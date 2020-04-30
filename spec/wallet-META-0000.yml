@@ -1,0 +1,8 @@
+title: Wallet
+stub: wallet
+status: 0
+maintainer: Charlie Varlie <charlie.varlie@iota.org>
+contributors: [Umair Sarfaz <umair.sarfaz@iota.org>, Lucas Nogueira <lucas.nogueira@iota.org>, Rajiv Shah <Rajiv@iota.org>, Daniel Thompson-Yvetot <daniel.yvetot@iota.org>]
+sponsor: Navin Ramachandran <navin@iota.org>
+license: ["Apache-2", "MIT"]
+updated: YYYY-MMM-DD
