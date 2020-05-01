@@ -1,4 +1,4 @@
-# Application Overview: Request For Proposal (RFP)
+# Wallet Application Overview: Request For Proposal (RFP)
 [RFP]: #RFP
 
 ## Frontmatter
@@ -123,7 +123,3 @@ Why should we *not* do this?
 
 ## Research
 [research]: #research
-
-
-
-

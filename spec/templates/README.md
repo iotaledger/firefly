@@ -1,6 +1,6 @@
-# How to use the 6P Specification System
+# How to use the 7PEC Specification System
 
-6P is a formalized approach that seeks to follow the needs of software developement and business development.
+7P is a formalized approach that seeks to follow the needs of software developement and business development.
 
 It is a combination of logbook, documentation and specification system.
 
@@ -42,12 +42,22 @@ In this stage, where all things are "mostly finished", an RFC process is absolut
 
 This stage is also the first point in time at which it makes sense for the Requirements Specs to be initiated.
 
+### Preproduction
+
+
 ### Production
+Preparing for the Production phase brings all the stakeholders together and is a ceremony that unites devops, engineering, management and external parties. It should guarantee that documentation is available, well-formed and accurate.
+
+When the Product is `@stable` it means that there is a very strict contract between the contributors to the product and the consumers of the product.
+
 
 
 ### dePrecation
+The deprecation stage of a Product means that it (or one of its constituent parts) will be deprecated at a point in the future.
+
 
 ### Posterity
+We don't want to throw away any work, ever. When Products are deprecated,
 
 ## Component Parts
 

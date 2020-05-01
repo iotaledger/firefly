@@ -4,5 +4,5 @@ status: 0
 maintainer: Firstname Lastname <email@address.tld>
 contributors: [Firstname Lastname <email@address.tld>]
 sponsor: Firstname Lastname <email@address.tld>
-license: ["License 1", "License 2"]
+licenses: ["License 1", "License 2"]
 updated: YYYY-MMM-DD

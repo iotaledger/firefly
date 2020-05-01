@@ -4,15 +4,34 @@
 ## Frontmatter
 [frontmatter]: #frontmatter
 ```yaml
-title: Wallet
-stub: wallet
+title: Project
+stub: project
 status: 0
-maintainer: Charlie Varley <charlie.varley@iota.org>
-contributors: [Umair Sarfraz <umair.sarfraz@iota.org>, Lucas Nogueira <lucas.nogueira@iota.org>, Rajiv Shah <rajiv@iota.org>, Daniel Thompson-Yvetot <daniel.yvetot@iota.org>]
-sponsor: Navin Ramachandran <navin@iota.org>
-license: ["Apache-2", "CC-BY"]
-updated: 2020-APR-29
+maintainer: Firstname Lastname <email@address.tld>
+contributors: [Firstname Lastname <email@address.tld>]
+sponsor: Firstname Lastname <email@address.tld>
+licenses: ["License 1", "License 2"]
+updated: YYYY-MMM-DD
 ```
+
+## License
+[license]: #license
+
+All code is licensed under the X license, all text and images are licensed under the X license.
+
+## Language
+[language]: #language
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC 2119.
+
+## Versioning
+These documents MUST use incremental numbering. New documents always start at 0000. Subsequent revisions to each RFI, RFP and RFC will have their number increased by one.
+
+Software releases will follow [strict semantic versioning](https://semver.org/).
+
+## Hierarchy
+[hierarchy]: #hierarchy
+All documents in this specification are understood to flow from this document and be bound to its licenses and language as described above.
 
 ## Summary
 [summary]: #summary
@@ -32,7 +51,7 @@ Talk about the business reasons for the product's existence
 ## Has the community been involved
 [community-involvement]: #community-involvement
 
-Many of the design objectives have been
+Many of the design objectives have been proposed by the community via feature requests.
 
 ## Guide-level explanation
 [guide-level-explanation]: #guide-level-explanation
@@ -75,7 +94,7 @@ of this product?
 - What related issues do you consider out of scope for this prodect that could
 be addressed in the future independently of the solution that comes out it?
 
-# #Future possibilities
+## Future possibilities
 [future-possibilities]: #future-possibilities
 
 Think about what the natural extension and evolution of your proposal would
