@@ -1,4 +1,5 @@
 # Extension System: Request For Proposal (RFP)
+[RFP]: #RFP
 
 # Frontmatter
 [frontmatter]: #frontmatter
@@ -8,6 +9,8 @@ Maintainer: Rajiv Shah
 updated: 2020-APR-29
 ```
 
+# Introduction
+[introduction]: #introduction
 
 # Requirements
 [requirements]: #requirements
