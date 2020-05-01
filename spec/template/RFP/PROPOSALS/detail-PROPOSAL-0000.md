@@ -1,26 +1,22 @@
-# Wallet Application Overview: Request For Proposal (RFP)
+# Detail: Request For Proposal (RFP)
 [RFP]: #RFP
 
 ## Frontmatter
 [frontmatter]: #frontmatter
 ```yaml
-RFP: application
-Maintainer: Daniel Thompson-Yvetot
-updated: 2020-APR-29
+RFP: detail-RFP-0000
+Maintainer: Name
+updated: YYYY-MMM-DD
 ```
 
 ## Summary
 [summary]: #summary
-
-The application is the base layer of the WALLET. There are a number of components are the basic building blocks of the Application which manage
-internal state and interact with device APIs.
 
 ## Requirements
 [requirements]: #requirements
 
 ## Considerations
 [considerations]: #considerations
-
 
 ### Alternatives Considered
 [alternatives]: #alternatives
@@ -67,36 +63,9 @@ Are there examples of this in the wild?
 
 Are there compatibility concerns?
 
-
 ## Technical Proposal
 [technical-proposal]: #technical-proposal
-
-```
-Application
-  Actor Model
-    Supervisor
-    Actors
-    Messages
-  Runtime Extensions
-  Notifications
-    System-based (Push)
-      Transaction received
-      User Resolvable Error messages
-  Networking
-    Inter-device communication
-      Transport:
-      TCP
-        Flow:
-          Input
-          Output
-    Intra-device communication
-      Transport:
-        Deeplinks
-      Flow:
-        Input
-        Output
-  Insecure Storage
-```
+Introduce and explain the technical proposal
 
 ### Reference-level explanation
 [reference-level-explanation]: #reference-level-explanation

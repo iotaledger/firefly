@@ -1,4 +1,4 @@
- How to understand the 7PEC Lifecycle
+# How to understand the 7PEC Lifecycle
 
 7PEC is a formalized approach that seeks to follow the needs of software developement and business development, in order to enhance community involvement and pave the way for potential standardisation.
 
@@ -19,34 +19,39 @@ Common work in this phase would be to get the stakeholders to agree upon a Reque
 It is possible that the team decides to Prune the Proposal (or entire project) in this phase. (Fail-early)
 
 ### Prototype
-The prototype phase could be aligned closely with "pre-alpha" software in the context of semantic versioning. The completion of the prototype phase results in "alpha" quality software.
+The prototype phase could be aligned closely with "pre-alpha" software in the context of semantic versioning. The completion of the prototype phase results in "prealpha" quality software.
 
-As a reminder, "alpha" software is software that generally speaking works, is likely to be buggy and will quite likely have its interfaces and shape changed one or more times as it matures to Beta state.
+As a reminder, "pre-alpha" software is software that generally speaking works, is likely to be buggy and will quite likely have its interfaces and shape changed one or more times as it matures to Beta state. It is not appropriate for wide dissemination.
 
 This phase seeks to identify the ideal RFI (if there are multiple) and "solidifies" the project scope, technology applied and general architectural patterns.
 
 Common work in this phase is to write and maintain Requests for Proposal (RFP), which serve to log the work done, approaches investigated and act as a "logbook" for the components of the software.
 
-To receive the `@alpha` grading, the project MUST have detailed Engineering specifications. (see below)
+To receive the `@prealpha` grading, the project MUST have detailed Engineering specifications. (see below)
 
 It is possible that the team decides to Prune the Prototype (or entire project) in this phase. (Fail-early)
 
 ### Proofing
 Proofing of a product is the stage in development where the engineering team focuses on testing, fuzzing, benchmarking and basically proving that the product is secure and of the highest quality. It is the last chance to change the interface or fix underlying problems.
 
+As a reminder, "alpha"-quality software is software that generally speaking works, is likely to be buggy and will quite likely have its interfaces and shape changed one or more times as it matures to Beta state. It is not appropriate for wide dissemination.
+
+
 In this stage it is imperative that continuous integration systems are implemented, that distributables are validated and that the Engineering Schema matches the specification.
 
 It is imperative in public projects that the community is brought in at this stage, if they have not yet been involved in earlier work. Especially in the context of "intuitive and friendly" libraries, feedback at this stage will help the "social" aspect of the software release.
 
-In this stage, where all things are "mostly finished", an RFC process is absolutely essential for affecting changes in a fashion that enables  stakeholder involvement. Similar to the RFI and RFP workflows, an RFC exists as a last chance to modify integral parts of the product before it receives the `@beta` grading.
+In this stage, where all things are "mostly finished", an RFC process is absolutely essential for affecting changes in a fashion that enables  stakeholder involvement. Similar to the RFI and RFP workflows, an RFC exists as a last chance to modify integral parts of the product before it receives the `@alpha` grading.
 
 This stage is also the first point in time at which it makes sense for the Requirements Specs to be initiated.
 
 ### Preproduction
+Preparing for the Production phase brings all the stakeholders together and is a ceremony that unites devops, engineering, management and external parties. It should guarantee that documentation is available, well-formed and accurate.
 
+The schema must be finalized, reqeuirements validated
 
 ### Production
-Preparing for the Production phase brings all the stakeholders together and is a ceremony that unites devops, engineering, management and external parties. It should guarantee that documentation is available, well-formed and accurate.
+
 
 When the Product is `@stable` it means that there is a very strict contract between the contributors to the product and the consumers of the product.
 
@@ -91,7 +96,6 @@ The detailing of Engineering Specs can vary from project to project (and underly
 - Build tools
 - Testing
 - Auditing
--
 
 This is a real "living document" and should reflect the current state of the software at all times. It is a contract between developers of the project and consumers of the project. Where possible, automation SHOULD be used.
 
@@ -113,3 +117,5 @@ The structural model shows how the parts of the product fit together and exist i
 
 #### 3. Behavioral Model
 The behavioral model explains how the system behaves at runtime.
+
+/// RTF / FTF

@@ -1,4 +1,4 @@
-# Extension System: Request For Proposal (RFP)
+# Extension System: Proposal
 [RFP]: #RFP
 
 ## Frontmatter

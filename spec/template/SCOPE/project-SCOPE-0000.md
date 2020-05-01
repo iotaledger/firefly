@@ -1,4 +1,4 @@
-# Projectt Request For Information (RFI)
+# Project Request For Information (RFI)
 [RFI]: #RFI
 
 ## Frontmatter
