@@ -1,10 +1,10 @@
-# How to use the 7PEC Specification System
+ How to understand the 7PEC Lifecycle
 
-7P is a formalized approach that seeks to follow the needs of software developement and business development.
+7PEC is a formalized approach that seeks to follow the needs of software developement and business development, in order to enhance community involvement and pave the way for potential standardisation.
 
 It is a combination of logbook, documentation and specification system.
 
-![drawing](/spec/templates/images/6P-Lifecycle.png)
+![drawing](/spec/templates/images/7P-Lifecycle.png)
 
 ## Lifecycle in the evolution of specifications
 From the perspective of engineering, it is important to evolve a specification throughout the scope of work, offer an "entry point" for stakeholders to participate and review the state of the work and prepare documentation of the project.
