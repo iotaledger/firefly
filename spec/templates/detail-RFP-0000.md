@@ -1,12 +1,12 @@
-# Extension System: Request For Proposal (RFP)
+# Detail: Request For Proposal (RFP)
 [RFP]: #RFP
 
 ## Frontmatter
 [frontmatter]: #frontmatter
 ```yaml
-RFP: application/notifications-RFP-0000
-Maintainer: Rajiv Shah
-updated: 2020-APR-29
+RFP: detail-RFP-0000
+Maintainer: Name
+updated: YYYY-MMM-DD
 ```
 
 ## Summary
@@ -20,6 +20,7 @@ updated: 2020-APR-29
 
 ## Technical Proposal
 [technical-proposal]: #technical-proposal
+
 
 ### Reference-level explanation
 [reference-level-explanation]: #reference-level-explanation
@@ -44,8 +45,5 @@ Why should we *not* do this?
 - What other designs have been considered and what is the rationale for not choosing them?
 - What is the impact of not doing this?
 
-
 ## Research
 [research]: #research
-
-

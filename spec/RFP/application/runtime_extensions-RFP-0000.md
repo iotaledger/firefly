@@ -1,7 +1,7 @@
 # Extension System: Request For Proposal (RFP)
 [RFP]: #RFP
 
-# Frontmatter
+## Frontmatter
 [frontmatter]: #frontmatter
 ```yaml
 RFP: application/runtime_extensions-RFP-0000
@@ -9,10 +9,10 @@ Maintainer: Lucas Nogiuera
 updated: 2020-APR-29
 ```
 
-# Introduction
-[introduction]: #introduction
+## Summary
+[summary]: #summary
 
-# Requirements
+## Requirements
 [requirements]: #requirements
 
 - It should be simple for a dev to add a new extension
@@ -22,7 +22,7 @@ updated: 2020-APR-29
 - A user should confirm any sensitive requests by the extension (e.g. send transaction)
 - The extension system should allow sufficient customisability for interesting use cases e.g. buying IOTA in the wallet
 
-# Considerations
+## Considerations
 [considerations]: #considerations
 
 Things to think about:
@@ -37,7 +37,7 @@ Things to think about:
   - See topic 4
 - How to grant extensions access to the Rust API in Capacitor and in Electron
 
-# Technical Proposal
+## Technical Proposal
 [technical-proposal]: #technical-proposal
 
 1. The API exposed to extensions are wrappers to the “real” API implementation, so it can force some API calls to require user confirmation
@@ -68,7 +68,31 @@ MISSING TEXT
 4. We could use an HTML to JSON converter to simplify the process of writing a plugin, so the 3rd party developer doesn’t have to worry about writing JSON.
 Possibly leverage: https://github.com/jsdom/jsdom
 
-# Research
+### Reference-level explanation
+[reference-level-explanation]: #reference-level-explanation
+
+This is the technical portion of the RFC. Explain the design in sufficient detail that:
+
+- Its interaction with other features is clear.
+- It is reasonably clear how the feature would be implemented.
+- Corner cases are dissected by example.
+
+The section should return to the examples given in the previous section, and explain more fully how the detailed proposal makes those examples work.
+
+### Drawbacks
+[drawbacks]: #drawbacks
+
+Why should we *not* do this?
+
+## Rationale and alternatives
+[rationale-and-alternatives]: #rationale-and-alternatives
+
+- Why is this design the best in the space of possible designs?
+- What other designs have been considered and what is the rationale for not choosing them?
+- What is the impact of not doing this?
+
+
+## Research
 [research]: #research
 
 https://gist.github.com/pfrazee/8949363

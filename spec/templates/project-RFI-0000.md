@@ -1,4 +1,4 @@
-# Wallet: Request For Information (RFI)
+# Projectt Request For Information (RFI)
 [RFI]: #RFI
 
 ## Frontmatter
@@ -14,43 +14,15 @@ license: ["Apache-2", "CC-BY"]
 updated: 2020-APR-29
 ```
 
-## License
-[license]: #license
-
-All code is licensed under the Apache 2 license, all text and images are licensed under the Creative-Commons CC-BY license.
-
-## Language
-[language]: #language
-
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC 2119.
-
-## Hierarchy
-[hierarchy]: #hierarchy
-All documents in this specification are understood to flow from this document and be bound to its licenses and language as described above.
-
 ## Summary
 [summary]: #summary
 
-The WALLET will be the human interface for interacting with the IOTA Tangle. It will serve as a
-portal for IOTA investors to manage their funds and communicate with other users. The application
-dashboard will centre around a contacts page and decentralised chat system. Its primary purpose
-is to improve the user experience when transacting with IOTA tokens.
-
-The application will be inherently modular and extensible to enable plugin development by third
-parties and the repurposing of functionality within other applications.
-
-As part of a later phase, the application with also serve as a self-sovereign identity and data
-management platform. Combining financial and identity management Trinity will provide the same
-functionality as a conventional physical WALLET.
+One paragraph explanation of the feature.
 
 ## Motivation
 [motivation]: #motivation
 
-The WALLET is the IOTA Foundation’s flagship user-facing product. It is the primary route through
-which users manage their IOTA tokens.
-
-The WALLET presents the perfect environment to showcase the human-to-human capabilities of theIOTA protocol and thereby serve as a
-testbed for third-parties to develop relevant IOTA use cases.
+Why are we doing this? What use cases does it support? What is the expected outcome?
 
 ## Product Introduction
 [product]: #product
@@ -103,7 +75,7 @@ of this product?
 - What related issues do you consider out of scope for this prodect that could
 be addressed in the future independently of the solution that comes out it?
 
-## Future possibilities
+# #Future possibilities
 [future-possibilities]: #future-possibilities
 
 Think about what the natural extension and evolution of your proposal would
@@ -116,3 +88,4 @@ and of the relevant sub-team.
 
 If you have tried and cannot think of any future possibilities,
 you may simply state that you cannot think of anything.
+
