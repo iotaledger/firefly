@@ -8,7 +8,7 @@ title: Wallet
 stub: wallet
 status: 0
 maintainer: Charlie Varlie <charlie.varlie@iota.org>
-contributors: [Umair Sarfaz <umair.sarfaz@iota.org>, Lucas Nogueira <lucas.nogueira@iota.org>, Rajiv Shah <Rajiv@iota.org>, Daniel Thompson-Yvetot <daniel.yvetot@iota.org>]
+contributors: [Umair Sarfraz <umair.sarfraz@iota.org>, Lucas Nogueira <lucas.nogueira@iota.org>, Rajiv Shah <rajiv@iota.org>, Daniel Thompson-Yvetot <daniel.yvetot@iota.org>]
 sponsor: Navin Ramachandran <navin@iota.org>
 license: ["Apache-2", "CC-BY"]
 updated: 2020-APR-29
@@ -116,4 +116,3 @@ and of the relevant sub-team.
 
 If you have tried and cannot think of any future possibilities,
 you may simply state that you cannot think of anything.
-
