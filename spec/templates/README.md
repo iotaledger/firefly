@@ -4,9 +4,12 @@
 
 It is a combination of logbook, documentation and specification system.
 
+![drawing](/spec/templates/images/6P-Lifecycle.png)
 
 ## Lifecycle in the evolution of specifications
-From the perspective of engineering, it is important to
+From the perspective of engineering, it is important to evolve a specification throughout the scope of work, offer an "entry point" for stakeholders to participate and review the state of the work and prepare documentation of the project.
+
+Engineering is an iterative process that moves from raw ideas to stable implementations. As projects evolve, specifications evolve, become deprecated and eventually retired. This means that first and foremost, specifications need to be easy to write, modify and publish. There must be a way to discover the current version of any specification and it must be from the perspective of the humans that will be interacting with it.
 
 ### Proposal
 A proposal is a statement of intent that presents the scope of a product from the point of view of the business and the user. This phase is intended to define `what` a project is about.
