@@ -1,14 +1,19 @@
-# Wallet Application Overview: Request For Proposal (RFP)
+# Wallet Application Overview: Request For Proposals (RFP)
 [RFP]: #RFP
 
 ## Frontmatter
 [frontmatter]: #frontmatter
 ```yaml
-RFP: application
-Maintainer: Daniel Thompson-Yvetot
-updated: 2020-APR-29
+title: Project
+stub: project
+document: RFP
+version: 0000
+maintainer: Firstname Lastname <email@address.tld>
+contributors: [Firstname Lastname <email@address.tld>]
+sponsors: [Firstname Lastname <email@address.tld>]
+licenses: ["License X", "License Y"]
+updated: YYYY-MMM-DD
 ```
-
 ## Summary
 [summary]: #summary
 
@@ -17,56 +22,6 @@ internal state and interact with device APIs.
 
 ## Requirements
 [requirements]: #requirements
-
-## Considerations
-[considerations]: #considerations
-
-
-### Alternatives Considered
-[alternatives]: #alternatives
-
-List of other approaches.
-
-### Performance Implications
-[performance]: #performance
-
-Honest analysis of performance implications.
-
-### Dependencies
-[dependencies]: #dependencies
-
-New dependencies introduced.
-
-### Engineering Impact
-[engineering-impact]: #engineering-impact
-- How will engineering be impacted?
-- Are there other projects that need to be adapted?
-
-### Platforms and Environments
-[platforms]: #platforms
-
-What platforms and environments will this address?
-
-### Security Impact
-[security]: #security
-
-Are there any known impacts (positive or negative) regarding the security posture?
-
-### Tutorials
-[tutorials]: #tutorials
-
-Are there tutorials that help illustrate this?
-
-### Examples
-[examples]: #examples
-
-Are there examples of this in the wild?
-
-### Compatibility
-[compatibility]: #compatibility
-
-Are there compatibility concerns?
-
 
 ## Technical Proposal
 [technical-proposal]: #technical-proposal

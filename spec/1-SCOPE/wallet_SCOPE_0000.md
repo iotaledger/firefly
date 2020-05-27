@@ -1,5 +1,5 @@
-# Wallet: Request For Information (RFI)
-[RFI]: #RFI
+# Wallet: Scope
+[Scope]: #Scope
 
 ## Frontmatter
 [frontmatter]: #frontmatter
@@ -59,17 +59,21 @@ testbed for third-parties to develop relevant IOTA use cases.
 
 ## Product Introduction
 [product]: #product
+<!--
+Talk about the business reasons for the product's existence, what it is for and who it serves.
+-->
 
-Talk about the business reasons for the product's existence
+## Stakeholders
+[stakeholders]: #stakeholders
+<!--
+- Who are the stakeholders?
+- How has the community been involved?
+-->
 
-## Has the community been involved
-[community-involvement]: #community-involvement
-
-Many of the design objectives have been
 
 ## Guide-level explanation
 [guide-level-explanation]: #guide-level-explanation
-
+<!--
 Explain the proposal as if it was already included in the language and you were
 teaching it to another programmer. That generally means:
 
@@ -80,10 +84,11 @@ teaching it to another programmer. That generally means:
 - If applicable, provide sample error messages, deprecation warnings, or migration guidance.
 - If applicable, describe the differences between teaching this to existing programmers
 and new programmers.
+-->
 
 ## Prior art
 [prior-art]: #prior-art
-
+<!--
 Discuss prior art, both the good and the bad, in relation to this proposal.
 A few examples of what this can include are:
 
@@ -97,20 +102,23 @@ have some relevant papers to refer to, this can serve as a more detailed theoret
 
 If there is no prior art, that is fine - your ideas are interesting to us whether
 they are brand new or if it is an adaptation from other projects.
+-->
 
 ## Unresolved questions
 [unresolved-questions]: #unresolved-questions
 
+<!--
 - What parts of the design do you expect to resolve through the spec process
 before this gets merged?
 - What parts of the design do you expect to resolve through the implementation
 of this product?
 - What related issues do you consider out of scope for this prodect that could
 be addressed in the future independently of the solution that comes out it?
+-->
 
 ## Future possibilities
 [future-possibilities]: #future-possibilities
-
+<!--
 Think about what the natural extension and evolution of your proposal would
 be and how it would affect the language and project as a whole in a holistic
 way. Try to use this section as a tool to more fully consider all possible
@@ -121,3 +129,5 @@ and of the relevant sub-team.
 
 If you have tried and cannot think of any future possibilities,
 you may simply state that you cannot think of anything.
+-->
+

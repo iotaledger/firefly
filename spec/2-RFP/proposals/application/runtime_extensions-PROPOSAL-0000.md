@@ -1,12 +1,18 @@
-# Extension System: Proposal
-[RFP]: #RFP
+# Extension System: Proposal to Request (PTR)
+[PTR]: #PTR
 
 ## Frontmatter
 [frontmatter]: #frontmatter
 ```yaml
-RFP: application/runtime_extensions-RFP-0000
-Maintainer: Lucas Nogiuera
-updated: 2020-APR-29
+title: Project
+stub: project
+document: PTR
+version: 0000
+maintainer: Firstname Lastname <email@address.tld>
+contributors: [Firstname Lastname <email@address.tld>]
+sponsors: [Firstname Lastname <email@address.tld>]
+licenses: ["License X", "License Y"]
+updated: YYYY-MMM-DD
 ```
 
 ## Summary
