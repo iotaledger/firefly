@@ -10,7 +10,7 @@ status: 0
 maintainer: Charlie Varley <charlie.varley@iota.org>
 contributors: [Umair Sarfraz <umair.sarfraz@iota.org>, Lucas Nogueira <lucas.nogueira@iota.org>, Rajiv Shah <rajiv@iota.org>, Daniel Thompson-Yvetot <daniel.yvetot@iota.org>]
 sponsor: Navin Ramachandran <navin@iota.org>
-licenses: ["Apache-2", "CC-BY"]
+licenses: ["Apache-2.0", "CC-BY"]
 updated: 2020-APR-29
 ```
 
@@ -130,4 +130,3 @@ and of the relevant sub-team.
 If you have tried and cannot think of any future possibilities,
 you may simply state that you cannot think of anything.
 -->
-
