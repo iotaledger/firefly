@@ -22,7 +22,7 @@ All code is licensed under the Apache 2 license, all text and images are license
 ## Language
 [language]: #language
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC 2119.
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://tools.ietf.org/html/rfc2119).
 
 ## Versioning
 These documents MUST use incremental numbering. New documents always start at 0000. Subsequent revisions to each RFI, RFP and RFC will have their number increased by one.
