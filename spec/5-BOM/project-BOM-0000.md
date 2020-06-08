@@ -1,4 +1,4 @@
-# Software Bill of Materials BOM)
+# Software Bill of Materials (BOM)
 [BOM]: #BOM
 
 ## Frontmatter
