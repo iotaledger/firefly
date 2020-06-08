@@ -54,7 +54,7 @@ functionality as a conventional physical WALLET.
 The WALLET is the IOTA Foundation’s flagship user-facing product. It is the primary route through
 which users manage their IOTA tokens.
 
-The WALLET presents the perfect environment to showcase the human-to-human capabilities of theIOTA protocol and thereby serve as a
+The WALLET presents the perfect environment to showcase the human-to-human capabilities of the IOTA protocol and thereby serve as a
 testbed for third-parties to develop relevant IOTA use cases.
 
 ## Product Introduction
