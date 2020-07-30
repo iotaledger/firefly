@@ -2,16 +2,14 @@
 We welcome contributions to INSERTWALLETNAME and associated libraries, whether it's a new feature, a bugfix or a change to the documentation. Please do not hesistate to reach out for support.
 
 ## We use [Github Flow](https://guides.github.com/introduction/flow/index.html), so all code changes happen through pull requests
-Pull requests are the best way to propose changes to the codebase (we use [Github Flow](https://guides.github.com/introduction/flow/index.html)).
-
-When creating a pull request, please follow these steps:
+Pull requests are the best way to propose changes to the codebase (we use [Github Flow](https://guides.github.com/introduction/flow/index.html)). When creating a pull request, please follow these steps:
 
 1. Fork the repo and create your branch from `master`.
 2. If you've added code that should be tested, add tests.
 3. Ensure the test suite passes.
 4. Make sure your code lints.
 5. Issue your pull request
-    * All code should be well tested and follow the [code styleguide](/docs/dev/styleguide.md)
+    * All code should follow the [code styleguide](/docs/dev/styleguide.md).
     * A pull request should have exactly one concern (i.e. one feature or one bug). A PR that addresses more than one concern should be split into multiple PRs.
 
 ## We use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/), so commit messages are consistent
