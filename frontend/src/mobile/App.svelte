@@ -1,3 +1,11 @@
+<script>
+  import { createAccount } from "./lib/api";
+
+  createAccount().then(res => {
+    alert(JSON.stringify(res));
+  });
+</script>
+
 <style>
   main {
     text-align: center;
@@ -7,7 +15,7 @@
   }
 
   h1 {
-    color: #000000
+    color: #000000;
     text-transform: uppercase;
     font-size: 4em;
     font-weight: 100;

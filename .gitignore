@@ -1,5 +1,8 @@
 node_modules
 
+# wallet
+**/example-database
+
 # misc
 .DS_Store
 .env.local

@@ -25,13 +25,14 @@ Following [this guide](https://mozilla.github.io/firefox-browser-architecture/ex
   ```
 - Configure Cargo to use the NDK ar and linker:
   ```bash
-  $ cd /path/to/actor-runtime/bindings/c
+  $ cd /path/to/wallet/backend/bindings/c
   $ mkdir .cargo
   $ echo -e "[target.i686-linux-android]\nar = \"/some/path/to/install/NDK/x86/bin/i686-linux-android-ar\"\nlinker = \"/some/path/to/install/NDK/x86/bin/i686-linux-android-clang\"" > .cargo/config
   ```
+  Also, you'll need to add `/some/path/to/install/NDK/x86/bin` to your PATH.
 - Building
   ```bash
   $ cargo build --target i686-linux-android
   ```
 - Using the library on Android
-  $ mv target/i686-linux-android/debug/libwallet.so ../capacitor/demo/android/app/src/main/jniLibs/x86/
+  $ mv target/i686-linux-android/debug/libwallet.so ../../../frontend/src/mobile/android/app/src/main/jniLibs/x86/

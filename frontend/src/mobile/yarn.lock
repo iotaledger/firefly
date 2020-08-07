@@ -52,6 +52,13 @@
   dependencies:
     tslib "^1.9.0"
 
+"@capacitor/core@latest":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-2.4.0.tgz#5f3741153d87901e5c14c9037b6634bd24df5e77"
+  integrity sha512-zL+3yKjLNkU6QwIB/Fp9rg+qDLsO44/ibrIgaZZRXcDCwScwanjXCgco/jXQl3jGFcZzanm59wKhMcJr9xQH0Q==
+  dependencies:
+    tslib "^1.9.0"
+
 "@capacitor/ios@2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-2.2.1.tgz#f410a31843ef10eb2c908f6a634d16439915c420"
@@ -841,6 +848,10 @@ universalify@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.1.2.tgz#b646f69be3942dabcecc9d6639c80dc105efaa66"
   integrity sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==
+
+"wallet-actor-system-capacitor-binding@link:../../../backend/bindings/capacitor":
+  version "0.0.0"
+  uid ""
 
 which@^1.3.0:
   version "1.3.1"

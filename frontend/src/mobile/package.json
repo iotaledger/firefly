@@ -26,6 +26,7 @@
   "dependencies": {
     "@capacitor/android": "2.2.1",
     "@capacitor/core": "^2.2.1",
-    "@capacitor/ios": "2.2.1"
+    "@capacitor/ios": "2.2.1",
+    "wallet-actor-system-capacitor-binding": "link:../../../backend/bindings/capacitor"
   }
 }

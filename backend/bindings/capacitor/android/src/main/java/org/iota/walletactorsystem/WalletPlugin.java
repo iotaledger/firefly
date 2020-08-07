@@ -20,7 +20,7 @@ public class WalletPlugin extends Plugin {
     @PluginMethod()
     public void sendMessage(final PluginCall call) {
         try {
-            WalletNative.INSTANCE.send_message("message from Capacitor", new WalletNative.MessageCallback() {
+            WalletNative.INSTANCE.send_message(call.getObject("message").toString(), new WalletNative.MessageCallback() {
                 @Override
                 public void apply(String response) {
                     try {

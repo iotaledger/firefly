@@ -1,5 +1,5 @@
 {
-  "name": "node-neon",
+  "name": "wallet-actor-system-nodejs-binding",
   "version": "0.1.0",
   "description": "",
   "main": "lib/index.js",
