@@ -7,11 +7,22 @@ import Capacitor
  */
 @objc(WalletPlugin)
 public class WalletPlugin: CAPPlugin {
+
+    func load() {
+        initialize()
+    }
     
-    @objc func echo(_ call: CAPPluginCall) {
-        let value = call.getString("value") ?? ""
-        call.success([
-            "value": value
-        ])
+    @objc func sendMessage(_ call: CAPPluginCall) {
+        do {
+            let message = call.getObject("message")
+            let jsonMessage = try JSONSerialization.data(withJSONObject: message, options: .prettyPrinted)
+            let jsonMessageStr = String(decoding: jsonMessage, as: UTF8.self)
+            let response = send_message(jsonMessage)
+            call.success([
+                "response": String(cString: response!)
+            ])
+        } catch {
+            call.reject("failed to serialize message")
+        }
     }
 }

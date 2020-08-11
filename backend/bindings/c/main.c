@@ -9,7 +9,7 @@ void callback(const char *message) {
 }
 
 int main() {
-  init();
+  initialize();
   send_message("{ \"cmd\": \"CreateAccount\", \"payload\": { \"id\": \"account_id\", \"clientOptions\": { \"node\": \"https://nodes.devnet.iota.org:443\" } } }", callback);
   return 0;
 }

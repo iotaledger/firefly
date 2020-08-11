@@ -138,7 +138,7 @@ dependencies = [
 [[package]]
 name = "bee-transaction"
 version = "0.1.0-alpha"
-source = "git+https://github.com/Alex6323/bee-p#926c0e01cf974adf7a3b1488093106388f90923d"
+source = "git+https://github.com/Alex6323/bee-p#35bc5fd7e0a025e9b82f89faf2289857ba5531d1"
 dependencies = [
  "bee-crypto",
  "bee-signing",
@@ -233,7 +233,7 @@ checksum = "4785bdd1c96b2a846b2bd7cc02e86b6b3dbf14e7e53446c4f54c92a361040822"
 [[package]]
 name = "chronicle-common"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/chronicle.rs#935924ab49b9df21a55a0d1af67f8e51e45050b9"
+source = "git+https://github.com/iotaledger/chronicle.rs#ab457a14b28ae50a9c994347a9ccc459aa75779e"
 dependencies = [
  "chrono",
  "fern",
@@ -244,6 +244,13 @@ dependencies = [
 [[package]]
 name = "chronicle-common"
 version = "0.1.0"
+source = "git+https://github.com/iotaledger/chronicle.rs?rev=ab457a1#ab457a14b28ae50a9c994347a9ccc459aa75779e"
+dependencies = [
+ "chrono",
+ "fern",
+ "log",
+ "serde",
+]
 
 [[package]]
 name = "chrono"
@@ -359,15 +366,15 @@ dependencies = [
 
 [[package]]
 name = "event-listener"
-version = "2.3.2"
+version = "2.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "68082183f458867ce7cddea16d4df4443c1537112c0c09c450dedc09daf5c719"
+checksum = "7f14646a9e0430150a87951622ba9675472b68e384b7701b8423b30560805c7a"
 
 [[package]]
 name = "fastrand"
-version = "1.3.3"
+version = "1.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "36a9cb09840f81cd211e435d00a4e487edd263dc3c8ff815c32dd76ad668ebed"
+checksum = "4bd3bdaaf0a72155260a1c098989b60db1cbb22d6a628e64f16237aa4da93cc7"
 
 [[package]]
 name = "fern"
@@ -412,28 +419,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3dcaa9ae7725d12cdb85b3ad99a434db70b468c09ded17e012d86b5c1010f7a7"
 
 [[package]]
-name = "futures"
-version = "0.3.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1e05b85ec287aac0dc34db7d4a569323df697f9c55b99b15d6b4ef8cde49f613"
-dependencies = [
- "futures-channel",
- "futures-core",
- "futures-executor",
- "futures-io",
- "futures-sink",
- "futures-task",
- "futures-util",
-]
-
-[[package]]
 name = "futures-channel"
 version = "0.3.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f366ad74c28cca6ba456d95e6422883cfb4b252a83bed929c83abfdbbf2967d5"
 dependencies = [
  "futures-core",
- "futures-sink",
 ]
 
 [[package]]
@@ -441,17 +432,6 @@ name = "futures-core"
 version = "0.3.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "59f5fff90fd5d971f936ad674802482ba441b6f09ba5e15fd8b39145582ca399"
-
-[[package]]
-name = "futures-executor"
-version = "0.3.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "10d6bb888be1153d3abeb9006b11b02cf5e9b209fda28693c31ae1e4e012e314"
-dependencies = [
- "futures-core",
- "futures-task",
- "futures-util",
-]
 
 [[package]]
 name = "futures-io"
@@ -507,11 +487,9 @@ version = "0.3.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8764574ff08b701a084482c3c7031349104b07ac897393010494beaa18ce32c6"
 dependencies = [
- "futures-channel",
  "futures-core",
  "futures-io",
  "futures-macro",
- "futures-sink",
  "futures-task",
  "memchr",
  "pin-project",
@@ -532,9 +510,9 @@ dependencies = [
 
 [[package]]
 name = "generic-array"
-version = "0.14.3"
+version = "0.14.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "60fb4bb6bba52f78a471264d9a3b7d026cc0af47b22cd2cffbc0b787ca003e63"
+checksum = "501466ecc8a30d1d3b7fc9229b122b2ce8ed6e9d9223f1138d4babb253e51817"
 dependencies = [
  "typenum",
  "version_check",
@@ -584,9 +562,9 @@ dependencies = [
 
 [[package]]
 name = "hashbrown"
-version = "0.8.1"
+version = "0.8.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "34f595585f103464d8d2f6e9864682d74c1601fed5e07d62b1c9058dba8246fb"
+checksum = "e91b62f79061a0bc2e046024cb7ba44b08419ed238ecbd9adbd787434b9e8c25"
 dependencies = [
  "autocfg",
 ]
@@ -680,9 +658,9 @@ dependencies = [
 
 [[package]]
 name = "indexmap"
-version = "1.5.0"
+version = "1.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5b88cd59ee5f71fea89a62248fc8f387d44400cefe05ef548466d61ced9029a7"
+checksum = "86b45e59b16c76b11bf9738fd5d38879d3bd28ad292d7b313608becb17ae2df9"
 dependencies = [
  "autocfg",
  "hashbrown",
@@ -691,7 +669,7 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "0.5.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=fix/android-build#e3d5737edd60ee8b7296d8422cddf2b316637274"
+source = "git+https://github.com/iotaledger/iota.rs?rev=5eb9fd1#5eb9fd170f77b24b8c989acbf64ecca31ea48fb8"
 dependencies = [
  "bee-crypto",
  "bee-signing",
@@ -707,7 +685,7 @@ dependencies = [
 [[package]]
 name = "iota-core"
 version = "0.2.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=fix/android-build#e3d5737edd60ee8b7296d8422cddf2b316637274"
+source = "git+https://github.com/iotaledger/iota.rs?rev=5eb9fd1#5eb9fd170f77b24b8c989acbf64ecca31ea48fb8"
 dependencies = [
  "bee-crypto",
  "bee-signing",
@@ -719,7 +697,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=feat/transaction#a810d5a93f94e30b7291171536cc7a6d2418e7fb"
+source = "git+https://github.com/iotaledger/wallet.rs#ac9d9ce3a37afa9de65b3d72d2cba6bc72f970f7"
 dependencies = [
  "anyhow",
  "bee-crypto",
@@ -727,20 +705,20 @@ dependencies = [
  "bee-ternary",
  "bee-transaction",
  "chrono",
- "futures",
  "getset",
  "iota-core",
  "kv",
  "once_cell",
  "serde",
  "serde_json",
+ "tokio",
  "url",
 ]
 
 [[package]]
 name = "iota-wallet-actor"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/actors.rs?branch=feat/wallet#8367e85059b178c42a6cae4b8a6f4a1c0b964807"
+source = "git+https://github.com/iotaledger/actors.rs?branch=feat/wallet#2b91a2542e888c171a2247490c4f3ccbd8a08f2c"
 dependencies = [
  "chronicle-common 0.1.0 (git+https://github.com/iotaledger/chronicle.rs)",
  "iota-wallet",
@@ -1082,9 +1060,9 @@ checksum = "8b870d8c151b6f2fb93e84a13146138f05d02ed11c7e7c54f8826aaaf7c9f184"
 
 [[package]]
 name = "polling"
-version = "0.1.0"
+version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4545151ad78cb34188ca6b8454b1e8331cfdd501ccf520c41659b0fcd44dd9ce"
+checksum = "c134fc4b7c9b673e3002cbcdc07ccf84c50205e29a32f7ebe660095865514de3"
 dependencies = [
  "cfg-if",
  "libc",
@@ -1294,18 +1272,18 @@ dependencies = [
 
 [[package]]
 name = "serde"
-version = "1.0.114"
+version = "1.0.115"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5317f7588f0a5078ee60ef675ef96735a1442132dc645eb1d12c018620ed8cd3"
+checksum = "e54c9a88f2da7238af84b5101443f0c0d0a3bbdc455e34a5c9497b1903ed55d5"
 dependencies = [
  "serde_derive",
 ]
 
 [[package]]
 name = "serde_derive"
-version = "1.0.114"
+version = "1.0.115"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2a0be94b04690fbaed37cddffc5c134bf537c8e3329d53e982fe04c374978f8e"
+checksum = "609feed1d0a73cc36a0182a840a9b37b4a82f0b1150369f0536a9e3f2a31dc48"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1576,9 +1554,9 @@ checksum = "e987b6bf443f4b5b3b6f38704195592cca41c5bb7aedd3c3693c7081f8289860"
 
 [[package]]
 name = "tracing"
-version = "0.1.18"
+version = "0.1.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f0aae59226cf195d8e74d4b34beae1859257efb4e5fed3f147d2dc2c7d372178"
+checksum = "6d79ca061b032d6ce30c660fded31189ca0b9922bf483cd70759f13a2d86786c"
 dependencies = [
  "cfg-if",
  "log",
@@ -1587,9 +1565,9 @@ dependencies = [
 
 [[package]]
 name = "tracing-core"
-version = "0.1.13"
+version = "0.1.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d593f98af59ebc017c0648f0117525db358745a8894a8d684e185ba3f45954f9"
+checksum = "db63662723c316b43ca36d833707cc93dff82a02ba3d7e354f342682cc8b3545"
 dependencies = [
  "lazy_static",
 ]
@@ -1679,8 +1657,9 @@ checksum = "9571542c2ce85ce642e6b58b3364da2fb53526360dfb7c211add4f5c23105ff7"
 name = "wallet-actor-system"
 version = "0.1.0"
 dependencies = [
- "chronicle-common 0.1.0",
+ "chronicle-common 0.1.0 (git+https://github.com/iotaledger/chronicle.rs?rev=ab457a1)",
  "iota-wallet-actor",
+ "log",
  "once_cell",
  "serde_json",
  "tokio",

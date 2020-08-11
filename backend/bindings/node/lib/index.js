@@ -2,7 +2,7 @@ var addon = require('../native');
 
 module.exports = {
   init() {
-    addon.init()
+    addon.initialize()
   },
   sendMessage(message) {
     return new Promise((resolve, reject) => {

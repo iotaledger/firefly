@@ -198,6 +198,13 @@ dependencies = [
 [[package]]
 name = "chronicle-common"
 version = "0.1.0"
+source = "git+https://github.com/iotaledger/chronicle.rs?rev=ab457a1#ab457a14b28ae50a9c994347a9ccc459aa75779e"
+dependencies = [
+ "chrono",
+ "fern",
+ "log",
+ "serde",
+]
 
 [[package]]
 name = "chrono"
@@ -1669,8 +1676,9 @@ checksum = "9571542c2ce85ce642e6b58b3364da2fb53526360dfb7c211add4f5c23105ff7"
 name = "wallet-actor-system"
 version = "0.1.0"
 dependencies = [
- "chronicle-common 0.1.0",
+ "chronicle-common 0.1.0 (git+https://github.com/iotaledger/chronicle.rs?rev=ab457a1)",
  "iota-wallet-actor",
+ "log",
  "once_cell",
  "serde_json",
  "tokio",

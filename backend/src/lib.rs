@@ -1,4 +1,5 @@
 use chronicle_common::launcher;
+use log::*;
 
 mod actors;
 use actors::{dispatch, WalletAppBuilder};

@@ -7,6 +7,15 @@ Provides C bindings to the Rust Wallet Runtime.
 $ make
 ```
 
+## Compiling for iOS
+
+- Install [cargo-lipo](https://github.com/TimNN/cargo-lipo):
+  `$ cargo install cargo-lipo`
+- Building the universal library:
+  `$ cargo lipo`
+- Using the library on iOS:
+  ` $ mv target/universal/debug/libwallet.a ../capacitor/ios`
+
 ## Compiling for Android
 
 Following [this guide](https://mozilla.github.io/firefox-browser-architecture/experiments/2017-09-21-rust-on-android.html):

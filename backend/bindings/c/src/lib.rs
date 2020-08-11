@@ -6,7 +6,7 @@ use wallet_actor_system::{init as init_runtime, send_message as send_actor_messa
 type Callback = fn(*const c_char);
 
 #[no_mangle]
-pub extern "C" fn init() {
+pub extern "C" fn initialize() {
     std::thread::spawn(|| smol::block_on(init_runtime()));
 }
 

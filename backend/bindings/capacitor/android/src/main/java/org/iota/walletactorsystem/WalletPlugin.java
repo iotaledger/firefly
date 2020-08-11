@@ -14,7 +14,7 @@ public class WalletPlugin extends Plugin {
     @Override
     public void load() {
         super.load();
-        WalletNative.INSTANCE.init();
+        WalletNative.INSTANCE.initialize();
     }
 
     @PluginMethod()
