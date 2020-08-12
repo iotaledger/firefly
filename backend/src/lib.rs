@@ -4,6 +4,8 @@ use log::*;
 mod actors;
 use actors::{dispatch, WalletAppBuilder};
 
+use std::path::Path;
+
 launcher!(
     apps_builder: AppsBuilder {wallet: WalletAppBuilder}, // Apps
     apps: Apps {} // Launcher state
@@ -17,8 +19,12 @@ impl AppsBuilder {
     }
 }
 
-pub async fn init() {
+pub async fn init(storage_path: Option<impl AsRef<Path>>) {
     println!("Starting runtime");
+    if let Some(path) = storage_path {
+        iota_wallet_actor::wallet::storage::set_storage_path(path)
+            .expect("failed to set storage path");
+    }
     AppsBuilder::new()
         .build() // build apps first, then start them in order you want.
         .wallet()

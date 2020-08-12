@@ -697,7 +697,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs#ac9d9ce3a37afa9de65b3d72d2cba6bc72f970f7"
+source = "git+https://github.com/iotaledger/wallet.rs#a656e9d7d18feed38ee469374ec25e26eb246f10"
 dependencies = [
  "anyhow",
  "bee-crypto",
@@ -718,7 +718,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet-actor"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/actors.rs?branch=feat/wallet#2b91a2542e888c171a2247490c4f3ccbd8a08f2c"
+source = "git+https://github.com/iotaledger/actors.rs?branch=feat/wallet#58917839b0e0fb804122a271f4c6736486ad958a"
 dependencies = [
  "chronicle-common 0.1.0 (git+https://github.com/iotaledger/chronicle.rs)",
  "iota-wallet",
@@ -1359,9 +1359,9 @@ dependencies = [
 
 [[package]]
 name = "smallvec"
-version = "1.4.1"
+version = "1.4.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3757cb9d89161a2f24e1cf78efa0c1fcff485d18e3f55e0aa3480824ddaa0f3f"
+checksum = "fbee7696b84bbf3d89a1c2eccff0850e3047ed46bfcd2e92c29a2d074d57e252"
 
 [[package]]
 name = "smol"

@@ -11,10 +11,9 @@ import org.json.JSONException;
 @NativePlugin()
 public class WalletPlugin extends Plugin {
 
-    @Override
-    public void load() {
-        super.load();
-        WalletNative.INSTANCE.initialize();
+    @PluginMethod
+    public void initialize(final PluginCall call) {
+        WalletNative.INSTANCE.initialize(call.getString("storagePath"));
     }
 
     @PluginMethod()

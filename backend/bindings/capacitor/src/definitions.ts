@@ -4,6 +4,11 @@ declare module "@capacitor/core" {
   }
 }
 
+export interface InitOptions {
+  storagePath?: string
+}
+
 export interface WalletPlugin {
-  sendMessage(message: string): Promise<{response: string}>;
+  initialize(options?: InitOptions): void;
+  sendMessage(message: { [k: string]: any }): Promise<{ response: string }>;
 }

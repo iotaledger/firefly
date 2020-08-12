@@ -6,8 +6,14 @@ use wallet_actor_system::{init as init_runtime, send_message as send_actor_messa
 type Callback = fn(*const c_char);
 
 #[no_mangle]
-pub extern "C" fn initialize() {
-    std::thread::spawn(|| smol::block_on(init_runtime()));
+pub extern "C" fn initialize(storage_path: *const c_char) {
+    let storage_path: Option<&str> = if storage_path.is_null() {
+        None
+    } else {
+        let c_storage_path = unsafe { CStr::from_ptr(storage_path) };
+        Some(c_storage_path.to_str().unwrap())
+    };
+    std::thread::spawn(move || smol::block_on(init_runtime(storage_path)));
 }
 
 #[no_mangle]
