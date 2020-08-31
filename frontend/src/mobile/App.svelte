@@ -1,25 +1,22 @@
-<style>
-  main {
-    text-align: center;
-    padding: 1em;
-    max-width: 240px;
-    margin: 0 auto;
-  }
+<script>
+    import { setupI18n, isLocaleLoaded, dir, _ } from 'shared-modules/lib/i18n.js'
+    import { darkMode } from 'shared-modules/lib/app'
+    $: $darkMode ? document.body.classList.add('dark') : document.body.classList.remove('dark')
 
-  h1 {
-    color: #000000
-    text-transform: uppercase;
-    font-size: 4em;
-    font-weight: 100;
-  }
-
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
+    setupI18n()
+    $: if (document.dir !== $dir) {
+        document.dir = $dir
     }
-  }
+</script>
+
+<style type="text/scss">
+    @import 'shared-modules/style/style.scss';
 </style>
 
-<main>
-  <h1>Mobile wallet!</h1>
-</main>
+{#if $isLocaleLoaded}
+    <main>
+        <h1>{$_('app.title')}</h1>
+    </main>
+{:else}
+    <p>Loading locale...</p>
+{/if}

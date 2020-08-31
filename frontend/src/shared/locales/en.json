@@ -1,0 +1,16 @@
+{
+    "app": {
+        "title": "Firefly",
+        "author": "IOTA Foundation"
+    },
+    "views": {
+        "onboarding_1": {
+            "title": "send, receive & store your IOTA tokens",
+            "body": "store tokens, coins and collectible assets"
+        }
+    },
+    "actions": {
+        "continue": "continue",
+        "import_seed": "import an existing seed"
+    }
+}

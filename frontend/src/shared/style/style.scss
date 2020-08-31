@@ -1,0 +1,112 @@
+/* dm-sans-500 - latin */
+@font-face {
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 500;
+    src: local("DM Sans Medium"), local("DMSans-Medium"),
+        url("../assets/fonts/dm-sans-v4-latin-500.woff2") format("woff2"),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */ url("../assets/fonts/dm-sans-v4-latin-500.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* dm-sans-700 - latin */
+@font-face {
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 700;
+    src: local("DM Sans Bold"), local("DMSans-Bold"), url("../assets/fonts/dm-sans-v4-latin-700.woff2") format("woff2"),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */ url("../assets/fonts/dm-sans-v4-latin-700.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+@import "themes.scss";
+
+:root {
+    // color palette
+    --blue-primary-color: #108cff;
+    --yellow-primary-color: #ffca62;
+    --turquoise-color: #17e1d5;
+    --blue-light-color: #8fe6fa;
+    --blue-medium-color: #4daaff;
+    --orange-color: #ff8b5c;
+    --red-color: #ff6755;
+    --pink-color: #ef75d4;
+    --pruple-color: #666af7;
+    --green-color: #61e884;
+    --grey-midnight: #25395f;
+    --grey-medium: #9aadce;
+    --grey-light: #eef4ff;
+}
+*,
+*:after,
+*:before {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: 400;
+    box-sizing: border-box;
+    outline: none;
+}
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #e5e5e5;
+    font-weight: 500;
+}
+h1 {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 100%;
+    color: var(--heading-color);
+}
+h2 {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 120%;
+    color: var(--heading-color);
+}
+h3 {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 140%;
+    color: var(--heading-color);
+}
+h4 {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 140%;
+    color: var(--heading-color);
+}
+.text {
+    font-size: 13px;
+    line-height: 140%;
+    &.text--primary {
+        color: var(--text-primary-color);
+    }
+    &.text--secondary {
+        color: var(--text-secondary-color);
+    }
+    &.text--disabled {
+        color: var(--text-disabled-color);
+    }
+}
+.bold {
+    font-weight: 700;
+}
+.button {
+    border-radius: 16px;
+    padding: 15px 12px;
+    cursor: pointer;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 140%;
+    color: var(--button-text-color);
+
+    &.button--ghost {
+        border: 1px solid var(--button-border-color);
+    }
+
+    &.button--solid {
+        background-color: var(--button-backround-color);
+    }
+}
