@@ -13,11 +13,6 @@ const isDev = process.env.NODE_ENV === 'development'
 const port = 3000
 
 // Plugins definition
-const preprocess = sveltePreprocess({
-    scss: {
-        includePaths: ['src', 'node_modules']
-    }
-})
 const plugins = [
     json(),
     svelte({
@@ -26,7 +21,11 @@ const plugins = [
         css: (css) => {
             css.write('public/build/bundle.css')
         },
-        preprocess
+        preprocess: sveltePreprocess({
+            scss: {
+                prependData: `@import 'shared-modules/style/style.scss';`
+            }
+        })
     }),
     resolve({
         browser: true,

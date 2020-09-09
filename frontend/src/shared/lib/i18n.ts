@@ -11,14 +11,14 @@ export { locales, fallbackLocale }
 
 const MESSAGE_FILE_URL_TEMPLATE = '/locales/{locale}.json'
 
-let _activeLocale
+let _activeLocale: any
 
 const isDownloading = writable(false)
 
-function setupI18n(options = {}) {
+function setupI18n(options: any = {}) {
     const locale_ = supported(options.withLocale || language(getLocaleFromNavigator()))
 
-    init({ initialLocale: locale_ })
+    init({ initialLocale: locale_ } as any)
 
     if (!hasLoadedLocale(locale_)) {
         isDownloading.set(true)
@@ -45,20 +45,20 @@ const isLocaleLoaded = derived(
 
 const dir = derived(locale, ($locale) => ($locale === 'ar' ? 'rtl' : 'ltr'))
 
-function loadJson(url) {
+function loadJson(url: any) {
     return fetch(url).then(
         (response) => response.json())
 }
 
-function hasLoadedLocale(locale) {
+function hasLoadedLocale(locale: any) {
     return get(dictionary)[locale]
 }
 
-function language(locale) {
+function language(locale: any) {
     return locale.replace('_', '-').split('-')[0]
 }
 
-function supported(locale) {
+function supported(locale: any) {
     if (Object.keys(locales).includes(locale)) {
         return locale
     } else {
