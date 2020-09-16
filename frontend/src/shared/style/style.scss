@@ -34,9 +34,7 @@
     --grey-medium: #9aadce;
     --grey-light: #eef4ff;
 }
-*,
-*:after,
-*:before {
+:global(*, *:after, *:before) {
     margin: 0;
     padding: 0;
     border: 0;
@@ -45,38 +43,37 @@
     font-weight: 500;
     font-family: "DM Sans";
 }
-html,
-body {
+:global(html, body) {
     width: 100%;
     height: 100%;
     overflow: hidden;
     background: #e5e5e5;
 }
-h1 {
+:global(h1) {
     font-weight: 700;
     font-size: 32px;
     line-height: 100%;
     color: var(--heading-color);
 }
-h2 {
+:global(h2) {
     font-weight: 700;
     font-size: 24px;
     line-height: 120%;
     color: var(--heading-color);
 }
-h3 {
+:global(h3) {
     font-weight: 700;
     font-size: 18px;
     line-height: 140%;
     color: var(--heading-color);
 }
-h4 {
+:global(h4) {
     font-weight: 700;
     font-size: 16px;
     line-height: 140%;
     color: var(--heading-color);
 }
-.text {
+:global(.text) {
     font-size: 13px;
     line-height: 140%;
     &.text--primary {
@@ -89,10 +86,10 @@ h4 {
         color: var(--text-disabled-color);
     }
 }
-.bold {
+:global(.bold) {
     font-weight: 700;
 }
-.button {
+:global(.button) {
     border-radius: 16px;
     padding: 15px 12px;
     cursor: pointer;

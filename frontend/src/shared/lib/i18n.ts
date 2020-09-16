@@ -9,7 +9,7 @@ const fallbackLocale = 'en'
 
 export { locales, fallbackLocale }
 
-const MESSAGE_FILE_URL_TEMPLATE = '/locales/{locale}.json'
+const MESSAGE_FILE_URL_TEMPLATE = '../locales/{locale}.json'
 
 let _activeLocale: any
 

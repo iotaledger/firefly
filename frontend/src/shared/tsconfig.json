@@ -1,12 +1,9 @@
 {
+    "extends": "@tsconfig/svelte/tsconfig.json",
     "compilerOptions": {
-        "lib": ["es2019", "dom", "esnext"],
-        "noImplicitThis": true,
-        "strict": true,
-        "outDir": "out",
-        "declaration": true,
-        "sourceMap": true,
-        "watch": true
+        "allowJs": true,
+        "outDir": "lib/out"
     },
-    "include": ["lib"]
+    "include": ["lib"],
+    "exclude": ["lib/out"]
 }
