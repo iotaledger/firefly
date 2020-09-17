@@ -1,0 +1,20 @@
+{
+    "version": 1.0,
+    "type": "Sample plugin",
+    "description": "Sample plugin definition",
+    "modules": [
+        {
+            "id": "button",
+            "type": "@iota/core",
+            "component": "Button",
+            "content": "Generate Address",
+            "events": {
+                "click": {
+                    "call": "getAddress",
+                    "parameters": "{{ index }}",
+                    "assignTo": "address"
+                }
+            }
+        }
+    ]
+}

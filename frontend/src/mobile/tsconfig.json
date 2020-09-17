@@ -2,6 +2,6 @@
     "extends": "@tsconfig/svelte/tsconfig.json",
     "compilerOptions": {
         "isolatedModules": false,
-        "noImplicitAny": true
+        "noImplicitAny": false,
     }
 }
