@@ -36,7 +36,7 @@ type ModuleEvent = {
     [key in AllowedEvents]: {
         call: string;
         assignTo: string;
-        parameters: string;
+        parameters?: string;
     }
 };
 
@@ -53,7 +53,7 @@ type ModuleEvents = {
 interface PluginModule {
     id: string;
     component: string;
-    content: string;
+    content?: string;
     children?: PluginModule[];
 };
 
@@ -66,9 +66,16 @@ interface IPlugin {
 };
 
 export default class Plugin implements IPlugin {
+    /** Plugin version */
     public version: string;
+
+    /** Plugin modules */
     public modules: PluginModule[];
+
+    /** Plugin state */
     public state: Writable<Object>;
+
+    /** Plugin events (click, change etc) */
     public events: ModuleEvents;
 
     constructor(plugin: IPlugin) {
@@ -158,7 +165,13 @@ export default class Plugin implements IPlugin {
     }
 
     /**
+     * Validates plugin semantics
+     * 
+     * @method validate
+     * 
      * @param {IPlugin} plugin 
+     * 
+     * @returns {void}
      */
     private validate(plugin: IPlugin) {
         // TODO(laumair): Also, validate schema enums
