@@ -7,11 +7,22 @@
  * 
  * @returns {Promise<string>}
  */
-const getAddress = async (index: number): Promise<string> => {
+const getAddress = (index: number): Promise<string> => {
     return Promise.resolve(`${index ? 'U' : 'A'}`.repeat(81));
 }
 
-const api = {
+export interface IWalletRestrictedAPI {
+    getAddress: (index: number) => Promise<string>;
+};
+
+export interface IWalletPublicAPI { };
+
+export interface IWalletAPI {
+    public: IWalletPublicAPI;
+    restricted: IWalletRestrictedAPI;
+};
+
+const api: IWalletAPI = {
     public: {},
     restricted: {
         getAddress

@@ -1,26 +1,32 @@
 
-import walletAPI from './wallet'
+import walletAPI, { IWalletAPI, IWalletPublicAPI, IWalletRestrictedAPI } from './wallet'
 
 import db from '../db'
+
+interface IRestrictedAPI extends IWalletRestrictedAPI { };
+
+interface IPublicAPI extends IWalletPublicAPI { };
+
+interface IAPI extends IPublicAPI, IRestrictedAPI { };
 
 /**
  * Restricted APIs
  */
-const restrictedAPI = {
+const restrictedAPI: IRestrictedAPI = {
     ...walletAPI.restricted,
 }
 
 /**
  * Public APIs — Can be used by any component
  */
-const publicAPI = {
+const publicAPI: IPublicAPI = {
     ...walletAPI.public,
 }
 
 /**
  * All public and restricted API calls
  */
-export const API = {
+export const API: IAPI = {
     ...restrictedAPI,
     ...publicAPI
 }
@@ -29,7 +35,7 @@ export const API = {
  * API authorisation middleware
  */
 const middleware = {
-    get: (_target, action): ((moduleId: string, payload: any) => Promise<object>) => {
+    get: (_target: typeof API, action: keyof IAPI): ((moduleId: string, payload: any) => Promise<object>) => {
         return async (moduleId, payload): Promise<object> => {
             if (typeof API[action] !== 'function') {
                 throw Error('Incorrect API call')
@@ -49,12 +55,13 @@ const middleware = {
                     throw Error('Permission denied')
                 }
             }
-            // If all good, return the actual API call
-            return API[action](...payload)
+
+            // @ts-ignore
+            return API[action](...payload);
         }
     }
 }
 
-const handler: typeof API = new Proxy({}, middleware)
+const handler: typeof API = new Proxy({} as IAPI, middleware)
 
 export default handler
