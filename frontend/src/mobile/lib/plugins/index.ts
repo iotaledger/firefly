@@ -3,11 +3,14 @@ import { get, writable, Writable } from 'svelte/store'
 import API from '../api';
 
 import Button from '../../ui/components/Button.svelte';
+import Text from '../../ui/components/Text.svelte';
 
 import ButtonSchema from './schemas/button.json';
+import TextSchema from './schemas/text.json';
 
 const schemas = {
-    button: ButtonSchema
+    button: ButtonSchema,
+    text: TextSchema
 };
 
 /**
@@ -15,6 +18,7 @@ const schemas = {
  */
 const components = {
     Button,
+    Text,
 };
 
 /**
@@ -156,6 +160,7 @@ export default class Plugin implements IPlugin {
      * @param {IPlugin} plugin 
      */
     private validate(plugin: IPlugin) {
+        // TODO(laumair): Also, validate schema enums
         plugin.modules.forEach((module: PluginModule) => {
             const requiredProperties: string[] = schemas[module.id].required;
 

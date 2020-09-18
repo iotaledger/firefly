@@ -29,7 +29,7 @@
 
 {#if true}
     <main>
-        <h1>{$_('app.title')}</h1>
+        <!-- <h1>{$_('app.title')}</h1> -->
         <PluginRenderer definition={plugins[0].definition} parameters={plugins[0].parameters} />
     </main>
 {:else}
