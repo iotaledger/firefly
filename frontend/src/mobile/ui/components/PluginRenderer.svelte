@@ -9,7 +9,6 @@
         // Initialise plugin
         plugin = new Plugin(definition)
 
-        console.log('Plugin', plugin)
         // Set parameters
         plugin.state.update((state) => {
             return Object.keys(state).reduce((acc, prop) => {
