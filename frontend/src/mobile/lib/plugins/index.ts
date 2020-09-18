@@ -4,6 +4,12 @@ import API from '../api';
 
 import Button from '../../ui/components/Button.svelte';
 
+import ButtonSchema from './schemas/button.json';
+
+const schemas = {
+    button: ButtonSchema
+};
+
 /**
  * Supported components
  */
@@ -16,15 +22,23 @@ const components = {
  */
 type AllowedEvents = 'click'
 
+
 /**
- * Plugin event props
+ * Single module event
  */
-type PluginEvent = {
+type ModuleEvent = {
     [key in AllowedEvents]: {
         call: string;
         assignTo: string;
         parameters: string;
     }
+};
+
+/**
+ * Module event props
+ */
+type ModuleEvents = {
+    [key: string]: ModuleEvent;
 };
 
 /**
@@ -34,7 +48,6 @@ interface PluginModule {
     id: string;
     component: string;
     content: string;
-    events?: PluginEvent;
     children?: PluginModule[];
     props?: any;
 };
@@ -51,18 +64,51 @@ export default class Plugin implements IPlugin {
     public version: string;
     public modules: PluginModule[];
     public state: Writable<Object>;
-
-    public events: Object;
+    public events: ModuleEvents;
 
     constructor(plugin: IPlugin) {
         // Validate plugin semantics
         this.validate(plugin);
+
+        // Extract and set events
+        this.events = this.setEvents(plugin);
 
         // Initialise plugin state
         this.state = this.setState(plugin);
 
         this.version = plugin.version;
         this.modules = plugin.modules.map((item: PluginModule) => this.mapModule(item));
+    }
+
+    /**
+     * @method setEvents
+     * 
+     * @param {IPlugin} plugin
+     * 
+     * @returns {void} 
+     */
+    private setEvents(plugin: IPlugin): ModuleEvents {
+        const events: ModuleEvents = {};
+
+        plugin.modules.forEach((module: PluginModule) => {
+            const moduleDefinedProperties = schemas[module.id].properties;
+
+            const supportedEvents = Object.keys(moduleDefinedProperties)
+                .filter((prop: string) => moduleDefinedProperties[prop].type === 'event');
+
+            if (supportedEvents.length) {
+                supportedEvents.forEach((event: string) => {
+                    // Check if event is present in plugin json
+                    if (event in module) {
+                        events[module.id] = {
+                            [event as AllowedEvents]: module[event]
+                        }
+                    }
+                });
+            }
+        });
+
+        return events;
     }
 
     /**
@@ -75,18 +121,20 @@ export default class Plugin implements IPlugin {
      * @returns {Writable<Object>} 
      */
     private setState(plugin: IPlugin): Writable<Object> {
-        const state = plugin.modules.reduce((acc, item: PluginModule): any => {
-            if (item.events) {
-                Object.keys(item.events).forEach((event) => {
-                    if (item.events[event].parameters) {
+        const state = plugin.modules.reduce((acc, module: PluginModule): any => {
+            if (module.id in this.events) {
+                const eventsForThisModule = this.events[module.id];
+
+                Object.keys(eventsForThisModule).forEach((event) => {
+                    if (eventsForThisModule[event].parameters) {
                         const regex = new RegExp(/[^{\}]+(?=})/g);
 
-                        const params = item.events[event].parameters.match(regex).map((param) => param.trim());
+                        const params = eventsForThisModule[event].parameters.match(regex).map((param) => param.trim());
 
                         params.forEach((param) => {
                             acc = Object.assign({}, acc, {
-                                [item.id]: {
-                                    [item.events[event].call]: {
+                                [module.id]: {
+                                    [eventsForThisModule[event].call]: {
                                         [param]: null
                                     }
                                 }
@@ -107,7 +155,18 @@ export default class Plugin implements IPlugin {
     /**
      * @param {IPlugin} plugin 
      */
-    private validate(plugin: IPlugin) { }
+    private validate(plugin: IPlugin) {
+        plugin.modules.forEach((module: PluginModule) => {
+            const requiredProperties: string[] = schemas[module.id].required;
+
+            const providedProperties: string[] = Object.keys(module);
+
+            if (!requiredProperties.every((prop: string) => providedProperties.includes(prop))) {
+                throw new Error(`Missing properties for component ${module.component}`);
+            }
+        });
+
+    }
 
     /**
      * @method mapModule
@@ -121,9 +180,11 @@ export default class Plugin implements IPlugin {
 
         const events = {}
 
-        if (module.events) {
-            for (const event in module.events) {
-                const { call, assignTo } = module.events[event];
+        if (module.id in this.events) {
+            const eventsForThisModule = this.events[module.id];
+
+            for (const event in eventsForThisModule) {
+                const { call, assignTo } = eventsForThisModule[event];
 
                 events[event] = () => {
                     const state = get(this.state);

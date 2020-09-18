@@ -1,6 +1,6 @@
 {
     "version": 1.0,
-    "description": "Button component definition",
+    "description": "Button component schema",
     "properties": {
         "id": {
             "type": "string",
@@ -53,7 +53,8 @@
     "required": [
         "id",
         "type",
-        "content"
+        "content",
+        "click"
     ],
     "propertiesSummary": [
         {

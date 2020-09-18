@@ -8,12 +8,10 @@
             "type": "@iota/core",
             "component": "Button",
             "content": "Generate Address",
-            "events": {
-                "click": {
-                    "call": "getAddress",
-                    "parameters": "{{ index }}",
-                    "assignTo": "address"
-                }
+            "click": {
+                "call": "getAddress",
+                "parameters": "{{ index }}",
+                "assignTo": "address"
             }
         }
     ]
