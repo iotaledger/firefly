@@ -67,10 +67,46 @@
       "text": "Component id. Must be unique for each component"
     },
     {
+      "name": "type",
+      "type": "string",
+      "required": "Required",
+      "text": "Component type. Currently, only @iota/core type is supported"
+    },
+    {
+      "name": "component",
+      "type": "string",
+      "required": "Required",
+      "text": "Component name"
+    },
+    {
       "name": "children",
       "type": "array",
       "required": "Optional",
       "text": "Component children. If both 'content' & 'children' are passed, 'children' takes precedence"
+    },
+    {
+      "name": "content",
+      "type": "string",
+      "required": "Optional",
+      "text": "Component content. If 'children' property is passed, this property will be ignored"
+    },
+    {
+      "name": "color",
+      "type": "string",
+      "required": "Optional",
+      "text": "Button color"
+    },
+    {
+      "name": "size",
+      "type": "string",
+      "required": "Optional",
+      "text": "Button size"
+    },
+    {
+      "name": "click",
+      "type": "event",
+      "required": "Required",
+      "text": "Button click event"
     }
   ]
 }
