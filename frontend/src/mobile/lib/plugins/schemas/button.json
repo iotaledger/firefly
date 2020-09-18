@@ -1,72 +1,76 @@
 {
-    "version": 1.0,
-    "description": "Button component schema",
-    "properties": {
-        "id": {
-            "type": "string",
-            "description": "Component id",
-            "enum": [
-                "button"
-            ]
-        },
-        "type": {
-            "type": "string",
-            "description": "Must be @iota/core.",
-            "enum": [
-              "@iota/core"
-            ]
-        },
-        "component": {
-            "type": "string",
-            "description": "Component name",
-            "enum": [
-              "Button"
-            ]
-        },
-        "color": {
-            "type": "string",
-            "description": "Controls the color of button component.",
-            "enum": [
-              "default",
-              "dark",
-              "light"
-            ]
-        },
-        "size": {
-            "type": "string",
-            "description": "Controls size of button.",
-            "enum": [
-              "default",
-              "medium",
-              "large"
-            ]
-        },
-        "content": {
-            "type": "string",
-            "description": "Text to display."
-        },
-        "click": {
-            "type": "event",
-            "description": "On click event."
-        }
-    },
-    "required": [
-        "id",
-        "type",
-        "content",
-        "click"
-    ],
-    "propertiesSummary": [
-        {
-          "name": "id",
-          "type": "string",
-          "required": "Required",
-          "text": "Component id. Must be unique for each component"
-        },
-        {
-          "name": "text",
-          "required": "Required",
-          "text": "Button text"
-        }
+  "version": 1.0,
+  "description": "Button component schema",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Component id",
+      "enum": [
+        "button"
       ]
+    },
+    "type": {
+      "type": "string",
+      "description": "Must be @iota/core.",
+      "enum": [
+        "@iota/core"
+      ]
+    },
+    "component": {
+      "type": "string",
+      "description": "Component name",
+      "enum": [
+        "Button"
+      ]
+    },
+    "children": {
+      "type": "array",
+      "description": "Component children."
+    },
+    "content": {
+      "type": "string",
+      "description": "Controls the color of button component."
+    },
+    "color": {
+      "type": "string",
+      "description": "Controls the color of button component.",
+      "enum": [
+        "default",
+        "dark",
+        "light"
+      ]
+    },
+    "size": {
+      "type": "string",
+      "description": "Controls size of button.",
+      "enum": [
+        "default",
+        "medium",
+        "large"
+      ]
+    },
+    "click": {
+      "type": "event",
+      "description": "On click event."
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "click"
+  ],
+  "propertiesSummary": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": "Required",
+      "text": "Component id. Must be unique for each component"
+    },
+    {
+      "name": "children",
+      "type": "array",
+      "required": "Optional",
+      "text": "Component children. If both 'content' & 'children' are passed, 'children' takes precedence"
+    }
+  ]
 }

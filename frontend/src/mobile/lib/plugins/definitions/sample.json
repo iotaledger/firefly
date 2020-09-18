@@ -12,7 +12,15 @@
                 "call": "getAddress",
                 "parameters": "{{ index }}",
                 "assignTo": "address"
-            }
+            },
+            "children": [
+                {
+                    "id": "text",
+                    "type": "@iota/core",
+                    "component": "Text",
+                    "content": "Child"
+                }
+            ]
         },
         {
             "id": "text",

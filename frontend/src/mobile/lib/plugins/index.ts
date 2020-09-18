@@ -8,6 +8,9 @@ import Text from '../../ui/components/Text.svelte';
 import ButtonSchema from './schemas/button.json';
 import TextSchema from './schemas/text.json';
 
+/**
+ * Supported schemas
+ */
 const schemas = {
     button: ButtonSchema,
     text: TextSchema
@@ -25,7 +28,6 @@ const components = {
  * Allowed events
  */
 type AllowedEvents = 'click'
-
 
 /**
  * Single module event
@@ -53,7 +55,6 @@ interface PluginModule {
     component: string;
     content: string;
     children?: PluginModule[];
-    props?: any;
 };
 
 /**
@@ -211,7 +212,7 @@ export default class Plugin implements IPlugin {
         return {
             ...module,
             component: components[module.component],
-            children: module.children && module.children.map(this.mapModule),
+            children: module.children ? module.children.map((child) => this.mapModule(child)) : [],
             events
         }
     }

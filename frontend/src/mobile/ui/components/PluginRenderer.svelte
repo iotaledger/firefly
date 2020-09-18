@@ -9,6 +9,7 @@
         // Initialise plugin
         plugin = new Plugin(definition)
 
+        console.log('Plugin', plugin)
         // Set parameters
         plugin.state.update((state) => {
             return Object.keys(state).reduce((acc, prop) => {
@@ -29,6 +30,7 @@
             console.info('Updated state:', s)
         })
     } catch (e) {
+        console.error(e)
         error = e
     }
 </script>
@@ -38,7 +40,16 @@
         <span style="color: red">{error}</span>
     {:else}
         {#each plugin.modules as item}
-            <svelte:component this={item.component} {...item.props} events={item.events}>{item.content}</svelte:component>
+            <svelte:component this={item.component} {...item.props} events={item.events}>
+                {#if item.children.length}
+                    {#each item.children as child}
+                        <svelte:component this={child.component} {...child.props} events={child.events}>
+                            {child.content}
+                        </svelte:component>
+                    {/each}
+                {:else}{item.content}{/if}
+
+            </svelte:component>
         {/each}
     {/if}
 </main>
