@@ -1,18 +1,15 @@
 <script>
     import { fly, scale } from 'svelte/transition'
-    import { quintOut } from 'svelte/easing'
-    import { readable } from 'svelte/store'
+    import path from '@shared-lib/router'
 
-    import path from '@lib/router'
-
-    export let route
-    export let primary
-    export let secondary
-    export let left
-    export let transparent
+    export let route = null
+    export let primary = true
+    export let secondary = false
+    export let left = false
+    export let transparent = false
 </script>
 
-<style>
+<style type="text/scss">
     div {
         position: absolute;
         top: 0px;
@@ -20,9 +17,9 @@
         width: 100%;
         height: 100%;
         background: var(--bg);
-    }
-    div.transparent {
-        background: none;
+        &.transparent {
+            background: none;
+        }
     }
 </style>
 

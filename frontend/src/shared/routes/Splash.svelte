@@ -1,6 +1,9 @@
 <script>
-    const logo_icon_src = '../assets/img/logo_icon.svg'
-    const logo_name_src = '../assets/img/logo_name.svg'
+    import { Logo, Box } from '@shared-components'
 </script>
 
-<div><img src={logo_icon_src} alt="" /> <img src={logo_name_src} alt="" /></div>
+<Box classes="w-full h-full flex justify-center items-center">
+    <Box width="100px">
+        <Logo width="100%" logo="logo-firefly-complete-vertical" />
+    </Box>
+</Box>

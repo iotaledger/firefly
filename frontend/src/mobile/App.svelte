@@ -1,9 +1,10 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { setupI18n, isLocaleLoaded, dir, _ } from 'shared-modules/lib/i18n'
-    import { darkMode } from 'shared-modules/lib/app'
-    import { Route } from 'shared-modules/components'
-    import { Splash } from 'shared-modules/routes'
+    import { setupI18n, isLocaleLoaded, dir, _ } from '@shared-lib/i18n'
+    import { darkMode, mobile } from '@shared-lib/app'
+    import { goto } from '@shared-lib/helpers'
+    import { Route } from '@shared-components'
+    import { Splash, Onboarding1 } from '@shared-routes'
 
     let splash = true
 
@@ -13,10 +14,11 @@
     }
 
     setupI18n()
-
+    goto('') // dummmy goto homepage
     onMount(() => {
         setTimeout(() => {
             splash = false
+            goto('ob1')
         }, 2000)
     })
 </script>
@@ -24,12 +26,12 @@
 <style type="text/scss">
 </style>
 
-<main>
-    {#if !$isLocaleLoaded || splash}
-        <Route route="">
-            <Splash />
-        </Route>
-    {:else}
-        <h1>{$_('app.title')}</h1>
-    {/if}
-</main>
+{#if !$isLocaleLoaded || splash}
+    <Route route="">
+        <Splash />
+    </Route>
+{:else}
+    <Route route="ob1">
+        <Onboarding1 mobile={$mobile} locale={$_} />
+    </Route>
+{/if}

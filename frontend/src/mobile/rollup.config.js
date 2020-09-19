@@ -18,13 +18,27 @@ const projectRootDir = path.resolve(__dirname)
 // Plugins definition
 const plugins = [
     alias({
-        resolve: ['.js', '.svelte', '.css', '.scss'],
+        resolve: ['', '.js', '.svelte', '.css', '.scss'],
         entries: [
-            { find: /^@lib\/(.*)/, replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/lib/out') + '/$1' },
-            { find: /^@locales\/(.*)/, replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/locales') + '/$1' },
             {
-                find: /^shared-modules\/lib\/(.*)/,
+                find: /^@shared-lib\/(.*)/,
                 replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/lib/out') + '/$1'
+            },
+            {
+                find: /^@shared-locales\/(.*)/,
+                replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/locales') + '/$1'
+            },
+            {
+                find: /^@shared-components/,
+                replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/components')
+            },
+            {
+                find: /^@shared-routes/,
+                replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/routes')
+            },
+            {
+                find: /^@shared-assets\/(.*)/,
+                replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/assets') + '/$1'
             }
         ]
     }),
@@ -45,7 +59,6 @@ const plugins = [
         browser: true,
         dedupe: ['svelte']
     }),
-
     ts({ sourceMap: isDev, typescript }),
     commonjs()
 ]

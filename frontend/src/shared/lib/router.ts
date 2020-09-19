@@ -1,5 +1,5 @@
 import { readable } from 'svelte/store'
-import { notification } from './app'
+import { notification } from '@shared-lib/app'
 
 /**
  * Application path based on location hash
