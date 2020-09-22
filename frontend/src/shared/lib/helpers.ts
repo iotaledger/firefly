@@ -1,6 +1,13 @@
 import { writable, Writable } from 'svelte/store'
 
 /**
+ * Update application path
+ */
+export const goto = (path: string): void => {
+    window.location.hash = path
+}
+
+/**
  * Persist a writable Svelte store to local storage
  */
 export const persistent = <T>(key: string, initialValue: T): Writable<T> => {

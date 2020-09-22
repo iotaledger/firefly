@@ -1,22 +1,21 @@
 /* dm-sans-500 - latin */
 @font-face {
-    font-family: "DM Sans";
+    font-family: 'DM Sans';
     font-style: normal;
     font-weight: 500;
-    src: local("DM Sans Medium"), local("DMSans-Medium"),
-        url("../assets/fonts/dm-sans-v4-latin-500.woff2") format("woff2"),
-        /* Chrome 26+, Opera 23+, Firefox 39+ */ url("../assets/fonts/dm-sans-v4-latin-500.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    src: local('DM Sans Medium'), local('DMSans-Medium'), url('../assets/fonts/dm-sans-v4-latin-500.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */ url('../assets/fonts/dm-sans-v4-latin-500.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* dm-sans-700 - latin */
 @font-face {
-    font-family: "DM Sans";
+    font-family: 'DM Sans';
     font-style: normal;
     font-weight: 700;
-    src: local("DM Sans Bold"), local("DMSans-Bold"), url("../assets/fonts/dm-sans-v4-latin-700.woff2") format("woff2"),
-        /* Chrome 26+, Opera 23+, Firefox 39+ */ url("../assets/fonts/dm-sans-v4-latin-700.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    src: local('DM Sans Bold'), local('DMSans-Bold'), url('../assets/fonts/dm-sans-v4-latin-700.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */ url('../assets/fonts/dm-sans-v4-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
-@import "themes.scss";
+@import 'themes.scss';
 
 :root {
     // color palette
@@ -34,65 +33,60 @@
     --grey-medium: #9aadce;
     --grey-light: #eef4ff;
 }
-*,
-*:after,
-*:before {
+:global(*, *:after, *:before) {
     margin: 0;
     padding: 0;
     border: 0;
     box-sizing: border-box;
     outline: none;
     font-weight: 500;
-    font-family: "DM Sans";
+    font-family: 'DM Sans';
 }
-html,
-body {
+:global(html, body) {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background: #e5e5e5;
+    background: var(--app-background-color);
 }
-h1 {
+:global(h1) {
     font-weight: 700;
     font-size: 32px;
-    line-height: 100%;
+    line-height: 115%;
     color: var(--heading-color);
 }
-h2 {
+:global(h2) {
     font-weight: 700;
     font-size: 24px;
     line-height: 120%;
     color: var(--heading-color);
 }
-h3 {
+:global(h3) {
     font-weight: 700;
     font-size: 18px;
     line-height: 140%;
     color: var(--heading-color);
 }
-h4 {
+:global(h4) {
     font-weight: 700;
     font-size: 16px;
     line-height: 140%;
     color: var(--heading-color);
 }
-.text {
+:global(p) {
     font-size: 13px;
     line-height: 140%;
-    &.text--primary {
-        color: var(--text-primary-color);
-    }
-    &.text--secondary {
+    color: var(--text-primary-color);
+    &.secondary {
         color: var(--text-secondary-color);
     }
-    &.text--disabled {
+    &.disabled {
         color: var(--text-disabled-color);
     }
 }
-.bold {
+:global(.bold) {
     font-weight: 700;
 }
-.button {
+:global(button) {
     border-radius: 16px;
     padding: 15px 12px;
     cursor: pointer;
@@ -101,12 +95,16 @@ h4 {
     font-size: 12px;
     line-height: 140%;
     color: var(--button-text-color);
+    background-color: var(--button-backround-color);
+    min-width: 160px;
 
-    &.button--ghost {
+    &.ghost {
         border: 1px solid var(--button-border-color);
+        background-color: transparent;
     }
-
-    &.button--solid {
-        background-color: var(--button-backround-color);
-    }
+}
+:global(a) {
+    font-size: 12px;
+    line-height: 140%;
+    color: var(--link-text-color);
 }

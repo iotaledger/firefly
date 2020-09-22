@@ -1,37 +1,37 @@
 <script lang="typescript">
-    import { setupI18n, isLocaleLoaded, dir, _, darkMode } from '../shared'
+    import { onMount } from 'svelte'
+    import { setupI18n, isLocaleLoaded, dir, _ } from '@shared-lib/i18n'
+    import { darkMode, mobile } from '@shared-lib/app'
+    import { goto } from '@shared-lib/helpers'
+    import { Route } from '@shared-components'
+    import { Splash, Onboarding1 } from '@shared-routes'
 
-    import PluginRenderer from './ui/components/PluginRenderer.svelte'
-    import SamplePluginDefinition from './lib/plugins/definitions/sample.json'
-
-    const plugins = [
-        {
-            definition: SamplePluginDefinition,
-            parameters: {
-                button: {
-                    getAddress: [0]
-                }
-            }
-        }
-    ]
-
-    setupI18n()
+    let splash = true
 
     $: $darkMode ? document.body.classList.add('dark') : document.body.classList.remove('dark')
     $: if (document.dir !== $dir) {
         document.dir = $dir
     }
+
+    setupI18n()
+    goto('') // dummmy goto homepage
+    onMount(() => {
+        setTimeout(() => {
+            splash = false
+            goto('ob1')
+        }, 2000)
+    })
 </script>
 
 <style type="text/scss">
-
 </style>
 
-{#if true}
-    <main>
-        <!-- <h1>{$_('app.title')}</h1> -->
-        <PluginRenderer definition={plugins[0].definition} parameters={plugins[0].parameters} />
-    </main>
+{#if !$isLocaleLoaded || splash}
+    <Route route="">
+        <Splash />
+    </Route>
 {:else}
-    <p>Loading locale...</p>
+    <Route route="ob1">
+        <Onboarding1 mobile={$mobile} locale={$_} />
+    </Route>
 {/if}

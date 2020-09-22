@@ -8,10 +8,11 @@
     --button-text-color: #ffffff;
     --button-border-color: #108cff;
     --button-backround-color: #108cff;
+    --link-text-color: #108cff;
 }
 
 //dark
-.dark {
+:global(body.dark) {
     --app-background-color: #f6f9ff;
     --heading-color: #25395f;
     --text-primary-color: #25395f;
