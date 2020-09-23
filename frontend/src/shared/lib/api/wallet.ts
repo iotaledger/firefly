@@ -11,6 +11,19 @@ const getAddress = (index: number): Promise<string> => {
     return Promise.resolve(`${index ? 'U' : 'A'}`.repeat(81));
 }
 
+/**
+ * Logs a message
+ * 
+ * @method log
+ * 
+ * @param {string} message
+ * 
+ * @returns {void} 
+ */
+const log = (message: string) => {
+    console.log(message);
+};
+
 export interface IWalletRestrictedAPI {
     getAddress: (index: number) => Promise<string>;
 };
@@ -23,7 +36,9 @@ export interface IWalletAPI {
 };
 
 const api: IWalletAPI = {
-    public: {},
+    public: {
+        log
+    },
     restricted: {
         getAddress
     }

@@ -1,0 +1,112 @@
+{
+  "version": 1.0,
+  "description": "Button component schema.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Component id.",
+      "enum": [
+        "^\\d?\\.?\\d?\\.?\\d$"
+      ]
+    },
+    "category": {
+      "type": "string",
+      "description": "Must be @iota/core.",
+      "enum": [
+        "@iota/core"
+      ]
+    },
+    "children": {
+      "type": "array",
+      "description": "Component children."
+    },
+    "content": {
+      "type": "string",
+      "description": "Text to display."
+    },
+    "secondary": {
+      "type": "boolean",
+      "description": "Determines if 'secondary' CSS class should be applied.",
+      "default": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "description": "Determines if button should be disabled.",
+      "default": false
+    },
+    "ghost": {
+      "type": "boolean",
+      "description": "Determines if 'ghost' CSS should be applied.",
+      "default": false
+    },
+    "classes": {
+      "type": "string",
+      "description": "Additonal CSS classes."
+    },
+    "click": {
+      "type": "event",
+      "description": "On click event."
+    }
+  },
+  "required": [
+    "id",
+    "category",
+    "click"
+  ],
+  "propertiesSummary": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": "Required",
+      "text": "Component id. Must be unique for each component in a plugin."
+    },
+    {
+      "name": "category",
+      "type": "string",
+      "required": "Required",
+      "text": "Component category. Currently, only @iota/core category is supported."
+    },
+    {
+      "name": "children",
+      "type": "array",
+      "required": "Optional",
+      "text": "Component children. If both 'content' & 'children' are passed, 'children' takes precedence."
+    },
+    {
+      "name": "content",
+      "type": "string",
+      "required": "Optional",
+      "text": "Component content. If 'children' property is passed, this property will be ignored."
+    },
+    {
+      "name": "secondary",
+      "type": "boolean",
+      "required": "Optional",
+      "text": "When true, 'secondary' CSS class should be applied."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": "Optional",
+      "text": "When true, the component will be disabled."
+    },
+    {
+      "name": "ghost",
+      "type": "boolean",
+      "required": "Required",
+      "text": "When true, 'ghost' CSS class should be applied."
+    },
+    {
+      "name": "classes",
+      "type": "string",
+      "required": "Optional",
+      "text": "Additional CSS classes used by the component."
+    },
+    {
+      "name": "click",
+      "type": "event",
+      "required": "Required",
+      "text": "Button on click event handler."
+    }
+  ]
+}

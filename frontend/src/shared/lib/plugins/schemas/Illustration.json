@@ -1,0 +1,85 @@
+{
+  "version": 1.0,
+  "description": "Illustration component schema.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Component id.",
+      "enum": [
+        "^\\d?\\.?\\d?\\.?\\d$"
+      ]
+    },
+    "category": {
+      "type": "string",
+      "description": "Must be @iota/core.",
+      "enum": [
+        "@iota/core"
+      ]
+    },
+    "illustration": {
+      "type": "string",
+      "description": "Illustration type.",
+      "enum": [
+        "onboarding-1-mobile",
+        "onboarding-1-desktop"
+      ]
+    },
+    "width": {
+      "type": "string",
+      "description": "Illustration width.",
+      "default": "100%"
+    },
+    "height": {
+      "type": "string",
+      "description": "Illustration height.",
+      "default": "100%"
+    },
+    "classes": {
+      "type": "string",
+      "description": "Additional CSS classes."
+    }
+  },
+  "required": [
+    "id",
+    "category",
+    "illustration"
+  ],
+  "propertiesSummary": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": "Required",
+      "text": "Component id. Must be unique for each component in a plugin."
+    },
+    {
+      "name": "category",
+      "type": "string",
+      "required": "Required",
+      "text": "Component category. Currently, only @iota/core category is supported."
+    },
+    {
+      "name": "illustration",
+      "type": "string",
+      "required": "Required",
+      "text": "Illustration name. Based on this name, the correct illustration will be rendered."
+    },
+    {
+      "name": "width",
+      "type": "string",
+      "required": "Optional",
+      "text": "Component width."
+    },
+    {
+      "name": "height",
+      "type": "string",
+      "required": "Optional",
+      "text": "Component height."
+    },
+    {
+      "name": "classes",
+      "type": "string",
+      "required": "Optional",
+      "text": "Additional CSS classes used by the component."
+    }
+  ]
+}

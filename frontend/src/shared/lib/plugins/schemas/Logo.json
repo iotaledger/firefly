@@ -1,0 +1,86 @@
+{
+  "version": 1.0,
+  "description": "Logo component schema.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Component id.",
+      "enum": [
+        "^\\d?\\.?\\d?\\.?\\d$"
+      ]
+    },
+    "category": {
+      "type": "string",
+      "description": "Must be @iota/core.",
+      "enum": [
+        "@iota/core"
+      ]
+    },
+    "logo": {
+      "type": "string",
+      "description": "Logo type.",
+      "enum": [
+        "logo-firefly-complete-vertical",
+        "logo-firefly-complete-horizontal",
+        "logo-firefly"
+      ]
+    },
+    "width": {
+      "type": "string",
+      "description": "Illustration width.",
+      "default": "100%"
+    },
+    "height": {
+      "type": "string",
+      "description": "Illustration height.",
+      "default": "100%"
+    },
+    "classes": {
+      "type": "string",
+      "description": "Additional CSS classes."
+    }
+  },
+  "required": [
+    "id",
+    "category",
+    "logo"
+  ],
+  "propertiesSummary": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": "Required",
+      "text": "Component id. Must be unique for each component in a plugin."
+    },
+    {
+      "name": "category",
+      "type": "string",
+      "required": "Required",
+      "text": "Component category. Currently, only @iota/core category is supported."
+    },
+    {
+      "name": "logo",
+      "type": "string",
+      "required": "Required",
+      "text": "Logo type. Based on this type, the correct logo will be rendered."
+    },
+    {
+      "name": "width",
+      "type": "string",
+      "required": "Optional",
+      "text": "Component width."
+    },
+    {
+      "name": "height",
+      "type": "string",
+      "required": "Optional",
+      "text": "Component height."
+    },
+    {
+      "name": "classes",
+      "type": "string",
+      "required": "Optional",
+      "text": "Additional CSS classes used by the component."
+    }
+  ]
+}

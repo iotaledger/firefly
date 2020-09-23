@@ -1,6 +1,7 @@
 {
     "extends": "@tsconfig/svelte/tsconfig.json",
     "compilerOptions": {
+        "resolveJsonModule": true,
         "allowJs": true,
         "outDir": "lib/out",
         "baseUrl": "./",

@@ -22,7 +22,7 @@ const plugins = [
         entries: [
             {
                 find: /^@shared-lib\/(.*)/,
-                replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/lib/out') + '/$1'
+                replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/lib/out/lib') + '/$1'
             },
             {
                 find: /^@shared-locales\/(.*)/,
