@@ -1,0 +1,20 @@
+[package]
+name = "node-neon"
+version = "0.1.0"
+authors = ["Lucas Nogueira <lucas.nogueira@iota.org>"]
+license = "MIT"
+build = "build.rs"
+edition = "2018"
+exclude = ["artifacts.json", "index.node"]
+
+[lib]
+name = "node_neon"
+crate-type = ["cdylib"]
+
+[build-dependencies]
+neon-build = "0.4.0"
+
+[dependencies]
+neon = "0.4.0"
+wallet-actor-system = { path = "../../.." }
+smol = {version = "0.3", features = ["tokio02"] }

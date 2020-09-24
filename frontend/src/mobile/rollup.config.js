@@ -34,7 +34,7 @@ if (isDev) {
         livereload({ watch: './public' })
     );
 } else {
-    plugins.push(terser({ sourcemap: isDev }));
+    plugins.push(terser());
 }
 
 module.exports = {
@@ -42,7 +42,6 @@ module.exports = {
     output: {
         name: 'bundle',
         file: 'public/build/bundle.js',
-        sourcemap: isDev,
         format: 'iife',
     },
     plugins,

@@ -34,7 +34,7 @@ if (isDev) {
         livereload({ watch: './public' })
     );
 } else {
-    plugins.push(terser({ sourcemap: isDev }));
+    plugins.push(terser());
 }
 
 module.exports = {

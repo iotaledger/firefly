@@ -1,0 +1,20 @@
+const lib = require('../lib')
+const assert = require('assert')
+
+describe('binding', () => {
+  it('sends a message and gets the response', () => {
+    lib.init()
+    lib.sendMessage(JSON.stringify({
+        cmd: 'CreateAccount',
+        payload: {
+          id: 'account_id',
+          clientOptions: {
+            node: 'https://nodes.devnet.iota.org:443'
+          }
+        }
+      }))
+      .then(response => {
+        assert.equal(response, '{"type":"CreatedAccount"}')
+      })
+  })
+})
