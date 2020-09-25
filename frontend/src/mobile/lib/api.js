@@ -28,7 +28,6 @@ function createAccount() {
   return sendMessage({
     cmd: 'CreateAccount',
     payload: {
-      id: 'account_id',
       clientOptions: {
         node: 'https://nodes.devnet.iota.org:443'
       }

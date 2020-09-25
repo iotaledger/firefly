@@ -1,15 +1,16 @@
 <script>
-  window.__WALLET__.sendMessage({
-    cmd: 'CreateAccount',
-    payload: {
-      id: 'account_id',
-      clientOptions: {
-        node: 'https://nodes.devnet.iota.org:443'
+  window.__WALLET__
+    .sendMessage({
+      cmd: "CreateAccount",
+      payload: {
+        clientOptions: {
+          node: "https://nodes.devnet.iota.org:443"
+        }
       }
-    }
-  }).then(res => {
-    alert(JSON.stringify(res))
-  })
+    })
+    .then(res => {
+      alert(JSON.stringify(res));
+    });
 </script>
 
 <style>

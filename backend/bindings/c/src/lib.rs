@@ -3,7 +3,7 @@ use std::os::raw::c_char;
 
 use wallet_actor_system::{init as init_runtime, send_message as send_actor_message};
 
-type Callback = fn(*const c_char);
+type Callback = extern "C" fn(*const c_char);
 
 #[no_mangle]
 pub extern "C" fn initialize(storage_path: *const c_char) {
