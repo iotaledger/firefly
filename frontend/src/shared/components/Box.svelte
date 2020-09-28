@@ -4,6 +4,6 @@
     export let classes = ''
 </script>
 
-<div class={classes} style={`${width ? `width:${width};` : ''}${height ? `height:${height};` : ''}`}>
+<box class={classes || 'block'} style={`${width ? `width:${width};` : ''}${height ? `height:${height};` : ''}`}>
     <slot />
-</div>
+</box>

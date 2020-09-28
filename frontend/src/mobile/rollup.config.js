@@ -50,7 +50,11 @@ const plugins = [
             css.write('bundle.css')
         },
         preprocess: sveltePreprocess({
+            postcss: true,
             scss: {
+                postcss: {
+                    plugins: [require('autoprefixer')]
+                },
                 prependData: `@import 'shared-modules/style/style.scss';`
             }
         })
