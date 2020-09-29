@@ -8,7 +8,7 @@ use std::path::Path;
 
 static WALLET_ACTOR: OnceCell<ActorRef<WalletMessage>> = OnceCell::new();
 
-pub async fn init(storage_path: Option<impl AsRef<Path>>) {
+pub fn init(storage_path: Option<impl AsRef<Path>>) {
     println!("Starting runtime");
     if let Some(path) = storage_path {
         iota_wallet_actor::wallet::storage::set_storage_path(path)
@@ -22,17 +22,16 @@ pub async fn init(storage_path: Option<impl AsRef<Path>>) {
 }
 
 pub async fn send_message(message: String) -> String {
-    // loop to make sure the runtime has been initialized before sending messages
-    loop {
-        if let Some(actor) = WALLET_ACTOR.get() {
-            match dispatch(actor, message.clone()).await {
-                Ok(response) => {
-                    return response.unwrap_or("".to_string());
-                }
-                Err(e) => {
-                    return format!(r#"{{ "type": "error", "payload": "{}" }}"#, e);
-                }
+    if let Some(actor) = WALLET_ACTOR.get() {
+        match dispatch(actor, message.clone()).await {
+            Ok(response) => {
+                return response.unwrap_or("{}".to_string());
+            }
+            Err(e) => {
+                return format!(r#"{{ "type": "error", "payload": "{}" }}"#, e);
             }
         }
+    } else {
+        return r#""{{ "type": "error", "payload": "runtime not initialized; call `init` before sending messages" }}""#.to_string();
     }
 }

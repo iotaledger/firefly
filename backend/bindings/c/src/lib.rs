@@ -13,7 +13,7 @@ pub extern "C" fn initialize(storage_path: *const c_char) {
         let c_storage_path = unsafe { CStr::from_ptr(storage_path) };
         Some(c_storage_path.to_str().unwrap())
     };
-    std::thread::spawn(move || smol::block_on(init_runtime(storage_path)));
+    init_runtime(storage_path);
 }
 
 #[no_mangle]

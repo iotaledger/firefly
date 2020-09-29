@@ -25,10 +25,16 @@ impl Task for SendMessageTask {
 
 fn init(mut cx: FunctionContext) -> JsResult<JsUndefined> {
     let storage_path = match cx.argument::<JsString>(0) {
-        Ok(path) => Some(path.value()),
+        Ok(path) => {
+            if path.value() == "".to_string() {
+                Some(path.value())
+            } else {
+                None
+            }
+        }
         Err(_) => None,
     };
-    std::thread::spawn(|| smol::block_on(init_runtime(storage_path)));
+    init_runtime(storage_path);
     Ok(cx.undefined())
 }
 

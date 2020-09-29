@@ -2,6 +2,10 @@ node_modules
 
 # wallet
 **/example-database
+**/id.db
+
+# stronghold
+snapshot
 
 # misc
 .DS_Store

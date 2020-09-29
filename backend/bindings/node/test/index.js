@@ -13,7 +13,9 @@ describe('binding', () => {
         }
       }))
       .then(response => {
-        assert.equal(response, '{"type":"CreatedAccount"}')
+        assert.deepStrictEqual(response, {
+          type: "CreatedAccount"
+        })
       })
   })
 })

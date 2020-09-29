@@ -1,8 +1,8 @@
 var addon = require('../native');
 
 module.exports = {
-  init() {
-    addon.initialize()
+  init(storagePath = '') {
+    addon.init(storagePath)
   },
   sendMessage(message) {
     return new Promise((resolve, reject) => {
@@ -10,7 +10,7 @@ module.exports = {
         if (err) {
           reject(err)
         } else {
-          resolve(res)
+          resolve(JSON.parse(res))
         }
       })
     })
