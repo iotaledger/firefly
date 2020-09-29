@@ -1,5 +1,20 @@
 import { BridgeMessage } from '../../../../api-wrapper/bridge'
-import { AccountToCreate, Account, createAccount as _createAccount } from '../../../../api-wrapper/account'
+import {
+  AccountToCreate,
+  Account,
+  AccountIdentifier,
+  createAccount as _createAccount,
+  removeAccount as _removeAccount,
+  getAccount as _getAccount,
+  syncAccounts as _syncAccounts
+} from '../../../../api-wrapper/account'
+import {
+  Message,
+  ListMessageFilter,
+  listMessages as _listMessages,
+  reattach as _reattach
+} from '../../../../api-wrapper/message'
+import { backup as _backup, restoreBackup as _restoreBackup } from '../../../../api-wrapper/wallet'
 
 const addon = require('../native')
 
@@ -21,4 +36,32 @@ export function init(storagePath: string = '') {
 
 export function createAccount(account: AccountToCreate): Promise<Account> {
   return _createAccount(sendMessage, account)
+}
+
+export function removeAccount(accountId: AccountIdentifier): Promise<void> {
+  return _removeAccount(sendMessage, accountId)
+}
+
+export function getAccount(accountId: AccountIdentifier): Promise<Account> {
+  return _getAccount(sendMessage, accountId)
+}
+
+export function syncAccounts(): Promise<void> {
+  return _syncAccounts(sendMessage)
+}
+
+export function listMessages(accountId: AccountIdentifier, filter: ListMessageFilter, count: number, from = 0): Promise<Message[]> {
+  return _listMessages(sendMessage, accountId, filter, count, from)
+}
+
+export function reattach(accountId: AccountIdentifier, messageHash: string): Promise<void> {
+  return _reattach(sendMessage, accountId, messageHash)
+}
+
+export function backup(destinationPath: string): Promise<void> {
+  return _backup(sendMessage, destinationPath)
+}
+
+export function restoreBackup(backupPath: string): Promise<void> {
+  return _restoreBackup(sendMessage, backupPath)
 }

@@ -27,3 +27,21 @@ export function createAccount(bridge: Bridge, account: AccountToCreate): Promise
     payload: account
   })
 }
+
+export function removeAccount(bridge: Bridge, accountId: AccountIdentifier): Promise<void> {
+  return bridge({
+    cmd: 'RemoveAccount',
+    payload: accountId
+  })
+}
+
+export function getAccount(bridge: Bridge, accountId: AccountIdentifier): Promise<Account> {
+  return bridge({
+    cmd: 'GetAccount',
+    payload: accountId
+  })
+}
+
+export function syncAccounts(bridge: Bridge): Promise<void> {
+  return bridge({ cmd: 'SyncAccounts' })
+}
