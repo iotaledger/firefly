@@ -9,7 +9,9 @@
     "neon-cli": "^0.4.0"
   },
   "scripts": {
-    "install": "neon build",
+    "postinstall": "yarn build",
+    "pretest": "yarn build",
+    "build": "neon build && cd ./lib && yarn",
     "test": "mocha"
   },
   "devDependencies": {

@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "types": ["@types"]
+    },
+    "declaration": true,
+    "declarationDir": "types"
+  },
+  "include": ["./src"]
+}
