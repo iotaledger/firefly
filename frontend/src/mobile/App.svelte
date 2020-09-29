@@ -1,6 +1,7 @@
 <script>
-  import { createAccount } from "./lib/api";
+  import { init, createAccount } from "./lib/api";
 
+  init();
   createAccount().then(res => {
     alert(JSON.stringify(res));
   });
