@@ -1,5 +1,5 @@
 import { BridgeMessage } from '../../../../api-wrapper/bridge'
-import { AccountToCreate, Account, createAccount } from '../../../../api-wrapper/account'
+import { AccountToCreate, Account, createAccount as _createAccount } from '../../../../api-wrapper/account'
 
 const addon = require('../native')
 
@@ -15,11 +15,10 @@ function sendMessage(message: BridgeMessage): Promise<any> {
   })
 }
 
-module.exports = {
-  init(storagePath: string = '') {
-    addon.init(storagePath)
-  },
-  createAccount(account: AccountToCreate): Promise<Account> {
-    return createAccount(sendMessage, account)
-  }
+export function init(storagePath: string = '') {
+  addon.init(storagePath)
+}
+
+export function createAccount(account: AccountToCreate): Promise<Account> {
+  return _createAccount(sendMessage, account)
 }

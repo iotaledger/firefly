@@ -6,7 +6,10 @@
   "author": "",
   "license": "Apache-2.0",
   "scripts": {
-    "postinstall": "rimraf ./index.js && rollup -c --silent"
+    "postinstall": "yarn build",
+    "build": "rimraf ./index.js && rollup -c --silent && yarn generate-declaration",
+    "generate-declaration": "tsc src/index.ts --declaration --emitDeclarationOnly --outDir . && yarn cleanup-declaration",
+    "cleanup-declaration": "rm -R api-wrapper && mv bindings/node/lib/src/index.d.ts index.d.ts && rm -R bindings"
   },
   "devDependencies": {
     "@babel/core": "7.11.6",
