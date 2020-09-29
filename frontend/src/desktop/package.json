@@ -7,7 +7,7 @@
   "author": "IOTA Foundation <contact@iota.org>",
   "license": "Apache-2.0",
   "scripts": {
-    "build-binding": "electron-build-env --electron 9.1.0 -- neon build wallet-actor-system-nodejs-binding --release",
+    "postinstall": "electron-build-env --electron 9.1.0 -- neon build wallet-actor-system-nodejs-binding --release",
     "start": "NODE_ENV=development rollup --config --watch",
     "build": "NODE_ENV=production rollup --config"
   },
