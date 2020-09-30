@@ -7,14 +7,15 @@ describe('binding', () => {
     lib.sendMessage(JSON.stringify({
         cmd: 'CreateAccount',
         payload: {
-          id: 'account_id',
           clientOptions: {
             node: 'https://nodes.devnet.iota.org:443'
           }
         }
       }))
       .then(response => {
-        assert.equal(response, '{"type":"CreatedAccount"}')
+        assert.deepStrictEqual(response, {
+          type: "CreatedAccount"
+        })
       })
   })
 })

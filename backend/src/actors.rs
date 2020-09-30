@@ -1,50 +1,46 @@
-use iota_wallet_actor::{
-  Message as WalletMessage, MessageType as WalletMessageType, WalletBuilder,
+pub use iota_wallet_actor::{
+  Message as WalletMessage, MessageType as WalletMessageType, WalletMessageHandler,
 };
-use once_cell::sync::OnceCell;
-use tokio::sync::mpsc::{unbounded_channel, UnboundedSender};
+use riker::actors::*;
+use tokio::{runtime::Runtime, sync::mpsc::unbounded_channel};
 
-static WALLET_TX: OnceCell<UnboundedSender<WalletMessage>> = OnceCell::new();
-
-use chronicle_common::app;
-
-app!(WalletAppBuilder {});
-
-impl WalletAppBuilder {
-  pub fn build(self) -> WalletApp {
-    WalletApp {}
-  }
+pub struct WalletActor {
+  wallet_message_handler: WalletMessageHandler,
+  runtime: Runtime,
 }
 
-pub struct WalletApp;
-
-impl WalletApp {
-  pub async fn run(self) {
-    let (wallet_tx, wallet_rx) = unbounded_channel();
-    let wallet = WalletBuilder::new().rx(wallet_rx).build();
-    WALLET_TX
-      .set(wallet_tx)
-      .expect("failed to set wallet actor tx");
-
-    tokio::spawn(wallet.run());
-  }
-}
-
-pub(crate) async fn dispatch(message: String) -> Result<Option<String>, String> {
-  if let Some(actor_tx) = WALLET_TX.get() {
-    let (response_tx, mut response_rx) = unbounded_channel();
-    let message: WalletMessageType = serde_json::from_str(&message).map_err(|e| e.to_string())?;
-    actor_tx
-      .send(WalletMessage::new(message, response_tx))
-      .map_err(|e| e.to_string())?;
-    let response = response_rx.recv().await;
-    match response {
-      Some(res) => Ok(Some(
-        serde_json::to_string(&res).map_err(|e| e.to_string())?,
-      )),
-      None => Ok(None),
+impl Default for WalletActor {
+  fn default() -> Self {
+    Self {
+      wallet_message_handler: Default::default(),
+      runtime: Runtime::new().expect("failed to create tokio runtime"),
     }
-  } else {
-    Err("actor tx not initialized".to_string())
+  }
+}
+
+impl Actor for WalletActor {
+  type Msg = WalletMessage;
+
+  fn recv(&mut self, _ctx: &Context<Self::Msg>, msg: Self::Msg, _sender: Sender) {
+    let wallet_message_handler = &self.wallet_message_handler;
+    self.runtime.block_on(async move {
+      wallet_message_handler.handle(msg).await;
+    });
+  }
+}
+
+pub(crate) async fn dispatch(
+  wallet_actor: &ActorRef<WalletMessage>,
+  message: String,
+) -> Result<Option<String>, String> {
+  let (response_tx, mut response_rx) = unbounded_channel();
+  let message: WalletMessageType = serde_json::from_str(&message).map_err(|e| e.to_string())?;
+  wallet_actor.tell(WalletMessage::new(message, response_tx), None);
+  let response = response_rx.recv().await;
+  match response {
+    Some(res) => Ok(Some(
+      serde_json::to_string(&res).map_err(|e| e.to_string())?,
+    )),
+    None => Ok(None),
   }
 }

@@ -1,50 +1,37 @@
-use chronicle_common::launcher;
-use log::*;
-
 mod actors;
-use actors::{dispatch, WalletAppBuilder};
+use actors::{dispatch, WalletActor, WalletMessage};
+
+use once_cell::sync::OnceCell;
+use riker::actors::*;
 
 use std::path::Path;
 
-launcher!(
-    apps_builder: AppsBuilder {wallet: WalletAppBuilder}, // Apps
-    apps: Apps {} // Launcher state
-);
+static WALLET_ACTOR: OnceCell<ActorRef<WalletMessage>> = OnceCell::new();
 
-// build your apps
-impl AppsBuilder {
-    fn build(self) -> Apps {
-        let wallet_app = WalletAppBuilder::new();
-        self.wallet(wallet_app).to_apps()
-    }
-}
-
-pub async fn init(storage_path: Option<impl AsRef<Path>>) {
+pub fn init(storage_path: Option<impl AsRef<Path>>) {
     println!("Starting runtime");
     if let Some(path) = storage_path {
         iota_wallet_actor::wallet::storage::set_storage_path(path)
             .expect("failed to set storage path");
     }
-    AppsBuilder::new()
-        .build() // build apps first, then start them in order you want.
-        .wallet()
-        .await // start app
-        .one_for_one()
-        .await;
+    let sys = ActorSystem::new().unwrap();
+    let wallet_actor = sys.actor_of::<WalletActor>("wallet-actor").unwrap();
+    WALLET_ACTOR
+        .set(wallet_actor)
+        .expect("failed to set wallet actor globally");
 }
 
 pub async fn send_message(message: String) -> String {
-    // loop to make sure the runtime has been initialized before sending messages
-    loop {
-        match dispatch(message.clone()).await {
+    if let Some(actor) = WALLET_ACTOR.get() {
+        match dispatch(actor, message.clone()).await {
             Ok(response) => {
-                return response.unwrap_or("".to_string());
+                return response.unwrap_or("{}".to_string());
             }
             Err(e) => {
-                if e != "actor tx not initialized" {
-                    return format!(r#"{{ "type": "error", "payload": "{}" }}"#, e);
-                }
+                return format!(r#"{{ "type": "error", "payload": "{}" }}"#, e);
             }
         }
+    } else {
+        return r#""{{ "type": "error", "payload": "runtime not initialized; call `init` before sending messages" }}""#.to_string();
     }
 }
