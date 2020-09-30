@@ -27,9 +27,9 @@ fn init(mut cx: FunctionContext) -> JsResult<JsUndefined> {
     let storage_path = match cx.argument::<JsString>(0) {
         Ok(path) => {
             if path.value() == "".to_string() {
-                Some(path.value())
-            } else {
                 None
+            } else {
+                Some(path.value())
             }
         }
         Err(_) => None,
