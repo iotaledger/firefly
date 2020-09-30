@@ -1,4 +1,4 @@
-import { Bridge } from './bridge'
+import { Bridge, BridgeResponse } from './bridge'
 import { AccountIdentifier } from './account'
 
 export interface UnsignedTransaction {
@@ -53,7 +53,7 @@ export interface ListMessageFilter {
   messageType?: MessageType;
 }
 
-export function listMessages(bridge: Bridge, accountId: AccountIdentifier, filter: ListMessageFilter, count: number, from = 0): Promise<Message[]> {
+export function listMessages(bridge: Bridge<Message[]>, accountId: AccountIdentifier, filter: ListMessageFilter, count: number, from = 0): Promise<BridgeResponse<Message[]>> {
   return bridge({
     cmd: 'ListMessages',
     payload: {
@@ -65,7 +65,7 @@ export function listMessages(bridge: Bridge, accountId: AccountIdentifier, filte
   })
 }
 
-export function reattach(bridge: Bridge, accountId: AccountIdentifier, messageHash: string) {
+export function reattach(bridge: Bridge<any>, accountId: AccountIdentifier, messageHash: string): Promise<BridgeResponse<any>> {
   return bridge({
     cmd: 'Reattach',
     payload: {

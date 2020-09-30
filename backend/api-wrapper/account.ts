@@ -1,4 +1,4 @@
-import { Bridge } from './bridge'
+import { Bridge, BridgeResponse } from './bridge'
 import { Message } from './message'
 import { Address } from './address'
 import { ClientOptions } from './client'
@@ -21,27 +21,27 @@ export interface AccountToCreate {
   createdAt?: string;
 }
 
-export function createAccount(bridge: Bridge, account: AccountToCreate): Promise<Account> {
+export function createAccount(bridge: Bridge<Account>, account: AccountToCreate): Promise<BridgeResponse<Account>> {
   return bridge({
     cmd: 'CreateAccount',
     payload: account
   })
 }
 
-export function removeAccount(bridge: Bridge, accountId: AccountIdentifier): Promise<void> {
+export function removeAccount(bridge: Bridge<any>, accountId: AccountIdentifier): Promise<BridgeResponse<any>> {
   return bridge({
     cmd: 'RemoveAccount',
     payload: accountId
   })
 }
 
-export function getAccount(bridge: Bridge, accountId: AccountIdentifier): Promise<Account> {
+export function getAccount(bridge: Bridge<Account>, accountId: AccountIdentifier): Promise<BridgeResponse<Account>> {
   return bridge({
     cmd: 'GetAccount',
     payload: accountId
   })
 }
 
-export function syncAccounts(bridge: Bridge): Promise<void> {
+export function syncAccounts(bridge: Bridge<any>): Promise<BridgeResponse<any>> {
   return bridge({ cmd: 'SyncAccounts' })
 }

@@ -1,4 +1,4 @@
-import { BridgeMessage } from '../../../../api-wrapper/bridge'
+import { BridgeMessage, BridgeResponse } from '../../../../api-wrapper/bridge'
 import {
   AccountToCreate,
   Account,
@@ -34,34 +34,34 @@ export function init(storagePath: string = '') {
   addon.init(storagePath)
 }
 
-export function createAccount(account: AccountToCreate): Promise<Account> {
+export function createAccount(account: AccountToCreate): Promise<BridgeResponse<Account>> {
   return _createAccount(sendMessage, account)
 }
 
-export function removeAccount(accountId: AccountIdentifier): Promise<void> {
+export function removeAccount(accountId: AccountIdentifier): Promise<BridgeResponse<any>> {
   return _removeAccount(sendMessage, accountId)
 }
 
-export function getAccount(accountId: AccountIdentifier): Promise<Account> {
+export function getAccount(accountId: AccountIdentifier): Promise<BridgeResponse<Account>> {
   return _getAccount(sendMessage, accountId)
 }
 
-export function syncAccounts(): Promise<void> {
+export function syncAccounts(): Promise<BridgeResponse<any>> {
   return _syncAccounts(sendMessage)
 }
 
-export function listMessages(accountId: AccountIdentifier, filter: ListMessageFilter, count: number, from = 0): Promise<Message[]> {
+export function listMessages(accountId: AccountIdentifier, filter: ListMessageFilter, count: number, from = 0): Promise<BridgeResponse<Message[]>> {
   return _listMessages(sendMessage, accountId, filter, count, from)
 }
 
-export function reattach(accountId: AccountIdentifier, messageHash: string): Promise<void> {
+export function reattach(accountId: AccountIdentifier, messageHash: string): Promise<BridgeResponse<any>> {
   return _reattach(sendMessage, accountId, messageHash)
 }
 
-export function backup(destinationPath: string): Promise<void> {
+export function backup(destinationPath: string): Promise<BridgeResponse<any>> {
   return _backup(sendMessage, destinationPath)
 }
 
-export function restoreBackup(backupPath: string): Promise<void> {
+export function restoreBackup(backupPath: string): Promise<BridgeResponse<any>> {
   return _restoreBackup(sendMessage, backupPath)
 }

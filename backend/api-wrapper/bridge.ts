@@ -3,4 +3,9 @@ export interface BridgeMessage {
   payload?: any;
 }
 
-export type Bridge = (message: BridgeMessage) => Promise<any>
+export interface BridgeResponse<T> {
+  type: string;
+  payload?: T;
+}
+
+export type Bridge<T> = (message: BridgeMessage) => Promise<BridgeResponse<T>>
