@@ -3,7 +3,7 @@ name = "wallet-actor-system"
 version = "0.1.0"
 authors = ["Lucas Nogueira <lucas.nogueira@iota.org>"]
 edition = "2018"
-exclude = ["/bindings"]
+exclude = ["/bindings", "/api-wrapper"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
