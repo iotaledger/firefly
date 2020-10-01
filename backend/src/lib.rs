@@ -32,6 +32,6 @@ pub async fn send_message(message: String) -> String {
             }
         }
     } else {
-        return r#""{{ "type": "error", "payload": "runtime not initialized; call `init` before sending messages" }}""#.to_string();
+        return r#""{ "type": "error", "payload": "runtime not initialized; call `init` before sending messages" }""#.to_string();
     }
 }
