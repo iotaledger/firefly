@@ -12,7 +12,7 @@
     "postinstall": "yarn build",
     "pretest": "yarn build",
     "build": "neon build && cd ./lib && yarn",
-    "test": "mocha"
+    "test": "mocha --timeout 0"
   },
   "devDependencies": {
     "mocha": "^8.0.1"

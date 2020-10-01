@@ -160,7 +160,7 @@ checksum = "cdcf67bb7ba7797a081cd19009948ab533af7c355d5caf1d08c777582d351e9c"
 [[package]]
 name = "bee-common-derive"
 version = "0.1.1-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#661adea03f5d51e7476fcb5594ee2fa697628cd1"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#9f7130a3935c6c3bcf522457dc38600f66d45a6a"
 dependencies = [
  "quote 1.0.7",
  "syn 1.0.42",
@@ -169,7 +169,7 @@ dependencies = [
 [[package]]
 name = "bee-crypto"
 version = "0.2.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#661adea03f5d51e7476fcb5594ee2fa697628cd1"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#9f7130a3935c6c3bcf522457dc38600f66d45a6a"
 dependencies = [
  "bee-ternary",
  "byteorder",
@@ -181,7 +181,7 @@ dependencies = [
 [[package]]
 name = "bee-signing"
 version = "0.1.1-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#661adea03f5d51e7476fcb5594ee2fa697628cd1"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#9f7130a3935c6c3bcf522457dc38600f66d45a6a"
 dependencies = [
  "bee-common-derive",
  "bee-crypto",
@@ -195,7 +195,7 @@ dependencies = [
 [[package]]
 name = "bee-signing-ext"
 version = "0.1.0-alpha"
-source = "git+https://github.com/wusyong/bee-p?branch=sign-ext#ec83331c6a3a3dd465545eca6fe6fd2fd9925658"
+source = "git+https://github.com/wusyong/bee-p?branch=sign-ext#390a7bcfcc524fd8e37c29617c60d2712c3adb67"
 dependencies = [
  "bee-common-derive",
  "bee-crypto",
@@ -206,14 +206,13 @@ dependencies = [
  "serde 1.0.116",
  "signature",
  "slip10",
- "thiserror",
  "zeroize",
 ]
 
 [[package]]
 name = "bee-ternary"
 version = "0.3.1-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#661adea03f5d51e7476fcb5594ee2fa697628cd1"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#9f7130a3935c6c3bcf522457dc38600f66d45a6a"
 dependencies = [
  "num-traits 0.2.12",
  "serde 1.0.116",
@@ -222,7 +221,7 @@ dependencies = [
 [[package]]
 name = "bee-transaction"
 version = "0.1.0-alpha"
-source = "git+https://github.com/wusyong/bee-p.git?branch=atomic-tx#213bb6d51da1bb73103be67a2a0b113bb66504ea"
+source = "git+https://github.com/wusyong/bee-p.git?branch=atomic-tx#ee5e4bca8820e091398b9aa31895b779c6ddcf08"
 dependencies = [
  "bech32",
  "bee-crypto",
@@ -394,9 +393,9 @@ dependencies = [
 
 [[package]]
 name = "chrono"
-version = "0.4.18"
+version = "0.4.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d021fddb7bd3e734370acfa4a83f34095571d8570c039f1420d77540f68d5772"
+checksum = "670ad68c9088c2a963aaa298cb369688cf3f9465ce5e2d4ca10e6e0098a1ce73"
 dependencies = [
  "libc",
  "num-integer",
@@ -553,7 +552,7 @@ checksum = "7a81dae078cea95a014a339291cec439d2f232ebe854a9d672b796c6afafa9b7"
 [[package]]
 name = "crypto"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#3900209e2461dd9215693715479fda1f15a289b3"
+source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#2a2987c586383b1d724793f32cc47492dda7e67b"
 dependencies = [
  "anyhow",
  "primitives",
@@ -718,7 +717,7 @@ version = "0.1.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "aa4da3c766cd7a0db8242e326e9e4e081edd567072893ed320008189715366a4"
 dependencies = [
- "proc-macro2 1.0.23",
+ "proc-macro2 1.0.24",
  "quote 1.0.7",
  "syn 1.0.42",
  "synstructure",
@@ -857,7 +856,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d0b5a30a4328ab5473878237c447333c093297bded83a4983d10f4deea240d39"
 dependencies = [
  "proc-macro-hack",
- "proc-macro2 1.0.23",
+ "proc-macro2 1.0.24",
  "quote 1.0.7",
  "syn 1.0.42",
 ]
@@ -934,7 +933,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "24b328c01a4d71d2d8173daa93562a73ab0fe85616876f02500f53d82948c504"
 dependencies = [
  "proc-macro-error",
- "proc-macro2 1.0.23",
+ "proc-macro2 1.0.24",
  "quote 1.0.7",
  "syn 1.0.42",
 ]
@@ -1111,7 +1110,7 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "0.5.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=chrysalis#e7b2d67b160d9a207d4ef36c270418a4c672fd8d"
+source = "git+https://github.com/iotaledger/iota.rs?branch=chrysalis#3477955c4deaf161b55912480665787d1661c793"
 dependencies = [
  "bee-crypto",
  "bee-signing",
@@ -1128,7 +1127,7 @@ dependencies = [
 [[package]]
 name = "iota-core"
 version = "0.2.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=chrysalis#e7b2d67b160d9a207d4ef36c270418a4c672fd8d"
+source = "git+https://github.com/iotaledger/iota.rs?branch=chrysalis#3477955c4deaf161b55912480665787d1661c793"
 dependencies = [
  "bee-crypto",
  "bee-signing",
@@ -1140,7 +1139,7 @@ dependencies = [
 [[package]]
 name = "iota-stronghold"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#3900209e2461dd9215693715479fda1f15a289b3"
+source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#2a2987c586383b1d724793f32cc47492dda7e67b"
 dependencies = [
  "anyhow",
  "base64 0.12.3",
@@ -1164,7 +1163,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs#c0a60134eddac4c0b7967c0606b6b79736eabd3c"
+source = "git+https://github.com/iotaledger/wallet.rs#361cc922931bd762f7a2c0c99c8e7cfcc7835abf"
 dependencies = [
  "anyhow",
  "chrono",
@@ -1184,7 +1183,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet-actor"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/actors.rs?branch=feat/wallet#b1193eb9353e00c7d4e9b9ad91fde640a4bb5b56"
+source = "git+https://github.com/iotaledger/actors.rs?branch=feat/wallet#08955cadbb9b6a58b59b2294dcc5449897e34986"
 dependencies = [
  "chronicle-common",
  "iota-core",
@@ -1260,9 +1259,9 @@ dependencies = [
 
 [[package]]
 name = "libc"
-version = "0.2.77"
+version = "0.2.78"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f2f96b10ec2560088a8e76961b00d47107b3a625fecb76dedb29ee7ccbf98235"
+checksum = "aa7087f49d294270db4e1928fc110c976cd4b9e5a16348e0a1df09afa99e6c98"
 
 [[package]]
 name = "libsodium-sys"
@@ -1605,29 +1604,29 @@ checksum = "d4fd5641d01c8f18a23da7b6fe29298ff4b55afcccdf78973b24cf3175fee32e"
 
 [[package]]
 name = "pin-project"
-version = "0.4.24"
+version = "0.4.25"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f48fad7cfbff853437be7cf54d7b993af21f53be7f0988cbfe4a51535aa77205"
+checksum = "2b9e280448854bd91559252582173b3bd1f8e094a0e644791c0628ca9b1f144f"
 dependencies = [
  "pin-project-internal",
 ]
 
 [[package]]
 name = "pin-project-internal"
-version = "0.4.24"
+version = "0.4.25"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "24c6d293bdd3ca5a1697997854c6cf7855e43fb6a0ba1c47af57a5bcafd158ae"
+checksum = "c8c8b352676bc6a4c3d71970560b913cea444a7a921cc2e2d920225e4b91edaa"
 dependencies = [
- "proc-macro2 1.0.23",
+ "proc-macro2 1.0.24",
  "quote 1.0.7",
  "syn 1.0.42",
 ]
 
 [[package]]
 name = "pin-project-lite"
-version = "0.1.9"
+version = "0.1.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4fe74897791e156a0cd8cce0db31b9b2198e67877316bf3086c3acd187f719f0"
+checksum = "e555d9e657502182ac97b539fb3dae8b79cda19e3e4f8ffb5e8de4f18df93c95"
 
 [[package]]
 name = "pin-utils"
@@ -1663,7 +1662,7 @@ checksum = "c36fa947111f5c62a733b652544dd0016a43ce89619538a8ef92724a6f501a20"
 [[package]]
 name = "primitives"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#3900209e2461dd9215693715479fda1f15a289b3"
+source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#2a2987c586383b1d724793f32cc47492dda7e67b"
 
 [[package]]
 name = "proc-macro-error"
@@ -1672,7 +1671,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "da25490ff9892aab3fcf7c36f08cfb902dd3e71ca0f9f9517bea02a73a5ce38c"
 dependencies = [
  "proc-macro-error-attr",
- "proc-macro2 1.0.23",
+ "proc-macro2 1.0.24",
  "quote 1.0.7",
  "syn 1.0.42",
  "version_check",
@@ -1684,7 +1683,7 @@ version = "1.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a1be40180e52ecc98ad80b184934baf3d0d29f979574e439af5a55274b35f869"
 dependencies = [
- "proc-macro2 1.0.23",
+ "proc-macro2 1.0.24",
  "quote 1.0.7",
  "version_check",
 ]
@@ -1712,9 +1711,9 @@ dependencies = [
 
 [[package]]
 name = "proc-macro2"
-version = "1.0.23"
+version = "1.0.24"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "51ef7cd2518ead700af67bf9d1a658d90b6037d77110fd9c0445429d0ba1c6c9"
+checksum = "1e0704ee1a7e00d7bb417d0770ea303c1bccbabf0ef1667dae92b5967f5f8a71"
 dependencies = [
  "unicode-xid 0.2.1",
 ]
@@ -1734,7 +1733,7 @@ version = "1.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "aa563d17ecb180e500da1cfd2b028310ac758de548efdd203e18f283af693f37"
 dependencies = [
- "proc-macro2 1.0.23",
+ "proc-macro2 1.0.24",
 ]
 
 [[package]]
@@ -1832,7 +1831,7 @@ dependencies = [
 [[package]]
 name = "random"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#3900209e2461dd9215693715479fda1f15a289b3"
+source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#2a2987c586383b1d724793f32cc47492dda7e67b"
 dependencies = [
  "cc",
  "primitives",
@@ -2102,16 +2101,16 @@ version = "1.0.116"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f630a6370fd8e457873b4bd2ffdae75408bc291ba72be773772a4c2a065d9ae8"
 dependencies = [
- "proc-macro2 1.0.23",
+ "proc-macro2 1.0.24",
  "quote 1.0.7",
  "syn 1.0.42",
 ]
 
 [[package]]
 name = "serde_json"
-version = "1.0.57"
+version = "1.0.58"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "164eacbdb13512ec2745fb09d51fd5b22b0d65ed294a1dcf7285a360c80a675c"
+checksum = "a230ea9107ca2220eea9d46de97eddcb04cd00e92d13dda78e478dd33fa82bd4"
 dependencies = [
  "itoa",
  "ryu",
@@ -2286,7 +2285,7 @@ dependencies = [
 [[package]]
 name = "snapshot"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#3900209e2461dd9215693715479fda1f15a289b3"
+source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#2a2987c586383b1d724793f32cc47492dda7e67b"
 dependencies = [
  "anyhow",
  "crypto",
@@ -2334,7 +2333,7 @@ checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
 [[package]]
 name = "stronghold-engine"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#3900209e2461dd9215693715479fda1f15a289b3"
+source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#2a2987c586383b1d724793f32cc47492dda7e67b"
 dependencies = [
  "crypto",
  "primitives",
@@ -2372,7 +2371,7 @@ version = "1.0.42"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9c51d92969d209b54a98397e1b91c8ae82d8c87a7bb87df0b29aa2ad81454228"
 dependencies = [
- "proc-macro2 1.0.23",
+ "proc-macro2 1.0.24",
  "quote 1.0.7",
  "unicode-xid 0.2.1",
 ]
@@ -2383,7 +2382,7 @@ version = "0.12.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b834f2d66f734cb897113e34aaff2f1ab4719ca946f9a7358dba8f8064148701"
 dependencies = [
- "proc-macro2 1.0.23",
+ "proc-macro2 1.0.24",
  "quote 1.0.7",
  "syn 1.0.42",
  "unicode-xid 0.2.1",
@@ -2404,7 +2403,7 @@ version = "1.0.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bd80fc12f73063ac132ac92aceea36734f04a1d93c1240c6944e23a3b8841793"
 dependencies = [
- "proc-macro2 1.0.23",
+ "proc-macro2 1.0.24",
  "quote 1.0.7",
  "syn 1.0.42",
 ]
@@ -2490,7 +2489,7 @@ version = "0.2.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f0c3acc6aa564495a0f2e1d59fab677cd7f81a19994cfc7f3ad0e64301560389"
 dependencies = [
- "proc-macro2 1.0.23",
+ "proc-macro2 1.0.24",
  "quote 1.0.7",
  "syn 1.0.42",
 ]
@@ -2638,7 +2637,7 @@ dependencies = [
 [[package]]
 name = "vault"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#3900209e2461dd9215693715479fda1f15a289b3"
+source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#2a2987c586383b1d724793f32cc47492dda7e67b"
 dependencies = [
  "anyhow",
  "serde 1.0.116",
@@ -2731,7 +2730,7 @@ dependencies = [
  "bumpalo",
  "lazy_static",
  "log",
- "proc-macro2 1.0.23",
+ "proc-macro2 1.0.24",
  "quote 1.0.7",
  "syn 1.0.42",
  "wasm-bindgen-shared",
@@ -2765,7 +2764,7 @@ version = "0.2.68"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f249f06ef7ee334cc3b8ff031bfc11ec99d00f34d86da7498396dc1e3b1498fe"
 dependencies = [
- "proc-macro2 1.0.23",
+ "proc-macro2 1.0.24",
  "quote 1.0.7",
  "syn 1.0.42",
  "wasm-bindgen-backend",
@@ -2893,7 +2892,7 @@ version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c3f369ddb18862aba61aa49bf31e74d29f0f162dec753063200e1dc084345d16"
 dependencies = [
- "proc-macro2 1.0.23",
+ "proc-macro2 1.0.24",
  "quote 1.0.7",
  "syn 1.0.42",
  "synstructure",
