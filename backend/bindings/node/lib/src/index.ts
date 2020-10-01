@@ -14,7 +14,11 @@ import {
   listMessages as _listMessages,
   reattach as _reattach
 } from '../../../../api-wrapper/message'
-import { backup as _backup, restoreBackup as _restoreBackup } from '../../../../api-wrapper/wallet'
+import {
+  backup as _backup,
+  restoreBackup as _restoreBackup,
+  setStrongholdPassword as _setStrongholdPassword
+} from '../../../../api-wrapper/wallet'
 
 const addon = require('../native')
 
@@ -64,4 +68,8 @@ export function backup(destinationPath: string): Promise<BridgeResponse<any>> {
 
 export function restoreBackup(backupPath: string): Promise<BridgeResponse<any>> {
   return _restoreBackup(sendMessage, backupPath)
+}
+
+export function setStrongholdPassword(password: string): Promise<BridgeResponse<any>> {
+  return _setStrongholdPassword(sendMessage, password)
 }
