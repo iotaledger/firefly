@@ -9,6 +9,15 @@
     export let ghost = false
 </script>
 
+<style type="text/scss">
+    a {
+        font-size: 12px;
+        line-height: 140%;
+        cursor: pointer;
+        color: var(--link-text-color);
+    }
+</style>
+
 <a use:bindEvents={events} {href} on:click={onClick} class:secondary class:disabled class:ghost>
     <slot />
 </a>

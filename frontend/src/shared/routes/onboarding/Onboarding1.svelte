@@ -1,5 +1,5 @@
 <script>
-    import { Logo, Box, Illustration, Text, Button, Link } from '@shared-components'
+    import { OnboardingLayout, Logo, Box, Illustration, Text, Button, Link } from '@shared-components'
     export let locale
     export let mobile
     export let goto
@@ -19,20 +19,17 @@
         </Box>
     </Box>
 {:else}
-    <Box classes="w-full h-full flex flex-row">
-        <Box width="430px" classes="flex flex-col flex-shrink-0 justify-between pt-12 pb-16 px-12 w-2/6">
-            <Box classes="flex flex-col">
-                <Logo width="64px" logo="logo-firefly" classes="mb-10 mt-12" />
-                <Text type="h1" classes="mb-5">{locale('views.onboarding_1.title')}</Text>
-                <Text type="p" secondary={true}>{locale('views.onboarding_1.body')}</Text>
-            </Box>
-            <Box classes="flex flex-row justify-between items-center">
-                <Link onClick={() => console.log('horo')}>{locale('actions.import_seed')}</Link>
-                <Button onClick={() => goto('legal')}>{locale('actions.continue')}</Button>
-            </Box>
-        </Box>
-        <Box classes="w-full h-full flex p-16 bg-white">
+    <OnboardingLayout allowBack={false}>
+        <div slot="leftpane__content">
+            <Text type="h1" classes="mb-5">{locale('views.onboarding_1.title')}</Text>
+            <Text type="p" secondary={true}>{locale('views.onboarding_1.body')}</Text>
+        </div>
+        <div slot="leftpane__action" class="flex flex-row justify-between items-center">
+            <Link onClick={() => console.log('horo')}>{locale('actions.import_seed')}</Link>
+            <Button onClick={() => goto('legal')}>{locale('actions.continue')}</Button>
+        </div>
+        <div slot="rightpane" class="w-full h-full flex p-16 bg-white">
             <Illustration width="100%" illustration="onboarding-1-desktop" />
-        </Box>
-    </Box>
+        </div>
+    </OnboardingLayout>
 {/if}

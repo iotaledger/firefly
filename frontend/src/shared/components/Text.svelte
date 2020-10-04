@@ -1,9 +1,47 @@
 <script>
-    export let type = null
+    export let type = 'p'
     export let secondary = false
     export let disabled = false
     export let classes = null
 </script>
+
+<style type="text/scss">
+    :global(h1) {
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 115%;
+        color: var(--heading-color);
+    }
+    :global(h2) {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 120%;
+        color: var(--heading-color);
+    }
+    :global(h3) {
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 140%;
+        color: var(--heading-color);
+    }
+    :global(h4) {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 140%;
+        color: var(--heading-color);
+    }
+    :global(p) {
+        font-size: 13px;
+        line-height: 140%;
+        color: var(--text-primary-color);
+        &.secondary {
+            color: var(--text-secondary-color);
+        }
+        &.disabled {
+            color: var(--text-disabled-color);
+        }
+    }
+</style>
 
 {#if type === 'h1'}
     <h1 class={classes} class:secondary class:disabled>
