@@ -10,25 +10,25 @@
         font-weight: 700;
         font-size: 32px;
         line-height: 115%;
-        color: var(--heading-color);
+        color: var(--text-primary-color);
     }
     :global(h2) {
         font-weight: 700;
         font-size: 24px;
         line-height: 120%;
-        color: var(--heading-color);
+        color: var(--text-primary-color);
     }
     :global(h3) {
         font-weight: 700;
         font-size: 18px;
         line-height: 140%;
-        color: var(--heading-color);
+        color: var(--text-primary-color);
     }
     :global(h4) {
         font-weight: 700;
         font-size: 16px;
         line-height: 140%;
-        color: var(--heading-color);
+        color: var(--text-primary-color);
     }
     :global(p) {
         font-size: 13px;

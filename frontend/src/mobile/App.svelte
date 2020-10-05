@@ -19,7 +19,7 @@
     onMount(() => {
         setTimeout(() => {
             splash = false
-            goto('legal')
+            goto('setup-password')
         }, 2000)
     })
 </script>

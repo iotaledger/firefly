@@ -22,12 +22,12 @@
         font-size: 12px;
         line-height: 140%;
         color: var(--button-text-color);
-        background-color: var(--button-background-color);
+        background-color: var(--button-bg-color);
         min-width: 160px;
         &.ghost {
             border: 1px solid var(--button-border-color);
             background-color: transparent;
-            color: var(--button-background-color);
+            color: var(--button-bg-color);
         }
         &.icon {
             padding: 28px 22px;
@@ -68,7 +68,7 @@
         }
         &.secondary {
             color: var(--button-secondary-text-color);
-            background-color: var(--button-secondary-background-color);
+            background-color: var(--button-secondary-bg-color);
             &.icon {
                 padding: 28px 22px;
                 :global(svg path) {
@@ -79,7 +79,7 @@
                     stroke: var(--button-secondary-icon-color);
                 }
                 &.active {
-                    background-color: var(--button-secondary-active-background-color);
+                    background-color: var(--button-secondary-active-bg-color);
                     color: var(--button-secondary-active-text-color);
                     :global(svg path) {
                         fill: var(--button-secondary-active-icon-color);
@@ -93,8 +93,8 @@
         }
         &.disabled {
             pointer-events: none !important;
-            color: var(--buton-disabled-text-color) !important;
-            background-color: var(--buton-disabled-background-color) !important;
+            color: var(--button-disabled-text-color) !important;
+            background-color: var(--button-disabled-bg-color) !important;
         }
     }
 </style>

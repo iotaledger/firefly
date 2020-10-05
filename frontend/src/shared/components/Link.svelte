@@ -14,7 +14,7 @@
         font-size: 12px;
         line-height: 140%;
         cursor: pointer;
-        color: var(--link-text-color);
+        color: var(--text-highlighted-color);
     }
 </style>
 
