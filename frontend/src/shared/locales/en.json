@@ -34,9 +34,19 @@
         "setup": {
             "title": "Set up a wallet"
         },
-        "setup_password": {
+        "password": {
             "title": "Create a password for your wallet",
             "body": "Your password needs to be highly secure to encrypt and recover your Stronghold vault. Also, you will need this to send tokens from your wallet."
+        },
+        "protect": {
+            "title": "Protect your wallet",
+            "body_1": "Set up your login PIN or Touch ID to ensure that only you can access the app.",
+            "body_2": "Keep your PIN safe!"
+        },
+        "pin": {
+            "title": "Set up PIN code",
+            "body_1": "Enter a 6-digit PIN below. You will be asked for this frequently when you access your device.",
+            "body_2": "Use numbers only"
         }
     },
     "actions": {
@@ -44,7 +54,10 @@
         "import_seed": "Import an existing seed",
         "import_wallet": "Import existing wallet",
         "create_wallet": "Create new wallet",
-        "save_password": "Save password"
+        "save_password": "Save password",
+        "use_biometric": "Use biometric security",
+        "setup_pin": "Set up PIN code",
+        "set_pin": "Set PIN code"
     },
     "general": {
         "password": "Password",

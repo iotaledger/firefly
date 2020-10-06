@@ -28,7 +28,7 @@
             <Link onClick={() => console.log('horo')}>{locale('actions.import_seed')}</Link>
             <Button onClick={() => goto('legal')}>{locale('actions.continue')}</Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex p-16 bg-white">
+        <div slot="rightpane" class="w-full h-full flex p-16">
             <Illustration width="100%" illustration="onboarding-1-desktop" />
         </div>
     </OnboardingLayout>

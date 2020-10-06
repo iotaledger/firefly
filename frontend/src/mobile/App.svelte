@@ -4,7 +4,7 @@
     import { darkMode, mobile } from '@shared-lib/app'
     import { goto } from '@shared-lib/helpers'
     import { Route } from '@shared-components'
-    import { Splash, Onboarding1, Legal, Setup, Password } from '@shared-routes'
+    import { Splash, Onboarding1, Legal, Setup, Password, Protect, Pin } from '@shared-routes'
 
     let splash = true
     mobile.set(false)
@@ -19,7 +19,7 @@
     onMount(() => {
         setTimeout(() => {
             splash = false
-            goto('setup-password')
+            goto('onboarding-1')
         }, 2000)
     })
 </script>
@@ -44,7 +44,13 @@
     <Route route="setup">
         <Setup mobile={$mobile} locale={$_} {goto} />
     </Route>
-    <Route route="setup-password">
+    <Route route="password">
         <Password mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="protect">
+        <Protect mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="pin">
+        <Pin mobile={$mobile} locale={$_} {goto} />
     </Route>
 {/if}

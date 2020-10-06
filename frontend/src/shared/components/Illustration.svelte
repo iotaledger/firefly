@@ -7,14 +7,17 @@
     $: selected = illustrations[illustration]
 
     const illustrations = {
-        'onboarding-1-mobile': 'onboarding/creature_onboarding_1_mobile.svg',
-        'onboarding-1-desktop': 'onboarding/creature_onboarding_1_desktop.svg',
-        setup: 'setup/setup.svg',
+        'onboarding-1-mobile': 'onboarding/onboarding-1-desktop.svg',
+        'onboarding-1-desktop': 'onboarding/onboarding-1-desktop.svg',
+        'setup-desktop': 'setup/setup-desktop.svg',
+        'password-desktop': 'protect/password-desktop.svg',
+        'protect-desktop': 'protect/protect-desktop.svg',
+        'pin-desktop': 'protect/pin-desktop.svg',
     }
 </script>
 
 {#if selected}
     <img class={classes} width={width || '100%'} height={height || '100%'} src={`../assets/illustrations/${selected}`} alt="" />
 {:else}
-    <div class={`${classes} bg-gray-200`} width={width || '100%'} height={height || '100%'} />
+    <div class={`${classes}`} width={width || '100%'} height={height || '100%'} />
 {/if}

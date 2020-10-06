@@ -17,17 +17,20 @@
         border-radius: 16px;
         padding: 15px 12px;
         cursor: pointer;
-        font-style: normal;
-        font-weight: 700;
-        font-size: 12px;
-        line-height: 140%;
-        color: var(--button-text-color);
         background-color: var(--button-bg-color);
         min-width: 160px;
+        span {
+            font-weight: 700;
+            font-size: 12px;
+            line-height: 140%;
+            color: var(--button-text-color);
+        }
         &.ghost {
             border: 1px solid var(--button-border-color);
             background-color: transparent;
-            color: var(--button-bg-color);
+            span {
+                color: var(--button-bg-color);
+            }
         }
         &.icon {
             padding: 28px 22px;
@@ -67,8 +70,10 @@
             }
         }
         &.secondary {
-            color: var(--button-secondary-text-color);
             background-color: var(--button-secondary-bg-color);
+            span {
+                color: var(--button-secondary-text-color);
+            }
             &.icon {
                 padding: 28px 22px;
                 :global(svg path) {
@@ -80,7 +85,9 @@
                 }
                 &.active {
                     background-color: var(--button-secondary-active-bg-color);
-                    color: var(--button-secondary-active-text-color);
+                    span {
+                        color: var(--button-secondary-active-text-color);
+                    }
                     :global(svg path) {
                         fill: var(--button-secondary-active-icon-color);
                     }
@@ -93,8 +100,10 @@
         }
         &.disabled {
             pointer-events: none !important;
-            color: var(--button-disabled-text-color) !important;
             background-color: var(--button-disabled-bg-color) !important;
+            span {
+                color: var(--button-disabled-text-color) !important;
+            }
         }
     }
 </style>
@@ -109,13 +118,13 @@
     class:ghost
     class:active>
     {#if icon}
-        <Box classes="flex flex-row justify-between">
-            <Box classes="flex items-center flex-1">
+        <div class="relative flex flex-row justify-between">
+            <div class="relative flex items-center flex-1">
                 <Icon classes="mr-4" {icon} />
                 <span><slot /></span>
-            </Box>
+            </div>
             <Icon icon="arrow-right" classes="right" />
-        </Box>
+        </div>
     {:else}
         <span><slot /></span>
     {/if}

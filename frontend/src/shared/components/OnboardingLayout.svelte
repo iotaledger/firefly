@@ -1,19 +1,34 @@
 <script>
-    import { Logo, Box } from '@shared-components'
+    import { Logo } from '@shared-components'
     export let allowBack = true
 </script>
 
-<Box classes="w-full h-full flex flex-row">
-    <Box width="430px" classes="flex flex-col flex-shrink-0 justify-between pt-12 pb-16 px-12 w-2/6">
-        <Box classes="flex flex-col">
-            <Box classes="w-full mb-10">
+<style global type="text/scss">
+    leftpane {
+        width: 430px;
+    }
+    rightpane {
+        background-color: var(--element-bg-color);
+    }
+</style>
+
+<div class="w-full h-full flex flex-row">
+    <leftpane class="flex flex-col flex-shrink-0 justify-between pt-12 pb-16 px-12">
+        <div class="flex flex-col">
+            <div class="w-full mb-10">
                 {#if !allowBack}
                     <Logo width="64px" logo="logo-firefly" />
                 {/if}
-            </Box>
-            <slot name="leftpane__content" />
-        </Box>
-        <slot name="leftpane__action" />
-    </Box>
-    <slot name="rightpane" />
-</Box>
+            </div>
+            <leftpane-content>
+                <slot name="leftpane__content" />
+            </leftpane-content>
+        </div>
+        <leftpane-action>
+            <slot name="leftpane__action" />
+        </leftpane-action>
+    </leftpane>
+    <rightpane class="w-full">
+        <slot name="rightpane" />
+    </rightpane>
+</div>

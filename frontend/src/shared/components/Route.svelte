@@ -16,7 +16,7 @@
         left: 0px;
         width: 100%;
         height: 100%;
-        background: var(--bg);
+        background: var(--app-bg-color);
         &.transparent {
             background: none;
         }
