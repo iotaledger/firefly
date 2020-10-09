@@ -13,7 +13,7 @@
             <Text type="h1">{locale('views.setup.title')}</Text>
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-between items-center">
-            <Button ghost={true} onClick={() => goto('legal')}>{locale('actions.import_wallet')}</Button>
+            <Button ghost={true} onClick={() => console.log('foo')}>{locale('actions.import_wallet')}</Button>
             <Button onClick={() => goto('password')}>{locale('actions.create_wallet')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex p-16">

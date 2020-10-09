@@ -19,7 +19,7 @@
             <Text type="p" secondary={true} highlighted={true} classes="font-bold">{locale('views.recovery-phrase.body_2')}</Text>
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-between items-center">
-            <Button ghost={true} onClick={() => console.log('foo')}>{locale('actions.save_backup')}</Button>
+            <Button ghost={true} onClick={() => goto('backup-recovery-phrase')}>{locale('actions.save_backup')}</Button>
             <Button onClick={() => goto('verify-recovery-phrase')}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex items-center justify-center p-16">

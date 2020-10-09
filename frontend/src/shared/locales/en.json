@@ -66,6 +66,24 @@
         "verify-recovery-phrase": {
             "title": "Verify recovery phrase",
             "body": "Let's check you wrote down the phrase correctly. Click the words on the right in the exact order you have written them down."
+        },
+        "backup-recovery-phrase": {
+            "title": "Back up to a file",
+            "body": "You wallet password is also used to encrypt a Stronghold backup. Enter your wallet password to save your recovery phrase backup to a file."
+        },
+        "recovery-phrase-saved": {
+            "title": "Recovery phrase",
+            "body": "Backed up to a file"
+        },
+        "congratulations": {
+            "title": "Congratulations",
+            "body": "Your new wallet is ready to use."
+        },
+        "import": {
+            "title": "Import a wallet",
+            "body": "If you have an existing seed or wallet back up, you can import it here.",
+            "action_1": "I have an 81 character IOTA seed",
+            "action_2": "I have a secret recovery phrase"
         }
     },
     "actions": {

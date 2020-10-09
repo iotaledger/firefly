@@ -19,7 +19,7 @@
             <Text type="p" secondary={true} classes="mb-4">{locale('views.verify-recovery-phrase.body')}</Text>
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-end items-center">
-            <Button disabled={!valid} onClick={() => goto('confirm-pin')}>{locale('actions.continue')}</Button>
+            <Button disabled={!valid} onClick={() => goto('congratulations')}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex items-center justify-center p-16">
             <RecoveryPhrase {recoveryPhrase} shuffle={true} bind:valid />

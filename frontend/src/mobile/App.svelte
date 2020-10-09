@@ -16,6 +16,10 @@
         Backup,
         RecoveryPhrase,
         VerifyRecoveryPhrase,
+        BackupRecoveryPhrase,
+        RecoveryPhraseSaved,
+        Congratulations,
+        Import,
     } from '@shared-routes'
 
     let splash = true
@@ -29,7 +33,7 @@
     onMount(() => {
         setTimeout(() => {
             splash = false
-            goto('recovery-phrase')
+            goto('recovery-phrase-saved') // dummmy dev only
         }, 2000)
     })
 
@@ -79,5 +83,17 @@
     </Route>
     <Route route="verify-recovery-phrase">
         <VerifyRecoveryPhrase mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="backup-recovery-phrase">
+        <BackupRecoveryPhrase mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="recovery-phrase-saved">
+        <RecoveryPhraseSaved mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="import">
+        <Import mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="congratulations">
+        <Congratulations mobile={$mobile} locale={$_} {goto} />
     </Route>
 {/if}
