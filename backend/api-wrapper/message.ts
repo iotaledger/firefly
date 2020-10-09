@@ -65,12 +65,12 @@ export function listMessages(bridge: Bridge<Message[]>, accountId: AccountIdenti
   })
 }
 
-export function reattach(bridge: Bridge<any>, accountId: AccountIdentifier, messageHash: string): Promise<BridgeResponse<any>> {
+export function reattach(bridge: Bridge<any>, accountId: AccountIdentifier, messageId: string): Promise<BridgeResponse<any>> {
   return bridge({
     cmd: 'Reattach',
     payload: {
       accountId,
-      messageHash
+      messageId
     }
   })
 }

@@ -58,8 +58,8 @@ export function listMessages(accountId: AccountIdentifier, filter: ListMessageFi
   return _listMessages(sendMessage, accountId, filter, count, from)
 }
 
-export function reattach(accountId: AccountIdentifier, messageHash: string): Promise<BridgeResponse<any>> {
-  return _reattach(sendMessage, accountId, messageHash)
+export function reattach(accountId: AccountIdentifier, messageId: string): Promise<BridgeResponse<any>> {
+  return _reattach(sendMessage, accountId, messageId)
 }
 
 export function backup(destinationPath: string): Promise<BridgeResponse<any>> {
