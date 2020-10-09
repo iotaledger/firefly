@@ -13,6 +13,8 @@
         'password-desktop': 'protect/password-desktop.svg',
         'protect-desktop': 'protect/protect-desktop.svg',
         'pin-desktop': 'protect/pin-desktop.svg',
+        'repeat-pin-desktop': 'protect/repeat-pin-desktop.svg',
+        'backup-desktop': 'backup/backup-desktop.svg',
     }
 </script>
 

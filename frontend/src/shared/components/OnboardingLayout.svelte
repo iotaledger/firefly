@@ -3,7 +3,7 @@
     export let allowBack = true
 </script>
 
-<style global type="text/scss">
+<style type="text/scss">
     leftpane {
         width: 430px;
     }

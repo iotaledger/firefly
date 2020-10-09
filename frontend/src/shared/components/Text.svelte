@@ -33,7 +33,7 @@
     }
     p {
         font-size: 13px;
-        line-height: 140%;
+        line-height: 160%;
         color: var(--text-primary-color);
     }
     h1,

@@ -4,10 +4,21 @@
     import { darkMode, mobile } from '@shared-lib/app'
     import { goto } from '@shared-lib/helpers'
     import { Route } from '@shared-components'
-    import { Splash, Onboarding1, Legal, Setup, Password, Protect, Pin } from '@shared-routes'
+    import {
+        Splash,
+        Onboarding1,
+        Legal,
+        Setup,
+        Password,
+        Protect,
+        Pin,
+        ConfirmPin,
+        Backup,
+        RecoveryPhrase,
+        VerifyRecoveryPhrase,
+    } from '@shared-routes'
 
     let splash = true
-    mobile.set(false)
 
     $: $darkMode ? document.body.classList.add('dark') : document.body.classList.remove('dark')
     $: if (document.dir !== $dir) {
@@ -15,19 +26,23 @@
     }
 
     setupI18n()
-    goto('') // dummmy goto homepage
     onMount(() => {
         setTimeout(() => {
             splash = false
-            goto('onboarding-1')
+            goto('recovery-phrase')
         }, 2000)
     })
+
+    // DEV ONLY
+    mobile.set(false)
+    goto('') // dummmy goto homepage
 </script>
 
 <style global type="text/scss">
     @tailwind base;
     @tailwind components;
     @tailwind utilities;
+    @import '../shared/style/style.scss';
 </style>
 
 {#if !$isLocaleLoaded || splash}
@@ -52,5 +67,17 @@
     </Route>
     <Route route="pin">
         <Pin mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="confirm-pin">
+        <ConfirmPin mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="backup">
+        <Backup mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="recovery-phrase">
+        <RecoveryPhrase mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="verify-recovery-phrase">
+        <VerifyRecoveryPhrase mobile={$mobile} locale={$_} {goto} />
     </Route>
 {/if}

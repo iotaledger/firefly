@@ -30,3 +30,8 @@ export const persistent = <T>(key: string, initialValue: T): Writable<T> => {
 
     return state
 }
+
+/**
+ * Shuffle an array
+ */
+export const shuffleArray = (array) => array.sort(() => Math.random() - 0.5)

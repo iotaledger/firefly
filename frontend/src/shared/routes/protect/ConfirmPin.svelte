@@ -18,16 +18,15 @@
 {:else}
     <OnboardingLayout allowBack={true}>
         <div slot="leftpane__content">
-            <Text type="h1" classes="mb-5">{locale('views.pin.title')}</Text>
-            <Text type="p" secondary={true} classes="mb-4">{locale('views.pin.body_1')}</Text>
-            <Text type="p" secondary={true} classes="mb-8 font-bold">{locale('views.pin.body_2')}</Text>
+            <Text type="h1" classes="mb-5">{locale('views.confirm_pin.title')}</Text>
+            <Text type="p" secondary={true} classes="mb-8">{locale('views.confirm_pin.body')}</Text>
             <Pin bind:value={pin} classes="w-full mx-auto block mt-24" />
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-end items-center">
-            <Button disabled={!valid} onClick={() => goto('confirm-pin')}>{locale('actions.set_pin')}</Button>
+            <Button disabled={!valid} onClick={() => goto('backup')}>{locale('actions.set_pin')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex p-16">
-            <Illustration width="100%" illustration="pin-desktop" />
+            <Illustration width="100%" illustration="repeat-pin-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

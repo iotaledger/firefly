@@ -9,6 +9,10 @@ import livereload from 'rollup-plugin-livereload'
 import serve from 'rollup-plugin-serve'
 import { terser } from 'rollup-plugin-terser'
 import sveltePreprocess from 'svelte-preprocess'
+
+import builtins from 'rollup-plugin-node-builtins'
+import globals from 'rollup-plugin-node-globals'
+
 const path = require('path')
 
 const isDev = process.env.NODE_ENV === 'development'
@@ -50,13 +54,7 @@ const plugins = [
             css.write('bundle.css')
         },
         preprocess: sveltePreprocess({
-            postcss: true,
-            scss: {
-                postcss: {
-                    plugins: [require('autoprefixer')]
-                },
-                prependData: `@import 'shared-modules/style/style.scss';`
-            }
+            postcss: true
         })
     }),
     resolve({
@@ -64,7 +62,9 @@ const plugins = [
         dedupe: ['svelte']
     }),
     ts({ sourceMap: isDev, typescript }),
-    commonjs()
+    commonjs(),
+    globals(),
+    builtins()
 ]
 
 if (isDev) {

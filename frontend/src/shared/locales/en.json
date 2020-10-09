@@ -47,6 +47,25 @@
             "title": "Set up PIN code",
             "body_1": "Enter a 6-digit PIN below. You will be asked for this frequently when you access your device.",
             "body_2": "Use numbers only"
+        },
+        "confirm_pin": {
+            "title": "Confirm the PIN code you created",
+            "body": "Confirm the PIN code you created"
+        },
+        "backup": {
+            "title": "Back up your wallet",
+            "body_1": "You will be shown a secret phrase. You will need these to restore your wallet and funds.",
+            "body_2": "Do not share this phrase with anyone. Your secret phrase can access your funds at any time from anywhere.",
+            "body_3": "If you lose this, you lose your funds."
+        },
+        "recovery-phrase": {
+            "title": "Recovery phrase",
+            "body_1": "Carefully copy the words in the exact order below. You can create a secondary backup on iCloud.",
+            "body_2": "Keep this private and safely stored"
+        },
+        "verify-recovery-phrase": {
+            "title": "Verify recovery phrase",
+            "body": "Let's check you wrote down the phrase correctly. Click the words on the right in the exact order you have written them down."
         }
     },
     "actions": {
@@ -57,7 +76,8 @@
         "save_password": "Save password",
         "use_biometric": "Use biometric security",
         "setup_pin": "Set up PIN code",
-        "set_pin": "Set PIN code"
+        "set_pin": "Set PIN code",
+        "save_backup": "Save Backup"
     },
     "general": {
         "password": "Password",
