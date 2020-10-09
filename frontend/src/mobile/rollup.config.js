@@ -1,40 +1,88 @@
-import svelte from 'rollup-plugin-svelte';
-import resolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
-import livereload from 'rollup-plugin-livereload';
-import serve from 'rollup-plugin-serve';
-import { terser } from 'rollup-plugin-terser';
+import svelte from 'rollup-plugin-svelte'
+import resolve from '@rollup/plugin-node-resolve'
+import commonjs from '@rollup/plugin-commonjs'
+import alias from '@rollup/plugin-alias'
+import sucrase from '@rollup/plugin-sucrase'
+import json from '@rollup/plugin-json'
+import livereload from 'rollup-plugin-livereload'
+import serve from 'rollup-plugin-serve'
+import {
+    terser
+} from 'rollup-plugin-terser'
+import sveltePreprocess from 'svelte-preprocess'
+const path = require('path')
 
-const isDev = process.env.NODE_ENV === 'development';
-const port = 3000;
+const isDev = process.env.NODE_ENV === 'development'
+const port = 3000
+const projectRootDir = path.resolve(__dirname)
 
 // Plugins definition
 const plugins = [
+    alias({
+        resolve: ['', '.js', '.svelte', '.css', '.scss'],
+        entries: [{
+                find: /^@shared-lib\/(.*)/,
+                replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/lib/out') + '/$1'
+            },
+            {
+                find: /^@shared-locales\/(.*)/,
+                replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/locales') + '/$1'
+            },
+            {
+                find: /^@shared-components/,
+                replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/components')
+            },
+            {
+                find: /^@shared-routes/,
+                replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/routes')
+            },
+            {
+                find: /^@shared-assets\/(.*)/,
+                replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/assets') + '/$1'
+            }
+        ]
+    }),
+    json(),
     svelte({
         dev: isDev,
         extensions: ['.svelte'],
-        css: css => {
-            css.write('public/build/bundle.css');
-        }
+        css: (css) => {
+            css.write('bundle.css')
+        },
+        preprocess: sveltePreprocess({
+            postcss: true,
+            scss: {
+                postcss: {
+                    plugins: [require('autoprefixer')]
+                },
+                prependData: `@import 'shared-modules/style/style.scss';`
+            }
+        })
     }),
     resolve({
         browser: true,
-        dedupe: ['svelte'],
+        dedupe: ['svelte']
+    }),
+    sucrase({
+        exclude: ['node_modules'],
+        transforms: ['typescript']
     }),
     commonjs()
-];
+]
 
 if (isDev) {
     plugins.push(
         serve({
-            contentBase: './public',
+            contentBase: ['public', 'node_modules/shared-modules'],
             historyApiFallback: true, // for SPAs
-            port,
+            port
         }),
-        livereload({ watch: './public' })
-    );
+        livereload({
+            watch: './public'
+        })
+    )
 } else {
-    plugins.push(terser());
+    plugins.push(terser())
 }
 
 module.exports = {
@@ -42,7 +90,30 @@ module.exports = {
     output: {
         name: 'bundle',
         file: 'public/build/bundle.js',
-        format: 'iife',
+        sourcemap: isDev,
+        format: 'iife'
     },
-    plugins,
-};
+    moduleContext: (id) => {
+        // In order to match native module behaviour, Rollup
+        // sets `this` as `undefined` at the top level of
+        // modules. Rollup also outputs a warning if a module
+        // tries to access `this` at the top level. The
+        // following modules use `this` at the top level and
+        // expect it to be the global `window` object, so we
+        // tell Rollup to set `this = window` for these modules.
+        const thisAsWindowForModules = [
+            'node_modules/intl-messageformat/lib/core.js',
+            'node_modules/intl-messageformat/lib/compiler.js',
+            'node_modules/intl-messageformat/lib/formatters.js',
+            'node_modules/intl-format-cache/lib/index.js',
+            'node_modules/intl-messageformat-parser/lib/parser.js',
+            'node_modules/intl-messageformat-parser/lib/skeleton.js',
+            'node_modules/intl-messageformat-parser/lib/normalize.js'
+        ]
+
+        if (thisAsWindowForModules.some((id_) => id.trimRight().endsWith(id_))) {
+            return 'window'
+        }
+    },
+    plugins
+}

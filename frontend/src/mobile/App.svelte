@@ -1,10 +1,40 @@
 <script>
-  import { init, createAccount } from "./lib/api";
+  import {
+    init,
+    createAccount,
+    setStrongholdPassword,
+    backup,
+    restoreBackup
+  } from "./lib/api";
+  import { Plugins, FilesystemDirectory } from "@capacitor/core";
+  const { Filesystem } = Plugins;
 
   init();
-  createAccount().then(res => {
-    alert(JSON.stringify(res));
-  });
+
+  async function test() {
+    await setStrongholdPassword("password");
+    let a = await createAccount({
+      clientOptions: {
+        node: "https://nodes.devnet.iota.org:443"
+      }
+    });
+    console.log(a);
+    await backup("/data/data/com.iota.wallet/cache/backup");
+    console.log(a);
+    await Filesystem.deleteFile({
+      path: "./database/snapshot",
+      directory: FilesystemDirectory.Cache
+    });
+    console.log(a);
+    a = await setStrongholdPassword("password"); // since we removed the snapshot, reload stronghold
+    console.log(a);
+    a = await restoreBackup("/data/data/com.iota.wallet/cache/backup");
+    console.log(a);
+    return "ok";
+  }
+  test()
+    .then(console.log)
+    .catch(console.error);
 </script>
 
 <style>
