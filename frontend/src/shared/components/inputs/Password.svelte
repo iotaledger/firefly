@@ -29,51 +29,53 @@
 </script>
 
 <style type="text/scss">
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-    input {
-        padding: 15px 40px 16px 13px;
-        color: var(--text-secondary-color);
-        background: var(--element-bg-color);
-        border-color: var(--line-separator-color);
-        border-radius: 10px;
-        box-shadow: -2px -2px 4px rgba(255, 255, 255, 0.2), 0px 4px 8px rgba(65, 114, 248, 0.08);
-    }
-    :global(password-input svg path) {
-        fill: var(--ui-blue-color);
-    }
-    :global(password-input svg path.stroke:not(.fixedstroke)) {
-        fill: none;
-        stroke: var(--ui-blue-color);
-    }
-    button {
-        position: absolute;
-        right: 12px;
-        transform: translateY(-50%);
-        top: 50%;
-    }
-    strength-meter {
-        span {
-            width: 22px;
-            height: 4px;
+    password-input {
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input {
+            padding: 15px 40px 16px 13px;
+            color: var(--text-secondary-color);
+            background: var(--element-bg-color);
+            border-color: var(--line-separator-color);
             border-radius: 10px;
-            &:nth-child(1) {
-                background: #fe968a;
-            }
-            &:nth-child(2) {
-                background: #ffcf24;
-            }
-            &:nth-child(3) {
-                background: #00e0ca;
-            }
-            &:nth-child(4) {
-                background: #108cff;
-            }
-            &.disabled {
-                background: var(--text-disabled-color);
+            box-shadow: -2px -2px 4px rgba(255, 255, 255, 0.2), 0px 4px 8px rgba(65, 114, 248, 0.08);
+        }
+        :global(svg path) {
+            fill: var(--ui-blue-color);
+        }
+        :global(svg path.stroke:not(.fixedstroke)) {
+            fill: none;
+            stroke: var(--ui-blue-color);
+        }
+        button {
+            position: absolute;
+            right: 12px;
+            transform: translateY(-50%);
+            top: 50%;
+        }
+        strength-meter {
+            span {
+                width: 22px;
+                height: 4px;
+                border-radius: 10px;
+                &:nth-child(1) {
+                    background: #fe968a;
+                }
+                &:nth-child(2) {
+                    background: #ffcf24;
+                }
+                &:nth-child(3) {
+                    background: #00e0ca;
+                }
+                &:nth-child(4) {
+                    background: #108cff;
+                }
+                &.disabled {
+                    background: var(--text-disabled-color);
+                }
             }
         }
     }

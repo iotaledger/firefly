@@ -18,6 +18,10 @@
         'backup-desktop': 'backup/backup-desktop.svg',
         'backup-recovery-phrase-desktop': 'backup/backup-recovery-phrase-desktop.svg',
         'import-desktop': 'import/import-desktop.svg',
+        'import-from-seed-desktop': 'import/import-from-seed-desktop.svg',
+        'import-from-recovery-phrase-desktop': 'import/import-from-recovery-phrase-desktop.svg',
+        'import-from-recovery-phrase-file-desktop': 'import/import-from-recovery-phrase-file-desktop.svg',
+        'balance-desktop': 'import/balance-desktop.svg',
     }
 </script>
 

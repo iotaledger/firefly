@@ -20,6 +20,11 @@
         RecoveryPhraseSaved,
         Congratulations,
         Import,
+        ImportFromSeed,
+        ImportFromSeedVault,
+        ImportFromSecurityPhrase,
+        ImportFromSecurityPhraseFile,
+        Balance,
     } from '@shared-routes'
 
     let splash = true
@@ -33,12 +38,13 @@
     onMount(() => {
         setTimeout(() => {
             splash = false
-            goto('recovery-phrase-saved') // dummmy dev only
+            goto('onboarding-1') // dummmy dev only
         }, 2000)
     })
 
     // DEV ONLY
     mobile.set(false)
+    darkMode.set(false)
     goto('') // dummmy goto homepage
 </script>
 
@@ -90,10 +96,25 @@
     <Route route="recovery-phrase-saved">
         <RecoveryPhraseSaved mobile={$mobile} locale={$_} {goto} />
     </Route>
+    <Route route="congratulations">
+        <Congratulations mobile={$mobile} locale={$_} {goto} />
+    </Route>
     <Route route="import">
         <Import mobile={$mobile} locale={$_} {goto} />
     </Route>
-    <Route route="congratulations">
-        <Congratulations mobile={$mobile} locale={$_} {goto} />
+    <Route route="import-from-seed">
+        <ImportFromSeed mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="import-from-seedvault">
+        <ImportFromSeedVault mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="import-from-security-phrase">
+        <ImportFromSecurityPhrase mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="import-from-security-phrase-file">
+        <ImportFromSecurityPhraseFile mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="balance">
+        <Balance mobile={$mobile} locale={$_} {goto} />
     </Route>
 {/if}

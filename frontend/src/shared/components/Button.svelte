@@ -1,6 +1,6 @@
 <script>
     import { bindEvents } from '@shared-lib/utils'
-    import { Icon, Box } from '@shared-components'
+    import { Icon } from '@shared-components'
     export let events = {}
 
     export let onClick = () => ''
@@ -29,6 +29,7 @@
             border: 1px solid var(--button-border-color);
             background-color: transparent;
             span {
+                font-weight: 500;
                 color: var(--button-bg-color);
             }
         }

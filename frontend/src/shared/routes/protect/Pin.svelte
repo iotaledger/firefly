@@ -16,11 +16,11 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout allowBack={true}>
+    <OnboardingLayout allowBack>
         <div slot="leftpane__content">
             <Text type="h1" classes="mb-5">{locale('views.pin.title')}</Text>
-            <Text type="p" secondary={true} classes="mb-4">{locale('views.pin.body_1')}</Text>
-            <Text type="p" secondary={true} classes="mb-8 font-bold">{locale('views.pin.body_2')}</Text>
+            <Text type="p" secondary classes="mb-4">{locale('views.pin.body_1')}</Text>
+            <Text type="p" secondary classes="mb-8 font-bold">{locale('views.pin.body_2')}</Text>
             <Pin bind:value={pin} classes="w-full mx-auto block mt-24" />
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-end items-center">

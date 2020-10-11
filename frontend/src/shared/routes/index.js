@@ -13,3 +13,8 @@ export { default as VerifyRecoveryPhrase } from '@shared-routes/backup/VerifyRec
 export { default as BackupRecoveryPhrase } from '@shared-routes/backup/BackupRecoveryPhrase.svelte'
 export { default as RecoveryPhraseSaved } from '@shared-routes/backup/RecoveryPhraseSaved.svelte'
 export { default as Import } from '@shared-routes/import/Import.svelte'
+export { default as ImportFromSeed } from '@shared-routes/import/ImportFromSeed.svelte'
+export { default as ImportFromSeedVault } from '@shared-routes/import/ImportFromSeedVault.svelte'
+export { default as ImportFromSecurityPhrase } from '@shared-routes/import/ImportFromSecurityPhrase.svelte'
+export { default as ImportFromSecurityPhraseFile } from '@shared-routes/import/ImportFromSecurityPhraseFile.svelte'
+export { default as Balance } from '@shared-routes/import/Balance.svelte'

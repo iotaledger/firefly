@@ -1,5 +1,5 @@
 <script>
-    import { generateRecoveryPhrase } from '@shared-lib/app'
+    import { generateRecoveryPhrase } from '@shared-lib/utils'
     import { OnboardingLayout, RecoveryPhrase, Text, Button, Icon } from '@shared-components'
 
     export let locale
@@ -10,7 +10,7 @@
 </script>
 
 <style type="text/scss">
-    :global(svg path) {
+    :global(.checkmark path) {
         fill: var(--ui-blue-color);
     }
 </style>
@@ -18,12 +18,12 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout allowBack={true}>
+    <OnboardingLayout allowBack>
         <div slot="leftpane__content">
             <Text type="h1" classes="mb-5">{locale('views.recovery-phrase-saved.title')}</Text>
             <div class="flex flex-row items-center">
-                <Icon icon="checkmark" classes="mr-2" />
-                <Text type="p" secondary={true}>{locale('views.recovery-phrase-saved.body')}</Text>
+                <Icon icon="checkmark" classes="checkmark mr-2" />
+                <Text type="p" secondary>{locale('views.recovery-phrase-saved.body')}</Text>
             </div>
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-end items-center">

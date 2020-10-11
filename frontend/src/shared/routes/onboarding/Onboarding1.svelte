@@ -13,7 +13,7 @@
         </Box>
         <Box classes="w-full flex flex-col items-center px-16 pb-8 text-center">
             <Text type="h1" classes="mb-2">{locale('views.onboarding_1.title')}</Text>
-            <Text type="p" secondary={true} classes="mb-6 mx-12">{locale('views.onboarding_1.body')}</Text>
+            <Text type="p" secondary classes="mb-6 mx-12">{locale('views.onboarding_1.body')}</Text>
             <Button classes="mb-5" onClick={() => goto('legal')}>{locale('actions.continue')}</Button>
             <Link onClick={() => console.log('horo')}>{locale('actions.import_seed')}</Link>
         </Box>
@@ -22,10 +22,9 @@
     <OnboardingLayout allowBack={false}>
         <div slot="leftpane__content">
             <Text type="h1" classes="mb-5">{locale('views.onboarding_1.title')}</Text>
-            <Text type="p" secondary={true}>{locale('views.onboarding_1.body')}</Text>
+            <Text type="p" secondary>{locale('views.onboarding_1.body')}</Text>
         </div>
-        <div slot="leftpane__action" class="flex flex-row justify-between items-center">
-            <Link onClick={() => console.log('horo')}>{locale('actions.import_seed')}</Link>
+        <div slot="leftpane__action" class="flex flex-row justify-end items-center">
             <Button onClick={() => goto('legal')}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex p-16">

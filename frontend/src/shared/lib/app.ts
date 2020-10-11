@@ -1,5 +1,3 @@
-import { generateMnemonic } from 'bip39'
-
 import { writable } from 'svelte/store'
 import { persistent } from '@shared-lib/helpers'
 
@@ -14,11 +12,11 @@ export const notification = writable<string>(null)
 export const darkMode = persistent<boolean>('darkMode', false)
 
 /**
- * Notification content
+ * Mobile mode
  */
 export const mobile = writable<boolean>(false)
 
 /**
- * Generate BIP39 Mnemonic Recovery Phrase
+ * Dummy
  */
-export const generateRecoveryPhrase = () => generateMnemonic(256)
+export const loading = writable<boolean>(false)
