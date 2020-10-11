@@ -25,6 +25,7 @@
         ImportFromSecurityPhrase,
         ImportFromSecurityPhraseFile,
         Balance,
+        Dashboard
     } from '@shared-routes'
 
     let splash = true
@@ -49,10 +50,10 @@
 </script>
 
 <style global type="text/scss">
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
-    @import '../shared/style/style.scss';
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+  @import '../shared/style/style.scss';
 </style>
 
 {#if !$isLocaleLoaded || splash}
@@ -116,5 +117,8 @@
     </Route>
     <Route route="balance">
         <Balance mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="dashboard">
+        <Dashboard mobile={$mobile} locale={$_} {goto} />
     </Route>
 {/if}

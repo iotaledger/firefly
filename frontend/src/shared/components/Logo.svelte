@@ -10,6 +10,7 @@
         'logo-firefly-complete-vertical': 'firefly_logo_complete_vertical.svg',
         'logo-firefly-complete-horizontal': 'firefly_logo_complete_horizontal.svg',
         'logo-firefly': 'firefly_logo.svg',
+        'profile-picture': 'profile_picture.svg'
     }
 </script>
 
