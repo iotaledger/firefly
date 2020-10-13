@@ -1,8 +1,11 @@
 <script>
     import { OnboardingLayout, Illustration, Text, Button } from '@shared-components'
+    import { legacySeed } from '@shared-lib/app'
     export let locale
     export let mobile
     export let goto
+
+    legacySeed.set(true)
 </script>
 
 {#if mobile}

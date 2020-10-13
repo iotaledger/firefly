@@ -24,6 +24,7 @@
         ImportFromSeedVault,
         ImportFromSecurityPhrase,
         ImportFromSecurityPhraseFile,
+        Migrate,
         Balance,
     } from '@shared-routes'
 
@@ -38,7 +39,7 @@
     onMount(() => {
         setTimeout(() => {
             splash = false
-            goto('onboarding-1') // dummmy dev only
+            goto('migrate') // dummmy dev only
         }, 2000)
     })
 
@@ -113,6 +114,9 @@
     </Route>
     <Route route="import-from-security-phrase-file">
         <ImportFromSecurityPhraseFile mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="migrate">
+        <Migrate mobile={$mobile} locale={$_} {goto} />
     </Route>
     <Route route="balance">
         <Balance mobile={$mobile} locale={$_} {goto} />

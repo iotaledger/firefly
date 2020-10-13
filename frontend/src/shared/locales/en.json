@@ -103,6 +103,17 @@
             "title": "Import recovery phrase from a file",
             "body": "Provide your wallet and Stronghold password. This is the password created when you first created your original wallet backup. This allows secure import of your recovery phrase."
         },
+        "migrate": {
+            "title": "Transfer your funds",
+            "body_1": "This is an automated process to transfer your existing funds to your new wallet. In this process we will check for spent addresses that weaken your security.",
+            "body_2": "It may take some time. Do not turn off your device during this process.",
+            "existing": "Existing seed",
+            "new": "Your new wallet"
+        },
+        "migrate_failed": {
+            "title": "Transfer your funds",
+            "body": "Provide your wallet and Stronghold password. This is the password created when you first created your original wallet backup. This allows secure import of your recovery phrase."
+        },
         "balance": {
             "title": "Your balance",
             "body": "Is your balance correct?"
@@ -120,7 +131,10 @@
         "save_backup": "Save Backup",
         "import_seedvault": "Import SeedVault",
         "check_again": "No, Check Again",
-        "import_from_file": "Import from a file"
+        "import_from_file": "Import from a file",
+        "begin_transfer": "Begin Transfer",
+        "try_again": "Try again",
+        "visit_discord": "Visit Discord"
     },
     "general": {
         "password": "Password",

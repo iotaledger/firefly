@@ -20,3 +20,8 @@ export const mobile = writable<boolean>(false)
  * Dummy
  */
 export const loading = writable<boolean>(false)
+
+/**
+ * Dummy
+ */
+export const legacySeed = writable<boolean>(false)

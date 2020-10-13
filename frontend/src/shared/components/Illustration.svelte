@@ -22,6 +22,7 @@
         'import-from-recovery-phrase-desktop': 'import/import-from-recovery-phrase-desktop.svg',
         'import-from-recovery-phrase-file-desktop': 'import/import-from-recovery-phrase-file-desktop.svg',
         'balance-desktop': 'import/balance-desktop.svg',
+        'migrate-desktop': 'migrate/migrate-desktop.svg',
     }
 </script>
 

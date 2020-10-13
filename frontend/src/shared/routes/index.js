@@ -1,6 +1,5 @@
 export { default as Splash } from '@shared-routes/Splash.svelte'
 export { default as Onboarding1 } from '@shared-routes/onboarding/Onboarding1.svelte'
-export { default as Congratulations } from '@shared-routes/onboarding/Congratulations.svelte'
 export { default as Legal } from '@shared-routes/onboarding/Legal.svelte'
 export { default as Setup } from '@shared-routes/setup/Setup.svelte'
 export { default as Password } from '@shared-routes/protect/Password.svelte'
@@ -18,3 +17,5 @@ export { default as ImportFromSeedVault } from '@shared-routes/import/ImportFrom
 export { default as ImportFromSecurityPhrase } from '@shared-routes/import/ImportFromSecurityPhrase.svelte'
 export { default as ImportFromSecurityPhraseFile } from '@shared-routes/import/ImportFromSecurityPhraseFile.svelte'
 export { default as Balance } from '@shared-routes/import/Balance.svelte'
+export { default as Migrate } from '@shared-routes/migrate/Migrate.svelte'
+export { default as Congratulations } from '@shared-routes/onboarding/Congratulations.svelte'
