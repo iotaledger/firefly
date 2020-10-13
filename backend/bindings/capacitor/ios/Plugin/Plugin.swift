@@ -10,9 +10,17 @@ import Wallet
 public class WalletPlugin: CAPPlugin {
 
     @objc func initialize(_ call: CAPPluginCall) {
-        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let path = documents.appendingPathComponent("database", isDirectory: true).absoluteString
-        Wallet.initialize(path.cString(using: .utf8))
+        do {
+            let fm = FileManager.default
+            let documents = fm.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let path = documents.appendingPathComponent("database", isDirectory: true).path
+            if !fm.fileExists(atPath: path) {
+                try fm.createDirectory(atPath: path, withIntermediateDirectories: false, attributes: nil)
+            }
+            Wallet.initialize(path.cString(using: .utf8))
+        } catch {
+            call.reject("failed to initialize stronghold")
+        }
     }
 
     @objc func sendMessage(_ call: CAPPluginCall) {
