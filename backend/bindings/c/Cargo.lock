@@ -16,6 +16,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ee2a4ec343196209d6594e19543ae87a39f96d5534d7174822a3ad825dd6ed7e"
 
 [[package]]
+name = "ahash"
+version = "0.3.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e8fd72866655d1904d6b0997d0b07ba561047d070fbe29de039031c641b61217"
+dependencies = [
+ "const-random",
+]
+
+[[package]]
 name = "aho-corasick"
 version = "0.7.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -99,6 +108,17 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c17772156ef2829aadc587461c7753af20b7e8db1529bc66855add962a3b35d3"
 
 [[package]]
+name = "async-trait"
+version = "0.1.41"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b246867b8b3b6ae56035f1eb1ed557c1d8eae97f0d53696138a50fa0e3a3b8c0"
+dependencies = [
+ "proc-macro2 1.0.23",
+ "quote 1.0.7",
+ "syn 1.0.42",
+]
+
+[[package]]
 name = "atomic-waker"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -158,18 +178,46 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cdcf67bb7ba7797a081cd19009948ab533af7c355d5caf1d08c777582d351e9c"
 
 [[package]]
+name = "bee-common"
+version = "0.1.0-alpha"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#3ece4c59e98d0354cc8fce183325577a11318f13"
+dependencies = [
+ "chrono",
+ "fern",
+ "futures",
+ "log",
+ "serde 1.0.116",
+ "thiserror",
+]
+
+[[package]]
 name = "bee-common-derive"
 version = "0.1.1-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#661adea03f5d51e7476fcb5594ee2fa697628cd1"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#3ece4c59e98d0354cc8fce183325577a11318f13"
 dependencies = [
  "quote 1.0.7",
  "syn 1.0.42",
 ]
 
 [[package]]
+name = "bee-common-ext"
+version = "0.1.0-alpha"
+source = "git+https://github.com/Alex6323/bee-p.git#6125befc92cecbc3f1a79809e5a8dfdccc04af5c"
+dependencies = [
+ "async-trait",
+ "bee-common",
+ "bee-storage",
+ "dashmap 3.11.10",
+ "futures",
+ "log",
+ "thiserror",
+ "tokio",
+]
+
+[[package]]
 name = "bee-crypto"
 version = "0.2.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#661adea03f5d51e7476fcb5594ee2fa697628cd1"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#3ece4c59e98d0354cc8fce183325577a11318f13"
 dependencies = [
  "bee-ternary",
  "byteorder",
@@ -179,9 +227,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "bee-message"
+version = "0.1.0-alpha"
+source = "git+https://github.com/Alex6323/bee-p.git#6125befc92cecbc3f1a79809e5a8dfdccc04af5c"
+dependencies = [
+ "bech32",
+ "bee-common-ext",
+ "bee-crypto",
+ "bee-signing",
+ "bee-signing-ext",
+ "bee-ternary",
+ "bytemuck",
+ "hex",
+ "serde 1.0.116",
+ "thiserror",
+]
+
+[[package]]
 name = "bee-signing"
 version = "0.1.1-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#661adea03f5d51e7476fcb5594ee2fa697628cd1"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#3ece4c59e98d0354cc8fce183325577a11318f13"
 dependencies = [
  "bee-common-derive",
  "bee-crypto",
@@ -195,7 +260,7 @@ dependencies = [
 [[package]]
 name = "bee-signing-ext"
 version = "0.1.0-alpha"
-source = "git+https://github.com/wusyong/bee-p?branch=sign-ext#ec83331c6a3a3dd465545eca6fe6fd2fd9925658"
+source = "git+https://github.com/wusyong/bee-p?branch=sign-ext#390a7bcfcc524fd8e37c29617c60d2712c3adb67"
 dependencies = [
  "bee-common-derive",
  "bee-crypto",
@@ -206,33 +271,25 @@ dependencies = [
  "serde 1.0.116",
  "signature",
  "slip10",
- "thiserror",
  "zeroize",
+]
+
+[[package]]
+name = "bee-storage"
+version = "0.1.0-alpha"
+source = "git+https://github.com/Alex6323/bee-p.git#6125befc92cecbc3f1a79809e5a8dfdccc04af5c"
+dependencies = [
+ "async-trait",
+ "serde 1.0.116",
 ]
 
 [[package]]
 name = "bee-ternary"
 version = "0.3.1-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#661adea03f5d51e7476fcb5594ee2fa697628cd1"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#3ece4c59e98d0354cc8fce183325577a11318f13"
 dependencies = [
  "num-traits 0.2.12",
  "serde 1.0.116",
-]
-
-[[package]]
-name = "bee-transaction"
-version = "0.1.0-alpha"
-source = "git+https://github.com/wusyong/bee-p.git?branch=atomic-tx#213bb6d51da1bb73103be67a2a0b113bb66504ea"
-dependencies = [
- "bech32",
- "bee-crypto",
- "bee-signing",
- "bee-signing-ext",
- "bee-ternary",
- "bincode",
- "blake2",
- "serde 1.0.116",
- "thiserror",
 ]
 
 [[package]]
@@ -250,19 +307,6 @@ name = "bitflags"
 version = "1.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cf1de2fe8c75bc145a2f577add951f8134889b4795d47466a54a5c846d691693"
-
-[[package]]
-name = "blake2"
-version = "0.9.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "84ce5b6108f8e154604bd4eb76a2f726066c3464d5a552a4229262a18c9bb471"
-dependencies = [
- "byte-tools",
- "byteorder",
- "crypto-mac 0.8.0",
- "digest 0.9.0",
- "opaque-debug 0.2.3",
-]
 
 [[package]]
 name = "blake2b_simd"
@@ -314,20 +358,6 @@ checksum = "8d696c370c750c948ada61c69a0ee2cbbb9c50b1019ddb86d9317157a99c2cae"
 
 [[package]]
 name = "blocking"
-version = "0.4.7"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d2468ff7bf85066b4a3678fede6fe66db31846d753ff0adfbfab2c6a6e81612b"
-dependencies = [
- "async-channel",
- "atomic-waker",
- "futures-lite",
- "once_cell",
- "parking 1.0.6",
- "waker-fn",
-]
-
-[[package]]
-name = "blocking"
 version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ea5800d29218fea137b0880387e5948694a23c93fcdde157006966693a865c7c"
@@ -350,6 +380,12 @@ name = "byte-tools"
 version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e3b5ca7a04898ad4bcd41c90c5285445ff5b791899bb1b0abdd2a2aa791211d7"
+
+[[package]]
+name = "bytemuck"
+version = "1.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "41aa2ec95ca3b5c54cf73c91acf06d24f4495d5f1b1c12506ae3483d646177ac"
 
 [[package]]
 name = "byteorder"
@@ -461,6 +497,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "const-random"
+version = "0.1.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "02dc82c12dc2ee6e1ded861cf7d582b46f66f796d1b6c93fa28b911ead95da02"
+dependencies = [
+ "const-random-macro",
+ "proc-macro-hack",
+]
+
+[[package]]
+name = "const-random-macro"
+version = "0.1.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fc757bbb9544aa296c2ae00c679e81f886b37e28e59097defe0cf524306f6685"
+dependencies = [
+ "getrandom 0.2.0",
+ "proc-macro-hack",
+]
+
+[[package]]
 name = "constant_time_eq"
 version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -553,7 +609,7 @@ checksum = "7a81dae078cea95a014a339291cec439d2f232ebe854a9d672b796c6afafa9b7"
 [[package]]
 name = "crypto"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#3900209e2461dd9215693715479fda1f15a289b3"
+source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#03cfd7b14433ebea7e5e2d1c7444ad37deef1225"
 dependencies = [
  "anyhow",
  "primitives",
@@ -568,16 +624,6 @@ checksum = "4434400df11d95d556bac068ddfedd482915eb18fe8bea89bc80b6e4b1c179e5"
 dependencies = [
  "generic-array 0.12.3",
  "subtle 1.0.0",
-]
-
-[[package]]
-name = "crypto-mac"
-version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b584a330336237c1eecd3e94266efb216c56ed91225d634cb2991c5f3fd1aeab"
-dependencies = [
- "generic-array 0.14.4",
- "subtle 2.3.0",
 ]
 
 [[package]]
@@ -601,6 +647,17 @@ dependencies = [
  "rand_core 0.5.1",
  "subtle 2.3.0",
  "zeroize",
+]
+
+[[package]]
+name = "dashmap"
+version = "3.11.10"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0f260e2fc850179ef410018660006951c1b55b79e8087e87111a2c388994b9b5"
+dependencies = [
+ "ahash",
+ "cfg-if",
+ "num_cpus",
 ]
 
 [[package]]
@@ -928,6 +985,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "getrandom"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ee8025cf36f917e6a52cce185b7c7177689b838b7ec138364e50cc2277a56cf4"
+dependencies = [
+ "cfg-if",
+ "libc",
+ "wasi 0.9.0+wasi-snapshot-preview1",
+]
+
+[[package]]
 name = "getset"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1111,36 +1179,38 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "0.5.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=chrysalis#e7b2d67b160d9a207d4ef36c270418a4c672fd8d"
+source = "git+https://github.com/iotaledger/iota.rs?branch=chrysalis#63794b0a62b04b23a3c750f6f80a673864b42475"
 dependencies = [
+ "bee-common-ext",
  "bee-crypto",
+ "bee-message",
  "bee-signing",
  "bee-signing-ext",
  "bee-ternary",
- "bee-transaction",
  "chrono",
+ "hex",
  "reqwest",
  "serde 1.0.116",
  "serde_json",
- "smol 0.1.18",
+ "tokio",
 ]
 
 [[package]]
 name = "iota-core"
 version = "0.2.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=chrysalis#e7b2d67b160d9a207d4ef36c270418a4c672fd8d"
+source = "git+https://github.com/iotaledger/iota.rs?branch=chrysalis#63794b0a62b04b23a3c750f6f80a673864b42475"
 dependencies = [
  "bee-crypto",
+ "bee-message",
  "bee-signing",
  "bee-ternary",
- "bee-transaction",
  "iota-client",
 ]
 
 [[package]]
 name = "iota-stronghold"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#3900209e2461dd9215693715479fda1f15a289b3"
+source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#03cfd7b14433ebea7e5e2d1c7444ad37deef1225"
 dependencies = [
  "anyhow",
  "base64 0.12.3",
@@ -1164,9 +1234,10 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs#c0a60134eddac4c0b7967c0606b6b79736eabd3c"
+source = "git+https://github.com/iotaledger/wallet.rs#e21bc97a27de604ee7b1ca908d7d9da3d8f704b1"
 dependencies = [
  "anyhow",
+ "bech32",
  "chrono",
  "getset",
  "iota-core",
@@ -1184,7 +1255,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet-actor"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/actors.rs?branch=feat/wallet#b1193eb9353e00c7d4e9b9ad91fde640a4bb5b56"
+source = "git+https://github.com/iotaledger/actors.rs?branch=feat/wallet#dcefaa2fda92c7d243b47ea84cafc51dbbcaabc3"
 dependencies = [
  "chronicle-common",
  "iota-core",
@@ -1318,6 +1389,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4fabed175da42fed1fa0746b0ea71f412aa9d35e76e95e59b192c64b9dc2bf8b"
 dependencies = [
  "cfg-if",
+ "serde 1.0.116",
 ]
 
 [[package]]
@@ -1663,7 +1735,7 @@ checksum = "c36fa947111f5c62a733b652544dd0016a43ce89619538a8ef92724a6f501a20"
 [[package]]
 name = "primitives"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#3900209e2461dd9215693715479fda1f15a289b3"
+source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#03cfd7b14433ebea7e5e2d1c7444ad37deef1225"
 
 [[package]]
 name = "proc-macro-error"
@@ -1779,7 +1851,7 @@ version = "0.7.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6a6b1679d49b24bbfe0c803429aa1874472f50d9b363131f0e89fc356b544d03"
 dependencies = [
- "getrandom",
+ "getrandom 0.1.15",
  "libc",
  "rand_chacha",
  "rand_core 0.5.1",
@@ -1817,7 +1889,7 @@ version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "90bde5296fc891b0cef12a6d03ddccc162ce7b2aff54160af9338f8d40df6d19"
 dependencies = [
- "getrandom",
+ "getrandom 0.1.15",
 ]
 
 [[package]]
@@ -1832,7 +1904,7 @@ dependencies = [
 [[package]]
 name = "random"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#3900209e2461dd9215693715479fda1f15a289b3"
+source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#03cfd7b14433ebea7e5e2d1c7444ad37deef1225"
 dependencies = [
  "cc",
  "primitives",
@@ -1859,7 +1931,7 @@ version = "0.3.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "de0737333e7a9502c789a36d7c7fa6092a49895d4faa31ca5df163857ded2e9d"
 dependencies = [
- "getrandom",
+ "getrandom 0.1.15",
  "redox_syscall",
  "rust-argon2",
 ]
@@ -1927,7 +1999,7 @@ checksum = "f7b07140216b4c980a887315331822cc63f6d22f824b23dbff1751aee655a365"
 dependencies = [
  "chrono",
  "config",
- "dashmap",
+ "dashmap 4.0.0-rc6",
  "futures",
  "num_cpus",
  "pin-utils",
@@ -2109,9 +2181,9 @@ dependencies = [
 
 [[package]]
 name = "serde_json"
-version = "1.0.57"
+version = "1.0.59"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "164eacbdb13512ec2745fb09d51fd5b22b0d65ed294a1dcf7285a360c80a675c"
+checksum = "dcac07dbffa1c65e7f816ab9eba78eb142c6d44410f4eeba1e26e4f5dfa56b95"
 dependencies = [
  "itoa",
  "ryu",
@@ -2246,28 +2318,6 @@ checksum = "fbee7696b84bbf3d89a1c2eccff0850e3047ed46bfcd2e92c29a2d074d57e252"
 
 [[package]]
 name = "smol"
-version = "0.1.18"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "620cbb3c6e34da57d3a248cda0cd01cd5848164dc062e764e65d06fe3ea7aed5"
-dependencies = [
- "async-task",
- "blocking 0.4.7",
- "concurrent-queue",
- "fastrand",
- "futures-io",
- "futures-util",
- "libc",
- "once_cell",
- "scoped-tls",
- "slab",
- "socket2",
- "tokio",
- "wepoll-sys-stjepang",
- "winapi 0.3.9",
-]
-
-[[package]]
-name = "smol"
 version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "67583f4ccc13bbb105a0752058d8ad66c47753d85445952809bcaca891954f83"
@@ -2275,7 +2325,7 @@ dependencies = [
  "async-channel",
  "async-executor",
  "async-io",
- "blocking 0.5.2",
+ "blocking",
  "cfg-if",
  "easy-parallel",
  "futures-lite",
@@ -2286,7 +2336,7 @@ dependencies = [
 [[package]]
 name = "snapshot"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#3900209e2461dd9215693715479fda1f15a289b3"
+source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#03cfd7b14433ebea7e5e2d1c7444ad37deef1225"
 dependencies = [
  "anyhow",
  "crypto",
@@ -2334,7 +2384,7 @@ checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
 [[package]]
 name = "stronghold-engine"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#3900209e2461dd9215693715479fda1f15a289b3"
+source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#03cfd7b14433ebea7e5e2d1c7444ad37deef1225"
 dependencies = [
  "crypto",
  "primitives",
@@ -2638,7 +2688,7 @@ dependencies = [
 [[package]]
 name = "vault"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#3900209e2461dd9215693715479fda1f15a289b3"
+source = "git+https://github.com/iotaledger/stronghold.rs?branch=feat/refactoring#03cfd7b14433ebea7e5e2d1c7444ad37deef1225"
 dependencies = [
  "anyhow",
  "serde 1.0.116",
@@ -2684,7 +2734,7 @@ dependencies = [
 name = "wallet-actor-system-c-binding"
 version = "0.1.0"
 dependencies = [
- "smol 0.3.3",
+ "smol",
  "wallet-actor-system",
 ]
 
@@ -2875,7 +2925,7 @@ version = "0.4.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "39f0c922f1a334134dc2f7a8b67dc5d25f0735263feec974345ff706bcf20b0d"
 dependencies = [
- "linked-hash-map 0.5.3",
+ "linked-hash-map 0.3.0",
 ]
 
 [[package]]
