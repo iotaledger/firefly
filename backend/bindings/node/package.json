@@ -11,7 +11,7 @@
   "scripts": {
     "postinstall": "yarn build",
     "pretest": "yarn build",
-    "build": "neon build && cd ./lib && yarn",
+    "build": "neon build --release && cd ./lib && yarn",
     "test": "mocha --timeout 0"
   },
   "devDependencies": {
