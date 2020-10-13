@@ -10,7 +10,9 @@ import Wallet
 public class WalletPlugin: CAPPlugin {
 
     @objc func initialize(_ call: CAPPluginCall) {
-        Wallet.initialize(call.getString("storagePath")?.cString(using: .utf8))
+        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let path = documents.appendingPathComponent("database", isDirectory: true).absoluteString
+        Wallet.initialize(path.cString(using: .utf8))
     }
 
     @objc func sendMessage(_ call: CAPPluginCall) {
