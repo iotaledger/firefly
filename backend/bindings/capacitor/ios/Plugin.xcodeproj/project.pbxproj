@@ -15,7 +15,6 @@
 		50ADFFA42020D75100D50D53 /* Capacitor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50ADFFA52020D75100D50D53 /* Capacitor.framework */; };
 		50ADFFA82020EE4F00D50D53 /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ADFFA72020EE4F00D50D53 /* Plugin.m */; };
 		50E1A94820377CB70090CE1A /* Plugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E1A94720377CB70090CE1A /* Plugin.swift */; };
-		600FAB15252ED5880039D358 /* libwallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 600FAB12252ED5710039D358 /* libwallet.a */; };
 		600FAB17252ED5AC0039D358 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 600FAB16252ED5A30039D358 /* libresolv.tbd */; };
 		60EDD772252F846900E05012 /* libwallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60EDD771252F846500E05012 /* libwallet.a */; };
 		60EDD785252F881300E05012 /* libwallet.h in Headers */ = {isa = PBXBuildFile; fileRef = 60EDD762252F826300E05012 /* libwallet.h */; };
@@ -43,7 +42,6 @@
 		50ADFFA72020EE4F00D50D53 /* Plugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Plugin.m; sourceTree = "<group>"; };
 		50E1A94720377CB70090CE1A /* Plugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plugin.swift; sourceTree = "<group>"; };
 		5E23F77F099397094342571A /* Pods-Plugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plugin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Plugin/Pods-Plugin.debug.xcconfig"; sourceTree = "<group>"; };
-		600FAB12252ED5710039D358 /* libwallet.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwallet.a; path = ../../../../../Downloads/libwallet.a; sourceTree = "<group>"; };
 		600FAB16252ED5A30039D358 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/libresolv.tbd; sourceTree = DEVELOPER_DIR; };
 		60EDD75F252F7EC400E05012 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		60EDD762252F826300E05012 /* libwallet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libwallet.h; sourceTree = "<group>"; };
@@ -59,7 +57,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				600FAB15252ED5880039D358 /* libwallet.a in Frameworks */,
 				50ADFFA42020D75100D50D53 /* Capacitor.framework in Frameworks */,
 				60EDD772252F846900E05012 /* libwallet.a in Frameworks */,
 				03FC29A292ACC40490383A1F /* Pods_Plugin.framework in Frameworks */,
@@ -145,7 +142,6 @@
 			isa = PBXGroup;
 			children = (
 				600FAB16252ED5A30039D358 /* libresolv.tbd */,
-				600FAB12252ED5710039D358 /* libwallet.a */,
 				50ADFFA52020D75100D50D53 /* Capacitor.framework */,
 				3B2A61DA5A1F2DD4F959604D /* Pods_Plugin.framework */,
 				F6753A823D3815DB436415E3 /* Pods_PluginTests.framework */,
