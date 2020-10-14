@@ -1,16 +1,32 @@
 <script>
-  window.__WALLET__
-    .sendMessage({
-      cmd: "CreateAccount",
-      payload: {
-        clientOptions: {
-          node: "https://nodes.devnet.iota.org:443"
-        }
+  const {
+    init,
+    createAccount,
+    setStrongholdPassword,
+    backup,
+    restoreBackup
+  } = window.__WALLET__;
+
+  async function test() {
+    await setStrongholdPassword("password");
+    let a = await createAccount({
+      clientOptions: {
+        node: "https://nodes.devnet.iota.org:443"
       }
-    })
-    .then(res => {
-      alert(JSON.stringify(res));
     });
+    console.log(a);
+    a = await backup("./backup");
+    console.log(a);
+    window.__deleteStrongholdSnapshot();
+    a = await setStrongholdPassword("password"); // since we removed the snapshot, reload stronghold
+    console.log(a);
+    a = await restoreBackup("./backup");
+    console.log(a);
+    return "ok";
+  }
+  test()
+    .then(console.log)
+    .catch(console.error);
 </script>
 
 <style>

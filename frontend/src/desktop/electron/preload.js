@@ -1,9 +1,11 @@
-const { init, sendMessage } = require('wallet-actor-system-nodejs-binding')
+const binding = require('wallet-actor-system-nodejs-binding')
 
-init()
+binding.init()
 
-window.__WALLET__ = {
-  sendMessage(message) {
-    return sendMessage(JSON.stringify(message))
-  }
+window.__WALLET__ = binding
+
+// TODO this is only for the test; should be removed later
+const fs = require('fs')
+window.__deleteStrongholdSnapshot = () => {
+    fs.rmdirSync('./example-database', { recursive: true })
 }

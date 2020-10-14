@@ -7,9 +7,10 @@
   "author": "IOTA Foundation <contact@iota.org>",
   "license": "Apache-2.0",
   "scripts": {
-    "postinstall": "electron-build-env --electron 9.1.0 -- neon build wallet-actor-system-nodejs-binding --release",
-    "start": "NODE_ENV=development rollup --config --watch",
-    "build": "NODE_ENV=production rollup --config"
+    "postinstall": "electron-build-env --electron 9.1.0 -- yarn build-binding",
+    "build-binding": "node ./scripts/build-binding",
+    "start": "cross-env NODE_ENV=development rollup --config --watch",
+    "build": "cross-env NODE_ENV=production rollup --config"
   },
   "dependencies": {
     "wallet-actor-system-nodejs-binding": "link:../../../backend/bindings/node"
@@ -17,6 +18,7 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-node-resolve": "^8.1.0",
+    "cross-env": "^7.0.2",
     "electron": "^9.1.0",
     "electron-build-env": "^0.2.0",
     "rollup": "^2.21.0",

@@ -19,13 +19,12 @@
       }
     });
     console.log(a);
-    await backup("/data/data/com.iota.wallet/cache/backup");
+    a = await backup("/data/data/com.iota.wallet/cache/backup");
     console.log(a);
     await Filesystem.deleteFile({
       path: "./database/snapshot",
       directory: FilesystemDirectory.Cache
     });
-    console.log(a);
     a = await setStrongholdPassword("password"); // since we removed the snapshot, reload stronghold
     console.log(a);
     a = await restoreBackup("/data/data/com.iota.wallet/cache/backup");
