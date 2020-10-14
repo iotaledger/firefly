@@ -3,6 +3,7 @@
         ActivityRow,
         BalanceSummary,
         Sidebar,
+        BarChart,
         LineChart,
         Logo,
         Box,
@@ -61,7 +62,10 @@
                     </Box>
 
                     <Box classes="items-stretch h-auto w-1/2 bg-white rounded-lg p-10">
-                        <Text type="h4" classes="mb-5">Distribution</Text>
+                        <Text type="h4" classes="mb-5">Transactions</Text>
+                        <Box classes="h-full">
+                            <BarChart />
+                        </Box>
                     </Box>
                 </Box>
                 <Box classes="flex-1 flex">

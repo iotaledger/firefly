@@ -24,7 +24,6 @@
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,
                 legend: {
                     // Hide label
                     display: false
@@ -52,5 +51,5 @@
 </script>
 
 
-<canvas id="line-chart"></canvas>
+<canvas id="line-chart" style="width:100%;height:100%;"></canvas>
 
