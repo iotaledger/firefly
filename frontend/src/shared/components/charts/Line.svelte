@@ -2,10 +2,19 @@
     import { onMount } from "svelte";
     import Chart from "chart.js";
 
-    Chart.defaults.global.elements.rectangle.borderWidth = 1;
-
     function createChart() {
-        const ctx = document.getElementById("line-chart");
+        const ctx = document.getElementById('line-chart');
+        const context = ctx.getContext('2d');
+
+        const gradient = context.createLinearGradient(
+            context.canvas.width / 2,
+            0,
+            context.canvas.width / 2,
+            context.canvas.height / 1.2
+        );
+
+        gradient.addColorStop(0, '#DAE7FF');
+        gradient.addColorStop(1, 'rgba(238, 242, 250, 0)');
 
         const myChart = new Chart(ctx, {
             type: "line",
@@ -13,7 +22,7 @@
                 labels: ['25 oct', '26 oct', '26 oct', '27 oct', '28 oct', '29 oct'],
                 datasets: [
                     {
-                        backgroundColor: '#e1eaf9',
+                        backgroundColor: gradient,
                         borderColor: '#108cff',
                         borderWidth: 2,
                         // Hide data points on line
@@ -52,4 +61,3 @@
 
 
 <canvas id="line-chart" style="width:100%;height:100%;"></canvas>
-

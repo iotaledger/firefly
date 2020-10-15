@@ -2,6 +2,7 @@
     import {
         ActivityRow,
         BalanceSummary,
+        ChartOption,
         Sidebar,
         BarChart,
         LineChart,
@@ -71,16 +72,16 @@
                 <Box classes="flex-1 flex">
                     <Box classes="w-full bg-white rounded-lg p-10">
                         <Box classes="flex justify-start">
-                            <Text type="h4" classes="mb-1">Portfolio</Text>
-                            <Text type="h4" disabled classes="mb-1 ml-6">Token</Text>
+                            <Text type="h4">Portfolio</Text>
+                            <Text type="h4" disabled classes="ml-6">Token</Text>
                         </Box>
                         <Box classes=" flex-1 flex flex-row-reverse">
-                            <Text type="p" disabled classes="px-4 py-2">ALL</Text>
-                            <Text type="p" disabled classes="px-4 py-2">1Y</Text>
-                            <Text type="p" disabled classes="px-4 py-2">1M</Text>
-                            <Text type="p" classes="px-4 flex items-center justify-center rounded-full h-8 w-8 bg-blue-500 text-white">1W</Text>
-                            <Text type="p" disabled classes="px-4 py-2">1D</Text>
-                            <Text type="p" disabled classes="px-4 py-2">1H</Text>
+                            <ChartOption option="ALL" />
+                            <ChartOption option="1Y" />
+                            <ChartOption option="1M" />
+                            <ChartOption selected option="1W" />
+                            <ChartOption option="1D" />
+                            <ChartOption option="1H" />
                         </Box>
                         <Box>
                             <LineChart />
