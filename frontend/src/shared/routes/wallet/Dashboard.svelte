@@ -92,9 +92,8 @@
         </Box>
 
         <Box classes="flex-auto bg-white h-screen px-12 py-8 flex flex-col">
-            <Text type="h3" classes="mb-5">Accounts</Text>
             <Box classes="h-full">
-                <Text type="h3" classes="mb-5">Recent Activity</Text>
+                <Text type="h3" classes="mb-12">Recent Activity</Text>
                 <Box>
                     {#each transactions as transaction}
                         <ActivityRow {...transaction}  />
