@@ -15,6 +15,6 @@
     </Box>
     <Box classes="flex-1 items-end flex flex-col ml-4">
         <Text type="p">{amount}</Text>
-        <Text type="p" classes="text-green-500">{received ? 'Received' : 'Sent'}</Text>
+        <Text type="p" highlighted={!received}>{received ? 'Received' : 'Sent'}</Text>
     </Box>
 </Box>

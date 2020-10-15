@@ -13,7 +13,7 @@
             <Text type="h2" classes="uppercase">{balance.split(' ')[0]}</Text>
             <Text type="p" secondary classes="ml-1">{balance.split(' ')[1]}</Text>
         </Box>
-        <Text type="h4" classes="mb-3 uppercase text-blue-500">45000 USD</Text>
+        <Text type="h4" highlighted classes="mb-3 uppercase">45000 USD</Text>
     </Box>
 
     <Box classes="flex-grow-0 mt-4">
