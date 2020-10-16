@@ -35,6 +35,7 @@
         }
         &.icon {
             padding: 28px 22px;
+            text-align: left;
 
             span {
                 margin-left: 38px;

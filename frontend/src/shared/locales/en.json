@@ -120,12 +120,27 @@
         "save_backup": "Save Backup",
         "import_seedvault": "Import SeedVault",
         "check_again": "No, Check Again",
-        "import_from_file": "Import from a file"
+        "import_from_file": "Import from a file",
+        "send": "Send",
+        "receive": "Receive"
     },
     "general": {
         "password": "Password",
         "confirm_password": "Confirm password",
         "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase"
+        "recovery_phrase": "Recovery Phrase",
+        "recent_activity": "Recent Activity",
+        "sent": "Sent",
+        "received": "Received",
+        "send_funds": "Send funds",
+        "send_to_address": "Send to an Address",
+        "scan_qr_or_paste": "Scan a QR code or paste an Address",
+        "transfer_between_accounts": "Transfer Between Accounts",
+        "move_funds_between_accounts": "Move funds between your Accounts",
+        "account": "Account",
+        "sending_to_address": "Sending to address",
+        "amount": "Amount",
+        "add_address": "Add Address",
+        "reference": "Reference"
     }
 }

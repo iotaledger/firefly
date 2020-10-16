@@ -19,3 +19,4 @@ export { default as ImportFromSecurityPhrase } from '@shared-routes/import/Impor
 export { default as ImportFromSecurityPhraseFile } from '@shared-routes/import/ImportFromSecurityPhraseFile.svelte'
 export { default as Balance } from '@shared-routes/import/Balance.svelte'
 export { default as Dashboard } from '@shared-routes/wallet/Dashboard.svelte'
+export { default as Send } from '@shared-routes/wallet/Send.svelte'
