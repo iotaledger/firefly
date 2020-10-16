@@ -1,8 +1,14 @@
 <script>
     import { OnboardingLayout, Illustration, Text, Button } from '@shared-components'
+    import { logged } from '@shared-lib/app'
     export let locale
     export let mobile
     export let goto
+
+    const finishOnboarding = () => {
+        logged.update(() => true)
+        goto('dashboard')
+    }
 </script>
 
 {#if mobile}
@@ -14,7 +20,7 @@
             <Text type="p" secondary classes="mb-4">{locale('views.congratulations.body')}</Text>
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-end items-center">
-            <Button onClick={() => goto('dashboard')}>{locale('actions.continue')}</Button>
+            <Button onClick={() => finishOnboarding()}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex p-16">
             <Illustration width="100%" illustration="congratulations-desktop" />

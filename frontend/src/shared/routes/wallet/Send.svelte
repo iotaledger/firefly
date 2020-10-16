@@ -18,6 +18,7 @@
     let destinationType: RECEIVER_TYPES = null
     let destinationAddress: string
     let destinationAccount: number
+    let loading = false
     let reference
 
     const accounts = [
@@ -26,7 +27,6 @@
     ]
 
     const handleSelectDestinationClick = (type: RECEIVER_TYPES) => {
-        console.log(type)
         destinationType = type
     }
     const handleSelectOriginAddress = (value) => {
@@ -36,8 +36,17 @@
         destinationAccount = value
     }
 
-    $: validSendToAddress = amount && originAcount !== null && destinationAddress
-    $: validSendToAccount = amount && originAcount !== null && destinationAccount !== null
+    const handleSendClick = () => {
+        loading = true
+        setTimeout(() => {
+            var audio = new Audio('../../assets/sounds/send.mp3')
+            audio.play()
+            onSendClick()
+        }, 1000)
+    }
+
+    $: validSendToAddress = !loading && amount && originAcount !== null && destinationAddress
+    $: validSendToAccount = !loading && amount && originAcount !== null && destinationAccount !== null
 </script>
 
 <style type="text/scss">
@@ -98,7 +107,7 @@
                     </reference>
                 </div>
                 <div>
-                    <Button disabled={!validSendToAddress} classes="w-full" onClick={() => onSendClick()}>
+                    <Button disabled={!validSendToAddress} classes="w-full" onClick={() => handleSendClick()}>
                         {locale('actions.send')}
                     </Button>
                 </div>
@@ -126,7 +135,7 @@
                     </reference>
                 </div>
                 <div>
-                    <Button disabled={!validSendToAccount} classes="w-full" onClick={() => onSendClick()}>
+                    <Button disabled={!validSendToAccount} classes="w-full" onClick={() => handleSendClick()}>
                         {locale('actions.send')}
                     </Button>
                 </div>

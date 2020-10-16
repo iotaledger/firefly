@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { setupI18n, isLocaleLoaded, dir, _ } from '@shared-lib/i18n'
-    import { darkMode, mobile } from '@shared-lib/app'
+    import { darkMode, mobile, logged } from '@shared-lib/app'
     import { goto } from '@shared-lib/helpers'
-    import { Route } from '@shared-components'
+    import { Route, Toggle } from '@shared-components'
     import {
         Splash,
         Onboarding1,
@@ -40,13 +40,17 @@
     onMount(() => {
         setTimeout(() => {
             splash = false
-            goto('onboarding-1') // dummmy dev only
+            if (!$logged) {
+                goto('onboarding-1') // dummmy dev only
+            } else {
+                goto('dashboard') // dummmy dev only
+            }
         }, 2000)
     })
 
     // DEV ONLY
     mobile.set(false)
-    darkMode.set(false)
+    // darkMode.set(false)
     goto('') // dummmy goto homepage
 </script>
 
@@ -55,6 +59,25 @@
     @tailwind components;
     @tailwind utilities;
     @import '../shared/style/style.scss';
+
+    // dummy toggles
+    .dummy-toggles {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        z-index: 10;
+        font-size: 12px;
+        display: flex;
+        padding: 5px;
+        background: #8080803d;
+        border-radius: 10px;
+        button {
+            background: var(--button-bg-color);
+            padding: 0 7px;
+            border-radius: 10px;
+            color: var(--button-text-color);
+        }
+    }
 </style>
 
 {#if !$isLocaleLoaded || splash}
@@ -62,6 +85,14 @@
         <Splash />
     </Route>
 {:else}
+    <!-- dummy toggles -->
+    <div class="dummy-toggles flex flex-row">
+        <div class="mr-4">
+            <Toggle on={darkMode} />
+        </div>
+        <button on:click={() => logged.update(() => false)}> reset </button>
+    </div>
+    <!--  -->
     <Route route="onboarding-1">
         <Onboarding1 mobile={$mobile} locale={$_} {goto} />
     </Route>
