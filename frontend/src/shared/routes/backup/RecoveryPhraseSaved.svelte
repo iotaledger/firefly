@@ -1,5 +1,6 @@
 <script>
     import { generateRecoveryPhrase } from '@shared-lib/utils'
+    import { legacySeed } from '@shared-lib/app'
     import { OnboardingLayout, RecoveryPhrase, Text, Button, Icon } from '@shared-components'
 
     export let locale
@@ -7,6 +8,14 @@
     export let goto
 
     let recoveryPhrase = generateRecoveryPhrase().split(' ')
+
+    function handleClick() {
+        if ($legacySeed) {
+            goto('migrate')
+        } else {
+            goto('congratulations')
+        }
+    }
 </script>
 
 <style type="text/scss">
@@ -27,7 +36,7 @@
             </div>
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-end items-center">
-            <Button onClick={() => goto('congratulations')}>{locale('actions.continue')}</Button>
+            <Button onClick={() => handleClick()}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex items-center justify-center p-16">
             <RecoveryPhrase {recoveryPhrase} />

@@ -24,8 +24,9 @@
         ImportFromSeedVault,
         ImportFromSecurityPhrase,
         ImportFromSecurityPhraseFile,
+        Migrate,
         Balance,
-        Dashboard
+        Dashboard,
     } from '@shared-routes'
 
     let splash = true
@@ -50,10 +51,10 @@
 </script>
 
 <style global type="text/scss">
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
-  @import '../shared/style/style.scss';
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+    @import '../shared/style/style.scss';
 </style>
 
 {#if !$isLocaleLoaded || splash}
@@ -114,6 +115,9 @@
     </Route>
     <Route route="import-from-security-phrase-file">
         <ImportFromSecurityPhraseFile mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="migrate">
+        <Migrate mobile={$mobile} locale={$_} {goto} />
     </Route>
     <Route route="balance">
         <Balance mobile={$mobile} locale={$_} {goto} />

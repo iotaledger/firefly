@@ -1,5 +1,6 @@
 <script>
     import { generateRecoveryPhrase } from '@shared-lib/utils'
+    import { legacySeed } from '@shared-lib/app'
     import { OnboardingLayout, RecoveryPhrase, Text, Button } from '@shared-components'
 
     export let locale
@@ -8,6 +9,14 @@
 
     let recoveryPhrase = generateRecoveryPhrase().split(' ')
     let valid
+
+    function handleClick() {
+        if ($legacySeed) {
+            goto('migrate')
+        } else {
+            goto('congratulations')
+        }
+    }
 </script>
 
 {#if mobile}
@@ -19,7 +28,7 @@
             <Text type="p" secondary classes="mb-4">{locale('views.verify-recovery-phrase.body')}</Text>
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-end items-center">
-            <Button disabled={!valid} onClick={() => goto('congratulations')}>{locale('actions.continue')}</Button>
+            <Button disabled={!valid} onClick={() => handleClick()}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex items-center justify-center p-16">
             <RecoveryPhrase {recoveryPhrase} shuffle bind:valid />
