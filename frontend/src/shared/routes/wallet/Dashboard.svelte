@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { ActivityRow, BalanceSummary, Sidebar, LineChart, Box, Text, Button } from '@shared-components'
+    import { ActivityRow, BalanceSummary, ChartOption, Sidebar, BarChart, LineChart, Box, Text, Button } from '@shared-components'
     import { Send } from '@shared-routes'
 
     export let locale
@@ -63,42 +63,40 @@
 
         <Box classes="flex-auto w-1/2 px-12 py-8">
             <Text type="h2" classes="mb-5">Wallet</Text>
-            <Box classes="flex flex-col h-full pb-16">
-                <Box classes="flex-1 flex mb-4 gap-2">
-                    <Box classes="w-1/2 bg-white rounded-lg px-10 pt-24 pb-10">
-                        <BalanceSummary balance="239 Gi" transactions="2200" accounts="6" />
+            <Box classes="flex flex-col">
+                <!-- Top Boxes (Balance Summary & Transaction Chart) -->
+                <Box classes="flex mb-4 gap-2">
+                    <Box classes="w-1/2 bg-white rounded-lg px-10 pt-16 pb-6">
+                        <BalanceSummary balance="239.321 Gi" transactions="2200" accounts="6" />
                     </Box>
-
                     <Box classes="items-stretch h-auto w-1/2 bg-white rounded-lg p-10">
-                        <Text type="h4" classes="mb-5">Distribution</Text>
+                        <Text type="h4" classes="mb-5">Transactions</Text>
+                        <Box classes="h-full">
+                            <BarChart />
+                        </Box>
                     </Box>
                 </Box>
-                <Box classes="flex-1 flex">
-                    <Box classes="w-full bg-white rounded-lg p-10">
-                        <Box classes="flex justify-start">
-                            <Text type="h4" classes="mb-1">Portfolio</Text>
-                            <Text type="h4" disabled classes="mb-1 ml-6">Token</Text>
-                        </Box>
-                        <Box classes=" flex-1 flex flex-row-reverse">
-                            <Text type="p" disabled classes="px-4 py-2">ALL</Text>
-                            <Text type="p" disabled classes="px-4 py-2">1Y</Text>
-                            <Text type="p" disabled classes="px-4 py-2">1M</Text>
-                            <Text
-                                type="p"
-                                classes="px-4 flex items-center justify-center rounded-full h-8 w-8 bg-blue-500 text-white">
-                                1W
-                            </Text>
-                            <Text type="p" disabled classes="px-4 py-2">1D</Text>
-                            <Text type="p" disabled classes="px-4 py-2">1H</Text>
-                        </Box>
-                        <Box>
-                            <LineChart />
-                        </Box>
+
+                <!-- Portfolio/Token -->
+                <Box classes="w-full bg-white rounded-lg px-10 pt-8 pb-6">
+                    <Box classes="flex justify-start">
+                        <Text type="h4">Portfolio</Text>
+                        <Text type="h4" disabled classes="ml-6">Token</Text>
+                    </Box>
+                    <Box classes="flex-1 flex flex-row-reverse">
+                        <ChartOption option="ALL" />
+                        <ChartOption option="1Y" />
+                        <ChartOption option="1M" />
+                        <ChartOption selected option="1W" />
+                        <ChartOption option="1D" />
+                        <ChartOption option="1H" />
+                    </Box>
+                    <Box classes="flex-auto">
+                        <LineChart />
                     </Box>
                 </Box>
             </Box>
         </Box>
-
         <action-pane class="h-full flex-grow-0 bg-white">
             {#if ongoingRequestType === null}
                 <activity class="h-full px-12 py-8 flex flex-col justify-between">
