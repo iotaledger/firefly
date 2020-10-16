@@ -161,5 +161,6 @@
     onMount(createChart);
 </script>
 
-
-<canvas id="bar-chart" style="width:100%;height:100%;"></canvas>
+<div class="chart-container" style="position: relative; height: 100%;">
+    <canvas id="bar-chart"></canvas>
+</div>

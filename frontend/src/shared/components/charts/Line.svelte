@@ -27,12 +27,13 @@
                         borderWidth: 2,
                         // Hide data points on line
                         pointRadius: 0,
-                        data: [8, 15, 20, 20, 8, 13, 8]
+                        data: [8, 15, 17, 18, 8, 13, 8]
                     }
                 ]
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 legend: {
                     // Hide label
                     display: false
@@ -59,5 +60,6 @@
     onMount(createChart);
 </script>
 
-
-<canvas id="line-chart" style="width:100%;height:100%;"></canvas>
+<div class="chart-container" style="position: relative; height: 28.5vh;">
+    <canvas id="line-chart"></canvas>
+</div>
