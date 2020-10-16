@@ -1546,21 +1546,22 @@ dependencies = [
 
 [[package]]
 name = "neon"
-version = "0.4.0"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6cac4691701b686e6c07b2eb5b51a9f26f5c11179c5d7924b78100dd387fc99d"
+checksum = "5f1314e1a7a6375ddfab87906f98e5a848649c5a88d7d118e9d603c12440964e"
 dependencies = [
  "cslice",
  "neon-build",
  "neon-runtime",
  "semver",
+ "winapi 0.3.9",
 ]
 
 [[package]]
 name = "neon-build"
-version = "0.4.0"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f9ed332afd4711b84f4f83d334428a1fd9ce53620b62b87595934297c5ede2ed"
+checksum = "39a7bb825db76fd7b73956ea39329b92bc599adc8b71e1675908d9062c6dae69"
 dependencies = [
  "cfg-if 0.1.10",
  "neon-sys",
@@ -1568,9 +1569,9 @@ dependencies = [
 
 [[package]]
 name = "neon-runtime"
-version = "0.4.0"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2beea093a60c08463f65e1da4cda68149986f60d8d2177489b44589463c782a6"
+checksum = "d5e7dcc582b1c713f58f0b092b3f11de3ac94b2b8d78ea4b658b8990bfb3412c"
 dependencies = [
  "cfg-if 0.1.10",
  "neon-sys",
@@ -1578,9 +1579,9 @@ dependencies = [
 
 [[package]]
 name = "neon-sys"
-version = "0.4.0"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "69a6c1ba6b926746f4d3f596de18ce49d062d78fd9f35f636080232aa77a0e16"
+checksum = "c41690bb07b1673ec8073f5c64dc041ab997d56a5d3cb2cbcc6dbfb7416c135e"
 dependencies = [
  "cc",
  "regex",
