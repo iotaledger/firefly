@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { ActivityRow, BalanceSummary, ChartOption, Sidebar, BarChart, LineChart, Box, Text, Button } from '@shared-components'
-    import { Send } from '@shared-routes'
+    import { Send, Receive } from '@shared-routes'
 
     export let locale
     export let mobile
@@ -115,7 +115,9 @@
                 </activity>
             {:else if ongoingRequestType === REQUEST_TYPES.SEND}
                 <Send {locale} {mobile} onSendClick={sendTransaction} />
-            {:else if ongoingRequestType === REQUEST_TYPES.RECEIVE}foo{/if}
+            {:else if ongoingRequestType === REQUEST_TYPES.RECEIVE}
+                <Receive {locale} {mobile} />
+            {/if}
         </action-pane>
     </Box>
 {/if}

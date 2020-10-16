@@ -141,6 +141,10 @@
         "sending_to_address": "Sending to address",
         "amount": "Amount",
         "add_address": "Add Address",
-        "reference": "Reference"
+        "reference": "Reference",
+        "receive_funds": "Receive funds",
+        "share_address": "Share an address",
+        "your_address": "Your address",
+        "generate_new_address": "Generate new address"
     }
 }
