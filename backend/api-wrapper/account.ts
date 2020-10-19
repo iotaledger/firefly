@@ -4,7 +4,7 @@ import { Address } from './address'
 import { ClientOptions } from './client'
 
 export interface Account {
-  id: string;
+  id: number[];
   mnemonic: string;
   alias: string;
   createdAt: string;
@@ -12,13 +12,18 @@ export interface Account {
   addresses: Address[];
 }
 
-export type AccountIdentifier = string | number
+export type AccountIdentifier = number | number[]
 
 export interface AccountToCreate {
   clientOptions: ClientOptions;
   mnemonic?: string;
   alias?: string;
   createdAt?: string;
+}
+
+export interface SyncedAccount {
+  accountId: number[]
+  depositAddress: Address
 }
 
 export function createAccount(bridge: Bridge<Account>, account: AccountToCreate): Promise<BridgeResponse<Account>> {
@@ -42,6 +47,17 @@ export function getAccount(bridge: Bridge<Account>, accountId: AccountIdentifier
   })
 }
 
-export function syncAccounts(bridge: Bridge<any>): Promise<BridgeResponse<any>> {
+export function syncAccounts(bridge: Bridge<SyncedAccount[]>): Promise<BridgeResponse<SyncedAccount[]>> {
   return bridge({ cmd: 'SyncAccounts' })
+}
+
+export function internalTransfer(bridge: Bridge<Message>, fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number): Promise<BridgeResponse<Message>> {
+  return bridge({
+    cmd: 'InternalTransfer',
+    payload: {
+      fromAccountId,
+      toAccountId,
+      amount
+    }
+  })
 }

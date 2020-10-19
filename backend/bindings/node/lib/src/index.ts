@@ -6,18 +6,21 @@ import {
   createAccount as _createAccount,
   removeAccount as _removeAccount,
   getAccount as _getAccount,
-  syncAccounts as _syncAccounts
+  syncAccounts as _syncAccounts,
+  internalTransfer as _internalTransfer
 } from '../../../../api-wrapper/account'
 import {
   Message,
   ListMessageFilter,
+  Transfer,
   listMessages as _listMessages,
   reattach as _reattach
 } from '../../../../api-wrapper/message'
 import {
   backup as _backup,
   restoreBackup as _restoreBackup,
-  setStrongholdPassword as _setStrongholdPassword
+  setStrongholdPassword as _setStrongholdPassword,
+  send as _send
 } from '../../../../api-wrapper/wallet'
 
 const addon = require('../native')
@@ -78,4 +81,12 @@ export function restoreBackup(backupPath: string): Promise<BridgeResponse<any>> 
 
 export function setStrongholdPassword(password: string): Promise<BridgeResponse<any>> {
   return _setStrongholdPassword(sendMessage, password)
+}
+
+export function send(fromAccountId: AccountIdentifier, transfer: Transfer): Promise<BridgeResponse<Message>> {
+  return _send(sendMessage, fromAccountId, transfer)
+}
+
+export function internalTransfer(fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number): Promise<BridgeResponse<Message>> {
+  return _internalTransfer(sendMessage, fromAccountId, toAccountId, amount)
 }

@@ -53,6 +53,11 @@ export interface ListMessageFilter {
   messageType?: MessageType;
 }
 
+export interface Transfer {
+  amount: number
+  address: string
+}
+
 export function listMessages(bridge: Bridge<Message[]>, accountId: AccountIdentifier, filter: ListMessageFilter, count: number, from = 0): Promise<BridgeResponse<Message[]>> {
   return bridge({
     cmd: 'ListMessages',
