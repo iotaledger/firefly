@@ -10,4 +10,8 @@
     s.source_files = 'ios/Plugin/**/*.{swift,h,m,c,cc,mm,cpp}'
     s.ios.deployment_target  = '11.0'
     s.dependency 'Capacitor'
+    s.vendored_libraries = ['ios/Plugin/Libraries/libwallet.a']
+    s.platform = :ios, "11.0"
+    s.xcconfig = { 'SWIFT_INCLUDE_PATHS' => '$(PODS_TARGET_SRCROOT)/ios/Plugin/Libraries' }
+    s.preserve_paths = ['ios/Plugin/Libraries/module.modulemap']
   end
