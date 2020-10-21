@@ -22,6 +22,7 @@ import {
   setStrongholdPassword as _setStrongholdPassword,
   send as _send
 } from '../../../../api-wrapper/wallet'
+import * as events from '../../../../api-wrapper/events'
 
 const addon = require('../native')
 
@@ -89,4 +90,28 @@ export function send(fromAccountId: AccountIdentifier, transfer: Transfer): Prom
 
 export function internalTransfer(fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number): Promise<BridgeResponse<Message>> {
   return _internalTransfer(sendMessage, fromAccountId, toAccountId, amount)
+}
+
+export function onError(cb: events.Callback<events.ErrorEvent>) {
+  events.onError(addon.EventEmitter, cb)
+}
+
+export function onBalanceChange(cb: events.Callback<events.BalanceChangeEvent>) {
+  events.onBalanceChange(addon.EventEmitter, cb)
+}
+
+export function onNewTransaction(cb: events.Callback<events.TransactionEvent>) {
+  events.onNewTransaction(addon.EventEmitter, cb)
+}
+
+export function onConfirmationStateChange(cb: events.Callback<events.TransactionEvent>) {
+  events.onConfirmationStateChange(addon.EventEmitter, cb)
+}
+
+export function onReattachment(cb: events.Callback<events.TransactionEvent>) {
+  events.onReattachment(addon.EventEmitter, cb)
+}
+
+export function onBroadcast(cb: events.Callback<events.TransactionEvent>) {
+  events.onBroadcast(addon.EventEmitter, cb)
 }
