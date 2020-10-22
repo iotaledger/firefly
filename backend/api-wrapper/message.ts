@@ -58,7 +58,7 @@ export interface Transfer {
   address: string
 }
 
-export function listMessages(bridge: Bridge<Message[]>, accountId: AccountIdentifier, filter: ListMessageFilter, count: number, from = 0): Promise<BridgeResponse<Message[]>> {
+export function listMessages(bridge: Bridge, accountId: AccountIdentifier, filter: ListMessageFilter, count: number, from = 0) {
   return bridge({
     cmd: 'ListMessages',
     payload: {
@@ -70,7 +70,7 @@ export function listMessages(bridge: Bridge<Message[]>, accountId: AccountIdenti
   })
 }
 
-export function reattach(bridge: Bridge<any>, accountId: AccountIdentifier, messageId: string): Promise<BridgeResponse<any>> {
+export function reattach(bridge: Bridge, accountId: AccountIdentifier, messageId: string) {
   return bridge({
     cmd: 'Reattach',
     payload: {

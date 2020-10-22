@@ -1,6 +1,6 @@
 <script>
   const {
-    init,
+    onMessage,
     createAccount,
     setStrongholdPassword,
     backup,
@@ -8,20 +8,17 @@
   } = window.__WALLET__;
 
   async function test() {
+    onMessage(console.log);
     await setStrongholdPassword("password");
-    let a = await createAccount({
+    await createAccount({
       clientOptions: {
         node: "https://nodes.devnet.iota.org:443"
       }
     });
-    console.log(a);
-    a = await backup("./backup");
-    console.log(a);
+    await backup("./backup");
     window.__deleteStrongholdSnapshot();
-    a = await setStrongholdPassword("password"); // since we removed the snapshot, reload stronghold
-    console.log(a);
-    a = await restoreBackup("./backup");
-    console.log(a);
+    await setStrongholdPassword("password"); // since we removed the snapshot, reload stronghold
+    await restoreBackup("./backup");
     return "ok";
   }
   test()

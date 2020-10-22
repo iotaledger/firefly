@@ -12,6 +12,7 @@ use std::convert::TryFrom;
 use std::path::Path;
 
 static WALLET_ACTOR: OnceCell<ActorRef<WalletMessage>> = OnceCell::new();
+static MESSAGE_RECEIVER: OnceCell<Box<dyn Fn(String) + Send + Sync + 'static>> = OnceCell::new();
 
 #[repr(C)]
 pub enum EventType {
@@ -40,7 +41,10 @@ impl TryFrom<&str> for EventType {
     }
 }
 
-pub fn init(storage_path: Option<impl AsRef<Path>>) {
+pub fn init<F: Fn(String) + Send + Sync + 'static>(
+    message_receiver: F,
+    storage_path: Option<impl AsRef<Path>>,
+) {
     println!("Starting runtime");
     if let Some(path) = storage_path {
         iota_wallet_actor::wallet::storage::set_storage_path(path)
@@ -51,24 +55,30 @@ pub fn init(storage_path: Option<impl AsRef<Path>>) {
     WALLET_ACTOR
         .set(wallet_actor)
         .expect("failed to set wallet actor globally");
+    MESSAGE_RECEIVER
+        .set(Box::new(message_receiver))
+        .map_err(|_| ())
+        .expect("failed to set message receiver globally");
 }
 
-pub async fn send_message(message: String) -> String {
+pub async fn send_message(message: String) {
+    let callback = MESSAGE_RECEIVER.get().unwrap();
     if let Some(actor) = WALLET_ACTOR.get() {
         match dispatch(actor, message.clone()).await {
             Ok(response) => {
-                return response.unwrap_or("{}".to_string());
+                callback(response.unwrap_or("{}".to_string()));
             }
             Err(e) => {
-                return format!(r#"{{ "type": "error", "payload": "{}" }}"#, e);
+                callback(format!(r#"{{ "type": "error", "payload": "{}" }}"#, e));
             }
         }
     } else {
-        return r#""{ "type": "error", "payload": "runtime not initialized; call `init` before sending messages" }""#.to_string();
+        callback(r#""{ "type": "error", "payload": "runtime not initialized; call `init` before sending messages" }""#.to_string());
     }
 }
 
-pub fn listen<F: Fn(String) + Send + Sync + 'static>(event_type: EventType, callback: F) {
+pub fn listen(event_type: EventType) {
+    let callback = MESSAGE_RECEIVER.get().unwrap();
     match event_type {
         EventType::ErrorThrown => {
             on_error(move |error| callback(serde_json::to_string(&error).unwrap()))

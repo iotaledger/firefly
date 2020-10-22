@@ -26,32 +26,32 @@ export interface SyncedAccount {
   depositAddress: Address
 }
 
-export function createAccount(bridge: Bridge<Account>, account: AccountToCreate): Promise<BridgeResponse<Account>> {
+export function createAccount(bridge: Bridge, account: AccountToCreate): Promise<void> {
   return bridge({
     cmd: 'CreateAccount',
     payload: account
   })
 }
 
-export function removeAccount(bridge: Bridge<any>, accountId: AccountIdentifier): Promise<BridgeResponse<any>> {
+export function removeAccount(bridge: Bridge, accountId: AccountIdentifier): Promise<void> {
   return bridge({
     cmd: 'RemoveAccount',
     payload: accountId
   })
 }
 
-export function getAccount(bridge: Bridge<Account>, accountId: AccountIdentifier): Promise<BridgeResponse<Account>> {
+export function getAccount(bridge: Bridge, accountId: AccountIdentifier): Promise<void> {
   return bridge({
     cmd: 'GetAccount',
     payload: accountId
   })
 }
 
-export function syncAccounts(bridge: Bridge<SyncedAccount[]>): Promise<BridgeResponse<SyncedAccount[]>> {
+export function syncAccounts(bridge: Bridge): Promise<void> {
   return bridge({ cmd: 'SyncAccounts' })
 }
 
-export function internalTransfer(bridge: Bridge<Message>, fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number): Promise<BridgeResponse<Message>> {
+export function internalTransfer(bridge: Bridge, fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number): Promise<void> {
   return bridge({
     cmd: 'InternalTransfer',
     payload: {

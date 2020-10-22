@@ -1,6 +1,7 @@
 <script>
   import {
     init,
+    onMessage,
     createAccount,
     setStrongholdPassword,
     backup,
@@ -10,25 +11,22 @@
   const { Filesystem } = Plugins;
 
   init();
+  onMessage(message => console.log("got message: ", message));
 
   async function test() {
     await setStrongholdPassword("password");
-    let a = await createAccount({
+    await createAccount({
       clientOptions: {
         node: "https://nodes.devnet.iota.org:443"
       }
     });
-    console.log(a);
-    a = await backup("/data/data/com.iota.wallet/cache/backup");
-    console.log(a);
+    await backup("/data/data/com.iota.wallet/cache/backup");
     await Filesystem.deleteFile({
       path: "./database/snapshot",
       directory: FilesystemDirectory.Cache
     });
-    a = await setStrongholdPassword("password"); // since we removed the snapshot, reload stronghold
-    console.log(a);
-    a = await restoreBackup("/data/data/com.iota.wallet/cache/backup");
-    console.log(a);
+    await setStrongholdPassword("password"); // since we removed the snapshot, reload stronghold
+    await restoreBackup("/data/data/com.iota.wallet/cache/backup");
     return "ok";
   }
   test()

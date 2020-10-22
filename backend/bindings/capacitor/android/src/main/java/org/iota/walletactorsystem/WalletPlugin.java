@@ -13,25 +13,23 @@ public class WalletPlugin extends Plugin {
 
     @PluginMethod
     public void initialize(final PluginCall call) {
-        WalletNative.INSTANCE.initialize(call.getString("storagePath"));
+        WalletNative.INSTANCE.initialize(new WalletNative.MessageCallback(){
+            @Override
+            public void apply(String response) {
+                try {
+                    notifyListeners("walletMessageReceived", new JSObject(response));
+                } catch (Exception e) {
+                    // an exception here is unexpected since the backend always returns a JSON
+                }
+            }
+        }, call.getString("storagePath"));
     }
 
     @PluginMethod()
     public void sendMessage(final PluginCall call) {
         try {
-            WalletNative.INSTANCE.send_message(call.getObject("message").toString(), new WalletNative.MessageCallback() {
-                @Override
-                public void apply(String response) {
-                    try {
-                        JSObject res = new JSObject(response);
-                        call.resolve(res);
-                    } catch (JSONException ex) {
-                        JSObject res = new JSObject();
-                        res.put("response", response);
-                        call.resolve(res);
-                    }
-                }
-            });
+            WalletNative.INSTANCE.send_message(call.getObject("message").toString());
+            call.resolve(new JSObject());
         } catch (Exception ex) {
             call.reject(ex.getMessage() + ex.getStackTrace().toString());
         }
@@ -40,15 +38,7 @@ public class WalletPlugin extends Plugin {
     @PluginMethod
     public void listen(final PluginCall call) {
         try {
-            call.save();
-            WalletNative.instance.listen(call.getString("eventName"), new WalletNative.MessageCallback(){
-                @Override
-                public void apply(String response) {
-                    JSObject res = new JSObject();
-                    res.put("data", response);
-                    call.resolve(res);
-                }
-            });
+            WalletNative.INSTANCE.listen(call.getString("eventName"));
         } catch (Exception ex) {
             call.reject(ex.getMessage() + ex.getStackTrace().toString());
         }

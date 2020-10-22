@@ -1,29 +1,29 @@
 import { AccountIdentifier } from './account'
-import { Bridge, BridgeResponse } from './bridge'
+import { Bridge } from './bridge'
 import { Message, Transfer } from './message'
 
-export function backup(bridge: Bridge<any>, destinationPath: string): Promise<BridgeResponse<any>> {
+export function backup(bridge: Bridge, destinationPath: string) {
   return bridge({
     cmd: 'Backup',
     payload: destinationPath
   })
 }
 
-export function restoreBackup(bridge: Bridge<any>, backupPath: string): Promise<BridgeResponse<any>> {
+export function restoreBackup(bridge: Bridge, backupPath: string) {
   return bridge({
     cmd: 'RestoreBackup',
     payload: backupPath
   })
 }
 
-export function setStrongholdPassword(bridge: Bridge<any>, password: string): Promise<BridgeResponse<any>> {
+export function setStrongholdPassword(bridge: Bridge, password: string) {
   return bridge({
     cmd: 'SetStrongholdPassword',
     payload: password
   })
 }
 
-export function send(bridge: Bridge<Message>, fromAccountId: AccountIdentifier, transfer: Transfer): Promise<BridgeResponse<Message>> {
+export function send(bridge: Bridge, fromAccountId: AccountIdentifier, transfer: Transfer) {
   return bridge({
     cmd: 'SendTransfer',
     payload: {

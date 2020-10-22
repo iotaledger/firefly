@@ -1,7 +1,6 @@
-import { BridgeMessage, BridgeResponse } from '../../../../api-wrapper/bridge'
+import { BridgeMessage } from '../../../../api-wrapper/bridge'
 import {
   AccountToCreate,
-  Account,
   AccountIdentifier,
   createAccount as _createAccount,
   removeAccount as _removeAccount,
@@ -10,7 +9,6 @@ import {
   internalTransfer as _internalTransfer
 } from '../../../../api-wrapper/account'
 import {
-  Message,
   ListMessageFilter,
   Transfer,
   listMessages as _listMessages,
@@ -22,103 +20,99 @@ import {
   setStrongholdPassword as _setStrongholdPassword,
   send as _send
 } from '../../../../api-wrapper/wallet'
-import * as events from '../../../../api-wrapper/events'
 
 const addon = require('../native')
+const mailbox = []
+const onMessageListeners: ((payload: any) => void)[] = []
 
-function sendMessage(message: BridgeMessage): Promise<any> {
-  return new Promise((resolve, reject) => {
-    addon.sendMessage(JSON.stringify(message), (err: any, res: string) => {
-      if (err) {
-        reject(err)
-      } else {
-        const response = JSON.parse(res)
-        if (response && response.type === 'Error') {
-          reject(response)
-        }
-        else {
-          resolve(response)
-        }
-      }
-    })
+function _poll(runtime: typeof addon.ActorSystem, cb: (error: string, data: any) => void) {
+  runtime.poll((err: string, data: string) => {
+    cb(err, err ? null : JSON.parse(data))
+    _poll(runtime, cb)
   })
 }
 
-export function init(storagePath: string = '') {
-  addon.init(storagePath)
+function sendMessage(message: BridgeMessage): Promise<void> {
+  return new Promise(resolve => addon.sendMessage(JSON.stringify(message), resolve))
 }
 
-export function createAccount(account: AccountToCreate): Promise<BridgeResponse<Account>> {
+export function init(storagePath?: string) {
+  const runtime = new addon.ActorSystem(storagePath || '')
+  _poll(runtime, (error, data) => {
+    const message = error || data
+    mailbox.push(message)
+    onMessageListeners.forEach(listener => listener(message))
+  })
+}
+
+export function onMessage(cb: (payload: any) => void) {
+  onMessageListeners.push(cb)
+}
+
+export function createAccount(account: AccountToCreate): Promise<void> {
   return _createAccount(sendMessage, account)
 }
 
-export function removeAccount(accountId: AccountIdentifier): Promise<BridgeResponse<any>> {
+export function removeAccount(accountId: AccountIdentifier): Promise<void> {
   return _removeAccount(sendMessage, accountId)
 }
 
-export function getAccount(accountId: AccountIdentifier): Promise<BridgeResponse<Account>> {
+export function getAccount(accountId: AccountIdentifier): Promise<void> {
   return _getAccount(sendMessage, accountId)
 }
 
-export function syncAccounts(): Promise<BridgeResponse<any>> {
+export function syncAccounts(): Promise<void> {
   return _syncAccounts(sendMessage)
 }
 
-export function listMessages(accountId: AccountIdentifier, filter: ListMessageFilter, count: number, from = 0): Promise<BridgeResponse<Message[]>> {
+export function listMessages(accountId: AccountIdentifier, filter: ListMessageFilter, count: number, from = 0): Promise<void> {
   return _listMessages(sendMessage, accountId, filter, count, from)
 }
 
-export function reattach(accountId: AccountIdentifier, messageId: string): Promise<BridgeResponse<any>> {
+export function reattach(accountId: AccountIdentifier, messageId: string): Promise<void> {
   return _reattach(sendMessage, accountId, messageId)
 }
 
-export function backup(destinationPath: string): Promise<BridgeResponse<any>> {
+export function backup(destinationPath: string): Promise<void> {
   return _backup(sendMessage, destinationPath)
 }
 
-export function restoreBackup(backupPath: string): Promise<BridgeResponse<any>> {
+export function restoreBackup(backupPath: string): Promise<void> {
   return _restoreBackup(sendMessage, backupPath)
 }
 
-export function setStrongholdPassword(password: string): Promise<BridgeResponse<any>> {
+export function setStrongholdPassword(password: string): Promise<void> {
   return _setStrongholdPassword(sendMessage, password)
 }
 
-export function send(fromAccountId: AccountIdentifier, transfer: Transfer): Promise<BridgeResponse<Message>> {
+export function send(fromAccountId: AccountIdentifier, transfer: Transfer): Promise<void> {
   return _send(sendMessage, fromAccountId, transfer)
 }
 
-export function internalTransfer(fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number): Promise<BridgeResponse<Message>> {
+export function internalTransfer(fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number): Promise<void> {
   return _internalTransfer(sendMessage, fromAccountId, toAccountId, amount)
 }
 
-function _poll(emitter: typeof addon.EventEmitter, cb: (error: string, data: any) => void) {
-  emitter.poll((err: string, data: string) => {
-    cb(err, err ? null : JSON.parse(data))
-    _poll(emitter, cb)
-  })
+export function listenToErrorEvents() {
+  addon.listen('ErrorThrown')
 }
 
-export function onError(cb: events.Callback<events.ErrorEvent>) {
-  _poll(new addon.EventEmitter('ErrorThrown'), cb)
+export function listenToBalanceChangeEvents() {
+  addon.listen('BalanceChange')
 }
 
-export function onBalanceChange(cb: events.Callback<events.BalanceChangeEvent>) {
-  _poll(new addon.EventEmitter('BalanceChange'), cb)
+export function listenToNewTransactionEvents() {
+  addon.listen('NewTransaction')
 }
 
-export function onNewTransaction(cb: events.Callback<events.TransactionEvent>) {
-  _poll(new addon.EventEmitter('NewTransaction'), cb)
+export function listenToConfirmationStateChangeEvents() {
+  addon.listen('ConfirmationStateChange')
 }
 
-export function onConfirmationStateChange(cb: events.Callback<events.TransactionEvent>) {
-  _poll(new addon.EventEmitter('ConfirmationStateChange'), cb)
+export function listenToReattachmentEvents() {
+  addon.listen('Reattachment')
 }
 
-export function onReattachment(cb: events.Callback<events.TransactionEvent>) {
-  _poll(new addon.EventEmitter('Reattachment'), cb)
-}
-
-export function onBroadcast(cb: events.Callback<events.TransactionEvent>) {
-  _poll(new addon.EventEmitter('Broadcast'), cb)
+export function listenToBroadcastEvents() {
+  addon.listen('Broadcast')
 }

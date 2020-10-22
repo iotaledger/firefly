@@ -8,4 +8,4 @@ export interface BridgeResponse<T> {
   payload?: T;
 }
 
-export type Bridge<T> = (message: BridgeMessage) => Promise<BridgeResponse<T>>
+export type Bridge = (message: BridgeMessage) => Promise<void>
