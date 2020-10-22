@@ -3,6 +3,14 @@ const assert = require('assert')
 const fs = require('fs')
 
 describe('binding', () => {
+  it('gets an event', () => {
+    lib.init()
+    return new Promise(resolve => lib.onError((err, event) => {
+      console.log(err, event)
+      resolve()
+    }))
+  })
+  return
   it('creates an account, backup and restore it', async () => {
     fs.rmdirSync('./example-database', {
       recursive: true

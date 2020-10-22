@@ -1,7 +1,8 @@
 use std::ffi::{CStr, CString};
 use std::os::raw::c_char;
+use std::convert::TryInto;
 
-use wallet_actor_system::{init as init_runtime, send_message as send_actor_message};
+use wallet_actor_system::{init as init_runtime, send_message as send_actor_message, listen as add_event_listener, EventType};
 
 type Callback = extern "C" fn(*const c_char);
 
@@ -27,4 +28,18 @@ pub extern "C" fn send_message(message: *const c_char, callback: Callback) {
     let response = smol::block_on(send_actor_message(message.to_string()));
     let c_response = CString::new(response).expect("failed to convert response to CString");
     callback(c_response.as_ptr());
+}
+
+#[no_mangle]
+pub extern "C" fn listen(event_name: *const c_char, callback: Callback) {
+    let c_event_name = unsafe {
+        assert!(!event_name.is_null());
+        CStr::from_ptr(event_name)
+    };
+    let event_name = c_event_name.to_str().unwrap();
+    let event_type: EventType = event_name.try_into().expect("unknown event name");
+    add_event_listener(event_type, move |event| {
+        let c_event = CString::new(event).expect("failed to convert event response to CString");
+        callback(c_event.as_ptr());
+    });
 }

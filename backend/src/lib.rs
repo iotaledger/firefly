@@ -8,18 +8,36 @@ use iota_wallet_actor::wallet::event::{
 use once_cell::sync::OnceCell;
 use riker::actors::*;
 
+use std::convert::TryFrom;
 use std::path::Path;
 
 static WALLET_ACTOR: OnceCell<ActorRef<WalletMessage>> = OnceCell::new();
 
 #[repr(C)]
 pub enum EventType {
-    Error,
+    ErrorThrown,
     BalanceChange,
     NewTransaction,
     ConfirmationStateChange,
     Reattachment,
     Broadcast,
+}
+
+impl TryFrom<&str> for EventType {
+    type Error = String;
+
+    fn try_from(value: &str) -> Result<Self, Self::Error> {
+        let event_type = match value {
+            "ErrorThrown" => EventType::ErrorThrown,
+            "BalanceChange" => EventType::BalanceChange,
+            "NewTransaction" => EventType::NewTransaction,
+            "ConfirmationStateChange" => EventType::ConfirmationStateChange,
+            "Reattachment" => EventType::Reattachment,
+            "Broadcast" => EventType::Broadcast,
+            _ => return Err(format!("invalid event name {}", value)),
+        };
+        Ok(event_type)
+    }
 }
 
 pub fn init(storage_path: Option<impl AsRef<Path>>) {
@@ -52,7 +70,9 @@ pub async fn send_message(message: String) -> String {
 
 pub fn listen<F: Fn(String) + Send + Sync + 'static>(event_type: EventType, callback: F) {
     match event_type {
-        EventType::Error => on_error(move |error| callback(serde_json::to_string(&error).unwrap())),
+        EventType::ErrorThrown => {
+            on_error(move |error| callback(serde_json::to_string(&error).unwrap()))
+        }
         EventType::BalanceChange => {
             on_balance_change(move |event| callback(serde_json::to_string(&event).unwrap()))
         }

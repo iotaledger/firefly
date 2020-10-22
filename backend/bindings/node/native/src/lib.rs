@@ -4,6 +4,7 @@ use std::sync::{
     mpsc::{Receiver, channel},
     Arc, Mutex,
 };
+use std::convert::TryInto;
 
 struct SendMessageTask {
     message: String,
@@ -52,15 +53,7 @@ declare_types! {
         // Called by the `JsEventEmitter` constructor
         init(mut cx) {
             let event_name = cx.argument::<JsString>(0)?.value();
-            let event_type = match event_name.as_str() {
-                "Error" => EventType::Error,
-                "BalanceChange"=> EventType::BalanceChange,
-                "NewTransaction"=> EventType::NewTransaction,
-                "ConfirmationStateChange"=> EventType::ConfirmationStateChange,
-                "Reattachment"=> EventType::Reattachment,
-                "Broadcast"=> EventType::Broadcast,
-                _ => panic!(format!("invalid event name {}", event_name))
-            };
+            let event_type: EventType = event_name.as_str().try_into().expect("unknown event name");
             let (tx, rx) = channel();
             let wrapped_tx = Arc::new(Mutex::new(tx));
             add_event_listener(event_type, move |event| {

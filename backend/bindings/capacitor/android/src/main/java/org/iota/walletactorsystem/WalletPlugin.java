@@ -36,4 +36,21 @@ public class WalletPlugin extends Plugin {
             call.reject(ex.getMessage() + ex.getStackTrace().toString());
         }
     }
+
+    @PluginMethod
+    public void listen(final PluginCall call) {
+        try {
+            call.save();
+            WalletNative.instance.listen(call.getString("eventName"), new WalletNative.MessageCallback(){
+                @Override
+                public void apply(String response) {
+                    JSObject res = new JSObject();
+                    res.put("data", response);
+                    call.resolve(res);
+                }
+            });
+        } catch (Exception ex) {
+            call.reject(ex.getMessage() + ex.getStackTrace().toString());
+        }
+    }
 }

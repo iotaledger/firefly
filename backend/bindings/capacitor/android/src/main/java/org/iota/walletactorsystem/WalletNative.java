@@ -13,6 +13,7 @@ public interface WalletNative extends Library {
 
     void initialize(String storagePath);
     void send_message(String message, MessageCallback callback);
+    void listen(String eventName, MessageCallback callback);
 
     interface MessageCallback extends Callback {
         void apply(String response);

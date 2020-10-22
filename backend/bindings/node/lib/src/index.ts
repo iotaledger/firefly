@@ -92,26 +92,33 @@ export function internalTransfer(fromAccountId: AccountIdentifier, toAccountId: 
   return _internalTransfer(sendMessage, fromAccountId, toAccountId, amount)
 }
 
+function _poll(emitter: typeof addon.EventEmitter, cb: (error: string, data: any) => void) {
+  emitter.poll((err: string, data: string) => {
+    cb(err, err ? null : JSON.parse(data))
+    _poll(emitter, cb)
+  })
+}
+
 export function onError(cb: events.Callback<events.ErrorEvent>) {
-  events.onError(addon.EventEmitter, cb)
+  _poll(new addon.EventEmitter('ErrorThrown'), cb)
 }
 
 export function onBalanceChange(cb: events.Callback<events.BalanceChangeEvent>) {
-  events.onBalanceChange(addon.EventEmitter, cb)
+  _poll(new addon.EventEmitter('BalanceChange'), cb)
 }
 
 export function onNewTransaction(cb: events.Callback<events.TransactionEvent>) {
-  events.onNewTransaction(addon.EventEmitter, cb)
+  _poll(new addon.EventEmitter('NewTransaction'), cb)
 }
 
 export function onConfirmationStateChange(cb: events.Callback<events.TransactionEvent>) {
-  events.onConfirmationStateChange(addon.EventEmitter, cb)
+  _poll(new addon.EventEmitter('ConfirmationStateChange'), cb)
 }
 
 export function onReattachment(cb: events.Callback<events.TransactionEvent>) {
-  events.onReattachment(addon.EventEmitter, cb)
+  _poll(new addon.EventEmitter('Reattachment'), cb)
 }
 
 export function onBroadcast(cb: events.Callback<events.TransactionEvent>) {
-  events.onBroadcast(addon.EventEmitter, cb)
+  _poll(new addon.EventEmitter('Broadcast'), cb)
 }

@@ -8,8 +8,15 @@ void callback(const char *message) {
   fflush(stdout);
 }
 
+void listener(const char *message) {
+  printf("Listener got: %s\n", message);
+  fflush(stdout);
+}
+
 int main() {
-  initialize();
-  send_message("{ \"cmd\": \"CreateAccount\", \"payload\": { \"id\": \"account_id\", \"clientOptions\": { \"node\": \"https://nodes.devnet.iota.org:443\" } } }", callback);
+  initialize(NULL);
+  listen("ErrorThrown", listener);
+  send_message("{ \"cmd\": \"SetStrongholdPassword\", \"payload\": \"password\" }", callback);
+  send_message("{ \"cmd\": \"CreateAccount\", \"payload\": { \"clientOptions\": { \"node\": \"https://nodes.devnet.iota.org:443\" } } }", callback);
   return 0;
 }
