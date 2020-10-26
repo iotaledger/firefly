@@ -4,9 +4,21 @@ pub use iota_wallet_actor::{
 use riker::actors::*;
 use tokio::{runtime::Runtime, sync::mpsc::unbounded_channel};
 
+use std::path::PathBuf;
+
 pub struct WalletActor {
   wallet_message_handler: WalletMessageHandler,
   runtime: Runtime,
+}
+
+impl ActorFactoryArgs<PathBuf> for WalletActor {
+  fn create_args(storage_path: PathBuf) -> Self {
+    Self {
+      wallet_message_handler: WalletMessageHandler::with_storage_path(storage_path)
+        .expect("failed to initialise account manager"),
+      runtime: Runtime::new().expect("failed to create tokio runtime"),
+    }
+  }
 }
 
 impl Default for WalletActor {

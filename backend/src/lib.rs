@@ -46,12 +46,13 @@ pub fn init<F: Fn(String) + Send + Sync + 'static>(
     storage_path: Option<impl AsRef<Path>>,
 ) {
     println!("Starting runtime");
-    if let Some(path) = storage_path {
-        iota_wallet_actor::wallet::storage::set_storage_path(path)
-            .expect("failed to set storage path");
-    }
     let sys = ActorSystem::new().unwrap();
-    let wallet_actor = sys.actor_of::<WalletActor>("wallet-actor").unwrap();
+    let wallet_actor = match storage_path {
+        Some(path) => sys
+            .actor_of_args::<WalletActor, _>("wallet-actor", path.as_ref().to_path_buf())
+            .unwrap(),
+        None => sys.actor_of::<WalletActor>("wallet-actor").unwrap(),
+    };
     WALLET_ACTOR
         .set(wallet_actor)
         .expect("failed to set wallet actor globally");
