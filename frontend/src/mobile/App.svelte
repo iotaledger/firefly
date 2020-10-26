@@ -40,6 +40,7 @@
     onMount(() => {
         setTimeout(() => {
             splash = false
+
             if (!$logged) {
                 goto('onboarding-1') // dummmy dev only
             } else {
@@ -55,29 +56,10 @@
 </script>
 
 <style global type="text/scss">
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
-    @import '../shared/style/style.scss';
-
-    // dummy toggles
-    .dummy-toggles {
-        position: absolute;
-        right: 5px;
-        top: 5px;
-        z-index: 10;
-        font-size: 12px;
-        display: flex;
-        padding: 5px;
-        background: #8080803d;
-        border-radius: 10px;
-        button {
-            background: var(--button-bg-color);
-            padding: 0 7px;
-            border-radius: 10px;
-            color: var(--button-text-color);
-        }
-    }
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+  @import '../shared/style/style.scss';
 </style>
 
 {#if !$isLocaleLoaded || splash}

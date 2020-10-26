@@ -1,0 +1,15 @@
+[package]
+name = "wallet-actor-system-c-binding"
+version = "0.1.0"
+authors = ["Lucas Nogueira <lucas.nogueira@iota.org>"]
+edition = "2018"
+
+[lib]
+name = "wallet"
+crate-type = ["cdylib", "staticlib"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+wallet-actor-system = { path = "../.." }
+smol = { version = "0.3", features = ["tokio02"] }
