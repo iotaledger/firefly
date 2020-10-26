@@ -45,7 +45,14 @@
     which "^1.3.0"
     xml2js "^0.4.19"
 
-"@capacitor/core@^2.2.1", "@capacitor/core@latest":
+"@capacitor/core@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-2.2.1.tgz#20f07d35c4af3650eed90cbfd0d5c260cbb59ba5"
+  integrity sha512-Qbx+4woY24Ixb74zizaKAJur/gpFDwdZAZbZtXIc5yNhyaD13XLyqwLm5LTI1CKw7Vc7xoENUaWLqNQYtr6v2g==
+  dependencies:
+    tslib "^1.9.0"
+
+"@capacitor/core@latest":
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-2.4.2.tgz#f11d943febad2bb70f042ac87e354e9602250b82"
   integrity sha512-xQyJSZo50+aAvX3ZsX5h2xJDjz1LQxGT0A6/qD1pqJVEUeDhzdfYMbxCPWbmqSONZXddHtwrTiIsjq1Wd+ukuQ==
