@@ -23,9 +23,9 @@
         "@capacitor/core": "^2.2.1",
         "@capacitor/ios": "2.2.1",
         "shared-modules": "link:../shared"
-    },
-    "engineStrict": true,
-    "engines": {
-        "node": "12.x"
+    },	
+    "engineStrict": true,	
+    "engines": {	
+        "node": ">=11.15.0"	
     }
 }
