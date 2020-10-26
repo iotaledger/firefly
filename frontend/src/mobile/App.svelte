@@ -39,7 +39,7 @@
     onMount(() => {
         setTimeout(() => {
             splash = false
-            goto('migrate') // dummmy dev only
+            goto('onboarding-1') // dummmy dev only
         }, 2000)
     })
 
@@ -50,10 +50,10 @@
 </script>
 
 <style global type="text/scss">
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
-    @import '../shared/style/style.scss';
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+  @import '../shared/style/style.scss';
 </style>
 
 {#if !$isLocaleLoaded || splash}
