@@ -55,6 +55,12 @@ export function getAccount(bridge: Bridge, accountId: AccountIdentifier): Promis
   })
 }
 
+export function getAccounts(bridge: Bridge): Promise<void> {
+  return bridge({
+    cmd: 'GetAccounts'
+  })
+}
+
 export function syncAccounts(bridge: Bridge): Promise<void> {
   return bridge({ cmd: 'SyncAccounts' })
 }
@@ -79,7 +85,7 @@ enum AccountMethod {
   GetLatestAddress,
 }
 
-function _callAccountMethod(bridge: Bridge, methodName: AccountMethod, accountId: AccountIdentifier, data = {}) {
+function _callAccountMethod(bridge: Bridge, methodName: AccountMethod, accountId: AccountIdentifier, data = {}): Promise<void> {
   return bridge({
     cmd: 'CallAccountMethod',
     payload: {
@@ -92,26 +98,26 @@ function _callAccountMethod(bridge: Bridge, methodName: AccountMethod, accountId
   })
 }
 
-export function generateAddress(bridge: Bridge, accountId: AccountIdentifier) {
+export function generateAddress(bridge: Bridge, accountId: AccountIdentifier): Promise<void> {
   return _callAccountMethod(bridge, AccountMethod.GenerateAddress, accountId)
 }
 
-export function listMessages(bridge: Bridge, accountId: AccountIdentifier, filters?: ListMessagesFilter) {
+export function listMessages(bridge: Bridge, accountId: AccountIdentifier, filters?: ListMessagesFilter): Promise<void> {
   return _callAccountMethod(bridge, AccountMethod.ListMessages, accountId, filters)
 }
 
-export function listAddresses(bridge: Bridge, accountId: AccountIdentifier, unspent?: boolean) {
+export function listAddresses(bridge: Bridge, accountId: AccountIdentifier, unspent?: boolean): Promise<void> {
   return _callAccountMethod(bridge, AccountMethod.ListAddresses, accountId, { unspent })
 }
 
-export function availableBalance(bridge: Bridge, accountId: AccountIdentifier) {
+export function availableBalance(bridge: Bridge, accountId: AccountIdentifier): Promise<void> {
   return _callAccountMethod(bridge, AccountMethod.GetAvailableBalance, accountId)
 }
 
-export function totalBalance(bridge: Bridge, accountId: AccountIdentifier) {
+export function totalBalance(bridge: Bridge, accountId: AccountIdentifier): Promise<void> {
   return _callAccountMethod(bridge, AccountMethod.GetTotalBalance, accountId)
 }
 
-export function latestAddress(bridge: Bridge, accountId: AccountIdentifier) {
+export function latestAddress(bridge: Bridge, accountId: AccountIdentifier): Promise<void> {
   return _callAccountMethod(bridge, AccountMethod.GetLatestAddress, accountId)
 }

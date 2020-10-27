@@ -6,6 +6,7 @@ import {
   createAccount as _createAccount,
   removeAccount as _removeAccount,
   getAccount as _getAccount,
+  getAccounts as _getAccounts,
   syncAccounts as _syncAccounts,
   internalTransfer as _internalTransfer,
   generateAddress as _generateAddress,
@@ -66,31 +67,35 @@ export function getAccount(accountId: AccountIdentifier): Promise<void> {
   return _getAccount(sendMessage, accountId)
 }
 
+export function getAccounts(): Promise<void> {
+  return _getAccounts(sendMessage)
+}
+
 export function syncAccounts(): Promise<void> {
   return _syncAccounts(sendMessage)
 }
 
-export function generateAddress(accountId: AccountIdentifier) {
+export function generateAddress(accountId: AccountIdentifier): Promise<void> {
   return _generateAddress(sendMessage, accountId)
 }
 
-export function listMessages(accountId: AccountIdentifier, filters?: ListMessagesFilter) {
+export function listMessages(accountId: AccountIdentifier, filters?: ListMessagesFilter): Promise<void> {
   return _listMessages(sendMessage, accountId, filters)
 }
 
-export function listAddresses(accountId: AccountIdentifier, unspent?: boolean) {
+export function listAddresses(accountId: AccountIdentifier, unspent?: boolean): Promise<void> {
   return _listAddresses(sendMessage, accountId, unspent)
 }
 
-export function availableBalance(accountId: AccountIdentifier) {
+export function availableBalance(accountId: AccountIdentifier): Promise<void> {
   return _availableBalance(sendMessage, accountId)
 }
 
-export function totalBalance(accountId: AccountIdentifier) {
+export function totalBalance(accountId: AccountIdentifier): Promise<void> {
   return _totalBalance(sendMessage, accountId)
 }
 
-export function latestAddress(accountId: AccountIdentifier) {
+export function latestAddress(accountId: AccountIdentifier): Promise<void> {
   return _latestAddress(sendMessage, accountId)
 }
 
