@@ -1,4 +1,4 @@
-import { Bridge, BridgeResponse } from './bridge'
+import { Bridge } from './bridge'
 import { AccountIdentifier } from './account'
 
 export interface UnsignedTransaction {
@@ -56,18 +56,6 @@ export interface ListMessageFilter {
 export interface Transfer {
   amount: number
   address: string
-}
-
-export function listMessages(bridge: Bridge, accountId: AccountIdentifier, filter: ListMessageFilter, count: number, from = 0) {
-  return bridge({
-    cmd: 'ListMessages',
-    payload: {
-      accountId,
-      messageType: filter.messageType,
-      count,
-      from
-    }
-  })
 }
 
 export function reattach(bridge: Bridge, accountId: AccountIdentifier, messageId: string) {

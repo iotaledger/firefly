@@ -1,7 +1,15 @@
-import { Bridge, BridgeResponse } from './bridge'
+import { Bridge } from './bridge'
 import { Message } from './message'
 import { Address } from './address'
 import { ClientOptions } from './client'
+
+export enum MessageType { }
+
+export interface ListMessagesFilter {
+  messageType: MessageType,
+  count: number
+  from: number
+}
 
 export interface Account {
   id: number[];
@@ -60,4 +68,50 @@ export function internalTransfer(bridge: Bridge, fromAccountId: AccountIdentifie
       amount
     }
   })
+}
+
+enum AccountMethod {
+  GenerateAddress,
+  ListMessages,
+  ListAddresses,
+  GetAvailableBalance,
+  GetTotalBalance,
+  GetLatestAddress,
+}
+
+function _callAccountMethod(bridge: Bridge, methodName: AccountMethod, accountId: AccountIdentifier, data = {}) {
+  return bridge({
+    cmd: 'CallAccountMethod',
+    payload: {
+      accountId,
+      method: {
+        name: methodName,
+        ...data
+      }
+    }
+  })
+}
+
+export function generateAddress(bridge: Bridge, accountId: AccountIdentifier) {
+  return _callAccountMethod(bridge, AccountMethod.GenerateAddress, accountId)
+}
+
+export function listMessages(bridge: Bridge, accountId: AccountIdentifier, filters?: ListMessagesFilter) {
+  return _callAccountMethod(bridge, AccountMethod.ListMessages, accountId, filters)
+}
+
+export function listAddresses(bridge: Bridge, accountId: AccountIdentifier, unspent?: boolean) {
+  return _callAccountMethod(bridge, AccountMethod.ListAddresses, accountId, { unspent })
+}
+
+export function availableBalance(bridge: Bridge, accountId: AccountIdentifier) {
+  return _callAccountMethod(bridge, AccountMethod.GetAvailableBalance, accountId)
+}
+
+export function totalBalance(bridge: Bridge, accountId: AccountIdentifier) {
+  return _callAccountMethod(bridge, AccountMethod.GetTotalBalance, accountId)
+}
+
+export function latestAddress(bridge: Bridge, accountId: AccountIdentifier) {
+  return _callAccountMethod(bridge, AccountMethod.GetLatestAddress, accountId)
 }

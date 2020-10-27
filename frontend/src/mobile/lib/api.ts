@@ -1,22 +1,22 @@
-import type {
-  BridgeMessage,
-  BridgeResponse
-} from '../../../../backend/api-wrapper/bridge'
+import { BridgeMessage, MessageResponse } from '../../../../backend/api-wrapper/bridge'
 import {
   AccountToCreate,
-  Account,
   AccountIdentifier,
+  ListMessagesFilter,
   createAccount as _createAccount,
   removeAccount as _removeAccount,
   getAccount as _getAccount,
   syncAccounts as _syncAccounts,
-  internalTransfer as _internalTransfer
+  internalTransfer as _internalTransfer,
+  generateAddress as _generateAddress,
+  listMessages as _listMessages,
+  listAddresses as _listAddresses,
+  availableBalance as _availableBalance,
+  totalBalance as _totalBalance,
+  latestAddress as _latestAddress
 } from '../../../../backend/api-wrapper/account'
 import {
-  Message,
-  ListMessageFilter,
   Transfer,
-  listMessages as _listMessages,
   reattach as _reattach
 } from '../../../../backend/api-wrapper/message'
 import {
@@ -41,7 +41,7 @@ function sendMessage(message: BridgeMessage): Promise<void> {
   })
 }
 
-export function onMessage(cb: (payload: any) => void) {
+export function onMessage(cb: (payload: MessageResponse) => void) {
   onMessageListeners.push(cb)
 }
 
@@ -71,8 +71,28 @@ export function syncAccounts(): Promise<void> {
   return _syncAccounts(sendMessage)
 }
 
-export function listMessages(accountId: AccountIdentifier, filter: ListMessageFilter, count: number, from = 0): Promise<void> {
-  return _listMessages(sendMessage, accountId, filter, count, from)
+export function generateAddress(accountId: AccountIdentifier) {
+  return _generateAddress(sendMessage, accountId)
+}
+
+export function listMessages(accountId: AccountIdentifier, filters?: ListMessagesFilter) {
+  return _listMessages(sendMessage, accountId, filters)
+}
+
+export function listAddresses(accountId: AccountIdentifier, unspent?: boolean) {
+  return _listAddresses(sendMessage, accountId, unspent)
+}
+
+export function availableBalance(accountId: AccountIdentifier) {
+  return _availableBalance(sendMessage, accountId)
+}
+
+export function totalBalance(accountId: AccountIdentifier) {
+  return _totalBalance(sendMessage, accountId)
+}
+
+export function latestAddress(accountId: AccountIdentifier) {
+  return _latestAddress(sendMessage, accountId)
 }
 
 export function reattach(accountId: AccountIdentifier, messageId: string): Promise<void> {
