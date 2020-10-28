@@ -155,7 +155,7 @@ dependencies = [
  "futures",
  "log",
  "thiserror",
- "tokio 0.3.1",
+ "tokio 0.3.2",
 ]
 
 [[package]]
@@ -1056,7 +1056,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs#bf5b3d62acba1b9c1dcb05c8401a60f871f2b81d"
+source = "git+https://github.com/iotaledger/wallet.rs#063adfe4f2a9f313593d86609c8641edb41e337e"
 dependencies = [
  "anyhow",
  "bech32",
@@ -1078,7 +1078,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet-actor"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/actors.rs?branch=feat/wallet#8f81a1adacecf816a0f880f9d9552d5a35faf381"
+source = "git+https://github.com/iotaledger/actors.rs?branch=feat/wallet#306387d3fb453f843d72cd2a6f519181919fa4d6"
 dependencies = [
  "anyhow",
  "chronicle-common",
@@ -1556,9 +1556,9 @@ dependencies = [
 
 [[package]]
 name = "proc-macro-hack"
-version = "0.5.18"
+version = "0.5.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "99c605b9a0adc77b7211c6b1f722dcb613d68d66859a44f3d485a6da332b0598"
+checksum = "dbf0c48bc1d91375ae5c3cd81e3722dff1abcf81a30960240640d223f59fe0e5"
 
 [[package]]
 name = "proc-macro-nested"
@@ -2305,9 +2305,9 @@ dependencies = [
 
 [[package]]
 name = "tokio"
-version = "0.3.1"
+version = "0.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1911a203c5c240fd237e23a42e48846475f3d3b1e1dad3f17e6cc17a775b707c"
+checksum = "71f1b20504fd0aa9dab3ae17e8c4dd9431e5e08fd6921689f9745a4004883a17"
 dependencies = [
  "pin-project-lite",
  "slab",
