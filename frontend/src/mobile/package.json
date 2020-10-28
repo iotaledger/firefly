@@ -7,10 +7,12 @@
     "author": "IOTA Foundation <contact@iota.org>",
     "license": "Apache-2.0",
     "scripts": {
-        "build": "NODE_ENV=production rollup --config",
+        "preinstall": "cd ./../shared && yarn && cd ./../mobile",
+        "build": "NODE_ENV=production ./node_modules/.bin/rollup --config",
         "ios": "cap copy && cap open ios",
         "android": "cap copy && cap open android",
-        "dev": "NODE_ENV=development rollup -c -w"
+        "dev": "NODE_ENV=development rollup -c -w",
+        "start": "sirv public"
     },
     "devDependencies": {
         "@capacitor/cli": "^2.2.1",
@@ -22,7 +24,8 @@
         "@capacitor/android": "2.2.1",
         "@capacitor/core": "^2.2.1",
         "@capacitor/ios": "2.2.1",
-        "shared-modules": "link:../shared"
+        "shared-modules": "link:../shared",
+        "sirv-cli": "^1.0.6"
     },
     "engineStrict": true,
     "engines": {
