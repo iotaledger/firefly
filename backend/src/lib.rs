@@ -67,7 +67,9 @@ pub async fn send_message(message: String) {
     if let Some(actor) = WALLET_ACTOR.get() {
         match dispatch(actor, message.clone()).await {
             Ok(response) => {
-                callback(response.unwrap_or("{}".to_string()));
+                if let Some(response) = response {
+                    callback(response);
+                }
             }
             Err(e) => {
                 callback(format!(r#"{{ "type": "error", "payload": "{}" }}"#, e));

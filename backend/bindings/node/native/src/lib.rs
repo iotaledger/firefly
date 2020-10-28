@@ -1,10 +1,13 @@
 use neon::prelude::*;
-use wallet_actor_system::{init as init_runtime, send_message as send_actor_message, listen as add_event_listener, EventType};
+use std::convert::TryInto;
 use std::sync::{
-    mpsc::{Receiver, channel},
+    mpsc::{channel, Receiver},
     Arc, Mutex,
 };
-use std::convert::TryInto;
+use wallet_actor_system::{
+    init as init_runtime, listen as add_event_listener, send_message as send_actor_message,
+    EventType,
+};
 
 struct SendMessageTask {
     message: String,
@@ -37,12 +40,22 @@ impl Task for ReceiveMessageTask {
     type JsEvent = JsString;
 
     fn perform(&self) -> Result<Self::Output, Self::Error> {
-        let rx = self.0.lock().map_err(|_| "Could not obtain lock on receiver".to_string())?;
+        let rx = self
+            .0
+            .lock()
+            .map_err(|_| "Could not obtain lock on receiver".to_string())?;
         rx.recv().map_err(|e| e.to_string())
     }
 
-    fn complete(self, mut cx: TaskContext, result: Result<Self::Output, Self::Error>) -> JsResult<Self::JsEvent> {
-        Ok(cx.string(result.expect("channel closed")))
+    fn complete(
+        self,
+        mut cx: TaskContext,
+        result: Result<Self::Output, Self::Error>,
+    ) -> JsResult<Self::JsEvent> {
+        match result {
+            Ok(s) => Ok(cx.string(s)),
+            Err(e) => cx.throw_error(format!("ReceiveTask error: {}", e))
+        }
     }
 }
 
@@ -66,6 +79,7 @@ declare_types! {
             };
             let (tx, rx) = channel();
             let wrapped_tx = Arc::new(Mutex::new(tx));
+
             init_runtime(move |event| {
                 let tx = wrapped_tx.lock().unwrap();
                 let _ = tx.send(event);
@@ -97,11 +111,6 @@ declare_types! {
     }
 }
 
-fn init(mut cx: FunctionContext) -> JsResult<JsUndefined> {
-    
-    Ok(cx.undefined())
-}
-
 fn listen(mut cx: FunctionContext) -> JsResult<JsUndefined> {
     let event_name = cx.argument::<JsString>(0)?.value();
     let event_type: EventType = event_name.as_str().try_into().expect("unknown event name");
@@ -120,7 +129,6 @@ fn send_message(mut cx: FunctionContext) -> JsResult<JsUndefined> {
 }
 
 register_module!(mut cx, {
-    cx.export_function("init", init)?;
     cx.export_function("sendMessage", send_message)?;
     cx.export_function("listen", listen)?;
     // Expose the `JsActorSystem` class as `ActorSystem`.
