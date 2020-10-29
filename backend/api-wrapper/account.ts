@@ -91,7 +91,7 @@ function _callAccountMethod(bridge: Bridge, methodName: AccountMethod, accountId
     payload: {
       accountId,
       method: {
-        name: methodName,
+        name: AccountMethod[methodName],
         ...data
       }
     }
