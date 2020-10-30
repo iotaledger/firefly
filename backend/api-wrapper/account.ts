@@ -85,7 +85,7 @@ enum AccountMethod {
   GetLatestAddress,
 }
 
-function _callAccountMethod(bridge: Bridge, methodName: AccountMethod, accountId: AccountIdentifier, data = {}): Promise<void> {
+function _callAccountMethod(bridge: Bridge, methodName: AccountMethod, accountId: AccountIdentifier, data: any = void 0): Promise<void> {
   return bridge({
     cmd: 'CallAccountMethod',
     payload: {
