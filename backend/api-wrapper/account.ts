@@ -92,7 +92,7 @@ function _callAccountMethod(bridge: Bridge, methodName: AccountMethod, accountId
       accountId,
       method: {
         name: AccountMethod[methodName],
-        ...data
+        data
       }
     }
   })
