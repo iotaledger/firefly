@@ -27,7 +27,7 @@
 </script>
 
 {#if selected}
-    <img class={classes} width={width || '100%'} height={height || '100%'} src={`../assets/illustrations/${selected}`} alt="" />
+    <img class={classes} width={width || '100%'} height={height || '100%'} src={`assets/illustrations/${selected}`} alt="" />
 {:else}
     <div class={`${classes}`} width={width || '100%'} height={height || '100%'} />
 {/if}

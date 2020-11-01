@@ -1,4 +1,4 @@
-import { readable } from 'svelte/store'
+import {readable, writable} from 'svelte/store'
 import { notification } from '@shared-lib/app'
 
 /**
@@ -19,5 +19,10 @@ const path = readable<string>(null, (set) => {
         window.removeEventListener('hashchange', updatePath)
     }
 })
+
+/**
+ * Current view
+ */
+export const view = writable<string>('')
 
 export default path
