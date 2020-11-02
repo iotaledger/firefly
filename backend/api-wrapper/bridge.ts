@@ -9,7 +9,7 @@ export interface BridgeMessage {
   payload?: any;
 }
 
-export type Response<T, P> = { id: number, type: T, payload?: P }
+export type Response<T, P> = { id: number, action: string, type: T, payload?: P }
 export type RemovedAccountResponse = Response<'RemovedAccount', AccountIdentifier>
 export type CreatedAccountResponse = Response<'CreatedAccount', Account>
 export type ReadAccountResponse = Response<'ReadAccount', Account>
