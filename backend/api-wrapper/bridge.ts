@@ -4,11 +4,12 @@ import { AccountIdentifier, Account, SyncedAccount } from './account'
 import { Message } from './message'
 
 export interface BridgeMessage {
+  id?: number;
   cmd: string;
   payload?: any;
 }
 
-export type Response<T, P> = { type: T, payload?: T }
+export type Response<T, P> = { id: number, type: T, payload?: P }
 export type RemovedAccountResponse = Response<'RemovedAccount', AccountIdentifier>
 export type CreatedAccountResponse = Response<'CreatedAccount', Account>
 export type ReadAccountResponse = Response<'ReadAccount', Account>
@@ -25,7 +26,7 @@ export type BackupSuccessfulResponse = Response<'BackupSuccessful', void>
 export type BackupRestoredResponse = Response<'BackupRestored', void>
 export type SetStrongholdPasswordResponse = Response<'StrongholdPasswordSet', void>
 export type SentTransferResponse = Response<'SentTransfer', Message>
-export type ErrorResponse = Response<'Error', string>
+export type ErrorResponse = Response<'Error', ErrorEvent>
 
 export type MessageResponse = RemovedAccountResponse |
   CreatedAccountResponse |
@@ -47,4 +48,4 @@ export type MessageResponse = RemovedAccountResponse |
   // events
   ErrorEvent | TransactionEvent | BalanceChangeEvent
 
-export type Bridge = (message: BridgeMessage) => Promise<void>
+export type Bridge = (message: BridgeMessage) => Promise<number>

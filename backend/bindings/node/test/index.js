@@ -28,6 +28,7 @@ describe('binding', () => {
       switch (index++) {
         case 0: {
           assert.deepStrictEqual(message, {
+            id: message.id,
             type: 'StrongholdPasswordSet'
           })
           lib.createAccount({
@@ -39,6 +40,7 @@ describe('binding', () => {
         }
         case 1: {
           assert.deepStrictEqual(message, {
+            id: message.id,
             type: 'CreatedAccount',
             payload: message.payload
           })
@@ -47,6 +49,7 @@ describe('binding', () => {
         }
         case 2: {
           assert.deepStrictEqual(message, {
+            id: message.id,
             type: 'BackupSuccessful'
           })
           fs.unlinkSync('./example-database/snapshot')
@@ -55,6 +58,7 @@ describe('binding', () => {
         }
         case 3: {
           assert.deepStrictEqual(message, {
+            id: message.id,
             type: 'StrongholdPasswordSet'
           })
           lib.restoreBackup('./backup')
@@ -62,6 +66,7 @@ describe('binding', () => {
         }
         case 4: {
           assert.deepStrictEqual(message, {
+            id: message.id,
             type: 'BackupRestored'
           })
           resolve()
