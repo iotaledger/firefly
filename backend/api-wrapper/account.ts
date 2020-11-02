@@ -103,7 +103,7 @@ export function generateAddress(bridge: Bridge, accountId: AccountIdentifier): P
 }
 
 export function listMessages(bridge: Bridge, accountId: AccountIdentifier, filters?: ListMessagesFilter): Promise<number> {
-  return _callAccountMethod(bridge, AccountMethod.ListMessages, accountId, filters)
+  return _callAccountMethod(bridge, AccountMethod.ListMessages, accountId, filters || {})
 }
 
 export function listAddresses(bridge: Bridge, accountId: AccountIdentifier, unspent?: boolean): Promise<number> {
