@@ -11,6 +11,12 @@ export interface ListMessagesFilter {
   from: number
 }
 
+export interface SyncAccountOptions {
+  addressIndex?: number;
+  gapLimit?: number;
+  skipPersistance?: boolean
+}
+
 export interface Account {
   id: number[];
   mnemonic: string;
@@ -83,6 +89,7 @@ enum AccountMethod {
   GetAvailableBalance,
   GetTotalBalance,
   GetLatestAddress,
+  SyncAccount,
 }
 
 function _callAccountMethod(bridge: Bridge, methodName: AccountMethod, accountId: AccountIdentifier, data: any = void 0): Promise<number> {
@@ -120,4 +127,8 @@ export function totalBalance(bridge: Bridge, accountId: AccountIdentifier): Prom
 
 export function latestAddress(bridge: Bridge, accountId: AccountIdentifier): Promise<number> {
   return _callAccountMethod(bridge, AccountMethod.GetLatestAddress, accountId)
+}
+
+export function syncAccount(bridge: Bridge, accountId: AccountIdentifier, options?: SyncAccountOptions): Promise<number> {
+  return _callAccountMethod(bridge, AccountMethod.SyncAccount, accountId, options || {})
 }

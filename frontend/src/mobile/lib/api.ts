@@ -3,6 +3,7 @@ import {
   AccountToCreate,
   AccountIdentifier,
   ListMessagesFilter,
+  SyncAccountOptions,
   createAccount as _createAccount,
   removeAccount as _removeAccount,
   getAccount as _getAccount,
@@ -14,7 +15,8 @@ import {
   listAddresses as _listAddresses,
   availableBalance as _availableBalance,
   totalBalance as _totalBalance,
-  latestAddress as _latestAddress
+  latestAddress as _latestAddress,
+  syncAccount as _syncAccount
 } from '../../../../backend/api-wrapper/account'
 import {
   Transfer,
@@ -103,6 +105,10 @@ export function totalBalance(accountId: AccountIdentifier): Promise<number> {
 
 export function latestAddress(accountId: AccountIdentifier): Promise<number> {
   return _latestAddress(sendMessage, accountId)
+}
+
+export function syncAccount(accountId: AccountIdentifier, options?: SyncAccountOptions): Promise<number> {
+  return _syncAccount(sendMessage, accountId, options)
 }
 
 export function reattach(accountId: AccountIdentifier, messageId: string): Promise<number> {
