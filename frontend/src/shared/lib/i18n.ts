@@ -6,8 +6,7 @@ import { getLocaleFromNavigator, addMessages, dictionary, _, init } from 'svelte
  * Code following https://phrase.com/blog/posts/a-step-by-step-guide-to-svelte-localization-with-svelte-i18n-v3/
  */
 
-// Locales directory  
-const MESSAGE_FILE_URL_TEMPLATE = '../locales/{locale}.json'
+const MESSAGE_FILE_URL_TEMPLATE = 'locales/{locale}.json'
 
 // Locales our app supports
 const locales = {

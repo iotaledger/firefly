@@ -1,6 +1,6 @@
 import { readable, writable, get } from 'svelte/store'
 import { notification, walletPin, strongholdPassword, mnemonic } from '@shared-lib/app'
-import { goto } from '@shared-lib/helpers'
+import { goto, setRoute } from '@shared-lib/helpers'
 import { generateRecoveryPhrase } from '@shared-lib/utils'
 
 /**
@@ -20,6 +20,11 @@ export const path = readable<AppRoute>(null, (set) => {
         window.removeEventListener('hashchange', updatePath)
     }
 })
+
+/*
+* Current view
+*/
+export const view = writable<string>('')
 
 /**
  * Application Routes
@@ -61,12 +66,12 @@ let walletSetupType = writable<SetupType>(null)
  * Navigate to initial route
  */
 export const initRouter = () => {
-    goto(AppRoute.Import)
+    setRoute(AppRoute.Import)
     // let userLogged: boolean = get(logged)
     // if (userLogged) {
-    //     goto(AppRoute.Dashboard)
+    //     setRoute(AppRoute.Dashboard)
     // } else {
-    //     goto(AppRoute.Welcome)
+    //     setRoute(AppRoute.Welcome)
     // }
 }
 
@@ -150,7 +155,7 @@ export const routerNext = (event) => {
             _history.push(currentRoute)
             return _history
         })
-        goto(nextRoute)
+        setRoute(nextRoute)
     }
     else {
         console.error('Routing Error: Could not find next route')

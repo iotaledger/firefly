@@ -1,34 +1,33 @@
 {
-    "name": "mobile-wallet",
-    "version": "1.0.0",
-    "description": "IOTA wallet mobile",
-    "main": "main.js",
-    "repository": "git@github.com:iotaledger/new-wallet.git",
-    "author": "IOTA Foundation <contact@iota.org>",
-    "license": "Apache-2.0",
-    "scripts": {
-        "preinstall": "cd ./../shared && yarn && cd ./../mobile",
-        "build": "NODE_ENV=production ./node_modules/.bin/rollup --config",
-        "ios": "cap copy && cap open ios",
-        "android": "cap copy && cap open android",
-        "dev": "NODE_ENV=development rollup -c -w",
-        "start": "sirv public"
-    },
-    "devDependencies": {
-        "@capacitor/cli": "^2.2.1",
-        "@rollup/plugin-alias": "^3.1.1",
-        "@rollup/plugin-typescript": "^6.0.0",
-        "rollup-plugin-svelte": "^6.0.1"
-    },
-    "dependencies": {
-        "@capacitor/android": "2.2.1",
-        "@capacitor/core": "^2.2.1",
-        "@capacitor/ios": "2.2.1",
-        "shared-modules": "link:../shared",
-        "sirv-cli": "^1.0.6"
-    },
-    "engineStrict": true,
-    "engines": {
-        "node": "12.x"
-    }
+  "name": "mobile-wallet",
+  "version": "1.0.0",
+  "description": "IOTA wallet mobile",
+  "main": "main.js",
+  "repository": "git@github.com:iotaledger/new-wallet.git",
+  "author": "IOTA Foundation <contact@iota.org>",
+  "license": "Apache-2.0",
+  "scripts": {
+    "preinstall": "cd ./../shared && yarn && cd ./../mobile",
+    "build": "NODE_ENV=production rollup --config",
+    "ios": "cap copy && cap open ios",
+    "android": "cap copy && cap open android",
+    "dev": "NODE_ENV=development rollup -c -w"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^2.2.1",
+    "@rollup/plugin-alias": "^3.1.1",
+    "@rollup/plugin-typescript": "^6.0.0",
+    "rollup-plugin-svelte": "^6.0.1"
+  },
+  "dependencies": {
+    "@capacitor/android": "2.2.1",
+    "@capacitor/core": "^2.2.1",
+    "@capacitor/ios": "2.2.1",
+    "shared-modules": "link:../shared",
+    "wallet-actor-system-capacitor-binding": "link:../../../backend/bindings/capacitor"
+  },
+  "engineStrict": true,
+  "engines": {
+    "node": ">=11.15.0"
+  }
 }

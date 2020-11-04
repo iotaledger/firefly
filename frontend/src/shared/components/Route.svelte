@@ -1,6 +1,6 @@
 <script>
     import { fly, scale } from 'svelte/transition'
-    import { path } from '@shared-lib/router'
+    import { view } from '@shared-lib/router'
 
     export let route = null
     export let primary = true
@@ -23,7 +23,7 @@
     }
 </style>
 
-{#if $path === route}
+{#if $view === route}
     {#if primary}
         <div class:transparent transition:scale={{ duration: 380, start: 0.95, oapcity: 0.9 }}>
             <slot />
