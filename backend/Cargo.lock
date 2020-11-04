@@ -26,18 +26,18 @@ dependencies = [
 
 [[package]]
 name = "aho-corasick"
-version = "0.7.14"
+version = "0.7.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b476ce7103678b0c6d3d395dbbae31d48ff910bd28be979ba5d48c6351131d0d"
+checksum = "7404febffaa47dac81aa44dba71523c9d069b1bdc50a77db41195149e17f68e5"
 dependencies = [
  "memchr",
 ]
 
 [[package]]
 name = "anyhow"
-version = "1.0.33"
+version = "1.0.34"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a1fd36ffbb1fb7c834eac128ea8d0e310c5aeb635548f9d58861e1308d46e71c"
+checksum = "bf8dcb5b4bbaa28653b647d8c77bd4ed40183b48882e130c1f1ffb73de069fd7"
 
 [[package]]
 name = "arc-swap"
@@ -124,7 +124,7 @@ checksum = "cdcf67bb7ba7797a081cd19009948ab533af7c355d5caf1d08c777582d351e9c"
 [[package]]
 name = "bee-common"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#a9da28d27c34309aeee6f7c5affff3ea16679b8f"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#7ed4077d3ad843d3c0020763e4281edf24e9046d"
 dependencies = [
  "chrono",
  "fern",
@@ -137,7 +137,7 @@ dependencies = [
 [[package]]
 name = "bee-common-derive"
 version = "0.1.1-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#a9da28d27c34309aeee6f7c5affff3ea16679b8f"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#7ed4077d3ad843d3c0020763e4281edf24e9046d"
 dependencies = [
  "quote 1.0.7",
  "syn 1.0.48",
@@ -155,13 +155,13 @@ dependencies = [
  "futures",
  "log",
  "thiserror",
- "tokio 0.3.2",
+ "tokio 0.3.3",
 ]
 
 [[package]]
 name = "bee-crypto"
 version = "0.2.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#a9da28d27c34309aeee6f7c5affff3ea16679b8f"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#7ed4077d3ad843d3c0020763e4281edf24e9046d"
 dependencies = [
  "bee-ternary",
  "byteorder",
@@ -187,7 +187,7 @@ dependencies = [
 [[package]]
 name = "bee-signing"
 version = "0.1.1-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#a9da28d27c34309aeee6f7c5affff3ea16679b8f"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#7ed4077d3ad843d3c0020763e4281edf24e9046d"
 dependencies = [
  "bee-common-derive",
  "bee-crypto",
@@ -227,7 +227,7 @@ dependencies = [
 [[package]]
 name = "bee-ternary"
 version = "0.3.2-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#a9da28d27c34309aeee6f7c5affff3ea16679b8f"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#7ed4077d3ad843d3c0020763e4281edf24e9046d"
 dependencies = [
  "num-traits 0.2.14",
  "serde 1.0.117",
@@ -251,9 +251,9 @@ checksum = "cf1de2fe8c75bc145a2f577add951f8134889b4795d47466a54a5c846d691693"
 
 [[package]]
 name = "blake2b_simd"
-version = "0.5.10"
+version = "0.5.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d8fb2d74254a3a0b5cac33ac9f8ed0e44aa50378d9dbb2e5d83bd21ed1dc2c8a"
+checksum = "afa748e348ad3be8263be728124b24a24f268266f6f5d58af9d75f6a40b5c587"
 dependencies = [
  "arrayref",
  "arrayvec",
@@ -592,7 +592,7 @@ dependencies = [
  "rand 0.7.3",
  "serde 1.0.117",
  "serde_bytes",
- "sha2 0.9.1",
+ "sha2 0.9.2",
  "zeroize",
 ]
 
@@ -934,9 +934,9 @@ checksum = "494b4d60369511e7dea41cf646832512a94e542f68bb9c49e54518e0f468eb47"
 
 [[package]]
 name = "hyper"
-version = "0.13.8"
+version = "0.13.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2f3afcfae8af5ad0576a31e768415edb627824129e8e5a29b8bfccb2f234e835"
+checksum = "f6ad767baac13b44d4529fcf58ba2cd0995e36e7b435bc5b039de6f47e880dbf"
 dependencies = [
  "bytes",
  "futures-channel",
@@ -948,7 +948,7 @@ dependencies = [
  "httparse",
  "httpdate",
  "itoa",
- "pin-project 0.4.27",
+ "pin-project 1.0.1",
  "socket2",
  "tokio 0.2.22",
  "tower-service",
@@ -1056,7 +1056,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs#7564adabcfacc19d81cb2d321bcb2b04d69e0c9b"
+source = "git+https://github.com/iotaledger/wallet.rs#252b76f0dd35744f845681c06b6a3705b304c4a2"
 dependencies = [
  "anyhow",
  "bech32",
@@ -1078,7 +1078,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet-actor"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/actors.rs?branch=feat/wallet#122d8cc5c5cfe124b3e69134cf2702db38eaeded"
+source = "git+https://github.com/iotaledger/actors.rs?branch=feat/wallet#da987671fe16d6712e7a9602b3b67fa5547a404b"
 dependencies = [
  "anyhow",
  "backtrace",
@@ -2014,12 +2014,12 @@ dependencies = [
 
 [[package]]
 name = "sha2"
-version = "0.9.1"
+version = "0.9.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2933378ddfeda7ea26f48c555bdad8bb446bf8a3d17832dc83e380d444cfb8c1"
+checksum = "6e7aab86fe2149bad8c507606bdb3f4ef5e7b2380eb92350f56122cca72a42a8"
 dependencies = [
  "block-buffer 0.9.0",
- "cfg-if 0.1.10",
+ "cfg-if 1.0.0",
  "cpuid-bool",
  "digest 0.9.0",
  "opaque-debug 0.3.0",
@@ -2066,7 +2066,7 @@ checksum = "00606a5ef176f987d1d4c8dd59b5e8554d5ff27749730d58d656c7741d96a2a8"
 dependencies = [
  "ed25519-dalek",
  "hmac 0.9.0",
- "sha2 0.9.1",
+ "sha2 0.9.2",
 ]
 
 [[package]]
@@ -2211,18 +2211,18 @@ dependencies = [
 
 [[package]]
 name = "thiserror"
-version = "1.0.21"
+version = "1.0.22"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "318234ffa22e0920fe9a40d7b8369b5f649d490980cf7aadcf1eb91594869b42"
+checksum = "0e9ae34b84616eedaaf1e9dd6026dbe00dcafa92aa0c8077cb69df1fcfe5e53e"
 dependencies = [
  "thiserror-impl",
 ]
 
 [[package]]
 name = "thiserror-impl"
-version = "1.0.21"
+version = "1.0.22"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cae2447b6282786c3493999f40a9be2a6ad20cb8bd268b0a0dbf5a065535c0ab"
+checksum = "9ba20f23e85b10754cd195504aebf6a27e2e6cbe28c17778a0c930724628dd56"
 dependencies = [
  "proc-macro2 1.0.24",
  "quote 1.0.7",
@@ -2306,10 +2306,11 @@ dependencies = [
 
 [[package]]
 name = "tokio"
-version = "0.3.2"
+version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "71f1b20504fd0aa9dab3ae17e8c4dd9431e5e08fd6921689f9745a4004883a17"
+checksum = "e5ca08accbcb46f11fd8d2d1c6158c348b7888009a1f39260bcad66f6a454250"
 dependencies = [
+ "autocfg",
  "pin-project-lite",
  "slab",
 ]
