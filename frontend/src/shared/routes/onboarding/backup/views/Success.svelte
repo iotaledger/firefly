@@ -1,20 +1,16 @@
 <script>
-    import { generateRecoveryPhrase } from '@shared-lib/utils'
+    import { createEventDispatcher } from 'svelte'
     import { legacySeed } from '@shared-lib/app'
     import { OnboardingLayout, RecoveryPhrase, Text, Button, Icon } from '@shared-components'
 
     export let locale
     export let mobile
-    export let goto
+    export let mnemonic
 
-    let recoveryPhrase = generateRecoveryPhrase().split(' ')
+    const dispatch = createEventDispatcher()
 
-    function handleClick() {
-        if ($legacySeed) {
-            goto('migrate')
-        } else {
-            goto('congratulations')
-        }
+    function handleContinueClick() {
+        dispatch('next')
     }
 </script>
 
@@ -36,10 +32,10 @@
             </div>
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-end items-center">
-            <Button onClick={() => handleClick()}>{locale('actions.continue')}</Button>
+            <Button onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex items-center justify-center p-16">
-            <RecoveryPhrase {recoveryPhrase} />
+            <RecoveryPhrase recoveryPhrase={mnemonic} />
         </div>
     </OnboardingLayout>
 {/if}

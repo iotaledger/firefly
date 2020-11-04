@@ -1,12 +1,16 @@
 <script>
-    import { generateRecoveryPhrase } from '@shared-lib/utils'
+    import { createEventDispatcher } from 'svelte'
     import { OnboardingLayout, RecoveryPhrase, Text, Button } from '@shared-components'
 
     export let locale
     export let mobile
-    export let goto
+    export let mnemonic
 
-    let recoveryPhrase = generateRecoveryPhrase().split(' ')
+    const dispatch = createEventDispatcher()
+
+    function handleContinueClick(options) {
+        dispatch('next', { options })
+    }
 </script>
 
 {#if mobile}
@@ -19,11 +23,13 @@
             <Text type="p" secondary highlighted classes="font-bold">{locale('views.recovery-phrase.body_2')}</Text>
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-between items-center">
-            <Button ghost onClick={() => goto('backup-recovery-phrase')}>{locale('actions.save_backup')}</Button>
-            <Button onClick={() => goto('verify-recovery-phrase')}>{locale('actions.continue')}</Button>
+            <Button ghost onClick={() => handleContinueClick('backup')}>{locale('actions.save_backup_file')}</Button>
+            <Button onClick={() => handleContinueClick('verify')}>{locale('actions.ive_written_recovery_phrase')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex items-center justify-center p-16">
-            <RecoveryPhrase {recoveryPhrase} />
+            {#if mnemonic !== undefined && mnemonic !== null}
+                <RecoveryPhrase recoveryPhrase={mnemonic} />
+            {/if}
         </div>
     </OnboardingLayout>
 {/if}

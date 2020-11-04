@@ -1,69 +1,102 @@
-import { get, derived, writable } from 'svelte/store'
-import { _, date, init, locale, number, dictionary, addMessages, getLocaleFromNavigator } from 'svelte-i18n'
+import { get, derived, writable } from "svelte/store";
+import { locale } from '@shared-lib/app';
+import { getLocaleFromNavigator, addMessages, dictionary, _, init } from 'svelte-i18n';
 
-const locales = {
-    en: 'English'
-}
+/*
+ * Code following https://phrase.com/blog/posts/a-step-by-step-guide-to-svelte-localization-with-svelte-i18n-v3/
+ */
 
-const fallbackLocale = 'en'
-
-export { locales, fallbackLocale }
-
+// Locales directory  
 const MESSAGE_FILE_URL_TEMPLATE = '../locales/{locale}.json'
 
-let _activeLocale: any
+// Locales our app supports
+const locales = {
+    en: "English",
+};
 
-const isDownloading = writable(false)
+// Init options: eg locale to show when we don't support the
+// requested locale
+const INIT_OPTIONS = {
+    fallbackLocale: 'en',
+    initialLocale: null,
+    loadingDelay: 200,
+    formats: {},
+    warnOnMissingMessages: true,
+};
 
-function setupI18n(options: any = {}) {
-    const locale_ = supported(options.withLocale || language(getLocaleFromNavigator()))
+let _activeLocale;
 
-    init({ initialLocale: locale_ } as any)
+// Internal store for tracking network
+// loading state
+const isDownloading = writable(false);
 
-    if (!hasLoadedLocale(locale_)) {
-        isDownloading.set(true)
+const setupI18n = (options = { withLocale: null }) => {
 
-        const messagesFileUrl = MESSAGE_FILE_URL_TEMPLATE.replace('{locale}', locale_)
+    // If we're given an explicit locale, we use
+    // it. Otherwise, we attempt to auto-detect
+    // the user's locale.
+    const _locale = supported(
+        options.withLocale ||
+        get(locale) ||
+        language(getLocaleFromNavigator()),
+    );
 
+    init({ ...INIT_OPTIONS, initialLocale: _locale } as any);
+
+    // Don't re-download translation files
+    if (!hasLoadedLocale(_locale)) {
+        const messagesFileUrl =
+            MESSAGE_FILE_URL_TEMPLATE.replace(
+                "{locale}",
+                _locale,
+            );
+        // Download translation file for given locale/language
         return loadJson(messagesFileUrl).then((messages) => {
-            _activeLocale = locale_
-
-            addMessages(locale_, messages)
-
-            locale.set(locale_)
-
-            isDownloading.set(false)
-        })
+            _activeLocale = _locale;
+            addMessages(_locale, messages);
+            locale.set(_locale);
+            isDownloading.set(false);
+        });
     }
 }
 
 const isLocaleLoaded = derived(
     [isDownloading, dictionary],
     ([$isDownloading, $dictionary]) =>
-        !$isDownloading && $dictionary[_activeLocale] && Object.keys($dictionary[_activeLocale]).length > 0
-)
+        !$isDownloading &&
+        $dictionary[_activeLocale] &&
+        Object.keys($dictionary[_activeLocale]).length > 0,
+);
 
-const dir = derived(locale, ($locale) => ($locale === 'ar' ? 'rtl' : 'ltr'))
-
-function loadJson(url: any) {
-    return fetch(url).then(
-        (response) => response.json())
+const hasLoadedLocale = (locale: string) => {
+    // If the svelte-i18n dictionary has an entry for the
+    // locale, then the locale has already been added
+    return get(dictionary)[locale];
 }
 
-function hasLoadedLocale(locale: any) {
-    return get(dictionary)[locale]
+// Extract the "en" bit from fully qualified
+// locales, like "en-US"
+function language(locale) {
+    return locale.replace("_", "-").split("-")[0];
 }
 
-function language(locale: any) {
-    return locale.replace('_', '-').split('-')[0]
-}
-
-function supported(locale: any) {
+// Check to see if the given locale is supported
+// by our app. If it isn't, return our app's 
+// configured fallback locale.
+function supported(locale) {
     if (Object.keys(locales).includes(locale)) {
-        return locale
+        return locale;
     } else {
-        return fallbackLocale
+        return INIT_OPTIONS.fallbackLocale;
     }
 }
 
-export { _, setupI18n, isLocaleLoaded, locale, dir, date, number }
+function loadJson(url) {
+    return fetch(url).then((response) => response.json());
+}
+
+const dir = derived(locale, $locale => $locale === 'ar' ? 'rtl' : 'ltr');
+
+// We expose the svelte-i18n _ store so that our app has
+// a single API for i18n
+export { _, setupI18n, dir, isLocaleLoaded };

@@ -81,27 +81,18 @@
         },
         "import": {
             "title": "Import a wallet",
-            "body": "If you have an existing seed or wallet back up, you can import it here.",
-            "action_1": "I have an 81 character IOTA seed",
-            "action_2": "I have a secret recovery phrase"
+            "body": "If you have an existing seed or wallet back up, you can import it here."
         },
-        "import_from_seed": {
-            "title": "Type your seed",
-            "body_1": "A seed consists of 81 characters. This is used to support the older Trinity wallet.",
-            "body_2": "Seedvault is a digital encrypted file version of your seed which can also be used to restore your wallet."
+        "import_from_text": {
+            "title": "You have successfully recovered your backup",
+            "body_1": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+            "body_2": "A secret phrase is a 24 word mnemonic. This is used to recover a newer FireFly wallet.",
+            "body_3": "Enter your seed or secret phrase"
         },
-        "import_from_seedvault": {
-            "title": "Import SeedVault",
-            "body": "Enter your password to open your SeedVault"
-        },
-        "import_from_recovery_phrase": {
-            "title": "Sign in with a recovery phrase",
-            "body": "This is your 24 word phrase you were given when you created your previous wallet.",
-            "success": "Recovery phrase is correct, you can now continue"
-        },
-        "import_from_recovery_phrase_file": {
-            "title": "Import recovery phrase from a file",
-            "body": "Provide your wallet and Stronghold password. This is the password created when you first created your original wallet backup. This allows secure import of your recovery phrase."
+        "import_success": {
+            "title": "You have successfully recovered your backup",
+            "body_1": "Your secret phrase is correct, you can now set up your new wallet",
+            "body_2": "Your password is correct, you can now continue"
         },
         "migrate": {
             "title": "Transfer your funds",
@@ -128,7 +119,8 @@
         "use_biometric": "Use biometric security",
         "setup_pin": "Set up PIN code",
         "set_pin": "Set PIN code",
-        "save_backup": "Save Backup",
+        "save_backup_file": "Save backup file",
+        "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
         "import_seedvault": "Import SeedVault",
         "check_again": "No, Check Again",
         "import_from_file": "Import from a file",
@@ -159,6 +151,10 @@
         "receive_funds": "Receive funds",
         "share_address": "Share an address",
         "your_address": "Your address",
-        "generate_new_address": "Generate new address"
+        "generate_new_address": "Generate new address",
+        "have_text_backup": "I have a text backup",
+        "have_file_backup": "I have a file backup",
+        "enter_seed_or_phrase": "Enter an IOTA seed or secret phrase",
+        "upload_seedvault_or_stronghold": "Upload a Seedvault or Stronghold file"
     }
 }

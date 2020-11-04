@@ -1,8 +1,14 @@
 <script>
+    import { createEventDispatcher } from 'svelte'
     import { OnboardingLayout, Illustration, Text, Button } from '@shared-components'
     export let locale
     export let mobile
-    export let goto
+
+    const dispatch = createEventDispatcher()
+
+    function handleContinueClick() {
+        dispatch('next')
+    }
 </script>
 
 {#if mobile}
@@ -16,7 +22,7 @@
             <Text type="p" secondary highlighted classes="mb-8 font-bold">{locale('views.backup.body_3')}</Text>
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-end items-center">
-            <Button onClick={() => goto('recovery-phrase')}>{locale('actions.continue')}</Button>
+            <Button onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex p-16">
             <Illustration width="100%" illustration="backup-desktop" />

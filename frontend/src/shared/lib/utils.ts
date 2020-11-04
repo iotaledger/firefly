@@ -19,7 +19,7 @@ export function bindEvents(element, events) {
 /**
  * Generate BIP39 Mnemonic Recovery Phrase
  */
-export const generateRecoveryPhrase = () => generateMnemonic(256)
+export const generateRecoveryPhrase = () => generateMnemonic(256).split(' ')
 
 /**
  * Validate seed format

@@ -1,17 +1,21 @@
 <script>
     import zxcvbn from 'zxcvbn'
+    import { createEventDispatcher } from 'svelte'
     import { OnboardingLayout, Password, Illustration, Text, Button } from '@shared-components'
     export let locale
     export let mobile
-    export let goto
 
     let password = ''
-    let confirmPassword
-    let valid = false
+    let confirmedPassword = ''
+
+    const dispatch = createEventDispatcher()
 
     $: strength = zxcvbn(password).score
-    $: passwordMatch = password === confirmPassword
-    $: valid = strength === 4 && passwordMatch
+    $: valid = strength === 4 && password === confirmedPassword
+
+    function handleContinueClick() {
+        dispatch('next', { password })
+    }
 </script>
 
 {#if mobile}
@@ -29,10 +33,10 @@
                 showStrengthLevel
                 {strength}
                 {locale} />
-            <Password bind:value={confirmPassword} confirmType {locale} />
+            <Password bind:value={confirmedPassword} {locale} placeholder={locale('general.confirm_password')} />
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-end items-center">
-            <Button disabled={!valid} onClick={() => goto('protect')}>{locale('actions.save_password')}</Button>
+            <Button disabled={!valid} onClick={() => handleContinueClick()}>{locale('actions.save_password')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex p-16">
             <Illustration width="100%" illustration="password-desktop" />

@@ -5,12 +5,9 @@
     export let recoveryPhrase
     export let shuffle = false
     export let classes
-    export let valid = false
+    export let recoveryPhraseInput = new Array()
 
     let visibleRecoveryPhrase
-    let recoveryPhraseInput = new Array()
-
-    $: valid = recoveryPhrase.length === recoveryPhraseInput.length // dummy
 
     onMount(() => {
         visibleRecoveryPhrase = shuffle ? shuffleArray(recoveryPhrase) : recoveryPhrase

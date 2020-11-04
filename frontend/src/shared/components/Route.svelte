@@ -1,6 +1,6 @@
 <script>
     import { fly, scale } from 'svelte/transition'
-    import path from '@shared-lib/router'
+    import { path } from '@shared-lib/router'
 
     export let route = null
     export let primary = true
