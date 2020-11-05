@@ -1,9 +1,15 @@
 mod actors;
 use actors::{dispatch, WalletActor, WalletMessage};
 
-use iota_wallet_actor::wallet::event::{
-    on_balance_change, on_broadcast, on_confirmation_state_change, on_error, on_new_transaction,
-    on_reattachment,
+use iota_wallet_actor::{
+    wallet::{
+        event::{
+            on_balance_change, on_broadcast, on_confirmation_state_change, on_error,
+            on_new_transaction, on_reattachment,
+        },
+        WalletError,
+    },
+    ResponseType,
 };
 use once_cell::sync::OnceCell;
 use riker::actors::*;
@@ -72,11 +78,16 @@ pub async fn send_message(message: String) {
                 }
             }
             Err(e) => {
-                callback(format!(r#"{{ "type": "error", "payload": "{}" }}"#, e));
+                callback(e);
             }
         }
     } else {
-        callback(r#""{ "type": "error", "payload": "runtime not initialized; call `init` before sending messages" }""#.to_string());
+        callback(
+            serde_json::to_string(&ResponseType::Error(WalletError::UnknownError(
+                "runtime not initialized; send a `init` message before using the actor".to_string(),
+            )))
+            .unwrap(),
+        );
     }
 }
 
