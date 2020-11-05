@@ -1,9 +1,5 @@
-const { init, sendMessage } = require('wallet-actor-system-nodejs-binding')
+const binding = require('wallet-actor-system-nodejs-binding')
 
-init()
+binding.init()
 
-window.__WALLET__ = {
-  sendMessage(message) {
-    return sendMessage(JSON.stringify(message))
-  }
-}
+window.__WALLET__ = binding
