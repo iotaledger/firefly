@@ -1,0 +1,133 @@
+<script>
+    import { bindEvents } from '@shared-lib/utils'
+    import { Icon } from '@shared-components'
+    export let events = {}
+
+    export let onClick = () => ''
+    export let secondary = false
+    export let disabled = false
+    export let active = false
+    export let ghost = false
+    export let icon = null
+    export let classes = null
+</script>
+
+<style type="text/scss">
+    button {
+        border-radius: 16px;
+        padding: 15px 12px;
+        cursor: pointer;
+        background-color: var(--button-bg-color);
+        min-width: 160px;
+        span {
+            font-weight: 700;
+            font-size: 12px;
+            line-height: 140%;
+            color: var(--button-text-color);
+        }
+        &.ghost {
+            border: 1px solid var(--button-border-color);
+            background-color: transparent;
+            span {
+                font-weight: 500;
+                color: var(--button-bg-color);
+            }
+        }
+        &.icon {
+            padding: 28px 22px;
+            text-align: left;
+
+            span {
+                margin-left: 38px;
+                margin-right: 28px;
+            }
+
+            :global(svg) {
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+            }
+            :global(svg.right) {
+                position: absolute;
+                left: inherit;
+                right: 0;
+                transform: translateY(-50%);
+            }
+            :global(svg path) {
+                fill: var(--button-icon-color);
+            }
+            :global(svg path.stroke:not(.fixedstroke)) {
+                fill: none;
+                stroke: var(--button-icon-color);
+            }
+            &.active {
+                :global(svg path) {
+                    fill: var(--button-active-icon-color);
+                }
+                :global(svg path.stroke:not(.fixedstroke)) {
+                    fill: none;
+                    stroke: var(--button-active-icon-color);
+                }
+            }
+        }
+        &.secondary {
+            background-color: var(--button-secondary-bg-color);
+            span {
+                color: var(--button-secondary-text-color);
+            }
+            &.icon {
+                padding: 28px 22px;
+                :global(svg path) {
+                    fill: var(--button-secondary-icon-color);
+                }
+                :global(svg path.stroke:not(.fixedstroke)) {
+                    fill: none;
+                    stroke: var(--button-secondary-icon-color);
+                }
+                &.active {
+                    background-color: var(--button-secondary-active-bg-color);
+                    span {
+                        color: var(--button-secondary-active-text-color);
+                    }
+                    :global(svg path) {
+                        fill: var(--button-secondary-active-icon-color);
+                    }
+                    :global(svg path.stroke:not(.fixedstroke)) {
+                        fill: none;
+                        stroke: var(--button-secondary-active-icon-color);
+                    }
+                }
+            }
+        }
+        &.disabled {
+            pointer-events: none !important;
+            background-color: var(--button-disabled-bg-color) !important;
+            span {
+                color: var(--button-disabled-text-color) !important;
+            }
+        }
+    }
+</style>
+
+<button
+    class={classes}
+    use:bindEvents={events}
+    on:click={onClick}
+    class:secondary
+    class:disabled
+    class:icon
+    class:ghost
+    class:active>
+    {#if icon}
+        <div class="relative flex flex-row justify-between">
+            <div class="relative flex items-center flex-1">
+                <Icon classes="mr-4" {icon} />
+                <span><slot /></span>
+            </div>
+            <Icon icon="arrow-right" classes="right" />
+        </div>
+    {:else}
+        <span><slot /></span>
+    {/if}
+</button>

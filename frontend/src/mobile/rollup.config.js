@@ -1,15 +1,18 @@
 import svelte from 'rollup-plugin-svelte'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
+import ts from '@rollup/plugin-typescript'
 import alias from '@rollup/plugin-alias'
-import sucrase from '@rollup/plugin-sucrase'
+import typescript from 'typescript'
 import json from '@rollup/plugin-json'
 import livereload from 'rollup-plugin-livereload'
 import serve from 'rollup-plugin-serve'
-import {
-    terser
-} from 'rollup-plugin-terser'
+import { terser } from 'rollup-plugin-terser'
 import sveltePreprocess from 'svelte-preprocess'
+
+import builtins from 'rollup-plugin-node-builtins'
+import globals from 'rollup-plugin-node-globals'
+
 const path = require('path')
 
 const isDev = process.env.NODE_ENV === 'development'
@@ -20,7 +23,8 @@ const projectRootDir = path.resolve(__dirname)
 const plugins = [
     alias({
         resolve: ['', '.js', '.svelte', '.css', '.scss'],
-        entries: [{
+        entries: [
+            {
                 find: /^@shared-lib\/(.*)/,
                 replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/lib/out') + '/$1'
             },
@@ -50,24 +54,17 @@ const plugins = [
             css.write('bundle.css')
         },
         preprocess: sveltePreprocess({
-            postcss: true,
-            scss: {
-                postcss: {
-                    plugins: [require('autoprefixer')]
-                },
-                prependData: `@import 'shared-modules/style/style.scss';`
-            }
+            postcss: true
         })
     }),
     resolve({
         browser: true,
         dedupe: ['svelte']
     }),
-    sucrase({
-        exclude: ['node_modules'],
-        transforms: ['typescript']
-    }),
-    commonjs()
+    ts({ sourceMap: isDev, typescript }),
+    commonjs(),
+    globals(),
+    builtins()
 ]
 
 if (isDev) {
@@ -77,12 +74,10 @@ if (isDev) {
             historyApiFallback: true, // for SPAs
             port
         }),
-        livereload({
-            watch: './public'
-        })
+        livereload({ watch: './public' })
     )
 } else {
-    plugins.push(terser())
+    plugins.push(terser({ sourcemap: isDev }))
 }
 
 module.exports = {

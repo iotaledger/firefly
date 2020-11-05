@@ -1,61 +1,141 @@
-<script>
-  import {
-    init,
-    onMessage,
-    createAccount,
-    setStrongholdPassword,
-    backup,
-    restoreBackup
-  } from "./lib/api";
-  import { Plugins, FilesystemDirectory } from "@capacitor/core";
-  const { Filesystem } = Plugins;
+<script lang="typescript">
+    import { onMount } from 'svelte'
+    import { setupI18n, isLocaleLoaded, dir, _ } from '@shared-lib/i18n'
+    import { darkMode, mobile, logged } from '@shared-lib/app'
+    import { goto } from '@shared-lib/helpers'
+    import { Route, Toggle } from '@shared-components'
+    import {
+        Splash,
+        Onboarding1,
+        Legal,
+        Setup,
+        Password,
+        Protect,
+        Pin,
+        ConfirmPin,
+        Backup,
+        RecoveryPhrase,
+        VerifyRecoveryPhrase,
+        BackupRecoveryPhrase,
+        RecoveryPhraseSaved,
+        Congratulations,
+        Import,
+        ImportFromSeed,
+        ImportFromSeedVault,
+        ImportFromSecurityPhrase,
+        ImportFromSecurityPhraseFile,
+        Migrate,
+        Balance,
+        Dashboard,
+    } from '@shared-routes'
 
-  init();
-  onMessage(message => console.log("got message: ", message));
+    let splash = true
 
-  async function test() {
-    await setStrongholdPassword("password");
-    await createAccount({
-      clientOptions: {
-        node: "https://nodes.devnet.iota.org:443"
-      }
-    });
-    await backup("/data/data/com.iota.wallet/cache/backup");
-    await Filesystem.deleteFile({
-      path: "./database/snapshot",
-      directory: FilesystemDirectory.Cache
-    });
-    await setStrongholdPassword("password"); // since we removed the snapshot, reload stronghold
-    await restoreBackup("/data/data/com.iota.wallet/cache/backup");
-    return "ok";
-  }
-  test()
-    .then(console.log)
-    .catch(console.error);
+    $: $darkMode ? document.body.classList.add('dark') : document.body.classList.remove('dark')
+    $: if (document.dir !== $dir) {
+        document.dir = $dir
+    }
+
+    setupI18n()
+    onMount(() => {
+        setTimeout(() => {
+            splash = false
+
+            if (!$logged) {
+                goto('onboarding-1') // dummmy dev only
+            } else {
+                goto('dashboard') // dummmy dev only
+            }
+        }, 2000)
+    })
+
+    // DEV ONLY
+    mobile.set(false)
+    // darkMode.set(false)
+    goto('') // dummmy goto homepage
 </script>
 
-<style>
-  main {
-    text-align: center;
-    padding: 1em;
-    max-width: 240px;
-    margin: 0 auto;
-  }
-
-  h1 {
-    color: #000000;
-    text-transform: uppercase;
-    font-size: 4em;
-    font-weight: 100;
-  }
-
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
-    }
-  }
+<style global type="text/scss">
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+  @import '../shared/style/style.scss';
 </style>
 
-<main>
-  <h1>Mobile wallet!</h1>
-</main>
+{#if !$isLocaleLoaded || splash}
+    <Route route="">
+        <Splash />
+    </Route>
+{:else}
+    <!-- dummy toggles -->
+    <div class="dummy-toggles flex flex-row">
+        <div class="mr-4">
+            <Toggle on={darkMode} />
+        </div>
+        <button on:click={() => logged.update(() => false)}> reset </button>
+    </div>
+    <!--  -->
+    <Route route="onboarding-1">
+        <Onboarding1 mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="legal">
+        <Legal mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="setup">
+        <Setup mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="password">
+        <Password mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="protect">
+        <Protect mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="pin">
+        <Pin mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="confirm-pin">
+        <ConfirmPin mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="backup">
+        <Backup mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="recovery-phrase">
+        <RecoveryPhrase mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="verify-recovery-phrase">
+        <VerifyRecoveryPhrase mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="backup-recovery-phrase">
+        <BackupRecoveryPhrase mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="recovery-phrase-saved">
+        <RecoveryPhraseSaved mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="congratulations">
+        <Congratulations mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="import">
+        <Import mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="import-from-seed">
+        <ImportFromSeed mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="import-from-seedvault">
+        <ImportFromSeedVault mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="import-from-security-phrase">
+        <ImportFromSecurityPhrase mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="import-from-security-phrase-file">
+        <ImportFromSecurityPhraseFile mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="migrate">
+        <Migrate mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="balance">
+        <Balance mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route="dashboard">
+        <Dashboard mobile={$mobile} locale={$_} {goto} />
+    </Route>
+{/if}

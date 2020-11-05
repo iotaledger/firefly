@@ -1,0 +1,93 @@
+/*
+ * Branding Colors
+ */
+:root {
+    --blue-ff-color: #309cff;
+    --yellow-ff-color: #ffca62;
+    --turquoise-ff-color: #17e1d5;
+    --blue-light-ff-color: #8fe6fa;
+    --blue-medium-ff-color: #4daaff;
+    --orange-ff-color: #ff8b5c;
+    --red-ff-color: #ff6755;
+    --purple-ff-color: #666af7;
+    --pink-ff-color: #ef75d4;
+    --green-ff-color: #61e884;
+}
+/*
+ * Theme definition: Light
+ * Default
+ */
+:root {
+    // UI
+    --line-separator-color: #eef4ff;
+    --bg-grey-color: #f6f9ff;
+    --element-disabled-color: #e1eaf9;
+    --ui-blue-color: #108cff;
+    --element-bg-color: #ffffff;
+    // App
+    --app-bg-color: #f6f9ff;
+    // Typography
+    --text-primary-color: #25395f;
+    --text-secondary-color: #9aadce;
+    --text-disabled-color: #c9d6ec;
+    --text-highlighted-color: var(--blue-ff-color);
+    --text-error-color: var(--red-ff-color);
+    // Button
+    --button-text-color: #ffffff;
+    --button-border-color: var(--ui-blue-color);
+    --button-bg-color: var(--ui-blue-color);
+    --button-border-color: var(--ui-blue-color);
+    --button-disabled-bg-color: #e1eaf9;
+    --button-disabled-border-color: #c9d6ec;
+    --button-icon-color: #ffffff;
+    --button-active-icon-color: #ffffff;
+    --button-secondary-text-color: #1f212c;
+    --button-secondary-bg-color: #ffffff;
+    --button-secondary-icon-color: var(--ui-blue-color);
+    --button-secondary-active-text-color: #ffffff;
+    --button-secondary-active-bg-color: var(--ui-blue-color);
+    --button-secondary-active-icon-color: #ffffff;
+    --button-disabled-bg-color: #e1eaf9;
+    --button-disabled-text-color: #8391aa;
+    // Link
+    --link-text-color: var(--ui-blue-color);
+}
+
+/*
+ * Theme definition: Dark
+ */
+:global(body.dark) {
+    // UI
+    --line-separator-color: #333e5c;
+    --bg-grey-color: #22293e;
+    --element-disabled-color: #54698d;
+    --ui-blue-color: #108cff;
+    --element-bg-color: #2c3659;
+    // App
+    --app-bg-color: #22293e;
+    // Typography
+    --text-primary-color: #ffffff;
+    --text-secondary-color: #9aadce;
+    --text-disabled-color: #54698d;
+    --text-highlighted-color: var(--blue-ff-color);
+    --text-error-color: var(--red-ff-color);
+    // Button
+    --button-text-color: #ffffff;
+    --button-border-color: var(--ui-blue-color);
+    --button-bg-color: var(--ui-blue-color);
+    --button-border-color: var(--ui-blue-color);
+    --button-disabled-bg-color: #e1eaf9;
+    --button-disabled-border-color: #54698d;
+    --button-icon-color: #ffffff;
+    --button-active-icon-color: #ffffff;
+    --button-secondary-text-color: #1f212c;
+    --button-secondary-bg-color: #ffffff;
+    --button-secondary-icon-color: var(--ui-blue-color);
+    --button-secondary-active-text-color: #ffffff;
+    --button-secondary-active-bg-color: var(--ui-blue-color);
+    --button-secondary-active-icon-color: #ffffff;
+    --button-disabled-bg-color: #e1eaf9;
+    --button-disabled-text-color: #8391aa;
+    // Link
+    --link-text-color: var(--ui-blue-color);
+}
