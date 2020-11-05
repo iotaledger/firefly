@@ -95,7 +95,7 @@ Otherwise, your feature may not be approved at all.
 
 ### Building a new feature
 
-To build a new feature, check out a new branch based on the `master` branch, and be sure to document any public-facing APIs, using Rust code comments.
+To build a new feature, check out a new branch based on the `master` branch, and be sure to document any public-facing APIs.
 </details>
 
 <br>
@@ -135,36 +135,30 @@ If you're interested in joining, chat to us in the #experience channel on [Disco
 
 This section guides you through submitting a pull request (PR). Following these guidelines helps give your PR the best chance of being approved and merged.
 
-### Before submitting a pull request
+### Commit message guidelines
 
-Before submitting a pull request, please follow these steps to have your contribution considered by the maintainers:
+We use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/), so commit messages are consistent.
 
-- A pull request should have exactly one concern (for example one feature or one bug). If a PR addresses more than one concern, it should be split into two or more PRs.
+Commit messages and branch names should follow a consistent structure (we use [Conventional Commits](https://guides.github.com/introduction/flow/index.html)).
 
-- A pull request can be merged only if it references an open issue
-
-    **Note:** You don't need to open an issue for minor changes such as typos, but you can if you want.
-
-- All public interfaces should have descriptive documentation, including an
-example that compiles and passes [documentation tests](https://doc.rust-lang.org/rustdoc/documentation-tests.html)
-
-- All instances of `unsafe` should have a comment that explains why its use was unavoidable
-
-- All code should be well tested, using unit tests and integration tests
-
-- Code must compile and pass our [continuous integration tests](.github/workflows)
-
-- To be compatible with the guidelines of the Eclipse foundation, all code must be licensed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0). This license must be referenced in every crate of the workspace (add [`./LICENSE`] to the crate's top level directory). For Rust crates, every `Cargo.toml` must contain the line `license = "Apache-2.0"`.
+1. `fix:` a commit of the type fix patches a bug in the codebase.
+2. `feat:` a commit of the type feat introduces a new feature to the codebase.
+3. types other than fix: and feat: are allowed, `chore:`, `ci:`, `style:`, `refactor:`, `perf:`, `test:`, and others.
+4. branch names should follow a similar pattern e.g. `feat/new-feature`, `chore/update-docs` etc.
 
 ### Submitting a pull request
 
-The following is a typical workflow for submitting a new pull request:
+We use [Github Flow](https://guides.github.com/introduction/flow/index.html), so all code changes happen through pull requests. 
 
-1. Fork this repository
-2. Create a new branch based on your fork. For example, `git checkout -b fix/my-fix` or ` git checkout -b feat/my-feature`.
-3. Run the `rustfmt` command to make sure your code is well formatted
-4. Commit changes and push them to your fork
-5. Target your pull request to be merged with `master`
+Pull requests are the best way to propose changes to the codebase (we use [Github Flow](https://guides.github.com/introduction/flow/index.html)). When creating a pull request, please follow these steps:
+
+1. Fork the repo and create your branch from `master`.
+2. If you've added code that should be tested, add tests.
+3. Ensure the test suite passes.
+4. Make sure your code lints.
+5. Issue your pull request
+    * All code should follow the [code styleguide](/docs/dev/styleguide.md).
+    * A pull request should have exactly one concern (i.e. one feature or one bug). A PR that addresses more than one concern should be split into multiple PRs.
 
 If all [status checks](https://help.github.com/articles/about-status-checks/) pass, and the maintainer approves the PR, it will be merged.
 
