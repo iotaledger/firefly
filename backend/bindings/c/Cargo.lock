@@ -1176,7 +1176,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs#252b76f0dd35744f845681c06b6a3705b304c4a2"
+source = "git+https://github.com/iotaledger/wallet.rs#4bc980050ddab222807cc1ebc7d5ad163d976053"
 dependencies = [
  "anyhow",
  "bech32",
@@ -1198,7 +1198,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet-actor"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/actors.rs?branch=feat/wallet#da987671fe16d6712e7a9602b3b67fa5547a404b"
+source = "git+https://github.com/iotaledger/actors.rs?branch=feat/wallet#ada8ebac582ac23a92a05b08f1013d2eaba423f7"
 dependencies = [
  "anyhow",
  "backtrace",
