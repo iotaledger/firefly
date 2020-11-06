@@ -89,6 +89,15 @@
             "body_2": "A secret phrase is a 24 word mnemonic. This is used to recover a newer FireFly wallet.",
             "body_3": "Enter your seed or secret phrase"
         },
+        "import_from_file": {
+            "title": "Restore your wallet using a backup file",
+            "body": "Upload a file to restore existing wallet funds. File backups can be either a Trinity SeedVault or a Firefly Stronghold."
+        },
+        "import_backup_password": {
+            "title": "Restore your wallet using a backup file",
+            "body_1": "Please provide your backup password.",
+            "body_2": "This is the password created when you first created your backup. This stops unauthorised access to your funds."
+        },
         "import_success": {
             "title": "You have successfully recovered your backup",
             "body_1": "Your secret phrase is correct, you can now set up your new wallet",
@@ -128,7 +137,11 @@
         "receive": "Receive",
         "begin_transfer": "Begin Transfer",
         "try_again": "Try again",
-        "visit_discord": "Visit Discord"
+        "visit_discord": "Visit Discord",
+        "drag_drop": "Drag & Drop",
+        "import_extentions": ".kdbx or .stronghold file",
+        "choose_file": "Choose a File",
+        "drop_here": "Drop your file here"
     },
     "general": {
         "password": "Password",
@@ -155,6 +168,7 @@
         "have_text_backup": "I have a text backup",
         "have_file_backup": "I have a file backup",
         "enter_seed_or_phrase": "Enter an IOTA seed or secret phrase",
-        "upload_seedvault_or_stronghold": "Upload a Seedvault or Stronghold file"
+        "upload_seedvault_or_stronghold": "Upload a Seedvault or Stronghold file",
+        "import": "Import {type}"
     }
 }

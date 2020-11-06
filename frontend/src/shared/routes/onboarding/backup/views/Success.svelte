@@ -1,6 +1,5 @@
 <script>
     import { createEventDispatcher } from 'svelte'
-    import { legacySeed } from '@shared-lib/app'
     import { OnboardingLayout, RecoveryPhrase, Text, Button, Icon } from '@shared-components'
 
     export let locale

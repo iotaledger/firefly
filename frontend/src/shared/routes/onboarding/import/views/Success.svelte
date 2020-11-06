@@ -1,11 +1,10 @@
 <script>
     import { createEventDispatcher } from 'svelte'
-    import { legacySeed } from '@shared-lib/app'
-    import { OnboardingLayout, RecoveryPhrase, Text, Button, Icon } from '@shared-components'
+    import { OnboardingLayout, Text, Button, Icon } from '@shared-components'
 
     export let locale
     export let mobile
-    export let type
+    export let importType
 
     const dispatch = createEventDispatcher()
 
@@ -28,7 +27,7 @@
             <Text type="h1" classes="mb-5">{locale('views.import_success.title')}</Text>
             <div class="flex flex-row items-center">
                 <Icon icon="checkmark" classes="checkmark mr-2" />
-                <Text type="p" secondary>{locale(`views.import_success.body_${type === 'mnemonic' ? '1' : '2'}`)}</Text>
+                <Text type="p" secondary>{locale(`views.import_success.body_${importType === 'mnemonic' ? '1' : '2'}`)}</Text>
             </div>
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-end items-center">

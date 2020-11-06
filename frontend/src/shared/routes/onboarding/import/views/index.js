@@ -1,3 +1,5 @@
 export { default as Import } from './Import.svelte'
 export { default as TextImport } from './TextImport.svelte'
+export { default as FileImport } from './FileImport.svelte'
+export { default as BackupPassword } from './BackupPassword.svelte'
 export { default as Success } from './Success.svelte'

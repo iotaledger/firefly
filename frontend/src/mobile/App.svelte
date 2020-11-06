@@ -14,6 +14,7 @@
         Protect,
         Backup,
         Import,
+        Balance,
         Migrate,
         Congratulations,
         Dashboard,
@@ -30,7 +31,6 @@
     setupI18n()
     onMount(() => {
         setTimeout(() => {
-            logged.set(false) // DEV only
             splash = false
             initRouter()
         }, 2000)
@@ -42,6 +42,25 @@
     @tailwind components;
     @tailwind utilities;
     @import '../shared/style/style.scss';
+
+    // dummy toggles
+    .dummy-toggles {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        z-index: 10;
+        font-size: 12px;
+        display: flex;
+        padding: 5px;
+        background: #8080803d;
+        border-radius: 10px;
+        button {
+            background: var(--button-bg-color);
+            padding: 0 7px;
+            border-radius: 10px;
+            color: var(--button-text-color);
+        }
+    }
 </style>
 
 {#if !$isLocaleLoaded || splash}
@@ -65,7 +84,7 @@
         <Setup on:next={routerNext} mobile={$mobile} locale={$_} />
     </Route>
     <Route route="password">
-        <Password on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
+        <Password on:next={routerNext} mobile={$mobile} locale={$_} />
     </Route>
     <Route route="protect">
         <Protect on:next={routerNext} mobile={$mobile} locale={$_} />
@@ -74,13 +93,16 @@
         <Backup on:next={routerNext} on:requestMnemonic={requestMnemonic} mobile={$mobile} locale={$_} />
     </Route>
     <Route route="import">
-        <Import mobile={$mobile} locale={$_} {goto} />
+        <Import on:next={routerNext} mobile={$mobile} locale={$_} />
+    </Route>
+    <Route route="balance">
+        <Balance on:next={routerNext} mobile={$mobile} locale={$_} />
     </Route>
     <Route route="migrate">
-        <Migrate mobile={$mobile} locale={$_} {goto} />
+        <Migrate on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
     </Route>
     <Route route="congratulations">
-        <Congratulations mobile={$mobile} locale={$_} {goto} />
+        <Congratulations on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
     </Route>
     <Route route="dashboard">
         <Dashboard mobile={$mobile} locale={$_} {goto} />

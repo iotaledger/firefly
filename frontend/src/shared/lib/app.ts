@@ -39,14 +39,4 @@ export const locale = persistent<string>('locale', null)
 /**
  * Dummy
  */
-export const loading = writable<boolean>(false)
-
-/**
- * Dummy
- */
-export const legacySeed = writable<boolean>(false)
-
-/**
- * Dummy
- */
 export const logged = persistent<boolean>('logged', false)

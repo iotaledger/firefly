@@ -1,11 +1,15 @@
 <script>
+    import { createEventDispatcher } from 'svelte'
     import { OnboardingLayout, Illustration, Text, Button } from '@shared-components'
-    import { legacySeed } from '@shared-lib/app'
+
     export let locale
     export let mobile
-    export let goto
 
-    legacySeed.set(true)
+    const dispatch = createEventDispatcher()
+
+    function handleContinueClick() {
+        dispatch('next')
+    }
 </script>
 
 {#if mobile}
@@ -25,7 +29,7 @@
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-between items-center">
             <Button ghost onClick={() => console.log('foo')}>{locale('actions.check_again')}</Button>
-            <Button onClick={() => goto('protect')}>{locale('actions.continue')}</Button>
+            <Button onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex p-16">
             <Illustration width="100%" illustration="balance-desktop" />

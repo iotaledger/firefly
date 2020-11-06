@@ -1,15 +1,18 @@
 <script>
+    import { createEventDispatcher } from 'svelte'
     import { OnboardingLayout, Illustration, Text, Button } from '@shared-components'
+
     export let locale
     export let mobile
-    export let goto
 
     let loading = false
 
-    function handleClick() {
+    const dispatch = createEventDispatcher()
+
+    function handleContinue() {
         loading = true
         setTimeout(() => {
-            goto('congratulations')
+            dispatch('next')
         }, 10000)
     }
 </script>
@@ -42,7 +45,7 @@
             </div>
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-end items-center">
-            <Button disabled={loading} onClick={() => handleClick()}>{locale('actions.begin_transfer')}</Button>
+            <Button disabled={loading} onClick={() => handleContinue()}>{locale('actions.begin_transfer')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex p-16">
             <Illustration width="100%" illustration="migrate-desktop" />

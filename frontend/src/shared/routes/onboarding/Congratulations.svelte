@@ -1,13 +1,14 @@
 <script>
+    import { createEventDispatcher } from 'svelte'
     import { OnboardingLayout, Illustration, Text, Button } from '@shared-components'
-    import { logged } from '@shared-lib/app'
+
     export let locale
     export let mobile
-    export let goto
+
+    const dispatch = createEventDispatcher()
 
     const finishOnboarding = () => {
-        logged.update(() => true)
-        goto('dashboard')
+        dispatch('next')
     }
 </script>
 

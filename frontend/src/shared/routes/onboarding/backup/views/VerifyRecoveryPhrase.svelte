@@ -11,7 +11,7 @@
 
     const dispatch = createEventDispatcher()
 
-    function handleClick() {
+    function handleContinue() {
         dispatch('next')
     }
 </script>
@@ -25,7 +25,7 @@
             <Text type="p" secondary classes="mb-4">{locale('views.verify-recovery-phrase.body')}</Text>
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-end items-center">
-            <Button disabled={!valid} onClick={() => handleClick()}>{locale('actions.continue')}</Button>
+            <Button disabled={!valid} onClick={() => handleContinue()}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex items-center justify-center p-16">
             <RecoveryPhrase recoveryPhrase={mnemonic} bind:recoveryPhraseInput shuffle />

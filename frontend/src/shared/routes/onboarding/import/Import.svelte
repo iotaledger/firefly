@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
-    import { Import, TextImport, Success } from './views/'
+    import { Import, TextImport, FileImport, BackupPassword, Success } from './views/'
 
     export let locale
     export let mobile
@@ -9,15 +9,17 @@
         Init = 'init',
         TextImport = 'textImport',
         FileImport = 'fileImport',
+        BackupPassword = 'backupPassword',
         Success = 'Success',
     }
 
     const dispatch = createEventDispatcher()
 
     let importType
+    let importFile
 
     // let state: ImportState = ImportState.Init
-    let state: ImportState = ImportState.Init
+    let state: ImportState = ImportState.FileImport
 
     const _next = (event) => {
         let params = event.detail || {}
@@ -41,6 +43,20 @@
                     dispatch('next', { importType })
                 }
                 break
+            case ImportState.FileImport:
+                const strongholdRegex = /\.(stronghold)$/i
+                const seedvaultRegex = /\.(kdbx)$/i
+                const { file, fileName } = params
+                importFile = file
+                if (seedvaultRegex.test(fileName)) {
+                    importType = 'seedvault'
+                } else if (strongholdRegex.test(fileName)) {
+                    importType = 'stronghold'
+                }
+                state = ImportState.BackupPassword
+                break
+            case ImportState.BackupPassword:
+                state = ImportState.Success
             case ImportState.Success:
                 dispatch('next', { importType })
                 break
@@ -52,6 +68,10 @@
     <Import on:next={_next} {locale} {mobile} />
 {:else if state === ImportState.TextImport}
     <TextImport on:next={_next} {locale} {mobile} />
+{:else if state === ImportState.FileImport}
+    <FileImport on:next={_next} {locale} {mobile} />
+{:else if state === ImportState.BackupPassword}
+    <BackupPassword on:next={_next} {importType} {locale} {mobile} />
 {:else if state === ImportState.Success}
-    <Success type={importType} on:next={_next} {locale} {mobile} />
+    <Success on:next={_next} {importType} {locale} {mobile} />
 {/if}

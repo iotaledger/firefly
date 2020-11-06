@@ -6,8 +6,6 @@
     export let mobile
     export let strongholdPassword
 
-    $: console.log('strongholdPassword: ', strongholdPassword)
-
     let confirmPassword
 
     const dispatch = createEventDispatcher()

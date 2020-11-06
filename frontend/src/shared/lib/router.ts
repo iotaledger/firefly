@@ -1,15 +1,15 @@
-import { readable, writable, get } from 'svelte/store'
-import { notification, walletPin, strongholdPassword, mnemonic } from '@shared-lib/app'
-import { goto, setRoute } from '@shared-lib/helpers'
+import { readable, writable, get, derived } from 'svelte/store'
+import { logged, notification, walletPin, strongholdPassword, mnemonic } from '@shared-lib/app'
+import { setRoute } from '@shared-lib/helpers'
 import { generateRecoveryPhrase } from '@shared-lib/utils'
 
 /**
  * Application path based on location hash
  */
-export const path = readable<AppRoute>(null, (set) => {
+export const path = readable<string>(null, (set) => {
     const updatePath = (): void => {
         const pathName = window.location.hash.substr(1)
-        set(pathName as AppRoute)
+        set(pathName)
         notification.set(null)
     }
 
@@ -24,7 +24,7 @@ export const path = readable<AppRoute>(null, (set) => {
 /*
 * Current view
 */
-export const view = writable<string>('')
+export const view = writable<string>(null)
 
 /**
  * Application Routes
@@ -55,7 +55,7 @@ enum SetupType {
 /**
  * Application route history
  */
-const history = writable<Array<AppRoute>>([])
+const history = writable<Array<string>>([])
 
 /**
  * Onboarding/setup type
@@ -66,13 +66,12 @@ let walletSetupType = writable<SetupType>(null)
  * Navigate to initial route
  */
 export const initRouter = () => {
-    setRoute(AppRoute.Import)
-    // let userLogged: boolean = get(logged)
-    // if (userLogged) {
-    //     setRoute(AppRoute.Dashboard)
-    // } else {
-    //     setRoute(AppRoute.Welcome)
-    // }
+    let userLogged: boolean = get(logged)
+    if (userLogged) {
+        setRoute(AppRoute.Dashboard)
+    } else {
+        setRoute(AppRoute.Welcome)
+    }
 }
 
 export const requestMnemonic = () => {
@@ -83,7 +82,7 @@ export const requestMnemonic = () => {
 // TODO: only handle route changes, not app variables
 export const routerNext = (event) => {
     let params = event.detail || {}
-    let currentRoute: AppRoute = get(path)
+    const currentRoute: string = get(view)
     let nextRoute: AppRoute
 
     switch (currentRoute) {
@@ -125,7 +124,12 @@ export const routerNext = (event) => {
             }
             break
         case AppRoute.Backup:
-            nextRoute = AppRoute.Congratulations
+            if (get(walletSetupType) === SetupType.Seed || get(walletSetupType) === SetupType.Seedvault) {
+                nextRoute = AppRoute.Migrate
+            }
+            else {
+                nextRoute = AppRoute.Backup
+            }
             break
         case AppRoute.Import:
             nextRoute = AppRoute.Congratulations
@@ -144,7 +148,11 @@ export const routerNext = (event) => {
         case AppRoute.Balance:
             nextRoute = AppRoute.Password
             break
+        case AppRoute.Migrate:
+            nextRoute = AppRoute.Congratulations
+            break
         case AppRoute.Congratulations:
+            logged.set(true)
             nextRoute = AppRoute.Dashboard
             break
     }
