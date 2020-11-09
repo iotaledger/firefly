@@ -18,18 +18,19 @@
     let importType
     let importFile
 
-    // let state: ImportState = ImportState.Init
-    let state: ImportState = ImportState.FileImport
+    let state: ImportState = ImportState.Init
+    let stateHistory = []
 
     const _next = (event) => {
+        let nextState
         let params = event.detail || {}
         switch (state) {
             case ImportState.Init:
                 const { type } = params
                 if (type === 'text') {
-                    state = ImportState.TextImport
+                    nextState = ImportState.TextImport
                 } else if (type === 'file') {
-                    state = ImportState.FileImport
+                    nextState = ImportState.FileImport
                 }
                 break
             case ImportState.TextImport:
@@ -37,7 +38,7 @@
                 // Dummy
                 if (input.includes('123')) {
                     importType = 'mnemonic'
-                    state = ImportState.Success
+                    nextState = ImportState.Success
                 } else {
                     importType = 'seed'
                     dispatch('next', { importType })
@@ -53,25 +54,38 @@
                 } else if (strongholdRegex.test(fileName)) {
                     importType = 'stronghold'
                 }
-                state = ImportState.BackupPassword
+                nextState = ImportState.BackupPassword
                 break
             case ImportState.BackupPassword:
-                state = ImportState.Success
+                nextState = ImportState.Success
             case ImportState.Success:
                 dispatch('next', { importType })
                 break
+        }
+        if (nextState) {
+            stateHistory.push(nextState)
+            stateHistory = stateHistory
+            state = nextState
+        }
+    }
+    const _previous = () => {
+        let prevState = stateHistory.pop()
+        if (prevState) {
+            state = prevState
+        } else {
+            dispatch('previous')
         }
     }
 </script>
 
 {#if state === ImportState.Init}
-    <Import on:next={_next} {locale} {mobile} />
+    <Import on:next={_next} on:previous={_previous} {locale} {mobile} />
 {:else if state === ImportState.TextImport}
-    <TextImport on:next={_next} {locale} {mobile} />
+    <TextImport on:next={_next} on:previous={_previous} {locale} {mobile} />
 {:else if state === ImportState.FileImport}
-    <FileImport on:next={_next} {locale} {mobile} />
+    <FileImport on:next={_next} on:previous={_previous} {locale} {mobile} />
 {:else if state === ImportState.BackupPassword}
-    <BackupPassword on:next={_next} {importType} {locale} {mobile} />
+    <BackupPassword on:next={_next} on:previous={_previous} {importType} {locale} {mobile} />
 {:else if state === ImportState.Success}
-    <Success on:next={_next} {importType} {locale} {mobile} />
+    <Success on:next={_next} on:previous={_previous} {importType} {locale} {mobile} />
 {/if}

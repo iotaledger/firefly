@@ -12,6 +12,9 @@
     function handleContinueClick() {
         dispatch('next', { file, fileName })
     }
+    function handleBackClick() {
+        dispatch('previous')
+    }
 
     // TODO error management
     const onDrop = (buffer, name) => {
@@ -28,7 +31,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout allowBack>
+    <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
             <Text type="h1" classes="mb-5">{locale('views.import_from_file.title')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.import_from_file.body')}</Text>

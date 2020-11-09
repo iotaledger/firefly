@@ -9,12 +9,15 @@
     function handleContinueClick(setupType) {
         dispatch('next', { setupType })
     }
+    function handleBackClick() {
+        dispatch('previous')
+    }
 </script>
 
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout allowBack={false}>
+    <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
             <Text type="h1">{locale('views.setup.title')}</Text>
         </div>

@@ -14,6 +14,8 @@
     const dispatch = createEventDispatcher()
 
     let state: ProtectState = ProtectState.Init
+    let stateHistory = []
+
     let pin = null
 
     // Reset variables based on state
@@ -25,45 +27,45 @@
     }
 
     const _next = (event) => {
+        let nextState
         let params = event.detail || {}
         switch (state) {
             case ProtectState.Init:
                 const { type } = params
                 if (type === 'pin') {
-                    state = ProtectState.Pin
+                    nextState = ProtectState.Pin
                 } else if (type === 'biometric') {
-                    state = ProtectState.Biometric
+                    nextState = ProtectState.Biometric
                 }
                 break
             case ProtectState.Pin:
                 const { pinCandidate } = params
                 pin = pinCandidate
-                state = ProtectState.Confirm
+                nextState = ProtectState.Confirm
                 break
             case ProtectState.Confirm:
                 dispatch('next', { pin })
                 break
         }
+        if (nextState) {
+            stateHistory.push(nextState)
+            stateHistory = stateHistory
+            state = nextState
+        }
     }
 
     const _previous = () => {
-        switch (state) {
-            case ProtectState.Init:
-                dispatch('previous')
-                break
-            case ProtectState.Biometric:
-            case ProtectState.Pin:
-                state = ProtectState.Init
-                break
-            case ProtectState.Confirm:
-                state = ProtectState.Pin
-                break
+        let prevState = stateHistory.pop()
+        if (prevState) {
+            state = prevState
+        } else {
+            dispatch('previous')
         }
     }
 </script>
 
 {#if state === ProtectState.Init || state === ProtectState.Biometric}
-    <Protect on:next={_next} {locale} {mobile} />
+    <Protect on:next={_next} on:previous={_previous} {locale} {mobile} />
 {:else if state === ProtectState.Pin || state === ProtectState.Confirm}
-    <Pin on:next={_next} pinCandidate={pin} {locale} {mobile} />
+    <Pin on:next={_next} on:previous={_previous} pinCandidate={pin} {locale} {mobile} />
 {/if}

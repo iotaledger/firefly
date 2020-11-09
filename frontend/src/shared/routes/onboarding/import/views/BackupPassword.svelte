@@ -16,12 +16,15 @@
     function handleContinue() {
         dispatch('next')
     }
+    function handleBackClick() {
+        dispatch('previous')
+    }
 </script>
 
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout allowBack>
+    <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
             <Text type="h1" classes="mb-5">
                 {locale('general.import', { values: { type: importType === 'stronghold' ? 'Stronghold' : 'Seedvault' } })}

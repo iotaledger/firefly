@@ -3,7 +3,7 @@
     import { setupI18n, isLocaleLoaded, dir, _ } from '@shared-lib/i18n'
     import { darkMode, mobile, logged } from '@shared-lib/app'
     import { goto } from '@shared-lib/helpers'
-    import { initRouter, routerNext, requestMnemonic, AppRoute } from '@shared-lib/router'
+    import { initRouter, routerNext, routerPrevious, requestMnemonic, AppRoute } from '@shared-lib/router'
     import { Route, Toggle } from '@shared-components'
     import {
         Splash,
@@ -75,36 +75,41 @@
     </div>
     <!--  -->
     <Route route={AppRoute.Welcome}>
-        <Welcome on:next={routerNext} mobile={$mobile} locale={$_} />
+        <Welcome on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
     <Route route={AppRoute.Legal}>
-        <Legal on:next={routerNext} mobile={$mobile} locale={$_} />
+        <Legal on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
     <Route route={AppRoute.Setup}>
-        <Setup on:next={routerNext} mobile={$mobile} locale={$_} />
+        <Setup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
-    <Route route="password">
-        <Password on:next={routerNext} mobile={$mobile} locale={$_} />
+    <Route route={AppRoute.Password}>
+        <Password on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
-    <Route route="protect">
-        <Protect on:next={routerNext} mobile={$mobile} locale={$_} />
+    <Route route={AppRoute.Protect}>
+        <Protect on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
-    <Route route="backup">
-        <Backup on:next={routerNext} on:requestMnemonic={requestMnemonic} mobile={$mobile} locale={$_} />
+    <Route route={AppRoute.Backup}>
+        <Backup
+            on:next={routerNext}
+            on:previous={routerPrevious}
+            on:requestMnemonic={requestMnemonic}
+            mobile={$mobile}
+            locale={$_} />
     </Route>
-    <Route route="import">
-        <Import on:next={routerNext} mobile={$mobile} locale={$_} />
+    <Route route={AppRoute.Import}>
+        <Import on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
-    <Route route="balance">
-        <Balance on:next={routerNext} mobile={$mobile} locale={$_} />
+    <Route route={AppRoute.Balance}>
+        <Balance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
-    <Route route="migrate">
+    <Route route={AppRoute.Migrate}>
         <Migrate on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
     </Route>
-    <Route route="congratulations">
+    <Route route={AppRoute.Congratulations}>
         <Congratulations on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
     </Route>
-    <Route route="dashboard">
+    <Route route={AppRoute.Dashboard}>
         <Dashboard mobile={$mobile} locale={$_} {goto} />
     </Route>
 {/if}

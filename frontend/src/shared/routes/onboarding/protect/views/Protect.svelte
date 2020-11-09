@@ -9,12 +9,15 @@
     function handleContinueClick(type) {
         dispatch('next', { type })
     }
+    function handleBackClick() {
+        dispatch('previous')
+    }
 </script>
 
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout allowBack>
+    <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
             <Text type="h1" classes="mb-5">{locale('views.protect.title')}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.protect.body_1')}</Text>

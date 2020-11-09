@@ -169,3 +169,18 @@ export const routerNext = (event) => {
         console.error('Routing Error: Could not find next route')
     }
 }
+
+// TODO: only handle route changes, not app variables
+export const routerPrevious = () => {
+
+    let previousRoute: AppRoute
+
+    history.update(_history => {
+        previousRoute = _history.pop() as AppRoute
+        return _history
+    })
+
+    if (previousRoute) {
+        setRoute(previousRoute)
+    }
+}

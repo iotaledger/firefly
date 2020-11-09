@@ -18,15 +18,15 @@
     function handleContinueClick() {
         dispatch('next', !confirmInput ? { pinCandidate: pinInput } : null)
     }
+    function handleBackClick() {
+        dispatch('previous')
+    }
 </script>
-
-<style type="text/scss">
-</style>
 
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout allowBack>
+    <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
             {#if !confirmInput}
                 <Text type="h1" classes="mb-5">{locale('views.pin.title')}</Text>
