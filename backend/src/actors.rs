@@ -6,28 +6,46 @@ use serde::Deserialize;
 use tokio::{runtime::Runtime, sync::mpsc::unbounded_channel};
 
 use std::path::PathBuf;
+use std::time::Duration;
+
+const POLLING_INTERVAL_MS: u64 = 30_000;
 
 pub struct WalletActor {
   wallet_message_handler: WalletMessageHandler,
   runtime: Runtime,
 }
 
+impl WalletActor {
+  /// Starts the polling mechanism.
+  pub fn start_polling(&self, interval_ms: u64) -> &Self {
+    self
+      .wallet_message_handler
+      .account_manager()
+      .start_polling(Duration::from_millis(interval_ms));
+    self
+  }
+}
+
 impl ActorFactoryArgs<PathBuf> for WalletActor {
   fn create_args(storage_path: PathBuf) -> Self {
-    Self {
+    let actor = Self {
       wallet_message_handler: WalletMessageHandler::with_storage_path(storage_path)
         .expect("failed to initialise account manager"),
       runtime: Runtime::new().expect("failed to create tokio runtime"),
-    }
+    };
+    actor.start_polling(POLLING_INTERVAL_MS);
+    actor
   }
 }
 
 impl Default for WalletActor {
   fn default() -> Self {
-    Self {
+    let actor = Self {
       wallet_message_handler: Default::default(),
       runtime: Runtime::new().expect("failed to create tokio runtime"),
-    }
+    };
+    actor.start_polling(POLLING_INTERVAL_MS);
+    actor
   }
 }
 
