@@ -1,5 +1,6 @@
 pub use iota_wallet_actor::{
-  Message as WalletMessage, MessageType as WalletMessageType, WalletMessageHandler,
+  wallet::WalletError, Message as WalletMessage, MessageType as WalletMessageType, Response,
+  ResponseType, WalletMessageHandler,
 };
 use riker::actors::*;
 use serde::Deserialize;
@@ -72,16 +73,22 @@ pub(crate) async fn dispatch(
   message: String,
 ) -> Result<Option<String>, String> {
   let (response_tx, mut response_rx) = unbounded_channel();
-  let message: DispatchMessage = serde_json::from_str(&message).map_err(|e| e.to_string())?;
+  let message: DispatchMessage = serde_json::from_str(&message)
+    .map_err(|e| serde_json::to_string(&ResponseType::Error(e.into())).unwrap())?;
   wallet_actor.tell(
-    WalletMessage::new(message.id, message.message, response_tx),
+    WalletMessage::new(message.id.clone(), message.message.clone(), response_tx),
     None,
   );
   let response = response_rx.recv().await;
   match response {
-    Some(res) => Ok(Some(
-      serde_json::to_string(&res).map_err(|e| e.to_string())?,
-    )),
+    Some(res) => Ok(Some(serde_json::to_string(&res).map_err(|e| {
+      serde_json::to_string(&Response::new(
+        message.id,
+        message.message,
+        ResponseType::Error(e.into()),
+      ))
+      .unwrap()
+    })?)),
     None => Ok(None),
   }
 }
