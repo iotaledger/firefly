@@ -7,24 +7,34 @@ import { persistent } from '@shared-lib/helpers'
 export const notification = writable<string>(null)
 
 /**
- * Dark mode enabled state
- */
-export const darkMode = persistent<boolean>('darkMode', false)
-
-/**
  * Mobile mode
  */
 export const mobile = writable<boolean>(false)
 
 /**
- * Dummy
+ * Dark mode enabled state
  */
-export const loading = writable<boolean>(false)
+export const darkMode = persistent<boolean>('darkMode', false)
 
 /**
- * Dummy
+ * Wallet access pin
  */
-export const legacySeed = writable<boolean>(false)
+export const walletPin = persistent<number>('walletPin', null)
+
+/**
+ * Stronghold password
+ */
+export const strongholdPassword = writable<string>(null)
+
+/**
+ * Seed BIP39 mnemonic recovery phrase
+ */
+export const mnemonic = writable<Array<string>>(null)
+
+/**
+ * App language
+ */
+export const locale = persistent<string>('locale', null)
 
 /**
  * Dummy

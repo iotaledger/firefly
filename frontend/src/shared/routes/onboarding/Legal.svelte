@@ -1,8 +1,8 @@
 <script>
+    import { createEventDispatcher } from 'svelte'
     import { OnboardingLayout, Box, Text, Button, Scroller, Checkbox } from '@shared-components'
     export let locale
     export let mobile
-    export let goto
 
     let checkboxChecked = false
     let scrollerProgress = 0
@@ -11,12 +11,21 @@
     $: if (scrollerProgress === 100 || checkboxChecked) {
         legalRead = true
     }
+
+    const dispatch = createEventDispatcher()
+
+    function handleContinueClick() {
+        dispatch('next')
+    }
+    function handleBackClick() {
+        dispatch('previous')
+    }
 </script>
 
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout allowBack={false}>
+    <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
             <Text type="h1" classes="mb-5">{locale('views.legal.title')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.legal.body')}</Text>
@@ -29,7 +38,7 @@
             <Checkbox label={locale('views.legal.checkbox')} bind:checked={checkboxChecked} />
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-end items-center">
-            <Button disabled={!legalRead} onClick={() => goto('setup')}>{locale('actions.continue')}</Button>
+            <Button disabled={!legalRead} onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full">
             <Scroller classes="w-full" bind:progress={scrollerProgress}>

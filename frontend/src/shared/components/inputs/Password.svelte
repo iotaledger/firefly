@@ -7,7 +7,7 @@
     export let showRevealToggle = false
     export let strengthLevels = 4
     export let locale
-    export let confirmType = false
+    export let placeholder = null
 
     let revealed = false
     let type = 'password'
@@ -92,7 +92,7 @@
             {type}
             {value}
             on:input={handleInput}
-            placeholder={confirmType ? locale('general.confirm_password') : locale('general.password')}
+            placeholder={placeholder || locale('general.password')}
             class:toggle={showRevealToggle}
             class="w-full relative border border-solid text-xs leading-4 font-bold" />
         {#if showRevealToggle === true}

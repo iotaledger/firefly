@@ -7,6 +7,7 @@
   "author": "IOTA Foundation <contact@iota.org>",
   "license": "Apache-2.0",
   "scripts": {
+    "preinstall": "cd ./../shared && yarn && cd ./../mobile",
     "build": "NODE_ENV=production rollup --config",
     "ios": "cap copy && cap open ios",
     "android": "cap copy && cap open android",
