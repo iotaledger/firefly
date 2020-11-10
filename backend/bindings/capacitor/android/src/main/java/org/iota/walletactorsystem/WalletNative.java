@@ -11,8 +11,9 @@ public interface WalletNative extends Library {
 
     WalletNative INSTANCE = Native.loadLibrary(JNA_LIBRARY_NAME, WalletNative.class);
 
-    void initialize(String storagePath);
-    void send_message(String message, MessageCallback callback);
+    void initialize(MessageCallback callback, String storagePath);
+    void send_message(String message);
+    void listen(String eventName);
 
     interface MessageCallback extends Callback {
         void apply(String response);
