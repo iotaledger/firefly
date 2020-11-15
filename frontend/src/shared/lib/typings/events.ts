@@ -29,6 +29,7 @@ export enum ErrorType {
 export type Callback<T> = (error: string, data: T) => void
 
 export interface ErrorEvent {
+  id: number;
   type: ErrorType
   error: string
 }

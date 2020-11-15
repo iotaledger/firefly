@@ -1,10 +1,10 @@
-import { ErrorEvent, BalanceChangeEvent, TransactionEvent } from './events'
-import { Address } from './address'
-import { AccountIdentifier, Account, SyncedAccount } from './account'
-import { Message } from './message'
+import type { ErrorEvent, BalanceChangeEvent, TransactionEvent } from './events'
+import type { Address } from './address'
+import type { AccountIdentifier, Account, SyncedAccount } from './account'
+import type { Message } from './message'
 
 export interface BridgeMessage {
-  id?: number;
+  id: number;
   cmd: string;
   payload?: any;
 }
@@ -46,6 +46,6 @@ export type MessageResponse = RemovedAccountResponse |
   SentTransferResponse |
   ErrorResponse |
   // events
-  ErrorEvent | TransactionEvent | BalanceChangeEvent
+  ErrorEvent
 
 export type Bridge = (message: BridgeMessage) => Promise<number>

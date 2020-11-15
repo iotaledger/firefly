@@ -42,8 +42,9 @@ function _poll(runtime: typeof addon.ActorSystem, cb: (error: string, data: any)
 
 function sendMessage(message: BridgeMessage): Promise<number> {
   // TODO secure RNG?
-  const id = message.id || Math.floor(Math.random() * 99999999)
-  return new Promise(resolve => addon.sendMessage(JSON.stringify({ ...message, id }), () => resolve(id)))
+  const id = message.id;
+
+  return new Promise(resolve => addon.sendMessage(JSON.stringify(message), () => resolve(id)))
 }
 
 export function init(storagePath?: string) {
@@ -59,76 +60,77 @@ export function onMessage(cb: (payload: any) => void) {
   onMessageListeners.push(cb)
 }
 
-export function createAccount(account: AccountToCreate): Promise<number> {
-  return _createAccount(sendMessage, account)
+export function createAccount(__id: number): ((account: AccountToCreate) => Promise<number>) {
+  return (account: AccountToCreate) => _createAccount(sendMessage, __id, account)
+
 }
 
-export function removeAccount(accountId: AccountIdentifier): Promise<number> {
-  return _removeAccount(sendMessage, accountId)
+export function removeAccount(__id: number): ((accountId: AccountIdentifier) => Promise<number>) {
+  return (accountId: AccountIdentifier) => _removeAccount(sendMessage, __id, accountId)
 }
 
-export function getAccount(accountId: AccountIdentifier): Promise<number> {
-  return _getAccount(sendMessage, accountId)
+export function getAccount(__id: number): ((accountId: AccountIdentifier) => Promise<number>) {
+  return (accountId: AccountIdentifier) => _getAccount(sendMessage, __id, accountId)
 }
 
-export function getAccounts(): Promise<number> {
-  return _getAccounts(sendMessage)
+export function getAccounts(__id: number): (() => Promise<number>) {
+  return () => _getAccounts(sendMessage, __id)
 }
 
-export function syncAccounts(): Promise<number> {
-  return _syncAccounts(sendMessage)
+export function syncAccounts(__id: number): (() => Promise<number>) {
+  return () => _syncAccounts(sendMessage, __id)
 }
 
-export function generateAddress(accountId: AccountIdentifier): Promise<number> {
-  return _generateAddress(sendMessage, accountId)
+export function generateAddress(__id: number): ((accountId: AccountIdentifier) => Promise<number>) {
+  return (accountId: AccountIdentifier) => _generateAddress(sendMessage, __id, accountId)
 }
 
-export function listMessages(accountId: AccountIdentifier, filters?: ListMessagesFilter): Promise<number> {
-  return _listMessages(sendMessage, accountId, filters)
+export function listMessages(__id: number): ((accountId: AccountIdentifier, filters?: ListMessagesFilter) => Promise<number>) {
+  return (accountId: AccountIdentifier, filters?: ListMessagesFilter) => _listMessages(sendMessage, __id, accountId, filters)
 }
 
-export function listAddresses(accountId: AccountIdentifier, unspent?: boolean): Promise<number> {
-  return _listAddresses(sendMessage, accountId, unspent)
+export function listAddresses(__id: number): ((accountId: AccountIdentifier, unspent?: boolean) => Promise<number>) {
+  return (accountId: AccountIdentifier, unspent?: boolean) => _listAddresses(sendMessage, __id, accountId, unspent)
 }
 
-export function availableBalance(accountId: AccountIdentifier): Promise<number> {
-  return _availableBalance(sendMessage, accountId)
+export function availableBalance(__id: number): ((accountId: AccountIdentifier) => Promise<number>) {
+  return (accountId: AccountIdentifier) => _availableBalance(sendMessage, __id, accountId)
 }
 
-export function totalBalance(accountId: AccountIdentifier): Promise<number> {
-  return _totalBalance(sendMessage, accountId)
+export function totalBalance(__id: number): ((accountId: AccountIdentifier) => Promise<number>) {
+  return (accountId: AccountIdentifier) => _totalBalance(sendMessage, __id, accountId)
 }
 
-export function latestAddress(accountId: AccountIdentifier): Promise<number> {
-  return _latestAddress(sendMessage, accountId)
+export function latestAddress(__id: number): ((accountId: AccountIdentifier) => Promise<number>) {
+  return (accountId: AccountIdentifier) => _latestAddress(sendMessage, __id, accountId)
 }
 
-export function syncAccount(accountId: AccountIdentifier, options?: SyncAccountOptions): Promise<number> {
-  return _syncAccount(sendMessage, accountId, options)
+export function syncAccount(__id: number): ((accountId: AccountIdentifier, options?: SyncAccountOptions) => Promise<number>) {
+  return (accountId: AccountIdentifier, options?: SyncAccountOptions) => _syncAccount(sendMessage, __id, accountId, options)
 }
 
-export function reattach(accountId: AccountIdentifier, messageId: string): Promise<number> {
-  return _reattach(sendMessage, accountId, messageId)
+export function reattach(__id: number): ((accountId: AccountIdentifier, messageId: string) => Promise<number>) {
+  return (accountId: AccountIdentifier, messageId: string) => _reattach(sendMessage, __id, accountId, messageId)
 }
 
-export function backup(destinationPath: string): Promise<number> {
-  return _backup(sendMessage, destinationPath)
+export function backup(__id: number): ((destinationPath: string) => Promise<number>) {
+  return (destinationPath: string) => _backup(sendMessage, __id, destinationPath)
 }
 
-export function restoreBackup(backupPath: string): Promise<number> {
-  return _restoreBackup(sendMessage, backupPath)
+export function restoreBackup(__id: number): ((backupPath: string) => Promise<number>){
+  return (backupPath: string) => _restoreBackup(sendMessage, __id, backupPath)
 }
 
-export function setStrongholdPassword(password: string): Promise<number> {
-  return _setStrongholdPassword(sendMessage, password)
+export function setStrongholdPassword(__id: number): ((password: string) => Promise<number>) {
+  return (password: string)  =>_setStrongholdPassword(sendMessage, __id, password)
 }
 
-export function send(fromAccountId: AccountIdentifier, transfer: Transfer): Promise<number> {
-  return _send(sendMessage, fromAccountId, transfer)
+export function send(__id: number): ((fromAccountId: AccountIdentifier, transfer: Transfer) => Promise<number>) {
+  return (fromAccountId: AccountIdentifier, transfer: Transfer) => _send(sendMessage, __id, fromAccountId, transfer)
 }
 
-export function internalTransfer(fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number): Promise<number> {
-  return _internalTransfer(sendMessage, fromAccountId, toAccountId, amount)
+export function internalTransfer(__id: number): ((fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number) => Promise<number>) {
+  return (fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number) => _internalTransfer(sendMessage, __id, fromAccountId, toAccountId, amount)
 }
 
 export function listenToErrorEvents() {
