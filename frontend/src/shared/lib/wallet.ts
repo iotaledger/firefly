@@ -17,7 +17,6 @@ import type {
 import type {
     Message
 } from './typings/message';
-import { account } from './typings';
 
 const Wallet = window['__WALLET__'];
 
@@ -210,13 +209,15 @@ const Middleware = {
 
             const actualPayload = shouldOverrideDefaultCallbacks ? payload.slice(0, -1) : payload;
 
-            await _target[prop](__id)(...actualPayload);
+            await _target[prop](...actualPayload)(__id);
         }
     }
 }
 
-const api = new Proxy(Wallet, Middleware);
+const api = new Proxy(Wallet.api, Middleware);
 
 // setTimeout(async () => {
-//     api.setStrongholdPassword('password');
+//     await api.setStrongholdPassword('password');
+//     await api.createAccount({ alias: 'foo', clientOptions: { node: 'http://localhost:14265' } })
+//     await api.syncAccounts();
 // }, 2000);
