@@ -1,5 +1,5 @@
 <script>
-    import { Logo, Box, Text } from '@shared-components'
+    import { Icon, Text } from '@shared-components'
 
     export let hash
     export let timestamp
@@ -7,22 +7,13 @@
     export let received
 </script>
 
-<style type="text/scss">
-    activity-row {
-        :global(.highlighted.green) {
-            color: #0fc1b7;
-        }
-    }
-</style>
-
-<activity-row class="flex mb-6">
-    <Logo width="40px" logo="profile-picture" />
-    <Box classes="flex flex-col ml-4">
-        <Text type="p">{hash}</Text>
+<div data-label="transaction-row" class="flex rounded-2xl items-center mb-6 bg-gray-100 p-4">
+    <Icon icon={received ? 'arrow-down' : 'arrow-up'} />
+    <div class="flex flex-col ml-4">
+        <Text type="p" bold>{hash}</Text>
         <Text type="p" secondary>{timestamp}</Text>
-    </Box>
-    <Box classes="flex-1 items-end flex flex-col ml-4">
-        <Text type="p" bold>{amount}</Text>
-        <Text type="p" highlighted classes={received ? 'green' : ''}>{received ? 'Received' : 'Sent'}</Text>
-    </Box>
-</activity-row>
+    </div>
+    <div class="flex-1 items-end flex flex-col ml-4">
+        <Text type="p">{amount}</Text>
+    </div>
+</div>
