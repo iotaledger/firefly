@@ -8,51 +8,36 @@
     export let disabled = false
     export let active = false
     export let ghost = false
-    export let icon = null
-    export let classes = null
+    export let icon = undefined
+    export let xl = false
+    export let classes = ''
 </script>
 
 <style type="text/scss">
+    // TODO: tailwindify
     button {
-        border-radius: 16px;
-        padding: 15px 12px;
-        cursor: pointer;
         background-color: var(--button-bg-color);
         min-width: 160px;
         span {
-            font-weight: 700;
-            font-size: 12px;
-            line-height: 140%;
             color: var(--button-text-color);
         }
         &.ghost {
-            border: 1px solid var(--button-border-color);
-            background-color: transparent;
+            @apply bg-transparent;
+            @apply border;
+            @apply border-solid;
+            border-color: var(--button-border-color);
             span {
-                font-weight: 500;
+                @apply font-medium;
                 color: var(--button-bg-color);
             }
         }
-        &.icon {
-            padding: 28px 22px;
-            text-align: left;
-
+        &.with-icon {
+            @apply py-6;
+            @apply px-5;
+            @apply text-left;
             span {
-                margin-left: 38px;
-                margin-right: 28px;
-            }
-
-            :global(svg) {
-                position: absolute;
-                top: 50%;
-                left: 0;
-                transform: translateY(-50%);
-            }
-            :global(svg.right) {
-                position: absolute;
-                left: inherit;
-                right: 0;
-                transform: translateY(-50%);
+                @apply ml-10;
+                @apply mr-6;
             }
             :global(svg path) {
                 fill: var(--button-icon-color);
@@ -76,8 +61,7 @@
             span {
                 color: var(--button-secondary-text-color);
             }
-            &.icon {
-                padding: 28px 22px;
+            &.with-icon {
                 :global(svg path) {
                     fill: var(--button-secondary-icon-color);
                 }
@@ -100,8 +84,19 @@
                 }
             }
         }
+        &.xl {
+            @apply bg-transparent;
+            @apply border;
+            @apply border-solid;
+            @apply border-gray-300;
+            @apply min-w-0;
+            span {
+                @apply font-medium;
+                color: var(--button-bg-color);
+            }
+        }
         &.disabled {
-            pointer-events: none !important;
+            @apply pointer-events-none;
             background-color: var(--button-disabled-bg-color) !important;
             span {
                 color: var(--button-disabled-text-color) !important;
@@ -110,24 +105,41 @@
     }
 </style>
 
-<button
-    class={classes}
-    use:bindEvents={events}
-    on:click={onClick}
-    class:secondary
-    class:disabled
-    class:icon
-    class:ghost
-    class:active>
-    {#if icon}
-        <div class="relative flex flex-row justify-between">
-            <div class="relative flex items-center flex-1">
-                <Icon classes="mr-4" {icon} />
-                <span><slot /></span>
-            </div>
-            <Icon icon="arrow-right" classes="right" />
+{#if xl}
+    <button
+        class={`xl cursor-pointer  text-center rounded-2xl px-6 py-4 flex flex-col items-center ${classes}`}
+        use:bindEvents={events}
+        on:click={onClick}
+        class:disabled>
+        <Icon classes="mb-1" {icon} />
+        <div class="text-12 leading-140">
+            <slot />
         </div>
-    {:else}
-        <span><slot /></span>
-    {/if}
-</button>
+    </button>
+{:else}
+    <button
+        class={`cursor-pointer text-center rounded-2xl px-3 py-4 ${classes}`}
+        use:bindEvents={events}
+        on:click={onClick}
+        class:secondary
+        class:disabled
+        class:with-icon={icon}
+        class:ghost
+        class:active>
+        {#if icon}
+            <div class="relative flex flex-row justify-between">
+                <div class="relative flex items-center flex-1">
+                    <div class="absolute left-0 flex items-center">
+                        <Icon classes="mr-4" {icon} />
+                    </div>
+                    <span class="font-bold text-12 leading-140"><slot /></span>
+                </div>
+                <div class="absolute right-0 flex items-center h-full">
+                    <Icon icon="arrow-right" classes="right" />
+                </div>
+            </div>
+        {:else}
+            <span class="font-bold text-12 leading-140"><slot /></span>
+        {/if}
+    </button>
+{/if}
