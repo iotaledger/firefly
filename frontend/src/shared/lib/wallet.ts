@@ -33,10 +33,31 @@ type WalletState = {
 }
 
 type CallbacksStore = {
-    [id: string]: {
-        onSuccess: (message: MessageResponse) => void;
-        onError: (message: MessageResponse) => void;
-    }
+    [id: string]: CallbacksPattern;
+};
+
+type CallbacksPattern = {
+    onSuccess: (message: MessageResponse) => void;
+    onError: (message: MessageResponse) => void;
+}
+
+const apiToResponseTypeMap = {
+    removeAccount: ResponseTypes.RemovedAccount,
+    createAccount: ResponseTypes.CreatedAccount,
+    getAccount: ResponseTypes.ReadAccount,
+    getAccounts: ResponseTypes.ReadAccounts,
+    syncAccounts: ResponseTypes.SyncedAccounts,
+    listMessages: ResponseTypes.Messages,
+    listAddresses: ResponseTypes.Addresses,
+    generateAddress: ResponseTypes.GeneratedAddress,
+    latestAddress: ResponseTypes.LatestAddress,
+    totalBalance: ResponseTypes.TotalBalance,
+    reattach: ResponseTypes.Reattached,
+    backup: ResponseTypes.BackupSuccessful,
+    restoreBackup: ResponseTypes.BackupRestored,
+    send: ResponseTypes.SentTransfer,
+    setStrongholdPassword: ResponseTypes.StrongholdPasswordSet,
+
 };
 
 /*
@@ -151,216 +172,51 @@ Wallet.onMessage((message: MessageResponse) => {
 const storeCallbacks = (
     __id: number,
     type: ResponseTypes,
-    onSuccess?: () => any,
-    onError?: () => any
+    callbacks?: CallbacksPattern
 ): void => {
-    if (typeof onSuccess === 'function' && typeof onError === 'function') {
-        callbacksStore[__id] = {
-            onSuccess,
-            onError
-        }
+    if (
+        callbacks &&
+        typeof callbacks.onSuccess === 'function' && typeof callbacks.onError === 'function'
+    ) {
+        callbacksStore[__id] = callbacks;
     } else {
         callbacksStore[__id] = defaultCallbacks[type];
     }
 };
 
-/**
- * Sets stronghold password
- * 
- * @method setStrongholdPassword
- * 
- * @param {string} password 
- * @param {function} onSuccess 
- * @param {function} onError 
- * 
- * @returns {Promise<void>}
- */
-const setStrongholdPassword = async (
-    password: string,
-    onSuccess?: () => any,
-    onError?: () => any
-): Promise<void> => {
-    const __id = generateRandomId();
+const Middleware = {
+    get: (_target, prop) => {
+        return async (...payload): Promise<void> => {
+            const __id = generateRandomId();
 
-    storeCallbacks(
-        __id,
-        ResponseTypes.StrongholdPasswordSet,
-        onSuccess,
-        onError
-    );
+            const hasPayload = payload.length;
 
-    await Wallet.setStrongholdPassword(__id)(password);
-};
+            let shouldOverrideDefaultCallbacks = false;
+            let lastArgument = null;
 
-/**
- * Creates a new account
- * 
- * @method createAccount
- * 
- * @param {string} alias
- * @param {ClientOptions} clientOptions
- * @param {function} onSuccess 
- * @param {function} onError 
- * 
- * @returns {Promise<void>}
- */
-const createAccount = async (
-    alias: string,
-    clientOptions?: ClientOptions,
-    onSuccess?: () => any,
-    onError?: () => any
-): Promise<void> => {
-    const __id = generateRandomId();
+            if (hasPayload) {
+                lastArgument = payload[payload.length - 1];
 
-    storeCallbacks(
-        __id,
-        ResponseTypes.CreatedAccount,
-        onSuccess,
-        onError
-    );
+                shouldOverrideDefaultCallbacks = typeof lastArgument === 'object' &&
+                    'onSuccess' in lastArgument &&
+                    'onError' in lastArgument;
+            }
 
-    await Wallet.createAccount(__id)({ alias, clientOptions });
-};
+            storeCallbacks(
+                __id,
+                apiToResponseTypeMap[prop],
+                shouldOverrideDefaultCallbacks ? lastArgument : undefined
+            );
 
-/**
- * Gets all accounts
- * 
- * @method getAccounts
- * 
- * @param {function} onSuccess 
- * @param {function} onError 
- * 
- * @returns {Promise<void>}
- */
-const getAccounts = async (
-    onSuccess?: () => any,
-    onError?: () => any
-): Promise<void> => {
-    const __id = generateRandomId();
+            const actualPayload = shouldOverrideDefaultCallbacks ? payload.slice(0, -1) : payload;
 
-    storeCallbacks(
-        __id,
-        ResponseTypes.ReadAccounts,
-        onSuccess,
-        onError
-    );
+            await _target[prop](__id)(...actualPayload);
+        }
+    }
+}
 
-    await Wallet.getAccounts(__id)();
-};
+const api = new Proxy(Wallet, Middleware);
 
-/**
- * Gets deposit address for an account
- * 
- * @method getDepositAddress
- * 
- * @param {string} accountId
- * @param {function} onSuccess 
- * @param {function} onError 
- * 
- * @returns {Promise<void>}
- */
-const getDepositAddress = async (
-    accountId: string,
-    onSuccess?: () => any,
-    onError?: () => any
-): Promise<void> => {
-    const __id = generateRandomId();
-
-    storeCallbacks(
-        __id,
-        ResponseTypes.LatestAddress,
-        onSuccess,
-        onError
-    );
-
-    await Wallet.latestAddress(__id)(accountId);
-};
-
-/**
- * Gets total balance for an account
- * 
- * @method getTotalBalance
- * 
- * @param {string} accountId
- * @param {function} onSuccess 
- * @param {function} onError 
- * 
- * @returns {Promise<void>}
- */
-const getTotalBalance = async (
-    accountId: string,
-    onSuccess?: () => any,
-    onError?: () => any
-): Promise<void> => {
-    const __id = generateRandomId();
-
-    storeCallbacks(
-        __id,
-        ResponseTypes.TotalBalance,
-        onSuccess,
-        onError
-    );
-
-    await Wallet.totalBalance(__id)(accountId);
-};
-
-/**
- * Syncs all stored accounts
- * 
- * @method syncAccounts
- * 
- * @param {function} onSuccess 
- * @param {function} onError 
- * 
- * @returns {Promise<void>}
- */
-const syncAccounts = async (
-    onSuccess?: () => any,
-    onError?: () => any
-): Promise<void> => {
-    const __id = generateRandomId();
-
-    storeCallbacks(
-        __id,
-        ResponseTypes.SyncedAccounts,
-        onSuccess,
-        onError
-    );
-
-    await Wallet.syncAccounts(__id)();
-};
-
-/**
- * Syncs account for provided id
- * 
- * @method syncAccount
- * 
- * @param {string} accountId
- * @param {function} onSuccess 
- * @param {function} onError 
- * 
- * @returns {Promise<void>}
- */
-const syncAccount = async (
-    accountId: string,
-    onSuccess?: () => any,
-    onError?: () => any
-): Promise<void> => {
-    const __id = generateRandomId();
-
-    storeCallbacks(
-        __id,
-        ResponseTypes.SyncedAccounts,
-        onSuccess,
-        onError
-    );
-
-    await Wallet.syncAccount(__id)(accountId);
-};
-
-/**
- * setTimeout(() => {
-    setStrongholdPassword('password');
-    syncAccounts();
-}, 2000);
- */
+// setTimeout(async () => {
+//     api.setStrongholdPassword('password');
+// }, 2000);
