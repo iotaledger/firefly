@@ -1,4 +1,4 @@
-import type { ErrorEvent, BalanceChangeEvent, TransactionEvent } from './events'
+import type { Event, ErrorEventPayload, BalanceChangeEventPayload, TransactionEventPayload } from './events'
 import type { Address } from './address'
 import type { AccountIdentifier, Account, SyncedAccount } from './account'
 import type { Message } from './message'
@@ -26,7 +26,14 @@ export enum ResponseTypes {
   BackupRestored = 'BackupRestored',
   StrongholdPasswordSet = 'StrongholdPasswordSet',
   SentTransfer = 'SentTransfer',
-  Error = 'Error'
+  Error = 'Error',
+  Panic = 'Panic',
+  ErrorThrown = 'ErrorThrown',
+  BalanceChange = 'BalanceChange',
+  NewTransaction = 'NewTransaction',
+  ConfirmationStateChange = 'ConfirmationStateChange',
+  Reattachment = 'Reattachment',
+  Broadcast = 'Broadcast',
 }
 
 export type Response<T, P> = { id: number, action: string, type: T, payload?: P }
@@ -46,7 +53,8 @@ export type BackupSuccessfulResponse = Response<ResponseTypes.BackupSuccessful, 
 export type BackupRestoredResponse = Response<ResponseTypes.BackupRestored, void>
 export type SetStrongholdPasswordResponse = Response<ResponseTypes.StrongholdPasswordSet, void>
 export type SentTransferResponse = Response<ResponseTypes.SentTransfer, Message>
-export type ErrorResponse = Response<ResponseTypes.Error, ErrorEvent>
+export type ErrorResponse = Response<ResponseTypes.Error, ErrorEventPayload>
+export type PanicResponse = Response<ResponseTypes.Panic, string>
 
 export type MessageResponse = RemovedAccountResponse |
   CreatedAccountResponse |
@@ -65,7 +73,8 @@ export type MessageResponse = RemovedAccountResponse |
   SetStrongholdPasswordResponse |
   SentTransferResponse |
   ErrorResponse |
+  PanicResponse |
   // events
-  ErrorEvent
+  Event<ErrorEventPayload> | Event<BalanceChangeEventPayload> | Event<TransactionEventPayload>
 
 export type Bridge = (message: BridgeMessage) => Promise<number>

@@ -31,12 +31,12 @@ pub extern "C" fn send_message(message: *const c_char) {
 }
 
 #[no_mangle]
-pub extern "C" fn listen(event_name: *const c_char) {
+pub extern "C" fn listen(id: usize, event_name: *const c_char) {
     let c_event_name = unsafe {
         assert!(!event_name.is_null());
         CStr::from_ptr(event_name)
     };
     let event_name = c_event_name.to_str().unwrap();
     let event_type: EventType = event_name.try_into().expect("unknown event name");
-    add_event_listener(event_type);
+    add_event_listener(id, event_type);
 }

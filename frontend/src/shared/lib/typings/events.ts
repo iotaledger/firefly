@@ -1,3 +1,4 @@
+import type { ResponseTypes } from './bridge'
 import type { Address } from './address'
 
 export enum ErrorType {
@@ -28,19 +29,24 @@ export enum ErrorType {
 
 export type Callback<T> = (error: string, data: T) => void
 
-export interface ErrorEvent {
-  id: number;
-  type: ErrorType
+export interface Event<T> {
+  id: number
+  type: ResponseTypes
+  payload: T
+}
+
+export interface ErrorEventPayload {
+  type: ErrorType;
   error: string
 }
 
-export interface BalanceChangeEvent {
+export interface BalanceChangeEventPayload {
   accountId: number[]
   address: Address
   balance: number
 }
 
-export interface TransactionEvent {
+export interface TransactionEventPayload {
   accountId: number[]
   messageId: number[]
 }

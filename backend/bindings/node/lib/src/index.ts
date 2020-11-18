@@ -117,12 +117,12 @@ export function backup(__id: number): ((destinationPath: string) => Promise<numb
   return (destinationPath: string) => _backup(sendMessage, __id, destinationPath)
 }
 
-export function restoreBackup(__id: number): ((backupPath: string) => Promise<number>){
+export function restoreBackup(__id: number): ((backupPath: string) => Promise<number>) {
   return (backupPath: string) => _restoreBackup(sendMessage, __id, backupPath)
 }
 
 export function setStrongholdPassword(__id: number): ((password: string) => Promise<number>) {
-  return (password: string)  =>_setStrongholdPassword(sendMessage, __id, password)
+  return (password: string) => _setStrongholdPassword(sendMessage, __id, password)
 }
 
 export function send(__id: number): ((fromAccountId: AccountIdentifier, transfer: Transfer) => Promise<number>) {
@@ -133,26 +133,26 @@ export function internalTransfer(__id: number): ((fromAccountId: AccountIdentifi
   return (fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number) => _internalTransfer(sendMessage, __id, fromAccountId, toAccountId, amount)
 }
 
-export function listenToErrorEvents() {
-  addon.listen('ErrorThrown')
+export function listenToErrorEvents(__id: number) {
+  addon.listen(__id, 'ErrorThrown')
 }
 
-export function listenToBalanceChangeEvents() {
-  addon.listen('BalanceChange')
+export function listenToBalanceChangeEvents(__id: number) {
+  addon.listen(__id, 'BalanceChange')
 }
 
-export function listenToNewTransactionEvents() {
-  addon.listen('NewTransaction')
+export function listenToNewTransactionEvents(__id: number) {
+  addon.listen(__id, 'NewTransaction')
 }
 
-export function listenToConfirmationStateChangeEvents() {
-  addon.listen('ConfirmationStateChange')
+export function listenToConfirmationStateChangeEvents(__id: number) {
+  addon.listen(__id, 'ConfirmationStateChange')
 }
 
-export function listenToReattachmentEvents() {
-  addon.listen('Reattachment')
+export function listenToReattachmentEvents(__id: number) {
+  addon.listen(__id, 'Reattachment')
 }
 
-export function listenToBroadcastEvents() {
-  addon.listen('Broadcast')
+export function listenToBroadcastEvents(__id: number) {
+  addon.listen(__id, 'Broadcast')
 }

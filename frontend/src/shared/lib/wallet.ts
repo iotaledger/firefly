@@ -17,12 +17,13 @@ import type {
 import type {
     Message
 } from './typings/message';
+import type { Event, BalanceChangeEventPayload, TransactionEventPayload } from './typings/events'
 import { account } from './typings';
 
 const Wallet = window['__WALLET__'];
 
 type Account = {
-    id: string;
+    id: number[];
     alias: string;
     addresses: Address[];
     messages: Message[];
@@ -107,6 +108,20 @@ const defaultCallbacks = {
         onError: (error: ErrorResponse): void => {
             console.info('Error syncing accounts', error);
         }
+    },
+    BalanceChange: {
+        onSuccess: (response: Event<BalanceChangeEventPayload>): void => {
+            wallet.update((_wallet) => {
+                const account = _wallet.accounts.find(acc => acc.id === response.payload.accountId)
+                const address = account.addresses.find(addr => addr.address === response.payload.address.address)
+                address.balance = response.payload.balance
+                return _wallet
+            })
+        }
+    },
+    NewTransaction: {
+        onSuccess: (response: Event<TransactionEventPayload>): void => {
+        }
     }
 };
 
@@ -128,9 +143,20 @@ Wallet.onMessage((message: MessageResponse) => {
 
     const { onSuccess, onError } = callbacksStore[id];
 
-    message.type === 'Error' ? onError(message) : onSuccess(message);
+    message.type === 'Error' || message.type === 'Panic' ? onError(message) : onSuccess(message);
 
-    delete callbacksStore[id];
+    const isEventMessage = [
+        ResponseTypes.ErrorThrown,
+        ResponseTypes.BalanceChange,
+        ResponseTypes.NewTransaction,
+        ResponseTypes.ConfirmationStateChange,
+        ResponseTypes.Reattachment,
+        ResponseTypes.Broadcast
+    ].includes(message.type)
+
+    if (!isEventMessage) {
+        delete callbacksStore[id];
+    }
 })
 
 /**
@@ -175,7 +201,7 @@ const storeCallbacks = (
  * 
  * @returns {Promise<void>}
  */
-const setStrongholdPassword = async (
+export const setStrongholdPassword = async (
     password: string,
     onSuccess?: () => any,
     onError?: () => any
@@ -204,8 +230,9 @@ const setStrongholdPassword = async (
  * 
  * @returns {Promise<void>}
  */
-const createAccount = async (
+export const createAccount = async (
     alias: string,
+    mnemonic: string,
     clientOptions?: ClientOptions,
     onSuccess?: () => any,
     onError?: () => any
@@ -219,7 +246,7 @@ const createAccount = async (
         onError
     );
 
-    await Wallet.createAccount(__id)({ alias, clientOptions });
+    await Wallet.createAccount(__id)({ alias, mnemonic, clientOptions });
 };
 
 /**
@@ -232,7 +259,7 @@ const createAccount = async (
  * 
  * @returns {Promise<void>}
  */
-const getAccounts = async (
+export const getAccounts = async (
     onSuccess?: () => any,
     onError?: () => any
 ): Promise<void> => {
@@ -259,7 +286,7 @@ const getAccounts = async (
  * 
  * @returns {Promise<void>}
  */
-const getDepositAddress = async (
+export const getDepositAddress = async (
     accountId: string,
     onSuccess?: () => any,
     onError?: () => any
@@ -287,7 +314,7 @@ const getDepositAddress = async (
  * 
  * @returns {Promise<void>}
  */
-const getTotalBalance = async (
+export const getTotalBalance = async (
     accountId: string,
     onSuccess?: () => any,
     onError?: () => any
@@ -314,7 +341,7 @@ const getTotalBalance = async (
  * 
  * @returns {Promise<void>}
  */
-const syncAccounts = async (
+export const syncAccounts = async (
     onSuccess?: () => any,
     onError?: () => any
 ): Promise<void> => {
@@ -341,7 +368,7 @@ const syncAccounts = async (
  * 
  * @returns {Promise<void>}
  */
-const syncAccount = async (
+export const syncAccount = async (
     accountId: string,
     onSuccess?: () => any,
     onError?: () => any
@@ -358,9 +385,62 @@ const syncAccount = async (
     await Wallet.syncAccount(__id)(accountId);
 };
 
-/**
- * setTimeout(() => {
-    setStrongholdPassword('password');
-    syncAccounts();
-}, 2000);
- */
+export const onBalanceChange = async (cb?: () => any): Promise<void> => {
+    const __id = generateRandomId();
+
+    storeCallbacks(
+        __id,
+        ResponseTypes.BalanceChange,
+        cb
+    );
+
+    await Wallet.listenToBalanceChangeEvents(__id)
+}
+
+export const onNewTransaction = async (cb?: () => any): Promise<void> => {
+    const __id = generateRandomId();
+
+    storeCallbacks(
+        __id,
+        ResponseTypes.NewTransaction,
+        cb
+    );
+
+    await Wallet.listenToNewTransactionEvents(__id)
+}
+
+export const onConfirmationStateChange = async (cb?: () => any): Promise<void> => {
+    const __id = generateRandomId();
+
+    storeCallbacks(
+        __id,
+        ResponseTypes.ConfirmationStateChange,
+        cb
+    );
+
+    await Wallet.listenToConfirmationStateChangeEvents(__id)
+}
+
+export const onReattachment = async (cb?: () => any): Promise<void> => {
+    const __id = generateRandomId();
+
+    storeCallbacks(
+        __id,
+        ResponseTypes.Reattachment,
+        cb
+    );
+
+    await Wallet.listenToReattachmentEvents(__id)
+}
+
+export const onBroadcast = async (cb?: () => any): Promise<void> => {
+    const __id = generateRandomId();
+
+    storeCallbacks(
+        __id,
+        ResponseTypes.Broadcast,
+        cb
+    );
+
+    await Wallet.listenToBroadcastEvents(__id)
+}

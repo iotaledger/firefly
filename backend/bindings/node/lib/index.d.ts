@@ -20,9 +20,9 @@ export declare function restoreBackup(__id: number): ((backupPath: string) => Pr
 export declare function setStrongholdPassword(__id: number): ((password: string) => Promise<number>);
 export declare function send(__id: number): ((fromAccountId: AccountIdentifier, transfer: Transfer) => Promise<number>);
 export declare function internalTransfer(__id: number): ((fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number) => Promise<number>);
-export declare function listenToErrorEvents(): void;
-export declare function listenToBalanceChangeEvents(): void;
-export declare function listenToNewTransactionEvents(): void;
-export declare function listenToConfirmationStateChangeEvents(): void;
-export declare function listenToReattachmentEvents(): void;
-export declare function listenToBroadcastEvents(): void;
+export declare function listenToErrorEvents(__id: number): void;
+export declare function listenToBalanceChangeEvents(__id: number): void;
+export declare function listenToNewTransactionEvents(__id: number): void;
+export declare function listenToConfirmationStateChangeEvents(__id: number): void;
+export declare function listenToReattachmentEvents(__id: number): void;
+export declare function listenToBroadcastEvents(__id: number): void;
