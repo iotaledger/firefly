@@ -1,28 +1,27 @@
 <script>
     import { Icon, Text } from '@shared-components'
 
-    export let label
-    export let checked
+    export let label = undefined
+    export let checked = false
 </script>
 
 <style type="text/scss">
-    checkbox-input {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
+    div {
         :global(svg path) {
-            fill: #c9d6ec;
+            fill: var(--text-disabled-color);
         }
         :global(svg.active path) {
-            fill: #108cff;
+            fill: var(--ui-blue-color);
         }
     }
 </style>
 
-<checkbox-input
+<div
+    data-label="checkbox-input"
+    class="flex items-center cursor-pointer"
     on:click={() => {
         checked = !checked
     }}>
     <Icon icon="checkbox" classes={`mr-3 ${checked ? 'active' : ''}`} />
     <Text type="p" secondary>{label}</Text>
-</checkbox-input>
+</div>

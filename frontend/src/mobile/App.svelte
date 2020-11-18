@@ -20,7 +20,7 @@
         Dashboard,
     } from '@shared-routes'
 
-    $: $darkMode ? document.body.classList.add('dark') : document.body.classList.remove('dark')
+    $: $darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
 
     $: if (document.dir !== $dir) {
         document.dir = $dir
@@ -63,6 +63,8 @@
     }
 </style>
 
+<!-- empty div to avoid auto-purge removing dark classes -->
+<div class="scheme-dark" />
 {#if !$isLocaleLoaded || splash}
     <Splash />
 {:else}

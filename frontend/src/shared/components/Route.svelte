@@ -2,7 +2,7 @@
     import { fly, scale } from 'svelte/transition'
     import { view } from '@shared-lib/router'
 
-    export let route = null
+    export let route = undefined
     export let primary = true
     export let secondary = false
     export let left = false
@@ -11,29 +11,29 @@
 
 <style type="text/scss">
     div {
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        width: 100%;
-        height: 100%;
-        background: var(--app-bg-color);
+        @apply absolute;
+        @apply top-0;
+        @apply left-0;
+        @apply w-full;
+        @apply h-full;
+        background-color: var(--app-bg-color); // TODO: tailwindify
         &.transparent {
-            background: none;
+            @apply bg-transparent;
         }
     }
 </style>
 
 {#if $view === route}
     {#if primary}
-        <div class:transparent transition:scale={{ duration: 380, start: 0.95, oapcity: 0.9 }}>
+        <div data-label="route" class:transparent transition:scale={{ duration: 380, start: 0.95, oapcity: 0.9 }}>
             <slot />
         </div>
     {:else if secondary}
-        <div class:transparent transition:scale={{ duration: 300, start: 1.05, opacity: 0 }}>
+        <div data-label="route" class:transparent transition:scale={{ duration: 300, start: 1.05, opacity: 0 }}>
             <slot />
         </div>
     {:else}
-        <div class:transparent transition:fly={{ x: left ? 360 : -360, duration: 280, opacity: 0 }}>
+        <div data-label="route" class:transparent transition:fly={{ x: left ? 360 : -360, duration: 280, opacity: 0 }}>
             <slot />
         </div>
     {/if}

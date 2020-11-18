@@ -1,9 +1,9 @@
 <script>
     import { onMount } from 'svelte'
 
-    export let value
+    export let value = undefined
     export let size = 6
-    export let classes
+    export let classes = ''
 
     let inputs = new Array(size)
     $: value = parseInt(inputs.join(''), 10)

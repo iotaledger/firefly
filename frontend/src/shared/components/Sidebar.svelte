@@ -1,12 +1,22 @@
 <script>
-    import {Logo, Box} from '@shared-components'
+    import { Logo, Icon } from '@shared-components'
 </script>
 
-<aside class="flex flex-col bg-white h-screen relative w-20">
-    <Box classes="flex justify-center items-center h-32">
-        <Logo width="48px" logo="logo-firefly"/>
-    </Box>
-    <nav class="flex-grow pb-8 flex justify-center items-end">
-        <Logo width="40px" logo="profile-picture"/>
+<style type="text/scss">
+    :global(svg path) {
+        fill: var(--text-secondary-color); // TODO: tailwindify
+    }
+</style>
+
+<aside class="flex flex-col justify-center items-center bg-white h-screen relative w-20 px-5 py-6">
+    <Logo classes="mb-10" width="48px" logo="logo-firefly" />
+    <nav class="flex flex-grow flex-col justify-between">
+        <div>
+            <Icon icon="wallet" />
+        </div>
+        <div>
+            <Icon classes="mb-8" icon="bell" />
+            <Icon icon="settings" />
+        </div>
     </nav>
 </aside>
