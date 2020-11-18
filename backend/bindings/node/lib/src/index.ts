@@ -60,78 +60,62 @@ export function onMessage(cb: (payload: any) => void) {
   onMessageListeners.push(cb)
 }
 
-export function createAccount(__id: number): ((account: AccountToCreate) => Promise<number>) {
-  return (account: AccountToCreate) => _createAccount(sendMessage, __id, account)
-
-}
-
-export function removeAccount(__id: number): ((accountId: AccountIdentifier) => Promise<number>) {
-  return (accountId: AccountIdentifier) => _removeAccount(sendMessage, __id, accountId)
-}
-
-export function getAccount(__id: number): ((accountId: AccountIdentifier) => Promise<number>) {
-  return (accountId: AccountIdentifier) => _getAccount(sendMessage, __id, accountId)
-}
-
-export function getAccounts(__id: number): (() => Promise<number>) {
-  return () => _getAccounts(sendMessage, __id)
-}
-
-export function syncAccounts(__id: number): (() => Promise<number>) {
-  return () => _syncAccounts(sendMessage, __id)
-}
-
-export function generateAddress(__id: number): ((accountId: AccountIdentifier) => Promise<number>) {
-  return (accountId: AccountIdentifier) => _generateAddress(sendMessage, __id, accountId)
-}
-
-export function listMessages(__id: number): ((accountId: AccountIdentifier, filters?: ListMessagesFilter) => Promise<number>) {
-  return (accountId: AccountIdentifier, filters?: ListMessagesFilter) => _listMessages(sendMessage, __id, accountId, filters)
-}
-
-export function listAddresses(__id: number): ((accountId: AccountIdentifier, unspent?: boolean) => Promise<number>) {
-  return (accountId: AccountIdentifier, unspent?: boolean) => _listAddresses(sendMessage, __id, accountId, unspent)
-}
-
-export function availableBalance(__id: number): ((accountId: AccountIdentifier) => Promise<number>) {
-  return (accountId: AccountIdentifier) => _availableBalance(sendMessage, __id, accountId)
-}
-
-export function totalBalance(__id: number): ((accountId: AccountIdentifier) => Promise<number>) {
-  return (accountId: AccountIdentifier) => _totalBalance(sendMessage, __id, accountId)
-}
-
-export function latestAddress(__id: number): ((accountId: AccountIdentifier) => Promise<number>) {
-  return (accountId: AccountIdentifier) => _latestAddress(sendMessage, __id, accountId)
-}
-
-export function syncAccount(__id: number): ((accountId: AccountIdentifier, options?: SyncAccountOptions) => Promise<number>) {
-  return (accountId: AccountIdentifier, options?: SyncAccountOptions) => _syncAccount(sendMessage, __id, accountId, options)
-}
-
-export function reattach(__id: number): ((accountId: AccountIdentifier, messageId: string) => Promise<number>) {
-  return (accountId: AccountIdentifier, messageId: string) => _reattach(sendMessage, __id, accountId, messageId)
-}
-
-export function backup(__id: number): ((destinationPath: string) => Promise<number>) {
-  return (destinationPath: string) => _backup(sendMessage, __id, destinationPath)
-}
-
-export function restoreBackup(__id: number): ((backupPath: string) => Promise<number>) {
-  return (backupPath: string) => _restoreBackup(sendMessage, __id, backupPath)
-}
-
-export function setStrongholdPassword(__id: number): ((password: string) => Promise<number>) {
-  return (password: string) => _setStrongholdPassword(sendMessage, __id, password)
-}
-
-export function send(__id: number): ((fromAccountId: AccountIdentifier, transfer: Transfer) => Promise<number>) {
-  return (fromAccountId: AccountIdentifier, transfer: Transfer) => _send(sendMessage, __id, fromAccountId, transfer)
-}
-
-export function internalTransfer(__id: number): ((fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number) => Promise<number>) {
-  return (fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number) => _internalTransfer(sendMessage, __id, fromAccountId, toAccountId, amount)
-}
+export const api = {
+  createAccount: function (account: AccountToCreate): ((__id: number) => Promise<number>) {
+    return (__id: number) => _createAccount(sendMessage, __id, account)
+  },
+  removeAccount: function (accountId: AccountIdentifier): ((__id: number) => Promise<number>) {
+    return (__id: number) => _removeAccount(sendMessage, __id, accountId)
+  },
+  getAccount: function (accountId: AccountIdentifier): ((__id: number) => Promise<number>) {
+    return (__id: number) => _getAccount(sendMessage, __id, accountId)
+  },
+  getAccounts: function (): ((__id: number) => Promise<number>) {
+    return (__id: number) => _getAccounts(sendMessage, __id)
+  },
+  syncAccounts: function (): ((__id: number) => Promise<number>) {
+    return (__id: number) => _syncAccounts(sendMessage, __id)
+  },
+  generateAddress: function (accountId: AccountIdentifier): ((__id: number) => Promise<number>) {
+    return (__id: number) => _generateAddress(sendMessage, __id, accountId)
+  },
+  listMessages: function (accountId: AccountIdentifier, filters?: ListMessagesFilter): ((__id: number) => Promise<number>) {
+    return (__id: number) => _listMessages(sendMessage, __id, accountId, filters)
+  },
+  listAddresses: function (accountId: AccountIdentifier, unspent?: boolean): ((__id: number) => Promise<number>) {
+    return (__id: number) => _listAddresses(sendMessage, __id, accountId, unspent)
+  },
+  availableBalance: function (accountId: AccountIdentifier): ((__id: number) => Promise<number>) {
+    return (__id: number) => _availableBalance(sendMessage, __id, accountId)
+  },
+  totalBalance: function (accountId: AccountIdentifier): ((__id: number) => Promise<number>) {
+    return (__id: number) => _totalBalance(sendMessage, __id, accountId)
+  },
+  latestAddress: function (accountId: AccountIdentifier): ((__id: number) => Promise<number>) {
+    return (__id: number) => _latestAddress(sendMessage, __id, accountId)
+  },
+  syncAccount: function (accountId: AccountIdentifier, options?: SyncAccountOptions): ((__id: number) => Promise<number>) {
+    return (__id: number) => _syncAccount(sendMessage, __id, accountId, options)
+  },
+  reattach: function (accountId: AccountIdentifier, messageId: string): ((__id: number) => Promise<number>) {
+    return (__id: number) => _reattach(sendMessage, __id, accountId, messageId)
+  },
+  backup: function (destinationPath: string): ((__id: number) => Promise<number>) {
+    return (__id: number) => _backup(sendMessage, __id, destinationPath)
+  },
+  restoreBackup: function (backupPath: string): ((__id: number) => Promise<number>) {
+    return (__id: number) => _restoreBackup(sendMessage, __id, backupPath)
+  },
+  setStrongholdPassword: function (password: string): ((__id: number) => Promise<number>) {
+    return (__id: number) => _setStrongholdPassword(sendMessage, __id, password)
+  },
+  send: function (fromAccountId: AccountIdentifier, transfer: Transfer): ((__id: number) => Promise<number>) {
+    return (__id: number) => _send(sendMessage, __id, fromAccountId, transfer)
+  },
+  internalTransfer: function (fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number): ((__id: number) => Promise<number>) {
+    return (__id: number) => _internalTransfer(sendMessage, __id, fromAccountId, toAccountId, amount)
+  }
+};
 
 export function listenToErrorEvents(__id: number) {
   addon.listen(__id, 'ErrorThrown')
