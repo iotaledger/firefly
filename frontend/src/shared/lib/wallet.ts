@@ -57,7 +57,12 @@ const apiToResponseTypeMap = {
     restoreBackup: ResponseTypes.BackupRestored,
     send: ResponseTypes.SentTransfer,
     setStrongholdPassword: ResponseTypes.StrongholdPasswordSet,
-
+    onError: ResponseTypes.ErrorThrown,
+    onBalanceChange: ResponseTypes.BalanceChange,
+    onNewTransaction: ResponseTypes.NewTransaction,
+    onConfirmationStateChange: ResponseTypes.ConfirmationStateChange,
+    onReattachment: ResponseTypes.Reattachment,
+    onBroadcast: ResponseTypes.Broadcast,
 };
 
 /*
@@ -142,7 +147,9 @@ const defaultCallbacks = {
     BalanceChange: {
         onSuccess: (response: Event<BalanceChangeEventPayload>): void => {
             wallet.update((_wallet) => {
-                const account = _wallet.accounts.find(acc => acc.id === response.payload.accountId)
+                // TODO this won't be necessary when the account id is serialized as a string
+                const accountId = JSON.stringify(response.payload.accountId)
+                const account = _wallet.accounts.find(acc => JSON.stringify(acc.id) === accountId)
                 const address = account.addresses.find(addr => addr.address === response.payload.address.address)
                 address.balance = response.payload.balance
                 return _wallet
@@ -250,7 +257,7 @@ const Middleware = {
     }
 }
 
-const api = new Proxy(Wallet.api, Middleware);
+export const api = new Proxy(Wallet.api, Middleware);
 
 // setTimeout(async () => {
 //     await api.setStrongholdPassword('password');

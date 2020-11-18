@@ -114,29 +114,23 @@ export const api = {
   },
   internalTransfer: function (fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number): ((__id: number) => Promise<number>) {
     return (__id: number) => _internalTransfer(sendMessage, __id, fromAccountId, toAccountId, amount)
-  }
+  },
+  onError: function (): ((__id: number) => Promise<number>) {
+    return (__id: number) => addon.listen(__id, 'ErrorThrown')
+  },
+  onBalanceChange: function (): ((__id: number) => Promise<number>) {
+    return (__id: number) => addon.listen(__id, 'BalanceChange')
+  },
+  onNewTransaction: function (): ((__id: number) => Promise<number>) {
+    return (__id: number) => addon.listen(__id, 'NewTransaction')
+  },
+  onConfirmationStateChange: function (): ((__id: number) => Promise<number>) {
+    return (__id: number) => addon.listen(__id, 'ConfirmationStateChange')
+  },
+  onReattachment: function (): ((__id: number) => Promise<number>) {
+    return (__id: number) => addon.listen(__id, 'Reattachment')
+  },
+  onBroadcast: function (): ((__id: number) => Promise<number>) {
+    return (__id: number) => addon.listen(__id, 'Broadcast')
+  },
 };
-
-export function listenToErrorEvents(__id: number) {
-  addon.listen(__id, 'ErrorThrown')
-}
-
-export function listenToBalanceChangeEvents(__id: number) {
-  addon.listen(__id, 'BalanceChange')
-}
-
-export function listenToNewTransactionEvents(__id: number) {
-  addon.listen(__id, 'NewTransaction')
-}
-
-export function listenToConfirmationStateChangeEvents(__id: number) {
-  addon.listen(__id, 'ConfirmationStateChange')
-}
-
-export function listenToReattachmentEvents(__id: number) {
-  addon.listen(__id, 'Reattachment')
-}
-
-export function listenToBroadcastEvents(__id: number) {
-  addon.listen(__id, 'Broadcast')
-}

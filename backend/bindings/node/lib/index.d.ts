@@ -21,10 +21,10 @@ export declare const api: {
     setStrongholdPassword: (password: string) => (__id: number) => Promise<number>;
     send: (fromAccountId: AccountIdentifier, transfer: Transfer) => (__id: number) => Promise<number>;
     internalTransfer: (fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number) => (__id: number) => Promise<number>;
+    onError: () => (__id: number) => Promise<number>;
+    onBalanceChange: () => (__id: number) => Promise<number>;
+    onNewTransaction: () => (__id: number) => Promise<number>;
+    onConfirmationStateChange: () => (__id: number) => Promise<number>;
+    onReattachment: () => (__id: number) => Promise<number>;
+    onBroadcast: () => (__id: number) => Promise<number>;
 };
-export declare function listenToErrorEvents(__id: number): void;
-export declare function listenToBalanceChangeEvents(__id: number): void;
-export declare function listenToNewTransactionEvents(__id: number): void;
-export declare function listenToConfirmationStateChangeEvents(__id: number): void;
-export declare function listenToReattachmentEvents(__id: number): void;
-export declare function listenToBroadcastEvents(__id: number): void;
