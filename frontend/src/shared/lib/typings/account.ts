@@ -38,6 +38,8 @@ export interface AccountToCreate {
 export interface SyncedAccount {
   accountId: number[]
   depositAddress: Address
+  addresses: Address[]
+  messages: Message[]
 }
 
 export function createAccount(bridge: Bridge, account: AccountToCreate): Promise<number> {

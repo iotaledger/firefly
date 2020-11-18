@@ -124,6 +124,16 @@ const defaultCallbacks = {
     SyncedAccounts: {
         onSuccess: (response: SyncAccountsResponse): void => {
             console.info('Synced accounts', response);
+            wallet.update((_wallet) => {
+                for (const synced of response.payload) {
+                    // TODO this won't be necessary when the account id is serialized as a string
+                    const accountId = JSON.stringify(synced.accountId)
+                    const account = _wallet.accounts.find(acc => JSON.stringify(acc.id) === accountId)
+                    account.addresses = [...account.addresses, ...synced.addresses]
+                    account.messages = [...account.messages, ...synced.messages]
+                }
+                return _wallet
+            })
         },
         onError: (error: ErrorResponse): void => {
             console.info('Error syncing accounts', error);
