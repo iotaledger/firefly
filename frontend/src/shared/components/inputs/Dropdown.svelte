@@ -1,8 +1,9 @@
 <script>
     import { Icon, Text } from '@shared-components'
-    export let value
+
+    export let value = undefined
     export let items = []
-    export let onSelect
+    export let onSelect = () => {}
 
     let dropdown = false
 

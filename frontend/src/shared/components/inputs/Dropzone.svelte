@@ -1,8 +1,8 @@
 <script>
     import { Text, Button } from '@shared-components'
 
-    export let locale
-    export let onDrop
+    export let locale = undefined
+    export let onDrop = () => {}
     export let extentionsLabel = ''
     export let allowedExtensions = '*'
 

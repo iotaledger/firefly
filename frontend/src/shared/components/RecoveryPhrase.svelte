@@ -2,10 +2,10 @@
     import { shuffleArray } from '@shared-lib/helpers'
     import { onMount } from 'svelte'
 
-    export let recoveryPhrase
+    export let recoveryPhrase = []
+    export let recoveryPhraseInput = []
     export let shuffle = false
-    export let classes
-    export let recoveryPhraseInput = new Array()
+    export let classes = ''
 
     let visibleRecoveryPhrase
 
@@ -23,37 +23,26 @@
 </script>
 
 <style type="text/scss">
-    recovery-phrase {
-        display: grid;
-        grid-gap: 12px;
-        width: 100%;
+    // TODO: tailwindify
+    div {
         max-width: 460px;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        grid-auto-rows: minmax(min-content, max-content);
-        font-size: 12px;
-        color: #25395f;
+        color: var(--text-primary-color);
         button {
-            padding: 8px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: #eef4ff;
-            border-radius: 16px;
+            background: var(--line-separator-color);
             min-height: 50px;
             .number {
-                color: #108cff;
+                color: var(--ui-blue-color);
             }
             &.disabled {
-                pointer-events: none !important;
+                @apply pointer-events-none;
             }
             &.selected {
-                background: #108cff;
+                background: var(--ui-blue-color);
                 .number {
-                    font-weight: bold;
-                    font-size: 22px;
-                    line-height: 140%;
-                    color: #eef4ff;
+                    @apply font-bold;
+                    @apply text-22;
+                    @apply leading-140;
+                    color: var(--line-separator-color);
                 }
             }
         }
@@ -61,17 +50,18 @@
 </style>
 
 {#if visibleRecoveryPhrase}
-    <recovery-phrase class={classes}>
+    <div data-label="recovery-phrase" class={`grid w-full text-12 grid-cols-3 gap-3 ${classes}`}>
         {#each visibleRecoveryPhrase as word, i}
             <button
                 on:click|preventDefault={() => handleClick(word)}
+                class="p-2 flex flex-col items-center justify-center rounded-2xl"
                 class:selected={shuffle && recoveryPhraseInput.indexOf(word) !== -1}
                 class:disabled={!shuffle}>
                 {#if !shuffle}<span class="number">{i + 1}.</span>{/if}
                 {#if recoveryPhraseInput.indexOf(word) === -1}
-                    <word>{word}</word>
+                    <span class="word">{word}</span>
                 {:else}<span class="number">{recoveryPhraseInput.indexOf(word) + 1}</span>{/if}
             </button>
         {/each}
-    </recovery-phrase>
+    </div>
 {/if}

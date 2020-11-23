@@ -1,10 +1,10 @@
 <script>
-    export let value
-    export let classes
+    export let value = undefined
+    export let classes = ''
 </script>
 
 <style type="text/scss">
-    import-text-input {
+    div {
         display: flex;
         position: relative;
         textarea {
@@ -24,4 +24,4 @@
     }
 </style>
 
-<import-text-input class={classes}><textarea bind:value placeholder="" /></import-text-input>
+<div data-label="import-text-input" class={classes}><textarea bind:value placeholder="" /></div>

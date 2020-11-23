@@ -1,8 +1,8 @@
 <script>
-    export let amount
-    export let unit
-    export let locale
-    export let classes
+    export let amount = undefined
+    export let unit = undefined
+    export let locale = undefined
+    export let classes = ''
 
     let dropdown = false
 
