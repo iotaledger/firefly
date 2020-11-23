@@ -1,9 +1,10 @@
 <script lang="typescript">
-    import Plugin from '../../lib/plugins'
+    import Plugin from '@shared-lib/plugins'
+    import { PluginPartial } from '@shared-components'
 
     export let definition, parameters
 
-    let plugin, error
+    let plugin
 
     try {
         // Initialise plugin
@@ -30,25 +31,7 @@
         })
     } catch (e) {
         console.error(e)
-        error = e
     }
 </script>
 
-<main>
-    {#if error}
-        <span style="color: red">{error}</span>
-    {:else}
-        {#each plugin.modules as item}
-            <svelte:component this={item.component} {...item.props} events={item.events}>
-                {#if item.children.length}
-                    {#each item.children as child}
-                        <svelte:component this={child.component} {...child.props} events={child.events}>
-                            {child.content}
-                        </svelte:component>
-                    {/each}
-                {:else}{item.content}{/if}
-
-            </svelte:component>
-        {/each}
-    {/if}
-</main>
+<PluginPartial components={plugin.modules} />

@@ -1,0 +1,88 @@
+{
+    "version": 1.0,
+    "type": "onboarding",
+    "description": "Mobile onboarding screen # 1 view",
+    "componentRef": "routes/onboarding/Onboarding1.svelte",
+    "modules": [
+        {
+            "id": "0",
+            "schemaRef": "box",
+            "category": "@iota/core",
+            "classes": "w-full h-full flex flex-col justify-between",
+            "children": [
+                {
+                    "id": "0.0",
+                    "schemaRef": "box",
+                    "category": "@iota/core",
+                    "classes": "w-full flex flex-col items-center",
+                    "children": [
+                        {
+                            "id": "0.0.0",
+                            "schemaRef": "logo",
+                            "category": "@iota/core",
+                            "width": "130px",
+                            "logo": "logo-firefly-complete-horizontal",
+                            "classes": "pt-12"
+                        },
+                        {
+                            "id": "0.0.1",
+                            "schemaRef": "illustration",
+                            "category": "@iota/core",
+                            "component": "Illustration",
+                            "width": "100%",
+                            "illustration": "onboarding-1-mobile"
+                        }
+                    ]
+                },
+                {
+                    "id": "0.1",
+                    "schemaRef": "box",
+                    "category": "@iota/core",
+                    "component": "Box",
+                    "classes": "w-full flex flex-col items-center px-16 pb-8 text-center",
+                    "children": [
+                        {
+                            "id": "0.1.0",
+                            "schemaRef": "text",
+                            "category": "@iota/core",
+                            "type": "h1",
+                            "classes": "mb-2",
+                            "content": "Send, Receive & Store your IOTA Tokens"
+                        },
+                        {
+                            "id": "0.1.1",
+                            "schemaRef": "text",
+                            "category": "@iota/core",
+                            "type": "p",
+                            "secondary": true,
+                            "classes": "mb-6 px-12",
+                            "content": "Store Tokens, Coins and Collectible Assets"
+                        },
+                        {
+                            "id": "0.1.2",
+                            "schemaRef": "button",
+                            "category": "@iota/core",
+                            "classes": "mb-5",
+                            "content": "continue",
+                            "click": {
+                                "call": "log",
+                                "parameters": "{{ message }}"
+                            }
+                        },
+                        {
+                            "id": "0.1.3",
+                            "schemaRef": "link",
+                            "category": "@iota/core",
+                            "classes": "mb-5",
+                            "content": "import an existing seed",
+                            "click": {
+                                "call": "log",
+                                "parameters": "{{ message }}"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

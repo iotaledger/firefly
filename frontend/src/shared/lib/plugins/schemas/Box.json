@@ -1,0 +1,90 @@
+{
+  "version": 1.0,
+  "description": "Box component schema.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Component id.",
+      "enum": [
+        "^\\d?\\.?\\d?\\.?\\d$"
+      ]
+    },
+    "category": {
+      "type": "string",
+      "description": "Must be @iota/core.",
+      "enum": [
+        "@iota/core"
+      ]
+    },
+    "children": {
+      "type": "array",
+      "description": "Component children."
+    },
+    "content": {
+      "type": "string",
+      "description": "Text to display."
+    },
+    "width": {
+      "type": "string",
+      "description": "Box width.",
+      "default": "100%"
+    },
+    "height": {
+      "type": "string",
+      "description": "Box height.",
+      "default": "100%"
+    },
+    "classes": {
+      "type": "string",
+      "description": "Additional CSS classes."
+    }
+  },
+  "required": [
+    "id",
+    "category"
+  ],
+  "propertiesSummary": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": "Required",
+      "text": "Component id. Must be unique for each component in a plugin."
+    },
+    {
+      "name": "category",
+      "type": "string",
+      "required": "Required",
+      "text": "Component category. Currently, only @iota/core category is supported."
+    },
+    {
+      "name": "children",
+      "type": "array",
+      "required": "Optional",
+      "text": "Component children. If both 'content' & 'children' are passed, 'children' takes precedence."
+    },
+    {
+      "name": "content",
+      "type": "string",
+      "required": "Optional",
+      "text": "Component content. If 'children' property is passed, this property will be ignored."
+    },
+    {
+      "name": "width",
+      "type": "string",
+      "required": "Optional",
+      "text": "Component width. Defaults to 100%."
+    },
+    {
+      "name": "height",
+      "type": "string",
+      "required": "Optional",
+      "text": "Component height. Defaults to 100%."
+    },
+    {
+      "name": "classes",
+      "type": "string",
+      "required": "Optional",
+      "text": "Additional CSS classes used by the component."
+    }
+  ]
+}

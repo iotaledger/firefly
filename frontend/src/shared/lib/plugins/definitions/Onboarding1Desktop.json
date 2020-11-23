@@ -1,0 +1,86 @@
+{
+    "version": 1.0,
+    "type": "onboarding",
+    "description": "Desktop onboarding screen # 1 view",
+    "componentRef": "routes/onboarding/Onboarding1.svelte",
+    "modules": [
+        {
+            "id": "0",
+            "schemaRef": "box",
+            "category": "@iota/core",
+            "classes": "w-full h-full flex flex-row",
+            "children": [
+                {
+                    "id": "0.0",
+                    "schemaRef": "box",
+                    "category": "@iota/core",
+                    "classes": "flex flex-col pt-12 pb-16 px-12 w-2/6",
+                    "children": [
+                        {
+                            "id": "0.0.0",
+                            "schemaRef": "logo",
+                            "category": "@iota/core",
+                            "width": "64px",
+                            "logo": "logo-firefly",
+                            "classes": "pt-12"
+                        },
+                        {
+                            "id": "0.0.1",
+                            "schemaRef": "text",
+                            "category": "@iota/core",
+                            "type": "h1",
+                            "classes": "mb-2",
+                            "content": "Send, Receive & Store your IOTA Tokens"
+                        },
+                        {
+                            "id": "0.0.2",
+                            "schemaRef": "text",
+                            "category": "@iota/core",
+                            "type": "p",
+                            "secondary": true,
+                            "classes": "mb-6 px-12",
+                            "content": "Store Tokens, Coins and Collectible Assets"
+                        },
+                        {
+                            "id": "0.0.3",
+                            "schemaRef": "button",
+                            "category": "@iota/core",
+                            "classes": "mb-5",
+                            "content": "continue",
+                            "click": {
+                                "call": "log",
+                                "parameters": "{{ message }}"
+                            }
+                        },
+                        {
+                            "id": "0.0.4",
+                            "schemaRef": "link",
+                            "category": "@iota/core",
+                            "content": "import an existing seed",
+                            "click": {
+                                "call": "log",
+                                "parameters": "{{ message }}"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": "0.1",
+                    "schemaRef": "box",
+                    "category": "@iota/core",
+                    "classes": "w-full h-full flex p-16 bg-white",
+                    "children": [
+                        {
+                            "id": "0.1.0",
+                            "schemaRef": "illustration",
+                            "category": "@iota/core",
+                            "component": "Illustration",
+                            "width": "100%",
+                            "illustration": "onboarding-1-desktop"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

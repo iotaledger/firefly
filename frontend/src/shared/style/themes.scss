@@ -7,17 +7,24 @@
     --text-disabled-color: #c9d6ec;
     --button-text-color: #ffffff;
     --button-border-color: #108cff;
-    --button-backround-color: #108cff;
+    --button-background-color: #108cff;
+    --button-border-color: #108cff;
+    --button-disabled-background-color: #e1eaf9;
+    --button-disabled-border-color: #c9d6ec;
+    --button-icon-color: #ffffff;
+    --button-active-icon-color: #ffffff;
+    --button-secondary-text-color: #1f212c;
+    --button-secondary-background-color: #ffffff;
+    --button-secondary-icon-color: #108cff;
+    --button-secondary-active-text-color: #ffffff;
+    --button-secondary-active-background-color: #108cff;
+    --button-secondary-active-icon-color: #ffffff;
+    --buton-disabled-background-color: #e1eaf9;
+    --buton-disabled-text-color: #8391aa;
+    --link-text-color: #108cff;
 }
 
 //dark
-.dark {
-    --app-background-color: #f6f9ff;
-    --heading-color: #25395f;
-    --text-primary-color: #25395f;
-    --text-secondary-color: #9aadce;
-    --text-disabled-color: #c9d6ec;
-    --button-text-color: #ffffff;
-    --button-border-color: #108cff;
-    --button-backround-color: #108cff;
+:global(body.dark) {
+    // TODO
 }

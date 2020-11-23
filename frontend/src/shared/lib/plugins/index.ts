@@ -2,17 +2,33 @@ import { get, writable, Writable } from 'svelte/store'
 
 import API from '../api';
 
-import Button from '../../ui/components/Button.svelte';
-import Text from '../../ui/components/Text.svelte';
+import {
+    Box,
+    Button,
+    Illustration,
+    Link,
+    Logo,
+    Text
+} from '../../components';
 
-import ButtonSchema from './schemas/button.json';
-import TextSchema from './schemas/text.json';
+import {
+    Box as BoxSchema,
+    Button as ButtonSchema,
+    Illustration as IllustrationSchema,
+    Link as LinkSchema,
+    Logo as LogoSchema,
+    Text as TextSchema
+} from '../plugins/schemas';
 
 /**
  * Supported schemas
  */
 const schemas = {
+    box: BoxSchema,
     button: ButtonSchema,
+    illustration: IllustrationSchema,
+    link: LinkSchema,
+    logo: LogoSchema,
     text: TextSchema
 };
 
@@ -20,8 +36,12 @@ const schemas = {
  * Supported components
  */
 const components = {
-    Button,
-    Text,
+    box: Box,
+    button: Button,
+    illustration: Illustration,
+    link: Link,
+    logo: Logo,
+    text: Text,
 };
 
 /**
@@ -52,7 +72,7 @@ type ModuleEvents = {
  */
 interface PluginModule {
     id: string;
-    component: string;
+    schemaRef: string;
     content?: string;
     children?: PluginModule[];
 };
@@ -82,11 +102,15 @@ export default class Plugin implements IPlugin {
         // Validate plugin semantics
         this.validate(plugin);
 
-        // Extract and set events
-        this.events = this.setEvents(plugin);
-
         // Initialise plugin state
-        this.state = this.setState(plugin);
+        this.state = writable({});
+
+        // Extract and set events
+        plugin.modules.forEach((module: PluginModule) => {
+            this.setEvents(module);
+            this.setState(module);
+        });
+
 
         this.version = plugin.version;
         this.modules = plugin.modules.map((item: PluginModule) => this.mapModule(item));
@@ -95,32 +119,32 @@ export default class Plugin implements IPlugin {
     /**
      * @method setEvents
      * 
-     * @param {IPlugin} plugin
+     * @param {PluginModule} module
      * 
      * @returns {void} 
      */
-    private setEvents(plugin: IPlugin): ModuleEvents {
-        const events: ModuleEvents = {};
+    private setEvents(module: PluginModule): void {
+        const moduleDefinedProperties = schemas[module.schemaRef].properties;
 
-        plugin.modules.forEach((module: PluginModule) => {
-            const moduleDefinedProperties = schemas[module.id].properties;
+        const supportedEvents = Object.keys(moduleDefinedProperties)
+            .filter((prop: string) => moduleDefinedProperties[prop].type === 'event');
 
-            const supportedEvents = Object.keys(moduleDefinedProperties)
-                .filter((prop: string) => moduleDefinedProperties[prop].type === 'event');
-
-            if (supportedEvents.length) {
-                supportedEvents.forEach((event: string) => {
-                    // Check if event is present in plugin json
-                    if (event in module) {
-                        events[module.id] = {
+        if (supportedEvents.length) {
+            supportedEvents.forEach((event: string) => {
+                // Check if event is present in plugin json
+                if (event in module) {
+                    this.events = Object.assign({}, this.events, {
+                        [module.id]: {
                             [event as AllowedEvents]: module[event]
                         }
-                    }
-                });
-            }
-        });
+                    })
+                }
+            });
+        }
 
-        return events;
+        if (module.children) {
+            module.children.forEach((child: PluginModule) => this.setEvents(child));
+        }
     }
 
     /**
@@ -128,23 +152,23 @@ export default class Plugin implements IPlugin {
      * 
      * @method setState
      * 
-     * @param {IPlugin} plugin
+     * @param {PluginModule} plugin
      * 
      * @returns {Writable<Object>} 
      */
-    private setState(plugin: IPlugin): Writable<Object> {
-        const state = plugin.modules.reduce((acc, module: PluginModule): any => {
-            if (module.id in this.events) {
-                const eventsForThisModule = this.events[module.id];
+    private setState(module: PluginModule) {
+        if (module.id in this.events) {
+            const eventsForThisModule = this.events[module.id];
 
-                Object.keys(eventsForThisModule).forEach((event) => {
-                    if (eventsForThisModule[event].parameters) {
-                        const regex = new RegExp(/[^{\}]+(?=})/g);
+            Object.keys(eventsForThisModule).forEach((event) => {
+                if (eventsForThisModule[event].parameters) {
+                    const regex = new RegExp(/[^{\}]+(?=})/g);
 
-                        const params = eventsForThisModule[event].parameters.match(regex).map((param) => param.trim());
+                    const params = eventsForThisModule[event].parameters.match(regex).map((param) => param.trim());
 
-                        params.forEach((param) => {
-                            acc = Object.assign({}, acc, {
+                    params.forEach((param) => {
+                        this.state.update((state) => {
+                            return Object.assign({}, state, {
                                 [module.id]: {
                                     [eventsForThisModule[event].call]: {
                                         [param]: null
@@ -152,16 +176,14 @@ export default class Plugin implements IPlugin {
                                 }
                             });
                         });
+                    });
+                }
+            })
+        }
 
-
-                    }
-                })
-            }
-
-            return acc;
-        }, {});
-
-        return writable(state);
+        if (module.children) {
+            module.children.forEach((child: PluginModule) => this.setState(child));
+        }
     }
 
     /**
@@ -175,15 +197,15 @@ export default class Plugin implements IPlugin {
      */
     private validate(plugin: IPlugin) {
         // TODO(laumair): Also, validate schema enums
-        plugin.modules.forEach((module: PluginModule) => {
-            const requiredProperties: string[] = schemas[module.id].required;
+        // plugin.modules.forEach((module: PluginModule) => {
+        //     const requiredProperties: string[] = schemas[module.id].required;
 
-            const providedProperties: string[] = Object.keys(module);
+        //     const providedProperties: string[] = Object.keys(module);
 
-            if (!requiredProperties.every((prop: string) => providedProperties.includes(prop))) {
-                throw new Error(`Missing properties for component ${module.component}`);
-            }
-        });
+        //     if (!requiredProperties.every((prop: string) => providedProperties.includes(prop))) {
+        //         throw new Error(`Missing properties for component ${module.component}`);
+        //     }
+        // });
 
     }
 
@@ -193,8 +215,8 @@ export default class Plugin implements IPlugin {
      * @param {PluginModule} module 
      */
     private mapModule(module: PluginModule) {
-        if (!(module.component in components)) {
-            throw new Error(`Plugin ${module.id}: unknown component ${module.component}`)
+        if (!(module.schemaRef in components)) {
+            throw new Error(`Plugin ${module.id}: unknown component ${module.schemaRef}`)
         }
 
         const events = {}
@@ -207,7 +229,6 @@ export default class Plugin implements IPlugin {
 
                 events[event] = () => {
                     const state = get(this.state);
-
                     const params = module.id in state ? state[module.id][call] : []
 
                     API[call](module.id, params).then((result) => {
@@ -224,7 +245,7 @@ export default class Plugin implements IPlugin {
 
         return {
             ...module,
-            component: components[module.component],
+            component: components[module.schemaRef],
             children: module.children ? module.children.map((child) => this.mapModule(child)) : [],
             events
         }

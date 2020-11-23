@@ -2,27 +2,59 @@ import svelte from 'rollup-plugin-svelte'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import ts from '@rollup/plugin-typescript'
+import alias from '@rollup/plugin-alias'
 import typescript from 'typescript'
 import json from '@rollup/plugin-json'
 import livereload from 'rollup-plugin-livereload'
 import serve from 'rollup-plugin-serve'
 import { terser } from 'rollup-plugin-terser'
 import sveltePreprocess from 'svelte-preprocess'
+const path = require('path')
 
 const isDev = process.env.NODE_ENV === 'development'
 const port = 3000
+const projectRootDir = path.resolve(__dirname)
 
 // Plugins definition
 const plugins = [
+    alias({
+        resolve: ['', '.js', '.svelte', '.css', '.scss'],
+        entries: [
+            {
+                find: /^@shared-lib\/(.*)/,
+                replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/lib/out/lib') + '/$1'
+            },
+            {
+                find: /^@shared-locales\/(.*)/,
+                replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/locales') + '/$1'
+            },
+            {
+                find: /^@shared-components/,
+                replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/components')
+            },
+            {
+                find: /^@shared-routes/,
+                replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/routes')
+            },
+            {
+                find: /^@shared-assets\/(.*)/,
+                replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/assets') + '/$1'
+            }
+        ]
+    }),
     json(),
     svelte({
         dev: isDev,
         extensions: ['.svelte'],
         css: (css) => {
-            css.write('public/build/bundle.css')
+            css.write('bundle.css')
         },
         preprocess: sveltePreprocess({
+            postcss: true,
             scss: {
+                postcss: {
+                    plugins: [require('autoprefixer')]
+                },
                 prependData: `@import 'shared-modules/style/style.scss';`
             }
         })

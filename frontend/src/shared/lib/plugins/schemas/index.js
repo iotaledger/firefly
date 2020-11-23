@@ -1,0 +1,6 @@
+export { default as Box } from './Box.json'
+export { default as Button } from './Button.json'
+export { default as Illustration } from './Illustration.json'
+export { default as Link } from './Link.json'
+export { default as Logo } from './Logo.json'
+export { default as Text } from './Text.json'
