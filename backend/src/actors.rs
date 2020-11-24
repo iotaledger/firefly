@@ -63,7 +63,7 @@ impl Actor for WalletActor {
 
 #[derive(Deserialize)]
 struct DispatchMessage {
-  id: usize,
+  id: String,
   #[serde(flatten)]
   message: WalletMessageType,
 }
