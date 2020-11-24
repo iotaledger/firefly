@@ -83,52 +83,31 @@ const callbacksStore: CallbacksStore = {};
  */
 const defaultCallbacks = {
     StrongholdPasswordSet: {
-        onSuccess: (response: SetStrongholdPasswordResponse): void => {
-            console.info('Stronghold password set successfully', response);
-        },
-        onError: (error: ErrorResponse): void => {
-            console.info('Stronghold password set error', error);
-        }
+        onSuccess: (response: SetStrongholdPasswordResponse): void => { },
+        onError: (error: ErrorResponse): void => { }
     },
     CreatedAccount: {
         onSuccess: (response: CreatedAccountResponse): void => {
-            console.info('New account created!', response);
-
             wallet.update((_wallet) => Object.assign({}, _wallet, {
                 accounts: [..._wallet.accounts, response.payload]
             }))
         },
-        onError: (error: ErrorResponse): void => {
-            console.info('New account creation error!', error);
-        }
+        onError: (error: ErrorResponse): void => { }
     },
     ReadAccounts: {
-        onSuccess: (response: ReadAccountsResponse): void => {
-            console.info('Accounts', response);
-        },
-        onError: (error: ErrorResponse): void => {
-            console.info('Error reading accounts information', error);
-        }
+        onSuccess: (response: ReadAccountsResponse): void => { },
+        onError: (error: ErrorResponse): void => { }
     },
     LatestAddress: {
-        onSuccess: (response: LatestAddressResponse): void => {
-            console.info('Latest address', response);
-        },
-        onError: (error: ErrorResponse): void => {
-            console.info('Error reading latest address', error);
-        }
+        onSuccess: (response: LatestAddressResponse): void => { },
+        onError: (error: ErrorResponse): void => { }
     },
     TotalBalance: {
-        onSuccess: (response: TotalBalanceResponse): void => {
-            console.info('Total balance', response);
-        },
-        onError: (error: ErrorResponse): void => {
-            console.info('Error reading total balance', error);
-        }
+        onSuccess: (response: TotalBalanceResponse): void => { },
+        onError: (error: ErrorResponse): void => { }
     },
     SyncedAccounts: {
         onSuccess: (response: SyncAccountsResponse): void => {
-            console.info('Synced accounts', response);
             wallet.update((_wallet) => {
                 for (const synced of response.payload) {
                     // TODO this won't be necessary when the account id is serialized as a string
@@ -140,9 +119,7 @@ const defaultCallbacks = {
                 return _wallet
             })
         },
-        onError: (error: ErrorResponse): void => {
-            console.info('Error syncing accounts', error);
-        }
+        onError: (error: ErrorResponse): void => { }
     },
     BalanceChange: {
         onSuccess: (response: Event<BalanceChangeEventPayload>): void => {
@@ -157,12 +134,9 @@ const defaultCallbacks = {
         }
     },
     NewTransaction: {
-        onSuccess: (response: Event<TransactionEventPayload>): void => {
-        }
+        onSuccess: (response: Event<TransactionEventPayload>): void => { }
     }
 };
-
-wallet.subscribe((newState) => console.log('wallet: ', newState))
 
 /**
  * @method generateRandomId
