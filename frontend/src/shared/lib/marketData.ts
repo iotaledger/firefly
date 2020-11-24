@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store'
+import { writable, get } from 'svelte/store'
 
 /**
  * Market data endpoints list
@@ -163,6 +163,13 @@ type MarketData = {
     [Histories.HISTORY_USD]: HistoryUSD,
 };
 
+type PriceData = {
+    [CurrencyTypes.BTC]: HistoryData;
+    [CurrencyTypes.EUR]: HistoryData;
+    [CurrencyTypes.USD]: HistoryData;
+    [CurrencyTypes.ETH]: HistoryData;
+};
+
 /**
  * Exchange rates
  */
@@ -182,6 +189,36 @@ export const volume = writable<number>(0);
  * Percentage of change in IOTA price over twenty four hours
  */
 export const change24h = writable<number>(0);
+
+/**
+ * Price data
+ */
+export const priceData = writable<PriceData>({
+    btc: {
+        '1h': [],
+        '1m': [],
+        '24h': [],
+        '7d': []
+    },
+    eur: {
+        '1h': [],
+        '1m': [],
+        '24h': [],
+        '7d': []
+    },
+    usd: {
+        '1h': [],
+        '1m': [],
+        '24h': [],
+        '7d': []
+    },
+    eth: {
+        '1h': [],
+        '1m': [],
+        '24h': [],
+        '7d': []
+    }
+})
 
 /**
  * Fetches market data
@@ -210,6 +247,17 @@ export async function fetchMarketData(): Promise<void> {
 
             const marketData: MarketData = await response.json();
 
+            const _priceData = {} as PriceData;
+
+            Object.keys(get(priceData)).forEach((currency: CurrencyTypes) => {
+                if (marketData[`history-${currency}`]) {
+                    _priceData[currency] = marketData[`history-${currency}`].data;
+                }
+            });
+            
+            // Store price data
+            priceData.set(_priceData);
+
             // Store exchange rates in store
             rates.set(marketData.rates);
 
@@ -217,6 +265,7 @@ export async function fetchMarketData(): Promise<void> {
             mcap.set(marketData.market.usd_market_cap);
             volume.set(marketData.market.usd_24h_vol);
             change24h.set(marketData.market.usd_24h_change);
+
 
             break;
         } catch (err) {
