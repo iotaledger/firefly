@@ -3,7 +3,7 @@
     export let events = {}
 
     export let onClick = () => ''
-    export let href = null
+    export let href = undefined
     export let secondary = false
     export let disabled = false
     export let ghost = false
@@ -11,13 +11,18 @@
 
 <style type="text/scss">
     a {
-        font-size: 12px;
-        line-height: 140%;
-        cursor: pointer;
-        color: var(--text-highlighted-color);
+        color: var(--text-highlighted-color); // TODO: tailwindify
     }
 </style>
 
-<a use:bindEvents={events} {href} on:click={onClick} class:secondary class:disabled class:ghost>
+<a
+    class="text-12 leading-140 cursor-pointer"
+    data-label="link"
+    use:bindEvents={events}
+    {href}
+    on:click={onClick}
+    class:secondary
+    class:disabled
+    class:ghost>
     <slot />
 </a>

@@ -1,8 +1,8 @@
 <script>
-    export let illustration = null
-    export let width = null
-    export let height = null
-    export let classes = null
+    export let illustration = undefined
+    export let width = undefined
+    export let height = undefined
+    export let classes = ''
 
     $: selected = illustrations[illustration]
 
@@ -27,7 +27,13 @@
 </script>
 
 {#if selected}
-    <img class={classes} width={width || '100%'} height={height || '100%'} src={`assets/illustrations/${selected}`} alt="" />
+    <img
+        data-label="illustration"
+        class={classes}
+        width={width || '100%'}
+        height={height || '100%'}
+        src={`assets/illustrations/${selected}`}
+        alt="" />
 {:else}
     <div class={`${classes}`} width={width || '100%'} height={height || '100%'} />
 {/if}

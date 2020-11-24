@@ -2,7 +2,8 @@
     import { onMount } from 'svelte'
 
     export let progress = 0
-    export let classes = null
+    export let classes = ''
+
     let scroller
 
     onMount(() => {
@@ -22,15 +23,6 @@
     }
 </script>
 
-<style>
-    scroller {
-        display: block;
-        position: relative;
-        max-height: 100%;
-        overflow-y: scroll;
-    }
-</style>
-
-<scroller class={classes} bind:this={scroller}>
+<div data-label="scroller" class={`block relative max-h-full overflow-y-scroll ${classes}`} bind:this={scroller}>
     <slot />
-</scroller>
+</div>

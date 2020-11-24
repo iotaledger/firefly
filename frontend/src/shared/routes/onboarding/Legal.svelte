@@ -43,7 +43,7 @@
         <div slot="rightpane" class="w-full h-full">
             <Scroller classes="w-full" bind:progress={scrollerProgress}>
                 <Box width="540px" classes="block max-w-full mx-auto py-12">
-                    <Box classes="mb-12" anchor="privacy-policy" type="section">
+                    <Box classes="mb-12">
                         <Text type="h1" classes="mb-5">{locale('views.legal.privacy_policy.title')}</Text>
                         <Text type="p" secondary classes="mb-5">{locale('views.legal.privacy_policy.body_1')}</Text>
                         <Text type="p" secondary classes="mb-5">{locale('views.legal.privacy_policy.body_2')}</Text>
@@ -52,7 +52,7 @@
                         <Text type="p" secondary classes="mb-5">{locale('views.legal.privacy_policy.body_5')}</Text>
                         <Text type="p" secondary classes="mb-10">{locale('views.legal.privacy_policy.body_6')}</Text>
                     </Box>
-                    <Box anchor="terms-of-service" type="section">
+                    <Box>
                         <Text type="h1" classes="mb-5">{locale('views.legal.terms_of_service.title')}</Text>
                         <Text type="p" secondary classes="mb-5">{locale('views.legal.terms_of_service.body_1')}</Text>
                         <Text type="p" secondary classes="mb-5">{locale('views.legal.terms_of_service.body_2')}</Text>

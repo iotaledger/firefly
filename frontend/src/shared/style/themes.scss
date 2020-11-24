@@ -56,7 +56,7 @@
 /*
  * Theme definition: Dark
  */
-:global(body.dark) {
+:global(body.scheme-dark) {
     // UI
     --line-separator-color: #333e5c;
     --bg-grey-color: #22293e;

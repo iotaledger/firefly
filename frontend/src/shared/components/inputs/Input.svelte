@@ -7,17 +7,6 @@
     const handleInput = (event) => {
         value = event.target.value
     }
-
-    const revealToggle = (event) => {
-        const input = event.currentTarget.previousElementSibling
-
-        if (!input) {
-            return
-        }
-
-        input.type = input.type === 'password' ? 'text' : 'password'
-        revealed = !revealed
-    }
 </script>
 
 <style type="text/scss">
@@ -39,6 +28,6 @@
 <input
     {type}
     {value}
-    class={`w-full relative border border-solid text-xs leading-4 font-bold ${classes}`}
+    class={`w-full relative border border-solid text-12 leading-140 font-bold ${classes}`}
     on:input={handleInput}
     {placeholder} />
