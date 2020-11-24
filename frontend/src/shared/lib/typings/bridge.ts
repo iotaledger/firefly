@@ -2,6 +2,7 @@ import type { Event, ErrorEventPayload, BalanceChangeEventPayload, TransactionEv
 import type { Address } from './address'
 import type { AccountIdentifier, Account, SyncedAccount } from './account'
 import type { Message } from './message'
+import type { ErrorTypes } from '@shared-lib/validator';
 
 export interface BridgeMessage {
   id?: number;
@@ -36,7 +37,7 @@ export enum ResponseTypes {
   Broadcast = 'Broadcast',
 }
 
-export type Response<T, P> = { id: number, action: string, type: T, payload?: P }
+export type Response<T, P> = { id: string, action: string, type: T, payload?: P }
 export type RemovedAccountResponse = Response<ResponseTypes.RemovedAccount, AccountIdentifier>
 export type CreatedAccountResponse = Response<ResponseTypes.CreatedAccount, Account>
 export type ReadAccountResponse = Response<ResponseTypes.ReadAccount, Account>

@@ -9,7 +9,6 @@ import type {
     SyncAccountsResponse,
     ErrorResponse,
 } from './typings/bridge'
-import type { ClientOptions } from './typings/client'
 import { ResponseTypes } from './typings/bridge';
 import type {
     Address
@@ -18,6 +17,8 @@ import type {
     Message
 } from './typings/message';
 import type { Event, BalanceChangeEventPayload, TransactionEventPayload } from './typings/events'
+import Validator, { ErrorTypes as ValidatorErrorTypes } from './validator';
+import { deepFreeze } from './utils';
 
 const Wallet = window['__WALLET__'];
 
@@ -141,32 +142,53 @@ const defaultCallbacks = {
 /**
  * @method generateRandomId
  * 
- * @returns {number}
+ * @returns {string}
  */
-const generateRandomId = (): number => Math.floor(Math.random() * 99999999);
+const generateRandomId = (): string => {
+    return Array.from(crypto.getRandomValues(new Uint8Array(16)), (byte) => {
+        return ('0' + (byte & 0xFF).toString(16)).slice(-2);
+    }).join('');
+};
 
 /**
  * Response subscriber.
  * Receives messages from wallet.rs.
  */
 Wallet.onMessage((message: MessageResponse) => {
-    const { id } = message;
+    const _deleteCallbackId = (_id: string) => {
+        const isEventMessage = [
+            ResponseTypes.ErrorThrown,
+            ResponseTypes.BalanceChange,
+            ResponseTypes.NewTransaction,
+            ResponseTypes.ConfirmationStateChange,
+            ResponseTypes.Reattachment,
+            ResponseTypes.Broadcast
+        ].includes(message.type)
 
-    const { onSuccess, onError } = callbacksStore[id];
+        if (!isEventMessage) {
+            delete callbacksStore[_id];
+        }
+    };
 
-    message.type === 'Error' || message.type === 'Panic' ? onError(message) : onSuccess(message);
+    const { isValid, error } = new Validator(Object.keys(callbacksStore)).performValidation(message);
 
-    const isEventMessage = [
-        ResponseTypes.ErrorThrown,
-        ResponseTypes.BalanceChange,
-        ResponseTypes.NewTransaction,
-        ResponseTypes.ConfirmationStateChange,
-        ResponseTypes.Reattachment,
-        ResponseTypes.Broadcast
-    ].includes(message.type)
+    if (!isValid) {
+        if (error.type !== ValidatorErrorTypes.UnknownId) {
+            const { id } = message;
+            const { onError } = callbacksStore[id];
 
-    if (!isEventMessage) {
-        delete callbacksStore[id];
+            onError(message);
+
+            _deleteCallbackId(id);
+        } else {
+            /** TODO: In case of unknown ids, add validation failure to error log */
+        }
+    } else {
+        const { id } = message;
+
+        const { onSuccess, onError } = callbacksStore[id];
+
+        message.type === 'Error' || message.type === 'Panic' ? onError(message) : onSuccess(message);
     }
 })
 
@@ -186,7 +208,7 @@ Wallet.onMessage((message: MessageResponse) => {
  * @returns {void} 
  */
 const storeCallbacks = (
-    __id: number,
+    __id: string,
     type: ResponseTypes,
     callbacks?: CallbacksPattern
 ): void => {
@@ -231,10 +253,7 @@ const Middleware = {
     }
 }
 
+deepFreeze(Wallet);
+
 export const api = new Proxy(Wallet.api, Middleware);
 
-// setTimeout(async () => {
-//     await api.setStrongholdPassword('password');
-//     await api.createAccount({ alias: 'foo', clientOptions: { node: 'http://localhost:14265' } })
-//     await api.syncAccounts();
-// }, 2000);

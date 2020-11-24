@@ -40,3 +40,25 @@ export const validateRecoveryPhrase = (phrase) => {
     const REGEX = /^[a-zA-Z ]*$/
     return REGEX.test(phrase) && phrase.match(/\b(\w+)\b/g)?.length == RECOVERY_PHRASE_LENGTH
 }
+
+/**
+ * @method deepFreeze
+ * 
+ * @param {object} obj
+ * 
+ * @returns {Object}
+ */
+export const deepFreeze = (obj: Object): Object => {
+    Object.freeze(obj);
+
+    Object.getOwnPropertyNames(obj).forEach(function (prop) {
+        if (obj.hasOwnProperty(prop)
+            && obj[prop] !== null
+            && (typeof obj[prop] === 'object' || typeof obj[prop] === 'function')
+            && !Object.isFrozen(obj[prop])) {
+            deepFreeze(obj[prop]);
+        }
+    });
+
+    return obj;
+};

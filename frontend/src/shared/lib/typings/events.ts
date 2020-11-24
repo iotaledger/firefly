@@ -30,7 +30,8 @@ export enum ErrorType {
 export type Callback<T> = (error: string, data: T) => void
 
 export interface Event<T> {
-  id: number
+  action: string
+  id: string
   type: ResponseTypes
   payload: T
 }
