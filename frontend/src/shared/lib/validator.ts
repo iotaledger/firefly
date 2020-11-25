@@ -272,11 +272,13 @@ class ValidatorChainBuilder {
         if (!this.first) {
             this.first = validator;
             this.last = validator;
-            return this;
+        }
+        else {
+            this.last.setNextValidator(validator);
+            this.last = validator;
         }
 
-        this.last.setNextValidator(validator);
-        this.last = validator;
+        return this;
     }
 
 
