@@ -18,7 +18,6 @@ import type {
 } from './typings/message';
 import type { Event, BalanceChangeEventPayload, TransactionEventPayload } from './typings/events'
 import Validator, { ErrorTypes as ValidatorErrorTypes } from './validator';
-import { deepFreeze } from './utils';
 
 const Wallet = window['__WALLET__'];
 
@@ -250,10 +249,10 @@ const Middleware = {
 
             await _target[prop](...actualPayload)(__id);
         }
+    },
+    set: () => {
+        return false;
     }
 }
 
-deepFreeze(Wallet);
-
 export const api = new Proxy(Wallet.api, Middleware);
-
