@@ -24,7 +24,7 @@
         "rollup-plugin-svelte": "^6.1.1",
         "rollup-plugin-terser": "^6.1.0",
         "svelte": "^3.29.0",
-        "svelte-check": "^1.0.30",
+        "svelte-check": "^1.1.16",
         "svelte-i18n": "^3.0.4",
         "svelte-preprocess": "^4.1.3",
         "tailwindcss": "^1.8.10",
