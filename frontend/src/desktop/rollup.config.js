@@ -52,7 +52,7 @@ const plugins = [
         dev: isDev,
         extensions: ['.svelte'],
         css: (css) => {
-            css.write('public/build/bundle.css')
+            css.write('bundle.css')
         },
         preprocess: sveltePreprocess({
             postcss: true
@@ -86,7 +86,7 @@ if (isDev) {
         livereload({ watch: './public' })
     )
 } else {
-    plugins.push(terser({ sourcemap: isDev }))
+    plugins.push(terser({}))
 }
 
 module.exports = {

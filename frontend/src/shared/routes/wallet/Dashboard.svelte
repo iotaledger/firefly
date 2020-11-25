@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Icon, ActivityRow, ChartOption, Sidebar, LineChart, Text, Button } from '@shared-components'
+    import { api } from '@shared-lib/wallet'
 
     export let locale
     export let mobile
@@ -69,38 +70,37 @@
         amount: 16,
         unit: 'Gi',
     }
-    const accounts = [
-        {
-            name: 'Fun Wallet',
-            balance: '23.322 Gi',
-            balanceEquiv: '45500 USD',
+
+    let accounts = []
+    api.getAccounts({
+        onSuccess (response) {
+            for (const storedAccount of response.payload) {
+                api.availableBalance(storedAccount.id, {
+                    onSuccess (response) {
+                        const balance = response.payload;
+                        const account = {
+                            name: storedAccount.alias,
+                            balance: `${balance} i`,
+                            balanceEquiv: `${balance} USD`,
+                        };
+                        accounts = [...accounts, account];
+                    },
+                    onError () {
+                        const account = {
+                            name: storedAccount.alias,
+                            balance: 'ERROR',
+                            balanceEquiv: 'ERROR',
+                        };
+                        accounts = [...accounts, account];
+                    }
+                })
+            }
         },
-        {
-            name: 'Billy Bills',
-            balance: '23.322 Gi',
-            balanceEquiv: '45500 USD',
-        },
-        {
-            name: 'Pizza Fund',
-            balance: '23.322 Gi',
-            balanceEquiv: '45500 USD',
-        },
-        {
-            name: 'Wonder Alice',
-            balance: '23.322 Gi',
-            balanceEquiv: '45500 USD',
-        },
-        {
-            name: 'Tropical Palm',
-            balance: '23.322 Gi',
-            balanceEquiv: '45500 USD',
-        },
-        {
-            name: 'Johnny Bravo',
-            balance: '23.322 Gi',
-            balanceEquiv: '45500 USD',
-        },
-    ]
+        onError () {
+            // TODO handle error
+            alert('failed to get accounts')
+        }
+    })
 </script>
 
 <style type="text/scss">

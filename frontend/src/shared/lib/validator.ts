@@ -6,8 +6,9 @@ import type { Account } from './typings/account'
 
 type Validators = IdValidator |
     ActionValidator |
-    AccountIdentifierValidator |
-    AccountValidator;
+    PayloadTypeValidator |
+    AccountValidator |
+    AccountListValidator;
 
 export enum ErrorTypes {
     UnknownId = 'UnknownId',
@@ -125,7 +126,7 @@ class IdValidator extends Validator {
             });
         }
 
-        if (typeof id !== 'number') {
+        if (typeof id !== 'string') {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of id received.'
@@ -179,7 +180,14 @@ class ActionValidator extends Validator {
 /**
  * Validation for account identifier
  */
-class AccountIdentifierValidator extends Validator {
+class PayloadTypeValidator extends Validator {
+    type: string
+
+    constructor(type: string) {
+        super()
+        this.type = type
+    }
+
     /**
      * Checks if response is valid
      * 
@@ -192,11 +200,46 @@ class AccountIdentifierValidator extends Validator {
     isValid(response: MessageResponse): ValidationResponse {
         const payload = response.payload;
 
-        if (typeof payload !== 'number') {
+        if (typeof payload !== this.type) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of payload received.'
             });
+        }
+
+        return super.isValid(response);
+    }
+}
+
+class AccountListValidator extends Validator {
+    /**
+     * Checks if response is valid
+     * 
+     * @method isValid
+     * 
+     * @param {MessageResponse} response
+     * 
+     * @returns {ValidationResponse}
+     */
+    isValid(response: MessageResponse): ValidationResponse {
+        const payload = response.payload as Account[];
+        if (!Array.isArray(payload)) {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'Invalid type of accounts received.'
+            });
+        }
+
+        for (const account of payload) {
+            const validationResponse = new AccountValidator().isValid({
+                id: response.id,
+                action: response.action,
+                type: response.type,
+                payload: account as any
+            })
+            if (!validationResponse.isValid) {
+                return validationResponse
+            }
         }
 
         return super.isValid(response);
@@ -219,15 +262,10 @@ class AccountValidator extends Validator {
     isValid(response: MessageResponse): ValidationResponse {
         const payload = response.payload as Account;
 
-        if (typeof payload.id !== 'number') {
+        if (!(Array.isArray(payload.id) && payload.id.length === 32 && payload.id.every(id => typeof id === 'number'))) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of id received.'
-            });
-        } else if (typeof payload.mnemonic !== 'string') {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of mnemonic received.'
             });
         } else if (typeof payload.alias !== 'string') {
             return super.createResponse(false, {
@@ -239,12 +277,12 @@ class AccountValidator extends Validator {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of createdAt received.'
             });
-        } else if (Array.isArray(payload.messages)) {
+        } else if (!Array.isArray(payload.messages)) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of messages received.'
             });
-        } else if (Array.isArray(payload.addresses)) {
+        } else if (!Array.isArray(payload.addresses)) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of addresses received.'
@@ -298,24 +336,33 @@ export default class ValidatorService {
     validators: any;
     ids: string[];
 
+    private createValidator(): ValidatorChainBuilder {
+        return new ValidatorChainBuilder()
+            .add(new IdValidator(this.ids))
+            .add(new ActionValidator())
+    }
+
     constructor(ids: string[]) {
         this.ids = ids;
 
         this.validators = {
-            [ResponseTypes.StrongholdPasswordSet]: new ValidatorChainBuilder()
-                .add(new IdValidator(ids))
-                .add(new ActionValidator())
+            [ResponseTypes.StrongholdPasswordSet]: this.createValidator()
                 .getFirst(),
-            [ResponseTypes.RemovedAccount]: new ValidatorChainBuilder()
-                .add(new IdValidator(ids))
-                .add(new ActionValidator())
-                .add(new AccountIdentifierValidator())
+            [ResponseTypes.RemovedAccount]: this.createValidator()
+                .add(new PayloadTypeValidator('object'))
                 .getFirst(),
-            [ResponseTypes.CreatedAccount]: new ValidatorChainBuilder()
-                .add(new IdValidator(ids))
-                .add(new ActionValidator())
+            [ResponseTypes.CreatedAccount]: this.createValidator()
                 .add(new AccountValidator())
                 .getFirst(),
+            [ResponseTypes.ReadAccounts]: this.createValidator()
+                .add(new AccountListValidator())
+                .getFirst(),
+            [ResponseTypes.TotalBalance]: this.createValidator()
+                .add(new PayloadTypeValidator('number'))
+                .getFirst(),
+            [ResponseTypes.AvailableBalance]: this.createValidator()
+                .add(new PayloadTypeValidator('number'))
+                .getFirst()
         };
     }
 

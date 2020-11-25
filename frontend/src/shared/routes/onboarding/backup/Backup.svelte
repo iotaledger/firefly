@@ -1,8 +1,10 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
+    import { get } from 'svelte/store'
     import { Backup, RecoveryPhrase, VerifyRecoveryPhrase, BackupToFile, Success } from './views/'
     import { mnemonic } from '@shared-lib/app'
     import { strongholdPassword } from '@shared-lib/app'
+    import { api } from '@shared-lib/wallet'
 
     export let locale
     export let mobile
@@ -12,7 +14,7 @@
         RecoveryPhrase = 'recoveryPhrase',
         Verify = 'verify',
         Backup = 'backup',
-        Success = 'success',
+        Success = 'success'
     }
 
     const dispatch = createEventDispatcher()
@@ -41,7 +43,23 @@
                 break
             case BackupState.Verify:
             case BackupState.Success:
-                dispatch('next')
+                api.createAccount(
+                    {
+                        mnemonic: (get(mnemonic) as string[]).join(' '),
+                        clientOptions: {
+                            node: 'http://127.0.0.1:14265'
+                        }
+                    },
+                    {
+                        onSuccess() {
+                            dispatch('next')
+                        },
+                        onError() {
+                            // TODO: handle error
+                            alert('create account error')
+                        }
+                    }
+                )
                 break
         }
         if (nextState) {

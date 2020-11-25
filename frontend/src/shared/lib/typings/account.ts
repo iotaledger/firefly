@@ -19,7 +19,6 @@ export interface SyncAccountOptions {
 
 export interface Account {
   id: number[];
-  mnemonic: string;
   alias: string;
   createdAt: string;
   messages: Message[];
