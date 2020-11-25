@@ -4002,10 +4002,10 @@ supports-color@^7.0.0, supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-svelte-check@^1.0.30:
-  version "1.1.8"
-  resolved "https://registry.yarnpkg.com/svelte-check/-/svelte-check-1.1.8.tgz#587c0f214bd1e4d2a1795bf5cc32b28ad1e7dec1"
-  integrity sha512-f7pYUMFo1H/TtWoDdle/Le/W73rvKT4xImTkZecUCiJJr4ILO7bQP57sTM2qZZAQOR2jtGEeNtHWtntyGQ+GEg==
+svelte-check@^1.1.16:
+  version "1.1.16"
+  resolved "https://registry.yarnpkg.com/svelte-check/-/svelte-check-1.1.16.tgz#df3c1010db3c0604fbe5595959ca59fc07654dc9"
+  integrity sha512-9R+5OYz+YRintkkIjdoFe6AgB48SnZJt+AyQBI55w2sAnzh9prXUbjTCKP9CLj5unja3gu8pUipTJYZI0RBedA==
   dependencies:
     chalk "^4.0.0"
     chokidar "^3.4.1"
