@@ -10,5 +10,6 @@ export interface InitOptions {
 
 export interface WalletPlugin {
   initialize(options?: InitOptions): void;
-  sendMessage(message: { [k: string]: any }): Promise<{ response: string }>;
+  sendMessage(message: { [k: string]: any }): Promise<void>;
+  addListener(event: 'walletMessageReceived', cb: (message: any) => void): void;
 }
