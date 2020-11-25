@@ -4,15 +4,15 @@
     export let disabled = false
     export let highlighted = false
     export let bold = false
-    export let small = false
+    export let smaller = false
     export let error = false
     export let classes = '' // ISSUE: https://github.com/tailwindlabs/tailwindcss/discussions/1446
 </script>
 
 <style type="text/scss">
     p {
-        &.small {
-            @apply text-10;
+        &.smaller {
+            @apply text-12;
             @apply leading-120;
         }
     }
@@ -24,23 +24,23 @@
     p {
         // TODO: tailwindify
         &.secondary {
-            color: var(--text-secondary-color);
+            @apply text-gray-500;
         }
         &.disabled {
-            color: var(--text-disabled-color);
+            @apply text-gray-400;
         }
         &.highlighted {
-            color: var(--text-highlighted-color);
+            @apply text-blue-500;
         }
         &.error {
-            color: var(--text-error-color);
+            @apply text-red-500;
         }
     }
 </style>
 
 {#if type === 'h1'}
     <h1
-        class={`font-bold text-32 leading-120 text-blue-900 dark:text-white ${classes}`}
+        class={`font-bold text-32 leading-120 text-gray-800 dark:text-white ${classes}`}
         class:secondary
         class:disabled
         class:highlighted
@@ -49,7 +49,7 @@
     </h1>
 {:else if type === 'h2'}
     <h2
-        class={`font-bold text-24 leading-120 text-blue-900 dark:text-white ${classes}`}
+        class={`font-bold text-24 leading-120 text-gray-800 dark:text-white ${classes}`}
         class:secondary
         class:disabled
         class:highlighted
@@ -58,7 +58,7 @@
     </h2>
 {:else if type === 'h3'}
     <h3
-        class={`font-bold text-18 leading-140 text-blue-900 dark:text-white ${classes}`}
+        class={`font-bold text-18 leading-140 text-gray-800 dark:text-white ${classes}`}
         class:secondary
         class:disabled
         class:highlighted
@@ -67,7 +67,7 @@
     </h3>
 {:else if type === 'h4'}
     <h4
-        class={`font-bold text-16 leading-140 text-blue-900 dark:text-white ${classes}`}
+        class={`font-bold text-16 leading-140 text-gray-800 dark:text-white ${classes}`}
         class:secondary
         class:disabled
         class:highlighted
@@ -76,7 +76,7 @@
     </h4>
 {:else if type === 'h5'}
     <h5
-        class={`font-bold text-14 leading-140  text-blue-900 dark:text-white ${classes}`}
+        class={`font-bold text-14 leading-140  text-gray-800 dark:text-white ${classes}`}
         class:secondary
         class:disabled
         class:highlighted
@@ -85,12 +85,12 @@
     </h5>
 {:else if type === 'p'}
     <p
-        class={`text-13 leading-160 text-blue-900  dark:text-white ${classes}`}
+        class={`text-13 leading-160 text-gray-800  dark:text-white ${classes}`}
         class:secondary
         class:disabled
         class:highlighted
         class:error
-        class:small
+        class:smaller
         class:font-bold={bold}>
         <slot />
     </p>

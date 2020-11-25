@@ -6,11 +6,12 @@
 
     $: selected = illustrations[illustration]
 
+
     const illustrations = {
-        'onboarding-1-mobile': 'onboarding/onboarding-1-desktop.svg',
-        'onboarding-1-desktop': 'onboarding/onboarding-1-desktop.svg',
+        'welcome-1-desktop': 'onboarding/welcome-1-desktop.svg',
+        'settings-desktop': 'onboarding/settings-desktop.svg',
+        'setup-desktop': 'onboarding/setup-desktop.svg',
         'congratulations-desktop': 'onboarding/congratulations-desktop.svg',
-        'setup-desktop': 'setup/setup-desktop.svg',
         'password-desktop': 'protect/password-desktop.svg',
         'protect-desktop': 'protect/protect-desktop.svg',
         'pin-desktop': 'protect/pin-desktop.svg',

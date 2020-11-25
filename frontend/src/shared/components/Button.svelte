@@ -14,75 +14,75 @@
 </script>
 
 <style type="text/scss">
-    // TODO: tailwindify
     button {
-        background-color: var(--button-bg-color);
+        @apply bg-blue-500;
         min-width: 160px;
         span {
-            color: var(--button-text-color);
+            @apply text-white;
         }
-        &.ghost {
-            @apply bg-transparent;
-            @apply border;
-            @apply border-solid;
-            border-color: var(--button-border-color);
-            span {
-                @apply font-medium;
-                color: var(--button-bg-color);
-            }
+        &:hover {
+            @apply bg-blue-600;
         }
-        &.with-icon {
-            @apply py-6;
-            @apply px-5;
-            @apply text-left;
+        &:active {
+            @apply bg-blue-700;
+        }
+        &.disabled {
+            @apply pointer-events-none;
+            @apply bg-gray-200;
             span {
-                @apply ml-10;
-                @apply mr-6;
-            }
-            :global(svg path) {
-                fill: var(--button-icon-color);
-            }
-            :global(svg path.stroke:not(.fixedstroke)) {
-                fill: none;
-                stroke: var(--button-icon-color);
-            }
-            &.active {
-                :global(svg path) {
-                    fill: var(--button-active-icon-color);
-                }
-                :global(svg path.stroke:not(.fixedstroke)) {
-                    fill: none;
-                    stroke: var(--button-active-icon-color);
-                }
+                @apply text-gray-500;
             }
         }
         &.secondary {
-            background-color: var(--button-secondary-bg-color);
+            @apply border;
+            @apply border-solid;
+            @apply border-gray-300;
+            @apply bg-white;
             span {
-                color: var(--button-secondary-text-color);
+                @apply text-blue-500;
             }
-            &.with-icon {
-                :global(svg path) {
-                    fill: var(--button-secondary-icon-color);
-                }
-                :global(svg path.stroke:not(.fixedstroke)) {
-                    fill: none;
-                    stroke: var(--button-secondary-icon-color);
-                }
-                &.active {
-                    background-color: var(--button-secondary-active-bg-color);
-                    span {
-                        color: var(--button-secondary-active-text-color);
-                    }
-                    :global(svg path) {
-                        fill: var(--button-secondary-active-icon-color);
-                    }
-                    :global(svg path.stroke:not(.fixedstroke)) {
-                        fill: none;
-                        stroke: var(--button-secondary-active-icon-color);
-                    }
+            &:hover {
+                @apply bg-blue-50;
+                @apply border-blue-200;
+            }
+            &:active {
+                @apply bg-blue-100;
+                @apply border-blue-400;
+                @apply text-blue-600;
+            }
+            &.disabled {
+                @apply pointer-events-none;
+                @apply bg-gray-50;
+                span {
+                    @apply text-gray-500;
                 }
             }
+            // &.with-icon {
+            //     :global(svg path) {
+            //         @apply text-blue-500;
+            //         @apply fill-current;
+            //     }
+            //     :global(svg path.stroke:not(.fixedstroke)) {
+            //         fill: none;
+            //         @apply text-blue-500;
+            //         @apply stroke-current;
+            //     }
+            //     &.active {
+            //         @apply bg-blue-500;
+            //         span {
+            //             @apply text-white;
+            //         }
+            //         :global(svg path) {
+            //             @apply text-white;
+            //             @apply fill-current;
+            //         }
+            //         :global(svg path.stroke:not(.fixedstroke)) {
+            //             fill: none;
+            //             @apply text-white;
+            //             @apply stroke-current;
+            //         }
+            //     }
+            // }
         }
         &.xl {
             @apply bg-transparent;
@@ -92,22 +92,64 @@
             @apply min-w-0;
             span {
                 @apply font-medium;
-                color: var(--button-bg-color);
+                @apply text-blue-500;
             }
         }
         &.disabled {
             @apply pointer-events-none;
-            background-color: var(--button-disabled-bg-color) !important;
+            @apply bg-gray-200;
             span {
-                color: var(--button-disabled-text-color) !important;
+                @apply text-gray-500;
             }
         }
+        // &.ghost {
+        //     @apply bg-transparent;
+        //     @apply border;
+        //     @apply border-solid;
+        //     @apply border-blue-500;
+        //     &.secondary {
+        //         @apply border-gray-300;
+        //     }
+        //     span {
+        //         @apply font-medium;
+        //         @apply text-blue-500;
+        //     }
+        // }
+        // &.with-icon {
+        //     @apply py-6;
+        //     @apply px-5;
+        //     @apply text-left;
+        //     span {
+        //         @apply ml-10;
+        //         @apply mr-6;
+        //     }
+        //     :global(svg path) {
+        //         @apply text-white;
+        //         @apply fill-current;
+        //     }
+        //     :global(svg path.stroke:not(.fixedstroke)) {
+        //         fill: none;
+        //         @apply text-white;
+        //         @apply stroke-current;
+        //     }
+        //     &.active {
+        //         :global(svg path) {
+        //             @apply text-white;
+        //             @apply fill-current;
+        //         }
+        //         :global(svg path.stroke:not(.fixedstroke)) {
+        //             fill: none;
+        //             @apply text-white;
+        //             @apply stroke-current;
+        //         }
+        //     }
+        // }
     }
 </style>
 
 {#if xl}
     <button
-        class={`xl cursor-pointer  text-center rounded-2xl px-6 py-4 flex flex-col items-center ${classes}`}
+        class={`xl cursor-pointer text-center rounded-2xl px-6 py-4 flex flex-col items-center ${classes}`}
         use:bindEvents={events}
         on:click={onClick}
         class:disabled>

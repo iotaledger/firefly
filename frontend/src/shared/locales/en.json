@@ -31,6 +31,10 @@
             },
             "checkbox": "I’ve read and I accept the Privacy policy & ToS"
         },
+        "settings": {
+            "title": "Language & appearance",
+            "body": "Choose your wallet’s language and theme"
+        },
         "setup": {
             "title": "Set up a wallet"
         },
@@ -169,6 +173,10 @@
         "have_file_backup": "I have a file backup",
         "enter_seed_or_phrase": "Enter an IOTA seed or secret phrase",
         "upload_seedvault_or_stronghold": "Upload a Seedvault or Stronghold file",
-        "import": "Import {type}"
+        "import": "Import {type}",
+        "language": "Language",
+        "appearance": "Appearance",
+        "light_theme": "Light theme",
+        "dark_theme": "Dark theme"
     }
 }

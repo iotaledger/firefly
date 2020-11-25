@@ -32,6 +32,7 @@ export const view = writable<string>(null)
 export enum AppRoute {
     Welcome = "welcome",
     Legal = "legal",
+    Settings = "settings",
     Setup = "setup",
     Password = "password",
     Protect = "protect",
@@ -90,6 +91,9 @@ export const routerNext = (event) => {
             nextRoute = AppRoute.Legal
             break
         case AppRoute.Legal:
+            nextRoute = AppRoute.Settings
+            break
+        case AppRoute.Settings:
             nextRoute = AppRoute.Setup
             break
         case AppRoute.Setup:
@@ -128,7 +132,7 @@ export const routerNext = (event) => {
                 nextRoute = AppRoute.Migrate
             }
             else {
-                nextRoute = AppRoute.Backup
+                nextRoute = AppRoute.Backup //TODO: infinite loop
             }
             break
         case AppRoute.Import:

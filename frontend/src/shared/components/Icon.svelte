@@ -280,7 +280,7 @@
 {#if selected}
     <svg
         data-label="icon"
-        class={classes}
+        class={`fill-current ${classes}`}
         width={width || selected.width || '100%'}
         height={height || selected.height || '100%'}
         viewBox="0 0 {width || selected.width}
