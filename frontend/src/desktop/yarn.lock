@@ -3552,6 +3552,15 @@ rollup-plugin-svelte@^5.2.3:
     rollup-pluginutils "^2.8.2"
     sourcemap-codec "^1.4.8"
 
+rollup-plugin-svelte@^6.1.1:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-svelte/-/rollup-plugin-svelte-6.1.1.tgz#66362cf0500fb7a848283ebcf19d289a60ef0871"
+  integrity sha512-ijnm0pH1ScrY4uxwaNXBpNVejVzpL2769hIEbAlnqNUWZrffLspu5/k9/l/Wsj3NrEHLQ6wCKGagVJonyfN7ow==
+  dependencies:
+    require-relative "^0.8.7"
+    rollup-pluginutils "^2.8.2"
+    sourcemap-codec "^1.4.8"
+
 rollup-plugin-terser@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/rollup-plugin-terser/-/rollup-plugin-terser-6.1.0.tgz#071866585aea104bfbb9dd1019ac523e63c81e45"
@@ -3993,10 +4002,10 @@ supports-color@^7.0.0, supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-svelte-check@^1.0.30:
-  version "1.1.8"
-  resolved "https://registry.yarnpkg.com/svelte-check/-/svelte-check-1.1.8.tgz#587c0f214bd1e4d2a1795bf5cc32b28ad1e7dec1"
-  integrity sha512-f7pYUMFo1H/TtWoDdle/Le/W73rvKT4xImTkZecUCiJJr4ILO7bQP57sTM2qZZAQOR2jtGEeNtHWtntyGQ+GEg==
+svelte-check@^1.1.16:
+  version "1.1.16"
+  resolved "https://registry.yarnpkg.com/svelte-check/-/svelte-check-1.1.16.tgz#df3c1010db3c0604fbe5595959ca59fc07654dc9"
+  integrity sha512-9R+5OYz+YRintkkIjdoFe6AgB48SnZJt+AyQBI55w2sAnzh9prXUbjTCKP9CLj5unja3gu8pUipTJYZI0RBedA==
   dependencies:
     chalk "^4.0.0"
     chokidar "^3.4.1"
@@ -4027,10 +4036,25 @@ svelte-preprocess@^4.0.0, svelte-preprocess@^4.1.3:
     detect-indent "^6.0.0"
     strip-indent "^3.0.0"
 
+svelte-preprocess@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/svelte-preprocess/-/svelte-preprocess-4.6.0.tgz#9ec11e7c00a44f7d0c5932a35b34125d6dbcd458"
+  integrity sha512-kJwcU71+yw3KKMgGu9eHZMJVBSkW4VfGJ5LSMgFQP/XcwvY2QUV6JcyBoQTjJm+h1KRlo/WGDo6A7+7e+B8B4A==
+  dependencies:
+    "@types/pug" "^2.0.4"
+    "@types/sass" "^1.16.0"
+    detect-indent "^6.0.0"
+    strip-indent "^3.0.0"
+
 svelte@^3.24.0:
   version "3.29.4"
   resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.29.4.tgz#d0f80cb58109ef52963855c23496f7153bb2eb7e"
   integrity sha512-oW0fGHlyFFMvzRtIvOs84b0fOc0gmZNQcL5Is3hxuTpvaYX3pfd8oHy4KnOvbq4Ca6SG6AHdRMk7OhApTo0NqA==
+
+svelte@^3.29.0:
+  version "3.29.7"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.29.7.tgz#e254eb2d0d609ce0fd60f052d444ac4a66d90f7d"
+  integrity sha512-rx0g311kBODvEWUU01DFBUl3MJuJven04bvTVFUG/w0On/wuj0PajQY/QlXcJndFxG+W1s8iXKaB418tdHWc3A==
 
 table-layout@^1.0.0:
   version "1.0.1"
