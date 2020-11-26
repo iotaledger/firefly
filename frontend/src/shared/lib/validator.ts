@@ -11,7 +11,8 @@ type Validators = IdValidator |
 
 export enum ErrorTypes {
     UnknownId = 'UnknownId',
-    InvalidType = 'InvalidType'
+    InvalidType = 'InvalidType',
+    EmptyResponse = 'EmptyResponse',
 };
 
 type ErrorObject = {
@@ -230,6 +231,55 @@ class AccountValidator extends Validator {
     }
 }
 
+
+/**
+ * Validation for type of response object
+ * Type should be the very first thing that gets validated
+ */
+class TypeValidator extends Validator {
+    /**
+     * Checks if response is valid
+     * 
+     * @method isValid
+     * 
+     * @param {MessageResponse} response
+     * 
+     * @returns {ValidationResponse}
+     */
+    isValid(response: MessageResponse): ValidationResponse {
+        const hasValidType = typeof response === 'object' &&
+            response !== null &&
+            !Array.isArray(response) &&
+            typeof response !== 'function';
+
+        if (!hasValidType) {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'Invalid type of message received.'
+            });
+        }
+
+        const responseValues = Object.values(response);
+
+        if (!responseValues.length) {
+            return super.createResponse(false, {
+                type: ErrorTypes.EmptyResponse,
+                error: 'Empty message received.'
+            });
+        }
+
+        if (responseValues.some((value) => typeof value === 'function')) {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'Properties with invalid types received.'
+            });
+        }
+
+        return super.isValid(response);
+    }
+}
+
+
 class ValidatorChainBuilder {
     first: Validators;
     last: Validators;
@@ -277,21 +327,24 @@ export default class ValidatorService {
         this.ids = ids;
 
         this.validators = {
-            [ResponseTypes.StrongholdPasswordSet]: new ValidatorChainBuilder()
-                .add(new IdValidator(ids))
-                .add(new ActionValidator())
-                .getFirst(),
-            [ResponseTypes.RemovedAccount]: new ValidatorChainBuilder()
-                .add(new IdValidator(ids))
-                .add(new ActionValidator())
-                .add(new AccountIdentifierValidator())
-                .getFirst(),
-            [ResponseTypes.CreatedAccount]: new ValidatorChainBuilder()
-                .add(new IdValidator(ids))
-                .add(new ActionValidator())
-                .add(new AccountValidator())
-                .getFirst(),
+            [ResponseTypes.StrongholdPasswordSet]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.RemovedAccount]: this.createBaseValidator().add(new AccountIdentifierValidator()).getFirst(),
+            [ResponseTypes.CreatedAccount]: this.createBaseValidator().add(new AccountValidator()).getFirst(),
         };
+    }
+
+    /**
+     * Creates a base validator
+     * 
+     * @method createBaseValidator
+     * 
+     * @returns {ValidatorChainBuilder}
+     */
+    private createBaseValidator(): ValidatorChainBuilder {
+        return new ValidatorChainBuilder()
+            .add(new TypeValidator())
+            .add(new IdValidator(this.ids))
+            .add(new ActionValidator())
     }
 
     /**
