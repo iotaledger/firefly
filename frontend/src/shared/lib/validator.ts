@@ -94,19 +94,6 @@ class IdValidator extends Validator {
     }
 
     /**
-     * Extracts id from response
-     * 
-     * @method getId
-     * 
-     * @param {MessageResponse} response
-     * 
-     * @return {number}
-     */
-    getId(response: MessageResponse): string {
-        return response.id;
-    }
-
-    /**
      * Checks if response is valid
      * 
      * @method isValid
@@ -116,7 +103,14 @@ class IdValidator extends Validator {
      * @returns {ValidationResponse}
      */
     isValid(response: MessageResponse): ValidationResponse {
-        const id = this.getId(response);
+        const id = response.id;
+
+        if (typeof id !== 'number') {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'Invalid type of id received.'
+            });
+        }
 
         if (!this.ids.includes(id)) {
             return super.createResponse(false, {
@@ -125,12 +119,6 @@ class IdValidator extends Validator {
             });
         }
 
-        if (typeof id !== 'number') {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of id received.'
-            });
-        }
 
         return super.isValid(response);
     }
@@ -141,19 +129,6 @@ class IdValidator extends Validator {
  */
 class ActionValidator extends Validator {
     /**
-     * Extracts action from response
-     * 
-     * @method getAction
-     * 
-     * @param {MessageResponse} response
-     * 
-     * @return {number}
-     */
-    getAction(response: MessageResponse): string {
-        return response.action;
-    }
-
-    /**
      * Checks if response is valid
      * 
      * @method isValid
@@ -163,7 +138,7 @@ class ActionValidator extends Validator {
      * @returns {ValidationResponse}
      */
     isValid(response: MessageResponse): ValidationResponse {
-        const action = this.getAction(response);
+        const action = response.action;
 
         if (typeof action !== 'string') {
             return super.createResponse(false, {
