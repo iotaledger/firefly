@@ -26,18 +26,20 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
-            <Text type="h1" classes="mb-5">
-                {locale('general.import', { values: { type: importType === 'stronghold' ? 'Stronghold' : 'Seedvault' } })}
+            <Text type="h2" classes="mb-4">{locale('general.import')}</Text>
+            <Text type="h3" highlighted classes="mb-5">
+                {locale(`general.${importType === 'stronghold' ? 'stronghold' : 'seedvault'}`)}
             </Text>
             <Text type="p" secondary classes="mb-4">{locale('views.import_backup_password.body_1')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.import_backup_password.body_2')}</Text>
             <Password classes="mb-6" bind:value={password} {locale} />
         </div>
-        <div slot="leftpane__action" class="flex flex-row justify-end items-center">
-            <Button disabled={!valid} onClick={() => handleContinue()}>{locale('actions.continue')}</Button>
+        <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center gap-4">
+            <Button secondary classes="flex-auto" onClick={() => handleBackClick()}>{locale('actions.back')}</Button>
+            <Button classes="flex-auto" disabled={!valid} onClick={() => handleContinue()}>{locale('actions.continue')}</Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex p-16">
-            <Illustration width="100%" illustration="import-from-recovery-phrase-file-desktop" />
+        <div slot="rightpane" class="w-full h-full flex justify-end items-center">
+            <Illustration width="100%" illustration="import-from-file-password-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

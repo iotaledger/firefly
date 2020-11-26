@@ -7,7 +7,6 @@
     export let secondary = false
     export let disabled = false
     export let active = false
-    export let ghost = false
     export let icon = undefined
     export let xl = false
     export let classes = ''
@@ -20,10 +19,10 @@
         span {
             @apply text-white;
         }
-        &:hover {
+        &:not(.with-icon):hover {
             @apply bg-blue-600;
         }
-        &:active {
+        &:not(.with-icon):active {
             @apply bg-blue-700;
         }
         &.disabled {
@@ -57,32 +56,54 @@
                     @apply text-gray-500;
                 }
             }
-            // &.with-icon {
-            //     :global(svg path) {
-            //         @apply text-blue-500;
-            //         @apply fill-current;
-            //     }
-            //     :global(svg path.stroke:not(.fixedstroke)) {
-            //         fill: none;
-            //         @apply text-blue-500;
-            //         @apply stroke-current;
-            //     }
-            //     &.active {
-            //         @apply bg-blue-500;
-            //         span {
-            //             @apply text-white;
-            //         }
-            //         :global(svg path) {
-            //             @apply text-white;
-            //             @apply fill-current;
-            //         }
-            //         :global(svg path.stroke:not(.fixedstroke)) {
-            //             fill: none;
-            //             @apply text-white;
-            //             @apply stroke-current;
-            //         }
-            //     }
-            // }
+        }
+        &.with-icon {
+            @apply border;
+            @apply border-solid;
+            @apply border-gray-300;
+            @apply bg-white;
+            @apply py-6;
+            @apply px-5;
+            @apply text-left;
+            span {
+                @apply text-gray-800;
+                @apply ml-10;
+                @apply mr-6;
+            }
+            :global(svg path) {
+                @apply text-blue-500;
+                @apply fill-current;
+            }
+            :global(svg.right path) {
+                @apply text-gray-500;
+                @apply fill-current;
+            }
+            :global(svg path.stroke:not(.fixedstroke)) {
+                fill: none;
+                @apply text-blue-500;
+                @apply stroke-current;
+            }
+            &.active {
+                @apply bg-blue-500;
+                span {
+                    @apply text-white;
+                }
+                :global(svg path) {
+                    @apply text-white;
+                    @apply fill-current;
+                }
+                :global(svg path.stroke:not(.fixedstroke)) {
+                    fill: none;
+                    @apply text-white;
+                    @apply stroke-current;
+                }
+            }
+            &.disabled {
+                :global(svg path) {
+                    @apply text-gray-500;
+                    @apply fill-current;
+                }
+            }
         }
         &.xl {
             @apply bg-transparent;
@@ -102,48 +123,6 @@
                 @apply text-gray-500;
             }
         }
-        // &.ghost {
-        //     @apply bg-transparent;
-        //     @apply border;
-        //     @apply border-solid;
-        //     @apply border-blue-500;
-        //     &.secondary {
-        //         @apply border-gray-300;
-        //     }
-        //     span {
-        //         @apply font-medium;
-        //         @apply text-blue-500;
-        //     }
-        // }
-        // &.with-icon {
-        //     @apply py-6;
-        //     @apply px-5;
-        //     @apply text-left;
-        //     span {
-        //         @apply ml-10;
-        //         @apply mr-6;
-        //     }
-        //     :global(svg path) {
-        //         @apply text-white;
-        //         @apply fill-current;
-        //     }
-        //     :global(svg path.stroke:not(.fixedstroke)) {
-        //         fill: none;
-        //         @apply text-white;
-        //         @apply stroke-current;
-        //     }
-        //     &.active {
-        //         :global(svg path) {
-        //             @apply text-white;
-        //             @apply fill-current;
-        //         }
-        //         :global(svg path.stroke:not(.fixedstroke)) {
-        //             fill: none;
-        //             @apply text-white;
-        //             @apply stroke-current;
-        //         }
-        //     }
-        // }
     }
 </style>
 
@@ -166,7 +145,6 @@
         class:secondary
         class:disabled
         class:with-icon={icon}
-        class:ghost
         class:active>
         {#if icon}
             <div class="relative flex flex-row justify-between">
@@ -176,9 +154,11 @@
                     </div>
                     <span class="font-bold text-12 leading-140"><slot /></span>
                 </div>
-                <div class="absolute right-0 flex items-center h-full">
-                    <Icon icon="arrow-right" classes="right" />
-                </div>
+                {#if !disabled}
+                    <div class="absolute right-0 flex items-center h-full">
+                        <Icon icon="arrow-right" classes="right" />
+                    </div>
+                {/if}
             </div>
         {:else}
             <span class="font-bold text-12 leading-140"><slot /></span>

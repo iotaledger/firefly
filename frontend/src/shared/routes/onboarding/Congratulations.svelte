@@ -20,10 +20,10 @@
             <Text type="h1" classes="mb-5">{locale('views.congratulations.title')}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.congratulations.body')}</Text>
         </div>
-        <div slot="leftpane__action" class="flex flex-row justify-end items-center">
-            <Button onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
+        <div slot="leftpane__action">
+            <Button classes="w-full" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex p-16">
+        <div slot="rightpane" class="w-full h-full flex justify-end items-center">
             <Illustration width="100%" illustration="congratulations-desktop" />
         </div>
     </OnboardingLayout>

@@ -21,13 +21,13 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
-            <Text type="h1" classes="mb-5">{locale('views.recovery-phrase.title')}</Text>
-            <Text type="p" secondary classes="mb-4">{locale('views.recovery-phrase.body_1')}</Text>
-            <Text type="p" secondary highlighted classes="font-bold">{locale('views.recovery-phrase.body_2')}</Text>
+            <Text type="h2" classes="mb-5">{locale('views.recovery_phrase.title')}</Text>
+            <Text type="p" secondary classes="mb-4">{locale('views.recovery_phrase.body_1')}</Text>
+            <Text type="p" secondary highlighted classes="font-bold">{locale('views.recovery_phrase.body_2')}</Text>
         </div>
-        <div slot="leftpane__action" class="flex flex-row justify-between items-center">
-            <Button ghost onClick={() => handleContinueClick('backup')}>{locale('actions.save_backup_file')}</Button>
-            <Button onClick={() => handleContinueClick('verify')}>{locale('actions.ive_written_recovery_phrase')}</Button>
+        <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center gap-4">
+            <Button secondary onClick={() => handleContinueClick('backup')}>{locale('actions.save_backup_file')}</Button>
+            <Button onClick={() => handleContinueClick('verify')}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex items-center justify-center p-16">
             {#if mnemonic !== undefined && mnemonic !== null}

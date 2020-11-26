@@ -29,20 +29,23 @@
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
             {#if !confirmInput}
-                <Text type="h1" classes="mb-5">{locale('views.pin.title')}</Text>
+                <Text type="h2" classes="mb-5">{locale('views.pin.title')}</Text>
                 <Text type="p" secondary classes="mb-4">{locale('views.pin.body_1')}</Text>
-                <Text type="p" secondary classes="mb-8 font-bold">{locale('views.pin.body_2')}</Text>
-                <Pin bind:value={pinInput} classes="w-full mx-auto block mt-24" />
+                <Text type="p" secondary highlighted classes="mb-8 font-bold">{locale('views.pin.body_2')}</Text>
+                <Pin bind:value={pinInput} classes="w-full mx-auto block" />
             {:else}
-                <Text type="h1" classes="mb-5">{locale('views.confirm_pin.title')}</Text>
+                <Text type="h2" classes="mb-5">{locale('views.confirm_pin.title')}</Text>
                 <Text type="p" secondary classes="mb-8">{locale('views.confirm_pin.body')}</Text>
-                <Pin bind:value={pinInput} classes="w-full mx-auto block mt-24" />
+                <Pin bind:value={pinInput} classes="w-full mx-auto block" />
             {/if}
         </div>
-        <div slot="leftpane__action" class="flex flex-row justify-end items-center">
-            <Button disabled={!valid} onClick={() => handleContinueClick()}>{locale('actions.set_pin')}</Button>
+        <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center gap-4">
+            <Button secondary classes="flex-auto" onClick={() => handleBackClick()}>{locale('actions.back')}</Button>
+            <Button classes="flex-auto" disabled={!valid} onClick={() => handleContinueClick()}>
+                {locale('actions.set_pin')}
+            </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex p-16">
+        <div slot="rightpane" class="w-full h-full flex justify-end items-center">
             {#if !confirmInput}
                 <Illustration width="100%" illustration="pin-desktop" />
             {:else}

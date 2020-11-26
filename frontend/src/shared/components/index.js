@@ -23,6 +23,7 @@ export { default as RecoveryPhrase } from './RecoveryPhrase.svelte'
 export { default as ActivityRow } from './ActivityRow.svelte'
 export { default as BalanceSummary } from './BalanceSummary.svelte'
 export { default as Sidebar } from './Sidebar.svelte'
+export { default as Transition } from './Transition.svelte'
 // Charts
 export { default as ChartOption } from './charts/Option.svelte'
 export { default as BarChart } from './charts/Bar.svelte'

@@ -47,22 +47,10 @@
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5">{locale('views.legal.title')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.legal.body')}</Text>
-            <Button
-                active={index === 0}
-                icon="parchment"
-                classes="w-full mb-5"
-                secondary
-                ghost
-                onClick={() => scrollIntoView(privacyPolicy)}>
+            <Button active={index === 0} icon="parchment" classes="w-full mb-5" onClick={() => scrollIntoView(privacyPolicy)}>
                 {locale('views.legal.privacy_policy.title')}
             </Button>
-            <Button
-                active={index === 1}
-                icon="doc"
-                classes="w-full mb-6"
-                secondary
-                ghost
-                onClick={() => scrollIntoView(termsOfService)}>
+            <Button active={index === 1} icon="doc" classes="w-full mb-6" onClick={() => scrollIntoView(termsOfService)}>
                 {locale('views.legal.terms_of_service.title')}
             </Button>
             <Checkbox label={locale('views.legal.checkbox')} bind:checked />

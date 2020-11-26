@@ -4,24 +4,13 @@
 </script>
 
 <style type="text/scss">
-    div {
-        display: flex;
-        position: relative;
-        textarea {
-            resize: none;
-            min-height: 200px;
-            width: 100%;
-            padding: 19px 50px 19px 13px;
-            color: var(--text-secondary-color);
-            background: var(--element-bg-color);
-            border-color: var(--line-separator-color);
-            border-radius: 10px;
-            box-shadow: -2px -2px 4px rgba(255, 255, 255, 0.2), 0px 4px 8px rgba(65, 114, 248, 0.08);
-            font-size: 12px;
-            line-height: 140%;
-            font-weight: 700;
-        }
+    textarea {
+        min-height: 200px;
     }
 </style>
 
-<div data-label="import-text-input" class={classes}><textarea bind:value placeholder="" /></div>
+<!-- TODO: detect seed or mnemonic and style accordingly -->
+<textarea
+    class="text-12 leading-140 resize-none w-full p-4 pb-3 rounded-xl	border border-solid border-gray-300 bg-white text-gray-800"
+    bind:value
+    placeholder="" />
