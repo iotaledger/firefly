@@ -106,7 +106,7 @@ class IdValidator extends Validator {
     isValid(response: MessageResponse): ValidationResponse {
         const id = response.id;
 
-        if (typeof id !== 'string') {
+        if ('string' !== typeof id) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of id received.'
@@ -141,7 +141,7 @@ class ActionValidator extends Validator {
     isValid(response: MessageResponse): ValidationResponse {
         const action = response.action;
 
-        if (typeof action !== 'string') {
+        if ('string' !== typeof action) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of action received.'
@@ -168,7 +168,7 @@ class AccountIdentifierValidator extends Validator {
     isValid(response: MessageResponse): ValidationResponse {
         const payload = response.payload;
 
-        if (typeof payload !== 'number') {
+        if ('number' !== typeof payload) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of payload received.'
@@ -195,32 +195,32 @@ class AccountValidator extends Validator {
     isValid(response: MessageResponse): ValidationResponse {
         const payload = response.payload as Account;
 
-        if (typeof payload.id !== 'number') {
+        if ('number' !== typeof payload.id) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of id received.'
             });
-        } else if (typeof payload.mnemonic !== 'string') {
+        } else if ('string' !== typeof payload.mnemonic) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of mnemonic received.'
             });
-        } else if (typeof payload.alias !== 'string') {
+        } else if ('string' !== typeof payload.alias) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of alias received.'
             });
-        } else if (typeof payload.createdAt !== 'string') {
+        } else if ('string' !== typeof payload.createdAt) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of createdAt received.'
             });
-        } else if (Array.isArray(payload.messages)) {
+        } else if (!Array.isArray(payload.messages)) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of messages received.'
             });
-        } else if (Array.isArray(payload.addresses)) {
+        } else if (!Array.isArray(payload.addresses)) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of addresses received.'
@@ -247,10 +247,10 @@ class TypeValidator extends Validator {
      * @returns {ValidationResponse}
      */
     isValid(response: MessageResponse): ValidationResponse {
-        const hasValidType = typeof response === 'object' &&
-            response !== null &&
+        const hasValidType = 'object' === typeof response &&
+            null !== response &&
             !Array.isArray(response) &&
-            typeof response !== 'function';
+            'function' !== typeof response;
 
         if (!hasValidType) {
             return super.createResponse(false, {
@@ -268,7 +268,7 @@ class TypeValidator extends Validator {
             });
         }
 
-        if (responseValues.some((value) => typeof value === 'function')) {
+        if (responseValues.some((value) => 'function' === typeof value)) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Properties with invalid types received.'
