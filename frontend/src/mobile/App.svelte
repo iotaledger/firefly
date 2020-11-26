@@ -99,10 +99,10 @@
     <Route route={AppRoute.Password}>
         <Password on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
-    <Route route={AppRoute.Protect}>
+    <Route route={AppRoute.Protect} transition={false}>
         <Protect on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
-    <Route route={AppRoute.Backup}>
+    <Route route={AppRoute.Backup} transition={false}>
         <Backup
             on:next={routerNext}
             on:previous={routerPrevious}
@@ -110,7 +110,7 @@
             mobile={$mobile}
             locale={$_} />
     </Route>
-    <Route route={AppRoute.Import}>
+    <Route route={AppRoute.Import} transition={false}>
         <Import on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
     <Route route={AppRoute.Balance}>

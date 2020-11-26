@@ -30,53 +30,51 @@
 
 <style type="text/scss">
     password-input {
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
         input {
-            padding: 15px 40px 16px 13px;
-            color: var(--text-secondary-color);
-            background: var(--element-bg-color);
-            border-color: var(--line-separator-color);
-            border-radius: 10px;
-            box-shadow: -2px -2px 4px rgba(255, 255, 255, 0.2), 0px 4px 8px rgba(65, 114, 248, 0.08);
-        }
-        :global(svg path) {
-            fill: var(--ui-blue-color);
-        }
-        :global(svg path.stroke:not(.fixedstroke)) {
-            fill: none;
-            stroke: var(--ui-blue-color);
+            transition: border-color 0.25s;
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                @apply m-0;
+            }
+            &::placeholder {
+                /* Chrome, Firefox, Opera, Safari 10.1+ */
+                @apply text-gray-500;
+            }
         }
         button {
-            position: absolute;
-            right: 12px;
-            transform: translateY(-50%);
-            top: 50%;
+            right: 12px; // TODO: unable to use tailwind inset
         }
         strength-meter {
             span {
                 width: 22px;
                 height: 4px;
-                border-radius: 10px;
                 &:nth-child(1) {
-                    background: #fe968a;
+                    @apply bg-orange-500;
                 }
                 &:nth-child(2) {
+                    @apply bg-yellow-500;
                     background: #ffcf24;
                 }
                 &:nth-child(3) {
-                    background: #00e0ca;
+                    @apply bg-green-500;
                 }
                 &:nth-child(4) {
+                    @apply bg-blue-500;
                     background: #108cff;
                 }
                 &.disabled {
-                    background: var(--text-disabled-color);
+                    @apply bg-gray-300;
                 }
             }
+        }
+        :global(svg path) {
+            @apply text-blue-500;
+            @apply fill-current;
+        }
+        :global(svg path.stroke:not(.fixedstroke)) {
+            fill: none;
+            @apply stroke-current;
         }
     }
 </style>
@@ -84,19 +82,23 @@
 <password-input class={`relative block ${classes}`} class:with-toggle={showRevealToggle}>
     {#if showStrengthLevel}
         <strength-meter class="flex flex-row justify-end mb-2">
-            {#each Array(strengthLevels) as _, i}<span class:disabled={i + 1 > strength} class="ml-1" />{/each}
+            {#each Array(strengthLevels) as _, i}
+                <span class="ml-1 w-1.5 h-0.5 rounded-lg" class:disabled={i + 1 > strength} />
+            {/each}
         </strength-meter>
     {/if}
-    <div class="w-full relative">
+    <div class="w-full relative flex items-center">
         <input
             {type}
             {value}
             on:input={handleInput}
             placeholder={placeholder || locale('general.password')}
             class:toggle={showRevealToggle}
-            class="w-full relative border border-solid text-12 leading-140 font-bold" />
+            class="w-full relative text-12 leading-140 py-4 pr-8 pl-4
+                 bg-white border border-solid border-gray-300 hover:border-gray-500 focus:border-gray-500 rounded-xl text-gray
+                 " />
         {#if showRevealToggle === true}
-            <button on:click={(e) => revealToggle(e)} tabindex="-1">
+            <button on:click={(e) => revealToggle(e)} tabindex="-1" class="absolute">
                 <Icon icon={revealed ? 'view' : 'hide'} />
             </button>
         {/if}

@@ -35,7 +35,7 @@
                 break
         }
         if (nextState) {
-            stateHistory.push(nextState)
+            stateHistory.push(state)
             stateHistory = stateHistory
             state = nextState
         }

@@ -27,15 +27,13 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
-            <Text type="h1" classes="mb-5">{locale('views.import_success.title')}</Text>
-            <div class="flex flex-row items-center">
-                <Icon icon="checkmark" classes="checkmark mr-2" />
-                <Text type="p" secondary>{locale(`views.import_success.body_${importType === 'mnemonic' ? '1' : '2'}`)}</Text>
-            </div>
+            <Text type="h2" classes="mb-5">{locale(`views.import_success.title_${importType === 'mnemonic' ? '1' : '2'}`)}</Text>
+            <Text type="p" secondary>{locale(`views.import_success.body_${importType === 'mnemonic' ? '1' : '2'}`)}</Text>
         </div>
-        <div slot="leftpane__action" class="flex flex-row justify-end items-center">
-            <Button onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
+        <div slot="leftpane__action">
+            <Button classes="w-full" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex items-center justify-center p-16" />
+        <!-- TODO: missing illustration -->
+        <div slot="rightpane" class="w-full h-full" />
     </OnboardingLayout>
 {/if}

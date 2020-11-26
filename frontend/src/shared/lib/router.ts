@@ -132,7 +132,7 @@ export const routerNext = (event) => {
                 nextRoute = AppRoute.Migrate
             }
             else {
-                nextRoute = AppRoute.Backup //TODO: infinite loop
+                nextRoute = AppRoute.Congratulations
             }
             break
         case AppRoute.Import:

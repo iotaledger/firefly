@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
+    import { Transition } from '@shared-components'
     import { Import, TextImport, FileImport, BackupPassword, Success } from './views/'
 
     export let locale
@@ -58,12 +59,13 @@
                 break
             case ImportState.BackupPassword:
                 nextState = ImportState.Success
+                break
             case ImportState.Success:
                 dispatch('next', { importType })
                 break
         }
         if (nextState) {
-            stateHistory.push(nextState)
+            stateHistory.push(state)
             stateHistory = stateHistory
             state = nextState
         }
@@ -79,13 +81,23 @@
 </script>
 
 {#if state === ImportState.Init}
-    <Import on:next={_next} on:previous={_previous} {locale} {mobile} />
+    <Transition>
+        <Import on:next={_next} on:previous={_previous} {locale} {mobile} />
+    </Transition>
 {:else if state === ImportState.TextImport}
-    <TextImport on:next={_next} on:previous={_previous} {locale} {mobile} />
+    <Transition>
+        <TextImport on:next={_next} on:previous={_previous} {locale} {mobile} />
+    </Transition>
 {:else if state === ImportState.FileImport}
-    <FileImport on:next={_next} on:previous={_previous} {locale} {mobile} />
+    <Transition>
+        <FileImport on:next={_next} on:previous={_previous} {locale} {mobile} />
+    </Transition>
 {:else if state === ImportState.BackupPassword}
-    <BackupPassword on:next={_next} on:previous={_previous} {importType} {locale} {mobile} />
+    <Transition>
+        <BackupPassword on:next={_next} on:previous={_previous} {importType} {locale} {mobile} />
+    </Transition>
 {:else if state === ImportState.Success}
-    <Success on:next={_next} on:previous={_previous} {importType} {locale} {mobile} />
+    <Transition>
+        <Success on:next={_next} on:previous={_previous} {importType} {locale} {mobile} />
+    </Transition>
 {/if}

@@ -26,41 +26,32 @@
     // TODO: tailwindify
     div {
         max-width: 460px;
-        color: var(--text-primary-color);
         button {
-            background: var(--line-separator-color);
-            min-height: 50px;
-            .number {
-                color: var(--ui-blue-color);
-            }
             &.disabled {
                 @apply pointer-events-none;
             }
             &.selected {
-                background: var(--ui-blue-color);
-                .number {
-                    @apply font-bold;
-                    @apply text-22;
-                    @apply leading-140;
-                    color: var(--line-separator-color);
-                }
+                @apply bg-blue-500;
+                @apply text-white;
+                @apply justify-between;
             }
         }
     }
 </style>
 
 {#if visibleRecoveryPhrase}
-    <div data-label="recovery-phrase" class={`grid w-full text-12 grid-cols-3 gap-3 ${classes}`}>
+    <div data-label="recovery-phrase" class={`grid w-full text-12 grid-cols-3 gap-3 text-gray-800 ${classes}`}>
         {#each visibleRecoveryPhrase as word, i}
             <button
                 on:click|preventDefault={() => handleClick(word)}
-                class="p-2 flex flex-col items-center justify-center rounded-2xl"
+                class="px-6 py-4 flex flex-row items-center rounded-2xl bg-gray-50"
                 class:selected={shuffle && recoveryPhraseInput.indexOf(word) !== -1}
                 class:disabled={!shuffle}>
-                {#if !shuffle}<span class="number">{i + 1}.</span>{/if}
-                {#if recoveryPhraseInput.indexOf(word) === -1}
-                    <span class="word">{word}</span>
-                {:else}<span class="number">{recoveryPhraseInput.indexOf(word) + 1}</span>{/if}
+                {#if !shuffle}<span class="text-gray-500 whitespace-pre">{`${i + 1}. `}</span>{/if}
+                <span>{word}</span>
+                {#if recoveryPhraseInput.indexOf(word) !== -1}
+                    <span class="font-bold text-16 leading-3 text-white">{recoveryPhraseInput.indexOf(word) + 1}</span>
+                {/if}
             </button>
         {/each}
     </div>

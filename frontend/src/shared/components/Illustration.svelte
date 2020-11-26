@@ -6,24 +6,21 @@
 
     $: selected = illustrations[illustration]
 
-
     const illustrations = {
         'welcome-1-desktop': 'onboarding/welcome-1-desktop.svg',
         'settings-desktop': 'onboarding/settings-desktop.svg',
         'setup-desktop': 'onboarding/setup-desktop.svg',
+        'password-desktop': 'onboarding/password-desktop.svg',
+        'protect-desktop': 'onboarding/protect-desktop.svg',
+        'pin-desktop': 'onboarding/pin-desktop.svg',
+        'repeat-pin-desktop': 'onboarding/repeat-pin-desktop.svg',
+        'backup-desktop': 'onboarding/backup-desktop.svg',
+        'backup-recovery-phrase-desktop': 'onboarding/backup-recovery-phrase-desktop.svg',
+        'import-desktop': 'onboarding/import-desktop.svg',
+        'import-from-text-desktop': 'onboarding/import-from-text-desktop.svg',
+        'import-from-file-desktop': 'onboarding/import-from-file-desktop.svg',
+        'import-from-file-password-desktop': 'onboarding/import-from-file-password-desktop.svg',
         'congratulations-desktop': 'onboarding/congratulations-desktop.svg',
-        'password-desktop': 'protect/password-desktop.svg',
-        'protect-desktop': 'protect/protect-desktop.svg',
-        'pin-desktop': 'protect/pin-desktop.svg',
-        'repeat-pin-desktop': 'protect/repeat-pin-desktop.svg',
-        'backup-desktop': 'backup/backup-desktop.svg',
-        'backup-recovery-phrase-desktop': 'backup/backup-recovery-phrase-desktop.svg',
-        'import-desktop': 'import/import-desktop.svg',
-        'import-from-seed-desktop': 'import/import-from-seed-desktop.svg',
-        'import-from-recovery-phrase-desktop': 'import/import-from-recovery-phrase-desktop.svg',
-        'import-from-recovery-phrase-file-desktop': 'import/import-from-recovery-phrase-file-desktop.svg',
-        'balance-desktop': 'import/balance-desktop.svg',
-        'migrate-desktop': 'migrate/migrate-desktop.svg',
     }
 </script>
 

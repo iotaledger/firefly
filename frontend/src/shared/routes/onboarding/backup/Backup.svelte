@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
     import { Backup, RecoveryPhrase, VerifyRecoveryPhrase, BackupToFile, Success } from './views/'
+    import { Transition } from '@shared-components'
     import { mnemonic } from '@shared-lib/app'
     import { strongholdPassword } from '@shared-lib/app'
 
@@ -45,7 +46,7 @@
                 break
         }
         if (nextState) {
-            stateHistory.push(nextState)
+            stateHistory.push(state)
             stateHistory = stateHistory
             state = nextState
         }
@@ -62,13 +63,23 @@
 </script>
 
 {#if state === BackupState.Init}
-    <Backup on:next={_next} on:previous={_previous} {locale} {mobile} />
+    <Transition>
+        <Backup on:next={_next} on:previous={_previous} {locale} {mobile} />
+    </Transition>
 {:else if state === BackupState.RecoveryPhrase}
-    <RecoveryPhrase on:next={_next} on:previous={_previous} mnemonic={$mnemonic} {locale} {mobile} />
+    <Transition>
+        <RecoveryPhrase on:next={_next} on:previous={_previous} mnemonic={$mnemonic} {locale} {mobile} />
+    </Transition>
 {:else if state === BackupState.Verify}
-    <VerifyRecoveryPhrase on:next={_next} on:previous={_previous} mnemonic={$mnemonic} {locale} {mobile} />
+    <Transition>
+        <VerifyRecoveryPhrase on:next={_next} on:previous={_previous} mnemonic={$mnemonic} {locale} {mobile} />
+    </Transition>
 {:else if state === BackupState.Backup}
-    <BackupToFile on:next={_next} on:previous={_previous} strongholdPassword={$strongholdPassword} {locale} {mobile} />
+    <Transition>
+        <BackupToFile on:next={_next} on:previous={_previous} strongholdPassword={$strongholdPassword} {locale} {mobile} />
+    </Transition>
 {:else if state === BackupState.Success}
-    <Success on:next={_next} on:previous={_previous} mnemonic={$mnemonic} {locale} {mobile} />
+    <Transition>
+        <Success on:next={_next} on:previous={_previous} mnemonic={$mnemonic} {locale} {mobile} />
+    </Transition>
 {/if}
