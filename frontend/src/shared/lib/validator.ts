@@ -105,7 +105,7 @@ class IdValidator extends Validator {
     isValid(response: MessageResponse): ValidationResponse {
         const id = response.id;
 
-        if (typeof id !== 'number') {
+        if (typeof id !== 'string') {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of id received.'
