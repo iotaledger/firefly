@@ -25,14 +25,14 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
-            <Text type="h1" classes="mb-5">{locale('views.backup-recovery-phrase.title')}</Text>
-            <Text type="p" secondary classes="mb-8">{locale('views.backup-recovery-phrase.body')}</Text>
-            <Password bind:value={confirmPassword} placeholder={locale('general.confirm_password')} {locale} />
+            <Text type="h2" classes="mb-5">{locale('views.backup_recovery_phrase.title')}</Text>
+            <Text type="p" secondary classes="mb-8">{locale('views.backup_recovery_phrase.body')}</Text>
+            <Password bind:value={confirmPassword} {locale} />
         </div>
-        <div slot="leftpane__action" class="flex flex-row justify-end items-center">
-            <Button disabled={!valid} onClick={() => handleContinueClick()}>{locale('actions.save_password')}</Button>
+        <div slot="leftpane__action">
+            <Button classes="w-full" disabled={!valid} onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex p-16">
+        <div slot="rightpane" class="w-full h-full flex justify-end items-center">
             <Illustration width="100%" illustration="backup-recovery-phrase-desktop" />
         </div>
     </OnboardingLayout>

@@ -42,63 +42,41 @@
 
 <style type="text/scss">
     pin-input {
-        display: block;
-        width: 100%;
-        max-width: 204px;
-        height: 14px;
-        position: relative;
-        z-index: 0;
+        height: 80px;
         .input-wrapper {
-            position: relative;
-            margin: 0 auto;
-            align-items: center;
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: space-between;
             max-width: 204px;
             input {
                 -webkit-text-security: disc;
-                // border: none;
                 width: 14px;
                 height: 14px;
-                background: transparent;
-                color: transparent;
-                cursor: pointer;
+                @apply bg-transparent;
+                @apply text-transparent;
+                @apply cursor-pointer;
                 &:focus {
                     outline: none;
                 }
             }
         }
         .input-decorator-wrapper {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: space-between;
             z-index: -1;
+            max-width: 204px;
             input-decorator {
                 width: 14px;
                 height: 14px;
-                border-radius: 50%;
-                background: #c8d4e9;
+                @apply bg-gray-400;
                 &.active {
-                    background: #108cff;
+                    @apply bg-blue-500;
                 }
             }
         }
     }
 </style>
 
-<pin-input style="--pin-input-size: {size}" class={classes}>
+<pin-input
+    style="--pin-input-size: {size}"
+    class={`flex items-center justify-center w-full relative z-0 bg-gray-50 rounded-xl	${classes}`}>
     {#if inputs.length}
-        <div class="input-wrapper">
+        <div class="input-wrapper absolute items-center w-full flex flex-row flex-no-wrap justify-between">
             {#each inputs as item, i}
                 <input
                     bind:value={inputs[i]}
@@ -111,9 +89,9 @@
                     placeholder="" />
             {/each}
         </div>
-        <div class="input-decorator-wrapper">
+        <div class="input-decorator-wrapper absolute w-full flex flex-row flex-no-wrap justify-between">
             {#each inputs as item, i}
-                <input-decorator class:active={inputs[i] && inputs[i].length !== 0} />
+                <input-decorator class="rounded-full" class:active={inputs[i] && inputs[i].length !== 0} />
             {/each}
         </div>
     {/if}

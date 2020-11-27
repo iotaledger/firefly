@@ -10,6 +10,7 @@
         Welcome,
         Legal,
         Setup,
+        Settings,
         Password,
         Protect,
         Backup,
@@ -81,6 +82,9 @@
     </Route>
     <Route route={AppRoute.Legal}>
         <Legal on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+    </Route>
+    <Route route={AppRoute.Settings}>
+        <Settings on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
     <Route route={AppRoute.Setup}>
         <Setup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />

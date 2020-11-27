@@ -26,7 +26,7 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
-            <Text type="h1" classes="mb-5">{locale('views.password.title')}</Text>
+            <Text type="h2" classes="mb-5">{locale('views.password.title')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.password.body')}</Text>
             <Password
                 classes="mb-6"
@@ -38,11 +38,13 @@
                 {locale} />
             <Password bind:value={confirmedPassword} {locale} placeholder={locale('general.confirm_password')} />
         </div>
-        <div slot="leftpane__action" class="flex flex-row justify-end items-center">
-            <Button disabled={!valid} onClick={() => handleContinueClick()}>{locale('actions.save_password')}</Button>
+        <div slot="leftpane__action">
+            <Button classes="w-full" disabled={!valid} onClick={() => handleContinueClick()}>
+                {locale('actions.save_password')}
+            </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex p-16">
-            <Illustration width="100%" illustration="password-desktop" />
+        <div slot="rightpane" class="w-full h-full flex justify-end items-center">
+            <Illustration illustration="password-desktop" height="100%" width="auto" classes="h-full object-cover object-left" />
         </div>
     </OnboardingLayout>
 {/if}

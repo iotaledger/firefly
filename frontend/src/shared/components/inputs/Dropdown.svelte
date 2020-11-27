@@ -2,6 +2,8 @@
     import { Icon, Text } from '@shared-components'
 
     export let value = undefined
+    export let label = undefined
+    export let disabled = false
     export let items = []
     export let onSelect = () => {}
 
@@ -14,86 +16,54 @@
 
 <style type="text/scss">
     dropdown-input {
-        position: relative;
-        display: flex;
-        align-items: center;
-        margin-bottom: 24px;
-        height: 52px;
-        padding: 15px 30px 15px 15px;
-        width: 100%;
-        background: #ffffff;
-        border: 1px solid #eef4ff;
-        box-shadow: -2px -2px 4px rgba(255, 255, 255, 0.2), 0px 4px 8px rgba(65, 114, 248, 0.08);
-        border-radius: 10px;
-        cursor: pointer;
-
-        :global(svg.right) {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            right: 12px;
+        transition: border-color 0.25s;
+        :global(svg) {
+            right: 12px; // TODO: unable to use tailwind inset
         }
-        :global(svg.right path) {
-            fill: var(--button-secondary-icon-color);
+        &.disabled {
+            @apply pointer-events-none;
+            @apply bg-gray-100;
         }
     }
-
     nav {
-        position: absolute;
-        top: 50px;
-        left: 0px;
-        width: 100%;
-        max-height: 260px;
-        overflow-y: scroll;
-        background: var(--element-bg-color);
-        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.25);
-        border-radius: 7px;
-        opacity: 0;
-        transition: opacity 0.1s cubic-bezier(0.4, 0, 0.2, 1);
-        pointer-events: none;
-        z-index: 2;
+        transition: opacity 0.25s;
+        top: 50px; // TODO: unable to use tailwind inset
+        left: 0px; // TODO: unable to use tailwind inset
         &.active {
-            opacity: 1;
-            pointer-events: all;
+            @apply opacity-100;
+            @apply pointer-events-auto;
         }
         button {
-            position: relative;
-            display: flex;
-            align-items: center;
-            background: var(--element-bg-color);
-            height: 36px;
-            padding: 0 20px;
-            width: 100%;
-            text-align: left;
-            font-size: 14px;
-            &:hover {
-                background: var(--line-separator-color);
-            }
+            &:hover,
             &.active {
-                background: var(--line-separator-color);
-            }
-            &:first-child {
-                border-radius: 3px 3px 0 0;
-            }
-            &:last-child {
-                border-radius: 0 0 3px 3px;
+                @apply bg-gray-100;
             }
         }
     }
 </style>
 
 <svelte:window on:click={clickOutside} />
-
+{#if label}
+    <Text type="p" classes="mb-2" secondary smaller>{label}</Text>
+{/if}
 <dropdown-input
+    class="relative flex items-center mb-5 py-4 pr-8 pl-4 w-full 
+                bg-white border border-solid border-gray-300 hover:border-gray-500 rounded-xl cursor-pointer"
     on:click={(e) => {
         e.stopPropagation()
         dropdown = !dropdown
-    }}>
-    <Text type="p" bold>{value}</Text>
-    <Icon icon="arrow-down" classes="right" />
-    <nav class:active={dropdown}>
+    }}
+    class:disabled>
+    <Text type="p" smaller {disabled}>{value}</Text>
+    <Icon icon="arrow-down" classes="absolute text-gray-500 fill-current" />
+    <nav
+        class:active={dropdown}
+        class="absolute w-full overflow-y-auto bg-white border border-solid border-gray-500 rounded-xl pointer-events-none opacity-0 z-10 text-left">
         {#each items as item}
-            <button on:click={() => onSelect(item.value)} class:active={item.label === value}> {item.label} </button>
+            <button
+                class="relative flex items-center bg-white p-4 w-full"
+                on:click={() => onSelect(item.value)}
+                class:active={item.label === value}><Text type="p" smaller>{item.label}</Text></button>
         {/each}
     </nav>
 </dropdown-input>

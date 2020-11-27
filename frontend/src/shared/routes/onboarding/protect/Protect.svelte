@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
+    import { Transition } from '@shared-components'
     import { Protect, Pin } from './views/'
     export let locale
     export let mobile
@@ -48,7 +49,7 @@
                 break
         }
         if (nextState) {
-            stateHistory.push(nextState)
+            stateHistory.push(state)
             stateHistory = stateHistory
             state = nextState
         }
@@ -65,7 +66,11 @@
 </script>
 
 {#if state === ProtectState.Init || state === ProtectState.Biometric}
-    <Protect on:next={_next} on:previous={_previous} {locale} {mobile} />
+    <Transition>
+        <Protect on:next={_next} on:previous={_previous} {locale} {mobile} />
+    </Transition>
 {:else if state === ProtectState.Pin || state === ProtectState.Confirm}
-    <Pin on:next={_next} on:previous={_previous} pinCandidate={pin} {locale} {mobile} />
+    <Transition>
+        <Pin on:next={_next} on:previous={_previous} pinCandidate={pin} {locale} {mobile} />
+    </Transition>
 {/if}

@@ -31,6 +31,10 @@
             },
             "checkbox": "I’ve read and I accept the Privacy policy & ToS"
         },
+        "settings": {
+            "title": "Language & appearance",
+            "body": "Choose your wallet’s language and theme"
+        },
         "setup": {
             "title": "Set up a wallet"
         },
@@ -58,20 +62,20 @@
             "body_2": "Do not share this phrase with anyone. Your secret phrase can access your funds at any time from anywhere.",
             "body_3": "If you lose this, you lose your funds."
         },
-        "recovery-phrase": {
+        "recovery_phrase": {
             "title": "Recovery phrase",
             "body_1": "Carefully copy the words in the exact order below. You can create a secondary backup on iCloud.",
             "body_2": "Keep this private and safely stored"
         },
-        "verify-recovery-phrase": {
+        "verify_recovery_phrase": {
             "title": "Verify recovery phrase",
             "body": "Let's check you wrote down the phrase correctly. Click the words on the right in the exact order you have written them down."
         },
-        "backup-recovery-phrase": {
+        "backup_recovery_phrase": {
             "title": "Back up to a file",
             "body": "You wallet password is also used to encrypt a Stronghold backup. Enter your wallet password to save your recovery phrase backup to a file."
         },
-        "recovery-phrase-saved": {
+        "recovery_phrase_saved": {
             "title": "Recovery phrase",
             "body": "Backed up to a file"
         },
@@ -84,7 +88,7 @@
             "body": "If you have an existing seed or wallet back up, you can import it here."
         },
         "import_from_text": {
-            "title": "You have successfully recovered your backup",
+            "title": "Type your seed or secret phrase",
             "body_1": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
             "body_2": "A secret phrase is a 24 word mnemonic. This is used to recover a newer FireFly wallet.",
             "body_3": "Enter your seed or secret phrase"
@@ -99,8 +103,9 @@
             "body_2": "This is the password created when you first created your backup. This stops unauthorised access to your funds."
         },
         "import_success": {
-            "title": "You have successfully recovered your backup",
+            "title_1": "You have successfully recovered your backup",
             "body_1": "Your secret phrase is correct, you can now set up your new wallet",
+            "title_2": "You have successfully recovered your backup",
             "body_2": "Your password is correct, you can now continue"
         },
         "migrate": {
@@ -121,6 +126,7 @@
     },
     "actions": {
         "continue": "Continue",
+        "back": "Back",
         "import_seed": "Import an existing seed",
         "import_wallet": "Import existing wallet",
         "create_wallet": "Create new wallet",
@@ -129,7 +135,7 @@
         "setup_pin": "Set up PIN code",
         "set_pin": "Set PIN code",
         "save_backup_file": "Save backup file",
-        "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
+        "verify_recovery_phrase": "Verify recovery phrase",
         "import_seedvault": "Import SeedVault",
         "check_again": "No, Check Again",
         "import_from_file": "Import from a file",
@@ -169,6 +175,12 @@
         "have_file_backup": "I have a file backup",
         "enter_seed_or_phrase": "Enter an IOTA seed or secret phrase",
         "upload_seedvault_or_stronghold": "Upload a Seedvault or Stronghold file",
-        "import": "Import {type}"
+        "import": "Import",
+        "seedvault": "Seedvault",
+        "stronghold": "Stronghold",
+        "language": "Language",
+        "appearance": "Appearance",
+        "light_theme": "Light theme",
+        "dark_theme": "Dark theme"
     }
 }

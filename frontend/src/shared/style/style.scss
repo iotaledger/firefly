@@ -29,13 +29,13 @@
     font-weight: 500;
     font-family: "DM Sans";
     font-style: normal;
+    transition: background 0.25s, color 0.25s;
 }
 html,
 body {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background: var(--app-bg-color);
 }
 
 button:focus {

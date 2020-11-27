@@ -3,6 +3,7 @@ export { default as Splash } from '@shared-routes/Splash.svelte'
 // onboarding/setup
 export { default as Welcome } from '@shared-routes/onboarding/Welcome.svelte'
 export { default as Legal } from '@shared-routes/onboarding/Legal.svelte'
+export { default as Settings } from '@shared-routes/onboarding/Settings.svelte'
 export { default as Setup } from '@shared-routes/onboarding/Setup.svelte'
 export { default as Password } from '@shared-routes/onboarding/Password.svelte'
 export { default as Protect } from '@shared-routes/onboarding/protect/Protect.svelte'

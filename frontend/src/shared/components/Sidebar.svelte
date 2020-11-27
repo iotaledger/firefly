@@ -3,7 +3,7 @@
 </script>
 
 <style type="text/scss">
-    :global(svg path) {
+    :global(aside svg path) {
         fill: var(--text-secondary-color); // TODO: tailwindify
     }
 </style>
