@@ -1,6 +1,9 @@
-pub use iota_wallet_actor::{
-  wallet::WalletError, Message as WalletMessage, MessageType as WalletMessageType, Response,
-  ResponseType, WalletMessageHandler,
+pub use iota_wallet::{
+  actor::{
+    Message as WalletMessage, MessageType as WalletMessageType, Response, ResponseType,
+    WalletMessageHandler,
+  },
+  WalletError,
 };
 use riker::actors::*;
 use serde::Deserialize;
@@ -18,34 +21,33 @@ pub struct WalletActor {
 
 impl WalletActor {
   /// Starts the polling mechanism.
-  pub fn start_polling(&self, interval_ms: u64) -> &Self {
+  pub fn set_polling_interval(&mut self, interval_ms: u64) -> &Self {
     self
       .wallet_message_handler
-      .account_manager()
-      .start_polling(Duration::from_millis(interval_ms));
+      .set_polling_interval(Duration::from_millis(interval_ms));
     self
   }
 }
 
 impl ActorFactoryArgs<PathBuf> for WalletActor {
   fn create_args(storage_path: PathBuf) -> Self {
-    let actor = Self {
+    let mut actor = Self {
       wallet_message_handler: WalletMessageHandler::with_storage_path(storage_path)
         .expect("failed to initialise account manager"),
       runtime: Runtime::new().expect("failed to create tokio runtime"),
     };
-    actor.start_polling(POLLING_INTERVAL_MS);
+    actor.set_polling_interval(POLLING_INTERVAL_MS);
     actor
   }
 }
 
 impl Default for WalletActor {
   fn default() -> Self {
-    let actor = Self {
+    let mut actor = Self {
       wallet_message_handler: Default::default(),
       runtime: Runtime::new().expect("failed to create tokio runtime"),
     };
-    actor.start_polling(POLLING_INTERVAL_MS);
+    actor.set_polling_interval(POLLING_INTERVAL_MS);
     actor
   }
 }
@@ -54,7 +56,7 @@ impl Actor for WalletActor {
   type Msg = WalletMessage;
 
   fn recv(&mut self, _ctx: &Context<Self::Msg>, msg: Self::Msg, _sender: Sender) {
-    let wallet_message_handler = &self.wallet_message_handler;
+    let wallet_message_handler = &mut self.wallet_message_handler;
     self.runtime.block_on(async move {
       wallet_message_handler.handle(msg).await;
     });

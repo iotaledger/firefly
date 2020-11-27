@@ -22,7 +22,7 @@ import Validator, { ErrorTypes as ValidatorErrorTypes } from './validator';
 const Wallet = window['__WALLET__'];
 
 type Account = {
-    id: number[];
+    id: string;
     alias: string;
     addresses: Address[];
     messages: Message[];
