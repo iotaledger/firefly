@@ -13,6 +13,7 @@ use iota_wallet_actor::{
 };
 use once_cell::sync::OnceCell;
 use riker::actors::*;
+use serde::{Deserialize, Serialize};
 
 use std::convert::TryFrom;
 use std::path::Path;
@@ -20,6 +21,7 @@ use std::path::Path;
 static WALLET_ACTOR: OnceCell<ActorRef<WalletMessage>> = OnceCell::new();
 static MESSAGE_RECEIVER: OnceCell<Box<dyn Fn(String) + Send + Sync + 'static>> = OnceCell::new();
 
+#[derive(Serialize, Deserialize, Copy, Clone)]
 #[repr(C)]
 pub enum EventType {
     ErrorThrown,
@@ -91,26 +93,48 @@ pub async fn send_message(message: String) {
     }
 }
 
-pub fn listen(event_type: EventType) {
+#[derive(Serialize)]
+struct EventResponse<T: Serialize> {
+    id: usize,
+    #[serde(rename = "type")]
+    _type: EventType,
+    payload: T,
+}
+
+impl<T: Serialize> EventResponse<T> {
+    fn new(id: usize, event: EventType, payload: T) -> Self {
+        Self {
+            id,
+            _type: event,
+            payload,
+        }
+    }
+}
+
+fn serialize_event<T: Serialize>(id: usize, event: EventType, payload: T) -> String {
+    serde_json::to_string(&EventResponse::new(id, event, payload)).unwrap()
+}
+
+pub fn listen(id: usize, event_type: EventType) {
     let callback = MESSAGE_RECEIVER.get().unwrap();
     match event_type {
         EventType::ErrorThrown => {
-            on_error(move |error| callback(serde_json::to_string(&error).unwrap()))
+            on_error(move |error| callback(serialize_event(id, event_type, &error)))
         }
         EventType::BalanceChange => {
-            on_balance_change(move |event| callback(serde_json::to_string(&event).unwrap()))
+            on_balance_change(move |event| callback(serialize_event(id, event_type, &event)))
         }
         EventType::NewTransaction => on_new_transaction(move |event| {
-            callback(serde_json::to_string(&event).unwrap());
+            callback(serialize_event(id, event_type, &event));
         }),
         EventType::ConfirmationStateChange => on_confirmation_state_change(move |event| {
-            callback(serde_json::to_string(&event).unwrap())
+            callback(serialize_event(id, event_type, &event))
         }),
         EventType::Reattachment => {
-            on_reattachment(move |event| callback(serde_json::to_string(&event).unwrap()))
+            on_reattachment(move |event| callback(serialize_event(id, event_type, &event)))
         }
         EventType::Broadcast => {
-            on_broadcast(move |event| callback(serde_json::to_string(&event).unwrap()))
+            on_broadcast(move |event| callback(serialize_event(id, event_type, &event)))
         }
     }
 }
