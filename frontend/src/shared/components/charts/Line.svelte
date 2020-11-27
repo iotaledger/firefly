@@ -2,8 +2,10 @@
     import { onMount } from "svelte";
     import Chart from "chart.js";
 
+    let canvas 
+
     function createChart() {
-        const ctx = document.getElementById('line-chart');
+        const ctx = canvas;
         const context = ctx.getContext('2d');
 
         const gradient = context.createLinearGradient(
@@ -61,5 +63,5 @@
 </script>
 
 <div class="chart-container" style="position: relative; height: 28.5vh;">
-    <canvas id="line-chart"></canvas>
+    <canvas bind:this={canvas}></canvas>
 </div>

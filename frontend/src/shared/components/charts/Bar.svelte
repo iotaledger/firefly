@@ -2,6 +2,8 @@
     import { onMount } from "svelte";
     import Chart from "chart.js";
 
+    let canvas;
+
     function createRoundedBarChart() {
         // Source: https://stackoverflow.com/a/43281198/6682995
         Chart.helpers.drawRoundedTopRectangle = function(ctx, x, y, width, height, radius) {
@@ -99,7 +101,7 @@
     function createChart() {
         createRoundedBarChart();
 
-        const ctx = document.getElementById('bar-chart');
+        const ctx = canvas;
 
         const myChart = new Chart(ctx, {
             type: 'roundedBar',
@@ -162,5 +164,5 @@
 </script>
 
 <div class="chart-container" style="position: relative; height: 100%;">
-    <canvas id="bar-chart"></canvas>
+    <canvas bind:this={canvas}></canvas>
 </div>
