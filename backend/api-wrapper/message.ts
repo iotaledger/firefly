@@ -58,7 +58,7 @@ export interface Transfer {
   address: string
 }
 
-export function reattach(bridge: Bridge, __id: number, accountId: AccountIdentifier, messageId: string) {
+export function reattach(bridge: Bridge, __id: string, accountId: AccountIdentifier, messageId: string) {
   return bridge({
     id: __id,
     cmd: 'Reattach',

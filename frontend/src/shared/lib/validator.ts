@@ -168,7 +168,7 @@ class AccountIdentifierValidator extends Validator {
     isValid(response: MessageResponse): ValidationResponse {
         const payload = response.payload;
 
-        if ('number' !== typeof payload) {
+        if ('string' !== typeof payload) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of payload received.'
@@ -195,7 +195,7 @@ class AccountValidator extends Validator {
     isValid(response: MessageResponse): ValidationResponse {
         const payload = response.payload as Account;
 
-        if ('number' !== typeof payload.id) {
+        if ('string' !== typeof payload.id) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of id received.'

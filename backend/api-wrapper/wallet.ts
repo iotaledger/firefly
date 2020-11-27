@@ -2,7 +2,7 @@ import { AccountIdentifier } from './account'
 import { Bridge } from './bridge'
 import { Message, Transfer } from './message'
 
-export function backup(bridge: Bridge, __id: number, destinationPath: string) {
+export function backup(bridge: Bridge, __id: string, destinationPath: string) {
   return bridge({
     id: __id,
     cmd: 'Backup',
@@ -10,7 +10,7 @@ export function backup(bridge: Bridge, __id: number, destinationPath: string) {
   })
 }
 
-export function restoreBackup(bridge: Bridge, __id: number, backupPath: string) {
+export function restoreBackup(bridge: Bridge, __id: string, backupPath: string) {
   return bridge({
     id: __id,
     cmd: 'RestoreBackup',
@@ -18,7 +18,7 @@ export function restoreBackup(bridge: Bridge, __id: number, backupPath: string) 
   })
 }
 
-export function setStrongholdPassword(bridge: Bridge, __id: number, password: string) {
+export function setStrongholdPassword(bridge: Bridge, __id: string, password: string) {
   return bridge({
     id: __id,
     cmd: 'SetStrongholdPassword',
@@ -26,7 +26,7 @@ export function setStrongholdPassword(bridge: Bridge, __id: number, password: st
   })
 }
 
-export function send(bridge: Bridge, __id: number, fromAccountId: AccountIdentifier, transfer: Transfer) {
+export function send(bridge: Bridge, __id: string, fromAccountId: AccountIdentifier, transfer: Transfer) {
   return bridge({
     id: __id,
     cmd: 'SendTransfer',

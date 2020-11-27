@@ -31,7 +31,12 @@ pub extern "C" fn send_message(message: *const c_char) {
 }
 
 #[no_mangle]
-pub extern "C" fn listen(id: usize, event_name: *const c_char) {
+pub extern "C" fn listen(id: *const c_char, event_name: *const c_char) {
+    let c_id = unsafe {
+        assert!(!id.is_null());
+        CStr::from_ptr(id)
+    };
+    let id = c_id.to_str().unwrap();
     let c_event_name = unsafe {
         assert!(!event_name.is_null());
         CStr::from_ptr(event_name)

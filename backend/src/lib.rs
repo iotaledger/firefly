@@ -1,15 +1,13 @@
 mod actors;
 use actors::{dispatch, WalletActor, WalletMessage};
 
-use iota_wallet_actor::{
-    wallet::{
-        event::{
-            on_balance_change, on_broadcast, on_confirmation_state_change, on_error,
-            on_new_transaction, on_reattachment,
-        },
-        WalletError,
+use iota_wallet::{
+    actor::ResponseType,
+    event::{
+        on_balance_change, on_broadcast, on_confirmation_state_change, on_error,
+        on_new_transaction, on_reattachment,
     },
-    ResponseType,
+    WalletError,
 };
 use once_cell::sync::OnceCell;
 use riker::actors::*;
@@ -95,46 +93,47 @@ pub async fn send_message(message: String) {
 
 #[derive(Serialize)]
 struct EventResponse<T: Serialize> {
-    id: usize,
+    id: String,
     #[serde(rename = "type")]
     _type: EventType,
     payload: T,
 }
 
 impl<T: Serialize> EventResponse<T> {
-    fn new(id: usize, event: EventType, payload: T) -> Self {
+    fn new<S: Into<String>>(id: S, event: EventType, payload: T) -> Self {
         Self {
-            id,
+            id: id.into(),
             _type: event,
             payload,
         }
     }
 }
 
-fn serialize_event<T: Serialize>(id: usize, event: EventType, payload: T) -> String {
+fn serialize_event<T: Serialize, S: Into<String>>(id: S, event: EventType, payload: T) -> String {
     serde_json::to_string(&EventResponse::new(id, event, payload)).unwrap()
 }
 
-pub fn listen(id: usize, event_type: EventType) {
+pub fn listen<S: Into<String>>(id: S, event_type: EventType) {
     let callback = MESSAGE_RECEIVER.get().unwrap();
+    let id = id.into();
     match event_type {
         EventType::ErrorThrown => {
-            on_error(move |error| callback(serialize_event(id, event_type, &error)))
+            on_error(move |error| callback(serialize_event(id.clone(), event_type, &error)))
         }
-        EventType::BalanceChange => {
-            on_balance_change(move |event| callback(serialize_event(id, event_type, &event)))
-        }
+        EventType::BalanceChange => on_balance_change(move |event| {
+            callback(serialize_event(id.clone(), event_type, &event))
+        }),
         EventType::NewTransaction => on_new_transaction(move |event| {
-            callback(serialize_event(id, event_type, &event));
+            callback(serialize_event(id.clone(), event_type, &event));
         }),
         EventType::ConfirmationStateChange => on_confirmation_state_change(move |event| {
-            callback(serialize_event(id, event_type, &event))
+            callback(serialize_event(id.clone(), event_type, &event))
         }),
         EventType::Reattachment => {
-            on_reattachment(move |event| callback(serialize_event(id, event_type, &event)))
+            on_reattachment(move |event| callback(serialize_event(id.clone(), event_type, &event)))
         }
         EventType::Broadcast => {
-            on_broadcast(move |event| callback(serialize_event(id, event_type, &event)))
+            on_broadcast(move |event| callback(serialize_event(id.clone(), event_type, &event)))
         }
     }
 }

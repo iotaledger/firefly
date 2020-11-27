@@ -18,7 +18,7 @@ export interface SyncAccountOptions {
 }
 
 export interface Account {
-  id: number[];
+  id: string;
   mnemonic: string;
   alias: string;
   createdAt: string;
@@ -26,7 +26,7 @@ export interface Account {
   addresses: Address[];
 }
 
-export type AccountIdentifier = number | number[]
+export type AccountIdentifier = number | string
 
 export interface AccountToCreate {
   clientOptions: ClientOptions;
@@ -36,7 +36,7 @@ export interface AccountToCreate {
 }
 
 export interface SyncedAccount {
-  accountId: number[]
+  accountId: string
   depositAddress: Address
   addresses: Address[]
   messages: Message[]

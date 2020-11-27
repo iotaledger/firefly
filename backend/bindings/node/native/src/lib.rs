@@ -112,7 +112,7 @@ declare_types! {
 }
 
 fn listen(mut cx: FunctionContext) -> JsResult<JsUndefined> {
-    let id = cx.argument::<JsNumber>(0)?.value() as usize;
+    let id = cx.argument::<JsString>(0)?.value();
     let event_name = cx.argument::<JsString>(1)?.value();
     let event_type: EventType = event_name.as_str().try_into().expect("unknown event name");
     add_event_listener(id, event_type);

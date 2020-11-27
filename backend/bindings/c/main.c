@@ -15,8 +15,8 @@ void listener(const char *message) {
 
 int main() {
   initialize(callback, NULL);
-  listen("ErrorThrown");
-  send_message("{ \"cmd\": \"SetStrongholdPassword\", \"payload\": \"password\" }");
-  send_message("{ \"cmd\": \"CreateAccount\", \"payload\": { \"clientOptions\": { \"node\": \"https://nodes.devnet.iota.org:443\" } } }");
+  listen("", "ErrorThrown");
+  send_message("{ \"id\": \"A\", \"cmd\": \"SetStrongholdPassword\", \"payload\": \"password\" }");
+  send_message("{ \"id\": \"B\", \"cmd\": \"CreateAccount\", \"payload\": { \"clientOptions\": { \"node\": \"https://nodes.devnet.iota.org:443\" } } }");
   return 0;
 }

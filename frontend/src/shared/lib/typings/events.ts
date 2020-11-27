@@ -1,5 +1,6 @@
 import type { ResponseTypes } from './bridge'
 import type { Address } from './address'
+import type { Message } from './message'
 
 export enum ErrorType {
   UnknownError,
@@ -42,12 +43,12 @@ export interface ErrorEventPayload {
 }
 
 export interface BalanceChangeEventPayload {
-  accountId: number[]
+  accountId: string
   address: Address
   balance: number
 }
 
 export interface TransactionEventPayload {
-  accountId: number[]
-  messageId: number[]
+  accountId: string
+  message: Message
 }

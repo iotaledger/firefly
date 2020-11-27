@@ -1,4 +1,5 @@
 import type { Address } from './address'
+import type { Message } from './message'
 
 export enum ErrorType {
   UnknownError,
@@ -34,12 +35,12 @@ export interface ErrorEvent {
 }
 
 export interface BalanceChangeEvent {
-  accountId: number[]
+  accountId: string
   address: Address
   balance: number
 }
 
 export interface TransactionEvent {
-  accountId: number[]
-  messageId: number[]
+  accountId: string
+  message: Message
 }
