@@ -22,31 +22,6 @@ const projectRootDir = path.resolve(__dirname)
 
 // Plugins definition
 const plugins = [
-    alias({
-        resolve: ['', '.js', '.svelte', '.css', '.scss'],
-        entries: [
-            {
-                find: /^@shared-lib\/(.*)/,
-                replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/lib/out') + '/$1'
-            },
-            {
-                find: /^@shared-locales\/(.*)/,
-                replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/locales') + '/$1'
-            },
-            {
-                find: /^@shared-components/,
-                replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/components')
-            },
-            {
-                find: /^@shared-routes/,
-                replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/routes')
-            },
-            {
-                find: /^@shared-assets\/(.*)/,
-                replacement: path.resolve(projectRootDir, 'node_modules/shared-modules/assets') + '/$1'
-            }
-        ]
-    }),
     json(),
     svelte({
         dev: isDev,
@@ -62,13 +37,12 @@ const plugins = [
         browser: true,
         dedupe: ['svelte']
     }),
-    ts({ sourceMap: isDev, typescript }),
+    ts({ sourceMap: isDev, typescript, include: ['../shared/**/*.ts'] }),
     commonjs(),
     copy({
         targets: [
-            { src: 'node_modules/shared-modules/assets/*', dest: './public/assets/' },
-            { src: 'node_modules/shared-modules/style/*', dest: './public/style/' },
-            { src: 'node_modules/shared-modules/locales/*', dest: './public/locales/' }
+            { src: 'node_modules/shared/assets/*', dest: './public/assets/' },
+            { src: 'node_modules/shared/locales/*', dest: './public/locales/' }
         ],
         flatten: true
     }),
@@ -78,11 +52,6 @@ const plugins = [
 
 if (isDev) {
     plugins.push(
-        serve({
-            contentBase: ['public', 'node_modules/shared-modules'],
-            historyApiFallback: true, // for SPAs
-            port
-        }),
         livereload({ watch: './public' })
     )
 } else {
