@@ -9,6 +9,7 @@ import livereload from 'rollup-plugin-livereload'
 import serve from 'rollup-plugin-serve'
 import { terser } from 'rollup-plugin-terser'
 import sveltePreprocess from 'svelte-preprocess'
+import copy from 'rollup-plugin-copy'
 
 import builtins from 'rollup-plugin-node-builtins'
 import globals from 'rollup-plugin-node-globals'
@@ -51,7 +52,7 @@ const plugins = [
         dev: isDev,
         extensions: ['.svelte'],
         css: (css) => {
-            css.write('bundle.css')
+            css.write('public/build/bundle.css')
         },
         preprocess: sveltePreprocess({
             postcss: true
@@ -63,6 +64,14 @@ const plugins = [
     }),
     ts({ sourceMap: isDev, typescript }),
     commonjs(),
+    copy({
+        targets: [
+            { src: 'node_modules/shared-modules/assets/*', dest: './public/assets/' },
+            { src: 'node_modules/shared-modules/style/*', dest: './public/style/' },
+            { src: 'node_modules/shared-modules/locales/*', dest: './public/locales/' }
+        ],
+        flatten: true
+    }),
     globals(),
     builtins()
 ]
@@ -77,7 +86,7 @@ if (isDev) {
         livereload({ watch: './public' })
     )
 } else {
-    plugins.push(terser({ sourcemap: isDev }))
+    plugins.push(terser())
 }
 
 module.exports = {

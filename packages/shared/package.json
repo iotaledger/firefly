@@ -1,7 +1,6 @@
 {
-    "name": "shared-modules",
+    "name": "shared",
     "version": "0.0.0",
-    "private": true,
     "author": "IOTA Foundation <contact@iota.org>",
     "license": "Apache-2.0",
     "dependencies": {

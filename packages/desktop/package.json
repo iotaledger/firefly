@@ -1,5 +1,5 @@
 {
-  "name": "desktop-wallet",
+  "name": "desktop",
   "version": "1.0.0",
   "description": "IOTA wallet desktop",
   "main": "main.js",
@@ -16,8 +16,7 @@
     "build": "cross-env NODE_ENV=production rollup --config"
   },
   "dependencies": {
-    "shared-modules": "link:../shared",
-    "wallet-actor-system-nodejs-binding": "link:../../../backend/bindings/node"
+    "shared": "0.0.0"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^3.1.1",
