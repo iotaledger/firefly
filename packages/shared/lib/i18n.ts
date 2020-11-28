@@ -1,5 +1,5 @@
 import { get, derived, writable } from "svelte/store";
-import { locale } from '@shared-lib/app';
+import { locale } from 'shared/lib/app';
 import { getLocaleFromNavigator, addMessages, dictionary, _, init } from 'svelte-i18n';
 
 /*

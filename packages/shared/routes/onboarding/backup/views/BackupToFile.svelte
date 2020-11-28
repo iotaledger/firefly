@@ -1,6 +1,6 @@
 <script>
     import { createEventDispatcher } from 'svelte'
-    import { OnboardingLayout, Password, Illustration, Text, Button } from '@shared-components'
+    import { OnboardingLayout, Password, Illustration, Text, Button } from 'shared/components'
 
     export let locale
     export let mobile

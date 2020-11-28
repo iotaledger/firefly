@@ -1,5 +1,5 @@
 <script>
-    import { Icon, Text } from '@shared-components'
+    import { Icon, Text } from 'shared/components'
 
     export let hash
     export let timestamp

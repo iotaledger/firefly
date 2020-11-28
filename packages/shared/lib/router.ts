@@ -1,7 +1,7 @@
 import { readable, writable, get, derived } from 'svelte/store'
-import { logged, notification, walletPin, strongholdPassword, mnemonic } from '@shared-lib/app'
-import { setRoute } from '@shared-lib/helpers'
-import { generateRecoveryPhrase } from '@shared-lib/utils'
+import { logged, notification, walletPin, strongholdPassword, mnemonic } from 'shared/lib/app'
+import { setRoute } from 'shared/lib/helpers'
+import { generateRecoveryPhrase } from 'shared/lib/utils'
 
 /**
  * Application path based on location hash

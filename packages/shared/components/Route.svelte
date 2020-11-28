@@ -1,6 +1,6 @@
 <script>
     import { fly, scale } from 'svelte/transition'
-    import { view } from '@shared-lib/router'
+    import { view } from 'shared/lib/router'
 
     export let transition = true
     export let route = undefined

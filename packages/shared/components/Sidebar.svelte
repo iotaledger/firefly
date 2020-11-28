@@ -1,5 +1,5 @@
 <script>
-    import { Logo, Icon } from '@shared-components'
+    import { Logo, Icon } from 'shared/components'
 </script>
 
 <style type="text/scss">

@@ -1,5 +1,5 @@
 <script>
-    import { shuffleArray } from '@shared-lib/helpers'
+    import { shuffleArray } from 'shared/lib/helpers'
     import { onMount } from 'svelte'
 
     export let recoveryPhrase = []

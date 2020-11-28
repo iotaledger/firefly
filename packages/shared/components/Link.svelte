@@ -1,5 +1,5 @@
 <script>
-    import { bindEvents } from '@shared-lib/utils'
+    import { bindEvents } from 'shared/lib/utils'
     export let events = {}
 
     export let onClick = () => ''

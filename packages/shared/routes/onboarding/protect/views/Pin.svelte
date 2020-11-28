@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { OnboardingLayout, Illustration, Text, Button, Pin } from '@shared-components'
+    import { OnboardingLayout, Illustration, Text, Button, Pin } from 'shared/components'
     import { createEventDispatcher } from 'svelte'
 
     export let locale

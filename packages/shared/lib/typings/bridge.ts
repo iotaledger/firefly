@@ -2,7 +2,7 @@ import type { Event, ErrorEventPayload, BalanceChangeEventPayload, TransactionEv
 import type { Address } from './address'
 import type { AccountIdentifier, Account, SyncedAccount } from './account'
 import type { Message } from './message'
-import type { ErrorTypes } from '@shared-lib/validator';
+import type { ErrorTypes } from 'shared/lib/validator';
 
 export interface BridgeMessage {
   id?: number;

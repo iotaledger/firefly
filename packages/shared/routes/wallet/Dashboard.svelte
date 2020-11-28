@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Icon, ActivityRow, ChartOption, Sidebar, LineChart, Text, Button } from '@shared-components'
+    import { Icon, ActivityRow, ChartOption, Sidebar, LineChart, Text, Button } from 'shared/components'
 
     export let locale
     export let mobile

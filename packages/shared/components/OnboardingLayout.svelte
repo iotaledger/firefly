@@ -1,5 +1,5 @@
 <script>
-    import { Icon } from '@shared-components'
+    import { Icon } from 'shared/components'
     export let allowBack = true
     export let onBackClick = () => {}
 </script>

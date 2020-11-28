@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { setupI18n, isLocaleLoaded, dir, _ } from '@shared-lib/i18n'
-    import { darkMode, mobile, logged } from '@shared-lib/app'
-    import { goto } from '@shared-lib/helpers'
-    import { initRouter, routerNext, routerPrevious, requestMnemonic, AppRoute } from '@shared-lib/router'
-    import { Route, Toggle } from '@shared-components'
+    import { setupI18n, isLocaleLoaded, dir, _ } from 'shared/lib/i18n'
+    import { darkMode, mobile, logged } from 'shared/lib/app'
+    import { goto } from 'shared/lib/helpers'
+    import { initRouter, routerNext, routerPrevious, requestMnemonic, AppRoute } from 'shared/lib/router'
+    import { Route, Toggle } from 'shared/components'
     import {
         Splash,
         Welcome,
@@ -19,7 +19,7 @@
         Migrate,
         Congratulations,
         Dashboard,
-    } from '@shared-routes'
+    } from 'shared/routes'
 
     $: $darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
 

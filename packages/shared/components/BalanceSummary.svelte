@@ -1,5 +1,5 @@
 <script>
-    import { Box, Text } from '@shared-components'
+    import { Box, Text } from 'shared/components'
 
     export let balance
     export let transactions

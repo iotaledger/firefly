@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { fly } from 'svelte/transition'
-    import { Text, Button, Dropdown, Address } from '@shared-components'
+    import { Text, Button, Dropdown, Address } from 'shared/components'
 
     export let locale
     export let mobile

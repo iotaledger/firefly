@@ -1,5 +1,5 @@
 <script>
-    import { Logo } from '@shared-components'
+    import { Logo } from 'shared/components'
 </script>
 
 <div class="w-full h-full flex justify-center items-center">

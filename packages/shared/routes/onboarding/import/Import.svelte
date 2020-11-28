@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
-    import { Transition } from '@shared-components'
+    import { Transition } from 'shared/components'
     import { Import, TextImport, FileImport, BackupPassword, Success } from './views/'
 
     export let locale

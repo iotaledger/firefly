@@ -1,6 +1,6 @@
 <script>
-    import { bindEvents } from '@shared-lib/utils'
-    import { Icon } from '@shared-components'
+    import { bindEvents } from 'shared/lib/utils'
+    import { Icon } from 'shared/components'
     export let events = {}
 
     export let onClick = () => ''

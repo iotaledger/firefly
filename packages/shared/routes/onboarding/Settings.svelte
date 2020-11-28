@@ -1,7 +1,7 @@
 <script>
     import { createEventDispatcher } from 'svelte'
-    import { OnboardingLayout, Illustration, Text, Button, Dropdown, Radio } from '@shared-components'
-    import { darkMode } from '@shared-lib/app'
+    import { OnboardingLayout, Illustration, Text, Button, Dropdown, Radio } from 'shared/components'
+    import { darkMode } from 'shared/lib/app'
 
     export let locale
     export let mobile

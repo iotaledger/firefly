@@ -3,10 +3,6 @@
     "compilerOptions": {
         "outDir": "lib/out",
         "baseUrl": "./",
-        "paths": {
-            "@shared-lib/*": ["lib/*"],
-            "@shared-routes": ["routes"]
-        }
     },
     "include": ["./lib"],
     "exclude": ["lib/out"]

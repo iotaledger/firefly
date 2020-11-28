@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store'
-import { persistent } from '@shared-lib/helpers'
+import { persistent } from 'shared/lib/helpers'
 
 /**
  * Notification content

@@ -1,5 +1,5 @@
 <script>
-    import { Text, Button } from '@shared-components'
+    import { Text, Button } from 'shared/components'
 
     export let locale = undefined
     export let onDrop = () => {}
