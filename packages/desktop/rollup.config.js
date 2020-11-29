@@ -27,7 +27,7 @@ const plugins = [
         dev: isDev,
         extensions: ['.svelte'],
         css: (css) => {
-            css.write('public/build/bundle.css')
+            css.write('bundle.css')
         },
         preprocess: sveltePreprocess({
             postcss: true
@@ -41,8 +41,8 @@ const plugins = [
     commonjs(),
     copy({
         targets: [
-            { src: 'node_modules/shared/assets/*', dest: './public/assets/' },
-            { src: 'node_modules/shared/locales/*', dest: './public/locales/' }
+            { src: '../shared/assets/*', dest: './public/assets/' },
+            { src: '../shared/locales/*', dest: './public/locales/' }
         ],
         flatten: true
     }),
@@ -52,6 +52,11 @@ const plugins = [
 
 if (isDev) {
     plugins.push(
+        serve({
+            contentBase: ['public'],
+            historyApiFallback: true, // for SPAs
+            port
+        }),
         livereload({ watch: './public' })
     )
 } else {
