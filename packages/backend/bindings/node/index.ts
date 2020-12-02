@@ -1,4 +1,4 @@
-import { BridgeMessage, MessageResponse } from '../../../../api-wrapper/bridge'
+import { BridgeMessage, MessageResponse } from '../../api-wrapper/bridge'
 import {
   AccountToCreate,
   AccountIdentifier,
@@ -17,17 +17,17 @@ import {
   totalBalance as _totalBalance,
   latestAddress as _latestAddress,
   syncAccount as _syncAccount
-} from '../../../../api-wrapper/account'
+} from '../../api-wrapper/account'
 import {
   Transfer,
   reattach as _reattach
-} from '../../../../api-wrapper/message'
+} from '../../api-wrapper/message'
 import {
   backup as _backup,
   restoreBackup as _restoreBackup,
   setStrongholdPassword as _setStrongholdPassword,
   send as _send
-} from '../../../../api-wrapper/wallet'
+} from '../../api-wrapper/wallet'
 
 const addon = require('../native')
 const mailbox = []

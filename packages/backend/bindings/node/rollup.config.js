@@ -9,12 +9,12 @@ import pkg from './package.json'
 
 export default {
   input: {
-    index: './src/index.ts'
+    index: './index.ts'
   },
   treeshake: true,
   perf: true,
   output: {
-    dir: './',
+    dir: './dist',
     entryFileNames: '[name].js',
     format: 'cjs',
     exports: 'named',
@@ -40,7 +40,7 @@ export default {
   ],
   watch: {
     chokidar: true,
-    include: 'src/**',
+    include: '*.ts',
     exclude: 'node_modules/**'
   }
 }

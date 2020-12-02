@@ -1,5 +1,5 @@
-import { AccountToCreate, AccountIdentifier, ListMessagesFilter, SyncAccountOptions } from '../../../../api-wrapper/account';
-import { Transfer } from '../../../../api-wrapper/message';
+import { AccountToCreate, AccountIdentifier, ListMessagesFilter, SyncAccountOptions } from '../../api-wrapper/account';
+import { Transfer } from '../../api-wrapper/message';
 export declare function init(storagePath?: string): void;
 export declare function onMessage(cb: (payload: any) => void): void;
 export declare const api: {

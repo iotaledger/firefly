@@ -1,4 +1,4 @@
-const binding = require('wallet-actor-system-nodejs-binding')
+const binding = require('wallet-nodejs-binding')
 
 binding.init()
 
