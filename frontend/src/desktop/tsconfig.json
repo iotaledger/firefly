@@ -1,7 +1,0 @@
-{
-  "extends": "@tsconfig/svelte/tsconfig.json",
-  "compilerOptions": {
-    "isolatedModules": false,
-    "allowJs": true
-  }
-}
