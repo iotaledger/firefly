@@ -3,7 +3,7 @@
     import Chart from 'chart.js'
 
     let canvas
-    let chart;
+    let chart
 
     export let labels
     export let data
@@ -72,9 +72,9 @@
     }
 
     function reinitialise() {
-        chart.destroy();
+        chart.destroy()
 
-        createChart();
+        createChart()
     }
 
     onMount(createChart)

@@ -19,7 +19,7 @@
         Balance,
         Migrate,
         Congratulations,
-        Dashboard
+        Dashboard,
     } from 'shared/routes'
 
     $: $darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')

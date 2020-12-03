@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onDestroy } from 'svelte'
-    import { LineChart, BarChart } from '@shared-components'
-    import { chartData } from '@shared-lib/marketData'
+    import { LineChart, BarChart } from 'shared/components'
+    import { chartData } from 'shared/lib/marketData'
 
     enum ChartType {
         Line = 'line',
