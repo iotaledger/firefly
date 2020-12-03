@@ -1,0 +1,37 @@
+{
+  "name": "wallet-nodejs-binding",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/index.js",
+  "author": "Lucas Nogueira <lucas.nogueira@iota.org>",
+  "license": "MIT",
+  "dependencies": {
+    "neon-cli": "^0.4.0",
+    "electron-build-env": "^0.2.0"
+  },
+  "scripts": {
+    "postinstall": "yarn build",
+    "pretest": "yarn build",
+    "build": "npm-run-all -p build:api build:binding",
+    "build:binding": "electron-build-env -- yarn neon build",
+    "build:api": "rimraf ./index.js && rollup -c --silent && yarn generate-declaration",
+    "generate-declaration": "tsc index.ts --declaration --emitDeclarationOnly --outDir dist && mv dist/bindings/node/index.d.ts dist/index.d.ts",
+    "test": "mocha --timeout 0"
+  },
+  "devDependencies": {
+    "@babel/core": "7.11.6",
+    "@babel/preset-env": "7.11.5",
+    "@babel/preset-typescript": "7.10.4",
+    "@rollup/plugin-commonjs": "15.1.0",
+    "@rollup/plugin-json": "4.1.0",
+    "@rollup/plugin-node-resolve": "9.0.0",
+    "@rollup/plugin-sucrase": "^3.1.0",
+    "mocha": "^8.0.1",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "rollup": "2.28.1",
+    "rollup-plugin-terser": "7.0.2",
+    "rollup-plugin-typescript2": "0.27.2",
+    "typescript": "^4.0.3"
+  }
+}
