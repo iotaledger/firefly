@@ -7,7 +7,6 @@
   "author": "IOTA Foundation <contact@iota.org>",
   "license": "Apache-2.0",
   "scripts": {
-    "preinstall": "cd ./../shared && yarn && cd ./../desktop",
     "start": "npm-run-all -p start:dev start:electron",
     "start:dev": "NODE_ENV=development rollup --config --watch",
     "start:electron": "NODE_ENV=development electron electron/main.js",
