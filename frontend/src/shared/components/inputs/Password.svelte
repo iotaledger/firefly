@@ -68,14 +68,6 @@
                 }
             }
         }
-        :global(svg path) {
-            @apply text-blue-500;
-            @apply fill-current;
-        }
-        :global(svg path.stroke:not(.fixedstroke)) {
-            fill: none;
-            @apply stroke-current;
-        }
     }
 </style>
 
@@ -99,7 +91,7 @@
                  " />
         {#if showRevealToggle === true}
             <button on:click={(e) => revealToggle(e)} tabindex="-1" class="absolute">
-                <Icon icon={revealed ? 'view' : 'hide'} />
+                <Icon icon={revealed ? 'view' : 'hide'} classes="text-blue-500" />
             </button>
         {/if}
     </div>

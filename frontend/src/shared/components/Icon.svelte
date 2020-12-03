@@ -3,6 +3,8 @@
     export let width = undefined
     export let height = undefined
     export let classes = ''
+    export let boxed = false
+    export let boxClasses = 'undefined'
 
     $: selected = icons[icon]
 
@@ -109,7 +111,7 @@
                     d: 'M7 12L10.5 15.5L17 9',
                     strokeWidth: '2',
                     strokeLinecap: 'round',
-                    stroke: 'white',
+                    strokeColor: 'white',
                 },
             ],
         },
@@ -195,9 +197,23 @@
             path: [
                 {
                     d:
-                        'M18.3355 5.6929L6.11394 13.2609L9.4556 14.6471L15.1177 10.6027L13.129 16.171L17.7892 18.1042L18.3355 5.6929ZM20.4168 3.89052C20.4521 3.08788 19.5744 2.57338 18.8913 2.99635L3.40306 12.5871C2.71041 13.016 2.79384 14.0488 3.54635 14.361L7.30235 15.9191L7.50227 16.3836L9.66387 21.4051C10.3206 22.9308 12.4433 23.0373 13.2495 21.5851L14.6929 18.985L18.3423 20.4989C18.9834 20.7649 19.6939 20.3127 19.7245 19.6192L20.4168 3.89052ZM11.5009 20.6143L10.3498 17.9403L12.4636 18.8802L11.5009 20.6143Z',
+                        'M4.91176 4.90936L4.92686 4.9174C4.92179 4.91477 4.91675 4.91209 4.91176 4.90936ZM6.41052 5.6855L18.6122 12.0017L6.40835 18.319L7.61573 14.1444L11.0189 12.5C11.4192 12.359 11.6867 12.2757 11.6867 12.002C11.6867 11.7284 11.4005 11.6405 11 11.5C10.5995 11.3595 7.61575 9.86536 7.61575 9.86536L6.41052 5.6855ZM4.90804 19.0959C4.91307 19.0931 4.91813 19.0905 4.92323 19.0878L4.90804 19.0959ZM5.8594 3.14814C5.24695 2.82124 4.63768 3.08572 4.32746 3.45385C4.03285 3.80345 3.92991 4.28889 4.05775 4.74456L5.70796 10.4677C5.82735 10.9979 6.2195 11.5817 6.9009 11.7341L7.67139 12.0044L6.9013 12.2757C6.2127 12.4284 5.82628 13.0169 5.70804 13.5418L4.05623 19.253L4.05519 19.2566C3.92408 19.7164 4.03193 20.2011 4.32166 20.5472C4.62572 20.9104 5.23511 21.1884 5.85571 20.8571L20.1734 13.4456L20.1876 13.4381C20.7701 13.1246 21 12.5045 21 12.0026C21 11.4877 20.763 10.8967 20.2174 10.5818C20.2042 10.5741 20.1907 10.5667 20.1771 10.5597L5.8594 3.14814Z',
                     fillRule: 'evenodd',
                     clipRule: 'evenodd',
+                },
+            ],
+        },
+        receive: {
+            width: 24,
+            height: 24,
+            path: [
+                {
+                    d:
+                        'M5.30898 11.111L12 17L18.691 11.111C19.0872 10.7655 19.1047 10.1892 18.7301 9.82379C18.3556 9.45838 17.7308 9.44223 17.3346 9.78771L12.9872 13.633L12.9872 3.91053C12.9872 3.40766 12.5452 3 12 3C11.4548 3 11.0128 3.40766 11.0128 3.91053L11.0128 13.633L6.66538 9.7877C6.26921 9.44223 5.64441 9.45838 5.26985 9.82379C4.89529 10.1892 4.91281 10.7655 5.30898 11.111Z',
+                },
+                {
+                    d:
+                        'M5 21C3.89543 21 3 20.1046 3 19V18C3 17.4477 3.44772 17 4 17C4.55228 17 5 17.4477 5 18V19H19V18C19 17.4477 19.4477 17 20 17C20.5523 17 21 17.4477 21 18V19C21 20.1046 20.1046 21 19 21H5Z',
                 },
             ],
         },
@@ -278,24 +294,51 @@
 </script>
 
 {#if selected}
-    <svg
-        data-label="icon"
-        class={`fill-current ${classes}`}
-        width={width || selected.width || '100%'}
-        height={height || selected.height || '100%'}
-        viewBox="0 0 {width || selected.width}
-        {height || selected.height}"
-        xmlns="http://www.w3.org/2000/svg">
-        {#each selected.path as path}
-            <path
-                class:stroke={path.strokeWidth}
-                class:fixedstroke={path.stroke}
-                d={path.d}
-                fill-rule={path.fillRule || ''}
-                clip-rule={path.clipRule || ''}
-                stroke-width={path.strokeWidth || ''}
-                stroke-linecap={path.strokeLinecap || ''}
-                stroke={path.stroke || ''} />
-        {/each}
-    </svg>
+    {#if boxed}
+        <div class={`w-8 h-8 flex justify-center items-center rounded-lg ${boxClasses}`}>
+            <svg
+                data-label="icon"
+                class={classes}
+                width={width || selected.width || '100%'}
+                height={height || selected.height || '100%'}
+                viewBox="0 0 {width || selected.width} {height || selected.height}"
+                xmlns="http://www.w3.org/2000/svg">
+                {#each selected.path as path}
+                    <path
+                        class:stroke={path.strokeWidth}
+                        class:fixedstrokeColor={path.strokeColor}
+                        class:fill-current={!path.strokeWidth & !path.strokeColor}
+                        class:stroke-current={path.strokeWidth & !path.strokeColor}
+                        d={path.d}
+                        fill-rule={path.fillRule || ''}
+                        clip-rule={path.clipRule || ''}
+                        stroke-width={path.strokeWidth || ''}
+                        stroke-linecap={path.strokeLinecap || ''}
+                        stroke={path.strokeColor || ''} />
+                {/each}
+            </svg>
+        </div>
+    {:else}
+        <svg
+            data-label="icon"
+            class={classes}
+            width={width || selected.width || '100%'}
+            height={height || selected.height || '100%'}
+            viewBox="0 0 {width || selected.width} {height || selected.height}"
+            xmlns="http://www.w3.org/2000/svg">
+            {#each selected.path as path}
+                <path
+                    class:stroke={path.strokeWidth}
+                    class:fixedstrokeColor={path.strokeColor}
+                    class:fill-current={!path.strokeWidth & !path.strokeColor}
+                    class:stroke-current={path.strokeWidth & !path.strokeColor}
+                    d={path.d}
+                    fill-rule={path.fillRule || ''}
+                    clip-rule={path.clipRule || ''}
+                    stroke-width={path.strokeWidth || ''}
+                    stroke-linecap={path.strokeLinecap || ''}
+                    stroke={path.strokeColor || ''} />
+            {/each}
+        </svg>
+    {/if}
 {/if}
