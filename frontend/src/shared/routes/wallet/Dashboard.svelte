@@ -139,9 +139,9 @@
             <div class="flex flex-auto flex-col w-1/3 h-full flex-shrink-0">
                 <!-- Balance -->
                 <div data-label="total-balance" class="bg-blue-700 rounded-t-2xl pt-10 pb-16 px-8">
-                    <Text type="p" smaller classes="text-white mb-2">Total Balance</Text>
+                    <Text type="p" classes="p-smaller text-white mb-2">Total Balance</Text>
                     <Text type="h1" classes="text-white mb-2">23.322,32 Mi</Text>
-                    <Text type="p" smaller classes="text-opacity-75 text-white">Total Balance</Text>
+                    <Text type="p" classes="p-smaller text-opacity-75 text-white">Total Balance</Text>
                 </div>
                 <!-- Incoming/Outgoing -->
                 <div data-label="total-movements" class="bg-blue-600 rounded-t-2xl p-8 pb-12 -mt-5 flex flex-row justify-between">
@@ -150,7 +150,7 @@
                             <Icon icon="arrow-down" classes="mr-2" />
                             <div>
                                 <Text type="p" classes="text-white mb-1">{`${totalIncoming.amount} ${totalIncoming.unit}`}</Text>
-                                <Text type="p" smaller classes="text-opacity-50 text-white">Incoming</Text>
+                                <Text type="p" classes="p-smaller text-opacity-50 text-white">Incoming</Text>
                             </div>
                         </div>
                     {/if}
@@ -159,7 +159,7 @@
                             <Icon icon="arrow-down" classes="mr-2" />
                             <div>
                                 <Text type="p" classes="text-white mb-1">{`${totalOutgoing.amount} ${totalOutgoing.unit}`}</Text>
-                                <Text type="p" smaller classes="text-opacity-50 text-white">Outgoing</Text>
+                                <Text type="p" classes="p-smaller text-opacity-50 text-white">Outgoing</Text>
                             </div>
                         </div>
                     {/if}
