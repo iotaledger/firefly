@@ -2,10 +2,9 @@ import type { Event, ErrorEventPayload, BalanceChangeEventPayload, TransactionEv
 import type { Address } from './address'
 import type { AccountIdentifier, Account, SyncedAccount } from './account'
 import type { Message } from './message'
-import type { ErrorTypes } from 'shared/lib/validator';
 
 export interface BridgeMessage {
-  id?: number;
+  id: string;
   cmd: string;
   payload?: any;
 }
@@ -78,4 +77,4 @@ export type MessageResponse = RemovedAccountResponse |
   // events
   Event<ErrorEventPayload> | Event<BalanceChangeEventPayload> | Event<TransactionEventPayload>
 
-export type Bridge = (message: BridgeMessage) => Promise<number>
+export type Bridge = (message: BridgeMessage) => Promise<string>

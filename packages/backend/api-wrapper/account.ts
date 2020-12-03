@@ -40,7 +40,7 @@ export interface SyncedAccount {
   depositAddress: Address
 }
 
-export function createAccount(bridge: Bridge, __id: string, account: AccountToCreate): Promise<number> {
+export function createAccount(bridge: Bridge, __id: string, account: AccountToCreate): Promise<string> {
   return bridge({
     id: __id,
     cmd: 'CreateAccount',
@@ -48,7 +48,7 @@ export function createAccount(bridge: Bridge, __id: string, account: AccountToCr
   })
 }
 
-export function removeAccount(bridge: Bridge, __id: string, accountId: AccountIdentifier): Promise<number> {
+export function removeAccount(bridge: Bridge, __id: string, accountId: AccountIdentifier): Promise<string> {
   return bridge({
     id: __id,
     cmd: 'RemoveAccount',
@@ -56,7 +56,7 @@ export function removeAccount(bridge: Bridge, __id: string, accountId: AccountId
   })
 }
 
-export function getAccount(bridge: Bridge, __id: string, accountId: AccountIdentifier): Promise<number> {
+export function getAccount(bridge: Bridge, __id: string, accountId: AccountIdentifier): Promise<string> {
   return bridge({
     id: __id,
     cmd: 'GetAccount',
@@ -64,21 +64,21 @@ export function getAccount(bridge: Bridge, __id: string, accountId: AccountIdent
   })
 }
 
-export function getAccounts(bridge: Bridge, __id: string): Promise<number> {
+export function getAccounts(bridge: Bridge, __id: string): Promise<string> {
   return bridge({
     id: __id,
     cmd: 'GetAccounts'
   })
 }
 
-export function syncAccounts(bridge: Bridge, __id: string): Promise<number> {
+export function syncAccounts(bridge: Bridge, __id: string): Promise<string> {
   return bridge({
     id: __id,
     cmd: 'SyncAccounts'
   })
 }
 
-export function internalTransfer(bridge: Bridge, __id: string, fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number): Promise<number> {
+export function internalTransfer(bridge: Bridge, __id: string, fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number): Promise<string> {
   return bridge({
     id: __id,
     cmd: 'InternalTransfer',
@@ -100,7 +100,7 @@ enum AccountMethod {
   SyncAccount,
 }
 
-function _callAccountMethod(bridge: Bridge, __id: string, methodName: AccountMethod, accountId: AccountIdentifier, data: any = void 0): Promise<number> {
+function _callAccountMethod(bridge: Bridge, __id: string, methodName: AccountMethod, accountId: AccountIdentifier, data: any = void 0): Promise<string> {
   return bridge({
     id: __id,
     cmd: 'CallAccountMethod',
@@ -114,30 +114,30 @@ function _callAccountMethod(bridge: Bridge, __id: string, methodName: AccountMet
   })
 }
 
-export function generateAddress(bridge: Bridge, __id: string, accountId: AccountIdentifier): Promise<number> {
+export function generateAddress(bridge: Bridge, __id: string, accountId: AccountIdentifier): Promise<string> {
   return _callAccountMethod(bridge, __id, AccountMethod.GenerateAddress, accountId)
 }
 
-export function listMessages(bridge: Bridge, __id: string, accountId: AccountIdentifier, filters?: ListMessagesFilter): Promise<number> {
+export function listMessages(bridge: Bridge, __id: string, accountId: AccountIdentifier, filters?: ListMessagesFilter): Promise<string> {
   return _callAccountMethod(bridge, __id, AccountMethod.ListMessages, accountId, filters || {})
 }
 
-export function listAddresses(bridge: Bridge, __id: string, accountId: AccountIdentifier, unspent?: boolean): Promise<number> {
+export function listAddresses(bridge: Bridge, __id: string, accountId: AccountIdentifier, unspent?: boolean): Promise<string> {
   return _callAccountMethod(bridge, __id, AccountMethod.ListAddresses, accountId, { unspent })
 }
 
-export function availableBalance(bridge: Bridge, __id: string, accountId: AccountIdentifier): Promise<number> {
+export function availableBalance(bridge: Bridge, __id: string, accountId: AccountIdentifier): Promise<string> {
   return _callAccountMethod(bridge, __id, AccountMethod.GetAvailableBalance, accountId)
 }
 
-export function totalBalance(bridge: Bridge, __id: string, accountId: AccountIdentifier): Promise<number> {
+export function totalBalance(bridge: Bridge, __id: string, accountId: AccountIdentifier): Promise<string> {
   return _callAccountMethod(bridge, __id, AccountMethod.GetTotalBalance, accountId)
 }
 
-export function latestAddress(bridge: Bridge, __id: string, accountId: AccountIdentifier): Promise<number> {
+export function latestAddress(bridge: Bridge, __id: string, accountId: AccountIdentifier): Promise<string> {
   return _callAccountMethod(bridge, __id, AccountMethod.GetLatestAddress, accountId)
 }
 
-export function syncAccount(bridge: Bridge, __id: string, accountId: AccountIdentifier, options?: SyncAccountOptions): Promise<number> {
+export function syncAccount(bridge: Bridge, __id: string, accountId: AccountIdentifier, options?: SyncAccountOptions): Promise<string> {
   return _callAccountMethod(bridge, __id, AccountMethod.SyncAccount, accountId, options || {})
 }
