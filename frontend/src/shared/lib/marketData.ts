@@ -1,4 +1,4 @@
-import { writable, get } from 'svelte/store'
+import { writable, get, derived } from 'svelte/store'
 
 /**
  * Market data endpoints list
@@ -53,7 +53,7 @@ const DEFAULT_EXCHANGE_RATES = {
     ZAR: 1,
 };
 
-enum CurrencyTypes {
+export enum CurrencyTypes {
     BTC = 'btc',
     ETH = 'eth',
     EUR = 'eur',
@@ -66,6 +66,17 @@ enum HistoryDataProps {
     ONE_MINUTE = '1m',
     SEVEN_DAYS = '7d',
     TWENTY_FOUR_HOURS = '24h'
+}
+
+enum Timeframes {
+    ONE_HOUR = '1 hour',
+    SEVEN_DAYS = '1 week',
+    TWENTY_FOUR_HOURS = '1 day'
+}
+
+export enum AvailableCharts {
+    PORTFOLIO = 'Portfolio',
+    TOKEN = 'Token'
 }
 
 enum Histories {
@@ -170,6 +181,11 @@ type PriceData = {
     [CurrencyTypes.ETH]: HistoryData;
 };
 
+type ChartData = {
+    labels: string[];
+    data: number[]
+}
+
 /**
  * Exchange rates
  */
@@ -220,6 +236,43 @@ export const priceData = writable<PriceData>({
     }
 })
 
+/** Selected currency on chart */
+export const chartCurrency = writable<CurrencyTypes>(CurrencyTypes.USD);
+
+/** Selected time frame on chart */
+export const chartTimeframe = writable<HistoryDataProps>(HistoryDataProps.SEVEN_DAYS);
+
+/** Selected chart */
+export const selectedChart = writable<AvailableCharts>(AvailableCharts.PORTFOLIO);
+
+/** Chart data */
+export const chartData = derived(
+    [
+        priceData,
+        chartCurrency,
+        chartTimeframe
+    ],
+    ([$priceData, $chartCurrency, $chartTimeframe]) => {
+        return $priceData[$chartCurrency][$chartTimeframe]
+            .sort((a, b) => a[0] - b[0])
+            .reduce(
+                (acc, values) => {
+                    acc.labels.push(new Date(values[0] * 1000).toLocaleString('default', { month: 'short', day: 'numeric' }))
+                    acc.data.push(parseFloat(values[1]))
+
+                    return acc
+                },
+                { labels: [], data: [] }
+            )
+    }
+)
+
+export const TIMEFRAME_MAP = {
+    [HistoryDataProps.ONE_HOUR]: Timeframes.ONE_HOUR,
+    [HistoryDataProps.SEVEN_DAYS]: Timeframes.SEVEN_DAYS,
+    [HistoryDataProps.TWENTY_FOUR_HOURS]: Timeframes.TWENTY_FOUR_HOURS
+}
+
 /**
  * Fetches market data
  * 
@@ -254,7 +307,7 @@ export async function fetchMarketData(): Promise<void> {
                     _priceData[currency] = marketData[`history-${currency}`].data;
                 }
             });
-            
+
             // Store price data
             priceData.set(_priceData);
 
