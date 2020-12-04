@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
+    import { fetchMarketData } from 'shared/lib/marketData'
     import { setupI18n, isLocaleLoaded, dir, _ } from 'shared/lib/i18n'
     import { darkMode, mobile, logged } from 'shared/lib/app'
     import { goto } from 'shared/lib/helpers'
@@ -30,11 +31,13 @@
     let splash = true
 
     setupI18n()
-    onMount(() => {
+    onMount(async () => {
         setTimeout(() => {
             splash = false
             initRouter()
         }, 2000)
+
+        await fetchMarketData()
     })
 </script>
 
@@ -81,7 +84,7 @@
         <div class="mr-4">
             <Toggle on={darkMode} />
         </div>
-        <button on:click={() => logged.update(() => false)}> reset </button>
+        <button on:click={() => logged.update(() => false)}>reset</button>
     </div>
     <!--  -->
     <Route route={AppRoute.Welcome}>

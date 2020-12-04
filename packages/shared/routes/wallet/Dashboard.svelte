@@ -1,5 +1,13 @@
 <script lang="typescript">
-    import { Icon, ActivityRow, ChartOption, Sidebar, LineChart, Text, Button } from 'shared/components'
+    import { Dropdown, Icon, ActivityRow, Sidebar, Chart, Text, Button } from 'shared/components'
+    import {
+        selectedChart,
+        CurrencyTypes,
+        chartCurrency,
+        chartTimeframe,
+        TIMEFRAME_MAP,
+        AvailableCharts
+    } from 'shared/lib/marketData'
 
     export let locale
     export let mobile
@@ -7,7 +15,7 @@
     enum DashboardState {
         Init = 'init',
         Send = 'send',
-        Receive = 'receive',
+        Receive = 'receive'
     }
 
     let state: DashboardState = DashboardState.Init
@@ -46,60 +54,60 @@
             hash: 'JWL9...KFL9M',
             timestamp: '20 June, 2020, 14:03',
             amount: '251 Gi',
-            received: true,
+            received: true
         },
         {
             hash: 'JWL9...KFL9M',
             timestamp: '20 June, 2020, 14:03',
             amount: '151 Gi',
-            received: false,
+            received: false
         },
         {
             hash: 'JWL9...KFL9M',
             timestamp: '20 June, 2020, 14:03',
             amount: '50 Gi',
-            received: true,
-        },
+            received: true
+        }
     ]
     const totalIncoming = {
         amount: 32,
-        unit: 'Gi',
+        unit: 'Gi'
     }
     const totalOutgoing = {
         amount: 16,
-        unit: 'Gi',
+        unit: 'Gi'
     }
     const accounts = [
         {
             name: 'Fun Wallet',
             balance: '23.322 Gi',
-            balanceEquiv: '45500 USD',
+            balanceEquiv: '45500 USD'
         },
         {
             name: 'Billy Bills',
             balance: '23.322 Gi',
-            balanceEquiv: '45500 USD',
+            balanceEquiv: '45500 USD'
         },
         {
             name: 'Pizza Fund',
             balance: '23.322 Gi',
-            balanceEquiv: '45500 USD',
+            balanceEquiv: '45500 USD'
         },
         {
             name: 'Wonder Alice',
             balance: '23.322 Gi',
-            balanceEquiv: '45500 USD',
+            balanceEquiv: '45500 USD'
         },
         {
             name: 'Tropical Palm',
             balance: '23.322 Gi',
-            balanceEquiv: '45500 USD',
+            balanceEquiv: '45500 USD'
         },
         {
             name: 'Johnny Bravo',
             balance: '23.322 Gi',
-            balanceEquiv: '45500 USD',
-        },
+            balanceEquiv: '45500 USD'
+        }
     ]
 </script>
 
@@ -185,22 +193,37 @@
             <div class="flex flex-col flex-wrap w-2/3 h-full">
                 <!-- Portfolio / Token Chart -->
                 <div data-label="portfolio-token-chart" class="w-full bg-white rounded-2xl px-10 pt-8 pb-6 mb-4">
-                    <div class="flex justify-start">
-                        <Text type="h4">Portfolio</Text>
-                        <Text type="h4" disabled classes="ml-6">Token</Text>
-                    </div>
-                    <div class="flex-1 flex flex-row-reverse">
-                        <ChartOption option="ALL" />
-                        <ChartOption option="1Y" />
-                        <ChartOption option="1M" />
-                        <ChartOption selected option="1W" />
-                        <ChartOption option="1D" />
-                        <ChartOption option="1H" />
+                    <div class="flex justify-between">
+                        <div class="flex">
+                            {#each Object.values(AvailableCharts) as chart, idx}
+                                <span on:click={() => selectedChart.set(chart)}>
+                                    <Text type="h4" disabled={chart !== $selectedChart} classes={idx > 0 && 'ml-6'}>{chart}</Text>
+                                </span>
+                            {/each}
+                        </div>
+                        <div class="flex">
+                            <span>
+                                <Dropdown
+                                    value={$chartCurrency.toUpperCase()}
+                                    items={Object.values(CurrencyTypes).map((currency) => ({
+                                        value: currency,
+                                        label: currency.toUpperCase()
+                                    }))}
+                                    onSelect={(newCurrency) => chartCurrency.set(newCurrency)} />
+                            </span>
+                            <span class="ml-6">
+                                <Dropdown
+                                    value={TIMEFRAME_MAP[$chartTimeframe]}
+                                    items={Object.keys(TIMEFRAME_MAP).map((value) => ({ label: TIMEFRAME_MAP[value], value }))}
+                                    onSelect={(newTimeframe) => chartTimeframe.set(newTimeframe)} />
+                            </span>
+                        </div>
                     </div>
                     <div class="flex-auto">
-                        <LineChart />
+                        <Chart type="line" />
                     </div>
                 </div>
+
                 <div class="w-full flex flex-row flex-1 gap-4">
                     <!-- Latest Transactions -->
                     <div data-label="latest-transactions" class="bg-white rounded-2xl w-1/2 p-8 flex-grow flex flex-col">

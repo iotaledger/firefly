@@ -1,27 +1,33 @@
 <script>
-    import { onMount } from "svelte";
-    import Chart from "chart.js";
+    import { onMount, afterUpdate } from 'svelte'
+    import Chart from 'chart.js'
 
-    let canvas 
+    let canvas
+    let chart
+
+    export let labels
+    export let data
+
+    afterUpdate(reinitialise)
 
     function createChart() {
-        const ctx = canvas;
-        const context = ctx.getContext('2d');
+        const ctx = canvas
+        const context = ctx.getContext('2d')
 
         const gradient = context.createLinearGradient(
             context.canvas.width / 2,
             0,
             context.canvas.width / 2,
             context.canvas.height / 1.2
-        );
+        )
 
-        gradient.addColorStop(0, '#DAE7FF');
-        gradient.addColorStop(1, 'rgba(238, 242, 250, 0)');
+        gradient.addColorStop(0, '#DAE7FF')
+        gradient.addColorStop(1, 'rgba(238, 242, 250, 0)')
 
-        const myChart = new Chart(ctx, {
-            type: "line",
+        chart = new Chart(ctx, {
+            type: 'line',
             data: {
-                labels: ['25 oct', '26 oct', '26 oct', '27 oct', '28 oct', '29 oct'],
+                labels,
                 datasets: [
                     {
                         backgroundColor: gradient,
@@ -29,7 +35,7 @@
                         borderWidth: 2,
                         // Hide data points on line
                         pointRadius: 0,
-                        data: [8, 15, 17, 18, 8, 13, 8]
+                        data
                     }
                 ]
             },
@@ -41,27 +47,39 @@
                     display: false
                 },
                 scales: {
-                    xAxes: [{
-                        offset: true,
-                        gridLines: {
-                            display: false
-                        },
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            autoSkip: true,
-                            maxTicksLimit: 5
-                        },
-                    }]
-                },
+                    xAxes: [
+                        {
+                            offset: true,
+                            gridLines: {
+                                display: false
+                            }
+                        }
+                    ],
+                    yAxes: [
+                        {
+                            ticks: {
+                                autoSkip: true,
+                                maxTicksLimit: 6,
+                                callback: function(value, index, values) {
+                                    return value.toFixed(3)
+                                }
+                            }
+                        }
+                    ]
+                }
             }
-        });
+        })
     }
 
-    onMount(createChart);
+    function reinitialise() {
+        chart.destroy()
+
+        createChart()
+    }
+
+    onMount(createChart)
 </script>
 
 <div class="chart-container" style="position: relative; height: 28.5vh;">
-    <canvas bind:this={canvas}></canvas>
+    <canvas bind:this={canvas} />
 </div>
