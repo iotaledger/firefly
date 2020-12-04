@@ -6,6 +6,7 @@
     export let bold = false
     export let smaller = false
     export let error = false
+    export let overrideColor = false
     export let classes = '' // ISSUE: https://github.com/tailwindlabs/tailwindcss/discussions/1446
 </script>
 
@@ -40,7 +41,7 @@
 
 {#if type === 'h1'}
     <h1
-        class={`font-bold text-32 leading-120 text-gray-800 dark:text-white ${classes}`}
+        class={`font-bold text-32 leading-120 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
         class:secondary
         class:disabled
         class:highlighted
@@ -49,7 +50,7 @@
     </h1>
 {:else if type === 'h2'}
     <h2
-        class={`font-bold text-24 leading-120 text-gray-800 dark:text-white ${classes}`}
+        class={`font-bold text-24 leading-120 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
         class:secondary
         class:disabled
         class:highlighted
@@ -58,7 +59,7 @@
     </h2>
 {:else if type === 'h3'}
     <h3
-        class={`font-bold text-18 leading-140 text-gray-800 dark:text-white ${classes}`}
+        class={`font-bold text-18 leading-140 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
         class:secondary
         class:disabled
         class:highlighted
@@ -67,7 +68,7 @@
     </h3>
 {:else if type === 'h4'}
     <h4
-        class={`font-bold text-16 leading-140 text-gray-800 dark:text-white ${classes}`}
+        class={`font-bold text-16 leading-140 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
         class:secondary
         class:disabled
         class:highlighted
@@ -76,7 +77,7 @@
     </h4>
 {:else if type === 'h5'}
     <h5
-        class={`font-bold text-14 leading-140  text-gray-800 dark:text-white ${classes}`}
+        class={`font-bold text-14 leading-140  ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
         class:secondary
         class:disabled
         class:highlighted
@@ -85,7 +86,7 @@
     </h5>
 {:else if type === 'p'}
     <p
-        class={`text-13 leading-160 text-gray-800  dark:text-white ${classes}`}
+        class={`text-13 leading-160 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
         class:secondary
         class:disabled
         class:highlighted

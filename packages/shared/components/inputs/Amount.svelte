@@ -1,11 +1,11 @@
 <script>
+    import { Icon, Text } from 'shared/components'
     export let amount = undefined
     export let unit = undefined
+    export let label = undefined
     export let locale = undefined
     export let classes = ''
-
     let dropdown = false
-
     function onKey(e) {
         if (e.keyCode === 8 || e.target.value.length <= 12) {
             return true
@@ -13,7 +13,6 @@
             e.target.value = e.target.value.substring(0, 12)
         }
     }
-
     const clickOutside = () => {
         dropdown = false
     }
@@ -60,7 +59,8 @@
 <svelte:window on:click={clickOutside} />
 
 <amount-input class={classes}>
-    <input type="number" placeholder={locale('general.amount')} on:keydown={onKey} bind:value={amount} />
+    <Text type="p" classes="mb-2" smaller>{label || locale('general.amount')}</Text>
+    <input type="number" placeholder={label || locale('general.amount')} on:keydown={onKey} bind:value={amount} />
     <button
         on:click={(e) => {
             e.preventDefault()
