@@ -402,7 +402,6 @@ export default class ValidatorService {
      * @returns {ValidationResponse}
      */
     performValidation(response: MessageResponse): ValidationResponse {
-        console.log('REsponse');
         return this.validators[response.type].isValid(response);
     }
 }
