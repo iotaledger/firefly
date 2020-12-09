@@ -1,4 +1,5 @@
 const binding = require('wallet-nodejs-binding')
+const { remote } = require('electron')
 
 binding.init()
 
@@ -20,3 +21,15 @@ const freezeObjectFactory = (obj) => {
 }
 
 window.__WALLET__ = freezeObjectFactory(binding)
+
+window.Electron = {
+    getStrongholdBackupDestination: () => {
+        return remote.dialog.showOpenDialog({ properties: ['openDirectory'] }).then((result) => {
+            if (result.canceled) {
+                return null
+            }
+
+            return result.filePaths[0]
+        })
+    }
+}

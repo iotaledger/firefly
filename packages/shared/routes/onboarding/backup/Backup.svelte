@@ -40,7 +40,19 @@
                 }
                 break
             case BackupState.Backup:
-                nextState = BackupState.Success
+                window['Electron'].getStrongholdBackupDestination().then((result) => {
+                    if (result) {
+                        api.backup(result, {
+                            onSuccess() {
+                                dispatch('next')
+                            },
+                            onError(error) {
+                                console.error(error)
+                            }
+                        })
+                    }
+                })
+                
                 break
             case BackupState.Verify:
             case BackupState.Success:

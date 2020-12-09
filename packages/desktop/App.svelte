@@ -3,6 +3,7 @@
     import { fetchMarketData } from 'shared/lib/marketData'
     import { setupI18n, isLocaleLoaded, dir, _ } from 'shared/lib/i18n'
     import { darkMode, mobile, logged } from 'shared/lib/app'
+    import { api } from 'shared/lib/wallet'
     import { goto } from 'shared/lib/helpers'
     import { initRouter, routerNext, routerPrevious, requestMnemonic, AppRoute } from 'shared/lib/router'
     import { Route, Toggle } from 'shared/components'

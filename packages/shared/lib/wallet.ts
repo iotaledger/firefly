@@ -170,7 +170,7 @@ Wallet.onMessage((message: MessageResponse) => {
     };
 
     const { isValid, error }  = new Validator(Object.keys(callbacksStore)).performValidation(message);
-    
+
     if (!isValid) {
         if (error.type !== ValidatorErrorTypes.UnknownId) {
             const { id } = message;

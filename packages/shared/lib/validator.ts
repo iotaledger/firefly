@@ -244,11 +244,6 @@ class AccountValidator extends Validator {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of id received.'
             });
-        } else if ('string' !== typeof payload.mnemonic) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of mnemonic received.'
-            });
         } else if ('string' !== typeof payload.alias) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
@@ -374,7 +369,8 @@ export default class ValidatorService {
             [ResponseTypes.CreatedAccount]: this.createBaseValidator().add(new AccountValidator()).getFirst(),
             [ResponseTypes.ReadAccounts]: this.createBaseValidator().add(new AccountListValidator()).getFirst(),
             [ResponseTypes.TotalBalance]: this.createBaseValidator().add(new PayloadTypeValidator('number')).getFirst(),
-            [ResponseTypes.AvailableBalance]: this.createBaseValidator().add(new PayloadTypeValidator('number')).getFirst()
+            [ResponseTypes.AvailableBalance]: this.createBaseValidator().add(new PayloadTypeValidator('number')).getFirst(),
+            [ResponseTypes.BackupSuccessful]: this.createBaseValidator().getFirst(),
         };
     }
 
