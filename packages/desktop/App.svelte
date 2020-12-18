@@ -11,7 +11,7 @@
         Welcome,
         Legal,
         Setup,
-        Settings,
+        Language,
         Password,
         Protect,
         Backup,
@@ -71,9 +71,7 @@
 
 <!-- empty div to avoid auto-purge removing dark classes -->
 <div class="scheme-dark" />
-{#if !$isLocaleLoaded || splash}
-    <Splash />
-{:else}
+{#if true}
     <!-- dummy toggles -->
     <div class="dummy-toggles flex flex-row">
         <div class="mr-4">
@@ -88,8 +86,8 @@
     <Route route={AppRoute.Legal}>
         <Legal on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
-    <Route route={AppRoute.Settings}>
-        <Settings on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+    <Route route={AppRoute.Language}>
+        <Language on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
     <Route route={AppRoute.Setup}>
         <Setup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />

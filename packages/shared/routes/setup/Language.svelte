@@ -25,8 +25,8 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
-            <Text type="h2" classes="mb-5">{locale('views.settings.title')}</Text>
-            <Text type="p" secondary classes="mb-8">{locale('views.settings.body')}</Text>
+            <Text type="h2" classes="mb-5">{locale('views.language.title')}</Text>
+            <Text type="p" secondary classes="mb-8">{locale('views.language.body')}</Text>
             <Dropdown
                 value="English"
                 label={locale('general.language')}
