@@ -1,42 +1,28 @@
 <script lang="typescript">
     import { Sidebar } from 'shared/components'
-    import { Wallet } from 'shared/routes'
+    import { Wallet, Settings } from 'shared/routes'
 
     export let locale
     export let mobile
-    enum DashboardState {
+    const tabs = {
+        'wallet': Wallet,
+        'settings': Settings
+    }
+    enum Tabs {
         Wallet = 'wallet',
         Settings = 'settings'
     }
-    let state: DashboardState = DashboardState.Wallet
-    let stateHistory = []
-    const _next = (request) => {
-        let nextState = request
-        if (nextState) {
-            stateHistory.push(state)
-            stateHistory = stateHistory
-            state = nextState
-        }
-    }
-    const _prev = (event) => {
-        const _previous = () => {
-            let prevState = stateHistory.pop()
-            if (prevState) {
-                state = prevState
-            }
-        }
-    }
+
+    let activeTab = Tabs.Settings
+    
 </script>
 
 {#if mobile}
     <div>foo</div>
 {:else}
     <div class="w-full h-full flex flex-row">
-        <Sidebar />
+        <Sidebar bind:activeTab/>
         <!-- Dashboard Pane -->
-        {#if state === DashboardState.Wallet}
-            <Wallet mobile={mobile} locale={locale} />
-        {:else if state === DashboardState.Settings}
-        {/if}
+        <svelte:component locale={locale} this={tabs[activeTab]}/>
     </div>
 {/if}
