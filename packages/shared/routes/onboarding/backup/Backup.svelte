@@ -6,6 +6,7 @@
     import { mnemonic } from 'shared/lib/app'
     import { strongholdPassword } from 'shared/lib/app'
     import { api } from 'shared/lib/wallet'
+    import { DEFAULT_NODE as node, DEFAULT_NODES as nodes } from 'shared/lib/network'
 
     export let locale
     export let mobile
@@ -44,24 +45,22 @@
                     if (result) {
                         api.backup(result, {
                             onSuccess() {
-                                dispatch('next')
+                                nextState = BackupState.Success
                             },
                             onError(error) {
                                 console.error(error)
                             }
                         })
                     }
-                })
-                
-                break
+                }).catch(console.error)
+
+                // break
             case BackupState.Verify:
             case BackupState.Success:
                 api.createAccount(
                     {
                         mnemonic: (get(mnemonic) as string[]).join(' '),
-                        clientOptions: {
-                            node: 'http://127.0.0.1:14265'
-                        }
+                        clientOptions: { node, nodes }
                     },
                     {
                         onSuccess() {

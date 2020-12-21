@@ -2,6 +2,7 @@
     import { createEventDispatcher } from 'svelte'
     import { Transition } from 'shared/components'
     import { Import, TextImport, FileImport, BackupPassword, Success } from './views/'
+    import { api } from 'shared/lib/wallet'
 
     export let locale
     export let mobile
@@ -11,13 +12,14 @@
         TextImport = 'textImport',
         FileImport = 'fileImport',
         BackupPassword = 'backupPassword',
-        Success = 'Success',
+        Success = 'Success'
     }
 
     const dispatch = createEventDispatcher()
 
     let importType
     let importFile
+    let importFilePath
 
     let state: ImportState = ImportState.Init
     let stateHistory = []
@@ -48,17 +50,30 @@
             case ImportState.FileImport:
                 const strongholdRegex = /\.(stronghold)$/i
                 const seedvaultRegex = /\.(kdbx)$/i
-                const { file, fileName } = params
+                const { file, fileName, filePath } = params
                 importFile = file
+                importFilePath = filePath
+
                 if (seedvaultRegex.test(fileName)) {
                     importType = 'seedvault'
                 } else if (strongholdRegex.test(fileName)) {
                     importType = 'stronghold'
                 }
                 nextState = ImportState.BackupPassword
+
                 break
             case ImportState.BackupPassword:
-                nextState = ImportState.Success
+                const { password } = params
+
+                api.restoreBackup(importFilePath, {
+                    onSuccess() {
+                        nextState = ImportState.Success
+                    },
+                    onError(error) {
+                        console.log('Error', error)
+                    }
+                })
+
                 break
             case ImportState.Success:
                 dispatch('next', { importType })

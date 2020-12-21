@@ -6,25 +6,29 @@
     export let mobile
     let file
     let fileName
+    let filePath
 
     const dispatch = createEventDispatcher()
 
     function handleContinueClick() {
-        dispatch('next', { file, fileName })
+        dispatch('next', { file, fileName, filePath })
     }
     function handleBackClick() {
         dispatch('previous')
     }
 
     // TODO error management
-    const onDrop = (buffer, name) => {
+    const onDrop = (buffer, name, path) => {
         if (!buffer) {
             file = null
             fileName = null
+            filePath = null
             return
         }
+
         file = buffer
         fileName = name
+        filePath = path
     }
 </script>
 
