@@ -16,12 +16,6 @@
     }
 </script>
 
-<style type="text/scss">
-    :global(.checkmark path) {
-        fill: var(--ui-blue-color);
-    }
-</style>
-
 {#if mobile}
     <div>foo</div>
 {:else}

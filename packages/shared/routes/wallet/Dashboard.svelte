@@ -9,25 +9,21 @@
         TIMEFRAME_MAP,
         AvailableCharts
     } from 'shared/lib/marketData'
-
+    import { Send } from 'shared/routes'
     export let locale
     export let mobile
-
+    const AccountColors = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
     enum DashboardState {
         Init = 'init',
         Send = 'send',
         Receive = 'receive'
     }
-
-    let state: DashboardState = DashboardState.Init
+    let state: DashboardState = DashboardState.Send
     let stateHistory = []
-
-    const _next = (event) => {
+    const _next = (request) => {
         let nextState
-        let params = event.detail || {}
         switch (state) {
             case DashboardState.Init:
-                const { request } = params
                 if (request === 'send') {
                     nextState = DashboardState.Send
                 } else if (request === 'receive') {
@@ -49,7 +45,14 @@
             state = nextState
         }
     }
-
+    const _prev = (event) => {
+        const _previous = () => {
+            let prevState = stateHistory.pop()
+            if (prevState) {
+                state = prevState
+            }
+        }
+    }
     const transactions = [
         {
             hash: 'JWL9...KFL9M',
@@ -79,14 +82,52 @@
         unit: 'Gi'
     }
 
-    let accounts = []
+    let accounts = [
+        {
+            index: 0,
+            name: 'Fun Wallet',
+            balance: '23.322 Gi',
+            balanceEquiv: '45500 USD'
+        },
+        {
+            index: 1,
+            name: 'Billy Bills',
+            balance: '23.322 Gi',
+            balanceEquiv: '45500 USD'
+        },
+        {
+            index: 2,
+            name: 'Pizza Fund',
+            balance: '23.322 Gi',
+            balanceEquiv: '45500 USD'
+        },
+        {
+            index: 3,
+            name: 'Wonder Alice',
+            balance: '23.322 Gi',
+            balanceEquiv: '45500 USD'
+        },
+        {
+            index: 4,
+            name: 'Tropical Palm',
+            balance: '23.322 Gi',
+            balanceEquiv: '45500 USD'
+        },
+        {
+            index: 5,
+            name: 'Johnny Bravo',
+            balance: '23.322 Gi',
+            balanceEquiv: '45500 USD'
+        }
+    ]
     api.getAccounts({
         onSuccess(response) {
-            for (const storedAccount of response.payload) {
+            for (const [index, storedAccount] of response.payload.entries()) {
                 api.availableBalance(storedAccount.id, {
                     onSuccess(response) {
                         const balance = response.payload
                         const account = {
+                            index,
                             name: storedAccount.alias,
                             balance: `${balance} i`,
                             balanceEquiv: `${balance} USD`
@@ -95,6 +136,7 @@
                     },
                     onError() {
                         const account = {
+                            index,
                             name: storedAccount.alias,
                             balance: 'ERROR',
                             balanceEquiv: 'ERROR'
@@ -111,23 +153,6 @@
     })
 </script>
 
-<style type="text/scss">
-    // ISSUE: https://github.com/tailwindlabs/tailwindcss/discussions/1446
-    :global(.text-white) {
-        @apply text-white;
-    }
-    :global(.p-smaller) {
-        @apply text-12;
-        @apply leading-140;
-    }
-    :global(.text-opacity-75) {
-        --text-opacity: 0.75;
-    }
-    :global(.text-opacity-50) {
-        --text-opacity: 0.5;
-    }
-</style>
-
 {#if mobile}
     <div>foo</div>
 {:else}
@@ -137,55 +162,97 @@
         <div class="w-full h-full p-10 flex flex-row gap-4">
             <!-- Total Balance, Accounts list & Send/Receive -->
             <div class="flex flex-auto flex-col w-1/3 h-full flex-shrink-0">
-                <!-- Balance -->
-                <div data-label="total-balance" class="bg-blue-700 rounded-t-2xl pt-10 pb-16 px-8">
-                    <Text type="p" smaller classes="text-white mb-2">Total Balance</Text>
-                    <Text type="h1" classes="text-white mb-2">23.322,32 Mi</Text>
-                    <Text type="p" smaller classes="text-opacity-75 text-white">Total Balance</Text>
-                </div>
-                <!-- Incoming/Outgoing -->
-                <div data-label="total-movements" class="bg-blue-600 rounded-t-2xl p-8 pb-12 -mt-5 flex flex-row justify-between">
-                    {#if totalIncoming.amount > 0}
-                        <div class="flex items-center">
-                            <Icon icon="arrow-down" classes="mr-2" />
-                            <div>
-                                <Text type="p" classes="text-white mb-1">{`${totalIncoming.amount} ${totalIncoming.unit}`}</Text>
-                                <Text type="p" smaller classes="text-opacity-50 text-white">Incoming</Text>
-                            </div>
-                        </div>
-                    {/if}
-                    {#if totalOutgoing.amount > 0}
-                        <div class="flex items-center">
-                            <Icon icon="arrow-down" classes="mr-2" />
-                            <div>
-                                <Text type="p" classes="text-white mb-1">{`${totalOutgoing.amount} ${totalOutgoing.unit}`}</Text>
-                                <Text type="p" smaller classes="text-opacity-50 text-white">Outgoing</Text>
-                            </div>
-                        </div>
-                    {/if}
-                </div>
-                <!-- Accounts -->
-                <div data-label="accounts" class="bg-white rounded-2xl p-8 -mt-5 flex flex-col h-full justify-between">
-                    <div>
-                        <div class="flex flex-row mb-6">
-                            <Text type="h5">Accounts</Text>
-                        </div>
-                        <div class="flex flex-row justify-between flex-wrap w-full px-2 ">
-                            {#each accounts as account}
-                                <div
-                                    class={`rounded-2xl bg-gray-200 flex flex-col justify-between -mx-2 mb-2 p-5 w-${accounts.length === 1 ? `full` : accounts.length === 2 ? `1/2` : `1/3`}`}>
-                                    <Text type="p" classes="p-smaller mb-10">{account.name}</Text>
-                                    <div class="flex">
-                                        <Text type="p" classes="p-smaller">{account.balance}</Text>
+                <div class="bg-gradient-to-b from-blue-500 to-blue-600 rounded-t-2xl pt-10 pb-16 px-8">
+                    <!-- Balance -->
+                    <div data-label="total-balance">
+                        <Text type="p" overrideColor smaller classes="text-white mb-2">{locale('general.total_balance')}</Text>
+                        <Text type="h1" overrideColor classes="text-white mb-2">23.322,32 Mi</Text>
+                        <Text type="p" overrideColor smaller classes="text-blue-300">45500 USD</Text>
+                    </div>
+                    {#if state === DashboardState.Init}
+                        <!-- Incoming/Outgoing -->
+                        <div data-label="total-movements" class="flex flex-row justify-between mt-10">
+                            {#if totalIncoming.amount > 0}
+                                <div class="flex items-center">
+                                    <Icon boxed icon="arrow-down" classes="text-green-500" boxClasses="bg-white mr-4" />
+                                    <div>
+                                        <Text type="p" classes="text-white mb-0.5">
+                                            {`${totalIncoming.amount} ${totalIncoming.unit}`}
+                                        </Text>
+                                        <Text type="p" overrideColor smaller classes="text-blue-300">
+                                            {locale('general.incoming')}
+                                        </Text>
                                     </div>
                                 </div>
-                            {/each}
+                            {/if}
+                            {#if totalOutgoing.amount > 0}
+                                <div class="flex items-center">
+                                    <Icon boxed icon="arrow-up" classes="text-blue-500" boxClasses="bg-white mr-4" />
+                                    <div>
+                                        <Text type="p" classes="text-white mb-0.5">
+                                            {`${totalOutgoing.amount} ${totalOutgoing.unit}`}
+                                        </Text>
+                                        <Text type="p" overrideColor smaller classes="text-blue-300">
+                                            {locale('general.outgoing')}
+                                        </Text>
+                                    </div>
+                                </div>
+                            {/if}
                         </div>
-                    </div>
-                    <div class="flex flex-row justify-between px-2 ">
-                        <Button xl icon="arrow-up" classes="-mx-2 w-1/2" onClick={() => _next('send')}>Send</Button>
-                        <Button xl icon="arrow-down" classes="-mx-2 w-1/2" onClick={() => _next('receive')}>Receive</Button>
-                    </div>
+                    {/if}
+                </div>
+                <div class="bg-white rounded-2xl p-8 -mt-5 flex flex-col h-full justify-between">
+                    <!-- Accounts -->
+                    {#if state === DashboardState.Init}
+                        <div data-label="accounts">
+                            <div class="flex flex-row mb-6">
+                                <Text type="h5">{locale('general.accounts')}</Text>
+                            </div>
+                            {#if accounts.length > 0}
+                                <div class="flex flex-row justify-between flex-wrap w-full px-2 ">
+                                    {#each accounts as account, index}
+                                        <div
+                                            class={`group rounded-2xl bg-gray-200 hover:bg-${AccountColors[index]}-500 flex-col justify-between -mx-2 mb-2 p-5 w-${accounts.length === 1 ? `full` : accounts.length === 2 ? `1/2` : `1/3`}`}>
+                                            <Text
+                                                type="p"
+                                                smaller
+                                                overrideColor
+                                                classes="mb-10 text-gray-800 group-hover:text-white">
+                                                {account.name}
+                                            </Text>
+                                            <div class="flex flex-wrap justify-between -mx-4">
+                                                <Text
+                                                    type="p"
+                                                    smaller
+                                                    overrideColor
+                                                    classes="text-gray-800 group-hover:text-white group-hover:font-700 px-4">
+                                                    {account.balance}
+                                                </Text>
+                                                <Text
+                                                    type="p"
+                                                    smaller
+                                                    overrideColor
+                                                    classes="text-blue-500 group-hover:text-white px-4">
+                                                    {account.balanceEquiv}
+                                                </Text>
+                                            </div>
+                                        </div>
+                                    {/each}
+                                </div>
+                            {/if}
+                        </div>
+                        <!-- Action Send / Receive -->
+                        <div class="flex flex-row justify-between px-2 ">
+                            <Button xl secondary icon="receive" classes="-mx-2 w-1/2" onClick={() => _next('receive')}>
+                                {locale('actions.receive')}
+                            </Button>
+                            <Button xl secondary icon="transfer" classes="-mx-2 w-1/2" onClick={() => _next('send')}>
+                                {locale('actions.send')}
+                            </Button>
+                        </div>
+                    {:else if state === DashboardState.Send}
+                        <Send on:next={_next} {accounts} {locale} {mobile} />
+                    {/if}
                 </div>
             </div>
 
@@ -223,7 +290,6 @@
                         <Chart type="line" />
                     </div>
                 </div>
-
                 <div class="w-full flex flex-row flex-1 gap-4">
                     <!-- Latest Transactions -->
                     <div data-label="latest-transactions" class="bg-white rounded-2xl w-1/2 p-8 flex-grow flex flex-col">
