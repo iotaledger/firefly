@@ -17,7 +17,7 @@ export declare const api: {
     syncAccount: (accountId: AccountIdentifier, options?: SyncAccountOptions) => (__id: number) => Promise<number>;
     reattach: (accountId: AccountIdentifier, messageId: string) => (__id: number) => Promise<number>;
     backup: (destinationPath: string) => (__id: number) => Promise<number>;
-    restoreBackup: (backupPath: string) => (__id: number) => Promise<number>;
+    restoreBackup: (backupPath: string, password: string) => (__id: number) => Promise<number>;
     setStrongholdPassword: (password: string) => (__id: number) => Promise<number>;
     send: (fromAccountId: AccountIdentifier, transfer: Transfer) => (__id: number) => Promise<number>;
     internalTransfer: (fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number) => (__id: number) => Promise<number>;

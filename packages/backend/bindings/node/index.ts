@@ -103,8 +103,8 @@ export const api = {
   backup: function (destinationPath: string): ((__id: string) => Promise<string>) {
     return (__id: string) => _backup(sendMessage, __id, destinationPath)
   },
-  restoreBackup: function (backupPath: string): ((__id: string) => Promise<string>) {
-    return (__id: string) => _restoreBackup(sendMessage, __id, backupPath)
+  restoreBackup: function (backupPath: string, password: string): ((__id: string) => Promise<string>) {
+    return (__id: string) => _restoreBackup(sendMessage, __id, backupPath, password)
   },
   setStrongholdPassword: function (password: string): ((__id: string) => Promise<string>) {
     return (__id: string) => _setStrongholdPassword(sendMessage, __id, password)
