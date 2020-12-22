@@ -10,11 +10,14 @@ export function backup(bridge: Bridge, __id: string, destinationPath: string) {
   })
 }
 
-export function restoreBackup(bridge: Bridge, __id: string, backupPath: string) {
+export function restoreBackup(bridge: Bridge, __id: string, backupPath: string, password: string) {
   return bridge({
     id: __id,
     cmd: 'RestoreBackup',
-    payload: backupPath
+    payload: {
+      backupPath,
+      password
+    }
   })
 }
 

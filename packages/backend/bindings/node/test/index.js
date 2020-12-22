@@ -61,7 +61,7 @@ describe('binding', () => {
             id: message.id,
             type: 'StrongholdPasswordSet'
           })
-          lib.restoreBackup('./backup')
+          lib.restoreBackup('./backup', 'password')
           break
         }
         case 4: {
