@@ -31,7 +31,7 @@
             },
             "checkbox": "I’ve read and I accept the Privacy policy & ToS"
         },
-        "settings": {
+        "language": {
             "title": "Language & appearance",
             "body": "Choose your wallet’s language and theme"
         },
@@ -122,6 +122,109 @@
         "balance": {
             "title": "Your balance",
             "body": "Is your balance correct?"
+        },
+        "settings": {
+            "settings": "Settings",
+            "generalSettings": {
+                "title": "General Settings",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "security": {
+                "title": "Security",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "advancedSettings": {
+                "title": "Advanced Settings",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "helpAndInfo": {
+                "title": "Help and Information",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "profileDetails": {
+                "title": "Profile Details",
+                "description": "Temp"
+            }, 
+            "theme": {
+                "title": "Theme",
+                "description": "Temp"
+            }, 
+            "language": {
+                "title": "Language",
+                "description": "Temp"
+            }, 
+            "currency": {
+                "title": "Currency",
+                "description": "Temp"
+            }, 
+            "notifications": {
+                "title": "Notifications",
+                "description": "Temp"
+            }, 
+            "exportStronghold": {
+                "title": "Export Stronghold",
+                "description": "Temp"
+            }, 
+            "appLock": {
+                "title": "App Lock",
+                "description": "Temp"
+            }, 
+            "changePassword": {
+                "title": "Change Password",
+                "description": "Temp"
+            }, 
+            "resyncAccounts": {
+                "title": "Resync Accounts",
+                "description": "Temp"
+            }, 
+            "resetWallet": {
+                "title": "Reset Wallet",
+                "description": "Temp"
+            }, 
+            "deepLinks": {
+                "title": "Deep Links",
+                "description": "Temp"
+            }, 
+            "developerMode": {
+                "title": "Developer Mode",
+                "description": "Temp"
+            }, 
+            "nodeSettings": {
+                "title": "Node Settings",
+                "description": "Temp"
+            }, 
+            "proofOfWork": {
+                "title": "Proof of Work",
+                "description": "Temp"
+            }, 
+            "errorLog": {
+                "title": "Error Log",
+                "description": "Temp"
+            }, 
+            "stateExport": {
+                "title": "State Export",
+                "description": "Temp"
+            }, 
+            "troubleshoot": {
+                "title": "Troubleshoot",
+                "description": "Temp"
+            }, 
+            "documentation": {
+                "title": "Documentation",
+                "description": "Temp"
+            }, 
+            "faq": {
+                "title": "FAQ",
+                "description": "Temp"
+            }, 
+            "discord": {
+                "title": "Discord",
+                "description": "Temp"
+            }, 
+            "about": {
+                "title": "About",
+                "description": "Temp"
+            }
         }
     },
     "actions": {
@@ -188,6 +291,5 @@
         "incoming": "Incoming",
         "outgoing": "Outgoing",
         "accounts": "Accounts"
-
     }
 }
