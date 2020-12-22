@@ -21,17 +21,13 @@
         Congratulations,
         Dashboard,
     } from 'shared/routes'
-
     $: $darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
-
     $: if (document.dir !== $dir) {
         document.dir = $dir
     }
-
     let splash = true
-
     setupI18n()
-    onMount(async () => {
+    onMount(async() => {
         setTimeout(() => {
             splash = false
             initRouter()
@@ -46,7 +42,6 @@
     @tailwind components;
     @tailwind utilities;
     @import '../shared/style/style.scss';
-
     // dummy toggles
     .dummy-toggles {
         position: absolute;
@@ -63,6 +58,13 @@
             padding: 0 7px;
             border-radius: 10px;
             color: var(--button-text-color);
+        }
+    }
+    html,
+    body {
+        @apply bg-white;
+        &.scheme-dark {
+            @apply bg-blue-900;
         }
     }
 </style>
@@ -95,10 +97,10 @@
     <Route route={AppRoute.Password}>
         <Password on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
-    <Route route={AppRoute.Protect}>
+    <Route route={AppRoute.Protect} transition={false}>
         <Protect on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
-    <Route route={AppRoute.Backup}>
+    <Route route={AppRoute.Backup} transition={false}>
         <Backup
             on:next={routerNext}
             on:previous={routerPrevious}
@@ -106,7 +108,7 @@
             mobile={$mobile}
             locale={$_} />
     </Route>
-    <Route route={AppRoute.Import}>
+    <Route route={AppRoute.Import} transition={false}>
         <Import on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
     <Route route={AppRoute.Balance}>

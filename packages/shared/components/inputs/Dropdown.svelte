@@ -1,14 +1,11 @@
 <script>
     import { Icon, Text } from 'shared/components'
-
     export let value = undefined
     export let label = undefined
     export let disabled = false
     export let items = []
     export let onSelect = () => {}
-
     let dropdown = false
-
     const clickOutside = () => {
         dropdown = false
     }
@@ -44,7 +41,7 @@
 
 <svelte:window on:click={clickOutside} />
 {#if label}
-    <Text type="p" classes="mb-2" secondary smaller>{label}</Text>
+    <Text type="p" classes="mb-2" smaller>{label}</Text>
 {/if}
 <dropdown-input
     class="relative flex items-center mb-5 py-4 pr-8 pl-4 w-full 
@@ -62,7 +59,7 @@
         {#each items as item}
             <button
                 class="relative flex items-center bg-white p-4 w-full"
-                on:click={() => onSelect(item.value)}
+                on:click={() => onSelect(item)}
                 class:active={item.label === value}><Text type="p" smaller>{item.label}</Text></button>
         {/each}
     </nav>

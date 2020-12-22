@@ -8,21 +8,16 @@
     export let strengthLevels = 4
     export let placeholder = undefined
     export let locale = undefined
-
     let revealed = false
     let type = 'password'
-
     const handleInput = (event) => {
         value = event.target.value
     }
-
     const revealToggle = (event) => {
         const input = event.currentTarget.previousElementSibling
-
         if (!input) {
             return
         }
-
         input.type = input.type === 'password' ? 'text' : 'password'
         revealed = !revealed
     }
@@ -68,14 +63,6 @@
                 }
             }
         }
-        :global(svg path) {
-            @apply text-blue-500;
-            @apply fill-current;
-        }
-        :global(svg path.stroke:not(.fixedstroke)) {
-            fill: none;
-            @apply stroke-current;
-        }
     }
 </style>
 
@@ -99,7 +86,7 @@
                  " />
         {#if showRevealToggle === true}
             <button on:click={(e) => revealToggle(e)} tabindex="-1" class="absolute">
-                <Icon icon={revealed ? 'view' : 'hide'} />
+                <Icon icon={revealed ? 'view' : 'hide'} classes="text-blue-500" />
             </button>
         {/if}
     </div>

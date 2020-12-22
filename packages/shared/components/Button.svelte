@@ -2,7 +2,6 @@
     import { bindEvents } from 'shared/lib/utils'
     import { Icon } from 'shared/components'
     export let events = {}
-
     export let onClick = () => ''
     export let secondary = false
     export let disabled = false
@@ -70,50 +69,30 @@
                 @apply ml-10;
                 @apply mr-6;
             }
-            :global(svg path) {
+            :global(svg) {
                 @apply text-blue-500;
-                @apply fill-current;
             }
-            :global(svg.right path) {
+            :global(svg.right) {
                 @apply text-gray-500;
-                @apply fill-current;
-            }
-            :global(svg path.stroke:not(.fixedstroke)) {
-                fill: none;
-                @apply text-blue-500;
-                @apply stroke-current;
             }
             &.active {
                 @apply bg-blue-500;
-                span {
+                span,
+                :global(svg) {
                     @apply text-white;
-                }
-                :global(svg path) {
-                    @apply text-white;
-                    @apply fill-current;
-                }
-                :global(svg path.stroke:not(.fixedstroke)) {
-                    fill: none;
-                    @apply text-white;
-                    @apply stroke-current;
                 }
             }
             &.disabled {
-                :global(svg path) {
+                :global(svg) {
                     @apply text-gray-500;
-                    @apply fill-current;
                 }
             }
         }
         &.xl {
-            @apply bg-transparent;
-            @apply border;
-            @apply border-solid;
-            @apply border-gray-300;
-            @apply min-w-0;
-            span {
-                @apply font-medium;
-                @apply text-blue-500;
+            &,
+            &:hover,
+            &:active {
+                @apply text-gray-800;
             }
         }
         &.disabled {
@@ -128,10 +107,13 @@
 
 {#if xl}
     <button
-        class={`xl cursor-pointer text-center rounded-2xl px-6 py-4 flex flex-col items-center ${classes}`}
+        class={`xl cursor-pointer text-center rounded-2xl pt-8 pb-4 px-4 flex flex-col items-center ${classes}`}
         use:bindEvents={events}
         on:click={onClick}
-        class:disabled>
+        class:disabled
+        class:secondary
+        class:active
+        class:with-icon={icon}>
         <Icon classes="mb-1" {icon} />
         <div class="text-12 leading-140">
             <slot />
