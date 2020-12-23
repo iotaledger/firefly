@@ -5,14 +5,14 @@
     },
     "views": {
         "onboarding_1": {
-            "title": "Send, Receive & Manage your IOTA",
-            "body": "Firefly is a secure and easy-to-use IOTA wallet."
+            "title": "Envoyer, recevoir et gérer vos IOTA",
+            "body": "Firefly est un portefeuille IOTA sécurisé et facile à utiliser."
         },
         "legal": {
-            "title": "Legal",
-            "body": "Please review the Privacy Policy and Terms of Service.",
+            "title": "Mentions légales",
+            "body": "Veuillez consulter la politique de confidentialité et les conditions d'utilisation.",
             "privacy_policy": {
-                "title": "Privacy Policy",
+                "title": "Politique de confidentialité",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -21,7 +21,7 @@
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "terms_of_service": {
-                "title": "Terms of Service",
+                "title": "Conditions d'utilisation",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -32,16 +32,16 @@
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
         "language": {
-            "title": "Language & appearance",
-            "body": "Choose your wallet’s language and theme"
+            "title": "Langue & apparence",
+            "body": "Choisissez la langue et le thème de votre portefeuille"
         },
         "setup": {
-            "title": "Set up your wallet",
-            "body": "You can create a new wallet or import an existing one."
+            "title": "Configurez votre portefeuille",
+            "body": "Vous pouvez créer un nouveau portefeuille ou importer un portefeuille existant."
         },
         "password": {
-            "title": "Create a password",
-            "body": "You will be asked to enter your password to send tokens from your wallet. You need a strong password to protect your funds. "
+            "title": "Créer un mot de passe",
+            "body": "Il vous sera demandé d'entrer votre mot de passe pour envoyer des jetons depuis votre portefeuille. Vous avez besoin d'un mot de passe fort pour protéger vos fonds. "
         },
         "protect": {
             "title": "Protect your wallet",
@@ -49,47 +49,47 @@
             "body_2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Set up PIN code",
-            "body_1": "Enter a 6-digit PIN below. You will be asked to enter your pin to login to your wallet.",
-            "body_2": "You can use numbers only."
+            "title": "Définir le code PIN",
+            "body_1": "Entrez un code PIN de 6 chiffres ci-dessous. Il vous sera demandé de saisir votre code PIN pour vous connecter à votre portefeuille.",
+            "body_2": "Vous pouvez utiliser que des chiffres."
         },
         "confirm_pin": {
-            "title": "Verify your PIN code",
-            "body": "Re-enter your PIN code to proceed."
+            "title": "Vérifiez votre code PIN",
+            "body": "Entrez à nouveau votre code PIN pour continuer."
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body_1": "You will now be shown a recovery phrase.",
-            "body_2": "Do not share this phrase with anyone. Your recovery phrase can be used to access your tokens from anywhere.",
-            "body_3": "If you lose your recovery phrase, you may lose your funds."
+            "title": "Sauvegarder votre portefeuille",
+            "body_1": "Vous allez maintenant voir une phrase de récupération.",
+            "body_2": "Ne partagez pas cette phrase avec quiconque. Votre phrase de récupération peut être utilisée pour accéder à vos jetons depuis n'importe où.",
+            "body_3": "Si vous perdez votre phrase de récupération, vous risquez de perdre vos fonds."
         },
         "recovery_phrase": {
-            "title": "Recovery phrase",
-            "body_1": "Carefully write down the words in the exact order.",
-            "body_2": "Keep your recovery phrase private and safely stored. Do not share it with anyone."
+            "title": "Phrase de récupération",
+            "body_1": "Notez soigneusement les mots dans l'ordre exact.",
+            "body_2": "Gardez votre phrase de récupération privée et stockée en toute sécurité. Ne la partagez avec personne."
         },
         "verify_recovery_phrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Select the words in the correct order."
+            "title": "Vérifier la phrase de récupération",
+            "body": "Vérifions que tu as écrit correctement la phrase. Sélectionne les mots dans le bon ordre."
         },
         "backup_wallet": {
-            "title": "Back up to a Stronghold file",
-            "body": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup."
+            "title": "Sauvegarder dans un fichier de forteresse",
+            "body": "Entrez votre mot de passe pour sauvegarder votre portefeuille dans un fichier Stronghold. Votre mot de passe est utilisé pour chiffrer la sauvegarde."
         },
         "recovery_phrase_saved": {
-            "title": "Successfully backed up",
-            "body": "You have backed up your wallet to a Stronghold."
+            "title": "Sauvegardé avec succès",
+            "body": "Vous avez sauvegardé votre portefeuille dans une forteresse ."
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your wallet is ready to go."
+            "title": "Félicitations",
+            "body": "Votre portefeuille est prêt à l'emploi."
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have a recovery phrase or Stronghold back up, you can import it here."
+            "title": "Importer un portefeuille",
+            "body": "Si vous avez une phrase de récupération ou une de sauvegarde, vous pouvez l'importer ici."
         },
         "import_from_text": {
-            "title": "Restore your wallet with a recovery phrase or seed",
+            "title": "Restaurez votre portefeuille avec une phrase de récupération ou une graine",
             "body_1": "A recovery phrase is 24 words long. This is used to recover an existing Firefly wallet.",
             "body_2": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
             "body_3": "Enter your seed or recovery phrase"
@@ -108,32 +108,32 @@
             "body": "You can now set up your new wallet."
         },
         "migrate": {
-            "title": "Migrate your funds",
+            "title": "Migrer vos fonds",
             "body_1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
             "body_2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
-            "new": "Your new wallet"
+            "existing": "Votre ancien portefeuille",
+            "new": "Votre nouveau portefeuille"
         },
         "migrate_failed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "Votre solde",
+            "body": "Votre solde est-il correct ?"
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "Réglages",
             "generalSettings": {
-                "title": "General Settings",
+                "title": "Paramètres généraux",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "security": {
-                "title": "Security",
+                "title": "Sécurité",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
+                "title": "Options avancés",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
@@ -221,31 +221,31 @@
                 "description": "Temp"
             },
             "about": {
-                "title": "About",
+                "title": "À propos",
                 "description": "Temp"
             }
         }
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
+        "continue": "Continuer",
+        "back": "Retour",
         "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
-        "setup_pin": "Set up PIN code",
-        "set_pin": "Set PIN code",
-        "confirm_pin": "Confirm PIN code",
-        "save_backup_file": "Save backup file",
-        "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
-        "verify_recovery_phrase": "Verify recovery phrase",
-        "reveal_recovery_phrase": "Reveal recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
+        "import_wallet": "Importer un portefeuille existant",
+        "create_wallet": "Créer un nouveau portefeuille",
+        "save_password": "Sauvegarder le mot de passe",
+        "use_biometric": "Utiliser la sécurité biométrique",
+        "setup_pin": "Configurer le code PIN",
+        "set_pin": "Définir le code PIN",
+        "confirm_pin": "Confirmer le code PIN",
+        "save_backup_file": "Enregistrer le fichier de sauvegarde",
+        "ive_written_recovery_phrase": "J'ai bien noté ma phrase de récupération",
+        "verify_recovery_phrase": "Vérifier la phrase de récupération",
+        "reveal_recovery_phrase": "Montrer la phrase de récupération",
+        "import_seedvault": "Importer un SeedVault",
+        "check_again": "Non, vérifier à nouveau",
+        "import_from_file": "Importer à partir d''un fichier",
+        "send": "Envoyer",
+        "receive": "Recevoir",
         "begin_transfer": "Begin Transfer",
         "try_again": "Try again",
         "visit_discord": "Visit Discord",
@@ -255,19 +255,19 @@
         "drop_here": "Drop your file here"
     },
     "general": {
-        "password": "Password",
-        "confirm_password": "Confirm password",
+        "password": "Mot de passe",
+        "confirm_password": "Confirmer le mot de passe",
         "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
-        "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
-        "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "transfer_between_accounts": "Transfer Between Accounts",
-        "move_funds_between_accounts": "Move funds between your Accounts",
-        "account": "Account",
+        "recovery_phrase": "Phrase de récupération",
+        "recent_activity": "Activité récente",
+        "sent": "Envoyé",
+        "received": "Reçu",
+        "send_funds": "Envoyer des fonds",
+        "send_to_address": "Envoyer à une Adresse",
+        "scan_qr_or_paste": "Scannez un code QR ou collez une Adresse",
+        "transfer_between_accounts": "Transfert Entre Comptes",
+        "move_funds_between_accounts": "Déplacer des fonds entre vos Comptes",
+        "account": "Compte",
         "sending_to_address": "Sending to address",
         "amount": "Amount",
         "add_address": "Add Address",
