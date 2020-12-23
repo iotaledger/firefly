@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding_1": {
-            "title": "Lähetä, Vastaanota & Hallitse omat IOTA",
+            "title": "Lähetä, vastaanota ja hallitse IOTA-varojasi",
             "body": "Firefly on turvallinen ja helppokäyttöinen IOTA-lompakko."
         },
         "legal": {
@@ -47,169 +47,169 @@
         "pin": {
             "title": "Määritä PIN-koodi",
             "body_1": "Syötä 6-numeroinen PIN-koodi alla. Sinua pyydetään syöttämään PIN-koodisi kirjautuessasi lompakkoosi.",
-            "body_2": "You can use numbers only."
+            "body_2": "Voit käyttää vain numeroita."
         },
         "confirm_pin": {
-            "title": "Verify your PIN code",
-            "body": "Re-enter your PIN code to proceed."
+            "title": "Vahvista PIN-koodisi",
+            "body": "Syötä PIN-koodisi uudelleen jatkaaksesi."
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body_1": "You will now be shown a recovery phrase.",
-            "body_2": "Do not share this phrase with anyone. Your recovery phrase can be used to access your tokens from anywhere.",
-            "body_3": "If you lose your recovery phrase, you may lose your funds."
+            "title": "Varmuuskopioi lompakko",
+            "body_1": "Sinulle näytetään nyt palautuslauseke.",
+            "body_2": "Älä jaa tätä lauseketta kenenkään kanssa. Palautuslauseketta voidaan käyttään varoihisi pääsemiseen mistä tahansa.",
+            "body_3": "Jos menetät palautuslausekkeen, voit menettää varasi."
         },
         "recovery_phrase": {
-            "title": "Recovery phrase",
-            "body_1": "Carefully write down the words in the exact order.",
-            "body_2": "Keep your recovery phrase private and safely stored. Do not share it with anyone."
+            "title": "Palautuslauseke",
+            "body_1": "Kirjoita sanat huolellisesti oikeassa järjestyksessä.",
+            "body_2": "Pidä palautuslausekkeesi vain itsesi tiedossa ja turvallisesti tallennettuna. Älä jaa sitä kenenkään kanssa."
         },
         "verify_recovery_phrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Select the words in the correct order."
+            "title": "Vahvista palautuslauseke",
+            "body": "Tarkistetaan, että kirjoitit lausekkeen oikein. Valitse sanat oikeassa järjestyksessä."
         },
         "backup_wallet": {
-            "title": "Back up to a Stronghold file",
-            "body": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup."
+            "title": "Varmuuskopioi Stronghold-tiedostoon",
+            "body": "Syötä salasanasi varmuuskopioidaksesi lompakkosi Stronghold-tiedostoon. Salasanaasi käytetään varmuuskopion salaukseen."
         },
         "recovery_phrase_saved": {
-            "title": "Successfully backed up",
-            "body": "You have backed up your wallet to a Stronghold."
+            "title": "Varmuuskopiointi onnistui",
+            "body": "Olet varmuuskopioinut lompakkosi Stronghold-tiedostoon."
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your wallet is ready to go."
+            "title": "Onneksi olkoon",
+            "body": "Lompakkosi on valmis käytettäväksi."
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have a recovery phrase or Stronghold back up, you can import it here."
+            "title": "Tuo lompakko",
+            "body": "Jos sinulla on palautuslauseke tai Stronghold-varmuuskopio, voit tuoda sen täällä."
         },
         "import_from_text": {
-            "title": "Restore your wallet with a recovery phrase or seed",
-            "body_1": "A recovery phrase is 24 words long. This is used to recover an existing Firefly wallet.",
-            "body_2": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body_3": "Enter your seed or recovery phrase"
+            "title": "Palauta lompakkosi palautuslausekkeella tai seed-merkkijonolla",
+            "body_1": "Palautuslauseke on pituudeltaan 24 sanaa. Sitä käytetään olemassaolevan Firefly-lompakon palauttamiseen.",
+            "body_2": "Seed-merkkijonossa on 81 merkkiä. Sitä käytetään vanhan Trinity-lompakon palauttamiseen.",
+            "body_3": "Syötä seed-merkkijono tai palautuslauseke"
         },
         "import_from_file": {
-            "title": "Restore your wallet from a backup file",
-            "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "Palauta lompakko varmuuskopiotiedostosta",
+            "body": "Tuo varmuuskopiotiedosto lompakon palauttamiseksi. Varmuuskopiot voivat olla joko Stronghold-tiedosto (.stronghold) tai Trinity SeedVault -tiedosto (.kdbx)."
         },
         "import_backup_password": {
-            "title": "Restore your wallet from a SeedVault or Stronghold",
-            "body_1": "Please enter your backup password.",
-            "body_2": "This is the password you set when you first created your backup."
+            "title": "Palauta lompakkosi SeedVault- tai Stronghold-tiedostosta",
+            "body_1": "Syötä varmuuskopion salasanasi.",
+            "body_2": "Asetit tämän salasanan, kun loit varmuuskopion."
         },
         "import_success": {
-            "title": "You have successfully recovered your backup",
-            "body": "You can now set up your new wallet."
+            "title": "Varmuuskopion palautus onnistui",
+            "body": "Voit nyt määrittää uuden lompakon."
         },
         "migrate": {
-            "title": "Migrate your funds",
-            "body_1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
-            "new": "Your new wallet"
+            "title": "Siirrä varasi",
+            "body_1": "Tämä on automatisoitu prosessi varojen siirtämiseksi uuteen lompakkoon. Tarkistamme käytetyt osoitteet, jotka heikentävät turvallisuuttasi.",
+            "body_2": "Tämä voi viedä jonkin aikaa. Älä sammuta laitettasi siirtoprosessin aikana.",
+            "existing": "Vanha lompakkosi",
+            "new": "Uusi lompakkosi"
         },
         "migrate_failed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "Saldosi",
+            "body": "Onko saldosi oikein?"
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "Asetukset",
             "generalSettings": {
-                "title": "General Settings",
+                "title": "Yleiset asetukset",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "security": {
-                "title": "Security",
+                "title": "Suojaus",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
+                "title": "Lisäasetukset",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Help and Information",
+                "title": "Ohjetiedot",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profileDetails": {
-                "title": "Profile Details",
+                "title": "Profiilitiedot",
                 "description": "Temp"
             },
             "theme": {
-                "title": "Theme",
+                "title": "Teema",
                 "description": "Temp"
             },
             "language": {
-                "title": "Language",
+                "title": "Kieli",
                 "description": "Temp"
             },
             "currency": {
-                "title": "Currency",
+                "title": "Valuutta",
                 "description": "Temp"
             },
             "notifications": {
-                "title": "Notifications",
+                "title": "Ilmoitukset",
                 "description": "Temp"
             },
             "exportStronghold": {
-                "title": "Export Stronghold",
+                "title": "Vie Stronghold",
                 "description": "Temp"
             },
             "appLock": {
-                "title": "App Lock",
+                "title": "Sovelluslukko",
                 "description": "Temp"
             },
             "changePassword": {
-                "title": "Change Password",
+                "title": "Vaihda salasana",
                 "description": "Temp"
             },
             "resyncAccounts": {
-                "title": "Resync Accounts",
+                "title": "Uudelleensynkronoi tilit",
                 "description": "Temp"
             },
             "resetWallet": {
-                "title": "Reset Wallet",
+                "title": "Tyhjennä lompakko",
                 "description": "Temp"
             },
             "deepLinks": {
-                "title": "Deep Links",
+                "title": "Syvälinkit",
                 "description": "Temp"
             },
             "developerMode": {
-                "title": "Developer Mode",
+                "title": "Kehittäjätila",
                 "description": "Temp"
             },
             "nodeSettings": {
-                "title": "Node Settings",
+                "title": "Node-asetukset",
                 "description": "Temp"
             },
             "proofOfWork": {
-                "title": "Proof of Work",
+                "title": "Laskenta-asetukset",
                 "description": "Temp"
             },
             "errorLog": {
-                "title": "Error Log",
+                "title": "Virheloki",
                 "description": "Temp"
             },
             "stateExport": {
-                "title": "State Export",
+                "title": "Tilan vienti",
                 "description": "Temp"
             },
             "troubleshoot": {
-                "title": "Troubleshoot",
+                "title": "Vianmääritys",
                 "description": "Temp"
             },
             "documentation": {
-                "title": "Documentation",
+                "title": "Dokumentaatio",
                 "description": "Temp"
             },
             "faq": {
-                "title": "FAQ",
+                "title": "Usein kysytyt kysymykset",
                 "description": "Temp"
             },
             "discord": {
@@ -217,77 +217,77 @@
                 "description": "Temp"
             },
             "about": {
-                "title": "About",
+                "title": "Lisätietoja",
                 "description": "Temp"
             }
         }
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
+        "continue": "Jatka",
+        "back": "Takaisin",
+        "import_seed": "Tuo olemassaoleva seed-merkkijono",
+        "import_wallet": "Tuo olemassaoleva lompakko",
+        "create_wallet": "Luo uusi lompakko",
+        "save_password": "Tallenna salasana",
+        "use_biometric": "Käytä biometristä suojausta",
         "setup_pin": "Määritä PIN-koodi",
-        "set_pin": "Set PIN code",
-        "confirm_pin": "Confirm PIN code",
-        "save_backup_file": "Save backup file",
-        "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
-        "verify_recovery_phrase": "Verify recovery phrase",
-        "reveal_recovery_phrase": "Reveal recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
-        "visit_discord": "Visit Discord",
-        "drag_drop": "Drag & Drop",
-        "import_extentions": ".stronghold or .kdbx file",
-        "choose_file": "Choose a File",
-        "drop_here": "Drop your file here"
+        "set_pin": "Aseta PIN-koodi",
+        "confirm_pin": "Vahvista PIN-koodi",
+        "save_backup_file": "Tallenna varmuuskopiotiedosto",
+        "ive_written_recovery_phrase": "Olen tallentanut palautuslausekkeeni",
+        "verify_recovery_phrase": "Vahvista palautuslauseke",
+        "reveal_recovery_phrase": "Näytä palautuslauseke",
+        "import_seedvault": "Tuo Seedvault-tiedosto",
+        "check_again": "Tarkista uudelleen",
+        "import_from_file": "Tuo tiedostosta",
+        "send": "Lähetä",
+        "receive": "Vastaanota",
+        "begin_transfer": "Aloita siirto",
+        "try_again": "Yritä uudelleen",
+        "visit_discord": "Vieraile Discordissa",
+        "drag_drop": "Vedä ja pudota",
+        "import_extentions": ".stronghold tai .kdbx tiedosto",
+        "choose_file": "Valitse tiedosto",
+        "drop_here": "Pudota tiedosto tähän"
     },
     "general": {
-        "password": "Password",
-        "confirm_password": "Confirm password",
-        "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
-        "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
-        "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "transfer_between_accounts": "Transfer Between Accounts",
-        "move_funds_between_accounts": "Move funds between your Accounts",
-        "account": "Account",
-        "sending_to_address": "Sending to address",
-        "amount": "Amount",
-        "add_address": "Add Address",
-        "reference": "Reference",
-        "from": "From",
-        "to": "To",
-        "receive_funds": "Receive funds",
-        "share_address": "Share an address",
-        "your_address": "Your address",
-        "generate_new_address": "Generate new address",
-        "have_text_backup": "I have a text backup",
-        "have_file_backup": "I have a file backup",
-        "enter_seed_or_phrase": "Enter a recovery phrase or seed",
-        "upload_seedvault_or_stronghold": "Import a Stronghold or SeedVault file",
-        "import": "Import",
+        "password": "Salasana",
+        "confirm_password": "Vahvista salasana",
+        "your_seed": "Sinun seed-merkkijonosi",
+        "recovery_phrase": "Palautuslauseke",
+        "recent_activity": "Viimeaikainen toiminta",
+        "sent": "Lähetetty",
+        "received": "Vastaanotettu",
+        "send_funds": "Lähetä varoja",
+        "send_to_address": "Lähetä osoitteeseen",
+        "scan_qr_or_paste": "Skannaa QR-koodi tai liitä osoite",
+        "transfer_between_accounts": "Siirrä tilien välillä",
+        "move_funds_between_accounts": "Siirrä varoja tilijesi välillä",
+        "account": "Tili",
+        "sending_to_address": "Lähetys osoitteeseen",
+        "amount": "Määrä",
+        "add_address": "Lisää osoite",
+        "reference": "Viite",
+        "from": "Mistä",
+        "to": "Mihin",
+        "receive_funds": "Vastaanota varoja",
+        "share_address": "Jaa osoite",
+        "your_address": "Osoitteesi",
+        "generate_new_address": "Luo uusi osoite",
+        "have_text_backup": "Minulla on tekstimuotoinen varmuuskopio",
+        "have_file_backup": "Minulla on tiedostomuotoinen varmuuskopio",
+        "enter_seed_or_phrase": "Syötä palautuslauseke tai seed-merkkijono",
+        "upload_seedvault_or_stronghold": "Tuo Stronghold- tai SeedVault-tiedosto",
+        "import": "Tuo",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
-        "language": "Language",
-        "appearance": "Appearance",
-        "light_theme": "Light theme",
-        "dark_theme": "Dark theme",
-        "total_balance": "Total Balance",
-        "incoming": "Incoming",
-        "outgoing": "Outgoing",
-        "accounts": "Accounts"
+        "language": "Kieli",
+        "appearance": "Ulkoasu",
+        "light_theme": "Vaalea teema",
+        "dark_theme": "Tumma teema",
+        "total_balance": "Saldo yhteensä",
+        "incoming": "Saapuva",
+        "outgoing": "Lähtevä",
+        "accounts": "Tilit"
     }
 }
