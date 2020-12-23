@@ -1,15 +1,15 @@
 {
     "app": {
         "title": "Firefly",
-        "author": "IOTA Foundation"
+        "author": "IOTA stiftelse"
     },
     "views": {
         "onboarding_1": {
-            "title": "Send, Receive & Manage your IOTA",
-            "body": "Firefly is a secure and easy-to-use IOTA wallet."
+            "title": "Send, motta & håndtere dine IOTA",
+            "body": "Firefly er en sikker og enkel å bruke IOTA lommebok."
         },
         "legal": {
-            "title": "Legal",
+            "title": "Juridisk",
             "body": "Please review the Privacy Policy and Terms of Service.",
             "privacy_policy": {
                 "title": "Privacy Policy",
@@ -81,7 +81,7 @@
             "body": "You have backed up your wallet to a Stronghold."
         },
         "congratulations": {
-            "title": "Congratulations",
+            "title": "Gratulerer",
             "body": "Your wallet is ready to go."
         },
         "import": {
