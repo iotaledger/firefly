@@ -1,8 +1,4 @@
 {
-    "app": {
-        "title": "Firefly",
-        "author": "IOTA Foundation"
-    },
     "views": {
         "onboarding_1": {
             "title": "Send, Receive & Manage your IOTA Tokens",
