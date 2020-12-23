@@ -1,16 +1,16 @@
 {
     "app": {
         "title": "Firefly",
-        "author": "IOTA Foundation"
+        "author": "Fundación IOTA"
     },
     "views": {
         "onboarding_1": {
-            "title": "Send, Receive & Manage your IOTA",
-            "body": "Firefly is a secure and easy-to-use IOTA wallet."
+            "title": "Envía, Recibe y Gestiona tus IOTA",
+            "body": "Firefly es un monedero IOTA seguro y fácil de usar."
         },
         "legal": {
             "title": "Legal",
-            "body": "Please review the Privacy Policy and Terms of Service.",
+            "body": "Por favor revisa la Política de Privacidad y los Términos del Servicio.",
             "privacy_policy": {
                 "title": "Privacy Policy",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
