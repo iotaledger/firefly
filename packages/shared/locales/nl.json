@@ -1,8 +1,8 @@
 {
     "views": {
         "onboarding_1": {
-            "title": "Verstuur, Ontvang & Beheer jouw IOTA",
-            "body": "Firefly is een veilig en eenvoudig te gebruiken IOTA portemonnee."
+            "title": "Verstuur, Ontvang & Beheer je IOTA",
+            "body": "Firefly is een veilig en eenvoudig te gebruiken IOTA wallet."
         },
         "legal": {
             "title": "Juridisch",
@@ -28,16 +28,16 @@
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
         "language": {
-            "title": "Taal & weergave",
-            "body": "Kies de taal en het thema van jouw portemonnee"
+            "title": "Taal & uiterlijk",
+            "body": "Kies de taal en het thema van je wallet"
         },
         "setup": {
             "title": "Stel uw portemonnee in",
-            "body": "U kunt een nieuwe portemonnee maken of een bestaande importeren."
+            "body": "Je kunt een nieuwe wallet maken of een bestaande importeren."
         },
         "password": {
             "title": "Geef een wachtwoord op",
-            "body": "You will be asked to enter your password to send tokens from your wallet. You need a strong password to protect your funds."
+            "body": "Je hebt je wachtwoord nodig om tokens vanuit je wallet te versturen. Verzin een sterk wachtwoord om je tokens zo goed mogelijk te beschermen."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -46,31 +46,31 @@
         },
         "pin": {
             "title": "PIN-code instellen",
-            "body_1": "Voer hieronder een 6-cijferige PIN-code in. U wordt gevraagd uw PIN-code in te voeren om in te loggen in uw portemonnee.",
-            "body_2": "U kunt alleen cijfers gebruiken."
+            "body_1": "Voer hieronder een 6-cijferige PIN-code in. Je hebt je PIN-code nodig om in te loggen in je wallet.",
+            "body_2": "Je kunt alleen cijfers gebruiken."
         },
         "confirm_pin": {
-            "title": "Verifieer uw PIN-code",
-            "body": "Voer uw PIN-code opnieuw in om door te gaan."
+            "title": "Verifieer je PIN-code",
+            "body": "Voer je PIN-code opnieuw in om door te gaan."
         },
         "backup": {
-            "title": "Backup uw portemonnee",
+            "title": "Maak een back-up van je wallet",
             "body_1": "Je krijgt nu een herstelzin te zien.",
-            "body_2": "Deel deze zin niet met anderen. Uw herstelzin kunt u gebruiken vanuit elke locatie toegang te krijgen tot uw tokens.",
-            "body_3": "Als u uw herstelzin verliest, kunt u uw tokens verliezen."
+            "body_2": "Deel deze zin niet met anderen. Met je herstelzin kun je vanaf elke locatie toegang krijgen tot je tokens.",
+            "body_3": "Als je de herstelzin verliest, kun je ook de toegang tot je tokens verliezen."
         },
         "recovery_phrase": {
-            "title": "Herstel zin",
+            "title": "Herstelzin",
             "body_1": "Schrijf de woorden zorgvuldig op in de exacte volgorde.",
-            "body_2": "Houd uw herstelzin privé en veilig opgeslagen. Deel deze met niemand."
+            "body_2": "Houd je herstelzin privé en veilig opgeslagen. Deel deze met niemand."
         },
         "verify_recovery_phrase": {
-            "title": "Verifieer uw herstel zin",
-            "body": "Laten we kijken of u de zin correct hebt opgeschreven. Selecteer de woorden in de juiste volgorde."
+            "title": "Verifieer je herstelzin",
+            "body": "Laten we kijken of je de zin correct hebt opgeschreven. Selecteer de woorden in de juiste volgorde."
         },
         "backup_wallet": {
             "title": "Maak een back-up van een Stronghold bestand",
-            "body": "Voer uw wachtwoord in om een back-up van uw wallet te maken naar een Stronghold bestand. Uw wachtwoord wordt gebruikt om de back-up te versleutelen."
+            "body": "Voer je wachtwoord in om een back-up van je wallet te maken naar een Stronghold bestand. Je wachtwoord wordt gebruikt om de back-up te versleutelen."
         },
         "recovery_phrase_saved": {
             "title": "Backup succesvol gemaakt",
@@ -78,44 +78,44 @@
         },
         "congratulations": {
             "title": "Gefeliciteerd",
-            "body": "Uw portemonnee is klaar voor gebruik."
+            "body": "Je wallet is klaar voor gebruik."
         },
         "import": {
-            "title": "Importeer portemonnee",
-            "body": "Als u een herstelzin of Stronghold back-up heeft, dan kunt u die hier importeren."
+            "title": "Importeer wallet",
+            "body": "Als je een herstelzin of Stronghold back-up hebt, dan kun je die hier importeren."
         },
         "import_from_text": {
-            "title": "Herstel uw portemonnee met een herstelzin of seed",
-            "body_1": "Uw herstelzin bestaat uit 24 woorden. Deze kan worden gebruikt om een bestaande Firefly wallet te herstellen.",
+            "title": "Herstel je wallet met een herstelzin of seed",
+            "body_1": "Je herstelzin bestaat uit 24 woorden. Deze kan worden gebruikt om een bestaande Firefly wallet te herstellen.",
             "body_2": "Een seed bestaat uit 81 tekens. Deze wordt gebruikt om een eerdere Trinity wallet te herstellen.",
-            "body_3": "Voer uw herstelzin in"
+            "body_3": "Voer je herstelzin in"
         },
         "import_from_file": {
-            "title": "Herstel uw wallet met een back-up bestand",
-            "body": "Importeer een back-upbestand om uw portemonnee te herstellen. Back-ups kunnen een Stronghold bestand (.stronghold) of een Trinity SeedVault bestand (.kdbx) zijn."
+            "title": "Herstel je wallet met een back-up bestand",
+            "body": "Importeer een back-upbestand om je wallet te herstellen. Back-ups kunnen een Stronghold bestand (.stronghold) of een Trinity SeedVault bestand (.kdbx) zijn."
         },
         "import_backup_password": {
-            "title": "Herstel uw wallet vanuit een Seedvault of Stronghold",
-            "body_1": "Voer uw wachtwoord in.",
-            "body_2": "Dit is het wachtwoord dat u heeft ingesteld toen u de back--up maakte."
+            "title": "Herstel uw wallet vanuit een Seedvault of vanuit Stronghold",
+            "body_1": "Voer je back-up wachtwoord in.",
+            "body_2": "Dit is het wachtwoord dat je hebt ingesteld toen je de back-up maakte."
         },
         "import_success": {
-            "title": "U hebt uw back-up succesvol herstelt",
-            "body": "You can now set up your new wallet."
+            "title": "Je hebt je back-up succesvol hersteld",
+            "body": "Je kunt nu je nieuwe wallet gaan instellen."
         },
         "migrate": {
-            "title": "Migreer uw saldo",
-            "body_1": "Dit is een automatisch proces om uw saldo naar uw nieuwe portemonnee te verplaatsen. We zullen controleren op bestede adressen die je beveiliging verzwakken.",
-            "body_2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
-            "new": "Your new wallet"
+            "title": "Migreer je saldo",
+            "body_1": "Dit is een automatisch proces om je tokens naar je nieuwe wallet over te schrijven. We controleren op reeds bestede adressen die je beveiliging verzwakken.",
+            "body_2": "Dit kan even duren. Schakel je apparaat niet uit tijdens de migratie.",
+            "existing": "Je oude wallet",
+            "new": "Je nieuwe wallet"
         },
         "migrate_failed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
-            "title": "Jouw saldo",
+            "title": "Je saldo",
             "body": "Klopt je saldo?"
         },
         "settings": {
@@ -137,7 +137,7 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profileDetails": {
-                "title": "Profile Details",
+                "title": "Profielgegevens",
                 "description": "Temp"
             },
             "theme": {
@@ -153,15 +153,15 @@
                 "description": "Temp"
             },
             "notifications": {
-                "title": "Notificaties",
+                "title": "Meldingen",
                 "description": "Temp"
             },
             "exportStronghold": {
-                "title": "Export Stronghold",
+                "title": "Exporteer Stronghold",
                 "description": "Temp"
             },
             "appLock": {
-                "title": "App Lock",
+                "title": "App versleuteling",
                 "description": "Temp"
             },
             "changePassword": {
@@ -169,11 +169,11 @@
                 "description": "Temp"
             },
             "resyncAccounts": {
-                "title": "Opnieuw synchroniseren",
+                "title": "Rekeningen opnieuw synchroniseren",
                 "description": "Temp"
             },
             "resetWallet": {
-                "title": "Portemonnee opnieuw instellen",
+                "title": "Wallet opnieuw instellen",
                 "description": "Temp"
             },
             "deepLinks": {
@@ -197,7 +197,7 @@
                 "description": "Temp"
             },
             "stateExport": {
-                "title": "Status exporteren",
+                "title": "Staat exporteren",
                 "description": "Temp"
             },
             "troubleshoot": {
@@ -209,7 +209,7 @@
                 "description": "Temp"
             },
             "faq": {
-                "title": "VEELGESTELDE VRAGEN",
+                "title": "FAQ",
                 "description": "Temp"
             },
             "discord": {
@@ -226,66 +226,66 @@
         "continue": "Doorgaan",
         "back": "Terug",
         "import_seed": "Importeer een bestaande seed",
-        "import_wallet": "Importeer bestaande portemonnee",
-        "create_wallet": "Nieuwe portemonnee maken",
+        "import_wallet": "Importeer bestaande wallet",
+        "create_wallet": "Nieuwe wallet maken",
         "save_password": "Wachtwoord opslaan",
         "use_biometric": "Biometrische beveiliging gebruiken",
         "setup_pin": "PIN-code instellen",
         "set_pin": "Pincode instellen",
         "confirm_pin": "PIN-code bevestigen",
-        "save_backup_file": "Save backup file",
-        "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
+        "save_backup_file": "Bewaar back-upbestand",
+        "ive_written_recovery_phrase": "Ik heb mijn herstelzin opgeschreven",
         "verify_recovery_phrase": "Verifieer jouw herstel zin",
-        "reveal_recovery_phrase": "Toon herstel zin",
+        "reveal_recovery_phrase": "Toon herstelzin",
         "import_seedvault": "Importeer SeedVault",
         "check_again": "Nee, controleer opnieuw",
-        "import_from_file": "Import from a file",
+        "import_from_file": "Importeer vanuit een bestand",
         "send": "Verstuur",
         "receive": "Ontvang",
-        "begin_transfer": "Begin Transfer",
+        "begin_transfer": "Start overschrijving",
         "try_again": "Probeer opnieuw",
         "visit_discord": "Bezoek Discord",
-        "drag_drop": "Drag & Drop",
-        "import_extentions": ".stronghold or .kdbx file",
+        "drag_drop": "Drag & drop",
+        "import_extentions": ".stronghold of .kdbx bestand",
         "choose_file": "Kies een bestand",
-        "drop_here": "Sleep jouw bestand hier naartoe"
+        "drop_here": "Sleep je bestand hier naartoe"
     },
     "general": {
         "password": "Wachtwoord",
         "confirm_password": "Bevestig wachtwoord",
-        "your_seed": "Jouw Seed",
-        "recovery_phrase": "Herstel zin",
+        "your_seed": "Je Seed",
+        "recovery_phrase": "Herstelzin",
         "recent_activity": "Recente activiteit",
         "sent": "Verzonden",
         "received": "Ontvangen",
-        "send_funds": "Verstuur saldo",
-        "send_to_address": "Send to an Address",
+        "send_funds": "Verstuur tokens",
+        "send_to_address": "Verzenden naar een adres",
         "scan_qr_or_paste": "Scan een QR-code of plak een adres",
-        "transfer_between_accounts": "Overdracht tussen rekeningen",
-        "move_funds_between_accounts": "Move funds between your Accounts",
+        "transfer_between_accounts": "Overschrijven tussen rekeningen",
+        "move_funds_between_accounts": "Geld binnen je eigen rekeningen verplaatsen",
         "account": "Rekening",
-        "sending_to_address": "Sending to address",
+        "sending_to_address": "Naar een adres sturen",
         "amount": "Aantal",
         "add_address": "Adres toevoegen",
         "reference": "Referentie",
         "from": "Van",
         "to": "Naar",
-        "receive_funds": "Receive funds",
-        "share_address": "Share an address",
+        "receive_funds": "Tokens ontvangen",
+        "share_address": "Een adres delen",
         "your_address": "Jouw adres",
         "generate_new_address": "Genereer nieuw adres",
         "have_text_backup": "Ik heb een tekst back-up",
         "have_file_backup": "Ik heb een bestandsback-up",
-        "enter_seed_or_phrase": "Voer een herstel zin of seed in",
-        "upload_seedvault_or_stronghold": "Import a Stronghold or SeedVault file",
+        "enter_seed_or_phrase": "Voer een herstelzin of seed in",
+        "upload_seedvault_or_stronghold": "Importeer een Stronghold of Seedvault bestand",
         "import": "Importeer",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Taal",
-        "appearance": "Weergave",
+        "appearance": "Vormgeving",
         "light_theme": "Lichte modus",
         "dark_theme": "Donkere modus",
-        "total_balance": "Totale saldo",
+        "total_balance": "Totaalsaldo",
         "incoming": "Inkomend",
         "outgoing": "Uitgaand",
         "accounts": "Rekeningen"
