@@ -1,8 +1,4 @@
 {
-    "app": {
-        "title": "Firefly",
-        "author": "IOTA stiftelse"
-    },
     "views": {
         "onboarding_1": {
             "title": "Send, motta & håndtere dine IOTA",
@@ -10,9 +6,9 @@
         },
         "legal": {
             "title": "Juridisk",
-            "body": "Please review the Privacy Policy and Terms of Service.",
+            "body": "Vennligst se gjennom personvernerklæringen og vilkårene for bruk.",
             "privacy_policy": {
-                "title": "Privacy Policy",
+                "title": "Personvernerklæring",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -21,7 +17,7 @@
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "terms_of_service": {
-                "title": "Terms of Service",
+                "title": "Vilkår for bruk",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -32,16 +28,16 @@
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
         "language": {
-            "title": "Language & appearance",
-            "body": "Choose your wallet’s language and theme"
+            "title": "Språk & utseende",
+            "body": "Velg din lommeboks språk og tema"
         },
         "setup": {
-            "title": "Set up your wallet",
-            "body": "You can create a new wallet or import an existing one."
+            "title": "Sett opp lommeboken din",
+            "body": "Du kan opprette en ny lommebok eller importere en eksisterende."
         },
         "password": {
-            "title": "Create a password",
-            "body": "You will be asked to enter your password to send tokens from your wallet. You need a strong password to protect your funds. "
+            "title": "Opprett et passord",
+            "body": "Du trenger passordet for å kunne sende midler fra lommeboken din. Et sterkt passord er viktig for å beskytte midlene dine."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -49,167 +45,167 @@
             "body_2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Set up PIN code",
-            "body_1": "Enter a 6-digit PIN below. You will be asked to enter your pin to login to your wallet.",
-            "body_2": "You can use numbers only."
+            "title": "Angi PIN-kode",
+            "body_1": "Skriv inn en 6-sifret PIN-kode nedenfor. Du vil bli bedt om å fylle inn din pin for å logge inn i din lommebok.",
+            "body_2": "Du kan kun bruke tall."
         },
         "confirm_pin": {
-            "title": "Verify your PIN code",
-            "body": "Re-enter your PIN code to proceed."
+            "title": "Bekreft din PIN-kode",
+            "body": "Tast inn PIN-koden igjen for å fortsette."
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body_1": "You will now be shown a recovery phrase.",
-            "body_2": "Do not share this phrase with anyone. Your recovery phrase can be used to access your tokens from anywhere.",
-            "body_3": "If you lose your recovery phrase, you may lose your funds."
+            "title": "Sikkerhetskopier din lommebok",
+            "body_1": "Du vil nå bli vist en gjenopprettingsfrase.",
+            "body_2": "Ikke del denne frasen med noen. Din gjenopprettingsfrase kan brukes til å få tilgang til tokens fra hvor som helst.",
+            "body_3": "Hvis du mister din recovery frase, kan du miste midlene dine."
         },
         "recovery_phrase": {
-            "title": "Recovery phrase",
-            "body_1": "Carefully write down the words in the exact order.",
-            "body_2": "Keep your recovery phrase private and safely stored. Do not share it with anyone."
+            "title": "Gjenopprettingsfrase",
+            "body_1": "Skriv forsiktig ned ordene i riktig rekkefølge.",
+            "body_2": "Hold gjenopprettingsfrasen privat og trygt lagret. Ikke del den med noen."
         },
         "verify_recovery_phrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Select the words in the correct order."
+            "title": "Bekreft frasen for gjenoppretting",
+            "body": "La oss sjekke at du skrev ned frasen riktig. Velg ordene i riktig rekkefølge."
         },
         "backup_wallet": {
-            "title": "Back up to a Stronghold file",
-            "body": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup."
+            "title": "Sikkerhetskopier til en Stronghold-fil",
+            "body": "Skriv inn passordet for å sikkerhetskopiere lommeboken til en Stronghold-fil. Passordet brukes til å kryptere sikkerhetskopien."
         },
         "recovery_phrase_saved": {
-            "title": "Successfully backed up",
-            "body": "You have backed up your wallet to a Stronghold."
+            "title": "Vellykket sikkerhetskopiering",
+            "body": "Du har sikkerhetskopiert lommeboken til et Stronghold."
         },
         "congratulations": {
             "title": "Gratulerer",
-            "body": "Your wallet is ready to go."
+            "body": "Lommeboken er klar til bruk."
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have a recovery phrase or Stronghold back up, you can import it here."
+            "title": "Importer en lommebok",
+            "body": "Hvis du har en gjenopprettingsfrase eller en Stronghold-sikkerhetskopiering, kan du importere den her."
         },
         "import_from_text": {
-            "title": "Restore your wallet with a recovery phrase or seed",
-            "body_1": "A recovery phrase is 24 words long. This is used to recover an existing Firefly wallet.",
-            "body_2": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body_3": "Enter your seed or recovery phrase"
+            "title": "Gjenopprette lommeboken med en gjenopprettingsfrase eller hovednøkkel",
+            "body_1": "En gjenopprettingsfrase er 24 ord. Dette er brukt for å gjenopprette en eksisterende Firefly lommebok.",
+            "body_2": "Et hovednøkkel består av 81 tegn. Dette brukes for å gjenopprette fra en eldre Trinity lommebok.",
+            "body_3": "Angi hovednøkkel eller gjenopprettingsfrase"
         },
         "import_from_file": {
-            "title": "Restore your wallet from a backup file",
-            "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "Gjenopprett lommeboken fra en sikkerhetskopi-fil",
+            "body": "Importer en sikkerhetskopifil for å gjenopprette lommeboken. Sikkerhetskopier kan enten være et Stronghold (.stronghold) eller et Trinity SeedVault (.kdbx)."
         },
         "import_backup_password": {
-            "title": "Restore your wallet from a SeedVault or Stronghold",
-            "body_1": "Please enter your backup password.",
-            "body_2": "This is the password you set when you first created your backup."
+            "title": "Gjenopprett din lommebok fra et SeedVault eller Stronghold",
+            "body_1": "Vennligst angi passord for sikkerhetskopi.",
+            "body_2": "Dette er passordet du lagde når du først opprettet sikkerhetskopien."
         },
         "import_success": {
-            "title": "You have successfully recovered your backup",
-            "body": "You can now set up your new wallet."
+            "title": "Du har nå gjenopprettet sikkerhetskopien",
+            "body": "Du kan nå sette opp din nye lommebok."
         },
         "migrate": {
-            "title": "Migrate your funds",
-            "body_1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
-            "new": "Your new wallet"
+            "title": "Overfør midlene dine",
+            "body_1": "Dette er en automatisert prosess for å overføre midlene dine til din nye lommebok. Vi vil se etter brukte adresser som svekker sikkerhet din.",
+            "body_2": "Dette kan ta litt tid. Ikke slå av enheten under overføringen.",
+            "existing": "Din gamle lommebok",
+            "new": "Din nye lommebok"
         },
         "migrate_failed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "Din saldo",
+            "body": "Er saldoen riktig?"
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "Innstillinger",
             "generalSettings": {
-                "title": "General Settings",
+                "title": "Generelle innstillinger",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "security": {
-                "title": "Security",
+                "title": "Sikkerhet",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
+                "title": "Avanserte innstillinger",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Help and Information",
+                "title": "Hjelp og informasjon",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profileDetails": {
-                "title": "Profile Details",
+                "title": "Profilopplysninger",
                 "description": "Temp"
             },
             "theme": {
-                "title": "Theme",
+                "title": "Tema",
                 "description": "Temp"
             },
             "language": {
-                "title": "Language",
+                "title": "Språk",
                 "description": "Temp"
             },
             "currency": {
-                "title": "Currency",
+                "title": "Valuta",
                 "description": "Temp"
             },
             "notifications": {
-                "title": "Notifications",
+                "title": "Varslinger",
                 "description": "Temp"
             },
             "exportStronghold": {
-                "title": "Export Stronghold",
+                "title": "Eksporter Stronghold",
                 "description": "Temp"
             },
             "appLock": {
-                "title": "App Lock",
+                "title": "App-lås",
                 "description": "Temp"
             },
             "changePassword": {
-                "title": "Change Password",
+                "title": "Endre passord",
                 "description": "Temp"
             },
             "resyncAccounts": {
-                "title": "Resync Accounts",
+                "title": "Synkroniser kontoene",
                 "description": "Temp"
             },
             "resetWallet": {
-                "title": "Reset Wallet",
+                "title": "Tilbakestill lommeboken",
                 "description": "Temp"
             },
             "deepLinks": {
-                "title": "Deep Links",
+                "title": "Dype Lenker",
                 "description": "Temp"
             },
             "developerMode": {
-                "title": "Developer Mode",
+                "title": "Utviklermodus",
                 "description": "Temp"
             },
             "nodeSettings": {
-                "title": "Node Settings",
+                "title": "Node-innstillinger",
                 "description": "Temp"
             },
             "proofOfWork": {
-                "title": "Proof of Work",
+                "title": "Bevis på arbeid",
                 "description": "Temp"
             },
             "errorLog": {
-                "title": "Error Log",
+                "title": "Feilmeldingslogg",
                 "description": "Temp"
             },
             "stateExport": {
-                "title": "State Export",
+                "title": "Tilstands-eksportering",
                 "description": "Temp"
             },
             "troubleshoot": {
-                "title": "Troubleshoot",
+                "title": "Feilsøking",
                 "description": "Temp"
             },
             "documentation": {
-                "title": "Documentation",
+                "title": "Dokumentasjon",
                 "description": "Temp"
             },
             "faq": {
@@ -221,77 +217,77 @@
                 "description": "Temp"
             },
             "about": {
-                "title": "About",
+                "title": "Om",
                 "description": "Temp"
             }
         }
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
-        "setup_pin": "Set up PIN code",
-        "set_pin": "Set PIN code",
-        "confirm_pin": "Confirm PIN code",
-        "save_backup_file": "Save backup file",
-        "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
-        "verify_recovery_phrase": "Verify recovery phrase",
-        "reveal_recovery_phrase": "Reveal recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
+        "continue": "Fortsett",
+        "back": "Tilbake",
+        "import_seed": "Importer en eksisterende hovednøkkel",
+        "import_wallet": "Importer eksisterende lommebok",
+        "create_wallet": "Opprette ny lommebok",
+        "save_password": "Lagre passord",
+        "use_biometric": "Bruk biometrisk sikkerhet",
+        "setup_pin": "Angi PIN-kode",
+        "set_pin": "Angi PIN-kode",
+        "confirm_pin": "Bekreft PIN-kode",
+        "save_backup_file": "Lagre sikkerhetskopifilen",
+        "ive_written_recovery_phrase": "Jeg har skrevet ned gjenopprettingsfrasen min",
+        "verify_recovery_phrase": "Bekreft frasen for gjenoppretting",
+        "reveal_recovery_phrase": "Vis frasen for gjenoppretting",
+        "import_seedvault": "Importer SeedVault",
+        "check_again": "Nei, sjekk igjen",
+        "import_from_file": "Importer fra fil",
         "send": "Send",
-        "receive": "Receive",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
-        "visit_discord": "Visit Discord",
-        "drag_drop": "Drag & Drop",
-        "import_extentions": ".stronghold or .kdbx file",
-        "choose_file": "Choose a File",
-        "drop_here": "Drop your file here"
+        "receive": "Motta",
+        "begin_transfer": "Begynn overføring",
+        "try_again": "Prøv på nytt",
+        "visit_discord": "Besøk Discord",
+        "drag_drop": "Dra & slipp",
+        "import_extentions": ".stronghold eller .kdbx fil",
+        "choose_file": "Velg en fil",
+        "drop_here": "Slipp filen her"
     },
     "general": {
-        "password": "Password",
-        "confirm_password": "Confirm password",
-        "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
-        "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
-        "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "transfer_between_accounts": "Transfer Between Accounts",
-        "move_funds_between_accounts": "Move funds between your Accounts",
-        "account": "Account",
-        "sending_to_address": "Sending to address",
-        "amount": "Amount",
-        "add_address": "Add Address",
-        "reference": "Reference",
-        "from": "From",
-        "to": "To",
-        "receive_funds": "Receive funds",
-        "share_address": "Share an address",
+        "password": "Passord",
+        "confirm_password": "Bekreft passord",
+        "your_seed": "Din hovednøkkel",
+        "recovery_phrase": "Gjenopprettingsfrase",
+        "recent_activity": "Nylig aktivitet",
+        "sent": "Sendt",
+        "received": "Mottatt",
+        "send_funds": "Send midler",
+        "send_to_address": "Send til en adresse",
+        "scan_qr_or_paste": "Skann en QR-kode eller lim inn en adresse",
+        "transfer_between_accounts": "Overfør mellom kontoer",
+        "move_funds_between_accounts": "Flytt midler mellom kontoene dine",
+        "account": "Konto",
+        "sending_to_address": "Sender til adresse",
+        "amount": "Beløp",
+        "add_address": "Legg til adresse",
+        "reference": "Referanse",
+        "from": "Fra",
+        "to": "Til",
+        "receive_funds": "Motta midler",
+        "share_address": "Del en adresse",
         "your_address": "Your address",
         "generate_new_address": "Generate new address",
         "have_text_backup": "I have a text backup",
         "have_file_backup": "I have a file backup",
         "enter_seed_or_phrase": "Enter a recovery phrase or seed",
-        "upload_seedvault_or_stronghold": "Import a Stronghold or Seedvault file",
+        "upload_seedvault_or_stronghold": "Import a Stronghold or SeedVault file",
         "import": "Import",
-        "seedvault": "Seedvault",
+        "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Language",
         "appearance": "Appearance",
-        "light_theme": "Light theme",
-        "dark_theme": "Dark theme",
-        "total_balance": "Total Balance",
-        "incoming": "Incoming",
-        "outgoing": "Outgoing",
-        "accounts": "Accounts"
+        "light_theme": "Lyst tema",
+        "dark_theme": "Mørkt tema",
+        "total_balance": "Samlet saldo",
+        "incoming": "Innkommende",
+        "outgoing": "Utgående",
+        "accounts": "Konto"
     }
 }
