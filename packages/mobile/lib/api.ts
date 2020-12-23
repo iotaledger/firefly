@@ -119,8 +119,8 @@ export function backup(destinationPath: string): Promise<number> {
   return _backup(sendMessage, destinationPath)
 }
 
-export function restoreBackup(backupPath: string): Promise<number> {
-  return _restoreBackup(sendMessage, backupPath)
+export function restoreBackup(backupPath: string, password: string): Promise<number> {
+  return _restoreBackup(sendMessage, backupPath, password)
 }
 
 export function setStrongholdPassword(password: string): Promise<number> {

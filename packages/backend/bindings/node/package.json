@@ -13,7 +13,7 @@
     "postinstall": "yarn build",
     "pretest": "yarn build",
     "build": "npm-run-all -p build:api build:binding",
-    "build:binding": "electron-build-env -- yarn neon build",
+    "build:binding": "electron-build-env -- yarn neon build --release",
     "build:api": "rimraf ./index.js && rollup -c --silent && yarn generate-declaration",
     "generate-declaration": "tsc index.ts --declaration --emitDeclarationOnly --outDir dist && mv dist/bindings/node/index.d.ts dist/index.d.ts",
     "test": "mocha --timeout 0"
