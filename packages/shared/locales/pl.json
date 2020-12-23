@@ -5,8 +5,8 @@
     },
     "views": {
         "onboarding_1": {
-            "title": "Send, Receive & Manage your IOTA Tokens",
-            "body": "Firefly is a platform for managing your IOTA portfolio."
+            "title": "Send, Receive & Manage your IOTA",
+            "body": "Firefly is a secure and easy-to-use IOTA wallet."
         },
         "legal": {
             "title": "Legal",
