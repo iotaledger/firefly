@@ -37,7 +37,7 @@
         },
         "password": {
             "title": "Crear una contraseña",
-            "body": "You will be asked to enter your password to send tokens from your wallet. You need a strong password to protect your funds."
+            "body": "Se te va a pedir que introduzcas tu contraseña para mandar los tokens desde tu billetera. Necesitas una fuerte contraseña para proteger tus fondos."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -51,7 +51,7 @@
         },
         "confirm_pin": {
             "title": "Verifica tu código PIN",
-            "body": "Vuelve a introducir tu código PIN"
+            "body": "Vuelve a introducir tu código PIN."
         },
         "backup": {
             "title": "Copia de seguridad",
@@ -87,105 +87,105 @@
         "import_from_text": {
             "title": "Restaurar su cartera con una frase de recuperación o semilla",
             "body_1": "Una frase de recuperación tiene 24 palabras. Esto se utiliza para recuperar una cartera Firefly existente.",
-            "body_2": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body_3": "Enter your seed or recovery phrase"
+            "body_2": "Una semilla consta de 81 caracteres. Esto se utiliza para reestablecerse desde una cartera Trinity más antigua.",
+            "body_3": "Introduce tu semilla o tu frase de recuperación"
         },
         "import_from_file": {
-            "title": "Restore your wallet from a backup file",
-            "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "Restaurar su cartera desde un archivo de copia de seguridad",
+            "body": "Importa un archivo de copia de seguridad para restaurar tu cartera. Las copias de seguridad pueden ser un Stronghold (.stronghold) o un Trinity SeedVault (.kdbx)."
         },
         "import_backup_password": {
-            "title": "Restore your wallet from a SeedVault or Stronghold",
-            "body_1": "Please enter your backup password.",
-            "body_2": "This is the password you set when you first created your backup."
+            "title": "Restaurar su cartera desde una SeedVault o Stronghold",
+            "body_1": "Por favor, introduzca su contraseña de respaldo.",
+            "body_2": "Esta es la contraseña que configuraste cuando creaste por primera vez tu copia de seguridad."
         },
         "import_success": {
-            "title": "You have successfully recovered your backup",
-            "body": "You can now set up your new wallet."
+            "title": "Has recuperado con éxito tu copia de seguridad",
+            "body": "Ahora puede configurar su nueva cartera."
         },
         "migrate": {
-            "title": "Migrate your funds",
-            "body_1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
-            "new": "Your new wallet"
+            "title": "Migrar tus fondos",
+            "body_1": "Este es un proceso automatizado para transferir sus fondos a su nueva cartera. Comprobaremos si hay direcciones usadas que puedan debilitar su seguridad.",
+            "body_2": "Puede tardar un tiempo. No apague su dispositivo durante la migración.",
+            "existing": "Su antigua cartera",
+            "new": "Su nueva cartera"
         },
         "migrate_failed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "Tu saldo",
+            "body": "¿Su saldo es correcto?"
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "Ajustes",
             "generalSettings": {
-                "title": "General Settings",
+                "title": "Ajustes generales",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "security": {
-                "title": "Security",
+                "title": "Seguridad",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
+                "title": "Configuración Avanzada",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Help and Information",
+                "title": "Ayuda e información",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profileDetails": {
-                "title": "Profile Details",
+                "title": "Detalles del perfil",
                 "description": "Temp"
             },
             "theme": {
-                "title": "Theme",
+                "title": "Tema",
                 "description": "Temp"
             },
             "language": {
-                "title": "Language",
+                "title": "Idioma",
                 "description": "Temp"
             },
             "currency": {
-                "title": "Currency",
+                "title": "Divisa",
                 "description": "Temp"
             },
             "notifications": {
-                "title": "Notifications",
+                "title": "Notificaciones",
                 "description": "Temp"
             },
             "exportStronghold": {
-                "title": "Export Stronghold",
+                "title": "Exportar Stronghold",
                 "description": "Temp"
             },
             "appLock": {
-                "title": "App Lock",
+                "title": "Bloqueo de Aplicación",
                 "description": "Temp"
             },
             "changePassword": {
-                "title": "Change Password",
+                "title": "Cambiar la contraseña",
                 "description": "Temp"
             },
             "resyncAccounts": {
-                "title": "Resync Accounts",
+                "title": "Resincronizar cuentas",
                 "description": "Temp"
             },
             "resetWallet": {
-                "title": "Reset Wallet",
+                "title": "Resetear Billetera",
                 "description": "Temp"
             },
             "deepLinks": {
-                "title": "Deep Links",
+                "title": "Enlaces profundos",
                 "description": "Temp"
             },
             "developerMode": {
-                "title": "Developer Mode",
+                "title": "Modo de desarrollador",
                 "description": "Temp"
             },
             "nodeSettings": {
-                "title": "Node Settings",
+                "title": "Ajustes del nodo",
                 "description": "Temp"
             },
             "proofOfWork": {
@@ -193,19 +193,19 @@
                 "description": "Temp"
             },
             "errorLog": {
-                "title": "Error Log",
+                "title": "Registro de Errores",
                 "description": "Temp"
             },
             "stateExport": {
-                "title": "State Export",
+                "title": "Exportar estado",
                 "description": "Temp"
             },
             "troubleshoot": {
-                "title": "Troubleshoot",
+                "title": "Resolución de problemas",
                 "description": "Temp"
             },
             "documentation": {
-                "title": "Documentation",
+                "title": "Documentación",
                 "description": "Temp"
             },
             "faq": {
@@ -217,77 +217,77 @@
                 "description": "Temp"
             },
             "about": {
-                "title": "About",
+                "title": "Acerca de",
                 "description": "Temp"
             }
         }
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
+        "continue": "Continuar",
+        "back": "Atrás",
+        "import_seed": "Importar una semilla existente",
+        "import_wallet": "Importar billetera existente",
+        "create_wallet": "Crear nueva cartera",
+        "save_password": "Guardar contraseña",
+        "use_biometric": "Usar seguridad biométrica",
         "setup_pin": "Código PIN",
-        "set_pin": "Set PIN code",
-        "confirm_pin": "Confirm PIN code",
-        "save_backup_file": "Save backup file",
-        "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
+        "set_pin": "Establecer código PIN",
+        "confirm_pin": "Confirmar código PIN",
+        "save_backup_file": "Guardar copia de seguridad",
+        "ive_written_recovery_phrase": "He escrito mi frase de recuperación",
         "verify_recovery_phrase": "Verificar frase de recuperación",
-        "reveal_recovery_phrase": "Reveal recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
-        "visit_discord": "Visit Discord",
-        "drag_drop": "Drag & Drop",
-        "import_extentions": ".stronghold or .kdbx file",
-        "choose_file": "Choose a File",
-        "drop_here": "Drop your file here"
+        "reveal_recovery_phrase": "Mostrar frase de recuperación",
+        "import_seedvault": "Importar SeedVault",
+        "check_again": "No, comprobar de nuevo",
+        "import_from_file": "Importar desde un archivo",
+        "send": "Enviar",
+        "receive": "Recibir",
+        "begin_transfer": "Iniciar transferencia",
+        "try_again": "Inténtalo de nuevo",
+        "visit_discord": "Visita Discord",
+        "drag_drop": "Arrastrar y soltar",
+        "import_extentions": "archivo .stronghold o .kdbx",
+        "choose_file": "Seleccionar un Archivo",
+        "drop_here": "Coloca tu archivo aquí"
     },
     "general": {
-        "password": "Password",
-        "confirm_password": "Confirm password",
-        "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
-        "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
-        "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "transfer_between_accounts": "Transfer Between Accounts",
-        "move_funds_between_accounts": "Move funds between your Accounts",
-        "account": "Account",
-        "sending_to_address": "Sending to address",
-        "amount": "Amount",
-        "add_address": "Add Address",
-        "reference": "Reference",
-        "from": "From",
-        "to": "To",
-        "receive_funds": "Receive funds",
-        "share_address": "Share an address",
-        "your_address": "Your address",
-        "generate_new_address": "Generate new address",
-        "have_text_backup": "I have a text backup",
-        "have_file_backup": "I have a file backup",
-        "enter_seed_or_phrase": "Enter a recovery phrase or seed",
-        "upload_seedvault_or_stronghold": "Import a Stronghold or SeedVault file",
-        "import": "Import",
+        "password": "Contraseña",
+        "confirm_password": "Confirmar la contraseña",
+        "your_seed": "Tu Semilla",
+        "recovery_phrase": "Frase de Recuperación",
+        "recent_activity": "Actividad reciente",
+        "sent": "Enviado",
+        "received": "Recibido",
+        "send_funds": "Enviar fondos",
+        "send_to_address": "Enviar a una dirección",
+        "scan_qr_or_paste": "Escanea un código QR o pega una dirección",
+        "transfer_between_accounts": "Transferir entre mis cuentas",
+        "move_funds_between_accounts": "Mover fondos entre tus cuentas",
+        "account": "Cuenta",
+        "sending_to_address": "Mandar a la dirección",
+        "amount": "Cantidad",
+        "add_address": "Añadir dirección",
+        "reference": "Nota",
+        "from": "De",
+        "to": "Para",
+        "receive_funds": "Recibir fondos",
+        "share_address": "Compartir dirección",
+        "your_address": "Su dirección",
+        "generate_new_address": "Generar nueva dirección",
+        "have_text_backup": "Tengo una copia de seguridad",
+        "have_file_backup": "Tengo una copia de seguridad",
+        "enter_seed_or_phrase": "Introduzca una frase de recuperación o semilla",
+        "upload_seedvault_or_stronghold": "Importar un archivo Stronghold o SeedVault",
+        "import": "Importar",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
-        "language": "Language",
-        "appearance": "Appearance",
-        "light_theme": "Light theme",
-        "dark_theme": "Dark theme",
-        "total_balance": "Total Balance",
-        "incoming": "Incoming",
-        "outgoing": "Outgoing",
-        "accounts": "Accounts"
+        "language": "Idioma",
+        "appearance": "Apariencia",
+        "light_theme": "Tema claro",
+        "dark_theme": "Tema oscuro",
+        "total_balance": "Saldo total",
+        "incoming": "Entrante",
+        "outgoing": "Saliente",
+        "accounts": "Cuentas"
     }
 }
