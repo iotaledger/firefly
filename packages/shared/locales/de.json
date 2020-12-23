@@ -37,7 +37,7 @@
         },
         "password": {
             "title": "Passwort erstellen",
-            "body": "You will be asked to enter your password to send tokens from your wallet. You need a strong password to protect your funds."
+            "body": "Du wirst aufgefordert dein Passwort einzugeben, um Token von deiner Wallet zu senden. Du benötigst ein starkes Passwort, um dein Guthaben zu schützen."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -78,17 +78,17 @@
         },
         "congratulations": {
             "title": "Glückwunsch",
-            "body": "Ihr Wallet ist jetzt bereit."
+            "body": "Deine Wallet ist jetzt bereit."
         },
         "import": {
             "title": "Wallet importieren",
-            "body": "Wenn Sie eine Wiederherstellungsphrase oder ein Stronghold Backup haben, können Sie sie hier importieren."
+            "body": "Wenn du eine Wiederherstellungsphrase oder ein Stronghold Backup hast kannst du es hier importieren."
         },
         "import_from_text": {
             "title": "Stelle deine Wallet aus einer Wiederherstellungsphrase oder einem Seed wieder her",
             "body_1": "Eine Wiederherstellungsphrase ist 24 Wörter lang. Sie wird benutzt, um eine bestehende Firefly Wallet wiederherzustellen.",
             "body_2": "Ein Seed besteht aus 81 Zeichen. Er wird benutzt, um eine ältere Trinity Wallet wiederherzustellen.",
-            "body_3": "Geben Sie Ihren Seed oder ihre Wiederherstellungsphrase ein"
+            "body_3": "Gebe deinen Seed oder eine Wiederherstellungsphrase ein"
         },
         "import_from_file": {
             "title": "Wallet aus einer Sicherungsdatei wiederherstellen",
@@ -96,8 +96,8 @@
         },
         "import_backup_password": {
             "title": "Wallet aus SeedVault oder Stronghold wiederherstellen",
-            "body_1": "Bitte geben SIe Ihr Backup Passwort ein.",
-            "body_2": "Dies ist das Passwort, das du beim ersten Erstellen des Backups gesetzt hast."
+            "body_1": "Bitte gebe dein Backup Passwort ein.",
+            "body_2": "Dies ist das Passwort, welches du beim ersten Erstellen des Backups gesetzt hast."
         },
         "import_success": {
             "title": "Du hast dein Backup erfolgreich wiederhergestellt",
@@ -105,7 +105,7 @@
         },
         "migrate": {
             "title": "Guthaben migrieren",
-            "body_1": "Dies ist ein automatisierter Prozess, um Ihr Guthaben auf Ihren neuen Wallet zu überweisen. Wir werden auf ausgegebene Adressen überprüfen, die Ihre Sicherheit schwächen.",
+            "body_1": "Dies ist ein automatisierter Prozess, um dein Guthaben auf deine neue Wallet zu überweisen. Wir werden nach ausgegebene Adressen suchen, welche deine Sicherheit beeinträchtigen könnten.",
             "body_2": "Das kann einige Zeit dauern. Schalte dein Gerät nicht während der Migration aus.",
             "existing": "Deine alte Wallet",
             "new": "Deine neue Wallet"
@@ -115,8 +115,8 @@
             "body": "To do"
         },
         "balance": {
-            "title": "Ihr Guthaben",
-            "body": "Stimmt Ihr Guthaben?"
+            "title": "Dein Guthaben",
+            "body": "Stimmt dein Guthaben?"
         },
         "settings": {
             "settings": "Einstellungen",
@@ -277,7 +277,7 @@
         "have_text_backup": "Ich habe ein Text-backup",
         "have_file_backup": "Ich habe ein Datei-backup",
         "enter_seed_or_phrase": "Wiederherstellungsphrase oder Seed eingeben",
-        "upload_seedvault_or_stronghold": "Import a Stronghold or SeedVault file",
+        "upload_seedvault_or_stronghold": "Importiere eine Stronghold oder SeedVault Datei",
         "import": "Importieren",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
