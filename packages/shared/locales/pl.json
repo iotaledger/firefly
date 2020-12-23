@@ -1,18 +1,14 @@
 {
-    "app": {
-        "title": "Firefly",
-        "author": "IOTA Foundation"
-    },
     "views": {
         "onboarding_1": {
             "title": "Send, Receive & Manage your IOTA",
-            "body": "Firefly is a secure and easy-to-use IOTA wallet."
+            "body": "Firefly to bezpieczny i łatwy w obsłudze portfel IOTA."
         },
         "legal": {
-            "title": "Legal",
-            "body": "Please review the Privacy Policy and Terms of Service.",
+            "title": "Informacje prawne",
+            "body": "Zapoznaj się z Polityką Prywatności i Warunkami Usługi.",
             "privacy_policy": {
-                "title": "Privacy Policy",
+                "title": "Polityka prywatności",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -21,7 +17,7 @@
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "terms_of_service": {
-                "title": "Terms of Service",
+                "title": "Warunki świadczenia usług",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -32,16 +28,16 @@
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
         "language": {
-            "title": "Language & appearance",
-            "body": "Choose your wallet’s language and theme"
+            "title": "Język i wygląd",
+            "body": "Wybierz język i motyw wyglądu portfela"
         },
         "setup": {
-            "title": "Set up your wallet",
-            "body": "You can create a new wallet or import an existing one."
+            "title": "Skonfiguruj swój portfel",
+            "body": "Możesz utworzyć nowy portfel lub zaimportować istniejący."
         },
         "password": {
-            "title": "Create a password",
-            "body": "You will be asked to enter your password to send tokens from your wallet. You need a strong password to protect your funds. "
+            "title": "Utwórz hasło",
+            "body": "You will be asked to enter your password to send tokens from your wallet. You need a strong password to protect your funds."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -49,53 +45,53 @@
             "body_2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Set up PIN code",
-            "body_1": "Enter a 6-digit PIN below. You will be asked to enter your pin to login to your wallet.",
-            "body_2": "You can use numbers only."
+            "title": "Ustaw kod PIN",
+            "body_1": "Wprowadź poniżej 6-cyfrowy kod PIN. Zostaniesz poproszony o wprowadzenie kodu PIN, aby zalogować się do portfela.",
+            "body_2": "Możesz używać tylko liczb."
         },
         "confirm_pin": {
-            "title": "Verify your PIN code",
-            "body": "Re-enter your PIN code to proceed."
+            "title": "Sprawdź swój kod PIN",
+            "body": "Wprowadź ponownie kod PIN, aby kontynuować."
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body_1": "You will now be shown a recovery phrase.",
-            "body_2": "Do not share this phrase with anyone. Your recovery phrase can be used to access your tokens from anywhere.",
-            "body_3": "If you lose your recovery phrase, you may lose your funds."
+            "title": "Utwórz back up swojego portfela",
+            "body_1": "Zostanie teraz pokazana fraza odzyskiwania.",
+            "body_2": "Nie udostępniaj tej frazy nikomu. Twoja fraza odzyskiwania może być użyta do uzyskania dostępu do Twoich tokenów z dowolnego miejsca.",
+            "body_3": "Jeśli stracisz swoją frazę odzyskiwania, możesz stracić swoje środki."
         },
         "recovery_phrase": {
-            "title": "Recovery phrase",
-            "body_1": "Carefully write down the words in the exact order.",
-            "body_2": "Keep your recovery phrase private and safely stored. Do not share it with anyone."
+            "title": "Fraza odzyskiwania",
+            "body_1": "Zapisz uważnie słowa w dokładnie podanej kolejności.",
+            "body_2": "Trzymaj swoją frazę odzyskiwania bezpiecznie w ukryciu. Nie udostępniaj jej nikomu."
         },
         "verify_recovery_phrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Select the words in the correct order."
+            "title": "Sprawdź frazę odzyskiwania",
+            "body": "Sprawdźmy, czy zapisałeś sobie frazę poprawnie. Wybierz słowa w prawidłowej kolejności."
         },
         "backup_wallet": {
-            "title": "Back up to a Stronghold file",
-            "body": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup."
+            "title": "Kopia zapasowa do pliku Stronghold",
+            "body": "Wprowadź hasło, aby utworzyć kopię zapasową portfela do pliku Stronghold. Twoje hasło jest używane do szyfrowania kopii zapasowej."
         },
         "recovery_phrase_saved": {
-            "title": "Successfully backed up",
-            "body": "You have backed up your wallet to a Stronghold."
+            "title": "Pomyślnie utworzono kopię zapasową",
+            "body": "Wykonałeś kopię zapasową portfela do Stronghold."
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your wallet is ready to go."
+            "title": "Gratulacje",
+            "body": "Twój portfel jest gotowy do użycia."
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have a recovery phrase or Stronghold back up, you can import it here."
+            "title": "Importuj portfel",
+            "body": "Jeśli masz frazę odzyskiwania lub kopię zapasową Stronghold, możesz zaimportować je tutaj."
         },
         "import_from_text": {
             "title": "Restore your wallet with a recovery phrase or seed",
-            "body_1": "A recovery phrase is 24 words long. This is used to recover an existing Firefly wallet.",
+            "body_1": "Fraza odzyskiwania zawiera 24 słowa. Jest ona używana do odzyskania istniejącego portfela Firefly.",
             "body_2": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
             "body_3": "Enter your seed or recovery phrase"
         },
         "import_from_file": {
-            "title": "Restore your wallet from a backup file",
+            "title": "Przywróć portfel przy użyciu kopii zapasowej",
             "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
         },
         "import_backup_password": {
@@ -234,12 +230,12 @@
         "create_wallet": "Create new wallet",
         "save_password": "Save password",
         "use_biometric": "Use biometric security",
-        "setup_pin": "Set up PIN code",
+        "setup_pin": "Ustaw kod PIN",
         "set_pin": "Set PIN code",
         "confirm_pin": "Confirm PIN code",
         "save_backup_file": "Save backup file",
         "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
-        "verify_recovery_phrase": "Verify recovery phrase",
+        "verify_recovery_phrase": "Sprawdź frazę odzyskiwania",
         "reveal_recovery_phrase": "Reveal recovery phrase",
         "import_seedvault": "Import SeedVault",
         "check_again": "No, Check Again",
@@ -281,9 +277,9 @@
         "have_text_backup": "I have a text backup",
         "have_file_backup": "I have a file backup",
         "enter_seed_or_phrase": "Enter a recovery phrase or seed",
-        "upload_seedvault_or_stronghold": "Import a Stronghold or Seedvault file",
+        "upload_seedvault_or_stronghold": "Import a Stronghold or SeedVault file",
         "import": "Import",
-        "seedvault": "Seedvault",
+        "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Language",
         "appearance": "Appearance",
