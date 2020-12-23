@@ -81,33 +81,33 @@
             "body": "Your wallet is ready to go."
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have a recovery phrase or Stronghold back up, you can import it here."
+            "title": "Importă un portofel",
+            "body": "Dacă ai o frază de recuperare sau o copie de rezervă Stronghold, o poți importa aici."
         },
         "import_from_text": {
-            "title": "Restore your wallet with a recovery phrase or seed",
-            "body_1": "A recovery phrase is 24 words long. This is used to recover an existing Firefly wallet.",
-            "body_2": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body_3": "Enter your seed or recovery phrase"
+            "title": "Restaurează-ți portofelul cu o frază de recuperare sau cu seed-ul tău",
+            "body_1": "O frază de recuperare are 24 de cuvinte lungime. Aceasta este folosită pentru a recupera un portofel Firefly existent.",
+            "body_2": "Un seed este format din 81 de caractere. Acesta este folosit pentru a recupera de la un portofel Trinity mai vechi.",
+            "body_3": "Introduce parola sau fraza de recuperare"
         },
         "import_from_file": {
-            "title": "Restore your wallet from a backup file",
-            "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "Restaurează-ți portofelul dintr-un fișier copie de rezervă",
+            "body": "Importă un fișier de backup pentru a-ți restaura portofelul. Copiile de siguranță pot fi Stronghold (.stronghold) sau un SeedVault Trinity (.kdbx)."
         },
         "import_backup_password": {
-            "title": "Restore your wallet from a SeedVault or Stronghold",
-            "body_1": "Please enter your backup password.",
-            "body_2": "This is the password you set when you first created your backup."
+            "title": "Restaurează portofelul tău de la un SeedVault sau Stronghold",
+            "body_1": "Te rugăm să introduci parola de rezervă.",
+            "body_2": "Aceasta este parola pe care ai setat-o când ai creat prima dată copia de rezervă."
         },
         "import_success": {
-            "title": "You have successfully recovered your backup",
-            "body": "You can now set up your new wallet."
+            "title": "Ai recuperat cu succes copia de rezervă",
+            "body": "Acum poți configura noul tău portofel."
         },
         "migrate": {
-            "title": "Migrate your funds",
-            "body_1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
+            "title": "Migrează-ți fondurile",
+            "body_1": "Acesta este un proces automat pentru a transfera fondurile către noul portofel. Vom verifica adresele cheltuite care vă slăbesc securitatea.",
+            "body_2": "Poate dura ceva timp. Nu opri dispozitivul în timpul migrării.",
+            "existing": "Vechiul tău portofel",
             "new": "Your new wallet"
         },
         "migrate_failed": {
