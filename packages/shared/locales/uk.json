@@ -86,29 +86,29 @@
         },
         "import_from_text": {
             "title": "Відновіть свій гаманець фразою відновлення або seed",
-            "body_1": "A recovery phrase is 24 words long. This is used to recover an existing Firefly wallet.",
-            "body_2": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body_3": "Enter your seed or recovery phrase"
+            "body_1": "Фраза захисту складається з 24 слів. Це потрібно для відновлення наявного гаманця Firefly.",
+            "body_2": "Seed складається з 81 символу. Це потрібно для відновлення з будь якої версії гаманця, наприклад Trinity.",
+            "body_3": "Введіть seed, або фразу для відновлення"
         },
         "import_from_file": {
-            "title": "Restore your wallet from a backup file",
-            "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "Відновити гаманець з файлу резервної копії",
+            "body": "Імпортуйте файл резервної копії, щоб відновити гаманець. Резервні копії можуть бути Stronghold (.stronghold) або Trinity SeedVault (.kdbx)."
         },
         "import_backup_password": {
-            "title": "Restore your wallet from a SeedVault or Stronghold",
-            "body_1": "Please enter your backup password.",
-            "body_2": "This is the password you set when you first created your backup."
+            "title": "Відновіть свій гаманець із SeedVault або Stronghold",
+            "body_1": "Будь ласка введіть пароль для захисту резервної копії.",
+            "body_2": "Це пароль, який ви встановили під час створення резервної копії."
         },
         "import_success": {
-            "title": "You have successfully recovered your backup",
-            "body": "You can now set up your new wallet."
+            "title": "Ви успішно відновили резервну копію",
+            "body": "Тепер ви можете налаштувати свій новий гаманець."
         },
         "migrate": {
-            "title": "Migrate your funds",
-            "body_1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
-            "new": "Your new wallet"
+            "title": "Перенести свої кошти",
+            "body_1": "Це автоматичний процес перенесення ваших коштів на новий гаманець. Ми перевіримо витрачені адреси, що послаблюють вашу безпеку.",
+            "body_2": "Це може зайняти деякий час. Не вимикайте пристрій під час міграції.",
+            "existing": "Ваш старий гаманець",
+            "new": "Ваш новий гаманець"
         },
         "migrate_failed": {
             "title": "To do",
@@ -246,27 +246,27 @@
         "try_again": "Try again",
         "visit_discord": "Visit Discord",
         "drag_drop": "Drag & Drop",
-        "import_extentions": ".stronghold or .kdbx file",
-        "choose_file": "Choose a File",
-        "drop_here": "Drop your file here"
+        "import_extentions": ".stronghold або .kdbx file",
+        "choose_file": "Обрати файл",
+        "drop_here": "Перетягніть файл сюди"
     },
     "general": {
-        "password": "Password",
-        "confirm_password": "Confirm password",
-        "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
-        "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
-        "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "transfer_between_accounts": "Transfer Between Accounts",
-        "move_funds_between_accounts": "Move funds between your Accounts",
-        "account": "Account",
-        "sending_to_address": "Sending to address",
-        "amount": "Amount",
-        "add_address": "Add Address",
+        "password": "Пароль",
+        "confirm_password": "Підтвердити пароль",
+        "your_seed": "Ваш Seed",
+        "recovery_phrase": "Фраза відновлення",
+        "recent_activity": "Останні дії",
+        "sent": "Надіслано",
+        "received": "Отримано",
+        "send_funds": "Відправити кошти",
+        "send_to_address": "Відправити на адресу",
+        "scan_qr_or_paste": "Скануйте QR код або вставте адресу",
+        "transfer_between_accounts": "Переказ між рахунками",
+        "move_funds_between_accounts": "Переміщуйте кошти між своїми рахунками",
+        "account": "Обліковий запис",
+        "sending_to_address": "Відправити на адресу",
+        "amount": "Сума",
+        "add_address": "Додати адресу",
         "reference": "Reference",
         "from": "From",
         "to": "To",
