@@ -130,7 +130,7 @@ checksum = "cdcf67bb7ba7797a081cd19009948ab533af7c355d5caf1d08c777582d351e9c"
 [[package]]
 name = "bee-common"
 version = "0.1.1-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#a708a7b2c3df977e2c10dfd6832c580df901383b"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#5f2b7b49f8daf266e9ba1624a872733c32194750"
 dependencies = [
  "async-trait",
  "bee-common 0.1.1-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
@@ -184,7 +184,7 @@ dependencies = [
 [[package]]
 name = "bee-message"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#a708a7b2c3df977e2c10dfd6832c580df901383b"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#5f2b7b49f8daf266e9ba1624a872733c32194750"
 dependencies = [
  "bech32",
  "bee-common 0.1.1-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
@@ -201,7 +201,7 @@ dependencies = [
 [[package]]
 name = "bee-pow"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#a708a7b2c3df977e2c10dfd6832c580df901383b"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#5f2b7b49f8daf266e9ba1624a872733c32194750"
 dependencies = [
  "bee-common 0.1.1-alpha (git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2)",
  "bee-crypto",
@@ -244,7 +244,7 @@ dependencies = [
 [[package]]
 name = "bee-storage"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#a708a7b2c3df977e2c10dfd6832c580df901383b"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#5f2b7b49f8daf266e9ba1624a872733c32194750"
 dependencies = [
  "async-trait",
  "futures 0.3.8",
@@ -1226,7 +1226,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#536b4e93411cb7037206cebbab8279a366849fea"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#878e221b9cdf97153e0b64e09ef8fea8fabe4f46"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -1243,6 +1243,7 @@ dependencies = [
  "hmac 0.7.1",
  "iota-core",
  "iota-stronghold",
+ "log",
  "once_cell",
  "pbkdf2",
  "rand 0.3.23",
@@ -2747,6 +2748,7 @@ checksum = "b5a972e5669d67ba988ce3dc826706fb0a8b01471c088cb0b6110b805cc36aed"
 name = "wallet-actor-system"
 version = "0.1.0"
 dependencies = [
+ "iota-core",
  "iota-wallet",
  "once_cell",
  "riker",

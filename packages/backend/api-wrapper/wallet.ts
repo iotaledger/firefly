@@ -1,6 +1,17 @@
 import { AccountIdentifier } from './account'
 import { Bridge } from './bridge'
-import { Message, Transfer } from './message'
+import { Transfer } from './message'
+
+export interface LoggerOutput {
+  name?: string
+  level_filter: 'off' | 'error' | 'warn' | 'info' | 'debug' | 'trace'
+  target_filters?: string[]
+}
+
+export interface LoggerConfig {
+  color_enabled?: boolean
+  outputs?: LoggerOutput[]
+}
 
 export function backup(bridge: Bridge, __id: string, destinationPath: string) {
   return bridge({
