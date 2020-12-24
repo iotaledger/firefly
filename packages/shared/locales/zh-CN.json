@@ -55,14 +55,14 @@
         },
         "backup": {
             "title": "备份你的钱包",
-            "body_1": "您现在将看到一个恢复短语。",
-            "body_2": "请不要将此短语分享给任何人。您的恢复短语可以用来从任何地方访问您的令牌。",
-            "body_3": "如果您丢失了恢复短语，您很可能会丢失您的资金。"
+            "body_1": "您现在将看到一个恢复密语。",
+            "body_2": "请不要将此密语分享给任何人。您的恢复密语可以用来从任何地方访问您的令牌。",
+            "body_3": "如果您丢失了恢复密语，您很可能会丢失您的资金。"
         },
         "recovery_phrase": {
-            "title": "恢复短语",
+            "title": "恢复密语",
             "body_1": "请仔细按正确的顺序写下这些单词。",
-            "body_2": "请私密地保管好您的恢复短语并安全存储。不要与任何人共享它。"
+            "body_2": "请秘密地保管好您的恢复密语并安全存储。不要与任何人共享它。"
         },
         "verify_recovery_phrase": {
             "title": "验证恢复密语",
@@ -82,20 +82,20 @@
         },
         "import": {
             "title": "导入钱包",
-            "body": "如果您已有恢复短语或是Stronghold的备份文件，您可以在此处导入。"
+            "body": "如果您已有恢复恢复或是Stronghold的备份文件，您可以在此处导入。"
         },
         "import_from_text": {
-            "title": "用恢复短语或种子恢复你的钱包",
-            "body_1": "恢复短语长度为24个单词。这个短语可用于恢复已有的Firefly钱包。",
+            "title": "用恢复恢复或种子恢复你的钱包",
+            "body_1": "恢复密语长度为24个单词。这个短语可用于恢复已有的Firefly钱包。",
             "body_2": "种子由81个字符组成。它用于从旧的 Trinity 钱包中恢复。",
-            "body_3": "请输入您的种子或恢复短语"
+            "body_3": "请输入您的种子或恢复密语"
         },
         "import_from_file": {
             "title": "从备份文件恢复你的钱包",
-            "body": "导入备份文件以恢复您的钱包。备份可以是 Stronghold (.stronghold) 或 Trinity SeedVault (.kdbx)."
+            "body": "导入备份文件以恢复您的钱包。备份可以是 Stronghold (.stronghold) 或 Trinity SeedVault (.kdbx)格式。"
         },
         "import_backup_password": {
-            "title": "从种子保险库或Stronghold文件恢复你的钱包",
+            "title": "从SeedVault或Stronghold文件恢复你的钱包",
             "body_1": "请输入您的备份密码。",
             "body_2": "这是您首次创建备份时设置的密码。"
         },
@@ -157,59 +157,59 @@
                 "description": "Temp"
             },
             "exportStronghold": {
-                "title": "Export Stronghold",
+                "title": "导出到Stronghold",
                 "description": "Temp"
             },
             "appLock": {
-                "title": "App Lock",
+                "title": "应用锁定",
                 "description": "Temp"
             },
             "changePassword": {
-                "title": "Change Password",
+                "title": "修改密码",
                 "description": "Temp"
             },
             "resyncAccounts": {
-                "title": "Resync Accounts",
+                "title": "重新同步账户",
                 "description": "Temp"
             },
             "resetWallet": {
-                "title": "Reset Wallet",
+                "title": "重置钱包",
                 "description": "Temp"
             },
             "deepLinks": {
-                "title": "Deep Links",
+                "title": "深链接",
                 "description": "Temp"
             },
             "developerMode": {
-                "title": "Developer Mode",
+                "title": "开发者模式",
                 "description": "Temp"
             },
             "nodeSettings": {
-                "title": "Node Settings",
+                "title": "节点设置",
                 "description": "Temp"
             },
             "proofOfWork": {
-                "title": "Proof of Work",
+                "title": "工作量证明",
                 "description": "Temp"
             },
             "errorLog": {
-                "title": "Error Log",
+                "title": "错误日志",
                 "description": "Temp"
             },
             "stateExport": {
-                "title": "State Export",
+                "title": "状态导出",
                 "description": "Temp"
             },
             "troubleshoot": {
-                "title": "Troubleshoot",
+                "title": "故障排除",
                 "description": "Temp"
             },
             "documentation": {
-                "title": "Documentation",
+                "title": "文档",
                 "description": "Temp"
             },
             "faq": {
-                "title": "FAQ",
+                "title": "常见问题",
                 "description": "Temp"
             },
             "discord": {
@@ -217,77 +217,77 @@
                 "description": "Temp"
             },
             "about": {
-                "title": "About",
+                "title": "关于",
                 "description": "Temp"
             }
         }
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
+        "continue": "继续",
+        "back": "返回",
+        "import_seed": "导入已有的种子",
+        "import_wallet": "导入现有钱包",
+        "create_wallet": "创建新钱包",
+        "save_password": "保存密码",
+        "use_biometric": "使用生物特征安全机制",
         "setup_pin": "设置PIN码",
-        "set_pin": "Set PIN code",
-        "confirm_pin": "Confirm PIN code",
-        "save_backup_file": "Save backup file",
-        "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
+        "set_pin": "设置PIN码",
+        "confirm_pin": "确认PIN码",
+        "save_backup_file": "保存备份文件",
+        "ive_written_recovery_phrase": "我已经写下我的恢复短语",
         "verify_recovery_phrase": "验证恢复密语",
-        "reveal_recovery_phrase": "Reveal recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
-        "visit_discord": "Visit Discord",
-        "drag_drop": "Drag & Drop",
-        "import_extentions": ".stronghold or .kdbx file",
-        "choose_file": "Choose a File",
-        "drop_here": "Drop your file here"
+        "reveal_recovery_phrase": "显示恢复密语",
+        "import_seedvault": "导入SeedVault",
+        "check_again": "不，再次检查",
+        "import_from_file": "从文件导入",
+        "send": "发送",
+        "receive": "接收",
+        "begin_transfer": "开始传输",
+        "try_again": "重试",
+        "visit_discord": "访问 Discord",
+        "drag_drop": "拖放",
+        "import_extentions": ".surhold 或 .kdbx 文件",
+        "choose_file": "选择一个文件",
+        "drop_here": "将您的文件拖放至此处"
     },
     "general": {
-        "password": "Password",
-        "confirm_password": "Confirm password",
-        "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
-        "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
-        "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "transfer_between_accounts": "Transfer Between Accounts",
-        "move_funds_between_accounts": "Move funds between your Accounts",
-        "account": "Account",
-        "sending_to_address": "Sending to address",
-        "amount": "Amount",
-        "add_address": "Add Address",
-        "reference": "Reference",
-        "from": "From",
-        "to": "To",
-        "receive_funds": "Receive funds",
-        "share_address": "Share an address",
-        "your_address": "Your address",
-        "generate_new_address": "Generate new address",
-        "have_text_backup": "I have a text backup",
-        "have_file_backup": "I have a file backup",
-        "enter_seed_or_phrase": "Enter a recovery phrase or seed",
-        "upload_seedvault_or_stronghold": "Import a Stronghold or SeedVault file",
-        "import": "Import",
+        "password": "密码",
+        "confirm_password": "确认密码",
+        "your_seed": "你的种子",
+        "recovery_phrase": "恢复密语",
+        "recent_activity": "最新活动",
+        "sent": "已发送",
+        "received": "已收到",
+        "send_funds": "资金转账",
+        "send_to_address": "发送至地址",
+        "scan_qr_or_paste": "扫描二维码或粘贴地址",
+        "transfer_between_accounts": "账户之间的转移",
+        "move_funds_between_accounts": "在您的账户之间移动资金",
+        "account": "账号",
+        "sending_to_address": "发送至地址",
+        "amount": "金额",
+        "add_address": "新增地址",
+        "reference": "使用指南",
+        "from": "从",
+        "to": "到",
+        "receive_funds": "接收资金",
+        "share_address": "分享地址",
+        "your_address": "您的地址",
+        "generate_new_address": "生成新地址",
+        "have_text_backup": "我有一个文本备份",
+        "have_file_backup": "我有一个文本备份",
+        "enter_seed_or_phrase": "输入恢复密语或种子",
+        "upload_seedvault_or_stronghold": "导入Strong或 SeedVault 文件",
+        "import": "导入",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
-        "language": "Language",
-        "appearance": "Appearance",
-        "light_theme": "Light theme",
-        "dark_theme": "Dark theme",
-        "total_balance": "Total Balance",
-        "incoming": "Incoming",
-        "outgoing": "Outgoing",
-        "accounts": "Accounts"
+        "language": "语言",
+        "appearance": "外观",
+        "light_theme": "浅色主题",
+        "dark_theme": "深色主题",
+        "total_balance": "总余额",
+        "incoming": "收到",
+        "outgoing": "转出",
+        "accounts": "帐户"
     }
 }
