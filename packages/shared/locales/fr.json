@@ -37,7 +37,7 @@
         },
         "password": {
             "title": "Créer un mot de passe",
-            "body": "You will be asked to enter your password to send tokens from your wallet. You need a strong password to protect your funds."
+            "body": "Il vous sera demandé d'entrer votre mot de passe pour envoyer des jetons depuis votre portefeuille. Vous avez besoin d'un mot de passe fort pour protéger vos fonds."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -277,7 +277,7 @@
         "have_text_backup": "J'ai un texte de sauvegarde",
         "have_file_backup": "J'ai un fichier de sauvegarde",
         "enter_seed_or_phrase": "Entrez une phrase de récupération ou une phrase du germe aléatoire (seed)",
-        "upload_seedvault_or_stronghold": "Import a Stronghold or SeedVault file",
+        "upload_seedvault_or_stronghold": "Importer un fichier Stronghold ou SeedVault",
         "import": "Importer",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
