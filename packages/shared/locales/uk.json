@@ -5,7 +5,7 @@
             "body": "Firefly це безпечний і легкий у використанні IOTA гаманець."
         },
         "legal": {
-            "title": "Legal",
+            "title": "Правовий",
             "body": "Будь ласка, ознайомтеся з Політикою конфіденційності та Умовами надання послуг.",
             "privacy_policy": {
                 "title": "Політика конфіденційності",
@@ -115,101 +115,101 @@
             "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "Ваш баланс",
+            "body": "Ваш баланс правильний?"
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "Налаштування",
             "generalSettings": {
-                "title": "General Settings",
+                "title": "Загальні налаштування",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "security": {
-                "title": "Security",
+                "title": "Безпека",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
+                "title": "Розширені налаштування",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Help and Information",
+                "title": "Довідка та інформація",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profileDetails": {
-                "title": "Profile Details",
+                "title": "Деталі профілю",
                 "description": "Temp"
             },
             "theme": {
-                "title": "Theme",
+                "title": "Тема",
                 "description": "Temp"
             },
             "language": {
-                "title": "Language",
+                "title": "Мова",
                 "description": "Temp"
             },
             "currency": {
-                "title": "Currency",
+                "title": "Валюта",
                 "description": "Temp"
             },
             "notifications": {
-                "title": "Notifications",
+                "title": "Сповіщення",
                 "description": "Temp"
             },
             "exportStronghold": {
-                "title": "Export Stronghold",
+                "title": "Експорт Stronghold",
                 "description": "Temp"
             },
             "appLock": {
-                "title": "App Lock",
+                "title": "Блокування програми",
                 "description": "Temp"
             },
             "changePassword": {
-                "title": "Change Password",
+                "title": "Змінити пароль",
                 "description": "Temp"
             },
             "resyncAccounts": {
-                "title": "Resync Accounts",
+                "title": "Повторна синхронізація облікових записів",
                 "description": "Temp"
             },
             "resetWallet": {
-                "title": "Reset Wallet",
+                "title": "Скинути налаштування гаманця",
                 "description": "Temp"
             },
             "deepLinks": {
-                "title": "Deep Links",
+                "title": "Глибокі посилання",
                 "description": "Temp"
             },
             "developerMode": {
-                "title": "Developer Mode",
+                "title": "Режим розробника",
                 "description": "Temp"
             },
             "nodeSettings": {
-                "title": "Node Settings",
+                "title": "Налаштування вузла",
                 "description": "Temp"
             },
             "proofOfWork": {
-                "title": "Proof of Work",
+                "title": "Доказ роботи",
                 "description": "Temp"
             },
             "errorLog": {
-                "title": "Error Log",
+                "title": "Журнал помилок",
                 "description": "Temp"
             },
             "stateExport": {
-                "title": "State Export",
+                "title": "Експорт стану",
                 "description": "Temp"
             },
             "troubleshoot": {
-                "title": "Troubleshoot",
+                "title": "Виправлення помилок",
                 "description": "Temp"
             },
             "documentation": {
-                "title": "Documentation",
+                "title": "Документація",
                 "description": "Temp"
             },
             "faq": {
-                "title": "FAQ",
+                "title": "Питання, що часто ставляться",
                 "description": "Temp"
             },
             "discord": {
@@ -217,35 +217,35 @@
                 "description": "Temp"
             },
             "about": {
-                "title": "About",
+                "title": "Про програму",
                 "description": "Temp"
             }
         }
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
+        "continue": "Продовжити",
+        "back": "Назад",
+        "import_seed": "Імпортувати існуючий seed",
+        "import_wallet": "Імпортувати існуючий гаманець",
+        "create_wallet": "Створити новий гаманець",
+        "save_password": "Зберегти пароль",
+        "use_biometric": "Використовувати біометричний захист",
         "setup_pin": "Встановіть PIN-код",
-        "set_pin": "Set PIN code",
-        "confirm_pin": "Confirm PIN code",
-        "save_backup_file": "Save backup file",
-        "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
+        "set_pin": "Встановіть PIN-код",
+        "confirm_pin": "Підтвердьте PIN-код",
+        "save_backup_file": "Збережіть файл резервної копії",
+        "ive_written_recovery_phrase": "Я записав свою фразу для відновлення",
         "verify_recovery_phrase": "Перевірте фразу відновлення",
-        "reveal_recovery_phrase": "Reveal recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
-        "visit_discord": "Visit Discord",
-        "drag_drop": "Drag & Drop",
+        "reveal_recovery_phrase": "Перевірте фразу відновлення",
+        "import_seedvault": "Імпорт SeedVault",
+        "check_again": "Ні, перевірити ще раз",
+        "import_from_file": "Імпортувати з файлу",
+        "send": "Надіслати",
+        "receive": "Отримати",
+        "begin_transfer": "Почати відправку",
+        "try_again": "Повторити",
+        "visit_discord": "Відвідати Discord",
+        "drag_drop": "Перетягнути і відпустити",
         "import_extentions": ".stronghold або .kdbx file",
         "choose_file": "Обрати файл",
         "drop_here": "Перетягніть файл сюди"
@@ -267,27 +267,27 @@
         "sending_to_address": "Відправити на адресу",
         "amount": "Сума",
         "add_address": "Додати адресу",
-        "reference": "Reference",
-        "from": "From",
-        "to": "To",
-        "receive_funds": "Receive funds",
-        "share_address": "Share an address",
-        "your_address": "Your address",
-        "generate_new_address": "Generate new address",
-        "have_text_backup": "I have a text backup",
-        "have_file_backup": "I have a file backup",
-        "enter_seed_or_phrase": "Enter a recovery phrase or seed",
-        "upload_seedvault_or_stronghold": "Import a Stronghold or SeedVault file",
-        "import": "Import",
+        "reference": "Посилання",
+        "from": "Звідки",
+        "to": "Кому",
+        "receive_funds": "Отримати кошти",
+        "share_address": "Поділитися адресою",
+        "your_address": "Ваша адреса",
+        "generate_new_address": "Згенерувати нову адресу",
+        "have_text_backup": "Я маю текстову резервну копію",
+        "have_file_backup": "Я маю файл backup",
+        "enter_seed_or_phrase": "Введіть фразу відновлення або seed",
+        "upload_seedvault_or_stronghold": "Імпортувати файл Stronghold або SeedVault file",
+        "import": "Імпортувати",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
-        "language": "Language",
-        "appearance": "Appearance",
-        "light_theme": "Light theme",
-        "dark_theme": "Dark theme",
-        "total_balance": "Total Balance",
-        "incoming": "Incoming",
-        "outgoing": "Outgoing",
-        "accounts": "Accounts"
+        "language": "Мова",
+        "appearance": "Оформлення",
+        "light_theme": "Світлий фон",
+        "dark_theme": "Темний фон",
+        "total_balance": "Загальний баланс",
+        "incoming": "Вхідні",
+        "outgoing": "Вихідні",
+        "accounts": "Аккаунт"
     }
 }
