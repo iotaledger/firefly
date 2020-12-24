@@ -161,7 +161,7 @@
                 "description": "Temp"
             },
             "appLock": {
-                "title": "Bloqueo de Aplicación",
+                "title": "Bloqueo App",
                 "description": "Temp"
             },
             "changePassword": {
