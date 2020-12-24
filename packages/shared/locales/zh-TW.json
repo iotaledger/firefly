@@ -5,7 +5,7 @@
             "body": "Firefly 是一個「安全」且「簡單易用」的IOTA錢包"
         },
         "legal": {
-            "title": "Legal",
+            "title": "法律聲明",
             "body": "請仔細檢閱「隱私權政策」與「服務條款」",
             "privacy_policy": {
                 "title": "隱私權政策",
@@ -37,7 +37,7 @@
         },
         "password": {
             "title": "建立密碼",
-            "body": "You will be asked to enter your password to send tokens from your wallet. You need a strong password to protect your funds."
+            "body": "發送代幣前必須輸入密碼，您需要一個強的密碼來保障代幣安全"
         },
         "protect": {
             "title": "Protect your wallet",
@@ -46,22 +46,22 @@
         },
         "pin": {
             "title": "設置 PIN 碼",
-            "body_1": "Enter a 6-digit PIN below. You will be asked to enter your pin to login to your wallet.",
+            "body_1": "請在下方輸入 6個數字 以當作您的 PIN 碼。之後都需要這個 PIN 碼來登入錢包！",
             "body_2": "這裡只能填入數字"
         },
         "confirm_pin": {
-            "title": "Verify your PIN code",
-            "body": "Re-enter your PIN code to proceed."
+            "title": "驗證您的 PIN 碼",
+            "body": "重新輸入您的 PIN 碼以繼續操作"
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body_1": "You will now be shown a recovery phrase.",
-            "body_2": "Do not share this phrase with anyone. Your recovery phrase can be used to access your tokens from anywhere.",
-            "body_3": "If you lose your recovery phrase, you may lose your funds."
+            "title": "備份您的錢包",
+            "body_1": "此時您會看到一組復原詞",
+            "body_2": "復原詞可以用來在任何地方存取您的代幣，請問將其分享給其他人",
+            "body_3": "一旦復原詞遺失，您的代幣也會遺失"
         },
         "recovery_phrase": {
-            "title": "Recovery phrase",
-            "body_1": "Carefully write down the words in the exact order.",
+            "title": "註記詞",
+            "body_1": "請仔細的按照順序寫下這些詞",
             "body_2": "Keep your recovery phrase private and safely stored. Do not share it with anyone."
         },
         "verify_recovery_phrase": {
@@ -145,7 +145,7 @@
                 "description": "Temp"
             },
             "language": {
-                "title": "Language",
+                "title": "語言",
                 "description": "Temp"
             },
             "currency": {
@@ -185,15 +185,15 @@
                 "description": "Temp"
             },
             "nodeSettings": {
-                "title": "Node Settings",
+                "title": "節點設定",
                 "description": "Temp"
             },
             "proofOfWork": {
-                "title": "Proof of Work",
+                "title": "工作量證明",
                 "description": "Temp"
             },
             "errorLog": {
-                "title": "Error Log",
+                "title": "錯誤日誌",
                 "description": "Temp"
             },
             "stateExport": {
@@ -209,7 +209,7 @@
                 "description": "Temp"
             },
             "faq": {
-                "title": "FAQ",
+                "title": "常見問題",
                 "description": "Temp"
             },
             "discord": {
@@ -217,22 +217,22 @@
                 "description": "Temp"
             },
             "about": {
-                "title": "About",
+                "title": "關於",
                 "description": "Temp"
             }
         }
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
+        "continue": "繼續",
+        "back": "返回",
         "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
+        "import_wallet": "匯入現有錢包",
+        "create_wallet": "建立新錢包",
+        "save_password": "儲存密碼",
         "use_biometric": "Use biometric security",
         "setup_pin": "設置 PIN 碼",
-        "set_pin": "Set PIN code",
-        "confirm_pin": "Confirm PIN code",
+        "set_pin": "設置 PIN 碼",
+        "confirm_pin": "確認 PIN 碼",
         "save_backup_file": "Save backup file",
         "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
         "verify_recovery_phrase": "Verify recovery phrase",
@@ -247,47 +247,47 @@
         "visit_discord": "Visit Discord",
         "drag_drop": "Drag & Drop",
         "import_extentions": ".stronghold or .kdbx file",
-        "choose_file": "Choose a File",
-        "drop_here": "Drop your file here"
+        "choose_file": "選擇一個檔案",
+        "drop_here": "將檔案拖至此處"
     },
     "general": {
-        "password": "Password",
-        "confirm_password": "Confirm password",
+        "password": "密碼",
+        "confirm_password": "確認密碼",
         "your_seed": "Your Seed",
         "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
+        "recent_activity": "近期活動",
+        "sent": "已支出",
+        "received": "已接收",
         "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
-        "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "transfer_between_accounts": "Transfer Between Accounts",
-        "move_funds_between_accounts": "Move funds between your Accounts",
-        "account": "Account",
-        "sending_to_address": "Sending to address",
-        "amount": "Amount",
-        "add_address": "Add Address",
-        "reference": "Reference",
-        "from": "From",
-        "to": "To",
-        "receive_funds": "Receive funds",
-        "share_address": "Share an address",
-        "your_address": "Your address",
-        "generate_new_address": "Generate new address",
+        "send_to_address": "傳送到地址",
+        "scan_qr_or_paste": "掃描QR碼 或 貼上地址",
+        "transfer_between_accounts": "在帳戶間轉移",
+        "move_funds_between_accounts": "在在帳戶間轉移資產",
+        "account": "帳戶",
+        "sending_to_address": "正傳送到地址",
+        "amount": "數量",
+        "add_address": "添加地址",
+        "reference": "參照",
+        "from": "由",
+        "to": "至",
+        "receive_funds": "接收資產",
+        "share_address": "分享地址",
+        "your_address": "您的地址",
+        "generate_new_address": "產生新地址",
         "have_text_backup": "I have a text backup",
         "have_file_backup": "I have a file backup",
         "enter_seed_or_phrase": "Enter a recovery phrase or seed",
         "upload_seedvault_or_stronghold": "Import a Stronghold or SeedVault file",
-        "import": "Import",
+        "import": "導入",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
-        "language": "Language",
-        "appearance": "Appearance",
-        "light_theme": "Light theme",
-        "dark_theme": "Dark theme",
-        "total_balance": "Total Balance",
+        "language": "語言",
+        "appearance": "界面外觀",
+        "light_theme": "淺色主題",
+        "dark_theme": "深色主題",
+        "total_balance": "總額",
         "incoming": "Incoming",
         "outgoing": "Outgoing",
-        "accounts": "Accounts"
+        "accounts": "帳戶"
     }
 }
