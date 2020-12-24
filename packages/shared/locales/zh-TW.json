@@ -277,7 +277,7 @@
         "have_text_backup": "我有文字備份",
         "have_file_backup": "我有檔案備份",
         "enter_seed_or_phrase": "輸入恢復詞組或種子",
-        "upload_seedvault_or_stronghold": "匯入 SeedVault 或 SeedVault 檔案",
+        "upload_seedvault_or_stronghold": "匯入 Stronghold 或 SeedVault 檔案",
         "import": "匯入",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
