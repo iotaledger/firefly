@@ -1,14 +1,14 @@
 {
     "views": {
         "onboarding_1": {
-            "title": "Send, Receive & Manage your IOTA",
-            "body": "Firefly is a secure and easy-to-use IOTA wallet."
+            "title": "Отправляйте, получайте и управляйте вашей IOTA",
+            "body": "Firefly - это безопасный и легкий в использовании кошелек IOTA."
         },
         "legal": {
-            "title": "Legal",
-            "body": "Please review the Privacy Policy and Terms of Service.",
+            "title": "Правила",
+            "body": "Пожалуйста, ознакомьтесь с Политикой конфиденциальности и Условиями обслуживания.",
             "privacy_policy": {
-                "title": "Privacy Policy",
+                "title": "Политика конфиденциальности",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -17,7 +17,7 @@
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "terms_of_service": {
-                "title": "Terms of Service",
+                "title": "Условия обслуживания",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -28,16 +28,16 @@
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
         "language": {
-            "title": "Language & appearance",
-            "body": "Choose your wallet’s language and theme"
+            "title": "Язык и оформление",
+            "body": "Выберите язык и внешний вид вашего кошелька"
         },
         "setup": {
-            "title": "Set up your wallet",
-            "body": "You can create a new wallet or import an existing one."
+            "title": "Настройте ваш кошелек",
+            "body": "Вы можете создать новый кошелек или импортировать существующий."
         },
         "password": {
-            "title": "Create a password",
-            "body": "You will be asked to enter your password to send tokens from your wallet. You need a strong password to protect your funds."
+            "title": "Придумайте пароль",
+            "body": "Вам будет предложено ввести пароль для отправки токенов. Вам нужен надежный пароль, чтобы защитить ваши средства."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -45,28 +45,28 @@
             "body_2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Set up PIN code",
-            "body_1": "Enter a 6-digit PIN below. You will be asked to enter your pin to login to your wallet.",
-            "body_2": "You can use numbers only."
+            "title": "Задайте PIN-код",
+            "body_1": "Введите 6-значный PIN-код ниже. Вам будет необходимо ввести PIN-код для входа в ваш кошелек.",
+            "body_2": "Вы можете использовать только цифры."
         },
         "confirm_pin": {
-            "title": "Verify your PIN code",
-            "body": "Re-enter your PIN code to proceed."
+            "title": "Подтвердите PIN-код",
+            "body": "Повторно введите PIN-код для продолжения."
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body_1": "You will now be shown a recovery phrase.",
-            "body_2": "Do not share this phrase with anyone. Your recovery phrase can be used to access your tokens from anywhere.",
-            "body_3": "If you lose your recovery phrase, you may lose your funds."
+            "title": "Сделайте резервную копию вашего кошелька",
+            "body_1": "Сейчас вам будет показана фраза восстановления.",
+            "body_2": "Не передавайте эту фразу никому. Ваша фраза восстановления может быть использована для доступа к токенам отовсюду.",
+            "body_3": "Если вы потеряете фразу восстановления, вы можете потерять свои средства."
         },
         "recovery_phrase": {
-            "title": "Recovery phrase",
-            "body_1": "Carefully write down the words in the exact order.",
-            "body_2": "Keep your recovery phrase private and safely stored. Do not share it with anyone."
+            "title": "Фраза восстановления",
+            "body_1": "Внимательно запишите слова в точном порядке.",
+            "body_2": "Держите вашу фразу восстановления в недоступном для других, безопасном месте. Не передавайте ее никому."
         },
         "verify_recovery_phrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Select the words in the correct order."
+            "title": "Проверьте фразу восстановления",
+            "body": "Давайте проверим, что вы записали фразу правильно. Выберите слова в правильном порядке."
         },
         "backup_wallet": {
             "title": "Back up to a Stronghold file",
@@ -230,12 +230,12 @@
         "create_wallet": "Create new wallet",
         "save_password": "Save password",
         "use_biometric": "Use biometric security",
-        "setup_pin": "Set up PIN code",
+        "setup_pin": "Задайте PIN-код",
         "set_pin": "Set PIN code",
         "confirm_pin": "Confirm PIN code",
         "save_backup_file": "Save backup file",
         "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
-        "verify_recovery_phrase": "Verify recovery phrase",
+        "verify_recovery_phrase": "Проверьте фразу восстановления",
         "reveal_recovery_phrase": "Reveal recovery phrase",
         "import_seedvault": "Import SeedVault",
         "check_again": "No, Check Again",
