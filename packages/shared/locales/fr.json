@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding_1": {
-            "title": "Envoyer, recevoir et gérer vos IOTA",
+            "title": "Envoyer, Recevoir & Gérer vos IOTA",
             "body": "Firefly est un portefeuille IOTA sécurisé et facile à utiliser."
         },
         "legal": {
@@ -37,7 +37,7 @@
         },
         "password": {
             "title": "Créer un mot de passe",
-            "body": "Il vous sera demandé de saisir votre mot de passe pour envoyer des jetons depuis votre portefeuille. Vous avez besoin d'un mot de passe fort pour protéger vos fonds."
+            "body": "Il vous sera demandé de saisir votre mot de passe pour envoyer des jetons depuis votre portefeuille. Un mot de passe fort est nécessaire pour protéger vos fonds."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -45,7 +45,7 @@
             "body_2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Définir le code PIN",
+            "title": "Configurer le code PIN",
             "body_1": "Saisissez ci-dessous un code PIN à 6 chiffres. Il vous sera demandé de saisir votre code PIN pour vous connecter à votre portefeuille.",
             "body_2": "Vous ne pouvez utiliser que des chiffres."
         },
@@ -62,7 +62,7 @@
         "recovery_phrase": {
             "title": "Phrase de récupération",
             "body_1": "Notez soigneusement les mots dans l'ordre exact.",
-            "body_2": "Gardez votre phrase de récupération secrète et stockée en toute sécurité. Ne la partagez avec personne."
+            "body_2": "Gardez secrète votre phrase de récupération et stockez-la de manière sécurisée. Ne la partagez avec personne."
         },
         "verify_recovery_phrase": {
             "title": "Vérifier la phrase de récupération",
@@ -78,16 +78,16 @@
         },
         "congratulations": {
             "title": "Félicitations",
-            "body": "Vous pouvez utiliser votre portefeuille."
+            "body": "Vous pouvez maintenant utiliser votre portefeuille."
         },
         "import": {
             "title": "Importer un portefeuille",
             "body": "Si vous avez une phrase de récupération ou une sauvegarde Stronghold, vous pouvez l'importer ici."
         },
         "import_from_text": {
-            "title": "Restaurez votre portefeuille avec une phrase de récupération ou un germe aléatoire (seed)",
+            "title": "Restaurez votre portefeuille avec une phrase de récupération ou une seed",
             "body_1": "Une phrase de récupération est composée de 24 mots. Elle est utilisée pour récupérer un portefeuille Firefly existant.",
-            "body_2": "Un germe aléatoire (seed) est composé de 81 caractères. Il est utilisé pour importer un portefeuille Trinity.",
+            "body_2": "Une seed est composée de 81 caractères. Elle est utilisée pour importer un ancien portefeuille Trinity.",
             "body_3": "Saisissez votre seed ou votre phrase de récupération"
         },
         "import_from_file": {
@@ -161,19 +161,19 @@
                 "description": "Temp"
             },
             "appLock": {
-                "title": "Verrouillage de l'application",
+                "title": "Verrouillage de l'Application",
                 "description": "Temp"
             },
             "changePassword": {
-                "title": "Modifier le mot de passe",
+                "title": "Modifier le Mot de passe",
                 "description": "Temp"
             },
             "resyncAccounts": {
-                "title": "Resynchroniser les comptes",
+                "title": "Resynchroniser les Comptes",
                 "description": "Temp"
             },
             "resetWallet": {
-                "title": "Réinitialiser Portefeuille",
+                "title": "Réinitialiser le Portefeuille",
                 "description": "Temp"
             },
             "deepLinks": {
@@ -185,7 +185,7 @@
                 "description": "Temp"
             },
             "nodeSettings": {
-                "title": "Réglages Noeud",
+                "title": "Réglages du Noeud",
                 "description": "Temp"
             },
             "proofOfWork": {
@@ -193,11 +193,11 @@
                 "description": "Temp"
             },
             "errorLog": {
-                "title": "Journal d'Erreurs",
+                "title": "Journal des Erreurs",
                 "description": "Temp"
             },
             "stateExport": {
-                "title": "Exportation d'État",
+                "title": "Export de l'État",
                 "description": "Temp"
             },
             "troubleshoot": {
@@ -236,7 +236,7 @@
         "save_backup_file": "Enregistrer le fichier de sauvegarde",
         "ive_written_recovery_phrase": "J'ai noté ma phrase de récupération",
         "verify_recovery_phrase": "Vérifier la phrase de récupération",
-        "reveal_recovery_phrase": "Montrer la phrase de récupération",
+        "reveal_recovery_phrase": "Afficher la phrase de récupération",
         "import_seedvault": "Importer un SeedVault",
         "check_again": "Non, vérifier à nouveau",
         "import_from_file": "Importer à partir d''un fichier",
@@ -245,22 +245,22 @@
         "begin_transfer": "Démarrer le Transfert",
         "try_again": "Réessayez",
         "visit_discord": "Visitez Discord",
-        "drag_drop": "Glisser-déposer",
+        "drag_drop": "Glisser & Déposer",
         "import_extentions": "FIchier .stronghold ou .kdbx",
-        "choose_file": "Sélectionner un Fichier",
+        "choose_file": "Sélectionnez un Fichier",
         "drop_here": "Déposez votre fichier ici"
     },
     "general": {
         "password": "Mot de passe",
         "confirm_password": "Confirmer le mot de passe",
         "your_seed": "Votre Seed",
-        "recovery_phrase": "Phrase de récupération",
-        "recent_activity": "Activité récente",
+        "recovery_phrase": "Phrase de Récupération",
+        "recent_activity": "Activité Récente",
         "sent": "Envoyé",
         "received": "Reçu",
         "send_funds": "Envoyer des fonds",
         "send_to_address": "Envoyer à une Adresse",
-        "scan_qr_or_paste": "Scannez un code QR ou collez une Adresse",
+        "scan_qr_or_paste": "Scanner un QR code ou coller une Adresse",
         "transfer_between_accounts": "Transfert Entre Comptes",
         "move_funds_between_accounts": "Déplacer des fonds entre vos Comptes",
         "account": "Compte",
@@ -274,7 +274,7 @@
         "share_address": "Partager une adresse",
         "your_address": "Votre adresse",
         "generate_new_address": "Générer une nouvelle adresse",
-        "have_text_backup": "J'ai un texte de sauvegarde",
+        "have_text_backup": "J'ai une sauvegarde texte",
         "have_file_backup": "J'ai un fichier de sauvegarde",
         "enter_seed_or_phrase": "Saisissez une phrase de récupération ou une seed",
         "upload_seedvault_or_stronghold": "Importer un fichier Stronghold ou SeedVault",
@@ -283,8 +283,8 @@
         "stronghold": "Stronghold",
         "language": "Langue",
         "appearance": "Apparence",
-        "light_theme": "Thème clair",
-        "dark_theme": "Thème sombre",
+        "light_theme": "Thème Clair",
+        "dark_theme": "Thème Sombre",
         "total_balance": "Solde Total",
         "incoming": "Entrant",
         "outgoing": "Sortant",
