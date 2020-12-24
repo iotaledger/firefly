@@ -107,8 +107,8 @@
             "title": "Migrate your funds",
             "body_1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
             "body_2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
-            "new": "Your new wallet"
+            "existing": "आपका पराना वालेट",
+            "new": "आपका नए वालेट"
         },
         "migrate_failed": {
             "title": "To do",
@@ -116,20 +116,20 @@
         },
         "balance": {
             "title": "Your balance",
-            "body": "Is your balance correct?"
+            "body": "क्या आपका बैलेंस सही है?"
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "सैटिन्ग्स",
             "generalSettings": {
                 "title": "General Settings",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "security": {
-                "title": "Security",
+                "title": "सुरक्षा",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
+                "title": "उच्च सेटिंग्स",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
@@ -145,11 +145,11 @@
                 "description": "Temp"
             },
             "language": {
-                "title": "Language",
+                "title": "भाषा ",
                 "description": "Temp"
             },
             "currency": {
-                "title": "Currency",
+                "title": "मुद्रा",
                 "description": "Temp"
             },
             "notifications": {
@@ -185,7 +185,7 @@
                 "description": "Temp"
             },
             "nodeSettings": {
-                "title": "Node Settings",
+                "title": "नोड सेटिंग्स",
                 "description": "Temp"
             },
             "proofOfWork": {
@@ -193,11 +193,11 @@
                 "description": "Temp"
             },
             "errorLog": {
-                "title": "Error Log",
+                "title": "त्रुटि लॉग",
                 "description": "Temp"
             },
             "stateExport": {
-                "title": "State Export",
+                "title": "स्टेट एक्सपोर्ट",
                 "description": "Temp"
             },
             "troubleshoot": {
@@ -213,7 +213,7 @@
                 "description": "Temp"
             },
             "discord": {
-                "title": "Discord",
+                "title": "डिस्कोर्ड",
                 "description": "Temp"
             },
             "about": {
@@ -223,8 +223,8 @@
         }
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
+        "continue": "जारी रखें",
+        "back": "पीछे",
         "import_seed": "Import an existing seed",
         "import_wallet": "Import existing wallet",
         "create_wallet": "Create new wallet",
