@@ -91,125 +91,125 @@
             "body_3": "Adja meg a magértéket (seed) vagy a helyreállító kódmondatot"
         },
         "import_from_file": {
-            "title": "Restore your wallet from a backup file",
-            "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "Állítsa helyre kriptotárcáját biztonsági mentésből",
+            "body": "Kriptotárcája helyreállításához importáljon egy biztonsági mentést! A biztosnági mentés lehet egy Stronghold-fájl (.stronghold) vagy egy Trinity SeedVault-fájl (.kdbx)."
         },
         "import_backup_password": {
-            "title": "Restore your wallet from a SeedVault or Stronghold",
-            "body_1": "Please enter your backup password.",
-            "body_2": "This is the password you set when you first created your backup."
+            "title": "Állítsa helyre kriptotárcáját SeedVault- vagy Stronghold-fájlból",
+            "body_1": "Kérjük, adja meg a helyreállító jelszavát!",
+            "body_2": "Ez az a jelszó, amelyet a biztonsági mentés első létrehozásakor adott meg."
         },
         "import_success": {
-            "title": "You have successfully recovered your backup",
-            "body": "You can now set up your new wallet."
+            "title": "Sikeresen helyreállította kriptotárcáját a biztonsági mentésből",
+            "body": "Most már beállíthatja kriptotárcáját."
         },
         "migrate": {
-            "title": "Migrate your funds",
-            "body_1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
-            "new": "Your new wallet"
+            "title": "Egyenlegének átvezetése",
+            "body_1": "Ez egy automatizált folyamat, amely során egyenlege átvezetődik az új kriptotárcájába. Ellenőriznünk kell a már felhasznált címeket, amelyek csökkenthetik az ön biztonságát.",
+            "body_2": "Ez hosszabb időt vehet igénybe. Ne kapcsolja ki az eszközét, amíg az átvezetés be nem fejeződik.",
+            "existing": "Az ön régi kriptotárcája",
+            "new": "Az ön új kriptotárcája"
         },
         "migrate_failed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "Az ön egyenlege",
+            "body": "Helyes az egyenlege?"
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "Beállítások",
             "generalSettings": {
-                "title": "General Settings",
+                "title": "Általános beállítások",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "security": {
-                "title": "Security",
+                "title": "Biztonság",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
+                "title": "Haladó beállítások",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Help and Information",
+                "title": "Súgó és egyéb információk",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profileDetails": {
-                "title": "Profile Details",
+                "title": "Profiladatok",
                 "description": "Temp"
             },
             "theme": {
-                "title": "Theme",
+                "title": "Téma",
                 "description": "Temp"
             },
             "language": {
-                "title": "Language",
+                "title": "Nyelv",
                 "description": "Temp"
             },
             "currency": {
-                "title": "Currency",
+                "title": "Pénznem",
                 "description": "Temp"
             },
             "notifications": {
-                "title": "Notifications",
+                "title": "Értesítések",
                 "description": "Temp"
             },
             "exportStronghold": {
-                "title": "Export Stronghold",
+                "title": "Stronghold-fájl exportálása",
                 "description": "Temp"
             },
             "appLock": {
-                "title": "App Lock",
+                "title": "Alkalmazás lezárása",
                 "description": "Temp"
             },
             "changePassword": {
-                "title": "Change Password",
+                "title": "Jelszó módosítása",
                 "description": "Temp"
             },
             "resyncAccounts": {
-                "title": "Resync Accounts",
+                "title": "Számlák újraszinkronizálása",
                 "description": "Temp"
             },
             "resetWallet": {
-                "title": "Reset Wallet",
+                "title": "Kriptotárca alapállapotának visszaállítása",
                 "description": "Temp"
             },
             "deepLinks": {
-                "title": "Deep Links",
+                "title": "Mélyhivatkozások (Deep Links)",
                 "description": "Temp"
             },
             "developerMode": {
-                "title": "Developer Mode",
+                "title": "Fejlesztői mód",
                 "description": "Temp"
             },
             "nodeSettings": {
-                "title": "Node Settings",
+                "title": "Csomópont beállításai",
                 "description": "Temp"
             },
             "proofOfWork": {
-                "title": "Proof of Work",
+                "title": "Kiszabott munka elvégzése (PoW)",
                 "description": "Temp"
             },
             "errorLog": {
-                "title": "Error Log",
+                "title": "Hibanapló",
                 "description": "Temp"
             },
             "stateExport": {
-                "title": "State Export",
+                "title": "Adatmentés",
                 "description": "Temp"
             },
             "troubleshoot": {
-                "title": "Troubleshoot",
+                "title": "Hibaelhárítás",
                 "description": "Temp"
             },
             "documentation": {
-                "title": "Documentation",
+                "title": "Dokumentáció",
                 "description": "Temp"
             },
             "faq": {
-                "title": "FAQ",
+                "title": "GYIK",
                 "description": "Temp"
             },
             "discord": {
@@ -217,77 +217,77 @@
                 "description": "Temp"
             },
             "about": {
-                "title": "About",
+                "title": "Rólunk",
                 "description": "Temp"
             }
         }
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
+        "continue": "Tovább",
+        "back": "Vissza",
+        "import_seed": "Meglévő magérték (seed) importálása",
+        "import_wallet": "Meglévő kriptotárca importálása",
+        "create_wallet": "Új kriptotárca létrehozása",
+        "save_password": "Jelszó mentése",
+        "use_biometric": "Biometrikus biztonsági eszköz használata",
         "setup_pin": "PIN-kód beállítása",
-        "set_pin": "Set PIN code",
-        "confirm_pin": "Confirm PIN code",
-        "save_backup_file": "Save backup file",
-        "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
+        "set_pin": "Állítson be egy PIN-kódot",
+        "confirm_pin": "Erősítse meg a PIN-kódot",
+        "save_backup_file": "Biztonsági mentésfájl létrehozása",
+        "ive_written_recovery_phrase": "Feljegyeztem a helyreállító kódmondatomat",
         "verify_recovery_phrase": "Helyreállító kódmondat hitelesítése",
-        "reveal_recovery_phrase": "Reveal recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
-        "visit_discord": "Visit Discord",
-        "drag_drop": "Drag & Drop",
-        "import_extentions": ".stronghold or .kdbx file",
-        "choose_file": "Choose a File",
-        "drop_here": "Drop your file here"
+        "reveal_recovery_phrase": "Helyreállító kódmondat felfedése",
+        "import_seedvault": "SeedVault importálása",
+        "check_again": "Helytelen, ellenőrizze újból",
+        "import_from_file": "Importálás fájlból",
+        "send": "Küldés",
+        "receive": "Fogadás",
+        "begin_transfer": "Tranzakció indítása",
+        "try_again": "Újrapróbálkozás",
+        "visit_discord": "Discord-csatorna meglátogatása",
+        "drag_drop": "Fogd és vidd",
+        "import_extentions": ".stronghold- vagy .kdbx-fájl",
+        "choose_file": "Válasszon egy fájlt",
+        "drop_here": "Húzza ide a fájlt"
     },
     "general": {
-        "password": "Password",
-        "confirm_password": "Confirm password",
-        "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
-        "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
-        "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "transfer_between_accounts": "Transfer Between Accounts",
-        "move_funds_between_accounts": "Move funds between your Accounts",
-        "account": "Account",
-        "sending_to_address": "Sending to address",
-        "amount": "Amount",
-        "add_address": "Add Address",
-        "reference": "Reference",
-        "from": "From",
-        "to": "To",
-        "receive_funds": "Receive funds",
-        "share_address": "Share an address",
-        "your_address": "Your address",
-        "generate_new_address": "Generate new address",
-        "have_text_backup": "I have a text backup",
-        "have_file_backup": "I have a file backup",
-        "enter_seed_or_phrase": "Enter a recovery phrase or seed",
-        "upload_seedvault_or_stronghold": "Import a Stronghold or SeedVault file",
-        "import": "Import",
+        "password": "Jelszó",
+        "confirm_password": "Jelszó megerősítése",
+        "your_seed": "Az ön magértéke (seed)",
+        "recovery_phrase": "Helyreállító kódmondat",
+        "recent_activity": "Legutóbbi tevékenység",
+        "sent": "Elküldött",
+        "received": "Fogadott",
+        "send_funds": "Pénz küldése",
+        "send_to_address": "Küldés címre",
+        "scan_qr_or_paste": "QR-kód szkennelése vagy cím beillesztése",
+        "transfer_between_accounts": "Átutalás számlák között",
+        "move_funds_between_accounts": "Mozgatás saját számlák között",
+        "account": "Számla",
+        "sending_to_address": "Címre küldés",
+        "amount": "Összeg",
+        "add_address": "Cím hozzáadása",
+        "reference": "Hivatkozás",
+        "from": "Feladó:",
+        "to": "Címzett:",
+        "receive_funds": "Pénz fogadása",
+        "share_address": "Cím megosztása",
+        "your_address": "Az Ön címe",
+        "generate_new_address": "Új cím létrehozása",
+        "have_text_backup": "Szöveges biztonsági mentésem van",
+        "have_file_backup": "Biztonsági mentésfájlom van",
+        "enter_seed_or_phrase": "Adja meg a helyreállító kódmondatot vagy a magértéket (seed)",
+        "upload_seedvault_or_stronghold": "Stronghold- vagy SeedVault-fájl importálása",
+        "import": "Importálás",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
-        "language": "Language",
-        "appearance": "Appearance",
-        "light_theme": "Light theme",
-        "dark_theme": "Dark theme",
-        "total_balance": "Total Balance",
-        "incoming": "Incoming",
-        "outgoing": "Outgoing",
-        "accounts": "Accounts"
+        "language": "Nyelv",
+        "appearance": "Megjelenés",
+        "light_theme": "Világos téma",
+        "dark_theme": "Sötét téma",
+        "total_balance": "Összesített egyenleg",
+        "incoming": "Bejövő",
+        "outgoing": "Kimenő",
+        "accounts": "Számlák"
     }
 }
