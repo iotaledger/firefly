@@ -29,15 +29,15 @@
         },
         "language": {
             "title": "Taal en voorkoms",
-            "body": "Kies u beursie se taal en tema"
+            "body": "Kies jou beursie se taal en tema"
         },
         "setup": {
-            "title": "Stel u beursie op",
-            "body": "U kan 'n nuwe beursie skep of 'n bestaande beursie invoer."
+            "title": "Stel jou beursie op",
+            "body": "Jy kan 'n nuwe beursie skep of 'n bestaande beursie invoer."
         },
         "password": {
             "title": "Skep 'n wagwoord",
-            "body": "U sal gevra word om u wagwoord in te voer om tokens uit u beursie te stuur. U het 'n sterk wagwoord nodig om u fondse te beskerm."
+            "body": "Jy sal gevra word om jou wagwoord in te voer om tokens uit jou beursie te stuur. Jy het 'n sterk wagwoord nodig om jou fondse te beskerm."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -46,21 +46,21 @@
         },
         "pin": {
             "title": "Stel PIN-kode op",
-            "body_1": "Tik 'n 6-syfer PIN hieronder. U sal gevra word om u PIN in te voer om aan te meld by u beursie.",
-            "body_2": "U kan slegs getalle gebruik."
+            "body_1": "Tik 'n 6-syfer PIN hieronder. Jy sal gevra word om jou PIN in te voer om aan te meld by jou beursie.",
+            "body_2": "Jy kan slegs getalle gebruik."
         },
         "confirm_pin": {
-            "title": "Verifieer u PIN-kode",
-            "body": "Voer weer u PIN-kode in om voort te gaan."
+            "title": "Verifieer jou PIN-kode",
+            "body": "Voer weer jou PIN-kode in om voort te gaan."
         },
         "backup": {
             "title": "Rugsteun you beursie",
             "body_1": "Jy sal nou vertoon word met 'n herstel frase.",
-            "body_2": "Moenie hierdie frase met iemand deel nie. U herstelfrase kan gebruik word om toegang tot u tokens te kry.",
+            "body_2": "Moenie hierdie frase met iemand deel nie. Jou herstelfrase kan gebruik word om toegang tot jou tokens te kry.",
             "body_3": "As jy jou herstelfrase verloor, kan jy jou geld verloor."
         },
         "recovery_phrase": {
-            "title": "Recovery phrase",
+            "title": "Herstel frase",
             "body_1": "Skryf die woorde noukeurig neer in die presiese volgorde.",
             "body_2": "Stoor you herstelfrase privaat en veilig. Moet dit met niemand deel nie."
         },
@@ -97,67 +97,67 @@
         "import_backup_password": {
             "title": "Herstel jou beursie vanaf 'n SeedVault of 'n Stronghold",
             "body_1": "Voer asseblief jou rugsteunwagwoord in.",
-            "body_2": "This is the password you set when you first created your backup."
+            "body_2": "Dit is die wagwoord wat jy ingestel het toe jy die rugsteun gemaak het."
         },
         "import_success": {
-            "title": "You have successfully recovered your backup",
-            "body": "You can now set up your new wallet."
+            "title": "Jy het jou rugsteun suksesvol herwin",
+            "body": "Jy kan nou jou nuwe beursie instel."
         },
         "migrate": {
-            "title": "Migrate your funds",
-            "body_1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
-            "new": "Your new wallet"
+            "title": "Migreer jou fondse",
+            "body_1": "Hierdie is 'n outomatiese proses om jou fondse na jou nuwe beursie oor te dra. Ons sal kyk na spandeerde adresse wat jou sekuriteit verswak.",
+            "body_2": "Dit kan 'n rukkie neem. Moenie jou toestel tydens die migrasie afskakel nie.",
+            "existing": "Jou ou beursie",
+            "new": "Jou nuwe beursie"
         },
         "migrate_failed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "Jou balans",
+            "body": "Is jou balans korrek?"
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "Instellings",
             "generalSettings": {
-                "title": "General Settings",
+                "title": "Algemene instellings",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "security": {
-                "title": "Security",
+                "title": "Sekuriteit",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
+                "title": "Gevorderde instellings",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Help and Information",
+                "title": "Hulp en inligting",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profileDetails": {
-                "title": "Profile Details",
+                "title": "Profielbesonderhede",
                 "description": "Temp"
             },
             "theme": {
-                "title": "Theme",
+                "title": "Tema",
                 "description": "Temp"
             },
             "language": {
-                "title": "Language",
+                "title": "Taal",
                 "description": "Temp"
             },
             "currency": {
-                "title": "Currency",
+                "title": "Geldeenheid",
                 "description": "Temp"
             },
             "notifications": {
-                "title": "Notifications",
+                "title": "Kennisgewings",
                 "description": "Temp"
             },
             "exportStronghold": {
-                "title": "Export Stronghold",
+                "title": "Voer Stronghold uit",
                 "description": "Temp"
             },
             "appLock": {
@@ -165,15 +165,15 @@
                 "description": "Temp"
             },
             "changePassword": {
-                "title": "Change Password",
+                "title": "Verander wagwoord",
                 "description": "Temp"
             },
             "resyncAccounts": {
-                "title": "Resync Accounts",
+                "title": "Sinkroniseer rekeninge weer",
                 "description": "Temp"
             },
             "resetWallet": {
-                "title": "Reset Wallet",
+                "title": "Herstel beursie",
                 "description": "Temp"
             },
             "deepLinks": {
@@ -181,35 +181,35 @@
                 "description": "Temp"
             },
             "developerMode": {
-                "title": "Developer Mode",
+                "title": "Ontwikkelaarmodus",
                 "description": "Temp"
             },
             "nodeSettings": {
-                "title": "Node Settings",
+                "title": "Node Instellings",
                 "description": "Temp"
             },
             "proofOfWork": {
-                "title": "Proof of Work",
+                "title": "Bewys van werk",
                 "description": "Temp"
             },
             "errorLog": {
-                "title": "Error Log",
+                "title": "Foutlêer",
                 "description": "Temp"
             },
             "stateExport": {
-                "title": "State Export",
+                "title": "Staat uitvoer",
                 "description": "Temp"
             },
             "troubleshoot": {
-                "title": "Troubleshoot",
+                "title": "Probleemoplossing",
                 "description": "Temp"
             },
             "documentation": {
-                "title": "Documentation",
+                "title": "Dokumentasie",
                 "description": "Temp"
             },
             "faq": {
-                "title": "FAQ",
+                "title": "Gereelde vrae",
                 "description": "Temp"
             },
             "discord": {
@@ -217,77 +217,77 @@
                 "description": "Temp"
             },
             "about": {
-                "title": "About",
+                "title": "Oor",
                 "description": "Temp"
             }
         }
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
+        "continue": "Gaan voort",
+        "back": "Terug",
+        "import_seed": "Voer 'n bestaande seed in",
+        "import_wallet": "Voer bestaande beursie in",
+        "create_wallet": "Skep 'n nuwe beursie",
+        "save_password": "Stoor wagwoord",
+        "use_biometric": "Gebruik biometriese sekuriteit",
         "setup_pin": "Stel PIN-kode op",
-        "set_pin": "Set PIN code",
-        "confirm_pin": "Confirm PIN code",
-        "save_backup_file": "Save backup file",
-        "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
+        "set_pin": "Stel PIN-kode in",
+        "confirm_pin": "Bevestig die PIN-kode",
+        "save_backup_file": "Stoor rugsteunlêer",
+        "ive_written_recovery_phrase": "Ek het my herstelfrase neergeskryf",
         "verify_recovery_phrase": "Verifieer herstelfrase",
-        "reveal_recovery_phrase": "Reveal recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
-        "visit_discord": "Visit Discord",
-        "drag_drop": "Drag & Drop",
-        "import_extentions": ".stronghold or .kdbx file",
-        "choose_file": "Choose a File",
-        "drop_here": "Drop your file here"
+        "reveal_recovery_phrase": "Openbaar herstelfrase",
+        "import_seedvault": "Voer SeedVault in",
+        "check_again": "Nee, kyk weer",
+        "import_from_file": "Invoer vanaf 'n lêer",
+        "send": "Stuur",
+        "receive": "Ontvang",
+        "begin_transfer": "Begin oordrag",
+        "try_again": "Probeer weer",
+        "visit_discord": "Besoek Discord",
+        "drag_drop": "Sleep-en-los",
+        "import_extentions": ".stronghold of .kdbx lêer",
+        "choose_file": "Kies 'n lêer",
+        "drop_here": "Sit jou lêer hier neer"
     },
     "general": {
-        "password": "Password",
-        "confirm_password": "Confirm password",
-        "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
-        "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
+        "password": "Wagwoord",
+        "confirm_password": "Bevestig Wagwoord",
+        "your_seed": "Jou Seed",
+        "recovery_phrase": "Herstelfrase",
+        "recent_activity": "Onlangse aktiwiteite",
+        "sent": "Gestuur",
+        "received": "Ontvang",
+        "send_funds": "Stuur fondse",
+        "send_to_address": "Stuur na 'n adres",
         "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "transfer_between_accounts": "Transfer Between Accounts",
-        "move_funds_between_accounts": "Move funds between your Accounts",
-        "account": "Account",
-        "sending_to_address": "Sending to address",
-        "amount": "Amount",
-        "add_address": "Add Address",
-        "reference": "Reference",
-        "from": "From",
-        "to": "To",
-        "receive_funds": "Receive funds",
-        "share_address": "Share an address",
-        "your_address": "Your address",
-        "generate_new_address": "Generate new address",
-        "have_text_backup": "I have a text backup",
-        "have_file_backup": "I have a file backup",
-        "enter_seed_or_phrase": "Enter a recovery phrase or seed",
-        "upload_seedvault_or_stronghold": "Import a Stronghold or SeedVault file",
-        "import": "Import",
+        "transfer_between_accounts": "Oordrag tussen rekeninge",
+        "move_funds_between_accounts": "Skuif fondse tussen jou rekeninge",
+        "account": "Rekening",
+        "sending_to_address": "Oppad na adres",
+        "amount": "Bedrag",
+        "add_address": "Adres byvoeg",
+        "reference": "Verwysing",
+        "from": "Van",
+        "to": "Aan",
+        "receive_funds": "Ontvang fondse",
+        "share_address": "Deel 'n adres",
+        "your_address": "Jou adres",
+        "generate_new_address": "Genereer nuwe adres",
+        "have_text_backup": "Ek het 'n teks-rugsteun",
+        "have_file_backup": "Ek het 'n lêer-rugsteun",
+        "enter_seed_or_phrase": "Voer 'n herstelfrase of seed in",
+        "upload_seedvault_or_stronghold": "Voer 'n Stronghold of SeedVault lêer in",
+        "import": "Invoer",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
-        "language": "Language",
-        "appearance": "Appearance",
-        "light_theme": "Light theme",
-        "dark_theme": "Dark theme",
-        "total_balance": "Total Balance",
-        "incoming": "Incoming",
-        "outgoing": "Outgoing",
-        "accounts": "Accounts"
+        "language": "Taal",
+        "appearance": "Voorkoms",
+        "light_theme": "Ligte tema",
+        "dark_theme": "Donker tema",
+        "total_balance": "Totale balans",
+        "incoming": "Inkomende",
+        "outgoing": "Uitgaande",
+        "accounts": "Rekeninge"
     }
 }
