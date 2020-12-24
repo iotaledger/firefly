@@ -66,11 +66,11 @@
         },
         "verify_recovery_phrase": {
             "title": "Vérifier la phrase de récupération",
-            "body": "Vérifions que vous avez écrit la phrase correctement. Sélectionnez les mots dans le bon ordre."
+            "body": "Vérifions que vous avez noté la phrase correctement. Sélectionnez les mots dans le bon ordre."
         },
         "backup_wallet": {
             "title": "Sauvegarder dans un fichier Stronghold",
-            "body": "Entrez votre mot de passe pour sauvegarder votre portefeuille dans un fichier Stronghold. Votre mot de passe est utilisé pour chiffrer la sauvegarde."
+            "body": "Saisissez votre mot de passe pour sauvegarder votre portefeuille dans un fichier Stronghold. Votre mot de passe est utilisé pour chiffrer la sauvegarde."
         },
         "recovery_phrase_saved": {
             "title": "Sauvegardé avec succès",
@@ -78,35 +78,35 @@
         },
         "congratulations": {
             "title": "Félicitations",
-            "body": "Votre portefeuille est prêt à l'emploi."
+            "body": "Vous pouvez utiliser votre portefeuille."
         },
         "import": {
             "title": "Importer un portefeuille",
-            "body": "Si vous avez une phrase de récupération ou une de sauvegarde Stronghold, vous pouvez l'importer ici."
+            "body": "Si vous avez une phrase de récupération ou une sauvegarde Stronghold, vous pouvez l'importer ici."
         },
         "import_from_text": {
             "title": "Restaurez votre portefeuille avec une phrase de récupération ou un germe aléatoire (seed)",
-            "body_1": "Une phrase de récupération comporte 24 mots. Elle est utilisée pour récupérer un portefeuille Firefly existant.",
+            "body_1": "Une phrase de récupération est composée de 24 mots. Elle est utilisée pour récupérer un portefeuille Firefly existant.",
             "body_2": "Un germe aléatoire (seed) est composé de 81 caractères. Il est utilisé pour importer un portefeuille Trinity.",
-            "body_3": "Entrez votre seed ou votre phrase secrète de récupération"
+            "body_3": "Saisissez votre seed ou votre phrase de récupération"
         },
         "import_from_file": {
-            "title": "Restaurer votre portefeuille à partir d'un fichier de sauvegarde",
-            "body": "Importez un fichier de sauvegarde pour restaurer votre portefeuille. Les sauvegardes reconnues sont les fichiers Stronghold (.stronghold) et Trinity SeedVault (.kdbx)."
+            "title": "Restaurez votre portefeuille à partir d'un fichier de sauvegarde",
+            "body": "Importez un fichier de sauvegarde pour restaurer votre portefeuille. Les sauvegardes peuvent être de type Stronghold (.stronghold) ou Trinity SeedVault (.kdbx)."
         },
         "import_backup_password": {
             "title": "Restaurez votre portefeuille à partir d'un fichier SeedVault ou Stronghold",
-            "body_1": "Veuillez entrer votre mot de passe de sauvegarde.",
+            "body_1": "Veuillez saisir votre mot de passe de sauvegarde.",
             "body_2": "C'est le mot de passe que vous avez défini lorsque vous avez créé votre sauvegarde pour la première fois."
         },
         "import_success": {
             "title": "Vous avez récupéré votre sauvegarde avec succès",
-            "body": "Vous pouvez maintenant configurer votre nouveau portefeuille."
+            "body": "Vous pouvez maintenant installer votre nouveau portefeuille."
         },
         "migrate": {
             "title": "Migrer vos fonds",
-            "body_1": "Ceci est un processus automatisé pour transférer vos fonds vers votre nouveau portefeuille. Nous vérifierons les adresses dépensées qui affaiblissent votre sécurité.",
-            "body_2": "Cela peut prendre un certain temps. N'éteignez pas votre appareil pendant la migration.",
+            "body_1": "Ceci est un processus automatisé permettant de transférer vos fonds vers votre nouveau portefeuille. Nous vérifierons les adresses dépensées qui affaiblissent votre sécurité.",
+            "body_2": "Cela peut prendre du temps. N'éteignez pas votre appareil pendant la migration.",
             "existing": "Votre ancien portefeuille",
             "new": "Votre nouveau portefeuille"
         },
@@ -119,7 +119,7 @@
             "body": "Votre solde est-il correct ?"
         },
         "settings": {
-            "settings": "Paramètres",
+            "settings": "Réglages",
             "generalSettings": {
                 "title": "Paramètres Généraux",
                 "description": "Configure your wallet’s appearance and other general settings"
@@ -129,7 +129,7 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "advancedSettings": {
-                "title": "Paramètres avancés",
+                "title": "Réglages Avancés",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
@@ -157,7 +157,7 @@
                 "description": "Temp"
             },
             "exportStronghold": {
-                "title": "Exporter le fichier Stronghold",
+                "title": "Export Stronghold",
                 "description": "Temp"
             },
             "appLock": {
@@ -173,19 +173,19 @@
                 "description": "Temp"
             },
             "resetWallet": {
-                "title": "Réinitialiser le portefeuille",
+                "title": "Réinitialiser Portefeuille",
                 "description": "Temp"
             },
             "deepLinks": {
-                "title": "Liens profonds",
+                "title": "Liens Profonds",
                 "description": "Temp"
             },
             "developerMode": {
-                "title": "Mode développeur",
+                "title": "Mode Développeur",
                 "description": "Temp"
             },
             "nodeSettings": {
-                "title": "Paramètres du Noeud",
+                "title": "Réglages Noeud",
                 "description": "Temp"
             },
             "proofOfWork": {
@@ -193,7 +193,7 @@
                 "description": "Temp"
             },
             "errorLog": {
-                "title": "Journal des erreurs",
+                "title": "Journal d'Erreurs",
                 "description": "Temp"
             },
             "stateExport": {
@@ -217,7 +217,7 @@
                 "description": "Temp"
             },
             "about": {
-                "title": "À propos",
+                "title": "À Propos",
                 "description": "Temp"
             }
         }
@@ -225,7 +225,7 @@
     "actions": {
         "continue": "Continuer",
         "back": "Retour",
-        "import_seed": "Importer un germe aléatoire (seed) existant",
+        "import_seed": "Importer une seed existante",
         "import_wallet": "Importer un portefeuille existant",
         "create_wallet": "Créer un nouveau portefeuille",
         "save_password": "Sauvegarder le mot de passe",
@@ -239,21 +239,21 @@
         "reveal_recovery_phrase": "Montrer la phrase de récupération",
         "import_seedvault": "Importer un SeedVault",
         "check_again": "Non, vérifier à nouveau",
-        "import_from_file": "Importer depuis un fichier",
+        "import_from_file": "Importer à partir d''un fichier",
         "send": "Envoyer",
         "receive": "Recevoir",
-        "begin_transfer": "Commencer le Transfert",
+        "begin_transfer": "Démarrer le Transfert",
         "try_again": "Réessayez",
         "visit_discord": "Visitez Discord",
         "drag_drop": "Glisser-déposer",
-        "import_extentions": "fichier .stronghold ou .kdbx",
+        "import_extentions": "FIchier .stronghold ou .kdbx",
         "choose_file": "Sélectionner un Fichier",
         "drop_here": "Déposez votre fichier ici"
     },
     "general": {
         "password": "Mot de passe",
         "confirm_password": "Confirmer le mot de passe",
-        "your_seed": "Votre seed",
+        "your_seed": "Votre Seed",
         "recovery_phrase": "Phrase de récupération",
         "recent_activity": "Activité récente",
         "sent": "Envoyé",
@@ -261,7 +261,7 @@
         "send_funds": "Envoyer des fonds",
         "send_to_address": "Envoyer à une Adresse",
         "scan_qr_or_paste": "Scannez un code QR ou collez une Adresse",
-        "transfer_between_accounts": "Transfert entre comptes",
+        "transfer_between_accounts": "Transfert Entre Comptes",
         "move_funds_between_accounts": "Déplacer des fonds entre vos Comptes",
         "account": "Compte",
         "sending_to_address": "Envoi vers l'adresse",
@@ -276,7 +276,7 @@
         "generate_new_address": "Générer une nouvelle adresse",
         "have_text_backup": "J'ai un texte de sauvegarde",
         "have_file_backup": "J'ai un fichier de sauvegarde",
-        "enter_seed_or_phrase": "Entrez une phrase de récupération ou une phrase du germe aléatoire (seed)",
+        "enter_seed_or_phrase": "Saisissez une phrase de récupération ou une seed",
         "upload_seedvault_or_stronghold": "Importer un fichier Stronghold ou SeedVault",
         "import": "Importer",
         "seedvault": "SeedVault",
