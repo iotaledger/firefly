@@ -1,14 +1,14 @@
 {
     "views": {
         "onboarding_1": {
-            "title": "Enviar, rebre i gestionar el vostre IOTA",
+            "title": "Enviar, rebre i gestionar eIs seus IOTA",
             "body": "Firefly és una cartera IOTA segura i fàcil d’utilitzar."
         },
         "legal": {
             "title": "Legal",
-            "body": "Consulteu la Política de privadesa i els Termes i condicions.",
+            "body": "Consulteu la Política de privacitat i els Termes i condicions.",
             "privacy_policy": {
-                "title": "Política de privadesa",
+                "title": "Política de Privacitat",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -37,7 +37,7 @@
         },
         "password": {
             "title": "Crear una contrasenya",
-            "body": "Se us demanarà que introduïu la vostra contrasenya per enviar fitxes des de la vostra cartera. Necessiteu una contrasenya segura per protegir els vostres fons."
+            "body": "Se us demanarà que introduïu la vostra contrasenya per enviar Tokens des de la vostra cartera. Necessiteu una contrasenya segura per protegir els vostres fons."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -232,8 +232,8 @@
         "use_biometric": "Utilitzeu seguretat biomètrica",
         "setup_pin": "Configureu el codi PIN",
         "set_pin": "Estableix el codi PIN",
-        "confirm_pin": "Confirm PIN code",
-        "save_backup_file": "Save backup file",
+        "confirm_pin": "Confirmeu el codi PIN",
+        "save_backup_file": "Guardar còpia de seguretat",
         "ive_written_recovery_phrase": "He escrit la meva frase de recuperació",
         "verify_recovery_phrase": "Verifiqueu la frase de recuperació",
         "reveal_recovery_phrase": "Mostrar la frase de recuperació",
