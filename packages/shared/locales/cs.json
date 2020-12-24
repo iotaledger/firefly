@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding_1": {
-            "title": "Pošli, přijmi and spravuj tokeny",
+            "title": "Pošli, přijmi and spravuj IOTA tokeny",
             "body": "Firefly je bezpečná a snadno použitelná IOTA peněženka."
         },
         "legal": {
@@ -51,7 +51,7 @@
         },
         "confirm_pin": {
             "title": "Ověřit PIN kód",
-            "body": "Pro pokračování zadejte svůj PIN kód."
+            "body": "Pro pokračování zadejte PIN kód."
         },
         "backup": {
             "title": "Zálohovat peněženku",
@@ -62,7 +62,7 @@
         "recovery_phrase": {
             "title": "Fráze pro obnovení",
             "body_1": "Pečlivě si zapište slova v tomto pořadí.",
-            "body_2": "Zachovejte svá klíčová slova v soukromém a bezpečném úložišti. Nesdílejte je s nikým."
+            "body_2": "Zachovejte klíčová slova v soukromém a bezpečném úložišti. Nesdílejte je s nikým."
         },
         "verify_recovery_phrase": {
             "title": "Ověřte obnovovací frázi",
@@ -74,7 +74,7 @@
         },
         "recovery_phrase_saved": {
             "title": "Úspěšně zálohováno",
-            "body": "Zálohovali jste svou peněženku jako Stronghold soubor."
+            "body": "Zálohovali jste peněženku jako Stronghold soubor."
         },
         "congratulations": {
             "title": "Blahopřejeme",
@@ -225,7 +225,7 @@
     "actions": {
         "continue": "Pokračovat",
         "back": "Zpět",
-        "import_seed": "Importovat existující Seed",
+        "import_seed": "Importovat existující seed",
         "import_wallet": "Importovat existující peněženku",
         "create_wallet": "Vytvořit novou peněženku",
         "save_password": "Uložit heslo",
@@ -277,7 +277,7 @@
         "have_text_backup": "Mám textovou zálohu",
         "have_file_backup": "Mám zálovací soubor",
         "enter_seed_or_phrase": "Zadejte obnovovací frázi nebo seed",
-        "upload_seedvault_or_stronghold": "Importovat soubor Stronghold nebo SeedVault",
+        "upload_seedvault_or_stronghold": "Importovat soubor typu Stronghold nebo SeedVault",
         "import": "Importovat",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
