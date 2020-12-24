@@ -46,7 +46,7 @@
         },
         "pin": {
             "title": "Ustaw kod PIN",
-            "body_1": "Wprowadź 6-cyfrowy kod PIN poniżej. Zostaniesz poproszony o wprowadzenie kodu PIN, aby zalogować się do portfela.",
+            "body_1": "Wprowadź poniżej 6-cyfrowy kod PIN. Będziesz proszony o wprowadzenie kodu PIN, aby zalogować się do portfela.",
             "body_2": "Możesz używać tylko liczb."
         },
         "confirm_pin": {
