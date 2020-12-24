@@ -28,8 +28,8 @@
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
         "language": {
-            "title": "언어와 외양선택",
-            "body": "지갑의 언어와 테마를 선택하기"
+            "title": "언어와 외양",
+            "body": "사용할 언어와 테마를 선택하기"
         },
         "setup": {
             "title": "지갑을 설정하기",
@@ -47,68 +47,68 @@
         "pin": {
             "title": "PIN코드 설정",
             "body_1": "아래에 6자리 PIN 코드를 적으세요. 앞으로 지갑에 로그인하기 위해서는 PIN 코드를 입력해야 합니다.",
-            "body_2": "숫자만 사용할 수 있습니다."
+            "body_2": "숫자만 사용 가능합니다."
         },
         "confirm_pin": {
             "title": "PIN 코드를 제대로 입력했는지 확인하세요.",
-            "body": "다음 진행을 위해 PIN 코드를 다시 입력해주세요."
+            "body": "PIN 코드를 다시 입력하고 다음으로 넘어갑니다."
         },
         "backup": {
             "title": "지갑 백업하기",
-            "body_1": "지갑복구에 필요한 '구절'이 제시될 겁니다.",
-            "body_2": "Do not share this phrase with anyone. Your recovery phrase can be used to access your tokens from anywhere.",
-            "body_3": "If you lose your recovery phrase, you may lose your funds."
+            "body_1": "지갑복구에 필요한 '문장'이 제시될 겁니다.",
+            "body_2": "이 '문장'을 누구와도 공유하지 마세요. 당신의 토큰에 접근하기 위해, 어디에서든 이 복구 '문장'을 사용할 수 있습니다.",
+            "body_3": "이 복구 '문장'을 잊어버린다면, 당신의 자금을 잃게될 수도 있습니다."
         },
         "recovery_phrase": {
-            "title": "Recovery phrase",
-            "body_1": "Carefully write down the words in the exact order.",
-            "body_2": "Keep your recovery phrase private and safely stored. Do not share it with anyone."
+            "title": "복구 문장",
+            "body_1": "정확하게 문장을 적으세요.",
+            "body_2": "복구 '문장'을 안전하게 보관하고 누구와도 공유하지 마세요."
         },
         "verify_recovery_phrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Select the words in the correct order."
+            "title": "복구 '문장'이 정확한지 확인하세요.",
+            "body": "'문장'을 정확한 순서로 올바르게 적었는지 확인하세요."
         },
         "backup_wallet": {
-            "title": "Back up to a Stronghold file",
-            "body": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup."
+            "title": "'스트롱홀드' 파일에 백업하기",
+            "body": "지갑을 '스트롱홀드' 파일에 백업하기 위해 비밀번호를 입력하세요. 비밀번호는 백업을 암호화하기 위해 사용됩니다."
         },
         "recovery_phrase_saved": {
-            "title": "Successfully backed up",
-            "body": "You have backed up your wallet to a Stronghold."
+            "title": "성공적으로 백업되었습니다.",
+            "body": "'스트롱홀드'에 지갑을 백업했습니다."
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your wallet is ready to go."
+            "title": "축하합니다.",
+            "body": "지갑이 사용준비가 되었습니다."
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have a recovery phrase or Stronghold back up, you can import it here."
+            "title": "지갑 불러오기",
+            "body": "복원 '문장'을 알거나 '스트롱홀드' 백업을 했다면, 여기로 불러올 수 있습니다."
         },
         "import_from_text": {
-            "title": "Restore your wallet with a recovery phrase or seed",
-            "body_1": "A recovery phrase is 24 words long. This is used to recover an existing Firefly wallet.",
-            "body_2": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body_3": "Enter your seed or recovery phrase"
+            "title": "복원 '문장'이나 '시드'로 지갑을 복원하기",
+            "body_1": "복원 '문장'은 24 단어 길이이며, 기존의 '파이어플라이' 지갑을 복원하기 위해 사용됩니다.",
+            "body_2": "'시드'는 81자로 구성되며, 예전의 '트리니티' 지갑으로부터 복원하기 위해 사용됩니다.",
+            "body_3": "'시드'나 복원 '문장'을 입력하기"
         },
         "import_from_file": {
-            "title": "Restore your wallet from a backup file",
-            "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "백업파일로부터 지갑을 복원하기",
+            "body": "지갑을 복원하기 위해, '스트롱홀드(.stronghold)' 또는 '트리니티 시드볼트(.kdbx)'로 구성된 백업파일을 불러오세요."
         },
         "import_backup_password": {
-            "title": "Restore your wallet from a SeedVault or Stronghold",
-            "body_1": "Please enter your backup password.",
-            "body_2": "This is the password you set when you first created your backup."
+            "title": "'시드볼트(SeedVault)'나 '스트롱홀드'로부터 지갑을 복원하기",
+            "body_1": "백업 패스워드를 입력하세요.",
+            "body_2": "백업파일을 처음 만들때 설정했던 패스워드를 뜻합니다."
         },
         "import_success": {
-            "title": "You have successfully recovered your backup",
-            "body": "You can now set up your new wallet."
+            "title": "백업파일을 이용해 성공적으로 복구했습니다.",
+            "body": "이제 새로운 지갑을 설정할 수 있습니다."
         },
         "migrate": {
-            "title": "Migrate your funds",
-            "body_1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
-            "new": "Your new wallet"
+            "title": "자금을 옮기기",
+            "body_1": "당신의 자금을 새로운 지갑으로 자동으로 옮기는 과정입니다. '사용완료된 주소'를 확인해 보안이 취약해지지 않도록 합니다.",
+            "body_2": "시간이 다소 걸릴 수 있습니다. 자금을 옮기는 동안 기기를 끄지 마세요.",
+            "existing": "옛날 지갑",
+            "new": "새로운 지갑"
         },
         "migrate_failed": {
             "title": "To do",
@@ -235,7 +235,7 @@
         "confirm_pin": "Confirm PIN code",
         "save_backup_file": "Save backup file",
         "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
-        "verify_recovery_phrase": "Verify recovery phrase",
+        "verify_recovery_phrase": "복구 '문장'이 정확한지 확인하세요.",
         "reveal_recovery_phrase": "Reveal recovery phrase",
         "import_seedvault": "Import SeedVault",
         "check_again": "No, Check Again",
@@ -247,24 +247,24 @@
         "visit_discord": "Visit Discord",
         "drag_drop": "Drag & Drop",
         "import_extentions": ".stronghold or .kdbx file",
-        "choose_file": "Choose a File",
-        "drop_here": "Drop your file here"
+        "choose_file": "파일을 선택하기",
+        "drop_here": "여기에 파일 놓기"
     },
     "general": {
-        "password": "Password",
-        "confirm_password": "Confirm password",
-        "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
-        "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
-        "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "transfer_between_accounts": "Transfer Between Accounts",
-        "move_funds_between_accounts": "Move funds between your Accounts",
-        "account": "Account",
-        "sending_to_address": "Sending to address",
+        "password": "패스워드",
+        "confirm_password": "패스워드 확인하기",
+        "your_seed": "나의 '시드'",
+        "recovery_phrase": "복구 문장",
+        "recent_activity": "최근 활동",
+        "sent": "보냄",
+        "received": "받음",
+        "send_funds": "자금 보내기",
+        "send_to_address": "특정주소로 보내기",
+        "scan_qr_or_paste": "QR 코드를 스캔하거나 주소를 복사해 붙이기",
+        "transfer_between_accounts": "계정간 송금하기",
+        "move_funds_between_accounts": "나의 계정간 자금 옮기기",
+        "account": "계정",
+        "sending_to_address": "특정주소로 보내기",
         "amount": "Amount",
         "add_address": "Add Address",
         "reference": "Reference",
