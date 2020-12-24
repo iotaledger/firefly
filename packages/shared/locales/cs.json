@@ -70,7 +70,7 @@
         },
         "backup_wallet": {
             "title": "Zálohujte jako Stronghold soubor",
-            "body": "Zadejte heslo pro zálohování peněženky jako Stornghold soubor. Vaše heslo bude použito k zašifrování zálohy."
+            "body": "Zadejte heslo pro zálohování peněženky jako Stronghold soubor. Vaše heslo bude použito k zašifrování zálohy."
         },
         "recovery_phrase_saved": {
             "title": "Úspěšně zálohováno",
