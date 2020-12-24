@@ -5,7 +5,7 @@
             "body": "'파이어플라이'는 안전하고 사용하기 쉬운 아이오타 지갑입니다."
         },
         "legal": {
-            "title": "법적 문제",
+            "title": "법적 문제 관련",
             "body": "개인정보 보호 정책과 서비스 약관을 검토바랍니다.",
             "privacy_policy": {
                 "title": "개인정보 보호정책",
@@ -28,16 +28,16 @@
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
         "language": {
-            "title": "언어와 모양새",
-            "body": "사용할 언어와 테마를 선택하기"
+            "title": "사용언어와 모양새",
+            "body": "사용 언어와 테마를 선택하기"
         },
         "setup": {
             "title": "지갑을 설정하기",
             "body": "새로운 지갑을 만들거나, 기존의 지갑을 불러올 수 있습니다."
         },
         "password": {
-            "title": "패스워드 만들기",
-            "body": "지갑에서 토큰을 보내기 위해서는 패스워드 입력이 필요합니다. 자금의 적절한 보호를 위해서 강력한 비밀번호 사용을 권장합니다."
+            "title": "비밀번호 만들기",
+            "body": "지갑에서 토큰을 보내기 위해서는 비밀번호 입력이 필요합니다. 자금의 적절한 보호를 위해서 강력한 비밀번호 사용을 권장합니다."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -55,13 +55,13 @@
         },
         "backup": {
             "title": "지갑 백업하기",
-            "body_1": "지갑복구에 필요한 '문장'이 제시될 겁니다.",
+            "body_1": "지갑복구에 필요한 '문장'이 제시됩니다.",
             "body_2": "이 '문장'을 누구와도 공유하지 마세요. 당신의 토큰에 접근하기 위해, 어디에서든 이 복구 '문장'을 사용할 수 있습니다.",
-            "body_3": "이 복구 '문장'을 잊어버린다면, 당신의 자금을 잃게될 수도 있습니다."
+            "body_3": "이 복구 '문장'을 잃어버린다면, 당신의 자금을 잃게될 수도 있습니다."
         },
         "recovery_phrase": {
             "title": "복구 문장",
-            "body_1": "정확하게 문장을 적으세요.",
+            "body_1": "정확한 순서에 유의하며 문장을 적으세요.",
             "body_2": "복구 '문장'을 안전하게 보관하고 누구와도 공유하지 마세요."
         },
         "verify_recovery_phrase": {
@@ -213,46 +213,46 @@
                 "description": "Temp"
             },
             "discord": {
-                "title": "Discord",
+                "title": "디스코드(Discord)",
                 "description": "Temp"
             },
             "about": {
-                "title": "About",
+                "title": "관련 정보",
                 "description": "Temp"
             }
         }
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
-        "setup_pin": "PIN코드 설정",
-        "set_pin": "Set PIN code",
-        "confirm_pin": "Confirm PIN code",
-        "save_backup_file": "Save backup file",
-        "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
+        "continue": "계속하기",
+        "back": "뒤로가기",
+        "import_seed": "기존 '시드'를 불러오기",
+        "import_wallet": "기존 지갑을 불러오기",
+        "create_wallet": "새 지갑 만들기",
+        "save_password": "비밀번호 저장하기",
+        "use_biometric": "생체인증 사용하기",
+        "setup_pin": "PIN코드 설정하기",
+        "set_pin": "PIN코드 설정",
+        "confirm_pin": "PIN코드 확인하기",
+        "save_backup_file": "백업파일 저장하기",
+        "ive_written_recovery_phrase": "복구 '문장'을 기입했습니다.",
         "verify_recovery_phrase": "복구 '문장'이 정확한지 확인하세요.",
-        "reveal_recovery_phrase": "Reveal recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
-        "visit_discord": "Visit Discord",
-        "drag_drop": "Drag & Drop",
-        "import_extentions": ".stronghold or .kdbx file",
+        "reveal_recovery_phrase": "복구 '문장' 드러내기",
+        "import_seedvault": "시드볼트(SeedVault) 불러오기",
+        "check_again": "다시 확인하기",
+        "import_from_file": "파일에서 불러오기",
+        "send": "보내기",
+        "receive": "받기",
+        "begin_transfer": "전송하기",
+        "try_again": "다시 시도하기",
+        "visit_discord": "디스코드 방문하기",
+        "drag_drop": "끌어서 놓기",
+        "import_extentions": ".stronghold 또는 .kdbx 파일",
         "choose_file": "파일을 선택하기",
         "drop_here": "여기에 파일 놓기"
     },
     "general": {
-        "password": "패스워드",
-        "confirm_password": "패스워드 확인하기",
+        "password": "비밀번호",
+        "confirm_password": "비밀번호 확인하기",
         "your_seed": "내 '시드'",
         "recovery_phrase": "복구 문장",
         "recent_activity": "최근 활동",
