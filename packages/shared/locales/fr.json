@@ -8,7 +8,7 @@
             "title": "Mentions légales",
             "body": "Veuillez consulter la politique de confidentialité et les conditions d'utilisation.",
             "privacy_policy": {
-                "title": "Politique de confidentialité",
+                "title": "Politique de Confidentialité",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -17,7 +17,7 @@
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "terms_of_service": {
-                "title": "Conditions d'utilisation",
+                "title": "Conditions d'Utilisation",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -32,12 +32,12 @@
             "body": "Choisissez la langue et le thème de votre portefeuille"
         },
         "setup": {
-            "title": "Configurez votre portefeuille",
+            "title": "Installez votre portefeuille",
             "body": "Vous pouvez créer un nouveau portefeuille ou importer un portefeuille existant."
         },
         "password": {
             "title": "Créer un mot de passe",
-            "body": "Il vous sera demandé d'entrer votre mot de passe pour envoyer des jetons depuis votre portefeuille. Vous avez besoin d'un mot de passe fort pour protéger vos fonds."
+            "body": "Il vous sera demandé de saisir votre mot de passe pour envoyer des jetons depuis votre portefeuille. Vous avez besoin d'un mot de passe fort pour protéger vos fonds."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -46,23 +46,23 @@
         },
         "pin": {
             "title": "Définir le code PIN",
-            "body_1": "Entrez un code PIN de 6 chiffres ci-dessous. Il vous sera demandé de saisir votre code PIN pour vous connecter à votre portefeuille.",
+            "body_1": "Saisissez ci-dessous un code PIN à 6 chiffres. Il vous sera demandé de saisir votre code PIN pour vous connecter à votre portefeuille.",
             "body_2": "Vous ne pouvez utiliser que des chiffres."
         },
         "confirm_pin": {
             "title": "Vérifiez votre code PIN",
-            "body": "Entrez à nouveau votre code PIN pour continuer."
+            "body": "Saisissez à nouveau votre code PIN pour continuer."
         },
         "backup": {
             "title": "Sauvegarder votre portefeuille",
             "body_1": "Vous allez maintenant voir une phrase de récupération.",
-            "body_2": "Ne partagez pas cette phrase avec quiconque. Votre phrase de récupération peut être utilisée pour accéder à vos jetons depuis n'importe où.",
+            "body_2": "Ne partagez cette phrase avec personne. Votre phrase de récupération peut être utilisée pour accéder à vos jetons depuis n'importe quel endroit.",
             "body_3": "Si vous perdez votre phrase de récupération, vous risquez de perdre vos fonds."
         },
         "recovery_phrase": {
             "title": "Phrase de récupération",
             "body_1": "Notez soigneusement les mots dans l'ordre exact.",
-            "body_2": "Gardez votre phrase de récupération privée et stockée en toute sécurité. Ne la partagez avec personne."
+            "body_2": "Gardez votre phrase de récupération secrète et stockée en toute sécurité. Ne la partagez avec personne."
         },
         "verify_recovery_phrase": {
             "title": "Vérifier la phrase de récupération",
@@ -177,7 +177,7 @@
                 "description": "Temp"
             },
             "deepLinks": {
-                "title": "Deep Links",
+                "title": "Liens profonds",
                 "description": "Temp"
             },
             "developerMode": {
@@ -234,9 +234,9 @@
         "set_pin": "Définir le code PIN",
         "confirm_pin": "Confirmer le code PIN",
         "save_backup_file": "Enregistrer le fichier de sauvegarde",
-        "ive_written_recovery_phrase": "J'ai écrit ma phrase de récupération",
+        "ive_written_recovery_phrase": "J'ai noté ma phrase de récupération",
         "verify_recovery_phrase": "Vérifier la phrase de récupération",
-        "reveal_recovery_phrase": "Révéler la phrase de récupération",
+        "reveal_recovery_phrase": "Montrer la phrase de récupération",
         "import_seedvault": "Importer un SeedVault",
         "check_again": "Non, vérifier à nouveau",
         "import_from_file": "Importer depuis un fichier",
