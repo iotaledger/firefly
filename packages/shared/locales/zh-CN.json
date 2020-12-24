@@ -5,7 +5,7 @@
             "body": "Firefly是一款安全、易用的IOTA钱包。"
         },
         "legal": {
-            "title": "Legal",
+            "title": "法律条款",
             "body": "请查看隐私政策和服务条款。",
             "privacy_policy": {
                 "title": "隐私政策",
@@ -77,37 +77,37 @@
             "body": "你已经将你的钱包备份到了一个Stronghold文件。"
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your wallet is ready to go."
+            "title": "恭喜您！",
+            "body": "你的钱包已准备就绪。"
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have a recovery phrase or Stronghold back up, you can import it here."
+            "title": "导入钱包",
+            "body": "如果您已有恢复短语或是Stronghold的备份文件，您可以在此处导入。"
         },
         "import_from_text": {
-            "title": "Restore your wallet with a recovery phrase or seed",
-            "body_1": "A recovery phrase is 24 words long. This is used to recover an existing Firefly wallet.",
-            "body_2": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body_3": "Enter your seed or recovery phrase"
+            "title": "用恢复短语或种子恢复你的钱包",
+            "body_1": "恢复短语长度为24个单词。这个短语可用于恢复已有的Firefly钱包。",
+            "body_2": "种子由81个字符组成。它用于从旧的 Trinity 钱包中恢复。",
+            "body_3": "请输入您的种子或恢复短语"
         },
         "import_from_file": {
-            "title": "Restore your wallet from a backup file",
-            "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "从备份文件恢复你的钱包",
+            "body": "导入备份文件以恢复您的钱包。备份可以是 Stronghold (.stronghold) 或 Trinity SeedVault (.kdbx)."
         },
         "import_backup_password": {
-            "title": "Restore your wallet from a SeedVault or Stronghold",
-            "body_1": "Please enter your backup password.",
-            "body_2": "This is the password you set when you first created your backup."
+            "title": "从种子保险库或Stronghold文件恢复你的钱包",
+            "body_1": "请输入您的备份密码。",
+            "body_2": "这是您首次创建备份时设置的密码。"
         },
         "import_success": {
-            "title": "You have successfully recovered your backup",
-            "body": "You can now set up your new wallet."
+            "title": "您已成功恢复您的备份。",
+            "body": "您现在可以设置您的新钱包。"
         },
         "migrate": {
-            "title": "Migrate your funds",
-            "body_1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
+            "title": "迁移您的资金",
+            "body_1": "这是一个将您的资金转账到您新钱包的自动化过程。我们将检查削弱您安全性的已花费地址。",
+            "body_2": "这可能需要一些时间。不要在迁移过程中关闭您的设备。",
+            "existing": "您的旧钱包",
             "new": "您的新钱包"
         },
         "migrate_failed": {
@@ -115,45 +115,45 @@
             "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "您的余额",
+            "body": "您的余额是否正确？"
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "设置",
             "generalSettings": {
-                "title": "General Settings",
+                "title": "常规设置",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "security": {
-                "title": "Security",
+                "title": "安全设置",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
+                "title": "高级设置",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Help and Information",
+                "title": "帮助和信息",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profileDetails": {
-                "title": "Profile Details",
+                "title": "账户详情",
                 "description": "Temp"
             },
             "theme": {
-                "title": "Theme",
+                "title": "主题",
                 "description": "Temp"
             },
             "language": {
-                "title": "Language",
+                "title": "语言",
                 "description": "Temp"
             },
             "currency": {
-                "title": "Currency",
+                "title": "货币",
                 "description": "Temp"
             },
             "notifications": {
-                "title": "Notifications",
+                "title": "通知",
                 "description": "Temp"
             },
             "exportStronghold": {
