@@ -37,7 +37,7 @@
         },
         "password": {
             "title": "एक पासवर्ड बनाएं",
-            "body": "You will be asked to enter your password to send tokens from your wallet. You need a strong password to protect your funds."
+            "body": "आपको अपने वॉलेट से टोकन भेजने के लिए अपना पासवर्ड दर्ज करने के लिए कहा जाएगा। अपने धन की सुरक्षा के लिए आपको एक मजबूत पासवर्ड की आवश्यकता है|"
         },
         "protect": {
             "title": "Protect your wallet",
@@ -45,31 +45,31 @@
             "body_2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Set up PIN code",
-            "body_1": "Enter a 6-digit PIN below. You will be asked to enter your pin to login to your wallet.",
-            "body_2": "You can use numbers only."
+            "title": "पिन कोड सेट करें",
+            "body_1": "नीचे छह अंकों का पिन दर्ज करें। वॉलेट लॉग इन करने के लिए अपना पिन दर्ज करने के लिए कहा जाएगा|",
+            "body_2": "केवल संख्याओं का उपयोग करे|"
         },
         "confirm_pin": {
-            "title": "Verify your PIN code",
-            "body": "Re-enter your PIN code to proceed."
+            "title": "अपना पिन कोड सत्यापित करें",
+            "body": "आगे बढ़ने के लिए अपना पिन कोड पुनः दर्ज करें"
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body_1": "You will now be shown a recovery phrase.",
-            "body_2": "Do not share this phrase with anyone. Your recovery phrase can be used to access your tokens from anywhere.",
-            "body_3": "If you lose your recovery phrase, you may lose your funds."
+            "title": "अपने वॉलेट का बैकअप लें",
+            "body_1": "अब आपको एक पुनर्प्राप्ति वाक्यांश दिखाया जाएगा",
+            "body_2": "इस वाक्यांश को किसी के साथ साझा न करें। आपके पुनर्प्राप्ति वाक्यांश का उपयोग आपके टोकन को कहीं से भी एक्सेस करने के लिए किया जा सकता है|",
+            "body_3": "यदि आप अपना पुनर्प्राप्ति वाक्यांश खो देते हैं, तो आप अपने धन को खो सकते हैं।"
         },
         "recovery_phrase": {
-            "title": "Recovery phrase",
-            "body_1": "Carefully write down the words in the exact order.",
-            "body_2": "Keep your recovery phrase private and safely stored. Do not share it with anyone."
+            "title": "वसूली वाक्यांश",
+            "body_1": "सटीक क्रम में शब्दों को सावधानीपूर्वक लिखें|",
+            "body_2": "अपने पुनर्प्राप्ति वाक्यांश को निजी और सुरक्षित रूप से संग्रहीत रखें। इसे किसी के साथ साझा न करें।"
         },
         "verify_recovery_phrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Select the words in the correct order."
+            "title": "वसूली वाक्यांश सत्यापित करें",
+            "body": "चलिए चेक करते हैं कि आपने वाक्यांश को सही ढंग से लिखा है। सही क्रम में शब्दों का चयन करें|"
         },
         "backup_wallet": {
-            "title": "Back up to a Stronghold file",
+            "title": "बैक अप लें स्ट्रॉन्गहोल्ड फाइल में|",
             "body": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup."
         },
         "recovery_phrase_saved": {
@@ -230,12 +230,12 @@
         "create_wallet": "Create new wallet",
         "save_password": "Save password",
         "use_biometric": "Use biometric security",
-        "setup_pin": "Set up PIN code",
+        "setup_pin": "पिन कोड सेट करें",
         "set_pin": "Set PIN code",
         "confirm_pin": "Confirm PIN code",
         "save_backup_file": "Save backup file",
         "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
-        "verify_recovery_phrase": "Verify recovery phrase",
+        "verify_recovery_phrase": "वसूली वाक्यांश सत्यापित करें",
         "reveal_recovery_phrase": "Reveal recovery phrase",
         "import_seedvault": "Import SeedVault",
         "check_again": "No, Check Again",
