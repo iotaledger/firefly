@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding_1": {
-            "title": "Verstuur, Ontvang & Beheer je IOTA",
+            "title": "Verzend, ontvang & beheer je IOTA",
             "body": "Firefly is een veilig en eenvoudig te gebruiken IOTA wallet."
         },
         "legal": {
@@ -28,7 +28,7 @@
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
         "language": {
-            "title": "Taal & uiterlijk",
+            "title": "Taal & weergave",
             "body": "Kies de taal en het thema van je wallet"
         },
         "setup": {
