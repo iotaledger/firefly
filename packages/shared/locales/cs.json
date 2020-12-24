@@ -1,11 +1,11 @@
 {
     "views": {
         "onboarding_1": {
-            "title": "Send, Receive & Manage your IOTA",
-            "body": "Firefly is a secure and easy-to-use IOTA wallet."
+            "title": "Pošli, přijmi and spravuj své tokeny",
+            "body": "Firefly je bezpečná a snadno použitelná IOTA peněženka."
         },
         "legal": {
-            "title": "Legal",
+            "title": "Právní předpisy",
             "body": "Please review the Privacy Policy and Terms of Service.",
             "privacy_policy": {
                 "title": "Privacy Policy",
