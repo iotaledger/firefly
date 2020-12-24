@@ -37,7 +37,7 @@
         },
         "password": {
             "title": "Scegli una password",
-            "body": "You will be asked to enter your password to send tokens from your wallet. You need a strong password to protect your funds."
+            "body": "Ti verrà chiesto di inserire la tua password per inviare token dal tuo portafoglio. Utilizza una password sicura per proteggere i tuoi fondi."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -277,7 +277,7 @@
         "have_text_backup": "Ho un backup di testo",
         "have_file_backup": "Ho un backup dei file",
         "enter_seed_or_phrase": "Inserisci una frase di recupero o un seed",
-        "upload_seedvault_or_stronghold": "Import a Stronghold or SeedVault file",
+        "upload_seedvault_or_stronghold": "Importa un file Stronghold o SeedVault",
         "import": "Importa",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
