@@ -28,15 +28,15 @@
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
         "language": {
-            "title": "Language & appearance",
-            "body": "Choose your wallet’s language and theme"
+            "title": "भाषा और प्रकटन|",
+            "body": "अपने वॉलेट की भाषा और विषय चुनें|"
         },
         "setup": {
-            "title": "Set up your wallet",
-            "body": "You can create a new wallet or import an existing one."
+            "title": "अपना वॉलेट सेट करें|",
+            "body": "आप एक नया वॉलेट बना सकते हैं या एक मौजूदा आयात कर सकते हैं।"
         },
         "password": {
-            "title": "Create a password",
+            "title": "एक पासवर्ड बनाएं",
             "body": "You will be asked to enter your password to send tokens from your wallet. You need a strong password to protect your funds."
         },
         "protect": {
