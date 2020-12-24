@@ -54,49 +54,49 @@
             "body": "Voer weer u PIN-kode in om voort te gaan."
         },
         "backup": {
-            "title": "Back up your wallet",
+            "title": "Rugsteun you beursie",
             "body_1": "Jy sal nou vertoon word met 'n herstel frase.",
             "body_2": "Moenie hierdie frase met iemand deel nie. U herstelfrase kan gebruik word om toegang tot u tokens te kry.",
             "body_3": "As jy jou herstelfrase verloor, kan jy jou geld verloor."
         },
         "recovery_phrase": {
             "title": "Recovery phrase",
-            "body_1": "Carefully write down the words in the exact order.",
-            "body_2": "Keep your recovery phrase private and safely stored. Do not share it with anyone."
+            "body_1": "Skryf die woorde noukeurig neer in die presiese volgorde.",
+            "body_2": "Stoor you herstelfrase privaat en veilig. Moet dit met niemand deel nie."
         },
         "verify_recovery_phrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Select the words in the correct order."
+            "title": "Verifieer herstelfrase",
+            "body": "Kom ons kyk of jy die frase korrek neergeskryf het. Kies die woorde in die regte volgorde."
         },
         "backup_wallet": {
-            "title": "Back up to a Stronghold file",
-            "body": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup."
+            "title": "Rugsteun na 'n Stronghold lêer",
+            "body": "Voer jou wagwoord in om you beursie na 'n Stronghold lêer te rugsteun. Jou wagwoord word gebruik om die rugsteun te enkripteer."
         },
         "recovery_phrase_saved": {
-            "title": "Successfully backed up",
-            "body": "You have backed up your wallet to a Stronghold."
+            "title": "Rugsteun suksesvol",
+            "body": "Jy het jou beursie gerusteun na 'n Stronghold."
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your wallet is ready to go."
+            "title": "Baie geluk",
+            "body": "Jou beursie is gereed."
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have a recovery phrase or Stronghold back up, you can import it here."
+            "title": "Voer 'n beursie in",
+            "body": "As jy 'n herstelfrase of 'n Stronghold rugsteun het, kan jy dit hier invoer."
         },
         "import_from_text": {
-            "title": "Restore your wallet with a recovery phrase or seed",
-            "body_1": "A recovery phrase is 24 words long. This is used to recover an existing Firefly wallet.",
-            "body_2": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body_3": "Enter your seed or recovery phrase"
+            "title": "Herstel jou beursie met 'n herstelfrase of seed",
+            "body_1": "'N Herstelfrase is 24 woorde lank. Dit word gebruik om 'n bestaande Firefly beursie te herstel.",
+            "body_2": "'N seed bestaan uit 81 karakters. Dit word gebruik om van 'n ouer Trinity beursie te herstel.",
+            "body_3": "Voer you seed of herstelfrase in"
         },
         "import_from_file": {
-            "title": "Restore your wallet from a backup file",
-            "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "Herstel u beursie uit 'n rugsteunlêer",
+            "body": "Voer 'n rugsteunlêer in om jou beursie te herstel. Rugsteune kan 'n Stronghold (.stronghold) of 'n Trinity SeedVault (.kdbx) wees."
         },
         "import_backup_password": {
-            "title": "Restore your wallet from a SeedVault or Stronghold",
-            "body_1": "Please enter your backup password.",
+            "title": "Herstel jou beursie vanaf 'n SeedVault of 'n Stronghold",
+            "body_1": "Voer asseblief jou rugsteunwagwoord in.",
             "body_2": "This is the password you set when you first created your backup."
         },
         "import_success": {
@@ -235,7 +235,7 @@
         "confirm_pin": "Confirm PIN code",
         "save_backup_file": "Save backup file",
         "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
-        "verify_recovery_phrase": "Verify recovery phrase",
+        "verify_recovery_phrase": "Verifieer herstelfrase",
         "reveal_recovery_phrase": "Reveal recovery phrase",
         "import_seedvault": "Import SeedVault",
         "check_again": "No, Check Again",
