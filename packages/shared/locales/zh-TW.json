@@ -62,10 +62,10 @@
         "recovery_phrase": {
             "title": "註記詞",
             "body_1": "請仔細的按照順序寫下這些詞",
-            "body_2": "Keep your recovery phrase private and safely stored. Do not share it with anyone."
+            "body_2": "請保障你的恢復詞組隱私及安全。不要與任何人分享。"
         },
         "verify_recovery_phrase": {
-            "title": "Verify recovery phrase",
+            "title": "驗證種子助記詞",
             "body": "Let's check you wrote down the phrase correctly. Select the words in the correct order."
         },
         "backup_wallet": {
@@ -73,15 +73,15 @@
             "body": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup."
         },
         "recovery_phrase_saved": {
-            "title": "Successfully backed up",
+            "title": "備份成功",
             "body": "You have backed up your wallet to a Stronghold."
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your wallet is ready to go."
+            "title": "恭喜您",
+            "body": "您的錢包已就緒"
         },
         "import": {
-            "title": "Import a wallet",
+            "title": "匯入錢包",
             "body": "If you have a recovery phrase or Stronghold back up, you can import it here."
         },
         "import_from_text": {
@@ -104,44 +104,44 @@
             "body": "You can now set up your new wallet."
         },
         "migrate": {
-            "title": "Migrate your funds",
+            "title": "轉移你的資金",
             "body_1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
             "body_2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
-            "new": "Your new wallet"
+            "existing": "你的舊錢包",
+            "new": "你的新錢包"
         },
         "migrate_failed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "您的餘額",
+            "body": "您的餘額正確嗎？"
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "設定",
             "generalSettings": {
-                "title": "General Settings",
+                "title": "一般設定",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "security": {
-                "title": "Security",
+                "title": "安全性",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
+                "title": "進階設定",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Help and Information",
+                "title": "幫助及資訊",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profileDetails": {
-                "title": "Profile Details",
+                "title": "個人資料詳情",
                 "description": "Temp"
             },
             "theme": {
-                "title": "Theme",
+                "title": "佈景主題",
                 "description": "Temp"
             },
             "language": {
@@ -149,11 +149,11 @@
                 "description": "Temp"
             },
             "currency": {
-                "title": "Currency",
+                "title": "貨幣",
                 "description": "Temp"
             },
             "notifications": {
-                "title": "Notifications",
+                "title": "通知",
                 "description": "Temp"
             },
             "exportStronghold": {
@@ -161,19 +161,19 @@
                 "description": "Temp"
             },
             "appLock": {
-                "title": "App Lock",
+                "title": "鎖定程式",
                 "description": "Temp"
             },
             "changePassword": {
-                "title": "Change Password",
+                "title": "更改密碼",
                 "description": "Temp"
             },
             "resyncAccounts": {
-                "title": "Resync Accounts",
+                "title": "重新同步帳戶",
                 "description": "Temp"
             },
             "resetWallet": {
-                "title": "Reset Wallet",
+                "title": "重設錢包",
                 "description": "Temp"
             },
             "deepLinks": {
@@ -181,7 +181,7 @@
                 "description": "Temp"
             },
             "developerMode": {
-                "title": "Developer Mode",
+                "title": "開發者模式",
                 "description": "Temp"
             },
             "nodeSettings": {
@@ -197,15 +197,15 @@
                 "description": "Temp"
             },
             "stateExport": {
-                "title": "State Export",
+                "title": "輸出狀態",
                 "description": "Temp"
             },
             "troubleshoot": {
-                "title": "Troubleshoot",
+                "title": "疑難排解",
                 "description": "Temp"
             },
             "documentation": {
-                "title": "Documentation",
+                "title": "文獻資料",
                 "description": "Temp"
             },
             "faq": {
@@ -225,7 +225,7 @@
     "actions": {
         "continue": "繼續",
         "back": "返回",
-        "import_seed": "Import an existing seed",
+        "import_seed": "匯入現有的種子",
         "import_wallet": "匯入現有錢包",
         "create_wallet": "建立新錢包",
         "save_password": "儲存密碼",
@@ -233,19 +233,19 @@
         "setup_pin": "設置 PIN 碼",
         "set_pin": "設置 PIN 碼",
         "confirm_pin": "確認 PIN 碼",
-        "save_backup_file": "Save backup file",
-        "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
-        "verify_recovery_phrase": "Verify recovery phrase",
-        "reveal_recovery_phrase": "Reveal recovery phrase",
+        "save_backup_file": "儲存備份檔案",
+        "ive_written_recovery_phrase": "我已經寫下了恢復詞組",
+        "verify_recovery_phrase": "驗證種子助記詞",
+        "reveal_recovery_phrase": "揭示恢復詞組",
         "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
+        "check_again": "再次檢查",
+        "import_from_file": "從檔案匯入",
+        "send": "傳送",
+        "receive": "收款",
+        "begin_transfer": "開始交易",
+        "try_again": "重新嘗試",
         "visit_discord": "Visit Discord",
-        "drag_drop": "Drag & Drop",
+        "drag_drop": "拖拽並釋放",
         "import_extentions": ".stronghold or .kdbx file",
         "choose_file": "選擇一個檔案",
         "drop_here": "將檔案拖至此處"
@@ -253,12 +253,12 @@
     "general": {
         "password": "密碼",
         "confirm_password": "確認密碼",
-        "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
+        "your_seed": "你的種子",
+        "recovery_phrase": "恢復詞組",
         "recent_activity": "近期活動",
         "sent": "已支出",
         "received": "已接收",
-        "send_funds": "Send funds",
+        "send_funds": "發送資金",
         "send_to_address": "傳送到地址",
         "scan_qr_or_paste": "掃描QR碼 或 貼上地址",
         "transfer_between_accounts": "在帳戶間轉移",
@@ -274,9 +274,9 @@
         "share_address": "分享地址",
         "your_address": "您的地址",
         "generate_new_address": "產生新地址",
-        "have_text_backup": "I have a text backup",
-        "have_file_backup": "I have a file backup",
-        "enter_seed_or_phrase": "Enter a recovery phrase or seed",
+        "have_text_backup": "我有文字備份",
+        "have_file_backup": "我有檔案備份",
+        "enter_seed_or_phrase": "輸入恢復詞組或種子",
         "upload_seedvault_or_stronghold": "Import a Stronghold or SeedVault file",
         "import": "導入",
         "seedvault": "SeedVault",
@@ -286,8 +286,8 @@
         "light_theme": "淺色主題",
         "dark_theme": "深色主題",
         "total_balance": "總額",
-        "incoming": "Incoming",
-        "outgoing": "Outgoing",
+        "incoming": "傳入",
+        "outgoing": "傳出",
         "accounts": "帳戶"
     }
 }
