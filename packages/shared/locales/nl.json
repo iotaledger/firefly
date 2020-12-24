@@ -32,7 +32,7 @@
             "body": "Kies de taal en het thema van je wallet"
         },
         "setup": {
-            "title": "Stel uw portemonnee in",
+            "title": "Stel je wallet in",
             "body": "Je kunt een nieuwe wallet maken of een bestaande importeren."
         },
         "password": {
@@ -69,7 +69,7 @@
             "body": "Laten we kijken of je de zin correct hebt opgeschreven. Selecteer de woorden in de juiste volgorde."
         },
         "backup_wallet": {
-            "title": "Maak een back-up van een Stronghold bestand",
+            "title": "Maak een back-up naar een Stronghold bestand",
             "body": "Voer je wachtwoord in om een back-up van je wallet te maken naar een Stronghold bestand. Je wachtwoord wordt gebruikt om de back-up te versleutelen."
         },
         "recovery_phrase_saved": {
@@ -86,12 +86,12 @@
         },
         "import_from_text": {
             "title": "Herstel je wallet met een herstelzin of seed",
-            "body_1": "Je herstelzin bestaat uit 24 woorden. Deze kan worden gebruikt om een bestaande Firefly wallet te herstellen.",
+            "body_1": "Een herstelzin bestaat uit 24 woorden. Deze kan worden gebruikt om een bestaande Firefly wallet te herstellen.",
             "body_2": "Een seed bestaat uit 81 tekens. Deze wordt gebruikt om een eerdere Trinity wallet te herstellen.",
             "body_3": "Voer je herstelzin in"
         },
         "import_from_file": {
-            "title": "Herstel je wallet met een back-up bestand",
+            "title": "Herstel je wallet met een back-upbestand",
             "body": "Importeer een back-upbestand om je wallet te herstellen. Back-ups kunnen een Stronghold bestand (.stronghold) of een Trinity SeedVault bestand (.kdbx) zijn."
         },
         "import_backup_password": {
