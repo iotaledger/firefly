@@ -37,7 +37,7 @@
         },
         "password": {
             "title": "Skep 'n wagwoord",
-            "body": "You will be asked to enter your password to send tokens from your wallet. You need a strong password to protect your funds."
+            "body": "U sal gevra word om u wagwoord in te voer om tokens uit u beursie te stuur. U het 'n sterk wagwoord nodig om u fondse te beskerm."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -45,19 +45,19 @@
             "body_2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Set up PIN code",
-            "body_1": "Enter a 6-digit PIN below. You will be asked to enter your pin to login to your wallet.",
-            "body_2": "You can use numbers only."
+            "title": "Stel PIN-kode op",
+            "body_1": "Tik 'n 6-syfer PIN hieronder. U sal gevra word om u PIN in te voer om aan te meld by u beursie.",
+            "body_2": "U kan slegs getalle gebruik."
         },
         "confirm_pin": {
-            "title": "Verify your PIN code",
-            "body": "Re-enter your PIN code to proceed."
+            "title": "Verifieer u PIN-kode",
+            "body": "Voer weer u PIN-kode in om voort te gaan."
         },
         "backup": {
             "title": "Back up your wallet",
-            "body_1": "You will now be shown a recovery phrase.",
-            "body_2": "Do not share this phrase with anyone. Your recovery phrase can be used to access your tokens from anywhere.",
-            "body_3": "If you lose your recovery phrase, you may lose your funds."
+            "body_1": "Jy sal nou vertoon word met 'n herstel frase.",
+            "body_2": "Moenie hierdie frase met iemand deel nie. U herstelfrase kan gebruik word om toegang tot u tokens te kry.",
+            "body_3": "As jy jou herstelfrase verloor, kan jy jou geld verloor."
         },
         "recovery_phrase": {
             "title": "Recovery phrase",
@@ -230,7 +230,7 @@
         "create_wallet": "Create new wallet",
         "save_password": "Save password",
         "use_biometric": "Use biometric security",
-        "setup_pin": "Set up PIN code",
+        "setup_pin": "Stel PIN-kode op",
         "set_pin": "Set PIN code",
         "confirm_pin": "Confirm PIN code",
         "save_backup_file": "Save backup file",
