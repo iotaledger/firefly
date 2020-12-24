@@ -106,7 +106,7 @@
         "migrate": {
             "title": "Guthaben migrieren",
             "body_1": "Dies ist ein automatisierter Prozess, um dein Guthaben auf deine neue Wallet zu überweisen. Wir werden nach ausgegebene Adressen suchen, welche deine Sicherheit beeinträchtigen könnten.",
-            "body_2": "Das kann einige Zeit dauern. Schalte dein Gerät nicht während der Migration aus.",
+            "body_2": "Das kann einige Zeit dauern. Schalte dein Gerät während der Migration nicht aus.",
             "existing": "Deine alte Wallet",
             "new": "Deine neue Wallet"
         },
