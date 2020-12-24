@@ -28,16 +28,16 @@
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
         "language": {
-            "title": "Language & appearance",
-            "body": "Choose your wallet’s language and theme"
+            "title": "Мова і зовнішній вигляд",
+            "body": "Оберіть мову та тему вашого гаманця"
         },
         "setup": {
-            "title": "Set up your wallet",
-            "body": "You can create a new wallet or import an existing one."
+            "title": "Налаштування Вашого гаманця",
+            "body": "Ви можете створити новий гаманець або імпортувати наявний."
         },
         "password": {
-            "title": "Create a password",
-            "body": "You will be asked to enter your password to send tokens from your wallet. You need a strong password to protect your funds."
+            "title": "Створіть пароль",
+            "body": "Вам буде запропоновано ввести пароль для надсилання токенів з вашого гаманця. Вам необхідний надійний пароль для захисту ваших коштів."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -45,47 +45,47 @@
             "body_2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Set up PIN code",
-            "body_1": "Enter a 6-digit PIN below. You will be asked to enter your pin to login to your wallet.",
-            "body_2": "You can use numbers only."
+            "title": "Встановіть PIN-код",
+            "body_1": "Введіть 6-значний PIN-код нижче. Вам буде необхідно ввести PIN-код для входу в свій гаманець.",
+            "body_2": "Можна використовувати лише цифри."
         },
         "confirm_pin": {
-            "title": "Verify your PIN code",
-            "body": "Re-enter your PIN code to proceed."
+            "title": "Підтвердіть свій PIN-код",
+            "body": "Введіть ще раз свій PIN-код, щоб продовжити."
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body_1": "You will now be shown a recovery phrase.",
-            "body_2": "Do not share this phrase with anyone. Your recovery phrase can be used to access your tokens from anywhere.",
-            "body_3": "If you lose your recovery phrase, you may lose your funds."
+            "title": "Створити резервну копію вашого гаманця",
+            "body_1": "Зараз ви побачите фразу відновлення.",
+            "body_2": "Не показуйте та не передавайте цю фразу нікому. Ваша фраза відновлення може бути використана для доступу до ваших токенів.",
+            "body_3": "Якщо ви загубите фразу відновлення, ви можете втратити свої кошти."
         },
         "recovery_phrase": {
-            "title": "Recovery phrase",
-            "body_1": "Carefully write down the words in the exact order.",
-            "body_2": "Keep your recovery phrase private and safely stored. Do not share it with anyone."
+            "title": "Фраза відновлення",
+            "body_1": "Уважно запишіть слова в правильній послідовності.",
+            "body_2": "Зберігайте вашу фразу відновлення в надійному місці. Не передавайте її іншим особам."
         },
         "verify_recovery_phrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Select the words in the correct order."
+            "title": "Перевірте фразу відновлення",
+            "body": "Давайте перевіримо, чи правильно ви записали фразу. Виберіть слова в правильному порядку."
         },
         "backup_wallet": {
-            "title": "Back up to a Stronghold file",
-            "body": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup."
+            "title": "Зробити резервну копію Stronghold",
+            "body": "Введіть свій пароль для створення резервної копії гаманця Stronghold. Ваш пароль використовується для захисту резервної копії."
         },
         "recovery_phrase_saved": {
-            "title": "Successfully backed up",
-            "body": "You have backed up your wallet to a Stronghold."
+            "title": "Резервне копіювання успішно виконано",
+            "body": "Ви створили резервну копію гаманця для Stronghold."
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your wallet is ready to go."
+            "title": "Вітаємо",
+            "body": "Ваш гаманець готовий до роботи."
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have a recovery phrase or Stronghold back up, you can import it here."
+            "title": "Імпортувати гаманець",
+            "body": "Якщо у вас є фраза для відновлення або резервна копія Stronghold, ви можете імпортувати її тут."
         },
         "import_from_text": {
-            "title": "Restore your wallet with a recovery phrase or seed",
+            "title": "Відновіть свій гаманець фразою відновлення або seed",
             "body_1": "A recovery phrase is 24 words long. This is used to recover an existing Firefly wallet.",
             "body_2": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
             "body_3": "Enter your seed or recovery phrase"
@@ -230,12 +230,12 @@
         "create_wallet": "Create new wallet",
         "save_password": "Save password",
         "use_biometric": "Use biometric security",
-        "setup_pin": "Set up PIN code",
+        "setup_pin": "Встановіть PIN-код",
         "set_pin": "Set PIN code",
         "confirm_pin": "Confirm PIN code",
         "save_backup_file": "Save backup file",
         "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
-        "verify_recovery_phrase": "Verify recovery phrase",
+        "verify_recovery_phrase": "Перевірте фразу відновлення",
         "reveal_recovery_phrase": "Reveal recovery phrase",
         "import_seedvault": "Import SeedVault",
         "check_again": "No, Check Again",
