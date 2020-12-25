@@ -33,7 +33,7 @@
         },
         "setup": {
             "title": "Richte deine Wallet ein",
-            "body": "Du kannst ein neues Wallet erstellen oder ein vorhandenes importieren."
+            "body": "Du kannst eine neue Wallet erstellen oder eine vorhandene importieren."
         },
         "password": {
             "title": "Passwort erstellen",
@@ -105,7 +105,7 @@
         },
         "migrate": {
             "title": "Guthaben migrieren",
-            "body_1": "Dies ist ein automatisierter Prozess, um dein Guthaben auf deine neue Wallet zu überweisen. Wir werden nach ausgegebene Adressen suchen, welche deine Sicherheit beeinträchtigen könnten.",
+            "body_1": "Dies ist ein automatisierter Vorgang, um dein Guthaben auf deine neue Wallet zu übertragen. Wir werden nach ausgegebenen Adressen suchen, die deine Sicherheit beeinträchtigen könnten.",
             "body_2": "Das kann einige Zeit dauern. Schalte dein Gerät während der Migration nicht aus.",
             "existing": "Deine alte Wallet",
             "new": "Deine neue Wallet"
@@ -185,7 +185,7 @@
                 "description": "Temp"
             },
             "nodeSettings": {
-                "title": "Node Einstellungen",
+                "title": "Node-Einstellungen",
                 "description": "Temp"
             },
             "proofOfWork": {
@@ -209,7 +209,7 @@
                 "description": "Temp"
             },
             "faq": {
-                "title": "FAQ",
+                "title": "Häufig gestellte Fragen",
                 "description": "Temp"
             },
             "discord": {
@@ -230,16 +230,16 @@
         "create_wallet": "Neue Wallet erstellen",
         "save_password": "Passwort speichern",
         "use_biometric": "Biometrische Sicherheit verwenden",
-        "setup_pin": "PIN-Code festlegen",
-        "set_pin": "PIN festlegen",
+        "setup_pin": "PIN-Code einrichten",
+        "set_pin": "PIN-Code festlegen",
         "confirm_pin": "PIN-Code bestätigen",
-        "save_backup_file": "Backup-Datei speichern",
+        "save_backup_file": "Sicherungsdatei speichern",
         "ive_written_recovery_phrase": "Ich habe meine Wiederherstellungsphrase aufgeschrieben",
         "verify_recovery_phrase": "Wiederherstellungsphrase bestätigen",
         "reveal_recovery_phrase": "Wiederherstellungsphrase anzeigen",
         "import_seedvault": "SeedVault importieren",
-        "check_again": "Erneut überprüfen",
-        "import_from_file": "Importiere von einer Datei",
+        "check_again": "Überprüfen Sie ihre Angaben",
+        "import_from_file": "Von einer Datei importieren",
         "send": "Senden",
         "receive": "Empfangen",
         "begin_transfer": "Transfer starten",
@@ -248,21 +248,21 @@
         "drag_drop": "Drag & Drop",
         "import_extentions": ".stronghold oder .kdbx Datei",
         "choose_file": "Wählen Sie eine Datei",
-        "drop_here": "Dateien hier ablegen"
+        "drop_here": "Datei hier ablegen"
     },
     "general": {
         "password": "Passwort",
         "confirm_password": "Passwort bestätigen",
-        "your_seed": "Ihr Seed",
+        "your_seed": "Dein Seed",
         "recovery_phrase": "Wiederherstellungsphrase",
         "recent_activity": "Kürzliche Aktivität",
         "sent": "Gesendet",
         "received": "Empfangen",
         "send_funds": "Guthaben senden",
         "send_to_address": "Zu Adresse senden",
-        "scan_qr_or_paste": "Scannen Sie einen QR-Code oder fügen Sie eine Adresse ein",
-        "transfer_between_accounts": "Zwischen Konten transferieren",
-        "move_funds_between_accounts": "Guthaben zwischen Ihren Konten verschieben",
+        "scan_qr_or_paste": "Scanne einen QR-Code oder füge eine Adresse ein",
+        "transfer_between_accounts": "Zwischen Konten übertragen",
+        "move_funds_between_accounts": "Guthaben zwischen deinen Konten verschieben",
         "account": "Konto",
         "sending_to_address": "An Adresse senden",
         "amount": "Betrag",
@@ -270,19 +270,19 @@
         "reference": "Referenz",
         "from": "Von",
         "to": "An",
-        "receive_funds": "Guthaben erhalten",
+        "receive_funds": "Guthaben empfangen",
         "share_address": "Adresse teilen",
         "your_address": "Deine Adresse",
         "generate_new_address": "Neue Adresse erstellen",
-        "have_text_backup": "Ich habe ein Text-backup",
-        "have_file_backup": "Ich habe ein Datei-backup",
+        "have_text_backup": "Ich habe eine Text-Sicherung",
+        "have_file_backup": "Ich habe eine Datei-Sicherung",
         "enter_seed_or_phrase": "Wiederherstellungsphrase oder Seed eingeben",
-        "upload_seedvault_or_stronghold": "Importiere eine Stronghold oder SeedVault Datei",
+        "upload_seedvault_or_stronghold": "Importiere eine Stronghold- oder SeedVault-Datei",
         "import": "Importieren",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Sprache",
-        "appearance": "Aussehen",
+        "appearance": "Darstellung",
         "light_theme": "Heller Modus",
         "dark_theme": "Dunkler Modus",
         "total_balance": "Gesamtguthaben",
