@@ -189,7 +189,7 @@
                 "description": "Temp"
             },
             "proofOfWork": {
-                "title": "Bewys van werk",
+                "title": "Proof of Work",
                 "description": "Temp"
             },
             "errorLog": {
@@ -209,7 +209,7 @@
                 "description": "Temp"
             },
             "faq": {
-                "title": "Gereelde vrae",
+                "title": "FAQ",
                 "description": "Temp"
             },
             "discord": {
@@ -233,7 +233,7 @@
         "setup_pin": "Stel PIN-kode op",
         "set_pin": "Stel PIN-kode in",
         "confirm_pin": "Bevestig die PIN-kode",
-        "save_backup_file": "Stoor rugsteunlêer",
+        "save_backup_file": "Stoor back-up lêer",
         "ive_written_recovery_phrase": "Ek het my herstelfrase neergeskryf",
         "verify_recovery_phrase": "Verifieer herstelfrase",
         "reveal_recovery_phrase": "Openbaar herstelfrase",
@@ -274,8 +274,8 @@
         "share_address": "Deel 'n adres",
         "your_address": "Jou adres",
         "generate_new_address": "Genereer nuwe adres",
-        "have_text_backup": "Ek het 'n teks-rugsteun",
-        "have_file_backup": "Ek het 'n lêer-rugsteun",
+        "have_text_backup": "Ek het 'n teks back-up",
+        "have_file_backup": "Ek het 'n lêer back-up",
         "enter_seed_or_phrase": "Voer 'n herstelfrase of seed in",
         "upload_seedvault_or_stronghold": "Voer 'n Stronghold of SeedVault lêer in",
         "import": "Invoer",
