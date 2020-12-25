@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding_1": {
-            "title": "Verzend, ontvang & beheer je IOTA",
+            "title": "Verzend, ontvang en beheer je IOTA",
             "body": "Firefly is een veilig en eenvoudig te gebruiken IOTA wallet."
         },
         "legal": {
@@ -46,7 +46,7 @@
         },
         "pin": {
             "title": "PIN-code instellen",
-            "body_1": "Voer hieronder een 6-cijferige PIN-code in. Je hebt je PIN-code nodig om in te loggen in je wallet.",
+            "body_1": "Voer een 6-cijferige PIN-code in. Je hebt deze PIN-code nodig om in te loggen in je wallet.",
             "body_2": "Je kunt alleen cijfers gebruiken."
         },
         "confirm_pin": {
@@ -61,12 +61,12 @@
         },
         "recovery_phrase": {
             "title": "Herstelzin",
-            "body_1": "Schrijf de woorden zorgvuldig op in de exacte volgorde.",
+            "body_1": "Neem de woorden over precies zoals ze hier staan.",
             "body_2": "Houd je herstelzin privé en veilig opgeslagen. Deel deze met niemand."
         },
         "verify_recovery_phrase": {
             "title": "Verifieer je herstelzin",
-            "body": "Laten we kijken of je de zin correct hebt opgeschreven. Selecteer de woorden in de juiste volgorde."
+            "body": "Laten we controleren of de zin correct is overgenomen. Selecteer de woorden in de juiste volgorde."
         },
         "backup_wallet": {
             "title": "Maak een back-up naar een Stronghold bestand",
@@ -88,7 +88,7 @@
             "title": "Herstel je wallet met een herstelzin of seed",
             "body_1": "Een herstelzin bestaat uit 24 woorden. Deze kan worden gebruikt om een bestaande Firefly wallet te herstellen.",
             "body_2": "Een seed bestaat uit 81 tekens. Deze wordt gebruikt om een eerdere Trinity wallet te herstellen.",
-            "body_3": "Voer je herstelzin in"
+            "body_3": "Voer je seed of herstelzin in"
         },
         "import_from_file": {
             "title": "Herstel je wallet met een back-upbestand",
@@ -197,11 +197,11 @@
                 "description": "Temp"
             },
             "stateExport": {
-                "title": "Staat exporteren",
+                "title": "Status exporteren",
                 "description": "Temp"
             },
             "troubleshoot": {
-                "title": "Probleemoplossing",
+                "title": "Problemen oplossen",
                 "description": "Temp"
             },
             "documentation": {
@@ -231,11 +231,11 @@
         "save_password": "Wachtwoord opslaan",
         "use_biometric": "Biometrische beveiliging gebruiken",
         "setup_pin": "PIN-code instellen",
-        "set_pin": "Pincode instellen",
+        "set_pin": "PIN-code invoeren",
         "confirm_pin": "PIN-code bevestigen",
         "save_backup_file": "Bewaar back-upbestand",
         "ive_written_recovery_phrase": "Ik heb mijn herstelzin opgeschreven",
-        "verify_recovery_phrase": "Verifieer jouw herstel zin",
+        "verify_recovery_phrase": "Verifieer jouw herstelzin",
         "reveal_recovery_phrase": "Toon herstelzin",
         "import_seedvault": "Importeer SeedVault",
         "check_again": "Nee, controleer opnieuw",
