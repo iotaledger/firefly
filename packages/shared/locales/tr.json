@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding_1": {
-            "title": "IOTA gönder, iste ve yönet",
+            "title": "IOTA gönder, iste ve düzenle",
             "body": "Firefly güvenli ve kullanımı kolay bir IOTA cüzdanıdır."
         },
         "legal": {
