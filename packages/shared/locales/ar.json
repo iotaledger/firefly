@@ -268,8 +268,8 @@
         "amount": "Amount",
         "add_address": "Add Address",
         "reference": "Reference",
-        "from": "From",
-        "to": "To",
+        "from": "مِن",
+        "to": "الى",
         "receive_funds": "Receive funds",
         "share_address": "Share an address",
         "your_address": "Your address",
@@ -286,8 +286,8 @@
         "light_theme": "Light theme",
         "dark_theme": "Dark theme",
         "total_balance": "Total Balance",
-        "incoming": "Incoming",
-        "outgoing": "Outgoing",
+        "incoming": "الواردة",
+        "outgoing": "الصادرة",
         "accounts": "Accounts"
     }
 }
