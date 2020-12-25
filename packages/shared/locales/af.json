@@ -54,7 +54,7 @@
             "body": "Voer weer jou PIN-kode in om voort te gaan."
         },
         "backup": {
-            "title": "Rugsteun you beursie",
+            "title": "Back-up you beursie",
             "body_1": "Jy sal nou vertoon word met 'n herstel frase.",
             "body_2": "Moenie hierdie frase met iemand deel nie. Jou herstelfrase kan gebruik word om toegang tot jou tokens te kry.",
             "body_3": "As jy jou herstelfrase verloor, kan jy jou geld verloor."
@@ -69,12 +69,12 @@
             "body": "Kom ons kyk of jy die frase korrek neergeskryf het. Kies die woorde in die regte volgorde."
         },
         "backup_wallet": {
-            "title": "Rugsteun na 'n Stronghold lêer",
-            "body": "Voer jou wagwoord in om you beursie na 'n Stronghold lêer te rugsteun. Jou wagwoord word gebruik om die rugsteun te enkripteer."
+            "title": "Back-up na 'n Stronghold lêer",
+            "body": "Voer jou wagwoord in om you beursie na 'n Stronghold lêer te rugsteun. Jou wagwoord word gebruik om die back-up te enkripteer."
         },
         "recovery_phrase_saved": {
             "title": "Rugsteun suksesvol",
-            "body": "Jy het jou beursie gerusteun na 'n Stronghold."
+            "body": "Jy het jou beursie ge back-up na 'n Stronghold."
         },
         "congratulations": {
             "title": "Baie geluk",
@@ -82,7 +82,7 @@
         },
         "import": {
             "title": "Voer 'n beursie in",
-            "body": "As jy 'n herstelfrase of 'n Stronghold rugsteun het, kan jy dit hier invoer."
+            "body": "As jy 'n herstelfrase of 'n Stronghold back-up het, kan jy dit hier invoer."
         },
         "import_from_text": {
             "title": "Herstel jou beursie met 'n herstelfrase of seed",
@@ -91,16 +91,16 @@
             "body_3": "Voer you seed of herstelfrase in"
         },
         "import_from_file": {
-            "title": "Herstel u beursie uit 'n rugsteunlêer",
-            "body": "Voer 'n rugsteunlêer in om jou beursie te herstel. Rugsteune kan 'n Stronghold (.stronghold) of 'n Trinity SeedVault (.kdbx) wees."
+            "title": "Herstel u beursie uit 'n back-up lêer",
+            "body": "Voer 'n rugsteunlêer in om jou beursie te herstel. Back-up kan 'n Stronghold (.stronghold) of 'n Trinity SeedVault (.kdbx) wees."
         },
         "import_backup_password": {
             "title": "Herstel jou beursie vanaf 'n SeedVault of 'n Stronghold",
-            "body_1": "Voer asseblief jou rugsteunwagwoord in.",
+            "body_1": "Voer asseblief jou back-up wagwoord in.",
             "body_2": "Dit is die wagwoord wat jy ingestel het toe jy die rugsteun gemaak het."
         },
         "import_success": {
-            "title": "Jy het jou rugsteun suksesvol herwin",
+            "title": "Jy het jou back-up suksesvol herwin",
             "body": "Jy kan nou jou nuwe beursie instel."
         },
         "migrate": {
