@@ -121,7 +121,7 @@
         "settings": {
             "settings": "Réglages",
             "generalSettings": {
-                "title": "Paramètres Généraux",
+                "title": "Réglages Généraux",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "security": {
@@ -260,7 +260,7 @@
         "received": "Reçu",
         "send_funds": "Envoyer des fonds",
         "send_to_address": "Envoyer à une Adresse",
-        "scan_qr_or_paste": "Scanner un QR code ou coller une Adresse",
+        "scan_qr_or_paste": "Scannez un QR code ou collez une Adresse",
         "transfer_between_accounts": "Transfert Entre Comptes",
         "move_funds_between_accounts": "Déplacer des fonds entre vos Comptes",
         "account": "Compte",
