@@ -32,7 +32,7 @@
             "body": "Wähle die Sprache und das Design deiner Wallet"
         },
         "setup": {
-            "title": "Richte dein Wallet ein",
+            "title": "Richte deine Wallet ein",
             "body": "Du kannst ein neues Wallet erstellen oder ein vorhandenes importieren."
         },
         "password": {
@@ -45,7 +45,7 @@
             "body_2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "PIN einrichten",
+            "title": "PIN-Code festlegen",
             "body_1": "Gib unten eine 6-stellige PIN ein. Diese PIN wird später zum Login in deine Wallet benötigt.",
             "body_2": "Du kannst nur Zahlen verwenden."
         },
@@ -54,27 +54,27 @@
             "body": "Gebe deine PIN erneut ein um fortzufahren."
         },
         "backup": {
-            "title": "Erstelle ein Backup des Wallets",
-            "body_1": "Es wird dir jetzt eine Wiederherstellungs-Phrase angezeigt.",
-            "body_2": "Teilen Sie diese Phrase mit niemandem. Ihre Wiederherstellungsphrase kann verwendet werden, um von überall auf Ihre Token zuzugreifen.",
-            "body_3": "Wenn Sie Ihre Wiederherstellungsphrase verlieren, können Sie Ihr Guthaben verlieren."
+            "title": "Deine Wallet sichern",
+            "body_1": "Dir wird jetzt eine Wiederherstellungsphrase angezeigt.",
+            "body_2": "Teile diese Phrase mit niemandem. Deine Wiederherstellungsphrase kann verwendet werden, um von überall auf deine Token zuzugreifen.",
+            "body_3": "Falls du deine Wiederherstellungsphrase verlierst, kannst du dein Guthaben verlieren."
         },
         "recovery_phrase": {
             "title": "Wiederherstellungsphrase",
             "body_1": "Schreibe die Wörter sorgfältig in der richtigen Reihenfolge auf.",
-            "body_2": "Halte deine Wiederherstellungsphrase geheim und speichere sie sicher. Teilen sie mit niemandem."
+            "body_2": "Halte deine Wiederherstellungsphrase geheim und bewahre sie sicher auf. Teile sie mit niemandem."
         },
         "verify_recovery_phrase": {
-            "title": "Wiederherstellungsphrase verifizieren",
+            "title": "Wiederherstellungsphrase bestätigen",
             "body": "Lass uns überprüfen, ob du die Phrase korrekt notiert hast. Wähle die Wörter in der richtigen Reihenfolge."
         },
         "backup_wallet": {
             "title": "Backup in eine Stronghold Datei",
-            "body": "Gebe deine Passwort ein, um deine Wallet in einer Stronghold Datei zu sichern. Das Passwort wird verwendet, um die Sicherung zu verschlüsseln."
+            "body": "Gib dein Passwort ein, um deine Wallet in einer Stronghold-Datei zu sichern. Das Passwort wird verwendet, um die Sicherung zu verschlüsseln."
         },
         "recovery_phrase_saved": {
             "title": "Erfolgreich gesichert",
-            "body": "Sie haben ein Backup Ihrer Wallet auf Stronghold erstellt."
+            "body": "Du hast deine Wallet in einem Stronghold gesichert."
         },
         "congratulations": {
             "title": "Glückwunsch",
@@ -88,16 +88,16 @@
             "title": "Stelle deine Wallet aus einer Wiederherstellungsphrase oder einem Seed wieder her",
             "body_1": "Eine Wiederherstellungsphrase ist 24 Wörter lang. Sie wird benutzt, um eine bestehende Firefly Wallet wiederherzustellen.",
             "body_2": "Ein Seed besteht aus 81 Zeichen. Er wird benutzt, um eine ältere Trinity Wallet wiederherzustellen.",
-            "body_3": "Gebe deinen Seed oder eine Wiederherstellungsphrase ein"
+            "body_3": "Gib deinen Seed oder deine Wiederherstellungsphrase ein"
         },
         "import_from_file": {
             "title": "Wallet aus einer Sicherungsdatei wiederherstellen",
-            "body": "Importiere eine Backup Datei um deine Wallet wiederherzustellen. Backups können entweder eine Stronghold (.stronghold) oder ein Trinity SeedVault (.kdbx) sein."
+            "body": "Importiere eine Sicherungsdatei, um deine Wallet wiederherzustellen. Backups können entweder ein Stronghold (.stronghold) oder ein Trinity SeedVault (.kdbx) sein."
         },
         "import_backup_password": {
             "title": "Wallet aus SeedVault oder Stronghold wiederherstellen",
-            "body_1": "Bitte gebe dein Backup Passwort ein.",
-            "body_2": "Dies ist das Passwort, welches du beim ersten Erstellen des Backups gesetzt hast."
+            "body_1": "Bitte gib dein Sicherungspasswort ein.",
+            "body_2": "Dies ist das Passwort, das du beim Erstellen deiner Sicherung festgelegt hast."
         },
         "import_success": {
             "title": "Du hast dein Backup erfolgreich wiederhergestellt",
@@ -230,12 +230,12 @@
         "create_wallet": "Neue Wallet erstellen",
         "save_password": "Passwort speichern",
         "use_biometric": "Biometrische Sicherheit verwenden",
-        "setup_pin": "PIN einrichten",
+        "setup_pin": "PIN-Code festlegen",
         "set_pin": "PIN festlegen",
         "confirm_pin": "PIN-Code bestätigen",
-        "save_backup_file": "Backup Datei speichern",
+        "save_backup_file": "Backup-Datei speichern",
         "ive_written_recovery_phrase": "Ich habe meine Wiederherstellungsphrase aufgeschrieben",
-        "verify_recovery_phrase": "Wiederherstellungsphrase verifizieren",
+        "verify_recovery_phrase": "Wiederherstellungsphrase bestätigen",
         "reveal_recovery_phrase": "Wiederherstellungsphrase anzeigen",
         "import_seedvault": "SeedVault importieren",
         "check_again": "Erneut überprüfen",
