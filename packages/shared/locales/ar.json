@@ -119,7 +119,7 @@
             "body": "Is your balance correct?"
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "الاعدادات",
             "generalSettings": {
                 "title": "General Settings",
                 "description": "Configure your wallet’s appearance and other general settings"
@@ -133,7 +133,7 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Help and Information",
+                "title": "المساعدة والمعلومات",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profileDetails": {
@@ -145,11 +145,11 @@
                 "description": "Temp"
             },
             "language": {
-                "title": "Language",
+                "title": "اللغة",
                 "description": "Temp"
             },
             "currency": {
-                "title": "Currency",
+                "title": "عملة",
                 "description": "Temp"
             },
             "notifications": {
@@ -240,10 +240,10 @@
         "import_seedvault": "Import SeedVault",
         "check_again": "No, Check Again",
         "import_from_file": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
+        "send": "إرسال",
+        "receive": "استلام",
+        "begin_transfer": "بدء التحويل",
+        "try_again": "حاول مرة اخرى",
         "visit_discord": "Visit Discord",
         "drag_drop": "Drag & Drop",
         "import_extentions": ".stronghold or .kdbx file",
