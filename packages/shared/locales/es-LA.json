@@ -236,7 +236,7 @@
         "save_backup_file": "Guardar copia de seguridad",
         "ive_written_recovery_phrase": "He escrito mi frase de recuperación",
         "verify_recovery_phrase": "Verifica la frase de recuperación",
-        "reveal_recovery_phrase": "Mostrar frase de recuperación",
+        "reveal_recovery_phrase": "Revelar frase de recuperación",
         "import_seedvault": "Importar SeedVault",
         "check_again": "No, comprobar de nuevo",
         "import_from_file": "Importar desde un archivo",
@@ -245,7 +245,7 @@
         "begin_transfer": "Iniciar transferencia",
         "try_again": "Inténtalo de nuevo",
         "visit_discord": "Visita Discord",
-        "drag_drop": "Arrastrar y soltar",
+        "drag_drop": "Arrastra y suelta",
         "import_extentions": "archivo .stronghold o .kdbx",
         "choose_file": "Seleccionar un Archivo",
         "drop_here": "Coloca tu archivo aquí"
