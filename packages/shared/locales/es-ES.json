@@ -37,7 +37,7 @@
         },
         "password": {
             "title": "Crear una contraseña",
-            "body": "Se te va a pedir que introduzcas tu contraseña para mandar los tokens desde tu billetera. Necesitas una fuerte contraseña para proteger tus fondos."
+            "body": "Se te pedirá que introduzcas tu contraseña para enviar tokens desde tu cartera. Necesitas una contraseña fuerte y segura para proteger tus fondos."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -57,7 +57,7 @@
             "title": "Copia de seguridad",
             "body_1": "Ahora se te va a mostrar la frase de recuperación.",
             "body_2": "No compartas esta frase con nadie. Tu frase de recuperación puede ser usada para acceder a tus fondos desde cualquier sitio.",
-            "body_3": "Si pierde su frase de recuperación, puede perder sus fondos."
+            "body_3": "Si pierdes tu frase de recuperación, puedes perder tus fondos."
         },
         "recovery_phrase": {
             "title": "Frase de recuperación",
