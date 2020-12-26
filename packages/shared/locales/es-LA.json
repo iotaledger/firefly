@@ -46,35 +46,35 @@
         },
         "pin": {
             "title": "Setear el código PIN",
-            "body_1": "Introduce un PIN de 6 dígitos. Se te pedirá el PIN para entrar en tu billetera.",
+            "body_1": "Ingresa un PIN de 6 dígitos a continuación. Será requerido al entrar a la billetera.",
             "body_2": "Sólo puedes usar números."
         },
         "confirm_pin": {
             "title": "Verifica tu código PIN",
-            "body": "Vuelve a introducir tu código PIN."
+            "body": "Vuelve a introducir tu código PIN para continuar."
         },
         "backup": {
-            "title": "Copia de seguridad",
+            "title": "Respalda tu billetera",
             "body_1": "Ahora se te va a mostrar la frase de recuperación.",
-            "body_2": "No compartas esta frase con nadie. Tu frase de recuperación puede ser usada para acceder a tus fondos desde cualquier sitio.",
-            "body_3": "Si pierde su frase de recuperación, puede perder sus fondos."
+            "body_2": "No compartas esta frase con nadie. Tu frase de recuperación puede ser usada para acceder a tus fondos desde cualquier lugar.",
+            "body_3": "Si pierdes tu frase de recuperación, puedes perder tu fondos."
         },
         "recovery_phrase": {
             "title": "Frase de recuperación",
-            "body_1": "Escriba cuidadosamente las palabras en el orden exacto.",
-            "body_2": "Mantenga su frase de recuperación guardada de forma segura. No la comparta con nadie."
+            "body_1": "Escriba cuidadosamente las palabras en el mismo orden.",
+            "body_2": "Mantén tu frase de recuperación guardada de forma segura y privada."
         },
         "verify_recovery_phrase": {
-            "title": "Verificar frase de recuperación",
+            "title": "Verifica la frase de recuperación",
             "body": "Vamos a comprobar que escribiste correctamente la frase. Selecciona las palabras en el orden correcto."
         },
         "backup_wallet": {
-            "title": "Copia de seguridad en un archivo Stronghold",
-            "body": "Introduzca su contraseña para hacer una copia de seguridad de su billetera en un archivo Stronghold. Su contraseña se utiliza para cifrar la copia de seguridad."
+            "title": "Respaldar en un archivo Stronghold",
+            "body": "Ingresa tu contraseña para hacer un respaldo de tu billetera en un archivo Stronghold. La contraseña se utiliza para cifrar el respaldo."
         },
         "recovery_phrase_saved": {
             "title": "Respaldado con éxito",
-            "body": "Ha hecho una copia de seguridad de su cartera en Strongholg."
+            "body": "Has hecho un respaldo de tu billetera en Strongholg."
         },
         "congratulations": {
             "title": "Felicitaciones",
@@ -82,33 +82,33 @@
         },
         "import": {
             "title": "Importar una billetera",
-            "body": "Si tiene una frase de recuperación o una copia de seguridad de Stronghold, puede importarla aquí."
+            "body": "Si tienes una frase de recuperación o una copia de seguridad de Stronghold, puedes importarla aquí."
         },
         "import_from_text": {
-            "title": "Restaurar su billetera con una frase de recuperación o semilla",
-            "body_1": "Una frase de recuperación tiene 24 palabras. Esto se utiliza para recuperar una billetera Firefly existente.",
-            "body_2": "Una semilla consta de 81 caracteres. Esto se utiliza para reestablecerse desde una billetera Trinity más antigua.",
+            "title": "Restaurar tu billetera con una frase de recuperación o semilla",
+            "body_1": "Una frase de recuperación tiene 24 palabras. Esta se utiliza para recuperar una billetera de Firefly existente.",
+            "body_2": "Una semilla consta de 81 caracteres. Esta se utiliza para reestablecer desde una billetera Trinity más antigua.",
             "body_3": "Introduce tu semilla o tu frase de recuperación"
         },
         "import_from_file": {
-            "title": "Restaura su billetera desde un archivo de copia de seguridad",
-            "body": "Importa un archivo de copia de seguridad para restaurar tu cartera. Las copias de seguridad pueden ser un Stronghold (.stronghold) o un Trinity SeedVault (.kdbx)."
+            "title": "Restaura su billetera desde un archivo de respaldo",
+            "body": "Importa un archivo de respaldo para restaurar tu billetera. Los respaldos pueden ser un Stronghold (.stronghold) o un Trinity SeedVault (.kdbx)."
         },
         "import_backup_password": {
-            "title": "Restaurar su billetera desde una SeedVault o Stronghold",
-            "body_1": "Por favor, introduzca su contraseña de respaldo.",
-            "body_2": "Esta es la contraseña que configuraste cuando creaste por primera vez tu copia de seguridad."
+            "title": "Resraura tu billetera desde una SeedVault o Stronghold",
+            "body_1": "Por favor, introduce tu contraseña de respaldo.",
+            "body_2": "Esta es la contraseña que configuraste cuando creaste por primera vez tu respaldo."
         },
         "import_success": {
-            "title": "Has recuperado con éxito tu copia de seguridad",
+            "title": "Has recuperado con éxito tu respaldo",
             "body": "Ahora puede configurar su nueva billetera."
         },
         "migrate": {
             "title": "Migrar tus fondos",
-            "body_1": "Este es un proceso automatizado para transferir sus fondos a su nueva cartera. Comprobaremos si hay direcciones usadas que puedan debilitar su seguridad.",
-            "body_2": "Puede tardar un tiempo. No apague su dispositivo durante la migración.",
-            "existing": "Su antigua billetera",
-            "new": "Su nueva cartera"
+            "body_1": "Este es un proceso automatizado para transferir tus fondos a tu nueva billetera. Comprobaremos si hay direcciones usadas que puedan debilitar tu seguridad.",
+            "body_2": "Puede tardar un tiempo. No apagues tu dispositivo durante la migración.",
+            "existing": "Tu antigua billetera",
+            "new": "Tu nueva billetera"
         },
         "migrate_failed": {
             "title": "To do",
@@ -161,7 +161,7 @@
                 "description": "Temp"
             },
             "appLock": {
-                "title": "Bloqueo de Aplicación",
+                "title": "Bloqueo de la Aplicación",
                 "description": "Temp"
             },
             "changePassword": {
@@ -209,7 +209,7 @@
                 "description": "Temp"
             },
             "faq": {
-                "title": "FAQ",
+                "title": "Preguntas Frecuentes",
                 "description": "Temp"
             },
             "discord": {
@@ -227,15 +227,15 @@
         "back": "Atrás",
         "import_seed": "Importar una semilla existente",
         "import_wallet": "Importar billetera existente",
-        "create_wallet": "Crear nueva billetera",
+        "create_wallet": "Crear billetera nueva",
         "save_password": "Guardar contraseña",
         "use_biometric": "Usar seguridad biométrica",
         "setup_pin": "Setear el código PIN",
-        "set_pin": "Definir código PIN",
-        "confirm_pin": "Confirmar código PIN",
+        "set_pin": "Establecer código PIN",
+        "confirm_pin": "Confirma el código PIN",
         "save_backup_file": "Guardar copia de seguridad",
         "ive_written_recovery_phrase": "He escrito mi frase de recuperación",
-        "verify_recovery_phrase": "Verificar frase de recuperación",
+        "verify_recovery_phrase": "Verifica la frase de recuperación",
         "reveal_recovery_phrase": "Mostrar frase de recuperación",
         "import_seedvault": "Importar SeedVault",
         "check_again": "No, comprobar de nuevo",
