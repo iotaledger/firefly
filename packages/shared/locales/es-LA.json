@@ -2,11 +2,11 @@
     "views": {
         "onboarding_1": {
             "title": "Envía, Recibe y Gestiona tus IOTA",
-            "body": "Firefly es un monedero IOTA seguro y fácil de usar."
+            "body": "Firefly es una billetera de IOTA segura y fácil de usar."
         },
         "legal": {
             "title": "Legal",
-            "body": "Por favor revisa la Política de Privacidad y los Términos del Servicio.",
+            "body": "Por favor revise la Política de Privacidad y los Términos del Servicio.",
             "privacy_policy": {
                 "title": "Política de Privacidad",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
@@ -33,11 +33,11 @@
         },
         "setup": {
             "title": "Configura tu billetera",
-            "body": "Puede crear una billetera nueva o importar una existente."
+            "body": "Puedes crear una billetera nueva o importar una existente."
         },
         "password": {
-            "title": "Crear una contraseña",
-            "body": "Se te va a pedir que introduzcas tu contraseña para mandar los tokens desde tu billetera. Necesitas una fuerte contraseña para proteger tus fondos."
+            "title": "Crea una contraseña",
+            "body": "La contraseña será requerida al mandar tokens desde tu billetera. Necesitas una contraseña fuerte para proteger tus fondos."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -45,7 +45,7 @@
             "body_2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Código PIN",
+            "title": "Setear el código PIN",
             "body_1": "Introduce un PIN de 6 dígitos. Se te pedirá el PIN para entrar en tu billetera.",
             "body_2": "Sólo puedes usar números."
         },
@@ -230,7 +230,7 @@
         "create_wallet": "Crear nueva billetera",
         "save_password": "Guardar contraseña",
         "use_biometric": "Usar seguridad biométrica",
-        "setup_pin": "Código PIN",
+        "setup_pin": "Setear el código PIN",
         "set_pin": "Definir código PIN",
         "confirm_pin": "Confirmar código PIN",
         "save_backup_file": "Guardar copia de seguridad",
