@@ -95,7 +95,7 @@
             "body": "Importuj plik kopii zapasowej, aby przywrócić portfel. Możliwe kopie zapasowe to Stronghold (.stronghold) lub Trinity SeedVault (.kdbx)."
         },
         "import_backup_password": {
-            "title": "Przywróć swój portfel z SeedVault lub Stronghold",
+            "title": "Przywróć swój portfel za pomocą SeedVault lub Stronghold",
             "body_1": "Wprowadź hasło kopii zapasowej.",
             "body_2": "To jest hasło, które ustawiłeś podczas tworzenia kopii zapasowej."
         },
