@@ -18,3 +18,4 @@ neon-build = "0.5.0"
 neon = "0.5.0"
 wallet-actor-system = { path = "../../.." }
 smol = {version = "0.3", features = ["tokio02"] }
+serde_json = "1.0"
