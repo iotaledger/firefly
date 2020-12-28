@@ -39,12 +39,12 @@
             case ImportState.TextImport:
                 const { input } = params
                 // Dummy
-                if (input.includes('123')) {
-                    importType = 'mnemonic'
-                    nextState = ImportState.Success
-                } else {
+                if (input.length === 81) {
                     importType = 'seed'
                     dispatch('next', { importType })
+                } else {
+                    importType = 'mnemonic'
+                    nextState = ImportState.Success
                 }
                 break
             case ImportState.FileImport:
@@ -65,7 +65,7 @@
             case ImportState.BackupPassword:
                 const { password } = params
 
-                api.restoreBackup(importFilePath, {
+                api.restoreBackup(importFilePath, password, {
                     onSuccess() {
                         nextState = ImportState.Success
                     },
