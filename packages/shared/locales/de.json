@@ -247,7 +247,7 @@
         "visit_discord": "Besuche uns auf Discord",
         "drag_drop": "Drag & Drop",
         "import_extentions": ".stronghold oder .kdbx Datei",
-        "choose_file": "Wählen Sie eine Datei",
+        "choose_file": "Datei auswählen",
         "drop_here": "Datei hier ablegen"
     },
     "general": {
@@ -273,7 +273,7 @@
         "receive_funds": "Guthaben empfangen",
         "share_address": "Adresse teilen",
         "your_address": "Deine Adresse",
-        "generate_new_address": "Neue Adresse erstellen",
+        "generate_new_address": "Neue Adresse generieren",
         "have_text_backup": "Ich habe eine Text-Sicherung",
         "have_file_backup": "Ich habe eine Datei-Sicherung",
         "enter_seed_or_phrase": "Wiederherstellungsphrase oder Seed eingeben",
@@ -282,7 +282,7 @@
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Sprache",
-        "appearance": "Darstellung",
+        "appearance": "Design",
         "light_theme": "Heller Modus",
         "dark_theme": "Dunkler Modus",
         "total_balance": "Gesamtguthaben",
