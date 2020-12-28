@@ -1,5 +1,16 @@
-<script>
+<script lang="typescript">
     import { Logo, Icon } from 'shared/components'
+
+    export let activeTab
+
+    enum Tabs {
+        Wallet = 'wallet',
+        Settings = 'settings'
+    }
+
+    function setActiveTab(tab: Tabs) {
+        activeTab = tab
+    }
 </script>
 
 <style type="text/scss">
@@ -12,11 +23,10 @@
     <Logo classes="mb-10" width="48px" logo="logo-firefly" />
     <nav class="flex flex-grow flex-col justify-between">
         <div>
-            <Icon icon="wallet" />
+            <button on:click={() => setActiveTab(Tabs.Wallet)}><Icon icon="wallet" /></button>
         </div>
         <div>
-            <Icon classes="mb-8" icon="bell" />
-            <Icon icon="settings" />
+            <button on:click={() => setActiveTab(Tabs.Settings)}><Icon icon="settings" /></button>
         </div>
     </nav>
 </aside>

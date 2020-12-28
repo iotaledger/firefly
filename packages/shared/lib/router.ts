@@ -32,7 +32,7 @@ export const view = writable<string>(null)
 export enum AppRoute {
     Welcome = "welcome",
     Legal = "legal",
-    Settings = "settings",
+    Language = "language",
     Setup = "setup",
     Password = "password",
     Protect = "protect",
@@ -91,9 +91,9 @@ export const routerNext = (event) => {
             nextRoute = AppRoute.Legal
             break
         case AppRoute.Legal:
-            nextRoute = AppRoute.Settings
+            nextRoute = AppRoute.Language
             break
-        case AppRoute.Settings:
+        case AppRoute.Language:
             nextRoute = AppRoute.Setup
             break
         case AppRoute.Setup:

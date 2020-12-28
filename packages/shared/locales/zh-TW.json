@@ -167,6 +167,8 @@
         "amount": "Amount",
         "add_address": "Add Address",
         "reference": "Reference",
+        "from": "From",
+        "to": "To",
         "receive_funds": "Receive funds",
         "share_address": "Share an address",
         "your_address": "Your address",
@@ -181,6 +183,10 @@
         "language": "Language",
         "appearance": "Appearance",
         "light_theme": "Light theme",
-        "dark_theme": "Dark theme"
+        "dark_theme": "Dark theme",
+        "total_balance": "Total Balance",
+        "incoming": "Incoming",
+        "outgoing": "Outgoing",
+        "accounts": "Accounts"
     }
 }
