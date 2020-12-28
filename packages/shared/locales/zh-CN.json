@@ -66,7 +66,7 @@
         },
         "verify_recovery_phrase": {
             "title": "验证恢复密语",
-            "body": "请检查您记录的密语是否正确。请按照正确的顺序选择这些单词。"
+            "body": "让我们检查你是否能正确地写下密语。请按照正确的顺序选择这些单词。"
         },
         "backup_wallet": {
             "title": "备份到 Stronghold 文件",
