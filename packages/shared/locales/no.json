@@ -2,7 +2,7 @@
     "views": {
         "onboarding_1": {
             "title": "Send, motta & håndtere dine IOTA",
-            "body": "Firefly er en sikker og enkel å bruke IOTA lommebok."
+            "body": "Firefly er en sikker og enkel å bruke IOTA-lommebok."
         },
         "legal": {
             "title": "Juridisk",
@@ -29,14 +29,14 @@
         },
         "language": {
             "title": "Språk & utseende",
-            "body": "Velg din lommeboks språk og tema"
+            "body": "Bestem språk og tema for lommebok"
         },
         "setup": {
             "title": "Sett opp lommeboken din",
             "body": "Du kan opprette en ny lommebok eller importere en eksisterende."
         },
         "password": {
-            "title": "Opprett et passord",
+            "title": "Opprett passord",
             "body": "Du trenger passordet for å kunne sende midler fra lommeboken din. Et sterkt passord er viktig for å beskytte midlene dine."
         },
         "protect": {
@@ -57,7 +57,7 @@
             "title": "Sikkerhetskopier din lommebok",
             "body_1": "Du vil nå bli vist en gjenopprettingsfrase.",
             "body_2": "Ikke del denne frasen med noen. Din gjenopprettingsfrase kan brukes til å få tilgang til tokens fra hvor som helst.",
-            "body_3": "Hvis du mister din recovery frase, kan du miste midlene dine."
+            "body_3": "Hvis du mister gjenopprettingsfrasen, kan du miste midlene dine."
         },
         "recovery_phrase": {
             "title": "Gjenopprettingsfrase",
@@ -65,7 +65,7 @@
             "body_2": "Hold gjenopprettingsfrasen privat og trygt lagret. Ikke del den med noen."
         },
         "verify_recovery_phrase": {
-            "title": "Bekreft frasen for gjenoppretting",
+            "title": "Bekreft gjenopprettingsfrasen",
             "body": "La oss sjekke at du skrev ned frasen riktig. Velg ordene i riktig rekkefølge."
         },
         "backup_wallet": {
@@ -86,7 +86,7 @@
         },
         "import_from_text": {
             "title": "Gjenopprette lommeboken med en gjenopprettingsfrase eller hovednøkkel",
-            "body_1": "En gjenopprettingsfrase er 24 ord. Dette er brukt for å gjenopprette en eksisterende Firefly lommebok.",
+            "body_1": "En gjenopprettingsfrase er 24 ord. Dette er brukt for å gjenopprette en eksisterende Firefly-lommebok.",
             "body_2": "Et hovednøkkel består av 81 tegn. Dette brukes for å gjenopprette fra en eldre Trinity lommebok.",
             "body_3": "Angi hovednøkkel eller gjenopprettingsfrase"
         },
