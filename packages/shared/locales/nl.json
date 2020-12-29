@@ -95,7 +95,7 @@
             "body": "Importeer een back-upbestand om je wallet te herstellen. Back-ups kunnen een Stronghold bestand (.stronghold) of een Trinity SeedVault bestand (.kdbx) zijn."
         },
         "import_backup_password": {
-            "title": "Herstel uw wallet vanuit een Seedvault of vanuit Stronghold",
+            "title": "Herstel je wallet vanuit een Seedvault of vanuit Stronghold",
             "body_1": "Voer je back-up wachtwoord in.",
             "body_2": "Dit is het wachtwoord dat je hebt ingesteld toen je de back-up maakte."
         },
