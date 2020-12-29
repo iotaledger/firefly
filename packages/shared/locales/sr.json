@@ -141,7 +141,7 @@
                 "description": "Temp"
             },
             "theme": {
-                "title": "Theme",
+                "title": "Тема",
                 "description": "Temp"
             },
             "language": {
@@ -149,138 +149,138 @@
                 "description": "Temp"
             },
             "currency": {
-                "title": "Currency",
+                "title": "Валута",
                 "description": "Temp"
             },
             "notifications": {
-                "title": "Notifications",
+                "title": "Обавештења",
                 "description": "Temp"
             },
             "exportStronghold": {
-                "title": "Export Stronghold",
+                "title": "Извоз Стронгхолд-a",
                 "description": "Temp"
             },
             "appLock": {
-                "title": "App Lock",
+                "title": "Закључавање апликације",
                 "description": "Temp"
             },
             "changePassword": {
-                "title": "Change Password",
+                "title": "Промени лозинку",
                 "description": "Temp"
             },
             "resyncAccounts": {
-                "title": "Resync Accounts",
+                "title": "Поново синхронизујте рачуне",
                 "description": "Temp"
             },
             "resetWallet": {
-                "title": "Reset Wallet",
+                "title": "Ресетујте новчаник",
                 "description": "Temp"
             },
             "deepLinks": {
-                "title": "Deep Links",
+                "title": "Дубоке везе",
                 "description": "Temp"
             },
             "developerMode": {
-                "title": "Developer Mode",
+                "title": "Развојни режим",
                 "description": "Temp"
             },
             "nodeSettings": {
-                "title": "Node Settings",
+                "title": "Ноде Подешавања",
                 "description": "Temp"
             },
             "proofOfWork": {
-                "title": "Proof of Work",
+                "title": "Доказ о раду",
                 "description": "Temp"
             },
             "errorLog": {
-                "title": "Error Log",
+                "title": "Евиденција грешака",
                 "description": "Temp"
             },
             "stateExport": {
-                "title": "State Export",
+                "title": "Државни извоз",
                 "description": "Temp"
             },
             "troubleshoot": {
-                "title": "Troubleshoot",
+                "title": "Решавање проблема",
                 "description": "Temp"
             },
             "documentation": {
-                "title": "Documentation",
+                "title": "Документација",
                 "description": "Temp"
             },
             "faq": {
-                "title": "FAQ",
+                "title": "Најчешћа питања",
                 "description": "Temp"
             },
             "discord": {
-                "title": "Discord",
+                "title": "Дискорд",
                 "description": "Temp"
             },
             "about": {
-                "title": "About",
+                "title": "О апликацији",
                 "description": "Temp"
             }
         }
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
+        "continue": "Настави",
+        "back": "Назад",
+        "import_seed": "Увезите постојеће семе",
+        "import_wallet": "Увезите постојећи новчаник",
+        "create_wallet": "Направите нови новчаник",
+        "save_password": "Сачувај лозинку",
+        "use_biometric": "Користите биометријску сигурност",
         "setup_pin": "Подесите ПИН код",
-        "set_pin": "Set PIN code",
-        "confirm_pin": "Confirm PIN code",
-        "save_backup_file": "Save backup file",
-        "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
+        "set_pin": "Подесите ПИН код",
+        "confirm_pin": "Потврдите ПИН код",
+        "save_backup_file": "Сачувајте датотеку сигурносне копије",
+        "ive_written_recovery_phrase": "Записао сам фразу за опоравак",
         "verify_recovery_phrase": "Верификујте фразу за опоравак",
-        "reveal_recovery_phrase": "Reveal recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
-        "visit_discord": "Visit Discord",
-        "drag_drop": "Drag & Drop",
-        "import_extentions": ".stronghold or .kdbx file",
-        "choose_file": "Choose a File",
-        "drop_here": "Drop your file here"
+        "reveal_recovery_phrase": "Откривање фразе за опоравак",
+        "import_seedvault": "Увезите СеедВаулт",
+        "check_again": "Провери поново",
+        "import_from_file": "Увези из датотеке*",
+        "send": "Пошаљи",
+        "receive": "Добити",
+        "begin_transfer": "Започни пренос",
+        "try_again": "Покушај поново",
+        "visit_discord": "Посетите Дисцорд",
+        "drag_drop": "Превуци и испусти",
+        "import_extentions": ".стронгхолд или .кдбк датотека",
+        "choose_file": "Изабери датотеку",
+        "drop_here": "Овде превуци фајлове"
     },
     "general": {
-        "password": "Password",
-        "confirm_password": "Confirm password",
-        "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
-        "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
-        "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "transfer_between_accounts": "Transfer Between Accounts",
-        "move_funds_between_accounts": "Move funds between your Accounts",
-        "account": "Account",
-        "sending_to_address": "Sending to address",
-        "amount": "Amount",
-        "add_address": "Add Address",
-        "reference": "Reference",
-        "from": "From",
-        "to": "To",
-        "receive_funds": "Receive funds",
-        "share_address": "Share an address",
-        "your_address": "Your address",
-        "generate_new_address": "Generate new address",
-        "have_text_backup": "I have a text backup",
-        "have_file_backup": "I have a file backup",
-        "enter_seed_or_phrase": "Enter a recovery phrase or seed",
-        "upload_seedvault_or_stronghold": "Import a Stronghold or SeedVault file",
-        "import": "Import",
-        "seedvault": "SeedVault",
-        "stronghold": "Stronghold",
+        "password": "Лозинка",
+        "confirm_password": "Потврдите лозинку",
+        "your_seed": "Твоје Семе",
+        "recovery_phrase": "Фраза за опоравак",
+        "recent_activity": "Скорашња активност",
+        "sent": "Послато",
+        "received": "Примљено",
+        "send_funds": "Пошаљите средства",
+        "send_to_address": "Пошаљите на адресу",
+        "scan_qr_or_paste": "Скенирајте КР код или налепите адресу",
+        "transfer_between_accounts": "Пренос између рачуна",
+        "move_funds_between_accounts": "Премештајте средства између својих рачуна",
+        "account": "Рачун",
+        "sending_to_address": "Слање на адресу",
+        "amount": "Износ",
+        "add_address": "Додај Адресу",
+        "reference": "Препорука",
+        "from": "Од",
+        "to": "За",
+        "receive_funds": "Примајте средства",
+        "share_address": "Подели Адресу",
+        "your_address": "Ваша адреса",
+        "generate_new_address": "Генериши нову адресу",
+        "have_text_backup": "Имам резервну копију текста",
+        "have_file_backup": "Имам резервну копију датотеке",
+        "enter_seed_or_phrase": "Унесите фразу за опоравак или семе",
+        "upload_seedvault_or_stronghold": "Увезите датотеку Стронгхолд или СеедВаулт",
+        "import": "Увези",
+        "seedvault": "СеедВаулт",
+        "stronghold": "Стронгхолд",
         "language": "Jezik",
         "appearance": "Изглед",
         "light_theme": "Светла тема",
