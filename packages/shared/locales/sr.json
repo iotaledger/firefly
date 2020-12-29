@@ -1,14 +1,14 @@
 {
     "views": {
         "onboarding_1": {
-            "title": "Send, Receive & Manage your IOTA",
-            "body": "Firefly is a secure and easy-to-use IOTA wallet."
+            "title": "Пошаљите, примите и управљајте својим ИОТА-ом",
+            "body": "Фирефли је сигуран и једноставан за употребу ИОТА новчаник."
         },
         "legal": {
-            "title": "Legal",
-            "body": "Please review the Privacy Policy and Terms of Service.",
+            "title": "Правне информације",
+            "body": "Молимо прегледајте Политику приватности и Услове услуге.",
             "privacy_policy": {
-                "title": "Privacy Policy",
+                "title": "Правила о приватности",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -17,7 +17,7 @@
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "terms_of_service": {
-                "title": "Terms of Service",
+                "title": "Услови коришћења",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -28,16 +28,16 @@
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
         "language": {
-            "title": "Language & appearance",
-            "body": "Choose your wallet’s language and theme"
+            "title": "Језик и изглед",
+            "body": "Изаберите језик и тему новчаника"
         },
         "setup": {
-            "title": "Set up your wallet",
-            "body": "You can create a new wallet or import an existing one."
+            "title": "Намести новчаник",
+            "body": "Можете да креирате нови новчаник или да увезете постојећи."
         },
         "password": {
-            "title": "Create a password",
-            "body": "You will be asked to enter your password to send tokens from your wallet. You need a strong password to protect your funds."
+            "title": "Направите лозинку",
+            "body": "Од вас ће бити затражено да унесете лозинку за слање жетона из новчаника. За заштиту средстава потребна вам је јака лозинка."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -45,99 +45,99 @@
             "body_2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Set up PIN code",
-            "body_1": "Enter a 6-digit PIN below. You will be asked to enter your pin to login to your wallet.",
-            "body_2": "You can use numbers only."
+            "title": "Подесите ПИН код",
+            "body_1": "Унесите 6-цифрени ПИН испод. Од вас ће бити затражено да унесете свој пин да бисте се пријавили у свој новчаник.",
+            "body_2": "Можете користити само бројеве."
         },
         "confirm_pin": {
-            "title": "Verify your PIN code",
-            "body": "Re-enter your PIN code to proceed."
+            "title": "Потврдите свој ПИН код",
+            "body": "Поново унесите ПИН код да бисте наставили."
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body_1": "You will now be shown a recovery phrase.",
-            "body_2": "Do not share this phrase with anyone. Your recovery phrase can be used to access your tokens from anywhere.",
-            "body_3": "If you lose your recovery phrase, you may lose your funds."
+            "title": "Направите резервну копију новчаника",
+            "body_1": "Сада ће вам се приказати фраза за опоравак.",
+            "body_2": "Не делите ову фразу ни са ким. Ваша фраза за опоравак може се користити за приступ токенима са било ког места.",
+            "body_3": "Ако изгубите фразу за опоравак, можете изгубити средства."
         },
         "recovery_phrase": {
-            "title": "Recovery phrase",
-            "body_1": "Carefully write down the words in the exact order.",
-            "body_2": "Keep your recovery phrase private and safely stored. Do not share it with anyone."
+            "title": "Фраза за опоравак",
+            "body_1": "Пажљиво запишите речи тачним редоследом.",
+            "body_2": "Нека ваша фраза за опоравак буде приватна и безбедно ускладиштена. Не делите је ни са ким."
         },
         "verify_recovery_phrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Select the words in the correct order."
+            "title": "Верификујте фразу за опоравак",
+            "body": "Проверимо да ли сте правилно записали фразу. Изаберите речи у правилном редоследу."
         },
         "backup_wallet": {
-            "title": "Back up to a Stronghold file",
-            "body": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup."
+            "title": "Направите резервну копију у датотеци Стронгхолд",
+            "body": "Унесите лозинку да бисте направили резервну копију новчаника у датотеци Стронгхолд. Ваша лозинка се користи за шифровање резервне копије."
         },
         "recovery_phrase_saved": {
-            "title": "Successfully backed up",
-            "body": "You have backed up your wallet to a Stronghold."
+            "title": "Израђена је резервна копија",
+            "body": "Направили сте резервну копију новчаника у Стронгхолд."
         },
         "congratulations": {
             "title": "Честитамо",
-            "body": "Your wallet is ready to go."
+            "body": "Новчаник је спреман за употребу."
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have a recovery phrase or Stronghold back up, you can import it here."
+            "title": "Увезите новчаник",
+            "body": "Ако имате фразу за опоравак или резервну копију Стронгхолд-а, можете је увести овде."
         },
         "import_from_text": {
-            "title": "Restore your wallet with a recovery phrase or seed",
-            "body_1": "A recovery phrase is 24 words long. This is used to recover an existing Firefly wallet.",
-            "body_2": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body_3": "Enter your seed or recovery phrase"
+            "title": "Вратите новчаник помоћу фразе за опоравак или семена",
+            "body_1": "Фраза за опоравак дуга је 24 речи. Ово се користи за опоравак постојећег Фирефли новчаника.",
+            "body_2": "Семе се састоји од 81 знака. Ово се користи за опоравак од старијег новчаника Тринити.",
+            "body_3": "Унесите семе или фразу за опоравак"
         },
         "import_from_file": {
-            "title": "Restore your wallet from a backup file",
-            "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "Вратите новчаник из резервне датотеке",
+            "body": "Увезите датотеку резервне копије да бисте вратили новчаник. Резервне копије могу бити Стронгхолд (.стронгхолд) или Тринити СеедВаулт (.кдбк)."
         },
         "import_backup_password": {
-            "title": "Restore your wallet from a SeedVault or Stronghold",
-            "body_1": "Please enter your backup password.",
-            "body_2": "This is the password you set when you first created your backup."
+            "title": "Вратите новчаник из СеедВаулт-а или Стронгхолд-а",
+            "body_1": "Унесите резервну лозинку.",
+            "body_2": "Ово је лозинка коју сте поставили приликом првог прављења резервне копије."
         },
         "import_success": {
-            "title": "You have successfully recovered your backup",
-            "body": "You can now set up your new wallet."
+            "title": "Успешно сте опоравили резервну копију",
+            "body": "Сада можете да подесите свој новчаник."
         },
         "migrate": {
-            "title": "Migrate your funds",
-            "body_1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
-            "new": "Your new wallet"
+            "title": "Мигрирајте своја средства",
+            "body_1": "Ово је аутоматизовани процес преноса средстава у нови новчаник. Проверићемо да ли постоје потрошене адресе које слабе вашу сигурност.",
+            "body_2": "Може потрајати. Не искључујте уређај током миграције.",
+            "existing": "Твој стари новчаник",
+            "new": "Твој нови новчаник"
         },
         "migrate_failed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "Стање",
+            "body": "Да ли је ваш биланс тачан?"
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "Подешавања",
             "generalSettings": {
-                "title": "General Settings",
+                "title": "Генерална подешавања",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "security": {
-                "title": "Security",
+                "title": "Сигурност",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
+                "title": "Напредна подешавања",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Help and Information",
+                "title": "Помоћ и информације",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profileDetails": {
-                "title": "Profile Details",
+                "title": "Деталји профила",
                 "description": "Temp"
             },
             "theme": {
@@ -145,7 +145,7 @@
                 "description": "Temp"
             },
             "language": {
-                "title": "Language",
+                "title": "Jezik",
                 "description": "Temp"
             },
             "currency": {
@@ -230,12 +230,12 @@
         "create_wallet": "Create new wallet",
         "save_password": "Save password",
         "use_biometric": "Use biometric security",
-        "setup_pin": "Set up PIN code",
+        "setup_pin": "Подесите ПИН код",
         "set_pin": "Set PIN code",
         "confirm_pin": "Confirm PIN code",
         "save_backup_file": "Save backup file",
         "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
-        "verify_recovery_phrase": "Verify recovery phrase",
+        "verify_recovery_phrase": "Верификујте фразу за опоравак",
         "reveal_recovery_phrase": "Reveal recovery phrase",
         "import_seedvault": "Import SeedVault",
         "check_again": "No, Check Again",
@@ -281,13 +281,13 @@
         "import": "Import",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
-        "language": "Language",
-        "appearance": "Appearance",
-        "light_theme": "Light theme",
-        "dark_theme": "Dark theme",
-        "total_balance": "Total Balance",
-        "incoming": "Incoming",
-        "outgoing": "Outgoing",
-        "accounts": "Accounts"
+        "language": "Jezik",
+        "appearance": "Изглед",
+        "light_theme": "Светла тема",
+        "dark_theme": "Тамна тема",
+        "total_balance": "Укупно стање",
+        "incoming": "Долазни",
+        "outgoing": "Одлазни",
+        "accounts": "Рачуни"
     }
 }
