@@ -11,7 +11,7 @@
   },
   "scripts": {
     "postinstall": "yarn build",
-    "pretest": "yarn build",
+    "pretest": "yarn build:api && yarn neon build --release",
     "build": "npm-run-all -p build:api build:binding",
     "build:binding": "electron-build-env -- yarn neon build --release",
     "build:api": "rimraf ./index.js && rollup -c --silent && yarn generate-declaration",
