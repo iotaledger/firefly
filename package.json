@@ -1,0 +1,4 @@
+{
+    "private": true,
+    "workspaces": ["packages/desktop", "packages/shared", "packages/backend/bindings/node"]
+}

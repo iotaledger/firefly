@@ -1,0 +1,4 @@
+commit_message: '[ci skip]'
+files:
+  - source: packages/shared/locales/en.json
+    translation: /packages/shared/locales/%two_letters_code%.json
