@@ -5,6 +5,7 @@ import type { Transfer } from './message'
 export interface LoggerOutput {
   name?: string
   level_filter: 'off' | 'error' | 'warn' | 'info' | 'debug' | 'trace'
+  target_filters?: string[]
 }
 
 export interface LoggerConfig {
