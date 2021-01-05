@@ -61,7 +61,7 @@
         },
         "recovery_phrase": {
             "title": "Fraza za oporavak",
-            "body_1": "Pažljivo zapišite ove riječi točno ovim redoslijedom.",
+            "body_1": "Pažljivo zapišite sljedeće riječi točno ovim redoslijedom.",
             "body_2": "Svoju frazu za oporavak zadržite za sebe, na sigurnome mjestu. Ne dijelite ju ni sa kime."
         },
         "verify_recovery_phrase": {
