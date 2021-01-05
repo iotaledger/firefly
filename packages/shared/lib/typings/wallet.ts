@@ -4,8 +4,7 @@ import type { Transfer } from './message'
 
 export interface LoggerOutput {
   name?: string
-  level_filter: 'off' | 'error' | 'warn' | 'info' | 'debug' | 'trace' = 'info'
-  target_filters?: string[]
+  level_filter: 'off' | 'error' | 'warn' | 'info' | 'debug' | 'trace'
 }
 
 export interface LoggerConfig {
