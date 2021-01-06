@@ -220,6 +220,10 @@
                 "title": "О апликацији",
                 "description": "Temp"
             }
+        },
+        "login": {
+            "please_wait": "Please wait {time} seconds",
+            "incorrect_attempts": "{attempts} incorrect attempts"
         }
     },
     "actions": {
@@ -233,6 +237,7 @@
         "setup_pin": "Подесите ПИН код",
         "set_pin": "Подесите ПИН код",
         "confirm_pin": "Потврдите ПИН код",
+        "enter_your_pin": "Enter your PIN",
         "save_backup_file": "Сачувајте датотеку сигурносне копије",
         "ive_written_recovery_phrase": "Записао сам фразу за опоравак",
         "verify_recovery_phrase": "Верификујте фразу за опоравак",
@@ -288,6 +293,7 @@
         "total_balance": "Укупно стање",
         "incoming": "Долазни",
         "outgoing": "Одлазни",
-        "accounts": "Рачуни"
+        "accounts": "Рачуни",
+        "profiles": "Profiles"
     }
 }
