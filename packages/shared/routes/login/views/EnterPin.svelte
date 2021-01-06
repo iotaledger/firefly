@@ -6,7 +6,7 @@
     export let mobile
 
     let attempts = 0
-    let pinCode
+    let pinCode = ''
 
     /** Maximum number of consecutive (incorrect) attempts allowed to the user */
     const MAX_PINCODE_INCORRECT_ATTEMPTS = 3
