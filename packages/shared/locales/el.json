@@ -220,6 +220,10 @@
                 "title": "Σχετικά",
                 "description": "Temp"
             }
+        },
+        "login": {
+            "please_wait": "Please wait {time} seconds",
+            "incorrect_attempts": "{attempts} incorrect attempts"
         }
     },
     "actions": {
@@ -233,6 +237,7 @@
         "setup_pin": "Δημιουργία κωδικού PIN",
         "set_pin": "Ορίστε τον κωδικό PIN",
         "confirm_pin": "Επιβεβαιώστε τον κωδικό PIN",
+        "enter_your_pin": "Enter your PIN",
         "save_backup_file": "Αποθήκευση εφεδρικού αρχείου",
         "ive_written_recovery_phrase": "Έχω γράψει τη φράση ανάκτησης",
         "verify_recovery_phrase": "Επαληθεύστε τη φράση ανάκτησης",
@@ -288,6 +293,7 @@
         "total_balance": "Συνολικό Υπόλοιπο",
         "incoming": "Εισερχόμενο",
         "outgoing": "Εξερχόμενο",
-        "accounts": "Λογαριασμοί"
+        "accounts": "Λογαριασμοί",
+        "profiles": "Profiles"
     }
 }
