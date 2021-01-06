@@ -220,6 +220,10 @@
                 "title": "Despre",
                 "description": "Temp"
             }
+        },
+        "login": {
+            "please_wait": "Please wait {time} seconds",
+            "incorrect_attempts": "{attempts} incorrect attempts"
         }
     },
     "actions": {
@@ -233,6 +237,7 @@
         "setup_pin": "Setează-ți un cod PIN",
         "set_pin": "Setează un cod PIN",
         "confirm_pin": "Confirmă codul PIN",
+        "enter_your_pin": "Enter your PIN",
         "save_backup_file": "Salvează copia de rezervă",
         "ive_written_recovery_phrase": "Am notat fraza de recuperare",
         "verify_recovery_phrase": "Verifică fraza de recuperare",
@@ -288,6 +293,7 @@
         "total_balance": "Sold Total",
         "incoming": "În curs de primire",
         "outgoing": "În curs de ieșire",
-        "accounts": "Conturi"
+        "accounts": "Conturi",
+        "profiles": "Profiles"
     }
 }
