@@ -35,5 +35,9 @@
     "scripts": {
         "build": "tsc",
         "dev": "tsc --watch"
+    },
+    "devDependencies": {
+        "prettier": "^2.2.1",
+        "prettier-plugin-svelte": "^1.4.2"
     }
 }

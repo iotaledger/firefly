@@ -27,9 +27,7 @@
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-4">{locale('general.import')}</Text>
-            <Text type="h3" highlighted classes="mb-5">
-                {locale(`general.${importType}`)}
-            </Text>
+            <Text type="h3" highlighted classes="mb-5">{locale(`general.${importType}`)}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.import_backup_password.body_1')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.import_backup_password.body_2')}</Text>
             <Password classes="mb-6" bind:value={password} {locale} />

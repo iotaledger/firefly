@@ -1,23 +1,22 @@
 <script lang="typescript">
-    import { Icon, Text } from 'shared/components';
+    import { Icon, Text } from 'shared/components'
 
     export let locale
     export let mobile
-    
-    
+
     enum SettingsTitles {
         GeneralSettings = 'generalSettings',
-        Security = "security",
+        Security = 'security',
         AdvancedSettings = 'advancedSettings',
-        HelpAndInfo = 'helpAndInfo'
-    }   
+        HelpAndInfo = 'helpAndInfo',
+    }
 
     enum GeneralSettings {
         ProfileDetails = 'profileDetails',
         Theme = 'theme',
         Language = 'language',
         Currency = 'currency',
-        Notifications = 'notifications'
+        Notifications = 'notifications',
     }
 
     enum Security {
@@ -25,7 +24,7 @@
         AppLock = 'appLock',
         ChangePassword = 'changePassword',
         ResyncAccounts = 'resyncAccounts',
-        ResetWallet = 'resetWallet'
+        ResetWallet = 'resetWallet',
     }
 
     enum AdvancedSettings {
@@ -34,7 +33,7 @@
         NodeSettings = 'nodeSettings',
         ProofOfWork = 'proofOfWork',
         ErrorLog = 'errorLog',
-        StateExport = 'stateExport'
+        StateExport = 'stateExport',
     }
 
     enum HelpAndInfo {
@@ -42,7 +41,7 @@
         Documentation = 'documentation',
         FAQ = 'faq',
         Discord = 'discord',
-        About = 'about'
+        About = 'about',
     }
 
     enum SettingsIcons {
@@ -66,15 +65,11 @@
         documentation = 'doc',
         faq = 'speech',
         discord = 'discord',
-        about = 'help'
+        about = 'help',
     }
-
 </script>
 
-
-
 <style type="text/scss">
-
 </style>
 
 {#if mobile}
@@ -90,7 +85,9 @@
                 {#each Object.values(GeneralSettings) as setting}
                     <button class="group flex flex-row justify-start items-center hover:bg-blue-50 py-2 rounded-lg w-full">
                         <Icon icon={SettingsIcons[setting]} classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
-                        <Text type="p" secondary classes="group-hover:text-blue-500">{locale(`views.settings.${setting}.title`)}</Text>
+                        <Text type="p" secondary classes="group-hover:text-blue-500">
+                            {locale(`views.settings.${setting}.title`)}
+                        </Text>
                     </button>
                 {/each}
             </div>
@@ -101,7 +98,9 @@
                 {#each Object.values(Security) as setting}
                     <button class="group flex flex-row justify-start items-center hover:bg-blue-50 py-2 rounded-lg w-full">
                         <Icon icon={SettingsIcons[setting]} classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
-                        <Text type="p" secondary classes="group-hover:text-blue-500">{locale(`views.settings.${setting}.title`)}</Text>
+                        <Text type="p" secondary classes="group-hover:text-blue-500">
+                            {locale(`views.settings.${setting}.title`)}
+                        </Text>
                     </button>
                 {/each}
             </div>
@@ -112,7 +111,9 @@
                 {#each Object.values(AdvancedSettings) as setting}
                     <button class="group flex flex-row justify-start items-center hover:bg-blue-50 py-2 rounded-lg w-full">
                         <Icon icon={SettingsIcons[setting]} classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
-                        <Text type="p" secondary classes="group-hover:text-blue-500">{locale(`views.settings.${setting}.title`)}</Text>
+                        <Text type="p" secondary classes="group-hover:text-blue-500">
+                            {locale(`views.settings.${setting}.title`)}
+                        </Text>
                     </button>
                 {/each}
             </div>
@@ -123,7 +124,9 @@
                 {#each Object.values(HelpAndInfo) as setting}
                     <button class="group flex flex-row justify-start items-center hover:bg-blue-50 py-2 rounded-lg w-full">
                         <Icon icon={SettingsIcons[setting]} classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
-                        <Text type="p" secondary classes="group-hover:text-blue-500">{locale(`views.settings.${setting}.title`)}</Text>
+                        <Text type="p" secondary classes="group-hover:text-blue-500">
+                            {locale(`views.settings.${setting}.title`)}
+                        </Text>
                     </button>
                 {/each}
             </div>
