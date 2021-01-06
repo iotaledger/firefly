@@ -220,6 +220,10 @@
                 "title": "Rólunk",
                 "description": "Temp"
             }
+        },
+        "login": {
+            "please_wait": "Please wait {time} seconds",
+            "incorrect_attempts": "{attempts} incorrect attempts"
         }
     },
     "actions": {
@@ -233,6 +237,7 @@
         "setup_pin": "PIN-kód beállítása",
         "set_pin": "Állítson be egy PIN-kódot",
         "confirm_pin": "Erősítse meg a PIN-kódot",
+        "enter_your_pin": "Enter your PIN",
         "save_backup_file": "Biztonsági mentésfájl létrehozása",
         "ive_written_recovery_phrase": "Feljegyeztem a helyreállító kódmondatomat",
         "verify_recovery_phrase": "Helyreállító kódmondat hitelesítése",
@@ -288,6 +293,7 @@
         "total_balance": "Összesített egyenleg",
         "incoming": "Bejövő",
         "outgoing": "Kimenő",
-        "accounts": "Számlák"
+        "accounts": "Számlák",
+        "profiles": "Profiles"
     }
 }
