@@ -220,6 +220,10 @@
                 "title": "Über uns",
                 "description": "Temp"
             }
+        },
+        "login": {
+            "please_wait": "Please wait {time} seconds",
+            "incorrect_attempts": "{attempts} incorrect attempts"
         }
     },
     "actions": {
@@ -233,6 +237,7 @@
         "setup_pin": "PIN-Code einrichten",
         "set_pin": "PIN-Code festlegen",
         "confirm_pin": "PIN-Code bestätigen",
+        "enter_your_pin": "Enter your PIN",
         "save_backup_file": "Sicherungsdatei speichern",
         "ive_written_recovery_phrase": "Ich habe meine Wiederherstellungsphrase aufgeschrieben",
         "verify_recovery_phrase": "Wiederherstellungsphrase bestätigen",
@@ -273,7 +278,7 @@
         "receive_funds": "Guthaben empfangen",
         "share_address": "Adresse teilen",
         "your_address": "Deine Adresse",
-        "generate_new_address": "Neue Adresse generieren",
+        "generate_new_address": "Neue Adresse erstellen",
         "have_text_backup": "Ich habe eine Text-Sicherung",
         "have_file_backup": "Ich habe eine Datei-Sicherung",
         "enter_seed_or_phrase": "Wiederherstellungsphrase oder Seed eingeben",
@@ -288,6 +293,7 @@
         "total_balance": "Gesamtguthaben",
         "incoming": "Eingehend",
         "outgoing": "Ausgehend",
-        "accounts": "Konten"
+        "accounts": "Konten",
+        "profiles": "Profiles"
     }
 }
