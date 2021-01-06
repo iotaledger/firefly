@@ -220,6 +220,10 @@
                 "title": "विवरण",
                 "description": "Temp"
             }
+        },
+        "login": {
+            "please_wait": "Please wait {time} seconds",
+            "incorrect_attempts": "{attempts} incorrect attempts"
         }
     },
     "actions": {
@@ -233,6 +237,7 @@
         "setup_pin": "पिन कोड सेट करें",
         "set_pin": "पिन कोड सेट करें",
         "confirm_pin": "पिन कोड की पुष्टि करें",
+        "enter_your_pin": "Enter your PIN",
         "save_backup_file": "बैकअप फाइल सहेजें",
         "ive_written_recovery_phrase": "मैंने अपना पुनर्प्राप्ति वाक्यांश लिख लिया है",
         "verify_recovery_phrase": "वसूली वाक्यांश सत्यापित करें",
@@ -288,6 +293,7 @@
         "total_balance": "कुल शेष",
         "incoming": "आने वाला",
         "outgoing": "बाहर जाने वाले",
-        "accounts": "खाता"
+        "accounts": "खाता",
+        "profiles": "Profiles"
     }
 }
