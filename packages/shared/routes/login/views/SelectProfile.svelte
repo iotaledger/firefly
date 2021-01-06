@@ -15,9 +15,9 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <section class="flex flex-col h-screen">
-        <Logo width="64px" logo="logo-firefly" classes="mt-28 mx-auto" />
-        <div class="px-48 flex-1 flex justify-evenly items-center">
+    <section class="flex flex-col h-screen bg-white">
+        <Logo width="64px" logo="logo-firefly" classes="mt-24 mx-auto" />
+        <div class="px-48 mt-32	flex justify-evenly items-center">
             {#each [
                 'Charlie Varley',
                 'Umair Sarfraz',

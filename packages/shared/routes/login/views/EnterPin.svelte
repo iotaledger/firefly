@@ -75,20 +75,20 @@
         <div data-label="back-button" class="absolute top-0 left-0 pl-5 pt-5" on:click={handleBackClick}>
             <div class="flex items-center">
                 <Icon icon="arrow-left" classes="cursor-pointer text-blue-500" />
-                <strong class="ml-6 cursor-pointer">{locale('general.profiles')}</strong>
+                <Text type="h4" classes="ml-6 cursor-pointer">{locale('general.profiles')}</Text>
             </div>
         </div>
-        <div class="bg-white pt-56 pb-16 flex w-full h-full flex-col items-center justify-center">
-            <div class="flex-1 w-1/3">
+        <div class="bg-white pt-48 pb-16 flex w-full h-full flex-col items-center justify-center">
+            <div class="flex-1 w-96">
                 <Profile name="Charlie Varley" />
-                <Pin bind:value={pinCode} classes="mt-16" />
-                <Text type="p" classes="mt-12 text-center">
+                <Pin bind:value={pinCode} classes="mt-10" />
+                <Text type="p" bold classes="mt-4 text-center">
                     {attempts > 0 ? locale('views.login.incorrect_attempts', {
                               values: { attempts: attempts.toString() }
                           }) : locale('actions.enter_your_pin')}
                 </Text>
             </div>
-            <Button classes="w-1/4" disabled={!hasCorrectLength || hasReachedMaxAttempts} onClick={() => handleContinueClick()}>
+            <Button classes="w-96" disabled={!hasCorrectLength || hasReachedMaxAttempts} onClick={() => handleContinueClick()}>
                 {hasReachedMaxAttempts ? buttonText : locale('actions.continue')}
             </Button>
         </div>

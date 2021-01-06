@@ -1,4 +1,6 @@
 <script>
+    import { Text } from 'shared/components'
+
     export let width = '76px'
     export let height = '76px'
     export let classes = undefined
@@ -31,5 +33,5 @@
             <slot />
         {:else}{getInitials()}{/if}
     </div>
-    <strong class="mt-8">{name}</strong>
+    <Text type="h4" bold classes="mt-8">{name}</Text>
 </div>
