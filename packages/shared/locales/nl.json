@@ -220,6 +220,10 @@
                 "title": "Over",
                 "description": "Temp"
             }
+        },
+        "login": {
+            "please_wait": "Please wait {time} seconds",
+            "incorrect_attempts": "{attempts} incorrect attempts"
         }
     },
     "actions": {
@@ -233,6 +237,7 @@
         "setup_pin": "PIN-code instellen",
         "set_pin": "PIN-code invoeren",
         "confirm_pin": "PIN-code bevestigen",
+        "enter_your_pin": "Enter your PIN",
         "save_backup_file": "Bewaar back-upbestand",
         "ive_written_recovery_phrase": "Ik heb mijn herstelzin opgeschreven",
         "verify_recovery_phrase": "Verifieer jouw herstelzin",
@@ -288,6 +293,7 @@
         "total_balance": "Totaalsaldo",
         "incoming": "Inkomend",
         "outgoing": "Uitgaand",
-        "accounts": "Rekeningen"
+        "accounts": "Rekeningen",
+        "profiles": "Profiles"
     }
 }
