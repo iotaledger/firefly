@@ -220,6 +220,10 @@
                 "title": "O aplikaciji",
                 "description": "Temp"
             }
+        },
+        "login": {
+            "please_wait": "Please wait {time} seconds",
+            "incorrect_attempts": "{attempts} incorrect attempts"
         }
     },
     "actions": {
@@ -233,6 +237,7 @@
         "setup_pin": "Postavite PIN",
         "set_pin": "Postavite PIN",
         "confirm_pin": "Potvrdite PIN",
+        "enter_your_pin": "Enter your PIN",
         "save_backup_file": "Spremite pričuvnu kopiju",
         "ive_written_recovery_phrase": "Zapisao sam svoju frazu za oporavak",
         "verify_recovery_phrase": "Potvrdite frazu za oporavak",
@@ -288,6 +293,7 @@
         "total_balance": "Ukupno stanje",
         "incoming": "Dolazni",
         "outgoing": "Odlazni",
-        "accounts": "Računi"
+        "accounts": "Računi",
+        "profiles": "Profiles"
     }
 }
