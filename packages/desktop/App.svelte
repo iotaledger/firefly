@@ -27,7 +27,7 @@
     }
     let splash = true
     setupI18n()
-    onMount(async() => {
+    onMount(async () => {
         setTimeout(() => {
             splash = false
             initRouter()
