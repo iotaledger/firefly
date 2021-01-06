@@ -220,6 +220,10 @@
                 "title": "Lisätietoja",
                 "description": "Temp"
             }
+        },
+        "login": {
+            "please_wait": "Please wait {time} seconds",
+            "incorrect_attempts": "{attempts} incorrect attempts"
         }
     },
     "actions": {
@@ -233,6 +237,7 @@
         "setup_pin": "Määritä PIN-koodi",
         "set_pin": "Aseta PIN-koodi",
         "confirm_pin": "Vahvista PIN-koodi",
+        "enter_your_pin": "Enter your PIN",
         "save_backup_file": "Tallenna varmuuskopiotiedosto",
         "ive_written_recovery_phrase": "Olen tallentanut palautuslausekkeeni",
         "verify_recovery_phrase": "Vahvista palautuslauseke",
@@ -288,6 +293,7 @@
         "total_balance": "Saldo yhteensä",
         "incoming": "Saapuva",
         "outgoing": "Lähtevä",
-        "accounts": "Tilit"
+        "accounts": "Tilit",
+        "profiles": "Profiles"
     }
 }
