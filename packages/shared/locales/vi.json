@@ -220,6 +220,10 @@
                 "title": "About",
                 "description": "Temp"
             }
+        },
+        "login": {
+            "please_wait": "Please wait {time} seconds",
+            "incorrect_attempts": "{attempts} incorrect attempts"
         }
     },
     "actions": {
@@ -233,6 +237,7 @@
         "setup_pin": "Thiết lập mã PIN",
         "set_pin": "Set PIN code",
         "confirm_pin": "Confirm PIN code",
+        "enter_your_pin": "Enter your PIN",
         "save_backup_file": "Save backup file",
         "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
         "verify_recovery_phrase": "Xác thực cụm từ phục hồi tài khoản ví",
@@ -288,6 +293,7 @@
         "total_balance": "Tổng số dư",
         "incoming": "Tiền chuyển đến",
         "outgoing": "Tiền chuyển đi",
-        "accounts": "Tài khoản"
+        "accounts": "Tài khoản",
+        "profiles": "Profiles"
     }
 }
