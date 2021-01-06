@@ -220,6 +220,10 @@
                 "title": "O aplikacji",
                 "description": "Temp"
             }
+        },
+        "login": {
+            "please_wait": "Please wait {time} seconds",
+            "incorrect_attempts": "{attempts} incorrect attempts"
         }
     },
     "actions": {
@@ -233,6 +237,7 @@
         "setup_pin": "Ustaw kod PIN",
         "set_pin": "Ustaw kod PIN",
         "confirm_pin": "Potwierdź kod PIN",
+        "enter_your_pin": "Enter your PIN",
         "save_backup_file": "Zapisz plik kopii zapasowej",
         "ive_written_recovery_phrase": "Zapisałem moją frazę odzyskiwania",
         "verify_recovery_phrase": "Sprawdź frazę odzyskiwania",
@@ -288,6 +293,7 @@
         "total_balance": "Saldo całkowite",
         "incoming": "Przychodzące",
         "outgoing": "Wychodzące",
-        "accounts": "Konta"
+        "accounts": "Konta",
+        "profiles": "Profiles"
     }
 }
