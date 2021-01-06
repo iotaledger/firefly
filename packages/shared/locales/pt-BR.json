@@ -220,6 +220,10 @@
                 "title": "Sobre",
                 "description": "Temp"
             }
+        },
+        "login": {
+            "please_wait": "Please wait {time} seconds",
+            "incorrect_attempts": "{attempts} incorrect attempts"
         }
     },
     "actions": {
@@ -233,6 +237,7 @@
         "setup_pin": "Definir código PIN",
         "set_pin": "Definir código PIN",
         "confirm_pin": "Confirmar código PIN",
+        "enter_your_pin": "Enter your PIN",
         "save_backup_file": "Salvar arquivo de backup",
         "ive_written_recovery_phrase": "Eu anotei minha frase de recuperação",
         "verify_recovery_phrase": "Verificar frase de recuperação",
@@ -288,6 +293,7 @@
         "total_balance": "Saldo Total",
         "incoming": "Recebendo",
         "outgoing": "Efetuadas",
-        "accounts": "Contas"
+        "accounts": "Contas",
+        "profiles": "Profiles"
     }
 }
