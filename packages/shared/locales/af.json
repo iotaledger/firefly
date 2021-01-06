@@ -220,6 +220,10 @@
                 "title": "Oor",
                 "description": "Temp"
             }
+        },
+        "login": {
+            "please_wait": "Please wait {time} seconds",
+            "incorrect_attempts": "{attempts} incorrect attempts"
         }
     },
     "actions": {
@@ -233,6 +237,7 @@
         "setup_pin": "Stel PIN-kode op",
         "set_pin": "Stel PIN-kode in",
         "confirm_pin": "Bevestig die PIN-kode",
+        "enter_your_pin": "Enter your PIN",
         "save_backup_file": "Stoor back-up lêer",
         "ive_written_recovery_phrase": "Ek het my herstelfrase neergeskryf",
         "verify_recovery_phrase": "Verifieer herstelfrase",
@@ -288,6 +293,7 @@
         "total_balance": "Totale balans",
         "incoming": "Inkomende",
         "outgoing": "Uitgaande",
-        "accounts": "Rekeninge"
+        "accounts": "Rekeninge",
+        "profiles": "Profiles"
     }
 }
