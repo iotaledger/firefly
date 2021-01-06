@@ -78,7 +78,7 @@
                 <Text type="h4" classes="ml-6 cursor-pointer">{locale('general.profiles')}</Text>
             </div>
         </div>
-        <div class="bg-white pt-48 pb-16 flex w-full h-full flex-col items-center justify-center">
+        <div class="bg-white pt-40 pb-16 flex w-full h-full flex-col items-center justify-center">
             <div class="flex-1 w-96">
                 <Profile name="Charlie Varley" />
                 <Pin bind:value={pinCode} classes="mt-10" />
