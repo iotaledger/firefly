@@ -42,6 +42,7 @@ export enum AppRoute {
     Balance = "balance",
     Congratulations = "congratulations",
     Dashboard = "dashboard",
+    Login = 'login'
 }
 
 enum SetupType {
@@ -68,8 +69,9 @@ let walletSetupType = writable<SetupType>(null)
  */
 export const initRouter = () => {
     let userLogged: boolean = get(logged)
+
     if (userLogged) {
-        setRoute(AppRoute.Dashboard)
+        setRoute(AppRoute.Login)
     } else {
         setRoute(AppRoute.Welcome)
     }
@@ -87,6 +89,9 @@ export const routerNext = (event) => {
     let nextRoute: AppRoute
 
     switch (currentRoute) {
+        case AppRoute.Login:
+            nextRoute = AppRoute.Dashboard;
+            break
         case AppRoute.Welcome:
             nextRoute = AppRoute.Legal
             break
