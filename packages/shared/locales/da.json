@@ -220,6 +220,10 @@
                 "title": "Om",
                 "description": "Temp"
             }
+        },
+        "login": {
+            "please_wait": "Please wait {time} seconds",
+            "incorrect_attempts": "{attempts} incorrect attempts"
         }
     },
     "actions": {
@@ -233,6 +237,7 @@
         "setup_pin": "Vælg en PIN-kode",
         "set_pin": "Angiv pinkode",
         "confirm_pin": "Bekræft pinkode",
+        "enter_your_pin": "Enter your PIN",
         "save_backup_file": "Gem backupfil",
         "ive_written_recovery_phrase": "Jeg har skrevet min gendannelsessætning ned",
         "verify_recovery_phrase": "Bekræft gendannelsessætning",
@@ -288,6 +293,7 @@
         "total_balance": "Saldo I Alt",
         "incoming": "Indgående",
         "outgoing": "Udgående",
-        "accounts": "Konti"
+        "accounts": "Konti",
+        "profiles": "Profiles"
     }
 }
