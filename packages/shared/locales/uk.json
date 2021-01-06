@@ -220,6 +220,10 @@
                 "title": "Про програму",
                 "description": "Temp"
             }
+        },
+        "login": {
+            "please_wait": "Please wait {time} seconds",
+            "incorrect_attempts": "{attempts} incorrect attempts"
         }
     },
     "actions": {
@@ -233,6 +237,7 @@
         "setup_pin": "Встановіть PIN-код",
         "set_pin": "Встановіть PIN-код",
         "confirm_pin": "Підтвердьте PIN-код",
+        "enter_your_pin": "Enter your PIN",
         "save_backup_file": "Збережіть файл резервної копії",
         "ive_written_recovery_phrase": "Я записав свою фразу для відновлення",
         "verify_recovery_phrase": "Перевірте фразу відновлення",
@@ -288,6 +293,7 @@
         "total_balance": "Загальний баланс",
         "incoming": "Вхідні",
         "outgoing": "Вихідні",
-        "accounts": "Аккаунт"
+        "accounts": "Аккаунт",
+        "profiles": "Profiles"
     }
 }
