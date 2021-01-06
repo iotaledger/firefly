@@ -220,6 +220,10 @@
                 "title": "관련 정보",
                 "description": "Temp"
             }
+        },
+        "login": {
+            "please_wait": "Please wait {time} seconds",
+            "incorrect_attempts": "{attempts} incorrect attempts"
         }
     },
     "actions": {
@@ -233,6 +237,7 @@
         "setup_pin": "PIN코드 설정하기",
         "set_pin": "PIN코드 설정",
         "confirm_pin": "PIN코드 확인하기",
+        "enter_your_pin": "Enter your PIN",
         "save_backup_file": "백업파일 저장하기",
         "ive_written_recovery_phrase": "복구 '문장'을 기입했습니다.",
         "verify_recovery_phrase": "복구 '문장'이 정확한지 확인하세요.",
@@ -288,6 +293,7 @@
         "total_balance": "총 잔액",
         "incoming": "받는중",
         "outgoing": "보내는중",
-        "accounts": "계정"
+        "accounts": "계정",
+        "profiles": "Profiles"
     }
 }
