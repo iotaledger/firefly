@@ -220,6 +220,10 @@
                 "title": "O aplikaci",
                 "description": "Temp"
             }
+        },
+        "login": {
+            "please_wait": "Please wait {time} seconds",
+            "incorrect_attempts": "{attempts} incorrect attempts"
         }
     },
     "actions": {
@@ -233,6 +237,7 @@
         "setup_pin": "Nastavení PIN",
         "set_pin": "Nastavte PIN",
         "confirm_pin": "Potvrďte PIN",
+        "enter_your_pin": "Enter your PIN",
         "save_backup_file": "Uložte zálohu",
         "ive_written_recovery_phrase": "Zapsal jsem si frázi pro obnovení",
         "verify_recovery_phrase": "Ověřte obnovovací frázi",
@@ -288,6 +293,7 @@
         "total_balance": "Celkový zůstatek",
         "incoming": "Příchozí",
         "outgoing": "Odchozí",
-        "accounts": "Účty"
+        "accounts": "Účty",
+        "profiles": "Profiles"
     }
 }
