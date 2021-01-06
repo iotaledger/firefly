@@ -220,6 +220,10 @@
                 "title": "Om",
                 "description": "Temp"
             }
+        },
+        "login": {
+            "please_wait": "Please wait {time} seconds",
+            "incorrect_attempts": "{attempts} incorrect attempts"
         }
     },
     "actions": {
@@ -233,6 +237,7 @@
         "setup_pin": "Ställ in PIN-kod",
         "set_pin": "Ställ in PIN-kod",
         "confirm_pin": "Bekräfta PIN-kod",
+        "enter_your_pin": "Enter your PIN",
         "save_backup_file": "Spara säkerhetskopia",
         "ive_written_recovery_phrase": "Jag har skrivit ner min återställningsfras",
         "verify_recovery_phrase": "Verifiera återställningsfras",
@@ -288,6 +293,7 @@
         "total_balance": "Totalt saldo",
         "incoming": "Inkommande",
         "outgoing": "Utgående",
-        "accounts": "Konton"
+        "accounts": "Konton",
+        "profiles": "Profiles"
     }
 }
