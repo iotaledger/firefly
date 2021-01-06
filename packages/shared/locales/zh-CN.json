@@ -220,6 +220,10 @@
                 "title": "关于",
                 "description": "Temp"
             }
+        },
+        "login": {
+            "please_wait": "Please wait {time} seconds",
+            "incorrect_attempts": "{attempts} incorrect attempts"
         }
     },
     "actions": {
@@ -233,6 +237,7 @@
         "setup_pin": "设置PIN码",
         "set_pin": "设置PIN码",
         "confirm_pin": "确认PIN码",
+        "enter_your_pin": "Enter your PIN",
         "save_backup_file": "保存备份文件",
         "ive_written_recovery_phrase": "我已经写下我的恢复短语",
         "verify_recovery_phrase": "验证恢复密语",
@@ -288,6 +293,7 @@
         "total_balance": "总余额",
         "incoming": "收到",
         "outgoing": "转出",
-        "accounts": "帐户"
+        "accounts": "帐户",
+        "profiles": "Profiles"
     }
 }
