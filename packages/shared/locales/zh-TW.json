@@ -220,6 +220,10 @@
                 "title": "關於",
                 "description": "Temp"
             }
+        },
+        "login": {
+            "please_wait": "Please wait {time} seconds",
+            "incorrect_attempts": "{attempts} incorrect attempts"
         }
     },
     "actions": {
@@ -233,6 +237,7 @@
         "setup_pin": "設置 PIN 碼",
         "set_pin": "設置 PIN 碼",
         "confirm_pin": "確認 PIN 碼",
+        "enter_your_pin": "Enter your PIN",
         "save_backup_file": "儲存備份檔案",
         "ive_written_recovery_phrase": "我已經寫下了恢復詞組",
         "verify_recovery_phrase": "驗證種子助記詞",
@@ -288,6 +293,7 @@
         "total_balance": "總額",
         "incoming": "傳入",
         "outgoing": "傳出",
-        "accounts": "帳戶"
+        "accounts": "帳戶",
+        "profiles": "Profiles"
     }
 }
