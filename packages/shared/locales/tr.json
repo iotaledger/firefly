@@ -220,6 +220,10 @@
                 "title": "Hakkında",
                 "description": "Temp"
             }
+        },
+        "login": {
+            "please_wait": "Please wait {time} seconds",
+            "incorrect_attempts": "{attempts} incorrect attempts"
         }
     },
     "actions": {
@@ -233,6 +237,7 @@
         "setup_pin": "PIN kodunuzu ayarlayın",
         "set_pin": "PIN kodunu ayarla",
         "confirm_pin": "PIN kodunu onaylayın",
+        "enter_your_pin": "Enter your PIN",
         "save_backup_file": "Yedek dosyasını kaydet",
         "ive_written_recovery_phrase": "Kurtarma sözcüklerini not aldım",
         "verify_recovery_phrase": "Kurtarma ifadesini doğrulayın",
@@ -288,6 +293,7 @@
         "total_balance": "Toplam Bakiye",
         "incoming": "Gelen",
         "outgoing": "Giden",
-        "accounts": "Hesaplar"
+        "accounts": "Hesaplar",
+        "profiles": "Profiles"
     }
 }
