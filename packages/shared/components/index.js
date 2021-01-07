@@ -24,6 +24,7 @@ export { default as ActivityRow } from './ActivityRow.svelte'
 export { default as BalanceSummary } from './BalanceSummary.svelte'
 export { default as Sidebar } from './Sidebar.svelte'
 export { default as Transition } from './Transition.svelte'
+export { default as Profile } from './Profile.svelte'
 // Charts
 export { default as Chart } from './charts/Index.svelte'
 export { default as ChartOption } from './charts/Option.svelte'

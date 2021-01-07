@@ -20,6 +20,7 @@
         Migrate,
         Congratulations,
         Dashboard,
+        Login
     } from 'shared/routes'
     $: $darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
     $: if (document.dir !== $dir) {
@@ -72,14 +73,6 @@
 <!-- empty div to avoid auto-purge removing dark classes -->
 <div class="scheme-dark" />
 {#if true}
-    <!-- dummy toggles -->
-    <div class="dummy-toggles flex flex-row">
-        <div class="mr-4">
-            <Toggle on={darkMode} />
-        </div>
-        <button on:click={() => logged.update(() => false)}> reset </button>
-    </div>
-    <!--  -->
     <Route route={AppRoute.Welcome}>
         <Welcome on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
@@ -120,5 +113,8 @@
     </Route>
     <Route route={AppRoute.Dashboard}>
         <Dashboard mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route={AppRoute.Login}>
+        <Login on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} {goto} />
     </Route>
 {/if}
