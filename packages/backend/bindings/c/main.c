@@ -14,9 +14,10 @@ void listener(const char *message) {
 }
 
 int main() {
-  initialize(callback, NULL);
+  initialize(callback, "wallet.stronghold");
   listen("", "ErrorThrown");
   send_message("{ \"id\": \"A\", \"cmd\": \"SetStrongholdPassword\", \"payload\": \"password\" }");
-  send_message("{ \"id\": \"B\", \"cmd\": \"CreateAccount\", \"payload\": { \"clientOptions\": { \"node\": \"https://nodes.devnet.iota.org:443\" } } }");
+  send_message("{ \"id\": \"AA\", \"cmd\": \"StoreMnemonic\", \"payload\": { \"signerType\": { \"type\": \"Stronghold\" } } }");
+  send_message("{ \"id\": \"B\", \"cmd\": \"CreateAccount\", \"payload\": { \"clientOptions\": { \"node\": \"https://nodes.devnet.iota.org:443\" } }, \"signerType\": { \"type\": \"Stronghold\" } }");
   return 0;
 }
