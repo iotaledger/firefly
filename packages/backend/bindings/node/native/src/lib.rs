@@ -5,8 +5,8 @@ use std::sync::{
     Arc, Mutex,
 };
 use wallet_actor_system::{
-    init as init_runtime, listen as add_event_listener, send_message as send_actor_message,
-    EventType, LoggerConfigBuilder, init_logger as init_backend_logger,
+    init as init_runtime, init_logger as init_backend_logger, listen as add_event_listener,
+    send_message as send_actor_message, EventType, LoggerConfigBuilder,
 };
 
 struct SendMessageTask {
@@ -54,7 +54,7 @@ impl Task for ReceiveMessageTask {
     ) -> JsResult<Self::JsEvent> {
         match result {
             Ok(s) => Ok(cx.string(s)),
-            Err(e) => cx.throw_error(format!("ReceiveTask error: {}", e))
+            Err(e) => cx.throw_error(format!("ReceiveTask error: {}", e)),
         }
     }
 }
@@ -80,10 +80,10 @@ declare_types! {
             let (tx, rx) = channel();
             let wrapped_tx = Arc::new(Mutex::new(tx));
 
-            init_runtime(move |event| {
+            smol::block_on(init_runtime(move |event| {
                 let tx = wrapped_tx.lock().unwrap();
                 let _ = tx.send(event);
-            }, storage_path);
+            }, storage_path));
 
             Ok(ActorSystem {
                 rx: Arc::new(Mutex::new(rx)),

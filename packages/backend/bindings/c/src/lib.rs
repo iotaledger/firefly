@@ -1,8 +1,11 @@
+use std::convert::TryInto;
 use std::ffi::{CStr, CString};
 use std::os::raw::c_char;
-use std::convert::TryInto;
 
-use wallet_actor_system::{init as init_runtime, send_message as send_actor_message, listen as add_event_listener, EventType};
+use wallet_actor_system::{
+    init as init_runtime, listen as add_event_listener, send_message as send_actor_message,
+    EventType,
+};
 
 type Callback = extern "C" fn(*const c_char);
 
@@ -14,10 +17,13 @@ pub extern "C" fn initialize(callback: Callback, storage_path: *const c_char) {
         let c_storage_path = unsafe { CStr::from_ptr(storage_path) };
         Some(c_storage_path.to_str().unwrap())
     };
-    init_runtime(move |event| {
-        let c_event = CString::new(event).expect("failed to convert response to CString");
-        callback(c_event.as_ptr());
-    }, storage_path);
+    smol::block_on(init_runtime(
+        move |event| {
+            let c_event = CString::new(event).expect("failed to convert response to CString");
+            callback(c_event.as_ptr());
+        },
+        storage_path,
+    ));
 }
 
 #[no_mangle]

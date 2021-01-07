@@ -45,25 +45,26 @@ impl TryFrom<&str> for EventType {
     }
 }
 
-pub fn init<F: Fn(String) + Send + Sync + 'static>(
+pub async fn init<F: Fn(String) + Send + Sync + 'static>(
     message_receiver: F,
     storage_path: Option<impl AsRef<Path>>,
 ) {
     println!("Starting runtime");
-    let sys = ActorSystem::new().unwrap();
-    let wallet_actor = match storage_path {
-        Some(path) => sys
-            .actor_of_args::<WalletActor, _>("wallet-actor", path.as_ref().to_path_buf())
-            .unwrap(),
-        None => sys.actor_of::<WalletActor>("wallet-actor").unwrap(),
-    };
-    WALLET_ACTOR
-        .set(wallet_actor)
-        .expect("failed to set wallet actor globally");
-    MESSAGE_RECEIVER
-        .set(Box::new(message_receiver))
-        .map_err(|_| ())
-        .expect("failed to set message receiver globally");
+    iota_wallet::with_actor_system(|sys| {
+        let wallet_actor = match storage_path {
+            Some(path) => sys
+                .actor_of_args::<WalletActor, _>("wallet-actor", path.as_ref().to_path_buf())
+                .unwrap(),
+            None => sys.actor_of::<WalletActor>("wallet-actor").unwrap(),
+        };
+        WALLET_ACTOR
+            .set(wallet_actor)
+            .expect("failed to set wallet actor globally");
+        MESSAGE_RECEIVER
+            .set(Box::new(message_receiver))
+            .map_err(|_| ())
+            .expect("failed to set message receiver globally");
+    }).await;
 }
 
 pub fn init_logger(config: LoggerConfigBuilder) {
