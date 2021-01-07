@@ -204,7 +204,7 @@ checksum = "cdcf67bb7ba7797a081cd19009948ab533af7c355d5caf1d08c777582d351e9c"
 [[package]]
 name = "bee-common"
 version = "0.1.1-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#b4f6629c1359ee2c7eb73ed7a8468708f9499f86"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#78bb18ad1c829f923a9bcea1973cbdaa1a5bc591"
 dependencies = [
  "async-trait",
  "bee-common 0.2.0-alpha",
@@ -257,7 +257,7 @@ dependencies = [
 [[package]]
 name = "bee-message"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#b4f6629c1359ee2c7eb73ed7a8468708f9499f86"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#78bb18ad1c829f923a9bcea1973cbdaa1a5bc591"
 dependencies = [
  "bech32",
  "bee-common 0.2.0-alpha",
@@ -273,7 +273,7 @@ dependencies = [
 [[package]]
 name = "bee-pow"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#b4f6629c1359ee2c7eb73ed7a8468708f9499f86"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#78bb18ad1c829f923a9bcea1973cbdaa1a5bc591"
 dependencies = [
  "bee-common 0.1.1-alpha",
  "bee-crypto",
@@ -1493,7 +1493,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=refactor/new-stronghold#118373ed993f7c84d6155372a23775a2d311c8ae"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=refactor/new-stronghold#1b8645a586d70c5b61936d1c322d464dc9a152e5"
 dependencies = [
  "async-trait",
  "backtrace",

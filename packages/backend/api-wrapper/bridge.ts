@@ -2,6 +2,7 @@ import type { ErrorEvent, BalanceChangeEvent, TransactionEvent } from './events'
 import type { Address } from './address'
 import type { AccountIdentifier, Account, SyncedAccount } from './account'
 import type { Message } from './message'
+import type { MnemonicPayload } from './mnemonic'
 
 export interface BridgeMessage {
   id: string;
@@ -27,6 +28,8 @@ export type BackupRestoredResponse = Response<'BackupRestored', void>
 export type SetStrongholdPasswordResponse = Response<'StrongholdPasswordSet', void>
 export type SentTransferResponse = Response<'SentTransfer', Message>
 export type ErrorResponse = Response<'Error', ErrorEvent>
+export type GenerateMnemonicResponse = Response<'GeneratedMnemonic', string>
+export type StoreMnemonicResponse = Response<'StoredMnemonic', void>
 
 export type MessageResponse = RemovedAccountResponse |
   CreatedAccountResponse |
@@ -44,6 +47,8 @@ export type MessageResponse = RemovedAccountResponse |
   BackupRestoredResponse |
   SetStrongholdPasswordResponse |
   SentTransferResponse |
+  GenerateMnemonicResponse |
+  StoreMnemonicResponse |
   ErrorResponse |
   // events
   ErrorEvent

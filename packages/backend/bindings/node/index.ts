@@ -16,7 +16,7 @@ import {
   availableBalance as _availableBalance,
   totalBalance as _totalBalance,
   latestAddress as _latestAddress,
-  syncAccount as _syncAccount
+  syncAccount as _syncAccount,
 } from '../../api-wrapper/account'
 import {
   Transfer,
@@ -27,7 +27,9 @@ import {
   backup as _backup,
   restoreBackup as _restoreBackup,
   setStrongholdPassword as _setStrongholdPassword,
-  send as _send
+  send as _send,
+  generateMnemonic as _generateMnemonic,
+  storeMnemonic as _storeMnemonic
 } from '../../api-wrapper/wallet'
 
 const addon = require('../native')
@@ -65,6 +67,15 @@ export function initLogger(config: LoggerConfig) {
 }
 
 export const api = {
+  generateMnemonic: function (): ((__id: string) => Promise<string>) {
+    return (__id: string) => _generateMnemonic(sendMessage, __id)
+  },
+  storeMnemonic: function (mnemonic?: string): ((__id: string) => Promise<string>) {
+    return (__id: string) => _storeMnemonic(sendMessage, __id, {
+      signerType: { type: 'Stronghold' },
+      mnemonic: mnemonic || null
+    })
+  },
   createAccount: function (account: AccountToCreate): ((__id: string) => Promise<string>) {
     return (__id: string) => _createAccount(sendMessage, __id, account)
   },

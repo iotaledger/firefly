@@ -1,4 +1,6 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
+    import { api } from 'shared/lib/wallet'
     import { Dropdown, Icon, ActivityRow, Chart, Text, Button } from 'shared/components'
     import {
         selectedChart,
@@ -11,6 +13,7 @@
     import { Send, Receive } from './views/'
     export let locale
     export let mobile
+
     const AccountColors = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
     enum WalletState {
         Init = 'init',
@@ -19,6 +22,7 @@
     }
     let state: WalletState = WalletState.Init
     let stateHistory = []
+
     const _next = (request) => {
         let nextState
         switch (state) {
@@ -44,6 +48,7 @@
             state = nextState
         }
     }
+
     const _prev = (event) => {
         const _previous = () => {
             let prevState = stateHistory.pop()
@@ -52,6 +57,7 @@
             }
         }
     }
+
     const transactions = [
         {
             hash: 'JWL9...KFL9M',
@@ -70,7 +76,7 @@
             timestamp: '20 June, 2020, 14:03',
             amount: '50 Gi',
             received: true
-        },
+        }
     ]
     const totalIncoming = {
         amount: 32,
@@ -80,44 +86,44 @@
         amount: 16,
         unit: 'Gi'
     }
-    const accounts = [
-        {
-            index: 0,
-            name: 'Fun Wallet',
-            balance: '23.322 Gi',
-            balanceEquiv: '45500 USD'
-        },
-        {
-            index: 1,
-            name: 'Billy Bills',
-            balance: '23.322 Gi',
-            balanceEquiv: '45500 USD'
-        },
-        {
-            index: 2,
-            name: 'Pizza Fund',
-            balance: '23.322 Gi',
-            balanceEquiv: '45500 USD',
-        },
-        {
-            index: 3,
-            name: 'Wonder Alice',
-            balance: '23.322 Gi',
-            balanceEquiv: '45500 USD'
-        },
-        {
-            index: 4,
-            name: 'Tropical Palm',
-            balance: '23.322 Gi',
-            balanceEquiv: '45500 USD'
-        },
-        {
-            index: 5,
-            name: 'Johnny Bravo',
-            balance: '23.322 Gi',
-            balanceEquiv: '45500 USD'
-        },
-    ]
+
+    let accounts = []
+
+    function getAccounts() {
+        api.getAccounts({
+            onSuccess(response) {
+                for (const storedAccount of response.payload) {
+                    api.availableBalance(storedAccount.id, {
+                        onSuccess(response) {
+                            const balance = response.payload
+                            const account = {
+                                name: storedAccount.alias,
+                                balance: `${balance} i`,
+                                balanceEquiv: `${balance} USD`
+                            }
+                            accounts = [...accounts, account]
+                        },
+                        onError() {
+                            const account = {
+                                name: storedAccount.alias,
+                                balance: 'ERROR',
+                                balanceEquiv: 'ERROR'
+                            }
+                            accounts = [...accounts, account]
+                        }
+                    })
+                }
+            },
+            onError() {
+                // TODO handle error
+                alert('failed to get accounts')
+            }
+        })
+    }
+
+    onMount(() => {
+        getAccounts()
+    })
 </script>
 
 <div class="w-full h-full p-10 flex flex-row gap-4">
@@ -140,9 +146,7 @@
                                 <Text type="p" classes="text-white mb-0.5">
                                     {`${totalIncoming.amount} ${totalIncoming.unit}`}
                                 </Text>
-                                <Text type="p" overrideColor smaller classes="text-blue-300">
-                                    {locale('general.incoming')}
-                                </Text>
+                                <Text type="p" overrideColor smaller classes="text-blue-300">{locale('general.incoming')}</Text>
                             </div>
                         </div>
                     {/if}
@@ -153,9 +157,7 @@
                                 <Text type="p" classes="text-white mb-0.5">
                                     {`${totalOutgoing.amount} ${totalOutgoing.unit}`}
                                 </Text>
-                                <Text type="p" overrideColor smaller classes="text-blue-300">
-                                    {locale('general.outgoing')}
-                                </Text>
+                                <Text type="p" overrideColor smaller classes="text-blue-300">{locale('general.outgoing')}</Text>
                             </div>
                         </div>
                     {/if}
@@ -174,11 +176,7 @@
                             {#each accounts as account, index}
                                 <div
                                     class={`group rounded-2xl bg-gray-200 hover:bg-${AccountColors[index]}-500 flex-col justify-between -mx-2 mb-2 p-5 w-${accounts.length === 1 ? `full` : accounts.length === 2 ? `1/2` : `1/3`}`}>
-                                    <Text
-                                        type="p"
-                                        smaller
-                                        overrideColor
-                                        classes="mb-10 text-gray-800 group-hover:text-white">
+                                    <Text type="p" smaller overrideColor classes="mb-10 text-gray-800 group-hover:text-white">
                                         {account.name}
                                     </Text>
                                     <div class="flex flex-wrap justify-between -mx-4">
@@ -189,11 +187,7 @@
                                             classes="text-gray-800 group-hover:text-white group-hover:font-700 px-4">
                                             {account.balance}
                                         </Text>
-                                        <Text
-                                            type="p"
-                                            smaller
-                                            overrideColor
-                                            classes="text-blue-500 group-hover:text-white px-4">
+                                        <Text type="p" smaller overrideColor classes="text-blue-500 group-hover:text-white px-4">
                                             {account.balanceEquiv}
                                         </Text>
                                     </div>

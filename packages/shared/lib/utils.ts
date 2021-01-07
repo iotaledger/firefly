@@ -1,4 +1,5 @@
 import { generateMnemonic } from 'bip39'
+import { api } from 'shared/lib/wallet';
 
 export function bindEvents(element, events) {
     const listeners = Object.entries(events).map(([event, handler]) => {
@@ -19,7 +20,12 @@ export function bindEvents(element, events) {
 /**
  * Generate BIP39 Mnemonic Recovery Phrase
  */
-export const generateRecoveryPhrase = () => generateMnemonic(256).split(' ')
+export const generateRecoveryPhrase = (): Promise<string[]> => new Promise((resolve, reject) => {
+    api.generateMnemonic({
+        onSuccess(response) { resolve(response.payload.split(' ')) },
+        onError(error) { reject(error) }
+    })
+})
 
 /**
  * Validate seed format

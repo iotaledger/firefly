@@ -3,6 +3,7 @@
     import { Transition } from 'shared/components'
     import { Import, TextImport, FileImport, BackupPassword, Success } from './views/'
     import { api } from 'shared/lib/wallet'
+    import { DEFAULT_NODE as node, DEFAULT_NODES as nodes } from 'shared/lib/network'
 
     export let locale
     export let mobile
@@ -24,7 +25,7 @@
     let state: ImportState = ImportState.Init
     let stateHistory = []
 
-    const _next = (event) => {
+    const _next = async (event) => {
         let nextState
         let params = event.detail || {}
         switch (state) {
@@ -65,15 +66,18 @@
             case ImportState.BackupPassword:
                 const { password } = params
 
-                api.restoreBackup(importFilePath, password, {
-                    onSuccess() {
-                        nextState = ImportState.Success
-                    },
-                    onError(error) {
-                        console.log('Error', error)
-                    }
+                await new Promise((resolve) => {
+                    api.restoreBackup(importFilePath, password, {
+                        onSuccess() {
+                            resolve()
+                        },
+                        onError(error) {
+                            console.log('Error', error)
+                            resolve()
+                        }
+                    })
                 })
-
+                nextState = ImportState.Success
                 break
             case ImportState.Success:
                 dispatch('next', { importType })

@@ -71,14 +71,14 @@ export const initRouter = () => {
     let userLogged: boolean = get(logged)
 
     if (userLogged) {
-        setRoute(AppRoute.Login)
+        setRoute(AppRoute.Welcome)
     } else {
         setRoute(AppRoute.Welcome)
     }
 }
 
-export const requestMnemonic = () => {
-    let recovPhrase = generateRecoveryPhrase()
+export const requestMnemonic = async () => {
+    let recovPhrase = await generateRecoveryPhrase()
     mnemonic.set(recovPhrase)
 }
 

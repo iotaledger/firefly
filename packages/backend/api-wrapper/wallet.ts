@@ -1,6 +1,7 @@
 import { AccountIdentifier } from './account'
 import { Bridge } from './bridge'
 import { Transfer } from './message'
+import { MnemonicPayload } from './mnemonic'
 
 export interface LoggerOutput {
   name?: string
@@ -48,5 +49,20 @@ export function send(bridge: Bridge, __id: string, fromAccountId: AccountIdentif
       transfer,
       accountId: fromAccountId
     }
+  })
+}
+
+export function generateMnemonic(bridge: Bridge, __id: string,) {
+  return bridge({
+    id: __id,
+    cmd: 'GenerateMnemonic',
+  })
+}
+
+export function storeMnemonic(bridge: Bridge, __id: string, payload: MnemonicPayload) {
+  return bridge({
+    id: __id,
+    cmd: 'StoreMnemonic',
+    payload
   })
 }

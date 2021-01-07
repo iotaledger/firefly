@@ -370,7 +370,9 @@ export default class ValidatorService {
             [ResponseTypes.ReadAccounts]: this.createBaseValidator().add(new AccountListValidator()).getFirst(),
             [ResponseTypes.TotalBalance]: this.createBaseValidator().add(new PayloadTypeValidator('number')).getFirst(),
             [ResponseTypes.AvailableBalance]: this.createBaseValidator().add(new PayloadTypeValidator('number')).getFirst(),
-            [ResponseTypes.BackupSuccessful]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.BackupRestored]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.GeneratedMnemonic]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.Error]: this.createBaseValidator().getFirst()
         };
     }
 

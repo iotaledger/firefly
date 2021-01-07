@@ -60,7 +60,8 @@
                 api.createAccount(
                     {
                         mnemonic: (get(mnemonic) as string[]).join(' '),
-                        clientOptions: { node, nodes }
+                        clientOptions: { node, nodes },
+                        alias: 'Umair'
                     },
                     {
                         onSuccess() {

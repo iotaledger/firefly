@@ -7,15 +7,18 @@
     export let accounts = []
     const dispatch = createEventDispatcher()
     $: accountsDropdownItems = accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balanceEquiv}` }))
+
     let from = accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balanceEquiv}` }))[0]
     let to = ''
     let amount = 0.0
     let reference = ''
     let unit = 'MIOTA'
     let loading = false
+    
     const handleFromSelect = (item) => {
         from = item
     }
+    
     const handleSendClick = () => {
         loading = true
         setTimeout(() => {
