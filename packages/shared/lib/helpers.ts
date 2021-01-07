@@ -48,4 +48,4 @@ export const persistent = <T>(key: string, initialValue: T): Writable<T> => {
 /**
  * Shuffle an array
  */
-export const shuffleArray = (array) => array.sort(() => Math.random() - 0.5)
+export const shuffleArray = (array) => array.slice().sort(() => Math.random() - 0.5)
