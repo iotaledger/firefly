@@ -42,7 +42,7 @@ export enum AppRoute {
     Balance = 'balance',
     Congratulations = 'congratulations',
     Dashboard = 'dashboard',
-    Login = 'login'
+    Login = 'login',
 }
 
 enum SetupType {
@@ -90,7 +90,7 @@ export const routerNext = (event) => {
 
     switch (currentRoute) {
         case AppRoute.Login:
-            nextRoute = AppRoute.Dashboard;
+            nextRoute = AppRoute.Dashboard
             break
         case AppRoute.Welcome:
             nextRoute = AppRoute.Legal

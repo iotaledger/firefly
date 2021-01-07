@@ -9,7 +9,7 @@
 
     enum LoginState {
         Init = 'init',
-        EnterPin = 'enterPin'
+        EnterPin = 'enterPin',
     }
 
     const dispatch = createEventDispatcher()

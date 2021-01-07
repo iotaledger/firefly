@@ -84,7 +84,7 @@
                 <Pin bind:value={pinCode} classes="mt-10" />
                 <Text type="p" bold classes="mt-4 text-center">
                     {attempts > 0 ? locale('views.login.incorrect_attempts', {
-                              values: { attempts: attempts.toString() }
+                              values: { attempts: attempts.toString() },
                           }) : locale('actions.enter_your_pin')}
                 </Text>
             </div>
