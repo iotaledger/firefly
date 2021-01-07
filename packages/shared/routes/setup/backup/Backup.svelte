@@ -41,38 +41,47 @@
                 }
                 break
             case BackupState.Backup:
-                window['Electron'].getStrongholdBackupDestination().then((result) => {
-                    if (result) {
-                        api.backup(result, {
-                            onSuccess() {
-                                nextState = BackupState.Success
-                            },
-                            onError(error) {
-                                console.error(error)
-                            }
-                        })
-                    }
-                }).catch(console.error)
+                window['Electron']
+                    .getStrongholdBackupDestination()
+                    .then((result) => {
+                        if (result) {
+                            api.backup(result, {
+                                onSuccess() {
+                                    nextState = BackupState.Success
+                                },
+                                onError(error) {
+                                    console.error(error)
+                                }
+                            })
+                        }
+                    })
+                    .catch(console.error)
 
-                // break
+            // break
             case BackupState.Verify:
             case BackupState.Success:
-                api.createAccount(
-                    {
-                        mnemonic: (get(mnemonic) as string[]).join(' '),
-                        clientOptions: { node, nodes },
-                        alias: 'Umair'
+                api.storeMnemonic((get(mnemonic) as string[]).join(' '), {
+                    onSuccess(response) {
+                        api.createAccount(
+                            {
+                                clientOptions: { node, nodes },
+                            },
+                            {
+                                onSuccess() {
+                                    dispatch('next')
+                                },
+                                onError() {
+                                    // TODO: handle error
+                                    alert('create account error')
+                                }
+                            }
+                        )
                     },
-                    {
-                        onSuccess() {
-                            dispatch('next')
-                        },
-                        onError() {
-                            // TODO: handle error
-                            alert('create account error')
-                        }
+                    onError(error) {
+                        console.log(error)
                     }
-                )
+                })
+
                 break
         }
         if (nextState) {
