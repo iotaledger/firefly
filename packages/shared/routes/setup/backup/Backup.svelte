@@ -73,8 +73,9 @@
                                 onSuccess() {
                                     dispatch('next')
                                 },
-                                onError() {
+                                onError(error) {
                                     // TODO: handle error
+                                    console.log(error)
                                     alert('create account error')
                                 }
                             }

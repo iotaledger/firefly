@@ -1,6 +1,8 @@
 mod actors;
 use actors::{dispatch, WalletActor, WalletMessage};
 
+use iota::common::logger::logger_init;
+pub use iota::common::logger::LoggerConfigBuilder;
 use iota_wallet::event::{
     on_balance_change, on_broadcast, on_confirmation_state_change, on_error, on_new_transaction,
     on_reattachment,
@@ -8,8 +10,6 @@ use iota_wallet::event::{
 use once_cell::sync::OnceCell;
 use riker::actors::*;
 use serde::{Deserialize, Serialize};
-use iota::common::logger::logger_init;
-pub use iota::common::logger::LoggerConfigBuilder;
 
 use std::convert::TryFrom;
 use std::path::Path;
@@ -64,7 +64,8 @@ pub async fn init<F: Fn(String) + Send + Sync + 'static>(
             .set(Box::new(message_receiver))
             .map_err(|_| ())
             .expect("failed to set message receiver globally");
-    }).await;
+    })
+    .await;
 }
 
 pub fn init_logger(config: LoggerConfigBuilder) {
