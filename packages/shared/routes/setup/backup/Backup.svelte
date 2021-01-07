@@ -65,6 +65,9 @@
                         api.createAccount(
                             {
                                 clientOptions: { node, nodes },
+                                signerType: {
+                                    type: 'Stronghold'
+                                }
                             },
                             {
                                 onSuccess() {
