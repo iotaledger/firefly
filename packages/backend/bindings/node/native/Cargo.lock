@@ -1493,7 +1493,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=refactor/new-stronghold#4fdfa0c28cd7bbcde7821d8464dba59473124f9d"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=refactor/new-stronghold#118373ed993f7c84d6155372a23775a2d311c8ae"
 dependencies = [
  "async-trait",
  "backtrace",

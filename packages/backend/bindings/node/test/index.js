@@ -22,13 +22,13 @@ describe('binding', () => {
     lib.api.listenToErrorEvents()(generateRandomId())
   }) */
   it('creates an account, backup and restore it', () => {
-    fs.rmSync('./example-database', {
+    fs.rmdirSync('./example-database', {
       recursive: true,
       force: true
     })
     after(() => {
       try {
-        fs.rmSync('./backup', {
+        fs.rmdirSync('./backup', {
           recursive: true,
           force: true
         })
