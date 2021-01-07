@@ -237,7 +237,7 @@
         "setup_pin": "Подесите ПИН код",
         "set_pin": "Подесите ПИН код",
         "confirm_pin": "Потврдите ПИН код",
-        "enter_your_pin": "Enter your PIN",
+        "enter_your_pin": "Унеси свој ПИН код.",
         "save_backup_file": "Сачувајте датотеку сигурносне копије",
         "ive_written_recovery_phrase": "Записао сам фразу за опоравак",
         "verify_recovery_phrase": "Верификујте фразу за опоравак",
@@ -294,6 +294,6 @@
         "incoming": "Долазни",
         "outgoing": "Одлазни",
         "accounts": "Рачуни",
-        "profiles": "Profiles"
+        "profiles": "Профили"
     }
 }
