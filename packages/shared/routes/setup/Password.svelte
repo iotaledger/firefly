@@ -19,8 +19,9 @@
             onSuccess() {
                 dispatch('next', { password })
             },
-            onError() {
+            onError(error) {
                 // TODO: handle error
+                console.log(error)
                 alert('set password error')
             }
         })

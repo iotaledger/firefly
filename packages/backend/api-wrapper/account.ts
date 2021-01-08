@@ -28,9 +28,13 @@ export interface Account {
 
 export type AccountIdentifier = number | string
 
+export interface SignerType {
+  type: 'Stronghold';
+}
+
 export interface AccountToCreate {
   clientOptions: ClientOptions;
-  mnemonic?: string;
+  signerType: SignerType;
   alias?: string;
   createdAt?: string;
 }
