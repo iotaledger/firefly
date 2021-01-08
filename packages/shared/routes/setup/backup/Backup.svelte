@@ -24,7 +24,7 @@
     let state: BackupState = BackupState.Init
     let stateHistory = []
 
-    const _next = (event) => {
+    const _next = async (event) => {
         let nextState
         let params = event.detail || {}
         switch (state) {
@@ -41,7 +41,7 @@
                 }
                 break
             case BackupState.Backup:
-                window['Electron']
+                await window['Electron']
                     .getStrongholdBackupDestination()
                     .then((result) => {
                         if (result) {
@@ -57,7 +57,7 @@
                     })
                     .catch(console.error)
 
-            // break
+                break
             case BackupState.Verify:
             case BackupState.Success:
                 const _mnemonic = (get(mnemonic) as string[]).join(' ')
@@ -88,7 +88,7 @@
                         })
                     },
                     onError(error) {
-                        console.error('Error verifying mnemonic', error);
+                        console.error('Error verifying mnemonic', error)
                     }
                 })
 
