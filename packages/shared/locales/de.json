@@ -222,8 +222,8 @@
             }
         },
         "login": {
-            "please_wait": "Please wait {time} seconds",
-            "incorrect_attempts": "{attempts} incorrect attempts"
+            "please_wait": "Bitte warte {time} Sekunden",
+            "incorrect_attempts": "{attempts} falsche Versuche"
         }
     },
     "actions": {
@@ -237,7 +237,7 @@
         "setup_pin": "PIN-Code einrichten",
         "set_pin": "PIN-Code festlegen",
         "confirm_pin": "PIN-Code bestätigen",
-        "enter_your_pin": "Enter your PIN",
+        "enter_your_pin": "PIN eingeben",
         "save_backup_file": "Sicherungsdatei speichern",
         "ive_written_recovery_phrase": "Ich habe meine Wiederherstellungsphrase aufgeschrieben",
         "verify_recovery_phrase": "Wiederherstellungsphrase bestätigen",
@@ -294,6 +294,6 @@
         "incoming": "Eingehend",
         "outgoing": "Ausgehend",
         "accounts": "Konten",
-        "profiles": "Profiles"
+        "profiles": "Profile"
     }
 }
