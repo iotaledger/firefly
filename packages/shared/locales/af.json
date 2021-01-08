@@ -222,8 +222,8 @@
             }
         },
         "login": {
-            "please_wait": "Please wait {time} seconds",
-            "incorrect_attempts": "{attempts} incorrect attempts"
+            "please_wait": "Wag asseblief {time} sekondes",
+            "incorrect_attempts": "{attempts} onkorrekte pogings"
         }
     },
     "actions": {
@@ -237,7 +237,7 @@
         "setup_pin": "Stel PIN-kode op",
         "set_pin": "Stel PIN-kode in",
         "confirm_pin": "Bevestig die PIN-kode",
-        "enter_your_pin": "Enter your PIN",
+        "enter_your_pin": "Tik you PIN in",
         "save_backup_file": "Stoor back-up lêer",
         "ive_written_recovery_phrase": "Ek het my herstelfrase neergeskryf",
         "verify_recovery_phrase": "Verifieer herstelfrase",
@@ -294,6 +294,6 @@
         "incoming": "Inkomende",
         "outgoing": "Uitgaande",
         "accounts": "Rekeninge",
-        "profiles": "Profiles"
+        "profiles": "Profiel"
     }
 }
