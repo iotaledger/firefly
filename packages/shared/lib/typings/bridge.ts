@@ -35,7 +35,8 @@ export enum ResponseTypes {
   Reattachment = 'Reattachment',
   Broadcast = 'Broadcast',
   GeneratedMnemonic = 'GeneratedMnemonic',
-  StoredMnemonic = 'StoredMnemonic'
+  StoredMnemonic = 'StoredMnemonic',
+  VerifiedMnemonic = 'VerifiedMnemonic'
 }
 
 export type Response<T, P> = { id: string, action: string, type: T, payload?: P }

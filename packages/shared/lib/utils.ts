@@ -46,3 +46,12 @@ export const validateRecoveryPhrase = (phrase) => {
     const REGEX = /^[a-zA-Z ]*$/
     return REGEX.test(phrase) && phrase.match(/\b(\w+)\b/g)?.length == RECOVERY_PHRASE_LENGTH
 }
+
+export const verifyRecoveryPhrase = (phrase): Promise<void> => new Promise((resolve, reject) => {
+    api.verifyMnemonic(phrase, {
+        onSuccess(response) {
+            resolve(response)
+        },
+        onError(error) { reject(error) }
+    })
+})

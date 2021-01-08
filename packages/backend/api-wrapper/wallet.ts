@@ -66,3 +66,11 @@ export function storeMnemonic(bridge: Bridge, __id: string, payload: MnemonicPay
     payload
   })
 }
+
+export function verifyMnemonic(bridge: Bridge, __id: string, payload: string) {
+  return bridge({
+    id: __id,
+    cmd: 'VerifyMnemonic',
+    payload
+  })
+}

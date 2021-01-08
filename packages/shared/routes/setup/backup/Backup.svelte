@@ -60,25 +60,35 @@
             // break
             case BackupState.Verify:
             case BackupState.Success:
-                api.storeMnemonic((get(mnemonic) as string[]).join(' '), {
+                const _mnemonic = (get(mnemonic) as string[]).join(' ')
+
+                // TODO: Instead of generated mnemonic, we should construct the phrase with what was chosen by the user
+                api.verifyMnemonic(_mnemonic, {
                     onSuccess(response) {
-                        api.createAccount(
-                            {
-                                clientOptions: { node, nodes },
+                        api.storeMnemonic(_mnemonic, {
+                            onSuccess(response) {
+                                api.createAccount(
+                                    {
+                                        clientOptions: { node, nodes }
+                                    },
+                                    {
+                                        onSuccess() {
+                                            dispatch('next')
+                                        },
+                                        onError() {
+                                            // TODO: handle error
+                                            alert('create account error')
+                                        }
+                                    }
+                                )
                             },
-                            {
-                                onSuccess() {
-                                    dispatch('next')
-                                },
-                                onError() {
-                                    // TODO: handle error
-                                    alert('create account error')
-                                }
+                            onError(error) {
+                                console.log(error)
                             }
-                        )
+                        })
                     },
                     onError(error) {
-                        console.log(error)
+                        console.error('Error verifying mnemonic', error);
                     }
                 })
 

@@ -29,7 +29,8 @@ import {
   setStrongholdPassword as _setStrongholdPassword,
   send as _send,
   generateMnemonic as _generateMnemonic,
-  storeMnemonic as _storeMnemonic
+  storeMnemonic as _storeMnemonic,
+  verifyMnemonic as _verifyMnemonic
 } from '../../api-wrapper/wallet'
 
 const addon = require('../native')
@@ -75,6 +76,9 @@ export const api = {
       signerType: { type: 'Stronghold' },
       mnemonic: mnemonic || null
     })
+  },
+  verifyMnemonic: function (mnemonic: string): ((__id: string) => Promise<string>) {
+    return (__id: string) => _verifyMnemonic(sendMessage, __id, mnemonic)
   },
   createAccount: function (account: AccountToCreate): ((__id: string) => Promise<string>) {
     return (__id: string) => _createAccount(sendMessage, __id, account)

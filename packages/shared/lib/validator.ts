@@ -373,6 +373,7 @@ export default class ValidatorService {
             [ResponseTypes.BackupRestored]: this.createBaseValidator().getFirst(),
             [ResponseTypes.GeneratedMnemonic]: this.createBaseValidator().getFirst(),
             [ResponseTypes.StoredMnemonic]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.VerifiedMnemonic]: this.createBaseValidator().getFirst(),
             [ResponseTypes.Error]: this.createBaseValidator().getFirst()
         };
     }

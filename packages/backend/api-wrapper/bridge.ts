@@ -30,6 +30,7 @@ export type SentTransferResponse = Response<'SentTransfer', Message>
 export type ErrorResponse = Response<'Error', ErrorEvent>
 export type GenerateMnemonicResponse = Response<'GeneratedMnemonic', string>
 export type StoreMnemonicResponse = Response<'StoredMnemonic', void>
+export type VerifyMnmonicResponse = Response<'VerifiedMnemonic', void>
 
 export type MessageResponse = RemovedAccountResponse |
   CreatedAccountResponse |
@@ -49,6 +50,7 @@ export type MessageResponse = RemovedAccountResponse |
   SentTransferResponse |
   GenerateMnemonicResponse |
   StoreMnemonicResponse |
+  VerifyMnmonicResponse |
   ErrorResponse |
   // events
   ErrorEvent
