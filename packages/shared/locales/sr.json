@@ -222,8 +222,8 @@
             }
         },
         "login": {
-            "please_wait": "Please wait {time} seconds",
-            "incorrect_attempts": "{attempts} incorrect attempts"
+            "please_wait": "Сачекајте {time} секунди",
+            "incorrect_attempts": "{attempts} нетачних покушаја"
         }
     },
     "actions": {
