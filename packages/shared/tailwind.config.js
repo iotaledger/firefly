@@ -139,6 +139,7 @@ module.exports = {
     extend: {
       fontSize: {
         10: pxToRem(10),
+        11: pxToRem(10),
         12: pxToRem(12),
         13: pxToRem(13),
         14: pxToRem(14),
@@ -183,7 +184,8 @@ module.exports = {
   variants: {
     fontWeight: ['hover', 'focus', 'group-hover'],
     textColor: ['dark', 'responsive', 'hover', 'dark-hover', 'focus', 'group-hover'],
-    backgroundColor: ['dark', 'responsive', 'hover', 'dark-hover', 'focus', 'group-hover']
+    backgroundColor: ['dark', 'responsive', 'hover', 'dark-hover', 'focus', 'group-hover'],
+    backgroundOpacity: ['dark'],
   },
   plugins: [
     // Reference: https://dev.to/smartmointy/tailwind-css-dark-mode-switch-with-javascript-2kl9

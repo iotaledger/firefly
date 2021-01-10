@@ -2,27 +2,30 @@
     import { createEventDispatcher } from 'svelte'
     import { fly } from 'svelte/transition'
     import { Text, Button, Dropdown, Amount, Address } from 'shared/components'
+
     export let locale
     export let mobile
     export let accounts = []
+    export let internal = false
+
     const dispatch = createEventDispatcher()
-    $: accountsDropdownItems = accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balanceEquiv}` }))
-    let from = accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balanceEquiv}` }))[0]
-    let to = ''
-    let amount = 0.0
+
+    $: accountsDropdownItems = accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balance}` }))
+
+    let from = accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balance}` }))[0]
+    let toAddress = ''
+    let toAccount = accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balance}` }))[0]
+    let amount = undefined
     let reference = ''
-    let unit = 'MIOTA'
-    let loading = false
+
     const handleFromSelect = (item) => {
         from = item
     }
+    const handleToSelect = (item) => {
+        toAccount = item
+    }
     const handleSendClick = () => {
-        loading = true
-        setTimeout(() => {
-            var audio = new Audio('../../assets/sounds/send.mp3')
-            audio.play()
-            dispatch('next')
-        }, 1000)
+        dispatch('next')
     }
 </script>
 
@@ -43,8 +46,16 @@
                         onSelect={handleFromSelect} />
                 </div>
                 <div class="w-full mb-8 block">
-                    <Amount bind:amount {unit} {locale} classes="mb-4" />
-                    <Address bind:address={to} {locale} label={locale('general.to')} />
+                    <Amount bind:amount {locale} classes="mb-4" />
+                    {#if internal}
+                        <Dropdown
+                            value={toAccount?.label || ''}
+                            label={locale('general.to')}
+                            items={accountsDropdownItems}
+                            onSelect={handleToSelect} />
+                    {:else}
+                        <Address bind:address={toAddress} {locale} label={locale('general.to')} />
+                    {/if}
                 </div>
                 <div class="w-full mb-8 block">
                     <Text type="h5" classes="mb-4">{locale('general.reference')}</Text>

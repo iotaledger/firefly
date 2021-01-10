@@ -25,6 +25,9 @@ export { default as BalanceSummary } from './BalanceSummary.svelte'
 export { default as Sidebar } from './Sidebar.svelte'
 export { default as Transition } from './Transition.svelte'
 export { default as Profile } from './Profile.svelte'
+export { default as AccountTile } from './AccountTile.svelte'
+export { default as QR } from './QR.svelte'
+export { default as Popup } from './popups/Popup.svelte'
 // Charts
 export { default as Chart } from './charts/Index.svelte';
 export { default as ChartOption } from './charts/Option.svelte'

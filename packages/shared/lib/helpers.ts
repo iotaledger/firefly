@@ -49,3 +49,36 @@ export const persistent = <T>(key: string, initialValue: T): Writable<T> => {
  * Shuffle an array
  */
 export const shuffleArray = (array) => array.sort(() => Math.random() - 0.5)
+
+/**
+ * Extract initials from string
+ */
+export const getInitials = (string: string, maxCharts: number) => {
+    let initialsArray: string[] = string.replace(/[^a-zA-Z- ]/g, "").match(/\b\w/g);
+    if (maxCharts) {
+        initialsArray = initialsArray.slice(0, maxCharts)
+    }
+    let initials = initialsArray.join('').toUpperCase()
+    return initials
+}
+
+/**
+ * Truncate strings
+ *  
+ * @param str: String which has to be truncated
+ * @param firstCharCount: Number of characters which has to be shown as first portion. Default = 5
+ * @param endCharCount: Number of characters which has to be shown at end portion. Default = 5
+ * @param dotCount: Count of dots in between first and end portion. Default = 3
+ */
+
+export const truncateString = (str: string, firstCharCount: number = 5, endCharCount: number = 5, dotCount: number = 3) => {
+    const MAX_LENGTH = 13
+    if (str.length <= MAX_LENGTH) {
+        return str
+    }
+    let convertedStr = "";
+    convertedStr += str.substring(0, firstCharCount);
+    convertedStr += ".".repeat(dotCount);
+    convertedStr += str.substring(str.length - endCharCount, str.length);
+    return convertedStr;
+}
