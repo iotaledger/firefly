@@ -222,8 +222,8 @@
             }
         },
         "login": {
-            "please_wait": "Please wait {time} seconds",
-            "incorrect_attempts": "{attempts} incorrect attempts"
+            "please_wait": "Si us plau, espera {time} uns segons",
+            "incorrect_attempts": "{attempts} intents incorrectes"
         }
     },
     "actions": {
@@ -237,7 +237,7 @@
         "setup_pin": "Configureu el codi PIN",
         "set_pin": "Estableix el codi PIN",
         "confirm_pin": "Confirmeu el codi PIN",
-        "enter_your_pin": "Enter your PIN",
+        "enter_your_pin": "Introdueix el teu codi PIN",
         "save_backup_file": "Guardar còpia de seguretat",
         "ive_written_recovery_phrase": "He escrit la meva frase de recuperació",
         "verify_recovery_phrase": "Verifiqueu la frase de recuperació",
@@ -294,6 +294,6 @@
         "incoming": "Entrant",
         "outgoing": "Sortint",
         "accounts": "Comptes",
-        "profiles": "Profiles"
+        "profiles": "Perfils"
     }
 }
