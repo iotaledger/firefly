@@ -78,6 +78,7 @@
             received: true
         }
     ]
+
     const totalIncoming = {
         amount: 32,
         unit: 'Gi'
@@ -90,6 +91,11 @@
     let accounts = []
 
     function getAccounts() {
+        api.syncAccounts({
+            onSuccess(res) {},
+            onError(err) {}
+        })
+
         api.getAccounts({
             onSuccess(response) {
                 for (const storedAccount of response.payload) {
@@ -97,6 +103,7 @@
                         onSuccess(response) {
                             const balance = response.payload
                             const account = {
+                                id: storedAccount.id,
                                 name: storedAccount.alias,
                                 balance: `${balance} i`,
                                 balanceEquiv: `${balance} USD`
@@ -105,6 +112,7 @@
                         },
                         onError() {
                             const account = {
+                                id: storedAccount.id,
                                 name: storedAccount.alias,
                                 balance: 'ERROR',
                                 balanceEquiv: 'ERROR'

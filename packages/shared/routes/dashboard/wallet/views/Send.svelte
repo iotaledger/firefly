@@ -1,14 +1,17 @@
 <script lang="typescript">
+    import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { fly } from 'svelte/transition'
     import { Text, Button, Dropdown, Amount, Address } from 'shared/components'
     export let locale
     export let mobile
     export let accounts = []
-    const dispatch = createEventDispatcher()
-    $: accountsDropdownItems = accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balanceEquiv}` }))
 
-    let from = accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balanceEquiv}` }))[0]
+    const dispatch = createEventDispatcher()
+
+    $: accountsDropdownItems = accounts.map((acc) => ({ value: acc.id, label: `${acc.name} • ${acc.balanceEquiv}` }))
+
+    let from = accounts.map((acc) => ({ value: acc.id, label: `${acc.name} • ${acc.balanceEquiv}` }))[0]
     let to = ''
     let amount = 0.0
     let reference = ''
@@ -21,11 +24,28 @@
     
     const handleSendClick = () => {
         loading = true
-        setTimeout(() => {
-            var audio = new Audio('../../assets/sounds/send.mp3')
-            audio.play()
-            dispatch('next')
-        }, 1000)
+
+        api.send(
+            from.value,
+            {
+                amount,
+                address: to,
+                remainder_value_strategy: {
+                    strategy: 'ChangeAddress'
+                },
+                indexation: { index: 'firefly', data: new Array() }
+            },
+            {
+                onSuccess(response) {
+                    const audio = new Audio('../../assets/sounds/send.mp3')
+                    audio.play()
+                    dispatch('next')
+                },
+                onError(error) {
+                    console.error(error);
+                }
+            }
+)
     }
 </script>
 
