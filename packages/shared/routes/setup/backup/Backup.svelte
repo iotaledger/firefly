@@ -41,31 +41,38 @@
                 }
                 break
             case BackupState.Backup:
-                await new Promise((resolve, reject) => {
-                    api.storeMnemonic((get(mnemonic) as string[]).join(' '), {
-                        onSuccess() {
-                            resolve()
-                        },
-                        onError(error) {
-                            reject(error)
-                        }
+                try {
+                    await new Promise((resolve, reject) => {
+                        api.storeMnemonic((get(mnemonic) as string[]).join(' '), {
+                            onSuccess() {
+                                resolve()
+                            },
+                            onError(error) {
+                                reject(error)
+                            }
+                        })
                     })
-                })
-                    .then(() => window['Electron'].getStrongholdBackupDestination())
-                    .then((result) => {
-                        // TODO: What happens if a user cancels the back up option at this point?
-                        if (result) {
-                            api.backup(result, {
-                                onSuccess() {
-                                    nextState = BackupState.Success
-                                },
-                                onError(error) {
-                                    console.error(error)
-                                }
-                            })
-                        }
-                    })
-                    .catch(console.error)
+                        .then(() => window['Electron'].getStrongholdBackupDestination())
+                        .then((result) => {
+                            if (result) {
+                                return new Promise((res, rej) => {
+                                    api.backup(result, {
+                                        onSuccess() {
+                                            res()
+                                        },
+                                        onError(error) {
+                                            rej(error)
+                                        }
+                                    })
+                                })
+                            }
+
+                            throw new Error('Path not selected.')
+                        })
+                    nextState = BackupState.Success
+                } catch (error) {
+                    console.log('Error', error)
+                }
 
                 break
             case BackupState.Verify:
