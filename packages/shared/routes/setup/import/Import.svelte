@@ -66,18 +66,21 @@
             case ImportState.BackupPassword:
                 const { password } = params
 
-                await new Promise((resolve) => {
-                    api.restoreBackup(importFilePath, password, {
-                        onSuccess() {
-                            resolve()
-                        },
-                        onError(error) {
-                            console.log('Error', error)
-                            resolve()
-                        }
+                try {
+                    await new Promise((resolve, reject) => {
+                        api.restoreBackup(importFilePath, password, {
+                            onSuccess() {
+                                resolve()
+                            },
+                            onError(error) {
+                                reject(error)
+                            }
+                        })
                     })
-                })
-                nextState = ImportState.Success
+                    nextState = ImportState.Success
+                } catch (error) {
+                    console.log('Error', error)
+                }
                 break
             case ImportState.Success:
                 dispatch('next', { importType })
