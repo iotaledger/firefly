@@ -222,8 +222,8 @@
             }
         },
         "login": {
-            "please_wait": "Please wait {time} seconds",
-            "incorrect_attempts": "{attempts} incorrect attempts"
+            "please_wait": "Por favor, espere unos segundos",
+            "incorrect_attempts": "Intentos incorrectos"
         }
     },
     "actions": {
