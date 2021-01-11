@@ -222,8 +222,8 @@
             }
         },
         "login": {
-            "please_wait": "Please wait {time} seconds",
-            "incorrect_attempts": "{attempts} incorrect attempts"
+            "please_wait": "Παρακαλώ περιμένετε {time} δευτερόλεπτα",
+            "incorrect_attempts": "{attempts} εσφαλμένες προσπάθειες"
         }
     },
     "actions": {
@@ -237,7 +237,7 @@
         "setup_pin": "Δημιουργία κωδικού PIN",
         "set_pin": "Ορίστε τον κωδικό PIN",
         "confirm_pin": "Επιβεβαιώστε τον κωδικό PIN",
-        "enter_your_pin": "Enter your PIN",
+        "enter_your_pin": "Εισαγάγετε το PIN σας",
         "save_backup_file": "Αποθήκευση εφεδρικού αρχείου",
         "ive_written_recovery_phrase": "Έχω γράψει τη φράση ανάκτησης",
         "verify_recovery_phrase": "Επαληθεύστε τη φράση ανάκτησης",
@@ -294,6 +294,6 @@
         "incoming": "Εισερχόμενο",
         "outgoing": "Εξερχόμενο",
         "accounts": "Λογαριασμοί",
-        "profiles": "Profiles"
+        "profiles": "Προφίλ"
     }
 }
