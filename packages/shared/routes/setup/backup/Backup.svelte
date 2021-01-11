@@ -41,9 +41,19 @@
                 }
                 break
             case BackupState.Backup:
-                await window['Electron']
-                    .getStrongholdBackupDestination()
+                await new Promise((resolve, reject) => {
+                    api.storeMnemonic((get(mnemonic) as string[]).join(' '), {
+                        onSuccess() {
+                            resolve()
+                        },
+                        onError(error) {
+                            reject(error)
+                        }
+                    })
+                })
+                    .then(() => window['Electron'].getStrongholdBackupDestination())
                     .then((result) => {
+                        // TODO: What happens if a user cancels the back up option at this point?
                         if (result) {
                             api.backup(result, {
                                 onSuccess() {
