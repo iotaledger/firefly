@@ -35,39 +35,39 @@
                         borderWidth: 2,
                         // Hide data points on line
                         pointRadius: 0,
-                        data
-                    }
-                ]
+                        data,
+                    },
+                ],
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
                 legend: {
                     // Hide label
-                    display: false
+                    display: false,
                 },
                 scales: {
                     xAxes: [
                         {
                             offset: true,
                             gridLines: {
-                                display: false
-                            }
-                        }
+                                display: false,
+                            },
+                        },
                     ],
                     yAxes: [
                         {
                             ticks: {
                                 autoSkip: true,
                                 maxTicksLimit: 6,
-                                callback: function(value, index, values) {
+                                callback: function (value, index, values) {
                                     return value.toFixed(3)
-                                }
-                            }
-                        }
-                    ]
-                }
-            }
+                                },
+                            },
+                        },
+                    ],
+                },
+            },
         })
     }
 
@@ -80,6 +80,4 @@
     onMount(createChart)
 </script>
 
-<div class="chart-container" style="position: relative; height: 28.5vh;">
-    <canvas bind:this={canvas} />
-</div>
+<div class="chart-container" style="position: relative; height: 28.5vh;"><canvas bind:this={canvas} /></div>

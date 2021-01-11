@@ -5,7 +5,7 @@
 
     enum Tabs {
         Wallet = 'wallet',
-        Settings = 'settings'
+        Settings = 'settings',
     }
 
     function setActiveTab(tab: Tabs) {

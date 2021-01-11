@@ -139,83 +139,83 @@
             "profileDetails": {
                 "title": "Profile Details",
                 "description": "Temp"
-            }, 
+            },
             "theme": {
                 "title": "Theme",
                 "description": "Temp"
-            }, 
+            },
             "language": {
                 "title": "Language",
                 "description": "Temp"
-            }, 
+            },
             "currency": {
                 "title": "Currency",
                 "description": "Temp"
-            }, 
+            },
             "notifications": {
                 "title": "Notifications",
                 "description": "Temp"
-            }, 
+            },
             "exportStronghold": {
                 "title": "Export Stronghold",
                 "description": "Temp"
-            }, 
+            },
             "appLock": {
                 "title": "App Lock",
                 "description": "Temp"
-            }, 
+            },
             "changePassword": {
                 "title": "Change Password",
                 "description": "Temp"
-            }, 
+            },
             "resyncAccounts": {
                 "title": "Resync Accounts",
                 "description": "Temp"
-            }, 
+            },
             "resetWallet": {
                 "title": "Reset Wallet",
                 "description": "Temp"
-            }, 
+            },
             "deepLinks": {
                 "title": "Deep Links",
                 "description": "Temp"
-            }, 
+            },
             "developerMode": {
                 "title": "Developer Mode",
                 "description": "Temp"
-            }, 
+            },
             "nodeSettings": {
                 "title": "Node Settings",
                 "description": "Temp"
-            }, 
+            },
             "proofOfWork": {
                 "title": "Proof of Work",
                 "description": "Temp"
-            }, 
+            },
             "errorLog": {
                 "title": "Error Log",
                 "description": "Temp"
-            }, 
+            },
             "stateExport": {
                 "title": "State Export",
                 "description": "Temp"
-            }, 
+            },
             "troubleshoot": {
                 "title": "Troubleshoot",
                 "description": "Temp"
-            }, 
+            },
             "documentation": {
                 "title": "Documentation",
                 "description": "Temp"
-            }, 
+            },
             "faq": {
                 "title": "FAQ",
                 "description": "Temp"
-            }, 
+            },
             "discord": {
                 "title": "Discord",
                 "description": "Temp"
-            }, 
+            },
             "about": {
                 "title": "About",
                 "description": "Temp"
@@ -235,7 +235,7 @@
         "save_password": "Save password",
         "use_biometric": "Use biometric security",
         "setup_pin": "Set up PIN code",
-        "set_pin" : "Set PIN code",
+        "set_pin": "Set PIN code",
         "confirm_pin": "Confirm PIN code",
         "enter_your_pin": "Enter your PIN",
         "save_backup_file": "Save backup file",

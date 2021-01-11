@@ -9,14 +9,14 @@ const freezeObjectFactory = (obj) => {
                 return new Proxy(obj[prop], rejector)
             }
 
-            return obj[prop];
+            return obj[prop]
         },
         set() {
-            return false;
-        }
+            return false
+        },
     }
 
-    return new Proxy(obj, rejector);
+    return new Proxy(obj, rejector)
 }
 
 window.__WALLET__ = freezeObjectFactory(binding)
