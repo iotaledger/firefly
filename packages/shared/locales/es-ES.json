@@ -237,7 +237,7 @@
         "setup_pin": "Código PIN",
         "set_pin": "Establecer código PIN",
         "confirm_pin": "Confirmar código PIN",
-        "enter_your_pin": "Enter your PIN",
+        "enter_your_pin": "Introduce tu código PIN",
         "save_backup_file": "Guardar copia de seguridad",
         "ive_written_recovery_phrase": "He escrito mi frase de recuperación",
         "verify_recovery_phrase": "Verificar frase de recuperación",
@@ -294,6 +294,6 @@
         "incoming": "Entrante",
         "outgoing": "Saliente",
         "accounts": "Cuentas",
-        "profiles": "Profiles"
+        "profiles": "Perfiles"
     }
 }
