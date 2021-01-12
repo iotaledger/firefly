@@ -222,8 +222,8 @@
             }
         },
         "login": {
-            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "please_wait": "Počkejte prosím {time, plural, one {1 vteřinu} other {# vteřin}}",
+            "incorrect_attempts": "{attempts, plural, one {1 nesprávný pokus} other {# nesprávné pokusy}}"
         }
     },
     "actions": {
@@ -237,7 +237,7 @@
         "setup_pin": "Nastavení PIN",
         "set_pin": "Nastavte PIN",
         "confirm_pin": "Potvrďte PIN",
-        "enter_your_pin": "Enter your PIN",
+        "enter_your_pin": "Zadejta svůj PIN",
         "save_backup_file": "Uložte zálohu",
         "ive_written_recovery_phrase": "Zapsal jsem si frázi pro obnovení",
         "verify_recovery_phrase": "Ověřte obnovovací frázi",
@@ -294,6 +294,6 @@
         "incoming": "Příchozí",
         "outgoing": "Odchozí",
         "accounts": "Účty",
-        "profiles": "Profiles"
+        "profiles": "Profily"
     }
 }
