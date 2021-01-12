@@ -222,8 +222,8 @@
             }
         },
         "login": {
-            "please_wait": "Please wait {time} seconds",
-            "incorrect_attempts": "{attempts} incorrect attempts"
+            "please_wait": "___ 초 동안 기다리세요.",
+            "incorrect_attempts": "___ 잘못된 시도"
         }
     },
     "actions": {
@@ -237,7 +237,7 @@
         "setup_pin": "PIN코드 설정하기",
         "set_pin": "PIN코드 설정",
         "confirm_pin": "PIN코드 확인하기",
-        "enter_your_pin": "Enter your PIN",
+        "enter_your_pin": "PIN코드 입력하기",
         "save_backup_file": "백업파일 저장하기",
         "ive_written_recovery_phrase": "복구 '문장'을 기입했습니다.",
         "verify_recovery_phrase": "복구 '문장'이 정확한지 확인하세요.",
@@ -294,6 +294,6 @@
         "incoming": "받는중",
         "outgoing": "보내는중",
         "accounts": "계정",
-        "profiles": "Profiles"
+        "profiles": "프로필"
     }
 }
