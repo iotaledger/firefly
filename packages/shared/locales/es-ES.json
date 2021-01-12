@@ -222,7 +222,7 @@
             }
         },
         "login": {
-            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
+            "please_wait": "Por favor, espere {time, plural, one {1 segundo} other {# segundos}}",
             "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
         }
     },
