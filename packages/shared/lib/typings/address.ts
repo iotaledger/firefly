@@ -1,5 +1,5 @@
 export interface Address {
-  address: string;
-  balance: number;
-  keyIndex: number;
+    address: string
+    balance: number
+    keyIndex: number
 }

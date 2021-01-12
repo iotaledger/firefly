@@ -6,7 +6,7 @@ use std::sync::{
 };
 use wallet_actor_system::{
     init as init_runtime, listen as add_event_listener, send_message as send_actor_message,
-    EventType,
+    EventType, LoggerConfigBuilder, init_logger as init_backend_logger,
 };
 
 struct SendMessageTask {
@@ -129,9 +129,17 @@ fn send_message(mut cx: FunctionContext) -> JsResult<JsUndefined> {
     Ok(cx.undefined())
 }
 
+pub fn init_logger(mut cx: FunctionContext) -> JsResult<JsUndefined> {
+    let config = cx.argument::<JsString>(0)?.value();
+    let config: LoggerConfigBuilder = serde_json::from_str(&config).expect("invalid logger config");
+    init_backend_logger(config);
+    Ok(cx.undefined())
+}
+
 register_module!(mut cx, {
     cx.export_function("sendMessage", send_message)?;
     cx.export_function("listen", listen)?;
+    cx.export_function("initLogger", init_logger)?;
     // Expose the `JsActorSystem` class as `ActorSystem`.
     cx.export_class::<JsActorSystem>("ActorSystem")?;
 

@@ -2,7 +2,7 @@
     "extends": "@tsconfig/svelte/tsconfig.json",
     "compilerOptions": {
         "outDir": "lib/out",
-        "baseUrl": "./",
+        "baseUrl": "./"
     },
     "include": ["./lib"],
     "exclude": ["lib/out"]

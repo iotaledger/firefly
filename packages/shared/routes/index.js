@@ -16,3 +16,5 @@ export { default as Congratulations } from 'shared/routes/setup/Congratulations.
 export { default as Dashboard } from 'shared/routes/dashboard/Dashboard.svelte'
 export { default as Wallet } from 'shared/routes/dashboard/wallet/Wallet.svelte'
 export { default as Settings } from 'shared/routes/dashboard/settings/Settings.svelte'
+// login
+export { default as Login } from 'shared/routes/login/Login.svelte'
