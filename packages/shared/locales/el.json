@@ -223,7 +223,7 @@
         },
         "login": {
             "please_wait": "Παρακαλώ περιμένετε {time} δευτερόλεπτα",
-            "incorrect_attempts": "{attempts} εσφαλμένες προσπάθειες"
+            "incorrect_attempts": "{attempts} εσφαλμένη(ες) προσπάθεια(ες)"
         }
     },
     "actions": {
