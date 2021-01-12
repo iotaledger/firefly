@@ -222,8 +222,8 @@
             }
         },
         "login": {
-            "please_wait": "___ 초 동안 기다리세요.",
-            "incorrect_attempts": "___ 잘못된 시도"
+            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
+            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
         }
     },
     "actions": {
