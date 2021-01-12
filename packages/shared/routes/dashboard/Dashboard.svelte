@@ -20,7 +20,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <div class="w-full h-full flex flex-row">
+    <div class="flex flex-row w-full h-full">
         <Sidebar bind:activeTab/>
         <!-- Dashboard Pane -->
         <svelte:component locale={locale} this={tabs[activeTab]}/>
