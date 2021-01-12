@@ -22,26 +22,27 @@ export const path = readable<string>(null, (set) => {
 })
 
 /*
-* Current view
-*/
+ * Current view
+ */
 export const view = writable<string>(null)
 
 /**
  * Application Routes
  */
 export enum AppRoute {
-    Welcome = "welcome",
-    Legal = "legal",
-    Language = "language",
-    Setup = "setup",
-    Password = "password",
-    Protect = "protect",
-    Backup = "backup",
-    Import = "import",
-    Migrate = "migrate",
-    Balance = "balance",
-    Congratulations = "congratulations",
-    Dashboard = "dashboard",
+    Welcome = 'welcome',
+    Legal = 'legal',
+    Language = 'language',
+    Setup = 'setup',
+    Password = 'password',
+    Protect = 'protect',
+    Backup = 'backup',
+    Import = 'import',
+    Migrate = 'migrate',
+    Balance = 'balance',
+    Congratulations = 'congratulations',
+    Dashboard = 'dashboard',
+    Login = 'login',
 }
 
 enum SetupType {
@@ -68,8 +69,9 @@ let walletSetupType = writable<SetupType>(null)
  */
 export const initRouter = () => {
     let userLogged: boolean = get(logged)
+
     if (userLogged) {
-        setRoute(AppRoute.Dashboard)
+        setRoute(AppRoute.Login)
     } else {
         setRoute(AppRoute.Welcome)
     }
@@ -87,6 +89,9 @@ export const routerNext = (event) => {
     let nextRoute: AppRoute
 
     switch (currentRoute) {
+        case AppRoute.Login:
+            nextRoute = AppRoute.Dashboard
+            break
         case AppRoute.Welcome:
             nextRoute = AppRoute.Legal
             break
@@ -102,8 +107,7 @@ export const routerNext = (event) => {
                 walletSetupType.set(setupType)
                 if (setupType === SetupType.New) {
                     nextRoute = AppRoute.Password
-                }
-                else if (setupType === SetupType.Import) {
+                } else if (setupType === SetupType.Import) {
                     nextRoute = AppRoute.Import
                 }
             }
@@ -121,8 +125,7 @@ export const routerNext = (event) => {
                 walletPin.set(pin)
                 if (get(walletSetupType) === SetupType.Mnemonic || get(walletSetupType) === SetupType.Stronghold) {
                     nextRoute = AppRoute.Congratulations
-                }
-                else {
+                } else {
                     nextRoute = AppRoute.Backup
                 }
             }
@@ -130,8 +133,7 @@ export const routerNext = (event) => {
         case AppRoute.Backup:
             if (get(walletSetupType) === SetupType.Seed || get(walletSetupType) === SetupType.Seedvault) {
                 nextRoute = AppRoute.Migrate
-            }
-            else {
+            } else {
                 nextRoute = AppRoute.Congratulations
             }
             break
@@ -141,11 +143,9 @@ export const routerNext = (event) => {
             walletSetupType.set(importType)
             if (importType === SetupType.Mnemonic) {
                 nextRoute = AppRoute.Password
-            }
-            else if (importType === SetupType.Seed || importType === SetupType.Seedvault) {
+            } else if (importType === SetupType.Seed || importType === SetupType.Seedvault) {
                 nextRoute = AppRoute.Balance
-            }
-            else if (importType === SetupType.Stronghold) {
+            } else if (importType === SetupType.Stronghold) {
                 nextRoute = AppRoute.Protect
             }
             break
@@ -163,23 +163,21 @@ export const routerNext = (event) => {
 
     // Update history and navigate to new route
     if (nextRoute) {
-        history.update(_history => {
+        history.update((_history) => {
             _history.push(currentRoute)
             return _history
         })
         setRoute(nextRoute)
-    }
-    else {
+    } else {
         console.error('Routing Error: Could not find next route')
     }
 }
 
 // TODO: only handle route changes, not app variables
 export const routerPrevious = () => {
-
     let previousRoute: AppRoute
 
-    history.update(_history => {
+    history.update((_history) => {
         previousRoute = _history.pop() as AppRoute
         return _history
     })

@@ -23,6 +23,7 @@ import {
   reattach as _reattach
 } from '../../../../backend/api-wrapper/message'
 import {
+  LoggerConfig,
   backup as _backup,
   restoreBackup as _restoreBackup,
   setStrongholdPassword as _setStrongholdPassword,
@@ -51,6 +52,10 @@ function sendMessage(message: BridgeMessage): Promise<number> {
 
 export function onMessage(cb: (payload: MessageResponse) => void) {
   onMessageListeners.push(cb)
+}
+
+export function initLogger(config: LoggerConfig) {
+  WalletPlugin.initLogger(JSON.stringify(config))
 }
 
 export function init() {

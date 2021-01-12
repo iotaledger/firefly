@@ -1753,6 +1753,7 @@ version = "0.1.0"
 dependencies = [
  "neon",
  "neon-build",
+ "serde_json",
  "smol",
  "wallet-actor-system",
 ]
@@ -3160,6 +3161,7 @@ checksum = "9d5b2c62b4012a3e1eca5a7e077d13b3bf498c4073e33ccd58626607748ceeca"
 name = "wallet-actor-system"
 version = "0.1.0"
 dependencies = [
+ "iota-core",
  "iota-wallet",
  "once_cell",
  "riker",

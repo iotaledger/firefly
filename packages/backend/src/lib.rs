@@ -8,6 +8,8 @@ use iota_wallet::event::{
 use once_cell::sync::OnceCell;
 use riker::actors::*;
 use serde::{Deserialize, Serialize};
+use iota::common::logger::logger_init;
+pub use iota::common::logger::LoggerConfigBuilder;
 
 use std::convert::TryFrom;
 use std::path::Path;
@@ -62,6 +64,10 @@ pub fn init<F: Fn(String) + Send + Sync + 'static>(
         .set(Box::new(message_receiver))
         .map_err(|_| ())
         .expect("failed to set message receiver globally");
+}
+
+pub fn init_logger(config: LoggerConfigBuilder) {
+    logger_init(config.finish()).expect("failed to init logger");
 }
 
 pub async fn send_message(message: String) {
