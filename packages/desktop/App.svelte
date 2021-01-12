@@ -72,14 +72,6 @@
 <!-- empty div to avoid auto-purge removing dark classes -->
 <div class="scheme-dark" />
 {#if true}
-    <!-- dummy toggles -->
-    <div class="dummy-toggles flex flex-row">
-        <div class="mr-4">
-            <Toggle on={darkMode} />
-        </div>
-        <button on:click={() => logged.update(() => false)}> reset </button>
-    </div>
-    <!--  -->
     <Route route={AppRoute.Welcome}>
         <Welcome on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
