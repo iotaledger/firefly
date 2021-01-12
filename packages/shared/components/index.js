@@ -1,7 +1,7 @@
 export { default as Route } from './Route.svelte'
 export { default as Logo } from './Logo.svelte'
 export { default as Illustration } from './Illustration.svelte'
-export { default as Icon } from './Icon.svelte'
+export { default as Icon } from './icon/Index.svelte'
 export { default as Box } from './Box.svelte'
 export { default as Text } from './Text.svelte'
 export { default as Button } from './Button.svelte'
