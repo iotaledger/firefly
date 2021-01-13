@@ -3,7 +3,7 @@ use std::ffi::{CStr, CString};
 use std::os::raw::c_char;
 
 use wallet_actor_system::{
-    init as init_runtime, listen as add_event_listener, send_message as send_actor_message,
+    init as init_actor, destroy as destroy_actor, listen as add_event_listener, send_message as send_actor_message,
     EventType,
 };
 
@@ -23,13 +23,26 @@ pub extern "C" fn initialize(callback: Callback, actor_id: *const c_char, storag
         let c_storage_path = unsafe { CStr::from_ptr(storage_path) };
         Some(c_storage_path.to_str().unwrap())
     };
-    smol::block_on(init_runtime(
+    smol::block_on(init_actor(
         actor_id,
         move |event| {
             let c_event = CString::new(event).expect("failed to convert response to CString");
             callback(c_event.as_ptr());
         },
         storage_path,
+    ));
+}
+
+#[no_mangle]
+pub extern "C" fn destroy(actor_id: *const c_char) {
+    let c_actor_id = unsafe {
+        assert!(!actor_id.is_null());
+        CStr::from_ptr(actor_id)
+    };
+    let actor_id = c_actor_id.to_str().unwrap();
+
+    smol::block_on(destroy_actor(
+        actor_id,
     ));
 }
 

@@ -5,7 +5,7 @@ use std::sync::{
     Arc, Mutex,
 };
 use wallet_actor_system::{
-    init as init_runtime, init_logger as init_backend_logger, listen as add_event_listener,
+    init as init_actor, destroy as destroy_actor, init_logger as init_backend_logger, listen as add_event_listener,
     send_message as send_actor_message, EventType, LoggerConfigBuilder,
 };
 
@@ -60,6 +60,7 @@ impl Task for ReceiveMessageTask {
 }
 
 pub struct ActorSystem {
+    actor_id: String,
     rx: Arc<Mutex<Receiver<String>>>,
 }
 
@@ -81,14 +82,22 @@ declare_types! {
             let (tx, rx) = channel();
             let wrapped_tx = Arc::new(Mutex::new(tx));
 
-            smol::block_on(init_runtime(actor_id, move |event| {
+            smol::block_on(init_actor(actor_id.to_string(), move |event| {
                 let tx = wrapped_tx.lock().unwrap();
                 let _ = tx.send(event);
             }, storage_path));
 
             Ok(ActorSystem {
+                actor_id,
                 rx: Arc::new(Mutex::new(rx)),
             })
+        }
+
+        method destroy(mut cx) {
+            let this = cx.this();
+            let actor_id = cx.borrow(&this, |emitter| emitter.actor_id.clone());
+            smol::block_on(destroy_actor(actor_id));
+            Ok(cx.undefined().upcast())
         }
 
         // This method should be called by JS to receive data. It accepts a

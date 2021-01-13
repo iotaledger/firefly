@@ -85,8 +85,8 @@ impl Receive<WalletMessage> for WalletActor {
 impl Receive<KillMessage> for WalletActor {
     type Msg = WalletActorMsg;
 
-    fn receive(&mut self, _ctx: &Context<Self::Msg>, _msg: KillMessage, _sender: Sender) {
-        // TODO stop wallet message handler, kill the actor
+    fn receive(&mut self, ctx: &Context<Self::Msg>, _msg: KillMessage, _sender: Sender) {
+        ctx.stop(ctx.myself());
     }
 }
 

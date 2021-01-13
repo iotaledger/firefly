@@ -86,22 +86,24 @@ pub async fn init<A: Into<String>, F: Fn(String) + Send + Sync + 'static>(
     .await;
 }
 
-pub fn destroy<A: Into<String>>(actor_id: A) {
+pub async fn destroy<A: Into<String>>(actor_id: A) {
     let mut actors = wallet_actors()
         .lock()
         .expect("Failed to lock wallet_actors: init()");
     let actor_id = actor_id.into();
 
-    if let Some(actor) = actors.get(&actor_id) {
+    if let Some(actor) = actors.remove(&actor_id) {
         actor.tell(actors::KillMessage, None);
+        iota_wallet::with_actor_system(|sys| {
+            sys.stop(actor);
+        })
+        .await;
 
         let mut message_receivers = message_receivers()
             .lock()
             .expect("Failed to lock message_receivers: respond()");
         message_receivers.remove(&actor_id);
     }
-
-    actors.remove(&actor_id);
 }
 
 pub fn init_logger(config: LoggerConfigBuilder) {
@@ -215,6 +217,8 @@ mod tests {
     fn basic() {
         run_actor("my-actor");
         run_actor("my-actor2");
+        run_actor("my-actor");
+        run_actor("my-actor2");
     }
 
     fn run_actor(actor_id: &str) {
@@ -251,10 +255,50 @@ mod tests {
                         ResponseType::StrongholdPasswordSet
                     ))
                     .unwrap()
-                )
+                );
+
+                super::destroy(actor_id).await;
+                let res = convert_async_panics(|| {
+                    super::send_message(format!(
+                        r#"{{
+                    "actorId": "{}",
+                    "id": "{}",
+                    "cmd": "SetStrongholdPassword",
+                    "payload": "password"
+                }}"#,
+                        actor_id, "message-id"
+                    ))
+                })
+                .await;
+                assert_eq!(res.is_err(), true);
+                assert_eq!(res.unwrap_err().contains("actor dropped"), true);
             } else {
                 panic!("response failed")
             }
         });
+    }
+
+    use futures::{Future, FutureExt};
+    use std::any::Any;
+    use std::panic::AssertUnwindSafe;
+
+    fn panic_message(panic: Box<dyn Any>) -> String {
+        if let Some(message) = panic.downcast_ref::<String>() {
+            message.to_string()
+        } else if let Some(message) = panic.downcast_ref::<&str>() {
+            message.to_string()
+        } else {
+            "Unknown error".to_string()
+        }
+    }
+
+    async fn convert_async_panics<F>(f: impl FnOnce() -> F) -> Result<(), String>
+    where
+        F: Future<Output = ()>,
+    {
+        match AssertUnwindSafe(f()).catch_unwind().await {
+            Ok(r) => Ok(r),
+            Err(panic) => Err(panic_message(panic)),
+        }
     }
 }
