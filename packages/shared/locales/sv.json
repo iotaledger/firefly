@@ -222,8 +222,8 @@
             }
         },
         "login": {
-            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "please_wait": "Vänta {time, plural, one {1 sekund} other {# sekunder}}",
+            "incorrect_attempts": "{attempts, plural, one {1 felaktigt försök} other {# felaktiga försök}}"
         }
     },
     "actions": {
@@ -237,7 +237,7 @@
         "setup_pin": "Ställ in PIN-kod",
         "set_pin": "Ställ in PIN-kod",
         "confirm_pin": "Bekräfta PIN-kod",
-        "enter_your_pin": "Enter your PIN",
+        "enter_your_pin": "Ange din PIN-kod",
         "save_backup_file": "Spara säkerhetskopia",
         "ive_written_recovery_phrase": "Jag har skrivit ner min återställningsfras",
         "verify_recovery_phrase": "Verifiera återställningsfras",
@@ -294,6 +294,6 @@
         "incoming": "Inkommande",
         "outgoing": "Utgående",
         "accounts": "Konton",
-        "profiles": "Profiles"
+        "profiles": "Profiler"
     }
 }
