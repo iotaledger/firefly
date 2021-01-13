@@ -222,8 +222,8 @@
             }
         },
         "login": {
-            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "please_wait": "Vennligst vent {time, plural, one {1 sekund} other {# sekunder}}",
+            "incorrect_attempts": "{attempts, plural, one {1 feil forsøk} other {# ugyldige forsøk}}"
         }
     },
     "actions": {
@@ -237,7 +237,7 @@
         "setup_pin": "Opprett PIN-kode",
         "set_pin": "Angi PIN-kode",
         "confirm_pin": "Bekreft PIN-kode",
-        "enter_your_pin": "Enter your PIN",
+        "enter_your_pin": "Tast PIN",
         "save_backup_file": "Lagre sikkerhetskopifilen",
         "ive_written_recovery_phrase": "Jeg har skrevet ned gjenopprettingsfrasen",
         "verify_recovery_phrase": "Bekreft gjenopprettingsfrasen",
@@ -279,7 +279,7 @@
         "share_address": "Del en adresse",
         "your_address": "Din adresse",
         "generate_new_address": "Generer en ny adresse",
-        "have_text_backup": "I have a text backup",
+        "have_text_backup": "Jeg har en nedskrevet hovednøkkel",
         "have_file_backup": "Jeg har en sikkerhetskopi-fil",
         "enter_seed_or_phrase": "Angi gjenopprettingsfrase eller hovednøkkel",
         "upload_seedvault_or_stronghold": "Importer en Stronghold eller SeedVault-fil",
@@ -294,6 +294,6 @@
         "incoming": "Innkommende",
         "outgoing": "Utgående",
         "accounts": "Konto",
-        "profiles": "Profiles"
+        "profiles": "Profiler"
     }
 }
