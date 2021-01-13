@@ -21,7 +21,7 @@
         Migrate,
         Congratulations,
         Dashboard,
-        Login
+        Login,
     } from 'shared/routes'
     $: $darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
     $: if (document.dir !== $dir) {

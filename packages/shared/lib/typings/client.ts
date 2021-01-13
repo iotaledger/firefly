@@ -1,13 +1,13 @@
 export enum Network {
-  Mainnet,
-  Devnet,
-  Comnet
+    Mainnet,
+    Devnet,
+    Comnet,
 }
 
 export interface ClientOptions {
-  node?: string;
-  nodes?: string[];
-  network?: Network;
-  quorumSize?: number;
-  quorumThreshold?: number;
+    node?: string
+    nodes?: string[]
+    network?: Network
+    quorumSize?: number
+    quorumThreshold?: number
 }

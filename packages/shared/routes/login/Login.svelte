@@ -3,13 +3,13 @@
     import { Transition } from 'shared/components'
     import { SelectProfile, EnterPin } from './views/'
     import { api } from 'shared/lib/wallet'
-
+    
     export let locale
     export let mobile
 
     enum LoginState {
         Init = 'init',
-        EnterPin = 'enterPin'
+        EnterPin = 'enterPin',
     }
 
     const dispatch = createEventDispatcher()

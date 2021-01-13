@@ -13,7 +13,7 @@ export function bindEvents(element, events) {
             listeners.forEach(([event, listener]) => {
                 element.removeEventListener(event, listener)
             })
-        }
+        },
     }
 }
 

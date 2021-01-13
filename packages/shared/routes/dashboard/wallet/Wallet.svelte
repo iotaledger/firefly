@@ -8,7 +8,7 @@
         chartCurrency,
         chartTimeframe,
         TIMEFRAME_MAP,
-        AvailableCharts
+        AvailableCharts,
     } from 'shared/lib/marketData'
     import { Send, Receive } from './views/'
     export let locale
@@ -18,7 +18,7 @@
     enum WalletState {
         Init = 'init',
         Send = 'send',
-        Receive = 'receive'
+        Receive = 'receive',
     }
     let state: WalletState = WalletState.Init
     let stateHistory = []
@@ -63,13 +63,13 @@
             hash: 'JWL9...KFL9M',
             timestamp: '20 June, 2020, 14:03',
             amount: '251 Gi',
-            received: true
+            received: true,
         },
         {
             hash: 'JWL9...KFL9M',
             timestamp: '20 June, 2020, 14:03',
             amount: '151 Gi',
-            received: false
+            received: false,
         },
         {
             hash: 'JWL9...KFL9M',
@@ -81,11 +81,11 @@
 
     const totalIncoming = {
         amount: 32,
-        unit: 'Gi'
+        unit: 'Gi',
     }
     const totalOutgoing = {
         amount: 16,
-        unit: 'Gi'
+        unit: 'Gi',
     }
 
     let accounts = []
@@ -237,7 +237,7 @@
                             value={$chartCurrency.toUpperCase()}
                             items={Object.values(CurrencyTypes).map((currency) => ({
                                 value: currency,
-                                label: currency.toUpperCase()
+                                label: currency.toUpperCase(),
                             }))}
                             onSelect={(newCurrency) => chartCurrency.set(newCurrency)} />
                     </span>

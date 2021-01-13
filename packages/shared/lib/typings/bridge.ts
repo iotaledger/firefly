@@ -4,9 +4,9 @@ import type { AccountIdentifier, Account, SyncedAccount } from './account'
 import type { Message } from './message'
 
 export interface BridgeMessage {
-  id: string;
-  cmd: string;
-  payload?: any;
+    id: string
+    cmd: string
+    payload?: any
 }
 
 export enum ResponseTypes {
@@ -39,7 +39,7 @@ export enum ResponseTypes {
   VerifiedMnemonic = 'VerifiedMnemonic'
 }
 
-export type Response<T, P> = { id: string, action: string, type: T, payload?: P }
+export type Response<T, P> = { id: string; action: string; type: T; payload?: P }
 export type RemovedAccountResponse = Response<ResponseTypes.RemovedAccount, AccountIdentifier>
 export type CreatedAccountResponse = Response<ResponseTypes.CreatedAccount, Account>
 export type ReadAccountResponse = Response<ResponseTypes.ReadAccount, Account>

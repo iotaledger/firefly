@@ -1,4 +1,4 @@
-import Chart from "chart.js";
+import Chart from 'chart.js'
 
 Chart.defaults.global.defaultFontFamily = 'DM Sans'
 Chart.defaults.global.defaultFontSize = 10
