@@ -3389,6 +3389,7 @@ version = "0.1.0"
 dependencies = [
  "iota-core",
  "iota-wallet",
+ "log",
  "once_cell",
  "riker",
  "serde 1.0.118",

@@ -67,7 +67,8 @@ declare_types! {
     pub class JsActorSystem for ActorSystem {
         // Called by the `JsActorSystem` constructor
         init(mut cx) {
-            let storage_path = match cx.argument::<JsString>(0) {
+            let actor_id = cx.argument::<JsString>(0)?.value();
+            let storage_path = match cx.argument::<JsString>(1) {
                 Ok(path) => {
                     if path.value() == "".to_string() {
                         None
@@ -80,7 +81,7 @@ declare_types! {
             let (tx, rx) = channel();
             let wrapped_tx = Arc::new(Mutex::new(tx));
 
-            smol::block_on(init_runtime(move |event| {
+            smol::block_on(init_runtime(actor_id, move |event| {
                 let tx = wrapped_tx.lock().unwrap();
                 let _ = tx.send(event);
             }, storage_path));
@@ -112,10 +113,11 @@ declare_types! {
 }
 
 fn listen(mut cx: FunctionContext) -> JsResult<JsUndefined> {
-    let id = cx.argument::<JsString>(0)?.value();
-    let event_name = cx.argument::<JsString>(1)?.value();
+    let actor_id = cx.argument::<JsString>(0)?.value();
+    let id = cx.argument::<JsString>(1)?.value();
+    let event_name = cx.argument::<JsString>(2)?.value();
     let event_type: EventType = event_name.as_str().try_into().expect("unknown event name");
-    add_event_listener(id, event_type);
+    add_event_listener(actor_id, id, event_type);
     Ok(cx.undefined())
 }
 

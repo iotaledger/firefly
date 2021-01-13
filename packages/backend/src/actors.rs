@@ -17,6 +17,10 @@ use std::{path::PathBuf, sync::Arc, time::Duration};
 
 const POLLING_INTERVAL_MS: u64 = 30_000;
 
+#[derive(Clone, Debug)]
+pub struct KillMessage;
+
+#[actor(WalletMessage, KillMessage)]
 pub struct WalletActor {
     wallet_message_handler: Arc<Mutex<WalletMessageHandler>>,
     runtime: Runtime,
@@ -57,9 +61,17 @@ impl Default for WalletActor {
 }
 
 impl Actor for WalletActor {
-    type Msg = WalletMessage;
+    type Msg = WalletActorMsg;
 
-    fn recv(&mut self, _ctx: &Context<Self::Msg>, msg: Self::Msg, _sender: Sender) {
+    fn recv(&mut self, ctx: &Context<Self::Msg>, msg: Self::Msg, sender: Sender) {
+        self.receive(ctx, msg, sender)
+    }
+}
+
+impl Receive<WalletMessage> for WalletActor {
+    type Msg = WalletActorMsg;
+
+    fn receive(&mut self, _ctx: &Context<Self::Msg>, msg: WalletMessage, _sender: Sender) {
         let wallet_message_handler = self.wallet_message_handler.clone();
         self.runtime.enter(move || {
             tokio::task::spawn(async move {
@@ -70,20 +82,28 @@ impl Actor for WalletActor {
     }
 }
 
+impl Receive<KillMessage> for WalletActor {
+    type Msg = WalletActorMsg;
+
+    fn receive(&mut self, _ctx: &Context<Self::Msg>, _msg: KillMessage, _sender: Sender) {
+        // TODO stop wallet message handler, kill the actor
+    }
+}
+
 #[derive(Deserialize)]
-struct DispatchMessage {
-    id: String,
+pub(crate) struct DispatchMessage {
+    #[serde(rename = "actorId")]
+    pub(crate) actor_id: String,
+    pub(crate) id: String,
     #[serde(flatten)]
-    message: WalletMessageType,
+    pub(crate) message: WalletMessageType,
 }
 
 pub(crate) async fn dispatch(
-    wallet_actor: &ActorRef<WalletMessage>,
-    message: String,
+    wallet_actor: &ActorRef<WalletActorMsg>,
+    message: DispatchMessage,
 ) -> Result<Option<String>, String> {
     let (response_tx, mut response_rx) = unbounded_channel();
-    let message: DispatchMessage = serde_json::from_str(&message)
-        .map_err(|e| serde_json::to_string(&ResponseType::Error(e.into())).unwrap())?;
 
     wallet_actor.tell(
         WalletMessage::new(message.id.clone(), message.message.clone(), response_tx),
