@@ -115,33 +115,33 @@
             "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "Saldo Anda",
+            "body": "Apakah saldo Anda benar?"
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "Pengaturan",
             "generalSettings": {
-                "title": "General Settings",
+                "title": "Pengaturan Biasa",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "security": {
-                "title": "Security",
+                "title": "Keamanan",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
+                "title": "Pengaturan Lanjutan",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Help and Information",
+                "title": "Bantuan dan Informasi",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profileDetails": {
-                "title": "Profile Details",
+                "title": "Detail Profil",
                 "description": "Temp"
             },
             "theme": {
-                "title": "Theme",
+                "title": "Motif",
                 "description": "Temp"
             },
             "language": {
@@ -149,43 +149,43 @@
                 "description": "Temp"
             },
             "currency": {
-                "title": "Currency",
+                "title": "Mata uang",
                 "description": "Temp"
             },
             "notifications": {
-                "title": "Notifications",
+                "title": "Notifikasi",
                 "description": "Temp"
             },
             "exportStronghold": {
-                "title": "Export Stronghold",
+                "title": "Ekspor Stronghold",
                 "description": "Temp"
             },
             "appLock": {
-                "title": "App Lock",
+                "title": "Kunci App",
                 "description": "Temp"
             },
             "changePassword": {
-                "title": "Change Password",
+                "title": "Ganti Kata sandi",
                 "description": "Temp"
             },
             "resyncAccounts": {
-                "title": "Resync Accounts",
+                "title": "Sinkron ulang Akun",
                 "description": "Temp"
             },
             "resetWallet": {
-                "title": "Reset Wallet",
+                "title": "Atur ulang Dompet",
                 "description": "Temp"
             },
             "deepLinks": {
-                "title": "Deep Links",
+                "title": "Tautan Dalam",
                 "description": "Temp"
             },
             "developerMode": {
-                "title": "Developer Mode",
+                "title": "Mode Developer",
                 "description": "Temp"
             },
             "nodeSettings": {
-                "title": "Node Settings",
+                "title": "Pengaturan Node",
                 "description": "Temp"
             },
             "proofOfWork": {
@@ -193,19 +193,19 @@
                 "description": "Temp"
             },
             "errorLog": {
-                "title": "Error Log",
+                "title": "Log Galat",
                 "description": "Temp"
             },
             "stateExport": {
-                "title": "State Export",
+                "title": "Ekspor Status",
                 "description": "Temp"
             },
             "troubleshoot": {
-                "title": "Troubleshoot",
+                "title": "Permasalahan",
                 "description": "Temp"
             },
             "documentation": {
-                "title": "Documentation",
+                "title": "Dokumentasi",
                 "description": "Temp"
             },
             "faq": {
@@ -217,38 +217,38 @@
                 "description": "Temp"
             },
             "about": {
-                "title": "About",
+                "title": "Tentang",
                 "description": "Temp"
             }
         },
         "login": {
-            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "please_wait": "Harap tunggu {time, plural,one {1 detik}other {# detik}}",
+            "incorrect_attempts": "{attempts, plural,one {1 upaya gagal}other {# upaya gagal}}"
         }
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
+        "continue": "Lanjutkan",
+        "back": "Kembali",
+        "import_seed": "Impor seed lama",
+        "import_wallet": "Impor dompet lama",
+        "create_wallet": "Buat dompet baru",
+        "save_password": "Simpan kata sandi",
+        "use_biometric": "Pakai keamanan biometrik",
         "setup_pin": "Atur kode PIN",
-        "set_pin": "Set PIN code",
-        "confirm_pin": "Confirm PIN code",
-        "enter_your_pin": "Enter your PIN",
-        "save_backup_file": "Save backup file",
-        "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
+        "set_pin": "Buat kode PIN",
+        "confirm_pin": "Konfirmasikan PIN",
+        "enter_your_pin": "Masukkan PIN",
+        "save_backup_file": "Simpan file pencadangan",
+        "ive_written_recovery_phrase": "Aku sudah menuliskan frasa pemulihan",
         "verify_recovery_phrase": "Verifikasi frasa pemulihan",
-        "reveal_recovery_phrase": "Reveal recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
+        "reveal_recovery_phrase": "Perlihatkan frasa pemulihan",
+        "import_seedvault": "Impor SeedVault",
+        "check_again": "Bukan, Periksa Lagi",
+        "import_from_file": "Impor dari file",
+        "send": "Kirim",
+        "receive": "Terima",
+        "begin_transfer": "Mulai Transfer",
+        "try_again": "Coba kembali",
         "visit_discord": "Kunjungi Discord",
         "drag_drop": "Tarik & Letak",
         "import_extentions": "file .stronghold atau .kdbx",
