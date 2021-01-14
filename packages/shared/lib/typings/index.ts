@@ -6,12 +6,4 @@ import * as events from './events'
 import * as message from './message'
 import * as wallet from './wallet'
 
-export {
-  account,
-  address,
-  bridge,
-  client,
-  events,
-  message,
-  wallet
-}
+export { account, address, bridge, client, events, message, wallet }

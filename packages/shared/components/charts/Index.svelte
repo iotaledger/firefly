@@ -5,7 +5,7 @@
 
     enum ChartType {
         Line = 'line',
-        Bar = 'bar'
+        Bar = 'bar',
     }
 
     let data: any[]
@@ -18,8 +18,8 @@
     export let type: ChartType
 
     const unsubscribe = chartData.subscribe((_chartData) => {
-        labels = _chartData.labels;
-        data = _chartData.data;
+        labels = _chartData.labels
+        data = _chartData.data
     })
 
     onDestroy(unsubscribe)

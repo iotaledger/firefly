@@ -5,7 +5,7 @@
     import { darkMode, mobile, logged } from 'shared/lib/app'
     import { goto } from 'shared/lib/helpers'
     import { initRouter, routerNext, routerPrevious, requestMnemonic, AppRoute } from 'shared/lib/router'
-    import { Route, Toggle } from 'shared/components'
+    import { Route } from 'shared/components'
     import {
         Splash,
         Welcome,

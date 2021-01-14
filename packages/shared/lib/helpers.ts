@@ -11,8 +11,8 @@ import { view } from './router'
  * @returns {void}
  */
 export const setRoute = (path: string): void => {
-    view.set(path);
-};
+    view.set(path)
+}
 
 /**
  * Update application path

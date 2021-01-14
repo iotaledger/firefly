@@ -133,92 +133,96 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Help and Information",
+                "title": "Help & Information",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
-            "profileDetails": {
-                "title": "Profile Details",
-                "description": "Temp"
+            "profile": {
+                "title": "Profile",
+                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
+            }, 
+            "sync": {
+                "title": "Sync accounts",
+                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
             }, 
             "theme": {
                 "title": "Theme",
-                "description": "Temp"
+                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
             }, 
             "language": {
                 "title": "Language",
-                "description": "Temp"
+                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
             }, 
             "currency": {
                 "title": "Currency",
-                "description": "Temp"
+                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
             }, 
             "notifications": {
                 "title": "Notifications",
-                "description": "Temp"
+                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
             }, 
             "exportStronghold": {
                 "title": "Export Stronghold",
-                "description": "Temp"
+                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
             }, 
             "appLock": {
                 "title": "App Lock",
-                "description": "Temp"
+                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
             }, 
             "changePassword": {
-                "title": "Change Password",
-                "description": "Temp"
+                "title": "Change password",
+                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
             }, 
             "resyncAccounts": {
-                "title": "Resync Accounts",
-                "description": "Temp"
+                "title": "Resync accounts",
+                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
             }, 
             "resetWallet": {
-                "title": "Reset Wallet",
-                "description": "Temp"
+                "title": "Reset wallet",
+                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
             }, 
             "deepLinks": {
-                "title": "Deep Links",
-                "description": "Temp"
+                "title": "Deep links",
+                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
             }, 
             "developerMode": {
-                "title": "Developer Mode",
-                "description": "Temp"
+                "title": "Developer mode",
+                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
             }, 
             "nodeSettings": {
-                "title": "Node Settings",
-                "description": "Temp"
+                "title": "Node settings",
+                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
             }, 
             "proofOfWork": {
-                "title": "Proof of Work",
-                "description": "Temp"
+                "title": "Proof of work",
+                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
             }, 
             "errorLog": {
-                "title": "Error Log",
-                "description": "Temp"
+                "title": "Error log",
+                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
             }, 
             "stateExport": {
-                "title": "State Export",
-                "description": "Temp"
+                "title": "State export",
+                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
             }, 
             "troubleshoot": {
                 "title": "Troubleshoot",
-                "description": "Temp"
+                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
             }, 
             "documentation": {
                 "title": "Documentation",
-                "description": "Temp"
+                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
             }, 
             "faq": {
                 "title": "FAQ",
-                "description": "Temp"
+                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
             }, 
             "discord": {
                 "title": "Discord",
-                "description": "Temp"
+                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
             }, 
             "about": {
                 "title": "About",
-                "description": "Temp"
+                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
             }
         },
         "login": {
@@ -235,7 +239,7 @@
         "save_password": "Save password",
         "use_biometric": "Use biometric security",
         "setup_pin": "Set up PIN code",
-        "set_pin" : "Set PIN code",
+        "set_pin": "Set PIN code",
         "confirm_pin": "Confirm PIN code",
         "enter_your_pin": "Enter your PIN",
         "save_backup_file": "Save backup file",
@@ -253,11 +257,22 @@
         "drag_drop": "Drag & Drop",
         "import_extentions": ".stronghold or .kdbx file",
         "choose_file": "Choose a File",
-        "drop_here": "Drop your file here"
+        "drop_here": "Drop your file here",
+        "syncAll": "Sync all",
+        "export": "Export",
+        "exportNewStronghold": "Export a new Stronghold",
+        "enableDeepLinks": "Enable deep links",
+        "enableDeveloperMode": "Enable developer mode",
+        "enableNotifications": "Enable notifications",
+        "exportState": "Export state",
+        "outsourceProofOfWork": "Outsource proof of work"
     },
     "general": {
         "password": "Password",
         "confirm_password": "Confirm password",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "confirmNewPassword": "Confirm new password",
         "your_seed": "Your Seed",
         "recovery_phrase": "Recovery Phrase",
         "recent_activity": "Recent Activity",
@@ -296,6 +311,8 @@
         "incoming": "Incoming",
         "outgoing": "Outgoing",
         "accounts": "Accounts",
+        "automaticNodeSelection": "Automatic node selection",
+        "manualNodeSelection": "Manual node selection",
         "profiles": "Profiles"
     }
 }

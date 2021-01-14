@@ -4,39 +4,39 @@ import type { AccountIdentifier, Account, SyncedAccount } from './account'
 import type { Message } from './message'
 
 export interface BridgeMessage {
-  id: string;
-  cmd: string;
-  payload?: any;
+    id: string
+    cmd: string
+    payload?: any
 }
 
 export enum ResponseTypes {
-  RemovedAccount = 'RemovedAccount',
-  CreatedAccount = 'CreatedAccount',
-  ReadAccount = 'ReadAccount',
-  ReadAccounts = 'ReadAccounts',
-  Messages = 'Messages',
-  Addresses = 'Addresses',
-  GeneratedAddress = 'GeneratedAddress',
-  LatestAddress = 'LatestAddress',
-  AvailableBalance = 'AvailableBalance',
-  TotalBalance = 'TotalBalance',
-  SyncedAccounts = 'SyncedAccounts',
-  Reattached = 'Reattached',
-  BackupSuccessful = 'BackupSuccessful',
-  BackupRestored = 'BackupRestored',
-  StrongholdPasswordSet = 'StrongholdPasswordSet',
-  SentTransfer = 'SentTransfer',
-  Error = 'Error',
-  Panic = 'Panic',
-  ErrorThrown = 'ErrorThrown',
-  BalanceChange = 'BalanceChange',
-  NewTransaction = 'NewTransaction',
-  ConfirmationStateChange = 'ConfirmationStateChange',
-  Reattachment = 'Reattachment',
-  Broadcast = 'Broadcast',
+    RemovedAccount = 'RemovedAccount',
+    CreatedAccount = 'CreatedAccount',
+    ReadAccount = 'ReadAccount',
+    ReadAccounts = 'ReadAccounts',
+    Messages = 'Messages',
+    Addresses = 'Addresses',
+    GeneratedAddress = 'GeneratedAddress',
+    LatestAddress = 'LatestAddress',
+    AvailableBalance = 'AvailableBalance',
+    TotalBalance = 'TotalBalance',
+    SyncedAccounts = 'SyncedAccounts',
+    Reattached = 'Reattached',
+    BackupSuccessful = 'BackupSuccessful',
+    BackupRestored = 'BackupRestored',
+    StrongholdPasswordSet = 'StrongholdPasswordSet',
+    SentTransfer = 'SentTransfer',
+    Error = 'Error',
+    Panic = 'Panic',
+    ErrorThrown = 'ErrorThrown',
+    BalanceChange = 'BalanceChange',
+    NewTransaction = 'NewTransaction',
+    ConfirmationStateChange = 'ConfirmationStateChange',
+    Reattachment = 'Reattachment',
+    Broadcast = 'Broadcast',
 }
 
-export type Response<T, P> = { id: string, action: string, type: T, payload?: P }
+export type Response<T, P> = { id: string; action: string; type: T; payload?: P }
 export type RemovedAccountResponse = Response<ResponseTypes.RemovedAccount, AccountIdentifier>
 export type CreatedAccountResponse = Response<ResponseTypes.CreatedAccount, Account>
 export type ReadAccountResponse = Response<ResponseTypes.ReadAccount, Account>
@@ -56,25 +56,28 @@ export type SentTransferResponse = Response<ResponseTypes.SentTransfer, Message>
 export type ErrorResponse = Response<ResponseTypes.Error, ErrorEventPayload>
 export type PanicResponse = Response<ResponseTypes.Panic, string>
 
-export type MessageResponse = RemovedAccountResponse |
-  CreatedAccountResponse |
-  ReadAccountResponse |
-  ReadAccountsResponse |
-  ListMessagesResponse |
-  ListAddressesResponse |
-  GeneratedAddressResponse |
-  LatestAddressResponse |
-  AvailableBalanceResponse |
-  TotalBalanceResponse |
-  SyncAccountsResponse |
-  ReattachResponse |
-  BackupSuccessfulResponse |
-  BackupRestoredResponse |
-  SetStrongholdPasswordResponse |
-  SentTransferResponse |
-  ErrorResponse |
-  PanicResponse |
-  // events
-  Event<ErrorEventPayload> | Event<BalanceChangeEventPayload> | Event<TransactionEventPayload>
+export type MessageResponse =
+    | RemovedAccountResponse
+    | CreatedAccountResponse
+    | ReadAccountResponse
+    | ReadAccountsResponse
+    | ListMessagesResponse
+    | ListAddressesResponse
+    | GeneratedAddressResponse
+    | LatestAddressResponse
+    | AvailableBalanceResponse
+    | TotalBalanceResponse
+    | SyncAccountsResponse
+    | ReattachResponse
+    | BackupSuccessfulResponse
+    | BackupRestoredResponse
+    | SetStrongholdPasswordResponse
+    | SentTransferResponse
+    | ErrorResponse
+    | PanicResponse
+    // events
+    | Event<ErrorEventPayload>
+    | Event<BalanceChangeEventPayload>
+    | Event<TransactionEventPayload>
 
 export type Bridge = (message: BridgeMessage) => Promise<string>
