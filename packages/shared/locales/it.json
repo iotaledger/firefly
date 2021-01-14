@@ -5,8 +5,8 @@
             "body": "Firefly è un portafoglio IOTA sicuro e facile da usare."
         },
         "legal": {
-            "title": "Legal",
-            "body": "Si prega di rivedere l'Informativa sulla privacy e i termini di servizio.",
+            "title": "Info Legali",
+            "body": "Si prega di prendere visione dell'Informativa sulla privacy e i termini di servizio.",
             "privacy_policy": {
                 "title": "Informativa Privacy",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
@@ -222,7 +222,7 @@
             }
         },
         "login": {
-            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
+            "please_wait": "Attendere {time, plural, one {1 secondo} other {# secondi}}",
             "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
         }
     },
