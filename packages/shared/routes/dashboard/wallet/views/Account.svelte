@@ -151,6 +151,8 @@
                         <Send on:next={_next} {accounts} {locale} {mobile} />
                     {:else if state === AccountState.Transfer}
                         <Send internal on:next={_next} {accounts} {locale} {mobile} />
+                    {:else if state === AccountState.Receive}
+                        <Receive on:next={_next} {account} {locale} {mobile} />
                     {/if}
                 </div>
             </div>

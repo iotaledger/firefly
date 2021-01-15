@@ -5,7 +5,7 @@
     import { darkMode, mobile, logged } from 'shared/lib/app'
     import { goto } from 'shared/lib/helpers'
     import { initRouter, routerNext, routerPrevious, requestMnemonic, AppRoute } from 'shared/lib/router'
-    import { Route } from 'shared/components'
+    import { Route, Toggle } from 'shared/components'
     import {
         Splash,
         Welcome,
@@ -54,12 +54,6 @@
         padding: 5px;
         background: #8080803d;
         border-radius: 10px;
-        button {
-            background: var(--button-bg-color);
-            padding: 0 7px;
-            border-radius: 10px;
-            color: var(--button-text-color);
-        }
     }
     html,
     body {
@@ -77,10 +71,7 @@
 {:else}
     <!-- dummy toggles -->
     <div class="dummy-toggles flex flex-row">
-        <div class="mr-4">
-            <Toggle on={darkMode} />
-        </div>
-        <button on:click={() => logged.update(() => false)}> reset </button>
+        <Toggle storeItem={darkMode} />
     </div>
     <!--  -->
     <Route route={AppRoute.Welcome}>

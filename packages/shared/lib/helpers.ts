@@ -82,3 +82,34 @@ export const truncateString = (str: string, firstCharCount: number = 5, endCharC
     convertedStr += str.substring(str.length - endCharCount, str.length);
     return convertedStr;
 }
+
+
+/**
+ * Set text to clipboard
+ */
+export const setClipboard = (input: string): boolean => {
+    try {
+        const textArea = document.createElement('textarea')
+        textArea.value = input
+        document.body.appendChild(textArea)
+
+        if (navigator.userAgent.match(/ipad|iphone/i)) {
+            const range = document.createRange()
+            range.selectNodeContents(textArea)
+            const selection = window.getSelection()
+            selection.removeAllRanges()
+            selection.addRange(range)
+            textArea.setSelectionRange(0, 999999)
+        } else {
+            textArea.select()
+        }
+
+        document.execCommand('copy')
+        document.body.removeChild(textArea)
+
+        return true
+    } catch (err) {
+        console.log(err)
+        return false
+    }
+}
