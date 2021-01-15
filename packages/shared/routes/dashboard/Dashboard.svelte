@@ -13,13 +13,13 @@
         Settings = 'settings',
     }
 
-    let activeTab = Tabs.Settings
+    let activeTab = Tabs.Wallet
 </script>
 
 {#if mobile}
     <div>foo</div>
 {:else}
-    <div class="w-full h-full flex flex-row">
+    <div class="flex flex-row w-full h-full">
         <Sidebar bind:activeTab />
         <!-- Dashboard Pane -->
         <svelte:component this={tabs[activeTab]} {locale} />

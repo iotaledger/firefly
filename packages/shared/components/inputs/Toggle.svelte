@@ -1,41 +1,24 @@
 <script>
-    export let on = undefined
+    export let value = undefined
+    export let label = ''
+    export let classes = ''
 
-    $: active = $on === true
+    $: active = value === true
 </script>
 
 <style type="text/scss">
-    toggle {
-        display: block;
-        position: relative;
-        width: 41px;
-        height: 23px;
-        border-radius: 23px;
-        background: var(--line-separator-color);
-        cursor: pointer;
-    }
-
     knob {
-        position: absolute;
-        top: 2px;
-        left: 2px;
-        height: 19px;
-        width: 19px;
-        border-radius: 19px;
-        background: var(--ui-blue-color);
-        opacity: 0.2;
         transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
-
         &.active {
             left: 20px;
-            opacity: 1;
         }
     }
 </style>
 
-<toggle
-    on:click={() => {
-        on.update((on) => !on)
-    }}>
-    <knob class:active />
-</toggle>
+<label class={`w-full flex items-center mb-4 text-12 leading-160 text-gray-800 dark:text-white ${classes}`}>
+    <toggle on:click={() => value = !value} class='relative block mr-5 w-10 h-6 rounded-full bg-gray-300'>
+        <knob class:active class='absolute top-1 left-1 h-4 w-4 rounded-full bg-white' />
+    </toggle>
+    {label}
+</label>
+

@@ -6,6 +6,7 @@
     export let query = 'section'
     export let index = 0
     export let threshold = 0
+    export let y = 0
 
     let scroller
     let sections
@@ -38,6 +39,8 @@
     }
 </script>
 
-<div data-label="scroller" class={`block relative max-h-full overflow-y-scroll ${classes}`} bind:this={scroller}>
+<svelte:window bind:scrollY={y}/>
+
+<div data-label="scroller" id="scroller" class={`block relative max-h-full overflow-y-auto ${classes}`} bind:this={scroller}>
     <slot />
 </div>
