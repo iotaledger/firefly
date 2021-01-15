@@ -1,3 +1,5 @@
+import { validatePin } from 'shared/utils'
+
 const keytar = require('keytar')
 const { remote } = require('electron')
 
@@ -72,7 +74,7 @@ const PincodeManager = {
      * @returns {Promise}
      */
     set(pincode) {
-        if ('string' !== typeof pincode) {
+        if (validatePin(pincode)) {
             return Promise.reject(new Error('Invalid pincode provided.'));
         }
 
@@ -96,7 +98,7 @@ const PincodeManager = {
      * @returns {Promise}
      */
     verify(pincode) {
-        if ('string' !== typeof pincode) {
+        if (validatePin(pincode)) {
             return Promise.reject(new Error('Invalid pincode provided.'));
         }
 
