@@ -5,11 +5,13 @@
     export let locale
     export let mobile
 
+    const PincodeManager = window['Electron']['PincodeManager']
+
     enum ProtectState {
         Init = 'init',
         Biometric = 'biometric',
         Pin = 'pin',
-        Confirm = 'confirm',
+        Confirm = 'confirm'
     }
 
     const dispatch = createEventDispatcher()
@@ -27,7 +29,7 @@
             break
     }
 
-    const _next = (event) => {
+    const _next = async (event) => {
         let nextState
         let params = event.detail || {}
         switch (state) {
@@ -45,8 +47,14 @@
                 nextState = ProtectState.Confirm
                 break
             case ProtectState.Confirm:
-                dispatch('next', { pin })
-                break
+                try {
+                    await PincodeManager.set(pin.toString())
+
+                    dispatch('next', { pin })
+                    break
+                } catch (error) {
+                    console.error(error)
+                }
         }
         if (nextState) {
             stateHistory.push(state)
