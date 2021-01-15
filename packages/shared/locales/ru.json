@@ -181,11 +181,11 @@
                 "description": "Temp"
             },
             "developerMode": {
-                "title": "Developer Mode",
+                "title": "Режим Разработчика",
                 "description": "Temp"
             },
             "nodeSettings": {
-                "title": "Node Settings",
+                "title": "Настройки Node",
                 "description": "Temp"
             },
             "proofOfWork": {
@@ -193,7 +193,7 @@
                 "description": "Temp"
             },
             "errorLog": {
-                "title": "Error Log",
+                "title": "Журнал ошибок",
                 "description": "Temp"
             },
             "stateExport": {
@@ -201,15 +201,15 @@
                 "description": "Temp"
             },
             "troubleshoot": {
-                "title": "Troubleshoot",
+                "title": "Диагностика",
                 "description": "Temp"
             },
             "documentation": {
-                "title": "Documentation",
+                "title": "Документация",
                 "description": "Temp"
             },
             "faq": {
-                "title": "FAQ",
+                "title": "ЧАВО",
                 "description": "Temp"
             },
             "discord": {
@@ -217,37 +217,37 @@
                 "description": "Temp"
             },
             "about": {
-                "title": "About",
+                "title": "О приложение",
                 "description": "Temp"
             }
         },
         "login": {
-            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "please_wait": "Пожалуйста подождите {time, plural, one {1 секунду} few {# секунды} other {# секунд}}",
+            "incorrect_attempts": "{attempts, plural, one {1 неправильная попытка} other {# неправильные попытки}}"
         }
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
+        "continue": "Продолжить",
+        "back": "Назад",
+        "import_seed": "Импортировать существующую мнемонику",
+        "import_wallet": "Импортировать существующий кошелек",
+        "create_wallet": "Создать новый кошелек",
+        "save_password": "Сохранить пароль",
+        "use_biometric": "Использовать биометрическую защиту",
         "setup_pin": "Задайте PIN-код",
-        "set_pin": "Set PIN code",
-        "confirm_pin": "Confirm PIN code",
-        "enter_your_pin": "Enter your PIN",
-        "save_backup_file": "Save backup file",
-        "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
+        "set_pin": "Задать PIN-код",
+        "confirm_pin": "Подтвердите PIN-код",
+        "enter_your_pin": "Введите ваш PIN",
+        "save_backup_file": "Сохранить файл резервной копии",
+        "ive_written_recovery_phrase": "Я записал фразу восстановления",
         "verify_recovery_phrase": "Проверьте фразу восстановления",
-        "reveal_recovery_phrase": "Reveal recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "begin_transfer": "Begin Transfer",
+        "reveal_recovery_phrase": "Показать фразу восстановлению",
+        "import_seedvault": "Импортировать SeedVault",
+        "check_again": "Нет, проверьте снова",
+        "import_from_file": "Импортировать из файла",
+        "send": "Отправить",
+        "receive": "Получить",
+        "begin_transfer": "Начать Перемещение",
         "try_again": "Попрoбуйте снова",
         "visit_discord": "Посетить Discord",
         "drag_drop": "Перетащить",
@@ -266,7 +266,7 @@
         "send_funds": "Отправить средства",
         "send_to_address": "Отправить на адрес",
         "scan_qr_or_paste": "Сканировать QR-код или вставить Адрес",
-        "transfer_between_accounts": "Transfer Between Accounts",
+        "transfer_between_accounts": "Перемещайте между вашими Aккаунтами",
         "move_funds_between_accounts": "Перемещайте средств между вашими Aккаунтами",
         "account": "Аккаунт",
         "sending_to_address": "Отправляется на адрес",
