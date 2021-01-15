@@ -237,7 +237,7 @@
         "setup_pin": "PIN-code instellen",
         "set_pin": "PIN-code invoeren",
         "confirm_pin": "PIN-code bevestigen",
-        "enter_your_pin": "Enter your PIN",
+        "enter_your_pin": "Voer uw pincode in",
         "save_backup_file": "Bewaar back-upbestand",
         "ive_written_recovery_phrase": "Ik heb mijn herstelzin opgeschreven",
         "verify_recovery_phrase": "Verifieer jouw herstelzin",
@@ -294,6 +294,6 @@
         "incoming": "Inkomend",
         "outgoing": "Uitgaand",
         "accounts": "Rekeningen",
-        "profiles": "Profiles"
+        "profiles": "Profielen"
     }
 }
