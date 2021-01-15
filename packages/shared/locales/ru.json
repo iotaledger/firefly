@@ -88,35 +88,35 @@
             "title": "Восстановить кошелек с фразой восстановления или мнемоникой",
             "body_1": "Фраза восстановления состоит из 24 слова. Она используется для восстановления существующего кошелька Firefly.",
             "body_2": "Мнемоника состоит из 81 символа. Оно используется для восстановления из старого кошелька Trinity.",
-            "body_3": "Enter your seed or recovery phrase"
+            "body_3": "Введите вашу фразу восстановления или мнемонику"
         },
         "import_from_file": {
-            "title": "Restore your wallet from a backup file",
-            "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "Восстановить кошелёк из файла резервной копии",
+            "body": "Импортируйте файл резервной копии для восстановления вашего кошелька. Резервные копии могут быть Stronghold (.stronghold) или Trinity SeedVault (.kdbx)."
         },
         "import_backup_password": {
-            "title": "Restore your wallet from a SeedVault or Stronghold",
-            "body_1": "Please enter your backup password.",
-            "body_2": "This is the password you set when you first created your backup."
+            "title": "Восстановить кошелёк из SeedVault или Stronghold",
+            "body_1": "Пожалуйста, введите ваш пароль от резервной копии.",
+            "body_2": "Это пароль, который вы установили при первом создании резервной копии."
         },
         "import_success": {
-            "title": "You have successfully recovered your backup",
-            "body": "You can now set up your new wallet."
+            "title": "Вы успешно восстановили вашу резервную копию",
+            "body": "Теперь вы можете настроить ваш новый кошелёк."
         },
         "migrate": {
-            "title": "Migrate your funds",
-            "body_1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
-            "new": "Your new wallet"
+            "title": "Мигрируйте свои средства",
+            "body_1": "Это автоматизированный процесс перемищение ваших средств на новый кошелёк. Мы проверим потраченные адреса, которые ослабляют вашу безопасность.",
+            "body_2": "Это может занять некоторое время. Не выключайте устройство во время миграции.",
+            "existing": "Ваш старый кошелёк",
+            "new": "Ваш новый кошелёк"
         },
         "migrate_failed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "Ваш баланс",
+            "body": "Верен ли ваш баланс?"
         },
         "settings": {
             "settings": "Настройки",
@@ -125,23 +125,23 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "security": {
-                "title": "Security",
+                "title": "Настройки Безопасности",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
+                "title": "Дополнительные Настройки",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Help and Information",
+                "title": "Помощь и Информация",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profileDetails": {
-                "title": "Profile Details",
+                "title": "Данные Профиля",
                 "description": "Temp"
             },
             "theme": {
-                "title": "Theme",
+                "title": "Внешний Вид",
                 "description": "Temp"
             },
             "language": {
@@ -153,15 +153,15 @@
                 "description": "Temp"
             },
             "notifications": {
-                "title": "Notifications",
+                "title": "Оповещения",
                 "description": "Temp"
             },
             "exportStronghold": {
-                "title": "Export Stronghold",
+                "title": "Экспортировать Stronghold",
                 "description": "Temp"
             },
             "appLock": {
-                "title": "App Lock",
+                "title": "Блокировка Приложения",
                 "description": "Temp"
             },
             "changePassword": {
@@ -169,15 +169,15 @@
                 "description": "Temp"
             },
             "resyncAccounts": {
-                "title": "Resync Accounts",
+                "title": "Повторная Синхронизация Аккаунтов",
                 "description": "Temp"
             },
             "resetWallet": {
-                "title": "Reset Wallet",
+                "title": "Сбросить кошелёк",
                 "description": "Temp"
             },
             "deepLinks": {
-                "title": "Deep Links",
+                "title": "Глубинное Связывание",
                 "description": "Temp"
             },
             "developerMode": {
@@ -197,7 +197,7 @@
                 "description": "Temp"
             },
             "stateExport": {
-                "title": "State Export",
+                "title": "Экспортировать Состояние Кошелька",
                 "description": "Temp"
             },
             "troubleshoot": {
