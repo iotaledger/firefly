@@ -69,20 +69,20 @@
             "body": "Давайте проверим, что вы записали фразу правильно. Выберите слова в правильном порядке."
         },
         "backup_wallet": {
-            "title": "Back up to a Stronghold file",
-            "body": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup."
+            "title": "Сделайте резервную копию в файл Stronghold",
+            "body": "Введите пароль чтобы сделать резервную копию кошелька на файл Stronghold. Ваш пароль используется для шифрования резервной копии."
         },
         "recovery_phrase_saved": {
-            "title": "Successfully backed up",
-            "body": "You have backed up your wallet to a Stronghold."
+            "title": "Резервная копия сделано успешно",
+            "body": "Вы сделали резервную копию вашего кошелька на Stronghold."
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your wallet is ready to go."
+            "title": "Поздравляем",
+            "body": "Ваш кошелек готов к использованию."
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have a recovery phrase or Stronghold back up, you can import it here."
+            "title": "Импортировать кошелёк",
+            "body": "Если у вас есть ключевая фраза или резервная копия, вы можете импортировать его здесь."
         },
         "import_from_text": {
             "title": "Restore your wallet with a recovery phrase or seed",
@@ -119,9 +119,9 @@
             "body": "Is your balance correct?"
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "Настройки",
             "generalSettings": {
-                "title": "General Settings",
+                "title": "Общие настройки",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "security": {
@@ -145,11 +145,11 @@
                 "description": "Temp"
             },
             "language": {
-                "title": "Language",
+                "title": "Язык",
                 "description": "Temp"
             },
             "currency": {
-                "title": "Currency",
+                "title": "Валюта",
                 "description": "Temp"
             },
             "notifications": {
@@ -165,7 +165,7 @@
                 "description": "Temp"
             },
             "changePassword": {
-                "title": "Change Password",
+                "title": "Изменить пароль",
                 "description": "Temp"
             },
             "resyncAccounts": {
@@ -189,7 +189,7 @@
                 "description": "Temp"
             },
             "proofOfWork": {
-                "title": "Proof of Work",
+                "title": "Доказательство Работы",
                 "description": "Temp"
             },
             "errorLog": {
