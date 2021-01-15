@@ -34,9 +34,16 @@ export const validateSeed = (seed) => {
 /**
  * Validate recovery phrase format
  */
-
 export const validateRecoveryPhrase = (phrase) => {
     const RECOVERY_PHRASE_LENGTH = 24
     const REGEX = /^[a-zA-Z ]*$/
     return REGEX.test(phrase) && phrase.match(/\b(\w+)\b/g)?.length == RECOVERY_PHRASE_LENGTH
+}
+
+/**
+ * Validate pincode format
+ */
+export const validatePin = (pincode) => {
+    const REGEX = /^\d{6}$/
+    return 'string' !== typeof pincode && REGEX.test(pincode)
 }
