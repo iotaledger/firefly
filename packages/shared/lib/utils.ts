@@ -43,7 +43,7 @@ export const validateRecoveryPhrase = (phrase) => {
 /**
  * Validate pincode format
  */
-export const validatePin = (pincode) => {
+export const validatePinFormat = (pincode: string) => {
     const REGEX = /^\d{6}$/
-    return 'string' !== typeof pincode && REGEX.test(pincode)
+    return REGEX.test(pincode)
 }

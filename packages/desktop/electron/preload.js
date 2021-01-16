@@ -1,5 +1,5 @@
 const binding = require('wallet-nodejs-binding')
-const { PincodeManager } = require('../libs/pincodeManager');
+const PincodeManager = require('../libs/pincodeManager');
 
 binding.init()
 

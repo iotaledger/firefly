@@ -1,7 +1,7 @@
-import { validatePin } from 'shared/lib/utils'
 const { ipcRenderer } = require('electron')
 
 /** Pincode Manager  */
+// Runs in renderer process
 const PincodeManager = {
     /**
     * Key name — Key against which pincode will be stored in keychain
@@ -17,10 +17,6 @@ const PincodeManager = {
      * @returns {Promise}
      */
     set(pincode) {
-        if (validatePin(pincode)) {
-            return Promise.reject(new Error('Invalid pincode provided.'));
-        }
-        
         return ipcRenderer.invoke('keychain-get', this.KEY_NAME).then((storedPincode) => {
             // Do not allow overriding pincode if there's already one stored in keychain. 
             if (storedPincode) {
