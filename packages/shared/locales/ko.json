@@ -234,7 +234,7 @@
         "create_wallet": "새 지갑 만들기",
         "save_password": "비밀번호 저장하기",
         "use_biometric": "생체인증 사용하기",
-        "setup_pin": "PIN코드 설정하기",
+        "setup_pin": "PIN코드 설정",
         "set_pin": "PIN코드 설정",
         "confirm_pin": "PIN코드 확인하기",
         "enter_your_pin": "PIN코드 입력하기",
