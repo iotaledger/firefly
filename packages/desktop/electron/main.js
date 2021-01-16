@@ -1,5 +1,6 @@
-const { app, BrowserWindow } = require('electron')
+const { app, ipcMain, BrowserWindow } = require('electron')
 const path = require('path')
+const Keychain = require('./keychain');
 
 function createWindow() {
     // Create the browser window.
@@ -37,4 +38,20 @@ app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) {
         createWindow()
     }
+})
+
+// IPC handlers for APIs exposed from main process
+
+// Keychain
+ipcMain.handle('keychain-getAll', (_e) => {
+    return Keychain.getAll()
+})
+ipcMain.handle('keychain-get', (_e, key) => {
+    return Keychain.get(key)
+})
+ipcMain.handle('keychain-set', (_e, key, content) => {
+    return Keychain.set(key, content)
+})
+ipcMain.handle('keychain-remove', (_e, key) => {
+    return Keychain.remove(key)
 })
