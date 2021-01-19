@@ -2,6 +2,8 @@
     import { createEventDispatcher } from 'svelte'
     import { Transition } from 'shared/components'
     import { Protect, Pin } from './views/'
+    import { validatePinFormat } from 'shared/lib/utils'
+
     export let locale
     export let mobile
 
@@ -48,6 +50,9 @@
                 break
             case ProtectState.Confirm:
                 try {
+                    if (!validatePinFormat(pin.toString())) {
+                        throw new Error("Invalid pin code!");
+                    }
                     await PincodeManager.set(pin.toString())
 
                     dispatch('next', { pin })
