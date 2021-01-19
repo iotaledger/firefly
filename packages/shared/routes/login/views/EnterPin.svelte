@@ -1,6 +1,7 @@
 <script>
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { OnboardingLayout, Illustration, Icon, Text, Profile, Pin, Button } from 'shared/components'
+    import { validatePinFormat } from 'shared/lib/utils'
 
     export let locale
     export let mobile
@@ -19,7 +20,6 @@
     let timeRemainingBeforeNextAttempt = WAITING_TIME_AFTER_MAX_INCORRECT_ATTEMPTS
 
     $: hasCorrectLength = Number.isInteger(pinCode) && `${pinCode}`.length === 6
-    $: isValid = hasCorrectLength // TODO: Should accompany with the actual pin verification
     $: hasReachedMaxAttempts = attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS
 
     let buttonText = setButtonText(timeRemainingBeforeNextAttempt)
@@ -48,26 +48,26 @@
     }
 
     function handleContinueClick() {
-        if (!isValid) {
-            attempts++
-
-            if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
-                clearInterval(timerId)
-
-                timerId = setInterval(countdown, 1000)
-            }
-        } else {
+        if (validatePinFormat(pinCode)) {
             PincodeManager.verify(pinCode.toString()).then((verified) => {
                 if (verified === true) {
                     return dispatch('next')
-                } 
+                }
 
+                attempts++
+
+                if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
+                    clearInterval(timerId)
+
+                    timerId = setInterval(countdown, 1000)
+                }
                 return console.info('Incorrect pincode provided!');
             }).catch((error) => {
                 console.error(error);
             })
            
         }
+
     }
 
     function handleBackClick() {
