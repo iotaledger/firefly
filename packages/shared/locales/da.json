@@ -1,18 +1,14 @@
 {
-    "app": {
-        "title": "Firefly",
-        "author": "IOTA Foundation"
-    },
     "views": {
         "onboarding_1": {
-            "title": "Send, Receive & Store your IOTA Tokens",
-            "body": "Store Tokens, Coins and Collectible Assets"
+            "title": "Send, Modtag & Administrer dine IOTA",
+            "body": "Firefly er en sikker og let anvendelig IOTA-tegnebog."
         },
         "legal": {
-            "title": "Legal",
-            "body": "Please review the IOTA wallet Privacy Policy and Terms of Service",
+            "title": "Jura",
+            "body": "Gennemgå venligst privatlivspolitikken samt vilkår og betingelser.",
             "privacy_policy": {
-                "title": "Privacy Policy",
+                "title": "Privatlivspolitik",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -21,7 +17,7 @@
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "terms_of_service": {
-                "title": "Terms of Service",
+                "title": "Vilkår og Betingelser",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -29,164 +25,275 @@
                 "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I’ve read and I accept the Privacy policy & ToS"
+            "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
-        "settings": {
-            "title": "Language & appearance",
-            "body": "Choose your wallet’s language and theme"
+        "language": {
+            "title": "Sprog og udseende",
+            "body": "Vælg din tegnebogs sprog og tema"
         },
         "setup": {
-            "title": "Set up a wallet"
+            "title": "Konfigurer din tegnebog",
+            "body": "Du kan oprette en ny tegnebog eller importere en eksisterende."
         },
         "password": {
-            "title": "Create a password for your wallet",
-            "body": "Your password needs to be highly secure to encrypt and recover your Stronghold vault. Also, you will need this to send tokens from your wallet."
+            "title": "Opret en adgangskode",
+            "body": "Du vil blive bedt om at indtaste din adgangskode for at du kan sende tokens fra din tegnebog. Du har brug for en stærk adgangskode for at beskytte dine penge."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up your login PIN or Touch ID to ensure that only you can access the app.",
+            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
             "body_2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Set up PIN code",
-            "body_1": "Enter a 6-digit PIN below. You will be asked for this frequently when you access your device.",
-            "body_2": "Use numbers only"
+            "title": "Vælg en PIN-kode",
+            "body_1": "Indtast en 6-cifret PIN-kode nedenfor. Du vil blive bedt om at indtaste din pinkode, når du skal logge ind på din tegnebog.",
+            "body_2": "Du kan kun bruge tal."
         },
         "confirm_pin": {
-            "title": "Confirm the PIN code you created",
-            "body": "Confirm the PIN code you created"
+            "title": "Bekræft din PIN-kode",
+            "body": "Indtast din PIN-kode igen for at fortsætte."
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body_1": "You will be shown a secret phrase. You will need these to restore your wallet and funds.",
-            "body_2": "Do not share this phrase with anyone. Your secret phrase can access your funds at any time from anywhere.",
-            "body_3": "If you lose this, you lose your funds."
+            "title": "Sikkerhedskopier din tegnebog",
+            "body_1": "Du vil nu blive vist en gendannelsessætning.",
+            "body_2": "Del ikke denne sætning med nogen. Din gendannelsessætning kan bruges til at få adgang til dine tokens.",
+            "body_3": "Hvis du mister din gendannelsessætning, kan du miste dine penge."
         },
         "recovery_phrase": {
-            "title": "Recovery phrase",
-            "body_1": "Carefully copy the words in the exact order below. You can create a secondary backup on iCloud.",
-            "body_2": "Keep this private and safely stored"
+            "title": "Gendannelsesssætning",
+            "body_1": "Skriv omhyggeligt ordene ned i den rigtige rækkefølge.",
+            "body_2": "Hold din genoprettelsessætning hemmelig og gem den et sikkert sted. Del den ikke med nogen."
         },
         "verify_recovery_phrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Click the words on the right in the exact order you have written them down."
+            "title": "Bekræft gendannelsessætning",
+            "body": "Lad os tjekke om du skrev sætningen korrekt ned. Vælg ordene i den rigtige rækkefølge."
         },
-        "backup_recovery_phrase": {
-            "title": "Back up to a file",
-            "body": "You wallet password is also used to encrypt a Stronghold backup. Enter your wallet password to save your recovery phrase backup to a file."
+        "backup_wallet": {
+            "title": "Sikkerhedskopiér til en Stronghold fil",
+            "body": "Indtast din adgangskode for at sikkerhedskopiere din tegnebog til en Stronghold fil. Din adgangskode bruges til at kryptere sikkerhedskopien."
         },
         "recovery_phrase_saved": {
-            "title": "Recovery phrase",
-            "body": "Backed up to a file"
+            "title": "Sikkerhedskopiering lykkedes",
+            "body": "Du har sikkerhedskopieret din tegnebog til Stronghold."
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your new wallet is ready to use."
+            "title": "Tillykke",
+            "body": "Din tegnebog er klar til brug."
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have an existing seed or wallet back up, you can import it here."
+            "title": "Importér en tegnebog",
+            "body": "Hvis du har en gendannelsessætning eller Stronghold backup, kan du importere den her."
         },
         "import_from_text": {
-            "title": "Type your seed or secret phrase",
-            "body_1": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
-            "body_2": "A secret phrase is a 24 word mnemonic. This is used to recover a newer FireFly wallet.",
-            "body_3": "Enter your seed or secret phrase"
+            "title": "Gendan din tegnebog med en gendannelsessætning eller et seed",
+            "body_1": "En gendannelsessætning er 24 ord lang. Den kan bruges til at gendanne en eksisterende Firefly tegnebog.",
+            "body_2": "Et seed består af 81 tegn. Dette bruges til at gendanne fra en ældre Trinity tegnebog.",
+            "body_3": "Indtast dit seed eller din gendannelsessætning"
         },
         "import_from_file": {
-            "title": "Restore your wallet using a backup file",
-            "body": "Upload a file to restore existing wallet funds. File backups can be either a Trinity SeedVault or a Firefly Stronghold."
+            "title": "Gendan din tegnebog fra en backupfil",
+            "body": "Importer en backupfil for at gendanne din tegnebog. Backups kan enten være en Stronghold-fil (.stronghold) eller en Trinity SeedVault (.kdbx)."
         },
         "import_backup_password": {
-            "title": "Restore your wallet using a backup file",
-            "body_1": "Please provide your backup password.",
-            "body_2": "This is the password created when you first created your backup. This stops unauthorised access to your funds."
+            "title": "Gendan din tegnebog fra en SeedVault eller Stronghold",
+            "body_1": "Indtast venligst adgangskoden til din sikkerhedskopi.",
+            "body_2": "Dette er den adgangskode du angav, da du først oprettede din backup."
         },
         "import_success": {
-            "title_1": "You have successfully recovered your backup",
-            "body_1": "Your secret phrase is correct, you can now set up your new wallet",
-            "title_2": "You have successfully recovered your backup",
-            "body_2": "Your password is correct, you can now continue"
+            "title": "Du har gendannet din sikkerhedskopi med succes",
+            "body": "Du kan nu konfigurere din nye tegnebog."
         },
         "migrate": {
-            "title": "Transfer your funds",
-            "body_1": "This is an automated process to transfer your existing funds to your new wallet. In this process we will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during this process.",
-            "existing": "Existing seed",
-            "new": "Your new wallet"
+            "title": "Migrér dine penge",
+            "body_1": "Dette er en automatiseret proces til at overføre dine penge til din nye tegnebog. Vi tjekker samtidigt for brugte adresser, der svækker din sikkerhed.",
+            "body_2": "Det kan tage nogen tid. Sluk ikke din enhed under migrationen.",
+            "existing": "Din gamle tegnebog",
+            "new": "Din nye tegnebog"
         },
         "migrate_failed": {
-            "title": "Transfer your funds",
-            "body": "Provide your wallet and Stronghold password. This is the password created when you first created your original wallet backup. This allows secure import of your recovery phrase."
+            "title": "To do",
+            "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "Din saldo",
+            "body": "Er din saldo korrekt?"
+        },
+        "settings": {
+            "settings": "Indstillinger",
+            "generalSettings": {
+                "title": "Generelle indstillinger",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "security": {
+                "title": "Sikkerhed",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "advancedSettings": {
+                "title": "Avancerede Indstillinger",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "helpAndInfo": {
+                "title": "Hjælp og information",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "profileDetails": {
+                "title": "Profil Detaljer",
+                "description": "Temp"
+            },
+            "theme": {
+                "title": "Tema",
+                "description": "Temp"
+            },
+            "language": {
+                "title": "Sprog",
+                "description": "Temp"
+            },
+            "currency": {
+                "title": "Valuta",
+                "description": "Temp"
+            },
+            "notifications": {
+                "title": "Notifikationer",
+                "description": "Temp"
+            },
+            "exportStronghold": {
+                "title": "Eksporter Stronghold",
+                "description": "Temp"
+            },
+            "appLock": {
+                "title": "App Lås",
+                "description": "Temp"
+            },
+            "changePassword": {
+                "title": "Skift Adgangskode",
+                "description": "Temp"
+            },
+            "resyncAccounts": {
+                "title": "Synkronisér konti",
+                "description": "Temp"
+            },
+            "resetWallet": {
+                "title": "Reset Wallet",
+                "description": "Temp"
+            },
+            "deepLinks": {
+                "title": "Dybe Links",
+                "description": "Temp"
+            },
+            "developerMode": {
+                "title": "Udvikler Tilstand",
+                "description": "Temp"
+            },
+            "nodeSettings": {
+                "title": "Nodeindstillinger",
+                "description": "Temp"
+            },
+            "proofOfWork": {
+                "title": "Bevis for arbejde",
+                "description": "Temp"
+            },
+            "errorLog": {
+                "title": "Fejllog",
+                "description": "Temp"
+            },
+            "stateExport": {
+                "title": "Status på Eksport",
+                "description": "Temp"
+            },
+            "troubleshoot": {
+                "title": "Fejlfinding",
+                "description": "Temp"
+            },
+            "documentation": {
+                "title": "Dokumentation",
+                "description": "Temp"
+            },
+            "faq": {
+                "title": "FAQ",
+                "description": "Temp"
+            },
+            "discord": {
+                "title": "Discord",
+                "description": "Temp"
+            },
+            "about": {
+                "title": "Om",
+                "description": "Temp"
+            }
+        },
+        "login": {
+            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
+            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
         }
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
-        "setup_pin": "Set up PIN code",
-        "set_pin": "Set PIN code",
-        "save_backup_file": "Save backup file",
-        "verify_recovery_phrase": "Verify recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
+        "continue": "Fortsæt",
+        "back": "Tilbage",
+        "import_seed": "Importer et eksisterende seed",
+        "import_wallet": "Importer eksisterende tegnebog",
+        "create_wallet": "Opret ny tegnebog",
+        "save_password": "Gem adgangskode",
+        "use_biometric": "Brug biometrisk sikkerhed",
+        "setup_pin": "Vælg en PIN-kode",
+        "set_pin": "Angiv pinkode",
+        "confirm_pin": "Bekræft pinkode",
+        "enter_your_pin": "Enter your PIN",
+        "save_backup_file": "Gem backupfil",
+        "ive_written_recovery_phrase": "Jeg har skrevet min gendannelsessætning ned",
+        "verify_recovery_phrase": "Bekræft gendannelsessætning",
+        "reveal_recovery_phrase": "Vis gendannelsessætning",
+        "import_seedvault": "Importér SeedVault",
+        "check_again": "Nej, Kontroller Igen",
+        "import_from_file": "Importer fra en fil",
         "send": "Send",
-        "receive": "Receive",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
-        "visit_discord": "Visit Discord",
-        "drag_drop": "Drag & Drop",
-        "import_extentions": ".kdbx or .stronghold file",
-        "choose_file": "Choose a File",
-        "drop_here": "Drop your file here"
+        "receive": "Modtag",
+        "begin_transfer": "Begynd Overførsel",
+        "try_again": "Prøv igen",
+        "visit_discord": "Besøg Discord",
+        "drag_drop": "Træk Og Slip",
+        "import_extentions": ".stronghold eller .kdbx fil",
+        "choose_file": "Vælg fil",
+        "drop_here": "Slip din fil her"
     },
     "general": {
-        "password": "Password",
-        "confirm_password": "Confirm password",
-        "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
-        "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
-        "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "transfer_between_accounts": "Transfer Between Accounts",
-        "move_funds_between_accounts": "Move funds between your Accounts",
-        "account": "Account",
-        "sending_to_address": "Sending to address",
-        "amount": "Amount",
-        "add_address": "Add Address",
+        "password": "Adgangskode",
+        "confirm_password": "Bekræft adgangskode",
+        "your_seed": "Dit seed",
+        "recovery_phrase": "Gendannelsesssætning",
+        "recent_activity": "Seneste Aktivitet",
+        "sent": "Sendt",
+        "received": "Modtaget",
+        "send_funds": "Send penge",
+        "send_to_address": "Send til en adresse",
+        "scan_qr_or_paste": "Scan en QR-kode eller indsæt en adresse",
+        "transfer_between_accounts": "Overfør Mellem Konti",
+        "move_funds_between_accounts": "Flyt penge mellem dine konti",
+        "account": "Konto",
+        "sending_to_address": "Sender til adresse",
+        "amount": "Beløb",
+        "add_address": "Tilføj adresse",
         "reference": "Reference",
-        "from": "From",
-        "to": "To",
-        "receive_funds": "Receive funds",
-        "share_address": "Share an address",
-        "your_address": "Your address",
-        "generate_new_address": "Generate new address",
-        "have_text_backup": "I have a text backup",
-        "have_file_backup": "I have a file backup",
-        "enter_seed_or_phrase": "Enter an IOTA seed or secret phrase",
-        "upload_seedvault_or_stronghold": "Upload a Seedvault or Stronghold file",
-        "import": "Import",
-        "seedvault": "Seedvault",
+        "from": "Fra",
+        "to": "Til",
+        "receive_funds": "Modtag penge",
+        "share_address": "Del en adresse",
+        "your_address": "Din adresse",
+        "generate_new_address": "Generér ny adresse",
+        "have_text_backup": "Jeg har en tekst sikkerhedskopi",
+        "have_file_backup": "Jeg har en fil sikkerhedskopi",
+        "enter_seed_or_phrase": "Indtast en gendannelsessætning eller seed",
+        "upload_seedvault_or_stronghold": "Importér en Stronghold - eller SeedVault- fil",
+        "import": "Importér",
+        "seedvault": "SeedVault",
         "stronghold": "Stronghold",
-        "language": "Language",
-        "appearance": "Appearance",
-        "light_theme": "Light theme",
-        "dark_theme": "Dark theme",
-        "total_balance": "Total Balance",
-        "incoming": "Incoming",
-        "outgoing": "Outgoing",
-        "accounts": "Accounts"
+        "language": "Sprog",
+        "appearance": "Udseende",
+        "light_theme": "Lyst tema",
+        "dark_theme": "Mørkt tema",
+        "total_balance": "Saldo I Alt",
+        "incoming": "Indgående",
+        "outgoing": "Udgående",
+        "accounts": "Konti",
+        "profiles": "Profiles"
     }
 }

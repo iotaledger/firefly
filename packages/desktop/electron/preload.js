@@ -1,4 +1,5 @@
 const binding = require('wallet-nodejs-binding')
+const PincodeManager = require('../libs/pincodeManager');
 
 binding.init()
 
@@ -20,3 +21,7 @@ const freezeObjectFactory = (obj) => {
 }
 
 window.__WALLET__ = freezeObjectFactory(binding)
+
+window.Electron = {
+    PincodeManager
+};

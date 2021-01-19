@@ -1,18 +1,14 @@
 {
-    "app": {
-        "title": "Firefly",
-        "author": "IOTA Foundation"
-    },
     "views": {
         "onboarding_1": {
-            "title": "Send, Receive & Store your IOTA Tokens",
-            "body": "Store Tokens, Coins and Collectible Assets"
+            "title": "Trimite, Primește și Administrează-ți IOTA ta",
+            "body": "Firefly este un portofel securizat și ușor de folosit."
         },
         "legal": {
             "title": "Legal",
-            "body": "Please review the IOTA wallet Privacy Policy and Terms of Service",
+            "body": "Te rog să revizuiești Politica de Confidențialitate și Termeni și Condiții.",
             "privacy_policy": {
-                "title": "Privacy Policy",
+                "title": "Politică de confidenţialitate",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -21,7 +17,7 @@
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "terms_of_service": {
-                "title": "Terms of Service",
+                "title": "Termeni și condiții",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -29,164 +25,275 @@
                 "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I’ve read and I accept the Privacy policy & ToS"
+            "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
-        "settings": {
-            "title": "Language & appearance",
-            "body": "Choose your wallet’s language and theme"
+        "language": {
+            "title": "Limbă și aspect",
+            "body": "Alege limba și tema portofelului tău"
         },
         "setup": {
-            "title": "Set up a wallet"
+            "title": "Configurează portofelul tău",
+            "body": "Poți crea un portofel nou sau să imporți unul existent."
         },
         "password": {
-            "title": "Create a password for your wallet",
-            "body": "Your password needs to be highly secure to encrypt and recover your Stronghold vault. Also, you will need this to send tokens from your wallet."
+            "title": "Creează o parolă",
+            "body": "Ți se va cere să introduci o parolă pentru a trimite tokeni din portofelul tău. Ai nevoie de o parolă puternică să îți protejezi fondurile."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up your login PIN or Touch ID to ensure that only you can access the app.",
+            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
             "body_2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Set up PIN code",
-            "body_1": "Enter a 6-digit PIN below. You will be asked for this frequently when you access your device.",
-            "body_2": "Use numbers only"
+            "title": "Setează-ți un cod PIN",
+            "body_1": "Introdu un cod PIN de 6 cifre mai jos. Ți se va cere să introduci codul PIN pentru a te conecta la portofel.",
+            "body_2": "Poți folosi doar numere."
         },
         "confirm_pin": {
-            "title": "Confirm the PIN code you created",
-            "body": "Confirm the PIN code you created"
+            "title": "Verifică-ți codul PIN",
+            "body": "Reintrodu codul tău PIN pentru a continua."
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body_1": "You will be shown a secret phrase. You will need these to restore your wallet and funds.",
-            "body_2": "Do not share this phrase with anyone. Your secret phrase can access your funds at any time from anywhere.",
-            "body_3": "If you lose this, you lose your funds."
+            "title": "Fă o copie de rezervă a portofelului",
+            "body_1": "Ți se va arăta o frază de recuperare.",
+            "body_2": "Nu împărtăși această frază cu nimeni. Fraza ta de recuperare poate fi folosită pentru a accesa tokeni de oriunde.",
+            "body_3": "Dacă îți pierzi fraza de recuperare, îți poți pierde fondurile."
         },
         "recovery_phrase": {
-            "title": "Recovery phrase",
-            "body_1": "Carefully copy the words in the exact order below. You can create a secondary backup on iCloud.",
-            "body_2": "Keep this private and safely stored"
+            "title": "Frază de recuperare",
+            "body_1": "Notează cu atenție cuvintele in ordinea exactă.",
+            "body_2": "Păstrați fraza de recuperare privată și stocată în siguranță. Nu o împărtășiți cu nimeni."
         },
         "verify_recovery_phrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Click the words on the right in the exact order you have written them down."
+            "title": "Verifică fraza de recuperare",
+            "body": "Hai să verificăm că ai notat corect fraza. Selectează cuvintele în ordinea corectă."
         },
-        "backup_recovery_phrase": {
-            "title": "Back up to a file",
-            "body": "You wallet password is also used to encrypt a Stronghold backup. Enter your wallet password to save your recovery phrase backup to a file."
+        "backup_wallet": {
+            "title": "Fă o copie de rezervă într-un fișier Stronghold",
+            "body": "Introdu parola pentru a salva portofelul tău într-un fișier Stronghold. Parola ta este folosită pentru a cripta copia de rezervă."
         },
         "recovery_phrase_saved": {
-            "title": "Recovery phrase",
-            "body": "Backed up to a file"
+            "title": "Copie de rezervă reușită",
+            "body": "Ați făcut o copie de rezervă la un Stronghold."
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your new wallet is ready to use."
+            "title": "Felicitări",
+            "body": "Portofelul tău este pregătit."
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have an existing seed or wallet back up, you can import it here."
+            "title": "Importă un portofel",
+            "body": "Dacă ai o frază de recuperare sau o copie de rezervă Stronghold, o poți importa aici."
         },
         "import_from_text": {
-            "title": "Type your seed or secret phrase",
-            "body_1": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
-            "body_2": "A secret phrase is a 24 word mnemonic. This is used to recover a newer FireFly wallet.",
-            "body_3": "Enter your seed or secret phrase"
+            "title": "Restaurează-ți portofelul cu o frază de recuperare sau cu seed-ul tău",
+            "body_1": "O frază de recuperare are 24 de cuvinte lungime. Aceasta este folosită pentru a recupera un portofel Firefly existent.",
+            "body_2": "Un seed este format din 81 de caractere. Acesta este folosit pentru a recupera de la un portofel Trinity mai vechi.",
+            "body_3": "Introduce parola sau fraza de recuperare"
         },
         "import_from_file": {
-            "title": "Restore your wallet using a backup file",
-            "body": "Upload a file to restore existing wallet funds. File backups can be either a Trinity SeedVault or a Firefly Stronghold."
+            "title": "Restaurează-ți portofelul dintr-un fișier copie de rezervă",
+            "body": "Importă un fișier de backup pentru a-ți restaura portofelul. Copiile de siguranță pot fi Stronghold (.stronghold) sau un SeedVault Trinity (.kdbx)."
         },
         "import_backup_password": {
-            "title": "Restore your wallet using a backup file",
-            "body_1": "Please provide your backup password.",
-            "body_2": "This is the password created when you first created your backup. This stops unauthorised access to your funds."
+            "title": "Restaurează portofelul tău de la un SeedVault sau Stronghold",
+            "body_1": "Te rugăm să introduci parola de rezervă.",
+            "body_2": "Aceasta este parola pe care ai setat-o când ai creat prima dată copia de rezervă."
         },
         "import_success": {
-            "title_1": "You have successfully recovered your backup",
-            "body_1": "Your secret phrase is correct, you can now set up your new wallet",
-            "title_2": "You have successfully recovered your backup",
-            "body_2": "Your password is correct, you can now continue"
+            "title": "Ai recuperat cu succes copia de rezervă",
+            "body": "Acum poți configura noul tău portofel."
         },
         "migrate": {
-            "title": "Transfer your funds",
-            "body_1": "This is an automated process to transfer your existing funds to your new wallet. In this process we will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during this process.",
-            "existing": "Existing seed",
-            "new": "Your new wallet"
+            "title": "Migrează-ți fondurile",
+            "body_1": "Acesta este un proces automat pentru a transfera fondurile către noul portofel. Vom verifica adresele cheltuite care vă slăbesc securitatea.",
+            "body_2": "Poate dura ceva timp. Nu opri dispozitivul în timpul migrării.",
+            "existing": "Vechiul tău portofel",
+            "new": "Noul tău portofel"
         },
         "migrate_failed": {
-            "title": "Transfer your funds",
-            "body": "Provide your wallet and Stronghold password. This is the password created when you first created your original wallet backup. This allows secure import of your recovery phrase."
+            "title": "To do",
+            "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "Soldul tău",
+            "body": "Este soldul tău corect?"
+        },
+        "settings": {
+            "settings": "Setări",
+            "generalSettings": {
+                "title": "Setări generale",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "security": {
+                "title": "Securitate",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "advancedSettings": {
+                "title": "Setări Avansate",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "helpAndInfo": {
+                "title": "Ajutor și Informații",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "profileDetails": {
+                "title": "Detalii Profil",
+                "description": "Temp"
+            },
+            "theme": {
+                "title": "Temă",
+                "description": "Temp"
+            },
+            "language": {
+                "title": "Limbă",
+                "description": "Temp"
+            },
+            "currency": {
+                "title": "Monedă",
+                "description": "Temp"
+            },
+            "notifications": {
+                "title": "Notificări",
+                "description": "Temp"
+            },
+            "exportStronghold": {
+                "title": "Exportă Stronghold",
+                "description": "Temp"
+            },
+            "appLock": {
+                "title": "Blochează aplicația",
+                "description": "Temp"
+            },
+            "changePassword": {
+                "title": "Schimbă Parola",
+                "description": "Temp"
+            },
+            "resyncAccounts": {
+                "title": "Resincronizează Conturile",
+                "description": "Temp"
+            },
+            "resetWallet": {
+                "title": "Resetează Portofelul",
+                "description": "Temp"
+            },
+            "deepLinks": {
+                "title": "Legături Profunde",
+                "description": "Temp"
+            },
+            "developerMode": {
+                "title": "Mod Dezvoltator",
+                "description": "Temp"
+            },
+            "nodeSettings": {
+                "title": "Setările Nodului",
+                "description": "Temp"
+            },
+            "proofOfWork": {
+                "title": "Dovadă de Lucru",
+                "description": "Temp"
+            },
+            "errorLog": {
+                "title": "Jurnal de erori",
+                "description": "Temp"
+            },
+            "stateExport": {
+                "title": "Exportarea stării",
+                "description": "Temp"
+            },
+            "troubleshoot": {
+                "title": "Depanare",
+                "description": "Temp"
+            },
+            "documentation": {
+                "title": "Documentaţie",
+                "description": "Temp"
+            },
+            "faq": {
+                "title": "Întrebări frecvente",
+                "description": "Temp"
+            },
+            "discord": {
+                "title": "Discord",
+                "description": "Temp"
+            },
+            "about": {
+                "title": "Despre",
+                "description": "Temp"
+            }
+        },
+        "login": {
+            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
+            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
         }
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
-        "setup_pin": "Set up PIN code",
-        "set_pin": "Set PIN code",
-        "save_backup_file": "Save backup file",
-        "verify_recovery_phrase": "Verify recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
-        "visit_discord": "Visit Discord",
-        "drag_drop": "Drag & Drop",
-        "import_extentions": ".kdbx or .stronghold file",
-        "choose_file": "Choose a File",
-        "drop_here": "Drop your file here"
+        "continue": "Continuă",
+        "back": "Înapoi",
+        "import_seed": "Importă un seed existent",
+        "import_wallet": "Importă un portofel existent",
+        "create_wallet": "Creează portofel nou",
+        "save_password": "Salvează parola",
+        "use_biometric": "Utilizează securitatea biometrică",
+        "setup_pin": "Setează-ți un cod PIN",
+        "set_pin": "Setează un cod PIN",
+        "confirm_pin": "Confirmă codul PIN",
+        "enter_your_pin": "Enter your PIN",
+        "save_backup_file": "Salvează copia de rezervă",
+        "ive_written_recovery_phrase": "Am notat fraza de recuperare",
+        "verify_recovery_phrase": "Verifică fraza de recuperare",
+        "reveal_recovery_phrase": "Afișează fraza de recuperare",
+        "import_seedvault": "Importă SeedVault",
+        "check_again": "Nu, verifică din nou",
+        "import_from_file": "Importă dintr-un fișier",
+        "send": "Trimite",
+        "receive": "Primește",
+        "begin_transfer": "Începe transferul",
+        "try_again": "Încearcă din nou",
+        "visit_discord": "Vizitează Discord",
+        "drag_drop": "Trage & Eliberează",
+        "import_extentions": "fișier .stronghold sau .kdbx",
+        "choose_file": "Alege un Fișier",
+        "drop_here": "Eliberează fișierul tău aici"
     },
     "general": {
-        "password": "Password",
-        "confirm_password": "Confirm password",
-        "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
-        "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
-        "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "transfer_between_accounts": "Transfer Between Accounts",
-        "move_funds_between_accounts": "Move funds between your Accounts",
-        "account": "Account",
-        "sending_to_address": "Sending to address",
-        "amount": "Amount",
-        "add_address": "Add Address",
-        "reference": "Reference",
-        "from": "From",
-        "to": "To",
-        "receive_funds": "Receive funds",
-        "share_address": "Share an address",
-        "your_address": "Your address",
-        "generate_new_address": "Generate new address",
-        "have_text_backup": "I have a text backup",
-        "have_file_backup": "I have a file backup",
-        "enter_seed_or_phrase": "Enter an IOTA seed or secret phrase",
-        "upload_seedvault_or_stronghold": "Upload a Seedvault or Stronghold file",
-        "import": "Import",
-        "seedvault": "Seedvault",
+        "password": "Parolă",
+        "confirm_password": "Confirmă parola",
+        "your_seed": "Seed-ul tău",
+        "recovery_phrase": "Frază de recuperare",
+        "recent_activity": "Activitate Recentă",
+        "sent": "Trimis",
+        "received": "Primit",
+        "send_funds": "Trimite fonduri",
+        "send_to_address": "Trimite la o Adresă",
+        "scan_qr_or_paste": "Scanează un cod QR sau lipește o Adresă",
+        "transfer_between_accounts": "Transferă Între Conturi",
+        "move_funds_between_accounts": "Mută fondurile între conturile tale",
+        "account": "Cont",
+        "sending_to_address": "Trimitere la adresă",
+        "amount": "Sumă",
+        "add_address": "Adaugă Adresă",
+        "reference": "Referinţă",
+        "from": "De la",
+        "to": "Către",
+        "receive_funds": "Primește fonduri",
+        "share_address": "Partajează o adresă",
+        "your_address": "Adresa ta",
+        "generate_new_address": "Generează o adresă nouă",
+        "have_text_backup": "Am un text de rezervă",
+        "have_file_backup": "Am o copie de rezervă a fișierului",
+        "enter_seed_or_phrase": "Introdu o frază de recuperare sau un seed",
+        "upload_seedvault_or_stronghold": "Importă un fișier Stronghold sau SeedVault",
+        "import": "Importă",
+        "seedvault": "SeedVault",
         "stronghold": "Stronghold",
-        "language": "Language",
-        "appearance": "Appearance",
-        "light_theme": "Light theme",
-        "dark_theme": "Dark theme",
-        "total_balance": "Total Balance",
-        "incoming": "Incoming",
-        "outgoing": "Outgoing",
-        "accounts": "Accounts"
+        "language": "Limbă",
+        "appearance": "Afișare",
+        "light_theme": "Temă luminoasă",
+        "dark_theme": "Temă întunecată",
+        "total_balance": "Sold Total",
+        "incoming": "În curs de primire",
+        "outgoing": "În curs de ieșire",
+        "accounts": "Conturi",
+        "profiles": "Profiles"
     }
 }
