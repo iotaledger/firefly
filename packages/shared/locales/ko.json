@@ -1,18 +1,14 @@
 {
-    "app": {
-        "title": "Firefly",
-        "author": "IOTA Foundation"
-    },
     "views": {
         "onboarding_1": {
-            "title": "Send, Receive & Store your IOTA Tokens",
-            "body": "Store Tokens, Coins and Collectible Assets"
+            "title": "아이오타 보내기, 받기, 관리하기",
+            "body": "'파이어플라이'는 안전하고 사용하기 쉬운 아이오타 지갑입니다."
         },
         "legal": {
-            "title": "Legal",
-            "body": "Please review the IOTA wallet Privacy Policy and Terms of Service",
+            "title": "법적 문제 관련",
+            "body": "개인정보 보호 정책과 서비스 약관을 검토바랍니다.",
             "privacy_policy": {
-                "title": "Privacy Policy",
+                "title": "개인정보 보호정책",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -21,7 +17,7 @@
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "terms_of_service": {
-                "title": "Terms of Service",
+                "title": "서비스 약관",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -29,164 +25,275 @@
                 "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I’ve read and I accept the Privacy policy & ToS"
+            "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
-        "settings": {
-            "title": "Language & appearance",
-            "body": "Choose your wallet’s language and theme"
+        "language": {
+            "title": "사용언어와 모양새",
+            "body": "사용 언어와 테마를 선택하기"
         },
         "setup": {
-            "title": "Set up a wallet"
+            "title": "지갑을 설정하기",
+            "body": "새로운 지갑을 만들거나, 기존의 지갑을 불러올 수 있습니다."
         },
         "password": {
-            "title": "Create a password for your wallet",
-            "body": "Your password needs to be highly secure to encrypt and recover your Stronghold vault. Also, you will need this to send tokens from your wallet."
+            "title": "비밀번호 만들기",
+            "body": "지갑에서 토큰을 보내기 위해서는 비밀번호 입력이 필요합니다. 자금의 적절한 보호를 위해서 강력한 비밀번호 사용을 권장합니다."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up your login PIN or Touch ID to ensure that only you can access the app.",
+            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
             "body_2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Set up PIN code",
-            "body_1": "Enter a 6-digit PIN below. You will be asked for this frequently when you access your device.",
-            "body_2": "Use numbers only"
+            "title": "PIN코드 설정",
+            "body_1": "아래에 6자리 PIN 코드를 적으세요. 앞으로 지갑에 로그인하기 위해서는 PIN 코드를 입력해야 합니다.",
+            "body_2": "숫자만 사용 가능합니다."
         },
         "confirm_pin": {
-            "title": "Confirm the PIN code you created",
-            "body": "Confirm the PIN code you created"
+            "title": "PIN 코드를 제대로 입력했는지 확인하세요.",
+            "body": "PIN 코드를 다시 입력하고 다음으로 넘어갑니다."
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body_1": "You will be shown a secret phrase. You will need these to restore your wallet and funds.",
-            "body_2": "Do not share this phrase with anyone. Your secret phrase can access your funds at any time from anywhere.",
-            "body_3": "If you lose this, you lose your funds."
+            "title": "지갑 백업하기",
+            "body_1": "지갑복구에 필요한 '문장'이 제시됩니다.",
+            "body_2": "이 '문장'을 누구와도 공유하지 마세요. 당신의 토큰에 접근하기 위해, 어디에서든 이 복구 '문장'을 사용할 수 있습니다.",
+            "body_3": "이 복구 '문장'을 잃어버린다면, 당신의 자금을 잃게될 수도 있습니다."
         },
         "recovery_phrase": {
-            "title": "Recovery phrase",
-            "body_1": "Carefully copy the words in the exact order below. You can create a secondary backup on iCloud.",
-            "body_2": "Keep this private and safely stored"
+            "title": "복구 문장",
+            "body_1": "정확한 순서에 유의하며 문장을 적으세요.",
+            "body_2": "복구 '문장'을 안전하게 보관하고 누구와도 공유하지 마세요."
         },
         "verify_recovery_phrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Click the words on the right in the exact order you have written them down."
+            "title": "복구 '문장'이 정확한지 확인하세요.",
+            "body": "'문장'을 정확한 순서로 올바르게 적었는지 확인하세요."
         },
-        "backup_recovery_phrase": {
-            "title": "Back up to a file",
-            "body": "You wallet password is also used to encrypt a Stronghold backup. Enter your wallet password to save your recovery phrase backup to a file."
+        "backup_wallet": {
+            "title": "'스트롱홀드' 파일에 백업하기",
+            "body": "지갑을 '스트롱홀드' 파일에 백업하기 위해 비밀번호를 입력하세요. 비밀번호는 백업을 암호화하기 위해 사용됩니다."
         },
         "recovery_phrase_saved": {
-            "title": "Recovery phrase",
-            "body": "Backed up to a file"
+            "title": "성공적으로 백업되었습니다.",
+            "body": "'스트롱홀드'에 지갑을 백업했습니다."
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your new wallet is ready to use."
+            "title": "축하합니다.",
+            "body": "지갑이 사용준비가 되었습니다."
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have an existing seed or wallet back up, you can import it here."
+            "title": "지갑 불러오기",
+            "body": "복구 '문장'을 알거나 '스트롱홀드' 백업을 했다면, 여기로 불러올 수 있습니다."
         },
         "import_from_text": {
-            "title": "Type your seed or secret phrase",
-            "body_1": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
-            "body_2": "A secret phrase is a 24 word mnemonic. This is used to recover a newer FireFly wallet.",
-            "body_3": "Enter your seed or secret phrase"
+            "title": "복구 '문장'이나 '시드'로 지갑을 복원하기",
+            "body_1": "복구 '문장'은 24 단어 길이이며, 기존의 '파이어플라이' 지갑을 복원하기 위해 사용됩니다.",
+            "body_2": "'시드'는 81자로 구성되며, 예전의 '트리니티' 지갑으로부터 복구하기 위해 사용됩니다.",
+            "body_3": "'시드'나 복구 '문장'을 입력하기"
         },
         "import_from_file": {
-            "title": "Restore your wallet using a backup file",
-            "body": "Upload a file to restore existing wallet funds. File backups can be either a Trinity SeedVault or a Firefly Stronghold."
+            "title": "백업파일로부터 지갑을 복구하기",
+            "body": "지갑을 복구하기 위해, '스트롱홀드(.stronghold)' 또는 '트리니티 시드볼트(.kdbx)'로 구성된 백업파일을 불러오세요."
         },
         "import_backup_password": {
-            "title": "Restore your wallet using a backup file",
-            "body_1": "Please provide your backup password.",
-            "body_2": "This is the password created when you first created your backup. This stops unauthorised access to your funds."
+            "title": "'시드볼트(SeedVault)'나 '스트롱홀드'로부터 지갑을 복구하기",
+            "body_1": "백업 패스워드를 입력하세요.",
+            "body_2": "백업파일을 처음 만들때 설정했던 패스워드를 뜻합니다."
         },
         "import_success": {
-            "title_1": "You have successfully recovered your backup",
-            "body_1": "Your secret phrase is correct, you can now set up your new wallet",
-            "title_2": "You have successfully recovered your backup",
-            "body_2": "Your password is correct, you can now continue"
+            "title": "백업파일을 이용해 성공적으로 복구했습니다.",
+            "body": "이제 새로운 지갑을 설정할 수 있습니다."
         },
         "migrate": {
-            "title": "Transfer your funds",
-            "body_1": "This is an automated process to transfer your existing funds to your new wallet. In this process we will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during this process.",
-            "existing": "Existing seed",
-            "new": "Your new wallet"
+            "title": "자금을 옮기기",
+            "body_1": "당신의 자금을 새로운 지갑으로 자동으로 옮기는 과정입니다. '사용완료된 주소'를 확인해 보안이 취약해지지 않도록 합니다.",
+            "body_2": "시간이 다소 걸릴 수 있습니다. 자금을 옮기는 동안 기기를 끄지 마세요.",
+            "existing": "옛날 지갑",
+            "new": "새로운 지갑"
         },
         "migrate_failed": {
-            "title": "Transfer your funds",
-            "body": "Provide your wallet and Stronghold password. This is the password created when you first created your original wallet backup. This allows secure import of your recovery phrase."
+            "title": "To do",
+            "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "내 잔액",
+            "body": "이 잔액이 옳습니까?"
+        },
+        "settings": {
+            "settings": "설정",
+            "generalSettings": {
+                "title": "일반 설정",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "security": {
+                "title": "보안",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "advancedSettings": {
+                "title": "고급 설정",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "helpAndInfo": {
+                "title": "도움말 정보",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "profileDetails": {
+                "title": "프로필 상세정보",
+                "description": "Temp"
+            },
+            "theme": {
+                "title": "테마",
+                "description": "Temp"
+            },
+            "language": {
+                "title": "언어",
+                "description": "Temp"
+            },
+            "currency": {
+                "title": "화폐",
+                "description": "Temp"
+            },
+            "notifications": {
+                "title": "알림",
+                "description": "Temp"
+            },
+            "exportStronghold": {
+                "title": "'스트롱홀드' 내보내기",
+                "description": "Temp"
+            },
+            "appLock": {
+                "title": "앱 잠금",
+                "description": "Temp"
+            },
+            "changePassword": {
+                "title": "비밀번호 변경하기",
+                "description": "Temp"
+            },
+            "resyncAccounts": {
+                "title": "계정 동기화",
+                "description": "Temp"
+            },
+            "resetWallet": {
+                "title": "지갑 초기화",
+                "description": "Temp"
+            },
+            "deepLinks": {
+                "title": "웹페이지 링크",
+                "description": "Temp"
+            },
+            "developerMode": {
+                "title": "개발자 모드",
+                "description": "Temp"
+            },
+            "nodeSettings": {
+                "title": "노드 설정",
+                "description": "Temp"
+            },
+            "proofOfWork": {
+                "title": "작업증명",
+                "description": "Temp"
+            },
+            "errorLog": {
+                "title": "오류 로그",
+                "description": "Temp"
+            },
+            "stateExport": {
+                "title": "상태 내보내기",
+                "description": "Temp"
+            },
+            "troubleshoot": {
+                "title": "문제 해결하기",
+                "description": "Temp"
+            },
+            "documentation": {
+                "title": "설명서",
+                "description": "Temp"
+            },
+            "faq": {
+                "title": "자주 묻는 질문(FAQ)",
+                "description": "Temp"
+            },
+            "discord": {
+                "title": "디스코드(Discord)",
+                "description": "Temp"
+            },
+            "about": {
+                "title": "관련 정보",
+                "description": "Temp"
+            }
+        },
+        "login": {
+            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
+            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
         }
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
-        "setup_pin": "Set up PIN code",
-        "set_pin": "Set PIN code",
-        "save_backup_file": "Save backup file",
-        "verify_recovery_phrase": "Verify recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
-        "visit_discord": "Visit Discord",
-        "drag_drop": "Drag & Drop",
-        "import_extentions": ".kdbx or .stronghold file",
-        "choose_file": "Choose a File",
-        "drop_here": "Drop your file here"
+        "continue": "계속하기",
+        "back": "뒤로가기",
+        "import_seed": "기존 '시드'를 불러오기",
+        "import_wallet": "기존 지갑을 불러오기",
+        "create_wallet": "새 지갑 만들기",
+        "save_password": "비밀번호 저장하기",
+        "use_biometric": "생체인증 사용하기",
+        "setup_pin": "PIN코드 설정하기",
+        "set_pin": "PIN코드 설정",
+        "confirm_pin": "PIN코드 확인하기",
+        "enter_your_pin": "PIN코드 입력하기",
+        "save_backup_file": "백업파일 저장하기",
+        "ive_written_recovery_phrase": "복구 '문장'을 기입했습니다.",
+        "verify_recovery_phrase": "복구 '문장'이 정확한지 확인하세요.",
+        "reveal_recovery_phrase": "복구 '문장' 드러내기",
+        "import_seedvault": "시드볼트(SeedVault) 불러오기",
+        "check_again": "다시 확인하기",
+        "import_from_file": "파일에서 불러오기",
+        "send": "보내기",
+        "receive": "받기",
+        "begin_transfer": "전송하기",
+        "try_again": "다시 시도하기",
+        "visit_discord": "디스코드 방문하기",
+        "drag_drop": "끌어서 놓기",
+        "import_extentions": ".stronghold 또는 .kdbx 파일",
+        "choose_file": "파일을 선택하기",
+        "drop_here": "여기에 파일 놓기"
     },
     "general": {
-        "password": "Password",
-        "confirm_password": "Confirm password",
-        "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
-        "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
-        "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "transfer_between_accounts": "Transfer Between Accounts",
-        "move_funds_between_accounts": "Move funds between your Accounts",
-        "account": "Account",
-        "sending_to_address": "Sending to address",
-        "amount": "Amount",
-        "add_address": "Add Address",
-        "reference": "Reference",
-        "from": "From",
-        "to": "To",
-        "receive_funds": "Receive funds",
-        "share_address": "Share an address",
-        "your_address": "Your address",
-        "generate_new_address": "Generate new address",
-        "have_text_backup": "I have a text backup",
-        "have_file_backup": "I have a file backup",
-        "enter_seed_or_phrase": "Enter an IOTA seed or secret phrase",
-        "upload_seedvault_or_stronghold": "Upload a Seedvault or Stronghold file",
-        "import": "Import",
-        "seedvault": "Seedvault",
-        "stronghold": "Stronghold",
-        "language": "Language",
-        "appearance": "Appearance",
-        "light_theme": "Light theme",
-        "dark_theme": "Dark theme",
-        "total_balance": "Total Balance",
-        "incoming": "Incoming",
-        "outgoing": "Outgoing",
-        "accounts": "Accounts"
+        "password": "비밀번호",
+        "confirm_password": "비밀번호 확인하기",
+        "your_seed": "내 '시드'",
+        "recovery_phrase": "복구 문장",
+        "recent_activity": "최근 활동",
+        "sent": "보냄",
+        "received": "받음",
+        "send_funds": "자금 보내기",
+        "send_to_address": "특정주소로 보내기",
+        "scan_qr_or_paste": "QR 코드를 스캔하거나 주소를 복사해 붙이기",
+        "transfer_between_accounts": "계정간 송금하기",
+        "move_funds_between_accounts": "내 계정간 자금 옮기기",
+        "account": "계정",
+        "sending_to_address": "특정주소로 보내기",
+        "amount": "수량",
+        "add_address": "주소 추가하기",
+        "reference": "참고",
+        "from": "보낸이",
+        "to": "받는이",
+        "receive_funds": "자금 받기",
+        "share_address": "주소 공유하기",
+        "your_address": "내 주소",
+        "generate_new_address": "새 주소 생성하기",
+        "have_text_backup": "복구 '문장'을 알고 있습니다.",
+        "have_file_backup": "복구 '파일'을 가지고 있습니다.",
+        "enter_seed_or_phrase": "복구 '문장'이나 '시드'를 입력하기",
+        "upload_seedvault_or_stronghold": "'스트롱홀드' 또는 '시드볼트' 파일 불러오기",
+        "import": "불러오기",
+        "seedvault": "시드볼트(SeedVault)",
+        "stronghold": "스트롱홀드(Stronghold)",
+        "language": "언어",
+        "appearance": "모양새",
+        "light_theme": "밝은 테마",
+        "dark_theme": "어두운 테마",
+        "total_balance": "총 잔액",
+        "incoming": "받는중",
+        "outgoing": "보내는중",
+        "accounts": "계정",
+        "profiles": "프로필"
     }
 }
