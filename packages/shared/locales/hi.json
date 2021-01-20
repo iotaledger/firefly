@@ -1,0 +1,299 @@
+{
+    "views": {
+        "onboarding_1": {
+            "title": "भेजे, प्राप्त करे तथा प्रबंधन करे अपने आयोटा!",
+            "body": "फायरफ्लाई एक सुरक्षित और प्रयोग करने में आसान आयोटा वॉलेट है।"
+        },
+        "legal": {
+            "title": "कानूनी",
+            "body": "कृपया समीक्षा करे प्राइवेसी पॉलिसी तथा सेवा की शर्तें|",
+            "privacy_policy": {
+                "title": "प्राइवेसी पॉलिसी",
+                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+            },
+            "terms_of_service": {
+                "title": "सेवा की शर्तें",
+                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+            },
+            "checkbox": "I have read and I accept the Privacy policy & ToS"
+        },
+        "language": {
+            "title": "भाषा और प्रकटन|",
+            "body": "अपने वॉलेट की भाषा और विषय चुनें|"
+        },
+        "setup": {
+            "title": "अपना वॉलेट सेट करें|",
+            "body": "आप एक नया वॉलेट बना सकते हैं या एक मौजूदा आयात कर सकते हैं।"
+        },
+        "password": {
+            "title": "एक पासवर्ड बनाएं",
+            "body": "आपको अपने वॉलेट से टोकन भेजने के लिए अपना पासवर्ड दर्ज करने के लिए कहा जाएगा। अपने धन की सुरक्षा के लिए आपको एक मजबूत पासवर्ड की आवश्यकता है|"
+        },
+        "protect": {
+            "title": "Protect your wallet",
+            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
+            "body_2": "Keep your PIN safe!"
+        },
+        "pin": {
+            "title": "पिन कोड सेट करें",
+            "body_1": "नीचे छह अंकों का पिन दर्ज करें। वॉलेट लॉग इन करने के लिए अपना पिन दर्ज करने के लिए कहा जाएगा|",
+            "body_2": "केवल संख्याओं का उपयोग करे|"
+        },
+        "confirm_pin": {
+            "title": "अपना पिन कोड सत्यापित करें",
+            "body": "आगे बढ़ने के लिए अपना पिन कोड पुनः दर्ज करें"
+        },
+        "backup": {
+            "title": "अपने वॉलेट का बैकअप लें",
+            "body_1": "अब आपको एक पुनर्प्राप्ति वाक्यांश दिखाया जाएगा",
+            "body_2": "इस वाक्यांश को किसी के साथ साझा न करें। आपके पुनर्प्राप्ति वाक्यांश का उपयोग आपके टोकन को कहीं से भी एक्सेस करने के लिए किया जा सकता है|",
+            "body_3": "यदि आप अपना पुनर्प्राप्ति वाक्यांश खो देते हैं, तो आप अपने धन को खो सकते हैं।"
+        },
+        "recovery_phrase": {
+            "title": "वसूली वाक्यांश",
+            "body_1": "सटीक क्रम में शब्दों को सावधानीपूर्वक लिखें|",
+            "body_2": "अपने पुनर्प्राप्ति वाक्यांश को निजी और सुरक्षित रूप से संग्रहीत रखें। इसे किसी के साथ साझा न करें।"
+        },
+        "verify_recovery_phrase": {
+            "title": "वसूली वाक्यांश सत्यापित करें",
+            "body": "चलिए चेक करते हैं कि आपने वाक्यांश को सही ढंग से लिखा है। सही क्रम में शब्दों का चयन करें|"
+        },
+        "backup_wallet": {
+            "title": "बैक अप लें स्ट्रॉन्गहोल्ड फाइल में|",
+            "body": "अपने वॉलेट को एक स्ट्रॉन्गहोल्ड फाइल में बैकअप करने के लिए अपना पासवर्ड दर्ज करें। आपका पासवर्ड बैकअप एन्क्रिप्ट करने के लिए उपयोग किया जाता है।"
+        },
+        "recovery_phrase_saved": {
+            "title": "सफलतापूर्वक बैकअप होगया",
+            "body": "आपने अपना वॉलेट स्ट्रॉन्गहोल्ड में बैकअप कर लिया है"
+        },
+        "congratulations": {
+            "title": "बधाई हो",
+            "body": "आपका वॉलेट उपयोग के लिए तैयार है"
+        },
+        "import": {
+            "title": "वॉलेट आयात करें",
+            "body": "यदि आपके पास एक पुनर्प्राप्ति वाक्यांश या स्ट्रॉन्गहोल्ड बैकअप है, तो आप इसे यहां आयात कर सकते हैं।"
+        },
+        "import_from_text": {
+            "title": "एक पुनर्प्राप्ति वाक्यांश या सीड के साथ अपने वॉलेट को पुनर्स्थापित करें",
+            "body_1": "एक पुनर्प्राप्ति वाक्यांश चौबीस शब्द लंबा होता है। इसका उपयोग मौजूदा फायरफ्लाई वॉलेट को पुनर्प्राप्त करने के लिए किया जाता है।",
+            "body_2": "एक सीड में इक्यासी वर्ण होते हैं। इसका उपयोग पुराने ट्रिनिटी वॉलेट से पुनर्प्राप्त करने के लिए किया जाता है।",
+            "body_3": "अपना सीड या पुनर्प्राप्ति वाक्यांश दर्ज करें"
+        },
+        "import_from_file": {
+            "title": "एक बैकअप फ़ाइल से अपने वॉलेट को पुनर्स्थापित करें",
+            "body": "अपने बटुए को पुनर्स्थापित करने के लिए एक बैकअप फ़ाइल आयात करें। बैकअप या तो एक स्ट्रॉन्गहोल्ड फाइल (.stronghold) या एक ट्रिनिटी सीड़वॉल्ट फाइल (.kdbx) हो सकते हैं।"
+        },
+        "import_backup_password": {
+            "title": "एक सीड़वॉल्ट या स्ट्रॉन्गहोल्ड से अपने वॉलेट को पुनर्स्थापित करें",
+            "body_1": "कृपया अपना बैकअप पासवर्ड डालें",
+            "body_2": "यह वह पासवर्ड है जिसे आपने पहली बार अपना बैकअप बनाते समय सेट किया था।"
+        },
+        "import_success": {
+            "title": "आपने अपना बैकअप सफलतापूर्वक प्राप्त कर लिया है",
+            "body": "अब आप अपना नया वॉलेट सेट कर सकते हैं।"
+        },
+        "migrate": {
+            "title": "अपने निधि को विस्थापित करें",
+            "body_1": "यह आपके फंड को आपके नए वॉलेट में स्थानांतरित करने की एक स्वचालित प्रक्रिया है। हम खर्च किए गए पतों की जांच करेंगे जो आपकी सुरक्षा को कमजोर करते हैं।",
+            "body_2": "इसमें कुछ समय लग सकता है। प्रवास के दौरान अपने डिवाइस को बंद न करें।",
+            "existing": "आपका पराना वालेट",
+            "new": "आपका नए वालेट"
+        },
+        "migrate_failed": {
+            "title": "To do",
+            "body": "To do"
+        },
+        "balance": {
+            "title": "आपका बैलेंस",
+            "body": "क्या आपका बैलेंस सही है?"
+        },
+        "settings": {
+            "settings": "सैटिन्ग्स",
+            "generalSettings": {
+                "title": "सामान्य सेटिंग्स",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "security": {
+                "title": "सुरक्षा",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "advancedSettings": {
+                "title": "उच्च सेटिंग्स",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "helpAndInfo": {
+                "title": "मदद सूचना",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "profileDetails": {
+                "title": "प्रोफ़ाइल विवरण",
+                "description": "Temp"
+            },
+            "theme": {
+                "title": "थीम",
+                "description": "Temp"
+            },
+            "language": {
+                "title": "भाषा ",
+                "description": "Temp"
+            },
+            "currency": {
+                "title": "मुद्रा",
+                "description": "Temp"
+            },
+            "notifications": {
+                "title": "नोटिफिकेशन",
+                "description": "Temp"
+            },
+            "exportStronghold": {
+                "title": "निर्यात स्ट्रॉन्गहोल्ड",
+                "description": "Temp"
+            },
+            "appLock": {
+                "title": "ऐप लॉक",
+                "description": "Temp"
+            },
+            "changePassword": {
+                "title": "पासवर्ड परिवर्तित करें",
+                "description": "Temp"
+            },
+            "resyncAccounts": {
+                "title": "पुन: सिंक खाता",
+                "description": "Temp"
+            },
+            "resetWallet": {
+                "title": "वॉलेट रिसेट",
+                "description": "Temp"
+            },
+            "deepLinks": {
+                "title": "डीप लिंक्स",
+                "description": "Temp"
+            },
+            "developerMode": {
+                "title": "विकासक प्रणाली",
+                "description": "Temp"
+            },
+            "nodeSettings": {
+                "title": "नोड सेटिंग्स",
+                "description": "Temp"
+            },
+            "proofOfWork": {
+                "title": "प्रूफ ऑफ़ वर्क",
+                "description": "Temp"
+            },
+            "errorLog": {
+                "title": "त्रुटि लॉग",
+                "description": "Temp"
+            },
+            "stateExport": {
+                "title": "स्टेट एक्सपोर्ट",
+                "description": "Temp"
+            },
+            "troubleshoot": {
+                "title": "समस्या निवारण",
+                "description": "Temp"
+            },
+            "documentation": {
+                "title": "प्रलेखन",
+                "description": "Temp"
+            },
+            "faq": {
+                "title": "FAQ",
+                "description": "Temp"
+            },
+            "discord": {
+                "title": "डिस्कोर्ड",
+                "description": "Temp"
+            },
+            "about": {
+                "title": "विवरण",
+                "description": "Temp"
+            }
+        },
+        "login": {
+            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
+            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+        }
+    },
+    "actions": {
+        "continue": "जारी रखें",
+        "back": "पीछे",
+        "import_seed": "एक मौजूदा सीड आयात करें",
+        "import_wallet": "मौजूदा वॉलेट आयात करें",
+        "create_wallet": "नया वॉलेट बनाएं",
+        "save_password": "पासवर्ड सहेजें",
+        "use_biometric": "बायोमेट्रिक सुरक्षा का उपयोग करें",
+        "setup_pin": "पिन कोड सेट करें",
+        "set_pin": "पिन कोड सेट करें",
+        "confirm_pin": "पिन कोड की पुष्टि करें",
+        "enter_your_pin": "Enter your PIN",
+        "save_backup_file": "बैकअप फाइल सहेजें",
+        "ive_written_recovery_phrase": "मैंने अपना पुनर्प्राप्ति वाक्यांश लिख लिया है",
+        "verify_recovery_phrase": "वसूली वाक्यांश सत्यापित करें",
+        "reveal_recovery_phrase": "पुनर्प्राप्ति वाक्यांश प्रकट करें",
+        "import_seedvault": "सीडवॉल्ट आयात करे",
+        "check_again": "नहीं, फिर से जाँच करें",
+        "import_from_file": "फ़ाइल से आयात करें",
+        "send": "भेजें",
+        "receive": "प्राप्त करें",
+        "begin_transfer": "स्थानांतरण शुरू करें",
+        "try_again": "फिर कोशिश करें",
+        "visit_discord": "डिस्कॉर्ड पर जाएँ",
+        "drag_drop": "खींचें और छोड़ें",
+        "import_extentions": ".stronghold या .kdbx फाइल",
+        "choose_file": "फ़ाइल चुनें",
+        "drop_here": "अपनी फाइल को यहां छोड़ें"
+    },
+    "general": {
+        "password": "पासवर्ड",
+        "confirm_password": "पासवर्ड की पुष्टि करें",
+        "your_seed": "आपका सीड",
+        "recovery_phrase": "पुनर्प्राप्ति वाक्यांश",
+        "recent_activity": "हाल की गतिविधि",
+        "sent": "भेजे गए",
+        "received": "प्राप्त हुआ",
+        "send_funds": "धनराशि भेजें",
+        "send_to_address": "स्वयं के पते पर भेजा जा रहा है",
+        "scan_qr_or_paste": "QR कोड स्कैन करें या एक पता पेस्ट करें",
+        "transfer_between_accounts": "खाते के बीच स्थानांतरण",
+        "move_funds_between_accounts": "अपने खातों के बीच धन ले जाएँ",
+        "account": "खाता",
+        "sending_to_address": "स्वयं के पते पर भेजा जा रहा है",
+        "amount": "रकम",
+        "add_address": "पता जोड़े",
+        "reference": "संदर्भ",
+        "from": "से",
+        "to": "को",
+        "receive_funds": "पैसे प्राप्त करे",
+        "share_address": "पता साझा करें",
+        "your_address": "आपका पता",
+        "generate_new_address": "नया पता उत्पन्न करें",
+        "have_text_backup": "मेरे पास एक लिखित में बैकअप है",
+        "have_file_backup": "मेरे पास एक फाइल में बैकअप है",
+        "enter_seed_or_phrase": "एक पुनर्प्राप्ति वाक्यांश या सीड दर्ज करें",
+        "upload_seedvault_or_stronghold": "एक स्ट्रॉन्गहोल्ड या सीड़वॉल्ट फ़ाइल आयात करें",
+        "import": "आयात करना",
+        "seedvault": "सीड़वॉल्ट",
+        "stronghold": "स्ट्रॉन्गहोल्ड",
+        "language": "भाषा ",
+        "appearance": "दिखावट",
+        "light_theme": "लाइट थीम",
+        "dark_theme": "डार्क थीम",
+        "total_balance": "कुल शेष",
+        "incoming": "आने वाला",
+        "outgoing": "बाहर जाने वाले",
+        "accounts": "खाता",
+        "profiles": "Profiles"
+    }
+}
