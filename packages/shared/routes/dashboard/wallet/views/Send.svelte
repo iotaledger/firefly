@@ -11,11 +11,11 @@
 
     const dispatch = createEventDispatcher()
 
-    $: accountsDropdownItems = accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balance}` }))
+    $: accountsDropdownItems = accounts.map((acc) => ({ value: acc.id, label: `${acc.name} • ${acc.balance}` }))
 
-    let from = accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balance}` }))[0]
+    let from = accounts.map((acc) => ({ value: acc.id, label: `${acc.name} • ${acc.balance}` }))[0]
     let toAddress = ''
-    let toAccount = accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balance}` }))[0]
+    let toAccount = accounts.map((acc) => ({ value: acc.id, label: `${acc.name} • ${acc.balance}` }))[0]
     let amount = undefined
     let reference = ''
 
@@ -26,7 +26,25 @@
         toAccount = item
     }
     const handleSendClick = () => {
-        dispatch('next')
+        api.send(
+            from.value,
+            {
+                amount,
+                address: toAddress,
+                remainder_value_strategy: {
+                    strategy: 'ChangeAddress'
+                },
+                indexation: { index: 'firefly', data: new Array() }
+            },
+            {
+                onSuccess(response) {
+                    dispatch('next')
+                },
+                onError(error) {
+                    console.error(error);
+                }
+            }
+        )
     }
 </script>
 

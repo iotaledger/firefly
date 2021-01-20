@@ -1,4 +1,6 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
+    import { api } from 'shared/lib/wallet'
     import type { account } from 'lib/typings'
     import { Dropdown, Icon, ActivityRow, Chart, Text, Button, AccountTile, Transition } from 'shared/components'
     import {
@@ -25,7 +27,7 @@
 
     let totalBalance = dummyTotalBalance
     let transactions = dummyTransactions
-    let accounts = dummyAccounts.map((acc) => ({ ...acc, color: AccountColors[acc.index] }))
+    let accounts = []
 
     let state: WalletState = WalletState.Init
     let stateHistory = []
@@ -76,6 +78,58 @@
             console.error('Error selecting account')
         }
     }
+
+
+    function getAccounts() {
+        api.syncAccounts({
+            onSuccess(res) {},
+            onError(err) {}
+        })
+        api.getAccounts({
+            onSuccess(response) {
+                for (const [idx, storedAccount] of response.payload) {
+                    api.availableBalance(storedAccount.id, {
+                        onSuccess(response) {
+                            const balance = response.payload
+                            const account = {
+                                id: storedAccount.id,
+                                index: idx,
+                                name: storedAccount.alias,
+                                balance: `${balance} i`,
+                                balanceEquiv: `${balance} USD`,
+                                color: AccountColors[idx],
+                                address: 'x'.repeat(64)
+                            }
+                            accounts = [...accounts, account]
+                        },
+                        onError(error) {
+                            console.log('Error', error);
+                            
+                            const account = {
+                                id: storedAccount.id,
+                                index: idx,
+                                name: storedAccount.alias,
+                                balance: 'ERROR',
+                                balanceEquiv: 'ERROR',
+                               color: AccountColors[idx],
+                               address: 'x'.repeat(64)
+
+                            }
+                            accounts = [...accounts, account]
+                        }
+                    })
+                }
+            },
+            onError() {
+                // TODO handle error
+                alert('failed to get accounts')
+            }
+        })
+    }
+
+    onMount(() => {
+        getAccounts()
+    })
 </script>
 
 {#if state === WalletState.Account && selectedAccount !== null && selectedAccount !== undefined}
