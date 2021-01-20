@@ -1,5 +1,5 @@
 pub use iota_wallet::{
-    account_manager::AccountManager,
+    account_manager::{AccountManager, ManagerStorage, DEFAULT_STORAGE_FOLDER},
     actor::{
         Message as WalletMessage, MessageType as WalletMessageType, Response, ResponseType,
         WalletMessageHandler,
@@ -28,14 +28,15 @@ pub struct WalletActor {
 
 impl ActorFactoryArgs<PathBuf> for WalletActor {
     fn create_args(storage_path: PathBuf) -> Self {
-        let mut runtime = Runtime::new().expect("failed to create tokio runtime");
+        let runtime = Runtime::new().expect("failed to create tokio runtime");
         Self {
             wallet_message_handler: Arc::new(Mutex::new(
                 WalletMessageHandler::with_manager(
                     runtime
                         .block_on(
                             AccountManager::builder()
-                                .with_storage_path(storage_path)
+                                .with_storage(storage_path, ManagerStorage::Sqlite, None)
+                                .unwrap() //safe to unwrap, the storage password is None ^
                                 .with_polling_interval(Duration::from_millis(POLLING_INTERVAL_MS))
                                 .finish(),
                         )
@@ -50,11 +51,24 @@ impl ActorFactoryArgs<PathBuf> for WalletActor {
 
 impl Default for WalletActor {
     fn default() -> Self {
-        let mut runtime = Runtime::new().expect("failed to create tokio runtime");
+        let runtime = Runtime::new().expect("failed to create tokio runtime");
+        let wallet_message_handler = Arc::new(Mutex::new(
+            runtime
+                .block_on(async {
+                    WalletMessageHandler::with_manager(
+                        AccountManager::builder()
+                            .with_storage(DEFAULT_STORAGE_FOLDER, ManagerStorage::Sqlite, None)
+                            .unwrap() //safe to unwrap, the storage password is None ^
+                            .with_polling_interval(Duration::from_millis(POLLING_INTERVAL_MS))
+                            .finish()
+                            .await
+                            .unwrap(),
+                    )
+                })
+                .unwrap(),
+        ));
         Self {
-            wallet_message_handler: Arc::new(Mutex::new(
-                runtime.block_on(WalletMessageHandler::new()).unwrap(),
-            )),
+            wallet_message_handler,
             runtime,
         }
     }
@@ -73,11 +87,9 @@ impl Receive<WalletMessage> for WalletActor {
 
     fn receive(&mut self, _ctx: &Context<Self::Msg>, msg: WalletMessage, _sender: Sender) {
         let wallet_message_handler = self.wallet_message_handler.clone();
-        self.runtime.enter(move || {
-            tokio::task::spawn(async move {
-                let mut wallet_message_handler = wallet_message_handler.lock().await;
-                wallet_message_handler.handle(msg).await;
-            });
+        self.runtime.spawn(async move {
+            let mut wallet_message_handler = wallet_message_handler.lock().await;
+            wallet_message_handler.handle(msg).await;
         });
     }
 }

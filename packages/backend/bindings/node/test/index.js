@@ -22,7 +22,7 @@ describe('binding', () => {
     lib.api.listenToErrorEvents()(generateRandomId())
   }) */
   it('creates an account, backup and restore it', () => {
-    fs.rmdirSync('./example-database', {
+    fs.rmdirSync('./storage', {
       recursive: true,
       force: true
     })
@@ -35,7 +35,7 @@ describe('binding', () => {
       } catch {}
     })
 
-    const actorId = Math.random().toString()
+    const actorId = Math.random().toString().replace('.', '')
 
     return new Promise(resolve => {
       lib.init(actorId)
@@ -50,6 +50,10 @@ describe('binding', () => {
               type: 'StrongholdPasswordSet',
               action: 'SetStrongholdPassword'
             })
+            lib.api.storeMnemonic()
+            break
+          }
+          case 1: {
             lib.api.createAccount({
               clientOptions: {
                 node: 'https://nodes.devnet.iota.org:443'
@@ -57,7 +61,7 @@ describe('binding', () => {
             })(generateRandomId())
             break
           }
-          case 1: {
+          case 2: {
             assert.deepStrictEqual(message, {
               actorId,
               id: message.id,
@@ -68,18 +72,18 @@ describe('binding', () => {
             lib.api.backup('./backup')(generateRandomId())
             break
           }
-          case 2: {
+          case 3: {
             assert.deepStrictEqual(message, {
               actorId,
               id: message.id,
               type: 'BackupSuccessful',
               action: 'Backup'
             })
-            fs.unlinkSync('./example-database/wallet.stronghold')
+            fs.unlinkSync('./storage/wallet.stronghold')
             lib.api.setStrongholdPassword('password')(generateRandomId()) // since we removed the snapshot, reload stronghold
             break
           }
-          case 3: {
+          case 4: {
             assert.deepStrictEqual(message, {
               actorId,
               id: message.id,
@@ -88,7 +92,7 @@ describe('binding', () => {
             lib.api.restoreBackup('./backup', 'password')(generateRandomId())
             break
           }
-          case 4: {
+          case 5: {
             assert.deepStrictEqual(message, {
               actorId,
               id: message.id,
@@ -99,7 +103,8 @@ describe('binding', () => {
           }
         }
       })
+  
       lib.api.setStrongholdPassword('password')(generateRandomId())
-      })
     })
+  })
 })

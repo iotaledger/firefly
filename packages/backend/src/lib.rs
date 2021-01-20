@@ -10,13 +10,14 @@ use iota_wallet::event::{
 use once_cell::sync::Lazy;
 use riker::actors::*;
 use serde::{Deserialize, Serialize};
+use tokio::sync::Mutex as AsyncMutex;
 
 use std::collections::HashMap;
 use std::convert::TryFrom;
 use std::path::Path;
 use std::sync::{Arc, Mutex};
 
-type WalletActors = Arc<Mutex<HashMap<String, ActorRef<WalletActorMsg>>>>;
+type WalletActors = Arc<AsyncMutex<HashMap<String, ActorRef<WalletActorMsg>>>>;
 type MessageReceiver = Box<dyn Fn(String) + Send + Sync + 'static>;
 type MessageReceivers = Arc<Mutex<HashMap<String, MessageReceiver>>>;
 
@@ -65,6 +66,8 @@ pub async fn init<A: Into<String>, F: Fn(String) + Send + Sync + 'static>(
 ) {
     let actor_id = actor_id.into();
 
+    let mut actors = wallet_actors().lock().await;
+
     iota_wallet::with_actor_system(|sys| {
         let wallet_actor = match storage_path {
             Some(path) => sys
@@ -73,9 +76,6 @@ pub async fn init<A: Into<String>, F: Fn(String) + Send + Sync + 'static>(
             None => sys.actor_of::<WalletActor>(&actor_id).unwrap(),
         };
 
-        let mut actors = wallet_actors()
-            .lock()
-            .expect("Failed to lock wallet_actors: init()");
         actors.insert(actor_id.to_string(), wallet_actor);
 
         let mut message_receivers = message_receivers()
@@ -87,9 +87,7 @@ pub async fn init<A: Into<String>, F: Fn(String) + Send + Sync + 'static>(
 }
 
 pub async fn destroy<A: Into<String>>(actor_id: A) {
-    let mut actors = wallet_actors()
-        .lock()
-        .expect("Failed to lock wallet_actors: init()");
+    let mut actors = wallet_actors().lock().await;
     let actor_id = actor_id.into();
 
     if let Some(actor) = actors.remove(&actor_id) {
@@ -113,9 +111,7 @@ pub fn init_logger(config: LoggerConfigBuilder) {
 pub async fn send_message(message: String) {
     let data = match serde_json::from_str::<DispatchMessage>(&message) {
         Ok(message) => {
-            let actors = wallet_actors()
-                .lock()
-                .expect("Failed to lock wallet_actors: send_message()");
+            let actors = wallet_actors().lock().await;
 
             let actor_id = message.actor_id.to_string();
             if let Some(actor) = actors.get(&actor_id) {
@@ -297,7 +293,7 @@ mod tests {
         F: Future<Output = ()>,
     {
         match AssertUnwindSafe(f()).catch_unwind().await {
-            Ok(r) => Ok(r),
+            Ok(_) => Ok(()),
             Err(panic) => Err(panic_message(panic)),
         }
     }

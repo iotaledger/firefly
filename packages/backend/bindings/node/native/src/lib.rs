@@ -69,15 +69,11 @@ declare_types! {
         // Called by the `JsActorSystem` constructor
         init(mut cx) {
             let actor_id = cx.argument::<JsString>(0)?.value();
-            let storage_path = match cx.argument::<JsString>(1) {
-                Ok(path) => {
-                    if path.value() == "".to_string() {
-                        None
-                    } else {
-                        Some(path.value())
-                    }
+            let storage_path = match cx.argument_opt(1) {
+                Some(arg) => {
+                    Some(arg.downcast::<JsString>().or_throw(&mut cx)?.value())
                 }
-                Err(_) => None,
+                None => None,
             };
             let (tx, rx) = channel();
             let wrapped_tx = Arc::new(Mutex::new(tx));
