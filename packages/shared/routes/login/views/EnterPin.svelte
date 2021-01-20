@@ -4,6 +4,7 @@
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { OnboardingLayout, Illustration, Icon, Text, Profile, Pin, Button } from 'shared/components'
     import { validatePinFormat } from 'shared/lib/utils'
+    import { getActiveProfile } from 'shared/lib/app'
 
     export let locale
     export let mobile
@@ -51,7 +52,7 @@
 
     function handleContinueClick() {
         if (validatePinFormat(pinCode)) {
-            PincodeManager.verify(pinCode.toString())
+            PincodeManager.verify(getActiveProfile().id, pinCode.toString())
                 .then((verified) => {
                     if (verified === true) {
                         api.setStoragePassword(pinCode.toString(), {
@@ -60,7 +61,7 @@
                             },
                             onError(error) {
                                 console.error(error)
-                            }
+                            },
                         })
                     }
 
@@ -104,7 +105,7 @@
                 <Pin bind:value={pinCode} classes="mt-10" />
                 <Text type="p" bold classes="mt-4 text-center">
                     {attempts > 0 ? locale('views.login.incorrect_attempts', {
-                              values: { attempts: attempts.toString() }
+                              values: { attempts: attempts.toString() },
                           }) : locale('actions.enter_your_pin')}
                 </Text>
             </div>

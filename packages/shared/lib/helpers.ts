@@ -83,7 +83,6 @@ export const truncateString = (str: string, firstCharCount: number = 5, endCharC
     return convertedStr;
 }
 
-
 /**
  * Set text to clipboard
  */

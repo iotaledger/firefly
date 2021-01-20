@@ -1,6 +1,9 @@
 <script>
     import { createEventDispatcher } from 'svelte'
     import { OnboardingLayout, Illustration, Text, Button, Input, Radio } from 'shared/components'
+    import { createProfile, markProfileAsActive } from 'shared/lib/app'
+    import { initialise } from 'shared/lib/wallet'
+
     export let locale
     export let mobile
 
@@ -10,7 +13,19 @@
     let mainnet = true
 
     function handleContinueClick(setupType) {
-        dispatch('next', { setupType })
+        // TOOD (laumair): What happens if a user cancels at this point? We need to detect and remove this profile.
+        let profile
+
+        try {
+            profile = createProfile(profileName)
+            markProfileAsActive(profile.id)
+
+            initialise(profile.id, profile.name)
+
+            dispatch('next', { setupType })
+        } catch (error) {
+            console.error(error)
+        }
     }
     function handleBackClick() {
         dispatch('previous')
