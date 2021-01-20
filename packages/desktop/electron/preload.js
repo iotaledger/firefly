@@ -1,8 +1,6 @@
 const binding = require('wallet-nodejs-binding')
 const { PincodeManager } = require('./keytar')
 
-binding.init()
-
 const freezeObjectFactory = (obj) => {
     const rejector = {
         get(obj, prop) {

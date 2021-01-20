@@ -1,4 +1,4 @@
-import { BridgeMessage, MessageResponse } from '../../api-wrapper/bridge'
+import { BridgeMessage, MessageResponse, CommunicationIds } from '../../api-wrapper/bridge'
 import {
   AccountToCreate,
   AccountIdentifier,
@@ -51,8 +51,8 @@ function sendMessage(message: BridgeMessage): Promise<string> {
   return new Promise(resolve => addon.sendMessage(JSON.stringify(message), () => resolve(id)))
 }
 
-export function init(storagePath?: string) {
-  const runtime = new addon.ActorSystem(storagePath || '')
+export function init(id: string, storagePath?: string) {
+  const runtime = new addon.ActorSystem(id, storagePath || '')
   _poll(runtime, (error, data) => {
     const message = error || data
     mailbox.push(message)
@@ -69,91 +69,91 @@ export function initLogger(config: LoggerConfig) {
 }
 
 export const api = {
-  generateMnemonic: function (): ((__id: string) => Promise<string>) {
-    return (__id: string) => _generateMnemonic(sendMessage, __id)
+  generateMnemonic: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _generateMnemonic(sendMessage, __ids)
   },
-  storeMnemonic: function (mnemonic?: string): ((__id: string) => Promise<string>) {
-    return (__id: string) => _storeMnemonic(sendMessage, __id, {
+  storeMnemonic: function (mnemonic?: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _storeMnemonic(sendMessage, __ids, {
       signerType: { type: 'Stronghold' },
       mnemonic: mnemonic || null
     })
   },
-  verifyMnemonic: function (mnemonic: string): ((__id: string) => Promise<string>) {
-    return (__id: string) => _verifyMnemonic(sendMessage, __id, mnemonic)
+  verifyMnemonic: function (mnemonic: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _verifyMnemonic(sendMessage, __ids, mnemonic)
   },
-  createAccount: function (account: AccountToCreate): ((__id: string) => Promise<string>) {
-    return (__id: string) => _createAccount(sendMessage, __id, account)
+  createAccount: function (account: AccountToCreate): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _createAccount(sendMessage, __ids, account)
   },
-  removeAccount: function (accountId: AccountIdentifier): ((__id: string) => Promise<string>) {
-    return (__id: string) => _removeAccount(sendMessage, __id, accountId)
+  removeAccount: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _removeAccount(sendMessage, __ids, accountId)
   },
-  getAccount: function (accountId: AccountIdentifier): ((__id: string) => Promise<string>) {
-    return (__id: string) => _getAccount(sendMessage, __id, accountId)
+  getAccount: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _getAccount(sendMessage, __ids, accountId)
   },
-  getAccounts: function (): ((__id: string) => Promise<string>) {
-    return (__id: string) => _getAccounts(sendMessage, __id)
+  getAccounts: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _getAccounts(sendMessage, __ids)
   },
-  syncAccounts: function (): ((__id: string) => Promise<string>) {
-    return (__id: string) => _syncAccounts(sendMessage, __id)
+  syncAccounts: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _syncAccounts(sendMessage, __ids)
   },
-  generateAddress: function (accountId: AccountIdentifier): ((__id: string) => Promise<string>) {
-    return (__id: string) => _generateAddress(sendMessage, __id, accountId)
+  generateAddress: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _generateAddress(sendMessage, __ids, accountId)
   },
-  listMessages: function (accountId: AccountIdentifier, filters?: ListMessagesFilter): ((__id: string) => Promise<string>) {
-    return (__id: string) => _listMessages(sendMessage, __id, accountId, filters)
+  listMessages: function (accountId: AccountIdentifier, filters?: ListMessagesFilter): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _listMessages(sendMessage, __ids, accountId, filters)
   },
-  listAddresses: function (accountId: AccountIdentifier, unspent?: boolean): ((__id: string) => Promise<string>) {
-    return (__id: string) => _listAddresses(sendMessage, __id, accountId, unspent)
+  listAddresses: function (accountId: AccountIdentifier, unspent?: boolean): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _listAddresses(sendMessage, __ids, accountId, unspent)
   },
-  availableBalance: function (accountId: AccountIdentifier): ((__id: string) => Promise<string>) {
-    return (__id: string) => _availableBalance(sendMessage, __id, accountId)
+  availableBalance: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _availableBalance(sendMessage, __ids, accountId)
   },
-  totalBalance: function (accountId: AccountIdentifier): ((__id: string) => Promise<string>) {
-    return (__id: string) => _totalBalance(sendMessage, __id, accountId)
+  totalBalance: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _totalBalance(sendMessage, __ids, accountId)
   },
-  latestAddress: function (accountId: AccountIdentifier): ((__id: string) => Promise<string>) {
-    return (__id: string) => _latestAddress(sendMessage, __id, accountId)
+  latestAddress: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _latestAddress(sendMessage, __ids, accountId)
   },
-  syncAccount: function (accountId: AccountIdentifier, options?: SyncAccountOptions): ((__id: string) => Promise<string>) {
-    return (__id: string) => _syncAccount(sendMessage, __id, accountId, options)
+  syncAccount: function (accountId: AccountIdentifier, options?: SyncAccountOptions): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _syncAccount(sendMessage, __ids, accountId, options)
   },
-  reattach: function (accountId: AccountIdentifier, messageId: string): ((__id: string) => Promise<string>) {
-    return (__id: string) => _reattach(sendMessage, __id, accountId, messageId)
+  reattach: function (accountId: AccountIdentifier, messageId: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _reattach(sendMessage, __ids, accountId, messageId)
   },
-  backup: function (destinationPath: string): ((__id: string) => Promise<string>) {
-    return (__id: string) => _backup(sendMessage, __id, destinationPath)
+  backup: function (destinationPath: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _backup(sendMessage, __ids, destinationPath)
   },
-  restoreBackup: function (backupPath: string, password: string): ((__id: string) => Promise<string>) {
-    return (__id: string) => _restoreBackup(sendMessage, __id, backupPath, password)
+  restoreBackup: function (backupPath: string, password: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _restoreBackup(sendMessage, __ids, backupPath, password)
   },
-  setStrongholdPassword: function (password: string): ((__id: string) => Promise<string>) {
-    return (__id: string) => _setStrongholdPassword(sendMessage, __id, password)
+  setStrongholdPassword: function (password: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _setStrongholdPassword(sendMessage, __ids, password)
   },
-  setStoragePassword: function (password: string): ((__id: string) => Promise<string>) {
-    return (__id: string) => _setStoragePassword(sendMessage, __id, password)
+  setStoragePassword: function (password: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _setStoragePassword(sendMessage, __ids, password)
   },
-  send: function (fromAccountId: AccountIdentifier, transfer: Transfer): ((__id: string) => Promise<string>) {
-    return (__id: string) => _send(sendMessage, __id, fromAccountId, transfer)
+  send: function (fromAccountId: AccountIdentifier, transfer: Transfer): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _send(sendMessage, __ids, fromAccountId, transfer)
   },
-  internalTransfer: function (fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number): ((__id: string) => Promise<string>) {
-    return (__id: string) => _internalTransfer(sendMessage, __id, fromAccountId, toAccountId, amount)
+  internalTransfer: function (fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _internalTransfer(sendMessage, __ids, fromAccountId, toAccountId, amount)
   },
-  onError: function (): ((__id: string) => Promise<string>) {
-    return (__id: string) => addon.listen(__id, 'ErrorThrown')
+  onError: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'ErrorThrown')
   },
-  onBalanceChange: function (): ((__id: string) => Promise<string>) {
-    return (__id: string) => addon.listen(__id, 'BalanceChange')
+  onBalanceChange: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId,, 'BalanceChange')
   },
-  onNewTransaction: function (): ((__id: string) => Promise<string>) {
-    return (__id: string) => addon.listen(__id, 'NewTransaction')
+  onNewTransaction: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'NewTransaction')
   },
-  onConfirmationStateChange: function (): ((__id: string) => Promise<string>) {
-    return (__id: string) => addon.listen(__id, 'ConfirmationStateChange')
+  onConfirmationStateChange: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'ConfirmationStateChange')
   },
-  onReattachment: function (): ((__id: string) => Promise<string>) {
-    return (__id: string) => addon.listen(__id, 'Reattachment')
+  onReattachment: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'Reattachment')
   },
-  onBroadcast: function (): ((__id: string) => Promise<string>) {
-    return (__id: string) => addon.listen(__id, 'Broadcast')
+  onBroadcast: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'Broadcast')
   },
 };
