@@ -1,0 +1,29 @@
+name: "Crowdin"
+
+on:
+  schedule:
+    # Weekly on Wednesday at 18:00 UTC
+    - cron: '0 18 * * WED'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Sync translations from Crowdin
+        uses: crowdin/github-action@1.0.16
+        with:
+          upload_sources: true
+          download_translations: true
+          localization_branch_name: 'l10n_develop'
+          pull_request_title: 'New Crowdin translations [ci skip]'
+          crowdin_branch_name: 'develop'
+          config: 'crowdin.yml'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}

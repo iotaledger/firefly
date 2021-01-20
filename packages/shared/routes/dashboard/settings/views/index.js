@@ -1,1 +1,5 @@
 export { default as SettingsHome } from './SettingsHome.svelte'
+export { default as SettingsViewer } from './SettingsViewer.svelte'
+export { default as General } from './General.svelte'
+export { default as Security } from './Security.svelte'
+export { default as Advanced } from './Advanced.svelte'

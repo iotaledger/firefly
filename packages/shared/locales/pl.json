@@ -1,18 +1,14 @@
 {
-    "app": {
-        "title": "Firefly",
-        "author": "IOTA Foundation"
-    },
     "views": {
         "onboarding_1": {
-            "title": "Send, Receive & Store your IOTA Tokens",
-            "body": "Store Tokens, Coins and Collectible Assets"
+            "title": "Wysyłaj, odbieraj i zarządzaj IOTA",
+            "body": "Firefly to bezpieczny i łatwy w obsłudze portfel IOTA."
         },
         "legal": {
-            "title": "Legal",
-            "body": "Please review the IOTA wallet Privacy Policy and Terms of Service",
+            "title": "Informacje prawne",
+            "body": "Zapoznaj się z Polityką Prywatności i Warunkami Usługi.",
             "privacy_policy": {
-                "title": "Privacy Policy",
+                "title": "Polityka prywatności",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -21,7 +17,7 @@
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "terms_of_service": {
-                "title": "Terms of Service",
+                "title": "Warunki świadczenia usług",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -29,164 +25,275 @@
                 "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I’ve read and I accept the Privacy policy & ToS"
+            "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
-        "settings": {
-            "title": "Language & appearance",
-            "body": "Choose your wallet’s language and theme"
+        "language": {
+            "title": "Język i wygląd",
+            "body": "Wybierz język i motyw portfela"
         },
         "setup": {
-            "title": "Set up a wallet"
+            "title": "Skonfiguruj swój portfel",
+            "body": "Możesz utworzyć nowy portfel lub zaimportować istniejący."
         },
         "password": {
-            "title": "Create a password for your wallet",
-            "body": "Your password needs to be highly secure to encrypt and recover your Stronghold vault. Also, you will need this to send tokens from your wallet."
+            "title": "Utwórz hasło",
+            "body": "Zostaniesz poproszony o wprowadzenie hasła, aby wysłać tokeny z portfela. Potrzebujesz silnego hasła, aby chronić swoje środki."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up your login PIN or Touch ID to ensure that only you can access the app.",
+            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
             "body_2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Set up PIN code",
-            "body_1": "Enter a 6-digit PIN below. You will be asked for this frequently when you access your device.",
-            "body_2": "Use numbers only"
+            "title": "Ustaw kod PIN",
+            "body_1": "Wprowadź poniżej 6-cyfrowy kod PIN. Będziesz proszony o wprowadzenie kodu PIN, aby zalogować się do portfela.",
+            "body_2": "Możesz używać tylko liczb."
         },
         "confirm_pin": {
-            "title": "Confirm the PIN code you created",
-            "body": "Confirm the PIN code you created"
+            "title": "Zweryfikuj swój kod PIN",
+            "body": "Wprowadź ponownie kod PIN, aby kontynuować."
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body_1": "You will be shown a secret phrase. You will need these to restore your wallet and funds.",
-            "body_2": "Do not share this phrase with anyone. Your secret phrase can access your funds at any time from anywhere.",
-            "body_3": "If you lose this, you lose your funds."
+            "title": "Utwórz kopię zapasową portfela",
+            "body_1": "Zobaczysz teraz frazę odzyskiwania.",
+            "body_2": "Nie udostępniaj tej frazy nikomu. Twoja fraza odzyskiwania może być użyta do uzyskania dostępu do Twoich tokenów z dowolnego miejsca.",
+            "body_3": "Jeśli stracisz swoją frazę odzyskiwania, możesz stracić swoje środki."
         },
         "recovery_phrase": {
-            "title": "Recovery phrase",
-            "body_1": "Carefully copy the words in the exact order below. You can create a secondary backup on iCloud.",
-            "body_2": "Keep this private and safely stored"
+            "title": "Fraza odzyskiwania",
+            "body_1": "Zanotuj słowa dokładnie i w podanej kolejności.",
+            "body_2": "Przechowuj swoją frazę odzyskiwania bezpiecznie. Nie udostępniaj jej nikomu."
         },
         "verify_recovery_phrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Click the words on the right in the exact order you have written them down."
+            "title": "Sprawdź frazę odzyskiwania",
+            "body": "Sprawdźmy, czy poprawnie zapisałeś frazę odzyskiwania. Wybierz słowa w prawidłowej kolejności."
         },
-        "backup_recovery_phrase": {
-            "title": "Back up to a file",
-            "body": "You wallet password is also used to encrypt a Stronghold backup. Enter your wallet password to save your recovery phrase backup to a file."
+        "backup_wallet": {
+            "title": "Kopia zapasowa do pliku Stronghold",
+            "body": "Wprowadź hasło, aby utworzyć kopię zapasową portfela do pliku Stronghold. Twoje hasło jest używane do szyfrowania kopii zapasowej."
         },
         "recovery_phrase_saved": {
-            "title": "Recovery phrase",
-            "body": "Backed up to a file"
+            "title": "Pomyślnie utworzono kopię zapasową",
+            "body": "Wykonałeś kopię zapasową portfela do Stronghold."
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your new wallet is ready to use."
+            "title": "Gratulacje",
+            "body": "Twój portfel jest gotowy do użycia."
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have an existing seed or wallet back up, you can import it here."
+            "title": "Importuj portfel",
+            "body": "Jeśli masz frazę odzyskiwania lub kopię zapasową Stronghold, możesz zaimportować je tutaj."
         },
         "import_from_text": {
-            "title": "Type your seed or secret phrase",
-            "body_1": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
-            "body_2": "A secret phrase is a 24 word mnemonic. This is used to recover a newer FireFly wallet.",
-            "body_3": "Enter your seed or secret phrase"
+            "title": "Przywróć portfel za pomocą frazy odzyskiwania lub klucza seed",
+            "body_1": "Fraza odzyskiwania zawiera 24 słowa. Jest ona używana do odzyskania istniejącego portfela Firefly.",
+            "body_2": "Seed składa się z 81 znaków. Jest on używany do odzyskiwania środków z portfela starego typu (Trinity).",
+            "body_3": "Wprowadź swój seed lub frazę odzyskiwania"
         },
         "import_from_file": {
-            "title": "Restore your wallet using a backup file",
-            "body": "Upload a file to restore existing wallet funds. File backups can be either a Trinity SeedVault or a Firefly Stronghold."
+            "title": "Przywróć portfel przy użyciu kopii zapasowej",
+            "body": "Importuj plik kopii zapasowej, aby przywrócić portfel. Możliwe kopie zapasowe to Stronghold (.stronghold) lub Trinity SeedVault (.kdbx)."
         },
         "import_backup_password": {
-            "title": "Restore your wallet using a backup file",
-            "body_1": "Please provide your backup password.",
-            "body_2": "This is the password created when you first created your backup. This stops unauthorised access to your funds."
+            "title": "Przywróć swój portfel za pomocą SeedVault lub Stronghold",
+            "body_1": "Wprowadź hasło kopii zapasowej.",
+            "body_2": "To jest hasło, które ustawiłeś podczas tworzenia kopii zapasowej."
         },
         "import_success": {
-            "title_1": "You have successfully recovered your backup",
-            "body_1": "Your secret phrase is correct, you can now set up your new wallet",
-            "title_2": "You have successfully recovered your backup",
-            "body_2": "Your password is correct, you can now continue"
+            "title": "Pomyślnie odzyskałeś kopię zapasową",
+            "body": "Możesz teraz skonfigurować swój nowy portfel."
         },
         "migrate": {
-            "title": "Transfer your funds",
-            "body_1": "This is an automated process to transfer your existing funds to your new wallet. In this process we will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during this process.",
-            "existing": "Existing seed",
-            "new": "Your new wallet"
+            "title": "Migruj swoje środki",
+            "body_1": "To jest automatyczny proces przekazywania środków do Twojego nowego portfela. Sprawdzimy czy zużyte adresy osłabiają Twoje bezpieczeństwo.",
+            "body_2": "Może to zająć trochę czasu. Nie wyłączaj urządzenia podczas migracji.",
+            "existing": "Twój stary portfel",
+            "new": "Twój nowy portfel"
         },
         "migrate_failed": {
-            "title": "Transfer your funds",
-            "body": "Provide your wallet and Stronghold password. This is the password created when you first created your original wallet backup. This allows secure import of your recovery phrase."
+            "title": "To do",
+            "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "Twoje saldo",
+            "body": "Czy Twoje saldo jest poprawne?"
+        },
+        "settings": {
+            "settings": "Ustawienia",
+            "generalSettings": {
+                "title": "Ustawienia ogólne",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "security": {
+                "title": "Bezpieczeństwo",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "advancedSettings": {
+                "title": "Ustawienia zaawansowane",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "helpAndInfo": {
+                "title": "Pomoc i informacje",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "profileDetails": {
+                "title": "Szczegóły profilu",
+                "description": "Temp"
+            },
+            "theme": {
+                "title": "Motyw",
+                "description": "Temp"
+            },
+            "language": {
+                "title": "Język",
+                "description": "Temp"
+            },
+            "currency": {
+                "title": "Waluta",
+                "description": "Temp"
+            },
+            "notifications": {
+                "title": "Powiadomienia",
+                "description": "Temp"
+            },
+            "exportStronghold": {
+                "title": "Eksportuj Stronghold",
+                "description": "Temp"
+            },
+            "appLock": {
+                "title": "Blokada aplikacji",
+                "description": "Temp"
+            },
+            "changePassword": {
+                "title": "Zmień hasło",
+                "description": "Temp"
+            },
+            "resyncAccounts": {
+                "title": "Resynchronizacja kont",
+                "description": "Temp"
+            },
+            "resetWallet": {
+                "title": "Reset portfela",
+                "description": "Temp"
+            },
+            "deepLinks": {
+                "title": "Deep linki",
+                "description": "Temp"
+            },
+            "developerMode": {
+                "title": "Tryb deweloperski",
+                "description": "Temp"
+            },
+            "nodeSettings": {
+                "title": "Ustawienia serwera",
+                "description": "Temp"
+            },
+            "proofOfWork": {
+                "title": "Proof of Work",
+                "description": "Temp"
+            },
+            "errorLog": {
+                "title": "Dzienniki błędów",
+                "description": "Temp"
+            },
+            "stateExport": {
+                "title": "Eksport stanu portfela",
+                "description": "Temp"
+            },
+            "troubleshoot": {
+                "title": "Rozwiązywanie problemów",
+                "description": "Temp"
+            },
+            "documentation": {
+                "title": "Dokumentacja",
+                "description": "Temp"
+            },
+            "faq": {
+                "title": "FAQ",
+                "description": "Temp"
+            },
+            "discord": {
+                "title": "Discord",
+                "description": "Temp"
+            },
+            "about": {
+                "title": "O aplikacji",
+                "description": "Temp"
+            }
+        },
+        "login": {
+            "please_wait": "Zaczekaj {time, plural, one {1 sekundę} few {# sekundy} many {# sekund} other {# sekund}}",
+            "incorrect_attempts": "{attempts, plural, one {1 nieudana próba} few {# nieudane próby} many {# nieudanych prób} other {# nieudane próby}}"
         }
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
-        "setup_pin": "Set up PIN code",
-        "set_pin": "Set PIN code",
-        "save_backup_file": "Save backup file",
-        "verify_recovery_phrase": "Verify recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
-        "visit_discord": "Visit Discord",
-        "drag_drop": "Drag & Drop",
-        "import_extentions": ".kdbx or .stronghold file",
-        "choose_file": "Choose a File",
-        "drop_here": "Drop your file here"
+        "continue": "Kontynuuj",
+        "back": "Wstecz",
+        "import_seed": "Importuj istniejący klucz seed",
+        "import_wallet": "Importuj istniejący portfel",
+        "create_wallet": "Stwórz nowy portfel",
+        "save_password": "Zapisz hasło",
+        "use_biometric": "Użyj zabezpieczeń biometrycznych",
+        "setup_pin": "Ustaw kod PIN",
+        "set_pin": "Ustaw kod PIN",
+        "confirm_pin": "Potwierdź kod PIN",
+        "enter_your_pin": "Wprowadź swój PIN",
+        "save_backup_file": "Zapisz plik kopii zapasowej",
+        "ive_written_recovery_phrase": "Zapisałem moją frazę odzyskiwania",
+        "verify_recovery_phrase": "Sprawdź frazę odzyskiwania",
+        "reveal_recovery_phrase": "Pokaż frazę odzyskiwania",
+        "import_seedvault": "Importuj plik SeedVault",
+        "check_again": "Nie, sprawdź ponownie",
+        "import_from_file": "Importuj z pliku",
+        "send": "Wyślij",
+        "receive": "Odbierz",
+        "begin_transfer": "Rozpocznij transfer",
+        "try_again": "Spróbuj ponownie",
+        "visit_discord": "Odwiedź nasz Discord",
+        "drag_drop": "Przeciągnij i upuść",
+        "import_extentions": "plik .stronghold lub .kdbx",
+        "choose_file": "Wybierz plik",
+        "drop_here": "Upuść plik tutaj"
     },
     "general": {
-        "password": "Password",
-        "confirm_password": "Confirm password",
-        "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
-        "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
-        "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "transfer_between_accounts": "Transfer Between Accounts",
-        "move_funds_between_accounts": "Move funds between your Accounts",
-        "account": "Account",
-        "sending_to_address": "Sending to address",
-        "amount": "Amount",
-        "add_address": "Add Address",
-        "reference": "Reference",
-        "from": "From",
-        "to": "To",
-        "receive_funds": "Receive funds",
-        "share_address": "Share an address",
-        "your_address": "Your address",
-        "generate_new_address": "Generate new address",
-        "have_text_backup": "I have a text backup",
-        "have_file_backup": "I have a file backup",
-        "enter_seed_or_phrase": "Enter an IOTA seed or secret phrase",
-        "upload_seedvault_or_stronghold": "Upload a Seedvault or Stronghold file",
-        "import": "Import",
-        "seedvault": "Seedvault",
+        "password": "Hasło",
+        "confirm_password": "Potwierdź hasło",
+        "your_seed": "Twój seed",
+        "recovery_phrase": "Fraza odzyskiwania",
+        "recent_activity": "Ostatnia aktywność",
+        "sent": "Wysłano",
+        "received": "Odebrano",
+        "send_funds": "Wyślij środki",
+        "send_to_address": "Wyślij na adres",
+        "scan_qr_or_paste": "Zeskanuj kod QR lub wklej adres",
+        "transfer_between_accounts": "Transfer między kontami",
+        "move_funds_between_accounts": "Przenieś środki między swoimi kontami",
+        "account": "Konto",
+        "sending_to_address": "Wysyłanie na adres",
+        "amount": "Ilość",
+        "add_address": "Dodaj adres",
+        "reference": "Odniesienie",
+        "from": "Od",
+        "to": "Do",
+        "receive_funds": "Odbierz środki",
+        "share_address": "Udostępnij adres",
+        "your_address": "Twój adres",
+        "generate_new_address": "Generuj nowy adres",
+        "have_text_backup": "Mam zapasową kopię tekstową",
+        "have_file_backup": "Mam zapasową kopię w pliku",
+        "enter_seed_or_phrase": "Wprowadź frazę odzyskiwania lub seed",
+        "upload_seedvault_or_stronghold": "Importuj plik Stronghold lub SeedVault",
+        "import": "Importuj",
+        "seedvault": "SeedVault",
         "stronghold": "Stronghold",
-        "language": "Language",
-        "appearance": "Appearance",
-        "light_theme": "Light theme",
-        "dark_theme": "Dark theme",
-        "total_balance": "Total Balance",
-        "incoming": "Incoming",
-        "outgoing": "Outgoing",
-        "accounts": "Accounts"
+        "language": "Język",
+        "appearance": "Wygląd",
+        "light_theme": "Tryb jasny",
+        "dark_theme": "Tryb ciemny",
+        "total_balance": "Saldo całkowite",
+        "incoming": "Przychodzące",
+        "outgoing": "Wychodzące",
+        "accounts": "Konta",
+        "profiles": "Profile"
     }
 }

@@ -1,18 +1,14 @@
 {
-    "app": {
-        "title": "Firefly",
-        "author": "IOTA Foundation"
-    },
     "views": {
         "onboarding_1": {
-            "title": "Send, Receive & Store your IOTA Tokens",
-            "body": "Store Tokens, Coins and Collectible Assets"
+            "title": "Gửi, Nhận và Quản lý IOTA của bạn",
+            "body": "Firefly là một ví IOTA an toàn và dễ sử dụng."
         },
         "legal": {
-            "title": "Legal",
-            "body": "Please review the IOTA wallet Privacy Policy and Terms of Service",
+            "title": "Hợp lệ",
+            "body": "Vui lòng xem lại Chính sách Bảo mật và Điều khoản Dịch vụ.",
             "privacy_policy": {
-                "title": "Privacy Policy",
+                "title": "Chính sách Bảo mật",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -21,7 +17,7 @@
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "terms_of_service": {
-                "title": "Terms of Service",
+                "title": "Điều khoản Dịch vụ",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -29,99 +25,205 @@
                 "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I’ve read and I accept the Privacy policy & ToS"
+            "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
-        "settings": {
-            "title": "Language & appearance",
-            "body": "Choose your wallet’s language and theme"
+        "language": {
+            "title": "Ngôn ngữ và giao diện",
+            "body": "Chọn ngôn ngữ và chủ đề cho Ví của bạn"
         },
         "setup": {
-            "title": "Set up a wallet"
+            "title": "Thiết lập Ví của bạn",
+            "body": "Bạn có thể tạo một Ví mới hoặc nhập vào từ một Ví hiện có."
         },
         "password": {
-            "title": "Create a password for your wallet",
-            "body": "Your password needs to be highly secure to encrypt and recover your Stronghold vault. Also, you will need this to send tokens from your wallet."
+            "title": "Tạo mật khẩu",
+            "body": "Bạn sẽ được yêu cầu nhập mật khẩu của mình để gửi tiền từ ví của bạn. Bạn cần một mật khẩu mạnh để bảo vệ tiền của mình."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up your login PIN or Touch ID to ensure that only you can access the app.",
+            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
             "body_2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Set up PIN code",
-            "body_1": "Enter a 6-digit PIN below. You will be asked for this frequently when you access your device.",
-            "body_2": "Use numbers only"
+            "title": "Thiết lập mã PIN",
+            "body_1": "Nhập mã PIN gồm 6 chữ số bên dưới. Bạn sẽ được yêu cầu nhập mã PIN để đăng nhập vào ví của mình.",
+            "body_2": "Bạn chỉ có thể sử dụng số."
         },
         "confirm_pin": {
-            "title": "Confirm the PIN code you created",
-            "body": "Confirm the PIN code you created"
+            "title": "Xác thực mã PIN của bạn",
+            "body": "Nhập lại mã PIN của bạn để tiếp tục."
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body_1": "You will be shown a secret phrase. You will need these to restore your wallet and funds.",
-            "body_2": "Do not share this phrase with anyone. Your secret phrase can access your funds at any time from anywhere.",
-            "body_3": "If you lose this, you lose your funds."
+            "title": "Sao lưu ví của bạn",
+            "body_1": "Bây giờ bạn sẽ được xem cụm từ để phục hồi tài khoản ví.",
+            "body_2": "Đừng bao giờ chia sẻ cụm từ này với bất kỳ ai. Cụm từ phục hồi tài khoản ví này của bạn có thể được sử dụng để truy cập vào tài khoản của bạn từ bất kỳ nơi nào.",
+            "body_3": "Nếu bạn làm mất cụm từ khôi phục tài khoản ví, bạn có thể sẽ bị mất tiền của mình."
         },
         "recovery_phrase": {
-            "title": "Recovery phrase",
-            "body_1": "Carefully copy the words in the exact order below. You can create a secondary backup on iCloud.",
-            "body_2": "Keep this private and safely stored"
+            "title": "Cụm từ hồi phục tài khoản ví",
+            "body_1": "Ghi lại ra giấy một cách cẩn thận những từ sau đây chính xác theo thứ tự.",
+            "body_2": "Cất giữ cụm từ khôi phục tài khoản của bạn ở nơi riêng tư và an toàn. Đừng chia sẻ nó với bất kỳ ai."
         },
         "verify_recovery_phrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Click the words on the right in the exact order you have written them down."
+            "title": "Xác thực cụm từ phục hồi tài khoản ví",
+            "body": "Hãy kiểm tra lại cụm từ đã được viết xuống một cách chính xác. Chọn các từ theo đúng thứ tự của chúng."
         },
-        "backup_recovery_phrase": {
-            "title": "Back up to a file",
-            "body": "You wallet password is also used to encrypt a Stronghold backup. Enter your wallet password to save your recovery phrase backup to a file."
+        "backup_wallet": {
+            "title": "Sao lưu vào tập tin Stronghold",
+            "body": "Nhập mật khẩu của bạn để sao lưu ví của bạn vào tập tin Stronghold. Mật khẩu của bạn được dùng để mã hóa việc sao lưu."
         },
         "recovery_phrase_saved": {
-            "title": "Recovery phrase",
-            "body": "Backed up to a file"
+            "title": "Sao lưu thành công",
+            "body": "Bạn vừa sao lưu tài khoản ví của mình vào Stronghold."
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your new wallet is ready to use."
+            "title": "Xin chúc mừng",
+            "body": "Ví của bạn đã sẵn sàng để sử dụng."
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have an existing seed or wallet back up, you can import it here."
+            "title": "Nhập tài khoản vào ví",
+            "body": "Nếu bạn có một cụm từ để phục hồi tài khoản ví hoặc một sao lưu Stronghold, bạn có thể nhập nó ở đây."
         },
         "import_from_text": {
-            "title": "Type your seed or secret phrase",
-            "body_1": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
-            "body_2": "A secret phrase is a 24 word mnemonic. This is used to recover a newer FireFly wallet.",
-            "body_3": "Enter your seed or secret phrase"
+            "title": "Khôi phục tài khoản ví của bạn với cụm từ hoặc với seed",
+            "body_1": "Một cụm từ khôi phục là một cụm dài 24 từ. Nó được sử dụng để khôi phục tài khoản ví Firefly đã được tạo.",
+            "body_2": "Một seed gồm có 81 ký tự. Nó được dùng để khôi phục từ một tài khoản ví Trinity, phiên bản cũ hơn.",
+            "body_3": "Nhập vào seed hoặc cụm từ khôi phục của bạn"
         },
         "import_from_file": {
-            "title": "Restore your wallet using a backup file",
-            "body": "Upload a file to restore existing wallet funds. File backups can be either a Trinity SeedVault or a Firefly Stronghold."
+            "title": "Khôi phục tài khoản ví của bạn từ tập tin sao lưu",
+            "body": "Nhập vào một file sao lưu để khôi phục tài khoản ví của bạn. Sao lưu cũng có thể là một tập tin Stronghold (.stronghold) hoặc một tập tin Trinity SeedVault (.kdbx)."
         },
         "import_backup_password": {
-            "title": "Restore your wallet using a backup file",
-            "body_1": "Please provide your backup password.",
-            "body_2": "This is the password created when you first created your backup. This stops unauthorised access to your funds."
+            "title": "Khôi phục tài khoản ví của bạn từ SeedVault hoặc Stronghold",
+            "body_1": "Vui lòng nhập mật khẩu sao lưu của bạn.",
+            "body_2": "Đây là mật khẩu bạn đã đặt khi tạo bản sao lưu lần đầu tiên."
         },
         "import_success": {
-            "title_1": "You have successfully recovered your backup",
-            "body_1": "Your secret phrase is correct, you can now set up your new wallet",
-            "title_2": "You have successfully recovered your backup",
-            "body_2": "Your password is correct, you can now continue"
+            "title": "Bạn đã khôi phục sao lưu của mình thành công",
+            "body": "Bây giờ bạn có thể thiết lập một tài khoản ví mới."
         },
         "migrate": {
-            "title": "Transfer your funds",
-            "body_1": "This is an automated process to transfer your existing funds to your new wallet. In this process we will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during this process.",
-            "existing": "Existing seed",
-            "new": "Your new wallet"
+            "title": "Chuyền tiền của bạn",
+            "body_1": "Đây là một tiến trình tự động để chuyển tiền của bạn sang ví mới. Chúng tôi sẽ kiểm tra các địa chỉ đã sử dụng làm suy yếu bảo mật của bạn.",
+            "body_2": "Nó có thể mất một khoảng thời gian. Không tắt thiết bị của bạn trong quá trình chuyển tiền.",
+            "existing": "Ví cũ của bạn",
+            "new": "Ví mới của bạn"
         },
         "migrate_failed": {
-            "title": "Transfer your funds",
-            "body": "Provide your wallet and Stronghold password. This is the password created when you first created your original wallet backup. This allows secure import of your recovery phrase."
+            "title": "To do",
+            "body": "To do"
         },
         "balance": {
             "title": "Your balance",
             "body": "Is your balance correct?"
+        },
+        "settings": {
+            "settings": "Settings",
+            "generalSettings": {
+                "title": "General Settings",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "security": {
+                "title": "Security",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "advancedSettings": {
+                "title": "Advanced Settings",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "helpAndInfo": {
+                "title": "Help and Information",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "profileDetails": {
+                "title": "Profile Details",
+                "description": "Temp"
+            },
+            "theme": {
+                "title": "Theme",
+                "description": "Temp"
+            },
+            "language": {
+                "title": "Ngôn ngữ",
+                "description": "Temp"
+            },
+            "currency": {
+                "title": "Currency",
+                "description": "Temp"
+            },
+            "notifications": {
+                "title": "Notifications",
+                "description": "Temp"
+            },
+            "exportStronghold": {
+                "title": "Export Stronghold",
+                "description": "Temp"
+            },
+            "appLock": {
+                "title": "App Lock",
+                "description": "Temp"
+            },
+            "changePassword": {
+                "title": "Change Password",
+                "description": "Temp"
+            },
+            "resyncAccounts": {
+                "title": "Resync Accounts",
+                "description": "Temp"
+            },
+            "resetWallet": {
+                "title": "Reset Wallet",
+                "description": "Temp"
+            },
+            "deepLinks": {
+                "title": "Deep Links",
+                "description": "Temp"
+            },
+            "developerMode": {
+                "title": "Developer Mode",
+                "description": "Temp"
+            },
+            "nodeSettings": {
+                "title": "Node Settings",
+                "description": "Temp"
+            },
+            "proofOfWork": {
+                "title": "Proof of Work",
+                "description": "Temp"
+            },
+            "errorLog": {
+                "title": "Error Log",
+                "description": "Temp"
+            },
+            "stateExport": {
+                "title": "State Export",
+                "description": "Temp"
+            },
+            "troubleshoot": {
+                "title": "Troubleshoot",
+                "description": "Temp"
+            },
+            "documentation": {
+                "title": "Documentation",
+                "description": "Temp"
+            },
+            "faq": {
+                "title": "FAQ",
+                "description": "Temp"
+            },
+            "discord": {
+                "title": "Discord",
+                "description": "Temp"
+            },
+            "about": {
+                "title": "About",
+                "description": "Temp"
+            }
+        },
+        "login": {
+            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
+            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
         }
     },
     "actions": {
@@ -132,10 +234,14 @@
         "create_wallet": "Create new wallet",
         "save_password": "Save password",
         "use_biometric": "Use biometric security",
-        "setup_pin": "Set up PIN code",
+        "setup_pin": "Thiết lập mã PIN",
         "set_pin": "Set PIN code",
+        "confirm_pin": "Confirm PIN code",
+        "enter_your_pin": "Enter your PIN",
         "save_backup_file": "Save backup file",
-        "verify_recovery_phrase": "Verify recovery phrase",
+        "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
+        "verify_recovery_phrase": "Xác thực cụm từ phục hồi tài khoản ví",
+        "reveal_recovery_phrase": "Reveal recovery phrase",
         "import_seedvault": "Import SeedVault",
         "check_again": "No, Check Again",
         "import_from_file": "Import from a file",
@@ -145,48 +251,49 @@
         "try_again": "Try again",
         "visit_discord": "Visit Discord",
         "drag_drop": "Drag & Drop",
-        "import_extentions": ".kdbx or .stronghold file",
-        "choose_file": "Choose a File",
-        "drop_here": "Drop your file here"
+        "import_extentions": ".stronghold or .kdbx file",
+        "choose_file": "Chọn một tập tin",
+        "drop_here": "Thả tập tin của bạn vào đây"
     },
     "general": {
-        "password": "Password",
-        "confirm_password": "Confirm password",
-        "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
-        "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
-        "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "transfer_between_accounts": "Transfer Between Accounts",
-        "move_funds_between_accounts": "Move funds between your Accounts",
-        "account": "Account",
-        "sending_to_address": "Sending to address",
-        "amount": "Amount",
-        "add_address": "Add Address",
-        "reference": "Reference",
-        "from": "From",
-        "to": "To",
-        "receive_funds": "Receive funds",
-        "share_address": "Share an address",
-        "your_address": "Your address",
-        "generate_new_address": "Generate new address",
-        "have_text_backup": "I have a text backup",
-        "have_file_backup": "I have a file backup",
-        "enter_seed_or_phrase": "Enter an IOTA seed or secret phrase",
-        "upload_seedvault_or_stronghold": "Upload a Seedvault or Stronghold file",
-        "import": "Import",
-        "seedvault": "Seedvault",
+        "password": "Mật khẩu",
+        "confirm_password": "Xác nhận mật khẩu",
+        "your_seed": "Seed của bạn",
+        "recovery_phrase": "Cụm từ hồi phục tài khoản ví",
+        "recent_activity": "Hoạt động gần đây",
+        "sent": "Đã gửi",
+        "received": "Đã nhận",
+        "send_funds": "Gửi tiền",
+        "send_to_address": "Gửi đến địa chỉ",
+        "scan_qr_or_paste": "Quét mã QR hoặc dán vào một địa chỉ ví",
+        "transfer_between_accounts": "Chuyển giữa các tài khoản",
+        "move_funds_between_accounts": "Di chuyển tiền giữa các tài khoản của bạn",
+        "account": "Tài khoản",
+        "sending_to_address": "Gửi đến địa chỉ",
+        "amount": "Số tiền",
+        "add_address": "Thêm địa chỉ",
+        "reference": "Tham chiếu",
+        "from": "Từ",
+        "to": "Đến",
+        "receive_funds": "Nhận tiền",
+        "share_address": "Chia sẻ địa chỉ",
+        "your_address": "Địa chỉ ví của bạn",
+        "generate_new_address": "Tạo địa chỉ ví mới",
+        "have_text_backup": "Tôi có một văn bản sao lưu",
+        "have_file_backup": "Tôi có một tập tin sao lưu",
+        "enter_seed_or_phrase": "Nhập vào cụm từ khôi phục tài khoản ví hoặc seed",
+        "upload_seedvault_or_stronghold": "Nhập vào một tập tin Stronghold hoặc SeedVault",
+        "import": "Nhập vào",
+        "seedvault": "SeedVault",
         "stronghold": "Stronghold",
-        "language": "Language",
-        "appearance": "Appearance",
-        "light_theme": "Light theme",
-        "dark_theme": "Dark theme",
-        "total_balance": "Total Balance",
-        "incoming": "Incoming",
-        "outgoing": "Outgoing",
-        "accounts": "Accounts"
+        "language": "Ngôn ngữ",
+        "appearance": "Giao diện",
+        "light_theme": "Tông màu sáng",
+        "dark_theme": "Tông màu tối",
+        "total_balance": "Tổng số dư",
+        "incoming": "Tiền chuyển đến",
+        "outgoing": "Tiền chuyển đi",
+        "accounts": "Tài khoản",
+        "profiles": "Profiles"
     }
 }
