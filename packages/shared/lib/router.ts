@@ -1,7 +1,6 @@
 import { readable, writable, get, derived } from 'svelte/store'
 import { logged, notification, walletPin, strongholdPassword, mnemonic } from 'shared/lib/app'
 import { setRoute } from 'shared/lib/helpers'
-import { generateRecoveryPhrase } from 'shared/lib/utils'
 
 /**
  * Application path based on location hash
@@ -75,11 +74,6 @@ export const initRouter = () => {
     } else {
         setRoute(AppRoute.Welcome)
     }
-}
-
-export const requestMnemonic = async () => {
-    let recovPhrase = await generateRecoveryPhrase()
-    mnemonic.set(recovPhrase)
 }
 
 // TODO: only handle route changes, not app variables

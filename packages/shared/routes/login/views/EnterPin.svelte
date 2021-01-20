@@ -4,6 +4,7 @@
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { OnboardingLayout, Illustration, Icon, Text, Profile, Pin, Button } from 'shared/components'
     import { validatePinFormat } from 'shared/lib/utils'
+    import { getActiveProfile } from 'shared/lib/app'
 
     export let locale
     export let mobile
@@ -50,35 +51,32 @@
     }
 
     function handleContinueClick() {
-        if (!isValid) {
-            attempts++
+        if (validatePinFormat(pinCode)) {
+            PincodeManager.verify(getActiveProfile().id, pinCode.toString())
+                .then((verified) => {
+                    if (verified === true) {
+                        api.setStoragePassword(pinCode.toString(), {
+                            onSuccess() {
+                                dispatch('next')
+                            },
+                            onError(error) {
+                                console.error(error)
+                            },
+                        })
+                    }
 
-            if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
-                clearInterval(timerId)
+                    attempts++
 
-                timerId = setInterval(countdown, 1000)
-            }
-        } else {
-            if (validatePinFormat(pinCode)) {
-                PincodeManager.verify(pinCode.toString())
-                    .then((verified) => {
-                        if (verified === true) {
-                            api.setStoragePassword(pinCode.toString(), {
-                                onSuccess() {
-                                    dispatch('next')
-                                },
-                                onError(error) {
-                                    console.error(error)
-                                }
-                            })
-                        } else {
-                            console.info('Incorrect pincode provided!')
-                        }
-                    })
-                    .catch((error) => {
-                        console.error(error)
-                    })
-            }
+                    if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
+                        clearInterval(timerId)
+
+                        timerId = setInterval(countdown, 1000)
+                    }
+                    return console.info('Incorrect pincode provided!')
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
         }
     }
 
@@ -107,7 +105,7 @@
                 <Pin bind:value={pinCode} classes="mt-10" />
                 <Text type="p" bold classes="mt-4 text-center">
                     {attempts > 0 ? locale('views.login.incorrect_attempts', {
-                              values: { attempts: attempts.toString() }
+                              values: { attempts: attempts.toString() },
                           }) : locale('actions.enter_your_pin')}
                 </Text>
             </div>

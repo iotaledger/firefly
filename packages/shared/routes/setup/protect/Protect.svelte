@@ -2,6 +2,7 @@
     import { createEventDispatcher } from 'svelte'
     import { Transition } from 'shared/components'
     import { api } from 'shared/lib/wallet'
+    import { getActiveProfile } from 'shared/lib/app'
 
     import { Protect, Pin } from './views/'
     import { validatePinFormat } from 'shared/lib/utils'
@@ -53,9 +54,12 @@
             case ProtectState.Confirm:
                 try {
                     if (!validatePinFormat(pin.toString())) {
-                        throw new Error('Invalid pin code!')
+                        throw new Error("Invalid pin code!");
                     }
-                    await PincodeManager.set(pin.toString())
+                    await PincodeManager.set(
+                        getActiveProfile().id,
+                        pin.toString()
+                    )
 
                     api.setStoragePassword(pin.toString(), {
                         onSuccess() {

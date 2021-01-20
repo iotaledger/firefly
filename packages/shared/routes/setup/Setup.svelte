@@ -1,13 +1,31 @@
 <script>
     import { createEventDispatcher } from 'svelte'
-    import { OnboardingLayout, Illustration, Text, Button } from 'shared/components'
+    import { OnboardingLayout, Illustration, Text, Button, Input, Radio } from 'shared/components'
+    import { createProfile, markProfileAsActive } from 'shared/lib/app'
+    import { initialise } from 'shared/lib/wallet'
+
     export let locale
     export let mobile
 
     const dispatch = createEventDispatcher()
 
+    let profileName = undefined
+    let mainnet = true
+
     function handleContinueClick(setupType) {
-        dispatch('next', { setupType })
+        // TOOD (laumair): What happens if a user cancels at this point? We need to detect and remove this profile.
+        let profile
+
+        try {
+            profile = createProfile(profileName)
+            markProfileAsActive(profile.id)
+
+            initialise(profile.id, profile.name)
+
+            dispatch('next', { setupType })
+        } catch (error) {
+            console.error(error)
+        }
     }
     function handleBackClick() {
         dispatch('previous')
@@ -19,7 +37,10 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
-            <Text type="h2">{locale('views.setup.title')}</Text>
+            <Text type="h2" classes="mb-4">{locale('views.setup.title')}</Text>
+            <Input bind:value={profileName} placeholder="Profile Name" classes="w-full mb-4" />
+            <Radio value={true} bind:group={mainnet} label="Mainnet Account" classes="mb-4" />
+            <Radio value={false} bind:group={mainnet} label="Testnet Account" classes="mb-4" />
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center gap-4">
             <Button secondary classes="flex-auto" onClick={() => handleContinueClick('import')}>

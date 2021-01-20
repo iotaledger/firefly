@@ -13,7 +13,9 @@ import { ResponseTypes } from './typings/bridge'
 import type { Address } from './typings/address'
 import type { Message } from './typings/message'
 import type { Event, BalanceChangeEventPayload, TransactionEventPayload } from './typings/events'
-import Validator, { ErrorTypes as ValidatorErrorTypes } from './validator'
+import Validator, { ErrorTypes as ValidatorErrorTypes } from 'shared/lib/validator'
+import { generateRandomId } from 'shared/lib/utils'
+import { mnemonic, getActiveProfile } from 'shared/lib/app'
 
 const Wallet = window['__WALLET__']
 
@@ -141,17 +143,6 @@ const defaultCallbacks = {
 };
 
 /**
- * @method generateRandomId
- *
- * @returns {string}
- */
-const generateRandomId = (): string => {
-    return Array.from(crypto.getRandomValues(new Uint8Array(16)), (byte) => {
-        return ('0' + (byte & 0xff).toString(16)).slice(-2)
-    }).join('')
-}
-
-/**
  * Response subscriber.
  * Receives messages from wallet.rs.
  */
@@ -219,7 +210,8 @@ const storeCallbacks = (__id: string, type: ResponseTypes, callbacks?: Callbacks
 const Middleware = {
     get: (_target, prop) => {
         return async (...payload): Promise<void> => {
-            const actorId = generateRandomId()
+            const actorId = getActiveProfile().id;
+
             const messageId = generateRandomId();
 
             const hasPayload = payload.length
@@ -238,7 +230,7 @@ const Middleware = {
 
             const actualPayload = shouldOverrideDefaultCallbacks ? payload.slice(0, -1) : payload
 
-            await _target[prop](...actualPayload)({ actorId: '2', messageId })
+            await _target[prop](...actualPayload)({ actorId, messageId })
         }
     },
     set: () => {
@@ -247,3 +239,29 @@ const Middleware = {
 }
 
 export const api = new Proxy(Wallet.api, Middleware)
+
+export const initialise = Wallet.init;
+
+/**
+ * Generate BIP39 Mnemonic Recovery Phrase
+ */
+export const generateRecoveryPhrase = (): Promise<string[]> => new Promise((resolve, reject) => {
+    api.generateMnemonic({
+        onSuccess(response) { resolve(response.payload.split(' ')) },
+        onError(error) { reject(error) }
+    })
+})
+
+export const verifyRecoveryPhrase = (phrase): Promise<void> => new Promise((resolve, reject) => {
+    api.verifyMnemonic(phrase, {
+        onSuccess(response) {
+            resolve(response)
+        },
+        onError(error) { reject(error) }
+    })
+})
+
+export const requestMnemonic = async () => {
+    let recovPhrase = await generateRecoveryPhrase()
+    mnemonic.set(recovPhrase)
+}
