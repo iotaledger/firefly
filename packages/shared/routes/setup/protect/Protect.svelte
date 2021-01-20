@@ -4,6 +4,8 @@
     import { api } from 'shared/lib/wallet'
 
     import { Protect, Pin } from './views/'
+    import { validatePinFormat } from 'shared/lib/utils'
+
     export let locale
     export let mobile
 
@@ -50,6 +52,9 @@
                 break
             case ProtectState.Confirm:
                 try {
+                    if (!validatePinFormat(pin.toString())) {
+                        throw new Error('Invalid pin code!')
+                    }
                     await PincodeManager.set(pin.toString())
 
                     api.setStoragePassword(pin.toString(), {

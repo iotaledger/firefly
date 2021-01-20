@@ -1,18 +1,14 @@
 {
-    "app": {
-        "title": "Firefly",
-        "author": "IOTA Foundation"
-    },
     "views": {
         "onboarding_1": {
-            "title": "Send, Receive & Store your IOTA Tokens",
-            "body": "Store Tokens, Coins and Collectible Assets"
+            "title": "IOTA gönder, iste ve düzenle",
+            "body": "Firefly güvenli ve kullanımı kolay bir IOTA cüzdanıdır."
         },
         "legal": {
-            "title": "Legal",
-            "body": "Please review the IOTA wallet Privacy Policy and Terms of Service",
+            "title": "Yasal",
+            "body": "Lütfen Gizlilik Politikası ve Hizmet Şartları'nı inceleyin.",
             "privacy_policy": {
-                "title": "Privacy Policy",
+                "title": "Gizlilik Politikası",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -21,7 +17,7 @@
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "terms_of_service": {
-                "title": "Terms of Service",
+                "title": "Hizmet Şartları",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -29,164 +25,275 @@
                 "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I’ve read and I accept the Privacy policy & ToS"
+            "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
-        "settings": {
-            "title": "Language & appearance",
-            "body": "Choose your wallet’s language and theme"
+        "language": {
+            "title": "Dil & Görünüm",
+            "body": "Cüzdan dilini ve temasını seçin"
         },
         "setup": {
-            "title": "Set up a wallet"
+            "title": "Cüzdanınızı oluşturun",
+            "body": "Yeni bir cüzdan oluşturabilir veya zaten var olan cüzdanınızı ekleyebilirsiniz."
         },
         "password": {
-            "title": "Create a password for your wallet",
-            "body": "Your password needs to be highly secure to encrypt and recover your Stronghold vault. Also, you will need this to send tokens from your wallet."
+            "title": "Şifre oluşturun",
+            "body": "Cüzdanınızdaki varlıkları göndermek için parolaya ihtiyacınız vardır. Varlıklarınızın güvenliği için güçlü bir parola oluşturun."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up your login PIN or Touch ID to ensure that only you can access the app.",
+            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
             "body_2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Set up PIN code",
-            "body_1": "Enter a 6-digit PIN below. You will be asked for this frequently when you access your device.",
-            "body_2": "Use numbers only"
+            "title": "PIN kodunuzu ayarlayın",
+            "body_1": "6 haneli PIN kodunuzu aşağıya girin. Cüzdanınıza girmek için PIN koduna ihtiyacınız vardır.",
+            "body_2": "Sadece sayı kullanabilirsiniz."
         },
         "confirm_pin": {
-            "title": "Confirm the PIN code you created",
-            "body": "Confirm the PIN code you created"
+            "title": "PIN kodunuzu doğrulayın",
+            "body": "Devam etmek için PIN kodunuzu tekrar girin."
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body_1": "You will be shown a secret phrase. You will need these to restore your wallet and funds.",
-            "body_2": "Do not share this phrase with anyone. Your secret phrase can access your funds at any time from anywhere.",
-            "body_3": "If you lose this, you lose your funds."
+            "title": "Cüzdanınızı yedekleyin",
+            "body_1": "Şimdi bir kurtarma ifadesi gösterilecek.",
+            "body_2": "Bu cümleyi kimseyle paylaşmayın. Bu cümle varlıklarınıza herhangi bir yerden ulaşmak için kullanılabilir.",
+            "body_3": "Eğer kurtarma cümlenizi kaybederseniz, varlıklarınızı da kaybedersiniz."
         },
         "recovery_phrase": {
-            "title": "Recovery phrase",
-            "body_1": "Carefully copy the words in the exact order below. You can create a secondary backup on iCloud.",
-            "body_2": "Keep this private and safely stored"
+            "title": "Kurtarma cümlesi",
+            "body_1": "Carefully write down the words in the exact order.",
+            "body_2": "Kurtarma ifadenizi gizli ve güvenli bir şekilde saklayın ve kimseyle paylaşmayın."
         },
         "verify_recovery_phrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Click the words on the right in the exact order you have written them down."
+            "title": "Kurtarma ifadesini doğrulayın",
+            "body": "İfadeyi doğru yazdığınızı kontrol edelim. Doğru sıradaki kelimeleri seçin."
         },
-        "backup_recovery_phrase": {
-            "title": "Back up to a file",
-            "body": "You wallet password is also used to encrypt a Stronghold backup. Enter your wallet password to save your recovery phrase backup to a file."
+        "backup_wallet": {
+            "title": "Bir Stronghold dosyasına yedekleyin",
+            "body": "Cüzdanınızı bir Stronghold dosyasına yedeklemek için şifrenizi girin. Parolanız yedeklemeyi şifrelemek için kullanılır."
         },
         "recovery_phrase_saved": {
-            "title": "Recovery phrase",
-            "body": "Backed up to a file"
+            "title": "Başarı ile yedeklendi",
+            "body": "Cüzdanınızı Stronghold'a yedeklediniz."
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your new wallet is ready to use."
+            "title": "Tebrikler",
+            "body": "Cüzdanınız kullanıma hazır."
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have an existing seed or wallet back up, you can import it here."
+            "title": "Cüzdanı içe aktar",
+            "body": "Bir kurtarma ifadeniz veya Stronghold yedeklemeniz varsa, buradan içe aktarabilirsiniz."
         },
         "import_from_text": {
-            "title": "Type your seed or secret phrase",
-            "body_1": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
-            "body_2": "A secret phrase is a 24 word mnemonic. This is used to recover a newer FireFly wallet.",
-            "body_3": "Enter your seed or secret phrase"
+            "title": "Cüzdanınızı bir kurtarma ifadesi veya kelimesi ile geri yükleyin",
+            "body_1": "Bir kurtarma ifadesi 24 kelime uzunluktadır. Bu, mevcut bir Firefly cüzdanını kurtarmak için kullanılır.",
+            "body_2": "Bir seed 81 karakterden oluşur. Bu eski bir Trinity cüzdanından kurtarmak için kullanılır.",
+            "body_3": "Seed veya kurtarma ifadenizi girin"
         },
         "import_from_file": {
-            "title": "Restore your wallet using a backup file",
-            "body": "Upload a file to restore existing wallet funds. File backups can be either a Trinity SeedVault or a Firefly Stronghold."
+            "title": "Cüzdanınızı bir yedekleme dosyasından geri yükleyin",
+            "body": "Cüzdanınızı geri yüklemek için bir yedekleme dosyasını içe aktarın. Yedekleme dosyaları Strongghold (.stronghold) veya Trinity SeedVault (.kdbx) olabilir."
         },
         "import_backup_password": {
-            "title": "Restore your wallet using a backup file",
-            "body_1": "Please provide your backup password.",
-            "body_2": "This is the password created when you first created your backup. This stops unauthorised access to your funds."
+            "title": "Cüzdanınızı SeedVault veya Stronghold ile geri yükleyin",
+            "body_1": "Lütfen yedek şifrenizi girin.",
+            "body_2": "Bu, yedeğinizi ilk oluşturduğunuzda belirlediğiniz paroladır."
         },
         "import_success": {
-            "title_1": "You have successfully recovered your backup",
-            "body_1": "Your secret phrase is correct, you can now set up your new wallet",
-            "title_2": "You have successfully recovered your backup",
-            "body_2": "Your password is correct, you can now continue"
+            "title": "Yedeklemenizi başarıyla geri yüklediniz",
+            "body": "Artık yeni cüzdanınızı kurabilirsiniz."
         },
         "migrate": {
-            "title": "Transfer your funds",
-            "body_1": "This is an automated process to transfer your existing funds to your new wallet. In this process we will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during this process.",
-            "existing": "Existing seed",
-            "new": "Your new wallet"
+            "title": "Varlıklarınızı taşıyın",
+            "body_1": "Bu, paranızı yeni cüzdanınıza aktarmak için otomatik bir işlemdir. Güvenliğinizi zayıflatan kullanılmış adresleri kontrol edeceğiz.",
+            "body_2": "Bu biraz zaman alabilir. Taşıma sırasında cihazınızı kapatmayın.",
+            "existing": "Eski cüzdanınız",
+            "new": "Yeni cüzdanınız"
         },
         "migrate_failed": {
-            "title": "Transfer your funds",
-            "body": "Provide your wallet and Stronghold password. This is the password created when you first created your original wallet backup. This allows secure import of your recovery phrase."
+            "title": "To do",
+            "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "Bakiyeniz",
+            "body": "Bakiyeniz doğru mu?"
+        },
+        "settings": {
+            "settings": "Ayarlar",
+            "generalSettings": {
+                "title": "Genel ayarlar",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "security": {
+                "title": "Güvenlik",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "advancedSettings": {
+                "title": "Gelişmiş Ayarlar",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "helpAndInfo": {
+                "title": "Yardım ve Bilgiler",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "profileDetails": {
+                "title": "Profil Detayları",
+                "description": "Temp"
+            },
+            "theme": {
+                "title": "Tema",
+                "description": "Temp"
+            },
+            "language": {
+                "title": "Dil",
+                "description": "Temp"
+            },
+            "currency": {
+                "title": "Para Birimi",
+                "description": "Temp"
+            },
+            "notifications": {
+                "title": "Bildirimler",
+                "description": "Temp"
+            },
+            "exportStronghold": {
+                "title": "Stronghold Aktar",
+                "description": "Temp"
+            },
+            "appLock": {
+                "title": "Uygulama Kilidi",
+                "description": "Temp"
+            },
+            "changePassword": {
+                "title": "Şifre Değiştir",
+                "description": "Temp"
+            },
+            "resyncAccounts": {
+                "title": "Hesapları yeniden senkronize et",
+                "description": "Temp"
+            },
+            "resetWallet": {
+                "title": "Cüzdanı Sıfırla",
+                "description": "Temp"
+            },
+            "deepLinks": {
+                "title": "Derin Bağlantılar",
+                "description": "Temp"
+            },
+            "developerMode": {
+                "title": "Geliştirici Modu",
+                "description": "Temp"
+            },
+            "nodeSettings": {
+                "title": "Ağ ayarları",
+                "description": "Temp"
+            },
+            "proofOfWork": {
+                "title": "İş Kanıtı",
+                "description": "Temp"
+            },
+            "errorLog": {
+                "title": "Hata Geçmişi",
+                "description": "Temp"
+            },
+            "stateExport": {
+                "title": "State dışa aktarıldı",
+                "description": "Temp"
+            },
+            "troubleshoot": {
+                "title": "Sorun giderme",
+                "description": "Temp"
+            },
+            "documentation": {
+                "title": "Belgeler",
+                "description": "Temp"
+            },
+            "faq": {
+                "title": "SSS",
+                "description": "Temp"
+            },
+            "discord": {
+                "title": "Discord",
+                "description": "Temp"
+            },
+            "about": {
+                "title": "Hakkında",
+                "description": "Temp"
+            }
+        },
+        "login": {
+            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
+            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
         }
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
-        "setup_pin": "Set up PIN code",
-        "set_pin": "Set PIN code",
-        "save_backup_file": "Save backup file",
-        "verify_recovery_phrase": "Verify recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
-        "visit_discord": "Visit Discord",
-        "drag_drop": "Drag & Drop",
-        "import_extentions": ".kdbx or .stronghold file",
-        "choose_file": "Choose a File",
-        "drop_here": "Drop your file here"
+        "continue": "Devam Et",
+        "back": "Geri",
+        "import_seed": "Mevcut bir Seed'i içe aktarın",
+        "import_wallet": "Mevcut cüzdanı içe aktar",
+        "create_wallet": "Yeni cüzdan oluştur",
+        "save_password": "Parolayı kaydet",
+        "use_biometric": "Biyometrik güvenlik kullanın",
+        "setup_pin": "PIN kodunuzu ayarlayın",
+        "set_pin": "PIN kodunu ayarla",
+        "confirm_pin": "PIN kodunu onaylayın",
+        "enter_your_pin": "Enter your PIN",
+        "save_backup_file": "Yedek dosyasını kaydet",
+        "ive_written_recovery_phrase": "Kurtarma sözcüklerini not aldım",
+        "verify_recovery_phrase": "Kurtarma ifadesini doğrulayın",
+        "reveal_recovery_phrase": "Kurtarma ifadesini göster",
+        "import_seedvault": "SeedVault'u içe aktar",
+        "check_again": "Tekrar kontrol ediniz",
+        "import_from_file": "Dosyadan İçe Aktar",
+        "send": "Gönder",
+        "receive": "Al",
+        "begin_transfer": "Transfere başla",
+        "try_again": "Tekrar deneyin",
+        "visit_discord": "Discord'a uğra",
+        "drag_drop": "Sürükle & Bırak",
+        "import_extentions": ".stronghold veya .kdbx dosyası",
+        "choose_file": "Bir dosya seçin",
+        "drop_here": "Dosyanızı buraya bırakın"
     },
     "general": {
-        "password": "Password",
-        "confirm_password": "Confirm password",
-        "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
-        "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
-        "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "transfer_between_accounts": "Transfer Between Accounts",
-        "move_funds_between_accounts": "Move funds between your Accounts",
-        "account": "Account",
-        "sending_to_address": "Sending to address",
-        "amount": "Amount",
-        "add_address": "Add Address",
-        "reference": "Reference",
-        "from": "From",
-        "to": "To",
-        "receive_funds": "Receive funds",
-        "share_address": "Share an address",
-        "your_address": "Your address",
-        "generate_new_address": "Generate new address",
-        "have_text_backup": "I have a text backup",
-        "have_file_backup": "I have a file backup",
-        "enter_seed_or_phrase": "Enter an IOTA seed or secret phrase",
-        "upload_seedvault_or_stronghold": "Upload a Seedvault or Stronghold file",
-        "import": "Import",
-        "seedvault": "Seedvault",
+        "password": "Parola",
+        "confirm_password": "Parolayı doğrula",
+        "your_seed": "Seed'iniz",
+        "recovery_phrase": "Kurtarma cümlesi",
+        "recent_activity": "Son Hareketler",
+        "sent": "Gönderildi",
+        "received": "Alındı",
+        "send_funds": "Para gönderin",
+        "send_to_address": "Adrese Gönder",
+        "scan_qr_or_paste": "Bir QR kodunu tarayın veya bir Adres yapıştırın",
+        "transfer_between_accounts": "Hesaplar arasında para transferi",
+        "move_funds_between_accounts": "Hesaplarınız arasında para aktarın",
+        "account": "Hesap",
+        "sending_to_address": "Adrese gönderiliyor",
+        "amount": "Tutar",
+        "add_address": "Adres Ekle",
+        "reference": "Referans",
+        "from": "Gönderen",
+        "to": "Kime",
+        "receive_funds": "Gelen varlıklar",
+        "share_address": "Bir adres paylaşın",
+        "your_address": "Adresiniz",
+        "generate_new_address": "Yeni adres oluştur",
+        "have_text_backup": "Metin yedeğim var",
+        "have_file_backup": "Dosya yedeğim var",
+        "enter_seed_or_phrase": "Bir kurtarma ifadesi veya seed'i girin",
+        "upload_seedvault_or_stronghold": "Bir Stronghold veya SeedVault dosyasını içe aktarın",
+        "import": "İçe aktar",
+        "seedvault": "SeedVault",
         "stronghold": "Stronghold",
-        "language": "Language",
-        "appearance": "Appearance",
-        "light_theme": "Light theme",
-        "dark_theme": "Dark theme",
-        "total_balance": "Total Balance",
-        "incoming": "Incoming",
-        "outgoing": "Outgoing",
-        "accounts": "Accounts"
+        "language": "Dil",
+        "appearance": "Görünüm",
+        "light_theme": "Aydınlık tema",
+        "dark_theme": "Karanlık tema",
+        "total_balance": "Toplam Bakiye",
+        "incoming": "Gelen",
+        "outgoing": "Giden",
+        "accounts": "Hesaplar",
+        "profiles": "Profiles"
     }
 }

@@ -6,7 +6,7 @@
     import { api } from 'shared/lib/wallet'
     import { goto } from 'shared/lib/helpers'
     import { initRouter, routerNext, routerPrevious, requestMnemonic, AppRoute } from 'shared/lib/router'
-    import { Route, Toggle } from 'shared/components'
+    import { Route } from 'shared/components'
     import {
         Splash,
         Welcome,

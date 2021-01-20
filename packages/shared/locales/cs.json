@@ -1,18 +1,14 @@
 {
-    "app": {
-        "title": "Firefly",
-        "author": "IOTA Foundation"
-    },
     "views": {
         "onboarding_1": {
-            "title": "Send, Receive & Store your IOTA Tokens",
-            "body": "Store Tokens, Coins and Collectible Assets"
+            "title": "Pošli, přijmi a spravuj IOTA tokeny",
+            "body": "Firefly je bezpečná a snadno použitelná IOTA peněženka."
         },
         "legal": {
-            "title": "Legal",
-            "body": "Please review the IOTA wallet Privacy Policy and Terms of Service",
+            "title": "Právní předpisy",
+            "body": "Zkontrolujte zásady ochrany osobních údajů a podmínky služby.",
             "privacy_policy": {
-                "title": "Privacy Policy",
+                "title": "Zásady ochrany osobních údajů",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -21,7 +17,7 @@
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "terms_of_service": {
-                "title": "Terms of Service",
+                "title": "Podmínky služby",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -29,164 +25,275 @@
                 "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I’ve read and I accept the Privacy policy & ToS"
+            "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
-        "settings": {
-            "title": "Language & appearance",
-            "body": "Choose your wallet’s language and theme"
+        "language": {
+            "title": "Jazyk a vzhled",
+            "body": "Vyberte jazyk a šablonu vaší peněženky"
         },
         "setup": {
-            "title": "Set up a wallet"
+            "title": "Nastavení peněženky",
+            "body": "Můžete vytvořit novou nebo importovat existující peněženku."
         },
         "password": {
-            "title": "Create a password for your wallet",
-            "body": "Your password needs to be highly secure to encrypt and recover your Stronghold vault. Also, you will need this to send tokens from your wallet."
+            "title": "Vytvoření hesla",
+            "body": "Budete požádáni o zadání hesla, abyste mohli odesílat tokeny z vaší peněženky. Potřebujete silné heslo pro ochranu vašich prostředků."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up your login PIN or Touch ID to ensure that only you can access the app.",
+            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
             "body_2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Set up PIN code",
-            "body_1": "Enter a 6-digit PIN below. You will be asked for this frequently when you access your device.",
-            "body_2": "Use numbers only"
+            "title": "Nastavení PIN",
+            "body_1": "Zadejte 6místný kód PIN. Pro přihlášení do vaší peněženky budete požádáni o zadání PIN.",
+            "body_2": "Můžete použít pouze čísla."
         },
         "confirm_pin": {
-            "title": "Confirm the PIN code you created",
-            "body": "Confirm the PIN code you created"
+            "title": "Ověřit PIN kód",
+            "body": "Pro pokračování zadejte PIN kód."
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body_1": "You will be shown a secret phrase. You will need these to restore your wallet and funds.",
-            "body_2": "Do not share this phrase with anyone. Your secret phrase can access your funds at any time from anywhere.",
-            "body_3": "If you lose this, you lose your funds."
+            "title": "Zálohovat peněženku",
+            "body_1": "Nyní vám bude zobrazena obnovovací fráze.",
+            "body_2": "Nesdílejte tuto frázi s nikým. Obnovovací fráze slouží pro přístup k vašim tokenům odkudkoliv.",
+            "body_3": "Pokud ztratíte vaši obnovovací frázi, můžete přijít o tokeny."
         },
         "recovery_phrase": {
-            "title": "Recovery phrase",
-            "body_1": "Carefully copy the words in the exact order below. You can create a secondary backup on iCloud.",
-            "body_2": "Keep this private and safely stored"
+            "title": "Fráze pro obnovení",
+            "body_1": "Pečlivě si zapište slova v tomto pořadí.",
+            "body_2": "Zachovejte klíčová slova v soukromém a bezpečném úložišti. Nesdílejte je s nikým."
         },
         "verify_recovery_phrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Click the words on the right in the exact order you have written them down."
+            "title": "Ověřte obnovovací frázi",
+            "body": "Zkontrolujme, zda jste správně zapsali frázi. Vyberte slova ve správném pořadí."
         },
-        "backup_recovery_phrase": {
-            "title": "Back up to a file",
-            "body": "You wallet password is also used to encrypt a Stronghold backup. Enter your wallet password to save your recovery phrase backup to a file."
+        "backup_wallet": {
+            "title": "Zálohujte jako Stronghold soubor",
+            "body": "Zadejte heslo pro zálohování peněženky jako Stronghold soubor. Vaše heslo bude použito k zašifrování zálohy."
         },
         "recovery_phrase_saved": {
-            "title": "Recovery phrase",
-            "body": "Backed up to a file"
+            "title": "Úspěšně zálohováno",
+            "body": "Zálohovali jste peněženku jako Stronghold soubor."
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your new wallet is ready to use."
+            "title": "Blahopřejeme",
+            "body": "Vaše peněženka je připravena k použití."
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have an existing seed or wallet back up, you can import it here."
+            "title": "Importovat peněženku",
+            "body": "Pokud máte obnovovací frázi nebo záložní soubor typu Stronghold, můžete je použít zde."
         },
         "import_from_text": {
-            "title": "Type your seed or secret phrase",
-            "body_1": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
-            "body_2": "A secret phrase is a 24 word mnemonic. This is used to recover a newer FireFly wallet.",
-            "body_3": "Enter your seed or secret phrase"
+            "title": "Obnovte vaši peněženku s obnovovací frází nebo přes seed",
+            "body_1": "Obnovovací fráze má 24 slov. Používá se k obnově stávající Firefly peněženky.",
+            "body_2": "Seed obsahuje 81 znaků. Používá se k obnovení ze starší peněženky Trinity.",
+            "body_3": "Zadejte váš seed nebo obnovovací frázi"
         },
         "import_from_file": {
-            "title": "Restore your wallet using a backup file",
-            "body": "Upload a file to restore existing wallet funds. File backups can be either a Trinity SeedVault or a Firefly Stronghold."
+            "title": "Obnovit peněženku ze zálohy",
+            "body": "Importujte zálohu pro obnovení vaší peněženky. Zálohy jsou soubory typu Stronghold (.stronghold) nebo Trinity SeedVault (.kdbx)."
         },
         "import_backup_password": {
-            "title": "Restore your wallet using a backup file",
-            "body_1": "Please provide your backup password.",
-            "body_2": "This is the password created when you first created your backup. This stops unauthorised access to your funds."
+            "title": "Obnovte vaši peněženku ze SeedVault nebo Stronghold",
+            "body_1": "Prosím zadejte vaše záložní heslo.",
+            "body_2": "Toto je heslo, které jste nastavili při prvním vytvoření zálohy."
         },
         "import_success": {
-            "title_1": "You have successfully recovered your backup",
-            "body_1": "Your secret phrase is correct, you can now set up your new wallet",
-            "title_2": "You have successfully recovered your backup",
-            "body_2": "Your password is correct, you can now continue"
+            "title": "Úspěšně jste obnovili váš účet pomocí zálohy",
+            "body": "Nyní můžete nastavit novou peněženku."
         },
         "migrate": {
-            "title": "Transfer your funds",
-            "body_1": "This is an automated process to transfer your existing funds to your new wallet. In this process we will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during this process.",
-            "existing": "Existing seed",
-            "new": "Your new wallet"
+            "title": "Migrujte vaše tokeny",
+            "body_1": "Toto je automatický proces pro převod vašich tokenů do nové peněženky. Odesílání ze souvisejících adres může oslabit zabezpečení, proto adresy zkontrolujeme.",
+            "body_2": "Toto může nějakou dobu trvat. Během migrace nevypínejte zařízení.",
+            "existing": "Vaše předchozí peněženka",
+            "new": "Vaše nová peněženka"
         },
         "migrate_failed": {
-            "title": "Transfer your funds",
-            "body": "Provide your wallet and Stronghold password. This is the password created when you first created your original wallet backup. This allows secure import of your recovery phrase."
+            "title": "To do",
+            "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "Váš zůstatek",
+            "body": "Je váš zůstatek v pořádku?"
+        },
+        "settings": {
+            "settings": "Nastavení",
+            "generalSettings": {
+                "title": "Obecné nastavení",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "security": {
+                "title": "Zabezpečení",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "advancedSettings": {
+                "title": "Pokročilé nastavení",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "helpAndInfo": {
+                "title": "Nápověda",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "profileDetails": {
+                "title": "Podrobnosti profilu",
+                "description": "Temp"
+            },
+            "theme": {
+                "title": "Motiv",
+                "description": "Temp"
+            },
+            "language": {
+                "title": "Jazyk",
+                "description": "Temp"
+            },
+            "currency": {
+                "title": "Měna",
+                "description": "Temp"
+            },
+            "notifications": {
+                "title": "Oznámení",
+                "description": "Temp"
+            },
+            "exportStronghold": {
+                "title": "Exportovat Stronghold",
+                "description": "Temp"
+            },
+            "appLock": {
+                "title": "Zámek aplikace",
+                "description": "Temp"
+            },
+            "changePassword": {
+                "title": "Změnit heslo",
+                "description": "Temp"
+            },
+            "resyncAccounts": {
+                "title": "Znovu synchronizovat účty",
+                "description": "Temp"
+            },
+            "resetWallet": {
+                "title": "Resetovat peněženku",
+                "description": "Temp"
+            },
+            "deepLinks": {
+                "title": "Hluboké odkazy",
+                "description": "Temp"
+            },
+            "developerMode": {
+                "title": "Vývojářský režim",
+                "description": "Temp"
+            },
+            "nodeSettings": {
+                "title": "Nastavení Node",
+                "description": "Temp"
+            },
+            "proofOfWork": {
+                "title": "Proof of Work",
+                "description": "Temp"
+            },
+            "errorLog": {
+                "title": "Záznam chyb",
+                "description": "Temp"
+            },
+            "stateExport": {
+                "title": "Export stavu",
+                "description": "Temp"
+            },
+            "troubleshoot": {
+                "title": "Řešení problémů",
+                "description": "Temp"
+            },
+            "documentation": {
+                "title": "Dokumentace",
+                "description": "Temp"
+            },
+            "faq": {
+                "title": "Časté dotazy",
+                "description": "Temp"
+            },
+            "discord": {
+                "title": "Discord",
+                "description": "Temp"
+            },
+            "about": {
+                "title": "O aplikaci",
+                "description": "Temp"
+            }
+        },
+        "login": {
+            "please_wait": "Počkejte prosím {time, plural, one {1 vteřinu} other {# vteřin}}",
+            "incorrect_attempts": "{attempts, plural, one {1 nesprávný pokus} other {# nesprávné pokusy}}"
         }
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
-        "setup_pin": "Set up PIN code",
-        "set_pin": "Set PIN code",
-        "save_backup_file": "Save backup file",
-        "verify_recovery_phrase": "Verify recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
-        "visit_discord": "Visit Discord",
-        "drag_drop": "Drag & Drop",
-        "import_extentions": ".kdbx or .stronghold file",
-        "choose_file": "Choose a File",
-        "drop_here": "Drop your file here"
+        "continue": "Pokračovat",
+        "back": "Zpět",
+        "import_seed": "Importovat existující seed",
+        "import_wallet": "Importovat existující peněženku",
+        "create_wallet": "Vytvořit novou peněženku",
+        "save_password": "Uložit heslo",
+        "use_biometric": "Použít biometrické zabezpečení",
+        "setup_pin": "Nastavení PIN",
+        "set_pin": "Nastavte PIN",
+        "confirm_pin": "Potvrďte PIN",
+        "enter_your_pin": "Zadejta svůj PIN",
+        "save_backup_file": "Uložte zálohu",
+        "ive_written_recovery_phrase": "Zapsal jsem si frázi pro obnovení",
+        "verify_recovery_phrase": "Ověřte obnovovací frázi",
+        "reveal_recovery_phrase": "Zobrazit obnovovací frázi",
+        "import_seedvault": "Importovat SeedVault",
+        "check_again": "Ne, zkontrolujte znovu",
+        "import_from_file": "Importovat ze souboru",
+        "send": "Odeslat",
+        "receive": "Přijmout",
+        "begin_transfer": "Zahájit přenos",
+        "try_again": "Zkuste to znovu",
+        "visit_discord": "Navštivte Discord",
+        "drag_drop": "Přetáhněte",
+        "import_extentions": ".stronghold nebo .kdbx soubor",
+        "choose_file": "Vyberte soubor",
+        "drop_here": "Přesuňte soubor sem"
     },
     "general": {
-        "password": "Password",
-        "confirm_password": "Confirm password",
-        "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
-        "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
-        "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "transfer_between_accounts": "Transfer Between Accounts",
-        "move_funds_between_accounts": "Move funds between your Accounts",
-        "account": "Account",
-        "sending_to_address": "Sending to address",
-        "amount": "Amount",
-        "add_address": "Add Address",
-        "reference": "Reference",
-        "from": "From",
-        "to": "To",
-        "receive_funds": "Receive funds",
-        "share_address": "Share an address",
-        "your_address": "Your address",
-        "generate_new_address": "Generate new address",
-        "have_text_backup": "I have a text backup",
-        "have_file_backup": "I have a file backup",
-        "enter_seed_or_phrase": "Enter an IOTA seed or secret phrase",
-        "upload_seedvault_or_stronghold": "Upload a Seedvault or Stronghold file",
-        "import": "Import",
-        "seedvault": "Seedvault",
+        "password": "Heslo",
+        "confirm_password": "Potvrďte heslo",
+        "your_seed": "Váš seed",
+        "recovery_phrase": "Fráze pro obnovení",
+        "recent_activity": "Nedávná aktivita",
+        "sent": "Odesláno",
+        "received": "Přijato",
+        "send_funds": "Poslat tokeny",
+        "send_to_address": "Poslat na adresu",
+        "scan_qr_or_paste": "Naskenujte QR kód nebo vložte adresu",
+        "transfer_between_accounts": "Převod mezi účty",
+        "move_funds_between_accounts": "Převod mezi vašimi účty",
+        "account": "Účet",
+        "sending_to_address": "Odeslání na adresu",
+        "amount": "Částka",
+        "add_address": "Přidat adresu",
+        "reference": "Odkazy",
+        "from": "Odkud",
+        "to": "Komu",
+        "receive_funds": "Přijmout tokeny",
+        "share_address": "Sdílet adresu",
+        "your_address": "Vaše adresa",
+        "generate_new_address": "Vytvořit novou adresu",
+        "have_text_backup": "Mám textovou zálohu",
+        "have_file_backup": "Mám zálovací soubor",
+        "enter_seed_or_phrase": "Zadejte obnovovací frázi nebo seed",
+        "upload_seedvault_or_stronghold": "Importovat soubor typu Stronghold nebo SeedVault",
+        "import": "Importovat",
+        "seedvault": "SeedVault",
         "stronghold": "Stronghold",
-        "language": "Language",
-        "appearance": "Appearance",
-        "light_theme": "Light theme",
-        "dark_theme": "Dark theme",
-        "total_balance": "Total Balance",
-        "incoming": "Incoming",
-        "outgoing": "Outgoing",
-        "accounts": "Accounts"
+        "language": "Jazyk",
+        "appearance": "Vzhled",
+        "light_theme": "Světlé téma",
+        "dark_theme": "Tmavé téma",
+        "total_balance": "Celkový zůstatek",
+        "incoming": "Příchozí",
+        "outgoing": "Odchozí",
+        "accounts": "Účty",
+        "profiles": "Profily"
     }
 }

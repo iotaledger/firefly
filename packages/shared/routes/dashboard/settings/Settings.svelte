@@ -1,21 +1,18 @@
 <script lang="typescript">
-    import { SettingsHome } from './views'
+    import { setContext } from 'svelte';
+    import { writable } from 'svelte/store';
+    import { SettingsHome, SettingsViewer } from './views'
     export let locale
     export let mobile
-
-    enum SettingsState {
-        Init = 'init',
-        GeneralSettings = 'generalSettings',
-        Security = 'security',
-        Advanced = 'advancedSettings',
-        HelpAndInfo = 'helpAndInfo',
-    }
-
-    let state: SettingsState = SettingsState.Init
+    
+    const route = writable(undefined)
+    setContext('route', route)
 </script>
 
-<div class="border-l-1 border-gray-100 w-full h-full p-10 flex gap-4 bg-white">
-    {#if state === SettingsState.Init}
-        <SettingsHome {locale} />
+<div class="w-full h-full px-16 py-12 flex flex-1 bg-white">
+    {#if $route}
+        <SettingsViewer mobile={mobile} locale={locale} />
+    {:else}
+        <SettingsHome mobile={mobile} locale={locale} />
     {/if}
 </div>

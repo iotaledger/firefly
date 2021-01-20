@@ -1,18 +1,14 @@
 {
-    "app": {
-        "title": "Firefly",
-        "author": "IOTA Foundation"
-    },
     "views": {
         "onboarding_1": {
-            "title": "Send, Receive & Store your IOTA Tokens",
-            "body": "Store Tokens, Coins and Collectible Assets"
+            "title": "Отправляйте, получайте и управляйте вашей IOTA",
+            "body": "Firefly - это безопасный и легкий в использовании кошелек IOTA."
         },
         "legal": {
-            "title": "Legal",
-            "body": "Please review the IOTA wallet Privacy Policy and Terms of Service",
+            "title": "Правила",
+            "body": "Пожалуйста, ознакомьтесь с Политикой конфиденциальности и Условиями обслуживания.",
             "privacy_policy": {
-                "title": "Privacy Policy",
+                "title": "Политика конфиденциальности",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -21,7 +17,7 @@
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "terms_of_service": {
-                "title": "Terms of Service",
+                "title": "Условия обслуживания",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -29,164 +25,275 @@
                 "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I’ve read and I accept the Privacy policy & ToS"
+            "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
-        "settings": {
-            "title": "Language & appearance",
-            "body": "Choose your wallet’s language and theme"
+        "language": {
+            "title": "Язык и оформление",
+            "body": "Выберите язык и внешний вид вашего кошелька"
         },
         "setup": {
-            "title": "Set up a wallet"
+            "title": "Настройте ваш кошелек",
+            "body": "Вы можете создать новый кошелек или импортировать существующий."
         },
         "password": {
-            "title": "Create a password for your wallet",
-            "body": "Your password needs to be highly secure to encrypt and recover your Stronghold vault. Also, you will need this to send tokens from your wallet."
+            "title": "Придумайте пароль",
+            "body": "Вам будет предложено ввести пароль для отправки токенов. Вам нужен надежный пароль, чтобы защитить ваши средства."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up your login PIN or Touch ID to ensure that only you can access the app.",
+            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
             "body_2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Set up PIN code",
-            "body_1": "Enter a 6-digit PIN below. You will be asked for this frequently when you access your device.",
-            "body_2": "Use numbers only"
+            "title": "Задайте PIN-код",
+            "body_1": "Введите 6-значный PIN-код ниже. Вам будет необходимо ввести PIN-код для входа в ваш кошелек.",
+            "body_2": "Вы можете использовать только цифры."
         },
         "confirm_pin": {
-            "title": "Confirm the PIN code you created",
-            "body": "Confirm the PIN code you created"
+            "title": "Подтвердите PIN-код",
+            "body": "Повторно введите PIN-код для продолжения."
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body_1": "You will be shown a secret phrase. You will need these to restore your wallet and funds.",
-            "body_2": "Do not share this phrase with anyone. Your secret phrase can access your funds at any time from anywhere.",
-            "body_3": "If you lose this, you lose your funds."
+            "title": "Сделайте резервную копию вашего кошелька",
+            "body_1": "Сейчас вам будет показана фраза восстановления.",
+            "body_2": "Не передавайте эту фразу никому. Ваша фраза восстановления может быть использована для доступа к токенам отовсюду.",
+            "body_3": "Если вы потеряете фразу восстановления, вы можете потерять свои средства."
         },
         "recovery_phrase": {
-            "title": "Recovery phrase",
-            "body_1": "Carefully copy the words in the exact order below. You can create a secondary backup on iCloud.",
-            "body_2": "Keep this private and safely stored"
+            "title": "Фраза восстановления",
+            "body_1": "Внимательно запишите слова в точном порядке.",
+            "body_2": "Держите вашу фразу восстановления в недоступном для других, безопасном месте. Не передавайте ее никому."
         },
         "verify_recovery_phrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Click the words on the right in the exact order you have written them down."
+            "title": "Проверьте фразу восстановления",
+            "body": "Давайте проверим, что вы записали фразу правильно. Выберите слова в правильном порядке."
         },
-        "backup_recovery_phrase": {
-            "title": "Back up to a file",
-            "body": "You wallet password is also used to encrypt a Stronghold backup. Enter your wallet password to save your recovery phrase backup to a file."
+        "backup_wallet": {
+            "title": "Сделайте резервную копию в файл Stronghold",
+            "body": "Введите пароль чтобы сделать резервную копию кошелька на файл Stronghold. Ваш пароль используется для шифрования резервной копии."
         },
         "recovery_phrase_saved": {
-            "title": "Recovery phrase",
-            "body": "Backed up to a file"
+            "title": "Резервная копия сделано успешно",
+            "body": "Вы сделали резервную копию вашего кошелька на Stronghold."
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your new wallet is ready to use."
+            "title": "Поздравляем",
+            "body": "Ваш кошелек готов к использованию."
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have an existing seed or wallet back up, you can import it here."
+            "title": "Импортировать кошелёк",
+            "body": "Если у вас есть фраза восстановления или резервная копия, вы можете импортировать его здесь."
         },
         "import_from_text": {
-            "title": "Type your seed or secret phrase",
-            "body_1": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
-            "body_2": "A secret phrase is a 24 word mnemonic. This is used to recover a newer FireFly wallet.",
-            "body_3": "Enter your seed or secret phrase"
+            "title": "Восстановить кошелек с фразой восстановления или мнемоникой",
+            "body_1": "Фраза восстановления состоит из 24 слова. Она используется для восстановления существующего кошелька Firefly.",
+            "body_2": "Мнемоника состоит из 81 символа. Оно используется для восстановления из старого кошелька Trinity.",
+            "body_3": "Введите вашу фразу восстановления или мнемонику"
         },
         "import_from_file": {
-            "title": "Restore your wallet using a backup file",
-            "body": "Upload a file to restore existing wallet funds. File backups can be either a Trinity SeedVault or a Firefly Stronghold."
+            "title": "Восстановить кошелёк из файла резервной копии",
+            "body": "Импортируйте файл резервной копии для восстановления вашего кошелька. Резервные копии могут быть Stronghold (.stronghold) или Trinity SeedVault (.kdbx)."
         },
         "import_backup_password": {
-            "title": "Restore your wallet using a backup file",
-            "body_1": "Please provide your backup password.",
-            "body_2": "This is the password created when you first created your backup. This stops unauthorised access to your funds."
+            "title": "Восстановить кошелёк из SeedVault или Stronghold",
+            "body_1": "Пожалуйста, введите ваш пароль от резервной копии.",
+            "body_2": "Это пароль, который вы установили при первом создании резервной копии."
         },
         "import_success": {
-            "title_1": "You have successfully recovered your backup",
-            "body_1": "Your secret phrase is correct, you can now set up your new wallet",
-            "title_2": "You have successfully recovered your backup",
-            "body_2": "Your password is correct, you can now continue"
+            "title": "Вы успешно восстановили вашу резервную копию",
+            "body": "Теперь вы можете настроить ваш новый кошелёк."
         },
         "migrate": {
-            "title": "Transfer your funds",
-            "body_1": "This is an automated process to transfer your existing funds to your new wallet. In this process we will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during this process.",
-            "existing": "Existing seed",
-            "new": "Your new wallet"
+            "title": "Мигрируйте свои средства",
+            "body_1": "Это автоматизированный процесс перемищение ваших средств на новый кошелёк. Мы проверим потраченные адреса, которые ослабляют вашу безопасность.",
+            "body_2": "Это может занять некоторое время. Не выключайте устройство во время миграции.",
+            "existing": "Ваш старый кошелёк",
+            "new": "Ваш новый кошелёк"
         },
         "migrate_failed": {
-            "title": "Transfer your funds",
-            "body": "Provide your wallet and Stronghold password. This is the password created when you first created your original wallet backup. This allows secure import of your recovery phrase."
+            "title": "To do",
+            "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "Ваш баланс",
+            "body": "Верен ли ваш баланс?"
+        },
+        "settings": {
+            "settings": "Настройки",
+            "generalSettings": {
+                "title": "Общие настройки",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "security": {
+                "title": "Настройки Безопасности",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "advancedSettings": {
+                "title": "Дополнительные Настройки",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "helpAndInfo": {
+                "title": "Помощь и Информация",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "profileDetails": {
+                "title": "Данные Профиля",
+                "description": "Temp"
+            },
+            "theme": {
+                "title": "Внешний Вид",
+                "description": "Temp"
+            },
+            "language": {
+                "title": "Язык",
+                "description": "Temp"
+            },
+            "currency": {
+                "title": "Валюта",
+                "description": "Temp"
+            },
+            "notifications": {
+                "title": "Оповещения",
+                "description": "Temp"
+            },
+            "exportStronghold": {
+                "title": "Экспортировать Stronghold",
+                "description": "Temp"
+            },
+            "appLock": {
+                "title": "Блокировка Приложения",
+                "description": "Temp"
+            },
+            "changePassword": {
+                "title": "Изменить пароль",
+                "description": "Temp"
+            },
+            "resyncAccounts": {
+                "title": "Повторная Синхронизация Аккаунтов",
+                "description": "Temp"
+            },
+            "resetWallet": {
+                "title": "Сбросить кошелёк",
+                "description": "Temp"
+            },
+            "deepLinks": {
+                "title": "Глубинное Связывание",
+                "description": "Temp"
+            },
+            "developerMode": {
+                "title": "Режим Разработчика",
+                "description": "Temp"
+            },
+            "nodeSettings": {
+                "title": "Настройки Node",
+                "description": "Temp"
+            },
+            "proofOfWork": {
+                "title": "Доказательство Работы",
+                "description": "Temp"
+            },
+            "errorLog": {
+                "title": "Журнал ошибок",
+                "description": "Temp"
+            },
+            "stateExport": {
+                "title": "Экспортировать Состояние Кошелька",
+                "description": "Temp"
+            },
+            "troubleshoot": {
+                "title": "Диагностика",
+                "description": "Temp"
+            },
+            "documentation": {
+                "title": "Документация",
+                "description": "Temp"
+            },
+            "faq": {
+                "title": "ЧАВО",
+                "description": "Temp"
+            },
+            "discord": {
+                "title": "Discord",
+                "description": "Temp"
+            },
+            "about": {
+                "title": "О приложение",
+                "description": "Temp"
+            }
+        },
+        "login": {
+            "please_wait": "Пожалуйста подождите {time, plural, one {1 секунду} few {# секунды} other {# секунд}}",
+            "incorrect_attempts": "{attempts, plural, one {1 неправильная попытка} other {# неправильные попытки}}"
         }
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
-        "setup_pin": "Set up PIN code",
-        "set_pin": "Set PIN code",
-        "save_backup_file": "Save backup file",
-        "verify_recovery_phrase": "Verify recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
-        "visit_discord": "Visit Discord",
-        "drag_drop": "Drag & Drop",
-        "import_extentions": ".kdbx or .stronghold file",
-        "choose_file": "Choose a File",
-        "drop_here": "Drop your file here"
+        "continue": "Продолжить",
+        "back": "Назад",
+        "import_seed": "Импортировать существующую мнемонику",
+        "import_wallet": "Импортировать существующий кошелек",
+        "create_wallet": "Создать новый кошелек",
+        "save_password": "Сохранить пароль",
+        "use_biometric": "Использовать биометрическую защиту",
+        "setup_pin": "Задайте PIN-код",
+        "set_pin": "Задать PIN-код",
+        "confirm_pin": "Подтвердите PIN-код",
+        "enter_your_pin": "Введите ваш PIN",
+        "save_backup_file": "Сохранить файл резервной копии",
+        "ive_written_recovery_phrase": "Я записал фразу восстановления",
+        "verify_recovery_phrase": "Проверьте фразу восстановления",
+        "reveal_recovery_phrase": "Показать фразу восстановлению",
+        "import_seedvault": "Импортировать SeedVault",
+        "check_again": "Нет, проверьте снова",
+        "import_from_file": "Импортировать из файла",
+        "send": "Отправить",
+        "receive": "Получить",
+        "begin_transfer": "Начать Перемещение",
+        "try_again": "Попрoбуйте снова",
+        "visit_discord": "Посетить Discord",
+        "drag_drop": "Перетащить",
+        "import_extentions": ".stronghold или .kdbx файл",
+        "choose_file": "Выберите файл",
+        "drop_here": "Перенесите файл сюда"
     },
     "general": {
-        "password": "Password",
-        "confirm_password": "Confirm password",
-        "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
-        "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
-        "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "transfer_between_accounts": "Transfer Between Accounts",
-        "move_funds_between_accounts": "Move funds between your Accounts",
-        "account": "Account",
-        "sending_to_address": "Sending to address",
-        "amount": "Amount",
-        "add_address": "Add Address",
-        "reference": "Reference",
-        "from": "From",
-        "to": "To",
-        "receive_funds": "Receive funds",
-        "share_address": "Share an address",
-        "your_address": "Your address",
-        "generate_new_address": "Generate new address",
-        "have_text_backup": "I have a text backup",
-        "have_file_backup": "I have a file backup",
-        "enter_seed_or_phrase": "Enter an IOTA seed or secret phrase",
-        "upload_seedvault_or_stronghold": "Upload a Seedvault or Stronghold file",
-        "import": "Import",
-        "seedvault": "Seedvault",
+        "password": "Пароль",
+        "confirm_password": "Подтвердите пароль",
+        "your_seed": "Ваша Мнемоника",
+        "recovery_phrase": "Фраза Восстановления",
+        "recent_activity": "Последние действия",
+        "sent": "Отправлено",
+        "received": "Получено",
+        "send_funds": "Отправить средства",
+        "send_to_address": "Отправить на адрес",
+        "scan_qr_or_paste": "Сканировать QR-код или вставить Адрес",
+        "transfer_between_accounts": "Перемещайте между вашими Aккаунтами",
+        "move_funds_between_accounts": "Перемещайте средств между вашими Aккаунтами",
+        "account": "Аккаунт",
+        "sending_to_address": "Отправляется на адрес",
+        "amount": "Сумма",
+        "add_address": "Добавить Адрес",
+        "reference": "Ссылка",
+        "from": "От",
+        "to": "К",
+        "receive_funds": "Получить средства",
+        "share_address": "Поделиться адресом",
+        "your_address": "Ваш адрес",
+        "generate_new_address": "Создать новый адрес",
+        "have_text_backup": "У меня есть резервная копия текста",
+        "have_file_backup": "У меня есть резервная копия файла",
+        "enter_seed_or_phrase": "Введите фразу восстановлении или мнемонику",
+        "upload_seedvault_or_stronghold": "Импорт файла Stronghold или SeedVault",
+        "import": "Импорт",
+        "seedvault": "SeedVault",
         "stronghold": "Stronghold",
-        "language": "Language",
-        "appearance": "Appearance",
-        "light_theme": "Light theme",
-        "dark_theme": "Dark theme",
-        "total_balance": "Total Balance",
-        "incoming": "Incoming",
-        "outgoing": "Outgoing",
-        "accounts": "Accounts"
+        "language": "Язык",
+        "appearance": "Внешний вид",
+        "light_theme": "Светлая тема",
+        "dark_theme": "Тёмная тема",
+        "total_balance": "Общий баланс",
+        "incoming": "Входящие",
+        "outgoing": "Исходящие",
+        "accounts": "Аккаунты",
+        "profiles": "Профили"
     }
 }

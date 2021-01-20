@@ -83,8 +83,8 @@ const callbacksStore: CallbacksStore = {}
  */
 const defaultCallbacks = {
     StrongholdPasswordSet: {
-        onSuccess: (response: SetStrongholdPasswordResponse): void => {},
-        onError: (error: ErrorResponse): void => {},
+        onSuccess: (response: SetStrongholdPasswordResponse): void => { },
+        onError: (error: ErrorResponse): void => { },
     },
     CreatedAccount: {
         onSuccess: (response: CreatedAccountResponse): void => {
@@ -94,19 +94,19 @@ const defaultCallbacks = {
                 })
             )
         },
-        onError: (error: ErrorResponse): void => {},
+        onError: (error: ErrorResponse): void => { },
     },
     ReadAccounts: {
-        onSuccess: (response: ReadAccountsResponse): void => {},
-        onError: (error: ErrorResponse): void => {},
+        onSuccess: (response: ReadAccountsResponse): void => { },
+        onError: (error: ErrorResponse): void => { },
     },
     LatestAddress: {
-        onSuccess: (response: LatestAddressResponse): void => {},
-        onError: (error: ErrorResponse): void => {},
+        onSuccess: (response: LatestAddressResponse): void => { },
+        onError: (error: ErrorResponse): void => { },
     },
     TotalBalance: {
-        onSuccess: (response: TotalBalanceResponse): void => {},
-        onError: (error: ErrorResponse): void => {},
+        onSuccess: (response: TotalBalanceResponse): void => { },
+        onError: (error: ErrorResponse): void => { },
     },
     SyncedAccounts: {
         onSuccess: (response: SyncAccountsResponse): void => {
@@ -121,7 +121,7 @@ const defaultCallbacks = {
                 return _wallet
             })
         },
-        onError: (error: ErrorResponse): void => {},
+        onError: (error: ErrorResponse): void => { },
     },
     BalanceChange: {
         onSuccess: (response: Event<BalanceChangeEventPayload>): void => {
@@ -155,7 +155,7 @@ const generateRandomId = (): string => {
  * Response subscriber.
  * Receives messages from wallet.rs.
  */
-Wallet.onMessage((message: MessageResponse) => {   
+Wallet.onMessage((message: MessageResponse) => {
     const _deleteCallbackId = (_id: string) => {
         const isEventMessage = [
             ResponseTypes.ErrorThrown,
@@ -171,7 +171,7 @@ Wallet.onMessage((message: MessageResponse) => {
         }
     }
 
-    const { isValid, error }  = new Validator(Object.keys(callbacksStore)).performValidation(message);
+    const { isValid, error } = new Validator(Object.keys(callbacksStore)).performValidation(message);
 
     if (!isValid) {
         if (error.type !== ValidatorErrorTypes.UnknownId) {
@@ -219,7 +219,8 @@ const storeCallbacks = (__id: string, type: ResponseTypes, callbacks?: Callbacks
 const Middleware = {
     get: (_target, prop) => {
         return async (...payload): Promise<void> => {
-            const __id = generateRandomId()
+            const actorId = generateRandomId()
+            const messageId = generateRandomId();
 
             const hasPayload = payload.length
 
@@ -233,11 +234,11 @@ const Middleware = {
                     typeof lastArgument === 'object' && 'onSuccess' in lastArgument && 'onError' in lastArgument
             }
 
-            storeCallbacks(__id, apiToResponseTypeMap[prop], shouldOverrideDefaultCallbacks ? lastArgument : undefined)
+            storeCallbacks(messageId, apiToResponseTypeMap[prop], shouldOverrideDefaultCallbacks ? lastArgument : undefined)
 
             const actualPayload = shouldOverrideDefaultCallbacks ? payload.slice(0, -1) : payload
 
-            await _target[prop](...actualPayload)(__id)
+            await _target[prop](...actualPayload)({ actorId: '2', messageId })
         }
     },
     set: () => {

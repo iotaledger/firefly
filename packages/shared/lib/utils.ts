@@ -40,7 +40,6 @@ export const validateSeed = (seed) => {
 /**
  * Validate recovery phrase format
  */
-
 export const validateRecoveryPhrase = (phrase) => {
     const RECOVERY_PHRASE_LENGTH = 24
     const REGEX = /^[a-zA-Z ]*$/
@@ -55,3 +54,11 @@ export const verifyRecoveryPhrase = (phrase): Promise<void> => new Promise((reso
         onError(error) { reject(error) }
     })
 })
+
+/**
+ * Validate pincode format
+ */
+export const validatePinFormat = (pincode: string) => {
+    const REGEX = /^\d{6}$/
+    return REGEX.test(pincode)
+}

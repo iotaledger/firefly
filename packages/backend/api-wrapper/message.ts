@@ -1,4 +1,4 @@
-import type { Bridge } from './bridge'
+import type { Bridge, CommunicationIds } from './bridge'
 import type { AccountIdentifier } from './account'
 
 export interface UnsignedTransaction {
@@ -58,9 +58,10 @@ export interface Transfer {
   address: string
 }
 
-export function reattach(bridge: Bridge, __id: string, accountId: AccountIdentifier, messageId: string) {
+export function reattach(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier, messageId: string) {
   return bridge({
-    id: __id,
+    actorId: __ids.actorId,
+    id: __ids.messageId,
     cmd: 'Reattach',
     payload: {
       accountId,

@@ -1,18 +1,14 @@
 {
-    "app": {
-        "title": "Firefly",
-        "author": "IOTA Foundation"
-    },
     "views": {
         "onboarding_1": {
-            "title": "Send, Receive & Store your IOTA Tokens",
-            "body": "Store Tokens, Coins and Collectible Assets"
+            "title": "发送、接收和管理您的 IOTA",
+            "body": "Firefly是一款安全且易用的IOTA钱包。"
         },
         "legal": {
-            "title": "Legal",
-            "body": "Please review the IOTA wallet Privacy Policy and Terms of Service",
+            "title": "法律条款",
+            "body": "请查看隐私政策和服务条款。",
             "privacy_policy": {
-                "title": "Privacy Policy",
+                "title": "隐私政策",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -21,7 +17,7 @@
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "terms_of_service": {
-                "title": "Terms of Service",
+                "title": "服务条款",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -29,164 +25,275 @@
                 "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I’ve read and I accept the Privacy policy & ToS"
+            "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
-        "settings": {
-            "title": "Language & appearance",
-            "body": "Choose your wallet’s language and theme"
+        "language": {
+            "title": "语言和外观",
+            "body": "选择您的钱包的语言和主题"
         },
         "setup": {
-            "title": "Set up a wallet"
+            "title": "设置您的钱包",
+            "body": "您可以创建一个新钱包或导入一个已有的钱包。"
         },
         "password": {
-            "title": "Create a password for your wallet",
-            "body": "Your password needs to be highly secure to encrypt and recover your Stronghold vault. Also, you will need this to send tokens from your wallet."
+            "title": "设置密码",
+            "body": "在发送代币时，您需要输入密码。为了保护您的资金，请使用足够复杂的密码。"
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up your login PIN or Touch ID to ensure that only you can access the app.",
+            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
             "body_2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Set up PIN code",
-            "body_1": "Enter a 6-digit PIN below. You will be asked for this frequently when you access your device.",
-            "body_2": "Use numbers only"
+            "title": "设置PIN码",
+            "body_1": "请在下方输入 6 位数字的 PIN。您在登录钱包时需要输入 PIN。",
+            "body_2": "您只能使用数字。"
         },
         "confirm_pin": {
-            "title": "Confirm the PIN code you created",
-            "body": "Confirm the PIN code you created"
+            "title": "请验证您的 PIN",
+            "body": "请重新输入您的 PIN 码来继续后面的操作。"
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body_1": "You will be shown a secret phrase. You will need these to restore your wallet and funds.",
-            "body_2": "Do not share this phrase with anyone. Your secret phrase can access your funds at any time from anywhere.",
-            "body_3": "If you lose this, you lose your funds."
+            "title": "请备份您的钱包",
+            "body_1": "您现在将看到一个恢复密语。",
+            "body_2": "请不要将此密语分享给任何人。您的恢复密语可以用来从任何地方访问您的令牌。",
+            "body_3": "如果您丢失了恢复密语，您很可能会丢失您的资金。"
         },
         "recovery_phrase": {
-            "title": "Recovery phrase",
-            "body_1": "Carefully copy the words in the exact order below. You can create a secondary backup on iCloud.",
-            "body_2": "Keep this private and safely stored"
+            "title": "恢复密语",
+            "body_1": "请仔细按正确的顺序写下这些单词。",
+            "body_2": "请秘密地保管好您的恢复密语并安全存储。不要与任何人共享它。"
         },
         "verify_recovery_phrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Click the words on the right in the exact order you have written them down."
+            "title": "验证恢复密语",
+            "body": "让我们检查你是否能正确地写下密语。请按照正确的顺序选择这些单词。"
         },
-        "backup_recovery_phrase": {
-            "title": "Back up to a file",
-            "body": "You wallet password is also used to encrypt a Stronghold backup. Enter your wallet password to save your recovery phrase backup to a file."
+        "backup_wallet": {
+            "title": "备份到 Stronghold 文件",
+            "body": "请输入您的密码来备份您的钱包到一个Stronghold文件。您的密码将用来加密这个备份文件。"
         },
         "recovery_phrase_saved": {
-            "title": "Recovery phrase",
-            "body": "Backed up to a file"
+            "title": "备份成功",
+            "body": "你已经将你的钱包备份到了一个Stronghold文件。"
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your new wallet is ready to use."
+            "title": "恭喜您！",
+            "body": "你的钱包已准备就绪。"
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have an existing seed or wallet back up, you can import it here."
+            "title": "导入钱包",
+            "body": "如果您已有恢复恢复或是Stronghold的备份文件，您可以在此处导入。"
         },
         "import_from_text": {
-            "title": "Type your seed or secret phrase",
-            "body_1": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
-            "body_2": "A secret phrase is a 24 word mnemonic. This is used to recover a newer FireFly wallet.",
-            "body_3": "Enter your seed or secret phrase"
+            "title": "用恢复恢复或种子恢复你的钱包",
+            "body_1": "恢复密语长度为24个单词。这个短语可用于恢复已有的Firefly钱包。",
+            "body_2": "种子由81个字符组成。它用于从旧的 Trinity 钱包中恢复。",
+            "body_3": "请输入您的种子或恢复密语"
         },
         "import_from_file": {
-            "title": "Restore your wallet using a backup file",
-            "body": "Upload a file to restore existing wallet funds. File backups can be either a Trinity SeedVault or a Firefly Stronghold."
+            "title": "从备份文件恢复你的钱包",
+            "body": "导入备份文件以恢复您的钱包。备份可以是 Stronghold (.stronghold) 或 Trinity SeedVault (.kdbx)格式。"
         },
         "import_backup_password": {
-            "title": "Restore your wallet using a backup file",
-            "body_1": "Please provide your backup password.",
-            "body_2": "This is the password created when you first created your backup. This stops unauthorised access to your funds."
+            "title": "从SeedVault或Stronghold文件恢复你的钱包",
+            "body_1": "请输入您的备份密码。",
+            "body_2": "这是您首次创建备份时设置的密码。"
         },
         "import_success": {
-            "title_1": "You have successfully recovered your backup",
-            "body_1": "Your secret phrase is correct, you can now set up your new wallet",
-            "title_2": "You have successfully recovered your backup",
-            "body_2": "Your password is correct, you can now continue"
+            "title": "您已成功恢复您的备份。",
+            "body": "您现在可以设置您的新钱包。"
         },
         "migrate": {
-            "title": "Transfer your funds",
-            "body_1": "This is an automated process to transfer your existing funds to your new wallet. In this process we will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during this process.",
-            "existing": "Existing seed",
-            "new": "Your new wallet"
+            "title": "迁移您的资金",
+            "body_1": "这是一个将您的资金转账到您新钱包的自动化过程。我们将检查削弱您安全性的已花费地址。",
+            "body_2": "这可能需要一些时间。不要在迁移过程中关闭您的设备。",
+            "existing": "您的旧钱包",
+            "new": "您的新钱包"
         },
         "migrate_failed": {
-            "title": "Transfer your funds",
-            "body": "Provide your wallet and Stronghold password. This is the password created when you first created your original wallet backup. This allows secure import of your recovery phrase."
+            "title": "To do",
+            "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "您的余额",
+            "body": "您的余额是否正确？"
+        },
+        "settings": {
+            "settings": "设置",
+            "generalSettings": {
+                "title": "常规设置",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "security": {
+                "title": "安全设置",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "advancedSettings": {
+                "title": "高级设置",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "helpAndInfo": {
+                "title": "帮助和信息",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "profileDetails": {
+                "title": "账户详情",
+                "description": "Temp"
+            },
+            "theme": {
+                "title": "主题",
+                "description": "Temp"
+            },
+            "language": {
+                "title": "语言",
+                "description": "Temp"
+            },
+            "currency": {
+                "title": "货币",
+                "description": "Temp"
+            },
+            "notifications": {
+                "title": "通知",
+                "description": "Temp"
+            },
+            "exportStronghold": {
+                "title": "导出到Stronghold",
+                "description": "Temp"
+            },
+            "appLock": {
+                "title": "应用锁定",
+                "description": "Temp"
+            },
+            "changePassword": {
+                "title": "修改密码",
+                "description": "Temp"
+            },
+            "resyncAccounts": {
+                "title": "重新同步账户",
+                "description": "Temp"
+            },
+            "resetWallet": {
+                "title": "重置钱包",
+                "description": "Temp"
+            },
+            "deepLinks": {
+                "title": "深链接",
+                "description": "Temp"
+            },
+            "developerMode": {
+                "title": "开发者模式",
+                "description": "Temp"
+            },
+            "nodeSettings": {
+                "title": "节点设置",
+                "description": "Temp"
+            },
+            "proofOfWork": {
+                "title": "工作量证明",
+                "description": "Temp"
+            },
+            "errorLog": {
+                "title": "错误日志",
+                "description": "Temp"
+            },
+            "stateExport": {
+                "title": "状态导出",
+                "description": "Temp"
+            },
+            "troubleshoot": {
+                "title": "故障排除",
+                "description": "Temp"
+            },
+            "documentation": {
+                "title": "文档",
+                "description": "Temp"
+            },
+            "faq": {
+                "title": "常见问题",
+                "description": "Temp"
+            },
+            "discord": {
+                "title": "Discord",
+                "description": "Temp"
+            },
+            "about": {
+                "title": "关于",
+                "description": "Temp"
+            }
+        },
+        "login": {
+            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
+            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
         }
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
-        "setup_pin": "Set up PIN code",
-        "set_pin": "Set PIN code",
-        "save_backup_file": "Save backup file",
-        "verify_recovery_phrase": "Verify recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
-        "visit_discord": "Visit Discord",
-        "drag_drop": "Drag & Drop",
-        "import_extentions": ".kdbx or .stronghold file",
-        "choose_file": "Choose a File",
-        "drop_here": "Drop your file here"
+        "continue": "继续",
+        "back": "返回",
+        "import_seed": "导入已有的种子",
+        "import_wallet": "导入现有钱包",
+        "create_wallet": "创建新钱包",
+        "save_password": "保存密码",
+        "use_biometric": "使用生物特征安全机制",
+        "setup_pin": "设置PIN码",
+        "set_pin": "设置PIN码",
+        "confirm_pin": "确认PIN码",
+        "enter_your_pin": "Enter your PIN",
+        "save_backup_file": "保存备份文件",
+        "ive_written_recovery_phrase": "我已经写下我的恢复短语",
+        "verify_recovery_phrase": "验证恢复密语",
+        "reveal_recovery_phrase": "显示恢复密语",
+        "import_seedvault": "导入SeedVault",
+        "check_again": "不，再次检查",
+        "import_from_file": "从文件导入",
+        "send": "发送",
+        "receive": "接收",
+        "begin_transfer": "开始传输",
+        "try_again": "重试",
+        "visit_discord": "访问 Discord",
+        "drag_drop": "拖放",
+        "import_extentions": ".stronghold 或 .kdbx 文件",
+        "choose_file": "选择一个文件",
+        "drop_here": "将您的文件拖放至此处"
     },
     "general": {
-        "password": "Password",
-        "confirm_password": "Confirm password",
-        "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
-        "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
-        "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "transfer_between_accounts": "Transfer Between Accounts",
-        "move_funds_between_accounts": "Move funds between your Accounts",
-        "account": "Account",
-        "sending_to_address": "Sending to address",
-        "amount": "Amount",
-        "add_address": "Add Address",
-        "reference": "Reference",
-        "from": "From",
-        "to": "To",
-        "receive_funds": "Receive funds",
-        "share_address": "Share an address",
-        "your_address": "Your address",
-        "generate_new_address": "Generate new address",
-        "have_text_backup": "I have a text backup",
-        "have_file_backup": "I have a file backup",
-        "enter_seed_or_phrase": "Enter an IOTA seed or secret phrase",
-        "upload_seedvault_or_stronghold": "Upload a Seedvault or Stronghold file",
-        "import": "Import",
-        "seedvault": "Seedvault",
+        "password": "密码",
+        "confirm_password": "确认密码",
+        "your_seed": "你的种子",
+        "recovery_phrase": "恢复密语",
+        "recent_activity": "最新活动",
+        "sent": "已发送",
+        "received": "已收到",
+        "send_funds": "资金转账",
+        "send_to_address": "发送至地址",
+        "scan_qr_or_paste": "扫描二维码或粘贴地址",
+        "transfer_between_accounts": "账户之间的转移",
+        "move_funds_between_accounts": "在您的账户之间移动资金",
+        "account": "账号",
+        "sending_to_address": "发送至地址",
+        "amount": "金额",
+        "add_address": "新增地址",
+        "reference": "使用指南",
+        "from": "从",
+        "to": "到",
+        "receive_funds": "接收资金",
+        "share_address": "分享地址",
+        "your_address": "您的地址",
+        "generate_new_address": "生成新地址",
+        "have_text_backup": "我有一个文本备份",
+        "have_file_backup": "我有一个文本备份",
+        "enter_seed_or_phrase": "输入恢复密语或种子",
+        "upload_seedvault_or_stronghold": "导入Strong或 SeedVault 文件",
+        "import": "导入",
+        "seedvault": "SeedVault",
         "stronghold": "Stronghold",
-        "language": "Language",
-        "appearance": "Appearance",
-        "light_theme": "Light theme",
-        "dark_theme": "Dark theme",
-        "total_balance": "Total Balance",
-        "incoming": "Incoming",
-        "outgoing": "Outgoing",
-        "accounts": "Accounts"
+        "language": "语言",
+        "appearance": "外观",
+        "light_theme": "浅色主题",
+        "dark_theme": "深色主题",
+        "total_balance": "总余额",
+        "incoming": "收到",
+        "outgoing": "转出",
+        "accounts": "帐户",
+        "profiles": "Profiles"
     }
 }

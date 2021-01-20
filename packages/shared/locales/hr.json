@@ -1,0 +1,299 @@
+{
+    "views": {
+        "onboarding_1": {
+            "title": "Šaljite, primajte i upravljajte svojom IOTAom",
+            "body": "Firefly je siguran i jednostavan IOTA novčanik."
+        },
+        "legal": {
+            "title": "Pravne informacije",
+            "body": "Molimo Vas da proučite Politiku privatnosti i Uvjete korištenja.",
+            "privacy_policy": {
+                "title": "Politika privatnosti",
+                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+            },
+            "terms_of_service": {
+                "title": "Uvjeti korištenja",
+                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+            },
+            "checkbox": "I have read and I accept the Privacy policy & ToS"
+        },
+        "language": {
+            "title": "Jezik i prikaz",
+            "body": "Izaberite jezik i temu za svoj novčanik"
+        },
+        "setup": {
+            "title": "Postavite svoj novčanik",
+            "body": "Možete stvoriti novi novčanik ili uvesti postojeći."
+        },
+        "password": {
+            "title": "Stvorite lozinku",
+            "body": "Za slanje sredstava iz novčanika pitat ćemo vas da unesete lozinku. Za zaštitu sredstava treba vam jaka lozinka."
+        },
+        "protect": {
+            "title": "Protect your wallet",
+            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
+            "body_2": "Keep your PIN safe!"
+        },
+        "pin": {
+            "title": "Postavite PIN",
+            "body_1": "Unesite PIN od 6 znamenki. Tražit ćemo vas da svoj PIN unesete prilikom ulaska u novčanik.",
+            "body_2": "Ovdje možete koristiti samo brojeve."
+        },
+        "confirm_pin": {
+            "title": "Potvrdite svoj PIN kod",
+            "body": "Za nastavak ponovo unesite PIN."
+        },
+        "backup": {
+            "title": "Napravite pričuvnu kopiju svojeg novčanika",
+            "body_1": "Sada ćemo vam pokazati frazu za oporavak.",
+            "body_2": "Ovu frazu nemojte dijeliti ni sa kime. Vaša fraza za oporavak omogućuje pristup vašim tokenima odasvud.",
+            "body_3": "Izgubite li svoju frazu za oporavak, možete izgubiti sva sredstva."
+        },
+        "recovery_phrase": {
+            "title": "Fraza za oporavak",
+            "body_1": "Pažljivo zapišite sljedeće riječi točno ovim redoslijedom.",
+            "body_2": "Svoju frazu za oporavak zadržite za sebe, na sigurnome mjestu. Ne dijelite ju ni sa kime."
+        },
+        "verify_recovery_phrase": {
+            "title": "Potvrdite frazu za oporavak",
+            "body": "Provjerimo zajedno jeste li dobro zapisali frazu za oporavak. Odaberite riječi pravilnim redoslijedom."
+        },
+        "backup_wallet": {
+            "title": "Spremite pričuvnu kopiju u Stronghold datoteku",
+            "body": "Unesite svoju lozinku kako biste spremili pričuvnu kopiju u Stronghold datoteku. Vašu lozinku koristimo za enkripciju pričuvne kopije."
+        },
+        "recovery_phrase_saved": {
+            "title": "Pričuvna kopija je uspješno napravljena",
+            "body": "Napravili ste Stronghold pričuvnu kopiju svojeg novčanika."
+        },
+        "congratulations": {
+            "title": "Čestitamo",
+            "body": "Vaš je novčanik spreman za korištenje."
+        },
+        "import": {
+            "title": "Uvezite novčanik",
+            "body": "Ako imate frazu za oporavak ili Stronghold pričuvnu kopiju, možete ih uvesti ovdje."
+        },
+        "import_from_text": {
+            "title": "Obnovite svoj novčanik pomoću fraze za oporavak ili seeda",
+            "body_1": "Fraza za oporavak sastoji se od 24 riječi. Služi za oporavak postojećeg Firefly novčanika.",
+            "body_2": "Seed se sastoji od 81 znaka. On služi za oporavak iz starijih Trinity novčanika.",
+            "body_3": "Unesite svoj seed ili frazu za oporavak"
+        },
+        "import_from_file": {
+            "title": "Obnovite svoj novčanik iz datoteke s pričuvnom kopijom",
+            "body": "Za obnovu novčanika uvezite datoteku s pričuvnom kopijom. To može biti Stronghold (.stronghold) ili Trinity SeedVault (.kdbx) datoteka."
+        },
+        "import_backup_password": {
+            "title": "Obnovite svoj novčanik pomoću SeedVaulta ili Strongolda",
+            "body_1": "Molimo vas da unesete svoju lozinku za pričuvnu kopiju.",
+            "body_2": "Ovo je lozinka koju ste postavili kada ste izradili pričuvnu kopiju."
+        },
+        "import_success": {
+            "title": "Uspješno ste obnovili pričuvnu kopiju",
+            "body": "Sada možete postaviti svoj novi novčanik."
+        },
+        "migrate": {
+            "title": "Migrirajte svoja sredstva",
+            "body_1": "Ovo je automatski postupak za prebacivanje vaših sredstava u novi novčanik. Provjerit ćemo već korištene adrese koje ugrožavaju vašu sigurnost.",
+            "body_2": "Ovo bi moglo potrajati. Za trajanja migracije ne gasite uređaj.",
+            "existing": "Vaš stari novčanik",
+            "new": "Vaš novi novčanik"
+        },
+        "migrate_failed": {
+            "title": "To do",
+            "body": "To do"
+        },
+        "balance": {
+            "title": "Vaš saldo",
+            "body": "Je li vaš saldo ispravan?"
+        },
+        "settings": {
+            "settings": "Postavke",
+            "generalSettings": {
+                "title": "Opće postavke",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "security": {
+                "title": "Sigurnost",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "advancedSettings": {
+                "title": "Napredne postavke",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "helpAndInfo": {
+                "title": "Pomoć i informacije",
+                "description": "Configure your wallet’s appearance and other general settings"
+            },
+            "profileDetails": {
+                "title": "Detalji profila",
+                "description": "Temp"
+            },
+            "theme": {
+                "title": "Tema",
+                "description": "Temp"
+            },
+            "language": {
+                "title": "Jezik",
+                "description": "Temp"
+            },
+            "currency": {
+                "title": "Valuta",
+                "description": "Temp"
+            },
+            "notifications": {
+                "title": "Obavijesti",
+                "description": "Temp"
+            },
+            "exportStronghold": {
+                "title": "Izvezite Stronghold",
+                "description": "Temp"
+            },
+            "appLock": {
+                "title": "Zaključavanje aplikacije",
+                "description": "Temp"
+            },
+            "changePassword": {
+                "title": "Promjena lozinke",
+                "description": "Temp"
+            },
+            "resyncAccounts": {
+                "title": "Ponovna sinkronizacija računa",
+                "description": "Temp"
+            },
+            "resetWallet": {
+                "title": "Resetiranje novčanika",
+                "description": "Temp"
+            },
+            "deepLinks": {
+                "title": "Deep Links",
+                "description": "Temp"
+            },
+            "developerMode": {
+                "title": "Razvojno okruženje",
+                "description": "Temp"
+            },
+            "nodeSettings": {
+                "title": "Node postavke",
+                "description": "Temp"
+            },
+            "proofOfWork": {
+                "title": "Proof of Work",
+                "description": "Temp"
+            },
+            "errorLog": {
+                "title": "Evidencija grešaka",
+                "description": "Temp"
+            },
+            "stateExport": {
+                "title": "Izvoz stanja",
+                "description": "Temp"
+            },
+            "troubleshoot": {
+                "title": "Rješavanje problema",
+                "description": "Temp"
+            },
+            "documentation": {
+                "title": "Dokumentacija",
+                "description": "Temp"
+            },
+            "faq": {
+                "title": "Često postavljana pitanja",
+                "description": "Temp"
+            },
+            "discord": {
+                "title": "Discord",
+                "description": "Temp"
+            },
+            "about": {
+                "title": "O aplikaciji",
+                "description": "Temp"
+            }
+        },
+        "login": {
+            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
+            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+        }
+    },
+    "actions": {
+        "continue": "Nastavi",
+        "back": "Natrag",
+        "import_seed": "Uvezite postojeći Seed",
+        "import_wallet": "Uvezite postojeći novčanik",
+        "create_wallet": "Stvorite novi novčanik",
+        "save_password": "Spremi lozinku",
+        "use_biometric": "Koristi biometričku zaštitu",
+        "setup_pin": "Postavite PIN",
+        "set_pin": "Postavite PIN",
+        "confirm_pin": "Potvrdite PIN",
+        "enter_your_pin": "Enter your PIN",
+        "save_backup_file": "Spremite pričuvnu kopiju",
+        "ive_written_recovery_phrase": "Zapisao sam svoju frazu za oporavak",
+        "verify_recovery_phrase": "Potvrdite frazu za oporavak",
+        "reveal_recovery_phrase": "Prikaži frazu za oporavak",
+        "import_seedvault": "Uvezi SeedVault",
+        "check_again": "Ne, provjeri opet",
+        "import_from_file": "Uvezi iz datoteke",
+        "send": "Pošalji",
+        "receive": "Primi",
+        "begin_transfer": "Započni transfer",
+        "try_again": "Pokušaj ponovo",
+        "visit_discord": "Posjetite Discord",
+        "drag_drop": "Vuci i ispusti",
+        "import_extentions": ".stronghold ili .kdbx datoteka",
+        "choose_file": "Izaberite datoteku",
+        "drop_here": "Ispustite datoteku ovdje"
+    },
+    "general": {
+        "password": "Lozinka",
+        "confirm_password": "Potvrda lozinke",
+        "your_seed": "Vaš Seed",
+        "recovery_phrase": "Fraza za oporavak",
+        "recent_activity": "Nedavne Aktivnosti",
+        "sent": "Poslano",
+        "received": "Primljeno",
+        "send_funds": "Pošaljite sredstva",
+        "send_to_address": "Pošaljite na Adresu",
+        "scan_qr_or_paste": "Skenirajte QR kod ili zalijepite Adresu",
+        "transfer_between_accounts": "Prebacivanje između računa",
+        "move_funds_between_accounts": "Prebacite sredstva između svojih računa",
+        "account": "Račun",
+        "sending_to_address": "Slanje na adresu",
+        "amount": "Iznos",
+        "add_address": "Dodajte adresu",
+        "reference": "Referenca",
+        "from": "Od",
+        "to": "Za",
+        "receive_funds": "Primite sredstva",
+        "share_address": "Podijelite adresu",
+        "your_address": "Vaša adresa",
+        "generate_new_address": "Stvorite novu adresu",
+        "have_text_backup": "Imam tekstualnu pričuvnu kopiju",
+        "have_file_backup": "Imam datoteku s pričuvnom kopijom",
+        "enter_seed_or_phrase": "Unesite frazu za oporavak ili seed",
+        "upload_seedvault_or_stronghold": "Uvezite Stronghold ili SeedVault datoteku",
+        "import": "Uvezi",
+        "seedvault": "SeedVault",
+        "stronghold": "Stronghold",
+        "language": "Jezik",
+        "appearance": "Prikaz",
+        "light_theme": "Svijetla tema",
+        "dark_theme": "Tamna tema",
+        "total_balance": "Ukupno stanje",
+        "incoming": "Dolazni",
+        "outgoing": "Odlazni",
+        "accounts": "Računi",
+        "profiles": "Profiles"
+    }
+}
