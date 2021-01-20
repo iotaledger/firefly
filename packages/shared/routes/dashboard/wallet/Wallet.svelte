@@ -9,7 +9,7 @@
         TIMEFRAME_MAP,
         AvailableCharts,
     } from 'shared/lib/marketData'
-    import { Send, Receive, Account } from './views/'
+    import { Send, Receive, Account, CreateAccount } from './views/'
     import { totalBalance as dummyTotalBalance, transactions as dummyTransactions, accounts as dummyAccounts } from './dummydata'
 
     export let locale
@@ -21,6 +21,7 @@
         Account = 'account',
         Send = 'send',
         Receive = 'receive',
+        CreateAccount = 'createAccount',
     }
 
     let totalBalance = dummyTotalBalance
@@ -33,19 +34,11 @@
         let nextState
         switch (state) {
             case WalletState.Init:
-                if (request === 'send') {
-                    nextState = WalletState.Send
-                } else if (request === 'receive') {
-                    nextState = WalletState.Receive
-                } else if (request === 'account') {
-                    nextState = WalletState.Account
+                if (Object.values(WalletState).includes(request as WalletState)) {
+                    nextState = request
                 }
                 break
             case WalletState.Send:
-                // do logic here
-                nextState = WalletState.Init
-                break
-            case WalletState.Receive:
                 // do logic here
                 nextState = WalletState.Init
                 break
@@ -91,81 +84,93 @@
         <div class="w-full h-full flex flex-row space-x-4 flex-auto">
             <!-- Total Balance, Accounts list & Send/Receive -->
             <div class="flex flex-auto flex-col w-1/3 h-full flex-shrink-0">
-                <div
-                    class="bg-gradient-to-b from-blue-500 to-blue-600 dark:from-gray-800 dark:to-gray-900 rounded-t-2xl pt-10 pb-12 px-8">
-                    <!-- Balance -->
-                    <div data-label="total-balance">
-                        <Text type="p" overrideColor smaller classes="text-white mb-2">{locale('general.total_balance')}</Text>
-                        <Text type="h2" overrideColor classes="text-white mb-2">{totalBalance.balance}</Text>
-                        <Text type="p" overrideColor smaller classes="text-blue-300">{totalBalance.balanceEquiv}</Text>
-                    </div>
-                    {#if state === WalletState.Init}
-                        <!-- Incoming/Outgoing -->
-                        <div data-label="total-movements" class="flex flex-row justify-between mt-10">
-                            <div class="flex items-center">
-                                <Icon
-                                    boxed
-                                    icon="arrow-down"
-                                    classes="text-white"
-                                    boxClasses="bg-blue-300 dark:bg-gray-900 mr-4" />
-                                <div>
-                                    <Text type="p" classes="text-white mb-0.5">{totalBalance.incoming}</Text>
-                                    <Text type="p" overrideColor smaller classes="text-blue-300">
-                                        {locale('general.incoming')}
-                                    </Text>
-                                </div>
-                            </div>
-                            <div class="flex items-center">
-                                <Icon boxed icon="arrow-up" classes="text-white" boxClasses="bg-blue-300 dark:bg-gray-900 mr-4" />
-                                <div>
-                                    <Text type="p" classes="text-white mb-0.5">{totalBalance.outgoing}</Text>
-                                    <Text type="p" overrideColor smaller classes="text-blue-300">
-                                        {locale('general.outgoing')}
-                                    </Text>
-                                </div>
-                            </div>
+                {#if state === WalletState.CreateAccount}
+                    <CreateAccount on:next={_next} on:previous={_previous} {locale} {mobile} />
+                {:else}
+                    <div
+                        class="bg-gradient-to-b from-blue-500 to-blue-600 dark:from-gray-800 dark:to-gray-900 rounded-t-2xl pt-10 pb-12 px-8">
+                        <!-- Balance -->
+                        <div data-label="total-balance">
+                            <Text type="p" overrideColor smaller classes="text-white mb-2">
+                                {locale('general.total_balance')}
+                            </Text>
+                            <Text type="h2" overrideColor classes="text-white mb-2">{totalBalance.balance}</Text>
+                            <Text type="p" overrideColor smaller classes="text-blue-300">{totalBalance.balanceEquiv}</Text>
                         </div>
-                    {/if}
-                </div>
-                <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 pt-4 -mt-5 flex flex-col h-full justify-between">
-                    <!-- Accounts -->
-                    {#if state === WalletState.Init || state === WalletState.Account}
-                        {#if state === WalletState.Init || state === WalletState.Account}
-                            <div data-label="accounts">
-                                <div class="flex flex-row mb-6 justify-between items-center">
-                                    <Text type="h5">{locale('general.accounts')}</Text>
-                                    <Button secondary small icon="plus">Create</Button>
-                                </div>
-                                {#if accounts.length > 0}
-                                    <div class="flex flex-row justify-between flex-wrap w-full px-2">
-                                        {#each accounts as account, i}
-                                            <AccountTile
-                                                color={account.color}
-                                                name={account.name}
-                                                balance={account.balance}
-                                                balanceEquiv={account.balanceEquiv}
-                                                width={accounts.length === 1 ? `full` : accounts.length === 2 ? `1/2` : `1/3`}
-                                                onClick={() => selectAccount(account.index)} />
-                                        {/each}
+                        {#if state === WalletState.Init}
+                            <!-- Incoming/Outgoing -->
+                            <div data-label="total-movements" class="flex flex-row justify-between mt-10">
+                                <div class="flex items-center">
+                                    <Icon
+                                        boxed
+                                        icon="arrow-down"
+                                        classes="text-white"
+                                        boxClasses="bg-blue-300 dark:bg-gray-900 mr-4" />
+                                    <div>
+                                        <Text type="p" classes="text-white mb-0.5">{totalBalance.incoming}</Text>
+                                        <Text type="p" overrideColor smaller classes="text-blue-300">
+                                            {locale('general.incoming')}
+                                        </Text>
                                     </div>
-                                {/if}
+                                </div>
+                                <div class="flex items-center">
+                                    <Icon
+                                        boxed
+                                        icon="arrow-up"
+                                        classes="text-white"
+                                        boxClasses="bg-blue-300 dark:bg-gray-900 mr-4" />
+                                    <div>
+                                        <Text type="p" classes="text-white mb-0.5">{totalBalance.outgoing}</Text>
+                                        <Text type="p" overrideColor smaller classes="text-blue-300">
+                                            {locale('general.outgoing')}
+                                        </Text>
+                                    </div>
+                                </div>
                             </div>
                         {/if}
-                        <!-- Action Send / Receive -->
-                        <div class="flex flex-row justify-between space-x-4">
-                            <Button xl secondary icon="receive" classes="w-1/2" onClick={() => _next(WalletState.Receive)}>
-                                {locale('actions.receive')}
-                            </Button>
-                            <Button xl secondary icon="transfer" classes="w-1/2" onClick={() => _next(WalletState.Send)}>
-                                {locale('actions.send')}
-                            </Button>
-                        </div>
-                    {:else if state === WalletState.Send}
-                        <Send on:next={_next} {accounts} {locale} {mobile} />
-                    {:else if state === WalletState.Receive}
-                        <Receive on:next={_next} {accounts} {locale} {mobile} />
-                    {/if}
-                </div>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 pt-4 -mt-5 flex flex-col h-full justify-between">
+                        <!-- Accounts -->
+                        {#if state === WalletState.Init || state === WalletState.Account}
+                            {#if state === WalletState.Init || state === WalletState.Account}
+                                <div data-label="accounts">
+                                    <div class="flex flex-row mb-6 justify-between items-center">
+                                        <Text type="h5">{locale('general.accounts')}</Text>
+                                        <Button onClick={() => _next(WalletState.CreateAccount)} secondary small icon="plus">
+                                            Create
+                                        </Button>
+                                    </div>
+                                    {#if accounts.length > 0}
+                                        <div class="flex flex-row justify-between flex-wrap w-full px-2">
+                                            {#each accounts as account, i}
+                                                <AccountTile
+                                                    color={account.color}
+                                                    name={account.name}
+                                                    balance={account.balance}
+                                                    balanceEquiv={account.balanceEquiv}
+                                                    width={accounts.length === 1 ? `full` : accounts.length === 2 ? `1/2` : `1/3`}
+                                                    onClick={() => selectAccount(account.index)} />
+                                            {/each}
+                                        </div>
+                                    {/if}
+                                </div>
+                            {/if}
+                            <!-- Action Send / Receive -->
+                            <div class="flex flex-row justify-between space-x-4">
+                                <Button xl secondary icon="receive" classes="w-1/2" onClick={() => _next(WalletState.Receive)}>
+                                    {locale('actions.receive')}
+                                </Button>
+                                <Button xl secondary icon="transfer" classes="w-1/2" onClick={() => _next(WalletState.Send)}>
+                                    {locale('actions.send')}
+                                </Button>
+                            </div>
+                        {:else if state === WalletState.Send}
+                            <Send on:next={_next} on:previous={_previous} {accounts} {locale} {mobile} />
+                        {:else if state === WalletState.Receive}
+                            <Receive on:next={_next} on:previous={_previous} {accounts} {locale} {mobile} />
+                        {/if}
+                    </div>
+                {/if}
             </div>
 
             <!-- Portfolio / Token Chart, Latest Transactions, Security -->
