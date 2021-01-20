@@ -70,7 +70,7 @@
 <Popup bind:active={showQR} qrData={account.address} type="qr" title="Your QR code" />
 <div class="w-full h-full flex flex-col flex-nowrap px-10 pb-10">
     <!-- Selected account top bar: back, account name, account switcher -->
-    <div class="relative flex lex-row justify-center items-center w-full py-5">
+    <div class="relative flex flex-row justify-center items-center w-full py-5">
         <div class="absolute left-0">
             <Button secondary small icon="arrow-left" iconReverse onClick={_previous}>Back</Button>
         </div>
