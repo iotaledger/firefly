@@ -53,7 +53,7 @@
             case ProtectState.Confirm:
                 try {
                     if (!validatePinFormat(pin.toString())) {
-                        throw new Error('Invalid pin code!')
+                        throw new Error("Invalid pin code!");
                     }
                     await PincodeManager.set(pin.toString())
 

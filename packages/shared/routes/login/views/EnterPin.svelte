@@ -50,35 +50,32 @@
     }
 
     function handleContinueClick() {
-        if (!isValid) {
-            attempts++
+        if (validatePinFormat(pinCode)) {
+            PincodeManager.verify(pinCode.toString())
+                .then((verified) => {
+                    if (verified === true) {
+                        api.setStoragePassword(pinCode.toString(), {
+                            onSuccess() {
+                                dispatch('next')
+                            },
+                            onError(error) {
+                                console.error(error)
+                            }
+                        })
+                    }
 
-            if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
-                clearInterval(timerId)
+                    attempts++
 
-                timerId = setInterval(countdown, 1000)
-            }
-        } else {
-            if (validatePinFormat(pinCode)) {
-                PincodeManager.verify(pinCode.toString())
-                    .then((verified) => {
-                        if (verified === true) {
-                            api.setStoragePassword(pinCode.toString(), {
-                                onSuccess() {
-                                    dispatch('next')
-                                },
-                                onError(error) {
-                                    console.error(error)
-                                }
-                            })
-                        } else {
-                            console.info('Incorrect pincode provided!')
-                        }
-                    })
-                    .catch((error) => {
-                        console.error(error)
-                    })
-            }
+                    if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
+                        clearInterval(timerId)
+
+                        timerId = setInterval(countdown, 1000)
+                    }
+                    return console.info('Incorrect pincode provided!')
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
         }
     }
 
