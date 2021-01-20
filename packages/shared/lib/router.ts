@@ -71,7 +71,7 @@ export const initRouter = () => {
     let userLogged: boolean = get(logged)
 
     if (userLogged) {
-        setRoute(AppRoute.Welcome)
+        setRoute(AppRoute.Login)
     } else {
         setRoute(AppRoute.Welcome)
     }

@@ -27,6 +27,7 @@ import {
   backup as _backup,
   restoreBackup as _restoreBackup,
   setStrongholdPassword as _setStrongholdPassword,
+  setStoragePassword as _setStoragePassword,
   send as _send,
   generateMnemonic as _generateMnemonic,
   storeMnemonic as _storeMnemonic,
@@ -127,6 +128,9 @@ export const api = {
   },
   setStrongholdPassword: function (password: string): ((__id: string) => Promise<string>) {
     return (__id: string) => _setStrongholdPassword(sendMessage, __id, password)
+  },
+  setStoragePassword: function (password: string): ((__id: string) => Promise<string>) {
+    return (__id: string) => _setStoragePassword(sendMessage, __id, password)
   },
   send: function (fromAccountId: AccountIdentifier, transfer: Transfer): ((__id: string) => Promise<string>) {
     return (__id: string) => _send(sendMessage, __id, fromAccountId, transfer)

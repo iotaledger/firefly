@@ -61,7 +61,8 @@ const apiToResponseTypeMap = {
     onBroadcast: ResponseTypes.Broadcast,
     generateMnemonic: ResponseTypes.GeneratedMnemonic,
     storeMnemonic: ResponseTypes.StoredMnemonic,
-    verifyMnemonic: ResponseTypes.VerifiedMnemonic
+    verifyMnemonic: ResponseTypes.VerifiedMnemonic,
+    setStoragePassword: ResponseTypes.StoragePasswordSet
 };
 
 /*
@@ -154,7 +155,7 @@ const generateRandomId = (): string => {
  * Response subscriber.
  * Receives messages from wallet.rs.
  */
-Wallet.onMessage((message: MessageResponse) => {    
+Wallet.onMessage((message: MessageResponse) => {   
     const _deleteCallbackId = (_id: string) => {
         const isEventMessage = [
             ResponseTypes.ErrorThrown,

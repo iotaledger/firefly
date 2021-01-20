@@ -41,6 +41,14 @@ export function setStrongholdPassword(bridge: Bridge, __id: string, password: st
   })
 }
 
+export function setStoragePassword(bridge: Bridge, __id: string, password: string) {
+  return bridge({
+    id: __id,
+    cmd: 'SetStoragePassword',
+    payload: password
+  })
+}
+
 export function send(bridge: Bridge, __id: string, fromAccountId: AccountIdentifier, transfer: Transfer) {
   return bridge({
     id: __id,

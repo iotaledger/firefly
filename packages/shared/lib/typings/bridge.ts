@@ -36,7 +36,8 @@ export enum ResponseTypes {
   Broadcast = 'Broadcast',
   GeneratedMnemonic = 'GeneratedMnemonic',
   StoredMnemonic = 'StoredMnemonic',
-  VerifiedMnemonic = 'VerifiedMnemonic'
+  VerifiedMnemonic = 'VerifiedMnemonic',
+  StoragePasswordSet = 'StoragePasswordSet',
 }
 
 export type Response<T, P> = { id: string; action: string; type: T; payload?: P }
@@ -60,6 +61,7 @@ export type ErrorResponse = Response<ResponseTypes.Error, ErrorEventPayload>
 export type PanicResponse = Response<ResponseTypes.Panic, string>
 export type GenerateMnemonicResponse =  Response<ResponseTypes.GeneratedMnemonic, string>
 export type StoreMnemonicResponse =  Response<ResponseTypes.StoredMnemonic, void>
+export type SetStoragePasswordResponse = Response<ResponseTypes.StoragePasswordSet, void>
 
 export type MessageResponse = RemovedAccountResponse |
   CreatedAccountResponse |
@@ -81,6 +83,7 @@ export type MessageResponse = RemovedAccountResponse |
   PanicResponse |
   GenerateMnemonicResponse |
   StoreMnemonicResponse |
+  SetStoragePasswordResponse |
   // events
   Event<ErrorEventPayload> | Event<BalanceChangeEventPayload> | Event<TransactionEventPayload>
 

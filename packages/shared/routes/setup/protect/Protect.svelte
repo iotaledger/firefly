@@ -1,6 +1,8 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
     import { Transition } from 'shared/components'
+    import { api } from 'shared/lib/wallet'
+
     import { Protect, Pin } from './views/'
     export let locale
     export let mobile
@@ -50,7 +52,14 @@
                 try {
                     await PincodeManager.set(pin.toString())
 
-                    dispatch('next', { pin })
+                    api.setStoragePassword(pin.toString(), {
+                        onSuccess() {
+                            dispatch('next', { pin })
+                        },
+                        onError(error) {
+                            console.error(error)
+                        }
+                    })
                     break
                 } catch (error) {
                     console.error(error)

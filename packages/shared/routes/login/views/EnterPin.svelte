@@ -1,11 +1,13 @@
 <script>
+    import { api } from 'shared/lib/wallet'
+
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { OnboardingLayout, Illustration, Icon, Text, Profile, Pin, Button } from 'shared/components'
 
     export let locale
     export let mobile
 
-    const PincodeManager = window['Electron']['PincodeManager'];
+    const PincodeManager = window['Electron']['PincodeManager']
 
     let attempts = 0
     let pinCode = ''
@@ -57,16 +59,24 @@
                 timerId = setInterval(countdown, 1000)
             }
         } else {
-            PincodeManager.verify(pinCode.toString()).then((verified) => {
-                if (verified === true) {
-                    return dispatch('next')
-                } 
-
-                return console.info('Incorrect pincode provided!');
-            }).catch((error) => {
-                console.error(error);
-            })
-           
+            PincodeManager.verify(pinCode.toString())
+                .then((verified) => {
+                    if (verified === true) {
+                        api.setStoragePassword(pinCode.toString(), {
+                            onSuccess() {
+                                dispatch('next')
+                            },
+                            onError(error) {
+                                console.error(error)
+                            }
+                        })
+                    } else {
+                        console.info('Incorrect pincode provided!')
+                    }
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
         }
     }
 
@@ -95,7 +105,7 @@
                 <Pin bind:value={pinCode} classes="mt-10" />
                 <Text type="p" bold classes="mt-4 text-center">
                     {attempts > 0 ? locale('views.login.incorrect_attempts', {
-                              values: { attempts: attempts.toString() },
+                              values: { attempts: attempts.toString() }
                           }) : locale('actions.enter_your_pin')}
                 </Text>
             </div>
