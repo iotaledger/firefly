@@ -35,14 +35,17 @@ describe('binding', () => {
       } catch {}
     })
 
+    const actorId = Math.random().toString()
+
     return new Promise(resolve => {
-      lib.init()
+      lib.init(actorId)
       let index = 0
       lib.onMessage(message => {
         console.log(message)
         switch (index++) {
           case 0: {
             assert.deepStrictEqual(message, {
+              actorId,
               id: message.id,
               type: 'StrongholdPasswordSet',
               action: 'SetStrongholdPassword'
@@ -56,6 +59,7 @@ describe('binding', () => {
           }
           case 1: {
             assert.deepStrictEqual(message, {
+              actorId,
               id: message.id,
               type: 'CreatedAccount',
               payload: message.payload,
@@ -66,6 +70,7 @@ describe('binding', () => {
           }
           case 2: {
             assert.deepStrictEqual(message, {
+              actorId,
               id: message.id,
               type: 'BackupSuccessful',
               action: 'Backup'
@@ -76,6 +81,7 @@ describe('binding', () => {
           }
           case 3: {
             assert.deepStrictEqual(message, {
+              actorId,
               id: message.id,
               type: 'StrongholdPasswordSet'
             })
@@ -84,6 +90,7 @@ describe('binding', () => {
           }
           case 4: {
             assert.deepStrictEqual(message, {
+              actorId,
               id: message.id,
               type: 'BackupRestored'
             })
