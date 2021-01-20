@@ -77,7 +77,7 @@
     }
 </script>
 
-{#if state === WalletState.Account && selectedAccount !== null && selectedAccount !== undefined}
+{#if state === WalletState.Account && selectedAccount}
     <Account
         account={selectedAccount}
         {accounts}

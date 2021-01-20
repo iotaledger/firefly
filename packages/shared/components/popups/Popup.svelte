@@ -5,7 +5,7 @@
     export let active
     export let type
     export let title
-    export let qrValue
+    export let qrData
 
     const types = {
         qr: QR,
@@ -46,6 +46,6 @@
                 <Icon icon="close" classes="text-gray-800" />
             </button>
         </div>
-        <svelte:component this={types[type]} value={qrValue} />
+        <svelte:component this={types[type]} data={qrData} />
     </popup-content>
 </popup>
