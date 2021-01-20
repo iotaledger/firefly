@@ -142,7 +142,7 @@ export const api = {
     return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'ErrorThrown')
   },
   onBalanceChange: function (): ((__ids: CommunicationIds) => Promise<string>) {
-    return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId,, 'BalanceChange')
+    return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'BalanceChange')
   },
   onNewTransaction: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'NewTransaction')
