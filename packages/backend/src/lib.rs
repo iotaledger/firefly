@@ -3,9 +3,12 @@ use actors::{dispatch, DispatchMessage, WalletActor, WalletActorMsg};
 
 use iota::common::logger::logger_init;
 pub use iota::common::logger::LoggerConfigBuilder;
-use iota_wallet::event::{
-    on_balance_change, on_broadcast, on_confirmation_state_change, on_error, on_new_transaction,
-    on_reattachment,
+use iota_wallet::{
+    account_manager::{AccountManager, ManagerStorage, DEFAULT_STORAGE_FOLDER},
+    event::{
+        on_balance_change, on_broadcast, on_confirmation_state_change, on_error,
+        on_new_transaction, on_reattachment,
+    },
 };
 use once_cell::sync::Lazy;
 use riker::actors::*;
@@ -14,8 +17,11 @@ use tokio::sync::Mutex as AsyncMutex;
 
 use std::collections::HashMap;
 use std::convert::TryFrom;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex};
+use std::time::Duration;
+
+const POLLING_INTERVAL_MS: u64 = 30_000;
 
 type WalletActors = Arc<AsyncMutex<HashMap<String, ActorRef<WalletActorMsg>>>>;
 type MessageReceiver = Box<dyn Fn(String) + Send + Sync + 'static>;
@@ -68,13 +74,25 @@ pub async fn init<A: Into<String>, F: Fn(String) + Send + Sync + 'static>(
 
     let mut actors = wallet_actors().lock().await;
 
+    let manager = AccountManager::builder()
+        .with_storage(
+            match storage_path {
+                Some(path) => path.as_ref().to_path_buf(),
+                None => PathBuf::from(DEFAULT_STORAGE_FOLDER),
+            },
+            ManagerStorage::Sqlite,
+            None,
+        )
+        .unwrap() //safe to unwrap, the storage password is None ^
+        .with_polling_interval(Duration::from_millis(POLLING_INTERVAL_MS))
+        .finish()
+        .await
+        .expect("failed to init account manager");
+
     iota_wallet::with_actor_system(|sys| {
-        let wallet_actor = match storage_path {
-            Some(path) => sys
-                .actor_of_args::<WalletActor, _>(&actor_id, path.as_ref().to_path_buf())
-                .unwrap(),
-            None => sys.actor_of::<WalletActor>(&actor_id).unwrap(),
-        };
+        let wallet_actor = sys
+            .actor_of_args::<WalletActor, _>(&actor_id, manager)
+            .unwrap();
 
         actors.insert(actor_id.to_string(), wallet_actor);
 
