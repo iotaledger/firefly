@@ -222,8 +222,8 @@
             }
         },
         "login": {
-            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "please_wait": "कृपया {time, plural, one {1 सेकंड} other {# सेकंड}} प्रतीक्षा करें",
+            "incorrect_attempts": "{attempts, plural, one {1 गलत प्रयास} other {# गलत प्रयास}}"
         }
     },
     "actions": {
@@ -237,7 +237,7 @@
         "setup_pin": "पिन कोड सेट करें",
         "set_pin": "पिन कोड सेट करें",
         "confirm_pin": "पिन कोड की पुष्टि करें",
-        "enter_your_pin": "Enter your PIN",
+        "enter_your_pin": "अपना पिन डालें",
         "save_backup_file": "बैकअप फाइल सहेजें",
         "ive_written_recovery_phrase": "मैंने अपना पुनर्प्राप्ति वाक्यांश लिख लिया है",
         "verify_recovery_phrase": "वसूली वाक्यांश सत्यापित करें",
@@ -294,6 +294,6 @@
         "incoming": "आने वाला",
         "outgoing": "बाहर जाने वाले",
         "accounts": "खाता",
-        "profiles": "Profiles"
+        "profiles": "प्रोफाइल्स"
     }
 }
