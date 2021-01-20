@@ -51,7 +51,13 @@
     }
 
     function handleContinueClick() {
-        if (validatePinFormat(pinCode)) {
+        if (!validatePinFormat(pinCode)) {
+            attempts++
+            if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
+                clearInterval(timerId)
+                timerId = setInterval(countdown, 1000)
+            }
+        } else {
             PincodeManager.verify(getActiveProfile().id, pinCode.toString())
                 .then((verified) => {
                     if (verified === true) {
@@ -61,18 +67,11 @@
                             },
                             onError(error) {
                                 console.error(error)
-                            },
+                            }
                         })
+                    } else {
+                        console.info('Incorrect pincode provided!')
                     }
-
-                    attempts++
-
-                    if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
-                        clearInterval(timerId)
-
-                        timerId = setInterval(countdown, 1000)
-                    }
-                    return console.info('Incorrect pincode provided!')
                 })
                 .catch((error) => {
                     console.error(error)
@@ -101,7 +100,7 @@
         </div>
         <div class="bg-white pt-40 pb-16 flex w-full h-full flex-col items-center justify-center">
             <div class="flex-1 w-96">
-                <Profile name="Charlie Varley" />
+                <Profile name={getActiveProfile().name} />
                 <Pin bind:value={pinCode} classes="mt-10" />
                 <Text type="p" bold classes="mt-4 text-center">
                     {attempts > 0 ? locale('views.login.incorrect_attempts', {
