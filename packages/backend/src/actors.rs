@@ -13,9 +13,7 @@ use tokio::{
     sync::{mpsc::unbounded_channel, Mutex},
 };
 
-use std::{path::PathBuf, sync::Arc, time::Duration};
-
-const POLLING_INTERVAL_MS: u64 = 30_000;
+use std::{sync::Arc, time::Duration};
 
 #[derive(Clone, Debug)]
 pub struct KillMessage;
@@ -26,24 +24,14 @@ pub struct WalletActor {
     runtime: Runtime,
 }
 
-impl ActorFactoryArgs<PathBuf> for WalletActor {
-    fn create_args(storage_path: PathBuf) -> Self {
+impl ActorFactoryArgs<AccountManager> for WalletActor {
+    fn create_args(manager: AccountManager) -> Self {
         let runtime = Runtime::new().expect("failed to create tokio runtime");
+
         Self {
-            wallet_message_handler: Arc::new(Mutex::new(
-                WalletMessageHandler::with_manager(
-                    runtime
-                        .block_on(
-                            AccountManager::builder()
-                                .with_storage(storage_path, ManagerStorage::Sqlite, None)
-                                .unwrap() //safe to unwrap, the storage password is None ^
-                                .with_polling_interval(Duration::from_millis(POLLING_INTERVAL_MS))
-                                .finish(),
-                        )
-                        .unwrap(),
-                )
-                .unwrap(),
-            )),
+            wallet_message_handler: Arc::new(Mutex::new(WalletMessageHandler::with_manager(
+                manager,
+            ))),
             runtime,
         }
     }
@@ -52,21 +40,17 @@ impl ActorFactoryArgs<PathBuf> for WalletActor {
 impl Default for WalletActor {
     fn default() -> Self {
         let runtime = Runtime::new().expect("failed to create tokio runtime");
-        let wallet_message_handler = Arc::new(Mutex::new(
-            runtime
-                .block_on(async {
-                    WalletMessageHandler::with_manager(
-                        AccountManager::builder()
-                            .with_storage(DEFAULT_STORAGE_FOLDER, ManagerStorage::Sqlite, None)
-                            .unwrap() //safe to unwrap, the storage password is None ^
-                            .with_polling_interval(Duration::from_millis(POLLING_INTERVAL_MS))
-                            .finish()
-                            .await
-                            .unwrap(),
-                    )
-                })
-                .unwrap(),
-        ));
+        let wallet_message_handler = Arc::new(Mutex::new(runtime.block_on(async move {
+            WalletMessageHandler::with_manager(
+                AccountManager::builder()
+                    .with_storage(DEFAULT_STORAGE_FOLDER, ManagerStorage::Sqlite, None)
+                    .unwrap() //safe to unwrap, the storage password is None ^
+                    .with_polling_interval(Duration::from_millis(crate::POLLING_INTERVAL_MS))
+                    .finish()
+                    .await
+                    .unwrap(),
+            )
+        })));
         Self {
             wallet_message_handler,
             runtime,

@@ -1,13 +1,22 @@
 use neon::prelude::*;
+use once_cell::sync::OnceCell;
 use std::convert::TryInto;
 use std::sync::{
     mpsc::{channel, Receiver},
     Arc, Mutex,
 };
+use tokio::runtime::Runtime;
 use wallet_actor_system::{
-    init as init_actor, destroy as destroy_actor, init_logger as init_backend_logger, listen as add_event_listener,
-    send_message as send_actor_message, EventType, LoggerConfigBuilder,
+    destroy as destroy_actor, init as init_actor, init_logger as init_backend_logger,
+    listen as add_event_listener, send_message as send_actor_message, EventType,
+    LoggerConfigBuilder,
 };
+
+pub(crate) fn block_on<C: futures::Future>(cb: C) -> C::Output {
+    static INSTANCE: OnceCell<Mutex<Runtime>> = OnceCell::new();
+    let runtime = INSTANCE.get_or_init(|| Mutex::new(Runtime::new().unwrap()));
+    runtime.lock().unwrap().block_on(cb)
+}
 
 struct SendMessageTask {
     message: String,
@@ -19,7 +28,7 @@ impl Task for SendMessageTask {
     type JsEvent = JsUndefined;
     fn perform(&self) -> Result<Self::Output, Self::Error> {
         let message = &self.message;
-        smol::block_on(send_actor_message(message.to_string()));
+        block_on(send_actor_message(message.to_string()));
         Ok(())
     }
 
@@ -78,7 +87,7 @@ declare_types! {
             let (tx, rx) = channel();
             let wrapped_tx = Arc::new(Mutex::new(tx));
 
-            smol::block_on(init_actor(actor_id.to_string(), move |event| {
+            block_on(init_actor(actor_id.to_string(), move |event| {
                 let tx = wrapped_tx.lock().unwrap();
                 let _ = tx.send(event);
             }, storage_path));
@@ -92,7 +101,7 @@ declare_types! {
         method destroy(mut cx) {
             let this = cx.this();
             let actor_id = cx.borrow(&this, |emitter| emitter.actor_id.clone());
-            smol::block_on(destroy_actor(actor_id));
+            block_on(destroy_actor(actor_id));
             Ok(cx.undefined().upcast())
         }
 

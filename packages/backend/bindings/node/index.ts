@@ -38,10 +38,12 @@ const addon = require('../native')
 const mailbox = []
 const onMessageListeners: ((payload: MessageResponse) => void)[] = []
 
-function _poll(runtime: typeof addon.ActorSystem, cb: (error: string, data: any) => void) {
+function _poll(runtime: typeof addon.ActorSystem, cb: (error: string, data: any) => void, shouldStop: () => boolean) {
   runtime.poll((err: string, data: string) => {
     cb(err, err ? null : JSON.parse(data))
-    _poll(runtime, cb)
+    if (!shouldStop()) {
+      _poll(runtime, cb, shouldStop)
+    }
   })
 }
 
@@ -52,12 +54,19 @@ function sendMessage(message: BridgeMessage): Promise<string> {
 }
 
 export function init(id: string, storagePath?: string) {
-  const runtime = new addon.ActorSystem(id, storagePath || '')
+  const runtime = storagePath ? new addon.ActorSystem(id, storagePath) : new addon.ActorSystem(id)
+  let destroyed = false
   _poll(runtime, (error, data) => {
     const message = error || data
     mailbox.push(message)
     onMessageListeners.forEach(listener => listener(message))
-  })
+  }, () => destroyed)
+  return {
+    destroy() {
+      destroyed = true
+      runtime.destroy()
+    }
+  }
 }
 
 export function onMessage(cb: (payload: any) => void) {
