@@ -82,6 +82,27 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "23b62fc65de8e4e7f52534fb52b0f3ed04746ae267519eef2a83941e8085068b"
 
 [[package]]
+name = "async-stream"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3670df70cbc01729f901f94c887814b3c68db038aad1329a418bae178bc5295c"
+dependencies = [
+ "async-stream-impl",
+ "futures-core",
+]
+
+[[package]]
+name = "async-stream-impl"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a3548b8efc9f8e8a5a0a2808c5bd8451a9031b9e5b879a79590304ae928b0a70"
+dependencies = [
+ "proc-macro2 1.0.24",
+ "quote 1.0.8",
+ "syn 1.0.58",
+]
+
+[[package]]
 name = "async-trait"
 version = "0.1.42"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -138,7 +159,7 @@ checksum = "cdcf67bb7ba7797a081cd19009948ab533af7c355d5caf1d08c777582d351e9c"
 [[package]]
 name = "bee-common"
 version = "0.3.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#2f56d9dd7c601f7581e93b8d3e7259dd46e17740"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#f867fcfd63130d307ea8b4df68679635ce07586e"
 dependencies = [
  "autocfg",
  "chrono",
@@ -151,7 +172,7 @@ dependencies = [
 [[package]]
 name = "bee-common-derive"
 version = "0.1.1-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#2f56d9dd7c601f7581e93b8d3e7259dd46e17740"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#f867fcfd63130d307ea8b4df68679635ce07586e"
 dependencies = [
  "quote 1.0.8",
  "syn 1.0.58",
@@ -160,7 +181,7 @@ dependencies = [
 [[package]]
 name = "bee-crypto"
 version = "0.2.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#2f56d9dd7c601f7581e93b8d3e7259dd46e17740"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#f867fcfd63130d307ea8b4df68679635ce07586e"
 dependencies = [
  "bee-ternary",
  "byteorder",
@@ -172,7 +193,7 @@ dependencies = [
 [[package]]
 name = "bee-message"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#14f969a36ca08c6b5af75d92eaa2ea09066134f8"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#4d98ee2a7dcf22510b2c27678f7359bef9e14c9e"
 dependencies = [
  "bech32",
  "bee-common",
@@ -189,7 +210,7 @@ dependencies = [
 [[package]]
 name = "bee-pow"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#14f969a36ca08c6b5af75d92eaa2ea09066134f8"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#4d98ee2a7dcf22510b2c27678f7359bef9e14c9e"
 dependencies = [
  "bee-crypto",
  "bee-ternary",
@@ -200,12 +221,12 @@ dependencies = [
 [[package]]
 name = "bee-signing"
 version = "0.1.1-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#2f56d9dd7c601f7581e93b8d3e7259dd46e17740"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#f867fcfd63130d307ea8b4df68679635ce07586e"
 dependencies = [
  "bee-common-derive",
  "bee-crypto",
  "bee-ternary",
- "rand 0.7.3",
+ "rand 0.8.2",
  "sha3",
  "thiserror",
  "zeroize",
@@ -231,7 +252,7 @@ dependencies = [
 [[package]]
 name = "bee-ternary"
 version = "0.4.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#2f56d9dd7c601f7581e93b8d3e7259dd46e17740"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#f867fcfd63130d307ea8b4df68679635ce07586e"
 dependencies = [
  "autocfg",
  "num-traits 0.2.14",
@@ -1192,7 +1213,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#f4ecdfe32c1727aff7f28a1e61f6da2529e965cc"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#f624dcd87a4ccc7de8ea242e0d42911bf52e6633"
 dependencies = [
  "async-trait",
  "backtrace",
@@ -2663,10 +2684,11 @@ dependencies = [
 
 [[package]]
 name = "tokio-util"
-version = "0.6.1"
+version = "0.6.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "12ae4751faa60b9f96dd8344d74592e5a17c0c9a220413dbc6942d14139bbfcc"
+checksum = "feb971a26599ffd28066d387f109746df178eff14d5ea1e235015c5601967a4b"
 dependencies = [
+ "async-stream",
  "bytes",
  "futures-core",
  "futures-sink",

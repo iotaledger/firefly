@@ -226,17 +226,19 @@ mod tests {
     use std::path::PathBuf;
     use std::sync::{mpsc::channel, Mutex};
     use std::time::Duration;
+    use tokio::runtime::Runtime;
 
     #[test]
     fn basic() {
-        run_actor("my-actor");
-        run_actor("my-actor2");
-        run_actor("my-actor");
-        run_actor("my-actor2");
+        let runtime = Runtime::new().unwrap();
+        run_actor(&runtime, "my-actor");
+        run_actor(&runtime, "my-actor2");
+        run_actor(&runtime, "my-actor");
+        run_actor(&runtime, "my-actor2");
     }
 
-    fn run_actor(actor_id: &str) {
-        smol::block_on(async {
+    fn run_actor(runtime: &Runtime, actor_id: &str) {
+        runtime.block_on(async {
             let (tx, rx) = channel();
             let tx = Mutex::new(tx);
 
