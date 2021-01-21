@@ -1,5 +1,5 @@
 import { readable, writable, get, derived } from 'svelte/store'
-import { logged, notification, walletPin, strongholdPassword, mnemonic } from 'shared/lib/app'
+import { logged, notification, walletPin, strongholdPassword, profiles } from 'shared/lib/app'
 import { setRoute } from 'shared/lib/helpers'
 
 /**
@@ -67,9 +67,9 @@ let walletSetupType = writable<SetupType>(null)
  * Navigate to initial route
  */
 export const initRouter = () => {
-    let userLogged: boolean = get(logged)
+    let hasProfiles: boolean = get(profiles).length > 0;
 
-    if (userLogged) {
+    if (hasProfiles) {
         setRoute(AppRoute.Login)
     } else {
         setRoute(AppRoute.Welcome)
