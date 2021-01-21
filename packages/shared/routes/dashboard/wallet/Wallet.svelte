@@ -81,13 +81,14 @@
 
 
     function getAccounts() {
-        api.syncAccounts({
+      api.syncAccounts({
             onSuccess(res) {},
             onError(err) {}
         })
+
         api.getAccounts({
             onSuccess(response) {
-                for (const [idx, storedAccount] of response.payload) {
+                for (const [idx, storedAccount] of response.payload.entries()) {
                     api.availableBalance(storedAccount.id, {
                         onSuccess(response) {
                             const balance = response.payload
