@@ -46,7 +46,7 @@
             <Button secondary classes="flex-auto" onClick={() => handleContinueClick('import')}>
                 {locale('actions.import_wallet')}
             </Button>
-            <Button classes="flex-auto" onClick={() => handleContinueClick('new')}>{locale('actions.create_wallet')}</Button>
+            <Button classes="flex-auto" disabled={!profileName} onClick={() => handleContinueClick('new')}>{locale('actions.create_wallet')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-end items-center">
             <Illustration illustration="setup-desktop" height="100%" width="auto" classes="h-full object-cover object-left" />
