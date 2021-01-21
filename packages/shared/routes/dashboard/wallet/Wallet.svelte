@@ -32,6 +32,8 @@
     let state: WalletState = WalletState.Init
     let stateHistory = []
 
+    let isGeneratingAddress = false
+
     const _next = (request) => {
         let nextState
         switch (state) {
@@ -79,12 +81,11 @@
         }
     }
 
-
     function getAccounts() {
-      api.syncAccounts({
-            onSuccess(res) {},
-            onError(err) {}
-        })
+    //   api.syncAccounts({
+    //         onSuccess(res) {},
+    //         onError(err) {}
+    //     })
 
         api.getAccounts({
             onSuccess(response) {
@@ -126,6 +127,23 @@
                 alert('failed to get accounts')
             }
         })
+    }
+
+    function onGenerateAddress(accountId) {
+         isGeneratingAddress = true
+        setTimeout(() => {
+            accounts = accounts.map((account) => {
+                if (account.id === accountId) {
+                    return Object.assign({}, account, {
+                        address: 'y'.repeat(64)
+                    })
+                }
+
+                return account;
+            })
+            isGeneratingAddress = false
+
+        }, 2000)
     }
 
     onMount(() => {
@@ -219,7 +237,7 @@
                     {:else if state === WalletState.Send}
                         <Send on:next={_next} {accounts} {locale} {mobile} />
                     {:else if state === WalletState.Receive}
-                        <Receive on:next={_next} {accounts} {locale} {mobile} />
+                        <Receive on:next={_next} {accounts} {onGenerateAddress} {isGeneratingAddress} {locale} {mobile} />
                     {/if}
                 </div>
             </div>
