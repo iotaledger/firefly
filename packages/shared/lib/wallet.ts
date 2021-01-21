@@ -61,6 +61,7 @@ const apiToResponseTypeMap = {
     onConfirmationStateChange: ResponseTypes.ConfirmationStateChange,
     onReattachment: ResponseTypes.Reattachment,
     onBroadcast: ResponseTypes.Broadcast,
+    onStrongholdStatusChange: ResponseTypes.StrongholdStatusChange,
     generateMnemonic: ResponseTypes.GeneratedMnemonic,
     storeMnemonic: ResponseTypes.StoredMnemonic,
     verifyMnemonic: ResponseTypes.VerifiedMnemonic,
