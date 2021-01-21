@@ -131,19 +131,23 @@
 
     function onGenerateAddress(accountId) {
          isGeneratingAddress = true
-        setTimeout(() => {
+        api.generateAddress(accountId, {
+            onSuccess(response) {
             accounts = accounts.map((account) => {
                 if (account.id === accountId) {
                     return Object.assign({}, account, {
-                        address: 'y'.repeat(64)
+                        address: response.payload.address
                     })
                 }
 
                 return account;
             })
             isGeneratingAddress = false
-
-        }, 2000)
+            },
+            onError(error) {
+                console.error(error)
+            }
+        })
     }
 
     onMount(() => {
