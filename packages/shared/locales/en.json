@@ -233,6 +233,9 @@
     "actions": {
         "continue": "Continue",
         "back": "Back",
+        "cancel": "Cancel",
+        "close": "Close",
+        "save": "Save",
         "import_seed": "Import an existing seed",
         "import_wallet": "Import existing wallet",
         "create_wallet": "Create new wallet",
@@ -251,6 +254,7 @@
         "import_from_file": "Import from a file",
         "send": "Send",
         "receive": "Receive",
+        "create": "Create",
         "begin_transfer": "Begin Transfer",
         "try_again": "Try again",
         "visit_discord": "Visit Discord",
@@ -296,6 +300,7 @@
         "share_address": "Share an address",
         "your_address": "Your address",
         "generate_new_address": "Generate new address",
+        "copy_address": "Copy Address",
         "have_text_backup": "I have a text backup",
         "have_file_backup": "I have a file backup",
         "enter_seed_or_phrase": "Enter a recovery phrase or seed",
@@ -313,6 +318,8 @@
         "accounts": "Accounts",
         "automaticNodeSelection": "Automatic node selection",
         "manualNodeSelection": "Manual node selection",
-        "profiles": "Profiles"
+        "profiles": "Profiles",
+        "create_account": "Create an account",
+        "account_name": "Account name"
     }
 }

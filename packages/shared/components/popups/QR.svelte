@@ -1,8 +1,8 @@
 <script>
     import { QR } from 'shared/components'
-    export let value
+    export let data
 </script>
 
 <div class="flex justify-center w-full">
-    <QR {value} />
+    <QR {data} />
 </div>

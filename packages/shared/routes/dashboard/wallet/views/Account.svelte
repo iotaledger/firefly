@@ -5,6 +5,7 @@
     import { Dropdown, ActivityRow, Text, Button, Icon, Popup } from 'shared/components'
     import { CurrencyTypes, chartCurrency, chartTimeframe, TIMEFRAME_MAP } from 'shared/lib/marketData'
     import { Send, Receive } from '.'
+    import ManageAccount from './ManageAccount.svelte'
 
     export let locale
     export let mobile
@@ -30,12 +31,8 @@
         let nextState
         switch (state) {
             case AccountState.Init:
-                if (request === 'send') {
-                    nextState = AccountState.Send
-                } else if (request === 'receive') {
-                    nextState = AccountState.Receive
-                } else if (request === 'transfer') {
-                    nextState = AccountState.Transfer
+                if (Object.values(AccountState).includes(request as AccountState)) {
+                    nextState = request
                 }
                 break
             case AccountState.Send:
@@ -46,7 +43,7 @@
                 // do logic here
                 nextState = AccountState.Init
                 break
-            case AccountState.Receive:
+            case AccountState.Manage:
                 // do logic here
                 nextState = AccountState.Init
                 break
@@ -57,9 +54,9 @@
             state = nextState
         }
     }
-    const _previous = (exit: boolean = false) => {
+    const _previous = (exit: boolean) => {
         let prevState = stateHistory.pop()
-        if (!exit && prevState) {
+        if (!exit) {
             state = prevState
         } else {
             dispatch('previous')
@@ -67,12 +64,12 @@
     }
 </script>
 
-<Popup bind:active={showQR} qrValue={account.address} type="qr" title="Your QR code" />
+<Popup bind:active={showQR} qrData={account.address} type="qr" title="Your QR code" />
 <div class="w-full h-full flex flex-col flex-nowrap px-10 pb-10">
     <!-- Selected account top bar: back, account name, account switcher -->
-    <div class="relative flex lex-row justify-center items-center w-full py-5">
+    <div class="relative flex flex-row justify-center items-center w-full py-5">
         <div class="absolute left-0">
-            <Button secondary small icon="arrow-left" iconReverse onClick={_previous}>Back</Button>
+            <Button secondary small icon="arrow-left" iconReverse onClick={() => _previous(true)}>Back</Button>
         </div>
         <Text type="h3" classes="text-center">{account.name}</Text>
         <div class="absolute right-0 flex flex-row space-x-4 account-switch">
@@ -132,7 +129,7 @@
                                     icon="transfer"
                                     classes="w-full mb-5 p-4"
                                     secondary
-                                    onClick={() => _next(AccountState.Send)}>
+                                    onClick={() => _next(AccountState.Manage)}>
                                     {locale('general.manage_account')}
                                     <Text type="p" secondary>{locale('general.customize_account')}</Text>
                                 </Button>
@@ -148,11 +145,13 @@
                             </Button>
                         </div>
                     {:else if state === AccountState.Send}
-                        <Send on:next={_next} {accounts} {locale} {mobile} />
+                        <Send on:next={_next} on:previous={() => _previous(false)} {accounts} {locale} {mobile} />
                     {:else if state === AccountState.Transfer}
-                        <Send internal on:next={_next} {accounts} {locale} {mobile} />
+                        <Send internal on:next={_next} on:previous={() => _previous(false)} {accounts} {locale} {mobile} />
                     {:else if state === AccountState.Receive}
-                        <Receive on:next={_next} {account} {locale} {mobile} />
+                        <Receive on:next={_next} on:previous={() => _previous(false)} {account} {locale} {mobile} />
+                    {:else if state === AccountState.Manage}
+                        <ManageAccount on:next={_next} on:previous={() => _previous(false)} {account} {locale} {mobile} />
                     {/if}
                 </div>
             </div>

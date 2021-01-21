@@ -46,6 +46,9 @@
             }
         )
     }
+    const handleBackClick = () => {
+        dispatch('previous')
+    }
 </script>
 
 {#if mobile}
@@ -85,7 +88,7 @@
         </div>
         <!-- Action -->
         <div class="flex flex-row justify-between px-2">
-            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleSendClick()}>{locale('actions.back')}</Button>
+            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>{locale('actions.back')}</Button>
             <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()}>{locale('actions.send')}</Button>
         </div>
     </div>
