@@ -1,6 +1,6 @@
 <script lang="typescript">
     import type { account } from 'lib/typings'
-    import { Dropdown, Icon, ActivityRow, Chart, Text, Button, AccountTile, Transition } from 'shared/components'
+    import { Dropdown, Icon, ActivityRow, Chart, Text, Button, AccountTile, Popup } from 'shared/components'
     import {
         selectedChart,
         CurrencyTypes,
@@ -68,8 +68,16 @@
             console.error('Error selecting account')
         }
     }
+
+    let showPasswordPopup = true
 </script>
 
+<Popup
+    bind:active={showPasswordPopup}
+    {locale}
+    type="password"
+    title="Password required"
+    subtitle="Please provide your wallet’s password to confirm this transaction." />
 {#if state === WalletState.Account && selectedAccount}
     <Account
         account={selectedAccount}
