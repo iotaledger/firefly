@@ -4,9 +4,9 @@ import type { AccountIdentifier, Account, SyncedAccount } from './account'
 import type { Message } from './message'
 
 export interface BridgeMessage {
-    id: string
-    cmd: string
-    payload?: any
+  id: string
+  cmd: string
+  payload?: any
 }
 
 export enum ResponseTypes {
@@ -34,6 +34,7 @@ export enum ResponseTypes {
   ConfirmationStateChange = 'ConfirmationStateChange',
   Reattachment = 'Reattachment',
   Broadcast = 'Broadcast',
+  StrongholdStatusChange = 'StrongholdStatusChange',
   GeneratedMnemonic = 'GeneratedMnemonic',
   StoredMnemonic = 'StoredMnemonic',
   VerifiedMnemonic = 'VerifiedMnemonic',
@@ -59,8 +60,8 @@ export type SetStrongholdPasswordResponse = Response<ResponseTypes.StrongholdPas
 export type SentTransferResponse = Response<ResponseTypes.SentTransfer, Message>
 export type ErrorResponse = Response<ResponseTypes.Error, ErrorEventPayload>
 export type PanicResponse = Response<ResponseTypes.Panic, string>
-export type GenerateMnemonicResponse =  Response<ResponseTypes.GeneratedMnemonic, string>
-export type StoreMnemonicResponse =  Response<ResponseTypes.StoredMnemonic, void>
+export type GenerateMnemonicResponse = Response<ResponseTypes.GeneratedMnemonic, string>
+export type StoreMnemonicResponse = Response<ResponseTypes.StoredMnemonic, void>
 export type SetStoragePasswordResponse = Response<ResponseTypes.StoragePasswordSet, void>
 
 export type MessageResponse = RemovedAccountResponse |

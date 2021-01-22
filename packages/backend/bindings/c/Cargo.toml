@@ -12,4 +12,6 @@ crate-type = ["cdylib", "staticlib"]
 
 [dependencies]
 wallet-actor-system = { path = "../.." }
-smol = { version = "0.3", features = ["tokio02"] }
+tokio = "1.0"
+once_cell = "1.5"
+futures = "0.3"

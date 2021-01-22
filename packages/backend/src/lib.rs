@@ -7,7 +7,7 @@ use iota_wallet::{
     account_manager::{AccountManager, ManagerStorage, DEFAULT_STORAGE_FOLDER},
     event::{
         on_balance_change, on_broadcast, on_confirmation_state_change, on_error,
-        on_new_transaction, on_reattachment,
+        on_new_transaction, on_reattachment, on_stronghold_status_change,
     },
 };
 use once_cell::sync::Lazy;
@@ -46,6 +46,7 @@ pub enum EventType {
     ConfirmationStateChange,
     Reattachment,
     Broadcast,
+    StrongholdStatusChange,
 }
 
 impl TryFrom<&str> for EventType {
@@ -59,6 +60,7 @@ impl TryFrom<&str> for EventType {
             "ConfirmationStateChange" => EventType::ConfirmationStateChange,
             "Reattachment" => EventType::Reattachment,
             "Broadcast" => EventType::Broadcast,
+            "StrongholdStatusChange" => EventType::StrongholdStatusChange,
             _ => return Err(format!("invalid event name {}", value)),
         };
         Ok(event_type)
@@ -217,6 +219,9 @@ pub fn listen<A: Into<String>, S: Into<String>>(actor_id: A, id: S, event_type: 
         EventType::Broadcast => on_broadcast(move |event| {
             let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
         }),
+        EventType::StrongholdStatusChange => on_stronghold_status_change(move |event| {
+            let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
+        }),
     }
 }
 
@@ -226,17 +231,19 @@ mod tests {
     use std::path::PathBuf;
     use std::sync::{mpsc::channel, Mutex};
     use std::time::Duration;
+    use tokio::runtime::Runtime;
 
     #[test]
     fn basic() {
-        run_actor("my-actor");
-        run_actor("my-actor2");
-        run_actor("my-actor");
-        run_actor("my-actor2");
+        let runtime = Runtime::new().unwrap();
+        run_actor(&runtime, "my-actor");
+        run_actor(&runtime, "my-actor2");
+        run_actor(&runtime, "my-actor");
+        run_actor(&runtime, "my-actor2");
     }
 
-    fn run_actor(actor_id: &str) {
-        smol::block_on(async {
+    fn run_actor(runtime: &Runtime, actor_id: &str) {
+        runtime.block_on(async {
             let (tx, rx) = channel();
             let tx = Mutex::new(tx);
 

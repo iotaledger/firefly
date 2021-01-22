@@ -18,5 +18,4 @@ iota-core = { git = "https://github.com/iotaledger/iota.rs", branch = "dev" }
 log = "0.4"
 
 [dev-dependencies]
-smol = {version = "0.3", features = ["tokio02"] }
 futures = "0.3"

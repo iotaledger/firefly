@@ -1,13 +1,22 @@
 use std::convert::TryInto;
 use std::ffi::{CStr, CString};
 use std::os::raw::c_char;
+use std::sync::Mutex;
 
 use wallet_actor_system::{
     init as init_actor, destroy as destroy_actor, listen as add_event_listener, send_message as send_actor_message,
     EventType,
 };
+use tokio::runtime::Runtime;
+use once_cell::sync::OnceCell;
 
 type Callback = extern "C" fn(*const c_char);
+
+pub(crate) fn block_on<C: futures::Future>(cb: C) -> C::Output {
+    static INSTANCE: OnceCell<Mutex<Runtime>> = OnceCell::new();
+    let runtime = INSTANCE.get_or_init(|| Mutex::new(Runtime::new().unwrap()));
+    runtime.lock().unwrap().block_on(cb)
+}
 
 #[no_mangle]
 pub extern "C" fn initialize(callback: Callback, actor_id: *const c_char, storage_path: *const c_char) {
@@ -23,7 +32,7 @@ pub extern "C" fn initialize(callback: Callback, actor_id: *const c_char, storag
         let c_storage_path = unsafe { CStr::from_ptr(storage_path) };
         Some(c_storage_path.to_str().unwrap())
     };
-    smol::block_on(init_actor(
+    block_on(init_actor(
         actor_id,
         move |event| {
             let c_event = CString::new(event).expect("failed to convert response to CString");
@@ -41,7 +50,7 @@ pub extern "C" fn destroy(actor_id: *const c_char) {
     };
     let actor_id = c_actor_id.to_str().unwrap();
 
-    smol::block_on(destroy_actor(
+    block_on(destroy_actor(
         actor_id,
     ));
 }
@@ -53,7 +62,7 @@ pub extern "C" fn send_message(message: *const c_char) {
         CStr::from_ptr(message)
     };
     let message = c_message.to_str().unwrap();
-    smol::block_on(send_actor_message(message.to_string()));
+    block_on(send_actor_message(message.to_string()));
 }
 
 #[no_mangle]
