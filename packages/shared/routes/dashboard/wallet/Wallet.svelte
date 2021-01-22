@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { api } from 'shared/lib/wallet'
+    import { api, getLatestMessages } from 'shared/lib/wallet'
     import type { account } from 'lib/typings'
     import { Dropdown, Icon, ActivityRow, Chart, Text, Button, AccountTile, Popup } from 'shared/components'
     import {
@@ -27,13 +27,18 @@
     }
 
     let totalBalance = dummyTotalBalance
-    let transactions = dummyTransactions
+    let transactions = []
+    
     let accounts = []
 
     let state: WalletState = WalletState.Init
     let stateHistory = []
 
     let isGeneratingAddress = false
+
+    let showPasswordPopup = false
+
+    let selectedAccount = null
 
     const _next = (request) => {
         let nextState
@@ -64,7 +69,6 @@
         }
     }
 
-    let selectedAccount = null
     const selectAccount = (index) => {
         selectedAccount = accounts.find((account) => account.index === index)
         if (selectedAccount) {
@@ -75,14 +79,20 @@
     }
 
     function getAccounts() {
-    //   api.syncAccounts({
-    //         onSuccess(res) {},
-    //         onError(err) {}
-    //     })
+      api.getStrongholdStatus({
+          onSuccess(response) {
+              if (response.payload.snapshot.status === 'Locked') {
+                  showPasswordPopup = true;
+              }
+          },
+          onError(error) {
+              console.error(error)
+          }
+      })
 
-        api.getAccounts({
-            onSuccess(response) {
-                for (const [idx, storedAccount] of response.payload.entries()) {
+      api.getAccounts({
+            onSuccess(accountsResponse) {
+                for (const [idx, storedAccount] of accountsResponse.payload.entries()) {
                     api.availableBalance(storedAccount.id, {
                         onSuccess(response) {
                             const balance = response.payload
@@ -96,6 +106,7 @@
                                 address: 'x'.repeat(64)
                             }
                             accounts = [...accounts, account]
+                            transactions = getLatestMessages(accountsResponse.payload)
                         },
                         onError(error) {
                             console.log('Error', error);
@@ -143,11 +154,23 @@
         })
     }
 
+    function syncAccounts(payload) {
+        console.log('payload', payload);
+
+        api.syncAccounts({
+            onSuccess(response) {
+                console.log('Response', response);
+            },
+            onError(error) {
+                console.error(error)
+            }
+        })
+    }
+
     onMount(() => {
         getAccounts()
     })
     
-    let showPasswordPopup = true
 </script>
 
 <Popup
@@ -155,7 +178,9 @@
     {locale}
     type="password"
     title="Password required"
-    subtitle="Please provide your wallet’s password to confirm this transaction." />
+    subtitle="Please provide your wallet’s password to unlock stronghold." 
+    onSuccess={syncAccounts}
+/>
 {#if state === WalletState.Account && selectedAccount}
     <Account
         account={selectedAccount}
@@ -253,7 +278,7 @@
                         {:else if state === WalletState.Send}
                             <Send on:next={_next} on:previous={_previous} {accounts} {locale} {mobile} />
                         {:else if state === WalletState.Receive}
-                            <Receive on:next={_next} on:previous={_previous} {accounts} {locale} {mobile} />
+                            <Receive on:next={_next} on:previous={_previous} {accounts} {locale} {mobile} onGenerateAddress={onGenerateAddress} />
                         {/if}
                     </div>
                 {/if}

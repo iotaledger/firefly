@@ -372,6 +372,7 @@ export default class ValidatorService {
             [ResponseTypes.SyncedAccounts]: this.createBaseValidator().getFirst(),
             [ResponseTypes.SentTransfer]: this.createBaseValidator().getFirst(),
             [ResponseTypes.StoragePasswordSet]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.StrongholdStatus]: this.createBaseValidator().getFirst(),
             [ResponseTypes.GeneratedAddress]: this.createBaseValidator().add(new PayloadTypeValidator('object')).getFirst(),
             [ResponseTypes.Error]: this.createBaseValidator().getFirst()
         };

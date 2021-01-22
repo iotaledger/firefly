@@ -31,7 +31,8 @@ import {
   send as _send,
   generateMnemonic as _generateMnemonic,
   storeMnemonic as _storeMnemonic,
-  verifyMnemonic as _verifyMnemonic
+  verifyMnemonic as _verifyMnemonic,
+  getStrongholdStatus as _getStrongholdStatus
 } from '../../api-wrapper/wallet'
 
 const addon = require('../native')
@@ -78,6 +79,9 @@ export function initLogger(config: LoggerConfig) {
 }
 
 export const api = {
+  getStrongholdStatus: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _getStrongholdStatus(sendMessage, __ids)
+  },
   generateMnemonic: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _generateMnemonic(sendMessage, __ids)
   },

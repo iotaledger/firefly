@@ -16,11 +16,13 @@ import type { Event, BalanceChangeEventPayload, TransactionEventPayload } from '
 import Validator, { ErrorTypes as ValidatorErrorTypes } from 'shared/lib/validator'
 import { generateRandomId } from 'shared/lib/utils'
 import { mnemonic, getActiveProfile } from 'shared/lib/app'
+import { account, message } from './typings'
 
 const Wallet = window['__WALLET__']
 
 type Account = {
     id: string
+    index: number;
     alias: string
     addresses: Address[]
     messages: Message[]
@@ -65,7 +67,8 @@ const apiToResponseTypeMap = {
     generateMnemonic: ResponseTypes.GeneratedMnemonic,
     storeMnemonic: ResponseTypes.StoredMnemonic,
     verifyMnemonic: ResponseTypes.VerifiedMnemonic,
-    setStoragePassword: ResponseTypes.StoragePasswordSet
+    setStoragePassword: ResponseTypes.StoragePasswordSet,
+    getStrongholdStatus: ResponseTypes.StrongholdStatus
 };
 
 /*
@@ -148,6 +151,7 @@ const defaultCallbacks = {
  * Receives messages from wallet.rs.
  */
 Wallet.onMessage((message: MessageResponse) => {
+    console.log(message)
     const _deleteCallbackId = (_id: string) => {
         const isEventMessage = [
             ResponseTypes.ErrorThrown,
@@ -266,3 +270,39 @@ export const requestMnemonic = async () => {
     let recovPhrase = await generateRecoveryPhrase()
     mnemonic.set(recovPhrase)
 }
+
+Wallet.api.onStrongholdStatusChange({
+    onSuccess(response) {
+        console.log(response)
+    },
+    onError(error) {
+        console.error(error)
+    }
+})
+
+/**
+ * Gets latest messages
+ * 
+ * @method getLatestMessages
+ * 
+ * @param {Account} accounts 
+ * @param {number} [count] 
+ * 
+ * @returns {Message[]}
+ */
+export const getLatestMessages = (
+    accounts: Account[],
+    count = 10
+): Message[] => {    
+    const messages: Message[] = accounts.reduce((messages, account) => messages.concat(
+        account.messages.map((message, idx) => Object.assign({}, message, {
+            account: account.index,
+            internal: idx % 2 !== 0
+        })
+        )
+    ), []);
+
+    return messages.slice().sort((a, b) => {
+        return <any>new Date(b.timestamp) - <any>new Date(a.timestamp);
+    }).slice(0, count);
+};

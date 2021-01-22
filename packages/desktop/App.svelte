@@ -36,7 +36,7 @@
             initRouter()
         }, 100)
 
-        await fetchMarketData()
+        // await fetchMarketData()
     })
 </script>
 

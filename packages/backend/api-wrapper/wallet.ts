@@ -90,3 +90,11 @@ export function verifyMnemonic(bridge: Bridge, __ids: CommunicationIds, payload:
     payload
   })
 }
+
+export function getStrongholdStatus(bridge: Bridge, __ids: CommunicationIds) {
+  return bridge({
+    actorId: __ids.actorId,
+    id: __ids.messageId,
+    cmd: 'GetStrongholdStatus',
+  })
+}
