@@ -13,6 +13,7 @@
     } from 'shared/lib/marketData'
     import { Send, Receive, Account, CreateAccount } from './views/'
     import { totalBalance as dummyTotalBalance, transactions as dummyTransactions, accounts as dummyAccounts } from './dummydata'
+    import { DEFAULT_NODE as node, DEFAULT_NODES as nodes } from 'shared/lib/network'
 
     export let locale
     export let mobile
@@ -167,6 +168,24 @@
         })
     }
 
+    function onCreateAccount(alias) {
+          api.createAccount(
+            {
+                alias,
+                clientOptions: { node, nodes },
+            },
+            {
+                onSuccess(response) {
+                    accounts = [...accounts, response.payload]
+                    _next(WalletState.Init)
+                },
+                onError(error) {
+                    console.error(error);
+            }
+         }
+        )
+    }
+
     onMount(() => {
         getAccounts()
     })
@@ -196,7 +215,7 @@
             <!-- Total Balance, Accounts list & Send/Receive -->
             <div class="flex flex-auto flex-col w-1/3 h-full flex-shrink-0">
                 {#if state === WalletState.CreateAccount}
-                    <CreateAccount on:next={_next} on:previous={_previous} {locale} {mobile} />
+                    <CreateAccount on:next={_next} on:previous={_previous} {locale} {mobile} onCreate={onCreateAccount} />
                 {:else}
                     <div
                         class="bg-gradient-to-b from-blue-500 to-blue-600 dark:from-gray-800 dark:to-gray-900 rounded-t-2xl pt-10 pb-12 px-8">
