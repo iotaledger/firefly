@@ -27,7 +27,7 @@
         CreateAccount = 'createAccount',
     }
 
-    let totalBalance = dummyTotalBalance
+    let totalBalance = []
     let transactions = []
     
     let accounts = []
@@ -64,6 +64,7 @@
             state = nextState
         }
     }
+    
     const _previous = () => {
         let prevState = stateHistory.pop()
         if (prevState) {
