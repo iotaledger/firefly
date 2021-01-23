@@ -43,6 +43,7 @@
 
     const _next = (request) => {
         let nextState
+
         switch (state) {
             case WalletState.Init:
                 if (Object.values(WalletState).includes(request as WalletState)) {
@@ -53,6 +54,9 @@
                 // do logic here
                 nextState = WalletState.Init
                 break
+            case WalletState.CreateAccount:
+                nextState = request
+                break;
         }
         if (nextState) {
             stateHistory.push(state)
