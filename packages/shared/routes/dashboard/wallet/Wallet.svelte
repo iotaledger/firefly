@@ -12,8 +12,8 @@
         AvailableCharts,
     } from 'shared/lib/marketData'
     import { Send, Receive, Account, CreateAccount } from './views/'
-    import { totalBalance as dummyTotalBalance, transactions as dummyTransactions, accounts as dummyAccounts } from './dummydata'
     import { DEFAULT_NODE as node, DEFAULT_NODES as nodes } from 'shared/lib/network'
+
 
     export let locale
     export let mobile

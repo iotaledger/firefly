@@ -16,6 +16,7 @@
     let from = accounts.map((acc) => ({ value: acc.id, label: `${acc.name} • ${acc.balance}` }))[0]
     let toAddress = ''
     let toAccount = accounts.map((acc) => ({ value: acc.id, label: `${acc.name} • ${acc.balance}` }))[0]
+
     let amount = undefined
     let reference = ''
 

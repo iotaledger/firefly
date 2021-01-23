@@ -6,9 +6,9 @@
 
     export let locale
     export let mobile
-
     export let accounts
     export let account
+
     export let onGenerateAddress = (accountId) => {}
     export let isGeneratingAddress = false
 
