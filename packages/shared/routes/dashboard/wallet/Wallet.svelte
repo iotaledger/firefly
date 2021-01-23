@@ -138,6 +138,7 @@
                         if (!err) {
                             const account = prepareAccountInfo(storedAccount, meta);
                             accounts = [...accounts, account]
+                            transactions = getLatestMessages(accountsResponse.payload)
                         } else {
                             console.error(err);
                         }
