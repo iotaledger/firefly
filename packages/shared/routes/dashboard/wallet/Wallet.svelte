@@ -27,7 +27,12 @@
         CreateAccount = 'createAccount',
     }
 
-    let totalBalance = []
+    let totalBalance = {
+          incoming: '32 Gi',
+          outgoing: '16 Gi',
+          balance: '23.322,32 Mi',
+          balanceEquiv: '45.500 USD'
+    }
     let transactions = []
     
     let accounts = []
