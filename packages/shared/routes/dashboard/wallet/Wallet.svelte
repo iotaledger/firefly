@@ -192,8 +192,7 @@
 
     onMount(() => {
         getAccounts()
-    })
-    
+    })   
 </script>
 
 <Popup

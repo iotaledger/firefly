@@ -12,6 +12,10 @@
         markProfileAsActive(id);
         dispatch('next')
     }
+
+    function addProfile() {
+        dispatch('next', { shouldAddProfile: true })
+    }
 </script>
 
 {#if mobile}
@@ -23,7 +27,7 @@
             {#each $profiles as profile}
                 <Profile onClick={handleContinueClick} name={profile.name} id={profile.id} />
             {/each}
-            <Profile name="Add Profile" bgColor="#fff" classes="border-solid border-2 border-gray-400">
+            <Profile onClick={addProfile}  name="Add Profile" bgColor="#fff" classes="border-solid border-2 border-gray-400">
                 <Icon icon="plus" classes="text-blue-500" width={16} height={19} />
             </Profile>
         </div>

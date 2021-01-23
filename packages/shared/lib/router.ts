@@ -84,7 +84,9 @@ export const routerNext = (event) => {
 
     switch (currentRoute) {
         case AppRoute.Login:
-            nextRoute = AppRoute.Dashboard
+            const { shouldAddProfile } = params;
+
+            nextRoute = shouldAddProfile ? AppRoute.Setup : AppRoute.Dashboard
             break
         case AppRoute.Welcome:
             nextRoute = AppRoute.Legal
