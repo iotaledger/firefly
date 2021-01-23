@@ -182,7 +182,7 @@
                 <div class="relative flex flex-row justify-between">
                     <div class="relative flex items-center flex-1">
                         <div class="absolute left-0 flex items-center">
-                            <Icon classes="mr-4" {icon} />
+                            <Icon width={16} height={16} classes="mr-4" {icon} />
                         </div>
                         <span class="font-bold text-12 leading-140"><slot /></span>
                     </div>
