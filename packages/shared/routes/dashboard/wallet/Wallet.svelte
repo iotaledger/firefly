@@ -83,6 +83,42 @@
         }
     }
 
+    function getAccountMeta(accountId, callback) {
+        api.totalBalance(accountId, {
+            onSuccess(availableBalanceResponse) {
+
+                api.latestAddress(accountId, {
+                    onSuccess(latestAddressResponse) {
+                        callback(null, {
+                            balance: availableBalanceResponse.payload,
+                            address: latestAddressResponse.payload.address
+                        })
+                    },
+                    onError(error) {
+                        callback(error)
+                    }
+                })},
+                onError(error) {
+                    callback(error)
+                }
+        })
+    }
+
+    function prepareAccountInfo(account, meta) {
+        const { id, index, alias } = account;
+        const { balance, address } = meta;
+
+        return Object.assign({}, account, {
+            id, 
+            index,
+            name: alias,
+            balance, 
+            balanceEquiv: `${balance} USD`,
+            address,
+            color: AccountColors[index],
+        })
+    }
+
     function getAccounts() {
       api.getStrongholdStatus({
           onSuccess(response) {
@@ -98,42 +134,19 @@
       api.getAccounts({
             onSuccess(accountsResponse) {
                 for (const [idx, storedAccount] of accountsResponse.payload.entries()) {
-                    api.availableBalance(storedAccount.id, {
-                        onSuccess(response) {
-                            const balance = response.payload
-                            const account = {
-                                id: storedAccount.id,
-                                index: idx,
-                                name: storedAccount.alias,
-                                balance: `${balance} i`,
-                                balanceEquiv: `${balance} USD`,
-                                color: AccountColors[idx],
-                                address: 'x'.repeat(64)
-                            }
+                    getAccountMeta(storedAccount.id, (err, meta) => {
+                        if (!err) {
+                            const account = prepareAccountInfo(storedAccount, meta);
                             accounts = [...accounts, account]
-                            transactions = getLatestMessages(accountsResponse.payload)
-                        },
-                        onError(error) {
-                            console.log('Error', error);
-                            
-                            const account = {
-                                id: storedAccount.id,
-                                index: idx,
-                                name: storedAccount.alias,
-                                balance: 'ERROR',
-                                balanceEquiv: 'ERROR',
-                               color: AccountColors[idx],
-                               address: 'x'.repeat(64)
-
-                            }
-                            accounts = [...accounts, account]
+                        } else {
+                            console.error(err);
                         }
                     })
                 }
             },
-            onError() {
+            onError(error) {
                 // TODO handle error
-                alert('failed to get accounts')
+                console.error(error)
             }
         })
     }
@@ -179,9 +192,23 @@
                 clientOptions: { node, nodes },
             },
             {
-                onSuccess(response) {
-                    accounts = [...accounts, response.payload]
-                    _next(WalletState.Init)
+                onSuccess(createAccountResponse) {
+                    api.syncAccount(createAccountResponse.payload.id, {
+                        onSuccess(syncAccountResponse) {
+                        getAccountMeta(createAccountResponse.payload.id, (err, meta) => {
+                        if (!err) {
+                            const account = prepareAccountInfo(createAccountResponse.payload, meta);
+                            accounts = [...accounts, account]
+                            _next(WalletState.Init)
+                        } else {
+                            console.error(err);
+                        }
+                    })
+                        },
+                        onError(error) {
+                            console.error(error)
+                        }
+                    })
                 },
                 onError(error) {
                     console.error(error);

@@ -21,6 +21,7 @@ export enum ResponseTypes {
   AvailableBalance = 'AvailableBalance',
   TotalBalance = 'TotalBalance',
   SyncedAccounts = 'SyncedAccounts',
+  SyncedAccount = 'SyncedAccount',
   Reattached = 'Reattached',
   BackupSuccessful = 'BackupSuccessful',
   BackupRestored = 'BackupRestored',
@@ -54,6 +55,7 @@ export type LatestAddressResponse = Response<ResponseTypes.LatestAddress, Addres
 export type AvailableBalanceResponse = Response<ResponseTypes.AvailableBalance, number>
 export type TotalBalanceResponse = Response<ResponseTypes.TotalBalance, number>
 export type SyncAccountsResponse = Response<ResponseTypes.SyncedAccounts, SyncedAccount[]>
+export type SyncAccountResponse = Response<ResponseTypes.SyncedAccounts, SyncedAccount>
 export type ReattachResponse = Response<ResponseTypes.Reattached, string> // message id
 export type BackupSuccessfulResponse = Response<ResponseTypes.BackupSuccessful, void>
 export type BackupRestoredResponse = Response<ResponseTypes.BackupRestored, void>
