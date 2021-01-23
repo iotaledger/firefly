@@ -54,6 +54,8 @@
                 // do logic here
                 nextState = WalletState.Init
                 break
+            case WalletState.Account:
+            case WalletState.Send:
             case WalletState.CreateAccount:
                 nextState = request
                 break;
@@ -218,6 +220,64 @@
         )
     }
 
+    function onSend(
+        senderAccountId, 
+        receiveAddress,
+        amount,
+        ) {
+        api.send(
+            senderAccountId,
+            {
+                amount,
+                address: receiveAddress,
+                remainder_value_strategy: {
+                    strategy: 'ChangeAddress'
+                },
+                indexation: { index: 'firefly', data: new Array() }
+            },
+            {
+                onSuccess(response) {
+                    transactions = [{
+                        ...response.payload,
+                        ...{
+                            internal: false,
+                            account: accounts.find((account) => account.id === senderAccountId).index
+                        },
+                        ...transactions,
+                    }]
+                    _next(WalletState.Init)
+                },
+                onError(error) {
+                    console.error(error);
+                }
+            }
+        )
+    }
+
+    function onInternalTransfer(senderAccountId, receiverAccountId, amount) {
+        api.internalTransfer(
+                senderAccountId,
+                receiverAccountId,
+                amount,
+                {
+                    onSuccess(response) {
+                         transactions = [{
+                        ...response.payload,
+                        ...{
+                            internal: true,
+                            account: accounts.find((account) => account.id === senderAccountId).index
+                        },
+                        ...transactions
+                    }]
+                        _next(WalletState.Init)
+                    },
+                    onError(response) {
+                        console.log(response)
+                    }
+                }
+            )
+    }
+
     onMount(() => {
         getAccounts()
     })   
@@ -233,6 +293,8 @@
 />
 {#if state === WalletState.Account && selectedAccount}
     <Account
+        send={onSend}
+        internalTransfer={onInternalTransfer}
         account={selectedAccount}
         {accounts}
         {selectAccount}
@@ -326,7 +388,7 @@
                                 </Button>
                             </div>
                         {:else if state === WalletState.Send}
-                            <Send on:next={_next} on:previous={_previous} {accounts} {locale} {mobile} />
+                            <Send on:next={_next} on:previous={_previous} send={onSend} internalTransfer={onInternalTransfer} {accounts} {locale} {mobile} />
                         {:else if state === WalletState.Receive}
                             <Receive on:next={_next} on:previous={_previous} {accounts} {locale} {mobile} onGenerateAddress={onGenerateAddress} />
                         {/if}

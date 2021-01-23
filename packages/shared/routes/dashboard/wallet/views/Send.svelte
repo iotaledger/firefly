@@ -20,6 +20,9 @@
     let amount = undefined
     let reference = ''
 
+    export let send
+    export let internalTransfer
+
     const handleFromSelect = (item) => {
         from = item
     }
@@ -27,25 +30,19 @@
         toAccount = item
     }
     const handleSendClick = () => {
-        api.send(
-            from.value,
-            {
-                amount,
-                address: toAddress,
-                remainder_value_strategy: {
-                    strategy: 'ChangeAddress'
-                },
-                indexation: { index: 'firefly', data: new Array() }
-            },
-            {
-                onSuccess(response) {
-                    dispatch('next')
-                },
-                onError(error) {
-                    console.error(error);
-                }
-            }
-        )
+        if (internal) {
+            internalTransfer(
+                from.value,
+                toAccount.value,
+                amount
+            );
+        } else {
+            send(
+                from.value,
+                toAddress,
+                amount
+            )
+        }
     }
     const handleBackClick = () => {
         dispatch('previous')
