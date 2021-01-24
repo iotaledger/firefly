@@ -228,6 +228,11 @@
         "login": {
             "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
             "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+        },
+        "popup": {
+            "account_address_qr": {
+                "title": "Account Address"
+            }
         }
     },
     "actions": {
@@ -320,6 +325,9 @@
         "manualNodeSelection": "Manual node selection",
         "profiles": "Profiles",
         "create_account": "Create an account",
-        "account_name": "Account name"
+        "account_name": "Account name",
+        "latest_transactions": "Latest Transactions",
+        "transactions": "Transactions",
+        "security": "Security"
     }
 }

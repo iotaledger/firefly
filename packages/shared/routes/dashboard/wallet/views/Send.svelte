@@ -1,6 +1,5 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
-    import { fly } from 'svelte/transition'
     import { Text, Button, Dropdown, Amount, Address } from 'shared/components'
 
     export let locale
@@ -16,7 +15,6 @@
     let toAddress = ''
     let toAccount = accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balance}` }))[0]
     let amount = undefined
-    let reference = ''
 
     const handleFromSelect = (item) => {
         from = item
@@ -35,7 +33,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <div transition:fly={{ x: 360, duration: 280, opacity: 0 }}>
+    <div>
         <div>
             <div class="flex flex-row mb-6">
                 <Text type="h5">{locale('general.send_funds')}</Text>

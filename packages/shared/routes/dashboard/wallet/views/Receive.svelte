@@ -1,6 +1,5 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
-    import { fly } from 'svelte/transition'
     import { Text, Button, Dropdown, Address } from 'shared/components'
     import { setClipboard } from 'shared/lib/helpers'
 
@@ -33,7 +32,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <div class="w-full h-full flex flex-col justify-center" transition:fly={{ x: 360, duration: 280, opacity: 0 }}>
+    <div class="w-full h-full flex flex-col justify-center">
         <div class="w-full">
             <Text type="h5" classes="mb-6">{locale('general.receive_funds')}</Text>
             <div>
