@@ -30,7 +30,7 @@
     let totalBalance = {
           incoming: '32 Gi',
           outgoing: '16 Gi',
-          balance: '23.322,32 Mi',
+          balance: '0 Mi',
           balanceEquiv: '45.500 USD'
     }
     let transactions = []
@@ -130,17 +130,25 @@
     function getAccounts() {
       api.getAccounts({
             onSuccess(accountsResponse) {
+                let balance = 0;
+
                 for (const [idx, storedAccount] of accountsResponse.payload.entries()) {
                     getAccountMeta(storedAccount.id, (err, meta) => {
                         if (!err) {
+                            balance += meta.balance
                             const account = prepareAccountInfo(storedAccount, meta);
                             accounts = [...accounts, account]
                             transactions = getLatestMessages(accountsResponse.payload)
+
+                             if (idx === accountsResponse.payload.length - 1) {
+                                totalBalance.balance = formatUnits(balance, 2);
+                            }
                         } else {
                             console.error(err);
                         }
                     })
                 }
+
             },
             onError(error) {
                 // TODO handle error
