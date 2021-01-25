@@ -11,6 +11,7 @@ import {
   syncAccounts as _syncAccounts,
   internalTransfer as _internalTransfer,
   generateAddress as _generateAddress,
+  getUnusedAddress as _getUnusedAddress,
   listMessages as _listMessages,
   listAddresses as _listAddresses,
   availableBalance as _availableBalance,
@@ -111,6 +112,9 @@ export const api = {
   },
   generateAddress: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _generateAddress(sendMessage, __ids, accountId)
+  },
+  getUnusedAddress: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _getUnusedAddress(sendMessage, __ids, accountId)
   },
   listMessages: function (accountId: AccountIdentifier, filters?: ListMessagesFilter): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _listMessages(sendMessage, __ids, accountId, filters)
