@@ -138,91 +138,91 @@
             },
             "profile": {
                 "title": "Profile",
-                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
+                "description": ""
             }, 
             "sync": {
                 "title": "Sync accounts",
-                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
+                "description": ""
             }, 
             "theme": {
                 "title": "Theme",
-                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
+                "description": ""
             }, 
             "language": {
                 "title": "Language",
-                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
+                "description": ""
             }, 
             "currency": {
                 "title": "Currency",
-                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
+                "description": ""
             }, 
             "notifications": {
                 "title": "Notifications",
-                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
+                "description": ""
             }, 
             "exportStronghold": {
                 "title": "Export Stronghold",
-                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
+                "description": ""
             }, 
             "appLock": {
                 "title": "App Lock",
-                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
+                "description": ""
             }, 
             "changePassword": {
                 "title": "Change password",
-                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
+                "description": ""
             }, 
             "resyncAccounts": {
                 "title": "Resync accounts",
-                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
+                "description": ""
             }, 
             "resetWallet": {
                 "title": "Reset wallet",
-                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
+                "description": ""
             }, 
             "deepLinks": {
                 "title": "Deep links",
-                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
+                "description": ""
             }, 
             "developerMode": {
                 "title": "Developer mode",
-                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
+                "description": ""
             }, 
             "nodeSettings": {
                 "title": "Node settings",
-                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
+                "description": ""
             }, 
             "proofOfWork": {
                 "title": "Proof of work",
-                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
+                "description": ""
             }, 
             "errorLog": {
                 "title": "Error log",
-                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
+                "description": ""
             }, 
             "stateExport": {
                 "title": "State export",
-                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
+                "description": ""
             }, 
             "troubleshoot": {
                 "title": "Troubleshoot",
-                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
+                "description": ""
             }, 
             "documentation": {
                 "title": "Documentation",
-                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
+                "description": ""
             }, 
             "faq": {
                 "title": "FAQ",
-                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
+                "description": ""
             }, 
             "discord": {
                 "title": "Discord",
-                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
+                "description": ""
             }, 
             "about": {
                 "title": "About",
-                "description": "Clear and easy to understand description. Lorem ipsum dolor sit amet, consectetur"
+                "description": ""
             }
         },
         "login": {
