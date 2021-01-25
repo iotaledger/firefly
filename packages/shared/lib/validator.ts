@@ -377,6 +377,7 @@ export default class ValidatorService {
             [ResponseTypes.StrongholdStatusChange]: this.createBaseValidator().getFirst(),
             [ResponseTypes.LatestAddress]: this.createBaseValidator().getFirst(),
             [ResponseTypes.SyncedAccount]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.UnusedAddress]: this.createBaseValidator().getFirst(),
             [ResponseTypes.Error]: this.createBaseValidator().getFirst()
         };
     }

@@ -159,7 +159,7 @@
 
     function onGenerateAddress(accountId) {
          isGeneratingAddress = true
-        api.generateAddress(accountId, {
+        api.getUnusedAddress(accountId, {
             onSuccess(response) {
             accounts = accounts.map((account) => {
                 if (account.id === accountId) {
