@@ -13,7 +13,7 @@
     } from 'shared/lib/marketData'
     import { Send, Receive, Account, CreateAccount } from './views/'
     import { DEFAULT_NODE as node, DEFAULT_NODES as nodes } from 'shared/lib/network'
-    import { format as formatUnits } from 'shared/lib/units'
+    import { formatUnit } from 'shared/lib/units'
 
     export let locale
     export let mobile
@@ -158,7 +158,7 @@
     }
 
     function onGenerateAddress(accountId) {
-         isGeneratingAddress = true
+        isGeneratingAddress = true
         api.generateAddress(accountId, {
             onSuccess(response) {
             accounts = accounts.map((account) => {

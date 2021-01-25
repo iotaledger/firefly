@@ -1,7 +1,7 @@
 <script>
     import { createEventDispatcher } from 'svelte'
     import { OnboardingLayout, Illustration, Text, Button, Logo, Profile, Icon } from 'shared/components'
-    import { profiles, markProfileAsActive } from 'shared/lib/app'
+    import { profiles, setActiveProfile } from 'shared/lib/app'
 
     export let locale
     export let mobile
@@ -9,7 +9,7 @@
     const dispatch = createEventDispatcher()
 
     function handleContinueClick(id) {
-        markProfileAsActive(id);
+        setActiveProfile(id);
         dispatch('next')
     }
 

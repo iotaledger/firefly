@@ -1,7 +1,7 @@
 <script>
     import { createEventDispatcher } from 'svelte'
     import { OnboardingLayout, Illustration, Text, Button, Input, Radio } from 'shared/components'
-    import { createProfile, markProfileAsActive } from 'shared/lib/app'
+    import { createProfile, setActiveProfile } from 'shared/lib/app'
     import { initialise } from 'shared/lib/wallet'
 
     export let locale
@@ -18,7 +18,7 @@
 
         try {
             profile = createProfile(profileName)
-            markProfileAsActive(profile.id)
+            setActiveProfile(profile.id)
 
             initialise(profile.id, profile.name)
 

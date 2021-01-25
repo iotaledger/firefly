@@ -267,8 +267,8 @@ export const verifyRecoveryPhrase = (phrase): Promise<void> => new Promise((reso
 })
 
 export const requestMnemonic = async () => {
-    let recovPhrase = await generateRecoveryPhrase()
-    mnemonic.set(recovPhrase)
+    let recoveryPhrase = await generateRecoveryPhrase()
+    mnemonic.set(recoveryPhrase)
 }
 
 Wallet.api.onStrongholdStatusChange({

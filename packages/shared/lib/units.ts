@@ -15,14 +15,14 @@ const UNIT_MAP: { [unit in Unit]: { val: number; dp: number } } = {
 /**
  * Formats IOTA value
  * 
- * @method format
+ * @method formatUnit
  * 
  * @param {number} value 
  * @param {number} decimalPlaces 
  * 
  * @returns {string}
  */
-export const format = (value: number, decimalPlaces = 2): string => {
+export const formatUnit = (value: number, decimalPlaces = 2): string => {
     const unit: Unit = getUnit(value);
 
     if (!value) {
@@ -43,7 +43,7 @@ export const format = (value: number, decimalPlaces = 2): string => {
  * 
  * @returns {Unit}
  */
-export const getUnit = (value: number): Unit => {
+const getUnit = (value: number): Unit => {
     let bestUnits: Unit = Unit.i;
 
     if (!value) {
