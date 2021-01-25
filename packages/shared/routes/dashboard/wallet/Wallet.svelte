@@ -128,17 +128,6 @@
     }
 
     function getAccounts() {
-      api.getStrongholdStatus({
-          onSuccess(response) {
-              if (response.payload.snapshot.status === 'Locked') {
-                  showPasswordPopup = true;
-              }
-          },
-          onError(error) {
-              console.error(error)
-          }
-      })
-
       api.getAccounts({
             onSuccess(accountsResponse) {
                 for (const [idx, storedAccount] of accountsResponse.payload.entries()) {
@@ -187,6 +176,7 @@
         api.syncAccounts({
             onSuccess(response) {
                 console.log('Response', response);
+                getAccounts();
             },
             onError(error) {
                 console.error(error)
@@ -282,11 +272,20 @@
                     }
                 }
             )
-    }
+    } 
 
     onMount(() => {
-        getAccounts()
-    })   
+      api.getStrongholdStatus({
+          onSuccess(response) {
+              if (response.payload.snapshot.status === 'Locked') {
+                  showPasswordPopup = true;
+              }
+          },
+          onError(error) {
+              console.error(error)
+          }
+      })
+    })
 </script>
 
 <Popup
