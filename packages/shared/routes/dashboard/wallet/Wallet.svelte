@@ -13,7 +13,7 @@
     } from 'shared/lib/marketData'
     import { Send, Receive, Account, CreateAccount } from './views/'
     import { DEFAULT_NODE as node, DEFAULT_NODES as nodes } from 'shared/lib/network'
-
+    import { format as formatUnits } from 'shared/lib/units'
 
     export let locale
     export let mobile
@@ -120,7 +120,7 @@
             id, 
             index,
             name: alias,
-            balance, 
+            balance: formatUnits(balance, 0), 
             balanceEquiv: `${balance} USD`,
             address,
             color: AccountColors[index],
