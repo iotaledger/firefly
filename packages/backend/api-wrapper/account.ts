@@ -102,6 +102,7 @@ export function internalTransfer(bridge: Bridge, __ids: CommunicationIds, fromAc
 
 enum AccountMethod {
   GenerateAddress,
+  GetUnusedAddress,
   ListMessages,
   ListAddresses,
   GetAvailableBalance,
@@ -127,6 +128,10 @@ function _callAccountMethod(bridge: Bridge, __ids: CommunicationIds, methodName:
 
 export function generateAddress(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
   return _callAccountMethod(bridge, __ids, AccountMethod.GenerateAddress, accountId)
+}
+
+export function getUnusedAddress(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
+  return _callAccountMethod(bridge, __ids, AccountMethod.GetUnusedAddress, accountId)
 }
 
 export function listMessages(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier, filters?: ListMessagesFilter): Promise<string> {

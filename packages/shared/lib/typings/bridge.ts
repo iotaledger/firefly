@@ -40,7 +40,8 @@ export enum ResponseTypes {
   StoredMnemonic = 'StoredMnemonic',
   VerifiedMnemonic = 'VerifiedMnemonic',
   StoragePasswordSet = 'StoragePasswordSet',
-  StrongholdStatus = 'StrongholdStatus'
+  StrongholdStatus = 'StrongholdStatus',
+  UnusedAddress = 'UnusedAddress'
 }
 
 export type Response<T, P> = { id: string; action: string; type: T; payload?: P }
@@ -67,6 +68,7 @@ export type GenerateMnemonicResponse = Response<ResponseTypes.GeneratedMnemonic,
 export type StoreMnemonicResponse = Response<ResponseTypes.StoredMnemonic, void>
 export type SetStoragePasswordResponse = Response<ResponseTypes.StoragePasswordSet, void>
 export type StrongholdStatusResponse = Response<ResponseTypes.StrongholdStatus, void>
+export type UnusedAddressResponse = Response<ResponseTypes.UnusedAddress, void>
 
 export type MessageResponse = RemovedAccountResponse |
   CreatedAccountResponse |
@@ -90,6 +92,7 @@ export type MessageResponse = RemovedAccountResponse |
   StoreMnemonicResponse |
   SetStoragePasswordResponse |
   StrongholdStatusResponse |
+  UnusedAddressResponse |
   // events
   Event<ErrorEventPayload> | Event<BalanceChangeEventPayload> | Event<TransactionEventPayload>
 
