@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Popup, DashboardPane } from 'shared/components'
-    import { Account, WalletFrontDesk, LineChart, WalletTx, Security } from './views/'
+    import { Account, WalletOverview, LineChart, WalletHistory, Security } from './views/'
     import { totalBalance as dummyTotalBalance, transactions as dummyTransactions, accounts as dummyAccounts } from './dummydata'
 
     export let locale
@@ -83,7 +83,7 @@
     <div class="w-full h-full flex flex-col p-10">
         <div class="w-full h-full flex flex-row space-x-4 flex-auto">
             <DashboardPane classes="w-1/3 h-full">
-                <WalletFrontDesk
+                <WalletOverview
                     {locale}
                     {mobile}
                     {state}
@@ -100,7 +100,7 @@
                 </DashboardPane>
                 <div class="w-full flex flex-row flex-1 space-x-4">
                     <DashboardPane classes="w-1/2">
-                        <WalletTx {locale} {mobile} {transactions} {accounts} />
+                        <WalletHistory {locale} {mobile} {transactions} {accounts} />
                     </DashboardPane>
                     <DashboardPane classes="w-1/2">
                         <Security {locale} {mobile} />

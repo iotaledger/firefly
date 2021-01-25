@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
     import { Popup, DashboardPane } from 'shared/components'
-    import { Send, Receive, AccountNav, AccountBalance, AccountActions, ManageAccount, AccountTx } from '.'
+    import { Send, Receive, AccountNavigation, AccountBalance, AccountActions, ManageAccount, AccountHistory } from '.'
 
     export let locale
     export let mobile
@@ -62,7 +62,7 @@
 
 <Popup bind:active={showQR} qrData={account.address} type="qr" title="Your QR code" />
 <div class="w-full h-full flex flex-col flex-nowrap px-10 pb-10">
-    <AccountNav {locale} {mobile} {account} {accounts} {_previous} {selectAccount} />
+    <AccountNavigation {locale} {mobile} {account} {accounts} {_previous} {selectAccount} />
     {#key account}
         <div class="w-full h-full flex flex-row space-x-4 flex-auto">
             <DashboardPane classes="w-1/3 h-full flex flex-auto flex-col flex-shrink-0">
@@ -87,7 +87,7 @@
                 </DashboardPane>
             </DashboardPane>
             <DashboardPane classes="w-1/3">
-                <AccountTx {locale} {mobile} {transactions} color={account.color} />
+                <AccountHistory {locale} {mobile} {transactions} color={account.color} />
             </DashboardPane>
             <div class="w-1/3 h-full flex flex-col space-y-4">
                 <!-- TODO Account Value -->
