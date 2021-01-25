@@ -7,14 +7,16 @@
     export let disabled = false
     export let active = false
     export let icon = undefined
+    export let iconReverse = false
     export let xl = false
+    export let small = false
     export let classes = ''
 </script>
 
 <style type="text/scss">
     button {
         @apply bg-blue-500;
-        min-width: 160px;
+        min-width: 100px;
         span {
             @apply text-white;
         }
@@ -88,7 +90,32 @@
                 }
             }
         }
+        &.small {
+            @apply p-2.5;
+            @apply rounded-lg;
+            min-width: 78px;
+            &.with-icon {
+                @apply p-2.5;
+                @apply text-white;
+                span {
+                    @apply ml-0;
+                    @apply mr-6;
+                }
+                &.iconReverse {
+                    span {
+                        @apply ml-6;
+                        @apply mr-0;
+                    }
+                }
+                &.secondary {
+                    :global(svg) {
+                        @apply text-gray-500;
+                    }
+                }
+            }
+        }
         &.xl {
+            min-width: 100px;
             &,
             &:hover,
             &:active {
@@ -125,23 +152,47 @@
         use:bindEvents={events}
         on:click={onClick}
         class:secondary
+        class:small
         class:disabled
         class:with-icon={icon}
+        class:iconReverse
         class:active>
         {#if icon}
-            <div class="relative flex flex-row justify-between">
-                <div class="relative flex items-center flex-1">
-                    <div class="absolute left-0 flex items-center">
-                        <Icon classes="mr-4" {icon} />
+            {#if small}
+                {#if iconReverse}
+                    <div class="relative flex flex-row justify-between">
+                        <div class="relative flex items-center flex-1">
+                            <div class="absolute left-0 flex items-center">
+                                <Icon width={16} height={16} classes="mr-4" {icon} />
+                            </div>
+                            <span class="font-bold text-12 leading-140"><slot /></span>
+                        </div>
                     </div>
-                    <span class="font-bold text-12 leading-140"><slot /></span>
-                </div>
-                {#if !disabled}
-                    <div class="absolute right-0 flex items-center h-full">
-                        <Icon icon="arrow-right" classes="right" />
+                {:else}
+                    <div class="relative flex flex-row justify-between">
+                        <div class="relative flex items-center flex-1">
+                            <span class="font-bold text-12 leading-140"><slot /></span>
+                            <div class="absolute right-0 flex items-center">
+                                <Icon width={16} height={16} classes="ml-4" {icon} />
+                            </div>
+                        </div>
                     </div>
                 {/if}
-            </div>
+            {:else}
+                <div class="relative flex flex-row justify-between">
+                    <div class="relative flex items-center flex-1">
+                        <div class="absolute left-0 flex items-center">
+                            <Icon width={16} height={16} classes="mr-4" {icon} />
+                        </div>
+                        <span class="font-bold text-12 leading-140"><slot /></span>
+                    </div>
+                    {#if !disabled}
+                        <div class="absolute right-0 flex items-center h-full">
+                            <Icon icon="arrow-right" classes="right" />
+                        </div>
+                    {/if}
+                </div>
+            {/if}
         {:else}
             <span class="font-bold text-12 leading-140"><slot /></span>
         {/if}

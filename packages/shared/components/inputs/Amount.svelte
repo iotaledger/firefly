@@ -1,11 +1,13 @@
 <script>
     import { Icon, Text } from 'shared/components'
     export let amount = undefined
-    export let unit = undefined
     export let label = undefined
     export let locale = undefined
     export let classes = ''
     let dropdown = false
+
+    const units = ['i', 'Ki', 'Mi', 'Gi', 'Ti']
+
     function onKey(e) {
         if (e.keyCode === 8 || e.target.value.length <= 12) {
             return true
@@ -67,6 +69,6 @@
             e.stopPropagation()
             dropdown = !dropdown
         }}>
-        {unit}
+        {units[3]}
     </button>
 </amount-input>

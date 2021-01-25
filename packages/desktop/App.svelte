@@ -5,7 +5,7 @@
     import { darkMode, mobile, logged } from 'shared/lib/app'
     import { goto } from 'shared/lib/helpers'
     import { initRouter, routerNext, routerPrevious, requestMnemonic, AppRoute } from 'shared/lib/router'
-    import { Route } from 'shared/components'
+    import { Route, Toggle } from 'shared/components'
     import {
         Splash,
         Welcome,
@@ -32,7 +32,7 @@
         setTimeout(() => {
             splash = false
             initRouter()
-        }, 2000)
+        }, 100)
 
         await fetchMarketData()
     })
@@ -54,12 +54,6 @@
         padding: 5px;
         background: #8080803d;
         border-radius: 10px;
-        button {
-            background: var(--button-bg-color);
-            padding: 0 7px;
-            border-radius: 10px;
-            color: var(--button-text-color);
-        }
     }
     html,
     body {
@@ -72,7 +66,14 @@
 
 <!-- empty div to avoid auto-purge removing dark classes -->
 <div class="scheme-dark" />
-{#if true}
+{#if !$isLocaleLoaded || splash}
+    <Splash />
+{:else}
+    <!-- dummy toggles -->
+    <div class="dummy-toggles flex flex-row">
+        <Toggle storeItem={darkMode} />
+    </div>
+    <!--  -->
     <Route route={AppRoute.Welcome}>
         <Welcome on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>

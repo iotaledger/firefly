@@ -80,4 +80,4 @@
     onMount(createChart)
 </script>
 
-<div class="chart-container" style="position: relative; height: 28.5vh;"><canvas bind:this={canvas} /></div>
+<div class="chart-container" style="position: relative; height: 28.5vh; width: 49vw"><canvas bind:this={canvas} /></div>
