@@ -77,6 +77,6 @@ export const createProfile = (profileName): Profile => {
     return profile;
 };
 
-export const markProfileAsActive = (id) => {
+export const setActiveProfile = (id) => {
     profiles.update((_profiles) => _profiles.map((profile) => Object.assign({}, profile, { active: id === profile.id })))
 }
