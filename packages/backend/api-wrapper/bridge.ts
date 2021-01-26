@@ -26,8 +26,7 @@ export type ListMessagesResponse = Response<'Messages', Message[]>
 export type ListAddressesResponse = Response<'Addresses', Address[]>
 export type GeneratedAddressResponse = Response<'GeneratedAddress', Address>
 export type LatestAddressResponse = Response<'LatestAddress', Address>
-export type AvailableBalanceResponse = Response<'AvailableBalance', number>
-export type TotalBalanceResponse = Response<'TotalBalance', number>
+export type BalanceResponse = Response<'Balance', number>
 export type SyncAccountsResponse = Response<'SyncedAccounts', SyncedAccount[]>
 export type ReattachResponse = Response<'Reattached', string> // message id
 export type BackupSuccessfulResponse = Response<'BackupSuccessful', void>
@@ -51,8 +50,7 @@ export type MessageResponse = RemovedAccountResponse |
   ListAddressesResponse |
   GeneratedAddressResponse |
   LatestAddressResponse |
-  AvailableBalanceResponse |
-  TotalBalanceResponse |
+  BalanceResponse |
   SyncAccountsResponse |
   ReattachResponse |
   BackupSuccessfulResponse |

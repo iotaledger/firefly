@@ -113,8 +113,7 @@ enum AccountMethod {
   GetUnusedAddress,
   ListMessages,
   ListAddresses,
-  GetAvailableBalance,
-  GetTotalBalance,
+  GetBalance,
   GetLatestAddress,
   SyncAccount,
   IsLatestAddressUnused
@@ -154,12 +153,8 @@ export function listAddresses(bridge: Bridge, __ids: CommunicationIds, accountId
   return _callAccountMethod(bridge, __ids, AccountMethod.ListAddresses, accountId, { unspent })
 }
 
-export function availableBalance(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
-  return _callAccountMethod(bridge, __ids, AccountMethod.GetAvailableBalance, accountId)
-}
-
-export function totalBalance(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
-  return _callAccountMethod(bridge, __ids, AccountMethod.GetTotalBalance, accountId)
+export function getBalance(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
+  return _callAccountMethod(bridge, __ids, AccountMethod.GetBalance, accountId)
 }
 
 export function latestAddress(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {

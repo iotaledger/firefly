@@ -14,8 +14,7 @@ import {
   getUnusedAddress as _getUnusedAddress,
   listMessages as _listMessages,
   listAddresses as _listAddresses,
-  availableBalance as _availableBalance,
-  totalBalance as _totalBalance,
+  getBalance as _getBalance,
   latestAddress as _latestAddress,
   syncAccount as _syncAccount,
   isLatestAddressUnused as _isLatestAddressUnused,
@@ -127,11 +126,8 @@ export const api = {
   listAddresses: function (accountId: AccountIdentifier, unspent?: boolean): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _listAddresses(sendMessage, __ids, accountId, unspent)
   },
-  availableBalance: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
-    return (__ids: CommunicationIds) => _availableBalance(sendMessage, __ids, accountId)
-  },
-  totalBalance: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
-    return (__ids: CommunicationIds) => _totalBalance(sendMessage, __ids, accountId)
+  getBalance: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _getBalance(sendMessage, __ids, accountId)
   },
   latestAddress: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _latestAddress(sendMessage, __ids, accountId)

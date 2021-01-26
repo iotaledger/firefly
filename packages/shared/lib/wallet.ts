@@ -5,7 +5,6 @@ import type {
     CreatedAccountResponse,
     ReadAccountsResponse,
     LatestAddressResponse,
-    TotalBalanceResponse,
     SyncAccountsResponse,
     ErrorResponse,
 } from './typings/bridge'
@@ -51,7 +50,7 @@ const apiToResponseTypeMap = {
     listAddresses: ResponseTypes.Addresses,
     generateAddress: ResponseTypes.GeneratedAddress,
     latestAddress: ResponseTypes.LatestAddress,
-    totalBalance: ResponseTypes.TotalBalance,
+    getBalance: ResponseTypes.Balance,
     reattach: ResponseTypes.Reattached,
     backup: ResponseTypes.BackupSuccessful,
     restoreBackup: ResponseTypes.BackupRestored,
@@ -111,10 +110,6 @@ const defaultCallbacks = {
     },
     LatestAddress: {
         onSuccess: (response: LatestAddressResponse): void => { },
-        onError: (error: ErrorResponse): void => { },
-    },
-    TotalBalance: {
-        onSuccess: (response: TotalBalanceResponse): void => { },
         onError: (error: ErrorResponse): void => { },
     },
     SyncedAccounts: {

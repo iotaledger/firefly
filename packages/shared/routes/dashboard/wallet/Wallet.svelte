@@ -92,13 +92,14 @@
     }
 
     function getAccountMeta(accountId, callback) {
-        api.totalBalance(accountId, {
-            onSuccess(availableBalanceResponse) {
-
+        api.getBalance(accountId, {
+            onSuccess(balanceResponse) {
                 api.latestAddress(accountId, {
                     onSuccess(latestAddressResponse) {
                         callback(null, {
-                            balance: availableBalanceResponse.payload,
+                            balance: balanceResponse.payload.total,
+                            incoming: balanceResponse.payload.incoming,
+                            outgoing: balanceResponse.payload.outgoing,
                             address: latestAddressResponse.payload.address
                         })
                     },
@@ -130,18 +131,29 @@
     function getAccounts() {
       api.getAccounts({
             onSuccess(accountsResponse) {
-                let balance = 0;
+                const _totalBalance = {
+                    balance: 0,
+                    incoming: 0,
+                    outgoing: 0
+                }
 
                 for (const [idx, storedAccount] of accountsResponse.payload.entries()) {
                     getAccountMeta(storedAccount.id, (err, meta) => {
                         if (!err) {
-                            balance += meta.balance
+                            _totalBalance.balance += meta.balance
+                            _totalBalance.incoming += meta.incoming
+                            _totalBalance.outgoing += meta.outgoing
+
                             const account = prepareAccountInfo(storedAccount, meta);
                             accounts = [...accounts, account]
                             transactions = getLatestMessages(accountsResponse.payload)
 
                              if (idx === accountsResponse.payload.length - 1) {
-                                totalBalance.balance = formatUnit(balance, 2);
+                                totalBalance = Object.assign({}, totalBalance, {
+                                    balance: formatUnit(_totalBalance.balance, 2),
+                                    incoming: formatUnit(_totalBalance.incoming, 2),
+                                    outgoing: formatUnit(_totalBalance.outgoing, 2),
+                                });
                             }
                         } else {
                             console.error(err);
