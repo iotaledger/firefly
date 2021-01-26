@@ -12,7 +12,7 @@
     import { createEventDispatcher, getContext, setContext } from 'svelte'
     import { writable } from 'svelte/store'
     import { Popup, DashboardPane } from 'shared/components'
-    import { AccountNav, AccountBalance, AccountActions, AccountTx } from '.'
+    import { AccountNavigation, AccountBalance, AccountActions, AccountHistory } from '.'
 
     export let locale
     export let send
@@ -78,7 +78,7 @@
 
 <Popup bind:active={$showQrPopup} qrData={$account?.address} type="qr" title={locale('popups.qr.title')} />
 <div class="w-full h-full flex flex-col flex-nowrap px-10 pb-10">
-    <AccountNav {locale} on:next={_next} on:previous={_previous} accounts={navAccounts} />
+    <AccountNavigation {locale} on:next={_next} on:previous={_previous} accounts={navAccounts} />
     {#key $account}
         <div class="w-full h-full flex flex-row space-x-4 flex-auto">
             <DashboardPane classes="w-1/3 h-full flex flex-auto flex-col flex-shrink-0">
@@ -94,7 +94,7 @@
                 </DashboardPane>
             </DashboardPane>
             <DashboardPane classes="w-1/3">
-                <AccountTx {locale} color={$account.color} {transactions} />
+                <AccountHistory {locale} color={$account.color} {transactions} />
             </DashboardPane>
             <div class="w-1/3 h-full flex flex-col space-y-4">
                 <!-- TODO Account Value -->

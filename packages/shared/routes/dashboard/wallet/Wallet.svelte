@@ -15,7 +15,7 @@
     import { DEFAULT_NODE as node, DEFAULT_NODES as nodes } from 'shared/lib/network'
     import { formatUnit } from 'shared/lib/units'
     import { Popup, DashboardPane } from 'shared/components'
-    import { Account, LineChart, WalletTx, Security, CreateAccount, WalletBalance, WalletActions } from './views/'
+    import { Account, LineChart, WalletHistory, Security, CreateAccount, WalletBalance, WalletActions } from './views/'
 
     export let locale
 
@@ -358,7 +358,7 @@
                 </DashboardPane>
                 <div class="w-full flex flex-row flex-1 space-x-4">
                     <DashboardPane classes="w-1/2">
-                        <WalletTx {locale} />
+                        <WalletHistory {locale} />
                     </DashboardPane>
                     <DashboardPane classes="w-1/2">
                         <Security {locale} />
