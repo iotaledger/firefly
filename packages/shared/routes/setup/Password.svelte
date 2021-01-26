@@ -2,6 +2,7 @@
     import zxcvbn from 'zxcvbn'
     import { createEventDispatcher } from 'svelte'
     import { OnboardingLayout, Password, Illustration, Text, Button } from 'shared/components'
+    import { api } from 'shared/lib/wallet'
     export let locale
     export let mobile
 
@@ -14,7 +15,16 @@
     $: valid = strength === 4 && password === confirmedPassword
 
     function handleContinueClick() {
-        dispatch('next', { password })
+        api.setStrongholdPassword(password, {
+            onSuccess() {
+                dispatch('next', { password })
+            },
+            onError(error) {
+                // TODO: handle error
+                console.log(error)
+                alert('set password error')
+            }
+        })
     }
     function handleBackClick() {
         dispatch('previous')

@@ -1,5 +1,6 @@
-import { writable } from 'svelte/store'
+import { get, writable } from 'svelte/store'
 import { persistent } from 'shared/lib/helpers'
+import { generateRandomId } from 'shared/lib/utils'
 
 /**
  * Notification content
@@ -40,3 +41,42 @@ export const locale = persistent<string>('locale', null)
  * Dummy
  */
 export const logged = persistent<boolean>('logged', false)
+
+interface Profile {
+    name: string;
+    id: string;
+    active: boolean;
+}
+
+export const profiles = persistent<Profile[]>('profiles', []);
+
+export const getActiveProfile = (): Profile => {
+    return get(profiles).find((_profile) => {
+        return _profile.active === true
+    });
+}
+
+export const createProfile = (profileName): Profile => {
+    if (get(profiles).some((profile) => profile.name === profileName)) {
+        throw new Error(`Profile with name ${profileName} already exists.`);
+    }
+
+    const profile = {
+        id: generateRandomId(),
+        name: profileName,
+        active: true
+    };
+
+    profiles.update((_profiles) => {
+        return [
+            ..._profiles,
+            profile
+        ]
+    })
+
+    return profile;
+};
+
+export const setActiveProfile = (id) => {
+    profiles.update((_profiles) => _profiles.map((profile) => Object.assign({}, profile, { active: id === profile.id })))
+}

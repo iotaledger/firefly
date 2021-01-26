@@ -157,22 +157,28 @@
         class:with-icon={icon}
         class:iconReverse
         class:active>
-        {#if icon && !small}
-            <div class="relative flex flex-row justify-between">
-                <div class="relative flex items-center flex-1">
-                    <div class="absolute left-0 flex items-center">
-                        <Icon classes="mr-4" {icon} />
+        {#if icon}
+            {#if small}
+                {#if iconReverse}
+                    <div class="relative flex flex-row justify-between">
+                        <div class="relative flex items-center flex-1">
+                            <div class="absolute left-0 flex items-center">
+                                <Icon width={16} height={16} classes="mr-4" {icon} />
+                            </div>
+                            <span class="font-bold text-12 leading-140"><slot /></span>
+                        </div>
                     </div>
-                    <span class="font-bold text-12 leading-140"><slot /></span>
-                </div>
-                {#if !disabled}
-                    <div class="absolute right-0 flex items-center h-full">
-                        <Icon icon="arrow-right" classes="right" />
+                {:else}
+                    <div class="relative flex flex-row justify-between">
+                        <div class="relative flex items-center flex-1">
+                            <span class="font-bold text-12 leading-140"><slot /></span>
+                            <div class="absolute right-0 flex items-center">
+                                <Icon width={16} height={16} classes="ml-4" {icon} />
+                            </div>
+                        </div>
                     </div>
                 {/if}
-            </div>
-        {:else if icon && small}
-            {#if iconReverse}
+            {:else}
                 <div class="relative flex flex-row justify-between">
                     <div class="relative flex items-center flex-1">
                         <div class="absolute left-0 flex items-center">
@@ -180,15 +186,11 @@
                         </div>
                         <span class="font-bold text-12 leading-140"><slot /></span>
                     </div>
-                </div>
-            {:else}
-                <div class="relative flex flex-row justify-between">
-                    <div class="relative flex items-center flex-1">
-                        <span class="font-bold text-12 leading-140"><slot /></span>
-                        <div class="absolute right-0 flex items-center">
-                            <Icon width={16} height={16} classes="ml-4" {icon} />
+                    {#if !disabled}
+                        <div class="absolute right-0 flex items-center h-full">
+                            <Icon icon="arrow-right" classes="right" />
                         </div>
-                    </div>
+                    {/if}
                 </div>
             {/if}
         {:else}

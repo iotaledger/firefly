@@ -10,6 +10,9 @@
     export let transactions
     export let selectAccount = () => {}
 
+    export let send;
+    export let internalTransfer;
+
     const dispatch = createEventDispatcher()
 
     let showQR = false
@@ -76,9 +79,9 @@
                     {#if state === AccountState.Init}
                         <AccountActions {locale} {mobile} {account} {AccountState} {_next} bind:showQR />
                     {:else if state === AccountState.Send}
-                        <Send on:next={_next} on:previous={() => _previous(false)} {accounts} {locale} {mobile} />
+                        <Send send={send} internalTransfer={internalTransfer} on:next={_next} on:previous={() => _previous(false)} {accounts} {locale} {mobile} />
                     {:else if state === AccountState.Transfer}
-                        <Send internal on:next={_next} on:previous={() => _previous(false)} {accounts} {locale} {mobile} />
+                        <Send send={send} internalTransfer={internalTransfer} internal on:next={_next} on:previous={() => _previous(false)} {accounts} {locale} {mobile} />
                     {:else if state === AccountState.Receive}
                         <Receive on:next={_next} on:previous={() => _previous(false)} {account} {locale} {mobile} />
                     {:else if state === AccountState.Manage}

@@ -10,6 +10,9 @@
     export let accounts
     export let WalletState
     export let selectAccount
+    export let onGenerateAddress
+    export let onInternalTransfer
+    export let onSend
 </script>
 
 <div class="p-8 pt-4 flex flex-col h-full justify-between">
@@ -48,8 +51,8 @@
             </Button>
         </div>
     {:else if state === WalletState.Send}
-        <Send on:next={_next} on:previous={_previous} {accounts} {locale} {mobile} />
+        <Send on:next={_next} on:previous={_previous} onSend={onSend} onInternalTransfer={onInternalTransfer} {accounts} {locale} {mobile} />
     {:else if state === WalletState.Receive}
-        <Receive on:next={_next} on:previous={_previous} {accounts} {locale} {mobile} />
+        <Receive on:next={_next} on:previous={_previous} {accounts} {locale} {mobile} onGenerateAddress={onGenerateAddress} />
     {/if}
 </div>

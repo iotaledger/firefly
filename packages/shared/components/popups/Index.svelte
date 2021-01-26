@@ -10,6 +10,9 @@
     export let subtitle
     export let qrData
 
+    export let onSuccess
+    export let onError
+
     const types = {
         qr: QR,
         password: Password,
@@ -57,6 +60,6 @@
                 <Icon icon="close" classes="text-gray-800" />
             </button>
         </div>
-        <svelte:component this={types[type]} data={qrData} {locale} bind:active />
+        <svelte:component this={types[type]} data={qrData} {locale} bind:active onSuccess={onSuccess} onError={onError} />
     </popup-content>
 </popup>

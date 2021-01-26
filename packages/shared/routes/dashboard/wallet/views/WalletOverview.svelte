@@ -12,6 +12,9 @@
     export let color = 'blue'
     export let WalletState
     export let selectAccount
+    export let onSend
+    export let onGenerateAddress
+    export let onInternalTransfer
 </script>
 
 <!-- Total Balance, Accounts list & Send/Receive -->
@@ -21,7 +24,7 @@
     {:else}
         <WalletBalance {locale} {mobile} {state} {totalBalance} {color} {WalletState} />
         <DashboardPane classes="-mt-5 h-full">
-            <WalletActions {locale} {mobile} {state} {_next} {_previous} {accounts} {WalletState} {selectAccount} />
+            <WalletActions {locale} {mobile} {state} {_next} {_previous} {accounts} {WalletState} {selectAccount} {onGenerateAddress} {onInternalTransfer} {onSend}/>
         </DashboardPane>
     {/if}
 </div>
