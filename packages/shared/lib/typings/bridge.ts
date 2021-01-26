@@ -70,7 +70,7 @@ export type SetStoragePasswordResponse = Response<ResponseTypes.StoragePasswordS
 export type StrongholdStatusResponse = Response<ResponseTypes.StrongholdStatus, void>
 export type UnusedAddressResponse = Response<ResponseTypes.UnusedAddress, void>
 export type IsLatestAddressUnusedResponse = Response<ResponseTypes.IsLatestAddressUnused, void>
-export type AreLatestAddressesUnusedResponse = Response<ResponseTypes.AreLatestAddressesUnused, void>
+export type AreLatestAddressesUnusedResponse = Response<ResponseTypes.AreAllLatestAddressesUnused, void>
 
 export type MessageResponse = RemovedAccountResponse |
   CreatedAccountResponse |
