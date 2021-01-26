@@ -1,7 +1,5 @@
 <script lang="typescript">
     import { createEventDispatcher, getContext } from 'svelte'
-    import { api } from 'shared/lib/wallet'
-    import { fly } from 'svelte/transition'
     import { Text, Button, Dropdown, Amount, Address } from 'shared/components'
 
     export let locale

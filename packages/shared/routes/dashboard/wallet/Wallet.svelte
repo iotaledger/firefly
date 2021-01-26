@@ -83,7 +83,6 @@
             state.set(nextState)
         }
     }
-
     const _previous = () => {
         let prevState = stateHistory.pop()
         if (prevState) {

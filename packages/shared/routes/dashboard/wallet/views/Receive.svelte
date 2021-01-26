@@ -4,7 +4,6 @@
     import { setClipboard } from 'shared/lib/helpers'
 
     export let locale
-
     export let onGenerateAddress = (accountId) => {}
     export let isGeneratingAddress = false
 
