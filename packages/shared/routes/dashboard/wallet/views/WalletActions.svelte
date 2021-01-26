@@ -7,7 +7,7 @@
     export let locale
     export let send
     export let internalTransfer
-    export let onGenerateAddress
+    export let generateAddress
 
     const dispatch = createEventDispatcher()
     const accounts = getContext('walletAccounts')
@@ -57,5 +57,5 @@
 {:else if $state === WalletState.Send}
     <Send on:next on:previous {send} {internalTransfer} {locale} />
 {:else if $state === WalletState.Receive}
-    <Receive on:next on:previous {onGenerateAddress} {locale} />
+    <Receive on:next on:previous {generateAddress} {locale} />
 {/if}

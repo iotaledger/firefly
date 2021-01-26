@@ -323,7 +323,13 @@
     subtitle={locale('popups.password.subtitle')}
     onSuccess={syncAccounts} />
 {#if $state === WalletState.Account && $selectedAccountId}
-    <Account on:next={_next} on:previous={_previous} send={onSend} internalTransfer={onInternalTransfer} {locale} />
+    <Account
+        on:next={_next}
+        on:previous={_previous}
+        send={onSend}
+        internalTransfer={onInternalTransfer}
+        generateAddress={onGenerateAddress}
+        {locale} />
 {:else}
     <div class="w-full h-full flex flex-col p-10">
         <div class="w-full h-full flex flex-row space-x-4 flex-auto">
@@ -340,7 +346,7 @@
                                 on:previous={_previous}
                                 send={onSend}
                                 internalTransfer={onInternalTransfer}
-                                {onGenerateAddress}
+                                generateAddress={onGenerateAddress}
                                 {locale} />
                         </DashboardPane>
                     {/if}

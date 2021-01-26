@@ -17,6 +17,7 @@
     export let locale
     export let send
     export let internalTransfer
+    export let generateAddress
 
     const dispatch = createEventDispatcher()
 
@@ -83,7 +84,13 @@
             <DashboardPane classes="w-1/3 h-full flex flex-auto flex-col flex-shrink-0">
                 <AccountBalance {locale} color={$account.color} balance={$account.balance} balanceEquiv={$account.balanceEquiv} />
                 <DashboardPane classes="h-full -mt-5">
-                    <AccountActions on:next={_next} on:previous={_previous} {send} {internalTransfer} {locale} />
+                    <AccountActions
+                        on:next={_next}
+                        on:previous={_previous}
+                        {send}
+                        {internalTransfer}
+                        {generateAddress}
+                        {locale} />
                 </DashboardPane>
             </DashboardPane>
             <DashboardPane classes="w-1/3">

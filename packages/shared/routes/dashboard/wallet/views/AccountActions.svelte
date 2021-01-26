@@ -6,6 +6,7 @@
 
     export let locale
     export let send
+    export let generateAddress
     export let internalTransfer
 
     const dispatch = createEventDispatcher()
@@ -70,7 +71,7 @@
 {:else if $state === AccountState.Transfer}
     <Send on:next internal {send} {internalTransfer} on:previous {locale} />
 {:else if $state === AccountState.Receive}
-    <Receive on:next on:previous {locale} />
+    <Receive on:next on:previous {generateAddress} {locale} />
 {:else if $state === AccountState.Manage}
     <ManageAccount on:next on:previous {locale} name={$account.name} />
 {/if}
