@@ -306,9 +306,6 @@
         "reference": "Reference",
         "from": "From",
         "to": "To",
-        "transaction_id": "Transaction ID",
-        "input_address": "Input Address",
-        "receive_address": "Receive Address",
         "receive_funds": "Receive funds",
         "share_address": "Share an address",
         "your_address": "Your address",
@@ -336,7 +333,6 @@
         "account_name": "Account name",
         "latest_transactions": "Latest Transactions",
         "transactions": "Transactions",
-        "transaction": "Transaction",
         "security": "Security",
         "account_address": "Account Address"
     }
