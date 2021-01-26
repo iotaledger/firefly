@@ -42,7 +42,7 @@ export enum ResponseTypes {
   StrongholdStatus = 'StrongholdStatus',
   UnusedAddress = 'UnusedAddress',
   IsLatestAddressUnused = 'IsLatestAddressUnused',
-  AreLatestAddressesUnused = 'AreLatestAddressesUnused'
+  AreAllLatestAddressesUnused = 'AreAllLatestAddressesUnused'
 }
 
 export type Response<T, P> = { id: string; action: string; type: T; payload?: P }

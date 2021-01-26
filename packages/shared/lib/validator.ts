@@ -378,7 +378,7 @@ export default class ValidatorService {
             [ResponseTypes.SyncedAccount]: this.createBaseValidator().getFirst(),
             [ResponseTypes.UnusedAddress]: this.createBaseValidator().getFirst(),
             [ResponseTypes.IsLatestAddressUnused]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.AreLatestAddressesUnused]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.AreAllLatestAddressesUnused]: this.createBaseValidator().getFirst(),
             [ResponseTypes.Error]: this.createBaseValidator().getFirst()
         };
     }
