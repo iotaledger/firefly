@@ -191,12 +191,8 @@
     }
 
     function syncAccounts(payload) {
-        console.log('payload', payload);
-
         api.syncAccounts({
-            onSuccess(response) {
-                console.log('Response', response);
-            },
+            onSuccess(response) {},
             onError(error) {
                 console.error(error)
             }

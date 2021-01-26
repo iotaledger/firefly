@@ -44,7 +44,7 @@ export enum AppRoute {
     Login = 'login',
 }
 
-enum SetupType {
+export enum SetupType {
     New = 'new',
     Import = 'import',
     Mnemonic = 'mnemonic',
