@@ -13,17 +13,7 @@ const PincodeManager = {
      * 
      * @returns {Promise}
      */
-    set(key, pincode) {
-        return ipcRenderer.invoke('keychain-get', key).then((storedPincode) => {
-            // Do not allow overriding pincode if there's already one stored in keychain. 
-            if (storedPincode) {
-                return Promise.reject('Pincode already stored.')
-            }
-
-            return ipcRenderer.invoke('keychain-set', key, pincode);
-        })
-
-    },
+    set(key, pincode) { return ipcRenderer.invoke('keychain-set', key, pincode) },
     /**
      * Verifies user entered pincode against the one stored in keychain
      * 
