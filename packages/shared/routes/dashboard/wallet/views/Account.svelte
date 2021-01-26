@@ -27,7 +27,8 @@
 
     const account = getContext('selectedAccount')
     const accounts = getContext('walletAccounts')
-    $: transactions = $account.transactions
+    const walletTransactions = getContext('walletTransactions')
+    $: transactions = $walletTransactions.filter((tx) => tx.account === $account.index)
     $: navAccounts = $accounts.map(({ id, name, color }) => ({ id, name, color, active: $account.id === id }))
 
     let stateHistory = []

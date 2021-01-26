@@ -73,11 +73,6 @@
                     // do logic here
                     nextState = WalletState.Init
                     break
-                case WalletState.Account:
-                case WalletState.Send:
-                case WalletState.CreateAccount:
-                    nextState = request
-                    break
             }
         }
         if (nextState) {

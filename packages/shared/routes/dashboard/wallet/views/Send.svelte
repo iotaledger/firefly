@@ -6,6 +6,8 @@
 
     export let locale
     export let internal = false
+    export let send
+    export let internalTransfer
 
     const dispatch = createEventDispatcher()
     const accounts = getContext('walletAccounts')
@@ -15,9 +17,6 @@
     let toAccount = $accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balance}` }))[0]
     let toAddress = ''
     let amount = undefined
-
-    export let send
-    export let internalTransfer
 
     const handleFromSelect = (item) => {
         from = item
