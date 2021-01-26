@@ -3,6 +3,7 @@
     export let value = undefined
     export let label = undefined
     export let disabled = false
+    export let valueKey = 'label'
     export let items = []
     export let onSelect = () => {}
     let dropdown = false
@@ -60,7 +61,7 @@
             <button
                 class="relative flex items-center bg-white p-4 w-full"
                 on:click={() => onSelect(item)}
-                class:active={item.label === value}><Text type="p" smaller>{item.label}</Text></button>
+                class:active={item[valueKey] === value}><Text type="p" smaller>{item[valueKey]}</Text></button>
         {/each}
     </nav>
 </dropdown-input>

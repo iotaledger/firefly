@@ -228,11 +228,15 @@
         "login": {
             "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
             "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+        }
+    },
+    "popups": {
+        "password": {
+            "title": "Password required",
+            "subtitle": "Please provide your wallet’s password to confirm this transaction."
         },
-        "popup": {
-            "account_address_qr": {
-                "title": "Account Address"
-            }
+        "qr": {
+            "title": "Your QR code"
         }
     },
     "actions": {
@@ -301,6 +305,9 @@
         "reference": "Reference",
         "from": "From",
         "to": "To",
+        "transaction_id": "Transaction ID",
+        "input_address": "Input Address",
+        "receive_address": "Receive Address",
         "receive_funds": "Receive funds",
         "share_address": "Share an address",
         "your_address": "Your address",
@@ -328,6 +335,8 @@
         "account_name": "Account name",
         "latest_transactions": "Latest Transactions",
         "transactions": "Transactions",
-        "security": "Security"
+        "transaction": "Transaction",
+        "security": "Security",
+        "account_address": "Account Address"
     }
 }

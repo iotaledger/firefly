@@ -2,9 +2,8 @@
     import { ActivityRow, Text } from 'shared/components'
 
     export let locale
-    export let mobile
-    export let transactions
-    export let color
+    export let transactions = []
+    export let color = 'blue'
 </script>
 
 <div class="h-full p-8 flex flex-col flex-auto flex-grow flex-shrink-0">

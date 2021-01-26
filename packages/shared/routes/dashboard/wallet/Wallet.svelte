@@ -1,34 +1,72 @@
-<script lang="typescript">
-    import { Popup, DashboardPane } from 'shared/components'
-    import { Account, WalletFrontDesk, LineChart, WalletTx, Security } from './views/'
-    import { totalBalance as dummyTotalBalance, transactions as dummyTransactions, accounts as dummyAccounts } from './dummydata'
-
-    export let locale
-    export let mobile
-
-    const AccountColors = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
-
-    enum WalletState {
+<script context="module" lang="typescript">
+    export enum WalletState {
         Init = 'init',
         Account = 'account',
         Send = 'send',
         Receive = 'receive',
         CreateAccount = 'createAccount',
     }
+</script>
 
-    let totalBalance = dummyTotalBalance
-    let transactions = dummyTransactions
-    let accounts = dummyAccounts.map((acc) => ({ ...acc, color: AccountColors[acc.index] }))
+<script lang="typescript">
+    import { setContext } from 'svelte'
+    import { writable, derived } from 'svelte/store'
+    import { Popup, DashboardPane } from 'shared/components'
+    import { Account, LineChart, WalletTx, Security, CreateAccount, WalletBalance, WalletActions } from './views/'
+    import { accounts as dummyAccounts } from './dummydata'
 
-    let state: WalletState = WalletState.Init
+    export let locale
+
+    const AccountColors = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
+
+    const DUMMY_WALLET_BALANCE = {
+        incoming: '32 Gi',
+        outgoing: '16 Gi',
+        balance: '23.322,32 Mi',
+        balanceEquiv: '45.500 USD',
+    }
+    const balance = writable(DUMMY_WALLET_BALANCE)
+    const accounts = writable(dummyAccounts.map((acc, index) => ({ ...acc, color: AccountColors[index] })))
+    const selectedAccountId = writable(null)
+    const selectedAccount = derived([selectedAccountId, accounts], ([$selectedAccountId, $accounts]) =>
+        $accounts.find((acc) => acc.id === $selectedAccountId)
+    )
+    const showPasswordPopup = writable(false)
+    const state = writable(WalletState.Init)
+
+    setContext('walletBalance', balance)
+    setContext('walletAccounts', accounts)
+    setContext('selectedAccountId', selectedAccountId)
+    setContext('selectedAccount', selectedAccount)
+    setContext('walletState', state)
+    setContext('showPasswordPopup', showPasswordPopup)
+
     let stateHistory = []
     const _next = (request) => {
+        if (request instanceof CustomEvent) {
+            request = request.detail || {}
+        }
         let nextState
-        switch (state) {
+        switch ($state) {
+            case WalletState.Account:
+            case WalletState.CreateAccount:
             case WalletState.Init:
+                const { accountId } = request
                 if (Object.values(WalletState).includes(request as WalletState)) {
                     nextState = request
+                } else if (accountId) {
+                    const account = $accounts.find((account) => account.id === accountId)
+                    if (account) {
+                        selectedAccountId.set(accountId)
+                        _next(WalletState.Account)
+                    } else {
+                        console.error('Error selecting account')
+                    }
                 }
+                break
+            case WalletState.Receive:
+                // do logic here
+                nextState = WalletState.Init
                 break
             case WalletState.Send:
                 // do logic here
@@ -36,74 +74,58 @@
                 break
         }
         if (nextState) {
-            stateHistory.push(state)
+            if (nextState !== $state) {
+                stateHistory.push($state)
+            }
             stateHistory = stateHistory
-            state = nextState
+            state.set(nextState)
         }
     }
     const _previous = () => {
         let prevState = stateHistory.pop()
         if (prevState) {
-            if (state === WalletState.Account) {
-                selectedAccount = null
+            if ($state === WalletState.Account) {
+                selectedAccountId.set(null)
             }
-            state = prevState
+            state.set(prevState)
         }
     }
-
-    let selectedAccount = null
-    const selectAccount = (index) => {
-        selectedAccount = accounts.find((account) => account.index === index)
-        if (selectedAccount) {
-            _next('account')
-        } else {
-            console.error('Error selecting account')
-        }
-    }
-
-    let showPasswordPopup = false
 </script>
 
 <Popup
-    bind:active={showPasswordPopup}
+    bind:active={$showPasswordPopup}
     {locale}
     type="password"
-    title="Password required"
-    subtitle="Please provide your wallet’s password to confirm this transaction." />
-{#if state === WalletState.Account && selectedAccount}
-    <Account
-        account={selectedAccount}
-        {accounts}
-        {selectAccount}
-        {locale}
-        {mobile}
-        transactions={transactions.filter((tx) => tx.account === selectedAccount.index)}
-        on:previous={_previous} />
+    title={locale('popups.password.title')}
+    subtitle={locale('popups.password.subtitle')} />
+{#if $state === WalletState.Account && $selectedAccountId}
+    <Account on:next={_next} on:previous={_previous} {locale} />
 {:else}
     <div class="w-full h-full flex flex-col p-10">
         <div class="w-full h-full flex flex-row space-x-4 flex-auto">
             <DashboardPane classes="w-1/3 h-full">
-                <WalletFrontDesk
-                    {locale}
-                    {mobile}
-                    {state}
-                    {_next}
-                    {_previous}
-                    {accounts}
-                    {totalBalance}
-                    {selectAccount}
-                    {WalletState} />
+                <!-- Total Balance, Accounts list & Send/Receive -->
+                <div class="flex flex-auto flex-col flex-shrink-0 h-full">
+                    {#if $state === WalletState.CreateAccount}
+                        <CreateAccount on:next={_next} on:previous={_previous} {locale} />
+                    {:else}
+                        <WalletBalance {locale} />
+                        <DashboardPane classes="-mt-5 h-full">
+                            <WalletActions on:next={_next} on:previous={_previous} {locale} />
+                        </DashboardPane>
+                    {/if}
+                </div>
             </DashboardPane>
             <div class="flex flex-col w-2/3 h-full space-y-4">
-                <DashboardPane>
+                <DashboardPane classes="w-full">
                     <LineChart />
                 </DashboardPane>
                 <div class="w-full flex flex-row flex-1 space-x-4">
                     <DashboardPane classes="w-1/2">
-                        <WalletTx {locale} {mobile} {transactions} {accounts} />
+                        <WalletTx {locale} />
                     </DashboardPane>
                     <DashboardPane classes="w-1/2">
-                        <Security {locale} {mobile} />
+                        <Security {locale} />
                     </DashboardPane>
                 </div>
             </div>

@@ -2,7 +2,6 @@
     import { Text } from 'shared/components'
 
     export let locale
-    export let mobile
     export let color
     export let balance
     export let balanceEquiv

@@ -1,93 +1,90 @@
-<script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
-    import { Popup, DashboardPane } from 'shared/components'
-    import { Send, Receive, AccountNav, AccountBalance, AccountActions, ManageAccount, AccountTx } from '.'
-
-    export let locale
-    export let mobile
-    export let account
-    export let accounts
-    export let transactions
-    export let selectAccount = () => {}
-
-    const dispatch = createEventDispatcher()
-
-    let showQR = false
-
-    enum AccountState {
+<script context="module" lang="typescript">
+    export enum AccountState {
         Init = 'init',
         Manage = 'manage',
         Send = 'send',
         Transfer = 'transfer',
         Receive = 'receive',
     }
-    let state: AccountState = AccountState.Init
+</script>
+
+<script lang="typescript">
+    import { createEventDispatcher, getContext, setContext } from 'svelte'
+    import { writable } from 'svelte/store'
+    import { Popup, DashboardPane } from 'shared/components'
+    import { AccountNav, AccountBalance, AccountActions, AccountTx } from '.'
+
+    export let locale
+
+    const dispatch = createEventDispatcher()
+
+    const state = writable(AccountState.Init)
+    const showQrPopup = writable(false)
+    setContext('accountState', state)
+    setContext('showQrPopup', showQrPopup)
+
+    const account = getContext('selectedAccount')
+    const accounts = getContext('walletAccounts')
+    $: transactions = $account.transactions
+    $: navAccounts = $accounts.map(({ id, name, color }) => ({ id, name, color, active: $account.id === id }))
+
     let stateHistory = []
     const _next = (request) => {
+        if (request instanceof CustomEvent) {
+            request = request.detail || {}
+        }
+        const { accountId } = request
+        if (accountId) {
+            dispatch('next', { accountId })
+            return
+        }
         let nextState
-        switch (state) {
+        switch ($state) {
             case AccountState.Init:
                 if (Object.values(AccountState).includes(request as AccountState)) {
                     nextState = request
                 }
                 break
             case AccountState.Send:
-                // do logic here
-                nextState = AccountState.Init
-                break
             case AccountState.Transfer:
-                // do logic here
-                nextState = AccountState.Init
-                break
             case AccountState.Manage:
                 // do logic here
                 nextState = AccountState.Init
                 break
         }
         if (nextState) {
-            stateHistory.push(state)
+            stateHistory.push($state)
             stateHistory = stateHistory
-            state = nextState
+            state.set(nextState)
         }
     }
-    const _previous = (exit: boolean) => {
+    const _previous = (request) => {
+        if (request instanceof CustomEvent) {
+            request = request.detail || {}
+        }
+        const { exit } = request
         let prevState = stateHistory.pop()
         if (!exit) {
-            state = prevState
+            state.set(prevState)
         } else {
             dispatch('previous')
         }
     }
 </script>
 
-<Popup bind:active={showQR} qrData={account.address} type="qr" title="Your QR code" />
+<Popup bind:active={$showQrPopup} qrData={$account?.address} type="qr" title={locale('popups.qr.title')} />
 <div class="w-full h-full flex flex-col flex-nowrap px-10 pb-10">
-    <AccountNav {locale} {mobile} {account} {accounts} {_previous} {selectAccount} />
-    {#key account}
+    <AccountNav {locale} on:next={_next} on:previous={_previous} accounts={navAccounts} />
+    {#key $account}
         <div class="w-full h-full flex flex-row space-x-4 flex-auto">
             <DashboardPane classes="w-1/3 h-full flex flex-auto flex-col flex-shrink-0">
-                <AccountBalance
-                    {locale}
-                    {mobile}
-                    color={account.color}
-                    balance={account.balance}
-                    balanceEquiv={account.balanceEquiv} />
-                <DashboardPane classes="p-8 -mt-5 h-full">
-                    {#if state === AccountState.Init}
-                        <AccountActions {locale} {mobile} {account} {AccountState} {_next} bind:showQR />
-                    {:else if state === AccountState.Send}
-                        <Send on:next={_next} on:previous={() => _previous(false)} {accounts} {locale} {mobile} />
-                    {:else if state === AccountState.Transfer}
-                        <Send internal on:next={_next} on:previous={() => _previous(false)} {accounts} {locale} {mobile} />
-                    {:else if state === AccountState.Receive}
-                        <Receive on:next={_next} on:previous={() => _previous(false)} {account} {locale} {mobile} />
-                    {:else if state === AccountState.Manage}
-                        <ManageAccount on:next={_next} on:previous={() => _previous(false)} {account} {locale} {mobile} />
-                    {/if}
+                <AccountBalance {locale} color={$account.color} balance={$account.balance} balanceEquiv={$account.balanceEquiv} />
+                <DashboardPane classes="h-full -mt-5">
+                    <AccountActions on:next={_next} on:previous={_previous} {locale} />
                 </DashboardPane>
             </DashboardPane>
             <DashboardPane classes="w-1/3">
-                <AccountTx {locale} {mobile} {transactions} color={account.color} />
+                <AccountTx {locale} color={$account.color} {transactions} />
             </DashboardPane>
             <div class="w-1/3 h-full flex flex-col space-y-4">
                 <!-- TODO Account Value -->

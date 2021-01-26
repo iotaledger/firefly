@@ -2,7 +2,6 @@
     import { Icon, Text } from 'shared/components'
 
     export let locale
-    export let mobile
 </script>
 
 <div data-label="security" class="p-8 flex-grow flex flex-col">

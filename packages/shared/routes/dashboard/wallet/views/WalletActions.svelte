@@ -1,55 +1,58 @@
 <script lang="typescript">
+    import { createEventDispatcher, getContext } from 'svelte'
     import { Text, Button, AccountTile } from 'shared/components'
     import { Send, Receive } from '.'
+    import { WalletState } from '../Wallet.svelte'
 
     export let locale
-    export let mobile
-    export let state
-    export let _next
-    export let _previous
-    export let accounts
-    export let WalletState
-    export let selectAccount
+
+    const dispatch = createEventDispatcher()
+    const accounts = getContext('walletAccounts')
+    const state = getContext('walletState')
+
+    function handleAccountClick(accountId) {
+        dispatch('next', { accountId })
+    }
+    function handleCreateClick() {
+        dispatch('next', WalletState.CreateAccount)
+    }
+    function handleSendClick() {
+        dispatch('next', WalletState.Send)
+    }
+    function handleReceiveClick() {
+        dispatch('next', WalletState.Receive)
+    }
 </script>
 
-<div class="p-8 pt-4 flex flex-col h-full justify-between">
-    <!-- Accounts -->
-    {#if state === WalletState.Init || state === WalletState.Account}
-        {#if state === WalletState.Init || state === WalletState.Account}
-            <div data-label="accounts">
-                <div class="flex flex-row mb-6 justify-between items-center">
-                    <Text type="h5">{locale('general.accounts')}</Text>
-                    <Button onClick={() => _next(WalletState.CreateAccount)} secondary small icon="plus">
-                        {locale('actions.create')}
-                    </Button>
-                </div>
-                {#if accounts.length > 0}
-                    <div class="flex flex-row justify-between flex-wrap w-full px-2">
-                        {#each accounts as account, i}
-                            <AccountTile
-                                color={account.color}
-                                name={account.name}
-                                balance={account.balance}
-                                balanceEquiv={account.balanceEquiv}
-                                width={accounts.length === 1 ? `full` : accounts.length === 2 ? `1/2` : `1/3`}
-                                onClick={() => selectAccount(account.index)} />
-                        {/each}
-                    </div>
-                {/if}
+{#if $state === WalletState.Init}
+    <div class="p-8 pt-4 flex flex-col h-full justify-between">
+        <div data-label="accounts">
+            <div class="flex flex-row mb-6 justify-between items-center">
+                <Text type="h5">{locale('general.accounts')}</Text>
+                <Button onClick={handleCreateClick} secondary small icon="plus">{locale('actions.create')}</Button>
             </div>
-        {/if}
+            {#if $accounts.length > 0}
+                <div class="flex flex-row justify-between flex-wrap w-full px-2">
+                    {#each $accounts as account}
+                        <AccountTile
+                            color={account.color}
+                            name={account.name}
+                            balance={account.balance}
+                            balanceEquiv={account.balanceEquiv}
+                            width={$accounts.length === 1 ? `full` : $accounts.length === 2 ? `1/2` : `1/3`}
+                            onClick={() => handleAccountClick(account.id)} />
+                    {/each}
+                </div>
+            {/if}
+        </div>
         <!-- Action Send / Receive -->
         <div class="flex flex-row justify-between space-x-4">
-            <Button xl secondary icon="receive" classes="w-1/2" onClick={() => _next(WalletState.Receive)}>
-                {locale('actions.receive')}
-            </Button>
-            <Button xl secondary icon="transfer" classes="w-1/2" onClick={() => _next(WalletState.Send)}>
-                {locale('actions.send')}
-            </Button>
+            <Button xl secondary icon="receive" classes="w-1/2" onClick={handleReceiveClick}>{locale('actions.receive')}</Button>
+            <Button xl secondary icon="transfer" classes="w-1/2" onClick={handleSendClick}>{locale('actions.send')}</Button>
         </div>
-    {:else if state === WalletState.Send}
-        <Send on:next={_next} on:previous={_previous} {accounts} {locale} {mobile} />
-    {:else if state === WalletState.Receive}
-        <Receive on:next={_next} on:previous={_previous} {accounts} {locale} {mobile} />
-    {/if}
-</div>
+    </div>
+{:else if $state === WalletState.Send}
+    <Send on:next on:previous {locale} />
+{:else if $state === WalletState.Receive}
+    <Receive on:next on:previous {locale} />
+{/if}
