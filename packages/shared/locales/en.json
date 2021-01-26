@@ -269,7 +269,8 @@
         "enableDeveloperMode": "Enable developer mode",
         "enableNotifications": "Enable notifications",
         "exportState": "Export state",
-        "outsourceProofOfWork": "Outsource proof of work"
+        "outsourceProofOfWork": "Outsource proof of work",
+        "unlock": "Unlock"
     },
     "general": {
         "password": "Password",

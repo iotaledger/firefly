@@ -1,6 +1,7 @@
 import { AccountIdentifier } from './account'
-import { Bridge } from './bridge'
+import { Bridge, CommunicationIds } from './bridge'
 import { Transfer } from './message'
+import { MnemonicPayload } from './mnemonic'
 
 export interface LoggerOutput {
   name?: string
@@ -13,17 +14,19 @@ export interface LoggerConfig {
   outputs?: LoggerOutput[]
 }
 
-export function backup(bridge: Bridge, __id: string, destinationPath: string) {
+export function backup(bridge: Bridge, __ids: CommunicationIds, destinationPath: string) {
   return bridge({
-    id: __id,
+    actorId: __ids.actorId,
+    id: __ids.messageId,
     cmd: 'Backup',
     payload: destinationPath
   })
 }
 
-export function restoreBackup(bridge: Bridge, __id: string, backupPath: string, password: string) {
+export function restoreBackup(bridge: Bridge, __ids: CommunicationIds, backupPath: string, password: string) {
   return bridge({
-    id: __id,
+    actorId: __ids.actorId,
+    id: __ids.messageId,
     cmd: 'RestoreBackup',
     payload: {
       backupPath,
@@ -32,21 +35,66 @@ export function restoreBackup(bridge: Bridge, __id: string, backupPath: string, 
   })
 }
 
-export function setStrongholdPassword(bridge: Bridge, __id: string, password: string) {
+export function setStrongholdPassword(bridge: Bridge, __ids: CommunicationIds, password: string) {
   return bridge({
-    id: __id,
+    actorId: __ids.actorId,
+    id: __ids.messageId,
     cmd: 'SetStrongholdPassword',
     payload: password
   })
 }
 
-export function send(bridge: Bridge, __id: string, fromAccountId: AccountIdentifier, transfer: Transfer) {
+export function setStoragePassword(bridge: Bridge, __ids: CommunicationIds, password: string) {
   return bridge({
-    id: __id,
+    actorId: __ids.actorId,
+    id: __ids.messageId,
+    cmd: 'SetStoragePassword',
+    payload: password
+  })
+}
+
+export function send(bridge: Bridge, __ids: CommunicationIds, fromAccountId: AccountIdentifier, transfer: Transfer) {
+  return bridge({
+    actorId: __ids.actorId,
+    id: __ids.messageId,
     cmd: 'SendTransfer',
     payload: {
       transfer,
       accountId: fromAccountId
     }
+  })
+}
+
+export function generateMnemonic(bridge: Bridge, __ids: CommunicationIds) {
+  return bridge({
+    actorId: __ids.actorId,
+    id: __ids.messageId,
+    cmd: 'GenerateMnemonic',
+  })
+}
+
+export function storeMnemonic(bridge: Bridge, __ids: CommunicationIds, payload: MnemonicPayload) {
+  return bridge({
+    actorId: __ids.actorId,
+    id: __ids.messageId,
+    cmd: 'StoreMnemonic',
+    payload
+  })
+}
+
+export function verifyMnemonic(bridge: Bridge, __ids: CommunicationIds, payload: string) {
+  return bridge({
+    actorId: __ids.actorId,
+    id: __ids.messageId,
+    cmd: 'VerifyMnemonic',
+    payload
+  })
+}
+
+export function getStrongholdStatus(bridge: Bridge, __ids: CommunicationIds) {
+  return bridge({
+    actorId: __ids.actorId,
+    id: __ids.messageId,
+    cmd: 'GetStrongholdStatus',
   })
 }

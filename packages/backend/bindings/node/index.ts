@@ -1,4 +1,4 @@
-import { BridgeMessage, MessageResponse } from '../../api-wrapper/bridge'
+import { BridgeMessage, MessageResponse, CommunicationIds } from '../../api-wrapper/bridge'
 import {
   AccountToCreate,
   AccountIdentifier,
@@ -11,12 +11,14 @@ import {
   syncAccounts as _syncAccounts,
   internalTransfer as _internalTransfer,
   generateAddress as _generateAddress,
+  getUnusedAddress as _getUnusedAddress,
   listMessages as _listMessages,
   listAddresses as _listAddresses,
-  availableBalance as _availableBalance,
-  totalBalance as _totalBalance,
+  getBalance as _getBalance,
   latestAddress as _latestAddress,
-  syncAccount as _syncAccount
+  syncAccount as _syncAccount,
+  isLatestAddressUnused as _isLatestAddressUnused,
+  areLatestAddressesUnused as _areLatestAddressesUnused
 } from '../../api-wrapper/account'
 import {
   Transfer,
@@ -27,17 +29,24 @@ import {
   backup as _backup,
   restoreBackup as _restoreBackup,
   setStrongholdPassword as _setStrongholdPassword,
-  send as _send
+  setStoragePassword as _setStoragePassword,
+  send as _send,
+  generateMnemonic as _generateMnemonic,
+  storeMnemonic as _storeMnemonic,
+  verifyMnemonic as _verifyMnemonic,
+  getStrongholdStatus as _getStrongholdStatus
 } from '../../api-wrapper/wallet'
 
 const addon = require('../native')
 const mailbox = []
 const onMessageListeners: ((payload: MessageResponse) => void)[] = []
 
-function _poll(runtime: typeof addon.ActorSystem, cb: (error: string, data: any) => void) {
+function _poll(runtime: typeof addon.ActorSystem, cb: (error: string, data: any) => void, shouldStop: () => boolean) {
   runtime.poll((err: string, data: string) => {
     cb(err, err ? null : JSON.parse(data))
-    _poll(runtime, cb)
+    if (!shouldStop()) {
+      _poll(runtime, cb, shouldStop)
+    }
   })
 }
 
@@ -47,13 +56,20 @@ function sendMessage(message: BridgeMessage): Promise<string> {
   return new Promise(resolve => addon.sendMessage(JSON.stringify(message), () => resolve(id)))
 }
 
-export function init(storagePath?: string) {
-  const runtime = new addon.ActorSystem(storagePath || '')
+export function init(id: string, storagePath?: string) {
+  const runtime = storagePath ? new addon.ActorSystem(id, storagePath) : new addon.ActorSystem(id)
+  let destroyed = false
   _poll(runtime, (error, data) => {
     const message = error || data
     mailbox.push(message)
     onMessageListeners.forEach(listener => listener(message))
-  })
+  }, () => destroyed)
+  return {
+    destroy() {
+      destroyed = true
+      runtime.destroy()
+    }
+  }
 }
 
 export function onMessage(cb: (payload: any) => void) {
@@ -65,76 +81,103 @@ export function initLogger(config: LoggerConfig) {
 }
 
 export const api = {
-  createAccount: function (account: AccountToCreate): ((__id: string) => Promise<string>) {
-    return (__id: string) => _createAccount(sendMessage, __id, account)
+  getStrongholdStatus: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _getStrongholdStatus(sendMessage, __ids)
   },
-  removeAccount: function (accountId: AccountIdentifier): ((__id: string) => Promise<string>) {
-    return (__id: string) => _removeAccount(sendMessage, __id, accountId)
+  generateMnemonic: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _generateMnemonic(sendMessage, __ids)
   },
-  getAccount: function (accountId: AccountIdentifier): ((__id: string) => Promise<string>) {
-    return (__id: string) => _getAccount(sendMessage, __id, accountId)
+  storeMnemonic: function (mnemonic?: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _storeMnemonic(sendMessage, __ids, {
+      signerType: { type: 'Stronghold' },
+      mnemonic: mnemonic || null
+    })
   },
-  getAccounts: function (): ((__id: string) => Promise<string>) {
-    return (__id: string) => _getAccounts(sendMessage, __id)
+  verifyMnemonic: function (mnemonic: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _verifyMnemonic(sendMessage, __ids, mnemonic)
   },
-  syncAccounts: function (): ((__id: string) => Promise<string>) {
-    return (__id: string) => _syncAccounts(sendMessage, __id)
+  createAccount: function (account: AccountToCreate): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _createAccount(sendMessage, __ids, account)
   },
-  generateAddress: function (accountId: AccountIdentifier): ((__id: string) => Promise<string>) {
-    return (__id: string) => _generateAddress(sendMessage, __id, accountId)
+  removeAccount: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _removeAccount(sendMessage, __ids, accountId)
   },
-  listMessages: function (accountId: AccountIdentifier, filters?: ListMessagesFilter): ((__id: string) => Promise<string>) {
-    return (__id: string) => _listMessages(sendMessage, __id, accountId, filters)
+  getAccount: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _getAccount(sendMessage, __ids, accountId)
   },
-  listAddresses: function (accountId: AccountIdentifier, unspent?: boolean): ((__id: string) => Promise<string>) {
-    return (__id: string) => _listAddresses(sendMessage, __id, accountId, unspent)
+  getAccounts: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _getAccounts(sendMessage, __ids)
   },
-  availableBalance: function (accountId: AccountIdentifier): ((__id: string) => Promise<string>) {
-    return (__id: string) => _availableBalance(sendMessage, __id, accountId)
+  syncAccounts: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _syncAccounts(sendMessage, __ids)
   },
-  totalBalance: function (accountId: AccountIdentifier): ((__id: string) => Promise<string>) {
-    return (__id: string) => _totalBalance(sendMessage, __id, accountId)
+  areLatestAddressesUnused: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _areLatestAddressesUnused(sendMessage, __ids)
   },
-  latestAddress: function (accountId: AccountIdentifier): ((__id: string) => Promise<string>) {
-    return (__id: string) => _latestAddress(sendMessage, __id, accountId)
+  generateAddress: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _generateAddress(sendMessage, __ids, accountId)
   },
-  syncAccount: function (accountId: AccountIdentifier, options?: SyncAccountOptions): ((__id: string) => Promise<string>) {
-    return (__id: string) => _syncAccount(sendMessage, __id, accountId, options)
+  getUnusedAddress: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _getUnusedAddress(sendMessage, __ids, accountId)
   },
-  reattach: function (accountId: AccountIdentifier, messageId: string): ((__id: string) => Promise<string>) {
-    return (__id: string) => _reattach(sendMessage, __id, accountId, messageId)
+  listMessages: function (accountId: AccountIdentifier, filters?: ListMessagesFilter): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _listMessages(sendMessage, __ids, accountId, filters)
   },
-  backup: function (destinationPath: string): ((__id: string) => Promise<string>) {
-    return (__id: string) => _backup(sendMessage, __id, destinationPath)
+  listAddresses: function (accountId: AccountIdentifier, unspent?: boolean): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _listAddresses(sendMessage, __ids, accountId, unspent)
   },
-  restoreBackup: function (backupPath: string, password: string): ((__id: string) => Promise<string>) {
-    return (__id: string) => _restoreBackup(sendMessage, __id, backupPath, password)
+  getBalance: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _getBalance(sendMessage, __ids, accountId)
   },
-  setStrongholdPassword: function (password: string): ((__id: string) => Promise<string>) {
-    return (__id: string) => _setStrongholdPassword(sendMessage, __id, password)
+  latestAddress: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _latestAddress(sendMessage, __ids, accountId)
   },
-  send: function (fromAccountId: AccountIdentifier, transfer: Transfer): ((__id: string) => Promise<string>) {
-    return (__id: string) => _send(sendMessage, __id, fromAccountId, transfer)
+  syncAccount: function (accountId: AccountIdentifier, options?: SyncAccountOptions): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _syncAccount(sendMessage, __ids, accountId, options)
   },
-  internalTransfer: function (fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number): ((__id: string) => Promise<string>) {
-    return (__id: string) => _internalTransfer(sendMessage, __id, fromAccountId, toAccountId, amount)
+  isLatestAddressUnused: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _isLatestAddressUnused(sendMessage, __ids, accountId)
   },
-  onError: function (): ((__id: string) => Promise<string>) {
-    return (__id: string) => addon.listen(__id, 'ErrorThrown')
+  reattach: function (accountId: AccountIdentifier, messageId: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _reattach(sendMessage, __ids, accountId, messageId)
   },
-  onBalanceChange: function (): ((__id: string) => Promise<string>) {
-    return (__id: string) => addon.listen(__id, 'BalanceChange')
+  backup: function (destinationPath: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _backup(sendMessage, __ids, destinationPath)
   },
-  onNewTransaction: function (): ((__id: string) => Promise<string>) {
-    return (__id: string) => addon.listen(__id, 'NewTransaction')
+  restoreBackup: function (backupPath: string, password: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _restoreBackup(sendMessage, __ids, backupPath, password)
   },
-  onConfirmationStateChange: function (): ((__id: string) => Promise<string>) {
-    return (__id: string) => addon.listen(__id, 'ConfirmationStateChange')
+  setStrongholdPassword: function (password: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _setStrongholdPassword(sendMessage, __ids, password)
   },
-  onReattachment: function (): ((__id: string) => Promise<string>) {
-    return (__id: string) => addon.listen(__id, 'Reattachment')
+  setStoragePassword: function (password: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _setStoragePassword(sendMessage, __ids, password)
   },
-  onBroadcast: function (): ((__id: string) => Promise<string>) {
-    return (__id: string) => addon.listen(__id, 'Broadcast')
+  send: function (fromAccountId: AccountIdentifier, transfer: Transfer): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _send(sendMessage, __ids, fromAccountId, transfer)
+  },
+  internalTransfer: function (fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _internalTransfer(sendMessage, __ids, fromAccountId, toAccountId, amount)
+  },
+  onError: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'ErrorThrown')
+  },
+  onBalanceChange: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'BalanceChange')
+  },
+  onNewTransaction: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'NewTransaction')
+  },
+  onConfirmationStateChange: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'ConfirmationStateChange')
+  },
+  onReattachment: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'Reattachment')
+  },
+  onBroadcast: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'Broadcast')
+  },
+  onStrongholdStatusChange: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'StrongholdStatusChange')
   },
 };

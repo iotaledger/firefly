@@ -6,13 +6,16 @@
     export let locale
     export let mobile
 
+    export let onCreate
+
     const dispatch = createEventDispatcher()
 
     let accountName
 
     const handleCreateClick = () => {
-        dispatch('next', { accountName })
+        onCreate(accountName)
     }
+    
     const handleCancelClick = () => {
         dispatch('previous')
     }

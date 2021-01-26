@@ -59,7 +59,7 @@ if (isDev) {
         livereload({ watch: './public' })
     )
 } else {
-    plugins.push(terser())
+    plugins.push(terser({}))
 }
 
 module.exports = {

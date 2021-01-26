@@ -1,7 +1,6 @@
 import { readable, writable, get, derived } from 'svelte/store'
-import { logged, notification, walletPin, strongholdPassword, mnemonic } from 'shared/lib/app'
+import { logged, notification, walletPin, strongholdPassword, profiles } from 'shared/lib/app'
 import { setRoute } from 'shared/lib/helpers'
-import { generateRecoveryPhrase } from 'shared/lib/utils'
 
 /**
  * Application path based on location hash
@@ -45,7 +44,7 @@ export enum AppRoute {
     Login = 'login',
 }
 
-enum SetupType {
+export enum SetupType {
     New = 'new',
     Import = 'import',
     Mnemonic = 'mnemonic',
@@ -68,18 +67,13 @@ let walletSetupType = writable<SetupType>(null)
  * Navigate to initial route
  */
 export const initRouter = () => {
-    let userLogged: boolean = get(logged)
+    let hasCompletedSetup: boolean = get(profiles).length > 0;
 
-    if (userLogged) {
+    if (hasCompletedSetup) {
         setRoute(AppRoute.Login)
     } else {
         setRoute(AppRoute.Welcome)
     }
-}
-
-export const requestMnemonic = () => {
-    let recovPhrase = generateRecoveryPhrase()
-    mnemonic.set(recovPhrase)
 }
 
 // TODO: only handle route changes, not app variables
@@ -90,7 +84,9 @@ export const routerNext = (event) => {
 
     switch (currentRoute) {
         case AppRoute.Login:
-            nextRoute = AppRoute.Dashboard
+            const { shouldAddProfile } = params;
+
+            nextRoute = shouldAddProfile ? AppRoute.Setup : AppRoute.Dashboard
             break
         case AppRoute.Welcome:
             nextRoute = AppRoute.Legal

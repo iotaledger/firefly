@@ -1,12 +1,16 @@
 <script>
+    import { api } from 'shared/lib/wallet'
+
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { OnboardingLayout, Illustration, Icon, Text, Profile, Pin, Button } from 'shared/components'
     import { validatePinFormat } from 'shared/lib/utils'
+    import { getActiveProfile } from 'shared/lib/app'
+    import { initialise } from 'shared/lib/wallet'
 
     export let locale
     export let mobile
 
-    const PincodeManager = window['Electron']['PincodeManager'];
+    const PincodeManager = window['Electron']['PincodeManager']
 
     let attempts = 0
     let pinCode = ''
@@ -48,26 +52,36 @@
     }
 
     function handleContinueClick() {
-        if (validatePinFormat(pinCode)) {
-            PincodeManager.verify(pinCode.toString()).then((verified) => {
-                if (verified === true) {
-                    return dispatch('next')
-                }
+        if (!validatePinFormat(pinCode)) {
+            attempts++
+            if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
+                clearInterval(timerId)
+                timerId = setInterval(countdown, 1000)
+            }
+        } else {
+            const profile = getActiveProfile();
 
-                attempts++
+            PincodeManager.verify(profile.id, pinCode.toString())
+                .then((verified) => {
+                    if (verified === true) {
+                        initialise(profile.id, profile.name)
 
-                if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
-                    clearInterval(timerId)
-
-                    timerId = setInterval(countdown, 1000)
-                }
-                return console.info('Incorrect pincode provided!');
-            }).catch((error) => {
-                console.error(error);
-            })
-           
+                        api.setStoragePassword(pinCode.toString(), {
+                            onSuccess() {
+                                dispatch('next')
+                            },
+                            onError(error) {
+                                console.error(error)
+                            },
+                        })
+                    } else {
+                        console.info('Incorrect pincode provided!')
+                    }
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
         }
-
     }
 
     function handleBackClick() {
@@ -91,7 +105,7 @@
         </div>
         <div class="bg-white pt-40 pb-16 flex w-full h-full flex-col items-center justify-center">
             <div class="flex-1 w-96">
-                <Profile name="Charlie Varley" />
+                <Profile name={getActiveProfile().name} />
                 <Pin bind:value={pinCode} classes="mt-10" />
                 <Text type="p" bold classes="mt-4 text-center">
                     {attempts > 0 ? locale('views.login.incorrect_attempts', {
