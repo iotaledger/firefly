@@ -120,7 +120,7 @@
             id, 
             index,
             name: alias,
-            balance: formatUnits(balance, 0), 
+            balance: formatUnit(balance, 0), 
             balanceEquiv: `${balance} USD`,
             address,
             color: AccountColors[index],
@@ -141,7 +141,7 @@
                             transactions = getLatestMessages(accountsResponse.payload)
 
                              if (idx === accountsResponse.payload.length - 1) {
-                                totalBalance.balance = formatUnits(balance, 2);
+                                totalBalance.balance = formatUnit(balance, 2);
                             }
                         } else {
                             console.error(err);
