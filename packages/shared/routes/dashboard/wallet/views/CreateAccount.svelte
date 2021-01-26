@@ -1,17 +1,18 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
     import { Input, Text, Button } from 'shared/components'
-    import { WalletState } from '../Wallet.svelte'
 
     export let locale
+    export let onCreate
 
     const dispatch = createEventDispatcher()
 
     let accountName
 
     const handleCreateClick = () => {
-        dispatch('next', WalletState.Init)
+        onCreate(accountName)
     }
+
     const handleCancelClick = () => {
         dispatch('previous')
     }

@@ -5,6 +5,9 @@
     import { WalletState } from '../Wallet.svelte'
 
     export let locale
+    export let send
+    export let internalTransfer
+    export let onGenerateAddress
 
     const dispatch = createEventDispatcher()
     const accounts = getContext('walletAccounts')
@@ -52,7 +55,7 @@
         </div>
     </div>
 {:else if $state === WalletState.Send}
-    <Send on:next on:previous {locale} />
+    <Send on:next on:previous {send} {internalTransfer} {locale} />
 {:else if $state === WalletState.Receive}
-    <Receive on:next on:previous {locale} />
+    <Receive on:next on:previous {onGenerateAddress} {locale} />
 {/if}

@@ -28,11 +28,15 @@ export interface Account {
 
 export type AccountIdentifier = number | string
 
+export interface SignerType {
+  type: 'Stronghold';
+}
+
 export interface AccountToCreate {
-    clientOptions: ClientOptions
-    mnemonic?: string
-    alias?: string
-    createdAt?: string
+  clientOptions: ClientOptions;
+  signerType: SignerType;
+  alias?: string;
+  createdAt?: string;
 }
 
 export interface SyncedAccount {

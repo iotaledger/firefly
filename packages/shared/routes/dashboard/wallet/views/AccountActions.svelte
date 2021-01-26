@@ -5,6 +5,8 @@
     import { AccountState } from './Account.svelte'
 
     export let locale
+    export let send
+    export let internalTransfer
 
     const dispatch = createEventDispatcher()
 
@@ -64,9 +66,9 @@
         </div>
     </div>
 {:else if $state === AccountState.Send}
-    <Send on:next on:previous {locale} />
+    <Send on:next {send} {internalTransfer} on:previous {locale} />
 {:else if $state === AccountState.Transfer}
-    <Send internal on:next on:previous {locale} />
+    <Send on:next {send} {internalTransfer} on:previous {locale} />
 {:else if $state === AccountState.Receive}
     <Receive on:next on:previous {locale} />
 {:else if $state === AccountState.Manage}

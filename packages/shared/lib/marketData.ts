@@ -292,7 +292,7 @@ export async function fetchMarketData(): Promise<void> {
             ])
 
             const marketData: MarketData = await response.json()
-
+            
             const _priceData = {} as PriceData
 
             Object.keys(get(priceData)).forEach((currency: CurrencyTypes) => {

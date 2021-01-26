@@ -1,5 +1,7 @@
 <script lang="typescript">
     import { createEventDispatcher, getContext } from 'svelte'
+    import { api } from 'shared/lib/wallet'
+    import { fly } from 'svelte/transition'
     import { Text, Button, Dropdown, Amount, Address } from 'shared/components'
 
     export let locale
@@ -14,6 +16,9 @@
     let toAddress = ''
     let amount = undefined
 
+    export let send
+    export let internalTransfer
+
     const handleFromSelect = (item) => {
         from = item
     }
@@ -21,7 +26,11 @@
         toAccount = item
     }
     const handleSendClick = () => {
-        dispatch('next')
+        if (internal) {
+            internalTransfer(from.value, toAccount.value, amount)
+        } else {
+            send(from.value, toAddress, amount)
+        }
     }
     const handleBackClick = () => {
         dispatch('previous')

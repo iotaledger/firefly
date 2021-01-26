@@ -6,6 +6,13 @@ const generateRandomId = () => {
     return Math.random().toString()
 };
 
+const communicationIds = (actorId) => {
+  return {
+    actorId,
+    messageId: generateRandomId()
+  }
+}
+
 lib.initLogger({
   color_enabled: false,
   outputs: [{
@@ -22,24 +29,26 @@ describe('binding', () => {
     lib.api.listenToErrorEvents()(generateRandomId())
   }) */
   it('creates an account, backup and restore it', () => {
-    fs.rmSync('./example-database', {
+    fs.rmdirSync('./storage', {
       recursive: true,
       force: true
     })
     after(() => {
       try {
-        fs.rmSync('./backup', {
+        fs.rmdirSync('./backup', {
           recursive: true,
           force: true
         })
       } catch {}
     })
 
+    const actorId = Math.random().toString().replace('.', '')
+
     return new Promise(resolve => {
-      lib.init()
+      const actor = lib.init(actorId)
       let index = 0
       lib.onMessage(message => {
-        console.log(message)
+        console.log(message, index)
         switch (index++) {
           case 0: {
             assert.deepStrictEqual(message, {
@@ -47,52 +56,82 @@ describe('binding', () => {
               type: 'StrongholdPasswordSet',
               action: 'SetStrongholdPassword'
             })
+            lib.api.storeMnemonic()(communicationIds(actorId))
+            break
+          }
+          case 1: {
+            assert.deepStrictEqual(message, {
+              id: message.id,
+              type: 'StoredMnemonic',
+              action: 'StoreMnemonic'
+            })
             lib.api.createAccount({
               clientOptions: {
                 node: 'https://nodes.devnet.iota.org:443'
               }
-            })(generateRandomId())
+            })(communicationIds(actorId))
             break
           }
-          case 1: {
+          case 2: {
             assert.deepStrictEqual(message, {
               id: message.id,
               type: 'CreatedAccount',
               payload: message.payload,
               action: 'CreateAccount'
             })
-            lib.api.backup('./backup')(generateRandomId())
-            break
-          }
-          case 2: {
-            assert.deepStrictEqual(message, {
-              id: message.id,
-              type: 'BackupSuccessful',
-              action: 'Backup'
-            })
-            fs.unlinkSync('./example-database/wallet.stronghold')
-            lib.api.setStrongholdPassword('password')(generateRandomId()) // since we removed the snapshot, reload stronghold
+            if (fs.existsSync('./backup')) {
+              fs.rmdirSync('./backup', {
+                recursive: true,
+                force: true
+              })
+            }
+            fs.mkdirSync('./backup')
+            lib.api.backup('./backup')(communicationIds(actorId))
             break
           }
           case 3: {
             assert.deepStrictEqual(message, {
               id: message.id,
-              type: 'StrongholdPasswordSet'
+              type: 'BackupSuccessful',
+              action: 'Backup'
             })
-            lib.api.restoreBackup('./backup', 'password')(generateRandomId())
+            lib.api.setStrongholdPassword('password')(communicationIds(actorId)) // since we removed the snapshot, reload stronghold
             break
           }
           case 4: {
             assert.deepStrictEqual(message, {
               id: message.id,
-              type: 'BackupRestored'
+              type: 'StrongholdPasswordSet',
+              action: 'SetStrongholdPassword'
             })
+            // clear the current storage
+            lib.api.removeAccount(0)(communicationIds(actorId))
+            break
+          }
+          case 5: {
+            assert.deepStrictEqual(message, {
+              id: message.id,
+              type: 'RemovedAccount',
+              action: 'RemoveAccount',
+              payload: 0
+            })
+            lib.api.restoreBackup('./backup/' + fs.readdirSync('./backup')[0], 'password')(communicationIds(actorId))
+            break
+          }
+          case 6: {
+            assert.deepStrictEqual(message, {
+              id: message.id,
+              type: 'BackupRestored',
+              action: 'RestoreBackup'
+            })
+            actor.destroy()
             resolve()
             break
           }
         }
       })
-      lib.api.setStrongholdPassword('password')(generateRandomId())
-      })
+  
+      lib.api.setStrongholdPassword('password')(communicationIds(actorId))
     })
+  })
 })

@@ -14,9 +14,10 @@ void listener(const char *message) {
 }
 
 int main() {
-  initialize(callback, NULL);
-  listen("", "ErrorThrown");
-  send_message("{ \"id\": \"A\", \"cmd\": \"SetStrongholdPassword\", \"payload\": \"password\" }");
-  send_message("{ \"id\": \"B\", \"cmd\": \"CreateAccount\", \"payload\": { \"clientOptions\": { \"node\": \"https://nodes.devnet.iota.org:443\" } } }");
+  initialize(callback, "my-actor", "./storage");
+  listen("my-actor", "", "ErrorThrown");
+  send_message("{ \"actorId\": \"my-actor\", \"id\": \"A\", \"cmd\": \"SetStrongholdPassword\", \"payload\": \"password\" }");
+  send_message("{ \"actorId\": \"my-actor\", \"id\": \"AA\", \"cmd\": \"StoreMnemonic\", \"payload\": { \"signerType\": { \"type\": \"Stronghold\" } } }");
+  send_message("{ \"actorId\": \"my-actor\", \"id\": \"B\", \"cmd\": \"CreateAccount\", \"payload\": { \"clientOptions\": { \"node\": \"https://nodes.devnet.iota.org:443\" } }, \"signerType\": { \"type\": \"Stronghold\" } }");
   return 0;
 }

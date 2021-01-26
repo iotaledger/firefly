@@ -15,6 +15,8 @@
     import { AccountNav, AccountBalance, AccountActions, AccountTx } from '.'
 
     export let locale
+    export let send
+    export let internalTransfer
 
     const dispatch = createEventDispatcher()
 
@@ -80,7 +82,7 @@
             <DashboardPane classes="w-1/3 h-full flex flex-auto flex-col flex-shrink-0">
                 <AccountBalance {locale} color={$account.color} balance={$account.balance} balanceEquiv={$account.balanceEquiv} />
                 <DashboardPane classes="h-full -mt-5">
-                    <AccountActions on:next={_next} on:previous={_previous} {locale} />
+                    <AccountActions on:next={_next} on:previous={_previous} {send} {internalTransfer} {locale} />
                 </DashboardPane>
             </DashboardPane>
             <DashboardPane classes="w-1/3">
