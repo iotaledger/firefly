@@ -2,7 +2,11 @@ import { ResponseTypes } from './typings/bridge'
 import type { MessageResponse } from './typings/bridge'
 import type { Account } from './typings/account'
 
-type Validators = IdValidator | ActionValidator | AccountIdentifierValidator | AccountValidator
+type Validators = IdValidator |
+    ActionValidator |
+    PayloadTypeValidator |
+    AccountValidator |
+    AccountListValidator;
 
 export enum ErrorTypes {
     UnknownId = 'UnknownId',
@@ -149,7 +153,14 @@ class ActionValidator extends Validator {
 /**
  * Validation for account identifier
  */
-class AccountIdentifierValidator extends Validator {
+class PayloadTypeValidator extends Validator {
+    type: string
+
+    constructor(type: string) {
+        super()
+        this.type = type
+    }
+
     /**
      * Checks if response is valid
      *
@@ -162,7 +173,7 @@ class AccountIdentifierValidator extends Validator {
     isValid(response: MessageResponse): ValidationResponse {
         const payload = response.payload
 
-        if ('string' !== typeof payload) {
+        if (typeof payload !== this.type) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of payload received.',
@@ -170,6 +181,42 @@ class AccountIdentifierValidator extends Validator {
         }
 
         return super.isValid(response)
+    }
+}
+
+class AccountListValidator extends Validator {
+    /**
+     * Checks if response is valid
+     * 
+     * @method isValid
+     * 
+     * @param {MessageResponse} response
+     * 
+     * @returns {ValidationResponse}
+     */
+    isValid(response: MessageResponse): ValidationResponse {
+        const payload = response.payload as Account[];
+
+        if (!Array.isArray(payload)) {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'Invalid type of accounts received.'
+            });
+        }
+
+        for (const account of payload) {
+            const validationResponse = new AccountValidator().isValid({
+                id: response.id,
+                action: response.action,
+                type: response.type,
+                payload: account as any
+            })
+            if (!validationResponse.isValid) {
+                return validationResponse
+            }
+        }
+
+        return super.isValid(response);
     }
 }
 
@@ -192,13 +239,8 @@ class AccountValidator extends Validator {
         if ('string' !== typeof payload.id) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
-                error: 'Invalid type of id received.',
-            })
-        } else if ('string' !== typeof payload.mnemonic) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of mnemonic received.',
-            })
+                error: 'Invalid type of id received.'
+            });
         } else if ('string' !== typeof payload.alias) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
@@ -316,9 +358,29 @@ export default class ValidatorService {
 
         this.validators = {
             [ResponseTypes.StrongholdPasswordSet]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.RemovedAccount]: this.createBaseValidator().add(new AccountIdentifierValidator()).getFirst(),
+            [ResponseTypes.RemovedAccount]: this.createBaseValidator().add(new PayloadTypeValidator('object')).getFirst(),
             [ResponseTypes.CreatedAccount]: this.createBaseValidator().add(new AccountValidator()).getFirst(),
-        }
+            [ResponseTypes.ReadAccounts]: this.createBaseValidator().add(new AccountListValidator()).getFirst(),
+            [ResponseTypes.Balance]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.BackupRestored]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.BackupSuccessful]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.BackupSuccessful]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.GeneratedMnemonic]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.StoredMnemonic]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.VerifiedMnemonic]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.SyncedAccounts]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.SentTransfer]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.StoragePasswordSet]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.StrongholdStatus]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.GeneratedAddress]: this.createBaseValidator().add(new PayloadTypeValidator('object')).getFirst(),
+            [ResponseTypes.StrongholdStatusChange]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.LatestAddress]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.SyncedAccount]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.UnusedAddress]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.IsLatestAddressUnused]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.AreAllLatestAddressesUnused]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.Error]: this.createBaseValidator().getFirst()
+        };
     }
 
     /**

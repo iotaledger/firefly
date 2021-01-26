@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { fly } from 'svelte/transition'
     import { Text, Button, Dropdown, Amount, Address } from 'shared/components'
@@ -10,13 +11,17 @@
 
     const dispatch = createEventDispatcher()
 
-    $: accountsDropdownItems = accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balance}` }))
+    $: accountsDropdownItems = accounts.map((acc) => ({ value: acc.id, label: `${acc.name} • ${acc.balance}` }))
 
-    let from = accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balance}` }))[0]
+    let from = accounts.map((acc) => ({ value: acc.id, label: `${acc.name} • ${acc.balance}` }))[0]
     let toAddress = ''
-    let toAccount = accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balance}` }))[0]
+    let toAccount = accounts.map((acc) => ({ value: acc.id, label: `${acc.name} • ${acc.balance}` }))[0]
+
     let amount = undefined
     let reference = ''
+
+    export let send
+    export let internalTransfer
 
     const handleFromSelect = (item) => {
         from = item
@@ -25,7 +30,19 @@
         toAccount = item
     }
     const handleSendClick = () => {
-        dispatch('next')
+        if (internal) {
+            internalTransfer(
+                from.value,
+                toAccount.value,
+                amount
+            );
+        } else {
+            send(
+                from.value,
+                toAddress,
+                amount
+            )
+        }
     }
     const handleBackClick = () => {
         dispatch('previous')

@@ -3,7 +3,7 @@
     import { Transition } from 'shared/components'
     import { SelectProfile, EnterPin } from './views/'
     import { api } from 'shared/lib/wallet'
-    
+
     export let locale
     export let mobile
 
@@ -26,7 +26,13 @@
         let params = event.detail || {}
         switch (state) {
             case LoginState.Init:
-                nextState = LoginState.EnterPin
+                const { shouldAddProfile } = params
+
+                if (shouldAddProfile) {
+                    dispatch('next', { shouldAddProfile })
+                } else {
+                    nextState = LoginState.EnterPin
+                }
                 break
             case LoginState.EnterPin:
                 dispatch('next')

@@ -1,5 +1,5 @@
 pub use iota_wallet::{
-    account_manager::AccountManager,
+    account_manager::{AccountManager, ManagerStorage, DEFAULT_STORAGE_FOLDER},
     actor::{
         Message as WalletMessage, MessageType as WalletMessageType, Response, ResponseType,
         WalletMessageHandler,
@@ -8,32 +8,30 @@ pub use iota_wallet::{
 };
 use riker::actors::*;
 use serde::Deserialize;
-use tokio::{runtime::Runtime, sync::mpsc::unbounded_channel};
+use tokio::{
+    runtime::Runtime,
+    sync::{mpsc::unbounded_channel, Mutex},
+};
 
-use std::{path::PathBuf, time::Duration};
+use std::{sync::Arc, time::Duration};
 
-const POLLING_INTERVAL_MS: u64 = 30_000;
+#[derive(Clone, Debug)]
+pub struct KillMessage;
 
+#[actor(WalletMessage, KillMessage)]
 pub struct WalletActor {
-    wallet_message_handler: WalletMessageHandler,
+    wallet_message_handler: Arc<Mutex<WalletMessageHandler>>,
     runtime: Runtime,
 }
 
-impl ActorFactoryArgs<PathBuf> for WalletActor {
-    fn create_args(storage_path: PathBuf) -> Self {
-        let mut runtime = Runtime::new().expect("failed to create tokio runtime");
+impl ActorFactoryArgs<AccountManager> for WalletActor {
+    fn create_args(manager: AccountManager) -> Self {
+        let runtime = Runtime::new().expect("failed to create tokio runtime");
+
         Self {
-            wallet_message_handler: WalletMessageHandler::with_manager(
-                runtime
-                    .block_on(
-                        AccountManager::builder()
-                            .with_storage_path(storage_path)
-                            .with_polling_interval(Duration::from_millis(POLLING_INTERVAL_MS))
-                            .finish(),
-                    )
-                    .unwrap(),
-            )
-            .unwrap(),
+            wallet_message_handler: Arc::new(Mutex::new(WalletMessageHandler::with_manager(
+                manager,
+            ))),
             runtime,
         }
     }
@@ -41,43 +39,73 @@ impl ActorFactoryArgs<PathBuf> for WalletActor {
 
 impl Default for WalletActor {
     fn default() -> Self {
-        let mut runtime = Runtime::new().expect("failed to create tokio runtime");
+        let runtime = Runtime::new().expect("failed to create tokio runtime");
+        let wallet_message_handler = Arc::new(Mutex::new(runtime.block_on(async move {
+            WalletMessageHandler::with_manager(
+                AccountManager::builder()
+                    .with_storage(DEFAULT_STORAGE_FOLDER, ManagerStorage::Sqlite, None)
+                    .unwrap() //safe to unwrap, the storage password is None ^
+                    .with_polling_interval(Duration::from_millis(crate::POLLING_INTERVAL_MS))
+                    .finish()
+                    .await
+                    .unwrap(),
+            )
+        })));
         Self {
-            wallet_message_handler: runtime.block_on(WalletMessageHandler::new()).unwrap(),
+            wallet_message_handler,
             runtime,
         }
     }
 }
 
 impl Actor for WalletActor {
-    type Msg = WalletMessage;
+    type Msg = WalletActorMsg;
 
-    fn recv(&mut self, _ctx: &Context<Self::Msg>, msg: Self::Msg, _sender: Sender) {
-        let wallet_message_handler = &mut self.wallet_message_handler;
-        self.runtime.block_on(async move {
+    fn recv(&mut self, ctx: &Context<Self::Msg>, msg: Self::Msg, sender: Sender) {
+        self.receive(ctx, msg, sender)
+    }
+}
+
+impl Receive<WalletMessage> for WalletActor {
+    type Msg = WalletActorMsg;
+
+    fn receive(&mut self, _ctx: &Context<Self::Msg>, msg: WalletMessage, _sender: Sender) {
+        let wallet_message_handler = self.wallet_message_handler.clone();
+        self.runtime.spawn(async move {
+            let mut wallet_message_handler = wallet_message_handler.lock().await;
             wallet_message_handler.handle(msg).await;
         });
     }
 }
 
+impl Receive<KillMessage> for WalletActor {
+    type Msg = WalletActorMsg;
+
+    fn receive(&mut self, ctx: &Context<Self::Msg>, _msg: KillMessage, _sender: Sender) {
+        ctx.stop(ctx.myself());
+    }
+}
+
 #[derive(Deserialize)]
-struct DispatchMessage {
-    id: String,
+pub(crate) struct DispatchMessage {
+    #[serde(rename = "actorId")]
+    pub(crate) actor_id: String,
+    pub(crate) id: String,
     #[serde(flatten)]
-    message: WalletMessageType,
+    pub(crate) message: WalletMessageType,
 }
 
 pub(crate) async fn dispatch(
-    wallet_actor: &ActorRef<WalletMessage>,
-    message: String,
+    wallet_actor: &ActorRef<WalletActorMsg>,
+    message: DispatchMessage,
 ) -> Result<Option<String>, String> {
     let (response_tx, mut response_rx) = unbounded_channel();
-    let message: DispatchMessage = serde_json::from_str(&message)
-        .map_err(|e| serde_json::to_string(&ResponseType::Error(e.into())).unwrap())?;
+
     wallet_actor.tell(
         WalletMessage::new(message.id.clone(), message.message.clone(), response_tx),
         None,
     );
+
     let response = response_rx.recv().await;
     match response {
         Some(res) => Ok(Some(serde_json::to_string(&res).map_err(|e| {

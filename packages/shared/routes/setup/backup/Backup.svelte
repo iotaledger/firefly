@@ -1,9 +1,12 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
+    import { get } from 'svelte/store'
     import { Backup, RecoveryPhrase, VerifyRecoveryPhrase, BackupToFile, Success } from './views/'
     import { Transition } from 'shared/components'
     import { mnemonic } from 'shared/lib/app'
     import { strongholdPassword } from 'shared/lib/app'
+    import { api } from 'shared/lib/wallet'
+    import { DEFAULT_NODE as node, DEFAULT_NODES as nodes } from 'shared/lib/network'
 
     export let locale
     export let mobile
@@ -13,7 +16,7 @@
         RecoveryPhrase = 'recoveryPhrase',
         Verify = 'verify',
         Backup = 'backup',
-        Success = 'success',
+        Success = 'success'
     }
 
     const dispatch = createEventDispatcher()
@@ -21,7 +24,7 @@
     let state: BackupState = BackupState.Init
     let stateHistory = []
 
-    const _next = (event) => {
+    const _next = async (event) => {
         let nextState
         let params = event.detail || {}
         switch (state) {
@@ -38,11 +41,74 @@
                 }
                 break
             case BackupState.Backup:
-                nextState = BackupState.Success
+                try {
+                    await new Promise((resolve, reject) => {
+                        api.storeMnemonic((get(mnemonic) as string[]).join(' '), {
+                            onSuccess() {
+                                resolve()
+                            },
+                            onError(error) {
+                                reject(error)
+                            }
+                        })
+                    })
+                        .then(() => window['Electron'].getStrongholdBackupDestination())
+                        .then((result) => {
+                            if (result) {
+                                return new Promise((res, rej) => {
+                                    api.backup(result, {
+                                        onSuccess() {
+                                            res()
+                                        },
+                                        onError(error) {
+                                            rej(error)
+                                        }
+                                    })
+                                })
+                            }
+
+                            throw new Error('Path not selected.')
+                        })
+                    nextState = BackupState.Success
+                } catch (error) {
+                    console.log('Error', error)
+                }
+
                 break
             case BackupState.Verify:
             case BackupState.Success:
-                dispatch('next')
+                const _mnemonic = (get(mnemonic) as string[]).join(' ')
+
+                // TODO: Instead of generated mnemonic, we should construct the phrase with what was chosen by the user
+                api.verifyMnemonic(_mnemonic, {
+                    onSuccess(response) {
+                        api.storeMnemonic(_mnemonic, {
+                            onSuccess(response) {
+                                api.createAccount(
+                                    {
+                                        clientOptions: { node, nodes }
+                                    },
+                                    {
+                                        onSuccess() {
+                                            dispatch('next')
+                                        },
+                                        onError() {
+                                            // TODO: handle error
+                                            alert('create account error')
+                                        }
+                                    }
+                                )
+                            },
+                            onError(error) {
+                                console.log(error)
+                            }
+                        })
+                    },
+                    onError(error) {
+                        console.error('Error verifying mnemonic', error)
+                    }
+                })
+
                 break
         }
         if (nextState) {

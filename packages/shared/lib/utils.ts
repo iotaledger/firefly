@@ -1,5 +1,3 @@
-import { generateMnemonic } from 'bip39'
-
 export function bindEvents(element, events) {
     const listeners = Object.entries(events).map(([event, handler]) => {
         const listener = element.addEventListener(event, handler)
@@ -15,11 +13,6 @@ export function bindEvents(element, events) {
         },
     }
 }
-
-/**
- * Generate BIP39 Mnemonic Recovery Phrase
- */
-export const generateRecoveryPhrase = () => generateMnemonic(256).split(' ')
 
 /**
  * Validate seed format
@@ -46,4 +39,15 @@ export const validateRecoveryPhrase = (phrase) => {
 export const validatePinFormat = (pincode: string) => {
     const REGEX = /^\d{6}$/
     return REGEX.test(pincode)
+}
+
+/**
+ * @method generateRandomId
+ *
+ * @returns {string}
+ */
+export const generateRandomId = (): string => {
+    return Array.from(crypto.getRandomValues(new Uint8Array(16)), (byte) => {
+        return ('0' + (byte & 0xff).toString(16)).slice(-2)
+    }).join('')
 }
