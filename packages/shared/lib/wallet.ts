@@ -69,7 +69,9 @@ const apiToResponseTypeMap = {
     verifyMnemonic: ResponseTypes.VerifiedMnemonic,
     setStoragePassword: ResponseTypes.StoragePasswordSet,
     getStrongholdStatus: ResponseTypes.StrongholdStatus,
-    getUnusedAddress: ResponseTypes.UnusedAddress
+    getUnusedAddress: ResponseTypes.UnusedAddress,
+    isLatestAddressUnused: ResponseTypes.IsLatestAddressUnused,
+    areLatestAddressesUnused: ResponseTypes.AreLatestAddressesUnused
 };
 
 /*

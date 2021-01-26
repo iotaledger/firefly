@@ -18,6 +18,8 @@ import {
   totalBalance as _totalBalance,
   latestAddress as _latestAddress,
   syncAccount as _syncAccount,
+  isLatestAddressUnused as _isLatestAddressUnused,
+  areLatestAddressesUnused as _areLatestAddressesUnused
 } from '../../api-wrapper/account'
 import {
   Transfer,
@@ -110,6 +112,9 @@ export const api = {
   syncAccounts: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _syncAccounts(sendMessage, __ids)
   },
+  areLatestAddressesUnused: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _areLatestAddressesUnused(sendMessage, __ids)
+  },
   generateAddress: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _generateAddress(sendMessage, __ids, accountId)
   },
@@ -133,6 +138,9 @@ export const api = {
   },
   syncAccount: function (accountId: AccountIdentifier, options?: SyncAccountOptions): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _syncAccount(sendMessage, __ids, accountId, options)
+  },
+  isLatestAddressUnused: function (accountId: AccountIdentifier): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _isLatestAddressUnused(sendMessage, __ids, accountId)
   },
   reattach: function (accountId: AccountIdentifier, messageId: string): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _reattach(sendMessage, __ids, accountId, messageId)

@@ -40,6 +40,8 @@ export type StoreMnemonicResponse = Response<'StoredMnemonic', void>
 export type VerifyMnmonicResponse = Response<'VerifiedMnemonic', void>
 export type StrongholdStatusResponse = Response<'StrongholdStatus', void>
 export type UnusedAddressResponse = Response<'UnusedAddress', void>
+export type IsLatestAddressUnusedResponse = Response<'IsLatestAddressUnused', void>
+export type AreLatestAddressesUnusedResponse = Response<'AreLatestAddressesUnused', void>
 
 export type MessageResponse = RemovedAccountResponse |
   CreatedAccountResponse |
@@ -63,6 +65,8 @@ export type MessageResponse = RemovedAccountResponse |
   StrongholdStatusResponse |
   ErrorResponse |
   UnusedAddressResponse |
+  IsLatestAddressUnusedResponse |
+  AreLatestAddressesUnusedResponse |
   // events
   ErrorEvent
 

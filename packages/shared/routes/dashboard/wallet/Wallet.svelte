@@ -184,7 +184,6 @@
         api.syncAccounts({
             onSuccess(response) {
                 console.log('Response', response);
-                getAccounts();
             },
             onError(error) {
                 console.error(error)
@@ -283,10 +282,21 @@
     } 
 
     onMount(() => {
+      getAccounts();
+
       api.getStrongholdStatus({
-          onSuccess(response) {
-              if (response.payload.snapshot.status === 'Locked') {
-                  showPasswordPopup = true;
+          onSuccess(strongholdStatusResponse) {
+              if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                      api.areLatestAddressesUnused({
+                        onSuccess(response) {
+                            if (!response.payload) {
+                                showPasswordPopup = true;
+                            }
+                        },
+                        onError(error) {
+                            console.error(error)
+                        }
+                     })
               }
           },
           onError(error) {

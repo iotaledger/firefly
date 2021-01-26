@@ -100,6 +100,14 @@ export function internalTransfer(bridge: Bridge, __ids: CommunicationIds, fromAc
   })
 }
 
+export function areLatestAddressesUnused(bridge: Bridge, __ids: CommunicationIds): Promise<string> {
+  return bridge({
+    actorId: __ids.actorId,
+    id: __ids.messageId,
+    cmd: 'IsLatestAddressUnused'
+  })
+}
+
 enum AccountMethod {
   GenerateAddress,
   GetUnusedAddress,
@@ -109,6 +117,7 @@ enum AccountMethod {
   GetTotalBalance,
   GetLatestAddress,
   SyncAccount,
+  IsLatestAddressUnused
 }
 
 function _callAccountMethod(bridge: Bridge, __ids: CommunicationIds, methodName: AccountMethod, accountId: AccountIdentifier, data: any = void 0): Promise<string> {
@@ -126,6 +135,9 @@ function _callAccountMethod(bridge: Bridge, __ids: CommunicationIds, methodName:
   })
 }
 
+export function isLatestAddressUnused(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
+  return _callAccountMethod(bridge, __ids, AccountMethod.IsLatestAddressUnused, accountId)
+}
 export function generateAddress(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
   return _callAccountMethod(bridge, __ids, AccountMethod.GenerateAddress, accountId)
 }
