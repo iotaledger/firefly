@@ -20,18 +20,16 @@
         'import-from-text-desktop': 'onboarding/import-from-text-desktop.svg',
         'import-from-file-desktop': 'onboarding/import-from-file-desktop.svg',
         'import-from-file-password-desktop': 'onboarding/import-from-file-password-desktop.svg',
+        'import-from-ledger-desktop': 'onboarding/import-from-ledger-desktop.svg',
+        'import-from-firefly-ledger-desktop': 'onboarding/import-from-firefly-ledger-desktop.svg',
+        'balance-desktop': 'onboarding/balance-desktop.svg',
         'congratulations-desktop': 'onboarding/congratulations-desktop.svg',
     }
 </script>
 
 {#if selected}
-    <img
-        data-label="illustration"
-        class={classes}
-        width={width || '100%'}
-        height={height || '100%'}
-        src={`assets/illustrations/${selected}`}
-        alt="" />
+<img data-label="illustration" class={classes} width={width || '100%' } height={height || '100%' }
+    src={`assets/illustrations/${selected}`} alt="" />
 {:else}
-    <div class={`${classes}`} width={width || '100%'} height={height || '100%'} />
+<div class={`${classes}`} width={width || '100%' } height={height || '100%' } />
 {/if}

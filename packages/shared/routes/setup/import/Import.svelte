@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
     import { Transition } from 'shared/components'
-    import { Import, TextImport, FileImport, BackupPassword, Success } from './views/'
+    import { Import, TextImport, FileImport, LedgerImport, FireflyLedgerImport, ConfirmBalance, BackupPassword, Success } from './views/'
     import { api } from 'shared/lib/wallet'
     import { DEFAULT_NODE as node, DEFAULT_NODES as nodes } from 'shared/lib/network'
 
@@ -12,6 +12,10 @@
         Init = 'init',
         TextImport = 'textImport',
         FileImport = 'fileImport',
+        LedgerImport = 'ledgerImport',
+        TrinityLedgerImport = 'trinityLedgerImport',
+        FireflyLedgerImport = 'fireflyLedgerImport',
+        ConfirmBalance = 'confirmBalance',
         BackupPassword = 'backupPassword',
         Success = 'Success'
     }
@@ -21,6 +25,7 @@
     let importType
     let importFile
     let importFilePath
+    let balance
 
     let state: ImportState = ImportState.Init
     let stateHistory = []
@@ -35,6 +40,8 @@
                     nextState = ImportState.TextImport
                 } else if (type === 'file') {
                     nextState = ImportState.FileImport
+                } else if (type === 'ledger') {
+                    nextState = ImportState.LedgerImport
                 }
                 break
             case ImportState.TextImport:
@@ -62,6 +69,23 @@
                 }
                 nextState = ImportState.BackupPassword
 
+                break
+            case ImportState.LedgerImport:
+                const { app } = params
+                if (app === 'Trinity') {
+                    importType = 'trinityLedger'
+                    nextState = ImportState.TrinityLedgerImport
+                } else if (app === 'Firefly') {
+                    importType = 'fireflyLedger'
+                    nextState = ImportState.FireflyLedgerImport
+                }
+                break
+            case ImportState.FireflyLedgerImport:
+                balance = params.balance
+                nextState = ImportState.ConfirmBalance
+                break
+            case ImportState.ConfirmBalance:
+                nextState = ImportState.Success
                 break
             case ImportState.BackupPassword:
                 const { password } = params
@@ -103,23 +127,35 @@
 </script>
 
 {#if state === ImportState.Init}
-    <Transition>
-        <Import on:next={_next} on:previous={_previous} {locale} {mobile} />
-    </Transition>
+<Transition>
+    <Import on:next={_next} on:previous={_previous} {locale} {mobile} />
+</Transition>
 {:else if state === ImportState.TextImport}
-    <Transition>
-        <TextImport on:next={_next} on:previous={_previous} {locale} {mobile} />
-    </Transition>
+<Transition>
+    <TextImport on:next={_next} on:previous={_previous} {locale} {mobile} />
+</Transition>
 {:else if state === ImportState.FileImport}
-    <Transition>
-        <FileImport on:next={_next} on:previous={_previous} {locale} {mobile} />
-    </Transition>
+<Transition>
+    <FileImport on:next={_next} on:previous={_previous} {locale} {mobile} />
+</Transition>
+{:else if state === ImportState.LedgerImport}
+<Transition>
+    <LedgerImport on:next={_next} on:previous={_previous} {locale} {mobile} />
+</Transition>
+{:else if state === ImportState.FireflyLedgerImport}
+<Transition>
+    <FireflyLedgerImport on:next={_next} on:previous={_previous} {locale} {mobile} />
+</Transition>
+{:else if state === ImportState.ConfirmBalance}
+<Transition>
+    <ConfirmBalance on:next={_next} on:previous={_previous} {importType} {balance} {locale} {mobile} />
+</Transition>
 {:else if state === ImportState.BackupPassword}
-    <Transition>
-        <BackupPassword on:next={_next} on:previous={_previous} {importType} {locale} {mobile} />
-    </Transition>
+<Transition>
+    <BackupPassword on:next={_next} on:previous={_previous} {importType} {locale} {mobile} />
+</Transition>
 {:else if state === ImportState.Success}
-    <Transition>
-        <Success on:next={_next} on:previous={_previous} {importType} {locale} {mobile} />
-    </Transition>
+<Transition>
+    <Success on:next={_next} on:previous={_previous} {importType} {locale} {mobile} />
+</Transition>
 {/if}

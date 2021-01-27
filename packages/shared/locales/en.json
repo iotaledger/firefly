@@ -94,6 +94,19 @@
             "title": "Restore your wallet from a backup file",
             "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
         },
+        "import_from_ledger": {
+            "title": "Back up from a Ledger",
+            "body": "Something, something about Ledger backups and some important life advice",
+            "have_firefly_ledger": "I have a Firefly ledger backup",
+            "have_firefly_ledger_description": "Create a fresh account",
+            "have_trinity_ledger": "I have a Trinity ledger backup",
+            "have_trinity_ledger_description": "Create a fresh Ledger account"
+        },
+        "import-from-firefly-ledger": {
+            "title": "Restore from Ledger",
+            "body": "Your wallet password is also used to encrypt a Stronghold backup. Enter your wallet password to save your recovery phrase backup to a file.",
+            "restoring": "Restoring from ledger..."
+        },
         "import_backup_password": {
             "title": "Restore your wallet from a SeedVault or Stronghold",
             "body_1": "Please enter your backup password.",
@@ -279,7 +292,8 @@
         "enableNotifications": "Enable notifications",
         "exportState": "Export state",
         "outsourceProofOfWork": "Outsource proof of work",
-        "unlock": "Unlock"
+        "unlock": "Unlock",
+        "restore": "Restore"
     },
     "general": {
         "password": "Password",
@@ -313,8 +327,10 @@
         "copy_address": "Copy Address",
         "have_text_backup": "I have a text backup",
         "have_file_backup": "I have a file backup",
+        "have_ledger_backup": "I have a Ledger backup",
         "enter_seed_or_phrase": "Enter a recovery phrase or seed",
         "upload_seedvault_or_stronghold": "Import a Stronghold or SeedVault file",
+        "restore_from_ledger": "Restore using a seed from Ledger",
         "import": "Import",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",

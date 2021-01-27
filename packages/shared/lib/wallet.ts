@@ -290,7 +290,7 @@ Wallet.api.onStrongholdStatusChange({
 export const getLatestMessages = (
     accounts: Account[],
     count = 10
-): Message[] => {    
+): Message[] => {
     const messages: Message[] = accounts.reduce((messages, account) => messages.concat(
         account.messages.map((message, idx) => Object.assign({}, message, {
             account: account.index,
