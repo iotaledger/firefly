@@ -48,7 +48,7 @@ export const persistent = <T>(key: string, initialValue: T): Writable<T> => {
 /**
  * Shuffle an array
  */
-export const shuffleArray = (array) => array.sort(() => Math.random() - 0.5)
+export const shuffleArray = (array) => array.slice().sort(() => Math.random() - 0.5)
 
 /**
  * Extract initials from string
@@ -82,7 +82,6 @@ export const truncateString = (str: string, firstCharCount: number = 5, endCharC
     convertedStr += str.substring(str.length - endCharCount, str.length);
     return convertedStr;
 }
-
 
 /**
  * Set text to clipboard

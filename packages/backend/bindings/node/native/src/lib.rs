@@ -1,13 +1,22 @@
 use neon::prelude::*;
+use once_cell::sync::OnceCell;
 use std::convert::TryInto;
 use std::sync::{
     mpsc::{channel, Receiver},
     Arc, Mutex,
 };
+use tokio::runtime::Runtime;
 use wallet_actor_system::{
-    init as init_runtime, listen as add_event_listener, send_message as send_actor_message,
-    EventType, LoggerConfigBuilder, init_logger as init_backend_logger,
+    destroy as destroy_actor, init as init_actor, init_logger as init_backend_logger,
+    listen as add_event_listener, send_message as send_actor_message, EventType,
+    LoggerConfigBuilder,
 };
+
+pub(crate) fn block_on<C: futures::Future>(cb: C) -> C::Output {
+    static INSTANCE: OnceCell<Mutex<Runtime>> = OnceCell::new();
+    let runtime = INSTANCE.get_or_init(|| Mutex::new(Runtime::new().unwrap()));
+    runtime.lock().unwrap().block_on(cb)
+}
 
 struct SendMessageTask {
     message: String,
@@ -19,7 +28,7 @@ impl Task for SendMessageTask {
     type JsEvent = JsUndefined;
     fn perform(&self) -> Result<Self::Output, Self::Error> {
         let message = &self.message;
-        smol::block_on(send_actor_message(message.to_string()));
+        block_on(send_actor_message(message.to_string()));
         Ok(())
     }
 
@@ -54,12 +63,13 @@ impl Task for ReceiveMessageTask {
     ) -> JsResult<Self::JsEvent> {
         match result {
             Ok(s) => Ok(cx.string(s)),
-            Err(e) => cx.throw_error(format!("ReceiveTask error: {}", e))
+            Err(e) => cx.throw_error(format!("ReceiveTask error: {}", e)),
         }
     }
 }
 
 pub struct ActorSystem {
+    actor_id: String,
     rx: Arc<Mutex<Receiver<String>>>,
 }
 
@@ -67,27 +77,32 @@ declare_types! {
     pub class JsActorSystem for ActorSystem {
         // Called by the `JsActorSystem` constructor
         init(mut cx) {
-            let storage_path = match cx.argument::<JsString>(0) {
-                Ok(path) => {
-                    if path.value() == "".to_string() {
-                        None
-                    } else {
-                        Some(path.value())
-                    }
+            let actor_id = cx.argument::<JsString>(0)?.value();
+            let storage_path = match cx.argument_opt(1) {
+                Some(arg) => {
+                    Some(arg.downcast::<JsString>().or_throw(&mut cx)?.value())
                 }
-                Err(_) => None,
+                None => None,
             };
             let (tx, rx) = channel();
             let wrapped_tx = Arc::new(Mutex::new(tx));
 
-            init_runtime(move |event| {
+            block_on(init_actor(actor_id.to_string(), move |event| {
                 let tx = wrapped_tx.lock().unwrap();
                 let _ = tx.send(event);
-            }, storage_path);
+            }, storage_path));
 
             Ok(ActorSystem {
+                actor_id,
                 rx: Arc::new(Mutex::new(rx)),
             })
+        }
+
+        method destroy(mut cx) {
+            let this = cx.this();
+            let actor_id = cx.borrow(&this, |emitter| emitter.actor_id.clone());
+            block_on(destroy_actor(actor_id));
+            Ok(cx.undefined().upcast())
         }
 
         // This method should be called by JS to receive data. It accepts a
@@ -112,10 +127,11 @@ declare_types! {
 }
 
 fn listen(mut cx: FunctionContext) -> JsResult<JsUndefined> {
-    let id = cx.argument::<JsString>(0)?.value();
-    let event_name = cx.argument::<JsString>(1)?.value();
+    let actor_id = cx.argument::<JsString>(0)?.value();
+    let id = cx.argument::<JsString>(1)?.value();
+    let event_name = cx.argument::<JsString>(2)?.value();
     let event_type: EventType = event_name.as_str().try_into().expect("unknown event name");
-    add_event_listener(id, event_type);
+    add_event_listener(actor_id, id, event_type);
     Ok(cx.undefined())
 }
 

@@ -14,7 +14,7 @@
     $: valid = password.length > 8
 
     function handleContinue() {
-        dispatch('next')
+        dispatch('next', { password })
     }
     function handleBackClick() {
         dispatch('previous')

@@ -238,6 +238,15 @@
             "confirmation_rate": "Confirmation rate"
         }
     },
+    "popups": {
+        "password": {
+            "title": "Password required",
+            "subtitle": "Please provide your wallet’s password to unlock stronghold."
+        },
+        "qr": {
+            "title": "Your QR code"
+        }
+    },
     "actions": {
         "continue": "Continue",
         "back": "Back",
@@ -277,7 +286,8 @@
         "enableDeveloperMode": "Enable developer mode",
         "enableNotifications": "Enable notifications",
         "exportState": "Export state",
-        "outsourceProofOfWork": "Outsource proof of work"
+        "outsourceProofOfWork": "Outsource proof of work",
+        "unlock": "Unlock"
     },
     "general": {
         "password": "Password",
@@ -328,6 +338,10 @@
         "manualNodeSelection": "Manual node selection",
         "profiles": "Profiles",
         "create_account": "Create an account",
-        "account_name": "Account name"
+        "account_name": "Account name",
+        "latest_transactions": "Latest Transactions",
+        "transactions": "Transactions",
+        "security": "Security",
+        "account_address": "Account Address"
     }
 }

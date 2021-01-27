@@ -5,7 +5,6 @@ import type {
     CreatedAccountResponse,
     ReadAccountsResponse,
     LatestAddressResponse,
-    TotalBalanceResponse,
     SyncAccountsResponse,
     ErrorResponse,
 } from './typings/bridge'
@@ -13,12 +12,16 @@ import { ResponseTypes } from './typings/bridge'
 import type { Address } from './typings/address'
 import type { Message } from './typings/message'
 import type { Event, BalanceChangeEventPayload, TransactionEventPayload } from './typings/events'
-import Validator, { ErrorTypes as ValidatorErrorTypes } from './validator'
+import Validator, { ErrorTypes as ValidatorErrorTypes } from 'shared/lib/validator'
+import { generateRandomId } from 'shared/lib/utils'
+import { mnemonic, getActiveProfile } from 'shared/lib/app'
+import { account, message } from './typings'
 
 const Wallet = window['__WALLET__']
 
 type Account = {
     id: string
+    index: number;
     alias: string
     addresses: Address[]
     messages: Message[]
@@ -47,7 +50,7 @@ const apiToResponseTypeMap = {
     listAddresses: ResponseTypes.Addresses,
     generateAddress: ResponseTypes.GeneratedAddress,
     latestAddress: ResponseTypes.LatestAddress,
-    totalBalance: ResponseTypes.TotalBalance,
+    getBalance: ResponseTypes.Balance,
     reattach: ResponseTypes.Reattached,
     backup: ResponseTypes.BackupSuccessful,
     restoreBackup: ResponseTypes.BackupRestored,
@@ -59,7 +62,16 @@ const apiToResponseTypeMap = {
     onConfirmationStateChange: ResponseTypes.ConfirmationStateChange,
     onReattachment: ResponseTypes.Reattachment,
     onBroadcast: ResponseTypes.Broadcast,
-}
+    onStrongholdStatusChange: ResponseTypes.StrongholdStatusChange,
+    generateMnemonic: ResponseTypes.GeneratedMnemonic,
+    storeMnemonic: ResponseTypes.StoredMnemonic,
+    verifyMnemonic: ResponseTypes.VerifiedMnemonic,
+    setStoragePassword: ResponseTypes.StoragePasswordSet,
+    getStrongholdStatus: ResponseTypes.StrongholdStatus,
+    getUnusedAddress: ResponseTypes.UnusedAddress,
+    isLatestAddressUnused: ResponseTypes.IsLatestAddressUnused,
+    areLatestAddressesUnused: ResponseTypes.AreAllLatestAddressesUnused
+};
 
 /*
  * Wallet state
@@ -79,8 +91,8 @@ const callbacksStore: CallbacksStore = {}
  */
 const defaultCallbacks = {
     StrongholdPasswordSet: {
-        onSuccess: (response: SetStrongholdPasswordResponse): void => {},
-        onError: (error: ErrorResponse): void => {},
+        onSuccess: (response: SetStrongholdPasswordResponse): void => { },
+        onError: (error: ErrorResponse): void => { },
     },
     CreatedAccount: {
         onSuccess: (response: CreatedAccountResponse): void => {
@@ -90,19 +102,15 @@ const defaultCallbacks = {
                 })
             )
         },
-        onError: (error: ErrorResponse): void => {},
+        onError: (error: ErrorResponse): void => { },
     },
     ReadAccounts: {
-        onSuccess: (response: ReadAccountsResponse): void => {},
-        onError: (error: ErrorResponse): void => {},
+        onSuccess: (response: ReadAccountsResponse): void => { },
+        onError: (error: ErrorResponse): void => { },
     },
     LatestAddress: {
-        onSuccess: (response: LatestAddressResponse): void => {},
-        onError: (error: ErrorResponse): void => {},
-    },
-    TotalBalance: {
-        onSuccess: (response: TotalBalanceResponse): void => {},
-        onError: (error: ErrorResponse): void => {},
+        onSuccess: (response: LatestAddressResponse): void => { },
+        onError: (error: ErrorResponse): void => { },
     },
     SyncedAccounts: {
         onSuccess: (response: SyncAccountsResponse): void => {
@@ -117,7 +125,7 @@ const defaultCallbacks = {
                 return _wallet
             })
         },
-        onError: (error: ErrorResponse): void => {},
+        onError: (error: ErrorResponse): void => { },
     },
     BalanceChange: {
         onSuccess: (response: Event<BalanceChangeEventPayload>): void => {
@@ -132,20 +140,9 @@ const defaultCallbacks = {
         },
     },
     NewTransaction: {
-        onSuccess: (response: Event<TransactionEventPayload>): void => {},
+        onSuccess: (response: Event<TransactionEventPayload>): void => { }
     },
-}
-
-/**
- * @method generateRandomId
- *
- * @returns {string}
- */
-const generateRandomId = (): string => {
-    return Array.from(crypto.getRandomValues(new Uint8Array(16)), (byte) => {
-        return ('0' + (byte & 0xff).toString(16)).slice(-2)
-    }).join('')
-}
+};
 
 /**
  * Response subscriber.
@@ -167,7 +164,7 @@ Wallet.onMessage((message: MessageResponse) => {
         }
     }
 
-    const { isValid, error } = new Validator(Object.keys(callbacksStore)).performValidation(message)
+    const { isValid, error } = new Validator(Object.keys(callbacksStore)).performValidation(message);
 
     if (!isValid) {
         if (error.type !== ValidatorErrorTypes.UnknownId) {
@@ -215,7 +212,9 @@ const storeCallbacks = (__id: string, type: ResponseTypes, callbacks?: Callbacks
 const Middleware = {
     get: (_target, prop) => {
         return async (...payload): Promise<void> => {
-            const __id = generateRandomId()
+            const actorId = getActiveProfile().id;
+
+            const messageId = generateRandomId();
 
             const hasPayload = payload.length
 
@@ -229,11 +228,11 @@ const Middleware = {
                     typeof lastArgument === 'object' && 'onSuccess' in lastArgument && 'onError' in lastArgument
             }
 
-            storeCallbacks(__id, apiToResponseTypeMap[prop], shouldOverrideDefaultCallbacks ? lastArgument : undefined)
+            storeCallbacks(messageId, apiToResponseTypeMap[prop], shouldOverrideDefaultCallbacks ? lastArgument : undefined)
 
             const actualPayload = shouldOverrideDefaultCallbacks ? payload.slice(0, -1) : payload
 
-            await _target[prop](...actualPayload)(__id)
+            await _target[prop](...actualPayload)({ actorId, messageId })
         }
     },
     set: () => {
@@ -242,3 +241,65 @@ const Middleware = {
 }
 
 export const api = new Proxy(Wallet.api, Middleware)
+
+export const initialise = Wallet.init;
+
+/**
+ * Generate BIP39 Mnemonic Recovery Phrase
+ */
+export const generateRecoveryPhrase = (): Promise<string[]> => new Promise((resolve, reject) => {
+    api.generateMnemonic({
+        onSuccess(response) { resolve(response.payload.split(' ')) },
+        onError(error) { reject(error) }
+    })
+})
+
+export const verifyRecoveryPhrase = (phrase): Promise<void> => new Promise((resolve, reject) => {
+    api.verifyMnemonic(phrase, {
+        onSuccess(response) {
+            resolve(response)
+        },
+        onError(error) { reject(error) }
+    })
+})
+
+export const requestMnemonic = async () => {
+    let recoveryPhrase = await generateRecoveryPhrase()
+    mnemonic.set(recoveryPhrase)
+}
+
+Wallet.api.onStrongholdStatusChange({
+    onSuccess(response) {
+        console.log(response)
+    },
+    onError(error) {
+        console.error(error)
+    }
+})
+
+/**
+ * Gets latest messages
+ * 
+ * @method getLatestMessages
+ * 
+ * @param {Account} accounts 
+ * @param {number} [count] 
+ * 
+ * @returns {Message[]}
+ */
+export const getLatestMessages = (
+    accounts: Account[],
+    count = 10
+): Message[] => {    
+    const messages: Message[] = accounts.reduce((messages, account) => messages.concat(
+        account.messages.map((message, idx) => Object.assign({}, message, {
+            account: account.index,
+            internal: idx % 2 !== 0
+        })
+        )
+    ), []);
+
+    return messages.slice().sort((a, b) => {
+        return <any>new Date(b.timestamp) - <any>new Date(a.timestamp);
+    }).slice(0, count);
+};

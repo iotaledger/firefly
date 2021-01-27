@@ -22,7 +22,8 @@
     h3,
     h4,
     h5,
-    p {
+    p,
+    pre {
         // TODO: tailwindify
         &.secondary {
             @apply text-gray-500;
@@ -36,6 +37,12 @@
         &.error {
             @apply text-red-500;
         }
+    }
+    pre {
+        font-family: 'DM Mono';
+        @apply font-normal;
+        @apply break-all;
+        @apply whitespace-pre-line;
     }
 </style>
 
@@ -95,4 +102,15 @@
         class:font-bold={bold}>
         <slot />
     </p>
+{:else if type === 'pre'}
+    <pre
+        class={`text-11 leading-140 ${overrideColor ? '' : 'text-gray-800 dark:text-white'} ${classes}`}
+        class:secondary
+        class:disabled
+        class:highlighted
+        class:error
+        class:smaller
+        class:font-bold={bold}>
+        <slot />
+    </pre>
 {/if}

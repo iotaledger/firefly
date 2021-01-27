@@ -7,6 +7,7 @@
 
     export let bgColor = '#108CFF'
     export let name = ''
+    export let id = ''
     export let onClick = () => ''
 
     let slots = $$props.$$slots
@@ -26,7 +27,7 @@
 
 <div class="flex flex-col justify-between items-center">
     <div
-        on:click={onClick}
+        on:click={() => onClick(id)}
         class={`font-bold text-white text-center rounded-full flex items-center justify-center cursor-pointer ${classes}`}
         style={`height: ${height}; width: ${width}; background-color: ${bgColor}`}>
         {#if slots}

@@ -4,41 +4,31 @@ const { ipcRenderer } = require('electron')
 // Runs in renderer process
 const PincodeManager = {
     /**
-    * Key name — Key against which pincode will be stored in keychain
-    */
-    KEY_NAME: 'pincode',
-    /**
      * Sets pincode in keychain
      * 
      * @method set
      * 
+     * @param {string} key
      * @param {string} pincode 
      * 
      * @returns {Promise}
      */
-    set(pincode) {
-        return ipcRenderer.invoke('keychain-get', this.KEY_NAME).then((storedPincode) => {
-            // Do not allow overriding pincode if there's already one stored in keychain. 
-            if (storedPincode) {
-                return Promise.reject('Pincode already stored.')
-            }
-
-            return ipcRenderer.invoke('keychain-set', this.KEY_NAME, pincode);
-        })
-
-    },
+    set(key, pincode) { return ipcRenderer.invoke('keychain-set', key, pincode) },
     /**
      * Verifies user entered pincode against the one stored in keychain
      * 
      * @method verify
      * 
+     * @param {string} key
      * @param {string} pincode 
      * 
      * @returns {Promise}
      */
-    verify(pincode) {
-        return ipcRenderer.invoke('keychain-get', this.KEY_NAME).then(
-            (storedPincode) => storedPincode === pincode
+    verify(key, pincode) {
+        return ipcRenderer.invoke('keychain-get', key).then(
+            (storedPincode) => {
+                return storedPincode === pincode;
+            }
         );
     }
 }

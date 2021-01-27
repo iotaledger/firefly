@@ -1,7 +1,7 @@
 node_modules
 
 # wallet
-**/example-database
+**/storage
 
 # misc
 .DS_Store

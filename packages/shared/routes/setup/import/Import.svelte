@@ -2,6 +2,8 @@
     import { createEventDispatcher } from 'svelte'
     import { Transition } from 'shared/components'
     import { Import, TextImport, FileImport, BackupPassword, Success } from './views/'
+    import { api } from 'shared/lib/wallet'
+    import { DEFAULT_NODE as node, DEFAULT_NODES as nodes } from 'shared/lib/network'
 
     export let locale
     export let mobile
@@ -11,18 +13,19 @@
         TextImport = 'textImport',
         FileImport = 'fileImport',
         BackupPassword = 'backupPassword',
-        Success = 'Success',
+        Success = 'Success'
     }
 
     const dispatch = createEventDispatcher()
 
     let importType
     let importFile
+    let importFilePath
 
     let state: ImportState = ImportState.Init
     let stateHistory = []
 
-    const _next = (event) => {
+    const _next = async (event) => {
         let nextState
         let params = event.detail || {}
         switch (state) {
@@ -37,28 +40,47 @@
             case ImportState.TextImport:
                 const { input } = params
                 // Dummy
-                if (input.includes('123')) {
-                    importType = 'mnemonic'
-                    nextState = ImportState.Success
-                } else {
+                if (input.length === 81) {
                     importType = 'seed'
                     dispatch('next', { importType })
+                } else {
+                    importType = 'mnemonic'
+                    nextState = ImportState.Success
                 }
                 break
             case ImportState.FileImport:
                 const strongholdRegex = /\.(stronghold)$/i
                 const seedvaultRegex = /\.(kdbx)$/i
-                const { file, fileName } = params
+                const { file, fileName, filePath } = params
                 importFile = file
+                importFilePath = filePath
+
                 if (seedvaultRegex.test(fileName)) {
                     importType = 'seedvault'
                 } else if (strongholdRegex.test(fileName)) {
                     importType = 'stronghold'
                 }
                 nextState = ImportState.BackupPassword
+
                 break
             case ImportState.BackupPassword:
-                nextState = ImportState.Success
+                const { password } = params
+
+                try {
+                    await new Promise((resolve, reject) => {
+                        api.restoreBackup(importFilePath, password, {
+                            onSuccess() {
+                                resolve()
+                            },
+                            onError(error) {
+                                reject(error)
+                            }
+                        })
+                    })
+                    nextState = ImportState.Success
+                } catch (error) {
+                    console.log('Error', error)
+                }
                 break
             case ImportState.Success:
                 dispatch('next', { importType })
