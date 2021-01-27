@@ -133,92 +133,96 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Hjälp och information",
+                "title": "Help & Information",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
-            "profileDetails": {
-                "title": "Profiluppgifter",
-                "description": "Temp"
+            "profile": {
+                "title": "Profile",
+                "description": ""
+            },
+            "sync": {
+                "title": "Sync accounts",
+                "description": ""
             },
             "theme": {
                 "title": "Teman",
-                "description": "Temp"
+                "description": ""
             },
             "language": {
                 "title": "Språk",
-                "description": "Temp"
+                "description": ""
             },
             "currency": {
                 "title": "Valuta",
-                "description": "Temp"
+                "description": ""
             },
             "notifications": {
                 "title": "Aviseringar",
-                "description": "Temp"
+                "description": ""
             },
             "exportStronghold": {
                 "title": "Exportera Stronghold",
-                "description": "Temp"
+                "description": ""
             },
             "appLock": {
                 "title": "Applås",
-                "description": "Temp"
+                "description": ""
             },
             "changePassword": {
-                "title": "Byt lösenord",
-                "description": "Temp"
+                "title": "Change password",
+                "description": ""
             },
             "resyncAccounts": {
-                "title": "Synkronisera konton",
-                "description": "Temp"
+                "title": "Resync accounts",
+                "description": ""
             },
             "resetWallet": {
-                "title": "Återställ plånbok",
-                "description": "Temp"
+                "title": "Reset wallet",
+                "description": ""
             },
             "deepLinks": {
-                "title": "Deep Links",
-                "description": "Temp"
+                "title": "Deep links",
+                "description": ""
             },
             "developerMode": {
-                "title": "Utvecklarläge",
-                "description": "Temp"
+                "title": "Developer mode",
+                "description": ""
             },
             "nodeSettings": {
-                "title": "Nod-inställningar",
-                "description": "Temp"
+                "title": "Node settings",
+                "description": ""
             },
             "proofOfWork": {
-                "title": "PoW",
-                "description": "Temp"
+                "title": "Proof of work",
+                "description": ""
             },
             "errorLog": {
-                "title": "Fellogg",
-                "description": "Temp"
+                "title": "Error log",
+                "description": ""
             },
             "stateExport": {
-                "title": "Tillstånds-exportering",
-                "description": "Temp"
+                "title": "State export",
+                "description": ""
             },
             "troubleshoot": {
                 "title": "Felsök",
-                "description": "Temp"
+                "description": ""
             },
             "documentation": {
                 "title": "Dokumentation",
-                "description": "Temp"
+                "description": ""
             },
             "faq": {
                 "title": "Vanliga frågor (FAQ)",
-                "description": "Temp"
+                "description": ""
             },
             "discord": {
                 "title": "Discord",
-                "description": "Temp"
+                "description": ""
             },
             "about": {
                 "title": "Om",
-                "description": "Temp"
+                "description": ""
             }
         },
         "login": {
@@ -226,9 +230,21 @@
             "incorrect_attempts": "{attempts, plural, one {1 felaktigt försök} other {# felaktiga försök}}"
         }
     },
+    "popups": {
+        "password": {
+            "title": "Password required",
+            "subtitle": "Please provide your wallet’s password to unlock stronghold."
+        },
+        "qr": {
+            "title": "Your QR code"
+        }
+    },
     "actions": {
         "continue": "Fortsätt",
         "back": "Bakåt",
+        "cancel": "Cancel",
+        "close": "Close",
+        "save": "Save",
         "import_seed": "Importera en befintlig seed",
         "import_wallet": "Importera befintlig plånbok",
         "create_wallet": "Skapa ny plånbok",
@@ -247,17 +263,30 @@
         "import_from_file": "Importera från en fil",
         "send": "Skicka",
         "receive": "Ta emot",
+        "create": "Create",
         "begin_transfer": "Påbörja överföring",
         "try_again": "Försök igen",
         "visit_discord": "Besök Discord",
         "drag_drop": "Dra & Släpp",
         "import_extentions": ".stronghold eller .kdbx-fil",
         "choose_file": "Välj en fil",
-        "drop_here": "Släpp din fil här"
+        "drop_here": "Släpp din fil här",
+        "syncAll": "Sync all",
+        "export": "Export",
+        "exportNewStronghold": "Export a new Stronghold",
+        "enableDeepLinks": "Enable deep links",
+        "enableDeveloperMode": "Enable developer mode",
+        "enableNotifications": "Enable notifications",
+        "exportState": "Export state",
+        "outsourceProofOfWork": "Outsource proof of work",
+        "unlock": "Unlock"
     },
     "general": {
         "password": "Lösenord",
         "confirm_password": "Bekräfta lösenord",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "confirmNewPassword": "Confirm new password",
         "your_seed": "Din Seed",
         "recovery_phrase": "Återställningsfras",
         "recent_activity": "Senaste aktivitet",
@@ -267,7 +296,9 @@
         "send_to_address": "Skicka till en adress",
         "scan_qr_or_paste": "Skanna en QR-kod eller klistra in en adress",
         "transfer_between_accounts": "Överför mellan konton",
-        "move_funds_between_accounts": "Flytta pengar mellan dina konton",
+        "move_funds_between_accounts": "Move funds between accounts",
+        "manage_account": "Manage Account",
+        "customize_account": "Customize your account",
         "account": "Konto",
         "sending_to_address": "Skickar till adress",
         "amount": "Belopp",
@@ -279,6 +310,7 @@
         "share_address": "Dela en adress",
         "your_address": "Din adress",
         "generate_new_address": "Skapa ny adress",
+        "copy_address": "Copy Address",
         "have_text_backup": "Jag har en säkerhetskopia-fras",
         "have_file_backup": "Jag har en säkerhetskopia-fil",
         "enter_seed_or_phrase": "Ange en återställningsfras eller seed",
@@ -294,6 +326,14 @@
         "incoming": "Inkommande",
         "outgoing": "Utgående",
         "accounts": "Konton",
-        "profiles": "Profiler"
+        "automaticNodeSelection": "Automatic node selection",
+        "manualNodeSelection": "Manual node selection",
+        "profiles": "Profiler",
+        "create_account": "Create an account",
+        "account_name": "Account name",
+        "latest_transactions": "Latest Transactions",
+        "transactions": "Transactions",
+        "security": "Säkerhet",
+        "account_address": "Account Address"
     }
 }

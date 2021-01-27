@@ -133,92 +133,96 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Βοήθεια και πληροφορίες",
+                "title": "Help & Information",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
-            "profileDetails": {
-                "title": "Λεπτομέρειες προφίλ",
-                "description": "Temp"
+            "profile": {
+                "title": "Profile",
+                "description": ""
+            },
+            "sync": {
+                "title": "Sync accounts",
+                "description": ""
             },
             "theme": {
                 "title": "Θεματικό",
-                "description": "Temp"
+                "description": ""
             },
             "language": {
                 "title": "Γλώσσα",
-                "description": "Temp"
+                "description": ""
             },
             "currency": {
                 "title": "Νόμισμα",
-                "description": "Temp"
+                "description": ""
             },
             "notifications": {
                 "title": "Ειδοποιήσεις",
-                "description": "Temp"
+                "description": ""
             },
             "exportStronghold": {
                 "title": "Εξαγωγή Stronghold",
-                "description": "Temp"
+                "description": ""
             },
             "appLock": {
                 "title": "Κλείδωμα του App",
-                "description": "Temp"
+                "description": ""
             },
             "changePassword": {
-                "title": "Αλλαγή Κωδικού Ασφαλείας",
-                "description": "Temp"
+                "title": "Change password",
+                "description": ""
             },
             "resyncAccounts": {
-                "title": "Επανα-συγχρωνισμός Λογαριασμών",
-                "description": "Temp"
+                "title": "Resync accounts",
+                "description": ""
             },
             "resetWallet": {
-                "title": "Επαναφορά Πορτοφολιού",
-                "description": "Temp"
+                "title": "Reset wallet",
+                "description": ""
             },
             "deepLinks": {
-                "title": "Βαθιοί Συνδέσμοι",
-                "description": "Temp"
+                "title": "Deep links",
+                "description": ""
             },
             "developerMode": {
-                "title": "Λειτουργία Προγραμματιστών",
-                "description": "Temp"
+                "title": "Developer mode",
+                "description": ""
             },
             "nodeSettings": {
-                "title": "Ρυθμίσεις κόμβου",
-                "description": "Temp"
+                "title": "Node settings",
+                "description": ""
             },
             "proofOfWork": {
-                "title": "Απόδειξη της εργασίας",
-                "description": "Temp"
+                "title": "Proof of work",
+                "description": ""
             },
             "errorLog": {
-                "title": "Αρχείο Σφαλμάτων",
-                "description": "Temp"
+                "title": "Error log",
+                "description": ""
             },
             "stateExport": {
-                "title": "Εξαγωγή Κατάστασης",
-                "description": "Temp"
+                "title": "State export",
+                "description": ""
             },
             "troubleshoot": {
                 "title": "Αντιμετώπιση προβλημάτων",
-                "description": "Temp"
+                "description": ""
             },
             "documentation": {
                 "title": "Εγχειρίδιο",
-                "description": "Temp"
+                "description": ""
             },
             "faq": {
                 "title": "Συχνές Ερωτήσεις",
-                "description": "Temp"
+                "description": ""
             },
             "discord": {
                 "title": "Discord",
-                "description": "Temp"
+                "description": ""
             },
             "about": {
                 "title": "Σχετικά",
-                "description": "Temp"
+                "description": ""
             }
         },
         "login": {
@@ -226,9 +230,21 @@
             "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
         }
     },
+    "popups": {
+        "password": {
+            "title": "Password required",
+            "subtitle": "Please provide your wallet’s password to unlock stronghold."
+        },
+        "qr": {
+            "title": "Your QR code"
+        }
+    },
     "actions": {
         "continue": "Συνέχεια",
         "back": "Πίσω",
+        "cancel": "Cancel",
+        "close": "Close",
+        "save": "Save",
         "import_seed": "Εισαγωγή υφιστάμενου seed",
         "import_wallet": "Εισαγωγή υφιστάμενου πορτοφολιού",
         "create_wallet": "Δημιουργία νέου πορτοφολιού",
@@ -247,17 +263,30 @@
         "import_from_file": "Εισαγωγή από αρχείο",
         "send": "Αποστολή",
         "receive": "Λήψη",
+        "create": "Create",
         "begin_transfer": "Ξεκινήστε την Μεταφορά",
         "try_again": "Προσπαθήστε ξανά",
         "visit_discord": "Επισκεφτείτε το Discord",
         "drag_drop": "Σύρετε και τοποθετήστε",
         "import_extentions": "αρχείο .stronghold ή .kdbx",
         "choose_file": "Επιλέξτε αρχείο",
-        "drop_here": "Τοποθετήστε το αρχείο σας εδώ"
+        "drop_here": "Τοποθετήστε το αρχείο σας εδώ",
+        "syncAll": "Sync all",
+        "export": "Export",
+        "exportNewStronghold": "Export a new Stronghold",
+        "enableDeepLinks": "Enable deep links",
+        "enableDeveloperMode": "Enable developer mode",
+        "enableNotifications": "Enable notifications",
+        "exportState": "Export state",
+        "outsourceProofOfWork": "Outsource proof of work",
+        "unlock": "Unlock"
     },
     "general": {
         "password": "Κωδικός πρόσβασης",
         "confirm_password": "Επιβεβαίωση κωδικού πρόσβασης",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "confirmNewPassword": "Confirm new password",
         "your_seed": "Το Seed σας",
         "recovery_phrase": "Φράση ανάκτησης",
         "recent_activity": "Πρόσφατη Δραστηριότητα",
@@ -267,7 +296,9 @@
         "send_to_address": "Αποστολή σε μία διεύθυνση",
         "scan_qr_or_paste": "Σαρώστε τον κωδικό QR ή επικολλήστε μια διεύθυνση",
         "transfer_between_accounts": "Μεταφορά μεταξύ λογαριασμών",
-        "move_funds_between_accounts": "Μεταφέρετε χρήματα μεταξύ των λογαριασμών σας",
+        "move_funds_between_accounts": "Move funds between accounts",
+        "manage_account": "Manage Account",
+        "customize_account": "Customize your account",
         "account": "Λογαριασμός",
         "sending_to_address": "Αποστολή σε διεύθυνση",
         "amount": "Ποσό",
@@ -279,6 +310,7 @@
         "share_address": "Μοιραστείτε μια διεύθυνση",
         "your_address": "Η διεύθυνση σας",
         "generate_new_address": "Δημιουργία νέας διεύθυνσης",
+        "copy_address": "Copy Address",
         "have_text_backup": "Έχω εφεδρικό αρχείο text",
         "have_file_backup": "Έχω εφεδρικό αρχείο",
         "enter_seed_or_phrase": "Εισάξτε φράση ανάκτησης ή seed",
@@ -294,6 +326,14 @@
         "incoming": "Εισερχόμενο",
         "outgoing": "Εξερχόμενο",
         "accounts": "Λογαριασμοί",
-        "profiles": "Προφίλ"
+        "automaticNodeSelection": "Automatic node selection",
+        "manualNodeSelection": "Manual node selection",
+        "profiles": "Προφίλ",
+        "create_account": "Create an account",
+        "account_name": "Account name",
+        "latest_transactions": "Latest Transactions",
+        "transactions": "Transactions",
+        "security": "Ασφάλεια",
+        "account_address": "Account Address"
     }
 }
