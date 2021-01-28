@@ -133,92 +133,96 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Hilfe und Information",
+                "title": "Help & Information",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
-            "profileDetails": {
-                "title": "Profildetails",
-                "description": "Temp"
+            "profile": {
+                "title": "Profile",
+                "description": ""
+            },
+            "sync": {
+                "title": "Sync accounts",
+                "description": ""
             },
             "theme": {
                 "title": "Erscheinungsbild",
-                "description": "Temp"
+                "description": ""
             },
             "language": {
                 "title": "Sprache",
-                "description": "Temp"
+                "description": ""
             },
             "currency": {
                 "title": "Währung",
-                "description": "Temp"
+                "description": ""
             },
             "notifications": {
                 "title": "Benachrichtigungen",
-                "description": "Temp"
+                "description": ""
             },
             "exportStronghold": {
                 "title": "Stronghold exportieren",
-                "description": "Temp"
+                "description": ""
             },
             "appLock": {
                 "title": "App-Sperre",
-                "description": "Temp"
+                "description": ""
             },
             "changePassword": {
-                "title": "Passwort ändern",
-                "description": "Temp"
+                "title": "Change password",
+                "description": ""
             },
             "resyncAccounts": {
-                "title": "Konten synchronisieren",
-                "description": "Temp"
+                "title": "Resync accounts",
+                "description": ""
             },
             "resetWallet": {
-                "title": "Wallet zurücksetzen",
-                "description": "Temp"
+                "title": "Reset wallet",
+                "description": ""
             },
             "deepLinks": {
-                "title": "Deep Links",
-                "description": "Temp"
+                "title": "Deep links",
+                "description": ""
             },
             "developerMode": {
-                "title": "Entwicklermodus",
-                "description": "Temp"
+                "title": "Developer mode",
+                "description": ""
             },
             "nodeSettings": {
-                "title": "Node-Einstellungen",
-                "description": "Temp"
+                "title": "Node settings",
+                "description": ""
             },
             "proofOfWork": {
-                "title": "Proof of Work",
-                "description": "Temp"
+                "title": "Proof of work",
+                "description": ""
             },
             "errorLog": {
-                "title": "Fehlerprotokoll",
-                "description": "Temp"
+                "title": "Error log",
+                "description": ""
             },
             "stateExport": {
-                "title": "Status exportieren",
-                "description": "Temp"
+                "title": "State export",
+                "description": ""
             },
             "troubleshoot": {
                 "title": "Fehlerbehebung",
-                "description": "Temp"
+                "description": ""
             },
             "documentation": {
                 "title": "Dokumentation",
-                "description": "Temp"
+                "description": ""
             },
             "faq": {
                 "title": "Häufig gestellte Fragen",
-                "description": "Temp"
+                "description": ""
             },
             "discord": {
                 "title": "Discord",
-                "description": "Temp"
+                "description": ""
             },
             "about": {
                 "title": "Über uns",
-                "description": "Temp"
+                "description": ""
             }
         },
         "login": {
@@ -226,9 +230,21 @@
             "incorrect_attempts": "{attempts, plural, one {1 falscher Versuch} other {# falsche Versuche}}"
         }
     },
+    "popups": {
+        "password": {
+            "title": "Password required",
+            "subtitle": "Please provide your wallet’s password to unlock stronghold."
+        },
+        "qr": {
+            "title": "Your QR code"
+        }
+    },
     "actions": {
         "continue": "Weiter",
         "back": "Zurück",
+        "cancel": "Cancel",
+        "close": "Close",
+        "save": "Save",
         "import_seed": "Importiere einen bestehenden Seed",
         "import_wallet": "Bestehende Wallet importieren",
         "create_wallet": "Neue Wallet erstellen",
@@ -247,17 +263,30 @@
         "import_from_file": "Von einer Datei importieren",
         "send": "Senden",
         "receive": "Empfangen",
+        "create": "Create",
         "begin_transfer": "Transfer starten",
         "try_again": "Erneut versuchen",
         "visit_discord": "Besuche uns auf Discord",
         "drag_drop": "Drag & Drop",
         "import_extentions": ".stronghold oder .kdbx Datei",
         "choose_file": "Datei auswählen",
-        "drop_here": "Datei hier ablegen"
+        "drop_here": "Datei hier ablegen",
+        "syncAll": "Sync all",
+        "export": "Export",
+        "exportNewStronghold": "Export a new Stronghold",
+        "enableDeepLinks": "Enable deep links",
+        "enableDeveloperMode": "Enable developer mode",
+        "enableNotifications": "Enable notifications",
+        "exportState": "Export state",
+        "outsourceProofOfWork": "Outsource proof of work",
+        "unlock": "Unlock"
     },
     "general": {
         "password": "Passwort",
         "confirm_password": "Passwort bestätigen",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "confirmNewPassword": "Confirm new password",
         "your_seed": "Dein Seed",
         "recovery_phrase": "Wiederherstellungsphrase",
         "recent_activity": "Kürzliche Aktivität",
@@ -267,7 +296,9 @@
         "send_to_address": "Zu Adresse senden",
         "scan_qr_or_paste": "Scanne einen QR-Code oder füge eine Adresse ein",
         "transfer_between_accounts": "Zwischen Konten übertragen",
-        "move_funds_between_accounts": "Guthaben zwischen deinen Konten verschieben",
+        "move_funds_between_accounts": "Move funds between accounts",
+        "manage_account": "Manage Account",
+        "customize_account": "Customize your account",
         "account": "Konto",
         "sending_to_address": "An Adresse senden",
         "amount": "Betrag",
@@ -279,6 +310,7 @@
         "share_address": "Adresse teilen",
         "your_address": "Deine Adresse",
         "generate_new_address": "Neue Adresse erstellen",
+        "copy_address": "Copy Address",
         "have_text_backup": "Ich habe eine Text-Sicherung",
         "have_file_backup": "Ich habe eine Datei-Sicherung",
         "enter_seed_or_phrase": "Wiederherstellungsphrase oder Seed eingeben",
@@ -294,6 +326,14 @@
         "incoming": "Eingehend",
         "outgoing": "Ausgehend",
         "accounts": "Konten",
-        "profiles": "Profile"
+        "automaticNodeSelection": "Automatic node selection",
+        "manualNodeSelection": "Manual node selection",
+        "profiles": "Profile",
+        "create_account": "Create an account",
+        "account_name": "Account name",
+        "latest_transactions": "Latest Transactions",
+        "transactions": "Transactions",
+        "security": "Sicherheit",
+        "account_address": "Account Address"
     }
 }

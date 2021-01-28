@@ -133,92 +133,96 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "मदद सूचना",
+                "title": "Help & Information",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
-            "profileDetails": {
-                "title": "प्रोफ़ाइल विवरण",
-                "description": "Temp"
+            "profile": {
+                "title": "Profile",
+                "description": ""
+            },
+            "sync": {
+                "title": "Sync accounts",
+                "description": ""
             },
             "theme": {
                 "title": "थीम",
-                "description": "Temp"
+                "description": ""
             },
             "language": {
                 "title": "भाषा ",
-                "description": "Temp"
+                "description": ""
             },
             "currency": {
                 "title": "मुद्रा",
-                "description": "Temp"
+                "description": ""
             },
             "notifications": {
                 "title": "नोटिफिकेशन",
-                "description": "Temp"
+                "description": ""
             },
             "exportStronghold": {
                 "title": "निर्यात स्ट्रॉन्गहोल्ड",
-                "description": "Temp"
+                "description": ""
             },
             "appLock": {
                 "title": "ऐप लॉक",
-                "description": "Temp"
+                "description": ""
             },
             "changePassword": {
-                "title": "पासवर्ड परिवर्तित करें",
-                "description": "Temp"
+                "title": "Change password",
+                "description": ""
             },
             "resyncAccounts": {
-                "title": "पुन: सिंक खाता",
-                "description": "Temp"
+                "title": "Resync accounts",
+                "description": ""
             },
             "resetWallet": {
-                "title": "वॉलेट रिसेट",
-                "description": "Temp"
+                "title": "Reset wallet",
+                "description": ""
             },
             "deepLinks": {
-                "title": "डीप लिंक्स",
-                "description": "Temp"
+                "title": "Deep links",
+                "description": ""
             },
             "developerMode": {
-                "title": "विकासक प्रणाली",
-                "description": "Temp"
+                "title": "Developer mode",
+                "description": ""
             },
             "nodeSettings": {
-                "title": "नोड सेटिंग्स",
-                "description": "Temp"
+                "title": "Node settings",
+                "description": ""
             },
             "proofOfWork": {
-                "title": "प्रूफ ऑफ़ वर्क",
-                "description": "Temp"
+                "title": "Proof of work",
+                "description": ""
             },
             "errorLog": {
-                "title": "त्रुटि लॉग",
-                "description": "Temp"
+                "title": "Error log",
+                "description": ""
             },
             "stateExport": {
-                "title": "स्टेट एक्सपोर्ट",
-                "description": "Temp"
+                "title": "State export",
+                "description": ""
             },
             "troubleshoot": {
                 "title": "समस्या निवारण",
-                "description": "Temp"
+                "description": ""
             },
             "documentation": {
                 "title": "प्रलेखन",
-                "description": "Temp"
+                "description": ""
             },
             "faq": {
                 "title": "FAQ",
-                "description": "Temp"
+                "description": ""
             },
             "discord": {
                 "title": "डिस्कोर्ड",
-                "description": "Temp"
+                "description": ""
             },
             "about": {
                 "title": "विवरण",
-                "description": "Temp"
+                "description": ""
             }
         },
         "login": {
@@ -226,9 +230,21 @@
             "incorrect_attempts": "{attempts, plural, one {1 गलत प्रयास} other {# गलत प्रयास}}"
         }
     },
+    "popups": {
+        "password": {
+            "title": "Password required",
+            "subtitle": "Please provide your wallet’s password to unlock stronghold."
+        },
+        "qr": {
+            "title": "Your QR code"
+        }
+    },
     "actions": {
         "continue": "जारी रखें",
         "back": "पीछे",
+        "cancel": "Cancel",
+        "close": "Close",
+        "save": "Save",
         "import_seed": "एक मौजूदा सीड आयात करें",
         "import_wallet": "मौजूदा वॉलेट आयात करें",
         "create_wallet": "नया वॉलेट बनाएं",
@@ -247,17 +263,30 @@
         "import_from_file": "फ़ाइल से आयात करें",
         "send": "भेजें",
         "receive": "प्राप्त करें",
+        "create": "Create",
         "begin_transfer": "स्थानांतरण शुरू करें",
         "try_again": "फिर कोशिश करें",
         "visit_discord": "डिस्कॉर्ड पर जाएँ",
         "drag_drop": "खींचें और छोड़ें",
         "import_extentions": ".stronghold या .kdbx फाइल",
         "choose_file": "फ़ाइल चुनें",
-        "drop_here": "अपनी फाइल को यहां छोड़ें"
+        "drop_here": "अपनी फाइल को यहां छोड़ें",
+        "syncAll": "Sync all",
+        "export": "Export",
+        "exportNewStronghold": "Export a new Stronghold",
+        "enableDeepLinks": "Enable deep links",
+        "enableDeveloperMode": "Enable developer mode",
+        "enableNotifications": "Enable notifications",
+        "exportState": "Export state",
+        "outsourceProofOfWork": "Outsource proof of work",
+        "unlock": "Unlock"
     },
     "general": {
         "password": "पासवर्ड",
         "confirm_password": "पासवर्ड की पुष्टि करें",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "confirmNewPassword": "Confirm new password",
         "your_seed": "आपका सीड",
         "recovery_phrase": "पुनर्प्राप्ति वाक्यांश",
         "recent_activity": "हाल की गतिविधि",
@@ -267,7 +296,9 @@
         "send_to_address": "स्वयं के पते पर भेजा जा रहा है",
         "scan_qr_or_paste": "QR कोड स्कैन करें या एक पता पेस्ट करें",
         "transfer_between_accounts": "खाते के बीच स्थानांतरण",
-        "move_funds_between_accounts": "अपने खातों के बीच धन ले जाएँ",
+        "move_funds_between_accounts": "Move funds between accounts",
+        "manage_account": "Manage Account",
+        "customize_account": "Customize your account",
         "account": "खाता",
         "sending_to_address": "स्वयं के पते पर भेजा जा रहा है",
         "amount": "रकम",
@@ -279,6 +310,7 @@
         "share_address": "पता साझा करें",
         "your_address": "आपका पता",
         "generate_new_address": "नया पता उत्पन्न करें",
+        "copy_address": "Copy Address",
         "have_text_backup": "मेरे पास एक लिखित में बैकअप है",
         "have_file_backup": "मेरे पास एक फाइल में बैकअप है",
         "enter_seed_or_phrase": "एक पुनर्प्राप्ति वाक्यांश या सीड दर्ज करें",
@@ -294,6 +326,14 @@
         "incoming": "आने वाला",
         "outgoing": "बाहर जाने वाले",
         "accounts": "खाता",
-        "profiles": "प्रोफाइल्स"
+        "automaticNodeSelection": "Automatic node selection",
+        "manualNodeSelection": "Manual node selection",
+        "profiles": "प्रोफाइल्स",
+        "create_account": "Create an account",
+        "account_name": "Account name",
+        "latest_transactions": "Latest Transactions",
+        "transactions": "Transactions",
+        "security": "सुरक्षा",
+        "account_address": "Account Address"
     }
 }
