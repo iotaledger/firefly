@@ -43,10 +43,14 @@
             },
             {
                 onSuccess(createAccountResponse) {
-                    api.syncAccount(createAccountResponse.payload.id, {
-                        onSuccess(syncAccountResponse) {
+                    api.syncAccounts({
+                        onSuccess(syncAccountsResponse) {
+                            let balance = 0
+                            for (const syncedAccount of syncAccountsResponse.payload) {
+                                const accountBalance = syncedAccount.addresses.reduce((total, address) => total + address.balance, 0)
+                                balance += accountBalance
+                            }
                             restoring = false
-                            const balance = syncAccountResponse.payload.addresses.reduce((total, address) => total + address.balance, 0)
                             dispatch('next', { balance })
                         },
                         onError(error) {
