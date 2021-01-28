@@ -19,6 +19,8 @@ import { account, message } from './typings'
 
 const Wallet = window['__WALLET__']
 
+export const WALLET_STORAGE_DIRECTORY = '__storage__'
+
 type Account = {
     id: string
     index: number;
@@ -242,7 +244,9 @@ const Middleware = {
 
 export const api = new Proxy(Wallet.api, Middleware)
 
-export const initialise = Wallet.init;
+export const initialise = (id: string, profileName: string): void => {
+    return Wallet.init(id, `${WALLET_STORAGE_DIRECTORY}/${profileName}`);
+}
 
 /**
  * Generate BIP39 Mnemonic Recovery Phrase
