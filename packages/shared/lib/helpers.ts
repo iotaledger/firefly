@@ -112,3 +112,46 @@ export const setClipboard = (input: string): boolean => {
         return false
     }
 }
+
+/**
+ * Get difference between two dates in weeks
+ */
+
+export const diffDates = (date1: Date, date2: Date) => {
+    const diff = Math.floor(date2.getTime() - date1.getTime());
+    const day = 1000 * 60 * 60 * 24;
+
+    const days = Math.floor(diff / day);
+    const weeks = Math.floor(days / 7);
+    const months = Math.floor(weeks / 4.33);
+    const years = Math.floor(months / 12);
+
+    if (years > 0) {
+        return { unit: 'years_ago', value: years }
+    }
+    else if (months > 0) {
+        return { unit: 'months_ago', value: months }
+    }
+    else if (weeks > 0) {
+        return { unit: 'weeks_ago', value: weeks }
+    }
+    else if (days > 0) {
+        return { unit: 'days_ago', value: days }
+    }
+    else {
+        return { unit: 'today' }
+    }
+}
+
+/**
+ * Get if a date is considered "recent". Less than 1 month is considered recent.
+ * @param date: date to know if recent or not, compared to today. Must be in the past. 
+ */
+export const isRecentDate = (date: Date) => {
+    const diff = Math.floor(new Date().getTime() - date.getTime());
+    const day = 1000 * 60 * 60 * 24;
+    const days = Math.floor(diff / day);
+    const weeks = Math.floor(days / 7);
+    const months = Math.floor(weeks / 4.33);
+    return months == 0
+}

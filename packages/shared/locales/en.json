@@ -228,6 +228,28 @@
         "login": {
             "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
             "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+        },
+        "dashboard": {
+            "security":{
+                "version": {
+                    "title": "Firefly v. {version}",
+                    "up_to_date": "Up to date",
+                    "out_of_date": "Out of date"
+                },
+                "hardware_device": {
+                    "title": "Hardware Device",
+                    "none_detected": "None detected"
+                },
+                "stronghold_status": {
+                    "title": "Stronghold Status",
+                    "locked": "Locked",
+                    "unlocked": "Unlocked"
+                },
+                "stronghold_backup": {
+                    "title": "Stronghold Backup",
+                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                }
+            }
         }
     },
     "popups": {
@@ -237,6 +259,20 @@
         },
         "qr": {
             "title": "Your QR code"
+        },
+        "update": {
+            "title": "Firefly update",
+            "up_to_date_title": "Firefly v. {version} is up to date",
+            "up_to_date_description": "You are running the latest and the most safest Firefly version",
+            "update_available": "Firefly v. {version} update available",
+            "update_details": "Firefly v. {version}, {date}"
+        },
+        "backup": {
+            "title": "Stronghold backup",
+            "last_backup": "Last backup: {date}",
+            "backup_description": "Back up your Stronghold regularly to keep your data and wallet history up to date. Some other benefits are mentioned here.",
+            "update_details": "Last backup: {version}, {date}",
+            "not_backed_up": "Not backed up"
         }
     },
     "actions": {
@@ -279,7 +315,9 @@
         "enableNotifications": "Enable notifications",
         "exportState": "Export state",
         "outsourceProofOfWork": "Outsource proof of work",
-        "unlock": "Unlock"
+        "unlock": "Unlock",
+        "update_firefly": "Update Firefly",
+        "save_backup": "Save backup"
     },
     "general": {
         "password": "Password",
@@ -335,5 +373,12 @@
         "transactions": "Transactions",
         "security": "Security",
         "account_address": "Account Address"
+    },
+    "dates": {
+        "today": "Today",
+        "days_ago": "{time, plural, one {# day} other {# days}} ago",
+        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
+        "months_ago": "{time, plural, one {# month} other {# months}} ago",
+        "years_ago": "{time, plural, one {# year} other {# years}} ago"
     }
 }
