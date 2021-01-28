@@ -18,7 +18,8 @@ import {
   latestAddress as _latestAddress,
   syncAccount as _syncAccount,
   isLatestAddressUnused as _isLatestAddressUnused,
-  areLatestAddressesUnused as _areLatestAddressesUnused
+  areLatestAddressesUnused as _areLatestAddressesUnused,
+  setAlias as _setAlias,
 } from '../../api-wrapper/account'
 import {
   Transfer,
@@ -81,6 +82,9 @@ export function initLogger(config: LoggerConfig) {
 }
 
 export const api = {
+  setAlias: function (accountId: AccountIdentifier, newAccountAlias: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _setAlias(sendMessage, __ids, accountId, newAccountAlias)
+  },
   getStrongholdStatus: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _getStrongholdStatus(sendMessage, __ids)
   },

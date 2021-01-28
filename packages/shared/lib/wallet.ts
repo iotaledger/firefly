@@ -70,7 +70,8 @@ const apiToResponseTypeMap = {
     getStrongholdStatus: ResponseTypes.StrongholdStatus,
     getUnusedAddress: ResponseTypes.UnusedAddress,
     isLatestAddressUnused: ResponseTypes.IsLatestAddressUnused,
-    areLatestAddressesUnused: ResponseTypes.AreAllLatestAddressesUnused
+    areLatestAddressesUnused: ResponseTypes.AreAllLatestAddressesUnused,
+    setAlias: ResponseTypes.UpdatedAlias
 };
 
 /*

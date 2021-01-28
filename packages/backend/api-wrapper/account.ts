@@ -116,7 +116,8 @@ enum AccountMethod {
   GetBalance,
   GetLatestAddress,
   SyncAccount,
-  IsLatestAddressUnused
+  IsLatestAddressUnused,
+  SetAlias,
 }
 
 function _callAccountMethod(bridge: Bridge, __ids: CommunicationIds, methodName: AccountMethod, accountId: AccountIdentifier, data: any = void 0): Promise<string> {
@@ -134,9 +135,14 @@ function _callAccountMethod(bridge: Bridge, __ids: CommunicationIds, methodName:
   })
 }
 
+export function setAlias(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier, payload: string): Promise<string> {
+  return _callAccountMethod(bridge, __ids, AccountMethod.SetAlias, accountId, payload)
+}
+
 export function isLatestAddressUnused(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
   return _callAccountMethod(bridge, __ids, AccountMethod.IsLatestAddressUnused, accountId)
 }
+
 export function generateAddress(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
   return _callAccountMethod(bridge, __ids, AccountMethod.GenerateAddress, accountId)
 }

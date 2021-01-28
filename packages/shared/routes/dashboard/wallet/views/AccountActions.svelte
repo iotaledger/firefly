@@ -8,10 +8,12 @@
     export let send
     export let generateAddress
     export let internalTransfer
+    export let setAlias
 
     const dispatch = createEventDispatcher()
 
     const account = getContext('selectedAccount')
+
     const state = getContext('accountState')
     const showQR = getContext('showQrPopup')
 
@@ -73,5 +75,5 @@
 {:else if $state === AccountState.Receive}
     <Receive on:next on:previous {generateAddress} {locale} />
 {:else if $state === AccountState.Manage}
-    <ManageAccount on:next on:previous {locale} name={$account.name} />
+    <ManageAccount on:next on:previous {locale} name={$account.name} setAlias={setAlias} />
 {/if}
