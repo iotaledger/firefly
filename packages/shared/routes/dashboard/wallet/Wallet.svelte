@@ -16,6 +16,7 @@
     import { formatUnit } from 'shared/lib/units'
     import { Popup, DashboardPane } from 'shared/components'
     import { Account, LineChart, WalletHistory, Security, CreateAccount, WalletBalance, WalletActions } from './views/'
+    import { convertToFiat, currencies, CurrencyTypes, exchangeRates, selectedCurrency } from 'shared/lib/currency'
 
     export let locale
 
@@ -24,7 +25,7 @@
         incoming: '32 Gi',
         outgoing: '16 Gi',
         balance: '0 Mi',
-        balanceEquiv: '45.500 USD',
+        balanceEquiv: '0.00 USD',
     }
 
     const totalBalance = writable(DUMMY_WALLET_BALANCE)
@@ -125,7 +126,7 @@
             index,
             name: alias,
             balance: formatUnit(balance, 0),
-            balanceEquiv: `${balance} USD`,
+            balanceEquiv: `${convertToFiat(balance, $currencies[CurrencyTypes.USD], $exchangeRates[$selectedCurrency])} ${$selectedCurrency}`,
             address,
             color: AccountColors[index],
         })
@@ -157,6 +158,7 @@
                                         balance: formatUnit(_totalBalance.balance, 2),
                                         incoming: formatUnit(_totalBalance.incoming, 2),
                                         outgoing: formatUnit(_totalBalance.outgoing, 2),
+                                        balanceEquiv: `${convertToFiat(_totalBalance.balance, $currencies[CurrencyTypes.USD], $exchangeRates[$selectedCurrency])} ${$selectedCurrency}`,
                                     })
                                 )
                             }
