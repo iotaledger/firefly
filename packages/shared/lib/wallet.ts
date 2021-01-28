@@ -70,7 +70,8 @@ const apiToResponseTypeMap = {
     getStrongholdStatus: ResponseTypes.StrongholdStatus,
     getUnusedAddress: ResponseTypes.UnusedAddress,
     isLatestAddressUnused: ResponseTypes.IsLatestAddressUnused,
-    areLatestAddressesUnused: ResponseTypes.AreAllLatestAddressesUnused
+    areLatestAddressesUnused: ResponseTypes.AreAllLatestAddressesUnused,
+    openLedgerApp: ResponseTypes.OpenedLedgerApp
 };
 
 /*
@@ -157,6 +158,7 @@ Wallet.onMessage((message: MessageResponse) => {
             ResponseTypes.ConfirmationStateChange,
             ResponseTypes.Reattachment,
             ResponseTypes.Broadcast,
+            ResponseTypes.StrongholdStatusChange
         ].includes(message.type)
 
         if (!isEventMessage) {

@@ -1,21 +1,45 @@
 <script>
-    import { createEventDispatcher } from 'svelte'
-    import { OnboardingLayout, Illustration, Text, Button } from 'shared/components'
+    import { createEventDispatcher, onDestroy } from 'svelte'
+    import { writable } from 'svelte/store'
+    import { OnboardingLayout, Illustration, Text, Button, Popup } from 'shared/components'
     import { api } from 'shared/lib/wallet'
     import { DEFAULT_NODE as node, DEFAULT_NODES as nodes } from 'shared/lib/network'
 
     export let locale
     export let mobile
     let restoring = false
+    let showOpenLedgerDialog = true
+    let hasOpenedLedger = false
+    let simulator = true
+    let checkIfLedgerIsOpened = true
+
+    onDestroy(() => {
+        checkIfLedgerIsOpened = false
+    })
 
     const dispatch = createEventDispatcher()
+
+    function openLedgerApp() {
+        api.openLedgerApp(simulator, {
+            onSuccess() {
+                hasOpenedLedger = true
+            },
+            onError() {
+                if (checkIfLedgerIsOpened) {
+                    setTimeout(openLedgerApp, 1000)
+                }
+            }
+        })
+    }
+
+    openLedgerApp()
 
     function restore() {
         restoring = true
         api.createAccount(
             {
                 clientOptions: { node, nodes },
-                signerType: { type: 'LedgerNanoSimulator' }
+                signerType: { type: simulator ? 'LedgerNanoSimulator' : 'LedgerNano' }
             },
             {
                 onSuccess(createAccountResponse) {
@@ -42,19 +66,26 @@
     function handleBackClick() {
         dispatch('previous')
     }
+
+    $: if (!showOpenLedgerDialog) {
+        handleBackClick()
+    }
 </script>
 
 {#if mobile}
 <div>foo</div>
 {:else}
+{#if !hasOpenedLedger}
+<Popup bind:active={showOpenLedgerDialog} {locale} type="ledgerNotConnected" />
+{/if}
 <OnboardingLayout onBackClick={handleBackClick}>
     <div slot="leftpane__content">
-        <Text type="h2" classes="mb-5">{locale('views.import-from-firefly-ledger.title')}</Text>
-        <Text type="p" secondary classes="mb-8">{locale('views.import-from-firefly-ledger.body')}</Text>
+        <Text type="h2" classes="mb-5">{locale('views.import_from_firefly_ledger.title')}</Text>
+        <Text type="p" secondary classes="mb-8">{locale('views.import_from_firefly_ledger.body')}</Text>
     </div>
     <div slot="leftpane__action">
         <Button classes="w-full" disabled={restoring} onClick={restore}>
-            {locale(restoring ? 'views.import-from-firefly-ledger.restoring' : 'actions.restore')}
+            {locale(restoring ? 'views.import_from_firefly_ledger.restoring' : 'actions.restore')}
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-end items-center">

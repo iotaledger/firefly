@@ -34,7 +34,8 @@ import {
   generateMnemonic as _generateMnemonic,
   storeMnemonic as _storeMnemonic,
   verifyMnemonic as _verifyMnemonic,
-  getStrongholdStatus as _getStrongholdStatus
+  getStrongholdStatus as _getStrongholdStatus,
+  openLedgerApp as _openLedgerApp
 } from '../../api-wrapper/wallet'
 
 const addon = require('../native')
@@ -179,5 +180,8 @@ export const api = {
   },
   onStrongholdStatusChange: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'StrongholdStatusChange')
+  },
+  openLedgerApp: function (isSimulator: boolean): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _openLedgerApp(sendMessage, __ids, isSimulator)
   },
 };

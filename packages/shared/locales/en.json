@@ -100,9 +100,10 @@
             "have_firefly_ledger": "I have a Firefly ledger backup",
             "have_firefly_ledger_description": "Create a fresh account",
             "have_trinity_ledger": "I have a Trinity ledger backup",
-            "have_trinity_ledger_description": "Create a fresh Ledger account"
+            "have_trinity_ledger_description": "Create a fresh Ledger account",
+            "ledger_not_connected": "Connect your Ledger device"
         },
-        "import-from-firefly-ledger": {
+        "import_from_firefly_ledger": {
             "title": "Restore from Ledger",
             "body": "Your wallet password is also used to encrypt a Stronghold backup. Enter your wallet password to save your recovery phrase backup to a file.",
             "restoring": "Restoring from ledger..."

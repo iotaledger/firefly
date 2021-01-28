@@ -98,3 +98,12 @@ export function getStrongholdStatus(bridge: Bridge, __ids: CommunicationIds) {
     cmd: 'GetStrongholdStatus',
   })
 }
+
+export function openLedgerApp(bridge: Bridge, __ids: CommunicationIds, isSimulator: boolean) {
+  return bridge({
+    actorId: __ids.actorId,
+    id: __ids.messageId,
+    cmd: 'OpenLedgerApp',
+    payload: isSimulator
+  })
+}
