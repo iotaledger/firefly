@@ -31,6 +31,13 @@ window.Electron = {
 
             return result.filePaths[0]
         })
-    }
-
+    },
+    /**
+     * Gets directory for app's configuration files
+     * 
+     * @method getUserDataPath
+     * 
+     * @returns {string}
+     */
+    getUserDataPath: () => remote.app.getPath('userData')
 };

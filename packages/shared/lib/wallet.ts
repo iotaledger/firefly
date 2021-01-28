@@ -244,8 +244,12 @@ const Middleware = {
 
 export const api = new Proxy(Wallet.api, Middleware)
 
-export const initialise = (id: string, profileName: string): void => {
-    return Wallet.init(id, `${WALLET_STORAGE_DIRECTORY}/${profileName}`);
+export const getStoragePath = (appPath: string, profileName: string): string => {
+    return `${appPath}/${WALLET_STORAGE_DIRECTORY}/${profileName}`;
+} 
+
+export const initialise = (id: string, storagePath: string): void => {
+    return Wallet.init(id, storagePath);
 }
 
 /**
