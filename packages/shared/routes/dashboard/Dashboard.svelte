@@ -20,7 +20,7 @@
     <div>foo</div>
 {:else}
     <div class="flex flex-row w-full h-full">
-        <Sidebar bind:activeTab />
+        <Sidebar bind:activeTab {locale} />
         <!-- Dashboard Pane -->
         <svelte:component this={tabs[activeTab]} {locale} />
     </div>

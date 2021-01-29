@@ -228,6 +228,14 @@
         "login": {
             "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
             "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+        },
+        "network": {
+            "network_operational": "Network Operational",
+            "network_degraded": "Network Degraded",
+            "network_down": "Network Down",
+            "status": "Status",
+            "messages_per_second": "Messages per second",
+            "confirmation_rate": "Confirmation rate"
         }
     },
     "popups": {
