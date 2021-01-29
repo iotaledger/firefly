@@ -133,92 +133,96 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Pomoć i informacije",
+                "title": "Help & Information",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
-            "profileDetails": {
-                "title": "Detalji profila",
-                "description": "Temp"
+            "profile": {
+                "title": "Profile",
+                "description": ""
+            },
+            "sync": {
+                "title": "Sync accounts",
+                "description": ""
             },
             "theme": {
                 "title": "Tema",
-                "description": "Temp"
+                "description": ""
             },
             "language": {
                 "title": "Jezik",
-                "description": "Temp"
+                "description": ""
             },
             "currency": {
                 "title": "Valuta",
-                "description": "Temp"
+                "description": ""
             },
             "notifications": {
                 "title": "Obavijesti",
-                "description": "Temp"
+                "description": ""
             },
             "exportStronghold": {
                 "title": "Izvezite Stronghold",
-                "description": "Temp"
+                "description": ""
             },
             "appLock": {
                 "title": "Zaključavanje aplikacije",
-                "description": "Temp"
+                "description": ""
             },
             "changePassword": {
-                "title": "Promjena lozinke",
-                "description": "Temp"
+                "title": "Change password",
+                "description": ""
             },
             "resyncAccounts": {
-                "title": "Ponovna sinkronizacija računa",
-                "description": "Temp"
+                "title": "Resync accounts",
+                "description": ""
             },
             "resetWallet": {
-                "title": "Resetiranje novčanika",
-                "description": "Temp"
+                "title": "Reset wallet",
+                "description": ""
             },
             "deepLinks": {
-                "title": "Deep Links",
-                "description": "Temp"
+                "title": "Deep links",
+                "description": ""
             },
             "developerMode": {
-                "title": "Razvojno okruženje",
-                "description": "Temp"
+                "title": "Developer mode",
+                "description": ""
             },
             "nodeSettings": {
-                "title": "Node postavke",
-                "description": "Temp"
+                "title": "Node settings",
+                "description": ""
             },
             "proofOfWork": {
-                "title": "Proof of Work",
-                "description": "Temp"
+                "title": "Proof of work",
+                "description": ""
             },
             "errorLog": {
-                "title": "Evidencija grešaka",
-                "description": "Temp"
+                "title": "Error log",
+                "description": ""
             },
             "stateExport": {
-                "title": "Izvoz stanja",
-                "description": "Temp"
+                "title": "State export",
+                "description": ""
             },
             "troubleshoot": {
                 "title": "Rješavanje problema",
-                "description": "Temp"
+                "description": ""
             },
             "documentation": {
                 "title": "Dokumentacija",
-                "description": "Temp"
+                "description": ""
             },
             "faq": {
                 "title": "Često postavljana pitanja",
-                "description": "Temp"
+                "description": ""
             },
             "discord": {
                 "title": "Discord",
-                "description": "Temp"
+                "description": ""
             },
             "about": {
                 "title": "O aplikaciji",
-                "description": "Temp"
+                "description": ""
             }
         },
         "login": {
@@ -226,9 +230,21 @@
             "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
         }
     },
+    "popups": {
+        "password": {
+            "title": "Password required",
+            "subtitle": "Please provide your wallet’s password to unlock stronghold."
+        },
+        "qr": {
+            "title": "Your QR code"
+        }
+    },
     "actions": {
         "continue": "Nastavi",
         "back": "Natrag",
+        "cancel": "Cancel",
+        "close": "Close",
+        "save": "Save",
         "import_seed": "Uvezite postojeći Seed",
         "import_wallet": "Uvezite postojeći novčanik",
         "create_wallet": "Stvorite novi novčanik",
@@ -247,17 +263,30 @@
         "import_from_file": "Uvezi iz datoteke",
         "send": "Pošalji",
         "receive": "Primi",
+        "create": "Create",
         "begin_transfer": "Započni transfer",
         "try_again": "Pokušaj ponovo",
         "visit_discord": "Posjetite Discord",
         "drag_drop": "Vuci i ispusti",
         "import_extentions": ".stronghold ili .kdbx datoteka",
         "choose_file": "Izaberite datoteku",
-        "drop_here": "Ispustite datoteku ovdje"
+        "drop_here": "Ispustite datoteku ovdje",
+        "syncAll": "Sync all",
+        "export": "Export",
+        "exportNewStronghold": "Export a new Stronghold",
+        "enableDeepLinks": "Enable deep links",
+        "enableDeveloperMode": "Enable developer mode",
+        "enableNotifications": "Enable notifications",
+        "exportState": "Export state",
+        "outsourceProofOfWork": "Outsource proof of work",
+        "unlock": "Unlock"
     },
     "general": {
         "password": "Lozinka",
         "confirm_password": "Potvrda lozinke",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "confirmNewPassword": "Confirm new password",
         "your_seed": "Vaš Seed",
         "recovery_phrase": "Fraza za oporavak",
         "recent_activity": "Nedavne Aktivnosti",
@@ -267,7 +296,9 @@
         "send_to_address": "Pošaljite na Adresu",
         "scan_qr_or_paste": "Skenirajte QR kod ili zalijepite Adresu",
         "transfer_between_accounts": "Prebacivanje između računa",
-        "move_funds_between_accounts": "Prebacite sredstva između svojih računa",
+        "move_funds_between_accounts": "Move funds between accounts",
+        "manage_account": "Manage Account",
+        "customize_account": "Customize your account",
         "account": "Račun",
         "sending_to_address": "Slanje na adresu",
         "amount": "Iznos",
@@ -279,6 +310,7 @@
         "share_address": "Podijelite adresu",
         "your_address": "Vaša adresa",
         "generate_new_address": "Stvorite novu adresu",
+        "copy_address": "Copy Address",
         "have_text_backup": "Imam tekstualnu pričuvnu kopiju",
         "have_file_backup": "Imam datoteku s pričuvnom kopijom",
         "enter_seed_or_phrase": "Unesite frazu za oporavak ili seed",
@@ -294,6 +326,14 @@
         "incoming": "Dolazni",
         "outgoing": "Odlazni",
         "accounts": "Računi",
-        "profiles": "Profiles"
+        "automaticNodeSelection": "Automatic node selection",
+        "manualNodeSelection": "Manual node selection",
+        "profiles": "Profiles",
+        "create_account": "Create an account",
+        "account_name": "Account name",
+        "latest_transactions": "Latest Transactions",
+        "transactions": "Transactions",
+        "security": "Sigurnost",
+        "account_address": "Account Address"
     }
 }

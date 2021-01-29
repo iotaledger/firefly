@@ -133,92 +133,96 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Помоћ и информације",
+                "title": "Help & Information",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
-            "profileDetails": {
-                "title": "Деталји профила",
-                "description": "Temp"
+            "profile": {
+                "title": "Profile",
+                "description": ""
+            },
+            "sync": {
+                "title": "Sync accounts",
+                "description": ""
             },
             "theme": {
                 "title": "Тема",
-                "description": "Temp"
+                "description": ""
             },
             "language": {
                 "title": "Jezik",
-                "description": "Temp"
+                "description": ""
             },
             "currency": {
                 "title": "Валута",
-                "description": "Temp"
+                "description": ""
             },
             "notifications": {
                 "title": "Обавештења",
-                "description": "Temp"
+                "description": ""
             },
             "exportStronghold": {
                 "title": "Извоз Стронгхолд-a",
-                "description": "Temp"
+                "description": ""
             },
             "appLock": {
                 "title": "Закључавање апликације",
-                "description": "Temp"
+                "description": ""
             },
             "changePassword": {
-                "title": "Промени лозинку",
-                "description": "Temp"
+                "title": "Change password",
+                "description": ""
             },
             "resyncAccounts": {
-                "title": "Поново синхронизујте рачуне",
-                "description": "Temp"
+                "title": "Resync accounts",
+                "description": ""
             },
             "resetWallet": {
-                "title": "Ресетујте новчаник",
-                "description": "Temp"
+                "title": "Reset wallet",
+                "description": ""
             },
             "deepLinks": {
-                "title": "Дубоке везе",
-                "description": "Temp"
+                "title": "Deep links",
+                "description": ""
             },
             "developerMode": {
-                "title": "Развојни режим",
-                "description": "Temp"
+                "title": "Developer mode",
+                "description": ""
             },
             "nodeSettings": {
-                "title": "Ноде Подешавања",
-                "description": "Temp"
+                "title": "Node settings",
+                "description": ""
             },
             "proofOfWork": {
-                "title": "Доказ о раду",
-                "description": "Temp"
+                "title": "Proof of work",
+                "description": ""
             },
             "errorLog": {
-                "title": "Евиденција грешака",
-                "description": "Temp"
+                "title": "Error log",
+                "description": ""
             },
             "stateExport": {
-                "title": "Државни извоз",
-                "description": "Temp"
+                "title": "State export",
+                "description": ""
             },
             "troubleshoot": {
                 "title": "Решавање проблема",
-                "description": "Temp"
+                "description": ""
             },
             "documentation": {
                 "title": "Документација",
-                "description": "Temp"
+                "description": ""
             },
             "faq": {
                 "title": "Најчешћа питања",
-                "description": "Temp"
+                "description": ""
             },
             "discord": {
                 "title": "Дискорд",
-                "description": "Temp"
+                "description": ""
             },
             "about": {
                 "title": "О апликацији",
-                "description": "Temp"
+                "description": ""
             }
         },
         "login": {
@@ -226,9 +230,21 @@
             "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
         }
     },
+    "popups": {
+        "password": {
+            "title": "Password required",
+            "subtitle": "Please provide your wallet’s password to unlock stronghold."
+        },
+        "qr": {
+            "title": "Your QR code"
+        }
+    },
     "actions": {
         "continue": "Настави",
         "back": "Назад",
+        "cancel": "Cancel",
+        "close": "Close",
+        "save": "Save",
         "import_seed": "Увезите постојеће семе",
         "import_wallet": "Увезите постојећи новчаник",
         "create_wallet": "Направите нови новчаник",
@@ -247,17 +263,30 @@
         "import_from_file": "Увези из датотеке*",
         "send": "Пошаљи",
         "receive": "Добити",
+        "create": "Create",
         "begin_transfer": "Започни пренос",
         "try_again": "Покушај поново",
         "visit_discord": "Посетите Дисцорд",
         "drag_drop": "Превуци и испусти",
         "import_extentions": ".стронгхолд или .кдбк датотека",
         "choose_file": "Изабери датотеку",
-        "drop_here": "Овде превуци фајлове"
+        "drop_here": "Овде превуци фајлове",
+        "syncAll": "Sync all",
+        "export": "Export",
+        "exportNewStronghold": "Export a new Stronghold",
+        "enableDeepLinks": "Enable deep links",
+        "enableDeveloperMode": "Enable developer mode",
+        "enableNotifications": "Enable notifications",
+        "exportState": "Export state",
+        "outsourceProofOfWork": "Outsource proof of work",
+        "unlock": "Unlock"
     },
     "general": {
         "password": "Лозинка",
         "confirm_password": "Потврдите лозинку",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "confirmNewPassword": "Confirm new password",
         "your_seed": "Твоје Семе",
         "recovery_phrase": "Фраза за опоравак",
         "recent_activity": "Скорашња активност",
@@ -267,7 +296,9 @@
         "send_to_address": "Пошаљите на адресу",
         "scan_qr_or_paste": "Скенирајте КР код или налепите адресу",
         "transfer_between_accounts": "Пренос између рачуна",
-        "move_funds_between_accounts": "Премештајте средства између својих рачуна",
+        "move_funds_between_accounts": "Move funds between accounts",
+        "manage_account": "Manage Account",
+        "customize_account": "Customize your account",
         "account": "Рачун",
         "sending_to_address": "Слање на адресу",
         "amount": "Износ",
@@ -279,6 +310,7 @@
         "share_address": "Подели Адресу",
         "your_address": "Ваша адреса",
         "generate_new_address": "Генериши нову адресу",
+        "copy_address": "Copy Address",
         "have_text_backup": "Имам резервну копију текста",
         "have_file_backup": "Имам резервну копију датотеке",
         "enter_seed_or_phrase": "Унесите фразу за опоравак или семе",
@@ -294,6 +326,14 @@
         "incoming": "Долазни",
         "outgoing": "Одлазни",
         "accounts": "Рачуни",
-        "profiles": "Профили"
+        "automaticNodeSelection": "Automatic node selection",
+        "manualNodeSelection": "Manual node selection",
+        "profiles": "Профили",
+        "create_account": "Create an account",
+        "account_name": "Account name",
+        "latest_transactions": "Latest Transactions",
+        "transactions": "Transactions",
+        "security": "Сигурност",
+        "account_address": "Account Address"
     }
 }

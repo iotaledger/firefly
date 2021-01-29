@@ -133,92 +133,96 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Довідка та інформація",
+                "title": "Help & Information",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
-            "profileDetails": {
-                "title": "Деталі профілю",
-                "description": "Temp"
+            "profile": {
+                "title": "Profile",
+                "description": ""
+            },
+            "sync": {
+                "title": "Sync accounts",
+                "description": ""
             },
             "theme": {
                 "title": "Тема",
-                "description": "Temp"
+                "description": ""
             },
             "language": {
                 "title": "Мова",
-                "description": "Temp"
+                "description": ""
             },
             "currency": {
                 "title": "Валюта",
-                "description": "Temp"
+                "description": ""
             },
             "notifications": {
                 "title": "Сповіщення",
-                "description": "Temp"
+                "description": ""
             },
             "exportStronghold": {
                 "title": "Експорт Stronghold",
-                "description": "Temp"
+                "description": ""
             },
             "appLock": {
                 "title": "Блокування програми",
-                "description": "Temp"
+                "description": ""
             },
             "changePassword": {
-                "title": "Змінити пароль",
-                "description": "Temp"
+                "title": "Change password",
+                "description": ""
             },
             "resyncAccounts": {
-                "title": "Повторна синхронізація облікових записів",
-                "description": "Temp"
+                "title": "Resync accounts",
+                "description": ""
             },
             "resetWallet": {
-                "title": "Скинути налаштування гаманця",
-                "description": "Temp"
+                "title": "Reset wallet",
+                "description": ""
             },
             "deepLinks": {
-                "title": "Глибокі посилання",
-                "description": "Temp"
+                "title": "Deep links",
+                "description": ""
             },
             "developerMode": {
-                "title": "Режим розробника",
-                "description": "Temp"
+                "title": "Developer mode",
+                "description": ""
             },
             "nodeSettings": {
-                "title": "Налаштування вузла",
-                "description": "Temp"
+                "title": "Node settings",
+                "description": ""
             },
             "proofOfWork": {
-                "title": "Доказ роботи",
-                "description": "Temp"
+                "title": "Proof of work",
+                "description": ""
             },
             "errorLog": {
-                "title": "Журнал помилок",
-                "description": "Temp"
+                "title": "Error log",
+                "description": ""
             },
             "stateExport": {
-                "title": "Експорт стану",
-                "description": "Temp"
+                "title": "State export",
+                "description": ""
             },
             "troubleshoot": {
                 "title": "Виправлення помилок",
-                "description": "Temp"
+                "description": ""
             },
             "documentation": {
                 "title": "Документація",
-                "description": "Temp"
+                "description": ""
             },
             "faq": {
                 "title": "Питання, що часто ставляться",
-                "description": "Temp"
+                "description": ""
             },
             "discord": {
                 "title": "Discord",
-                "description": "Temp"
+                "description": ""
             },
             "about": {
                 "title": "Про програму",
-                "description": "Temp"
+                "description": ""
             }
         },
         "login": {
@@ -226,9 +230,21 @@
             "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
         }
     },
+    "popups": {
+        "password": {
+            "title": "Password required",
+            "subtitle": "Please provide your wallet’s password to unlock stronghold."
+        },
+        "qr": {
+            "title": "Your QR code"
+        }
+    },
     "actions": {
         "continue": "Продовжити",
         "back": "Назад",
+        "cancel": "Cancel",
+        "close": "Close",
+        "save": "Save",
         "import_seed": "Імпортувати існуючий seed",
         "import_wallet": "Імпортувати існуючий гаманець",
         "create_wallet": "Створити новий гаманець",
@@ -247,17 +263,30 @@
         "import_from_file": "Імпортувати з файлу",
         "send": "Надіслати",
         "receive": "Отримати",
+        "create": "Create",
         "begin_transfer": "Почати відправку",
         "try_again": "Повторити",
         "visit_discord": "Відвідати Discord",
         "drag_drop": "Перетягнути і відпустити",
         "import_extentions": ".stronghold або .kdbx file",
         "choose_file": "Обрати файл",
-        "drop_here": "Перетягніть файл сюди"
+        "drop_here": "Перетягніть файл сюди",
+        "syncAll": "Sync all",
+        "export": "Export",
+        "exportNewStronghold": "Export a new Stronghold",
+        "enableDeepLinks": "Enable deep links",
+        "enableDeveloperMode": "Enable developer mode",
+        "enableNotifications": "Enable notifications",
+        "exportState": "Export state",
+        "outsourceProofOfWork": "Outsource proof of work",
+        "unlock": "Unlock"
     },
     "general": {
         "password": "Пароль",
         "confirm_password": "Підтвердити пароль",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "confirmNewPassword": "Confirm new password",
         "your_seed": "Ваш Seed",
         "recovery_phrase": "Фраза відновлення",
         "recent_activity": "Останні дії",
@@ -267,7 +296,9 @@
         "send_to_address": "Відправити на адресу",
         "scan_qr_or_paste": "Скануйте QR код або вставте адресу",
         "transfer_between_accounts": "Переказ між рахунками",
-        "move_funds_between_accounts": "Переміщуйте кошти між своїми рахунками",
+        "move_funds_between_accounts": "Move funds between accounts",
+        "manage_account": "Manage Account",
+        "customize_account": "Customize your account",
         "account": "Обліковий запис",
         "sending_to_address": "Відправити на адресу",
         "amount": "Сума",
@@ -279,6 +310,7 @@
         "share_address": "Поділитися адресою",
         "your_address": "Ваша адреса",
         "generate_new_address": "Згенерувати нову адресу",
+        "copy_address": "Copy Address",
         "have_text_backup": "Я маю текстову резервну копію",
         "have_file_backup": "Я маю файл backup",
         "enter_seed_or_phrase": "Введіть фразу відновлення або seed",
@@ -294,6 +326,14 @@
         "incoming": "Вхідні",
         "outgoing": "Вихідні",
         "accounts": "Аккаунт",
-        "profiles": "Profiles"
+        "automaticNodeSelection": "Automatic node selection",
+        "manualNodeSelection": "Manual node selection",
+        "profiles": "Profiles",
+        "create_account": "Create an account",
+        "account_name": "Account name",
+        "latest_transactions": "Latest Transactions",
+        "transactions": "Transactions",
+        "security": "Безпека",
+        "account_address": "Account Address"
     }
 }

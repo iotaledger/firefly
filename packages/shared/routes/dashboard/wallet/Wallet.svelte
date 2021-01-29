@@ -10,8 +10,10 @@
 
 <script lang="typescript">
     import { setContext, onMount } from 'svelte'
-    import { writable, derived } from 'svelte/store'
+    import { get, writable, derived } from 'svelte/store'
     import { api, getLatestMessages } from 'shared/lib/wallet'
+    import { deepLinkRequestActive } from 'shared/lib/deepLinking'
+    import { deepLinking } from 'shared/lib/settings'
     import { DEFAULT_NODE as node, DEFAULT_NODES as nodes } from 'shared/lib/network'
     import { formatUnit } from 'shared/lib/units'
     import { Popup, DashboardPane } from 'shared/components'
@@ -290,6 +292,13 @@
                 console.log(response)
             },
         })
+    }
+
+    $: {
+        if ($deepLinkRequestActive && get(deepLinking)) {
+            _next(WalletState.Send)
+            deepLinkRequestActive.set(false)
+        }
     }
 
     onMount(() => {

@@ -37,6 +37,18 @@ export const mnemonic = writable<Array<string>>(null)
  */
 export const locale = persistent<string>('locale', null)
 
+
+interface SendParams {
+    amount: number;
+    address: string;
+    message: string;
+}
+
+/**
+ * Input paramaters for sending transactions
+ */
+export const sendParams = writable<SendParams>({ amount: 0, address: '', message: ''})
+
 /**
  * Dummy
  */
