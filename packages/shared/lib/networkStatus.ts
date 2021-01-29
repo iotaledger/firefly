@@ -31,7 +31,7 @@ type StatusData = {
 export const networkStatus = writable<StatusData>({});
 
 /**
- * Poll the net work status at an interval.
+ * Poll the network status at an interval.
  */
 export async function pollNetworkStatus(): Promise<void> {
     await fetchNetworkStatus();
