@@ -7,6 +7,11 @@ import { persistent } from 'shared/lib/helpers'
 export const deepLinking = persistent<boolean>('deepLinking', false)
 
 /**
+ * Selected language locale
+ */
+export const language = persistent<string>('locale', 'en')
+
+/**
  * Deep links enabled setting
  */
 export const developerMode = persistent<boolean>('developerMode', false)
