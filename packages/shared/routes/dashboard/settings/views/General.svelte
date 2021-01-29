@@ -3,7 +3,6 @@
     import { Text, Radio, Dropdown, Toggle } from 'shared/components'
     import { exchangeRates } from 'shared/lib/currency'
     import { locales, setupI18n } from 'shared/lib/i18n'
-
     import { language, currency } from 'shared/lib/settings'
 
     export let locale
