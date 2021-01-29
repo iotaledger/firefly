@@ -258,6 +258,7 @@
                 "messages_per_second": "Messages per second",
                 "confirmation_rate": "Confirmation rate"
             }
+        }
     },
     "popups": {
         "password": {
