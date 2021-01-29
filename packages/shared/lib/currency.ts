@@ -1,4 +1,5 @@
-import { writable, get, derived } from 'svelte/store'
+import { writable } from 'svelte/store'
+import { persistent } from 'shared/lib/helpers'
 
 export enum CurrencyTypes {
     BTC = 'btc',
@@ -133,7 +134,7 @@ const DEFAULT_EXCHANGE_RATES = {
 export const exchangeRates = writable<ExchangeRates>(DEFAULT_EXCHANGE_RATES)
 
 /** Selected currency (in settings) */
-export const selectedCurrency = writable<AvailableExchangeRates>(AvailableExchangeRates.USD)
+export const selectedCurrency = persistent<AvailableExchangeRates>('selectedCurrency', AvailableExchangeRates.USD)
 
 /** Currencies with price */
 export const currencies = writable<Currencies>({} as Currencies)
