@@ -1,4 +1,5 @@
 import { writable, get, derived } from 'svelte/store'
+import { currencies, Currencies, exchangeRates, ExchangeRates, CurrencyTypes } from 'shared/lib/currency'
 
 /**
  * Market data endpoints list
@@ -13,53 +14,6 @@ export const MARKETDATA_ENDPOINTS = [
  * Default timeout for a request made to an endpoint
  */
 const DEFAULT_MARKETDATA_ENDPOINT_TIMEOUT = 5000
-
-/**
- * Default exchange rates
- */
-const DEFAULT_EXCHANGE_RATES = {
-    USD: 1,
-    GBP: 1,
-    EUR: 1,
-    AUD: 1,
-    BGN: 1,
-    BRL: 1,
-    CAD: 1,
-    CHF: 1,
-    CNY: 1,
-    CZK: 1,
-    DKK: 1,
-    HKD: 1,
-    HRK: 1,
-    HUF: 1,
-    IDR: 1,
-    ILS: 1,
-    INR: 1,
-    ISK: 1,
-    JPY: 1,
-    KRW: 1,
-    MXN: 1,
-    MYR: 1,
-    NOK: 1,
-    NZD: 1,
-    PHP: 1,
-    PLN: 1,
-    RON: 1,
-    RUB: 1,
-    SEK: 1,
-    SGD: 1,
-    THB: 1,
-    TRY: 1,
-    ZAR: 1,
-}
-
-export enum CurrencyTypes {
-    BTC = 'btc',
-    ETH = 'eth',
-    EUR = 'eur',
-    GBP = 'gbp',
-    USD = 'usd',
-}
 
 enum HistoryDataProps {
     ONE_HOUR = '1h',
@@ -84,14 +38,6 @@ enum Histories {
     HISTORY_ETH = 'history-eth',
     HISTORY_EUR = 'history-eur',
     HISTORY_USD = 'history-usd',
-}
-
-type Currencies = {
-    [CurrencyTypes.BTC]: number
-    [CurrencyTypes.ETH]: number
-    [CurrencyTypes.EUR]: number
-    [CurrencyTypes.GBP]: number
-    [CurrencyTypes.USD]: number
 }
 
 type HistoryData = {
@@ -128,46 +74,10 @@ type Market = {
     usd_market_cap: number
 }
 
-type Rates = {
-    AUD: number
-    BGN: number
-    BRL: number
-    CAD: number
-    CHF: number
-    CNY: number
-    CZK: number
-    DKK: number
-    EUR: number
-    GBP: number
-    HKD: number
-    HRK: number
-    HUF: number
-    IDR: number
-    ILS: number
-    INR: number
-    ISK: number
-    JPY: number
-    KRW: number
-    MXN: number
-    MYR: number
-    NOK: number
-    NZD: number
-    PHP: number
-    PLN: number
-    RON: number
-    RUB: number
-    SEK: number
-    SGD: number
-    THB: number
-    TRY: number
-    USD: number
-    ZAR: number
-}
-
 type MarketData = {
     currencies: Currencies
     market: Market
-    rates: Rates
+    rates: ExchangeRates
     [Histories.HISTORY_BTC]: HistoryBTC
     [Histories.HISTORY_ETH]: HistoryETH
     [Histories.HISTORY_EUR]: HistoryEUR
@@ -185,11 +95,6 @@ type ChartData = {
     labels: string[]
     data: number[]
 }
-
-/**
- * Exchange rates
- */
-export const rates = writable<Rates>(DEFAULT_EXCHANGE_RATES)
 
 /**
  * Market cap
@@ -301,11 +206,14 @@ export async function fetchMarketData(): Promise<void> {
                 }
             })
 
+            // Store currencies
+            currencies.set(marketData.currencies)
+
             // Store price data
             priceData.set(_priceData)
 
             // Store exchange rates in store
-            rates.set(marketData.rates)
+            exchangeRates.set(marketData.rates)
 
             // Store market statistics
             mcap.set(marketData.market.usd_market_cap)
@@ -318,3 +226,4 @@ export async function fetchMarketData(): Promise<void> {
         }
     }
 }
+

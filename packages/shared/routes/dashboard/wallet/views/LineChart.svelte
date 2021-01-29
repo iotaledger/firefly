@@ -2,12 +2,12 @@
     import { Dropdown, Chart, Text } from 'shared/components'
     import {
         selectedChart,
-        CurrencyTypes,
         chartCurrency,
         chartTimeframe,
         TIMEFRAME_MAP,
         AvailableCharts,
     } from 'shared/lib/marketData'
+    import { CurrencyTypes } from 'shared/lib/currency'
 </script>
 
 <div data-label="portfolio-token-chart" class="w-full px-10 pt-8 pb-6">
