@@ -1,9 +1,10 @@
 <script lang="typescript">
     import { getContext } from 'svelte'
     import { fade } from 'svelte/transition'
+    import { date } from 'svelte-i18n'
     import QR from './QR.svelte'
     import Password from './Password.svelte'
-    import Update from './Update.svelte'
+    import Update from './Version.svelte'
     import Backup from './Backup.svelte'
     import { Text, Icon } from 'shared/components'
 
@@ -22,17 +23,17 @@
 
     const headings = {
         qr: {
-            title: 'popups.password.title',
+            title: locale('popups.password.title'),
         },
         password: {
-            title: 'popups.password.title',
-            subtitle: 'popups.password.subtitle',
+            title: locale('popups.password.title'),
+            subtitle: locale('popups.password.subtitle'),
         },
         update: {
-            title: 'popups.update.title',
+            title: locale('popups.version.title', { values: { version: $state.props.currentVersion } }),
         },
         backup: {
-            title: 'popups.backup.title',
+            title: locale('popups.backup.title', { values: { date: $date($state.props.lastBackupDate, { format: 'long' }) } }),
         },
     }
 
@@ -69,10 +70,10 @@
         <div class="w-full mb-10 flex flex-row justify-between items-start">
             <div>
                 {#if title}
-                    <Text type="h4">{locale(title)}</Text>
+                    <Text type="h4">{title}</Text>
                 {/if}
                 {#if subtitle}
-                    <Text type="p" secondary>{locale(subtitle)}</Text>
+                    <Text type="p" secondary>{subtitle}</Text>
                 {/if}
             </div>
             <button on:click={close}>

@@ -11,6 +11,14 @@
 
     let newVersion = '3.45' // dummy
     let newVersionReleaseDate = new Date() // dummy
+    let changelog = 
+    `Fix: Bugs that prevent some transactions from confirming (#3039)
+    Fix: Poll for value transfers before data (#3039)
+    Fix: Add polling errors to the error log (#2987)
+    Fix: Crash when app returns from background on Android (#2982)
+    Fix: Crash while polling on Android (#2986)
+    Fix: Fingerprint scanner crash on Android (#2983)
+    Fix: Incorrect progress bar steps and translation not available displayed on send (#3020)` //dummy
 
     function handleUpdate() {
         popupState.set({ active: false })
@@ -33,10 +41,10 @@
     {#if upToDate}
         <div class="w-full text-center my-6 px-8">
             <Text type="h5" highlighted classes="mb-2">
-                {locale('popups.update.up_to_date_title', { values: { version: currentVersion } })}
+                {locale('popups.version.up_to_date_title')}
             </Text>
             <Text smaller secondary>
-                {locale('popups.update.up_to_date_description', { values: { version: currentVersion } })}
+                {locale('popups.version.up_to_date_description', { values: { version: currentVersion } })}
             </Text>
         </div>
         <div class="flex flex-row justify-center w-full">
@@ -45,21 +53,15 @@
     {:else}
         <div class="my-6">
             <Text smaller highlighted classes="mb-2">
-                {locale('popups.update.update_available', { values: { version: currentVersion } })}
+                {locale('popups.version.update_available', { values: { version: currentVersion } })}
             </Text>
             <Text type="h5" classes="mb-2">
-                {locale('popups.update.update_details', {
+                {locale('popups.version.update_details', {
                     values: { version: newVersion, date: $date(newVersionReleaseDate, { format: 'long' }) },
                 })}
             </Text>
             <Text secondary classes="whitespace-pre-wrap">
-                {`Fix: Bugs that prevent some transactions from confirming (#3039)
-Fix: Poll for value transfers before data (#3039)
-Fix: Add polling errors to the error log (#2987)
-Fix: Crash when app returns from background on Android (#2982)
-Fix: Crash while polling on Android (#2986)
-Fix: Fingerprint scanner crash on Android (#2983)
-Fix: Incorrect progress bar steps and translation not available displayed on send (#3020)`}
+                {changelog}
             </Text>
         </div>
         <div class="flex flex-row justify-between space-x-4 w-full px-8">

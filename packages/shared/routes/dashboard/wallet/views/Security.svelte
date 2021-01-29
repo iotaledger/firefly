@@ -1,45 +1,33 @@
 <script lang="typescript">
     import { getContext } from 'svelte'
     import { Text, SecurityTile } from 'shared/components'
-    import { diffDates, isRecentDate } from 'shared/lib/helpers'
+    import { diffDates, getBackupWarningColor } from 'shared/lib/helpers'
 
     export let locale
 
     // version
-    let currentVersion = '1.32' // dummy
+    let currentVersion = '0.0.1' // dummy
     let upToDate = Math.random() < 0.5 // dummy
 
     // stronghold backup
-    let strongholdLastBackup = new Date(
+    let lastBackupDate = new Date(
         new Date().getFullYear(),
         new Date().getMonth(),
-        new Date().getDate() - Math.floor(Math.random() * 28)
+        new Date().getDate() - Math.floor(Math.random() * 200)
     ) // dummy
 
     // stronghold status
     let strongholdLocked = Math.random() < 0.5 // dummy
-    let strongholdRecentBackup = strongholdLastBackup ? isRecentDate(strongholdLastBackup) : null // dummy
+    let color = getBackupWarningColor(lastBackupDate)
 
     // stronghold backup
-    let strongholdBackupTimeAgo = strongholdLastBackup ? diffDates(strongholdLastBackup, new Date()) : null // dummy
+    let lastBackupDateFormatted = lastBackupDate ? diffDates(lastBackupDate, new Date()) : null
     $: strongholdStatusMessage = strongholdLocked ? 'locked' : 'unlocked'
 
     const popupState = getContext('popupState')
 
     function openPopup(type) {
-        switch (type) {
-            case 'update':
-                popupState.set({ active: true, type, props: { upToDate, currentVersion } })
-                break
-            case 'password':
-                popupState.set({ active: true, type })
-                break
-            case 'backup':
-                popupState.set({ active: true, type, props: { lastBackup: strongholdLastBackup } })
-                break
-            default:
-                console.error('Wrong popup type selected')
-        }
+        popupState.set({ active: true, type, props: { upToDate, currentVersion, lastBackupDate, lastBackupDateFormatted } })
     }
 </script>
 
@@ -50,7 +38,7 @@
         <SecurityTile
             title={locale('views.dashboard.security.version.title', { values: { version: currentVersion } })}
             message={locale(`views.dashboard.security.version.${upToDate ? 'up_to_date' : 'out_of_date'}`)}
-            color={upToDate ? 'yellow' : 'red'}
+            color={upToDate ? 'green' : 'red'}
             icon="firefly"
             onClick={() => openPopup('update')} />
         <!-- Hardware Device -->
@@ -64,18 +52,18 @@
         <SecurityTile
             title={locale('views.dashboard.security.stronghold_status.title')}
             message={locale(`views.dashboard.security.stronghold_status.${strongholdStatusMessage}`)}
-            color={strongholdLocked ? 'green' : 'red'}
+            color={strongholdLocked ? 'blue' : 'red'}
             icon="lock"
             onClick={() => openPopup('password')}
             classes={strongholdLocked ? 'pointer-events-none' : 'pointer-events-all'} />
         <!-- Stronghold backup -->
         <SecurityTile
             title={locale('views.dashboard.security.stronghold_backup.title')}
-            message={strongholdLastBackup ? locale(`dates.${strongholdBackupTimeAgo.unit}`, {
-                      values: { time: strongholdBackupTimeAgo.value },
+            message={lastBackupDate ? locale(`dates.${lastBackupDateFormatted.unit}`, {
+                      values: { time: lastBackupDateFormatted.value },
                   }) : locale('popups.backup.not_backed_up')}
             onClick={() => openPopup('backup')}
             icon="shield"
-            color={strongholdRecentBackup ? 'blue' : 'red'} />
+            color={color} />
     </div>
 </div>

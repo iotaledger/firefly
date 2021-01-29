@@ -115,10 +115,11 @@ export const setClipboard = (input: string): boolean => {
 
 /**
  * Get difference between two dates in weeks
+ * @param firstDate: first date to compare
+ * @param secondDate: second sate to compare
  */
-
-export const diffDates = (date1: Date, date2: Date) => {
-    const diff = Math.floor(date2.getTime() - date1.getTime());
+export const diffDates = (firstDate: Date, secondDate: Date) => {
+    const diff = Math.floor(secondDate.getTime() - firstDate.getTime());
     const day = 1000 * 60 * 60 * 24;
 
     const days = Math.floor(diff / day);
@@ -128,17 +129,13 @@ export const diffDates = (date1: Date, date2: Date) => {
 
     if (years > 0) {
         return { unit: 'years_ago', value: years }
-    }
-    else if (months > 0) {
+    } else if (months > 0) {
         return { unit: 'months_ago', value: months }
-    }
-    else if (weeks > 0) {
+    } else if (weeks > 0) {
         return { unit: 'weeks_ago', value: weeks }
-    }
-    else if (days > 0) {
+    } else if (days > 0) {
         return { unit: 'days_ago', value: days }
-    }
-    else {
+    } else {
         return { unit: 'today' }
     }
 }
@@ -153,5 +150,18 @@ export const isRecentDate = (date: Date) => {
     const days = Math.floor(diff / day);
     const weeks = Math.floor(days / 7);
     const months = Math.floor(weeks / 4.33);
-    return months == 0
+    const threeMonths = Math.floor(months / 3);
+
+    
+    return { lessThanAMonth: months == 0, lessThanThreeMonths: threeMonths == 0 };
+}
+
+/**
+ * Returns warning text color for last Stronghold backup
+ * @param lastBackupDate: Blue if less than a month. Orange if less than three months. Red if more.
+ */
+export const getBackupWarningColor = (lastBackupDate: Date) => {
+    const { lessThanAMonth, lessThanThreeMonths } = isRecentDate(lastBackupDate)
+
+    return lessThanAMonth ? 'blue' : lessThanThreeMonths ? 'yellow' : 'red'
 }

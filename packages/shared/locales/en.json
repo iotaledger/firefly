@@ -232,7 +232,7 @@
         "dashboard": {
             "security":{
                 "version": {
-                    "title": "Firefly v. {version}",
+                    "title": "Firefly v.{version}",
                     "up_to_date": "Up to date",
                     "out_of_date": "Out of date"
                 },
@@ -255,23 +255,23 @@
     "popups": {
         "password": {
             "title": "Password required",
-            "subtitle": "Please provide your wallet’s password to unlock stronghold."
+            "subtitle": "Please enter your wallet password to unlock Stronghold"
         },
         "qr": {
             "title": "Your QR code"
         },
-        "update": {
-            "title": "Firefly update",
-            "up_to_date_title": "Firefly v. {version} is up to date",
-            "up_to_date_description": "You are running the latest and the most safest Firefly version",
-            "update_available": "Firefly v. {version} update available",
-            "update_details": "Firefly v. {version}, {date}"
+        "version": {
+            "title": "Current version: {version}",
+            "up_to_date_title": "Firefly is up to date",
+            "up_to_date_description": "You are running the latest and safest version of Firefly.",
+            "update_available": "Firefly update available",
+            "update_details": "Version {version} - {date}"
         },
         "backup": {
-            "title": "Stronghold backup",
-            "last_backup": "Last backup: {date}",
-            "backup_description": "Back up your Stronghold regularly to keep your data and wallet history up to date. Some other benefits are mentioned here.",
-            "update_details": "Last backup: {version}, {date}",
+            "title": "Last backup: {date}",
+            "last_backup": "You last backed up {date}",
+            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
+            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
             "not_backed_up": "Not backed up"
         }
     },
