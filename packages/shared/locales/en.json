@@ -232,7 +232,7 @@
         "dashboard": {
             "security":{
                 "version": {
-                    "title": "Firefly v.{version}",
+                    "title": "Firefly v{version}",
                     "up_to_date": "Up to date",
                     "out_of_date": "Out of date"
                 },
