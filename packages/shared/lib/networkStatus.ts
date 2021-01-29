@@ -16,7 +16,7 @@ const DEFAULT_NETWORK_STATUS_ENDPOINT_TIMEOUT = 5000
 /**
  * Default interval for polling the network status
  */
-const DEFAULT_NETWORK_STATUS_POLL_INTERVAL = 30000
+const DEFAULT_NETWORK_STATUS_POLL_INTERVAL = 10000
 
 type StatusData = {
     itemsPerSecond?: number;
