@@ -150,5 +150,5 @@ export const currencies = writable<Currencies>({} as Currencies)
  * @returns {number} 
  */
 export const convertToFiat = (amount: number, usdPrice: number, conversionRate: number): number => {
-    return ((amount * usdPrice) / 1000000) * conversionRate;
+    return +(((amount * usdPrice) / 1000000) * conversionRate).toFixed(2);
 };
