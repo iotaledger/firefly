@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { createEventDispatcher, getContext } from 'svelte'
     import { Text, Button, Dropdown, Amount, Address } from 'shared/components'
+    import { sendParams } from 'shared/lib/app';
 
     export let locale
     export let internal = false
@@ -12,21 +13,19 @@
 
     $: accountsDropdownItems = $accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balance}` }))
     $: from = $accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balance}` }))[0]
-    let toAccount = $accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balance}` }))[0]
-    let toAddress = ''
-    let amount = undefined
+    let account = $accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balance}` }))[0]
 
     const handleFromSelect = (item) => {
         from = item
     }
     const handleToSelect = (item) => {
-        toAccount = item
+        account = item
     }
     const handleSendClick = () => {
         if (internal) {
-            internalTransfer(from.value, toAccount.value, amount)
+            internalTransfer(from.value, account.value, $sendParams.amount)
         } else {
-            send(from.value, toAddress, amount)
+            send(from.value, $sendParams.address, $sendParams.amount)
         }
     }
     const handleBackClick = () => {
@@ -49,15 +48,15 @@
                         onSelect={handleFromSelect} />
                 </div>
                 <div class="w-full mb-8 block">
-                    <Amount bind:amount {locale} classes="mb-4" />
+                    <Amount bind:amount={$sendParams.amount} {locale} classes="mb-4" />
                     {#if internal}
                         <Dropdown
-                            value={toAccount?.label || ''}
+                            value={account?.label || ''}
                             label={locale('general.to')}
                             items={accountsDropdownItems}
                             onSelect={handleToSelect} />
                     {:else}
-                        <Address bind:address={toAddress} {locale} label={locale('general.to')} />
+                        <Address bind:address={$sendParams.address} {locale} label={locale('general.to')} />
                     {/if}
                 </div>
                 <div class="w-full mb-8 block">
