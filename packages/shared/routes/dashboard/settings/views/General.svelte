@@ -36,6 +36,7 @@
         <Text type="h4" classes="mb-3">{locale('views.settings.currency.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.currency.description')}</Text>
         <Dropdown 
+            sortItems={true}
             onSelect={(item) => currency.set(item.value)}
             value={$currency} 
             items={Object.keys($exchangeRates).map((currency) => ({ value: currency, label: currency })).sort()} />
