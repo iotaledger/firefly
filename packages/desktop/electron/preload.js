@@ -1,28 +1,11 @@
 const binding = require('wallet-nodejs-binding')
 const PincodeManager = require('../libs/pincodeManager');
 const DeepLinkManager = require('../libs/DeepLinkManager');
-const { remote, ipcRenderer } = require('electron')
+const { remote, ipcRenderer, contextBridge } = require('electron')
 
-const freezeObjectFactory = (obj) => {
-    const rejector = {
-        get(obj, prop) {
-            if (typeof obj[prop] === 'object' && obj[prop] !== null) {
-                return new Proxy(obj[prop], rejector)
-            }
+const __WALLET__ = binding;
 
-            return obj[prop]
-        },
-        set() {
-            return false
-        },
-    }
-
-    return new Proxy(obj, rejector)
-}
-
-window.__WALLET__ = freezeObjectFactory(binding)
-
-window.Electron = {
+const Electron = {
     PincodeManager,
     DeepLinkManager,
     getStrongholdBackupDestination: () => {
@@ -54,3 +37,6 @@ window.Electron = {
     },
     _eventListeners: {},
 };
+
+contextBridge.exposeInMainWorld('__WALLET__', __WALLET__);
+contextBridge.exposeInMainWorld('Electron', Electron);
