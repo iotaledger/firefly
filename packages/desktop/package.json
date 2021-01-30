@@ -11,7 +11,10 @@
         "start:dev": "cross-env NODE_ENV=development rollup --config --watch",
         "start:electron": "cross-env NODE_ENV=development electron electron/main.js",
         "start:electron-prod": "cross-env NODE_ENV=production electron public/build/main.js",
-        "build": "cross-env NODE_ENV=production rollup --config"
+        "build": "cross-env NODE_ENV=production rollup --config",
+        "compile:linux": "electron-builder --linux --x64",
+        "compile:mac": "electron-builder --mac --x64",
+        "compile:win": "electron-builder --win --x64"
     },
     "dependencies": {
         "keytar": "^7.3.0",
@@ -21,10 +24,90 @@
     "devDependencies": {
         "cross-env": "^7.0.2",
         "electron": "^9.1.0",
+        "electron-builder": "^22.9.1",
         "npm-run-all": "^4.1.5",
         "prettier": "^2.2.1",
         "prettier-plugin-svelte": "^1.4.2",
         "rollup-plugin-copy": "^3.3.0",
         "rollup-plugin-natives": "^0.7.1"
+    },
+    "build": {
+        "productName": "Firefly",
+        "artifactName": "firefly-desktop-${version}.${ext}",
+        "copyright": "IOTA Foundation",
+        "directories": {
+            "buildResources": "./public",
+            "output": "./out"
+        },
+        "files": [
+            "public/",
+            "package.json"
+        ],
+        "appId": "org.iota.firefly",
+        "asar": true,
+        "protocols": [
+            {
+                "name": "IOTA URL Scheme",
+                "schemes": [
+                    "iota"
+                ]
+            }
+        ],
+        "dmg": {
+            "iconSize": 120,
+            "title": "${productName}",
+            "sign": false,
+            "contents": [
+                {
+                    "x": 520,
+                    "y": 250,
+                    "type": "link",
+                    "path": "/Applications"
+                },
+                {
+                    "x": 170,
+                    "y": 250,
+                    "type": "file"
+                }
+            ]
+        },
+        "nsis": {
+            "deleteAppDataOnUninstall": true
+        },
+        "win": {
+            "publisherName": "IOTA Stiftung",
+            "target": "nsis",
+            "timeStampServer": "http://timestamp.digicert.com"
+        },
+        "linux": {
+            "target": [
+                "AppImage"
+            ],
+            "desktop": {
+                "Name": "Trinity",
+                "Comment": "Desktop wallet for IOTA",
+                "Categories": "Office;Network;Finance"
+            }
+        },
+        "mac": {
+            "category": "public.app-category.finance",
+            "target": [
+                "dmg",
+                "zip"
+            ],
+            "entitlements": "./entitlements.mac.plist",
+            "entitlementsInherit": "./entitlements.mac.plist",
+            "hardenedRuntime": true,
+            "gatekeeperAssess": false,
+            "asarUnpack": [
+                "**/*.node"
+            ]
+        },
+        "publish": {
+            "provider": "generic",
+            "url": "https://iotaledger-files.s3.amazonaws.com/trinity/desktop/releases/",
+            "publishAutoUpdate": true,
+            "channel": "latest"
+        }
     }
 }
