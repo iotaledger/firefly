@@ -18,6 +18,14 @@ const Electron = {
         })
     },
     /**
+     * Gets directory for app's configuration files
+     * 
+     * @method getUserDataPath
+     * 
+     * @returns {string}
+     */
+    getUserDataPath: () => remote.app.getPath('userData'),
+    /**
      * Add native window wallet event listener
      * @param {string} event - Target event name
      * @param {function} callback - Event trigger callback
