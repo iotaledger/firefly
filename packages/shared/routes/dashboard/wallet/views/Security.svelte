@@ -55,7 +55,7 @@
             color={strongholdLocked ? 'blue' : 'red'}
             icon="lock"
             onClick={() => openPopup('password')}
-            classes={strongholdLocked ? 'pointer-events-none' : 'pointer-events-all'} />
+            classes={strongholdLocked ? 'pointer-events-all' : 'pointer-events-none'} />
         <!-- Stronghold backup -->
         <SecurityTile
             title={locale('views.dashboard.security.stronghold_backup.title')}
@@ -64,6 +64,6 @@
                   }) : locale('popups.backup.not_backed_up')}
             onClick={() => openPopup('backup')}
             icon="shield"
-            color={color} />
+            {color} />
     </div>
 </div>
