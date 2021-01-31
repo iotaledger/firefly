@@ -133,92 +133,96 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Ajutor și Informații",
+                "title": "Help & Information",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
-            "profileDetails": {
-                "title": "Detalii Profil",
-                "description": "Temp"
+            "profile": {
+                "title": "Profile",
+                "description": ""
+            },
+            "sync": {
+                "title": "Sync accounts",
+                "description": ""
             },
             "theme": {
                 "title": "Temă",
-                "description": "Temp"
+                "description": ""
             },
             "language": {
                 "title": "Limbă",
-                "description": "Temp"
+                "description": ""
             },
             "currency": {
                 "title": "Monedă",
-                "description": "Temp"
+                "description": ""
             },
             "notifications": {
                 "title": "Notificări",
-                "description": "Temp"
+                "description": ""
             },
             "exportStronghold": {
                 "title": "Exportă Stronghold",
-                "description": "Temp"
+                "description": ""
             },
             "appLock": {
                 "title": "Blochează aplicația",
-                "description": "Temp"
+                "description": ""
             },
             "changePassword": {
-                "title": "Schimbă Parola",
-                "description": "Temp"
+                "title": "Change password",
+                "description": ""
             },
             "resyncAccounts": {
-                "title": "Resincronizează Conturile",
-                "description": "Temp"
+                "title": "Resync accounts",
+                "description": ""
             },
             "resetWallet": {
-                "title": "Resetează Portofelul",
-                "description": "Temp"
+                "title": "Reset wallet",
+                "description": ""
             },
             "deepLinks": {
-                "title": "Legături Profunde",
-                "description": "Temp"
+                "title": "Deep links",
+                "description": ""
             },
             "developerMode": {
-                "title": "Mod Dezvoltator",
-                "description": "Temp"
+                "title": "Developer mode",
+                "description": ""
             },
             "nodeSettings": {
-                "title": "Setările Nodului",
-                "description": "Temp"
+                "title": "Node settings",
+                "description": ""
             },
             "proofOfWork": {
-                "title": "Dovadă de Lucru",
-                "description": "Temp"
+                "title": "Proof of work",
+                "description": ""
             },
             "errorLog": {
-                "title": "Jurnal de erori",
-                "description": "Temp"
+                "title": "Error log",
+                "description": ""
             },
             "stateExport": {
-                "title": "Exportarea stării",
-                "description": "Temp"
+                "title": "State export",
+                "description": ""
             },
             "troubleshoot": {
                 "title": "Depanare",
-                "description": "Temp"
+                "description": ""
             },
             "documentation": {
                 "title": "Documentaţie",
-                "description": "Temp"
+                "description": ""
             },
             "faq": {
                 "title": "Întrebări frecvente",
-                "description": "Temp"
+                "description": ""
             },
             "discord": {
                 "title": "Discord",
-                "description": "Temp"
+                "description": ""
             },
             "about": {
                 "title": "Despre",
-                "description": "Temp"
+                "description": ""
             }
         },
         "login": {
@@ -226,9 +230,21 @@
             "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
         }
     },
+    "popups": {
+        "password": {
+            "title": "Password required",
+            "subtitle": "Please provide your wallet’s password to unlock stronghold."
+        },
+        "qr": {
+            "title": "Your QR code"
+        }
+    },
     "actions": {
         "continue": "Continuă",
         "back": "Înapoi",
+        "cancel": "Cancel",
+        "close": "Close",
+        "save": "Save",
         "import_seed": "Importă un seed existent",
         "import_wallet": "Importă un portofel existent",
         "create_wallet": "Creează portofel nou",
@@ -247,17 +263,30 @@
         "import_from_file": "Importă dintr-un fișier",
         "send": "Trimite",
         "receive": "Primește",
+        "create": "Create",
         "begin_transfer": "Începe transferul",
         "try_again": "Încearcă din nou",
         "visit_discord": "Vizitează Discord",
         "drag_drop": "Trage & Eliberează",
         "import_extentions": "fișier .stronghold sau .kdbx",
         "choose_file": "Alege un Fișier",
-        "drop_here": "Eliberează fișierul tău aici"
+        "drop_here": "Eliberează fișierul tău aici",
+        "syncAll": "Sync all",
+        "export": "Export",
+        "exportNewStronghold": "Export a new Stronghold",
+        "enableDeepLinks": "Enable deep links",
+        "enableDeveloperMode": "Enable developer mode",
+        "enableNotifications": "Enable notifications",
+        "exportState": "Export state",
+        "outsourceProofOfWork": "Outsource proof of work",
+        "unlock": "Unlock"
     },
     "general": {
         "password": "Parolă",
         "confirm_password": "Confirmă parola",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "confirmNewPassword": "Confirm new password",
         "your_seed": "Seed-ul tău",
         "recovery_phrase": "Frază de recuperare",
         "recent_activity": "Activitate Recentă",
@@ -267,7 +296,9 @@
         "send_to_address": "Trimite la o Adresă",
         "scan_qr_or_paste": "Scanează un cod QR sau lipește o Adresă",
         "transfer_between_accounts": "Transferă Între Conturi",
-        "move_funds_between_accounts": "Mută fondurile între conturile tale",
+        "move_funds_between_accounts": "Move funds between accounts",
+        "manage_account": "Manage Account",
+        "customize_account": "Customize your account",
         "account": "Cont",
         "sending_to_address": "Trimitere la adresă",
         "amount": "Sumă",
@@ -279,6 +310,7 @@
         "share_address": "Partajează o adresă",
         "your_address": "Adresa ta",
         "generate_new_address": "Generează o adresă nouă",
+        "copy_address": "Copy Address",
         "have_text_backup": "Am un text de rezervă",
         "have_file_backup": "Am o copie de rezervă a fișierului",
         "enter_seed_or_phrase": "Introdu o frază de recuperare sau un seed",
@@ -294,6 +326,14 @@
         "incoming": "În curs de primire",
         "outgoing": "În curs de ieșire",
         "accounts": "Conturi",
-        "profiles": "Profiles"
+        "automaticNodeSelection": "Automatic node selection",
+        "manualNodeSelection": "Manual node selection",
+        "profiles": "Profiles",
+        "create_account": "Create an account",
+        "account_name": "Account name",
+        "latest_transactions": "Latest Transactions",
+        "transactions": "Transactions",
+        "security": "Securitate",
+        "account_address": "Account Address"
     }
 }

@@ -1,9 +1,9 @@
 <script>
+    import { outsourcePow, developerMode, deepLinking } from 'shared/lib/settings'
     import { Text, Radio, Checkbox, Button } from 'shared/components';
 
     export let locale
 
-    let deepLinksChecked
     let automaticNodeSelection = true
 </script>
 
@@ -18,19 +18,19 @@
     <section id="proofOfWork" class='w-3/4'>
         <Text type="h4" classes="mb-3">{locale('views.settings.proofOfWork.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.proofOfWork.description')}</Text>
-        <Checkbox label={locale('actions.outsourceProofOfWork')} bind:deepLinksChecked />
+        <Checkbox label={locale('actions.outsourceProofOfWork')} bind:checked={$outsourcePow} />
     </section>
     <hr class='border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center'/>
     <section id="developerMode" class='w-3/4'>
         <Text type="h4" classes="mb-3">{locale('views.settings.developerMode.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.developerMode.description')}</Text>
-        <Checkbox label={locale('actions.enableDeveloperMode')} bind:deepLinksChecked />
+        <Checkbox label={locale('actions.enableDeveloperMode')} bind:checked={$developerMode} />
     </section>
     <hr class='border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center'/>
     <section id="deepLinks" class='w-3/4'>
         <Text type="h4" classes="mb-3">{locale('views.settings.deepLinks.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.deepLinks.description')}</Text>
-        <Checkbox label={locale('actions.enableDeepLinks')} bind:deepLinksChecked />
+        <Checkbox label={locale('actions.enableDeepLinks')} bind:checked={$deepLinking} />
     </section>
     <hr class='border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center'/>
     <section id="resyncAccounts" class='w-3/4'>

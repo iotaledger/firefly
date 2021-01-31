@@ -133,92 +133,96 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Hulp en inligting",
+                "title": "Help & Information",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
-            "profileDetails": {
-                "title": "Profielbesonderhede",
-                "description": "Temp"
+            "profile": {
+                "title": "Profile",
+                "description": ""
+            },
+            "sync": {
+                "title": "Sync accounts",
+                "description": ""
             },
             "theme": {
                 "title": "Tema",
-                "description": "Temp"
+                "description": ""
             },
             "language": {
                 "title": "Taal",
-                "description": "Temp"
+                "description": ""
             },
             "currency": {
                 "title": "Geldeenheid",
-                "description": "Temp"
+                "description": ""
             },
             "notifications": {
                 "title": "Kennisgewings",
-                "description": "Temp"
+                "description": ""
             },
             "exportStronghold": {
                 "title": "Voer Stronghold uit",
-                "description": "Temp"
+                "description": ""
             },
             "appLock": {
                 "title": "App Lock",
-                "description": "Temp"
+                "description": ""
             },
             "changePassword": {
-                "title": "Verander wagwoord",
-                "description": "Temp"
+                "title": "Change password",
+                "description": ""
             },
             "resyncAccounts": {
-                "title": "Sinkroniseer rekeninge weer",
-                "description": "Temp"
+                "title": "Resync accounts",
+                "description": ""
             },
             "resetWallet": {
-                "title": "Herstel beursie",
-                "description": "Temp"
+                "title": "Reset wallet",
+                "description": ""
             },
             "deepLinks": {
-                "title": "Deep Links",
-                "description": "Temp"
+                "title": "Deep links",
+                "description": ""
             },
             "developerMode": {
-                "title": "Ontwikkelaarmodus",
-                "description": "Temp"
+                "title": "Developer mode",
+                "description": ""
             },
             "nodeSettings": {
-                "title": "Node Instellings",
-                "description": "Temp"
+                "title": "Node settings",
+                "description": ""
             },
             "proofOfWork": {
-                "title": "Proof of Work",
-                "description": "Temp"
+                "title": "Proof of work",
+                "description": ""
             },
             "errorLog": {
-                "title": "Foutlêer",
-                "description": "Temp"
+                "title": "Error log",
+                "description": ""
             },
             "stateExport": {
-                "title": "Staat uitvoer",
-                "description": "Temp"
+                "title": "State export",
+                "description": ""
             },
             "troubleshoot": {
                 "title": "Probleemoplossing",
-                "description": "Temp"
+                "description": ""
             },
             "documentation": {
                 "title": "Dokumentasie",
-                "description": "Temp"
+                "description": ""
             },
             "faq": {
                 "title": "FAQ",
-                "description": "Temp"
+                "description": ""
             },
             "discord": {
                 "title": "Discord",
-                "description": "Temp"
+                "description": ""
             },
             "about": {
                 "title": "Oor",
-                "description": "Temp"
+                "description": ""
             }
         },
         "login": {
@@ -226,9 +230,21 @@
             "incorrect_attempts": "{attempts, plural, one {1 verkeerde poging} other {# verkeerde pogings}}"
         }
     },
+    "popups": {
+        "password": {
+            "title": "Password required",
+            "subtitle": "Please provide your wallet’s password to unlock stronghold."
+        },
+        "qr": {
+            "title": "Your QR code"
+        }
+    },
     "actions": {
         "continue": "Gaan voort",
         "back": "Terug",
+        "cancel": "Cancel",
+        "close": "Close",
+        "save": "Save",
         "import_seed": "Voer 'n bestaande seed in",
         "import_wallet": "Voer bestaande beursie in",
         "create_wallet": "Skep 'n nuwe beursie",
@@ -247,17 +263,30 @@
         "import_from_file": "Invoer vanaf 'n lêer",
         "send": "Stuur",
         "receive": "Ontvang",
+        "create": "Create",
         "begin_transfer": "Begin oordrag",
         "try_again": "Probeer weer",
         "visit_discord": "Besoek Discord",
         "drag_drop": "Sleep-en-los",
         "import_extentions": ".stronghold of .kdbx lêer",
         "choose_file": "Kies 'n lêer",
-        "drop_here": "Sit jou lêer hier neer"
+        "drop_here": "Sit jou lêer hier neer",
+        "syncAll": "Sync all",
+        "export": "Export",
+        "exportNewStronghold": "Export a new Stronghold",
+        "enableDeepLinks": "Enable deep links",
+        "enableDeveloperMode": "Enable developer mode",
+        "enableNotifications": "Enable notifications",
+        "exportState": "Export state",
+        "outsourceProofOfWork": "Outsource proof of work",
+        "unlock": "Unlock"
     },
     "general": {
         "password": "Wagwoord",
         "confirm_password": "Bevestig Wagwoord",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "confirmNewPassword": "Confirm new password",
         "your_seed": "Jou Seed",
         "recovery_phrase": "Herstelfrase",
         "recent_activity": "Onlangse aktiwiteite",
@@ -267,7 +296,9 @@
         "send_to_address": "Stuur na 'n adres",
         "scan_qr_or_paste": "Skandeer 'n QR-kode of plak 'n adres",
         "transfer_between_accounts": "Oordrag tussen rekeninge",
-        "move_funds_between_accounts": "Skuif fondse tussen jou rekeninge",
+        "move_funds_between_accounts": "Move funds between accounts",
+        "manage_account": "Manage Account",
+        "customize_account": "Customize your account",
         "account": "Rekening",
         "sending_to_address": "Oppad na adres",
         "amount": "Bedrag",
@@ -279,6 +310,7 @@
         "share_address": "Deel 'n adres",
         "your_address": "Jou adres",
         "generate_new_address": "Genereer nuwe adres",
+        "copy_address": "Copy Address",
         "have_text_backup": "Ek het 'n teks back-up",
         "have_file_backup": "Ek het 'n lêer back-up",
         "enter_seed_or_phrase": "Voer 'n herstelfrase of seed in",
@@ -294,6 +326,14 @@
         "incoming": "Inkomende",
         "outgoing": "Uitgaande",
         "accounts": "Rekeninge",
-        "profiles": "Profiel"
+        "automaticNodeSelection": "Automatic node selection",
+        "manualNodeSelection": "Manual node selection",
+        "profiles": "Profiel",
+        "create_account": "Create an account",
+        "account_name": "Account name",
+        "latest_transactions": "Latest Transactions",
+        "transactions": "Transactions",
+        "security": "Sekuriteit",
+        "account_address": "Account Address"
     }
 }
