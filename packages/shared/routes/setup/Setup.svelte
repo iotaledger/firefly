@@ -2,7 +2,7 @@
     import { createEventDispatcher } from 'svelte'
     import { OnboardingLayout, Illustration, Text, Button, Input, Radio } from 'shared/components'
     import { createProfile, setActiveProfile } from 'shared/lib/app'
-    import { initialise } from 'shared/lib/wallet'
+    import { initialise, getStoragePath } from 'shared/lib/wallet'
     import { SetupType } from 'shared/lib/router'
 
     export let locale
@@ -26,7 +26,7 @@
                 profile = createProfile(profileName)
                 setActiveProfile(profile.id)
 
-                initialise(profile.id, profile.name)
+                initialise(profile.id, getStoragePath(window['Electron'].getUserDataPath(), profile.name))
 
                 dispatch('next', { setupType })
             } catch (error) {
