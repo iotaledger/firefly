@@ -41,7 +41,9 @@ export interface AccountToCreate {
 
 export interface SyncedAccount {
   accountId: string
-  depositAddress: Address
+  depositAddress: Address,
+  addresses: Address[],
+  messages: Message[]
 }
 
 export function createAccount(bridge: Bridge, __ids: CommunicationIds, account: AccountToCreate): Promise<string> {
