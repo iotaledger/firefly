@@ -60,6 +60,7 @@
             nextState = request
         } else {
             switch ($state) {
+                case WalletState.Account:
                 case WalletState.Init:
                     const { accountId } = request
                     if (accountId) {
@@ -364,10 +365,10 @@
                 </div>
             </DashboardPane>
             <div class="flex flex-col w-2/3 h-full space-y-4">
-                <DashboardPane classes="w-full">
+                <DashboardPane classes="w-full h-1/2">
                     <LineChart />
                 </DashboardPane>
-                <div class="w-full flex flex-row flex-1 space-x-4">
+                <div class="w-full h-1/2 flex flex-row flex-1 space-x-4">
                     <DashboardPane classes="w-1/2">
                         <WalletHistory {locale} />
                     </DashboardPane>
