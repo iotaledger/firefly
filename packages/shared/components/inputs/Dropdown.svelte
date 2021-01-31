@@ -4,12 +4,15 @@
     export let label = undefined
     export let disabled = false
     export let valueKey = 'label'
+    export let sortItems = false
     export let items = []
     export let onSelect = () => {}
     let dropdown = false
     const clickOutside = () => {
         dropdown = false
     }
+
+    items = sortItems ? items.sort((a, b) => (a.label > b.label) ? 1 : -1) : items
 </script>
 
 <style type="text/scss">

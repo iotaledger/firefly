@@ -1,18 +1,4 @@
 import { writable, Writable } from 'svelte/store'
-import { view } from './router'
-
-/**
- * Sets next route
- *
- * @method setRoute
- *
- * @param {string} path
- *
- * @returns {void}
- */
-export const setRoute = (path: string): void => {
-    view.set(path)
-}
 
 /**
  * Update application path
