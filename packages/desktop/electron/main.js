@@ -1,4 +1,4 @@
-const { app, ipcMain, protocol, BrowserWindow } = require('electron')
+const { app, dialog, ipcMain, protocol, BrowserWindow } = require('electron')
 const path = require('path')
 const Keychain = require('./keychain');
 
@@ -32,6 +32,7 @@ function createWindow() {
         height: 600,
         webPreferences: {
             nodeIntegration: false,
+            enableRemoteModule: false,
             preload: path.join(__dirname, 'preload.js'),
         },
     })
@@ -77,6 +78,11 @@ ipcMain.handle('keychain-set', (_e, key, content) => {
 })
 ipcMain.handle('keychain-remove', (_e, key) => {
     return Keychain.remove(key)
+})
+
+// Dialogs
+ipcMain.handle('show-open-dialog', (_e, options) => {
+    return dialog.showOpenDialog(options)
 })
 
 /**
