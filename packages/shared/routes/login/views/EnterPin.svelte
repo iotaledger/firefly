@@ -5,7 +5,7 @@
     import { OnboardingLayout, Illustration, Icon, Text, Profile, Pin, Button } from 'shared/components'
     import { validatePinFormat } from 'shared/lib/utils'
     import { getActiveProfile } from 'shared/lib/app'
-    import { initialise } from 'shared/lib/wallet'
+    import { initialise, getStoragePath } from 'shared/lib/wallet'
 
     export let locale
     export let mobile
@@ -59,12 +59,12 @@
                 timerId = setInterval(countdown, 1000)
             }
         } else {
-            const profile = getActiveProfile();
+            const profile = getActiveProfile()
 
             PincodeManager.verify(profile.id, pinCode.toString())
                 .then((verified) => {
                     if (verified === true) {
-                        initialise(profile.id, profile.name)
+                        initialise(profile.id, getStoragePath(window['Electron'].getUserDataPath(), profile.name))
 
                         api.setStoragePassword(pinCode.toString(), {
                             onSuccess() {

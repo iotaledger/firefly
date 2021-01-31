@@ -19,6 +19,8 @@ import { account, message } from './typings'
 
 const Wallet = window['__WALLET__']
 
+export const WALLET_STORAGE_DIRECTORY = '__storage__'
+
 type Account = {
     id: string
     index: number;
@@ -70,7 +72,8 @@ const apiToResponseTypeMap = {
     getStrongholdStatus: ResponseTypes.StrongholdStatus,
     getUnusedAddress: ResponseTypes.UnusedAddress,
     isLatestAddressUnused: ResponseTypes.IsLatestAddressUnused,
-    areLatestAddressesUnused: ResponseTypes.AreAllLatestAddressesUnused
+    areLatestAddressesUnused: ResponseTypes.AreAllLatestAddressesUnused,
+    setAlias: ResponseTypes.UpdatedAlias
 };
 
 /*
@@ -242,7 +245,13 @@ const Middleware = {
 
 export const api = new Proxy(Wallet.api, Middleware)
 
-export const initialise = Wallet.init;
+export const getStoragePath = (appPath: string, profileName: string): string => {
+    return `${appPath}/${WALLET_STORAGE_DIRECTORY}/${profileName}`;
+} 
+
+export const initialise = (id: string, storagePath: string): void => {
+    return Wallet.init(id, storagePath);
+}
 
 /**
  * Generate BIP39 Mnemonic Recovery Phrase
