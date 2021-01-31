@@ -3,7 +3,14 @@ import type { Address } from './address'
 import type { AccountIdentifier, Account, SyncedAccount } from './account'
 import type { Message } from './message'
 
+export interface CommunicationIds {
+  messageId: string;
+  actorId: string;
+}
+
 export interface BridgeMessage {
+  actorId: string;
+  // TODO: rename to messageId for clarity
   id: string
   cmd: string
   payload?: any

@@ -1,29 +1,29 @@
-import type { Bridge } from './bridge'
+import type { Bridge, CommunicationIds } from './bridge'
 import type { Message } from './message'
 import type { Address } from './address'
 import type { ClientOptions } from './client'
 
-export enum MessageType {}
+export enum MessageType { }
 
 export interface ListMessagesFilter {
-    messageType: MessageType
-    count: number
-    from: number
+  messageType: MessageType,
+  count: number
+  from: number
 }
 
 export interface SyncAccountOptions {
-    addressIndex?: number
-    gapLimit?: number
-    skipPersistance?: boolean
+  addressIndex?: number;
+  gapLimit?: number;
+  skipPersistance?: boolean
 }
 
 export interface Account {
-    id: string
-    mnemonic: string
-    alias: string
-    createdAt: string
-    messages: Message[]
-    addresses: Address[]
+  id: string;
+  mnemonic: string;
+  alias: string;
+  createdAt: string;
+  messages: Message[];
+  addresses: Address[];
 }
 
 export type AccountIdentifier = number | string
@@ -40,132 +40,132 @@ export interface AccountToCreate {
 }
 
 export interface SyncedAccount {
-    accountId: string
-    depositAddress: Address
-    addresses: Address[]
-    messages: Message[]
+  accountId: string
+  depositAddress: Address
 }
 
-export function createAccount(bridge: Bridge, __id: string, account: AccountToCreate): Promise<string> {
-    return bridge({
-        id: __id,
-        cmd: 'CreateAccount',
-        payload: account,
-    })
+export function createAccount(bridge: Bridge, __ids: CommunicationIds, account: AccountToCreate): Promise<string> {
+  return bridge({
+    actorId: __ids.actorId,
+    id: __ids.messageId,
+    cmd: 'CreateAccount',
+    payload: account
+  })
 }
 
-export function removeAccount(bridge: Bridge, __id: string, accountId: AccountIdentifier): Promise<string> {
-    return bridge({
-        id: __id,
-        cmd: 'RemoveAccount',
-        payload: accountId,
-    })
+export function removeAccount(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
+  return bridge({
+    actorId: __ids.actorId,
+    id: __ids.messageId,
+    cmd: 'RemoveAccount',
+    payload: accountId
+  })
 }
 
-export function getAccount(bridge: Bridge, __id: string, accountId: AccountIdentifier): Promise<string> {
-    return bridge({
-        id: __id,
-        cmd: 'GetAccount',
-        payload: accountId,
-    })
+export function getAccount(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
+  return bridge({
+    actorId: __ids.actorId,
+    id: __ids.messageId,
+    cmd: 'GetAccount',
+    payload: accountId
+  })
 }
 
-export function getAccounts(bridge: Bridge, __id: string): Promise<string> {
-    return bridge({
-        id: __id,
-        cmd: 'GetAccounts',
-    })
+export function getAccounts(bridge: Bridge, __ids: CommunicationIds): Promise<string> {
+  return bridge({
+    actorId: __ids.actorId,
+    id: __ids.messageId,
+    cmd: 'GetAccounts'
+  })
 }
 
-export function syncAccounts(bridge: Bridge, __id: string): Promise<string> {
-    return bridge({
-        id: __id,
-        cmd: 'SyncAccounts',
-    })
+export function syncAccounts(bridge: Bridge, __ids: CommunicationIds): Promise<string> {
+  return bridge({
+    actorId: __ids.actorId,
+    id: __ids.messageId,
+    cmd: 'SyncAccounts'
+  })
 }
 
-export function internalTransfer(
-    bridge: Bridge,
-    __id: string,
-    fromAccountId: AccountIdentifier,
-    toAccountId: AccountIdentifier,
-    amount: number
-): Promise<string> {
-    return bridge({
-        id: __id,
-        cmd: 'InternalTransfer',
-        payload: {
-            fromAccountId,
-            toAccountId,
-            amount,
-        },
-    })
+export function internalTransfer(bridge: Bridge, __ids: CommunicationIds, fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number): Promise<string> {
+  return bridge({
+    actorId: __ids.actorId,
+    id: __ids.messageId,
+    cmd: 'InternalTransfer',
+    payload: {
+      fromAccountId,
+      toAccountId,
+      amount
+    }
+  })
+}
+
+export function areLatestAddressesUnused(bridge: Bridge, __ids: CommunicationIds): Promise<string> {
+  return bridge({
+    actorId: __ids.actorId,
+    id: __ids.messageId,
+    cmd: 'IsLatestAddressUnused'
+  })
 }
 
 enum AccountMethod {
-    GenerateAddress,
-    ListMessages,
-    ListAddresses,
-    GetAvailableBalance,
-    GetTotalBalance,
-    GetLatestAddress,
-    SyncAccount,
+  GenerateAddress,
+  GetUnusedAddress,
+  ListMessages,
+  ListAddresses,
+  GetBalance,
+  GetLatestAddress,
+  SyncAccount,
+  IsLatestAddressUnused,
+  SetAlias
 }
 
-function _callAccountMethod(
-    bridge: Bridge,
-    __id: string,
-    methodName: AccountMethod,
-    accountId: AccountIdentifier,
-    data: any = void 0
-): Promise<string> {
-    return bridge({
-        id: __id,
-        cmd: 'CallAccountMethod',
-        payload: {
-            accountId,
-            method: {
-                name: AccountMethod[methodName],
-                data,
-            },
-        },
-    })
+function _callAccountMethod(bridge: Bridge, __ids: CommunicationIds, methodName: AccountMethod, accountId: AccountIdentifier, data: any = void 0): Promise<string> {
+  return bridge({
+    actorId: __ids.actorId,
+    id: __ids.messageId,
+    cmd: 'CallAccountMethod',
+    payload: {
+      accountId,
+      method: {
+        name: AccountMethod[methodName],
+        data
+      }
+    }
+  })
 }
 
-export function generateAddress(bridge: Bridge, __id: string, accountId: AccountIdentifier): Promise<string> {
-    return _callAccountMethod(bridge, __id, AccountMethod.GenerateAddress, accountId)
+export function setAlias(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier, payload: string): Promise<string> {
+  return _callAccountMethod(bridge, __ids, AccountMethod.SetAlias, accountId, payload)
 }
 
-export function listMessages(
-    bridge: Bridge,
-    __id: string,
-    accountId: AccountIdentifier,
-    filters?: ListMessagesFilter
-): Promise<string> {
-    return _callAccountMethod(bridge, __id, AccountMethod.ListMessages, accountId, filters || {})
+export function isLatestAddressUnused(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
+  return _callAccountMethod(bridge, __ids, AccountMethod.IsLatestAddressUnused, accountId)
+}
+export function generateAddress(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
+  return _callAccountMethod(bridge, __ids, AccountMethod.GenerateAddress, accountId)
 }
 
-export function listAddresses(bridge: Bridge, __id: string, accountId: AccountIdentifier, unspent?: boolean): Promise<string> {
-    return _callAccountMethod(bridge, __id, AccountMethod.ListAddresses, accountId, { unspent })
+export function getUnusedAddress(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
+  return _callAccountMethod(bridge, __ids, AccountMethod.GetUnusedAddress, accountId)
 }
 
-export function availableBalance(bridge: Bridge, __id: string, accountId: AccountIdentifier): Promise<string> {
-    return _callAccountMethod(bridge, __id, AccountMethod.GetAvailableBalance, accountId)
+export function listMessages(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier, filters?: ListMessagesFilter): Promise<string> {
+  return _callAccountMethod(bridge, __ids, AccountMethod.ListMessages, accountId, filters || {})
 }
 
-export function totalBalance(bridge: Bridge, __id: string, accountId: AccountIdentifier): Promise<string> {
-    return _callAccountMethod(bridge, __id, AccountMethod.GetTotalBalance, accountId)
+export function listAddresses(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier, unspent?: boolean): Promise<string> {
+  return _callAccountMethod(bridge, __ids, AccountMethod.ListAddresses, accountId, { unspent })
 }
 
-export function latestAddress(bridge: Bridge, __id: string, accountId: AccountIdentifier): Promise<string> {
-    return _callAccountMethod(bridge, __id, AccountMethod.GetLatestAddress, accountId)
+export function getBalance(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
+  return _callAccountMethod(bridge, __ids, AccountMethod.GetBalance, accountId)
 }
 
-export function syncAccount(
-    bridge: Bridge,
-    __id: string,
-    accountId: AccountIdentifier,
-    options?: SyncAccountOptions
-): Promise<string> {
-    return _callAccountMethod(bridge, __id, AccountMethod.SyncAccount, accountId, options || {})
+export function latestAddress(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier): Promise<string> {
+  return _callAccountMethod(bridge, __ids, AccountMethod.GetLatestAddress, accountId)
+}
+
+export function syncAccount(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier, options?: SyncAccountOptions): Promise<string> {
+  return _callAccountMethod(bridge, __ids, AccountMethod.SyncAccount, accountId, options || {})
 }

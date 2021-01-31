@@ -1,4 +1,4 @@
-import { BridgeMessage, MessageResponse, CommunicationIds } from '../../api-wrapper/bridge'
+import { BridgeMessage, MessageResponse, CommunicationIds } from '../../../shared/lib/typings/bridge'
 import {
   AccountToCreate,
   AccountIdentifier,
@@ -19,12 +19,12 @@ import {
   syncAccount as _syncAccount,
   isLatestAddressUnused as _isLatestAddressUnused,
   areLatestAddressesUnused as _areLatestAddressesUnused,
-  setAlias as _setAlias,
-} from '../../api-wrapper/account'
+  setAlias as _setAlias
+} from '../../../shared/lib/typings/account'
 import {
   Transfer,
   reattach as _reattach
-} from '../../api-wrapper/message'
+} from '../../../shared/lib/typings/message'
 import {
   LoggerConfig,
   backup as _backup,
@@ -36,7 +36,7 @@ import {
   storeMnemonic as _storeMnemonic,
   verifyMnemonic as _verifyMnemonic,
   getStrongholdStatus as _getStrongholdStatus
-} from '../../api-wrapper/wallet'
+} from '../../../shared/lib/typings/wallet'
 
 const addon = require('../native')
 const mailbox = []
