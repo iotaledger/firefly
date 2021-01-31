@@ -36,12 +36,12 @@ window.Electron = {
     },
     /**
      * Gets directory for app's configuration files
-     * 
+     *
      * @method getUserDataPath
-     * 
+     *
      * @returns {string}
      */
-    getUserDataPath: () => remote.app.getPath('userData'),
+    getUserDataPath: () => ipcRenderer.invoke('get-path', 'userData').then((path) => (path)),
     /**
      * Add native window wallet event listener
      * @param {string} event - Target event name

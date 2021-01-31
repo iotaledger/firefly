@@ -85,6 +85,17 @@ ipcMain.handle('show-open-dialog', (_e, options) => {
     return dialog.showOpenDialog(options)
 })
 
+// Miscellaneous
+ipcMain.handle('get-path', (_e, path) => {
+    const allowedPaths = [
+        'userData',
+    ]
+    if (allowedPaths.indexOf(path) === -1) {
+        return null
+    }
+    return app.getPath(path)
+})
+
 /**
  * Define deep link state
  */

@@ -26,9 +26,11 @@
                 profile = createProfile(profileName)
                 setActiveProfile(profile.id)
 
-                initialise(profile.id, getStoragePath(window['Electron'].getUserDataPath(), profile.name))
+                window['Electron'].getUserDataPath().then((path) => {
+                    initialise(profile.id, getStoragePath(path, profile.name))
 
-                dispatch('next', { setupType })
+                    dispatch('next', { setupType })
+                })
             } catch (error) {
                 console.error(error)
             }
