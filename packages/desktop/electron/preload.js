@@ -1,6 +1,7 @@
 const binding = require('wallet-nodejs-binding')
 const PincodeManager = require('../libs/pincodeManager');
-const { remote } = require('electron')
+const DeepLinkManager = require('../libs/DeepLinkManager');
+const { remote, ipcRenderer } = require('electron')
 
 const freezeObjectFactory = (obj) => {
     const rejector = {
@@ -23,6 +24,7 @@ window.__WALLET__ = freezeObjectFactory(binding)
 
 window.Electron = {
     PincodeManager,
+    DeepLinkManager,
     getStrongholdBackupDestination: () => {
         return remote.dialog.showOpenDialog({ properties: ['openDirectory'] }).then((result) => {
             if (result.canceled) {
@@ -39,5 +41,24 @@ window.Electron = {
      * 
      * @returns {string}
      */
-    getUserDataPath: () => remote.app.getPath('userData')
+    getUserDataPath: () => remote.app.getPath('userData'),
+    /**
+     * Add native window wallet event listener
+     * @param {string} event - Target event name
+     * @param {function} callback - Event trigger callback
+     * @returns {undefined}
+     */
+    onEvent: function (event, callback) {
+        let listeners = this._eventListeners[event];
+        if (!listeners) {
+            listeners = this._eventListeners[event] = [];
+            ipcRenderer.on(event, (e, args) => {
+                listeners.forEach((call) => {
+                    call(args);
+                });
+            });
+        }
+        listeners.push(callback);
+    },
+    _eventListeners: {},
 };

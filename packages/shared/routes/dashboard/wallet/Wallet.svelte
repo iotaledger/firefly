@@ -10,12 +10,15 @@
 
 <script lang="typescript">
     import { setContext, onMount } from 'svelte'
-    import { writable, derived } from 'svelte/store'
+    import { get, writable, derived } from 'svelte/store'
     import { api, getLatestMessages } from 'shared/lib/wallet'
+    import { deepLinkRequestActive } from 'shared/lib/deepLinking'
+    import { deepLinking, currency } from 'shared/lib/settings'
     import { DEFAULT_NODE as node, DEFAULT_NODES as nodes } from 'shared/lib/network'
     import { formatUnit } from 'shared/lib/units'
     import { Popup, DashboardPane } from 'shared/components'
     import { Account, LineChart, WalletHistory, Security, CreateAccount, WalletBalance, WalletActions } from './views/'
+    import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
 
     export let locale
 
@@ -24,7 +27,7 @@
         incoming: '32 Gi',
         outgoing: '16 Gi',
         balance: '0 Mi',
-        balanceEquiv: '45.500 USD',
+        balanceEquiv: '0.00 USD',
     }
 
     const totalBalance = writable(DUMMY_WALLET_BALANCE)
@@ -125,7 +128,7 @@
             index,
             name: alias,
             balance: formatUnit(balance, 0),
-            balanceEquiv: `${balance} USD`,
+            balanceEquiv: `${convertToFiat(balance, $currencies[CurrencyTypes.USD], $exchangeRates[$currency])} ${$currency}`,
             address,
             color: AccountColors[index],
         })
@@ -157,6 +160,7 @@
                                         balance: formatUnit(_totalBalance.balance, 2),
                                         incoming: formatUnit(_totalBalance.incoming, 2),
                                         outgoing: formatUnit(_totalBalance.outgoing, 2),
+                                        balanceEquiv: `${convertToFiat(_totalBalance.balance, $currencies[CurrencyTypes.USD], $exchangeRates[$currency])} ${$currency}`,
                                     })
                                 )
                             }
@@ -288,6 +292,13 @@
                 console.log(response)
             },
         })
+    }
+
+    $: {
+        if ($deepLinkRequestActive && get(deepLinking)) {
+            _next(WalletState.Send)
+            deepLinkRequestActive.set(false)
+        }
     }
 
     onMount(() => {

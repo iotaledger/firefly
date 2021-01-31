@@ -133,92 +133,96 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Помощь и Информация",
+                "title": "Help & Information",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
-            "profileDetails": {
-                "title": "Данные Профиля",
-                "description": "Temp"
+            "profile": {
+                "title": "Profile",
+                "description": ""
+            },
+            "sync": {
+                "title": "Sync accounts",
+                "description": ""
             },
             "theme": {
                 "title": "Внешний Вид",
-                "description": "Temp"
+                "description": ""
             },
             "language": {
                 "title": "Язык",
-                "description": "Temp"
+                "description": ""
             },
             "currency": {
                 "title": "Валюта",
-                "description": "Temp"
+                "description": ""
             },
             "notifications": {
                 "title": "Оповещения",
-                "description": "Temp"
+                "description": ""
             },
             "exportStronghold": {
                 "title": "Экспортировать Stronghold",
-                "description": "Temp"
+                "description": ""
             },
             "appLock": {
                 "title": "Блокировка Приложения",
-                "description": "Temp"
+                "description": ""
             },
             "changePassword": {
-                "title": "Изменить пароль",
-                "description": "Temp"
+                "title": "Change password",
+                "description": ""
             },
             "resyncAccounts": {
-                "title": "Повторная Синхронизация Аккаунтов",
-                "description": "Temp"
+                "title": "Resync accounts",
+                "description": ""
             },
             "resetWallet": {
-                "title": "Сбросить кошелёк",
-                "description": "Temp"
+                "title": "Reset wallet",
+                "description": ""
             },
             "deepLinks": {
-                "title": "Глубинное Связывание",
-                "description": "Temp"
+                "title": "Deep links",
+                "description": ""
             },
             "developerMode": {
-                "title": "Режим Разработчика",
-                "description": "Temp"
+                "title": "Developer mode",
+                "description": ""
             },
             "nodeSettings": {
-                "title": "Настройки Node",
-                "description": "Temp"
+                "title": "Node settings",
+                "description": ""
             },
             "proofOfWork": {
-                "title": "Доказательство Работы",
-                "description": "Temp"
+                "title": "Proof of work",
+                "description": ""
             },
             "errorLog": {
-                "title": "Журнал ошибок",
-                "description": "Temp"
+                "title": "Error log",
+                "description": ""
             },
             "stateExport": {
-                "title": "Экспортировать Состояние Кошелька",
-                "description": "Temp"
+                "title": "State export",
+                "description": ""
             },
             "troubleshoot": {
                 "title": "Диагностика",
-                "description": "Temp"
+                "description": ""
             },
             "documentation": {
                 "title": "Документация",
-                "description": "Temp"
+                "description": ""
             },
             "faq": {
                 "title": "ЧАВО",
-                "description": "Temp"
+                "description": ""
             },
             "discord": {
                 "title": "Discord",
-                "description": "Temp"
+                "description": ""
             },
             "about": {
                 "title": "О приложение",
-                "description": "Temp"
+                "description": ""
             }
         },
         "login": {
@@ -226,9 +230,21 @@
             "incorrect_attempts": "{attempts, plural, one {1 неправильная попытка} other {# неправильные попытки}}"
         }
     },
+    "popups": {
+        "password": {
+            "title": "Password required",
+            "subtitle": "Please provide your wallet’s password to unlock stronghold."
+        },
+        "qr": {
+            "title": "Your QR code"
+        }
+    },
     "actions": {
         "continue": "Продолжить",
         "back": "Назад",
+        "cancel": "Cancel",
+        "close": "Close",
+        "save": "Save",
         "import_seed": "Импортировать существующую мнемонику",
         "import_wallet": "Импортировать существующий кошелек",
         "create_wallet": "Создать новый кошелек",
@@ -247,17 +263,30 @@
         "import_from_file": "Импортировать из файла",
         "send": "Отправить",
         "receive": "Получить",
+        "create": "Create",
         "begin_transfer": "Начать Перемещение",
         "try_again": "Попрoбуйте снова",
         "visit_discord": "Посетить Discord",
         "drag_drop": "Перетащить",
         "import_extentions": ".stronghold или .kdbx файл",
         "choose_file": "Выберите файл",
-        "drop_here": "Перенесите файл сюда"
+        "drop_here": "Перенесите файл сюда",
+        "syncAll": "Sync all",
+        "export": "Export",
+        "exportNewStronghold": "Export a new Stronghold",
+        "enableDeepLinks": "Enable deep links",
+        "enableDeveloperMode": "Enable developer mode",
+        "enableNotifications": "Enable notifications",
+        "exportState": "Export state",
+        "outsourceProofOfWork": "Outsource proof of work",
+        "unlock": "Unlock"
     },
     "general": {
         "password": "Пароль",
         "confirm_password": "Подтвердите пароль",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "confirmNewPassword": "Confirm new password",
         "your_seed": "Ваша Мнемоника",
         "recovery_phrase": "Фраза Восстановления",
         "recent_activity": "Последние действия",
@@ -267,7 +296,9 @@
         "send_to_address": "Отправить на адрес",
         "scan_qr_or_paste": "Сканировать QR-код или вставить Адрес",
         "transfer_between_accounts": "Перемещайте между вашими Aккаунтами",
-        "move_funds_between_accounts": "Перемещайте средств между вашими Aккаунтами",
+        "move_funds_between_accounts": "Move funds between accounts",
+        "manage_account": "Manage Account",
+        "customize_account": "Customize your account",
         "account": "Аккаунт",
         "sending_to_address": "Отправляется на адрес",
         "amount": "Сумма",
@@ -279,6 +310,7 @@
         "share_address": "Поделиться адресом",
         "your_address": "Ваш адрес",
         "generate_new_address": "Создать новый адрес",
+        "copy_address": "Copy Address",
         "have_text_backup": "У меня есть резервная копия текста",
         "have_file_backup": "У меня есть резервная копия файла",
         "enter_seed_or_phrase": "Введите фразу восстановлении или мнемонику",
@@ -294,6 +326,14 @@
         "incoming": "Входящие",
         "outgoing": "Исходящие",
         "accounts": "Аккаунты",
-        "profiles": "Профили"
+        "automaticNodeSelection": "Automatic node selection",
+        "manualNodeSelection": "Manual node selection",
+        "profiles": "Профили",
+        "create_account": "Create an account",
+        "account_name": "Account name",
+        "latest_transactions": "Latest Transactions",
+        "transactions": "Transactions",
+        "security": "Настройки Безопасности",
+        "account_address": "Account Address"
     }
 }
