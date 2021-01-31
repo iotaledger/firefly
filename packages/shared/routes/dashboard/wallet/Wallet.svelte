@@ -160,7 +160,11 @@
                                         balance: formatUnit(_totalBalance.balance, 2),
                                         incoming: formatUnit(_totalBalance.incoming, 2),
                                         outgoing: formatUnit(_totalBalance.outgoing, 2),
-                                        balanceEquiv: `${convertToFiat(_totalBalance.balance, $currencies[CurrencyTypes.USD], $exchangeRates[$currency])} ${$currency}`,
+                                        balanceEquiv: `${convertToFiat(
+                                            _totalBalance.balance,
+                                            $currencies[CurrencyTypes.USD],
+                                            $exchangeRates[$currency]
+                                        )} ${$currency}`,
                                     })
                                 )
                             }
@@ -294,6 +298,31 @@
         })
     }
 
+    function onSetAlias(newAlias) {
+        api.setAlias($selectedAccountId, newAlias, {
+            onSuccess(res) {
+                accounts.update((_accounts) => {
+                    return _accounts.map((account) => {
+                        if (account.id === $selectedAccountId) {
+                            return Object.assign({}, account, {
+                                // TODO: Remove "name" property from account and reference alias everywhere
+                                alias: newAlias,
+                                name: newAlias,
+                            })
+                        }
+
+                        return account
+                    })
+                })
+
+                _next(WalletState.Init)
+            },
+            onError(error) {
+                console.error(error)
+            },
+        })
+    }
+
     $: {
         if ($deepLinkRequestActive && get(deepLinking)) {
             _next(WalletState.Send)
@@ -340,6 +369,7 @@
         send={onSend}
         internalTransfer={onInternalTransfer}
         generateAddress={onGenerateAddress}
+        setAlias={onSetAlias}
         {locale} />
 {:else}
     <div class="w-full h-full flex flex-col p-10">

@@ -41,6 +41,7 @@ export type StrongholdStatusResponse = Response<'StrongholdStatus', void>
 export type UnusedAddressResponse = Response<'UnusedAddress', void>
 export type IsLatestAddressUnusedResponse = Response<'IsLatestAddressUnused', void>
 export type AreLatestAddressesUnusedResponse = Response<'AreLatestAddressesUnused', void>
+export type SetAliasResponse = Response<'UpdatedAlias', void>
 
 export type MessageResponse = RemovedAccountResponse |
   CreatedAccountResponse |
@@ -65,6 +66,7 @@ export type MessageResponse = RemovedAccountResponse |
   UnusedAddressResponse |
   IsLatestAddressUnusedResponse |
   AreLatestAddressesUnusedResponse |
+  SetAliasResponse |
   // events
   ErrorEvent
 
