@@ -1,20 +1,30 @@
 <script lang="typescript">
     import { createEventDispatcher, getContext } from 'svelte'
     import { Text, Button, Dropdown, Amount, Address } from 'shared/components'
-    import { sendParams } from 'shared/lib/app';
+    import { sendParams } from 'shared/lib/app'
 
     export let locale
-    export let internal = false
     export let send
     export let internalTransfer
 
     const dispatch = createEventDispatcher()
     const accounts = getContext('walletAccounts')
 
+    enum SEND_TYPE {
+        EXTERNAL = 'send_payment',
+        INTERNAL = 'move_funds',
+    }
+
+    let selectedSendType = SEND_TYPE.EXTERNAL
+
     $: accountsDropdownItems = $accounts.map((acc) => ({ value: acc.id, label: `${acc.name} • ${acc.balance}` }))
     $: from = $accounts.map((acc) => ({ value: acc.id, label: `${acc.name} • ${acc.balance}` }))[0]
     let account = $accounts.map((acc) => ({ value: acc.id, label: `${acc.name} • ${acc.balance}` }))[0]
 
+
+    const handleSendTypeClick = (type) => {
+        selectedSendType = type
+    }
     const handleFromSelect = (item) => {
         from = item
     }
@@ -22,7 +32,7 @@
         account = item
     }
     const handleSendClick = () => {
-        if (internal) {
+        if (selectedSendType === SEND_TYPE.INTERNAL) {
             internalTransfer(from.value, account.value, $sendParams.amount)
         } else {
             send(from.value, $sendParams.address, $sendParams.amount)
@@ -35,8 +45,12 @@
 
 <div class="w-full h-full flex flex-col justify-between p-8">
     <div>
-        <div class="flex flex-row mb-6">
-            <Text type="h5">{locale('general.send_funds')}</Text>
+        <div class="flex flex-row mb-6 space-x-4">
+            {#each Object.values(SEND_TYPE) as type}
+                <button on:click={() => handleSendTypeClick(type)}>
+                    <Text type="h5" disabled={type !== selectedSendType}>{locale(`general.${type}`)}</Text>
+                </button>
+            {/each}
         </div>
         <div class="w-full h-full flex flex-col justify-between">
             <div>
@@ -49,7 +63,7 @@
                 </div>
                 <div class="w-full mb-8 block">
                     <Amount bind:amount={$sendParams.amount} {locale} classes="mb-4" />
-                    {#if internal}
+                    {#if selectedSendType === SEND_TYPE.INTERNAL}
                         <Dropdown
                             value={account?.label || ''}
                             label={locale('general.to')}
