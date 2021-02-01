@@ -17,9 +17,10 @@
 
     let selectedSendType = SEND_TYPE.EXTERNAL
 
-    $: accountsDropdownItems = $accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balance}` }))
-    $: from = $accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balance}` }))[0]
-    let account = $accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balance}` }))[0]
+    $: accountsDropdownItems = $accounts.map((acc) => ({ value: acc.id, label: `${acc.name} • ${acc.balance}` }))
+    $: from = $accounts.map((acc) => ({ value: acc.id, label: `${acc.name} • ${acc.balance}` }))[0]
+    let account = $accounts.map((acc) => ({ value: acc.id, label: `${acc.name} • ${acc.balance}` }))[0]
+
 
     const handleSendTypeClick = (type) => {
         selectedSendType = type
