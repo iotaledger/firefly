@@ -1,6 +1,8 @@
 import type { Bridge, CommunicationIds } from './bridge'
 import type { AccountIdentifier } from './account'
 
+type MessageVersion = 1;
+
 export interface UnsignedTransaction {
     inputs: Input[]
     outputs: Output[]
@@ -24,15 +26,18 @@ export interface SignedTransaction {
 export type Payload = SignedTransaction
 
 export interface Message {
-    version: number
-    trunk: string
-    branch: string
-    payload_length: number
-    payload: Payload
-    timestamp: string
-    nonce: number
-    confirmed: boolean
-    broadcasted: boolean
+    broadcasted: boolean;
+    id: string;
+    incoming: boolean;
+    nonce: number;
+    parent1: string;
+    parent2: string;
+    // TODO: rename to camelCase
+    remainder_value: number;
+    timestamp: string;
+    value: 0;
+    version: MessageVersion;
+    payload: Payload;
 }
 
 export enum MessageType {

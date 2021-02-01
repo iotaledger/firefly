@@ -1,7 +1,8 @@
 import type { Event, ErrorEventPayload, BalanceChangeEventPayload, TransactionEventPayload } from './events'
 import type { Address } from './address'
-import type { AccountIdentifier, Account, SyncedAccount } from './account'
+import type { AccountIdentifier, Account, Balance, SyncedAccount } from './account'
 import type { Message } from './message'
+import type { StrongholdStatus } from './wallet'
 
 export interface CommunicationIds {
   messageId: string;
@@ -53,16 +54,20 @@ export enum ResponseTypes {
   UpdatedAlias = 'UpdatedAlias'
 }
 
-export type Response<T, P> = { id: string; action: string; type: T; payload?: P }
+export enum Actions {
+  RemoveAccount = 'RemoveAccount'
+}
+
+export type Response<T, P> = { id: string; action: Actions; type: T; payload?: P }
 export type RemovedAccountResponse = Response<ResponseTypes.RemovedAccount, AccountIdentifier>
 export type CreatedAccountResponse = Response<ResponseTypes.CreatedAccount, Account>
-export type ReadAccountResponse = Response<ResponseTypes.ReadAccount, Account>
+export type ReadAccountResponse = Response<ResponseTypes.ReadAccount, Account> 
 export type ReadAccountsResponse = Response<ResponseTypes.ReadAccounts, Account[]>
 export type ListMessagesResponse = Response<ResponseTypes.Messages, Message[]>
 export type ListAddressesResponse = Response<ResponseTypes.Addresses, Address[]>
 export type GeneratedAddressResponse = Response<ResponseTypes.GeneratedAddress, Address>
 export type LatestAddressResponse = Response<ResponseTypes.LatestAddress, Address>
-export type BalanceResponse = Response<ResponseTypes.Balance, void>
+export type BalanceResponse = Response<ResponseTypes.Balance, Balance>
 export type SyncAccountsResponse = Response<ResponseTypes.SyncedAccounts, SyncedAccount[]>
 export type SyncAccountResponse = Response<ResponseTypes.SyncedAccount, SyncedAccount>
 export type ReattachResponse = Response<ResponseTypes.Reattached, string> // message id
@@ -74,11 +79,12 @@ export type ErrorResponse = Response<ResponseTypes.Error, ErrorEventPayload>
 export type PanicResponse = Response<ResponseTypes.Panic, string>
 export type GenerateMnemonicResponse = Response<ResponseTypes.GeneratedMnemonic, string>
 export type StoreMnemonicResponse = Response<ResponseTypes.StoredMnemonic, void>
+export type VerifyMnemonicResponse = Response<ResponseTypes.VerifiedMnemonic, void>
 export type SetStoragePasswordResponse = Response<ResponseTypes.StoragePasswordSet, void>
-export type StrongholdStatusResponse = Response<ResponseTypes.StrongholdStatus, void>
-export type UnusedAddressResponse = Response<ResponseTypes.UnusedAddress, void>
-export type IsLatestAddressUnusedResponse = Response<ResponseTypes.IsLatestAddressUnused, void>
-export type AreLatestAddressesUnusedResponse = Response<ResponseTypes.AreAllLatestAddressesUnused, void>
+export type StrongholdStatusResponse = Response<ResponseTypes.StrongholdStatus, StrongholdStatus>
+export type UnusedAddressResponse = Response<ResponseTypes.UnusedAddress, Address>
+export type IsLatestAddressUnusedResponse = Response<ResponseTypes.IsLatestAddressUnused, boolean>
+export type AreLatestAddressesUnusedResponse = Response<ResponseTypes.AreAllLatestAddressesUnused, boolean>
 export type SetAliasResponse = Response<ResponseTypes.UpdatedAlias, void>
 
 export type MessageResponse = RemovedAccountResponse |
@@ -100,6 +106,7 @@ export type MessageResponse = RemovedAccountResponse |
   PanicResponse |
   GenerateMnemonicResponse |
   StoreMnemonicResponse |
+  VerifyMnemonicResponse |
   SetStoragePasswordResponse |
   StrongholdStatusResponse |
   UnusedAddressResponse |

@@ -5,6 +5,13 @@ import type { ClientOptions } from './client'
 
 export enum MessageType { }
 
+export interface Balance {
+  total: number;
+  available: number;
+  incoming: number;
+  outgoing: number;
+}
+
 export interface ListMessagesFilter {
   messageType: MessageType,
   count: number
@@ -19,9 +26,16 @@ export interface SyncAccountOptions {
 
 export interface Account {
   id: string;
-  mnemonic: string;
   alias: string;
   createdAt: string;
+  clientOptions: ClientOptions;
+  index: number;
+  lastSyncedAt: string;
+  // TODO: Change to camelCase
+  signer_type: {
+    type: 'Stronghold'
+  };
+  storage_path: string;
   messages: Message[];
   addresses: Address[];
 }
@@ -40,10 +54,12 @@ export interface AccountToCreate {
 }
 
 export interface SyncedAccount {
-  accountId: string
-  depositAddress: Address,
-  addresses: Address[],
-  messages: Message[]
+  // TODO: Rename to "id"
+  accountId: string;
+  depositAddress: Address;
+  isEmpty: boolean;
+  addresses: Address[];
+  messages: Message[];
 }
 
 export function createAccount(bridge: Bridge, __ids: CommunicationIds, account: AccountToCreate): Promise<string> {
