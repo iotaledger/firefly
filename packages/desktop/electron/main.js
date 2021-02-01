@@ -1,18 +1,18 @@
-const { app, ipcMain, protocol, BrowserWindow } = require('electron')
+const { app, ipcMain, protocol, shell, BrowserWindow } = require('electron')
 const path = require('path')
-const Keychain = require('./keychain');
+const Keychain = require('./keychain')
 
 /**
  * Define wallet windows
  */
 const windows = {
     main: null,
-};
+}
 
 /**
  * Set environment mode
  */
-const devMode = process.env.NODE_ENV === 'development';
+const devMode = process.env.NODE_ENV === 'development'
 
 function createWindow() {
     /**
@@ -20,10 +20,10 @@ function createWindow() {
      */
     try {
         protocol.registerFileProtocol('iota', (request, callback) => {
-            callback(request.url.replace('iota:/', app.getAppPath()).split('?')[0].split('#')[0]);
-        });
+            callback(request.url.replace('iota:/', app.getAppPath()).split('?')[0].split('#')[0])
+        })
     } catch (error) {
-        console.log(error); //eslint-disable-line no-console
+        console.log(error) //eslint-disable-line no-console
     }
 
     // Create the browser window.
@@ -41,31 +41,31 @@ function createWindow() {
 
     windows.main.webContents.openDevTools()
 
+    const _handleNavigation = (e, url) => {
+        e.preventDefault()
+        // TODO: Add whitelist links for T&C, privacy policy and help
+        const externalWhitelist = [
+            'privacy@iota.org',
+            'google.com',
+            'explorer.iota.org',
+        ]
+
+        try {
+            if (
+                externalWhitelist.indexOf(new URL(url).hostname.replace('www.', '').replace('mailto:', '')) > -1
+            ) {
+                shell.openExternal(url)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     /**
      * Only allow external navigation to whitelisted domains
      */
-    windows.main.webContents.on('will-navigate', (e, targetURL) => {
-        if (url.indexOf(targetURL) !== 0) {
-            e.preventDefault();
-
-            // TODO: Add whitelist links for T&C, privacy policy and help
-            const externalWhitelist = [
-                'privacy@iota.org',
-                'iota.org',
-                'explorer.iota.org',
-            ]
-
-            try {
-                if (
-                    externalWhitelist.indexOf(URL.parse(targetURL).host.replace('www.', '').replace('mailto:', '')) > -1
-                ) {
-                    shell.openExternal(targetURL);
-                }
-            } catch (error) {
-                console.log(error); 
-            }
-        }
-    })
+    windows.main.webContents.on('will-navigate', _handleNavigation)
+    windows.main.webContents.on('new-window', _handleNavigation)
 }
 
 app.whenReady().then(createWindow)
@@ -108,32 +108,32 @@ ipcMain.handle('keychain-remove', (_e, key) => {
 /**
  * Define deep link state
  */
-let deepLinkUrl = null;
+let deepLinkUrl = null
 
 /**
  * Create a single instance only
  */
-const isFirstInstance = app.requestSingleInstanceLock();
+const isFirstInstance = app.requestSingleInstanceLock()
 
 if (!isFirstInstance) {
-    app.quit();
+    app.quit()
 }
 
 app.on('second-instance', (_e, args) => {
     if (windows.main) {
         if (args.length > 1) {
-            const params = args.find((arg) => arg.startsWith('iota://'));
+            const params = args.find((arg) => arg.startsWith('iota://'))
 
             if (params) {
-                windows.main.webContents.send('deepLink-params', params);
+                windows.main.webContents.send('deepLink-params', params)
             }
         }
         if (windows.main.isMinimized()) {
-            windows.main.restore();
+            windows.main.restore()
         }
-        windows.main.focus();
+        windows.main.focus()
     }
-});
+})
 
 /**
  * Register iota:// protocol for deep links
@@ -153,11 +153,11 @@ if (process.defaultApp) {
  */
 app.on('open-url', (event, url) => {
     event.preventDefault()
-    deepLinkUrl = url;
+    deepLinkUrl = url
     if (windows.main) {
         windows.main.webContents.send('deepLink-params', url)
     }
-});
+})
 
 /**
  * Proxy deep link event to the wallet application
@@ -167,4 +167,4 @@ ipcMain.on('deepLink-request', () => {
         windows.main.webContents.send('deepLink-params', deepLinkUrl)
         deepLinkUrl = null
     }
-});
+})
