@@ -39,7 +39,10 @@ function createWindow() {
     // and load the index.html of the app.
     windows.main.loadFile('../public/index.html')
 
-    windows.main.webContents.openDevTools()
+    // Enable dev tools only in developer mode
+    if (devMode) {
+        windows.main.webContents.openDevTools()
+    }
 }
 
 app.whenReady().then(createWindow)
