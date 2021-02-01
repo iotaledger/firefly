@@ -37,8 +37,8 @@
     const selectedAccount = derived([selectedAccountId, accounts], ([$selectedAccountId, $accounts]) =>
         $accounts.find((acc) => acc.id === $selectedAccountId)
     )
-    const showPasswordPopup = writable(false)
     const state = writable(WalletState.Init)
+    const popupState = writable({ active: false })
 
     setContext('walletBalance', totalBalance)
     setContext('walletAccounts', accounts)
@@ -46,7 +46,7 @@
     setContext('selectedAccountId', selectedAccountId)
     setContext('selectedAccount', selectedAccount)
     setContext('walletState', state)
-    setContext('showPasswordPopup', showPasswordPopup)
+    setContext('popupState', popupState)
 
     let stateHistory = []
     let isGeneratingAddress = false
@@ -339,7 +339,7 @@
                     api.areLatestAddressesUnused({
                         onSuccess(response) {
                             if (!response.payload) {
-                                showPasswordPopup.set(true)
+                                popupState.set({ active: true, type: 'password', props: { onSuccess: syncAccounts } })
                             }
                         },
                         onError(error) {
@@ -355,13 +355,9 @@
     })
 </script>
 
-<Popup
-    bind:active={$showPasswordPopup}
-    {locale}
-    type="password"
-    title={locale('popups.password.title')}
-    subtitle={locale('popups.password.subtitle')}
-    onSuccess={syncAccounts} />
+{#if $popupState.active}
+    <Popup type={$popupState.type} props={$popupState.props} {locale} />
+{/if}
 {#if $state === WalletState.Account && $selectedAccountId}
     <Account
         on:next={_next}

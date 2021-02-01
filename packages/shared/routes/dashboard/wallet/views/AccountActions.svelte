@@ -15,8 +15,11 @@
     const account = getContext('selectedAccount')
 
     const state = getContext('accountState')
-    const showQR = getContext('showQrPopup')
+    const popupState = getContext('popupState')
 
+    function handleQrClick() {
+        popupState.set({ active: true, type: 'qr', props: { data: $account?.address } })
+    }
     function handleTransferClick() {
         dispatch('next', AccountState.Transfer)
     }
@@ -36,7 +39,7 @@
         <div class="flex flex-col justify-between">
             <div class="flex flex-row mb-6 justify-between items-center">
                 <button
-                    on:click={() => showQR.set(true)}
+                    on:click={handleQrClick}
                     class="w-full rounded-2xl bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 flex items-center p-4 text-left">
                     <div class="flex flex-row mr-4 flex-wrap">
                         <p class="text-gray-500 mb-2 text-10 leading-140">{locale('general.account_address')}</p>
