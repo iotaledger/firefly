@@ -17,6 +17,7 @@
     export let send
     export let internalTransfer
     export let generateAddress
+    export let setAlias
 
     const dispatch = createEventDispatcher()
 
@@ -85,6 +86,7 @@
                         {send}
                         {internalTransfer}
                         {generateAddress}
+                        {setAlias}
                         {locale} />
                 </DashboardPane>
             </DashboardPane>

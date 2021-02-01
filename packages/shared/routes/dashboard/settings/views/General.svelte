@@ -2,8 +2,8 @@
     import { darkMode } from 'shared/lib/app'
     import { Text, Radio, Dropdown, Toggle } from 'shared/components'
     import { exchangeRates } from 'shared/lib/currency'
-
-    import { currency } from 'shared/lib/settings'
+    import { locales, setupI18n } from 'shared/lib/i18n'
+    import { language, currency } from 'shared/lib/settings'
 
     export let locale
 
@@ -11,6 +11,12 @@
     let notificationsEnabled = true
 
     $: darkMode.set(darkModeEnabled)
+
+    const setLanguage = (item) => {
+        const locale = Object.keys(locales).find(key => locales[key] === item.value)
+        language.set(locale) 
+        setupI18n(locale)
+    }
 </script>
 
 <div>
@@ -29,7 +35,11 @@
     <section id="language" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.language.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.language.description')}</Text>
-        <Dropdown value="English" items={[{ value: 1, label: 'English' }, { value: 2, label: 'Belula' }]} />
+        <Dropdown 
+            sortItems={true}
+            onSelect={(item) => setLanguage(item)}
+            value={locales[$language]} 
+            items={Object.values(locales).map((locale) => ({ value: locale, label: locale }))} />
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <section id="currency" class="w-3/4">

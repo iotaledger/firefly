@@ -8,12 +8,25 @@
     export let send
     export let generateAddress
     export let internalTransfer
+    export let setAlias
 
     const dispatch = createEventDispatcher()
 
     const account = getContext('selectedAccount')
+
     const state = getContext('accountState')
 
+    const popupState = getContext('popupState')
+
+    function handleQrClick() {
+        popupState.set({ active: true, type: 'qr', props: { data: $account?.address } })
+    }
+    function handleTransferClick() {
+        dispatch('next', AccountState.Transfer)
+    }
+    function handleManageClick() {
+        dispatch('next', AccountState.Manage)
+    }
     function handleSendClick() {
         dispatch('next', AccountState.Send)
     }
@@ -34,5 +47,5 @@
 {:else if $state === AccountState.Send}
     <Send on:next on:previous {send} {internalTransfer} {locale} />
 {:else if $state === AccountState.Manage}
-    <ManageAccount on:next on:previous {locale} name={$account.name} />
+    <ManageAccount on:next on:previous {locale} name={$account.name} setAlias={setAlias} />
 {/if}

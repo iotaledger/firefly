@@ -299,6 +299,31 @@
         })
     }
 
+    function onSetAlias(newAlias) {
+        api.setAlias($selectedAccountId, newAlias, {
+            onSuccess(res) {
+                accounts.update((_accounts) => {
+                    return _accounts.map((account) => {
+                        if (account.id === $selectedAccountId) {
+                            return Object.assign({}, account, {
+                                // TODO: Remove "name" property from account and reference alias everywhere
+                                alias: newAlias,
+                                name: newAlias,
+                            })
+                        }
+
+                        return account
+                    })
+                })
+
+                _next(WalletState.Init)
+            },
+            onError(error) {
+                console.error(error)
+            },
+        })
+    }
+
     $: {
         if ($deepLinkRequestActive && get(deepLinking)) {
             _next(WalletState.Send)
@@ -341,6 +366,7 @@
         send={onSend}
         internalTransfer={onInternalTransfer}
         generateAddress={onGenerateAddress}
+        setAlias={onSetAlias}
         {locale} />
 {:else}
     <div class="w-full h-full flex flex-col p-10">
