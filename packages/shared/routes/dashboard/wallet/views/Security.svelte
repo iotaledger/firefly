@@ -64,6 +64,6 @@
                   }) : locale('popups.backup.not_backed_up')}
             onClick={() => openPopup('backup')}
             icon="shield"
-            color={color} />
+            {color} />
     </div>
 </div>
