@@ -339,7 +339,6 @@
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
                 updateStrongholdStatus(strongholdStatusResponse.payload.snapshot.status === 'Locked')
-                popupState.set({ active: true, type: 'password', props: { onSuccess: syncAccounts } })
 
                 api.areLatestAddressesUnused({
                     onSuccess(response) {
