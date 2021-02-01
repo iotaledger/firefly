@@ -1,5 +1,5 @@
 import { get, derived, writable } from 'svelte/store'
-import { locale } from 'shared/lib/app'
+import { language } from 'shared/lib/settings'
 import { getLocaleFromNavigator, addMessages, dictionary, _, init } from 'svelte-i18n'
 
 /*
@@ -9,8 +9,48 @@ import { getLocaleFromNavigator, addMessages, dictionary, _, init } from 'svelte
 const MESSAGE_FILE_URL_TEMPLATE = 'locales/{locale}.json'
 
 // Locales our app supports
-const locales = {
+export const locales = {
     en: 'English',
+    ar: 'Arabic',
+    cs: 'Czech',
+    da: 'Danish',
+    de: 'German',
+    el: 'Greek',
+    es_ES: 'Spanish (Spain)',
+    es_LA: 'Spanish (Latin America)',
+    et: 'Estonian',
+    fa: 'Persian',
+    fi: 'Finnish',
+    fr: 'French',
+    he: 'Hebrew',
+    hi: 'Hindi',
+    hr: 'Croatian',
+    hu: 'Hungarian',
+    id: 'Indonesian',
+    it: 'Italian',
+    ja: 'Japanese',
+    kn: 'Kannada',
+    ko: 'Korean',
+    lt: 'Lithuanian',
+    lv: 'Latvian',
+    nl: 'Dutch',
+    no: 'Norwegian',
+    pl: 'Polish',
+    pt_BR: 'Portuguese (Brazil)',
+    pt_PT: 'Portuguese (Portugal)',
+    ro: 'Romanian',
+    ru: 'Russian',
+    sk: 'Slovak',
+    sl: 'Slovenian',
+    sr: 'Serbian (Latin)',
+    sv_SE: 'Swedish',
+    ta: 'Tamil',
+    th: 'Thai',
+    tr: 'Turkish',
+    ur: 'Urdu',
+    vi: 'Vietnamese',
+    zh_CN: 'Chinese (Simplified)',
+    zh_TW: 'Chinese (Traditional)'
 }
 
 // Init options: eg locale to show when we don't support the
@@ -33,7 +73,7 @@ const setupI18n = (options = { withLocale: null }) => {
     // If we're given an explicit locale, we use
     // it. Otherwise, we attempt to auto-detect
     // the user's locale.
-    const _locale = supported(options.withLocale || get(locale) || language(getLocaleFromNavigator()))
+    const _locale = supported(options.withLocale || get(language) || reduceLocale(getLocaleFromNavigator()))
 
     init({ ...INIT_OPTIONS, initialLocale: _locale } as any)
 
@@ -44,7 +84,7 @@ const setupI18n = (options = { withLocale: null }) => {
         return loadJson(messagesFileUrl).then((messages) => {
             _activeLocale = _locale
             addMessages(_locale, messages)
-            locale.set(_locale)
+            language.set(_locale)
             isDownloading.set(false)
         })
     }
@@ -64,7 +104,7 @@ const hasLoadedLocale = (locale: string) => {
 
 // Extract the "en" bit from fully qualified
 // locales, like "en-US"
-function language(locale) {
+function reduceLocale(locale) {
     return locale.replace('_', '-').split('-')[0]
 }
 
@@ -83,7 +123,7 @@ function loadJson(url) {
     return fetch(url).then((response) => response.json())
 }
 
-const dir = derived(locale, ($locale) => ($locale === 'ar' ? 'rtl' : 'ltr'))
+const dir = derived(language, ($locale) => ($locale === 'ar' ? 'rtl' : 'ltr'))
 
 // We expose the svelte-i18n _ store so that our app has
 // a single API for i18n

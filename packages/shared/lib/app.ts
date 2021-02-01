@@ -32,12 +32,6 @@ export const strongholdPassword = writable<string>(null)
  */
 export const mnemonic = writable<Array<string>>(null)
 
-/**
- * App language
- */
-export const locale = persistent<string>('locale', null)
-
-
 interface SendParams {
     amount: number;
     address: string;
