@@ -7,6 +7,7 @@ import type {
     LatestAddressResponse,
     SyncAccountsResponse,
     ErrorResponse,
+    StrongholdStatusResponse,
 } from './typings/bridge'
 import { ResponseTypes } from './typings/bridge'
 import type { Address } from './typings/address'
@@ -84,6 +85,11 @@ export const wallet = writable<WalletState>({
 })
 
 /**
+ * Determines if stronghold is locked
+ */
+export const isStrongholdLocked = writable<boolean>(true)
+
+/**
  * A simple store for keeping references to (success, error) callbacks
  */
 const callbacksStore: CallbacksStore = {}
@@ -152,6 +158,7 @@ const defaultCallbacks = {
  * Receives messages from wallet.rs.
  */
 Wallet.onMessage((message: MessageResponse) => {
+    console.log(message)
     const _deleteCallbackId = (_id: string) => {
         const isEventMessage = [
             ResponseTypes.ErrorThrown,
@@ -247,7 +254,7 @@ export const api = new Proxy(Wallet.api, Middleware)
 
 export const getStoragePath = (appPath: string, profileName: string): string => {
     return `${appPath}/${WALLET_STORAGE_DIRECTORY}/${profileName}`;
-} 
+}
 
 export const initialise = (id: string, storagePath: string): void => {
     return Wallet.init(id, storagePath);
@@ -277,13 +284,16 @@ export const requestMnemonic = async () => {
     mnemonic.set(recoveryPhrase)
 }
 
-Wallet.api.onStrongholdStatusChange({
+/**
+ * Event listener for stronghold status change
+ */
+api.onStrongholdStatusChange({
     onSuccess(response) {
-        console.log(response)
+        isStrongholdLocked.set(
+            response.payload.snapshot.status === 'Locked'
+        )
     },
-    onError(error) {
-        console.error(error)
-    }
+    onError(error) { console.error(error) }
 })
 
 /**
@@ -299,7 +309,7 @@ Wallet.api.onStrongholdStatusChange({
 export const getLatestMessages = (
     accounts: Account[],
     count = 10
-): Message[] => {    
+): Message[] => {
     const messages: Message[] = accounts.reduce((messages, account) => messages.concat(
         account.messages.map((message, idx) => Object.assign({}, message, {
             account: account.index,

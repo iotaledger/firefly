@@ -2,6 +2,7 @@
     import { getContext } from 'svelte'
     import { Text, SecurityTile } from 'shared/components'
     import { diffDates, getBackupWarningColor } from 'shared/lib/helpers'
+    import { isStrongholdLocked } from 'shared/lib/wallet'
 
     export let locale
 
@@ -16,13 +17,11 @@
         new Date().getDate() - Math.floor(Math.random() * 200)
     ) // dummy
 
-    // stronghold status
-    let strongholdLocked = Math.random() < 0.5 // dummy
     let color = getBackupWarningColor(lastBackupDate)
 
     // stronghold backup
     let lastBackupDateFormatted = lastBackupDate ? diffDates(lastBackupDate, new Date()) : null
-    $: strongholdStatusMessage = strongholdLocked ? 'locked' : 'unlocked'
+    $: strongholdStatusMessage = $isStrongholdLocked ? 'locked' : 'unlocked'
 
     const popupState = getContext('popupState')
 
@@ -52,10 +51,10 @@
         <SecurityTile
             title={locale('views.dashboard.security.stronghold_status.title')}
             message={locale(`views.dashboard.security.stronghold_status.${strongholdStatusMessage}`)}
-            color={strongholdLocked ? 'blue' : 'red'}
+            color={$isStrongholdLocked ? 'blue' : 'red'}
             icon="lock"
             onClick={() => openPopup('password')}
-            classes={strongholdLocked ? 'pointer-events-none' : 'pointer-events-all'} />
+            classes={$isStrongholdLocked ? 'pointer-events-all' : 'pointer-events-none'} />
         <!-- Stronghold backup -->
         <SecurityTile
             title={locale('views.dashboard.security.stronghold_backup.title')}
