@@ -281,14 +281,26 @@ export const requestMnemonic = async () => {
 }
 
 /**
- * Event listener for stronghold status change
+ * Initialises event listeners from wallet library
+ * 
+ * @method initialiseListeners
+ * 
+ * @returns {void}
  */
-api.onStrongholdStatusChange({
-    onSuccess(response) {
-        updateStrongholdStatus(response.payload.snapshot.status === 'Locked')
-    },
-    onError(error) { console.error(error) }
-})
+export const initialiseListeners = () => {
+    /**
+     * Event listener for stronghold status change
+     */
+    api.onStrongholdStatusChange({
+        onSuccess(response) {
+            updateStrongholdStatus(response.payload.snapshot.status === 'Locked')
+        },
+        onError(error) { console.error(error) }
+    })
+};
+
+
+
 
 /**
  * Gets latest messages

@@ -12,7 +12,7 @@
     import { setContext, onMount } from 'svelte'
     import { get, writable, derived } from 'svelte/store'
     import { getActiveProfile } from 'shared/lib/app'
-    import { api, getLatestMessages } from 'shared/lib/wallet'
+    import { api, getLatestMessages, initialiseListeners } from 'shared/lib/wallet'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { deepLinking, currency } from 'shared/lib/settings'
     import { DEFAULT_NODE as node, DEFAULT_NODES as nodes } from 'shared/lib/network'
@@ -333,6 +333,8 @@
 
     onMount(() => {
         getAccounts()
+
+        initialiseListeners()
 
         if (getActiveProfile().isStrongholdLocked) {
             api.areLatestAddressesUnused({
