@@ -8,10 +8,12 @@
     export let send
     export let generateAddress
     export let internalTransfer
+    export let setAlias
 
     const dispatch = createEventDispatcher()
 
     const account = getContext('selectedAccount')
+
     const state = getContext('accountState')
 
     function handleSendClick() {
@@ -34,5 +36,5 @@
 {:else if $state === AccountState.Send}
     <Send on:next on:previous {send} {internalTransfer} {locale} />
 {:else if $state === AccountState.Manage}
-    <ManageAccount on:next on:previous {locale} name={$account.name} />
+    <ManageAccount on:next on:previous {locale} name={$account.name} {setAlias} />
 {/if}

@@ -1,4 +1,4 @@
-import { BridgeMessage, MessageResponse, CommunicationIds } from '../../api-wrapper/bridge'
+import { BridgeMessage, MessageResponse, CommunicationIds } from '../../../shared/lib/typings/bridge'
 import {
   AccountToCreate,
   AccountIdentifier,
@@ -18,12 +18,13 @@ import {
   latestAddress as _latestAddress,
   syncAccount as _syncAccount,
   isLatestAddressUnused as _isLatestAddressUnused,
-  areLatestAddressesUnused as _areLatestAddressesUnused
-} from '../../api-wrapper/account'
+  areLatestAddressesUnused as _areLatestAddressesUnused,
+  setAlias as _setAlias
+} from '../../../shared/lib/typings/account'
 import {
   Transfer,
   reattach as _reattach
-} from '../../api-wrapper/message'
+} from '../../../shared/lib/typings/message'
 import {
   LoggerConfig,
   backup as _backup,
@@ -35,7 +36,7 @@ import {
   storeMnemonic as _storeMnemonic,
   verifyMnemonic as _verifyMnemonic,
   getStrongholdStatus as _getStrongholdStatus
-} from '../../api-wrapper/wallet'
+} from '../../../shared/lib/typings/wallet'
 
 const addon = require('../native')
 const mailbox = []
@@ -81,6 +82,9 @@ export function initLogger(config: LoggerConfig) {
 }
 
 export const api = {
+  setAlias: function (accountId: AccountIdentifier, newAccountAlias: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _setAlias(sendMessage, __ids, accountId, newAccountAlias)
+  },
   getStrongholdStatus: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _getStrongholdStatus(sendMessage, __ids)
   },
