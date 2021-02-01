@@ -154,7 +154,6 @@ const defaultCallbacks = {
  * Receives messages from wallet.rs.
  */
 Wallet.onMessage((message: MessageResponse) => {
-    console.log(message)
     const _deleteCallbackId = (_id: string) => {
         const isEventMessage = [
             ResponseTypes.ErrorThrown,
