@@ -2,31 +2,33 @@
     import { getContext } from 'svelte'
     import { Text, SecurityTile } from 'shared/components'
     import { diffDates, getBackupWarningColor } from 'shared/lib/helpers'
-    import { isStrongholdLocked } from 'shared/lib/wallet'
+    import { getActiveProfile } from 'shared/lib/app'
 
     export let locale
+
+    const activeProfile = getActiveProfile()
+    const { isStrongholdLocked, strongholdLastBackupTime } = activeProfile
+
+    const lastBackupDate = new Date(strongholdLastBackupTime)
 
     // version
     let currentVersion = '0.0.1' // dummy
     let upToDate = Math.random() < 0.5 // dummy
 
-    // stronghold backup
-    let lastBackupDate = new Date(
-        new Date().getFullYear(),
-        new Date().getMonth(),
-        new Date().getDate() - Math.floor(Math.random() * 200)
-    ) // dummy
-
-    let color = getBackupWarningColor(lastBackupDate)
+    let color = lastBackupDate ? getBackupWarningColor(lastBackupDate) : 'red'
 
     // stronghold backup
     let lastBackupDateFormatted = lastBackupDate ? diffDates(lastBackupDate, new Date()) : null
-    $: strongholdStatusMessage = $isStrongholdLocked ? 'locked' : 'unlocked'
+    $: strongholdStatusMessage = isStrongholdLocked ? 'locked' : 'unlocked'
 
     const popupState = getContext('popupState')
 
     function openPopup(type) {
-        popupState.set({ active: true, type, props: { upToDate, currentVersion, lastBackupDate, lastBackupDateFormatted } })
+        popupState.set({
+            active: true,
+            type,
+            props: { upToDate, currentVersion, lastBackupDate, lastBackupDateFormatted, isStrongholdLocked },
+        })
     }
 </script>
 
@@ -51,18 +53,18 @@
         <SecurityTile
             title={locale('views.dashboard.security.stronghold_status.title')}
             message={locale(`views.dashboard.security.stronghold_status.${strongholdStatusMessage}`)}
-            color={$isStrongholdLocked ? 'blue' : 'red'}
+            color={isStrongholdLocked ? 'blue' : 'red'}
             icon="lock"
             onClick={() => openPopup('password')}
-            classes={$isStrongholdLocked ? 'pointer-events-all' : 'pointer-events-none'} />
+            classes={isStrongholdLocked ? 'pointer-events-all' : 'pointer-events-none'} />
         <!-- Stronghold backup -->
         <SecurityTile
             title={locale('views.dashboard.security.stronghold_backup.title')}
-            message={lastBackupDate ? locale(`dates.${lastBackupDateFormatted.unit}`, {
+            message={strongholdLastBackupTime ? locale(`dates.${lastBackupDateFormatted.unit}`, {
                       values: { time: lastBackupDateFormatted.value },
                   }) : locale('popups.backup.not_backed_up')}
             onClick={() => openPopup('backup')}
             icon="shield"
-            color={color} />
+            {color} />
     </div>
 </div>

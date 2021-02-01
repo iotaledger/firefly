@@ -15,8 +15,9 @@ import type { Message } from './typings/message'
 import type { Event, BalanceChangeEventPayload, TransactionEventPayload } from './typings/events'
 import Validator, { ErrorTypes as ValidatorErrorTypes } from 'shared/lib/validator'
 import { generateRandomId } from 'shared/lib/utils'
-import { mnemonic, getActiveProfile } from 'shared/lib/app'
+import { mnemonic, getActiveProfile, updateStrongholdStatus } from 'shared/lib/app'
 import { account, message } from './typings'
+import { persistent } from './helpers'
 
 const Wallet = window['__WALLET__']
 
@@ -83,11 +84,6 @@ const apiToResponseTypeMap = {
 export const wallet = writable<WalletState>({
     accounts: [] as Account[],
 })
-
-/**
- * Determines if stronghold is locked
- */
-export const isStrongholdLocked = writable<boolean>(true)
 
 /**
  * A simple store for keeping references to (success, error) callbacks
@@ -289,9 +285,7 @@ export const requestMnemonic = async () => {
  */
 api.onStrongholdStatusChange({
     onSuccess(response) {
-        isStrongholdLocked.set(
-            response.payload.snapshot.status === 'Locked'
-        )
+        updateStrongholdStatus(response.payload.snapshot.status === 'Locked')
     },
     onError(error) { console.error(error) }
 })
