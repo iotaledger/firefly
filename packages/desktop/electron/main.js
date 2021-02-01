@@ -40,6 +40,32 @@ function createWindow() {
     windows.main.loadFile('../public/index.html')
 
     windows.main.webContents.openDevTools()
+
+    /**
+     * Only allow external navigation to whitelisted domains
+     */
+    windows.main.webContents.on('will-navigate', (e, targetURL) => {
+        if (url.indexOf(targetURL) !== 0) {
+            e.preventDefault();
+
+            // TODO: Add whitelist links for T&C, privacy policy and help
+            const externalWhitelist = [
+                'privacy@iota.org',
+                'iota.org',
+                'explorer.iota.org',
+            ]
+
+            try {
+                if (
+                    externalWhitelist.indexOf(URL.parse(targetURL).host.replace('www.', '').replace('mailto:', '')) > -1
+                ) {
+                    shell.openExternal(targetURL);
+                }
+            } catch (error) {
+                console.log(error); 
+            }
+        }
+    })
 }
 
 app.whenReady().then(createWindow)
