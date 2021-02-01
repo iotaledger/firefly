@@ -11,7 +11,7 @@
 <script lang="typescript">
     import { setContext, onMount } from 'svelte'
     import { get, writable, derived } from 'svelte/store'
-    import { getActiveProfile } from 'shared/lib/app'
+    import { updateStrongholdStatus } from 'shared/lib/app'
     import { api, getLatestMessages, initialiseListeners } from 'shared/lib/wallet'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { deepLinking, currency } from 'shared/lib/settings'
@@ -336,19 +336,26 @@
 
         initialiseListeners()
 
-        if (getActiveProfile().isStrongholdLocked) {
-            api.areLatestAddressesUnused({
-                onSuccess(response) {
-                    popupState.set({ active: true, type: 'password', props: { onSuccess: syncAccounts } })
-                    if (!response.payload) {
-                        popupState.set({ active: true, type: 'password', props: { onSuccess: syncAccounts } })
-                    }
-                },
-                onError(error) {
-                    console.error(error)
-                },
-            })
-        }
+        api.getStrongholdStatus({
+            onSuccess(strongholdStatusResponse) {
+                updateStrongholdStatus(strongholdStatusResponse.payload.snapshot.status === 'Locked')
+                popupState.set({ active: true, type: 'password', props: { onSuccess: syncAccounts } })
+
+                api.areLatestAddressesUnused({
+                    onSuccess(response) {
+                        if (!response.payload) {
+                            popupState.set({ active: true, type: 'password', props: { onSuccess: syncAccounts } })
+                        }
+                    },
+                    onError(error) {
+                        console.error(error)
+                    },
+                })
+            },
+            onError(error) {
+                console.error(error)
+            },
+        })
     })
 </script>
 

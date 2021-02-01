@@ -1,25 +1,30 @@
 <script lang="typescript">
-    import { getContext } from 'svelte'
+    import { getContext, onMount, onDestroy } from 'svelte'
     import { Text, SecurityTile } from 'shared/components'
     import { diffDates, getBackupWarningColor } from 'shared/lib/helpers'
-    import { getActiveProfile } from 'shared/lib/app'
+    import { getActiveProfile, profiles } from 'shared/lib/app'
 
     export let locale
 
-    const activeProfile = getActiveProfile()
-    const { isStrongholdLocked, strongholdLastBackupTime } = activeProfile
+    let activeProfile
+    let lastBackupDate
+    let lastBackupDateFormatted
+    let color
+    let strongholdStatusMessage
 
-    const lastBackupDate = new Date(strongholdLastBackupTime)
+    function setup() {
+        activeProfile = getActiveProfile()
+
+        const { isStrongholdLocked, strongholdLastBackupTime } = activeProfile
+        lastBackupDate = new Date(strongholdLastBackupTime)
+        color = lastBackupDate ? getBackupWarningColor(lastBackupDate) : 'red'
+        lastBackupDateFormatted = lastBackupDate ? diffDates(lastBackupDate, new Date()) : null
+        strongholdStatusMessage = isStrongholdLocked ? 'locked' : 'unlocked'
+    }
 
     // version
     let currentVersion = '0.0.1' // dummy
     let upToDate = Math.random() < 0.5 // dummy
-
-    let color = lastBackupDate ? getBackupWarningColor(lastBackupDate) : 'red'
-
-    // stronghold backup
-    let lastBackupDateFormatted = lastBackupDate ? diffDates(lastBackupDate, new Date()) : null
-    $: strongholdStatusMessage = isStrongholdLocked ? 'locked' : 'unlocked'
 
     const popupState = getContext('popupState')
 
@@ -27,9 +32,22 @@
         popupState.set({
             active: true,
             type,
-            props: { upToDate, currentVersion, lastBackupDate, lastBackupDateFormatted, isStrongholdLocked },
+            props: {
+                upToDate,
+                currentVersion,
+                lastBackupDate,
+                lastBackupDateFormatted,
+                isStrongholdLocked: activeProfile.isStrongholdLocked,
+            },
         })
     }
+
+    const unsubscribe = profiles.subscribe(() => {
+        setup()
+    })
+
+    onMount(setup)
+    onDestroy(unsubscribe)
 </script>
 
 <div data-label="security" class="p-8 flex-grow flex flex-col">
@@ -53,14 +71,14 @@
         <SecurityTile
             title={locale('views.dashboard.security.stronghold_status.title')}
             message={locale(`views.dashboard.security.stronghold_status.${strongholdStatusMessage}`)}
-            color={isStrongholdLocked ? 'blue' : 'red'}
+            color={activeProfile.isStrongholdLocked ? 'blue' : 'red'}
             icon="lock"
             onClick={() => openPopup('password')}
-            classes={isStrongholdLocked ? 'pointer-events-all' : 'pointer-events-none'} />
+            classes={activeProfile.isStrongholdLocked ? 'pointer-events-all' : 'pointer-events-none'} />
         <!-- Stronghold backup -->
         <SecurityTile
             title={locale('views.dashboard.security.stronghold_backup.title')}
-            message={strongholdLastBackupTime ? locale(`dates.${lastBackupDateFormatted.unit}`, {
+            message={activeProfile.strongholdLastBackupTime ? locale(`dates.${lastBackupDateFormatted.unit}`, {
                       values: { time: lastBackupDateFormatted.value },
                   }) : locale('popups.backup.not_backed_up')}
             onClick={() => openPopup('backup')}
