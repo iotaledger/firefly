@@ -32,7 +32,9 @@
 
     const totalBalance = writable(DUMMY_WALLET_BALANCE)
     const accounts = writable([])
-    const transactions = writable([])
+    const transactions = derived(accounts, ($accounts) => {
+        return getLatestMessages($accounts)
+    })
     const selectedAccountId = writable(null)
     const selectedAccount = derived([selectedAccountId, accounts], ([$selectedAccountId, $accounts]) =>
         $accounts.find((acc) => acc.id === $selectedAccountId)
@@ -152,7 +154,6 @@
 
                             const account = prepareAccountInfo(storedAccount, meta)
                             accounts.update((accounts) => [...accounts, account])
-                            transactions.set(getLatestMessages(accountsResponse.payload))
 
                             if (idx === accountsResponse.payload.length - 1) {
                                 totalBalance.update((totalBalance) =>
@@ -206,7 +207,41 @@
 
     function syncAccounts(payload) {
         api.syncAccounts({
-            onSuccess(response) {},
+            onSuccess(syncAccountsResponse) {
+                const _update = (existingPayload, newPayload, prop) => {
+                    const existingPayloadMap = existingPayload.reduce((acc, object) => {
+                        acc[object[prop]] = object
+
+                        return acc
+                    }, {})
+
+                    const newPayloadMap = newPayload.reduce((acc, object) => {
+                        acc[object[prop]] = object
+
+                        return acc
+                    }, {})
+
+                    return Object.values(Object.assign({}, existingPayloadMap, newPayloadMap))
+                }
+
+                const syncedAccounts = syncAccountsResponse.payload
+
+                accounts.update((storedAccounts) => {
+                    return storedAccounts.map((storedAccount) => {
+                        // TODO: SyncAccounts response should have "id" instead of "accountId" (for consistency)
+                        const syncedAccount = syncedAccounts.find((_account) => _account.accountId === storedAccount.id)
+
+                        return Object.assign({}, storedAccount, {
+                            // Update deposit address
+                            depositAddress: syncedAccount.depositAddress,
+                            // If we have received a new address, simply add it;
+                            // If we have received an existing address, update the properties.
+                            addresses: _update(storedAccount.addresses, syncedAccount.addresses, 'address'),
+                            messages: _update(storedAccount.messages, syncedAccount.messages, 'id'),
+                        })
+                    })
+                })
+            },
             onError(error) {
                 console.error(error)
             },
@@ -258,16 +293,17 @@
             },
             {
                 onSuccess(response) {
-                    transactions.update((transactions) => [
-                        {
-                            ...response.payload,
-                            ...{
-                                internal: false,
-                                account: $accounts.find((account) => account.id === senderAccountId).index,
-                            },
-                            ...transactions,
-                        },
-                    ])
+                    accounts.update((_accounts) => {
+                        return _accounts.map((_account) => {
+                            if (_account.id === senderAccountId) {
+                                return Object.assign({}, _account, {
+                                    messages: [response.payload, ..._account.messages],
+                                })
+                            }
+
+                            return _account
+                        })
+                    })
                     _next(WalletState.Init)
                 },
                 onError(error) {
@@ -280,20 +316,21 @@
     function onInternalTransfer(senderAccountId, receiverAccountId, amount) {
         api.internalTransfer(senderAccountId, receiverAccountId, amount, {
             onSuccess(response) {
-                transactions.update((transactions) => [
-                    {
-                        ...response.payload,
-                        ...{
-                            internal: true,
-                            account: $accounts.find((account) => account.id === senderAccountId).index,
-                        },
-                        ...transactions,
-                    },
-                ])
+                accounts.update((_accounts) => {
+                    return _accounts.map((_account) => {
+                        if (_account.id === senderAccountId || _account.id === receiverAccountId) {
+                            return Object.assign({}, _account, {
+                                messages: [response.payload, ..._account.messages],
+                            })
+                        }
+
+                        return _account
+                    })
+                })
                 _next(WalletState.Init)
             },
             onError(response) {
-                console.log(response)
+                console.error(response)
             },
         })
     }
