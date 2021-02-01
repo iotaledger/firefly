@@ -9,7 +9,7 @@
     export let type
     export let title
     export let subtitle
-    export let qrData
+    export let data
 
     export let onSuccess
     export let onError
@@ -60,7 +60,6 @@
                 <Icon icon="close" classes="text-gray-800" />
             </button>
         </div>
-        <svelte:component this={types[type]} data={qrData} {locale} bind:active onSuccess={onSuccess}
-            onError={onError} />
+        <svelte:component this={types[type]} data={data} {locale} bind:active onSuccess={onSuccess} onError={onError} />
     </popup-content>
 </popup>

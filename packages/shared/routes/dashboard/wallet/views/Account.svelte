@@ -76,7 +76,7 @@
     }
 </script>
 
-<Popup bind:active={$showQrPopup} qrData={$account?.address} type="qr" title={locale('popups.qr.title')} />
+<Popup bind:active={$showQrPopup} data={$account?.address} type="qr" title={locale('popups.qr.title')} />
 <div class="w-full h-full flex flex-col flex-nowrap px-10 pb-10">
     <AccountNavigation {locale} on:next={_next} on:previous={_previous} accounts={navAccounts} />
     {#key $account}

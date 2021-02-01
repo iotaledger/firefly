@@ -7,7 +7,7 @@
 
     export let locale
     export let mobile
-    let restoring = false
+    let creatingAccount = false
     let showOpenLedgerDialog = true
     let hasOpenedLedger = false
     let simulator = true
@@ -34,8 +34,8 @@
 
     openLedgerApp()
 
-    function restore() {
-        restoring = true
+    function createAccount() {
+        creatingAccount = true
         api.createAccount(
             {
                 clientOptions: { node, nodes },
@@ -43,24 +43,11 @@
             },
             {
                 onSuccess(createAccountResponse) {
-                    api.syncAccounts({
-                        onSuccess(syncAccountsResponse) {
-                            let balance = 0
-                            for (const syncedAccount of syncAccountsResponse.payload) {
-                                const accountBalance = syncedAccount.addresses.reduce((total, address) => total + address.balance, 0)
-                                balance += accountBalance
-                            }
-                            restoring = false
-                            dispatch('next', { balance })
-                        },
-                        onError(error) {
-                            restoring = false
-                            console.error(error)
-                        }
-                    })
+                    creatingAccount = false
+                    dispatch('next')
                 },
                 onError(error) {
-                    restoring = false
+                    creatingAccount = false
                     console.error(error);
                 }
             }
@@ -81,16 +68,16 @@
 {:else}
 {#if !hasOpenedLedger}
 <Popup bind:active={showOpenLedgerDialog} {locale} type="ledgerNotConnected"
-    data={locale('views.import_from_ledger.ledger_not_connected')} />
+    data={locale('views.setup_ledger.connect')} />
 {/if}
 <OnboardingLayout onBackClick={handleBackClick}>
     <div slot="leftpane__content">
-        <Text type="h2" classes="mb-5">{locale('views.import_from_firefly_ledger.title')}</Text>
-        <Text type="p" secondary classes="mb-8">{locale('views.import_from_firefly_ledger.body')}</Text>
+        <Text type="h2" classes="mb-5">{locale('views.setup_ledger.title')}</Text>
+        <Text type="p" secondary classes="mb-8">{locale('views.setup_ledger.body')}</Text>
     </div>
     <div slot="leftpane__action">
-        <Button classes="w-full" disabled={restoring} onClick={restore}>
-            {locale(restoring ? 'views.import_from_firefly_ledger.restoring' : 'actions.restore')}
+        <Button classes="w-full" disabled={creatingAccount} onClick={createAccount}>
+            {locale(creatingAccount ? 'actions.continue' : 'actions.continue')}
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-end items-center">

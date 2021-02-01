@@ -33,7 +33,9 @@ export enum AppRoute {
     Legal = 'legal',
     Language = 'language',
     Setup = 'setup',
+    Create = 'create',
     Password = 'password',
+    LedgerSetup = 'ledgerSetup',
     Protect = 'protect',
     Backup = 'backup',
     Import = 'import',
@@ -51,6 +53,11 @@ export enum SetupType {
     Seed = 'seed',
     Stronghold = 'stronghold',
     Seedvault = 'seedvault',
+}
+
+export enum AccountType {
+    Software = 'Software',
+    Ledger = 'Ledger'
 }
 
 /**
@@ -102,10 +109,18 @@ export const routerNext = (event) => {
             if (setupType) {
                 walletSetupType.set(setupType)
                 if (setupType === SetupType.New) {
-                    nextRoute = AppRoute.Password
+                    nextRoute = AppRoute.Create
                 } else if (setupType === SetupType.Import) {
                     nextRoute = AppRoute.Import
                 }
+            }
+            break
+        case AppRoute.Create:
+            const { accountType } = params
+            if (accountType === AccountType.Software) {
+                nextRoute = AppRoute.Password
+            } else if (accountType === AccountType.Ledger) {
+                nextRoute = AppRoute.LedgerSetup
             }
             break
         case AppRoute.Password:

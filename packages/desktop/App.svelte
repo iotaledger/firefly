@@ -13,7 +13,9 @@
         Welcome,
         Legal,
         Setup,
+        Create,
         Language,
+        Ledger,
         Password,
         Protect,
         Backup,
@@ -69,55 +71,57 @@
 <!-- empty div to avoid auto-purge removing dark classes -->
 <div class="scheme-dark" />
 {#if !$isLocaleLoaded || splash}
-    <Splash />
+<Splash />
 {:else}
-    <!-- dummy toggles -->
-    <div class="dummy-toggles flex flex-row">
-        <Toggle storeItem={darkMode} />
-    </div>
-    <!--  -->
-    <Route route={AppRoute.Welcome}>
-        <Welcome on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Legal}>
-        <Legal on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Language}>
-        <Language on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Setup}>
-        <Setup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Password}>
-        <Password on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Protect} transition={false}>
-        <Protect on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Backup} transition={false}>
-        <Backup
-            on:next={routerNext}
-            on:previous={routerPrevious}
-            on:requestMnemonic={requestMnemonic}
-            mobile={$mobile}
-            locale={$_} />
-    </Route>
-    <Route route={AppRoute.Import} transition={false}>
-        <Import on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Balance}>
-        <Balance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Migrate}>
-        <Migrate on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
-    </Route>
-    <Route route={AppRoute.Congratulations}>
-        <Congratulations on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
-    </Route>
-    <Route route={AppRoute.Dashboard}>
-        <Dashboard mobile={$mobile} locale={$_} {goto} />
-    </Route>
-    <Route route={AppRoute.Login}>
-        <Login on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} {goto} />
-    </Route>
+<!-- dummy toggles -->
+<div class="dummy-toggles flex flex-row">
+    <Toggle storeItem={darkMode} />
+</div>
+<!--  -->
+<Route route={AppRoute.Welcome}>
+    <Welcome on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+</Route>
+<Route route={AppRoute.Legal}>
+    <Legal on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+</Route>
+<Route route={AppRoute.Language}>
+    <Language on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+</Route>
+<Route route={AppRoute.Setup}>
+    <Setup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+</Route>
+<Route route={AppRoute.Create}>
+    <Create on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+</Route>
+<Route route={AppRoute.LedgerSetup}>
+    <Ledger on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+</Route>
+<Route route={AppRoute.Password}>
+    <Password on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+</Route>
+<Route route={AppRoute.Protect} transition={false}>
+    <Protect on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+</Route>
+<Route route={AppRoute.Backup} transition={false}>
+    <Backup on:next={routerNext} on:previous={routerPrevious} on:requestMnemonic={requestMnemonic} mobile={$mobile}
+        locale={$_} />
+</Route>
+<Route route={AppRoute.Import} transition={false}>
+    <Import on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+</Route>
+<Route route={AppRoute.Balance}>
+    <Balance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+</Route>
+<Route route={AppRoute.Migrate}>
+    <Migrate on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
+</Route>
+<Route route={AppRoute.Congratulations}>
+    <Congratulations on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
+</Route>
+<Route route={AppRoute.Dashboard}>
+    <Dashboard mobile={$mobile} locale={$_} {goto} />
+</Route>
+<Route route={AppRoute.Login}>
+    <Login on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} {goto} />
+</Route>
 {/if}
