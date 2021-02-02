@@ -3,7 +3,6 @@
         Init = 'init',
         Manage = 'manage',
         Send = 'send',
-        Transfer = 'transfer',
         Receive = 'receive',
     }
 </script>
@@ -49,7 +48,6 @@
                 }
                 break
             case AccountState.Send:
-            case AccountState.Transfer:
             case AccountState.Manage:
                 // do logic here
                 nextState = AccountState.Init

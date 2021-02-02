@@ -6,7 +6,7 @@
     import { mnemonic, updateStrongholdBackupTime } from 'shared/lib/app'
     import { strongholdPassword } from 'shared/lib/app'
     import { api } from 'shared/lib/wallet'
-    import { DEFAULT_NODE as node, DEFAULT_NODES as nodes } from 'shared/lib/network'
+    import { DEFAULT_NODES as nodes, network } from 'shared/lib/network'
 
     export let locale
     export let mobile
@@ -87,7 +87,7 @@
                             onSuccess(response) {
                                 api.createAccount(
                                     {
-                                        clientOptions: { node, nodes }
+                                        clientOptions: { nodes, network: $network }
                                     },
                                     {
                                         onSuccess() {
