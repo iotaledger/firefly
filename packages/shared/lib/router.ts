@@ -83,6 +83,11 @@ const history = writable<Array<string>>([])
 let walletSetupType = writable<SetupType>(null)
 
 /**
+ * Onboarding/setup account type
+ */
+let walletSetupAccountType = writable<AccountType>(null)
+
+/**
  * Navigate to initial route
  */
 export const initRouter = () => {
@@ -129,11 +134,15 @@ export const routerNext = (event) => {
             break
         case AppRoute.Create:
             const { accountType } = params
+            walletSetupAccountType.set(accountType)
             if (accountType === AccountType.Software) {
                 nextRoute = AppRoute.Password
             } else if (accountType === AccountType.Ledger) {
                 nextRoute = AppRoute.LedgerSetup
             }
+            break
+        case AppRoute.LedgerSetup:
+            nextRoute = AppRoute.Protect
             break
         case AppRoute.Password:
             const { password } = params
@@ -146,7 +155,8 @@ export const routerNext = (event) => {
             const { pin } = params
             if (pin) {
                 walletPin.set(pin)
-                if (get(walletSetupType) === SetupType.Mnemonic || get(walletSetupType) === SetupType.Stronghold) {
+                const walletSetupType_ = get(walletSetupType)
+                if ((walletSetupType_ === SetupType.Mnemonic || walletSetupType_ === SetupType.Stronghold) || get(walletSetupAccountType) === AccountType.Ledger) {
                     nextRoute = AppRoute.Congratulations
                 } else {
                     nextRoute = AppRoute.Backup
