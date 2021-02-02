@@ -3,27 +3,59 @@ import type { AccountIdentifier } from './account'
 
 type MessageVersion = 1;
 
-export interface UnsignedTransaction {
+export interface UTXOInput {
+    type: 'UTXO'
+    data: string
+}
+
+export type Input = UTXOInput
+
+export interface OutputAddress {
+    type: 'Ed25519',
+    data: string
+}
+
+export interface SignatureLockedSingle {
+    type: 'SignatureLockedSingle'
+    data: {
+        address: OutputAddress
+        amount: number
+    }
+}
+
+export interface SignatureLockedDustAllowance {
+    type: 'SignatureLockedDustAllowance'
+    data: {
+        address: OutputAddress
+        amount: number
+    }
+}
+
+export type Output = SignatureLockedSingle | SignatureLockedDustAllowance
+
+export interface TransactionEssence {
     inputs: Input[]
     outputs: Output[]
-    payload?: Payload[]
+    // TODO: Add proper type for essence payload
+    payload?: any
 }
 
-export interface Input {
-    transactionId: string
-    outputIndex: number
+export interface MessagePayload {
+    type: 'Transaction',
+    data: {
+        essence: TransactionEssence
+        unlock_blocks: {
+            type: 'Signature',
+            data: {
+                type: 'Ed25519',
+                data: {
+                    public_key: number[],
+                    signature: number[]
+                }
+            }
+        }
+    }
 }
-
-export interface Output {
-    address: string
-    amount: number
-}
-
-export interface SignedTransaction {
-    unsignedTransaction: UnsignedTransaction
-}
-
-export type Payload = SignedTransaction
 
 export interface Message {
     broadcasted: boolean;
@@ -37,7 +69,7 @@ export interface Message {
     timestamp: string;
     value: 0;
     version: MessageVersion;
-    payload: Payload;
+    payload: MessagePayload;
 }
 
 export enum MessageType {
@@ -64,12 +96,12 @@ export interface Transfer {
 
 export function reattach(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier, messageId: string) {
     return bridge({
-      actorId: __ids.actorId,
-      id: __ids.messageId,
-      cmd: 'Reattach',
-      payload: {
-        accountId,
-        messageId
-      }
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        cmd: 'Reattach',
+        payload: {
+            accountId,
+            messageId
+        }
     })
-  }
+}
