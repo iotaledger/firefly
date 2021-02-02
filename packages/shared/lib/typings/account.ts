@@ -31,11 +31,10 @@ export interface Account {
   clientOptions: ClientOptions;
   index: number;
   lastSyncedAt: string;
-  // TODO: Change to camelCase
-  signer_type: {
+  signerType: {
     type: 'Stronghold'
   };
-  storage_path: string;
+  storagePath: string;
   messages: Message[];
   addresses: Address[];
 }
@@ -54,8 +53,7 @@ export interface AccountToCreate {
 }
 
 export interface SyncedAccount {
-  // TODO: Rename to "id"
-  accountId: string;
+  id: string;
   depositAddress: Address;
   isEmpty: boolean;
   addresses: Address[];
