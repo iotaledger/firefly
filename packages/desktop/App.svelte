@@ -1,8 +1,10 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { fetchMarketData } from 'shared/lib/marketData'
+    import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { setupI18n, isLocaleLoaded, dir, _ } from 'shared/lib/i18n'
     import { darkMode, mobile, logged } from 'shared/lib/app'
+    import { language } from 'shared/lib/settings'
     import { api } from 'shared/lib/wallet'
     import { goto } from 'shared/lib/helpers'
     import { initRouter, routerNext, routerPrevious, AppRoute } from 'shared/lib/router'
@@ -31,7 +33,7 @@
         document.dir = $dir
     }
     let splash = true
-    setupI18n()
+    setupI18n({ withLocale: $language })
     onMount(async () => {
         setTimeout(() => {
             splash = false
@@ -39,6 +41,7 @@
         }, 100)
 
         await fetchMarketData()
+        await pollNetworkStatus()
     })
 </script>
 

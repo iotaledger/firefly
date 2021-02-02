@@ -30,7 +30,8 @@
                         clip-rule={path.clipRule || ''}
                         stroke-width={path.strokeWidth || ''}
                         stroke-linecap={path.strokeLinecap || ''}
-                        stroke={path.strokeColor || ''} />
+                        stroke={path.strokeColor || ''}
+                        opacity={path.opacity || 1} />
                 {/each}
             </svg>
         </div>
@@ -53,7 +54,8 @@
                     clip-rule={path.clipRule || ''}
                     stroke-width={path.strokeWidth || ''}
                     stroke-linecap={path.strokeLinecap || ''}
-                    stroke={path.strokeColor || ''} />
+                    stroke={path.strokeColor || ''}
+                    opacity={path.opacity || 1} />
             {/each}
         </svg>
     {/if}

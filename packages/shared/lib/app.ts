@@ -32,10 +32,16 @@ export const strongholdPassword = writable<string>(null)
  */
 export const mnemonic = writable<Array<string>>(null)
 
+interface SendParams {
+    amount: number;
+    address: string;
+    message: string;
+}
+
 /**
- * App language
+ * Input paramaters for sending transactions
  */
-export const locale = persistent<string>('locale', null)
+export const sendParams = writable<SendParams>({ amount: 0, address: '', message: ''})
 
 /**
  * Dummy

@@ -133,92 +133,96 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Nápověda",
+                "title": "Help & Information",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
-            "profileDetails": {
-                "title": "Podrobnosti profilu",
-                "description": "Temp"
+            "profile": {
+                "title": "Profile",
+                "description": ""
+            },
+            "sync": {
+                "title": "Sync accounts",
+                "description": ""
             },
             "theme": {
                 "title": "Motiv",
-                "description": "Temp"
+                "description": ""
             },
             "language": {
                 "title": "Jazyk",
-                "description": "Temp"
+                "description": ""
             },
             "currency": {
                 "title": "Měna",
-                "description": "Temp"
+                "description": ""
             },
             "notifications": {
                 "title": "Oznámení",
-                "description": "Temp"
+                "description": ""
             },
             "exportStronghold": {
                 "title": "Exportovat Stronghold",
-                "description": "Temp"
+                "description": ""
             },
             "appLock": {
                 "title": "Zámek aplikace",
-                "description": "Temp"
+                "description": ""
             },
             "changePassword": {
-                "title": "Změnit heslo",
-                "description": "Temp"
+                "title": "Change password",
+                "description": ""
             },
             "resyncAccounts": {
-                "title": "Znovu synchronizovat účty",
-                "description": "Temp"
+                "title": "Resync accounts",
+                "description": ""
             },
             "resetWallet": {
-                "title": "Resetovat peněženku",
-                "description": "Temp"
+                "title": "Reset wallet",
+                "description": ""
             },
             "deepLinks": {
-                "title": "Hluboké odkazy",
-                "description": "Temp"
+                "title": "Deep links",
+                "description": ""
             },
             "developerMode": {
-                "title": "Vývojářský režim",
-                "description": "Temp"
+                "title": "Developer mode",
+                "description": ""
             },
             "nodeSettings": {
-                "title": "Nastavení Node",
-                "description": "Temp"
+                "title": "Node settings",
+                "description": ""
             },
             "proofOfWork": {
-                "title": "Proof of Work",
-                "description": "Temp"
+                "title": "Proof of work",
+                "description": ""
             },
             "errorLog": {
-                "title": "Záznam chyb",
-                "description": "Temp"
+                "title": "Error log",
+                "description": ""
             },
             "stateExport": {
-                "title": "Export stavu",
-                "description": "Temp"
+                "title": "State export",
+                "description": ""
             },
             "troubleshoot": {
                 "title": "Řešení problémů",
-                "description": "Temp"
+                "description": ""
             },
             "documentation": {
                 "title": "Dokumentace",
-                "description": "Temp"
+                "description": ""
             },
             "faq": {
                 "title": "Časté dotazy",
-                "description": "Temp"
+                "description": ""
             },
             "discord": {
                 "title": "Discord",
-                "description": "Temp"
+                "description": ""
             },
             "about": {
                 "title": "O aplikaci",
-                "description": "Temp"
+                "description": ""
             }
         },
         "login": {
@@ -226,9 +230,21 @@
             "incorrect_attempts": "{attempts, plural, one {1 nesprávný pokus} other {# nesprávné pokusy}}"
         }
     },
+    "popups": {
+        "password": {
+            "title": "Password required",
+            "subtitle": "Please provide your wallet’s password to unlock stronghold."
+        },
+        "qr": {
+            "title": "Your QR code"
+        }
+    },
     "actions": {
         "continue": "Pokračovat",
         "back": "Zpět",
+        "cancel": "Cancel",
+        "close": "Close",
+        "save": "Save",
         "import_seed": "Importovat existující seed",
         "import_wallet": "Importovat existující peněženku",
         "create_wallet": "Vytvořit novou peněženku",
@@ -247,17 +263,30 @@
         "import_from_file": "Importovat ze souboru",
         "send": "Odeslat",
         "receive": "Přijmout",
+        "create": "Create",
         "begin_transfer": "Zahájit přenos",
         "try_again": "Zkuste to znovu",
         "visit_discord": "Navštivte Discord",
         "drag_drop": "Přetáhněte",
         "import_extentions": ".stronghold nebo .kdbx soubor",
         "choose_file": "Vyberte soubor",
-        "drop_here": "Přesuňte soubor sem"
+        "drop_here": "Přesuňte soubor sem",
+        "syncAll": "Sync all",
+        "export": "Export",
+        "exportNewStronghold": "Export a new Stronghold",
+        "enableDeepLinks": "Enable deep links",
+        "enableDeveloperMode": "Enable developer mode",
+        "enableNotifications": "Enable notifications",
+        "exportState": "Export state",
+        "outsourceProofOfWork": "Outsource proof of work",
+        "unlock": "Unlock"
     },
     "general": {
         "password": "Heslo",
         "confirm_password": "Potvrďte heslo",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "confirmNewPassword": "Confirm new password",
         "your_seed": "Váš seed",
         "recovery_phrase": "Fráze pro obnovení",
         "recent_activity": "Nedávná aktivita",
@@ -267,7 +296,9 @@
         "send_to_address": "Poslat na adresu",
         "scan_qr_or_paste": "Naskenujte QR kód nebo vložte adresu",
         "transfer_between_accounts": "Převod mezi účty",
-        "move_funds_between_accounts": "Převod mezi vašimi účty",
+        "move_funds_between_accounts": "Move funds between accounts",
+        "manage_account": "Manage Account",
+        "customize_account": "Customize your account",
         "account": "Účet",
         "sending_to_address": "Odeslání na adresu",
         "amount": "Částka",
@@ -279,6 +310,7 @@
         "share_address": "Sdílet adresu",
         "your_address": "Vaše adresa",
         "generate_new_address": "Vytvořit novou adresu",
+        "copy_address": "Copy Address",
         "have_text_backup": "Mám textovou zálohu",
         "have_file_backup": "Mám zálovací soubor",
         "enter_seed_or_phrase": "Zadejte obnovovací frázi nebo seed",
@@ -294,6 +326,14 @@
         "incoming": "Příchozí",
         "outgoing": "Odchozí",
         "accounts": "Účty",
-        "profiles": "Profily"
+        "automaticNodeSelection": "Automatic node selection",
+        "manualNodeSelection": "Manual node selection",
+        "profiles": "Profily",
+        "create_account": "Create an account",
+        "account_name": "Account name",
+        "latest_transactions": "Latest Transactions",
+        "transactions": "Transactions",
+        "security": "Zabezpečení",
+        "account_address": "Account Address"
     }
 }

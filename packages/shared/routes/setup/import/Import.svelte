@@ -3,7 +3,7 @@
     import { Transition } from 'shared/components'
     import { Import, TextImport, FileImport, LedgerImport, FireflyLedgerImport, ConfirmBalance, BackupPassword, Success } from './views/'
     import { api } from 'shared/lib/wallet'
-    import { DEFAULT_NODE as node, DEFAULT_NODES as nodes } from 'shared/lib/network'
+    import { DEFAULT_NODES as nodes } from 'shared/lib/network'
 
     export let locale
     export let mobile
@@ -17,7 +17,7 @@
         FireflyLedgerImport = 'fireflyLedgerImport',
         ConfirmBalance = 'confirmBalance',
         BackupPassword = 'backupPassword',
-        Success = 'Success'
+        Success = 'Success',
     }
 
     const dispatch = createEventDispatcher()
@@ -98,7 +98,7 @@
                             },
                             onError(error) {
                                 reject(error)
-                            }
+                            },
                         })
                     })
                     nextState = ImportState.Success

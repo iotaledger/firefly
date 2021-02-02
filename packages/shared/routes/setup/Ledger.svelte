@@ -1,17 +1,30 @@
 <script>
-    import { createEventDispatcher, onDestroy } from 'svelte'
+    import { createEventDispatcher, onDestroy, setContext } from 'svelte'
     import { writable } from 'svelte/store'
     import { OnboardingLayout, Illustration, Text, Button, Popup } from 'shared/components'
     import { api } from 'shared/lib/wallet'
-    import { DEFAULT_NODE as node, DEFAULT_NODES as nodes } from 'shared/lib/network'
+    import { DEFAULT_NODES as nodes } from 'shared/lib/network'
 
     export let locale
     export let mobile
+    const popupState = writable({
+        active: true,
+        type: 'ledgerNotConnected',
+        props: {
+            message: locale('views.setup_ledger.connect')
+        }
+    })
+    setContext('popupState', popupState)
     let creatingAccount = false
-    let showOpenLedgerDialog = true
-    let hasOpenedLedger = false
     let simulator = true
     let checkIfLedgerIsOpened = true
+    let isLedgerOpened = false
+
+    popupState.subscribe(state => {
+        if (!(state.active || isLedgerOpened)) {
+            handleBackClick()
+        }
+    })
 
     onDestroy(() => {
         checkIfLedgerIsOpened = false
@@ -22,7 +35,8 @@
     function openLedgerApp() {
         api.openLedgerApp(simulator, {
             onSuccess() {
-                hasOpenedLedger = true
+                isLedgerOpened = true
+                popupState.set({ active: false })
             },
             onError() {
                 if (checkIfLedgerIsOpened) {
@@ -38,7 +52,7 @@
         creatingAccount = true
         api.createAccount(
             {
-                clientOptions: { node, nodes },
+                clientOptions: { nodes },
                 signerType: { type: simulator ? 'LedgerNanoSimulator' : 'LedgerNano' }
             },
             {
@@ -57,18 +71,13 @@
     function handleBackClick() {
         dispatch('previous')
     }
-
-    $: if (!showOpenLedgerDialog) {
-        handleBackClick()
-    }
 </script>
 
 {#if mobile}
 <div>foo</div>
 {:else}
-{#if !hasOpenedLedger}
-<Popup bind:active={showOpenLedgerDialog} {locale} type="ledgerNotConnected"
-    data={locale('views.setup_ledger.connect')} />
+{#if $popupState.active}
+<Popup type={$popupState.type} props={$popupState.props} {locale} />
 {/if}
 <OnboardingLayout onBackClick={handleBackClick}>
     <div slot="leftpane__content">

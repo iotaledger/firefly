@@ -133,92 +133,96 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Ohjetiedot",
+                "title": "Help & Information",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
-            "profileDetails": {
-                "title": "Profiilitiedot",
-                "description": "Temp"
+            "profile": {
+                "title": "Profile",
+                "description": ""
+            },
+            "sync": {
+                "title": "Sync accounts",
+                "description": ""
             },
             "theme": {
                 "title": "Teema",
-                "description": "Temp"
+                "description": ""
             },
             "language": {
                 "title": "Kieli",
-                "description": "Temp"
+                "description": ""
             },
             "currency": {
                 "title": "Valuutta",
-                "description": "Temp"
+                "description": ""
             },
             "notifications": {
                 "title": "Ilmoitukset",
-                "description": "Temp"
+                "description": ""
             },
             "exportStronghold": {
                 "title": "Vie Stronghold",
-                "description": "Temp"
+                "description": ""
             },
             "appLock": {
                 "title": "Sovelluslukko",
-                "description": "Temp"
+                "description": ""
             },
             "changePassword": {
-                "title": "Vaihda salasana",
-                "description": "Temp"
+                "title": "Change password",
+                "description": ""
             },
             "resyncAccounts": {
-                "title": "Uudelleensynkronoi tilit",
-                "description": "Temp"
+                "title": "Resync accounts",
+                "description": ""
             },
             "resetWallet": {
-                "title": "Tyhjennä lompakko",
-                "description": "Temp"
+                "title": "Reset wallet",
+                "description": ""
             },
             "deepLinks": {
-                "title": "Syvälinkit",
-                "description": "Temp"
+                "title": "Deep links",
+                "description": ""
             },
             "developerMode": {
-                "title": "Kehittäjätila",
-                "description": "Temp"
+                "title": "Developer mode",
+                "description": ""
             },
             "nodeSettings": {
-                "title": "Node-asetukset",
-                "description": "Temp"
+                "title": "Node settings",
+                "description": ""
             },
             "proofOfWork": {
-                "title": "Laskenta-asetukset",
-                "description": "Temp"
+                "title": "Proof of work",
+                "description": ""
             },
             "errorLog": {
-                "title": "Virheloki",
-                "description": "Temp"
+                "title": "Error log",
+                "description": ""
             },
             "stateExport": {
-                "title": "Tilan vienti",
-                "description": "Temp"
+                "title": "State export",
+                "description": ""
             },
             "troubleshoot": {
                 "title": "Vianmääritys",
-                "description": "Temp"
+                "description": ""
             },
             "documentation": {
                 "title": "Dokumentaatio",
-                "description": "Temp"
+                "description": ""
             },
             "faq": {
                 "title": "Usein kysytyt kysymykset",
-                "description": "Temp"
+                "description": ""
             },
             "discord": {
                 "title": "Discord",
-                "description": "Temp"
+                "description": ""
             },
             "about": {
                 "title": "Lisätietoja",
-                "description": "Temp"
+                "description": ""
             }
         },
         "login": {
@@ -226,9 +230,21 @@
             "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
         }
     },
+    "popups": {
+        "password": {
+            "title": "Password required",
+            "subtitle": "Please provide your wallet’s password to unlock stronghold."
+        },
+        "qr": {
+            "title": "Your QR code"
+        }
+    },
     "actions": {
         "continue": "Jatka",
         "back": "Takaisin",
+        "cancel": "Cancel",
+        "close": "Close",
+        "save": "Save",
         "import_seed": "Tuo olemassaoleva seed-merkkijono",
         "import_wallet": "Tuo olemassaoleva lompakko",
         "create_wallet": "Luo uusi lompakko",
@@ -247,17 +263,30 @@
         "import_from_file": "Tuo tiedostosta",
         "send": "Lähetä",
         "receive": "Vastaanota",
+        "create": "Create",
         "begin_transfer": "Aloita siirto",
         "try_again": "Yritä uudelleen",
         "visit_discord": "Vieraile Discordissa",
         "drag_drop": "Vedä ja pudota",
         "import_extentions": ".stronghold tai .kdbx tiedosto",
         "choose_file": "Valitse tiedosto",
-        "drop_here": "Pudota tiedosto tähän"
+        "drop_here": "Pudota tiedosto tähän",
+        "syncAll": "Sync all",
+        "export": "Export",
+        "exportNewStronghold": "Export a new Stronghold",
+        "enableDeepLinks": "Enable deep links",
+        "enableDeveloperMode": "Enable developer mode",
+        "enableNotifications": "Enable notifications",
+        "exportState": "Export state",
+        "outsourceProofOfWork": "Outsource proof of work",
+        "unlock": "Unlock"
     },
     "general": {
         "password": "Salasana",
         "confirm_password": "Vahvista salasana",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "confirmNewPassword": "Confirm new password",
         "your_seed": "Sinun seed-merkkijonosi",
         "recovery_phrase": "Palautuslauseke",
         "recent_activity": "Viimeaikainen toiminta",
@@ -267,7 +296,9 @@
         "send_to_address": "Lähetä osoitteeseen",
         "scan_qr_or_paste": "Skannaa QR-koodi tai liitä osoite",
         "transfer_between_accounts": "Siirrä tilien välillä",
-        "move_funds_between_accounts": "Siirrä varoja tilijesi välillä",
+        "move_funds_between_accounts": "Move funds between accounts",
+        "manage_account": "Manage Account",
+        "customize_account": "Customize your account",
         "account": "Tili",
         "sending_to_address": "Lähetys osoitteeseen",
         "amount": "Määrä",
@@ -279,6 +310,7 @@
         "share_address": "Jaa osoite",
         "your_address": "Osoitteesi",
         "generate_new_address": "Luo uusi osoite",
+        "copy_address": "Copy Address",
         "have_text_backup": "Minulla on tekstimuotoinen varmuuskopio",
         "have_file_backup": "Minulla on tiedostomuotoinen varmuuskopio",
         "enter_seed_or_phrase": "Syötä palautuslauseke tai seed-merkkijono",
@@ -294,6 +326,14 @@
         "incoming": "Saapuva",
         "outgoing": "Lähtevä",
         "accounts": "Tilit",
-        "profiles": "Profiles"
+        "automaticNodeSelection": "Automatic node selection",
+        "manualNodeSelection": "Manual node selection",
+        "profiles": "Profiles",
+        "create_account": "Create an account",
+        "account_name": "Account name",
+        "latest_transactions": "Latest Transactions",
+        "transactions": "Transactions",
+        "security": "Suojaus",
+        "account_address": "Account Address"
     }
 }

@@ -2,8 +2,10 @@
     import { createEventDispatcher } from 'svelte'
     import { OnboardingLayout, Illustration, Text, Button, Input, Radio } from 'shared/components'
     import { createProfile, setActiveProfile } from 'shared/lib/app'
-    import { initialise } from 'shared/lib/wallet'
+    import { initialise, getStoragePath } from 'shared/lib/wallet'
     import { SetupType } from 'shared/lib/router'
+    import { network } from 'shared/lib/network'
+    import { Network } from 'shared/lib/typings/client'
 
     export let locale
     export let mobile
@@ -11,7 +13,8 @@
     const dispatch = createEventDispatcher()
 
     let profileName = ''
-    let mainnet = true
+    
+    let mainnet = $network === Network.Mainnet
 
     const MAX_PROFILE_NAME_LENGTH = 250
 
@@ -26,14 +29,19 @@
                 profile = createProfile(profileName)
                 setActiveProfile(profile.id)
 
-                initialise(profile.id, profile.name)
+                return window['Electron'].getUserDataPath().then((path) => {
+                    initialise(profile.id, getStoragePath(path, profile.name))
 
-                dispatch('next', { setupType })
+                    network.set(mainnet ? Network.Mainnet : Network.Devnet)
+
+                    dispatch('next', { setupType })
+                })
             } catch (error) {
                 console.error(error)
             }
         }
     }
+
     function handleBackClick() {
         dispatch('previous')
     }

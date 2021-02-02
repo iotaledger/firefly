@@ -1,6 +1,18 @@
 import { readable, writable, get, derived } from 'svelte/store'
 import { logged, notification, walletPin, strongholdPassword, profiles } from 'shared/lib/app'
-import { setRoute } from 'shared/lib/helpers'
+
+/**
+ * Sets next route
+ *
+ * @method setRoute
+ *
+ * @param {string} path
+ *
+ * @returns {void}
+ */
+export const setRoute = (path: string): void => {
+    view.set(path)
+}
 
 /**
  * Application path based on location hash

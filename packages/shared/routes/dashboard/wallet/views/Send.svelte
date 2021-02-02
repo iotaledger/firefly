@@ -1,32 +1,41 @@
 <script lang="typescript">
     import { createEventDispatcher, getContext } from 'svelte'
     import { Text, Button, Dropdown, Amount, Address } from 'shared/components'
+    import { sendParams } from 'shared/lib/app'
 
     export let locale
-    export let internal = false
     export let send
     export let internalTransfer
 
     const dispatch = createEventDispatcher()
     const accounts = getContext('walletAccounts')
 
-    $: accountsDropdownItems = $accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balance}` }))
-    $: from = $accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balance}` }))[0]
-    let toAccount = $accounts.map((acc) => ({ value: acc.index, label: `${acc.name} • ${acc.balance}` }))[0]
-    let toAddress = ''
-    let amount = undefined
+    enum SEND_TYPE {
+        EXTERNAL = 'send_payment',
+        INTERNAL = 'move_funds',
+    }
 
+    let selectedSendType = SEND_TYPE.EXTERNAL
+
+    $: accountsDropdownItems = $accounts.map((acc) => ({ value: acc.id, label: `${acc.name} • ${acc.balance}` }))
+    $: from = $accounts.map((acc) => ({ value: acc.id, label: `${acc.name} • ${acc.balance}` }))[0]
+    let account = $accounts.map((acc) => ({ value: acc.id, label: `${acc.name} • ${acc.balance}` }))[0]
+
+
+    const handleSendTypeClick = (type) => {
+        selectedSendType = type
+    }
     const handleFromSelect = (item) => {
         from = item
     }
     const handleToSelect = (item) => {
-        toAccount = item
+        account = item
     }
     const handleSendClick = () => {
-        if (internal) {
-            internalTransfer(from.value, toAccount.value, amount)
+        if (selectedSendType === SEND_TYPE.INTERNAL) {
+            internalTransfer(from.value, account.value, $sendParams.amount)
         } else {
-            send(from.value, toAddress, amount)
+            send(from.value, $sendParams.address, $sendParams.amount)
         }
     }
     const handleBackClick = () => {
@@ -36,8 +45,12 @@
 
 <div class="w-full h-full flex flex-col justify-between p-8">
     <div>
-        <div class="flex flex-row mb-6">
-            <Text type="h5">{locale('general.send_funds')}</Text>
+        <div class="flex flex-row mb-6 space-x-4">
+            {#each Object.values(SEND_TYPE) as type}
+                <button on:click={() => handleSendTypeClick(type)}>
+                    <Text type="h5" disabled={type !== selectedSendType}>{locale(`general.${type}`)}</Text>
+                </button>
+            {/each}
         </div>
         <div class="w-full h-full flex flex-col justify-between">
             <div>
@@ -49,15 +62,15 @@
                         onSelect={handleFromSelect} />
                 </div>
                 <div class="w-full mb-8 block">
-                    <Amount bind:amount {locale} classes="mb-4" />
-                    {#if internal}
+                    <Amount bind:amount={$sendParams.amount} {locale} classes="mb-4" />
+                    {#if selectedSendType === SEND_TYPE.INTERNAL}
                         <Dropdown
-                            value={toAccount?.label || ''}
+                            value={account?.label || ''}
                             label={locale('general.to')}
                             items={accountsDropdownItems}
                             onSelect={handleToSelect} />
                     {:else}
-                        <Address bind:address={toAddress} {locale} label={locale('general.to')} />
+                        <Address bind:address={$sendParams.address} {locale} label={locale('general.to')} />
                     {/if}
                 </div>
                 <div class="w-full mb-8 block">

@@ -177,27 +177,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "async-stream"
-version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3670df70cbc01729f901f94c887814b3c68db038aad1329a418bae178bc5295c"
-dependencies = [
- "async-stream-impl",
- "futures-core",
-]
-
-[[package]]
-name = "async-stream-impl"
-version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a3548b8efc9f8e8a5a0a2808c5bd8451a9031b9e5b879a79590304ae928b0a70"
-dependencies = [
- "proc-macro2 1.0.24",
- "quote 1.0.8",
- "syn 1.0.60",
-]
-
-[[package]]
 name = "async-trait"
 version = "0.1.42"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -310,7 +289,7 @@ dependencies = [
 [[package]]
 name = "bee-ledger"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#14c7cac8569dd7d52d346765c1ebaa21eea1ddea"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#1369e656f4ec824d8996b338e4ec4b713e5595a3"
 dependencies = [
  "async-trait",
  "bee-common",
@@ -335,7 +314,7 @@ dependencies = [
 [[package]]
 name = "bee-message"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#14c7cac8569dd7d52d346765c1ebaa21eea1ddea"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#1369e656f4ec824d8996b338e4ec4b713e5595a3"
 dependencies = [
  "bech32",
  "bee-common",
@@ -351,7 +330,7 @@ dependencies = [
 [[package]]
 name = "bee-network"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#14c7cac8569dd7d52d346765c1ebaa21eea1ddea"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#1369e656f4ec824d8996b338e4ec4b713e5595a3"
 dependencies = [
  "async-trait",
  "bee-runtime",
@@ -370,7 +349,7 @@ dependencies = [
 [[package]]
 name = "bee-pow"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#14c7cac8569dd7d52d346765c1ebaa21eea1ddea"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#1369e656f4ec824d8996b338e4ec4b713e5595a3"
 dependencies = [
  "bee-crypto",
  "bee-ternary",
@@ -381,7 +360,7 @@ dependencies = [
 [[package]]
 name = "bee-protocol"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#14c7cac8569dd7d52d346765c1ebaa21eea1ddea"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#1369e656f4ec824d8996b338e4ec4b713e5595a3"
 dependencies = [
  "async-channel",
  "async-trait",
@@ -416,7 +395,7 @@ dependencies = [
 [[package]]
 name = "bee-rest-api"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#14c7cac8569dd7d52d346765c1ebaa21eea1ddea"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#1369e656f4ec824d8996b338e4ec4b713e5595a3"
 dependencies = [
  "async-trait",
  "bech32",
@@ -487,7 +466,7 @@ dependencies = [
 [[package]]
 name = "bee-snapshot"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#14c7cac8569dd7d52d346765c1ebaa21eea1ddea"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#1369e656f4ec824d8996b338e4ec4b713e5595a3"
 dependencies = [
  "async-trait",
  "bee-common",
@@ -517,7 +496,7 @@ dependencies = [
 [[package]]
 name = "bee-tangle"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#14c7cac8569dd7d52d346765c1ebaa21eea1ddea"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#1369e656f4ec824d8996b338e4ec4b713e5595a3"
 dependencies = [
  "async-trait",
  "bee-common",
@@ -672,9 +651,9 @@ dependencies = [
 
 [[package]]
 name = "bumpalo"
-version = "3.5.0"
+version = "3.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f07aa6688c702439a1be0307b6a94dffe1168569e45b9500c1372bc580740d59"
+checksum = "099e596ef14349721d9016f6b80dd3419ea1bf289ab9b44df8e4dfd3a005d5d9"
 
 [[package]]
 name = "byte-tools"
@@ -789,9 +768,9 @@ dependencies = [
 
 [[package]]
 name = "chunked_transfer"
-version = "1.3.0"
+version = "1.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7477065d45a8fe57167bf3cf8bcd3729b54cfcb81cca49bda2d038ea89ae82ca"
+checksum = "fff857943da45f546682664a79488be82e69e43c1a7a2307679ab9afb3a66d2e"
 
 [[package]]
 name = "cipher"
@@ -1027,9 +1006,9 @@ dependencies = [
 
 [[package]]
 name = "data-encoding"
-version = "2.3.1"
+version = "2.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "993a608597367c6377b258c25d7120740f00ed23a2252b729b1932dd7866f908"
+checksum = "3ee2393c4a91429dffb4bedf19f4d6abf27d8a732c8ce4980305d782e5426d57"
 
 [[package]]
 name = "digest"
@@ -1091,7 +1070,7 @@ dependencies = [
  "rand 0.7.3",
  "serde 1.0.123",
  "serde_bytes",
- "sha2 0.9.2",
+ "sha2 0.9.3",
  "zeroize",
 ]
 
@@ -1104,7 +1083,7 @@ dependencies = [
  "curve25519-dalek",
  "hex",
  "rand_core 0.5.1",
- "sha2 0.9.2",
+ "sha2 0.9.3",
  "thiserror",
 ]
 
@@ -1764,7 +1743,7 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "0.5.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#4e494c35cbec935d8276e6d04989bc536f18ab95"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#e7b731ac3f204df615aa195111425b5127845287"
 dependencies = [
  "bee-common",
  "bee-crypto",
@@ -1789,7 +1768,7 @@ dependencies = [
 [[package]]
 name = "iota-core"
 version = "0.2.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#4e494c35cbec935d8276e6d04989bc536f18ab95"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#e7b731ac3f204df615aa195111425b5127845287"
 dependencies = [
  "bee-common",
  "bee-message",
@@ -1809,7 +1788,7 @@ dependencies = [
  "getrandom 0.2.2",
  "hmac 0.10.1",
  "pbkdf2",
- "sha2 0.9.2",
+ "sha2 0.9.3",
  "unicode-normalization",
 ]
 
@@ -1822,14 +1801,14 @@ dependencies = [
  "getrandom 0.2.2",
  "hmac 0.10.1",
  "pbkdf2",
- "sha2 0.9.2",
+ "sha2 0.9.3",
  "unicode-normalization",
 ]
 
 [[package]]
 name = "iota-crypto"
 version = "0.2.0"
-source = "git+https://github.com/iotaledger/crypto.rs?branch=dev#c2514969c3f6693b86425ec84bada84b3ebea645"
+source = "git+https://github.com/iotaledger/crypto.rs?branch=dev#93f4120f9d08fd2158ec8fb283025724f74e6781"
 dependencies = [
  "blake2b_simd",
  "ed25519-zebra",
@@ -1857,7 +1836,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#73da1e744355c2cc9ae527bfeeb34416692f0768"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#dffad0aa64dbc26a16c99d95ee542ea23e635a7a"
 dependencies = [
  "async-trait",
  "backtrace",
@@ -2024,9 +2003,9 @@ dependencies = [
 
 [[package]]
 name = "libc"
-version = "0.2.83"
+version = "0.2.84"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7eb0c4e9c72ee9d69b767adebc5f4788462a3b45624acd919475c92597bcaf4f"
+checksum = "1cca32fa0182e8c0989459524dc356b8f2b5c10f1b9eb521b7d182c03cf8c5ff"
 
 [[package]]
 name = "libloading"
@@ -2089,7 +2068,7 @@ dependencies = [
  "rand 0.7.3",
  "ring",
  "rw-stream-sink",
- "sha2 0.9.2",
+ "sha2 0.9.3",
  "smallvec",
  "thiserror",
  "unsigned-varint 0.6.0",
@@ -2151,7 +2130,7 @@ dependencies = [
  "prost",
  "prost-build",
  "rand 0.7.3",
- "sha2 0.9.2",
+ "sha2 0.9.3",
  "snow",
  "static_assertions",
  "x25519-dalek",
@@ -2356,7 +2335,7 @@ dependencies = [
  "digest 0.9.0",
  "generic-array 0.14.4",
  "multihash-derive",
- "sha2 0.9.2",
+ "sha2 0.9.3",
  "unsigned-varint 0.5.1",
 ]
 
@@ -3527,9 +3506,9 @@ dependencies = [
 
 [[package]]
 name = "sha-1"
-version = "0.9.2"
+version = "0.9.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ce3cdf1b5e620a498ee6f2a171885ac7e22f0e12089ec4b3d22b84921792507c"
+checksum = "f4b312c3731e3fe78a185e6b9b911a7aa715b8e31cce117975219aab2acf285d"
 dependencies = [
  "block-buffer 0.9.0",
  "cfg-if 1.0.0",
@@ -3552,9 +3531,9 @@ dependencies = [
 
 [[package]]
 name = "sha2"
-version = "0.9.2"
+version = "0.9.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6e7aab86fe2149bad8c507606bdb3f4ef5e7b2380eb92350f56122cca72a42a8"
+checksum = "fa827a14b29ab7f44778d14a88d3cb76e949c45083f7dbfa507d0cb699dc12de"
 dependencies = [
  "block-buffer 0.9.0",
  "cfg-if 1.0.0",
@@ -3610,7 +3589,7 @@ checksum = "00606a5ef176f987d1d4c8dd59b5e8554d5ff27749730d58d656c7741d96a2a8"
 dependencies = [
  "ed25519-dalek",
  "hmac 0.9.0",
- "sha2 0.9.2",
+ "sha2 0.9.3",
 ]
 
 [[package]]
@@ -3671,7 +3650,7 @@ dependencies = [
  "rand_core 0.5.1",
  "ring",
  "rustc_version",
- "sha2 0.9.2",
+ "sha2 0.9.3",
  "subtle 2.4.0",
  "x25519-dalek",
 ]
@@ -3909,9 +3888,9 @@ checksum = "cda74da7e1a664f795bb1f8a87ec406fb89a02522cf6e50620d016add6dbbf5c"
 
 [[package]]
 name = "tokio"
-version = "1.1.0"
+version = "1.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8efab2086f17abcddb8f756117665c958feee6b2e39974c2f1600592ab3a4195"
+checksum = "6714d663090b6b0acb0fa85841c6d66233d150cdb2602c8f9b8abb03370beb3f"
 dependencies = [
  "autocfg",
  "bytes",
@@ -3985,18 +3964,16 @@ dependencies = [
 
 [[package]]
 name = "tokio-util"
-version = "0.6.2"
+version = "0.6.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "feb971a26599ffd28066d387f109746df178eff14d5ea1e235015c5601967a4b"
+checksum = "ebb7cb2f00c5ae8df755b252306272cd1790d39728363936e01827e11f0b017b"
 dependencies = [
- "async-stream",
  "bytes",
  "futures-core",
  "futures-sink",
  "log",
  "pin-project-lite",
  "tokio",
- "tokio-stream",
 ]
 
 [[package]]
@@ -4076,7 +4053,7 @@ dependencies = [
  "input_buffer",
  "log",
  "rand 0.8.3",
- "sha-1 0.9.2",
+ "sha-1 0.9.3",
  "url",
  "utf-8",
 ]

@@ -3,7 +3,14 @@ import type { Address } from './address'
 import type { AccountIdentifier, Account, SyncedAccount } from './account'
 import type { Message } from './message'
 
+export interface CommunicationIds {
+  messageId: string;
+  actorId: string;
+}
+
 export interface BridgeMessage {
+  actorId: string;
+  // TODO: rename to messageId for clarity
   id: string
   cmd: string
   payload?: any
@@ -43,6 +50,7 @@ export enum ResponseTypes {
   UnusedAddress = 'UnusedAddress',
   IsLatestAddressUnused = 'IsLatestAddressUnused',
   AreAllLatestAddressesUnused = 'AreAllLatestAddressesUnused',
+  UpdatedAlias = 'UpdatedAlias',
   OpenedLedgerApp = 'OpenedLedgerApp'
 }
 
@@ -72,6 +80,7 @@ export type StrongholdStatusResponse = Response<ResponseTypes.StrongholdStatus, 
 export type UnusedAddressResponse = Response<ResponseTypes.UnusedAddress, void>
 export type IsLatestAddressUnusedResponse = Response<ResponseTypes.IsLatestAddressUnused, void>
 export type AreLatestAddressesUnusedResponse = Response<ResponseTypes.AreAllLatestAddressesUnused, void>
+export type SetAliasResponse = Response<ResponseTypes.UpdatedAlias, void>
 
 export type MessageResponse = RemovedAccountResponse |
   CreatedAccountResponse |
@@ -97,6 +106,7 @@ export type MessageResponse = RemovedAccountResponse |
   UnusedAddressResponse |
   IsLatestAddressUnusedResponse |
   AreLatestAddressesUnusedResponse |
+  SetAliasResponse |
   // events
   Event<ErrorEventPayload> | Event<BalanceChangeEventPayload> | Event<TransactionEventPayload>
 

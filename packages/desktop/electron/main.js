@@ -1,22 +1,49 @@
-const { app, ipcMain, BrowserWindow } = require('electron')
+const { app, dialog, ipcMain, protocol, BrowserWindow } = require('electron')
 const path = require('path')
 const Keychain = require('./keychain');
 
+/**
+ * Define wallet windows
+ */
+const windows = {
+    main: null,
+};
+
+/**
+ * Set environment mode
+ */
+const devMode = process.env.NODE_ENV === 'development';
+
 function createWindow() {
+    /**
+     * Register iota file protocol
+     */
+    try {
+        protocol.registerFileProtocol('iota', (request, callback) => {
+            callback(request.url.replace('iota:/', app.getAppPath()).split('?')[0].split('#')[0]);
+        });
+    } catch (error) {
+        console.log(error); //eslint-disable-line no-console
+    }
+
     // Create the browser window.
-    const mainWindow = new BrowserWindow({
+    windows.main = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
             nodeIntegration: false,
+            enableRemoteModule: false,
             preload: path.join(__dirname, 'preload.js'),
         },
     })
 
     // and load the index.html of the app.
-    mainWindow.loadFile('../public/index.html')
+    windows.main.loadFile('../public/index.html')
 
-    mainWindow.webContents.openDevTools()
+    // Enable dev tools only in developer mode
+    if (devMode) {
+        windows.main.webContents.openDevTools()
+    }
 }
 
 app.whenReady().then(createWindow)
@@ -55,3 +82,83 @@ ipcMain.handle('keychain-set', (_e, key, content) => {
 ipcMain.handle('keychain-remove', (_e, key) => {
     return Keychain.remove(key)
 })
+
+// Dialogs
+ipcMain.handle('show-open-dialog', (_e, options) => {
+    return dialog.showOpenDialog(options)
+})
+
+// Miscellaneous
+ipcMain.handle('get-path', (_e, path) => {
+    const allowedPaths = [
+        'userData',
+    ]
+    if (allowedPaths.indexOf(path) === -1) {
+        throw Error(`Path ${path} is not allowed`)
+    }
+    return app.getPath(path)
+})
+
+/**
+ * Define deep link state
+ */
+let deepLinkUrl = null;
+
+/**
+ * Create a single instance only
+ */
+const isFirstInstance = app.requestSingleInstanceLock();
+
+if (!isFirstInstance) {
+    app.quit();
+}
+
+app.on('second-instance', (_e, args) => {
+    if (windows.main) {
+        if (args.length > 1) {
+            const params = args.find((arg) => arg.startsWith('iota://'));
+
+            if (params) {
+                windows.main.webContents.send('deepLink-params', params);
+            }
+        }
+        if (windows.main.isMinimized()) {
+            windows.main.restore();
+        }
+        windows.main.focus();
+    }
+});
+
+/**
+ * Register iota:// protocol for deep links
+ * Set Firefly as the default handler for iota:// protocol
+ */
+protocol.registerSchemesAsPrivileged([{ scheme: 'iota', privileges: { secure: true, standard: true } }])
+if (process.defaultApp) {
+    if (process.argv.length >= 2) {
+        app.setAsDefaultProtocolClient('iota', process.execPath, [path.resolve(process.argv[1])])
+    }
+} else {
+    app.setAsDefaultProtocolClient('iota')
+}
+
+/**
+ * Proxy deep link event to the wallet application
+ */
+app.on('open-url', (event, url) => {
+    event.preventDefault()
+    deepLinkUrl = url;
+    if (windows.main) {
+        windows.main.webContents.send('deepLink-params', url)
+    }
+});
+
+/**
+ * Proxy deep link event to the wallet application
+ */
+ipcMain.on('deepLink-request', () => {
+    if (deepLinkUrl) {
+        windows.main.webContents.send('deepLink-params', deepLinkUrl)
+        deepLinkUrl = null
+    }
+});
