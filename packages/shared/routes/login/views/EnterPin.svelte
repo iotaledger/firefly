@@ -64,7 +64,7 @@
             PincodeManager.verify(profile.id, pinCode.toString())
                 .then((verified) => {
                     if (verified === true) {
-                        window['Electron'].getUserDataPath().then((path) => {
+                        return window['Electron'].getUserDataPath().then((path) => {
                             initialise(profile.id, getStoragePath(path, profile.name))
                             api.setStoragePassword(pinCode.toString(), {
                                 onSuccess() {

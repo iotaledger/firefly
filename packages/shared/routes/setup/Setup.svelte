@@ -29,7 +29,7 @@
                 profile = createProfile(profileName)
                 setActiveProfile(profile.id)
 
-                window['Electron'].getUserDataPath().then((path) => {
+                return window['Electron'].getUserDataPath().then((path) => {
                     initialise(profile.id, getStoragePath(path, profile.name))
 
                     network.set(mainnet ? Network.Mainnet : Network.Devnet)

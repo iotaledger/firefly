@@ -94,7 +94,7 @@ ipcMain.handle('get-path', (_e, path) => {
         'userData',
     ]
     if (allowedPaths.indexOf(path) === -1) {
-        return null
+        throw Error(`Path ${path} is not allowed`)
     }
     return app.getPath(path)
 })

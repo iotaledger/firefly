@@ -39,9 +39,9 @@ window.Electron = {
      *
      * @method getUserDataPath
      *
-     * @returns {string}
+     * @returns {Promise}
      */
-    getUserDataPath: () => ipcRenderer.invoke('get-path', 'userData').then((path) => (path)),
+    getUserDataPath: () => ipcRenderer.invoke('get-path', 'userData'),
     /**
      * Add native window wallet event listener
      * @param {string} event - Target event name
