@@ -59,7 +59,7 @@
     <div class="w-full text-center my-6 px-8">
         <Text overrideColor type="h5" classes="mb-2 text-{color}-600">
             {#if !lastBackupDate}
-                {locale('popups.backup.not_backed_up')}
+                {locale('popups.backup.not_backed_up_description')}
             {:else}
                 {locale('popups.backup.last_backup', {
                     values: {
