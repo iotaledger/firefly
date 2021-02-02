@@ -16,7 +16,7 @@
     })
     setContext('popupState', popupState)
     let creatingAccount = false
-    let simulator = true
+    let simulator = false
     let checkIfLedgerIsOpened = true
     let isLedgerOpened = false
 
