@@ -15,10 +15,10 @@
     function handleSubmit() {
         api.setStrongholdPassword(password, {
             onSuccess(response) {
+                // Close popup
+                popupState.set({ active: false })
                 if ('function' === typeof onSuccess) {
                     onSuccess(response)
-                    // Close popup
-                    popupState.set({ active: false })
                 }
             },
             onError(error) {
