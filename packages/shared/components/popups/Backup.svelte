@@ -19,7 +19,7 @@
             popupState.set({ active: false })
             popupState.set({ active: true, type: 'password', props: { onSuccess: triggerBackup } })
         } else {
-            triggerUpdate()
+            triggerBackup()
         }
     }
 
