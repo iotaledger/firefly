@@ -49,7 +49,6 @@ function createWindow() {
         // TODO: Add whitelist links for T&C, privacy policy and help
         const externalWhitelist = [
             'privacy@iota.org',
-            'google.com',
             'explorer.iota.org',
         ]
 
