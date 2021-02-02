@@ -5,6 +5,7 @@
     import Password from './Password.svelte'
     import Version from './Version.svelte'
     import Backup from './Backup.svelte'
+    import DeleteAccount from './DeleteAccount.svelte'
     import AddressHistory from './AddressHistory.svelte'
     import { Icon } from 'shared/components'
 
@@ -19,6 +20,7 @@
         password: Password,
         version: Version,
         backup: Backup,
+        deleteAccount: DeleteAccount,
         addressHistory: AddressHistory,
     }
 
