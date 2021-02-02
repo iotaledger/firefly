@@ -15,7 +15,7 @@
         min-height: 92px;
         &.size-m,
         &.size-l {
-            min-height: 70%;
+            height: 70%;
             max-height: 140px;
         }
     }

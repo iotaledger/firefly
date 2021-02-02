@@ -12,12 +12,13 @@
         dropdown = false
     }
 
-    items = sortItems ? items.sort((a, b) => (a.label > b.label) ? 1 : -1) : items
+    items = sortItems ? items.sort((a, b) => (a.label > b.label ? 1 : -1)) : items
 </script>
 
 <style type="text/scss">
     dropdown-input {
         transition: border-color 0.25s;
+        min-height: 48px;
         :global(svg) {
             right: 12px; // TODO: unable to use tailwind inset
         }
@@ -48,7 +49,7 @@
     <Text type="p" classes="mb-2" smaller>{label}</Text>
 {/if}
 <dropdown-input
-    class="relative flex items-center mb-5 py-4 pr-8 pl-4 w-full 
+    class="relative flex items-center py-4 pr-8 pl-4 w-full 
                 bg-white border border-solid border-gray-300 hover:border-gray-500 rounded-xl cursor-pointer"
     on:click={(e) => {
         e.stopPropagation()
