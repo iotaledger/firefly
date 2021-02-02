@@ -3,7 +3,6 @@
         Init = 'init',
         Manage = 'manage',
         Send = 'send',
-        Transfer = 'transfer',
         Receive = 'receive',
     }
 </script>
@@ -11,7 +10,7 @@
 <script lang="typescript">
     import { createEventDispatcher, getContext, setContext } from 'svelte'
     import { writable } from 'svelte/store'
-    import { Popup, DashboardPane } from 'shared/components'
+    import { DashboardPane } from 'shared/components'
     import { AccountNavigation, AccountBalance, AccountActions, AccountHistory } from '.'
 
     export let locale
@@ -23,9 +22,7 @@
     const dispatch = createEventDispatcher()
 
     const state = writable(AccountState.Init)
-    const showQrPopup = writable(false)
     setContext('accountState', state)
-    setContext('showQrPopup', showQrPopup)
 
     const account = getContext('selectedAccount')
     const accounts = getContext('walletAccounts')
@@ -51,7 +48,6 @@
                 }
                 break
             case AccountState.Send:
-            case AccountState.Transfer:
             case AccountState.Manage:
                 // do logic here
                 nextState = AccountState.Init
@@ -77,7 +73,6 @@
     }
 </script>
 
-<Popup bind:active={$showQrPopup} qrData={$account?.address} type="qr" title={locale('popups.qr.title')} />
 <div class="w-full h-full flex flex-col flex-nowrap px-10 pb-10">
     <AccountNavigation {locale} on:next={_next} on:previous={_previous} accounts={navAccounts} />
     {#key $account}
