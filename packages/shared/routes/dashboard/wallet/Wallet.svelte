@@ -123,13 +123,14 @@
     }
 
     function prepareAccountInfo(account, meta) {
-        const { id, index, alias } = account
+        const { id, index, alias, signerType } = account
         const { balance, address } = meta
 
         return Object.assign({}, account, {
             id,
             index,
             name: alias,
+            signerType,
             balance: formatUnit(balance, 0),
             balanceEquiv: `${convertToFiat(balance, $currencies[CurrencyTypes.USD], $exchangeRates[$currency])} ${$currency}`,
             address,
@@ -146,6 +147,7 @@
                     outgoing: 0,
                 }
 
+                let signerType = null
                 for (const [idx, storedAccount] of accountsResponse.payload.entries()) {
                     getAccountMeta(storedAccount.id, (err, meta) => {
                         if (!err) {
@@ -154,6 +156,12 @@
                             _totalBalance.outgoing += meta.outgoing
 
                             const account = prepareAccountInfo(storedAccount, meta)
+                            if (signerType === null) {
+                                signerType = account.signerType.type
+                                if (!signerType.startsWith('Ledger')) {
+                                    checkStrongholdStatus()
+                                }
+                            }
                             accounts.update((accounts) => [...accounts, account])
 
                             if (idx === accountsResponse.payload.length - 1) {
@@ -362,16 +370,7 @@
         })
     }
 
-    $: {
-        if ($deepLinkRequestActive && get(deepLinking)) {
-            _next(WalletState.Send)
-            deepLinkRequestActive.set(false)
-        }
-    }
-
-    onMount(() => {
-        getAccounts()
-
+    function checkStrongholdStatus() {
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
                 if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
@@ -391,6 +390,17 @@
                 console.error(error)
             },
         })
+    }
+
+    $: {
+        if ($deepLinkRequestActive && get(deepLinking)) {
+            _next(WalletState.Send)
+            deepLinkRequestActive.set(false)
+        }
+    }
+
+    onMount(() => {
+        getAccounts()
     })
 </script>
 
