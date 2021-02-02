@@ -33,12 +33,12 @@ function createWindow() {
         webPreferences: {
             nodeIntegration: false,
             enableRemoteModule: false,
-            preload: path.join(__dirname, 'preload.js'),
+            preload: path.join(devMode ? __dirname : app.getAppPath(), 'preload.js'),
         },
     })
 
     // and load the index.html of the app.
-    windows.main.loadFile('../public/index.html')
+    windows.main.loadFile(devMode ? '../public/index.html' : '../index.html')
 
     // Enable dev tools only in developer mode
     if (devMode) {
