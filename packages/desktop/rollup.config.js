@@ -9,6 +9,7 @@ import serve from 'rollup-plugin-serve'
 import { terser } from 'rollup-plugin-terser'
 import sveltePreprocess from 'svelte-preprocess'
 import copy from 'rollup-plugin-copy'
+import nativePlugin from 'rollup-plugin-natives'
 
 import builtins from 'rollup-plugin-node-builtins'
 import globals from 'rollup-plugin-node-globals'
@@ -19,8 +20,8 @@ const isDev = process.env.NODE_ENV === 'development'
 const port = 3000
 const projectRootDir = path.resolve(__dirname)
 
-// Plugins definition
-const plugins = [
+// Plugins definition for code that runs in the renderer process
+const rendererPlugins = [
     json(),
     svelte({
         dev: isDev,
@@ -49,8 +50,22 @@ const plugins = [
     builtins(),
 ]
 
+// Plugins definition for code that runs in the main process
+const mainPlugins = [
+    // This plugin needs to be first to avoid errors with the binaries
+    nativePlugin({
+        copyTo: 'public/build/nativeLibs',
+        // Path to the same folder, relative to the output bundle js
+        destDir: './nativeLibs',
+        dlopen: false,
+    }),
+    //ts()
+    resolve(),
+    commonjs(),
+]
+
 if (isDev) {
-    plugins.push(
+    rendererPlugins.push(
         serve({
             contentBase: ['public'],
             historyApiFallback: true, // for SPAs
@@ -59,38 +74,66 @@ if (isDev) {
         livereload({ watch: './public' })
     )
 } else {
-    plugins.push(terser({}))
+    mainPlugins.push(terser({}))
+    rendererPlugins.push(terser({}))
 }
 
-module.exports = {
-    input: 'main.js',
-    output: {
-        name: 'bundle',
-        file: 'public/build/bundle.js',
-        sourcemap: isDev,
-        format: 'iife',
+module.exports = [
+    // Main process
+    {
+        input: 'electron/main.js',
+        output: {
+            name: 'mainBundle',
+            file: 'public/build/main.js',
+            sourcemap: !isDev,
+            format: 'cjs',
+        },
+        external: ['electron', 'path'],
+        plugins: mainPlugins,
     },
-    moduleContext: (id) => {
-        // In order to match native module behaviour, Rollup
-        // sets `this` as `undefined` at the top level of
-        // modules. Rollup also outputs a warning if a module
-        // tries to access `this` at the top level. The
-        // following modules use `this` at the top level and
-        // expect it to be the global `window` object, so we
-        // tell Rollup to set `this = window` for these modules.
-        const thisAsWindowForModules = [
-            'node_modules/intl-messageformat/lib/core.js',
-            'node_modules/intl-messageformat/lib/compiler.js',
-            'node_modules/intl-messageformat/lib/formatters.js',
-            'node_modules/intl-format-cache/lib/index.js',
-            'node_modules/intl-messageformat-parser/lib/parser.js',
-            'node_modules/intl-messageformat-parser/lib/skeleton.js',
-            'node_modules/intl-messageformat-parser/lib/normalize.js',
-        ]
+    // Preload script
+    {
+        input: 'electron/preload.js',
+        output: {
+            name: 'preloadBundle',
+            file: 'public/build/preload.js',
+            sourcemap: !isDev,
+            format: 'cjs',
+        },
+        external: ['electron'],
+        plugins: mainPlugins,
+    },
+    // Renderer process
+    {
+        input: 'main.js',
+        output: {
+            name: 'rendererBundle',
+            file: 'public/build/index.js',
+            sourcemap: !isDev,
+            format: 'iife',
+        },
+        moduleContext: (id) => {
+            // In order to match native module behaviour, Rollup
+            // sets `this` as `undefined` at the top level of
+            // modules. Rollup also outputs a warning if a module
+            // tries to access `this` at the top level. The
+            // following modules use `this` at the top level and
+            // expect it to be the global `window` object, so we
+            // tell Rollup to set `this = window` for these modules.
+            const thisAsWindowForModules = [
+                'node_modules/intl-messageformat/lib/core.js',
+                'node_modules/intl-messageformat/lib/compiler.js',
+                'node_modules/intl-messageformat/lib/formatters.js',
+                'node_modules/intl-format-cache/lib/index.js',
+                'node_modules/intl-messageformat-parser/lib/parser.js',
+                'node_modules/intl-messageformat-parser/lib/skeleton.js',
+                'node_modules/intl-messageformat-parser/lib/normalize.js',
+            ]
 
-        if (thisAsWindowForModules.some((id_) => id.trimRight().endsWith(id_))) {
-            return 'window'
-        }
+            if (thisAsWindowForModules.some((id_) => id.trimRight().endsWith(id_))) {
+                return 'window'
+            }
+        },
+        plugins: rendererPlugins,
     },
-    plugins,
-}
+]
