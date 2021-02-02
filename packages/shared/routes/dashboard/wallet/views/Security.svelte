@@ -12,13 +12,14 @@
     let color
     let strongholdStatusMessage
 
+
     function setup() {
         activeProfile = getActiveProfile()
 
         const { isStrongholdLocked, strongholdLastBackupTime } = activeProfile
-        lastBackupDate = new Date(strongholdLastBackupTime)
-        color = lastBackupDate ? getBackupWarningColor(lastBackupDate) : 'red'
-        lastBackupDateFormatted = lastBackupDate ? diffDates(lastBackupDate, new Date()) : null
+        lastBackupDate = strongholdLastBackupTime ? new Date(strongholdLastBackupTime) : null
+        lastBackupDateFormatted = diffDates(lastBackupDate, new Date())
+        color = getBackupWarningColor(lastBackupDate)
         strongholdStatusMessage = isStrongholdLocked ? 'locked' : 'unlocked'
     }
 
