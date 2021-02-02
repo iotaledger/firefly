@@ -1,7 +1,8 @@
 <script lang="typescript">
-    import { getContext } from 'svelte'
+    import { getContext, onDestroy } from 'svelte'
     import { Text, SecurityTile } from 'shared/components'
     import { diffDates, getBackupWarningColor } from 'shared/lib/helpers'
+    import { api } from 'shared/lib/wallet'
 
     export let locale
 
@@ -18,17 +19,50 @@
 
     // stronghold status
     let strongholdLocked = Math.random() < 0.5 // dummy
+    let isLedgerOpened = false
+    let isDestroyed = false
+    let isCheckingLedger = false
     let color = getBackupWarningColor(lastBackupDate)
 
     // stronghold backup
     let lastBackupDateFormatted = lastBackupDate ? diffDates(lastBackupDate, new Date()) : null
     $: strongholdStatusMessage = strongholdLocked ? 'locked' : 'unlocked'
+    $: hardwareDeviceMessage = isLedgerOpened ? 'detected' : 'none_detected'
 
     const popupState = getContext('popupState')
+    const walletAccounts = getContext('walletAccounts')
 
     function openPopup(type) {
         popupState.set({ active: true, type, props: { upToDate, currentVersion, lastBackupDate, lastBackupDateFormatted } })
     }
+
+    function checkLedger(simulator) {
+        isCheckingLedger = true
+        api.openLedgerApp(simulator, {
+            onSuccess() {
+                isLedgerOpened = true
+                if (!isDestroyed) {
+                    setTimeout(() => checkLedger(simulator), 10000)
+                }
+            },
+            onError() {
+                isLedgerOpened = false
+                if (!isDestroyed) {
+                    setTimeout(() => checkLedger(simulator), 10000)
+                }
+            }
+        })
+    }
+
+    $: {
+        if (!isCheckingLedger && $walletAccounts.length > 0 && $walletAccounts[0].signerType.type.startsWith('Ledger')) {
+            checkLedger($walletAccounts[0].signerType.type === 'LedgerNanoSimulator')
+        }
+    }
+
+    onDestroy(() => {
+        isDestroyed = true
+    })
 </script>
 
 <div data-label="security" class="p-8 flex-grow flex flex-col">
@@ -44,7 +78,7 @@
         <!-- Hardware Device -->
         <SecurityTile
             title={locale('views.dashboard.security.hardware_device.title')}
-            message={locale('views.dashboard.security.hardware_device.none_detected')}
+            message={locale(`views.dashboard.security.hardware_device.${hardwareDeviceMessage}`)}
             color="gray"
             icon="chip"
             classes="pointer-events-none" />
@@ -60,9 +94,9 @@
         <SecurityTile
             title={locale('views.dashboard.security.stronghold_backup.title')}
             message={lastBackupDate ? locale(`dates.${lastBackupDateFormatted.unit}`, {
-                      values: { time: lastBackupDateFormatted.value },
-                  }) : locale('popups.backup.not_backed_up')}
-            onClick={() => openPopup('backup')}
+                    values: { time: lastBackupDateFormatted.value }
+                }) : locale('popups.backup.not_backed_up')}
+            onClick={()=> openPopup('backup')}
             icon="shield"
             {color} />
     </div>

@@ -269,7 +269,8 @@
                 },
                 "hardware_device": {
                     "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "none_detected": "None detected",
+                    "detected": "Detected"
                 },
                 "stronghold_status": {
                     "title": "Stronghold Status",
