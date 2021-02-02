@@ -10,6 +10,7 @@
         "start": "npm-run-all -p start:dev start:electron",
         "start:dev": "cross-env NODE_ENV=development rollup --config --watch",
         "start:electron": "cross-env NODE_ENV=development electron electron/main.js",
+        "start:electron-prod": "cross-env NODE_ENV=production electron public/build/main.js",
         "build": "cross-env NODE_ENV=production rollup --config"
     },
     "dependencies": {
