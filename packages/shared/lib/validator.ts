@@ -364,7 +364,6 @@ export default class ValidatorService {
             [ResponseTypes.Balance]: this.createBaseValidator().getFirst(),
             [ResponseTypes.BackupRestored]: this.createBaseValidator().getFirst(),
             [ResponseTypes.BackupSuccessful]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.BackupSuccessful]: this.createBaseValidator().getFirst(),
             [ResponseTypes.GeneratedMnemonic]: this.createBaseValidator().getFirst(),
             [ResponseTypes.StoredMnemonic]: this.createBaseValidator().getFirst(),
             [ResponseTypes.VerifiedMnemonic]: this.createBaseValidator().getFirst(),
@@ -373,12 +372,13 @@ export default class ValidatorService {
             [ResponseTypes.StoragePasswordSet]: this.createBaseValidator().getFirst(),
             [ResponseTypes.StrongholdStatus]: this.createBaseValidator().getFirst(),
             [ResponseTypes.GeneratedAddress]: this.createBaseValidator().add(new PayloadTypeValidator('object')).getFirst(),
-            [ResponseTypes.StrongholdStatusChange]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.StrongholdStatusChange]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.LatestAddress]: this.createBaseValidator().getFirst(),
             [ResponseTypes.SyncedAccount]: this.createBaseValidator().getFirst(),
             [ResponseTypes.UnusedAddress]: this.createBaseValidator().getFirst(),
             [ResponseTypes.IsLatestAddressUnused]: this.createBaseValidator().getFirst(),
             [ResponseTypes.AreAllLatestAddressesUnused]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.UpdatedAlias]: this.createBaseValidator().getFirst(),
             [ResponseTypes.Error]: this.createBaseValidator().getFirst()
         };
     }
@@ -392,6 +392,17 @@ export default class ValidatorService {
      */
     private createBaseValidator(): ValidatorChainBuilder {
         return new ValidatorChainBuilder().add(new TypeValidator()).add(new IdValidator(this.ids)).add(new ActionValidator())
+    }
+
+    /**
+     * Creates a base event validator
+     *
+     * @method createBaseEventValidator
+     *
+     * @returns {ValidatorChainBuilder}
+     */
+    private createBaseEventValidator(): ValidatorChainBuilder {
+        return new ValidatorChainBuilder().add(new TypeValidator()).add(new IdValidator(this.ids))
     }
 
     /**

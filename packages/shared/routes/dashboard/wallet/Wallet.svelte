@@ -14,7 +14,7 @@
     import { api, getLatestMessages } from 'shared/lib/wallet'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { deepLinking, currency } from 'shared/lib/settings'
-    import { DEFAULT_NODE as node, DEFAULT_NODES as nodes } from 'shared/lib/network'
+    import { DEFAULT_NODES as nodes } from 'shared/lib/network'
     import { formatUnit } from 'shared/lib/units'
     import { Popup, DashboardPane } from 'shared/components'
     import { Account, LineChart, WalletHistory, Security, CreateAccount, WalletBalance, WalletActions } from './views/'
@@ -32,13 +32,15 @@
 
     const totalBalance = writable(DUMMY_WALLET_BALANCE)
     const accounts = writable([])
-    const transactions = writable([])
+    const transactions = derived(accounts, ($accounts) => {
+        return getLatestMessages($accounts)
+    })
     const selectedAccountId = writable(null)
     const selectedAccount = derived([selectedAccountId, accounts], ([$selectedAccountId, $accounts]) =>
         $accounts.find((acc) => acc.id === $selectedAccountId)
     )
-    const showPasswordPopup = writable(false)
     const state = writable(WalletState.Init)
+    const popupState = writable({ active: false })
 
     setContext('walletBalance', totalBalance)
     setContext('walletAccounts', accounts)
@@ -46,7 +48,7 @@
     setContext('selectedAccountId', selectedAccountId)
     setContext('selectedAccount', selectedAccount)
     setContext('walletState', state)
-    setContext('showPasswordPopup', showPasswordPopup)
+    setContext('popupState', popupState)
 
     let stateHistory = []
     let isGeneratingAddress = false
@@ -60,6 +62,7 @@
             nextState = request
         } else {
             switch ($state) {
+                case WalletState.Account:
                 case WalletState.Init:
                     const { accountId } = request
                     if (accountId) {
@@ -152,7 +155,6 @@
 
                             const account = prepareAccountInfo(storedAccount, meta)
                             accounts.update((accounts) => [...accounts, account])
-                            transactions.set(getLatestMessages(accountsResponse.payload))
 
                             if (idx === accountsResponse.payload.length - 1) {
                                 totalBalance.update((totalBalance) =>
@@ -160,7 +162,11 @@
                                         balance: formatUnit(_totalBalance.balance, 2),
                                         incoming: formatUnit(_totalBalance.incoming, 2),
                                         outgoing: formatUnit(_totalBalance.outgoing, 2),
-                                        balanceEquiv: `${convertToFiat(_totalBalance.balance, $currencies[CurrencyTypes.USD], $exchangeRates[$currency])} ${$currency}`,
+                                        balanceEquiv: `${convertToFiat(
+                                            _totalBalance.balance,
+                                            $currencies[CurrencyTypes.USD],
+                                            $exchangeRates[$currency]
+                                        )} ${$currency}`,
                                     })
                                 )
                             }
@@ -202,7 +208,41 @@
 
     function syncAccounts(payload) {
         api.syncAccounts({
-            onSuccess(response) {},
+            onSuccess(syncAccountsResponse) {
+                const _update = (existingPayload, newPayload, prop) => {
+                    const existingPayloadMap = existingPayload.reduce((acc, object) => {
+                        acc[object[prop]] = object
+
+                        return acc
+                    }, {})
+
+                    const newPayloadMap = newPayload.reduce((acc, object) => {
+                        acc[object[prop]] = object
+
+                        return acc
+                    }, {})
+
+                    return Object.values(Object.assign({}, existingPayloadMap, newPayloadMap))
+                }
+
+                const syncedAccounts = syncAccountsResponse.payload
+
+                accounts.update((storedAccounts) => {
+                    return storedAccounts.map((storedAccount) => {
+                        // TODO: SyncAccounts response should have "id" instead of "accountId" (for consistency)
+                        const syncedAccount = syncedAccounts.find((_account) => _account.accountId === storedAccount.id)
+
+                        return Object.assign({}, storedAccount, {
+                            // Update deposit address
+                            depositAddress: syncedAccount.depositAddress,
+                            // If we have received a new address, simply add it;
+                            // If we have received an existing address, update the properties.
+                            addresses: _update(storedAccount.addresses, syncedAccount.addresses, 'address'),
+                            messages: _update(storedAccount.messages, syncedAccount.messages, 'id'),
+                        })
+                    })
+                })
+            },
             onError(error) {
                 console.error(error)
             },
@@ -213,7 +253,8 @@
         api.createAccount(
             {
                 alias,
-                clientOptions: { node, nodes },
+                // For subsequent accounts, use the network for any of the previous accounts
+                clientOptions: { nodes, network: $accounts[0].clientOptions.network },
             },
             {
                 onSuccess(createAccountResponse) {
@@ -254,16 +295,17 @@
             },
             {
                 onSuccess(response) {
-                    transactions.update((transactions) => [
-                        {
-                            ...response.payload,
-                            ...{
-                                internal: false,
-                                account: $accounts.find((account) => account.id === senderAccountId).index,
-                            },
-                            ...transactions,
-                        },
-                    ])
+                    accounts.update((_accounts) => {
+                        return _accounts.map((_account) => {
+                            if (_account.id === senderAccountId) {
+                                return Object.assign({}, _account, {
+                                    messages: [response.payload, ..._account.messages],
+                                })
+                            }
+
+                            return _account
+                        })
+                    })
                     _next(WalletState.Init)
                 },
                 onError(error) {
@@ -276,20 +318,46 @@
     function onInternalTransfer(senderAccountId, receiverAccountId, amount) {
         api.internalTransfer(senderAccountId, receiverAccountId, amount, {
             onSuccess(response) {
-                transactions.update((transactions) => [
-                    {
-                        ...response.payload,
-                        ...{
-                            internal: true,
-                            account: $accounts.find((account) => account.id === senderAccountId).index,
-                        },
-                        ...transactions,
-                    },
-                ])
+                accounts.update((_accounts) => {
+                    return _accounts.map((_account) => {
+                        if (_account.id === senderAccountId || _account.id === receiverAccountId) {
+                            return Object.assign({}, _account, {
+                                messages: [response.payload, ..._account.messages],
+                            })
+                        }
+
+                        return _account
+                    })
+                })
                 _next(WalletState.Init)
             },
             onError(response) {
-                console.log(response)
+                console.error(response)
+            },
+        })
+    }
+
+    function onSetAlias(newAlias) {
+        api.setAlias($selectedAccountId, newAlias, {
+            onSuccess(res) {
+                accounts.update((_accounts) => {
+                    return _accounts.map((account) => {
+                        if (account.id === $selectedAccountId) {
+                            return Object.assign({}, account, {
+                                // TODO: Remove "name" property from account and reference alias everywhere
+                                alias: newAlias,
+                                name: newAlias,
+                            })
+                        }
+
+                        return account
+                    })
+                })
+
+                _next(WalletState.Init)
+            },
+            onError(error) {
+                console.error(error)
             },
         })
     }
@@ -310,7 +378,7 @@
                     api.areLatestAddressesUnused({
                         onSuccess(response) {
                             if (!response.payload) {
-                                showPasswordPopup.set(true)
+                                popupState.set({ active: true, type: 'password', props: { onSuccess: syncAccounts } })
                             }
                         },
                         onError(error) {
@@ -326,13 +394,9 @@
     })
 </script>
 
-<Popup
-    bind:active={$showPasswordPopup}
-    {locale}
-    type="password"
-    title={locale('popups.password.title')}
-    subtitle={locale('popups.password.subtitle')}
-    onSuccess={syncAccounts} />
+{#if $popupState.active}
+    <Popup type={$popupState.type} props={$popupState.props} {locale} />
+{/if}
 {#if $state === WalletState.Account && $selectedAccountId}
     <Account
         on:next={_next}
@@ -340,6 +404,7 @@
         send={onSend}
         internalTransfer={onInternalTransfer}
         generateAddress={onGenerateAddress}
+        setAlias={onSetAlias}
         {locale} />
 {:else}
     <div class="w-full h-full flex flex-col p-10">
@@ -364,10 +429,10 @@
                 </div>
             </DashboardPane>
             <div class="flex flex-col w-2/3 h-full space-y-4">
-                <DashboardPane classes="w-full">
+                <DashboardPane classes="w-full h-1/2">
                     <LineChart />
                 </DashboardPane>
-                <div class="w-full flex flex-row flex-1 space-x-4">
+                <div class="w-full h-1/2 flex flex-row flex-1 space-x-4">
                     <DashboardPane classes="w-1/2">
                         <WalletHistory {locale} />
                     </DashboardPane>

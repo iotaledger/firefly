@@ -4,14 +4,16 @@
 
     export let locale
     export let name
+    export let setAlias
 
     const dispatch = createEventDispatcher()
 
     let accountName = name
 
     const handleSaveClick = () => {
-        dispatch('next', { accountName })
+        setAlias(accountName)
     }
+    
     const handleCancelClick = () => {
         dispatch('previous')
     }

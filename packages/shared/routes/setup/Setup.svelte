@@ -4,6 +4,8 @@
     import { createProfile, setActiveProfile } from 'shared/lib/app'
     import { initialise, getStoragePath } from 'shared/lib/wallet'
     import { SetupType } from 'shared/lib/router'
+    import { network } from 'shared/lib/network'
+    import { Network } from 'shared/lib/typings/client'
 
     export let locale
     export let mobile
@@ -11,7 +13,8 @@
     const dispatch = createEventDispatcher()
 
     let profileName = ''
-    let mainnet = true
+    
+    let mainnet = $network === Network.Mainnet
 
     const MAX_PROFILE_NAME_LENGTH = 250
 
@@ -29,6 +32,8 @@
                 window['Electron'].getUserDataPath().then((path) => {
                     initialise(profile.id, getStoragePath(path, profile.name))
 
+                    network.set(mainnet ? Network.Mainnet : Network.Devnet)
+
                     dispatch('next', { setupType })
                 })
             } catch (error) {
@@ -36,6 +41,7 @@
             }
         }
     }
+
     function handleBackClick() {
         dispatch('previous')
     }
