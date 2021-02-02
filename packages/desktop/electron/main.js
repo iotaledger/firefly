@@ -14,6 +14,28 @@ const windows = {
  */
 const devMode = process.env.NODE_ENV === 'development';
 
+
+// TODO(rajivshah3): Use @rollup/plugin-replace here
+
+let paths = {
+    preload: "",
+    html: "",
+}
+
+if (devMode) {
+    // __dirname is desktop/electron
+    paths.preload = path.join(__dirname, 'preload.js')
+    paths.html = path.join(__dirname, '../public/index.html')
+} else if (app.isPackaged) {
+    paths.preload = path.join(app.getAppPath(), '/public/build/preload.js')
+    paths.html = path.join(app.getAppPath(), '/public/index.html')
+} else {
+    // Probably production mode, but not packaged (i.e. run with yarn start:electron-prod)
+    // __dirname is desktop/public/build
+    paths.preload =  path.join(__dirname, 'preload.js')
+    paths.html =  path.join(__dirname, '../index.html')
+}
+
 function createWindow() {
     /**
      * Register iota file protocol
@@ -33,12 +55,12 @@ function createWindow() {
         webPreferences: {
             nodeIntegration: false,
             enableRemoteModule: false,
-            preload: path.join(devMode ? __dirname : app.getAppPath(), 'preload.js'),
+            preload: paths.preload,
         },
     })
 
     // and load the index.html of the app.
-    windows.main.loadFile(devMode ? '../public/index.html' : '../index.html')
+    windows.main.loadFile(paths.html)
 
     // Enable dev tools only in developer mode
     if (devMode) {

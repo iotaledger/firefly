@@ -2,7 +2,7 @@
     "name": "desktop",
     "version": "1.0.0",
     "description": "IOTA wallet desktop",
-    "main": "main.js",
+    "main": "public/build/main.js",
     "repository": "git@github.com:iotaledger/new-wallet.git",
     "author": "IOTA Foundation <contact@iota.org>",
     "license": "Apache-2.0",
@@ -41,7 +41,8 @@
         },
         "files": [
             "public/",
-            "package.json"
+            "package.json",
+            "!node_modules/wallet-nodejs-binding/native/*"
         ],
         "appId": "org.iota.firefly",
         "asar": true,
