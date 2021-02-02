@@ -281,6 +281,18 @@
             "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
             "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
             "not_backed_up": "Not backed up"
+        },
+        "delete_account": {
+            "title": "Delete {name} account?",
+            "body": "You will permanently lose your transaction history and maybe something else as well.",
+            "type_password": "Type your wallet’s password to confirm.",
+            "delete_account": "Delete account",
+            "error_title": "Unable to delete {name} account",
+            "error_body_1": "To delete an account you must have 0 balance.",
+            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+        },
+        "address_history": {
+            "title": "{name} account address history"
         }
     },
     "actions": {
@@ -288,6 +300,7 @@
         "back": "Back",
         "cancel": "Cancel",
         "close": "Close",
+        "dismiss": "Dismiss",
         "save": "Save",
         "import_seed": "Import an existing seed",
         "import_wallet": "Import existing wallet",
@@ -325,7 +338,11 @@
         "outsourceProofOfWork": "Outsource proof of work",
         "unlock": "Unlock",
         "update_firefly": "Update Firefly",
-        "save_backup": "Save backup"
+        "save_backup": "Save backup",
+        "customize_account": "Customise account",
+        "sync_account": "Sync account",
+        "view_address_history": "View address history",
+        "delete_account": "Delete account"
     },
     "general": {
         "password": "Password",
@@ -372,6 +389,7 @@
         "light_theme": "Light theme",
         "dark_theme": "Dark theme",
         "total_balance": "Total Balance",
+        "account_balance": "Account Balance",
         "incoming": "Incoming",
         "outgoing": "Outgoing",
         "accounts": "Accounts",
