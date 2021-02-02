@@ -41,7 +41,7 @@ interface SendParams {
 /**
  * Input paramaters for sending transactions
  */
-export const sendParams = writable<SendParams>({ amount: 0, address: '', message: ''})
+export const sendParams = writable<SendParams>({ amount: 0, address: '', message: '' })
 
 /**
  * Dummy
@@ -85,4 +85,19 @@ export const createProfile = (profileName): Profile => {
 
 export const setActiveProfile = (id) => {
     profiles.update((_profiles) => _profiles.map((profile) => Object.assign({}, profile, { active: id === profile.id })))
+}
+
+/**
+ * Removes profile from storage
+ * 
+ * @method removeProfile
+ * 
+ * @param {string} id
+ * 
+ * @returns {void} 
+ */
+export const removeProfile = (id: string): void => {
+    profiles.update((_profiles) => {
+        return _profiles.filter((_profile) => _profile.id !== id)
+    })
 }

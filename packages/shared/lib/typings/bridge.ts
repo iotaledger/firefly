@@ -3,6 +3,10 @@ import type { Address } from './address'
 import type { AccountIdentifier, Account, SyncedAccount } from './account'
 import type { Message } from './message'
 
+export interface Actor {
+  destroy(): void
+}
+
 export interface CommunicationIds {
   messageId: string;
   actorId: string;
@@ -50,7 +54,8 @@ export enum ResponseTypes {
   UnusedAddress = 'UnusedAddress',
   IsLatestAddressUnused = 'IsLatestAddressUnused',
   AreAllLatestAddressesUnused = 'AreAllLatestAddressesUnused',
-  UpdatedAlias = 'UpdatedAlias'
+  UpdatedAlias = 'UpdatedAlias',
+  DeletedStorage = 'DeletedStorage'
 }
 
 export type Response<T, P> = { id: string; action: string; type: T; payload?: P }
@@ -80,6 +85,7 @@ export type UnusedAddressResponse = Response<ResponseTypes.UnusedAddress, void>
 export type IsLatestAddressUnusedResponse = Response<ResponseTypes.IsLatestAddressUnused, void>
 export type AreLatestAddressesUnusedResponse = Response<ResponseTypes.AreAllLatestAddressesUnused, void>
 export type SetAliasResponse = Response<ResponseTypes.UpdatedAlias, void>
+export type DeleteStorageResponse = Response<ResponseTypes.DeletedStorage, void>
 
 export type MessageResponse = RemovedAccountResponse |
   CreatedAccountResponse |
@@ -106,6 +112,7 @@ export type MessageResponse = RemovedAccountResponse |
   IsLatestAddressUnusedResponse |
   AreLatestAddressesUnusedResponse |
   SetAliasResponse |
+  DeleteStorageResponse |
   // events
   Event<ErrorEventPayload> | Event<BalanceChangeEventPayload> | Event<TransactionEventPayload>
 
