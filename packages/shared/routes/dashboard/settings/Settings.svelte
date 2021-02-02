@@ -14,8 +14,8 @@
 
     const dispatch = createEventDispatcher()
 
-    function navigate() {
-        dispatch('next', { reset: true })
+    function navigate(params) {
+        dispatch('next', params)
     }
 
     $: {

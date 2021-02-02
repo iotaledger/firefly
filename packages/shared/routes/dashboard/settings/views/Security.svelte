@@ -36,7 +36,7 @@
                         removeProfile(activeProfile.id)
 
                         // Navigate
-                        navigate()
+                        navigate({ reset: true })
                     },
                     onError(error) {
                         console.error(error)
