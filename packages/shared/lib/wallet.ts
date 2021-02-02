@@ -31,9 +31,7 @@ type Account = {
 }
 
 interface ActorState {
-    [id: string]: {
-        destroy(): void
-    }
+    [id: string]: Actor
 }
 
 type WalletState = {
