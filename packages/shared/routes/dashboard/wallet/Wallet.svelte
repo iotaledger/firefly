@@ -263,6 +263,7 @@
                 alias,
                 // For subsequent accounts, use the network for any of the previous accounts
                 clientOptions: { nodes, network: $accounts[0].clientOptions.network },
+                signerType: $accounts[0].signerType,
             },
             {
                 onSuccess(createAccountResponse) {
