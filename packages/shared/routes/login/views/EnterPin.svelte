@@ -64,15 +64,16 @@
             PincodeManager.verify(profile.id, pinCode.toString())
                 .then((verified) => {
                     if (verified === true) {
-                        initialise(profile.id, getStoragePath(window['Electron'].getUserDataPath(), profile.name))
-
-                        api.setStoragePassword(pinCode.toString(), {
-                            onSuccess() {
-                                dispatch('next')
-                            },
-                            onError(error) {
-                                console.error(error)
-                            },
+                        return window['Electron'].getUserDataPath().then((path) => {
+                            initialise(profile.id, getStoragePath(path, profile.name))
+                            api.setStoragePassword(pinCode.toString(), {
+                                onSuccess() {
+                                    dispatch('next')
+                                },
+                                onError(error) {
+                                    console.error(error)
+                                },
+                            })
                         })
                     } else {
                         console.info('Incorrect pincode provided!')

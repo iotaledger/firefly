@@ -29,11 +29,13 @@
                 profile = createProfile(profileName)
                 setActiveProfile(profile.id)
 
-                initialise(profile.id, getStoragePath(window['Electron'].getUserDataPath(), profile.name))
+                return window['Electron'].getUserDataPath().then((path) => {
+                    initialise(profile.id, getStoragePath(path, profile.name))
 
-                network.set(mainnet ? Network.Mainnet : Network.Devnet)
+                    network.set(mainnet ? Network.Mainnet : Network.Devnet)
 
-                dispatch('next', { setupType })
+                    dispatch('next', { setupType })
+                })
             } catch (error) {
                 console.error(error)
             }
