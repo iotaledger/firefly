@@ -1,20 +1,20 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
     import { getInitials } from 'shared/lib/helpers'
     import { Text, Button } from 'shared/components'
+    import { walletViewState, WalletViewStates, accountViewState, AccountViewStates, selectedAccountId } from 'shared/lib/app'
 
     export let locale
     export let accounts
 
-    const dispatch = createEventDispatcher()
-
     $: activeAccount = accounts.find((acc) => acc.active)
 
     function handleAccountClick(accountId) {
-        dispatch('next', { accountId })
+        selectedAccountId.set(accountId)
     }
     function handleBackClick() {
-        dispatch('previous', { exit: true })
+        selectedAccountId.set(null)
+        walletViewState.set(WalletViewStates.Init)
+        accountViewState.set(AccountViewStates.Init)
     }
 </script>
 

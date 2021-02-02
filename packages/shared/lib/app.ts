@@ -41,7 +41,7 @@ interface SendParams {
 /**
  * Input paramaters for sending transactions
  */
-export const sendParams = writable<SendParams>({ amount: 0, address: '', message: ''})
+export const sendParams = writable<SendParams>({ amount: 0, address: '', message: '' })
 
 /**
  * Dummy
@@ -86,3 +86,32 @@ export const createProfile = (profileName): Profile => {
 export const setActiveProfile = (id) => {
     profiles.update((_profiles) => _profiles.map((profile) => Object.assign({}, profile, { active: id === profile.id })))
 }
+
+/**
+ * Wallet view state
+ */
+export enum WalletViewStates {
+    Init = 'init',
+    Account = 'account',
+    Send = 'send',
+    Receive = 'receive',
+    CreateAccount = 'createAccount',
+}
+export const walletViewState = writable<WalletViewStates>(WalletViewStates.Init)
+
+/**
+ * Account view state
+ */
+export enum AccountViewStates {
+    Init = 'init',
+    Manage = 'manage',
+    Send = 'send',
+    Receive = 'receive',
+}
+
+export const accountViewState = writable<AccountViewStates>(AccountViewStates.Init)
+
+/**
+ * Selected account ID
+ */
+export const selectedAccountId = writable<string>(null)

@@ -2,6 +2,7 @@
     import { getContext } from 'svelte'
     import { fade } from 'svelte/transition'
     import { Text, Icon } from 'shared/components'
+    import { accountViewState, AccountViewStates } from 'shared/lib/app'
 
     const popupState = getContext('popupState')
 
@@ -9,6 +10,7 @@
     export let locale
 
     const handleCustomiseAccountClick = () => {
+        accountViewState.set(AccountViewStates.Manage)
         isActive = false
     }
     const handleSyncAccountClick = () => {

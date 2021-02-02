@@ -1,13 +1,3 @@
-<script context="module" lang="typescript">
-    export enum WalletState {
-        Init = 'init',
-        Account = 'account',
-        Send = 'send',
-        Receive = 'receive',
-        CreateAccount = 'createAccount',
-    }
-</script>
-
 <script lang="typescript">
     import { setContext, onMount } from 'svelte'
     import { get, writable, derived } from 'svelte/store'
@@ -19,6 +9,7 @@
     import { Popup, DashboardPane } from 'shared/components'
     import { Account, LineChart, WalletHistory, Security, CreateAccount, WalletBalance, WalletActions } from './views/'
     import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
+    import { walletViewState, WalletViewStates, selectedAccountId } from 'shared/lib/app'
 
     export let locale
 
@@ -35,69 +26,18 @@
     const transactions = derived(accounts, ($accounts) => {
         return getLatestMessages($accounts)
     })
-    const selectedAccountId = writable(null)
     const selectedAccount = derived([selectedAccountId, accounts], ([$selectedAccountId, $accounts]) =>
         $accounts.find((acc) => acc.id === $selectedAccountId)
     )
-    const state = writable(WalletState.Init)
     const popupState = writable({ active: false })
 
     setContext('walletBalance', totalBalance)
     setContext('walletAccounts', accounts)
     setContext('walletTransactions', transactions)
-    setContext('selectedAccountId', selectedAccountId)
     setContext('selectedAccount', selectedAccount)
-    setContext('walletState', state)
     setContext('popupState', popupState)
 
-    let stateHistory = []
     let isGeneratingAddress = false
-
-    const _next = (request) => {
-        let nextState
-        if (request instanceof CustomEvent) {
-            request = request.detail || {}
-        }
-        if (Object.values(WalletState).includes(request as WalletState)) {
-            nextState = request
-        } else {
-            switch ($state) {
-                case WalletState.Account:
-                case WalletState.Init:
-                    const { accountId } = request
-                    if (accountId) {
-                        const account = $accounts.find((account) => account.id === accountId)
-                        if (account) {
-                            selectedAccountId.set(accountId)
-                            _next(WalletState.Account)
-                        } else {
-                            console.error('Error selecting account')
-                        }
-                    }
-                    break
-                case WalletState.Send:
-                    // do logic here
-                    nextState = WalletState.Init
-                    break
-            }
-        }
-        if (nextState) {
-            if (nextState !== $state) {
-                stateHistory.push($state)
-            }
-            stateHistory = stateHistory
-            state.set(nextState)
-        }
-    }
-    const _previous = () => {
-        let prevState = stateHistory.pop()
-        if (prevState) {
-            if ($state === WalletState.Account) {
-                selectedAccountId.set(null)
-            }
-            state.set(prevState)
-        }
-    }
 
     function getAccountMeta(accountId, callback) {
         api.getBalance(accountId, {
@@ -130,6 +70,7 @@
             id,
             index,
             name: alias,
+            rawIotaBalance: balance,
             balance: formatUnit(balance, 0),
             balanceEquiv: `${convertToFiat(balance, $currencies[CurrencyTypes.USD], $exchangeRates[$currency])} ${$currency}`,
             address,
@@ -159,6 +100,7 @@
                             if (idx === accountsResponse.payload.length - 1) {
                                 totalBalance.update((totalBalance) =>
                                     Object.assign({}, totalBalance, {
+                                        rawIotaBalance: _totalBalance.balance,
                                         balance: formatUnit(_totalBalance.balance, 2),
                                         incoming: formatUnit(_totalBalance.incoming, 2),
                                         outgoing: formatUnit(_totalBalance.outgoing, 2),
@@ -263,7 +205,7 @@
                                 if (!err) {
                                     const account = prepareAccountInfo(createAccountResponse.payload, meta)
                                     accounts.update((accounts) => [...accounts, account])
-                                    _next(WalletState.Init)
+                                    walletViewState.set(WalletViewStates.Init)
                                 } else {
                                     console.error(err)
                                 }
@@ -305,7 +247,7 @@
                             return _account
                         })
                     })
-                    _next(WalletState.Init)
+                    walletViewState.set(WalletViewStates.Init)
                 },
                 onError(error) {
                     console.error(error)
@@ -328,7 +270,7 @@
                         return _account
                     })
                 })
-                _next(WalletState.Init)
+                walletViewState.set(WalletViewStates.Init)
             },
             onError(response) {
                 console.error(response)
@@ -353,7 +295,7 @@
                     })
                 })
 
-                _next(WalletState.Init)
+                walletViewState.set(WalletViewStates.Init)
             },
             onError(error) {
                 console.error(error)
@@ -363,7 +305,7 @@
 
     $: {
         if ($deepLinkRequestActive && get(deepLinking)) {
-            _next(WalletState.Send)
+            walletViewState.set(WalletViewStates.Send)
             deepLinkRequestActive.set(false)
         }
     }
@@ -396,10 +338,8 @@
 {#if $popupState.active}
     <Popup type={$popupState.type} props={$popupState.props} {locale} />
 {/if}
-{#if $state === WalletState.Account && $selectedAccountId}
+{#if $walletViewState === WalletViewStates.Account && $selectedAccountId}
     <Account
-        on:next={_next}
-        on:previous={_previous}
         send={onSend}
         internalTransfer={onInternalTransfer}
         generateAddress={onGenerateAddress}
@@ -411,14 +351,12 @@
             <DashboardPane classes="w-1/3 h-full">
                 <!-- Total Balance, Accounts list & Send/Receive -->
                 <div class="flex flex-auto flex-col flex-shrink-0 h-full">
-                    {#if $state === WalletState.CreateAccount}
-                        <CreateAccount on:next={_next} on:previous={_previous} onCreate={onCreateAccount} {locale} />
+                    {#if $walletViewState === WalletViewStates.CreateAccount}
+                        <CreateAccount onCreate={onCreateAccount} {locale} />
                     {:else}
                         <WalletBalance {locale} />
                         <DashboardPane classes="-mt-5 h-full">
                             <WalletActions
-                                on:next={_next}
-                                on:previous={_previous}
                                 send={onSend}
                                 internalTransfer={onInternalTransfer}
                                 generateAddress={onGenerateAddress}

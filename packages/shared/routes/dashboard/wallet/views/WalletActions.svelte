@@ -1,33 +1,33 @@
 <script lang="typescript">
-    import { createEventDispatcher, getContext } from 'svelte'
+    import { getContext } from 'svelte'
     import { Text, Button, AccountTile } from 'shared/components'
     import { Send, Receive } from '.'
-    import { WalletState } from '../Wallet.svelte'
+    import { walletViewState, WalletViewStates, accountViewState, AccountViewStates, selectedAccountId } from 'shared/lib/app'
 
     export let locale
     export let send
     export let internalTransfer
     export let generateAddress
 
-    const dispatch = createEventDispatcher()
     const accounts = getContext('walletAccounts')
-    const state = getContext('walletState')
 
     function handleAccountClick(accountId) {
-        dispatch('next', { accountId })
+        selectedAccountId.set(accountId)
+        walletViewState.set(WalletViewStates.Account)
+        accountViewState.set(AccountViewStates.Init)
     }
     function handleCreateClick() {
-        dispatch('next', WalletState.CreateAccount)
+        walletViewState.set(WalletViewStates.CreateAccount)
     }
     function handleSendClick() {
-        dispatch('next', WalletState.Send)
+        walletViewState.set(WalletViewStates.Send)
     }
     function handleReceiveClick() {
-        dispatch('next', WalletState.Receive)
+        walletViewState.set(WalletViewStates.Receive)
     }
 </script>
 
-{#if $state === WalletState.Init}
+{#if $walletViewState === WalletViewStates.Init}
     <div class="p-8 pt-4 flex flex-col h-full justify-between">
         <div data-label="accounts" class="w-full h-full flex flex-col flex-no-wrap justify-start mb-6">
             <div class="flex flex-row mb-6 justify-between items-center">
@@ -54,8 +54,8 @@
             <Button xl secondary icon="transfer" classes="w-1/2" onClick={handleSendClick}>{locale('actions.send')}</Button>
         </div>
     </div>
-{:else if $state === WalletState.Send}
-    <Send on:next on:previous {send} {internalTransfer} {locale} />
-{:else if $state === WalletState.Receive}
-    <Receive on:next on:previous {generateAddress} {locale} />
+{:else if $walletViewState === WalletViewStates.Send}
+    <Send {send} {internalTransfer} {locale} />
+{:else if $walletViewState === WalletViewStates.Receive}
+    <Receive {generateAddress} {locale} />
 {/if}

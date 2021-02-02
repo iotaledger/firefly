@@ -1,21 +1,18 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
     import { Input, Text, Button } from 'shared/components'
+    import { accountViewState, AccountViewStates } from 'shared/lib/app'
 
     export let locale
     export let name
     export let setAlias
-
-    const dispatch = createEventDispatcher()
 
     let accountName = name
 
     const handleSaveClick = () => {
         setAlias(accountName)
     }
-    
     const handleCancelClick = () => {
-        dispatch('previous')
+        accountViewState.set(AccountViewStates.Init)
     }
 </script>
 
