@@ -257,6 +257,10 @@
                 "status": "Status",
                 "messages_per_second": "Messages per second",
                 "confirmation_rate": "Confirmation rate"
+            },
+            "profile_modal": {
+                "all_settings": "All settings",
+                "logout": "Log out"
             }
         }
     },
