@@ -1,18 +1,18 @@
-const { app, ipcMain, protocol, BrowserWindow } = require('electron')
+const { app, dialog, ipcMain, protocol, shell, BrowserWindow } = require('electron')
 const path = require('path')
-const Keychain = require('./keychain');
+const Keychain = require('./keychain')
 
 /**
  * Define wallet windows
  */
 const windows = {
     main: null,
-};
+}
 
 /**
  * Set environment mode
  */
-const devMode = process.env.NODE_ENV === 'development';
+const devMode = process.env.NODE_ENV === 'development'
 
 function createWindow() {
     /**
@@ -20,10 +20,10 @@ function createWindow() {
      */
     try {
         protocol.registerFileProtocol('iota', (request, callback) => {
-            callback(request.url.replace('iota:/', app.getAppPath()).split('?')[0].split('#')[0]);
-        });
+            callback(request.url.replace('iota:/', app.getAppPath()).split('?')[0].split('#')[0])
+        })
     } catch (error) {
-        console.log(error); //eslint-disable-line no-console
+        console.log(error) //eslint-disable-line no-console
     }
 
     // Create the browser window.
@@ -32,14 +32,43 @@ function createWindow() {
         height: 600,
         webPreferences: {
             nodeIntegration: false,
-            preload: path.join(__dirname, 'preload.js'),
+            enableRemoteModule: false,
+            preload: path.join(devMode ? __dirname : app.getAppPath(), 'preload.js'),
         },
     })
 
     // and load the index.html of the app.
-    windows.main.loadFile('../public/index.html')
+    windows.main.loadFile(devMode ? '../public/index.html' : '../index.html')
 
-    windows.main.webContents.openDevTools()
+    // Enable dev tools only in developer mode
+    if (devMode) {
+        windows.main.webContents.openDevTools()
+    }
+
+    const _handleNavigation = (e, url) => {
+        e.preventDefault()
+        // TODO: Add externalAcceptlist links for T&C, privacy policy and help
+        const externalAcceptlist = [
+            'privacy@iota.org',
+            'explorer.iota.org',
+        ]
+
+        try {
+            if (
+                externalAcceptlist.indexOf(new URL(url).hostname.replace('www.', '').replace('mailto:', '')) > -1
+            ) {
+                shell.openExternal(url)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    /**
+     * Only allow external navigation to acceptlisted domains
+     */
+    windows.main.webContents.on('will-navigate', _handleNavigation)
+    windows.main.webContents.on('new-window', _handleNavigation)
 }
 
 app.whenReady().then(createWindow)
@@ -79,35 +108,51 @@ ipcMain.handle('keychain-remove', (_e, key) => {
     return Keychain.remove(key)
 })
 
+// Dialogs
+ipcMain.handle('show-open-dialog', (_e, options) => {
+    return dialog.showOpenDialog(options)
+})
+
+// Miscellaneous
+ipcMain.handle('get-path', (_e, path) => {
+    const allowedPaths = [
+        'userData',
+    ]
+    if (allowedPaths.indexOf(path) === -1) {
+        throw Error(`Path ${path} is not allowed`)
+    }
+    return app.getPath(path)
+})
+
 /**
  * Define deep link state
  */
-let deepLinkUrl = null;
+let deepLinkUrl = null
 
 /**
  * Create a single instance only
  */
-const isFirstInstance = app.requestSingleInstanceLock();
+const isFirstInstance = app.requestSingleInstanceLock()
 
 if (!isFirstInstance) {
-    app.quit();
+    app.quit()
 }
 
 app.on('second-instance', (_e, args) => {
     if (windows.main) {
         if (args.length > 1) {
-            const params = args.find((arg) => arg.startsWith('iota://'));
+            const params = args.find((arg) => arg.startsWith('iota://'))
 
             if (params) {
-                windows.main.webContents.send('deepLink-params', params);
+                windows.main.webContents.send('deepLink-params', params)
             }
         }
         if (windows.main.isMinimized()) {
-            windows.main.restore();
+            windows.main.restore()
         }
-        windows.main.focus();
+        windows.main.focus()
     }
-});
+})
 
 /**
  * Register iota:// protocol for deep links
@@ -127,11 +172,11 @@ if (process.defaultApp) {
  */
 app.on('open-url', (event, url) => {
     event.preventDefault()
-    deepLinkUrl = url;
+    deepLinkUrl = url
     if (windows.main) {
         windows.main.webContents.send('deepLink-params', url)
     }
-});
+})
 
 /**
  * Proxy deep link event to the wallet application
@@ -141,4 +186,4 @@ ipcMain.on('deepLink-request', () => {
         windows.main.webContents.send('deepLink-params', deepLinkUrl)
         deepLinkUrl = null
     }
-});
+})

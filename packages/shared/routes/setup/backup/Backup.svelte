@@ -3,10 +3,10 @@
     import { get } from 'svelte/store'
     import { Backup, RecoveryPhrase, VerifyRecoveryPhrase, BackupToFile, Success } from './views/'
     import { Transition } from 'shared/components'
-    import { mnemonic } from 'shared/lib/app'
+    import { mnemonic, updateStrongholdBackupTime } from 'shared/lib/app'
     import { strongholdPassword } from 'shared/lib/app'
     import { api } from 'shared/lib/wallet'
-    import { DEFAULT_NODE as node, DEFAULT_NODES as nodes } from 'shared/lib/network'
+    import { DEFAULT_NODES as nodes, network } from 'shared/lib/network'
 
     export let locale
     export let mobile
@@ -58,6 +58,7 @@
                                 return new Promise((res, rej) => {
                                     api.backup(result, {
                                         onSuccess() {
+                                            updateStrongholdBackupTime(new Date())
                                             res()
                                         },
                                         onError(error) {
@@ -86,7 +87,7 @@
                             onSuccess(response) {
                                 api.createAccount(
                                     {
-                                        clientOptions: { node, nodes }
+                                        clientOptions: { nodes, network: $network }
                                     },
                                     {
                                         onSuccess() {

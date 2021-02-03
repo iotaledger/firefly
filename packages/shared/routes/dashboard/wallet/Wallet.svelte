@@ -11,10 +11,11 @@
 <script lang="typescript">
     import { setContext, onMount } from 'svelte'
     import { get, writable, derived } from 'svelte/store'
-    import { api, getLatestMessages } from 'shared/lib/wallet'
+    import { updateStrongholdStatus } from 'shared/lib/app'
+    import { api, getLatestMessages, initialiseListeners } from 'shared/lib/wallet'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { deepLinking, currency } from 'shared/lib/settings'
-    import { DEFAULT_NODE as node, DEFAULT_NODES as nodes } from 'shared/lib/network'
+    import { DEFAULT_NODES as nodes } from 'shared/lib/network'
     import { formatUnit } from 'shared/lib/units'
     import { Popup, DashboardPane } from 'shared/components'
     import { Account, LineChart, WalletHistory, Security, CreateAccount, WalletBalance, WalletActions } from './views/'
@@ -253,7 +254,8 @@
         api.createAccount(
             {
                 alias,
-                clientOptions: { node, nodes },
+                // For subsequent accounts, use the network for any of the previous accounts
+                clientOptions: { nodes, network: $accounts[0].clientOptions.network },
             },
             {
                 onSuccess(createAccountResponse) {
@@ -371,20 +373,22 @@
     onMount(() => {
         getAccounts()
 
+        initialiseListeners()
+
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
-                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    api.areLatestAddressesUnused({
-                        onSuccess(response) {
-                            if (!response.payload) {
-                                popupState.set({ active: true, type: 'password', props: { onSuccess: syncAccounts } })
-                            }
-                        },
-                        onError(error) {
-                            console.error(error)
-                        },
-                    })
-                }
+                updateStrongholdStatus(strongholdStatusResponse.payload.snapshot.status === 'Locked')
+
+                api.areLatestAddressesUnused({
+                    onSuccess(response) {
+                        if (!response.payload) {
+                            popupState.set({ active: true, type: 'password', props: { onSuccess: syncAccounts } })
+                        }
+                    },
+                    onError(error) {
+                        console.error(error)
+                    },
+                })
             },
             onError(error) {
                 console.error(error)
