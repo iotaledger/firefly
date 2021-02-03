@@ -3,28 +3,47 @@
     import { date } from 'svelte-i18n'
     import { Text, Button } from 'shared/components'
     import { getBackupWarningColor } from 'shared/lib/helpers'
+    import { api } from 'shared/lib/wallet'
+    import { updateStrongholdBackupTime } from 'shared/lib/app'
 
     export let locale
     export let lastBackupDate
     export let lastBackupDateFormatted
+    export let isStrongholdLocked
 
-    let strongholdLocked = Math.random() < 0.5 // dummy
     let color = getBackupWarningColor(lastBackupDate)
 
     const popupState = getContext('popupState')
 
-    function handleUpdate() {
-        // Do logic here
-        popupState.set({ active: false })
-        if (strongholdLocked) {
-            popupState.set({ active: true, type: 'password', props: { onSuccess: triggerUpdate } })
+    function handleBackupClick() {
+        if (isStrongholdLocked) {
+            popupState.set({ active: false })
+            popupState.set({ active: true, type: 'password', props: { onSuccess: triggerBackup } })
+        } else {
+            triggerBackup()
         }
     }
+
     function handleCancelClick() {
         popupState.set({ active: false })
     }
-    function triggerUpdate() {
-        // Do logic here
+    function triggerBackup() {
+        window['Electron']
+            .getStrongholdBackupDestination()
+            .then((result) => {
+                if (result) {
+                    api.backup(result, {
+                        onSuccess() {
+                            updateStrongholdBackupTime(new Date())
+                            popupState.set({ active: false })
+                        },
+                        onError(error) {
+                            console.error(error)
+                        },
+                    })
+                }
+            })
+            .catch((error) => console.error(error))
     }
 </script>
 
@@ -42,7 +61,7 @@
     <div class="w-full text-center my-6 px-8">
         <Text overrideColor type="h5" classes="mb-2 text-{color}-600">
             {#if !lastBackupDate}
-                {locale('popups.backup.not_backed_up')}
+                {locale('popups.backup.not_backed_up_description')}
             {:else}
                 {locale('popups.backup.last_backup', {
                     values: {
@@ -58,6 +77,6 @@
     </div>
     <div class="flex flex-row justify-between space-x-4 w-full px-8 ">
         <Button secondary classes="w-1/2" onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
-        <Button classes="w-1/2" onClick={() => handleUpdate()}>{locale('actions.save_backup')}</Button>
+        <Button classes="w-1/2" onClick={() => handleBackupClick()}>{locale('actions.save_backup')}</Button>
     </div>
 </div>

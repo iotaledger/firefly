@@ -280,7 +280,8 @@
             "last_backup": "You last backed up {date}",
             "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
             "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "not_backed_up": "Not backed up"
+            "not_backed_up": "Not backed up",
+            "not_backed_up_description": "You have not backed up your Stronghold"
         },
         "delete_account": {
             "title": "Delete {name} account?",
