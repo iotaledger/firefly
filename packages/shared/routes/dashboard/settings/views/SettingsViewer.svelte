@@ -8,6 +8,8 @@
     export let locale
     export let mobile
 
+    export let navigate
+
     let scroller
     let index
 
@@ -46,7 +48,7 @@
                     {#if $route === 'generalSettings'}
                         <General locale={locale}/>
                     {:else if $route === 'security'}
-                        <Security locale={locale}/>
+                        <Security navigate={navigate} locale={locale}/>
                     {:else if $route === 'advancedSettings'}
                         <Advanced locale={locale}/>
                     {:else if $route === 'helpAndInfo'}

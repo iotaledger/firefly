@@ -289,7 +289,7 @@ dependencies = [
 [[package]]
 name = "bee-ledger"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#1369e656f4ec824d8996b338e4ec4b713e5595a3"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#2a3c4352201ac1918f043d212fd4e1df20c138d3"
 dependencies = [
  "async-trait",
  "bee-common",
@@ -314,7 +314,7 @@ dependencies = [
 [[package]]
 name = "bee-message"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#1369e656f4ec824d8996b338e4ec4b713e5595a3"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#2a3c4352201ac1918f043d212fd4e1df20c138d3"
 dependencies = [
  "bech32",
  "bee-common",
@@ -323,6 +323,7 @@ dependencies = [
  "digest 0.9.0",
  "hex",
  "iota-crypto 0.2.0 (git+https://github.com/iotaledger/crypto.rs?branch=dev)",
+ "ref-cast",
  "serde 1.0.123",
  "thiserror",
 ]
@@ -330,7 +331,7 @@ dependencies = [
 [[package]]
 name = "bee-network"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#1369e656f4ec824d8996b338e4ec4b713e5595a3"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#2a3c4352201ac1918f043d212fd4e1df20c138d3"
 dependencies = [
  "async-trait",
  "bee-runtime",
@@ -349,7 +350,7 @@ dependencies = [
 [[package]]
 name = "bee-pow"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#1369e656f4ec824d8996b338e4ec4b713e5595a3"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#2a3c4352201ac1918f043d212fd4e1df20c138d3"
 dependencies = [
  "bee-crypto",
  "bee-ternary",
@@ -360,7 +361,7 @@ dependencies = [
 [[package]]
 name = "bee-protocol"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#1369e656f4ec824d8996b338e4ec4b713e5595a3"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#2a3c4352201ac1918f043d212fd4e1df20c138d3"
 dependencies = [
  "async-channel",
  "async-trait",
@@ -384,6 +385,7 @@ dependencies = [
  "num_cpus",
  "pin-project 1.0.4",
  "rand 0.8.3",
+ "ref-cast",
  "serde 1.0.123",
  "spin 0.7.1",
  "thiserror",
@@ -395,7 +397,7 @@ dependencies = [
 [[package]]
 name = "bee-rest-api"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#1369e656f4ec824d8996b338e4ec4b713e5595a3"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#2a3c4352201ac1918f043d212fd4e1df20c138d3"
 dependencies = [
  "async-trait",
  "bech32",
@@ -466,7 +468,7 @@ dependencies = [
 [[package]]
 name = "bee-snapshot"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#1369e656f4ec824d8996b338e4ec4b713e5595a3"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#2a3c4352201ac1918f043d212fd4e1df20c138d3"
 dependencies = [
  "async-trait",
  "bee-common",
@@ -496,7 +498,7 @@ dependencies = [
 [[package]]
 name = "bee-tangle"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#1369e656f4ec824d8996b338e4ec4b713e5595a3"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#2a3c4352201ac1918f043d212fd4e1df20c138d3"
 dependencies = [
  "async-trait",
  "bee-common",
@@ -507,9 +509,11 @@ dependencies = [
  "bitflags",
  "dashmap 4.0.2",
  "futures 0.3.12",
+ "hashbrown",
  "log",
  "lru",
  "rand 0.8.3",
+ "ref-cast",
  "serde 1.0.123",
  "thiserror",
  "tokio",
@@ -1647,9 +1651,9 @@ dependencies = [
 
 [[package]]
 name = "httparse"
-version = "1.3.4"
+version = "1.3.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cd179ae861f0c2e53da70d892f5f3029f9594be0c41dc5269cd371691b1dc2f9"
+checksum = "615caabe2c3160b313d52ccc905335f4ed5f10881dd63dc5699d47e90be85691"
 
 [[package]]
 name = "httpdate"
@@ -1797,7 +1801,32 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "0.5.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#e7b731ac3f204df615aa195111425b5127845287"
+source = "git+https://github.com/iotaledger/iota.rs?rev=e7b731ac3f204df615aa195111425b5127845287#e7b731ac3f204df615aa195111425b5127845287"
+dependencies = [
+ "bee-common",
+ "bee-crypto",
+ "bee-message",
+ "bee-pow",
+ "bee-rest-api",
+ "bee-signing",
+ "bee-signing-ext",
+ "blake2",
+ "chrono",
+ "hex",
+ "num_cpus",
+ "paho-mqtt",
+ "regex",
+ "reqwest",
+ "serde 1.0.123",
+ "serde_json",
+ "thiserror",
+ "tokio",
+]
+
+[[package]]
+name = "iota-client"
+version = "0.5.0-alpha.3"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#56e92725cac7c4e75b036ad770b6dc85a8065cfb"
 dependencies = [
  "bee-common",
  "bee-crypto",
@@ -1822,13 +1851,25 @@ dependencies = [
 [[package]]
 name = "iota-core"
 version = "0.2.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#e7b731ac3f204df615aa195111425b5127845287"
+source = "git+https://github.com/iotaledger/iota.rs?rev=e7b731ac3f204df615aa195111425b5127845287#e7b731ac3f204df615aa195111425b5127845287"
 dependencies = [
  "bee-common",
  "bee-message",
  "bee-pow",
  "bee-signing-ext",
- "iota-client",
+ "iota-client 0.5.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?rev=e7b731ac3f204df615aa195111425b5127845287)",
+]
+
+[[package]]
+name = "iota-core"
+version = "0.2.0-alpha.3"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#56e92725cac7c4e75b036ad770b6dc85a8065cfb"
+dependencies = [
+ "bee-common",
+ "bee-message",
+ "bee-pow",
+ "bee-signing-ext",
+ "iota-client 0.5.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?branch=dev)",
 ]
 
 [[package]]
@@ -1890,7 +1931,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#dffad0aa64dbc26a16c99d95ee542ea23e635a7a"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#7c75ac817feb76c907d0c88e44d86e9723a9cc5e"
 dependencies = [
  "async-trait",
  "backtrace",
@@ -1900,7 +1941,7 @@ dependencies = [
  "futures 0.3.12",
  "getset",
  "hex",
- "iota-core",
+ "iota-core 0.2.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?rev=e7b731ac3f204df615aa195111425b5127845287)",
  "iota-crypto 0.2.0 (git+https://github.com/iotaledger/crypto.rs?rev=c2514969c3f6693b86425ec84bada84b3ebea645)",
  "iota-stronghold",
  "log",
@@ -1984,9 +2025,9 @@ dependencies = [
 
 [[package]]
 name = "libc"
-version = "0.2.84"
+version = "0.2.85"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1cca32fa0182e8c0989459524dc356b8f2b5c10f1b9eb521b7d182c03cf8c5ff"
+checksum = "7ccac4b00700875e6a07c6cde370d44d32fa01c5a65cdd2fca6858c479d28bb3"
 
 [[package]]
 name = "libloading"
@@ -3106,6 +3147,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "ref-cast"
+version = "1.0.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "300f2a835d808734ee295d45007adacb9ebb29dd3ae2424acfa17930cae541da"
+dependencies = [
+ "ref-cast-impl",
+]
+
+[[package]]
+name = "ref-cast-impl"
+version = "1.0.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4c38e3aecd2b21cb3959637b883bb3714bc7e43f0268b9a29d3743ee3e55cdd2"
+dependencies = [
+ "proc-macro2 1.0.24",
+ "quote 1.0.8",
+ "syn 1.0.60",
+]
+
+[[package]]
 name = "regex"
 version = "1.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3205,9 +3266,9 @@ dependencies = [
 
 [[package]]
 name = "ring"
-version = "0.16.19"
+version = "0.16.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "024a1e66fea74c66c66624ee5622a7ff0e4b73a13b4f5c326ddb50c708944226"
+checksum = "3053cf52e236a3ed746dfc745aa9cacf1b791d846bdaf412f60a8d7d6e17c8fc"
 dependencies = [
  "cc",
  "libc",
@@ -4214,7 +4275,7 @@ checksum = "9d5b2c62b4012a3e1eca5a7e077d13b3bf498c4073e33ccd58626607748ceeca"
 name = "wallet-actor-system"
 version = "0.1.0"
 dependencies = [
- "iota-core",
+ "iota-core 0.2.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?branch=dev)",
  "iota-wallet",
  "log",
  "once_cell",

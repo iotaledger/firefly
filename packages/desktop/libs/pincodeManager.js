@@ -1,4 +1,4 @@
-const { ipcRenderer } = require('electron')
+const { ipcRenderer } = require('electron');
 
 /** Pincode Manager  */
 // Runs in renderer process
@@ -30,6 +30,19 @@ const PincodeManager = {
                 return storedPincode === pincode;
             }
         );
+    },
+
+    /**
+     * Removes pincode entry from the keychain
+     * 
+     * @method remove
+     * 
+     * @param {string} key 
+     * 
+     * @returns {Promise}
+     */
+    remove(key) {
+        return ipcRenderer.invoke('keychain-remove', key)
     }
 }
 
