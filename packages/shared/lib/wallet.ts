@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store'
+import { writable, get } from 'svelte/store'
 import type {
     MessageResponse,
     SetStrongholdPasswordResponse,
@@ -13,12 +13,13 @@ import type {
 import { ResponseTypes } from './typings/bridge'
 import type { Address } from './typings/address'
 import type { Message } from './typings/message'
-import type { Event, BalanceChangeEventPayload, TransactionEventPayload } from './typings/events'
+import type { Event, BalanceChangeEventPayload, TransactionEventPayload, ConfirmationStateChangeEventPayload } from './typings/events'
 import Validator, { ErrorTypes as ValidatorErrorTypes } from 'shared/lib/validator'
 import { generateRandomId } from 'shared/lib/utils'
 import { mnemonic, getActiveProfile, updateStrongholdStatus } from 'shared/lib/app'
 import { account, message } from './typings'
 import { persistent } from './helpers'
+import { _ } from './i18n'
 
 const Wallet = window['__WALLET__']
 
@@ -328,6 +329,41 @@ export const initialiseListeners = () => {
             updateStrongholdStatus(response.payload.snapshot.status === 'Locked')
         },
         onError(error) { console.error(error) }
+    })
+
+    api.onNewTransaction({
+        onSuccess(response: Event<TransactionEventPayload>) {
+            const accounts = get(wallet).accounts
+            const account = accounts.find(account => account.id === response.payload.accountId)
+            const message = response.payload.message
+
+            const locale = get(_) as (string) => string
+            const notificationMessage = locale('notifications.valueTx')
+                .replace('{{value}}', message.value.toString())
+            const NotificationManager = window['Electron']['NotificationManager']
+            NotificationManager.notify(account.alias, notificationMessage, { notifications: { general: true } })
+        },
+        onError(error) {
+            console.error(error)
+        }
+    })
+
+    api.onConfirmationStateChange({
+        onSuccess(response: Event<ConfirmationStateChangeEventPayload>) {
+            const accounts = get(wallet).accounts
+            const account = accounts.find(account => account.id === response.payload.accountId)
+            const message = response.payload.message
+            const messageKey = response.payload.confirmed ? 'confirmed' : 'failed'
+
+            const locale = get(_) as (string) => string
+            const notificationMessage = locale(`notifications.${messageKey}`)
+                .replace('{{value}}', message.value.toString())
+            const NotificationManager = window['Electron']['NotificationManager']
+            NotificationManager.notify(account.alias, notificationMessage, { notifications: { general: true } })
+        },
+        onError(error) {
+            console.error(error)
+        }
     })
 };
 
