@@ -65,6 +65,14 @@ export function send(bridge: Bridge, __ids: CommunicationIds, fromAccountId: Acc
   })
 }
 
+export function removeStorage(bridge: Bridge, __ids: CommunicationIds) {
+    return bridge({
+      actorId: __ids.actorId,
+      id: __ids.messageId,
+      cmd: 'DeleteStorage'
+    })
+}
+
 export function generateMnemonic(bridge: Bridge, __ids: CommunicationIds) {
   return bridge({
     actorId: __ids.actorId,

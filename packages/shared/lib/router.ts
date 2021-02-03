@@ -112,6 +112,14 @@ export const routerNext = (event) => {
 
             nextRoute = shouldAddProfile ? AppRoute.Setup : AppRoute.Dashboard
             break
+        case AppRoute.Dashboard:
+            const { reset } = params
+
+            if (reset) {
+                nextRoute = AppRoute.Login
+            }
+            break
+
         case AppRoute.Welcome:
             nextRoute = AppRoute.Legal
             break
