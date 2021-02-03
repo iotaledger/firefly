@@ -58,9 +58,10 @@ interface BaseProfile {
 }
 
 /**
- * Custom profile interface (Extra / custom properties associated with a profile)
+ * Extended profile interface (Extra properties associated with a profile)
  */
-interface CustomProfile {
+interface ExtendedProfile {
+
     /**
     * Determines if stronghold is locked
     */
@@ -74,7 +75,7 @@ interface CustomProfile {
 /**
  * Profile interface
  */
-interface Profile extends BaseProfile, CustomProfile { }
+interface Profile extends BaseProfile, ExtendedProfile { }
 
 export const profiles = persistent<Profile[]>('profiles', []);
 

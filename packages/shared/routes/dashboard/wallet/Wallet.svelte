@@ -284,21 +284,58 @@
     }
 
     function onSend(senderAccountId, receiveAddress, amount) {
-        api.send(
-            senderAccountId,
-            {
-                amount,
-                address: receiveAddress,
-                remainder_value_strategy: {
-                    strategy: 'ChangeAddress',
+        const _send = () => {
+            api.send(
+                senderAccountId,
+                {
+                    amount,
+                    address: receiveAddress,
+                    remainder_value_strategy: {
+                        strategy: 'ChangeAddress',
+                    },
+                    indexation: { index: 'firefly', data: new Array() },
                 },
-                indexation: { index: 'firefly', data: new Array() },
+                {
+                    onSuccess(response) {
+                        accounts.update((_accounts) => {
+                            return _accounts.map((_account) => {
+                                if (_account.id === senderAccountId) {
+                                    return Object.assign({}, _account, {
+                                        messages: [response.payload, ..._account.messages],
+                                    })
+                                }
+
+                                return _account
+                            })
+                        })
+                        _next(WalletState.Init)
+                    },
+                    onError(error) {
+                        console.error(error)
+                    },
+                }
+            )
+        }
+
+        api.getStrongholdStatus({
+            onSuccess(strongholdStatusResponse) {
+                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                    popupState.set({ active: true, type: 'password', props: { onSuccess: _send } })
+                }
             },
-            {
+            onError(error) {
+                console.error(error)
+            },
+        })
+    }
+
+    function onInternalTransfer(senderAccountId, receiverAccountId, amount) {
+        const _internalTransfer = () => {
+            api.internalTransfer(senderAccountId, receiverAccountId, amount, {
                 onSuccess(response) {
                     accounts.update((_accounts) => {
                         return _accounts.map((_account) => {
-                            if (_account.id === senderAccountId) {
+                            if (_account.id === senderAccountId || _account.id === receiverAccountId) {
                                 return Object.assign({}, _account, {
                                     messages: [response.payload, ..._account.messages],
                                 })
@@ -309,31 +346,20 @@
                     })
                     _next(WalletState.Init)
                 },
-                onError(error) {
-                    console.error(error)
+                onError(response) {
+                    console.error(response)
                 },
-            }
-        )
-    }
+            })
+        }
 
-    function onInternalTransfer(senderAccountId, receiverAccountId, amount) {
-        api.internalTransfer(senderAccountId, receiverAccountId, amount, {
-            onSuccess(response) {
-                accounts.update((_accounts) => {
-                    return _accounts.map((_account) => {
-                        if (_account.id === senderAccountId || _account.id === receiverAccountId) {
-                            return Object.assign({}, _account, {
-                                messages: [response.payload, ..._account.messages],
-                            })
-                        }
-
-                        return _account
-                    })
-                })
-                _next(WalletState.Init)
+        api.getStrongholdStatus({
+            onSuccess(strongholdStatusResponse) {
+                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                    popupState.set({ active: true, type: 'password', props: { onSuccess: _internalTransfer } })
+                }
             },
-            onError(response) {
-                console.error(response)
+            onError(error) {
+                console.error(error)
             },
         })
     }
