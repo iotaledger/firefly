@@ -61,6 +61,7 @@ interface BaseProfile {
  * Extended profile interface (Extra properties associated with a profile)
  */
 interface ExtendedProfile {
+
     /**
     * Determines if stronghold is locked
     */

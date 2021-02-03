@@ -51,6 +51,7 @@ export enum ResponseTypes {
   IsLatestAddressUnused = 'IsLatestAddressUnused',
   AreAllLatestAddressesUnused = 'AreAllLatestAddressesUnused',
   UpdatedAlias = 'UpdatedAlias',
+  LockedStronghold = 'LockedStronghold',
   OpenedLedgerApp = 'OpenedLedgerApp'
 }
 
@@ -81,6 +82,7 @@ export type UnusedAddressResponse = Response<ResponseTypes.UnusedAddress, void>
 export type IsLatestAddressUnusedResponse = Response<ResponseTypes.IsLatestAddressUnused, void>
 export type AreLatestAddressesUnusedResponse = Response<ResponseTypes.AreAllLatestAddressesUnused, void>
 export type SetAliasResponse = Response<ResponseTypes.UpdatedAlias, void>
+export type LockStrongholdResponse = Response<ResponseTypes.LockedStronghold, void>
 
 export type MessageResponse = RemovedAccountResponse |
   CreatedAccountResponse |
@@ -107,6 +109,7 @@ export type MessageResponse = RemovedAccountResponse |
   IsLatestAddressUnusedResponse |
   AreLatestAddressesUnusedResponse |
   SetAliasResponse |
+  LockStrongholdResponse |
   // events
   Event<ErrorEventPayload> | Event<BalanceChangeEventPayload> | Event<TransactionEventPayload>
 

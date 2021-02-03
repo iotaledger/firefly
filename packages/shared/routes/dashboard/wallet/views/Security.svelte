@@ -5,6 +5,7 @@
     import { getActiveProfile, profiles } from 'shared/lib/app'
     import { api } from 'shared/lib/wallet'
 
+
     export let locale
 
     let activeProfile
@@ -45,6 +46,16 @@
                 lastBackupDateFormatted,
                 isStrongholdLocked: activeProfile.isStrongholdLocked,
             },
+        })
+    }
+
+    function lockStronghold() {
+        api.lockStronghold({ 
+            onSuccess() {
+            },
+            onError(error) {
+                console.error(error)
+            }
         })
     }
 
@@ -108,8 +119,7 @@
             message={locale(`views.dashboard.security.stronghold_status.${strongholdStatusMessage}`)}
             color={activeProfile.isStrongholdLocked ? 'blue' : 'red'}
             icon="lock"
-            onClick={() => openPopup('password')}
-            classes={activeProfile.isStrongholdLocked ? 'pointer-events-all' : 'pointer-events-none'} />
+            onClick={() => activeProfile.isStrongholdLocked ? openPopup('password') : lockStronghold()} />
         <!-- Stronghold backup -->
         <SecurityTile
             title={locale('views.dashboard.security.stronghold_backup.title')}

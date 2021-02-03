@@ -36,6 +36,7 @@ import {
   storeMnemonic as _storeMnemonic,
   verifyMnemonic as _verifyMnemonic,
   getStrongholdStatus as _getStrongholdStatus,
+  lockStronghold as _lockStronghold,
   openLedgerApp as _openLedgerApp
 } from '../../../shared/lib/typings/wallet'
 
@@ -88,6 +89,9 @@ export const api = {
   },
   getStrongholdStatus: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _getStrongholdStatus(sendMessage, __ids)
+  },
+  lockStronghold: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _lockStronghold(sendMessage, __ids)
   },
   generateMnemonic: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _generateMnemonic(sendMessage, __ids)

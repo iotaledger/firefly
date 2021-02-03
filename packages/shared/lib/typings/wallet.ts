@@ -99,6 +99,14 @@ export function getStrongholdStatus(bridge: Bridge, __ids: CommunicationIds) {
   })
 }
 
+export function lockStronghold(bridge: Bridge, __ids: CommunicationIds) {
+    return bridge({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        cmd: 'LockStronghold',
+    })
+}
+
 export function openLedgerApp(bridge: Bridge, __ids: CommunicationIds, isSimulator: boolean) {
   return bridge({
     actorId: __ids.actorId,

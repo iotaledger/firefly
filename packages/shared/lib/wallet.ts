@@ -76,6 +76,7 @@ const apiToResponseTypeMap = {
     isLatestAddressUnused: ResponseTypes.IsLatestAddressUnused,
     areLatestAddressesUnused: ResponseTypes.AreAllLatestAddressesUnused,
     setAlias: ResponseTypes.UpdatedAlias,
+    lockStronghold: ResponseTypes.LockedStronghold,
     openLedgerApp: ResponseTypes.OpenedLedgerApp
 };
 

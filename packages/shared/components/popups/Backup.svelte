@@ -20,13 +20,16 @@
             popupState.set({ active: true, type: 'password', props: { onSuccess: triggerBackup } })
         } else {
             triggerBackup()
+
         }
     }
 
     function handleCancelClick() {
         popupState.set({ active: false })
     }
+
     function triggerBackup() {
+
         window['Electron']
             .getStrongholdBackupDestination()
             .then((result) => {
