@@ -137,6 +137,21 @@ export const setActiveProfile = (id: string): void => {
 }
 
 /**
+ * Removes profile from storage
+ * 
+ * @method removeProfile
+ * 
+ * @param {string} id
+ * 
+ * @returns {void} 
+ */
+export const removeProfile = (id: string): void => {
+    profiles.update((_profiles) => {
+        return _profiles.filter((_profile) => _profile.id !== id)
+    })
+}
+
+/** 
  * Updates stronghold status
  * 
  * @method updateStrongholdStatus
