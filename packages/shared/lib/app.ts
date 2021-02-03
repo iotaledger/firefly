@@ -48,6 +48,8 @@ export const sendParams = writable<SendParams>({ amount: 0, address: '', message
  */
 export const logged = persistent<boolean>('logged', false)
 
+type ProfileStatus = 'complete' | 'incomplete'
+
 /**
  * Base profile interface — 
  */
@@ -55,6 +57,7 @@ interface BaseProfile {
     name: string;
     id: string;
     active: boolean;
+    status: ProfileStatus;
 }
 
 /**
@@ -99,7 +102,7 @@ export const getActiveProfile = (): Profile => {
  * 
  * @returns {Profile}
  */
-export const createProfile = (profileName): Profile => {
+export const createProfile = (profileName: string, status: ProfileStatus = 'incomplete'): Profile => {
     if (get(profiles).some((profile) => profile.name === profileName)) {
         throw new Error(`Profile with name ${profileName} already exists.`);
     }
@@ -108,6 +111,7 @@ export const createProfile = (profileName): Profile => {
         id: generateRandomId(),
         name: profileName,
         active: true,
+        status,
         // At the time of profile creation, stronghold will be locked
         isStrongholdLocked: true,
         strongholdLastBackupTime: null
@@ -196,3 +200,39 @@ export const updateStrongholdBackupTime = (time: Date): void => {
         })
     })
 }
+
+/**
+ * Updates profile status
+ * 
+ * @method updateProfileStatus
+ * 
+ * @param {ProfileStatus} status
+ * 
+ * @returns {void} 
+ */
+export const updateProfileStatus = (status: ProfileStatus): void => {
+    profiles.update((_profiles) => {
+        return _profiles.map((_profile) => {
+            if (_profile.id === getActiveProfile().id) {
+                return Object.assign({}, _profile, {
+                    status
+                })
+            }
+
+            return _profile
+        })
+    })
+}
+
+/**
+ * Removes incomplete profiles from persistent storage
+ * 
+ * @method removeIncompleteProfiles
+ * 
+ * @returns {void}
+ */
+export const removeIncompleteProfiles = (): void => {
+    profiles.update((_profiles) => {
+        return _profiles.filter((_profile) => _profile.status === 'complete')
+    })
+};

@@ -3,7 +3,7 @@
     import { get } from 'svelte/store'
     import { Backup, RecoveryPhrase, VerifyRecoveryPhrase, BackupToFile, Success } from './views/'
     import { Transition } from 'shared/components'
-    import { mnemonic, updateStrongholdBackupTime } from 'shared/lib/app'
+    import { mnemonic, updateStrongholdBackupTime, updateProfileStatus } from 'shared/lib/app'
     import { strongholdPassword } from 'shared/lib/app'
     import { api } from 'shared/lib/wallet'
     import { DEFAULT_NODES as nodes, network } from 'shared/lib/network'
@@ -16,7 +16,7 @@
         RecoveryPhrase = 'recoveryPhrase',
         Verify = 'verify',
         Backup = 'backup',
-        Success = 'success'
+        Success = 'success',
     }
 
     const dispatch = createEventDispatcher()
@@ -49,7 +49,7 @@
                             },
                             onError(error) {
                                 reject(error)
-                            }
+                            },
                         })
                     })
                         .then(() => window['Electron'].getStrongholdBackupDestination())
@@ -63,7 +63,7 @@
                                         },
                                         onError(error) {
                                             rej(error)
-                                        }
+                                        },
                                     })
                                 })
                             }
@@ -87,27 +87,28 @@
                             onSuccess(response) {
                                 api.createAccount(
                                     {
-                                        clientOptions: { nodes, network: $network }
+                                        clientOptions: { nodes, network: $network },
                                     },
                                     {
                                         onSuccess() {
+                                            updateProfileStatus('complete')
                                             dispatch('next')
                                         },
                                         onError() {
                                             // TODO: handle error
                                             alert('create account error')
-                                        }
+                                        },
                                     }
                                 )
                             },
                             onError(error) {
                                 console.log(error)
-                            }
+                            },
                         })
                     },
                     onError(error) {
                         console.error('Error verifying mnemonic', error)
-                    }
+                    },
                 })
 
                 break

@@ -163,7 +163,7 @@ const defaultCallbacks = {
  * Response subscriber.
  * Receives messages from wallet.rs.
  */
-Wallet.onMessage((message: MessageResponse) => {
+Wallet.onMessage((message: MessageResponse) => {    
     const _deleteCallbackId = (_id: string) => {
         const isEventMessage = [
             ResponseTypes.ErrorThrown,

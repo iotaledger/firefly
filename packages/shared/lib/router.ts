@@ -79,7 +79,7 @@ let walletSetupType = writable<SetupType>(null)
  * Navigate to initial route
  */
 export const initRouter = () => {
-    let hasCompletedSetup: boolean = get(profiles).length > 0;
+    let hasCompletedSetup: boolean = get(profiles).filter((profile) => profile.status === 'complete').length > 0;
 
     if (hasCompletedSetup) {
         setRoute(AppRoute.Login)

@@ -3,7 +3,7 @@
     import { fetchMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { setupI18n, isLocaleLoaded, dir, _ } from 'shared/lib/i18n'
-    import { darkMode, mobile, logged } from 'shared/lib/app'
+    import { darkMode, mobile, logged, removeIncompleteProfiles } from 'shared/lib/app'
     import { language } from 'shared/lib/settings'
     import { api } from 'shared/lib/wallet'
     import { goto } from 'shared/lib/helpers'
@@ -37,6 +37,9 @@
             splash = false
             initRouter()
         }, 100)
+
+        // Remove incomplete profiles from persistent storage
+        removeIncompleteProfiles()
 
         await fetchMarketData()
         await pollNetworkStatus()
