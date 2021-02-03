@@ -6,8 +6,6 @@ import { currencies, Currencies, exchangeRates, ExchangeRates, CurrencyTypes } f
  */
 export const MARKETDATA_ENDPOINTS = [
     'https://nodes.iota.works/api/market',
-    'https://iota-node-api.now.sh/api/market',
-    'https://iota.dance/api/market',
 ]
 
 /**
@@ -226,4 +224,3 @@ export async function fetchMarketData(): Promise<void> {
         }
     }
 }
-
