@@ -1,18 +1,15 @@
 <script>
-    import { getContext } from 'svelte'
     import { date } from 'svelte-i18n'
+    import { closePopup } from 'shared/lib/popup'
     import { Text, Button } from 'shared/components'
 
     export let locale
     export let currentVersion
     export let upToDate
 
-    const popupState = getContext('popupState')
-
     let newVersion = '3.45' // dummy
     let newVersionReleaseDate = new Date() // dummy
-    let changelog = 
-    `Fix: Bugs that prevent some transactions from confirming (#3039)
+    let changelog = `Fix: Bugs that prevent some transactions from confirming (#3039)
     Fix: Poll for value transfers before data (#3039)
     Fix: Add polling errors to the error log (#2987)
     Fix: Crash when app returns from background on Android (#2982)
@@ -21,10 +18,10 @@
     Fix: Incorrect progress bar steps and translation not available displayed on send (#3020)` //dummy
 
     function handleUpdate() {
-        popupState.set({ active: false })
+        closePopup()
     }
     function handleCancelClick() {
-        popupState.set({ active: false })
+        closePopup()
     }
 </script>
 
@@ -40,9 +37,7 @@
     </div>
     {#if upToDate}
         <div class="w-full text-center my-6 px-8">
-            <Text type="h5" highlighted classes="mb-2">
-                {locale('popups.version.up_to_date_title')}
-            </Text>
+            <Text type="h5" highlighted classes="mb-2">{locale('popups.version.up_to_date_title')}</Text>
             <Text smaller secondary>
                 {locale('popups.version.up_to_date_description', { values: { version: currentVersion } })}
             </Text>
@@ -60,9 +55,7 @@
                     values: { version: newVersion, date: $date(newVersionReleaseDate, { format: 'long' }) },
                 })}
             </Text>
-            <Text secondary classes="whitespace-pre-wrap">
-                {changelog}
-            </Text>
+            <Text secondary classes="whitespace-pre-wrap">{changelog}</Text>
         </div>
         <div class="flex flex-row justify-between space-x-4 w-full px-8">
             <Button secondary classes="w-1/2" onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>

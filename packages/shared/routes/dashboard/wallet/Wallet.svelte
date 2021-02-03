@@ -17,9 +17,10 @@
     import { deepLinking, currency } from 'shared/lib/settings'
     import { DEFAULT_NODES as nodes } from 'shared/lib/network'
     import { formatUnit } from 'shared/lib/units'
-    import { Popup, DashboardPane } from 'shared/components'
+    import { DashboardPane } from 'shared/components'
     import { Account, LineChart, WalletHistory, Security, CreateAccount, WalletBalance, WalletActions } from './views/'
     import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
+    import { openPopup } from 'shared/lib/popup'
 
     export let locale
 
@@ -41,7 +42,6 @@
         $accounts.find((acc) => acc.id === $selectedAccountId)
     )
     const state = writable(WalletState.Init)
-    const popupState = writable({ active: false })
 
     setContext('walletBalance', totalBalance)
     setContext('walletAccounts', accounts)
@@ -49,7 +49,6 @@
     setContext('selectedAccountId', selectedAccountId)
     setContext('selectedAccount', selectedAccount)
     setContext('walletState', state)
-    setContext('popupState', popupState)
 
     let stateHistory = []
     let isGeneratingAddress = false
@@ -320,7 +319,7 @@
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
                 if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    popupState.set({ active: true, type: 'password', props: { onSuccess: _send } })
+                    openPopup({ type: 'password', props: { onSuccess: _send } })
                 }
             },
             onError(error) {
@@ -355,7 +354,7 @@
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
                 if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    popupState.set({ active: true, type: 'password', props: { onSuccess: _internalTransfer } })
+                    openPopup({ type: 'password', props: { onSuccess: _internalTransfer } })
                 }
             },
             onError(error) {
@@ -404,11 +403,10 @@
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
                 updateStrongholdStatus(strongholdStatusResponse.payload.snapshot.status === 'Locked')
-
                 api.areLatestAddressesUnused({
                     onSuccess(response) {
                         if (!response.payload) {
-                            popupState.set({ active: true, type: 'password', props: { onSuccess: syncAccounts } })
+                            openPopup({ type: 'password', props: { onSuccess: syncAccounts } })
                         }
                     },
                     onError(error) {
@@ -423,9 +421,6 @@
     })
 </script>
 
-{#if $popupState.active}
-    <Popup type={$popupState.type} props={$popupState.props} {locale} />
-{/if}
 {#if $state === WalletState.Account && $selectedAccountId}
     <Account
         on:next={_next}

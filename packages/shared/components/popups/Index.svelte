@@ -7,12 +7,11 @@
     import Update from './Version.svelte'
     import Backup from './Backup.svelte'
     import { Text, Icon } from 'shared/components'
+    import { closePopup, popupState } from 'shared/lib/popup'
 
     export let locale = 'en'
     export let type = undefined
     export let props = undefined
-
-    const state = getContext('popupState')
 
     const types = {
         qr: QR,
@@ -30,10 +29,12 @@
             subtitle: locale('popups.password.subtitle'),
         },
         update: {
-            title: locale('popups.version.title', { values: { version: $state.props.currentVersion } }),
+            title: locale('popups.version.title', { values: { version: $popupState.props.currentVersion } }),
         },
         backup: {
-            title: $state.props.lastBackupDate ? locale('popups.backup.title', { values: { date: $date($state.props.lastBackupDate, { format: 'long' }) } }) : locale('popups.backup.not_backed_up'),
+            title: $popupState.props.lastBackupDate
+                ? locale('popups.backup.title', { values: { date: $date($popupState.props.lastBackupDate, { format: 'long' }) } })
+                : locale('popups.backup.not_backed_up'),
         },
     }
 
@@ -42,12 +43,8 @@
 
     const onkey = (e) => {
         if (e.key === 'Escape') {
-            close()
+            closePopup()
         }
-    }
-
-    const close = () => {
-        state.set({ active: false })
     }
 </script>
 
@@ -62,24 +59,26 @@
 </style>
 
 <svelte:window on:keydown={onkey} />
-<popup
-    in:fade={{ duration: 100 }}
-    class="flex items-center justify-center fixed top-0 left-0 w-screen p-6
-                h-screen overflow-hidden z-10 bg-gray-800 bg-opacity-40">
-    <popup-content class="bg-white dark:bg-gray-900 rounded-xl pt-6 px-8 pb-14">
-        <div class="w-full mb-10 flex flex-row justify-between items-start">
-            <div>
-                {#if title}
-                    <Text type="h4">{title}</Text>
-                {/if}
-                {#if subtitle}
-                    <Text type="p" secondary>{subtitle}</Text>
-                {/if}
+{#key type}
+    <popup
+        in:fade={{ duration: 100 }}
+        class="flex items-center justify-center fixed top-0 left-0 w-screen p-6
+                    h-screen overflow-hidden z-10 bg-gray-800 bg-opacity-40">
+        <popup-content class="bg-white dark:bg-gray-900 rounded-xl pt-6 px-8 pb-14">
+            <div class="w-full mb-10 flex flex-row justify-between items-start">
+                <div>
+                    {#if title}
+                        <Text type="h4">{title}</Text>
+                    {/if}
+                    {#if subtitle}
+                        <Text type="p" secondary>{subtitle}</Text>
+                    {/if}
+                </div>
+                <button on:click={closePopup}>
+                    <Icon icon="close" classes="text-gray-800 dark:text-white" />
+                </button>
             </div>
-            <button on:click={close}>
-                <Icon icon="close" classes="text-gray-800 dark:text-white" />
-            </button>
-        </div>
-        <svelte:component this={types[type]} {...props} {locale} />
-    </popup-content>
-</popup>
+            <svelte:component this={types[type]} {...props} {locale} />
+        </popup-content>
+    </popup>
+{/key}
