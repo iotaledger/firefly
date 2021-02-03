@@ -46,15 +46,15 @@ function createWindow() {
 
     const _handleNavigation = (e, url) => {
         e.preventDefault()
-        // TODO: Add whitelist links for T&C, privacy policy and help
-        const externalWhitelist = [
+        // TODO: Add externalAcceptlist links for T&C, privacy policy and help
+        const externalAcceptlist = [
             'privacy@iota.org',
             'explorer.iota.org',
         ]
 
         try {
             if (
-                externalWhitelist.indexOf(new URL(url).hostname.replace('www.', '').replace('mailto:', '')) > -1
+                externalAcceptlist.indexOf(new URL(url).hostname.replace('www.', '').replace('mailto:', '')) > -1
             ) {
                 shell.openExternal(url)
             }
@@ -64,7 +64,7 @@ function createWindow() {
     }
 
     /**
-     * Only allow external navigation to whitelisted domains
+     * Only allow external navigation to acceptlisted domains
      */
     windows.main.webContents.on('will-navigate', _handleNavigation)
     windows.main.webContents.on('new-window', _handleNavigation)
