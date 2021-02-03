@@ -13,7 +13,7 @@
     let confirmedPassword = ''
 
     $: strength = zxcvbn(newPassword).score
-    $: valid = strength === 4 && newPassword === confirmedPassword
+    $: valid = strength === 4
 
     const PincodeManager = window['Electron']['PincodeManager']
 
@@ -81,6 +81,10 @@
 
         if (newPassword !== confirmedPassword) {
             return console.error('Passwords do not match.')
+        }
+
+        if (!valid) {
+            return console.error('New password too weak.')
         }
 
         const _changePassword = () => {
