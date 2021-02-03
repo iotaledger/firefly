@@ -133,15 +133,15 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Help & Information",
+                "title": "Hjælp & Information",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profile": {
-                "title": "Profile",
+                "title": "Profil",
                 "description": ""
             },
             "sync": {
-                "title": "Sync accounts",
+                "title": "Synkronisér konti",
                 "description": ""
             },
             "theme": {
@@ -169,39 +169,39 @@
                 "description": ""
             },
             "changePassword": {
-                "title": "Change password",
+                "title": "Skift adgangskode",
                 "description": ""
             },
             "resyncAccounts": {
-                "title": "Resync accounts",
+                "title": "Synkronisér konti",
                 "description": ""
             },
             "resetWallet": {
-                "title": "Reset wallet",
+                "title": "Nulstil tegnebog",
                 "description": ""
             },
             "deepLinks": {
-                "title": "Deep links",
+                "title": "Dybe Links",
                 "description": ""
             },
             "developerMode": {
-                "title": "Developer mode",
+                "title": "Udviklertilstand",
                 "description": ""
             },
             "nodeSettings": {
-                "title": "Node settings",
+                "title": "Nodeindstillinger",
                 "description": ""
             },
             "proofOfWork": {
-                "title": "Proof of work",
+                "title": "Bevis for arbejde",
                 "description": ""
             },
             "errorLog": {
-                "title": "Error log",
+                "title": "Fejllog",
                 "description": ""
             },
             "stateExport": {
-                "title": "State export",
+                "title": "Eksportér tilstand",
                 "description": ""
             },
             "troubleshoot": {
@@ -226,25 +226,84 @@
             }
         },
         "login": {
-            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "please_wait": "Vent venligst {time, plural, one {1 sekund} other {# sekunder}}",
+            "incorrect_attempts": "{attempts, plural, one {1 forkert forsøg} other {# forkerte forsøg}}"
+        },
+        "dashboard": {
+            "security": {
+                "version": {
+                    "title": "Firefly v{version}",
+                    "up_to_date": "Up to date",
+                    "out_of_date": "Out of date"
+                },
+                "hardware_device": {
+                    "title": "Hardware Device",
+                    "none_detected": "None detected"
+                },
+                "stronghold_status": {
+                    "title": "Stronghold Status",
+                    "locked": "Locked",
+                    "unlocked": "Unlocked"
+                },
+                "stronghold_backup": {
+                    "title": "Stronghold Backup",
+                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                }
+            },
+            "network": {
+                "network_operational": "Network Operational",
+                "network_degraded": "Network Degraded",
+                "network_down": "Network Down",
+                "status": "Status",
+                "messages_per_second": "Messages per second",
+                "confirmation_rate": "Confirmation rate"
+            }
         }
     },
     "popups": {
         "password": {
-            "title": "Password required",
-            "subtitle": "Please provide your wallet’s password to unlock stronghold."
+            "title": "Adgangskode påkrævet",
+            "subtitle": "Please enter your wallet password to unlock Stronghold"
         },
         "qr": {
-            "title": "Your QR code"
+            "title": "Din QR-kode"
+        },
+        "version": {
+            "title": "Current version: {version}",
+            "up_to_date_title": "Firefly is up to date",
+            "up_to_date_description": "You are running the latest and safest version of Firefly.",
+            "update_available": "Firefly update available",
+            "update_details": "Version {version} - {date}"
+        },
+        "backup": {
+            "title": "Last backup: {date}",
+            "last_backup": "You last backed up {date}",
+            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
+            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
+            "not_backed_up": "Not backed up",
+            "not_backed_up_description": "You have not backed up your Stronghold"
+        },
+        "delete_account": {
+            "title": "Delete {name}?",
+            "body": "You will permanently lose your transaction history and maybe something else as well.",
+            "type_password": "Type your wallet’s password to confirm.",
+            "delete_account": "Delete account",
+            "error_title": "Unable to delete {name}",
+            "error_body_1": "To delete an account you must have 0 balance.",
+            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+        },
+        "address_history": {
+            "title": "{name} account address history",
+            "current_balance": "Current balance: {balance}"
         }
     },
     "actions": {
         "continue": "Fortsæt",
         "back": "Tilbage",
-        "cancel": "Cancel",
-        "close": "Close",
-        "save": "Save",
+        "cancel": "Annullér",
+        "close": "Luk",
+        "dismiss": "Dismiss",
+        "save": "Gem",
         "import_seed": "Importer et eksisterende seed",
         "import_wallet": "Importer eksisterende tegnebog",
         "create_wallet": "Opret ny tegnebog",
@@ -253,7 +312,7 @@
         "setup_pin": "Vælg en PIN-kode",
         "set_pin": "Angiv pinkode",
         "confirm_pin": "Bekræft pinkode",
-        "enter_your_pin": "Enter your PIN",
+        "enter_your_pin": "Indtast din PIN-kode",
         "save_backup_file": "Gem backupfil",
         "ive_written_recovery_phrase": "Jeg har skrevet min gendannelsessætning ned",
         "verify_recovery_phrase": "Bekræft gendannelsessætning",
@@ -263,7 +322,7 @@
         "import_from_file": "Importer fra en fil",
         "send": "Send",
         "receive": "Modtag",
-        "create": "Create",
+        "create": "Opret",
         "begin_transfer": "Begynd Overførsel",
         "try_again": "Prøv igen",
         "visit_discord": "Besøg Discord",
@@ -271,34 +330,42 @@
         "import_extentions": ".stronghold eller .kdbx fil",
         "choose_file": "Vælg fil",
         "drop_here": "Slip din fil her",
-        "syncAll": "Sync all",
-        "export": "Export",
-        "exportNewStronghold": "Export a new Stronghold",
-        "enableDeepLinks": "Enable deep links",
-        "enableDeveloperMode": "Enable developer mode",
-        "enableNotifications": "Enable notifications",
-        "exportState": "Export state",
-        "outsourceProofOfWork": "Outsource proof of work",
-        "unlock": "Unlock"
+        "syncAll": "Synkronisér alle",
+        "export": "Eksportér",
+        "exportNewStronghold": "Eksportér en ny Stronghold",
+        "enableDeepLinks": "Aktivér dybe links",
+        "enableDeveloperMode": "Aktiver udviklertilstand",
+        "enableNotifications": "Aktiver notifikationer",
+        "exportState": "Eksportér tilstand",
+        "outsourceProofOfWork": "Outsource bevis for arbejde",
+        "unlock": "Lås op",
+        "update_firefly": "Update Firefly",
+        "save_backup": "Save backup",
+        "customize_account": "Customise account",
+        "sync_account": "Sync account",
+        "view_address_history": "View address history",
+        "delete_account": "Delete account"
     },
     "general": {
         "password": "Adgangskode",
         "confirm_password": "Bekræft adgangskode",
-        "currentPassword": "Current password",
-        "newPassword": "New password",
-        "confirmNewPassword": "Confirm new password",
+        "currentPassword": "Nuværende adgangskode",
+        "newPassword": "Ny adgangskode",
+        "confirmNewPassword": "Bekræft ny adgangskode",
         "your_seed": "Dit seed",
         "recovery_phrase": "Gendannelsesssætning",
         "recent_activity": "Seneste Aktivitet",
         "sent": "Sendt",
         "received": "Modtaget",
+        "send_payment": "Send payment",
+        "move_funds": "Move funds",
         "send_funds": "Send penge",
         "send_to_address": "Send til en adresse",
         "scan_qr_or_paste": "Scan en QR-kode eller indsæt en adresse",
-        "transfer_between_accounts": "Overfør Mellem Konti",
-        "move_funds_between_accounts": "Move funds between accounts",
-        "manage_account": "Manage Account",
-        "customize_account": "Customize your account",
+        "move_funds_between_accounts": "Flyt midler mellem konti",
+        "send_tokens_to_address": "Send tokens to an address",
+        "manage_account": "Administrér konto",
+        "customize_account": "Tilpas din konto",
         "account": "Konto",
         "sending_to_address": "Sender til adresse",
         "amount": "Beløb",
@@ -307,10 +374,11 @@
         "from": "Fra",
         "to": "Til",
         "receive_funds": "Modtag penge",
+        "my_address": "My Address",
         "share_address": "Del en adresse",
         "your_address": "Din adresse",
         "generate_new_address": "Generér ny adresse",
-        "copy_address": "Copy Address",
+        "copy_address": "Kopiér adresse",
         "have_text_backup": "Jeg har en tekst sikkerhedskopi",
         "have_file_backup": "Jeg har en fil sikkerhedskopi",
         "enter_seed_or_phrase": "Indtast en gendannelsessætning eller seed",
@@ -323,17 +391,25 @@
         "light_theme": "Lyst tema",
         "dark_theme": "Mørkt tema",
         "total_balance": "Saldo I Alt",
+        "account_balance": "Account Balance",
         "incoming": "Indgående",
         "outgoing": "Udgående",
         "accounts": "Konti",
-        "automaticNodeSelection": "Automatic node selection",
-        "manualNodeSelection": "Manual node selection",
-        "profiles": "Profiles",
-        "create_account": "Create an account",
-        "account_name": "Account name",
-        "latest_transactions": "Latest Transactions",
-        "transactions": "Transactions",
+        "automaticNodeSelection": "Automatisk valg af node",
+        "manualNodeSelection": "Manuelt valg af node",
+        "profiles": "Profiler",
+        "create_account": "Opret en konto",
+        "account_name": "Kontonavn",
+        "latest_transactions": "Seneste transaktioner",
+        "transactions": "Transaktioner",
         "security": "Sikkerhed",
-        "account_address": "Account Address"
+        "account_address": "Konto adresse"
+    },
+    "dates": {
+        "today": "Today",
+        "days_ago": "{time, plural, one {# day} other {# days}} ago",
+        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
+        "months_ago": "{time, plural, one {# month} other {# months}} ago",
+        "years_ago": "{time, plural, one {# year} other {# years}} ago"
     }
 }
