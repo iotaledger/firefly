@@ -82,7 +82,8 @@ const apiToResponseTypeMap = {
     areLatestAddressesUnused: ResponseTypes.AreAllLatestAddressesUnused,
     setAlias: ResponseTypes.UpdatedAlias,
     removeStorage: ResponseTypes.DeletedStorage,
-    lockStronghold: ResponseTypes.LockedStronghold
+    lockStronghold: ResponseTypes.LockedStronghold,
+    changeStrongholdPassword: ResponseTypes.StrongholdPasswordChanged
 };
 
 /** Active actors state */
@@ -360,3 +361,8 @@ export const getLatestMessages = (
         return <any>new Date(b.timestamp) - <any>new Date(a.timestamp);
     }).slice(0, count);
 };
+
+/**
+ * Selected account ID
+ */
+export const selectedAccountId = writable<string>(null)
