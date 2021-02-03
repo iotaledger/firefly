@@ -92,7 +92,8 @@ const apiToResponseTypeMap = {
     areLatestAddressesUnused: ResponseTypes.AreAllLatestAddressesUnused,
     setAlias: ResponseTypes.UpdatedAlias,
     removeStorage: ResponseTypes.DeletedStorage,
-    lockStronghold: ResponseTypes.LockedStronghold
+    lockStronghold: ResponseTypes.LockedStronghold,
+    changeStrongholdPassword: ResponseTypes.StrongholdPasswordChanged
 };
 
 /** Active actors state */
@@ -158,7 +159,7 @@ const defaultCallbacks = {
  * Response subscriber.
  * Receives messages from wallet.rs.
  */
-Wallet.onMessage((message: MessageResponse) => {
+Wallet.onMessage((message: MessageResponse) => {    
     const _deleteCallbackId = (_id: string) => {
         const isEventMessage = [
             ResponseTypes.ErrorThrown,
