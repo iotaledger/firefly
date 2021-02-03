@@ -1,6 +1,7 @@
 const { app, dialog, ipcMain, protocol, shell, BrowserWindow } = require('electron')
 const path = require('path')
 const Keychain = require('./keychain')
+const { initAutoUpdate } = require("./appUpdater")
 
 /**
  * Define wallet windows
@@ -69,6 +70,8 @@ function createWindow() {
      */
     windows.main.webContents.on('will-navigate', _handleNavigation)
     windows.main.webContents.on('new-window', _handleNavigation)
+
+    initAutoUpdate(windows.main, devMode);
 }
 
 app.whenReady().then(createWindow)

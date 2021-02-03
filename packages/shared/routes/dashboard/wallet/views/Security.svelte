@@ -4,7 +4,7 @@
     import { diffDates, getBackupWarningColor } from 'shared/lib/helpers'
     import { getActiveProfile, profiles } from 'shared/lib/app'
     import { api } from 'shared/lib/wallet'
-
+    import { versionDetails } from 'shared/lib/appUpdater'
 
     export let locale
 
@@ -24,10 +24,6 @@
         strongholdStatusMessage = isStrongholdLocked ? 'locked' : 'unlocked'
     }
 
-    // version
-    let currentVersion = '0.0.1' // dummy
-    let upToDate = Math.random() < 0.5 // dummy
-
     const popupState = getContext('popupState')
 
     function openPopup(type) {
@@ -35,8 +31,7 @@
             active: true,
             type,
             props: {
-                upToDate,
-                currentVersion,
+                currentVersion: $versionDetails.currentVersion,
                 lastBackupDate,
                 lastBackupDateFormatted,
                 isStrongholdLocked: activeProfile.isStrongholdLocked,
@@ -67,9 +62,9 @@
     <div class="grid grid-cols-2 gap-2">
         <!-- Firefly version -->
         <SecurityTile
-            title={locale('views.dashboard.security.version.title', { values: { version: currentVersion } })}
-            message={locale(`views.dashboard.security.version.${upToDate ? 'up_to_date' : 'out_of_date'}`)}
-            color={upToDate ? 'green' : 'red'}
+            title={locale('views.dashboard.security.version.title', { values: { version: $versionDetails.currentVersion } })}
+            message={locale(`views.dashboard.security.version.${$versionDetails.upToDate ? 'up_to_date' : 'out_of_date'}`)}
+            color={$versionDetails.upToDate ? 'green' : 'red'}
             icon="firefly"
             onClick={() => openPopup('update')} />
         <!-- Hardware Device -->

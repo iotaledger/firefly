@@ -59,6 +59,7 @@ const mainPlugins = [
         destDir: './nativeLibs',
         dlopen: false,
     }),
+    json(),
     //ts()
     resolve(),
     commonjs(),

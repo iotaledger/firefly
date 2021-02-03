@@ -1,0 +1,4 @@
+# This is for testing purposes see updateConfigPath in appUpdater.js
+owner: obany
+repo: dev-auto-update-testing
+provider: github
