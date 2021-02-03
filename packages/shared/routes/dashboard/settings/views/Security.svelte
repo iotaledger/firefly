@@ -1,13 +1,8 @@
 <script>
     import zxcvbn from 'zxcvbn'
     import { Text, Dropdown, Password, Button, Checkbox } from 'shared/components'
-<<<<<<< HEAD
-    import { getActiveProfile, removeProfile } from 'shared/lib/app'
+    import { getActiveProfile, removeProfile, updateStrongholdBackupTime } from 'shared/lib/app'
     import { api, destroyActor } from 'shared/lib/wallet'
-=======
-    import { api } from 'shared/lib/wallet'
-    import { updateStrongholdBackupTime, getActiveProfile } from 'shared/lib/app'
->>>>>>> develop
 
     export let locale
     export let navigate
@@ -20,35 +15,35 @@
     $: strength = zxcvbn(newPassword).score
     $: valid = strength === 4 && newPassword === confirmedPassword
 
-<<<<<<< HEAD
     const PincodeManager = window['Electron']['PincodeManager']
 
     function reset() {
         const activeProfile = getActiveProfile()
 
-        PincodeManager.remove(activeProfile.id)
-            .then((isRemoved) => {
-                if (!isRemoved) {
-                    throw new Error('Something went wrong removing pincode entry.')
-                }
+        PincodeManager.remove(activeProfile.id).then((isRemoved) => {
+            if (!isRemoved) {
+                throw new Error('Something went wrong removing pincode entry.')
+            }
 
-                // Remove storage
-                api.removeStorage({
-                    onSuccess(res) {
-                        // Destroy wallet.rs actor for this profile
-                        destroyActor(activeProfile.id)
+            // Remove storage
+            api.removeStorage({
+                onSuccess(res) {
+                    // Destroy wallet.rs actor for this profile
+                    destroyActor(activeProfile.id)
 
-                        // Remove profile from (local) storage
-                        removeProfile(activeProfile.id)
+                    // Remove profile from (local) storage
+                    removeProfile(activeProfile.id)
 
-                        // Navigate
-                        navigate({ reset: true })
-                    },
-                    onError(error) {
-                        console.error(error)
-                    },
-                })
-=======
+                    // Navigate
+                    navigate({ reset: true })
+                },
+                onError(error) {
+                    console.error(error)
+                },
+            })
+        })
+    }
+    
     function exportStronghold() {
         window['Electron']
             .getStrongholdBackupDestination()
@@ -63,7 +58,6 @@
                         },
                     })
                 }
->>>>>>> develop
             })
             .catch((error) => console.error(error))
     }
@@ -73,7 +67,9 @@
     <section id="exportStronghold" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.exportStronghold.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.exportStronghold.description')}</Text>
-        <Button classes="w-1/4 h-1/2" disabled={getActiveProfile().isStrongholdLocked} onClick={exportStronghold}>{locale('actions.export')}</Button>
+        <Button classes="w-1/4 h-1/2" disabled={getActiveProfile().isStrongholdLocked} onClick={exportStronghold}>
+            {locale('actions.export')}
+        </Button>
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <section id="appLock" class="w-3/4">
