@@ -185,21 +185,34 @@
     }
 
     function onGenerateAddress(accountId) {
-        isGeneratingAddress = true
-        api.generateAddress(accountId, {
-            onSuccess(response) {
-                accounts.update((accounts) =>
-                    accounts.map((account) => {
-                        if (account.id === accountId) {
-                            return Object.assign({}, account, {
-                                address: response.payload.address,
-                            })
-                        }
+        const _generate = () => {
+            isGeneratingAddress = true
+            api.getUnusedAddress(accountId, {
+                onSuccess(response) {
+                    accounts.update((accounts) =>
+                        accounts.map((account) => {
+                            if (account.id === accountId) {
+                                return Object.assign({}, account, {
+                                    address: response.payload.address,
+                                })
+                            }
 
-                        return account
-                    })
-                )
-                isGeneratingAddress = false
+                            return account
+                        })
+                    )
+                    isGeneratingAddress = false
+                },
+                onError(error) {
+                    console.error(error)
+                },
+            })
+        }
+
+        api.getStrongholdStatus({
+            onSuccess(strongholdStatusResponse) {
+                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                    popupState.set({ active: true, type: 'password', props: { onSuccess: _generate } })
+                }
             },
             onError(error) {
                 console.error(error)
