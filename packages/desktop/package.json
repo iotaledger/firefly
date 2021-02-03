@@ -85,7 +85,7 @@
                 "AppImage"
             ],
             "desktop": {
-                "Name": "Trinity",
+                "Name": "Firefly",
                 "Comment": "Desktop wallet for IOTA",
                 "Categories": "Office;Network;Finance"
             }
