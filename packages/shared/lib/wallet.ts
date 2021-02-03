@@ -7,6 +7,7 @@ import type {
     LatestAddressResponse,
     SyncAccountsResponse,
     ErrorResponse,
+    Actor,
     StrongholdStatusResponse,
 } from './typings/bridge'
 import { ResponseTypes } from './typings/bridge'
@@ -29,6 +30,10 @@ type Account = {
     alias: string
     addresses: Address[]
     messages: Message[]
+}
+
+interface ActorState {
+    [id: string]: Actor
 }
 
 type WalletState = {
@@ -75,8 +80,13 @@ const apiToResponseTypeMap = {
     getUnusedAddress: ResponseTypes.UnusedAddress,
     isLatestAddressUnused: ResponseTypes.IsLatestAddressUnused,
     areLatestAddressesUnused: ResponseTypes.AreAllLatestAddressesUnused,
-    setAlias: ResponseTypes.UpdatedAlias
+    setAlias: ResponseTypes.UpdatedAlias,
+    removeStorage: ResponseTypes.DeletedStorage,
+    lockStronghold: ResponseTypes.LockedStronghold
 };
+
+/** Active actors state */
+const actors: ActorState = {};
 
 /*
  * Wallet state
@@ -252,8 +262,31 @@ export const getStoragePath = (appPath: string, profileName: string): string => 
 }
 
 export const initialise = (id: string, storagePath: string): void => {
-    return Wallet.init(id, storagePath);
+    const actor: Actor = Wallet.init(id, storagePath);
+
+    actors[id] = actor;
 }
+
+/**
+ * Destroys an actor & remove it from actors state
+ * 
+ * @method destroyActor
+ * 
+ * @param {string} id
+ * 
+ * @returns {void} 
+ */
+export const destroyActor = (id: string): void => {
+    if (!actors[id]) {
+        throw new Error('No actor found for provided id.')
+    }
+
+    // Destroy actor
+    actors[id].destroy();
+
+    // Delete actor id from state
+    delete actors[id];
+};
 
 /**
  * Generate BIP39 Mnemonic Recovery Phrase
@@ -327,3 +360,8 @@ export const getLatestMessages = (
         return <any>new Date(b.timestamp) - <any>new Date(a.timestamp);
     }).slice(0, count);
 };
+
+/**
+ * Selected account ID
+ */
+export const selectedAccountId = writable<string>(null)

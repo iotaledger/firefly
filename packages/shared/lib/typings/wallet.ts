@@ -52,6 +52,14 @@ export interface LoggerOutput {
       payload: password
     })
   }
+
+  export function removeStorage(bridge: Bridge, __ids: CommunicationIds) {
+    return bridge({
+      actorId: __ids.actorId,
+      id: __ids.messageId,
+      cmd: 'DeleteStorage'
+    })
+  }
   
   export function send(bridge: Bridge, __ids: CommunicationIds, fromAccountId: AccountIdentifier, transfer: Transfer) {
     return bridge({
@@ -96,5 +104,13 @@ export interface LoggerOutput {
       actorId: __ids.actorId,
       id: __ids.messageId,
       cmd: 'GetStrongholdStatus',
+    })
+  }
+
+  export function lockStronghold(bridge: Bridge, __ids: CommunicationIds) {
+    return bridge({
+      actorId: __ids.actorId,
+      id: __ids.messageId,
+      cmd: 'LockStronghold',
     })
   }

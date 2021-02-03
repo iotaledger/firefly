@@ -35,7 +35,9 @@ import {
   generateMnemonic as _generateMnemonic,
   storeMnemonic as _storeMnemonic,
   verifyMnemonic as _verifyMnemonic,
-  getStrongholdStatus as _getStrongholdStatus
+  getStrongholdStatus as _getStrongholdStatus,
+  removeStorage as _removeStorage,
+  lockStronghold as _lockStronghold
 } from '../../../shared/lib/typings/wallet'
 
 const addon = require('../index.node')
@@ -87,6 +89,9 @@ export const api = {
   },
   getStrongholdStatus: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _getStrongholdStatus(sendMessage, __ids)
+  },
+  lockStronghold: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _lockStronghold(sendMessage, __ids)
   },
   generateMnemonic: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _generateMnemonic(sendMessage, __ids)
@@ -156,6 +161,9 @@ export const api = {
   },
   setStoragePassword: function (password: string): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _setStoragePassword(sendMessage, __ids, password)
+  },
+  removeStorage: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _removeStorage(sendMessage, __ids)
   },
   send: function (fromAccountId: AccountIdentifier, transfer: Transfer): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _send(sendMessage, __ids, fromAccountId, transfer)
