@@ -3,6 +3,20 @@ const path = require('path')
 const Keychain = require('./keychain')
 
 /**
+ * Terminate application if Node remote debugging detected
+ */
+const argv = process.argv.join()
+const flagBlocklist = ['inspect', 'inspect-brk', 'remote-debugging-port']
+if (
+    argv.includes('inspect') ||
+    argv.includes('remote') ||
+    typeof v8debug !== 'undefined' ||
+    flagBlocklist.some((flag) => app.commandLine.hasSwitch(flag))
+) {
+    app.quit()
+}
+
+/**
  * Define wallet windows
  */
 const windows = {
