@@ -1,15 +1,17 @@
 <script lang="typescript">
     import { fade } from 'svelte/transition'
     import { Text, Icon, Modal } from 'shared/components'
-    import { getActiveProfile } from 'shared/lib/app'
+    import { getActiveProfile, setActiveProfile } from 'shared/lib/app'
     import { getInitials } from 'shared/lib/helpers'
     import { AppRoute, setRoute } from 'shared/lib/router'
+    import { api, destroyActor } from 'shared/lib/wallet'
 
     export let isActive
     export let locale
     export let openSettings = () => {}
 
     const profileColor = 'blue' // TODO: each profile has a different color
+    const activeProfile = getActiveProfile()
     const profileName = getActiveProfile().name
     const profileInitial = getInitials(profileName, 1)
 
@@ -18,8 +20,19 @@
         isActive = false
     }
     const handleLogoutClick = () => {
-        isActive = false
-        setRoute(AppRoute.Login)
+        // Lock stronghold
+        api.lockStronghold({
+            onSuccess() {
+                // TODO clear writables
+                // Destroy wallet.rs actor for this profile
+                destroyActor(activeProfile.id)
+                // Navigate to Login
+                setRoute(AppRoute.Login)
+            },
+            onError(error) {
+                console.error(error)
+            },
+        })
     }
 </script>
 
