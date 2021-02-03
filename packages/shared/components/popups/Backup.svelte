@@ -21,7 +21,6 @@
             popupState.set({ active: true, type: 'password', props: { onSuccess: triggerBackup } })
         } else {
             triggerBackup()
-
         }
     }
 
@@ -30,7 +29,6 @@
     }
 
     function triggerBackup() {
-
         window['Electron']
             .getStrongholdBackupDestination()
             .then((result) => {
@@ -58,7 +56,9 @@
 
 <div class="flex w-full flex-row flex-wrap">
     <Text type="h4" classes="mb-5">
-        {locale('popups.backup.title', { values: { date: $date(lastBackupDate.lastBackupDate, { format: 'long' }) } })}
+        {lastBackupDate ? locale('popups.backup.title', {
+                  values: { date: $date(lastBackupDate, { format: 'long' }) },
+              }) : locale('popups.backup.not_backed_up')}
     </Text>
     <div class="w-full p-4 bg-gray-50 flex justify-center content-center"><img src="assets/logos/stronghold.svg" alt="" /></div>
     <div class="w-full text-center my-6 px-8">
