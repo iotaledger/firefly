@@ -1,4 +1,4 @@
-const { app, dialog, ipcMain, protocol, shell, BrowserWindow } = require('electron')
+const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
 const path = require('path')
 const Keychain = require('./keychain')
 
@@ -92,10 +92,23 @@ function createWindow() {
     }
 
     /**
-     * Only allow external navigation to acceptlisted domains
+     * Only allow external navigation to allowed domains
      */
     windows.main.webContents.on('will-navigate', _handleNavigation)
     windows.main.webContents.on('new-window', _handleNavigation)
+
+    /**
+     * Handle permissions requests
+     */
+    session.defaultSession.setPermissionRequestHandler((_webContents, permission, cb, details) => {
+        if (permission === 'openExternal' && details && details.externalURL && isUrlAllowed(details.externalURL)) {
+            return cb(true)
+        }
+
+        const permissionAllowlist = ['clipboard-read', 'notifications', 'fullscreen']
+
+        return cb(permissionAllowlist.indexOf(permission) > -1)
+    })
 }
 
 app.whenReady().then(createWindow)
