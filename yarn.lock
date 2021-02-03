@@ -5006,6 +5006,14 @@ rollup-plugin-livereload@^1.3.0:
   dependencies:
     livereload "^0.9.1"
 
+rollup-plugin-natives@^0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-natives/-/rollup-plugin-natives-0.7.1.tgz#e9ae4d06fa0a8da3ce36ee2efe5060d55f830c2d"
+  integrity sha512-dVc+ImchVzqELPULC0fFuqKEhnlUE+elT6D9x8sQmoxEHYLHxDjEnqRJJ2oNYZsqHFfzMYnapDu5j8qfo3Vm3g==
+  dependencies:
+    fs-extra "^9.0.1"
+    magic-string "^0.25.7"
+
 rollup-plugin-node-builtins@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/rollup-plugin-node-builtins/-/rollup-plugin-node-builtins-2.1.2.tgz#24a1fed4a43257b6b64371d8abc6ce1ab14597e9"

@@ -1,4 +1,4 @@
-const { app, ipcMain, protocol, shell, BrowserWindow } = require('electron')
+const { app, dialog, ipcMain, protocol, shell, BrowserWindow } = require('electron')
 const path = require('path')
 const Keychain = require('./keychain')
 
@@ -32,12 +32,13 @@ function createWindow() {
         height: 600,
         webPreferences: {
             nodeIntegration: false,
-            preload: path.join(__dirname, 'preload.js'),
+            enableRemoteModule: false,
+            preload: path.join(devMode ? __dirname : app.getAppPath(), 'preload.js'),
         },
     })
 
     // and load the index.html of the app.
-    windows.main.loadFile('../public/index.html')
+    windows.main.loadFile(devMode ? '../public/index.html' : '../index.html')
 
     // Enable dev tools only in developer mode
     if (devMode) {
@@ -105,6 +106,22 @@ ipcMain.handle('keychain-set', (_e, key, content) => {
 })
 ipcMain.handle('keychain-remove', (_e, key) => {
     return Keychain.remove(key)
+})
+
+// Dialogs
+ipcMain.handle('show-open-dialog', (_e, options) => {
+    return dialog.showOpenDialog(options)
+})
+
+// Miscellaneous
+ipcMain.handle('get-path', (_e, path) => {
+    const allowedPaths = [
+        'userData',
+    ]
+    if (allowedPaths.indexOf(path) === -1) {
+        throw Error(`Path ${path} is not allowed`)
+    }
+    return app.getPath(path)
 })
 
 /**

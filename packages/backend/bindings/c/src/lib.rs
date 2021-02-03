@@ -86,5 +86,5 @@ pub extern "C" fn listen(actor_id: *const c_char, id: *const c_char, event_name:
     let event_name = c_event_name.to_str().unwrap();
 
     let event_type: EventType = event_name.try_into().expect("unknown event name");
-    add_event_listener(actor_id, id, event_type);
+    block_on(add_event_listener(actor_id, id, event_type));
 }
