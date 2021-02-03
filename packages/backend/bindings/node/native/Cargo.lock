@@ -289,7 +289,7 @@ dependencies = [
 [[package]]
 name = "bee-ledger"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#2a3c4352201ac1918f043d212fd4e1df20c138d3"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#0bb1032716557c77f4716792f4414fb6d75854ba"
 dependencies = [
  "async-trait",
  "bee-common",
@@ -314,7 +314,7 @@ dependencies = [
 [[package]]
 name = "bee-message"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#2a3c4352201ac1918f043d212fd4e1df20c138d3"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#0bb1032716557c77f4716792f4414fb6d75854ba"
 dependencies = [
  "bech32",
  "bee-common",
@@ -331,7 +331,7 @@ dependencies = [
 [[package]]
 name = "bee-network"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#2a3c4352201ac1918f043d212fd4e1df20c138d3"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#0bb1032716557c77f4716792f4414fb6d75854ba"
 dependencies = [
  "async-trait",
  "bee-runtime",
@@ -350,7 +350,7 @@ dependencies = [
 [[package]]
 name = "bee-pow"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#2a3c4352201ac1918f043d212fd4e1df20c138d3"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#0bb1032716557c77f4716792f4414fb6d75854ba"
 dependencies = [
  "bee-crypto",
  "bee-ternary",
@@ -361,7 +361,7 @@ dependencies = [
 [[package]]
 name = "bee-protocol"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#2a3c4352201ac1918f043d212fd4e1df20c138d3"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#0bb1032716557c77f4716792f4414fb6d75854ba"
 dependencies = [
  "async-channel",
  "async-trait",
@@ -397,7 +397,7 @@ dependencies = [
 [[package]]
 name = "bee-rest-api"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#2a3c4352201ac1918f043d212fd4e1df20c138d3"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#0bb1032716557c77f4716792f4414fb6d75854ba"
 dependencies = [
  "async-trait",
  "bech32",
@@ -468,7 +468,7 @@ dependencies = [
 [[package]]
 name = "bee-snapshot"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#2a3c4352201ac1918f043d212fd4e1df20c138d3"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#0bb1032716557c77f4716792f4414fb6d75854ba"
 dependencies = [
  "async-trait",
  "bee-common",
@@ -498,7 +498,7 @@ dependencies = [
 [[package]]
 name = "bee-tangle"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#2a3c4352201ac1918f043d212fd4e1df20c138d3"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#0bb1032716557c77f4716792f4414fb6d75854ba"
 dependencies = [
  "async-trait",
  "bee-common",
@@ -1801,31 +1801,6 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "0.5.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?rev=e7b731ac3f204df615aa195111425b5127845287#e7b731ac3f204df615aa195111425b5127845287"
-dependencies = [
- "bee-common",
- "bee-crypto",
- "bee-message",
- "bee-pow",
- "bee-rest-api",
- "bee-signing",
- "bee-signing-ext",
- "blake2",
- "chrono",
- "hex",
- "num_cpus",
- "paho-mqtt",
- "regex",
- "reqwest",
- "serde 1.0.123",
- "serde_json",
- "thiserror",
- "tokio",
-]
-
-[[package]]
-name = "iota-client"
-version = "0.5.0-alpha.3"
 source = "git+https://github.com/iotaledger/iota.rs?branch=dev#56e92725cac7c4e75b036ad770b6dc85a8065cfb"
 dependencies = [
  "bee-common",
@@ -1851,25 +1826,13 @@ dependencies = [
 [[package]]
 name = "iota-core"
 version = "0.2.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?rev=e7b731ac3f204df615aa195111425b5127845287#e7b731ac3f204df615aa195111425b5127845287"
-dependencies = [
- "bee-common",
- "bee-message",
- "bee-pow",
- "bee-signing-ext",
- "iota-client 0.5.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?rev=e7b731ac3f204df615aa195111425b5127845287)",
-]
-
-[[package]]
-name = "iota-core"
-version = "0.2.0-alpha.3"
 source = "git+https://github.com/iotaledger/iota.rs?branch=dev#56e92725cac7c4e75b036ad770b6dc85a8065cfb"
 dependencies = [
  "bee-common",
  "bee-message",
  "bee-pow",
  "bee-signing-ext",
- "iota-client 0.5.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?branch=dev)",
+ "iota-client",
 ]
 
 [[package]]
@@ -1931,7 +1894,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#7c75ac817feb76c907d0c88e44d86e9723a9cc5e"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#cedc88114445217e1499e52d90ef8c995666e4c9"
 dependencies = [
  "async-trait",
  "backtrace",
@@ -1941,7 +1904,7 @@ dependencies = [
  "futures 0.3.12",
  "getset",
  "hex",
- "iota-core 0.2.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?rev=e7b731ac3f204df615aa195111425b5127845287)",
+ "iota-core",
  "iota-crypto 0.2.0 (git+https://github.com/iotaledger/crypto.rs?rev=c2514969c3f6693b86425ec84bada84b3ebea645)",
  "iota-stronghold",
  "log",
@@ -4275,7 +4238,7 @@ checksum = "9d5b2c62b4012a3e1eca5a7e077d13b3bf498c4073e33ccd58626607748ceeca"
 name = "wallet-actor-system"
 version = "0.1.0"
 dependencies = [
- "iota-core 0.2.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?branch=dev)",
+ "iota-core",
  "iota-wallet",
  "log",
  "once_cell",
