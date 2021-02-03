@@ -131,13 +131,7 @@ const defaultCallbacks = {
         onError: (error: ErrorResponse): void => { },
     },
     CreatedAccount: {
-        onSuccess: (response: CreatedAccountResponse): void => {
-            wallet.update((_wallet) =>
-                Object.assign({}, _wallet, {
-                    accounts: [..._wallet.accounts, response.payload],
-                })
-            )
-        },
+        onSuccess: (response: CreatedAccountResponse): void => { },
         onError: (error: ErrorResponse): void => { },
     },
     ReadAccounts: {
@@ -149,31 +143,11 @@ const defaultCallbacks = {
         onError: (error: ErrorResponse): void => { },
     },
     SyncedAccounts: {
-        onSuccess: (response: SyncAccountsResponse): void => {
-            wallet.update((_wallet) => {
-                for (const synced of response.payload) {
-                    // TODO this won't be necessary when the account id is serialized as a string
-                    const accountId = JSON.stringify(synced.accountId)
-                    const account = _wallet.accounts.find((acc) => JSON.stringify(acc.id) === accountId)
-                    account.addresses = [...account.addresses, ...synced.addresses]
-                    account.messages = [...account.messages, ...synced.messages]
-                }
-                return _wallet
-            })
-        },
+        onSuccess: (response: SyncAccountsResponse): void => { },
         onError: (error: ErrorResponse): void => { },
     },
     BalanceChange: {
-        onSuccess: (response: Event<BalanceChangeEventPayload>): void => {
-            wallet.update((_wallet) => {
-                // TODO this won't be necessary when the account id is serialized as a string
-                const accountId = JSON.stringify(response.payload.accountId)
-                const account = _wallet.accounts.find((acc) => JSON.stringify(acc.id) === accountId)
-                const address = account.addresses.find((addr) => addr.address === response.payload.address.address)
-                address.balance = response.payload.balance
-                return _wallet
-            })
-        },
+        onSuccess: (response: Event<BalanceChangeEventPayload>): void => { },
     },
     NewTransaction: {
         onSuccess: (response: Event<TransactionEventPayload>): void => { }
