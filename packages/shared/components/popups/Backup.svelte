@@ -1,5 +1,6 @@
 <script>
     import { getContext } from 'svelte'
+    import { date } from 'svelte-i18n'
     import { Text, Button } from 'shared/components'
     import { getBackupWarningColor } from 'shared/lib/helpers'
     import { api } from 'shared/lib/wallet'
@@ -56,9 +57,10 @@
 </style>
 
 <div class="flex w-full flex-row flex-wrap">
-    <div class="w-full p-4 bg-gray-50 flex justify-center content-center">
-        <img src="assets/logos/stronghold.svg" alt="" />
-    </div>
+    <Text type="h4" classes="mb-5">
+        {lastBackupDate ? locale('popups.backup.title', { values: { date: $date(lastBackupDate, { format: 'long' }) } }) : locale('popups.backup.not_backed_up')}
+    </Text>
+    <div class="w-full p-4 bg-gray-50 flex justify-center content-center"><img src="assets/logos/stronghold.svg" alt="" /></div>
     <div class="w-full text-center my-6 px-8">
         <Text overrideColor type="h5" classes="mb-2 text-{color}-600">
             {#if !lastBackupDate}

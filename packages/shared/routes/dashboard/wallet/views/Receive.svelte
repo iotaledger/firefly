@@ -1,13 +1,13 @@
 <script lang="typescript">
-    import { createEventDispatcher, getContext } from 'svelte'
+    import { getContext } from 'svelte'
     import { Text, Button, Dropdown, QR, Icon } from 'shared/components'
     import { setClipboard } from 'shared/lib/helpers'
+    import { walletViewState, WalletViewStates, accountViewState, AccountViewStates } from 'shared/lib/router'
 
     export let locale
     export let generateAddress = (accountId) => {}
     export let isGeneratingAddress = false
 
-    const dispatch = createEventDispatcher()
     const accounts = getContext('walletAccounts')
     const currentAccount = getContext('selectedAccount')
 
@@ -20,7 +20,8 @@
         generateAddress(selectedAccount.id)
     }
     const handleCloseClick = () => {
-        dispatch('previous')
+        walletViewState.set(WalletViewStates.Init)
+        accountViewState.set(AccountViewStates.Init)
     }
 </script>
 
