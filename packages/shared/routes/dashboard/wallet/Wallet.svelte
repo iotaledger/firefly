@@ -2,7 +2,7 @@
     import { setContext, onMount } from 'svelte'
     import { get, writable, derived } from 'svelte/store'
     import { updateStrongholdStatus } from 'shared/lib/app'
-    import { api, getLatestMessages, initialiseListeners, selectedAccountId } from 'shared/lib/wallet'
+    import { api, getLatestMessages, initialiseListeners, selectedAccountId, wallet } from 'shared/lib/wallet'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { deepLinking, currency } from 'shared/lib/settings'
     import { DEFAULT_NODES as nodes } from 'shared/lib/network'
@@ -15,24 +15,19 @@
     export let locale
 
     const AccountColors = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
-    const DUMMY_WALLET_BALANCE = {
-        incoming: '32 Gi',
-        outgoing: '16 Gi',
-        balance: '0 Mi',
-        balanceEquiv: '0.00 USD',
-    }
 
-    const totalBalance = writable(DUMMY_WALLET_BALANCE)
-    const accounts = writable([])
+    const { accounts, balanceOverview } = $wallet
+
     const transactions = derived(accounts, ($accounts) => {
         return getLatestMessages($accounts)
     })
     const selectedAccount = derived([selectedAccountId, accounts], ([$selectedAccountId, $accounts]) =>
         $accounts.find((acc) => acc.id === $selectedAccountId)
     )
+
     const popupState = writable({ active: false })
 
-    setContext('walletBalance', totalBalance)
+    setContext('walletBalance', balanceOverview)
     setContext('walletAccounts', accounts)
     setContext('walletTransactions', transactions)
     setContext('selectedAccount', selectedAccount)
@@ -49,7 +44,7 @@
                             balance: balanceResponse.payload.total,
                             incoming: balanceResponse.payload.incoming,
                             outgoing: balanceResponse.payload.outgoing,
-                            address: latestAddressResponse.payload.address,
+                            depositAddress: latestAddressResponse.payload.address,
                         })
                     },
                     onError(error) {
@@ -65,7 +60,7 @@
 
     function prepareAccountInfo(account, meta) {
         const { id, index, alias } = account
-        const { balance, address } = meta
+        const { balance, depositAddress } = meta
 
         return Object.assign({}, account, {
             id,
@@ -74,7 +69,6 @@
             rawIotaBalance: balance,
             balance: formatUnit(balance, 0),
             balanceEquiv: `${convertToFiat(balance, $currencies[CurrencyTypes.USD], $exchangeRates[$currency])} ${$currency}`,
-            address,
             color: AccountColors[index],
         })
     }
@@ -99,13 +93,15 @@
                             accounts.update((accounts) => [...accounts, account])
 
                             if (idx === accountsResponse.payload.length - 1) {
-                                totalBalance.update((totalBalance) =>
-                                    Object.assign({}, totalBalance, {
-                                        rawIotaBalance: _totalBalance.balance,
-                                        balance: formatUnit(_totalBalance.balance, 2),
+                                balanceOverview.update((balanceOverview) =>
+                                    Object.assign({}, balanceOverview, {
                                         incoming: formatUnit(_totalBalance.incoming, 2),
+                                        incomingRaw: _totalBalance.incoming,
                                         outgoing: formatUnit(_totalBalance.outgoing, 2),
-                                        balanceEquiv: `${convertToFiat(
+                                        outgoingRaw: _totalBalance.outgoing,
+                                        balance: formatUnit(_totalBalance.balance, 2),
+                                        balanceRaw: _totalBalance.balance,
+                                        balanceFiat: `${convertToFiat(
                                             _totalBalance.balance,
                                             $currencies[CurrencyTypes.USD],
                                             $exchangeRates[$currency]
@@ -134,7 +130,7 @@
                     accounts.map((account) => {
                         if (account.id === accountId) {
                             return Object.assign({}, account, {
-                                address: response.payload.address,
+                                depositAddress: response.payload.address,
                             })
                         }
 
@@ -173,11 +169,11 @@
                 accounts.update((storedAccounts) => {
                     return storedAccounts.map((storedAccount) => {
                         // TODO: SyncAccounts response should have "id" instead of "accountId" (for consistency)
-                        const syncedAccount = syncedAccounts.find((_account) => _account.accountId === storedAccount.id)
+                        const syncedAccount = syncedAccounts.find((_account) => _account.id === storedAccount.id)
 
                         return Object.assign({}, storedAccount, {
                             // Update deposit address
-                            depositAddress: syncedAccount.depositAddress,
+                            depositAddress: syncedAccount.depositAddress.address,
                             // If we have received a new address, simply add it;
                             // If we have received an existing address, update the properties.
                             addresses: _update(storedAccount.addresses, syncedAccount.addresses, 'address'),
@@ -339,7 +335,9 @@
     }
 
     onMount(() => {
-        getAccounts()
+        if (!$accounts.length) {
+            getAccounts()
+        }
 
         initialiseListeners()
 

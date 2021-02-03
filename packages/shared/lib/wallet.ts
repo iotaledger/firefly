@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store'
+import { writable, Writable, get } from 'svelte/store'
 import type {
     MessageResponse,
     SetStrongholdPasswordResponse,
@@ -18,7 +18,6 @@ import Validator, { ErrorTypes as ValidatorErrorTypes } from 'shared/lib/validat
 import { generateRandomId } from 'shared/lib/utils'
 import { mnemonic, getActiveProfile, updateStrongholdStatus } from 'shared/lib/app'
 import { account, message } from './typings'
-import { persistent } from './helpers'
 
 const Wallet = window['__WALLET__']
 
@@ -29,15 +28,26 @@ type Account = {
     index: number;
     alias: string
     addresses: Address[]
-    messages: Message[]
+    messages: Message[],
 }
 
 interface ActorState {
     [id: string]: Actor
 }
 
+export type BalanceOverview = {
+    incoming: string;
+    incomingRaw: number;
+    outgoing: string;
+    outgoingRaw: number;
+    balance: string;
+    balanceRaw: number;
+    balanceFiat: string;
+}
+
 type WalletState = {
-    accounts: Account[]
+    balanceOverview: Writable<BalanceOverview>;
+    accounts: Writable<Account[]>
 }
 
 type CallbacksStore = {
@@ -92,8 +102,19 @@ const actors: ActorState = {};
  * Wallet state
  */
 export const wallet = writable<WalletState>({
-    accounts: [] as Account[],
+    balanceOverview: writable<BalanceOverview>({
+        incoming: '0 Mi',
+        incomingRaw: 0,
+        outgoing: '0 Mi',
+        outgoingRaw: 0,
+        balance: '0 Mi',
+        balanceRaw: 0,
+        balanceFiat: '0.00 USD'
+    }),
+    accounts: writable<Account[]>([])
 })
+
+export const selectedAccountId = writable<string | null>(null)
 
 /**
  * A simple store for keeping references to (success, error) callbacks
@@ -329,6 +350,22 @@ export const initialiseListeners = () => {
         },
         onError(error) { console.error(error) }
     })
+
+    /**
+    * Event listener for balance change event
+    */
+    api.onBalanceChange({
+        onSuccess(response) { console.log('Balance change response', response) },
+        onError(error) { console.error(error) }
+    })
+
+    /**
+    * Event listener for new message event
+    */
+    api.onNewTransaction({
+        onSuccess(response) { console.log('New transaction response', response) },
+        onError(error) { console.error(error) }
+    })
 };
 
 
@@ -360,8 +397,3 @@ export const getLatestMessages = (
         return <any>new Date(b.timestamp) - <any>new Date(a.timestamp);
     }).slice(0, count);
 };
-
-/**
- * Selected account ID
- */
-export const selectedAccountId = writable<string>(null)
