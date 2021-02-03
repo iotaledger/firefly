@@ -17,6 +17,11 @@ if (
 }
 
 /**
+ * Expose Garbage Collector flag for manual trigger after seed usage
+ */
+app.commandLine.appendSwitch('js-flags', '--expose-gc')
+
+/**
  * Define wallet windows
  */
 const windows = {
