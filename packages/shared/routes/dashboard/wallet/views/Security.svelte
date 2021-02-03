@@ -12,7 +12,6 @@
     let color
     let strongholdStatusMessage
 
-
     function setup() {
         activeProfile = getActiveProfile()
 
