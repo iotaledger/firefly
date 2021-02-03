@@ -33,6 +33,16 @@ const windows = {
  */
 const devMode = process.env.NODE_ENV === 'development'
 
+/**
+ * Check URL against allowlist
+ */
+function isUrlAllowed(url) {
+    // TODO: Add links for T&C, privacy policy and help
+    const externalAllowlist = ['privacy@iota.org', 'explorer.iota.org']
+
+    return externalAllowlist.indexOf(new URL(url).hostname.replace('www.', '').replace('mailto:', '')) > -1
+}
+
 function createWindow() {
     /**
      * Register iota file protocol
@@ -71,16 +81,9 @@ function createWindow() {
 
     const _handleNavigation = (e, url) => {
         e.preventDefault()
-        // TODO: Add externalAcceptlist links for T&C, privacy policy and help
-        const externalAcceptlist = [
-            'privacy@iota.org',
-            'explorer.iota.org',
-        ]
 
         try {
-            if (
-                externalAcceptlist.indexOf(new URL(url).hostname.replace('www.', '').replace('mailto:', '')) > -1
-            ) {
+            if (isUrlAllowed(url)) {
                 shell.openExternal(url)
             }
         } catch (error) {
@@ -139,9 +142,7 @@ ipcMain.handle('show-open-dialog', (_e, options) => {
 
 // Miscellaneous
 ipcMain.handle('get-path', (_e, path) => {
-    const allowedPaths = [
-        'userData',
-    ]
+    const allowedPaths = ['userData']
     if (allowedPaths.indexOf(path) === -1) {
         throw Error(`Path ${path} is not allowed`)
     }
