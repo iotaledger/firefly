@@ -39,7 +39,7 @@ import {
   removeStorage as _removeStorage
 } from '../../../shared/lib/typings/wallet'
 
-const addon = require('../native')
+const addon = require('../index.node')
 const mailbox = []
 const onMessageListeners: ((payload: MessageResponse) => void)[] = []
 
