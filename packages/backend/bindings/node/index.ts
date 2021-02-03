@@ -39,7 +39,7 @@ import {
   openLedgerApp as _openLedgerApp
 } from '../../../shared/lib/typings/wallet'
 
-const addon = require('../native')
+const addon = require('../index.node')
 const mailbox = []
 const onMessageListeners: ((payload: MessageResponse) => void)[] = []
 

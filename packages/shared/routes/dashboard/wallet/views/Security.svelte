@@ -1,39 +1,51 @@
 <script lang="typescript">
-    import { getContext, onDestroy } from 'svelte'
+    import { getContext, onMount, onDestroy } from 'svelte'
     import { Text, SecurityTile } from 'shared/components'
     import { diffDates, getBackupWarningColor } from 'shared/lib/helpers'
+    import { getActiveProfile, profiles } from 'shared/lib/app'
     import { api } from 'shared/lib/wallet'
 
     export let locale
+
+    let activeProfile
+    let lastBackupDate
+    let lastBackupDateFormatted
+    let color
+    let strongholdStatusMessage
+    let isDestroyed = false
+    let isCheckingLedger
+    let isLedgerOpened
+    let hardwareDeviceMessage
+
+    function setup() {
+        activeProfile = getActiveProfile()
+
+        const { isStrongholdLocked, strongholdLastBackupTime } = activeProfile
+        lastBackupDate = strongholdLastBackupTime ? new Date(strongholdLastBackupTime) : null
+        lastBackupDateFormatted = diffDates(lastBackupDate, new Date())
+        color = getBackupWarningColor(lastBackupDate)
+        strongholdStatusMessage = isStrongholdLocked ? 'locked' : 'unlocked'
+    }
 
     // version
     let currentVersion = '0.0.1' // dummy
     let upToDate = Math.random() < 0.5 // dummy
 
-    // stronghold backup
-    let lastBackupDate = new Date(
-        new Date().getFullYear(),
-        new Date().getMonth(),
-        new Date().getDate() - Math.floor(Math.random() * 200)
-    ) // dummy
-
-    // stronghold status
-    let strongholdLocked = Math.random() < 0.5 // dummy
-    let isLedgerOpened = false
-    let isDestroyed = false
-    let isCheckingLedger = false
-    let color = getBackupWarningColor(lastBackupDate)
-
-    // stronghold backup
-    let lastBackupDateFormatted = lastBackupDate ? diffDates(lastBackupDate, new Date()) : null
-    $: strongholdStatusMessage = strongholdLocked ? 'locked' : 'unlocked'
-    $: hardwareDeviceMessage = isLedgerOpened ? 'detected' : 'none_detected'
-
     const popupState = getContext('popupState')
     const walletAccounts = getContext('walletAccounts')
 
     function openPopup(type) {
-        popupState.set({ active: true, type, props: { upToDate, currentVersion, lastBackupDate, lastBackupDateFormatted } })
+        popupState.set({
+            active: true,
+            type,
+            props: {
+                upToDate,
+                currentVersion,
+                lastBackupDate,
+                lastBackupDateFormatted,
+                isStrongholdLocked: activeProfile.isStrongholdLocked,
+            },
+        })
     }
 
     function checkLedger(simulator) {
@@ -60,7 +72,15 @@
         }
     }
 
+    $: hardwareDeviceMessage = isLedgerOpened ? 'detected' : 'none_detected'
+
+    const unsubscribe = profiles.subscribe(() => {
+        setup()
+    })
+
+    onMount(setup)
     onDestroy(() => {
+        unsubscribe()
         isDestroyed = true
     })
 </script>
@@ -86,17 +106,17 @@
         <SecurityTile
             title={locale('views.dashboard.security.stronghold_status.title')}
             message={locale(`views.dashboard.security.stronghold_status.${strongholdStatusMessage}`)}
-            color={strongholdLocked ? 'blue' : 'red'}
+            color={activeProfile.isStrongholdLocked ? 'blue' : 'red'}
             icon="lock"
             onClick={() => openPopup('password')}
-            classes={strongholdLocked ? 'pointer-events-none' : 'pointer-events-all'} />
+            classes={activeProfile.isStrongholdLocked ? 'pointer-events-all' : 'pointer-events-none'} />
         <!-- Stronghold backup -->
         <SecurityTile
             title={locale('views.dashboard.security.stronghold_backup.title')}
-            message={lastBackupDate ? locale(`dates.${lastBackupDateFormatted.unit}`, {
-                    values: { time: lastBackupDateFormatted.value }
-                }) : locale('popups.backup.not_backed_up')}
-            onClick={()=> openPopup('backup')}
+            message={activeProfile.strongholdLastBackupTime ? locale(`dates.${lastBackupDateFormatted.unit}`, {
+                      values: { time: lastBackupDateFormatted.value },
+                  }) : locale('popups.backup.not_backed_up')}
+            onClick={() => openPopup('backup')}
             icon="shield"
             {color} />
     </div>

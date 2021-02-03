@@ -7,6 +7,7 @@ import type {
     LatestAddressResponse,
     SyncAccountsResponse,
     ErrorResponse,
+    StrongholdStatusResponse,
 } from './typings/bridge'
 import { ResponseTypes } from './typings/bridge'
 import type { Address } from './typings/address'
@@ -14,8 +15,9 @@ import type { Message } from './typings/message'
 import type { Event, BalanceChangeEventPayload, TransactionEventPayload } from './typings/events'
 import Validator, { ErrorTypes as ValidatorErrorTypes } from 'shared/lib/validator'
 import { generateRandomId } from 'shared/lib/utils'
-import { mnemonic, getActiveProfile } from 'shared/lib/app'
+import { mnemonic, getActiveProfile, updateStrongholdStatus } from 'shared/lib/app'
 import { account, message } from './typings'
+import { persistent } from './helpers'
 
 const Wallet = window['__WALLET__']
 
@@ -249,7 +251,7 @@ export const api = new Proxy(Wallet.api, Middleware)
 
 export const getStoragePath = (appPath: string, profileName: string): string => {
     return `${appPath}/${WALLET_STORAGE_DIRECTORY}/${profileName}`;
-} 
+}
 
 export const initialise = (id: string, storagePath: string): void => {
     return Wallet.init(id, storagePath);
@@ -279,14 +281,27 @@ export const requestMnemonic = async () => {
     mnemonic.set(recoveryPhrase)
 }
 
-Wallet.api.onStrongholdStatusChange({
-    onSuccess(response) {
-        console.log(response)
-    },
-    onError(error) {
-        console.error(error)
-    }
-})
+/**
+ * Initialises event listeners from wallet library
+ * 
+ * @method initialiseListeners
+ * 
+ * @returns {void}
+ */
+export const initialiseListeners = () => {
+    /**
+     * Event listener for stronghold status change
+     */
+    api.onStrongholdStatusChange({
+        onSuccess(response) {
+            updateStrongholdStatus(response.payload.snapshot.status === 'Locked')
+        },
+        onError(error) { console.error(error) }
+    })
+};
+
+
+
 
 /**
  * Gets latest messages

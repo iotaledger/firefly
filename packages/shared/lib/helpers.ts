@@ -105,6 +105,9 @@ export const setClipboard = (input: string): boolean => {
  * @param secondDate: second sate to compare
  */
 export const diffDates = (firstDate: Date, secondDate: Date) => {
+    if (!(firstDate instanceof Date) || !(secondDate instanceof Date)) {
+        return null
+    }
     const diff = Math.floor(secondDate.getTime() - firstDate.getTime());
     const day = 1000 * 60 * 60 * 24;
 
@@ -131,6 +134,9 @@ export const diffDates = (firstDate: Date, secondDate: Date) => {
  * @param date: date to know if recent or not, compared to today. Must be in the past. 
  */
 export const isRecentDate = (date: Date) => {
+    if (!(date instanceof Date)) {
+        return null
+    }
     const diff = Math.floor(new Date().getTime() - date.getTime());
     const day = 1000 * 60 * 60 * 24;
     const days = Math.floor(diff / day);
@@ -147,6 +153,9 @@ export const isRecentDate = (date: Date) => {
  * @param lastBackupDate: Blue if less than a month. Orange if less than three months. Red if more.
  */
 export const getBackupWarningColor = (lastBackupDate: Date) => {
+    if (!(lastBackupDate instanceof Date)) {
+        return 'red'
+    }
     const { lessThanAMonth, lessThanThreeMonths } = isRecentDate(lastBackupDate)
 
     return lessThanAMonth ? 'blue' : lessThanThreeMonths ? 'yellow' : 'red'

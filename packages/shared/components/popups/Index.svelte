@@ -35,7 +35,7 @@
             title: locale('popups.version.title', { values: { version: $state.props.currentVersion } }),
         },
         backup: {
-            title: locale('popups.backup.title', { values: { date: $date($state.props.lastBackupDate, { format: 'long' }) } }),
+            title: $state.props.lastBackupDate ? locale('popups.backup.title', { values: { date: $date($state.props.lastBackupDate, { format: 'long' }) } }) : locale('popups.backup.not_backed_up'),
         },
     }
 
