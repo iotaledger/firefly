@@ -75,7 +75,8 @@ const apiToResponseTypeMap = {
     getUnusedAddress: ResponseTypes.UnusedAddress,
     isLatestAddressUnused: ResponseTypes.IsLatestAddressUnused,
     areLatestAddressesUnused: ResponseTypes.AreAllLatestAddressesUnused,
-    setAlias: ResponseTypes.UpdatedAlias
+    setAlias: ResponseTypes.UpdatedAlias,
+    lockStronghold: ResponseTypes.LockedStronghold
 };
 
 /*
