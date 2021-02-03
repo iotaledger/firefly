@@ -36,7 +36,7 @@
 
 <div class="flex w-full flex-row flex-wrap">
     <div class="w-full p-4 bg-gray-50 flex justify-center content-center">
-        <img src="assets/logos/firefly_logo_complete_horizontal.svg" alt="" />
+        <img src="assets/logos/firefly_logo_full.svg" alt="" />
     </div>
     {#if upToDate}
         <div class="w-full text-center my-6 px-8">
