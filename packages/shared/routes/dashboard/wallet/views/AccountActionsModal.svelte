@@ -16,7 +16,7 @@
     const handleSyncAccountClick = () => {
         isActive = false
     }
-    const handlViewAddressHistoryClick = () => {
+    const handleViewAddressHistoryClick = () => {
         popupState.set({ active: true, type: 'addressHistory' })
         isActive = false
     }
@@ -59,7 +59,7 @@
         </button>
         <!-- Address history -->
         <button
-            on:click={() => handlViewAddressHistoryClick()}
+            on:click={() => handleViewAddressHistoryClick()}
             class="group flex flex-row justify-start items-center hover:bg-blue-50 py-3 px-3 w-full">
             <Icon icon="history" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
             <Text smaller classes="group-hover:text-blue-500">{locale(`actions.view_address_history`)}</Text>

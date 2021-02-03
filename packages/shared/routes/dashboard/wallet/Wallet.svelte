@@ -24,7 +24,6 @@
     const selectedAccount = derived([selectedAccountId, accounts], ([$selectedAccountId, $accounts]) =>
         $accounts.find((acc) => acc.id === $selectedAccountId)
     )
-
     const popupState = writable({ active: false })
 
     setContext('walletBalance', balanceOverview)
