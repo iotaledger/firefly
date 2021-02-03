@@ -1,12 +1,12 @@
 <script>
     import { getContext } from 'svelte'
-    import { api } from 'shared/lib/wallet'
-    import { sendParams, walletViewState, WalletViewStates, accountViewState, AccountViewStates } from 'shared/lib/app'
+    import { api, selectedAccountId } from 'shared/lib/wallet'
+    import { sendParams } from 'shared/lib/app'
+    import { walletViewState, WalletViewStates, accountViewState, AccountViewStates } from 'shared/lib/router'
     import { Password, Button, Text } from 'shared/components'
 
     export let locale
 
-    const selectedAccountId = getContext('selectedAccountId')
     const popupState = getContext('popupState')
     const account = getContext('selectedAccount')
 

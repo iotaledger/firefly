@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { getContext } from 'svelte'
     import { Icon, Text } from 'shared/components'
-    import { walletViewState, WalletViewStates } from 'shared/lib/app'
+    import { walletViewState, WalletViewStates } from 'shared/lib/router'
 
     export let locale
     export let color = 'blue'

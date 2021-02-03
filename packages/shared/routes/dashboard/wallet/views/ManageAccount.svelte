@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Input, Text, Button } from 'shared/components'
-    import { accountViewState, AccountViewStates } from 'shared/lib/app'
+    import { accountViewState, AccountViewStates } from 'shared/lib/router'
 
     export let locale
     export let name

@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Input, Text, Button } from 'shared/components'
-    import { walletViewState, WalletViewStates } from 'shared/lib/app'
+    import { walletViewState, WalletViewStates } from 'shared/lib/router'
 
     export let locale
     export let onCreate

@@ -1,7 +1,8 @@
 <script lang="typescript">
     import { getContext } from 'svelte'
     import { Text, Button, Dropdown, Amount, Address } from 'shared/components'
-    import { sendParams, walletViewState, WalletViewStates, accountViewState, AccountViewStates } from 'shared/lib/app'
+    import { sendParams } from 'shared/lib/app'
+    import { walletViewState, WalletViewStates, accountViewState, AccountViewStates } from 'shared/lib/router'
 
     export let locale
     export let send

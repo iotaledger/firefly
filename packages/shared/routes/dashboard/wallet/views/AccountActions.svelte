@@ -2,7 +2,7 @@
     import { getContext } from 'svelte'
     import { Text, Button } from 'shared/components'
     import { Send, Receive, ManageAccount } from '.'
-    import { accountViewState, AccountViewStates } from 'shared/lib/app'
+    import { accountViewState, AccountViewStates } from 'shared/lib/router'
 
     export let locale
     export let send

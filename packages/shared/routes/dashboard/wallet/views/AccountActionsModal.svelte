@@ -2,7 +2,7 @@
     import { getContext } from 'svelte'
     import { fade } from 'svelte/transition'
     import { Text, Icon } from 'shared/components'
-    import { accountViewState, AccountViewStates } from 'shared/lib/app'
+    import { accountViewState, AccountViewStates } from 'shared/lib/router'
 
     const popupState = getContext('popupState')
 

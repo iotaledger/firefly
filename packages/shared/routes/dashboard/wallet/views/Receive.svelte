@@ -2,7 +2,7 @@
     import { getContext } from 'svelte'
     import { Text, Button, Dropdown, QR, Icon } from 'shared/components'
     import { setClipboard } from 'shared/lib/helpers'
-    import { walletViewState, WalletViewStates, accountViewState, AccountViewStates } from 'shared/lib/app'
+    import { walletViewState, WalletViewStates, accountViewState, AccountViewStates } from 'shared/lib/router'
 
     export let locale
     export let generateAddress = (accountId) => {}

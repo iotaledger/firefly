@@ -1,7 +1,8 @@
 <script lang="typescript">
     import { getInitials } from 'shared/lib/helpers'
     import { Text, Button } from 'shared/components'
-    import { walletViewState, WalletViewStates, accountViewState, AccountViewStates, selectedAccountId } from 'shared/lib/app'
+    import { selectedAccountId } from 'shared/lib/wallet'
+    import { walletViewState, WalletViewStates, accountViewState, AccountViewStates } from 'shared/lib/router'
 
     export let locale
     export let accounts
