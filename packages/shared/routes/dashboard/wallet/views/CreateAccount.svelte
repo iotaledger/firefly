@@ -1,11 +1,9 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
     import { Input, Text, Button } from 'shared/components'
+    import { walletViewState, WalletViewStates } from 'shared/lib/router'
 
     export let locale
     export let onCreate
-
-    const dispatch = createEventDispatcher()
 
     let accountName
 
@@ -13,7 +11,7 @@
         onCreate(accountName)
     }
     const handleCancelClick = () => {
-        dispatch('previous')
+        walletViewState.set(WalletViewStates.Init)
     }
 </script>
 
