@@ -2,6 +2,7 @@ const { ipcMain } = require('electron')
 const { autoUpdater, CancellationToken } = require('electron-updater')
 const path = require('path')
 const packageJson = require('../package.json')
+const electronLog = require('electron-log')
 
 let autoUpdateMainWindow;
 let versionDetails = {
@@ -15,6 +16,9 @@ let downloadCancellation
 
 function initAutoUpdate(mainWindow, devMode) {
     autoUpdateMainWindow = mainWindow
+
+    autoUpdater.logger = electronLog
+    autoUpdater.logger.transports.file.level = "info"
 
     // Disable automatic update downloads
     autoUpdater.autoDownload = false;
