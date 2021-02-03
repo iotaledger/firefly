@@ -1,13 +1,13 @@
 <script lang="typescript">
-    import { createEventDispatcher, getContext } from 'svelte'
+    import { getContext } from 'svelte'
     import { Text, Button, Dropdown, Amount, Address } from 'shared/components'
     import { sendParams } from 'shared/lib/app'
+    import { walletViewState, WalletViewStates, accountViewState, AccountViewStates } from 'shared/lib/router'
 
     export let locale
     export let send
     export let internalTransfer
 
-    const dispatch = createEventDispatcher()
     const accounts = getContext('walletAccounts')
     const account = getContext('selectedAccount')
 
@@ -39,7 +39,10 @@
         }
     }
     const handleBackClick = () => {
-        dispatch('previous')
+        accountViewState.set(AccountViewStates.Init)
+        if (!$account) {
+            walletViewState.set(WalletViewStates.Init)
+        }
     }
     const format = (account) => {
         return { value: account.id, label: `${account.name} • ${account.balance}` }
