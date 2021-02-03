@@ -14,7 +14,7 @@
     <div data-label="total-balance">
         <Text type="p" overrideColor smaller classes="text-white mb-2">{locale('general.total_balance')}</Text>
         <Text type="h2" overrideColor classes="text-white mb-2">{$balance.balance}</Text>
-        <Text type="p" overrideColor smaller classes="text-{color}-300">{$balance.balanceEquiv}</Text>
+        <Text type="p" overrideColor smaller classes="text-{color}-300">{$balance.balanceFiat}</Text>
     </div>
     {#if $walletViewState === WalletViewStates.Init}
         <!-- Incoming/Outgoing -->
