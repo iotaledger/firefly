@@ -52,6 +52,11 @@ function createWindow() {
         webPreferences: {
             nodeIntegration: false,
             enableRemoteModule: false,
+            worldSafeExecuteJavaScript: true,
+            disableBlinkFeatures: 'Auxclick',
+            webviewTag: false,
+            enableWebSQL: false,
+            devTools: devMode,
             preload: path.join(devMode ? __dirname : app.getAppPath(), 'preload.js'),
         },
     })
