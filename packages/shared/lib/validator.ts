@@ -380,7 +380,8 @@ export default class ValidatorService {
             [ResponseTypes.AreAllLatestAddressesUnused]: this.createBaseValidator().getFirst(),
             [ResponseTypes.UpdatedAlias]: this.createBaseValidator().getFirst(),
             [ResponseTypes.DeletedStorage]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.Error]: this.createBaseValidator().getFirst()
+            [ResponseTypes.LockedStronghold]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.Error]: this.createBaseValidator().getFirst(),
         };
     }
 

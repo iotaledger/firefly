@@ -106,3 +106,11 @@ export interface LoggerOutput {
       cmd: 'GetStrongholdStatus',
     })
   }
+
+  export function lockStronghold(bridge: Bridge, __ids: CommunicationIds) {
+    return bridge({
+      actorId: __ids.actorId,
+      id: __ids.messageId,
+      cmd: 'LockStronghold',
+    })
+  }
