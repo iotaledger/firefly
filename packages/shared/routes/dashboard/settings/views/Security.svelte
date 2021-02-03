@@ -3,6 +3,7 @@
     import { Text, Dropdown, Password, Button, Checkbox } from 'shared/components'
     import { getActiveProfile, removeProfile, updateStrongholdBackupTime } from 'shared/lib/app'
     import { api, destroyActor } from 'shared/lib/wallet'
+    import { openPopup } from 'shared/lib/popup'
 
     export let locale
     export let navigate
@@ -43,7 +44,15 @@
             })
         })
     }
-    
+
+    function handleExportClick() {
+        if (getActiveProfile().isStrongholdLocked) {
+            openPopup({ type: 'password', props: { onSuccess: exportStronghold } })
+        } else {
+            exportStronghold()
+        }
+    }
+
     function exportStronghold() {
         window['Electron']
             .getStrongholdBackupDestination()
@@ -67,15 +76,15 @@
     <section id="exportStronghold" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.exportStronghold.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.exportStronghold.description')}</Text>
-        <Button classes="w-1/4 h-1/2" disabled={getActiveProfile().isStrongholdLocked} onClick={exportStronghold}>
-            {locale('actions.export')}
-        </Button>
+        <Button classes="w-1/4 h-1/2" onClick={handleExportClick}>{locale('actions.export')}</Button>
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <section id="appLock" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.appLock.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.appLock.description')}</Text>
-        <Dropdown value="English" items={[{ value: 1, label: 'English' }, { value: 2, label: 'Belula' }]} />
+        <Dropdown
+            value="English"
+            items={[{ value: 1, label: 'English' }, { value: 2, label: 'Belula' }]} />
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <section id="changePassword" class="w-3/4">
