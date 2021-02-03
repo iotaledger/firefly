@@ -284,11 +284,11 @@
             "not_backed_up_description": "You have not backed up your Stronghold"
         },
         "delete_account": {
-            "title": "Delete {name} account?",
+            "title": "Delete {name}?",
             "body": "You will permanently lose your transaction history and maybe something else as well.",
             "type_password": "Type your wallet’s password to confirm.",
             "delete_account": "Delete account",
-            "error_title": "Unable to delete {name} account",
+            "error_title": "Unable to delete {name}",
             "error_body_1": "To delete an account you must have 0 balance.",
             "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
         },
