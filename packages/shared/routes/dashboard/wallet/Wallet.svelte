@@ -63,6 +63,7 @@
         return Object.assign({}, account, {
             id,
             index,
+            depositAddress,
             name: alias,
             rawIotaBalance: balance,
             balance: formatUnit(balance, 0),
