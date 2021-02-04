@@ -76,6 +76,29 @@ const history = writable<Array<string>>([])
 let walletSetupType = writable<SetupType>(null)
 
 /**
+ * Wallet view state
+ */
+export enum WalletViewStates {
+    Init = 'init',
+    Account = 'account',
+    Send = 'send',
+    Receive = 'receive',
+    CreateAccount = 'createAccount',
+}
+export const walletViewState = writable<WalletViewStates>(WalletViewStates.Init)
+
+/**
+ * Account view state
+ */
+export enum AccountViewStates {
+    Init = 'init',
+    Manage = 'manage',
+    Send = 'send',
+    Receive = 'receive',
+}
+
+export const accountViewState = writable<AccountViewStates>(AccountViewStates.Init)
+/**
  * Navigate to initial route
  */
 export const initRouter = () => {
@@ -100,6 +123,14 @@ export const routerNext = (event) => {
 
             nextRoute = shouldAddProfile ? AppRoute.Setup : AppRoute.Dashboard
             break
+        case AppRoute.Dashboard:
+            const { reset } = params
+
+            if (reset) {
+                nextRoute = AppRoute.Login
+            }
+            break
+
         case AppRoute.Welcome:
             nextRoute = AppRoute.Legal
             break

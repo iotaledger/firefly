@@ -133,15 +133,15 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Help & Information",
+                "title": "帮助和信息",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profile": {
-                "title": "Profile",
+                "title": "个人信息",
                 "description": ""
             },
             "sync": {
-                "title": "Sync accounts",
+                "title": "同步账户",
                 "description": ""
             },
             "theme": {
@@ -169,39 +169,39 @@
                 "description": ""
             },
             "changePassword": {
-                "title": "Change password",
+                "title": "修改密码",
                 "description": ""
             },
             "resyncAccounts": {
-                "title": "Resync accounts",
+                "title": "重新同步账户",
                 "description": ""
             },
             "resetWallet": {
-                "title": "Reset wallet",
+                "title": "重置钱包",
                 "description": ""
             },
             "deepLinks": {
-                "title": "Deep links",
+                "title": "深链接",
                 "description": ""
             },
             "developerMode": {
-                "title": "Developer mode",
+                "title": "开发者模式",
                 "description": ""
             },
             "nodeSettings": {
-                "title": "Node settings",
+                "title": "节点设置",
                 "description": ""
             },
             "proofOfWork": {
-                "title": "Proof of work",
+                "title": "工作量证明",
                 "description": ""
             },
             "errorLog": {
-                "title": "Error log",
+                "title": "错误日志",
                 "description": ""
             },
             "stateExport": {
-                "title": "State export",
+                "title": "状态导出",
                 "description": ""
             },
             "troubleshoot": {
@@ -226,25 +226,84 @@
             }
         },
         "login": {
-            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "please_wait": "请等待 {time, plural, one {1 秒} other {# 秒}}",
+            "incorrect_attempts": "{attempts, plural, one {1 次失败重试} other {# 次失败重试}}"
+        },
+        "dashboard": {
+            "security": {
+                "version": {
+                    "title": "Firefly v{version}",
+                    "up_to_date": "Up to date",
+                    "out_of_date": "Out of date"
+                },
+                "hardware_device": {
+                    "title": "Hardware Device",
+                    "none_detected": "None detected"
+                },
+                "stronghold_status": {
+                    "title": "Stronghold Status",
+                    "locked": "Locked",
+                    "unlocked": "Unlocked"
+                },
+                "stronghold_backup": {
+                    "title": "Stronghold Backup",
+                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                }
+            },
+            "network": {
+                "network_operational": "Network Operational",
+                "network_degraded": "Network Degraded",
+                "network_down": "Network Down",
+                "status": "Status",
+                "messages_per_second": "Messages per second",
+                "confirmation_rate": "Confirmation rate"
+            }
         }
     },
     "popups": {
         "password": {
-            "title": "Password required",
-            "subtitle": "Please provide your wallet’s password to unlock stronghold."
+            "title": "需要输入密码",
+            "subtitle": "Please enter your wallet password to unlock Stronghold"
         },
         "qr": {
-            "title": "Your QR code"
+            "title": "你的二维码"
+        },
+        "version": {
+            "title": "Current version: {version}",
+            "up_to_date_title": "Firefly is up to date",
+            "up_to_date_description": "You are running the latest and safest version of Firefly.",
+            "update_available": "Firefly update available",
+            "update_details": "Version {version} - {date}"
+        },
+        "backup": {
+            "title": "Last backup: {date}",
+            "last_backup": "You last backed up {date}",
+            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
+            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
+            "not_backed_up": "Not backed up",
+            "not_backed_up_description": "You have not backed up your Stronghold"
+        },
+        "delete_account": {
+            "title": "Delete {name}?",
+            "body": "You will permanently lose your transaction history and maybe something else as well.",
+            "type_password": "Type your wallet’s password to confirm.",
+            "delete_account": "Delete account",
+            "error_title": "Unable to delete {name}",
+            "error_body_1": "To delete an account you must have 0 balance.",
+            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+        },
+        "address_history": {
+            "title": "{name} account address history",
+            "current_balance": "Current balance: {balance}"
         }
     },
     "actions": {
         "continue": "继续",
         "back": "返回",
-        "cancel": "Cancel",
-        "close": "Close",
-        "save": "Save",
+        "cancel": "取消",
+        "close": "关闭",
+        "dismiss": "Dismiss",
+        "save": "保存",
         "import_seed": "导入已有的种子",
         "import_wallet": "导入现有钱包",
         "create_wallet": "创建新钱包",
@@ -253,7 +312,7 @@
         "setup_pin": "设置PIN码",
         "set_pin": "设置PIN码",
         "confirm_pin": "确认PIN码",
-        "enter_your_pin": "Enter your PIN",
+        "enter_your_pin": "输入你的密码",
         "save_backup_file": "保存备份文件",
         "ive_written_recovery_phrase": "我已经写下我的恢复短语",
         "verify_recovery_phrase": "验证恢复密语",
@@ -263,7 +322,7 @@
         "import_from_file": "从文件导入",
         "send": "发送",
         "receive": "接收",
-        "create": "Create",
+        "create": "创建",
         "begin_transfer": "开始传输",
         "try_again": "重试",
         "visit_discord": "访问 Discord",
@@ -271,34 +330,42 @@
         "import_extentions": ".stronghold 或 .kdbx 文件",
         "choose_file": "选择一个文件",
         "drop_here": "将您的文件拖放至此处",
-        "syncAll": "Sync all",
-        "export": "Export",
-        "exportNewStronghold": "Export a new Stronghold",
-        "enableDeepLinks": "Enable deep links",
-        "enableDeveloperMode": "Enable developer mode",
-        "enableNotifications": "Enable notifications",
-        "exportState": "Export state",
-        "outsourceProofOfWork": "Outsource proof of work",
-        "unlock": "Unlock"
+        "syncAll": "全部同步",
+        "export": "导出",
+        "exportNewStronghold": "导出一个新的Stronghold",
+        "enableDeepLinks": "启用深链接",
+        "enableDeveloperMode": "打开开发者模式",
+        "enableNotifications": "打开通知功能",
+        "exportState": "导出状态",
+        "outsourceProofOfWork": "外包工作证明",
+        "unlock": "解锁",
+        "update_firefly": "Update Firefly",
+        "save_backup": "Save backup",
+        "customize_account": "Customise account",
+        "sync_account": "Sync account",
+        "view_address_history": "View address history",
+        "delete_account": "Delete account"
     },
     "general": {
         "password": "密码",
         "confirm_password": "确认密码",
-        "currentPassword": "Current password",
-        "newPassword": "New password",
-        "confirmNewPassword": "Confirm new password",
+        "currentPassword": "当前使用的密码",
+        "newPassword": "新的密码",
+        "confirmNewPassword": "再次确认新的密码",
         "your_seed": "你的种子",
         "recovery_phrase": "恢复密语",
         "recent_activity": "最新活动",
         "sent": "已发送",
         "received": "已收到",
+        "send_payment": "Send payment",
+        "move_funds": "Move funds",
         "send_funds": "资金转账",
         "send_to_address": "发送至地址",
         "scan_qr_or_paste": "扫描二维码或粘贴地址",
-        "transfer_between_accounts": "账户之间的转移",
-        "move_funds_between_accounts": "Move funds between accounts",
-        "manage_account": "Manage Account",
-        "customize_account": "Customize your account",
+        "move_funds_between_accounts": "账户之间的资金转移",
+        "send_tokens_to_address": "Send tokens to an address",
+        "manage_account": "账户管理",
+        "customize_account": "自定义你的账户",
         "account": "账号",
         "sending_to_address": "发送至地址",
         "amount": "金额",
@@ -307,10 +374,11 @@
         "from": "从",
         "to": "到",
         "receive_funds": "接收资金",
+        "my_address": "My Address",
         "share_address": "分享地址",
         "your_address": "您的地址",
         "generate_new_address": "生成新地址",
-        "copy_address": "Copy Address",
+        "copy_address": "复制地址",
         "have_text_backup": "我有一个文本备份",
         "have_file_backup": "我有一个文本备份",
         "enter_seed_or_phrase": "输入恢复密语或种子",
@@ -323,17 +391,25 @@
         "light_theme": "浅色主题",
         "dark_theme": "深色主题",
         "total_balance": "总余额",
+        "account_balance": "Account Balance",
         "incoming": "收到",
         "outgoing": "转出",
         "accounts": "帐户",
-        "automaticNodeSelection": "Automatic node selection",
-        "manualNodeSelection": "Manual node selection",
-        "profiles": "Profiles",
-        "create_account": "Create an account",
-        "account_name": "Account name",
-        "latest_transactions": "Latest Transactions",
-        "transactions": "Transactions",
+        "automaticNodeSelection": "自动选择节点",
+        "manualNodeSelection": "手动选择节点",
+        "profiles": "个人信息",
+        "create_account": "创建一个账户",
+        "account_name": "账户名称",
+        "latest_transactions": "最新交易",
+        "transactions": "交易",
         "security": "安全设置",
-        "account_address": "Account Address"
+        "account_address": "账户地址"
+    },
+    "dates": {
+        "today": "Today",
+        "days_ago": "{time, plural, one {# day} other {# days}} ago",
+        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
+        "months_ago": "{time, plural, one {# month} other {# months}} ago",
+        "years_ago": "{time, plural, one {# year} other {# years}} ago"
     }
 }

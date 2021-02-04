@@ -32,7 +32,7 @@
                 return window['Electron'].getUserDataPath().then((path) => {
                     initialise(profile.id, getStoragePath(path, profile.name))
 
-                    network.set(mainnet ? Network.Mainnet : Network.Devnet)
+                    network.set(mainnet ? Network.Mainnet : Network.Testnet)
 
                     dispatch('next', { setupType })
                 })

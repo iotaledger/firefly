@@ -7,6 +7,7 @@
     import { sendParams } from 'shared/lib/app'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { deepLinking } from 'shared/lib/settings'
+    import { routerNext } from 'shared/lib/router'
 
 
     export let locale
@@ -62,6 +63,6 @@
     <div class="flex flex-row w-full h-full">
         <Sidebar bind:activeTab {locale} />
         <!-- Dashboard Pane -->
-        <svelte:component this={tabs[activeTab]} {locale} />
+        <svelte:component this={tabs[activeTab]} {locale} on:next={routerNext} />
     </div>
 {/if}

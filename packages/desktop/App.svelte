@@ -3,13 +3,13 @@
     import { fetchMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { setupI18n, isLocaleLoaded, dir, _ } from 'shared/lib/i18n'
-    import { darkMode, mobile, logged } from 'shared/lib/app'
+    import { darkMode, mobile } from 'shared/lib/app'
     import { language } from 'shared/lib/settings'
-    import { api } from 'shared/lib/wallet'
     import { goto } from 'shared/lib/helpers'
     import { initRouter, routerNext, routerPrevious, AppRoute } from 'shared/lib/router'
+    import { popupState } from 'shared/lib/popup'
     import { requestMnemonic } from 'shared/lib/wallet'
-    import { Route, Toggle } from 'shared/components'
+    import { Route, Toggle, Popup } from 'shared/components'
     import {
         Splash,
         Welcome,
@@ -74,6 +74,9 @@
 {#if !$isLocaleLoaded || splash}
     <Splash />
 {:else}
+    {#if $popupState.active}
+        <Popup type={$popupState.type} props={$popupState.props} locale={$_} />
+    {/if}
     <!-- dummy toggles -->
     <div class="dummy-toggles flex flex-row">
         <Toggle storeItem={darkMode} />
