@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { fade } from 'svelte/transition'
     import { Text, Icon, Modal } from 'shared/components'
-    import { getActiveProfile, setActiveProfile } from 'shared/lib/app'
+    import { getActiveProfile } from 'shared/lib/app'
     import { getInitials } from 'shared/lib/helpers'
-    import { AppRoute, setRoute } from 'shared/lib/router'
-    import { api, destroyActor } from 'shared/lib/wallet'
+    import { resetRouter } from 'shared/lib/router'
+    import { api, destroyActor, clearWallet } from 'shared/lib/wallet'
 
     export let isActive
     export let locale
@@ -20,14 +20,11 @@
         isActive = false
     }
     const handleLogoutClick = () => {
-        // Lock stronghold
         api.lockStronghold({
             onSuccess() {
-                // TODO clear writables
-                // Destroy wallet.rs actor for this profile
                 destroyActor(activeProfile.id)
-                // Navigate to Login
-                setRoute(AppRoute.Login)
+                clearWallet()
+                resetRouter()
             },
             onError(error) {
                 console.error(error)

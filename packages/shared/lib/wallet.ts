@@ -115,6 +115,20 @@ export const wallet = writable<WalletState>({
     accounts: writable<Account[]>([])
 })
 
+export const clearWallet = () => {
+    const { balanceOverview, accounts } = get(wallet)
+    balanceOverview.set({
+        incoming: '0 Mi',
+        incomingRaw: 0,
+        outgoing: '0 Mi',
+        outgoingRaw: 0,
+        balance: '0 Mi',
+        balanceRaw: 0,
+        balanceFiat: '0.00 USD'
+    })
+    accounts.set([])
+}
+
 export const selectedAccountId = writable<string | null>(null)
 
 /**
