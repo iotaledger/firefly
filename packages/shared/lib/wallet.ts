@@ -19,7 +19,8 @@ import { generateRandomId } from 'shared/lib/utils'
 import { mnemonic, getActiveProfile, updateStrongholdStatus } from 'shared/lib/app'
 import { account, message } from './typings'
 import { persistent } from './helpers'
-import { _ } from './i18n'
+import { _ } from 'shared/lib/i18n'
+import { notifications } from 'shared/lib/settings'
 
 const Wallet = window['__WALLET__']
 
@@ -333,16 +334,18 @@ export const initialiseListeners = () => {
 
     api.onNewTransaction({
         onSuccess(response: Event<TransactionEventPayload>) {
-            const accounts = get(wallet).accounts
-            const account = accounts.find(account => account.id === response.payload.accountId)
-            const message = response.payload.message
+            if (get(notifications)) {
+                const accounts = get(wallet).accounts
+                const account = accounts.find(account => account.id === response.payload.accountId)
+                const message = response.payload.message
 
-            const locale = get(_) as (string) => string
-            const notificationMessage = locale('notifications.valueTx')
-                .replace('{{value}}', message.value.toString())
-                .replace('{{account}}', account.alias)
-            const NotificationManager = window['Electron']['NotificationManager']
-            NotificationManager.notify(notificationMessage, { notifications: { general: true } })
+                const locale = get(_) as (string) => string
+                const notificationMessage = locale('notifications.valueTx')
+                    .replace('{{value}}', message.value.toString())
+                    .replace('{{account}}', account.alias)
+                const NotificationManager = window['Electron']['NotificationManager']
+                NotificationManager.notify(notificationMessage)
+            }
         },
         onError(error) {
             console.error(error)
@@ -351,17 +354,19 @@ export const initialiseListeners = () => {
 
     api.onConfirmationStateChange({
         onSuccess(response: Event<ConfirmationStateChangeEventPayload>) {
-            const accounts = get(wallet).accounts
-            const account = accounts.find(account => account.id === response.payload.accountId)
-            const message = response.payload.message
-            const messageKey = response.payload.confirmed ? 'confirmed' : 'failed'
+            if (get(notifications)) {
+                const accounts = get(wallet).accounts
+                const account = accounts.find(account => account.id === response.payload.accountId)
+                const message = response.payload.message
+                const messageKey = response.payload.confirmed ? 'confirmed' : 'failed'
 
-            const locale = get(_) as (string) => string
-            const notificationMessage = locale(`notifications.${messageKey}`)
-                .replace('{{value}}', message.value.toString())
-                .replace('{{account}}', account.alias)
-            const NotificationManager = window['Electron']['NotificationManager']
-            NotificationManager.notify(notificationMessage, { notifications: { general: true } })
+                const locale = get(_) as (string) => string
+                const notificationMessage = locale(`notifications.${messageKey}`)
+                    .replace('{{value}}', message.value.toString())
+                    .replace('{{account}}', account.alias)
+                const NotificationManager = window['Electron']['NotificationManager']
+                NotificationManager.notify(notificationMessage)
+            }
         },
         onError(error) {
             console.error(error)
