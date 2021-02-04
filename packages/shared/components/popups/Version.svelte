@@ -1,13 +1,11 @@
 <script>
-    import { getContext } from 'svelte'
     import { date } from 'svelte-i18n'
+    import { closePopup } from 'shared/lib/popup'
     import { Text, Button } from 'shared/components'
 
     export let locale
     export let currentVersion
     export let upToDate
-
-    const popupState = getContext('popupState')
 
     let newVersion = '3.45' // dummy
     let newVersionReleaseDate = new Date() // dummy
@@ -20,10 +18,10 @@
     Fix: Incorrect progress bar steps and translation not available displayed on send (#3020)` //dummy
 
     function handleUpdate() {
-        popupState.set({ active: false })
+        closePopup()
     }
     function handleCancelClick() {
-        popupState.set({ active: false })
+        closePopup()
     }
 </script>
 

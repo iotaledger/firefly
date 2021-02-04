@@ -1,10 +1,10 @@
 <script>
-    import { getContext } from 'svelte'
     import { date } from 'svelte-i18n'
     import { Text, Button } from 'shared/components'
     import { getBackupWarningColor } from 'shared/lib/helpers'
     import { api } from 'shared/lib/wallet'
     import { updateStrongholdBackupTime } from 'shared/lib/app'
+    import { openPopup, closePopup } from 'shared/lib/popup'
 
     export let locale
     export let lastBackupDate
@@ -13,24 +13,19 @@
 
     let color = getBackupWarningColor(lastBackupDate)
 
-    const popupState = getContext('popupState')
-
     function handleBackupClick() {
         if (isStrongholdLocked) {
-            popupState.set({ active: false })
-            popupState.set({ active: true, type: 'password', props: { onSuccess: triggerBackup } })
+            openPopup({ type: 'password', props: { onSuccess: triggerBackup } })
         } else {
             triggerBackup()
-
         }
     }
 
     function handleCancelClick() {
-        popupState.set({ active: false })
+        closePopup()
     }
 
     function triggerBackup() {
-
         window['Electron']
             .getStrongholdBackupDestination()
             .then((result) => {
@@ -38,7 +33,7 @@
                     api.backup(result, {
                         onSuccess() {
                             updateStrongholdBackupTime(new Date())
-                            popupState.set({ active: false })
+                            closePopup()
                         },
                         onError(error) {
                             console.error(error)
@@ -58,7 +53,9 @@
 
 <div class="flex w-full flex-row flex-wrap">
     <Text type="h4" classes="mb-5">
-        {lastBackupDate ? locale('popups.backup.title', { values: { date: $date(lastBackupDate, { format: 'long' }) } }) : locale('popups.backup.not_backed_up')}
+        {lastBackupDate ? locale('popups.backup.title', {
+                  values: { date: $date(lastBackupDate, { format: 'long' }) },
+              }) : locale('popups.backup.not_backed_up')}
     </Text>
     <div class="w-full p-4 bg-gray-50 flex justify-center content-center"><img src="assets/logos/stronghold.svg" alt="" /></div>
     <div class="w-full text-center my-6 px-8">
