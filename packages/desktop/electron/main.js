@@ -3,6 +3,11 @@ const path = require('path')
 const Keychain = require('./keychain')
 
 /**
+ * Set AppUserModelID for Windows notifications functionallity
+ */
+app.setAppUserModelId('org.iota.firefly');
+
+/** 
  * Terminate application if Node remote debugging detected
  */
 const argv = process.argv.join()
