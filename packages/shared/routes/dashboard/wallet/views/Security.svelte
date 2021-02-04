@@ -67,7 +67,7 @@
             message={locale(`views.dashboard.security.version.${upToDate ? 'up_to_date' : 'out_of_date'}`)}
             color={upToDate ? 'green' : 'red'}
             icon="firefly"
-            onClick={() => handleSecurityTileClick('update')} />
+            onClick={() => handleSecurityTileClick('version')} />
         <!-- Hardware Device -->
         <SecurityTile
             title={locale('views.dashboard.security.hardware_device.title')}

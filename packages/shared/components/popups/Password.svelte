@@ -1,7 +1,7 @@
 <script>
     import { api } from 'shared/lib/wallet'
     import { closePopup } from 'shared/lib/popup'
-    import { Password, Button } from 'shared/components'
+    import { Password, Button, Text } from 'shared/components'
 
     export let locale
 
@@ -33,6 +33,10 @@
     }
 </script>
 
+<div class="mb-5">
+    <Text type="h4">{locale('popups.password.title')}</Text>
+    <Text type="p" secondary>{locale('popups.password.subtitle')}</Text>
+</div>
 <div class="flex justify-center w-full flex-row flex-wrap">
     <Password classes="w-full mb-8" bind:value={password} showRevealToggle {locale} placeholder={locale('general.password')} />
     <div class="flex flex-row justify-between w-full space-x-4 px-8">

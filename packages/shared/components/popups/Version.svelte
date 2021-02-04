@@ -29,11 +29,15 @@
     img {
         width: 196px;
     }
+    .changelog {
+        max-height: 50vh;
+    }
 </style>
 
+<Text type="h4" classes="mb-5">{locale('popups.version.title', { values: { version: currentVersion } })}</Text>
 <div class="flex w-full flex-row flex-wrap">
     <div class="w-full p-4 bg-gray-50 flex justify-center content-center">
-        <img src="assets/logos/firefly_logo_complete_horizontal.svg" alt="" />
+        <img src="assets/logos/firefly_logo_full.svg" alt="" />
     </div>
     {#if upToDate}
         <div class="w-full text-center my-6 px-8">
@@ -55,7 +59,9 @@
                     values: { version: newVersion, date: $date(newVersionReleaseDate, { format: 'long' }) },
                 })}
             </Text>
-            <Text secondary classes="whitespace-pre-wrap">{changelog}</Text>
+            <div class="changelog overflow-y-auto">
+                <Text secondary classes="whitespace-pre-wrap">{changelog}</Text>
+            </div>
         </div>
         <div class="flex flex-row justify-between space-x-4 w-full px-8">
             <Button secondary classes="w-1/2" onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
