@@ -381,6 +381,7 @@ export default class ValidatorService {
             [ResponseTypes.UpdatedAlias]: this.createBaseValidator().getFirst(),
             [ResponseTypes.DeletedStorage]: this.createBaseValidator().getFirst(),
             [ResponseTypes.LockedStronghold]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.StrongholdPasswordChanged]: this.createBaseValidator().getFirst(),
             [ResponseTypes.OpenedLedgerApp]: this.createBaseValidator().getFirst(),
             [ResponseTypes.Error]: this.createBaseValidator().getFirst(),
         };

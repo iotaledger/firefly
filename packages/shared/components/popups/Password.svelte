@@ -1,14 +1,12 @@
 <script>
-    import { getContext } from 'svelte'
     import { api } from 'shared/lib/wallet'
-    import { Password, Button } from 'shared/components'
+    import { closePopup } from 'shared/lib/popup'
+    import { Password, Button, Text } from 'shared/components'
 
     export let locale
 
     export let onSuccess
     export let onError
-
-    const popupState = getContext('popupState')
 
     let password
 
@@ -16,7 +14,7 @@
         api.setStrongholdPassword(password, {
             onSuccess(response) {
                 // Close popup
-                popupState.set({ active: false })
+                closePopup()
                 if ('function' === typeof onSuccess) {
                     onSuccess(response)
                 }
@@ -31,10 +29,14 @@
         })
     }
     function handleCancelClick() {
-        popupState.set({ active: false })
+        closePopup()
     }
 </script>
 
+<div class="mb-5">
+    <Text type="h4">{locale('popups.password.title')}</Text>
+    <Text type="p" secondary>{locale('popups.password.subtitle')}</Text>
+</div>
 <div class="flex justify-center w-full flex-row flex-wrap">
     <Password classes="w-full mb-8" bind:value={password} showRevealToggle {locale} placeholder={locale('general.password')} />
     <div class="flex flex-row justify-between w-full space-x-4 px-8">

@@ -14,6 +14,11 @@ export interface LoggerConfig {
   outputs?: LoggerOutput[]
 }
 
+export interface StrongholdPasswordChange {
+  currentPassword: string;
+  newPassword: string;
+}
+
 export function backup(bridge: Bridge, __ids: CommunicationIds, destinationPath: string) {
   return bridge({
     actorId: __ids.actorId,
@@ -53,6 +58,14 @@ export function setStoragePassword(bridge: Bridge, __ids: CommunicationIds, pass
   })
 }
 
+export function removeStorage(bridge: Bridge, __ids: CommunicationIds) {
+  return bridge({
+    actorId: __ids.actorId,
+    id: __ids.messageId,
+    cmd: 'DeleteStorage'
+  })
+}
+
 export function send(bridge: Bridge, __ids: CommunicationIds, fromAccountId: AccountIdentifier, transfer: Transfer) {
   return bridge({
     actorId: __ids.actorId,
@@ -63,14 +76,6 @@ export function send(bridge: Bridge, __ids: CommunicationIds, fromAccountId: Acc
       accountId: fromAccountId
     }
   })
-}
-
-export function removeStorage(bridge: Bridge, __ids: CommunicationIds) {
-    return bridge({
-      actorId: __ids.actorId,
-      id: __ids.messageId,
-      cmd: 'DeleteStorage'
-    })
 }
 
 export function generateMnemonic(bridge: Bridge, __ids: CommunicationIds) {
@@ -108,11 +113,20 @@ export function getStrongholdStatus(bridge: Bridge, __ids: CommunicationIds) {
 }
 
 export function lockStronghold(bridge: Bridge, __ids: CommunicationIds) {
-    return bridge({
-        actorId: __ids.actorId,
-        id: __ids.messageId,
-        cmd: 'LockStronghold',
-    })
+  return bridge({
+    actorId: __ids.actorId,
+    id: __ids.messageId,
+    cmd: 'LockStronghold',
+  })
+}
+
+export function changeStrongholdPassword(bridge: Bridge, __ids: CommunicationIds, payload: StrongholdPasswordChange) {
+  return bridge({
+    actorId: __ids.actorId,
+    id: __ids.messageId,
+    cmd: 'ChangeStrongholdPassword',
+    payload
+  })
 }
 
 export function openLedgerApp(bridge: Bridge, __ids: CommunicationIds, isSimulator: boolean) {

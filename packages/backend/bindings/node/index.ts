@@ -38,6 +38,7 @@ import {
   getStrongholdStatus as _getStrongholdStatus,
   removeStorage as _removeStorage,
   lockStronghold as _lockStronghold,
+  changeStrongholdPassword as _changeStrongholdPassword,
   openLedgerApp as _openLedgerApp
 } from '../../../shared/lib/typings/wallet'
 
@@ -159,6 +160,9 @@ export const api = {
   },
   setStrongholdPassword: function (password: string): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _setStrongholdPassword(sendMessage, __ids, password)
+  },
+  changeStrongholdPassword: function (currentPassword: string, newPassword: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _changeStrongholdPassword(sendMessage, __ids, { currentPassword, newPassword })
   },
   setStoragePassword: function (password: string): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _setStoragePassword(sendMessage, __ids, password)

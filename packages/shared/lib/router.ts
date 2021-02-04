@@ -83,6 +83,30 @@ const history = writable<Array<string>>([])
 let walletSetupType = writable<SetupType>(null)
 
 /**
+ * Wallet view state
+ */
+export enum WalletViewStates {
+    Init = 'init',
+    Account = 'account',
+    Send = 'send',
+    Receive = 'receive',
+    CreateAccount = 'createAccount',
+}
+export const walletViewState = writable<WalletViewStates>(WalletViewStates.Init)
+
+/**
+ * Account view state
+ */
+export enum AccountViewStates {
+    Init = 'init',
+    Manage = 'manage',
+    Send = 'send',
+    Receive = 'receive',
+}
+
+export const accountViewState = writable<AccountViewStates>(AccountViewStates.Init)
+
+/**
  * Onboarding/setup account type
  */
 let walletSetupAccountType = writable<AccountType>(null)
