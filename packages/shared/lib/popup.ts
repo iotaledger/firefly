@@ -6,5 +6,5 @@ interface PopupState {
     props?: any;
 }
 export const popupState = writable<PopupState>({ active: false, type: null })
-export const openPopup = ({ type, props }) => popupState.set({ active: true, type, props })
+export const openPopup = ({ type, props = null }) => popupState.set({ active: true, type, props })
 export const closePopup = () => popupState.set({ active: false, type: null })

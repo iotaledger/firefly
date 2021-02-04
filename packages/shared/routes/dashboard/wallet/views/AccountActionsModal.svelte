@@ -1,13 +1,14 @@
 <script lang="typescript">
-    import { getContext } from 'svelte'
     import { fade } from 'svelte/transition'
+    import { getContext } from 'svelte'
     import { Text, Icon } from 'shared/components'
     import { accountViewState, AccountViewStates } from 'shared/lib/router'
-
-    const popupState = getContext('popupState')
+    import { openPopup } from 'shared/lib/popup'
 
     export let isActive
     export let locale
+
+    const account = getContext('selectedAccount')
 
     const handleCustomiseAccountClick = () => {
         accountViewState.set(AccountViewStates.Manage)
@@ -17,11 +18,11 @@
         isActive = false
     }
     const handleViewAddressHistoryClick = () => {
-        popupState.set({ active: true, type: 'addressHistory' })
+        openPopup({ type: 'addressHistory', props: { account } })
         isActive = false
     }
     const handleDeleteAccountClick = () => {
-        popupState.set({ active: true, type: 'deleteAccount' })
+        openPopup({ type: 'deleteAccount', props: { account } })
         isActive = false
     }
 </script>

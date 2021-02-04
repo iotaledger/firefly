@@ -1,9 +1,8 @@
 <script>
-    import { getContext } from 'svelte'
     import { Text } from 'shared/components'
 
     export let locale
-    const account = getContext('selectedAccount')
+    export let account
 
     const dummyAddressHistory = [
         {
