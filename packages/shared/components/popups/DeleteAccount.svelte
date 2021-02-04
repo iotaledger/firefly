@@ -1,5 +1,4 @@
 <script>
-    import { getContext } from 'svelte'
     import { api, selectedAccountId } from 'shared/lib/wallet'
     import { sendParams } from 'shared/lib/app'
     import { walletViewState, WalletViewStates, accountViewState, AccountViewStates } from 'shared/lib/router'
@@ -7,8 +6,7 @@
     import { closePopup } from 'shared/lib/popup'
 
     export let locale
-
-    const account = getContext('selectedAccount')
+    export let account
 
     $: canDelete = $account.rawIotaBalance == 0
 
