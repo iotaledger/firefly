@@ -1,6 +1,25 @@
-const { app, dialog, ipcMain, protocol, shell, BrowserWindow } = require('electron')
+const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
 const path = require('path')
 const Keychain = require('./keychain')
+
+/**
+ * Terminate application if Node remote debugging detected
+ */
+const argv = process.argv.join()
+const flagBlocklist = ['inspect', 'inspect-brk', 'remote-debugging-port']
+if (
+    argv.includes('inspect') ||
+    argv.includes('remote') ||
+    typeof v8debug !== 'undefined' ||
+    flagBlocklist.some((flag) => app.commandLine.hasSwitch(flag))
+) {
+    app.quit()
+}
+
+/**
+ * Expose Garbage Collector flag for manual trigger after seed usage
+ */
+app.commandLine.appendSwitch('js-flags', '--expose-gc')
 
 /**
  * Define wallet windows
@@ -13,6 +32,16 @@ const windows = {
  * Set environment mode
  */
 const devMode = process.env.NODE_ENV === 'development'
+
+/**
+ * Check URL against allowlist
+ */
+function isUrlAllowed(url) {
+    // TODO: Add links for T&C, privacy policy and help
+    const externalAllowlist = ['privacy@iota.org', 'explorer.iota.org']
+
+    return externalAllowlist.indexOf(new URL(url).hostname.replace('www.', '').replace('mailto:', '')) > -1
+}
 
 function createWindow() {
     /**
@@ -33,6 +62,11 @@ function createWindow() {
         webPreferences: {
             nodeIntegration: false,
             enableRemoteModule: false,
+            worldSafeExecuteJavaScript: true,
+            disableBlinkFeatures: 'Auxclick',
+            webviewTag: false,
+            enableWebSQL: false,
+            devTools: devMode,
             preload: path.join(devMode ? __dirname : app.getAppPath(), 'preload.js'),
         },
     })
@@ -47,16 +81,9 @@ function createWindow() {
 
     const _handleNavigation = (e, url) => {
         e.preventDefault()
-        // TODO: Add externalAcceptlist links for T&C, privacy policy and help
-        const externalAcceptlist = [
-            'privacy@iota.org',
-            'explorer.iota.org',
-        ]
 
         try {
-            if (
-                externalAcceptlist.indexOf(new URL(url).hostname.replace('www.', '').replace('mailto:', '')) > -1
-            ) {
+            if (isUrlAllowed(url)) {
                 shell.openExternal(url)
             }
         } catch (error) {
@@ -65,10 +92,23 @@ function createWindow() {
     }
 
     /**
-     * Only allow external navigation to acceptlisted domains
+     * Only allow external navigation to allowed domains
      */
     windows.main.webContents.on('will-navigate', _handleNavigation)
     windows.main.webContents.on('new-window', _handleNavigation)
+
+    /**
+     * Handle permissions requests
+     */
+    session.defaultSession.setPermissionRequestHandler((_webContents, permission, cb, details) => {
+        if (permission === 'openExternal' && details && details.externalURL && isUrlAllowed(details.externalURL)) {
+            return cb(true)
+        }
+
+        const permissionAllowlist = ['clipboard-read', 'notifications', 'fullscreen']
+
+        return cb(permissionAllowlist.indexOf(permission) > -1)
+    })
 }
 
 app.whenReady().then(createWindow)
@@ -115,9 +155,7 @@ ipcMain.handle('show-open-dialog', (_e, options) => {
 
 // Miscellaneous
 ipcMain.handle('get-path', (_e, path) => {
-    const allowedPaths = [
-        'userData',
-    ]
+    const allowedPaths = ['userData']
     if (allowedPaths.indexOf(path) === -1) {
         throw Error(`Path ${path} is not allowed`)
     }

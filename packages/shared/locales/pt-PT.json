@@ -228,15 +228,73 @@
         "login": {
             "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
             "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+        },
+        "dashboard": {
+            "security": {
+                "version": {
+                    "title": "Firefly v{version}",
+                    "up_to_date": "Up to date",
+                    "out_of_date": "Out of date"
+                },
+                "hardware_device": {
+                    "title": "Hardware Device",
+                    "none_detected": "None detected"
+                },
+                "stronghold_status": {
+                    "title": "Stronghold Status",
+                    "locked": "Locked",
+                    "unlocked": "Unlocked"
+                },
+                "stronghold_backup": {
+                    "title": "Stronghold Backup",
+                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                }
+            },
+            "network": {
+                "network_operational": "Network Operational",
+                "network_degraded": "Network Degraded",
+                "network_down": "Network Down",
+                "status": "Status",
+                "messages_per_second": "Messages per second",
+                "confirmation_rate": "Confirmation rate"
+            }
         }
     },
     "popups": {
         "password": {
             "title": "Password required",
-            "subtitle": "Please provide your wallet’s password to unlock stronghold."
+            "subtitle": "Please enter your wallet password to unlock Stronghold"
         },
         "qr": {
             "title": "Your QR code"
+        },
+        "version": {
+            "title": "Current version: {version}",
+            "up_to_date_title": "Firefly is up to date",
+            "up_to_date_description": "You are running the latest and safest version of Firefly.",
+            "update_available": "Firefly update available",
+            "update_details": "Version {version} - {date}"
+        },
+        "backup": {
+            "title": "Last backup: {date}",
+            "last_backup": "You last backed up {date}",
+            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
+            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
+            "not_backed_up": "Not backed up",
+            "not_backed_up_description": "You have not backed up your Stronghold"
+        },
+        "delete_account": {
+            "title": "Delete {name}?",
+            "body": "You will permanently lose your transaction history and maybe something else as well.",
+            "type_password": "Type your wallet’s password to confirm.",
+            "delete_account": "Delete account",
+            "error_title": "Unable to delete {name}",
+            "error_body_1": "To delete an account you must have 0 balance.",
+            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+        },
+        "address_history": {
+            "title": "{name} account address history",
+            "current_balance": "Current balance: {balance}"
         }
     },
     "actions": {
@@ -244,6 +302,7 @@
         "back": "Back",
         "cancel": "Cancel",
         "close": "Close",
+        "dismiss": "Dismiss",
         "save": "Save",
         "import_seed": "Import an existing seed",
         "import_wallet": "Import existing wallet",
@@ -279,7 +338,13 @@
         "enableNotifications": "Enable notifications",
         "exportState": "Export state",
         "outsourceProofOfWork": "Outsource proof of work",
-        "unlock": "Unlock"
+        "unlock": "Unlock",
+        "update_firefly": "Update Firefly",
+        "save_backup": "Save backup",
+        "customize_account": "Customise account",
+        "sync_account": "Sync account",
+        "view_address_history": "View address history",
+        "delete_account": "Delete account"
     },
     "general": {
         "password": "Password",
@@ -292,11 +357,13 @@
         "recent_activity": "Recent Activity",
         "sent": "Sent",
         "received": "Received",
+        "send_payment": "Send payment",
+        "move_funds": "Move funds",
         "send_funds": "Send funds",
         "send_to_address": "Send to an Address",
         "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "transfer_between_accounts": "Transfer Between Accounts",
         "move_funds_between_accounts": "Move funds between accounts",
+        "send_tokens_to_address": "Send tokens to an address",
         "manage_account": "Manage Account",
         "customize_account": "Customize your account",
         "account": "Account",
@@ -307,6 +374,7 @@
         "from": "From",
         "to": "To",
         "receive_funds": "Receive funds",
+        "my_address": "My Address",
         "share_address": "Share an address",
         "your_address": "Your address",
         "generate_new_address": "Generate new address",
@@ -323,6 +391,7 @@
         "light_theme": "Light theme",
         "dark_theme": "Dark theme",
         "total_balance": "Total Balance",
+        "account_balance": "Account Balance",
         "incoming": "Incoming",
         "outgoing": "Outgoing",
         "accounts": "Accounts",
@@ -335,5 +404,12 @@
         "transactions": "Transactions",
         "security": "Security",
         "account_address": "Account Address"
+    },
+    "dates": {
+        "today": "Today",
+        "days_ago": "{time, plural, one {# day} other {# days}} ago",
+        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
+        "months_ago": "{time, plural, one {# month} other {# months}} ago",
+        "years_ago": "{time, plural, one {# year} other {# years}} ago"
     }
 }
