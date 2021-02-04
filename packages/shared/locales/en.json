@@ -297,7 +297,8 @@
             "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
         },
         "address_history": {
-            "title": "{name} account address history"
+            "title": "{name} account address history",
+            "current_balance": "Current balance: {balance}"
         }
     },
     "actions": {
