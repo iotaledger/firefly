@@ -1,8 +1,6 @@
 <script lang="typescript">
     import { onDestroy } from 'svelte'
-    import { Logo, Icon } from 'shared/components'
-    import NetworkIndicator from './NetworkIndicator.svelte'
-    import ProfileModal from './ProfileModal.svelte'
+    import { Logo, Icon, NetworkIndicator, ProfileActionsModal } from 'shared/components'
     import { networkStatus } from 'shared/lib/networkStatus'
     import { getActiveProfile } from 'shared/lib/app'
     import { getInitials } from 'shared/lib/helpers'
@@ -64,5 +62,5 @@
         </span>
     </nav>
     <NetworkIndicator bind:isActive={showNetwork} {locale} />
-    <ProfileModal bind:isActive={showProfile} {locale} {openSettings} />
+    <ProfileActionsModal bind:isActive={showProfile} {locale} {openSettings} />
 </aside>
