@@ -340,8 +340,9 @@ export const initialiseListeners = () => {
             const locale = get(_) as (string) => string
             const notificationMessage = locale('notifications.valueTx')
                 .replace('{{value}}', message.value.toString())
+                .replace('{{account}}', account.alias)
             const NotificationManager = window['Electron']['NotificationManager']
-            NotificationManager.notify(account.alias, notificationMessage, { notifications: { general: true } })
+            NotificationManager.notify(notificationMessage, { notifications: { general: true } })
         },
         onError(error) {
             console.error(error)
@@ -358,8 +359,9 @@ export const initialiseListeners = () => {
             const locale = get(_) as (string) => string
             const notificationMessage = locale(`notifications.${messageKey}`)
                 .replace('{{value}}', message.value.toString())
+                .replace('{{account}}', account.alias)
             const NotificationManager = window['Electron']['NotificationManager']
-            NotificationManager.notify(account.alias, notificationMessage, { notifications: { general: true } })
+            NotificationManager.notify(notificationMessage, { notifications: { general: true } })
         },
         onError(error) {
             console.error(error)
