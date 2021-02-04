@@ -257,6 +257,10 @@
                 "status": "Status",
                 "messages_per_second": "Messages per second",
                 "confirmation_rate": "Confirmation rate"
+            },
+            "profile_modal": {
+                "all_settings": "All settings",
+                "logout": "Log out"
             }
         }
     },
@@ -293,8 +297,7 @@
             "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
         },
         "address_history": {
-            "title": "{name} account address history",
-            "current_balance": "Current balance: {balance}"
+            "title": "{name} account address history"
         }
     },
     "actions": {
