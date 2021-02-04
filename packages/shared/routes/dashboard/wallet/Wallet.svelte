@@ -149,6 +149,8 @@
             onSuccess(strongholdStatusResponse) {
                 if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
                     popupState.set({ active: true, type: 'password', props: { onSuccess: _generate } })
+                } else {
+                    _generate()
                 }
             },
             onError(error) {
