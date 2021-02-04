@@ -4,24 +4,23 @@
     import { OnboardingLayout, Illustration, Text, Button, Popup } from 'shared/components'
     import { api } from 'shared/lib/wallet'
     import { DEFAULT_NODES as nodes } from 'shared/lib/network'
+    import { popupState, openPopup, closePopup } from 'shared/lib/popup'
 
     export let locale
     export let mobile
-    const popupState = writable({
-        active: true,
+    openPopup({
         type: 'ledgerNotConnected',
         props: {
             message: locale('views.import_from_ledger.ledger_not_connected')
         }
     })
-    setContext('popupState', popupState)
 
     let restoring = false
     let simulator = false
     let checkIfLedgerIsOpened = true
     let isLedgerOpened = false
 
-    popupState.subscribe(state => {
+    const unsubscribe = popupState.subscribe(state => {
         if (!(state.active || isLedgerOpened)) {
             handleBackClick()
         }
@@ -29,6 +28,7 @@
 
     onDestroy(() => {
         checkIfLedgerIsOpened = false
+        unsubscribe()
     })
 
     const dispatch = createEventDispatcher()
@@ -37,7 +37,7 @@
         api.openLedgerApp(simulator, {
             onSuccess() {
                 isLedgerOpened = true
-                popupState.set({ active: false })
+                closePopup()
             },
             onError() {
                 if (checkIfLedgerIsOpened) {
@@ -90,9 +90,6 @@
 {#if mobile}
 <div>foo</div>
 {:else}
-{#if $popupState.active}
-<Popup type={$popupState.type} props={$popupState.props} {locale} />
-{/if}
 <OnboardingLayout onBackClick={handleBackClick}>
     <div slot="leftpane__content">
         <Text type="h2" classes="mb-5">{locale('views.import_from_firefly_ledger.title')}</Text>

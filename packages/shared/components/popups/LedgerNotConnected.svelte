@@ -1,13 +1,14 @@
 <script>
     import { getContext } from 'svelte'
     import { Text, Button } from 'shared/components'
+    import { closePopup } from 'shared/lib/popup'
     export let locale
     export let message
 
     const popupState = getContext('popupState')
 
     function handleCancelClick() {
-        popupState.set({ active: false })
+        closePopup()
     }
 </script>
 
