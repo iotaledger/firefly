@@ -1,6 +1,7 @@
 export enum Network {
     Mainnet = 'mainnet',
-    Devnet = 'testnet2',
+    Testnet = 'testnet',
+    Devnet = 'devnet',
     Comnet = 'comnet',
 }
 
