@@ -52,3 +52,9 @@ export interface TransactionEventPayload {
     accountId: string
     message: Message
 }
+
+export interface ConfirmationStateChangeEventPayload {
+    accountId: string
+    message: Message
+    confirmed: boolean
+}

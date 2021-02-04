@@ -1,6 +1,7 @@
 const binding = require('wallet-nodejs-binding')
 const PincodeManager = require('../libs/pincodeManager');
 const DeepLinkManager = require('../libs/deepLinkManager');
+const NotificationManager = require('../libs/notificationManager');
 const { ipcRenderer } = require('electron')
 
 const freezeObjectFactory = (obj) => {
@@ -25,6 +26,7 @@ window.__WALLET__ = freezeObjectFactory(binding)
 window.Electron = {
     PincodeManager,
     DeepLinkManager,
+    NotificationManager,
     getStrongholdBackupDestination: () => {
         return ipcRenderer.invoke('show-open-dialog', { properties: ['openDirectory'] }).then((result) => {
             if (result.canceled) {

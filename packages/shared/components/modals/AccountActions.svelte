@@ -1,14 +1,12 @@
 <script lang="typescript">
-    import { fade } from 'svelte/transition'
     import { getContext } from 'svelte'
-    import { Text, Icon } from 'shared/components'
+    import { Text, Icon, Modal } from 'shared/components'
     import { accountViewState, AccountViewStates } from 'shared/lib/router'
-    import { openPopup } from 'shared/lib/popup'
+
+    const popupState = getContext('popupState')
 
     export let isActive
     export let locale
-
-    const account = getContext('selectedAccount')
 
     const handleCustomiseAccountClick = () => {
         accountViewState.set(AccountViewStates.Manage)
@@ -17,33 +15,18 @@
     const handleSyncAccountClick = () => {
         isActive = false
     }
-    const handleViewAddressHistoryClick = () => {
-        openPopup({ type: 'addressHistory', props: { account } })
+    const handlViewAddressHistoryClick = () => {
+        popupState.set({ active: true, type: 'addressHistory' })
         isActive = false
     }
     const handleDeleteAccountClick = () => {
-        openPopup({ type: 'deleteAccount', props: { account } })
+        popupState.set({ active: true, type: 'deleteAccount' })
         isActive = false
     }
 </script>
 
-<style type="text/scss">
-    account-actions-menu-content {
-        position: absolute;
-        right: calc((100% + 43px) * 0.6666666);
-        top: 121px;
-        min-width: 230px;
-        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-    }
-</style>
-
-{#if isActive}
-    <account-actions-menu-shield
-        class="fixed left-0 top-0 right-0 bottom-0 bg-transparent z-0"
-        on:click={() => (isActive = false)} />
-    <account-actions-menu-content
-        class="flex flex-col bg-white dark:bg-gray-900 border border-solid border-gray-200 rounded-lg overflow-hidden z-10"
-        in:fade={{ duration: 100 }}>
+<Modal bind:isActive position={{ top: '121px', right: 'calc((100% + 43px) * 0.6666666)' }}>
+    <div class="flex flex-col">
         <!-- Customize -->
         <button
             on:click={() => handleCustomiseAccountClick()}
@@ -60,12 +43,12 @@
         </button>
         <!-- Address history -->
         <button
-            on:click={() => handleViewAddressHistoryClick()}
+            on:click={() => handlViewAddressHistoryClick()}
             class="group flex flex-row justify-start items-center hover:bg-blue-50 py-3 px-3 w-full">
             <Icon icon="history" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
             <Text smaller classes="group-hover:text-blue-500">{locale(`actions.view_address_history`)}</Text>
         </button>
-        <hr class="border-t border-solid border-gray-200" />
+        <hr class="border-t border-solid border-gray-200 dark:border-gray-700" />
         <!-- Delete -->
         <button
             on:click={() => handleDeleteAccountClick()}
@@ -73,5 +56,5 @@
             <Icon icon="delete" classes="text-red-500 ml-1 mr-3" />
             <Text smaller classes="text-red-500" overrideColor>{locale(`actions.delete_account`)}</Text>
         </button>
-    </account-actions-menu-content>
-{/if}
+    </div>
+</Modal>

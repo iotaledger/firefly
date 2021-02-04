@@ -1,9 +1,8 @@
 <script>
-    import { getContext } from 'svelte'
     import { Text } from 'shared/components'
 
     export let locale
-    const account = getContext('selectedAccount')
+    export let account
 
     const dummyAddressHistory = [
         {
@@ -50,15 +49,15 @@
     }
 </style>
 
-<div class="mb-10">
+<div class="mb-5">
     <Text type="h4">{locale('popups.address_history.title', { values: { name: $account.alias } })}</Text>
 </div>
-<div class="history overflow-y-auto pr-8">
+<div class="history overflow-y-auto">
     {#each dummyAddressHistory as address}
         <div class="mb-7 flex flex-row flex-wrap">
-            <Text type="p" secondary classes="mb-1">{address.date}</Text>
-            <Text type="pre" classes="mb-1">{address.address}</Text>
-            <Text type="p">{locale('popups.address_history.current_balance', { values: { balance: address.balance } })}</Text>
+            <Text type="p" secondary>{address.date}</Text>
+            <Text type="pre">{address.address}</Text>
+            <Text type="p">{address.balance}</Text>
         </div>
     {/each}
 </div>

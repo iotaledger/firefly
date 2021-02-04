@@ -63,6 +63,7 @@
         return Object.assign({}, account, {
             id,
             index,
+            depositAddress,
             name: alias,
             signerType,
             rawIotaBalance: balance,
