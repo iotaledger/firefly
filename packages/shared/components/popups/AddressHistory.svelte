@@ -57,7 +57,7 @@
         <div class="mb-7 flex flex-row flex-wrap">
             <Text type="p" secondary>{address.date}</Text>
             <Text type="pre">{address.address}</Text>
-            <Text type="p">{address.balance}</Text>
+            <Text type="p">{locale('popups.address_history.title', { values: { balance: address.balance } })}</Text>
         </div>
     {/each}
 </div>

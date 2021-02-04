@@ -2,8 +2,9 @@
     import { getContext } from 'svelte'
     import { Text, Icon, Modal } from 'shared/components'
     import { accountViewState, AccountViewStates } from 'shared/lib/router'
+    import { openPopup } from 'shared/lib/popup'
 
-    const popupState = getContext('popupState')
+    const account = getContext('selectedAccount')
 
     export let isActive
     export let locale
@@ -16,11 +17,11 @@
         isActive = false
     }
     const handlViewAddressHistoryClick = () => {
-        popupState.set({ active: true, type: 'addressHistory' })
+        openPopup({ type: 'addressHistory', props: { account } })
         isActive = false
     }
     const handleDeleteAccountClick = () => {
-        popupState.set({ active: true, type: 'deleteAccount' })
+        openPopup({ type: 'deleteAccount', props: { account } })
         isActive = false
     }
 </script>
