@@ -1,13 +1,8 @@
 /**
  * Create and show a native notification
  * @param {string} message - the notification message
- * @param {object} settings - wallet settings
  */
-function notify (message, settings) {
-    if (!settings.notifications || !settings.notifications.general) {
-        return;
-    }
-
+function notify (message) {
     const notification = new Notification('Firefly', {
         body: message
     });
