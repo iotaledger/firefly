@@ -225,3 +225,13 @@ export const routerPrevious = () => {
         setRoute(previousRoute)
     }
 }
+
+export const resetRouter = () => {
+    history.set([])
+    let hasCompletedSetup: boolean = get(profiles).length > 0;
+    if (hasCompletedSetup) {
+        setRoute(AppRoute.Login)
+    } else {
+        setRoute(AppRoute.Welcome)
+    }
+}  

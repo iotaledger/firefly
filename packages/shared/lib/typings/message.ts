@@ -33,6 +33,7 @@ export interface Message {
     nonce: number
     confirmed: boolean
     broadcasted: boolean
+    value: number
 }
 
 export enum MessageType {

@@ -30,6 +30,7 @@ function initAutoUpdate(mainWindow, devMode) {
     ipcMain.handle('update-download', () => updateDownload())
     ipcMain.handle('update-cancel', () => updateCancel())
     ipcMain.handle('update-install', () => updateInstall())
+    ipcMain.handle('update-get-version-details', () => getVersionDetails())
 
     autoUpdater.on('update-available', (info) => {
         versionDetails.upToDate = false;
@@ -73,17 +74,12 @@ function updateInstall() {
     autoUpdater.quitAndInstall();
 }
 
-function setVersionDetails(vd) {
-    versionDetails = vd;
-}
-
 function getVersionDetails() {
     return versionDetails
 }
 
 module.exports = {
     initAutoUpdate,
-    setVersionDetails,
     getVersionDetails,
     updateDownload,
     updateCancel,

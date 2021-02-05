@@ -1,6 +1,6 @@
 <script>
-    import { getContext } from 'svelte'
     import { date } from 'svelte-i18n'
+    import { closePopup } from 'shared/lib/popup'
     import { Text, Button } from 'shared/components'
 
     import {
@@ -15,8 +15,6 @@
 
     export let locale
 
-    const popupState = getContext('popupState')
-
     function handleUpdate() {
         if ($updateComplete) {
             updateInstall()
@@ -28,7 +26,7 @@
         if ($updateBusy) {
             updateCancel()
         }
-        popupState.set({ active: false })
+        closePopup()
     }
 </script>
 
@@ -41,10 +39,10 @@
     }
 </style>
 
-<Text type="h4" classes="mb-5">{locale('popups.version.title', { values: { version: currentVersion } })}</Text>
+<Text type="h4" classes="mb-5">{locale('popups.version.title', { values: { version: $versionDetails.currentVersion } })}</Text>
 <div class="flex w-full flex-row flex-wrap">
     <div class="w-full p-4 bg-gray-50 flex justify-center content-center">
-        <img src="assets/logos/firefly_logo_complete_horizontal.svg" alt="" />
+        <img src="assets/logos/firefly_logo_full.svg" alt="" />
     </div>
     {#if $versionDetails.upToDate}
         <div class="w-full text-center my-6 px-8">

@@ -1,42 +1,35 @@
 <script lang="typescript">
     import { setContext, onMount } from 'svelte'
-    import { get, writable, derived } from 'svelte/store'
+    import { get, derived } from 'svelte/store'
     import { updateStrongholdStatus } from 'shared/lib/app'
-    import { api, getLatestMessages, initialiseListeners, selectedAccountId } from 'shared/lib/wallet'
+    import { api, getLatestMessages, initialiseListeners, selectedAccountId, wallet } from 'shared/lib/wallet'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { deepLinking, currency } from 'shared/lib/settings'
     import { DEFAULT_NODES as nodes } from 'shared/lib/network'
     import { formatUnit } from 'shared/lib/units'
-    import { Popup, DashboardPane } from 'shared/components'
+    import { DashboardPane } from 'shared/components'
     import { Account, LineChart, WalletHistory, Security, CreateAccount, WalletBalance, WalletActions } from './views/'
     import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
+    import { openPopup } from 'shared/lib/popup'
     import { walletViewState, WalletViewStates } from 'shared/lib/router'
 
     export let locale
 
     const AccountColors = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
-    const DUMMY_WALLET_BALANCE = {
-        incoming: '32 Gi',
-        outgoing: '16 Gi',
-        balance: '0 Mi',
-        balanceEquiv: '0.00 USD',
-    }
 
-    const totalBalance = writable(DUMMY_WALLET_BALANCE)
-    const accounts = writable([])
+    const { accounts, balanceOverview } = $wallet
+
     const transactions = derived(accounts, ($accounts) => {
         return getLatestMessages($accounts)
     })
     const selectedAccount = derived([selectedAccountId, accounts], ([$selectedAccountId, $accounts]) =>
         $accounts.find((acc) => acc.id === $selectedAccountId)
     )
-    const popupState = writable({ active: false })
 
-    setContext('walletBalance', totalBalance)
+    setContext('walletBalance', balanceOverview)
     setContext('walletAccounts', accounts)
     setContext('walletTransactions', transactions)
     setContext('selectedAccount', selectedAccount)
-    setContext('popupState', popupState)
 
     let isGeneratingAddress = false
 
@@ -49,7 +42,7 @@
                             balance: balanceResponse.payload.total,
                             incoming: balanceResponse.payload.incoming,
                             outgoing: balanceResponse.payload.outgoing,
-                            address: latestAddressResponse.payload.address,
+                            depositAddress: latestAddressResponse.payload.address,
                         })
                     },
                     onError(error) {
@@ -65,16 +58,16 @@
 
     function prepareAccountInfo(account, meta) {
         const { id, index, alias } = account
-        const { balance, address } = meta
+        const { balance, depositAddress } = meta
 
         return Object.assign({}, account, {
             id,
             index,
+            depositAddress,
             name: alias,
             rawIotaBalance: balance,
             balance: formatUnit(balance, 0),
             balanceEquiv: `${convertToFiat(balance, $currencies[CurrencyTypes.USD], $exchangeRates[$currency])} ${$currency}`,
-            address,
             color: AccountColors[index],
         })
     }
@@ -99,13 +92,15 @@
                             accounts.update((accounts) => [...accounts, account])
 
                             if (idx === accountsResponse.payload.length - 1) {
-                                totalBalance.update((totalBalance) =>
-                                    Object.assign({}, totalBalance, {
-                                        rawIotaBalance: _totalBalance.balance,
-                                        balance: formatUnit(_totalBalance.balance, 2),
+                                balanceOverview.update((balanceOverview) =>
+                                    Object.assign({}, balanceOverview, {
                                         incoming: formatUnit(_totalBalance.incoming, 2),
+                                        incomingRaw: _totalBalance.incoming,
                                         outgoing: formatUnit(_totalBalance.outgoing, 2),
-                                        balanceEquiv: `${convertToFiat(
+                                        outgoingRaw: _totalBalance.outgoing,
+                                        balance: formatUnit(_totalBalance.balance, 2),
+                                        balanceRaw: _totalBalance.balance,
+                                        balanceFiat: `${convertToFiat(
                                             _totalBalance.balance,
                                             $currencies[CurrencyTypes.USD],
                                             $exchangeRates[$currency]
@@ -127,21 +122,36 @@
     }
 
     function onGenerateAddress(accountId) {
-        isGeneratingAddress = true
-        api.generateAddress(accountId, {
-            onSuccess(response) {
-                accounts.update((accounts) =>
-                    accounts.map((account) => {
-                        if (account.id === accountId) {
-                            return Object.assign({}, account, {
-                                address: response.payload.address,
-                            })
-                        }
+        const _generate = () => {
+            isGeneratingAddress = true
+            api.getUnusedAddress(accountId, {
+                onSuccess(response) {
+                    accounts.update((accounts) =>
+                        accounts.map((account) => {
+                            if (account.id === accountId) {
+                                return Object.assign({}, account, {
+                                    depositAddress: response.payload.address,
+                                })
+                            }
 
-                        return account
-                    })
-                )
-                isGeneratingAddress = false
+                            return account
+                        })
+                    )
+                    isGeneratingAddress = false
+                },
+                onError(error) {
+                    console.error(error)
+                },
+            })
+        }
+
+        api.getStrongholdStatus({
+            onSuccess(strongholdStatusResponse) {
+                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                    openPopup({ type: 'password', props: { onSuccess: _generate } })
+                } else {
+                    _generate()
+                }
             },
             onError(error) {
                 console.error(error)
@@ -173,11 +183,11 @@
                 accounts.update((storedAccounts) => {
                     return storedAccounts.map((storedAccount) => {
                         // TODO: SyncAccounts response should have "id" instead of "accountId" (for consistency)
-                        const syncedAccount = syncedAccounts.find((_account) => _account.accountId === storedAccount.id)
+                        const syncedAccount = syncedAccounts.find((_account) => _account.id === storedAccount.id)
 
                         return Object.assign({}, storedAccount, {
                             // Update deposit address
-                            depositAddress: syncedAccount.depositAddress,
+                            depositAddress: syncedAccount.depositAddress.address,
                             // If we have received a new address, simply add it;
                             // If we have received an existing address, update the properties.
                             addresses: _update(storedAccount.addresses, syncedAccount.addresses, 'address'),
@@ -262,7 +272,7 @@
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
                 if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    popupState.set({ active: true, type: 'password', props: { onSuccess: _send } })
+                    openPopup({ type: 'password', props: { onSuccess: _send } })
                 }
             },
             onError(error) {
@@ -297,7 +307,7 @@
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
                 if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    popupState.set({ active: true, type: 'password', props: { onSuccess: _internalTransfer } })
+                    openPopup({ type: 'password', props: { onSuccess: _internalTransfer } })
                 }
             },
             onError(error) {
@@ -339,18 +349,19 @@
     }
 
     onMount(() => {
-        getAccounts()
+        if (!$accounts.length) {
+            getAccounts()
+        }
 
         initialiseListeners()
 
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
                 updateStrongholdStatus(strongholdStatusResponse.payload.snapshot.status === 'Locked')
-
                 api.areLatestAddressesUnused({
                     onSuccess(response) {
                         if (!response.payload) {
-                            popupState.set({ active: true, type: 'password', props: { onSuccess: syncAccounts } })
+                            openPopup({ type: 'password', props: { onSuccess: syncAccounts } })
                         }
                     },
                     onError(error) {
@@ -365,9 +376,6 @@
     })
 </script>
 
-{#if $popupState.active}
-    <Popup type={$popupState.type} props={$popupState.props} {locale} />
-{/if}
 {#if $walletViewState === WalletViewStates.Account && $selectedAccountId}
     <Account
         send={onSend}

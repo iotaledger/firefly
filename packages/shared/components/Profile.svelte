@@ -28,11 +28,13 @@
 <div class="flex flex-col justify-between items-center">
     <div
         on:click={() => onClick(id)}
-        class={`font-bold text-white text-center rounded-full flex items-center justify-center cursor-pointer ${classes}`}
+        class={`font-bold text-center rounded-full flex items-center justify-center cursor-pointer ${classes}`}
         style={`height: ${height}; width: ${width}; background-color: ${bgColor}`}>
         {#if slots}
             <slot />
-        {:else}{getInitials()}{/if}
+        {:else}
+            <Text type="h2" classes="text-white">{getInitials()}</Text>
+        {/if}
     </div>
-    <Text type="h4" bold classes="mt-8">{name}</Text>
+    <Text type="h4" classes="mt-5">{name}</Text>
 </div>

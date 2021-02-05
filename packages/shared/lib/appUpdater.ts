@@ -54,3 +54,7 @@ export function updateCancel(): void {
 export function updateInstall(): void {
     window['Electron'].updateInstall()
 }
+
+export async function refreshVersionDetails(): Promise<void> {
+    versionDetails.set(await window['Electron'].getVersionDetails())
+}
