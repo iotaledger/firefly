@@ -1,5 +1,6 @@
-import { readable, writable, get, derived } from 'svelte/store'
-import { logged, notification, walletPin, strongholdPassword, profiles } from 'shared/lib/app'
+import { readable, writable, get } from 'svelte/store'
+import { logged, notification, walletPin, strongholdPassword } from 'shared/lib/app'
+import { profiles } from 'shared/lib/profile'
 
 /**
  * Sets next route

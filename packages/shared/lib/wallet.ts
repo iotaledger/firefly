@@ -8,7 +8,6 @@ import type {
     SyncAccountsResponse,
     ErrorResponse,
     Actor,
-    StrongholdStatusResponse,
 } from './typings/bridge'
 import { ResponseTypes } from './typings/bridge'
 import type { Address } from './typings/address'
@@ -16,11 +15,9 @@ import type { Message } from './typings/message'
 import type { Event, BalanceChangeEventPayload, TransactionEventPayload, ConfirmationStateChangeEventPayload } from './typings/events'
 import Validator, { ErrorTypes as ValidatorErrorTypes } from 'shared/lib/validator'
 import { generateRandomId } from 'shared/lib/utils'
-import { mnemonic, getActiveProfile, updateStrongholdStatus } from 'shared/lib/app'
-import { account, message } from './typings'
-import { persistent } from './helpers'
+import { mnemonic } from 'shared/lib/app'
+import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { _ } from 'shared/lib/i18n'
-import { notifications } from 'shared/lib/settings'
 
 
 const Wallet = window['__WALLET__']
@@ -119,7 +116,7 @@ export const wallet = writable<WalletState>({
     accounts: writable<Account[]>([])
 })
 
-export const clearWallet = () => {
+export const resetWallet = () => {
     const { balanceOverview, accounts } = get(wallet)
     balanceOverview.set({
         incoming: '0 Mi',
@@ -131,6 +128,7 @@ export const clearWallet = () => {
         balanceFiat: '0.00 USD'
     })
     accounts.set([])
+    selectedAccountId.set(null)
 }
 
 export const selectedAccountId = writable<string | null>(null)
@@ -241,7 +239,7 @@ const storeCallbacks = (__id: string, type: ResponseTypes, callbacks?: Callbacks
 const Middleware = {
     get: (_target, prop) => {
         return async (...payload): Promise<void> => {
-            const actorId = getActiveProfile().id;
+            const actorId = get(activeProfile).id;
 
             const messageId = generateRandomId();
 
@@ -339,7 +337,7 @@ export const initialiseListeners = () => {
      */
     api.onStrongholdStatusChange({
         onSuccess(response) {
-            updateStrongholdStatus(response.payload.snapshot.status === 'Locked')
+            updateProfile('isStrongholdLocked', response.payload.snapshot.status === 'Locked')
         },
         onError(error) { console.error(error) }
     })
@@ -349,7 +347,7 @@ export const initialiseListeners = () => {
     */
     api.onNewTransaction({
         onSuccess(response: Event<TransactionEventPayload>) {
-            if (get(notifications)) {
+            if (get(activeProfile).settings.notifications) {
                 const accounts = get(wallet).accounts
                 const account = get(accounts).find(account => account.id === response.payload.accountId)
                 const message = response.payload.message
@@ -369,7 +367,7 @@ export const initialiseListeners = () => {
 
     api.onConfirmationStateChange({
         onSuccess(response: Event<ConfirmationStateChangeEventPayload>) {
-            if (get(notifications)) {
+            if (get(activeProfile).settings.notifications) {
                 const accounts = get(wallet).accounts
                 const account = get(accounts).find(account => account.id === response.payload.accountId)
                 const message = response.payload.message

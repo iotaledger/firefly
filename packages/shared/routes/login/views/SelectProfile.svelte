@@ -1,7 +1,7 @@
 <script>
     import { createEventDispatcher } from 'svelte'
-    import { OnboardingLayout, Illustration, Text, Button, Logo, Profile, Icon } from 'shared/components'
-    import { profiles, setActiveProfile } from 'shared/lib/app'
+    import { Logo, Profile, Icon } from 'shared/components'
+    import { profiles, setActiveProfile } from 'shared/lib/profile'
 
     export let locale
     export let mobile

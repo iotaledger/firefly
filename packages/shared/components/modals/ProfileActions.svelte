@@ -1,18 +1,18 @@
 <script lang="typescript">
+    import { get } from 'svelte/store';
     import { fade } from 'svelte/transition'
     import { Text, Icon, Modal } from 'shared/components'
-    import { getActiveProfile } from 'shared/lib/app'
+    import { activeProfile } from 'shared/lib/profile'
     import { getInitials } from 'shared/lib/helpers'
     import { resetRouter } from 'shared/lib/router'
-    import { api, destroyActor, clearWallet } from 'shared/lib/wallet'
+    import { api, destroyActor, resetWallet } from 'shared/lib/wallet'
 
     export let isActive
     export let locale
     export let openSettings = () => {}
 
     const profileColor = 'blue' // TODO: each profile has a different color
-    const activeProfile = getActiveProfile()
-    const profileName = getActiveProfile().name
+    const profileName = get(activeProfile).name
     const profileInitial = getInitials(profileName, 1)
 
     const handleSettingsClick = () => {
@@ -22,8 +22,8 @@
     const handleLogoutClick = () => {
         api.lockStronghold({
             onSuccess() {
-                destroyActor(activeProfile.id)
-                clearWallet()
+                destroyActor(get(activeProfile).id)
+                resetWallet()
                 resetRouter()
             },
             onError(error) {

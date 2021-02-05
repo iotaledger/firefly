@@ -3,7 +3,7 @@
     import { Text, Button } from 'shared/components'
     import { getBackupWarningColor } from 'shared/lib/helpers'
     import { api } from 'shared/lib/wallet'
-    import { updateStrongholdBackupTime } from 'shared/lib/app'
+    import { updateProfile } from 'shared/lib/profile'
     import { openPopup, closePopup } from 'shared/lib/popup'
 
     export let locale
@@ -32,7 +32,7 @@
                 if (result) {
                     api.backup(result, {
                         onSuccess() {
-                            updateStrongholdBackupTime(new Date())
+                            updateProfile('lastStrongholdBackupTime', new Date())
                             closePopup()
                         },
                         onError(error) {
