@@ -76,12 +76,13 @@ function createWindow() {
         },
     })
 
-    // and load the index.html of the app.
-    windows.main.loadFile(devMode ? '../public/index.html' : '../index.html')
-
-    // Enable dev tools only in developer mode
     if (devMode) {
+        // Enable dev tools only in developer mode
         windows.main.webContents.openDevTools()
+        windows.main.loadURL('http://localhost:8080')
+    } else {
+        // load the index.html of the app.
+        windows.main.loadFile('../index.html')
     }
 
     const _handleNavigation = (e, url) => {
