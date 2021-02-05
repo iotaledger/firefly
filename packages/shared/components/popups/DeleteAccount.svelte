@@ -1,14 +1,12 @@
 <script>
-    import { getContext } from 'svelte'
     import { api, selectedAccountId } from 'shared/lib/wallet'
     import { sendParams } from 'shared/lib/app'
     import { walletViewState, WalletViewStates, accountViewState, AccountViewStates } from 'shared/lib/router'
     import { Password, Button, Text } from 'shared/components'
+    import { closePopup } from 'shared/lib/popup'
 
     export let locale
-
-    const popupState = getContext('popupState')
-    const account = getContext('selectedAccount')
+    export let account
 
     $: canDelete = $account.rawIotaBalance == 0
 
@@ -19,7 +17,7 @@
             onSuccess(response) {
                 // 1. Delete account
                 // 2. Close popup
-                popupState.set({ active: false })
+                closePopup()
                 // 3. Go to main dashboard
                 selectedAccountId.set(null)
                 accountViewState.set(AccountViewStates.Init)
@@ -31,12 +29,12 @@
         })
     }
     function handleMoveFundsClick() {
-        popupState.set({ active: false })
+        closePopup()
         sendParams.update((params) => ({ ...params, amount: $account.rawIotaBalance })) // TODO: fix input amount
         accountViewState.set(AccountViewStates.Send)
     }
     function handleCancelClick() {
-        popupState.set({ active: false })
+        closePopup()
     }
 </script>
 

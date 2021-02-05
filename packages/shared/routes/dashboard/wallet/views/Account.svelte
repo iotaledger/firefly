@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { getContext } from 'svelte'
-    import { DashboardPane } from 'shared/components'
-    import { AccountNavigation, AccountBalance, AccountActions, AccountHistory, AccountActionsModal } from '.'
+    import { DashboardPane, AccountActionsModal } from 'shared/components'
+    import { AccountNavigation, AccountBalance, AccountActions, AccountHistory } from '.'
 
     export let locale
     export let send

@@ -63,6 +63,7 @@
         return Object.assign({}, account, {
             id,
             index,
+            depositAddress,
             name: alias,
             rawIotaBalance: balance,
             balance: formatUnit(balance, 0),
@@ -148,6 +149,8 @@
             onSuccess(strongholdStatusResponse) {
                 if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
                     openPopup({ type: 'password', props: { onSuccess: _generate } })
+                } else {
+                    _generate()
                 }
             },
             onError(error) {
