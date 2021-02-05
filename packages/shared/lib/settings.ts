@@ -26,3 +26,8 @@ export const outsourcePow = persistent<boolean>('outsourcePow', false)
  * Selected currency setting
  */
 export const currency = persistent<AvailableExchangeRates>('currency', AvailableExchangeRates.USD)
+
+/**
+ * Notifications settings
+ */
+export const notifications = persistent<boolean>('notifications', true)

@@ -1,6 +1,6 @@
 <script>
-    import { getContext } from 'svelte'
     import { api } from 'shared/lib/wallet'
+    import { closePopup } from 'shared/lib/popup'
     import { Password, Button, Text } from 'shared/components'
 
     export let locale
@@ -8,15 +8,13 @@
     export let onSuccess
     export let onError
 
-    const popupState = getContext('popupState')
-
     let password
 
     function handleSubmit() {
         api.setStrongholdPassword(password, {
             onSuccess(response) {
                 // Close popup
-                popupState.set({ active: false })
+                closePopup()
                 if ('function' === typeof onSuccess) {
                     onSuccess(response)
                 }
@@ -31,7 +29,7 @@
         })
     }
     function handleCancelClick() {
-        popupState.set({ active: false })
+        closePopup()
     }
 </script>
 

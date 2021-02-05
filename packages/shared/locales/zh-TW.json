@@ -69,12 +69,12 @@
             "body": "請檢查您是否正確寫下了該詞組。請正確的順序選擇單詞。"
         },
         "backup_wallet": {
-            "title": "備份至一個Stronghold檔案",
-            "body": "輸入密碼將您的錢包備份到Stronghold文件。您的密碼用於加密備份。"
+            "title": "備份至一個 Stronghold 檔案",
+            "body": "輸入密碼以將 您的錢包 備份至 Stronghold 檔案。您的密碼將用於加密此備份。"
         },
         "recovery_phrase_saved": {
             "title": "備份成功",
-            "body": "您的錢包已備份至Stronghold"
+            "body": "您的錢包已備份至 Stronghold"
         },
         "congratulations": {
             "title": "恭喜您",
@@ -82,7 +82,7 @@
         },
         "import": {
             "title": "匯入錢包",
-            "body": "如果您有恢復詞組或Stronghold備份，您可以在此處輸入。"
+            "body": "如果您有 恢復詞組(註記詞) 或 Stronghold 備份，您可以在此處輸入。"
         },
         "import_from_text": {
             "title": "使用恢復詞組或種子恢復您的錢包",
@@ -133,15 +133,15 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Help & Information",
+                "title": "幫助及資訊",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profile": {
-                "title": "Profile",
+                "title": "用戶設定檔",
                 "description": ""
             },
             "sync": {
-                "title": "Sync accounts",
+                "title": "同步帳戶",
                 "description": ""
             },
             "theme": {
@@ -169,39 +169,39 @@
                 "description": ""
             },
             "changePassword": {
-                "title": "Change password",
+                "title": "修改密碼",
                 "description": ""
             },
             "resyncAccounts": {
-                "title": "Resync accounts",
+                "title": "重新同步帳戶",
                 "description": ""
             },
             "resetWallet": {
-                "title": "Reset wallet",
+                "title": "重設錢包",
                 "description": ""
             },
             "deepLinks": {
-                "title": "Deep links",
+                "title": "深層連結",
                 "description": ""
             },
             "developerMode": {
-                "title": "Developer mode",
+                "title": "開發者模式",
                 "description": ""
             },
             "nodeSettings": {
-                "title": "Node settings",
+                "title": "節點設定",
                 "description": ""
             },
             "proofOfWork": {
-                "title": "Proof of work",
+                "title": "工作量證明",
                 "description": ""
             },
             "errorLog": {
-                "title": "Error log",
+                "title": "錯誤日誌",
                 "description": ""
             },
             "stateExport": {
-                "title": "State export",
+                "title": "狀態輸出",
                 "description": ""
             },
             "troubleshoot": {
@@ -226,25 +226,84 @@
             }
         },
         "login": {
-            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "please_wait": "請等候 {time, plural, one {1 秒} other {# 秒}}",
+            "incorrect_attempts": "{attempts, plural, one {錯誤輸入 1 次} other {輸入錯誤 # 次}}"
+        },
+        "dashboard": {
+            "security": {
+                "version": {
+                    "title": "Firefly v{version}",
+                    "up_to_date": "Up to date",
+                    "out_of_date": "Out of date"
+                },
+                "hardware_device": {
+                    "title": "Hardware Device",
+                    "none_detected": "None detected"
+                },
+                "stronghold_status": {
+                    "title": "Stronghold Status",
+                    "locked": "Locked",
+                    "unlocked": "Unlocked"
+                },
+                "stronghold_backup": {
+                    "title": "Stronghold Backup",
+                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                }
+            },
+            "network": {
+                "network_operational": "Network Operational",
+                "network_degraded": "Network Degraded",
+                "network_down": "Network Down",
+                "status": "Status",
+                "messages_per_second": "Messages per second",
+                "confirmation_rate": "Confirmation rate"
+            }
         }
     },
     "popups": {
         "password": {
-            "title": "Password required",
-            "subtitle": "Please provide your wallet’s password to unlock stronghold."
+            "title": "必須輸入密碼",
+            "subtitle": "Please enter your wallet password to unlock Stronghold"
         },
         "qr": {
-            "title": "Your QR code"
+            "title": "您的QR碼"
+        },
+        "version": {
+            "title": "Current version: {version}",
+            "up_to_date_title": "Firefly is up to date",
+            "up_to_date_description": "You are running the latest and safest version of Firefly.",
+            "update_available": "Firefly update available",
+            "update_details": "Version {version} - {date}"
+        },
+        "backup": {
+            "title": "Last backup: {date}",
+            "last_backup": "You last backed up {date}",
+            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
+            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
+            "not_backed_up": "Not backed up",
+            "not_backed_up_description": "You have not backed up your Stronghold"
+        },
+        "delete_account": {
+            "title": "Delete {name}?",
+            "body": "You will permanently lose your transaction history and maybe something else as well.",
+            "type_password": "Type your wallet’s password to confirm.",
+            "delete_account": "Delete account",
+            "error_title": "Unable to delete {name}",
+            "error_body_1": "To delete an account you must have 0 balance.",
+            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+        },
+        "address_history": {
+            "title": "{name} account address history",
+            "current_balance": "Current balance: {balance}"
         }
     },
     "actions": {
         "continue": "繼續",
         "back": "返回",
-        "cancel": "Cancel",
-        "close": "Close",
-        "save": "Save",
+        "cancel": "取消",
+        "close": "關閉",
+        "dismiss": "Dismiss",
+        "save": "儲存",
         "import_seed": "匯入現有的種子",
         "import_wallet": "匯入現有錢包",
         "create_wallet": "建立新錢包",
@@ -253,7 +312,7 @@
         "setup_pin": "設置 PIN 碼",
         "set_pin": "設置 PIN 碼",
         "confirm_pin": "確認 PIN 碼",
-        "enter_your_pin": "Enter your PIN",
+        "enter_your_pin": "請輸入您的 PIN",
         "save_backup_file": "儲存備份檔案",
         "ive_written_recovery_phrase": "我已經寫下了恢復詞組",
         "verify_recovery_phrase": "驗證種子助記詞",
@@ -263,7 +322,7 @@
         "import_from_file": "從檔案匯入",
         "send": "傳送",
         "receive": "收款",
-        "create": "Create",
+        "create": "建立",
         "begin_transfer": "開始交易",
         "try_again": "重新嘗試",
         "visit_discord": "探訪 Discord",
@@ -271,34 +330,42 @@
         "import_extentions": ".stronghold 或 .kdbx 檔案",
         "choose_file": "選擇一個檔案",
         "drop_here": "將檔案拖至此處",
-        "syncAll": "Sync all",
-        "export": "Export",
-        "exportNewStronghold": "Export a new Stronghold",
-        "enableDeepLinks": "Enable deep links",
-        "enableDeveloperMode": "Enable developer mode",
-        "enableNotifications": "Enable notifications",
-        "exportState": "Export state",
-        "outsourceProofOfWork": "Outsource proof of work",
-        "unlock": "Unlock"
+        "syncAll": "同步全部",
+        "export": "匯出",
+        "exportNewStronghold": "輸出一個新的 Stronghold",
+        "enableDeepLinks": "啟用深度連結",
+        "enableDeveloperMode": "開啟開發者模式",
+        "enableNotifications": "啟用通知",
+        "exportState": "匯出狀態",
+        "outsourceProofOfWork": "外派工作量証明",
+        "unlock": "解鎖",
+        "update_firefly": "Update Firefly",
+        "save_backup": "Save backup",
+        "customize_account": "Customise account",
+        "sync_account": "Sync account",
+        "view_address_history": "View address history",
+        "delete_account": "Delete account"
     },
     "general": {
         "password": "密碼",
         "confirm_password": "確認密碼",
-        "currentPassword": "Current password",
-        "newPassword": "New password",
-        "confirmNewPassword": "Confirm new password",
+        "currentPassword": "當前密碼",
+        "newPassword": "新密碼",
+        "confirmNewPassword": "確認新密碼",
         "your_seed": "您的種子",
         "recovery_phrase": "恢復詞組",
         "recent_activity": "近期活動",
         "sent": "已支出",
         "received": "已接收",
+        "send_payment": "Send payment",
+        "move_funds": "Move funds",
         "send_funds": "發送資金",
         "send_to_address": "傳送到地址",
         "scan_qr_or_paste": "掃描QR碼 或 貼上地址",
-        "transfer_between_accounts": "在帳戶間轉移",
-        "move_funds_between_accounts": "Move funds between accounts",
-        "manage_account": "Manage Account",
-        "customize_account": "Customize your account",
+        "move_funds_between_accounts": "在帳戶間轉移資產",
+        "send_tokens_to_address": "Send tokens to an address",
+        "manage_account": "管理帳戶",
+        "customize_account": "自定義您的帳戶",
         "account": "帳戶",
         "sending_to_address": "正傳送到地址",
         "amount": "金額",
@@ -307,10 +374,11 @@
         "from": "由",
         "to": "至",
         "receive_funds": "接收資產",
+        "my_address": "My Address",
         "share_address": "分享地址",
         "your_address": "您的地址",
         "generate_new_address": "產生新地址",
-        "copy_address": "Copy Address",
+        "copy_address": "複製地址",
         "have_text_backup": "我有文字備份",
         "have_file_backup": "我有檔案備份",
         "enter_seed_or_phrase": "輸入恢復詞組或種子",
@@ -323,17 +391,25 @@
         "light_theme": "淺色主題",
         "dark_theme": "深色主題",
         "total_balance": "總額",
+        "account_balance": "Account Balance",
         "incoming": "傳入",
         "outgoing": "傳出",
         "accounts": "帳戶",
-        "automaticNodeSelection": "Automatic node selection",
-        "manualNodeSelection": "Manual node selection",
-        "profiles": "Profiles",
-        "create_account": "Create an account",
-        "account_name": "Account name",
-        "latest_transactions": "Latest Transactions",
-        "transactions": "Transactions",
+        "automaticNodeSelection": "自動選取節點",
+        "manualNodeSelection": "手動選取節點",
+        "profiles": "設定檔",
+        "create_account": "建立帳戶",
+        "account_name": "帳戶名稱",
+        "latest_transactions": "最新交易",
+        "transactions": "交易紀錄",
         "security": "安全性",
-        "account_address": "Account Address"
+        "account_address": "帳戶地址"
+    },
+    "dates": {
+        "today": "Today",
+        "days_ago": "{time, plural, one {# day} other {# days}} ago",
+        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
+        "months_ago": "{time, plural, one {# month} other {# months}} ago",
+        "years_ago": "{time, plural, one {# year} other {# years}} ago"
     }
 }

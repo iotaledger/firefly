@@ -13,11 +13,15 @@ import type {
 import { ResponseTypes } from './typings/bridge'
 import type { Address } from './typings/address'
 import type { Message } from './typings/message'
-import type { Event, BalanceChangeEventPayload, TransactionEventPayload } from './typings/events'
+import type { Event, BalanceChangeEventPayload, TransactionEventPayload, ConfirmationStateChangeEventPayload } from './typings/events'
 import Validator, { ErrorTypes as ValidatorErrorTypes } from 'shared/lib/validator'
 import { generateRandomId } from 'shared/lib/utils'
 import { mnemonic, getActiveProfile, updateStrongholdStatus } from 'shared/lib/app'
 import { account, message } from './typings'
+import { persistent } from './helpers'
+import { _ } from 'shared/lib/i18n'
+import { notifications } from 'shared/lib/settings'
+
 
 const Wallet = window['__WALLET__']
 
@@ -115,6 +119,20 @@ export const wallet = writable<WalletState>({
     accounts: writable<Account[]>([])
 })
 
+export const clearWallet = () => {
+    const { balanceOverview, accounts } = get(wallet)
+    balanceOverview.set({
+        incoming: '0 Mi',
+        incomingRaw: 0,
+        outgoing: '0 Mi',
+        outgoingRaw: 0,
+        balance: '0 Mi',
+        balanceRaw: 0,
+        balanceFiat: '0.00 USD'
+    })
+    accounts.set([])
+}
+
 export const selectedAccountId = writable<string | null>(null)
 
 /**
@@ -159,7 +177,7 @@ const defaultCallbacks = {
  * Response subscriber.
  * Receives messages from wallet.rs.
  */
-Wallet.onMessage((message: MessageResponse) => {    
+Wallet.onMessage((message: MessageResponse) => {
     const _deleteCallbackId = (_id: string) => {
         const isEventMessage = [
             ResponseTypes.ErrorThrown,
@@ -327,18 +345,54 @@ export const initialiseListeners = () => {
     })
 
     /**
+    * Event listener for new message event
+    */
+    api.onNewTransaction({
+        onSuccess(response: Event<TransactionEventPayload>) {
+            if (get(notifications)) {
+                const accounts = get(wallet).accounts
+                const account = accounts.find(account => account.id === response.payload.accountId)
+                const message = response.payload.message
+
+                const locale = get(_) as (string) => string
+                const notificationMessage = locale('notifications.valueTx')
+                    .replace('{{value}}', message.value.toString())
+                    .replace('{{account}}', account.alias)
+                const NotificationManager = window['Electron']['NotificationManager']
+                NotificationManager.notify(notificationMessage)
+            }
+        },
+        onError(error) {
+            console.error(error)
+        }
+    })
+
+    api.onConfirmationStateChange({
+        onSuccess(response: Event<ConfirmationStateChangeEventPayload>) {
+            if (get(notifications)) {
+                const accounts = get(wallet).accounts
+                const account = accounts.find(account => account.id === response.payload.accountId)
+                const message = response.payload.message
+                const messageKey = response.payload.confirmed ? 'confirmed' : 'failed'
+
+                const locale = get(_) as (string) => string
+                const notificationMessage = locale(`notifications.${messageKey}`)
+                    .replace('{{value}}', message.value.toString())
+                    .replace('{{account}}', account.alias)
+                const NotificationManager = window['Electron']['NotificationManager']
+                NotificationManager.notify(notificationMessage)
+            }
+        },
+        onError(error) {
+            console.error(error)
+        }
+    })
+
+    /**
     * Event listener for balance change event
     */
     api.onBalanceChange({
         onSuccess(response) { console.log('Balance change response', response) },
-        onError(error) { console.error(error) }
-    })
-
-    /**
-    * Event listener for new message event
-    */
-    api.onNewTransaction({
-        onSuccess(response) { console.log('New transaction response', response) },
         onError(error) { console.error(error) }
     })
 };

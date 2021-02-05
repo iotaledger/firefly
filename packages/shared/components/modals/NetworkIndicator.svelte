@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { onDestroy } from 'svelte'
-    import { fade } from 'svelte/transition'
-    import { Text } from 'shared/components'
+    import { Text, Modal } from 'shared/components'
     import { networkStatus } from 'shared/lib/networkStatus'
     export let isActive
     export let locale
@@ -9,6 +8,12 @@
     let healthStatusText = 'network_operational'
     let messagesPerSecond = 0
     let confirmationRate = 0
+
+    const NETWORK_HEALTH_COLORS = {
+        0: 'red',
+        1: 'yellow',
+        2: 'green',
+    }
 
     const unsubscribe = networkStatus.subscribe((data) => {
         healthStatus = data.health ?? 0
@@ -22,51 +27,13 @@
     })
 </script>
 
-<style type="text/scss">
-    network-indicator-shield {
-        position: fixed;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        background-color: transparent;
-        z-index: 10;
-    }
-
-    network-indicator-content {
-        position: absolute;
-        min-width: 230px;
-        left: 80px;
-        bottom: 25px;
-        border-radius: 10px;
-        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-
-        .health-status {
-            &.health-2 {
-                color: var(--green-ff-color);
-            }
-            &.health-1 {
-                color: var(--yellow-ff-color);
-            }
-            &.health-0 {
-                color: var(--red-ff-color);
-            }
-        }
-
-        hr {
-            border-top: 1px solid var(--line-separator-color);
-        }
-    }
-</style>
-
-{#if isActive}
-    <network-indicator-shield on:click={() => (isActive = false)} />
-    <network-indicator-content class="flex flex-col bg-white dark:bg-gray-900" in:fade={{ duration: 100 }}>
+<Modal bind:isActive position={{ left: '80px', bottom: '25px' }}>
+    <network-indicator-content class="flex flex-col">
         <Text type="h3" classes="px-7 pt-5">{locale('views.dashboard.network.status')}</Text>
-        <div class={`px-7 pb-5 text-13 health-status health-${healthStatus}`}>
+        <div class="px-7 pb-5 text-13 text-{NETWORK_HEALTH_COLORS[healthStatus]}-500">
             {locale(`views.dashboard.network.${healthStatusText}`)}
         </div>
-        <hr />
+        <hr class="border-t border-solid border-gray-200 dark:border-gray-700" />
         <div class="flex flex-row justify-between px-7 pt-5 pb-2">
             <span class="text-12 text-gray-800 dark:text-white">{locale('views.dashboard.network.messages_per_second')}</span>
             <span class="text-12 text-gray-500">{`${Math.round(messagesPerSecond)}`}</span>
@@ -76,4 +43,4 @@
             <span class="text-12 text-gray-500">{`${Math.round(confirmationRate)}%`}</span>
         </div>
     </network-indicator-content>
-{/if}
+</Modal>
