@@ -23,7 +23,7 @@ const resolve = {
 /// ------------------------ Output ------------------------
 
 const output = {
-  publicPath: '../',
+  publicPath: prod ? '../' : '/',
   path: path.join(__dirname, '/public'),
   filename: '[name].js',
   chunkFilename: '[name].[id].js'
@@ -67,7 +67,7 @@ const rendererRules = [
         emitCss: prod,
         hotReload: !prod,
         preprocess: sveltePreprocess({
-          sourceMap: !prod,
+          sourceMap: false,
           postcss: true
         })
       }
@@ -106,15 +106,15 @@ const rendererPlugins = [
       {
         from: '../shared/assets/**/*',
         // we ignore the fonts since the `asset/resource` handles them
-        filter: (asset) => !asset.includes('fonts'),
+        filter: prod ? (asset) => !asset.includes('fonts') : undefined,
         to({ context, absoluteFilename }) {
-          return path.relative(context, absoluteFilename).replace('../shared/', '')
+          return path.relative(context, absoluteFilename).replace(prod ? '../shared/' : '../', '')
         }
       },
       {
         from: '../shared/locales/*',
         to() {
-          return 'locales/[name].[ext]'
+          return (prod ? '' : 'shared/') + 'locales/[name].[ext]'
         }
       }
     ]
@@ -128,7 +128,6 @@ const rendererPlugins = [
 
 module.exports = [
   {
-    target: 'electron-renderer',
     entry: {
       'build/index': ['./main.js']
     },
@@ -139,7 +138,7 @@ module.exports = [
     },
     mode,
     plugins: rendererPlugins,
-    devtool: prod ? false : 'source-map',
+    devtool: prod ? false : 'cheap-module-source-map',
     devServer: {
       hot: true
     }
@@ -157,9 +156,6 @@ module.exports = [
     },
     mode,
     plugins: mainPlugins,
-    devtool: prod ? false : 'source-map',
-    devServer: {
-      hot: true
-    }
+    devtool: prod ? false : 'cheap-module-source-map'
   }
 ]
