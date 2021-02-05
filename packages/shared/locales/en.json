@@ -191,7 +191,11 @@
             "nodeSettings": {
                 "title": "Node settings",
                 "description": ""
-            }, 
+            },
+            "configureNodeList": {
+                "title": "Configure node list",
+                "description": ""
+            },
             "proofOfWork": {
                 "title": "Proof of work",
                 "description": ""
@@ -347,7 +351,8 @@
         "customize_account": "Customise account",
         "sync_account": "Sync account",
         "view_address_history": "View address history",
-        "delete_account": "Delete account"
+        "delete_account": "Delete account",
+        "add_node": "Add node"
     },
     "general": {
         "password": "Password",
@@ -406,7 +411,8 @@
         "latest_transactions": "Latest Transactions",
         "transactions": "Transactions",
         "security": "Security",
-        "account_address": "Account Address"
+        "account_address": "Account Address",
+        "nodes": "Nodes"
     },
     "dates": {
         "today": "Today",
