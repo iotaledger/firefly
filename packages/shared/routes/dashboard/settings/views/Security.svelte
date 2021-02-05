@@ -5,6 +5,31 @@
     import { api, destroyActor } from 'shared/lib/wallet'
     import { openPopup } from 'shared/lib/popup'
 
+    const ONE_MINUTE = 60 * 1000
+
+    const appLockOptions = [
+        {
+            value: ONE_MINUTE,
+            label: '1 minute',
+        },
+        {
+            value: 5 * ONE_MINUTE,
+            label: '5 minutes',
+        },
+        {
+            value: 10 * ONE_MINUTE,
+            label: '10 minutes',
+        },
+        {
+            value: 30 * ONE_MINUTE,
+            label: '30 minutes',
+        },
+        {
+            value: 60 * ONE_MINUTE,
+            label: '1 hour',
+        },
+    ]
+
     export let locale
     export let navigate
 
@@ -12,6 +37,8 @@
     let currentPassword = ''
     let newPassword = ''
     let confirmedPassword = ''
+
+    let appLockTime = appLockOptions[0]
 
     $: strength = zxcvbn(newPassword).score
     $: valid = strength === 4
@@ -123,9 +150,7 @@
     <section id="appLock" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.appLock.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.appLock.description')}</Text>
-        <Dropdown
-            value="English"
-            items={[{ value: 1, label: 'English' }, { value: 2, label: 'Belula' }]} />
+        <Dropdown value={appLockTime.label} items={appLockOptions} />
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <section id="changePassword" class="w-3/4">

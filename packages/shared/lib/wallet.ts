@@ -351,7 +351,7 @@ export const initialiseListeners = () => {
         onSuccess(response: Event<TransactionEventPayload>) {
             if (get(notifications)) {
                 const accounts = get(wallet).accounts
-                const account = accounts.find(account => account.id === response.payload.accountId)
+                const account = get(accounts).find(account => account.id === response.payload.accountId)
                 const message = response.payload.message
 
                 const locale = get(_) as (string) => string
@@ -371,7 +371,7 @@ export const initialiseListeners = () => {
         onSuccess(response: Event<ConfirmationStateChangeEventPayload>) {
             if (get(notifications)) {
                 const accounts = get(wallet).accounts
-                const account = accounts.find(account => account.id === response.payload.accountId)
+                const account = get(accounts).find(account => account.id === response.payload.accountId)
                 const message = response.payload.message
                 const messageKey = response.payload.confirmed ? 'confirmed' : 'failed'
 
