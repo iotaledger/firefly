@@ -106,15 +106,15 @@ const rendererPlugins = [
       {
         from: '../shared/assets/**/*',
         // we ignore the fonts since the `asset/resource` handles them
-        filter: prod ? (asset) => !asset.includes('fonts') : undefined,
+        filter: (asset) => !asset.includes('fonts'),
         to({ context, absoluteFilename }) {
-          return path.relative(context, absoluteFilename).replace(prod ? '../shared/' : '../', '')
+          return path.relative(context, absoluteFilename).replace('../shared/', '')
         }
       },
       {
         from: '../shared/locales/*',
         to() {
-          return (prod ? '' : 'shared/') + 'locales/[name].[ext]'
+          return 'locales/[name].[ext]'
         }
       }
     ]
