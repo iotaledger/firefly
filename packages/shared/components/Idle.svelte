@@ -1,22 +1,31 @@
 <script lang="typescript">
     import { onMount, onDestroy } from 'svelte'
-    import { getActiveProfile } from 'shared/lib/app'
-    import { api, destroyActor, clearWallet } from 'shared/lib/wallet'
+    import { activeProfile } from 'shared/lib/profile'
+    import { api, destroyActor, resetWallet } from 'shared/lib/wallet'
     import { resetRouter } from 'shared/lib/router'
 
     let timeout
 
+    function debounce(callback, wait = 500) {
+        let _timeout
+        return (...args) => {
+            const context = this
+            clearTimeout(_timeout)
+            _timeout = setTimeout(() => callback.apply(context, args), wait)
+        }
+    }
+
     function handleEvent() {
         clearTimeout(timeout)
 
-        timeout = setTimeout(lock, 5000)
+        timeout = setTimeout(lock, $activeProfile.settings.lockScreenTimeout * 60 * 1000)
     }
 
     function lock() {
         api.lockStronghold({
             onSuccess() {
-                destroyActor(getActiveProfile().id)
-                clearWallet()
+                destroyActor($activeProfile.id)
+                resetWallet()
                 resetRouter()
             },
             onError(error) {
@@ -31,8 +40,8 @@
 </script>
 
 <svelte:window
-    on:keydown={handleEvent}
-    on:mousemove={handleEvent}
-    on:mousedown={handleEvent}
-    on:touchstart={handleEvent}
-    on:scroll={handleEvent} />
+    on:keydown={debounce(handleEvent)}
+    on:mousemove={debounce(handleEvent)}
+    on:mousedown={debounce(handleEvent)}
+    on:touchstart={debounce(handleEvent)}
+    on:scroll={debounce(handleEvent)} />

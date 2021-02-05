@@ -1,35 +1,24 @@
 <script>
-    import { get } from 'svelte/store';
+    import { get } from 'svelte/store'
     import zxcvbn from 'zxcvbn'
     import { Text, Dropdown, Password, Button, Checkbox } from 'shared/components'
     import { updateProfile, activeProfile, removeProfile } from 'shared/lib/profile'
     import { api, destroyActor } from 'shared/lib/wallet'
     import { openPopup } from 'shared/lib/popup'
 
-    const ONE_MINUTE = 60 * 1000
+    function assignTimeoutOptionLabel(timeInMinutes) {
+        let label = ''
 
-    const appLockOptions = [
-        {
-            value: ONE_MINUTE,
-            label: '1 minute',
-        },
-        {
-            value: 5 * ONE_MINUTE,
-            label: '5 minutes',
-        },
-        {
-            value: 10 * ONE_MINUTE,
-            label: '10 minutes',
-        },
-        {
-            value: 30 * ONE_MINUTE,
-            label: '30 minutes',
-        },
-        {
-            value: 60 * ONE_MINUTE,
-            label: '1 hour',
-        },
-    ]
+        if (timeInMinutes >= 60) {
+            label = `${timeInMinutes / 60} hour`
+        }
+
+        label = `${timeInMinutes} minute`
+
+        return label.includes('1') ? label : `${label}s`
+    }
+
+    const lockScreenTimeoutOptions = [1, 5, 10, 30, 60].map((time) => ({ value: time, label: assignTimeoutOptionLabel(time) }))
 
     export let locale
     export let navigate
@@ -38,8 +27,6 @@
     let currentPassword = ''
     let newPassword = ''
     let confirmedPassword = ''
-
-    let appLockTime = appLockOptions[0]
 
     $: strength = zxcvbn(newPassword).score
     $: valid = strength === 4
@@ -149,7 +136,12 @@
     <section id="appLock" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.appLock.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.appLock.description')}</Text>
-        <Dropdown value={appLockTime.label} items={appLockOptions} />
+        <Dropdown
+            onSelect={(option) => {
+                updateProfile('settings.lockScreenTimeout', option.value)
+            }}
+            value={assignTimeoutOptionLabel($activeProfile.settings.lockScreenTimeout)}
+            items={lockScreenTimeoutOptions} />
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <section id="changePassword" class="w-3/4">
