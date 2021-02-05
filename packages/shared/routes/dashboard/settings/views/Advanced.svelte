@@ -1,7 +1,9 @@
 <script>
     import { get } from 'svelte/store'
+    import { api } from 'shared/lib/wallet'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { Dropdown, Text, Radio, Checkbox, Button } from 'shared/components'
+    import { DEFAULT_NODES as nodes } from 'shared/lib/network'
 
     export let locale
     let outsourcePowChecked = get(activeProfile).settings.outsourcePow
@@ -13,6 +15,12 @@
     $: updateProfile('settings.deepLinking', deepLinkingChecked)
 
     let automaticNodeSelection = true
+
+    function addNode() {
+        if ([...$activeProfile.settings.customNodes, ...nodes].some((node) => node === 'http://localhost')) {
+            return console.error('Node already exists')
+        }
+    }
 </script>
 
 <div>
@@ -28,10 +36,12 @@
         <section id="configureNodeList" class="w-3/4">
             <Text type="h4" classes="mb-3">{locale('views.settings.configureNodeList.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.configureNodeList.description')}</Text>
-            
+
             <!-- Nodes list -->
             <Text type="h4" classes="mb-3">{locale('general.nodes')}</Text>
-            <Dropdown value="English" items={[{ value: 1, label: 'English' }, { value: 2, label: 'Belula' }]} />
+            <Dropdown
+                value={$activeProfile.settings.node}
+                items={[...nodes, ...$activeProfile.settings.customNodes].map((node) => ({ value: node, label: node }))} />
             <Button classes="w-1/4 mt-4" onClick={() => {}}>{locale('actions.add_node')}</Button>
 
         </section>

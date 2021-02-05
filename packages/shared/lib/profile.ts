@@ -2,6 +2,7 @@ import { get, derived } from 'svelte/store'
 import { persistent } from 'shared/lib/helpers'
 import { generateRandomId } from 'shared/lib/utils'
 import { AvailableExchangeRates } from 'shared/lib/currency'
+import { DEFAULT_NODE as node } from 'shared/lib/network'
 
 /**
  * Base profile interface — 
@@ -27,7 +28,7 @@ interface ExtendedProfile {
     /**
      * User settings
      */
-    settings: UserSettings
+    settings: UserSettings,
 }
 
 /**
@@ -39,7 +40,9 @@ export interface UserSettings {
     outsourcePow: boolean,
     language: string,
     currency: AvailableExchangeRates,
-    notifications: boolean
+    notifications: boolean,
+    node: string;
+    customNodes: string[]
 }
 
 /**
@@ -59,7 +62,7 @@ interface Profile extends BaseProfile, ExtendedProfile { }
  */
 export const activeProfile = derived(
     profiles,
-	$profiles => $profiles.find((_profile) => {
+    $profiles => $profiles.find((_profile) => {
         return _profile.active === true
     })
 )
@@ -89,8 +92,10 @@ export const createProfile = (profileName): Profile => {
             developerMode: false,
             outsourcePow: false,
             currency: AvailableExchangeRates.USD,
-            notifications: true
-        }
+            notifications: true,
+            node,
+            customNodes: []
+        },
     };
 
     profiles.update((_profiles) => {
@@ -140,16 +145,16 @@ export const removeProfile = (id: string): void => {
  * 
  * @returns {void} 
  */
-export const updateProfile = (path: string, value: string | boolean | Date | AvailableExchangeRates) => { 
+export const updateProfile = (path: string, value: string | boolean | Date | AvailableExchangeRates) => {
     profiles.update((_profiles) => {
         return _profiles.map((_profile) => {
             if (_profile.id === get(activeProfile).id) {
                 const pathList = path.split('.')
                 pathList.reduce((a, b: keyof ExtendedProfile | keyof UserSettings, level: number) => {
-                    if (level === pathList.length - 1){
+                    if (level === pathList.length - 1) {
                         a[b] = value;
                         return value;
-                    } 
+                    }
                     return a[b];
                 }, _profile)
             }

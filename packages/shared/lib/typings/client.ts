@@ -7,6 +7,7 @@ export enum Network {
 
 export interface ClientOptions {
     nodes?: string[]
+    node?: string;
     network?: Network
     localPow?: boolean
     nodeSyncEnabled?: boolean
