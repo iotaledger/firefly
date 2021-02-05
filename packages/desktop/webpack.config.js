@@ -23,7 +23,7 @@ const resolve = {
 /// ------------------------ Output ------------------------
 
 const output = {
-  publicPath: '../',
+  publicPath: prod ? '../' : '/',
   path: path.join(__dirname, '/public'),
   filename: '[name].js',
   chunkFilename: '[name].[id].js'
@@ -67,7 +67,7 @@ const rendererRules = [
         emitCss: prod,
         hotReload: !prod,
         preprocess: sveltePreprocess({
-          sourceMap: !prod,
+          sourceMap: false,
           postcss: true
         })
       }
@@ -128,7 +128,6 @@ const rendererPlugins = [
 
 module.exports = [
   {
-    target: 'electron-renderer',
     entry: {
       'build/index': ['./main.js']
     },
@@ -139,7 +138,7 @@ module.exports = [
     },
     mode,
     plugins: rendererPlugins,
-    devtool: prod ? false : 'source-map',
+    devtool: prod ? false : 'cheap-module-source-map',
     devServer: {
       hot: true
     }
@@ -157,9 +156,6 @@ module.exports = [
     },
     mode,
     plugins: mainPlugins,
-    devtool: prod ? false : 'source-map',
-    devServer: {
-      hot: true
-    }
+    devtool: prod ? false : 'cheap-module-source-map'
   }
 ]

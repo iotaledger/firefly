@@ -9,7 +9,23 @@ module.exports = {
         // removeDeprecatedGapUtilities: true,
         // purgeLayersByDefault: true,
     },
-    purge: [],
+    purge: {
+        enabled: true,
+        content: ['../shared/**/*.svelte', '../shared/**/*.scss'],
+        options: {
+            safelist: [
+                // `from-${color}` (gradients)
+                /^from-/,
+                // `to-${color}` (gradients)
+                /^to-/,
+                // `bg-${color}` 
+                /^bg-/,
+                // `text-${color}` 
+                /^text-/,
+                /^grid-cols-/
+            ],
+        },
+    },
     theme: {
         colors: {
             blue: {
