@@ -1,10 +1,11 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
     import { fetchMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { setupI18n, isLocaleLoaded, dir, _ } from 'shared/lib/i18n'
     import { darkMode, mobile } from 'shared/lib/app'
-    import { language } from 'shared/lib/settings'
+    import { activeProfile } from 'shared/lib/profile'
     import { goto } from 'shared/lib/helpers'
     import { initRouter, routerNext, routerPrevious, AppRoute } from 'shared/lib/router'
     import { popupState } from 'shared/lib/popup'
@@ -31,7 +32,7 @@
         document.dir = $dir
     }
     let splash = true
-    setupI18n({ withLocale: $language })
+    setupI18n({ withLocale: get(activeProfile) ? get(activeProfile).settings.language : 'en'})
     onMount(async () => {
         setTimeout(() => {
             splash = false
