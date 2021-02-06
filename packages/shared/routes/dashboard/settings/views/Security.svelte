@@ -6,6 +6,20 @@
     import { api, destroyActor } from 'shared/lib/wallet'
     import { openPopup } from 'shared/lib/popup'
 
+    function assignTimeoutOptionLabel(timeInMinutes) {
+        let label = ''
+
+        if (timeInMinutes >= 60) {
+            label = `${timeInMinutes / 60} hour`
+        }
+
+        label = `${timeInMinutes} minute`
+
+        return label.includes('1') ? label : `${label}s`
+    }
+
+    const lockScreenTimeoutOptions = [1, 5, 10, 30, 60].map((time) => ({ value: time, label: assignTimeoutOptionLabel(time) }))
+
     export let locale
     export let navigate
 
@@ -123,8 +137,11 @@
         <Text type="h4" classes="mb-3">{locale('views.settings.appLock.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.appLock.description')}</Text>
         <Dropdown
-            value="English"
-            items={[{ value: 1, label: 'English' }, { value: 2, label: 'Belula' }]} />
+            onSelect={(option) => {
+                updateProfile('settings.lockScreenTimeout', option.value)
+            }}
+            value={assignTimeoutOptionLabel($activeProfile.settings.lockScreenTimeout)}
+            items={lockScreenTimeoutOptions} />
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <section id="changePassword" class="w-3/4">

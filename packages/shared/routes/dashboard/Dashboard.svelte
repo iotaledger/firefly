@@ -1,14 +1,13 @@
 <script lang="typescript">
     import { get } from 'svelte/store'
     import { onMount } from 'svelte'
-    import { Sidebar } from 'shared/components'
+    import { Idle, Sidebar } from 'shared/components'
     import { Wallet, Settings } from 'shared/routes'
     import { parseDeepLink } from 'shared/lib/utils'
     import { sendParams } from 'shared/lib/app'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { activeProfile } from 'shared/lib/profile'
     import { routerNext } from 'shared/lib/router'
-
 
     export let locale
     export let mobile
@@ -25,7 +24,7 @@
 
     let activeTab = Tabs.Wallet
 
-    onMount(() => { 
+    onMount(() => {
         DeepLinkManager.requestDeepLink()
         window['Electron'].onEvent('deepLink-params', (data) => handleDeepLinkRequest(data))
     })
@@ -35,7 +34,7 @@
      * If deep linking is enabled, fill send input parameters
      * If deep linking is disabled, direct user to settings
      */
-     const handleDeepLinkRequest = (data) => {
+    const handleDeepLinkRequest = (data) => {
         const parsedData = parseDeepLink(data)
         const _redirect = (tab) => {
             deepLinkRequestActive.set(true)
@@ -53,13 +52,14 @@
             sendParams.set(parsedData)
         } else {
             console.log('error parsing')
-        }        
+        }
     }
 </script>
 
 {#if mobile}
     <div>foo</div>
 {:else}
+    <Idle />
     <div class="flex flex-row w-full h-full">
         <Sidebar bind:activeTab {locale} />
         <!-- Dashboard Pane -->

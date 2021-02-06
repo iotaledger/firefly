@@ -44,6 +44,8 @@ export interface UserSettings {
     notifications: boolean,
     node: Node;
     customNodes: Node[]
+    /** Lock screen timeout in minutes */
+    lockScreenTimeout: number
 }
 
 /**
@@ -95,9 +97,15 @@ export const createProfile = (profileName): Profile => {
             outsourcePow: false,
             currency: AvailableExchangeRates.USD,
             notifications: true,
+<<<<<<< HEAD
             node,
             customNodes: []
         },
+=======
+            // Minutes
+            lockScreenTimeout: 5
+        }
+>>>>>>> develop
     };
 
     profiles.update((_profiles) => {
