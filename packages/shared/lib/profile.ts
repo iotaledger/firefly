@@ -45,7 +45,8 @@ export interface UserSettings {
     node: Node;
     customNodes: Node[]
     /** Lock screen timeout in minutes */
-    lockScreenTimeout: number
+    lockScreenTimeout: number,
+    automaticNodeSelection: boolean
 }
 
 /**
@@ -70,6 +71,26 @@ export const activeProfile = derived([profiles, newProfile], ([$profiles, $newPr
         return _profile.active === true
     })
 )
+
+/**
+ * Saves profile in persistent storage
+ * 
+ * @method saveProfile
+ * 
+ * @param {Profile} profile 
+ * 
+ * @returns {Profile}
+ */
+export const saveProfile = (profile: Profile): Profile => {
+    profiles.update((_profiles) => {
+        return [
+            ..._profiles,
+            profile
+        ]
+    })
+
+    return profile;
+}
 
 /**
  * Creates a new profile
@@ -100,16 +121,12 @@ export const createProfile = (profileName): Profile => {
             node,
             customNodes: [],
             // Minutes
-            lockScreenTimeout: 5
+            lockScreenTimeout: 5,
+            automaticNodeSelection: true
         },
     }
 
-    profiles.update((_profiles) => {
-        return [
-            ..._profiles,
-            profile
-        ]
-    })
+    newProfile.set(profile)
 
     return profile;
 }

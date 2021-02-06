@@ -1,5 +1,6 @@
 import type { AccountIdentifier } from './account'
 import type { Bridge, CommunicationIds } from './bridge'
+import type { ClientOptions } from './client'
 import type { Transfer } from './message'
 import type { MnemonicPayload } from './mnemonic'
 
@@ -125,6 +126,15 @@ export function changeStrongholdPassword(bridge: Bridge, __ids: CommunicationIds
     actorId: __ids.actorId,
     id: __ids.messageId,
     cmd: 'ChangeStrongholdPassword',
+    payload
+  })
+}
+
+export function setClientOptions(bridge: Bridge, __ids: CommunicationIds, payload: ClientOptions) {
+  return bridge({
+    actorId: __ids.actorId,
+    id: __ids.messageId,
+    cmd: 'SetClientOptions',
     payload
   })
 }

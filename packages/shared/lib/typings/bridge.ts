@@ -57,7 +57,8 @@ export enum ResponseTypes {
   UpdatedAlias = 'UpdatedAlias',
   DeletedStorage = 'DeletedStorage',
   LockedStronghold = 'LockedStronghold',
-  StrongholdPasswordChanged = 'StrongholdPasswordChanged'
+  StrongholdPasswordChanged = 'StrongholdPasswordChanged',
+  UpdatedAllClientOptions = 'UpdatedAllClientOptions'
 }
 
 export type Response<T, P> = { id: string; action: string; type: T; payload?: P }
@@ -90,6 +91,7 @@ export type SetAliasResponse = Response<ResponseTypes.UpdatedAlias, void>
 export type DeleteStorageResponse = Response<ResponseTypes.DeletedStorage, void>
 export type LockStrongholdResponse = Response<ResponseTypes.LockedStronghold, void>
 export type StrongholdPasswordChangeResponse = Response<ResponseTypes.StrongholdPasswordChanged, void>
+export type UpdatedAllClientOptions = Response<ResponseTypes.UpdatedAllClientOptions, void>
 
 export type MessageResponse = RemovedAccountResponse |
   CreatedAccountResponse |
@@ -119,6 +121,7 @@ export type MessageResponse = RemovedAccountResponse |
   DeleteStorageResponse |
   LockStrongholdResponse |
   StrongholdStatusResponse |
+  UpdatedAllClientOptions |
   // events
   Event<ErrorEventPayload> | Event<BalanceChangeEventPayload> | Event<TransactionEventPayload>
 
