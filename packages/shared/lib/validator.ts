@@ -4,6 +4,7 @@ import type { Account, SyncedAccount } from './typings/account'
 import type { Message } from './typings/message'
 import type { StrongholdStatus } from './typings/wallet'
 import type { Address } from './typings/address'
+import type { MarketDataValidationResponse } from 'shared/lib/marketData'
 
 type Validators = IdValidator |
     ActionValidator |
@@ -31,6 +32,7 @@ type ValidationResponse = {
     isValid: boolean
     error: ErrorObject
 }
+
 
 class Validator {
     nextValidator: Validators
@@ -628,7 +630,7 @@ export default class ValidatorService {
     validators: any
     ids: string[]
 
-    constructor(ids: string[]) {
+    constructor(ids?: string[]) {
         this.ids = ids
 
         this.validators = {
@@ -698,6 +700,8 @@ export default class ValidatorService {
             [ResponseTypes.ErrorThrown]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.BalanceChange]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.ConfirmationStateChange]: this.createBaseEventValidator().getFirst(),
+            // Market data
+            'MarketData': new ValidatorChainBuilder().add(new TypeValidator()).getFirst()
         };
     }
 
@@ -735,7 +739,7 @@ export default class ValidatorService {
      *
      * @returns {ValidationResponse}
      */
-    performValidation(response: MessageResponse): ValidationResponse {
+    performValidation(response: MessageResponse | MarketDataValidationResponse): ValidationResponse {
         return this.validators[response.type].isValid(response)
     }
 }

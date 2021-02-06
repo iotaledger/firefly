@@ -1,5 +1,6 @@
 import { writable, get, derived } from 'svelte/store'
 import { currencies, Currencies, exchangeRates, ExchangeRates, CurrencyTypes } from 'shared/lib/currency'
+import Validator from 'shared/lib/validator'
 
 /**
  * Market data endpoints list
@@ -80,6 +81,11 @@ type MarketData = {
     [Histories.HISTORY_ETH]: HistoryETH
     [Histories.HISTORY_EUR]: HistoryEUR
     [Histories.HISTORY_USD]: HistoryUSD
+}
+
+export type MarketDataValidationResponse = {
+    type: 'MarketData',
+    payload: MarketData
 }
 
 type PriceData = {
@@ -195,28 +201,37 @@ export async function fetchMarketData(): Promise<void> {
             ])
 
             const marketData: MarketData = await response.json()
-            
-            const _priceData = {} as PriceData
 
-            Object.keys(get(priceData)).forEach((currency: CurrencyTypes) => {
-                if (marketData[`history-${currency}`]) {
-                    _priceData[currency] = marketData[`history-${currency}`].data
-                }
-            })
+            const { isValid, error } = new Validator().performValidation({
+                type: 'MarketData',
+                payload: marketData
+            });
 
-            // Store currencies
-            currencies.set(marketData.currencies)
+            if (isValid) {
+                const _priceData = {} as PriceData
 
-            // Store price data
-            priceData.set(_priceData)
+                Object.keys(get(priceData)).forEach((currency: CurrencyTypes) => {
+                    if (marketData[`history-${currency}`]) {
+                        _priceData[currency] = marketData[`history-${currency}`].data
+                    }
+                })
 
-            // Store exchange rates in store
-            exchangeRates.set(marketData.rates)
+                // Store currencies
+                currencies.set(marketData.currencies)
 
-            // Store market statistics
-            mcap.set(marketData.market.usd_market_cap)
-            volume.set(marketData.market.usd_24h_vol)
-            change24h.set(marketData.market.usd_24h_change)
+                // Store price data
+                priceData.set(_priceData)
+
+                // Store exchange rates in store
+                exchangeRates.set(marketData.rates)
+
+                // Store market statistics
+                mcap.set(marketData.market.usd_market_cap)
+                volume.set(marketData.market.usd_24h_vol)
+                change24h.set(marketData.market.usd_24h_change)
+            } else {
+                throw new Error(error.error)
+            }
 
             break
         } catch (err) {
