@@ -25,7 +25,7 @@
     }
 </script>
 
-<div class="flex items-center justify-center h-full">
+<div class="flex items-center justify-center w-24">
     <div class="flex flex-col justify-between items-center">
         <div
             on:click={() => onClick(id)}

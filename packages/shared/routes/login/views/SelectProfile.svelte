@@ -22,7 +22,7 @@
     <div>foo</div>
 {:else}
     <section class="flex flex-col h-screen bg-white dark:bg-gray-900 items-center">
-        <Logo width="64px" logo="logo-firefly" classes="absolute top-20 left-1/2 translate-x-1/2" />
+        <Logo width="64px" logo="logo-firefly" classes="absolute top-20 transform left-1/2 -translate-x-1/2" />
         <div class="h-full space-x-20 flex flex-wrap justify-center items-center content-center mt-10 mx-20">
             {#each $profiles as profile}
                 <div class="mb-6">
