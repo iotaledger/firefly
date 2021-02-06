@@ -27,7 +27,7 @@
             props: {
                 account,
                 hasMultipleAccounts: $accounts.length > 1,
-                updateAccounts: (id) => {
+                deleteAccount: (id) => {
                     accounts.update((_accounts) => _accounts.filter((_account) => _account.id !== id))
                 },
             },

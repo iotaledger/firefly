@@ -7,7 +7,7 @@
 
     export let locale
     export let account
-    export let updateAccounts = (selectedAccountId) => {}
+    export let deleteAccount = (selectedAccountId) => {}
     export let hasMultipleAccounts
 
     $: canDelete = $account.rawIotaBalance == 0
@@ -24,7 +24,7 @@
                             closePopup()
 
                             // 2. Remove account from walletAccounts
-                            updateAccounts($selectedAccountId)
+                            deleteAccount($selectedAccountId)
 
                             // 3. Go to main dashboard
                             selectedAccountId.set(null)
