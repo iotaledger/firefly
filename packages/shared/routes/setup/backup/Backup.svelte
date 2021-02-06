@@ -7,7 +7,8 @@
     import { newProfile, saveProfile, updateProfile } from 'shared/lib/profile'
     import { strongholdPassword } from 'shared/lib/app'
     import { api } from 'shared/lib/wallet'
-    import { DEFAULT_NODES as nodes, network } from 'shared/lib/network'
+    import { DEFAULT_NODES as nodes } from 'shared/lib/network'
+    import { Network } from 'shared/lib/typings/client'
 
     export let locale
     export let mobile
@@ -88,7 +89,8 @@
                             onSuccess(response) {
                                 api.createAccount(
                                     {
-                                        clientOptions: { nodes, network: $network }
+                                        // TODO: Change to mainnet
+                                        clientOptions: { nodes, network: Network.Testnet }
                                     },
                                     {
                                         onSuccess() {

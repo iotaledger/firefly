@@ -9,7 +9,7 @@
     const dispatch = createEventDispatcher()
 
     function handleContinueClick(id) {
-        setActiveProfile(id);
+        setActiveProfile(id)
         dispatch('next')
     }
 
@@ -21,15 +21,19 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <section class="flex flex-col h-screen bg-white">
-        <Logo width="64px" logo="logo-firefly" classes="mt-24 mx-auto" />
-            <div class="space-x-20 mt-32 flex justify-center items-center">
-                {#each $profiles as profile}
-                    <Profile onClick={handleContinueClick} name={profile.name} id={profile.id} />
-                {/each}
-                <Profile onClick={addProfile}  name="Add Profile" bgColor="#fff" classes="border-solid border-2 border-gray-400">
-                    <Icon icon="plus" classes="text-blue-500"/>
+    <section class="flex flex-col h-screen bg-white dark:bg-gray-900 items-center">
+        <Logo width="64px" logo="logo-firefly" classes="absolute top-20 transform left-1/2 -translate-x-1/2" />
+        <div class="h-full space-x-20 flex flex-wrap justify-center items-center content-center mt-10 mx-20">
+            {#each $profiles as profile}
+                <div class="mb-6">
+                    <Profile bgColor="blue" locale={locale} onClick={handleContinueClick} name={profile.name} id={profile.id} isDeveloper={profile.isDeveloperProfile}/>
+                </div>
+            {/each}
+            <div class="mb-6">
+                <Profile onClick={addProfile} name="Add Profile" classes="border-solid border-2 border-gray-400">
+                    <Icon icon="plus" classes="text-blue-500" />
                 </Profile>
             </div>
+        </div>
     </section>
 {/if}
