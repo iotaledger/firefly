@@ -39,7 +39,9 @@ export interface UserSettings {
     outsourcePow: boolean,
     language: string,
     currency: AvailableExchangeRates,
-    notifications: boolean
+    notifications: boolean,
+    /** Lock screen timeout in minutes */
+    lockScreenTimeout: number
 }
 
 /**
@@ -90,7 +92,9 @@ export const createProfile = (profileName): Profile => {
             developerMode: false,
             outsourcePow: false,
             currency: AvailableExchangeRates.USD,
-            notifications: true
+            notifications: true,
+            // Minutes
+            lockScreenTimeout: 5
         }
     };
 
