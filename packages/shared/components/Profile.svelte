@@ -39,8 +39,8 @@
         <Text type="h4" classes="mt-5">{name}</Text>
     </div>
     {#if isDeveloper}
-        <div class={'bg-blue-500 rounded-lg px-2 py-1 absolute top-20'}>
-            <Text type="h4" classes="text-white">{locale('general.dev').toUpperCase()}</Text>
+        <div class={'bg-gray-500 rounded-full px-2 absolute bottom-64'}>
+            <Text type="p" classes="text-white">{locale('general.dev').toUpperCase()}</Text>
         </div>
     {/if}
 </div>

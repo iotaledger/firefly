@@ -26,7 +26,7 @@
         <div class="h-full space-x-20 flex flex-wrap justify-center items-center content-center mt-10 mx-20">
             {#each $profiles as profile}
                 <div class="mb-6">
-                    <Profile bgColor="blue" onClick={handleContinueClick} name={profile.name} id={profile.id} />
+                    <Profile bgColor="blue" locale={locale} onClick={handleContinueClick} name={profile.name} id={profile.id} isDeveloper={profile.isDeveloperProfile}/>
                 </div>
             {/each}
             <div class="mb-6">
