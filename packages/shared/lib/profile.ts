@@ -1,4 +1,4 @@
-import { get, derived } from 'svelte/store'
+import { get, derived, writable } from 'svelte/store'
 import { persistent } from 'shared/lib/helpers'
 import { generateRandomId } from 'shared/lib/utils'
 import { AvailableExchangeRates } from 'shared/lib/currency'
@@ -53,6 +53,8 @@ interface Profile extends BaseProfile, ExtendedProfile { }
 
 export const profiles = persistent<Profile[]>('profiles', []);
 
+export const newProfile = writable<Profile | null>(null);
+
 /**
  * Profile interface
  */
@@ -61,9 +63,8 @@ interface Profile extends BaseProfile, ExtendedProfile { }
 /**
  * Currently active profile
  */
-export const activeProfile = derived(
-    profiles,
-    $profiles => $profiles.find((_profile) => {
+export const activeProfile = derived([profiles, newProfile], ([$profiles, $newProfile]) =>
+    $newProfile || $profiles.find((_profile) => {
         return _profile.active === true
     })
 )
@@ -107,7 +108,7 @@ export const createProfile = (profileName): Profile => {
     })
 
     return profile;
-};
+}
 
 /**
  * Sets profile with provided id as active
@@ -146,20 +147,32 @@ export const removeProfile = (id: string): void => {
  * 
  * @returns {void} 
  */
-export const updateProfile = (path: string, value: string | boolean | Date | AvailableExchangeRates | Node | Node[]) => {
-    profiles.update((_profiles) => {
-        return _profiles.map((_profile) => {
-            if (_profile.id === get(activeProfile).id) {
-                const pathList = path.split('.')
-                pathList.reduce((a, b: keyof ExtendedProfile | keyof UserSettings, level: number) => {
-                    if (level === pathList.length - 1) {
-                        a[b] = value;
-                        return value;
-                    }
-                    return a[b];
-                }, _profile)
+export const updateProfile = (path: string, value: string | boolean | Date | AvailableExchangeRates) => {
+    const _update = (_profile) => {
+        const pathList = path.split('.')
+
+        pathList.reduce((a, b: keyof ExtendedProfile | keyof UserSettings, level: number) => {
+            if (level === pathList.length - 1) {
+                a[b] = value;
+                return value;
             }
-            return _profile
+            return a[b];
+        }, _profile)
+
+        return _profile
+    };
+
+    if (get(newProfile)) {
+        newProfile.update((_profile) => _update(_profile))
+    } else {
+        profiles.update((_profiles) => {
+            return _profiles.map((_profile) => {
+                if (_profile.id === get(activeProfile).id) {
+                    return _update(_profile);
+                }
+
+                return _profile
+            })
         })
-    })
+    }
 }

@@ -4,7 +4,7 @@
     import { Backup, RecoveryPhrase, VerifyRecoveryPhrase, BackupToFile, Success } from './views/'
     import { Transition } from 'shared/components'
     import { mnemonic } from 'shared/lib/app'
-    import { updateProfile } from 'shared/lib/profile'
+    import { newProfile, saveProfile, updateProfile } from 'shared/lib/profile'
     import { strongholdPassword } from 'shared/lib/app'
     import { api } from 'shared/lib/wallet'
     import { DEFAULT_NODES as nodes, DEFAULT_NODE as node, network } from 'shared/lib/network'
@@ -92,11 +92,15 @@
                                     },
                                     {
                                         onSuccess() {
+                                            saveProfile($newProfile)
+
+                                            newProfile.set(null)
+
                                             dispatch('next')
                                         },
                                         onError() {
                                             // TODO: handle error
-                                            alert('create account error')
+                                            console.error('create account error')
                                         },
                                     }
                                 )

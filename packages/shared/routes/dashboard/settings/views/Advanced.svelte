@@ -6,6 +6,7 @@
     import { openPopup, closePopup } from 'shared/lib/popup'
 
     export let locale
+
     let outsourcePowChecked = get(activeProfile).settings.outsourcePow
     let developerModeChecked = get(activeProfile).settings.developerMode
     let deepLinkingChecked = get(activeProfile).settings.deepLinking

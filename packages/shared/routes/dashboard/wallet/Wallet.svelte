@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { setContext, onMount } from 'svelte'
     import { get, derived } from 'svelte/store'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { updateProfile } from 'shared/lib/profile'
     import { api, getLatestMessages, initialiseListeners, selectedAccountId, wallet } from 'shared/lib/wallet'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
-    import { DEFAULT_NODES as nodes } from 'shared/lib/network'
+    import { activeProfile } from 'shared/lib/profile'
     import { formatUnit } from 'shared/lib/units'
     import { DashboardPane } from 'shared/components'
     import { Account, LineChart, WalletHistory, Security, CreateAccount, WalletBalance, WalletActions } from './views/'
@@ -152,6 +152,8 @@
             onSuccess(strongholdStatusResponse) {
                 if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
                     openPopup({ type: 'password', props: { onSuccess: _generate } })
+                } else {
+                    _generate()
                 }
             },
             onError(error) {
