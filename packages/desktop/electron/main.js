@@ -1,6 +1,7 @@
 const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
 const path = require('path')
 const Keychain = require('./keychain')
+const { initAutoUpdate } = require("./appUpdater")
 
 /**
  * Set AppUserModelID for Windows notifications functionallity
@@ -124,6 +125,10 @@ function createWindow() {
      */
     windows.main.webContents.on('will-navigate', _handleNavigation)
     windows.main.webContents.on('new-window', _handleNavigation)
+
+    if (!devMode) {
+        initAutoUpdate(windows.main);
+    }
 
     /**
      * Handle permissions requests

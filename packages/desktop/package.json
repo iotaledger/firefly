@@ -17,6 +17,8 @@
         "compile:win": "electron-builder --win --x64"
     },
     "dependencies": {
+        "electron-log": "^4.3.1",
+        "electron-updater": "^4.3.5",
         "keytar": "^7.3.0",
         "shared": "0.0.0",
         "wallet-nodejs-binding": "0.1.0"

@@ -45,6 +45,38 @@ window.Electron = {
      */
     getUserDataPath: () => ipcRenderer.invoke('get-path', 'userData'),
     /**
+     * Starts an update of the application
+     *
+     * @method updateDownload
+     *
+     * @returns void
+     */
+    updateDownload: () => ipcRenderer.invoke('update-download'),
+    /**
+     * Cancels an update of the application
+     *
+     * @method updateCancel
+     *
+     * @returns void
+     */
+    updateCancel: () => ipcRenderer.invoke('update-cancel'),
+    /**
+     * Install an update of the application
+     *
+     * @method updateInstall
+     *
+     * @returns void
+     */
+    updateInstall: () => ipcRenderer.invoke('update-install'),
+    /**
+     * Get version details
+     *
+     * @method getVersionDetails
+     *
+     * @returns void
+     */
+    getVersionDetails: () => ipcRenderer.invoke('update-get-version-details'),
+    /**
      * Add native window wallet event listener
      * @param {string} event - Target event name
      * @param {function} callback - Event trigger callback
