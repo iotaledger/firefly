@@ -3,6 +3,7 @@ import { persistent } from 'shared/lib/helpers'
 import { generateRandomId } from 'shared/lib/utils'
 import { AvailableExchangeRates } from 'shared/lib/currency'
 import { DEFAULT_NODE as node } from 'shared/lib/network'
+import type { Node } from './typings/client'
 
 /**
  * Base profile interface — 
@@ -41,8 +42,8 @@ export interface UserSettings {
     language: string,
     currency: AvailableExchangeRates,
     notifications: boolean,
-    node: string;
-    customNodes: string[]
+    node: Node;
+    customNodes: Node[]
 }
 
 /**
@@ -145,7 +146,7 @@ export const removeProfile = (id: string): void => {
  * 
  * @returns {void} 
  */
-export const updateProfile = (path: string, value: string | boolean | Date | AvailableExchangeRates) => {
+export const updateProfile = (path: string, value: string | boolean | Date | AvailableExchangeRates | Node | Node[]) => {
     profiles.update((_profiles) => {
         return _profiles.map((_profile) => {
             if (_profile.id === get(activeProfile).id) {

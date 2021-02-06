@@ -1,13 +1,14 @@
 <script lang="typescript">
     import { fade } from 'svelte/transition'
+    import { Icon } from 'shared/components'
+    import { closePopup } from 'shared/lib/popup'
     import QR from './QR.svelte'
     import Password from './Password.svelte'
     import Version from './Version.svelte'
     import Backup from './Backup.svelte'
-    import { Icon } from 'shared/components'
-    import { closePopup } from 'shared/lib/popup'
     import DeleteAccount from './DeleteAccount.svelte'
     import AddressHistory from './AddressHistory.svelte'
+    import AddNode from './AddNode.svelte'
 
     export let locale = 'en'
     export let type = undefined
@@ -20,6 +21,7 @@
         backup: Backup,
         deleteAccount: DeleteAccount,
         addressHistory: AddressHistory,
+        addNode: AddNode,
     }
 
     const onkey = (e) => {

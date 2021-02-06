@@ -302,6 +302,14 @@
         },
         "address_history": {
             "title": "{name} account address history"
+        },
+        "node": {
+            "title_add": "Add a node",
+            "title_details": "Node details",
+            "node_address": "Node address",
+            "optional_username": "Username (optional)",
+            "optional_password": "Password (optional)",
+            "set_as_primary_node": "Set as primary node"
         }
     },
     "actions": {

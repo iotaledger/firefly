@@ -32,6 +32,7 @@
         "tailwindcss": "^2.0.1",
         "tslib": "^2.0.1",
         "typescript": "^3.9.5",
+        "valid-url": "^1.0.9",
         "zxcvbn": "^4.4.2"
     },
     "scripts": {

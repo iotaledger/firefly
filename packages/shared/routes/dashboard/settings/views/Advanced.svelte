@@ -1,9 +1,9 @@
 <script>
     import { get } from 'svelte/store'
-    import { api } from 'shared/lib/wallet'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { Dropdown, Text, Radio, Checkbox, Button } from 'shared/components'
-    import { DEFAULT_NODES as nodes } from 'shared/lib/network'
+    import { DEFAULT_NODES as nodes, isNewNodeValid } from 'shared/lib/network'
+    import { openPopup, closePopup } from 'shared/lib/popup'
 
     export let locale
     let outsourcePowChecked = get(activeProfile).settings.outsourcePow
@@ -16,10 +16,20 @@
 
     let automaticNodeSelection = true
 
-    function addNode() {
-        if ([...$activeProfile.settings.customNodes, ...nodes].some((node) => node === 'http://localhost')) {
-            return console.error('Node already exists')
+    function addCustomNode(node, primary = false) {
+        if (isNewNodeValid([...$activeProfile.settings.customNodes, ...nodes], node)) {
+            updateProfile('settings.customNodes', [...$activeProfile.settings.customNodes, node])
+            if (primary) {
+                updateProfile('settings.node', node)
+            }
+            closePopup()
+        } else {
+            console.error('Node is not valid')
         }
+    }
+
+    function handleAddNodeClick() {
+        openPopup({ type: 'addNode', props: { addCustomNode, onSuccess: closePopup } })
     }
 </script>
 
@@ -36,14 +46,15 @@
         <section id="configureNodeList" class="w-3/4">
             <Text type="h4" classes="mb-3">{locale('views.settings.configureNodeList.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.configureNodeList.description')}</Text>
-
             <!-- Nodes list -->
             <Text type="h4" classes="mb-3">{locale('general.nodes')}</Text>
             <Dropdown
-                value={$activeProfile.settings.node}
-                items={[...nodes, ...$activeProfile.settings.customNodes].map((node) => ({ value: node, label: node }))} />
-            <Button classes="w-1/4 mt-4" onClick={() => {}}>{locale('actions.add_node')}</Button>
-
+                value={$activeProfile.settings.node.url}
+                items={[...nodes, ...$activeProfile.settings.customNodes].map((node) => ({
+                    value: node.url,
+                    label: node.url,
+                }))} />
+            <Button classes="w-1/4 mt-4" onClick={() => handleAddNodeClick()}>{locale('actions.add_node')}</Button>
         </section>
         <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     {/if}
