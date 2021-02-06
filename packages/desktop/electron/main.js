@@ -38,6 +38,28 @@ const windows = {
  */
 const devMode = process.env.NODE_ENV === 'development'
 
+
+// TODO(rajivshah3): Use @rollup/plugin-replace here
+
+let paths = {
+    preload: "",
+    html: "",
+}
+
+if (devMode) {
+    // __dirname is desktop/electron
+    paths.preload = path.join(__dirname, 'preload.js')
+    paths.html = path.join(__dirname, '../public/index.html')
+} else if (app.isPackaged) {
+    paths.preload = path.join(app.getAppPath(), '/public/build/preload.js')
+    paths.html = path.join(app.getAppPath(), '/public/index.html')
+} else {
+    // Probably production mode, but not packaged (i.e. run with yarn start:electron-prod)
+    // __dirname is desktop/public/build
+    paths.preload =  path.join(__dirname, 'preload.js')
+    paths.html =  path.join(__dirname, '../index.html')
+}
+
 /**
  * Check URL against allowlist
  */
@@ -72,7 +94,7 @@ function createWindow() {
             webviewTag: false,
             enableWebSQL: false,
             devTools: devMode,
-            preload: path.join(devMode ? __dirname : app.getAppPath(), 'preload.js'),
+            preload: paths.preload,
         },
     })
 
@@ -82,7 +104,7 @@ function createWindow() {
         windows.main.loadURL('http://localhost:8080')
     } else {
         // load the index.html of the app.
-        windows.main.loadFile('../index.html')
+        windows.main.loadFile(paths.html)
     }
 
     const _handleNavigation = (e, url) => {
