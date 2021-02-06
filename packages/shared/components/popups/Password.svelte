@@ -18,7 +18,7 @@
                 if ('function' === typeof onSuccess) {
                     onSuccess(response)
                 }
-            },
+             },
             onError(error) {
                 if ('function' === typeof onError) {
                     onError(error)

@@ -45,9 +45,9 @@
                 extentionsLabel={locale('actions.import_extentions')}
                 allowedExtensions=".kdbx,.stronghold" />
         </div>
-        <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center gap-4">
-            <Button secondary classes="flex-auto" onClick={() => handleBackClick()}>{locale('actions.back')}</Button>
-            <Button classes="flex-auto" disabled={!file} onClick={() => handleContinueClick()}>
+        <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
+            <Button secondary classes="flex-1" onClick={() => handleBackClick()}>{locale('actions.back')}</Button>
+            <Button classes="flex-1" disabled={!file} onClick={() => handleContinueClick()}>
                 {locale('actions.continue')}
             </Button>
         </div>

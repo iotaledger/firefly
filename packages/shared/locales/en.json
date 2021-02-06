@@ -403,6 +403,8 @@
         "automaticNodeSelection": "Automatic node selection",
         "manualNodeSelection": "Manual node selection",
         "profiles": "Profiles",
+        "developerProfile": "Developer Profile",
+        "dev": "Dev",
         "create_account": "Create an account",
         "account_name": "Account name",
         "latest_transactions": "Latest Transactions",
