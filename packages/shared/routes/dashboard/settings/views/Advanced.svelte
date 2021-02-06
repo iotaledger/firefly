@@ -1,15 +1,14 @@
 <script>
     import { get } from 'svelte/store';
     import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { developerMode } from 'shared/lib/app'
     import { Text, Radio, Checkbox, Button } from 'shared/components';
 
     export let locale
     let outsourcePowChecked = get(activeProfile).settings.outsourcePow
-    let developerModeChecked = get(activeProfile).settings.developerMode
     let deepLinkingChecked = get(activeProfile).settings.deepLinking
     
     $: updateProfile('settings.outsourcePow', outsourcePowChecked)
-    $: updateProfile('settings.developerMode', developerModeChecked)
     $: updateProfile('settings.deepLinking', deepLinkingChecked)
 
     let automaticNodeSelection = true
@@ -32,7 +31,7 @@
     <section id="developerMode" class='w-3/4'>
         <Text type="h4" classes="mb-3">{locale('views.settings.developerMode.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.developerMode.description')}</Text>
-        <Checkbox label={locale('actions.enableDeveloperMode')} bind:checked={developerModeChecked} />
+        <Checkbox label={locale('actions.enableDeveloperMode')} bind:checked={$developerMode} />
     </section>
     <hr class='border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center'/>
     <section id="deepLinks" class='w-3/4'>

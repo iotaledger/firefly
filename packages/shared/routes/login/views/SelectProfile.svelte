@@ -21,11 +21,11 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <section class="flex flex-col h-screen bg-white">
-        <Logo width="64px" logo="logo-firefly" classes="mt-24 mx-auto" />
-            <div class="space-x-20 mt-32 flex justify-center items-center">
+    <section class="flex flex-col h-full bg-white items-center justify-center">
+        <Logo width="64px" logo="logo-firefly" classes="absolute top-24" />
+            <div class="space-x-20 flex justify-center items-center">
                 {#each $profiles as profile}
-                    <Profile onClick={handleContinueClick} name={profile.name} id={profile.id} />
+                    <Profile locale={locale} onClick={handleContinueClick} name={profile.name} id={profile.id} isDeveloper={profile.isDeveloperProfile} />
                 {/each}
                 <Profile onClick={addProfile}  name="Add Profile" bgColor="#fff" classes="border-solid border-2 border-gray-400">
                     <Icon icon="plus" classes="text-blue-500"/>
