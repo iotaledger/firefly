@@ -66,7 +66,7 @@ export interface Message {
     parent2: string;
     remainderValue: number;
     timestamp: string;
-    value: 0;
+    value: number;
     version: MessageVersion;
     payload: MessagePayload;
 }

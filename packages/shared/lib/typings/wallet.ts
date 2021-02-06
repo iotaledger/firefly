@@ -4,11 +4,10 @@ import type { Transfer } from './message'
 import type { MnemonicPayload } from './mnemonic'
 
 export interface StrongholdStatus {
-  status: 'Locked' | 'Unlocked';
-  data: {
-    nanos: number;
-    secs: number;
-  }
+  snapshot: {
+    status: 'Locked' | 'Unlocked'
+  };
+  snapshotPath: string;
 }
 
 export interface LoggerOutput {

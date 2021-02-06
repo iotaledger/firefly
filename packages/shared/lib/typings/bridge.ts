@@ -107,6 +107,7 @@ export type MessageResponse = RemovedAccountResponse |
   LatestAddressResponse |
   BalanceResponse |
   SyncAccountsResponse |
+  SyncAccountResponse |
   ReattachResponse |
   BackupSuccessfulResponse |
   BackupRestoredResponse |
