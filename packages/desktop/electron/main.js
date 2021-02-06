@@ -104,7 +104,9 @@ function createWindow() {
     windows.main.webContents.on('will-navigate', _handleNavigation)
     windows.main.webContents.on('new-window', _handleNavigation)
 
-    initAutoUpdate(windows.main, devMode);
+    if (!devMode) {
+        initAutoUpdate(windows.main);
+    }
 
     /**
      * Handle permissions requests

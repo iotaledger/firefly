@@ -14,7 +14,7 @@ let versionDetails = {
 }
 let downloadCancellation
 
-function initAutoUpdate(mainWindow, devMode) {
+function initAutoUpdate(mainWindow) {
     autoUpdateMainWindow = mainWindow
 
     autoUpdater.logger = electronLog
@@ -22,10 +22,6 @@ function initAutoUpdate(mainWindow, devMode) {
 
     // Disable automatic update downloads
     autoUpdater.autoDownload = false;
-
-    if (devMode) {
-        autoUpdater.updateConfigPath = path.join(__dirname, '..', 'dev-app-update.yaml');
-    }
 
     ipcMain.handle('update-download', () => updateDownload())
     ipcMain.handle('update-cancel', () => updateCancel())
