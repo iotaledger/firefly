@@ -1,5 +1,5 @@
 <script>
-    import { get } from 'svelte/store'
+    import { get } from 'svelte/store';
     import zxcvbn from 'zxcvbn'
     import { Text, Dropdown, Password, Button, Checkbox } from 'shared/components'
     import { updateProfile, activeProfile, removeProfile } from 'shared/lib/profile'
