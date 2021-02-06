@@ -57,11 +57,11 @@
             <Radio value={true} bind:group={mainnet} label="Mainnet Account" classes="mb-4" />
             <Radio value={false} bind:group={mainnet} label="Testnet Account" classes="mb-4" />
         </div>
-        <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center gap-4">
-            <Button secondary classes="flex-auto" onClick={() => handleContinueClick(SetupType.Import)}>
+        <div slot="leftpane__action" class="flex flex-row flex-wrap items-center space-x-4">
+            <Button secondary classes="flex-1" onClick={() => handleContinueClick(SetupType.Import)}>
                 {locale('actions.import_wallet')}
             </Button>
-            <Button classes="flex-auto" disabled={!profileName} onClick={() => handleContinueClick(SetupType.New)}>
+            <Button classes="flex-1" disabled={!profileName} onClick={() => handleContinueClick(SetupType.New)}>
                 {locale('actions.create_wallet')}
             </Button>
         </div>
