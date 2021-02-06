@@ -8,6 +8,10 @@ use iota_wallet::{
     event::{
         on_balance_change, on_broadcast, on_confirmation_state_change, on_error,
         on_new_transaction, on_reattachment, on_stronghold_status_change,
+        remove_balance_change_listener, remove_broadcast_listener,
+        remove_confirmation_state_change_listener, remove_error_listener,
+        remove_new_transaction_listener, remove_reattachment_listener,
+        remove_stronghold_status_change_listener, EventId,
     },
 };
 use once_cell::sync::Lazy;
@@ -23,7 +27,12 @@ use std::time::Duration;
 
 const POLLING_INTERVAL_MS: u64 = 30_000;
 
-type WalletActors = Arc<AsyncMutex<HashMap<String, ActorRef<WalletActorMsg>>>>;
+struct WalletActorData {
+    listeners: Vec<(EventId, EventType)>,
+    actor: ActorRef<WalletActorMsg>,
+}
+
+type WalletActors = Arc<AsyncMutex<HashMap<String, WalletActorData>>>;
 type MessageReceiver = Box<dyn Fn(String) + Send + Sync + 'static>;
 type MessageReceivers = Arc<Mutex<HashMap<String, MessageReceiver>>>;
 
@@ -96,7 +105,13 @@ pub async fn init<A: Into<String>, F: Fn(String) + Send + Sync + 'static>(
             .actor_of_args::<WalletActor, _>(&actor_id, manager)
             .unwrap();
 
-        actors.insert(actor_id.to_string(), wallet_actor);
+        actors.insert(
+            actor_id.to_string(),
+            WalletActorData {
+                listeners: Vec::new(),
+                actor: wallet_actor,
+            },
+        );
 
         let mut message_receivers = message_receivers()
             .lock()
@@ -110,10 +125,26 @@ pub async fn destroy<A: Into<String>>(actor_id: A) {
     let mut actors = wallet_actors().lock().await;
     let actor_id = actor_id.into();
 
-    if let Some(actor) = actors.remove(&actor_id) {
-        actor.tell(actors::KillMessage, None);
+    if let Some(actor_data) = actors.remove(&actor_id) {
+        for (event_id, event_type) in &actor_data.listeners {
+            match event_type {
+                &EventType::ErrorThrown => remove_error_listener(event_id),
+                &EventType::BalanceChange => remove_balance_change_listener(event_id),
+                &EventType::NewTransaction => remove_new_transaction_listener(event_id),
+                &EventType::ConfirmationStateChange => {
+                    remove_confirmation_state_change_listener(event_id)
+                }
+                &EventType::Reattachment => remove_reattachment_listener(event_id),
+                &EventType::Broadcast => remove_broadcast_listener(event_id),
+                &EventType::StrongholdStatusChange => {
+                    remove_stronghold_status_change_listener(event_id)
+                }
+            };
+        }
+
+        actor_data.actor.tell(actors::KillMessage, None);
         iota_wallet::with_actor_system(|sys| {
-            sys.stop(actor);
+            sys.stop(&actor_data.actor);
         })
         .await;
 
@@ -135,7 +166,7 @@ pub async fn send_message(message: String) {
 
             let actor_id = message.actor_id.to_string();
             if let Some(actor) = actors.get(&actor_id) {
-                match dispatch(actor, message).await {
+                match dispatch(&actor.actor, message).await {
                     Ok(response) => Some((response, actor_id)),
                     Err(e) => Some((Some(e), actor_id)),
                 }
@@ -197,10 +228,14 @@ fn respond<A: AsRef<str>>(actor_id: A, message: String) -> Result<(), String> {
     }
 }
 
-pub fn listen<A: Into<String>, S: Into<String>>(actor_id: A, id: S, event_type: EventType) {
+pub async fn listen<A: Into<String>, S: Into<String>>(actor_id: A, id: S, event_type: EventType) {
     let id = id.into();
     let actor_id = actor_id.into();
-    match event_type {
+
+    let actor_id_ = actor_id.clone();
+    let event_type_ = event_type.clone();
+
+    let event_id = match event_type {
         EventType::ErrorThrown => on_error(move |error| {
             let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &error));
         }),
@@ -222,7 +257,11 @@ pub fn listen<A: Into<String>, S: Into<String>>(actor_id: A, id: S, event_type: 
         EventType::StrongholdStatusChange => on_stronghold_status_change(move |event| {
             let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
         }),
-    }
+    };
+
+    let mut actors = wallet_actors().lock().await;
+    let actor = actors.get_mut(&actor_id_).expect("actor not initialised");
+    actor.listeners.push((event_id, event_type_));
 }
 
 #[cfg(test)]

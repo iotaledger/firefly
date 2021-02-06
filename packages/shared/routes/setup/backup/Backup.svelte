@@ -4,6 +4,7 @@
     import { Backup, RecoveryPhrase, VerifyRecoveryPhrase, BackupToFile, Success } from './views/'
     import { Transition } from 'shared/components'
     import { mnemonic } from 'shared/lib/app'
+    import { updateProfile } from 'shared/lib/profile'
     import { strongholdPassword } from 'shared/lib/app'
     import { api } from 'shared/lib/wallet'
     import { DEFAULT_NODES as nodes, network } from 'shared/lib/network'
@@ -58,6 +59,7 @@
                                 return new Promise((res, rej) => {
                                     api.backup(result, {
                                         onSuccess() {
+                                            updateProfile('lastStrongholdBackupTime', new Date())
                                             res()
                                         },
                                         onError(error) {

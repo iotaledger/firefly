@@ -22,6 +22,11 @@ export interface LoggerConfig {
   outputs?: LoggerOutput[]
 }
 
+export interface StrongholdPasswordChange {
+  currentPassword: string;
+  newPassword: string;
+}
+
 export function backup(bridge: Bridge, __ids: CommunicationIds, destinationPath: string) {
   return bridge({
     actorId: __ids.actorId,
@@ -58,6 +63,14 @@ export function setStoragePassword(bridge: Bridge, __ids: CommunicationIds, pass
     id: __ids.messageId,
     cmd: 'SetStoragePassword',
     payload: password
+  })
+}
+
+export function removeStorage(bridge: Bridge, __ids: CommunicationIds) {
+  return bridge({
+    actorId: __ids.actorId,
+    id: __ids.messageId,
+    cmd: 'DeleteStorage'
   })
 }
 
@@ -104,5 +117,22 @@ export function getStrongholdStatus(bridge: Bridge, __ids: CommunicationIds) {
     actorId: __ids.actorId,
     id: __ids.messageId,
     cmd: 'GetStrongholdStatus',
+  })
+}
+
+export function lockStronghold(bridge: Bridge, __ids: CommunicationIds) {
+  return bridge({
+    actorId: __ids.actorId,
+    id: __ids.messageId,
+    cmd: 'LockStronghold',
+  })
+}
+
+export function changeStrongholdPassword(bridge: Bridge, __ids: CommunicationIds, payload: StrongholdPasswordChange) {
+  return bridge({
+    actorId: __ids.actorId,
+    id: __ids.messageId,
+    cmd: 'ChangeStrongholdPassword',
+    payload
   })
 }

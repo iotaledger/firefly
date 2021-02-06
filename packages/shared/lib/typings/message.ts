@@ -64,8 +64,7 @@ export interface Message {
     nonce: number;
     parent1: string;
     parent2: string;
-    // TODO: rename to camelCase
-    remainder_value: number;
+    remainderValue: number;
     timestamp: string;
     value: 0;
     version: MessageVersion;

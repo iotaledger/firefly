@@ -1,14 +1,15 @@
 <script lang="typescript">
-    import { createEventDispatcher, getContext } from 'svelte'
+    import { getContext } from 'svelte'
     import { Text, Button, Dropdown, Amount, Address } from 'shared/components'
     import { sendParams } from 'shared/lib/app'
+    import { walletViewState, WalletViewStates, accountViewState, AccountViewStates } from 'shared/lib/router'
 
     export let locale
     export let send
     export let internalTransfer
 
-    const dispatch = createEventDispatcher()
     const accounts = getContext('walletAccounts')
+    const account = getContext('selectedAccount')
 
     enum SEND_TYPE {
         EXTERNAL = 'send_payment',
@@ -17,10 +18,9 @@
 
     let selectedSendType = SEND_TYPE.EXTERNAL
 
-    $: accountsDropdownItems = $accounts.map((acc) => ({ value: acc.id, label: `${acc.name} • ${acc.balance}` }))
-    $: from = $accounts.map((acc) => ({ value: acc.id, label: `${acc.name} • ${acc.balance}` }))[0]
-    let account = $accounts.map((acc) => ({ value: acc.id, label: `${acc.name} • ${acc.balance}` }))[0]
-
+    $: accountsDropdownItems = $accounts.map((acc) => format(acc))
+    $: from = $account ? format($account) : accountsDropdownItems[0]
+    let to = undefined
 
     const handleSendTypeClick = (type) => {
         selectedSendType = type
@@ -29,17 +29,23 @@
         from = item
     }
     const handleToSelect = (item) => {
-        account = item
+        to = item
     }
     const handleSendClick = () => {
         if (selectedSendType === SEND_TYPE.INTERNAL) {
-            internalTransfer(from.value, account.value, $sendParams.amount)
+            internalTransfer(from.id, to.id, $sendParams.amount)
         } else {
-            send(from.value, $sendParams.address, $sendParams.amount)
+            send(from.id, $sendParams.address, $sendParams.amount)
         }
     }
     const handleBackClick = () => {
-        dispatch('previous')
+        accountViewState.set(AccountViewStates.Init)
+        if (!$account) {
+            walletViewState.set(WalletViewStates.Init)
+        }
+    }
+    const format = (account) => {
+        return { value: account.id, label: `${account.name} • ${account.balance}` }
     }
 </script>
 
@@ -54,18 +60,20 @@
         </div>
         <div class="w-full h-full flex flex-col justify-between">
             <div>
-                <div class="block mb-8">
-                    <Dropdown
-                        value={from?.label || ''}
-                        label={locale('general.from')}
-                        items={accountsDropdownItems}
-                        onSelect={handleFromSelect} />
-                </div>
+                {#if !$account}
+                    <div class="block mb-8">
+                        <Dropdown
+                            value={from?.label || ''}
+                            label={locale('general.from')}
+                            items={accountsDropdownItems}
+                            onSelect={handleFromSelect} />
+                    </div>
+                {/if}
                 <div class="w-full mb-8 block">
                     <Amount bind:amount={$sendParams.amount} {locale} classes="mb-4" />
                     {#if selectedSendType === SEND_TYPE.INTERNAL}
                         <Dropdown
-                            value={account?.label || ''}
+                            value={to?.label || ''}
                             label={locale('general.to')}
                             items={accountsDropdownItems}
                             onSelect={handleToSelect} />

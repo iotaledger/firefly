@@ -1,5 +1,6 @@
-import { readable, writable, get, derived } from 'svelte/store'
-import { logged, notification, walletPin, strongholdPassword, profiles } from 'shared/lib/app'
+import { readable, writable, get } from 'svelte/store'
+import { logged, notification, walletPin, strongholdPassword } from 'shared/lib/app'
+import { profiles } from 'shared/lib/profile'
 
 /**
  * Sets next route
@@ -76,6 +77,29 @@ const history = writable<Array<string>>([])
 let walletSetupType = writable<SetupType>(null)
 
 /**
+ * Wallet view state
+ */
+export enum WalletViewStates {
+    Init = 'init',
+    Account = 'account',
+    Send = 'send',
+    Receive = 'receive',
+    CreateAccount = 'createAccount',
+}
+export const walletViewState = writable<WalletViewStates>(WalletViewStates.Init)
+
+/**
+ * Account view state
+ */
+export enum AccountViewStates {
+    Init = 'init',
+    Manage = 'manage',
+    Send = 'send',
+    Receive = 'receive',
+}
+
+export const accountViewState = writable<AccountViewStates>(AccountViewStates.Init)
+/**
  * Navigate to initial route
  */
 export const initRouter = () => {
@@ -100,6 +124,14 @@ export const routerNext = (event) => {
 
             nextRoute = shouldAddProfile ? AppRoute.Setup : AppRoute.Dashboard
             break
+        case AppRoute.Dashboard:
+            const { reset } = params
+
+            if (reset) {
+                nextRoute = AppRoute.Login
+            }
+            break
+
         case AppRoute.Welcome:
             nextRoute = AppRoute.Legal
             break
@@ -194,3 +226,13 @@ export const routerPrevious = () => {
         setRoute(previousRoute)
     }
 }
+
+export const resetRouter = () => {
+    history.set([])
+    let hasCompletedSetup: boolean = get(profiles).length > 0;
+    if (hasCompletedSetup) {
+        setRoute(AppRoute.Login)
+    } else {
+        setRoute(AppRoute.Welcome)
+    }
+}  

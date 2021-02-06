@@ -1,13 +1,13 @@
 <script lang="typescript">
-    import { createEventDispatcher, getContext } from 'svelte'
+    import { getContext } from 'svelte'
     import { Text, Button, Dropdown, QR, Icon } from 'shared/components'
     import { setClipboard } from 'shared/lib/helpers'
+    import { walletViewState, WalletViewStates, accountViewState, AccountViewStates } from 'shared/lib/router'
 
     export let locale
     export let generateAddress = (accountId) => {}
     export let isGeneratingAddress = false
 
-    const dispatch = createEventDispatcher()
     const accounts = getContext('walletAccounts')
     const currentAccount = getContext('selectedAccount')
 
@@ -20,7 +20,8 @@
         generateAddress(selectedAccount.id)
     }
     const handleCloseClick = () => {
-        dispatch('previous')
+        walletViewState.set(WalletViewStates.Init)
+        accountViewState.set(AccountViewStates.Init)
     }
 </script>
 
@@ -46,13 +47,13 @@
                 </button>
             </div>
             <div class="flex flex-auto items-center justify-center mb-6">
-                <QR size={98} data={selectedAccount.address} />
+                <QR size={98} data={selectedAccount.depositAddress} />
             </div>
             <div class="mb-6">
                 <Text secondary smaller classes="mb-1">{locale('general.my_address')}</Text>
-                <Text type="pre">{selectedAccount.address}</Text>
+                <Text type="pre">{selectedAccount.depositAddress}</Text>
             </div>
-            <Button disabled={isGeneratingAddress} classes="w-full" onClick={() => setClipboard(selectedAccount.address)}>
+            <Button disabled={isGeneratingAddress} classes="w-full" onClick={() => setClipboard(selectedAccount.depositAddress)}>
                 {locale('general.copy_address')}
             </Button>
         </div>

@@ -1,7 +1,7 @@
 <script>
     import { createEventDispatcher } from 'svelte'
     import { OnboardingLayout, Illustration, Text, Button, Input, Radio } from 'shared/components'
-    import { createProfile, setActiveProfile } from 'shared/lib/app'
+    import { createProfile, setActiveProfile } from 'shared/lib/profile'
     import { initialise, getStoragePath } from 'shared/lib/wallet'
     import { SetupType } from 'shared/lib/router'
     import { network } from 'shared/lib/network'
@@ -29,11 +29,13 @@
                 profile = createProfile(profileName)
                 setActiveProfile(profile.id)
 
-                initialise(profile.id, getStoragePath(window['Electron'].getUserDataPath(), profile.name))
+                return window['Electron'].getUserDataPath().then((path) => {
+                    initialise(profile.id, getStoragePath(path, profile.name))
 
-                network.set(mainnet ? Network.Mainnet : Network.Devnet)
+                    network.set(mainnet ? Network.Mainnet : Network.Testnet)
 
-                dispatch('next', { setupType })
+                    dispatch('next', { setupType })
+                })
             } catch (error) {
                 console.error(error)
             }

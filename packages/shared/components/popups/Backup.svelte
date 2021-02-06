@@ -1,29 +1,47 @@
 <script>
-    import { getContext } from 'svelte'
+    import { date } from 'svelte-i18n'
     import { Text, Button } from 'shared/components'
     import { getBackupWarningColor } from 'shared/lib/helpers'
+    import { api } from 'shared/lib/wallet'
+    import { updateProfile } from 'shared/lib/profile'
+    import { openPopup, closePopup } from 'shared/lib/popup'
 
     export let locale
     export let lastBackupDate
     export let lastBackupDateFormatted
+    export let isStrongholdLocked
 
-    let strongholdLocked = Math.random() < 0.5 // dummy
     let color = getBackupWarningColor(lastBackupDate)
 
-    const popupState = getContext('popupState')
-
-    function handleUpdate() {
-        // Do logic here
-        popupState.set({ active: false })
-        if (strongholdLocked) {
-            popupState.set({ active: true, type: 'password', props: { onSuccess: triggerUpdate } })
+    function handleBackupClick() {
+        if (isStrongholdLocked) {
+            openPopup({ type: 'password', props: { onSuccess: triggerBackup } })
+        } else {
+            triggerBackup()
         }
     }
+
     function handleCancelClick() {
-        popupState.set({ active: false })
+        closePopup()
     }
-    function triggerUpdate() {
-        // Do logic here
+
+    function triggerBackup() {
+        window['Electron']
+            .getStrongholdBackupDestination()
+            .then((result) => {
+                if (result) {
+                    api.backup(result, {
+                        onSuccess() {
+                            updateProfile('lastStrongholdBackupTime', new Date())
+                            closePopup()
+                        },
+                        onError(error) {
+                            console.error(error)
+                        },
+                    })
+                }
+            })
+            .catch((error) => console.error(error))
     }
 </script>
 
@@ -34,15 +52,23 @@
 </style>
 
 <div class="flex w-full flex-row flex-wrap">
+    <Text type="h4" classes="mb-5">
+        {lastBackupDate ? locale('popups.backup.title', {
+                  values: { date: $date(lastBackupDate, { format: 'long' }) },
+              }) : locale('popups.backup.not_backed_up')}
+    </Text>
     <div class="w-full p-4 bg-gray-50 flex justify-center content-center"><img src="assets/logos/stronghold.svg" alt="" /></div>
     <div class="w-full text-center my-6 px-8">
         <Text overrideColor type="h5" classes="mb-2 text-{color}-600">
             {#if !lastBackupDate}
-                {locale('popups.backup.not_backed_up')}
+                {locale('popups.backup.not_backed_up_description')}
             {:else}
                 {locale('popups.backup.last_backup', {
-                    values: 
-                        { date: locale(`dates.${lastBackupDateFormatted.unit}`, { values: { time: lastBackupDateFormatted.value } })}
+                    values: {
+                        date: locale(`dates.${lastBackupDateFormatted.unit}`, {
+                            values: { time: lastBackupDateFormatted.value },
+                        }),
+                    },
                 })}
             {/if}
         </Text>
@@ -51,6 +77,6 @@
     </div>
     <div class="flex flex-row justify-between space-x-4 w-full px-8 ">
         <Button secondary classes="w-1/2" onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
-        <Button classes="w-1/2" onClick={() => handleUpdate()}>{locale('actions.save_backup')}</Button>
+        <Button classes="w-1/2" onClick={() => handleBackupClick()}>{locale('actions.save_backup')}</Button>
     </div>
 </div>

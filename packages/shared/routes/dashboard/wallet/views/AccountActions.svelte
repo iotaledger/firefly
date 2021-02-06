@@ -1,8 +1,8 @@
 <script lang="typescript">
-    import { createEventDispatcher, getContext } from 'svelte'
+    import { getContext } from 'svelte'
     import { Text, Button } from 'shared/components'
     import { Send, Receive, ManageAccount } from '.'
-    import { AccountState } from './Account.svelte'
+    import { accountViewState, AccountViewStates } from 'shared/lib/router'
 
     export let locale
     export let send
@@ -10,29 +10,14 @@
     export let internalTransfer
     export let setAlias
 
-    const dispatch = createEventDispatcher()
-
     const account = getContext('selectedAccount')
 
-    const state = getContext('accountState')
-
-    const popupState = getContext('popupState')
-
-    function handleQrClick() {
-        popupState.set({ active: true, type: 'qr', props: { data: $account?.address } })
-    }
-    function handleTransferClick() {
-        dispatch('next', AccountState.Transfer)
-    }
-    function handleManageClick() {
-        dispatch('next', AccountState.Manage)
-    }
     function handleSendClick() {
-        dispatch('next', AccountState.Send)
+        accountViewState.set(AccountViewStates.Send)
     }
 </script>
 
-{#if $state === AccountState.Init}
+{#if $accountViewState === AccountViewStates.Init}
     <div class="w-full h-full flex flex-col justify-between p-8">
         <div class="flex flex-col justify-between">
             <div class="flex flex-col justify-between items-center">
@@ -40,12 +25,12 @@
                     {locale('general.send_funds')}
                     <Text type="p" smaller secondary>{locale('general.send_tokens_to_address')}</Text>
                 </Button>
-                <Receive on:next on:previous {generateAddress} {locale} />
+                <Receive {generateAddress} {locale} />
             </div>
         </div>
     </div>
-{:else if $state === AccountState.Send}
-    <Send on:next on:previous {send} {internalTransfer} {locale} />
-{:else if $state === AccountState.Manage}
-    <ManageAccount on:next on:previous {locale} name={$account.name} setAlias={setAlias} />
+{:else if $accountViewState === AccountViewStates.Send}
+    <Send {send} {internalTransfer} {locale} />
+{:else if $accountViewState === AccountViewStates.Manage}
+    <ManageAccount {locale} name={$account.name} {setAlias} />
 {/if}

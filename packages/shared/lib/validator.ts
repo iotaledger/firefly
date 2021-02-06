@@ -373,13 +373,20 @@ export default class ValidatorService {
             [ResponseTypes.StrongholdStatus]: this.createBaseValidator().getFirst(),
             [ResponseTypes.GeneratedAddress]: this.createBaseValidator().add(new PayloadTypeValidator('object')).getFirst(),
             [ResponseTypes.StrongholdStatusChange]: this.createBaseEventValidator().getFirst(),
+            [ResponseTypes.NewTransaction]: this.createBaseEventValidator().getFirst(),
+            [ResponseTypes.ErrorThrown]: this.createBaseEventValidator().getFirst(),
+            [ResponseTypes.BalanceChange]: this.createBaseEventValidator().getFirst(),
+            [ResponseTypes.ConfirmationStateChange]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.LatestAddress]: this.createBaseValidator().getFirst(),
             [ResponseTypes.SyncedAccount]: this.createBaseValidator().getFirst(),
             [ResponseTypes.UnusedAddress]: this.createBaseValidator().getFirst(),
             [ResponseTypes.IsLatestAddressUnused]: this.createBaseValidator().getFirst(),
             [ResponseTypes.AreAllLatestAddressesUnused]: this.createBaseValidator().getFirst(),
             [ResponseTypes.UpdatedAlias]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.Error]: this.createBaseValidator().getFirst()
+            [ResponseTypes.DeletedStorage]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.LockedStronghold]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.StrongholdPasswordChanged]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.Error]: this.createBaseValidator().getFirst(),
         };
     }
 
