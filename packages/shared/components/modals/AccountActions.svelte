@@ -5,6 +5,7 @@
     import { openPopup } from 'shared/lib/popup'
 
     const account = getContext('selectedAccount')
+    const accounts = getContext('walletAccounts')
 
     export let isActive
     export let locale
@@ -21,7 +22,16 @@
         isActive = false
     }
     const handleDeleteAccountClick = () => {
-        openPopup({ type: 'deleteAccount', props: { account } })
+        openPopup({
+            type: 'deleteAccount',
+            props: {
+                account,
+                hasMultipleAccounts: $accounts.length > 1,
+                deleteAccount: (id) => {
+                    accounts.update((_accounts) => _accounts.filter((_account) => _account.id !== id))
+                },
+            },
+        })
         isActive = false
     }
 </script>
