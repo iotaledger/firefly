@@ -1,12 +1,12 @@
 <script lang="typescript">
+    import { get } from 'svelte/store'
     import { onMount } from 'svelte'
-    import { get } from 'svelte/store';
     import { Sidebar } from 'shared/components'
     import { Wallet, Settings } from 'shared/routes'
     import { parseDeepLink } from 'shared/lib/utils'
     import { sendParams } from 'shared/lib/app'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
-    import { deepLinking } from 'shared/lib/settings'
+    import { activeProfile } from 'shared/lib/profile'
     import { routerNext } from 'shared/lib/router'
 
 
@@ -44,7 +44,7 @@
             }
         }
 
-        if (!get(deepLinking)) {
+        if (!get(activeProfile).settings.deepLinking) {
             _redirect(Tabs.Settings)
             // TODO: Add alert system
             console.log('deep linking not enabled')

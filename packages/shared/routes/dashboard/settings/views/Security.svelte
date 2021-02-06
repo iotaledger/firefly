@@ -1,7 +1,8 @@
 <script>
+    import { get } from 'svelte/store';
     import zxcvbn from 'zxcvbn'
     import { Text, Dropdown, Password, Button, Checkbox } from 'shared/components'
-    import { getActiveProfile, removeProfile, updateStrongholdBackupTime } from 'shared/lib/app'
+    import { updateProfile, activeProfile, removeProfile } from 'shared/lib/profile'
     import { api, destroyActor } from 'shared/lib/wallet'
     import { openPopup } from 'shared/lib/popup'
 
@@ -19,9 +20,7 @@
     const PincodeManager = window['Electron']['PincodeManager']
 
     function reset() {
-        const activeProfile = getActiveProfile()
-
-        PincodeManager.remove(activeProfile.id).then((isRemoved) => {
+        PincodeManager.remove(get(activeProfile).id).then((isRemoved) => {
             if (!isRemoved) {
                 throw new Error('Something went wrong removing pincode entry.')
             }
@@ -46,7 +45,7 @@
     }
 
     function handleExportClick() {
-        if (getActiveProfile().isStrongholdLocked) {
+        if (get(activeProfile).isStrongholdLocked) {
             openPopup({ type: 'password', props: { onSuccess: exportStronghold } })
         } else {
             exportStronghold()
@@ -60,7 +59,7 @@
                 if (result) {
                     api.backup(result, {
                         onSuccess() {
-                            updateStrongholdBackupTime(new Date())
+                            updateProfile('lastStrongholdBackupTime', new Date())
 
                             if ('function' === typeof callback) {
                                 callback()

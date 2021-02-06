@@ -1,8 +1,9 @@
 <script lang="typescript">
+    import { get } from 'svelte/store';
     import { createEventDispatcher } from 'svelte'
     import { Transition } from 'shared/components'
     import { api } from 'shared/lib/wallet'
-    import { getActiveProfile } from 'shared/lib/app'
+    import { activeProfile } from 'shared/lib/profile'
 
     import { Protect, Pin } from './views/'
     import { validatePinFormat } from 'shared/lib/utils'
@@ -57,7 +58,7 @@
                         throw new Error("Invalid pin code!");
                     }
                     await PincodeManager.set(
-                        getActiveProfile().id,
+                        get(activeProfile).id,
                         pin.toString()
                     )
 

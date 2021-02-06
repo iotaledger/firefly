@@ -1,10 +1,10 @@
 <script>
     import { api } from 'shared/lib/wallet'
-
+    import { get } from 'svelte/store'
     import { createEventDispatcher, onDestroy } from 'svelte'
-    import { OnboardingLayout, Illustration, Icon, Text, Profile, Pin, Button } from 'shared/components'
+    import { Icon, Text, Profile, Pin, Button } from 'shared/components'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { getActiveProfile } from 'shared/lib/app'
+    import { activeProfile } from 'shared/lib/profile'
     import { initialise, getStoragePath } from 'shared/lib/wallet'
 
     export let locale
@@ -59,7 +59,7 @@
                 timerId = setInterval(countdown, 1000)
             }
         } else {
-            const profile = getActiveProfile()
+            const profile = get(activeProfile)
 
             PincodeManager.verify(profile.id, pinCode.toString())
                 .then((verified) => {
@@ -106,7 +106,7 @@
         </div>
         <div class="bg-white pt-40 pb-16 flex w-full h-full flex-col items-center justify-center">
             <div class="flex-1 w-96">
-                <Profile name={getActiveProfile().name} />
+                <Profile name={$activeProfile.name} />
                 <Pin bind:value={pinCode} classes="mt-10" />
                 <Text type="p" bold classes="mt-4 text-center">
                     {attempts > 0 ? locale('views.login.incorrect_attempts', {
