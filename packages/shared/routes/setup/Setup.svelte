@@ -1,7 +1,7 @@
 <script>
     import { createEventDispatcher } from 'svelte'
     import { OnboardingLayout, Illustration, Text, Button, Input, Radio } from 'shared/components'
-    import { createProfile, setActiveProfile } from 'shared/lib/app'
+    import { createProfile, setActiveProfile } from 'shared/lib/profile'
     import { initialise, getStoragePath } from 'shared/lib/wallet'
     import { SetupType } from 'shared/lib/router'
     import { network } from 'shared/lib/network'

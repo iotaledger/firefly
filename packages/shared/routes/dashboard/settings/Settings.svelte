@@ -2,7 +2,7 @@
     import { setContext, createEventDispatcher } from 'svelte'
     import { get, writable } from 'svelte/store'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
-    import { deepLinking } from 'shared/lib/settings'
+    import { activeProfile } from 'shared/lib/profile'
     import { SettingsTitles } from './types'
 
     import { SettingsHome, SettingsViewer } from './views'
@@ -19,7 +19,7 @@
     }
 
     $: {
-        if ($deepLinkRequestActive && !get(deepLinking)) {
+        if ($deepLinkRequestActive && !get(activeProfile).settings.deepLinking) {
             route.set(SettingsTitles.AdvancedSettings)
             deepLinkRequestActive.set(false)
         }

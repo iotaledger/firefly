@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { setContext, onMount } from 'svelte'
     import { get, derived } from 'svelte/store'
-    import { updateStrongholdStatus } from 'shared/lib/app'
+    import { updateProfile } from 'shared/lib/profile'
     import { api, getLatestMessages, initialiseListeners, selectedAccountId, wallet } from 'shared/lib/wallet'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
-    import { deepLinking, currency } from 'shared/lib/settings'
+    import { activeProfile } from 'shared/lib/profile'
     import { DEFAULT_NODES as nodes } from 'shared/lib/network'
     import { formatUnit } from 'shared/lib/units'
     import { DashboardPane } from 'shared/components'
@@ -67,7 +67,7 @@
             name: alias,
             rawIotaBalance: balance,
             balance: formatUnit(balance, 0),
-            balanceEquiv: `${convertToFiat(balance, $currencies[CurrencyTypes.USD], $exchangeRates[$currency])} ${$currency}`,
+            balanceEquiv: `${convertToFiat(balance, $currencies[CurrencyTypes.USD], $exchangeRates[get(activeProfile).settings.currency])} ${$activeProfile.settings.currency}`,
             color: AccountColors[index],
         })
     }
@@ -103,8 +103,8 @@
                                         balanceFiat: `${convertToFiat(
                                             _totalBalance.balance,
                                             $currencies[CurrencyTypes.USD],
-                                            $exchangeRates[$currency]
-                                        )} ${$currency}`,
+                                            $exchangeRates[$activeProfile.settings.currency]
+                                        )} ${$activeProfile.settings.currency}`,
                                     })
                                 )
                             }
@@ -342,7 +342,7 @@
     }
 
     $: {
-        if ($deepLinkRequestActive && get(deepLinking)) {
+        if ($deepLinkRequestActive && get(activeProfile).settings.deepLinking) {
             walletViewState.set(WalletViewStates.Send)
             deepLinkRequestActive.set(false)
         }
@@ -357,7 +357,7 @@
 
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
-                updateStrongholdStatus(strongholdStatusResponse.payload.snapshot.status === 'Locked')
+                updateProfile('isStrongholdLocked', strongholdStatusResponse.payload.snapshot.status === 'Locked')
                 api.areLatestAddressesUnused({
                     onSuccess(response) {
                         if (!response.payload) {

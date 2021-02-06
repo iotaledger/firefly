@@ -1,9 +1,24 @@
 <script>
+    import { get } from 'svelte/store';
     import zxcvbn from 'zxcvbn'
     import { Text, Dropdown, Password, Button, Checkbox } from 'shared/components'
-    import { getActiveProfile, removeProfile, updateStrongholdBackupTime } from 'shared/lib/app'
+    import { updateProfile, activeProfile, removeProfile } from 'shared/lib/profile'
     import { api, destroyActor } from 'shared/lib/wallet'
     import { openPopup } from 'shared/lib/popup'
+
+    function assignTimeoutOptionLabel(timeInMinutes) {
+        let label = ''
+
+        if (timeInMinutes >= 60) {
+            label = `${timeInMinutes / 60} hour`
+        }
+
+        label = `${timeInMinutes} minute`
+
+        return label.includes('1') ? label : `${label}s`
+    }
+
+    const lockScreenTimeoutOptions = [1, 5, 10, 30, 60].map((time) => ({ value: time, label: assignTimeoutOptionLabel(time) }))
 
     export let locale
     export let navigate
@@ -19,9 +34,7 @@
     const PincodeManager = window['Electron']['PincodeManager']
 
     function reset() {
-        const activeProfile = getActiveProfile()
-
-        PincodeManager.remove(activeProfile.id).then((isRemoved) => {
+        PincodeManager.remove(get(activeProfile).id).then((isRemoved) => {
             if (!isRemoved) {
                 throw new Error('Something went wrong removing pincode entry.')
             }
@@ -46,7 +59,7 @@
     }
 
     function handleExportClick() {
-        if (getActiveProfile().isStrongholdLocked) {
+        if (get(activeProfile).isStrongholdLocked) {
             openPopup({ type: 'password', props: { onSuccess: exportStronghold } })
         } else {
             exportStronghold()
@@ -60,7 +73,7 @@
                 if (result) {
                     api.backup(result, {
                         onSuccess() {
-                            updateStrongholdBackupTime(new Date())
+                            updateProfile('lastStrongholdBackupTime', new Date())
 
                             if ('function' === typeof callback) {
                                 callback()
@@ -124,8 +137,11 @@
         <Text type="h4" classes="mb-3">{locale('views.settings.appLock.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.appLock.description')}</Text>
         <Dropdown
-            value="English"
-            items={[{ value: 1, label: 'English' }, { value: 2, label: 'Belula' }]} />
+            onSelect={(option) => {
+                updateProfile('settings.lockScreenTimeout', option.value)
+            }}
+            value={assignTimeoutOptionLabel($activeProfile.settings.lockScreenTimeout)}
+            items={lockScreenTimeoutOptions} />
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <section id="changePassword" class="w-3/4">
