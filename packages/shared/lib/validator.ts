@@ -292,7 +292,25 @@ class TypeValidator extends Validator {
             })
         }
 
-        const responseValues = Object.values(response)
+        const getValues = (obj, results = []) => {
+            const r = results;
+
+            const values = Array.isArray(obj) ? obj : Object.values(obj)
+
+            values.forEach(value => {
+                if ('object' !== typeof value) {
+                    r.push(value);
+                }
+
+                if (value && 'object' === typeof value) {
+                    getValues(value, r);
+                }
+            });
+
+            return r;
+        };
+
+        const responseValues = getValues(response)
 
         if (!responseValues.length) {
             return super.createResponse(false, {
@@ -398,7 +416,10 @@ export default class ValidatorService {
      * @returns {ValidatorChainBuilder}
      */
     private createBaseValidator(): ValidatorChainBuilder {
-        return new ValidatorChainBuilder().add(new TypeValidator()).add(new IdValidator(this.ids)).add(new ActionValidator())
+        return new ValidatorChainBuilder()
+            .add(new TypeValidator())
+            .add(new IdValidator(this.ids))
+            .add(new ActionValidator())
     }
 
     /**
