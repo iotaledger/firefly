@@ -97,16 +97,12 @@ export const createProfile = (profileName): Profile => {
             outsourcePow: false,
             currency: AvailableExchangeRates.USD,
             notifications: true,
-<<<<<<< HEAD
             node,
-            customNodes: []
-        },
-=======
+            customNodes: [],
             // Minutes
             lockScreenTimeout: 5
-        }
->>>>>>> develop
-    };
+        },
+    }
 
     profiles.update((_profiles) => {
         return [
