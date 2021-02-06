@@ -11,7 +11,6 @@
     export let setAlias
 
     const account = getContext('selectedAccount')
-
     function handleSendClick() {
         accountViewState.set(AccountViewStates.Send)
     }
