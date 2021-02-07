@@ -25,6 +25,7 @@
             const _nodes = [...$activeProfile.settings.customNodes, ...nodes].map((node) => node.url)
             api.setClientOptions(
                 {
+                    ...$accounts[0].clientOptions,
                     nodes: _nodes,
                     node: node.url,
                 },
@@ -49,6 +50,7 @@
         if ($accounts.some((account) => account.clientOptions.nodes.length)) {
             api.setClientOptions(
                 {
+                    ...$accounts[0].clientOptions,
                     nodes: [],
                     node: node.url,
                 },
@@ -107,10 +109,12 @@
         if (isNewNodeValid([...$activeProfile.settings.customNodes, ...nodes], node)) {
             const options = primary
                 ? {
+                      ...$accounts[0].clientOptions,
                       node: node.url,
                       nodes: [],
                   }
                 : {
+                      ...$accounts[0].clientOptions,
                       nodes: [...$accounts[0].clientOptions.nodes, node.url],
                   }
 
