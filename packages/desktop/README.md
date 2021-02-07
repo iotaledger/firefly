@@ -58,3 +58,16 @@ On Debian and Ubuntu releases that use multiarch:
 ```bash
 export RUSTFLAGS="-L /usr/lib/x86_64-linux-gnu"
 ```
+
+## Running the Firefly Snap
+To run the Firefly snap properly on Linux, you may need to run the following commands:
+
+To install the snap when built locally:
+```bash
+snap install --dangerous path/to/firefly-desktop-0.0.1.snap
+```
+
+To connect the `password-manager-service` interface:
+```bash
+snap connect firefly-wallet:password-manager-service
+```
