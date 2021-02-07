@@ -91,6 +91,7 @@ function createWindow() {
         height: 720,
         webPreferences: {
             nodeIntegration: false,
+            contextIsolation: true,
             enableRemoteModule: false,
             worldSafeExecuteJavaScript: true,
             disableBlinkFeatures: 'Auxclick',
