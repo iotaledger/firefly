@@ -3,6 +3,13 @@ import type { Bridge, CommunicationIds } from './bridge'
 import type { Transfer } from './message'
 import type { MnemonicPayload } from './mnemonic'
 
+export interface StrongholdStatus {
+  snapshot: {
+    status: 'Locked' | 'Unlocked'
+  };
+  snapshotPath: string;
+}
+
 export interface LoggerOutput {
   name?: string
   level_filter: 'off' | 'error' | 'warn' | 'info' | 'debug' | 'trace'
