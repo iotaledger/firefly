@@ -27,3 +27,34 @@ For all platforms, the following are required:
 * `libssl` (Debian/Ubuntu: `libssl-dev`, Red Hat: `openssl-devel`, Arch Linux: `openssl`)
 * `libusb` (Debian/Ubuntu: `libusb-1.0-0-dev`)
 * `libudev` (Debian/Ubuntu: `libudev-dev`)
+
+## Building Node.js Bindings for Electron
+The following environment variables need to be set in order to compile the bindings properly when packaging the app:
+
+### macOS
+```bash
+export OPENSSL_LINK_STATIC=true
+export OPENSSL_ROOT_DIR=$(brew --prefix openssl)
+```
+
+### Windows
+```powershell
+set OPENSSL_LINK_STATIC=true
+```
+If using `vcpkg` to install OpenSSL:
+```powershell
+set VCPKGRS_DYNAMIC=1
+```
+If using Chocolatey to install OpenSSL:
+```powershell
+set OPENSSL_ROOT_DIR="C:\Program Files\OpenSSL-Win64"
+```
+
+### Linux
+```bash
+export OPENSSL_LINK_STATIC=true
+```
+On Debian and Ubuntu releases that use multiarch:
+```bash
+export RUSTFLAGS="-L /usr/lib/x86_64-linux-gnu"
+```
