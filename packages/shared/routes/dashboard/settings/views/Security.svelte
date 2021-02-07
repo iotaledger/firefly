@@ -158,7 +158,13 @@
                             onSuccess() {
                                 PincodeManager.set(get(activeProfile).id, newPincode)
                                     .then(resolve)
+                                    .then(() => {
+                                        currentPincode = ''
+                                        newPincode = ''
+                                        confirmedPincode = ''
+                                    })
                                     .catch(reject)
+                                
                             },
                             onError(error) {
                                 reject(error)
@@ -223,7 +229,7 @@
         <Text type="h4" classes="mb-3">{locale('views.settings.changePincode.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.changePincode.description')}</Text>
         <Password
-            classes="mb-8"
+            classes="mb-4"
             bind:value={currentPincode}
             showRevealToggle
             {locale}
