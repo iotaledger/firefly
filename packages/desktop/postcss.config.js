@@ -7,7 +7,10 @@ module.exports = {
         require('tailwindcss')('./../shared/tailwind.config.js'),
         require('postcss-url')({
             url: mode === 'production' ? (asset) => {
-                return path.relative(__dirname, asset.absolutePath).replace('..', '../shared')
+                return path.relative(__dirname, asset.absolutePath)
+                    .replace('..', '../shared')
+                    // on Windows the path resolution doesn't work unless we change the path separator
+                    .replace(/\\/g, '/')
             } : undefined
         })
     ],
