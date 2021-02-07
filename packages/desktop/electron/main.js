@@ -84,8 +84,10 @@ function createWindow() {
 
     // Create the browser window.
     windows.main = new BrowserWindow({
-        width: 800,
-        height: 600,
+        minWidth: 1280,
+        minHeight: 720,
+        width: 1280,
+        height: 720,
         webPreferences: {
             nodeIntegration: false,
             enableRemoteModule: false,
