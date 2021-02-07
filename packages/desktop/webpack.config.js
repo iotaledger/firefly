@@ -1,5 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const { DefinePlugin } = require('webpack')
 const path = require('path');
 const sveltePreprocess = require('svelte-preprocess');
 
@@ -98,7 +99,11 @@ const rendererRules = [
 
 /// ------------------------ Plugins ------------------------
 
-const mainPlugins = []
+const mainPlugins = [
+  new DefinePlugin({
+    devMode: JSON.stringify(mode === 'development')
+  })
+]
 
 const rendererPlugins = [
   new CopyPlugin({
@@ -121,6 +126,9 @@ const rendererPlugins = [
   }),
   new MiniCssExtractPlugin({
     filename: '[name].css'
+  }),
+  new DefinePlugin({
+    devMode: JSON.stringify(mode === 'development')
   })
 ]
 

@@ -40,8 +40,6 @@ const windows = {
 const devMode = process.env.NODE_ENV === 'development'
 
 
-// TODO(rajivshah3): Use @rollup/plugin-replace here
-
 let paths = {
     preload: "",
     html: "",
