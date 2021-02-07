@@ -1,3 +1,3 @@
-# Wallet [WIP]
+# Firefly
 
-This repo is the staging area for the next wallet!
+Desktop readme: https://github.com/iotaledger/firefly/blob/develop/packages/desktop/README.md
