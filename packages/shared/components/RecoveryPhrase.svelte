@@ -49,7 +49,7 @@
                 class:selected={shuffle && recoveryPhraseInput.indexOf(word) !== -1}
                 class:disabled={!shuffle}>
                 {#if !shuffle}<span class="text-gray-500 whitespace-pre">{`${i + 1}. `}</span>{/if}
-                <span>{hide ? '********' : word}</span>
+                <span class={hide ? 'text-gray-500' : 'text-gray-800'}>{hide ? '********' : word}</span>
                 {#if recoveryPhraseInput.indexOf(word) !== -1}
                     <span class="font-bold text-16 leading-3 text-white">{recoveryPhraseInput.indexOf(word) + 1}</span>
                 {/if}
