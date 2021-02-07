@@ -57,7 +57,7 @@
         on:keydown={onKey}
         bind:value={amount} />
     <actions class="absolute right-0 top-0 h-full flex flex-row items-center text-12 text-gray-800 dark:text-white">
-        <button on:click={maxClick} class="px-2 hover:text-blue-500">Max</button>
+        <button on:click={maxClick} class="px-2 hover:text-blue-500">{locale('actions.max')}</button>
         <button
             on:click={(e) => {
                 e.preventDefault()

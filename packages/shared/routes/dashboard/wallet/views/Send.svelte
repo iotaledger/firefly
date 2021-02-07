@@ -3,6 +3,7 @@
     import { Text, Button, Dropdown, Amount, Address } from 'shared/components'
     import { Unit, convertUnits } from '@iota/unit-converter'
     import { sendParams } from 'shared/lib/app'
+    import { activeProfile } from 'shared/lib/profile'
     import { ADDRESS_LENGTH, VALID_MAINNET_ADDRESS, VALID_DEVNET_ADDRESS } from 'shared/lib/utils'
     import { walletViewState, WalletViewStates, accountViewState, AccountViewStates } from 'shared/lib/router'
 
@@ -68,9 +69,16 @@
                 console.error('Input error: Wrong address length')
                 return false
             }
-            if (!$sendParams.address.match(VALID_MAINNET_ADDRESS) && !$sendParams.address.match(VALID_DEVNET_ADDRESS)) {
-                console.error('Input error: Wrong address format')
-                return false
+            if ($activeProfile.isDeveloperProfile) {
+                if (!$sendParams.address.match(VALID_MAINNET_ADDRESS) && !$sendParams.address.match(VALID_DEVNET_ADDRESS)) {
+                    console.error('Input error: Wrong address format')
+                    return false
+                } else {
+                    if (!$sendParams.address.match(VALID_MAINNET_ADDRESS)) {
+                        console.error('Input error: Wrong address format')
+                        return false
+                    }
+                }
             }
         }
         return true
