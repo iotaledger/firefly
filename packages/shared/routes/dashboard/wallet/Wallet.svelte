@@ -5,7 +5,6 @@
     import { api, getLatestMessages, initialiseListeners, selectedAccountId, wallet } from 'shared/lib/wallet'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { activeProfile } from 'shared/lib/profile'
-    import { DEFAULT_NODES as nodes } from 'shared/lib/network'
     import { formatUnit } from 'shared/lib/units'
     import { DashboardPane } from 'shared/components'
     import { Account, LineChart, WalletHistory, Security, CreateAccount, WalletBalance, WalletActions } from './views/'
@@ -67,7 +66,11 @@
             name: alias,
             rawIotaBalance: balance,
             balance: formatUnit(balance, 0),
-            balanceEquiv: `${convertToFiat(balance, $currencies[CurrencyTypes.USD], $exchangeRates[get(activeProfile).settings.currency])} ${$activeProfile.settings.currency}`,
+            balanceEquiv: `${convertToFiat(
+                balance,
+                $currencies[CurrencyTypes.USD],
+                $exchangeRates[get(activeProfile).settings.currency]
+            )} ${$activeProfile.settings.currency}`,
             color: AccountColors[index],
         })
     }
@@ -205,8 +208,12 @@
         api.createAccount(
             {
                 alias,
-                // For subsequent accounts, use the network for any of the previous accounts
-                clientOptions: { nodes, network: $accounts[0].clientOptions.network },
+                clientOptions: {
+                    node: $accounts[0].clientOptions.node,
+                    nodes: $accounts[0].clientOptions.nodes,
+                    // For subsequent accounts, use the network for any of the previous accounts
+                    network: $accounts[0].clientOptions.network,
+                },
             },
             {
                 onSuccess(createAccountResponse) {

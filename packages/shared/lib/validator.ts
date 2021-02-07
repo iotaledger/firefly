@@ -694,6 +694,7 @@ export default class ValidatorService {
             [ResponseTypes.LockedStronghold]: this.createBaseValidator().getFirst(),
             [ResponseTypes.StrongholdPasswordChanged]: this.createBaseValidator().getFirst(),
             [ResponseTypes.RemovedAccount]: this.createBaseEventValidator().getFirst(),
+            [ResponseTypes.UpdatedAllClientOptions]: this.createBaseValidator().getFirst(),
             [ResponseTypes.Error]: this.createBaseValidator().getFirst(),
             // Events 
             [ResponseTypes.StrongholdStatusChange]: this.createBaseEventValidator().getFirst(),

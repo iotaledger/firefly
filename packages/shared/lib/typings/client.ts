@@ -5,11 +5,17 @@ export enum Network {
     Comnet = 'comnet',
 }
 
+export interface Node {
+    url: string
+    password?: string
+    username?: string
+}
+
 export interface ClientOptions {
-    nodes?: string[]
+    nodes?: Node[]
+    node?: Node;
     network?: Network
     localPow?: boolean
     nodeSyncEnabled?: boolean
     nodePoolUrls?: string[]
 }
-
