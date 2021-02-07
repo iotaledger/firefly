@@ -1,7 +1,9 @@
 <script lang="typescript">
     import { getContext } from 'svelte'
     import { Text, Button, Dropdown, Amount, Address } from 'shared/components'
+    import { Unit, convertUnits } from '@iota/unit-converter'
     import { sendParams } from 'shared/lib/app'
+    import { ADDRESS_LENGTH, VALID_MAINNET_ADDRESS, VALID_DEVNET_ADDRESS } from 'shared/lib/utils'
     import { walletViewState, WalletViewStates, accountViewState, AccountViewStates } from 'shared/lib/router'
 
     export let locale
@@ -17,10 +19,13 @@
     }
 
     let selectedSendType = SEND_TYPE.EXTERNAL
+    let unit = Unit.Mi
+    let amount = convertUnits($sendParams.amount, Unit.i, unit)
+    let to = undefined
 
     $: accountsDropdownItems = $accounts.map((acc) => format(acc))
     $: from = $account ? format($account) : accountsDropdownItems[0]
-    let to = undefined
+    $: $sendParams.amount = convertUnits(amount, unit, Unit.i)
 
     const handleSendTypeClick = (type) => {
         selectedSendType = type
@@ -32,10 +37,12 @@
         to = item
     }
     const handleSendClick = () => {
-        if (selectedSendType === SEND_TYPE.INTERNAL) {
-            internalTransfer(from.id, to.id, $sendParams.amount)
-        } else {
-            send(from.id, $sendParams.address, $sendParams.amount)
+        if (validInputs()) {
+            if (selectedSendType === SEND_TYPE.INTERNAL) {
+                internalTransfer(from.id, to.id, $sendParams.amount)
+            } else {
+                send(from.id, $sendParams.address, $sendParams.amount)
+            }
         }
     }
     const handleBackClick = () => {
@@ -45,7 +52,28 @@
         }
     }
     const format = (account) => {
-        return { value: account.id, label: `${account.name} • ${account.balance}` }
+        return { value: account.id, label: `${account.name} • ${account.balance}`, balance: account.rawIotaBalance }
+    }
+    const handleMaxClick = () => {
+        amount = convertUnits(from.balance, Unit.i, unit)
+    }
+    const validInputs = () => {
+        if (parseFloat($sendParams.amount) > from.balance) {
+            console.error('Input error: Amount higher than available balance')
+            return false
+        }
+        if (selectedSendType === SEND_TYPE.EXTERNAL) {
+            // Validate address length
+            if ($sendParams.address.length !== ADDRESS_LENGTH) {
+                console.error('Input error: Wrong address length')
+                return false
+            }
+            if (!$sendParams.address.match(VALID_MAINNET_ADDRESS) && !$sendParams.address.match(VALID_DEVNET_ADDRESS)) {
+                console.error('Input error: Wrong address format')
+                return false
+            }
+        }
+        return true
     }
 </script>
 
@@ -70,7 +98,7 @@
                     </div>
                 {/if}
                 <div class="w-full mb-8 block">
-                    <Amount bind:amount={$sendParams.amount} {locale} classes="mb-4" />
+                    <Amount bind:amount bind:unit maxClick={handleMaxClick} {locale} classes="mb-4" />
                     {#if selectedSendType === SEND_TYPE.INTERNAL}
                         <Dropdown
                             value={to?.label || ''}

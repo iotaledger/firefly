@@ -1,12 +1,14 @@
 <script>
-    import { Icon, Text } from 'shared/components'
+    import { Unit } from '@iota/unit-converter'
+    import { Text } from 'shared/components'
     export let amount = undefined
+    export let unit = Unit.Mi
     export let label = undefined
     export let locale = undefined
     export let classes = ''
-    let dropdown = false
+    export let maxClick = () => {}
 
-    const units = ['i', 'Ki', 'Mi', 'Gi', 'Ti']
+    let dropdown = false
 
     function onKey(e) {
         if (e.keyCode === 8 || e.target.value.length <= 12) {
@@ -18,57 +20,63 @@
     const clickOutside = () => {
         dropdown = false
     }
+    const onSelect = (index) => {
+        unit = index
+    }
 </script>
 
 <style type="text/scss">
     amount-input {
-        position: relative;
-        display: block;
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
+            @apply m-0;
             -webkit-appearance: none;
-            margin: 0;
         }
-        input {
-            width: 100%;
-            padding: 15px 40px 16px 13px;
-            color: var(--text-secondary-color);
-            background: var(--element-bg-color);
-            border-color: var(--line-separator-color);
-            border-radius: 10px;
-            box-shadow: -2px -2px 4px rgba(255, 255, 255, 0.2), 0px 4px 8px rgba(65, 114, 248, 0.08);
-            font-size: 12px;
-            line-height: 140%;
-            font-weight: 700;
-        }
-        button {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 65px;
-            background: content-box;
-            height: 100%;
-            color: var(--ui-blue-color);
-            text-align: center;
-            font-weight: 700;
-            font-size: 12px;
-            line-height: 140%;
-            border-left: 1px solid var(--line-separator-color);
+        nav {
+            &.active {
+                @apply opacity-100;
+                @apply pointer-events-auto;
+            }
+            button {
+                &:hover,
+                &.active {
+                    @apply bg-gray-100;
+                }
+            }
         }
     }
 </style>
 
 <svelte:window on:click={clickOutside} />
-
-<amount-input class={classes}>
-    <Text type="p" classes="mb-2" smaller>{label || locale('general.amount')}</Text>
-    <input type="number" placeholder={label || locale('general.amount')} on:keydown={onKey} bind:value={amount} />
-    <button
-        on:click={(e) => {
-            e.preventDefault()
-            e.stopPropagation()
-            dropdown = !dropdown
-        }}>
-        {units[3]}
-    </button>
+<Text type="p" classes="mb-2" smaller>{label || locale('general.amount')}</Text>
+<amount-input class="relative block {classes}">
+    <input
+        type="number"
+        class="w-full py-4 pl-4 pr-24 text-gray-800 border border-solid border-gray-500 text-12 leading-140 font-700 rounded-lg"
+        placeholder={label || locale('general.amount')}
+        on:keydown={onKey}
+        bind:value={amount} />
+    <actions class="absolute right-0 top-0 h-full flex flex-row items-center text-12 text-gray-800 dark:text-white">
+        <button on:click={maxClick} class="px-2 hover:text-blue-500">Max</button>
+        <button
+            on:click={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                dropdown = !dropdown
+            }}
+            class="w-10 h-full text-center px-2 border-l border-solid border-gray-500">
+            {unit}
+            <nav
+                class:active={dropdown}
+                class="absolute w-10 overflow-y-auto bg-white border border-solid border-gray-500 pointer-events-none opacity-0 z-10 text-left top-12 right-0">
+                {#each Object.values(Unit) as _unit}
+                    <button class="text-center w-full py-2" on:click={() => onSelect(_unit)} class:active={unit === _unit}><Text
+                            type="p"
+                            smaller>
+                            {_unit}
+                        </Text></button>
+                {/each}
+            </nav>
+        </button>
+    </actions>
 </amount-input>

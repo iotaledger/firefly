@@ -1,5 +1,6 @@
 export const VALID_MAINNET_ADDRESS = /^iota1[02-9ac-hj-np-z]{59}$/
 export const VALID_DEVNET_ADDRESS = /^atoi1[02-9ac-hj-np-z]{59}$/
+export const ADDRESS_LENGTH = 64;
 
 export function bindEvents(element, events) {
     const listeners = Object.entries(events).map(([event, handler]) => {
