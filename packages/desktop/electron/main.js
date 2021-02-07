@@ -102,6 +102,10 @@ function createWindow() {
         },
     })
 
+    if (!devMode) {
+        initAutoUpdate(windows.main);
+    }
+
     if (devMode) {
         // Enable dev tools only in developer mode
         windows.main.webContents.openDevTools()
@@ -128,10 +132,6 @@ function createWindow() {
      */
     windows.main.webContents.on('will-navigate', _handleNavigation)
     windows.main.webContents.on('new-window', _handleNavigation)
-
-    if (!devMode) {
-        initAutoUpdate(windows.main);
-    }
 
     /**
      * Handle permissions requests
