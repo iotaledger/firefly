@@ -62,7 +62,9 @@
         "recovery_phrase": {
             "title": "Recovery phrase",
             "body_1": "Carefully write down the words in the exact order.",
-            "body_2": "Keep your recovery phrase private and safely stored. Do not share it with anyone."
+            "body_2": "Keep your recovery phrase private and safely stored. Do not share it with anyone.",
+            "reveal_recovery_phrase": "Reveal recovery phrase",
+            "hide_recovery_phrase": "Hide recovery phrase"
         },
         "verify_recovery_phrase": {
             "title": "Verify recovery phrase",
