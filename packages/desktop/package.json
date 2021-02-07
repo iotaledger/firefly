@@ -1,6 +1,6 @@
 {
     "name": "desktop",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "description": "IOTA wallet desktop",
     "main": "public/build/main.js",
     "repository": "git@github.com:iotaledger/new-wallet.git",
@@ -87,6 +87,7 @@
             "deleteAppDataOnUninstall": true
         },
         "win": {
+            "icon": "./public/assets/icons/win/icon.ico",
             "publisherName": "IOTA Stiftung",
             "target": "nsis",
             "timeStampServer": "http://timestamp.digicert.com"
@@ -102,6 +103,7 @@
             }
         },
         "mac": {
+            "icon": "./public/assets/icons/mac/icon.icns", 
             "category": "public.app-category.finance",
             "target": [
                 "dmg",

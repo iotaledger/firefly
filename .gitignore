@@ -12,7 +12,11 @@ node_modules
 
 # Build directories
 **/public/build/
-**/public/assets/
+**/public/assets/fonts
+**/public/assets/illustrations
+**/public/assets/logos
+**/public/assets/sounds
+
 **/public/locales/
 
 .gradle/
