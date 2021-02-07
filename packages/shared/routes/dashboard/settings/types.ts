@@ -17,6 +17,7 @@ export enum SecuritySettings {
     ExportStronghold = 'exportStronghold',
     AppLock = 'appLock',
     ChangePassword = 'changePassword',
+    ChangePincode = 'changePincode',
     ResetWallet = 'resetWallet'
 }
 
@@ -47,6 +48,7 @@ export enum SettingsIcons {
     exportStronghold = 'export',
     appLock = 'pin',
     changePassword = 'lock',
+    changePincode = 'lock',
     resyncAccounts = 'sync',
     resetWallet = 'reset',
     deepLinks = 'link',

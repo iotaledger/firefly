@@ -298,7 +298,7 @@ dependencies = [
 [[package]]
 name = "bee-ledger"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#d65ca6f221e8f5c905017811cbb6ff5255fbce50"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#ecb81c97b51792ce46e3974b3ee220ea9ff3fe1d"
 dependencies = [
  "async-trait",
  "bee-common",
@@ -323,7 +323,7 @@ dependencies = [
 [[package]]
 name = "bee-message"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#d65ca6f221e8f5c905017811cbb6ff5255fbce50"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#ecb81c97b51792ce46e3974b3ee220ea9ff3fe1d"
 dependencies = [
  "bech32",
  "bee-common",
@@ -340,7 +340,7 @@ dependencies = [
 [[package]]
 name = "bee-network"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#d65ca6f221e8f5c905017811cbb6ff5255fbce50"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#ecb81c97b51792ce46e3974b3ee220ea9ff3fe1d"
 dependencies = [
  "async-trait",
  "bee-runtime",
@@ -359,7 +359,7 @@ dependencies = [
 [[package]]
 name = "bee-pow"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#d65ca6f221e8f5c905017811cbb6ff5255fbce50"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#ecb81c97b51792ce46e3974b3ee220ea9ff3fe1d"
 dependencies = [
  "bee-crypto",
  "bee-ternary",
@@ -370,7 +370,7 @@ dependencies = [
 [[package]]
 name = "bee-protocol"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#d65ca6f221e8f5c905017811cbb6ff5255fbce50"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#ecb81c97b51792ce46e3974b3ee220ea9ff3fe1d"
 dependencies = [
  "async-channel",
  "async-priority-queue",
@@ -407,7 +407,7 @@ dependencies = [
 [[package]]
 name = "bee-rest-api"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#d65ca6f221e8f5c905017811cbb6ff5255fbce50"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#ecb81c97b51792ce46e3974b3ee220ea9ff3fe1d"
 dependencies = [
  "async-trait",
  "bech32",
@@ -478,7 +478,7 @@ dependencies = [
 [[package]]
 name = "bee-snapshot"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#d65ca6f221e8f5c905017811cbb6ff5255fbce50"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#ecb81c97b51792ce46e3974b3ee220ea9ff3fe1d"
 dependencies = [
  "async-trait",
  "bee-common",
@@ -508,7 +508,7 @@ dependencies = [
 [[package]]
 name = "bee-tangle"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#d65ca6f221e8f5c905017811cbb6ff5255fbce50"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#ecb81c97b51792ce46e3974b3ee220ea9ff3fe1d"
 dependencies = [
  "async-trait",
  "bee-common",
@@ -1811,7 +1811,7 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "0.5.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#7b1656c5e50c243dddd9ad0f5316c33dc476d980"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#d5ad866b32703713be43208b2fe4cc21495044e6"
 dependencies = [
  "bee-common",
  "bee-common-derive",
@@ -1837,7 +1837,7 @@ dependencies = [
 [[package]]
 name = "iota-core"
 version = "0.2.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#7b1656c5e50c243dddd9ad0f5316c33dc476d980"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#d5ad866b32703713be43208b2fe4cc21495044e6"
 dependencies = [
  "bee-common",
  "bee-message",
@@ -1904,7 +1904,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#6242ccf34f2c6fdd714d29aad4164d13a02a0183"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#37bfc261401eeff6f92d3197041fd0ec84bb7c56"
 dependencies = [
  "async-trait",
  "backtrace",

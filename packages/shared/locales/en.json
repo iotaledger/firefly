@@ -173,7 +173,15 @@
             "changePassword": {
                 "title": "Change password",
                 "description": ""
-            }, 
+            },
+            "changePincode": {
+                "title": "Change PIN code",
+                "description": "",
+                "currentPincode": "Current PIN",
+                "newPincode": "New PIN",
+                "confirmNewPincode": "Confirm new PIN",
+                "action": "Change PIN"
+            },
             "resyncAccounts": {
                 "title": "Resync accounts",
                 "description": ""
