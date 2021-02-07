@@ -359,7 +359,8 @@
         "customize_account": "Customise account",
         "sync_account": "Sync account",
         "view_address_history": "View address history",
-        "delete_account": "Delete account"
+        "delete_account": "Delete account",
+        "max": "Max"
     },
     "general": {
         "password": "Password",
