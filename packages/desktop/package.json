@@ -86,15 +86,53 @@
         "nsis": {
             "deleteAppDataOnUninstall": true
         },
+        "snap": {
+            "confinement": "classic",
+            "buildPackages": [
+                "clang",
+                "cmake",
+                "libsecret-1-dev",
+                "libssl-dev",
+                "libusb-1.0-0-dev",
+                "libudev-dev"
+            ],
+            "plugs": [
+                "password-manager-service",
+                "raw-usb",
+                "network",
+                "desktop-legacy",
+                "audio-playback",
+                "desktop",
+                "home",
+                "gsettings",
+                "x11",
+                "unity7",
+                { 
+                    "browser-sandbox": {
+                        "interface": "browser-support", 
+                        "allow-sandbox": false
+                    }
+                },
+                "opengl",
+                {
+                    "personal-files": {
+                        "interface": "personal-files",
+                        "write": [
+                            "$HOME/.config/Firefly",
+                            "$HOME/.cache/fontconfig"
+                        ]
+                    }
+                }
+            ]
+        },
         "win": {
             "publisherName": "IOTA Stiftung",
             "target": "nsis",
             "timeStampServer": "http://timestamp.digicert.com"
         },
         "linux": {
-            "target": [
-                "AppImage"
-            ],
+            "target": "snap",
+            "executableName": "firefly-wallet",
             "desktop": {
                 "Name": "Firefly",
                 "Comment": "Desktop wallet for IOTA",
