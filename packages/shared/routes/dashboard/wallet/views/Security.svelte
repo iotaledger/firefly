@@ -6,6 +6,7 @@
     import { activeProfile, profiles } from 'shared/lib/profile'
     import { openPopup } from 'shared/lib/popup'
     import { api } from 'shared/lib/wallet'
+    import { versionDetails } from 'shared/lib/appUpdater'
 
     export let locale
 
@@ -22,16 +23,11 @@
         strongholdStatusMessage = isStrongholdLocked ? 'locked' : 'unlocked'
     }
 
-    // version
-    let currentVersion = '0.0.1' // dummy
-    let upToDate = Math.random() < 0.5 // dummy
-
     function handleSecurityTileClick(popupType) {
         openPopup({
             type: popupType,
             props: {
-                upToDate,
-                currentVersion,
+                currentVersion: $versionDetails.currentVersion,
                 lastBackupDate,
                 lastBackupDateFormatted,
                 isStrongholdLocked: get(activeProfile).isStrongholdLocked,
@@ -61,9 +57,9 @@
     <div class="grid grid-cols-2 gap-2">
         <!-- Firefly version -->
         <SecurityTile
-            title={locale('views.dashboard.security.version.title', { values: { version: currentVersion } })}
-            message={locale(`views.dashboard.security.version.${upToDate ? 'up_to_date' : 'out_of_date'}`)}
-            color={upToDate ? 'green' : 'red'}
+            title={locale('views.dashboard.security.version.title', { values: { version: $versionDetails.currentVersion } })}
+            message={locale(`views.dashboard.security.version.${$versionDetails.upToDate ? 'up_to_date' : 'out_of_date'}`)}
+            color={$versionDetails.upToDate ? 'green' : 'red'}
             icon="firefly"
             onClick={() => handleSecurityTileClick('version')} />
         <!-- Hardware Device -->

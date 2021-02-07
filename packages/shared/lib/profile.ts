@@ -37,7 +37,6 @@ interface ExtendedProfile {
  */
 export interface UserSettings {
     deepLinking: boolean,
-    developerMode: boolean,
     outsourcePow: boolean,
     language: string,
     currency: AvailableExchangeRates,
@@ -99,7 +98,7 @@ export const saveProfile = (profile: Profile): Profile => {
  * 
  * @returns {Profile}
  */
-export const createProfile = (profileName): Profile => {
+export const createProfile = (profileName, isDeveloperProfile): Profile => {
     if (get(profiles).some((profile) => profile.name === profileName)) {
         throw new Error(`Profile with name ${profileName} already exists.`);
     }
@@ -110,11 +109,11 @@ export const createProfile = (profileName): Profile => {
         active: true,
         isStrongholdLocked: true,
         lastStrongholdBackupTime: null,
+        isDeveloperProfile,
         // Settings
         settings: {
             deepLinking: false,
             language: 'en',
-            developerMode: false,
             outsourcePow: false,
             currency: AvailableExchangeRates.USD,
             notifications: true,

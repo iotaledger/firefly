@@ -1,4 +1,4 @@
-<script lang="typescript">
+    <script lang="typescript">
     import { getContext } from 'svelte'
     import { Text, Button, AccountTile } from 'shared/components'
     import { Send, Receive } from '.'

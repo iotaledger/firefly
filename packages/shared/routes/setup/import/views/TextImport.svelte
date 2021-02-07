@@ -27,10 +27,10 @@
             <Text type="h5" classes="mb-4">{locale('views.import_from_text.body_3')}</Text>
             <ImportTextfield bind:value={input} {locale} />
         </div>
-        <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center gap-4">
-            <Button secondary classes="flex-auto" onClick={() => handleBackClick()}>{locale('actions.back')}</Button>
+        <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
+            <Button secondary classes="flex-1" onClick={() => handleBackClick()}>{locale('actions.back')}</Button>
             <!-- TODO: implement real logic here about the input -->
-            <Button classes="flex-auto" disabled={!input || input.length < 10} onClick={() => handleContinueClick()}>
+            <Button classes="flex-1" disabled={!input || input.length < 10} onClick={() => handleContinueClick()}>
                 {locale('actions.continue')}
             </Button>
         </div>
