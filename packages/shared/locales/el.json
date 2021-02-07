@@ -133,15 +133,15 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Help & Information",
+                "title": "Βοήθεια και πληροφορίες",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profile": {
-                "title": "Profile",
+                "title": "Προφίλ",
                 "description": ""
             },
             "sync": {
-                "title": "Sync accounts",
+                "title": "Συγχρονισμός λογαριασμών",
                 "description": ""
             },
             "theme": {
@@ -169,39 +169,39 @@
                 "description": ""
             },
             "changePassword": {
-                "title": "Change password",
+                "title": "Αλλαγή κωδικού",
                 "description": ""
             },
             "resyncAccounts": {
-                "title": "Resync accounts",
+                "title": "Επανα-συγχρωνισμός Λογαριασμών",
                 "description": ""
             },
             "resetWallet": {
-                "title": "Reset wallet",
+                "title": "Επαναφορά Πορτοφολιού",
                 "description": ""
             },
             "deepLinks": {
-                "title": "Deep links",
+                "title": "Απευθείας/Βαθιές συνδέσεις",
                 "description": ""
             },
             "developerMode": {
-                "title": "Developer mode",
+                "title": "Λειτουργία προγραμματιστή",
                 "description": ""
             },
             "nodeSettings": {
-                "title": "Node settings",
+                "title": "Ρυθμίσεις κόμβου",
                 "description": ""
             },
             "proofOfWork": {
-                "title": "Proof of work",
+                "title": "Απόδειξη της εργασίας (Proof of work)",
                 "description": ""
             },
             "errorLog": {
-                "title": "Error log",
+                "title": "Αρχείο Σφαλμάτων",
                 "description": ""
             },
             "stateExport": {
-                "title": "State export",
+                "title": "Εξαγωγή Κατάστασης",
                 "description": ""
             },
             "troubleshoot": {
@@ -226,25 +226,84 @@
             }
         },
         "login": {
-            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "please_wait": "Παρακαλώ περιμένετε {time, plural, one {1 δευτερόλεπτο} other {# δευτερόλεπτα}}",
+            "incorrect_attempts": "{attempts, plural, one {1 εσφαλμένη προσπάθεια} other {# εσφαλμένες προσπάθειες}}"
+        },
+        "dashboard": {
+            "security": {
+                "version": {
+                    "title": "Firefly v{version}",
+                    "up_to_date": "Up to date",
+                    "out_of_date": "Out of date"
+                },
+                "hardware_device": {
+                    "title": "Hardware Device",
+                    "none_detected": "None detected"
+                },
+                "stronghold_status": {
+                    "title": "Stronghold Status",
+                    "locked": "Locked",
+                    "unlocked": "Unlocked"
+                },
+                "stronghold_backup": {
+                    "title": "Stronghold Backup",
+                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                }
+            },
+            "network": {
+                "network_operational": "Network Operational",
+                "network_degraded": "Network Degraded",
+                "network_down": "Network Down",
+                "status": "Status",
+                "messages_per_second": "Messages per second",
+                "confirmation_rate": "Confirmation rate"
+            }
         }
     },
     "popups": {
         "password": {
-            "title": "Password required",
-            "subtitle": "Please provide your wallet’s password to unlock stronghold."
+            "title": "Απαιτείται κωδικός",
+            "subtitle": "Please enter your wallet password to unlock Stronghold"
         },
         "qr": {
-            "title": "Your QR code"
+            "title": "Ο κωδικός QR σας"
+        },
+        "version": {
+            "title": "Current version: {version}",
+            "up_to_date_title": "Firefly is up to date",
+            "up_to_date_description": "You are running the latest and safest version of Firefly.",
+            "update_available": "Firefly update available",
+            "update_details": "Version {version} - {date}"
+        },
+        "backup": {
+            "title": "Last backup: {date}",
+            "last_backup": "You last backed up {date}",
+            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
+            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
+            "not_backed_up": "Not backed up",
+            "not_backed_up_description": "You have not backed up your Stronghold"
+        },
+        "delete_account": {
+            "title": "Delete {name}?",
+            "body": "You will permanently lose your transaction history and maybe something else as well.",
+            "type_password": "Type your wallet’s password to confirm.",
+            "delete_account": "Delete account",
+            "error_title": "Unable to delete {name}",
+            "error_body_1": "To delete an account you must have 0 balance.",
+            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+        },
+        "address_history": {
+            "title": "{name} account address history",
+            "current_balance": "Current balance: {balance}"
         }
     },
     "actions": {
         "continue": "Συνέχεια",
         "back": "Πίσω",
-        "cancel": "Cancel",
-        "close": "Close",
-        "save": "Save",
+        "cancel": "Ακύρωση",
+        "close": "Κλείσιμο",
+        "dismiss": "Dismiss",
+        "save": "Αποθήκευση",
         "import_seed": "Εισαγωγή υφιστάμενου seed",
         "import_wallet": "Εισαγωγή υφιστάμενου πορτοφολιού",
         "create_wallet": "Δημιουργία νέου πορτοφολιού",
@@ -263,7 +322,7 @@
         "import_from_file": "Εισαγωγή από αρχείο",
         "send": "Αποστολή",
         "receive": "Λήψη",
-        "create": "Create",
+        "create": "Δημιουργία",
         "begin_transfer": "Ξεκινήστε την Μεταφορά",
         "try_again": "Προσπαθήστε ξανά",
         "visit_discord": "Επισκεφτείτε το Discord",
@@ -271,34 +330,42 @@
         "import_extentions": "αρχείο .stronghold ή .kdbx",
         "choose_file": "Επιλέξτε αρχείο",
         "drop_here": "Τοποθετήστε το αρχείο σας εδώ",
-        "syncAll": "Sync all",
-        "export": "Export",
-        "exportNewStronghold": "Export a new Stronghold",
-        "enableDeepLinks": "Enable deep links",
-        "enableDeveloperMode": "Enable developer mode",
-        "enableNotifications": "Enable notifications",
-        "exportState": "Export state",
-        "outsourceProofOfWork": "Outsource proof of work",
-        "unlock": "Unlock"
+        "syncAll": "Συγχρονισμός όλων",
+        "export": "Εξαγωγή",
+        "exportNewStronghold": "Εξαγωγή ενός νέου Stronghold",
+        "enableDeepLinks": "Ενεργοποίηση βαθιών συνδέσμων",
+        "enableDeveloperMode": "Ενεργοποίηση λειτουργίας προγραμματιστή",
+        "enableNotifications": "Ενεργοποίηση ειδοποιήσεων",
+        "exportState": "Εξαγωγή κατάστασης",
+        "outsourceProofOfWork": "Ανάθεση λειτουργίας απόδειξης εργασίας (Proof of work)",
+        "unlock": "Ξεκλείδωμα",
+        "update_firefly": "Update Firefly",
+        "save_backup": "Save backup",
+        "customize_account": "Customise account",
+        "sync_account": "Sync account",
+        "view_address_history": "View address history",
+        "delete_account": "Delete account"
     },
     "general": {
         "password": "Κωδικός πρόσβασης",
         "confirm_password": "Επιβεβαίωση κωδικού πρόσβασης",
-        "currentPassword": "Current password",
-        "newPassword": "New password",
-        "confirmNewPassword": "Confirm new password",
+        "currentPassword": "Τρέχων κωδικός",
+        "newPassword": "Νέος κωδικός",
+        "confirmNewPassword": "Επιβεβαίωση νέου κωδικού",
         "your_seed": "Το Seed σας",
         "recovery_phrase": "Φράση ανάκτησης",
         "recent_activity": "Πρόσφατη Δραστηριότητα",
         "sent": "Εστάλη",
         "received": "Ελήφθη",
+        "send_payment": "Send payment",
+        "move_funds": "Move funds",
         "send_funds": "Αποστολή Χρημάτων",
         "send_to_address": "Αποστολή σε μία διεύθυνση",
         "scan_qr_or_paste": "Σαρώστε τον κωδικό QR ή επικολλήστε μια διεύθυνση",
-        "transfer_between_accounts": "Μεταφορά μεταξύ λογαριασμών",
-        "move_funds_between_accounts": "Move funds between accounts",
-        "manage_account": "Manage Account",
-        "customize_account": "Customize your account",
+        "move_funds_between_accounts": "Μετακίνηση κεφαλαίων μεταξύ λογαριασμών",
+        "send_tokens_to_address": "Send tokens to an address",
+        "manage_account": "Διαχείριση λογαριασμού",
+        "customize_account": "Προσαρμόστε το λογαριασμό σας",
         "account": "Λογαριασμός",
         "sending_to_address": "Αποστολή σε διεύθυνση",
         "amount": "Ποσό",
@@ -307,10 +374,11 @@
         "from": "Από",
         "to": "Προς",
         "receive_funds": "Λάβετε χρήματα",
+        "my_address": "My Address",
         "share_address": "Μοιραστείτε μια διεύθυνση",
         "your_address": "Η διεύθυνση σας",
         "generate_new_address": "Δημιουργία νέας διεύθυνσης",
-        "copy_address": "Copy Address",
+        "copy_address": "Αντιγραφή Διεύθυνσης",
         "have_text_backup": "Έχω εφεδρικό αρχείο text",
         "have_file_backup": "Έχω εφεδρικό αρχείο",
         "enter_seed_or_phrase": "Εισάξτε φράση ανάκτησης ή seed",
@@ -323,17 +391,25 @@
         "light_theme": "Φωτεινό θέμα",
         "dark_theme": "Σκοτεινό θέμα",
         "total_balance": "Συνολικό Υπόλοιπο",
+        "account_balance": "Account Balance",
         "incoming": "Εισερχόμενο",
         "outgoing": "Εξερχόμενο",
         "accounts": "Λογαριασμοί",
-        "automaticNodeSelection": "Automatic node selection",
-        "manualNodeSelection": "Manual node selection",
+        "automaticNodeSelection": "Αυτόματη επιλογή κόμβου",
+        "manualNodeSelection": "Μή αυτόματη επιλογή κόμβου/δικτύου",
         "profiles": "Προφίλ",
-        "create_account": "Create an account",
-        "account_name": "Account name",
-        "latest_transactions": "Latest Transactions",
-        "transactions": "Transactions",
+        "create_account": "Δημιουργία λογαριασμού",
+        "account_name": "Όνομα λογαριασμού",
+        "latest_transactions": "Τελευταίες Συναλλαγές",
+        "transactions": "Συναλλαγές",
         "security": "Ασφάλεια",
-        "account_address": "Account Address"
+        "account_address": "Διεύθυνση Λογαριασμού"
+    },
+    "dates": {
+        "today": "Today",
+        "days_ago": "{time, plural, one {# day} other {# days}} ago",
+        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
+        "months_ago": "{time, plural, one {# month} other {# months}} ago",
+        "years_ago": "{time, plural, one {# year} other {# years}} ago"
     }
 }

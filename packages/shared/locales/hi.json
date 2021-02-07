@@ -133,15 +133,15 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Help & Information",
+                "title": "मदद सूचना",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profile": {
-                "title": "Profile",
+                "title": "प्रोफाइल",
                 "description": ""
             },
             "sync": {
-                "title": "Sync accounts",
+                "title": "खाता को सिंक करें",
                 "description": ""
             },
             "theme": {
@@ -169,39 +169,39 @@
                 "description": ""
             },
             "changePassword": {
-                "title": "Change password",
+                "title": "पासवर्ड परिवर्तित करें",
                 "description": ""
             },
             "resyncAccounts": {
-                "title": "Resync accounts",
+                "title": "खाता को फिर से सिंक करें",
                 "description": ""
             },
             "resetWallet": {
-                "title": "Reset wallet",
+                "title": "वॉलेट रिसेट",
                 "description": ""
             },
             "deepLinks": {
-                "title": "Deep links",
+                "title": "डीप लिंक्स",
                 "description": ""
             },
             "developerMode": {
-                "title": "Developer mode",
+                "title": "डेवलपर मोड",
                 "description": ""
             },
             "nodeSettings": {
-                "title": "Node settings",
+                "title": "नोड सेटिंग्स",
                 "description": ""
             },
             "proofOfWork": {
-                "title": "Proof of work",
+                "title": "प्रूफ ऑफ़ वर्क",
                 "description": ""
             },
             "errorLog": {
-                "title": "Error log",
+                "title": "त्रुटि लॉग",
                 "description": ""
             },
             "stateExport": {
-                "title": "State export",
+                "title": "स्टेट एक्सपोर्ट",
                 "description": ""
             },
             "troubleshoot": {
@@ -228,23 +228,82 @@
         "login": {
             "please_wait": "कृपया {time, plural, one {1 सेकंड} other {# सेकंड}} प्रतीक्षा करें",
             "incorrect_attempts": "{attempts, plural, one {1 गलत प्रयास} other {# गलत प्रयास}}"
+        },
+        "dashboard": {
+            "security": {
+                "version": {
+                    "title": "Firefly v{version}",
+                    "up_to_date": "Up to date",
+                    "out_of_date": "Out of date"
+                },
+                "hardware_device": {
+                    "title": "Hardware Device",
+                    "none_detected": "None detected"
+                },
+                "stronghold_status": {
+                    "title": "Stronghold Status",
+                    "locked": "Locked",
+                    "unlocked": "Unlocked"
+                },
+                "stronghold_backup": {
+                    "title": "Stronghold Backup",
+                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                }
+            },
+            "network": {
+                "network_operational": "Network Operational",
+                "network_degraded": "Network Degraded",
+                "network_down": "Network Down",
+                "status": "Status",
+                "messages_per_second": "Messages per second",
+                "confirmation_rate": "Confirmation rate"
+            }
         }
     },
     "popups": {
         "password": {
-            "title": "Password required",
-            "subtitle": "Please provide your wallet’s password to unlock stronghold."
+            "title": "पासवर्ड अपेक्षित है",
+            "subtitle": "Please enter your wallet password to unlock Stronghold"
         },
         "qr": {
-            "title": "Your QR code"
+            "title": "आपका QR कोड"
+        },
+        "version": {
+            "title": "Current version: {version}",
+            "up_to_date_title": "Firefly is up to date",
+            "up_to_date_description": "You are running the latest and safest version of Firefly.",
+            "update_available": "Firefly update available",
+            "update_details": "Version {version} - {date}"
+        },
+        "backup": {
+            "title": "Last backup: {date}",
+            "last_backup": "You last backed up {date}",
+            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
+            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
+            "not_backed_up": "Not backed up",
+            "not_backed_up_description": "You have not backed up your Stronghold"
+        },
+        "delete_account": {
+            "title": "Delete {name}?",
+            "body": "You will permanently lose your transaction history and maybe something else as well.",
+            "type_password": "Type your wallet’s password to confirm.",
+            "delete_account": "Delete account",
+            "error_title": "Unable to delete {name}",
+            "error_body_1": "To delete an account you must have 0 balance.",
+            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+        },
+        "address_history": {
+            "title": "{name} account address history",
+            "current_balance": "Current balance: {balance}"
         }
     },
     "actions": {
         "continue": "जारी रखें",
         "back": "पीछे",
-        "cancel": "Cancel",
-        "close": "Close",
-        "save": "Save",
+        "cancel": "रद्द करें",
+        "close": "बंद करें",
+        "dismiss": "Dismiss",
+        "save": "सेव करें",
         "import_seed": "एक मौजूदा सीड आयात करें",
         "import_wallet": "मौजूदा वॉलेट आयात करें",
         "create_wallet": "नया वॉलेट बनाएं",
@@ -263,7 +322,7 @@
         "import_from_file": "फ़ाइल से आयात करें",
         "send": "भेजें",
         "receive": "प्राप्त करें",
-        "create": "Create",
+        "create": "बनाएं",
         "begin_transfer": "स्थानांतरण शुरू करें",
         "try_again": "फिर कोशिश करें",
         "visit_discord": "डिस्कॉर्ड पर जाएँ",
@@ -271,34 +330,42 @@
         "import_extentions": ".stronghold या .kdbx फाइल",
         "choose_file": "फ़ाइल चुनें",
         "drop_here": "अपनी फाइल को यहां छोड़ें",
-        "syncAll": "Sync all",
-        "export": "Export",
-        "exportNewStronghold": "Export a new Stronghold",
-        "enableDeepLinks": "Enable deep links",
-        "enableDeveloperMode": "Enable developer mode",
-        "enableNotifications": "Enable notifications",
-        "exportState": "Export state",
-        "outsourceProofOfWork": "Outsource proof of work",
-        "unlock": "Unlock"
+        "syncAll": "सभी सिंक करें",
+        "export": "एक्सपोर्ट करे",
+        "exportNewStronghold": "एक नया स्ट्रॉन्गहोल्ड निर्यात करें",
+        "enableDeepLinks": "डीप लिंक्स सक्षम करें",
+        "enableDeveloperMode": "डेवलपर मोड सक्षम करें",
+        "enableNotifications": "नोटिफिकेशंस सक्षम करें",
+        "exportState": "स्थिति निर्यात करें",
+        "outsourceProofOfWork": "आउटसोर्स प्रूफ ऑफ़ वर्क",
+        "unlock": "अनलॉक करें",
+        "update_firefly": "Update Firefly",
+        "save_backup": "Save backup",
+        "customize_account": "Customise account",
+        "sync_account": "Sync account",
+        "view_address_history": "View address history",
+        "delete_account": "Delete account"
     },
     "general": {
         "password": "पासवर्ड",
         "confirm_password": "पासवर्ड की पुष्टि करें",
-        "currentPassword": "Current password",
-        "newPassword": "New password",
-        "confirmNewPassword": "Confirm new password",
+        "currentPassword": "वर्तमान पासवर्ड",
+        "newPassword": "नया पासवर्ड",
+        "confirmNewPassword": "नए पासवर्ड की पुष्टि करें",
         "your_seed": "आपका सीड",
         "recovery_phrase": "पुनर्प्राप्ति वाक्यांश",
         "recent_activity": "हाल की गतिविधि",
         "sent": "भेजे गए",
         "received": "प्राप्त हुआ",
+        "send_payment": "Send payment",
+        "move_funds": "Move funds",
         "send_funds": "धनराशि भेजें",
         "send_to_address": "स्वयं के पते पर भेजा जा रहा है",
         "scan_qr_or_paste": "QR कोड स्कैन करें या एक पता पेस्ट करें",
-        "transfer_between_accounts": "खाते के बीच स्थानांतरण",
-        "move_funds_between_accounts": "Move funds between accounts",
-        "manage_account": "Manage Account",
-        "customize_account": "Customize your account",
+        "move_funds_between_accounts": "अपने खातों के बीच धन ले जाएँ",
+        "send_tokens_to_address": "Send tokens to an address",
+        "manage_account": "खाते का प्रबंधन",
+        "customize_account": "अनुकूलित करें अपना खाता",
         "account": "खाता",
         "sending_to_address": "स्वयं के पते पर भेजा जा रहा है",
         "amount": "रकम",
@@ -307,10 +374,11 @@
         "from": "से",
         "to": "को",
         "receive_funds": "पैसे प्राप्त करे",
+        "my_address": "My Address",
         "share_address": "पता साझा करें",
         "your_address": "आपका पता",
         "generate_new_address": "नया पता उत्पन्न करें",
-        "copy_address": "Copy Address",
+        "copy_address": "पता कॉपी करें",
         "have_text_backup": "मेरे पास एक लिखित में बैकअप है",
         "have_file_backup": "मेरे पास एक फाइल में बैकअप है",
         "enter_seed_or_phrase": "एक पुनर्प्राप्ति वाक्यांश या सीड दर्ज करें",
@@ -323,17 +391,25 @@
         "light_theme": "लाइट थीम",
         "dark_theme": "डार्क थीम",
         "total_balance": "कुल शेष",
+        "account_balance": "Account Balance",
         "incoming": "आने वाला",
         "outgoing": "बाहर जाने वाले",
         "accounts": "खाता",
-        "automaticNodeSelection": "Automatic node selection",
-        "manualNodeSelection": "Manual node selection",
+        "automaticNodeSelection": "स्वचालित नोड चयन",
+        "manualNodeSelection": "मैन्युअली नोड चुनना",
         "profiles": "प्रोफाइल्स",
-        "create_account": "Create an account",
-        "account_name": "Account name",
-        "latest_transactions": "Latest Transactions",
-        "transactions": "Transactions",
+        "create_account": "खाता बनाएं",
+        "account_name": "अकाउंट नाम",
+        "latest_transactions": "नवीनतम ट्रांसक्शन्स",
+        "transactions": "ट्रांसक्शन्स",
         "security": "सुरक्षा",
-        "account_address": "Account Address"
+        "account_address": "खाते का पता"
+    },
+    "dates": {
+        "today": "Today",
+        "days_ago": "{time, plural, one {# day} other {# days}} ago",
+        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
+        "months_ago": "{time, plural, one {# month} other {# months}} ago",
+        "years_ago": "{time, plural, one {# year} other {# years}} ago"
     }
 }

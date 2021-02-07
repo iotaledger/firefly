@@ -4,9 +4,11 @@
     import { Backup, RecoveryPhrase, VerifyRecoveryPhrase, BackupToFile, Success } from './views/'
     import { Transition } from 'shared/components'
     import { mnemonic } from 'shared/lib/app'
+    import { newProfile, saveProfile, updateProfile } from 'shared/lib/profile'
     import { strongholdPassword } from 'shared/lib/app'
     import { api } from 'shared/lib/wallet'
-    import { DEFAULT_NODE as node, DEFAULT_NODES as nodes } from 'shared/lib/network'
+    import { DEFAULT_NODES as nodes } from 'shared/lib/network'
+    import { Network } from 'shared/lib/typings/client'
 
     export let locale
     export let mobile
@@ -58,6 +60,7 @@
                                 return new Promise((res, rej) => {
                                     api.backup(result, {
                                         onSuccess() {
+                                            updateProfile('lastStrongholdBackupTime', new Date())
                                             res()
                                         },
                                         onError(error) {
@@ -86,15 +89,20 @@
                             onSuccess(response) {
                                 api.createAccount(
                                     {
-                                        clientOptions: { node, nodes }
+                                        // TODO: Change to mainnet
+                                        clientOptions: { nodes, network: Network.Testnet }
                                     },
                                     {
                                         onSuccess() {
+                                            saveProfile($newProfile)
+
+                                            newProfile.set(null)
+                                            
                                             dispatch('next')
                                         },
                                         onError() {
                                             // TODO: handle error
-                                            alert('create account error')
+                                            console.error('create account error')
                                         }
                                     }
                                 )

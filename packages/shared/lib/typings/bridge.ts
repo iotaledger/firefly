@@ -3,7 +3,18 @@ import type { Address } from './address'
 import type { AccountIdentifier, Account, SyncedAccount } from './account'
 import type { Message } from './message'
 
+export interface Actor {
+  destroy(): void
+}
+
+export interface CommunicationIds {
+  messageId: string;
+  actorId: string;
+}
+
 export interface BridgeMessage {
+  actorId: string;
+  // TODO: rename to messageId for clarity
   id: string
   cmd: string
   payload?: any
@@ -42,7 +53,11 @@ export enum ResponseTypes {
   StrongholdStatus = 'StrongholdStatus',
   UnusedAddress = 'UnusedAddress',
   IsLatestAddressUnused = 'IsLatestAddressUnused',
-  AreAllLatestAddressesUnused = 'AreAllLatestAddressesUnused'
+  AreAllLatestAddressesUnused = 'AreAllLatestAddressesUnused',
+  UpdatedAlias = 'UpdatedAlias',
+  DeletedStorage = 'DeletedStorage',
+  LockedStronghold = 'LockedStronghold',
+  StrongholdPasswordChanged = 'StrongholdPasswordChanged'
 }
 
 export type Response<T, P> = { id: string; action: string; type: T; payload?: P }
@@ -71,6 +86,10 @@ export type StrongholdStatusResponse = Response<ResponseTypes.StrongholdStatus, 
 export type UnusedAddressResponse = Response<ResponseTypes.UnusedAddress, void>
 export type IsLatestAddressUnusedResponse = Response<ResponseTypes.IsLatestAddressUnused, void>
 export type AreLatestAddressesUnusedResponse = Response<ResponseTypes.AreAllLatestAddressesUnused, void>
+export type SetAliasResponse = Response<ResponseTypes.UpdatedAlias, void>
+export type DeleteStorageResponse = Response<ResponseTypes.DeletedStorage, void>
+export type LockStrongholdResponse = Response<ResponseTypes.LockedStronghold, void>
+export type StrongholdPasswordChangeResponse = Response<ResponseTypes.StrongholdPasswordChanged, void>
 
 export type MessageResponse = RemovedAccountResponse |
   CreatedAccountResponse |
@@ -96,6 +115,10 @@ export type MessageResponse = RemovedAccountResponse |
   UnusedAddressResponse |
   IsLatestAddressUnusedResponse |
   AreLatestAddressesUnusedResponse |
+  SetAliasResponse |
+  DeleteStorageResponse |
+  LockStrongholdResponse |
+  StrongholdStatusResponse |
   // events
   Event<ErrorEventPayload> | Event<BalanceChangeEventPayload> | Event<TransactionEventPayload>
 

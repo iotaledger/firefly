@@ -13,9 +13,9 @@
     "postinstall": "yarn build",
     "pretest": "yarn build:api && yarn neon build --release",
     "build": "npm-run-all -p build:api build:binding",
-    "build:binding": "electron-build-env -- yarn neon build --release",
+    "build:binding": "electron-build-env -- yarn neon build --release && move-file native/index.node ./index.node",
     "build:api": "rimraf ./index.js && rollup -c --silent && yarn generate-declaration",
-    "generate-declaration": "tsc index.ts --declaration --emitDeclarationOnly --outDir dist && move-file dist/bindings/node/index.d.ts dist/index.d.ts && replace --silent '\\.\\.\\/\\.\\.' '.' dist/index.d.ts",
+    "generate-declaration": "tsc index.ts --declaration --emitDeclarationOnly --outDir dist && move-file dist/backend/bindings/node/index.d.ts dist/index.d.ts && replace --silent '\\.\\.\\/\\.\\.' '.' dist/index.d.ts",
     "test": "mocha --timeout 0"
   },
   "devDependencies": {

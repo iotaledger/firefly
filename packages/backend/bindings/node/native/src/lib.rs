@@ -131,7 +131,7 @@ fn listen(mut cx: FunctionContext) -> JsResult<JsUndefined> {
     let id = cx.argument::<JsString>(1)?.value();
     let event_name = cx.argument::<JsString>(2)?.value();
     let event_type: EventType = event_name.as_str().try_into().expect("unknown event name");
-    add_event_listener(actor_id, id, event_type);
+    block_on(add_event_listener(actor_id, id, event_type));
     Ok(cx.undefined())
 }
 

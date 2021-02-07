@@ -1,4 +1,4 @@
-import { BridgeMessage, MessageResponse, CommunicationIds } from '../../api-wrapper/bridge'
+import { BridgeMessage, MessageResponse, CommunicationIds } from '../../../shared/lib/typings/bridge'
 import {
   AccountToCreate,
   AccountIdentifier,
@@ -18,12 +18,13 @@ import {
   latestAddress as _latestAddress,
   syncAccount as _syncAccount,
   isLatestAddressUnused as _isLatestAddressUnused,
-  areLatestAddressesUnused as _areLatestAddressesUnused
-} from '../../api-wrapper/account'
+  areLatestAddressesUnused as _areLatestAddressesUnused,
+  setAlias as _setAlias
+} from '../../../shared/lib/typings/account'
 import {
   Transfer,
   reattach as _reattach
-} from '../../api-wrapper/message'
+} from '../../../shared/lib/typings/message'
 import {
   LoggerConfig,
   backup as _backup,
@@ -34,10 +35,13 @@ import {
   generateMnemonic as _generateMnemonic,
   storeMnemonic as _storeMnemonic,
   verifyMnemonic as _verifyMnemonic,
-  getStrongholdStatus as _getStrongholdStatus
-} from '../../api-wrapper/wallet'
+  getStrongholdStatus as _getStrongholdStatus,
+  removeStorage as _removeStorage,
+  lockStronghold as _lockStronghold,
+  changeStrongholdPassword as _changeStrongholdPassword
+} from '../../../shared/lib/typings/wallet'
 
-const addon = require('../native')
+const addon = require('../index.node')
 const mailbox = []
 const onMessageListeners: ((payload: MessageResponse) => void)[] = []
 
@@ -81,8 +85,14 @@ export function initLogger(config: LoggerConfig) {
 }
 
 export const api = {
+  setAlias: function (accountId: AccountIdentifier, newAccountAlias: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _setAlias(sendMessage, __ids, accountId, newAccountAlias)
+  },
   getStrongholdStatus: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _getStrongholdStatus(sendMessage, __ids)
+  },
+  lockStronghold: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _lockStronghold(sendMessage, __ids)
   },
   generateMnemonic: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _generateMnemonic(sendMessage, __ids)
@@ -150,8 +160,14 @@ export const api = {
   setStrongholdPassword: function (password: string): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _setStrongholdPassword(sendMessage, __ids, password)
   },
+  changeStrongholdPassword: function (currentPassword: string, newPassword: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _changeStrongholdPassword(sendMessage, __ids, { currentPassword, newPassword })
+  },
   setStoragePassword: function (password: string): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _setStoragePassword(sendMessage, __ids, password)
+  },
+  removeStorage: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _removeStorage(sendMessage, __ids)
   },
   send: function (fromAccountId: AccountIdentifier, transfer: Transfer): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _send(sendMessage, __ids, fromAccountId, transfer)

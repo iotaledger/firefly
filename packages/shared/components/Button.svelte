@@ -5,6 +5,7 @@
     export let onClick = () => ''
     export let secondary = false
     export let disabled = false
+    export let warning = false
     export let active = false
     export let icon = undefined
     export let iconReverse = false
@@ -53,6 +54,26 @@
             &.disabled {
                 @apply pointer-events-none;
                 @apply bg-gray-50;
+                span {
+                    @apply text-gray-500;
+                }
+            }
+        }
+        &.warning {
+            @apply bg-red-500;
+            min-width: 100px;
+            span {
+                @apply text-white;
+            }
+            &:hover {
+                @apply bg-red-600;
+            }
+            &:active {
+                @apply bg-red-700;
+            }
+            &.disabled {
+                @apply pointer-events-none;
+                @apply bg-gray-200;
                 span {
                     @apply text-gray-500;
                 }
@@ -152,6 +173,7 @@
         use:bindEvents={events}
         on:click={onClick}
         class:secondary
+        class:warning
         class:small
         class:disabled
         class:with-icon={icon}

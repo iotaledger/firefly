@@ -1,7 +1,8 @@
 <script>
     import { createEventDispatcher } from 'svelte'
-    import { OnboardingLayout, Illustration, Text, Button, Input, Radio } from 'shared/components'
-    import { createProfile, setActiveProfile } from 'shared/lib/app'
+    import { OnboardingLayout, Illustration, Text, Button, Input, Checkbox } from 'shared/components'
+    import { createProfile, setActiveProfile } from 'shared/lib/profile'
+    import { developerMode } from 'shared/lib/app'
     import { initialise, getStoragePath } from 'shared/lib/wallet'
     import { SetupType } from 'shared/lib/router'
 
@@ -10,9 +11,9 @@
 
     const dispatch = createEventDispatcher()
 
+    let isDeveloperProfile = false
     let profileName = ''
-    let mainnet = true
-
+    
     const MAX_PROFILE_NAME_LENGTH = 250
 
     function handleContinueClick(setupType) {
@@ -23,17 +24,19 @@
             console.error('Profile name too long.')
         } else {
             try {
-                profile = createProfile(profileName)
+                profile = createProfile(profileName, isDeveloperProfile)
                 setActiveProfile(profile.id)
 
-                initialise(profile.id, getStoragePath(window['Electron'].getUserDataPath(), profile.name))
-
-                dispatch('next', { setupType })
+                return window['Electron'].getUserDataPath().then((path) => {
+                    initialise(profile.id, getStoragePath(path, profile.name))
+                    dispatch('next', { setupType })
+                })
             } catch (error) {
                 console.error(error)
             }
         }
     }
+
     function handleBackClick() {
         dispatch('previous')
     }
@@ -46,14 +49,15 @@
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-4">{locale('views.setup.title')}</Text>
             <Input bind:value={profileName} placeholder="Profile Name" classes="w-full mb-4" />
-            <Radio value={true} bind:group={mainnet} label="Mainnet Account" classes="mb-4" />
-            <Radio value={false} bind:group={mainnet} label="Testnet Account" classes="mb-4" />
+            {#if $developerMode}
+                <Checkbox label={locale('general.developerProfile')} bind:checked={isDeveloperProfile} />  
+            {/if}
         </div>
-        <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center gap-4">
-            <Button secondary classes="flex-auto" onClick={() => handleContinueClick(SetupType.Import)}>
+        <div slot="leftpane__action" class="flex flex-row flex-wrap items-center space-x-4">
+            <Button secondary classes="flex-1" onClick={() => handleContinueClick(SetupType.Import)}>
                 {locale('actions.import_wallet')}
             </Button>
-            <Button classes="flex-auto" disabled={!profileName} onClick={() => handleContinueClick(SetupType.New)}>
+            <Button classes="flex-1" disabled={!profileName} onClick={() => handleContinueClick(SetupType.New)}>
                 {locale('actions.create_wallet')}
             </Button>
         </div>

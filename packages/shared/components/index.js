@@ -31,6 +31,10 @@ export { default as AccountTile } from './AccountTile.svelte'
 export { default as QR } from './QR.svelte'
 export { default as DashboardPane } from './DashboardPane.svelte'
 export { default as Popup } from './popups/Index.svelte'
+export { default as SecurityTile } from './SecurityTile.svelte'
+export { default as Idle } from './Idle.svelte'
+
+export * from './modals'
 // Charts
 export { default as Chart } from './charts/Index.svelte'
 export { default as ChartOption } from './charts/Option.svelte'

@@ -7,8 +7,7 @@
     $: selected = logos[logo]
 
     const logos = {
-        'logo-firefly-complete-vertical': 'firefly_logo_complete_vertical.svg',
-        'logo-firefly-complete-horizontal': 'firefly_logo_complete_horizontal.svg',
+        'logo-firefly-full': 'firefly_logo_full.svg',
         'logo-firefly': 'firefly_logo.svg',
         'profile-picture': 'profile_picture.svg', // TODO: remove
     }

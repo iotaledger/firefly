@@ -1,0 +1,83 @@
+<script>
+    import { date } from 'svelte-i18n'
+    import { closePopup } from 'shared/lib/popup'
+    import { Text, Button } from 'shared/components'
+
+    import {
+        versionDetails,
+        updateDownload,
+        updateCancel,
+        updateInstall,
+        updateProgress,
+        updateBusy,
+        updateComplete,
+    } from 'shared/lib/appUpdater'
+
+    export let locale
+
+    function handleUpdate() {
+        if ($updateComplete) {
+            updateInstall()
+        } else if (!$updateBusy) {
+            updateDownload()
+        }
+    }
+    function handleCancelClick() {
+        if ($updateBusy) {
+            updateCancel()
+        }
+        closePopup()
+    }
+</script>
+
+<style type="text/scss">
+    img {
+        width: 196px;
+    }
+    .changelog {
+        max-height: 50vh;
+    }
+</style>
+
+<Text type="h4" classes="mb-5">{locale('popups.version.title', { values: { version: $versionDetails.currentVersion } })}</Text>
+<div class="flex w-full flex-row flex-wrap">
+    <div class="w-full p-4 bg-gray-50 flex justify-center content-center">
+        <img src="assets/logos/firefly_logo_full.svg" alt="" />
+    </div>
+    {#if $versionDetails.upToDate}
+        <div class="w-full text-center my-6 px-8">
+            <Text type="h5" highlighted classes="mb-2">{locale('popups.version.up_to_date_title')}</Text>
+            <Text smaller secondary>
+                {locale('popups.version.up_to_date_description', { values: { version: $versionDetails.currentVersion } })}
+            </Text>
+        </div>
+        <div class="flex flex-row justify-center w-full">
+            <Button secondary onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
+        </div>
+    {:else}
+        <div class="my-6">
+            <Text smaller highlighted classes="mb-2">
+                {locale('popups.version.update_available', { values: { version: $versionDetails.currentVersion } })}
+            </Text>
+            <Text type="h5" classes="mb-2">
+                {locale('popups.version.update_details', {
+                    values: {
+                        version: $versionDetails.newVersion,
+                        date: $date($versionDetails.newVersionReleaseDate, { format: 'long' }),
+                    },
+                })}
+            </Text>
+            <div class="changelog overflow-y-auto">
+                <Text secondary classes="whitespace-pre-wrap">{$versionDetails.changelog}</Text>
+            </div>
+        </div>
+        <div class="flex flex-row justify-between space-x-4 w-full px-8">
+            <Button secondary classes="w-1/2" onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
+            <Button classes="w-1/2" onClick={() => handleUpdate()} bind:disabled={$updateBusy}>
+                {
+                    $updateComplete ? locale('actions.install_firefly') :
+                    ($updateBusy ? `${Math.round($updateProgress)}%` : locale('actions.update_firefly'))}
+            </Button>
+        </div>
+    {/if}
+</div>

@@ -1,48 +1,49 @@
-<script lang="typescript">
-    import { createEventDispatcher, getContext } from 'svelte'
+    <script lang="typescript">
+    import { getContext } from 'svelte'
     import { Text, Button, AccountTile } from 'shared/components'
     import { Send, Receive } from '.'
-    import { WalletState } from '../Wallet.svelte'
+    import { selectedAccountId } from 'shared/lib/wallet'
+    import { walletViewState, WalletViewStates, accountViewState, AccountViewStates } from 'shared/lib/router'
 
     export let locale
     export let send
     export let internalTransfer
     export let generateAddress
 
-    const dispatch = createEventDispatcher()
     const accounts = getContext('walletAccounts')
-    const state = getContext('walletState')
 
     function handleAccountClick(accountId) {
-        dispatch('next', { accountId })
+        selectedAccountId.set(accountId)
+        walletViewState.set(WalletViewStates.Account)
+        accountViewState.set(AccountViewStates.Init)
     }
     function handleCreateClick() {
-        dispatch('next', WalletState.CreateAccount)
+        walletViewState.set(WalletViewStates.CreateAccount)
     }
     function handleSendClick() {
-        dispatch('next', WalletState.Send)
+        walletViewState.set(WalletViewStates.Send)
     }
     function handleReceiveClick() {
-        dispatch('next', WalletState.Receive)
+        walletViewState.set(WalletViewStates.Receive)
     }
 </script>
 
-{#if $state === WalletState.Init}
+{#if $walletViewState === WalletViewStates.Init}
     <div class="p-8 pt-4 flex flex-col h-full justify-between">
-        <div data-label="accounts">
+        <div data-label="accounts" class="w-full h-full flex flex-col flex-no-wrap justify-start mb-6">
             <div class="flex flex-row mb-6 justify-between items-center">
                 <Text type="h5">{locale('general.accounts')}</Text>
                 <Button onClick={handleCreateClick} secondary small icon="plus">{locale('actions.create')}</Button>
             </div>
             {#if $accounts.length > 0}
-                <div class="flex flex-row justify-between flex-wrap w-full px-2">
+                <div class="grid grid-cols-{$accounts.length <= 2 ? $accounts.length : '3'} gap-2 w-full flex-auto">
                     {#each $accounts as account}
                         <AccountTile
                             color={account.color}
                             name={account.name}
                             balance={account.balance}
                             balanceEquiv={account.balanceEquiv}
-                            width={$accounts.length === 1 ? `full` : $accounts.length === 2 ? `1/2` : `1/3`}
+                            size={$accounts.length >= 3 ? 's' : $accounts.length === 2 ? 'm' : 'l'}
                             onClick={() => handleAccountClick(account.id)} />
                     {/each}
                 </div>
@@ -54,8 +55,8 @@
             <Button xl secondary icon="transfer" classes="w-1/2" onClick={handleSendClick}>{locale('actions.send')}</Button>
         </div>
     </div>
-{:else if $state === WalletState.Send}
-    <Send on:next on:previous {send} {internalTransfer} {locale} />
-{:else if $state === WalletState.Receive}
-    <Receive on:next on:previous {generateAddress} {locale} />
+{:else if $walletViewState === WalletViewStates.Send}
+    <Send {send} {internalTransfer} {locale} />
+{:else if $walletViewState === WalletViewStates.Receive}
+    <Receive {generateAddress} {locale} />
 {/if}

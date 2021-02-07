@@ -1,36 +1,36 @@
 <script lang="typescript">
+    import { fade } from 'svelte/transition'
     import QR from './QR.svelte'
     import Password from './Password.svelte'
-    import { Text, Icon } from 'shared/components'
+    import Version from './Version.svelte'
+    import Backup from './Backup.svelte'
+    import { Icon } from 'shared/components'
+    import { closePopup } from 'shared/lib/popup'
+    import DeleteAccount from './DeleteAccount.svelte'
+    import AddressHistory from './AddressHistory.svelte'
 
-    export let locale
-    export let active
-    export let type
-    export let title
-    export let subtitle
-    export let qrData
-
-    export let onSuccess
-    export let onError
+    export let locale = 'en'
+    export let type = undefined
+    export let props = undefined
 
     const types = {
         qr: QR,
         password: Password,
+        version: Version,
+        backup: Backup,
+        deleteAccount: DeleteAccount,
+        addressHistory: AddressHistory,
     }
 
     const onkey = (e) => {
         if (e.key === 'Escape') {
-            active = false
+            closePopup()
         }
     }
 </script>
 
 <style type="text/scss">
     popup {
-        &.active {
-            @apply opacity-100;
-            @apply pointer-events-auto;
-        }
         popup-content {
             box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
             width: 100%;
@@ -40,26 +40,14 @@
 </style>
 
 <svelte:window on:keydown={onkey} />
-
 <popup
-    class:active
+    in:fade={{ duration: 100 }}
     class="flex items-center justify-center fixed top-0 left-0 w-screen p-6
-                h-screen overflow-hidden z-10 pointer-events-none opacity-0 
-                bg-gray-800 bg-opacity-40 transition-opacity ">
-    <popup-content class="bg-white rounded-xl pt-6 px-8 pb-14">
-        <div class="w-full mb-10 flex flex-row justify-between items-start">
-            <div>
-                {#if title}
-                    <Text type="h4">{title}</Text>
-                {/if}
-                {#if subtitle}
-                    <Text type="p" secondary>{subtitle}</Text>
-                {/if}
-            </div>
-            <button on:click={() => (active = false)}>
-                <Icon icon="close" classes="text-gray-800" />
-            </button>
-        </div>
-        <svelte:component this={types[type]} data={qrData} {locale} bind:active onSuccess={onSuccess} onError={onError} />
+                h-screen overflow-hidden z-10 bg-gray-800 bg-opacity-40">
+    <popup-content class="bg-white dark:bg-gray-900 rounded-xl pt-6 px-8 pb-14 relative">
+        <button on:click={closePopup} class="absolute top-6 right-8">
+            <Icon icon="close" classes="text-gray-800 dark:text-white" />
+        </button>
+        <svelte:component this={types[type]} {...props} {locale} />
     </popup-content>
 </popup>

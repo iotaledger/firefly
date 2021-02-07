@@ -5,10 +5,10 @@
             "body": "Firefly is a secure and easy-to-use IOTA wallet."
         },
         "legal": {
-            "title": "Legal",
+            "title": "قانوني",
             "body": "Please review the Privacy Policy and Terms of Service.",
             "privacy_policy": {
-                "title": "Privacy Policy",
+                "title": "سياسة الخصوصية",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -17,7 +17,7 @@
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "terms_of_service": {
-                "title": "Terms of Service",
+                "title": "شروط الخدمة",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -28,7 +28,7 @@
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
         "language": {
-            "title": "Language & appearance",
+            "title": "اللغة والمظهر",
             "body": "Choose your wallet’s language and theme"
         },
         "setup": {
@@ -36,7 +36,7 @@
             "body": "You can create a new wallet or import an existing one."
         },
         "password": {
-            "title": "Create a password",
+            "title": "إنشاء كلمة السر",
             "body": "You will be asked to enter your password to send tokens from your wallet. You need a strong password to protect your funds."
         },
         "protect": {
@@ -45,13 +45,13 @@
             "body_2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Set up PIN code",
-            "body_1": "Enter a 6-digit PIN below. You will be asked to enter your pin to login to your wallet.",
-            "body_2": "You can use numbers only."
+            "title": "تعيين رمز PIN",
+            "body_1": "أدخل رقم تعريف شخصي من 6 أرقام أدناه. سوف يطلب منك إدخال رقم التعريف الشخصي لتسجيل الدخول إلى محفظتك.",
+            "body_2": "يمكنك استخدام الأرقام فقط."
         },
         "confirm_pin": {
-            "title": "Verify your PIN code",
-            "body": "Re-enter your PIN code to proceed."
+            "title": "تحقق من رمز PIN الخاص بك",
+            "body": "أعد إدخال رمز PIN الخاص بك للمتابعة."
         },
         "backup": {
             "title": "Back up your wallet",
@@ -137,7 +137,7 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profile": {
-                "title": "Profile",
+                "title": "الملف الشخصي",
                 "description": ""
             },
             "sync": {
@@ -157,7 +157,7 @@
                 "description": ""
             },
             "notifications": {
-                "title": "Notifications",
+                "title": "التنبيهات",
                 "description": ""
             },
             "exportStronghold": {
@@ -169,7 +169,7 @@
                 "description": ""
             },
             "changePassword": {
-                "title": "Change password",
+                "title": "تغيير كلمة المرور",
                 "description": ""
             },
             "resyncAccounts": {
@@ -197,7 +197,7 @@
                 "description": ""
             },
             "errorLog": {
-                "title": "Error log",
+                "title": "سجل الخطأ",
                 "description": ""
             },
             "stateExport": {
@@ -217,7 +217,7 @@
                 "description": ""
             },
             "discord": {
-                "title": "Discord",
+                "title": "ديسكورد",
                 "description": ""
             },
             "about": {
@@ -228,29 +228,88 @@
         "login": {
             "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
             "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+        },
+        "dashboard": {
+            "security": {
+                "version": {
+                    "title": "Firefly v{version}",
+                    "up_to_date": "Up to date",
+                    "out_of_date": "Out of date"
+                },
+                "hardware_device": {
+                    "title": "Hardware Device",
+                    "none_detected": "None detected"
+                },
+                "stronghold_status": {
+                    "title": "Stronghold Status",
+                    "locked": "Locked",
+                    "unlocked": "Unlocked"
+                },
+                "stronghold_backup": {
+                    "title": "Stronghold Backup",
+                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                }
+            },
+            "network": {
+                "network_operational": "Network Operational",
+                "network_degraded": "Network Degraded",
+                "network_down": "Network Down",
+                "status": "Status",
+                "messages_per_second": "Messages per second",
+                "confirmation_rate": "Confirmation rate"
+            }
         }
     },
     "popups": {
         "password": {
             "title": "Password required",
-            "subtitle": "Please provide your wallet’s password to unlock stronghold."
+            "subtitle": "Please enter your wallet password to unlock Stronghold"
         },
         "qr": {
             "title": "Your QR code"
+        },
+        "version": {
+            "title": "Current version: {version}",
+            "up_to_date_title": "Firefly is up to date",
+            "up_to_date_description": "You are running the latest and safest version of Firefly.",
+            "update_available": "Firefly update available",
+            "update_details": "Version {version} - {date}"
+        },
+        "backup": {
+            "title": "Last backup: {date}",
+            "last_backup": "You last backed up {date}",
+            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
+            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
+            "not_backed_up": "Not backed up",
+            "not_backed_up_description": "You have not backed up your Stronghold"
+        },
+        "delete_account": {
+            "title": "Delete {name}?",
+            "body": "You will permanently lose your transaction history and maybe something else as well.",
+            "type_password": "Type your wallet’s password to confirm.",
+            "delete_account": "Delete account",
+            "error_title": "Unable to delete {name}",
+            "error_body_1": "To delete an account you must have 0 balance.",
+            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+        },
+        "address_history": {
+            "title": "{name} account address history",
+            "current_balance": "Current balance: {balance}"
         }
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "cancel": "Cancel",
-        "close": "Close",
-        "save": "Save",
+        "continue": "مواصلة",
+        "back": "الى الخلف",
+        "cancel": "إلغاء",
+        "close": "إغلاق",
+        "dismiss": "Dismiss",
+        "save": "حفظ",
         "import_seed": "Import an existing seed",
         "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
+        "create_wallet": "إنشاء محفظة جديدة",
+        "save_password": "حفظ كلمة المرور",
         "use_biometric": "Use biometric security",
-        "setup_pin": "Set up PIN code",
+        "setup_pin": "تعيين رمز PIN",
         "set_pin": "Set PIN code",
         "confirm_pin": "Confirm PIN code",
         "enter_your_pin": "Enter your PIN",
@@ -266,8 +325,8 @@
         "create": "Create",
         "begin_transfer": "بدء التحويل",
         "try_again": "حاول مرة اخرى",
-        "visit_discord": "Visit Discord",
-        "drag_drop": "Drag & Drop",
+        "visit_discord": "زيارة ديسكورد",
+        "drag_drop": "سحب و إفلات",
         "import_extentions": ".stronghold or .kdbx file",
         "choose_file": "Choose a File",
         "drop_here": "Drop your file here",
@@ -279,7 +338,13 @@
         "enableNotifications": "Enable notifications",
         "exportState": "Export state",
         "outsourceProofOfWork": "Outsource proof of work",
-        "unlock": "Unlock"
+        "unlock": "Unlock",
+        "update_firefly": "Update Firefly",
+        "save_backup": "Save backup",
+        "customize_account": "Customise account",
+        "sync_account": "Sync account",
+        "view_address_history": "View address history",
+        "delete_account": "Delete account"
     },
     "general": {
         "password": "Password",
@@ -292,11 +357,13 @@
         "recent_activity": "Recent Activity",
         "sent": "Sent",
         "received": "Received",
+        "send_payment": "Send payment",
+        "move_funds": "Move funds",
         "send_funds": "Send funds",
         "send_to_address": "Send to an Address",
         "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "transfer_between_accounts": "Transfer Between Accounts",
         "move_funds_between_accounts": "Move funds between accounts",
+        "send_tokens_to_address": "Send tokens to an address",
         "manage_account": "Manage Account",
         "customize_account": "Customize your account",
         "account": "Account",
@@ -307,6 +374,7 @@
         "from": "مِن",
         "to": "الى",
         "receive_funds": "Receive funds",
+        "my_address": "My Address",
         "share_address": "Share an address",
         "your_address": "Your address",
         "generate_new_address": "Generate new address",
@@ -323,6 +391,7 @@
         "light_theme": "Light theme",
         "dark_theme": "Dark theme",
         "total_balance": "Total Balance",
+        "account_balance": "Account Balance",
         "incoming": "الواردة",
         "outgoing": "الصادرة",
         "accounts": "Accounts",
@@ -335,5 +404,12 @@
         "transactions": "Transactions",
         "security": "Security",
         "account_address": "Account Address"
+    },
+    "dates": {
+        "today": "Today",
+        "days_ago": "{time, plural, one {# day} other {# days}} ago",
+        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
+        "months_ago": "{time, plural, one {# month} other {# months}} ago",
+        "years_ago": "{time, plural, one {# year} other {# years}} ago"
     }
 }
