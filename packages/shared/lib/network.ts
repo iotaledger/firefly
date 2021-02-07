@@ -33,8 +33,8 @@ export const network = writable<Network>(Network.Mainnet)
  */
 export const isNewNodeValid = (nodesList: Node[] = null, newNode: Node): boolean => {
 
-    // Remove spaces and trailing slash
-    newNode.url = newNode.url.replace(/ /g, '').replace(/\/$/, '');
+    // Remove spaces, trailing slashes & trailing colons
+    newNode.url = newNode.url.replace(/ /g, '').replace(/[^0-9a-zA-Z]*$/, ''))
 
     // Check if URL is valid
     if (!isValidUrl(newNode.url)) {
@@ -46,6 +46,11 @@ export const isNewNodeValid = (nodesList: Node[] = null, newNode: Node): boolean
     if (!isValidHttpsUrl(newNode.url)) {
         console.error('Node validation error: Only https allowed')
         return false;
+    }
+
+    const hasDefaultHttpsPort = newNode.url.endsWith(':443');
+    if (hasDefaultHttpsPort) {
+        newNode.url = newNode.url.slice(0, -4);
     }
 
     // Check whether the node was already added to the list
