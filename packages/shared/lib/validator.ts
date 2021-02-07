@@ -386,6 +386,7 @@ export default class ValidatorService {
             [ResponseTypes.DeletedStorage]: this.createBaseValidator().getFirst(),
             [ResponseTypes.LockedStronghold]: this.createBaseValidator().getFirst(),
             [ResponseTypes.StrongholdPasswordChanged]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.RemovedAccount]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.Error]: this.createBaseValidator().getFirst(),
         };
     }

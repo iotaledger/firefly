@@ -11,6 +11,7 @@
     import { popupState } from 'shared/lib/popup'
     import { requestMnemonic } from 'shared/lib/wallet'
     import { Route, Toggle, Popup } from 'shared/components'
+    import { refreshVersionDetails } from 'shared/lib/appUpdater'
     import {
         Splash,
         Welcome,
@@ -41,6 +42,7 @@
 
         await fetchMarketData()
         await pollNetworkStatus()
+        await refreshVersionDetails();
     })
 </script>
 

@@ -7,26 +7,42 @@
 
     export let locale
     export let account
+    export let deleteAccount = (selectedAccountId) => {}
+    export let hasMultipleAccounts
 
     $: canDelete = $account.rawIotaBalance == 0
 
     let password
 
     function handleDeleteClick() {
-        api.setStrongholdPassword(password, {
-            onSuccess(response) {
-                // 1. Delete account
-                // 2. Close popup
-                closePopup()
-                // 3. Go to main dashboard
-                selectedAccountId.set(null)
-                accountViewState.set(AccountViewStates.Init)
-                walletViewState.set(WalletViewStates.Init)
-            },
-            onError(error) {
-                console.error(error)
-            },
-        })
+        if (hasMultipleAccounts) {
+            api.setStrongholdPassword(password, {
+                onSuccess() {
+                    api.removeAccount($selectedAccountId, {
+                        onSuccess() {
+                            // 1. Close popup
+                            closePopup()
+
+                            // 2. Remove account from walletAccounts
+                            deleteAccount($selectedAccountId)
+
+                            // 3. Go to main dashboard
+                            selectedAccountId.set(null)
+                            accountViewState.set(AccountViewStates.Init)
+                            walletViewState.set(WalletViewStates.Init)
+                        },
+                        onError(error) {
+                            console.error(error)
+                        },
+                    })
+                },
+                onError(error) {
+                    console.error(error)
+                },
+            })
+        } else {
+            console.error('Cannot allow account deletion.')
+        }
     }
     function handleMoveFundsClick() {
         closePopup()
