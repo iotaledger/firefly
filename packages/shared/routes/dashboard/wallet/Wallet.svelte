@@ -182,7 +182,6 @@
 
                 accounts.update((storedAccounts) => {
                     return storedAccounts.map((storedAccount) => {
-                        // TODO: SyncAccounts response should have "id" instead of "accountId" (for consistency)
                         const syncedAccount = syncedAccounts.find((_account) => _account.id === storedAccount.id)
 
                         return Object.assign({}, storedAccount, {
