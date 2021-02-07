@@ -3,24 +3,29 @@
     import { closePopup } from 'shared/lib/popup'
     import { Text, Button } from 'shared/components'
 
-    export let locale
-    export let currentVersion
-    export let upToDate
+    import {
+        versionDetails,
+        updateDownload,
+        updateCancel,
+        updateInstall,
+        updateProgress,
+        updateBusy,
+        updateComplete,
+    } from 'shared/lib/appUpdater'
 
-    let newVersion = '3.45' // dummy
-    let newVersionReleaseDate = new Date() // dummy
-    let changelog = `Fix: Bugs that prevent some transactions from confirming (#3039)
-    Fix: Poll for value transfers before data (#3039)
-    Fix: Add polling errors to the error log (#2987)
-    Fix: Crash when app returns from background on Android (#2982)
-    Fix: Crash while polling on Android (#2986)
-    Fix: Fingerprint scanner crash on Android (#2983)
-    Fix: Incorrect progress bar steps and translation not available displayed on send (#3020)` //dummy
+    export let locale
 
     function handleUpdate() {
-        closePopup()
+        if ($updateComplete) {
+            updateInstall()
+        } else if (!$updateBusy) {
+            updateDownload()
+        }
     }
     function handleCancelClick() {
+        if ($updateBusy) {
+            updateCancel()
+        }
         closePopup()
     }
 </script>
@@ -34,16 +39,16 @@
     }
 </style>
 
-<Text type="h4" classes="mb-5">{locale('popups.version.title', { values: { version: currentVersion } })}</Text>
+<Text type="h4" classes="mb-5">{locale('popups.version.title', { values: { version: $versionDetails.currentVersion } })}</Text>
 <div class="flex w-full flex-row flex-wrap">
     <div class="w-full p-4 bg-gray-50 flex justify-center content-center">
         <img src="assets/logos/firefly_logo_full.svg" alt="" />
     </div>
-    {#if upToDate}
+    {#if $versionDetails.upToDate}
         <div class="w-full text-center my-6 px-8">
             <Text type="h5" highlighted classes="mb-2">{locale('popups.version.up_to_date_title')}</Text>
             <Text smaller secondary>
-                {locale('popups.version.up_to_date_description', { values: { version: currentVersion } })}
+                {locale('popups.version.up_to_date_description', { values: { version: $versionDetails.currentVersion } })}
             </Text>
         </div>
         <div class="flex flex-row justify-center w-full">
@@ -52,20 +57,27 @@
     {:else}
         <div class="my-6">
             <Text smaller highlighted classes="mb-2">
-                {locale('popups.version.update_available', { values: { version: currentVersion } })}
+                {locale('popups.version.update_available', { values: { version: $versionDetails.currentVersion } })}
             </Text>
             <Text type="h5" classes="mb-2">
                 {locale('popups.version.update_details', {
-                    values: { version: newVersion, date: $date(newVersionReleaseDate, { format: 'long' }) },
+                    values: {
+                        version: $versionDetails.newVersion,
+                        date: $date($versionDetails.newVersionReleaseDate, { format: 'long' }),
+                    },
                 })}
             </Text>
             <div class="changelog overflow-y-auto">
-                <Text secondary classes="whitespace-pre-wrap">{changelog}</Text>
+                <Text secondary classes="whitespace-pre-wrap">{$versionDetails.changelog}</Text>
             </div>
         </div>
         <div class="flex flex-row justify-between space-x-4 w-full px-8">
             <Button secondary classes="w-1/2" onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
-            <Button classes="w-1/2" onClick={() => handleUpdate()}>{locale('actions.update_firefly')}</Button>
+            <Button classes="w-1/2" onClick={() => handleUpdate()} bind:disabled={$updateBusy}>
+                {
+                    $updateComplete ? locale('actions.install_firefly') :
+                    ($updateBusy ? `${Math.round($updateProgress)}%` : locale('actions.update_firefly'))}
+            </Button>
         </div>
     {/if}
 </div>

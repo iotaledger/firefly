@@ -46,3 +46,8 @@ export const sendParams = writable<SendParams>({ amount: 0, address: '', message
  * Dummy
  */
 export const logged = persistent<boolean>('logged', false)
+
+/**
+ * Determines if user can make developer profiles
+ */
+export const developerMode = persistent<boolean>('developerMode', false)
