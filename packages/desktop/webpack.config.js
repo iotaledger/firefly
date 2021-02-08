@@ -99,11 +99,7 @@ const rendererRules = [
 
 /// ------------------------ Plugins ------------------------
 
-const mainPlugins = [
-  new DefinePlugin({
-    devMode: JSON.stringify(mode === 'development')
-  })
-]
+const mainPlugins = []
 
 const rendererPlugins = [
   new CopyPlugin({
@@ -164,6 +160,9 @@ module.exports = [
     },
     mode,
     plugins: mainPlugins,
-    devtool: prod ? false : 'cheap-module-source-map'
+    devtool: prod ? false : 'cheap-module-source-map',
+    optimization: {
+      nodeEnv: false
+    }
   }
 ]
