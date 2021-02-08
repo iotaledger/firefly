@@ -34,7 +34,7 @@ export const network = writable<Network>(Network.Mainnet)
 export const isNewNodeValid = (nodesList: Node[] = null, newNode: Node): boolean => {
 
     // Remove spaces, trailing slashes & trailing colons
-    newNode.url = newNode.url.replace(/ /g, '').replace(/[^0-9a-zA-Z]*$/, ''))
+    newNode.url = newNode.url.replace(/ /g, '').replace(/[^0-9a-zA-Z]*$/, '')
 
     // Check if URL is valid
     if (!isValidUrl(newNode.url)) {
