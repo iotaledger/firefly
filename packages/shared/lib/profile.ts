@@ -71,6 +71,10 @@ export const activeProfile = derived([profiles, newProfile], ([$profiles, $newPr
     })
 )
 
+activeProfile.subscribe(profile => {
+    window['Electron'].updateActiveProfile(profile ? profile.id : null)
+})
+
 /**
  * Saves profile in persistent storage
  * 
