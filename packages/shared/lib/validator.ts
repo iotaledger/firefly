@@ -634,6 +634,7 @@ export default class ValidatorService {
         this.ids = ids
 
         this.validators = {
+            [ResponseTypes.InvalidMessage]: this.createBaseValidator().add(new PayloadTypeValidator('object')).getFirst(),
             [ResponseTypes.StrongholdPasswordSet]: this.createBaseValidator().getFirst(),
             [ResponseTypes.RemovedAccount]: this.createBaseValidator().add(new PayloadTypeValidator('string')).getFirst(),
             [ResponseTypes.CreatedAccount]: this.createBaseValidator().add(new AccountValidator()).getFirst(),
