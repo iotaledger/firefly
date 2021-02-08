@@ -3,7 +3,7 @@ const PincodeManager = require('../libs/pincodeManager');
 const DeepLinkManager = require('../libs/deepLinkManager');
 const NotificationManager = require('../libs/notificationManager');
 const { ipcRenderer, contextBridge } = require('electron');
-const { proxyApi }  = require('../../shared/lib/wallet-api');
+const { proxyApi }  = require('../../shared/lib/walletApi');
 
 let activeProfileId = null
 
