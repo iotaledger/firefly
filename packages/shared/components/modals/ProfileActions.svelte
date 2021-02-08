@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { get } from 'svelte/store';
+    import { get } from 'svelte/store'
     import { fade } from 'svelte/transition'
     import { Text, Icon, Modal } from 'shared/components'
     import { activeProfile } from 'shared/lib/profile'

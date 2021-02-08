@@ -13,7 +13,7 @@
 
     let isDeveloperProfile = false
     let profileName = ''
-    
+
     const MAX_PROFILE_NAME_LENGTH = 250
 
     function handleContinueClick(setupType) {
@@ -50,7 +50,7 @@
             <Text type="h2" classes="mb-4">{locale('views.setup.title')}</Text>
             <Input bind:value={profileName} placeholder="Profile Name" classes="w-full mb-4" />
             {#if $developerMode}
-                <Checkbox label={locale('general.developerProfile')} bind:checked={isDeveloperProfile} />  
+                <Checkbox label={locale('general.developerProfile')} bind:checked={isDeveloperProfile} />
             {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap items-center space-x-4">

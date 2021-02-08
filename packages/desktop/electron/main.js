@@ -1,14 +1,14 @@
 const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
 const path = require('path')
 const Keychain = require('./keychain')
-const { initAutoUpdate } = require("./appUpdater")
+const { initAutoUpdate } = require('./appUpdater')
 
 /**
  * Set AppUserModelID for Windows notifications functionallity
  */
-app.setAppUserModelId('org.iota.firefly');
+app.setAppUserModelId('org.iota.firefly')
 
-/** 
+/**
  * Terminate application if Node remote debugging detected
  */
 const argv = process.argv.join()
@@ -39,10 +39,9 @@ const windows = {
  */
 const devMode = process.env.NODE_ENV === 'development'
 
-
 let paths = {
-    preload: "",
-    html: "",
+    preload: '',
+    html: '',
 }
 
 if (app.isPackaged) {
@@ -50,8 +49,8 @@ if (app.isPackaged) {
     paths.html = path.join(app.getAppPath(), '/public/index.html')
 } else {
     // __dirname is desktop/public/build
-    paths.preload =  path.join(__dirname, 'preload.js')
-    paths.html =  path.join(__dirname, '../index.html')
+    paths.preload = path.join(__dirname, 'preload.js')
+    paths.html = path.join(__dirname, '../index.html')
 }
 
 /**
@@ -96,7 +95,7 @@ function createWindow() {
     })
 
     if (!devMode) {
-        initAutoUpdate(windows.main);
+        initAutoUpdate(windows.main)
     }
 
     if (devMode) {

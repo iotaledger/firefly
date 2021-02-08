@@ -5,71 +5,71 @@ import type { Message } from './message'
 import type { StrongholdStatus } from './wallet'
 
 export interface Actor {
-  destroy(): void
+    destroy(): void
 }
 
 export interface CommunicationIds {
-  messageId: string;
-  actorId: string;
+    messageId: string
+    actorId: string
 }
 
 export interface BridgeMessage {
-  actorId: string;
-  // TODO: rename to messageId for clarity
-  id: string
-  cmd: string
-  payload?: any
+    actorId: string
+    // TODO: rename to messageId for clarity
+    id: string
+    cmd: string
+    payload?: any
 }
 
 export enum ResponseTypes {
-  RemovedAccount = 'RemovedAccount',
-  CreatedAccount = 'CreatedAccount',
-  ReadAccount = 'ReadAccount',
-  ReadAccounts = 'ReadAccounts',
-  Messages = 'Messages',
-  Addresses = 'Addresses',
-  GeneratedAddress = 'GeneratedAddress',
-  LatestAddress = 'LatestAddress',
-  Balance = 'Balance',
-  SyncedAccounts = 'SyncedAccounts',
-  SyncedAccount = 'SyncedAccount',
-  Reattached = 'Reattached',
-  BackupSuccessful = 'BackupSuccessful',
-  BackupRestored = 'BackupRestored',
-  StrongholdPasswordSet = 'StrongholdPasswordSet',
-  SentTransfer = 'SentTransfer',
-  Error = 'Error',
-  Panic = 'Panic',
-  ErrorThrown = 'ErrorThrown',
-  BalanceChange = 'BalanceChange',
-  NewTransaction = 'NewTransaction',
-  ConfirmationStateChange = 'ConfirmationStateChange',
-  Reattachment = 'Reattachment',
-  Broadcast = 'Broadcast',
-  StrongholdStatusChange = 'StrongholdStatusChange',
-  GeneratedMnemonic = 'GeneratedMnemonic',
-  StoredMnemonic = 'StoredMnemonic',
-  VerifiedMnemonic = 'VerifiedMnemonic',
-  StoragePasswordSet = 'StoragePasswordSet',
-  StrongholdStatus = 'StrongholdStatus',
-  UnusedAddress = 'UnusedAddress',
-  IsLatestAddressUnused = 'IsLatestAddressUnused',
-  AreAllLatestAddressesUnused = 'AreAllLatestAddressesUnused',
-  UpdatedAlias = 'UpdatedAlias',
-  DeletedStorage = 'DeletedStorage',
-  LockedStronghold = 'LockedStronghold',
-  StrongholdPasswordChanged = 'StrongholdPasswordChanged',
-  UpdatedAllClientOptions = 'UpdatedAllClientOptions'
+    RemovedAccount = 'RemovedAccount',
+    CreatedAccount = 'CreatedAccount',
+    ReadAccount = 'ReadAccount',
+    ReadAccounts = 'ReadAccounts',
+    Messages = 'Messages',
+    Addresses = 'Addresses',
+    GeneratedAddress = 'GeneratedAddress',
+    LatestAddress = 'LatestAddress',
+    Balance = 'Balance',
+    SyncedAccounts = 'SyncedAccounts',
+    SyncedAccount = 'SyncedAccount',
+    Reattached = 'Reattached',
+    BackupSuccessful = 'BackupSuccessful',
+    BackupRestored = 'BackupRestored',
+    StrongholdPasswordSet = 'StrongholdPasswordSet',
+    SentTransfer = 'SentTransfer',
+    Error = 'Error',
+    Panic = 'Panic',
+    ErrorThrown = 'ErrorThrown',
+    BalanceChange = 'BalanceChange',
+    NewTransaction = 'NewTransaction',
+    ConfirmationStateChange = 'ConfirmationStateChange',
+    Reattachment = 'Reattachment',
+    Broadcast = 'Broadcast',
+    StrongholdStatusChange = 'StrongholdStatusChange',
+    GeneratedMnemonic = 'GeneratedMnemonic',
+    StoredMnemonic = 'StoredMnemonic',
+    VerifiedMnemonic = 'VerifiedMnemonic',
+    StoragePasswordSet = 'StoragePasswordSet',
+    StrongholdStatus = 'StrongholdStatus',
+    UnusedAddress = 'UnusedAddress',
+    IsLatestAddressUnused = 'IsLatestAddressUnused',
+    AreAllLatestAddressesUnused = 'AreAllLatestAddressesUnused',
+    UpdatedAlias = 'UpdatedAlias',
+    DeletedStorage = 'DeletedStorage',
+    LockedStronghold = 'LockedStronghold',
+    StrongholdPasswordChanged = 'StrongholdPasswordChanged',
+    UpdatedAllClientOptions = 'UpdatedAllClientOptions',
 }
 
 export enum Actions {
-  RemoveAccount = 'RemoveAccount'
+    RemoveAccount = 'RemoveAccount',
 }
 
 export type Response<T, P> = { id: string; action: Actions; type: T; payload?: P }
 export type RemovedAccountResponse = Response<ResponseTypes.RemovedAccount, AccountIdentifier>
 export type CreatedAccountResponse = Response<ResponseTypes.CreatedAccount, Account>
-export type ReadAccountResponse = Response<ResponseTypes.ReadAccount, Account> 
+export type ReadAccountResponse = Response<ResponseTypes.ReadAccount, Account>
 export type ReadAccountsResponse = Response<ResponseTypes.ReadAccounts, Account[]>
 export type ListMessagesResponse = Response<ResponseTypes.Messages, Message[]>
 export type ListAddressesResponse = Response<ResponseTypes.Addresses, Address[]>
@@ -99,38 +99,41 @@ export type LockStrongholdResponse = Response<ResponseTypes.LockedStronghold, vo
 export type StrongholdPasswordChangeResponse = Response<ResponseTypes.StrongholdPasswordChanged, void>
 export type UpdatedAllClientOptions = Response<ResponseTypes.UpdatedAllClientOptions, void>
 
-export type MessageResponse = RemovedAccountResponse |
-  CreatedAccountResponse |
-  ReadAccountResponse |
-  ReadAccountsResponse |
-  ListMessagesResponse |
-  ListAddressesResponse |
-  GeneratedAddressResponse |
-  LatestAddressResponse |
-  BalanceResponse |
-  SyncAccountsResponse |
-  SyncAccountResponse |
-  ReattachResponse |
-  BackupSuccessfulResponse |
-  BackupRestoredResponse |
-  SetStrongholdPasswordResponse |
-  SentTransferResponse |
-  ErrorResponse |
-  PanicResponse |
-  GenerateMnemonicResponse |
-  StoreMnemonicResponse |
-  VerifyMnemonicResponse |
-  SetStoragePasswordResponse |
-  StrongholdStatusResponse |
-  UnusedAddressResponse |
-  IsLatestAddressUnusedResponse |
-  AreLatestAddressesUnusedResponse |
-  SetAliasResponse |
-  DeleteStorageResponse |
-  LockStrongholdResponse |
-  StrongholdStatusResponse |
-  UpdatedAllClientOptions |
-  // events
-  Event<ErrorEventPayload> | Event<BalanceChangeEventPayload> | Event<TransactionEventPayload>
+export type MessageResponse =
+    | RemovedAccountResponse
+    | CreatedAccountResponse
+    | ReadAccountResponse
+    | ReadAccountsResponse
+    | ListMessagesResponse
+    | ListAddressesResponse
+    | GeneratedAddressResponse
+    | LatestAddressResponse
+    | BalanceResponse
+    | SyncAccountsResponse
+    | SyncAccountResponse
+    | ReattachResponse
+    | BackupSuccessfulResponse
+    | BackupRestoredResponse
+    | SetStrongholdPasswordResponse
+    | SentTransferResponse
+    | ErrorResponse
+    | PanicResponse
+    | GenerateMnemonicResponse
+    | StoreMnemonicResponse
+    | VerifyMnemonicResponse
+    | SetStoragePasswordResponse
+    | StrongholdStatusResponse
+    | UnusedAddressResponse
+    | IsLatestAddressUnusedResponse
+    | AreLatestAddressesUnusedResponse
+    | SetAliasResponse
+    | DeleteStorageResponse
+    | LockStrongholdResponse
+    | StrongholdStatusResponse
+    | UpdatedAllClientOptions
+    // events
+    | Event<ErrorEventPayload>
+    | Event<BalanceChangeEventPayload>
+    | Event<TransactionEventPayload>
 
 export type Bridge = (message: BridgeMessage) => Promise<string>

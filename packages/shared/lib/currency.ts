@@ -49,7 +49,7 @@ export enum AvailableExchangeRates {
     THB = 'THB',
     TRY = 'TRY',
     USD = 'USD',
-    ZAR = 'ZAR'
+    ZAR = 'ZAR',
 }
 
 export type ExchangeRates = {
@@ -137,15 +137,15 @@ export const currencies = writable<Currencies>({} as Currencies)
 
 /**
  * Converts iotas to fiat equivalent
- * 
+ *
  * @method convertToFiat
- * 
- * @param {number} amount 
- * @param {number} usdPrice 
+ *
+ * @param {number} amount
+ * @param {number} usdPrice
  * @param {number} conversionRate
- * 
- * @returns {number} 
+ *
+ * @returns {number}
  */
 export const convertToFiat = (amount: number, usdPrice: number, conversionRate: number): number => {
-    return +(((amount * usdPrice) / 1000000) * conversionRate).toFixed(2);
-};
+    return +(((amount * usdPrice) / 1000000) * conversionRate).toFixed(2)
+}

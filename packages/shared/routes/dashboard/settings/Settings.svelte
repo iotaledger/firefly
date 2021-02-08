@@ -28,7 +28,7 @@
 
 <div class="w-full h-full px-16 py-12 flex flex-1 bg-white">
     {#if $route}
-        <SettingsViewer {mobile} {locale} navigate={navigate} />
+        <SettingsViewer {mobile} {locale} {navigate} />
     {:else}
         <SettingsHome {mobile} {locale} />
     {/if}

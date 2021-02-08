@@ -74,9 +74,7 @@
         <div class="flex flex-row justify-between space-x-4 w-full px-8">
             <Button secondary classes="w-1/2" onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
             <Button classes="w-1/2" onClick={() => handleUpdate()} bind:disabled={$updateBusy}>
-                {
-                    $updateComplete ? locale('actions.install_firefly') :
-                    ($updateBusy ? `${Math.round($updateProgress)}%` : locale('actions.update_firefly'))}
+                {$updateComplete ? locale('actions.install_firefly') : $updateBusy ? `${Math.round($updateProgress)}%` : locale('actions.update_firefly')}
             </Button>
         </div>
     {/if}

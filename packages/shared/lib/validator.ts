@@ -6,16 +6,17 @@ import type { StrongholdStatus } from './typings/wallet'
 import type { Address } from './typings/address'
 import type { MarketDataValidationResponse } from 'shared/lib/marketData'
 
-type Validators = IdValidator |
-    ActionValidator |
-    PayloadTypeValidator |
-    AccountValidator |
-    AccountListValidator |
-    SyncedAccountValidator |
-    SyncedAccountListValidator |
-    MessageValidator |
-    StrongholdStatusValidator |
-    AddressValidator;
+type Validators =
+    | IdValidator
+    | ActionValidator
+    | PayloadTypeValidator
+    | AccountValidator
+    | AccountListValidator
+    | SyncedAccountValidator
+    | SyncedAccountListValidator
+    | MessageValidator
+    | StrongholdStatusValidator
+    | AddressValidator
 
 export enum ErrorTypes {
     UnknownId = 'UnknownId',
@@ -32,7 +33,6 @@ type ValidationResponse = {
     isValid: boolean
     error: ErrorObject
 }
-
 
 class Validator {
     nextValidator: Validators
@@ -200,21 +200,21 @@ class PayloadTypeValidator extends Validator {
 class AccountListValidator extends Validator {
     /**
      * Checks if response is valid
-     * 
+     *
      * @method isValid
-     * 
+     *
      * @param {MessageResponse} response
-     * 
+     *
      * @returns {ValidationResponse}
      */
     isValid(response: MessageResponse): ValidationResponse {
-        const payload = response.payload as Account[];
+        const payload = response.payload as Account[]
 
         if (!Array.isArray(payload)) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
-                error: 'Invalid type of accounts received.'
-            });
+                error: 'Invalid type of accounts received.',
+            })
         }
 
         for (const account of payload) {
@@ -222,14 +222,14 @@ class AccountListValidator extends Validator {
                 id: response.id,
                 action: response.action,
                 type: response.type,
-                payload: account as any
+                payload: account as any,
             })
             if (!validationResponse.isValid) {
                 return validationResponse
             }
         }
 
-        return super.isValid(response);
+        return super.isValid(response)
     }
 }
 
@@ -239,21 +239,21 @@ class AccountListValidator extends Validator {
 class SyncedAccountListValidator extends Validator {
     /**
      * Checks if response is valid
-     * 
+     *
      * @method isValid
-     * 
+     *
      * @param {MessageResponse} response
-     * 
+     *
      * @returns {ValidationResponse}
      */
     isValid(response: MessageResponse): ValidationResponse {
-        const payload = response.payload as Account[];
+        const payload = response.payload as Account[]
 
         if (!Array.isArray(payload)) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
-                error: 'Invalid type of synced accounts received.'
-            });
+                error: 'Invalid type of synced accounts received.',
+            })
         }
 
         for (const account of payload) {
@@ -261,7 +261,7 @@ class SyncedAccountListValidator extends Validator {
                 id: response.id,
                 action: response.action,
                 type: response.type,
-                payload: account as any
+                payload: account as any,
             })
 
             if (!validationResponse.isValid) {
@@ -269,7 +269,7 @@ class SyncedAccountListValidator extends Validator {
             }
         }
 
-        return super.isValid(response);
+        return super.isValid(response)
     }
 }
 
@@ -292,8 +292,8 @@ class SyncedAccountValidator extends Validator {
         if ('string' !== typeof payload.id) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
-                error: 'Invalid type of id received.'
-            });
+                error: 'Invalid type of id received.',
+            })
         } else if ('object' !== typeof payload.depositAddress) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
@@ -339,8 +339,8 @@ class AccountValidator extends Validator {
         if ('string' !== typeof payload.id) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
-                error: 'Invalid type of id received.'
-            });
+                error: 'Invalid type of id received.',
+            })
         } else if ('string' !== typeof payload.alias) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
@@ -388,8 +388,8 @@ class MessageValidator extends Validator {
         if ('string' !== typeof payload.id) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
-                error: 'Invalid type of id received.'
-            });
+                error: 'Invalid type of id received.',
+            })
         } else if ('boolean' !== typeof payload.broadcasted) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
@@ -450,8 +450,8 @@ class AddressValidator extends Validator {
         if ('string' !== typeof payload.address) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
-                error: 'Invalid type of address received.'
-            });
+                error: 'Invalid type of address received.',
+            })
         } else if ('number' !== typeof payload.balance) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
@@ -519,8 +519,8 @@ class StrongholdStatusValidator extends Validator {
         if ('Locked' !== payload.snapshot.status && 'Unlocked' !== payload.snapshot.status) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
-                error: 'Invalid type of status received.'
-            });
+                error: 'Invalid type of status received.',
+            })
         }
 
         return super.isValid(response)
@@ -552,22 +552,22 @@ class TypeValidator extends Validator {
         }
 
         const getValues = (obj, results = []) => {
-            const r = results;
+            const r = results
 
             const values = Array.isArray(obj) ? obj : Object.values(obj)
 
-            values.forEach(value => {
+            values.forEach((value) => {
                 if ('object' !== typeof value) {
-                    r.push(value);
+                    r.push(value)
                 }
 
                 if (value && 'object' === typeof value) {
-                    getValues(value, r);
+                    getValues(value, r)
                 }
-            });
+            })
 
-            return r;
-        };
+            return r
+        }
 
         const responseValues = getValues(response)
 
@@ -634,61 +634,31 @@ export default class ValidatorService {
         this.ids = ids
 
         this.validators = {
-            [ResponseTypes.StrongholdPasswordSet]: this.createBaseValidator()
-                .getFirst(),
-            [ResponseTypes.RemovedAccount]: this.createBaseValidator()
-                .add(new PayloadTypeValidator('string'))
-                .getFirst(),
-            [ResponseTypes.CreatedAccount]: this.createBaseValidator()
-                .add(new AccountValidator())
-                .getFirst(),
-            [ResponseTypes.ReadAccounts]: this.createBaseValidator()
-                .add(new AccountListValidator())
-                .getFirst(),
-            [ResponseTypes.Balance]: this.createBaseValidator()
-                .add(new PayloadTypeValidator('object'))
-                .getFirst(),
-            [ResponseTypes.BackupRestored]: this.createBaseValidator()
-                .getFirst(),
-            [ResponseTypes.BackupSuccessful]: this.createBaseValidator()
-                .getFirst(),
+            [ResponseTypes.StrongholdPasswordSet]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.RemovedAccount]: this.createBaseValidator().add(new PayloadTypeValidator('string')).getFirst(),
+            [ResponseTypes.CreatedAccount]: this.createBaseValidator().add(new AccountValidator()).getFirst(),
+            [ResponseTypes.ReadAccounts]: this.createBaseValidator().add(new AccountListValidator()).getFirst(),
+            [ResponseTypes.Balance]: this.createBaseValidator().add(new PayloadTypeValidator('object')).getFirst(),
+            [ResponseTypes.BackupRestored]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.BackupSuccessful]: this.createBaseValidator().getFirst(),
             [ResponseTypes.GeneratedMnemonic]: this.createBaseValidator()
                 .add(new PayloadTypeValidator('string'))
                 .add(new MnemonicValidator())
                 .getFirst(),
-            [ResponseTypes.StoredMnemonic]: this.createBaseValidator()
-                .getFirst(),
-            [ResponseTypes.VerifiedMnemonic]: this.createBaseValidator()
-                .getFirst(),
-            [ResponseTypes.SyncedAccounts]: this.createBaseValidator()
-                .add(new SyncedAccountListValidator())
-                .getFirst(),
-            [ResponseTypes.SentTransfer]: this.createBaseValidator()
-                .add(new MessageValidator())
-                .getFirst(),
-            [ResponseTypes.StoragePasswordSet]: this.createBaseValidator()
-                .getFirst(),
-            [ResponseTypes.StrongholdStatus]: this.createBaseValidator()
-                .add(new StrongholdStatusValidator())
-                .getFirst(),
-            [ResponseTypes.GeneratedAddress]: this.createBaseValidator()
-                .add(new AddressValidator())
-                .getFirst(),
-            [ResponseTypes.LatestAddress]: this.createBaseValidator()
-                .add(new AddressValidator())
-                .getFirst(),
-            [ResponseTypes.SyncedAccount]: this.createBaseValidator()
-            .add(new SyncedAccountValidator())
-            .getFirst(),
-            [ResponseTypes.UnusedAddress]: this.createBaseValidator()
-            .add(new AddressValidator())
-            .getFirst(),
-            [ResponseTypes.IsLatestAddressUnused]: this.createBaseValidator()
-            .add(new PayloadTypeValidator('boolean'))
-            .getFirst(),
+            [ResponseTypes.StoredMnemonic]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.VerifiedMnemonic]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.SyncedAccounts]: this.createBaseValidator().add(new SyncedAccountListValidator()).getFirst(),
+            [ResponseTypes.SentTransfer]: this.createBaseValidator().add(new MessageValidator()).getFirst(),
+            [ResponseTypes.StoragePasswordSet]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.StrongholdStatus]: this.createBaseValidator().add(new StrongholdStatusValidator()).getFirst(),
+            [ResponseTypes.GeneratedAddress]: this.createBaseValidator().add(new AddressValidator()).getFirst(),
+            [ResponseTypes.LatestAddress]: this.createBaseValidator().add(new AddressValidator()).getFirst(),
+            [ResponseTypes.SyncedAccount]: this.createBaseValidator().add(new SyncedAccountValidator()).getFirst(),
+            [ResponseTypes.UnusedAddress]: this.createBaseValidator().add(new AddressValidator()).getFirst(),
+            [ResponseTypes.IsLatestAddressUnused]: this.createBaseValidator().add(new PayloadTypeValidator('boolean')).getFirst(),
             [ResponseTypes.AreAllLatestAddressesUnused]: this.createBaseValidator()
-            .add(new PayloadTypeValidator('boolean'))
-            .getFirst(),
+                .add(new PayloadTypeValidator('boolean'))
+                .getFirst(),
             [ResponseTypes.UpdatedAlias]: this.createBaseValidator().getFirst(),
             [ResponseTypes.DeletedStorage]: this.createBaseValidator().getFirst(),
             [ResponseTypes.LockedStronghold]: this.createBaseValidator().getFirst(),
@@ -696,15 +666,15 @@ export default class ValidatorService {
             [ResponseTypes.RemovedAccount]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.UpdatedAllClientOptions]: this.createBaseValidator().getFirst(),
             [ResponseTypes.Error]: this.createBaseValidator().getFirst(),
-            // Events 
+            // Events
             [ResponseTypes.StrongholdStatusChange]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.NewTransaction]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.ErrorThrown]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.BalanceChange]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.ConfirmationStateChange]: this.createBaseEventValidator().getFirst(),
             // Market data
-            'MarketData': new ValidatorChainBuilder().add(new TypeValidator()).getFirst()
-        };
+            MarketData: new ValidatorChainBuilder().add(new TypeValidator()).getFirst(),
+        }
     }
 
     /**
@@ -715,10 +685,7 @@ export default class ValidatorService {
      * @returns {ValidatorChainBuilder}
      */
     private createBaseValidator(): ValidatorChainBuilder {
-        return new ValidatorChainBuilder()
-            .add(new TypeValidator())
-            .add(new IdValidator(this.ids))
-            .add(new ActionValidator())
+        return new ValidatorChainBuilder().add(new TypeValidator()).add(new IdValidator(this.ids)).add(new ActionValidator())
     }
 
     /**

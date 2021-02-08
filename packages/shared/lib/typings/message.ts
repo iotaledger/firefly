@@ -1,7 +1,7 @@
 import type { Bridge, CommunicationIds } from './bridge'
 import type { AccountIdentifier } from './account'
 
-type MessageVersion = 1;
+type MessageVersion = 1
 
 export interface UTXOInput {
     type: 'UTXO'
@@ -11,7 +11,7 @@ export interface UTXOInput {
 export type Input = UTXOInput
 
 export interface OutputAddress {
-    type: 'Ed25519',
+    type: 'Ed25519'
     data: string
 }
 
@@ -41,15 +41,15 @@ export interface TransactionEssence {
 }
 
 export interface MessagePayload {
-    type: 'Transaction',
+    type: 'Transaction'
     data: {
         essence: TransactionEssence
         unlock_blocks: {
-            type: 'Signature',
+            type: 'Signature'
             data: {
-                type: 'Ed25519',
+                type: 'Ed25519'
                 data: {
-                    public_key: number[],
+                    public_key: number[]
                     signature: number[]
                 }
             }
@@ -58,17 +58,17 @@ export interface MessagePayload {
 }
 
 export interface Message {
-    broadcasted: boolean;
-    id: string;
-    incoming: boolean;
-    nonce: number;
-    parent1: string;
-    parent2: string;
-    remainderValue: number;
-    timestamp: string;
-    value: number;
-    version: MessageVersion;
-    payload: MessagePayload;
+    broadcasted: boolean
+    id: string
+    incoming: boolean
+    nonce: number
+    parent1: string
+    parent2: string
+    remainderValue: number
+    timestamp: string
+    value: number
+    version: MessageVersion
+    payload: MessagePayload
 }
 
 export enum MessageType {
@@ -100,7 +100,7 @@ export function reattach(bridge: Bridge, __ids: CommunicationIds, accountId: Acc
         cmd: 'Reattach',
         payload: {
             accountId,
-            messageId
-        }
+            messageId,
+        },
     })
 }

@@ -50,7 +50,7 @@ export const locales = {
     ur: 'Urdu',
     vi: 'Vietnamese',
     zh_CN: 'Chinese (Simplified)',
-    zh_TW: 'Chinese (Traditional)'
+    zh_TW: 'Chinese (Traditional)',
 }
 
 // Init options: eg locale to show when we don't support the

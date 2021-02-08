@@ -103,7 +103,7 @@ export const accountViewState = writable<AccountViewStates>(AccountViewStates.In
  * Navigate to initial route
  */
 export const initRouter = () => {
-    let hasCompletedSetup: boolean = get(profiles).length > 0;
+    let hasCompletedSetup: boolean = get(profiles).length > 0
 
     if (hasCompletedSetup) {
         setRoute(AppRoute.Login)
@@ -120,7 +120,7 @@ export const routerNext = (event) => {
 
     switch (currentRoute) {
         case AppRoute.Login:
-            const { shouldAddProfile } = params;
+            const { shouldAddProfile } = params
 
             nextRoute = shouldAddProfile ? AppRoute.Setup : AppRoute.Dashboard
             break
@@ -229,10 +229,10 @@ export const routerPrevious = () => {
 
 export const resetRouter = () => {
     history.set([])
-    let hasCompletedSetup: boolean = get(profiles).length > 0;
+    let hasCompletedSetup: boolean = get(profiles).length > 0
     if (hasCompletedSetup) {
         setRoute(AppRoute.Login)
     } else {
         setRoute(AppRoute.Welcome)
     }
-}  
+}

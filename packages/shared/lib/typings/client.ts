@@ -13,7 +13,7 @@ export interface Node {
 
 export interface ClientOptions {
     nodes?: Node[]
-    node?: Node;
+    node?: Node
     network?: Network
     localPow?: boolean
     nodeSyncEnabled?: boolean
