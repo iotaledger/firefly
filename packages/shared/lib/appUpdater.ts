@@ -20,22 +20,26 @@ export const updateProgress = writable<number>(0)
 export const updateBusy = writable<boolean>(false)
 export const updateComplete = writable<boolean>(false)
 
-window['Electron'].onEvent('version-details', (nativeVersionDetails) => {
-    versionDetails.set(nativeVersionDetails);
-})
+// @ts-ignore: This value is replaced by Webpack DefinePlugin
+if (!devMode) {
+    window['Electron'].onEvent('version-details', (nativeVersionDetails) => {
+        versionDetails.set(nativeVersionDetails);
+    })
+    
+    window['Electron'].onEvent('version-progress', (nativeVersionProgress) => {
+        updateProgress.set(nativeVersionProgress.percent)
+    })
+    
+    window['Electron'].onEvent('version-complete', (nativeVersionComplete) => {
+        updateBusy.set(false)
+        updateComplete.set(true)
+    })
+    
+    window['Electron'].onEvent('version-error', (nativeVersionError) => {
+        console.log(nativeVersionError)
+    })
+}
 
-window['Electron'].onEvent('version-progress', (nativeVersionProgress) => {
-    updateProgress.set(nativeVersionProgress.percent)
-})
-
-window['Electron'].onEvent('version-complete', (nativeVersionComplete) => {
-    updateBusy.set(false)
-    updateComplete.set(true)
-})
-
-window['Electron'].onEvent('version-error', (nativeVersionError) => {
-    console.log(nativeVersionError)
-})
 
 export function updateDownload(): void {
     updateProgress.set(0)
