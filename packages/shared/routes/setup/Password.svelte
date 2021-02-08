@@ -23,7 +23,7 @@
                 // TODO: handle error
                 console.log(error)
                 alert('set password error')
-            }
+            },
         })
     }
     function handleBackClick() {

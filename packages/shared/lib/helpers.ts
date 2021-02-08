@@ -40,7 +40,7 @@ export const shuffleArray = (array) => array.slice().sort(() => Math.random() - 
  * Extract initials from string
  */
 export const getInitials = (string: string, maxChars: number) => {
-    let initialsArray: string[] = string.replace(/[^a-zA-Z- ]/g, "").match(/\b\w/g);
+    let initialsArray: string[] = string.replace(/[^a-zA-Z- ]/g, '').match(/\b\w/g)
     if (maxChars) {
         initialsArray = initialsArray.slice(0, maxChars)
     }
@@ -50,7 +50,7 @@ export const getInitials = (string: string, maxChars: number) => {
 
 /**
  * Truncate strings
- *  
+ *
  * @param str: String which has to be truncated
  * @param firstCharCount: Number of characters which has to be shown as first portion. Default = 5
  * @param endCharCount: Number of characters which has to be shown at end portion. Default = 5
@@ -62,11 +62,11 @@ export const truncateString = (str: string, firstCharCount: number = 5, endCharC
     if (str.length <= MAX_LENGTH) {
         return str
     }
-    let convertedStr = "";
-    convertedStr += str.substring(0, firstCharCount);
-    convertedStr += ".".repeat(dotCount);
-    convertedStr += str.substring(str.length - endCharCount, str.length);
-    return convertedStr;
+    let convertedStr = ''
+    convertedStr += str.substring(0, firstCharCount)
+    convertedStr += '.'.repeat(dotCount)
+    convertedStr += str.substring(str.length - endCharCount, str.length)
+    return convertedStr
 }
 
 /**
@@ -108,13 +108,13 @@ export const diffDates = (firstDate: Date, secondDate: Date) => {
     if (!(firstDate instanceof Date) || !(secondDate instanceof Date)) {
         return null
     }
-    const diff = Math.floor(secondDate.getTime() - firstDate.getTime());
-    const day = 1000 * 60 * 60 * 24;
+    const diff = Math.floor(secondDate.getTime() - firstDate.getTime())
+    const day = 1000 * 60 * 60 * 24
 
-    const days = Math.floor(diff / day);
-    const weeks = Math.floor(days / 7);
-    const months = Math.floor(weeks / 4.33);
-    const years = Math.floor(months / 12);
+    const days = Math.floor(diff / day)
+    const weeks = Math.floor(days / 7)
+    const months = Math.floor(weeks / 4.33)
+    const years = Math.floor(months / 12)
 
     if (years > 0) {
         return { unit: 'years_ago', value: years }
@@ -131,21 +131,20 @@ export const diffDates = (firstDate: Date, secondDate: Date) => {
 
 /**
  * Get if a date is considered "recent". Less than 1 month is considered recent.
- * @param date: date to know if recent or not, compared to today. Must be in the past. 
+ * @param date: date to know if recent or not, compared to today. Must be in the past.
  */
 export const isRecentDate = (date: Date) => {
     if (!(date instanceof Date)) {
         return null
     }
-    const diff = Math.floor(new Date().getTime() - date.getTime());
-    const day = 1000 * 60 * 60 * 24;
-    const days = Math.floor(diff / day);
-    const weeks = Math.floor(days / 7);
-    const months = Math.floor(weeks / 4.33);
-    const threeMonths = Math.floor(months / 3);
+    const diff = Math.floor(new Date().getTime() - date.getTime())
+    const day = 1000 * 60 * 60 * 24
+    const days = Math.floor(diff / day)
+    const weeks = Math.floor(days / 7)
+    const months = Math.floor(weeks / 4.33)
+    const threeMonths = Math.floor(months / 3)
 
-    
-    return { lessThanAMonth: months == 0, lessThanThreeMonths: threeMonths == 0 };
+    return { lessThanAMonth: months == 0, lessThanThreeMonths: threeMonths == 0 }
 }
 
 /**

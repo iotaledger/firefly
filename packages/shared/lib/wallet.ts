@@ -1,8 +1,5 @@
 import { writable, Writable, get } from 'svelte/store'
-import type {
-    MessageResponse,
-    Actor,
-} from './typings/bridge'
+import type { MessageResponse, Actor } from './typings/bridge'
 import type { Address } from './typings/address'
 import type { Message } from './typings/message'
 import type { Event, TransactionEventPayload, ConfirmationStateChangeEventPayload } from './typings/events'
@@ -14,10 +11,10 @@ export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
 type Account = {
     id: string
-    index: number;
+    index: number
     alias: string
     addresses: Address[]
-    messages: Message[],
+    messages: Message[]
 }
 
 interface ActorState {
@@ -25,22 +22,22 @@ interface ActorState {
 }
 
 export type BalanceOverview = {
-    incoming: string;
-    incomingRaw: number;
-    outgoing: string;
-    outgoingRaw: number;
-    balance: string;
-    balanceRaw: number;
-    balanceFiat: string;
+    incoming: string
+    incomingRaw: number
+    outgoing: string
+    outgoingRaw: number
+    balance: string
+    balanceRaw: number
+    balanceFiat: string
 }
 
 type WalletState = {
-    balanceOverview: Writable<BalanceOverview>;
+    balanceOverview: Writable<BalanceOverview>
     accounts: Writable<Account[]>
 }
 
 /** Active actors state */
-const actors: ActorState = {};
+const actors: ActorState = {}
 
 /*
  * Wallet state
@@ -53,9 +50,9 @@ export const wallet = writable<WalletState>({
         outgoingRaw: 0,
         balance: '0 Mi',
         balanceRaw: 0,
-        balanceFiat: '0.00 USD'
+        balanceFiat: '0.00 USD',
     }),
-    accounts: writable<Account[]>([])
+    accounts: writable<Account[]>([]),
 })
 
 export const resetWallet = () => {
@@ -67,7 +64,7 @@ export const resetWallet = () => {
         outgoingRaw: 0,
         balance: '0 Mi',
         balanceRaw: 0,
-        balanceFiat: '0.00 USD'
+        balanceFiat: '0.00 USD',
     })
     accounts.set([])
     selectedAccountId.set(null)
@@ -78,23 +75,23 @@ export const selectedAccountId = writable<string | null>(null)
 export const api = window['__WALLET_API__']
 
 export const getStoragePath = (appPath: string, profileName: string): string => {
-    return `${appPath}/${WALLET_STORAGE_DIRECTORY}/${profileName}`;
+    return `${appPath}/${WALLET_STORAGE_DIRECTORY}/${profileName}`
 }
 
 export const initialise = (id: string, storagePath: string): void => {
-    const actor: Actor = window['__WALLET_INIT__'].run(id, storagePath);
+    const actor: Actor = window['__WALLET_INIT__'].run(id, storagePath)
 
-    actors[id] = actor;
+    actors[id] = actor
 }
 
 /**
  * Destroys an actor & remove it from actors state
- * 
+ *
  * @method destroyActor
- * 
+ *
  * @param {string} id
- * 
- * @returns {void} 
+ *
+ * @returns {void}
  */
 export const destroyActor = (id: string): void => {
     if (!actors[id]) {
@@ -102,30 +99,38 @@ export const destroyActor = (id: string): void => {
     }
 
     // Destroy actor
-    actors[id].destroy();
+    actors[id].destroy()
 
     // Delete actor id from state
-    delete actors[id];
-};
+    delete actors[id]
+}
 
 /**
  * Generate BIP39 Mnemonic Recovery Phrase
  */
-export const generateRecoveryPhrase = (): Promise<string[]> => new Promise((resolve, reject) => {
-    api.generateMnemonic({
-        onSuccess(response) { resolve(response.payload.split(' ')) },
-        onError(error) { reject(error) }
+export const generateRecoveryPhrase = (): Promise<string[]> =>
+    new Promise((resolve, reject) => {
+        api.generateMnemonic({
+            onSuccess(response) {
+                resolve(response.payload.split(' '))
+            },
+            onError(error) {
+                reject(error)
+            },
+        })
     })
-})
 
-export const verifyRecoveryPhrase = (phrase): Promise<void> => new Promise((resolve, reject) => {
-    api.verifyMnemonic(phrase, {
-        onSuccess(response) {
-            resolve(response)
-        },
-        onError(error) { reject(error) }
+export const verifyRecoveryPhrase = (phrase): Promise<void> =>
+    new Promise((resolve, reject) => {
+        api.verifyMnemonic(phrase, {
+            onSuccess(response) {
+                resolve(response)
+            },
+            onError(error) {
+                reject(error)
+            },
+        })
     })
-})
 
 export const requestMnemonic = async () => {
     let recoveryPhrase = await generateRecoveryPhrase()
@@ -134,9 +139,9 @@ export const requestMnemonic = async () => {
 
 /**
  * Initialises event listeners from wallet library
- * 
+ *
  * @method initialiseListeners
- * 
+ *
  * @returns {void}
  */
 export const initialiseListeners = () => {
@@ -147,17 +152,19 @@ export const initialiseListeners = () => {
         onSuccess(response) {
             updateProfile('isStrongholdLocked', response.payload.snapshot.status === 'Locked')
         },
-        onError(error) { console.error(error) }
+        onError(error) {
+            console.error(error)
+        },
     })
 
     /**
-    * Event listener for new message event
-    */
+     * Event listener for new message event
+     */
     api.onNewTransaction({
         onSuccess(response: Event<TransactionEventPayload>) {
             if (get(activeProfile).settings.notifications) {
                 const accounts = get(wallet).accounts
-                const account = get(accounts).find(account => account.id === response.payload.accountId)
+                const account = get(accounts).find((account) => account.id === response.payload.accountId)
                 const message = response.payload.message
 
                 const locale = get(_) as (string) => string
@@ -170,14 +177,14 @@ export const initialiseListeners = () => {
         },
         onError(error) {
             console.error(error)
-        }
+        },
     })
 
     api.onConfirmationStateChange({
         onSuccess(response: Event<ConfirmationStateChangeEventPayload>) {
             if (get(activeProfile).settings.notifications) {
                 const accounts = get(wallet).accounts
-                const account = get(accounts).find(account => account.id === response.payload.accountId)
+                const account = get(accounts).find((account) => account.id === response.payload.accountId)
                 const message = response.payload.message
                 const messageKey = response.payload.confirmed ? 'confirmed' : 'failed'
 
@@ -191,44 +198,50 @@ export const initialiseListeners = () => {
         },
         onError(error) {
             console.error(error)
-        }
+        },
     })
 
     /**
-    * Event listener for balance change event
-    */
+     * Event listener for balance change event
+     */
     api.onBalanceChange({
-        onSuccess(response) { console.log('Balance change response', response) },
-        onError(error) { console.error(error) }
+        onSuccess(response) {
+            console.log('Balance change response', response)
+        },
+        onError(error) {
+            console.error(error)
+        },
     })
-};
-
-
-
+}
 
 /**
  * Gets latest messages
- * 
+ *
  * @method getLatestMessages
- * 
- * @param {Account} accounts 
- * @param {number} [count] 
- * 
+ *
+ * @param {Account} accounts
+ * @param {number} [count]
+ *
  * @returns {Message[]}
  */
-export const getLatestMessages = (
-    accounts: Account[],
-    count = 10
-): Message[] => {
-    const messages: Message[] = accounts.reduce((messages, account) => messages.concat(
-        account.messages.map((message, idx) => Object.assign({}, message, {
-            account: account.index,
-            internal: idx % 2 !== 0
-        })
-        )
-    ), []);
+export const getLatestMessages = (accounts: Account[], count = 10): Message[] => {
+    const messages: Message[] = accounts.reduce(
+        (messages, account) =>
+            messages.concat(
+                account.messages.map((message, idx) =>
+                    Object.assign({}, message, {
+                        account: account.index,
+                        internal: idx % 2 !== 0,
+                    })
+                )
+            ),
+        []
+    )
 
-    return messages.slice().sort((a, b) => {
-        return <any>new Date(b.timestamp) - <any>new Date(a.timestamp);
-    }).slice(0, count);
-};
+    return messages
+        .slice()
+        .sort((a, b) => {
+            return <any>new Date(b.timestamp) - <any>new Date(a.timestamp)
+        })
+        .slice(0, count)
+}

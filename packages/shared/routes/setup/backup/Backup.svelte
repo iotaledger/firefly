@@ -88,7 +88,11 @@
                             onSuccess(response) {
                                 api.createAccount(
                                     {
-                                        clientOptions: { node: node.url, nodes: nodes.map((node) => node.url), network: $network },
+                                        clientOptions: {
+                                            node: node.url,
+                                            nodes: nodes.map((node) => node.url),
+                                            network: $network,
+                                        },
                                     },
                                     {
                                         onSuccess() {

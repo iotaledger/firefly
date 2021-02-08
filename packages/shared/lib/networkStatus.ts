@@ -5,7 +5,7 @@ import { writable } from 'svelte/store'
  */
 export const NETWORK_STATUS_ENDPOINTS = [
     'https://explorer-api.iota.org/stats/chrysalis',
-    'https://explorer-api.iota.works/stats/chrysalis'
+    'https://explorer-api.iota.works/stats/chrysalis',
 ]
 
 /**
@@ -19,23 +19,23 @@ const DEFAULT_NETWORK_STATUS_ENDPOINT_TIMEOUT = 5000
 const DEFAULT_NETWORK_STATUS_POLL_INTERVAL = 10000
 
 type StatusData = {
-    itemsPerSecond?: number;
-    confirmedItemsPerSecond?: number;
-    confirmationRate?: number;
-    latestMilestoneIndex?: number;
-    latestMilestoneIndexTime?: number;
-    health?: number;
-    healthReason?: string;
+    itemsPerSecond?: number
+    confirmedItemsPerSecond?: number
+    confirmationRate?: number
+    latestMilestoneIndex?: number
+    latestMilestoneIndexTime?: number
+    health?: number
+    healthReason?: string
 }
 
-export const networkStatus = writable<StatusData>({});
+export const networkStatus = writable<StatusData>({})
 
 /**
  * Poll the network status at an interval.
  */
 export async function pollNetworkStatus(): Promise<void> {
-    await fetchNetworkStatus();
-    setInterval(async () => fetchNetworkStatus(), DEFAULT_NETWORK_STATUS_POLL_INTERVAL);
+    await fetchNetworkStatus()
+    setInterval(async () => fetchNetworkStatus(), DEFAULT_NETWORK_STATUS_POLL_INTERVAL)
 }
 
 /**
@@ -59,7 +59,10 @@ export async function fetchNetworkStatus(): Promise<void> {
             const response: any = await Promise.race([
                 fetch(endpoint, requestOptions),
                 new Promise((_, reject) => {
-                    setTimeout(() => reject(new Error(`Could not fetch from ${endpoint}.`)), DEFAULT_NETWORK_STATUS_ENDPOINT_TIMEOUT)
+                    setTimeout(
+                        () => reject(new Error(`Could not fetch from ${endpoint}.`)),
+                        DEFAULT_NETWORK_STATUS_ENDPOINT_TIMEOUT
+                    )
                 }),
             ])
 

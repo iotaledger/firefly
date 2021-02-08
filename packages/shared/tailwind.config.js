@@ -18,11 +18,11 @@ module.exports = {
                 /^from-/,
                 // `to-${color}` (gradients)
                 /^to-/,
-                // `bg-${color}` 
+                // `bg-${color}`
                 /^bg-/,
-                // `text-${color}` 
+                // `text-${color}`
                 /^text-/,
-                /^grid-cols-/
+                /^grid-cols-/,
             ],
         },
     },

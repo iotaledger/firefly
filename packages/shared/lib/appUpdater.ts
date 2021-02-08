@@ -13,7 +13,7 @@ export const versionDetails = writable<VersionDetails>({
     currentVersion: '',
     newVersion: '',
     newVersionReleaseDate: new Date(),
-    changelog: ''
+    changelog: '',
 })
 
 export const updateProgress = writable<number>(0)
@@ -21,7 +21,7 @@ export const updateBusy = writable<boolean>(false)
 export const updateComplete = writable<boolean>(false)
 
 window['Electron'].onEvent('version-details', (nativeVersionDetails) => {
-    versionDetails.set(nativeVersionDetails);
+    versionDetails.set(nativeVersionDetails)
 })
 
 window['Electron'].onEvent('version-progress', (nativeVersionProgress) => {

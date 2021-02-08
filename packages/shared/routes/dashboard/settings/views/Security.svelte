@@ -1,5 +1,5 @@
 <script>
-    import { get } from 'svelte/store';
+    import { get } from 'svelte/store'
     import zxcvbn from 'zxcvbn'
     import { Text, Dropdown, Password, Button, Checkbox } from 'shared/components'
     import { updateProfile, activeProfile, removeProfile } from 'shared/lib/profile'
@@ -151,7 +151,7 @@
         }
 
         PincodeManager.verify(get(activeProfile).id, currentPincode)
-            .then(valid => {
+            .then((valid) => {
                 if (valid) {
                     return new Promise((resolve, reject) => {
                         api.setStoragePassword(newPincode, {
@@ -164,7 +164,6 @@
                                         confirmedPincode = ''
                                     })
                                     .catch(reject)
-                                
                             },
                             onError(error) {
                                 reject(error)
