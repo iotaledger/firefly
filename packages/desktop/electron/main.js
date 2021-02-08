@@ -1,13 +1,14 @@
 const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
 const path = require('path')
 const Keychain = require('./keychain')
+const { initAutoUpdate } = require('./appUpdater')
 
 /**
  * Set AppUserModelID for Windows notifications functionallity
  */
-app.setAppUserModelId('org.iota.firefly');
+app.setAppUserModelId('org.iota.firefly')
 
-/** 
+/**
  * Terminate application if Node remote debugging detected
  */
 const argv = process.argv.join()
@@ -38,6 +39,20 @@ const windows = {
  */
 const devMode = process.env.NODE_ENV === 'development'
 
+let paths = {
+    preload: '',
+    html: '',
+}
+
+if (app.isPackaged) {
+    paths.preload = path.join(app.getAppPath(), '/public/build/preload.js')
+    paths.html = path.join(app.getAppPath(), '/public/index.html')
+} else {
+    // __dirname is desktop/public/build
+    paths.preload = path.join(__dirname, 'preload.js')
+    paths.html = path.join(__dirname, '../index.html')
+}
+
 /**
  * Check URL against allowlist
  */
@@ -62,26 +77,34 @@ function createWindow() {
 
     // Create the browser window.
     windows.main = new BrowserWindow({
-        width: 800,
-        height: 600,
+        minWidth: 1280,
+        minHeight: 720,
+        width: 1280,
+        height: 720,
         webPreferences: {
             nodeIntegration: false,
+            contextIsolation: true,
             enableRemoteModule: false,
             worldSafeExecuteJavaScript: true,
             disableBlinkFeatures: 'Auxclick',
             webviewTag: false,
             enableWebSQL: false,
             devTools: devMode,
-            preload: path.join(devMode ? __dirname : app.getAppPath(), 'preload.js'),
+            preload: paths.preload,
         },
     })
 
-    // and load the index.html of the app.
-    windows.main.loadFile(devMode ? '../public/index.html' : '../index.html')
+    if (!devMode) {
+        initAutoUpdate(windows.main)
+    }
 
-    // Enable dev tools only in developer mode
     if (devMode) {
+        // Enable dev tools only in developer mode
         windows.main.webContents.openDevTools()
+        windows.main.loadURL('http://localhost:8080')
+    } else {
+        // load the index.html of the app.
+        windows.main.loadFile(paths.html)
     }
 
     const _handleNavigation = (e, url) => {

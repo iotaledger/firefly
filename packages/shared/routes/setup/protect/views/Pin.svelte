@@ -39,11 +39,9 @@
                 <Pin bind:value={pinInput} classes="w-full mx-auto block" />
             {/if}
         </div>
-        <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center gap-4">
-            <Button secondary classes="flex-auto" onClick={() => handleBackClick()}>{locale('actions.back')}</Button>
-            <Button classes="flex-auto" disabled={!valid} onClick={() => handleContinueClick()}>
-                {locale('actions.set_pin')}
-            </Button>
+        <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
+            <Button secondary classes="flex-1" onClick={() => handleBackClick()}>{locale('actions.back')}</Button>
+            <Button classes="flex-1" disabled={!valid} onClick={() => handleContinueClick()}>{locale('actions.set_pin')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-end items-center">
             {#if !confirmInput}

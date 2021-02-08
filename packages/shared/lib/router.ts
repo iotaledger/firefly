@@ -1,5 +1,6 @@
-import { readable, writable, get, derived } from 'svelte/store'
-import { logged, notification, walletPin, strongholdPassword, profiles } from 'shared/lib/app'
+import { readable, writable, get } from 'svelte/store'
+import { logged, notification, walletPin, strongholdPassword } from 'shared/lib/app'
+import { profiles } from 'shared/lib/profile'
 
 /**
  * Sets next route
@@ -115,7 +116,7 @@ let walletSetupAccountType = writable<AccountType>(null)
  * Navigate to initial route
  */
 export const initRouter = () => {
-    let hasCompletedSetup: boolean = get(profiles).length > 0;
+    let hasCompletedSetup: boolean = get(profiles).length > 0
 
     if (hasCompletedSetup) {
         setRoute(AppRoute.Login)
@@ -132,7 +133,7 @@ export const routerNext = (event) => {
 
     switch (currentRoute) {
         case AppRoute.Login:
-            const { shouldAddProfile } = params;
+            const { shouldAddProfile } = params
 
             nextRoute = shouldAddProfile ? AppRoute.Setup : AppRoute.Dashboard
             break
@@ -254,10 +255,10 @@ export const routerPrevious = () => {
 
 export const resetRouter = () => {
     history.set([])
-    let hasCompletedSetup: boolean = get(profiles).length > 0;
+    let hasCompletedSetup: boolean = get(profiles).length > 0
     if (hasCompletedSetup) {
         setRoute(AppRoute.Login)
     } else {
         setRoute(AppRoute.Welcome)
     }
-}  
+}

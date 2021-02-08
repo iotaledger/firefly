@@ -7,12 +7,20 @@
     export let mnemonic
 
     const dispatch = createEventDispatcher()
+    let hide = true
+    let hasRevealedRecoveryPhrase = false
+
+    $: visibilityToggleString = hide ? 'reveal_recovery_phrase' : 'hide_recovery_phrase'
 
     function handleContinueClick(options) {
         dispatch('next', { options })
     }
     function handleBackClick() {
         dispatch('previous')
+    }
+    function handleMnemonicVisibilityClick() {
+        hide = !hide
+        hasRevealedRecoveryPhrase = true
     }
 </script>
 
@@ -25,13 +33,20 @@
             <Text type="p" secondary classes="mb-4">{locale('views.recovery_phrase.body_1')}</Text>
             <Text type="p" secondary highlighted classes="font-bold">{locale('views.recovery_phrase.body_2')}</Text>
         </div>
-        <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center gap-4">
-            <Button secondary onClick={() => handleContinueClick('backup')}>{locale('actions.save_backup_file')}</Button>
-            <Button onClick={() => handleContinueClick('verify')}>{locale('actions.continue')}</Button>
+        <div slot="leftpane__action" class="flex flex-row flex-wrap items-center space-x-4">
+            <Button secondary classes="flex-1" onClick={() => handleContinueClick('backup')}>
+                {locale('actions.save_backup_file')}
+            </Button>
+            <Button disabled={!hasRevealedRecoveryPhrase} classes="flex-1" onClick={() => handleContinueClick('verify')}>
+                {locale('actions.continue')}
+            </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex items-center justify-center p-16">
+        <div slot="rightpane" class="w-full h-full flex flex-row flex-wrap items-center justify-center p-16">
             {#if mnemonic !== undefined && mnemonic !== null}
-                <RecoveryPhrase recoveryPhrase={mnemonic} />
+                <RecoveryPhrase classes="mb-8" recoveryPhrase={mnemonic} {hide} />
+                <Button onClick={handleMnemonicVisibilityClick}>
+                    {locale(`views.recovery_phrase.${visibilityToggleString}`)}
+                </Button>
             {/if}
         </div>
     </OnboardingLayout>

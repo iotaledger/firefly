@@ -1,8 +1,9 @@
 <script lang="typescript">
+    import { get } from 'svelte/store'
     import { createEventDispatcher } from 'svelte'
     import { Transition } from 'shared/components'
     import { api } from 'shared/lib/wallet'
-    import { getActiveProfile } from 'shared/lib/app'
+    import { activeProfile } from 'shared/lib/profile'
 
     import { Protect, Pin } from './views/'
     import { validatePinFormat } from 'shared/lib/utils'
@@ -16,7 +17,7 @@
         Init = 'init',
         Biometric = 'biometric',
         Pin = 'pin',
-        Confirm = 'confirm'
+        Confirm = 'confirm',
     }
 
     const dispatch = createEventDispatcher()
@@ -54,12 +55,9 @@
             case ProtectState.Confirm:
                 try {
                     if (!validatePinFormat(pin.toString())) {
-                        throw new Error("Invalid pin code!");
+                        throw new Error('Invalid pin code!')
                     }
-                    await PincodeManager.set(
-                        getActiveProfile().id,
-                        pin.toString()
-                    )
+                    await PincodeManager.set(get(activeProfile).id, pin.toString())
 
                     api.setStoragePassword(pin.toString(), {
                         onSuccess() {
@@ -67,7 +65,7 @@
                         },
                         onError(error) {
                             console.error(error)
-                        }
+                        },
                     })
                     break
                 } catch (error) {

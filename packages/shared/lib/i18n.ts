@@ -1,5 +1,5 @@
 import { get, derived, writable } from 'svelte/store'
-import { language } from 'shared/lib/settings'
+import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { getLocaleFromNavigator, addMessages, dictionary, _, init } from 'svelte-i18n'
 
 /*
@@ -50,7 +50,7 @@ export const locales = {
     ur: 'Urdu',
     vi: 'Vietnamese',
     zh_CN: 'Chinese (Simplified)',
-    zh_TW: 'Chinese (Traditional)'
+    zh_TW: 'Chinese (Traditional)',
 }
 
 // Init options: eg locale to show when we don't support the
@@ -73,7 +73,7 @@ const setupI18n = (options = { withLocale: null }) => {
     // If we're given an explicit locale, we use
     // it. Otherwise, we attempt to auto-detect
     // the user's locale.
-    const _locale = supported(options.withLocale || get(language) || reduceLocale(getLocaleFromNavigator()))
+    const _locale = supported(options.withLocale || reduceLocale(getLocaleFromNavigator() || 'en'))
 
     init({ ...INIT_OPTIONS, initialLocale: _locale } as any)
 
@@ -84,7 +84,7 @@ const setupI18n = (options = { withLocale: null }) => {
         return loadJson(messagesFileUrl).then((messages) => {
             _activeLocale = _locale
             addMessages(_locale, messages)
-            language.set(_locale)
+            updateProfile('settings.language', _locale)
             isDownloading.set(false)
         })
     }
@@ -123,7 +123,12 @@ function loadJson(url) {
     return fetch(url).then((response) => response.json())
 }
 
-const dir = derived(language, ($locale) => ($locale === 'ar' ? 'rtl' : 'ltr'))
+const dir = derived(activeProfile, ($activeProfile) => {
+    if ($activeProfile) {
+        return $activeProfile.settings.language === 'ar' ? 'rtl' : 'ltr'
+    }
+    return 'ltr'
+})
 
 // We expose the svelte-i18n _ store so that our app has
 // a single API for i18n

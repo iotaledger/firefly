@@ -8,6 +8,8 @@
     export let strengthLevels = 4
     export let placeholder = undefined
     export let locale = undefined
+    export let maxlength = undefined
+    export let numeric = false
     let revealed = false
     let type = 'password'
     const handleInput = (event) => {
@@ -20,6 +22,12 @@
         }
         input.type = input.type === 'password' ? 'text' : 'password'
         revealed = !revealed
+    }
+
+    function onKeyPress(event) {
+        if (numeric && (event.which < 48 || event.which > 57)) {
+            event.preventDefault()
+        }
     }
 </script>
 
@@ -78,6 +86,8 @@
         <input
             {type}
             {value}
+            {maxlength}
+            on:keypress={onKeyPress}
             on:input={handleInput}
             placeholder={placeholder || locale('general.password')}
             class:toggle={showRevealToggle}

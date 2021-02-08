@@ -39,8 +39,10 @@ import {
   removeStorage as _removeStorage,
   lockStronghold as _lockStronghold,
   changeStrongholdPassword as _changeStrongholdPassword,
+  setClientOptions as _setClientOptions,
   openLedgerApp as _openLedgerApp
 } from '../../../shared/lib/typings/wallet'
+import { ClientOptions } from '../../../shared/lib/typings/client'
 
 const addon = require('../index.node')
 const mailbox = []
@@ -175,6 +177,9 @@ export const api = {
   },
   internalTransfer: function (fromAccountId: AccountIdentifier, toAccountId: AccountIdentifier, amount: number): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _internalTransfer(sendMessage, __ids, fromAccountId, toAccountId, amount)
+  },
+  setClientOptions: function (options: ClientOptions): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _setClientOptions(sendMessage, __ids, options)
   },
   onError: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'ErrorThrown')

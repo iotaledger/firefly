@@ -1,11 +1,10 @@
 <script lang="typescript">
     import { setContext, onMount } from 'svelte'
     import { get, derived } from 'svelte/store'
-    import { updateStrongholdStatus } from 'shared/lib/app'
+    import { updateProfile } from 'shared/lib/profile'
     import { api, getLatestMessages, initialiseListeners, selectedAccountId, wallet } from 'shared/lib/wallet'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
-    import { deepLinking, currency } from 'shared/lib/settings'
-    import { DEFAULT_NODES as nodes } from 'shared/lib/network'
+    import { activeProfile } from 'shared/lib/profile'
     import { formatUnit } from 'shared/lib/units'
     import { DashboardPane } from 'shared/components'
     import { Account, LineChart, WalletHistory, Security, CreateAccount, WalletBalance, WalletActions } from './views/'
@@ -68,7 +67,11 @@
             signerType,
             rawIotaBalance: balance,
             balance: formatUnit(balance, 0),
-            balanceEquiv: `${convertToFiat(balance, $currencies[CurrencyTypes.USD], $exchangeRates[$currency])} ${$currency}`,
+            balanceEquiv: `${convertToFiat(
+                balance,
+                $currencies[CurrencyTypes.USD],
+                $exchangeRates[get(activeProfile).settings.currency]
+            )} ${$activeProfile.settings.currency}`,
             color: AccountColors[index],
         })
     }
@@ -111,8 +114,8 @@
                                         balanceFiat: `${convertToFiat(
                                             _totalBalance.balance,
                                             $currencies[CurrencyTypes.USD],
-                                            $exchangeRates[$currency]
-                                        )} ${$currency}`,
+                                            $exchangeRates[$activeProfile.settings.currency]
+                                        )} ${$activeProfile.settings.currency}`,
                                     })
                                 )
                             }
@@ -157,6 +160,8 @@
             onSuccess(strongholdStatusResponse) {
                 if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
                     openPopup({ type: 'password', props: { onSuccess: _generate } })
+                } else {
+                    _generate()
                 }
             },
             onError(error) {
@@ -188,7 +193,6 @@
 
                 accounts.update((storedAccounts) => {
                     return storedAccounts.map((storedAccount) => {
-                        // TODO: SyncAccounts response should have "id" instead of "accountId" (for consistency)
                         const syncedAccount = syncedAccounts.find((_account) => _account.id === storedAccount.id)
 
                         return Object.assign({}, storedAccount, {
@@ -212,8 +216,12 @@
         api.createAccount(
             {
                 alias,
-                // For subsequent accounts, use the network for any of the previous accounts
-                clientOptions: { nodes, network: $accounts[0].clientOptions.network },
+                // For subsequent accounts, use the client options and signer type for any of the previous accounts
+                clientOptions: {
+                    node: $accounts[0].clientOptions.node,
+                    nodes: $accounts[0].clientOptions.nodes,
+                    network: $accounts[0].clientOptions.network,
+                },
                 signerType: $accounts[0].signerType,
             },
             {
@@ -359,7 +367,7 @@
     function checkStrongholdStatus() {
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
-                updateStrongholdStatus(strongholdStatusResponse.payload.snapshot.status === 'Locked')
+                updateProfile('isStrongholdLocked', strongholdStatusResponse.payload.snapshot.status === 'Locked')
                 api.areLatestAddressesUnused({
                     onSuccess(response) {
                         if (!response.payload) {
