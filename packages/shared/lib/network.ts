@@ -23,7 +23,7 @@ export const DEFAULT_NODES: Node[] = [
 /**
  * Selected network during profile creation
  */
-export const network = writable<Network>(Network.Mainnet)
+export const network = writable<Network>(Network.Testnet)
 
 /**
  * Check if new node candidate is valid
