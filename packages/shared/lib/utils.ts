@@ -1,3 +1,5 @@
+import validUrl from 'valid-url';
+
 export const VALID_MAINNET_ADDRESS = /^iota1[02-9ac-hj-np-z]{59}$/
 export const VALID_DEVNET_ADDRESS = /^atoi1[02-9ac-hj-np-z]{59}$/
 export const ADDRESS_LENGTH = 64;
@@ -115,7 +117,7 @@ export const parseAddress = (input) => {
         } else {
             return null;
         }
-        
+
         if (parsed.message && typeof parsed.message === 'string') {
             result.message = parsed.message;
         }
@@ -128,4 +130,33 @@ export const parseAddress = (input) => {
     }
 
     return result;
+};
+
+/**
+ * Checks if a URL is valid
+ * @method isValidUrl
+ *
+ * @param  {string}  url
+ * @returns {Boolean}
+ */
+export const isValidUrl = (url) => {
+    if (validUrl.isWebUri(url)) {
+        return true;
+    }
+    return false;
+};
+
+/**
+ * Check if a URL uses HTTPS
+ *
+ * @method isValidHttpsUrl
+ *
+ * @param  {string}  url
+ * @returns {Boolean}
+ */
+export const isValidHttpsUrl = (url) => {
+    if (validUrl.isHttpsUri(url)) {
+        return true;
+    }
+    return false;
 };

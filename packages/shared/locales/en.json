@@ -201,7 +201,11 @@
             "nodeSettings": {
                 "title": "Node settings",
                 "description": ""
-            }, 
+            },
+            "configureNodeList": {
+                "title": "Configure node list",
+                "description": ""
+            },
             "proofOfWork": {
                 "title": "Proof of work",
                 "description": ""
@@ -309,6 +313,14 @@
         "address_history": {
             "title": "{name} account address history",
             "current_balance": "Current balance: {balance}"
+        },
+        "node": {
+            "title_add": "Add a node",
+            "title_details": "Node details",
+            "node_address": "Node address",
+            "optional_username": "Username (optional)",
+            "optional_password": "Password (optional)",
+            "set_as_primary_node": "Set as primary node"
         }
     },
     "actions": {
@@ -360,7 +372,9 @@
         "sync_account": "Sync account",
         "view_address_history": "View address history",
         "delete_account": "Delete account",
-        "max": "Max"
+        "max": "Max",
+        "add_node": "Add node"
+
     },
     "general": {
         "password": "Password",
@@ -421,7 +435,8 @@
         "latest_transactions": "Latest Transactions",
         "transactions": "Transactions",
         "security": "Security",
-        "account_address": "Account Address"
+        "account_address": "Account Address",
+        "nodes": "Nodes"
     },
     "dates": {
         "today": "Today",

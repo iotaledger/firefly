@@ -40,8 +40,6 @@ const windows = {
 const devMode = process.env.NODE_ENV === 'development'
 
 
-// TODO(rajivshah3): Use @rollup/plugin-replace here
-
 let paths = {
     preload: "",
     html: "",
@@ -91,6 +89,7 @@ function createWindow() {
         height: 720,
         webPreferences: {
             nodeIntegration: false,
+            contextIsolation: true,
             enableRemoteModule: false,
             worldSafeExecuteJavaScript: true,
             disableBlinkFeatures: 'Auxclick',
@@ -100,6 +99,10 @@ function createWindow() {
             preload: paths.preload,
         },
     })
+
+    if (!devMode) {
+        initAutoUpdate(windows.main);
+    }
 
     if (devMode) {
         // Enable dev tools only in developer mode
@@ -127,10 +130,6 @@ function createWindow() {
      */
     windows.main.webContents.on('will-navigate', _handleNavigation)
     windows.main.webContents.on('new-window', _handleNavigation)
-
-    if (!devMode) {
-        initAutoUpdate(windows.main);
-    }
 
     /**
      * Handle permissions requests

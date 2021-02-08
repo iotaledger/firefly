@@ -42,7 +42,11 @@
 
         await fetchMarketData()
         await pollNetworkStatus()
-        await refreshVersionDetails();
+        
+        // @ts-ignore: This value is replaced by Webpack DefinePlugin
+        if (!devMode) {
+            await refreshVersionDetails()
+        }
     })
 </script>
 

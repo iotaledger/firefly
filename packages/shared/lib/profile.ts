@@ -2,6 +2,8 @@ import { get, derived, writable } from 'svelte/store'
 import { persistent } from 'shared/lib/helpers'
 import { generateRandomId } from 'shared/lib/utils'
 import { AvailableExchangeRates } from 'shared/lib/currency'
+import { DEFAULT_NODE as node } from 'shared/lib/network'
+import type { Node } from './typings/client'
 
 /**
  * Base profile interface — 
@@ -27,7 +29,7 @@ interface ExtendedProfile {
     /**
      * User settings
      */
-    settings: UserSettings
+    settings: UserSettings,
 }
 
 /**
@@ -39,8 +41,11 @@ export interface UserSettings {
     language: string,
     currency: AvailableExchangeRates,
     notifications: boolean,
+    node: Node;
+    customNodes: Node[]
     /** Lock screen timeout in minutes */
-    lockScreenTimeout: number
+    lockScreenTimeout: number,
+    automaticNodeSelection: boolean
 }
 
 /**
@@ -65,6 +70,26 @@ export const activeProfile = derived([profiles, newProfile], ([$profiles, $newPr
         return _profile.active === true
     })
 )
+
+/**
+ * Saves profile in persistent storage
+ * 
+ * @method saveProfile
+ * 
+ * @param {Profile} profile 
+ * 
+ * @returns {Profile}
+ */
+export const saveProfile = (profile: Profile): Profile => {
+    profiles.update((_profiles) => {
+        return [
+            ..._profiles,
+            profile
+        ]
+    })
+
+    return profile;
+}
 
 /**
  * Creates a new profile
@@ -92,32 +117,15 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
             outsourcePow: false,
             currency: AvailableExchangeRates.USD,
             notifications: true,
+            node,
+            customNodes: [],
             // Minutes
-            lockScreenTimeout: 5
-        }
-    };
+            lockScreenTimeout: 5,
+            automaticNodeSelection: true
+        },
+    }
 
     newProfile.set(profile)
-
-    return profile;
-};
-
-/**
- * Saves profile in persistent storage
- * 
- * @method saveProfile
- * 
- * @param {Profile} profile 
- * 
- * @returns {Profile}
- */
-export const saveProfile = (profile: Profile): Profile => {
-    profiles.update((_profiles) => {
-        return [
-            ..._profiles,
-            profile
-        ]
-    })
 
     return profile;
 }
