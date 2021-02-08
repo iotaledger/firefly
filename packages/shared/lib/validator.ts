@@ -405,17 +405,7 @@ class MessageValidator extends Validator {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of nonce received.',
             })
-        } else if ('string' !== typeof payload.parent1) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of parent1 received.',
-            })
-        } else if ('string' !== typeof payload.parent2) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of parent2 received.',
-            })
-        } else if ('string' !== typeof payload.remainderValue) {
+        } else if ('number' !== typeof payload.remainderValue) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of remainderValue received.',
@@ -424,6 +414,13 @@ class MessageValidator extends Validator {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of timestamp received.',
+            })
+        }
+
+        if (payload.parents.some((parent) => 'string' !== typeof parent)) { 
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'Invalid type of parents received.',
             })
         }
 
