@@ -2,11 +2,28 @@ const binding = require('wallet-nodejs-binding')
 const PincodeManager = require('../libs/pincodeManager');
 const DeepLinkManager = require('../libs/deepLinkManager');
 const NotificationManager = require('../libs/notificationManager');
-const { ipcRenderer, contextBridge } = require('electron')
+const { ipcRenderer } = require('electron')
 
-const __WALLET__ = binding;
+const freezeObjectFactory = (obj) => {
+    const rejector = {
+        get(obj, prop) {
+            if (typeof obj[prop] === 'object' && obj[prop] !== null) {
+                return new Proxy(obj[prop], rejector)
+            }
 
-const Electron = {
+            return obj[prop]
+        },
+        set() {
+            return false
+        },
+    }
+
+    return new Proxy(obj, rejector)
+}
+
+window.__WALLET__ = freezeObjectFactory(binding)
+
+window.Electron = {
     PincodeManager,
     DeepLinkManager,
     NotificationManager,
@@ -79,6 +96,3 @@ const Electron = {
     },
     _eventListeners: {},
 };
-
-contextBridge.exposeInMainWorld('__WALLET__', __WALLET__);
-contextBridge.exposeInMainWorld('Electron', Electron);
