@@ -298,7 +298,7 @@ dependencies = [
 [[package]]
 name = "bee-ledger"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#3cba1a5682c3f5c952037e1b0a2e927cc93841a9"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#05672ae80745ff051972447be150ecc3fad485a3"
 dependencies = [
  "async-trait",
  "bee-common",
@@ -323,7 +323,7 @@ dependencies = [
 [[package]]
 name = "bee-message"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#3cba1a5682c3f5c952037e1b0a2e927cc93841a9"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#05672ae80745ff051972447be150ecc3fad485a3"
 dependencies = [
  "bech32",
  "bee-common",
@@ -340,7 +340,7 @@ dependencies = [
 [[package]]
 name = "bee-network"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#3cba1a5682c3f5c952037e1b0a2e927cc93841a9"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#05672ae80745ff051972447be150ecc3fad485a3"
 dependencies = [
  "async-trait",
  "bee-runtime",
@@ -359,7 +359,7 @@ dependencies = [
 [[package]]
 name = "bee-pow"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#3cba1a5682c3f5c952037e1b0a2e927cc93841a9"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#05672ae80745ff051972447be150ecc3fad485a3"
 dependencies = [
  "bee-crypto",
  "bee-ternary",
@@ -370,7 +370,7 @@ dependencies = [
 [[package]]
 name = "bee-protocol"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#3cba1a5682c3f5c952037e1b0a2e927cc93841a9"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#05672ae80745ff051972447be150ecc3fad485a3"
 dependencies = [
  "async-channel",
  "async-priority-queue",
@@ -407,7 +407,7 @@ dependencies = [
 [[package]]
 name = "bee-rest-api"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#3cba1a5682c3f5c952037e1b0a2e927cc93841a9"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#05672ae80745ff051972447be150ecc3fad485a3"
 dependencies = [
  "async-trait",
  "bech32",
@@ -447,7 +447,7 @@ dependencies = [
 [[package]]
 name = "bee-snapshot"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#3cba1a5682c3f5c952037e1b0a2e927cc93841a9"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#05672ae80745ff051972447be150ecc3fad485a3"
 dependencies = [
  "async-trait",
  "bee-common",
@@ -477,7 +477,7 @@ dependencies = [
 [[package]]
 name = "bee-tangle"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#3cba1a5682c3f5c952037e1b0a2e927cc93841a9"
+source = "git+https://github.com/iotaledger/bee.git?branch=chrysalis-pt-2#05672ae80745ff051972447be150ecc3fad485a3"
 dependencies = [
  "async-trait",
  "bee-common",

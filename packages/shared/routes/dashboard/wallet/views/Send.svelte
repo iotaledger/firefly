@@ -33,9 +33,9 @@
     }
     const handleSendClick = () => {
         if (selectedSendType === SEND_TYPE.INTERNAL) {
-            internalTransfer(from.id, to.id, $sendParams.amount)
+            internalTransfer(from.value, to.id, $sendParams.amount)
         } else {
-            send(from.id, $sendParams.address, $sendParams.amount)
+            send(from.value, $sendParams.address, $sendParams.amount)
         }
     }
     const handleBackClick = () => {

@@ -91,5 +91,7 @@ const Electron = {
 contextBridge.exposeInMainWorld('__WALLET_INIT__', {
     run: Wallet.init,
 })
+
 contextBridge.exposeInMainWorld('__WALLET_API__', Wallet.api)
+
 contextBridge.exposeInMainWorld('Electron', Electron)
