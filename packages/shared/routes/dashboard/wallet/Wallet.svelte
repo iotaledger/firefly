@@ -205,7 +205,7 @@
     }
 
     function onCreateAccount(alias) {
-        api.createAccount(
+        const _create = () => api.createAccount(
             {
                 alias,
                 clientOptions: {
@@ -239,6 +239,19 @@
                 },
             }
         )
+
+        api.getStrongholdStatus({
+            onSuccess(strongholdStatusResponse) {
+                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                    openPopup({ type: 'password', props: { onSuccess: _create } })
+                } else {
+                    _create()
+                }
+            },
+            onError(error) {
+                console.error(error)
+            },
+        })
     }
 
     function onSend(senderAccountId, receiveAddress, amount) {
