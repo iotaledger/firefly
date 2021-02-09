@@ -86,7 +86,7 @@
             ]
         },
         "nsis": {
-            "deleteAppDataOnUninstall": true
+            "deleteAppDataOnUninstall": false
         },
         "win": {
             "icon": "./public/assets/icons/win/icon.ico",
