@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onDestroy } from 'svelte'
-    import { get } from 'svelte/store';
+    import { get } from 'svelte/store'
     import { Logo, Icon, NetworkIndicator, ProfileActionsModal } from 'shared/components'
     import { networkStatus } from 'shared/lib/networkStatus'
     import { activeProfile } from 'shared/lib/profile'

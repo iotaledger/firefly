@@ -32,7 +32,7 @@
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-between items-center">
             <Button ghost classes="flex-1" onClick={() => console.log('foo')}>{locale('actions.check_again')}</Button>
-            <Button  classes="flex-1" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
+            <Button classes="flex-1" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex p-16">
             <Illustration width="100%" illustration="balance-desktop" />

@@ -34,8 +34,12 @@
             <Text type="p" secondary highlighted classes="font-bold">{locale('views.recovery_phrase.body_2')}</Text>
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap items-center space-x-4">
-            <Button secondary classes="flex-1" onClick={() => handleContinueClick('backup')}>{locale('actions.save_backup_file')}</Button>
-            <Button disabled={!hasRevealedRecoveryPhrase} classes="flex-1" onClick={() => handleContinueClick('verify')}>{locale('actions.continue')}</Button>
+            <Button secondary classes="flex-1" onClick={() => handleContinueClick('backup')}>
+                {locale('actions.save_backup_file')}
+            </Button>
+            <Button disabled={!hasRevealedRecoveryPhrase} classes="flex-1" onClick={() => handleContinueClick('verify')}>
+                {locale('actions.continue')}
+            </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex flex-row flex-wrap items-center justify-center p-16">
             {#if mnemonic !== undefined && mnemonic !== null}

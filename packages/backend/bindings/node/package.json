@@ -12,7 +12,7 @@
   "scripts": {
     "postinstall": "yarn build",
     "pretest": "yarn build:api && yarn neon build --release",
-    "build": "npm-run-all -p build:api build:binding",
+    "build": "node ./scripts/build.js",
     "build:binding": "electron-build-env -- yarn neon build --release && move-file native/index.node ./index.node",
     "build:api": "rimraf ./index.js && rollup -c --silent && yarn generate-declaration",
     "generate-declaration": "tsc index.ts --declaration --emitDeclarationOnly --outDir dist && move-file dist/backend/bindings/node/index.d.ts dist/index.d.ts && replace --silent '\\.\\.\\/\\.\\.' '.' dist/index.d.ts",
@@ -29,7 +29,6 @@
     "mocha": "^8.0.1",
     "move-file-cli": "^2.0.0",
     "replace": "^1.2.0",
-    "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
     "rollup": "2.28.1",
     "rollup-plugin-terser": "7.0.2",

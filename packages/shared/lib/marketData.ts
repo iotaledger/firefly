@@ -5,9 +5,7 @@ import Validator from 'shared/lib/validator'
 /**
  * Market data endpoints list
  */
-export const MARKETDATA_ENDPOINTS = [
-    'https://nodes.iota.works/api/market',
-]
+export const MARKETDATA_ENDPOINTS = ['https://nodes.iota.works/api/market']
 
 /**
  * Default timeout for a request made to an endpoint
@@ -84,7 +82,7 @@ type MarketData = {
 }
 
 export type MarketDataValidationResponse = {
-    type: 'MarketData',
+    type: 'MarketData'
     payload: MarketData
 }
 
@@ -204,8 +202,8 @@ export async function fetchMarketData(): Promise<void> {
 
             const { isValid, error } = new Validator().performValidation({
                 type: 'MarketData',
-                payload: marketData
-            });
+                payload: marketData,
+            })
 
             if (isValid) {
                 const _priceData = {} as PriceData

@@ -9,34 +9,34 @@ const Keychain = {
     SERVICE_NAME: app.isPackaged ? 'Firefly' : 'Firefly — Dev',
     /**
      * Gets all credentials from keychain
-     * 
+     *
      * @method getAll
-     * 
+     *
      * @returns {Promise}
      */
     getAll() {
-        return keytar.findCredentials(this.SERVICE_NAME);
+        return keytar.findCredentials(this.SERVICE_NAME)
     },
     /**
      * Gets credential from keychain for provided key
-     * 
+     *
      * @method get
-     * 
+     *
      * @param {string} key
-     * 
+     *
      * @returns {Promise}
      */
     get(key) {
-        return keytar.getPassword(this.SERVICE_NAME, key);
+        return keytar.getPassword(this.SERVICE_NAME, key)
     },
     /**
      * Sets credential in keychain for provided key
-     * 
+     *
      * @param {string} key
      * @param {string} content
-     * 
+     *
      * @method set
-     * 
+     *
      * @returns {Promise}
      */
     set(key, content) {
@@ -44,17 +44,16 @@ const Keychain = {
     },
     /**
      * Removes credential from keychain for provided key
-     * 
+     *
      * @method remove
-     * 
+     *
      * @param {string} key
-     * 
+     *
      * @returns {Promise}
      */
     remove(key) {
-        return keytar.deletePassword(this.SERVICE_NAME, key);
-    }
+        return keytar.deletePassword(this.SERVICE_NAME, key)
+    },
 }
 
-
-module.exports = Keychain;
+module.exports = Keychain

@@ -32,9 +32,9 @@ export const strongholdPassword = writable<string>(null)
 export const mnemonic = writable<Array<string>>(null)
 
 interface SendParams {
-    amount: number;
-    address: string;
-    message: string;
+    amount: number
+    address: string
+    message: string
 }
 
 /**

@@ -38,12 +38,10 @@
         to = item
     }
     const handleSendClick = () => {
-        if (validInputs()) {
-            if (selectedSendType === SEND_TYPE.INTERNAL) {
-                internalTransfer(from.id, to.id, $sendParams.amount)
-            } else {
-                send(from.id, $sendParams.address, $sendParams.amount)
-            }
+        if (selectedSendType === SEND_TYPE.INTERNAL) {
+            internalTransfer(from.value, to.id, $sendParams.amount)
+        } else {
+            send(from.value, $sendParams.address, $sendParams.amount)
         }
     }
     const handleBackClick = () => {

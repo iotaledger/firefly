@@ -141,35 +141,35 @@
             "profile": {
                 "title": "Profile",
                 "description": ""
-            }, 
+            },
             "sync": {
                 "title": "Sync accounts",
                 "description": ""
-            }, 
+            },
             "theme": {
                 "title": "Theme",
                 "description": ""
-            }, 
+            },
             "language": {
                 "title": "Language",
                 "description": ""
-            }, 
+            },
             "currency": {
                 "title": "Currency",
                 "description": ""
-            }, 
+            },
             "notifications": {
                 "title": "Notifications",
                 "description": ""
-            }, 
+            },
             "exportStronghold": {
                 "title": "Export Stronghold",
                 "description": ""
-            }, 
+            },
             "appLock": {
                 "title": "App Lock",
                 "description": ""
-            }, 
+            },
             "changePassword": {
                 "title": "Change password",
                 "description": ""
@@ -185,19 +185,19 @@
             "resyncAccounts": {
                 "title": "Resync accounts",
                 "description": ""
-            }, 
+            },
             "resetWallet": {
                 "title": "Reset wallet",
                 "description": ""
-            }, 
+            },
             "deepLinks": {
                 "title": "Deep links",
                 "description": ""
-            }, 
+            },
             "developerMode": {
                 "title": "Developer mode",
                 "description": ""
-            }, 
+            },
             "nodeSettings": {
                 "title": "Node settings",
                 "description": ""
@@ -209,31 +209,31 @@
             "proofOfWork": {
                 "title": "Proof of work",
                 "description": ""
-            }, 
+            },
             "errorLog": {
                 "title": "Error log",
                 "description": ""
-            }, 
+            },
             "stateExport": {
                 "title": "State export",
                 "description": ""
-            }, 
+            },
             "troubleshoot": {
                 "title": "Troubleshoot",
                 "description": ""
-            }, 
+            },
             "documentation": {
                 "title": "Documentation",
                 "description": ""
-            }, 
+            },
             "faq": {
                 "title": "FAQ",
                 "description": ""
-            }, 
+            },
             "discord": {
                 "title": "Discord",
                 "description": ""
-            }, 
+            },
             "about": {
                 "title": "About",
                 "description": ""
@@ -244,7 +244,7 @@
             "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
-            "security":{
+            "security": {
                 "version": {
                     "title": "Firefly v{version}",
                     "up_to_date": "Up to date",

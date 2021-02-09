@@ -33,7 +33,7 @@
         document.dir = $dir
     }
     let splash = true
-    setupI18n({ withLocale: get(activeProfile) ? get(activeProfile).settings.language : 'en'})
+    setupI18n({ withLocale: get(activeProfile) ? get(activeProfile).settings.language : 'en' })
     onMount(async () => {
         setTimeout(() => {
             splash = false
@@ -42,7 +42,7 @@
 
         await fetchMarketData()
         await pollNetworkStatus()
-        
+
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
         if (!devMode) {
             await refreshVersionDetails()

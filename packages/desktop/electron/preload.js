@@ -1,12 +1,21 @@
 const binding = require('wallet-nodejs-binding')
-const PincodeManager = require('../libs/pincodeManager');
-const DeepLinkManager = require('../libs/deepLinkManager');
-const NotificationManager = require('../libs/notificationManager');
+const PincodeManager = require('../libs/pincodeManager')
+const DeepLinkManager = require('../libs/deepLinkManager')
+const NotificationManager = require('../libs/notificationManager')
 const { ipcRenderer, contextBridge } = require('electron')
+const { proxyApi } = require('../../shared/lib/walletApi')
 
-const __WALLET__ = binding;
+let activeProfileId = null
+
+const Wallet = binding
+Wallet.api = proxyApi(() => activeProfileId)
+
+const eventListeners = {}
 
 const Electron = {
+    updateActiveProfile(id) {
+        activeProfileId = id
+    },
     PincodeManager,
     DeepLinkManager,
     NotificationManager,
@@ -66,19 +75,23 @@ const Electron = {
      * @returns {undefined}
      */
     onEvent: function (event, callback) {
-        let listeners = this._eventListeners[event];
+        let listeners = eventListeners[event]
         if (!listeners) {
-            listeners = this._eventListeners[event] = [];
+            listeners = eventListeners[event] = []
             ipcRenderer.on(event, (e, args) => {
                 listeners.forEach((call) => {
-                    call(args);
-                });
-            });
+                    call(args)
+                })
+            })
         }
-        listeners.push(callback);
+        listeners.push(callback)
     },
-    _eventListeners: {},
-};
+}
 
-contextBridge.exposeInMainWorld('__WALLET__', __WALLET__);
-contextBridge.exposeInMainWorld('Electron', Electron);
+contextBridge.exposeInMainWorld('__WALLET_INIT__', {
+    run: Wallet.init,
+})
+
+contextBridge.exposeInMainWorld('__WALLET_API__', Wallet.api)
+
+contextBridge.exposeInMainWorld('Electron', Electron)
