@@ -1770,7 +1770,7 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "0.5.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#b939969fcb2a93a70e0743961d666fd982a40526"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#428dc3493aaeaf3cfea377c93a8c24a60127e8e8"
 dependencies = [
  "bee-common",
  "bee-common-derive",
@@ -1796,7 +1796,7 @@ dependencies = [
 [[package]]
 name = "iota-core"
 version = "0.2.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#b939969fcb2a93a70e0743961d666fd982a40526"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#428dc3493aaeaf3cfea377c93a8c24a60127e8e8"
 dependencies = [
  "bee-common",
  "bee-message",
@@ -4011,9 +4011,9 @@ dependencies = [
 
 [[package]]
 name = "unicode-normalization"
-version = "0.1.16"
+version = "0.1.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a13e63ab62dbe32aeee58d1c5408d35c36c392bba5d9d3142287219721afe606"
+checksum = "07fbfce1c8a97d547e8b5334978438d9d6ec8c20e38f56d4a4374d181493eaef"
 dependencies = [
  "tinyvec",
 ]
