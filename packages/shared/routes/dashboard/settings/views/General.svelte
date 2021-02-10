@@ -56,7 +56,7 @@
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <section id="notifications" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.notifications.title')}</Text>
-        <Text type="p" secondary classes="mb-5">{locale('views.settings.exportStronghold.description')}</Text>
+        <Text type="p" secondary classes="mb-5">{locale('views.settings.notifications.description')}</Text>
         <Toggle value={notificationsEnabled} label={locale('actions.enableNotifications')} />
     </section>
 </div>

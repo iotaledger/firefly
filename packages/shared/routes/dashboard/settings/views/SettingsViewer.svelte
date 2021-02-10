@@ -3,6 +3,7 @@
 
     import { getContext } from 'svelte'
     import { SettingsNavigator, Text, Scroller } from 'shared/components'
+    import { accountType } from 'shared/lib/wallet'
     import { General, Security, Advanced } from './'
 
     export let locale
@@ -13,9 +14,15 @@
     let scroller
     let index
 
+    const securitySettings = Object.assign({}, SecuritySettings)
+        if ($accountType.type !== 'Stronghold') {
+            delete securitySettings.ExportStronghold
+            delete securitySettings.ChangePassword
+        }
+
     const settings = {
         generalSettings: GeneralSettings,
-        security: SecuritySettings,
+        security: securitySettings,
         advancedSettings: AdvancedSettings,
         helpAndInfo: HelpAndInfo,
     }

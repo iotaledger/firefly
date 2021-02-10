@@ -3,7 +3,7 @@
     import zxcvbn from 'zxcvbn'
     import { Text, Dropdown, Password, Button, Checkbox } from 'shared/components'
     import { updateProfile, activeProfile, removeProfile } from 'shared/lib/profile'
-    import { api, destroyActor } from 'shared/lib/wallet'
+    import { api, destroyActor, accountType } from 'shared/lib/wallet'
     import { openPopup } from 'shared/lib/popup'
 
     function assignTimeoutOptionLabel(timeInMinutes) {
@@ -31,9 +31,11 @@
     let currentPincode = ''
     let newPincode = ''
     let confirmedPincode = ''
+    let hasStrongholdAccount = true
 
     $: strength = zxcvbn(newPassword).score
     $: valid = strength === 4
+    $: hasStrongholdAccount = $accountType && $accountType.type === 'Stronghold'
 
     const PincodeManager = window['Electron']['PincodeManager']
 
@@ -115,7 +117,7 @@
 
         const _changePassword = () => {
             api.changeStrongholdPassword(currentPassword, newPassword, {
-                onSuccess() {},
+                onSuccess() { },
                 onError(error) {
                     console.error(error)
                 },
@@ -179,77 +181,47 @@
 </script>
 
 <div>
+    {#if hasStrongholdAccount}
     <section id="exportStronghold" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.exportStronghold.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.exportStronghold.description')}</Text>
         <Button classes="w-1/4 h-1/2" onClick={handleExportClick}>{locale('actions.export')}</Button>
     </section>
+    {/if}
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <section id="appLock" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.appLock.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.appLock.description')}</Text>
-        <Dropdown
-            onSelect={(option) => {
-                updateProfile('settings.lockScreenTimeout', option.value)
+        <Dropdown onSelect={(option)=> {
+            updateProfile('settings.lockScreenTimeout', option.value)
             }}
             value={assignTimeoutOptionLabel($activeProfile.settings.lockScreenTimeout)}
             items={lockScreenTimeoutOptions} />
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
+    {#if hasStrongholdAccount}
     <section id="changePassword" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.changePassword.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.changePassword.description')}</Text>
-        <Password
-            classes="mb-8"
-            bind:value={currentPassword}
-            showRevealToggle
-            {locale}
+        <Password classes="mb-8" bind:value={currentPassword} showRevealToggle {locale}
             placeholder={locale('general.currentPassword')} />
-        <Password
-            classes="mb-4"
-            bind:value={newPassword}
-            showRevealToggle
-            strengthLevels={4}
-            showStrengthLevel
-            {strength}
-            {locale}
-            placeholder={locale('general.newPassword')} />
-        <Password
-            classes="mb-5"
-            bind:value={confirmedPassword}
-            showRevealToggle
-            {locale}
+        <Password classes="mb-4" bind:value={newPassword} showRevealToggle strengthLevels={4} showStrengthLevel
+            {strength} {locale} placeholder={locale('general.newPassword')} />
+        <Password classes="mb-5" bind:value={confirmedPassword} showRevealToggle {locale}
             placeholder={locale('general.confirmNewPassword')} />
         <Checkbox classes="mb-5" label={locale('actions.exportNewStronghold')} bind:checked={exportStrongholdChecked} />
         <Button classes="w-1/4" onClick={changePassword}>{locale('views.settings.changePassword.title')}</Button>
     </section>
+    {/if}
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <section id="changePincode" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.changePincode.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.changePincode.description')}</Text>
-        <Password
-            classes="mb-4"
-            bind:value={currentPincode}
-            showRevealToggle
-            {locale}
-            maxlength="6"
-            numeric
+        <Password classes="mb-4" bind:value={currentPincode} showRevealToggle {locale} maxlength="6" numeric
             placeholder={locale('views.settings.changePincode.currentPincode')} />
-        <Password
-            classes="mb-4"
-            bind:value={newPincode}
-            showRevealToggle
-            {locale}
-            maxlength="6"
-            numeric
+        <Password classes="mb-4" bind:value={newPincode} showRevealToggle {locale} maxlength="6" numeric
             placeholder={locale('views.settings.changePincode.newPincode')} />
-        <Password
-            classes="mb-5"
-            bind:value={confirmedPincode}
-            showRevealToggle
-            {locale}
-            maxlength="6"
-            numeric
+        <Password classes="mb-5" bind:value={confirmedPincode} showRevealToggle {locale} maxlength="6" numeric
             placeholder={locale('views.settings.changePincode.confirmNewPincode')} />
         <Button classes="w-1/4" onClick={changePincode}>{locale('views.settings.changePincode.action')}</Button>
     </section>
