@@ -62,7 +62,9 @@
         "recovery_phrase": {
             "title": "Palautuslauseke",
             "body_1": "Kirjoita sanat huolellisesti oikeassa järjestyksessä.",
-            "body_2": "Pidä palautuslausekkeesi vain itsesi tiedossa ja turvallisesti tallennettuna. Älä jaa sitä kenenkään kanssa."
+            "body_2": "Pidä palautuslausekkeesi vain itsesi tiedossa ja turvallisesti tallennettuna. Älä jaa sitä kenenkään kanssa.",
+            "reveal_recovery_phrase": "Näytä palautuslauseke",
+            "hide_recovery_phrase": "Hide recovery phrase"
         },
         "verify_recovery_phrase": {
             "title": "Vahvista palautuslauseke",
@@ -172,6 +174,14 @@
                 "title": "Vaihda salasana",
                 "description": ""
             },
+            "changePincode": {
+                "title": "Change PIN code",
+                "description": "",
+                "currentPincode": "Current PIN",
+                "newPincode": "New PIN",
+                "confirmNewPincode": "Confirm new PIN",
+                "action": "Change PIN"
+            },
             "resyncAccounts": {
                 "title": "Uudelleen synkronoi tilit",
                 "description": ""
@@ -190,6 +200,10 @@
             },
             "nodeSettings": {
                 "title": "Noodin asetukset",
+                "description": ""
+            },
+            "configureNodeList": {
+                "title": "Configure node list",
                 "description": ""
             },
             "proofOfWork": {
@@ -257,6 +271,10 @@
                 "status": "Status",
                 "messages_per_second": "Messages per second",
                 "confirmation_rate": "Confirmation rate"
+            },
+            "profile_modal": {
+                "all_settings": "All settings",
+                "logout": "Log out"
             }
         }
     },
@@ -295,6 +313,14 @@
         "address_history": {
             "title": "{name} account address history",
             "current_balance": "Current balance: {balance}"
+        },
+        "node": {
+            "title_add": "Add a node",
+            "title_details": "Node details",
+            "node_address": "Node address",
+            "optional_username": "Username (optional)",
+            "optional_password": "Password (optional)",
+            "set_as_primary_node": "Set as primary node"
         }
     },
     "actions": {
@@ -340,11 +366,14 @@
         "outsourceProofOfWork": "Ulkoista todiste työstä (PoW)",
         "unlock": "Avaa",
         "update_firefly": "Update Firefly",
+        "install_firefly": "Install Firefly",
         "save_backup": "Save backup",
         "customize_account": "Customise account",
         "sync_account": "Sync account",
         "view_address_history": "View address history",
-        "delete_account": "Delete account"
+        "delete_account": "Delete account",
+        "max": "Max",
+        "add_node": "Add node"
     },
     "general": {
         "password": "Salasana",
@@ -398,12 +427,15 @@
         "automaticNodeSelection": "Automaattinen noodin valinta",
         "manualNodeSelection": "Manuaalinen noodin valinta",
         "profiles": "Profiilit",
+        "developerProfile": "Developer Profile",
+        "dev": "Dev",
         "create_account": "Luo tili",
         "account_name": "Tilin nimi",
         "latest_transactions": "Viimeisimmät transaktiot",
         "transactions": "Transaktiot",
         "security": "Suojaus",
-        "account_address": "Tilin osoite"
+        "account_address": "Tilin osoite",
+        "nodes": "Nodes"
     },
     "dates": {
         "today": "Today",
@@ -411,5 +443,10 @@
         "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
         "months_ago": "{time, plural, one {# month} other {# months}} ago",
         "years_ago": "{time, plural, one {# year} other {# years}} ago"
+    },
+    "notifications": {
+        "valueTx": "Receiving {{value}} to {{account}}",
+        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
+        "failed": "Outgoing {{value}} from {{account}} has failed"
     }
 }

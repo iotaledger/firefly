@@ -62,7 +62,9 @@
         "recovery_phrase": {
             "title": "Herstel frase",
             "body_1": "Skryf die woorde noukeurig neer in die presiese volgorde.",
-            "body_2": "Stoor you herstelfrase privaat en veilig. Moet dit met niemand deel nie."
+            "body_2": "Stoor you herstelfrase privaat en veilig. Moet dit met niemand deel nie.",
+            "reveal_recovery_phrase": "Openbaar herstelfrase",
+            "hide_recovery_phrase": "Hide recovery phrase"
         },
         "verify_recovery_phrase": {
             "title": "Verifieer herstelfrase",
@@ -172,6 +174,14 @@
                 "title": "Verander wagwoord",
                 "description": ""
             },
+            "changePincode": {
+                "title": "Change PIN code",
+                "description": "",
+                "currentPincode": "Current PIN",
+                "newPincode": "New PIN",
+                "confirmNewPincode": "Confirm new PIN",
+                "action": "Change PIN"
+            },
             "resyncAccounts": {
                 "title": "Hersinkroniseer rekeninge",
                 "description": ""
@@ -190,6 +200,10 @@
             },
             "nodeSettings": {
                 "title": "Node instellings",
+                "description": ""
+            },
+            "configureNodeList": {
+                "title": "Configure node list",
                 "description": ""
             },
             "proofOfWork": {
@@ -234,45 +248,49 @@
                 "version": {
                     "title": "Firefly v{version}",
                     "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "out_of_date": "Verouderd"
                 },
                 "hardware_device": {
-                    "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "title": "Hardeware-toestel",
+                    "none_detected": "Nie bespeur nie"
                 },
                 "stronghold_status": {
                     "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "locked": "Gesluit",
+                    "unlocked": "Oopgesluit"
                 },
                 "stronghold_backup": {
                     "title": "Stronghold Backup",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "weeks_ago": "{weeks, plural, one {# week} other {# weke}} ago"
                 }
             },
             "network": {
-                "network_operational": "Network Operational",
-                "network_degraded": "Network Degraded",
-                "network_down": "Network Down",
+                "network_operational": "Netwerk Operasioneel",
+                "network_degraded": "Netwerk is nie optimaal nie",
+                "network_down": "Netwerk Af",
                 "status": "Status",
-                "messages_per_second": "Messages per second",
-                "confirmation_rate": "Confirmation rate"
+                "messages_per_second": "Boodskappe per sekondes",
+                "confirmation_rate": "Confirmation tempo"
+            },
+            "profile_modal": {
+                "all_settings": "All settings",
+                "logout": "Log out"
             }
         }
     },
     "popups": {
         "password": {
             "title": "Wagwoord benodig",
-            "subtitle": "Please enter your wallet password to unlock Stronghold"
+            "subtitle": "Voer asseblief you beursie-wagwoord in om Stronghold te ontsluit"
         },
         "qr": {
             "title": "Jou QR code"
         },
         "version": {
-            "title": "Current version: {version}",
-            "up_to_date_title": "Firefly is up to date",
-            "up_to_date_description": "You are running the latest and safest version of Firefly.",
-            "update_available": "Firefly update available",
+            "title": "Huidige weergawe: {version}",
+            "up_to_date_title": "Firefly is op datum",
+            "up_to_date_description": "Jy gebruik die nuutste en veiligste weergawe van Firefly.",
+            "update_available": "Firefly update beskikbaar",
             "update_details": "Version {version} - {date}"
         },
         "backup": {
@@ -295,6 +313,14 @@
         "address_history": {
             "title": "{name} account address history",
             "current_balance": "Current balance: {balance}"
+        },
+        "node": {
+            "title_add": "Add a node",
+            "title_details": "Node details",
+            "node_address": "Node address",
+            "optional_username": "Username (optional)",
+            "optional_password": "Password (optional)",
+            "set_as_primary_node": "Set as primary node"
         }
     },
     "actions": {
@@ -340,11 +366,14 @@
         "outsourceProofOfWork": "Uitkontrakteer proof of work",
         "unlock": "Ontsluit",
         "update_firefly": "Update Firefly",
+        "install_firefly": "Install Firefly",
         "save_backup": "Save backup",
         "customize_account": "Customise account",
         "sync_account": "Sync account",
         "view_address_history": "View address history",
-        "delete_account": "Delete account"
+        "delete_account": "Delete account",
+        "max": "Max",
+        "add_node": "Add node"
     },
     "general": {
         "password": "Wagwoord",
@@ -398,12 +427,15 @@
         "automaticNodeSelection": "Outomatiese node seleksie",
         "manualNodeSelection": "Manuele node seleksie",
         "profiles": "Profiel",
+        "developerProfile": "Developer Profile",
+        "dev": "Dev",
         "create_account": "Skep 'n rekening",
         "account_name": "Rekening naam",
         "latest_transactions": "Nuutste transaksie",
         "transactions": "Transaksies",
         "security": "Sekuriteit",
-        "account_address": "Rekeningadres"
+        "account_address": "Rekeningadres",
+        "nodes": "Nodes"
     },
     "dates": {
         "today": "Today",
@@ -411,5 +443,10 @@
         "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
         "months_ago": "{time, plural, one {# month} other {# months}} ago",
         "years_ago": "{time, plural, one {# year} other {# years}} ago"
+    },
+    "notifications": {
+        "valueTx": "Receiving {{value}} to {{account}}",
+        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
+        "failed": "Outgoing {{value}} from {{account}} has failed"
     }
 }

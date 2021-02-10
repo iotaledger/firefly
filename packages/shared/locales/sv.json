@@ -62,7 +62,9 @@
         "recovery_phrase": {
             "title": "Återställningsfras",
             "body_1": "Var noggrann och skriv ner orden i exakt samma ordning.",
-            "body_2": "Håll din återställningsfras för dig själv och lagrad på ett säkert sätt. Dela den inte med någon."
+            "body_2": "Håll din återställningsfras för dig själv och lagrad på ett säkert sätt. Dela den inte med någon.",
+            "reveal_recovery_phrase": "Visa återställningsfras",
+            "hide_recovery_phrase": "Hide recovery phrase"
         },
         "verify_recovery_phrase": {
             "title": "Verifiera återställningsfras",
@@ -172,6 +174,14 @@
                 "title": "Ändra lösenord",
                 "description": ""
             },
+            "changePincode": {
+                "title": "Change PIN code",
+                "description": "",
+                "currentPincode": "Current PIN",
+                "newPincode": "New PIN",
+                "confirmNewPincode": "Confirm new PIN",
+                "action": "Change PIN"
+            },
             "resyncAccounts": {
                 "title": "Synkronisera om konton",
                 "description": ""
@@ -190,6 +200,10 @@
             },
             "nodeSettings": {
                 "title": "Nod-inställningar",
+                "description": ""
+            },
+            "configureNodeList": {
+                "title": "Configure node list",
                 "description": ""
             },
             "proofOfWork": {
@@ -233,68 +247,80 @@
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "up_to_date": "Uppdaterad",
+                    "out_of_date": "Behöver uppdateras"
                 },
                 "hardware_device": {
-                    "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "title": "Hårdvaruenhet",
+                    "none_detected": "Ingen upptäckt"
                 },
                 "stronghold_status": {
-                    "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "title": "Stronghold status",
+                    "locked": "Låst",
+                    "unlocked": "Upplåst"
                 },
                 "stronghold_backup": {
-                    "title": "Stronghold Backup",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "title": "Stronghold säkerhetskopia",
+                    "weeks_ago": "{weeks, plural, one {# vecka} other {# veckor}} sedan"
                 }
             },
             "network": {
-                "network_operational": "Network Operational",
-                "network_degraded": "Network Degraded",
-                "network_down": "Network Down",
+                "network_operational": "Nätverk i drift",
+                "network_degraded": "Nätverk försämrat",
+                "network_down": "Nätverk nere",
                 "status": "Status",
-                "messages_per_second": "Messages per second",
-                "confirmation_rate": "Confirmation rate"
+                "messages_per_second": "Meddelanden per sekund",
+                "confirmation_rate": "Bekräftelseshastighet"
+            },
+            "profile_modal": {
+                "all_settings": "All settings",
+                "logout": "Log out"
             }
         }
     },
     "popups": {
         "password": {
             "title": "Lösenord krävs",
-            "subtitle": "Please enter your wallet password to unlock Stronghold"
+            "subtitle": "Ange din plånboks lösenord för att låsa upp Stronghold"
         },
         "qr": {
             "title": "Din QR-kod"
         },
         "version": {
-            "title": "Current version: {version}",
-            "up_to_date_title": "Firefly is up to date",
-            "up_to_date_description": "You are running the latest and safest version of Firefly.",
-            "update_available": "Firefly update available",
+            "title": "Nuvarande version: {version}",
+            "up_to_date_title": "Firefly är uppdaterad",
+            "up_to_date_description": "Du kör den senaste och säkraste versionen av Firefly.",
+            "update_available": "Firefly-uppdatering tillgänglig",
             "update_details": "Version {version} - {date}"
         },
         "backup": {
-            "title": "Last backup: {date}",
-            "last_backup": "You last backed up {date}",
-            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
-            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "not_backed_up": "Not backed up",
-            "not_backed_up_description": "You have not backed up your Stronghold"
+            "title": "Senaste säkerhetskopian: {date}",
+            "last_backup": "Du säkerhetskopierade senast {date}",
+            "backup_description": "Det är viktigt att säkerhetskopiera regelbundet för att säkerställa att du har en kopia av dina konton och transaktionshistorik.",
+            "backup_warning": "Om du förlorar din backup och återställningsfras förlorar du tillgång till dina pengar.",
+            "not_backed_up": "Inte säkerhetskopierad",
+            "not_backed_up_description": "Du har inte säkerhetskopierat din Stronghold"
         },
         "delete_account": {
-            "title": "Delete {name}?",
-            "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Type your wallet’s password to confirm.",
-            "delete_account": "Delete account",
-            "error_title": "Unable to delete {name}",
-            "error_body_1": "To delete an account you must have 0 balance.",
-            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+            "title": "Radera {name}?",
+            "body": "Du kommer permanent att förlora din transaktionshistorik och kanske något annat också.",
+            "type_password": "Ange plånbokens lösenord för att bekräfta.",
+            "delete_account": "Radera konto",
+            "error_title": "Det gick inte att ta bort {name}",
+            "error_body_1": "För att ta bort ett konto måste du ha 0 saldo.",
+            "error_body_2": "Du har för närvarande {balance} kvar på detta konto. Vänligen flytta dessa pengar till ett annat konto och försök igen."
         },
         "address_history": {
-            "title": "{name} account address history",
-            "current_balance": "Current balance: {balance}"
+            "title": "{name} kontoadress-historik",
+            "current_balance": "Nuvarande saldo: {balance}"
+        },
+        "node": {
+            "title_add": "Add a node",
+            "title_details": "Node details",
+            "node_address": "Node address",
+            "optional_username": "Username (optional)",
+            "optional_password": "Password (optional)",
+            "set_as_primary_node": "Set as primary node"
         }
     },
     "actions": {
@@ -302,7 +328,7 @@
         "back": "Bakåt",
         "cancel": "Avbryt",
         "close": "Stäng",
-        "dismiss": "Dismiss",
+        "dismiss": "Avfärda",
         "save": "Spara",
         "import_seed": "Importera en befintlig seed",
         "import_wallet": "Importera befintlig plånbok",
@@ -339,12 +365,15 @@
         "exportState": "Exportera tillstånd",
         "outsourceProofOfWork": "Outsourca bevis på arbete (PoW)",
         "unlock": "Lås upp",
-        "update_firefly": "Update Firefly",
-        "save_backup": "Save backup",
-        "customize_account": "Customise account",
-        "sync_account": "Sync account",
-        "view_address_history": "View address history",
-        "delete_account": "Delete account"
+        "update_firefly": "Uppdatera Firefly",
+        "install_firefly": "Install Firefly",
+        "save_backup": "Spara säkerhetskopia",
+        "customize_account": "Anpassa konto",
+        "sync_account": "Synkronisera konto",
+        "view_address_history": "Visa adresshistorik",
+        "delete_account": "Radera konto",
+        "max": "Max",
+        "add_node": "Add node"
     },
     "general": {
         "password": "Lösenord",
@@ -357,13 +386,13 @@
         "recent_activity": "Senaste aktivitet",
         "sent": "Skickat",
         "received": "Mottaget",
-        "send_payment": "Send payment",
-        "move_funds": "Move funds",
+        "send_payment": "Skicka betalning",
+        "move_funds": "Flytta pengar",
         "send_funds": "Skicka pengar",
         "send_to_address": "Skicka till en adress",
         "scan_qr_or_paste": "Skanna en QR-kod eller klistra in en adress",
         "move_funds_between_accounts": "Flytta pengar mellan dina konton",
-        "send_tokens_to_address": "Send tokens to an address",
+        "send_tokens_to_address": "Skicka tokens till en adress",
         "manage_account": "Hantera konto",
         "customize_account": "Anpassa ditt konto",
         "account": "Konto",
@@ -374,7 +403,7 @@
         "from": "Från",
         "to": "Till",
         "receive_funds": "Ta emot pengar",
-        "my_address": "My Address",
+        "my_address": "Min adress",
         "share_address": "Dela en adress",
         "your_address": "Din adress",
         "generate_new_address": "Skapa ny adress",
@@ -391,25 +420,33 @@
         "light_theme": "Ljust tema",
         "dark_theme": "Mörkt tema",
         "total_balance": "Totalt saldo",
-        "account_balance": "Account Balance",
+        "account_balance": "Kontosaldo",
         "incoming": "Inkommande",
         "outgoing": "Utgående",
         "accounts": "Konton",
         "automaticNodeSelection": "Automatiskt val av nod",
         "manualNodeSelection": "Manuellt val av nod",
         "profiles": "Profiler",
+        "developerProfile": "Developer Profile",
+        "dev": "Dev",
         "create_account": "Skapa ett konto",
         "account_name": "Kontonamn",
         "latest_transactions": "Senaste transaktionerna",
         "transactions": "Transaktioner",
         "security": "Säkerhet",
-        "account_address": "Konto-adress"
+        "account_address": "Konto-adress",
+        "nodes": "Nodes"
     },
     "dates": {
-        "today": "Today",
-        "days_ago": "{time, plural, one {# day} other {# days}} ago",
-        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
-        "months_ago": "{time, plural, one {# month} other {# months}} ago",
-        "years_ago": "{time, plural, one {# year} other {# years}} ago"
+        "today": "Idag",
+        "days_ago": "{time, plural, one {# dag} other {# dagar}} sedan",
+        "weeks_ago": "{time, plural, one {# vecka} other {# veckor}} sedan",
+        "months_ago": "{time, plural, one {# månad} other {# månader}} sedan",
+        "years_ago": "{time, plural, one {# år} other {# år}} sedan"
+    },
+    "notifications": {
+        "valueTx": "Receiving {{value}} to {{account}}",
+        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
+        "failed": "Outgoing {{value}} from {{account}} has failed"
     }
 }
