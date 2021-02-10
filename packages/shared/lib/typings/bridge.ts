@@ -22,6 +22,7 @@ export interface BridgeMessage {
 }
 
 export enum ResponseTypes {
+    InvalidMessage = 'InvalidMessage',
     RemovedAccount = 'RemovedAccount',
     CreatedAccount = 'CreatedAccount',
     ReadAccount = 'ReadAccount',

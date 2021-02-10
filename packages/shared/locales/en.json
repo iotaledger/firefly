@@ -404,6 +404,7 @@
         "sync_account": "Sync account",
         "view_address_history": "View address history",
         "delete_account": "Delete account",
+        "max": "Max",
         "add_node": "Add node",
         "restore": "Restore"
     },

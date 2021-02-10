@@ -62,8 +62,7 @@ export interface Message {
     id: string
     incoming: boolean
     nonce: number
-    parent1: string
-    parent2: string
+    parents: string[]
     remainderValue: number
     timestamp: string
     value: number

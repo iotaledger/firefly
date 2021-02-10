@@ -11,6 +11,7 @@
     import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
     import { openPopup } from 'shared/lib/popup'
     import { walletViewState, WalletViewStates } from 'shared/lib/router'
+    import { sendParams } from 'shared/lib/app'
 
     export let locale
 
@@ -213,7 +214,7 @@
     }
 
     function onCreateAccount(alias) {
-        api.createAccount(
+        const _create = () => api.createAccount(
             {
                 alias,
                 // For subsequent accounts, use the client options and signer type for any of the previous accounts
@@ -248,6 +249,19 @@
                 },
             }
         )
+
+        api.getStrongholdStatus({
+            onSuccess(strongholdStatusResponse) {
+                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                    openPopup({ type: 'password', props: { onSuccess: _create } })
+                } else {
+                    _create()
+                }
+            },
+            onError(error) {
+                console.error(error)
+            },
+        })
     }
 
     function onSend(senderAccountId, receiveAddress, amount) {
@@ -275,6 +289,8 @@
                                 return _account
                             })
                         })
+
+                        sendParams.set({ address: '', amount: 0, message: '' })
                         walletViewState.set(WalletViewStates.Init)
                     },
                     onError(error) {
@@ -288,6 +304,8 @@
             onSuccess(strongholdStatusResponse) {
                 if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
                     openPopup({ type: 'password', props: { onSuccess: _send } })
+                } else {
+                    _send()
                 }
             },
             onError(error) {
@@ -311,6 +329,8 @@
                             return _account
                         })
                     })
+
+                    sendParams.set({ address: '', amount: 0, message: '' })
                     walletViewState.set(WalletViewStates.Init)
                 },
                 onError(response) {
@@ -323,6 +343,8 @@
             onSuccess(strongholdStatusResponse) {
                 if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
                     openPopup({ type: 'password', props: { onSuccess: _internalTransfer } })
+                } else {
+                    _internalTransfer()
                 }
             },
             onError(error) {
