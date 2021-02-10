@@ -1,7 +1,8 @@
-import { writable, Writable, get } from 'svelte/store'
+import { writable, Writable, get, derived } from 'svelte/store'
 import type { MessageResponse, Actor } from './typings/bridge'
 import type { Address } from './typings/address'
 import type { Message } from './typings/message'
+import type { SignerType } from './typings/account'
 import type { Event, TransactionEventPayload, ConfirmationStateChangeEventPayload } from './typings/events'
 import { mnemonic } from 'shared/lib/app'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
@@ -13,6 +14,7 @@ type Account = {
     id: string
     index: number
     alias: string
+    signerType: SignerType
     addresses: Address[]
     messages: Message[]
 }
@@ -53,6 +55,11 @@ export const wallet = writable<WalletState>({
         balanceFiat: '0.00 USD',
     }),
     accounts: writable<Account[]>([]),
+})
+
+export const accountType = derived(wallet, $wallet => {
+    const accounts = get($wallet.accounts)
+    return accounts.length === 0 ? null : accounts[0].signerType
 })
 
 export const resetWallet = () => {

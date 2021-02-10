@@ -190,8 +190,9 @@ pub async fn send_message(serialized_message: String) {
             if let Ok(message) = serde_json::from_str::<MessageFallback>(&serialized_message) {
                 Some((
                     Some(format!(
-                        r#"{{ "type": "InvalidMessage", "payload": {} }}"#,
-                        serialized_message
+                        r#"{{ "type": "InvalidMessage", "payload": {}, "error": {} }}"#,
+                        serialized_message,
+                        serde_json::Value::String(error.to_string()).to_string(),
                     )),
                     message.actor_id,
                 ))

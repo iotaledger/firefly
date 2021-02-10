@@ -3,15 +3,16 @@
     import { writable } from 'svelte/store'
     import { OnboardingLayout, Illustration, Text, Button, Popup } from 'shared/components'
     import { api } from 'shared/lib/wallet'
-    import { DEFAULT_NODES as nodes } from 'shared/lib/network'
+    import { newProfile, saveProfile } from 'shared/lib/profile'
+    import { DEFAULT_NODES as nodes, DEFAULT_NODE as node, network } from 'shared/lib/network'
     import { popupState, openPopup, closePopup } from 'shared/lib/popup'
 
     export let locale
     export let mobile
     let creatingAccount = false
     let simulator = false
-    let checkIfLedgerIsOpened = true
-    let isLedgerOpened = false
+    let checkIfLedgerIsConnected = true
+    let isLedgerConnected = true
 
     openPopup({
         type: 'ledgerNotConnected',
@@ -21,43 +22,49 @@
     })
 
     const unsubscribe = popupState.subscribe(state => {
-        if (!(state.active || isLedgerOpened)) {
+        if (!(state.active || isLedgerConnected)) {
             handleBackClick()
         }
     })
 
     onDestroy(() => {
-        checkIfLedgerIsOpened = false
+        checkIfLedgerIsConnected = false
         unsubscribe()
     })
 
     const dispatch = createEventDispatcher()
 
-    function openLedgerApp() {
-        api.openLedgerApp(simulator, {
+    function assertLedgerNanoConnected() {
+        api.assertLedgerNanoConnected(simulator, {
             onSuccess() {
-                isLedgerOpened = true
+                isLedgerConnected = true
                 closePopup()
             },
-            onError() {
-                if (checkIfLedgerIsOpened) {
-                    setTimeout(openLedgerApp, 1000)
+            onError(e) {
+                if (checkIfLedgerIsConnected) {
+                    setTimeout(assertLedgerNanoConnected, 1000)
                 }
             }
         })
     }
 
-    openLedgerApp()
+    assertLedgerNanoConnected()
 
     function createAccount() {
         creatingAccount = true
         api.createAccount(
             {
-                clientOptions: { nodes },
+                clientOptions: {
+                    node: node.url,
+                    nodes: nodes.map((node) => node.url),
+                    network: $network,
+                },
                 signerType: { type: simulator ? 'LedgerNanoSimulator' : 'LedgerNano' }
             },
             {
                 onSuccess(createAccountResponse) {
+                    saveProfile($newProfile)
+                    newProfile.set(null)
                     creatingAccount = false
                     dispatch('next')
                 },
@@ -80,7 +87,9 @@
 <OnboardingLayout onBackClick={handleBackClick}>
     <div slot="leftpane__content">
         <Text type="h2" classes="mb-5">{locale('views.setup_ledger.title')}</Text>
-        <Text type="p" secondary classes="mb-8">{locale('views.setup_ledger.body')}</Text>
+        <Text type="p" secondary classes="mb-8">{locale('views.setup_ledger.body_1')}</Text>
+        <Text type="p" secondary classes="mb-8">{locale('views.setup_ledger.body_2')}</Text>
+        <Text type="p" secondary classes="mb-8">{locale('views.setup_ledger.body_3')}</Text>
     </div>
     <div slot="leftpane__action">
         <Button classes="w-full" disabled={creatingAccount} onClick={createAccount}>

@@ -3,6 +3,7 @@
     import { writable } from 'svelte/store'
     import { OnboardingLayout, Illustration, Text, Button, Popup } from 'shared/components'
     import { api } from 'shared/lib/wallet'
+    import { newProfile, saveProfile } from 'shared/lib/profile'
     import { DEFAULT_NODES as nodes } from 'shared/lib/network'
     import { popupState, openPopup, closePopup } from 'shared/lib/popup'
 
@@ -17,37 +18,37 @@
 
     let restoring = false
     let simulator = false
-    let checkIfLedgerIsOpened = true
-    let isLedgerOpened = false
+    let checkIfLedgerIsConnected = true
+    let isLedgerConnected = false
 
     const unsubscribe = popupState.subscribe(state => {
-        if (!(state.active || isLedgerOpened)) {
+        if (!(state.active || isLedgerConnected)) {
             handleBackClick()
         }
     })
 
     onDestroy(() => {
-        checkIfLedgerIsOpened = false
+        checkIfLedgerIsConnected = false
         unsubscribe()
     })
 
     const dispatch = createEventDispatcher()
 
-    function openLedgerApp() {
-        api.openLedgerApp(simulator, {
+    function assertLedgerNanoConnected() {
+        api.assertLedgerNanoConnected(simulator, {
             onSuccess() {
-                isLedgerOpened = true
+                isLedgerConnected = true
                 closePopup()
             },
             onError() {
-                if (checkIfLedgerIsOpened) {
-                    setTimeout(openLedgerApp, 1000)
+                if (checkIfLedgerIsConnected) {
+                    setTimeout(assertLedgerNanoConnected, 1000)
                 }
             }
         })
     }
 
-    openLedgerApp()
+    assertLedgerNanoConnected()
 
     function restore() {
         restoring = true
@@ -58,6 +59,9 @@
             },
             {
                 onSuccess(createAccountResponse) {
+                    saveProfile($newProfile)
+                    newProfile.set(null)
+
                     api.syncAccounts({
                         onSuccess(syncAccountsResponse) {
                             let balance = 0

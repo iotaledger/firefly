@@ -2,9 +2,16 @@
     import { getContext } from 'svelte'
     import { SettingsIcons, SettingsTitles, GeneralSettings, SecuritySettings, AdvancedSettings, HelpAndInfo } from '../types'
     import { Text, SettingsMenu } from 'shared/components'
+    import { accountType } from 'shared/lib/wallet'
 
     export let locale
     export let mobile
+
+    const securitySettings = Object.assign({}, SecuritySettings)
+    if ($accountType.type !== 'Stronghold') {
+        delete securitySettings.ExportStronghold
+        delete securitySettings.ChangePassword
+    }
 
     const route = getContext('route')
 </script>
@@ -28,7 +35,7 @@
                 icon="security"
                 iconColor="bg-yellow-500"
                 icons={SettingsIcons}
-                settings={SecuritySettings}
+                settings={securitySettings}
                 title={locale('views.settings.security.title')}
                 description={locale('views.settings.security.description')}
                 onClick={() => route.update(() => SettingsTitles.Security)}

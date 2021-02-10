@@ -49,7 +49,9 @@
         },
         "setup_ledger": {
             "title": "Install the new IOTA Ledger app on your device",
-            "body": "Open Ledger Live and install New IOTA app",
+            "body_1": "1. Open Ledger Live and install New IOTA app",
+            "body_2": "2. Close Ledger Live desktop application",
+            "body_3": "3. Open the new app on your Ledger device",
             "connect": "Connect your Ledger device to begin the setup process"
         },
         "password": {
@@ -206,7 +208,7 @@
                 "description": ""
             },
             "changePincode": {
-                "title": "Change PIN code",
+                "title": "Change PIN",
                 "description": "",
                 "currentPincode": "Current PIN",
                 "newPincode": "New PIN",

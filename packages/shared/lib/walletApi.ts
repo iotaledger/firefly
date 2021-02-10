@@ -57,7 +57,7 @@ const apiToResponseTypeMap = {
     removeStorage: ResponseTypes.DeletedStorage,
     lockStronghold: ResponseTypes.LockedStronghold,
     changeStrongholdPassword: ResponseTypes.StrongholdPasswordChanged,
-    openLedgerApp: ResponseTypes.OpenedLedgerApp,
+    assertLedgerNanoConnected: ResponseTypes.OpenedLedgerApp,
 }
 
 /**

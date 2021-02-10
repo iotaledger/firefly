@@ -5,10 +5,8 @@
     import { diffDates, getBackupWarningColor } from 'shared/lib/helpers'
     import { activeProfile, profiles } from 'shared/lib/profile'
     import { openPopup } from 'shared/lib/popup'
-    import { api, wallet } from 'shared/lib/wallet'
+    import { api, accountType } from 'shared/lib/wallet'
     import { versionDetails } from 'shared/lib/appUpdater'
-
-    const { accounts } = $wallet
 
     export let locale
 
@@ -20,6 +18,7 @@
     let isCheckingLedger
     let isLedgerOpened
     let hardwareDeviceMessage
+    let isSoftwareAccountProfile = true
 
     function setup() {
         const { isStrongholdLocked, lastStrongholdBackupTime } = get(activeProfile)
@@ -52,7 +51,7 @@
 
     function checkLedger(simulator) {
         isCheckingLedger = true
-        api.openLedgerApp(simulator, {
+        api.assertLedgerNanoConnected(simulator, {
             onSuccess() {
                 isLedgerOpened = true
                 if (!isDestroyed) {
@@ -69,12 +68,14 @@
     }
 
     $: {
-        if (!isCheckingLedger && $accounts.length > 0 && $accounts[0].signerType.type.startsWith('Ledger')) {
-            checkLedger($accounts[0].signerType.type === 'LedgerNanoSimulator')
+        if (!isCheckingLedger && $accountType && $accountType.type.startsWith('Ledger')) {
+            checkLedger($accountType.type === 'LedgerNanoSimulator')
         }
     }
 
     $: hardwareDeviceMessage = isLedgerOpened ? 'detected' : 'none_detected'
+
+    $: isSoftwareAccountProfile = $accountType && $accountType.type === 'Stronghold'
 
     const unsubscribe = profiles.subscribe(() => {
         setup()
@@ -104,6 +105,7 @@
             color="gray"
             icon="chip"
             classes="pointer-events-none" />
+        {#if isSoftwareAccountProfile}
         <!-- Stronghold status -->
         <SecurityTile
             title={locale('views.dashboard.security.stronghold_status.title')}
@@ -120,5 +122,6 @@
             onClick={() => handleSecurityTileClick('backup')}
             icon="shield"
             {color} />
+        {/if}
     </div>
 </div>

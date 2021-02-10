@@ -146,7 +146,7 @@ export function setClientOptions(bridge: Bridge, __ids: CommunicationIds, payloa
     })
 }
 
-export function openLedgerApp(bridge: Bridge, __ids: CommunicationIds, isSimulator: boolean) {
+export function assertLedgerNanoConnected(bridge: Bridge, __ids: CommunicationIds, isSimulator: boolean) {
   return bridge({
     actorId: __ids.actorId,
     id: __ids.messageId,
