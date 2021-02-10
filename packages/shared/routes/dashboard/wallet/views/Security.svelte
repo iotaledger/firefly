@@ -16,7 +16,7 @@
     let strongholdStatusMessage
     let isDestroyed = false
     let isCheckingLedger
-    let isLedgerOpened
+    let isLedgerConnected
     let hardwareDeviceMessage
     let isSoftwareAccountProfile = true
 
@@ -49,31 +49,38 @@
         })
     }
 
-    function checkLedger(simulator) {
-        isCheckingLedger = true
-        api.assertLedgerNanoConnected(simulator, {
-            onSuccess() {
-                isLedgerOpened = true
-                if (!isDestroyed) {
-                    setTimeout(() => checkLedger(simulator), 10000)
+    function checkLedgerConnection() {
+        return new Promise((resolve, reject) => {
+            api.assertLedgerNanoConnected($accountType.type === 'LedgerNanoSimulator', {
+                onSuccess() {
+                    isLedgerConnected = true
+                    resolve()
+                },
+                onError(e) {
+                    isLedgerConnected = false
+                    reject(e)
                 }
-            },
-            onError() {
-                isLedgerOpened = false
-                if (!isDestroyed) {
-                    setTimeout(() => checkLedger(simulator), 10000)
-                }
-            }
+            })
         })
+    }
+
+    function checkLedger() {
+        isCheckingLedger = true
+        const cb = () => {
+            if (!isDestroyed) {
+                setTimeout(checkLedger, 10000)
+            }
+        }
+        checkLedgerConnection().then(cb).catch(cb)
     }
 
     $: {
         if (!isCheckingLedger && $accountType && $accountType.type.startsWith('Ledger')) {
-            checkLedger($accountType.type === 'LedgerNanoSimulator')
+            checkLedger()
         }
     }
 
-    $: hardwareDeviceMessage = isLedgerOpened ? 'detected' : 'none_detected'
+    $: hardwareDeviceMessage = isLedgerConnected ? 'detected' : 'none_detected'
 
     $: isSoftwareAccountProfile = $accountType && $accountType.type === 'Stronghold'
 
@@ -100,11 +107,11 @@
             onClick={() => handleSecurityTileClick('version')} />
         <!-- Hardware Device -->
         <SecurityTile
+            onClick={checkLedgerConnection}
             title={locale('views.dashboard.security.hardware_device.title')}
             message={locale(`views.dashboard.security.hardware_device.${hardwareDeviceMessage}`)}
             color="gray"
-            icon="chip"
-            classes="pointer-events-none" />
+            icon="chip" />
         {#if isSoftwareAccountProfile}
         <!-- Stronghold status -->
         <SecurityTile
