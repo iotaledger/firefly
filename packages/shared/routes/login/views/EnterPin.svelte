@@ -51,7 +51,7 @@
         }
     }
 
-    function handleContinueClick() {
+    function onSubmit() {
         if (!validatePinFormat(pinCode)) {
             attempts++
             if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
@@ -107,14 +107,14 @@
         <div class="pt-40 pb-16 flex w-full h-full flex-col items-center justify-between">
             <div class="w-96 flex flex-row flex-wrap justify-center mb-20">
                 <Profile name={$activeProfile.name} bgColor="blue" />
-                <Pin bind:value={pinCode} classes="mt-10" />
+                <Pin bind:value={pinCode} classes="mt-10" on:submit={onSubmit} />
                 <Text type="p" bold classes="mt-4 text-center">
                     {attempts > 0 ? locale('views.login.incorrect_attempts', {
                               values: { attempts: attempts.toString() },
                           }) : locale('actions.enter_your_pin')}
                 </Text>
             </div>
-            <Button classes="w-96" disabled={!hasCorrectLength || hasReachedMaxAttempts} onClick={() => handleContinueClick()}>
+            <Button classes="w-96" disabled={!hasCorrectLength || hasReachedMaxAttempts} onClick={() => onSubmit()}>
                 {hasReachedMaxAttempts ? buttonText : locale('actions.continue')}
             </Button>
         </div>

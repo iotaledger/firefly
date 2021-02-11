@@ -25,7 +25,8 @@
     }
 
     function onKeyPress(event) {
-        if (numeric && (event.which < 48 || event.which > 57)) {
+        // if the input is numeric, we accept only numbers and enter press
+        if (numeric && event.keyCode !== 13 && (event.which < 48 || event.which > 57)) {
             event.preventDefault()
         }
     }
@@ -95,7 +96,7 @@
                  bg-white border border-solid border-gray-300 hover:border-gray-500 focus:border-gray-500 rounded-xl text-gray
                  " />
         {#if showRevealToggle === true}
-            <button on:click={(e) => revealToggle(e)} tabindex="-1" class="absolute">
+            <button type="button" on:click={(e) => revealToggle(e)} tabindex="-1" class="absolute">
                 <Icon icon={revealed ? 'view' : 'hide'} classes="text-blue-500" />
             </button>
         {/if}
