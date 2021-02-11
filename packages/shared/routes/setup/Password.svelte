@@ -15,16 +15,18 @@
     $: valid = strength === 4 && password === confirmedPassword
 
     function handleContinueClick() {
-        api.setStrongholdPassword(password, {
-            onSuccess() {
-                dispatch('next', { password })
-            },
-            onError(error) {
-                // TODO: handle error
-                console.log(error)
-                alert('set password error')
-            },
-        })
+        if (valid) {
+            api.setStrongholdPassword(password, {
+                onSuccess() {
+                    dispatch('next', { password })
+                },
+                onError(error) {
+                    // TODO: handle error
+                    console.log(error)
+                    alert('set password error')
+                },
+            })
+        }
     }
     function handleBackClick() {
         dispatch('previous')
@@ -36,20 +38,22 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
-            <Text type="h2" classes="mb-5">{locale('views.password.title')}</Text>
-            <Text type="p" secondary classes="mb-8">{locale('views.password.body')}</Text>
-            <Password
-                classes="mb-6"
-                bind:value={password}
-                strengthLevels={4}
-                showRevealToggle
-                showStrengthLevel
-                {strength}
-                {locale} />
-            <Password bind:value={confirmedPassword} {locale} placeholder={locale('general.confirm_password')} />
+            <form on:submit={handleContinueClick} id="password-form">
+                <Text type="h2" classes="mb-5">{locale('views.password.title')}</Text>
+                <Text type="p" secondary classes="mb-8">{locale('views.password.body')}</Text>
+                <Password
+                    classes="mb-6"
+                    bind:value={password}
+                    strengthLevels={4}
+                    showRevealToggle
+                    showStrengthLevel
+                    {strength}
+                    {locale} />
+                <Password bind:value={confirmedPassword} {locale} placeholder={locale('general.confirm_password')} />
+            </form>
         </div>
         <div slot="leftpane__action">
-            <Button classes="w-full" disabled={!valid} onClick={() => handleContinueClick()}>
+            <Button type="submit" form="password-form" classes="w-full" disabled={!valid}>
                 {locale('actions.save_password')}
             </Button>
         </div>

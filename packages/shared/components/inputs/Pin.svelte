@@ -1,5 +1,8 @@
 <script>
     import { onMount } from 'svelte'
+    import { createEventDispatcher } from 'svelte'
+
+    const dispatch = createEventDispatcher()
 
     export let value = undefined
     export let size = 6
@@ -10,6 +13,7 @@
 
     const KEYBOARD = {
         BACKSPACE: 8,
+        ENTER: 13,
     }
 
     onMount(async () => {
@@ -26,6 +30,8 @@
             if (prevInput) {
                 prevInput.focus()
             }
+        } else if (e.keyCode == KEYBOARD.ENTER) {
+            dispatch('submit')
         } else {
             if (!nextInput && inputs[i] && inputs[i] !== '') {
                 return

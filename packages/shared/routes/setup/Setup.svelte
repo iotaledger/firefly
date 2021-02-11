@@ -48,7 +48,7 @@
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-4">{locale('views.setup.title')}</Text>
-            <Input bind:value={profileName} placeholder="Profile Name" classes="w-full mb-4" />
+            <Input bind:value={profileName} placeholder={locale('views.setup.profile_name')} classes="w-full mb-4" />
             {#if $developerMode}
                 <Checkbox label={locale('general.developerProfile')} bind:checked={isDeveloperProfile} />
             {/if}

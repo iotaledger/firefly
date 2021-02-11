@@ -12,6 +12,8 @@
     export let xl = false
     export let small = false
     export let classes = ''
+    export let type = 'button'
+    export let form = ''
 </script>
 
 <style type="text/scss">
@@ -155,6 +157,8 @@
 
 {#if xl}
     <button
+        {type}
+        {form}
         class={`xl cursor-pointer text-center rounded-2xl pt-8 pb-4 px-4 flex flex-col items-center ${classes}`}
         use:bindEvents={events}
         on:click={onClick}
@@ -169,6 +173,8 @@
     </button>
 {:else}
     <button
+        {type}
+        {form}
         class={`cursor-pointer text-center rounded-2xl px-3 py-4 ${classes}`}
         use:bindEvents={events}
         on:click={onClick}
