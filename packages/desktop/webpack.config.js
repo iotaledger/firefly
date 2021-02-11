@@ -6,6 +6,7 @@ const sveltePreprocess = require('svelte-preprocess')
 
 const mode = process.env.NODE_ENV || 'development'
 const prod = mode === 'production'
+const hardcodeNodeEnv = typeof process.env.HARDCODE_NODE_ENV !== 'undefined'
 
 /// ------------------------ Resolve ------------------------
 
@@ -159,7 +160,7 @@ module.exports = [
         plugins: mainPlugins,
         devtool: prod ? false : 'cheap-module-source-map',
         optimization: {
-            nodeEnv: false,
+            nodeEnv: hardcodeNodeEnv ? mode : false,
         },
     },
 ]
