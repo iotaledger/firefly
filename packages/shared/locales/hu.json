@@ -62,7 +62,9 @@
         "recovery_phrase": {
             "title": "Helyreállító kódmondat",
             "body_1": "Különös figyelemmel jegyezze fel a szavakat azok pontos sorrendjében!",
-            "body_2": "Mindig őrizze a helyreállító kódmondatát titkos és biztonságos helyen! Soha senkivel se ossza meg!"
+            "body_2": "Mindig őrizze a helyreállító kódmondatát titkos és biztonságos helyen! Soha senkivel se ossza meg!",
+            "reveal_recovery_phrase": "Helyreállító kódmondat felfedése",
+            "hide_recovery_phrase": "Hide recovery phrase"
         },
         "verify_recovery_phrase": {
             "title": "Helyreállító kódmondat hitelesítése",
@@ -172,6 +174,14 @@
                 "title": "Jelszó módosítása",
                 "description": ""
             },
+            "changePincode": {
+                "title": "Change PIN code",
+                "description": "",
+                "currentPincode": "Current PIN",
+                "newPincode": "New PIN",
+                "confirmNewPincode": "Confirm new PIN",
+                "action": "Change PIN"
+            },
             "resyncAccounts": {
                 "title": "Fiókok újraszinkronizálása",
                 "description": ""
@@ -190,6 +200,10 @@
             },
             "nodeSettings": {
                 "title": "Csomópont beállításai",
+                "description": ""
+            },
+            "configureNodeList": {
+                "title": "Configure node list",
                 "description": ""
             },
             "proofOfWork": {
@@ -233,68 +247,80 @@
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "up_to_date": "Naprakész",
+                    "out_of_date": "Elavult"
                 },
                 "hardware_device": {
-                    "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "title": "Hardver eszköz",
+                    "none_detected": "Nincs találat"
                 },
                 "stronghold_status": {
-                    "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "title": "Stronghold állapota",
+                    "locked": "Zárolva",
+                    "unlocked": "Feloldva"
                 },
                 "stronghold_backup": {
-                    "title": "Stronghold Backup",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "title": "Stronghold biztonsági mentés",
+                    "weeks_ago": "{weeks, plural, one {# héttel} other {# héttel}} ezelőtt"
                 }
             },
             "network": {
-                "network_operational": "Network Operational",
-                "network_degraded": "Network Degraded",
-                "network_down": "Network Down",
-                "status": "Status",
-                "messages_per_second": "Messages per second",
-                "confirmation_rate": "Confirmation rate"
+                "network_operational": "Működő hálózat",
+                "network_degraded": "Elavult hálózat",
+                "network_down": "Hálózat üzemen kívül",
+                "status": "Állapot",
+                "messages_per_second": "Üzenet / másodperc",
+                "confirmation_rate": "Visszaigazolási arány"
+            },
+            "profile_modal": {
+                "all_settings": "All settings",
+                "logout": "Log out"
             }
         }
     },
     "popups": {
         "password": {
             "title": "Jelszó szükséges",
-            "subtitle": "Please enter your wallet password to unlock Stronghold"
+            "subtitle": "Adja meg kriptotárcája jelszavát a Stronghold feloldásához"
         },
         "qr": {
             "title": "QR kódod"
         },
         "version": {
-            "title": "Current version: {version}",
-            "up_to_date_title": "Firefly is up to date",
-            "up_to_date_description": "You are running the latest and safest version of Firefly.",
-            "update_available": "Firefly update available",
-            "update_details": "Version {version} - {date}"
+            "title": "Jelenlegi verzió: {version}",
+            "up_to_date_title": "Firefly naprakész",
+            "up_to_date_description": "Ön éppen Firefly legújabb és legbiztonságosabb verzióját használja.",
+            "update_available": "Firefly frissítés elérhető",
+            "update_details": "Verzió {version} - {date}"
         },
         "backup": {
-            "title": "Last backup: {date}",
-            "last_backup": "You last backed up {date}",
-            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
-            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "not_backed_up": "Not backed up",
-            "not_backed_up_description": "You have not backed up your Stronghold"
+            "title": "Legutóbbi biztonsági mentés: {date}",
+            "last_backup": "Legutóbbi biztonsági mentés ideje: {date}",
+            "backup_description": "Fontos a rendszeres biztonsági mentés, hogy fiókjait és tranzakciós naplóinak másolatait biztonságban tudhassa.",
+            "backup_warning": "Ha elveszíti a biztonsági mentést és a helyreállító mondatot, a számlájához többé nem tud hozzáférni.",
+            "not_backed_up": "Nincs biztonsági mentés",
+            "not_backed_up_description": "Nem készült még Stronghold biztonsági mentés"
         },
         "delete_account": {
-            "title": "Delete {name}?",
-            "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Type your wallet’s password to confirm.",
-            "delete_account": "Delete account",
-            "error_title": "Unable to delete {name}",
-            "error_body_1": "To delete an account you must have 0 balance.",
-            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+            "title": "{name} törlése?",
+            "body": "Végleg elveszíti a tranzakciós naplót és talán más adatokat is.",
+            "type_password": "Írja be kriptotárcája jelszavát a megerősítéshez.",
+            "delete_account": "Számla törlése",
+            "error_title": "{name} nem törölhető",
+            "error_body_1": "Fiókjának törléséhez 0 egyenleg szükséges.",
+            "error_body_2": "Jelenleg {balance} maradt a fiókjában. Kérjük, küldje át ezt az összeget egy másik számlára, majd próbálja újra."
         },
         "address_history": {
-            "title": "{name} account address history",
-            "current_balance": "Current balance: {balance}"
+            "title": "{name} fiókcím napló",
+            "current_balance": "Aktuális egyenleg: {balance}"
+        },
+        "node": {
+            "title_add": "Add a node",
+            "title_details": "Node details",
+            "node_address": "Node address",
+            "optional_username": "Username (optional)",
+            "optional_password": "Password (optional)",
+            "set_as_primary_node": "Set as primary node"
         }
     },
     "actions": {
@@ -302,7 +328,7 @@
         "back": "Vissza",
         "cancel": "Mégse",
         "close": "Bezár",
-        "dismiss": "Dismiss",
+        "dismiss": "Elvetés",
         "save": "Mentés",
         "import_seed": "Meglévő magérték (seed) importálása",
         "import_wallet": "Meglévő kriptotárca importálása",
@@ -339,12 +365,15 @@
         "exportState": "Állapot exportálása",
         "outsourceProofOfWork": "Kiszabott munka kiszervezése",
         "unlock": "Felold",
-        "update_firefly": "Update Firefly",
-        "save_backup": "Save backup",
-        "customize_account": "Customise account",
-        "sync_account": "Sync account",
-        "view_address_history": "View address history",
-        "delete_account": "Delete account"
+        "update_firefly": "Firefly frissítése",
+        "install_firefly": "Install Firefly",
+        "save_backup": "Biztonsági másolat mentése",
+        "customize_account": "Fiók személyre szabása",
+        "sync_account": "Fiók szinkronizálása",
+        "view_address_history": "Címek előzményeinek megjelenítése",
+        "delete_account": "Számla törlése",
+        "max": "Max",
+        "add_node": "Add node"
     },
     "general": {
         "password": "Jelszó",
@@ -357,13 +386,13 @@
         "recent_activity": "Legutóbbi tevékenység",
         "sent": "Elküldött",
         "received": "Fogadott",
-        "send_payment": "Send payment",
-        "move_funds": "Move funds",
+        "send_payment": "Összeg küldése",
+        "move_funds": "Összegek mozgatása",
         "send_funds": "Pénz küldése",
         "send_to_address": "Küldés címre",
         "scan_qr_or_paste": "QR-kód szkennelése vagy cím beillesztése",
         "move_funds_between_accounts": "Tőke mozgatása számlák között",
-        "send_tokens_to_address": "Send tokens to an address",
+        "send_tokens_to_address": "Tokenek küldése egy címre",
         "manage_account": "Fiók kezelése",
         "customize_account": "Fiók személyre szabása",
         "account": "Számla",
@@ -374,7 +403,7 @@
         "from": "Feladó:",
         "to": "Címzett:",
         "receive_funds": "Pénz fogadása",
-        "my_address": "My Address",
+        "my_address": "Címem",
         "share_address": "Cím megosztása",
         "your_address": "Az Ön címe",
         "generate_new_address": "Új cím létrehozása",
@@ -391,25 +420,33 @@
         "light_theme": "Világos téma",
         "dark_theme": "Sötét téma",
         "total_balance": "Összesített egyenleg",
-        "account_balance": "Account Balance",
+        "account_balance": "Számlaegyenleg",
         "incoming": "Bejövő",
         "outgoing": "Kimenő",
         "accounts": "Számlák",
         "automaticNodeSelection": "Automatikus csomópont kiválasztás",
         "manualNodeSelection": "Kézi csomópont kiválasztás",
         "profiles": "Profilok",
+        "developerProfile": "Developer Profile",
+        "dev": "Dev",
         "create_account": "Fiók létrehozása",
         "account_name": "Fiók neve",
         "latest_transactions": "Legfrissebb tranzakciók",
         "transactions": "Tranzakciók",
         "security": "Biztonság",
-        "account_address": "Fiók címe"
+        "account_address": "Fiók címe",
+        "nodes": "Nodes"
     },
     "dates": {
-        "today": "Today",
-        "days_ago": "{time, plural, one {# day} other {# days}} ago",
-        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
-        "months_ago": "{time, plural, one {# month} other {# months}} ago",
-        "years_ago": "{time, plural, one {# year} other {# years}} ago"
+        "today": "Ma",
+        "days_ago": "{time, plural, one {# nappal} other {# nappal}} ezelőtt",
+        "weeks_ago": "{time, plural, one {# héttel} other {# héttel}} ezelőtt",
+        "months_ago": "{time, plural, one {# hónappal} other {# hónappal}} ezelőtt",
+        "years_ago": "{time, plural, one {# évvel} other {# évvel}} ezelőtt"
+    },
+    "notifications": {
+        "valueTx": "Receiving {{value}} to {{account}}",
+        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
+        "failed": "Outgoing {{value}} from {{account}} has failed"
     }
 }

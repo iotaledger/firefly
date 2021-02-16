@@ -45,13 +45,13 @@
             "body_2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Nastavení PIN",
-            "body_1": "Zadejte 6místný kód PIN. Pro přihlášení do vaší peněženky budete požádáni o zadání PIN.",
+            "title": "Nastavení PIN kódu",
+            "body_1": "Zadejte 6místný kód PIN. Pro přihlášení do vaší peněženky budete požádáni o zadání PIN kódu.",
             "body_2": "Můžete použít pouze čísla."
         },
         "confirm_pin": {
             "title": "Ověřit PIN kód",
-            "body": "Pro pokračování zadejte PIN kód."
+            "body": "Pro pokračování zadejte svůj PIN kód."
         },
         "backup": {
             "title": "Zálohovat peněženku",
@@ -62,7 +62,9 @@
         "recovery_phrase": {
             "title": "Fráze pro obnovení",
             "body_1": "Pečlivě si zapište slova v tomto pořadí.",
-            "body_2": "Zachovejte klíčová slova v soukromém a bezpečném úložišti. Nesdílejte je s nikým."
+            "body_2": "Zachovejte klíčová slova v soukromém a bezpečném úložišti. Nesdílejte je s nikým.",
+            "reveal_recovery_phrase": "Zobrazit obnovovací frázi",
+            "hide_recovery_phrase": "Hide recovery phrase"
         },
         "verify_recovery_phrase": {
             "title": "Ověřte obnovovací frázi",
@@ -172,6 +174,14 @@
                 "title": "Změna hesla",
                 "description": ""
             },
+            "changePincode": {
+                "title": "Change PIN code",
+                "description": "",
+                "currentPincode": "Current PIN",
+                "newPincode": "New PIN",
+                "confirmNewPincode": "Confirm new PIN",
+                "action": "Change PIN"
+            },
             "resyncAccounts": {
                 "title": "Opakovaná synchronizace účtů",
                 "description": ""
@@ -190,6 +200,10 @@
             },
             "nodeSettings": {
                 "title": "Nastavení node",
+                "description": ""
+            },
+            "configureNodeList": {
+                "title": "Configure node list",
                 "description": ""
             },
             "proofOfWork": {
@@ -232,69 +246,81 @@
         "dashboard": {
             "security": {
                 "version": {
-                    "title": "Firefly v{version}",
-                    "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "title": "Firefly v. {version}",
+                    "up_to_date": "Aktuální",
+                    "out_of_date": "Zastaralá"
                 },
                 "hardware_device": {
-                    "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "title": "Hardwarové zařízení",
+                    "none_detected": "Nic nenalezeno"
                 },
                 "stronghold_status": {
-                    "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "title": "Stronghold status",
+                    "locked": "Uzamčeno",
+                    "unlocked": "Odemčeno"
                 },
                 "stronghold_backup": {
-                    "title": "Stronghold Backup",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "title": "Stronghold záloha",
+                    "weeks_ago": "před {weeks, plural, one {# týdnem} other {# týdny}}"
                 }
             },
             "network": {
-                "network_operational": "Network Operational",
-                "network_degraded": "Network Degraded",
-                "network_down": "Network Down",
-                "status": "Status",
-                "messages_per_second": "Messages per second",
-                "confirmation_rate": "Confirmation rate"
+                "network_operational": "Síť v provozu",
+                "network_degraded": "Zhoršená funkčnost sítě",
+                "network_down": "Síť mimo provoz",
+                "status": "Stav",
+                "messages_per_second": "Zprávy za sekundu",
+                "confirmation_rate": "Míra potvrzení"
+            },
+            "profile_modal": {
+                "all_settings": "All settings",
+                "logout": "Log out"
             }
         }
     },
     "popups": {
         "password": {
             "title": "Heslo požadováno",
-            "subtitle": "Please enter your wallet password to unlock Stronghold"
+            "subtitle": "Zadejte heslo své peněženky pro odemčení Stronghold"
         },
         "qr": {
             "title": "Váš QR kód"
         },
         "version": {
-            "title": "Current version: {version}",
-            "up_to_date_title": "Firefly is up to date",
-            "up_to_date_description": "You are running the latest and safest version of Firefly.",
-            "update_available": "Firefly update available",
-            "update_details": "Version {version} - {date}"
+            "title": "Aktuální verze: {version}",
+            "up_to_date_title": "Firefly je zaktualizován",
+            "up_to_date_description": "Používáte nejnovější a nejbezpečnější verzi Firefly.",
+            "update_available": "Je možné aktualizovat Firefly",
+            "update_details": "Verze {version} - {date}"
         },
         "backup": {
-            "title": "Last backup: {date}",
-            "last_backup": "You last backed up {date}",
-            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
-            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "not_backed_up": "Not backed up",
-            "not_backed_up_description": "You have not backed up your Stronghold"
+            "title": "Poslední záloha: {date}",
+            "last_backup": "Naposledy jste zálohovali {date}",
+            "backup_description": "Pravidelná záloha je důležitá pro zachování kopie účtů a historie transakcí.",
+            "backup_warning": "Ztratíte-li frázi pro zálohování a obnovení, ztratíte přístup ke svým prostředkům.",
+            "not_backed_up": "Zatím nezálohováno",
+            "not_backed_up_description": "Nezazálohovali jste váš Stronghold"
         },
         "delete_account": {
-            "title": "Delete {name}?",
-            "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Type your wallet’s password to confirm.",
-            "delete_account": "Delete account",
-            "error_title": "Unable to delete {name}",
-            "error_body_1": "To delete an account you must have 0 balance.",
-            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+            "title": "Chcete smazat {name}?",
+            "body": "Trvale ztratíte historii transakcí a možná i něco jiného.",
+            "type_password": "Zadejte heslo vaší peněženky pro potvrzení.",
+            "delete_account": "Odstranit účet",
+            "error_title": "Nelze odstranit {name}",
+            "error_body_1": "Chcete-li odstranit účet, musíte mít nulový zůstatek.",
+            "error_body_2": "V současné době zbývá {balance} na tomto účtu. Přesuňte tyto prostředky na jiný účet a zkuste to znovu."
         },
         "address_history": {
-            "title": "{name} account address history",
-            "current_balance": "Current balance: {balance}"
+            "title": "{name} historie adresy účtu",
+            "current_balance": "Aktuální zůstatek: {balance}"
+        },
+        "node": {
+            "title_add": "Add a node",
+            "title_details": "Node details",
+            "node_address": "Node address",
+            "optional_username": "Username (optional)",
+            "optional_password": "Password (optional)",
+            "set_as_primary_node": "Set as primary node"
         }
     },
     "actions": {
@@ -302,14 +328,14 @@
         "back": "Zpět",
         "cancel": "Zrušit",
         "close": "Zavřít",
-        "dismiss": "Dismiss",
+        "dismiss": "Zamítnout",
         "save": "Uložit",
         "import_seed": "Importovat existující seed",
         "import_wallet": "Importovat existující peněženku",
         "create_wallet": "Vytvořit novou peněženku",
         "save_password": "Uložit heslo",
         "use_biometric": "Použít biometrické zabezpečení",
-        "setup_pin": "Nastavení PIN",
+        "setup_pin": "Nastavení PIN kódu",
         "set_pin": "Nastavte PIN",
         "confirm_pin": "Potvrďte PIN",
         "enter_your_pin": "Zadejta svůj PIN",
@@ -339,12 +365,15 @@
         "exportState": "Exportovat stav",
         "outsourceProofOfWork": "Outsourcovaný Proof of Work",
         "unlock": "Odemknout",
-        "update_firefly": "Update Firefly",
-        "save_backup": "Save backup",
-        "customize_account": "Customise account",
-        "sync_account": "Sync account",
-        "view_address_history": "View address history",
-        "delete_account": "Delete account"
+        "update_firefly": "Aktualizovat Firefly",
+        "install_firefly": "Install Firefly",
+        "save_backup": "Uložit zálohu",
+        "customize_account": "Přizpůsobit účet",
+        "sync_account": "Synchronizovat účet",
+        "view_address_history": "Zobrazit historii adresy",
+        "delete_account": "Odstranit účet",
+        "max": "Max",
+        "add_node": "Add node"
     },
     "general": {
         "password": "Heslo",
@@ -357,13 +386,13 @@
         "recent_activity": "Nedávná aktivita",
         "sent": "Odesláno",
         "received": "Přijato",
-        "send_payment": "Send payment",
-        "move_funds": "Move funds",
+        "send_payment": "Odeslat platbu",
+        "move_funds": "Přesunout prostředky",
         "send_funds": "Poslat tokeny",
         "send_to_address": "Poslat na adresu",
         "scan_qr_or_paste": "Naskenujte QR kód nebo vložte adresu",
         "move_funds_between_accounts": "Převod mezi účty",
-        "send_tokens_to_address": "Send tokens to an address",
+        "send_tokens_to_address": "Poslat tokeny na adresu",
         "manage_account": "Správa účtu",
         "customize_account": "Přizpůsobení účtu",
         "account": "Účet",
@@ -374,7 +403,7 @@
         "from": "Odkud",
         "to": "Komu",
         "receive_funds": "Přijmout tokeny",
-        "my_address": "My Address",
+        "my_address": "Moje adresa",
         "share_address": "Sdílet adresu",
         "your_address": "Vaše adresa",
         "generate_new_address": "Vytvořit novou adresu",
@@ -391,25 +420,33 @@
         "light_theme": "Světlé téma",
         "dark_theme": "Tmavé téma",
         "total_balance": "Celkový zůstatek",
-        "account_balance": "Account Balance",
+        "account_balance": "Zůstatek účtu",
         "incoming": "Příchozí",
         "outgoing": "Odchozí",
         "accounts": "Účty",
         "automaticNodeSelection": "Automatický výběr node",
         "manualNodeSelection": "Manuální výběr node",
         "profiles": "Profily",
+        "developerProfile": "Developer Profile",
+        "dev": "Dev",
         "create_account": "Vytvořit účet",
         "account_name": "Název účtu",
         "latest_transactions": "Poslední transakce",
         "transactions": "Transakce",
         "security": "Zabezpečení",
-        "account_address": "Adresa účtu"
+        "account_address": "Adresa účtu",
+        "nodes": "Nodes"
     },
     "dates": {
-        "today": "Today",
-        "days_ago": "{time, plural, one {# day} other {# days}} ago",
-        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
-        "months_ago": "{time, plural, one {# month} other {# months}} ago",
-        "years_ago": "{time, plural, one {# year} other {# years}} ago"
+        "today": "Dnes",
+        "days_ago": "{time, plural, one {Zbývá # den} few {Zbývají # dny} many {Zbývá # dní} other {Zbývá # dní}}",
+        "weeks_ago": "před {time, plural, one {# týdnem} other {# týdny}}",
+        "months_ago": "před {time, plural,\n  one {# měsícem}\n  few {# měsíci}\n  many {# měsíci}\n  other {# měsíci}\n}",
+        "years_ago": "před {time, plural, one {# týdnem} other {# týdny}}"
+    },
+    "notifications": {
+        "valueTx": "Receiving {{value}} to {{account}}",
+        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
+        "failed": "Outgoing {{value}} from {{account}} has failed"
     }
 }

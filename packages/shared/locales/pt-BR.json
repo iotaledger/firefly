@@ -62,7 +62,9 @@
         "recovery_phrase": {
             "title": "Frase de recuperação",
             "body_1": "Escreva cuidadosamente as palavras na ordem exata.",
-            "body_2": "Mantenha privada sua frase de recuperação e armazenada com segurança. Não a compartilhe com ninguém."
+            "body_2": "Mantenha privada sua frase de recuperação e armazenada com segurança. Não a compartilhe com ninguém.",
+            "reveal_recovery_phrase": "Revelar frase de recuperação",
+            "hide_recovery_phrase": "Hide recovery phrase"
         },
         "verify_recovery_phrase": {
             "title": "Verificar frase de recuperação",
@@ -172,6 +174,14 @@
                 "title": "Alterar Senha",
                 "description": ""
             },
+            "changePincode": {
+                "title": "Change PIN code",
+                "description": "",
+                "currentPincode": "Current PIN",
+                "newPincode": "New PIN",
+                "confirmNewPincode": "Confirm new PIN",
+                "action": "Change PIN"
+            },
             "resyncAccounts": {
                 "title": "Ressincronizar Contas",
                 "description": ""
@@ -190,6 +200,10 @@
             },
             "nodeSettings": {
                 "title": "Configurações de Nó",
+                "description": ""
+            },
+            "configureNodeList": {
+                "title": "Configure node list",
                 "description": ""
             },
             "proofOfWork": {
@@ -257,6 +271,10 @@
                 "status": "Status",
                 "messages_per_second": "Messages per second",
                 "confirmation_rate": "Confirmation rate"
+            },
+            "profile_modal": {
+                "all_settings": "All settings",
+                "logout": "Log out"
             }
         }
     },
@@ -295,6 +313,14 @@
         "address_history": {
             "title": "{name} account address history",
             "current_balance": "Current balance: {balance}"
+        },
+        "node": {
+            "title_add": "Add a node",
+            "title_details": "Node details",
+            "node_address": "Node address",
+            "optional_username": "Username (optional)",
+            "optional_password": "Password (optional)",
+            "set_as_primary_node": "Set as primary node"
         }
     },
     "actions": {
@@ -340,11 +366,14 @@
         "outsourceProofOfWork": "Prova de origem de trabalho",
         "unlock": "Desbloquear",
         "update_firefly": "Update Firefly",
+        "install_firefly": "Install Firefly",
         "save_backup": "Save backup",
         "customize_account": "Customise account",
         "sync_account": "Sync account",
         "view_address_history": "View address history",
-        "delete_account": "Delete account"
+        "delete_account": "Delete account",
+        "max": "Max",
+        "add_node": "Add node"
     },
     "general": {
         "password": "Senha",
@@ -398,12 +427,15 @@
         "automaticNodeSelection": "Seleção automática de nó",
         "manualNodeSelection": "Seleção manual de nó",
         "profiles": "Perfis",
+        "developerProfile": "Developer Profile",
+        "dev": "Dev",
         "create_account": "Criar uma conta",
         "account_name": "Nome da Conta",
         "latest_transactions": "Últimas transações",
         "transactions": "Transações",
         "security": "Segurança",
-        "account_address": "Endereço da Conta"
+        "account_address": "Endereço da Conta",
+        "nodes": "Nodes"
     },
     "dates": {
         "today": "Today",
@@ -411,5 +443,10 @@
         "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
         "months_ago": "{time, plural, one {# month} other {# months}} ago",
         "years_ago": "{time, plural, one {# year} other {# years}} ago"
+    },
+    "notifications": {
+        "valueTx": "Receiving {{value}} to {{account}}",
+        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
+        "failed": "Outgoing {{value}} from {{account}} has failed"
     }
 }
