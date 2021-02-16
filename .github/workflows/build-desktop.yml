@@ -79,6 +79,8 @@ jobs:
     - name: Bundle desktop JS
       run: yarn build
       working-directory: packages/desktop
+      env:
+        HARDCODE_NODE_ENV: true
 
     - name: Build Electron app (macOS)
       run: yarn compile:mac
