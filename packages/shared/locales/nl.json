@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Stel je wallet in",
-            "body": "Je kunt een nieuwe wallet maken of een bestaande importeren."
+            "body": "Je kunt een nieuwe wallet maken of een bestaande importeren.",
+            "profile_name": "Profile Name"
         },
         "password": {
             "title": "Geef een wachtwoord op",
