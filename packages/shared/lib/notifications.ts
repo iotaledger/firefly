@@ -22,8 +22,6 @@ export type NotificationData = {
 
 export const displayNotifications = writable<Array<NotificationData>>([]);
 
-export const notificationHistory = writable<Array<NotificationData>>([]);
-
 export function showSystemNotification(notificationData: NotificationData): string {
     return showNotification(notificationData, true)
 }
@@ -57,11 +55,6 @@ export function showNotification(notificationData: NotificationData, showSystemN
             return _currentNotifications
         })
     }
-
-    notificationHistory.update((_notifications) => {
-        _notifications.push(notificationData)
-        return _notifications
-    })
 
     if (notificationData.timeout !== NOTIFICATION_TIMEOUT_NEVER) {
         setTimeout(() => removeDisplayNotification(notificationData.id), notificationData.timeout);
