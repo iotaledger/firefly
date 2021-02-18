@@ -37,6 +37,7 @@ export const updateProgress = writable<number>(0)
 export const updateMinutesRemaining = writable<number>(-1)
 export const updateBusy = writable<boolean>(false)
 export const updateComplete = writable<boolean>(false)
+export const updateError = writable<boolean>(false)
 
 window['Electron'].onEvent('version-details', (nativeVersionDetails) => {
     versionDetails.set(nativeVersionDetails)
@@ -53,12 +54,14 @@ window['Electron'].onEvent('version-progress', (nativeVersionProgress: NativePro
 
 window['Electron'].onEvent('version-complete', (nativeVersionComplete) => {
     updateBusy.set(false)
+    updateError.set(false)
     updateComplete.set(true)
     updateMinutesRemaining.set(0)
 })
 
 window['Electron'].onEvent('version-error', (nativeVersionError) => {
     console.log(nativeVersionError)
+    updateError.set(true)
 })
 
 export function updateDownload(): void {
@@ -66,17 +69,20 @@ export function updateDownload(): void {
     updateMinutesRemaining.set(-1)
     updateBusy.set(true)
     updateComplete.set(false)
+    updateError.set(false)
 
     const locale = get(_) as (string, values?) => string
 
     let progressSubscription;
     let minutesRemainingSubscription;
     let completeSubscription;
+    let errorSubscription;
 
     const cleanup = () => {
         removeDisplayNotification(notificationId)
         progressSubscription();
         completeSubscription();
+        errorSubscription();
         minutesRemainingSubscription();
     }
 
@@ -146,6 +152,25 @@ export function updateDownload(): void {
         }
     });
 
+    errorSubscription = updateError.subscribe((isError) => {
+        if (isError) {
+            updateDisplayNotification(
+                notificationId,
+                {
+                    type: "error",
+                    message: locale('notifications.update_error'),
+                    progress: undefined,
+                    actions: [
+                        {
+                            label: locale('actions.dismiss'),
+                            callback: () => cleanup(),
+                            isPrimary: true
+                        }
+                    ]
+                })
+        }
+    });
+
     window['Electron'].updateDownload()
 }
 
@@ -154,6 +179,7 @@ export function updateCancel(): void {
     updateProgress.set(0)
     updateBusy.set(false)
     updateComplete.set(false)
+    updateError.set(false)
     updateMinutesRemaining.set(-1)
 }
 

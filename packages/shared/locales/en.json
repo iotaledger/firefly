@@ -452,6 +452,7 @@
         "failed": "Outgoing {{value}} from {{account}} has failed",
         "downloading_update": "Downloading update",
         "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
         "restart_install": "Restart to install",
         "calc_minutes_remaining": "Calculating minutes remaining...",
         "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
