@@ -5,6 +5,7 @@ import type { Message } from './typings/message'
 import type { Event, TransactionEventPayload, ConfirmationStateChangeEventPayload } from './typings/events'
 import { mnemonic } from 'shared/lib/app'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
+import { showSystemNotification } from 'shared/lib/notifications'
 import { _ } from 'shared/lib/i18n'
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
@@ -171,8 +172,8 @@ export const initialiseListeners = () => {
                 const notificationMessage = locale('notifications.valueTx')
                     .replace('{{value}}', message.value.toString())
                     .replace('{{account}}', account.alias)
-                const NotificationManager = window['Electron']['NotificationManager']
-                NotificationManager.notify(notificationMessage)
+
+                showSystemNotification({ type: "info", message: notificationMessage })
             }
         },
         onError(error) {
@@ -192,8 +193,8 @@ export const initialiseListeners = () => {
                 const notificationMessage = locale(`notifications.${messageKey}`)
                     .replace('{{value}}', message.value.toString())
                     .replace('{{account}}', account.alias)
-                const NotificationManager = window['Electron']['NotificationManager']
-                NotificationManager.notify(notificationMessage)
+
+                showSystemNotification({ type: "info", message: notificationMessage })
             }
         },
         onError(error) {

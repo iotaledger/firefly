@@ -362,7 +362,7 @@
         "exportNewStronghold": "Export a new Stronghold",
         "enableDeepLinks": "Enable deep links",
         "enableDeveloperMode": "Enable developer mode",
-        "enableNotifications": "Enable notifications",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "Export state",
         "outsourceProofOfWork": "Outsource proof of work",
         "unlock": "Unlock",
