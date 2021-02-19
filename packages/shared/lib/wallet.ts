@@ -2,8 +2,10 @@ import { writable, Writable, get } from 'svelte/store'
 import type { MessageResponse, Actor } from './typings/bridge'
 import type { Address } from './typings/address'
 import type { Message } from './typings/message'
-import type { Event, TransactionEventPayload, ConfirmationStateChangeEventPayload } from './typings/events'
+import type { Event, TransactionEventPayload, ConfirmationStateChangeEventPayload, BalanceChangeEventPayload } from './typings/events'
 import { mnemonic } from 'shared/lib/app'
+import { formatUnit } from 'shared/lib/units'
+import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { _ } from 'shared/lib/i18n'
 
@@ -205,14 +207,48 @@ export const initialiseListeners = () => {
      * Event listener for balance change event
      */
     api.onBalanceChange({
-        onSuccess(response) {
-            console.log('Balance change response', response)
+        onSuccess(response: Event<BalanceChangeEventPayload>) {
+            const { payload: { accountId, address, balanceChange } } = response;
+
+            updateAddressMeta(accountId, address)
+            updateBalanceOverview(balanceChange.received, balanceChange.spent);
+
         },
         onError(error) {
             console.error(error)
         },
     })
 }
+
+/**
+ * Updates address meta 
+ * 
+ * @method updateAddressMeta
+ * 
+ * @param {string} accountId 
+ * @param {Address} addressMeta 
+ */
+export const updateAddressMeta = (accountId: string, address: Address): void => {
+    const { accounts } = get(wallet);
+
+    accounts.update((storedAccounts) => {
+        return storedAccounts.map((storedAccount) => {
+            if (storedAccount.id === accountId) {
+                return Object.assign({}, storedAccount, {
+                    addresses: storedAccount.addresses.map((_address: Address) => {
+                        if (_address.address === address.address) {
+                            return Object.assign({}, _address, address)
+                        }
+
+                        return _address
+                    })
+                })
+            }
+
+            return storedAccount;
+        })
+    })
+};
 
 /**
  * Gets latest messages
@@ -245,3 +281,66 @@ export const getLatestMessages = (accounts: Account[], count = 10): Message[] =>
         })
         .slice(0, count)
 }
+
+/**
+ * Sets balance overview
+ * 
+ * @method setBalanceOverview
+ * 
+ * @param {number} balance 
+ * @param {number} incoming 
+ * @param {number} outgoing
+ * 
+ * @returns {void} 
+ */
+export const setBalanceOverview = (balance: number, incoming: number, outgoing: number): void => {
+    const { balanceOverview } = get(wallet);
+
+    balanceOverview.set({
+        incoming: formatUnit(incoming, 2),
+        incomingRaw: incoming,
+        outgoing: formatUnit(outgoing, 2),
+        outgoingRaw: outgoing,
+        balance: formatUnit(balance, 2),
+        balanceRaw: balance,
+        balanceFiat: `${convertToFiat(
+            balance,
+            get(currencies)[CurrencyTypes.USD],
+            get(exchangeRates)[get(activeProfile).settings.currency]
+        )} ${get(activeProfile).settings.currency}`,
+    });
+};
+
+/**
+ * Updates balance overview 
+ * 
+ * @method updateBalanceOverview
+ * 
+ * @param {number} received 
+ * @param {number} spent
+ * 
+ * @returns {void} 
+ */
+export const updateBalanceOverview = (received: number, spent: number): void => {
+    const { balanceOverview } = get(wallet);
+
+    balanceOverview.update((overview) => {
+        const incoming = overview.incomingRaw + received;
+        const outgoing = overview.outgoingRaw + spent;
+        const balance = overview.balanceRaw - spent + received;
+
+        return Object.assign({}, overview, {
+            incoming: formatUnit(incoming, 2),
+            incomingRaw: incoming,
+            outgoing: formatUnit(outgoing, 2),
+            outgoingRaw: outgoing,
+            balance: formatUnit(balance, 2),
+            balanceRaw: balance,
+            balanceFiat: `${convertToFiat(
+                balance,
+                get(currencies)[CurrencyTypes.USD],
+                get(exchangeRates)[get(activeProfile).settings.currency]
+            )} ${get(activeProfile).settings.currency}`,
+        });
+    });
+};
