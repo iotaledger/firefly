@@ -10,7 +10,8 @@
     import { Account, LineChart, WalletHistory, Security, CreateAccount, WalletBalance, WalletActions } from './views/'
     import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
     import { openPopup } from 'shared/lib/popup'
-    import { walletViewState, WalletViewStates } from 'shared/lib/router'
+    import { walletRoute } from 'shared/lib/router'
+    import { WalletRoutes } from 'shared/lib/typings/routes'
     import { sendParams } from 'shared/lib/app'
 
     export let locale
@@ -224,7 +225,7 @@
                                 if (!err) {
                                     const account = prepareAccountInfo(createAccountResponse.payload, meta)
                                     accounts.update((accounts) => [...accounts, account])
-                                    walletViewState.set(WalletViewStates.Init)
+                                    walletRoute.set(WalletRoutes.Init)
                                 } else {
                                     console.error(err)
                                 }
@@ -282,7 +283,7 @@
                         })
 
                         sendParams.set({ address: '', amount: 0, message: '' })
-                        walletViewState.set(WalletViewStates.Init)
+                        walletRoute.set(WalletRoutes.Init)
                     },
                     onError(error) {
                         console.error(error)
@@ -322,7 +323,7 @@
                     })
 
                     sendParams.set({ address: '', amount: 0, message: '' })
-                    walletViewState.set(WalletViewStates.Init)
+                    walletRoute.set(WalletRoutes.Init)
                 },
                 onError(response) {
                     console.error(response)
@@ -361,7 +362,7 @@
                     })
                 })
 
-                walletViewState.set(WalletViewStates.Init)
+                walletRoute.set(WalletRoutes.Init)
             },
             onError(error) {
                 console.error(error)
@@ -371,7 +372,7 @@
 
     $: {
         if ($deepLinkRequestActive && get(activeProfile).settings.deepLinking) {
-            walletViewState.set(WalletViewStates.Send)
+            walletRoute.set(WalletRoutes.Send)
             deepLinkRequestActive.set(false)
         }
     }
@@ -404,7 +405,7 @@
     })
 </script>
 
-{#if $walletViewState === WalletViewStates.Account && $selectedAccountId}
+{#if $walletRoute === WalletRoutes.Account && $selectedAccountId}
     <Account
         send={onSend}
         internalTransfer={onInternalTransfer}
@@ -417,7 +418,7 @@
             <DashboardPane classes="w-1/3 h-full">
                 <!-- Total Balance, Accounts list & Send/Receive -->
                 <div class="flex flex-auto flex-col flex-shrink-0 h-full">
-                    {#if $walletViewState === WalletViewStates.CreateAccount}
+                    {#if $walletRoute === WalletRoutes.CreateAccount}
                         <CreateAccount onCreate={onCreateAccount} {locale} />
                     {:else}
                         <WalletBalance {locale} />

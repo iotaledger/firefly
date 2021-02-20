@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Input, Text, Button } from 'shared/components'
-    import { accountViewState, AccountViewStates } from 'shared/lib/router'
+    import { accountRoute } from 'shared/lib/router'
+    import { AccountRoutes } from 'shared/lib/typings/routes'
 
     export let locale
     export let name
@@ -12,7 +13,7 @@
         setAlias(accountName)
     }
     const handleCancelClick = () => {
-        accountViewState.set(AccountViewStates.Init)
+        accountRoute.set(AccountRoutes.Init)
     }
 </script>
 

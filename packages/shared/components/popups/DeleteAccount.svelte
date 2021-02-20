@@ -1,7 +1,8 @@
 <script>
     import { api, selectedAccountId } from 'shared/lib/wallet'
     import { sendParams } from 'shared/lib/app'
-    import { walletViewState, WalletViewStates, accountViewState, AccountViewStates } from 'shared/lib/router'
+    import { walletRoute, accountRoute } from 'shared/lib/router'
+    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { Password, Button, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
 
@@ -28,8 +29,8 @@
 
                             // 3. Go to main dashboard
                             selectedAccountId.set(null)
-                            accountViewState.set(AccountViewStates.Init)
-                            walletViewState.set(WalletViewStates.Init)
+                            accountRoute.set(AccountRoutes.Init)
+                            walletRoute.set(WalletRoutes.Init)
                         },
                         onError(error) {
                             console.error(error)
@@ -47,7 +48,7 @@
     function handleMoveFundsClick() {
         closePopup()
         sendParams.update((params) => ({ ...params, amount: $account.rawIotaBalance })) // TODO: fix input amount
-        accountViewState.set(AccountViewStates.Send)
+        accountRoute.set(AccountRoutes.Send)
     }
     function handleCancelClick() {
         closePopup()
