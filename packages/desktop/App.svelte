@@ -63,9 +63,7 @@
         window['Electron'].onEvent('menu-navigate-settings', (route) => {
             if (get(appRoute) !== AppRoute.Dashboard) {
                   // TODO: Add settings from login
-            }
-            console.log('here')
-            if (get(dashboardRoute) !== Tabs.Settings) {
+            } else if (get(dashboardRoute) !== Tabs.Settings) {
                 dashboardRoute.set(Tabs.Settings)
             }
             settingsRoute.set(route)
