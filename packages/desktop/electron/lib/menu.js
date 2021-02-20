@@ -34,7 +34,8 @@ let state = {
         troubleshoot: "Troubleshoot",
         faq: "FAQ",
         documentation: "Documentation",
-        discord: "Discord"
+        discord: "Discord",
+        reportAnIssue: "Report an Issue"
     }
 }
 
@@ -220,6 +221,12 @@ const buildTemplate = () => {
                 label: state.strings.discord,
                 click: function () {
                     shell.openExternal('https://iota.org')
+                },
+            },
+            {
+                label: state.strings.reportAnIssue,
+                click: function () {
+                    shell.openExternal('https://github.com/iotaledger/firefly/issues/new/choose')
                 },
             },
         ],

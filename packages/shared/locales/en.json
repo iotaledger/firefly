@@ -387,7 +387,8 @@
         "paste": "Paste",
         "selectAll": "Select All",
         "addAccount": "Add Account",
-        "checkForUpdates": "Check for Updates"
+        "checkForUpdates": "Check for Updates",
+        "reportAnIssue": "Report an Issue"
     },
     "general": {
         "password": "Password",
