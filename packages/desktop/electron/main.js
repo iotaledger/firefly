@@ -1,7 +1,9 @@
 const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
 const path = require('path')
-const Keychain = require('./keychain')
-const { initAutoUpdate } = require('./appUpdater')
+const Keychain = require('./lib/keychain')
+const { initAutoUpdate } = require('./lib/appUpdater')
+import { initMenu, contextMenu } from './lib/menu'
+const { version } = require('../package.json')
 
 /**
  * Set AppUserModelID for Windows notifications functionallity
@@ -32,6 +34,7 @@ app.commandLine.appendSwitch('js-flags', '--expose-gc')
  */
 const windows = {
     main: null,
+    about: null
 }
 
 /**
@@ -42,15 +45,18 @@ const devMode = process.env.NODE_ENV === 'development'
 let paths = {
     preload: '',
     html: '',
+    aboutHtml: ''
 }
 
 if (app.isPackaged) {
     paths.preload = path.join(app.getAppPath(), '/public/build/preload.js')
     paths.html = path.join(app.getAppPath(), '/public/index.html')
+    paths.aboutHtml = path.join(app.getAppPath(), '/public/about.html')
 } else {
     // __dirname is desktop/public/build
     paths.preload = path.join(__dirname, 'preload.js')
     paths.html = path.join(__dirname, '../index.html')
+    paths.aboutHtml = path.join(__dirname, '../about.html')
 }
 
 /**
@@ -75,7 +81,7 @@ function createWindow() {
         console.log(error) //eslint-disable-line no-console
     }
 
-    // Create the browser window.
+    // Create the browser window
     windows.main = new BrowserWindow({
         minWidth: 1280,
         minHeight: 720,
@@ -94,13 +100,16 @@ function createWindow() {
         },
     })
 
+    if (devMode) {
+        // Enable dev tools only in developer mode
+        windows.main.webContents.openDevTools()
+    }
+
     if (!devMode) {
         initAutoUpdate(windows.main)
     }
 
     if (devMode) {
-        // Enable dev tools only in developer mode
-        windows.main.webContents.openDevTools()
         windows.main.loadURL('http://localhost:8080')
     } else {
         // load the index.html of the app.
@@ -118,6 +127,16 @@ function createWindow() {
             console.log(error)
         }
     }
+
+    /**
+     * Right click context menu for inputs
+     */
+    windows.main.webContents.on('context-menu', (_e, props) => {
+        const { isEditable } = props
+        if (isEditable) {
+            contextMenu().popup(windows.main)
+        }
+    })
 
     /**
      * Only allow external navigation to allowed domains
@@ -140,6 +159,18 @@ function createWindow() {
 }
 
 app.whenReady().then(createWindow)
+
+/**
+ * Gets Window instance
+ */
+export const getWindow = function (windowName) {
+    return windows[windowName]
+}
+
+/**
+ * Initialises the menu bar
+ */
+initMenu(app, getWindow)
 
 app.allowRendererProcessReuse = false
 
@@ -253,3 +284,54 @@ ipcMain.on('deepLink-request', () => {
         deepLinkUrl = null
     }
 })
+
+export const openAboutWindow = () => {
+
+    if (windows.about !== null) {
+        windows.about.focus()
+        return windows.about
+    }
+
+    windows.about = new BrowserWindow({
+        width: 400,
+        height: 350,
+        useContentSize: true,
+        titleBarStyle: 'hidden-inset',
+        show: false,
+        webPreferences: {
+            nodeIntegration: false,
+            contextIsolation: true,
+            enableRemoteModule: false,
+            worldSafeExecuteJavaScript: true,
+            disableBlinkFeatures: 'Auxclick',
+            webviewTag: false,
+            enableWebSQL: false,
+            devTools: devMode,
+            preload: `${__dirname}/lib/aboutPreload.js`,
+        },
+    })
+
+    windows.about.once('closed', () => {
+        windows.about = null
+    })
+
+    windows.about.loadFile(paths.aboutHtml)
+
+    const content = {
+        appName: app.name,
+        version: version,
+        iconPath: './assets/logos/firefly_logo.svg'
+    }
+
+    windows.about.webContents.once('dom-ready', () => {
+        windows.about.webContents.send('about-content', content)
+    })
+
+    windows.about.once('ready-to-show', () => {
+        windows.about.show()
+    })
+
+    windows.about.setMenu(null)
+
+    return windows.about
+}

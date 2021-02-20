@@ -1,11 +1,12 @@
 import { writable, Writable, get } from 'svelte/store'
-import type { MessageResponse, Actor } from './typings/bridge'
+import type { Actor } from './typings/bridge'
 import type { Address } from './typings/address'
 import type { Message } from './typings/message'
 import type { Event, TransactionEventPayload, ConfirmationStateChangeEventPayload } from './typings/events'
 import { mnemonic } from 'shared/lib/app'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { _ } from 'shared/lib/i18n'
+import { persistent } from 'shared/lib/helpers'
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
@@ -68,9 +69,12 @@ export const resetWallet = () => {
     })
     accounts.set([])
     selectedAccountId.set(null)
+    loggedIn.set(false)
 }
 
 export const selectedAccountId = writable<string | null>(null)
+
+export const loggedIn = persistent<boolean>('loggedIn', false)
 
 export const api = window['__WALLET_API__']
 

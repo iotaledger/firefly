@@ -4,10 +4,11 @@
     import { fetchMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { setupI18n, isLocaleLoaded, dir, _ } from 'shared/lib/i18n'
-    import { darkMode, mobile } from 'shared/lib/app'
+    import { darkMode, mobile, loggedIn } from 'shared/lib/app'
     import { activeProfile } from 'shared/lib/profile'
     import { goto } from 'shared/lib/helpers'
-    import { initRouter, routerNext, routerPrevious, AppRoute } from 'shared/lib/router'
+    import { initRouter, routerNext, routerPrevious, route as appRoute, dashboardRoute, walletRoute, settingsRoute } from 'shared/lib/router'
+    import { AppRoute, Tabs } from 'shared/lib/typings/routes'
     import { popupState } from 'shared/lib/popup'
     import { requestMnemonic } from 'shared/lib/wallet'
     import { Route, Toggle, Popup } from 'shared/components'
@@ -28,10 +29,16 @@
         Dashboard,
         Login,
     } from 'shared/routes'
+    import { getLocalisedMenuItems } from './lib/helpers'
+
     $: $darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
+    $: window['Electron'].updateMenu('strings', getLocalisedMenuItems($_))
+    $: window['Electron'].updateMenu('loggedIn', $loggedIn)
+
     $: if (document.dir !== $dir) {
         document.dir = $dir
     }
+
     let splash = true
     setupI18n({ withLocale: get(activeProfile) ? get(activeProfile).settings.language : 'en' })
     onMount(async () => {
@@ -47,6 +54,23 @@
         if (!devMode) {
             await refreshVersionDetails()
         }
+        window['Electron'].onEvent('menu-navigate-wallet', (route) => {
+            if (get(dashboardRoute) !== Tabs.Wallet) {
+                dashboardRoute.set(Tabs.Wallet)
+            }
+            walletRoute.set(route)
+        })
+        window['Electron'].onEvent('menu-navigate-settings', (route) => {
+            if (get(appRoute) !== AppRoute.Dashboard) {
+                  // TODO: Add settings from login
+            }
+            console.log('here')
+            if (get(dashboardRoute) !== Tabs.Settings) {
+                dashboardRoute.set(Tabs.Settings)
+            }
+            settingsRoute.set(route)
+        })
+
     })
 </script>
 

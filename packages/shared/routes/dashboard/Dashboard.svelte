@@ -4,29 +4,36 @@
     import { Idle, Sidebar } from 'shared/components'
     import { Wallet, Settings } from 'shared/routes'
     import { parseDeepLink } from 'shared/lib/utils'
-    import { sendParams } from 'shared/lib/app'
+    import { sendParams, logout } from 'shared/lib/app'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { activeProfile } from 'shared/lib/profile'
-    import { routerNext } from 'shared/lib/router'
+    import { routerNext, dashboardRoute } from 'shared/lib/router'
+    import { api } from 'shared/lib/wallet'
+    import { Tabs } from 'shared/lib/typings/routes'
 
     export let locale
     export let mobile
+
     const tabs = {
         wallet: Wallet,
         settings: Settings,
     }
-    enum Tabs {
-        Wallet = 'wallet',
-        Settings = 'settings',
-    }
-
+    
     const DeepLinkManager = window['Electron']['DeepLinkManager']
-
-    let activeTab = Tabs.Wallet
 
     onMount(() => {
         DeepLinkManager.requestDeepLink()
         window['Electron'].onEvent('deepLink-params', (data) => handleDeepLinkRequest(data))
+        window['Electron'].onEvent('menu-logout', () => {
+            api.lockStronghold({
+                onSuccess() {
+                    logout()
+                },
+                onError(error) {
+                    console.error(error)
+                },
+            })
+        })
     })
 
     /**
@@ -38,8 +45,8 @@
         const parsedData = parseDeepLink(data)
         const _redirect = (tab) => {
             deepLinkRequestActive.set(true)
-            if (activeTab !== tab) {
-                activeTab = tab
+            if (get(dashboardRoute) !== tab) {
+                dashboardRoute.set(tab)
             }
         }
 
@@ -61,8 +68,8 @@
 {:else}
     <Idle />
     <div class="flex flex-row w-full h-full">
-        <Sidebar bind:activeTab {locale} />
+        <Sidebar bind:activeTab={$dashboardRoute} {locale} />
         <!-- Dashboard Pane -->
-        <svelte:component this={tabs[activeTab]} {locale} on:next={routerNext} />
+        <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
     </div>
 {/if}
