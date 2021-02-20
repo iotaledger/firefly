@@ -10,7 +10,7 @@
 
     function changeRoute(setting) {
         document.getElementById('scroller').scrollTop = 0
-        route.update(() => setting)
+        route = setting
     }
 </script>
 
