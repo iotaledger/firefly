@@ -28,7 +28,6 @@ let state = {
         wallet: "Wallet",
         send: "Send Funds",
         receive: "Receive Funds",
-        accountOptions: "Account Options",
         addAccount: "Add Account",
         help: "Help",
         troubleshoot: "Troubleshoot",
@@ -172,11 +171,6 @@ const buildTemplate = () => {
                 },
                 {
                     type: 'separator',
-                },
-                {
-                    label: state.strings.accountOptions,
-                    click: () => {},
-                    enabled: state.enabled
                 },
                 {
                     label: state.strings.addAccount,
