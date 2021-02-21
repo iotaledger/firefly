@@ -2,7 +2,15 @@
     import { setContext, onMount } from 'svelte'
     import { get, derived } from 'svelte/store'
     import { updateProfile } from 'shared/lib/profile'
-    import { api, getLatestMessages, initialiseListeners, selectedAccountId, wallet } from 'shared/lib/wallet'
+    import {
+        api,
+        getLatestMessages,
+        getAccountsBalanceHistory,
+        getWalletBalanceHistory,
+        initialiseListeners,
+        selectedAccountId,
+        wallet,
+    } from 'shared/lib/wallet'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { activeProfile } from 'shared/lib/profile'
     import { formatUnit } from 'shared/lib/units'
@@ -12,6 +20,7 @@
     import { openPopup } from 'shared/lib/popup'
     import { walletViewState, WalletViewStates } from 'shared/lib/router'
     import { sendParams } from 'shared/lib/app'
+    import { priceData } from 'shared/lib/marketData'
 
     export let locale
 
@@ -22,6 +31,12 @@
     const transactions = derived(accounts, ($accounts) => {
         return getLatestMessages($accounts)
     })
+    const accountsBalanceHistory = derived([accounts, priceData], ([$accounts, $priceData]) =>
+        getAccountsBalanceHistory($accounts, $priceData)
+    )
+    const walletBalanceHistory = derived(accountsBalanceHistory, ($accountsBalanceHistory) =>
+        getWalletBalanceHistory($accountsBalanceHistory)
+    )
     const selectedAccount = derived([selectedAccountId, accounts], ([$selectedAccountId, $accounts]) =>
         $accounts.find((acc) => acc.id === $selectedAccountId)
     )
@@ -29,6 +44,8 @@
     setContext('walletBalance', balanceOverview)
     setContext('walletAccounts', accounts)
     setContext('walletTransactions', transactions)
+    setContext('accountsBalanceHistory', accountsBalanceHistory)
+    setContext('walletBalanceHistory', walletBalanceHistory)
     setContext('selectedAccount', selectedAccount)
 
     let isGeneratingAddress = false
@@ -206,40 +223,41 @@
     }
 
     function onCreateAccount(alias) {
-        const _create = () => api.createAccount(
-            {
-                alias,
-                clientOptions: {
-                    node: $accounts[0].clientOptions.node,
-                    nodes: $accounts[0].clientOptions.nodes,
-                    // For subsequent accounts, use the network for any of the previous accounts
-                    network: $accounts[0].clientOptions.network,
+        const _create = () =>
+            api.createAccount(
+                {
+                    alias,
+                    clientOptions: {
+                        node: $accounts[0].clientOptions.node,
+                        nodes: $accounts[0].clientOptions.nodes,
+                        // For subsequent accounts, use the network for any of the previous accounts
+                        network: $accounts[0].clientOptions.network,
+                    },
                 },
-            },
-            {
-                onSuccess(createAccountResponse) {
-                    api.syncAccount(createAccountResponse.payload.id, {
-                        onSuccess(syncAccountResponse) {
-                            getAccountMeta(createAccountResponse.payload.id, (err, meta) => {
-                                if (!err) {
-                                    const account = prepareAccountInfo(createAccountResponse.payload, meta)
-                                    accounts.update((accounts) => [...accounts, account])
-                                    walletViewState.set(WalletViewStates.Init)
-                                } else {
-                                    console.error(err)
-                                }
-                            })
-                        },
-                        onError(error) {
-                            console.error(error)
-                        },
-                    })
-                },
-                onError(error) {
-                    console.error(error)
-                },
-            }
-        )
+                {
+                    onSuccess(createAccountResponse) {
+                        api.syncAccount(createAccountResponse.payload.id, {
+                            onSuccess(syncAccountResponse) {
+                                getAccountMeta(createAccountResponse.payload.id, (err, meta) => {
+                                    if (!err) {
+                                        const account = prepareAccountInfo(createAccountResponse.payload, meta)
+                                        accounts.update((accounts) => [...accounts, account])
+                                        walletViewState.set(WalletViewStates.Init)
+                                    } else {
+                                        console.error(err)
+                                    }
+                                })
+                            },
+                            onError(error) {
+                                console.error(error)
+                            },
+                        })
+                    },
+                    onError(error) {
+                        console.error(error)
+                    },
+                }
+            )
 
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {

@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { getContext } from 'svelte'
     import { DashboardPane, AccountActionsModal } from 'shared/components'
-    import { AccountNavigation, AccountBalance, AccountActions, AccountHistory } from '.'
+    import { AccountNavigation, AccountBalance, AccountActions, AccountHistory, LineChart } from '.'
 
     export let locale
     export let send
@@ -45,7 +45,9 @@
                 </DashboardPane>
                 <div class=" flex flex-col space-y-4">
                     <!-- TODO Account Value -->
-                    <DashboardPane classes="h-1/2 w-full" />
+                    <DashboardPane classes="w-full h-1/2">
+                        <LineChart />
+                    </DashboardPane>
                     <!-- TODO  Account Activity -->
                     <DashboardPane classes="h-1/2 w-full" />
                 </div>

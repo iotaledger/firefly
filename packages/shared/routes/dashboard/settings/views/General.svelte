@@ -2,6 +2,7 @@
     import { darkMode } from 'shared/lib/app'
     import { Text, Radio, Dropdown, Toggle } from 'shared/components'
     import { exchangeRates } from 'shared/lib/currency'
+    import { addProfileCurrencyPriceData } from 'shared/lib/marketData'
     import { locales, setupI18n } from 'shared/lib/i18n'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
 
@@ -16,6 +17,11 @@
         const locale = Object.keys(locales).find((key) => locales[key] === item.value)
         updateProfile('settings.language', locale)
         setupI18n({ withLocale: locale })
+    }
+
+    const handleCurrencySelect = (item) => {
+        updateProfile('settings.currency', item.value)
+        addProfileCurrencyPriceData()
     }
 </script>
 
@@ -47,7 +53,7 @@
         <Text type="p" secondary classes="mb-5">{locale('views.settings.currency.description')}</Text>
         <Dropdown
             sortItems={true}
-            onSelect={(item) => updateProfile('settings.currency', item.value)}
+            onSelect={handleCurrencySelect}
             value={$activeProfile.settings.currency}
             items={Object.keys($exchangeRates)
                 .map((currency) => ({ value: currency, label: currency }))

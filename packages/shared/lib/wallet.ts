@@ -5,7 +5,12 @@ import type { Message } from './typings/message'
 import type { Event, TransactionEventPayload, ConfirmationStateChangeEventPayload } from './typings/events'
 import { mnemonic } from 'shared/lib/app'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
+import type { HistoryData, PriceData } from 'shared/lib/marketData'
+import { HistoryDataProps } from 'shared/lib/marketData'
+import { CurrencyTypes } from 'shared/lib/currency'
 import { _ } from 'shared/lib/i18n'
+import { message } from './typings'
+import { time } from 'svelte-i18n'
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
@@ -244,4 +249,97 @@ export const getLatestMessages = (accounts: Account[], count = 10): Message[] =>
             return <any>new Date(b.timestamp) - <any>new Date(a.timestamp)
         })
         .slice(0, count)
+}
+
+/**
+ * Gets balance history for each account in market data timestamps
+ *
+ * @method getLatestMessages
+ *
+ * @param {Account} accounts
+ * @param {PriceData} [priceData]
+ *
+ */
+export const getAccountsBalanceHistory = (accounts: Account[], priceData: PriceData) => {
+    let balanceHistory = {}
+    if (priceData) {
+        accounts.forEach((account) => {
+            let accountBalanceHistory: HistoryData = {
+                [HistoryDataProps.ONE_HOUR]: [],
+                [HistoryDataProps.TWENTY_FOUR_HOURS]: [],
+                [HistoryDataProps.SEVEN_DAYS]: [],
+                [HistoryDataProps.ONE_MONTH]: [],
+            }
+            let messages = account.messages.sort((a, b) => {
+                return <any>new Date(a.timestamp).getTime() - <any>new Date(b.timestamp).getTime()
+            })
+            let balanceSoFar = 0;
+            let accountBalanceVariations = [{ balance: balanceSoFar, timestamp: '0' }]
+            messages.forEach((message) => {
+                if (message.incoming) {
+                    balanceSoFar += message.value;
+                } else {
+                    balanceSoFar -= message.value;
+                }
+                accountBalanceVariations.push({ balance: balanceSoFar, timestamp: message.timestamp })
+            })
+            let _balanceHistoryInTimeframe = []
+            Object.keys(priceData[CurrencyTypes.USD]).forEach((timeframe) => {
+                _balanceHistoryInTimeframe = []
+                priceData['usd'][timeframe].forEach(data => {
+                    if (accountBalanceVariations.length === 1 || new Date(data[0] * 1000).getTime() < new Date(accountBalanceVariations[0].timestamp).getTime()) {
+                        _balanceHistoryInTimeframe.push({ timestamp: data[0], balance: 0 })
+                    }
+                    else {
+                        for (var i = 1; i < accountBalanceVariations.length; i++) {
+                            if (new Date(data[0] * 1000).getTime() >= new Date(accountBalanceVariations[i - 1].timestamp).getTime() && new Date(data[0] * 1000).getTime() < new Date(accountBalanceVariations[i].timestamp).getTime()) {
+                                _balanceHistoryInTimeframe.push({ timestamp: data[0], balance: accountBalanceVariations[i - 1].balance })
+                                return
+                            }
+                            else if (i === (accountBalanceVariations.length - 1)) {
+                                _balanceHistoryInTimeframe.push({ timestamp: data[0], balance: accountBalanceVariations[i].balance })
+                                return
+                            }
+                        }
+                    }
+                })
+                accountBalanceHistory[timeframe] = _balanceHistoryInTimeframe
+            })
+            balanceHistory[account.index] = accountBalanceHistory
+        })
+    }
+    return balanceHistory
+}
+
+/**
+ * Gets balance history for each account in market data timestamps
+ *
+ * @method getLatestMessages
+ *
+ * @param {Account} accounts
+ * @param {PriceData} [priceData]
+ *
+ */
+export const getWalletBalanceHistory = (accountsBalanceHistory): HistoryData => {
+    let balanceHistory: HistoryData = {
+        [HistoryDataProps.ONE_HOUR]: [],
+        [HistoryDataProps.TWENTY_FOUR_HOURS]: [],
+        [HistoryDataProps.SEVEN_DAYS]: [],
+        [HistoryDataProps.ONE_MONTH]: [],
+    }
+    Object.values(accountsBalanceHistory).forEach((accBalanceHistory, accountID) => {
+        Object.keys(accBalanceHistory).forEach((timeframe) => {
+            if (!balanceHistory[timeframe].length) {
+                balanceHistory[timeframe] = accBalanceHistory[timeframe]
+            }
+            else {
+                balanceHistory[timeframe] = balanceHistory[timeframe].map(({ balance, timestamp }, index) =>
+                    ({ timestamp, balance: balance + accBalanceHistory[timeframe][index].balance })
+                )
+            }
+        })
+    })
+
+    return balanceHistory
+
 }

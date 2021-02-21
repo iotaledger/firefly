@@ -1,5 +1,6 @@
 import { writable, get, derived } from 'svelte/store'
-import { currencies, Currencies, exchangeRates, ExchangeRates, CurrencyTypes } from 'shared/lib/currency'
+import { currencies, Currencies, exchangeRates, ExchangeRates, CurrencyTypes, AvailableExchangeRates } from 'shared/lib/currency'
+import { activeProfile } from 'shared/lib/profile'
 import Validator from 'shared/lib/validator'
 
 /**
@@ -12,17 +13,18 @@ export const MARKETDATA_ENDPOINTS = ['https://nodes.iota.works/api/market']
  */
 const DEFAULT_MARKETDATA_ENDPOINT_TIMEOUT = 5000
 
-enum HistoryDataProps {
+export enum HistoryDataProps {
     ONE_HOUR = '1h',
-    ONE_MINUTE = '1m',
-    SEVEN_DAYS = '7d',
     TWENTY_FOUR_HOURS = '24h',
+    SEVEN_DAYS = '7d',
+    ONE_MONTH = '1m',
 }
 
 enum Timeframes {
     ONE_HOUR = '1 hour',
-    SEVEN_DAYS = '1 week',
     TWENTY_FOUR_HOURS = '1 day',
+    SEVEN_DAYS = '1 week',
+    ONE_MONTH = '1 month',
 }
 
 export enum AvailableCharts {
@@ -37,11 +39,11 @@ enum Histories {
     HISTORY_USD = 'history-usd',
 }
 
-type HistoryData = {
+export type HistoryData = {
     [HistoryDataProps.ONE_HOUR]: (string | number)[]
-    [HistoryDataProps.ONE_MINUTE]: (string | number)[]
     [HistoryDataProps.SEVEN_DAYS]: (string | number)[]
     [HistoryDataProps.TWENTY_FOUR_HOURS]: (string | number)[]
+    [HistoryDataProps.ONE_MONTH]: (string | number)[]
 }
 
 type HistoryBTC = {
@@ -86,7 +88,7 @@ export type MarketDataValidationResponse = {
     payload: MarketData
 }
 
-type PriceData = {
+export type PriceData = {
     [CurrencyTypes.BTC]: HistoryData
     [CurrencyTypes.EUR]: HistoryData
     [CurrencyTypes.USD]: HistoryData
@@ -119,27 +121,27 @@ export const change24h = writable<number>(0)
 export const priceData = writable<PriceData>({
     btc: {
         '1h': [],
-        '1m': [],
         '24h': [],
         '7d': [],
+        '1m': [],
     },
     eur: {
         '1h': [],
-        '1m': [],
         '24h': [],
         '7d': [],
+        '1m': [],
     },
     usd: {
         '1h': [],
-        '1m': [],
         '24h': [],
         '7d': [],
+        '1m': [],
     },
     eth: {
         '1h': [],
-        '1m': [],
         '24h': [],
         '7d': [],
+        '1m': [],
     },
 })
 
@@ -152,25 +154,11 @@ export const chartTimeframe = writable<HistoryDataProps>(HistoryDataProps.SEVEN_
 /** Selected chart */
 export const selectedChart = writable<AvailableCharts>(AvailableCharts.PORTFOLIO)
 
-/** Chart data */
-export const chartData = derived([priceData, chartCurrency, chartTimeframe], ([$priceData, $chartCurrency, $chartTimeframe]) => {
-    return $priceData[$chartCurrency][$chartTimeframe]
-        .sort((a, b) => a[0] - b[0])
-        .reduce(
-            (acc, values) => {
-                acc.labels.push(new Date(values[0] * 1000).toLocaleString('default', { month: 'short', day: 'numeric' }))
-                acc.data.push(parseFloat(values[1]))
-
-                return acc
-            },
-            { labels: [], data: [] }
-        )
-})
-
 export const TIMEFRAME_MAP = {
     [HistoryDataProps.ONE_HOUR]: Timeframes.ONE_HOUR,
-    [HistoryDataProps.SEVEN_DAYS]: Timeframes.SEVEN_DAYS,
     [HistoryDataProps.TWENTY_FOUR_HOURS]: Timeframes.TWENTY_FOUR_HOURS,
+    [HistoryDataProps.SEVEN_DAYS]: Timeframes.SEVEN_DAYS,
+    [HistoryDataProps.ONE_MONTH]: Timeframes.ONE_MONTH,
 }
 
 /**
@@ -227,13 +215,30 @@ export async function fetchMarketData(): Promise<void> {
                 mcap.set(marketData.market.usd_market_cap)
                 volume.set(marketData.market.usd_24h_vol)
                 change24h.set(marketData.market.usd_24h_change)
+
+                addProfileCurrencyPriceData()
+
             } else {
                 throw new Error(error.error)
             }
-
             break
         } catch (err) {
             console.error(err)
         }
+    }
+}
+
+export async function addProfileCurrencyPriceData(): Promise<void> {
+    // get selected profile currency and add its estimated history
+    const profileCurrency: string = get(activeProfile).settings.currency.toLowerCase()
+    if (!get(priceData)[profileCurrency.toLowerCase()]) {
+        const profileCurrencyRate: number = get(exchangeRates)[profileCurrency.toUpperCase()]
+        const usdHistory = get(priceData)[CurrencyTypes.USD]
+        let profileCurrencyHistory = {};
+        Object.keys(usdHistory).forEach((key) => {
+            let convertedProfileCurrencyHistory = usdHistory[key].map(([timestamp, value]) => [timestamp, (value * profileCurrencyRate).toString()])
+            profileCurrencyHistory[key] = convertedProfileCurrencyHistory
+        })
+        priceData.update((_priceData) => ({ ..._priceData, [profileCurrency]: profileCurrencyHistory }))
     }
 }
