@@ -293,11 +293,13 @@ export const openAboutWindow = () => {
     }
 
     windows.about = new BrowserWindow({
-        width: 400,
-        height: 350,
+        width: 300,
+        height: 180,
         useContentSize: true,
         titleBarStyle: 'hidden-inset',
         show: false,
+        fullscreenable: false,
+        resizable: false,
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
