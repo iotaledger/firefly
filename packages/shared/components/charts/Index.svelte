@@ -15,5 +15,5 @@
 {#if type === ChartType.Line}
     <LineChart {labels} {data} {color} />
 {:else if type === ChartType.Bar}
-    <BarChart />
+    <BarChart {labels} {data} {color} />
 {/if}

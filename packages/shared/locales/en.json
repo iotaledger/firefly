@@ -438,7 +438,8 @@
         "security": "Security",
         "account_address": "Account Address",
         "nodes": "Nodes",
-        "account_value": "Account Value"
+        "account_value": "Account Value",
+        "account_activity": "Account Activity"
     },
     "dates": {
         "today": "Today",

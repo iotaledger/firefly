@@ -9,6 +9,7 @@ import type { HistoryData, PriceData } from 'shared/lib/marketData'
 import { HistoryDataProps } from 'shared/lib/marketData'
 import { CurrencyTypes } from 'shared/lib/currency'
 import { _ } from 'shared/lib/i18n'
+import { Unit, convertUnits } from '@iota/unit-converter'
 import { message } from './typings'
 import { time } from 'svelte-i18n'
 
@@ -291,29 +292,25 @@ export const getAccountsBalanceHistory = (accounts: Account[], priceData: PriceD
                 // sort market data from last to newest
                 let sortedData = data.sort((a, b) => a[0] - b[0])
                 balanceHistoryInTimeframe = []
+                // if there are no balance variations
                 if (accountBalanceVariations.length === 1) {
                     balanceHistoryInTimeframe = sortedData.map(_data => ({ timestamp: _data[0], balance: 0 }))
                 }
                 else {
+                    let i = 1
                     sortedData.forEach(data => {
                         let data_timestamp = new Date(data[0] * 1000).getTime()
-                        // if there are no balance variations
-                        if (accountBalanceVariations.length === 1) {
-                            balanceHistoryInTimeframe.push({ timestamp: data[0], balance: 0 })
-                        }
-                        else {
-                            // find balance for each market data timepstamp
-                            for (var i = 1; i < accountBalanceVariations.length; i++) {
-                                let currentBalanceTimestamp = new Date(accountBalanceVariations[i].timestamp).getTime()
-                                let peviousBalanceTimestamp = new Date(accountBalanceVariations[i - 1].timestamp).getTime()
-                                if (data_timestamp >= peviousBalanceTimestamp && data_timestamp < currentBalanceTimestamp) {
-                                    balanceHistoryInTimeframe.push({ timestamp: data[0], balance: accountBalanceVariations[i - 1].balance })
-                                    return
-                                }
-                                else if (i === (accountBalanceVariations.length - 1)) {
-                                    balanceHistoryInTimeframe.push({ timestamp: data[0], balance: accountBalanceVariations[i].balance })
-                                    return
-                                }
+                        // find balance for each market data timepstamp
+                        for (i; i < accountBalanceVariations.length; i++) {
+                            let currentBalanceTimestamp = new Date(accountBalanceVariations[i].timestamp).getTime()
+                            let peviousBalanceTimestamp = new Date(accountBalanceVariations[i - 1].timestamp).getTime()
+                            if (data_timestamp >= peviousBalanceTimestamp && data_timestamp < currentBalanceTimestamp) {
+                                balanceHistoryInTimeframe.push({ timestamp: data[0], balance: accountBalanceVariations[i - 1].balance })
+                                return
+                            }
+                            else if (i === (accountBalanceVariations.length - 1)) {
+                                balanceHistoryInTimeframe.push({ timestamp: data[0], balance: accountBalanceVariations[i].balance })
+                                return
                             }
                         }
                     })
@@ -357,4 +354,52 @@ export const getWalletBalanceHistory = (accountsBalanceHistory): HistoryData => 
 
     return balanceHistory
 
+}
+
+export const getAccountActivity = (account) => {
+    const activityMonths = 6
+    var date = new Date();
+    let activityTimeframes = []
+    let accountActivity = []
+    let messages = account.messages.sort((a, b) => {
+        return <any>new Date(a.timestamp).getTime() - <any>new Date(b.timestamp).getTime()
+    })
+    for (var i = 0; i < activityMonths; i++) {
+        var start = new Date(date.getFullYear(), date.getMonth() - i, 1).getTime();
+        var end = new Date(date.getFullYear(), date.getMonth() - i + 1, 0).getTime();
+        activityTimeframes.push({ start, end })
+    }
+    if (account.messages.length) {
+        let index = 0
+        activityTimeframes.forEach(({ start, end }) => {
+            let incoming = 0
+            let outgoing = 0
+            if (new Date(messages[messages.length - 1].timestamp).getTime() < start || new Date(messages[messages.length - 1].timestamp).getTime() > end) {
+                accountActivity.push({ timestamp: start, incoming: 0, outgoing: 0 })
+                return
+            }
+            for (index; index < messages.length; index++) {
+                const message = messages[index]
+                const messageTimestamp = new Date(message.timestamp).getTime()
+                if (messageTimestamp >= start && messageTimestamp <= end) {
+                    const valueMiota = convertUnits(message.value, Unit.i, Unit.Mi)
+                    if (message.incoming) {
+                        incoming += valueMiota
+                    }
+                    else {
+                        outgoing += valueMiota
+                    }
+                }
+                else if (messageTimestamp > end) return
+            }
+            accountActivity.push({ timestamp: start, incoming, outgoing })
+        })
+    }
+    else {
+        accountActivity = activityTimeframes.map(({ start, end }) => ({ timestamp: start, incoming: 0, outgoing: 0 }))
+    }
+    accountActivity = accountActivity.sort((a, b) => {
+        return <any>new Date(a.timestamp).getTime() - <any>new Date(b.timestamp).getTime()
+    })
+    return accountActivity
 }

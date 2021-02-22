@@ -1,8 +1,20 @@
 <script>
-    import { onMount } from 'svelte'
+    import { onMount, afterUpdate } from 'svelte'
     import Chart from 'chart.js'
+    import resolveConfig from 'tailwindcss/resolveConfig'
+    import tailwindConfig from 'shared/tailwind.config.js'
+
+    export let labels = []
+    export let data = []
+    export let color = 'blue'
 
     let canvas
+    let chart
+    let beautifiedLabels = labels
+    $: incoming = data.map((_data) => _data.incoming)
+    $: outgoing = data.map((_data) => _data.outgoing)
+
+    const fullConfig = resolveConfig(tailwindConfig)
 
     function createRoundedBarChart() {
         // Source: https://stackoverflow.com/a/43281198/6682995
@@ -98,32 +110,32 @@
     }
 
     function createChart() {
-        createRoundedBarChart()
-
         const ctx = canvas
-
-        const myChart = new Chart(ctx, {
+        chart = new Chart(ctx, {
             type: 'roundedBar',
             data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                labels: beautifiedLabels,
                 datasets: [
                     {
                         label: 'Incoming',
-                        backgroundColor: '#108CFF',
+                        backgroundColor: fullConfig.theme.colors[color]['500'],
+                        hoverBackgroundColor: fullConfig.theme.colors[color]['500'],
                         barThickness: 7,
-                        data: [12, 8, 13, 7, 8, 10],
+                        data: incoming,
                     },
                     {
                         label: 'Outgoing',
-                        backgroundColor: '#0FC1B7',
+                        backgroundColor: fullConfig.theme.colors['gray']['400'],
+                        hoverBackgroundColor: fullConfig.theme.colors['gray']['400'],
                         barThickness: 7,
-                        data: [8, 6, 11, 4, 9, 6],
+                        data: outgoing,
                     },
                 ],
             },
             options: {
                 barRoundness: 1,
                 responsive: true,
+                maintainAspectRatio: false,
                 legend: {
                     position: 'bottom',
                     labels: {
@@ -148,11 +160,51 @@
                         },
                     ],
                 },
+                tooltips: {
+                    mode: 'point',
+                    backgroundColor: fullConfig.theme.colors.gray['900'],
+                    xPadding: 12,
+                    yPadding: 12,
+                    displayColors: false,
+                    titleFontSize: 12,
+                    bodyFontSize: 11,
+                    titleFontFamily: 'DM Sans',
+                    bodyFontFamily: 'DM Sans',
+                    bodyFontColor: fullConfig.theme.colors[color]['200'],
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            const datasetLabel = data.datasets[tooltipItem.datasetIndex].label || ''
+                            return `${datasetLabel} ${tooltipItem.value} Mi`
+                        },
+                    },
+                },
             },
         })
     }
 
-    onMount(createChart)
+    onMount(() => {
+        createRoundedBarChart()
+        formatLabels()
+        createChart()
+    })
+
+    afterUpdate(() => {
+        formatLabels()
+        reinitialise()
+    })
+
+    function reinitialise() {
+        chart.destroy()
+        createChart()
+    }
+
+    function formatLabels() {
+        beautifiedLabels = labels.map((label) =>
+            new Date(label).toLocaleString('default', {
+                month: 'short',
+            })
+        )
+    }
 </script>
 
-<div class="chart-container" style="position: relative; height: 100%;"><canvas bind:this={canvas} /></div>
+<div class="relative" style="height: calc(50vh - 130px);"><canvas bind:this={canvas} width="600" height="450" /></div>
