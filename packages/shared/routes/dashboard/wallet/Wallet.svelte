@@ -451,7 +451,7 @@
             </DashboardPane>
             <div class="flex flex-col w-2/3 h-full space-y-4">
                 <DashboardPane classes="w-full h-1/2">
-                    <LineChart />
+                    <LineChart {locale} />
                 </DashboardPane>
                 <div class="w-full h-1/2 flex flex-row flex-1 space-x-4">
                     <DashboardPane classes="w-1/2">

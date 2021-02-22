@@ -437,7 +437,8 @@
         "transactions": "Transactions",
         "security": "Security",
         "account_address": "Account Address",
-        "nodes": "Nodes"
+        "nodes": "Nodes",
+        "account_value": "Account Value"
     },
     "dates": {
         "today": "Today",

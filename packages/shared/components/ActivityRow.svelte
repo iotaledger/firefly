@@ -7,13 +7,14 @@
     export let incoming
     export let internal
     export let color
+    export let confirmed
     export let onClick = () => {}
 </script>
 
 <button
     on:click={(id) => onClick(id)}
     data-label="transaction-row"
-    class="w-full text-left flex rounded-2xl items-center bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 p-4">
+    class="w-full text-left flex rounded-2xl items-center bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 p-4 {confirmed ? 'opacity-50' : ''}">
     <Icon
         boxed
         classes="text-white dark:text-{internal ? 'gray-500' : `${color}-${incoming ? '500' : '600'}`}"

@@ -46,7 +46,7 @@
                 <div class=" flex flex-col space-y-4">
                     <!-- TODO Account Value -->
                     <DashboardPane classes="w-full h-1/2">
-                        <LineChart />
+                        <LineChart {locale} />
                     </DashboardPane>
                     <!-- TODO  Account Activity -->
                     <DashboardPane classes="h-1/2 w-full" />

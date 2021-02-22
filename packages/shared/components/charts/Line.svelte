@@ -6,12 +6,14 @@
     import { convertHexToRGBA } from 'shared/lib/helpers'
     import Chart from 'chart.js'
 
-    let canvas
-    let chart
-
     export let labels
     export let data
     export let color = 'blue' // TODO: each profile has a different color
+
+    let canvas
+    let chart
+    let beautifiedLabels = labels
+    $: autoSkipLabels = $chartTimeframe === HistoryDataProps.ONE_MONTH || $chartTimeframe === HistoryDataProps.TWENTY_FOUR_HOURS
 
     const fullConfig = resolveConfig(tailwindConfig)
 
@@ -29,17 +31,18 @@
         switch ($chartTimeframe) {
             case HistoryDataProps.ONE_HOUR:
             case HistoryDataProps.TWENTY_FOUR_HOURS:
-                return labels.map((label) =>
+                beautifiedLabels = labels.map((label) =>
                     label.toLocaleString('default', {
                         hour: '2-digit',
                         minute: '2-digit',
                     })
                 )
+                break
             case HistoryDataProps.SEVEN_DAYS:
                 let formattedLabels = labels.map((label) => label.toLocaleString('default', { month: 'short', day: 'numeric' }))
                 let _displayedLabels = []
                 let _blacklistedLabels = []
-                return formattedLabels.map((label, index) => {
+                beautifiedLabels = formattedLabels.map((label, index) => {
                     if (index === 0 && labels.filter((l) => l === label).length < 4) {
                         _blacklistedLabels.push(label)
                     }
@@ -50,8 +53,11 @@
                         return label
                     }
                 })
+                break
             case HistoryDataProps.ONE_MONTH:
-                return labels.map((label) => label.toLocaleString('default', { month: 'short', day: 'numeric' }))
+                return (beautifiedLabels = labels.map((label) =>
+                    label.toLocaleString('default', { month: 'short', day: 'numeric' })
+                ))
         }
     }
 
@@ -72,7 +78,7 @@
         chart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: formatLabels(),
+                labels: beautifiedLabels,
                 datasets: [
                     {
                         backgroundColor: gradient,
@@ -132,11 +138,15 @@
                             gridLines: {
                                 display: false,
                             },
+                            ticks: {
+                                autoSkip: autoSkipLabels,
+                            },
                         },
                     ],
                     yAxes: [
                         {
                             ticks: {
+                                beginAtZero: true,
                                 autoSkip: true,
                                 maxTicksLimit: 6,
                             },
@@ -153,4 +163,4 @@
     }
 </script>
 
-<div class="relative" style="height: calc(50vh - 160px);"><canvas bind:this={canvas} width="600" height="250" /></div>
+<div class="relative" style="height: calc(50vh - 130px);"><canvas bind:this={canvas} width="600" height="250" /></div>
