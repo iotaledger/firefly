@@ -3,7 +3,7 @@
     import { createEventDispatcher } from 'svelte'
     import { Transition } from 'shared/components'
     import { api } from 'shared/lib/wallet'
-    import { newProfile, activeProfile } from 'shared/lib/profile'
+    import { activeProfile } from 'shared/lib/profile'
 
     import { Protect, Pin } from './views/'
     import { validatePinFormat } from 'shared/lib/utils'
