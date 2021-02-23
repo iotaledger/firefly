@@ -38,6 +38,22 @@ const windows = {
 }
 
 /**
+ * Default web preferences (see https://www.electronjs.org/docs/tutorial/security)
+ */
+const defaultWebPreferences = {
+    webPreferences: {
+        nodeIntegration: false,
+        contextIsolation: true,
+        enableRemoteModule: false,
+        worldSafeExecuteJavaScript: true,
+        disableBlinkFeatures: 'Auxclick',
+        webviewTag: false,
+        enableWebSQL: false,
+        devTools: devMode,
+    }
+}
+
+/**
  * Set environment mode
  */
 const devMode = process.env.NODE_ENV === 'development'
@@ -88,14 +104,7 @@ function createWindow() {
         width: 1280,
         height: 720,
         webPreferences: {
-            nodeIntegration: false,
-            contextIsolation: true,
-            enableRemoteModule: false,
-            worldSafeExecuteJavaScript: true,
-            disableBlinkFeatures: 'Auxclick',
-            webviewTag: false,
-            enableWebSQL: false,
-            devTools: devMode,
+            ...defaultWebPreferences,
             preload: paths.preload,
         },
     })
@@ -302,14 +311,7 @@ export const openAboutWindow = () => {
         resizable: false,
         minimizable: false,
         webPreferences: {
-            nodeIntegration: false,
-            contextIsolation: true,
-            enableRemoteModule: false,
-            worldSafeExecuteJavaScript: true,
-            disableBlinkFeatures: 'Auxclick',
-            webviewTag: false,
-            enableWebSQL: false,
-            devTools: devMode,
+            ...defaultWebPreferences,
             preload: `${__dirname}/lib/aboutPreload.js`,
         },
     })
