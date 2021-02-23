@@ -300,6 +300,7 @@ export const openAboutWindow = () => {
         show: false,
         fullscreenable: false,
         resizable: false,
+        minimizable: false,
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
