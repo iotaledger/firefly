@@ -9,6 +9,7 @@ import { formatUnit } from 'shared/lib/units'
 import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { _ } from 'shared/lib/i18n'
+import type { SyncedAccount } from './typings/account'
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
@@ -177,6 +178,9 @@ export const initialiseListeners = () => {
                 const NotificationManager = window['Electron']['NotificationManager']
                 NotificationManager.notify(notificationMessage)
             }
+
+            // Update account with new message
+            saveNewMessage(response.payload.accountId, response.payload.message);
         },
         onError(error) {
             console.error(error)
@@ -257,6 +261,28 @@ export const updateAccountAfterBalanceChange = (
 
                         return _address
                     })
+                })
+            }
+        })
+    })
+}
+
+/** 
+ * @method saveNewMessage
+ * 
+ * @param {string} accountId 
+ * @param {Message} message
+ * 
+ * @returns {void} 
+ */
+export const saveNewMessage = (accountId: string, message: Message): void => {
+    const { accounts } = get(wallet)
+
+    accounts.update((storedAccounts) => {
+        return storedAccounts.map((storedAccount: Account) => {
+            if (storedAccount.id === accountId) {
+                return Object.assign({}, storedAccount, {
+                    messages: [message, ...storedAccount.messages]
                 })
             }
 
@@ -358,4 +384,48 @@ export const updateBalanceOverview = (received: number, spent: number): void => 
             )} ${get(activeProfile).settings.currency}`,
         });
     });
+};
+
+/**    
+* Updates accounts information after a successful sync accounts operation
+*
+* @method updateAccounts
+*
+* @param {SyncedAccount[]} syncedAccounts
+*
+* @returns {void}
+*/
+export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
+    const _update = (existingPayload, newPayload, prop) => {
+        const existingPayloadMap = existingPayload.reduce((acc, object) => {
+            acc[object[prop]] = object
+
+            return acc
+        }, {})
+
+        const newPayloadMap = newPayload.reduce((acc, object) => {
+            acc[object[prop]] = object
+
+            return acc
+        }, {})
+
+        return Object.values(Object.assign({}, existingPayloadMap, newPayloadMap))
+    }
+
+    const { accounts } = get(wallet)
+
+    accounts.update((storedAccounts) => {
+        return storedAccounts.map((storedAccount) => {
+            const syncedAccount = syncedAccounts.find((_account) => _account.id === storedAccount.id)
+
+            return Object.assign({}, storedAccount, {
+                // Update deposit address
+                depositAddress: syncedAccount.depositAddress.address,
+                // If we have received a new address, simply add it;
+                // If we have received an existing address, update the properties.
+                addresses: _update(storedAccount.addresses, syncedAccount.addresses, 'address'),
+                messages: _update(storedAccount.messages, syncedAccount.messages, 'id'),
+            })
+        })
+    })
 };
