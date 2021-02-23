@@ -175,6 +175,9 @@ export const initialiseListeners = () => {
                 const NotificationManager = window['Electron']['NotificationManager']
                 NotificationManager.notify(notificationMessage)
             }
+
+            // Update account with new message
+            saveNewMessage(response.payload.accountId, response.payload.message);
         },
         onError(error) {
             console.error(error)
@@ -212,6 +215,31 @@ export const initialiseListeners = () => {
         onError(error) {
             console.error(error)
         },
+    })
+}
+
+/**
+ * 
+ * @method saveNewMessage
+ * 
+ * @param {string} accountId 
+ * @param {Message} message
+ * 
+ * @returns {void} 
+ */
+export const saveNewMessage = (accountId: string, message: Message): void => {
+    const { accounts } = get(wallet)
+
+    accounts.update((storedAccounts) => {
+        return storedAccounts.map((storedAccount: Account) => {
+            if (storedAccount.id === accountId) {
+                return Object.assign({}, storedAccount, {
+                    messages: [message, ...storedAccount.messages]
+                })
+            }
+
+            return storedAccount;
+        })
     })
 }
 
