@@ -2,6 +2,7 @@ import { writable, Writable, get } from 'svelte/store'
 import type { MessageResponse, Actor } from './typings/bridge'
 import type { Address } from './typings/address'
 import type { Message } from './typings/message'
+import type { Account as BaseAccount } from './typings/account'
 import type { Event, TransactionEventPayload, ConfirmationStateChangeEventPayload, BalanceChangeEventPayload } from './typings/events'
 import { mnemonic } from 'shared/lib/app'
 import { formatUnit } from 'shared/lib/units'
@@ -11,12 +12,12 @@ import { _ } from 'shared/lib/i18n'
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
-type Account = {
-    id: string
-    index: number
-    alias: string
-    addresses: Address[]
-    messages: Message[]
+interface Account extends BaseAccount {
+    depositAddress: Address;
+    rawIotaBalance: number;
+    balance: string;
+    balanceEquiv: string;
+    color: string;
 }
 
 interface ActorState {
@@ -210,7 +211,7 @@ export const initialiseListeners = () => {
         onSuccess(response: Event<BalanceChangeEventPayload>) {
             const { payload: { accountId, address, balanceChange } } = response;
 
-            updateAddressMeta(accountId, address)
+            updateAccountAfterBalanceChange(accountId, address, balanceChange.received, balanceChange.spent)
             updateBalanceOverview(balanceChange.received, balanceChange.spent);
 
         },
@@ -221,20 +222,34 @@ export const initialiseListeners = () => {
 }
 
 /**
- * Updates address meta 
+ * Updates account information after balance change
  * 
- * @method updateAddressMeta
+ * @method updateAccountAfterBalanceChange
  * 
  * @param {string} accountId 
  * @param {Address} addressMeta 
  */
-export const updateAddressMeta = (accountId: string, address: Address): void => {
+export const updateAccountAfterBalanceChange = (
+    accountId: string,
+    address: Address,
+    receivedBalance: number,
+    spentBalance: number
+): void => {
     const { accounts } = get(wallet);
 
     accounts.update((storedAccounts) => {
         return storedAccounts.map((storedAccount) => {
             if (storedAccount.id === accountId) {
+                const rawIotaBalance = storedAccount.rawIotaBalance - spentBalance + receivedBalance;
+
                 return Object.assign({}, storedAccount, {
+                    rawIotaBalance,
+                    balance: formatUnit(rawIotaBalance, 0),
+                    balanceEquiv: `${convertToFiat(
+                        rawIotaBalance,
+                        get(currencies)[CurrencyTypes.USD],
+                        get(exchangeRates)[get(activeProfile).settings.currency]
+                    )} ${get(activeProfile).settings.currency}`,
                     addresses: storedAccount.addresses.map((_address: Address) => {
                         if (_address.address === address.address) {
                             return Object.assign({}, _address, address)
