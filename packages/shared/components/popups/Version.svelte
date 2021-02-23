@@ -3,29 +3,15 @@
     import { closePopup } from 'shared/lib/popup'
     import { Text, Button } from 'shared/components'
 
-    import {
-        versionDetails,
-        updateDownload,
-        updateCancel,
-        updateInstall,
-        updateProgress,
-        updateBusy,
-        updateComplete,
-    } from 'shared/lib/appUpdater'
+    import { versionDetails, updateDownload, updateBusy } from 'shared/lib/appUpdater'
 
     export let locale
 
-    function handleUpdate() {
-        if ($updateComplete) {
-            updateInstall()
-        } else if (!$updateBusy) {
-            updateDownload()
-        }
+    function handleDownload() {
+        updateDownload()
+        closePopup()
     }
     function handleCancelClick() {
-        if ($updateBusy) {
-            updateCancel()
-        }
         closePopup()
     }
 </script>
@@ -73,8 +59,8 @@
         </div>
         <div class="flex flex-row justify-between space-x-4 w-full px-8">
             <Button secondary classes="w-1/2" onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
-            <Button classes="w-1/2" onClick={() => handleUpdate()} bind:disabled={$updateBusy}>
-                {$updateComplete ? locale('actions.install_firefly') : $updateBusy ? `${Math.round($updateProgress)}%` : locale('actions.update_firefly')}
+            <Button classes="w-1/2" onClick={() => handleDownload()} bind:disabled={$updateBusy}>
+                {locale('actions.update_firefly')}
             </Button>
         </div>
     {/if}

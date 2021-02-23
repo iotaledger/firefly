@@ -8,6 +8,7 @@
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { activeProfile } from 'shared/lib/profile'
     import { routerNext } from 'shared/lib/router'
+    import { ToastContainer } from 'shared/components'
 
     export let locale
     export let mobile
@@ -64,5 +65,6 @@
         <Sidebar bind:activeTab {locale} />
         <!-- Dashboard Pane -->
         <svelte:component this={tabs[activeTab]} {locale} on:next={routerNext} />
+        <ToastContainer />
     </div>
 {/if}
