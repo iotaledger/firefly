@@ -13,6 +13,8 @@
     let scroller
     let index
 
+    const routes = Object.values(SettingsRoutes).filter((route) => route !== SettingsRoutes.Init)
+
     const settings = {
         generalSettings: GeneralSettings,
         security: SecuritySettings,
@@ -32,7 +34,7 @@
 {:else}
     <div class="flex flex-1 flex-row items-start">
         <SettingsNavigator
-            routes={Object.values(SettingsRoutes).filter((route) => route !== SettingsRoutes.Init)}
+            routes={routes}
             onSettingClick={(id) => scrollIntoView(id)}
             icons={SettingsIcons}
             {settings}
