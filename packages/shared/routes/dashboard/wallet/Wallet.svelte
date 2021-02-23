@@ -2,7 +2,7 @@
     import { setContext, onMount } from 'svelte'
     import { get, derived } from 'svelte/store'
     import { updateProfile } from 'shared/lib/profile'
-    import { api, getLatestMessages, initialiseListeners, selectedAccountId, wallet } from 'shared/lib/wallet'
+    import { api, getLatestMessages, initialiseListeners, selectedAccountId, updateAccounts, wallet } from 'shared/lib/wallet'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { activeProfile } from 'shared/lib/profile'
     import { formatUnit } from 'shared/lib/units'
@@ -167,38 +167,9 @@
     function syncAccounts(payload) {
         api.syncAccounts({
             onSuccess(syncAccountsResponse) {
-                const _update = (existingPayload, newPayload, prop) => {
-                    const existingPayloadMap = existingPayload.reduce((acc, object) => {
-                        acc[object[prop]] = object
-
-                        return acc
-                    }, {})
-
-                    const newPayloadMap = newPayload.reduce((acc, object) => {
-                        acc[object[prop]] = object
-
-                        return acc
-                    }, {})
-
-                    return Object.values(Object.assign({}, existingPayloadMap, newPayloadMap))
-                }
-
                 const syncedAccounts = syncAccountsResponse.payload
 
-                accounts.update((storedAccounts) => {
-                    return storedAccounts.map((storedAccount) => {
-                        const syncedAccount = syncedAccounts.find((_account) => _account.id === storedAccount.id)
-
-                        return Object.assign({}, storedAccount, {
-                            // Update deposit address
-                            depositAddress: syncedAccount.depositAddress.address,
-                            // If we have received a new address, simply add it;
-                            // If we have received an existing address, update the properties.
-                            addresses: _update(storedAccount.addresses, syncedAccount.addresses, 'address'),
-                            messages: _update(storedAccount.messages, syncedAccount.messages, 'id'),
-                        })
-                    })
-                })
+                updateAccounts(syncedAccounts)
             },
             onError(error) {
                 console.error(error)

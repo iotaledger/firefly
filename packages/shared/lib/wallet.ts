@@ -5,8 +5,10 @@ import type { Message } from './typings/message'
 import type { Event, TransactionEventPayload, ConfirmationStateChangeEventPayload } from './typings/events'
 import { mnemonic } from 'shared/lib/app'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
+import { showSystemNotification } from 'shared/lib/notifications'
 import { _ } from 'shared/lib/i18n'
 import { persistent } from 'shared/lib/helpers'
+import type { SyncedAccount } from './typings/account'
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
@@ -175,9 +177,12 @@ export const initialiseListeners = () => {
                 const notificationMessage = locale('notifications.valueTx')
                     .replace('{{value}}', message.value.toString())
                     .replace('{{account}}', account.alias)
-                const NotificationManager = window['Electron']['NotificationManager']
-                NotificationManager.notify(notificationMessage)
+
+                showSystemNotification({ type: "info", message: notificationMessage })
             }
+
+            // Update account with new message
+            saveNewMessage(response.payload.accountId, response.payload.message);
         },
         onError(error) {
             console.error(error)
@@ -196,8 +201,8 @@ export const initialiseListeners = () => {
                 const notificationMessage = locale(`notifications.${messageKey}`)
                     .replace('{{value}}', message.value.toString())
                     .replace('{{account}}', account.alias)
-                const NotificationManager = window['Electron']['NotificationManager']
-                NotificationManager.notify(notificationMessage)
+
+                showSystemNotification({ type: "info", message: notificationMessage })
             }
         },
         onError(error) {
@@ -215,6 +220,31 @@ export const initialiseListeners = () => {
         onError(error) {
             console.error(error)
         },
+    })
+}
+
+/**
+ * 
+ * @method saveNewMessage
+ * 
+ * @param {string} accountId 
+ * @param {Message} message
+ * 
+ * @returns {void} 
+ */
+export const saveNewMessage = (accountId: string, message: Message): void => {
+    const { accounts } = get(wallet)
+
+    accounts.update((storedAccounts) => {
+        return storedAccounts.map((storedAccount: Account) => {
+            if (storedAccount.id === accountId) {
+                return Object.assign({}, storedAccount, {
+                    messages: [message, ...storedAccount.messages]
+                })
+            }
+
+            return storedAccount;
+        })
     })
 }
 
@@ -249,3 +279,47 @@ export const getLatestMessages = (accounts: Account[], count = 10): Message[] =>
         })
         .slice(0, count)
 }
+
+/**
+ * Updates accounts information after a successful sync accounts operation
+ * 
+ * @method updateAccounts
+ * 
+ * @param {SyncedAccount[]} syncedAccounts
+ * 
+ * @returns {void} 
+ */
+export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
+    const _update = (existingPayload, newPayload, prop) => {
+        const existingPayloadMap = existingPayload.reduce((acc, object) => {
+            acc[object[prop]] = object
+
+            return acc
+        }, {})
+
+        const newPayloadMap = newPayload.reduce((acc, object) => {
+            acc[object[prop]] = object
+
+            return acc
+        }, {})
+
+        return Object.values(Object.assign({}, existingPayloadMap, newPayloadMap))
+    }
+
+    const { accounts } = get(wallet)
+
+    accounts.update((storedAccounts) => {
+        return storedAccounts.map((storedAccount) => {
+            const syncedAccount = syncedAccounts.find((_account) => _account.id === storedAccount.id)
+
+            return Object.assign({}, storedAccount, {
+                // Update deposit address
+                depositAddress: syncedAccount.depositAddress.address,
+                // If we have received a new address, simply add it;
+                // If we have received an existing address, update the properties.
+                addresses: _update(storedAccount.addresses, syncedAccount.addresses, 'address'),
+                messages: _update(storedAccount.messages, syncedAccount.messages, 'id'),
+            })
+        })
+    })
+};

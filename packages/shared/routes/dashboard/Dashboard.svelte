@@ -10,6 +10,7 @@
     import { routerNext, dashboardRoute } from 'shared/lib/router'
     import { api } from 'shared/lib/wallet'
     import { Tabs } from 'shared/lib/typings/routes'
+    import { ToastContainer } from 'shared/components'
 
     export let locale
     export let mobile
@@ -71,5 +72,6 @@
         <Sidebar bind:activeTab={$dashboardRoute} {locale} />
         <!-- Dashboard Pane -->
         <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
+        <ToastContainer />
     </div>
 {/if}

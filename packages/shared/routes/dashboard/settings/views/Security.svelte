@@ -197,7 +197,7 @@
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <section id="changePassword" class="w-3/4">
-        <form on:submit={changePassword}>
+        <form id="form-change-password" on:submit={changePassword}>
             <Text type="h4" classes="mb-3">{locale('views.settings.changePassword.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.changePassword.description')}</Text>
             <Password
@@ -222,7 +222,7 @@
                 {locale}
                 placeholder={locale('general.confirmNewPassword')} />
             <Checkbox classes="mb-5" label={locale('actions.exportNewStronghold')} bind:checked={exportStrongholdChecked} />
-            <Button type="submit" classes="w-1/4">{locale('views.settings.changePassword.title')}</Button>
+            <Button form="form-change-password" type="submit" classes="w-1/4">{locale('views.settings.changePassword.title')}</Button>
         </form>
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
