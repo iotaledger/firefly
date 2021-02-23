@@ -52,7 +52,7 @@ const history = writable<Array<string>>([])
 /**
  * Active dashboard tab
  */
-export const dashboardRoute = writable<string>(Tabs.Wallet)
+export const dashboardRoute = writable<Tabs>(Tabs.Wallet)
 
 /**
  * Wallet view route
