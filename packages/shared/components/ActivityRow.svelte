@@ -7,7 +7,6 @@
     export let incoming
     export let internal
     export let color
-    export let confirmed
     export let onClick = () => {}
 </script>
 
