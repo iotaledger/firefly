@@ -2,7 +2,7 @@ const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = requir
 const path = require('path')
 const Keychain = require('./lib/keychain')
 const { initAutoUpdate } = require('./lib/appUpdater')
-import { initMenu, contextMenu } from './lib/menu'
+const { initMenu, contextMenu } = require('./lib/menu')
 const { version } = require('../package.json')
 
 /**
@@ -38,22 +38,6 @@ const windows = {
 }
 
 /**
- * Default web preferences (see https://www.electronjs.org/docs/tutorial/security)
- */
-const defaultWebPreferences = {
-    webPreferences: {
-        nodeIntegration: false,
-        contextIsolation: true,
-        enableRemoteModule: false,
-        worldSafeExecuteJavaScript: true,
-        disableBlinkFeatures: 'Auxclick',
-        webviewTag: false,
-        enableWebSQL: false,
-        devTools: devMode,
-    }
-}
-
-/**
  * Set environment mode
  */
 const devMode = process.env.NODE_ENV === 'development'
@@ -62,6 +46,20 @@ let paths = {
     preload: '',
     html: '',
     aboutHtml: ''
+}
+
+/**
+ * Default web preferences (see https://www.electronjs.org/docs/tutorial/security)
+ */
+const defaultWebPreferences = {
+    nodeIntegration: false,
+    contextIsolation: true,
+    enableRemoteModule: false,
+    worldSafeExecuteJavaScript: true,
+    disableBlinkFeatures: 'Auxclick',
+    webviewTag: false,
+    enableWebSQL: false,
+    devTools: devMode,
 }
 
 if (app.isPackaged) {
@@ -114,13 +112,10 @@ function createWindow() {
         windows.main.webContents.openDevTools()
     }
 
-    if (!devMode) {
-        initAutoUpdate(windows.main)
-    }
-
     if (devMode) {
         windows.main.loadURL('http://localhost:8080')
     } else {
+        initAutoUpdate(windows.main)
         // load the index.html of the app.
         windows.main.loadFile(paths.html)
     }
