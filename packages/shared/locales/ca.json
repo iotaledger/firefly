@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Configureu la cartera",
-            "body": "Podeu crear una cartera nova o importar-ne una."
+            "body": "Podeu crear una cartera nova o importar-ne una.",
+            "profile_name": "Profile Name"
         },
         "password": {
             "title": "Crear una contrasenya",
@@ -63,8 +64,8 @@
             "title": "Frase de recuperació",
             "body_1": "Escriviu amb cura les paraules en l’ordre exacte.",
             "body_2": "Mantingueu la frase de recuperació privada i emmagatzemada de manera segura. No el compartiu amb ningú.",
-            "reveal_recovery_phrase": "Mostrar la frase de recuperació",
-            "hide_recovery_phrase": "Hide recovery phrase"
+            "reveal_recovery_phrase": "Mostrar la frase de recuperación",
+            "hide_recovery_phrase": "Amaga la frase de recuperació"
         },
         "verify_recovery_phrase": {
             "title": "Verifiqueu la frase de recuperació",
@@ -175,12 +176,12 @@
                 "description": ""
             },
             "changePincode": {
-                "title": "Change PIN code",
+                "title": "Canvia el codi PIN",
                 "description": "",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "currentPincode": "PIN actual",
+                "newPincode": "Nou PIN",
+                "confirmNewPincode": "Confirma el nou PIN",
+                "action": "Canvia el PIN"
             },
             "resyncAccounts": {
                 "title": "Torneu a sincronitzar els comptes",
@@ -203,7 +204,7 @@
                 "description": ""
             },
             "configureNodeList": {
-                "title": "Configure node list",
+                "title": "Configureu la llista de nodes",
                 "description": ""
             },
             "proofOfWork": {
@@ -273,8 +274,8 @@
                 "confirmation_rate": "Taxa de confirmació"
             },
             "profile_modal": {
-                "all_settings": "All settings",
-                "logout": "Log out"
+                "all_settings": "Tots els paràmetres",
+                "logout": "Tancar sessió"
             }
         }
     },
@@ -315,12 +316,12 @@
             "current_balance": "Saldo actual: {balance}"
         },
         "node": {
-            "title_add": "Add a node",
-            "title_details": "Node details",
-            "node_address": "Node address",
-            "optional_username": "Username (optional)",
-            "optional_password": "Password (optional)",
-            "set_as_primary_node": "Set as primary node"
+            "title_add": "Afegeix un node",
+            "title_details": "Detalls del node",
+            "node_address": "Adreça del node",
+            "optional_username": "Nom d'usuari (opcional)",
+            "optional_password": "Contrasenya (opcional)",
+            "set_as_primary_node": "Estableix com a node principal"
         }
     },
     "actions": {
@@ -366,14 +367,14 @@
         "outsourceProofOfWork": "Subcontractar proves de treball",
         "unlock": "Desbloqueja",
         "update_firefly": "Actualitza Firefly",
-        "install_firefly": "Install Firefly",
+        "install_firefly": "Instal·lar Firefly",
         "save_backup": "Desa la còpia de seguretat",
         "customize_account": "Personalitza el compte",
         "sync_account": "Sincronitza els comptes",
         "view_address_history": "Veure l'historial d'adreces",
         "delete_account": "Elimina el compte",
-        "max": "Max",
-        "add_node": "Add node"
+        "max": "Màxim",
+        "add_node": "Afegeix un node"
     },
     "general": {
         "password": "Contrasenya",
@@ -427,7 +428,7 @@
         "automaticNodeSelection": "Selecció automàtica de nodes",
         "manualNodeSelection": "Selecció manual de nodes",
         "profiles": "Perfils",
-        "developerProfile": "Developer Profile",
+        "developerProfile": "Mode de desenvolupador",
         "dev": "Dev",
         "create_account": "Crea un compte",
         "account_name": "Nom del compte",
@@ -445,8 +446,8 @@
         "years_ago": "fa {time, plural, one {# any} other {# anys}}"
     },
     "notifications": {
-        "valueTx": "Receiving {{value}} to {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed"
+        "valueTx": "S'està rebent {{value}} a {{account}}",
+        "confirmed": "{{value}} de sortida de {{account}} s'ha confirmat",
+        "failed": "Ha fallat el {{value}} de sortida de {{account}}"
     }
 }

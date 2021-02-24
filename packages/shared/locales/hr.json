@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Postavite svoj novčanik",
-            "body": "Možete stvoriti novi novčanik ili uvesti postojeći."
+            "body": "Možete stvoriti novi novčanik ili uvesti postojeći.",
+            "profile_name": "Profile Name"
         },
         "password": {
             "title": "Stvorite lozinku",

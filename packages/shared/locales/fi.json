@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Määritä lompakko",
-            "body": "Voit luoda uuden lompakon tai tuoda olemassaolevan."
+            "body": "Voit luoda uuden lompakon tai tuoda olemassaolevan.",
+            "profile_name": "Profile Name"
         },
         "password": {
             "title": "Luo salasana",

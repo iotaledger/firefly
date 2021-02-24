@@ -2,7 +2,7 @@
     import { setContext, onMount } from 'svelte'
     import { get, derived } from 'svelte/store'
     import { updateProfile } from 'shared/lib/profile'
-    import { api, getLatestMessages, initialiseListeners, selectedAccountId, updateAccounts, wallet } from 'shared/lib/wallet'
+    import { api, getLatestMessages, initialiseListeners, selectedAccountId, wallet, updateAccounts, updateBalanceOverview } from 'shared/lib/wallet'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { activeProfile } from 'shared/lib/profile'
     import { formatUnit } from 'shared/lib/units'
@@ -97,21 +97,7 @@
                             accounts.update((accounts) => [...accounts, account])
 
                             if (idx === accountsResponse.payload.length - 1) {
-                                balanceOverview.update((balanceOverview) =>
-                                    Object.assign({}, balanceOverview, {
-                                        incoming: formatUnit(_totalBalance.incoming, 2),
-                                        incomingRaw: _totalBalance.incoming,
-                                        outgoing: formatUnit(_totalBalance.outgoing, 2),
-                                        outgoingRaw: _totalBalance.outgoing,
-                                        balance: formatUnit(_totalBalance.balance, 2),
-                                        balanceRaw: _totalBalance.balance,
-                                        balanceFiat: `${convertToFiat(
-                                            _totalBalance.balance,
-                                            $currencies[CurrencyTypes.USD],
-                                            $exchangeRates[$activeProfile.settings.currency]
-                                        )} ${$activeProfile.settings.currency}`,
-                                    })
-                                )
+                                updateBalanceOverview(_totalBalance.balance, _totalBalance.incoming, _totalBalance.outgoing)
                             }
                         } else {
                             console.error(err)
@@ -178,40 +164,41 @@
     }
 
     function onCreateAccount(alias) {
-        const _create = () => api.createAccount(
-            {
-                alias,
-                clientOptions: {
-                    node: $accounts[0].clientOptions.node,
-                    nodes: $accounts[0].clientOptions.nodes,
-                    // For subsequent accounts, use the network for any of the previous accounts
-                    network: $accounts[0].clientOptions.network,
+        const _create = () =>
+            api.createAccount(
+                {
+                    alias,
+                    clientOptions: {
+                        node: $accounts[0].clientOptions.node,
+                        nodes: $accounts[0].clientOptions.nodes,
+                        // For subsequent accounts, use the network for any of the previous accounts
+                        network: $accounts[0].clientOptions.network,
+                    },
                 },
-            },
-            {
-                onSuccess(createAccountResponse) {
-                    api.syncAccount(createAccountResponse.payload.id, {
-                        onSuccess(syncAccountResponse) {
-                            getAccountMeta(createAccountResponse.payload.id, (err, meta) => {
-                                if (!err) {
-                                    const account = prepareAccountInfo(createAccountResponse.payload, meta)
-                                    accounts.update((accounts) => [...accounts, account])
-                                    walletRoute.set(WalletRoutes.Init)
-                                } else {
-                                    console.error(err)
-                                }
-                            })
-                        },
-                        onError(error) {
-                            console.error(error)
-                        },
-                    })
-                },
-                onError(error) {
-                    console.error(error)
-                },
-            }
-        )
+                {
+                    onSuccess(createAccountResponse) {
+                        api.syncAccount(createAccountResponse.payload.id, {
+                            onSuccess(syncAccountResponse) {
+                                getAccountMeta(createAccountResponse.payload.id, (err, meta) => {
+                                    if (!err) {
+                                        const account = prepareAccountInfo(createAccountResponse.payload, meta)
+                                        accounts.update((accounts) => [...accounts, account])
+                                        walletRoute.set(WalletRoutes.Init)
+                                    } else {
+                                        console.error(err)
+                                    }
+                                })
+                            },
+                            onError(error) {
+                                console.error(error)
+                            },
+                        })
+                    },
+                    onError(error) {
+                        console.error(error)
+                    },
+                }
+            )
 
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
