@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Configurează portofelul tău",
-            "body": "Poți crea un portofel nou sau să imporți unul existent."
+            "body": "Poți crea un portofel nou sau să imporți unul existent.",
+            "profile_name": "Profile Name"
         },
         "password": {
             "title": "Creează o parolă",
@@ -64,7 +65,7 @@
             "body_1": "Notează cu atenție cuvintele in ordinea exactă.",
             "body_2": "Păstrați fraza de recuperare privată și stocată în siguranță. Nu o împărtășiți cu nimeni.",
             "reveal_recovery_phrase": "Afișează fraza de recuperare",
-            "hide_recovery_phrase": "Hide recovery phrase"
+            "hide_recovery_phrase": "Ascunde fraza de recuperare"
         },
         "verify_recovery_phrase": {
             "title": "Verifică fraza de recuperare",
@@ -175,12 +176,12 @@
                 "description": ""
             },
             "changePincode": {
-                "title": "Change PIN code",
+                "title": "Schimbă codul PIN",
                 "description": "",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "currentPincode": "PIN curent",
+                "newPincode": "Noul PIN",
+                "confirmNewPincode": "Confirmã noul PIN",
+                "action": "Schimbă PIN"
             },
             "resyncAccounts": {
                 "title": "Resincronizează conturile",
@@ -203,19 +204,19 @@
                 "description": ""
             },
             "configureNodeList": {
-                "title": "Configure node list",
+                "title": "Configureazã lista de noduri",
                 "description": ""
             },
             "proofOfWork": {
-                "title": "Proof of work",
+                "title": "Dovadã de lucru",
                 "description": ""
             },
             "errorLog": {
-                "title": "Error log",
+                "title": "Jurnal de erori",
                 "description": ""
             },
             "stateExport": {
-                "title": "State export",
+                "title": "Exportare stare",
                 "description": ""
             },
             "troubleshoot": {

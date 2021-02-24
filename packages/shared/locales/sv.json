@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Ställ in din plånbok",
-            "body": "Du kan skapa en ny plånbok eller importera en befintlig."
+            "body": "Du kan skapa en ny plånbok eller importera en befintlig.",
+            "profile_name": "Profile Name"
         },
         "password": {
             "title": "Skapa ett lösenord",
@@ -64,7 +65,7 @@
             "body_1": "Var noggrann och skriv ner orden i exakt samma ordning.",
             "body_2": "Håll din återställningsfras för dig själv och lagrad på ett säkert sätt. Dela den inte med någon.",
             "reveal_recovery_phrase": "Visa återställningsfras",
-            "hide_recovery_phrase": "Hide recovery phrase"
+            "hide_recovery_phrase": "Dölj återställningsfras"
         },
         "verify_recovery_phrase": {
             "title": "Verifiera återställningsfras",
@@ -175,12 +176,12 @@
                 "description": ""
             },
             "changePincode": {
-                "title": "Change PIN code",
+                "title": "Ändra PIN-kod",
                 "description": "",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "currentPincode": "Nuvarande PIN-kod",
+                "newPincode": "Ny PIN-kod",
+                "confirmNewPincode": "Bekräfta ny PIN-kod",
+                "action": "Ändra PIN-kod"
             },
             "resyncAccounts": {
                 "title": "Synkronisera om konton",
@@ -203,7 +204,7 @@
                 "description": ""
             },
             "configureNodeList": {
-                "title": "Configure node list",
+                "title": "Konfigurera nodlista",
                 "description": ""
             },
             "proofOfWork": {
@@ -273,8 +274,8 @@
                 "confirmation_rate": "Bekräftelseshastighet"
             },
             "profile_modal": {
-                "all_settings": "All settings",
-                "logout": "Log out"
+                "all_settings": "Alla inställningar",
+                "logout": "Logga ut"
             }
         }
     },
@@ -315,12 +316,12 @@
             "current_balance": "Nuvarande saldo: {balance}"
         },
         "node": {
-            "title_add": "Add a node",
-            "title_details": "Node details",
-            "node_address": "Node address",
-            "optional_username": "Username (optional)",
-            "optional_password": "Password (optional)",
-            "set_as_primary_node": "Set as primary node"
+            "title_add": "Lägg till nod",
+            "title_details": "Nod-detaljer",
+            "node_address": "Nod-adress",
+            "optional_username": "Användarnamn (valfritt)",
+            "optional_password": "Lösenord (frivilligt)",
+            "set_as_primary_node": "Ställ in som primär nod"
         }
     },
     "actions": {
@@ -366,14 +367,14 @@
         "outsourceProofOfWork": "Outsourca bevis på arbete (PoW)",
         "unlock": "Lås upp",
         "update_firefly": "Uppdatera Firefly",
-        "install_firefly": "Install Firefly",
+        "install_firefly": "Installera Firefly",
         "save_backup": "Spara säkerhetskopia",
         "customize_account": "Anpassa konto",
         "sync_account": "Synkronisera konto",
         "view_address_history": "Visa adresshistorik",
         "delete_account": "Radera konto",
         "max": "Max",
-        "add_node": "Add node"
+        "add_node": "Lägg till nod"
     },
     "general": {
         "password": "Lösenord",
@@ -427,15 +428,15 @@
         "automaticNodeSelection": "Automatiskt val av nod",
         "manualNodeSelection": "Manuellt val av nod",
         "profiles": "Profiler",
-        "developerProfile": "Developer Profile",
-        "dev": "Dev",
+        "developerProfile": "Utvecklarprofil",
+        "dev": "Utvecklare",
         "create_account": "Skapa ett konto",
         "account_name": "Kontonamn",
         "latest_transactions": "Senaste transaktionerna",
         "transactions": "Transaktioner",
         "security": "Säkerhet",
         "account_address": "Konto-adress",
-        "nodes": "Nodes"
+        "nodes": "Noder"
     },
     "dates": {
         "today": "Idag",
@@ -445,8 +446,8 @@
         "years_ago": "{time, plural, one {# år} other {# år}} sedan"
     },
     "notifications": {
-        "valueTx": "Receiving {{value}} to {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed"
+        "valueTx": "Tar emot {{value}} till {{account}}",
+        "confirmed": "Utgående {{value}} från {{account}} har bekräftats",
+        "failed": "Utgående {{value}} från {{account}} misslyckades"
     }
 }

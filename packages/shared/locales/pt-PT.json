@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Configurar a carteira",
-            "body": "Pode criar uma nova carteira ou importar uma existente."
+            "body": "Pode criar uma nova carteira ou importar uma existente.",
+            "profile_name": "Profile Name"
         },
         "password": {
             "title": "Criar uma palavra-passe",
@@ -63,8 +64,8 @@
             "title": "Frase de recuperação",
             "body_1": "Anote cuidadosamente as palavras exatamente pela mesma ordem.",
             "body_2": "Mantenha a sua frase de recuperação privada e guardada de forma segura. Não a partilhe com ninguém.",
-            "reveal_recovery_phrase": "Reveal recovery phrase",
-            "hide_recovery_phrase": "Hide recovery phrase"
+            "reveal_recovery_phrase": "Revelar a frase de recuperação",
+            "hide_recovery_phrase": "Esconder a frase de recuperação"
         },
         "verify_recovery_phrase": {
             "title": "Verifique a frase de recuperação",
@@ -94,19 +95,19 @@
         },
         "import_from_file": {
             "title": "Restaure a carteira a partir de um ficheiro de backup",
-            "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "body": "Importe uma cópia de segurança para restaurar a sua carteira. As cópias de segurança só podem ser ficheiros Stronghold (.stronghold) ou Trinity SeedVault (.kdbx)."
         },
         "import_backup_password": {
-            "title": "Restore your wallet from a SeedVault or Stronghold",
-            "body_1": "Please enter your backup password.",
-            "body_2": "This is the password you set when you first created your backup."
+            "title": "Restaurar carteira através de SeedVault ou Stronghold",
+            "body_1": "Por favor insira a palavra-passe da sua cópia de segurança.",
+            "body_2": "Esta é a palavra-passe que você definiu quando criou a cópia de segurança pela primeira vez."
         },
         "import_success": {
-            "title": "You have successfully recovered your backup",
-            "body": "You can now set up your new wallet."
+            "title": "A cópia de segurança foi restaurada com sucesso",
+            "body": "Você pode agora configurar a sua nova carteira."
         },
         "migrate": {
-            "title": "Migrate your funds",
+            "title": "Migre os seus fundos",
             "body_1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
             "body_2": "It may take some time. Do not turn off your device during the migration.",
             "existing": "Your old wallet",

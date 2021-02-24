@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Konfigurer din tegnebog",
-            "body": "Du kan oprette en ny tegnebog eller importere en eksisterende."
+            "body": "Du kan oprette en ny tegnebog eller importere en eksisterende.",
+            "profile_name": "Profile Name"
         },
         "password": {
             "title": "Opret en adgangskode",

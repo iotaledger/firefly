@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Configura il tuo portafoglio",
-            "body": "È possibile creare un nuovo portafoglio o importare uno esistente."
+            "body": "È possibile creare un nuovo portafoglio o importare uno esistente.",
+            "profile_name": "Profile Name"
         },
         "password": {
             "title": "Scegli una password",

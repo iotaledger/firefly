@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Installez votre portefeuille",
-            "body": "Vous pouvez créer un nouveau portefeuille ou importer un portefeuille existant."
+            "body": "Vous pouvez créer un nouveau portefeuille ou importer un portefeuille existant.",
+            "profile_name": "Profile Name"
         },
         "password": {
             "title": "Créer un mot de passe",
@@ -64,7 +65,7 @@
             "body_1": "Notez soigneusement les mots dans l'ordre exact.",
             "body_2": "Gardez secrète votre phrase de récupération et stockez-la de manière sécurisée. Ne la partagez avec personne.",
             "reveal_recovery_phrase": "Afficher la phrase de récupération",
-            "hide_recovery_phrase": "Hide recovery phrase"
+            "hide_recovery_phrase": "Masquer la phrase de récupération"
         },
         "verify_recovery_phrase": {
             "title": "Vérifier la phrase de récupération",
@@ -175,12 +176,12 @@
                 "description": ""
             },
             "changePincode": {
-                "title": "Change PIN code",
+                "title": "Modifier le code PIN",
                 "description": "",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "currentPincode": "Code PIN actuel",
+                "newPincode": "Nouveau code PIN",
+                "confirmNewPincode": "Confirmer le nouveau code PIN",
+                "action": "Modifier le code PIN"
             },
             "resyncAccounts": {
                 "title": "Resynchroniser les comptes",
@@ -203,7 +204,7 @@
                 "description": ""
             },
             "configureNodeList": {
-                "title": "Configure node list",
+                "title": "Configurer la liste des nœuds",
                 "description": ""
             },
             "proofOfWork": {
@@ -273,8 +274,8 @@
                 "confirmation_rate": "Taux de confirmation"
             },
             "profile_modal": {
-                "all_settings": "All settings",
-                "logout": "Log out"
+                "all_settings": "Tous les paramètres",
+                "logout": "Déconnexion"
             }
         }
     },
@@ -315,12 +316,12 @@
             "current_balance": "Solde actuel : {balance}"
         },
         "node": {
-            "title_add": "Add a node",
-            "title_details": "Node details",
-            "node_address": "Node address",
-            "optional_username": "Username (optional)",
-            "optional_password": "Password (optional)",
-            "set_as_primary_node": "Set as primary node"
+            "title_add": "Ajouter un nœud",
+            "title_details": "Détails du nœud",
+            "node_address": "Adresse du noeud",
+            "optional_username": "Nom d'utilisateur (facultatif)",
+            "optional_password": "Mot de passe (facultatif)",
+            "set_as_primary_node": "Définir comme noeud principal"
         }
     },
     "actions": {
@@ -366,14 +367,14 @@
         "outsourceProofOfWork": "Externaliser la preuve de travail",
         "unlock": "Déverrouiller",
         "update_firefly": "Mettre à jour Firefly",
-        "install_firefly": "Install Firefly",
+        "install_firefly": "Installer Firefly",
         "save_backup": "Enregistrer la sauvegarde",
         "customize_account": "Personnaliser votre compte",
         "sync_account": "Synchroniser le compte",
         "view_address_history": "Voir l'historique des adresses",
         "delete_account": "Supprimer le compte",
-        "max": "Max",
-        "add_node": "Add node"
+        "max": "Maximum",
+        "add_node": "Ajouter un nœud"
     },
     "general": {
         "password": "Mot de passe",
@@ -427,15 +428,15 @@
         "automaticNodeSelection": "Sélection de nœud automatique",
         "manualNodeSelection": "Sélection de nœud manuelle",
         "profiles": "Profils",
-        "developerProfile": "Developer Profile",
-        "dev": "Dev",
+        "developerProfile": "Profil Développeur",
+        "dev": "Dév",
         "create_account": "Créer un compte",
         "account_name": "Nom du compte",
         "latest_transactions": "Dernières Transactions",
         "transactions": "Transactions",
         "security": "Sécurité",
         "account_address": "Adresse du Compte",
-        "nodes": "Nodes"
+        "nodes": "Nœuds"
     },
     "dates": {
         "today": "Aujourd'hui",
@@ -445,8 +446,8 @@
         "years_ago": "il y a {time, plural, one {# année} other {# années}}"
     },
     "notifications": {
-        "valueTx": "Receiving {{value}} to {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed"
+        "valueTx": "Réception de {{value}} sur {{account}}",
+        "confirmed": "Envoi de {{value}} depuis {{account}} confirmé",
+        "failed": "Envoi de {{value}} depuis {{account}} en échec"
     }
 }
