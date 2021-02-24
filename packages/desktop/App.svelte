@@ -3,7 +3,7 @@
     import { get } from 'svelte/store'
     import { fetchMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
-    import { setupI18n, isLocaleLoaded, dir, _ } from 'shared/lib/i18n'
+    import { setupI18n, isLocaleLoaded, dir, _, activeLocale } from 'shared/lib/i18n'
     import { darkMode, mobile, loggedIn } from 'shared/lib/app'
     import { activeProfile } from 'shared/lib/profile'
     import { goto } from 'shared/lib/helpers'
@@ -31,8 +31,12 @@
     } from 'shared/routes'
     import { getLocalisedMenuItems } from './lib/helpers'
 
+    const locale = activeLocale
+
     $: $darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
-    $: window['Electron'].updateMenu('strings', getLocalisedMenuItems($_))
+    $: if (activeLocale !== locale) {
+        window['Electron'].updateMenu('strings', getLocalisedMenuItems($_))
+    }
     $: window['Electron'].updateMenu('loggedIn', $loggedIn)
 
     $: if (document.dir !== $dir) {
