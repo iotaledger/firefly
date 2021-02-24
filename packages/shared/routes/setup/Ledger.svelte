@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { createEventDispatcher, onDestroy } from 'svelte'
-    import { writable } from 'svelte/store'
+    import { writable, get } from 'svelte/store'
     import { OnboardingLayout, Illustration, Text, Button, Popup } from 'shared/components'
     import { api } from 'shared/lib/wallet'
     import { newProfile, saveProfile } from 'shared/lib/profile'
@@ -15,15 +15,19 @@
     let checkIfLedgerIsConnected = true
     let isLedgerConnected = true
 
-    openPopup({
-        type: 'ledgerNotConnected',
-        props: {
-            message: locale('views.setup_ledger.connect')
-        }
-    })
+    const openLedgerNotConnectedPopup = () => {
+        openPopup({
+            type: 'ledgerNotConnected',
+            props: {
+                message: locale('views.setup_ledger.connect'),
+                closable: false
+            }
+        })
+    }
 
     const unsubscribe = popupState.subscribe(state => {
         if (!(state.active || isLedgerConnected)) {
+            checkIfLedgerIsConnected = false
             handleBackClick()
         }
     })
@@ -35,20 +39,27 @@
 
     const dispatch = createEventDispatcher()
 
+    function handleLedgerDeviceNotConnected() {
+        if (checkIfLedgerIsConnected) {
+            if (!get(popupState).active) {
+                openLedgerNotConnectedPopup()
+            }
+            setTimeout(getLedgerDeviceStatus, 1000)
+        }
+    }
+
     function getLedgerDeviceStatus() {
         api.getLedgerDeviceStatus(simulator, {
             onSuccess(response) {
                 isLedgerConnected = response.payload.type === LedgerStatus.Connected
                 if (isLedgerConnected) {
                     closePopup()
-                } else if (checkIfLedgerIsConnected) {
-                    setTimeout(getLedgerDeviceStatus, 1000)
+                } else {
+                    handleLedgerDeviceNotConnected()
                 }
             },
-            onError(e) {
-                if (checkIfLedgerIsConnected) {
-                    setTimeout(getLedgerDeviceStatus, 1000)
-                }
+            onError() {
+                handleLedgerDeviceNotConnected()
             }
         })
     }
