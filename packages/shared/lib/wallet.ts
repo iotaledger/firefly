@@ -2,8 +2,11 @@ import { writable, Writable, get } from 'svelte/store'
 import type { MessageResponse, Actor } from './typings/bridge'
 import type { Address } from './typings/address'
 import type { Message } from './typings/message'
-import type { Event, TransactionEventPayload, ConfirmationStateChangeEventPayload } from './typings/events'
+import type { Account as BaseAccount } from './typings/account'
+import type { Event, TransactionEventPayload, ConfirmationStateChangeEventPayload, BalanceChangeEventPayload } from './typings/events'
 import { mnemonic } from 'shared/lib/app'
+import { formatUnit } from 'shared/lib/units'
+import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { showSystemNotification } from 'shared/lib/notifications'
 import { _ } from 'shared/lib/i18n'
@@ -11,12 +14,12 @@ import type { SyncedAccount } from './typings/account'
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
-type Account = {
-    id: string
-    index: number
-    alias: string
-    addresses: Address[]
-    messages: Message[]
+interface Account extends BaseAccount {
+    depositAddress: Address;
+    rawIotaBalance: number;
+    balance: string;
+    balanceEquiv: string;
+    color: string;
 }
 
 interface ActorState {
@@ -210,8 +213,20 @@ export const initialiseListeners = () => {
      * Event listener for balance change event
      */
     api.onBalanceChange({
-        onSuccess(response) {
-            console.log('Balance change response', response)
+        onSuccess(response: Event<BalanceChangeEventPayload>) {
+            const { payload: { accountId, address, balanceChange } } = response;
+
+            updateAccountAfterBalanceChange(accountId, address, balanceChange.received, balanceChange.spent)
+
+            const { balanceOverview } = get(wallet);
+            const overview = get(balanceOverview);
+
+            const incoming = overview.incomingRaw + balanceChange.received;
+            const outgoing = overview.outgoingRaw + balanceChange.spent;
+            const balance = overview.balanceRaw - balanceChange.spent + balanceChange.received
+
+            updateBalanceOverview(balance, incoming, outgoing);
+
         },
         onError(error) {
             console.error(error)
@@ -220,7 +235,48 @@ export const initialiseListeners = () => {
 }
 
 /**
+ * Updates account information after balance change
  * 
+ * @method updateAccountAfterBalanceChange
+ * 
+ * @param {string} accountId 
+ * @param {Address} addressMeta 
+ */
+export const updateAccountAfterBalanceChange = (
+    accountId: string,
+    address: Address,
+    receivedBalance: number,
+    spentBalance: number
+): void => {
+    const { accounts } = get(wallet);
+
+    accounts.update((storedAccounts) => {
+        return storedAccounts.map((storedAccount) => {
+            if (storedAccount.id === accountId) {
+                const rawIotaBalance = storedAccount.rawIotaBalance - spentBalance + receivedBalance;
+
+                return Object.assign({}, storedAccount, {
+                    rawIotaBalance,
+                    balance: formatUnit(rawIotaBalance, 0),
+                    balanceEquiv: `${convertToFiat(
+                        rawIotaBalance,
+                        get(currencies)[CurrencyTypes.USD],
+                        get(exchangeRates)[get(activeProfile).settings.currency]
+                    )} ${get(activeProfile).settings.currency}`,
+                    addresses: storedAccount.addresses.map((_address: Address) => {
+                        if (_address.address === address.address) {
+                            return Object.assign({}, _address, address)
+                        }
+
+                        return _address
+                    })
+                })
+            }
+        })
+    })
+}
+
+/** 
  * @method saveNewMessage
  * 
  * @param {string} accountId 
@@ -242,7 +298,7 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
             return storedAccount;
         })
     })
-}
+};
 
 /**
  * Gets latest messages
@@ -277,14 +333,45 @@ export const getLatestMessages = (accounts: Account[], count = 10): Message[] =>
 }
 
 /**
- * Updates accounts information after a successful sync accounts operation
+ * Updates balance overview 
  * 
- * @method updateAccounts
+ * @method updateBalanceOverview
  * 
- * @param {SyncedAccount[]} syncedAccounts
+ * @param {number} balance
+ * @param {number} incoming 
+ * @param {number} outgoing
  * 
  * @returns {void} 
  */
+export const updateBalanceOverview = (balance: number, incoming: number, outgoing: number): void => {
+    const { balanceOverview } = get(wallet);
+
+    balanceOverview.update((overview) => {
+        return Object.assign({}, overview, {
+            incoming: formatUnit(incoming, 2),
+            incomingRaw: incoming,
+            outgoing: formatUnit(outgoing, 2),
+            outgoingRaw: outgoing,
+            balance: formatUnit(balance, 2),
+            balanceRaw: balance,
+            balanceFiat: `${convertToFiat(
+                balance,
+                get(currencies)[CurrencyTypes.USD],
+                get(exchangeRates)[get(activeProfile).settings.currency]
+            )} ${get(activeProfile).settings.currency}`,
+        });
+    });
+};
+
+/**    
+* Updates accounts information after a successful sync accounts operation
+*
+* @method updateAccounts
+*
+* @param {SyncedAccount[]} syncedAccounts
+*
+* @returns {void}
+*/
 export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
     const _update = (existingPayload, newPayload, prop) => {
         const existingPayloadMap = existingPayload.reduce((acc, object) => {
