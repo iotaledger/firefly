@@ -1,5 +1,5 @@
-import { writable, get, derived } from 'svelte/store'
-import { currencies, Currencies, exchangeRates, ExchangeRates, CurrencyTypes, AvailableExchangeRates } from 'shared/lib/currency'
+import { writable, get } from 'svelte/store'
+import { currencies, Currencies, exchangeRates, ExchangeRates, CurrencyTypes } from 'shared/lib/currency'
 import { activeProfile } from 'shared/lib/profile'
 import Validator from 'shared/lib/validator'
 
@@ -25,11 +25,6 @@ enum Timeframes {
     TWENTY_FOUR_HOURS = '1 day',
     SEVEN_DAYS = '1 week',
     ONE_MONTH = '1 month',
-}
-
-export enum AvailableCharts {
-    PORTFOLIO = 'Portfolio',
-    TOKEN = 'Token',
 }
 
 enum Histories {
@@ -95,11 +90,6 @@ export type PriceData = {
     [CurrencyTypes.ETH]: HistoryData
 }
 
-type ChartData = {
-    labels: string[]
-    data: number[]
-}
-
 /**
  * Market cap
  */
@@ -144,15 +134,6 @@ export const priceData = writable<PriceData>({
         '1m': [],
     },
 })
-
-/** Selected currency on chart */
-export const chartCurrency = writable<CurrencyTypes>(CurrencyTypes.USD)
-
-/** Selected time frame on chart */
-export const chartTimeframe = writable<HistoryDataProps>(HistoryDataProps.SEVEN_DAYS)
-
-/** Selected chart */
-export const selectedChart = writable<AvailableCharts>(AvailableCharts.PORTFOLIO)
 
 export const TIMEFRAME_MAP = {
     [HistoryDataProps.ONE_HOUR]: Timeframes.ONE_HOUR,
@@ -229,16 +210,19 @@ export async function fetchMarketData(): Promise<void> {
 }
 
 export async function addProfileCurrencyPriceData(): Promise<void> {
-    // get selected profile currency and add its estimated history
-    const profileCurrency: string = get(activeProfile).settings.currency.toLowerCase()
-    if (!get(priceData)[profileCurrency.toLowerCase()]) {
-        const profileCurrencyRate: number = get(exchangeRates)[profileCurrency.toUpperCase()]
-        const usdHistory = get(priceData)[CurrencyTypes.USD]
-        let profileCurrencyHistory = {};
-        Object.keys(usdHistory).forEach((key) => {
-            let convertedProfileCurrencyHistory = usdHistory[key].map(([timestamp, value]) => [timestamp, (value * profileCurrencyRate).toString()])
-            profileCurrencyHistory[key] = convertedProfileCurrencyHistory
-        })
-        priceData.update((_priceData) => ({ ..._priceData, [profileCurrency]: profileCurrencyHistory }))
+    const profile = get(activeProfile)
+    if (profile) {
+        // get selected profile currency and add its estimated history
+        const profileCurrency: string = profile.settings.currency.toLowerCase()
+        if (!get(priceData)[profileCurrency.toLowerCase()]) {
+            const profileCurrencyRate: number = get(exchangeRates)[profileCurrency.toUpperCase()]
+            const usdHistory = get(priceData)[CurrencyTypes.USD]
+            let profileCurrencyHistory = {};
+            Object.keys(usdHistory).forEach((key) => {
+                let convertedProfileCurrencyHistory = usdHistory[key].map(([timestamp, value]) => [timestamp, (value * profileCurrencyRate).toString()])
+                profileCurrencyHistory[key] = convertedProfileCurrencyHistory
+            })
+            priceData.update((_priceData) => ({ ..._priceData, [profileCurrency]: profileCurrencyHistory }))
+        }
     }
 }

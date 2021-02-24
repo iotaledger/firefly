@@ -1,71 +1,50 @@
 <script lang="typescript">
     import { onMount, getContext } from 'svelte'
     import { Dropdown, Chart, Text } from 'shared/components'
-    import {
-        priceData,
-        selectedChart,
-        chartCurrency,
-        chartTimeframe,
-        TIMEFRAME_MAP,
-        AvailableCharts,
-    } from 'shared/lib/marketData'
+    import { TIMEFRAME_MAP, HistoryDataProps } from 'shared/lib/marketData'
     import { CurrencyTypes } from 'shared/lib/currency'
     import { activeProfile } from 'shared/lib/profile'
+    import type { ChartData } from 'shared/lib/chart'
+    import {
+        DashboardChartType,
+        getPortfolioData,
+        getTokenData,
+        getAccountValueData,
+        chartCurrency,
+        selectedChart,
+        chartTimeframe,
+    } from 'shared/lib/chart'
 
     export let locale
 
-    let chartData = { data: [], labels: [] }
-    let data = []
-    let labels = []
+    const walletBalanceHistory = getContext('walletBalanceHistory')
+    const accountsBalanceHistory = getContext('accountsBalanceHistory')
+    const selectedAccount = getContext('selectedAccount')
+
+    let chartData: ChartData = { labels: [], data: [], tooltips: [] }
     let currencyDropdown = []
 
     $: color = $selectedAccount ? $selectedAccount.color : 'blue'
     $: data = chartData.data
     $: labels = chartData.labels
+    $: tooltips = chartData.tooltips
 
     /** Chart data */
-    $: if ($selectedChart || $priceData || $chartCurrency || $chartTimeframe || $selectedAccount) {
-        // sort price from last to newest
-        const fiatData = $priceData[$chartCurrency][$chartTimeframe].sort((a, b) => a[0] - b[0])
+    $: if ($selectedChart || $chartCurrency || $chartTimeframe || $walletBalanceHistory) {
+        // Account value chart
         if ($selectedAccount) {
-            chartData = $accountsBalanceHistory[$selectedAccount.index][$chartTimeframe].reduce(
-                (acc, values, index) => {
-                    const fiatBalance = ((values.balance * fiatData[index][1]) / 1000000).toFixed(5)
-                    acc.labels.push(new Date(values.timestamp * 1000))
-                    acc.data.push(fiatBalance)
-                    return acc
-                },
-                { labels: [], data: [] }
-            )
+            chartData = getAccountValueData($accountsBalanceHistory[$selectedAccount.index])
         } else {
-            if ($selectedChart === AvailableCharts.TOKEN) {
-                chartData = $priceData[$chartCurrency][$chartTimeframe]
-                    .sort((a, b) => a[0] - b[0])
-                    .reduce(
-                        (acc, values) => {
-                            acc.labels.push(new Date(values[0] * 1000))
-                            acc.data.push(parseFloat(values[1]))
-                            return acc
-                        },
-                        { labels: [], data: [] }
-                    )
-            } else if ($selectedChart === AvailableCharts.PORTFOLIO) {
-                chartData = $walletBalanceHistory[$chartTimeframe].reduce(
-                    (acc, values, index) => {
-                        const fiatBalance = ((values.balance * fiatData[index][1]) / 1000000).toFixed(5)
-                        acc.labels.push(new Date(values.timestamp * 1000))
-                        acc.data.push(fiatBalance)
-                        return acc
-                    },
-                    { labels: [], data: [] }
-                )
+            // Token value chart
+            if ($selectedChart === DashboardChartType.TOKEN) {
+                chartData = getTokenData()
+            }
+            // Portfolio value chart
+            if ($selectedChart === DashboardChartType.PORTFOLIO) {
+                chartData = getPortfolioData($walletBalanceHistory)
             }
         }
     }
-
-    const walletBalanceHistory = getContext('walletBalanceHistory')
-    const accountsBalanceHistory = getContext('accountsBalanceHistory')
-    const selectedAccount = getContext('selectedAccount')
 
     onMount(() => {
         let profileCurrency = $activeProfile.settings.currency
@@ -84,7 +63,7 @@
     <div class="flex justify-between items-center mb-2">
         {#if !$selectedAccount}
             <div class="flex space-x-4">
-                {#each Object.values(AvailableCharts) as chart, idx}
+                {#each Object.values(DashboardChartType) as chart, idx}
                     <button on:click={() => selectedChart.set(chart)}>
                         <Text type="h4" disabled={chart !== $selectedChart}>{chart}</Text>
                     </button>
@@ -107,6 +86,6 @@
         </div>
     </div>
     <div class="flex-auto">
-        <Chart type="line" {labels} {data} {color} />
+        <Chart type="line" {data} {labels} {tooltips} {color} />
     </div>
 </div>

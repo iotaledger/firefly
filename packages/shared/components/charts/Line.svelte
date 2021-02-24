@@ -2,64 +2,26 @@
     import { onMount, afterUpdate } from 'svelte'
     import resolveConfig from 'tailwindcss/resolveConfig'
     import tailwindConfig from 'shared/tailwind.config.js'
-    import { chartTimeframe, HistoryDataProps, chartCurrency } from 'shared/lib/marketData'
     import { convertHexToRGBA } from 'shared/lib/helpers'
     import Chart from 'chart.js'
 
-    export let labels
-    export let data
+    export let labels = []
+    export let data = []
+    export let tooltips = []
     export let color = 'blue' // TODO: each profile has a different color
 
     let canvas
     let chart
-    let beautifiedLabels = labels
-    $: autoSkipLabels = $chartTimeframe === HistoryDataProps.ONE_MONTH || $chartTimeframe === HistoryDataProps.TWENTY_FOUR_HOURS
 
     const fullConfig = resolveConfig(tailwindConfig)
 
     onMount(() => {
-        formatLabels()
         createChart()
     })
 
     afterUpdate(() => {
-        formatLabels()
         reinitialise()
     })
-
-    const formatLabels = () => {
-        switch ($chartTimeframe) {
-            case HistoryDataProps.ONE_HOUR:
-            case HistoryDataProps.TWENTY_FOUR_HOURS:
-                beautifiedLabels = labels.map((label) =>
-                    label.toLocaleString('default', {
-                        hour: '2-digit',
-                        minute: '2-digit',
-                    })
-                )
-                break
-            case HistoryDataProps.SEVEN_DAYS:
-                let formattedLabels = labels.map((label) => label.toLocaleString('default', { month: 'short', day: 'numeric' }))
-                let _displayedLabels = []
-                let _blacklistedLabels = []
-                beautifiedLabels = formattedLabels.map((label, index) => {
-                    if (index === 0 && labels.filter((l) => l === label).length < 4) {
-                        _blacklistedLabels.push(label)
-                    }
-                    if (_displayedLabels.includes(label) || _blacklistedLabels.includes(label)) {
-                        return ''
-                    } else {
-                        _displayedLabels.push(label)
-                        return label
-                    }
-                })
-                break
-            case HistoryDataProps.ONE_MONTH:
-                return (beautifiedLabels = labels.map((label) =>
-                    label.toLocaleString('default', { month: 'short', day: 'numeric' })
-                ))
-        }
-    }
 
     function createChart() {
         const ctx = canvas
@@ -78,7 +40,7 @@
         chart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: beautifiedLabels,
+                labels,
                 datasets: [
                     {
                         backgroundColor: gradient,
@@ -112,19 +74,10 @@
                     bodyFontColor: fullConfig.theme.colors[color]['200'],
                     callbacks: {
                         title: function ([tooltipItem]) {
-                            return `${tooltipItem.value} ${$chartCurrency.toUpperCase()}`
+                            return tooltips[tooltipItem.index] ? tooltips[tooltipItem.index].title : ''
                         },
                         label: function (tooltipItem) {
-                            return labels[tooltipItem.index].toLocaleString([], {
-                                year: 'numeric',
-                                month: 'short',
-                                day: '2-digit',
-                                weekday: 'long',
-                                hour: '2-digit',
-                                minute: '2-digit',
-                                second: '2-digit',
-                                hour12: 'false',
-                            })
+                            return tooltips[tooltipItem.index].label
                         },
                     },
                 },
@@ -139,7 +92,7 @@
                                 display: false,
                             },
                             ticks: {
-                                autoSkip: autoSkipLabels,
+                                autoSkip: true,
                             },
                         },
                     ],

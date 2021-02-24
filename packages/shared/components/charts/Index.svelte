@@ -9,11 +9,12 @@
     export let type: ChartType
     export let data
     export let labels
+    export let tooltips
     export let color
 </script>
 
 {#if type === ChartType.Line}
-    <LineChart {labels} {data} {color} />
+    <LineChart {data} {labels} {tooltips} {color} />
 {:else if type === ChartType.Bar}
-    <BarChart {labels} {data} {color} />
+    <BarChart {data} {labels} {tooltips} {color} />
 {/if}
