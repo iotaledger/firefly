@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { writable } from 'svelte/store'
     import { OnboardingLayout, Illustration, Text, Button, Popup } from 'shared/components'
@@ -6,6 +6,7 @@
     import { newProfile, saveProfile } from 'shared/lib/profile'
     import { DEFAULT_NODES as nodes, DEFAULT_NODE as node, network } from 'shared/lib/network'
     import { popupState, openPopup, closePopup } from 'shared/lib/popup'
+    import { LedgerStatus } from 'shared/lib/typings/wallet'
 
     export let locale
     export let mobile
@@ -34,21 +35,25 @@
 
     const dispatch = createEventDispatcher()
 
-    function assertLedgerNanoConnected() {
-        api.assertLedgerNanoConnected(simulator, {
-            onSuccess() {
-                isLedgerConnected = true
-                closePopup()
+    function getLedgerDeviceStatus() {
+        api.getLedgerDeviceStatus(simulator, {
+            onSuccess(response) {
+                isLedgerConnected = response.payload.type === LedgerStatus.Connected
+                if (isLedgerConnected) {
+                    closePopup()
+                } else if (checkIfLedgerIsConnected) {
+                    setTimeout(getLedgerDeviceStatus, 1000)
+                }
             },
             onError(e) {
                 if (checkIfLedgerIsConnected) {
-                    setTimeout(assertLedgerNanoConnected, 1000)
+                    setTimeout(getLedgerDeviceStatus, 1000)
                 }
             }
         })
     }
 
-    assertLedgerNanoConnected()
+    getLedgerDeviceStatus()
 
     function createAccount() {
         creatingAccount = true

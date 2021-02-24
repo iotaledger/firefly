@@ -6,6 +6,7 @@
     import { newProfile, saveProfile } from 'shared/lib/profile'
     import { DEFAULT_NODES as nodes } from 'shared/lib/network'
     import { popupState, openPopup, closePopup } from 'shared/lib/popup'
+    import { LedgerStatus } from 'shared/lib/typings/wallet'
 
     export let locale
     export let mobile
@@ -19,7 +20,7 @@
     let restoring = false
     let simulator = false
     let checkIfLedgerIsConnected = true
-    let isLedgerConnected = false
+    let isLedgerConnected = true
 
     const unsubscribe = popupState.subscribe(state => {
         if (!(state.active || isLedgerConnected)) {
@@ -34,21 +35,25 @@
 
     const dispatch = createEventDispatcher()
 
-    function assertLedgerNanoConnected() {
-        api.assertLedgerNanoConnected(simulator, {
-            onSuccess() {
-                isLedgerConnected = true
-                closePopup()
+    function getLedgerDeviceStatus() {
+        api.getLedgerDeviceStatus(simulator, {
+            onSuccess(response) {
+                isLedgerConnected = response.payload.type === LedgerStatus.Connected
+                if (isLedgerConnected) {
+                    closePopup()
+                } else if (checkIfLedgerIsConnected) {
+                    setTimeout(getLedgerDeviceStatus, 1000)
+                }
             },
             onError() {
                 if (checkIfLedgerIsConnected) {
-                    setTimeout(assertLedgerNanoConnected, 1000)
+                    setTimeout(getLedgerDeviceStatus, 1000)
                 }
             }
         })
     }
 
-    assertLedgerNanoConnected()
+    getLedgerDeviceStatus()
 
     function restore() {
         restoring = true

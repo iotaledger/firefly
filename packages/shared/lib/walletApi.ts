@@ -57,7 +57,7 @@ const apiToResponseTypeMap = {
     removeStorage: ResponseTypes.DeletedStorage,
     lockStronghold: ResponseTypes.LockedStronghold,
     changeStrongholdPassword: ResponseTypes.StrongholdPasswordChanged,
-    assertLedgerNanoConnected: ResponseTypes.OpenedLedgerApp,
+    getLedgerDeviceStatus: ResponseTypes.LedgerStatus,
 }
 
 /**
@@ -71,30 +71,30 @@ const callbacksStore: CallbacksStore = {}
  */
 const defaultCallbacks = {
     StrongholdPasswordSet: {
-        onSuccess: (response: SetStrongholdPasswordResponse): void => {},
-        onError: (error: ErrorResponse): void => {},
+        onSuccess: (response: SetStrongholdPasswordResponse): void => { },
+        onError: (error: ErrorResponse): void => { },
     },
     CreatedAccount: {
-        onSuccess: (response: CreatedAccountResponse): void => {},
-        onError: (error: ErrorResponse): void => {},
+        onSuccess: (response: CreatedAccountResponse): void => { },
+        onError: (error: ErrorResponse): void => { },
     },
     ReadAccounts: {
-        onSuccess: (response: ReadAccountsResponse): void => {},
-        onError: (error: ErrorResponse): void => {},
+        onSuccess: (response: ReadAccountsResponse): void => { },
+        onError: (error: ErrorResponse): void => { },
     },
     LatestAddress: {
-        onSuccess: (response: LatestAddressResponse): void => {},
-        onError: (error: ErrorResponse): void => {},
+        onSuccess: (response: LatestAddressResponse): void => { },
+        onError: (error: ErrorResponse): void => { },
     },
     SyncedAccounts: {
-        onSuccess: (response: SyncAccountsResponse): void => {},
-        onError: (error: ErrorResponse): void => {},
+        onSuccess: (response: SyncAccountsResponse): void => { },
+        onError: (error: ErrorResponse): void => { },
     },
     BalanceChange: {
-        onSuccess: (response: Event<BalanceChangeEventPayload>): void => {},
+        onSuccess: (response: Event<BalanceChangeEventPayload>): void => { },
     },
     NewTransaction: {
-        onSuccess: (response: Event<TransactionEventPayload>): void => {},
+        onSuccess: (response: Event<TransactionEventPayload>): void => { },
     },
 }
 

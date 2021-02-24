@@ -2,7 +2,7 @@ import type { Event, ErrorEventPayload, BalanceChangeEventPayload, TransactionEv
 import type { Address } from './address'
 import type { AccountIdentifier, Account, Balance, SyncedAccount } from './account'
 import type { Message } from './message'
-import type { StrongholdStatus } from './wallet'
+import type { StrongholdStatus, LedgerStatusPayload } from './wallet'
 
 export interface Actor {
     destroy(): void
@@ -61,7 +61,7 @@ export enum ResponseTypes {
     LockedStronghold = 'LockedStronghold',
     StrongholdPasswordChanged = 'StrongholdPasswordChanged',
     UpdatedAllClientOptions = 'UpdatedAllClientOptions',
-    OpenedLedgerApp = 'OpenedLedgerApp',
+    LedgerStatus = 'LedgerStatus',
 }
 
 export enum Actions {
@@ -100,6 +100,7 @@ export type DeleteStorageResponse = Response<ResponseTypes.DeletedStorage, void>
 export type LockStrongholdResponse = Response<ResponseTypes.LockedStronghold, void>
 export type StrongholdPasswordChangeResponse = Response<ResponseTypes.StrongholdPasswordChanged, void>
 export type UpdatedAllClientOptions = Response<ResponseTypes.UpdatedAllClientOptions, void>
+export type LedgerDeviceStatusResponse = Response<ResponseTypes.LedgerStatus, LedgerStatusPayload>
 
 export type MessageResponse =
     | RemovedAccountResponse
@@ -133,6 +134,7 @@ export type MessageResponse =
     | LockStrongholdResponse
     | StrongholdStatusResponse
     | UpdatedAllClientOptions
+    | LedgerDeviceStatusResponse
     // events
     | Event<ErrorEventPayload>
     | Event<BalanceChangeEventPayload>

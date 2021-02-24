@@ -2,7 +2,7 @@ import { ResponseTypes } from './typings/bridge'
 import type { MessageResponse } from './typings/bridge'
 import type { Account, SyncedAccount } from './typings/account'
 import type { Message } from './typings/message'
-import type { StrongholdStatus } from './typings/wallet'
+import type { StrongholdStatus, LedgerStatusPayload } from './typings/wallet'
 import type { Address } from './typings/address'
 import type { MarketDataValidationResponse } from 'shared/lib/marketData'
 
@@ -417,7 +417,7 @@ class MessageValidator extends Validator {
             })
         }
 
-        if (payload.parents.some((parent) => 'string' !== typeof parent)) { 
+        if (payload.parents.some((parent) => 'string' !== typeof parent)) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of parents received.',
@@ -523,6 +523,34 @@ class StrongholdStatusValidator extends Validator {
         return super.isValid(response)
     }
 }
+
+/**
+ * Validation for ledger device status
+ */
+class LedgerDeviceStatusValidator extends Validator {
+    /**
+     * Checks if response is valid
+     *
+     * @method isValid
+     *
+     * @param {MessageResponse} response
+     *
+     * @returns {ValidationResponse}
+     */
+    isValid(response: MessageResponse): ValidationResponse {
+        const payload = response.payload as LedgerStatusPayload
+
+        if ('Connected' !== payload.type && 'Disconnected' !== payload.type && 'Locked' !== payload.type) {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'Invalid type of status received.',
+            })
+        }
+
+        return super.isValid(response)
+    }
+}
+
 /**
  * Validation for type of response object
  * Type should be the very first thing that gets validated
@@ -663,7 +691,7 @@ export default class ValidatorService {
             [ResponseTypes.StrongholdPasswordChanged]: this.createBaseValidator().getFirst(),
             [ResponseTypes.RemovedAccount]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.UpdatedAllClientOptions]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.OpenedLedgerApp]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.LedgerStatus]: this.createBaseValidator().add(new LedgerDeviceStatusValidator()).getFirst(),
             [ResponseTypes.Error]: this.createBaseValidator().getFirst(),
             // Events
             [ResponseTypes.StrongholdStatusChange]: this.createBaseEventValidator().getFirst(),

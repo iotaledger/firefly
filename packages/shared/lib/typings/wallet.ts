@@ -11,6 +11,16 @@ export interface StrongholdStatus {
     snapshotPath: string
 }
 
+export enum LedgerStatus {
+    Connected = 'Connected',
+    Disconnected = 'Disconnected',
+    Locked = 'Locked'
+}
+
+export interface LedgerStatusPayload {
+    type: LedgerStatus
+}
+
 export interface LoggerOutput {
     name?: string
     level_filter: 'off' | 'error' | 'warn' | 'info' | 'debug' | 'trace'
@@ -146,11 +156,11 @@ export function setClientOptions(bridge: Bridge, __ids: CommunicationIds, payloa
     })
 }
 
-export function assertLedgerNanoConnected(bridge: Bridge, __ids: CommunicationIds, isSimulator: boolean) {
-  return bridge({
-    actorId: __ids.actorId,
-    id: __ids.messageId,
-    cmd: 'OpenLedgerApp',
-    payload: isSimulator
-  })
+export function getLedgerDeviceStatus(bridge: Bridge, __ids: CommunicationIds, isSimulator: boolean) {
+    return bridge({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        cmd: 'GetLedgerStatus',
+        payload: isSimulator
+    })
 }

@@ -7,6 +7,7 @@
     import { openPopup } from 'shared/lib/popup'
     import { api, accountType } from 'shared/lib/wallet'
     import { versionDetails } from 'shared/lib/appUpdater'
+    import { LedgerStatus } from 'shared/lib/typings/wallet'
 
     export let locale
 
@@ -51,9 +52,9 @@
 
     function checkLedgerConnection() {
         return new Promise((resolve, reject) => {
-            api.assertLedgerNanoConnected($accountType.type === 'LedgerNanoSimulator', {
-                onSuccess() {
-                    isLedgerConnected = true
+            api.getLedgerDeviceStatus($accountType.type === 'LedgerNanoSimulator', {
+                onSuccess(response) {
+                    isLedgerConnected = response.payload.type === LedgerStatus.Connected
                     resolve()
                 },
                 onError(e) {

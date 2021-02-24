@@ -40,7 +40,7 @@ import {
   lockStronghold as _lockStronghold,
   changeStrongholdPassword as _changeStrongholdPassword,
   setClientOptions as _setClientOptions,
-  assertLedgerNanoConnected as _assertLedgerNanoConnected
+  getLedgerDeviceStatus as _getLedgerDeviceStatus
 } from '../../../shared/lib/typings/wallet'
 import { ClientOptions } from '../../../shared/lib/typings/client'
 
@@ -202,7 +202,7 @@ export const api = {
   onStrongholdStatusChange: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'StrongholdStatusChange')
   },
-  assertLedgerNanoConnected: function (isSimulator: boolean): ((__ids: CommunicationIds) => Promise<string>) {
-    return (__ids: CommunicationIds) => _assertLedgerNanoConnected(sendMessage, __ids, isSimulator)
+  getLedgerDeviceStatus: function (isSimulator: boolean): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _getLedgerDeviceStatus(sendMessage, __ids, isSimulator)
   },
 };
