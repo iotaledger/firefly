@@ -1,5 +1,6 @@
 <script>
     import { Text } from 'shared/components'
+    import { getInitials as _getInitials } from 'shared/lib/helpers'
 
     export let classes = undefined
     export let locale
@@ -13,15 +14,13 @@
     let slots = $$props.$$slots
 
     function getInitials() {
-        const names = name.split(' ')
-
-        let initials = names[0].substring(0, 1).toUpperCase()
-
-        if (names.length > 1) {
-            initials += names[names.length - 1].substring(0, 1).toUpperCase()
+        const initials = _getInitials(name)
+        if (initials.length === 1) {
+            return initials
+        } else {
+            const letters = initials.split('')
+            return letters[0] + letters[letters.length - 1]
         }
-
-        return initials
     }
 </script>
 

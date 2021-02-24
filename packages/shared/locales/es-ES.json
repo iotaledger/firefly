@@ -62,7 +62,9 @@
         "recovery_phrase": {
             "title": "Frase de recuperación",
             "body_1": "Escriba cuidadosamente las palabras en el orden exacto.",
-            "body_2": "Mantenga su frase de recuperación guardada de forma segura. No la comparta con nadie."
+            "body_2": "Mantenga su frase de recuperación guardada de forma segura. No la comparta con nadie.",
+            "reveal_recovery_phrase": "Mostrar frase de recuperación",
+            "hide_recovery_phrase": "Hide recovery phrase"
         },
         "verify_recovery_phrase": {
             "title": "Verificar frase de recuperación",
@@ -172,6 +174,14 @@
                 "title": "Modificar contraseña",
                 "description": ""
             },
+            "changePincode": {
+                "title": "Change PIN code",
+                "description": "",
+                "currentPincode": "Current PIN",
+                "newPincode": "New PIN",
+                "confirmNewPincode": "Confirm new PIN",
+                "action": "Change PIN"
+            },
             "resyncAccounts": {
                 "title": "Resincronizar cuentas",
                 "description": ""
@@ -190,6 +200,10 @@
             },
             "nodeSettings": {
                 "title": "Ajustes del nodo",
+                "description": ""
+            },
+            "configureNodeList": {
+                "title": "Configure node list",
                 "description": ""
             },
             "proofOfWork": {
@@ -233,68 +247,80 @@
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "up_to_date": "Actualizado",
+                    "out_of_date": "Desactualizado"
                 },
                 "hardware_device": {
-                    "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "title": "Dispositivo de hardware",
+                    "none_detected": "Ninguna detectada"
                 },
                 "stronghold_status": {
-                    "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "title": "Estado de Stronghold",
+                    "locked": "Bloqueado",
+                    "unlocked": "Desbloqueado"
                 },
                 "stronghold_backup": {
-                    "title": "Stronghold Backup",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "title": "Respaldo de Stronghold",
+                    "weeks_ago": "hace {weeks, plural,one {# semana} other {# semanas}}"
                 }
             },
             "network": {
-                "network_operational": "Network Operational",
-                "network_degraded": "Network Degraded",
-                "network_down": "Network Down",
-                "status": "Status",
-                "messages_per_second": "Messages per second",
-                "confirmation_rate": "Confirmation rate"
+                "network_operational": "Red operativa",
+                "network_degraded": "Red degradada",
+                "network_down": "Red apagada",
+                "status": "Estado",
+                "messages_per_second": "Mensajes por segundo",
+                "confirmation_rate": "Tasa de confirmación"
+            },
+            "profile_modal": {
+                "all_settings": "All settings",
+                "logout": "Log out"
             }
         }
     },
     "popups": {
         "password": {
             "title": "Se requiere contraseña",
-            "subtitle": "Please enter your wallet password to unlock Stronghold"
+            "subtitle": "Por favor, proporcione la contraseña de su billetera para desbloquear Stronghold"
         },
         "qr": {
             "title": "Tu código QR"
         },
         "version": {
-            "title": "Current version: {version}",
-            "up_to_date_title": "Firefly is up to date",
-            "up_to_date_description": "You are running the latest and safest version of Firefly.",
-            "update_available": "Firefly update available",
-            "update_details": "Version {version} - {date}"
+            "title": "Versión actual: {version}",
+            "up_to_date_title": "Firefly está actualizado",
+            "up_to_date_description": "Estás ejecutando la última y más segura versión de Firefly.",
+            "update_available": "Actualización de Firefly disponible",
+            "update_details": "Versión {version} - {date}"
         },
         "backup": {
-            "title": "Last backup: {date}",
-            "last_backup": "You last backed up {date}",
-            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
-            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "not_backed_up": "Not backed up",
-            "not_backed_up_description": "You have not backed up your Stronghold"
+            "title": "Última copia de seguridad: {date}",
+            "last_backup": "Tu última copia de seguridad {date}",
+            "backup_description": "Es importante hacer una copia de seguridad con regularidad para asegurarse de que tiene una copia de sus cuentas y el historial de transacciones.",
+            "backup_warning": "Si pierde su copia de seguridad y su frase de recuperación perderá el acceso a sus fondos.",
+            "not_backed_up": "No está respaldado",
+            "not_backed_up_description": "No has respaldado tu fortaleza"
         },
         "delete_account": {
-            "title": "Delete {name}?",
-            "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Type your wallet’s password to confirm.",
-            "delete_account": "Delete account",
-            "error_title": "Unable to delete {name}",
-            "error_body_1": "To delete an account you must have 0 balance.",
-            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+            "title": "¿Eliminar {name}?",
+            "body": "Perderás permanentemente tu historial de transacciones y quizás también otra cosa.",
+            "type_password": "Escriba la contraseña de su monedero para confirmar.",
+            "delete_account": "Eliminar cuenta",
+            "error_title": "No se puede eliminar {name}",
+            "error_body_1": "Para eliminar una cuenta debes tener saldo 0.",
+            "error_body_2": "Actualmente tienes {balance} restantes en esta cuenta. Por favor, mueve estos fondos a una cuenta diferente e inténtalo de nuevo."
         },
         "address_history": {
-            "title": "{name} account address history",
-            "current_balance": "Current balance: {balance}"
+            "title": "{name} historial de direcciones de la cuenta",
+            "current_balance": "Saldo actual: {balance}"
+        },
+        "node": {
+            "title_add": "Add a node",
+            "title_details": "Node details",
+            "node_address": "Node address",
+            "optional_username": "Username (optional)",
+            "optional_password": "Password (optional)",
+            "set_as_primary_node": "Set as primary node"
         }
     },
     "actions": {
@@ -302,7 +328,7 @@
         "back": "Atrás",
         "cancel": "Cancelar",
         "close": "Cerrar",
-        "dismiss": "Dismiss",
+        "dismiss": "Descartar",
         "save": "Guardar",
         "import_seed": "Importar una semilla existente",
         "import_wallet": "Importar billetera existente",
@@ -339,12 +365,15 @@
         "exportState": "Exportar estado",
         "outsourceProofOfWork": "Externalizar prueba de trabajo",
         "unlock": "Desbloquear",
-        "update_firefly": "Update Firefly",
-        "save_backup": "Save backup",
-        "customize_account": "Customise account",
-        "sync_account": "Sync account",
-        "view_address_history": "View address history",
-        "delete_account": "Delete account"
+        "update_firefly": "Actualizar Firefly",
+        "install_firefly": "Install Firefly",
+        "save_backup": "Guardar respaldo",
+        "customize_account": "Personalizar cuenta",
+        "sync_account": "Sincronizar cuenta",
+        "view_address_history": "Ver historial de direcciones",
+        "delete_account": "Eliminar cuenta",
+        "max": "Max",
+        "add_node": "Add node"
     },
     "general": {
         "password": "Contraseña",
@@ -357,13 +386,13 @@
         "recent_activity": "Actividad reciente",
         "sent": "Enviado",
         "received": "Recibido",
-        "send_payment": "Send payment",
-        "move_funds": "Move funds",
+        "send_payment": "Enviar pago",
+        "move_funds": "Mover fondos",
         "send_funds": "Enviar fondos",
         "send_to_address": "Enviar a una dirección",
         "scan_qr_or_paste": "Escanea un código QR o pega una dirección",
         "move_funds_between_accounts": "Mover fondos entre cuentas",
-        "send_tokens_to_address": "Send tokens to an address",
+        "send_tokens_to_address": "Enviar tokens a una dirección",
         "manage_account": "Administrar cuenta",
         "customize_account": "Personaliza tu cuenta",
         "account": "Cuenta",
@@ -374,7 +403,7 @@
         "from": "De",
         "to": "Para",
         "receive_funds": "Recibir fondos",
-        "my_address": "My Address",
+        "my_address": "Mi dirección",
         "share_address": "Compartir dirección",
         "your_address": "Su dirección",
         "generate_new_address": "Generar nueva dirección",
@@ -391,25 +420,33 @@
         "light_theme": "Tema claro",
         "dark_theme": "Tema oscuro",
         "total_balance": "Saldo total",
-        "account_balance": "Account Balance",
+        "account_balance": "Saldo de la cuenta",
         "incoming": "Entrante",
         "outgoing": "Saliente",
         "accounts": "Cuentas",
         "automaticNodeSelection": "Selección automática de nodo",
         "manualNodeSelection": "Selección manual de nodo",
         "profiles": "Perfiles",
+        "developerProfile": "Developer Profile",
+        "dev": "Dev",
         "create_account": "Crear una cuenta",
         "account_name": "Nombre de cuenta",
         "latest_transactions": "Últimas transacciones",
         "transactions": "Transacciones",
         "security": "Seguridad",
-        "account_address": "Dirección de la cuenta"
+        "account_address": "Dirección de la cuenta",
+        "nodes": "Nodes"
     },
     "dates": {
-        "today": "Today",
-        "days_ago": "{time, plural, one {# day} other {# days}} ago",
-        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
-        "months_ago": "{time, plural, one {# month} other {# months}} ago",
-        "years_ago": "{time, plural, one {# year} other {# years}} ago"
+        "today": "Hoy",
+        "days_ago": "hace {time, plural, one {# día} other {# días}}",
+        "weeks_ago": "hace {time, plural,one {# semana} other {# semanas}}",
+        "months_ago": "hace {time, plural,one {# mes} other {# meses}}",
+        "years_ago": "hace {time, plural, one {# año} other {# años}}"
+    },
+    "notifications": {
+        "valueTx": "Receiving {{value}} to {{account}}",
+        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
+        "failed": "Outgoing {{value}} from {{account}} has failed"
     }
 }

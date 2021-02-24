@@ -40,12 +40,11 @@ export const shuffleArray = (array) => array.slice().sort(() => Math.random() - 
  * Extract initials from string
  */
 export const getInitials = (string: string, maxChars: number) => {
-    let initialsArray: string[] = string.replace(/[^a-zA-Z- ]/g, '').match(/\b\w/g)
+    let initialsArray = string.split(' ').map(n => n[0].toUpperCase())
     if (maxChars) {
         initialsArray = initialsArray.slice(0, maxChars)
     }
-    let initials = initialsArray.join('').toUpperCase()
-    return initials
+    return initialsArray.join('')
 }
 
 /**

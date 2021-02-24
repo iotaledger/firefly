@@ -62,7 +62,9 @@
         "recovery_phrase": {
             "title": "Фраза за опоравак",
             "body_1": "Пажљиво запишите речи тачним редоследом.",
-            "body_2": "Нека ваша фраза за опоравак буде приватна и безбедно ускладиштена. Не делите је ни са ким."
+            "body_2": "Нека ваша фраза за опоравак буде приватна и безбедно ускладиштена. Не делите је ни са ким.",
+            "reveal_recovery_phrase": "Откривање фразе за опоравак",
+            "hide_recovery_phrase": "Hide recovery phrase"
         },
         "verify_recovery_phrase": {
             "title": "Верификујте фразу за опоравак",
@@ -172,6 +174,14 @@
                 "title": "Change password",
                 "description": ""
             },
+            "changePincode": {
+                "title": "Change PIN code",
+                "description": "",
+                "currentPincode": "Current PIN",
+                "newPincode": "New PIN",
+                "confirmNewPincode": "Confirm new PIN",
+                "action": "Change PIN"
+            },
             "resyncAccounts": {
                 "title": "Resync accounts",
                 "description": ""
@@ -190,6 +200,10 @@
             },
             "nodeSettings": {
                 "title": "Node settings",
+                "description": ""
+            },
+            "configureNodeList": {
+                "title": "Configure node list",
                 "description": ""
             },
             "proofOfWork": {
@@ -257,6 +271,10 @@
                 "status": "Status",
                 "messages_per_second": "Messages per second",
                 "confirmation_rate": "Confirmation rate"
+            },
+            "profile_modal": {
+                "all_settings": "All settings",
+                "logout": "Log out"
             }
         }
     },
@@ -295,6 +313,14 @@
         "address_history": {
             "title": "{name} account address history",
             "current_balance": "Current balance: {balance}"
+        },
+        "node": {
+            "title_add": "Add a node",
+            "title_details": "Node details",
+            "node_address": "Node address",
+            "optional_username": "Username (optional)",
+            "optional_password": "Password (optional)",
+            "set_as_primary_node": "Set as primary node"
         }
     },
     "actions": {
@@ -340,11 +366,14 @@
         "outsourceProofOfWork": "Outsource proof of work",
         "unlock": "Unlock",
         "update_firefly": "Update Firefly",
+        "install_firefly": "Install Firefly",
         "save_backup": "Save backup",
         "customize_account": "Customise account",
         "sync_account": "Sync account",
         "view_address_history": "View address history",
-        "delete_account": "Delete account"
+        "delete_account": "Delete account",
+        "max": "Max",
+        "add_node": "Add node"
     },
     "general": {
         "password": "Лозинка",
@@ -398,12 +427,15 @@
         "automaticNodeSelection": "Automatic node selection",
         "manualNodeSelection": "Manual node selection",
         "profiles": "Профили",
+        "developerProfile": "Developer Profile",
+        "dev": "Dev",
         "create_account": "Create an account",
         "account_name": "Account name",
         "latest_transactions": "Latest Transactions",
         "transactions": "Transactions",
         "security": "Сигурност",
-        "account_address": "Account Address"
+        "account_address": "Account Address",
+        "nodes": "Nodes"
     },
     "dates": {
         "today": "Today",
@@ -411,5 +443,10 @@
         "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
         "months_ago": "{time, plural, one {# month} other {# months}} ago",
         "years_ago": "{time, plural, one {# year} other {# years}} ago"
+    },
+    "notifications": {
+        "valueTx": "Receiving {{value}} to {{account}}",
+        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
+        "failed": "Outgoing {{value}} from {{account}} has failed"
     }
 }

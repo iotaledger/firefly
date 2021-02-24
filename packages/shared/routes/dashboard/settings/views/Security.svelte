@@ -201,29 +201,66 @@
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     {#if hasStrongholdAccount}
     <section id="changePassword" class="w-3/4">
-        <Text type="h4" classes="mb-3">{locale('views.settings.changePassword.title')}</Text>
-        <Text type="p" secondary classes="mb-5">{locale('views.settings.changePassword.description')}</Text>
-        <Password classes="mb-8" bind:value={currentPassword} showRevealToggle {locale}
-            placeholder={locale('general.currentPassword')} />
-        <Password classes="mb-4" bind:value={newPassword} showRevealToggle strengthLevels={4} showStrengthLevel
-            {strength} {locale} placeholder={locale('general.newPassword')} />
-        <Password classes="mb-5" bind:value={confirmedPassword} showRevealToggle {locale}
-            placeholder={locale('general.confirmNewPassword')} />
-        <Checkbox classes="mb-5" label={locale('actions.exportNewStronghold')} bind:checked={exportStrongholdChecked} />
-        <Button classes="w-1/4" onClick={changePassword}>{locale('views.settings.changePassword.title')}</Button>
+        <form id="form-change-password" on:submit={changePassword}>
+            <Text type="h4" classes="mb-3">{locale('views.settings.changePassword.title')}</Text>
+            <Text type="p" secondary classes="mb-5">{locale('views.settings.changePassword.description')}</Text>
+            <Password
+                classes="mb-8"
+                bind:value={currentPassword}
+                showRevealToggle
+                {locale}
+                placeholder={locale('general.currentPassword')} />
+            <Password
+                classes="mb-4"
+                bind:value={newPassword}
+                showRevealToggle
+                strengthLevels={4}
+                showStrengthLevel
+                {strength}
+                {locale}
+                placeholder={locale('general.newPassword')} />
+            <Password
+                classes="mb-5"
+                bind:value={confirmedPassword}
+                showRevealToggle
+                {locale}
+                placeholder={locale('general.confirmNewPassword')} />
+            <Checkbox classes="mb-5" label={locale('actions.exportNewStronghold')} bind:checked={exportStrongholdChecked} />
+            <Button form="form-change-password" type="submit" classes="w-1/4">{locale('views.settings.changePassword.title')}</Button>
+        </form>
     </section>
     {/if}
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <section id="changePincode" class="w-3/4">
-        <Text type="h4" classes="mb-3">{locale('views.settings.changePincode.title')}</Text>
-        <Text type="p" secondary classes="mb-5">{locale('views.settings.changePincode.description')}</Text>
-        <Password classes="mb-4" bind:value={currentPincode} showRevealToggle {locale} maxlength="6" numeric
-            placeholder={locale('views.settings.changePincode.currentPincode')} />
-        <Password classes="mb-4" bind:value={newPincode} showRevealToggle {locale} maxlength="6" numeric
-            placeholder={locale('views.settings.changePincode.newPincode')} />
-        <Password classes="mb-5" bind:value={confirmedPincode} showRevealToggle {locale} maxlength="6" numeric
-            placeholder={locale('views.settings.changePincode.confirmNewPincode')} />
-        <Button classes="w-1/4" onClick={changePincode}>{locale('views.settings.changePincode.action')}</Button>
+        <form on:submit={changePincode} id="pincode-change-form">
+            <Text type="h4" classes="mb-3">{locale('views.settings.changePincode.title')}</Text>
+            <Text type="p" secondary classes="mb-5">{locale('views.settings.changePincode.description')}</Text>
+            <Password
+                classes="mb-4"
+                bind:value={currentPincode}
+                showRevealToggle
+                {locale}
+                maxlength="6"
+                numeric
+                placeholder={locale('views.settings.changePincode.currentPincode')} />
+            <Password
+                classes="mb-4"
+                bind:value={newPincode}
+                showRevealToggle
+                {locale}
+                maxlength="6"
+                numeric
+                placeholder={locale('views.settings.changePincode.newPincode')} />
+            <Password
+                classes="mb-5"
+                bind:value={confirmedPincode}
+                showRevealToggle
+                {locale}
+                maxlength="6"
+                numeric
+                placeholder={locale('views.settings.changePincode.confirmNewPincode')} />
+            <Button type="submit" form="pincode-change-form" classes="w-1/4">{locale('views.settings.changePincode.action')}</Button>
+        </form>
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <section id="resetWallet" class="w-3/4">

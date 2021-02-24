@@ -57,6 +57,7 @@
                     if (!validatePinFormat(pin.toString())) {
                         throw new Error('Invalid pin code!')
                     }
+
                     await PincodeManager.set(get(activeProfile).id, pin.toString())
 
                     api.setStoragePassword(pin.toString(), {

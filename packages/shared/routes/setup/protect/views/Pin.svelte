@@ -15,8 +15,10 @@
         ? Number.isInteger(pinInput) && `${pinInput}`.length === 6 && pinInput === pinCandidate
         : Number.isInteger(pinInput) && `${pinInput}`.length === 6
 
-    function handleContinueClick() {
-        dispatch('next', !confirmInput ? { pinCandidate: pinInput } : null)
+    function onSubmit() {
+        if (valid) {
+            dispatch('next', !confirmInput ? { pinCandidate: pinInput } : null)
+        }
     }
     function handleBackClick() {
         dispatch('previous')
@@ -32,16 +34,16 @@
                 <Text type="h2" classes="mb-5">{locale('views.pin.title')}</Text>
                 <Text type="p" secondary classes="mb-4">{locale('views.pin.body_1')}</Text>
                 <Text type="p" secondary highlighted classes="mb-8 font-bold">{locale('views.pin.body_2')}</Text>
-                <Pin bind:value={pinInput} classes="w-full mx-auto block" />
+                <Pin bind:value={pinInput} classes="w-full mx-auto block" on:submit={onSubmit} />
             {:else}
                 <Text type="h2" classes="mb-5">{locale('views.confirm_pin.title')}</Text>
                 <Text type="p" secondary classes="mb-8">{locale('views.confirm_pin.body')}</Text>
-                <Pin bind:value={pinInput} classes="w-full mx-auto block" />
+                <Pin bind:value={pinInput} classes="w-full mx-auto block" on:submit={onSubmit} />
             {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
             <Button secondary classes="flex-1" onClick={() => handleBackClick()}>{locale('actions.back')}</Button>
-            <Button classes="flex-1" disabled={!valid} onClick={() => handleContinueClick()}>{locale('actions.set_pin')}</Button>
+            <Button classes="flex-1" disabled={!valid} onClick={() => onSubmit()}>{locale('actions.set_pin')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-end items-center">
             {#if !confirmInput}

@@ -19,7 +19,7 @@ export const darkMode = persistent<boolean>('darkMode', false)
 /**
  * Wallet access pin
  */
-export const walletPin = persistent<number>('walletPin', null)
+export const walletPin = writable<number>(null)
 
 /**
  * Stronghold password

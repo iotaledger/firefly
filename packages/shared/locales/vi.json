@@ -62,7 +62,9 @@
         "recovery_phrase": {
             "title": "Cụm từ hồi phục tài khoản ví",
             "body_1": "Ghi lại ra giấy một cách cẩn thận những từ sau đây chính xác theo thứ tự.",
-            "body_2": "Cất giữ cụm từ khôi phục tài khoản của bạn ở nơi riêng tư và an toàn. Đừng chia sẻ nó với bất kỳ ai."
+            "body_2": "Cất giữ cụm từ khôi phục tài khoản của bạn ở nơi riêng tư và an toàn. Đừng chia sẻ nó với bất kỳ ai.",
+            "reveal_recovery_phrase": "Reveal recovery phrase",
+            "hide_recovery_phrase": "Hide recovery phrase"
         },
         "verify_recovery_phrase": {
             "title": "Xác thực cụm từ phục hồi tài khoản ví",
@@ -115,37 +117,37 @@
             "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "Số dư của bạn",
+            "body": "Số dư tài khoản của bạn có chính xác không?"
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "Cấu hình",
             "generalSettings": {
-                "title": "General Settings",
+                "title": "Thiết lập chung",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "security": {
-                "title": "Security",
+                "title": "Bảo mật",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
+                "title": "Thiết lập nâng cao",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Help & Information",
+                "title": "Thông tin trợ giúp",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profile": {
-                "title": "Profile",
+                "title": "Hồ sơ cá nhân",
                 "description": ""
             },
             "sync": {
-                "title": "Sync accounts",
+                "title": "Đồng bộ tài khoản",
                 "description": ""
             },
             "theme": {
-                "title": "Theme",
+                "title": "Giao diện",
                 "description": ""
             },
             "language": {
@@ -153,127 +155,143 @@
                 "description": ""
             },
             "currency": {
-                "title": "Currency",
+                "title": "Tiền tệ",
                 "description": ""
             },
             "notifications": {
-                "title": "Notifications",
+                "title": "Các thông báo",
                 "description": ""
             },
             "exportStronghold": {
-                "title": "Export Stronghold",
+                "title": "Xuất ra Stronghold",
                 "description": ""
             },
             "appLock": {
-                "title": "App Lock",
+                "title": "Khóa ứng dụng",
                 "description": ""
             },
             "changePassword": {
-                "title": "Change password",
+                "title": "Đổi mật khẩu",
                 "description": ""
             },
+            "changePincode": {
+                "title": "Change PIN code",
+                "description": "",
+                "currentPincode": "Current PIN",
+                "newPincode": "New PIN",
+                "confirmNewPincode": "Confirm new PIN",
+                "action": "Change PIN"
+            },
             "resyncAccounts": {
-                "title": "Resync accounts",
+                "title": "Đồng bộ lại các tài khoản",
                 "description": ""
             },
             "resetWallet": {
-                "title": "Reset wallet",
+                "title": "Thiết lập lại ví",
                 "description": ""
             },
             "deepLinks": {
-                "title": "Deep links",
+                "title": "Các liên kết sâu",
                 "description": ""
             },
             "developerMode": {
-                "title": "Developer mode",
+                "title": "Chế độ nhà phát triển",
                 "description": ""
             },
             "nodeSettings": {
-                "title": "Node settings",
+                "title": "Cấu hình node",
+                "description": ""
+            },
+            "configureNodeList": {
+                "title": "Configure node list",
                 "description": ""
             },
             "proofOfWork": {
-                "title": "Proof of work",
+                "title": "Bằng chứng công việc (PoW)",
                 "description": ""
             },
             "errorLog": {
-                "title": "Error log",
+                "title": "Bản ghi lỗi",
                 "description": ""
             },
             "stateExport": {
-                "title": "State export",
+                "title": "Xuất ra trạng thái",
                 "description": ""
             },
             "troubleshoot": {
-                "title": "Troubleshoot",
+                "title": "Xử lý sự cố",
                 "description": ""
             },
             "documentation": {
-                "title": "Documentation",
+                "title": "Tài liệu",
                 "description": ""
             },
             "faq": {
-                "title": "FAQ",
+                "title": "CÂU HỎI THƯỜNG GẶP",
                 "description": ""
             },
             "discord": {
-                "title": "Discord",
+                "title": "Tài khoản Discord",
                 "description": ""
             },
             "about": {
-                "title": "About",
+                "title": "Thông tin về ứng dụng",
                 "description": ""
             }
         },
         "login": {
-            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
+            "please_wait": "Vui lòng đợi {time, plural, one {1 second} other {# seconds}}",
             "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
                 "version": {
-                    "title": "Firefly v{version}",
-                    "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "title": "Firefly phiên bản v{version}",
+                    "up_to_date": "Đã cập nhật",
+                    "out_of_date": "Đã cũ"
                 },
                 "hardware_device": {
-                    "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "title": "Thiết bị phần cứng",
+                    "none_detected": "Không phát hiện được"
                 },
                 "stronghold_status": {
-                    "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "title": "Tình trạng của Stronghold",
+                    "locked": "Đã khóa",
+                    "unlocked": "Đã mở khóa"
                 },
                 "stronghold_backup": {
-                    "title": "Stronghold Backup",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "title": "Sao lưu của Stronghold",
+                    "weeks_ago": "{weeks, plural, one {# week} other {# tuần}} trước đó"
                 }
             },
             "network": {
-                "network_operational": "Network Operational",
-                "network_degraded": "Network Degraded",
-                "network_down": "Network Down",
-                "status": "Status",
-                "messages_per_second": "Messages per second",
-                "confirmation_rate": "Confirmation rate"
+                "network_operational": "Vận hành mạng",
+                "network_degraded": "Mạng bị xuống cấp",
+                "network_down": "Rớt mạng",
+                "status": "Trạng thái",
+                "messages_per_second": "Số tin nhắn trên giây",
+                "confirmation_rate": "Tỷ lệ xác nhận"
+            },
+            "profile_modal": {
+                "all_settings": "All settings",
+                "logout": "Log out"
             }
         }
     },
     "popups": {
         "password": {
-            "title": "Password required",
-            "subtitle": "Please enter your wallet password to unlock Stronghold"
+            "title": "Yêu cầu mật khẩu",
+            "subtitle": "Vui lòng nhập mật khẩu ví để mở khóa Stronghold"
         },
         "qr": {
-            "title": "Your QR code"
+            "title": "Mã QR của bạn"
         },
         "version": {
-            "title": "Current version: {version}",
-            "up_to_date_title": "Firefly is up to date",
-            "up_to_date_description": "You are running the latest and safest version of Firefly.",
-            "update_available": "Firefly update available",
-            "update_details": "Version {version} - {date}"
+            "title": "Phiên bản hiện tại: {version}",
+            "up_to_date_title": "Firefly đã cập nhật mới nhất",
+            "up_to_date_description": "Bạn đang chạy trên phiên bản Firefly mới nhất và an toàn nhất.",
+            "update_available": "Phiên bản cập nhật Firefly đang hiện hữu",
+            "update_details": "Phiên bản {version} - {date}"
         },
         "backup": {
             "title": "Last backup: {date}",
@@ -295,6 +313,14 @@
         "address_history": {
             "title": "{name} account address history",
             "current_balance": "Current balance: {balance}"
+        },
+        "node": {
+            "title_add": "Add a node",
+            "title_details": "Node details",
+            "node_address": "Node address",
+            "optional_username": "Username (optional)",
+            "optional_password": "Password (optional)",
+            "set_as_primary_node": "Set as primary node"
         }
     },
     "actions": {
@@ -340,11 +366,14 @@
         "outsourceProofOfWork": "Outsource proof of work",
         "unlock": "Unlock",
         "update_firefly": "Update Firefly",
+        "install_firefly": "Install Firefly",
         "save_backup": "Save backup",
         "customize_account": "Customise account",
         "sync_account": "Sync account",
         "view_address_history": "View address history",
-        "delete_account": "Delete account"
+        "delete_account": "Delete account",
+        "max": "Max",
+        "add_node": "Add node"
     },
     "general": {
         "password": "Mật khẩu",
@@ -398,12 +427,15 @@
         "automaticNodeSelection": "Automatic node selection",
         "manualNodeSelection": "Manual node selection",
         "profiles": "Profiles",
+        "developerProfile": "Developer Profile",
+        "dev": "Dev",
         "create_account": "Create an account",
         "account_name": "Account name",
         "latest_transactions": "Latest Transactions",
         "transactions": "Transactions",
-        "security": "Security",
-        "account_address": "Account Address"
+        "security": "Bảo mật",
+        "account_address": "Account Address",
+        "nodes": "Nodes"
     },
     "dates": {
         "today": "Today",
@@ -411,5 +443,10 @@
         "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
         "months_ago": "{time, plural, one {# month} other {# months}} ago",
         "years_ago": "{time, plural, one {# year} other {# years}} ago"
+    },
+    "notifications": {
+        "valueTx": "Receiving {{value}} to {{account}}",
+        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
+        "failed": "Outgoing {{value}} from {{account}} has failed"
     }
 }
