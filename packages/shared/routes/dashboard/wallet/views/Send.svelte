@@ -39,9 +39,9 @@
     }
     const handleSendClick = () => {
         if (selectedSendType === SEND_TYPE.INTERNAL) {
-            internalTransfer(from.value, to.id, $sendParams.amount)
+            internalTransfer(from.id, to.id, $sendParams.amount)
         } else {
-            send(from.value, $sendParams.address, $sendParams.amount)
+            send(from.id, $sendParams.address, $sendParams.amount)
         }
     }
     const handleBackClick = () => {
@@ -51,7 +51,11 @@
         }
     }
     const format = (account) => {
-        return { value: account.id, label: `${account.name} • ${account.balance}`, balance: account.rawIotaBalance }
+        return {
+            ...account,
+            label: `${account.name} • ${account.balance}`,
+            balance: account.rawIotaBalance,
+        }
     }
     const handleMaxClick = () => {
         amount = convertUnits(from.balance, Unit.i, unit)
