@@ -4,7 +4,7 @@
     import { OnboardingLayout, Illustration, Text, Button, Popup } from 'shared/components'
     import { api } from 'shared/lib/wallet'
     import { newProfile, saveProfile } from 'shared/lib/profile'
-    import { DEFAULT_NODES as nodes } from 'shared/lib/network'
+    import { DEFAULT_NODES as nodes, DEFAULT_NODE as node, network } from 'shared/lib/network'
     import { popupState, openPopup, closePopup } from 'shared/lib/popup'
     import { LedgerStatus } from 'shared/lib/typings/wallet'
 
@@ -71,7 +71,11 @@
         restoring = true
         api.createAccount(
             {
-                clientOptions: { nodes },
+               clientOptions: {
+                    node: node.url,
+                    nodes: nodes.map((node) => node.url),
+                    network: $network,
+                },
                 signerType: { type: simulator ? 'LedgerNanoSimulator' : 'LedgerNano' }
             },
             {
