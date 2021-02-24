@@ -40,6 +40,12 @@ type WalletState = {
     accounts: Writable<Account[]>
 }
 
+export enum ProfileType {
+    Software = 'Software',
+    Ledger = 'Ledger',
+    LedgerSimulator = 'LedgerSimulator'
+}
+
 /** Active actors state */
 const actors: ActorState = {}
 
@@ -59,9 +65,16 @@ export const wallet = writable<WalletState>({
     accounts: writable<Account[]>([]),
 })
 
-export const accountType = derived(wallet, $wallet => {
+export const profileType = derived(wallet, $wallet => {
     const accounts = get($wallet.accounts)
-    return accounts.length === 0 ? null : accounts[0].signerType
+    if (accounts.length === 0) {
+        return null
+    }
+    switch (accounts[0].signerType.type) {
+        case 'Stronghold': return ProfileType.Software
+        case 'LedgerNano': return ProfileType.Ledger
+        case 'LedgerNanoSimulator': return ProfileType.LedgerSimulator
+    }
 })
 
 export const resetWallet = () => {

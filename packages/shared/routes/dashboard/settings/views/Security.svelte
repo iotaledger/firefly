@@ -3,7 +3,7 @@
     import zxcvbn from 'zxcvbn'
     import { Text, Dropdown, Password, Button, Checkbox } from 'shared/components'
     import { updateProfile, activeProfile, removeProfile } from 'shared/lib/profile'
-    import { api, destroyActor, accountType } from 'shared/lib/wallet'
+    import { api, destroyActor, profileType, ProfileType } from 'shared/lib/wallet'
     import { openPopup } from 'shared/lib/popup'
 
     function assignTimeoutOptionLabel(timeInMinutes) {
@@ -35,7 +35,7 @@
 
     $: strength = zxcvbn(newPassword).score
     $: valid = strength === 4
-    $: hasStrongholdAccount = $accountType && $accountType.type === 'Stronghold'
+    $: hasStrongholdAccount = $profileType && $profileType === ProfileType.Software
 
     const PincodeManager = window['Electron']['PincodeManager']
 

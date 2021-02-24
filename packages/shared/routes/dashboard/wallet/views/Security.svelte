@@ -5,7 +5,7 @@
     import { diffDates, getBackupWarningColor } from 'shared/lib/helpers'
     import { activeProfile, profiles } from 'shared/lib/profile'
     import { openPopup } from 'shared/lib/popup'
-    import { api, accountType } from 'shared/lib/wallet'
+    import { api, profileType, ProfileType } from 'shared/lib/wallet'
     import { versionDetails } from 'shared/lib/appUpdater'
     import { LedgerStatus } from 'shared/lib/typings/wallet'
 
@@ -52,7 +52,7 @@
 
     function checkLedgerConnection() {
         return new Promise((resolve, reject) => {
-            api.getLedgerDeviceStatus($accountType.type === 'LedgerNanoSimulator', {
+            api.getLedgerDeviceStatus($profileType === 'LedgerNanoSimulator', {
                 onSuccess(response) {
                     isLedgerConnected = response.payload.type === LedgerStatus.Connected
                     resolve()
@@ -76,14 +76,14 @@
     }
 
     $: {
-        if (!isCheckingLedger && $accountType && $accountType.type.startsWith('Ledger')) {
+        if (!isCheckingLedger && $profileType !== ProfileType.Software) {
             checkLedger()
         }
     }
 
     $: hardwareDeviceMessage = isLedgerConnected ? 'detected' : 'none_detected'
 
-    $: isSoftwareAccountProfile = $accountType && $accountType.type === 'Stronghold'
+    $: isSoftwareAccountProfile = $profileType === ProfileType.Software
 
     const unsubscribe = profiles.subscribe(() => {
         setup()
@@ -107,12 +107,14 @@
             icon="firefly"
             onClick={() => handleSecurityTileClick('version')} />
         <!-- Hardware Device -->
+        {#if !isSoftwareAccountProfile}
         <SecurityTile
             onClick={checkLedgerConnection}
             title={locale('views.dashboard.security.hardware_device.title')}
             message={locale(`views.dashboard.security.hardware_device.${hardwareDeviceMessage}`)}
             color="gray"
             icon="chip" />
+        {/if}
         {#if isSoftwareAccountProfile}
         <!-- Stronghold status -->
         <SecurityTile

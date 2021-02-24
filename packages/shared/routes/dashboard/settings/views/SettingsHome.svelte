@@ -2,13 +2,13 @@
     import { getContext } from 'svelte'
     import { SettingsIcons, SettingsTitles, GeneralSettings, SecuritySettings, AdvancedSettings, HelpAndInfo } from '../types'
     import { Text, SettingsMenu } from 'shared/components'
-    import { accountType } from 'shared/lib/wallet'
+    import { profileType, ProfileType } from 'shared/lib/wallet'
 
     export let locale
     export let mobile
 
     const securitySettings = Object.assign({}, SecuritySettings)
-    if ($accountType.type !== 'Stronghold') {
+    if ($profileType !== ProfileType.Software) {
         delete securitySettings.ExportStronghold
         delete securitySettings.ChangePassword
     }
