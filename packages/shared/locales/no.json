@@ -249,19 +249,19 @@
                 "version": {
                     "title": "Firefly v{version}",
                     "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "out_of_date": "Utløpt"
                 },
                 "hardware_device": {
-                    "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "title": "Maskinvare enhet",
+                    "none_detected": "Ingen oppdaget"
                 },
                 "stronghold_status": {
-                    "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "title": "Festning status",
+                    "locked": "Låst",
+                    "unlocked": "Åpen"
                 },
                 "stronghold_backup": {
-                    "title": "Stronghold Backup",
+                    "title": "Festning sikkerhetskopi",
                     "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
                 }
             },
@@ -298,17 +298,17 @@
             "title": "Siste sikkerhetskopi: {date}",
             "last_backup": "Du sikkerhetskopierte sist {date}",
             "backup_description": "Det er viktig å sikkerhetskopiere regelmessig for å sørge for at du har en kopi av kontoer og transaksjonshistorien.",
-            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "not_backed_up": "Not backed up",
-            "not_backed_up_description": "You have not backed up your Stronghold"
+            "backup_warning": "Hvis du mister din backup og gjenopprettingsfrase mister du tilgang til dine midler.",
+            "not_backed_up": "Ikke sikkerhetskopiert",
+            "not_backed_up_description": "Du har ikke sikkerhetskopiert din festning"
         },
         "delete_account": {
-            "title": "Delete {name}?",
+            "title": "Slett {name}?",
             "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Type your wallet’s password to confirm.",
-            "delete_account": "Delete account",
-            "error_title": "Unable to delete {name}",
-            "error_body_1": "To delete an account you must have 0 balance.",
+            "type_password": "Skriv passordet til lommeboken for å bekrefte.",
+            "delete_account": "Slett konto",
+            "error_title": "Kan ikke slette {name}",
+            "error_body_1": "For å slette kontoen må du ha 0 i saldo.",
             "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
         },
         "address_history": {
@@ -362,17 +362,17 @@
         "exportNewStronghold": "Eksporter en ny Stronghold",
         "enableDeepLinks": "Aktiver dype lenker",
         "enableDeveloperMode": "Aktiver utviklermodus",
-        "enableNotifications": "Aktiver varsler",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "Eksporter status",
         "outsourceProofOfWork": "Outsource bevis på arbeid",
         "unlock": "Lås opp",
         "update_firefly": "Update Firefly",
-        "install_firefly": "Installer Firefly",
+        "restart_now": "Restart now",
         "save_backup": "Save backup",
         "customize_account": "Customise account",
         "sync_account": "Sync account",
         "view_address_history": "View address history",
-        "delete_account": "Delete account",
+        "delete_account": "Slett konto",
         "max": "Maks",
         "add_node": "Legg til Node"
     },
@@ -448,6 +448,12 @@
     "notifications": {
         "valueTx": "Mottar {{value}} til {{account}}",
         "confirmed": "Utgående {{value}} fra {{account}} er bekreftet",
-        "failed": "Utgående {{value}} fra {{account}} mislyktes"
+        "failed": "Utgående {{value}} fra {{account}} mislyktes",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

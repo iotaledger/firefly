@@ -32,9 +32,9 @@
             "body": "Elige el idioma y el tema de tu cartera"
         },
         "setup": {
-            "title": "Configuración de su cartera",
+            "title": "Configura tu cartera",
             "body": "Puede crear una cartera nueva o importar una existente.",
-            "profile_name": "Profile Name"
+            "profile_name": "Nombre del perfil"
         },
         "password": {
             "title": "Crear una contraseña",
@@ -362,12 +362,12 @@
         "exportNewStronghold": "Exportar un nuevo Stronghold",
         "enableDeepLinks": "Habilitar enlaces profundos",
         "enableDeveloperMode": "Habilitar modo de desarrollador",
-        "enableNotifications": "Habilitar notificaciones",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "Exportar estado",
         "outsourceProofOfWork": "Externalizar prueba de trabajo",
         "unlock": "Desbloquear",
         "update_firefly": "Actualizar Firefly",
-        "install_firefly": "Instalar Firefly",
+        "restart_now": "Restart now",
         "save_backup": "Guardar respaldo",
         "customize_account": "Personalizar cuenta",
         "sync_account": "Sincronizar cuenta",
@@ -448,6 +448,12 @@
     "notifications": {
         "valueTx": "Recibiendo {{value}} a {{account}}",
         "confirmed": "Se ha confirmado el {{value}} saliente de {{account}}",
-        "failed": "Ha fallado el {{value}} saliente de {{account}}"
+        "failed": "Ha fallado el {{value}} saliente de {{account}}",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

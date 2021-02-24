@@ -34,7 +34,7 @@
         "setup": {
             "title": "Configurar sua carteira",
             "body": "Você pode criar uma nova carteira ou importar uma existente.",
-            "profile_name": "Profile Name"
+            "profile_name": "Nome do Perfil"
         },
         "password": {
             "title": "Crie uma senha",
@@ -362,12 +362,12 @@
         "exportNewStronghold": "Exportar uma nova fortaleza",
         "enableDeepLinks": "Ativar links profundos",
         "enableDeveloperMode": "Ativar modo de desenvolvedor",
-        "enableNotifications": "Ativar notificações",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "Exportar estado",
         "outsourceProofOfWork": "Prova de origem de trabalho",
         "unlock": "Desbloquear",
         "update_firefly": "Atualizar a Firefly",
-        "install_firefly": "Instalar a Firefly",
+        "restart_now": "Restart now",
         "save_backup": "Salvar backup",
         "customize_account": "Personalizar conta",
         "sync_account": "Sincronizar conta",
@@ -448,6 +448,12 @@
     "notifications": {
         "valueTx": "Recebendo {{value}} para {{account}}",
         "confirmed": "Envio de {{value}} de {{account}} foi confirmado",
-        "failed": "Envio de {{value}} de {{account}} falhou"
+        "failed": "Envio de {{value}} de {{account}} falhou",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

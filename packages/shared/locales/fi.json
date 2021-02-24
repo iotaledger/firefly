@@ -34,7 +34,7 @@
         "setup": {
             "title": "Määritä lompakko",
             "body": "Voit luoda uuden lompakon tai tuoda olemassaolevan.",
-            "profile_name": "Profile Name"
+            "profile_name": "Profilin nimi"
         },
         "password": {
             "title": "Luo salasana",
@@ -65,7 +65,7 @@
             "body_1": "Kirjoita sanat huolellisesti oikeassa järjestyksessä.",
             "body_2": "Pidä palautuslausekkeesi vain itsesi tiedossa ja turvallisesti tallennettuna. Älä jaa sitä kenenkään kanssa.",
             "reveal_recovery_phrase": "Näytä palautuslauseke",
-            "hide_recovery_phrase": "Hide recovery phrase"
+            "hide_recovery_phrase": "Piilota palautuslauseke"
         },
         "verify_recovery_phrase": {
             "title": "Vahvista palautuslauseke",
@@ -176,12 +176,12 @@
                 "description": ""
             },
             "changePincode": {
-                "title": "Change PIN code",
+                "title": "Vaihda PIN-koodi",
                 "description": "",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "currentPincode": "Nykyinen PIN-koodi",
+                "newPincode": "Uusi PIN-koodi",
+                "confirmNewPincode": "Vahvista uusi PIN-koodi",
+                "action": "Vaihda PIN-koodi"
             },
             "resyncAccounts": {
                 "title": "Uudelleen synkronoi tilit",
@@ -204,7 +204,7 @@
                 "description": ""
             },
             "configureNodeList": {
-                "title": "Configure node list",
+                "title": "Muokkaa solmuluetteloa",
                 "description": ""
             },
             "proofOfWork": {
@@ -247,21 +247,21 @@
         "dashboard": {
             "security": {
                 "version": {
-                    "title": "Firefly v{version}",
-                    "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "title": "Firefly v {version}",
+                    "up_to_date": "Ajan tasalla",
+                    "out_of_date": "Vanhentunut"
                 },
                 "hardware_device": {
-                    "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "title": "Laite",
+                    "none_detected": "Ei havaittu"
                 },
                 "stronghold_status": {
-                    "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "title": "Stronghold tilanne",
+                    "locked": "Lukittu",
+                    "unlocked": "Avattu"
                 },
                 "stronghold_backup": {
-                    "title": "Stronghold Backup",
+                    "title": "Stronghold varmuuskopio",
                     "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
                 }
             },
@@ -362,12 +362,12 @@
         "exportNewStronghold": "Vie uuteen Strongholdiin",
         "enableDeepLinks": "Ota syvälinkit käyttöön",
         "enableDeveloperMode": "Ota kehittäjätila käyttöön",
-        "enableNotifications": "Kytke ilmoitukset päälle",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "Vienti tila",
         "outsourceProofOfWork": "Ulkoista todiste työstä (PoW)",
         "unlock": "Avaa",
         "update_firefly": "Update Firefly",
-        "install_firefly": "Install Firefly",
+        "restart_now": "Restart now",
         "save_backup": "Save backup",
         "customize_account": "Customise account",
         "sync_account": "Sync account",
@@ -448,6 +448,12 @@
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
         "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed"
+        "failed": "Outgoing {{value}} from {{account}} has failed",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

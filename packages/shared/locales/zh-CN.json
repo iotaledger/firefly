@@ -34,7 +34,7 @@
         "setup": {
             "title": "设置您的钱包",
             "body": "您可以创建一个新钱包或导入一个已有的钱包。",
-            "profile_name": "Profile Name"
+            "profile_name": "配置名称"
         },
         "password": {
             "title": "设置密码",
@@ -140,7 +140,7 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profile": {
-                "title": "个人信息",
+                "title": "配置信息",
                 "description": ""
             },
             "sync": {
@@ -362,12 +362,12 @@
         "exportNewStronghold": "导出一个新的Stronghold",
         "enableDeepLinks": "启用深链接",
         "enableDeveloperMode": "打开开发者模式",
-        "enableNotifications": "打开通知功能",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "导出状态",
         "outsourceProofOfWork": "外包工作证明",
         "unlock": "解锁",
         "update_firefly": "更新Firefly",
-        "install_firefly": "安装Firefly",
+        "restart_now": "Restart now",
         "save_backup": "保存备份",
         "customize_account": "自定义你的账户",
         "sync_account": "同步账户",
@@ -427,7 +427,7 @@
         "accounts": "帐户",
         "automaticNodeSelection": "自动选择节点",
         "manualNodeSelection": "手动选择节点",
-        "profiles": "个人信息",
+        "profiles": "用户配置",
         "developerProfile": "开发者模式",
         "dev": "开发者",
         "create_account": "创建一个账户",
@@ -448,6 +448,12 @@
     "notifications": {
         "valueTx": "帐户 {{account}} 收到 {{value}}",
         "confirmed": "帐户 {{account}} 的 {{value}} 转出交易已确认",
-        "failed": "帐户 {{account}} 的 {{value}} 转出交易未能成功。"
+        "failed": "帐户 {{account}} 的 {{value}} 转出交易未能成功。",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

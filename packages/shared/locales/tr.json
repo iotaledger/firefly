@@ -34,7 +34,7 @@
         "setup": {
             "title": "Cüzdanınızı oluşturun",
             "body": "Yeni bir cüzdan oluşturabilir veya zaten var olan cüzdanınızı ekleyebilirsiniz.",
-            "profile_name": "Profile Name"
+            "profile_name": "Profil ismi"
         },
         "password": {
             "title": "Şifre oluşturun",
@@ -321,7 +321,7 @@
             "node_address": "Node adresi",
             "optional_username": "Kullanıcı adı (opsiyonel)",
             "optional_password": "Şifre (opsiyonel)",
-            "set_as_primary_node": "Set as primary node"
+            "set_as_primary_node": "Birincil düğüm olarak ayarla"
         }
     },
     "actions": {
@@ -329,7 +329,7 @@
         "back": "Geri",
         "cancel": "İptal",
         "close": "Çıkış",
-        "dismiss": "Dismiss",
+        "dismiss": "Vazgeç",
         "save": "Kaydet",
         "import_seed": "Mevcut bir Seed'i içe aktarın",
         "import_wallet": "Mevcut cüzdanı içe aktar",
@@ -362,15 +362,15 @@
         "exportNewStronghold": "Yeni bir Stronghold dışa aktarın",
         "enableDeepLinks": "Derin bağlantıları etkinleştir",
         "enableDeveloperMode": "Geliştirici modunu etkinleştir",
-        "enableNotifications": "Bildirimleri etkinleştir",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "State dışa aktarın",
         "outsourceProofOfWork": "Dış kaynak iş gücü kanıtı",
         "unlock": "Kilidi Aç",
-        "update_firefly": "Update Firefly",
-        "install_firefly": "Install Firefly",
-        "save_backup": "Save backup",
-        "customize_account": "Customise account",
-        "sync_account": "Sync account",
+        "update_firefly": "Firefly'ı güncelle",
+        "restart_now": "Restart now",
+        "save_backup": "Yedeği kaydet",
+        "customize_account": "Hesabı özelleştir",
+        "sync_account": "Hesabı senkronize et",
         "view_address_history": "View address history",
         "delete_account": "Hesabı sil",
         "max": "Max",
@@ -421,25 +421,25 @@
         "light_theme": "Aydınlık tema",
         "dark_theme": "Karanlık tema",
         "total_balance": "Toplam Bakiye",
-        "account_balance": "Account Balance",
+        "account_balance": "Hesap Bakiyesi",
         "incoming": "Gelen",
         "outgoing": "Giden",
         "accounts": "Hesaplar",
         "automaticNodeSelection": "Otomatik düğüm seçimi",
         "manualNodeSelection": "Manuel seçim",
         "profiles": "Profiller",
-        "developerProfile": "Developer Profile",
-        "dev": "Dev",
+        "developerProfile": "Geliştirici hesabı",
+        "dev": "Geliştirici",
         "create_account": "Bir hesap oluşturun",
         "account_name": "Hesap adı",
         "latest_transactions": "Son transferler",
         "transactions": "Transferler",
         "security": "Güvenlik",
         "account_address": "Hesap adresi",
-        "nodes": "Nodes"
+        "nodes": "Düğümler"
     },
     "dates": {
-        "today": "Today",
+        "today": "Bugün",
         "days_ago": "{time, plural, one {# day} other {# days}} ago",
         "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
         "months_ago": "{time, plural, one {# month} other {# months}} ago",
@@ -448,6 +448,12 @@
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
         "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed"
+        "failed": "Outgoing {{value}} from {{account}} has failed",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }
