@@ -216,7 +216,15 @@ export const initialiseListeners = () => {
             const { payload: { accountId, address, balanceChange } } = response;
 
             updateAccountAfterBalanceChange(accountId, address, balanceChange.received, balanceChange.spent)
-            updateBalanceOverview(balanceChange.received, balanceChange.spent);
+
+            const { balanceOverview } = get(wallet);
+            const overview = get(balanceOverview);
+
+            const incoming = overview.incomingRaw + balanceChange.received;
+            const outgoing = overview.outgoingRaw + balanceChange.spent;
+            const balance = overview.balanceRaw - balanceChange.spent + balanceChange.received
+
+            updateBalanceOverview(balance, incoming, outgoing);
 
         },
         onError(error) {
@@ -324,52 +332,20 @@ export const getLatestMessages = (accounts: Account[], count = 10): Message[] =>
 }
 
 /**
- * Sets balance overview
+ * Updates balance overview 
  * 
- * @method setBalanceOverview
+ * @method updateBalanceOverview
  * 
- * @param {number} balance 
+ * @param {number} balance
  * @param {number} incoming 
  * @param {number} outgoing
  * 
  * @returns {void} 
  */
-export const setBalanceOverview = (balance: number, incoming: number, outgoing: number): void => {
-    const { balanceOverview } = get(wallet);
-
-    balanceOverview.set({
-        incoming: formatUnit(incoming, 2),
-        incomingRaw: incoming,
-        outgoing: formatUnit(outgoing, 2),
-        outgoingRaw: outgoing,
-        balance: formatUnit(balance, 2),
-        balanceRaw: balance,
-        balanceFiat: `${convertToFiat(
-            balance,
-            get(currencies)[CurrencyTypes.USD],
-            get(exchangeRates)[get(activeProfile).settings.currency]
-        )} ${get(activeProfile).settings.currency}`,
-    });
-};
-
-/**
- * Updates balance overview 
- * 
- * @method updateBalanceOverview
- * 
- * @param {number} received 
- * @param {number} spent
- * 
- * @returns {void} 
- */
-export const updateBalanceOverview = (received: number, spent: number): void => {
+export const updateBalanceOverview = (balance: number, incoming: number, outgoing: number): void => {
     const { balanceOverview } = get(wallet);
 
     balanceOverview.update((overview) => {
-        const incoming = overview.incomingRaw + received;
-        const outgoing = overview.outgoingRaw + spent;
-        const balance = overview.balanceRaw - spent + received;
-
         return Object.assign({}, overview, {
             incoming: formatUnit(incoming, 2),
             incomingRaw: incoming,

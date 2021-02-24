@@ -2,7 +2,7 @@
     import { setContext, onMount } from 'svelte'
     import { get, derived } from 'svelte/store'
     import { updateProfile } from 'shared/lib/profile'
-    import { api, getLatestMessages, initialiseListeners, selectedAccountId, wallet, updateAccounts, setBalanceOverview } from 'shared/lib/wallet'
+    import { api, getLatestMessages, initialiseListeners, selectedAccountId, wallet, updateAccounts, updateBalanceOverview } from 'shared/lib/wallet'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { activeProfile } from 'shared/lib/profile'
     import { formatUnit } from 'shared/lib/units'
@@ -96,7 +96,7 @@
                             accounts.update((accounts) => [...accounts, account])
 
                             if (idx === accountsResponse.payload.length - 1) {
-                                setBalanceOverview(_totalBalance.balance, _totalBalance.incoming, _totalBalance.outgoing)
+                                updateBalanceOverview(_totalBalance.balance, _totalBalance.incoming, _totalBalance.outgoing)
                             }
                         } else {
                             console.error(err)
