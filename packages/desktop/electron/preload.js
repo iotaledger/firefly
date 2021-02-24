@@ -4,6 +4,7 @@ const DeepLinkManager = require('./lib/deepLinkManager')
 const NotificationManager = require('./lib/notificationManager')
 const { ipcRenderer, contextBridge } = require('electron')
 const { proxyApi } = require('../../shared/lib/walletApi')
+const { menuState } = require('./lib/menuState')
 
 let activeProfileId = null
 
@@ -75,9 +76,12 @@ const Electron = {
      * @returns {undefined}
      */
     updateMenu: (attribute, value) => {
-        ipcRenderer.invoke('menu-update', {
-            [attribute]: value
-        })
+        console.log(menuState)
+        if (Object.keys(menuState).includes(attribute)) {
+            ipcRenderer.invoke('menu-update', {
+                [attribute]: value
+            })
+        }
     },
     /**
      * Add native window wallet event listener

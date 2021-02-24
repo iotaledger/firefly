@@ -1,43 +1,7 @@
 import { app, Menu, ipcMain, shell } from 'electron'
 import { getWindow, openAboutWindow } from '../main'
 import { WalletRoutes } from 'shared/lib/typings/routes'
-
-let state = {
-    loggedIn: false,
-    enabled: true,
-    strings: {
-        about: "About Firefly",
-        checkForUpdates: "Check for Updates",
-        settings: "Settings",
-        generalSettings: "General Settings",
-        security: "Security",
-        advancedSettings: "Advanced Settings",
-        errorLog: "Error Log",
-        logout: "Log Out",
-        hide: "Hide",
-        hideOthers: "Hide Others",
-        showAll: "Show All",
-        quit: "Quit",
-        edit: "Edit",
-        undo: "Undo",
-        redo: "Redo",
-        cut: "Cut",
-        copy: "Copy",
-        paste: "Paste",
-        selectAll: "Select All",
-        wallet: "Wallet",
-        send: "Send Funds",
-        receive: "Receive Funds",
-        addAccount: "Add Account",
-        help: "Help",
-        troubleshoot: "Troubleshoot",
-        faq: "FAQ",
-        documentation: "Documentation",
-        discord: "Discord",
-        reportAnIssue: "Report an Issue"
-    }
-}
-
+import { menuState as state } from './menuState'
 /**
  * Creates a native menu tree and applies it to the application window
  */
