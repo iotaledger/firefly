@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Atur dompet Anda",
-            "body": "Anda bisa membuat dompet baru atau mengimpornya."
+            "body": "Anda bisa membuat dompet baru atau mengimpornya.",
+            "profile_name": "Profile Name"
         },
         "password": {
             "title": "Buat kata sandi",

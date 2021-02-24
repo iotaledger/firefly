@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "지갑을 설정하기",
-            "body": "새로운 지갑을 만들거나, 기존의 지갑을 불러올 수 있습니다."
+            "body": "새로운 지갑을 만들거나, 기존의 지갑을 불러올 수 있습니다.",
+            "profile_name": "Profile Name"
         },
         "password": {
             "title": "비밀번호 만들기",
@@ -64,7 +65,7 @@
             "body_1": "정확한 순서에 유의하며 '복구문장'을 적으세요.",
             "body_2": "'복구문장'을 안전하게 보관하고 누구와도 공유하지 마세요.",
             "reveal_recovery_phrase": "'복구문장' 드러내기",
-            "hide_recovery_phrase": "Hide recovery phrase"
+            "hide_recovery_phrase": "복원 문구 숨기기"
         },
         "verify_recovery_phrase": {
             "title": "'복구문장'이 정확한지 확인하세요.",
@@ -175,12 +176,12 @@
                 "description": ""
             },
             "changePincode": {
-                "title": "Change PIN code",
+                "title": "PIN 번호 변경",
                 "description": "",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "currentPincode": "기존 PIN 번호",
+                "newPincode": "새 PIN 번호",
+                "confirmNewPincode": "새 PIN 번호 확인",
+                "action": "PIN 번호 변경"
             },
             "resyncAccounts": {
                 "title": "계정 동기화",
@@ -203,7 +204,7 @@
                 "description": ""
             },
             "configureNodeList": {
-                "title": "Configure node list",
+                "title": "노드 목록 구성",
                 "description": ""
             },
             "proofOfWork": {
@@ -273,8 +274,8 @@
                 "confirmation_rate": "승인율"
             },
             "profile_modal": {
-                "all_settings": "All settings",
-                "logout": "Log out"
+                "all_settings": "전체 설정",
+                "logout": "로그아웃"
             }
         }
     },
@@ -315,12 +316,12 @@
             "current_balance": "현재 잔액: {balance}"
         },
         "node": {
-            "title_add": "Add a node",
-            "title_details": "Node details",
-            "node_address": "Node address",
-            "optional_username": "Username (optional)",
-            "optional_password": "Password (optional)",
-            "set_as_primary_node": "Set as primary node"
+            "title_add": "노드 추가",
+            "title_details": "노드 세부사항",
+            "node_address": "노드 주소",
+            "optional_username": "사용자 이름 (선택사항)",
+            "optional_password": "비밀번호 (선택사항)",
+            "set_as_primary_node": "주 노드로 설정"
         }
     },
     "actions": {
@@ -366,14 +367,14 @@
         "outsourceProofOfWork": "원격 작업증명 수행하기",
         "unlock": "잠금해제하기",
         "update_firefly": "'파이어플라이' 업데이트하기",
-        "install_firefly": "Install Firefly",
+        "install_firefly": "Firefly 설치하기",
         "save_backup": "백업 저장하기",
         "customize_account": "취향대로 계정 설정하기",
         "sync_account": "계정 동기화하기",
         "view_address_history": "주소이력 보기",
         "delete_account": "계정 삭제하기",
-        "max": "Max",
-        "add_node": "Add node"
+        "max": "최대",
+        "add_node": "노드 추가"
     },
     "general": {
         "password": "비밀번호",
@@ -427,15 +428,15 @@
         "automaticNodeSelection": "노드 자동선택",
         "manualNodeSelection": "노드 수동선택",
         "profiles": "프로필",
-        "developerProfile": "Developer Profile",
-        "dev": "Dev",
+        "developerProfile": "개발자 프로필",
+        "dev": "개발",
         "create_account": "계정 만들기",
         "account_name": "계정 이름",
         "latest_transactions": "최신 거래",
         "transactions": "거래내역",
         "security": "보안",
         "account_address": "계정 주소",
-        "nodes": "Nodes"
+        "nodes": "노드"
     },
     "dates": {
         "today": "오늘",
@@ -445,8 +446,8 @@
         "years_ago": "{time, plural, one {# 년} other {# 년}} 전"
     },
     "notifications": {
-        "valueTx": "Receiving {{value}} to {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed"
+        "valueTx": "계정 {{account}}에 {{value}}를 받는 중",
+        "confirmed": "계정 {{account}}에서 {{value}}를 보내는 거래가 성공적으로 확인되었습니다",
+        "failed": "계정 {{account}}에서 {{value}}를 보내는 거래가 실패하였습니다"
     }
 }

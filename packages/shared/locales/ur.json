@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Set up your wallet",
-            "body": "You can create a new wallet or import an existing one."
+            "body": "You can create a new wallet or import an existing one.",
+            "profile_name": "Profile Name"
         },
         "password": {
             "title": "Create a password",

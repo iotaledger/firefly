@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "設定您的錢包",
-            "body": "您可以選擇 建立一個新的 或 匯入一個現有的 錢包"
+            "body": "您可以選擇 建立一個新的 或 匯入一個現有的 錢包",
+            "profile_name": "Profile Name"
         },
         "password": {
             "title": "建立密碼",

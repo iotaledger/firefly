@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Thiết lập Ví của bạn",
-            "body": "Bạn có thể tạo một Ví mới hoặc nhập vào từ một Ví hiện có."
+            "body": "Bạn có thể tạo một Ví mới hoặc nhập vào từ một Ví hiện có.",
+            "profile_name": "Profile Name"
         },
         "password": {
             "title": "Tạo mật khẩu",
@@ -63,8 +64,8 @@
             "title": "Cụm từ hồi phục tài khoản ví",
             "body_1": "Ghi lại ra giấy một cách cẩn thận những từ sau đây chính xác theo thứ tự.",
             "body_2": "Cất giữ cụm từ khôi phục tài khoản của bạn ở nơi riêng tư và an toàn. Đừng chia sẻ nó với bất kỳ ai.",
-            "reveal_recovery_phrase": "Reveal recovery phrase",
-            "hide_recovery_phrase": "Hide recovery phrase"
+            "reveal_recovery_phrase": "Hiển thị cụm từ khôi phục ví",
+            "hide_recovery_phrase": "Ẩn cụm từ khôi phục ví"
         },
         "verify_recovery_phrase": {
             "title": "Xác thực cụm từ phục hồi tài khoản ví",
@@ -175,12 +176,12 @@
                 "description": ""
             },
             "changePincode": {
-                "title": "Change PIN code",
+                "title": "Thay đổi mã PIN",
                 "description": "",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "currentPincode": "Mã PIN hiện tại",
+                "newPincode": "Mã PIN mới",
+                "confirmNewPincode": "Xác nhận mã PIN mới",
+                "action": "Thay đổi mã PIN"
             },
             "resyncAccounts": {
                 "title": "Đồng bộ lại các tài khoản",
@@ -203,7 +204,7 @@
                 "description": ""
             },
             "configureNodeList": {
-                "title": "Configure node list",
+                "title": "Cấu hình danh sách node",
                 "description": ""
             },
             "proofOfWork": {
@@ -273,8 +274,8 @@
                 "confirmation_rate": "Tỷ lệ xác nhận"
             },
             "profile_modal": {
-                "all_settings": "All settings",
-                "logout": "Log out"
+                "all_settings": "Tất cả tùy chọn cài đặt",
+                "logout": "Đăng xuất"
             }
         }
     },
@@ -315,12 +316,12 @@
             "current_balance": "Current balance: {balance}"
         },
         "node": {
-            "title_add": "Add a node",
-            "title_details": "Node details",
-            "node_address": "Node address",
-            "optional_username": "Username (optional)",
-            "optional_password": "Password (optional)",
-            "set_as_primary_node": "Set as primary node"
+            "title_add": "Thêm Node",
+            "title_details": "Các chi tiết node",
+            "node_address": "Đia chỉ node",
+            "optional_username": "Tên người dùng (tùy chọn)",
+            "optional_password": "Mật khẩu (tùy chọn)",
+            "set_as_primary_node": "Thiết lập node chính"
         }
     },
     "actions": {
@@ -366,14 +367,14 @@
         "outsourceProofOfWork": "Outsource proof of work",
         "unlock": "Unlock",
         "update_firefly": "Update Firefly",
-        "install_firefly": "Install Firefly",
+        "install_firefly": "Cài đặt Firefly",
         "save_backup": "Save backup",
         "customize_account": "Customise account",
         "sync_account": "Sync account",
         "view_address_history": "View address history",
         "delete_account": "Delete account",
-        "max": "Max",
-        "add_node": "Add node"
+        "max": "Tối đa",
+        "add_node": "Thêm Node"
     },
     "general": {
         "password": "Mật khẩu",
@@ -427,15 +428,15 @@
         "automaticNodeSelection": "Automatic node selection",
         "manualNodeSelection": "Manual node selection",
         "profiles": "Profiles",
-        "developerProfile": "Developer Profile",
-        "dev": "Dev",
+        "developerProfile": "Chế độ nhà phát triển",
+        "dev": "Nhà phát triển",
         "create_account": "Create an account",
         "account_name": "Account name",
         "latest_transactions": "Latest Transactions",
         "transactions": "Transactions",
         "security": "Bảo mật",
         "account_address": "Account Address",
-        "nodes": "Nodes"
+        "nodes": "Các node"
     },
     "dates": {
         "today": "Today",
@@ -445,8 +446,8 @@
         "years_ago": "{time, plural, one {# year} other {# years}} ago"
     },
     "notifications": {
-        "valueTx": "Receiving {{value}} to {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed"
+        "valueTx": "Đang nhận {{value}} từ {{account}}",
+        "confirmed": "Đang gửi đi {{value}} từ {{account}} đã được xác nhận",
+        "failed": "Đang gửi đi {{value}} từ {{account}} đã thất bại"
     }
 }

@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Configuración de su cartera",
-            "body": "Puede crear una cartera nueva o importar una existente."
+            "body": "Puede crear una cartera nueva o importar una existente.",
+            "profile_name": "Profile Name"
         },
         "password": {
             "title": "Crear una contraseña",
@@ -64,7 +65,7 @@
             "body_1": "Escriba cuidadosamente las palabras en el orden exacto.",
             "body_2": "Mantenga su frase de recuperación guardada de forma segura. No la comparta con nadie.",
             "reveal_recovery_phrase": "Mostrar frase de recuperación",
-            "hide_recovery_phrase": "Hide recovery phrase"
+            "hide_recovery_phrase": "Ocultar frase de recuperación"
         },
         "verify_recovery_phrase": {
             "title": "Verificar frase de recuperación",
@@ -175,12 +176,12 @@
                 "description": ""
             },
             "changePincode": {
-                "title": "Change PIN code",
+                "title": "Cambiar código PIN",
                 "description": "",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "currentPincode": "PIN actual",
+                "newPincode": "Nuevo PIN",
+                "confirmNewPincode": "Confirmar nuevo PIN",
+                "action": "Cambiar PIN"
             },
             "resyncAccounts": {
                 "title": "Resincronizar cuentas",
@@ -203,7 +204,7 @@
                 "description": ""
             },
             "configureNodeList": {
-                "title": "Configure node list",
+                "title": "Configurar lista de nodos",
                 "description": ""
             },
             "proofOfWork": {
@@ -273,8 +274,8 @@
                 "confirmation_rate": "Tasa de confirmación"
             },
             "profile_modal": {
-                "all_settings": "All settings",
-                "logout": "Log out"
+                "all_settings": "Todos los ajustes",
+                "logout": "Cerrar sesión"
             }
         }
     },
@@ -315,12 +316,12 @@
             "current_balance": "Saldo actual: {balance}"
         },
         "node": {
-            "title_add": "Add a node",
-            "title_details": "Node details",
-            "node_address": "Node address",
-            "optional_username": "Username (optional)",
-            "optional_password": "Password (optional)",
-            "set_as_primary_node": "Set as primary node"
+            "title_add": "Añadir un nodo",
+            "title_details": "Detalles del nodo",
+            "node_address": "Dirección del nodo",
+            "optional_username": "Nombre de usuario (opcional)",
+            "optional_password": "Contraseña (opcional)",
+            "set_as_primary_node": "Establecer como nodo principal"
         }
     },
     "actions": {
@@ -366,14 +367,14 @@
         "outsourceProofOfWork": "Externalizar prueba de trabajo",
         "unlock": "Desbloquear",
         "update_firefly": "Actualizar Firefly",
-        "install_firefly": "Install Firefly",
+        "install_firefly": "Instalar Firefly",
         "save_backup": "Guardar respaldo",
         "customize_account": "Personalizar cuenta",
         "sync_account": "Sincronizar cuenta",
         "view_address_history": "Ver historial de direcciones",
         "delete_account": "Eliminar cuenta",
-        "max": "Max",
-        "add_node": "Add node"
+        "max": "Máx",
+        "add_node": "Añadir nodo"
     },
     "general": {
         "password": "Contraseña",
@@ -427,7 +428,7 @@
         "automaticNodeSelection": "Selección automática de nodo",
         "manualNodeSelection": "Selección manual de nodo",
         "profiles": "Perfiles",
-        "developerProfile": "Developer Profile",
+        "developerProfile": "Perfil de desarrollador",
         "dev": "Dev",
         "create_account": "Crear una cuenta",
         "account_name": "Nombre de cuenta",
@@ -435,7 +436,7 @@
         "transactions": "Transacciones",
         "security": "Seguridad",
         "account_address": "Dirección de la cuenta",
-        "nodes": "Nodes"
+        "nodes": "Nodos"
     },
     "dates": {
         "today": "Hoy",
@@ -445,8 +446,8 @@
         "years_ago": "hace {time, plural, one {# año} other {# años}}"
     },
     "notifications": {
-        "valueTx": "Receiving {{value}} to {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed"
+        "valueTx": "Recibiendo {{value}} a {{account}}",
+        "confirmed": "Se ha confirmado el {{value}} saliente de {{account}}",
+        "failed": "Ha fallado el {{value}} saliente de {{account}}"
     }
 }
