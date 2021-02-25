@@ -2,7 +2,7 @@
     import { setContext, onMount } from 'svelte'
     import { get, derived } from 'svelte/store'
     import { updateProfile } from 'shared/lib/profile'
-    import { api, getLatestMessages, initialiseListeners, selectedAccountId, updateAccounts, wallet } from 'shared/lib/wallet'
+    import { api, getLatestMessages, initialiseListeners, selectedAccountId, updateAccounts, wallet, profileType, ProfileType } from 'shared/lib/wallet'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { activeProfile } from 'shared/lib/profile'
     import { formatUnit } from 'shared/lib/units'
@@ -32,6 +32,7 @@
     setContext('selectedAccount', selectedAccount)
 
     let isGeneratingAddress = false
+    let isSoftwareProfile = true
 
     function getAccountMeta(accountId, callback) {
         api.getBalance(accountId, {
@@ -157,18 +158,22 @@
             })
         }
 
-        api.getStrongholdStatus({
-            onSuccess(strongholdStatusResponse) {
-                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({ type: 'password', props: { onSuccess: _generate } })
-                } else {
-                    _generate()
-                }
-            },
-            onError(error) {
-                console.error(error)
-            },
-        })
+        if (isSoftwareProfile) {
+            api.getStrongholdStatus({
+                onSuccess(strongholdStatusResponse) {
+                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                        openPopup({ type: 'password', props: { onSuccess: _generate } })
+                    } else {
+                        _generate()
+                    }
+                },
+                onError(error) {
+                    console.error(error)
+                },
+            })
+        } else {
+            _generate()
+        }
     }
 
     function syncAccounts(payload) {
@@ -221,18 +226,22 @@
             }
         )
 
-        api.getStrongholdStatus({
-            onSuccess(strongholdStatusResponse) {
-                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({ type: 'password', props: { onSuccess: _create } })
-                } else {
-                    _create()
-                }
-            },
-            onError(error) {
-                console.error(error)
-            },
-        })
+        if (isSoftwareProfile) {
+            api.getStrongholdStatus({
+                onSuccess(strongholdStatusResponse) {
+                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                        openPopup({ type: 'password', props: { onSuccess: _create } })
+                    } else {
+                        _create()
+                    }
+                },
+                onError(error) {
+                    console.error(error)
+                },
+            })
+        } else {
+            _create()
+        }
     }
 
     function onSend(senderAccountId, receiveAddress, amount) {
@@ -271,18 +280,22 @@
             )
         }
 
-        api.getStrongholdStatus({
-            onSuccess(strongholdStatusResponse) {
-                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({ type: 'password', props: { onSuccess: _send } })
-                } else {
-                    _send()
-                }
-            },
-            onError(error) {
-                console.error(error)
-            },
-        })
+        if (isSoftwareProfile) {
+            api.getStrongholdStatus({
+                onSuccess(strongholdStatusResponse) {
+                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                        openPopup({ type: 'password', props: { onSuccess: _send } })
+                    } else {
+                        _send()
+                    }
+                },
+                onError(error) {
+                    console.error(error)
+                },
+            })
+        } else {
+            _send()
+        }
     }
 
     function onInternalTransfer(senderAccountId, receiverAccountId, amount) {
@@ -310,18 +323,22 @@
             })
         }
 
-        api.getStrongholdStatus({
-            onSuccess(strongholdStatusResponse) {
-                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({ type: 'password', props: { onSuccess: _internalTransfer } })
-                } else {
-                    _internalTransfer()
-                }
-            },
-            onError(error) {
-                console.error(error)
-            },
-        })
+        if (isSoftwareProfile) {
+            api.getStrongholdStatus({
+                onSuccess(strongholdStatusResponse) {
+                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                        openPopup({ type: 'password', props: { onSuccess: _internalTransfer } })
+                    } else {
+                        _internalTransfer()
+                    }
+                },
+                onError(error) {
+                    console.error(error)
+                },
+            })
+        } else {
+            _internalTransfer()
+        }
     }
 
     function onSetAlias(newAlias) {
@@ -384,6 +401,8 @@
             deepLinkRequestActive.set(false)
         }
     }
+
+    $: isSoftwareProfile = $profileType === ProfileType.Software
 
     onMount(() => {
         getAccounts()
