@@ -1,14 +1,14 @@
 {
     "views": {
         "onboarding_1": {
-            "title": "Send, Receive & Manage your IOTA",
-            "body": "Firefly is a secure and easy-to-use IOTA wallet."
+            "title": "IOTAトークンの送信、受信、管理",
+            "body": "Firefly は安全で使いやすいIOTAウォレットです。"
         },
         "legal": {
-            "title": "Legal",
-            "body": "Please review the Privacy Policy and Terms of Service.",
+            "title": "法的事項",
+            "body": "プライバシーポリシーと利用規約に同意します",
             "privacy_policy": {
-                "title": "Privacy Policy",
+                "title": "プライバシーポリシー",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -17,7 +17,7 @@
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "terms_of_service": {
-                "title": "Terms of Service",
+                "title": "サービス利用規約",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -28,16 +28,17 @@
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
         "language": {
-            "title": "Language & appearance",
-            "body": "Choose your wallet’s language and theme"
+            "title": "言語と外観",
+            "body": "ウォレットの言語とテーマを選択してください"
         },
         "setup": {
-            "title": "Set up your wallet",
-            "body": "You can create a new wallet or import an existing one."
+            "title": "ウォレットを準備する",
+            "body": "新しいウォレットを作成するか、既存のウォレットをインポートすることができます。",
+            "profile_name": "プロフィール名"
         },
         "password": {
-            "title": "Create a password",
-            "body": "You will be asked to enter your password to send tokens from your wallet. You need a strong password to protect your funds."
+            "title": "パスワードを作成します",
+            "body": "ウォレットからトークンを送信するためにパスワードを入力するよう求められます。資金を保護するためには強力なパスワードが必要です。"
         },
         "protect": {
             "title": "Protect your wallet",
@@ -45,214 +46,214 @@
             "body_2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Set up PIN code",
-            "body_1": "Enter a 6-digit PIN below. You will be asked to enter your pin to login to your wallet.",
-            "body_2": "You can use numbers only."
+            "title": "PIN コードを設定",
+            "body_1": "6桁のPINを入力してください。ウォレットにログインするには、ピンを入力してください。",
+            "body_2": "数字のみ使用できます。"
         },
         "confirm_pin": {
-            "title": "Verify your PIN code",
-            "body": "Re-enter your PIN code to proceed."
+            "title": "PINコードを選択します",
+            "body": "続行するにはPINコードを入力してください"
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body_1": "You will now be shown a recovery phrase.",
-            "body_2": "Do not share this phrase with anyone. Your recovery phrase can be used to access your tokens from anywhere.",
-            "body_3": "If you lose your recovery phrase, you may lose your funds."
+            "title": "シードをバックアップしてください。",
+            "body_1": "復元フレーズが表示されます。",
+            "body_2": "このフレーズを誰とも共有しないでください。あなたの復元フレーズはどこからでもあなたのトークンにアクセスするために使用できます。",
+            "body_3": "復元フレーズを失った場合、資金が失われる可能性があります。"
         },
         "recovery_phrase": {
-            "title": "Recovery phrase",
-            "body_1": "Carefully write down the words in the exact order.",
-            "body_2": "Keep your recovery phrase private and safely stored. Do not share it with anyone.",
-            "reveal_recovery_phrase": "Reveal recovery phrase",
-            "hide_recovery_phrase": "Hide recovery phrase"
+            "title": "復元フレーズ",
+            "body_1": "慎重に正確な順序で単語を書き留めます。",
+            "body_2": "復元フレーズをプライベートかつ安全に保管してください。誰とも共有しないでください。",
+            "reveal_recovery_phrase": "復元フレーズを表示",
+            "hide_recovery_phrase": "復元フレーズを隠す"
         },
         "verify_recovery_phrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Select the words in the correct order."
+            "title": "復元フレーズを確認",
+            "body": "フレーズを正しく書き留めたことを確認しましょう。正しい順序で単語を選択してください。"
         },
         "backup_wallet": {
-            "title": "Back up to a Stronghold file",
-            "body": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup."
+            "title": "Stronghold ファイルにバックアップする",
+            "body": "ウォレットを Stronghold ファイルにバックアップするにはパスワードを入力してください。パスワードはバックアップの暗号化に使用されます。"
         },
         "recovery_phrase_saved": {
-            "title": "Successfully backed up",
-            "body": "You have backed up your wallet to a Stronghold."
+            "title": "バックアップが完了しました",
+            "body": "ウォレットを Stronghold にバックアップしました"
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your wallet is ready to go."
+            "title": "おめでとうございます",
+            "body": "ウォレットの準備が整いました。"
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have a recovery phrase or Stronghold back up, you can import it here."
+            "title": "ウォレットをインポートしてください。",
+            "body": "復元フレーズや Stronghold を使っている場合は、こちらからインポートできます。"
         },
         "import_from_text": {
-            "title": "Restore your wallet with a recovery phrase or seed",
-            "body_1": "A recovery phrase is 24 words long. This is used to recover an existing Firefly wallet.",
-            "body_2": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body_3": "Enter your seed or recovery phrase"
+            "title": "復元フレーズまたはシードでウォレットを復元する",
+            "body_1": "復元フレーズは24語です。既存のFireflyウォレットを復元するために使用されます。",
+            "body_2": "シードは81文字で構成されています。これは古いTrinityウォレットから復元するために使用されます。",
+            "body_3": "リカバリーフレーズを入力してください"
         },
         "import_from_file": {
-            "title": "Restore your wallet from a backup file",
-            "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "バックアップファイルからウォレットを復元する",
+            "body": "ウォレットを復元するためにバックアップファイルをインポートします。バックアップは、Stronghold(.stronghold)またはTrinity SeedVault(.kdbx)のいずれかにすることができます。"
         },
         "import_backup_password": {
-            "title": "Restore your wallet from a SeedVault or Stronghold",
-            "body_1": "Please enter your backup password.",
-            "body_2": "This is the password you set when you first created your backup."
+            "title": "SeedVaultまたはStrongholdからウォレットを復元する",
+            "body_1": "パスワードを入力してください。",
+            "body_2": "このパスワードは、バックアップを最初に作成したときに設定したものです。"
         },
         "import_success": {
-            "title": "You have successfully recovered your backup",
-            "body": "You can now set up your new wallet."
+            "title": "バックアップを正常に復元しました",
+            "body": "新しいウォレットを設定できるようになりました。"
         },
         "migrate": {
-            "title": "Migrate your funds",
-            "body_1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
-            "new": "Your new wallet"
+            "title": "資金を移行",
+            "body_1": "これはあなたの新しいウォレットに資金を転送する自動化されたプロセスです。セキュリティを弱める使用済みアドレスを確認します。",
+            "body_2": "しばらく時間がかかる場合があります。移行中にデバイスをオフにしないでください。",
+            "existing": "あなたの古いウォレット",
+            "new": "あなたの新しいウォレット"
         },
         "migrate_failed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "残高",
+            "body": "残高は正しいですか？"
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "設定",
             "generalSettings": {
-                "title": "General Settings",
+                "title": "全般設定",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "security": {
-                "title": "Security",
+                "title": "セキュリティ",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
+                "title": "高度な設定",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Help & Information",
+                "title": "ヘルプ & 情報",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profile": {
-                "title": "Profile",
+                "title": "プロフィール",
                 "description": ""
             },
             "sync": {
-                "title": "Sync accounts",
+                "title": "アカウントを同期",
                 "description": ""
             },
             "theme": {
-                "title": "Theme",
+                "title": "テーマ：",
                 "description": ""
             },
             "language": {
-                "title": "Language",
+                "title": "言語:",
                 "description": ""
             },
             "currency": {
-                "title": "Currency",
+                "title": "通貨：",
                 "description": ""
             },
             "notifications": {
-                "title": "Notifications",
+                "title": "通知の設定",
                 "description": ""
             },
             "exportStronghold": {
-                "title": "Export Stronghold",
+                "title": "Stronghold をエクスポート",
                 "description": ""
             },
             "appLock": {
-                "title": "App Lock",
+                "title": "アプリをロック",
                 "description": ""
             },
             "changePassword": {
-                "title": "Change password",
+                "title": "パスワードの変更",
                 "description": ""
             },
             "changePincode": {
-                "title": "Change PIN code",
+                "title": "PINコードを変更",
                 "description": "",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "currentPincode": "現在のPIN",
+                "newPincode": "新しいPIN",
+                "confirmNewPincode": "新しいPINの確認",
+                "action": "PINを変更"
             },
             "resyncAccounts": {
-                "title": "Resync accounts",
+                "title": "アカウントの再同期",
                 "description": ""
             },
             "resetWallet": {
-                "title": "Reset wallet",
+                "title": "ウォレットをリセットします。",
                 "description": ""
             },
             "deepLinks": {
-                "title": "Deep links",
+                "title": "ディープ リンク",
                 "description": ""
             },
             "developerMode": {
-                "title": "Developer mode",
+                "title": "開発者モード",
                 "description": ""
             },
             "nodeSettings": {
-                "title": "Node settings",
+                "title": "ノードの設定",
                 "description": ""
             },
             "configureNodeList": {
-                "title": "Configure node list",
+                "title": "ノードリストの設定",
                 "description": ""
             },
             "proofOfWork": {
-                "title": "Proof of work",
+                "title": "プルーフ・オブ・ワーク",
                 "description": ""
             },
             "errorLog": {
-                "title": "Error log",
+                "title": "エラーログ",
                 "description": ""
             },
             "stateExport": {
-                "title": "State export",
+                "title": "状態のエクスポート",
                 "description": ""
             },
             "troubleshoot": {
-                "title": "Troubleshoot",
+                "title": "トラブルシューティング",
                 "description": ""
             },
             "documentation": {
-                "title": "Documentation",
+                "title": "ドキュメント",
                 "description": ""
             },
             "faq": {
-                "title": "FAQ",
+                "title": "よくある質問",
                 "description": ""
             },
             "discord": {
-                "title": "Discord",
+                "title": "Discordにてお問い合わせください",
                 "description": ""
             },
             "about": {
-                "title": "About",
+                "title": "このプログラムについて",
                 "description": ""
             }
         },
         "login": {
-            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "please_wait": "お待ちください {time, plural, other {# 秒}}",
+            "incorrect_attempts": "{attempts, plural, other {# 間違った attempt}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "up_to_date": "最新",
+                    "out_of_date": "古いバージョンです"
                 },
                 "hardware_device": {
-                    "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "title": "外部デバイス",
+                    "none_detected": "何も検出されませんでした"
                 },
                 "stronghold_status": {
                     "title": "Stronghold Status",
@@ -335,13 +336,13 @@
         "create_wallet": "Create new wallet",
         "save_password": "Save password",
         "use_biometric": "Use biometric security",
-        "setup_pin": "Set up PIN code",
+        "setup_pin": "PIN コードを設定",
         "set_pin": "Set PIN code",
         "confirm_pin": "Confirm PIN code",
         "enter_your_pin": "Enter your PIN",
         "save_backup_file": "Save backup file",
         "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
-        "verify_recovery_phrase": "Verify recovery phrase",
+        "verify_recovery_phrase": "復元フレーズを確認",
         "reveal_recovery_phrase": "Reveal recovery phrase",
         "import_seedvault": "Import SeedVault",
         "check_again": "No, Check Again",
@@ -361,12 +362,12 @@
         "exportNewStronghold": "Export a new Stronghold",
         "enableDeepLinks": "Enable deep links",
         "enableDeveloperMode": "Enable developer mode",
-        "enableNotifications": "Enable notifications",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "Export state",
         "outsourceProofOfWork": "Outsource proof of work",
         "unlock": "Unlock",
         "update_firefly": "Update Firefly",
-        "install_firefly": "Install Firefly",
+        "restart_now": "Restart now",
         "save_backup": "Save backup",
         "customize_account": "Customise account",
         "sync_account": "Sync account",
@@ -433,7 +434,7 @@
         "account_name": "Account name",
         "latest_transactions": "Latest Transactions",
         "transactions": "Transactions",
-        "security": "Security",
+        "security": "セキュリティ",
         "account_address": "Account Address",
         "nodes": "Nodes"
     },
@@ -447,6 +448,12 @@
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
         "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed"
+        "failed": "Outgoing {{value}} from {{account}} has failed",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

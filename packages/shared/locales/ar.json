@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Set up your wallet",
-            "body": "You can create a new wallet or import an existing one."
+            "body": "You can create a new wallet or import an existing one.",
+            "profile_name": "Profile Name"
         },
         "password": {
             "title": "إنشاء كلمة السر",
@@ -143,7 +144,7 @@
                 "description": ""
             },
             "sync": {
-                "title": "Sync accounts",
+                "title": "مزامنة الحساب",
                 "description": ""
             },
             "theme": {
@@ -296,7 +297,7 @@
         "backup": {
             "title": "Last backup: {date}",
             "last_backup": "You last backed up {date}",
-            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
+            "backup_description": "من المهم النسخ الاحتياطي بانتظام للتأكد من أن لديك نسخة من حساباتك وسجل المعاملات.",
             "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
             "not_backed_up": "Not backed up",
             "not_backed_up_description": "You have not backed up your Stronghold"
@@ -361,17 +362,17 @@
         "exportNewStronghold": "Export a new Stronghold",
         "enableDeepLinks": "Enable deep links",
         "enableDeveloperMode": "Enable developer mode",
-        "enableNotifications": "Enable notifications",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "Export state",
         "outsourceProofOfWork": "Outsource proof of work",
         "unlock": "Unlock",
         "update_firefly": "Update Firefly",
-        "install_firefly": "Install Firefly",
+        "restart_now": "Restart now",
         "save_backup": "Save backup",
         "customize_account": "Customise account",
         "sync_account": "Sync account",
         "view_address_history": "View address history",
-        "delete_account": "Delete account",
+        "delete_account": "حذف الحساب",
         "max": "Max",
         "add_node": "Add node"
     },
@@ -428,25 +429,31 @@
         "manualNodeSelection": "Manual node selection",
         "profiles": "Profiles",
         "developerProfile": "Developer Profile",
-        "dev": "Dev",
+        "dev": "المطور",
         "create_account": "Create an account",
-        "account_name": "Account name",
-        "latest_transactions": "Latest Transactions",
-        "transactions": "Transactions",
-        "security": "Security",
+        "account_name": "اسم الحساب",
+        "latest_transactions": "آخر المعاملات",
+        "transactions": "المعاملات",
+        "security": "الحماية",
         "account_address": "Account Address",
-        "nodes": "Nodes"
+        "nodes": "العقد"
     },
     "dates": {
-        "today": "Today",
+        "today": "اليوم",
         "days_ago": "{time, plural, one {# day} other {# days}} ago",
         "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
         "months_ago": "{time, plural, one {# month} other {# months}} ago",
         "years_ago": "{time, plural, one {# year} other {# years}} ago"
     },
     "notifications": {
-        "valueTx": "Receiving {{value}} to {{account}}",
+        "valueTx": "تلقي {{value}} إلى {{account}}",
         "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed"
+        "failed": "Outgoing {{value}} from {{account}} has failed",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

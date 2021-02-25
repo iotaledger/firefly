@@ -2,11 +2,11 @@
     "views": {
         "onboarding_1": {
             "title": "Küldje, fogadja és kezelje IOTA tokenjeit",
-            "body": "A Firefly egy biztonságos és könnyen kezelhető IOTA kriptotárca."
+            "body": "A Firefly egy biztonságos és könnyen kezelhető IOTA tárca."
         },
         "legal": {
             "title": "Jogi nyilatkozat",
-            "body": "Kérjük, olvassa el az Adatvédelmi Szabályzatot és az Általános Szolgáltatási Feltételeket!",
+            "body": "Kérjük, olvassa el az Adatvédelmi szabályzatot és a Felhasználási feltételeket!",
             "privacy_policy": {
                 "title": "Adatvédelmi Szabályzat",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
@@ -29,15 +29,16 @@
         },
         "language": {
             "title": "Nyelv és megjelenés",
-            "body": "Válassza ki a kriptotárcája megjelenítési nyelvét és témáját"
+            "body": "Válassza ki a tárca nyelvét és témáját"
         },
         "setup": {
-            "title": "Állítsa be kriptotárcáját",
-            "body": "Létrehozhat egy új kriptotárcát vagy importálhat egy létező tárcát."
+            "title": "Állítsa be tárcáját",
+            "body": "Létrehozhat egy új kriptotárcát vagy importálhat egy létező tárcát.",
+            "profile_name": "Profilnév"
         },
         "password": {
             "title": "Jelszó létrehozása",
-            "body": "Ahhoz, hogy tokeneket küldjön a kriptotárcájából, meg kell adnia jelszavát. A pénze biztonsága érdekében erős jelszóra van szükség."
+            "body": "A számlájáról való utaláshoz szüksége van jelszóra. Vagyonának biztonsága érdekében erős jelszót használjon."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -46,78 +47,78 @@
         },
         "pin": {
             "title": "PIN-kód beállítása",
-            "body_1": "A lenti mezőbe adjon meg egy 6 szemjegyből álló PIN-kódot! A kriptotárcába történő belépéshez majd mindig meg kell adnia ezt a PIN-kódot.",
+            "body_1": "Adjon meg egy 6 számjegyű PIN kódot! A PIN kódra a tárcába való belépéshez lesz szüksége.",
             "body_2": "Csak számokat használhat."
         },
         "confirm_pin": {
-            "title": "Hitelesítse a PIN-kódját",
-            "body": "A folytatáshoz adja meg újból a PIN-kódját!"
+            "title": "Erősítse meg a PIN kódját",
+            "body": "A folytatáshoz adja meg újból a PIN kódját!"
         },
         "backup": {
-            "title": "Készítsen biztonsági másolatot kriptotárcájáról",
-            "body_1": "A képernyőn most meg fog jelenni a helyreállító kódmondat.",
-            "body_2": "Soha senkivel se ossza meg ezt a kódmondatot! E kódmondat birtokában bárhonnan hozzá lehet férni a tokenjeihez.",
-            "body_3": "Ha elveszti a helyreállító kódmondatát, akkor örökre elveszítheti a pénzét."
+            "title": "Készítsen biztonsági másolatot tárcájáról",
+            "body_1": "Most meg fognak jelenni a számla helyreállításához szükséges szavak.",
+            "body_2": "Soha senkivel ne ossza meg ezeket a helyreállítási szavakat! A helyreállítási szavak ismeretében bárki hozzáférhet a számlaegyenlegéhez.",
+            "body_3": "Ha elveszti a helyreállítási szavakat, örökre elveszítheti számlájának teljes egyenlegét."
         },
         "recovery_phrase": {
-            "title": "Helyreállító kódmondat",
+            "title": "Helyreállítási szavak",
             "body_1": "Különös figyelemmel jegyezze fel a szavakat azok pontos sorrendjében!",
-            "body_2": "Mindig őrizze a helyreállító kódmondatát titkos és biztonságos helyen! Soha senkivel se ossza meg!",
-            "reveal_recovery_phrase": "Helyreállító kódmondat felfedése",
-            "hide_recovery_phrase": "Hide recovery phrase"
+            "body_2": "Mindig őrizze a helyreállítási szavakat titkos és biztonságos helyen! Soha senkivel ne ossza meg!",
+            "reveal_recovery_phrase": "Helyreállítási szavak megjelenítése",
+            "hide_recovery_phrase": "Helyreállítási szavak elrejtése"
         },
         "verify_recovery_phrase": {
-            "title": "Helyreállító kódmondat hitelesítése",
-            "body": "Most ellenőrizzük, hogy helyesen jegyezte-e fel a kódmondatot! Azok pontos sorrendjében válassza ki a szavakat!"
+            "title": "Helyreállítási szavak ellenőrzése",
+            "body": "Most ellenőrizzük, hogy helyesen jegyezte-e fel a helyreállítási szavakat. Válassza ki a szavakat a megfelelő sorrendben!"
         },
         "backup_wallet": {
-            "title": "Stronghold-fájl biztonsági mentése",
-            "body": "Kriptotárcája Stronghold-fájlba történő mentéséhez adja meg a jelszavát! A jelszava a biztonsági mentés titkosítására szolgál."
+            "title": "Stronghold biztonsági mentés",
+            "body": "Tárcája Stronghold-ba történő mentéséhez adja meg a jelszavát! A jelszava a biztonsági mentés titkosítására szolgál."
         },
         "recovery_phrase_saved": {
             "title": "Sikeres biztonsági mentés",
-            "body": "Ön sikeresen biztonsági másolatot készített kriptotárcájáról egy Stronghold-fájlba."
+            "body": "Tárcájáról sikeres biztonsági mentést készített a Stronghold-ba."
         },
         "congratulations": {
             "title": "Gratulálunk",
-            "body": "A kriptotárcája készen áll a használatra."
+            "body": "A tárcája készen áll a használatra."
         },
         "import": {
-            "title": "Kriptotárca importálása",
-            "body": "Ha rendelkezik helyreállító kódmondattal vagy Stronghold biztonsági mentéssel, itt importálhatja kriptotárcáját."
+            "title": "Tárca importálása",
+            "body": "Ha rendelkezik helyreállítási szavakkal vagy Stronghold biztonsági mentéssel, itt importálhatja azokat."
         },
         "import_from_text": {
-            "title": "Állítsa vissza kriptotárcáját helyreállító kódmondattal vagy magértékkel (seed)",
-            "body_1": "A helyreállító kódmondat 24 szóból áll. Egy, már meglévő Firefly-kriptotárca helyreállítására használatos.",
-            "body_2": "A magérték (seed) 81 karakterből áll. Régebbi, Trinity-kriptotárcából történő helyreállításra szolgál.",
-            "body_3": "Adja meg a magértéket (seed) vagy a helyreállító kódmondatot"
+            "title": "Állítsa vissza tárcáját helyreállítási szavak vagy seed használatával",
+            "body_1": "A helyreállítási szavak 24 szóból állnak. Ezekkel lehet egy már meglévő Firefly tárcát visszaállítani.",
+            "body_2": "A seed 81 karakterből áll. Régebbi, Trinity tárcából történő helyreállításra szolgál.",
+            "body_3": "Írja be a seed-et vagy a helyreállítási szavakat"
         },
         "import_from_file": {
-            "title": "Állítsa helyre kriptotárcáját biztonsági mentésből",
-            "body": "Kriptotárcája helyreállításához importáljon egy biztonsági mentést! A biztosnági mentés lehet egy Stronghold-fájl (.stronghold) vagy egy Trinity SeedVault-fájl (.kdbx)."
+            "title": "Állítsa helyre tárcáját biztonsági mentésből",
+            "body": "Tárcáját importálhatja egy meglévő biztonsági mentésből, mely lehet Stronghold (.stronghold) vagy Trinity SeedVault (.kdbx)."
         },
         "import_backup_password": {
             "title": "Állítsa helyre kriptotárcáját SeedVault- vagy Stronghold-fájlból",
-            "body_1": "Kérjük, adja meg a helyreállító jelszavát!",
+            "body_1": "Kérjük, adja meg a biztonsági mentés titkosításának feloldására szolgáló jelszavát!",
             "body_2": "Ez az a jelszó, amelyet a biztonsági mentés első létrehozásakor adott meg."
         },
         "import_success": {
-            "title": "Sikeresen helyreállította kriptotárcáját a biztonsági mentésből",
-            "body": "Most már beállíthatja kriptotárcáját."
+            "title": "Sikeresen helyreállította tárcáját a biztonsági mentésből",
+            "body": "Most már beállíthatja tárcáját."
         },
         "migrate": {
-            "title": "Egyenlegének átvezetése",
-            "body_1": "Ez egy automatizált folyamat, amely során egyenlege átvezetődik az új kriptotárcájába. Ellenőriznünk kell a már felhasznált címeket, amelyek csökkenthetik az ön biztonságát.",
+            "title": "Egyenleg átvezetése",
+            "body_1": "Ez egy automatizált folyamat, melynek során egyenlegét átvezetjük új tárcájába. Ellenőrizni fogjuk, van-e olyan számlacímén egyenleg, amelyről már indított korábban utalást. Az ilyen számlacímek csökkentik az Ön tárcájának biztonságát.",
             "body_2": "Ez hosszabb időt vehet igénybe. Ne kapcsolja ki az eszközét, amíg az átvezetés be nem fejeződik.",
-            "existing": "Az ön régi kriptotárcája",
-            "new": "Az ön új kriptotárcája"
+            "existing": "Régi tárca",
+            "new": "Új tárca"
         },
         "migrate_failed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
-            "title": "Az ön egyenlege",
+            "title": "Egyenleg",
             "body": "Helyes az egyenlege?"
         },
         "settings": {
@@ -135,7 +136,7 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Segítség & Információ",
+                "title": "Súgó és egyéb információk",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profile": {
@@ -143,7 +144,7 @@
                 "description": ""
             },
             "sync": {
-                "title": "Fiókok szinkronizálása",
+                "title": "Számlák szinkronizálása",
                 "description": ""
             },
             "theme": {
@@ -163,7 +164,7 @@
                 "description": ""
             },
             "exportStronghold": {
-                "title": "Stronghold-fájl exportálása",
+                "title": "Stronghold exportálása",
                 "description": ""
             },
             "appLock": {
@@ -175,23 +176,23 @@
                 "description": ""
             },
             "changePincode": {
-                "title": "Change PIN code",
+                "title": "PIN kód megváltoztatása",
                 "description": "",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "currentPincode": "Jelenlegi PIN kód",
+                "newPincode": "Új PIN kód",
+                "confirmNewPincode": "Új PIN kód megerősítése",
+                "action": "PIN kód módosítása"
             },
             "resyncAccounts": {
-                "title": "Fiókok újraszinkronizálása",
+                "title": "Számlák újraszinkronizálása",
                 "description": ""
             },
             "resetWallet": {
-                "title": "Tárca alapállapotának visszaállítása",
+                "title": "Tárca gyári állapotának visszaállítása",
                 "description": ""
             },
             "deepLinks": {
-                "title": "Mélyhivatkozások",
+                "title": "Automatikus adatkitöltés",
                 "description": ""
             },
             "developerMode": {
@@ -203,11 +204,11 @@
                 "description": ""
             },
             "configureNodeList": {
-                "title": "Configure node list",
+                "title": "Csomópont lista beállítása",
                 "description": ""
             },
             "proofOfWork": {
-                "title": "Kiszabott munka",
+                "title": "Kiszabott munka elvégzése",
                 "description": ""
             },
             "errorLog": {
@@ -265,62 +266,62 @@
                 }
             },
             "network": {
-                "network_operational": "Működő hálózat",
-                "network_degraded": "Elavult hálózat",
-                "network_down": "Hálózat üzemen kívül",
+                "network_operational": "Hálózat elérhető",
+                "network_degraded": "Hálózati problémák",
+                "network_down": "Nincs hálózati kapcsolat",
                 "status": "Állapot",
                 "messages_per_second": "Üzenet / másodperc",
                 "confirmation_rate": "Visszaigazolási arány"
             },
             "profile_modal": {
-                "all_settings": "All settings",
-                "logout": "Log out"
+                "all_settings": "Összes beállítás",
+                "logout": "Kijelentkezés"
             }
         }
     },
     "popups": {
         "password": {
             "title": "Jelszó szükséges",
-            "subtitle": "Adja meg kriptotárcája jelszavát a Stronghold feloldásához"
+            "subtitle": "Adja meg a tárcája jelszavát a Stronghold feloldásához"
         },
         "qr": {
-            "title": "QR kódod"
+            "title": "QR kód"
         },
         "version": {
             "title": "Jelenlegi verzió: {version}",
             "up_to_date_title": "Firefly naprakész",
-            "up_to_date_description": "Ön éppen Firefly legújabb és legbiztonságosabb verzióját használja.",
+            "up_to_date_description": "Ön a Firefly legújabb és legbiztonságosabb verzióját használja.",
             "update_available": "Firefly frissítés elérhető",
             "update_details": "Verzió {version} - {date}"
         },
         "backup": {
-            "title": "Legutóbbi biztonsági mentés: {date}",
-            "last_backup": "Legutóbbi biztonsági mentés ideje: {date}",
-            "backup_description": "Fontos a rendszeres biztonsági mentés, hogy fiókjait és tranzakciós naplóinak másolatait biztonságban tudhassa.",
-            "backup_warning": "Ha elveszíti a biztonsági mentést és a helyreállító mondatot, a számlájához többé nem tud hozzáférni.",
+            "title": "Utolsó biztonsági mentés: {date}",
+            "last_backup": "Utolsó biztonsági mentés ideje: {date}",
+            "backup_description": "Fontos a rendszeres biztonsági mentés, hogy számláiról és tranzakcióiról legyen másolata.",
+            "backup_warning": "Ha elveszíti a biztonsági mentést és a helyreállítási szavakat, többé nem tud a számlájához hozzáférni.",
             "not_backed_up": "Nincs biztonsági mentés",
             "not_backed_up_description": "Nem készült még Stronghold biztonsági mentés"
         },
         "delete_account": {
             "title": "{name} törlése?",
             "body": "Végleg elveszíti a tranzakciós naplót és talán más adatokat is.",
-            "type_password": "Írja be kriptotárcája jelszavát a megerősítéshez.",
+            "type_password": "Írja be tárcája jelszavát a megerősítéshez.",
             "delete_account": "Számla törlése",
             "error_title": "{name} nem törölhető",
-            "error_body_1": "Fiókjának törléséhez 0 egyenleg szükséges.",
-            "error_body_2": "Jelenleg {balance} maradt a fiókjában. Kérjük, küldje át ezt az összeget egy másik számlára, majd próbálja újra."
+            "error_body_1": "Számlája addig nem törölhető, amíg egyenlege nem nulla.",
+            "error_body_2": "Jelenleg {balance} maradt a számláján. Kérjük, küldje át ezt az összeget egy másik számlára, majd próbálja újra."
         },
         "address_history": {
-            "title": "{name} fiókcím napló",
+            "title": "{name} számla címeinek előzménye",
             "current_balance": "Aktuális egyenleg: {balance}"
         },
         "node": {
-            "title_add": "Add a node",
-            "title_details": "Node details",
-            "node_address": "Node address",
-            "optional_username": "Username (optional)",
-            "optional_password": "Password (optional)",
-            "set_as_primary_node": "Set as primary node"
+            "title_add": "Csomópont hozzáadása",
+            "title_details": "Csomópont adatai",
+            "node_address": "Csomópont címe",
+            "optional_username": "Felhasználónév (nem kötelező)",
+            "optional_password": "Jelszó (nem kötelező)",
+            "set_as_primary_node": "Beállítás elsődleges csomópontként"
         }
     },
     "actions": {
@@ -328,23 +329,23 @@
         "back": "Vissza",
         "cancel": "Mégse",
         "close": "Bezár",
-        "dismiss": "Elvetés",
+        "dismiss": "Elvet",
         "save": "Mentés",
-        "import_seed": "Meglévő magérték (seed) importálása",
-        "import_wallet": "Meglévő kriptotárca importálása",
-        "create_wallet": "Új kriptotárca létrehozása",
+        "import_seed": "Meglévő seed importálása",
+        "import_wallet": "Meglévő tárca importálása",
+        "create_wallet": "Új tárca létrehozása",
         "save_password": "Jelszó mentése",
-        "use_biometric": "Biometrikus biztonsági eszköz használata",
-        "setup_pin": "PIN-kód beállítása",
-        "set_pin": "Állítson be egy PIN-kódot",
-        "confirm_pin": "Erősítse meg a PIN-kódot",
+        "use_biometric": "Biometrikus azonosítás használata",
+        "setup_pin": "PIN kód létrehozása",
+        "set_pin": "Állítsa be a PIN kódot",
+        "confirm_pin": "Erősítse meg a PIN kódot",
         "enter_your_pin": "Írja be a PIN kódot",
-        "save_backup_file": "Biztonsági mentésfájl létrehozása",
-        "ive_written_recovery_phrase": "Feljegyeztem a helyreállító kódmondatomat",
-        "verify_recovery_phrase": "Helyreállító kódmondat hitelesítése",
-        "reveal_recovery_phrase": "Helyreállító kódmondat felfedése",
+        "save_backup_file": "Biztonsági mentés készítése",
+        "ive_written_recovery_phrase": "Feljegyeztem a helyreállítási szavakat",
+        "verify_recovery_phrase": "Helyreállítási szavak ellenőrzése",
+        "reveal_recovery_phrase": "Helyreállítási szavak megjelenítése",
         "import_seedvault": "SeedVault importálása",
-        "check_again": "Helytelen, ellenőrizze újból",
+        "check_again": "Helytelen, ellenőrizze újra",
         "import_from_file": "Importálás fájlból",
         "send": "Küldés",
         "receive": "Fogadás",
@@ -359,21 +360,21 @@
         "syncAll": "Összes szinkronizálása",
         "export": "Exportálás",
         "exportNewStronghold": "Stronghold-fájl exportálása",
-        "enableDeepLinks": "Mélyhivatkozások engedélyezése",
+        "enableDeepLinks": "Automatikus adatkitöltés engedélyezése",
         "enableDeveloperMode": "Fejlesztői mód engedélyezése",
-        "enableNotifications": "Értesítések engedélyezése",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "Állapot exportálása",
         "outsourceProofOfWork": "Kiszabott munka kiszervezése",
         "unlock": "Felold",
         "update_firefly": "Firefly frissítése",
-        "install_firefly": "Install Firefly",
-        "save_backup": "Biztonsági másolat mentése",
-        "customize_account": "Fiók személyre szabása",
-        "sync_account": "Fiók szinkronizálása",
+        "restart_now": "Restart now",
+        "save_backup": "Biztonsági mentés készítése",
+        "customize_account": "Számla személyre szabása",
+        "sync_account": "Számla szinkronizálása",
         "view_address_history": "Címek előzményeinek megjelenítése",
         "delete_account": "Számla törlése",
-        "max": "Max",
-        "add_node": "Add node"
+        "max": "Maximum",
+        "add_node": "Csomópont hozzáadása"
     },
     "general": {
         "password": "Jelszó",
@@ -381,27 +382,27 @@
         "currentPassword": "Jelenlegi jelszó",
         "newPassword": "Új jelszó",
         "confirmNewPassword": "Új jelszó megerősítése",
-        "your_seed": "Az ön magértéke (seed)",
-        "recovery_phrase": "Helyreállító kódmondat",
-        "recent_activity": "Legutóbbi tevékenység",
+        "your_seed": "Seed",
+        "recovery_phrase": "Helyreállítási szavak",
+        "recent_activity": "Legutóbbi tevékenységek",
         "sent": "Elküldött",
         "received": "Fogadott",
         "send_payment": "Összeg küldése",
-        "move_funds": "Összegek mozgatása",
-        "send_funds": "Pénz küldése",
+        "move_funds": "Egyenlegátvezetés",
+        "send_funds": "Küldés számlára",
         "send_to_address": "Küldés címre",
-        "scan_qr_or_paste": "QR-kód szkennelése vagy cím beillesztése",
-        "move_funds_between_accounts": "Tőke mozgatása számlák között",
+        "scan_qr_or_paste": "QR kód beolvasása vagy számlacím beillesztése",
+        "move_funds_between_accounts": "Egyenleg átvezetése számlák között",
         "send_tokens_to_address": "Tokenek küldése egy címre",
-        "manage_account": "Fiók kezelése",
-        "customize_account": "Fiók személyre szabása",
+        "manage_account": "Számla kezelése",
+        "customize_account": "Számla személyre szabása",
         "account": "Számla",
-        "sending_to_address": "Címre küldés",
+        "sending_to_address": "Küldés számlacímre",
         "amount": "Összeg",
         "add_address": "Cím hozzáadása",
         "reference": "Hivatkozás",
-        "from": "Feladó:",
-        "to": "Címzett:",
+        "from": "Feladó",
+        "to": "Címzett",
         "receive_funds": "Pénz fogadása",
         "my_address": "Címem",
         "share_address": "Cím megosztása",
@@ -410,7 +411,7 @@
         "copy_address": "Cím másolása",
         "have_text_backup": "Szöveges biztonsági mentésem van",
         "have_file_backup": "Biztonsági mentésfájlom van",
-        "enter_seed_or_phrase": "Adja meg a helyreállító kódmondatot vagy a magértéket (seed)",
+        "enter_seed_or_phrase": "Írja be a helyreállítási szavakat vagy a seed-et",
         "upload_seedvault_or_stronghold": "Stronghold- vagy SeedVault-fájl importálása",
         "import": "Importálás",
         "seedvault": "SeedVault",
@@ -427,15 +428,15 @@
         "automaticNodeSelection": "Automatikus csomópont kiválasztás",
         "manualNodeSelection": "Kézi csomópont kiválasztás",
         "profiles": "Profilok",
-        "developerProfile": "Developer Profile",
-        "dev": "Dev",
-        "create_account": "Fiók létrehozása",
-        "account_name": "Fiók neve",
-        "latest_transactions": "Legfrissebb tranzakciók",
+        "developerProfile": "Fejlesztői profil",
+        "dev": "Fejlesztő",
+        "create_account": "Számla létrehozása",
+        "account_name": "Számla neve",
+        "latest_transactions": "Legutóbbi tranzakciók",
         "transactions": "Tranzakciók",
         "security": "Biztonság",
-        "account_address": "Fiók címe",
-        "nodes": "Nodes"
+        "account_address": "Számla címe",
+        "nodes": "Csomópontok"
     },
     "dates": {
         "today": "Ma",
@@ -445,8 +446,14 @@
         "years_ago": "{time, plural, one {# évvel} other {# évvel}} ezelőtt"
     },
     "notifications": {
-        "valueTx": "Receiving {{value}} to {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed"
+        "valueTx": "{{value}} érkezik a(z) {{account}} számlájára",
+        "confirmed": "{{value}} sikeresen elküldve a(z) {{account}} számlájáról",
+        "failed": "{{value}} elküldése a(z) {{account}} számlájáról sikertelen",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

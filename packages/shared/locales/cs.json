@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Nastavení peněženky",
-            "body": "Můžete vytvořit novou nebo importovat existující peněženku."
+            "body": "Můžete vytvořit novou nebo importovat existující peněženku.",
+            "profile_name": "Název profilu"
         },
         "password": {
             "title": "Vytvoření hesla",
@@ -64,7 +65,7 @@
             "body_1": "Pečlivě si zapište slova v tomto pořadí.",
             "body_2": "Zachovejte klíčová slova v soukromém a bezpečném úložišti. Nesdílejte je s nikým.",
             "reveal_recovery_phrase": "Zobrazit obnovovací frázi",
-            "hide_recovery_phrase": "Hide recovery phrase"
+            "hide_recovery_phrase": "Skrýt frázi pro obnovení"
         },
         "verify_recovery_phrase": {
             "title": "Ověřte obnovovací frázi",
@@ -175,12 +176,12 @@
                 "description": ""
             },
             "changePincode": {
-                "title": "Change PIN code",
+                "title": "Změnit PIN kód",
                 "description": "",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "currentPincode": "Aktuální PIN kód",
+                "newPincode": "Nový PIN",
+                "confirmNewPincode": "Potvrďte nový PIN",
+                "action": "Změnit PIN"
             },
             "resyncAccounts": {
                 "title": "Opakovaná synchronizace účtů",
@@ -203,7 +204,7 @@
                 "description": ""
             },
             "configureNodeList": {
-                "title": "Configure node list",
+                "title": "Konfigurovat seznam node",
                 "description": ""
             },
             "proofOfWork": {
@@ -273,8 +274,8 @@
                 "confirmation_rate": "Míra potvrzení"
             },
             "profile_modal": {
-                "all_settings": "All settings",
-                "logout": "Log out"
+                "all_settings": "Všechna nastavení",
+                "logout": "Odhlásit se"
             }
         }
     },
@@ -315,12 +316,12 @@
             "current_balance": "Aktuální zůstatek: {balance}"
         },
         "node": {
-            "title_add": "Add a node",
-            "title_details": "Node details",
-            "node_address": "Node address",
-            "optional_username": "Username (optional)",
-            "optional_password": "Password (optional)",
-            "set_as_primary_node": "Set as primary node"
+            "title_add": "Přidat uzel",
+            "title_details": "Detaily uzlu",
+            "node_address": "Adresa uzlu",
+            "optional_username": "Uživatelské jméno (volitelné)",
+            "optional_password": "Heslo (volitelné)",
+            "set_as_primary_node": "Nastavit jako hlavní uzel"
         }
     },
     "actions": {
@@ -361,19 +362,19 @@
         "exportNewStronghold": "Exportovat nový Stronghold",
         "enableDeepLinks": "Povolit hluboké odkazy",
         "enableDeveloperMode": "Povolit vývojářský režim",
-        "enableNotifications": "Povolit notifikace",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "Exportovat stav",
         "outsourceProofOfWork": "Outsourcovaný Proof of Work",
         "unlock": "Odemknout",
         "update_firefly": "Aktualizovat Firefly",
-        "install_firefly": "Install Firefly",
+        "restart_now": "Restart now",
         "save_backup": "Uložit zálohu",
         "customize_account": "Přizpůsobit účet",
         "sync_account": "Synchronizovat účet",
         "view_address_history": "Zobrazit historii adresy",
         "delete_account": "Odstranit účet",
         "max": "Max",
-        "add_node": "Add node"
+        "add_node": "Přidat uzel"
     },
     "general": {
         "password": "Heslo",
@@ -427,15 +428,15 @@
         "automaticNodeSelection": "Automatický výběr node",
         "manualNodeSelection": "Manuální výběr node",
         "profiles": "Profily",
-        "developerProfile": "Developer Profile",
-        "dev": "Dev",
+        "developerProfile": "Vývojářský režim",
+        "dev": "Vývojář",
         "create_account": "Vytvořit účet",
         "account_name": "Název účtu",
         "latest_transactions": "Poslední transakce",
         "transactions": "Transakce",
         "security": "Zabezpečení",
         "account_address": "Adresa účtu",
-        "nodes": "Nodes"
+        "nodes": "Uzly"
     },
     "dates": {
         "today": "Dnes",
@@ -445,8 +446,14 @@
         "years_ago": "před {time, plural, one {# týdnem} other {# týdny}}"
     },
     "notifications": {
-        "valueTx": "Receiving {{value}} to {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed"
+        "valueTx": "Přijímání {{value}} na {{account}}",
+        "confirmed": "Odchozí {{value}} od {{account}} byl potvrzen",
+        "failed": "Odchozí {{value}} od {{account}} selhal",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

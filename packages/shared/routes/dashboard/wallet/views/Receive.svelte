@@ -2,7 +2,8 @@
     import { getContext } from 'svelte'
     import { Text, Button, Dropdown, QR, Icon } from 'shared/components'
     import { setClipboard } from 'shared/lib/helpers'
-    import { walletViewState, WalletViewStates, accountViewState, AccountViewStates } from 'shared/lib/router'
+    import { walletRoute, accountRoute } from 'shared/lib/router'
+    import { WalletRoutes, AccountRoutes } from 'shared/lib/typings/routes'
 
     export let locale
     export let generateAddress = (accountId) => {}
@@ -20,8 +21,8 @@
         generateAddress(selectedAccount.id)
     }
     const handleCloseClick = () => {
-        walletViewState.set(WalletViewStates.Init)
-        accountViewState.set(AccountViewStates.Init)
+        walletRoute.set(WalletRoutes.Init)
+        accountRoute.set(AccountRoutes.Init)
     }
 </script>
 

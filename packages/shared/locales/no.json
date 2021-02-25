@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Sett opp lommeboken din",
-            "body": "Du kan opprette en ny lommebok eller importere en eksisterende."
+            "body": "Du kan opprette en ny lommebok eller importere en eksisterende.",
+            "profile_name": "Profile Name"
         },
         "password": {
             "title": "Opprett passord",
@@ -64,7 +65,7 @@
             "body_1": "Skriv forsiktig ned ordene i riktig rekkefølge.",
             "body_2": "Hold gjenopprettingsfrasen privat og trygt lagret. Ikke del den med noen.",
             "reveal_recovery_phrase": "Vis gjenopprettingsfrasen",
-            "hide_recovery_phrase": "Hide recovery phrase"
+            "hide_recovery_phrase": "Skjul gjenoppretingsfrasen"
         },
         "verify_recovery_phrase": {
             "title": "Bekreft gjenopprettingsfrasen",
@@ -175,12 +176,12 @@
                 "description": ""
             },
             "changePincode": {
-                "title": "Change PIN code",
+                "title": "Endre PIN-koden",
                 "description": "",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "currentPincode": "Gjeldende PIN-kode",
+                "newPincode": "Ny PIN-kode",
+                "confirmNewPincode": "Bekreft ny PIN-kode",
+                "action": "Endre PIN-koden"
             },
             "resyncAccounts": {
                 "title": "Resynkroniser kontoene",
@@ -203,7 +204,7 @@
                 "description": ""
             },
             "configureNodeList": {
-                "title": "Configure node list",
+                "title": "Konfigurere node-listen",
                 "description": ""
             },
             "proofOfWork": {
@@ -248,66 +249,66 @@
                 "version": {
                     "title": "Firefly v{version}",
                     "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "out_of_date": "Utløpt"
                 },
                 "hardware_device": {
-                    "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "title": "Maskinvare enhet",
+                    "none_detected": "Ingen oppdaget"
                 },
                 "stronghold_status": {
-                    "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "title": "Festning status",
+                    "locked": "Låst",
+                    "unlocked": "Åpen"
                 },
                 "stronghold_backup": {
-                    "title": "Stronghold Backup",
+                    "title": "Festning sikkerhetskopi",
                     "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
                 }
             },
             "network": {
                 "network_operational": "Network Operational",
-                "network_degraded": "Network Degraded",
-                "network_down": "Network Down",
+                "network_degraded": "Nettverket er nedgradert",
+                "network_down": "Nettverket er nede",
                 "status": "Status",
-                "messages_per_second": "Messages per second",
-                "confirmation_rate": "Confirmation rate"
+                "messages_per_second": "Meldinger per sekund",
+                "confirmation_rate": "Bekreftelseshastighet"
             },
             "profile_modal": {
-                "all_settings": "All settings",
-                "logout": "Log out"
+                "all_settings": "Alle innstillinger",
+                "logout": "Logg ut"
             }
         }
     },
     "popups": {
         "password": {
             "title": "Passord påkrevd",
-            "subtitle": "Please enter your wallet password to unlock Stronghold"
+            "subtitle": "Vennligst skriv inn passordet for å låse opp Stronghold"
         },
         "qr": {
             "title": "Din QR-kode"
         },
         "version": {
-            "title": "Current version: {version}",
-            "up_to_date_title": "Firefly is up to date",
-            "up_to_date_description": "You are running the latest and safest version of Firefly.",
-            "update_available": "Firefly update available",
-            "update_details": "Version {version} - {date}"
+            "title": "Gjeldende versjon: {version}",
+            "up_to_date_title": "Firefly er oppdatert",
+            "up_to_date_description": "Du kjører den siste og sikreste versjonen av Firefly.",
+            "update_available": "Firefly-oppdatering tilgjengelig",
+            "update_details": "Versjon {version} - {date}"
         },
         "backup": {
-            "title": "Last backup: {date}",
-            "last_backup": "You last backed up {date}",
-            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
-            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "not_backed_up": "Not backed up",
-            "not_backed_up_description": "You have not backed up your Stronghold"
+            "title": "Siste sikkerhetskopi: {date}",
+            "last_backup": "Du sikkerhetskopierte sist {date}",
+            "backup_description": "Det er viktig å sikkerhetskopiere regelmessig for å sørge for at du har en kopi av kontoer og transaksjonshistorien.",
+            "backup_warning": "Hvis du mister din backup og gjenopprettingsfrase mister du tilgang til dine midler.",
+            "not_backed_up": "Ikke sikkerhetskopiert",
+            "not_backed_up_description": "Du har ikke sikkerhetskopiert din festning"
         },
         "delete_account": {
-            "title": "Delete {name}?",
+            "title": "Slett {name}?",
             "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Type your wallet’s password to confirm.",
-            "delete_account": "Delete account",
-            "error_title": "Unable to delete {name}",
-            "error_body_1": "To delete an account you must have 0 balance.",
+            "type_password": "Skriv passordet til lommeboken for å bekrefte.",
+            "delete_account": "Slett konto",
+            "error_title": "Kan ikke slette {name}",
+            "error_body_1": "For å slette kontoen må du ha 0 i saldo.",
             "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
         },
         "address_history": {
@@ -315,12 +316,12 @@
             "current_balance": "Current balance: {balance}"
         },
         "node": {
-            "title_add": "Add a node",
-            "title_details": "Node details",
-            "node_address": "Node address",
-            "optional_username": "Username (optional)",
-            "optional_password": "Password (optional)",
-            "set_as_primary_node": "Set as primary node"
+            "title_add": "Legg til Node",
+            "title_details": "Detaljer om node",
+            "node_address": "Node-adresse",
+            "optional_username": "Brukernavn (valgfritt)",
+            "optional_password": "Passord (valgfritt)",
+            "set_as_primary_node": "Velg som hoved-node"
         }
     },
     "actions": {
@@ -361,19 +362,19 @@
         "exportNewStronghold": "Eksporter en ny Stronghold",
         "enableDeepLinks": "Aktiver dype lenker",
         "enableDeveloperMode": "Aktiver utviklermodus",
-        "enableNotifications": "Aktiver varsler",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "Eksporter status",
         "outsourceProofOfWork": "Outsource bevis på arbeid",
         "unlock": "Lås opp",
         "update_firefly": "Update Firefly",
-        "install_firefly": "Install Firefly",
+        "restart_now": "Restart now",
         "save_backup": "Save backup",
         "customize_account": "Customise account",
         "sync_account": "Sync account",
         "view_address_history": "View address history",
-        "delete_account": "Delete account",
-        "max": "Max",
-        "add_node": "Add node"
+        "delete_account": "Slett konto",
+        "max": "Maks",
+        "add_node": "Legg til Node"
     },
     "general": {
         "password": "Passord",
@@ -427,15 +428,15 @@
         "automaticNodeSelection": "Automatisk node selektering",
         "manualNodeSelection": "Manuell node selektering",
         "profiles": "Profiler",
-        "developerProfile": "Developer Profile",
-        "dev": "Dev",
+        "developerProfile": "Utviklermodus",
+        "dev": "Utvikling",
         "create_account": "Opprett en konto",
         "account_name": "Kontonavn",
         "latest_transactions": "Siste transaksjoner",
         "transactions": "Transaksjoner",
         "security": "Sikkerhet",
         "account_address": "Konto adresse",
-        "nodes": "Nodes"
+        "nodes": "Noder"
     },
     "dates": {
         "today": "Today",
@@ -445,8 +446,14 @@
         "years_ago": "{time, plural, one {# year} other {# years}} ago"
     },
     "notifications": {
-        "valueTx": "Receiving {{value}} to {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed"
+        "valueTx": "Mottar {{value}} til {{account}}",
+        "confirmed": "Utgående {{value}} fra {{account}} er bekreftet",
+        "failed": "Utgående {{value}} fra {{account}} mislyktes",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

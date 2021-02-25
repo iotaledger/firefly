@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Cüzdanınızı oluşturun",
-            "body": "Yeni bir cüzdan oluşturabilir veya zaten var olan cüzdanınızı ekleyebilirsiniz."
+            "body": "Yeni bir cüzdan oluşturabilir veya zaten var olan cüzdanınızı ekleyebilirsiniz.",
+            "profile_name": "Profil ismi"
         },
         "password": {
             "title": "Şifre oluşturun",
@@ -62,12 +63,12 @@
         "recovery_phrase": {
             "title": "Kurtarma cümlesi",
             "body_1": "Carefully write down the words in the exact order.",
-            "body_2": "Kurtarma ifadenizi gizli ve güvenli bir şekilde saklayın ve kimseyle paylaşmayın.",
+            "body_2": "Kurtarma şifrenizi güvenli bir şekilde saklayın ve kimseyle paylaşmayın.",
             "reveal_recovery_phrase": "Kurtarma ifadesini göster",
-            "hide_recovery_phrase": "Hide recovery phrase"
+            "hide_recovery_phrase": "Kurtarma sözcüğünü gizle"
         },
         "verify_recovery_phrase": {
-            "title": "Kurtarma ifadesini doğrulayın",
+            "title": "Kurtarma şifrenizi doğrulayın",
             "body": "İfadeyi doğru yazdığınızı kontrol edelim. Doğru sıradaki kelimeleri seçin."
         },
         "backup_wallet": {
@@ -175,12 +176,12 @@
                 "description": ""
             },
             "changePincode": {
-                "title": "Change PIN code",
+                "title": "PIN kodunu değiştir",
                 "description": "",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "currentPincode": "Mevcut PIN",
+                "newPincode": "Yeni PIN",
+                "confirmNewPincode": "Yeni PIN'i doğrulayın",
+                "action": "PIN'i değiştir"
             },
             "resyncAccounts": {
                 "title": "Hesabı Yeniden Eşitle",
@@ -203,7 +204,7 @@
                 "description": ""
             },
             "configureNodeList": {
-                "title": "Configure node list",
+                "title": "Nodeları yapılandır",
                 "description": ""
             },
             "proofOfWork": {
@@ -246,81 +247,81 @@
         "dashboard": {
             "security": {
                 "version": {
-                    "title": "Firefly v{version}",
-                    "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "title": "Firefly versiyonu {version}",
+                    "up_to_date": "Güncel",
+                    "out_of_date": "Güncelleme gerekli"
                 },
                 "hardware_device": {
-                    "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "title": "Donanım Aygıtı",
+                    "none_detected": "Hiçbiri bulunamadı"
                 },
                 "stronghold_status": {
-                    "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "title": "Stronghold Durumu",
+                    "locked": "Kilitli",
+                    "unlocked": "Kilidi Açık"
                 },
                 "stronghold_backup": {
-                    "title": "Stronghold Backup",
+                    "title": "Stronghold Yedekleme",
                     "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
                 }
             },
             "network": {
-                "network_operational": "Network Operational",
-                "network_degraded": "Network Degraded",
-                "network_down": "Network Down",
-                "status": "Status",
-                "messages_per_second": "Messages per second",
-                "confirmation_rate": "Confirmation rate"
+                "network_operational": "Network Aktif",
+                "network_degraded": "Network Performans Sorunu",
+                "network_down": "Network Aktif Değil",
+                "status": "Durum",
+                "messages_per_second": "Saniye başına mesaj sayısı",
+                "confirmation_rate": "Doğrulama Oranı"
             },
             "profile_modal": {
-                "all_settings": "All settings",
-                "logout": "Log out"
+                "all_settings": "Tüm ayarlar",
+                "logout": "Çıkış yap"
             }
         }
     },
     "popups": {
         "password": {
             "title": "Lütfen Parolanızı Yazın",
-            "subtitle": "Please enter your wallet password to unlock Stronghold"
+            "subtitle": "Stronghold'u açmak için lütfen cüzdan şifrenizi giriniz"
         },
         "qr": {
             "title": "QR Kodunuz"
         },
         "version": {
-            "title": "Current version: {version}",
-            "up_to_date_title": "Firefly is up to date",
-            "up_to_date_description": "You are running the latest and safest version of Firefly.",
-            "update_available": "Firefly update available",
-            "update_details": "Version {version} - {date}"
+            "title": "Mevcut sürüm: {version}",
+            "up_to_date_title": "Firefly güncel",
+            "up_to_date_description": "En son ve güvenli Firefly sürümünü kullanıyorsunuz.",
+            "update_available": "Firefly güncellemesi mevcut",
+            "update_details": "Sürüm {version} - {date}"
         },
         "backup": {
-            "title": "Last backup: {date}",
-            "last_backup": "You last backed up {date}",
-            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
-            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "not_backed_up": "Not backed up",
-            "not_backed_up_description": "You have not backed up your Stronghold"
+            "title": "Son Yedekleme: {date}",
+            "last_backup": "Aldığınız son yedek {date}",
+            "backup_description": "Hesap ve işlem geçmişinizin bir kopyasını alabilmeniz için düzenli olarak yedek almanız önemlidir.",
+            "backup_warning": "Eğer yedeğinizi ve kurtarma şifrenizi kaybederseniz, hesabınıza erişimi kaybedeceksiniz.",
+            "not_backed_up": "Yedeklenmedi",
+            "not_backed_up_description": "Stronghold'unuzu yedeklemediniz"
         },
         "delete_account": {
-            "title": "Delete {name}?",
+            "title": "Sil {name}?",
             "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Type your wallet’s password to confirm.",
-            "delete_account": "Delete account",
-            "error_title": "Unable to delete {name}",
-            "error_body_1": "To delete an account you must have 0 balance.",
-            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+            "type_password": "Doğrulama için lütfen cüzdan şifrenizi giriniz.",
+            "delete_account": "Hesabı sil",
+            "error_title": "Silinemedi: {name}",
+            "error_body_1": "Bir hesabı silebilmek için hesap balansınız sıfır olmalıdır.",
+            "error_body_2": "Hesabınızda {balance} tutarında bakiye bulunmaktadır. Lütfen bakiyeyi başka bir hesaba taşıyıp, tekrar deneyiniz."
         },
         "address_history": {
-            "title": "{name} account address history",
-            "current_balance": "Current balance: {balance}"
+            "title": "{name} hesap adres geçmişi",
+            "current_balance": "Mevcut bakiye: {balance}"
         },
         "node": {
-            "title_add": "Add a node",
-            "title_details": "Node details",
-            "node_address": "Node address",
-            "optional_username": "Username (optional)",
-            "optional_password": "Password (optional)",
-            "set_as_primary_node": "Set as primary node"
+            "title_add": "Bir node ekle",
+            "title_details": "Node detayları",
+            "node_address": "Node adresi",
+            "optional_username": "Kullanıcı adı (opsiyonel)",
+            "optional_password": "Şifre (opsiyonel)",
+            "set_as_primary_node": "Birincil düğüm olarak ayarla"
         }
     },
     "actions": {
@@ -328,7 +329,7 @@
         "back": "Geri",
         "cancel": "İptal",
         "close": "Çıkış",
-        "dismiss": "Dismiss",
+        "dismiss": "Vazgeç",
         "save": "Kaydet",
         "import_seed": "Mevcut bir Seed'i içe aktarın",
         "import_wallet": "Mevcut cüzdanı içe aktar",
@@ -341,7 +342,7 @@
         "enter_your_pin": "Pin'inizi girin",
         "save_backup_file": "Yedek dosyasını kaydet",
         "ive_written_recovery_phrase": "Kurtarma sözcüklerini not aldım",
-        "verify_recovery_phrase": "Kurtarma ifadesini doğrulayın",
+        "verify_recovery_phrase": "Kurtarma şifrenizi doğrulayın",
         "reveal_recovery_phrase": "Kurtarma ifadesini göster",
         "import_seedvault": "SeedVault'u içe aktar",
         "check_again": "Tekrar kontrol ediniz",
@@ -361,17 +362,17 @@
         "exportNewStronghold": "Yeni bir Stronghold dışa aktarın",
         "enableDeepLinks": "Derin bağlantıları etkinleştir",
         "enableDeveloperMode": "Geliştirici modunu etkinleştir",
-        "enableNotifications": "Bildirimleri etkinleştir",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "State dışa aktarın",
         "outsourceProofOfWork": "Dış kaynak iş gücü kanıtı",
         "unlock": "Kilidi Aç",
-        "update_firefly": "Update Firefly",
-        "install_firefly": "Install Firefly",
-        "save_backup": "Save backup",
-        "customize_account": "Customise account",
-        "sync_account": "Sync account",
+        "update_firefly": "Firefly'ı güncelle",
+        "restart_now": "Restart now",
+        "save_backup": "Yedeği kaydet",
+        "customize_account": "Hesabı özelleştir",
+        "sync_account": "Hesabı senkronize et",
         "view_address_history": "View address history",
-        "delete_account": "Delete account",
+        "delete_account": "Hesabı sil",
         "max": "Max",
         "add_node": "Add node"
     },
@@ -420,25 +421,25 @@
         "light_theme": "Aydınlık tema",
         "dark_theme": "Karanlık tema",
         "total_balance": "Toplam Bakiye",
-        "account_balance": "Account Balance",
+        "account_balance": "Hesap Bakiyesi",
         "incoming": "Gelen",
         "outgoing": "Giden",
         "accounts": "Hesaplar",
         "automaticNodeSelection": "Otomatik düğüm seçimi",
         "manualNodeSelection": "Manuel seçim",
         "profiles": "Profiller",
-        "developerProfile": "Developer Profile",
-        "dev": "Dev",
+        "developerProfile": "Geliştirici hesabı",
+        "dev": "Geliştirici",
         "create_account": "Bir hesap oluşturun",
         "account_name": "Hesap adı",
         "latest_transactions": "Son transferler",
         "transactions": "Transferler",
         "security": "Güvenlik",
         "account_address": "Hesap adresi",
-        "nodes": "Nodes"
+        "nodes": "Düğümler"
     },
     "dates": {
-        "today": "Today",
+        "today": "Bugün",
         "days_ago": "{time, plural, one {# day} other {# days}} ago",
         "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
         "months_ago": "{time, plural, one {# month} other {# months}} ago",
@@ -447,6 +448,12 @@
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
         "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed"
+        "failed": "Outgoing {{value}} from {{account}} has failed",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

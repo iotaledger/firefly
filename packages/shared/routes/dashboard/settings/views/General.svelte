@@ -1,6 +1,7 @@
 <script>
+    import { get } from 'svelte/store'
     import { darkMode } from 'shared/lib/app'
-    import { Text, Radio, Dropdown, Toggle } from 'shared/components'
+    import { Text, Radio, Dropdown, Checkbox } from 'shared/components'
     import { exchangeRates } from 'shared/lib/currency'
     import { addProfileCurrencyPriceData } from 'shared/lib/marketData'
     import { locales, setupI18n } from 'shared/lib/i18n'
@@ -9,9 +10,10 @@
     export let locale
 
     let darkModeEnabled = $darkMode
-    let notificationsEnabled = true
+    let notificationsChecked = get(activeProfile).settings.notifications
 
     $: darkMode.set(darkModeEnabled)
+    $: updateProfile('settings.notifications', notificationsChecked)
 
     const setLanguage = (item) => {
         const locale = Object.keys(locales).find((key) => locales[key] === item.value)
@@ -62,7 +64,7 @@
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <section id="notifications" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.notifications.title')}</Text>
-        <Text type="p" secondary classes="mb-5">{locale('views.settings.exportStronghold.description')}</Text>
-        <Toggle value={notificationsEnabled} label={locale('actions.enableNotifications')} />
+        <Text type="p" secondary classes="mb-5">{locale('views.settings.notifications.description')}</Text>
+        <Checkbox label={locale('actions.enableSystemNotifications')} bind:checked={notificationsChecked} />
     </section>
 </div>

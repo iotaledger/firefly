@@ -4,7 +4,7 @@
     import { createProfile, setActiveProfile } from 'shared/lib/profile'
     import { developerMode } from 'shared/lib/app'
     import { initialise, getStoragePath } from 'shared/lib/wallet'
-    import { SetupType } from 'shared/lib/router'
+    import { SetupType } from 'shared/lib/typings/routes'
 
     export let locale
     export let mobile

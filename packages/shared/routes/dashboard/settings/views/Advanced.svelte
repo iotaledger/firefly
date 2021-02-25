@@ -4,7 +4,7 @@
     import { developerMode } from 'shared/lib/app'
     import { Dropdown, Text, Radio, Checkbox, Button } from 'shared/components'
     import { DEFAULT_NODES as nodes, DEFAULT_NODE as node, isNewNodeValid } from 'shared/lib/network'
-    import { api, wallet } from 'shared/lib/wallet'
+    import { api, updateAccounts, wallet } from 'shared/lib/wallet'
     import { openPopup, closePopup } from 'shared/lib/popup'
 
     export let locale
@@ -155,6 +155,27 @@
     function handleAddNodeClick() {
         openPopup({ type: 'addNode', props: { addCustomNode, onSuccess: closePopup } })
     }
+
+    function resyncAccounts() {
+        const _sync = () => {
+            api.syncAccounts({
+                onSuccess(syncAccountsResponse) {
+                    const syncedAccounts = syncAccountsResponse.payload
+
+                    updateAccounts(syncedAccounts)
+                },
+                onError(error) {
+                    console.error(error)
+                },
+            })
+        }
+
+        if ($activeProfile.isStrongholdLocked) {
+            openPopup({ type: 'password', props: { onSuccess: _sync } })
+        } else {
+            _sync();
+        }
+    }
 </script>
 
 <div>
@@ -205,7 +226,7 @@
     <section id="resyncAccounts" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.resyncAccounts.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.resyncAccounts.description')}</Text>
-        <Button classes="w-1/4" onClick={() => {}}>{locale('actions.syncAll')}</Button>
+        <Button classes="w-1/4" onClick={resyncAccounts}>{locale('actions.syncAll')}</Button>
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <section id="errorLog" class="w-3/4">

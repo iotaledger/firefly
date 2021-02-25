@@ -10,6 +10,8 @@
         initialiseListeners,
         selectedAccountId,
         wallet,
+        updateAccounts,
+        updateBalanceOverview,
     } from 'shared/lib/wallet'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { activeProfile } from 'shared/lib/profile'
@@ -18,7 +20,8 @@
     import { Account, LineChart, WalletHistory, Security, CreateAccount, WalletBalance, WalletActions } from './views/'
     import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
     import { openPopup } from 'shared/lib/popup'
-    import { walletViewState, WalletViewStates } from 'shared/lib/router'
+    import { walletRoute } from 'shared/lib/router'
+    import { WalletRoutes } from 'shared/lib/typings/routes'
     import { sendParams } from 'shared/lib/app'
     import { priceData } from 'shared/lib/marketData'
 
@@ -113,21 +116,7 @@
                             accounts.update((accounts) => [...accounts, account])
 
                             if (idx === accountsResponse.payload.length - 1) {
-                                balanceOverview.update((balanceOverview) =>
-                                    Object.assign({}, balanceOverview, {
-                                        incoming: formatUnit(_totalBalance.incoming, 2),
-                                        incomingRaw: _totalBalance.incoming,
-                                        outgoing: formatUnit(_totalBalance.outgoing, 2),
-                                        outgoingRaw: _totalBalance.outgoing,
-                                        balance: formatUnit(_totalBalance.balance, 2),
-                                        balanceRaw: _totalBalance.balance,
-                                        balanceFiat: `${convertToFiat(
-                                            _totalBalance.balance,
-                                            $currencies[CurrencyTypes.USD],
-                                            $exchangeRates[$activeProfile.settings.currency]
-                                        )} ${$activeProfile.settings.currency}`,
-                                    })
-                                )
+                                updateBalanceOverview(_totalBalance.balance, _totalBalance.incoming, _totalBalance.outgoing)
                             }
                         } else {
                             console.error(err)
@@ -183,38 +172,9 @@
     function syncAccounts(payload) {
         api.syncAccounts({
             onSuccess(syncAccountsResponse) {
-                const _update = (existingPayload, newPayload, prop) => {
-                    const existingPayloadMap = existingPayload.reduce((acc, object) => {
-                        acc[object[prop]] = object
-
-                        return acc
-                    }, {})
-
-                    const newPayloadMap = newPayload.reduce((acc, object) => {
-                        acc[object[prop]] = object
-
-                        return acc
-                    }, {})
-
-                    return Object.values(Object.assign({}, existingPayloadMap, newPayloadMap))
-                }
-
                 const syncedAccounts = syncAccountsResponse.payload
 
-                accounts.update((storedAccounts) => {
-                    return storedAccounts.map((storedAccount) => {
-                        const syncedAccount = syncedAccounts.find((_account) => _account.id === storedAccount.id)
-
-                        return Object.assign({}, storedAccount, {
-                            // Update deposit address
-                            depositAddress: syncedAccount.depositAddress.address,
-                            // If we have received a new address, simply add it;
-                            // If we have received an existing address, update the properties.
-                            addresses: _update(storedAccount.addresses, syncedAccount.addresses, 'address'),
-                            messages: _update(storedAccount.messages, syncedAccount.messages, 'id'),
-                        })
-                    })
-                })
+                updateAccounts(syncedAccounts)
             },
             onError(error) {
                 console.error(error)
@@ -242,7 +202,7 @@
                                     if (!err) {
                                         const account = prepareAccountInfo(createAccountResponse.payload, meta)
                                         accounts.update((accounts) => [...accounts, account])
-                                        walletViewState.set(WalletViewStates.Init)
+                                        walletRoute.set(WalletRoutes.Init)
                                     } else {
                                         console.error(err)
                                     }
@@ -300,7 +260,7 @@
                         })
 
                         sendParams.set({ address: '', amount: 0, message: '' })
-                        walletViewState.set(WalletViewStates.Init)
+                        walletRoute.set(WalletRoutes.Init)
                     },
                     onError(error) {
                         console.error(error)
@@ -340,7 +300,7 @@
                     })
 
                     sendParams.set({ address: '', amount: 0, message: '' })
-                    walletViewState.set(WalletViewStates.Init)
+                    walletRoute.set(WalletRoutes.Init)
                 },
                 onError(response) {
                     console.error(response)
@@ -379,7 +339,7 @@
                     })
                 })
 
-                walletViewState.set(WalletViewStates.Init)
+                walletRoute.set(WalletRoutes.Init)
             },
             onError(error) {
                 console.error(error)
@@ -389,7 +349,7 @@
 
     $: {
         if ($deepLinkRequestActive && get(activeProfile).settings.deepLinking) {
-            walletViewState.set(WalletViewStates.Send)
+            walletRoute.set(WalletRoutes.Send)
             deepLinkRequestActive.set(false)
         }
     }
@@ -422,7 +382,7 @@
     })
 </script>
 
-{#if $walletViewState === WalletViewStates.Account && $selectedAccountId}
+{#if $walletRoute === WalletRoutes.Account && $selectedAccountId}
     <Account
         send={onSend}
         internalTransfer={onInternalTransfer}
@@ -435,7 +395,7 @@
             <DashboardPane classes="w-1/3 h-full">
                 <!-- Total Balance, Accounts list & Send/Receive -->
                 <div class="flex flex-auto flex-col flex-shrink-0 h-full">
-                    {#if $walletViewState === WalletViewStates.CreateAccount}
+                    {#if $walletRoute === WalletRoutes.CreateAccount}
                         <CreateAccount onCreate={onCreateAccount} {locale} />
                     {:else}
                         <WalletBalance {locale} />

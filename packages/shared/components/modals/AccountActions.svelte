@@ -1,7 +1,8 @@
 <script lang="typescript">
     import { getContext } from 'svelte'
     import { Text, Icon, Modal } from 'shared/components'
-    import { accountViewState, AccountViewStates } from 'shared/lib/router'
+    import { accountRoute } from 'shared/lib/router'
+    import { AccountRoutes } from 'shared/lib/typings/routes'
     import { openPopup } from 'shared/lib/popup'
 
     const account = getContext('selectedAccount')
@@ -11,7 +12,7 @@
     export let locale
 
     const handleCustomiseAccountClick = () => {
-        accountViewState.set(AccountViewStates.Manage)
+        accountRoute.set(AccountRoutes.Manage)
         isActive = false
     }
     const handleSyncAccountClick = () => {

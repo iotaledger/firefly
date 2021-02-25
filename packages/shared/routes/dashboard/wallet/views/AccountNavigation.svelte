@@ -2,7 +2,8 @@
     import { getInitials } from 'shared/lib/helpers'
     import { Text, Button } from 'shared/components'
     import { selectedAccountId } from 'shared/lib/wallet'
-    import { walletViewState, WalletViewStates, accountViewState, AccountViewStates } from 'shared/lib/router'
+    import { walletRoute, accountRoute,  } from 'shared/lib/router'
+    import { WalletRoutes, AccountRoutes } from 'shared/lib/typings/routes'
 
     export let locale
     export let accounts
@@ -14,8 +15,8 @@
     }
     function handleBackClick() {
         selectedAccountId.set(null)
-        walletViewState.set(WalletViewStates.Init)
-        accountViewState.set(AccountViewStates.Init)
+        walletRoute.set(WalletRoutes.Init)
+        accountRoute.set(AccountRoutes.Init)
     }
 </script>
 
