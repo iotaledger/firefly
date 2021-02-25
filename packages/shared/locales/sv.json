@@ -34,7 +34,7 @@
         "setup": {
             "title": "Ställ in din plånbok",
             "body": "Du kan skapa en ny plånbok eller importera en befintlig.",
-            "profile_name": "Profile Name"
+            "profile_name": "Profilnamn"
         },
         "password": {
             "title": "Skapa ett lösenord",
@@ -362,12 +362,12 @@
         "exportNewStronghold": "Exportera en ny Stronghold",
         "enableDeepLinks": "Aktivera hyperlänkar",
         "enableDeveloperMode": "Aktivera utvecklarläge",
-        "enableNotifications": "Aktivera notifikationer",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "Exportera tillstånd",
         "outsourceProofOfWork": "Outsourca bevis på arbete (PoW)",
         "unlock": "Lås upp",
         "update_firefly": "Uppdatera Firefly",
-        "install_firefly": "Installera Firefly",
+        "restart_now": "Restart now",
         "save_backup": "Spara säkerhetskopia",
         "customize_account": "Anpassa konto",
         "sync_account": "Synkronisera konto",
@@ -448,6 +448,12 @@
     "notifications": {
         "valueTx": "Tar emot {{value}} till {{account}}",
         "confirmed": "Utgående {{value}} från {{account}} har bekräftats",
-        "failed": "Utgående {{value}} från {{account}} misslyckades"
+        "failed": "Utgående {{value}} från {{account}} misslyckades",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

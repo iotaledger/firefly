@@ -34,7 +34,7 @@
         "setup": {
             "title": "Configurează portofelul tău",
             "body": "Poți crea un portofel nou sau să imporți unul existent.",
-            "profile_name": "Profile Name"
+            "profile_name": "Nume Profil"
         },
         "password": {
             "title": "Creează o parolă",
@@ -241,32 +241,32 @@
             }
         },
         "login": {
-            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "please_wait": "Așteaptă {time, plural, one {1 secundă} few {# secunde} other {# secunde}}",
+            "incorrect_attempts": "{attempts, plural, one {1 încercare incorectă} few {# încercări incorecte} other {# încercări incorecte}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "up_to_date": "Actualizat",
+                    "out_of_date": "Expirat"
                 },
                 "hardware_device": {
-                    "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "title": "Dispozitiv Hardware",
+                    "none_detected": "Niciunul detectat"
                 },
                 "stronghold_status": {
-                    "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "title": "Stare Stronghold",
+                    "locked": "Blocat",
+                    "unlocked": "Deblocat"
                 },
                 "stronghold_backup": {
-                    "title": "Stronghold Backup",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "title": "Rezervă Stronghold",
+                    "weeks_ago": "{weeks, plural, one {# săptămână} other {# săptămâni}}"
                 }
             },
             "network": {
-                "network_operational": "Network Operational",
+                "network_operational": "Rețeaua este operațională",
                 "network_degraded": "Network Degraded",
                 "network_down": "Network Down",
                 "status": "Status",
@@ -362,12 +362,12 @@
         "exportNewStronghold": "Export a new Stronghold",
         "enableDeepLinks": "Enable deep links",
         "enableDeveloperMode": "Enable developer mode",
-        "enableNotifications": "Enable notifications",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "Export state",
         "outsourceProofOfWork": "Outsource proof of work",
         "unlock": "Unlock",
         "update_firefly": "Update Firefly",
-        "install_firefly": "Install Firefly",
+        "restart_now": "Restart now",
         "save_backup": "Save backup",
         "customize_account": "Customise account",
         "sync_account": "Sync account",
@@ -448,6 +448,12 @@
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
         "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed"
+        "failed": "Outgoing {{value}} from {{account}} has failed",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

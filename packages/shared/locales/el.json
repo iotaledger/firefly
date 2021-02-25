@@ -34,7 +34,7 @@
         "setup": {
             "title": "Δημιουργία πορτοφολιού",
             "body": "Μπορείτε να φτιάξετε καινούριο πορτοφόλι ή να εισάξετε ένα υφιστάμενο.",
-            "profile_name": "Profile Name"
+            "profile_name": "Όνομα Προφίλ"
         },
         "password": {
             "title": "Δημιουργία κωδικού πρόσβασης",
@@ -362,12 +362,12 @@
         "exportNewStronghold": "Εξαγωγή ενός νέου Stronghold",
         "enableDeepLinks": "Ενεργοποίηση βαθιών συνδέσμων",
         "enableDeveloperMode": "Ενεργοποίηση λειτουργίας προγραμματιστή",
-        "enableNotifications": "Ενεργοποίηση ειδοποιήσεων",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "Εξαγωγή κατάστασης",
         "outsourceProofOfWork": "Ανάθεση λειτουργίας απόδειξης εργασίας (Proof of work)",
         "unlock": "Ξεκλείδωμα",
         "update_firefly": "Ενημέρωση Firefly",
-        "install_firefly": "Εγκατάσταση του Firefly",
+        "restart_now": "Restart now",
         "save_backup": "Αποθήκευση αντιγράφου ασφαλείας",
         "customize_account": "Προσαρμογή λογαριασμού",
         "sync_account": "Συγχρονισμός λογαριασμού",
@@ -448,6 +448,12 @@
     "notifications": {
         "valueTx": "Λήψη {{value}} στο {{account}}",
         "confirmed": "Τα εξερχόμενα {{value}} από {{account}} έχουν επιβεβαιωθεί",
-        "failed": "Αποτυχία εξερχομένου {{value}} από {{account}}"
+        "failed": "Αποτυχία εξερχομένου {{value}} από {{account}}",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

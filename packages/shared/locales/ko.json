@@ -362,12 +362,12 @@
         "exportNewStronghold": "새로운 '스트롱홀드' 내보내기",
         "enableDeepLinks": "웹페이지 링크 활성화하기",
         "enableDeveloperMode": "개발자 모드 활성화하기",
-        "enableNotifications": "알림 켜기",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "상태 내보내기",
         "outsourceProofOfWork": "원격 작업증명 수행하기",
         "unlock": "잠금해제하기",
         "update_firefly": "'파이어플라이' 업데이트하기",
-        "install_firefly": "Firefly 설치하기",
+        "restart_now": "Restart now",
         "save_backup": "백업 저장하기",
         "customize_account": "취향대로 계정 설정하기",
         "sync_account": "계정 동기화하기",
@@ -448,6 +448,12 @@
     "notifications": {
         "valueTx": "계정 {{account}}에 {{value}}를 받는 중",
         "confirmed": "계정 {{account}}에서 {{value}}를 보내는 거래가 성공적으로 확인되었습니다",
-        "failed": "계정 {{account}}에서 {{value}}를 보내는 거래가 실패하였습니다"
+        "failed": "계정 {{account}}에서 {{value}}를 보내는 거래가 실패하였습니다",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

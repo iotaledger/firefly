@@ -34,7 +34,7 @@
         "setup": {
             "title": "ウォレットを準備する",
             "body": "新しいウォレットを作成するか、既存のウォレットをインポートすることができます。",
-            "profile_name": "Profile Name"
+            "profile_name": "プロフィール名"
         },
         "password": {
             "title": "パスワードを作成します",
@@ -103,157 +103,157 @@
             "body_2": "このパスワードは、バックアップを最初に作成したときに設定したものです。"
         },
         "import_success": {
-            "title": "You have successfully recovered your backup",
-            "body": "You can now set up your new wallet."
+            "title": "バックアップを正常に復元しました",
+            "body": "新しいウォレットを設定できるようになりました。"
         },
         "migrate": {
-            "title": "Migrate your funds",
-            "body_1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
-            "new": "Your new wallet"
+            "title": "資金を移行",
+            "body_1": "これはあなたの新しいウォレットに資金を転送する自動化されたプロセスです。セキュリティを弱める使用済みアドレスを確認します。",
+            "body_2": "しばらく時間がかかる場合があります。移行中にデバイスをオフにしないでください。",
+            "existing": "あなたの古いウォレット",
+            "new": "あなたの新しいウォレット"
         },
         "migrate_failed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "残高",
+            "body": "残高は正しいですか？"
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "設定",
             "generalSettings": {
-                "title": "General Settings",
+                "title": "全般設定",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "security": {
-                "title": "Security",
+                "title": "セキュリティ",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
+                "title": "高度な設定",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Help & Information",
+                "title": "ヘルプ & 情報",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profile": {
-                "title": "Profile",
+                "title": "プロフィール",
                 "description": ""
             },
             "sync": {
-                "title": "Sync accounts",
+                "title": "アカウントを同期",
                 "description": ""
             },
             "theme": {
-                "title": "Theme",
+                "title": "テーマ：",
                 "description": ""
             },
             "language": {
-                "title": "Language",
+                "title": "言語:",
                 "description": ""
             },
             "currency": {
-                "title": "Currency",
+                "title": "通貨：",
                 "description": ""
             },
             "notifications": {
-                "title": "Notifications",
+                "title": "通知の設定",
                 "description": ""
             },
             "exportStronghold": {
-                "title": "Export Stronghold",
+                "title": "Stronghold をエクスポート",
                 "description": ""
             },
             "appLock": {
-                "title": "App Lock",
+                "title": "アプリをロック",
                 "description": ""
             },
             "changePassword": {
-                "title": "Change password",
+                "title": "パスワードの変更",
                 "description": ""
             },
             "changePincode": {
-                "title": "Change PIN code",
+                "title": "PINコードを変更",
                 "description": "",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "currentPincode": "現在のPIN",
+                "newPincode": "新しいPIN",
+                "confirmNewPincode": "新しいPINの確認",
+                "action": "PINを変更"
             },
             "resyncAccounts": {
-                "title": "Resync accounts",
+                "title": "アカウントの再同期",
                 "description": ""
             },
             "resetWallet": {
-                "title": "Reset wallet",
+                "title": "ウォレットをリセットします。",
                 "description": ""
             },
             "deepLinks": {
-                "title": "Deep links",
+                "title": "ディープ リンク",
                 "description": ""
             },
             "developerMode": {
-                "title": "Developer mode",
+                "title": "開発者モード",
                 "description": ""
             },
             "nodeSettings": {
-                "title": "Node settings",
+                "title": "ノードの設定",
                 "description": ""
             },
             "configureNodeList": {
-                "title": "Configure node list",
+                "title": "ノードリストの設定",
                 "description": ""
             },
             "proofOfWork": {
-                "title": "Proof of work",
+                "title": "プルーフ・オブ・ワーク",
                 "description": ""
             },
             "errorLog": {
-                "title": "Error log",
+                "title": "エラーログ",
                 "description": ""
             },
             "stateExport": {
-                "title": "State export",
+                "title": "状態のエクスポート",
                 "description": ""
             },
             "troubleshoot": {
-                "title": "Troubleshoot",
+                "title": "トラブルシューティング",
                 "description": ""
             },
             "documentation": {
-                "title": "Documentation",
+                "title": "ドキュメント",
                 "description": ""
             },
             "faq": {
-                "title": "FAQ",
+                "title": "よくある質問",
                 "description": ""
             },
             "discord": {
-                "title": "Discord",
+                "title": "Discordにてお問い合わせください",
                 "description": ""
             },
             "about": {
-                "title": "About",
+                "title": "このプログラムについて",
                 "description": ""
             }
         },
         "login": {
-            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "please_wait": "お待ちください {time, plural, other {# 秒}}",
+            "incorrect_attempts": "{attempts, plural, other {# 間違った attempt}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "up_to_date": "最新",
+                    "out_of_date": "古いバージョンです"
                 },
                 "hardware_device": {
-                    "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "title": "外部デバイス",
+                    "none_detected": "何も検出されませんでした"
                 },
                 "stronghold_status": {
                     "title": "Stronghold Status",
@@ -362,12 +362,12 @@
         "exportNewStronghold": "Export a new Stronghold",
         "enableDeepLinks": "Enable deep links",
         "enableDeveloperMode": "Enable developer mode",
-        "enableNotifications": "Enable notifications",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "Export state",
         "outsourceProofOfWork": "Outsource proof of work",
         "unlock": "Unlock",
         "update_firefly": "Update Firefly",
-        "install_firefly": "Install Firefly",
+        "restart_now": "Restart now",
         "save_backup": "Save backup",
         "customize_account": "Customise account",
         "sync_account": "Sync account",
@@ -434,7 +434,7 @@
         "account_name": "Account name",
         "latest_transactions": "Latest Transactions",
         "transactions": "Transactions",
-        "security": "Security",
+        "security": "セキュリティ",
         "account_address": "Account Address",
         "nodes": "Nodes"
     },
@@ -448,6 +448,12 @@
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
         "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed"
+        "failed": "Outgoing {{value}} from {{account}} has failed",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

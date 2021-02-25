@@ -34,7 +34,7 @@
         "setup": {
             "title": "Nastavení peněženky",
             "body": "Můžete vytvořit novou nebo importovat existující peněženku.",
-            "profile_name": "Profile Name"
+            "profile_name": "Název profilu"
         },
         "password": {
             "title": "Vytvoření hesla",
@@ -179,9 +179,9 @@
                 "title": "Změnit PIN kód",
                 "description": "",
                 "currentPincode": "Aktuální PIN kód",
-                "newPincode": "Nový PIN kód",
-                "confirmNewPincode": "Potvrďte nový PIN kód",
-                "action": "Změnit PIN kód"
+                "newPincode": "Nový PIN",
+                "confirmNewPincode": "Potvrďte nový PIN",
+                "action": "Změnit PIN"
             },
             "resyncAccounts": {
                 "title": "Opakovaná synchronizace účtů",
@@ -204,7 +204,7 @@
                 "description": ""
             },
             "configureNodeList": {
-                "title": "Konfigurovat seznam uzlů",
+                "title": "Konfigurovat seznam node",
                 "description": ""
             },
             "proofOfWork": {
@@ -362,12 +362,12 @@
         "exportNewStronghold": "Exportovat nový Stronghold",
         "enableDeepLinks": "Povolit hluboké odkazy",
         "enableDeveloperMode": "Povolit vývojářský režim",
-        "enableNotifications": "Povolit notifikace",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "Exportovat stav",
         "outsourceProofOfWork": "Outsourcovaný Proof of Work",
         "unlock": "Odemknout",
         "update_firefly": "Aktualizovat Firefly",
-        "install_firefly": "Instalovat Firefly",
+        "restart_now": "Restart now",
         "save_backup": "Uložit zálohu",
         "customize_account": "Přizpůsobit účet",
         "sync_account": "Synchronizovat účet",
@@ -448,6 +448,12 @@
     "notifications": {
         "valueTx": "Přijímání {{value}} na {{account}}",
         "confirmed": "Odchozí {{value}} od {{account}} byl potvrzen",
-        "failed": "Odchozí {{value}} od {{account}} selhal"
+        "failed": "Odchozí {{value}} od {{account}} selhal",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

@@ -34,7 +34,7 @@
         "setup": {
             "title": "Skonfiguruj swój portfel",
             "body": "Możesz utworzyć nowy portfel lub zaimportować istniejący.",
-            "profile_name": "Profile Name"
+            "profile_name": "Nazwa profilu"
         },
         "password": {
             "title": "Utwórz hasło",
@@ -362,12 +362,12 @@
         "exportNewStronghold": "Eksportuj nowy Stronghold",
         "enableDeepLinks": "Włącz deep linki",
         "enableDeveloperMode": "Włącz tryb deweloperski",
-        "enableNotifications": "Włącz powiadomienia",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "Eksportuj stan",
         "outsourceProofOfWork": "Wykonuj proof of work zdalnie",
         "unlock": "Odblokuj",
         "update_firefly": "Zaktualizuj Firefly",
-        "install_firefly": "Zainstaluj Firefly",
+        "restart_now": "Restart now",
         "save_backup": "Zapisz kopię zapasową",
         "customize_account": "Dostosuj konto",
         "sync_account": "Synchronizuj konto",
@@ -448,6 +448,12 @@
     "notifications": {
         "valueTx": "Odbieranie {{value}} na konto {{account}}",
         "confirmed": "Wysyłka {{value}} z konta {{account}} została potwierdzona",
-        "failed": "Wysłanie {{value}} z konta {{account}} nie powiodło się"
+        "failed": "Wysłanie {{value}} z konta {{account}} nie powiodło się",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }
