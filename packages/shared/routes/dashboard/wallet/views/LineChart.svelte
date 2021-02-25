@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onMount, getContext } from 'svelte'
     import { Dropdown, Chart, Text } from 'shared/components'
-    import { TIMEFRAME_MAP, HistoryDataProps } from 'shared/lib/marketData'
+    import { TIMEFRAME_MAP } from 'shared/lib/marketData'
     import { CurrencyTypes } from 'shared/lib/currency'
     import { activeProfile } from 'shared/lib/profile'
     import type { ChartData } from 'shared/lib/chart'
@@ -24,24 +24,26 @@
     let chartData: ChartData = { labels: [], data: [], tooltips: [] }
     let currencyDropdown = []
 
-    $: color = $selectedAccount ? $selectedAccount.color : 'blue'
     $: data = chartData.data
     $: labels = chartData.labels
     $: tooltips = chartData.tooltips
+    $: color = $selectedAccount ? $selectedAccount.color : 'blue'
 
     /** Chart data */
-    $: if ($selectedChart || $chartCurrency || $chartTimeframe || $walletBalanceHistory) {
-        // Account value chart
-        if ($selectedAccount) {
-            chartData = getAccountValueData($accountsBalanceHistory[$selectedAccount.index])
-        } else {
-            // Token value chart
-            if ($selectedChart === DashboardChartType.TOKEN) {
-                chartData = getTokenData()
-            }
-            // Portfolio value chart
-            if ($selectedChart === DashboardChartType.PORTFOLIO) {
-                chartData = getPortfolioData($walletBalanceHistory)
+    $: {
+        if ($selectedChart || $chartCurrency || $chartTimeframe || $walletBalanceHistory) {
+            // Account value chart
+            if ($selectedAccount) {
+                chartData = getAccountValueData($accountsBalanceHistory[$selectedAccount.index])
+            } else {
+                // Token value chart
+                if ($selectedChart === DashboardChartType.TOKEN) {
+                    chartData = getTokenData()
+                }
+                // Portfolio value chart
+                if ($selectedChart === DashboardChartType.PORTFOLIO) {
+                    chartData = getPortfolioData($walletBalanceHistory)
+                }
             }
         }
     }

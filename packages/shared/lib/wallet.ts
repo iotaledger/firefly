@@ -1,5 +1,5 @@
 import { writable, Writable, get } from 'svelte/store'
-import type { MessageResponse, Actor } from './typings/bridge'
+import type { Actor } from './typings/bridge'
 import type { Address } from './typings/address'
 import type { Message } from './typings/message'
 import type { Event, TransactionEventPayload, ConfirmationStateChangeEventPayload } from './typings/events'
@@ -9,9 +9,6 @@ import type { HistoryData, PriceData } from 'shared/lib/marketData'
 import { HistoryDataProps } from 'shared/lib/marketData'
 import { CurrencyTypes } from 'shared/lib/currency'
 import { _ } from 'shared/lib/i18n'
-import { Unit, convertUnits } from '@iota/unit-converter'
-import { message } from './typings'
-import { time } from 'svelte-i18n'
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
@@ -276,7 +273,7 @@ export const getAccountsBalanceHistory = (accounts: Account[], priceData: PriceD
                 return <any>new Date(a.timestamp).getTime() - <any>new Date(b.timestamp).getTime()
             })
             // Calculate the variations for each account
-            let balanceSoFar = 0;
+            var balanceSoFar = 0;
             let accountBalanceVariations = [{ balance: balanceSoFar, timestamp: '0' }]
             messages.forEach((message) => {
                 if (message.incoming) {
@@ -354,52 +351,4 @@ export const getWalletBalanceHistory = (accountsBalanceHistory): HistoryData => 
 
     return balanceHistory
 
-}
-
-export const getAccountActivity = (account) => {
-    const activityMonths = 6
-    var date = new Date();
-    let activityTimeframes = []
-    let accountActivity = []
-    let messages = account.messages.sort((a, b) => {
-        return <any>new Date(a.timestamp).getTime() - <any>new Date(b.timestamp).getTime()
-    })
-    for (var i = 0; i < activityMonths; i++) {
-        var start = new Date(date.getFullYear(), date.getMonth() - i, 1).getTime();
-        var end = new Date(date.getFullYear(), date.getMonth() - i + 1, 0).getTime();
-        activityTimeframes.push({ start, end })
-    }
-    if (account.messages.length) {
-        let index = 0
-        activityTimeframes.forEach(({ start, end }) => {
-            let incoming = 0
-            let outgoing = 0
-            if (new Date(messages[messages.length - 1].timestamp).getTime() < start || new Date(messages[messages.length - 1].timestamp).getTime() > end) {
-                accountActivity.push({ timestamp: start, incoming: 0, outgoing: 0 })
-                return
-            }
-            for (index; index < messages.length; index++) {
-                const message = messages[index]
-                const messageTimestamp = new Date(message.timestamp).getTime()
-                if (messageTimestamp >= start && messageTimestamp <= end) {
-                    const valueMiota = convertUnits(message.value, Unit.i, Unit.Mi)
-                    if (message.incoming) {
-                        incoming += valueMiota
-                    }
-                    else {
-                        outgoing += valueMiota
-                    }
-                }
-                else if (messageTimestamp > end) return
-            }
-            accountActivity.push({ timestamp: start, incoming, outgoing })
-        })
-    }
-    else {
-        accountActivity = activityTimeframes.map(({ start, end }) => ({ timestamp: start, incoming: 0, outgoing: 0 }))
-    }
-    accountActivity = accountActivity.sort((a, b) => {
-        return <any>new Date(a.timestamp).getTime() - <any>new Date(b.timestamp).getTime()
-    })
-    return accountActivity
 }

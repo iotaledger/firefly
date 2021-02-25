@@ -15,13 +15,9 @@
 
     const fullConfig = resolveConfig(tailwindConfig)
 
-    onMount(() => {
-        createChart()
-    })
+    onMount(createChart)
 
-    afterUpdate(() => {
-        reinitialise()
-    })
+    afterUpdate(reinitialise)
 
     function createChart() {
         const ctx = canvas

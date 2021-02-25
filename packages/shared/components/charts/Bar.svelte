@@ -5,14 +5,11 @@
     import tailwindConfig from 'shared/tailwind.config.js'
 
     export let labels = []
-    export let data = []
+    export let data = [{}, {}]
     export let color = 'blue'
 
     let canvas
     let chart
-    let beautifiedLabels = labels
-    $: incoming = data.map((_data) => _data.incoming)
-    $: outgoing = data.map((_data) => _data.outgoing)
 
     const fullConfig = resolveConfig(tailwindConfig)
 
@@ -114,21 +111,19 @@
         chart = new Chart(ctx, {
             type: 'roundedBar',
             data: {
-                labels: beautifiedLabels,
+                labels,
                 datasets: [
                     {
-                        label: 'Incoming',
+                        ...data[0],
                         backgroundColor: fullConfig.theme.colors[color]['500'],
                         hoverBackgroundColor: fullConfig.theme.colors[color]['500'],
                         barThickness: 7,
-                        data: incoming,
                     },
                     {
-                        label: 'Outgoing',
+                        ...data[1],
                         backgroundColor: fullConfig.theme.colors['gray']['400'],
                         hoverBackgroundColor: fullConfig.theme.colors['gray']['400'],
                         barThickness: 7,
-                        data: outgoing,
                     },
                 ],
             },
@@ -173,8 +168,11 @@
                     bodyFontColor: fullConfig.theme.colors[color]['200'],
                     callbacks: {
                         label: function (tooltipItem, data) {
-                            const datasetLabel = data.datasets[tooltipItem.datasetIndex].label || ''
-                            return `${datasetLabel} ${tooltipItem.value} Mi`
+                            let dataset = data.datasets[tooltipItem.datasetIndex]
+                            if (dataset && dataset.tooltips) {
+                                return dataset.tooltips[tooltipItem.datasetIndex]
+                            }
+                            return ''
                         },
                     },
                 },
@@ -184,26 +182,14 @@
 
     onMount(() => {
         createRoundedBarChart()
-        formatLabels()
         createChart()
     })
 
-    afterUpdate(() => {
-        formatLabels()
-        reinitialise()
-    })
+    afterUpdate(reinitialise)
 
     function reinitialise() {
         chart.destroy()
         createChart()
-    }
-
-    function formatLabels() {
-        beautifiedLabels = labels.map((label) =>
-            new Date(label).toLocaleString('default', {
-                month: 'short',
-            })
-        )
     }
 </script>
 
