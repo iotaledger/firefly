@@ -170,7 +170,7 @@
                         label: function (tooltipItem, data) {
                             let dataset = data.datasets[tooltipItem.datasetIndex]
                             if (dataset && dataset.tooltips) {
-                                return dataset.tooltips[tooltipItem.datasetIndex]
+                                return dataset.tooltips[tooltipItem.index]
                             }
                             return ''
                         },
