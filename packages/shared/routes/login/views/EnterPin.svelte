@@ -23,7 +23,7 @@
 
     let timeRemainingBeforeNextAttempt = WAITING_TIME_AFTER_MAX_INCORRECT_ATTEMPTS
 
-    $: hasCorrectLength = Number.isInteger(pinCode) && `${pinCode}`.length === 6
+    $: hasCorrectFormat = validatePinFormat(pinCode)
     $: hasReachedMaxAttempts = attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS
 
     let buttonText = setButtonText(timeRemainingBeforeNextAttempt)
@@ -52,13 +52,7 @@
     }
 
     function onSubmit() {
-        if (!validatePinFormat(pinCode)) {
-            attempts++
-            if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
-                clearInterval(timerId)
-                timerId = setInterval(countdown, 1000)
-            }
-        } else {
+        if (!hasReachedMaxAttempts) {
             const profile = get(activeProfile)
 
             PincodeManager.verify(profile.id, pinCode.toString())
@@ -76,7 +70,11 @@
                             })
                         })
                     } else {
-                        console.info('Incorrect pincode provided!')
+                        attempts++
+                        if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
+                            clearInterval(timerId)
+                            timerId = setInterval(countdown, 1000)
+                        }
                     }
                 })
                 .catch((error) => {
@@ -114,7 +112,7 @@
                           }) : locale('actions.enter_your_pin')}
                 </Text>
             </div>
-            <Button classes="w-96" disabled={!hasCorrectLength || hasReachedMaxAttempts} onClick={() => onSubmit()}>
+            <Button classes="w-96" disabled={!hasCorrectFormat || hasReachedMaxAttempts} onClick={() => onSubmit()}>
                 {hasReachedMaxAttempts ? buttonText : locale('actions.continue')}
             </Button>
         </div>

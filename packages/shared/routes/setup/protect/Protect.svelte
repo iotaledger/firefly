@@ -54,13 +54,13 @@
                 break
             case ProtectState.Confirm:
                 try {
-                    if (!validatePinFormat(pin.toString())) {
+                    if (!validatePinFormat(pin)) {
                         throw new Error('Invalid pin code!')
                     }
 
-                    await PincodeManager.set(get(activeProfile).id, pin.toString())
+                    await PincodeManager.set(get(activeProfile).id, pin)
 
-                    api.setStoragePassword(pin.toString(), {
+                    api.setStoragePassword(pin, {
                         onSuccess() {
                             dispatch('next', { pin })
                         },
