@@ -26,7 +26,7 @@ export const initMenu = () => {
             mainMenu.popup(mainWindow)
         })
 
-        ipcMain.handle('updates.check', () => {
+        ipcMain.handle('updates-check', () => {
             
         })
 
