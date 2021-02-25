@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "अपना वॉलेट सेट करें|",
-            "body": "आप एक नया वॉलेट बना सकते हैं या एक मौजूदा आयात कर सकते हैं।"
+            "body": "आप एक नया वॉलेट बना सकते हैं या एक मौजूदा आयात कर सकते हैं।",
+            "profile_name": "प्रोफ़ाइल नाम"
         },
         "password": {
             "title": "एक पासवर्ड बनाएं",
@@ -64,7 +65,7 @@
             "body_1": "सटीक क्रम में शब्दों को सावधानीपूर्वक लिखें|",
             "body_2": "अपने पुनर्प्राप्ति वाक्यांश को निजी और सुरक्षित रूप से संग्रहीत रखें। इसे किसी के साथ साझा न करें।",
             "reveal_recovery_phrase": "पुनर्प्राप्ति वाक्यांश प्रकट करें",
-            "hide_recovery_phrase": "Hide recovery phrase"
+            "hide_recovery_phrase": "अपने वसूली वाक्यांश को छुपाये"
         },
         "verify_recovery_phrase": {
             "title": "वसूली वाक्यांश सत्यापित करें",
@@ -175,12 +176,12 @@
                 "description": ""
             },
             "changePincode": {
-                "title": "Change PIN code",
+                "title": "पिन कोड बदलें",
                 "description": "",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "currentPincode": "वर्तमान पिन",
+                "newPincode": "नया पिन",
+                "confirmNewPincode": "पिन की पुष्टि करें",
+                "action": "पिन बदलें"
             },
             "resyncAccounts": {
                 "title": "खाता को फिर से सिंक करें",
@@ -203,7 +204,7 @@
                 "description": ""
             },
             "configureNodeList": {
-                "title": "Configure node list",
+                "title": "नोड कॉन्फ़िगर करें",
                 "description": ""
             },
             "proofOfWork": {
@@ -273,8 +274,8 @@
                 "confirmation_rate": "पुष्टि दर"
             },
             "profile_modal": {
-                "all_settings": "All settings",
-                "logout": "Log out"
+                "all_settings": "सभी सेटिंग्स",
+                "logout": "लॉग आउट"
             }
         }
     },
@@ -315,12 +316,12 @@
             "current_balance": "वर्तमान बैलेंस: {balance}"
         },
         "node": {
-            "title_add": "Add a node",
-            "title_details": "Node details",
-            "node_address": "Node address",
-            "optional_username": "Username (optional)",
-            "optional_password": "Password (optional)",
-            "set_as_primary_node": "Set as primary node"
+            "title_add": "नया नोड जोड़ें",
+            "title_details": "नोड विवरण",
+            "node_address": "नोड एड्रेस",
+            "optional_username": "यूजरनाम (वैकल्पिक)",
+            "optional_password": "पासवर्ड (वैकल्पिक)",
+            "set_as_primary_node": "प्राथमिक नोड के रूप में सेट करें"
         }
     },
     "actions": {
@@ -361,19 +362,19 @@
         "exportNewStronghold": "एक नया स्ट्रॉन्गहोल्ड निर्यात करें",
         "enableDeepLinks": "डीप लिंक्स सक्षम करें",
         "enableDeveloperMode": "डेवलपर मोड सक्षम करें",
-        "enableNotifications": "नोटिफिकेशंस सक्षम करें",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "स्थिति निर्यात करें",
         "outsourceProofOfWork": "आउटसोर्स प्रूफ ऑफ़ वर्क",
         "unlock": "अनलॉक करें",
         "update_firefly": "अपडेट फायरफ्लाई",
-        "install_firefly": "Install Firefly",
+        "restart_now": "Restart now",
         "save_backup": "बैकअप सहेजें",
         "customize_account": "अनुकूलित करें अपना खाता",
         "sync_account": "खाता को सिंक करें",
         "view_address_history": "एड्रेस का इतिहास देखें",
         "delete_account": "खाता नष्ट करें",
-        "max": "Max",
-        "add_node": "Add node"
+        "max": "अधिकतम",
+        "add_node": "नया नोड जोड़ें"
     },
     "general": {
         "password": "पासवर्ड",
@@ -427,15 +428,15 @@
         "automaticNodeSelection": "स्वचालित नोड चयन",
         "manualNodeSelection": "मैन्युअली नोड चुनना",
         "profiles": "प्रोफाइल्स",
-        "developerProfile": "Developer Profile",
-        "dev": "Dev",
+        "developerProfile": "डेवलपर मोड",
+        "dev": "देव",
         "create_account": "खाता बनाएं",
         "account_name": "अकाउंट नाम",
         "latest_transactions": "नवीनतम ट्रांसक्शन्स",
         "transactions": "ट्रांसक्शन्स",
         "security": "सुरक्षा",
         "account_address": "खाते का पता",
-        "nodes": "Nodes"
+        "nodes": "नोड्स"
     },
     "dates": {
         "today": "आज",
@@ -445,8 +446,14 @@
         "years_ago": "{time, plural, one {# साल} other {# साल}} पहले"
     },
     "notifications": {
-        "valueTx": "Receiving {{value}} to {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed"
+        "valueTx": "{{value}} में {{account}} रिसीव हो रहा है",
+        "confirmed": "{{account}} से आउटगोइंग {{value}} की पुष्टि हो गयी है",
+        "failed": "{{account}} से आउटगोइंग {{value}} फ़ैल हो गयी है",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

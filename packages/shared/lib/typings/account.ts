@@ -31,9 +31,7 @@ export interface Account {
     clientOptions: ClientOptions
     index: number
     lastSyncedAt: string
-    signerType: {
-        type: 'Stronghold'
-    }
+    signerType: SignerType
     storagePath: string
     messages: Message[]
     addresses: Address[]

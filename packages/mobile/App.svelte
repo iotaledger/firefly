@@ -3,9 +3,11 @@
     import { fetchMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { setupI18n, isLocaleLoaded, dir, _ } from 'shared/lib/i18n'
-    import { darkMode, mobile, logged } from 'shared/lib/app'
+    import { darkMode, mobile, loggedIn } from 'shared/lib/app'
     import { goto } from 'shared/lib/helpers'
-    import { initRouter, routerNext, routerPrevious, requestMnemonic, AppRoute } from 'shared/lib/router'
+    import { requestMnemonic } from 'shared/lib/wallet'
+    import { initRouter, routerNext, routerPrevious } from 'shared/lib/router'
+    import { AppRoute } from 'shared/lib/typings/routes'
     import { Route, Toggle } from 'shared/components'
     import {
         Splash,
@@ -86,7 +88,7 @@
         <div class="mr-4">
             <Toggle on={darkMode} />
         </div>
-        <button on:click={() => logged.update(() => false)}>reset</button>
+        <button on:click={() => loggedIn.update(() => false)}>reset</button>
     </div>
     <!--  -->
     <Route route={AppRoute.Welcome}>

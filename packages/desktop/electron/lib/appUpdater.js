@@ -1,7 +1,7 @@
 const { ipcMain } = require('electron')
 const { autoUpdater, CancellationToken } = require('electron-updater')
 const path = require('path')
-const packageJson = require('../package.json')
+const packageJson = require('../../package.json')
 const electronLog = require('electron-log')
 
 let autoUpdateMainWindow

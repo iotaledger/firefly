@@ -45,7 +45,10 @@ export interface ErrorEventPayload {
 export interface BalanceChangeEventPayload {
     accountId: string
     address: Address
-    balance: number
+    balanceChange: {
+        spent: number;
+        received: number;
+    }
 }
 
 export interface TransactionEventPayload {

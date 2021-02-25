@@ -1,8 +1,9 @@
 <script lang="typescript">
-    import { getContext } from 'svelte'
-    import { SettingsIcons, SettingsTitles, GeneralSettings, SecuritySettings, AdvancedSettings, HelpAndInfo } from '../types'
+    import { SettingsRoutes, GeneralSettings, SecuritySettings, AdvancedSettings, HelpAndInfo } from 'shared/lib/typings/routes'
+    import { SettingsIcons } from 'shared/lib/typings/icons'
     import { Text, SettingsMenu } from 'shared/components'
-    import { profileType, ProfileType } from 'shared/lib/wallet'
+    import { settingsRoute } from 'shared/lib/router';
+    import { profileType, ProfileType } from 'shared/lib/wallet';
 
     export let locale
     export let mobile
@@ -13,7 +14,6 @@
         delete securitySettings.ChangePassword
     }
 
-    const route = getContext('route')
 </script>
 
 {#if mobile}
@@ -29,7 +29,7 @@
                 settings={GeneralSettings}
                 title={locale('views.settings.generalSettings.title')}
                 description={locale('views.settings.generalSettings.description')}
-                onClick={() => route.update(() => SettingsTitles.GeneralSettings)}
+                onClick={() => settingsRoute.set(SettingsRoutes.GeneralSettings)}
                 {locale} />
             <SettingsMenu
                 icon="security"
@@ -38,7 +38,7 @@
                 settings={securitySettings}
                 title={locale('views.settings.security.title')}
                 description={locale('views.settings.security.description')}
-                onClick={() => route.update(() => SettingsTitles.Security)}
+                onClick={() => settingsRoute.set(SettingsRoutes.Security)}
                 {locale} />
             <SettingsMenu
                 icon="tools"
@@ -47,7 +47,7 @@
                 settings={AdvancedSettings}
                 title={locale('views.settings.advancedSettings.title')}
                 description={locale('views.settings.advancedSettings.description')}
-                onClick={() => route.update(() => SettingsTitles.AdvancedSettings)}
+                onClick={() => settingsRoute.set(SettingsRoutes.AdvancedSettings)}
                 {locale} />
             <SettingsMenu
                 icon="info"
@@ -56,7 +56,7 @@
                 settings={HelpAndInfo}
                 title={locale('views.settings.helpAndInfo.title')}
                 description={locale('views.settings.helpAndInfo.description')}
-                onClick={() => route.update(() => SettingsTitles.HelpAndInfo)}
+                onClick={() => settingsRoute.set(SettingsRoutes.HelpAndInfo)}
                 {locale} />
         </div>
     </div>

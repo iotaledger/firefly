@@ -1,5 +1,6 @@
 import { readable, writable, get } from 'svelte/store'
-import { logged, notification, walletPin, strongholdPassword } from 'shared/lib/app'
+import { loggedIn, notification, walletPin, strongholdPassword } from 'shared/lib/app'
+import { AppRoute, SetupType, AccountType, WalletRoutes, AccountRoutes, SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
 import { profiles } from 'shared/lib/profile'
 
 /**
@@ -12,7 +13,7 @@ import { profiles } from 'shared/lib/profile'
  * @returns {void}
  */
 export const setRoute = (path: string): void => {
-    view.set(path)
+    route.set(path)
 }
 
 /**
@@ -33,47 +34,15 @@ export const path = readable<string>(null, (set) => {
     }
 })
 
+/**
+ * Onboarding/setup type
+ */
+let walletSetupType = writable<SetupType>(null)
+
 /*
  * Current view
  */
-export const view = writable<string>(null)
-
-/**
- * Application Routes
- */
-export enum AppRoute {
-    Welcome = 'welcome',
-    Legal = 'legal',
-    Language = 'language',
-    Setup = 'setup',
-    Create = 'create',
-    Password = 'password',
-    LedgerSetup = 'ledgerSetup',
-    Protect = 'protect',
-    Backup = 'backup',
-    Import = 'import',
-    Migrate = 'migrate',
-    Balance = 'balance',
-    Congratulations = 'congratulations',
-    Dashboard = 'dashboard',
-    Login = 'login',
-}
-
-export enum SetupType {
-    New = 'new',
-    Import = 'import',
-    Mnemonic = 'mnemonic',
-    Seed = 'seed',
-    Stronghold = 'stronghold',
-    Seedvault = 'seedvault',
-    TrinityLedger = 'trinityLedger',
-    FireflyLedger = 'fireflyLedger'
-}
-
-export enum AccountType {
-    Software = 'Software',
-    Ledger = 'Ledger'
-}
+export const route = writable<string>(null)
 
 /**
  * Application route history
@@ -81,38 +50,24 @@ export enum AccountType {
 const history = writable<Array<string>>([])
 
 /**
- * Onboarding/setup type
+ * Active dashboard tab
  */
-let walletSetupType = writable<SetupType>(null)
+export const dashboardRoute = writable<Tabs>(Tabs.Wallet)
 
 /**
- * Wallet view state
+ * Wallet view route
  */
-export enum WalletViewStates {
-    Init = 'init',
-    Account = 'account',
-    Send = 'send',
-    Receive = 'receive',
-    CreateAccount = 'createAccount',
-}
-export const walletViewState = writable<WalletViewStates>(WalletViewStates.Init)
+export const walletRoute = writable<WalletRoutes>(WalletRoutes.Init)
 
 /**
- * Account view state
+ * Account view route
  */
-export enum AccountViewStates {
-    Init = 'init',
-    Manage = 'manage',
-    Send = 'send',
-    Receive = 'receive',
-}
-
-export const accountViewState = writable<AccountViewStates>(AccountViewStates.Init)
+export const accountRoute = writable<AccountRoutes>(AccountRoutes.Init)
 
 /**
- * Onboarding/setup account type
+ * Settings view route
  */
-let walletSetupAccountType = writable<AccountType>(null)
+export const settingsRoute = writable<SettingsRoutes>(SettingsRoutes.Init)
 
 /**
  * Navigate to initial route
@@ -130,14 +85,19 @@ export const initRouter = () => {
 // TODO: only handle route changes, not app variables
 export const routerNext = (event) => {
     let params = event.detail || {}
-    const currentRoute: string = get(view)
+    const currentRoute: string = get(route)
     let nextRoute: AppRoute
 
     switch (currentRoute) {
         case AppRoute.Login:
             const { shouldAddProfile } = params
 
-            nextRoute = shouldAddProfile ? AppRoute.Setup : AppRoute.Dashboard
+            if (shouldAddProfile) {
+                nextRoute = AppRoute.Setup
+            } else {
+                loggedIn.set(true)
+                nextRoute = AppRoute.Dashboard
+            }
             break
         case AppRoute.Dashboard:
             const { reset } = params
@@ -146,7 +106,6 @@ export const routerNext = (event) => {
                 nextRoute = AppRoute.Login
             }
             break
-
         case AppRoute.Welcome:
             nextRoute = AppRoute.Legal
             break
@@ -169,7 +128,6 @@ export const routerNext = (event) => {
             break
         case AppRoute.Create:
             const { accountType } = params
-            walletSetupAccountType.set(accountType)
             if (accountType === AccountType.Software) {
                 nextRoute = AppRoute.Password
             } else if (accountType === AccountType.Ledger) {
@@ -191,7 +149,7 @@ export const routerNext = (event) => {
             if (pin) {
                 walletPin.set(pin)
                 const walletSetupType_ = get(walletSetupType)
-                if ((walletSetupType_ === SetupType.Mnemonic || walletSetupType_ === SetupType.Stronghold) || get(walletSetupAccountType) === AccountType.Ledger) {
+                if ([SetupType.Mnemonic, SetupType.Stronghold, SetupType.FireflyLedger, SetupType.TrinityLedger].includes(walletSetupType_)) {
                     nextRoute = AppRoute.Congratulations
                 } else {
                     nextRoute = AppRoute.Backup
@@ -224,7 +182,7 @@ export const routerNext = (event) => {
             nextRoute = AppRoute.Congratulations
             break
         case AppRoute.Congratulations:
-            logged.set(true)
+            loggedIn.set(true)
             nextRoute = AppRoute.Dashboard
             break
     }

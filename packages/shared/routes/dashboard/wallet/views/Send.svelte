@@ -5,7 +5,8 @@
     import { sendParams } from 'shared/lib/app'
     import { activeProfile } from 'shared/lib/profile'
     import { ADDRESS_LENGTH, VALID_MAINNET_ADDRESS, VALID_DEVNET_ADDRESS } from 'shared/lib/utils'
-    import { walletViewState, WalletViewStates, accountViewState, AccountViewStates } from 'shared/lib/router'
+    import { walletRoute, accountRoute } from 'shared/lib/router'
+    import { WalletRoutes, AccountRoutes } from 'shared/lib/typings/routes'
 
     export let locale
     export let send
@@ -39,19 +40,23 @@
     }
     const handleSendClick = () => {
         if (selectedSendType === SEND_TYPE.INTERNAL) {
-            internalTransfer(from.value, to.id, $sendParams.amount)
+            internalTransfer(from.id, to.id, $sendParams.amount)
         } else {
-            send(from.value, $sendParams.address, $sendParams.amount)
+            send(from.id, $sendParams.address, $sendParams.amount)
         }
     }
     const handleBackClick = () => {
-        accountViewState.set(AccountViewStates.Init)
+        accountRoute.set(AccountRoutes.Init)
         if (!$account) {
-            walletViewState.set(WalletViewStates.Init)
+            walletRoute.set(WalletRoutes.Init)
         }
     }
     const format = (account) => {
-        return { value: account.id, label: `${account.name} • ${account.balance}`, balance: account.rawIotaBalance }
+        return {
+            ...account,
+            label: `${account.name} • ${account.balance}`,
+            balance: account.rawIotaBalance,
+        }
     }
     const handleMaxClick = () => {
         amount = convertUnits(from.balance, Unit.i, unit)

@@ -1,4 +1,4 @@
-export enum SettingsTitles {
+export enum SettingsRoutes {
     GeneralSettings = 'generalSettings',
     Security = 'security',
     AdvancedSettings = 'advancedSettings',

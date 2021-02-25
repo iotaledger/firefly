@@ -54,7 +54,6 @@
         return new Promise((resolve, reject) => {
             api.getLedgerDeviceStatus($profileType === 'LedgerNanoSimulator', {
                 onSuccess(response) {
-                    console.log(response)
                     ledgerDeviceStatus = response.payload.type
                     resolve()
                 },

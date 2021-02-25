@@ -1,15 +1,15 @@
-<script>
+<script lang="typescript">
     import { onMount } from 'svelte'
     import { createEventDispatcher } from 'svelte'
+    import { validatePinFormat, PIN_LENGTH } from 'shared/lib/utils'
 
     const dispatch = createEventDispatcher()
 
     export let value = undefined
-    export let size = 6
     export let classes = ''
 
-    let inputs = new Array(size)
-    $: value = parseInt(inputs.join(''), 10)
+    let inputs = new Array(PIN_LENGTH)
+    $: value = inputs.join('')
 
     const KEYBOARD = {
         BACKSPACE: 8,
@@ -21,27 +21,54 @@
     })
 
     const changeHandler = function (e, i) {
-        let nextInput = e.target.nextElementSibling
-        let prevInput = e.target.previousElementSibling
         let regex = new RegExp(/^\d+$/)
 
         if (e.keyCode == KEYBOARD.BACKSPACE) {
-            inputs[i] = ''
-            if (prevInput) {
-                prevInput.focus()
+            // Search for the last child with a value
+            // and remove it
+            let sibling = e.target.parentNode.firstChild
+            for (let j = 0; j <= PIN_LENGTH; j++) {
+                if (j === PIN_LENGTH || !inputs[j]) {
+                    inputs[j - 1] = ''
+                    if (sibling) {
+                        sibling.focus()
+                    }
+                    return
+                }
+                sibling = sibling.nextElementSibling
             }
         } else if (e.keyCode == KEYBOARD.ENTER) {
-            dispatch('submit')
-        } else {
-            if (!nextInput && inputs[i] && inputs[i] !== '') {
-                return
+            if (validatePinFormat(inputs.join(''))) {
+                dispatch('submit')
             }
+        } else {
             if (regex.test(e.key)) {
-                inputs[i] = e.key
-                if (nextInput) {
-                    nextInput.focus()
+                // Search from the first child to find the first
+                // empty value and start filling from there
+                let sibling = e.target.parentNode.firstChild
+                for (let j = 0; j < PIN_LENGTH; j++) {
+                    let nextInput = sibling.nextElementSibling
+                    if (!inputs[j]) {
+                        inputs[j] = e.key
+                        if (nextInput) {
+                            nextInput.focus()
+                        }
+                        return
+                    }
+                    sibling = nextInput
                 }
             }
+        }
+    }
+
+    const selectFirstEmpty = (e) => {
+        let sibling = e.target.firstChild.firstChild
+        for (let j = 0; j < PIN_LENGTH; j++) {
+            if (!inputs[j] || j === PIN_LENGTH - 1) {
+                sibling.focus()
+                return
+            }
+            sibling = sibling.nextElementSibling
         }
     }
 </script>
@@ -79,8 +106,9 @@
 </style>
 
 <pin-input
-    style="--pin-input-size: {size}"
-    class={`flex items-center justify-center w-full relative z-0 bg-gray-50 rounded-xl	${classes}`}>
+    style="--pin-input-size: {PIN_LENGTH}"
+    class={`flex items-center justify-center w-full relative z-0 bg-gray-50 rounded-xl ${classes}`}
+    on:click={selectFirstEmpty}>
     {#if inputs.length}
         <div class="input-wrapper absolute items-center w-full flex flex-row flex-no-wrap justify-between">
             {#each inputs as item, i}

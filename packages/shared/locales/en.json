@@ -410,6 +410,20 @@
         "delete_account": "Delete account",
         "max": "Max",
         "add_node": "Add node",
+        "hide": "Hide",
+        "hideOthers": "Hide Others",
+        "showAll": "Show All",
+        "quit": "Quit",
+        "edit": "Edit",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "selectAll": "Select All",
+        "addAccount": "Add Account",
+        "checkForUpdates": "Check for Updates",
+        "reportAnIssue": "Report an Issue",
         "restore": "Restore"
     },
     "general": {
@@ -474,7 +488,9 @@
         "transactions": "Transactions",
         "security": "Security",
         "account_address": "Account Address",
-        "nodes": "Nodes"
+        "nodes": "Nodes",
+        "wallet": "Wallet",
+        "help": "Help"
     },
     "dates": {
         "today": "Today",

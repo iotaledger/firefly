@@ -1,6 +1,8 @@
-import { writable } from 'svelte/store'
-import { persistent } from 'shared/lib/helpers'
-
+import { writable, get } from 'svelte/store'
+import { persistent } from './helpers'
+import { resetRouter } from './router'
+import { activeProfile } from './profile'
+import { destroyActor, resetWallet } from './wallet'
 /**
  * Notification content
  */
@@ -44,11 +46,21 @@ export const sendParams = writable<SendParams>({ amount: 0, address: '', message
 export const clearSendParams = sendParams.set({ amount: 0, address: '', message: '' })
 
 /**
- * Dummy
+ * Determines whether a user is logged in
  */
-export const logged = persistent<boolean>('logged', false)
+export const loggedIn = writable<boolean>(false)
 
 /**
  * Determines if user can make developer profiles
  */
 export const developerMode = persistent<boolean>('developerMode', false)
+
+/**
+ * Logout from current profile
+ */
+export const logout = () => {
+    destroyActor(get(activeProfile).id)
+    resetWallet()
+    resetRouter()
+    loggedIn.set(false)
+}

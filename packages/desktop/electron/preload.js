@@ -1,9 +1,10 @@
 const binding = require('wallet-nodejs-binding')
-const PincodeManager = require('../libs/pincodeManager')
-const DeepLinkManager = require('../libs/deepLinkManager')
-const NotificationManager = require('../libs/notificationManager')
+const PincodeManager = require('./lib/pincodeManager')
+const DeepLinkManager = require('./lib/deepLinkManager')
+const NotificationManager = require('./lib/notificationManager')
 const { ipcRenderer, contextBridge } = require('electron')
 const { proxyApi } = require('../../shared/lib/walletApi')
+const { menuState } = require('./lib/menuState')
 
 let activeProfileId = null
 
@@ -69,12 +70,25 @@ const Electron = {
      */
     getVersionDetails: () => ipcRenderer.invoke('update-get-version-details'),
     /**
+     * Change menu state to determine what menu items to display
+     * @param {string} Attribute - Target attribute
+     * @param {any} Value - Target attribute value
+     * @returns {undefined}
+     */
+    updateMenu: (attribute, value) => {
+        if (Object.keys(menuState).includes(attribute)) {
+            ipcRenderer.invoke('menu-update', {
+                [attribute]: value
+            })
+        }
+    },
+    /**
      * Add native window wallet event listener
      * @param {string} event - Target event name
      * @param {function} callback - Event trigger callback
      * @returns {undefined}
      */
-    onEvent: function (event, callback) {
+    onEvent: (event, callback) => {
         let listeners = eventListeners[event]
         if (!listeners) {
             listeners = eventListeners[event] = []
