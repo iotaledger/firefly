@@ -374,8 +374,21 @@
         "view_address_history": "View address history",
         "delete_account": "Delete account",
         "max": "Max",
-        "add_node": "Add node"
-
+        "add_node": "Add node",
+        "hide": "Hide",
+        "hideOthers": "Hide Others",
+        "showAll": "Show All",
+        "quit": "Quit",
+        "edit": "Edit",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "selectAll": "Select All",
+        "addAccount": "Add Account",
+        "checkForUpdates": "Check for Updates",
+        "reportAnIssue": "Report an Issue"
     },
     "general": {
         "password": "Password",
@@ -437,7 +450,9 @@
         "transactions": "Transactions",
         "security": "Security",
         "account_address": "Account Address",
-        "nodes": "Nodes"
+        "nodes": "Nodes",
+        "wallet": "Wallet",
+        "help": "Help"
     },
     "dates": {
         "today": "Today",

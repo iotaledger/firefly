@@ -150,6 +150,7 @@ module.exports = [
         entry: {
             'build/main': ['./electron/main.js'],
             'build/preload': ['./electron/preload.js'],
+            'build/lib/aboutPreload': ['./electron/lib/aboutPreload.js'],
         },
         resolve,
         output,

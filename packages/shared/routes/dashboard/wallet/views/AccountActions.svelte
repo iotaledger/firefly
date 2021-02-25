@@ -2,7 +2,8 @@
     import { getContext } from 'svelte'
     import { Text, Button } from 'shared/components'
     import { Send, Receive, ManageAccount } from '.'
-    import { accountViewState, AccountViewStates } from 'shared/lib/router'
+    import { accountRoute } from 'shared/lib/router'
+    import { AccountRoutes } from 'shared/lib/typings/routes'
 
     export let locale
     export let send
@@ -12,11 +13,11 @@
 
     const account = getContext('selectedAccount')
     function handleSendClick() {
-        accountViewState.set(AccountViewStates.Send)
+        accountRoute.set(AccountRoutes.Send)
     }
 </script>
 
-{#if $accountViewState === AccountViewStates.Init}
+{#if $accountRoute === AccountRoutes.Init}
     <div class="w-full h-full flex flex-col justify-between p-8">
         <div class="flex flex-col justify-between">
             <div class="flex flex-col justify-between items-center">
@@ -28,8 +29,8 @@
             </div>
         </div>
     </div>
-{:else if $accountViewState === AccountViewStates.Send}
+{:else if $accountRoute === AccountRoutes.Send}
     <Send {send} {internalTransfer} {locale} />
-{:else if $accountViewState === AccountViewStates.Manage}
+{:else if $accountRoute === AccountRoutes.Manage}
     <ManageAccount {locale} name={$account.name} {setAlias} />
 {/if}

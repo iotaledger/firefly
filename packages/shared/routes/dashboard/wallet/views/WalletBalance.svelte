@@ -1,7 +1,8 @@
 <script lang="typescript">
     import { getContext } from 'svelte'
     import { Icon, Text } from 'shared/components'
-    import { walletViewState, WalletViewStates } from 'shared/lib/router'
+    import { walletRoute } from 'shared/lib/router'
+    import { WalletRoutes } from 'shared/lib/typings/routes'
 
     export let locale
     export let color = 'blue'
@@ -16,7 +17,7 @@
         <Text type="h2" overrideColor classes="text-white mb-2">{$balance.balance}</Text>
         <Text type="p" overrideColor smaller classes="text-{color}-300">{$balance.balanceFiat}</Text>
     </div>
-    {#if $walletViewState === WalletViewStates.Init}
+    {#if $walletRoute === WalletRoutes.Init}
         <!-- Incoming/Outgoing -->
         <div data-label="total-movements" class="flex flex-row justify-between mt-10">
             <div class="flex items-center">

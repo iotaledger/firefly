@@ -5,7 +5,8 @@
     import { sendParams } from 'shared/lib/app'
     import { activeProfile } from 'shared/lib/profile'
     import { ADDRESS_LENGTH, VALID_MAINNET_ADDRESS, VALID_DEVNET_ADDRESS } from 'shared/lib/utils'
-    import { walletViewState, WalletViewStates, accountViewState, AccountViewStates } from 'shared/lib/router'
+    import { walletRoute, accountRoute } from 'shared/lib/router'
+    import { WalletRoutes, AccountRoutes } from 'shared/lib/typings/routes'
 
     export let locale
     export let send
@@ -45,9 +46,9 @@
         }
     }
     const handleBackClick = () => {
-        accountViewState.set(AccountViewStates.Init)
+        accountRoute.set(AccountRoutes.Init)
         if (!$account) {
-            walletViewState.set(WalletViewStates.Init)
+            walletRoute.set(WalletRoutes.Init)
         }
     }
     const format = (account) => {

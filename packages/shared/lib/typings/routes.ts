@@ -1,4 +1,51 @@
+export enum AppRoute {
+    Welcome = 'welcome',
+    Legal = 'legal',
+    Language = 'language',
+    Setup = 'setup',
+    Password = 'password',
+    Protect = 'protect',
+    Backup = 'backup',
+    Import = 'import',
+    Migrate = 'migrate',
+    Balance = 'balance',
+    Congratulations = 'congratulations',
+    Dashboard = 'dashboard',
+    Login = 'login',
+    Settings = 'settings'
+}
+
+export enum SetupType {
+    New = 'new',
+    Import = 'import',
+    Mnemonic = 'mnemonic',
+    Seed = 'seed',
+    Stronghold = 'stronghold',
+    Seedvault = 'seedvault',
+}
+
+export enum WalletRoutes {
+    Init = 'init',
+    Account = 'account',
+    Send = 'send',
+    Receive = 'receive',
+    CreateAccount = 'createAccount',
+}
+
+export enum AccountRoutes {
+    Init = 'init',
+    Manage = 'manage',
+    Send = 'send',
+    Receive = 'receive',
+}
+
+export enum Tabs {
+    Wallet = 'wallet',
+    Settings = 'settings',
+}
+
 export enum SettingsRoutes {
+    Init = 'init',
     GeneralSettings = 'generalSettings',
     Security = 'security',
     AdvancedSettings = 'advancedSettings',
@@ -37,29 +84,4 @@ export enum HelpAndInfo {
     FAQ = 'faq',
     Discord = 'discord',
     About = 'about',
-}
-
-export enum SettingsIcons {
-    profile = 'info',
-    theme = 'theme',
-    language = 'language',
-    currency = 'currency',
-    notifications = 'bell',
-    exportStronghold = 'export',
-    appLock = 'pin',
-    changePassword = 'lock',
-    changePincode = 'lock',
-    resyncAccounts = 'sync',
-    resetWallet = 'reset',
-    deepLinks = 'link',
-    developerMode = 'dev',
-    nodeSettings = 'settings',
-    proofOfWork = 'work',
-    errorLog = 'warning',
-    stateExport = 'export',
-    troubleshoot = 'tools',
-    documentation = 'doc',
-    faq = 'speech',
-    discord = 'discord',
-    about = 'help',
 }
