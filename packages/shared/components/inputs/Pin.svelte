@@ -107,7 +107,7 @@
 
 <pin-input
     style="--pin-input-size: {PIN_LENGTH}"
-    class={`flex items-center justify-center w-full relative z-0 bg-gray-50 rounded-xl	${classes}`}
+    class={`flex items-center justify-center w-full relative z-0 bg-gray-50 rounded-xl ${classes}`}
     on:click={selectFirstEmpty}>
     {#if inputs.length}
         <div class="input-wrapper absolute items-center w-full flex flex-row flex-no-wrap justify-between">
