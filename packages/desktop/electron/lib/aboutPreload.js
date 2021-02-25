@@ -1,9 +1,4 @@
-const { ipcRenderer } = require('electron')
+const { contextBridge } = require('electron')
+const { version, build: { productName } } = require('../../package.json')
 
-ipcRenderer.on('about-content', (_, options) => {
-    const {appName, version, iconPath} = options
-    document.querySelector('.title').textContent = appName
-    document.getElementById('app-icon').src = iconPath
-    document.getElementById('app-version').textContent = `Version ${version}`
-    document.getElementById('footer').textContent = `IOTA Foundation ${new Date().getFullYear()}.`
-})
+contextBridge.exposeInMainWorld('app', { appName: productName, version, iconPath: './assets/logos/firefly_logo.svg' })

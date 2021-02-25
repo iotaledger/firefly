@@ -48,13 +48,19 @@
   </head>
   <body>
     <img id="app-icon" alt="App icon" height="70" width="70" />
-    <h2 class="title"></h2>
+    <h2 id="title"></h2>
     <p id="app-version" class="version"></p>
 
     <p id="footer"></p>
     <!-- https://github.com/electron/electron/issues/2863 -->
     <script>var exports = exports || {};</script>
 
-    <script src="../electron/lib/aboutRenderer.js"></script>
+    <script>
+        console.log(window.app.version)
+        document.getElementById('title').textContent = window.app.appName
+        document.getElementById('app-icon').src = window.app.iconPath
+        document.getElementById('app-version').textContent = `Version ${window.app.version}`
+        document.getElementById('footer').textContent = `IOTA Foundation ${new Date().getFullYear()}.`
+    </script>
   </body>
 </html>

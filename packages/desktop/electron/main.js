@@ -3,7 +3,6 @@ const path = require('path')
 const Keychain = require('./lib/keychain')
 const { initAutoUpdate } = require('./lib/appUpdater')
 const { initMenu, contextMenu } = require('./lib/menu')
-const { version } = require('../package.json')
 
 /**
  * Set AppUserModelID for Windows notifications functionallity
@@ -45,7 +44,8 @@ const devMode = process.env.NODE_ENV === 'development'
 let paths = {
     preload: '',
     html: '',
-    aboutHtml: ''
+    aboutHtml: '',
+    aboutPreload: ''
 }
 
 /**
@@ -65,11 +65,13 @@ const defaultWebPreferences = {
 if (app.isPackaged) {
     paths.preload = path.join(app.getAppPath(), '/public/build/preload.js')
     paths.html = path.join(app.getAppPath(), '/public/index.html')
+    paths.aboutPreload = path.join(app.getAppPath(), '/public/lib/aboutPreload.js')
     paths.aboutHtml = path.join(app.getAppPath(), '/public/about.html')
 } else {
     // __dirname is desktop/public/build
     paths.preload = path.join(__dirname, 'preload.js')
     paths.html = path.join(__dirname, '../index.html')
+    paths.aboutPreload = path.join(__dirname, 'lib/aboutPreload.js')
     paths.aboutHtml = path.join(__dirname, '../about.html')
 }
 
@@ -307,7 +309,7 @@ export const openAboutWindow = () => {
         minimizable: false,
         webPreferences: {
             ...defaultWebPreferences,
-            preload: `${__dirname}/lib/aboutPreload.js`,
+            preload: paths.aboutPreload,
         },
     })
 
@@ -316,16 +318,6 @@ export const openAboutWindow = () => {
     })
 
     windows.about.loadFile(paths.aboutHtml)
-
-    const content = {
-        appName: app.name,
-        version: version,
-        iconPath: './assets/logos/firefly_logo.svg'
-    }
-
-    windows.about.webContents.once('dom-ready', () => {
-        windows.about.webContents.send('about-content', content)
-    })
 
     windows.about.once('ready-to-show', () => {
         windows.about.show()

@@ -76,7 +76,6 @@ const Electron = {
      * @returns {undefined}
      */
     updateMenu: (attribute, value) => {
-        console.log(menuState)
         if (Object.keys(menuState).includes(attribute)) {
             ipcRenderer.invoke('menu-update', {
                 [attribute]: value
