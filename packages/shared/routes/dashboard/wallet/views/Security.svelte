@@ -17,7 +17,7 @@
     let strongholdStatusMessage
     let isDestroyed = false
     let isCheckingLedger
-    let isLedgerConnected
+    let ledgerDeviceStatus
     let hardwareDeviceMessage
     let isSoftwareAccountProfile = true
 
@@ -54,11 +54,12 @@
         return new Promise((resolve, reject) => {
             api.getLedgerDeviceStatus($profileType === 'LedgerNanoSimulator', {
                 onSuccess(response) {
-                    isLedgerConnected = response.payload.type === LedgerStatus.Connected
+                    console.log(response)
+                    ledgerDeviceStatus = response.payload.type
                     resolve()
                 },
                 onError(e) {
-                    isLedgerConnected = false
+                    ledgerDeviceStatus = LedgerStatus.Disconnected
                     reject(e)
                 }
             })
@@ -81,7 +82,19 @@
         }
     }
 
-    $: hardwareDeviceMessage = isLedgerConnected ? 'detected' : 'none_detected'
+    $: {
+        switch (ledgerDeviceStatus) {
+            case LedgerStatus.Connected:
+                hardwareDeviceMessage = 'detected'
+                break
+            case LedgerStatus.Disconnected:
+                hardwareDeviceMessage = 'none_detected'
+                break
+            case LedgerStatus.Locked:
+                hardwareDeviceMessage = 'locked'
+                break
+        }
+    }
 
     $: isSoftwareAccountProfile = $profileType === ProfileType.Software
 
@@ -100,38 +113,31 @@
     <Text type="h4" classes="mb-5">{locale('general.security')}</Text>
     <div class="grid grid-cols-2 gap-2">
         <!-- Firefly version -->
-        <SecurityTile
-            title={locale('views.dashboard.security.version.title', { values: { version: $versionDetails.currentVersion } })}
-            message={locale(`views.dashboard.security.version.${$versionDetails.upToDate ? 'up_to_date' : 'out_of_date'}`)}
-            color={$versionDetails.upToDate ? 'green' : 'red'}
-            icon="firefly"
-            onClick={() => handleSecurityTileClick('version')} />
-        <!-- Hardware Device -->
-        {#if !isSoftwareAccountProfile}
-        <SecurityTile
-            onClick={checkLedgerConnection}
-            title={locale('views.dashboard.security.hardware_device.title')}
-            message={locale(`views.dashboard.security.hardware_device.${hardwareDeviceMessage}`)}
-            color="gray"
-            icon="chip" />
-        {/if}
-        {#if isSoftwareAccountProfile}
-        <!-- Stronghold status -->
-        <SecurityTile
-            title={locale('views.dashboard.security.stronghold_status.title')}
-            message={locale(`views.dashboard.security.stronghold_status.${strongholdStatusMessage}`)}
-            color={$activeProfile.isStrongholdLocked ? 'blue' : 'red'}
-            icon="lock"
-            onClick={() => (get(activeProfile).isStrongholdLocked ? handleSecurityTileClick('password') : lockStronghold())} />
-        <!-- Stronghold backup -->
-        <SecurityTile
-            title={locale('views.dashboard.security.stronghold_backup.title')}
-            message={$activeProfile.lastStrongholdBackupTime ? locale(`dates.${lastBackupDateFormatted.unit}`, {
-                      values: { time: lastBackupDateFormatted.value },
-                  }) : locale('popups.backup.not_backed_up')}
-            onClick={() => handleSecurityTileClick('backup')}
-            icon="shield"
-            {color} />
-        {/if}
+        <SecurityTile title={locale('views.dashboard.security.version.title', { values: { version:
+            $versionDetails.currentVersion } })}
+            message={locale(`views.dashboard.security.version.${$versionDetails.upToDate ? 'up_to_date' : 'out_of_date'
+            }`)} color={$versionDetails.upToDate ? 'green' : 'red' } icon="firefly" onClick={()=>
+            handleSecurityTileClick('version')} />
+            <!-- Hardware Device -->
+            {#if !isSoftwareAccountProfile}
+            <SecurityTile onClick={checkLedgerConnection}
+                title={locale('views.dashboard.security.hardware_device.title')}
+                message={locale(`views.dashboard.security.hardware_device.${hardwareDeviceMessage}`)} color="gray"
+                icon="chip" />
+            {/if}
+            {#if isSoftwareAccountProfile}
+            <!-- Stronghold status -->
+            <SecurityTile title={locale('views.dashboard.security.stronghold_status.title')}
+                message={locale(`views.dashboard.security.stronghold_status.${strongholdStatusMessage}`)}
+                color={$activeProfile.isStrongholdLocked ? 'blue' : 'red' } icon="lock" onClick={()=>
+                (get(activeProfile).isStrongholdLocked ? handleSecurityTileClick('password') : lockStronghold())} />
+                <!-- Stronghold backup -->
+                <SecurityTile title={locale('views.dashboard.security.stronghold_backup.title')}
+                    message={$activeProfile.lastStrongholdBackupTime ? locale(`dates.${lastBackupDateFormatted.unit}`, {
+                    values: { time: lastBackupDateFormatted.value }, }) : locale('popups.backup.not_backed_up')}
+                    onClick={()=> handleSecurityTileClick('backup')}
+                    icon="shield"
+                    {color} />
+                    {/if}
     </div>
 </div>

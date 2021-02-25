@@ -287,7 +287,8 @@
                 "hardware_device": {
                     "title": "Hardware Device",
                     "none_detected": "None detected",
-                    "detected": "Detected"
+                    "detected": "Detected",
+                    "locked": "Locked"
                 },
                 "stronghold_status": {
                     "title": "Stronghold Status",
