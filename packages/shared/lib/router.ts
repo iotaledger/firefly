@@ -66,6 +66,8 @@ export enum SetupType {
     Seed = 'seed',
     Stronghold = 'stronghold',
     Seedvault = 'seedvault',
+    TrinityLedger = 'trinityLedger',
+    FireflyLedger = 'fireflyLedger'
 }
 
 export enum AccountType {
@@ -211,7 +213,7 @@ export const routerNext = (event) => {
                 nextRoute = AppRoute.Password
             } else if (importType === SetupType.Seed || importType === SetupType.Seedvault) {
                 nextRoute = AppRoute.Balance
-            } else if (importType === SetupType.Stronghold) {
+            } else if ([SetupType.Stronghold, SetupType.TrinityLedger, SetupType.FireflyLedger].includes(importType)) {
                 nextRoute = AppRoute.Protect
             }
             break
