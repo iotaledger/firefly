@@ -8,7 +8,9 @@
     export let locale
 
     function handleDownload() {
-        updateDownload()
+        if (process.platform !== 'linux') {
+            updateDownload()
+        }
         closePopup()
     }
     function handleCancelClick() {

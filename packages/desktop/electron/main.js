@@ -117,7 +117,11 @@ function createWindow() {
     if (devMode) {
         windows.main.loadURL('http://localhost:8080')
     } else {
-        initAutoUpdate(windows.main)
+        if (process.platform !== 'linux') {
+            // On Linux, updates are managed by snapd
+            // TODO: See if we can tree-shake electron-updater on Linux
+            initAutoUpdate(windows.main)
+        }
         // load the index.html of the app.
         windows.main.loadFile(paths.html)
     }

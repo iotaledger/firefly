@@ -54,8 +54,8 @@
         await fetchMarketData()
         await pollNetworkStatus()
 
-        // @ts-ignore: This value is replaced by Webpack DefinePlugin
-        if (!devMode) {
+        // @ts-ignore: devMode is replaced by Webpack DefinePlugin
+        if (!devMode && process.platform !== 'linux') {
             await refreshVersionDetails()
         }
         window['Electron'].onEvent('menu-navigate-wallet', (route) => {
