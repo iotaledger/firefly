@@ -32,7 +32,8 @@
                         onClick={handleContinueClick}
                         name={profile.name}
                         id={profile.id}
-                        isDeveloper={profile.isDeveloperProfile} />
+                        isDeveloper={profile.isDeveloperProfile}
+                        classes="cursor-pointer" />
                 </div>
             {/each}
             <div class="mb-6">
