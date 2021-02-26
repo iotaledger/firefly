@@ -38,7 +38,7 @@
     <Text type="p" secondary>{locale('popups.password.subtitle')}</Text>
 </div>
 <form id="password-popup-form" class="flex justify-center w-full flex-row flex-wrap" on:submit={handleSubmit}>
-    <Password classes="w-full mb-8" bind:value={password} showRevealToggle {locale} placeholder={locale('general.password')} />
+    <Password classes="w-full mb-8" bind:value={password} showRevealToggle {locale} placeholder={locale('general.password')} autofocus />
     <div class="flex flex-row justify-between w-full space-x-4 px-8">
         <Button secondary classes="w-1/2" onClick={handleCancelClick}>{locale('actions.cancel')}</Button>
         <Button classes="w-1/2" type="submit" form="password-popup-form">{locale('actions.unlock')}</Button>
