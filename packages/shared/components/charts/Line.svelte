@@ -6,8 +6,7 @@
     import Chart from 'chart.js'
 
     export let labels = []
-    export let data = []
-    export let tooltips = []
+    export let datasets = []
     export let color = 'blue' // TODO: each profile has a different color
 
     let canvas
@@ -23,31 +22,30 @@
         const ctx = canvas
         const context = ctx.getContext('2d')
 
-        const gradient = context.createLinearGradient(
-            context.canvas.width / 2,
-            0,
-            context.canvas.width / 2,
-            context.canvas.height / 1.2
-        )
-
-        gradient.addColorStop(0, convertHexToRGBA(fullConfig.theme.colors[color]['400'], 40))
-        gradient.addColorStop(1, convertHexToRGBA(fullConfig.theme.colors[color]['400'], 0))
-
         chart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels,
-                datasets: [
-                    {
+                datasets: datasets.map(dataset => {
+                    const gradient = context.createLinearGradient(
+                        context.canvas.width / 2,
+                        0,
+                        context.canvas.width / 2,
+                        context.canvas.height / 1.2
+                    )
+                    const themeColor = fullConfig.theme.colors[dataset.color || color]
+                    gradient.addColorStop(0, convertHexToRGBA(themeColor['400'], 40))
+                    gradient.addColorStop(1, convertHexToRGBA(themeColor['400'], 0))
+                    return {
                         backgroundColor: gradient,
-                        borderColor: fullConfig.theme.colors[color]['300'],
+                        borderColor: themeColor['300'],
                         borderWidth: 2,
-                        pointBackgroundColor: fullConfig.theme.colors[color]['300'],
+                        pointBackgroundColor: themeColor['300'],
                         pointRadius: 0,
                         hoverRadius: 4,
-                        data,
-                    },
-                ],
+                        ...dataset,
+                    }
+                }),
             },
             options: {
                 responsive: true,
@@ -70,10 +68,18 @@
                     bodyFontColor: fullConfig.theme.colors[color]['200'],
                     callbacks: {
                         title: function ([tooltipItem]) {
-                            return tooltips[tooltipItem.index] ? tooltips[tooltipItem.index].title : ''
+                            let dataset = datasets[tooltipItem.datasetIndex]
+                            if (dataset && dataset.tooltips) {
+                                return dataset.tooltips[tooltipItem.index]?.title ?? ''
+                            }
+                            return ''
                         },
                         label: function (tooltipItem) {
-                            return tooltips[tooltipItem.index].label
+                            let dataset = datasets[tooltipItem.datasetIndex]
+                            if (dataset && dataset.tooltips) {
+                                return dataset.tooltips[tooltipItem.index]?.label ?? ''
+                            }
+                            return ''
                         },
                     },
                 },

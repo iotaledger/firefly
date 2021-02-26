@@ -24,9 +24,8 @@
     let chartData: ChartData = { labels: [], data: [], tooltips: [] }
     let currencyDropdown = []
 
-    $: data = chartData.data
+    $: datasets = [{ data: chartData.data, tooltips: chartData.tooltips }]
     $: labels = chartData.labels
-    $: tooltips = chartData.tooltips
     $: color = $selectedAccount ? $selectedAccount.color : 'blue'
 
     /** Chart data */
@@ -88,6 +87,6 @@
         </div>
     </div>
     <div class="flex-auto">
-        <Chart type="line" {data} {labels} {tooltips} {color} />
+        <Chart type="line" {datasets} {labels} {color} />
     </div>
 </div>

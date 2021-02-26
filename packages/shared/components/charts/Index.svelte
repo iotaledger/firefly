@@ -7,14 +7,14 @@
     }
 
     export let type: ChartType
-    export let data
+    export let datasets
     export let labels
     export let tooltips
     export let color
 </script>
 
 {#if type === ChartType.Line}
-    <LineChart {data} {labels} {tooltips} {color} />
+    <LineChart {datasets} {labels} {tooltips} {color} />
 {:else if type === ChartType.Bar}
-    <BarChart {data} {labels} {tooltips} {color} />
+    <BarChart {datasets} {labels} {tooltips} {color} />
 {/if}

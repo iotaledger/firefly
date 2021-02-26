@@ -96,8 +96,8 @@ export const getAccountActivityData = (account) => {
     const activityMonths = 6
     let date = new Date();
     let activityTimeframes = []
-    let incoming = { data: [], tooltips: [], label: 'Incoming' } // TODO: localize
-    let outgoing = { data: [], tooltips: [], label: 'Outgoing' } // TODO: localize
+    let incoming = { data: [], tooltips: [], label: 'Incoming', color: 'blue' } // TODO: localize, profile colors
+    let outgoing = { data: [], tooltips: [], label: 'Outgoing', color: 'gray' } // TODO: localize, profile colors
     let labels = []
     let messages = account.messages.sort((a, b) => {
         return <any>new Date(a.timestamp).getTime() - <any>new Date(b.timestamp).getTime()

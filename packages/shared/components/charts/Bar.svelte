@@ -5,7 +5,7 @@
     import tailwindConfig from 'shared/tailwind.config.js'
 
     export let labels = []
-    export let data = [{}, {}]
+    export let datasets = []
     export let color = 'blue'
 
     let canvas
@@ -112,20 +112,14 @@
             type: 'roundedBar',
             data: {
                 labels,
-                datasets: [
-                    {
-                        ...data[0],
-                        backgroundColor: fullConfig.theme.colors[color]['500'],
-                        hoverBackgroundColor: fullConfig.theme.colors[color]['500'],
+                datasets: datasets.map(dataset => {
+                    return {
+                        backgroundColor: fullConfig.theme.colors[dataset.color || color]['500'],
+                        hoverBackgroundColor: fullConfig.theme.colors[dataset.color || color]['500'],
                         barThickness: 7,
-                    },
-                    {
-                        ...data[1],
-                        backgroundColor: fullConfig.theme.colors['gray']['400'],
-                        hoverBackgroundColor: fullConfig.theme.colors['gray']['400'],
-                        barThickness: 7,
-                    },
-                ],
+                        ...dataset,
+                    }
+                })
             },
             options: {
                 barRoundness: 1,
@@ -168,7 +162,7 @@
                     bodyFontColor: fullConfig.theme.colors[color]['200'],
                     callbacks: {
                         label: function (tooltipItem, data) {
-                            let dataset = data.datasets[tooltipItem.datasetIndex]
+                            let dataset = datasets[tooltipItem.datasetIndex]
                             if (dataset && dataset.tooltips) {
                                 return dataset.tooltips[tooltipItem.index]
                             }
