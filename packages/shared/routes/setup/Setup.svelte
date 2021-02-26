@@ -9,19 +9,20 @@
 
     export let locale
     export let mobile
+    let error = ''
 
     const dispatch = createEventDispatcher()
 
     let isDeveloperProfile = false
     let profileName = get(newProfile)?.name ?? ''
 
-    const MAX_PROFILE_NAME_LENGTH = 250
+    const MAX_PROFILE_NAME_LENGTH = 20
 
     function handleContinueClick(setupType) {
         let profile
 
         if (profileName.length > MAX_PROFILE_NAME_LENGTH) {
-            console.error('Profile name too long.')
+            error = locale('error.profile.nameLength')
         } else {
             try {
                 profile = createProfile(profileName, isDeveloperProfile)
@@ -48,7 +49,7 @@
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-4">{locale('views.setup.title')}</Text>
-            <Input bind:value={profileName} placeholder={locale('views.setup.profile_name')} classes="w-full mb-4" />
+            <Input error={error} bind:value={profileName} placeholder={locale('views.setup.profile_name')} classes="w-full mb-4" />
             {#if $developerMode}
                 <Checkbox label={locale('general.developerProfile')} bind:checked={isDeveloperProfile} />
             {/if}

@@ -473,6 +473,9 @@
         "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     },
     "error": {
+        "profile": {
+            "nameLength": "Your profile name must be under 20 characters."
+        },
         "password": {
             "doNotMatch": "Passwords do not match.",
             "tooWeak": "Your password is too weak.",
