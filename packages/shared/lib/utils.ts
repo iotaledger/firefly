@@ -3,6 +3,7 @@ import validUrl from 'valid-url'
 export const VALID_MAINNET_ADDRESS = /^iota1[02-9ac-hj-np-z]{59}$/
 export const VALID_DEVNET_ADDRESS = /^atoi1[02-9ac-hj-np-z]{59}$/
 export const ADDRESS_LENGTH = 64;
+export const PIN_LENGTH = 6;
 
 export function bindEvents(element, events) {
     const listeners = Object.entries(events).map(([event, handler]) => {
@@ -43,7 +44,7 @@ export const validateRecoveryPhrase = (phrase) => {
  * Validate pincode format
  */
 export const validatePinFormat = (pincode: string) => {
-    const REGEX = /^\d{6}$/
+    const REGEX = new RegExp(`^\\d{${PIN_LENGTH}}$`)
     return REGEX.test(pincode)
 }
 

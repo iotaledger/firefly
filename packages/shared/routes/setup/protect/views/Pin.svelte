@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { OnboardingLayout, Illustration, Text, Button, Pin } from 'shared/components'
     import { createEventDispatcher } from 'svelte'
+    import { validatePinFormat } from 'shared/lib/utils'
 
     export let locale
     export let mobile
@@ -12,8 +13,8 @@
 
     $: confirmInput = pinCandidate !== null
     $: valid = !!pinCandidate
-        ? Number.isInteger(pinInput) && `${pinInput}`.length === 6 && pinInput === pinCandidate
-        : Number.isInteger(pinInput) && `${pinInput}`.length === 6
+        ? validatePinFormat(pinInput) && pinInput === pinCandidate
+        : validatePinFormat(pinInput)
 
     function onSubmit() {
         if (valid) {
