@@ -1,9 +1,19 @@
 <script>
-    import { createEventDispatcher } from 'svelte'
+    import { onMount, createEventDispatcher } from 'svelte'
     import { OnboardingLayout, Illustration, Text, Button } from 'shared/components'
+    import { newProfile, saveProfile, setActiveProfile } from 'shared/lib/profile'
 
     export let locale
     export let mobile
+
+    onMount(() => {
+        // This is the last screen in onboarding for all flows i.e., if you create a new wallet or import stronghold
+        // When this component mounts, ensure that the profile is persisted in the local storage.
+        saveProfile($newProfile)
+        setActiveProfile($newProfile.id)
+
+        newProfile.set(null)
+    })
 
     const dispatch = createEventDispatcher()
 

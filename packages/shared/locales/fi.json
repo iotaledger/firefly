@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Määritä lompakko",
-            "body": "Voit luoda uuden lompakon tai tuoda olemassaolevan."
+            "body": "Voit luoda uuden lompakon tai tuoda olemassaolevan.",
+            "profile_name": "Profilin nimi"
         },
         "password": {
             "title": "Luo salasana",
@@ -62,7 +63,9 @@
         "recovery_phrase": {
             "title": "Palautuslauseke",
             "body_1": "Kirjoita sanat huolellisesti oikeassa järjestyksessä.",
-            "body_2": "Pidä palautuslausekkeesi vain itsesi tiedossa ja turvallisesti tallennettuna. Älä jaa sitä kenenkään kanssa."
+            "body_2": "Pidä palautuslausekkeesi vain itsesi tiedossa ja turvallisesti tallennettuna. Älä jaa sitä kenenkään kanssa.",
+            "reveal_recovery_phrase": "Näytä palautuslauseke",
+            "hide_recovery_phrase": "Piilota palautuslauseke"
         },
         "verify_recovery_phrase": {
             "title": "Vahvista palautuslauseke",
@@ -172,6 +175,14 @@
                 "title": "Vaihda salasana",
                 "description": ""
             },
+            "changePincode": {
+                "title": "Vaihda PIN-koodi",
+                "description": "",
+                "currentPincode": "Nykyinen PIN-koodi",
+                "newPincode": "Uusi PIN-koodi",
+                "confirmNewPincode": "Vahvista uusi PIN-koodi",
+                "action": "Vaihda PIN-koodi"
+            },
             "resyncAccounts": {
                 "title": "Uudelleen synkronoi tilit",
                 "description": ""
@@ -190,6 +201,10 @@
             },
             "nodeSettings": {
                 "title": "Noodin asetukset",
+                "description": ""
+            },
+            "configureNodeList": {
+                "title": "Muokkaa solmuluetteloa",
                 "description": ""
             },
             "proofOfWork": {
@@ -232,21 +247,21 @@
         "dashboard": {
             "security": {
                 "version": {
-                    "title": "Firefly v{version}",
-                    "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "title": "Firefly v {version}",
+                    "up_to_date": "Ajan tasalla",
+                    "out_of_date": "Vanhentunut"
                 },
                 "hardware_device": {
-                    "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "title": "Laite",
+                    "none_detected": "Ei havaittu"
                 },
                 "stronghold_status": {
-                    "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "title": "Stronghold tilanne",
+                    "locked": "Lukittu",
+                    "unlocked": "Avattu"
                 },
                 "stronghold_backup": {
-                    "title": "Stronghold Backup",
+                    "title": "Stronghold varmuuskopio",
                     "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
                 }
             },
@@ -257,6 +272,10 @@
                 "status": "Status",
                 "messages_per_second": "Messages per second",
                 "confirmation_rate": "Confirmation rate"
+            },
+            "profile_modal": {
+                "all_settings": "All settings",
+                "logout": "Log out"
             }
         }
     },
@@ -295,6 +314,14 @@
         "address_history": {
             "title": "{name} account address history",
             "current_balance": "Current balance: {balance}"
+        },
+        "node": {
+            "title_add": "Add a node",
+            "title_details": "Node details",
+            "node_address": "Node address",
+            "optional_username": "Username (optional)",
+            "optional_password": "Password (optional)",
+            "set_as_primary_node": "Set as primary node"
         }
     },
     "actions": {
@@ -335,16 +362,19 @@
         "exportNewStronghold": "Vie uuteen Strongholdiin",
         "enableDeepLinks": "Ota syvälinkit käyttöön",
         "enableDeveloperMode": "Ota kehittäjätila käyttöön",
-        "enableNotifications": "Kytke ilmoitukset päälle",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "Vienti tila",
         "outsourceProofOfWork": "Ulkoista todiste työstä (PoW)",
         "unlock": "Avaa",
         "update_firefly": "Update Firefly",
+        "restart_now": "Restart now",
         "save_backup": "Save backup",
         "customize_account": "Customise account",
         "sync_account": "Sync account",
         "view_address_history": "View address history",
-        "delete_account": "Delete account"
+        "delete_account": "Delete account",
+        "max": "Max",
+        "add_node": "Add node"
     },
     "general": {
         "password": "Salasana",
@@ -398,12 +428,15 @@
         "automaticNodeSelection": "Automaattinen noodin valinta",
         "manualNodeSelection": "Manuaalinen noodin valinta",
         "profiles": "Profiilit",
+        "developerProfile": "Developer Profile",
+        "dev": "Dev",
         "create_account": "Luo tili",
         "account_name": "Tilin nimi",
         "latest_transactions": "Viimeisimmät transaktiot",
         "transactions": "Transaktiot",
         "security": "Suojaus",
-        "account_address": "Tilin osoite"
+        "account_address": "Tilin osoite",
+        "nodes": "Nodes"
     },
     "dates": {
         "today": "Today",
@@ -411,5 +444,16 @@
         "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
         "months_ago": "{time, plural, one {# month} other {# months}} ago",
         "years_ago": "{time, plural, one {# year} other {# years}} ago"
+    },
+    "notifications": {
+        "valueTx": "Receiving {{value}} to {{account}}",
+        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
+        "failed": "Outgoing {{value}} from {{account}} has failed",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

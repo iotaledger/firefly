@@ -12,8 +12,10 @@
 
     $: valid = strongholdPassword === confirmPassword
 
-    function handleContinueClick() {
-        dispatch('next')
+    function onSubmit() {
+        if (valid) {
+            dispatch('next')
+        }
     }
     function handleBackClick() {
         dispatch('previous')
@@ -25,12 +27,14 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
-            <Text type="h2" classes="mb-5">{locale('views.backup_wallet.title')}</Text>
-            <Text type="p" secondary classes="mb-8">{locale('views.backup_wallet.body')}</Text>
-            <Password bind:value={confirmPassword} {locale} />
+            <form on:submit={onSubmit} id="backup-form">
+                <Text type="h2" classes="mb-5">{locale('views.backup_wallet.title')}</Text>
+                <Text type="p" secondary classes="mb-8">{locale('views.backup_wallet.body')}</Text>
+                <Password bind:value={confirmPassword} {locale} />
+            </form>
         </div>
         <div slot="leftpane__action">
-            <Button classes="w-full" disabled={!valid} onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
+            <Button type="submit" form="backup-form" classes="w-full" disabled={!valid}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-end items-center">
             <Illustration width="100%" illustration="backup-recovery-phrase-desktop" />

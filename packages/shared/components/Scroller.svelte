@@ -39,7 +39,7 @@
     }
 </script>
 
-<svelte:window bind:scrollY={y}/>
+<svelte:window bind:scrollY={y} />
 
 <div data-label="scroller" id="scroller" class={`block relative max-h-full overflow-y-auto ${classes}`} bind:this={scroller}>
     <slot />

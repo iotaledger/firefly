@@ -4,11 +4,10 @@
     import { Backup, RecoveryPhrase, VerifyRecoveryPhrase, BackupToFile, Success } from './views/'
     import { Transition } from 'shared/components'
     import { mnemonic } from 'shared/lib/app'
-    import { newProfile, saveProfile, updateProfile } from 'shared/lib/profile'
+    import { updateProfile } from 'shared/lib/profile'
     import { strongholdPassword } from 'shared/lib/app'
     import { api } from 'shared/lib/wallet'
-    import { DEFAULT_NODES as nodes } from 'shared/lib/network'
-    import { Network } from 'shared/lib/typings/client'
+    import { DEFAULT_NODES as nodes, DEFAULT_NODE as node, network } from 'shared/lib/network'
 
     export let locale
     export let mobile
@@ -18,7 +17,7 @@
         RecoveryPhrase = 'recoveryPhrase',
         Verify = 'verify',
         Backup = 'backup',
-        Success = 'success'
+        Success = 'success',
     }
 
     const dispatch = createEventDispatcher()
@@ -51,7 +50,7 @@
                             },
                             onError(error) {
                                 reject(error)
-                            }
+                            },
                         })
                     })
                         .then(() => window['Electron'].getStrongholdBackupDestination())
@@ -65,7 +64,7 @@
                                         },
                                         onError(error) {
                                             rej(error)
-                                        }
+                                        },
                                     })
                                 })
                             }
@@ -89,32 +88,31 @@
                             onSuccess(response) {
                                 api.createAccount(
                                     {
-                                        // TODO: Change to mainnet
-                                        clientOptions: { nodes, network: Network.Testnet }
+                                        clientOptions: {
+                                            node: node.url,
+                                            nodes: nodes.map((node) => node.url),
+                                            network: $network,
+                                        },
                                     },
                                     {
                                         onSuccess() {
-                                            saveProfile($newProfile)
-
-                                            newProfile.set(null)
-                                            
                                             dispatch('next')
                                         },
                                         onError() {
                                             // TODO: handle error
                                             console.error('create account error')
-                                        }
+                                        },
                                     }
                                 )
                             },
                             onError(error) {
                                 console.log(error)
-                            }
+                            },
                         })
                     },
                     onError(error) {
                         console.error('Error verifying mnemonic', error)
-                    }
+                    },
                 })
 
                 break

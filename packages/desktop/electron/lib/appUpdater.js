@@ -1,16 +1,16 @@
 const { ipcMain } = require('electron')
 const { autoUpdater, CancellationToken } = require('electron-updater')
 const path = require('path')
-const packageJson = require('../package.json')
+const packageJson = require('../../package.json')
 const electronLog = require('electron-log')
 
-let autoUpdateMainWindow;
+let autoUpdateMainWindow
 let versionDetails = {
     upToDate: true,
     currentVersion: packageJson.version,
     newVersion: '',
     newVersionReleaseDate: new Date(),
-    changelog: ''
+    changelog: '',
 }
 let downloadCancellation
 
@@ -18,10 +18,10 @@ function initAutoUpdate(mainWindow) {
     autoUpdateMainWindow = mainWindow
 
     autoUpdater.logger = electronLog
-    autoUpdater.logger.transports.file.level = "info"
+    autoUpdater.logger.transports.file.level = 'info'
 
     // Disable automatic update downloads
-    autoUpdater.autoDownload = false;
+    autoUpdater.autoDownload = false
 
     ipcMain.handle('update-download', () => updateDownload())
     ipcMain.handle('update-cancel', () => updateCancel())
@@ -29,11 +29,11 @@ function initAutoUpdate(mainWindow) {
     ipcMain.handle('update-get-version-details', () => getVersionDetails())
 
     autoUpdater.on('update-available', (info) => {
-        versionDetails.upToDate = false;
+        versionDetails.upToDate = false
         versionDetails.newVersion = info.version
         versionDetails.newVersionReleaseDate = new Date(info.releaseDate)
         // release notes from GH are HTML so strip tags out
-        let releaseNotes = info.releaseNotes || '';
+        let releaseNotes = info.releaseNotes || ''
         releaseNotes = releaseNotes.replace(/<[^>]*>?/gm, '')
         versionDetails.changelog = releaseNotes
         autoUpdateMainWindow.webContents.send('version-details', versionDetails)
@@ -44,11 +44,11 @@ function initAutoUpdate(mainWindow) {
 
     autoUpdater.on('update-downloaded', (info) => {
         autoUpdateMainWindow.webContents.send('version-complete', info)
-    });
+    })
 
     autoUpdater.on('error', (err) => {
         autoUpdateMainWindow.webContents.send('version-error', err)
-    });
+    })
 
     autoUpdateMainWindow.webContents.send('version-details', versionDetails)
     autoUpdater.checkForUpdates()
@@ -62,12 +62,12 @@ function updateDownload() {
 function updateCancel() {
     if (downloadCancellation) {
         downloadCancellation.cancel()
-        downloadCancellation = undefined;
+        downloadCancellation = undefined
     }
 }
 
 function updateInstall() {
-    autoUpdater.quitAndInstall();
+    autoUpdater.quitAndInstall()
 }
 
 function getVersionDetails() {
@@ -79,5 +79,5 @@ module.exports = {
     getVersionDetails,
     updateDownload,
     updateCancel,
-    updateInstall
+    updateInstall,
 }

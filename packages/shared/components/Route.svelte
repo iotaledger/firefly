@@ -1,6 +1,6 @@
 <script>
     import { fly, scale } from 'svelte/transition'
-    import { view } from 'shared/lib/router'
+    import { route as appRoute } from 'shared/lib/router'
 
     export let transition = true
     export let route = undefined
@@ -24,7 +24,7 @@
     }
 </style>
 
-{#if $view === route}
+{#if $appRoute === route}
     {#if transition}
         {#if primary}
             <div data-label="route" class:transparent transition:scale={{ duration: 380, start: 0.95, opacity: 0.9 }}>

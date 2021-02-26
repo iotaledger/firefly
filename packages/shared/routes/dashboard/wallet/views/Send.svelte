@@ -1,8 +1,12 @@
 <script lang="typescript">
     import { getContext } from 'svelte'
     import { Text, Button, Dropdown, Amount, Address } from 'shared/components'
+    import { Unit, convertUnits } from '@iota/unit-converter'
     import { sendParams } from 'shared/lib/app'
-    import { walletViewState, WalletViewStates, accountViewState, AccountViewStates } from 'shared/lib/router'
+    import { activeProfile } from 'shared/lib/profile'
+    import { ADDRESS_LENGTH, VALID_MAINNET_ADDRESS, VALID_DEVNET_ADDRESS } from 'shared/lib/utils'
+    import { walletRoute, accountRoute } from 'shared/lib/router'
+    import { WalletRoutes, AccountRoutes } from 'shared/lib/typings/routes'
 
     export let locale
     export let send
@@ -17,10 +21,13 @@
     }
 
     let selectedSendType = SEND_TYPE.EXTERNAL
+    let unit = Unit.Mi
+    let amount = convertUnits($sendParams.amount, Unit.i, unit)
+    let to = undefined
 
     $: accountsDropdownItems = $accounts.map((acc) => format(acc))
     $: from = $account ? format($account) : accountsDropdownItems[0]
-    let to = undefined
+    $: $sendParams.amount = convertUnits(amount, unit, Unit.i)
 
     const handleSendTypeClick = (type) => {
         selectedSendType = type
@@ -39,13 +46,45 @@
         }
     }
     const handleBackClick = () => {
-        accountViewState.set(AccountViewStates.Init)
+        accountRoute.set(AccountRoutes.Init)
         if (!$account) {
-            walletViewState.set(WalletViewStates.Init)
+            walletRoute.set(WalletRoutes.Init)
         }
     }
     const format = (account) => {
-        return { value: account.id, label: `${account.name} • ${account.balance}` }
+        return {
+            ...account,
+            label: `${account.name} • ${account.balance}`,
+            balance: account.rawIotaBalance,
+        }
+    }
+    const handleMaxClick = () => {
+        amount = convertUnits(from.balance, Unit.i, unit)
+    }
+    const validInputs = () => {
+        if (parseFloat($sendParams.amount) > from.balance) {
+            console.error('Input error: Amount higher than available balance')
+            return false
+        }
+        if (selectedSendType === SEND_TYPE.EXTERNAL) {
+            // Validate address length
+            if ($sendParams.address.length !== ADDRESS_LENGTH) {
+                console.error('Input error: Wrong address length')
+                return false
+            }
+            if ($activeProfile.isDeveloperProfile) {
+                if (!$sendParams.address.match(VALID_MAINNET_ADDRESS) && !$sendParams.address.match(VALID_DEVNET_ADDRESS)) {
+                    console.error('Input error: Wrong address format')
+                    return false
+                } else {
+                    if (!$sendParams.address.match(VALID_MAINNET_ADDRESS)) {
+                        console.error('Input error: Wrong address format')
+                        return false
+                    }
+                }
+            }
+        }
+        return true
     }
 </script>
 
@@ -70,7 +109,7 @@
                     </div>
                 {/if}
                 <div class="w-full mb-8 block">
-                    <Amount bind:amount={$sendParams.amount} {locale} classes="mb-4" />
+                    <Amount bind:amount bind:unit maxClick={handleMaxClick} {locale} classes="mb-4" />
                     {#if selectedSendType === SEND_TYPE.INTERNAL}
                         <Dropdown
                             value={to?.label || ''}

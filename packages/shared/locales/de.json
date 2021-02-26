@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Richte deine Wallet ein",
-            "body": "Du kannst eine neue Wallet erstellen oder eine vorhandene importieren."
+            "body": "Du kannst eine neue Wallet erstellen oder eine vorhandene importieren.",
+            "profile_name": "Profilname"
         },
         "password": {
             "title": "Passwort erstellen",
@@ -62,7 +63,9 @@
         "recovery_phrase": {
             "title": "Wiederherstellungsphrase",
             "body_1": "Schreibe die Wörter sorgfältig in der richtigen Reihenfolge auf.",
-            "body_2": "Halte deine Wiederherstellungsphrase geheim und bewahre sie sicher auf. Teile sie mit niemandem."
+            "body_2": "Halte deine Wiederherstellungsphrase geheim und bewahre sie sicher auf. Teile sie mit niemandem.",
+            "reveal_recovery_phrase": "Wiederherstellungsphrase anzeigen",
+            "hide_recovery_phrase": "Wiederherstellungsphrase ausblenden"
         },
         "verify_recovery_phrase": {
             "title": "Wiederherstellungsphrase bestätigen",
@@ -82,7 +85,7 @@
         },
         "import": {
             "title": "Wallet importieren",
-            "body": "Wenn du eine Wiederherstellungsphrase oder ein Stronghold Backup hast kannst du es hier importieren."
+            "body": "Falls du eine Wiederherstellungsphrase oder ein Stronghold-Backup hast, kannst du es hier importieren."
         },
         "import_from_text": {
             "title": "Stelle deine Wallet aus einer Wiederherstellungsphrase oder einem Seed wieder her",
@@ -172,6 +175,14 @@
                 "title": "Passwort ändern",
                 "description": ""
             },
+            "changePincode": {
+                "title": "PIN ändern",
+                "description": "",
+                "currentPincode": "Aktuelle PIN",
+                "newPincode": "Neue PIN",
+                "confirmNewPincode": "Neue PIN bestätigen",
+                "action": "PIN ändern"
+            },
             "resyncAccounts": {
                 "title": "Konten neu synchronisieren",
                 "description": ""
@@ -190,6 +201,10 @@
             },
             "nodeSettings": {
                 "title": "Node-Einstellungen",
+                "description": ""
+            },
+            "configureNodeList": {
+                "title": "Nodeliste konfigurieren",
                 "description": ""
             },
             "proofOfWork": {
@@ -233,68 +248,80 @@
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "up_to_date": "Aktuell",
+                    "out_of_date": "veraltet"
                 },
                 "hardware_device": {
-                    "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "title": "Geräte",
+                    "none_detected": "Keine erkannt"
                 },
                 "stronghold_status": {
                     "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "locked": "Gesperrt",
+                    "unlocked": "Entsperrt"
                 },
                 "stronghold_backup": {
                     "title": "Stronghold Backup",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "weeks_ago": "{weeks, plural, one {# Woche} other {# Wochen}}"
                 }
             },
             "network": {
-                "network_operational": "Network Operational",
-                "network_degraded": "Network Degraded",
-                "network_down": "Network Down",
+                "network_operational": "Netzwerk funktionsfähig",
+                "network_degraded": "Netzwerk verschlechtert",
+                "network_down": "Keine Verbindung",
                 "status": "Status",
-                "messages_per_second": "Messages per second",
-                "confirmation_rate": "Confirmation rate"
+                "messages_per_second": "Nachrichten pro Sekunde",
+                "confirmation_rate": "Bestaetigungsrate"
+            },
+            "profile_modal": {
+                "all_settings": "Alle Einstellungen",
+                "logout": "Abmelden"
             }
         }
     },
     "popups": {
         "password": {
             "title": "Passwort erforderlich",
-            "subtitle": "Please enter your wallet password to unlock Stronghold"
+            "subtitle": "Bitte geben Sie Ihr Wallet-Passwort ein, um Stronghold zu entsperren"
         },
         "qr": {
             "title": "Dein QR Code"
         },
         "version": {
-            "title": "Current version: {version}",
-            "up_to_date_title": "Firefly is up to date",
-            "up_to_date_description": "You are running the latest and safest version of Firefly.",
-            "update_available": "Firefly update available",
+            "title": "Aktuelle Version: {version}",
+            "up_to_date_title": "Firefly ist auf dem neuesten Stand",
+            "up_to_date_description": "Du verwendest die neueste und sicherste Version von Firefly",
+            "update_available": "Firefly Update verfügbar",
             "update_details": "Version {version} - {date}"
         },
         "backup": {
-            "title": "Last backup: {date}",
-            "last_backup": "You last backed up {date}",
-            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
-            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "not_backed_up": "Not backed up",
-            "not_backed_up_description": "You have not backed up your Stronghold"
+            "title": "Letztes Backup: {date}",
+            "last_backup": "Dein letztes Backup ist vom {date}",
+            "backup_description": "Es ist wichtig, regelmäßig Backups zu erstellen, damit du eine Sicherung deiner Konten und Transaktionen hast",
+            "backup_warning": "Wenn Sie Ihr Backup und die Wiederherstellungsphrase verlieren, verlieren Sie den Zugriff auf Ihr Guthaben.",
+            "not_backed_up": "Noch kein Backup erstellt",
+            "not_backed_up_description": "Du hast noch kein Backup für Stronghold erstellt"
         },
         "delete_account": {
-            "title": "Delete {name}?",
-            "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Type your wallet’s password to confirm.",
-            "delete_account": "Delete account",
-            "error_title": "Unable to delete {name}",
-            "error_body_1": "To delete an account you must have 0 balance.",
-            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+            "title": "{name} löschen?",
+            "body": "Du wirst deinen Transaktionsverlauf dauerhaft verlieren, und vielleicht sogar andere Dinge.",
+            "type_password": "Gib dein Passwort zur Bestätigung ein.",
+            "delete_account": "Konto löschen",
+            "error_title": "{name} kann nicht gelöscht werden",
+            "error_body_1": "Um ein Konto zu löschen, benötigst du 0 Guthaben.",
+            "error_body_2": "Du hast derzeit {balance} auf deinem Konto. Bitte verschiebe dein Guthaben auf ein anderes Konto und versuche es erneut."
         },
         "address_history": {
-            "title": "{name} account address history",
-            "current_balance": "Current balance: {balance}"
+            "title": "{name} Adresshistorie",
+            "current_balance": "Aktuelles Guthaben: {balance}"
+        },
+        "node": {
+            "title_add": "Node hinzufügen",
+            "title_details": "Node Details",
+            "node_address": "Node Adresse",
+            "optional_username": "Benutzername (optional)",
+            "optional_password": "Passwort (optional)",
+            "set_as_primary_node": "Als primäre Node festlegen"
         }
     },
     "actions": {
@@ -302,7 +329,7 @@
         "back": "Zurück",
         "cancel": "Abbrechen",
         "close": "Schließen",
-        "dismiss": "Dismiss",
+        "dismiss": "Verwerfen",
         "save": "Speichern",
         "import_seed": "Importiere einen bestehenden Seed",
         "import_wallet": "Bestehende Wallet importieren",
@@ -318,7 +345,7 @@
         "verify_recovery_phrase": "Wiederherstellungsphrase bestätigen",
         "reveal_recovery_phrase": "Wiederherstellungsphrase anzeigen",
         "import_seedvault": "SeedVault importieren",
-        "check_again": "Überprüfen Sie ihre Angaben",
+        "check_again": "Erneut überprüfen",
         "import_from_file": "Von einer Datei importieren",
         "send": "Senden",
         "receive": "Empfangen",
@@ -335,16 +362,19 @@
         "exportNewStronghold": "Neuen Stronghold exportieren",
         "enableDeepLinks": "Deep Links aktivieren",
         "enableDeveloperMode": "Entwicklermodus aktivieren",
-        "enableNotifications": "Benachrichtigungen aktivieren",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "Status exportieren",
         "outsourceProofOfWork": "Proof of work auslagern",
         "unlock": "Entsperren",
-        "update_firefly": "Update Firefly",
-        "save_backup": "Save backup",
-        "customize_account": "Customise account",
-        "sync_account": "Sync account",
-        "view_address_history": "View address history",
-        "delete_account": "Delete account"
+        "update_firefly": "Firefly aktualisieren",
+        "restart_now": "Restart now",
+        "save_backup": "Backup speichern",
+        "customize_account": "Konto anpassen",
+        "sync_account": "Konten synchronisieren",
+        "view_address_history": "Adressverlauf anzeigen",
+        "delete_account": "Konto löschen",
+        "max": "Maximal",
+        "add_node": "Node hinzufügen"
     },
     "general": {
         "password": "Passwort",
@@ -357,13 +387,13 @@
         "recent_activity": "Kürzliche Aktivität",
         "sent": "Gesendet",
         "received": "Empfangen",
-        "send_payment": "Send payment",
-        "move_funds": "Move funds",
+        "send_payment": "Zahlung senden",
+        "move_funds": "Guthaben verschieben",
         "send_funds": "Guthaben senden",
         "send_to_address": "Zu Adresse senden",
         "scan_qr_or_paste": "Scanne einen QR-Code oder füge eine Adresse ein",
         "move_funds_between_accounts": "Guthaben zwischen deinen Konten verschieben",
-        "send_tokens_to_address": "Send tokens to an address",
+        "send_tokens_to_address": "Token an eine Adresse senden",
         "manage_account": "Konto verwalten",
         "customize_account": "Konto anpassen",
         "account": "Konto",
@@ -374,7 +404,7 @@
         "from": "Von",
         "to": "An",
         "receive_funds": "Guthaben empfangen",
-        "my_address": "My Address",
+        "my_address": "Meine Wallet Adresse",
         "share_address": "Adresse teilen",
         "your_address": "Deine Adresse",
         "generate_new_address": "Neue Adresse erstellen",
@@ -391,25 +421,39 @@
         "light_theme": "Heller Modus",
         "dark_theme": "Dunkler Modus",
         "total_balance": "Gesamtguthaben",
-        "account_balance": "Account Balance",
+        "account_balance": "Kontostand",
         "incoming": "Eingehend",
         "outgoing": "Ausgehend",
         "accounts": "Konten",
         "automaticNodeSelection": "Automatische Node-Verwaltung",
         "manualNodeSelection": "Manuelle Node-Verwaltung",
         "profiles": "Profile",
+        "developerProfile": "Entwicklerprofil",
+        "dev": "Entwickler",
         "create_account": "Neues Konto erstellen",
         "account_name": "Kontoname",
         "latest_transactions": "Neueste Transaktionen",
         "transactions": "Transaktionen",
         "security": "Sicherheit",
-        "account_address": "Konto Adresse"
+        "account_address": "Konto Adresse",
+        "nodes": "Nodes"
     },
     "dates": {
-        "today": "Today",
-        "days_ago": "{time, plural, one {# day} other {# days}} ago",
-        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
-        "months_ago": "{time, plural, one {# month} other {# months}} ago",
-        "years_ago": "{time, plural, one {# year} other {# years}} ago"
+        "today": "Heute",
+        "days_ago": "Vor {time, plural, one {# Tag} other {# Tagen}}",
+        "weeks_ago": "Vor {time, plural, one {# Woche} other {# Wochen}}",
+        "months_ago": "Vor {time, plural, one {# Monat} other {# Monaten}}",
+        "years_ago": "Vor {time, plural, one {# Jahr} other {# Jahren}}"
+    },
+    "notifications": {
+        "valueTx": "Du hast {{value}} in {{account}} erhalten",
+        "confirmed": "Eine ausgehende Transaktion über {{value}} in {{account}} wurde bestätigt",
+        "failed": "Ausgehende Transaktion {{value}} von {{account}} ist fehlgeschlagen",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

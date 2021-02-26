@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Configurează portofelul tău",
-            "body": "Poți crea un portofel nou sau să imporți unul existent."
+            "body": "Poți crea un portofel nou sau să imporți unul existent.",
+            "profile_name": "Nume Profil"
         },
         "password": {
             "title": "Creează o parolă",
@@ -62,7 +63,9 @@
         "recovery_phrase": {
             "title": "Frază de recuperare",
             "body_1": "Notează cu atenție cuvintele in ordinea exactă.",
-            "body_2": "Păstrați fraza de recuperare privată și stocată în siguranță. Nu o împărtășiți cu nimeni."
+            "body_2": "Păstrați fraza de recuperare privată și stocată în siguranță. Nu o împărtășiți cu nimeni.",
+            "reveal_recovery_phrase": "Afișează fraza de recuperare",
+            "hide_recovery_phrase": "Ascunde fraza de recuperare"
         },
         "verify_recovery_phrase": {
             "title": "Verifică fraza de recuperare",
@@ -172,6 +175,14 @@
                 "title": "Schimbă parola",
                 "description": ""
             },
+            "changePincode": {
+                "title": "Schimbă codul PIN",
+                "description": "",
+                "currentPincode": "PIN curent",
+                "newPincode": "Noul PIN",
+                "confirmNewPincode": "Confirmã noul PIN",
+                "action": "Schimbă PIN"
+            },
             "resyncAccounts": {
                 "title": "Resincronizează conturile",
                 "description": ""
@@ -192,16 +203,20 @@
                 "title": "Setările nodului",
                 "description": ""
             },
+            "configureNodeList": {
+                "title": "Configureazã lista de noduri",
+                "description": ""
+            },
             "proofOfWork": {
-                "title": "Proof of work",
+                "title": "Dovadã de lucru",
                 "description": ""
             },
             "errorLog": {
-                "title": "Error log",
+                "title": "Jurnal de erori",
                 "description": ""
             },
             "stateExport": {
-                "title": "State export",
+                "title": "Exportare stare",
                 "description": ""
             },
             "troubleshoot": {
@@ -226,37 +241,41 @@
             }
         },
         "login": {
-            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "please_wait": "Așteaptă {time, plural, one {1 secundă} few {# secunde} other {# secunde}}",
+            "incorrect_attempts": "{attempts, plural, one {1 încercare incorectă} few {# încercări incorecte} other {# încercări incorecte}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "up_to_date": "Actualizat",
+                    "out_of_date": "Expirat"
                 },
                 "hardware_device": {
-                    "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "title": "Dispozitiv Hardware",
+                    "none_detected": "Niciunul detectat"
                 },
                 "stronghold_status": {
-                    "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "title": "Stare Stronghold",
+                    "locked": "Blocat",
+                    "unlocked": "Deblocat"
                 },
                 "stronghold_backup": {
-                    "title": "Stronghold Backup",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "title": "Rezervă Stronghold",
+                    "weeks_ago": "{weeks, plural, one {# săptămână} other {# săptămâni}}"
                 }
             },
             "network": {
-                "network_operational": "Network Operational",
+                "network_operational": "Rețeaua este operațională",
                 "network_degraded": "Network Degraded",
                 "network_down": "Network Down",
                 "status": "Status",
                 "messages_per_second": "Messages per second",
                 "confirmation_rate": "Confirmation rate"
+            },
+            "profile_modal": {
+                "all_settings": "All settings",
+                "logout": "Log out"
             }
         }
     },
@@ -295,6 +314,14 @@
         "address_history": {
             "title": "{name} account address history",
             "current_balance": "Current balance: {balance}"
+        },
+        "node": {
+            "title_add": "Add a node",
+            "title_details": "Node details",
+            "node_address": "Node address",
+            "optional_username": "Username (optional)",
+            "optional_password": "Password (optional)",
+            "set_as_primary_node": "Set as primary node"
         }
     },
     "actions": {
@@ -335,16 +362,19 @@
         "exportNewStronghold": "Export a new Stronghold",
         "enableDeepLinks": "Enable deep links",
         "enableDeveloperMode": "Enable developer mode",
-        "enableNotifications": "Enable notifications",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "Export state",
         "outsourceProofOfWork": "Outsource proof of work",
         "unlock": "Unlock",
         "update_firefly": "Update Firefly",
+        "restart_now": "Restart now",
         "save_backup": "Save backup",
         "customize_account": "Customise account",
         "sync_account": "Sync account",
         "view_address_history": "View address history",
-        "delete_account": "Delete account"
+        "delete_account": "Delete account",
+        "max": "Max",
+        "add_node": "Add node"
     },
     "general": {
         "password": "Parolă",
@@ -398,12 +428,15 @@
         "automaticNodeSelection": "Automatic node selection",
         "manualNodeSelection": "Manual node selection",
         "profiles": "Profiles",
+        "developerProfile": "Developer Profile",
+        "dev": "Dev",
         "create_account": "Create an account",
         "account_name": "Account name",
         "latest_transactions": "Latest Transactions",
         "transactions": "Transactions",
         "security": "Securitate",
-        "account_address": "Account Address"
+        "account_address": "Account Address",
+        "nodes": "Nodes"
     },
     "dates": {
         "today": "Today",
@@ -411,5 +444,16 @@
         "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
         "months_ago": "{time, plural, one {# month} other {# months}} ago",
         "years_ago": "{time, plural, one {# year} other {# years}} ago"
+    },
+    "notifications": {
+        "valueTx": "Receiving {{value}} to {{account}}",
+        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
+        "failed": "Outgoing {{value}} from {{account}} has failed",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

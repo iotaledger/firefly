@@ -23,7 +23,7 @@
 
     let timeRemainingBeforeNextAttempt = WAITING_TIME_AFTER_MAX_INCORRECT_ATTEMPTS
 
-    $: hasCorrectLength = Number.isInteger(pinCode) && `${pinCode}`.length === 6
+    $: hasCorrectFormat = validatePinFormat(pinCode)
     $: hasReachedMaxAttempts = attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS
 
     let buttonText = setButtonText(timeRemainingBeforeNextAttempt)
@@ -51,14 +51,8 @@
         }
     }
 
-    function handleContinueClick() {
-        if (!validatePinFormat(pinCode)) {
-            attempts++
-            if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
-                clearInterval(timerId)
-                timerId = setInterval(countdown, 1000)
-            }
-        } else {
+    function onSubmit() {
+        if (!hasReachedMaxAttempts) {
             const profile = get(activeProfile)
 
             PincodeManager.verify(profile.id, pinCode.toString())
@@ -76,7 +70,11 @@
                             })
                         })
                     } else {
-                        console.info('Incorrect pincode provided!')
+                        attempts++
+                        if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
+                            clearInterval(timerId)
+                            timerId = setInterval(countdown, 1000)
+                        }
                     }
                 })
                 .catch((error) => {
@@ -107,14 +105,14 @@
         <div class="pt-40 pb-16 flex w-full h-full flex-col items-center justify-between">
             <div class="w-96 flex flex-row flex-wrap justify-center mb-20">
                 <Profile name={$activeProfile.name} bgColor="blue" />
-                <Pin bind:value={pinCode} classes="mt-10" />
+                <Pin bind:value={pinCode} classes="mt-10" on:submit={onSubmit} />
                 <Text type="p" bold classes="mt-4 text-center">
                     {attempts > 0 ? locale('views.login.incorrect_attempts', {
                               values: { attempts: attempts.toString() },
                           }) : locale('actions.enter_your_pin')}
                 </Text>
             </div>
-            <Button classes="w-96" disabled={!hasCorrectLength || hasReachedMaxAttempts} onClick={() => handleContinueClick()}>
+            <Button classes="w-96" disabled={!hasCorrectFormat || hasReachedMaxAttempts} onClick={() => onSubmit()}>
                 {hasReachedMaxAttempts ? buttonText : locale('actions.continue')}
             </Button>
         </div>

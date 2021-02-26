@@ -1,29 +1,22 @@
 const binding = require('wallet-nodejs-binding')
-const PincodeManager = require('../libs/pincodeManager');
-const DeepLinkManager = require('../libs/deepLinkManager');
-const NotificationManager = require('../libs/notificationManager');
-const { ipcRenderer } = require('electron')
+const PincodeManager = require('./lib/pincodeManager')
+const DeepLinkManager = require('./lib/deepLinkManager')
+const NotificationManager = require('./lib/notificationManager')
+const { ipcRenderer, contextBridge } = require('electron')
+const { proxyApi } = require('../../shared/lib/walletApi')
+const { menuState } = require('./lib/menuState')
 
-const freezeObjectFactory = (obj) => {
-    const rejector = {
-        get(obj, prop) {
-            if (typeof obj[prop] === 'object' && obj[prop] !== null) {
-                return new Proxy(obj[prop], rejector)
-            }
+let activeProfileId = null
 
-            return obj[prop]
-        },
-        set() {
-            return false
-        },
-    }
+const Wallet = binding
+Wallet.api = proxyApi(() => activeProfileId)
 
-    return new Proxy(obj, rejector)
-}
+const eventListeners = {}
 
-window.__WALLET__ = freezeObjectFactory(binding)
-
-window.Electron = {
+const Electron = {
+    updateActiveProfile(id) {
+        activeProfileId = id
+    },
     PincodeManager,
     DeepLinkManager,
     NotificationManager,
@@ -77,22 +70,42 @@ window.Electron = {
      */
     getVersionDetails: () => ipcRenderer.invoke('update-get-version-details'),
     /**
+     * Change menu state to determine what menu items to display
+     * @param {string} Attribute - Target attribute
+     * @param {any} Value - Target attribute value
+     * @returns {undefined}
+     */
+    updateMenu: (attribute, value) => {
+        if (Object.keys(menuState).includes(attribute)) {
+            ipcRenderer.invoke('menu-update', {
+                [attribute]: value
+            })
+        }
+    },
+    /**
      * Add native window wallet event listener
      * @param {string} event - Target event name
      * @param {function} callback - Event trigger callback
      * @returns {undefined}
      */
-    onEvent: function (event, callback) {
-        let listeners = this._eventListeners[event];
+    onEvent: (event, callback) => {
+        let listeners = eventListeners[event]
         if (!listeners) {
-            listeners = this._eventListeners[event] = [];
+            listeners = eventListeners[event] = []
             ipcRenderer.on(event, (e, args) => {
                 listeners.forEach((call) => {
-                    call(args);
-                });
-            });
+                    call(args)
+                })
+            })
         }
-        listeners.push(callback);
+        listeners.push(callback)
     },
-    _eventListeners: {},
-};
+}
+
+contextBridge.exposeInMainWorld('__WALLET_INIT__', {
+    run: Wallet.init,
+})
+
+contextBridge.exposeInMainWorld('__WALLET_API__', Wallet.api)
+
+contextBridge.exposeInMainWorld('Electron', Electron)

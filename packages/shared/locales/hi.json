@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "अपना वॉलेट सेट करें|",
-            "body": "आप एक नया वॉलेट बना सकते हैं या एक मौजूदा आयात कर सकते हैं।"
+            "body": "आप एक नया वॉलेट बना सकते हैं या एक मौजूदा आयात कर सकते हैं।",
+            "profile_name": "प्रोफ़ाइल नाम"
         },
         "password": {
             "title": "एक पासवर्ड बनाएं",
@@ -62,7 +63,9 @@
         "recovery_phrase": {
             "title": "वसूली वाक्यांश",
             "body_1": "सटीक क्रम में शब्दों को सावधानीपूर्वक लिखें|",
-            "body_2": "अपने पुनर्प्राप्ति वाक्यांश को निजी और सुरक्षित रूप से संग्रहीत रखें। इसे किसी के साथ साझा न करें।"
+            "body_2": "अपने पुनर्प्राप्ति वाक्यांश को निजी और सुरक्षित रूप से संग्रहीत रखें। इसे किसी के साथ साझा न करें।",
+            "reveal_recovery_phrase": "पुनर्प्राप्ति वाक्यांश प्रकट करें",
+            "hide_recovery_phrase": "अपने वसूली वाक्यांश को छुपाये"
         },
         "verify_recovery_phrase": {
             "title": "वसूली वाक्यांश सत्यापित करें",
@@ -172,6 +175,14 @@
                 "title": "पासवर्ड परिवर्तित करें",
                 "description": ""
             },
+            "changePincode": {
+                "title": "पिन कोड बदलें",
+                "description": "",
+                "currentPincode": "वर्तमान पिन",
+                "newPincode": "नया पिन",
+                "confirmNewPincode": "पिन की पुष्टि करें",
+                "action": "पिन बदलें"
+            },
             "resyncAccounts": {
                 "title": "खाता को फिर से सिंक करें",
                 "description": ""
@@ -190,6 +201,10 @@
             },
             "nodeSettings": {
                 "title": "नोड सेटिंग्स",
+                "description": ""
+            },
+            "configureNodeList": {
+                "title": "नोड कॉन्फ़िगर करें",
                 "description": ""
             },
             "proofOfWork": {
@@ -232,69 +247,81 @@
         "dashboard": {
             "security": {
                 "version": {
-                    "title": "Firefly v{version}",
-                    "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "title": "फायरफ्लाई v{version}",
+                    "up_to_date": "आधुनिक",
+                    "out_of_date": "अप्रचलित"
                 },
                 "hardware_device": {
-                    "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "title": "हार्डवेयर उपकरण",
+                    "none_detected": "किसी का पता नहीं चला"
                 },
                 "stronghold_status": {
-                    "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "title": "स्ट्रॉन्गहोल्ड स्टेटस",
+                    "locked": "लॉक्ड",
+                    "unlocked": "खुला"
                 },
                 "stronghold_backup": {
-                    "title": "Stronghold Backup",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "title": "स्ट्रॉन्गहोल्ड बैकअप",
+                    "weeks_ago": "{weeks, plural, one {# सप्ताह} other {# सप्ताह}} पहले"
                 }
             },
             "network": {
-                "network_operational": "Network Operational",
-                "network_degraded": "Network Degraded",
-                "network_down": "Network Down",
-                "status": "Status",
-                "messages_per_second": "Messages per second",
-                "confirmation_rate": "Confirmation rate"
+                "network_operational": "नेटवर्क प्रचालन",
+                "network_degraded": "नेटवर्क पदावनत",
+                "network_down": "नेटवर्क डाउन",
+                "status": "स्टेटस",
+                "messages_per_second": "मेस्सगेस प्रति सेकंड",
+                "confirmation_rate": "पुष्टि दर"
+            },
+            "profile_modal": {
+                "all_settings": "सभी सेटिंग्स",
+                "logout": "लॉग आउट"
             }
         }
     },
     "popups": {
         "password": {
             "title": "पासवर्ड अपेक्षित है",
-            "subtitle": "Please enter your wallet password to unlock Stronghold"
+            "subtitle": "कृपया अपने वॉलेट का पासवर्ड स्ट्रॉन्गहोल्ड अनलॉक करने के लिए प्रदान करें"
         },
         "qr": {
             "title": "आपका QR कोड"
         },
         "version": {
-            "title": "Current version: {version}",
-            "up_to_date_title": "Firefly is up to date",
-            "up_to_date_description": "You are running the latest and safest version of Firefly.",
-            "update_available": "Firefly update available",
-            "update_details": "Version {version} - {date}"
+            "title": "वर्तमान संस्करण: {version}",
+            "up_to_date_title": "फायरफ्लाई नवीनतम है",
+            "up_to_date_description": "आप फायरफ्लाई का नवीनतम और सबसे सुरक्षित संस्करण चला रहे हैं",
+            "update_available": "फायरफ्लाई अपडेट उपलब्ध है",
+            "update_details": "संस्करण {version} - {date}"
         },
         "backup": {
-            "title": "Last backup: {date}",
-            "last_backup": "You last backed up {date}",
-            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
-            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "not_backed_up": "Not backed up",
-            "not_backed_up_description": "You have not backed up your Stronghold"
+            "title": "पिछला बैकअप: {date}",
+            "last_backup": "आपका पिछला बैकअप {date}",
+            "backup_description": "यह सुनिश्चित करने के लिए नियमित रूप से बैकअप लेना महत्वपूर्ण है कि आपके पास अपने खातों और लेनदेन के इतिहास की एक प्रति है",
+            "backup_warning": "यदि आप अपना बैकअप और पुनर्प्राप्ति वाक्यांश खो देते हैं तो आप अपने फंड तक पहुंच खो देंगे",
+            "not_backed_up": "बैकअप नहीं है",
+            "not_backed_up_description": "आपने अपने स्ट्रॉन्गहोल्ड का बैकअप नहीं किया है"
         },
         "delete_account": {
-            "title": "Delete {name}?",
-            "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Type your wallet’s password to confirm.",
-            "delete_account": "Delete account",
-            "error_title": "Unable to delete {name}",
-            "error_body_1": "To delete an account you must have 0 balance.",
-            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+            "title": "हटाएँ {name}?",
+            "body": "आप स्थायी रूप से अपना लेन-देन इतिहास खो देंगे और शायद कुछ और भी",
+            "type_password": "पुष्टि करने के लिए अपने वॉलेट का पासवर्ड टाइप करें",
+            "delete_account": "खाता नष्ट करें",
+            "error_title": "{name} हटाने में असमर्थ",
+            "error_body_1": "खाता हटाने के लिए आपके पास 0 बैलेंस होना चाहिए",
+            "error_body_2": "वर्तमान में आपके पास इस खाते पर {balance} बैलेंस है। कृपया इन निधियों को एक अलग खाते में ले जाएँ और पुनः प्रयास करें"
         },
         "address_history": {
-            "title": "{name} account address history",
-            "current_balance": "Current balance: {balance}"
+            "title": "{name} खाता पता इतिहास",
+            "current_balance": "वर्तमान बैलेंस: {balance}"
+        },
+        "node": {
+            "title_add": "नया नोड जोड़ें",
+            "title_details": "नोड विवरण",
+            "node_address": "नोड एड्रेस",
+            "optional_username": "यूजरनाम (वैकल्पिक)",
+            "optional_password": "पासवर्ड (वैकल्पिक)",
+            "set_as_primary_node": "प्राथमिक नोड के रूप में सेट करें"
         }
     },
     "actions": {
@@ -302,7 +329,7 @@
         "back": "पीछे",
         "cancel": "रद्द करें",
         "close": "बंद करें",
-        "dismiss": "Dismiss",
+        "dismiss": "रद्द करें",
         "save": "सेव करें",
         "import_seed": "एक मौजूदा सीड आयात करें",
         "import_wallet": "मौजूदा वॉलेट आयात करें",
@@ -335,16 +362,19 @@
         "exportNewStronghold": "एक नया स्ट्रॉन्गहोल्ड निर्यात करें",
         "enableDeepLinks": "डीप लिंक्स सक्षम करें",
         "enableDeveloperMode": "डेवलपर मोड सक्षम करें",
-        "enableNotifications": "नोटिफिकेशंस सक्षम करें",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "स्थिति निर्यात करें",
         "outsourceProofOfWork": "आउटसोर्स प्रूफ ऑफ़ वर्क",
         "unlock": "अनलॉक करें",
-        "update_firefly": "Update Firefly",
-        "save_backup": "Save backup",
-        "customize_account": "Customise account",
-        "sync_account": "Sync account",
-        "view_address_history": "View address history",
-        "delete_account": "Delete account"
+        "update_firefly": "अपडेट फायरफ्लाई",
+        "restart_now": "Restart now",
+        "save_backup": "बैकअप सहेजें",
+        "customize_account": "अनुकूलित करें अपना खाता",
+        "sync_account": "खाता को सिंक करें",
+        "view_address_history": "एड्रेस का इतिहास देखें",
+        "delete_account": "खाता नष्ट करें",
+        "max": "अधिकतम",
+        "add_node": "नया नोड जोड़ें"
     },
     "general": {
         "password": "पासवर्ड",
@@ -357,13 +387,13 @@
         "recent_activity": "हाल की गतिविधि",
         "sent": "भेजे गए",
         "received": "प्राप्त हुआ",
-        "send_payment": "Send payment",
-        "move_funds": "Move funds",
+        "send_payment": "भुगतान भेजें",
+        "move_funds": "फंड्स भेजे",
         "send_funds": "धनराशि भेजें",
         "send_to_address": "स्वयं के पते पर भेजा जा रहा है",
         "scan_qr_or_paste": "QR कोड स्कैन करें या एक पता पेस्ट करें",
         "move_funds_between_accounts": "अपने खातों के बीच धन ले जाएँ",
-        "send_tokens_to_address": "Send tokens to an address",
+        "send_tokens_to_address": "एक पते पर टोकन भेजें",
         "manage_account": "खाते का प्रबंधन",
         "customize_account": "अनुकूलित करें अपना खाता",
         "account": "खाता",
@@ -374,7 +404,7 @@
         "from": "से",
         "to": "को",
         "receive_funds": "पैसे प्राप्त करे",
-        "my_address": "My Address",
+        "my_address": "मेरा पता:",
         "share_address": "पता साझा करें",
         "your_address": "आपका पता",
         "generate_new_address": "नया पता उत्पन्न करें",
@@ -391,25 +421,39 @@
         "light_theme": "लाइट थीम",
         "dark_theme": "डार्क थीम",
         "total_balance": "कुल शेष",
-        "account_balance": "Account Balance",
+        "account_balance": "खाते की बैलेंस राशि",
         "incoming": "आने वाला",
         "outgoing": "बाहर जाने वाले",
         "accounts": "खाता",
         "automaticNodeSelection": "स्वचालित नोड चयन",
         "manualNodeSelection": "मैन्युअली नोड चुनना",
         "profiles": "प्रोफाइल्स",
+        "developerProfile": "डेवलपर मोड",
+        "dev": "देव",
         "create_account": "खाता बनाएं",
         "account_name": "अकाउंट नाम",
         "latest_transactions": "नवीनतम ट्रांसक्शन्स",
         "transactions": "ट्रांसक्शन्स",
         "security": "सुरक्षा",
-        "account_address": "खाते का पता"
+        "account_address": "खाते का पता",
+        "nodes": "नोड्स"
     },
     "dates": {
-        "today": "Today",
-        "days_ago": "{time, plural, one {# day} other {# days}} ago",
-        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
-        "months_ago": "{time, plural, one {# month} other {# months}} ago",
-        "years_ago": "{time, plural, one {# year} other {# years}} ago"
+        "today": "आज",
+        "days_ago": "{time, plural, one {# दिन} other {# दिन}} पहले",
+        "weeks_ago": "{time, plural, one {# सप्ताह} other {# सप्ताह}} पहले",
+        "months_ago": "{time, plural, one {# महीना} other {# महीना}} पहले",
+        "years_ago": "{time, plural, one {# साल} other {# साल}} पहले"
+    },
+    "notifications": {
+        "valueTx": "{{value}} में {{account}} रिसीव हो रहा है",
+        "confirmed": "{{account}} से आउटगोइंग {{value}} की पुष्टि हो गयी है",
+        "failed": "{{account}} से आउटगोइंग {{value}} फ़ैल हो गयी है",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

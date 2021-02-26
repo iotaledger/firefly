@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Thiết lập Ví của bạn",
-            "body": "Bạn có thể tạo một Ví mới hoặc nhập vào từ một Ví hiện có."
+            "body": "Bạn có thể tạo một Ví mới hoặc nhập vào từ một Ví hiện có.",
+            "profile_name": "Tên hồ sơ"
         },
         "password": {
             "title": "Tạo mật khẩu",
@@ -62,7 +63,9 @@
         "recovery_phrase": {
             "title": "Cụm từ hồi phục tài khoản ví",
             "body_1": "Ghi lại ra giấy một cách cẩn thận những từ sau đây chính xác theo thứ tự.",
-            "body_2": "Cất giữ cụm từ khôi phục tài khoản của bạn ở nơi riêng tư và an toàn. Đừng chia sẻ nó với bất kỳ ai."
+            "body_2": "Cất giữ cụm từ khôi phục tài khoản của bạn ở nơi riêng tư và an toàn. Đừng chia sẻ nó với bất kỳ ai.",
+            "reveal_recovery_phrase": "Hiển thị cụm từ khôi phục ví",
+            "hide_recovery_phrase": "Ẩn cụm từ khôi phục ví"
         },
         "verify_recovery_phrase": {
             "title": "Xác thực cụm từ phục hồi tài khoản ví",
@@ -115,37 +118,37 @@
             "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "Số dư của bạn",
+            "body": "Số dư tài khoản của bạn có chính xác không?"
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "Cấu hình",
             "generalSettings": {
-                "title": "General Settings",
+                "title": "Thiết lập chung",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "security": {
-                "title": "Security",
+                "title": "Bảo mật",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
+                "title": "Thiết lập nâng cao",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Help & Information",
+                "title": "Thông tin trợ giúp",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profile": {
-                "title": "Profile",
+                "title": "Hồ sơ cá nhân",
                 "description": ""
             },
             "sync": {
-                "title": "Sync accounts",
+                "title": "Đồng bộ tài khoản",
                 "description": ""
             },
             "theme": {
-                "title": "Theme",
+                "title": "Giao diện",
                 "description": ""
             },
             "language": {
@@ -153,198 +156,225 @@
                 "description": ""
             },
             "currency": {
-                "title": "Currency",
+                "title": "Tiền tệ",
                 "description": ""
             },
             "notifications": {
-                "title": "Notifications",
+                "title": "Các thông báo",
                 "description": ""
             },
             "exportStronghold": {
-                "title": "Export Stronghold",
+                "title": "Xuất ra Stronghold",
                 "description": ""
             },
             "appLock": {
-                "title": "App Lock",
+                "title": "Khóa ứng dụng",
                 "description": ""
             },
             "changePassword": {
-                "title": "Change password",
+                "title": "Đổi mật khẩu",
                 "description": ""
             },
+            "changePincode": {
+                "title": "Thay đổi mã PIN",
+                "description": "",
+                "currentPincode": "Mã PIN hiện tại",
+                "newPincode": "Mã PIN mới",
+                "confirmNewPincode": "Xác nhận mã PIN mới",
+                "action": "Thay đổi mã PIN"
+            },
             "resyncAccounts": {
-                "title": "Resync accounts",
+                "title": "Đồng bộ lại các tài khoản",
                 "description": ""
             },
             "resetWallet": {
-                "title": "Reset wallet",
+                "title": "Thiết lập lại ví",
                 "description": ""
             },
             "deepLinks": {
-                "title": "Deep links",
+                "title": "Các liên kết sâu",
                 "description": ""
             },
             "developerMode": {
-                "title": "Developer mode",
+                "title": "Chế độ nhà phát triển",
                 "description": ""
             },
             "nodeSettings": {
-                "title": "Node settings",
+                "title": "Cấu hình node",
+                "description": ""
+            },
+            "configureNodeList": {
+                "title": "Cấu hình danh sách node",
                 "description": ""
             },
             "proofOfWork": {
-                "title": "Proof of work",
+                "title": "Bằng chứng công việc (PoW)",
                 "description": ""
             },
             "errorLog": {
-                "title": "Error log",
+                "title": "Bản ghi lỗi",
                 "description": ""
             },
             "stateExport": {
-                "title": "State export",
+                "title": "Xuất ra trạng thái",
                 "description": ""
             },
             "troubleshoot": {
-                "title": "Troubleshoot",
+                "title": "Xử lý sự cố",
                 "description": ""
             },
             "documentation": {
-                "title": "Documentation",
+                "title": "Tài liệu",
                 "description": ""
             },
             "faq": {
-                "title": "FAQ",
+                "title": "CÂU HỎI THƯỜNG GẶP",
                 "description": ""
             },
             "discord": {
-                "title": "Discord",
+                "title": "Tài khoản Discord",
                 "description": ""
             },
             "about": {
-                "title": "About",
+                "title": "Thông tin về ứng dụng",
                 "description": ""
             }
         },
         "login": {
-            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
+            "please_wait": "Vui lòng đợi {time, plural, one {1 second} other {# seconds}}",
             "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
                 "version": {
-                    "title": "Firefly v{version}",
-                    "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "title": "Firefly phiên bản v{version}",
+                    "up_to_date": "Đã cập nhật",
+                    "out_of_date": "Đã cũ"
                 },
                 "hardware_device": {
-                    "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "title": "Thiết bị phần cứng",
+                    "none_detected": "Không phát hiện được"
                 },
                 "stronghold_status": {
-                    "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "title": "Tình trạng của Stronghold",
+                    "locked": "Đã khóa",
+                    "unlocked": "Đã mở khóa"
                 },
                 "stronghold_backup": {
-                    "title": "Stronghold Backup",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "title": "Sao lưu của Stronghold",
+                    "weeks_ago": "{weeks, plural, one {# week} other {# tuần}} trước đó"
                 }
             },
             "network": {
-                "network_operational": "Network Operational",
-                "network_degraded": "Network Degraded",
-                "network_down": "Network Down",
-                "status": "Status",
-                "messages_per_second": "Messages per second",
-                "confirmation_rate": "Confirmation rate"
+                "network_operational": "Vận hành mạng",
+                "network_degraded": "Mạng bị xuống cấp",
+                "network_down": "Rớt mạng",
+                "status": "Trạng thái",
+                "messages_per_second": "Số tin nhắn trên giây",
+                "confirmation_rate": "Tỷ lệ xác nhận"
+            },
+            "profile_modal": {
+                "all_settings": "Tất cả tùy chọn cài đặt",
+                "logout": "Đăng xuất"
             }
         }
     },
     "popups": {
         "password": {
-            "title": "Password required",
-            "subtitle": "Please enter your wallet password to unlock Stronghold"
+            "title": "Yêu cầu mật khẩu",
+            "subtitle": "Vui lòng nhập mật khẩu ví để mở khóa Stronghold"
         },
         "qr": {
-            "title": "Your QR code"
+            "title": "Mã QR của bạn"
         },
         "version": {
-            "title": "Current version: {version}",
-            "up_to_date_title": "Firefly is up to date",
-            "up_to_date_description": "You are running the latest and safest version of Firefly.",
-            "update_available": "Firefly update available",
-            "update_details": "Version {version} - {date}"
+            "title": "Phiên bản hiện tại: {version}",
+            "up_to_date_title": "Firefly đã cập nhật mới nhất",
+            "up_to_date_description": "Bạn đang chạy trên phiên bản Firefly mới nhất và an toàn nhất.",
+            "update_available": "Phiên bản cập nhật Firefly đang hiện hữu",
+            "update_details": "Phiên bản {version} - {date}"
         },
         "backup": {
-            "title": "Last backup: {date}",
-            "last_backup": "You last backed up {date}",
-            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
-            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "not_backed_up": "Not backed up",
-            "not_backed_up_description": "You have not backed up your Stronghold"
+            "title": "Bản sao lưu mới nhất: {date}",
+            "last_backup": "Bạn đã thực hiện sau lưu lần cuối vào ngày {date}",
+            "backup_description": "Điểm quan trọng là cần sao lưu thường xuyên để chắc chắn rằng bạn có lưu giữ một bản sao các tài khoản của mình và lịch sử giao dịch.",
+            "backup_warning": "Nếu bạn mất bản sao lưu của mình và cụm từ khôi phục bạn sẽ mất quyền truy cập vào các tài khoản của mình.",
+            "not_backed_up": "Chưa được sao lưu",
+            "not_backed_up_description": "Bạn đã không thực hiện sao lưu Stronghold của bạn"
         },
         "delete_account": {
-            "title": "Delete {name}?",
+            "title": "Có xóa {name} hay không?",
             "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Type your wallet’s password to confirm.",
-            "delete_account": "Delete account",
-            "error_title": "Unable to delete {name}",
-            "error_body_1": "To delete an account you must have 0 balance.",
-            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+            "type_password": "Nhập vào mật khẩu ví của bạn để xác nhận.",
+            "delete_account": "Xóa Tài khoản",
+            "error_title": "Không thể xóa {name}",
+            "error_body_1": "Để xóa một tài khoản bạn phải có số dư là 0.",
+            "error_body_2": "Bạn hiện đang có số dư {balance} còn lại trong tài khoản này. Xin vui lòng di chuyển đi số tiền này sang một tài khoản khác và thử lại một lần nữa."
         },
         "address_history": {
-            "title": "{name} account address history",
-            "current_balance": "Current balance: {balance}"
+            "title": "{name} lịch sử địa chỉ ví",
+            "current_balance": "Số dư hiện tại: {balance}"
+        },
+        "node": {
+            "title_add": "Thêm Node",
+            "title_details": "Các chi tiết node",
+            "node_address": "Đia chỉ node",
+            "optional_username": "Tên người dùng (tùy chọn)",
+            "optional_password": "Mật khẩu (tùy chọn)",
+            "set_as_primary_node": "Thiết lập node chính"
         }
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "cancel": "Cancel",
-        "close": "Close",
-        "dismiss": "Dismiss",
-        "save": "Save",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
+        "continue": "Tiếp tục",
+        "back": "Quay lại",
+        "cancel": "Hủy",
+        "close": "Đóng",
+        "dismiss": "Bỏ qua",
+        "save": "Lưu",
+        "import_seed": "Nhập vào một seed hiện có",
+        "import_wallet": "Nhập vào một ví hiện có",
+        "create_wallet": "Khởi tạo ví mới",
+        "save_password": "Lưu mật khẩu",
+        "use_biometric": "Sử dụng bảo mật sinh trắc học",
         "setup_pin": "Thiết lập mã PIN",
-        "set_pin": "Set PIN code",
-        "confirm_pin": "Confirm PIN code",
-        "enter_your_pin": "Enter your PIN",
-        "save_backup_file": "Save backup file",
-        "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
+        "set_pin": "Đặt mã PIN",
+        "confirm_pin": "Xác nhận mã PIN",
+        "enter_your_pin": "Nhập mã PIN của bạn",
+        "save_backup_file": "Lưu tập tin dự phòng",
+        "ive_written_recovery_phrase": "Tôi đã viết xuống giấy cụm từ phục hồi",
         "verify_recovery_phrase": "Xác thực cụm từ phục hồi tài khoản ví",
-        "reveal_recovery_phrase": "Reveal recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "create": "Create",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
-        "visit_discord": "Visit Discord",
-        "drag_drop": "Drag & Drop",
-        "import_extentions": ".stronghold or .kdbx file",
+        "reveal_recovery_phrase": "Hiển thị cụm từ khôi phục ví",
+        "import_seedvault": "Nhập vào SeedVault",
+        "check_again": "Không, Kiểm tra lại",
+        "import_from_file": "Nhập từ tập tin",
+        "send": "Gửi",
+        "receive": "Nhận",
+        "create": "Tạo mới",
+        "begin_transfer": "Bắt đầu chuyển",
+        "try_again": "Thử lại",
+        "visit_discord": "Thăm Discord",
+        "drag_drop": "Kéo và Thả",
+        "import_extentions": "file có định dạng .stronghold hoặc .kdbx",
         "choose_file": "Chọn một tập tin",
         "drop_here": "Thả tập tin của bạn vào đây",
-        "syncAll": "Sync all",
-        "export": "Export",
-        "exportNewStronghold": "Export a new Stronghold",
-        "enableDeepLinks": "Enable deep links",
-        "enableDeveloperMode": "Enable developer mode",
-        "enableNotifications": "Enable notifications",
-        "exportState": "Export state",
+        "syncAll": "Đồng bộ tất cả",
+        "export": "Xuất",
+        "exportNewStronghold": "Xuất ra Stronghold",
+        "enableDeepLinks": "Kích hoạt các liên kết sâu",
+        "enableDeveloperMode": "Bật chế độ nhà phát triển",
+        "enableSystemNotifications": "Enable system notifications",
+        "exportState": "Xuất trạng thái",
         "outsourceProofOfWork": "Outsource proof of work",
         "unlock": "Unlock",
         "update_firefly": "Update Firefly",
+        "restart_now": "Restart now",
         "save_backup": "Save backup",
         "customize_account": "Customise account",
         "sync_account": "Sync account",
         "view_address_history": "View address history",
-        "delete_account": "Delete account"
+        "delete_account": "Xóa Tài khoản",
+        "max": "Tối đa",
+        "add_node": "Thêm Node"
     },
     "general": {
         "password": "Mật khẩu",
@@ -398,12 +428,15 @@
         "automaticNodeSelection": "Automatic node selection",
         "manualNodeSelection": "Manual node selection",
         "profiles": "Profiles",
+        "developerProfile": "Chế độ nhà phát triển",
+        "dev": "Nhà phát triển",
         "create_account": "Create an account",
         "account_name": "Account name",
         "latest_transactions": "Latest Transactions",
         "transactions": "Transactions",
-        "security": "Security",
-        "account_address": "Account Address"
+        "security": "Bảo mật",
+        "account_address": "Account Address",
+        "nodes": "Các node"
     },
     "dates": {
         "today": "Today",
@@ -411,5 +444,16 @@
         "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
         "months_ago": "{time, plural, one {# month} other {# months}} ago",
         "years_ago": "{time, plural, one {# year} other {# years}} ago"
+    },
+    "notifications": {
+        "valueTx": "Đang nhận {{value}} từ {{account}}",
+        "confirmed": "Đang gửi đi {{value}} từ {{account}} đã được xác nhận",
+        "failed": "Đang gửi đi {{value}} từ {{account}} đã thất bại",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

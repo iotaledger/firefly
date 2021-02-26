@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "设置您的钱包",
-            "body": "您可以创建一个新钱包或导入一个已有的钱包。"
+            "body": "您可以创建一个新钱包或导入一个已有的钱包。",
+            "profile_name": "配置名称"
         },
         "password": {
             "title": "设置密码",
@@ -62,7 +63,9 @@
         "recovery_phrase": {
             "title": "恢复密语",
             "body_1": "请仔细按正确的顺序写下这些单词。",
-            "body_2": "请秘密地保管好您的恢复密语并安全存储。不要与任何人共享它。"
+            "body_2": "请秘密地保管好您的恢复密语并安全存储。不要与任何人共享它。",
+            "reveal_recovery_phrase": "显示恢复密语",
+            "hide_recovery_phrase": "隐藏恢复密语"
         },
         "verify_recovery_phrase": {
             "title": "验证恢复密语",
@@ -137,7 +140,7 @@
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profile": {
-                "title": "个人信息",
+                "title": "配置信息",
                 "description": ""
             },
             "sync": {
@@ -172,6 +175,14 @@
                 "title": "修改密码",
                 "description": ""
             },
+            "changePincode": {
+                "title": "修改 PIN 码",
+                "description": "",
+                "currentPincode": "当前 PIN 码",
+                "newPincode": "新 PIN 码",
+                "confirmNewPincode": "确认新PIN码",
+                "action": "更改 PIN 码"
+            },
             "resyncAccounts": {
                 "title": "重新同步账户",
                 "description": ""
@@ -190,6 +201,10 @@
             },
             "nodeSettings": {
                 "title": "节点设置",
+                "description": ""
+            },
+            "configureNodeList": {
+                "title": "配置节点列表",
                 "description": ""
             },
             "proofOfWork": {
@@ -233,68 +248,80 @@
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "up_to_date": "最新的",
+                    "out_of_date": "已过期"
                 },
                 "hardware_device": {
-                    "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "title": "硬件设备",
+                    "none_detected": "没有检测到"
                 },
                 "stronghold_status": {
-                    "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "title": "Stronghold 状态",
+                    "locked": "锁定",
+                    "unlocked": "解锁"
                 },
                 "stronghold_backup": {
-                    "title": "Stronghold Backup",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "title": "备份Stronghold",
+                    "weeks_ago": "{weeks, plural, one {# 周} other {# 周}} 前"
                 }
             },
             "network": {
-                "network_operational": "Network Operational",
-                "network_degraded": "Network Degraded",
-                "network_down": "Network Down",
-                "status": "Status",
-                "messages_per_second": "Messages per second",
-                "confirmation_rate": "Confirmation rate"
+                "network_operational": "网络运行",
+                "network_degraded": "网络降级",
+                "network_down": "网络中断",
+                "status": "状态",
+                "messages_per_second": "每秒信息数",
+                "confirmation_rate": "确认速度"
+            },
+            "profile_modal": {
+                "all_settings": "所有设置",
+                "logout": "退出账号"
             }
         }
     },
     "popups": {
         "password": {
             "title": "需要输入密码",
-            "subtitle": "Please enter your wallet password to unlock Stronghold"
+            "subtitle": "请输入你的钱包密码来解锁Stronghold"
         },
         "qr": {
             "title": "你的二维码"
         },
         "version": {
-            "title": "Current version: {version}",
-            "up_to_date_title": "Firefly is up to date",
-            "up_to_date_description": "You are running the latest and safest version of Firefly.",
-            "update_available": "Firefly update available",
-            "update_details": "Version {version} - {date}"
+            "title": "当前版本: {version}",
+            "up_to_date_title": "Firefly 目前是最新版本",
+            "up_to_date_description": "你正在运行的Firefly版本是最新，最安全的。",
+            "update_available": "Firefly有可用的更新",
+            "update_details": "版本{version} - {date}"
         },
         "backup": {
-            "title": "Last backup: {date}",
-            "last_backup": "You last backed up {date}",
-            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
-            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "not_backed_up": "Not backed up",
-            "not_backed_up_description": "You have not backed up your Stronghold"
+            "title": "上次备份: {date}",
+            "last_backup": "您上次的备份 {date}",
+            "backup_description": "定期备份您的账户和交易记录是非常重要的。",
+            "backup_warning": "如果您丢失了备份文件和恢复短语，您将再也不能访问您的资金",
+            "not_backed_up": "没有备份",
+            "not_backed_up_description": "您还没有备份您的 Stronghold"
         },
         "delete_account": {
-            "title": "Delete {name}?",
+            "title": "删除{name}?",
             "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Type your wallet’s password to confirm.",
-            "delete_account": "Delete account",
-            "error_title": "Unable to delete {name}",
-            "error_body_1": "To delete an account you must have 0 balance.",
-            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+            "type_password": "请输入您的钱包密码进行确认。",
+            "delete_account": "删除账户",
+            "error_title": "无法删除 {name}",
+            "error_body_1": "你只能删除余额为0的账户",
+            "error_body_2": "目前你的这个账户还有 {balance} 余额. 请把这些资金移动到另一个账户后重试。"
         },
         "address_history": {
-            "title": "{name} account address history",
-            "current_balance": "Current balance: {balance}"
+            "title": "{name} 账户地址历史记录",
+            "current_balance": "当前余额: {balance}"
+        },
+        "node": {
+            "title_add": "添加节点",
+            "title_details": "节点详细信息",
+            "node_address": "节点地址",
+            "optional_username": "用户名(选填)",
+            "optional_password": "密码 (选填)",
+            "set_as_primary_node": "设为主节点"
         }
     },
     "actions": {
@@ -302,7 +329,7 @@
         "back": "返回",
         "cancel": "取消",
         "close": "关闭",
-        "dismiss": "Dismiss",
+        "dismiss": "取消",
         "save": "保存",
         "import_seed": "导入已有的种子",
         "import_wallet": "导入现有钱包",
@@ -335,16 +362,19 @@
         "exportNewStronghold": "导出一个新的Stronghold",
         "enableDeepLinks": "启用深链接",
         "enableDeveloperMode": "打开开发者模式",
-        "enableNotifications": "打开通知功能",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "导出状态",
         "outsourceProofOfWork": "外包工作证明",
         "unlock": "解锁",
-        "update_firefly": "Update Firefly",
-        "save_backup": "Save backup",
-        "customize_account": "Customise account",
-        "sync_account": "Sync account",
-        "view_address_history": "View address history",
-        "delete_account": "Delete account"
+        "update_firefly": "更新Firefly",
+        "restart_now": "Restart now",
+        "save_backup": "保存备份",
+        "customize_account": "自定义你的账户",
+        "sync_account": "同步账户",
+        "view_address_history": "显示地址历史记录",
+        "delete_account": "删除账户",
+        "max": "最大",
+        "add_node": "添加节点"
     },
     "general": {
         "password": "密码",
@@ -357,13 +387,13 @@
         "recent_activity": "最新活动",
         "sent": "已发送",
         "received": "已收到",
-        "send_payment": "Send payment",
-        "move_funds": "Move funds",
+        "send_payment": "发送付款",
+        "move_funds": "转移资金",
         "send_funds": "资金转账",
         "send_to_address": "发送至地址",
         "scan_qr_or_paste": "扫描二维码或粘贴地址",
         "move_funds_between_accounts": "账户之间的资金转移",
-        "send_tokens_to_address": "Send tokens to an address",
+        "send_tokens_to_address": "发送Token到另一个地址",
         "manage_account": "账户管理",
         "customize_account": "自定义你的账户",
         "account": "账号",
@@ -374,7 +404,7 @@
         "from": "从",
         "to": "到",
         "receive_funds": "接收资金",
-        "my_address": "My Address",
+        "my_address": "我的地址",
         "share_address": "分享地址",
         "your_address": "您的地址",
         "generate_new_address": "生成新地址",
@@ -391,25 +421,39 @@
         "light_theme": "浅色主题",
         "dark_theme": "深色主题",
         "total_balance": "总余额",
-        "account_balance": "Account Balance",
+        "account_balance": "账户余额",
         "incoming": "收到",
         "outgoing": "转出",
         "accounts": "帐户",
         "automaticNodeSelection": "自动选择节点",
         "manualNodeSelection": "手动选择节点",
-        "profiles": "个人信息",
+        "profiles": "用户配置",
+        "developerProfile": "开发者模式",
+        "dev": "开发者",
         "create_account": "创建一个账户",
         "account_name": "账户名称",
         "latest_transactions": "最新交易",
         "transactions": "交易",
         "security": "安全设置",
-        "account_address": "账户地址"
+        "account_address": "账户地址",
+        "nodes": "节点"
     },
     "dates": {
-        "today": "Today",
-        "days_ago": "{time, plural, one {# day} other {# days}} ago",
-        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
-        "months_ago": "{time, plural, one {# month} other {# months}} ago",
-        "years_ago": "{time, plural, one {# year} other {# years}} ago"
+        "today": "今日",
+        "days_ago": "{time, plural, one {# 天} other {# 天}} 前",
+        "weeks_ago": "{time, plural, one {# 周} other {# 周}} 前",
+        "months_ago": "{time, plural, one {# 月} other {# 月}} 前",
+        "years_ago": "{time, plural, one {# 年} other {# 年}} 前"
+    },
+    "notifications": {
+        "valueTx": "帐户 {{account}} 收到 {{value}}",
+        "confirmed": "帐户 {{account}} 的 {{value}} 转出交易已确认",
+        "failed": "帐户 {{account}} 的 {{value}} 转出交易未能成功。",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

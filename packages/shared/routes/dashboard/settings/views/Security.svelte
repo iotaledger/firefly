@@ -1,5 +1,5 @@
 <script>
-    import { get } from 'svelte/store';
+    import { get } from 'svelte/store'
     import zxcvbn from 'zxcvbn'
     import { Text, Dropdown, Password, Button, Checkbox } from 'shared/components'
     import { updateProfile, activeProfile, removeProfile } from 'shared/lib/profile'
@@ -27,6 +27,10 @@
     let currentPassword = ''
     let newPassword = ''
     let confirmedPassword = ''
+
+    let currentPincode = ''
+    let newPincode = ''
+    let confirmedPincode = ''
 
     $: strength = zxcvbn(newPassword).score
     $: valid = strength === 4
@@ -124,6 +128,54 @@
 
         return _changePassword()
     }
+
+    function changePincode() {
+        if (!currentPincode) {
+            return console.error('Current PIN cannot be empty')
+        }
+
+        if (!newPincode) {
+            return console.error('New PIN cannot be empty')
+        }
+
+        if (newPincode.length !== 6) {
+            return console.error('PIN length must be 6')
+        }
+
+        if (currentPincode === newPincode) {
+            return console.error('Current PIN and new PIN cannot be same.')
+        }
+
+        if (newPincode !== confirmedPincode) {
+            return console.error('PINs do not match.')
+        }
+
+        PincodeManager.verify(get(activeProfile).id, currentPincode)
+            .then((valid) => {
+                if (valid) {
+                    return new Promise((resolve, reject) => {
+                        api.setStoragePassword(newPincode, {
+                            onSuccess() {
+                                PincodeManager.set(get(activeProfile).id, newPincode)
+                                    .then(resolve)
+                                    .then(() => {
+                                        currentPincode = ''
+                                        newPincode = ''
+                                        confirmedPincode = ''
+                                    })
+                                    .catch(reject)
+                            },
+                            onError(error) {
+                                reject(error)
+                            },
+                        })
+                    })
+                } else {
+                    return Promise.reject('Current PIN do not match')
+                }
+            })
+            .catch(console.error)
+    }
 </script>
 
 <div>
@@ -145,31 +197,65 @@
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <section id="changePassword" class="w-3/4">
-        <Text type="h4" classes="mb-3">{locale('views.settings.changePassword.title')}</Text>
-        <Text type="p" secondary classes="mb-5">{locale('views.settings.changePassword.description')}</Text>
-        <Password
-            classes="mb-8"
-            bind:value={currentPassword}
-            showRevealToggle
-            {locale}
-            placeholder={locale('general.currentPassword')} />
-        <Password
-            classes="mb-4"
-            bind:value={newPassword}
-            showRevealToggle
-            strengthLevels={4}
-            showStrengthLevel
-            {strength}
-            {locale}
-            placeholder={locale('general.newPassword')} />
-        <Password
-            classes="mb-5"
-            bind:value={confirmedPassword}
-            showRevealToggle
-            {locale}
-            placeholder={locale('general.confirmNewPassword')} />
-        <Checkbox classes="mb-5" label={locale('actions.exportNewStronghold')} bind:checked={exportStrongholdChecked} />
-        <Button classes="w-1/4" onClick={changePassword}>{locale('views.settings.changePassword.title')}</Button>
+        <form id="form-change-password" on:submit={changePassword}>
+            <Text type="h4" classes="mb-3">{locale('views.settings.changePassword.title')}</Text>
+            <Text type="p" secondary classes="mb-5">{locale('views.settings.changePassword.description')}</Text>
+            <Password
+                classes="mb-8"
+                bind:value={currentPassword}
+                showRevealToggle
+                {locale}
+                placeholder={locale('general.currentPassword')} />
+            <Password
+                classes="mb-4"
+                bind:value={newPassword}
+                showRevealToggle
+                strengthLevels={4}
+                showStrengthLevel
+                {strength}
+                {locale}
+                placeholder={locale('general.newPassword')} />
+            <Password
+                classes="mb-5"
+                bind:value={confirmedPassword}
+                showRevealToggle
+                {locale}
+                placeholder={locale('general.confirmNewPassword')} />
+            <Checkbox classes="mb-5" label={locale('actions.exportNewStronghold')} bind:checked={exportStrongholdChecked} />
+            <Button form="form-change-password" type="submit" classes="w-1/4">{locale('views.settings.changePassword.title')}</Button>
+        </form>
+    </section>
+    <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
+    <section id="changePincode" class="w-3/4">
+        <form on:submit={changePincode} id="pincode-change-form">
+            <Text type="h4" classes="mb-3">{locale('views.settings.changePincode.title')}</Text>
+            <Text type="p" secondary classes="mb-5">{locale('views.settings.changePincode.description')}</Text>
+            <Password
+                classes="mb-4"
+                bind:value={currentPincode}
+                showRevealToggle
+                {locale}
+                maxlength="6"
+                numeric
+                placeholder={locale('views.settings.changePincode.currentPincode')} />
+            <Password
+                classes="mb-4"
+                bind:value={newPincode}
+                showRevealToggle
+                {locale}
+                maxlength="6"
+                numeric
+                placeholder={locale('views.settings.changePincode.newPincode')} />
+            <Password
+                classes="mb-5"
+                bind:value={confirmedPincode}
+                showRevealToggle
+                {locale}
+                maxlength="6"
+                numeric
+                placeholder={locale('views.settings.changePincode.confirmNewPincode')} />
+            <Button type="submit" form="pincode-change-form" classes="w-1/4">{locale('views.settings.changePincode.action')}</Button>
+        </form>
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <section id="resetWallet" class="w-3/4">

@@ -1,4 +1,14 @@
 {
     "private": true,
-    "workspaces": ["packages/desktop", "packages/shared", "packages/backend/bindings/node"]
+    "workspaces": [
+        "packages/desktop",
+        "packages/shared",
+        "packages/backend/bindings/node"
+    ],
+    "devDependencies": {
+        "patch-package": "^6.2.2"
+    },
+    "scripts": {
+        "postinstall": "patch-package"
+    }
 }

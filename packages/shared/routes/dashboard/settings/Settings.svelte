@@ -1,16 +1,14 @@
 <script lang="typescript">
-    import { setContext, createEventDispatcher } from 'svelte'
-    import { get, writable } from 'svelte/store'
+    import { createEventDispatcher } from 'svelte'
+    import { get } from 'svelte/store'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { activeProfile } from 'shared/lib/profile'
-    import { SettingsTitles } from './types'
+    import { settingsRoute } from 'shared/lib/router'
+    import { SettingsRoutes } from 'shared/lib/typings/routes'
 
     import { SettingsHome, SettingsViewer } from './views'
     export let locale
     export let mobile
-
-    const route = writable(undefined)
-    setContext('route', route)
 
     const dispatch = createEventDispatcher()
 
@@ -20,16 +18,16 @@
 
     $: {
         if ($deepLinkRequestActive && !get(activeProfile).settings.deepLinking) {
-            route.set(SettingsTitles.AdvancedSettings)
+            settingsRoute.set(SettingsRoutes.AdvancedSettings)
             deepLinkRequestActive.set(false)
         }
     }
 </script>
 
 <div class="w-full h-full px-16 py-12 flex flex-1 bg-white">
-    {#if $route}
-        <SettingsViewer {mobile} {locale} navigate={navigate} />
-    {:else}
+    {#if $settingsRoute === SettingsRoutes.Init}
         <SettingsHome {mobile} {locale} />
+    {:else}
+        <SettingsViewer {mobile} {locale} {navigate} />
     {/if}
 </div>

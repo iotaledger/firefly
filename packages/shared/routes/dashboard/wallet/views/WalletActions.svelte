@@ -1,10 +1,11 @@
-    <script lang="typescript">
+<script lang="typescript">
     import { getContext } from 'svelte'
     import { Text, Button, AccountTile } from 'shared/components'
     import { Send, Receive } from '.'
     import { selectedAccountId } from 'shared/lib/wallet'
-    import { walletViewState, WalletViewStates, accountViewState, AccountViewStates } from 'shared/lib/router'
-
+    import { walletRoute, accountRoute } from 'shared/lib/router'
+    import { WalletRoutes, AccountRoutes } from 'shared/lib/typings/routes'
+    
     export let locale
     export let send
     export let internalTransfer
@@ -14,21 +15,21 @@
 
     function handleAccountClick(accountId) {
         selectedAccountId.set(accountId)
-        walletViewState.set(WalletViewStates.Account)
-        accountViewState.set(AccountViewStates.Init)
+        walletRoute.set(WalletRoutes.Account)
+        accountRoute.set(AccountRoutes.Init)
     }
     function handleCreateClick() {
-        walletViewState.set(WalletViewStates.CreateAccount)
+        walletRoute.set(WalletRoutes.CreateAccount)
     }
     function handleSendClick() {
-        walletViewState.set(WalletViewStates.Send)
+        walletRoute.set(WalletRoutes.Send)
     }
     function handleReceiveClick() {
-        walletViewState.set(WalletViewStates.Receive)
+        walletRoute.set(WalletRoutes.Receive)
     }
 </script>
 
-{#if $walletViewState === WalletViewStates.Init}
+{#if $walletRoute === WalletRoutes.Init}
     <div class="p-8 pt-4 flex flex-col h-full justify-between">
         <div data-label="accounts" class="w-full h-full flex flex-col flex-no-wrap justify-start mb-6">
             <div class="flex flex-row mb-6 justify-between items-center">
@@ -55,8 +56,8 @@
             <Button xl secondary icon="transfer" classes="w-1/2" onClick={handleSendClick}>{locale('actions.send')}</Button>
         </div>
     </div>
-{:else if $walletViewState === WalletViewStates.Send}
+{:else if $walletRoute === WalletRoutes.Send}
     <Send {send} {internalTransfer} {locale} />
-{:else if $walletViewState === WalletViewStates.Receive}
+{:else if $walletRoute === WalletRoutes.Receive}
     <Receive {generateAddress} {locale} />
 {/if}

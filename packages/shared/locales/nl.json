@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Stel je wallet in",
-            "body": "Je kunt een nieuwe wallet maken of een bestaande importeren."
+            "body": "Je kunt een nieuwe wallet maken of een bestaande importeren.",
+            "profile_name": "Profielnaam"
         },
         "password": {
             "title": "Geef een wachtwoord op",
@@ -62,7 +63,9 @@
         "recovery_phrase": {
             "title": "Herstelzin",
             "body_1": "Neem de woorden over precies zoals ze hier staan.",
-            "body_2": "Houd je herstelzin privé en veilig opgeslagen. Deel deze met niemand."
+            "body_2": "Houd je herstelzin privé en veilig opgeslagen. Deel deze met niemand.",
+            "reveal_recovery_phrase": "Toon herstelzin",
+            "hide_recovery_phrase": "Verberg herstelzin"
         },
         "verify_recovery_phrase": {
             "title": "Verifieer je herstelzin",
@@ -172,6 +175,14 @@
                 "title": "Wachtwoord wijzigen",
                 "description": ""
             },
+            "changePincode": {
+                "title": "Wijzig PIN code",
+                "description": "",
+                "currentPincode": "Huidige PIN",
+                "newPincode": "Nieuwe PIN",
+                "confirmNewPincode": "Bevestig nieuwe PIN",
+                "action": "Wijzig PIN"
+            },
             "resyncAccounts": {
                 "title": "Accounts opnieuw synchroniseren",
                 "description": ""
@@ -190,6 +201,10 @@
             },
             "nodeSettings": {
                 "title": "Node instellingen",
+                "description": ""
+            },
+            "configureNodeList": {
+                "title": "Configureer node lijst",
                 "description": ""
             },
             "proofOfWork": {
@@ -233,68 +248,80 @@
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "up_to_date": "Up-to-date",
+                    "out_of_date": "Verouderd"
                 },
                 "hardware_device": {
-                    "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "title": "Hardware apparaat",
+                    "none_detected": "Niet gedetecteerd"
                 },
                 "stronghold_status": {
                     "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "locked": "Vergrendeld",
+                    "unlocked": "Ontgrendeld"
                 },
                 "stronghold_backup": {
-                    "title": "Stronghold Backup",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "title": "Stronghold Back-up",
+                    "weeks_ago": "{weeks, plural, one {# week} other {# weken}} geleden"
                 }
             },
             "network": {
-                "network_operational": "Network Operational",
-                "network_degraded": "Network Degraded",
-                "network_down": "Network Down",
+                "network_operational": "Netwerk Operationeel",
+                "network_degraded": "Netwerk Gedegradeerd",
+                "network_down": "Netwerk Inactief",
                 "status": "Status",
-                "messages_per_second": "Messages per second",
-                "confirmation_rate": "Confirmation rate"
+                "messages_per_second": "Berichten per seconde",
+                "confirmation_rate": "Bevestigingssnelheid"
+            },
+            "profile_modal": {
+                "all_settings": "Alle instellingen",
+                "logout": "Uitloggen"
             }
         }
     },
     "popups": {
         "password": {
             "title": "Wachtwoord vereist",
-            "subtitle": "Please enter your wallet password to unlock Stronghold"
+            "subtitle": "Voer het wachtwoord van je wallet in om Stronghold te ontgrendelen"
         },
         "qr": {
             "title": "Jouw QR-code"
         },
         "version": {
-            "title": "Current version: {version}",
-            "up_to_date_title": "Firefly is up to date",
-            "up_to_date_description": "You are running the latest and safest version of Firefly.",
-            "update_available": "Firefly update available",
-            "update_details": "Version {version} - {date}"
+            "title": "Huidige Versie: {version}",
+            "up_to_date_title": "Firefly is up-to-date",
+            "up_to_date_description": "Je gebruikt de nieuwste en veiligste versie van Firefly.",
+            "update_available": "Firefly update beschikbaar",
+            "update_details": "Versie {version} - {date}"
         },
         "backup": {
-            "title": "Last backup: {date}",
-            "last_backup": "You last backed up {date}",
-            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
-            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "not_backed_up": "Not backed up",
-            "not_backed_up_description": "You have not backed up your Stronghold"
+            "title": "Laatste back-up: {date}",
+            "last_backup": "Je hebt voor het laatst een back-up gemaakt op {date}",
+            "backup_description": "Het is belangrijk om regelmatig een back-up te maken om er zeker van te zijn dat je een kopie hebt van je accounts en transactiegeschiedenis.",
+            "backup_warning": "Als je je back-up en herstelzin kwijt raakt verlies je toegang tot je fondsen.",
+            "not_backed_up": "Geen back-up gemaakt",
+            "not_backed_up_description": "Je hebt geen back-up van je Stronghold gemaakt"
         },
         "delete_account": {
-            "title": "Delete {name}?",
+            "title": "{name} verwijderen?",
             "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Type your wallet’s password to confirm.",
-            "delete_account": "Delete account",
-            "error_title": "Unable to delete {name}",
-            "error_body_1": "To delete an account you must have 0 balance.",
-            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+            "type_password": "Voer je wallet wachtwoord in om te bevestigen.",
+            "delete_account": "Account verwijderen",
+            "error_title": "Kan {name} niet verwijderen",
+            "error_body_1": "Om een account te verwijderen moet je een saldo van 0 hebben.",
+            "error_body_2": "Je hebt momenteel {balance} op deze rekening staan. Verplaats dit bedrag naar een ander account en probeer het opnieuw."
         },
         "address_history": {
-            "title": "{name} account address history",
-            "current_balance": "Current balance: {balance}"
+            "title": "{name} account adresgechiedenis",
+            "current_balance": "Huidig saldo: {balance}"
+        },
+        "node": {
+            "title_add": "Node toevoegen",
+            "title_details": "Node details",
+            "node_address": "Node adres",
+            "optional_username": "Gebruikersnaam (optioneel)",
+            "optional_password": "Wachtwoord (optioneel)",
+            "set_as_primary_node": "Instellen als primaire node"
         }
     },
     "actions": {
@@ -302,7 +329,7 @@
         "back": "Terug",
         "cancel": "Annuleer",
         "close": "Sluiten",
-        "dismiss": "Dismiss",
+        "dismiss": "Sluiten",
         "save": "Opslaan",
         "import_seed": "Importeer een bestaande seed",
         "import_wallet": "Importeer bestaande wallet",
@@ -335,16 +362,19 @@
         "exportNewStronghold": "Exporteer een nieuwe Stronghold",
         "enableDeepLinks": "Diepe links inschakelen",
         "enableDeveloperMode": "Ontwikkelaarsmodus inschakelen",
-        "enableNotifications": "Meldingen aanzetten",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "Status exporteren",
         "outsourceProofOfWork": "Proof of work uitbesteden",
         "unlock": "Ontgrendel",
-        "update_firefly": "Update Firefly",
-        "save_backup": "Save backup",
-        "customize_account": "Customise account",
-        "sync_account": "Sync account",
-        "view_address_history": "View address history",
-        "delete_account": "Delete account"
+        "update_firefly": "Firefly bijwerken",
+        "restart_now": "Restart now",
+        "save_backup": "Back-up opslaan",
+        "customize_account": "Account aanpassen",
+        "sync_account": "Account synchroniseren",
+        "view_address_history": "Bekijk adresgeschiedenis",
+        "delete_account": "Account verwijderen",
+        "max": "Max",
+        "add_node": "Node toevoegen"
     },
     "general": {
         "password": "Wachtwoord",
@@ -357,13 +387,13 @@
         "recent_activity": "Recente activiteit",
         "sent": "Verzonden",
         "received": "Ontvangen",
-        "send_payment": "Send payment",
-        "move_funds": "Move funds",
+        "send_payment": "Verstuur betaling",
+        "move_funds": "Tokens verplaatsen",
         "send_funds": "Verstuur tokens",
         "send_to_address": "Verzenden naar een adres",
         "scan_qr_or_paste": "Scan een QR-code of plak een adres",
         "move_funds_between_accounts": "Geld tussen rekeningen verplaatsen",
-        "send_tokens_to_address": "Send tokens to an address",
+        "send_tokens_to_address": "Verstuur tokens naar een adres",
         "manage_account": "Account beheren",
         "customize_account": "Pas je account aan",
         "account": "Rekening",
@@ -374,7 +404,7 @@
         "from": "Van",
         "to": "Naar",
         "receive_funds": "Tokens ontvangen",
-        "my_address": "My Address",
+        "my_address": "Mijn Adres",
         "share_address": "Een adres delen",
         "your_address": "Jouw adres",
         "generate_new_address": "Genereer nieuw adres",
@@ -391,25 +421,39 @@
         "light_theme": "Lichte modus",
         "dark_theme": "Donkere modus",
         "total_balance": "Totaalsaldo",
-        "account_balance": "Account Balance",
+        "account_balance": "Rekeningsaldo",
         "incoming": "Inkomend",
         "outgoing": "Uitgaand",
         "accounts": "Rekeningen",
         "automaticNodeSelection": "Automatische node selectie",
         "manualNodeSelection": "Handmatige node selectie",
         "profiles": "Profielen",
+        "developerProfile": "Ontwikkelaar Profiel",
+        "dev": "Ontwikkelaar",
         "create_account": "Account aanmaken",
         "account_name": "Accountnaam",
         "latest_transactions": "Meest recente transacties",
         "transactions": "Transacties",
         "security": "Beveiliging",
-        "account_address": "Account adres"
+        "account_address": "Account adres",
+        "nodes": "Nodes"
     },
     "dates": {
-        "today": "Today",
-        "days_ago": "{time, plural, one {# day} other {# days}} ago",
-        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
-        "months_ago": "{time, plural, one {# month} other {# months}} ago",
-        "years_ago": "{time, plural, one {# year} other {# years}} ago"
+        "today": "Vandaag",
+        "days_ago": "{time, plural, one {# dag} other {# dagen}} geleden",
+        "weeks_ago": "{time, plural, one {# week} other {# weken}} geleden",
+        "months_ago": "{time, plural, one {# maand} other {# maanden}} geleden",
+        "years_ago": "{time, plural, one {# jaar} other {# jaren}} geleden"
+    },
+    "notifications": {
+        "valueTx": "Ontvangst van {{value}} op {{account}}",
+        "confirmed": "Uitgaande {{value}} van {{account}} is bevestigd",
+        "failed": "Uitgaande {{value}} van {{account}} is mislukt",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Set up your wallet",
-            "body": "You can create a new wallet or import an existing one."
+            "body": "You can create a new wallet or import an existing one.",
+            "profile_name": "Profile Name"
         },
         "password": {
             "title": "Create a password",
@@ -141,87 +142,99 @@
             "profile": {
                 "title": "Profile",
                 "description": ""
-            }, 
+            },
             "sync": {
                 "title": "Sync accounts",
                 "description": ""
-            }, 
+            },
             "theme": {
                 "title": "Theme",
                 "description": ""
-            }, 
+            },
             "language": {
                 "title": "Language",
                 "description": ""
-            }, 
+            },
             "currency": {
                 "title": "Currency",
                 "description": ""
-            }, 
+            },
             "notifications": {
                 "title": "Notifications",
                 "description": ""
-            }, 
+            },
             "exportStronghold": {
                 "title": "Export Stronghold",
                 "description": ""
-            }, 
+            },
             "appLock": {
                 "title": "App Lock",
                 "description": ""
-            }, 
+            },
             "changePassword": {
                 "title": "Change password",
                 "description": ""
-            }, 
+            },
+            "changePincode": {
+                "title": "Change PIN code",
+                "description": "",
+                "currentPincode": "Current PIN",
+                "newPincode": "New PIN",
+                "confirmNewPincode": "Confirm new PIN",
+                "action": "Change PIN"
+            },
             "resyncAccounts": {
                 "title": "Resync accounts",
                 "description": ""
-            }, 
+            },
             "resetWallet": {
                 "title": "Reset wallet",
                 "description": ""
-            }, 
+            },
             "deepLinks": {
                 "title": "Deep links",
                 "description": ""
-            }, 
+            },
             "developerMode": {
                 "title": "Developer mode",
                 "description": ""
-            }, 
+            },
             "nodeSettings": {
                 "title": "Node settings",
                 "description": ""
-            }, 
+            },
+            "configureNodeList": {
+                "title": "Configure node list",
+                "description": ""
+            },
             "proofOfWork": {
                 "title": "Proof of work",
                 "description": ""
-            }, 
+            },
             "errorLog": {
                 "title": "Error log",
                 "description": ""
-            }, 
+            },
             "stateExport": {
                 "title": "State export",
                 "description": ""
-            }, 
+            },
             "troubleshoot": {
                 "title": "Troubleshoot",
                 "description": ""
-            }, 
+            },
             "documentation": {
                 "title": "Documentation",
                 "description": ""
-            }, 
+            },
             "faq": {
                 "title": "FAQ",
                 "description": ""
-            }, 
+            },
             "discord": {
                 "title": "Discord",
                 "description": ""
-            }, 
+            },
             "about": {
                 "title": "About",
                 "description": ""
@@ -232,7 +245,7 @@
             "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
-            "security":{
+            "security": {
                 "version": {
                     "title": "Firefly v{version}",
                     "up_to_date": "Up to date",
@@ -301,6 +314,14 @@
         "address_history": {
             "title": "{name} account address history",
             "current_balance": "Current balance: {balance}"
+        },
+        "node": {
+            "title_add": "Add a node",
+            "title_details": "Node details",
+            "node_address": "Node address",
+            "optional_username": "Username (optional)",
+            "optional_password": "Password (optional)",
+            "set_as_primary_node": "Set as primary node"
         }
     },
     "actions": {
@@ -341,17 +362,33 @@
         "exportNewStronghold": "Export a new Stronghold",
         "enableDeepLinks": "Enable deep links",
         "enableDeveloperMode": "Enable developer mode",
-        "enableNotifications": "Enable notifications",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "Export state",
         "outsourceProofOfWork": "Outsource proof of work",
         "unlock": "Unlock",
         "update_firefly": "Update Firefly",
-        "install_firefly": "Install Firefly",
+        "restart_now": "Restart now",
         "save_backup": "Save backup",
         "customize_account": "Customise account",
         "sync_account": "Sync account",
         "view_address_history": "View address history",
-        "delete_account": "Delete account"
+        "delete_account": "Delete account",
+        "max": "Max",
+        "add_node": "Add node",
+        "hide": "Hide",
+        "hideOthers": "Hide Others",
+        "showAll": "Show All",
+        "quit": "Quit",
+        "edit": "Edit",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "selectAll": "Select All",
+        "addAccount": "Add Account",
+        "checkForUpdates": "Check for Updates",
+        "reportAnIssue": "Report an Issue"
     },
     "general": {
         "password": "Password",
@@ -412,7 +449,10 @@
         "latest_transactions": "Latest Transactions",
         "transactions": "Transactions",
         "security": "Security",
-        "account_address": "Account Address"
+        "account_address": "Account Address",
+        "nodes": "Nodes",
+        "wallet": "Wallet",
+        "help": "Help"
     },
     "dates": {
         "today": "Today",
@@ -424,6 +464,12 @@
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
         "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed"
+        "failed": "Outgoing {{value}} from {{account}} has failed",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

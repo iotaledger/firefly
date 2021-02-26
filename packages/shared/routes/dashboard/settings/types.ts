@@ -1,23 +1,24 @@
-export enum SettingsTitles {
+export enum SettingsRoutes {
     GeneralSettings = 'generalSettings',
-    Security = "security",
+    Security = 'security',
     AdvancedSettings = 'advancedSettings',
-    HelpAndInfo = 'helpAndInfo'
-}   
+    HelpAndInfo = 'helpAndInfo',
+}
 
 export enum GeneralSettings {
     Profile = 'profile',
     Theme = 'theme',
     Language = 'language',
     Currency = 'currency',
-    Notifications = 'notifications'
+    Notifications = 'notifications',
 }
 
 export enum SecuritySettings {
     ExportStronghold = 'exportStronghold',
     AppLock = 'appLock',
     ChangePassword = 'changePassword',
-    ResetWallet = 'resetWallet'
+    ChangePincode = 'changePincode',
+    ResetWallet = 'resetWallet',
 }
 
 export enum AdvancedSettings {
@@ -27,7 +28,7 @@ export enum AdvancedSettings {
     DeepLinks = 'deepLinks',
     ResyncAccounts = 'resyncAccounts',
     ErrorLog = 'errorLog',
-    StateExport = 'stateExport'
+    StateExport = 'stateExport',
 }
 
 export enum HelpAndInfo {
@@ -35,7 +36,7 @@ export enum HelpAndInfo {
     Documentation = 'documentation',
     FAQ = 'faq',
     Discord = 'discord',
-    About = 'about'
+    About = 'about',
 }
 
 export enum SettingsIcons {
@@ -47,6 +48,7 @@ export enum SettingsIcons {
     exportStronghold = 'export',
     appLock = 'pin',
     changePassword = 'lock',
+    changePincode = 'lock',
     resyncAccounts = 'sync',
     resetWallet = 'reset',
     deepLinks = 'link',
@@ -59,5 +61,5 @@ export enum SettingsIcons {
     documentation = 'doc',
     faq = 'speech',
     discord = 'discord',
-    about = 'help'
+    about = 'help',
 }

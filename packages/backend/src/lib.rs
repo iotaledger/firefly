@@ -159,8 +159,14 @@ pub fn init_logger(config: LoggerConfigBuilder) {
     logger_init(config.finish()).expect("failed to init logger");
 }
 
-pub async fn send_message(message: String) {
-    let data = match serde_json::from_str::<DispatchMessage>(&message) {
+#[derive(Deserialize)]
+pub(crate) struct MessageFallback {
+    #[serde(rename = "actorId")]
+    pub(crate) actor_id: String,
+}
+
+pub async fn send_message(serialized_message: String) {
+    let data = match serde_json::from_str::<DispatchMessage>(&serialized_message) {
         Ok(message) => {
             let actors = wallet_actors().lock().await;
 
@@ -181,14 +187,29 @@ pub async fn send_message(message: String) {
             }
         }
         Err(error) => {
-            log::error!("[FIREFLY] backend sendMessage error: {:?}", error);
-            None
+            if let Ok(message) = serde_json::from_str::<MessageFallback>(&serialized_message) {
+                Some((
+                    Some(format!(
+                        r#"{{ "type": "InvalidMessage", "payload": {} }}"#,
+                        serialized_message
+                    )),
+                    message.actor_id,
+                ))
+            } else {
+                log::error!("[FIREFLY] backend sendMessage error: {:?}", error);
+                None
+            }
         }
     };
 
     if let Some((message, actor_id)) = data {
         if let Some(message) = message {
             respond(&actor_id, message).expect("actor dropped");
+        } else {
+            log::error!(
+                "[FIREFLY] unexpected empty response for message `{}`, the channel was dropped",
+                serialized_message
+            );
         }
     }
 }
@@ -295,6 +316,29 @@ mod tests {
                 Option::<PathBuf>::None,
             )
             .await;
+
+            // send a malformed message
+            super::send_message(format!(
+                r#"{{
+                    "actorId": "{}",
+                    "id": "{}",
+                    "cmd": "SetStrongholdPassword"
+                }}"#,
+                actor_id, "message-id"
+            ))
+            .await;
+
+            if let Ok(message) = rx.recv_timeout(Duration::from_secs(1)) {
+                let value: serde_json::Value = serde_json::from_str(&message).unwrap();
+                let json = value.as_object().unwrap();
+                assert_eq!(
+                    json.get("type"),
+                    Some(&serde_json::Value::String("InvalidMessage".to_string()))
+                );
+            } else {
+                panic!("actor didn't reply after wrong message");
+            }
+
             super::send_message(format!(
                 r#"{{
                     "actorId": "{}",

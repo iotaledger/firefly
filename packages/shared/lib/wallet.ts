@@ -1,35 +1,26 @@
 import { writable, Writable, get } from 'svelte/store'
-import type {
-    MessageResponse,
-    SetStrongholdPasswordResponse,
-    CreatedAccountResponse,
-    ReadAccountsResponse,
-    LatestAddressResponse,
-    SyncAccountsResponse,
-    ErrorResponse,
-    Actor,
-} from './typings/bridge'
-import { ResponseTypes } from './typings/bridge'
+import type { Actor } from './typings/bridge'
 import type { Address } from './typings/address'
 import type { Message } from './typings/message'
-import type { Event, BalanceChangeEventPayload, TransactionEventPayload, ConfirmationStateChangeEventPayload } from './typings/events'
-import Validator, { ErrorTypes as ValidatorErrorTypes } from 'shared/lib/validator'
-import { generateRandomId } from 'shared/lib/utils'
+import type { Account as BaseAccount } from './typings/account'
+import type { Event, TransactionEventPayload, ConfirmationStateChangeEventPayload, BalanceChangeEventPayload } from './typings/events'
 import { mnemonic } from 'shared/lib/app'
+import { formatUnit } from 'shared/lib/units'
+import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
+import { showSystemNotification } from 'shared/lib/notifications'
 import { _ } from 'shared/lib/i18n'
-
-
-const Wallet = window['__WALLET__']
+import { persistent } from 'shared/lib/helpers'
+import type { SyncedAccount } from './typings/account'
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
-type Account = {
-    id: string
-    index: number;
-    alias: string
-    addresses: Address[]
-    messages: Message[],
+interface Account extends BaseAccount {
+    depositAddress: Address;
+    rawIotaBalance: number;
+    balance: string;
+    balanceEquiv: string;
+    color: string;
 }
 
 interface ActorState {
@@ -37,68 +28,22 @@ interface ActorState {
 }
 
 export type BalanceOverview = {
-    incoming: string;
-    incomingRaw: number;
-    outgoing: string;
-    outgoingRaw: number;
-    balance: string;
-    balanceRaw: number;
-    balanceFiat: string;
+    incoming: string
+    incomingRaw: number
+    outgoing: string
+    outgoingRaw: number
+    balance: string
+    balanceRaw: number
+    balanceFiat: string
 }
 
 type WalletState = {
-    balanceOverview: Writable<BalanceOverview>;
+    balanceOverview: Writable<BalanceOverview>
     accounts: Writable<Account[]>
 }
 
-type CallbacksStore = {
-    [id: string]: CallbacksPattern
-}
-
-type CallbacksPattern = {
-    onSuccess: (message: MessageResponse) => void
-    onError: (message: MessageResponse) => void
-}
-
-const apiToResponseTypeMap = {
-    removeAccount: ResponseTypes.RemovedAccount,
-    createAccount: ResponseTypes.CreatedAccount,
-    getAccount: ResponseTypes.ReadAccount,
-    getAccounts: ResponseTypes.ReadAccounts,
-    syncAccounts: ResponseTypes.SyncedAccounts,
-    listMessages: ResponseTypes.Messages,
-    listAddresses: ResponseTypes.Addresses,
-    generateAddress: ResponseTypes.GeneratedAddress,
-    latestAddress: ResponseTypes.LatestAddress,
-    getBalance: ResponseTypes.Balance,
-    reattach: ResponseTypes.Reattached,
-    backup: ResponseTypes.BackupSuccessful,
-    restoreBackup: ResponseTypes.BackupRestored,
-    send: ResponseTypes.SentTransfer,
-    setStrongholdPassword: ResponseTypes.StrongholdPasswordSet,
-    onError: ResponseTypes.ErrorThrown,
-    onBalanceChange: ResponseTypes.BalanceChange,
-    onNewTransaction: ResponseTypes.NewTransaction,
-    onConfirmationStateChange: ResponseTypes.ConfirmationStateChange,
-    onReattachment: ResponseTypes.Reattachment,
-    onBroadcast: ResponseTypes.Broadcast,
-    onStrongholdStatusChange: ResponseTypes.StrongholdStatusChange,
-    generateMnemonic: ResponseTypes.GeneratedMnemonic,
-    storeMnemonic: ResponseTypes.StoredMnemonic,
-    verifyMnemonic: ResponseTypes.VerifiedMnemonic,
-    setStoragePassword: ResponseTypes.StoragePasswordSet,
-    getStrongholdStatus: ResponseTypes.StrongholdStatus,
-    getUnusedAddress: ResponseTypes.UnusedAddress,
-    isLatestAddressUnused: ResponseTypes.IsLatestAddressUnused,
-    areLatestAddressesUnused: ResponseTypes.AreAllLatestAddressesUnused,
-    setAlias: ResponseTypes.UpdatedAlias,
-    removeStorage: ResponseTypes.DeletedStorage,
-    lockStronghold: ResponseTypes.LockedStronghold,
-    changeStrongholdPassword: ResponseTypes.StrongholdPasswordChanged
-};
-
 /** Active actors state */
-const actors: ActorState = {};
+const actors: ActorState = {}
 
 /*
  * Wallet state
@@ -111,9 +56,9 @@ export const wallet = writable<WalletState>({
         outgoingRaw: 0,
         balance: '0 Mi',
         balanceRaw: 0,
-        balanceFiat: '0.00 USD'
+        balanceFiat: '0.00 USD',
     }),
-    accounts: writable<Account[]>([])
+    accounts: writable<Account[]>([]),
 })
 
 export const resetWallet = () => {
@@ -125,168 +70,37 @@ export const resetWallet = () => {
         outgoingRaw: 0,
         balance: '0 Mi',
         balanceRaw: 0,
-        balanceFiat: '0.00 USD'
+        balanceFiat: '0.00 USD',
     })
     accounts.set([])
     selectedAccountId.set(null)
+    loggedIn.set(false)
 }
 
 export const selectedAccountId = writable<string | null>(null)
 
-/**
- * A simple store for keeping references to (success, error) callbacks
- */
-const callbacksStore: CallbacksStore = {}
+export const loggedIn = persistent<boolean>('loggedIn', false)
 
-/**
- * (Default) callbacks for wallet.rs methods.
- * They can be overridden by the caller component.
- */
-const defaultCallbacks = {
-    StrongholdPasswordSet: {
-        onSuccess: (response: SetStrongholdPasswordResponse): void => { },
-        onError: (error: ErrorResponse): void => { },
-    },
-    CreatedAccount: {
-        onSuccess: (response: CreatedAccountResponse): void => { },
-        onError: (error: ErrorResponse): void => { },
-    },
-    ReadAccounts: {
-        onSuccess: (response: ReadAccountsResponse): void => { },
-        onError: (error: ErrorResponse): void => { },
-    },
-    LatestAddress: {
-        onSuccess: (response: LatestAddressResponse): void => { },
-        onError: (error: ErrorResponse): void => { },
-    },
-    SyncedAccounts: {
-        onSuccess: (response: SyncAccountsResponse): void => { },
-        onError: (error: ErrorResponse): void => { },
-    },
-    BalanceChange: {
-        onSuccess: (response: Event<BalanceChangeEventPayload>): void => { },
-    },
-    NewTransaction: {
-        onSuccess: (response: Event<TransactionEventPayload>): void => { }
-    },
-};
-
-/**
- * Response subscriber.
- * Receives messages from wallet.rs.
- */
-Wallet.onMessage((message: MessageResponse) => {
-    const _deleteCallbackId = (_id: string) => {
-        const isEventMessage = [
-            ResponseTypes.ErrorThrown,
-            ResponseTypes.BalanceChange,
-            ResponseTypes.NewTransaction,
-            ResponseTypes.ConfirmationStateChange,
-            ResponseTypes.Reattachment,
-            ResponseTypes.Broadcast,
-        ].includes(message.type)
-
-        if (!isEventMessage) {
-            delete callbacksStore[_id]
-        }
-    }
-
-    const { isValid, error } = new Validator(Object.keys(callbacksStore)).performValidation(message);
-
-    if (!isValid) {
-        if (error.type !== ValidatorErrorTypes.UnknownId) {
-            const { id } = message
-            const { onError } = callbacksStore[id]
-
-            onError(message)
-
-            _deleteCallbackId(id)
-        } else {
-            /** TODO: In case of unknown ids, add validation failure to error log */
-        }
-    } else {
-        const { id } = message
-
-        const { onSuccess, onError } = callbacksStore[id]
-
-        message.type === 'Error' || message.type === 'Panic' ? onError(message) : onSuccess(message)
-    }
-})
-
-/**
- * Keeps a reference to (optional) callbacks.
- *
- * If callbacks are not provided, the default callbacks will be used.
- *
- * Note: Callbacks are invoked when a response is received from wallet.rs actor
- *
- * @method storeCallbacks
- *
- * @param {string} __id
- * @param {function} onSuccess
- * @param {function} onError
- *
- * @returns {void}
- */
-const storeCallbacks = (__id: string, type: ResponseTypes, callbacks?: CallbacksPattern): void => {
-    if (callbacks && typeof callbacks.onSuccess === 'function' && typeof callbacks.onError === 'function') {
-        callbacksStore[__id] = callbacks
-    } else {
-        callbacksStore[__id] = defaultCallbacks[type]
-    }
-}
-
-const Middleware = {
-    get: (_target, prop) => {
-        return async (...payload): Promise<void> => {
-            const actorId = get(activeProfile).id;
-
-            const messageId = generateRandomId();
-
-            const hasPayload = payload.length
-
-            let shouldOverrideDefaultCallbacks = false
-            let lastArgument = null
-
-            if (hasPayload) {
-                lastArgument = payload[payload.length - 1]
-
-                shouldOverrideDefaultCallbacks =
-                    typeof lastArgument === 'object' && 'onSuccess' in lastArgument && 'onError' in lastArgument
-            }
-
-            storeCallbacks(messageId, apiToResponseTypeMap[prop], shouldOverrideDefaultCallbacks ? lastArgument : undefined)
-
-            const actualPayload = shouldOverrideDefaultCallbacks ? payload.slice(0, -1) : payload
-
-            await _target[prop](...actualPayload)({ actorId, messageId })
-        }
-    },
-    set: () => {
-        return false
-    },
-}
-
-export const api = new Proxy(Wallet.api, Middleware)
+export const api = window['__WALLET_API__']
 
 export const getStoragePath = (appPath: string, profileName: string): string => {
-    return `${appPath}/${WALLET_STORAGE_DIRECTORY}/${profileName}`;
+    return `${appPath}/${WALLET_STORAGE_DIRECTORY}/${profileName}`
 }
 
 export const initialise = (id: string, storagePath: string): void => {
-    const actor: Actor = Wallet.init(id, storagePath);
+    const actor: Actor = window['__WALLET_INIT__'].run(id, storagePath)
 
-    actors[id] = actor;
+    actors[id] = actor
 }
 
 /**
  * Destroys an actor & remove it from actors state
- * 
+ *
  * @method destroyActor
- * 
+ *
  * @param {string} id
- * 
- * @returns {void} 
+ *
+ * @returns {void}
  */
 export const destroyActor = (id: string): void => {
     if (!actors[id]) {
@@ -294,30 +108,38 @@ export const destroyActor = (id: string): void => {
     }
 
     // Destroy actor
-    actors[id].destroy();
+    actors[id].destroy()
 
     // Delete actor id from state
-    delete actors[id];
-};
+    delete actors[id]
+}
 
 /**
  * Generate BIP39 Mnemonic Recovery Phrase
  */
-export const generateRecoveryPhrase = (): Promise<string[]> => new Promise((resolve, reject) => {
-    api.generateMnemonic({
-        onSuccess(response) { resolve(response.payload.split(' ')) },
-        onError(error) { reject(error) }
+export const generateRecoveryPhrase = (): Promise<string[]> =>
+    new Promise((resolve, reject) => {
+        api.generateMnemonic({
+            onSuccess(response) {
+                resolve(response.payload.split(' '))
+            },
+            onError(error) {
+                reject(error)
+            },
+        })
     })
-})
 
-export const verifyRecoveryPhrase = (phrase): Promise<void> => new Promise((resolve, reject) => {
-    api.verifyMnemonic(phrase, {
-        onSuccess(response) {
-            resolve(response)
-        },
-        onError(error) { reject(error) }
+export const verifyRecoveryPhrase = (phrase): Promise<void> =>
+    new Promise((resolve, reject) => {
+        api.verifyMnemonic(phrase, {
+            onSuccess(response) {
+                resolve(response)
+            },
+            onError(error) {
+                reject(error)
+            },
+        })
     })
-})
 
 export const requestMnemonic = async () => {
     let recoveryPhrase = await generateRecoveryPhrase()
@@ -326,9 +148,9 @@ export const requestMnemonic = async () => {
 
 /**
  * Initialises event listeners from wallet library
- * 
+ *
  * @method initialiseListeners
- * 
+ *
  * @returns {void}
  */
 export const initialiseListeners = () => {
@@ -339,37 +161,42 @@ export const initialiseListeners = () => {
         onSuccess(response) {
             updateProfile('isStrongholdLocked', response.payload.snapshot.status === 'Locked')
         },
-        onError(error) { console.error(error) }
+        onError(error) {
+            console.error(error)
+        },
     })
 
     /**
-    * Event listener for new message event
-    */
+     * Event listener for new message event
+     */
     api.onNewTransaction({
         onSuccess(response: Event<TransactionEventPayload>) {
             if (get(activeProfile).settings.notifications) {
                 const accounts = get(wallet).accounts
-                const account = get(accounts).find(account => account.id === response.payload.accountId)
+                const account = get(accounts).find((account) => account.id === response.payload.accountId)
                 const message = response.payload.message
 
                 const locale = get(_) as (string) => string
                 const notificationMessage = locale('notifications.valueTx')
                     .replace('{{value}}', message.value.toString())
                     .replace('{{account}}', account.alias)
-                const NotificationManager = window['Electron']['NotificationManager']
-                NotificationManager.notify(notificationMessage)
+
+                showSystemNotification({ type: "info", message: notificationMessage })
             }
+
+            // Update account with new message
+            saveNewMessage(response.payload.accountId, response.payload.message);
         },
         onError(error) {
             console.error(error)
-        }
+        },
     })
 
     api.onConfirmationStateChange({
         onSuccess(response: Event<ConfirmationStateChangeEventPayload>) {
             if (get(activeProfile).settings.notifications) {
                 const accounts = get(wallet).accounts
-                const account = get(accounts).find(account => account.id === response.payload.accountId)
+                const account = get(accounts).find((account) => account.id === response.payload.accountId)
                 const message = response.payload.message
                 const messageKey = response.payload.confirmed ? 'confirmed' : 'failed'
 
@@ -377,50 +204,209 @@ export const initialiseListeners = () => {
                 const notificationMessage = locale(`notifications.${messageKey}`)
                     .replace('{{value}}', message.value.toString())
                     .replace('{{account}}', account.alias)
-                const NotificationManager = window['Electron']['NotificationManager']
-                NotificationManager.notify(notificationMessage)
+
+                showSystemNotification({ type: "info", message: notificationMessage })
             }
         },
         onError(error) {
             console.error(error)
-        }
+        },
     })
 
     /**
-    * Event listener for balance change event
-    */
+     * Event listener for balance change event
+     */
     api.onBalanceChange({
-        onSuccess(response) { console.log('Balance change response', response) },
-        onError(error) { console.error(error) }
+        onSuccess(response: Event<BalanceChangeEventPayload>) {
+            const { payload: { accountId, address, balanceChange } } = response;
+
+            updateAccountAfterBalanceChange(accountId, address, balanceChange.received, balanceChange.spent)
+
+            const { balanceOverview } = get(wallet);
+            const overview = get(balanceOverview);
+
+            const incoming = overview.incomingRaw + balanceChange.received;
+            const outgoing = overview.outgoingRaw + balanceChange.spent;
+            const balance = overview.balanceRaw - balanceChange.spent + balanceChange.received
+
+            updateBalanceOverview(balance, incoming, outgoing);
+
+        },
+        onError(error) {
+            console.error(error)
+        },
+    })
+}
+
+/**
+ * Updates account information after balance change
+ * 
+ * @method updateAccountAfterBalanceChange
+ * 
+ * @param {string} accountId 
+ * @param {Address} addressMeta 
+ */
+export const updateAccountAfterBalanceChange = (
+    accountId: string,
+    address: Address,
+    receivedBalance: number,
+    spentBalance: number
+): void => {
+    const { accounts } = get(wallet);
+
+    accounts.update((storedAccounts) => {
+        return storedAccounts.map((storedAccount) => {
+            if (storedAccount.id === accountId) {
+                const rawIotaBalance = storedAccount.rawIotaBalance - spentBalance + receivedBalance;
+
+                return Object.assign({}, storedAccount, {
+                    rawIotaBalance,
+                    balance: formatUnit(rawIotaBalance, 0),
+                    balanceEquiv: `${convertToFiat(
+                        rawIotaBalance,
+                        get(currencies)[CurrencyTypes.USD],
+                        get(exchangeRates)[get(activeProfile).settings.currency]
+                    )} ${get(activeProfile).settings.currency}`,
+                    addresses: storedAccount.addresses.map((_address: Address) => {
+                        if (_address.address === address.address) {
+                            return Object.assign({}, _address, address)
+                        }
+
+                        return _address
+                    })
+                })
+            }
+        })
+    })
+}
+
+/** 
+ * @method saveNewMessage
+ * 
+ * @param {string} accountId 
+ * @param {Message} message
+ * 
+ * @returns {void} 
+ */
+export const saveNewMessage = (accountId: string, message: Message): void => {
+    const { accounts } = get(wallet)
+
+    accounts.update((storedAccounts) => {
+        return storedAccounts.map((storedAccount: Account) => {
+            if (storedAccount.id === accountId) {
+                return Object.assign({}, storedAccount, {
+                    messages: [message, ...storedAccount.messages]
+                })
+            }
+
+            return storedAccount;
+        })
     })
 };
 
-
-
-
 /**
  * Gets latest messages
- * 
+ *
  * @method getLatestMessages
- * 
- * @param {Account} accounts 
- * @param {number} [count] 
- * 
+ *
+ * @param {Account} accounts
+ * @param {number} [count]
+ *
  * @returns {Message[]}
  */
-export const getLatestMessages = (
-    accounts: Account[],
-    count = 10
-): Message[] => {
-    const messages: Message[] = accounts.reduce((messages, account) => messages.concat(
-        account.messages.map((message, idx) => Object.assign({}, message, {
-            account: account.index,
-            internal: idx % 2 !== 0
-        })
-        )
-    ), []);
+export const getLatestMessages = (accounts: Account[], count = 10): Message[] => {
+    const messages: Message[] = accounts.reduce(
+        (messages, account) =>
+            messages.concat(
+                account.messages.map((message, idx) =>
+                    Object.assign({}, message, {
+                        account: account.index,
+                        internal: idx % 2 !== 0,
+                    })
+                )
+            ),
+        []
+    )
 
-    return messages.slice().sort((a, b) => {
-        return <any>new Date(b.timestamp) - <any>new Date(a.timestamp);
-    }).slice(0, count);
+    return messages
+        .slice()
+        .sort((a, b) => {
+            return <any>new Date(b.timestamp) - <any>new Date(a.timestamp)
+        })
+        .slice(0, count)
+}
+
+/**
+ * Updates balance overview 
+ * 
+ * @method updateBalanceOverview
+ * 
+ * @param {number} balance
+ * @param {number} incoming 
+ * @param {number} outgoing
+ * 
+ * @returns {void} 
+ */
+export const updateBalanceOverview = (balance: number, incoming: number, outgoing: number): void => {
+    const { balanceOverview } = get(wallet);
+
+    balanceOverview.update((overview) => {
+        return Object.assign({}, overview, {
+            incoming: formatUnit(incoming, 2),
+            incomingRaw: incoming,
+            outgoing: formatUnit(outgoing, 2),
+            outgoingRaw: outgoing,
+            balance: formatUnit(balance, 2),
+            balanceRaw: balance,
+            balanceFiat: `${convertToFiat(
+                balance,
+                get(currencies)[CurrencyTypes.USD],
+                get(exchangeRates)[get(activeProfile).settings.currency]
+            )} ${get(activeProfile).settings.currency}`,
+        });
+    });
+};
+
+/**    
+* Updates accounts information after a successful sync accounts operation
+*
+* @method updateAccounts
+*
+* @param {SyncedAccount[]} syncedAccounts
+*
+* @returns {void}
+*/
+export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
+    const _update = (existingPayload, newPayload, prop) => {
+        const existingPayloadMap = existingPayload.reduce((acc, object) => {
+            acc[object[prop]] = object
+
+            return acc
+        }, {})
+
+        const newPayloadMap = newPayload.reduce((acc, object) => {
+            acc[object[prop]] = object
+
+            return acc
+        }, {})
+
+        return Object.values(Object.assign({}, existingPayloadMap, newPayloadMap))
+    }
+
+    const { accounts } = get(wallet)
+
+    accounts.update((storedAccounts) => {
+        return storedAccounts.map((storedAccount) => {
+            const syncedAccount = syncedAccounts.find((_account) => _account.id === storedAccount.id)
+
+            return Object.assign({}, storedAccount, {
+                // Update deposit address
+                depositAddress: syncedAccount.depositAddress.address,
+                // If we have received a new address, simply add it;
+                // If we have received an existing address, update the properties.
+                addresses: _update(storedAccount.addresses, syncedAccount.addresses, 'address'),
+                messages: _update(storedAccount.messages, syncedAccount.messages, 'id'),
+            })
+        })
+    })
 };

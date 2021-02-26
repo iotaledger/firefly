@@ -33,7 +33,8 @@
         },
         "setup": {
             "title": "Konfigurer din tegnebog",
-            "body": "Du kan oprette en ny tegnebog eller importere en eksisterende."
+            "body": "Du kan oprette en ny tegnebog eller importere en eksisterende.",
+            "profile_name": "Profile Name"
         },
         "password": {
             "title": "Opret en adgangskode",
@@ -62,7 +63,9 @@
         "recovery_phrase": {
             "title": "Gendannelsesssætning",
             "body_1": "Skriv omhyggeligt ordene ned i den rigtige rækkefølge.",
-            "body_2": "Hold din genoprettelsessætning hemmelig og gem den et sikkert sted. Del den ikke med nogen."
+            "body_2": "Hold din genoprettelsessætning hemmelig og gem den et sikkert sted. Del den ikke med nogen.",
+            "reveal_recovery_phrase": "Vis gendannelsessætning",
+            "hide_recovery_phrase": "Hide recovery phrase"
         },
         "verify_recovery_phrase": {
             "title": "Bekræft gendannelsessætning",
@@ -172,6 +175,14 @@
                 "title": "Skift adgangskode",
                 "description": ""
             },
+            "changePincode": {
+                "title": "Change PIN code",
+                "description": "",
+                "currentPincode": "Current PIN",
+                "newPincode": "New PIN",
+                "confirmNewPincode": "Confirm new PIN",
+                "action": "Change PIN"
+            },
             "resyncAccounts": {
                 "title": "Synkronisér konti",
                 "description": ""
@@ -190,6 +201,10 @@
             },
             "nodeSettings": {
                 "title": "Nodeindstillinger",
+                "description": ""
+            },
+            "configureNodeList": {
+                "title": "Configure node list",
                 "description": ""
             },
             "proofOfWork": {
@@ -257,6 +272,10 @@
                 "status": "Status",
                 "messages_per_second": "Messages per second",
                 "confirmation_rate": "Confirmation rate"
+            },
+            "profile_modal": {
+                "all_settings": "All settings",
+                "logout": "Log out"
             }
         }
     },
@@ -295,6 +314,14 @@
         "address_history": {
             "title": "{name} account address history",
             "current_balance": "Current balance: {balance}"
+        },
+        "node": {
+            "title_add": "Add a node",
+            "title_details": "Node details",
+            "node_address": "Node address",
+            "optional_username": "Username (optional)",
+            "optional_password": "Password (optional)",
+            "set_as_primary_node": "Set as primary node"
         }
     },
     "actions": {
@@ -335,16 +362,19 @@
         "exportNewStronghold": "Eksportér en ny Stronghold",
         "enableDeepLinks": "Aktivér dybe links",
         "enableDeveloperMode": "Aktiver udviklertilstand",
-        "enableNotifications": "Aktiver notifikationer",
+        "enableSystemNotifications": "Enable system notifications",
         "exportState": "Eksportér tilstand",
         "outsourceProofOfWork": "Outsource bevis for arbejde",
         "unlock": "Lås op",
         "update_firefly": "Update Firefly",
+        "restart_now": "Restart now",
         "save_backup": "Save backup",
         "customize_account": "Customise account",
         "sync_account": "Sync account",
         "view_address_history": "View address history",
-        "delete_account": "Delete account"
+        "delete_account": "Delete account",
+        "max": "Max",
+        "add_node": "Add node"
     },
     "general": {
         "password": "Adgangskode",
@@ -398,12 +428,15 @@
         "automaticNodeSelection": "Automatisk valg af node",
         "manualNodeSelection": "Manuelt valg af node",
         "profiles": "Profiler",
+        "developerProfile": "Developer Profile",
+        "dev": "Dev",
         "create_account": "Opret en konto",
         "account_name": "Kontonavn",
         "latest_transactions": "Seneste transaktioner",
         "transactions": "Transaktioner",
         "security": "Sikkerhed",
-        "account_address": "Konto adresse"
+        "account_address": "Konto adresse",
+        "nodes": "Nodes"
     },
     "dates": {
         "today": "Today",
@@ -411,5 +444,16 @@
         "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
         "months_ago": "{time, plural, one {# month} other {# months}} ago",
         "years_ago": "{time, plural, one {# year} other {# years}} ago"
+    },
+    "notifications": {
+        "valueTx": "Receiving {{value}} to {{account}}",
+        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
+        "failed": "Outgoing {{value}} from {{account}} has failed",
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

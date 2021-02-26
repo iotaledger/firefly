@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Input, Text, Button } from 'shared/components'
-    import { walletViewState, WalletViewStates } from 'shared/lib/router'
+    import { walletRoute } from 'shared/lib/router'
+    import { WalletRoutes } from 'shared/lib/typings/routes'
 
     export let locale
     export let onCreate
@@ -11,7 +12,7 @@
         onCreate(accountName)
     }
     const handleCancelClick = () => {
-        walletViewState.set(WalletViewStates.Init)
+        walletRoute.set(WalletRoutes.Init)
     }
 </script>
 

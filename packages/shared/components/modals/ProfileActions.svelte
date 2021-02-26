@@ -1,11 +1,11 @@
 <script lang="typescript">
-    import { get } from 'svelte/store';
+    import { get } from 'svelte/store'
     import { fade } from 'svelte/transition'
     import { Text, Icon, Modal } from 'shared/components'
     import { activeProfile } from 'shared/lib/profile'
     import { getInitials } from 'shared/lib/helpers'
-    import { resetRouter } from 'shared/lib/router'
-    import { api, destroyActor, resetWallet } from 'shared/lib/wallet'
+    import { api } from 'shared/lib/wallet'
+    import { logout } from 'shared/lib/app'
 
     export let isActive
     export let locale
@@ -22,9 +22,7 @@
     const handleLogoutClick = () => {
         api.lockStronghold({
             onSuccess() {
-                destroyActor(get(activeProfile).id)
-                resetWallet()
-                resetRouter()
+                logout()
             },
             onError(error) {
                 console.error(error)
