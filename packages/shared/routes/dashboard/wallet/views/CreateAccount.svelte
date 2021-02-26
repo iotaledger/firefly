@@ -22,7 +22,7 @@
             <Text type="h5">{locale('general.create_account')}</Text>
         </div>
         <div class="w-full h-full flex flex-col justify-between">
-            <Input bind:value={accountName} placeholder={locale('general.account_name')} />
+            <Input bind:value={accountName} placeholder={locale('general.account_name')} autofocus />
         </div>
     </div>
     <!-- Action -->
