@@ -1,8 +1,10 @@
 <script>
+    import { Text } from 'shared/components'
     export let value = ''
     export let classes = ''
     export let placeholder = ''
     export let type = 'text'
+    export let error = null
 
     const handleInput = (event) => {
         value = event.target.value
@@ -25,9 +27,16 @@
     }
 </style>
 
-<input
-    {type}
-    {value}
-    class={`w-full relative border border-solid text-12 leading-140 font-bold ${classes}`}
-    on:input={handleInput}
-    {placeholder} />
+<div>
+    {#if error !== null}
+        <div class='h-8'>  
+            <Text type="p" error>{error}</Text>
+        </div>
+    {/if}
+    <input
+        {type}
+        {value}
+        class={`w-full relative border border-solid text-12 leading-140 font-bold ${classes}`}
+        on:input={handleInput}
+        {placeholder} />
+</div>
