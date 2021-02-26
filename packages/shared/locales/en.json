@@ -452,7 +452,8 @@
         "account_address": "Account Address",
         "nodes": "Nodes",
         "wallet": "Wallet",
-        "help": "Help"
+        "help": "Help",
+        "no_accounts": "You have no accounts, please create one."
     },
     "dates": {
         "today": "Today",

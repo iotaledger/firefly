@@ -4,6 +4,7 @@
     import { Send, Receive, ManageAccount } from '.'
     import { accountRoute } from 'shared/lib/router'
     import { AccountRoutes } from 'shared/lib/typings/routes'
+    import type { Readable } from 'svelte/store'
 
     export let locale
     export let send
@@ -11,7 +12,7 @@
     export let internalTransfer
     export let setAlias
 
-    const account = getContext('selectedAccount')
+    const account = getContext<Readable<Account>>('selectedAccount')
     function handleSendClick() {
         accountRoute.set(AccountRoutes.Send)
     }

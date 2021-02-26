@@ -15,12 +15,17 @@ import type { SyncedAccount } from './typings/account'
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
-interface Account extends BaseAccount {
+export interface Account extends BaseAccount {
     depositAddress: Address;
     rawIotaBalance: number;
     balance: string;
     balanceEquiv: string;
     color: string;
+}
+
+export interface MessageWithAccount extends Message {
+    account: number;
+    internal: boolean;
 }
 
 interface ActorState {
@@ -314,8 +319,8 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
  *
  * @returns {Message[]}
  */
-export const getLatestMessages = (accounts: Account[], count = 10): Message[] => {
-    const messages: Message[] = accounts.reduce(
+export const getLatestMessages = (accounts: Account[], count = 10): MessageWithAccount[] => {
+    const messages: MessageWithAccount[] = accounts.reduce(
         (messages, account) =>
             messages.concat(
                 account.messages.map((message, idx) =>

@@ -1,7 +1,9 @@
 <script lang="typescript">
+    import { AccountActionsModal, DashboardPane } from 'shared/components'
+    import type { Account, MessageWithAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import { DashboardPane, AccountActionsModal } from 'shared/components'
-    import { AccountNavigation, AccountBalance, AccountActions, AccountHistory } from '.'
+    import type { Readable, Writable } from 'svelte/store'
+    import { AccountActions, AccountBalance, AccountHistory, AccountNavigation } from '.'
 
     export let locale
     export let send
@@ -9,12 +11,12 @@
     export let generateAddress
     export let setAlias
 
-    const account = getContext('selectedAccount')
-    const accounts = getContext('walletAccounts')
-    const walletTransactions = getContext('walletTransactions')
+    const account = getContext<Readable<Account>>('selectedAccount')
+    const accounts = getContext<Writable<Account[]>>('walletAccounts')
+    const walletTransactions = getContext<Readable<MessageWithAccount[]>>('walletTransactions')
 
-    $: transactions = $account ? $walletTransactions.filter((tx) => tx.account === $account.index) : []
-    $: navAccounts = $account ? $accounts.map(({ id, name, color }) => ({ id, name, color, active: $account.id === id })) : []
+    $: transactions = account ? $walletTransactions.filter((tx) => tx.account === $account.index) : []
+    $: navAccounts = account ? $accounts.map(({ id, alias, color }) => ({ id, alias, color, active: $account.id === id })) : []
 
     let showActionsModal = false
 
@@ -24,10 +26,10 @@
 </script>
 
 <!-- wait for account to load -->
-{#if $accounts && $account}
+{#if accounts && account}
     <div class="w-full h-full flex flex-col flex-nowrap px-10 pb-10 relative">
         <AccountNavigation {locale} accounts={navAccounts} />
-        {#key $account}
+        {#key account}
             <div class="w-full h-full grid grid-cols-3 gap-x-4">
                 <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
                     <AccountBalance

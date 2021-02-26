@@ -1,19 +1,21 @@
 <script lang="typescript">
-    import { getContext } from 'svelte'
-    import { Text, Button, Dropdown, Amount, Address } from 'shared/components'
-    import { Unit, convertUnits } from '@iota/unit-converter'
+    import { convertUnits, Unit } from '@iota/unit-converter'
+    import { Address, Amount, Button, Dropdown, Text } from 'shared/components'
     import { sendParams } from 'shared/lib/app'
     import { activeProfile } from 'shared/lib/profile'
-    import { ADDRESS_LENGTH, VALID_MAINNET_ADDRESS, VALID_DEVNET_ADDRESS } from 'shared/lib/utils'
-    import { walletRoute, accountRoute } from 'shared/lib/router'
-    import { WalletRoutes, AccountRoutes } from 'shared/lib/typings/routes'
+    import { accountRoute, walletRoute } from 'shared/lib/router'
+    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
+    import { ADDRESS_LENGTH, VALID_DEVNET_ADDRESS, VALID_MAINNET_ADDRESS } from 'shared/lib/utils'
+    import type { Account } from 'shared/lib/wallet'
+    import { getContext } from 'svelte'
+    import type { Readable, Writable } from 'svelte/store'
 
     export let locale
     export let send
     export let internalTransfer
 
-    const accounts = getContext('walletAccounts')
-    const account = getContext('selectedAccount')
+    const accounts = getContext<Writable<Account[]>>('walletAccounts')
+    const account = getContext<Readable<Account>>('selectedAccount')
 
     enum SEND_TYPE {
         EXTERNAL = 'send_payment',
@@ -26,7 +28,7 @@
     let to = undefined
 
     $: accountsDropdownItems = $accounts.map((acc) => format(acc))
-    $: from = $account ? format($account) : accountsDropdownItems[0]
+    $: from = account ? format(account) : accountsDropdownItems[0]
     $: $sendParams.amount = convertUnits(amount, unit, Unit.i)
 
     const handleSendTypeClick = (type) => {
@@ -47,9 +49,7 @@
     }
     const handleBackClick = () => {
         accountRoute.set(AccountRoutes.Init)
-        if (!$account) {
-            walletRoute.set(WalletRoutes.Init)
-        }
+        walletRoute.set(WalletRoutes.Init)
     }
     const format = (account) => {
         return {
@@ -62,7 +62,7 @@
         amount = convertUnits(from.balance, Unit.i, unit)
     }
     const validInputs = () => {
-        if (parseFloat($sendParams.amount) > from.balance) {
+        if ($sendParams.amount > from.balance) {
             console.error('Input error: Amount higher than available balance')
             return false
         }
@@ -99,7 +99,7 @@
         </div>
         <div class="w-full h-full flex flex-col justify-between">
             <div>
-                {#if !$account}
+                {#if !account}
                     <div class="block mb-8">
                         <Dropdown
                             value={from?.label || ''}

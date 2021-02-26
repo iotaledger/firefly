@@ -1,12 +1,13 @@
 <script lang="typescript">
-    import { getContext } from 'svelte'
-    import { Text, Icon, Modal } from 'shared/components'
+    import { Icon, Modal, Text } from 'shared/components'
+    import { openPopup } from 'shared/lib/popup'
     import { accountRoute } from 'shared/lib/router'
     import { AccountRoutes } from 'shared/lib/typings/routes'
-    import { openPopup } from 'shared/lib/popup'
+    import { getContext } from 'svelte'
+    import type { Readable, Writable } from 'svelte/store'
 
-    const account = getContext('selectedAccount')
-    const accounts = getContext('walletAccounts')
+    const account = getContext<Readable<Account>>('selectedAccount')
+    const accounts = getContext<Writable<Account[]>>('walletAccounts')
 
     export let isActive
     export let locale
