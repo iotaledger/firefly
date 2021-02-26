@@ -89,7 +89,7 @@
             "deleteAppDataOnUninstall": false
         },
         "snap": {
-            "confinement": "classic",
+            "confinement": "strict",
             "buildPackages": [
                 "clang",
                 "cmake",
