@@ -21,7 +21,14 @@ const Electron = {
     DeepLinkManager,
     NotificationManager,
     getStrongholdBackupDestination: () => {
-        return ipcRenderer.invoke('show-open-dialog', { properties: ['openDirectory'] }).then((result) => {
+        let defaultPath
+        if (process.platform === 'linux' && process.env.SNAP_REAL_HOME) {
+            // On Snapcraft, snapd rewrites the HOME env var so it will be something like ~/snap/firefly-wallet/x1/
+            // https://snapcraft.io/docs/environment-variables
+            // This will cause the "Home" button in the sidebar to show a different dir instead of the actual home dir
+            defaultPath = prcess.env.SNAP_REAL_HOME
+        }
+        return ipcRenderer.invoke('show-open-dialog', { defaultPath, properties: ['openDirectory'] }).then((result) => {
             if (result.canceled) {
                 return null
             }
@@ -78,7 +85,7 @@ const Electron = {
     updateMenu: (attribute, value) => {
         if (Object.keys(menuState).includes(attribute)) {
             ipcRenderer.invoke('menu-update', {
-                [attribute]: value
+                [attribute]: value,
             })
         }
     },
