@@ -2,7 +2,11 @@ const { notarize } = require('electron-notarize')
 const path = require('path')
 
 exports.default = async () => {
-    if (process.platform !== 'darwin') {
+    if (
+        process.platform !== 'darwin' ||
+        process.env.ELECTRON_BUILDER_SKIP_NOTARIZATION ||
+        process.env.ELECTRON_BUILDER_SKIP_NOTARISATION
+    ) {
         return true
     }
 
