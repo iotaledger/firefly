@@ -38,7 +38,7 @@
         },
         "password": {
             "title": "Create a password",
-            "body": "You will be asked to enter your password to send tokens from your wallet. You need a strong password to protect your funds."
+            "body": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -471,5 +471,28 @@
         "restart_install": "Restart to install",
         "calc_minutes_remaining": "Calculating minutes remaining...",
         "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+    },
+    "error": {
+        "password": {
+            "doNotMatch": "Passwords do not match.",
+            "tooWeak": "Your password is too weak.",
+            "row": "Straight rows of keys are easy to guess.",
+            "pattern": "Short keyboard patterns are easy to guess.",
+            "names": "Common names and surnames are easy to guess.",
+            "repeats": "Repeats like 'aaa' are easy to guess.",
+            "repeats2": "Repeats like 'abcabcabc' are easy to guess",
+            "sequence": "Sequences of characters are easy to guess.",
+            "years": "Recent years are easy to guess.",
+            "dates": "Dates are easy to guess.",
+            "common": "This is a very common password.",
+            "similar": "This is similar to a common password.",
+            "reasonWord": "A single word is easy to guess.",
+            "incorrect": "Your current password is incorrect."
+        },
+        "pincode": {
+            "length": "Your PIN must be 6 digits long",
+            "match": "PINs do not match.",
+            "incorrect": "Your current PIN is incorrect."
+        }
     }
 }

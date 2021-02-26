@@ -27,13 +27,14 @@
     let currentPassword = ''
     let newPassword = ''
     let confirmedPassword = ''
+    let passwordError = ''
 
     let currentPincode = ''
     let newPincode = ''
     let confirmedPincode = ''
+    let pincodeError = ''
 
-    $: strength = zxcvbn(newPassword).score
-    $: valid = strength === 4
+    $: passwordStrength = zxcvbn(newPassword)
 
     const PincodeManager = window['Electron']['PincodeManager']
 
@@ -93,64 +94,39 @@
     }
 
     function changePassword() {
-        if (!currentPassword) {
-            return console.error('Current password cannot be empty')
-        }
-
-        if (!newPassword) {
-            return console.error('New password cannot be empty')
-        }
-
-        if (currentPassword === newPassword) {
-            return console.error('Current password and new password cannot be same.')
-        }
-
-        if (newPassword !== confirmedPassword) {
-            return console.error('Passwords do not match.')
-        }
-
-        if (!valid) {
-            return console.error('New password too weak.')
-        }
-
         const _changePassword = () => {
             api.changeStrongholdPassword(currentPassword, newPassword, {
                 onSuccess() {},
-                onError(error) {
-                    console.error(error)
+                onError(err) {
+                    // TODO: Add proper error handling
+                    if (err.payload.error.includes('try another password')){
+                        passwordError = locale('error.password.incorrect')
+                    }
                 },
             })
         }
 
-        if (exportStrongholdChecked) {
-            return exportStronghold(_changePassword)
+        if (newPassword !== confirmedPassword) {
+            passwordError = locale('error.password.doNotMatch')
+        } else if (passwordStrength.score !== 4) {
+            passwordError = passwordStrength.feedback.warning
+                ? locale(`error.password.${passwordInfo[passwordStrength.feedback.warning]}`)
+                : locale('error.password.tooWeak');
+        } else {
+            if (exportStrongholdChecked) {
+                  return exportStronghold(_changePassword)
+             }
+            _changePassword()
         }
-
-        return _changePassword()
     }
 
     function changePincode() {
-        if (!currentPincode) {
-            return console.error('Current PIN cannot be empty')
-        }
-
-        if (!newPincode) {
-            return console.error('New PIN cannot be empty')
-        }
-
         if (newPincode.length !== 6) {
-            return console.error('PIN length must be 6')
-        }
-
-        if (currentPincode === newPincode) {
-            return console.error('Current PIN and new PIN cannot be same.')
-        }
-
-        if (newPincode !== confirmedPincode) {
-            return console.error('PINs do not match.')
-        }
-
-        PincodeManager.verify(get(activeProfile).id, currentPincode)
+            pincodeError = locale('error.pincode.length')
+        } else if (newPincode !== confirmedPincode) {
+            pincodeError = locale('error.pincode.match')
+        } else {
+            PincodeManager.verify(get(activeProfile).id, currentPincode)
             .then((valid) => {
                 if (valid) {
                     return new Promise((resolve, reject) => {
@@ -171,10 +147,11 @@
                         })
                     })
                 } else {
-                    return Promise.reject('Current PIN do not match')
+                    pincodeError = locale('error.pincode.incorrect')
                 }
             })
             .catch(console.error)
+        }
     }
 </script>
 
@@ -201,6 +178,7 @@
             <Text type="h4" classes="mb-3">{locale('views.settings.changePassword.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.changePassword.description')}</Text>
             <Password
+                error={passwordError}
                 classes="mb-8"
                 bind:value={currentPassword}
                 showRevealToggle
@@ -212,7 +190,7 @@
                 showRevealToggle
                 strengthLevels={4}
                 showStrengthLevel
-                {strength}
+                strength={passwordStrength.score}
                 {locale}
                 placeholder={locale('general.newPassword')} />
             <Password
@@ -222,7 +200,14 @@
                 {locale}
                 placeholder={locale('general.confirmNewPassword')} />
             <Checkbox classes="mb-5" label={locale('actions.exportNewStronghold')} bind:checked={exportStrongholdChecked} />
-            <Button form="form-change-password" type="submit" classes="w-1/4">{locale('views.settings.changePassword.title')}</Button>
+            <Button 
+                form="form-change-password" 
+                type="submit" 
+                classes="w-1/4" 
+                disabled={!currentPassword || !newPassword || !confirmedPassword}
+            >
+                {locale('views.settings.changePassword.title')}
+            </Button>
         </form>
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
@@ -231,6 +216,7 @@
             <Text type="h4" classes="mb-3">{locale('views.settings.changePincode.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.changePincode.description')}</Text>
             <Password
+                error={pincodeError}
                 classes="mb-4"
                 bind:value={currentPincode}
                 showRevealToggle
@@ -254,7 +240,14 @@
                 maxlength="6"
                 numeric
                 placeholder={locale('views.settings.changePincode.confirmNewPincode')} />
-            <Button type="submit" form="pincode-change-form" classes="w-1/4">{locale('views.settings.changePincode.action')}</Button>
+            <Button 
+                type="submit" 
+                form="pincode-change-form" 
+                classes="w-1/4"
+                disabled={!currentPincode || !newPincode || !confirmedPincode}
+            >
+                {locale('views.settings.changePincode.action')}
+            </Button>
         </form>
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />

@@ -1,5 +1,6 @@
 <script>
-    import { Icon } from 'shared/components'
+    import { Text, Icon } from 'shared/components'
+    
     export let value = ''
     export let classes = ''
     export let strength = 0
@@ -10,11 +11,15 @@
     export let locale = undefined
     export let maxlength = undefined
     export let numeric = false
+    export let error = null
+
     let revealed = false
     let type = 'password'
+
     const handleInput = (event) => {
         value = event.target.value
     }
+
     const revealToggle = (event) => {
         const input = event.currentTarget.previousElementSibling
         if (!input) {
@@ -76,6 +81,11 @@
 </style>
 
 <password-input class={`relative block ${classes}`} class:with-toggle={showRevealToggle}>
+    {#if error !== null}
+        <div class='h-8'>  
+            <Text type="p" error>{error}</Text>
+        </div>
+    {/if}
     {#if showStrengthLevel}
         <strength-meter class="flex flex-row justify-end mb-2">
             {#each Array(strengthLevels) as _, i}
