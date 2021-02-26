@@ -1,12 +1,23 @@
-<script>
+<script lang="typescript">
+    import { onMount } from 'svelte'
+
     export let value = ''
     export let classes = ''
     export let placeholder = ''
     export let type = 'text'
+    export let autofocus = false
+
+    let inputElement
 
     const handleInput = (event) => {
         value = event.target.value
     }
+
+    onMount(() => {
+        if (autofocus) {
+            inputElement.focus()
+        }
+    })
 </script>
 
 <style type="text/scss">
@@ -17,17 +28,14 @@
     }
     input {
         padding: 15px 40px 16px 13px;
-        color: var(--text-secondary-color);
-        background: var(--element-bg-color);
-        border-color: var(--line-separator-color);
-        border-radius: 10px;
-        box-shadow: -2px -2px 4px rgba(255, 255, 255, 0.2), 0px 4px 8px rgba(65, 114, 248, 0.08);
+        transition: border-color 0.25s;
     }
 </style>
 
 <input
     {type}
     {value}
-    class={`w-full relative border border-solid text-12 leading-140 font-bold ${classes}`}
+    bind:this={inputElement}
+    class={`w-full relative bg-white border border-solid border-gray-300 hover:border-gray-500 focus:border-gray-500 rounded-xl text-gray text-12 leading-140 font-bold ${classes}`}
     on:input={handleInput}
     {placeholder} />
