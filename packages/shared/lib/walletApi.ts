@@ -105,6 +105,7 @@ Wallet.onMessage((message: MessageResponse) => {
     const _deleteCallbackId = (_id: string) => {
         const isEventMessage = [
             ResponseTypes.ErrorThrown,
+            ResponseTypes.InvalidMessage,
             ResponseTypes.BalanceChange,
             ResponseTypes.NewTransaction,
             ResponseTypes.ConfirmationStateChange,

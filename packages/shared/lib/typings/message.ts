@@ -10,24 +10,21 @@ export interface UTXOInput {
 
 export type Input = UTXOInput
 
-export interface OutputAddress {
-    type: 'Ed25519'
-    data: string
-}
-
 export interface SignatureLockedSingle {
     type: 'SignatureLockedSingle'
     data: {
-        address: OutputAddress
+        address: string
         amount: number
+        remainder: boolean
     }
 }
 
 export interface SignatureLockedDustAllowance {
     type: 'SignatureLockedDustAllowance'
     data: {
-        address: OutputAddress
+        address: string
         amount: number
+        remainder: boolean
     }
 }
 
@@ -43,7 +40,9 @@ export interface TransactionEssence {
 export interface MessagePayload {
     type: 'Transaction'
     data: {
-        essence: TransactionEssence
+        essence: {
+            data: TransactionEssence
+        }
         unlock_blocks: {
             type: 'Signature'
             data: {
