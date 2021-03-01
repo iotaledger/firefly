@@ -50,13 +50,14 @@
                 <Text type="p" secondary classes="mb-3">{locale('views.password.body')}</Text>
                 <Password
                     error={error}
-                    classes="mb-6"
+                    classes="mb-1"
                     bind:value={password}
                     strengthLevels={4}
                     showRevealToggle
                     showStrengthLevel
                     strength={passwordStrength.score}
-                    {locale} />
+                    {locale} 
+                />
                 <Password 
                     bind:value={confirmedPassword} 
                     {locale} 
