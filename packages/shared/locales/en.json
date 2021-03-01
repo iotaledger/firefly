@@ -478,7 +478,7 @@
         },
         "password": {
             "doNotMatch": "Passwords do not match.",
-            "tooWeak": "Your password is too weak.",
+            "tooWeak": "Your new password is too weak.",
             "row": "Straight rows of keys are easy to guess.",
             "pattern": "Short keyboard patterns are easy to guess.",
             "names": "Common names and surnames are easy to guess.",
@@ -490,7 +490,7 @@
             "common": "This is a very common password.",
             "similar": "This is similar to a common password.",
             "reasonWord": "A single word is easy to guess.",
-            "incorrect": "Your current password is incorrect."
+            "incorrect": "Your password is incorrect."
         },
         "pincode": {
             "length": "Your PIN must be 6 digits long.",
