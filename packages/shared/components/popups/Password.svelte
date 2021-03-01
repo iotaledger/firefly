@@ -9,21 +9,20 @@
     export let onError
 
     let password
+    let error = ''
 
     function handleSubmit() {
         api.setStrongholdPassword(password, {
             onSuccess(response) {
-                // Close popup
                 closePopup()
                 if ('function' === typeof onSuccess) {
                     onSuccess(response)
                 }
             },
-            onError(error) {
+            onError(err) {
+                error = locale('error.password.incorrect')
                 if ('function' === typeof onError) {
-                    onError(error)
-                } else {
-                    console.error(error)
+                    onError(err)
                 }
             },
         })
@@ -38,7 +37,7 @@
     <Text type="p" secondary>{locale('popups.password.subtitle')}</Text>
 </div>
 <form id="password-popup-form" class="flex justify-center w-full flex-row flex-wrap" on:submit={handleSubmit}>
-    <Password classes="w-full mb-8" bind:value={password} showRevealToggle {locale} placeholder={locale('general.password')} />
+    <Password {error} classes="w-full mb-5" bind:value={password} showRevealToggle {locale} placeholder={locale('general.password')} />
     <div class="flex flex-row justify-between w-full space-x-4 px-8">
         <Button secondary classes="w-1/2" onClick={handleCancelClick}>{locale('actions.cancel')}</Button>
         <Button classes="w-1/2" type="submit" form="password-popup-form">{locale('actions.unlock')}</Button>
