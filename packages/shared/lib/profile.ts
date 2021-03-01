@@ -135,6 +135,17 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
 }
 
 /**
+ * Disposes a new profile
+ *
+ * @method disposeNewProfile
+ *
+ * @returns {void}
+ */
+export const disposeNewProfile = (): void => {
+    newProfile.set(null)
+}
+
+/**
  * Sets profile with provided id as active
  *
  * @method setActiveProfile

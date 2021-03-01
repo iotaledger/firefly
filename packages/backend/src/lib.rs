@@ -129,15 +129,15 @@ pub async fn destroy<A: Into<String>>(actor_id: A) {
         for (event_id, event_type) in &actor_data.listeners {
             match event_type {
                 &EventType::ErrorThrown => remove_error_listener(event_id),
-                &EventType::BalanceChange => remove_balance_change_listener(event_id),
-                &EventType::NewTransaction => remove_new_transaction_listener(event_id),
+                &EventType::BalanceChange => remove_balance_change_listener(event_id).await,
+                &EventType::NewTransaction => remove_new_transaction_listener(event_id).await,
                 &EventType::ConfirmationStateChange => {
-                    remove_confirmation_state_change_listener(event_id)
+                    remove_confirmation_state_change_listener(event_id).await
                 }
-                &EventType::Reattachment => remove_reattachment_listener(event_id),
-                &EventType::Broadcast => remove_broadcast_listener(event_id),
+                &EventType::Reattachment => remove_reattachment_listener(event_id).await,
+                &EventType::Broadcast => remove_broadcast_listener(event_id).await,
                 &EventType::StrongholdStatusChange => {
-                    remove_stronghold_status_change_listener(event_id)
+                    remove_stronghold_status_change_listener(event_id).await
                 }
             };
         }
@@ -262,22 +262,22 @@ pub async fn listen<A: Into<String>, S: Into<String>>(actor_id: A, id: S, event_
         }),
         EventType::BalanceChange => on_balance_change(move |event| {
             let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
-        }),
+        }).await,
         EventType::NewTransaction => on_new_transaction(move |event| {
             let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
-        }),
+        }).await,
         EventType::ConfirmationStateChange => on_confirmation_state_change(move |event| {
             let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
-        }),
+        }).await,
         EventType::Reattachment => on_reattachment(move |event| {
             let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
-        }),
+        }).await,
         EventType::Broadcast => on_broadcast(move |event| {
             let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
-        }),
+        }).await,
         EventType::StrongholdStatusChange => on_stronghold_status_change(move |event| {
             let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
-        }),
+        }).await,
     };
 
     let mut actors = wallet_actors().lock().await;

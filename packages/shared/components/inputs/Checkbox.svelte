@@ -9,9 +9,11 @@
 <style type="text/scss">
     div {
         :global(svg path) {
-            fill: var(--text-disabled-color);
+            stroke: var(--text-disabled-color);
+            fill: none;
         }
         :global(svg.active path) {
+            stroke: white;
             fill: var(--ui-blue-color);
         }
     }
@@ -23,6 +25,7 @@
     on:click={() => {
         checked = !checked
     }}>
-    <Icon icon="checkbox" classes={`mr-3 ${checked ? 'active' : ''}`} />
+    <Icon icon={checked ? "checkbox" : "checkbox-unchecked"} classes={`mr-3 ${checked ? 'active' : ''}`} />
     <Text type="p" secondary={!checked}>{label}</Text>
+
 </div>
