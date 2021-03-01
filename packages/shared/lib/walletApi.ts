@@ -101,6 +101,8 @@ const defaultCallbacks = {
     },
 }
 
+const eventsApiResponseTypes = Object.values(eventsApiToResponseTypeMap)
+
 /**
  * Response subscriber.
  * Receives messages from wallet.rs.
@@ -108,7 +110,7 @@ const defaultCallbacks = {
 Wallet.onMessage((message: MessageResponse) => {
     const _deleteCallbackId = (_id: string) => {
         // Do not delete callback ids for events api methods
-        if (!Object.values(eventsApiToResponseTypeMap).includes(message.type)) {
+        if (!eventsApiResponseTypes.includes(message.type)) {
             delete callbacksStore[_id]
         }
     }
