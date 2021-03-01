@@ -20,7 +20,10 @@
                 }
             },
             onError(err) {
-                error = locale('error.password.incorrect')
+                // TODO: Add proper error handling
+                if (err.payload.error.includes('try another password')){
+                        error = locale('error.password.incorrect')
+                    }
                 if ('function' === typeof onError) {
                     onError(err)
                 }
