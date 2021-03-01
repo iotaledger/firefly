@@ -55,7 +55,7 @@
             {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap items-center space-x-4">
-            <Button secondary classes="flex-1" onClick={() => handleContinueClick(SetupType.Import)}>
+            <Button secondary classes="flex-1" disabled={!profileName} onClick={() => handleContinueClick(SetupType.Import)}>
                 {locale('actions.import_wallet')}
             </Button>
             <Button classes="flex-1" disabled={!profileName} onClick={() => handleContinueClick(SetupType.New)}>
