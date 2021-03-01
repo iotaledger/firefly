@@ -77,6 +77,54 @@ export const icons = {
             },
         ],
     },
+    'arrow-small-right': {
+        width: 16,
+        height: 16,
+        path: [
+            {
+                d: 'M7 12L11 8L7 4',
+                strokeWidth: '2',
+                strokeLinecap: 'round',
+                fill: 'none',
+            },
+        ],
+    },
+    'arrow-small-down': {
+        width: 16,
+        height: 16,
+        path: [
+            {
+                d: 'M4 6L8 10L12 6',
+                strokeWidth: '2',
+                strokeLinecap: 'round',
+                fill: 'none',
+            },
+        ],
+    },
+    'arrow-small-left': {
+        width: 16,
+        height: 16,
+        path: [
+            {
+                d: 'M9 4L5 8L9 12',
+                strokeWidth: '2',
+                strokeLinecap: 'round',
+                fill: 'none',
+            },
+        ],
+    },
+    'arrow-small-up': {
+        width: 16,
+        height: 16,
+        path: [
+            {
+                d: 'M12 10L8 6L4 10',
+                strokeWidth: '2',
+                strokeLinecap: 'round',
+                fill: 'none',
+            },
+        ],
+    },
     checkbox: {
         width: 24,
         height: 24,

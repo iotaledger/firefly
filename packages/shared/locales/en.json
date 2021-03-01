@@ -388,7 +388,8 @@
         "selectAll": "Select All",
         "addAccount": "Add Account",
         "checkForUpdates": "Check for Updates",
-        "reportAnIssue": "Report an Issue"
+        "reportAnIssue": "Report an Issue",
+        "hide_details": "Hide Details"
     },
     "general": {
         "password": "Password",
@@ -452,7 +453,12 @@
         "account_address": "Account Address",
         "nodes": "Nodes",
         "wallet": "Wallet",
-        "help": "Help"
+        "help": "Help",
+        "you": "You",
+        "transaction_id": "Transaction ID",
+        "input_address": "Input Address",
+        "receive_address": "Receive Address",
+        "date": "Date"
     },
     "dates": {
         "today": "Today",

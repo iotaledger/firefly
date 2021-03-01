@@ -28,7 +28,7 @@
     <div class="w-full h-full flex flex-col flex-nowrap px-10 pb-10 relative">
         <AccountNavigation {locale} accounts={navAccounts} />
         {#key $account}
-            <div class="w-full h-full grid grid-cols-3 gap-x-4">
+            <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
                 <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
                     <AccountBalance
                         {locale}

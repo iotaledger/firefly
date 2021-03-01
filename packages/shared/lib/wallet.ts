@@ -74,10 +74,13 @@ export const resetWallet = () => {
     })
     accounts.set([])
     selectedAccountId.set(null)
+    selectedMessage.set(null)
     loggedIn.set(false)
 }
 
 export const selectedAccountId = writable<string | null>(null)
+
+export const selectedMessage = writable<Message | null>(null)
 
 export const loggedIn = persistent<boolean>('loggedIn', false)
 
