@@ -22,8 +22,8 @@
             onError(err) {
                 // TODO: Add proper error handling
                 if (err.payload.error.includes('try another password')){
-                        error = locale('error.password.incorrect')
-                    }
+                     error = locale('error.password.incorrect')
+                }
                 if ('function' === typeof onError) {
                     onError(err)
                 }

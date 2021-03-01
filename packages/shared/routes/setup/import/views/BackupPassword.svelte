@@ -5,13 +5,11 @@
     export let locale
     export let mobile
     export let importType
+    export let error = ''
 
     let password = ''
 
     const dispatch = createEventDispatcher()
-
-    // dummy
-    $: valid = password.length > 8
 
     function handleContinue() {
         dispatch('next', { password })
@@ -30,11 +28,11 @@
             <Text type="h3" highlighted classes="mb-5">{locale(`general.${importType}`)}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.import_backup_password.body_1')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.import_backup_password.body_2')}</Text>
-            <Password classes="mb-6" bind:value={password} {locale} />
+            <Password classes="mb-6" {error} bind:value={password} {locale} showRevealToggle/>
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
             <Button secondary classes="flex-1" onClick={() => handleBackClick()}>{locale('actions.back')}</Button>
-            <Button classes="flex-1" disabled={!valid} onClick={() => handleContinue()}>{locale('actions.continue')}</Button>
+            <Button classes="flex-1" disabled={password.length === 0} onClick={() => handleContinue()}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-end items-center">
             <Illustration width="100%" illustration="import-from-file-password-desktop" />
