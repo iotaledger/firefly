@@ -222,11 +222,7 @@ const GenerateMiddleware = (activeProfileIdGetter: () => string) => ({
                     typeof lastArgument === 'object' && 'onSuccess' in lastArgument && 'onError' in lastArgument
             }
 
-            // Only store callbacks for non-event api methods
-            // There are no default callbacks supported for event api methods.
-            if (!(prop in eventsApiToResponseTypeMap)) {
-                storeCallbacks(messageId, apiToResponseTypeMap[prop], shouldOverrideDefaultCallbacks ? lastArgument : undefined)
-            }
+            storeCallbacks(messageId, apiToResponseTypeMap[prop], shouldOverrideDefaultCallbacks ? lastArgument : undefined)
 
             const actualPayload = shouldOverrideDefaultCallbacks ? payload.slice(0, -1) : payload
 
