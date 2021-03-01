@@ -14,10 +14,14 @@
 
     const dispatch = createEventDispatcher()
 
+    // TODO: move to config file
+    const MAX_PASSWORD_LENGTH = 256
     $: passwordStrength = zxcvbn(password)
 
     function handleContinueClick() {
-        if (password !== confirmedPassword) {
+        if (password.length > MAX_PASSWORD_LENGTH) {
+            error = locale('error.password.tooLong')
+        } else if (password !== confirmedPassword) {
             error = locale('error.password.doNotMatch')
         } else if (passwordStrength.score !== 4) {
             error = passwordStrength.feedback.warning

@@ -36,6 +36,7 @@
     let currentPincodeError = ''
     let newPincodeError = ''
 
+    const MAX_PASSWORD_LENGTH = 256
     $: passwordStrength = zxcvbn(newPassword)
 
     const PincodeManager = window['Electron']['PincodeManager']
@@ -110,7 +111,9 @@
             })
         }
 
-        if (newPassword !== confirmedPassword) {
+        if (newPassword.length > MAX_PASSWORD_LENGTH) {
+            newPasswordError = locale('error.password.tooLong')
+        } else if (newPassword !== confirmedPassword) {
             newPasswordError = locale('error.password.doNotMatch')
         } else if (passwordStrength.score !== 4) {
             newPasswordError = passwordStrength.feedback.warning

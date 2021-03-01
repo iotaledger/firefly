@@ -5,7 +5,7 @@
     export let placeholder = ''
     export let type = 'text'
     export let error
-    export let maxlength
+    export let maxlength = null
     export let numeric = false
 
     const handleInput = (event) => {
