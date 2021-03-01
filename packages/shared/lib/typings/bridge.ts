@@ -85,7 +85,7 @@ export type BackupRestoredResponse = Response<ResponseTypes.BackupRestored, void
 export type SetStrongholdPasswordResponse = Response<ResponseTypes.StrongholdPasswordSet, void>
 export type SentTransferResponse = Response<ResponseTypes.SentTransfer, Message>
 export type ErrorResponse = Response<ResponseTypes.Error, ErrorEventPayload>
-export type PanicResponse = Response<ResponseTypes.Panic, string>
+export type PanicResponse = Response<ResponseTypes.Panic, ErrorEventPayload>
 export type GenerateMnemonicResponse = Response<ResponseTypes.GeneratedMnemonic, string>
 export type StoreMnemonicResponse = Response<ResponseTypes.StoredMnemonic, void>
 export type VerifyMnemonicResponse = Response<ResponseTypes.VerifiedMnemonic, void>
@@ -101,7 +101,7 @@ export type StrongholdPasswordChangeResponse = Response<ResponseTypes.Stronghold
 export type UpdatedAllClientOptions = Response<ResponseTypes.UpdatedAllClientOptions, void>
 
 export type MessageResponse =
-    | RemovedAccountResponse
+    RemovedAccountResponse
     | CreatedAccountResponse
     | ReadAccountResponse
     | ReadAccountsResponse
@@ -132,9 +132,5 @@ export type MessageResponse =
     | LockStrongholdResponse
     | StrongholdStatusResponse
     | UpdatedAllClientOptions
-    // events
-    | Event<ErrorEventPayload>
-    | Event<BalanceChangeEventPayload>
-    | Event<TransactionEventPayload>
 
 export type Bridge = (message: BridgeMessage) => Promise<string>

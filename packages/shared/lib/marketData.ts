@@ -200,7 +200,7 @@ export async function fetchMarketData(): Promise<void> {
 
             const marketData: MarketData = await response.json()
 
-            const { isValid, error } = new Validator().performValidation({
+            const { isValid, payload } = new Validator().performValidation({
                 type: 'MarketData',
                 payload: marketData,
             })
@@ -228,7 +228,7 @@ export async function fetchMarketData(): Promise<void> {
                 volume.set(marketData.market.usd_24h_vol)
                 change24h.set(marketData.market.usd_24h_change)
             } else {
-                throw new Error(error.error)
+                throw new Error(payload.error)
             }
 
             break
