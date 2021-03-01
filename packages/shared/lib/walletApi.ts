@@ -22,6 +22,16 @@ type CallbacksPattern = {
     onError: (message: MessageResponse) => void
 }
 
+const eventsApiToResponseTypeMap = {
+    onError: ResponseTypes.ErrorThrown,
+    onBalanceChange: ResponseTypes.BalanceChange,
+    onNewTransaction: ResponseTypes.NewTransaction,
+    onConfirmationStateChange: ResponseTypes.ConfirmationStateChange,
+    onReattachment: ResponseTypes.Reattachment,
+    onBroadcast: ResponseTypes.Broadcast,
+    onStrongholdStatusChange: ResponseTypes.StrongholdStatusChange,
+}
+
 const apiToResponseTypeMap = {
     removeAccount: ResponseTypes.RemovedAccount,
     createAccount: ResponseTypes.CreatedAccount,
@@ -38,13 +48,6 @@ const apiToResponseTypeMap = {
     restoreBackup: ResponseTypes.BackupRestored,
     send: ResponseTypes.SentTransfer,
     setStrongholdPassword: ResponseTypes.StrongholdPasswordSet,
-    onError: ResponseTypes.ErrorThrown,
-    onBalanceChange: ResponseTypes.BalanceChange,
-    onNewTransaction: ResponseTypes.NewTransaction,
-    onConfirmationStateChange: ResponseTypes.ConfirmationStateChange,
-    onReattachment: ResponseTypes.Reattachment,
-    onBroadcast: ResponseTypes.Broadcast,
-    onStrongholdStatusChange: ResponseTypes.StrongholdStatusChange,
     generateMnemonic: ResponseTypes.GeneratedMnemonic,
     storeMnemonic: ResponseTypes.StoredMnemonic,
     verifyMnemonic: ResponseTypes.VerifiedMnemonic,
@@ -57,6 +60,7 @@ const apiToResponseTypeMap = {
     removeStorage: ResponseTypes.DeletedStorage,
     lockStronghold: ResponseTypes.LockedStronghold,
     changeStrongholdPassword: ResponseTypes.StrongholdPasswordChanged,
+    ...eventsApiToResponseTypeMap
 }
 
 /**
@@ -70,30 +74,30 @@ const callbacksStore: CallbacksStore = {}
  */
 const defaultCallbacks = {
     StrongholdPasswordSet: {
-        onSuccess: (response: SetStrongholdPasswordResponse): void => {},
-        onError: (error: ErrorResponse): void => {},
+        onSuccess: (response: SetStrongholdPasswordResponse): void => { },
+        onError: (error: ErrorResponse): void => { },
     },
     CreatedAccount: {
-        onSuccess: (response: CreatedAccountResponse): void => {},
-        onError: (error: ErrorResponse): void => {},
+        onSuccess: (response: CreatedAccountResponse): void => { },
+        onError: (error: ErrorResponse): void => { },
     },
     ReadAccounts: {
-        onSuccess: (response: ReadAccountsResponse): void => {},
-        onError: (error: ErrorResponse): void => {},
+        onSuccess: (response: ReadAccountsResponse): void => { },
+        onError: (error: ErrorResponse): void => { },
     },
     LatestAddress: {
-        onSuccess: (response: LatestAddressResponse): void => {},
-        onError: (error: ErrorResponse): void => {},
+        onSuccess: (response: LatestAddressResponse): void => { },
+        onError: (error: ErrorResponse): void => { },
     },
     SyncedAccounts: {
-        onSuccess: (response: SyncAccountsResponse): void => {},
-        onError: (error: ErrorResponse): void => {},
+        onSuccess: (response: SyncAccountsResponse): void => { },
+        onError: (error: ErrorResponse): void => { },
     },
     BalanceChange: {
-        onSuccess: (response: Event<BalanceChangeEventPayload>): void => {},
+        onSuccess: (response: Event<BalanceChangeEventPayload>): void => { },
     },
     NewTransaction: {
-        onSuccess: (response: Event<TransactionEventPayload>): void => {},
+        onSuccess: (response: Event<TransactionEventPayload>): void => { },
     },
 }
 
@@ -103,18 +107,7 @@ const defaultCallbacks = {
  */
 Wallet.onMessage((message: MessageResponse) => {
     const _deleteCallbackId = (_id: string) => {
-        const isEventMessage = [
-            ResponseTypes.ErrorThrown,
-            ResponseTypes.BalanceChange,
-            ResponseTypes.NewTransaction,
-            ResponseTypes.ConfirmationStateChange,
-            ResponseTypes.Reattachment,
-            ResponseTypes.Broadcast,
-        ].includes(message.type)
-
-        if (!isEventMessage) {
-            delete callbacksStore[_id]
-        }
+        delete callbacksStore[_id]
     }
 
     const { isValid, error } = new Validator(Object.keys(callbacksStore)).performValidation(message)
@@ -125,8 +118,6 @@ Wallet.onMessage((message: MessageResponse) => {
             const { onError } = callbacksStore[id]
 
             onError(message)
-
-            _deleteCallbackId(id)
         } else {
             /** TODO: In case of unknown ids, add validation failure to error log */
         }
@@ -137,6 +128,9 @@ Wallet.onMessage((message: MessageResponse) => {
 
         message.type === 'Error' || message.type === 'Panic' ? onError(message) : onSuccess(message)
     }
+
+    // Delete callback id from callback store
+    _deleteCallbackId(message.id)
 })
 
 /**
@@ -192,7 +186,11 @@ const GenerateMiddleware = (activeProfileIdGetter: () => string) => ({
                     typeof lastArgument === 'object' && 'onSuccess' in lastArgument && 'onError' in lastArgument
             }
 
-            storeCallbacks(messageId, apiToResponseTypeMap[prop], shouldOverrideDefaultCallbacks ? lastArgument : undefined)
+            // Only store callbacks for non-event api methods
+            // There are no default callbacks supported for event api methods.
+            if (!(prop in eventsApiToResponseTypeMap)) {
+                storeCallbacks(messageId, apiToResponseTypeMap[prop], shouldOverrideDefaultCallbacks ? lastArgument : undefined)
+            }
 
             const actualPayload = shouldOverrideDefaultCallbacks ? payload.slice(0, -1) : payload
 
