@@ -493,7 +493,7 @@
             "incorrect": "Your current password is incorrect."
         },
         "pincode": {
-            "length": "Your PIN must be 6 digits long",
+            "length": "Your PIN must be 6 digits long.",
             "match": "PINs do not match.",
             "incorrect": "Your current PIN is incorrect."
         }

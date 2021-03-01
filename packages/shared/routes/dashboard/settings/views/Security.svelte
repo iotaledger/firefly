@@ -27,12 +27,14 @@
     let currentPassword = ''
     let newPassword = ''
     let confirmedPassword = ''
-    let passwordError = ''
+    let currentPasswordError = ''
+    let newPasswordError = ''
 
     let currentPincode = ''
     let newPincode = ''
     let confirmedPincode = ''
-    let pincodeError = ''
+    let currentPincodeError = ''
+    let newPincodeError = ''
 
     $: passwordStrength = zxcvbn(newPassword)
 
@@ -94,22 +96,24 @@
     }
 
     function changePassword() {
+        resetErrors()
         const _changePassword = () => {
+            console.log('changing password')
             api.changeStrongholdPassword(currentPassword, newPassword, {
                 onSuccess() {},
                 onError(err) {
                     // TODO: Add proper error handling
                     if (err.payload.error.includes('try another password')){
-                        passwordError = locale('error.password.incorrect')
+                        currentPasswordError = locale('error.password.incorrect')
                     }
                 },
             })
         }
 
         if (newPassword !== confirmedPassword) {
-            passwordError = locale('error.password.doNotMatch')
+            newPasswordError = locale('error.password.doNotMatch')
         } else if (passwordStrength.score !== 4) {
-            passwordError = passwordStrength.feedback.warning
+            newPasswordError = passwordStrength.feedback.warning
                 ? locale(`error.password.${passwordInfo[passwordStrength.feedback.warning]}`)
                 : locale('error.password.tooWeak');
         } else {
@@ -121,10 +125,11 @@
     }
 
     function changePincode() {
+        resetErrors()
         if (newPincode.length !== 6) {
-            pincodeError = locale('error.pincode.length')
+            newPincodeError = locale('error.pincode.length')
         } else if (newPincode !== confirmedPincode) {
-            pincodeError = locale('error.pincode.match')
+            newPincodeError = locale('error.pincode.match')
         } else {
             PincodeManager.verify(get(activeProfile).id, currentPincode)
             .then((valid) => {
@@ -147,11 +152,18 @@
                         })
                     })
                 } else {
-                    pincodeError = locale('error.pincode.incorrect')
+                    currentPincodeError = locale('error.pincode.incorrect')
                 }
             })
             .catch(console.error)
         }
+    }
+
+    function resetErrors() {
+        currentPasswordError = ''
+        newPasswordError = ''
+        currentPincodeError = ''
+        newPincodeError = ''
     }
 </script>
 
@@ -178,14 +190,15 @@
             <Text type="h4" classes="mb-3">{locale('views.settings.changePassword.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.changePassword.description')}</Text>
             <Password
-                error={passwordError}
-                classes="mb-8"
+                error={currentPasswordError}
+                classes="mb-1"
                 bind:value={currentPassword}
                 showRevealToggle
                 {locale}
                 placeholder={locale('general.currentPassword')} />
             <Password
-                classes="mb-4"
+                error={newPasswordError}
+                classes="mb-1"
                 bind:value={newPassword}
                 showRevealToggle
                 strengthLevels={4}
@@ -216,8 +229,8 @@
             <Text type="h4" classes="mb-3">{locale('views.settings.changePincode.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.changePincode.description')}</Text>
             <Password
-                error={pincodeError}
-                classes="mb-4"
+                error={currentPincodeError}
+                classes="mb-1"
                 bind:value={currentPincode}
                 showRevealToggle
                 {locale}
@@ -225,7 +238,8 @@
                 numeric
                 placeholder={locale('views.settings.changePincode.currentPincode')} />
             <Password
-                classes="mb-4"
+                error={newPincodeError}
+                classes="mb-1"
                 bind:value={newPincode}
                 showRevealToggle
                 {locale}
@@ -243,7 +257,7 @@
             <Button 
                 type="submit" 
                 form="pincode-change-form" 
-                classes="w-1/4"
+                classes="w-1/4 mb-5"
                 disabled={!currentPincode || !newPincode || !confirmedPincode}
             >
                 {locale('views.settings.changePincode.action')}
