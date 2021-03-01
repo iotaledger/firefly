@@ -5,12 +5,10 @@ import type {
     ReadAccountsResponse,
     LatestAddressResponse,
     SyncAccountsResponse,
-    ErrorResponse,
-    PanicResponse
 } from './typings/bridge'
 import { ResponseTypes } from './typings/bridge'
 import type { ErrorType, Event, BalanceChangeEventPayload, TransactionEventPayload } from './typings/events'
-import Validator, { ErrorTypes as ValidatorErrorTypes, ValidationResponse } from 'shared/lib/validator'
+import Validator, { ErrorTypes as ValidatorErrorTypes } from 'shared/lib/validator'
 
 import * as Wallet from 'wallet-nodejs-binding'
 
@@ -107,13 +105,18 @@ const defaultCallbacks = {
     },
 }
 
+const eventsApiResponseTypes = Object.values(eventsApiToResponseTypeMap)
+
 /**
  * Response subscriber.
  * Receives messages from wallet.rs.
  */
 Wallet.onMessage((message: MessageResponse) => {
     const _deleteCallbackId = (_id: string) => {
-        delete callbacksStore[_id]
+        // Do not delete callback ids for events api methods
+        if (!eventsApiResponseTypes.includes(message.type)) {
+            delete callbacksStore[_id]
+        }
     }
 
     const { isValid, payload } = new Validator(Object.keys(callbacksStore)).performValidation(message)
