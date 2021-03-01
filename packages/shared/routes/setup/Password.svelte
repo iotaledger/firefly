@@ -49,7 +49,7 @@
                 <Text type="h2" classes="mb-5">{locale('views.password.title')}</Text>
                 <Text type="p" secondary classes="mb-3">{locale('views.password.body')}</Text>
                 <Password
-                    error={error}
+                    {error}
                     classes="mb-1"
                     bind:value={password}
                     strengthLevels={4}
