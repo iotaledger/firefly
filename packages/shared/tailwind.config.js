@@ -201,6 +201,8 @@ module.exports = {
         textColor: ['dark', 'responsive', 'hover', 'dark-hover', 'focus', 'group-hover'],
         backgroundColor: ['dark', 'responsive', 'hover', 'dark-hover', 'focus', 'group-hover'],
         backgroundOpacity: ['dark'],
+        opacity: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus', 'disabled'],
+        cursor: ['responsive', 'disabled'],
     },
     plugins: [
         // Reference: https://dev.to/smartmointy/tailwind-css-dark-mode-switch-with-javascript-2kl9
