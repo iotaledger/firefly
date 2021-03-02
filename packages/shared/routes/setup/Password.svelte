@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import zxcvbn from 'zxcvbn'
     import { createEventDispatcher } from 'svelte'
     import { OnboardingLayout, Password, Illustration, Text, Button } from 'shared/components'

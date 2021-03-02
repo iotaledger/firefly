@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { Text } from 'shared/components'
     import { getInitials as _getInitials } from 'shared/lib/helpers'
 

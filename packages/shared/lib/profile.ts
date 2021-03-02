@@ -51,16 +51,13 @@ export interface UserSettings {
 /**
  * Profile interface
  */
-interface Profile extends BaseProfile, ExtendedProfile {}
+interface Profile extends BaseProfile, ExtendedProfile {
+    isDeveloperProfile: boolean
+}
 
 export const profiles = persistent<Profile[]>('profiles', [])
 
 export const newProfile = writable<Profile | null>(null)
-
-/**
- * Profile interface
- */
-interface Profile extends BaseProfile, ExtendedProfile {}
 
 /**
  * Currently active profile

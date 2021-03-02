@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     export let value = undefined
     export let classes = ''
 </script>

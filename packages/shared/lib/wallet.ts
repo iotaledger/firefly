@@ -16,12 +16,16 @@ import { account, message } from './typings'
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
-interface Account extends BaseAccount {
+export interface Account extends BaseAccount {
     depositAddress: Address;
     rawIotaBalance: number;
     balance: string;
     balanceEquiv: string;
     color: string;
+}
+
+export interface AccountMessage extends Message {
+    internal: boolean;
 }
 
 interface ActorState {
@@ -313,9 +317,9 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
  * @param {Account} accounts
  * @param {number} [count]
  *
- * @returns {Message[]}
+ * @returns {AccountMessage[]}
  */
-export const getLatestMessages = (accounts: Account[], count = 10): Message[] => {
+export const getLatestMessages = (accounts: Account[], count = 10): AccountMessage[] => {
     const messages: Message[] = [];
     const addresses: string[] = [];
 
@@ -416,7 +420,7 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
 
             return Object.assign({}, storedAccount, {
                 // Update deposit address
-                depositAddress: syncedAccount.depositAddress.address,
+                depositAddress: syncedAccount.depositAddress,
                 // If we have received a new address, simply add it;
                 // If we have received an existing address, update the properties.
                 addresses: _update(storedAccount.addresses, syncedAccount.addresses, 'address'),

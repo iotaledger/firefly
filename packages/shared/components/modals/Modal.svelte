@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { fade } from 'svelte/transition'
 
     export let isActive = false

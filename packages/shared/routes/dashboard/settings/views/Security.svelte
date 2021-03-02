@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { get } from 'svelte/store'
     import zxcvbn from 'zxcvbn'
     import { Text, Dropdown, Password, Button, Checkbox } from 'shared/components'
