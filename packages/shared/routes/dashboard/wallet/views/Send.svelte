@@ -49,12 +49,14 @@
     }
     const handleBackClick = () => {
         accountRoute.set(AccountRoutes.Init)
-        walletRoute.set(WalletRoutes.Init)
+        if (!$account) {
+            walletRoute.set(WalletRoutes.Init)
+        }
     }
-    const format = (account) => {
+    const format = (account: Account) => {
         return {
             ...account,
-            label: `${account.name} • ${account.balance}`,
+            label: `${account.alias} • ${account.balance}`,
             balance: account.rawIotaBalance,
         }
     }
