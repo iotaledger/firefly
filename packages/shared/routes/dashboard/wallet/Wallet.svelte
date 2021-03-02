@@ -9,7 +9,7 @@
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import { formatUnit } from 'shared/lib/units'
-    import type { Account as AccountType, BalanceOverview, MessageWithAccount } from 'shared/lib/wallet'
+    import type { Account as AccountType, BalanceOverview, AccountMessage } from 'shared/lib/wallet'
     import {
         api,
         getLatestMessages,
@@ -38,7 +38,7 @@
 
     setContext<Writable<BalanceOverview>>('walletBalance', balanceOverview)
     setContext<Writable<AccountType[]>>('walletAccounts', accounts)
-    setContext<Readable<MessageWithAccount[]>>('walletTransactions', transactions)
+    setContext<Readable<AccountMessage[]>>('walletTransactions', transactions)
     setContext<Readable<AccountType>>('selectedAccount', selectedAccount)
 
     let isGeneratingAddress = false
