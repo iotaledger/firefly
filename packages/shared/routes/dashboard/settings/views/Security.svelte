@@ -112,7 +112,7 @@
         }
 
         if (newPassword.length > MAX_PASSWORD_LENGTH) {
-            newPasswordError = locale('error.password.tooLong')
+            newPasswordError = locale('error.password.length')
         } else if (newPassword !== confirmedPassword) {
             newPasswordError = locale('error.password.doNotMatch')
         } else if (passwordStrength.score !== 4) {

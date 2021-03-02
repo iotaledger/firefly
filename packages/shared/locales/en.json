@@ -474,7 +474,7 @@
     },
     "error": {
         "profile": {
-            "nameLength": "Your profile name must be under 20 characters."
+            "length": "Your profile name must be under 20 characters."
         },
         "password": {
             "doNotMatch": "Passwords do not match.",
@@ -491,7 +491,7 @@
             "similar": "This is similar to a common password.",
             "reasonWord": "A single word is easy to guess.",
             "incorrect": "Your password is incorrect.",
-            "tooLong": "Your password must be under 256 characters."
+            "length": "Your password must be under 256 characters."
         },
         "pincode": {
             "length": "Your PIN must be 6 digits long.",

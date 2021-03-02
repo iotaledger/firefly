@@ -20,7 +20,7 @@
 
     function handleContinueClick() {
         if (password.length > MAX_PASSWORD_LENGTH) {
-            error = locale('error.password.tooLong')
+            error = locale('error.password.length')
         } else if (password !== confirmedPassword) {
             error = locale('error.password.doNotMatch')
         } else if (passwordStrength.score !== 4) {
