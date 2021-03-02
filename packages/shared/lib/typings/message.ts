@@ -12,7 +12,7 @@ export interface UTXOInput {
             amount: number;
             index: number;
             isSpent: boolean;
-            kind: 'SignatureLockedSingle';
+            kind: 'SignatureLockedSingle' | 'SignatureLockedDustAllowance';
             messageId: string;
             transactionId: string;
         }
