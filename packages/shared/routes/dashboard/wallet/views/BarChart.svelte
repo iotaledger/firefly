@@ -1,8 +1,8 @@
 <script lang="typescript">
-    import { onMount, getContext } from 'svelte'
     import { Chart, Text } from 'shared/components'
-    import type { ChartData } from 'shared/lib/chart'
     import { getAccountActivityData } from 'shared/lib/chart'
+    import { getContext } from 'svelte'
+
     export let locale
 
     const selectedAccount = getContext('selectedAccount')

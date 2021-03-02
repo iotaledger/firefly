@@ -1,8 +1,8 @@
 <script>
-    import { onMount, afterUpdate } from 'svelte'
     import Chart from 'chart.js'
-    import resolveConfig from 'tailwindcss/resolveConfig'
     import tailwindConfig from 'shared/tailwind.config.js'
+    import { afterUpdate, onMount } from 'svelte'
+    import resolveConfig from 'tailwindcss/resolveConfig'
 
     export let labels = []
     export let datasets = []
@@ -112,14 +112,14 @@
             type: 'roundedBar',
             data: {
                 labels,
-                datasets: datasets.map(dataset => {
+                datasets: datasets.map((dataset) => {
                     return {
                         backgroundColor: fullConfig.theme.colors[dataset.color || color]['500'],
                         hoverBackgroundColor: fullConfig.theme.colors[dataset.color || color]['500'],
                         barThickness: 7,
                         ...dataset,
                     }
-                })
+                }),
             },
             options: {
                 barRoundness: 1,
@@ -161,10 +161,17 @@
                     bodyFontFamily: 'DM Sans',
                     bodyFontColor: fullConfig.theme.colors[color]['200'],
                     callbacks: {
-                        label: function (tooltipItem, data) {
+                        title: function ([tooltipItem]) {
                             let dataset = datasets[tooltipItem.datasetIndex]
                             if (dataset && dataset.tooltips) {
-                                return dataset.tooltips[tooltipItem.index]
+                                return dataset.tooltips[tooltipItem.index]?.title ?? ''
+                            }
+                            return ''
+                        },
+                        label: function (tooltipItem) {
+                            let dataset = datasets[tooltipItem.datasetIndex]
+                            if (dataset && dataset.tooltips) {
+                                return dataset.tooltips[tooltipItem.index]?.label ?? ''
                             }
                             return ''
                         },

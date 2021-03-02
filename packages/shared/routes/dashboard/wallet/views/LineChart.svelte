@@ -1,19 +1,19 @@
 <script lang="typescript">
-    import { onMount, getContext } from 'svelte'
-    import { Dropdown, Chart, Text } from 'shared/components'
-    import { TIMEFRAME_MAP } from 'shared/lib/marketData'
-    import { CurrencyTypes } from 'shared/lib/currency'
-    import { activeProfile } from 'shared/lib/profile'
+    import { Chart, Dropdown, Text } from 'shared/components'
     import type { ChartData } from 'shared/lib/chart'
     import {
+        chartCurrency,
+        chartTimeframe,
         DashboardChartType,
+        getAccountValueData,
         getPortfolioData,
         getTokenData,
-        getAccountValueData,
-        chartCurrency,
         selectedChart,
-        chartTimeframe,
     } from 'shared/lib/chart'
+    import { CurrencyTypes } from 'shared/lib/currency'
+    import { TIMEFRAME_MAP } from 'shared/lib/marketData'
+    import { activeProfile } from 'shared/lib/profile'
+    import { getContext, onMount } from 'svelte'
 
     export let locale
 

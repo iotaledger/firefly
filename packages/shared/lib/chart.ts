@@ -1,19 +1,30 @@
-import { Unit, convertUnits } from '@iota/unit-converter'
-import { get, writable } from 'svelte/store'
+import { convertUnits, Unit } from '@iota/unit-converter'
+import type { Account } from 'shared/lib/wallet'
+import { derived, get, writable } from 'svelte/store'
 import { CurrencyTypes } from './currency'
 import {
-    priceData,
     HistoryDataProps,
+    priceData
 } from './marketData'
+import type { Message } from './typings/message'
+import type { BalanceHistory } from './wallet'
 
 export interface Tooltip {
     title: string
     label: string
 }
+
 export interface ChartData {
     data: number[]
-    labels: string[]
-    tooltips: Tooltip[]
+    label?: string
+    labels?: string[]
+    tooltips?: Tooltip[]
+    color?: string
+}
+
+interface ActivityTimeframe {
+    start: number,
+    end: number
 }
 
 export enum DashboardChartType {
@@ -25,6 +36,8 @@ export enum AccountChartType {
     Activity = 'Activity',
 }
 
+const BAR_CHART_ACTIVITY_MONTHS = 6
+
 /** Selected currency on chart */
 export const chartCurrency = writable<CurrencyTypes>(CurrencyTypes.USD)
 
@@ -34,12 +47,16 @@ export const chartTimeframe = writable<HistoryDataProps>(HistoryDataProps.SEVEN_
 /** Selected chart */
 export const selectedChart = writable<DashboardChartType>(DashboardChartType.PORTFOLIO)
 
-export function getPortfolioData(balanceHistory = {}) {
+const fiatHistoryData = derived([priceData, chartCurrency, chartTimeframe], ([$priceData, $chartCurrency, $chartTimeframe]) => {
+    return $priceData?.[$chartCurrency]?.[$chartTimeframe]?.slice().sort((a, b) => a[0] - b[0]) ?? []
+})
+
+export function getPortfolioData(balanceHistory: BalanceHistory): ChartData {
     let chartData: ChartData = { labels: [], data: [], tooltips: [] }
-    const fiatHistoryData = get(priceData)[get(chartCurrency)][get(chartTimeframe)].sort((a, b) => a[0] - b[0])
+    const _fiatHistoryData = get(fiatHistoryData)
     chartData = balanceHistory[get(chartTimeframe)].reduce(
         (acc, values, index) => {
-            const fiatBalance = ((values.balance * fiatHistoryData[index][1]) / 1000000).toFixed(5)
+            const fiatBalance = ((values.balance * _fiatHistoryData[index][1]) / 1000000).toFixed(5)
             acc.data.push(fiatBalance)
             acc.labels.push(formatLabel(values.timestamp * 1000))
             acc.tooltips.push(formatLineChartTooltip(fiatBalance, values.timestamp * 1000))
@@ -47,18 +64,13 @@ export function getPortfolioData(balanceHistory = {}) {
         },
         { labels: [], data: [], tooltips: [] }
     )
-    if (get(chartTimeframe) === HistoryDataProps.SEVEN_DAYS) {
-        // skip labels for seven days timeframe
-        let skippedLabels = skipLabels(chartData.labels)
-        chartData = { ...chartData, labels: skippedLabels }
-    }
+    chartData = { ...chartData, labels: skipLabels(chartData.labels) }
     return chartData
 }
 
 export function getTokenData(): ChartData {
     let chartData: ChartData = { labels: [], data: [], tooltips: [] }
-    chartData = get(priceData)[get(chartCurrency)][get(chartTimeframe)]
-        .sort((a, b) => a[0] - b[0])
+    chartData = get(fiatHistoryData)
         .reduce(
             (acc, values) => {
                 acc.data.push(parseFloat(values[1]))
@@ -68,20 +80,16 @@ export function getTokenData(): ChartData {
             },
             { labels: [], data: [], tooltips: [] }
         )
-    if (get(chartTimeframe) === HistoryDataProps.SEVEN_DAYS) {
-        // skip labels for seven days timeframe
-        let skippedLabels = skipLabels(chartData.labels)
-        chartData = { ...chartData, labels: skippedLabels }
-    }
+    chartData = { ...chartData, labels: skipLabels(chartData.labels) }
     return chartData
 }
 
-export function getAccountValueData(balanceHistory): ChartData {
+export function getAccountValueData(balanceHistory: BalanceHistory): ChartData {
     let chartData: ChartData = { labels: [], data: [], tooltips: [] }
-    const fiatHistoryData = get(priceData)[get(chartCurrency)][get(chartTimeframe)].sort((a, b) => a[0] - b[0])
+    const _fiatHistoryData = get(fiatHistoryData)
     chartData = balanceHistory[get(chartTimeframe)].reduce(
         (acc, values, index) => {
-            const fiatBalance = ((values.balance * fiatHistoryData[index][1]) / 1000000).toFixed(5)
+            const fiatBalance = ((values.balance * _fiatHistoryData[index][1]) / 1000000).toFixed(5)
             acc.data.push(fiatBalance)
             acc.labels.push(formatLabel(values.timestamp * 1000))
             acc.tooltips.push(formatLineChartTooltip(fiatBalance, values.timestamp * 1000))
@@ -92,19 +100,18 @@ export function getAccountValueData(balanceHistory): ChartData {
     return chartData
 }
 
-export const getAccountActivityData = (account) => {
-    const activityMonths = 6
+export const getAccountActivityData = (account: Account) => {
     let date = new Date();
-    let activityTimeframes = []
-    let incoming = { data: [], tooltips: [], label: 'Incoming', color: 'blue' } // TODO: localize, profile colors
-    let outgoing = { data: [], tooltips: [], label: 'Outgoing', color: 'gray' } // TODO: localize, profile colors
-    let labels = []
-    let messages = account.messages.sort((a, b) => {
+    let activityTimeframes: ActivityTimeframe[] = []
+    let incoming: ChartData = { data: [], tooltips: [], label: 'Incoming', color: account.color || 'blue' } // TODO: localize, profile colors
+    let outgoing: ChartData = { data: [], tooltips: [], label: 'Outgoing', color: 'gray' } // TODO: localize, profile colors
+    let labels: string[] = []
+    let messages: Message[] = account.messages.slice().sort((a, b) => {
         return <any>new Date(a.timestamp).getTime() - <any>new Date(b.timestamp).getTime()
     })
-    for (var i = 0; i < activityMonths; i++) {
-        let start = new Date(date.getFullYear(), date.getMonth() - i, 1).getTime();
-        let end = new Date(date.getFullYear(), date.getMonth() - i + 1, 0).getTime();
+    for (var i = 0; i < BAR_CHART_ACTIVITY_MONTHS; i++) {
+        let start: number = new Date(date.getFullYear(), date.getMonth() - i, 1).getTime();
+        let end: number = new Date(date.getFullYear(), date.getMonth() - i + 1, 0).getTime();
         activityTimeframes.push({ start, end })
         labels.unshift(new Date(start).toLocaleString('default', {
             month: 'short',
@@ -132,17 +139,37 @@ export const getAccountActivityData = (account) => {
                 }
             }
             incoming.data.unshift(_incoming)
-            incoming.tooltips.unshift(`Incoming ${_incoming} Mi`) // TODO: localize
+            incoming.tooltips.unshift({
+                title: new Date(start).toLocaleString('default', {
+                    year: 'numeric',
+                    month: 'long',
+                }), label: `Incoming ${_incoming} Mi`
+            }) // TODO: localize
             outgoing.data.unshift(_outgoing)
-            outgoing.tooltips.unshift(`Outgoing ${_outgoing} Mi`) // TODO: localize
+            outgoing.tooltips.unshift({
+                title: new Date(start).toLocaleString('default', {
+                    year: 'numeric',
+                    month: 'long',
+                }), label: `Outgoing ${_outgoing} Mi`
+            }) // TODO: localize
         })
     }
     else {
-        activityTimeframes.forEach(() => {
+        activityTimeframes.forEach(({ start, end }) => {
             incoming.data.push(0)
-            incoming.tooltips.push(`Incoming ${0} Mi`) // TODO: localize
-            outgoing.data.push(0)
-            outgoing.tooltips.push(`Outgoing ${0} Mi`) // TODO: localize
+            incoming.tooltips.unshift({
+                title: new Date(start).toLocaleString('default', {
+                    year: 'numeric',
+                    month: 'long',
+                }), label: `Incoming ${0} Mi`
+            }) // TODO: localize
+            outgoing.data.unshift(0)
+            outgoing.tooltips.unshift({
+                title: new Date(start).toLocaleString('default', {
+                    year: 'numeric',
+                    month: 'long',
+                }), label: `Outgoing ${0} Mi`
+            }) // TODO: localize
         })
     }
     let chartData = {
@@ -153,25 +180,29 @@ export const getAccountActivityData = (account) => {
     return chartData
 }
 
-function skipLabels(labels) {
-    let _displayedLabels = []
-    let _blacklistedLabels = []
-    let skippedLabels = labels.map((label, index) => {
-        if (index === 0 && labels.filter((l) => l === label).length < 4) {
-            _blacklistedLabels.push(label)
-        }
-        if (_displayedLabels.includes(label) || _blacklistedLabels.includes(label)) {
-            return ''
-        } else {
-            _displayedLabels.push(label)
-            return label
-        }
-    })
+function skipLabels(labels: string[]): string[] {
+    let skippedLabels: string[] = labels
+    if (get(chartTimeframe) === HistoryDataProps.SEVEN_DAYS) {
+        let _displayedLabels: string[] = []
+        let _blacklistedLabels: string[] = []
+        skippedLabels = labels.map((label, index) => {
+            if (index === 0 && labels.filter((l) => l === label).length < 4) {
+                _blacklistedLabels.push(label)
+            }
+            if (_displayedLabels.includes(label) || _blacklistedLabels.includes(label)) {
+                return ''
+            } else {
+                _displayedLabels.push(label)
+                return label
+            }
+        })
+    }
+
     return skippedLabels
 }
 
 function formatLabel(timestamp: number): string {
-    const date = new Date(timestamp)
+    const date: Date = new Date(timestamp)
     var formattedLabel: string = ''
     switch (get(chartTimeframe)) {
         case HistoryDataProps.ONE_HOUR:
@@ -197,9 +228,9 @@ function formatLabel(timestamp: number): string {
     return formattedLabel
 }
 
-function formatLineChartTooltip(data: (number | string), timestamp: number | string, showMiota: boolean = false) {
-    const title = `${showMiota ? `1 ${Unit.Mi}: ` : ''}${data} ${get(chartCurrency).toUpperCase()}`
-    const label = new Date(timestamp).toLocaleString([], {
+function formatLineChartTooltip(data: (number | string), timestamp: number | string, showMiota: boolean = false): Tooltip {
+    const title: string = `${showMiota ? `1 ${Unit.Mi}: ` : ''}${data} ${get(chartCurrency).toUpperCase()}`
+    const label: string = new Date(timestamp).toLocaleString([], {
         year: 'numeric',
         month: 'short',
         day: '2-digit',

@@ -1,23 +1,22 @@
-import { writable, Writable, get } from 'svelte/store'
-import type { Actor } from './typings/bridge'
-import type { Address } from './typings/address'
-import type { Message } from './typings/message'
-import type { Account as BaseAccount } from './typings/account'
-import type { Event, TransactionEventPayload, ConfirmationStateChangeEventPayload, BalanceChangeEventPayload } from './typings/events'
 import { mnemonic } from 'shared/lib/app'
-import { formatUnit } from 'shared/lib/units'
 import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
-import { activeProfile, updateProfile } from 'shared/lib/profile'
+import { persistent } from 'shared/lib/helpers'
+import { _ } from 'shared/lib/i18n'
 import type { HistoryData, PriceData } from 'shared/lib/marketData'
 import { HistoryDataProps } from 'shared/lib/marketData'
 import { showSystemNotification } from 'shared/lib/notifications'
-import { _ } from 'shared/lib/i18n'
-import { persistent } from 'shared/lib/helpers'
-import type { SyncedAccount } from './typings/account'
+import { activeProfile, updateProfile } from 'shared/lib/profile'
+import { formatUnit } from 'shared/lib/units'
+import { get, writable, Writable } from 'svelte/store'
+import type { Account as BaseAccount, SyncedAccount } from './typings/account'
+import type { Address } from './typings/address'
+import type { Actor } from './typings/bridge'
+import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, Event, TransactionEventPayload } from './typings/events'
+import type { Message } from './typings/message'
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
-interface Account extends BaseAccount {
+export interface Account extends BaseAccount {
     depositAddress: Address;
     rawIotaBalance: number;
     balance: string;
@@ -42,6 +41,18 @@ export type BalanceOverview = {
 type WalletState = {
     balanceOverview: Writable<BalanceOverview>
     accounts: Writable<Account[]>
+}
+
+type BalanceTimestamp = {
+    timestamp: number,
+    balance: number
+}
+
+export type BalanceHistory = {
+    [HistoryDataProps.ONE_HOUR]: BalanceTimestamp[]
+    [HistoryDataProps.SEVEN_DAYS]: BalanceTimestamp[]
+    [HistoryDataProps.TWENTY_FOUR_HOURS]: BalanceTimestamp[]
+    [HistoryDataProps.ONE_MONTH]: BalanceTimestamp[]
 }
 
 /** Active actors state */
@@ -422,8 +433,13 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
  * @param {PriceData} [priceData]
  *
  */
-export const getAccountsBalanceHistory = (accounts: Account[], priceData: PriceData) => {
-    let balanceHistory = {}
+export const getAccountsBalanceHistory = (accounts: Account[], priceData: PriceData): BalanceHistory => {
+    let balanceHistory: BalanceHistory = {
+        [HistoryDataProps.ONE_HOUR]: [],
+        [HistoryDataProps.TWENTY_FOUR_HOURS]: [],
+        [HistoryDataProps.SEVEN_DAYS]: [],
+        [HistoryDataProps.ONE_MONTH]: [],
+    }
     if (priceData && accounts) {
         accounts.forEach((account) => {
             let accountBalanceHistory: HistoryData = {
@@ -493,8 +509,8 @@ export const getAccountsBalanceHistory = (accounts: Account[], priceData: PriceD
  * @param {PriceData} [priceData]
  *
  */
-export const getWalletBalanceHistory = (accountsBalanceHistory): HistoryData => {
-    let balanceHistory: HistoryData = {
+export const getWalletBalanceHistory = (accountsBalanceHistory: BalanceHistory): BalanceHistory => {
+    let balanceHistory: BalanceHistory = {
         [HistoryDataProps.ONE_HOUR]: [],
         [HistoryDataProps.TWENTY_FOUR_HOURS]: [],
         [HistoryDataProps.SEVEN_DAYS]: [],
@@ -512,7 +528,5 @@ export const getWalletBalanceHistory = (accountsBalanceHistory): HistoryData => 
             }
         })
     })
-
     return balanceHistory
-
 }

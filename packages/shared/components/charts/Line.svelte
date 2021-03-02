@@ -1,9 +1,9 @@
 <script>
-    import { onMount, afterUpdate } from 'svelte'
-    import resolveConfig from 'tailwindcss/resolveConfig'
-    import tailwindConfig from 'shared/tailwind.config.js'
-    import { convertHexToRGBA } from 'shared/lib/helpers'
     import Chart from 'chart.js'
+    import { convertHexToRGBA } from 'shared/lib/helpers'
+    import tailwindConfig from 'shared/tailwind.config.js'
+    import { afterUpdate, onMount } from 'svelte'
+    import resolveConfig from 'tailwindcss/resolveConfig'
 
     export let labels = []
     export let datasets = []
@@ -26,7 +26,7 @@
             type: 'line',
             data: {
                 labels,
-                datasets: datasets.map(dataset => {
+                datasets: datasets.map((dataset) => {
                     const gradient = context.createLinearGradient(
                         context.canvas.width / 2,
                         0,

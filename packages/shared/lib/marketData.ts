@@ -1,7 +1,7 @@
-import { writable, get } from 'svelte/store'
-import { currencies, Currencies, exchangeRates, ExchangeRates, CurrencyTypes } from 'shared/lib/currency'
+import { currencies, Currencies, CurrencyTypes, exchangeRates, ExchangeRates } from 'shared/lib/currency'
 import { activeProfile } from 'shared/lib/profile'
 import Validator from 'shared/lib/validator'
+import { get, writable } from 'svelte/store'
 
 /**
  * Market data endpoints list
