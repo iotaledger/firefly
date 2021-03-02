@@ -1,22 +1,80 @@
 <script>
     import { Text, Input, Button, Password, Checkbox } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
+    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { isNodeValid, DEFAULT_NODES as nodes } from 'shared/lib/network'
+    import { api, wallet } from 'shared/lib/wallet'
 
-    export let addCustomNode = ({ url, username, password }, primary) => {}
     export let locale
+
+    const { accounts } = $wallet
 
     let url = ''
     let username = ''
     let password = ''
     let primary = false
+    let addressError = ''
+    let authError = ''
+
+    function addCustomNode(node, primary = false) {
+        const error = isNodeValid([...$activeProfile.settings.customNodes, ...nodes], node)
+
+        if (error) {
+            // TODO: Move locale to store and localise properly
+            addressError = locale(error)
+        } else {
+            const options = primary
+                ? {
+                      ...$accounts[0].clientOptions,
+                      node: node.url,
+                      nodes: [],
+                  }
+                : {
+                      ...$accounts[0].clientOptions,
+                      nodes: [...$accounts[0].clientOptions.nodes, node.url],
+                  }
+
+            api.setClientOptions(options, {
+                onSuccess() {
+                    updateProfile('settings.customNodes', [...$activeProfile.settings.customNodes, node])
+
+                    if (primary) {
+                        updateProfile('settings.node', node)
+                    }
+
+                    accounts.update((_accounts) =>
+                        _accounts.map((_account) => {
+                            if (primary) {
+                                return Object.assign({}, _account, {
+                                    clientOptions: Object.assign({}, _account.clientOptions, { node: node.url, nodes: [] }),
+                                })
+                            }
+
+                            return Object.assign({}, _account, {
+                                clientOptions: Object.assign({}, _account.clientOptions, {
+                                    nodes: [..._account.clientOptions.nodes, node.url],
+                                }),
+                            })
+                        })
+                    )
+
+                    closePopup()
+                },
+                onError(error) {
+                    // TODO: Add auth error handling
+                    console.error(error)
+                },
+            })
+        }
+    }
 </script>
 
 <Text type="h4" classes="mb-5">{locale('popups.node.title_add')}</Text>
-<div class="w-full h-full flex flex-col justify-between">
-    <Input classes="mb-6" bind:value={url} placeholder={locale('popups.node.node_address')} />
-    <Input classes="mb-6" bind:value={username} placeholder={locale('popups.node.optional_username')} />
-    <Password classes="mb-6" bind:value={password} placeholder={locale('popups.node.optional_password')} />
-    <Checkbox classes="mb-8" label={locale('popups.node.set_as_primary_node')} bind:checked={primary} />
+<div class="w-full h-full">
+    <Input bind:value={url} placeholder={locale('popups.node.node_address')} error={addressError} />
+    <Input classes="mt-3" bind:value={username} placeholder={locale('popups.node.optional_username')} error={authError} />
+    <Password classes="mt-3" bind:value={password} placeholder={locale('popups.node.optional_password')} />
+    <Checkbox classes="my-8" label={locale('popups.node.set_as_primary_node')} bind:checked={primary} />
 </div>
 <div class="flex flex-row justify-between space-x-4 w-full px-8 ">
     <Button secondary classes="w-1/2" onClick={() => closePopup()}>{locale('actions.cancel')}</Button>
