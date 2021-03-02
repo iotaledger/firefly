@@ -95,6 +95,8 @@
                             },
                             ticks: {
                                 autoSkip: true,
+                                maxRotation: 0,
+                                minRotation: 0,
                             },
                         },
                     ],
