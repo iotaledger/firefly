@@ -1,5 +1,4 @@
 <script>
-    import Error from './Error'
     import Input from './Input'
     import { Icon } from 'shared/components'
 
