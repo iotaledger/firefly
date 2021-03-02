@@ -14,6 +14,8 @@
 
     let attempts = 0
     let pinCode = ''
+    let isBusy = false
+    let pinRef
 
     /** Maximum number of consecutive (incorrect) attempts allowed to the user */
     const MAX_PINCODE_INCORRECT_ATTEMPTS = 3
@@ -55,6 +57,8 @@
         if (!hasReachedMaxAttempts) {
             const profile = get(activeProfile)
 
+            isBusy = true
+
             PincodeManager.verify(profile.id, pinCode.toString())
                 .then((verified) => {
                     if (verified === true) {
@@ -62,23 +66,31 @@
                             initialise(profile.id, getStoragePath(path, profile.name))
                             api.setStoragePassword(pinCode.toString(), {
                                 onSuccess() {
+                                    isBusy = false
                                     dispatch('next')
                                 },
                                 onError(error) {
+                                    isBusy = false
                                     console.error(error)
                                 },
                             })
                         })
                     } else {
+                        isBusy = false
                         attempts++
                         if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
                             clearInterval(timerId)
                             timerId = setInterval(countdown, 1000)
                         }
+                        // This is necessary as the isBusy state change
+                        // is required to be processed to enable the
+                        // component before we can focus it
+                        setTimeout(() => pinRef.focus(), 100);
                     }
                 })
                 .catch((error) => {
                     console.error(error)
+                    isBusy = false
                 })
         }
     }
@@ -111,14 +123,14 @@
         <div class="pt-40 pb-16 flex w-full h-full flex-col items-center justify-between">
             <div class="w-96 flex flex-row flex-wrap justify-center mb-20">
                 <Profile name={$activeProfile.name} bgColor="blue" />
-                <Pin bind:value={pinCode} classes="mt-10" on:submit={onSubmit} disabled={hasReachedMaxAttempts} />
+                <Pin bind:this={pinRef} bind:value={pinCode} classes="mt-10" on:submit={onSubmit} disabled={hasReachedMaxAttempts || isBusy} />
                 <Text type="p" bold classes="mt-4 text-center">
                     {attempts > 0 ? locale('views.login.incorrect_attempts', {
                               values: { attempts: attempts.toString() },
                           }) : locale('actions.enter_your_pin')}
                 </Text>
             </div>
-            <Button classes="w-96" disabled={!hasCorrectFormat || hasReachedMaxAttempts} onClick={() => onSubmit()}>
+            <Button classes="w-96" disabled={!hasCorrectFormat || hasReachedMaxAttempts || isBusy} onClick={() => onSubmit()}>
                 {hasReachedMaxAttempts ? buttonText : locale('actions.continue')}
             </Button>
         </div>
