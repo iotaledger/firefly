@@ -84,7 +84,9 @@
     }
 
     function handleBackClick() {
-        dispatch('previous')
+        if (!hasReachedMaxAttempts) {
+            dispatch('previous')
+        }
     }
 
     onDestroy(() => {
@@ -96,16 +98,20 @@
     <div>foo</div>
 {:else}
     <div class="relative w-full h-full bg-white dark:bg-gray-900">
-        <div data-label="back-button" class="absolute top-0 left-0 pl-5 pt-5" on:click={handleBackClick}>
+        <button
+            data-label="back-button"
+            class="absolute top-0 left-0 pl-5 pt-5 disabled:opacity-50 cursor-pointer disabled:cursor-auto"
+            disabled={hasReachedMaxAttempts}
+            on:click={handleBackClick}>
             <div class="flex items-center">
-                <Icon icon="arrow-left" classes="cursor-pointer text-blue-500" />
-                <Text type="h4" classes="ml-6 cursor-pointer">{locale('general.profiles')}</Text>
+                <Icon icon="arrow-left" classes="text-blue-500" />
+                <Text type="h4" classes="ml-6">{locale('general.profiles')}</Text>
             </div>
-        </div>
+        </button>
         <div class="pt-40 pb-16 flex w-full h-full flex-col items-center justify-between">
             <div class="w-96 flex flex-row flex-wrap justify-center mb-20">
                 <Profile name={$activeProfile.name} bgColor="blue" />
-                <Pin bind:value={pinCode} classes="mt-10" on:submit={onSubmit} />
+                <Pin bind:value={pinCode} classes="mt-10" on:submit={onSubmit} disabled={hasReachedMaxAttempts} />
                 <Text type="p" bold classes="mt-4 text-center">
                     {attempts > 0 ? locale('views.login.incorrect_attempts', {
                               values: { attempts: attempts.toString() },

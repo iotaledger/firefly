@@ -28,7 +28,7 @@
     <div class="flex flex-col justify-between items-center">
         <div
             on:click={() => onClick(id)}
-            class="h-20 w-20 {bgColor ? `bg-${bgColor}-500` : ''} rounded-full font-bold text-center flex items-center justify-center cursor-pointer {classes}">
+            class="h-20 w-20 {bgColor ? `bg-${bgColor}-500` : ''} rounded-full font-bold text-center flex items-center justify-center {classes}">
             {#if slots}
                 <slot />
             {:else}
