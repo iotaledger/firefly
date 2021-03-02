@@ -3,6 +3,7 @@
     import { openPopup } from 'shared/lib/popup'
     import { accountRoute } from 'shared/lib/router'
     import { AccountRoutes } from 'shared/lib/typings/routes'
+    import type { Account } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable, Writable } from 'svelte/store'
 
