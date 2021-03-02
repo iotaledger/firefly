@@ -163,6 +163,7 @@ pub fn init_logger(config: LoggerConfigBuilder) {
 pub(crate) struct MessageFallback {
     #[serde(rename = "actorId")]
     pub(crate) actor_id: String,
+    pub(crate) id: Option<String>,
 }
 
 pub async fn send_message(serialized_message: String) {
@@ -190,8 +191,21 @@ pub async fn send_message(serialized_message: String) {
             if let Ok(message) = serde_json::from_str::<MessageFallback>(&serialized_message) {
                 Some((
                     Some(format!(
-                        r#"{{ "type": "InvalidMessage", "payload": {} }}"#,
-                        serialized_message
+                        r#"{{
+                            "type": "Error",
+                            "id": {},
+                            "payload": {{ 
+                                "type": "InvalidMessage",
+                                "message": {},
+                                "error": {}
+                             }}
+                        }}"#,
+                        match message.id {
+                            Some(id) => serde_json::Value::String(id),
+                            None => serde_json::Value::Null,
+                        },
+                        serialized_message,
+                        serde_json::Value::String(error.to_string()),
                     )),
                     message.actor_id,
                 ))
@@ -260,24 +274,42 @@ pub async fn listen<A: Into<String>, S: Into<String>>(actor_id: A, id: S, event_
         EventType::ErrorThrown => on_error(move |error| {
             let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &error));
         }),
-        EventType::BalanceChange => on_balance_change(move |event| {
-            let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
-        }).await,
-        EventType::NewTransaction => on_new_transaction(move |event| {
-            let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
-        }).await,
-        EventType::ConfirmationStateChange => on_confirmation_state_change(move |event| {
-            let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
-        }).await,
-        EventType::Reattachment => on_reattachment(move |event| {
-            let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
-        }).await,
-        EventType::Broadcast => on_broadcast(move |event| {
-            let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
-        }).await,
-        EventType::StrongholdStatusChange => on_stronghold_status_change(move |event| {
-            let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
-        }).await,
+        EventType::BalanceChange => {
+            on_balance_change(move |event| {
+                let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
+            })
+            .await
+        }
+        EventType::NewTransaction => {
+            on_new_transaction(move |event| {
+                let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
+            })
+            .await
+        }
+        EventType::ConfirmationStateChange => {
+            on_confirmation_state_change(move |event| {
+                let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
+            })
+            .await
+        }
+        EventType::Reattachment => {
+            on_reattachment(move |event| {
+                let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
+            })
+            .await
+        }
+        EventType::Broadcast => {
+            on_broadcast(move |event| {
+                let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
+            })
+            .await
+        }
+        EventType::StrongholdStatusChange => {
+            on_stronghold_status_change(move |event| {
+                let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
+            })
+            .await
+        }
     };
 
     let mut actors = wallet_actors().lock().await;
@@ -333,10 +365,15 @@ mod tests {
                 let json = value.as_object().unwrap();
                 assert_eq!(
                     json.get("type"),
+                    Some(&serde_json::Value::String("Error".to_string()))
+                );
+                let payload = json.get("payload").unwrap().as_object().unwrap();
+                assert_eq!(
+                    payload.get("type"),
                     Some(&serde_json::Value::String("InvalidMessage".to_string()))
                 );
             } else {
-                panic!("actor didn't reply after wrong message");
+                panic!("actor didn't reply after invalid message");
             }
 
             super::send_message(format!(
