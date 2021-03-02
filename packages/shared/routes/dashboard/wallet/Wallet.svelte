@@ -173,7 +173,6 @@
     }
 
     function onCreateAccount(alias) {
-        console.log(node, nodes, $network)
         const _create = () =>
             api.createAccount(
                 {
