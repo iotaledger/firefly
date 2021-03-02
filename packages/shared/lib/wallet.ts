@@ -24,8 +24,7 @@ export interface Account extends BaseAccount {
     color: string;
 }
 
-export interface MessageWithAccount extends Message {
-    account: number;
+export interface AccountMessage extends Message {
     internal: boolean;
 }
 
@@ -318,9 +317,9 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
  * @param {Account} accounts
  * @param {number} [count]
  *
- * @returns {Message[]}
+ * @returns {AccountMessage[]}
  */
-export const getLatestMessages = (accounts: Account[], count = 10): MessageWithAccount[] => {
+export const getLatestMessages = (accounts: Account[], count = 10): AccountMessage[] => {
     const messages: Message[] = [];
     const addresses: string[] = [];
 
