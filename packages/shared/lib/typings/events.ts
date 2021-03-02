@@ -99,3 +99,23 @@ export interface ConfirmationStateChangeEventPayload {
     message: Message
     confirmed: boolean
 }
+
+export enum TransferProgressEventType {
+    // Syncing account.
+    SyncingAccount = 'SyncingAccount',
+    /// Performing input selection.
+    SelectingInputs = 'SelectingInputs',
+    /// Generating remainder value deposit address.
+    GeneratingRemainderDepositAddress = 'GeneratingRemainderDepositAddress',
+    /// Signing the transaction.
+    SigningTransaction = 'SigningTransaction',
+    /// Performing PoW.
+    PerformingPoW = 'PerformingPoW',
+    /// Broadcasting.
+    Broadcasting = 'Broadcasting',
+}
+
+export interface TransferProgressEventPayload {
+    accountId: string
+    event: { type: TransferProgressEventType }
+}
