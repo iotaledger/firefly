@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { Icon } from 'shared/components'
     import { onMount } from 'svelte'
     export let value = ''

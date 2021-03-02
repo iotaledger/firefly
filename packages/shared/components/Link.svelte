@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { bindEvents } from 'shared/lib/utils'
     export let events = {}
 

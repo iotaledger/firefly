@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { createEventDispatcher } from 'svelte'
     import { Logo, Profile, Icon } from 'shared/components'
     import { profiles, setActiveProfile } from 'shared/lib/profile'

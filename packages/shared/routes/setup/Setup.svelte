@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
     import { OnboardingLayout, Illustration, Text, Button, Input, Checkbox } from 'shared/components'

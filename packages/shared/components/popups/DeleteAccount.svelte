@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { api, selectedAccountId } from 'shared/lib/wallet'
     import { sendParams } from 'shared/lib/app'
     import { walletRoute, accountRoute } from 'shared/lib/router'

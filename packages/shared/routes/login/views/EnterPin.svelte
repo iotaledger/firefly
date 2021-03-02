@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { api } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
     import { createEventDispatcher, onDestroy } from 'svelte'

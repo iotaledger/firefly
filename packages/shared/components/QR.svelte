@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import QRCode from 'qr.js/lib/QRCode'
 
     export let data

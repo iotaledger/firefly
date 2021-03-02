@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { api } from 'shared/lib/wallet'
     import { closePopup } from 'shared/lib/popup'
     import { Password, Button, Text } from 'shared/components'

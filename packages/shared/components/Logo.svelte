@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     export let logo = undefined
     export let width = undefined
     export let height = undefined

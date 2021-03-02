@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { Text, Button } from 'shared/components'
 
     export let locale = undefined
