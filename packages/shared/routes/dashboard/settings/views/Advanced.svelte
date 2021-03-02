@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { get } from 'svelte/store'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { developerMode } from 'shared/lib/app'

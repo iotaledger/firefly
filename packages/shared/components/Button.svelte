@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { bindEvents } from 'shared/lib/utils'
     import { Icon } from 'shared/components'
     export let events = {}
@@ -23,7 +23,8 @@
         span {
             @apply text-white;
         }
-        &:not(.with-icon):hover {
+        &:not(.with-icon):hover,
+        &:not(.with-icon):focus {
             @apply bg-blue-600;
         }
         &:not(.with-icon):active {
@@ -44,7 +45,8 @@
             span {
                 @apply text-blue-500;
             }
-            &:hover {
+            &:hover,
+            &:focus {
                 @apply bg-blue-50;
                 @apply border-blue-200;
             }

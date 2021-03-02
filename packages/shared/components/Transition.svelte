@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { fly, scale } from 'svelte/transition'
 
     export let primary = true

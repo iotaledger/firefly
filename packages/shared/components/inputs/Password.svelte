@@ -1,6 +1,8 @@
-<script>
+
+<script lang="typescript">
     import Input from './Input'
     import { Icon } from 'shared/components'
+    import { onMount } from 'svelte'
 
     export let value = ''
     export let classes = ''
@@ -12,14 +14,24 @@
     export let locale = undefined
     export let maxlength = undefined
     export let error = null
+    export let numeric = false
+    export let autofocus = false
 
     let revealed = false
     let type = 'password'
+    let inputElement
+
 
     const revealToggle = () => {
         type = type === 'password' ? 'text' : 'password'
         revealed = !revealed
     }
+
+    onMount(() => {
+        if (autofocus) {
+            inputElement.focus()
+        }
+    })
 </script>
 
 <style type="text/scss">
@@ -56,10 +68,12 @@
             {type}
             bind:value
             {maxlength}
+            {numeric}
+            bind:this={inputElement}
             placeholder={placeholder || locale('general.password')} 
         />
         {#if showRevealToggle === true}
-            <button type="button" on:click={(e) => revealToggle(e)} tabindex="-1" class="absolute top-3">
+            <button type="button" on:click={() => revealToggle()} tabindex="-1" class="absolute top-3">
                 <Icon icon={revealed ? 'view' : 'hide'} classes="text-blue-500" />
             </button>
         {/if}

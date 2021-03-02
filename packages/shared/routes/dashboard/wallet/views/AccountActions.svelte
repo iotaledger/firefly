@@ -1,9 +1,11 @@
 <script lang="typescript">
-    import { getContext } from 'svelte'
-    import { Text, Button } from 'shared/components'
-    import { Send, Receive, ManageAccount } from '.'
+    import { Button, Text } from 'shared/components'
     import { accountRoute } from 'shared/lib/router'
     import { AccountRoutes } from 'shared/lib/typings/routes'
+    import type { Account } from 'shared/lib/wallet'
+    import { getContext } from 'svelte'
+    import type { Readable } from 'svelte/store'
+    import { ManageAccount, Receive, Send } from '.'
 
     export let locale
     export let send
@@ -11,7 +13,7 @@
     export let internalTransfer
     export let setAlias
 
-    const account = getContext('selectedAccount')
+    const account = getContext<Readable<Account>>('selectedAccount')
     function handleSendClick() {
         accountRoute.set(AccountRoutes.Send)
     }

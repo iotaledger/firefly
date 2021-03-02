@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
     import { OnboardingLayout, Illustration, Text, Button, Input, Checkbox } from 'shared/components'
@@ -49,7 +49,7 @@
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-4">{locale('views.setup.title')}</Text>
-            <Input error={error} bind:value={profileName} placeholder={locale('views.setup.profile_name')} classes="w-full" />
+            <Input error={error} bind:value={profileName} placeholder={locale('views.setup.profile_name')} classes="w-full" autofocus/>
             {#if $developerMode}
                 <Checkbox label={locale('general.developerProfile')} bind:checked={isDeveloperProfile} />
             {/if}

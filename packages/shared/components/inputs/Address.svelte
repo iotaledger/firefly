@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { Icon } from 'shared/components'
     import Error from './Error'
     export let address = undefined
