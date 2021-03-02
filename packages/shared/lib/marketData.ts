@@ -188,15 +188,22 @@ export async function fetchMarketData(): Promise<void> {
     }
 
     for (let index = 0; index < MARKETDATA_ENDPOINTS.length; index++) {
+        const endpoint = MARKETDATA_ENDPOINTS[index]
         try {
-            const endpoint = MARKETDATA_ENDPOINTS[index]
+            const abortController = new AbortController()
+            const timerId = setTimeout(
+                () => {
+                    if (abortController) {
+                        abortController.abort();
+                    }
+                },
+                DEFAULT_MARKETDATA_ENDPOINT_TIMEOUT);
 
-            const response: any = await Promise.race([
-                fetch(endpoint, requestOptions),
-                new Promise((_, reject) => {
-                    setTimeout(() => reject(new Error(`Could not fetch from ${endpoint}.`)), DEFAULT_MARKETDATA_ENDPOINT_TIMEOUT)
-                }),
-            ])
+            requestOptions.signal = abortController.signal;
+
+            const response = await fetch(endpoint, requestOptions);
+
+            clearTimeout(timerId)
 
             const marketData: MarketData = await response.json()
 
@@ -233,7 +240,7 @@ export async function fetchMarketData(): Promise<void> {
 
             break
         } catch (err) {
-            console.error(err)
+            console.error(err.name === "AbortError" ? new Error(`Could not fetch from ${endpoint}.`) : err)
         }
     }
 }
