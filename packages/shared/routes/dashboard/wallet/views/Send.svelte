@@ -28,7 +28,7 @@
     let to = undefined
 
     $: accountsDropdownItems = $accounts.map((acc) => format(acc))
-    $: from = account ? format(account) : accountsDropdownItems[0]
+    $: from = $account ? format($account) : accountsDropdownItems[0]
     $: $sendParams.amount = convertUnits(amount, unit, Unit.i)
 
     const handleSendTypeClick = (type) => {
@@ -99,7 +99,7 @@
         </div>
         <div class="w-full h-full flex flex-col justify-between">
             <div>
-                {#if !account}
+                {#if !$account}
                     <div class="block mb-8">
                         <Dropdown
                             value={from?.label || ''}

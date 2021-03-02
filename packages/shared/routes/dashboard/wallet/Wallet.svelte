@@ -173,6 +173,7 @@
     }
 
     function onCreateAccount(alias) {
+        console.log(node, nodes, $network)
         const _create = () =>
             api.createAccount(
                 {
@@ -181,7 +182,7 @@
                         node: $accounts.length > 0 ? $accounts[0].clientOptions.node : node,
                         nodes: $accounts.length > 0 ? $accounts[0].clientOptions.nodes : nodes,
                         // For subsequent accounts, use the network for any of the previous accounts
-                        network: $accounts.length > 0 ? $accounts[0].clientOptions.network : network,
+                        network: $accounts.length > 0 ? $accounts[0].clientOptions.network : $network,
                     },
                 },
                 {

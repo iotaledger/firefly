@@ -14,7 +14,7 @@
     const accounts = getContext<Writable<Account[]>>('walletAccounts')
     const currentAccount = getContext<Readable<Account>>('selectedAccount')
 
-    $: selectedAccount = currentAccount || accounts[0]
+    $: selectedAccount = $currentAccount || $accounts[0]
 
     const handleDropdownSelect = (item) => {
         selectedAccount = item
@@ -28,9 +28,9 @@
     }
 </script>
 
-<div class="w-full h-full flex flex-col justify-between {!currentAccount ? 'p-8' : ''}">
+<div class="w-full h-full flex flex-col justify-between {!$currentAccount ? 'p-8' : ''}">
     <div class="w-full h-full space-y-10 flex flex-auto flex-col flex-shrink-0">
-        {#if !currentAccount}
+        {#if !$currentAccount}
             <div>
                 <div class="w-full flex flex-row justify-between items-start">
                     <Text type="h5" classes="mb-6">{locale('general.receive_funds')}</Text>
@@ -38,7 +38,7 @@
                         <Icon icon="close" classes="text-gray-800 dark:text-white" />
                     </button>
                 </div>
-                <Dropdown valueKey={'name'} value={selectedAccount.alias} items={accounts} onSelect={handleDropdownSelect} />
+                <Dropdown valueKey={'name'} value={selectedAccount.alias} items={$accounts} onSelect={handleDropdownSelect} />
             </div>
         {/if}
         <div

@@ -15,8 +15,8 @@
     const accounts = getContext<Writable<Account[]>>('walletAccounts')
     const walletTransactions = getContext<Readable<MessageWithAccount[]>>('walletTransactions')
 
-    $: transactions = account ? $walletTransactions.filter((tx) => tx.account === $account.index) : []
-    $: navAccounts = account ? $accounts.map(({ id, alias, color }) => ({ id, alias, color, active: $account.id === id })) : []
+    $: transactions = $account ? $walletTransactions.filter((tx) => tx.account === $account.index) : []
+    $: navAccounts = $account ? $accounts.map(({ id, alias, color }) => ({ id, alias, color, active: $account.id === id })) : []
 
     let showActionsModal = false
 
@@ -26,10 +26,10 @@
 </script>
 
 <!-- wait for account to load -->
-{#if accounts && account}
+{#if $accounts && $account}
     <div class="w-full h-full flex flex-col flex-nowrap px-10 pb-10 relative">
         <AccountNavigation {locale} accounts={navAccounts} />
-        {#key account}
+        {#key $account}
             <div class="w-full h-full grid grid-cols-3 gap-x-4">
                 <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
                     <AccountBalance
