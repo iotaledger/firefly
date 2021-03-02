@@ -7,6 +7,8 @@
 
     export let labels = []
     export let datasets = []
+    export let xMaxTicks = 7
+    export let yMaxTicks = 6
     export let color = 'blue' // TODO: each profile has a different color
 
     let canvas
@@ -97,15 +99,16 @@
                                 autoSkip: true,
                                 maxRotation: 0,
                                 minRotation: 0,
+                                maxTicksLimit: xMaxTicks,
                             },
                         },
                     ],
                     yAxes: [
                         {
                             ticks: {
-                                beginAtZero: true,
                                 autoSkip: true,
-                                maxTicksLimit: 6,
+                                beginAtZero: true,
+                                maxTicksLimit: yMaxTicks,
                             },
                         },
                     ],

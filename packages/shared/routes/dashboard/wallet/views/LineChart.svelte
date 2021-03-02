@@ -11,7 +11,7 @@
         selectedChart,
     } from 'shared/lib/chart'
     import { CurrencyTypes } from 'shared/lib/currency'
-    import { TIMEFRAME_MAP } from 'shared/lib/marketData'
+    import { TIMEFRAME_MAP, HistoryDataProps } from 'shared/lib/marketData'
     import { activeProfile } from 'shared/lib/profile'
     import { getContext, onMount } from 'svelte'
 
@@ -23,6 +23,7 @@
 
     let chartData: ChartData = { labels: [], data: [], tooltips: [] }
     let currencyDropdown = []
+    let xMaxTicks
 
     $: datasets = [{ data: chartData.data, tooltips: chartData.tooltips }]
     $: labels = chartData.labels
@@ -34,6 +35,16 @@
             // Account value chart
             if ($selectedAccount) {
                 chartData = getAccountValueData($accountsBalanceHistory[$selectedAccount.index])
+                switch ($chartTimeframe) {
+                    case HistoryDataProps.ONE_HOUR:
+                    case HistoryDataProps.ONE_DAY:
+                        xMaxTicks = 4
+                        break
+                    case HistoryDataProps.SEVEN_DAYS:
+                    case HistoryDataProps.ONE_MONTH:
+                        xMaxTicks = 6
+                        break
+                }
             } else {
                 // Token value chart
                 if ($selectedChart === DashboardChartType.TOKEN) {
@@ -43,6 +54,7 @@
                 if ($selectedChart === DashboardChartType.PORTFOLIO) {
                     chartData = getPortfolioData($walletBalanceHistory)
                 }
+                xMaxTicks = undefined
             }
         }
     }
@@ -87,6 +99,6 @@
         </div>
     </div>
     <div class="flex-auto">
-        <Chart type="line" {datasets} {labels} {color} />
+        <Chart type="line" {datasets} {labels} {color} {xMaxTicks} />
     </div>
 </div>

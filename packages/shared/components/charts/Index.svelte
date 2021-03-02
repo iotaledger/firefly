@@ -11,10 +11,12 @@
     export let labels
     export let tooltips
     export let color
+    export let xMaxTicks
+    export let yMaxTicks
 </script>
 
 {#if type === ChartType.Line}
-    <LineChart {datasets} {labels} {tooltips} {color} />
+    <LineChart {datasets} {labels} {tooltips} {xMaxTicks} {yMaxTicks} {color} />
 {:else if type === ChartType.Bar}
-    <BarChart {datasets} {labels} {tooltips} {color} />
+    <BarChart {datasets} {labels} {tooltips} {xMaxTicks} {yMaxTicks} {color} />
 {/if}

@@ -64,7 +64,6 @@ export function getPortfolioData(balanceHistory: BalanceHistory): ChartData {
         },
         { labels: [], data: [], tooltips: [] }
     )
-    chartData = { ...chartData, labels: skipLabels(chartData.labels) }
     return chartData
 }
 
@@ -80,7 +79,6 @@ export function getTokenData(): ChartData {
             },
             { labels: [], data: [], tooltips: [] }
         )
-    chartData = { ...chartData, labels: skipLabels(chartData.labels) }
     return chartData
 }
 
@@ -178,27 +176,6 @@ export const getAccountActivityData = (account: Account) => {
         labels
     }
     return chartData
-}
-
-function skipLabels(labels: string[]): string[] {
-    let skippedLabels: string[] = labels
-    if (get(chartTimeframe) === HistoryDataProps.SEVEN_DAYS) {
-        let _displayedLabels: string[] = []
-        let _blacklistedLabels: string[] = []
-        skippedLabels = labels.map((label, index) => {
-            if (index === 0 && labels.filter((l) => l === label).length < 4) {
-                _blacklistedLabels.push(label)
-            }
-            if (_displayedLabels.includes(label) || _blacklistedLabels.includes(label)) {
-                return ''
-            } else {
-                _displayedLabels.push(label)
-                return label
-            }
-        })
-    }
-
-    return skippedLabels
 }
 
 function formatLabel(timestamp: number): string {
