@@ -327,18 +327,25 @@ export const getLatestMessages = (accounts: Account[], count = 10): Message[] =>
         messages.push(...account.messages.map((message) => Object.assign({}, message, { account: account.index })));
     });
 
+    console.log(messages)
+
     return messages
         .map(
-            (message) => Object.assign(
-                {},
-                message,
-                {
-                    internal: message.payload.data.essence.data.outputs.some(
-                        (output: Output) => addresses.includes(output.data.address)
-                    ) && message.payload.data.essence.data.inputs.some(
-                        (input: Input) => input.data.metadata ? addresses.includes(input.data.metadata.address) : false
-                    )
-                })
+            (message) => {
+                const outputs = message.payload.data.essence.data.outputs;
+                const inputs = message.payload.data.essence.data.inputs
+
+                return Object.assign(
+                    {},
+                    message,
+                    {
+                        internal: outputs.length && outputs.every(
+                            (output: Output) => addresses.includes(output.data.address)
+                        ) && inputs.length && inputs.every(
+                            (input: Input) => input.data.metadata ? addresses.includes(input.data.metadata.address) : false
+                        )
+                    })
+            }
         )
         .sort((a, b) => {
             return <any>new Date(b.timestamp) - <any>new Date(a.timestamp)
