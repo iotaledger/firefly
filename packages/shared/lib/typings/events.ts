@@ -2,30 +2,80 @@ import type { ResponseTypes } from './bridge'
 import type { Address } from './address'
 import type { Message } from './message'
 
+// Reference: https://github.com/iotaledger/wallet.rs/blob/develop/src/error.rs
 export enum ErrorType {
+    // Generic
     UnknownError,
     GenericError,
     IoError,
     JsonError,
-    StrongholdError,
     ClientError,
-    SqliteError,
-    UrlError,
+    Panic,
     UnexpectedResponse,
+
+    // Account
+    AccountAlreadyImported,
+    LatestAccountIsEmpty,
+    AccountNotEmpty,
+    AccountInitialiseRequiredField,
+    CannotUseIndexIdentifier,
+    AccountAliasAlreadyExists,
+    InvalidBackupFile,
+    InvalidBackupDestination,
+    InsufficientFunds,
+    ZeroAmount,
+    MnemonicEncode,
+    InvalidMnemonic,
+
+    // Address
+    InvalidAddress,
+    InvalidAddressLength,
+    InvalidRemainderValueAddress,
+    AddressBuildRequiredField,
+    Bech32Error,
+
+    // Message
     MessageAboveMaxDepth,
     MessageAlreadyConfirmed,
     MessageNotFound,
-    EmptyNodeList,
-    InvalidAddressLength,
-    InvalidTransactionIdLength,
     InvalidMessageIdLength,
-    Bech32Error,
-    AccountAlreadyImported,
-    StorageDoesntExist,
-    InsufficientFunds,
     MessageNotEmpty,
-    LatestAccountIsEmpty,
-    ZeroAmount,
+    InvalidMessageId,
+    InvalidOutputKind,
+    InvalidTransactionId,
+    InvalidTransactionIdLength,
+
+    // Stronghold
+    StrongholdError,
+
+    // Database
+    SqliteError,
+    StorageDoesntExist,
+    Storage,
+    StorageAdapterNotDefined,
+    StorageExists,
+    StorageAdapterNotSet,
+    StorageIsEncrypted,
+    RecordDecrypt,
+    RecordEncrypt,
+    RecordNotFound,
+
+    // Bee (https://github.com/iotaledger/bee)
+    BeeMessage,
+
+    // Nodes
+    UrlError,
+    EmptyNodeList,
+
+    // Ledger
+    LedgerMiscError,
+    LedgerDongleLocked,
+    LedgerDeniedByUser,
+    LedgerDeviceNotFound,
+    LedgerEssenceTooLarge,
+
+    // Dust output
+    DustError,
 }
 
 export type Callback<T> = (error: string, data: T) => void
