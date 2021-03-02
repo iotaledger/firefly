@@ -5,16 +5,12 @@ import type { Message } from './message'
 // Reference: https://github.com/iotaledger/wallet.rs/blob/develop/src/error.rs
 export enum ErrorType {
     // Generic
-    UnknownError,
-    GenericError,
     IoError,
     JsonError,
     ClientError,
     Panic,
-    UnexpectedResponse,
 
     // Account
-    AccountAlreadyImported,
     LatestAccountIsEmpty,
     AccountNotEmpty,
     AccountInitialiseRequiredField,
@@ -23,7 +19,6 @@ export enum ErrorType {
     InvalidBackupFile,
     InvalidBackupDestination,
     InsufficientFunds,
-    ZeroAmount,
     MnemonicEncode,
     InvalidMnemonic,
 
@@ -32,24 +27,18 @@ export enum ErrorType {
     InvalidAddressLength,
     InvalidRemainderValueAddress,
     AddressBuildRequiredField,
-    Bech32Error,
 
     // Message
-    MessageAboveMaxDepth,
-    MessageAlreadyConfirmed,
     MessageNotFound,
     InvalidMessageIdLength,
-    MessageNotEmpty,
     InvalidMessageId,
     InvalidOutputKind,
     InvalidTransactionId,
-    InvalidTransactionIdLength,
 
     // Stronghold
     StrongholdError,
 
     // Database
-    SqliteError,
     StorageDoesntExist,
     Storage,
     StorageAdapterNotDefined,
@@ -65,7 +54,6 @@ export enum ErrorType {
 
     // Nodes
     UrlError,
-    EmptyNodeList,
 
     // Ledger
     LedgerMiscError,
