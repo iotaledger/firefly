@@ -327,8 +327,6 @@ export const getLatestMessages = (accounts: Account[], count = 10): Message[] =>
         messages.push(...account.messages.map((message) => Object.assign({}, message, { account: account.index })));
     });
 
-    console.log(messages)
-
     return messages
         .map(
             (message) => {
