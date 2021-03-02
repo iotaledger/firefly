@@ -109,6 +109,10 @@
                                 autoSkip: true,
                                 beginAtZero: true,
                                 maxTicksLimit: yMaxTicks,
+                                precision: 5,
+                                callback: function (value, index, values) {
+                                    return Number(value.toString())
+                                },
                             },
                         },
                     ],
