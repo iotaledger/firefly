@@ -668,6 +668,7 @@ export default class ValidatorService {
             [ResponseTypes.StrongholdStatusChange]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.NewTransaction]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.ErrorThrown]: this.createBaseEventValidator().getFirst(),
+            [ResponseTypes.InvalidMessage]: this.createBaseValidator().getFirst(),
             [ResponseTypes.BalanceChange]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.ConfirmationStateChange]: this.createBaseEventValidator().getFirst(),
             // Market data
