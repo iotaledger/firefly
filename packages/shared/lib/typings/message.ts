@@ -5,7 +5,18 @@ type MessageVersion = 1
 
 export interface UTXOInput {
     type: 'UTXO'
-    data: string
+    data: {
+        input: string;
+        metadata?: {
+            address: string;
+            amount: number;
+            index: number;
+            isSpent: boolean;
+            kind: 'SignatureLockedSingle';
+            messageId: string;
+            transactionId: string;
+        }
+    }
 }
 
 export type Input = UTXOInput
