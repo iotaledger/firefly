@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { createEventDispatcher } from 'svelte'
     import { Logo, Profile, Icon } from 'shared/components'
     import { profiles, setActiveProfile } from 'shared/lib/profile'
@@ -19,7 +19,7 @@
 </script>
 
 {#if mobile}
-    <div>foo</div>
+    <div>Not yet implemented</div>
 {:else}
     <section class="flex flex-col h-screen bg-white dark:bg-gray-900 items-center">
         <Logo width="64px" logo="logo-firefly" classes="absolute top-20 transform left-1/2 -translate-x-1/2" />
@@ -32,11 +32,12 @@
                         onClick={handleContinueClick}
                         name={profile.name}
                         id={profile.id}
-                        isDeveloper={profile.isDeveloperProfile} />
+                        isDeveloper={profile.isDeveloperProfile}
+                        classes="cursor-pointer" />
                 </div>
             {/each}
             <div class="mb-6">
-                <Profile onClick={addProfile} name="Add Profile" classes="border-solid border-2 border-gray-400">
+                <Profile onClick={addProfile} name={locale('general.add_profile')} classes="border-solid border-2 border-gray-400 cursor-pointer">
                     <Icon icon="plus" classes="text-blue-500" />
                 </Profile>
             </div>

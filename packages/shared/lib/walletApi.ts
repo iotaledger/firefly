@@ -22,6 +22,16 @@ type CallbacksPattern = {
     onError: (message: MessageResponse) => void
 }
 
+const eventsApiToResponseTypeMap = {
+    onError: ResponseTypes.ErrorThrown,
+    onBalanceChange: ResponseTypes.BalanceChange,
+    onNewTransaction: ResponseTypes.NewTransaction,
+    onConfirmationStateChange: ResponseTypes.ConfirmationStateChange,
+    onReattachment: ResponseTypes.Reattachment,
+    onBroadcast: ResponseTypes.Broadcast,
+    onStrongholdStatusChange: ResponseTypes.StrongholdStatusChange,
+}
+
 const apiToResponseTypeMap = {
     removeAccount: ResponseTypes.RemovedAccount,
     createAccount: ResponseTypes.CreatedAccount,
@@ -38,13 +48,6 @@ const apiToResponseTypeMap = {
     restoreBackup: ResponseTypes.BackupRestored,
     send: ResponseTypes.SentTransfer,
     setStrongholdPassword: ResponseTypes.StrongholdPasswordSet,
-    onError: ResponseTypes.ErrorThrown,
-    onBalanceChange: ResponseTypes.BalanceChange,
-    onNewTransaction: ResponseTypes.NewTransaction,
-    onConfirmationStateChange: ResponseTypes.ConfirmationStateChange,
-    onReattachment: ResponseTypes.Reattachment,
-    onBroadcast: ResponseTypes.Broadcast,
-    onStrongholdStatusChange: ResponseTypes.StrongholdStatusChange,
     generateMnemonic: ResponseTypes.GeneratedMnemonic,
     storeMnemonic: ResponseTypes.StoredMnemonic,
     verifyMnemonic: ResponseTypes.VerifiedMnemonic,
@@ -58,6 +61,7 @@ const apiToResponseTypeMap = {
     lockStronghold: ResponseTypes.LockedStronghold,
     changeStrongholdPassword: ResponseTypes.StrongholdPasswordChanged,
     getLedgerDeviceStatus: ResponseTypes.LedgerStatus,
+    ...eventsApiToResponseTypeMap
 }
 
 /**
@@ -98,22 +102,16 @@ const defaultCallbacks = {
     },
 }
 
+const eventsApiResponseTypes = Object.values(eventsApiToResponseTypeMap)
+
 /**
  * Response subscriber.
  * Receives messages from wallet.rs.
  */
 Wallet.onMessage((message: MessageResponse) => {
     const _deleteCallbackId = (_id: string) => {
-        const isEventMessage = [
-            ResponseTypes.ErrorThrown,
-            ResponseTypes.BalanceChange,
-            ResponseTypes.NewTransaction,
-            ResponseTypes.ConfirmationStateChange,
-            ResponseTypes.Reattachment,
-            ResponseTypes.Broadcast,
-        ].includes(message.type)
-
-        if (!isEventMessage) {
+        // Do not delete callback ids for events api methods
+        if (!eventsApiResponseTypes.includes(message.type)) {
             delete callbacksStore[_id]
         }
     }
@@ -126,8 +124,6 @@ Wallet.onMessage((message: MessageResponse) => {
             const { onError } = callbacksStore[id]
 
             onError(message)
-
-            _deleteCallbackId(id)
         } else {
             /** TODO: In case of unknown ids, add validation failure to error log */
         }
@@ -138,6 +134,9 @@ Wallet.onMessage((message: MessageResponse) => {
 
         message.type === 'Error' || message.type === 'Panic' ? onError(message) : onSuccess(message)
     }
+
+    // Delete callback id from callback store
+    _deleteCallbackId(message.id)
 })
 
 /**

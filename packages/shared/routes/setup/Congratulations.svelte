@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { onMount, createEventDispatcher } from 'svelte'
     import { OnboardingLayout, Illustration, Text, Button } from 'shared/components'
     import { newProfile, saveProfile, setActiveProfile } from 'shared/lib/profile'

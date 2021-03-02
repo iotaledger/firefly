@@ -98,6 +98,7 @@ export function syncAccounts(bridge: Bridge, __ids: CommunicationIds): Promise<s
         actorId: __ids.actorId,
         id: __ids.messageId,
         cmd: 'SyncAccounts',
+        payload: {}
     })
 }
 

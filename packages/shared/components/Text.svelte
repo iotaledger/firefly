@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     export let type = 'p'
     export let secondary = false
     export let disabled = false

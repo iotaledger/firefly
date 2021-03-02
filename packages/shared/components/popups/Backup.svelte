@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { date } from 'svelte-i18n'
     import { Text, Button } from 'shared/components'
     import { getBackupWarningColor } from 'shared/lib/helpers'
