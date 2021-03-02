@@ -1,4 +1,4 @@
-import type { Event, ErrorEventPayload, BalanceChangeEventPayload, TransactionEventPayload } from './events'
+import type { Event, ErrorEventPayload, BalanceChangeEventPayload, TransactionEventPayload, TransferProgressEventPayload } from './events'
 import type { Address } from './address'
 import type { AccountIdentifier, Account, Balance, SyncedAccount } from './account'
 import type { Message } from './message'
@@ -48,6 +48,7 @@ export enum ResponseTypes {
     Reattachment = 'Reattachment',
     Broadcast = 'Broadcast',
     StrongholdStatusChange = 'StrongholdStatusChange',
+    TransferProgress = 'TransferProgress',
     GeneratedMnemonic = 'GeneratedMnemonic',
     StoredMnemonic = 'StoredMnemonic',
     VerifiedMnemonic = 'VerifiedMnemonic',
@@ -136,5 +137,6 @@ export type MessageResponse =
     | Event<ErrorEventPayload>
     | Event<BalanceChangeEventPayload>
     | Event<TransactionEventPayload>
+    | Event<TransferProgressEventPayload>
 
 export type Bridge = (message: BridgeMessage) => Promise<string>

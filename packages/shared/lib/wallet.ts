@@ -3,7 +3,7 @@ import type { Actor } from './typings/bridge'
 import type { Address } from './typings/address'
 import type { Message } from './typings/message'
 import type { Account as BaseAccount } from './typings/account'
-import type { Event, TransactionEventPayload, ConfirmationStateChangeEventPayload, BalanceChangeEventPayload } from './typings/events'
+import type { Event, TransactionEventPayload, ConfirmationStateChangeEventPayload, BalanceChangeEventPayload, TransferProgressEventPayload, TransferProgressEventType } from './typings/events'
 import { mnemonic } from 'shared/lib/app'
 import { formatUnit } from 'shared/lib/units'
 import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
@@ -78,6 +78,8 @@ export const resetWallet = () => {
 }
 
 export const selectedAccountId = writable<string | null>(null)
+
+export const transferState = writable<TransferProgressEventType | null>(null)
 
 export const loggedIn = persistent<boolean>('loggedIn', false)
 
@@ -235,6 +237,15 @@ export const initialiseListeners = () => {
         onError(error) {
             console.error(error)
         },
+    })
+
+    api.onTransferProgress({
+        onSuccess(response: Event<TransferProgressEventPayload>) {
+            transferState.set(response.payload.event.type)
+        },
+        onError(error) {
+            console.error(error)
+        }
     })
 }
 

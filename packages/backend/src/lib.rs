@@ -7,11 +7,11 @@ use iota_wallet::{
     account_manager::{AccountManager, ManagerStorage, DEFAULT_STORAGE_FOLDER},
     event::{
         on_balance_change, on_broadcast, on_confirmation_state_change, on_error,
-        on_new_transaction, on_reattachment, on_stronghold_status_change,
+        on_new_transaction, on_reattachment, on_stronghold_status_change, on_transfer_progress,
         remove_balance_change_listener, remove_broadcast_listener,
         remove_confirmation_state_change_listener, remove_error_listener,
         remove_new_transaction_listener, remove_reattachment_listener,
-        remove_stronghold_status_change_listener, EventId,
+        remove_stronghold_status_change_listener, remove_transfer_progress_listener, EventId,
     },
 };
 use once_cell::sync::Lazy;
@@ -56,6 +56,7 @@ pub enum EventType {
     Reattachment,
     Broadcast,
     StrongholdStatusChange,
+    TransferProgress,
 }
 
 impl TryFrom<&str> for EventType {
@@ -70,6 +71,7 @@ impl TryFrom<&str> for EventType {
             "Reattachment" => EventType::Reattachment,
             "Broadcast" => EventType::Broadcast,
             "StrongholdStatusChange" => EventType::StrongholdStatusChange,
+            "TransferProgress" => EventType::TransferProgress,
             _ => return Err(format!("invalid event name {}", value)),
         };
         Ok(event_type)
@@ -139,6 +141,7 @@ pub async fn destroy<A: Into<String>>(actor_id: A) {
                 &EventType::StrongholdStatusChange => {
                     remove_stronghold_status_change_listener(event_id).await
                 }
+                &EventType::TransferProgress => remove_transfer_progress_listener(event_id).await,
             };
         }
 
@@ -306,6 +309,12 @@ pub async fn listen<A: Into<String>, S: Into<String>>(actor_id: A, id: S, event_
         }
         EventType::StrongholdStatusChange => {
             on_stronghold_status_change(move |event| {
+                let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
+            })
+            .await
+        }
+        EventType::TransferProgress => {
+            on_transfer_progress(move |event| {
                 let _ = respond(&actor_id, serialize_event(id.clone(), event_type, &event));
             })
             .await
