@@ -66,7 +66,6 @@
                             initialise(profile.id, getStoragePath(path, profile.name))
                             api.setStoragePassword(pinCode.toString(), {
                                 onSuccess() {
-                                    isBusy = false
                                     dispatch('next')
                                 },
                                 onError(error) {
