@@ -34,6 +34,8 @@
 
     let isGeneratingAddress = false
 
+    let createAccountError = ''
+
     function getAccountMeta(accountId, callback) {
         api.getBalance(accountId, {
             onSuccess(balanceResponse) {
@@ -189,13 +191,16 @@
                                     }
                                 })
                             },
-                            onError(error) {
-                                console.error(error)
+                            onError(err) {
+                                console.error(err)
                             },
                         })
                     },
-                    onError(error) {
-                        console.error(error)
+                    onError(err) {
+                        // TODO: Add proper error handling
+                        if (err.payload.error.includes('message history and balance')){
+                            createAccountError = locale('error.account.empty')
+                        }
                     },
                 }
             )
@@ -377,7 +382,7 @@
                 <!-- Total Balance, Accounts list & Send/Receive -->
                 <div class="flex flex-auto flex-col flex-shrink-0 h-full">
                     {#if $walletRoute === WalletRoutes.CreateAccount}
-                        <CreateAccount onCreate={onCreateAccount} {locale} />
+                        <CreateAccount error={createAccountError} onCreate={onCreateAccount} {locale} />
                     {:else}
                         <WalletBalance {locale} />
                         <DashboardPane classes="-mt-5 h-full">

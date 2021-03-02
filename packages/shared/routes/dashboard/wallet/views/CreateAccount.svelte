@@ -5,14 +5,25 @@
 
     export let locale
     export let onCreate
+    export let error = ''
 
     let accountName
 
+    const MAX_ACCOUNT_NAME_LENGTH = 20
+
     const handleCreateClick = () => {
+        resetError()
+        if (accountName.length > MAX_ACCOUNT_NAME_LENGTH) {
+            return error = locale('error.account.length')
+        }
         onCreate(accountName)
     }
     const handleCancelClick = () => {
+        resetError()
         walletRoute.set(WalletRoutes.Init)
+    }
+    const resetError = () => {
+        error = ''
     }
 </script>
 
@@ -22,7 +33,7 @@
             <Text type="h5">{locale('general.create_account')}</Text>
         </div>
         <div class="w-full h-full flex flex-col justify-between">
-            <Input bind:value={accountName} placeholder={locale('general.account_name')} />
+            <Input {error} bind:value={accountName} placeholder={locale('general.account_name')} />
         </div>
     </div>
     <!-- Action -->

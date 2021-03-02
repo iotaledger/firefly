@@ -497,6 +497,10 @@
             "length": "Your PIN must be 6 digits long.",
             "match": "PINs do not match.",
             "incorrect": "Your current PIN is incorrect."
+        },
+        "account": {
+            "length": "Your account name must be under 20 characters.",
+            "empty": "You must use your latest account before creating a new one."
         }
     }
 }
