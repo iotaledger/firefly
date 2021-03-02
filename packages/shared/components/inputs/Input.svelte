@@ -6,11 +6,18 @@
     export let placeholder = ''
     export let type = 'text'
     export let autofocus = false
+    export let submitHandler = undefined
 
     let inputElement
 
     const handleInput = (event) => {
         value = event.target.value
+    }
+
+    const handleKeyDown = (e) => {
+        if (e.keyCode === 13 && submitHandler) {
+            submitHandler()
+        }
     }
 
     onMount(() => {
@@ -38,4 +45,5 @@
     bind:this={inputElement}
     class={`w-full relative bg-white border border-solid border-gray-300 hover:border-gray-500 focus:border-gray-500 rounded-xl text-gray text-12 leading-140 font-bold ${classes}`}
     on:input={handleInput}
+    on:keydown={handleKeyDown}
     {placeholder} />
