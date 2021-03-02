@@ -1,7 +1,7 @@
 import { writable, Writable, get } from 'svelte/store'
 import type { Actor } from './typings/bridge'
 import type { Address } from './typings/address'
-import type { Message } from './typings/message'
+import type { Message, Output, Input } from './typings/message'
 import type { Account as BaseAccount } from './typings/account'
 import type { Event, TransactionEventPayload, ConfirmationStateChangeEventPayload, BalanceChangeEventPayload, TransferProgressEventPayload, TransferProgressEventType } from './typings/events'
 import { mnemonic } from 'shared/lib/app'
@@ -12,6 +12,7 @@ import { showSystemNotification } from 'shared/lib/notifications'
 import { _ } from 'shared/lib/i18n'
 import { persistent } from 'shared/lib/helpers'
 import type { SyncedAccount } from './typings/account'
+import { account, message } from './typings'
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
@@ -326,21 +327,35 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
  * @returns {Message[]}
  */
 export const getLatestMessages = (accounts: Account[], count = 10): Message[] => {
-    const messages: Message[] = accounts.reduce(
-        (messages, account) =>
-            messages.concat(
-                account.messages.map((message, idx) =>
-                    Object.assign({}, message, {
-                        account: account.index,
-                        internal: idx % 2 !== 0,
-                    })
-                )
-            ),
-        []
-    )
+    const messages: Message[] = [];
+    const addresses: string[] = [];
+
+    accounts.forEach((account) => {
+        account.addresses.forEach((address: Address) => {
+            addresses.push(address.address);
+        })
+
+        messages.push(...account.messages.map((message) => Object.assign({}, message, { account: account.index })));
+    });
 
     return messages
-        .slice()
+        .map(
+            (message) => {
+                const outputs = message.payload.data.essence.data.outputs;
+                const inputs = message.payload.data.essence.data.inputs
+
+                return Object.assign(
+                    {},
+                    message,
+                    {
+                        internal: outputs.length && outputs.every(
+                            (output: Output) => addresses.includes(output.data.address)
+                        ) && inputs.length && inputs.every(
+                            (input: Input) => input.data.metadata ? addresses.includes(input.data.metadata.address) : false
+                        )
+                    })
+            }
+        )
         .sort((a, b) => {
             return <any>new Date(b.timestamp) - <any>new Date(a.timestamp)
         })
