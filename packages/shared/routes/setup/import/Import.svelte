@@ -3,7 +3,6 @@
     import { Transition } from 'shared/components'
     import { Import, TextImport, FileImport, BackupPassword, Success } from './views/'
     import { api } from 'shared/lib/wallet'
-    import { DEFAULT_NODES as nodes } from 'shared/lib/network'
 
     export let locale
     export let mobile
@@ -67,7 +66,7 @@
                 const { password } = params
 
                 try {
-                    await new Promise((resolve, reject) => {
+                    await new Promise<void>((resolve, reject) => {
                         api.restoreBackup(importFilePath, password, {
                             onSuccess() {
                                 resolve()

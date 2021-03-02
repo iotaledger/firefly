@@ -2,7 +2,7 @@
     import { AccountTile, Button, Text } from 'shared/components'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { Account, selectedAccountId } from 'shared/lib/wallet'
+    import { selectedAccountId, WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Writable } from 'svelte/store'
     import { Receive, Send } from '.'
@@ -12,7 +12,8 @@
     export let internalTransfer
     export let generateAddress
 
-    const accounts = getContext<Writable<Account[]>>('walletAccounts')
+    const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
+    const accountsLoaded = getContext<Writable<boolean>>('walletAccountsLoaded')
 
     function handleAccountClick(accountId) {
         selectedAccountId.set(accountId)
@@ -35,9 +36,13 @@
         <div data-label="accounts" class="w-full h-full flex flex-col flex-no-wrap justify-start mb-6">
             <div class="flex flex-row mb-6 justify-between items-center">
                 <Text type="h5">{locale('general.accounts')}</Text>
-                <Button onClick={handleCreateClick} secondary small icon="plus">{locale('actions.create')}</Button>
+                <Button onClick={handleCreateClick} secondary small icon="plus" disabled={!$accountsLoaded}>
+                    {locale('actions.create')}
+                </Button>
             </div>
-            {#if $accounts.length > 0}
+            {#if !$accountsLoaded}
+                <Text overrideColor classes={'text-gray-600'}>{locale('general.loading_accounts')}</Text>
+            {:else if $accounts.length > 0}
                 <div class="grid grid-cols-{$accounts.length <= 2 ? $accounts.length : '3'} gap-2 w-full flex-auto">
                     {#each $accounts as account}
                         <AccountTile

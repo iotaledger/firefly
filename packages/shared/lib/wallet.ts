@@ -1,21 +1,20 @@
-import { writable, Writable, get } from 'svelte/store'
-import type { Actor } from './typings/bridge'
-import type { Address } from './typings/address'
-import type { Message } from './typings/message'
-import type { Account as BaseAccount } from './typings/account'
-import type { Event, TransactionEventPayload, ConfirmationStateChangeEventPayload, BalanceChangeEventPayload } from './typings/events'
 import { mnemonic } from 'shared/lib/app'
-import { formatUnit } from 'shared/lib/units'
 import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
-import { activeProfile, updateProfile } from 'shared/lib/profile'
-import { showSystemNotification } from 'shared/lib/notifications'
-import { _ } from 'shared/lib/i18n'
 import { persistent } from 'shared/lib/helpers'
-import type { SyncedAccount } from './typings/account'
+import { isLocaleLoaded, _ } from 'shared/lib/i18n'
+import { showSystemNotification } from 'shared/lib/notifications'
+import { activeProfile, updateProfile } from 'shared/lib/profile'
+import { formatUnit } from 'shared/lib/units'
+import { get, writable, Writable } from 'svelte/store'
+import type { Account, SyncedAccount } from './typings/account'
+import type { Address } from './typings/address'
+import type { Actor } from './typings/bridge'
+import type { Message } from './typings/message'
+import type { ApiClient } from './walletApi'
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
-export interface Account extends BaseAccount {
+export interface WalletAccount extends Account {
     depositAddress: Address;
     rawIotaBalance: number;
     balance: string;
@@ -44,7 +43,8 @@ export type BalanceOverview = {
 
 type WalletState = {
     balanceOverview: Writable<BalanceOverview>
-    accounts: Writable<Account[]>
+    accounts: Writable<WalletAccount[]>
+    accountsLoaded: Writable<boolean>
 }
 
 /** Active actors state */
@@ -63,11 +63,12 @@ export const wallet = writable<WalletState>({
         balanceRaw: 0,
         balanceFiat: '0.00 USD',
     }),
-    accounts: writable<Account[]>([]),
+    accounts: writable<WalletAccount[]>([]),
+    accountsLoaded: writable<boolean>(false),
 })
 
 export const resetWallet = () => {
-    const { balanceOverview, accounts } = get(wallet)
+    const { balanceOverview, accounts, accountsLoaded } = get(wallet)
     balanceOverview.set({
         incoming: '0 Mi',
         incomingRaw: 0,
@@ -78,6 +79,7 @@ export const resetWallet = () => {
         balanceFiat: '0.00 USD',
     })
     accounts.set([])
+    accountsLoaded.set(false)
     selectedAccountId.set(null)
     loggedIn.set(false)
 }
@@ -86,7 +88,7 @@ export const selectedAccountId = writable<string | null>(null)
 
 export const loggedIn = persistent<boolean>('loggedIn', false)
 
-export const api = window['__WALLET_API__']
+export const api: ApiClient = window['__WALLET_API__']
 
 export const getStoragePath = (appPath: string, profileName: string): string => {
     return `${appPath}/${WALLET_STORAGE_DIRECTORY}/${profileName}`
@@ -134,18 +136,6 @@ export const generateRecoveryPhrase = (): Promise<string[]> =>
         })
     })
 
-export const verifyRecoveryPhrase = (phrase): Promise<void> =>
-    new Promise((resolve, reject) => {
-        api.verifyMnemonic(phrase, {
-            onSuccess(response) {
-                resolve(response)
-            },
-            onError(error) {
-                reject(error)
-            },
-        })
-    })
-
 export const requestMnemonic = async () => {
     let recoveryPhrase = await generateRecoveryPhrase()
     mnemonic.set(recoveryPhrase)
@@ -175,7 +165,7 @@ export const initialiseListeners = () => {
      * Event listener for new message event
      */
     api.onNewTransaction({
-        onSuccess(response: Event<TransactionEventPayload>) {
+        onSuccess(response) {
             if (get(activeProfile).settings.notifications) {
                 const accounts = get(wallet).accounts
                 const account = get(accounts).find((account) => account.id === response.payload.accountId)
@@ -198,7 +188,7 @@ export const initialiseListeners = () => {
     })
 
     api.onConfirmationStateChange({
-        onSuccess(response: Event<ConfirmationStateChangeEventPayload>) {
+        onSuccess(response) {
             if (get(activeProfile).settings.notifications) {
                 const accounts = get(wallet).accounts
                 const account = get(accounts).find((account) => account.id === response.payload.accountId)
@@ -222,7 +212,7 @@ export const initialiseListeners = () => {
      * Event listener for balance change event
      */
     api.onBalanceChange({
-        onSuccess(response: Event<BalanceChangeEventPayload>) {
+        onSuccess(response) {
             const { payload: { accountId, address, balanceChange } } = response;
 
             updateAccountAfterBalanceChange(accountId, address, balanceChange.received, balanceChange.spent)
@@ -264,7 +254,7 @@ export const updateAccountAfterBalanceChange = (
             if (storedAccount.id === accountId) {
                 const rawIotaBalance = storedAccount.rawIotaBalance - spentBalance + receivedBalance;
 
-                return Object.assign({}, storedAccount, {
+                return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
                     rawIotaBalance,
                     balance: formatUnit(rawIotaBalance, 0),
                     balanceEquiv: `${convertToFiat(
@@ -274,7 +264,7 @@ export const updateAccountAfterBalanceChange = (
                     )} ${get(activeProfile).settings.currency}`,
                     addresses: storedAccount.addresses.map((_address: Address) => {
                         if (_address.address === address.address) {
-                            return Object.assign({}, _address, address)
+                            return Object.assign<Address, Partial<Address>, Partial<Address>>({} as Address, _address, address)
                         }
 
                         return _address
@@ -297,9 +287,9 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
     const { accounts } = get(wallet)
 
     accounts.update((storedAccounts) => {
-        return storedAccounts.map((storedAccount: Account) => {
+        return storedAccounts.map((storedAccount: WalletAccount) => {
             if (storedAccount.id === accountId) {
-                return Object.assign({}, storedAccount, {
+                return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
                     messages: [message, ...storedAccount.messages]
                 })
             }
@@ -314,24 +304,24 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
  *
  * @method getLatestMessages
  *
- * @param {Account} accounts
+ * @param {WalletAccount} accounts
  * @param {number} [count]
  *
  * @returns {Message[]}
  */
-export const getLatestMessages = (accounts: Account[], count = 10): MessageWithAccount[] => {
-    const messages: MessageWithAccount[] = accounts.reduce(
+export const getLatestMessages = (accounts: WalletAccount[], count = 10): MessageWithAccount[] => {
+    const messages: MessageWithAccount[] = accounts ? accounts.reduce(
         (messages, account) =>
             messages.concat(
                 account.messages.map((message, idx) =>
-                    Object.assign({}, message, {
+                    Object.assign<MessageWithAccount, Partial<Message>, Partial<MessageWithAccount>>({} as MessageWithAccount, message, {
                         account: account.index,
                         internal: idx % 2 !== 0,
                     })
                 )
             ),
         []
-    )
+    ) : []
 
     return messages
         .slice()
@@ -356,7 +346,7 @@ export const updateBalanceOverview = (balance: number, incoming: number, outgoin
     const { balanceOverview } = get(wallet);
 
     balanceOverview.update((overview) => {
-        return Object.assign({}, overview, {
+        return Object.assign<BalanceOverview, BalanceOverview, Partial<BalanceOverview>>({} as BalanceOverview, overview, {
             incoming: formatUnit(incoming, 2),
             incomingRaw: incoming,
             outgoing: formatUnit(outgoing, 2),
@@ -382,36 +372,40 @@ export const updateBalanceOverview = (balance: number, incoming: number, outgoin
 * @returns {void}
 */
 export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
-    const _update = (existingPayload, newPayload, prop) => {
-        const existingPayloadMap = existingPayload.reduce((acc, object) => {
-            acc[object[prop]] = object
-
-            return acc
-        }, {})
-
-        const newPayloadMap = newPayload.reduce((acc, object) => {
-            acc[object[prop]] = object
-
-            return acc
-        }, {})
-
-        return Object.values(Object.assign({}, existingPayloadMap, newPayloadMap))
-    }
-
     const { accounts } = get(wallet)
 
     accounts.update((storedAccounts) => {
         return storedAccounts.map((storedAccount) => {
             const syncedAccount = syncedAccounts.find((_account) => _account.id === storedAccount.id)
 
-            return Object.assign({}, storedAccount, {
+            console.log(storedAccount)
+            console.log(storedAccounts)
+
+
+            return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
                 // Update deposit address
                 depositAddress: syncedAccount.depositAddress,
                 // If we have received a new address, simply add it;
                 // If we have received an existing address, update the properties.
-                addresses: _update(storedAccount.addresses, syncedAccount.addresses, 'address'),
-                messages: _update(storedAccount.messages, syncedAccount.messages, 'id'),
+                addresses: mergeProps(storedAccount.addresses, syncedAccount.addresses, 'address'),
+                messages: mergeProps(storedAccount.messages, syncedAccount.messages, 'id'),
             })
         })
     })
 };
+
+function mergeProps<T>(existingPayload: T[], newPayload: T[], prop: string): T[] {
+    const existingPayloadMap = existingPayload.reduce((acc, object) => {
+        acc[object[prop]] = object
+
+        return acc
+    }, {})
+
+    const newPayloadMap = newPayload.reduce((acc, object) => {
+        acc[object[prop]] = object
+
+        return acc
+    }, {})
+
+    return Object.values(Object.assign({}, existingPayloadMap, newPayloadMap))
+}

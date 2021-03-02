@@ -454,6 +454,7 @@
         "wallet": "Wallet",
         "help": "Help",
         "no_accounts": "You have no accounts, please create one.",
+        "loading_accounts": "Loading accounts, please wait...",
         "add_profile": "Add Profile"
     },
     "dates": {

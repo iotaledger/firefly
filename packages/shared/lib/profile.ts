@@ -179,7 +179,7 @@ export const removeProfile = (id: string): void => {
  *
  * @returns {void}
  */
-export const updateProfile = (path: string, value: string | boolean | Date | AvailableExchangeRates) => {
+export const updateProfile = (path: string, value: string | boolean | Date | AvailableExchangeRates | Node | Node[]) => {
     const _update = (_profile) => {
         const pathList = path.split('.')
 
