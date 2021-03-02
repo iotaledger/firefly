@@ -1,5 +1,7 @@
 <script>
+    import { clickOutside } from 'shared/lib/actions'
     import { Icon, Text } from 'shared/components'
+
     export let value = undefined
     export let label = undefined
     export let disabled = false
@@ -8,12 +10,14 @@
     export let items = []
     export let small = false
     export let onSelect = () => {}
+
     let dropdown = false
-    const clickOutside = () => {
-        dropdown = false
-    }
 
     items = sortItems ? items.sort((a, b) => (a.label > b.label ? 1 : -1)) : items
+
+    const handleClickOutside = () => {
+        dropdown = false
+    }
 </script>
 
 <style type="text/scss">
@@ -63,7 +67,6 @@
     }
 </style>
 
-<svelte:window on:click={clickOutside} />
 {#if label}
     <Text type="p" classes="mb-2" smaller>{label}</Text>
 {/if}
@@ -74,6 +77,8 @@
         e.stopPropagation()
         dropdown = !dropdown
     }}
+    use:clickOutside
+    on:clickOutside={handleClickOutside}
     class:small
     class:disabled>
     <Text type="p" smaller {disabled}>{value}</Text>
