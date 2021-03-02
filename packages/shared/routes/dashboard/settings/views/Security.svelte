@@ -5,6 +5,7 @@
     import { updateProfile, activeProfile, removeProfile } from 'shared/lib/profile'
     import { api, destroyActor } from 'shared/lib/wallet'
     import { openPopup } from 'shared/lib/popup'
+    import passwordInfo from 'shared/lib/password';
 
     function assignTimeoutOptionLabel(timeInMinutes) {
         let label = ''
