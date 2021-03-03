@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { createEventDispatcher } from 'svelte'
     import { OnboardingLayout, Text, Button, Scroller, Checkbox } from 'shared/components'
     export let locale

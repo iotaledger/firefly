@@ -30,6 +30,7 @@ const eventsApiToResponseTypeMap = {
     onReattachment: ResponseTypes.Reattachment,
     onBroadcast: ResponseTypes.Broadcast,
     onStrongholdStatusChange: ResponseTypes.StrongholdStatusChange,
+    onTransferProgress: ResponseTypes.TransferProgress,
 }
 
 const apiToResponseTypeMap = {

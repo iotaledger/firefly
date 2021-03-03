@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import Chart from 'chart.js'
     import tailwindConfig from 'shared/tailwind.config.js'
     import { afterUpdate, onMount } from 'svelte'

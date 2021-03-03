@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     export let width = undefined
     export let height = undefined
     export let classes = ''

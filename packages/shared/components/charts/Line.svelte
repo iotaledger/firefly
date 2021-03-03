@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import Chart from 'chart.js'
     import { convertHexToRGBA } from 'shared/lib/helpers'
     import tailwindConfig from 'shared/tailwind.config.js'

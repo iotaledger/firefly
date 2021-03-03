@@ -68,20 +68,28 @@
                 }
             }
         }
-        e.preventDefault();
+        e.preventDefault()
     }
 
-    const selectFirstEmpty = (e) => {
-        if (e.target === root) {
-            let sibling = root.firstChild.firstChild
-            for (let j = 0; j < PIN_LENGTH; j++) {
-                if (!inputs[j] || j === PIN_LENGTH - 1) {
-                    sibling.focus()
-                    return
-                }
-                sibling = sibling.nextElementSibling
+    const selectFirstEmpty = () => {
+        let sibling = root.firstChild.firstChild
+        for (let j = 0; j < PIN_LENGTH; j++) {
+            if (!inputs[j] || j === PIN_LENGTH - 1) {
+                sibling.focus()
+                return
             }
+            sibling = sibling.nextElementSibling
         }
+    }
+
+    const selectFirstEmptyRoot = (e) => {
+        if (e.target === root) {
+            selectFirstEmpty()
+        }
+    }
+
+    export function focus() {
+        selectFirstEmpty()
     }
 </script>
 
@@ -143,8 +151,8 @@
     class={`flex items-center justify-center w-full relative z-0 bg-gray-50 border border-solid border-gray-300 rounded-xl ${classes}`}
     class:disabled
     bind:this={root}
-    on:click={selectFirstEmpty}
-    on:focus={selectFirstEmpty}
+    on:click={selectFirstEmptyRoot}
+    on:focus={selectFirstEmptyRoot}
     tabindex="0">
     {#if inputs.length}
         <div class="input-wrapper absolute items-center w-full flex flex-row flex-no-wrap justify-between">

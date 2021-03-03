@@ -1,29 +1,30 @@
 <script lang="typescript">
-    import { setContext, onMount } from 'svelte'
-    import { get, derived } from 'svelte/store'
-    import { updateProfile } from 'shared/lib/profile'
+    import { DashboardPane } from 'shared/components'
+    import { sendParams } from 'shared/lib/app'
+    import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
+    import { deepLinkRequestActive } from 'shared/lib/deepLinking'
+    import { priceData } from 'shared/lib/marketData'
+    import { DEFAULT_NODE as node, DEFAULT_NODES as nodes, network } from 'shared/lib/network'
+    import { openPopup } from 'shared/lib/popup'
+    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { walletRoute } from 'shared/lib/router'
+    import { WalletRoutes } from 'shared/lib/typings/routes'
+    import { formatUnit } from 'shared/lib/units'
+    import type { Account as AccountType, AccountMessage, BalanceHistory, BalanceOverview } from 'shared/lib/wallet'
     import {
         api,
-        getLatestMessages,
         getAccountsBalanceHistory,
+        getLatestMessages,
         getWalletBalanceHistory,
         initialiseListeners,
         selectedAccountId,
-        wallet,
         updateAccounts,
         updateBalanceOverview,
+        wallet,
     } from 'shared/lib/wallet'
-    import { deepLinkRequestActive } from 'shared/lib/deepLinking'
-    import { activeProfile } from 'shared/lib/profile'
-    import { formatUnit } from 'shared/lib/units'
-    import { DashboardPane } from 'shared/components'
-    import { Account, LineChart, WalletHistory, Security, CreateAccount, WalletBalance, WalletActions } from './views/'
-    import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
-    import { openPopup } from 'shared/lib/popup'
-    import { walletRoute } from 'shared/lib/router'
-    import { WalletRoutes } from 'shared/lib/typings/routes'
-    import { sendParams } from 'shared/lib/app'
-    import { priceData } from 'shared/lib/marketData'
+    import { onMount, setContext } from 'svelte'
+    import { derived, get, Readable, Writable } from 'svelte/store'
+    import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
 
     export let locale
 
@@ -44,12 +45,12 @@
         $accounts.find((acc) => acc.id === $selectedAccountId)
     )
 
-    setContext('walletBalance', balanceOverview)
-    setContext('walletAccounts', accounts)
-    setContext('walletTransactions', transactions)
-    setContext('accountsBalanceHistory', accountsBalanceHistory)
-    setContext('walletBalanceHistory', walletBalanceHistory)
-    setContext('selectedAccount', selectedAccount)
+    setContext<Writable<BalanceOverview>>('walletBalance', balanceOverview)
+    setContext<Writable<AccountType[]>>('walletAccounts', accounts)
+    setContext<Readable<AccountMessage[]>>('walletTransactions', transactions)
+    setContext<Readable<AccountType>>('selectedAccount', selectedAccount)
+    setContext<Readable<BalanceHistory>>('accountsBalanceHistory', accountsBalanceHistory)
+    setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
 
@@ -188,10 +189,10 @@
                 {
                     alias,
                     clientOptions: {
-                        node: $accounts[0].clientOptions.node,
-                        nodes: $accounts[0].clientOptions.nodes,
+                        node: $accounts.length > 0 ? $accounts[0].clientOptions.node : node,
+                        nodes: $accounts.length > 0 ? $accounts[0].clientOptions.nodes : nodes,
                         // For subsequent accounts, use the network for any of the previous accounts
-                        network: $accounts[0].clientOptions.network,
+                        network: $accounts.length > 0 ? $accounts[0].clientOptions.network : $network,
                     },
                 },
                 {

@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { get } from 'svelte/store'
     import { darkMode } from 'shared/lib/app'
     import { Text, Radio, Dropdown, Checkbox } from 'shared/components'

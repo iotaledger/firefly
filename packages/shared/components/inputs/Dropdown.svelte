@@ -1,6 +1,6 @@
-<script>
-    import { clickOutside } from 'shared/lib/actions'
+<script lang="typescript">
     import { Icon, Text } from 'shared/components'
+    import { clickOutside } from 'shared/lib/actions'
 
     export let value = undefined
     export let label = undefined

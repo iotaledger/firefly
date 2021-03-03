@@ -1,19 +1,21 @@
 <script lang="typescript">
-    import { getContext } from 'svelte'
-    import { Text, Button, Dropdown, Amount, Address } from 'shared/components'
-    import { Unit, convertUnits } from '@iota/unit-converter'
+    import { convertUnits, Unit } from '@iota/unit-converter'
+    import { Address, Amount, Button, Dropdown, Text } from 'shared/components'
     import { sendParams } from 'shared/lib/app'
     import { activeProfile } from 'shared/lib/profile'
-    import { ADDRESS_LENGTH, VALID_MAINNET_ADDRESS, VALID_DEVNET_ADDRESS } from 'shared/lib/utils'
-    import { walletRoute, accountRoute } from 'shared/lib/router'
-    import { WalletRoutes, AccountRoutes } from 'shared/lib/typings/routes'
+    import { accountRoute, walletRoute } from 'shared/lib/router'
+    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
+    import { ADDRESS_LENGTH, VALID_DEVNET_ADDRESS, VALID_MAINNET_ADDRESS } from 'shared/lib/utils'
+    import type { Account } from 'shared/lib/wallet'
+    import { getContext } from 'svelte'
+    import type { Readable, Writable } from 'svelte/store'
 
     export let locale
     export let send
     export let internalTransfer
 
-    const accounts = getContext('walletAccounts')
-    const account = getContext('selectedAccount')
+    const accounts = getContext<Writable<Account[]>>('walletAccounts')
+    const account = getContext<Readable<Account>>('selectedAccount')
 
     enum SEND_TYPE {
         EXTERNAL = 'send_payment',
@@ -51,10 +53,10 @@
             walletRoute.set(WalletRoutes.Init)
         }
     }
-    const format = (account) => {
+    const format = (account: Account) => {
         return {
             ...account,
-            label: `${account.name} • ${account.balance}`,
+            label: `${account.alias} • ${account.balance}`,
             balance: account.rawIotaBalance,
         }
     }
@@ -62,7 +64,7 @@
         amount = convertUnits(from.balance, Unit.i, unit)
     }
     const validInputs = () => {
-        if (parseFloat($sendParams.amount) > from.balance) {
+        if ($sendParams.amount > from.balance) {
             console.error('Input error: Amount higher than available balance')
             return false
         }

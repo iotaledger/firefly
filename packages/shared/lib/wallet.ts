@@ -11,8 +11,8 @@ import { get, writable, Writable } from 'svelte/store'
 import type { Account as BaseAccount, SyncedAccount } from './typings/account'
 import type { Address } from './typings/address'
 import type { Actor } from './typings/bridge'
-import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, Event, TransactionEventPayload } from './typings/events'
-import type { Message } from './typings/message'
+import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, Event, TransactionEventPayload, TransferProgressEventPayload, TransferProgressEventType } from './typings/events'
+import type { Input, Message, Output } from './typings/message'
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
@@ -22,6 +22,10 @@ export interface Account extends BaseAccount {
     balance: string;
     balanceEquiv: string;
     color: string;
+}
+
+export interface AccountMessage extends Message {
+    internal: boolean;
 }
 
 interface ActorState {
@@ -91,6 +95,8 @@ export const resetWallet = () => {
 }
 
 export const selectedAccountId = writable<string | null>(null)
+
+export const transferState = writable<TransferProgressEventType | null>(null)
 
 export const loggedIn = persistent<boolean>('loggedIn', false)
 
@@ -249,6 +255,15 @@ export const initialiseListeners = () => {
             console.error(error)
         },
     })
+
+    api.onTransferProgress({
+        onSuccess(response: Event<TransferProgressEventPayload>) {
+            transferState.set(response.payload.event.type)
+        },
+        onError(error) {
+            console.error(error)
+        }
+    })
 }
 
 /**
@@ -325,24 +340,38 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
  * @param {Account} accounts
  * @param {number} [count]
  *
- * @returns {Message[]}
+ * @returns {AccountMessage[]}
  */
-export const getLatestMessages = (accounts: Account[], count = 10): Message[] => {
-    const messages: Message[] = accounts.reduce(
-        (messages, account) =>
-            messages.concat(
-                account.messages.map((message, idx) =>
-                    Object.assign({}, message, {
-                        account: account.index,
-                        internal: idx % 2 !== 0,
-                    })
-                )
-            ),
-        []
-    )
+export const getLatestMessages = (accounts: Account[], count = 10): AccountMessage[] => {
+    const messages: Message[] = [];
+    const addresses: string[] = [];
+
+    accounts.forEach((account) => {
+        account.addresses.forEach((address: Address) => {
+            addresses.push(address.address);
+        })
+
+        messages.push(...account.messages.map((message) => Object.assign({}, message, { account: account.index })));
+    });
 
     return messages
-        .slice()
+        .map(
+            (message) => {
+                const outputs = message.payload.data.essence.data.outputs;
+                const inputs = message.payload.data.essence.data.inputs
+
+                return Object.assign(
+                    {},
+                    message,
+                    {
+                        internal: outputs.length && outputs.every(
+                            (output: Output) => addresses.includes(output.data.address)
+                        ) && inputs.length && inputs.every(
+                            (input: Input) => input.data.metadata ? addresses.includes(input.data.metadata.address) : false
+                        )
+                    })
+            }
+        )
         .sort((a, b) => {
             return <any>new Date(b.timestamp) - <any>new Date(a.timestamp)
         })
@@ -414,7 +443,7 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
 
             return Object.assign({}, storedAccount, {
                 // Update deposit address
-                depositAddress: syncedAccount.depositAddress.address,
+                depositAddress: syncedAccount.depositAddress,
                 // If we have received a new address, simply add it;
                 // If we have received an existing address, update the properties.
                 addresses: _update(storedAccount.addresses, syncedAccount.addresses, 'address'),

@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { Box, Text } from 'shared/components'
 
     export let balance
