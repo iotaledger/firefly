@@ -501,7 +501,7 @@
             "incorrect": "Your current PIN is incorrect."
         },
         "account": {
-            "length": "Your account name must be under 20 characters.",
+            "length": "Your account name cannot be longer than 20 characters.",
             "empty": "You must use your latest account before creating a new one."
         },
         "send": {
