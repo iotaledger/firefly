@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { Unit } from '@iota/unit-converter'
     import { Text } from 'shared/components'
     export let amount = undefined

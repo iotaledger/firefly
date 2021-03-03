@@ -34,6 +34,7 @@ const eventsApiToResponseTypeMap = {
     onReattachment: ResponseTypes.Reattachment,
     onBroadcast: ResponseTypes.Broadcast,
     onStrongholdStatusChange: ResponseTypes.StrongholdStatusChange,
+    onTransferProgress: ResponseTypes.TransferProgress,
 }
 
 const apiToResponseTypeMap = {
@@ -182,8 +183,6 @@ const storeCallbacks = (__id: string, type: ResponseTypes, callbacks?: Callbacks
  * 
  * @param {ErrorType | ValidatorErrorTypes} type
  * @param {string} error
- * 
- * @returns {ErrorEventPayload} 
  */
 const createErrorMessage = (type: ErrorType | ValidatorErrorTypes, error: string): { type: ErrorType | ValidatorErrorTypes, error: string } => {
     return {

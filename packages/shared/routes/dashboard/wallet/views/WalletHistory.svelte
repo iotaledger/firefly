@@ -1,11 +1,13 @@
 <script lang="typescript">
-    import { getContext } from 'svelte'
     import { ActivityRow, Text } from 'shared/components'
+    import type { Account, AccountMessage } from 'shared/lib/wallet'
+    import { getContext } from 'svelte'
+    import type { Readable, Writable } from 'svelte/store'
 
     export let locale
 
-    const accounts = getContext('walletAccounts')
-    const transactions = getContext('walletTransactions')
+    const accounts = getContext<Writable<Account[]>>('walletAccounts')
+    const transactions = getContext<Readable<AccountMessage[]>>('walletTransactions')
 </script>
 
 <div data-label="latest-transactions" class="h-full p-8 flex-grow flex flex-col">

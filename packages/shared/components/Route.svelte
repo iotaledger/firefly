@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { fly, scale } from 'svelte/transition'
     import { route as appRoute } from 'shared/lib/router'
 

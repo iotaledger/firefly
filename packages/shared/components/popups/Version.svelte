@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { date } from 'svelte-i18n'
     import { closePopup } from 'shared/lib/popup'
     import { Text, Button } from 'shared/components'

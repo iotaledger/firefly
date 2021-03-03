@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { Icon, Text } from 'shared/components'
     import { truncateString } from 'shared/lib/helpers'
     export let id

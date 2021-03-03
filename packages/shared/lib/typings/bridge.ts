@@ -1,4 +1,4 @@
-import type { Event, ErrorEventPayload, BalanceChangeEventPayload, TransactionEventPayload } from './events'
+import type { ErrorEventPayload } from './events'
 import type { Address } from './address'
 import type { AccountIdentifier, Account, Balance, SyncedAccount } from './account'
 import type { Message } from './message'
@@ -48,6 +48,7 @@ export enum ResponseTypes {
     Reattachment = 'Reattachment',
     Broadcast = 'Broadcast',
     StrongholdStatusChange = 'StrongholdStatusChange',
+    TransferProgress = 'TransferProgress',
     GeneratedMnemonic = 'GeneratedMnemonic',
     StoredMnemonic = 'StoredMnemonic',
     VerifiedMnemonic = 'VerifiedMnemonic',

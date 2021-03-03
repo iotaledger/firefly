@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { Icon } from 'shared/components'
     export let allowBack = true
     export let onBackClick = () => {}

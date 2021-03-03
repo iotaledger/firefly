@@ -5,29 +5,37 @@ type MessageVersion = 1
 
 export interface UTXOInput {
     type: 'UTXO'
-    data: string
+    data: {
+        input: string;
+        metadata?: {
+            address: string;
+            amount: number;
+            index: number;
+            isSpent: boolean;
+            kind: 'SignatureLockedSingle' | 'SignatureLockedDustAllowance';
+            messageId: string;
+            transactionId: string;
+        }
+    }
 }
 
 export type Input = UTXOInput
 
-export interface OutputAddress {
-    type: 'Ed25519'
-    data: string
-}
-
 export interface SignatureLockedSingle {
     type: 'SignatureLockedSingle'
     data: {
-        address: OutputAddress
+        address: string
         amount: number
+        remainder: boolean
     }
 }
 
 export interface SignatureLockedDustAllowance {
     type: 'SignatureLockedDustAllowance'
     data: {
-        address: OutputAddress
+        address: string
         amount: number
+        remainder: boolean
     }
 }
 
@@ -43,7 +51,9 @@ export interface TransactionEssence {
 export interface MessagePayload {
     type: 'Transaction'
     data: {
-        essence: TransactionEssence
+        essence: {
+            data: TransactionEssence
+        }
         unlock_blocks: {
             type: 'Signature'
             data: {

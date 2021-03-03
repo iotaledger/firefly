@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { shuffleArray } from 'shared/lib/helpers'
     import { onMount } from 'svelte'
 

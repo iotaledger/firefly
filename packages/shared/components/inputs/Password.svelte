@@ -1,5 +1,6 @@
-<script>
+<script lang="typescript">
     import { Icon } from 'shared/components'
+    import { onMount } from 'svelte'
     export let value = ''
     export let classes = ''
     export let strength = 0
@@ -10,8 +11,12 @@
     export let locale = undefined
     export let maxlength = undefined
     export let numeric = false
+    export let autofocus = false
+
     let revealed = false
     let type = 'password'
+    let inputElement
+
     const handleInput = (event) => {
         value = event.target.value
     }
@@ -30,6 +35,12 @@
             event.preventDefault()
         }
     }
+
+    onMount(() => {
+        if (autofocus) {
+            inputElement.focus()
+        }
+    })
 </script>
 
 <style type="text/scss">
@@ -88,6 +99,7 @@
             {type}
             {value}
             {maxlength}
+            bind:this={inputElement}
             on:keypress={onKeyPress}
             on:input={handleInput}
             placeholder={placeholder || locale('general.password')}
