@@ -32,11 +32,6 @@ export const persistent = <T>(key: string, initialValue: T): Writable<T> => {
 }
 
 /**
- * Shuffle an array
- */
-export const shuffleArray = (array) => array.slice().sort(() => Math.random() - 0.5)
-
-/**
  * Extract initials from string
  */
 export const getInitials = (string: string, maxChars: number) => {
