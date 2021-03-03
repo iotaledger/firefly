@@ -1,4 +1,4 @@
-import { ResponseTypes } from './typings/bridge'
+import { ReadAccountResponse, ResponseTypes } from './typings/bridge'
 import type { MessageResponse } from './typings/bridge'
 import type { Account, SyncedAccount } from './typings/account'
 import type { Message } from './typings/message'
@@ -29,9 +29,9 @@ type ErrorObject = {
     error: string
 }
 
-type ValidationResponse = {
+export type ValidationResponse = {
     isValid: boolean
-    error: ErrorObject
+    payload: ErrorObject
 }
 
 class Validator {
@@ -47,10 +47,10 @@ class Validator {
      *
      * @returns {ValidationResponse}
      */
-    createResponse(isValid: boolean, error?: ErrorObject): ValidationResponse {
+    createResponse(isValid: boolean, payload?: ErrorObject): ValidationResponse {
         return {
             isValid,
-            error,
+            payload,
         }
     }
 
@@ -218,12 +218,11 @@ class AccountListValidator extends Validator {
         }
 
         for (const account of payload) {
-            const validationResponse = new AccountValidator().isValid({
-                id: response.id,
-                action: response.action,
-                type: response.type,
-                payload: account as any,
-            })
+            const validationResponse = new AccountValidator().isValid(
+                Object.assign({}, response, {
+                    payload: account as any,
+                })
+            )
             if (!validationResponse.isValid) {
                 return validationResponse
             }
@@ -257,12 +256,9 @@ class SyncedAccountListValidator extends Validator {
         }
 
         for (const account of payload) {
-            const validationResponse = new SyncedAccountValidator().isValid({
-                id: response.id,
-                action: response.action,
-                type: response.type,
-                payload: account as any,
-            })
+            const validationResponse = new SyncedAccountValidator().isValid(Object.assign({}, response, {
+                payload: account as any
+            }))
 
             if (!validationResponse.isValid) {
                 return validationResponse
@@ -417,7 +413,7 @@ class MessageValidator extends Validator {
             })
         }
 
-        if (payload.parents.some((parent) => 'string' !== typeof parent)) { 
+        if (payload.parents.some((parent) => 'string' !== typeof parent)) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of parents received.',
@@ -661,7 +657,6 @@ export default class ValidatorService {
             [ResponseTypes.DeletedStorage]: this.createBaseValidator().getFirst(),
             [ResponseTypes.LockedStronghold]: this.createBaseValidator().getFirst(),
             [ResponseTypes.StrongholdPasswordChanged]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.RemovedAccount]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.UpdatedAllClientOptions]: this.createBaseValidator().getFirst(),
             [ResponseTypes.Error]: this.createBaseValidator().getFirst(),
             [ResponseTypes.Panic]: this.createBaseValidator().getFirst(),

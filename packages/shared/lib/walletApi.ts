@@ -5,10 +5,9 @@ import type {
     ReadAccountsResponse,
     LatestAddressResponse,
     SyncAccountsResponse,
-    ErrorResponse,
 } from './typings/bridge'
 import { ResponseTypes } from './typings/bridge'
-import type { Event, BalanceChangeEventPayload, TransactionEventPayload } from './typings/events'
+import type { ErrorType, Event, BalanceChangeEventPayload, TransactionEventPayload } from './typings/events'
 import Validator, { ErrorTypes as ValidatorErrorTypes } from 'shared/lib/validator'
 
 import * as Wallet from 'wallet-nodejs-binding'
@@ -19,7 +18,12 @@ type CallbacksStore = {
 
 type CallbacksPattern = {
     onSuccess: (message: MessageResponse) => void
-    onError: (message: MessageResponse) => void
+    onError: (message: ErrorMessage) => void
+}
+
+type ErrorMessage = {
+    type: ErrorType | ValidatorErrorTypes,
+    error: string
 }
 
 const eventsApiToResponseTypeMap = {
@@ -76,23 +80,23 @@ const callbacksStore: CallbacksStore = {}
 const defaultCallbacks = {
     StrongholdPasswordSet: {
         onSuccess: (response: SetStrongholdPasswordResponse): void => { },
-        onError: (error: ErrorResponse): void => { },
+        onError: (error: ErrorMessage): void => { },
     },
     CreatedAccount: {
         onSuccess: (response: CreatedAccountResponse): void => { },
-        onError: (error: ErrorResponse): void => { },
+        onError: (error: ErrorMessage): void => { },
     },
     ReadAccounts: {
         onSuccess: (response: ReadAccountsResponse): void => { },
-        onError: (error: ErrorResponse): void => { },
+        onError: (error: ErrorMessage): void => { },
     },
     LatestAddress: {
         onSuccess: (response: LatestAddressResponse): void => { },
-        onError: (error: ErrorResponse): void => { },
+        onError: (error: ErrorMessage): void => { },
     },
     SyncedAccounts: {
         onSuccess: (response: SyncAccountsResponse): void => { },
-        onError: (error: ErrorResponse): void => { },
+        onError: (error: ErrorMessage): void => { },
     },
     BalanceChange: {
         onSuccess: (response: Event<BalanceChangeEventPayload>): void => { },
@@ -116,14 +120,19 @@ Wallet.onMessage((message: MessageResponse) => {
         }
     }
 
-    const { isValid, error } = new Validator(Object.keys(callbacksStore)).performValidation(message)
+    const { isValid, payload } = new Validator(Object.keys(callbacksStore)).performValidation(message)
 
     if (!isValid) {
-        if (error.type !== ValidatorErrorTypes.UnknownId) {
+        if (payload.type !== ValidatorErrorTypes.UnknownId) {
             const { id } = message
             const { onError } = callbacksStore[id]
 
-            onError(message)
+            onError(
+                createErrorMessage(
+                    payload.type,
+                    payload.error
+                )
+            )
         } else {
             /** TODO: In case of unknown ids, add validation failure to error log */
         }
@@ -132,7 +141,12 @@ Wallet.onMessage((message: MessageResponse) => {
 
         const { onSuccess, onError } = callbacksStore[id]
 
-        message.type === 'Error' || message.type === 'Panic' ? onError(message) : onSuccess(message)
+        message.type === ResponseTypes.Error || message.type === ResponseTypes.Panic ? onError(
+            createErrorMessage(
+                message.payload.type,
+                message.payload.error
+            )
+        ) : onSuccess(message)
     }
 
     // Delete callback id from callback store
@@ -161,6 +175,21 @@ const storeCallbacks = (__id: string, type: ResponseTypes, callbacks?: Callbacks
         callbacksStore[__id] = defaultCallbacks[type]
     }
 }
+
+/**
+ * Creates error message 
+ * 
+ * @method createErrorMessage
+ * 
+ * @param {ErrorType | ValidatorErrorTypes} type
+ * @param {string} error
+ */
+const createErrorMessage = (type: ErrorType | ValidatorErrorTypes, error: string): { type: ErrorType | ValidatorErrorTypes, error: string } => {
+    return {
+        type,
+        error
+    }
+};
 
 /**
  * @method generateRandomId
