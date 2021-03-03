@@ -3,16 +3,19 @@
     import { sendParams } from 'shared/lib/app'
     import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
+    import { priceData } from 'shared/lib/marketData'
     import { DEFAULT_NODE as node, DEFAULT_NODES as nodes, network } from 'shared/lib/network'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import { formatUnit } from 'shared/lib/units'
-    import type { Account as AccountType, BalanceOverview, AccountMessage } from 'shared/lib/wallet'
+    import type { Account as AccountType, AccountMessage, BalanceHistory, BalanceOverview } from 'shared/lib/wallet'
     import {
         api,
+        getAccountsBalanceHistory,
         getLatestMessages,
+        getWalletBalanceHistory,
         initialiseListeners,
         selectedAccountId,
         updateAccounts,
@@ -32,6 +35,12 @@
     const transactions = derived(accounts, ($accounts) => {
         return getLatestMessages($accounts)
     })
+    const accountsBalanceHistory = derived([accounts, priceData], ([$accounts, $priceData]) =>
+        getAccountsBalanceHistory($accounts, $priceData)
+    )
+    const walletBalanceHistory = derived(accountsBalanceHistory, ($accountsBalanceHistory) =>
+        getWalletBalanceHistory($accountsBalanceHistory)
+    )
     const selectedAccount = derived([selectedAccountId, accounts], ([$selectedAccountId, $accounts]) =>
         $accounts.find((acc) => acc.id === $selectedAccountId)
     )
@@ -40,6 +49,8 @@
     setContext<Writable<AccountType[]>>('walletAccounts', accounts)
     setContext<Readable<AccountMessage[]>>('walletTransactions', transactions)
     setContext<Readable<AccountType>>('selectedAccount', selectedAccount)
+    setContext<Readable<BalanceHistory>>('accountsBalanceHistory', accountsBalanceHistory)
+    setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
 
@@ -406,7 +417,7 @@
             </DashboardPane>
             <div class="flex flex-col w-2/3 h-full space-y-4">
                 <DashboardPane classes="w-full h-1/2">
-                    <LineChart />
+                    <LineChart {locale} />
                 </DashboardPane>
                 <div class="w-full h-1/2 flex flex-row flex-1 space-x-4">
                     <DashboardPane classes="w-1/2">

@@ -4,7 +4,6 @@ export enum CurrencyTypes {
     BTC = 'btc',
     ETH = 'eth',
     EUR = 'eur',
-    GBP = 'gbp',
     USD = 'usd',
 }
 
@@ -12,7 +11,6 @@ export type Currencies = {
     [CurrencyTypes.BTC]: number
     [CurrencyTypes.ETH]: number
     [CurrencyTypes.EUR]: number
-    [CurrencyTypes.GBP]: number
     [CurrencyTypes.USD]: number
 }
 

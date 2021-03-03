@@ -1,34 +1,42 @@
 <script lang="typescript">
-    import { onMount } from 'svelte'
-    import { get } from 'svelte/store'
+    import { Popup, Route, ToastContainer, Toggle } from 'shared/components'
+    import { darkMode, loggedIn, mobile } from 'shared/lib/app'
+    import { refreshVersionDetails, versionDetails } from 'shared/lib/appUpdater'
+    import { goto } from 'shared/lib/helpers'
+    import { activeLocale, dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
     import { fetchMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
-    import { setupI18n, isLocaleLoaded, dir, _, activeLocale } from 'shared/lib/i18n'
-    import { darkMode, mobile, loggedIn } from 'shared/lib/app'
+    import { openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile } from 'shared/lib/profile'
-    import { goto } from 'shared/lib/helpers'
-    import { initRouter, routerNext, routerPrevious, route as appRoute, dashboardRoute, walletRoute, settingsRoute } from 'shared/lib/router'
-    import { AppRoute, Tabs } from 'shared/lib/typings/routes'
-    import { popupState } from 'shared/lib/popup'
-    import { requestMnemonic } from 'shared/lib/wallet'
-    import { Route, Toggle, Popup } from 'shared/components'
-    import { refreshVersionDetails } from 'shared/lib/appUpdater'
     import {
-        Splash,
-        Welcome,
-        Legal,
-        Setup,
-        Language,
-        Password,
-        Protect,
+        dashboardRoute,
+        initRouter,
+        route as appRoute,
+        routerNext,
+        routerPrevious,
+        settingsRoute,
+        walletRoute,
+    } from 'shared/lib/router'
+    import { AppRoute, Tabs } from 'shared/lib/typings/routes'
+    import { requestMnemonic } from 'shared/lib/wallet'
+    import {
         Backup,
-        Import,
         Balance,
-        Migrate,
         Congratulations,
         Dashboard,
+        Import,
+        Language,
+        Legal,
         Login,
+        Migrate,
+        Password,
+        Protect,
+        Setup,
+        Splash,
+        Welcome,
     } from 'shared/routes'
+    import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
 
     const locale = activeLocale
@@ -66,13 +74,21 @@
         })
         window['Electron'].onEvent('menu-navigate-settings', (route) => {
             if (get(appRoute) !== AppRoute.Dashboard) {
-                  // TODO: Add settings from login
+                // TODO: Add settings from login
             } else if (get(dashboardRoute) !== Tabs.Settings) {
                 dashboardRoute.set(Tabs.Settings)
             }
             settingsRoute.set(route)
         })
-
+        window['Electron'].onEvent('menu-check-for-update', async () => {
+            await refreshVersionDetails()
+            openPopup({
+                type: 'version',
+                props: {
+                    currentVersion: $versionDetails.currentVersion,
+                },
+            })
+        })
     })
 </script>
 
@@ -159,4 +175,5 @@
     <Route route={AppRoute.Login}>
         <Login on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} {goto} />
     </Route>
+    <ToastContainer />
 {/if}
