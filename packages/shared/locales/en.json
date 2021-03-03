@@ -514,7 +514,7 @@
         "node": {
             "invalid": "Please enter a valid URL.",
             "https": "Https only. Set up a developer profile to use http.",
-            "duplicate": "This node was already added."
+            "duplicate": "This node has already been added."
         }
     }
 }
