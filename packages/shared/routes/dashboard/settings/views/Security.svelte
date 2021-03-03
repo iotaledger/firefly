@@ -38,6 +38,8 @@
     let newPincodeError = ''
 
     const MAX_PASSWORD_LENGTH = 256
+    const MAX_PINCODE_LENGTH = 6
+    
     $: passwordStrength = zxcvbn(newPassword)
 
     const PincodeManager = window['Electron']['PincodeManager']
@@ -113,7 +115,11 @@
         }
 
         if (newPassword.length > MAX_PASSWORD_LENGTH) {
-            newPasswordError = locale('error.password.length')
+            newPasswordError = locale('error.password.length', { 
+                values: {
+                    length: MAX_PASSWORD_LENGTH
+                }
+            })
         } else if (newPassword !== confirmedPassword) {
             newPasswordError = locale('error.password.doNotMatch')
         } else if (passwordStrength.score !== 4) {
@@ -130,8 +136,12 @@
 
     function changePincode() {
         resetErrors()
-        if (newPincode.length !== 6) {
-            newPincodeError = locale('error.pincode.length')
+        if (newPincode.length !== MAX_PINCODE_LENGTH) {
+            newPincodeError = locale('error.pincode.length', { 
+                values: {
+                    length: MAX_PINCODE_LENGTH
+                }
+            })
         } else if (newPincode !== confirmedPincode) {
             newPincodeError = locale('error.pincode.match')
         } else {

@@ -14,7 +14,11 @@
     const handleCreateClick = () => {
         resetError()
         if (accountName.length > MAX_ACCOUNT_NAME_LENGTH) {
-            return error = locale('error.account.length')
+            return error = locale('error.account.length', { 
+                values: {
+                    length: MAX_ACCOUNT_NAME_LENGTH
+                }
+            })
         }
         if (accountName) {
             onCreate(accountName)

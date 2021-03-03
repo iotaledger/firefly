@@ -52,7 +52,11 @@
         if (selectedSendType === SEND_TYPE.EXTERNAL) {
             // Validate address length
             if ($sendParams.address.length !== ADDRESS_LENGTH) {
-                return addressError = locale('error.send.addressLength')
+                return addressError = locale('error.send.addressLength', { 
+                    values: {
+                        length: ADDRESS_LENGTH
+                    }
+                })
             }
             if ($activeProfile.isDeveloperProfile) {
                 if (!$sendParams.address.match(VALID_DEVNET_ADDRESS)) {

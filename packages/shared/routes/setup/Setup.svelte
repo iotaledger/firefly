@@ -22,7 +22,11 @@
         let profile
 
         if (profileName.length > MAX_PROFILE_NAME_LENGTH) {
-            error = locale('error.profile.length')
+            error = locale('error.profile.length', {
+                values: {
+                    length: MAX_PROFILE_NAME_LENGTH
+                }
+            })
         } else {
             try {
                 profile = createProfile(profileName, isDeveloperProfile)
