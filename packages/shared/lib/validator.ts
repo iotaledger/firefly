@@ -664,6 +664,7 @@ export default class ValidatorService {
             [ResponseTypes.RemovedAccount]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.UpdatedAllClientOptions]: this.createBaseValidator().getFirst(),
             [ResponseTypes.Error]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.Panic]: this.createBaseValidator().getFirst(),
             // Events
             [ResponseTypes.StrongholdStatusChange]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.NewTransaction]: this.createBaseEventValidator().getFirst(),
