@@ -90,8 +90,8 @@
                                     {
                                         signerType: { type: 'Stronghold' },
                                         clientOptions: {
-                                            node: DEFAULT_NODE,
-                                            nodes: DEFAULT_NODES,
+                                            node: DEFAULT_NODE.url,
+                                            nodes: DEFAULT_NODES.map(n => n.url),
                                             network: $network,
                                         },
                                     },

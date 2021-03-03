@@ -1,7 +1,7 @@
 import { mnemonic } from 'shared/lib/app'
 import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
-import { isLocaleLoaded, _ } from 'shared/lib/i18n'
+import { _ } from 'shared/lib/i18n'
 import { showSystemNotification } from 'shared/lib/notifications'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { formatUnit } from 'shared/lib/units'
@@ -9,7 +9,8 @@ import { get, writable, Writable } from 'svelte/store'
 import type { Account, SyncedAccount } from './typings/account'
 import type { Address } from './typings/address'
 import type { Actor } from './typings/bridge'
-import type { Message } from './typings/message'
+import type { TransferProgressEventType } from './typings/events'
+import type { Input, Message, Output } from './typings/message'
 import type { ApiClient } from './walletApi'
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
@@ -22,7 +23,7 @@ export interface WalletAccount extends Account {
     color: string;
 }
 
-export interface MessageWithAccount extends Message {
+export interface AccountMessage extends Message {
     account: number;
     internal: boolean;
 }
@@ -85,6 +86,8 @@ export const resetWallet = () => {
 }
 
 export const selectedAccountId = writable<string | null>(null)
+
+export const transferState = writable<TransferProgressEventType | null>(null)
 
 export const loggedIn = persistent<boolean>('loggedIn', false)
 
@@ -231,6 +234,15 @@ export const initialiseListeners = () => {
             console.error(error)
         },
     })
+
+    api.onTransferProgress({
+        onSuccess(response) {
+            transferState.set(response.payload.event.type)
+        },
+        onError(error) {
+            console.error(error)
+        }
+    })
 }
 
 /**
@@ -307,24 +319,39 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
  * @param {WalletAccount} accounts
  * @param {number} [count]
  *
- * @returns {Message[]}
+ * @returns {AccountMessage[]}
  */
-export const getLatestMessages = (accounts: WalletAccount[], count = 10): MessageWithAccount[] => {
-    const messages: MessageWithAccount[] = accounts ? accounts.reduce(
-        (messages, account) =>
-            messages.concat(
-                account.messages.map((message, idx) =>
-                    Object.assign<MessageWithAccount, Partial<Message>, Partial<MessageWithAccount>>({} as MessageWithAccount, message, {
-                        account: account.index,
-                        internal: idx % 2 !== 0,
-                    })
-                )
-            ),
-        []
-    ) : []
+export const getLatestMessages = (accounts: WalletAccount[], count = 10): AccountMessage[] => {
+    const messages: AccountMessage[] = [];
+    const addresses: string[] = [];
+
+    accounts.forEach((account) => {
+        account.addresses.forEach((address: Address) => {
+            addresses.push(address.address);
+        })
+
+        messages.push(...account.messages.map((message) =>
+            Object.assign<AccountMessage, Message, Partial<AccountMessage>>({} as AccountMessage, message, { account: account.index })));
+    });
 
     return messages
-        .slice()
+        .map(
+            (message) => {
+                const outputs = message.payload.data.essence.data.outputs;
+                const inputs = message.payload.data.essence.data.inputs
+
+                return Object.assign(
+                    {},
+                    message,
+                    {
+                        internal: outputs.length && outputs.every(
+                            (output: Output) => addresses.includes(output.data.address)
+                        ) && inputs.length && inputs.every(
+                            (input: Input) => input.data.metadata ? addresses.includes(input.data.metadata.address) : false
+                        )
+                    })
+            }
+        )
         .sort((a, b) => {
             return <any>new Date(b.timestamp) - <any>new Date(a.timestamp)
         })

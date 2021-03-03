@@ -26,24 +26,28 @@
             api.setClientOptions(
                 {
                     ...$accounts[0].clientOptions,
-                    nodes: _nodes,
-                    node: DEFAULT_NODE,
+                    nodes: _nodes.map(n => n.url),
+                    node: DEFAULT_NODE.url,
                 },
                 {
                     onSuccess() {
-                        updateProfile('settings.node', DEFAULT_NODE)
+                        updateProfile('settings.node', DEFAULT_NODE.url)
                         accounts.update((_accounts) =>
                             _accounts.map((_account) =>
-                                Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>({} as WalletAccount, _account, {
-                                    clientOptions: Object.assign<ClientOptions, ClientOptions, ClientOptions>(
-                                        {} as ClientOptions,
-                                        _account.clientOptions,
-                                        {
-                                            nodes: _nodes,
-                                            node: DEFAULT_NODE,
-                                        }
-                                    ),
-                                })
+                                Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+                                    {} as WalletAccount,
+                                    _account,
+                                    {
+                                        clientOptions: Object.assign<ClientOptions, ClientOptions, ClientOptions>(
+                                            {} as ClientOptions,
+                                            _account.clientOptions,
+                                            {
+                                                nodes: _nodes.map(n => n.url),
+                                                node: DEFAULT_NODE.url,
+                                            }
+                                        ),
+                                    }
+                                )
                             )
                         )
                     },
@@ -59,11 +63,11 @@
                 {
                     ...$accounts[0].clientOptions,
                     nodes: [],
-                    node: DEFAULT_NODE,
+                    node: DEFAULT_NODE.url,
                 },
                 {
                     onSuccess() {
-                        updateProfile('settings.node', DEFAULT_NODE)
+                        updateProfile('settings.node', DEFAULT_NODE.url)
 
                         accounts.update((_accounts) =>
                             _accounts.map((_account) =>
@@ -76,7 +80,7 @@
                                             _account.clientOptions,
                                             {
                                                 nodes: [],
-                                                node: DEFAULT_NODE,
+                                                node: DEFAULT_NODE.url,
                                             }
                                         ),
                                     }
@@ -139,12 +143,12 @@
             const options: ClientOptions = primary
                 ? {
                       ...$accounts[0].clientOptions,
-                      node,
+                      node: node.url,
                       nodes: [],
                   }
                 : {
                       ...$accounts[0].clientOptions,
-                      nodes: [...$accounts[0].clientOptions.nodes, node],
+                      nodes: [...$accounts[0].clientOptions.nodes, node.url],
                   }
 
             api.setClientOptions(options, {
@@ -165,7 +169,7 @@
                                         clientOptions: Object.assign<ClientOptions, ClientOptions, ClientOptions>(
                                             {},
                                             _account.clientOptions,
-                                            { node: node, nodes: [] }
+                                            { node: node.url, nodes: [] }
                                         ),
                                     }
                                 )
@@ -179,7 +183,7 @@
                                         {},
                                         _account.clientOptions,
                                         {
-                                            nodes: [..._account.clientOptions.nodes, node],
+                                            nodes: [..._account.clientOptions.nodes, node.url],
                                         }
                                     ),
                                 }

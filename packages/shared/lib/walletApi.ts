@@ -1,22 +1,27 @@
-import type {
-    MessageResponse,
-    SetStrongholdPasswordResponse,
-    CreatedAccountResponse,
-    ReadAccountsResponse,
-    LatestAddressResponse,
-    SyncAccountsResponse,
-    ErrorResponse,
-} from './typings/bridge'
-import { ResponseTypes } from './typings/bridge'
-import type { Event, BalanceChangeEventPayload, TransactionEventPayload, ErrorEventPayload, ConfirmationStateChangeEventPayload } from './typings/events'
 import Validator, { ErrorTypes as ValidatorErrorTypes } from 'shared/lib/validator'
-
 import * as Wallet from 'wallet-nodejs-binding'
 import type { Account, AccountToCreate, Balance, SyncedAccount } from './typings/account'
 import type { Address } from './typings/address'
-import type { StrongholdStatus } from './typings/wallet'
-import type { Message } from './typings/message'
+import type {
+    CreatedAccountResponse,
+
+
+
+    ErrorResponse, LatestAddressResponse, MessageResponse,
+
+
+    ReadAccountsResponse, SetStrongholdPasswordResponse,
+
+
+
+    SyncAccountsResponse
+} from './typings/bridge'
+import { ResponseTypes } from './typings/bridge'
 import type { ClientOptions } from './typings/client'
+import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, ErrorEventPayload, Event, TransactionEventPayload, TransferProgressEventPayload } from './typings/events'
+import type { Message } from './typings/message'
+import type { StrongholdStatus } from './typings/wallet'
+
 
 type CallbacksStore = {
     [id: string]: CallbacksPattern
@@ -35,6 +40,7 @@ const eventsApiToResponseTypeMap = {
     onReattachment: ResponseTypes.Reattachment,
     onBroadcast: ResponseTypes.Broadcast,
     onStrongholdStatusChange: ResponseTypes.StrongholdStatusChange,
+    onTransferProgress: ResponseTypes.TransferProgress,
 }
 
 const apiToResponseTypeMap = {
@@ -235,10 +241,6 @@ export interface ApiClient {
     }, callbacks: { onSuccess: (response: Event<Message>) => void, onError: (err: ErrorEventPayload) => void })
     internalTransfer(fromId: string, toId: string, amount: number, callbacks: { onSuccess: (response: Event<Message>) => void, onError: (err: ErrorEventPayload) => void })
     setAlias(accountId: string, alias: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    onStrongholdStatusChange(callbacks: { onSuccess: (response: Event<StrongholdStatus>) => void, onError: (err: ErrorEventPayload) => void })
-    onNewTransaction(callbacks: { onSuccess: (response: Event<TransactionEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
-    onConfirmationStateChange(callbacks: { onSuccess: (response: Event<ConfirmationStateChangeEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
-    onBalanceChange(callbacks: { onSuccess: (response: Event<BalanceChangeEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
     lockStronghold(callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     setStrongholdPassword(password: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     changeStrongholdPassword(currentPassword: string, newPassword: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
@@ -248,4 +250,10 @@ export interface ApiClient {
     setStoragePassword(newPinCode: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     removeStorage(callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     setClientOptions(clientOptions: ClientOptions, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
+
+    onStrongholdStatusChange(callbacks: { onSuccess: (response: Event<StrongholdStatus>) => void, onError: (err: ErrorEventPayload) => void })
+    onNewTransaction(callbacks: { onSuccess: (response: Event<TransactionEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
+    onConfirmationStateChange(callbacks: { onSuccess: (response: Event<ConfirmationStateChangeEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
+    onBalanceChange(callbacks: { onSuccess: (response: Event<BalanceChangeEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
+    onTransferProgress(callbacks: { onSuccess: (response: Event<TransferProgressEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
 }

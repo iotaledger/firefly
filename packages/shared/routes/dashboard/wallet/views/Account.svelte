@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { AccountActionsModal, DashboardPane } from 'shared/components'
-    import type { MessageWithAccount, WalletAccount } from 'shared/lib/wallet'
+    import type { AccountMessage, WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable, Writable } from 'svelte/store'
     import { AccountActions, AccountBalance, AccountHistory, AccountNavigation } from '.'
@@ -13,7 +13,7 @@
 
     const account = getContext<Readable<WalletAccount>>('selectedAccount')
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
-    const walletTransactions = getContext<Readable<MessageWithAccount[]>>('walletTransactions')
+    const walletTransactions = getContext<Readable<AccountMessage[]>>('walletTransactions')
 
     $: transactions = $account ? $walletTransactions.filter((tx) => tx.account === $account.index) : []
     $: navAccounts = $account ? $accounts.map(({ id, alias, color }) => ({ id, alias, color, active: $account.id === id })) : []

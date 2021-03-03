@@ -1,7 +1,6 @@
 <script lang="typescript">
     import type { Account as BaseAccount } from 'lib/typings/account'
     import type { Address } from 'lib/typings/address'
-
     import type { ErrorEventPayload } from 'lib/typings/events'
     import { DashboardPane } from 'shared/components'
     import { sendParams } from 'shared/lib/app'
@@ -13,7 +12,7 @@
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import { formatUnit } from 'shared/lib/units'
-    import type { BalanceOverview, MessageWithAccount, WalletAccount } from 'shared/lib/wallet'
+    import type { BalanceOverview, AccountMessage, WalletAccount } from 'shared/lib/wallet'
     import {
         api,
         getLatestMessages,
@@ -43,7 +42,7 @@
     setContext<Writable<BalanceOverview>>('walletBalance', balanceOverview)
     setContext<Writable<WalletAccount[]>>('walletAccounts', accounts)
     setContext<Writable<boolean>>('walletAccountsLoaded', accountsLoaded)
-    setContext<Readable<MessageWithAccount[]>>('walletTransactions', transactions)
+    setContext<Readable<AccountMessage[]>>('walletTransactions', transactions)
     setContext<Readable<WalletAccount>>('selectedAccount', selectedAccount)
 
     let isGeneratingAddress = false
@@ -119,26 +118,29 @@
                     outgoing: 0,
                 }
 
-                for (const [idx, storedAccount] of accountsResponse.payload.entries()) {
-                    getAccountMeta(storedAccount.id, (err, meta) => {
-                        if (!err) {
-                            _totalBalance.balance += meta.balance
-                            _totalBalance.incoming += meta.incoming
-                            _totalBalance.outgoing += meta.outgoing
+                if (accountsResponse.payload.length === 0) {
+                    accountsLoaded.set(true)
+                } else {
+                    for (const [idx, storedAccount] of accountsResponse.payload.entries()) {
+                        getAccountMeta(storedAccount.id, (err, meta) => {
+                            if (!err) {
+                                _totalBalance.balance += meta.balance
+                                _totalBalance.incoming += meta.incoming
+                                _totalBalance.outgoing += meta.outgoing
 
-                            const account = prepareAccountInfo(storedAccount, meta)
-                            accounts.update((accounts) => [...accounts, account])
+                                const account = prepareAccountInfo(storedAccount, meta)
+                                accounts.update((accounts) => [...accounts, account])
 
-                            if (idx === accountsResponse.payload.length - 1) {
-                                updateBalanceOverview(_totalBalance.balance, _totalBalance.incoming, _totalBalance.outgoing)
-                                accountsLoaded.set(true)
+                                if (idx === accountsResponse.payload.length - 1) {
+                                    updateBalanceOverview(_totalBalance.balance, _totalBalance.incoming, _totalBalance.outgoing)
+                                    accountsLoaded.set(true)
+                                }
+                            } else {
+                                console.error(err)
                             }
-                        } else {
-                            console.error(err)
-                        }
-                    })
+                        })
+                    }
                 }
-
             },
             onError(error) {
                 // TODO handle error
@@ -209,8 +211,8 @@
                     alias,
                     signerType: { type: 'Stronghold' },
                     clientOptions: {
-                        node: $accounts.length > 0 ? $accounts[0].clientOptions.node : DEFAULT_NODE,
-                        nodes: $accounts.length > 0 ? $accounts[0].clientOptions.nodes : DEFAULT_NODES,
+                        node: $accounts.length > 0 ? $accounts[0].clientOptions.node : DEFAULT_NODE.url,
+                        nodes: $accounts.length > 0 ? $accounts[0].clientOptions.nodes : DEFAULT_NODES.map(n => n.url),
                         // For subsequent accounts, use the network for any of the previous accounts
                         network: $accounts.length > 0 ? $accounts[0].clientOptions.network : $network,
                     },

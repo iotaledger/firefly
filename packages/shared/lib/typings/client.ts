@@ -12,8 +12,8 @@ export interface Node {
 }
 
 export interface ClientOptions {
-    nodes?: Node[]
-    node?: Node
+    nodes?: string[]
+    node?: string
     network?: Network
     localPow?: boolean
     nodeSyncEnabled?: boolean
