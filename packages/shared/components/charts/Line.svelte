@@ -9,6 +9,7 @@
     export let datasets = []
     export let xMaxTicks = 7
     export let yMaxTicks = 6
+    export let yPrecision = 3
     export let color = 'blue' // TODO: each profile has a different color
 
     let canvas
@@ -107,9 +108,8 @@
                         {
                             ticks: {
                                 autoSkip: true,
-                                beginAtZero: true,
                                 maxTicksLimit: yMaxTicks,
-                                precision: 5,
+                                precision: yPrecision,
                                 callback: function (value, index, values) {
                                     return Number(value.toString())
                                 },

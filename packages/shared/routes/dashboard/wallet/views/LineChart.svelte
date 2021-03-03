@@ -99,6 +99,6 @@
         </div>
     </div>
     <div class="flex-auto">
-        <Chart type="line" {datasets} {labels} {color} {xMaxTicks} />
+        <Chart type="line" {datasets} {labels} {color} {xMaxTicks} yPrecision={7} />
     </div>
 </div>
