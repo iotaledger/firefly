@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { Text, Input, Button, Password, Checkbox } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
 

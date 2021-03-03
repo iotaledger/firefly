@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { icons } from './icons'
     export let icon = undefined
     export let width = undefined

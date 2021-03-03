@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { onMount } from 'svelte'
 
     export let progress = 0

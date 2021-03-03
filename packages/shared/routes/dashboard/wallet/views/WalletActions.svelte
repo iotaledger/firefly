@@ -1,17 +1,18 @@
 <script lang="typescript">
+    import { AccountTile, Button, Text } from 'shared/components'
+    import { accountRoute, walletRoute } from 'shared/lib/router'
+    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
+    import { Account, selectedAccountId } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import { Text, Button, AccountTile } from 'shared/components'
-    import { Send, Receive } from '.'
-    import { selectedAccountId } from 'shared/lib/wallet'
-    import { walletRoute, accountRoute } from 'shared/lib/router'
-    import { WalletRoutes, AccountRoutes } from 'shared/lib/typings/routes'
-    
+    import type { Writable } from 'svelte/store'
+    import { Receive, Send } from '.'
+
     export let locale
     export let send
     export let internalTransfer
     export let generateAddress
 
-    const accounts = getContext('walletAccounts')
+    const accounts = getContext<Writable<Account[]>>('walletAccounts')
 
     function handleAccountClick(accountId) {
         selectedAccountId.set(accountId)
@@ -41,20 +42,26 @@
                     {#each $accounts as account}
                         <AccountTile
                             color={account.color}
-                            name={account.name}
+                            name={account.alias}
                             balance={account.balance}
                             balanceEquiv={account.balanceEquiv}
                             size={$accounts.length >= 3 ? 's' : $accounts.length === 2 ? 'm' : 'l'}
                             onClick={() => handleAccountClick(account.id)} />
                     {/each}
                 </div>
+            {:else}
+                <Text>{locale('general.no_accounts')}</Text>
             {/if}
         </div>
-        <!-- Action Send / Receive -->
-        <div class="flex flex-row justify-between space-x-4">
-            <Button xl secondary icon="receive" classes="w-1/2" onClick={handleReceiveClick}>{locale('actions.receive')}</Button>
-            <Button xl secondary icon="transfer" classes="w-1/2" onClick={handleSendClick}>{locale('actions.send')}</Button>
-        </div>
+        {#if $accounts.length > 0}
+            <!-- Action Send / Receive -->
+            <div class="flex flex-row justify-between space-x-4">
+                <Button xl secondary icon="receive" classes="w-1/2" onClick={handleReceiveClick}>
+                    {locale('actions.receive')}
+                </Button>
+                <Button xl secondary icon="transfer" classes="w-1/2" onClick={handleSendClick}>{locale('actions.send')}</Button>
+            </div>
+        {/if}
     </div>
 {:else if $walletRoute === WalletRoutes.Send}
     <Send {send} {internalTransfer} {locale} />

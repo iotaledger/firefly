@@ -458,7 +458,9 @@
         "transaction_id": "Transaction ID",
         "input_address": "Input Address",
         "receive_address": "Receive Address",
-        "date": "Date"
+        "date": "Date",
+        "no_accounts": "You have no accounts, please create one.",
+        "add_profile": "Add Profile"
     },
     "dates": {
         "today": "Today",

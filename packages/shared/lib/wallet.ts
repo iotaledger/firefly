@@ -1,26 +1,29 @@
-import { writable, Writable, get } from 'svelte/store'
-import type { Actor } from './typings/bridge'
-import type { Address } from './typings/address'
-import type { Message } from './typings/message'
-import type { Account as BaseAccount } from './typings/account'
-import type { Event, TransactionEventPayload, ConfirmationStateChangeEventPayload, BalanceChangeEventPayload } from './typings/events'
 import { mnemonic } from 'shared/lib/app'
-import { formatUnit } from 'shared/lib/units'
 import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
-import { activeProfile, updateProfile } from 'shared/lib/profile'
-import { showSystemNotification } from 'shared/lib/notifications'
-import { _ } from 'shared/lib/i18n'
 import { persistent } from 'shared/lib/helpers'
-import type { SyncedAccount } from './typings/account'
+import { _ } from 'shared/lib/i18n'
+import { showSystemNotification } from 'shared/lib/notifications'
+import { activeProfile, updateProfile } from 'shared/lib/profile'
+import { formatUnit } from 'shared/lib/units'
+import { get, writable, Writable } from 'svelte/store'
+import type { Account as BaseAccount, SyncedAccount } from './typings/account'
+import type { Address } from './typings/address'
+import type { Actor } from './typings/bridge'
+import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, Event, TransactionEventPayload, TransferProgressEventPayload, TransferProgressEventType } from './typings/events'
+import type { Input, Message, Output } from './typings/message'
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
-interface Account extends BaseAccount {
+export interface Account extends BaseAccount {
     depositAddress: Address;
     rawIotaBalance: number;
     balance: string;
     balanceEquiv: string;
     color: string;
+}
+
+export interface AccountMessage extends Message {
+    internal: boolean;
 }
 
 interface ActorState {
@@ -81,6 +84,8 @@ export const resetWallet = () => {
 export const selectedAccountId = writable<string | null>(null)
 
 export const selectedMessage = writable<Message | null>(null)
+
+export const transferState = writable<TransferProgressEventType | null>(null)
 
 export const loggedIn = persistent<boolean>('loggedIn', false)
 
@@ -239,6 +244,15 @@ export const initialiseListeners = () => {
             console.error(error)
         },
     })
+
+    api.onTransferProgress({
+        onSuccess(response: Event<TransferProgressEventPayload>) {
+            transferState.set(response.payload.event.type)
+        },
+        onError(error) {
+            console.error(error)
+        }
+    })
 }
 
 /**
@@ -315,24 +329,38 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
  * @param {Account} accounts
  * @param {number} [count]
  *
- * @returns {Message[]}
+ * @returns {AccountMessage[]}
  */
-export const getLatestMessages = (accounts: Account[], count = 10): Message[] => {
-    const messages: Message[] = accounts.reduce(
-        (messages, account) =>
-            messages.concat(
-                account.messages.map((message, idx) =>
-                    Object.assign({}, message, {
-                        account: account.index,
-                        internal: idx % 2 !== 0,
-                    })
-                )
-            ),
-        []
-    )
+export const getLatestMessages = (accounts: Account[], count = 10): AccountMessage[] => {
+    const messages: Message[] = [];
+    const addresses: string[] = [];
+
+    accounts.forEach((account) => {
+        account.addresses.forEach((address: Address) => {
+            addresses.push(address.address);
+        })
+
+        messages.push(...account.messages.map((message) => Object.assign({}, message, { account: account.index })));
+    });
 
     return messages
-        .slice()
+        .map(
+            (message) => {
+                const outputs = message.payload.data.essence.data.outputs;
+                const inputs = message.payload.data.essence.data.inputs
+
+                return Object.assign(
+                    {},
+                    message,
+                    {
+                        internal: outputs.length && outputs.every(
+                            (output: Output) => addresses.includes(output.data.address)
+                        ) && inputs.length && inputs.every(
+                            (input: Input) => input.data.metadata ? addresses.includes(input.data.metadata.address) : false
+                        )
+                    })
+            }
+        )
         .sort((a, b) => {
             return <any>new Date(b.timestamp) - <any>new Date(a.timestamp)
         })
@@ -404,7 +432,7 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
 
             return Object.assign({}, storedAccount, {
                 // Update deposit address
-                depositAddress: syncedAccount.depositAddress.address,
+                depositAddress: syncedAccount.depositAddress,
                 // If we have received a new address, simply add it;
                 // If we have received an existing address, update the properties.
                 addresses: _update(storedAccount.addresses, syncedAccount.addresses, 'address'),

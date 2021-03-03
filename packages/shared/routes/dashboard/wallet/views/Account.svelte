@@ -1,7 +1,9 @@
 <script lang="typescript">
+    import { AccountActionsModal, DashboardPane } from 'shared/components'
+    import type { Account, AccountMessage } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import { DashboardPane, AccountActionsModal } from 'shared/components'
-    import { AccountNavigation, AccountBalance, AccountActions, AccountHistory } from '.'
+    import type { Readable, Writable } from 'svelte/store'
+    import { AccountActions, AccountBalance, AccountHistory, AccountNavigation } from '.'
 
     export let locale
     export let send
@@ -9,12 +11,12 @@
     export let generateAddress
     export let setAlias
 
-    const account = getContext('selectedAccount')
-    const accounts = getContext('walletAccounts')
-    const walletTransactions = getContext('walletTransactions')
+    const account = getContext<Readable<Account>>('selectedAccount')
+    const accounts = getContext<Writable<Account[]>>('walletAccounts')
+    const walletTransactions = getContext<Readable<AccountMessage[]>>('walletTransactions')
 
     $: transactions = $account ? $walletTransactions.filter((tx) => tx.account === $account.index) : []
-    $: navAccounts = $account ? $accounts.map(({ id, name, color }) => ({ id, name, color, active: $account.id === id })) : []
+    $: navAccounts = $account ? $accounts.map(({ id, alias, color }) => ({ id, alias, color, active: $account.id === id })) : []
 
     let showActionsModal = false
 

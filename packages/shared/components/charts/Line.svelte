@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { onMount, afterUpdate } from 'svelte'
     import Chart from 'chart.js'
 

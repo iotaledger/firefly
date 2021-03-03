@@ -1,15 +1,17 @@
 <script lang="typescript">
-    import { get } from 'svelte/store'
-    import { getContext } from 'svelte'
     import { ActivityRow, Text } from 'shared/components'
+    import { accountRoute, walletRoute } from 'shared/lib/router'
+    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
+    import type { Account, AccountMessage } from 'shared/lib/wallet'
     import { selectedAccountId, selectedMessage } from 'shared/lib/wallet'
-    import { walletRoute, accountRoute } from 'shared/lib/router'
-    import { WalletRoutes, AccountRoutes } from 'shared/lib/typings/routes'
+    import { getContext } from 'svelte'
+    import type { Readable, Writable } from 'svelte/store'
+    import { get } from 'svelte/store'
 
     export let locale
 
-    const accounts = getContext('walletAccounts')
-    const transactions = getContext('walletTransactions')
+    const accounts = getContext<Writable<Account[]>>('walletAccounts')
+    const transactions = getContext<Readable<AccountMessage[]>>('walletTransactions')
 
     function handleTransactionClick(transaction) {
         const sourceAccount = get(accounts).find((acc) => acc.index === transaction.account)
