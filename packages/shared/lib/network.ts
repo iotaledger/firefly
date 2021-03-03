@@ -29,7 +29,7 @@ export const network = writable<Network>(Network.Testnet)
  * Check if a node url is valid
  * @param {Node[]} nodesList: list of current nodes
  * @param {Node} newNode: new node candidate
- * @returns {boolean}
+ * @returns {string | undefined}
  */
 export const isNodeValid = (nodesList: Node[] = null, newNode: Node): string | undefined => {
     // Remove spaces, trailing slashes & trailing colons
