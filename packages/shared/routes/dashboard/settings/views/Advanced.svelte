@@ -3,7 +3,7 @@
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { developerMode } from 'shared/lib/app'
     import { Dropdown, Text, Radio, Checkbox, Button } from 'shared/components'
-    import { DEFAULT_NODES as nodes, DEFAULT_NODE as node, isNewNodeValid } from 'shared/lib/network'
+    import { DEFAULT_NODES as nodes, DEFAULT_NODE as node } from 'shared/lib/network'
     import { api, updateAccounts, wallet } from 'shared/lib/wallet'
     import { openPopup, closePopup } from 'shared/lib/popup'
 
@@ -104,56 +104,8 @@
         }
     }
 
-    function addCustomNode(node, primary = false) {
-        if (isNewNodeValid([...$activeProfile.settings.customNodes, ...nodes], node)) {
-            const options = primary
-                ? {
-                      ...$accounts[0].clientOptions,
-                      node: node.url,
-                      nodes: [],
-                  }
-                : {
-                      ...$accounts[0].clientOptions,
-                      nodes: [...$accounts[0].clientOptions.nodes, node.url],
-                  }
-
-            api.setClientOptions(options, {
-                onSuccess() {
-                    updateProfile('settings.customNodes', [...$activeProfile.settings.customNodes, node])
-
-                    if (primary) {
-                        updateProfile('settings.node', node)
-                    }
-
-                    accounts.update((_accounts) =>
-                        _accounts.map((_account) => {
-                            if (primary) {
-                                return Object.assign({}, _account, {
-                                    clientOptions: Object.assign({}, _account.clientOptions, { node: node.url, nodes: [] }),
-                                })
-                            }
-
-                            return Object.assign({}, _account, {
-                                clientOptions: Object.assign({}, _account.clientOptions, {
-                                    nodes: [..._account.clientOptions.nodes, node.url],
-                                }),
-                            })
-                        })
-                    )
-
-                    closePopup()
-                },
-                onError(error) {
-                    console.error(error)
-                },
-            })
-        } else {
-            console.error('Node is not valid')
-        }
-    }
-
     function handleAddNodeClick() {
-        openPopup({ type: 'addNode', props: { addCustomNode, onSuccess: closePopup } })
+        openPopup({ type: 'addNode' })
     }
 
     function resyncAccounts() {
