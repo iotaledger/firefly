@@ -362,19 +362,33 @@
         "exportNewStronghold": "Ekspor Stronghold baru",
         "enableDeepLinks": "Memungkinkan deep links",
         "enableDeveloperMode": "Aktifkan Alat Pengembang",
-        "enableSystemNotifications": "Enable system notifications",
+        "enableSystemNotifications": "Aktifkan notifikasi sistem",
         "exportState": "Ekspor status",
         "outsourceProofOfWork": "Pindahkan pekerjaan",
         "unlock": "Buka",
         "update_firefly": "Memperbarui Firefly",
-        "restart_now": "Restart now",
+        "restart_now": "Start ulang sekarang",
         "save_backup": "Simpan cadangan",
         "customize_account": "Sesuaikan akun",
         "sync_account": "Sinkronisasi akun",
         "view_address_history": "Lihat riwayat alamat",
         "delete_account": "Hapus akun",
         "max": "Maksimal",
-        "add_node": "Tambah Node"
+        "add_node": "Tambah Node",
+        "hide": "Hide",
+        "hideOthers": "Hide Others",
+        "showAll": "Show All",
+        "quit": "Quit",
+        "edit": "Edit",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "selectAll": "Select All",
+        "addAccount": "Add Account",
+        "checkForUpdates": "Check for Updates",
+        "reportAnIssue": "Report an Issue"
     },
     "general": {
         "password": "Kata sandi",
@@ -436,7 +450,11 @@
         "transactions": "Transaksi",
         "security": "Keamanan",
         "account_address": "Alamat Akun",
-        "nodes": "Nodes"
+        "nodes": "Nodes",
+        "wallet": "Wallet",
+        "help": "Help",
+        "no_accounts": "You have no accounts, please create one.",
+        "add_profile": "Add Profile"
     },
     "dates": {
         "today": "Hari ini",
@@ -449,11 +467,11 @@
         "valueTx": "Menerima {{value}} ke {{account}}",
         "confirmed": "Keluar {{value}} dari {{account}} telah dikonfirmasi",
         "failed": "Keluar {{value}} dari {{account}} gagal",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "downloading_update": "Mengunduh pembaruan",
+        "update_ready": "Pembaruan siap",
+        "update_error": "Terjadi kesalahan selama pembaruan. Silakan mencoba kembali",
+        "restart_install": "Start ulang untuk menginstal",
+        "calc_minutes_remaining": "Menghitung menit yang tersisa...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {#sisa menit}}"
     }
 }

@@ -1,11 +1,11 @@
 {
     "views": {
         "onboarding_1": {
-            "title": "Send, Receive & Manage your IOTA",
-            "body": "Firefly is a secure and easy-to-use IOTA wallet."
+            "title": "Şandin, Standin & Rêveberî ya IOTA te",
+            "body": "Firefly tûrikek IOTA ya ewledar û karanîna wê hêsan e."
         },
         "legal": {
-            "title": "Legal",
+            "title": "Nasnav",
             "body": "Please review the Privacy Policy and Terms of Service.",
             "privacy_policy": {
                 "title": "Privacy Policy",
@@ -374,7 +374,21 @@
         "view_address_history": "View address history",
         "delete_account": "Delete account",
         "max": "Max",
-        "add_node": "Add node"
+        "add_node": "Add node",
+        "hide": "Hide",
+        "hideOthers": "Hide Others",
+        "showAll": "Show All",
+        "quit": "Quit",
+        "edit": "Edit",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "selectAll": "Select All",
+        "addAccount": "Add Account",
+        "checkForUpdates": "Check for Updates",
+        "reportAnIssue": "Report an Issue"
     },
     "general": {
         "password": "Password",
@@ -436,7 +450,11 @@
         "transactions": "Transactions",
         "security": "Security",
         "account_address": "Account Address",
-        "nodes": "Nodes"
+        "nodes": "Nodes",
+        "wallet": "Wallet",
+        "help": "Help",
+        "no_accounts": "You have no accounts, please create one.",
+        "add_profile": "Add Profile"
     },
     "dates": {
         "today": "Today",

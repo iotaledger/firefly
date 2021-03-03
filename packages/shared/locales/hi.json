@@ -374,7 +374,21 @@
         "view_address_history": "एड्रेस का इतिहास देखें",
         "delete_account": "खाता नष्ट करें",
         "max": "अधिकतम",
-        "add_node": "नया नोड जोड़ें"
+        "add_node": "नया नोड जोड़ें",
+        "hide": "Hide",
+        "hideOthers": "Hide Others",
+        "showAll": "Show All",
+        "quit": "Quit",
+        "edit": "Edit",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "selectAll": "Select All",
+        "addAccount": "Add Account",
+        "checkForUpdates": "Check for Updates",
+        "reportAnIssue": "Report an Issue"
     },
     "general": {
         "password": "पासवर्ड",
@@ -436,7 +450,11 @@
         "transactions": "ट्रांसक्शन्स",
         "security": "सुरक्षा",
         "account_address": "खाते का पता",
-        "nodes": "नोड्स"
+        "nodes": "नोड्स",
+        "wallet": "Wallet",
+        "help": "Help",
+        "no_accounts": "You have no accounts, please create one.",
+        "add_profile": "Add Profile"
     },
     "dates": {
         "today": "आज",

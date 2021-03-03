@@ -362,19 +362,33 @@
         "exportNewStronghold": "Neuen Stronghold exportieren",
         "enableDeepLinks": "Deep Links aktivieren",
         "enableDeveloperMode": "Entwicklermodus aktivieren",
-        "enableSystemNotifications": "Enable system notifications",
+        "enableSystemNotifications": "Aktiviere Systembenachrichtigungen",
         "exportState": "Status exportieren",
         "outsourceProofOfWork": "Proof of work auslagern",
         "unlock": "Entsperren",
         "update_firefly": "Firefly aktualisieren",
-        "restart_now": "Restart now",
+        "restart_now": "Jetzt Neustarten",
         "save_backup": "Backup speichern",
         "customize_account": "Konto anpassen",
         "sync_account": "Konten synchronisieren",
         "view_address_history": "Adressverlauf anzeigen",
         "delete_account": "Konto löschen",
         "max": "Maximal",
-        "add_node": "Node hinzufügen"
+        "add_node": "Node hinzufügen",
+        "hide": "Hide",
+        "hideOthers": "Hide Others",
+        "showAll": "Show All",
+        "quit": "Quit",
+        "edit": "Edit",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "selectAll": "Select All",
+        "addAccount": "Add Account",
+        "checkForUpdates": "Check for Updates",
+        "reportAnIssue": "Report an Issue"
     },
     "general": {
         "password": "Passwort",
@@ -436,7 +450,11 @@
         "transactions": "Transaktionen",
         "security": "Sicherheit",
         "account_address": "Konto Adresse",
-        "nodes": "Nodes"
+        "nodes": "Nodes",
+        "wallet": "Wallet",
+        "help": "Help",
+        "no_accounts": "You have no accounts, please create one.",
+        "add_profile": "Add Profile"
     },
     "dates": {
         "today": "Heute",
@@ -449,11 +467,11 @@
         "valueTx": "Du hast {{value}} in {{account}} erhalten",
         "confirmed": "Eine ausgehende Transaktion über {{value}} in {{account}} wurde bestätigt",
         "failed": "Ausgehende Transaktion {{value}} von {{account}} ist fehlgeschlagen",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "downloading_update": "Update lädt herunter",
+        "update_ready": "Update bereit",
+        "update_error": "Während des Updates ist ein Fehler aufgetreten. Versuche es erneut",
+        "restart_install": "Neustarten zum installieren",
+        "calc_minutes_remaining": "Berechne verbleibende Zeit...",
+        "minutes_remaining": "{minutes, plural, one {1 Minute verbleibend} other {# Minuten verbleibend}}"
     }
 }
