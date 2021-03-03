@@ -30,7 +30,8 @@
         &:not(.with-icon):active {
             @apply bg-blue-700;
         }
-        &.disabled {
+        
+        &:disabled {
             @apply pointer-events-none;
             @apply bg-gray-200;
             span {
@@ -55,7 +56,8 @@
                 @apply border-blue-400;
                 @apply text-blue-600;
             }
-            &.disabled {
+            
+            &:disabled {
                 @apply pointer-events-none;
                 @apply bg-gray-50;
                 span {
@@ -75,7 +77,8 @@
             &:active {
                 @apply bg-red-700;
             }
-            &.disabled {
+            
+            &:disabled {
                 @apply pointer-events-none;
                 @apply bg-gray-200;
                 span {
@@ -109,7 +112,13 @@
                     @apply text-white;
                 }
             }
-            &.disabled {
+
+            &:hover,
+            &:focus {
+                @apply border-gray-500;
+            }
+            
+            &:disabled {
                 :global(svg) {
                     @apply text-gray-500;
                 }
@@ -147,7 +156,8 @@
                 @apply text-gray-800;
             }
         }
-        &.disabled {
+        
+        &:disabled {
             @apply pointer-events-none;
             @apply bg-gray-200;
             span {
@@ -164,10 +174,11 @@
         class={`xl cursor-pointer text-center rounded-2xl pt-8 pb-4 px-4 flex flex-col items-center ${classes}`}
         use:bindEvents={events}
         on:click={onClick}
-        class:disabled
         class:secondary
         class:active
-        class:with-icon={icon}>
+        class:with-icon={icon}
+        disabled={disabled}
+        >
         <Icon classes="mb-1" {icon} />
         <div class="text-12 leading-140">
             <slot />
@@ -183,10 +194,10 @@
         class:secondary
         class:warning
         class:small
-        class:disabled
         class:with-icon={icon}
         class:iconReverse
-        class:active>
+        class:active
+        disabled={disabled}>
         {#if icon}
             {#if small}
                 {#if iconReverse}
