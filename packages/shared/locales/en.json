@@ -324,6 +324,14 @@
             "set_as_primary_node": "Set as primary node"
         }
     },
+    "charts": {
+        "incoming_mi": "Incoming {value} Mi",
+        "outgoing_mi": "Outgoing {value} Mi",
+        "portoflio": "Portfolio",
+        "token": "Token",
+        "account_value": "Account Value",
+        "account_activity": "Account Activity"
+    },
     "actions": {
         "continue": "Continue",
         "back": "Back",
@@ -451,8 +459,6 @@
         "security": "Security",
         "account_address": "Account Address",
         "nodes": "Nodes",
-        "account_value": "Account Value",
-        "account_activity": "Account Activity",
         "wallet": "Wallet",
         "help": "Help"
     },

@@ -18,14 +18,14 @@
     $: color = $selectedAccount ? $selectedAccount.color : 'blue'
 
     $: {
-        if ($selectedAccount) {
+        if (locale || $selectedAccount) {
             chartData = getAccountActivityData($selectedAccount)
         }
     }
 </script>
 
 <div data-label="portfolio-token-chart" class="w-full h-full px-8 py-4">
-    <Text type="h4" classes="mb-4">{locale('general.account_activity')}</Text>
+    <Text type="h4" classes="mb-4">{locale('charts.account_activity')}</Text>
     <div class="flex-auto">
         <Chart type="bar" {labels} datasets={[incoming, outgoing]} {color} />
     </div>

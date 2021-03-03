@@ -31,7 +31,7 @@
 
     /** Chart data */
     $: {
-        if ($selectedChart || $chartCurrency || $chartTimeframe || $walletBalanceHistory) {
+        if (locale || $selectedChart || $chartCurrency || $chartTimeframe || $walletBalanceHistory) {
             // Account value chart
             if ($selectedAccount) {
                 chartData = getAccountValueData($accountsBalanceHistory[$selectedAccount.index])
@@ -78,12 +78,12 @@
             <div class="flex space-x-4">
                 {#each Object.values(DashboardChartType) as chart, idx}
                     <button on:click={() => selectedChart.set(chart)}>
-                        <Text type="h4" disabled={chart !== $selectedChart}>{chart}</Text>
+                        <Text type="h4" disabled={chart !== $selectedChart}>{locale(`charts.${chart}`)}</Text>
                     </button>
                 {/each}
             </div>
         {:else}
-            <Text type="h4">{locale('general.account_value')}</Text>
+            <Text type="h4">{locale('charts.account_value')}</Text>
         {/if}
         <div class="flex space-x-2">
             <span>

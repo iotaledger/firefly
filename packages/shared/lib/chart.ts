@@ -1,5 +1,7 @@
 import { convertUnits, Unit } from '@iota/unit-converter'
+import { _ } from 'shared/lib/i18n'
 import type { Account } from 'shared/lib/wallet'
+import { date as i18nDate } from 'svelte-i18n'
 import { derived, get, writable } from 'svelte/store'
 import { CurrencyTypes } from './currency'
 import {
@@ -28,8 +30,8 @@ interface ActivityTimeframe {
 }
 
 export enum DashboardChartType {
-    PORTFOLIO = 'Portfolio', // TODO: localize
-    TOKEN = 'Token', // TODO: localize
+    PORTFOLIO = 'portoflio',
+    TOKEN = 'token',
 }
 export enum AccountChartType {
     Value = 'Value',
@@ -99,21 +101,21 @@ export function getAccountValueData(balanceHistory: BalanceHistory): ChartData {
 }
 
 export const getAccountActivityData = (account: Account) => {
-    let date = new Date();
+    const locale = get(_) as (string, values?) => string
+    let now = new Date();
     let activityTimeframes: ActivityTimeframe[] = []
-    let incoming: ChartData = { data: [], tooltips: [], label: 'Incoming', color: account.color || 'blue' } // TODO: localize, profile colors
-    let outgoing: ChartData = { data: [], tooltips: [], label: 'Outgoing', color: 'gray' } // TODO: localize, profile colors
+    let incoming: ChartData = { data: [], tooltips: [], label: locale('general.incoming'), color: account.color || 'blue' } // TODO: profile colors
+    let outgoing: ChartData = { data: [], tooltips: [], label: locale('general.outgoing'), color: 'gray' } // TODO: profile colors
     let labels: string[] = []
     let messages: Message[] = account.messages.slice().sort((a, b) => {
         return <any>new Date(a.timestamp).getTime() - <any>new Date(b.timestamp).getTime()
     })
     for (var i = 0; i < BAR_CHART_ACTIVITY_MONTHS; i++) {
-        let start: number = new Date(date.getFullYear(), date.getMonth() - i, 1).getTime();
-        let end: number = new Date(date.getFullYear(), date.getMonth() - i + 1, 0).getTime();
+        let start: number = new Date(now.getFullYear(), now.getMonth() - i, 1).getTime();
+        let end: number = new Date(now.getFullYear(), now.getMonth() - i + 1, 0).getTime();
         activityTimeframes.push({ start, end })
-        labels.unshift(new Date(start).toLocaleString('default', {
-            month: 'short',
-        }))
+        labels.unshift(
+            get(i18nDate)(new Date(start), { month: 'short' }))
     }
     if (account.messages.length) {
         let index = 0
@@ -138,36 +140,53 @@ export const getAccountActivityData = (account: Account) => {
             }
             incoming.data.unshift(_incoming)
             incoming.tooltips.unshift({
-                title: new Date(start).toLocaleString('default', {
+                title: get(i18nDate)(new Date(start), {
                     year: 'numeric',
-                    month: 'long',
-                }), label: `Incoming ${_incoming} Mi`
-            }) // TODO: localize
+                    month: 'long'
+                }),
+                label: locale('charts.incoming_mi', {
+                    values: {
+                        value: _incoming
+                    }
+                })
+            })
             outgoing.data.unshift(_outgoing)
             outgoing.tooltips.unshift({
-                title: new Date(start).toLocaleString('default', {
+                title: get(i18nDate)(new Date(start), {
                     year: 'numeric',
-                    month: 'long',
-                }), label: `Outgoing ${_outgoing} Mi`
-            }) // TODO: localize
+                    month: 'long'
+                }), label: locale('charts.outgoing_mi', {
+                    values: {
+                        value: _outgoing
+                    }
+                })
+            })
         })
     }
     else {
         activityTimeframes.forEach(({ start, end }) => {
             incoming.data.push(0)
             incoming.tooltips.unshift({
-                title: new Date(start).toLocaleString('default', {
+                title: get(i18nDate)(new Date(start), {
                     year: 'numeric',
-                    month: 'long',
-                }), label: `Incoming ${0} Mi`
-            }) // TODO: localize
+                    month: 'long'
+                }), label: locale('charts.incoming_mi', {
+                    values: {
+                        value: 0
+                    }
+                })
+            })
             outgoing.data.unshift(0)
             outgoing.tooltips.unshift({
-                title: new Date(start).toLocaleString('default', {
+                title: get(i18nDate)(new Date(start), {
                     year: 'numeric',
-                    month: 'long',
-                }), label: `Outgoing ${0} Mi`
-            }) // TODO: localize
+                    month: 'long'
+                }), label: locale('charts.outgoing_mi', {
+                    values: {
+                        value: 0
+                    }
+                })
+            })
         })
     }
     let chartData = {
@@ -184,19 +203,14 @@ function formatLabel(timestamp: number): string {
     switch (get(chartTimeframe)) {
         case HistoryDataProps.ONE_HOUR:
         case HistoryDataProps.TWENTY_FOUR_HOURS:
-            formattedLabel = date.toLocaleString('default', {
+            formattedLabel = get(i18nDate)(new Date(date), {
                 hour: '2-digit',
                 minute: '2-digit',
             })
             break
         case HistoryDataProps.SEVEN_DAYS:
-            formattedLabel = date.toLocaleString('default', {
-                month: 'short',
-                day: 'numeric'
-            })
-            break
         case HistoryDataProps.ONE_MONTH:
-            formattedLabel = date.toLocaleString('default', {
+            formattedLabel = get(i18nDate)(new Date(date), {
                 month: 'short',
                 day: 'numeric'
             })
@@ -207,7 +221,7 @@ function formatLabel(timestamp: number): string {
 
 function formatLineChartTooltip(data: (number | string), timestamp: number | string, showMiota: boolean = false): Tooltip {
     const title: string = `${showMiota ? `1 ${Unit.Mi}: ` : ''}${data} ${get(chartCurrency).toUpperCase()}`
-    const label: string = new Date(timestamp).toLocaleString([], {
+    const label: string = get(i18nDate)(new Date(timestamp), {
         year: 'numeric',
         month: 'short',
         day: '2-digit',
