@@ -1,12 +1,23 @@
 <script lang="typescript">
-    import { onMount, afterUpdate } from 'svelte'
     import Chart from 'chart.js'
+    import { convertHexToRGBA } from 'shared/lib/helpers'
+    import tailwindConfig from 'shared/tailwind.config.js'
+    import { afterUpdate, onMount } from 'svelte'
+    import resolveConfig from 'tailwindcss/resolveConfig'
+
+    export let labels = []
+    export let datasets = []
+    export let xMaxTicks = 7
+    export let yMaxTicks = 6
+    export let yPrecision = 3
+    export let color = 'blue' // TODO: each profile has a different color
 
     let canvas
     let chart
 
-    export let labels
-    export let data
+    const fullConfig = resolveConfig(tailwindConfig)
+
+    onMount(createChart)
 
     afterUpdate(reinitialise)
 
@@ -14,30 +25,30 @@
         const ctx = canvas
         const context = ctx.getContext('2d')
 
-        const gradient = context.createLinearGradient(
-            context.canvas.width / 2,
-            0,
-            context.canvas.width / 2,
-            context.canvas.height / 1.2
-        )
-
-        gradient.addColorStop(0, '#DAE7FF')
-        gradient.addColorStop(1, 'rgba(238, 242, 250, 0)')
-
         chart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels,
-                datasets: [
-                    {
+                datasets: datasets.map((dataset) => {
+                    const gradient = context.createLinearGradient(
+                        context.canvas.width / 2,
+                        0,
+                        context.canvas.width / 2,
+                        context.canvas.height / 1.2
+                    )
+                    const themeColor = fullConfig.theme.colors[dataset.color || color]
+                    gradient.addColorStop(0, convertHexToRGBA(themeColor['400'], 40))
+                    gradient.addColorStop(1, convertHexToRGBA(themeColor['400'], 0))
+                    return {
                         backgroundColor: gradient,
-                        borderColor: '#108cff',
+                        borderColor: themeColor['300'],
                         borderWidth: 2,
-                        // Hide data points on line
+                        pointBackgroundColor: themeColor['300'],
                         pointRadius: 0,
-                        data,
-                    },
-                ],
+                        hoverRadius: 4,
+                        ...dataset,
+                    }
+                }),
             },
             options: {
                 responsive: true,
@@ -46,12 +57,50 @@
                     // Hide label
                     display: false,
                 },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                    backgroundColor: fullConfig.theme.colors.gray['900'],
+                    xPadding: 12,
+                    yPadding: 12,
+                    displayColors: false,
+                    titleFontSize: 12,
+                    bodyFontSize: 11,
+                    titleFontFamily: 'DM Sans',
+                    bodyFontFamily: 'DM Sans',
+                    bodyFontColor: fullConfig.theme.colors[color]['200'],
+                    callbacks: {
+                        title: function ([tooltipItem]) {
+                            let dataset = datasets[tooltipItem.datasetIndex]
+                            if (dataset && dataset.tooltips) {
+                                return dataset.tooltips[tooltipItem.index]?.title ?? ''
+                            }
+                            return ''
+                        },
+                        label: function (tooltipItem) {
+                            let dataset = datasets[tooltipItem.datasetIndex]
+                            if (dataset && dataset.tooltips) {
+                                return dataset.tooltips[tooltipItem.index]?.label ?? ''
+                            }
+                            return ''
+                        },
+                    },
+                },
+                hover: {
+                    mode: 'index',
+                    intersect: false,
+                },
                 scales: {
                     xAxes: [
                         {
-                            offset: true,
                             gridLines: {
                                 display: false,
+                            },
+                            ticks: {
+                                autoSkip: true,
+                                maxRotation: 0,
+                                minRotation: 0,
+                                maxTicksLimit: xMaxTicks,
                             },
                         },
                     ],
@@ -59,9 +108,10 @@
                         {
                             ticks: {
                                 autoSkip: true,
-                                maxTicksLimit: 6,
+                                maxTicksLimit: yMaxTicks,
+                                precision: yPrecision,
                                 callback: function (value, index, values) {
-                                    return value.toFixed(3)
+                                    return Number(value.toString())
                                 },
                             },
                         },
@@ -73,11 +123,8 @@
 
     function reinitialise() {
         chart.destroy()
-
         createChart()
     }
-
-    onMount(createChart)
 </script>
 
-<div class="relative" style="height: calc(50vh - 160px);"><canvas bind:this={canvas} width="600" height="250" /></div>
+<div class="relative" style="height: calc(50vh - 130px);"><canvas bind:this={canvas} width="600" height="250" /></div>
