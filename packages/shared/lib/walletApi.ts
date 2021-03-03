@@ -4,16 +4,8 @@ import type { Account, AccountToCreate, Balance, SyncedAccount } from './typings
 import type { Address } from './typings/address'
 import type {
     CreatedAccountResponse,
-
-
-
     ErrorResponse, LatestAddressResponse, MessageResponse,
-
-
     ReadAccountsResponse, SetStrongholdPasswordResponse,
-
-
-
     SyncAccountsResponse
 } from './typings/bridge'
 import { ResponseTypes } from './typings/bridge'
@@ -21,7 +13,6 @@ import type { ClientOptions } from './typings/client'
 import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, ErrorEventPayload, Event, TransactionEventPayload, TransferProgressEventPayload } from './typings/events'
 import type { Message } from './typings/message'
 import type { StrongholdStatus } from './typings/wallet'
-
 
 type CallbacksStore = {
     [id: string]: CallbacksPattern
