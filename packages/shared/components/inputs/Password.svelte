@@ -2,7 +2,6 @@
 <script lang="typescript">
     import Input from './Input'
     import { Icon } from 'shared/components'
-    import { onMount } from 'svelte'
 
     export let value = ''
     export let classes = ''
