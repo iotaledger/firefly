@@ -68,7 +68,7 @@
                 const { password } = params
 
                 try {
-                    await new Promise((resolve, reject) => {
+                    await new Promise<void>((resolve, reject) => {
                         api.restoreBackup(importFilePath, password, {
                             onSuccess() {
                                 resolve()

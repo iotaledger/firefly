@@ -54,10 +54,10 @@
             api.removeStorage({
                 onSuccess(res) {
                     // Destroy wallet.rs actor for this profile
-                    destroyActor(activeProfile.id)
+                    destroyActor($activeProfile.id)
 
                     // Remove profile from (local) storage
-                    removeProfile(activeProfile.id)
+                    removeProfile($activeProfile.id)
 
                     // Navigate
                     navigate({ reset: true })
@@ -77,7 +77,7 @@
         }
     }
 
-    function exportStronghold() {
+    function exportStronghold(callback?: () => void) {
         window['Electron']
             .getStrongholdBackupDestination()
             .then((result) => {

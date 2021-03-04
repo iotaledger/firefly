@@ -5,8 +5,10 @@ import { isValidUrl, isValidHttpsUrl } from './utils'
 
 export const DEFAULT_NODE: Node = {
     url: 'https://api.hornet-0.testnet.chrysalis2.com',
-    username: '',
-    password: '',
+    auth: {
+        username: '',
+        password: ''
+    }
 }
 
 export const DEFAULT_NODES: Node[] = [
@@ -16,8 +18,10 @@ export const DEFAULT_NODES: Node[] = [
     'https://api.hornet-3.testnet.chrysalis2.com',
 ].map((url) => ({
     url,
-    username: '',
-    password: '',
+    auth: {
+        username: '',
+        password: ''
+    }
 }))
 
 /**

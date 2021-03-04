@@ -6,7 +6,7 @@
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { ADDRESS_LENGTH, VALID_DEVNET_ADDRESS, VALID_MAINNET_ADDRESS } from 'shared/lib/utils'
-    import type { Account } from 'shared/lib/wallet'
+    import type { WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable, Writable } from 'svelte/store'
 
@@ -14,8 +14,8 @@
     export let send
     export let internalTransfer
 
-    const accounts = getContext<Writable<Account[]>>('walletAccounts')
-    const account = getContext<Readable<Account>>('selectedAccount')
+    const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
+    const account = getContext<Readable<WalletAccount>>('selectedAccount')
 
     enum SEND_TYPE {
         EXTERNAL = 'send_payment',
@@ -81,7 +81,7 @@
             walletRoute.set(WalletRoutes.Init)
         }
     }
-    const format = (account: Account) => {
+    const format = (account: WalletAccount) => {
         return {
             ...account,
             label: `${account.alias} • ${account.balance}`,

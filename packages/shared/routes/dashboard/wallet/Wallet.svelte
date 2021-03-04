@@ -1,16 +1,19 @@
 <script lang="typescript">
+    import type { Account as BaseAccount } from 'lib/typings/account'
+    import type { Address } from 'lib/typings/address'
+    import type { ErrorEventPayload } from 'lib/typings/events'
     import { DashboardPane } from 'shared/components'
     import { sendParams } from 'shared/lib/app'
     import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { priceData } from 'shared/lib/marketData'
-    import { DEFAULT_NODE as node, DEFAULT_NODES as nodes, network } from 'shared/lib/network'
+    import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import { formatUnit } from 'shared/lib/units'
-    import type { Account as AccountType, AccountMessage, BalanceHistory, BalanceOverview } from 'shared/lib/wallet'
+    import type { BalanceOverview, AccountMessage, WalletAccount, BalanceHistory } from 'shared/lib/wallet'
     import {
         api,
         getAccountsBalanceHistory,
@@ -30,7 +33,7 @@
 
     const AccountColors = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
-    const { accounts, balanceOverview } = $wallet
+    const { accounts, balanceOverview, accountsLoaded } = $wallet
 
     const transactions = derived(accounts, ($accounts) => {
         return getLatestMessages($accounts)
@@ -46,17 +49,27 @@
     )
 
     setContext<Writable<BalanceOverview>>('walletBalance', balanceOverview)
-    setContext<Writable<AccountType[]>>('walletAccounts', accounts)
+    setContext<Writable<WalletAccount[]>>('walletAccounts', accounts)
+    setContext<Writable<boolean>>('walletAccountsLoaded', accountsLoaded)
     setContext<Readable<AccountMessage[]>>('walletTransactions', transactions)
-    setContext<Readable<AccountType>>('selectedAccount', selectedAccount)
+    setContext<Readable<WalletAccount>>('selectedAccount', selectedAccount)
     setContext<Readable<BalanceHistory>>('accountsBalanceHistory', accountsBalanceHistory)
     setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
 
-    let createAccountError = ''
-
-    function getAccountMeta(accountId, callback) {
+    function getAccountMeta(
+        accountId: string,
+        callback: (
+            error: ErrorEventPayload,
+            meta?: {
+                balance: number
+                incoming: number
+                outgoing: number
+                depositAddress: string
+            }
+        ) => void
+    ) {
         api.getBalance(accountId, {
             onSuccess(balanceResponse) {
                 api.latestAddress(accountId, {
@@ -79,15 +92,23 @@
         })
     }
 
-    function prepareAccountInfo(account, meta) {
+    function prepareAccountInfo(
+        account: BaseAccount,
+        meta: {
+            balance: number
+            incoming: number
+            outgoing: number
+            depositAddress: string
+        }
+    ): WalletAccount {
         const { id, index, alias } = account
         const { balance, depositAddress } = meta
 
-        return Object.assign({}, account, {
+        return Object.assign<WalletAccount, BaseAccount, Partial<WalletAccount>>({} as WalletAccount, account, {
             id,
             index,
             depositAddress,
-            name: alias,
+            alias,
             rawIotaBalance: balance,
             balance: formatUnit(balance, 0),
             balanceEquiv: `${convertToFiat(
@@ -108,23 +129,28 @@
                     outgoing: 0,
                 }
 
-                for (const [idx, storedAccount] of accountsResponse.payload.entries()) {
-                    getAccountMeta(storedAccount.id, (err, meta) => {
-                        if (!err) {
-                            _totalBalance.balance += meta.balance
-                            _totalBalance.incoming += meta.incoming
-                            _totalBalance.outgoing += meta.outgoing
+                if (accountsResponse.payload.length === 0) {
+                    accountsLoaded.set(true)
+                } else {
+                    for (const [idx, storedAccount] of accountsResponse.payload.entries()) {
+                        getAccountMeta(storedAccount.id, (err, meta) => {
+                            if (!err) {
+                                _totalBalance.balance += meta.balance
+                                _totalBalance.incoming += meta.incoming
+                                _totalBalance.outgoing += meta.outgoing
 
-                            const account = prepareAccountInfo(storedAccount, meta)
-                            accounts.update((accounts) => [...accounts, account])
+                                const account = prepareAccountInfo(storedAccount, meta)
+                                accounts.update((accounts) => [...accounts, account])
 
-                            if (idx === accountsResponse.payload.length - 1) {
-                                updateBalanceOverview(_totalBalance.balance, _totalBalance.incoming, _totalBalance.outgoing)
+                                if (idx === accountsResponse.payload.length - 1) {
+                                    updateBalanceOverview(_totalBalance.balance, _totalBalance.incoming, _totalBalance.outgoing)
+                                    accountsLoaded.set(true)
+                                }
+                            } else {
+                                console.error(err)
                             }
-                        } else {
-                            console.error(err)
-                        }
-                    })
+                        })
+                    }
                 }
             },
             onError(error) {
@@ -142,9 +168,13 @@
                     accounts.update((accounts) =>
                         accounts.map((account) => {
                             if (account.id === accountId) {
-                                return Object.assign({}, account, {
-                                    depositAddress: response.payload.address,
-                                })
+                                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+                                    {} as WalletAccount,
+                                    account,
+                                    {
+                                        depositAddress: response.payload.address,
+                                    }
+                                )
                             }
 
                             return account
@@ -190,9 +220,10 @@
             api.createAccount(
                 {
                     alias,
+                    signerType: { type: 'Stronghold' },
                     clientOptions: {
-                        node: $accounts.length > 0 ? $accounts[0].clientOptions.node : node,
-                        nodes: $accounts.length > 0 ? $accounts[0].clientOptions.nodes : nodes,
+                        node: $accounts.length > 0 ? $accounts[0].clientOptions.node : DEFAULT_NODE.url,
+                        nodes: $accounts.length > 0 ? $accounts[0].clientOptions.nodes : DEFAULT_NODES.map(n => n.url),
                         // For subsequent accounts, use the network for any of the previous accounts
                         network: $accounts.length > 0 ? $accounts[0].clientOptions.network : $network,
                     },
@@ -256,9 +287,13 @@
                         accounts.update((_accounts) => {
                             return _accounts.map((_account) => {
                                 if (_account.id === senderAccountId) {
-                                    return Object.assign({}, _account, {
-                                        messages: [response.payload, ..._account.messages],
-                                    })
+                                    return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+                                        {} as WalletAccount,
+                                        _account,
+                                        {
+                                            messages: [response.payload, ..._account.messages],
+                                        }
+                                    )
                                 }
 
                                 return _account
@@ -296,9 +331,13 @@
                     accounts.update((_accounts) => {
                         return _accounts.map((_account) => {
                             if (_account.id === senderAccountId || _account.id === receiverAccountId) {
-                                return Object.assign({}, _account, {
-                                    messages: [response.payload, ..._account.messages],
-                                })
+                                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+                                    {} as WalletAccount,
+                                    _account,
+                                    {
+                                        messages: [response.payload, ..._account.messages],
+                                    }
+                                )
                             }
 
                             return _account
@@ -334,11 +373,13 @@
                 accounts.update((_accounts) => {
                     return _accounts.map((account) => {
                         if (account.id === $selectedAccountId) {
-                            return Object.assign({}, account, {
-                                // TODO: Remove "name" property from account and reference alias everywhere
-                                alias: newAlias,
-                                name: newAlias,
-                            })
+                            return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+                                {} as WalletAccount,
+                                account,
+                                {
+                                    alias: newAlias,
+                                }
+                            )
                         }
 
                         return account
@@ -361,7 +402,7 @@
     }
 
     onMount(() => {
-        if (!$accounts.length) {
+        if (!$accountsLoaded) {
             getAccounts()
         }
 

@@ -1,6 +1,6 @@
 import { convertUnits, Unit } from '@iota/unit-converter'
 import { _ } from 'shared/lib/i18n'
-import type { Account } from 'shared/lib/wallet'
+import type { WalletAccount } from 'shared/lib/wallet'
 import { date as i18nDate } from 'svelte-i18n'
 import { derived, get, writable } from 'svelte/store'
 import { CurrencyTypes } from './currency'
@@ -100,7 +100,7 @@ export function getAccountValueData(balanceHistory: BalanceHistory): ChartData {
     return chartData
 }
 
-export const getAccountActivityData = (account: Account) => {
+export const getAccountActivityData = (account: WalletAccount) => {
     const locale = get(_) as (string, values?) => string
     let now = new Date();
     let activityTimeframes: ActivityTimeframe[] = []
