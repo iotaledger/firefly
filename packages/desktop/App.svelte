@@ -123,7 +123,7 @@
     <Splash />
 {:else}
     {#if $popupState.active}
-        <Popup type={$popupState.type} props={$popupState.props} locale={$_} />
+        <Popup type={$popupState.type} props={$popupState.props} hideClose={$popupState.hideClose} locale={$_} />
     {/if}
     <!-- dummy toggles -->
     <div class="dummy-toggles flex flex-row">
