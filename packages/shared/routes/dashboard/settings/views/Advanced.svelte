@@ -100,7 +100,6 @@
         const selectedNode = [...DEFAULT_NODES, ...$activeProfile.settings.customNodes]
                     .find((node: Node) => node.url === option.value)
 
-        console.log('Selected node', selectedNode)
         if (selectedNode.url !== $activeProfile.settings.node.url) {
             api.setClientOptions(
                 {
