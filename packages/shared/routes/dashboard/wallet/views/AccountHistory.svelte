@@ -1,13 +1,10 @@
 <script lang="typescript">
-    import { getContext } from 'svelte'
+    import { ActivityDetail, ActivityRow, Icon, Illustration, Text } from 'shared/components'
     import { selectedMessage } from 'shared/lib/wallet'
-    import { ActivityRow, Text, Icon, ActivityDetail } from 'shared/components'
 
     export let locale
     export let transactions = []
     export let color = 'blue'
-
-    const selectedAccount = getContext('selectedAccount')
 
     function handleTransactionClick(transaction) {
         selectedMessage.set(transaction)
@@ -28,12 +25,19 @@
         <Text type="h4">{locale('general.transactions')}</Text>
     </div>
     {#if $selectedMessage}
-        <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} color={$selectedAccount.color ?? 'blue'} {locale} />
+        <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} {locale} />
     {:else}
         <div class="overflow-y-auto flex-auto h-1 space-y-2">
-            {#each transactions as transaction}
-                <ActivityRow onClick={() => handleTransactionClick(transaction)} {...transaction} {color} />
-            {/each}
+            {#if transactions.length}
+                {#each transactions as transaction}
+                    <ActivityRow onClick={() => handleTransactionClick(transaction)} {...transaction} {color} />
+                {/each}
+            {:else}
+                <div class="h-full flex flex-col items-center justify-center text-center">
+                    <Illustration width="50%" illustration="no-history" />
+                    <Text secondary classes="mt-6">{locale('general.no_recent_history')}</Text>
+                </div>
+            {/if}
         </div>
     {/if}
 </div>

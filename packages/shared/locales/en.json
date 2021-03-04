@@ -469,7 +469,8 @@
         "date": "Date",
         "no_accounts": "Your accounts have not loaded yet.",
         "loading_accounts": "Loading accounts, please wait...",
-        "add_profile": "Add Profile"
+        "add_profile": "Add Profile",
+        "no_recent_history": "No recent history"
     },
     "dates": {
         "today": "Today",

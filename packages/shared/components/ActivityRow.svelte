@@ -1,7 +1,9 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
-    import { formatUnit } from 'shared/lib/units'
     import { truncateString } from 'shared/lib/helpers'
+    import { formatUnit } from 'shared/lib/units'
+    import { date } from 'svelte-i18n'
+
     export let id
     export let timestamp
     export let value
@@ -24,7 +26,7 @@
     <div class="flex flex-col ml-4">
         <Text type="p" bold smaller>{truncateString(id)}</Text>
         <Text type="p" secondary smaller>
-            {new Date(timestamp).toLocaleString('default', {
+            {$date(new Date(timestamp), {
                 year: 'numeric',
                 month: 'short',
                 day: 'numeric',
