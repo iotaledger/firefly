@@ -5,6 +5,7 @@
     import { networkStatus } from 'shared/lib/networkStatus'
     import { activeProfile } from 'shared/lib/profile'
     import { getInitials } from 'shared/lib/helpers'
+    import { selectedAccountId } from 'shared/lib/wallet'
     import { walletRoute, settingsRoute, accountRoute } from 'shared/lib/router'
     import { WalletRoutes, AccountRoutes, SettingsRoutes } from 'shared/lib/typings/routes'
 
@@ -49,6 +50,7 @@
     function openWallet() {
         walletRoute.set(WalletRoutes.Init)
         accountRoute.set(AccountRoutes.Init)
+        selectedAccountId.set(null)
         setActiveTab(Tabs.Wallet)
     }
 </script>
