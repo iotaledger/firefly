@@ -1,9 +1,9 @@
 <script lang="typescript">
-    import type { ClientOptions, Node } from 'lib/typings/client'
+    import type { ClientOptions } from 'lib/typings/client'
     import { Button, Checkbox, Dropdown, Radio, Text } from 'shared/components'
     import { developerMode } from 'shared/lib/app'
-    import { DEFAULT_NODE, DEFAULT_NODES, isNewNodeValid } from 'shared/lib/network'
-    import { closePopup, openPopup } from 'shared/lib/popup'
+    import { DEFAULT_NODE, DEFAULT_NODES } from 'shared/lib/network'
+    import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { api, updateAccounts, wallet, WalletAccount } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
@@ -26,7 +26,7 @@
             api.setClientOptions(
                 {
                     ...$accounts[0].clientOptions,
-                    nodes: _nodes.map(n => n.url),
+                    nodes: _nodes.map((n) => n.url),
                     node: DEFAULT_NODE.url,
                 },
                 {
@@ -42,7 +42,7 @@
                                             {} as ClientOptions,
                                             _account.clientOptions,
                                             {
-                                                nodes: _nodes.map(n => n.url),
+                                                nodes: _nodes.map((n) => n.url),
                                                 node: DEFAULT_NODE.url,
                                             }
                                         ),

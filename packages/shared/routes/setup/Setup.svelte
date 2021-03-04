@@ -1,11 +1,12 @@
 <script lang="typescript">
+    import { Button, Checkbox, Illustration, Input, OnboardingLayout, Text } from 'shared/components'
+    import { developerMode } from 'shared/lib/app'
+    import { Electron } from 'shared/lib/electron'
+    import { createProfile, disposeNewProfile, newProfile } from 'shared/lib/profile'
+    import { SetupType } from 'shared/lib/typings/routes'
+    import { getStoragePath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
-    import { OnboardingLayout, Illustration, Text, Button, Input, Checkbox } from 'shared/components'
-    import { createProfile, disposeNewProfile, newProfile } from 'shared/lib/profile'
-    import { developerMode } from 'shared/lib/app'
-    import { initialise, getStoragePath } from 'shared/lib/wallet'
-    import { SetupType } from 'shared/lib/typings/routes'
 
     export let locale
     export let mobile
@@ -24,14 +25,14 @@
         if (profileName.length > MAX_PROFILE_NAME_LENGTH) {
             error = locale('error.profile.length', {
                 values: {
-                    length: MAX_PROFILE_NAME_LENGTH
-                }
+                    length: MAX_PROFILE_NAME_LENGTH,
+                },
             })
         } else {
             try {
                 profile = createProfile(profileName, isDeveloperProfile)
 
-                return window['Electron'].getUserDataPath().then((path) => {
+                return Electron.getUserDataPath().then((path) => {
                     initialise(profile.id, getStoragePath(path, profile.name))
                     dispatch('next', { setupType })
                 })
@@ -42,7 +43,7 @@
     }
 
     function handleBackClick() {
-        disposeNewProfile();
+        disposeNewProfile()
         dispatch('previous')
     }
 </script>
@@ -53,7 +54,7 @@
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-4">{locale('views.setup.title')}</Text>
-            <Input {error} bind:value={profileName} placeholder={locale('views.setup.profile_name')} classes="w-full" autofocus/>
+            <Input {error} bind:value={profileName} placeholder={locale('views.setup.profile_name')} classes="w-full" autofocus />
             {#if $developerMode}
                 <Checkbox label={locale('general.developerProfile')} bind:checked={isDeveloperProfile} />
             {/if}
