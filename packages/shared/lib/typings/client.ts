@@ -5,7 +5,6 @@ export enum Network {
     Comnet = 'comnet',
 }
 
-// TODO: use this interface when https://github.com/iotaledger/wallet.rs/pull/373 is merged
 export interface Node {
     url: string
     auth?: {
@@ -15,8 +14,8 @@ export interface Node {
 }
 
 export interface ClientOptions {
-    nodes?: string[]
-    node?: string
+    nodes?: Node[]
+    node?: Node
     network?: Network
     localPow?: boolean
     nodeSyncEnabled?: boolean

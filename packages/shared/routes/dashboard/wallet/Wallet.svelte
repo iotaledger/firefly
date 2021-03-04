@@ -222,8 +222,8 @@
                     alias,
                     signerType: { type: 'Stronghold' },
                     clientOptions: {
-                        node: $accounts.length > 0 ? $accounts[0].clientOptions.node : DEFAULT_NODE.url,
-                        nodes: $accounts.length > 0 ? $accounts[0].clientOptions.nodes : DEFAULT_NODES.map(n => n.url),
+                        node: $accounts.length > 0 ? $accounts[0].clientOptions.node : DEFAULT_NODE,
+                        nodes: $accounts.length > 0 ? $accounts[0].clientOptions.nodes : DEFAULT_NODES,
                         // For subsequent accounts, use the network for any of the previous accounts
                         network: $accounts.length > 0 ? $accounts[0].clientOptions.network : $network,
                     },
