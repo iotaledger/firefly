@@ -14,10 +14,11 @@
     export let xMaxTicks
     export let yMaxTicks
     export let yPrecision
+    export let beginAtZero
 </script>
 
 {#if type === ChartType.Line}
-    <LineChart {datasets} {labels} {tooltips} {xMaxTicks} {yMaxTicks} {yPrecision} {color} />
+    <LineChart {datasets} {labels} {tooltips} {xMaxTicks} {yMaxTicks} {yPrecision} {beginAtZero} {color} />
 {:else if type === ChartType.Bar}
     <BarChart {datasets} {labels} {tooltips} />
 {/if}

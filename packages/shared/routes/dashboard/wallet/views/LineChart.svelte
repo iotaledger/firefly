@@ -99,6 +99,6 @@
         </div>
     </div>
     <div class="flex-auto">
-        <Chart type="line" {datasets} {labels} {color} {xMaxTicks} yPrecision={7} />
+        <Chart type="line" {datasets} beginAtZero={$selectedChart === DashboardChartType.PORTFOLIO} {labels} {color} {xMaxTicks} yPrecision={7} />
     </div>
 </div>
