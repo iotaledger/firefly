@@ -5,8 +5,6 @@
     export let group = undefined
     export let label = ''
     export let classes = ''
-
-    console.log({ value }, { group })
 </script>
 
 <style type="text/scss">
