@@ -17,7 +17,7 @@ import type { Input, Message, Output } from './typings/message'
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
 export interface Account extends BaseAccount {
-    depositAddress: Address;
+    depositAddress: string;
     rawIotaBalance: number;
     balance: string;
     balanceEquiv: string;

@@ -16,6 +16,7 @@
 
     $: selectedAccount = $currentAccount || $accounts[0]
 
+
     const handleDropdownSelect = (item) => {
         selectedAccount = item
     }
@@ -59,7 +60,7 @@
             <Button
                 disabled={isGeneratingAddress}
                 classes="w-full"
-                onClick={() => setClipboard(selectedAccount.depositAddress.address)}>
+                onClick={() => setClipboard(selectedAccount.depositAddress)}>
                 {locale('general.copy_address')}
             </Button>
         </div>
