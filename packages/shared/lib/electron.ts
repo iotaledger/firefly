@@ -30,7 +30,7 @@ export interface IPincodeManager {
     verify(id: string, pin: string): Promise<boolean>
 }
 
-interface ElectronEventMap extends GlobalEventHandlersEventMap, WindowEventHandlersEventMap {
+interface ElectronEventMap {
     "menu-logout": void;
     "menu-navigate-wallet": WalletRoutes;
     "menu-navigate-settings": void;
