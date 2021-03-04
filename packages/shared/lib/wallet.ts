@@ -2,6 +2,8 @@ import { mnemonic } from 'shared/lib/app'
 import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
 import { _ } from 'shared/lib/i18n'
+import type { HistoryData, PriceData } from 'shared/lib/marketData'
+import { HistoryDataProps } from 'shared/lib/marketData'
 import { showSystemNotification } from 'shared/lib/notifications'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { formatUnit } from 'shared/lib/units'
@@ -9,14 +11,14 @@ import { get, writable, Writable } from 'svelte/store'
 import type { Account, SyncedAccount } from './typings/account'
 import type { Address } from './typings/address'
 import type { Actor } from './typings/bridge'
-import type { TransferProgressEventType } from './typings/events'
+import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, Event, TransactionEventPayload, TransferProgressEventPayload, TransferProgressEventType } from './typings/events'
 import type { Input, Message, Output } from './typings/message'
 import type { ApiClient } from './walletApi'
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
 export interface WalletAccount extends Account {
-    depositAddress: Address;
+    depositAddress: string;
     rawIotaBalance: number;
     balance: string;
     balanceEquiv: string;
@@ -46,6 +48,18 @@ type WalletState = {
     balanceOverview: Writable<BalanceOverview>
     accounts: Writable<WalletAccount[]>
     accountsLoaded: Writable<boolean>
+}
+
+type BalanceTimestamp = {
+    timestamp: number,
+    balance: number
+}
+
+export type BalanceHistory = {
+    [HistoryDataProps.ONE_HOUR]: BalanceTimestamp[]
+    [HistoryDataProps.SEVEN_DAYS]: BalanceTimestamp[]
+    [HistoryDataProps.TWENTY_FOUR_HOURS]: BalanceTimestamp[]
+    [HistoryDataProps.ONE_MONTH]: BalanceTimestamp[]
 }
 
 /** Active actors state */
@@ -359,15 +373,15 @@ export const getLatestMessages = (accounts: WalletAccount[], count = 10): Accoun
 }
 
 /**
- * Updates balance overview 
- * 
+ * Updates balance overview
+ *
  * @method updateBalanceOverview
- * 
+ *
  * @param {number} balance
- * @param {number} incoming 
+ * @param {number} incoming
  * @param {number} outgoing
- * 
- * @returns {void} 
+ *
+ * @returns {void}
  */
 export const updateBalanceOverview = (balance: number, incoming: number, outgoing: number): void => {
     const { balanceOverview } = get(wallet);
@@ -389,7 +403,7 @@ export const updateBalanceOverview = (balance: number, incoming: number, outgoin
     });
 };
 
-/**    
+/**
 * Updates accounts information after a successful sync accounts operation
 *
 * @method updateAccounts
@@ -411,7 +425,7 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
 
             return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
                 // Update deposit address
-                depositAddress: syncedAccount.depositAddress,
+                depositAddress: syncedAccount.depositAddress.address,
                 // If we have received a new address, simply add it;
                 // If we have received an existing address, update the properties.
                 addresses: mergeProps(storedAccount.addresses, syncedAccount.addresses, 'address'),
@@ -435,4 +449,111 @@ function mergeProps<T>(existingPayload: T[], newPayload: T[], prop: string): T[]
     }, {})
 
     return Object.values(Object.assign({}, existingPayloadMap, newPayloadMap))
+}
+
+/**
+ * Gets balance history for each account in market data timestamps
+ *
+ * @method getLatestMessages
+ *
+ * @param {Account} accounts
+ * @param {PriceData} [priceData]
+ *
+ */
+export const getAccountsBalanceHistory = (accounts: Account[], priceData: PriceData): BalanceHistory => {
+    let balanceHistory: BalanceHistory = {
+        [HistoryDataProps.ONE_HOUR]: [],
+        [HistoryDataProps.TWENTY_FOUR_HOURS]: [],
+        [HistoryDataProps.SEVEN_DAYS]: [],
+        [HistoryDataProps.ONE_MONTH]: [],
+    }
+    if (priceData && accounts) {
+        accounts.forEach((account) => {
+            let accountBalanceHistory: HistoryData = {
+                [HistoryDataProps.ONE_HOUR]: [],
+                [HistoryDataProps.TWENTY_FOUR_HOURS]: [],
+                [HistoryDataProps.SEVEN_DAYS]: [],
+                [HistoryDataProps.ONE_MONTH]: [],
+            }
+            // Sort messages from last to newest
+            let messages = account.messages.sort((a, b) => {
+                return <any>new Date(a.timestamp).getTime() - <any>new Date(b.timestamp).getTime()
+            })
+            // Calculate the variations for each account
+            var balanceSoFar = 0;
+            let accountBalanceVariations = [{ balance: balanceSoFar, timestamp: '0' }]
+            messages.forEach((message) => {
+                if (message.incoming) {
+                    balanceSoFar += message.value;
+                } else {
+                    balanceSoFar -= message.value;
+                }
+                accountBalanceVariations.push({ balance: balanceSoFar, timestamp: message.timestamp })
+            })
+            // Calculate the balance in each market data timestamp
+            let balanceHistoryInTimeframe = []
+            Object.entries(priceData[CurrencyTypes.USD]).forEach(([timeframe, data]) => {
+                // sort market data from last to newest
+                let sortedData = data.sort((a, b) => a[0] - b[0])
+                balanceHistoryInTimeframe = []
+                // if there are no balance variations
+                if (accountBalanceVariations.length === 1) {
+                    balanceHistoryInTimeframe = sortedData.map(_data => ({ timestamp: _data[0], balance: 0 }))
+                }
+                else {
+                    let i = 1
+                    sortedData.forEach(data => {
+                        let data_timestamp = new Date(data[0] * 1000).getTime()
+                        // find balance for each market data timepstamp
+                        for (i; i < accountBalanceVariations.length; i++) {
+                            let currentBalanceTimestamp = new Date(accountBalanceVariations[i].timestamp).getTime()
+                            let peviousBalanceTimestamp = new Date(accountBalanceVariations[i - 1].timestamp).getTime()
+                            if (data_timestamp >= peviousBalanceTimestamp && data_timestamp < currentBalanceTimestamp) {
+                                balanceHistoryInTimeframe.push({ timestamp: data[0], balance: accountBalanceVariations[i - 1].balance })
+                                return
+                            }
+                            else if (i === (accountBalanceVariations.length - 1)) {
+                                balanceHistoryInTimeframe.push({ timestamp: data[0], balance: accountBalanceVariations[i].balance })
+                                return
+                            }
+                        }
+                    })
+                }
+                accountBalanceHistory[timeframe] = balanceHistoryInTimeframe
+            })
+            balanceHistory[account.index] = accountBalanceHistory
+        })
+    }
+    return balanceHistory
+}
+
+/**
+ * Gets balance history for all accounts combined in market data timestamps
+ *
+ * @method getLatestMessages
+ *
+ * @param {Account} accounts
+ * @param {PriceData} [priceData]
+ *
+ */
+export const getWalletBalanceHistory = (accountsBalanceHistory: BalanceHistory): BalanceHistory => {
+    let balanceHistory: BalanceHistory = {
+        [HistoryDataProps.ONE_HOUR]: [],
+        [HistoryDataProps.TWENTY_FOUR_HOURS]: [],
+        [HistoryDataProps.SEVEN_DAYS]: [],
+        [HistoryDataProps.ONE_MONTH]: [],
+    }
+    Object.values(accountsBalanceHistory).forEach(accBalanceHistory => {
+        Object.entries(accBalanceHistory).forEach(([timeframe, data]) => {
+            if (!balanceHistory[timeframe].length) {
+                balanceHistory[timeframe] = data
+            }
+            else {
+                balanceHistory[timeframe] = balanceHistory[timeframe].map(({ balance, timestamp }, index) =>
+                    ({ timestamp, balance: balance + data[index].balance })
+                )
+            }
+        })
+    })
+    return balanceHistory
 }

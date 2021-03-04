@@ -3,7 +3,7 @@
     import type { AccountMessage, WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable, Writable } from 'svelte/store'
-    import { AccountActions, AccountBalance, AccountHistory, AccountNavigation } from '.'
+    import { AccountActions, AccountBalance, AccountHistory, AccountNavigation, BarChart, LineChart } from '.'
 
     export let locale
     export let send
@@ -27,7 +27,7 @@
 
 <!-- wait for account to load -->
 {#if $accounts && $account}
-    <div class="w-full h-full flex flex-col flex-nowrap px-10 pb-10 relative">
+    <div class="w-full h-full flex flex-col flex-nowrap px-10 pb-10 relative flex-1">
         <AccountNavigation {locale} accounts={navAccounts} />
         {#key $account}
             <div class="w-full h-full grid grid-cols-3 gap-x-4">
@@ -46,10 +46,12 @@
                     <AccountHistory {locale} color={$account.color} {transactions} />
                 </DashboardPane>
                 <div class=" flex flex-col space-y-4">
-                    <!-- TODO Account Value -->
-                    <DashboardPane classes="h-1/2 w-full" />
-                    <!-- TODO  Account Activity -->
-                    <DashboardPane classes="h-1/2 w-full" />
+                    <DashboardPane classes="w-full h-1/2">
+                        <LineChart {locale} />
+                    </DashboardPane>
+                    <DashboardPane classes="w-full h-1/2">
+                        <BarChart {locale} />
+                    </DashboardPane>
                 </div>
             </div>
         {/key}

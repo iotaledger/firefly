@@ -6,16 +6,19 @@
     import { sendParams } from 'shared/lib/app'
     import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
+    import { priceData } from 'shared/lib/marketData'
     import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import { formatUnit } from 'shared/lib/units'
-    import type { BalanceOverview, AccountMessage, WalletAccount } from 'shared/lib/wallet'
+    import type { BalanceOverview, AccountMessage, WalletAccount, BalanceHistory } from 'shared/lib/wallet'
     import {
         api,
+        getAccountsBalanceHistory,
         getLatestMessages,
+        getWalletBalanceHistory,
         initialiseListeners,
         selectedAccountId,
         updateAccounts,
@@ -35,6 +38,12 @@
     const transactions = derived(accounts, ($accounts) => {
         return getLatestMessages($accounts)
     })
+    const accountsBalanceHistory = derived([accounts, priceData], ([$accounts, $priceData]) =>
+        getAccountsBalanceHistory($accounts, $priceData)
+    )
+    const walletBalanceHistory = derived(accountsBalanceHistory, ($accountsBalanceHistory) =>
+        getWalletBalanceHistory($accountsBalanceHistory)
+    )
     const selectedAccount = derived([selectedAccountId, accounts], ([$selectedAccountId, $accounts]) =>
         $accounts.find((acc) => acc.id === $selectedAccountId)
     )
@@ -44,6 +53,8 @@
     setContext<Writable<boolean>>('walletAccountsLoaded', accountsLoaded)
     setContext<Readable<AccountMessage[]>>('walletTransactions', transactions)
     setContext<Readable<WalletAccount>>('selectedAccount', selectedAccount)
+    setContext<Readable<BalanceHistory>>('accountsBalanceHistory', accountsBalanceHistory)
+    setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
 
@@ -231,13 +242,16 @@
                                     }
                                 })
                             },
-                            onError(error) {
-                                console.error(error)
+                            onError(err) {
+                                console.error(err)
                             },
                         })
                     },
-                    onError(error) {
-                        console.error(error)
+                    onError(err) {
+                        // TODO: Add proper error handling
+                        if (err.payload.error.includes('message history and balance')){
+                            createAccountError = locale('error.account.empty')
+                        }
                     },
                 }
             )
@@ -423,13 +437,13 @@
         setAlias={onSetAlias}
         {locale} />
 {:else}
-    <div class="w-full h-full flex flex-col p-10">
+    <div class="w-full h-full flex flex-col p-10 flex-1">
         <div class="w-full h-full flex flex-row space-x-4 flex-auto">
             <DashboardPane classes="w-1/3 h-full">
                 <!-- Total Balance, Accounts list & Send/Receive -->
                 <div class="flex flex-auto flex-col flex-shrink-0 h-full">
                     {#if $walletRoute === WalletRoutes.CreateAccount}
-                        <CreateAccount onCreate={onCreateAccount} {locale} />
+                        <CreateAccount error={createAccountError} onCreate={onCreateAccount} {locale} />
                     {:else}
                         <WalletBalance {locale} />
                         <DashboardPane classes="-mt-5 h-full">
@@ -444,7 +458,7 @@
             </DashboardPane>
             <div class="flex flex-col w-2/3 h-full space-y-4">
                 <DashboardPane classes="w-full h-1/2">
-                    <LineChart />
+                    <LineChart {locale} />
                 </DashboardPane>
                 <div class="w-full h-1/2 flex flex-row flex-1 space-x-4">
                     <DashboardPane classes="w-1/2">

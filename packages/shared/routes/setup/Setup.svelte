@@ -9,19 +9,24 @@
 
     export let locale
     export let mobile
+    let error = ''
 
     const dispatch = createEventDispatcher()
 
     let isDeveloperProfile = false
     let profileName = get(newProfile)?.name ?? ''
 
-    const MAX_PROFILE_NAME_LENGTH = 250
+    const MAX_PROFILE_NAME_LENGTH = 20
 
     function handleContinueClick(setupType) {
         let profile
 
         if (profileName.length > MAX_PROFILE_NAME_LENGTH) {
-            console.error('Profile name too long.')
+            error = locale('error.profile.length', {
+                values: {
+                    length: MAX_PROFILE_NAME_LENGTH
+                }
+            })
         } else {
             try {
                 profile = createProfile(profileName, isDeveloperProfile)
@@ -48,13 +53,13 @@
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-4">{locale('views.setup.title')}</Text>
-            <Input bind:value={profileName} placeholder={locale('views.setup.profile_name')} classes="w-full mb-4" autofocus />
+            <Input {error} bind:value={profileName} placeholder={locale('views.setup.profile_name')} classes="w-full" autofocus/>
             {#if $developerMode}
                 <Checkbox label={locale('general.developerProfile')} bind:checked={isDeveloperProfile} />
             {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap items-center space-x-4">
-            <Button secondary disabled={!profileName} classes="flex-1" onClick={() => handleContinueClick(SetupType.Import)}>
+            <Button secondary classes="flex-1" disabled={!profileName} onClick={() => handleContinueClick(SetupType.Import)}>
                 {locale('actions.import_wallet')}
             </Button>
             <Button classes="flex-1" disabled={!profileName} onClick={() => handleContinueClick(SetupType.New)}>

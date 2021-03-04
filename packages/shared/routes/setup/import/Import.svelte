@@ -20,6 +20,8 @@
     let importType
     let importFile
     let importFilePath
+    
+    let error = ''
 
     let state: ImportState = ImportState.Init
     let stateHistory = []
@@ -71,14 +73,17 @@
                             onSuccess() {
                                 resolve()
                             },
-                            onError(error) {
-                                reject(error)
+                            onError(err) {
+                                reject(err)
                             },
                         })
                     })
                     nextState = ImportState.Success
-                } catch (error) {
-                    console.log('Error', error)
+                } catch (err) {
+                    // TODO: Add proper error handling
+                    if (err.payload.error.includes('try another password')){
+                        error = locale('error.password.incorrect')
+                    }
                 }
                 break
             case ImportState.Success:
@@ -115,7 +120,7 @@
     </Transition>
 {:else if state === ImportState.BackupPassword}
     <Transition>
-        <BackupPassword on:next={_next} on:previous={_previous} {importType} {locale} {mobile} />
+        <BackupPassword on:next={_next} on:previous={_previous} {importType} {error} {locale} {mobile}/>
     </Transition>
 {:else if state === ImportState.Success}
     <Transition>

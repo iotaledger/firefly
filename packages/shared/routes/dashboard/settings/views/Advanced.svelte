@@ -138,72 +138,8 @@
         }
     }
 
-    function addCustomNode(node: Node, primary = false) {
-        if (isNewNodeValid([...$activeProfile.settings.customNodes, ...DEFAULT_NODES], node)) {
-            const options: ClientOptions = primary
-                ? {
-                      ...$accounts[0].clientOptions,
-                      node: node.url,
-                      nodes: [],
-                  }
-                : {
-                      ...$accounts[0].clientOptions,
-                      nodes: [...$accounts[0].clientOptions.nodes, node.url],
-                  }
-
-            api.setClientOptions(options, {
-                onSuccess() {
-                    updateProfile('settings.customNodes', [...$activeProfile.settings.customNodes, DEFAULT_NODE])
-
-                    if (primary) {
-                        updateProfile('settings.node', node)
-                    }
-
-                    accounts.update((_accounts) =>
-                        _accounts.map((_account) => {
-                            if (primary) {
-                                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                    {} as WalletAccount,
-                                    _account,
-                                    {
-                                        clientOptions: Object.assign<ClientOptions, ClientOptions, ClientOptions>(
-                                            {},
-                                            _account.clientOptions,
-                                            { node: node.url, nodes: [] }
-                                        ),
-                                    }
-                                )
-                            }
-
-                            return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                {} as WalletAccount,
-                                _account,
-                                {
-                                    clientOptions: Object.assign<ClientOptions, ClientOptions, ClientOptions>(
-                                        {},
-                                        _account.clientOptions,
-                                        {
-                                            nodes: [..._account.clientOptions.nodes, node.url],
-                                        }
-                                    ),
-                                }
-                            )
-                        })
-                    )
-
-                    closePopup()
-                },
-                onError(error) {
-                    console.error(error)
-                },
-            })
-        } else {
-            console.error('Node is not valid')
-        }
-    }
-
     function handleAddNodeClick() {
-        openPopup({ type: 'addNode', props: { addCustomNode, onSuccess: closePopup } })
+        openPopup({ type: 'addNode' })
     }
 
     function resyncAccounts() {
