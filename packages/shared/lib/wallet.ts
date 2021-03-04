@@ -17,7 +17,7 @@ import type { Input, Message, Output } from './typings/message'
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
 export interface Account extends BaseAccount {
-    depositAddress: Address;
+    depositAddress: string;
     rawIotaBalance: number;
     balance: string;
     balanceEquiv: string;
@@ -443,7 +443,7 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
 
             return Object.assign({}, storedAccount, {
                 // Update deposit address
-                depositAddress: syncedAccount.depositAddress,
+                depositAddress: syncedAccount.depositAddress.address,
                 // If we have received a new address, simply add it;
                 // If we have received an existing address, update the properties.
                 addresses: _update(storedAccount.addresses, syncedAccount.addresses, 'address'),

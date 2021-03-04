@@ -11,6 +11,7 @@
     export let yMaxTicks = 6
     export let yPrecision = 3
     export let color = 'blue' // TODO: each profile has a different color
+    export let beginAtZero = false
 
     let canvas
     let chart
@@ -110,6 +111,7 @@
                                 autoSkip: true,
                                 maxTicksLimit: yMaxTicks,
                                 precision: yPrecision,
+                                beginAtZero,
                                 callback: function (value, index, values) {
                                     return Number(value.toString())
                                 },

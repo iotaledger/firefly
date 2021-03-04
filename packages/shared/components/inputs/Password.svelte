@@ -19,19 +19,11 @@
 
     let revealed = false
     let type = 'password'
-    let inputElement
-
 
     const revealToggle = () => {
         type = type === 'password' ? 'text' : 'password'
         revealed = !revealed
     }
-
-    onMount(() => {
-        if (autofocus) {
-            inputElement.focus()
-        }
-    })
 </script>
 
 <style type="text/scss">
@@ -69,7 +61,7 @@
             bind:value
             {maxlength}
             {numeric}
-            bind:this={inputElement}
+            {autofocus}
             placeholder={placeholder || locale('general.password')} 
         />
         {#if showRevealToggle === true}

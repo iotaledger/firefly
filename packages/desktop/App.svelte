@@ -72,13 +72,12 @@
             }
             walletRoute.set(route)
         })
-        window['Electron'].onEvent('menu-navigate-settings', (route) => {
+        window['Electron'].onEvent('menu-navigate-settings', () => {
             if (get(appRoute) !== AppRoute.Dashboard) {
                 // TODO: Add settings from login
             } else if (get(dashboardRoute) !== Tabs.Settings) {
                 dashboardRoute.set(Tabs.Settings)
             }
-            settingsRoute.set(route)
         })
         window['Electron'].onEvent('menu-check-for-update', async () => {
             await refreshVersionDetails()
