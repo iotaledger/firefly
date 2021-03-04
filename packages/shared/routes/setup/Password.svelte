@@ -65,6 +65,7 @@
                     showStrengthLevel
                     strength={passwordStrength.score}
                     {locale} 
+                    autofocus
                 />
                 <Password 
                     bind:value={confirmedPassword} 
