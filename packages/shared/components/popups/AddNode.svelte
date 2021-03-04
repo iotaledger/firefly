@@ -21,14 +21,14 @@
         if (isNewNodeValid([...$activeProfile.settings.customNodes, ...DEFAULT_NODES], node)) {
             const options: ClientOptions = primary
                 ? {
-                    ...$accounts[0].clientOptions,
-                    node: node.url,
-                    nodes: [],
-                }
+                      ...$accounts[0].clientOptions,
+                      node: node.url,
+                      nodes: [],
+                  }
                 : {
-                    ...$accounts[0].clientOptions,
-                    nodes: [...$accounts[0].clientOptions.nodes, node.url],
-                }
+                      ...$accounts[0].clientOptions,
+                      nodes: [...$accounts[0].clientOptions.nodes, node.url],
+                  }
 
             api.setClientOptions(options, {
                 onSuccess() {
@@ -73,6 +73,7 @@
                     closePopup()
                 },
                 onError(error) {
+                    // TODO: Add auth error handling
                     console.error(error)
                 },
             })

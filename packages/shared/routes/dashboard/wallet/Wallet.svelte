@@ -66,7 +66,7 @@
                 balance: number
                 incoming: number
                 outgoing: number
-                depositAddress: Address
+                depositAddress: string
             }
         ) => void
     ) {
@@ -78,7 +78,7 @@
                             balance: balanceResponse.payload.total,
                             incoming: balanceResponse.payload.incoming,
                             outgoing: balanceResponse.payload.outgoing,
-                            depositAddress: latestAddressResponse.payload,
+                            depositAddress: latestAddressResponse.payload.address,
                         })
                     },
                     onError(error) {
@@ -98,7 +98,7 @@
             balance: number
             incoming: number
             outgoing: number
-            depositAddress: Address
+            depositAddress: string
         }
     ): WalletAccount {
         const { id, index, alias } = account
@@ -172,7 +172,7 @@
                                     {} as WalletAccount,
                                     account,
                                     {
-                                        depositAddress: response.payload,
+                                        depositAddress: response.payload.address,
                                     }
                                 )
                             }

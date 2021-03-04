@@ -51,11 +51,11 @@
                 </button>
             </div>
             <div class="flex flex-auto items-center justify-center mb-6">
-                <QR size={98} data={selectedAccount.depositAddress.address} />
+                <QR size={98} data={selectedAccount.depositAddress} />
             </div>
             <div class="mb-6">
                 <Text secondary smaller classes="mb-1">{locale('general.my_address')}</Text>
-                <Text type="pre">{selectedAccount.depositAddress.address}</Text>
+                <Text type="pre">{selectedAccount.depositAddress}</Text>
             </div>
             <Button
                 disabled={isGeneratingAddress}

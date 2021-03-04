@@ -419,10 +419,6 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
         return storedAccounts.map((storedAccount) => {
             const syncedAccount = syncedAccounts.find((_account) => _account.id === storedAccount.id)
 
-            console.log(storedAccount)
-            console.log(storedAccounts)
-
-
             return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
                 // Update deposit address
                 depositAddress: syncedAccount.depositAddress.address,
