@@ -22,12 +22,12 @@
             const options: ClientOptions = primary
                 ? {
                       ...$accounts[0].clientOptions,
-                      node: node.url,
+                      node,
                       nodes: [],
                   }
                 : {
                       ...$accounts[0].clientOptions,
-                      nodes: [...$accounts[0].clientOptions.nodes, node.url],
+                      nodes: [...$accounts[0].clientOptions.nodes, node],
                   }
 
             api.setClientOptions(options, {
@@ -48,7 +48,7 @@
                                         clientOptions: Object.assign<ClientOptions, ClientOptions, ClientOptions>(
                                             {},
                                             _account.clientOptions,
-                                            { node: node.url, nodes: [] }
+                                            { node, nodes: [] }
                                         ),
                                     }
                                 )
@@ -62,7 +62,7 @@
                                         {},
                                         _account.clientOptions,
                                         {
-                                            nodes: [..._account.clientOptions.nodes, node.url],
+                                            nodes: [..._account.clientOptions.nodes, node],
                                         }
                                     ),
                                 }
