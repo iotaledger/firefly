@@ -11,7 +11,7 @@ import { get, writable, Writable } from 'svelte/store'
 import type { Account, SyncedAccount } from './typings/account'
 import type { Address } from './typings/address'
 import type { Actor } from './typings/bridge'
-import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, Event, TransactionEventPayload, TransferProgressEventPayload, TransferProgressEventType } from './typings/events'
+import type { TransferProgressEventType } from './typings/events'
 import type { Input, Message, Output } from './typings/message'
 import type { ApiClient } from './walletApi'
 
@@ -101,6 +101,8 @@ export const resetWallet = () => {
 
 export const selectedAccountId = writable<string | null>(null)
 
+export const isTransferring = writable<boolean>(false)
+export const transferError = writable<string>("")
 export const transferState = writable<TransferProgressEventType | null>(null)
 
 export const loggedIn = persistent<boolean>('loggedIn', false)
@@ -297,6 +299,8 @@ export const updateAccountAfterBalanceChange = (
                     })
                 })
             }
+
+            return storedAccount;
         })
     })
 }

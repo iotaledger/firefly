@@ -463,7 +463,13 @@
         "help": "Help",
         "no_accounts": "You have no accounts, please create one.",
         "loading_accounts": "Loading accounts, please wait...",
-        "add_profile": "Add Profile"
+        "add_profile": "Add Profile",
+        "transferSyncing": "Syncing account",
+        "transferSelectingInputs": "Selecting inputs",
+        "transferRemainderAddress": "Generating remainder deposit address",
+        "transferSigning": "Signing the transaction",
+        "transferPow": "Performing PoW",
+        "transferBroadcasting": "Broadcasting transaction"
     },
     "dates": {
         "today": "Today",
@@ -518,7 +524,8 @@
             "amountTooHigh": "This is greater than your available balance.",
             "amountZero": "The amount must be greater than 0.",
             "wrongAddressFormat": "Addresses start with the prefix 'iota'.",
-            "wrongAddressFormatDev": "Testnet addresses start with the prefix 'atoi'."
+            "wrongAddressFormatDev": "Testnet addresses start with the prefix 'atoi'.",
+            "insufficientFunds": "This account has insufficient funds"
         },
         "node": {
             "invalid": "Please enter a valid URL.",

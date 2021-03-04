@@ -1,6 +1,5 @@
 <script lang="typescript">
     import type { Account as BaseAccount } from 'lib/typings/account'
-    import type { Address } from 'lib/typings/address'
     import type { ErrorEventPayload } from 'lib/typings/events'
     import { DashboardPane } from 'shared/components'
     import { sendParams } from 'shared/lib/app'
@@ -13,14 +12,16 @@
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import { formatUnit } from 'shared/lib/units'
-    import type { BalanceOverview, AccountMessage, WalletAccount, BalanceHistory } from 'shared/lib/wallet'
+    import type { AccountMessage, BalanceHistory, BalanceOverview, WalletAccount } from 'shared/lib/wallet'
     import {
         api,
         getAccountsBalanceHistory,
         getLatestMessages,
         getWalletBalanceHistory,
         initialiseListeners,
+        isTransferring,
         selectedAccountId,
+        transferError,
         updateAccounts,
         updateBalanceOverview,
         wallet,
@@ -57,6 +58,7 @@
     setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
+    let createAccountError
 
     function getAccountMeta(
         accountId: string,
@@ -223,7 +225,7 @@
                     signerType: { type: 'Stronghold' },
                     clientOptions: {
                         node: $accounts.length > 0 ? $accounts[0].clientOptions.node : DEFAULT_NODE.url,
-                        nodes: $accounts.length > 0 ? $accounts[0].clientOptions.nodes : DEFAULT_NODES.map(n => n.url),
+                        nodes: $accounts.length > 0 ? $accounts[0].clientOptions.nodes : DEFAULT_NODES.map((n) => n.url),
                         // For subsequent accounts, use the network for any of the previous accounts
                         network: $accounts.length > 0 ? $accounts[0].clientOptions.network : $network,
                     },
@@ -249,7 +251,7 @@
                     },
                     onError(err) {
                         // TODO: Add proper error handling
-                        if (err.payload.error.includes('message history and balance')){
+                        if (err.payload.error.includes('message history and balance')) {
                             createAccountError = locale('error.account.empty')
                         }
                     },
@@ -271,7 +273,9 @@
     }
 
     function onSend(senderAccountId, receiveAddress, amount) {
+        transferError.set('')
         const _send = () => {
+            isTransferring.set(true)
             api.send(
                 senderAccountId,
                 {
@@ -301,10 +305,12 @@
                         })
 
                         sendParams.set({ address: '', amount: 0, message: '' })
+                        isTransferring.set(false)
                         walletRoute.set(WalletRoutes.Init)
                     },
                     onError(error) {
-                        console.error(error)
+                        isTransferring.set(false)
+                        transferError.set(error.error)
                     },
                 }
             )
@@ -313,7 +319,12 @@
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
                 if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({ type: 'password', props: { onSuccess: _send } })
+                    openPopup({
+                        type: 'password',
+                        props: {
+                            onSuccess: _send,
+                        },
+                    })
                 } else {
                     _send()
                 }
