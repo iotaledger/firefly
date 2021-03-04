@@ -1,8 +1,8 @@
 <script lang="typescript">
-    import type { ClientOptions, Node } from 'lib/typings/client'
+    import type { ClientOptions, Node } from 'shared/lib/typings/client'
     import { Button, Checkbox, Dropdown, Radio, Text } from 'shared/components'
     import { developerMode } from 'shared/lib/app'
-    import { DEFAULT_NODE, DEFAULT_NODES, isNewNodeValid } from 'shared/lib/network'
+    import { DEFAULT_NODE, DEFAULT_NODES } from 'shared/lib/network'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { api, updateAccounts, wallet, WalletAccount } from 'shared/lib/wallet'
@@ -26,12 +26,12 @@
             api.setClientOptions(
                 {
                     ...$accounts[0].clientOptions,
-                    nodes: _nodes.map(n => n.url),
-                    node: DEFAULT_NODE.url,
+                    nodes: _nodes,
+                    node: DEFAULT_NODE,
                 },
                 {
                     onSuccess() {
-                        updateProfile('settings.node', DEFAULT_NODE.url)
+                        updateProfile('settings.node', DEFAULT_NODE)
                         accounts.update((_accounts) =>
                             _accounts.map((_account) =>
                                 Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
@@ -42,8 +42,8 @@
                                             {} as ClientOptions,
                                             _account.clientOptions,
                                             {
-                                                nodes: _nodes.map(n => n.url),
-                                                node: DEFAULT_NODE.url,
+                                                nodes: _nodes,
+                                                node: DEFAULT_NODE,
                                             }
                                         ),
                                     }
@@ -63,11 +63,11 @@
                 {
                     ...$accounts[0].clientOptions,
                     nodes: [],
-                    node: DEFAULT_NODE.url,
+                    node: DEFAULT_NODE,
                 },
                 {
                     onSuccess() {
-                        updateProfile('settings.node', DEFAULT_NODE.url)
+                        updateProfile('settings.node', DEFAULT_NODE)
 
                         accounts.update((_accounts) =>
                             _accounts.map((_account) =>
@@ -80,7 +80,7 @@
                                             _account.clientOptions,
                                             {
                                                 nodes: [],
-                                                node: DEFAULT_NODE.url,
+                                                node: DEFAULT_NODE,
                                             }
                                         ),
                                     }
@@ -97,9 +97,11 @@
     }
 
     function selectNode(option) {
-        const selectedNode = option.value
+        const selectedNode = [...DEFAULT_NODES, ...$activeProfile.settings.customNodes]
+                    .find((node: Node) => node.url === option.value)
 
-        if (selectedNode !== $activeProfile.settings.node.url) {
+        console.log('Selected node', selectedNode)
+        if (selectedNode.url !== $activeProfile.settings.node.url) {
             api.setClientOptions(
                 {
                     node: selectedNode,

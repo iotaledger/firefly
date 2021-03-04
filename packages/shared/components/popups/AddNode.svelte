@@ -1,9 +1,9 @@
 <script lang="typescript">
-    import type { ClientOptions, Node } from 'lib/typings/client'
+    import type { ClientOptions, Node } from 'shared/lib/typings/client'
     import { Text, Input, Button, Password, Checkbox } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
-    import { isNodeValid, DEFAULT_NODES as nodes } from 'shared/lib/network'
+    import { isNodeValid, DEFAULT_NODES, DEFAULT_NODE } from 'shared/lib/network'
     import { api, wallet, WalletAccount } from 'shared/lib/wallet'
 
     export let locale
@@ -18,16 +18,16 @@
     let authError = ''
 
     function addCustomNode(node: Node, primary = false) {
-        if (isNewNodeValid([...$activeProfile.settings.customNodes, ...DEFAULT_NODES], node)) {
+        if (isNodeValid([...$activeProfile.settings.customNodes, ...DEFAULT_NODES], node)) {
             const options: ClientOptions = primary
                 ? {
                       ...$accounts[0].clientOptions,
-                      node: node.url,
+                      node,
                       nodes: [],
                   }
                 : {
                       ...$accounts[0].clientOptions,
-                      nodes: [...$accounts[0].clientOptions.nodes, node.url],
+                      nodes: [...$accounts[0].clientOptions.nodes, node],
                   }
 
             api.setClientOptions(options, {
@@ -48,7 +48,7 @@
                                         clientOptions: Object.assign<ClientOptions, ClientOptions, ClientOptions>(
                                             {},
                                             _account.clientOptions,
-                                            { node: node.url, nodes: [] }
+                                            { node, nodes: [] }
                                         ),
                                     }
                                 )
@@ -62,7 +62,7 @@
                                         {},
                                         _account.clientOptions,
                                         {
-                                            nodes: [..._account.clientOptions.nodes, node.url],
+                                            nodes: [..._account.clientOptions.nodes, node],
                                         }
                                     ),
                                 }
@@ -93,7 +93,7 @@
 </div>
 <div class="flex flex-row justify-between space-x-4 w-full px-8 ">
     <Button secondary classes="w-1/2" onClick={()=> closePopup()}>{locale('actions.cancel')}</Button>
-    <Button disabled={!url} classes="w-1/2" onClick={()=> addCustomNode({ url, username, password }, primary)}>
+    <Button disabled={!url} classes="w-1/2" onClick={()=> addCustomNode({ url, auth: { username, password } }, primary)}>
         {locale('actions.add_node')}
     </Button>
 </div>
