@@ -3,12 +3,12 @@
     import { openPopup } from 'shared/lib/popup'
     import { accountRoute } from 'shared/lib/router'
     import { AccountRoutes } from 'shared/lib/typings/routes'
-    import type { Account } from 'shared/lib/wallet'
+    import type { WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable, Writable } from 'svelte/store'
 
-    const account = getContext<Readable<Account>>('selectedAccount')
-    const accounts = getContext<Writable<Account[]>>('walletAccounts')
+    const account = getContext<Readable<WalletAccount>>('selectedAccount')
+    const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
 
     export let isActive
     export let locale

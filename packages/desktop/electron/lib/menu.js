@@ -50,9 +50,7 @@ const buildTemplate = () => {
                 },
                 {
                     label: `${state.strings.checkForUpdates}...`,
-                    click: () => {
-                        // TODO: Check for updates
-                    },
+                    click: () => getWindow('main').webContents.send('menu-check-for-update'),
                     enabled: state.enabled,
                 },
                 {

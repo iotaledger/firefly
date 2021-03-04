@@ -3,7 +3,7 @@
     import { setClipboard } from 'shared/lib/helpers'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import type { Account } from 'shared/lib/wallet'
+    import type { WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable, Writable } from 'svelte/store'
 
@@ -11,10 +11,11 @@
     export let generateAddress = (accountId) => {}
     export let isGeneratingAddress = false
 
-    const accounts = getContext<Writable<Account[]>>('walletAccounts')
-    const currentAccount = getContext<Readable<Account>>('selectedAccount')
+    const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
+    const currentAccount = getContext<Readable<WalletAccount>>('selectedAccount')
 
     $: selectedAccount = $currentAccount || $accounts[0]
+
 
     const handleDropdownSelect = (item) => {
         selectedAccount = item
@@ -38,7 +39,7 @@
                         <Icon icon="close" classes="text-gray-800 dark:text-white" />
                     </button>
                 </div>
-                <Dropdown valueKey={'name'} value={selectedAccount.alias} items={$accounts} onSelect={handleDropdownSelect} />
+                <Dropdown valueKey={'alias'} value={selectedAccount.alias} items={$accounts} onSelect={handleDropdownSelect} />
             </div>
         {/if}
         <div
@@ -59,7 +60,7 @@
             <Button
                 disabled={isGeneratingAddress}
                 classes="w-full"
-                onClick={() => setClipboard(selectedAccount.depositAddress.address)}>
+                onClick={() => setClipboard(selectedAccount.depositAddress)}>
                 {locale('general.copy_address')}
             </Button>
         </div>

@@ -6,7 +6,7 @@
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { ADDRESS_LENGTH, VALID_DEVNET_ADDRESS, VALID_MAINNET_ADDRESS } from 'shared/lib/utils'
-    import type { Account } from 'shared/lib/wallet'
+    import type { WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable, Writable } from 'svelte/store'
 
@@ -14,8 +14,8 @@
     export let send
     export let internalTransfer
 
-    const accounts = getContext<Writable<Account[]>>('walletAccounts')
-    const account = getContext<Readable<Account>>('selectedAccount')
+    const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
+    const account = getContext<Readable<WalletAccount>>('selectedAccount')
 
     enum SEND_TYPE {
         EXTERNAL = 'send_payment',
@@ -26,6 +26,8 @@
     let unit = Unit.Mi
     let amount = convertUnits($sendParams.amount, Unit.i, unit)
     let to = undefined
+    let amountError = ''
+    let addressError = ''
 
     $: accountsDropdownItems = $accounts.map((acc) => format(acc))
     $: from = $account ? format($account) : accountsDropdownItems[0]
@@ -41,6 +43,32 @@
         to = item
     }
     const handleSendClick = () => {
+
+        if (parseFloat($sendParams.amount) > from.balance) {
+            return amountError = locale('error.send.amountTooHigh')
+        } else if (parseFloat($sendParams.amount) <= 0) {
+            return amountError = locale('error.send.amountZero')
+        }
+        if (selectedSendType === SEND_TYPE.EXTERNAL) {
+            // Validate address length
+            if ($sendParams.address.length !== ADDRESS_LENGTH) {
+                return addressError = locale('error.send.addressLength', { 
+                    values: {
+                        length: ADDRESS_LENGTH
+                    }
+                })
+            }
+            if ($activeProfile.isDeveloperProfile) {
+                if (!$sendParams.address.match(VALID_DEVNET_ADDRESS)) {
+                    return addressError = locale('error.send.wrongAddressFormatDev')
+                } 
+            } else {
+                if (!$sendParams.address.match(VALID_MAINNET_ADDRESS)) {
+                    return addressError = locale('error.send.wrongAddressFormat')
+                }
+            }
+        }
+        
         if (selectedSendType === SEND_TYPE.INTERNAL) {
             internalTransfer(from.id, to.id, $sendParams.amount)
         } else {
@@ -53,7 +81,7 @@
             walletRoute.set(WalletRoutes.Init)
         }
     }
-    const format = (account: Account) => {
+    const format = (account: WalletAccount) => {
         return {
             ...account,
             label: `${account.alias} • ${account.balance}`,
@@ -62,31 +90,6 @@
     }
     const handleMaxClick = () => {
         amount = convertUnits(from.balance, Unit.i, unit)
-    }
-    const validInputs = () => {
-        if ($sendParams.amount > from.balance) {
-            console.error('Input error: Amount higher than available balance')
-            return false
-        }
-        if (selectedSendType === SEND_TYPE.EXTERNAL) {
-            // Validate address length
-            if ($sendParams.address.length !== ADDRESS_LENGTH) {
-                console.error('Input error: Wrong address length')
-                return false
-            }
-            if ($activeProfile.isDeveloperProfile) {
-                if (!$sendParams.address.match(VALID_MAINNET_ADDRESS) && !$sendParams.address.match(VALID_DEVNET_ADDRESS)) {
-                    console.error('Input error: Wrong address format')
-                    return false
-                } else {
-                    if (!$sendParams.address.match(VALID_MAINNET_ADDRESS)) {
-                        console.error('Input error: Wrong address format')
-                        return false
-                    }
-                }
-            }
-        }
-        return true
     }
 </script>
 
@@ -102,7 +105,7 @@
         <div class="w-full h-full flex flex-col justify-between">
             <div>
                 {#if !$account}
-                    <div class="block mb-8">
+                    <div class="block mb-5">
                         <Dropdown
                             value={from?.label || ''}
                             label={locale('general.from')}
@@ -110,8 +113,8 @@
                             onSelect={handleFromSelect} />
                     </div>
                 {/if}
-                <div class="w-full mb-8 block">
-                    <Amount bind:amount bind:unit maxClick={handleMaxClick} {locale} classes="mb-4" />
+                <div class="w-full block">
+                    <Amount error={amountError} bind:amount bind:unit maxClick={handleMaxClick} {locale} classes="mb-2" />
                     {#if selectedSendType === SEND_TYPE.INTERNAL}
                         <Dropdown
                             value={to?.label || ''}
@@ -119,11 +122,8 @@
                             items={accountsDropdownItems}
                             onSelect={handleToSelect} />
                     {:else}
-                        <Address bind:address={$sendParams.address} {locale} label={locale('general.to')} />
+                        <Address error={addressError} bind:address={$sendParams.address} {locale} label={locale('general.to')} />
                     {/if}
-                </div>
-                <div class="w-full mb-8 block">
-                    <Text type="h5" classes="mb-4">{locale('general.reference')}</Text>
                 </div>
             </div>
         </div>

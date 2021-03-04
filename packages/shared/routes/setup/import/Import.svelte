@@ -3,7 +3,6 @@
     import { Transition } from 'shared/components'
     import { Import, TextImport, FileImport, LedgerImport, FireflyLedgerImport, ConfirmBalance, BackupPassword, Success } from './views/'
     import { api } from 'shared/lib/wallet'
-    import { DEFAULT_NODES as nodes } from 'shared/lib/network'
 
     export let locale
     export let mobile
@@ -26,6 +25,8 @@
     let importFile
     let importFilePath
     let balance
+    
+    let error = ''
 
     let state: ImportState = ImportState.Init
     let stateHistory = []
@@ -91,19 +92,22 @@
                 const { password } = params
 
                 try {
-                    await new Promise((resolve, reject) => {
+                    await new Promise<void>((resolve, reject) => {
                         api.restoreBackup(importFilePath, password, {
                             onSuccess() {
                                 resolve()
                             },
-                            onError(error) {
-                                reject(error)
+                            onError(err) {
+                                reject(err)
                             },
                         })
                     })
                     nextState = ImportState.Success
-                } catch (error) {
-                    console.log('Error', error)
+                } catch (err) {
+                    // TODO: Add proper error handling
+                    if (err.payload.error.includes('try another password')){
+                        error = locale('error.password.incorrect')
+                    }
                 }
                 break
             case ImportState.Success:
@@ -151,9 +155,9 @@
     <ConfirmBalance on:next={_next} on:previous={_previous} {importType} {balance} {locale} {mobile} />
 </Transition>
 {:else if state === ImportState.BackupPassword}
-<Transition>
-    <BackupPassword on:next={_next} on:previous={_previous} {importType} {locale} {mobile} />
-</Transition>
+    <Transition>
+        <BackupPassword on:next={_next} on:previous={_previous} {importType} {error} {locale} {mobile}/>
+    </Transition>
 {:else if state === ImportState.Success}
 <Transition>
     <Success on:next={_next} on:previous={_previous} {importType} {locale} {mobile} />

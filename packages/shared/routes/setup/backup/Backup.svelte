@@ -7,7 +7,7 @@
     import { updateProfile } from 'shared/lib/profile'
     import { strongholdPassword } from 'shared/lib/app'
     import { api } from 'shared/lib/wallet'
-    import { DEFAULT_NODES as nodes, DEFAULT_NODE as node, network } from 'shared/lib/network'
+    import { DEFAULT_NODES, DEFAULT_NODE, network } from 'shared/lib/network'
 
     export let locale
     export let mobile
@@ -43,8 +43,8 @@
                 break
             case BackupState.Backup:
                 try {
-                    await new Promise((resolve, reject) => {
-                        api.storeMnemonic((get(mnemonic) as string[]).join(' '), {
+                    await new Promise<void>((resolve, reject) => {
+                        api.storeMnemonic(get(mnemonic).join(' '), {
                             onSuccess() {
                                 resolve()
                             },
@@ -56,7 +56,7 @@
                         .then(() => window['Electron'].getStrongholdBackupDestination())
                         .then((result) => {
                             if (result) {
-                                return new Promise((res, rej) => {
+                                return new Promise<void>((res, rej) => {
                                     api.backup(result, {
                                         onSuccess() {
                                             updateProfile('lastStrongholdBackupTime', new Date())
@@ -79,7 +79,7 @@
                 break
             case BackupState.Verify:
             case BackupState.Success:
-                const _mnemonic = (get(mnemonic) as string[]).join(' ')
+                const _mnemonic = get(mnemonic).join(' ')
 
                 // TODO: Instead of generated mnemonic, we should construct the phrase with what was chosen by the user
                 api.verifyMnemonic(_mnemonic, {
@@ -88,9 +88,10 @@
                             onSuccess(response) {
                                 api.createAccount(
                                     {
+                                        signerType: { type: 'Stronghold' },
                                         clientOptions: {
-                                            node: node.url,
-                                            nodes: nodes.map((node) => node.url),
+                                            node: DEFAULT_NODE.url,
+                                            nodes: DEFAULT_NODES.map(n => n.url),
                                             network: $network,
                                         },
                                     },

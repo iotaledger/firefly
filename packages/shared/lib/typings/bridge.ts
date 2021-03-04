@@ -1,4 +1,4 @@
-import type { Event, ErrorEventPayload, BalanceChangeEventPayload, TransactionEventPayload } from './events'
+import type { ErrorEventPayload } from './events'
 import type { Address } from './address'
 import type { AccountIdentifier, Account, Balance, SyncedAccount } from './account'
 import type { Message } from './message'
@@ -48,6 +48,7 @@ export enum ResponseTypes {
     Reattachment = 'Reattachment',
     Broadcast = 'Broadcast',
     StrongholdStatusChange = 'StrongholdStatusChange',
+    TransferProgress = 'TransferProgress',
     GeneratedMnemonic = 'GeneratedMnemonic',
     StoredMnemonic = 'StoredMnemonic',
     VerifiedMnemonic = 'VerifiedMnemonic',
@@ -86,7 +87,7 @@ export type BackupRestoredResponse = Response<ResponseTypes.BackupRestored, void
 export type SetStrongholdPasswordResponse = Response<ResponseTypes.StrongholdPasswordSet, void>
 export type SentTransferResponse = Response<ResponseTypes.SentTransfer, Message>
 export type ErrorResponse = Response<ResponseTypes.Error, ErrorEventPayload>
-export type PanicResponse = Response<ResponseTypes.Panic, string>
+export type PanicResponse = Response<ResponseTypes.Panic, ErrorEventPayload>
 export type GenerateMnemonicResponse = Response<ResponseTypes.GeneratedMnemonic, string>
 export type StoreMnemonicResponse = Response<ResponseTypes.StoredMnemonic, void>
 export type VerifyMnemonicResponse = Response<ResponseTypes.VerifiedMnemonic, void>
@@ -103,7 +104,7 @@ export type UpdatedAllClientOptions = Response<ResponseTypes.UpdatedAllClientOpt
 export type LedgerDeviceStatusResponse = Response<ResponseTypes.LedgerStatus, LedgerStatusPayload>
 
 export type MessageResponse =
-    | RemovedAccountResponse
+    RemovedAccountResponse
     | CreatedAccountResponse
     | ReadAccountResponse
     | ReadAccountsResponse
@@ -135,9 +136,5 @@ export type MessageResponse =
     | StrongholdStatusResponse
     | UpdatedAllClientOptions
     | LedgerDeviceStatusResponse
-    // events
-    | Event<ErrorEventPayload>
-    | Event<BalanceChangeEventPayload>
-    | Event<TransactionEventPayload>
 
 export type Bridge = (message: BridgeMessage) => Promise<string>

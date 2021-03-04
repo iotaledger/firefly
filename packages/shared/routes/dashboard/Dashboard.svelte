@@ -1,16 +1,15 @@
 <script lang="typescript">
-    import { get } from 'svelte/store'
-    import { onMount } from 'svelte'
     import { Idle, Sidebar } from 'shared/components'
-    import { Wallet, Settings } from 'shared/routes'
-    import { parseDeepLink } from 'shared/lib/utils'
-    import { sendParams, logout } from 'shared/lib/app'
+    import { logout, sendParams } from 'shared/lib/app'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { activeProfile } from 'shared/lib/profile'
-    import { routerNext, dashboardRoute } from 'shared/lib/router'
-    import { api } from 'shared/lib/wallet'
+    import { dashboardRoute, routerNext } from 'shared/lib/router'
     import { Tabs } from 'shared/lib/typings/routes'
-    import { ToastContainer } from 'shared/components'
+    import { parseDeepLink } from 'shared/lib/utils'
+    import { api } from 'shared/lib/wallet'
+    import { Settings, Wallet } from 'shared/routes'
+    import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
 
     export let locale
     export let mobile
@@ -19,7 +18,7 @@
         wallet: Wallet,
         settings: Settings,
     }
-    
+
     const DeepLinkManager = window['Electron']['DeepLinkManager']
 
     onMount(() => {
@@ -72,6 +71,5 @@
         <Sidebar bind:activeTab={$dashboardRoute} {locale} />
         <!-- Dashboard Pane -->
         <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
-        <ToastContainer />
     </div>
 {/if}
