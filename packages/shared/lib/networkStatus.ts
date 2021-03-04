@@ -53,18 +53,23 @@ export async function fetchNetworkStatus(): Promise<void> {
     }
 
     for (let index = 0; index < NETWORK_STATUS_ENDPOINTS.length; index++) {
-        try {
-            const endpoint = NETWORK_STATUS_ENDPOINTS[index]
+        const endpoint = NETWORK_STATUS_ENDPOINTS[index]
 
-            const response: any = await Promise.race([
-                fetch(endpoint, requestOptions),
-                new Promise((_, reject) => {
-                    setTimeout(
-                        () => reject(new Error(`Could not fetch from ${endpoint}.`)),
-                        DEFAULT_NETWORK_STATUS_ENDPOINT_TIMEOUT
-                    )
-                }),
-            ])
+        try {
+            const abortController = new AbortController()
+            const timerId = setTimeout(
+                () => {
+                    if (abortController) {
+                        abortController.abort();
+                    }
+                },
+                DEFAULT_NETWORK_STATUS_ENDPOINT_TIMEOUT);
+
+            requestOptions.signal = abortController.signal;
+
+            const response = await fetch(endpoint, requestOptions);
+
+            clearTimeout(timerId)
 
             const statusData: StatusData = await response.json()
 
@@ -72,7 +77,7 @@ export async function fetchNetworkStatus(): Promise<void> {
 
             break
         } catch (err) {
-            console.error(err)
+            console.error(err.name === "AbortError" ? new Error(`Could not fetch from ${endpoint}.`) : err)
         }
     }
 }

@@ -2,7 +2,7 @@ import { get, derived, writable } from 'svelte/store'
 import { persistent } from 'shared/lib/helpers'
 import { generateRandomId } from 'shared/lib/utils'
 import { AvailableExchangeRates } from 'shared/lib/currency'
-import { DEFAULT_NODE as node } from 'shared/lib/network'
+import { DEFAULT_NODE } from 'shared/lib/network'
 import type { Node } from './typings/client'
 
 /**
@@ -118,7 +118,7 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
             outsourcePow: false,
             currency: AvailableExchangeRates.USD,
             notifications: true,
-            node,
+            node: DEFAULT_NODE,
             customNodes: [],
             // Minutes
             lockScreenTimeout: 5,
@@ -179,7 +179,8 @@ export const removeProfile = (id: string): void => {
  *
  * @returns {void}
  */
-export const updateProfile = (path: string, value: string | boolean | Date | AvailableExchangeRates) => {
+export const updateProfile = (
+    path: string, value: string | boolean | Date | AvailableExchangeRates | Node | Node[]) => {
     const _update = (_profile) => {
         const pathList = path.split('.')
 

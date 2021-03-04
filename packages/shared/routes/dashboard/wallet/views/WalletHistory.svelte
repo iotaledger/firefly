@@ -2,7 +2,7 @@
     import { ActivityRow, Text } from 'shared/components'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import type { Account, AccountMessage } from 'shared/lib/wallet'
+    import type { AccountMessage, WalletAccount } from 'shared/lib/wallet'
     import { selectedAccountId, selectedMessage } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable, Writable } from 'svelte/store'
@@ -10,7 +10,7 @@
 
     export let locale
 
-    const accounts = getContext<Writable<Account[]>>('walletAccounts')
+    const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
     const transactions = getContext<Readable<AccountMessage[]>>('walletTransactions')
 
     function handleTransactionClick(transaction) {

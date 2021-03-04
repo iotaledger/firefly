@@ -1,8 +1,17 @@
 <script lang="typescript">
-    import { onMount } from 'svelte'
     import Chart from 'chart.js'
+    import tailwindConfig from 'shared/tailwind.config.js'
+    import { afterUpdate, onMount } from 'svelte'
+    import resolveConfig from 'tailwindcss/resolveConfig'
+
+    export let labels = []
+    export let datasets = []
+    export let color = 'blue'
 
     let canvas
+    let chart
+
+    const fullConfig = resolveConfig(tailwindConfig)
 
     function createRoundedBarChart() {
         // Source: https://stackoverflow.com/a/43281198/6682995
@@ -98,32 +107,24 @@
     }
 
     function createChart() {
-        createRoundedBarChart()
-
         const ctx = canvas
-
-        const myChart = new Chart(ctx, {
+        chart = new Chart(ctx, {
             type: 'roundedBar',
             data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                datasets: [
-                    {
-                        label: 'Incoming',
-                        backgroundColor: '#108CFF',
+                labels,
+                datasets: datasets.map((dataset) => {
+                    return {
+                        backgroundColor: fullConfig.theme.colors[dataset.color || color]['500'],
+                        hoverBackgroundColor: fullConfig.theme.colors[dataset.color || color]['500'],
                         barThickness: 7,
-                        data: [12, 8, 13, 7, 8, 10],
-                    },
-                    {
-                        label: 'Outgoing',
-                        backgroundColor: '#0FC1B7',
-                        barThickness: 7,
-                        data: [8, 6, 11, 4, 9, 6],
-                    },
-                ],
+                        ...dataset,
+                    }
+                }),
             },
             options: {
                 barRoundness: 1,
                 responsive: true,
+                maintainAspectRatio: false,
                 legend: {
                     position: 'bottom',
                     labels: {
@@ -148,11 +149,49 @@
                         },
                     ],
                 },
+                tooltips: {
+                    mode: 'point',
+                    backgroundColor: fullConfig.theme.colors.gray['900'],
+                    xPadding: 12,
+                    yPadding: 12,
+                    displayColors: false,
+                    titleFontSize: 12,
+                    bodyFontSize: 11,
+                    titleFontFamily: 'DM Sans',
+                    bodyFontFamily: 'DM Sans',
+                    bodyFontColor: fullConfig.theme.colors[color]['200'],
+                    callbacks: {
+                        title: function ([tooltipItem]) {
+                            let dataset = datasets[tooltipItem.datasetIndex]
+                            if (dataset && dataset.tooltips) {
+                                return dataset.tooltips[tooltipItem.index]?.title ?? ''
+                            }
+                            return ''
+                        },
+                        label: function (tooltipItem) {
+                            let dataset = datasets[tooltipItem.datasetIndex]
+                            if (dataset && dataset.tooltips) {
+                                return dataset.tooltips[tooltipItem.index]?.label ?? ''
+                            }
+                            return ''
+                        },
+                    },
+                },
             },
         })
     }
 
-    onMount(createChart)
+    onMount(() => {
+        createRoundedBarChart()
+        createChart()
+    })
+
+    afterUpdate(reinitialise)
+
+    function reinitialise() {
+        chart.destroy()
+        createChart()
+    }
 </script>
 
-<div class="chart-container" style="position: relative; height: 100%;"><canvas bind:this={canvas} /></div>
+<div class="relative" style="height: calc(50vh - 130px);"><canvas bind:this={canvas} width="600" height="450" /></div>

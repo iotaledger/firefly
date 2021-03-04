@@ -35,7 +35,7 @@
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex items-center justify-center p-16">
-            <RecoveryPhrase recoveryPhrase={mnemonic} bind:recoveryPhraseInput shuffle />
+            <RecoveryPhrase recoveryPhrase={mnemonic} bind:recoveryPhraseInput isVerification />
         </div>
     </OnboardingLayout>
 {/if}

@@ -1,11 +1,12 @@
 <script lang="typescript">
-    import { get } from 'svelte/store'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import type { ClientOptions, Node } from 'shared/lib/typings/client'
+    import { Button, Checkbox, Dropdown, Radio, Text } from 'shared/components'
     import { developerMode } from 'shared/lib/app'
-    import { Dropdown, Text, Radio, Checkbox, Button } from 'shared/components'
-    import { DEFAULT_NODES as nodes, DEFAULT_NODE as node, isNewNodeValid } from 'shared/lib/network'
-    import { api, updateAccounts, wallet } from 'shared/lib/wallet'
-    import { openPopup, closePopup } from 'shared/lib/popup'
+    import { DEFAULT_NODE, DEFAULT_NODES } from 'shared/lib/network'
+    import { closePopup, openPopup } from 'shared/lib/popup'
+    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { api, updateAccounts, wallet, WalletAccount } from 'shared/lib/wallet'
+    import { get } from 'svelte/store'
 
     export let locale
 
@@ -21,21 +22,32 @@
 
     $: if (automaticNodeSelection) {
         if ($accounts.some((account) => !account.clientOptions.nodes.length)) {
-            const _nodes = [...$activeProfile.settings.customNodes, ...nodes].map((node) => node.url)
+            const _nodes = [...$activeProfile.settings.customNodes, ...DEFAULT_NODES]
             api.setClientOptions(
                 {
                     ...$accounts[0].clientOptions,
                     nodes: _nodes,
-                    node: node.url,
+                    node: DEFAULT_NODE,
                 },
                 {
                     onSuccess() {
-                        updateProfile('settings.node', { url: node.url, password: '', username: '' })
+                        updateProfile('settings.node', DEFAULT_NODE)
                         accounts.update((_accounts) =>
                             _accounts.map((_account) =>
-                                Object.assign({}, _account, {
-                                    clientOptions: Object.assign({}, _account.clientOptions, { node: node.url, nodes: _nodes }),
-                                })
+                                Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+                                    {} as WalletAccount,
+                                    _account,
+                                    {
+                                        clientOptions: Object.assign<ClientOptions, ClientOptions, ClientOptions>(
+                                            {} as ClientOptions,
+                                            _account.clientOptions,
+                                            {
+                                                nodes: _nodes,
+                                                node: DEFAULT_NODE,
+                                            }
+                                        ),
+                                    }
+                                )
                             )
                         )
                     },
@@ -51,17 +63,28 @@
                 {
                     ...$accounts[0].clientOptions,
                     nodes: [],
-                    node: node.url,
+                    node: DEFAULT_NODE,
                 },
                 {
                     onSuccess() {
-                        updateProfile('settings.node', { url: node.url, password: '', username: '' })
+                        updateProfile('settings.node', DEFAULT_NODE)
 
                         accounts.update((_accounts) =>
                             _accounts.map((_account) =>
-                                Object.assign({}, _account, {
-                                    clientOptions: Object.assign({}, _account.clientOptions, { node: node.url, nodes: [] }),
-                                })
+                                Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+                                    {} as WalletAccount,
+                                    _account,
+                                    {
+                                        clientOptions: Object.assign<ClientOptions, ClientOptions, ClientOptions>(
+                                            {} as ClientOptions,
+                                            _account.clientOptions,
+                                            {
+                                                nodes: [],
+                                                node: DEFAULT_NODE,
+                                            }
+                                        ),
+                                    }
+                                )
                             )
                         )
                     },
@@ -74,25 +97,37 @@
     }
 
     function selectNode(option) {
-        const node = option.value
+        const selectedNode = [...DEFAULT_NODES, ...$activeProfile.settings.customNodes]
+                    .find((node: Node) => node.url === option.value)
 
-        if (node !== $activeProfile.settings.node.url) {
+        if (selectedNode.url !== $activeProfile.settings.node.url) {
             api.setClientOptions(
                 {
-                    node,
+                    node: selectedNode,
                     nodes: [],
                 },
                 {
                     onSuccess(response) {
                         // Update profile in local storage
-                        updateProfile('settings.node', { url: node, password: '', username: '' })
+                        updateProfile('settings.node', selectedNode)
 
                         // Update client options for accounts
                         accounts.update((_accounts) =>
                             _accounts.map((_account) =>
-                                Object.assign({}, _account, {
-                                    clientOptions: Object.assign({}, _account.clientOptions, { node, nodes: [] }),
-                                })
+                                Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+                                    {} as WalletAccount,
+                                    _account,
+                                    {
+                                        clientOptions: Object.assign<ClientOptions, ClientOptions, ClientOptions>(
+                                            {} as ClientOptions,
+                                            _account.clientOptions,
+                                            {
+                                                nodes: [],
+                                                node: selectedNode,
+                                            }
+                                        ),
+                                    }
+                                )
                             )
                         )
                     },
@@ -104,56 +139,8 @@
         }
     }
 
-    function addCustomNode(node, primary = false) {
-        if (isNewNodeValid([...$activeProfile.settings.customNodes, ...nodes], node)) {
-            const options = primary
-                ? {
-                      ...$accounts[0].clientOptions,
-                      node: node.url,
-                      nodes: [],
-                  }
-                : {
-                      ...$accounts[0].clientOptions,
-                      nodes: [...$accounts[0].clientOptions.nodes, node.url],
-                  }
-
-            api.setClientOptions(options, {
-                onSuccess() {
-                    updateProfile('settings.customNodes', [...$activeProfile.settings.customNodes, node])
-
-                    if (primary) {
-                        updateProfile('settings.node', node)
-                    }
-
-                    accounts.update((_accounts) =>
-                        _accounts.map((_account) => {
-                            if (primary) {
-                                return Object.assign({}, _account, {
-                                    clientOptions: Object.assign({}, _account.clientOptions, { node: node.url, nodes: [] }),
-                                })
-                            }
-
-                            return Object.assign({}, _account, {
-                                clientOptions: Object.assign({}, _account.clientOptions, {
-                                    nodes: [..._account.clientOptions.nodes, node.url],
-                                }),
-                            })
-                        })
-                    )
-
-                    closePopup()
-                },
-                onError(error) {
-                    console.error(error)
-                },
-            })
-        } else {
-            console.error('Node is not valid')
-        }
-    }
-
     function handleAddNodeClick() {
-        openPopup({ type: 'addNode', props: { addCustomNode, onSuccess: closePopup } })
+        openPopup({ type: 'addNode' })
     }
 
     function resyncAccounts() {
@@ -173,7 +160,7 @@
         if ($activeProfile.isStrongholdLocked) {
             openPopup({ type: 'password', props: { onSuccess: _sync } })
         } else {
-            _sync();
+            _sync()
         }
     }
 </script>
@@ -196,7 +183,7 @@
             <Dropdown
                 onSelect={selectNode}
                 value={$activeProfile.settings.node.url}
-                items={[...nodes, ...$activeProfile.settings.customNodes].map((node) => ({
+                items={[...DEFAULT_NODES, ...$activeProfile.settings.customNodes].map((node) => ({
                     value: node.url,
                     label: node.url,
                 }))} />

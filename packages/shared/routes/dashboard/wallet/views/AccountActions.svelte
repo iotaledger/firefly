@@ -2,7 +2,7 @@
     import { Button, Text } from 'shared/components'
     import { accountRoute } from 'shared/lib/router'
     import { AccountRoutes } from 'shared/lib/typings/routes'
-    import type { Account } from 'shared/lib/wallet'
+    import type { WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable } from 'svelte/store'
     import { ManageAccount, Receive, Send } from '.'
@@ -13,7 +13,7 @@
     export let internalTransfer
     export let setAlias
 
-    const account = getContext<Readable<Account>>('selectedAccount')
+    const account = getContext<Readable<WalletAccount>>('selectedAccount')
     function handleSendClick() {
         accountRoute.set(AccountRoutes.Send)
     }
@@ -34,5 +34,5 @@
 {:else if $accountRoute === AccountRoutes.Send}
     <Send {send} {internalTransfer} {locale} />
 {:else if $accountRoute === AccountRoutes.Manage}
-    <ManageAccount {locale} name={$account.name} {setAlias} />
+    <ManageAccount {locale} name={$account.alias} {setAlias} />
 {/if}

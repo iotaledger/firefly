@@ -34,7 +34,7 @@
 {:else}
     <div class="flex flex-1 flex-row items-start">
         <SettingsNavigator
-            routes={routes}
+            {routes}
             onSettingClick={(id) => scrollIntoView(id)}
             icons={SettingsIcons}
             {settings}
