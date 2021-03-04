@@ -23,14 +23,14 @@
         <!-- Incoming/Outgoing -->
         <div data-label="total-movements" class="flex flex-row justify-between mt-10">
             <div class="flex items-center">
-                <Icon boxed icon="arrow-down" classes="text-white" boxClasses="bg-{color}-300 dark:bg-gray-900 mr-4" />
+                <Icon boxed icon="chevron-down" classes="text-white" boxClasses="bg-{color}-300 dark:bg-gray-900 mr-4" />
                 <div>
                     <Text type="p" classes="text-white mb-0.5">{$balance.incoming}</Text>
                     <Text type="p" overrideColor smaller classes="text-{color}-300">{locale('general.incoming')}</Text>
                 </div>
             </div>
             <div class="flex items-center">
-                <Icon boxed icon="arrow-up" classes="text-white" boxClasses="bg-{color}-300 dark:bg-gray-900 mr-4" />
+                <Icon boxed icon="chevron-up" classes="text-white" boxClasses="bg-{color}-300 dark:bg-gray-900 mr-4" />
                 <div>
                     <Text type="p" classes="text-white mb-0.5">{$balance.outgoing}</Text>
                     <Text type="p" overrideColor smaller classes="text-{color}-300">{locale('general.outgoing')}</Text>

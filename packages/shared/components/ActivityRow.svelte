@@ -20,7 +20,7 @@
         boxed
         classes="text-white dark:text-{internal ? 'gray-500' : `${color}-${incoming ? '500' : '600'}`}"
         boxClasses="bg-{internal ? 'gray-500' : `${color}-${incoming ? '500' : '600'}`} dark:bg-gray-900"
-        icon={internal ? 'transfer' : incoming ? 'arrow-down' : 'arrow-up'} />
+        icon={internal ? 'transfer' : incoming ? 'chevron-down' : 'chevron-up'} />
     <div class="flex flex-col ml-4">
         <Text type="p" bold smaller>{truncateString(id)}</Text>
         <Text type="p" secondary smaller>
