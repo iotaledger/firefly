@@ -63,5 +63,3 @@ export interface IElectron {
 }
 
 export const Electron: IElectron = window['Electron'];
-
-window.addEventListener
