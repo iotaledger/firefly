@@ -177,7 +177,7 @@
         class:secondary
         class:active
         class:with-icon={icon}
-        disabled={disabled}
+        {disabled}
         >
         <Icon classes="mb-1" {icon} />
         <div class="text-12 leading-140">
@@ -197,7 +197,7 @@
         class:with-icon={icon}
         class:iconReverse
         class:active
-        disabled={disabled}>
+        {disabled}>
         {#if icon}
             {#if small}
                 {#if iconReverse}
