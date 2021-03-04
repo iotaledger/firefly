@@ -362,19 +362,33 @@
         "exportNewStronghold": "輸出一個新的 Stronghold",
         "enableDeepLinks": "啟用深度連結",
         "enableDeveloperMode": "開啟開發者模式",
-        "enableSystemNotifications": "Enable system notifications",
+        "enableSystemNotifications": "啟用系統通知",
         "exportState": "匯出狀態",
         "outsourceProofOfWork": "外派工作量証明",
         "unlock": "解鎖",
         "update_firefly": "更新 Firefly",
-        "restart_now": "Restart now",
+        "restart_now": "立即重新啟動",
         "save_backup": "儲存備份",
         "customize_account": "自定義帳號",
         "sync_account": "同步帳號",
         "view_address_history": "檢視地址歷史紀錄",
         "delete_account": "刪除帳號",
         "max": "最大",
-        "add_node": "增加節點"
+        "add_node": "增加節點",
+        "hide": "Hide",
+        "hideOthers": "Hide Others",
+        "showAll": "Show All",
+        "quit": "Quit",
+        "edit": "Edit",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "selectAll": "Select All",
+        "addAccount": "Add Account",
+        "checkForUpdates": "Check for Updates",
+        "reportAnIssue": "Report an Issue"
     },
     "general": {
         "password": "密碼",
@@ -436,7 +450,11 @@
         "transactions": "交易紀錄",
         "security": "安全性",
         "account_address": "帳戶地址",
-        "nodes": "節點"
+        "nodes": "節點",
+        "wallet": "Wallet",
+        "help": "Help",
+        "no_accounts": "You have no accounts, please create one.",
+        "add_profile": "Add Profile"
     },
     "dates": {
         "today": "今天",
@@ -449,11 +467,11 @@
         "valueTx": "從 {{account}} 收到 {{value}}",
         "confirmed": "{{account}} 轉出的 {{value}} 已被確認",
         "failed": "{{account}} 轉出的 {{value}} 發生錯誤",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "downloading_update": "下載更新中",
+        "update_ready": "準備更新",
+        "update_error": "更新時發生錯誤，請重試。",
+        "restart_install": "重新安裝",
+        "calc_minutes_remaining": "正在計算剩餘時間...",
+        "minutes_remaining": "分鐘, 複數, 一 剩下一分鐘 其他 剩下一分鐘"
     }
 }

@@ -362,19 +362,33 @@
         "exportNewStronghold": "导出一个新的Stronghold",
         "enableDeepLinks": "启用深链接",
         "enableDeveloperMode": "打开开发者模式",
-        "enableSystemNotifications": "Enable system notifications",
+        "enableSystemNotifications": "启用系统通知",
         "exportState": "导出状态",
         "outsourceProofOfWork": "外包工作证明",
         "unlock": "解锁",
         "update_firefly": "更新Firefly",
-        "restart_now": "Restart now",
+        "restart_now": "立即重启",
         "save_backup": "保存备份",
         "customize_account": "自定义你的账户",
         "sync_account": "同步账户",
         "view_address_history": "显示地址历史记录",
         "delete_account": "删除账户",
         "max": "最大",
-        "add_node": "添加节点"
+        "add_node": "添加节点",
+        "hide": "Hide",
+        "hideOthers": "Hide Others",
+        "showAll": "Show All",
+        "quit": "Quit",
+        "edit": "Edit",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "selectAll": "Select All",
+        "addAccount": "Add Account",
+        "checkForUpdates": "Check for Updates",
+        "reportAnIssue": "Report an Issue"
     },
     "general": {
         "password": "密码",
@@ -436,7 +450,11 @@
         "transactions": "交易",
         "security": "安全设置",
         "account_address": "账户地址",
-        "nodes": "节点"
+        "nodes": "节点",
+        "wallet": "Wallet",
+        "help": "Help",
+        "no_accounts": "You have no accounts, please create one.",
+        "add_profile": "Add Profile"
     },
     "dates": {
         "today": "今日",
@@ -449,11 +467,11 @@
         "valueTx": "帐户 {{account}} 收到 {{value}}",
         "confirmed": "帐户 {{account}} 的 {{value}} 转出交易已确认",
         "failed": "帐户 {{account}} 的 {{value}} 转出交易未能成功。",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "downloading_update": "正在下载更新",
+        "update_ready": "更新已准备就绪",
+        "update_error": "更新过程中发生错误，请重试",
+        "restart_install": "重新启动后安装",
+        "calc_minutes_remaining": "正在计算剩余分钟...",
+        "minutes_remaining": "{minutes, plural, one {还剩最后一分钟...} other {还剩余 # 分钟...}}"
     }
 }
