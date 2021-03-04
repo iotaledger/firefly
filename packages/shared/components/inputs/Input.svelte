@@ -63,5 +63,5 @@
         {placeholder} 
         {...$$restProps}
     />
-    <Error error={error}/>
+    <Error {error}/>
 </div>
