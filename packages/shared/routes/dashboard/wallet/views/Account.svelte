@@ -27,7 +27,7 @@
 
 <!-- wait for account to load -->
 {#if $accounts && $account}
-    <div class="w-full h-full flex flex-col flex-nowrap px-10 pb-10 relative">
+    <div class="w-full h-full flex flex-col flex-nowrap px-10 pb-10 relative flex-1">
         <AccountNavigation {locale} accounts={navAccounts} />
         {#key $account}
             <div class="w-full h-full grid grid-cols-3 gap-x-4">
