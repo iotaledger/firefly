@@ -1,10 +1,11 @@
 <script lang="typescript">
-    import { date } from 'svelte-i18n'
-    import { Text, Button } from 'shared/components'
+    import { Button, Text } from 'shared/components'
+    import { Electron } from 'shared/lib/electron'
     import { getBackupWarningColor } from 'shared/lib/helpers'
-    import { api } from 'shared/lib/wallet'
+    import { closePopup, openPopup } from 'shared/lib/popup'
     import { updateProfile } from 'shared/lib/profile'
-    import { openPopup, closePopup } from 'shared/lib/popup'
+    import { api } from 'shared/lib/wallet'
+    import { date } from 'svelte-i18n'
 
     export let locale
     export let lastBackupDate
@@ -26,8 +27,7 @@
     }
 
     function triggerBackup() {
-        window['Electron']
-            .getStrongholdBackupDestination()
+        Electron.getStrongholdBackupDestination()
             .then((result) => {
                 if (result) {
                     api.backup(result, {

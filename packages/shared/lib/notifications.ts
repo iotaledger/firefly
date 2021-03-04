@@ -1,6 +1,7 @@
-import { get, writable } from 'svelte/store'
-import { activeProfile } from 'shared/lib/profile'
-import { generateRandomId } from 'shared/lib/utils'
+import { activeProfile } from 'shared/lib/profile';
+import { generateRandomId } from 'shared/lib/utils';
+import { get, writable } from 'svelte/store';
+import { Electron } from './electron';
 
 const NOTIFICATION_TIMEOUT_DEFAULT = 5000;
 export const NOTIFICATION_TIMEOUT_NEVER = -1;
@@ -41,8 +42,8 @@ export function showNotification(notificationData: NotificationData, showSystemN
 
     if (showSystemNotification &&
         get(activeProfile).settings.notifications &&
-        window['Electron']['NotificationManager']) {
-        window['Electron']['NotificationManager'].notify(notificationData.message)
+        Electron.NotificationManager) {
+        Electron.NotificationManager.notify(notificationData.message)
     } else {
         for (const action of notificationData.actions) {
             if (!action.callback) {
