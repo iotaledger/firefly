@@ -4,7 +4,8 @@
     import passwordInfo from 'shared/lib/password'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, removeProfile, updateProfile } from 'shared/lib/profile'
-    import { api, destroyActor } from 'shared/lib/wallet'
+    import { api, destroyActor, resetWallet } from 'shared/lib/wallet'
+    import { resetRouter } from 'shared/lib/router'
     import { get } from 'svelte/store'
     import zxcvbn from 'zxcvbn'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -59,8 +60,8 @@
                     // Remove profile from (local) storage
                     removeProfile($activeProfile.id)
 
-                    // Navigate
-                    navigate({ reset: true })
+                    resetWallet()
+                    resetRouter()
                 },
                 onError(err) {
                     showAppNotification({
@@ -203,7 +204,7 @@
             onSelect={(option) => {
                 updateProfile('settings.lockScreenTimeout', option.value)
             }}
-            value={assignTimeoutOptionLabel($activeProfile.settings.lockScreenTimeout)}
+            value={assignTimeoutOptionLabel($activeProfile?.settings.lockScreenTimeout)}
             items={lockScreenTimeoutOptions} />
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
