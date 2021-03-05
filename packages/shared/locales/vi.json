@@ -362,19 +362,33 @@
         "exportNewStronghold": "Xuất ra Stronghold",
         "enableDeepLinks": "Kích hoạt các liên kết sâu",
         "enableDeveloperMode": "Bật chế độ nhà phát triển",
-        "enableSystemNotifications": "Enable system notifications",
+        "enableSystemNotifications": "Cho phép thông báo",
         "exportState": "Xuất trạng thái",
         "outsourceProofOfWork": "Outsource proof of work",
         "unlock": "Unlock",
         "update_firefly": "Update Firefly",
-        "restart_now": "Restart now",
+        "restart_now": "Khởi động lại ngay",
         "save_backup": "Save backup",
         "customize_account": "Customise account",
         "sync_account": "Sync account",
         "view_address_history": "View address history",
         "delete_account": "Xóa Tài khoản",
         "max": "Tối đa",
-        "add_node": "Thêm Node"
+        "add_node": "Thêm Node",
+        "hide": "Hide",
+        "hideOthers": "Hide Others",
+        "showAll": "Show All",
+        "quit": "Quit",
+        "edit": "Edit",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "selectAll": "Select All",
+        "addAccount": "Add Account",
+        "checkForUpdates": "Check for Updates",
+        "reportAnIssue": "Report an Issue"
     },
     "general": {
         "password": "Mật khẩu",
@@ -436,7 +450,11 @@
         "transactions": "Transactions",
         "security": "Bảo mật",
         "account_address": "Account Address",
-        "nodes": "Các node"
+        "nodes": "Các node",
+        "wallet": "Wallet",
+        "help": "Help",
+        "no_accounts": "You have no accounts, please create one.",
+        "add_profile": "Add Profile"
     },
     "dates": {
         "today": "Today",
@@ -449,11 +467,11 @@
         "valueTx": "Đang nhận {{value}} từ {{account}}",
         "confirmed": "Đang gửi đi {{value}} từ {{account}} đã được xác nhận",
         "failed": "Đang gửi đi {{value}} từ {{account}} đã thất bại",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "downloading_update": "Đang tải xuống bản cập nhật",
+        "update_ready": "Bản cập nhật đã sẵn sàng",
+        "update_error": "Có lỗi đã xảy ra trong quá trình cập nhật, vui lòng thử lại",
+        "restart_install": "Khởi động lại để cài đặt",
+        "calc_minutes_remaining": "Đang tính toán số phút còn lại...",
+        "minutes_remaining": "{minutes, plural, one {1 phút còn lại} other {# số phút còn lại}}"
     }
 }

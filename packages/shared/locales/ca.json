@@ -362,19 +362,33 @@
         "exportNewStronghold": "Exporteu un nou Stronghold",
         "enableDeepLinks": "Activa els enllaços profunds",
         "enableDeveloperMode": "Activa el mode de desenvolupador",
-        "enableSystemNotifications": "Enable system notifications",
+        "enableSystemNotifications": "Activa les notificacions del sistema",
         "exportState": "Estat d'exportació",
         "outsourceProofOfWork": "Subcontractar proves de treball",
         "unlock": "Desbloqueja",
         "update_firefly": "Actualitza Firefly",
-        "restart_now": "Restart now",
+        "restart_now": "Reiniciar ara",
         "save_backup": "Desa la còpia de seguretat",
         "customize_account": "Personalitza el compte",
         "sync_account": "Sincronitza els comptes",
         "view_address_history": "Veure l'historial d'adreces",
         "delete_account": "Elimina el compte",
         "max": "Màxim",
-        "add_node": "Afegeix un node"
+        "add_node": "Afegeix un node",
+        "hide": "Hide",
+        "hideOthers": "Hide Others",
+        "showAll": "Show All",
+        "quit": "Quit",
+        "edit": "Edit",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "selectAll": "Select All",
+        "addAccount": "Add Account",
+        "checkForUpdates": "Check for Updates",
+        "reportAnIssue": "Report an Issue"
     },
     "general": {
         "password": "Contrasenya",
@@ -436,7 +450,11 @@
         "transactions": "Transaccions",
         "security": "Seguretat",
         "account_address": "Adreça del compte",
-        "nodes": "Nodes"
+        "nodes": "Nodes",
+        "wallet": "Wallet",
+        "help": "Help",
+        "no_accounts": "You have no accounts, please create one.",
+        "add_profile": "Add Profile"
     },
     "dates": {
         "today": "Avui",
@@ -449,11 +467,11 @@
         "valueTx": "S'està rebent {{value}} a {{account}}",
         "confirmed": "{{value}} de sortida de {{account}} s'ha confirmat",
         "failed": "Ha fallat el {{value}} de sortida de {{account}}",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "downloading_update": "S'està baixant l'actualització",
+        "update_ready": "Actualització llesta",
+        "update_error": "S'ha produït un error durant l'actualització. Torneu-ho a provar",
+        "restart_install": "Reinicieu per instal·lar",
+        "calc_minutes_remaining": "S'estan calculant els minuts restants...",
+        "minutes_remaining": "{minutes, plural, one {1 minut restant} other {# minuts restants}}"
     }
 }

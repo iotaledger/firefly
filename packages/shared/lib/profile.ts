@@ -1,8 +1,9 @@
-import { get, derived, writable } from 'svelte/store'
-import { persistent } from 'shared/lib/helpers'
-import { generateRandomId } from 'shared/lib/utils'
 import { AvailableExchangeRates } from 'shared/lib/currency'
+import { persistent } from 'shared/lib/helpers'
 import { DEFAULT_NODE } from 'shared/lib/network'
+import { generateRandomId } from 'shared/lib/utils'
+import { derived, get, writable } from 'svelte/store'
+import { Electron } from './electron'
 import type { Node } from './typings/client'
 
 /**
@@ -72,7 +73,7 @@ export const activeProfile = derived(
 )
 
 activeProfile.subscribe((profile) => {
-    window['Electron'].updateActiveProfile(profile ? profile.id : null)
+    Electron.updateActiveProfile(profile ? profile.id : null)
 })
 
 /**
