@@ -12,6 +12,7 @@
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import { formatUnit } from 'shared/lib/units'
+    import { showAppNotification } from 'shared/lib/notifications'
     import {
         AccountMessage,
         api,
@@ -23,8 +24,6 @@
         initialiseListeners,
         isTransferring,
         selectedAccountId,
-        transferError,
-        transferState,
         updateAccounts,
         updateBalanceOverview,
         wallet,
@@ -62,7 +61,7 @@
     setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
-    let createAccountError
+    let createAccountError = ''
 
     function getAccountMeta(
         accountId: string,
@@ -159,9 +158,11 @@
                     }
                 }
             },
-            onError(error) {
-                // TODO handle error
-                console.error(error)
+            onError(err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
+                })
             },
         })
     }
@@ -188,9 +189,12 @@
                     )
                     isGeneratingAddress = false
                 },
-                onError(error) {
+                onError(err) {
                     isGeneratingAddress = false
-                    console.error(error)
+                    showAppNotification({
+                        type: 'error',
+                        message: locale(err.error),
+                    })
                 },
             })
         }
@@ -203,8 +207,11 @@
                     _generate()
                 }
             },
-            onError(error) {
-                console.error(error)
+            onError(err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
+                })
             },
         })
     }
@@ -216,8 +223,11 @@
 
                 updateAccounts(syncedAccounts)
             },
-            onError(error) {
-                console.error(error)
+            onError(err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
+                })
             },
         })
     }
@@ -255,10 +265,7 @@
                         })
                     },
                     onError(err) {
-                        // TODO: Add proper error handling
-                        if (err.error.includes('message history and balance')) {
-                            createAccountError = locale('error.account.empty')
-                        }
+                        createAccountError = locale(err.error)
                     },
                 }
             )
@@ -271,14 +278,16 @@
                     _create()
                 }
             },
-            onError(error) {
-                console.error(error)
+            onError(err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
+                })
             },
         })
     }
 
     function onSend(senderAccountId, receiveAddress, amount) {
-        transferError.set('')
         const _send = () => {
             isTransferring.set(true)
             api.send(
@@ -317,9 +326,12 @@
                             walletRoute.set(WalletRoutes.Init)
                         }, 3000)
                     },
-                    onError(error) {
+                    onError(err) {
                         isTransferring.set(false)
-                        transferError.set(error.error)
+                        showAppNotification({
+                            type: 'error',
+                            message: locale(err.error),
+                        })
                     },
                 }
             )
@@ -338,27 +350,33 @@
                     _send()
                 }
             },
-            onError(error) {
-                console.error(error)
+            onError(err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
+                })
             },
         })
     }
 
     function onInternalTransfer(senderAccountId, receiverAccountId, amount) {
-        transferError.set('')
-
         const _internalTransfer = () => {
             isTransferring.set(true)
             api.internalTransfer(senderAccountId, receiverAccountId, amount, {
                 onSuccess(response) {
                     accounts.update((_accounts) => {
                         return _accounts.map((_account) => {
-                            if (_account.id === senderAccountId || _account.id === receiverAccountId) {
+                            const isSenderAccount = _account.id === senderAccountId
+                            const isReceiverAccount = _account.id === receiverAccountId
+                            if (isSenderAccount || isReceiverAccount) {
                                 return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
                                     {} as WalletAccount,
                                     _account,
                                     {
-                                        messages: [response.payload, ..._account.messages],
+                                        messages: [
+                                            Object.assign({}, response.payload, {
+                                            incoming: isReceiverAccount
+                                        }), ..._account.messages],
                                     }
                                 )
                             }
@@ -375,9 +393,12 @@
                         walletRoute.set(WalletRoutes.Init)
                     }, 3000)
                 },
-                onError(error) {
+                onError(err) {
                     isTransferring.set(false)
-                    transferError.set(error.error)
+                    showAppNotification({
+                        type: 'error',
+                        message: locale(err.error),
+                    })
                 },
             })
         }
@@ -390,35 +411,11 @@
                     _internalTransfer()
                 }
             },
-            onError(error) {
-                console.error(error)
-            },
-        })
-    }
-
-    function onSetAlias(newAlias) {
-        api.setAlias($selectedAccountId, newAlias, {
-            onSuccess(res) {
-                accounts.update((_accounts) => {
-                    return _accounts.map((account) => {
-                        if (account.id === $selectedAccountId) {
-                            return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                {} as WalletAccount,
-                                account,
-                                {
-                                    alias: newAlias,
-                                }
-                            )
-                        }
-
-                        return account
-                    })
+            onError(err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
                 })
-
-                walletRoute.set(WalletRoutes.Init)
-            },
-            onError(error) {
-                console.error(error)
             },
         })
     }
@@ -464,7 +461,6 @@
         send={onSend}
         internalTransfer={onInternalTransfer}
         generateAddress={onGenerateAddress}
-        setAlias={onSetAlias}
         {locale} />
 {:else}
     <div class="w-full h-full flex flex-col p-10 flex-1">

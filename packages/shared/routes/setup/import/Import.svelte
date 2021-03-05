@@ -80,10 +80,7 @@
                     })
                     nextState = ImportState.Success
                 } catch (err) {
-                    // TODO: Add proper error handling
-                    if (err.payload.error.includes('try another password')){
-                        error = locale('error.password.incorrect')
-                    }
+                    error = locale(err.error)
                 }
                 break
             case ImportState.Success:

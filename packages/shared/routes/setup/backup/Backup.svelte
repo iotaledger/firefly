@@ -8,9 +8,12 @@
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
     import { Backup, BackupToFile, RecoveryPhrase, Success, VerifyRecoveryPhrase } from './views/'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale
     export let mobile
+
+    let loading = false
 
     enum BackupState {
         Init = 'init',
@@ -80,6 +83,7 @@
             case BackupState.Verify:
             case BackupState.Success:
                 const _mnemonic = get(mnemonic).join(' ')
+                loading = true
 
                 // TODO: Instead of generated mnemonic, we should construct the phrase with what was chosen by the user
                 api.verifyMnemonic(_mnemonic, {
@@ -100,19 +104,30 @@
                                             dispatch('next')
                                         },
                                         onError(err) {
-                                            // TODO: handle error
-                                            console.error('create account error', err)
+                                            showAppNotification({
+                                                type: 'error',
+                                                message: locale(err.error),
+                                            })
+                                            loading = false
                                         },
                                     }
                                 )
                             },
-                            onError(error) {
-                                console.log(error)
+                            onError(err) {
+                                showAppNotification({
+                                    type: 'error',
+                                    message: locale(err.error),
+                                })
+                                loading = false
                             },
                         })
                     },
-                    onError(error) {
-                        console.error('Error verifying mnemonic', error)
+                    onError(err) {
+                        showAppNotification({
+                            type: 'error',
+                            message: locale(err.error),
+                        })
+                        loading = false
                     },
                 })
 
@@ -145,7 +160,7 @@
     </Transition>
 {:else if state === BackupState.Verify}
     <Transition>
-        <VerifyRecoveryPhrase on:next={_next} on:previous={_previous} mnemonic={$mnemonic} {locale} {mobile} />
+        <VerifyRecoveryPhrase {loading} on:next={_next} on:previous={_previous} mnemonic={$mnemonic} {locale} {mobile} />
     </Transition>
 {:else if state === BackupState.Backup}
     <Transition>

@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { api } from 'shared/lib/wallet'
+    import { getErrorMessage } from 'shared/lib/events'
     import { closePopup } from 'shared/lib/popup'
     import { Password, Button, Text } from 'shared/components'
 
@@ -20,10 +21,7 @@
                 }
             },
             onError(err) {
-                // TODO: Add proper error handling
-                if (err.error.includes('try another password')){
-                     error = locale('error.password.incorrect')
-                }
+                error = locale(err.error)
                 if ('function' === typeof onError) {
                     onError(err)
                 }

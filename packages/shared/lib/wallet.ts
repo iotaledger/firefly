@@ -105,7 +105,6 @@ export const selectedAccountId = writable<string | null>(null)
 export const selectedMessage = writable<Message | null>(null)
 
 export const isTransferring = writable<boolean>(false)
-export const transferError = writable<string>("")
 export const transferState = writable<TransferProgressEventType | "Complete" | null>(null)
 
 export const loggedIn = persistent<boolean>('loggedIn', false)
@@ -343,7 +342,7 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
  * @returns {AccountMessage[]}
  */
 export const getLatestMessages = (accounts: WalletAccount[], count = 10): AccountMessage[] => {
-    const messages: AccountMessage[] = [];
+    const messages: Set<AccountMessage> = new Set();
     const addresses: string[] = [];
 
     accounts.forEach((account) => {
@@ -351,11 +350,21 @@ export const getLatestMessages = (accounts: WalletAccount[], count = 10): Accoun
             addresses.push(address.address);
         })
 
-        messages.push(...account.messages.map((message) =>
-            Object.assign<AccountMessage, Message, Partial<AccountMessage>>({} as AccountMessage, message, { account: account.index })));
+        account.messages.forEach((message) => {
+            messages.add(
+                Object.assign<
+                    AccountMessage,
+                    Message,
+                    Partial<AccountMessage>
+                >(
+                    {} as AccountMessage,
+                    message,
+                    { account: account.index })
+            )
+        })
     });
 
-    return messages
+    return Array.from(messages)
         .map(
             (message) => {
                 const outputs = message.payload.data.essence.data.outputs;

@@ -10,6 +10,7 @@
     import AddressHistory from './AddressHistory.svelte'
     import AddNode from './AddNode.svelte'
     import Busy from './Busy.svelte'
+    import ErrorLog from './ErrorLog.svelte'
 
     export let locale = 'en'
     export let type = undefined
@@ -27,6 +28,7 @@
         addressHistory: AddressHistory,
         addNode: AddNode,
         busy: Busy,
+        errorLog: ErrorLog
     }
 
     const onkey = (e) => {
@@ -55,7 +57,7 @@
     in:fade={{ duration: transition ? 100 : 0 }}
     class={`flex items-center justify-center fixed top-0 left-0 w-screen p-6
                 h-screen overflow-hidden z-10 ${fullScreen ? "bg-white" : "bg-gray-800 bg-opacity-40"}`}>
-    <popup-content class={`bg-white dark:bg-gray-900 rounded-xl pt-6 px-8 pb-14 relative ${fullScreen ? "full-screen" : ""}`}>
+    <popup-content class={`bg-white dark:bg-gray-900 rounded-xl pt-6 px-8 pb-8 relative ${fullScreen ? "full-screen" : ""}`}>
         {#if !hideClose}
             <button on:click={closePopup} class="absolute top-6 right-8">
                 <Icon icon="close" classes="text-gray-800 dark:text-white" />

@@ -4,9 +4,11 @@
     import passwordInfo from 'shared/lib/password'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, removeProfile, updateProfile } from 'shared/lib/profile'
-    import { api, destroyActor } from 'shared/lib/wallet'
+    import { api, destroyActor, resetWallet } from 'shared/lib/wallet'
+    import { resetRouter } from 'shared/lib/router'
     import { get } from 'svelte/store'
     import zxcvbn from 'zxcvbn'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     function assignTimeoutOptionLabel(timeInMinutes) {
         let label = ''
@@ -58,11 +60,14 @@
                     // Remove profile from (local) storage
                     removeProfile($activeProfile.id)
 
-                    // Navigate
-                    navigate({ reset: true })
+                    resetWallet()
+                    resetRouter()
                 },
-                onError(error) {
-                    console.error(error)
+                onError(err) {
+                    showAppNotification({
+                        type: 'error',
+                        message: locale(err.error),
+                    })
                 },
             })
         })
@@ -88,13 +93,19 @@
                                 callback()
                             }
                         },
-                        onError(error) {
-                            console.error(error)
+                        onError(err) {
+                            showAppNotification({
+                                type: 'error',
+                                message: locale(err.error),
+                            })
                         },
                     })
                 }
             })
-            .catch((error) => console.error(error))
+            .catch((err) => showAppNotification({
+                type: 'error',
+                message: locale(err.error),
+            }))
     }
 
     function changePassword() {
@@ -104,10 +115,7 @@
             api.changeStrongholdPassword(currentPassword, newPassword, {
                 onSuccess() {},
                 onError(err) {
-                    // TODO: Add proper error handling
-                    if (err.payload.error.includes('try another password')) {
-                        currentPasswordError = locale('error.password.incorrect')
-                    }
+                    currentPasswordError = locale(err.error)
                 },
             })
         }
@@ -158,8 +166,11 @@
                                         })
                                         .catch(reject)
                                 },
-                                onError(error) {
-                                    reject(error)
+                                onError(err) {
+                                    showAppNotification({
+                                        type: 'error',
+                                        message: locale(err.error),
+                                    })
                                 },
                             })
                         })
@@ -193,7 +204,7 @@
             onSelect={(option) => {
                 updateProfile('settings.lockScreenTimeout', option.value)
             }}
-            value={assignTimeoutOptionLabel($activeProfile.settings.lockScreenTimeout)}
+            value={assignTimeoutOptionLabel($activeProfile?.settings.lockScreenTimeout)}
             items={lockScreenTimeoutOptions} />
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />

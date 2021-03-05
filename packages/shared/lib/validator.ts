@@ -1,4 +1,4 @@
-import { ReadAccountResponse, ResponseTypes } from './typings/bridge'
+import { ResponseTypes } from './typings/bridge'
 import type { MessageResponse } from './typings/bridge'
 import type { Account, SyncedAccount } from './typings/account'
 import type { Message } from './typings/message'

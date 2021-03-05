@@ -50,7 +50,7 @@
         setTimeout(() => {
             splash = false
             initRouter()
-        }, 100)
+        }, 2000)
 
         await fetchMarketData()
         await pollNetworkStatus()
@@ -80,6 +80,9 @@
                     currentVersion: $versionDetails.currentVersion,
                 },
             })
+        })
+        Electron.onEvent('menu-error-log', async () => {
+            openPopup({ type: 'errorLog' })
         })
     })
 </script>

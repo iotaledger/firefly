@@ -18,7 +18,13 @@
     let authError = ''
 
     function addCustomNode(node: Node, primary = false) {
-        if (isNodeValid([...$activeProfile.settings.customNodes, ...DEFAULT_NODES], node)) {
+
+        const error = isNodeValid([...$activeProfile.settings.customNodes, ...DEFAULT_NODES], node)
+
+        if (error) {
+            // TODO: Move locale to store and localise properly
+            addressError = locale(error)
+        } else {
             const options: ClientOptions = primary
                 ? {
                       ...$accounts[0].clientOptions,
@@ -72,13 +78,10 @@
 
                     closePopup()
                 },
-                onError(error) {
-                    // TODO: Add auth error handling
-                    console.error(error)
+                onError(err) {
+                    addressError = locale(err.error)
                 },
             })
-        } else {
-            console.error('Node is not valid')
         }
     }
 </script>
