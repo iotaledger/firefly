@@ -57,6 +57,7 @@
     setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
+    let createAccountError = ''
 
     function getAccountMeta(
         accountId: string,
