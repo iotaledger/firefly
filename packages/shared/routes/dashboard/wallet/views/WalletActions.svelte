@@ -25,6 +25,7 @@
             type: 'busy',
             hideClose: true,
             fullScreen: true,
+            transition: false,
         })
     }
 
