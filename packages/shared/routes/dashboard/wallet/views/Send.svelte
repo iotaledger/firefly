@@ -166,7 +166,7 @@
                             label={locale('general.from')}
                             items={accountsDropdownItems}
                             onSelect={handleFromSelect}
-                            disabled={$isTransferring} />
+                            disabled={$accounts.length === 1 || $isTransferring} />
                     </div>
                 {/if}
                 <div class="w-full block">
