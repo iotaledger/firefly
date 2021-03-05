@@ -145,6 +145,10 @@
         openPopup({ type: 'addNode' })
     }
 
+    function handleErrorLogClick() {
+        openPopup({ type: 'errorLog' })
+    }
+
     function resyncAccounts() {
         const _sync = () => {
             api.syncAccounts({
@@ -221,7 +225,7 @@
     <section id="errorLog" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.errorLog.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.errorLog.description')}</Text>
-        <Button classes="w-1/4" onClick={() => {}}>{locale('views.settings.errorLog.title')}</Button>
+        <Button classes="w-1/4" onClick={() => handleErrorLogClick()}>{locale('views.settings.errorLog.title')}</Button>
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <section id="stateExport" class="w-3/4">

@@ -1,3 +1,7 @@
+import type { ErrorTypes as ValidatorErrorTypes } from './validator'
+import type { ErrorType } from './typings/events'
+import { persistent } from 'shared/lib/helpers'
+
 const errorMessages = {
     'IoError': 'error.global.generic',
     'JsonError': 'error.global.generic',
@@ -51,7 +55,18 @@ const errorMessages = {
     'DustError': 'error.global.generic',
 }
 
-export const getErrorMessage = (type) => {
+export const getErrorMessage = (type: ErrorType | ValidatorErrorTypes): string => {
     const message = errorMessages?.[type]
     return message ? message : 'error.global.generic'
 }
+
+/**
+ * Error interface
+ */
+interface Error {
+    time: number
+    type: ErrorType | ValidatorErrorTypes,
+    message: string
+}
+
+export const errorLog = persistent<Error[]>('errorLog', [])

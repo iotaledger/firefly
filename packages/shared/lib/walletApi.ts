@@ -1,5 +1,6 @@
 import Validator, { ErrorTypes as ValidatorErrorTypes } from 'shared/lib/validator'
 import * as Wallet from 'wallet-nodejs-binding'
+import { errorLog, getErrorMessage } from './events'
 import type { Account, AccountToCreate, Balance, SyncedAccount } from './typings/account'
 import type { Address } from './typings/address'
 import type {
@@ -130,7 +131,7 @@ Wallet.onMessage((message: MessageResponse) => {
             const { onError } = callbacksStore[id]
 
             onError(
-                createErrorMessage(
+                handleError(
                     payload.type,
                     payload.error
                 )
@@ -144,7 +145,7 @@ Wallet.onMessage((message: MessageResponse) => {
         const { onSuccess, onError } = callbacksStore[id]
 
         message.type === ResponseTypes.Error || message.type === ResponseTypes.Panic ? onError(
-            createErrorMessage(
+            handleError(
                 message.payload.type,
                 message.payload.error
             )
@@ -179,17 +180,18 @@ const storeCallbacks = (__id: string, type: ResponseTypes, callbacks?: Callbacks
 }
 
 /**
- * Creates error message 
+ * Emits formatted error and adds to error log 
  * 
- * @method createErrorMessage
+ * @method handleError
  * 
  * @param {ErrorType | ValidatorErrorTypes} type
  * @param {string} error
  */
-const createErrorMessage = (type: ErrorType | ValidatorErrorTypes, error: string): { type: ErrorType | ValidatorErrorTypes, error: string } => {
+const handleError = (type: ErrorType | ValidatorErrorTypes, error: string): { type: ErrorType | ValidatorErrorTypes, error: string } => {
+    errorLog.update((log) => [ ...log, { type, message: error, time: Date.now() } ])
     return {
         type,
-        error
+        error: getErrorMessage(type)
     }
 };
 

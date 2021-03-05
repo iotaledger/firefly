@@ -322,6 +322,10 @@
             "optional_username": "Username (optional)",
             "optional_password": "Password (optional)",
             "set_as_primary_node": "Set as primary node"
+        },
+        "errorLog": {
+            "title": "Error Log",
+            "empty": "The error log is empty."
         }
     },
     "charts": {
@@ -396,7 +400,8 @@
         "selectAll": "Select All",
         "addAccount": "Add Account",
         "checkForUpdates": "Check for Updates",
-        "reportAnIssue": "Report an Issue"
+        "reportAnIssue": "Report an Issue",
+        "clear": "Clear"
     },
     "general": {
         "password": "Password",
