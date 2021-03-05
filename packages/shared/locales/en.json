@@ -91,7 +91,9 @@
             "title": "Restore your wallet with a recovery phrase or seed",
             "body_1": "A recovery phrase is 24 words long. This is used to recover an existing Firefly wallet.",
             "body_2": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body_3": "Enter your seed or recovery phrase"
+            "body_3": "Enter your seed or recovery phrase",
+            "seed_detected": "81 character seed detected",
+            "phrase_detected": "24 word phrase detected"
         },
         "import_from_file": {
             "title": "Restore your wallet from a backup file",
@@ -524,6 +526,12 @@
             "invalid": "Please enter a valid URL.",
             "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
             "duplicate": "This node has already been added."
+        },
+        "recovery": {
+            "seedTooShort": "The seed should be 81 characters long, it is {length}",
+            "seedCharacters": "The seed should only contain characters A-Z or 9",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}",
+            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase"
         }
     }
 }
