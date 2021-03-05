@@ -366,12 +366,17 @@
                 onSuccess(response) {
                     accounts.update((_accounts) => {
                         return _accounts.map((_account) => {
-                            if (_account.id === senderAccountId || _account.id === receiverAccountId) {
+                            const isSenderAccount = _account.id === senderAccountId
+                            const isReceiverAccount = _account.id === receiverAccountId
+                            if (isSenderAccount || isReceiverAccount) {
                                 return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
                                     {} as WalletAccount,
                                     _account,
                                     {
-                                        messages: [response.payload, ..._account.messages],
+                                        messages: [
+                                            Object.assign({}, response.payload, {
+                                            incoming: isReceiverAccount
+                                        }), ..._account.messages],
                                     }
                                 )
                             }
