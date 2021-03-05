@@ -188,10 +188,24 @@ const storeCallbacks = (__id: string, type: ResponseTypes, callbacks?: Callbacks
  * @param {string} error
  */
 const handleError = (type: ErrorType | ValidatorErrorTypes, error: string): { type: ErrorType | ValidatorErrorTypes, error: string } => {
-    errorLog.update((log) => [ ...log, { type, message: error, time: Date.now() } ])
+    errorLog.update((log) => [ { type, message: error, time: Date.now() }, ...log ])
+
+    // TODO: Add full type list to remove this temporary fix
+    const _getError = () => {
+        if (error.includes('try another password')) {
+            return ('error.password.incorrect')
+        }
+        if (error.includes('message history and balance')) {
+            return ('error.account.empty')
+        }
+
+        return getErrorMessage(type)
+    }
+
+
     return {
         type,
-        error: getErrorMessage(type)
+        error: _getError()
     }
 };
 
