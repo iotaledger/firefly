@@ -142,14 +142,20 @@
 <div class="w-full h-full flex flex-col justify-between p-8">
     <div>
         <div class="flex flex-row mb-6 space-x-4">
-            {#each Object.values(SEND_TYPE) as type}
-                <button
-                    on:click={() => handleSendTypeClick(type)}
-                    disabled={$isTransferring}
-                    class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}>
-                    <Text type="h5" disabled={type !== selectedSendType || $isTransferring}>{locale(`general.${type}`)}</Text>
-                </button>
-            {/each}
+            <button
+                on:click={() => handleSendTypeClick(SEND_TYPE.EXTERNAL)}
+                disabled={$isTransferring}
+                class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}>
+                <Text type="h5" disabled={SEND_TYPE.EXTERNAL !== selectedSendType || $isTransferring}>{locale(`general.${SEND_TYPE.EXTERNAL}`)}</Text>
+            </button>
+            {#if $accounts.length > 1}
+            <button
+                on:click={() => handleSendTypeClick(SEND_TYPE.INTERNAL)}
+                disabled={$isTransferring}
+                class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}>
+                <Text type="h5" disabled={SEND_TYPE.INTERNAL !== selectedSendType || $isTransferring}>{locale(`general.${SEND_TYPE.INTERNAL}`)}</Text>
+            </button>
+            {/if}
         </div>
         <div class="w-full h-full flex flex-col justify-between">
             <div>
