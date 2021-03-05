@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Text } from 'shared/components'
     import { debounce } from 'shared/lib/utils'
-    import { english } from './english'
+    import { english } from './wordlists/english'
 
     export let value = undefined
     export let locale
