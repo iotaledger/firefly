@@ -14,7 +14,8 @@
 
     const dispatch = createEventDispatcher()
 
-    let isDeveloperProfile = false
+    // TODO: Remove defaulting to dev profile
+    let isDeveloperProfile = true
     let profileName = get(newProfile)?.name ?? ''
 
     const MAX_PROFILE_NAME_LENGTH = 20
