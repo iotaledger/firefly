@@ -16,19 +16,28 @@
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
     const accountsLoaded = getContext<Writable<boolean>>('walletAccountsLoaded')
 
+    let startInit
+
     if ($walletRoute === WalletRoutes.Init) {
+        startInit = Date.now()
         openPopup({
             type: 'busy',
             props: {
                 statusMessage: locale('general.loading_accounts'),
             },
             hideClose: true,
+            fullScreen: true,
         })
     }
 
     $: {
         if ($accountsLoaded) {
-            closePopup()
+            const minTimeElapsed = 3000 - (Date.now() - startInit)
+            if (minTimeElapsed < 0) {
+                closePopup()
+            } else {
+                setTimeout(() => closePopup(), minTimeElapsed)
+            }
         }
     }
 
