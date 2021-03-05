@@ -362,19 +362,33 @@
         "exportNewStronghold": "Eksportuj nowy Stronghold",
         "enableDeepLinks": "Włącz deep linki",
         "enableDeveloperMode": "Włącz tryb deweloperski",
-        "enableSystemNotifications": "Enable system notifications",
+        "enableSystemNotifications": "Włącz powiadomienia",
         "exportState": "Eksportuj stan",
         "outsourceProofOfWork": "Wykonuj proof of work zdalnie",
         "unlock": "Odblokuj",
         "update_firefly": "Zaktualizuj Firefly",
-        "restart_now": "Restart now",
+        "restart_now": "Uruchom ponownie teraz",
         "save_backup": "Zapisz kopię zapasową",
         "customize_account": "Dostosuj konto",
         "sync_account": "Synchronizuj konto",
         "view_address_history": "Pokaż historię adresów",
         "delete_account": "Usuń konto",
         "max": "Maks.",
-        "add_node": "Dodaj serwer"
+        "add_node": "Dodaj serwer",
+        "hide": "Hide",
+        "hideOthers": "Hide Others",
+        "showAll": "Show All",
+        "quit": "Quit",
+        "edit": "Edit",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "selectAll": "Select All",
+        "addAccount": "Add Account",
+        "checkForUpdates": "Check for Updates",
+        "reportAnIssue": "Report an Issue"
     },
     "general": {
         "password": "Hasło",
@@ -436,7 +450,11 @@
         "transactions": "Transakcje",
         "security": "Bezpieczeństwo",
         "account_address": "Adres konta",
-        "nodes": "Serwery"
+        "nodes": "Serwery",
+        "wallet": "Wallet",
+        "help": "Help",
+        "no_accounts": "You have no accounts, please create one.",
+        "add_profile": "Add Profile"
     },
     "dates": {
         "today": "Dziś",
@@ -449,11 +467,11 @@
         "valueTx": "Odbieranie {{value}} na konto {{account}}",
         "confirmed": "Wysyłka {{value}} z konta {{account}} została potwierdzona",
         "failed": "Wysłanie {{value}} z konta {{account}} nie powiodło się",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "downloading_update": "Pobieranie aktualizacji",
+        "update_ready": "Aktualizacja jest gotowa",
+        "update_error": "Podczas aktualizacji wystąpił błąd, spróbuj ponownie",
+        "restart_install": "Uruchom ponownie, aby zainstalować",
+        "calc_minutes_remaining": "Obliczanie pozostałych minut...",
+        "minutes_remaining": "{minutes, plural, one {pozostała 1 minuta} few {pozostały # minuty} many {pozostało # minut} other {pozostało # minut}}"
     }
 }

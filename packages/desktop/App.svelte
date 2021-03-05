@@ -2,21 +2,14 @@
     import { Popup, Route, ToastContainer, Toggle } from 'shared/components'
     import { darkMode, loggedIn, mobile } from 'shared/lib/app'
     import { refreshVersionDetails, versionDetails } from 'shared/lib/appUpdater'
+    import { Electron } from 'shared/lib/electron'
     import { goto } from 'shared/lib/helpers'
     import { activeLocale, dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
     import { fetchMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile } from 'shared/lib/profile'
-    import {
-        dashboardRoute,
-        initRouter,
-        route as appRoute,
-        routerNext,
-        routerPrevious,
-        settingsRoute,
-        walletRoute,
-    } from 'shared/lib/router'
+    import { dashboardRoute, initRouter, route as appRoute, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
     import { AppRoute, Tabs } from 'shared/lib/typings/routes'
     import { requestMnemonic } from 'shared/lib/wallet'
     import {
@@ -43,9 +36,9 @@
 
     $: $darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
     $: if (activeLocale !== locale) {
-        window['Electron'].updateMenu('strings', getLocalisedMenuItems($_))
+        Electron.updateMenu('strings', getLocalisedMenuItems($_))
     }
-    $: window['Electron'].updateMenu('loggedIn', $loggedIn)
+    $: Electron.updateMenu('loggedIn', $loggedIn)
 
     $: if (document.dir !== $dir) {
         document.dir = $dir
@@ -66,20 +59,20 @@
         if (!devMode) {
             await refreshVersionDetails()
         }
-        window['Electron'].onEvent('menu-navigate-wallet', (route) => {
+        Electron.onEvent('menu-navigate-wallet', (route) => {
             if (get(dashboardRoute) !== Tabs.Wallet) {
                 dashboardRoute.set(Tabs.Wallet)
             }
             walletRoute.set(route)
         })
-        window['Electron'].onEvent('menu-navigate-settings', () => {
+        Electron.onEvent('menu-navigate-settings', () => {
             if (get(appRoute) !== AppRoute.Dashboard) {
                 // TODO: Add settings from login
             } else if (get(dashboardRoute) !== Tabs.Settings) {
                 dashboardRoute.set(Tabs.Settings)
             }
         })
-        window['Electron'].onEvent('menu-check-for-update', async () => {
+        Electron.onEvent('menu-check-for-update', async () => {
             await refreshVersionDetails()
             openPopup({
                 type: 'version',
@@ -123,7 +116,7 @@
     <Splash />
 {:else}
     {#if $popupState.active}
-        <Popup type={$popupState.type} props={$popupState.props} locale={$_} />
+        <Popup type={$popupState.type} props={$popupState.props} hideClose={$popupState.hideClose} locale={$_} />
     {/if}
     <!-- dummy toggles -->
     <div class="dummy-toggles flex flex-row">

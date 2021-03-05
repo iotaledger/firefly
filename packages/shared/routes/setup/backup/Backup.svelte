@@ -1,13 +1,13 @@
 <script lang="typescript">
+    import { Transition } from 'shared/components'
+    import { mnemonic, strongholdPassword } from 'shared/lib/app'
+    import { Electron } from 'shared/lib/electron'
+    import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
+    import { updateProfile } from 'shared/lib/profile'
+    import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
-    import { Backup, RecoveryPhrase, VerifyRecoveryPhrase, BackupToFile, Success } from './views/'
-    import { Transition } from 'shared/components'
-    import { mnemonic } from 'shared/lib/app'
-    import { updateProfile } from 'shared/lib/profile'
-    import { strongholdPassword } from 'shared/lib/app'
-    import { api } from 'shared/lib/wallet'
-    import { DEFAULT_NODES, DEFAULT_NODE, network } from 'shared/lib/network'
+    import { Backup, BackupToFile, RecoveryPhrase, Success, VerifyRecoveryPhrase } from './views/'
 
     export let locale
     export let mobile
@@ -53,7 +53,7 @@
                             },
                         })
                     })
-                        .then(() => window['Electron'].getStrongholdBackupDestination())
+                        .then(() => Electron.getStrongholdBackupDestination())
                         .then((result) => {
                             if (result) {
                                 return new Promise<void>((res, rej) => {
@@ -99,9 +99,9 @@
                                         onSuccess() {
                                             dispatch('next')
                                         },
-                                        onError() {
+                                        onError(err) {
                                             // TODO: handle error
-                                            console.error('create account error')
+                                            console.error('create account error', err)
                                         },
                                     }
                                 )

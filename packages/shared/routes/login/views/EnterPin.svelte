@@ -1,16 +1,14 @@
 <script lang="typescript">
-    import { api } from 'shared/lib/wallet'
-    import { get } from 'svelte/store'
-    import { createEventDispatcher, onDestroy } from 'svelte'
-    import { Icon, Text, Profile, Pin, Button } from 'shared/components'
-    import { validatePinFormat } from 'shared/lib/utils'
+    import { Button, Icon, Pin, Profile, Text } from 'shared/components'
+    import { Electron } from 'shared/lib/electron'
     import { activeProfile } from 'shared/lib/profile'
-    import { initialise, getStoragePath } from 'shared/lib/wallet'
+    import { validatePinFormat } from 'shared/lib/utils'
+    import { api, getStoragePath, initialise } from 'shared/lib/wallet'
+    import { createEventDispatcher, onDestroy } from 'svelte'
+    import { get } from 'svelte/store'
 
     export let locale
     export let mobile
-
-    const PincodeManager = window['Electron']['PincodeManager']
 
     let attempts = 0
     let pinCode = ''
@@ -59,12 +57,12 @@
 
             isBusy = true
 
-            PincodeManager.verify(profile.id, pinCode.toString())
+            Electron.PincodeManager.verify(profile.id, pinCode)
                 .then((verified) => {
                     if (verified === true) {
-                        return window['Electron'].getUserDataPath().then((path) => {
+                        return Electron.getUserDataPath().then((path) => {
                             initialise(profile.id, getStoragePath(path, profile.name))
-                            api.setStoragePassword(pinCode.toString(), {
+                            api.setStoragePassword(pinCode, {
                                 onSuccess() {
                                     dispatch('next')
                                 },
@@ -84,7 +82,7 @@
                         // This is necessary as the isBusy state change
                         // is required to be processed to enable the
                         // component before we can focus it
-                        setTimeout(() => pinRef.focus(), 100);
+                        setTimeout(() => pinRef.focus(), 100)
                     }
                 })
                 .catch((error) => {
@@ -122,7 +120,12 @@
         <div class="pt-40 pb-16 flex w-full h-full flex-col items-center justify-between">
             <div class="w-96 flex flex-row flex-wrap justify-center mb-20">
                 <Profile name={$activeProfile.name} bgColor="blue" />
-                <Pin bind:this={pinRef} bind:value={pinCode} classes="mt-10" on:submit={onSubmit} disabled={hasReachedMaxAttempts || isBusy} />
+                <Pin
+                    bind:this={pinRef}
+                    bind:value={pinCode}
+                    classes="mt-10"
+                    on:submit={onSubmit}
+                    disabled={hasReachedMaxAttempts || isBusy} />
                 <Text type="p" bold classes="mt-4 text-center">
                     {attempts > 0 ? locale('views.login.incorrect_attempts', {
                               values: { attempts: attempts.toString() },

@@ -362,19 +362,33 @@
         "exportNewStronghold": "Exportera en ny Stronghold",
         "enableDeepLinks": "Aktivera hyperlänkar",
         "enableDeveloperMode": "Aktivera utvecklarläge",
-        "enableSystemNotifications": "Enable system notifications",
+        "enableSystemNotifications": "Aktivera systemaviseringar",
         "exportState": "Exportera tillstånd",
         "outsourceProofOfWork": "Outsourca bevis på arbete (PoW)",
         "unlock": "Lås upp",
         "update_firefly": "Uppdatera Firefly",
-        "restart_now": "Restart now",
+        "restart_now": "Starta om nu",
         "save_backup": "Spara säkerhetskopia",
         "customize_account": "Anpassa konto",
         "sync_account": "Synkronisera konto",
         "view_address_history": "Visa adresshistorik",
         "delete_account": "Radera konto",
         "max": "Max",
-        "add_node": "Lägg till nod"
+        "add_node": "Lägg till nod",
+        "hide": "Hide",
+        "hideOthers": "Hide Others",
+        "showAll": "Show All",
+        "quit": "Quit",
+        "edit": "Edit",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "selectAll": "Select All",
+        "addAccount": "Add Account",
+        "checkForUpdates": "Check for Updates",
+        "reportAnIssue": "Report an Issue"
     },
     "general": {
         "password": "Lösenord",
@@ -436,7 +450,11 @@
         "transactions": "Transaktioner",
         "security": "Säkerhet",
         "account_address": "Konto-adress",
-        "nodes": "Noder"
+        "nodes": "Noder",
+        "wallet": "Wallet",
+        "help": "Help",
+        "no_accounts": "You have no accounts, please create one.",
+        "add_profile": "Add Profile"
     },
     "dates": {
         "today": "Idag",
@@ -449,11 +467,11 @@
         "valueTx": "Tar emot {{value}} till {{account}}",
         "confirmed": "Utgående {{value}} från {{account}} har bekräftats",
         "failed": "Utgående {{value}} från {{account}} misslyckades",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "downloading_update": "Hämtar uppdatering",
+        "update_ready": "Uppdatering redo",
+        "update_error": "Ett fel inträffade under uppdateringen, försök igen",
+        "restart_install": "Starta om för att installera",
+        "calc_minutes_remaining": "Beräknar minuter kvar...",
+        "minutes_remaining": "{minutes, plural, one {1 minut kvar} other {# minuter kvar}}"
     }
 }
