@@ -12,6 +12,7 @@
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import { formatUnit } from 'shared/lib/units'
+    import { showAppNotification } from 'shared/lib/notifications'
     import {
         AccountMessage,
         api,
@@ -159,9 +160,11 @@
                     }
                 }
             },
-            onError(error) {
-                // TODO handle error
-                console.error(error)
+            onError(err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
+                })
             },
         })
     }
@@ -188,9 +191,12 @@
                     )
                     isGeneratingAddress = false
                 },
-                onError(error) {
+                onError(err) {
                     isGeneratingAddress = false
-                    console.error(error)
+                    showAppNotification({
+                        type: 'error',
+                        message: locale(err.error),
+                    })
                 },
             })
         }
@@ -203,8 +209,11 @@
                     _generate()
                 }
             },
-            onError(error) {
-                console.error(error)
+            onError(err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
+                })
             },
         })
     }
@@ -216,8 +225,11 @@
 
                 updateAccounts(syncedAccounts)
             },
-            onError(error) {
-                console.error(error)
+            onError(err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
+                })
             },
         })
     }
@@ -255,10 +267,7 @@
                         })
                     },
                     onError(err) {
-                        // TODO: Add proper error handling
-                        if (err.error.includes('message history and balance')) {
-                            createAccountError = locale('error.account.empty')
-                        }
+                        createAccountError = locale(err.error)
                     },
                 }
             )
@@ -271,8 +280,11 @@
                     _create()
                 }
             },
-            onError(error) {
-                console.error(error)
+            onError(err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
+                })
             },
         })
     }
@@ -317,9 +329,9 @@
                             walletRoute.set(WalletRoutes.Init)
                         }, 3000)
                     },
-                    onError(error) {
+                    onError(err) {
                         isTransferring.set(false)
-                        transferError.set(error.error)
+                        transferError.set(err.error)
                     },
                 }
             )
@@ -338,8 +350,11 @@
                     _send()
                 }
             },
-            onError(error) {
-                console.error(error)
+            onError(err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
+                })
             },
         })
     }
@@ -375,9 +390,9 @@
                         walletRoute.set(WalletRoutes.Init)
                     }, 3000)
                 },
-                onError(error) {
+                onError(err) {
                     isTransferring.set(false)
-                    transferError.set(error.error)
+                    transferError.set(err.error)
                 },
             })
         }
@@ -390,35 +405,11 @@
                     _internalTransfer()
                 }
             },
-            onError(error) {
-                console.error(error)
-            },
-        })
-    }
-
-    function onSetAlias(newAlias) {
-        api.setAlias($selectedAccountId, newAlias, {
-            onSuccess(res) {
-                accounts.update((_accounts) => {
-                    return _accounts.map((account) => {
-                        if (account.id === $selectedAccountId) {
-                            return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                {} as WalletAccount,
-                                account,
-                                {
-                                    alias: newAlias,
-                                }
-                            )
-                        }
-
-                        return account
-                    })
+            onError(err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
                 })
-
-                walletRoute.set(WalletRoutes.Init)
-            },
-            onError(error) {
-                console.error(error)
             },
         })
     }
@@ -464,7 +455,6 @@
         send={onSend}
         internalTransfer={onInternalTransfer}
         generateAddress={onGenerateAddress}
-        setAlias={onSetAlias}
         {locale} />
 {:else}
     <div class="w-full h-full flex flex-col p-10 flex-1">

@@ -11,6 +11,7 @@
     import { Settings, Wallet } from 'shared/routes'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale
     export let mobile
@@ -29,8 +30,11 @@
                 onSuccess() {
                     logout()
                 },
-                onError(error) {
-                    console.error(error)
+                onError(err) {
+                    showAppNotification({
+                        type: 'error',
+                        message: locale(err.error),
+                    })
                 },
             })
         })

@@ -7,6 +7,7 @@
     import { openPopup } from 'shared/lib/popup'
     import { api } from 'shared/lib/wallet'
     import { versionDetails } from 'shared/lib/appUpdater'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale
 
@@ -38,8 +39,11 @@
     function lockStronghold() {
         api.lockStronghold({
             onSuccess() {},
-            onError(error) {
-                console.error(error)
+            onError(err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
+                })
             },
         })
     }

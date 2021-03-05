@@ -8,6 +8,7 @@
     import type { Node } from 'shared/lib/typings/client'
     import { api, updateAccounts, wallet, WalletAccount } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale
 
@@ -133,8 +134,11 @@
                             )
                         )
                     },
-                    onError(error) {
-                        console.error(error)
+                    onError(err) {
+                        showAppNotification({
+                            type: 'error',
+                            message: locale(err.error),
+                        })
                     },
                 }
             )
@@ -157,8 +161,11 @@
 
                     updateAccounts(syncedAccounts)
                 },
-                onError(error) {
-                    console.error(error)
+                onError(err) {
+                    showAppNotification({
+                        type: 'error',
+                        message: locale(err.error),
+                     })
                 },
             })
         }

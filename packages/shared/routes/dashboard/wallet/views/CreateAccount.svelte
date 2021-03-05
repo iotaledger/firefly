@@ -12,7 +12,7 @@
     const MAX_ACCOUNT_NAME_LENGTH = 20
 
     const handleCreateClick = () => {
-        resetError()
+        error = ''
         if (accountName.length > MAX_ACCOUNT_NAME_LENGTH) {
             return error = locale('error.account.length', { 
                 values: {
@@ -25,11 +25,7 @@
         }
     }
     const handleCancelClick = () => {
-        resetError()
         walletRoute.set(WalletRoutes.Init)
-    }
-    const resetError = () => {
-        error = ''
     }
 </script>
 

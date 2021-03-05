@@ -7,6 +7,7 @@
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
     import { Pin, Protect } from './views/'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale
     export let mobile
@@ -62,8 +63,11 @@
                         onSuccess() {
                             dispatch('next', { pin })
                         },
-                        onError(error) {
-                            console.error(error)
+                        onError(err) {
+                            showAppNotification({
+                                type: 'error',
+                                message: locale(err.error),
+                            })
                         },
                     })
                     break

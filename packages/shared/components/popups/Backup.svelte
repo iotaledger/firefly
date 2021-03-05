@@ -6,6 +6,7 @@
     import { updateProfile } from 'shared/lib/profile'
     import { api } from 'shared/lib/wallet'
     import { date } from 'svelte-i18n'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale
     export let lastBackupDate
@@ -35,8 +36,11 @@
                             updateProfile('lastStrongholdBackupTime', new Date())
                             closePopup()
                         },
-                        onError(error) {
-                            console.error(error)
+                        onError(err) {
+                            showAppNotification({
+                                type: 'error',
+                                message: locale(err.error),
+                            })
                         },
                     })
                 }

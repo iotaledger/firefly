@@ -6,6 +6,7 @@
     import { getInitials } from 'shared/lib/helpers'
     import { api } from 'shared/lib/wallet'
     import { logout } from 'shared/lib/app'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     export let isActive
     export let locale
@@ -24,8 +25,11 @@
             onSuccess() {
                 logout()
             },
-            onError(error) {
-                console.error(error)
+            onError(err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
+                })
             },
         })
     }
