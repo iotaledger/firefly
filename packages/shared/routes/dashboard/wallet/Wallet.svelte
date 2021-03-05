@@ -12,9 +12,11 @@
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import { formatUnit } from 'shared/lib/units'
-    import type { AccountMessage, BalanceHistory, BalanceOverview, WalletAccount } from 'shared/lib/wallet'
     import {
+        AccountMessage,
         api,
+        BalanceHistory,
+        BalanceOverview,
         getAccountsBalanceHistory,
         getLatestMessages,
         getWalletBalanceHistory,
@@ -22,9 +24,11 @@
         isTransferring,
         selectedAccountId,
         transferError,
+        transferState,
         updateAccounts,
         updateBalanceOverview,
         wallet,
+        WalletAccount,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
     import { derived, get, Readable, Writable } from 'svelte/store'
@@ -305,8 +309,12 @@
                         })
 
                         sendParams.set({ address: '', amount: 0, message: '' })
-                        isTransferring.set(false)
-                        walletRoute.set(WalletRoutes.Init)
+                        transferState.set('Complete')
+
+                        setTimeout(() => {
+                            isTransferring.set(false)
+                            walletRoute.set(WalletRoutes.Init)
+                        }, 3000)
                     },
                     onError(error) {
                         isTransferring.set(false)
@@ -336,7 +344,10 @@
     }
 
     function onInternalTransfer(senderAccountId, receiverAccountId, amount) {
+        transferError.set('')
+
         const _internalTransfer = () => {
+            isTransferring.set(true)
             api.internalTransfer(senderAccountId, receiverAccountId, amount, {
                 onSuccess(response) {
                     accounts.update((_accounts) => {
@@ -356,10 +367,16 @@
                     })
 
                     sendParams.set({ address: '', amount: 0, message: '' })
-                    walletRoute.set(WalletRoutes.Init)
+                    transferState.set('Complete')
+
+                    setTimeout(() => {
+                        isTransferring.set(false)
+                        walletRoute.set(WalletRoutes.Init)
+                    }, 3000)
                 },
-                onError(response) {
-                    console.error(response)
+                onError(error) {
+                    isTransferring.set(false)
+                    transferError.set(error.error)
                 },
             })
         }

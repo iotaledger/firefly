@@ -31,7 +31,7 @@
     let addressError = ''
 
     let transferSteps: {
-        [key in TransferProgressEventType]: {
+        [key in TransferProgressEventType | 'Complete']: {
             label: string
             percent: number
         }
@@ -60,6 +60,10 @@
             label: locale('general.transferBroadcasting'),
             percent: 80,
         },
+        Complete: {
+            label: locale('general.transferComplete'),
+            percent: 100,
+        },
     }
 
     $: accountsDropdownItems = $accounts.map((acc) => format(acc))
@@ -68,15 +72,21 @@
 
     const handleSendTypeClick = (type) => {
         selectedSendType = type
-        amountError = undefined
+        amountError = ''
     }
     const handleFromSelect = (item) => {
         from = item
-        amountError = undefined
+        if (to === from) {
+            to = undefined
+        }
+        amountError = ''
     }
     const handleToSelect = (item) => {
         to = item
-        amountError = undefined
+        if (from === to) {
+            from = undefined
+        }
+        amountError = ''
     }
     const handleSendClick = () => {
         if ($sendParams.amount > from.balance) {
@@ -165,7 +175,7 @@
                         <Dropdown
                             value={to?.label || ''}
                             label={locale('general.to')}
-                            items={accountsDropdownItems}
+                            items={accountsDropdownItems.filter((a) => from && a.id !== from.id)}
                             onSelect={handleToSelect}
                             disabled={$isTransferring} />
                     {:else}
@@ -189,7 +199,12 @@
         <!-- Action -->
         <div class="flex flex-row justify-between px-2">
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>{locale('actions.back')}</Button>
-            <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()}>{locale('actions.send')}</Button>
+            <Button
+                classes="-mx-2 w-1/2"
+                onClick={() => handleSendClick()}
+                disabled={$sendParams.amount === 0 || amountError || !from || (selectedSendType === SEND_TYPE.EXTERNAL ? $sendParams.address.length === 0 : !to)}>
+                {locale('actions.send')}
+            </Button>
         </div>
     {/if}
     {#if $isTransferring}

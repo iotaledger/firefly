@@ -469,7 +469,8 @@
         "transferRemainderAddress": "Generating remainder deposit address",
         "transferSigning": "Signing the transaction",
         "transferPow": "Performing PoW",
-        "transferBroadcasting": "Broadcasting transaction"
+        "transferBroadcasting": "Broadcasting transaction",
+        "transferComplete": "Transfer complete"
     },
     "dates": {
         "today": "Today",
