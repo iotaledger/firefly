@@ -11,7 +11,6 @@
     export let send
     export let generateAddress
     export let internalTransfer
-    export let setAlias
     export let isGeneratingAddress
 
     const account = getContext<Readable<WalletAccount>>('selectedAccount')
@@ -35,5 +34,5 @@
 {:else if $accountRoute === AccountRoutes.Send}
     <Send {send} {internalTransfer} {locale} />
 {:else if $accountRoute === AccountRoutes.Manage}
-    <ManageAccount {locale} name={$account.alias} {setAlias} />
+    <ManageAccount {locale} name={$account.alias} />
 {/if}

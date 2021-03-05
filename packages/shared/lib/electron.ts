@@ -35,6 +35,7 @@ interface ElectronEventMap {
     "menu-navigate-wallet": WalletRoutes;
     "menu-navigate-settings": void;
     "menu-check-for-update": void;
+    "menu-error-log": void;
     "deepLink-params": string;
     "version-details": VersionDetails;
     "version-progress": NativeProgress;

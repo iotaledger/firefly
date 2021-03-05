@@ -61,14 +61,11 @@ const buildTemplate = () => {
                     click: () => getWindow('main').webContents.send('menu-navigate-settings'),
                 },
                 {
-                    type: 'separator',
+                    label: state.strings.errorLog,
+                    click: () => getWindow('main').webContents.send('menu-error-log')
                 },
                 {
-                    label: state.strings.errorLog,
-                    click: () => {
-                        // TODO: Add error log
-                    },
-                    enabled: state.enabled,
+                    type: 'separator',
                 },
             ],
         },

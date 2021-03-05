@@ -8,6 +8,7 @@
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
     import { Backup, BackupToFile, RecoveryPhrase, Success, VerifyRecoveryPhrase } from './views/'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale
     export let mobile
@@ -100,19 +101,27 @@
                                             dispatch('next')
                                         },
                                         onError(err) {
-                                            // TODO: handle error
-                                            console.error('create account error', err)
+                                            showAppNotification({
+                                                type: 'error',
+                                                message: locale(err.error),
+                                            })
                                         },
                                     }
                                 )
                             },
-                            onError(error) {
-                                console.log(error)
+                            onError(err) {
+                                showAppNotification({
+                                    type: 'error',
+                                    message: locale(err.error),
+                                })
                             },
                         })
                     },
-                    onError(error) {
-                        console.error('Error verifying mnemonic', error)
+                    onError(err) {
+                        showAppNotification({
+                            type: 'error',
+                            message: locale(err.error),
+                        })
                     },
                 })
 

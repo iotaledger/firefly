@@ -6,6 +6,7 @@
     import { api, getStoragePath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale
     export let mobile
@@ -66,9 +67,12 @@
                                 onSuccess() {
                                     dispatch('next')
                                 },
-                                onError(error) {
+                                onError(err) {
                                     isBusy = false
-                                    console.error(error)
+                                    showAppNotification({
+                                        type: 'error',
+                                        message: locale(err.error)
+                                    })
                                 },
                             })
                         })

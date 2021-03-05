@@ -7,6 +7,7 @@
     import { api, destroyActor } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
     import zxcvbn from 'zxcvbn'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     function assignTimeoutOptionLabel(timeInMinutes) {
         let label = ''
@@ -61,8 +62,11 @@
                     // Navigate
                     navigate({ reset: true })
                 },
-                onError(error) {
-                    console.error(error)
+                onError(err) {
+                    showAppNotification({
+                        type: 'error',
+                        message: locale(err.error),
+                    })
                 },
             })
         })
@@ -88,13 +92,19 @@
                                 callback()
                             }
                         },
-                        onError(error) {
-                            console.error(error)
+                        onError(err) {
+                            showAppNotification({
+                                type: 'error',
+                                message: locale(err.error),
+                            })
                         },
                     })
                 }
             })
-            .catch((error) => console.error(error))
+            .catch((err) => showAppNotification({
+                type: 'error',
+                message: locale(err.error),
+            }))
     }
 
     function changePassword() {
@@ -104,10 +114,7 @@
             api.changeStrongholdPassword(currentPassword, newPassword, {
                 onSuccess() {},
                 onError(err) {
-                    // TODO: Add proper error handling
-                    if (err.payload.error.includes('try another password')) {
-                        currentPasswordError = locale('error.password.incorrect')
-                    }
+                    currentPasswordError = locale(err.error)
                 },
             })
         }
@@ -158,8 +165,11 @@
                                         })
                                         .catch(reject)
                                 },
-                                onError(error) {
-                                    reject(error)
+                                onError(err) {
+                                    showAppNotification({
+                                        type: 'error',
+                                        message: locale(err.error),
+                                    })
                                 },
                             })
                         })

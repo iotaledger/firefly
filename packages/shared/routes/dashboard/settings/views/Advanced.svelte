@@ -8,6 +8,7 @@
     import type { Node } from 'shared/lib/typings/client'
     import { api, updateAccounts, wallet, WalletAccount } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale
 
@@ -133,8 +134,11 @@
                             )
                         )
                     },
-                    onError(error) {
-                        console.error(error)
+                    onError(err) {
+                        showAppNotification({
+                            type: 'error',
+                            message: locale(err.error),
+                        })
                     },
                 }
             )
@@ -145,6 +149,10 @@
         openPopup({ type: 'addNode' })
     }
 
+    function handleErrorLogClick() {
+        openPopup({ type: 'errorLog' })
+    }
+
     function resyncAccounts() {
         const _sync = () => {
             api.syncAccounts({
@@ -153,8 +161,11 @@
 
                     updateAccounts(syncedAccounts)
                 },
-                onError(error) {
-                    console.error(error)
+                onError(err) {
+                    showAppNotification({
+                        type: 'error',
+                        message: locale(err.error),
+                     })
                 },
             })
         }
@@ -221,7 +232,7 @@
     <section id="errorLog" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.errorLog.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.errorLog.description')}</Text>
-        <Button classes="w-1/4" onClick={() => {}}>{locale('views.settings.errorLog.title')}</Button>
+        <Button classes="w-1/4" onClick={() => handleErrorLogClick()}>{locale('views.settings.errorLog.title')}</Button>
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <section id="stateExport" class="w-3/4">

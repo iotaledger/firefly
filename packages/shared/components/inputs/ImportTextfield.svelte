@@ -12,20 +12,20 @@
 
     const isSeed = (value: string): string | undefined => {
         if (value.length !== 81) {
-            return locale('error.recovery.seedTooShort', {
+            return locale('error.backup.seedTooShort', {
                 values: {
                     length: value.length,
                 },
             })
         }
         if (!/^[9A-Z]+$/.test(value)) {
-            return locale('error.recovery.seedCharacters')
+            return locale('error.backup.seedCharacters')
         }
     }
 
     const isMnemonic = (words: string[]): string | undefined => {
         if (words.length !== 24) {
-            return locale('error.recovery.phraseWordCount', {
+            return locale('error.backup.phraseWordCount', {
                 values: {
                     length: words.length,
                 },
@@ -33,7 +33,7 @@
         }
         for (let i = 0; i < words.length; i++) {
             if (!english.includes(words[i])) {
-                return locale('error.recovery.phraseUnrecognizedWord', {
+                return locale('error.backup.phraseUnrecognizedWord', {
                     values: {
                         word: words[i],
                     },
