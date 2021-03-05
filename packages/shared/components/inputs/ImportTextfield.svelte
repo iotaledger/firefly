@@ -19,7 +19,7 @@
             })
         }
         if (!/^[9A-Z]+$/.test(value)) {
-            return locale('seed.recovery.seedCharacters')
+            return locale('error.recovery.seedCharacters')
         }
     }
 
