@@ -398,7 +398,8 @@
         "selectAll": "Select All",
         "addAccount": "Add Account",
         "checkForUpdates": "Check for Updates",
-        "reportAnIssue": "Report an Issue"
+        "reportAnIssue": "Report an Issue",
+        "hide_details": "Hide Details"
     },
     "general": {
         "password": "Password",
@@ -463,9 +464,15 @@
         "nodes": "Nodes",
         "wallet": "Wallet",
         "help": "Help",
+        "you": "You",
+        "transaction_id": "Transaction ID",
+        "input_address": "Input Address",
+        "receive_address": "Receive Address",
+        "date": "Date",
         "no_accounts": "You have no accounts, please create one.",
         "loading_accounts": "Loading, please wait...",
         "add_profile": "Add Profile",
+        "no_recent_history": "No recent history",
         "transferSyncing": "Syncing account",
         "transferSelectingInputs": "Selecting inputs",
         "transferRemainderAddress": "Generating remainder deposit address",

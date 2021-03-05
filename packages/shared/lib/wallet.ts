@@ -96,10 +96,13 @@ export const resetWallet = () => {
     accounts.set([])
     accountsLoaded.set(false)
     selectedAccountId.set(null)
+    selectedMessage.set(null)
     loggedIn.set(false)
 }
 
 export const selectedAccountId = writable<string | null>(null)
+
+export const selectedMessage = writable<Message | null>(null)
 
 export const isTransferring = writable<boolean>(false)
 export const transferError = writable<string>("")
