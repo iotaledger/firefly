@@ -189,6 +189,7 @@
                     isGeneratingAddress = false
                 },
                 onError(error) {
+                    isGeneratingAddress = false
                     console.error(error)
                 },
             })
@@ -459,6 +460,7 @@
 
 {#if $walletRoute === WalletRoutes.Account && $selectedAccountId}
     <Account
+        {isGeneratingAddress}
         send={onSend}
         internalTransfer={onInternalTransfer}
         generateAddress={onGenerateAddress}
@@ -476,6 +478,7 @@
                         <WalletBalance {locale} />
                         <DashboardPane classes="-mt-5 h-full">
                             <WalletActions
+                                isGeneratingAddress={isGeneratingAddress}
                                 send={onSend}
                                 internalTransfer={onInternalTransfer}
                                 generateAddress={onGenerateAddress}

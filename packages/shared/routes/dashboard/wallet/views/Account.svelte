@@ -10,6 +10,7 @@
     export let internalTransfer
     export let generateAddress
     export let setAlias
+    export let isGeneratingAddress
 
     const account = getContext<Readable<WalletAccount>>('selectedAccount')
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
@@ -39,7 +40,7 @@
                         balanceEquiv={$account.balanceEquiv}
                         onMenuClick={handleMenuClick} />
                     <DashboardPane classes="h-full -mt-5">
-                        <AccountActions {send} {internalTransfer} {generateAddress} {setAlias} {locale} />
+                        <AccountActions {isGeneratingAddress} {send} {internalTransfer} {generateAddress} {setAlias} {locale} />
                     </DashboardPane>
                 </DashboardPane>
                 <DashboardPane>

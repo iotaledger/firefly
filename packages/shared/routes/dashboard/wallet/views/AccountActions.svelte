@@ -12,6 +12,7 @@
     export let generateAddress
     export let internalTransfer
     export let setAlias
+    export let isGeneratingAddress
 
     const account = getContext<Readable<WalletAccount>>('selectedAccount')
     function handleSendClick() {
@@ -27,7 +28,7 @@
                     {locale('general.send_funds')}
                     <Text type="p" smaller secondary>{locale('general.send_tokens_to_address')}</Text>
                 </Button>
-                <Receive {generateAddress} {locale} />
+                <Receive {isGeneratingAddress} {generateAddress} {locale} />
             </div>
         </div>
     </div>
