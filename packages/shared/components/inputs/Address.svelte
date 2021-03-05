@@ -1,6 +1,5 @@
 <script lang="typescript">
     import { Text } from 'shared/components'
-    import { activeProfile } from 'shared/lib/profile'
     import Error from './Error'
 
     export let address = undefined
@@ -8,7 +7,7 @@
     export let disabled = false
     export let label = undefined
     export let error = ''
-    let prefix = $activeProfile.isDeveloperProfile ? 'atoi...' : 'iota...'
+    export let prefix = ''
 </script>
 
 <style type="text/scss">

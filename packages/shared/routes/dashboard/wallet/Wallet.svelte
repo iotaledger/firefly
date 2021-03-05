@@ -255,7 +255,7 @@
                     },
                     onError(err) {
                         // TODO: Add proper error handling
-                        if (err.payload.error.includes('message history and balance')) {
+                        if (err.error.includes('message history and balance')) {
                             createAccountError = locale('error.account.empty')
                         }
                     },
@@ -308,10 +308,10 @@
                             })
                         })
 
-                        sendParams.set({ address: '', amount: 0, message: '' })
                         transferState.set('Complete')
 
                         setTimeout(() => {
+                            sendParams.set({ address: '', amount: 0, message: '' })
                             isTransferring.set(false)
                             walletRoute.set(WalletRoutes.Init)
                         }, 3000)
@@ -366,10 +366,10 @@
                         })
                     })
 
-                    sendParams.set({ address: '', amount: 0, message: '' })
                     transferState.set('Complete')
 
                     setTimeout(() => {
+                        sendParams.set({ address: '', amount: 0, message: '' })
                         isTransferring.set(false)
                         walletRoute.set(WalletRoutes.Init)
                     }, 3000)
