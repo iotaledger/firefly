@@ -7,7 +7,7 @@
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
     import { isTransferring, transferError, transferState, WalletAccount } from 'shared/lib/wallet'
-    import { getContext } from 'svelte'
+    import { getContext, onMount } from 'svelte'
     import type { Readable, Writable } from 'svelte/store'
 
     export let locale
@@ -77,7 +77,7 @@
     const handleFromSelect = (item) => {
         from = item
         if (to === from) {
-            to = undefined
+            to = $accounts.length === 2 ? accountsDropdownItems[from.id === $accounts[0].id ? 1 : 0] : undefined
         }
         amountError = ''
     }
@@ -137,6 +137,9 @@
     const handleMaxClick = () => {
         amount = convertUnits(from.balance, Unit.i, unit)
     }
+    onMount(() => {
+        to = $accounts.length === 2 ? accountsDropdownItems[from.id === $accounts[0].id ? 1 : 0] : to
+    })
 </script>
 
 <div class="w-full h-full flex flex-col justify-between p-8">
@@ -146,15 +149,19 @@
                 on:click={() => handleSendTypeClick(SEND_TYPE.EXTERNAL)}
                 disabled={$isTransferring}
                 class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}>
-                <Text type="h5" disabled={SEND_TYPE.EXTERNAL !== selectedSendType || $isTransferring}>{locale(`general.${SEND_TYPE.EXTERNAL}`)}</Text>
+                <Text type="h5" disabled={SEND_TYPE.EXTERNAL !== selectedSendType || $isTransferring}>
+                    {locale(`general.${SEND_TYPE.EXTERNAL}`)}
+                </Text>
             </button>
             {#if $accounts.length > 1}
-            <button
-                on:click={() => handleSendTypeClick(SEND_TYPE.INTERNAL)}
-                disabled={$isTransferring}
-                class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}>
-                <Text type="h5" disabled={SEND_TYPE.INTERNAL !== selectedSendType || $isTransferring}>{locale(`general.${SEND_TYPE.INTERNAL}`)}</Text>
-            </button>
+                <button
+                    on:click={() => handleSendTypeClick(SEND_TYPE.INTERNAL)}
+                    disabled={$isTransferring}
+                    class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}>
+                    <Text type="h5" disabled={SEND_TYPE.INTERNAL !== selectedSendType || $isTransferring}>
+                        {locale(`general.${SEND_TYPE.INTERNAL}`)}
+                    </Text>
+                </button>
             {/if}
         </div>
         <div class="w-full h-full flex flex-col justify-between">
@@ -184,7 +191,7 @@
                             label={locale('general.to')}
                             items={accountsDropdownItems.filter((a) => from && a.id !== from.id)}
                             onSelect={handleToSelect}
-                            disabled={$isTransferring} />
+                            disabled={$isTransferring || $accounts.length === 2} />
                     {:else}
                         <Address
                             error={addressError}
@@ -204,7 +211,6 @@
         </div>
     </div>
     {#if !$isTransferring}
-        <!-- Action -->
         <div class="flex flex-row justify-between px-2">
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>{locale('actions.back')}</Button>
             <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()}>{locale('actions.send')}</Button>
