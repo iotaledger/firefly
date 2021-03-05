@@ -362,19 +362,33 @@
         "exportNewStronghold": "Εξαγωγή ενός νέου Stronghold",
         "enableDeepLinks": "Ενεργοποίηση βαθιών συνδέσμων",
         "enableDeveloperMode": "Ενεργοποίηση λειτουργίας προγραμματιστή",
-        "enableSystemNotifications": "Enable system notifications",
+        "enableSystemNotifications": "Ενεργοποίηση ειδοποιήσεων συστήματος",
         "exportState": "Εξαγωγή κατάστασης",
         "outsourceProofOfWork": "Ανάθεση λειτουργίας απόδειξης εργασίας (Proof of work)",
         "unlock": "Ξεκλείδωμα",
         "update_firefly": "Ενημέρωση Firefly",
-        "restart_now": "Restart now",
+        "restart_now": "Επανεκκίνηση τώρα",
         "save_backup": "Αποθήκευση αντιγράφου ασφαλείας",
         "customize_account": "Προσαρμογή λογαριασμού",
         "sync_account": "Συγχρονισμός λογαριασμού",
         "view_address_history": "Προβολή ιστορικού διευθύνσεων",
         "delete_account": "Διαγραφή λογαριασμού",
         "max": "Μέγιστο",
-        "add_node": "Προσθήκη κόμβου"
+        "add_node": "Προσθήκη κόμβου",
+        "hide": "Hide",
+        "hideOthers": "Hide Others",
+        "showAll": "Show All",
+        "quit": "Quit",
+        "edit": "Edit",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "selectAll": "Select All",
+        "addAccount": "Add Account",
+        "checkForUpdates": "Check for Updates",
+        "reportAnIssue": "Report an Issue"
     },
     "general": {
         "password": "Κωδικός πρόσβασης",
@@ -436,7 +450,11 @@
         "transactions": "Συναλλαγές",
         "security": "Ασφάλεια",
         "account_address": "Διεύθυνση Λογαριασμού",
-        "nodes": "Κόμβοι"
+        "nodes": "Κόμβοι",
+        "wallet": "Wallet",
+        "help": "Help",
+        "no_accounts": "You have no accounts, please create one.",
+        "add_profile": "Add Profile"
     },
     "dates": {
         "today": "Σήμερα",
@@ -449,11 +467,11 @@
         "valueTx": "Λήψη {{value}} στο {{account}}",
         "confirmed": "Τα εξερχόμενα {{value}} από {{account}} έχουν επιβεβαιωθεί",
         "failed": "Αποτυχία εξερχομένου {{value}} από {{account}}",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "downloading_update": "Λήψη ενημέρωσης",
+        "update_ready": "Ενημέρωση έτοιμη",
+        "update_error": "Παρουσιάστηκε σφάλμα κατά τη διάρκεια της διαδικασίας. Παρακαλούμε δοκιμάστε ξανά",
+        "restart_install": "Επανεκκίνηση για εγκατάσταση",
+        "calc_minutes_remaining": "Υπολογισμός υπολειπόμενων λεπτών...",
+        "minutes_remaining": "{minutes, plural, one {1 λεπτό απομένει} other {# λεπτά απομένουν}}"
     }
 }

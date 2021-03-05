@@ -34,7 +34,7 @@
         "setup": {
             "title": "Configura il tuo portafoglio",
             "body": "È possibile creare un nuovo portafoglio o importare uno esistente.",
-            "profile_name": "Profile Name"
+            "profile_name": "Nome Profilo"
         },
         "password": {
             "title": "Scegli una password",
@@ -65,7 +65,7 @@
             "body_1": "Scrivi attentamente le parole nell'ordine esatto.",
             "body_2": "Mantieni la tua frase di recupero privata e salvata in sicurezza. Non condividerla con nessuno.",
             "reveal_recovery_phrase": "Rivela frase di recupero",
-            "hide_recovery_phrase": "Hide recovery phrase"
+            "hide_recovery_phrase": "Nascondi frase di recupero"
         },
         "verify_recovery_phrase": {
             "title": "Verifica la frase di recupero",
@@ -176,12 +176,12 @@
                 "description": ""
             },
             "changePincode": {
-                "title": "Change PIN code",
+                "title": "Cambia il PIN",
                 "description": "",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "currentPincode": "PIN attuale",
+                "newPincode": "Nuovo PIN",
+                "confirmNewPincode": "Conferma il nuovo PIN",
+                "action": "Cambia PIN"
             },
             "resyncAccounts": {
                 "title": "Risincronizza gli account",
@@ -204,7 +204,7 @@
                 "description": ""
             },
             "configureNodeList": {
-                "title": "Configure node list",
+                "title": "Configura elenco nodi",
                 "description": ""
             },
             "proofOfWork": {
@@ -248,80 +248,80 @@
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "up_to_date": "Ultima versione",
+                    "out_of_date": "Da aggiornare"
                 },
                 "hardware_device": {
-                    "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "title": "Dispositivo Hardware",
+                    "none_detected": "Non rilevato"
                 },
                 "stronghold_status": {
-                    "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "title": "Stato Stronghold",
+                    "locked": "Bloccato",
+                    "unlocked": "Sbloccato"
                 },
                 "stronghold_backup": {
-                    "title": "Stronghold Backup",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "title": "Backup Stronghold",
+                    "weeks_ago": "{weeks, plural, one {# settimana} other {# settimane}} fa"
                 }
             },
             "network": {
-                "network_operational": "Network Operational",
-                "network_degraded": "Network Degraded",
-                "network_down": "Network Down",
-                "status": "Status",
-                "messages_per_second": "Messages per second",
-                "confirmation_rate": "Confirmation rate"
+                "network_operational": "Rete Operativa",
+                "network_degraded": "Rete degradata",
+                "network_down": "Rete inattiva",
+                "status": "Stato",
+                "messages_per_second": "Messaggi al secondo",
+                "confirmation_rate": "Tasso di conferma"
             },
             "profile_modal": {
-                "all_settings": "All settings",
-                "logout": "Log out"
+                "all_settings": "Tutte le impostazioni",
+                "logout": "Esci"
             }
         }
     },
     "popups": {
         "password": {
             "title": "Password necessaria",
-            "subtitle": "Please enter your wallet password to unlock Stronghold"
+            "subtitle": "Si prega di inserire la password del wallet per sbloccare lo Stronghold"
         },
         "qr": {
             "title": "Il tuo codice QR"
         },
         "version": {
-            "title": "Current version: {version}",
-            "up_to_date_title": "Firefly is up to date",
-            "up_to_date_description": "You are running the latest and safest version of Firefly.",
-            "update_available": "Firefly update available",
-            "update_details": "Version {version} - {date}"
+            "title": "Versione attuale: {version}",
+            "up_to_date_title": "Firefly è aggiornato",
+            "up_to_date_description": "Stai utilizzando la versione più recente e sicura di Firefly.",
+            "update_available": "Aggiornamento Firefly disponibile",
+            "update_details": "Versione {version} - {date}"
         },
         "backup": {
-            "title": "Last backup: {date}",
-            "last_backup": "You last backed up {date}",
-            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
-            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "not_backed_up": "Not backed up",
-            "not_backed_up_description": "You have not backed up your Stronghold"
+            "title": "Ultimo backup: {date}",
+            "last_backup": "L'ultimo backup risale al {date}",
+            "backup_description": "È importante eseguire regolarmente il backup per assicurarsi di avere una copia dei tuoi account e della cronologia delle transazioni.",
+            "backup_warning": "Se perdi la tua frase di backup e recupero perderai l'accesso ai tuoi fondi.",
+            "not_backed_up": "Backup non eseguito",
+            "not_backed_up_description": "Non hai eseguito il backup del tuo Stronghold"
         },
         "delete_account": {
-            "title": "Delete {name}?",
+            "title": "Eliminare {name}?",
             "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Type your wallet’s password to confirm.",
-            "delete_account": "Delete account",
-            "error_title": "Unable to delete {name}",
-            "error_body_1": "To delete an account you must have 0 balance.",
-            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+            "type_password": "Digita la password del tuo wallet per confermare.",
+            "delete_account": "Cancella account",
+            "error_title": "Impossibile eliminare {name}",
+            "error_body_1": "Per eliminare un account devi avere il saldo a 0.",
+            "error_body_2": "Al momento hai {balance} rimanenti su questo account. Si prega di spostare questi fondi su un altro account e riprovare."
         },
         "address_history": {
-            "title": "{name} account address history",
-            "current_balance": "Current balance: {balance}"
+            "title": "cronologia degli indirizzi di {name}",
+            "current_balance": "Saldo attuale: {balance}"
         },
         "node": {
-            "title_add": "Add a node",
-            "title_details": "Node details",
-            "node_address": "Node address",
-            "optional_username": "Username (optional)",
-            "optional_password": "Password (optional)",
-            "set_as_primary_node": "Set as primary node"
+            "title_add": "Aggiungi un nodo",
+            "title_details": "Dettagli del nodo",
+            "node_address": "Indirizzo del nodo",
+            "optional_username": "Nome utente (Facoltativo)",
+            "optional_password": "Password (facoltativa)",
+            "set_as_primary_node": "Imposta come nodo primario"
         }
     },
     "actions": {
@@ -329,7 +329,7 @@
         "back": "Indietro",
         "cancel": "Annulla",
         "close": "Chiudi",
-        "dismiss": "Dismiss",
+        "dismiss": "Ignora",
         "save": "Salva",
         "import_seed": "Importa un seed esistente",
         "import_wallet": "Importa un portafoglio esistente",
@@ -362,19 +362,33 @@
         "exportNewStronghold": "Esporta un nuovo Stronghold",
         "enableDeepLinks": "Abilita deep links",
         "enableDeveloperMode": "Abilita Modalità Sviluppatore",
-        "enableSystemNotifications": "Enable system notifications",
+        "enableSystemNotifications": "Abilita notifiche di sistema",
         "exportState": "Esporta stato",
         "outsourceProofOfWork": "Proof of Work remoto",
         "unlock": "Sblocca",
-        "update_firefly": "Update Firefly",
-        "restart_now": "Restart now",
-        "save_backup": "Save backup",
-        "customize_account": "Customise account",
-        "sync_account": "Sync account",
-        "view_address_history": "View address history",
-        "delete_account": "Delete account",
-        "max": "Max",
-        "add_node": "Add node"
+        "update_firefly": "Aggiorna Firefly",
+        "restart_now": "Riavvia ora",
+        "save_backup": "Salva backup",
+        "customize_account": "Personalizza account",
+        "sync_account": "Sincronizza account",
+        "view_address_history": "Visualizza cronologia indirizzi",
+        "delete_account": "Cancella account",
+        "max": "Massimo",
+        "add_node": "Aggiungi nodo",
+        "hide": "Hide",
+        "hideOthers": "Hide Others",
+        "showAll": "Show All",
+        "quit": "Quit",
+        "edit": "Edit",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "selectAll": "Select All",
+        "addAccount": "Add Account",
+        "checkForUpdates": "Check for Updates",
+        "reportAnIssue": "Report an Issue"
     },
     "general": {
         "password": "Password",
@@ -387,13 +401,13 @@
         "recent_activity": "Attività Recenti",
         "sent": "Inviato",
         "received": "Ricevuto",
-        "send_payment": "Send payment",
-        "move_funds": "Move funds",
+        "send_payment": "Invia pagamento",
+        "move_funds": "Sposta fondi",
         "send_funds": "Invia fondi",
         "send_to_address": "Invia a un indirizzo",
         "scan_qr_or_paste": "Scansiona un codice QR o incolla un indirizzo",
         "move_funds_between_accounts": "Sposta fondi tra account",
-        "send_tokens_to_address": "Send tokens to an address",
+        "send_tokens_to_address": "Invia token ad un indirizzo",
         "manage_account": "Gestisci account",
         "customize_account": "Personalizza il tuo account",
         "account": "Account",
@@ -404,7 +418,7 @@
         "from": "Da",
         "to": "A",
         "receive_funds": "Ricevi fondi",
-        "my_address": "My Address",
+        "my_address": "Il mio Indirizzo",
         "share_address": "Condividi un indirizzo",
         "your_address": "Il tuo indirizzo",
         "generate_new_address": "Genera un nuovo indirizzo",
@@ -421,14 +435,14 @@
         "light_theme": "Tema chiaro",
         "dark_theme": "Tema Scuro",
         "total_balance": "Saldo totale",
-        "account_balance": "Account Balance",
+        "account_balance": "Saldo account",
         "incoming": "In entrata",
         "outgoing": "In uscita",
         "accounts": "Accounts",
         "automaticNodeSelection": "Selezione automatica del nodo",
         "manualNodeSelection": "Selezione manuale del nodo",
         "profiles": "Profili",
-        "developerProfile": "Developer Profile",
+        "developerProfile": "Profilo Sviluppatore",
         "dev": "Dev",
         "create_account": "Crea un account",
         "account_name": "Nome account",
@@ -436,24 +450,28 @@
         "transactions": "Transazioni",
         "security": "Sicurezza",
         "account_address": "Indirizzo Account",
-        "nodes": "Nodes"
+        "nodes": "Nodi",
+        "wallet": "Wallet",
+        "help": "Help",
+        "no_accounts": "You have no accounts, please create one.",
+        "add_profile": "Add Profile"
     },
     "dates": {
-        "today": "Today",
-        "days_ago": "{time, plural, one {# day} other {# days}} ago",
-        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
-        "months_ago": "{time, plural, one {# month} other {# months}} ago",
-        "years_ago": "{time, plural, one {# year} other {# years}} ago"
+        "today": "Oggi",
+        "days_ago": "{time, plural, one {# giorno} other {# giorni}} fa",
+        "weeks_ago": "{time, plural, one {# settimana} other {# settimane}} fa",
+        "months_ago": "{time, plural, one {# mese} other {# mesi}} fa",
+        "years_ago": "{time, plural, one {# anno} other {# anni}} fa"
     },
     "notifications": {
-        "valueTx": "Receiving {{value}} to {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "valueTx": "In ricezione {{value}} sul conto {{account}}",
+        "confirmed": "Invio confermato di {{value}} dal conto {{account}}",
+        "failed": "L'invio di {{value}} dal conto {{account}} è fallito",
+        "downloading_update": "Download aggiornamento in corso",
+        "update_ready": "Aggiornamento pronto",
+        "update_error": "Si è verificato un errore durante l'aggiornamento, si prega di riprovare",
+        "restart_install": "Riavvia per installare",
+        "calc_minutes_remaining": "Calcolo dei minuti rimanenti...",
+        "minutes_remaining": "{minutes, plural, one {1 minuto rimanente} other {# minuti rimanenti}}"
     }
 }

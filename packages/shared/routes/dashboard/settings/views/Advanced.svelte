@@ -1,10 +1,11 @@
 <script lang="typescript">
-    import type { ClientOptions, Node } from 'shared/lib/typings/client'
+    import type { ClientOptions } from 'lib/typings/client'
     import { Button, Checkbox, Dropdown, Radio, Text } from 'shared/components'
     import { developerMode } from 'shared/lib/app'
     import { DEFAULT_NODE, DEFAULT_NODES } from 'shared/lib/network'
-    import { closePopup, openPopup } from 'shared/lib/popup'
+    import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import type { Node } from 'shared/lib/typings/client'
     import { api, updateAccounts, wallet, WalletAccount } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
 
@@ -97,8 +98,9 @@
     }
 
     function selectNode(option) {
-        const selectedNode = [...DEFAULT_NODES, ...$activeProfile.settings.customNodes]
-                    .find((node: Node) => node.url === option.value)
+        const selectedNode = [...DEFAULT_NODES, ...$activeProfile.settings.customNodes].find(
+            (node: Node) => node.url === option.value
+        )
 
         if (selectedNode.url !== $activeProfile.settings.node.url) {
             api.setClientOptions(

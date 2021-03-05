@@ -1,29 +1,10 @@
-import { get, writable } from 'svelte/store'
-import {
-    showAppNotification,
-    removeDisplayNotification,
-    updateDisplayNotificationProgress,
-    updateDisplayNotification,
-    NOTIFICATION_TIMEOUT_NEVER,
-    NotificationData
-} from 'shared/lib/notifications'
+import { Electron, NativeProgress, VersionDetails } from 'shared/lib/electron'
 import { _ } from 'shared/lib/i18n'
-
-type VersionDetails = {
-    upToDate: boolean
-    currentVersion: string
-    newVersion: string
-    newVersionReleaseDate: Date
-    changelog: string
-}
-
-type NativeProgress = {
-    total: number
-    delta: number
-    transferred: number
-    percent: number
-    bytesPerSecond: number
-}
+import {
+    NotificationData, NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showAppNotification,
+    updateDisplayNotification, updateDisplayNotificationProgress
+} from 'shared/lib/notifications'
+import { get, writable } from 'svelte/store'
 
 export const versionDetails = writable<VersionDetails>({
     upToDate: true,
@@ -39,11 +20,11 @@ export const updateBusy = writable<boolean>(false)
 export const updateComplete = writable<boolean>(false)
 export const updateError = writable<boolean>(false)
 
-window['Electron'].onEvent('version-details', (nativeVersionDetails) => {
+Electron.onEvent('version-details', (nativeVersionDetails) => {
     versionDetails.set(nativeVersionDetails)
 })
 
-window['Electron'].onEvent('version-progress', (nativeVersionProgress: NativeProgress) => {
+Electron.onEvent('version-progress', (nativeVersionProgress: NativeProgress) => {
     updateProgress.set(nativeVersionProgress.percent)
 
     const bytesRemaining = ((100 - nativeVersionProgress.percent) / 100) * nativeVersionProgress.total;
@@ -52,14 +33,14 @@ window['Electron'].onEvent('version-progress', (nativeVersionProgress: NativePro
     }
 })
 
-window['Electron'].onEvent('version-complete', (nativeVersionComplete) => {
+Electron.onEvent('version-complete', () => {
     updateBusy.set(false)
     updateError.set(false)
     updateComplete.set(true)
     updateMinutesRemaining.set(0)
 })
 
-window['Electron'].onEvent('version-error', (nativeVersionError) => {
+Electron.onEvent('version-error', (nativeVersionError) => {
     console.log(nativeVersionError)
     updateError.set(true)
 })
@@ -171,11 +152,11 @@ export function updateDownload(): void {
         }
     });
 
-    window['Electron'].updateDownload()
+    Electron.updateDownload()
 }
 
 export function updateCancel(): void {
-    window['Electron'].updateCancel()
+    Electron.updateCancel()
     updateProgress.set(0)
     updateBusy.set(false)
     updateComplete.set(false)
@@ -184,11 +165,10 @@ export function updateCancel(): void {
 }
 
 export function updateInstall(): void {
-    window['Electron'].updateInstall()
+    Electron.updateInstall()
 }
 
 export async function refreshVersionDetails(): Promise<void> {
-    const verDetails = await window['Electron'].getVersionDetails();
-    console.log(verDetails);
+    const verDetails = await Electron.getVersionDetails();
     versionDetails.set(verDetails)
 }

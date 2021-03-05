@@ -1,11 +1,12 @@
 <script lang="typescript">
+    import { Button, Checkbox, Dropdown, Password, Text } from 'shared/components'
+    import { Electron } from 'shared/lib/electron'
+    import passwordInfo from 'shared/lib/password'
+    import { openPopup } from 'shared/lib/popup'
+    import { activeProfile, removeProfile, updateProfile } from 'shared/lib/profile'
+    import { api, destroyActor } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
     import zxcvbn from 'zxcvbn'
-    import { Text, Dropdown, Password, Button, Checkbox } from 'shared/components'
-    import { updateProfile, activeProfile, removeProfile } from 'shared/lib/profile'
-    import { api, destroyActor } from 'shared/lib/wallet'
-    import { openPopup } from 'shared/lib/popup'
-    import passwordInfo from 'shared/lib/password';
 
     function assignTimeoutOptionLabel(timeInMinutes) {
         let label = ''
@@ -39,13 +40,11 @@
 
     const MAX_PASSWORD_LENGTH = 256
     const MAX_PINCODE_LENGTH = 6
-    
+
     $: passwordStrength = zxcvbn(newPassword)
 
-    const PincodeManager = window['Electron']['PincodeManager']
-
     function reset() {
-        PincodeManager.remove(get(activeProfile).id).then((isRemoved) => {
+        Electron.PincodeManager.remove(get(activeProfile).id).then((isRemoved) => {
             if (!isRemoved) {
                 throw new Error('Something went wrong removing pincode entry.')
             }
@@ -78,8 +77,7 @@
     }
 
     function exportStronghold(callback?: () => void) {
-        window['Electron']
-            .getStrongholdBackupDestination()
+        Electron.getStrongholdBackupDestination()
             .then((result) => {
                 if (result) {
                     api.backup(result, {
@@ -107,7 +105,7 @@
                 onSuccess() {},
                 onError(err) {
                     // TODO: Add proper error handling
-                    if (err.payload.error.includes('try another password')){
+                    if (err.payload.error.includes('try another password')) {
                         currentPasswordError = locale('error.password.incorrect')
                     }
                 },
@@ -115,21 +113,21 @@
         }
 
         if (newPassword.length > MAX_PASSWORD_LENGTH) {
-            newPasswordError = locale('error.password.length', { 
+            newPasswordError = locale('error.password.length', {
                 values: {
-                    length: MAX_PASSWORD_LENGTH
-                }
+                    length: MAX_PASSWORD_LENGTH,
+                },
             })
         } else if (newPassword !== confirmedPassword) {
             newPasswordError = locale('error.password.doNotMatch')
         } else if (passwordStrength.score !== 4) {
             newPasswordError = passwordStrength.feedback.warning
                 ? locale(`error.password.${passwordInfo[passwordStrength.feedback.warning]}`)
-                : locale('error.password.tooWeak');
+                : locale('error.password.tooWeak')
         } else {
             if (exportStrongholdChecked) {
-                  return exportStronghold(_changePassword)
-             }
+                return exportStronghold(_changePassword)
+            }
             _changePassword()
         }
     }
@@ -137,39 +135,39 @@
     function changePincode() {
         resetErrors()
         if (newPincode.length !== MAX_PINCODE_LENGTH) {
-            newPincodeError = locale('error.pincode.length', { 
+            newPincodeError = locale('error.pincode.length', {
                 values: {
-                    length: MAX_PINCODE_LENGTH
-                }
+                    length: MAX_PINCODE_LENGTH,
+                },
             })
         } else if (newPincode !== confirmedPincode) {
             newPincodeError = locale('error.pincode.match')
         } else {
-            PincodeManager.verify(get(activeProfile).id, currentPincode)
-            .then((valid) => {
-                if (valid) {
-                    return new Promise((resolve, reject) => {
-                        api.setStoragePassword(newPincode, {
-                            onSuccess() {
-                                PincodeManager.set(get(activeProfile).id, newPincode)
-                                    .then(resolve)
-                                    .then(() => {
-                                        currentPincode = ''
-                                        newPincode = ''
-                                        confirmedPincode = ''
-                                    })
-                                    .catch(reject)
-                            },
-                            onError(error) {
-                                reject(error)
-                            },
+            Electron.PincodeManager.verify(get(activeProfile).id, currentPincode)
+                .then((valid) => {
+                    if (valid) {
+                        return new Promise((resolve, reject) => {
+                            api.setStoragePassword(newPincode, {
+                                onSuccess() {
+                                    Electron.PincodeManager.set(get(activeProfile).id, newPincode)
+                                        .then(resolve)
+                                        .then(() => {
+                                            currentPincode = ''
+                                            newPincode = ''
+                                            confirmedPincode = ''
+                                        })
+                                        .catch(reject)
+                                },
+                                onError(error) {
+                                    reject(error)
+                                },
+                            })
                         })
-                    })
-                } else {
-                    currentPincodeError = locale('error.pincode.incorrect')
-                }
-            })
-            .catch(console.error)
+                    } else {
+                        currentPincodeError = locale('error.pincode.incorrect')
+                    }
+                })
+                .catch(console.error)
         }
     }
 
@@ -209,7 +207,8 @@
                 bind:value={currentPassword}
                 showRevealToggle
                 {locale}
-                placeholder={locale('general.currentPassword')} />
+                placeholder={locale('general.currentPassword')} 
+                autofocus />
             <Password
                 error={newPasswordError}
                 classes="mb-1"
@@ -227,12 +226,11 @@
                 {locale}
                 placeholder={locale('general.confirmNewPassword')} />
             <Checkbox classes="mb-5" label={locale('actions.exportNewStronghold')} bind:checked={exportStrongholdChecked} />
-            <Button 
-                form="form-change-password" 
-                type="submit" 
-                classes="w-1/4" 
-                disabled={!currentPassword || !newPassword || !confirmedPassword}
-            >
+            <Button
+                form="form-change-password"
+                type="submit"
+                classes="w-1/4"
+                disabled={!currentPassword || !newPassword || !confirmedPassword}>
                 {locale('views.settings.changePassword.title')}
             </Button>
         </form>
@@ -268,12 +266,11 @@
                 maxlength="6"
                 numeric
                 placeholder={locale('views.settings.changePincode.confirmNewPincode')} />
-            <Button 
-                type="submit" 
-                form="pincode-change-form" 
+            <Button
+                type="submit"
+                form="pincode-change-form"
                 classes="w-1/4 mb-5"
-                disabled={!currentPincode || !newPincode || !confirmedPincode}
-            >
+                disabled={!currentPincode || !newPincode || !confirmedPincode}>
                 {locale('views.settings.changePincode.action')}
             </Button>
         </form>

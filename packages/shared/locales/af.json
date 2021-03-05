@@ -362,19 +362,33 @@
         "exportNewStronghold": "Export n nuwe Stronghold",
         "enableDeepLinks": "Aktiveer deep links",
         "enableDeveloperMode": "Activeer ontwikkelaarsmode",
-        "enableSystemNotifications": "Enable system notifications",
+        "enableSystemNotifications": "Aktiveer stelselkennisgewings",
         "exportState": "Export staat",
         "outsourceProofOfWork": "Uitkontrakteer proof of work",
         "unlock": "Ontsluit",
         "update_firefly": "Update Firefly",
-        "restart_now": "Restart now",
+        "restart_now": "Herlaai nou",
         "save_backup": "Stoor backup",
         "customize_account": "Pas rekening aan",
         "sync_account": "Sinkroniseer rekening",
         "view_address_history": "Bekyk adresgeskiedenis",
         "delete_account": "Verwyder rekening",
         "max": "Max",
-        "add_node": "Add Node"
+        "add_node": "Add Node",
+        "hide": "Hide",
+        "hideOthers": "Hide Others",
+        "showAll": "Show All",
+        "quit": "Quit",
+        "edit": "Edit",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "selectAll": "Select All",
+        "addAccount": "Add Account",
+        "checkForUpdates": "Check for Updates",
+        "reportAnIssue": "Report an Issue"
     },
     "general": {
         "password": "Wagwoord",
@@ -436,7 +450,11 @@
         "transactions": "Transaksies",
         "security": "Sekuriteit",
         "account_address": "Rekeningadres",
-        "nodes": "Nodes"
+        "nodes": "Nodes",
+        "wallet": "Wallet",
+        "help": "Help",
+        "no_accounts": "You have no accounts, please create one.",
+        "add_profile": "Add Profile"
     },
     "dates": {
         "today": "Vandag",
@@ -449,11 +467,11 @@
         "valueTx": "Ontvang {{value}} na {{account}}",
         "confirmed": "Uitgaande {{value}} vanaf {{account}} is bevestig",
         "failed": "Uitgaande {{value}} vanaf {{account}} het nie oordra nie",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "downloading_update": "Besig om bywerking af te laai",
+        "update_ready": "Opdatering gereed",
+        "update_error": "'N Fout het tydens die opdatering voorgekom. Probeer asseblief weer",
+        "restart_install": "Herbegin om te installeer",
+        "calc_minutes_remaining": "Bereken oorblywende minute...",
+        "minutes_remaining": "{minutes, plural, one {1 minuut oor} other {# minute oor}}"
     }
 }

@@ -2,6 +2,7 @@
     import { Idle, Sidebar } from 'shared/components'
     import { logout, sendParams } from 'shared/lib/app'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
+    import { Electron } from 'shared/lib/electron'
     import { activeProfile } from 'shared/lib/profile'
     import { dashboardRoute, routerNext } from 'shared/lib/router'
     import { Tabs } from 'shared/lib/typings/routes'
@@ -19,12 +20,11 @@
         settings: Settings,
     }
 
-    const DeepLinkManager = window['Electron']['DeepLinkManager']
-
     onMount(() => {
-        DeepLinkManager.requestDeepLink()
-        window['Electron'].onEvent('deepLink-params', (data) => handleDeepLinkRequest(data))
-        window['Electron'].onEvent('menu-logout', () => {
+        Electron.DeepLinkManager.requestDeepLink()
+        Electron.onEvent('deepLink-params', (data) => handleDeepLinkRequest(data))
+
+        Electron.onEvent('menu-logout', () => {
             api.lockStronghold({
                 onSuccess() {
                     logout()
