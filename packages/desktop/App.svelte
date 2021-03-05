@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Popup, Route, ToastContainer, Toggle } from 'shared/components'
+    import { Popup, Route, ToastContainer } from 'shared/components'
     import { darkMode, loggedIn, mobile } from 'shared/lib/app'
     import { refreshVersionDetails, versionDetails } from 'shared/lib/appUpdater'
     import { Electron } from 'shared/lib/electron'
@@ -92,18 +92,6 @@
     @tailwind components;
     @tailwind utilities;
     @import '../shared/style/style.scss';
-    // dummy toggles
-    .dummy-toggles {
-        position: absolute;
-        right: 5px;
-        top: 5px;
-        z-index: 10;
-        font-size: 12px;
-        display: flex;
-        padding: 5px;
-        background: #8080803d;
-        border-radius: 10px;
-    }
     html,
     body {
         @apply bg-white;
@@ -119,13 +107,14 @@
     <Splash />
 {:else}
     {#if $popupState.active}
-        <Popup type={$popupState.type} props={$popupState.props} hideClose={$popupState.hideClose} fullScreen={$popupState.fullScreen} locale={$_} />
+        <Popup
+            type={$popupState.type}
+            props={$popupState.props}
+            hideClose={$popupState.hideClose}
+            fullScreen={$popupState.fullScreen}
+            transition={$popupState.transition}
+            locale={$_} />
     {/if}
-    <!-- dummy toggles -->
-    <div class="dummy-toggles flex flex-row">
-        <Toggle storeItem={darkMode} />
-    </div>
-    <!--  -->
     <Route route={AppRoute.Welcome}>
         <Welcome on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
