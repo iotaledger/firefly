@@ -12,6 +12,7 @@
     export let send
     export let internalTransfer
     export let generateAddress
+    export let isGeneratingAddress 
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
     const accountsLoaded = getContext<Writable<boolean>>('walletAccountsLoaded')
@@ -88,5 +89,5 @@
 {:else if $walletRoute === WalletRoutes.Send}
     <Send {send} {internalTransfer} {locale} />
 {:else if $walletRoute === WalletRoutes.Receive}
-    <Receive {generateAddress} {locale} />
+    <Receive {isGeneratingAddress} {generateAddress} {locale} />
 {/if}

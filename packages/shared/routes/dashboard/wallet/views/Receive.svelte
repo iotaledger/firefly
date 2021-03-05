@@ -11,6 +11,7 @@
     export let generateAddress = (accountId) => {}
     export let isGeneratingAddress = false
 
+
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
     const currentAccount = getContext<Readable<WalletAccount>>('selectedAccount')
 
@@ -47,7 +48,7 @@
             <div class="w-full flex flex-row justify-between items-start">
                 <Text type="p" smaler bold classes="mb-4">{locale('actions.receive')}</Text>
                 <button on:click={generateNewAddress}>
-                    <Icon icon="refresh" classes="text-gray-500 dark:text-white" />
+                    <Icon icon="refresh" classes="{isGeneratingAddress && 'animate-spin'} text-gray-500 dark:text-white" />
                 </button>
             </div>
             <div class="flex flex-auto items-center justify-center mb-6">
