@@ -105,7 +105,6 @@ export const selectedAccountId = writable<string | null>(null)
 export const selectedMessage = writable<Message | null>(null)
 
 export const isTransferring = writable<boolean>(false)
-export const transferError = writable<string>("")
 export const transferState = writable<TransferProgressEventType | "Complete" | null>(null)
 
 export const loggedIn = persistent<boolean>('loggedIn', false)

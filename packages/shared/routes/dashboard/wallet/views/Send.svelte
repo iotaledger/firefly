@@ -6,7 +6,7 @@
     import type { TransferProgressEventType } from 'shared/lib/typings/events'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
-    import { isTransferring, transferError, transferState, WalletAccount } from 'shared/lib/wallet'
+    import { isTransferring, transferState, WalletAccount } from 'shared/lib/wallet'
     import { getContext, onMount } from 'svelte'
     import type { Readable, Writable } from 'svelte/store'
 
@@ -200,11 +200,6 @@
                             label={locale('general.to')}
                             disabled={$isTransferring}
                             prefix={`${addressPrefix}...`} />
-                    {/if}
-                    {#if $transferError}
-                        <Text type="p" error>
-                            {$transferError === 'insufficient funds' ? locale('error.send.insufficientFunds') : $transferError}
-                        </Text>
                     {/if}
                 </div>
             </div>
