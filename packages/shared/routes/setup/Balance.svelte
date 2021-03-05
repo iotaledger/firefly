@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Box, Button, Illustration, OnboardingLayout, Text, Toast } from 'shared/components'
-    import { convertToFiat, currencies, CurrencyTypes, exchangeRates, AvailableExchangeRates } from 'shared/lib/currency'
+    import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
     import { formatUnit } from 'shared/lib/units'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
@@ -43,7 +43,7 @@
                 </balance>
             </Box>
             {#if error}
-                <Toast classes="mt-4" message={locale('views.balance.error')} type="error" />
+                <Toast classes="mt-4" type="error" message={locale('views.balance.error')} />
             {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-between items-center space-x-4">
