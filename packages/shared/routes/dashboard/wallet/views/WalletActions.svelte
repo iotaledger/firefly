@@ -18,13 +18,10 @@
 
     let startInit
 
-    if ($walletRoute === WalletRoutes.Init) {
+    if ($walletRoute === WalletRoutes.Init && !$accountsLoaded) {
         startInit = Date.now()
         openPopup({
             type: 'busy',
-            props: {
-                statusMessage: locale('general.loading_accounts'),
-            },
             hideClose: true,
             fullScreen: true,
         })
