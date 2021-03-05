@@ -21,24 +21,7 @@ export function bindEvents(element, events) {
     }
 }
 
-/**
- * Validate seed format
- */
 
-export const validateSeed = (seed) => {
-    const REGEX = /^[a-z0-9]+$/i
-    const SEED_LENGTH = 81
-    return REGEX.test(seed) && seed.length == SEED_LENGTH
-}
-
-/**
- * Validate recovery phrase format
- */
-export const validateRecoveryPhrase = (phrase) => {
-    const RECOVERY_PHRASE_LENGTH = 24
-    const REGEX = /^[a-zA-Z ]*$/
-    return REGEX.test(phrase) && phrase.match(/\b(\w+)\b/g)?.length == RECOVERY_PHRASE_LENGTH
-}
 
 /**
  * Validate pincode format
@@ -170,4 +153,18 @@ export const isValidHttpsUrl = (url) => {
  */
 export const validateBech32Address = (prefix, addr) => {
     return new RegExp(`^${prefix}1[02-9ac-hj-np-z]{59}$`).test(addr)
+}
+
+/**
+ * Debounce the opertation
+ * @param callback The callback to call in completion
+ * @param wait How to long wait before calling callback
+ */
+export function debounce(callback, wait = 500) {
+    let _timeout
+    return (...args) => {
+        const context = this
+        clearTimeout(_timeout)
+        _timeout = setTimeout(() => callback.apply(context, args), wait)
+    }
 }
