@@ -5,6 +5,7 @@
     export let locale
     export let mobile
     export let mnemonic
+    export let loading
 
     let recoveryPhraseInput
 
@@ -30,7 +31,7 @@
             <Text type="p" secondary classes="mb-4">{locale('views.verify_recovery_phrase.body')}</Text>
         </div>
         <div slot="leftpane__action">
-            <Button classes="w-full" disabled={!valid} onClick={() => handleContinue()}>
+            <Button classes="w-full" disabled={!valid || loading} onClick={() => handleContinue()}>
                 {locale('actions.verify_recovery_phrase')}
             </Button>
         </div>
