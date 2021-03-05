@@ -25,10 +25,6 @@
             console.error('Could not find source account')
         }
     }
-
-    $: dedupedTransactions = $transactions.filter(
-        (transaction) => !transaction.internal || (transaction.internal && transaction.incoming)
-    )
 </script>
 
 <div data-label="latest-transactions" class="h-full p-8 flex-grow flex flex-col">
@@ -36,7 +32,7 @@
     {#if $accountsLoaded}
         <div class="overflow-y-auto flex-auto h-1 space-y-2">
             {#if $transactions?.length}
-                {#each dedupedTransactions as transaction}
+                {#each $transactions as transaction}
                     <ActivityRow
                         {...transaction}
                         onClick={() => handleTransactionClick(transaction)}
