@@ -81,6 +81,9 @@
                 },
             })
         })
+        Electron.onEvent('menu-error-log', async () => {
+            openPopup({ type: 'errorLog' })
+        })
     })
 </script>
 
