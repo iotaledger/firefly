@@ -47,7 +47,7 @@
             class="w-full h-full flex flex-col flex-auto rounded-2xl border border-solid border-gray-300 dark:border-gray-700 p-4">
             <div class="w-full flex flex-row justify-between items-start">
                 <Text type="p" smaler bold classes="mb-4">{locale('actions.receive')}</Text>
-                <button on:click={generateNewAddress}>
+                <button on:click={generateNewAddress} class:pointer-events-none={isGeneratingAddress}>
                     <Icon icon="refresh" classes="{isGeneratingAddress && 'animate-spin'} text-gray-500 dark:text-white" />
                 </button>
             </div>
