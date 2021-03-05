@@ -24,8 +24,6 @@
         initialiseListeners,
         isTransferring,
         selectedAccountId,
-        transferError,
-        transferState,
         updateAccounts,
         updateBalanceOverview,
         wallet,
@@ -290,7 +288,6 @@
     }
 
     function onSend(senderAccountId, receiveAddress, amount) {
-        transferError.set('')
         const _send = () => {
             isTransferring.set(true)
             api.send(
@@ -331,7 +328,10 @@
                     },
                     onError(err) {
                         isTransferring.set(false)
-                        transferError.set(err.error)
+                        showAppNotification({
+                            type: 'error',
+                            message: locale(err.error),
+                        })
                     },
                 }
             )
@@ -360,8 +360,6 @@
     }
 
     function onInternalTransfer(senderAccountId, receiverAccountId, amount) {
-        transferError.set('')
-
         const _internalTransfer = () => {
             isTransferring.set(true)
             api.internalTransfer(senderAccountId, receiverAccountId, amount, {
@@ -397,7 +395,10 @@
                 },
                 onError(err) {
                     isTransferring.set(false)
-                    transferError.set(err.error)
+                    showAppNotification({
+                        type: 'error',
+                        message: locale(err.error),
+                    })
                 },
             })
         }
