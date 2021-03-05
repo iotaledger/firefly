@@ -464,7 +464,7 @@
         "wallet": "Wallet",
         "help": "Help",
         "no_accounts": "You have no accounts, please create one.",
-        "loading_accounts": "Loading accounts, please wait...",
+        "loading_accounts": "Loading, please wait...",
         "add_profile": "Add Profile",
         "transferSyncing": "Syncing account",
         "transferSelectingInputs": "Selecting inputs",
