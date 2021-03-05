@@ -75,7 +75,7 @@ export const parseAddress = (input) => {
         return null
     }
 
-    if (input.match(VALID_MAINNET_ADDRESS)) {
+    if (input.match(VALID_MAINNET_ADDRESS) || input.match(VALID_DEVNET_ADDRESS)) {
         result.address = input
         return result
     }
@@ -96,7 +96,7 @@ export const parseAddress = (input) => {
             parsed = JSON.parse(input)
         }
 
-        if (parsed.address.match(VALID_MAINNET_ADDRESS)) {
+        if (parsed.address.match(VALID_MAINNET_ADDRESS) || parsed.address.match(VALID_DEVNET_ADDRESS)) {
             result.address = parsed.address
         } else {
             return null
@@ -145,6 +145,21 @@ export const isValidHttpsUrl = (url) => {
     return false
 }
 
+/**
+ * Validate an address given its prefix.
+ * @param prefix The bech32 hrp prefix to match.
+ * @param addr The address to validate.
+ * @returns True if it matches the bech32 format.
+ */
+export const validateBech32Address = (prefix, addr) => {
+    return new RegExp(`^${prefix}1[02-9ac-hj-np-z]{59}$`).test(addr)
+}
+
+/**
+ * Debounce the opertation
+ * @param callback The callback to call in completion
+ * @param wait How to long wait before calling callback
+ */
 export function debounce(callback, wait = 500) {
     let _timeout
     return (...args) => {
