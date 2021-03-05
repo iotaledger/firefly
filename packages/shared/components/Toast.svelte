@@ -1,8 +1,14 @@
 <script lang="typescript">
     import { Icon } from 'shared/components'
+    import type { Action } from 'shared/lib/typings/action'
     import Logo from './Logo.svelte'
 
-    export let type, progress, message, subMessage, classes
+    export let classes: string
+    export let type: string
+    export let message: string
+    export let subMessage: string
+    export let progress: number
+    export let actions: Array<Action>
 
     const TOAST_STYLE = {
         info: {
@@ -56,4 +62,16 @@
         {/if}
         {#if subMessage}<span class="flex text-11 text-{TOAST_STYLE[type].subMessageColor}">{subMessage}</span>{/if}
     </div>
+    {#if actions}
+        <div class="flex flex-col" style="min-width:90px">
+            {#each actions as action}
+                <button
+                    class="cursor-pointer text-center rounded-lg font-bold text-11 {action.isPrimary ? 'bg-white' : ''} text-{action.isPrimary ? 'black' : TOAST_STYLE[type].buttonSecondary}"
+                    style={`min-width:90px;min-height:32px`}
+                    on:click={() => action.onClick()}>
+                    {action.label}
+                </button>
+            {/each}
+        </div>
+    {/if}
 </div>
