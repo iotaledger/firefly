@@ -82,7 +82,7 @@
     class:small
     class:disabled>
     <Text type="p" smaller {disabled}>{value}</Text>
-    <Icon icon="arrow-down" classes="absolute text-gray-500 fill-current" />
+    <Icon icon="chevron-down" classes="absolute text-gray-500 fill-current" />
     <nav
         class:active={dropdown}
         class="absolute w-full overflow-y-auto bg-white border border-solid border-gray-500 pointer-events-none opacity-0 z-10 text-left">

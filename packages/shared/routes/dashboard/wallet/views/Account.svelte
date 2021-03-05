@@ -10,6 +10,7 @@
     export let internalTransfer
     export let generateAddress
     export let setAlias
+    export let isGeneratingAddress
 
     const account = getContext<Readable<WalletAccount>>('selectedAccount')
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
@@ -30,7 +31,7 @@
     <div class="w-full h-full flex flex-col flex-nowrap px-10 pb-10 relative flex-1">
         <AccountNavigation {locale} accounts={navAccounts} />
         {#key $account}
-            <div class="w-full h-full grid grid-cols-3 gap-x-4">
+            <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
                 <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
                     <AccountBalance
                         {locale}
@@ -39,7 +40,7 @@
                         balanceEquiv={$account.balanceEquiv}
                         onMenuClick={handleMenuClick} />
                     <DashboardPane classes="h-full -mt-5">
-                        <AccountActions {send} {internalTransfer} {generateAddress} {setAlias} {locale} />
+                        <AccountActions {isGeneratingAddress} {send} {internalTransfer} {generateAddress} {setAlias} {locale} />
                     </DashboardPane>
                 </DashboardPane>
                 <DashboardPane>

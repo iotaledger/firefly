@@ -51,7 +51,7 @@ export const getInitials = (string: string, maxChars: number) => {
  * @param dotCount: Count of dots in between first and end portion. Default = 3
  */
 
-export const truncateString = (str: string, firstCharCount: number = 5, endCharCount: number = 5, dotCount: number = 3) => {
+export const truncateString = (str: string = '', firstCharCount: number = 5, endCharCount: number = 5, dotCount: number = 3) => {
     const MAX_LENGTH = 13
     if (str.length <= MAX_LENGTH) {
         return str

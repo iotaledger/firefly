@@ -12,23 +12,30 @@
     export let send
     export let internalTransfer
     export let generateAddress
+    export let isGeneratingAddress 
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
     const accountsLoaded = getContext<Writable<boolean>>('walletAccountsLoaded')
 
-    if ($walletRoute === WalletRoutes.Init) {
+    let startInit
+
+    if ($walletRoute === WalletRoutes.Init && !$accountsLoaded) {
+        startInit = Date.now()
         openPopup({
             type: 'busy',
-            props: {
-                statusMessage: locale('general.loading_accounts'),
-            },
             hideClose: true,
+            fullScreen: true,
         })
     }
 
     $: {
         if ($accountsLoaded) {
-            closePopup()
+            const minTimeElapsed = 3000 - (Date.now() - startInit)
+            if (minTimeElapsed < 0) {
+                closePopup()
+            } else {
+                setTimeout(() => closePopup(), minTimeElapsed)
+            }
         }
     }
 
@@ -88,5 +95,5 @@
 {:else if $walletRoute === WalletRoutes.Send}
     <Send {send} {internalTransfer} {locale} />
 {:else if $walletRoute === WalletRoutes.Receive}
-    <Receive {generateAddress} {locale} />
+    <Receive {isGeneratingAddress} {generateAddress} {locale} />
 {/if}

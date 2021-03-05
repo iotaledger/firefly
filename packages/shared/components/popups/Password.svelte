@@ -41,6 +41,6 @@
     <Password {error} classes="w-full mb-5" bind:value={password} showRevealToggle {locale} placeholder={locale('general.password')} autofocus/>
     <div class="flex flex-row justify-between w-full space-x-4 px-8">
         <Button secondary classes="w-1/2" onClick={handleCancelClick}>{locale('actions.cancel')}</Button>
-        <Button classes="w-1/2" type="submit" form="password-popup-form">{locale('actions.unlock')}</Button>
+        <Button classes="w-1/2" type="submit" form="password-popup-form" disabled={!password || password.length === 0}>{locale('actions.unlock')}</Button>
     </div>
 </form>

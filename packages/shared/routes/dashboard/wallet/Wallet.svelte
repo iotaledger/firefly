@@ -1,6 +1,5 @@
 <script lang="typescript">
     import type { Account as BaseAccount } from 'lib/typings/account'
-    import type { Address } from 'lib/typings/address'
     import type { ErrorEventPayload } from 'lib/typings/events'
     import { DashboardPane } from 'shared/components'
     import { sendParams } from 'shared/lib/app'
@@ -13,17 +12,23 @@
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import { formatUnit } from 'shared/lib/units'
-    import type { BalanceOverview, AccountMessage, WalletAccount, BalanceHistory } from 'shared/lib/wallet'
     import {
+        AccountMessage,
         api,
+        BalanceHistory,
+        BalanceOverview,
         getAccountsBalanceHistory,
         getLatestMessages,
         getWalletBalanceHistory,
         initialiseListeners,
+        isTransferring,
         selectedAccountId,
+        transferError,
+        transferState,
         updateAccounts,
         updateBalanceOverview,
         wallet,
+        WalletAccount,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
     import { derived, get, Readable, Writable } from 'svelte/store'
@@ -184,6 +189,7 @@
                     isGeneratingAddress = false
                 },
                 onError(error) {
+                    isGeneratingAddress = false
                     console.error(error)
                 },
             })
@@ -250,7 +256,7 @@
                     },
                     onError(err) {
                         // TODO: Add proper error handling
-                        if (err.payload.error.includes('message history and balance')){
+                        if (err.error.includes('message history and balance')) {
                             createAccountError = locale('error.account.empty')
                         }
                     },
@@ -272,7 +278,9 @@
     }
 
     function onSend(senderAccountId, receiveAddress, amount) {
+        transferError.set('')
         const _send = () => {
+            isTransferring.set(true)
             api.send(
                 senderAccountId,
                 {
@@ -301,11 +309,17 @@
                             })
                         })
 
-                        sendParams.set({ address: '', amount: 0, message: '' })
-                        walletRoute.set(WalletRoutes.Init)
+                        transferState.set('Complete')
+
+                        setTimeout(() => {
+                            sendParams.set({ address: '', amount: 0, message: '' })
+                            isTransferring.set(false)
+                            walletRoute.set(WalletRoutes.Init)
+                        }, 3000)
                     },
                     onError(error) {
-                        console.error(error)
+                        isTransferring.set(false)
+                        transferError.set(error.error)
                     },
                 }
             )
@@ -314,7 +328,12 @@
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
                 if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({ type: 'password', props: { onSuccess: _send } })
+                    openPopup({
+                        type: 'password',
+                        props: {
+                            onSuccess: _send,
+                        },
+                    })
                 } else {
                     _send()
                 }
@@ -326,7 +345,10 @@
     }
 
     function onInternalTransfer(senderAccountId, receiverAccountId, amount) {
+        transferError.set('')
+
         const _internalTransfer = () => {
+            isTransferring.set(true)
             api.internalTransfer(senderAccountId, receiverAccountId, amount, {
                 onSuccess(response) {
                     accounts.update((_accounts) => {
@@ -345,11 +367,17 @@
                         })
                     })
 
-                    sendParams.set({ address: '', amount: 0, message: '' })
-                    walletRoute.set(WalletRoutes.Init)
+                    transferState.set('Complete')
+
+                    setTimeout(() => {
+                        sendParams.set({ address: '', amount: 0, message: '' })
+                        isTransferring.set(false)
+                        walletRoute.set(WalletRoutes.Init)
+                    }, 3000)
                 },
-                onError(response) {
-                    console.error(response)
+                onError(error) {
+                    isTransferring.set(false)
+                    transferError.set(error.error)
                 },
             })
         }
@@ -432,6 +460,7 @@
 
 {#if $walletRoute === WalletRoutes.Account && $selectedAccountId}
     <Account
+        {isGeneratingAddress}
         send={onSend}
         internalTransfer={onInternalTransfer}
         generateAddress={onGenerateAddress}
@@ -449,6 +478,7 @@
                         <WalletBalance {locale} />
                         <DashboardPane classes="-mt-5 h-full">
                             <WalletActions
+                                isGeneratingAddress={isGeneratingAddress}
                                 send={onSend}
                                 internalTransfer={onInternalTransfer}
                                 generateAddress={onGenerateAddress}
