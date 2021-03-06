@@ -105,5 +105,6 @@
         {labels}
         {color}
         {xMaxTicks}
-        yPrecision={7} />
+        yPrecision={7}
+        inlineStyle={$selectedAccount && 'height: calc(50vh - 150px);'} />
 </div>
