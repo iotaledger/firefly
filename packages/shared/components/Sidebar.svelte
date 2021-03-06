@@ -67,7 +67,7 @@
                 <Icon icon="network" classes="text-{NETWORK_HEALTH_COLORS[healthStatus]}-500" />
             </button>
             <button
-                class="w-8 h-8 flex items-center justify-center rounded-full bg-{profileColor}-500"
+                class="w-8 h-8 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
                 on:click={() => (showProfile = true)}>
                 <span class="text-12 text-center text-white uppercase">{profileInitial}</span>
             </button>
