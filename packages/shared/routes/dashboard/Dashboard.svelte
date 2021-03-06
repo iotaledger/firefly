@@ -23,7 +23,7 @@
 
     onMount(() => {
         Electron.DeepLinkManager.requestDeepLink()
-        Electron.onEvent('deepLink-params', (data) => handleDeepLinkRequest(data))
+        Electron.onEvent('deep-link-params', (data) => handleDeepLinkRequest(data))
 
         Electron.onEvent('menu-logout', () => {
             api.lockStronghold({

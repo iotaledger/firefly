@@ -248,7 +248,7 @@ app.on('second-instance', (_e, args) => {
             const params = args.find((arg) => arg.startsWith('iota://'))
 
             if (params) {
-                windows.main.webContents.send('deepLink-params', params)
+                windows.main.webContents.send('deep-link-params', params)
             }
         }
         if (windows.main.isMinimized()) {
@@ -278,16 +278,16 @@ app.on('open-url', (event, url) => {
     event.preventDefault()
     deepLinkUrl = url
     if (windows.main) {
-        windows.main.webContents.send('deepLink-params', url)
+        windows.main.webContents.send('deep-link-params', url)
     }
 })
 
 /**
  * Proxy deep link event to the wallet application
  */
-ipcMain.on('deepLink-request', () => {
+ipcMain.on('deep-link-request', () => {
     if (deepLinkUrl) {
-        windows.main.webContents.send('deepLink-params', deepLinkUrl)
+        windows.main.webContents.send('deep-link-params', deepLinkUrl)
         deepLinkUrl = null
     }
 })

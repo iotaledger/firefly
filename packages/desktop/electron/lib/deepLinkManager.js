@@ -4,7 +4,7 @@ const { ipcRenderer } = require('electron')
 // Runs in renderer process
 const DeepLinkManager = {
     requestDeepLink: () => {
-        ipcRenderer.send('deepLink-request')
+        ipcRenderer.send('deep-link-request')
     },
 }
 
