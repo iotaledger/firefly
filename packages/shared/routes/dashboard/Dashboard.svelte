@@ -1,16 +1,17 @@
 <script lang="typescript">
-    import { get } from 'svelte/store'
-    import { onMount } from 'svelte'
     import { Idle, Sidebar } from 'shared/components'
-    import { Wallet, Settings } from 'shared/routes'
-    import { parseDeepLink } from 'shared/lib/utils'
-    import { sendParams, logout } from 'shared/lib/app'
+    import { logout, sendParams } from 'shared/lib/app'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
+    import { Electron } from 'shared/lib/electron'
     import { activeProfile } from 'shared/lib/profile'
-    import { routerNext, dashboardRoute } from 'shared/lib/router'
-    import { api } from 'shared/lib/wallet'
+    import { dashboardRoute, routerNext } from 'shared/lib/router'
     import { Tabs } from 'shared/lib/typings/routes'
-    import { ToastContainer } from 'shared/components'
+    import { parseDeepLink } from 'shared/lib/utils'
+    import { api } from 'shared/lib/wallet'
+    import { Settings, Wallet } from 'shared/routes'
+    import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale
     export let mobile
@@ -19,19 +20,21 @@
         wallet: Wallet,
         settings: Settings,
     }
-    
-    const DeepLinkManager = window['Electron']['DeepLinkManager']
 
     onMount(() => {
-        DeepLinkManager.requestDeepLink()
-        window['Electron'].onEvent('deepLink-params', (data) => handleDeepLinkRequest(data))
-        window['Electron'].onEvent('menu-logout', () => {
+        Electron.DeepLinkManager.requestDeepLink()
+        Electron.onEvent('deepLink-params', (data) => handleDeepLinkRequest(data))
+
+        Electron.onEvent('menu-logout', () => {
             api.lockStronghold({
                 onSuccess() {
                     logout()
                 },
-                onError(error) {
-                    console.error(error)
+                onError(err) {
+                    showAppNotification({
+                        type: 'error',
+                        message: locale(err.error),
+                    })
                 },
             })
         })
@@ -72,6 +75,5 @@
         <Sidebar bind:activeTab={$dashboardRoute} {locale} />
         <!-- Dashboard Pane -->
         <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
-        <ToastContainer />
     </div>
 {/if}

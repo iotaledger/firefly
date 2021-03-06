@@ -1,10 +1,10 @@
-<script>
+<script lang="typescript">
     import { createEventDispatcher } from 'svelte'
     import { OnboardingLayout, Illustration, Text, ImportTextfield, Button } from 'shared/components'
     export let locale
     export let mobile
 
-    let input
+    let input = ''
 
     const dispatch = createEventDispatcher()
 
@@ -29,8 +29,7 @@
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
             <Button secondary classes="flex-1" onClick={() => handleBackClick()}>{locale('actions.back')}</Button>
-            <!-- TODO: implement real logic here about the input -->
-            <Button classes="flex-1" disabled={!input || input.length < 10} onClick={() => handleContinueClick()}>
+            <Button classes="flex-1" disabled={input.length === 0} onClick={() => handleContinueClick()}>
                 {locale('actions.continue')}
             </Button>
         </div>

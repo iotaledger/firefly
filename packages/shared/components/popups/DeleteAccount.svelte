@@ -1,10 +1,11 @@
-<script>
+<script lang="typescript">
     import { api, selectedAccountId } from 'shared/lib/wallet'
     import { sendParams } from 'shared/lib/app'
     import { walletRoute, accountRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { Password, Button, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale
     export let account
@@ -14,6 +15,7 @@
     $: canDelete = $account.rawIotaBalance == 0
 
     let password
+    let error = ''
 
     function handleDeleteClick() {
         if (hasMultipleAccounts) {
@@ -32,13 +34,16 @@
                             accountRoute.set(AccountRoutes.Init)
                             walletRoute.set(WalletRoutes.Init)
                         },
-                        onError(error) {
-                            console.error(error)
+                        onError(err) {
+                            showAppNotification({
+                                type: 'error',
+                                message: locale(err.error),
+                            })
                         },
                     })
                 },
-                onError(error) {
-                    console.error(error)
+                onError(err) {
+                    error = locale(err.error)
                 },
             })
         } else {
@@ -63,6 +68,7 @@
         <Text type="p" secondary classes="mb-5">{locale('popups.delete_account.body')}</Text>
         <Text type="p" secondary classes="mb-3">{locale('popups.delete_account.type_password')}</Text>
         <Password
+            {error}
             classes="w-full mb-8"
             bind:value={password}
             showRevealToggle

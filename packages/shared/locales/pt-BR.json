@@ -362,19 +362,33 @@
         "exportNewStronghold": "Exportar uma nova fortaleza",
         "enableDeepLinks": "Ativar links profundos",
         "enableDeveloperMode": "Ativar modo de desenvolvedor",
-        "enableSystemNotifications": "Enable system notifications",
+        "enableSystemNotifications": "Ativar notificações do sistema",
         "exportState": "Exportar estado",
         "outsourceProofOfWork": "Prova de origem de trabalho",
         "unlock": "Desbloquear",
         "update_firefly": "Atualizar a Firefly",
-        "restart_now": "Restart now",
+        "restart_now": "Reiniciar agora",
         "save_backup": "Salvar backup",
         "customize_account": "Personalizar conta",
         "sync_account": "Sincronizar conta",
         "view_address_history": "Ver histórico de endereços",
         "delete_account": "Excluir conta",
         "max": "Máx",
-        "add_node": "Adicionar servidor"
+        "add_node": "Adicionar servidor",
+        "hide": "Hide",
+        "hideOthers": "Hide Others",
+        "showAll": "Show All",
+        "quit": "Quit",
+        "edit": "Edit",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "selectAll": "Select All",
+        "addAccount": "Add Account",
+        "checkForUpdates": "Check for Updates",
+        "reportAnIssue": "Report an Issue"
     },
     "general": {
         "password": "Senha",
@@ -436,7 +450,11 @@
         "transactions": "Transações",
         "security": "Segurança",
         "account_address": "Endereço da Conta",
-        "nodes": "Servidores"
+        "nodes": "Servidores",
+        "wallet": "Wallet",
+        "help": "Help",
+        "no_accounts": "You have no accounts, please create one.",
+        "add_profile": "Add Profile"
     },
     "dates": {
         "today": "Hoje",
@@ -449,11 +467,11 @@
         "valueTx": "Recebendo {{value}} para {{account}}",
         "confirmed": "Envio de {{value}} de {{account}} foi confirmado",
         "failed": "Envio de {{value}} de {{account}} falhou",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "downloading_update": "Baixando atualização",
+        "update_ready": "Atualização está pronta",
+        "update_error": "Ocorreu um erro durante a atualização; por favor, tente novamente",
+        "restart_install": "Reinicie para instalar",
+        "calc_minutes_remaining": "Calculando minutos restantes...",
+        "minutes_remaining": "{minutes, plural, one {1 minuto restante} other {# minutos restantes}}"
     }
 }

@@ -1,17 +1,44 @@
 <script lang="typescript">
+    import { AccountTile, Button, Text } from 'shared/components'
+    import { closePopup, openPopup } from 'shared/lib/popup'
+    import { accountRoute, walletRoute } from 'shared/lib/router'
+    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
+    import { selectedAccountId, WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import { Text, Button, AccountTile } from 'shared/components'
-    import { Send, Receive } from '.'
-    import { selectedAccountId } from 'shared/lib/wallet'
-    import { walletRoute, accountRoute } from 'shared/lib/router'
-    import { WalletRoutes, AccountRoutes } from 'shared/lib/typings/routes'
-    
+    import type { Writable } from 'svelte/store'
+    import { Receive, Send } from '.'
+
     export let locale
     export let send
     export let internalTransfer
     export let generateAddress
+    export let isGeneratingAddress 
 
-    const accounts = getContext('walletAccounts')
+    const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
+    const accountsLoaded = getContext<Writable<boolean>>('walletAccountsLoaded')
+
+    let startInit
+
+    if ($walletRoute === WalletRoutes.Init && !$accountsLoaded) {
+        startInit = Date.now()
+        openPopup({
+            type: 'busy',
+            hideClose: true,
+            fullScreen: true,
+            transition: false,
+        })
+    }
+
+    $: {
+        if ($accountsLoaded) {
+            const minTimeElapsed = 3000 - (Date.now() - startInit)
+            if (minTimeElapsed < 0) {
+                closePopup()
+            } else {
+                setTimeout(() => closePopup(), minTimeElapsed)
+            }
+        }
+    }
 
     function handleAccountClick(accountId) {
         selectedAccountId.set(accountId)
@@ -34,30 +61,40 @@
         <div data-label="accounts" class="w-full h-full flex flex-col flex-no-wrap justify-start mb-6">
             <div class="flex flex-row mb-6 justify-between items-center">
                 <Text type="h5">{locale('general.accounts')}</Text>
-                <Button onClick={handleCreateClick} secondary small icon="plus">{locale('actions.create')}</Button>
+                <Button onClick={handleCreateClick} secondary small icon="plus" disabled={!$accountsLoaded}>
+                    {locale('actions.create')}
+                </Button>
             </div>
-            {#if $accounts.length > 0}
-                <div class="grid grid-cols-{$accounts.length <= 2 ? $accounts.length : '3'} gap-2 w-full flex-auto">
-                    {#each $accounts as account}
-                        <AccountTile
-                            color={account.color}
-                            name={account.name}
-                            balance={account.balance}
-                            balanceEquiv={account.balanceEquiv}
-                            size={$accounts.length >= 3 ? 's' : $accounts.length === 2 ? 'm' : 'l'}
-                            onClick={() => handleAccountClick(account.id)} />
-                    {/each}
-                </div>
+            {#if $accountsLoaded}
+                {#if $accounts.length > 0}
+                    <div class="grid grid-cols-{$accounts.length <= 2 ? $accounts.length : '3'} gap-2 w-full flex-auto">
+                        {#each $accounts as account}
+                            <AccountTile
+                                color={account.color}
+                                name={account.alias}
+                                balance={account.balance}
+                                balanceEquiv={account.balanceEquiv}
+                                size={$accounts.length >= 3 ? 's' : $accounts.length === 2 ? 'm' : 'l'}
+                                onClick={() => handleAccountClick(account.id)} />
+                        {/each}
+                    </div>
+                {:else}
+                    <Text>{locale('general.no_accounts')}</Text>
+                {/if}
             {/if}
         </div>
-        <!-- Action Send / Receive -->
-        <div class="flex flex-row justify-between space-x-4">
-            <Button xl secondary icon="receive" classes="w-1/2" onClick={handleReceiveClick}>{locale('actions.receive')}</Button>
-            <Button xl secondary icon="transfer" classes="w-1/2" onClick={handleSendClick}>{locale('actions.send')}</Button>
-        </div>
+        {#if $accounts.length > 0}
+            <!-- Action Send / Receive -->
+            <div class="flex flex-row justify-between space-x-4">
+                <Button xl secondary icon="receive" classes="w-1/2" onClick={handleReceiveClick}>
+                    {locale('actions.receive')}
+                </Button>
+                <Button xl secondary icon="transfer" classes="w-1/2" onClick={handleSendClick}>{locale('actions.send')}</Button>
+            </div>
+        {/if}
     </div>
 {:else if $walletRoute === WalletRoutes.Send}
     <Send {send} {internalTransfer} {locale} />
 {:else if $walletRoute === WalletRoutes.Receive}
-    <Receive {generateAddress} {locale} />
+    <Receive {isGeneratingAddress} {generateAddress} {locale} />
 {/if}

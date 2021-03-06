@@ -1,5 +1,8 @@
-<script>
+
+<script lang="typescript">
+    import Input from './Input'
     import { Icon } from 'shared/components'
+
     export let value = ''
     export let classes = ''
     export let strength = 0
@@ -9,43 +12,21 @@
     export let placeholder = undefined
     export let locale = undefined
     export let maxlength = undefined
+    export let error = null
     export let numeric = false
+    export let autofocus = false
+
     let revealed = false
     let type = 'password'
-    const handleInput = (event) => {
-        value = event.target.value
-    }
-    const revealToggle = (event) => {
-        const input = event.currentTarget.previousElementSibling
-        if (!input) {
-            return
-        }
-        input.type = input.type === 'password' ? 'text' : 'password'
-        revealed = !revealed
-    }
 
-    function onKeyPress(event) {
-        // if the input is numeric, we accept only numbers and enter press
-        if (numeric && event.keyCode !== 13 && (event.which < 48 || event.which > 57)) {
-            event.preventDefault()
-        }
+    const revealToggle = () => {
+        type = type === 'password' ? 'text' : 'password'
+        revealed = !revealed
     }
 </script>
 
 <style type="text/scss">
-    password-input {
-        input {
-            transition: border-color 0.25s;
-            &::-webkit-outer-spin-button,
-            &::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-                @apply m-0;
-            }
-            &::placeholder {
-                /* Chrome, Firefox, Opera, Safari 10.1+ */
-                @apply text-gray-500;
-            }
-        }
+    div {
         button {
             right: 12px; // TODO: unable to use tailwind inset
         }
@@ -53,52 +34,39 @@
             span {
                 width: 22px;
                 height: 4px;
-                &:nth-child(1) {
+                &.weak {
                     @apply bg-orange-500;
                 }
-                &:nth-child(2) {
-                    @apply bg-yellow-500;
-                    background: #ffcf24;
-                }
-                &:nth-child(3) {
+                &.strong {
                     @apply bg-green-500;
-                }
-                &:nth-child(4) {
-                    @apply bg-blue-500;
-                    background: #108cff;
-                }
-                &.disabled {
-                    @apply bg-gray-300;
                 }
             }
         }
     }
 </style>
 
-<password-input class={`relative block ${classes}`} class:with-toggle={showRevealToggle}>
+<div class={classes}>
     {#if showStrengthLevel}
         <strength-meter class="flex flex-row justify-end mb-2">
             {#each Array(strengthLevels) as _, i}
-                <span class="ml-1 w-1.5 h-0.5 rounded-lg" class:disabled={i + 1 > strength} />
+                <span class="ml-1 w-1.5 h-0.5 rounded-lg bg-gray-300"class:strong={strength === 4} class:weak={i - strength < 0}/>
             {/each}
         </strength-meter>
     {/if}
-    <div class="w-full relative flex items-center">
-        <input
+    <div class='flex w-full relative'>
+        <Input
+            {error}
             {type}
-            {value}
+            bind:value
             {maxlength}
-            on:keypress={onKeyPress}
-            on:input={handleInput}
-            placeholder={placeholder || locale('general.password')}
-            class:toggle={showRevealToggle}
-            class="w-full relative text-12 leading-140 py-4 pr-8 pl-4
-                 bg-white border border-solid border-gray-300 hover:border-gray-500 focus:border-gray-500 rounded-xl text-gray
-                 " />
+            {numeric}
+            {autofocus}
+            placeholder={placeholder || locale('general.password')} 
+        />
         {#if showRevealToggle === true}
-            <button type="button" on:click={(e) => revealToggle(e)} tabindex="-1" class="absolute">
+            <button type="button" on:click={() => revealToggle()} tabindex="-1" class="absolute top-3">
                 <Icon icon={revealed ? 'view' : 'hide'} classes="text-blue-500" />
             </button>
         {/if}
     </div>
-</password-input>
+</div>

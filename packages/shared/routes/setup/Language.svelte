@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { createEventDispatcher } from 'svelte'
     import { OnboardingLayout, Illustration, Text, Button, Dropdown, Radio } from 'shared/components'
     import { darkMode } from 'shared/lib/app'
@@ -12,8 +12,8 @@
 
     const dispatch = createEventDispatcher()
 
-    function handleContinueClick(setupType) {
-        dispatch('next', { setupType })
+    function handleContinueClick() {
+        dispatch('next')
     }
     function handleBackClick() {
         dispatch('previous')
@@ -34,7 +34,7 @@
                 disabled
                 classes="mb-4" />
             <div>
-                <Text type="p" classes="mb-2" secondary smaller>{locale('general.appearance')}</Text>
+                <Text type="p" classes="mb-2 mt-4" smaller>{locale('general.appearance')}</Text>
                 <Radio value={false} bind:group={darkModeEnabled} label={locale('general.light_theme')} />
                 <Radio value={true} bind:group={darkModeEnabled} label={locale('general.dark_theme')} />
             </div>

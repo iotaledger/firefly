@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { Text, QR } from 'shared/components'
     export let locale
     export let data

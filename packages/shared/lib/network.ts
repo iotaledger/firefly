@@ -5,8 +5,10 @@ import { isValidUrl, isValidHttpsUrl } from './utils'
 
 export const DEFAULT_NODE: Node = {
     url: 'https://api.hornet-0.testnet.chrysalis2.com',
-    username: '',
-    password: '',
+    auth: {
+        username: '',
+        password: ''
+    }
 }
 
 export const DEFAULT_NODES: Node[] = [
@@ -16,8 +18,10 @@ export const DEFAULT_NODES: Node[] = [
     'https://api.hornet-3.testnet.chrysalis2.com',
 ].map((url) => ({
     url,
-    username: '',
-    password: '',
+    auth: {
+        username: '',
+        password: ''
+    }
 }))
 
 /**
@@ -26,25 +30,23 @@ export const DEFAULT_NODES: Node[] = [
 export const network = writable<Network>(Network.Testnet)
 
 /**
- * Check if new node candidate is valid
+ * Check if a node url is valid
  * @param {Node[]} nodesList: list of current nodes
  * @param {Node} newNode: new node candidate
- * @returns {boolean}
+ * @returns {string | undefined}
  */
-export const isNewNodeValid = (nodesList: Node[] = null, newNode: Node): boolean => {
+export const isNodeValid = (nodesList: Node[] = null, newNode: Node): string | undefined => {
     // Remove spaces, trailing slashes & trailing colons
     newNode.url = newNode.url.replace(/ /g, '').replace(/[^0-9a-zA-Z]*$/, '')
 
     // Check if URL is valid
     if (!isValidUrl(newNode.url)) {
-        console.error('Node validation error: Invalid url')
-        return false
+        return 'error.node.invalid'
     }
 
     // Only allow HTTPS nodes
     if (!isValidHttpsUrl(newNode.url)) {
-        console.error('Node validation error: Only https allowed')
-        return false
+        return 'error.node.https'
     }
 
     const hasDefaultHttpsPort = newNode.url.endsWith(':443')
@@ -54,9 +56,8 @@ export const isNewNodeValid = (nodesList: Node[] = null, newNode: Node): boolean
 
     // Check whether the node was already added to the list
     if (nodesList && nodesList.some(({ url }) => (url.endsWith(':443') ? url.slice(0, -4) : url).match(newNode.url))) {
-        console.error('Node validation error: Node already exists')
-        return false
+        return 'error.node.duplicate'
     }
 
-    return true
+    return undefined
 }

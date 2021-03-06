@@ -362,19 +362,33 @@
         "exportNewStronghold": "Exportovat nový Stronghold",
         "enableDeepLinks": "Povolit hluboké odkazy",
         "enableDeveloperMode": "Povolit vývojářský režim",
-        "enableSystemNotifications": "Enable system notifications",
+        "enableSystemNotifications": "Povolit upozornění",
         "exportState": "Exportovat stav",
         "outsourceProofOfWork": "Outsourcovaný Proof of Work",
         "unlock": "Odemknout",
         "update_firefly": "Aktualizovat Firefly",
-        "restart_now": "Restart now",
+        "restart_now": "Restartovat nyní",
         "save_backup": "Uložit zálohu",
         "customize_account": "Přizpůsobit účet",
         "sync_account": "Synchronizovat účet",
         "view_address_history": "Zobrazit historii adresy",
         "delete_account": "Odstranit účet",
         "max": "Max",
-        "add_node": "Přidat uzel"
+        "add_node": "Přidat uzel",
+        "hide": "Hide",
+        "hideOthers": "Hide Others",
+        "showAll": "Show All",
+        "quit": "Quit",
+        "edit": "Edit",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "selectAll": "Select All",
+        "addAccount": "Add Account",
+        "checkForUpdates": "Check for Updates",
+        "reportAnIssue": "Report an Issue"
     },
     "general": {
         "password": "Heslo",
@@ -436,7 +450,11 @@
         "transactions": "Transakce",
         "security": "Zabezpečení",
         "account_address": "Adresa účtu",
-        "nodes": "Uzly"
+        "nodes": "Uzly",
+        "wallet": "Wallet",
+        "help": "Help",
+        "no_accounts": "You have no accounts, please create one.",
+        "add_profile": "Add Profile"
     },
     "dates": {
         "today": "Dnes",
@@ -449,11 +467,11 @@
         "valueTx": "Přijímání {{value}} na {{account}}",
         "confirmed": "Odchozí {{value}} od {{account}} byl potvrzen",
         "failed": "Odchozí {{value}} od {{account}} selhal",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
+        "downloading_update": "Stahování aktualizace",
+        "update_ready": "Aktualizace připravena",
         "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "restart_install": "Restartovat pro instalaci",
+        "calc_minutes_remaining": "Výpočet zbývajících minut...",
+        "minutes_remaining": "{minutes, plural, one {1 zbývající minuta} other {# zbývajících minut}}"
     }
 }

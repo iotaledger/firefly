@@ -50,9 +50,7 @@ const buildTemplate = () => {
                 },
                 {
                     label: `${state.strings.checkForUpdates}...`,
-                    click: () => {
-                        // TODO: Check for updates
-                    },
+                    click: () => getWindow('main').webContents.send('menu-check-for-update'),
                     enabled: state.enabled,
                 },
                 {
@@ -63,14 +61,11 @@ const buildTemplate = () => {
                     click: () => getWindow('main').webContents.send('menu-navigate-settings'),
                 },
                 {
-                    type: 'separator',
+                    label: state.strings.errorLog,
+                    click: () => getWindow('main').webContents.send('menu-error-log')
                 },
                 {
-                    label: state.strings.errorLog,
-                    click: () => {
-                        // TODO: Add error log
-                    },
-                    enabled: state.enabled,
+                    type: 'separator',
                 },
             ],
         },

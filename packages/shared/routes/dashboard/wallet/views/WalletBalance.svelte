@@ -1,13 +1,15 @@
 <script lang="typescript">
-    import { getContext } from 'svelte'
     import { Icon, Text } from 'shared/components'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
+    import type { BalanceOverview } from 'shared/lib/wallet'
+    import { getContext } from 'svelte'
+    import type { Readable } from 'svelte/store'
 
     export let locale
     export let color = 'blue'
 
-    const balance = getContext('walletBalance')
+    const balance = getContext<Readable<BalanceOverview>>('walletBalance')
 </script>
 
 <div class="bg-gradient-to-b from-{color}-500 to-{color}-600 dark:from-gray-800 dark:to-gray-900 rounded-t-2xl pt-10 pb-12 px-8">
@@ -21,14 +23,14 @@
         <!-- Incoming/Outgoing -->
         <div data-label="total-movements" class="flex flex-row justify-between mt-10">
             <div class="flex items-center">
-                <Icon boxed icon="arrow-down" classes="text-white" boxClasses="bg-{color}-300 dark:bg-gray-900 mr-4" />
+                <Icon boxed icon="chevron-down" classes="text-white" boxClasses="bg-{color}-300 dark:bg-gray-900 mr-4" />
                 <div>
                     <Text type="p" classes="text-white mb-0.5">{$balance.incoming}</Text>
                     <Text type="p" overrideColor smaller classes="text-{color}-300">{locale('general.incoming')}</Text>
                 </div>
             </div>
             <div class="flex items-center">
-                <Icon boxed icon="arrow-up" classes="text-white" boxClasses="bg-{color}-300 dark:bg-gray-900 mr-4" />
+                <Icon boxed icon="chevron-up" classes="text-white" boxClasses="bg-{color}-300 dark:bg-gray-900 mr-4" />
                 <div>
                     <Text type="p" classes="text-white mb-0.5">{$balance.outgoing}</Text>
                     <Text type="p" overrideColor smaller classes="text-{color}-300">{locale('general.outgoing')}</Text>

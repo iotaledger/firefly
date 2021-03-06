@@ -1,34 +1,104 @@
 <script lang="typescript">
-    import { Dropdown, Chart, Text } from 'shared/components'
-    import { selectedChart, chartCurrency, chartTimeframe, TIMEFRAME_MAP, AvailableCharts } from 'shared/lib/marketData'
+    import { Chart, Dropdown, Text } from 'shared/components'
+    import {
+        ChartData,
+        chartCurrency,
+        chartTimeframe,
+        DashboardChartType,
+        getAccountValueData,
+        getPortfolioData,
+        getTokenData,
+        selectedChart,
+    } from 'shared/lib/chart'
     import { CurrencyTypes } from 'shared/lib/currency'
+    import { TIMEFRAME_MAP, HistoryDataProps } from 'shared/lib/marketData'
+    import { activeProfile } from 'shared/lib/profile'
+    import { getContext, onMount } from 'svelte'
+
+    export let locale
+
+    const walletBalanceHistory = getContext('walletBalanceHistory')
+    const accountsBalanceHistory = getContext('accountsBalanceHistory')
+    const selectedAccount = getContext('selectedAccount')
+
+    let chartData: ChartData = { labels: [], data: [], tooltips: [] }
+    let currencyDropdown = []
+    let xMaxTicks
+
+    $: datasets = [{ data: chartData.data, tooltips: chartData.tooltips }]
+    $: labels = chartData.labels
+    $: color = $selectedAccount ? $selectedAccount.color : 'blue'
+
+    /** Chart data */
+    $: {
+        if (locale || $selectedChart || $chartCurrency || $chartTimeframe || $walletBalanceHistory) {
+            // Account value chart
+            if ($selectedAccount) {
+                chartData = getAccountValueData($accountsBalanceHistory[$selectedAccount.index])
+                switch ($chartTimeframe) {
+                    case HistoryDataProps.ONE_HOUR:
+                    case HistoryDataProps.ONE_DAY:
+                        xMaxTicks = 4
+                        break
+                    case HistoryDataProps.SEVEN_DAYS:
+                    case HistoryDataProps.ONE_MONTH:
+                        xMaxTicks = 6
+                        break
+                }
+            } else {
+                // Token value chart
+                if ($selectedChart === DashboardChartType.TOKEN) {
+                    chartData = getTokenData()
+                }
+                // Portfolio value chart
+                if ($selectedChart === DashboardChartType.PORTFOLIO) {
+                    chartData = getPortfolioData($walletBalanceHistory)
+                }
+                xMaxTicks = undefined
+            }
+        }
+    }
+
+    onMount(() => {
+        let profileCurrency = $activeProfile.settings.currency
+        currencyDropdown = Object.values(CurrencyTypes).map((currency) => ({ value: currency, label: currency.toUpperCase() }))
+        if (!CurrencyTypes[profileCurrency]) {
+            currencyDropdown.push({ value: profileCurrency.toLocaleLowerCase(), label: profileCurrency })
+        }
+    })
+
+    function handleCurrencySelect({ value: currency }) {
+        chartCurrency.set(currency)
+    }
 </script>
 
-<div data-label="portfolio-token-chart" class="w-full h-full px-10 pt-8 pb-6">
-    <div class="flex justify-between">
-        <div class="flex">
-            {#each Object.values(AvailableCharts) as chart, idx}
-                <span on:click={() => selectedChart.set(chart)}>
-                    <Text type="h4" disabled={chart !== $selectedChart} classes={idx > 0 && 'ml-6'}>{chart}</Text>
-                </span>
-            {/each}
-        </div>
-        <div class="flex">
+<div data-label="portfolio-token-chart" class="w-full h-full px-8 py-4">
+    <div class="flex justify-between items-center mb-2">
+        {#if !$selectedAccount}
+            <div class="flex space-x-4">
+                {#each Object.values(DashboardChartType) as chart}
+                    <button on:click={() => selectedChart.set(chart)}>
+                        <Text type="h4" disabled={chart !== $selectedChart}>{locale(`charts.${chart}`)}</Text>
+                    </button>
+                {/each}
+            </div>
+        {:else}
+            <Text type="h4">{locale('charts.account_value')}</Text>
+        {/if}
+        <div class="flex space-x-2">
+            <span>
+                <Dropdown small value={$chartCurrency.toUpperCase()} items={currencyDropdown} onSelect={handleCurrencySelect} />
+            </span>
             <span>
                 <Dropdown
-                    value={$chartCurrency.toUpperCase()}
-                    items={Object.values(CurrencyTypes).map((currency) => ({ value: currency, label: currency.toUpperCase() }))}
-                    onSelect={(newCurrency) => chartCurrency.set(newCurrency)} />
-            </span>
-            <span class="ml-6">
-                <Dropdown
+                    small
                     value={TIMEFRAME_MAP[$chartTimeframe]}
                     items={Object.keys(TIMEFRAME_MAP).map((value) => ({ label: TIMEFRAME_MAP[value], value }))}
-                    onSelect={(newTimeframe) => chartTimeframe.set(newTimeframe)} />
+                    onSelect={(newTimeframe) => chartTimeframe.set(newTimeframe.value)} />
             </span>
         </div>
     </div>
     <div class="flex-auto">
-        <Chart type="line" />
+        <Chart type="line" {datasets} beginAtZero={$selectedChart !== DashboardChartType.TOKEN} {labels} {color} {xMaxTicks} yPrecision={7} />
     </div>
 </div>

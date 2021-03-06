@@ -362,19 +362,33 @@
         "exportNewStronghold": "Exporteer een nieuwe Stronghold",
         "enableDeepLinks": "Diepe links inschakelen",
         "enableDeveloperMode": "Ontwikkelaarsmodus inschakelen",
-        "enableSystemNotifications": "Enable system notifications",
+        "enableSystemNotifications": "Notificaties inschakelen",
         "exportState": "Status exporteren",
         "outsourceProofOfWork": "Proof of work uitbesteden",
         "unlock": "Ontgrendel",
         "update_firefly": "Firefly bijwerken",
-        "restart_now": "Restart now",
+        "restart_now": "Herstart nu",
         "save_backup": "Back-up opslaan",
         "customize_account": "Account aanpassen",
         "sync_account": "Account synchroniseren",
         "view_address_history": "Bekijk adresgeschiedenis",
         "delete_account": "Account verwijderen",
         "max": "Max",
-        "add_node": "Node toevoegen"
+        "add_node": "Node toevoegen",
+        "hide": "Hide",
+        "hideOthers": "Hide Others",
+        "showAll": "Show All",
+        "quit": "Quit",
+        "edit": "Edit",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "selectAll": "Select All",
+        "addAccount": "Add Account",
+        "checkForUpdates": "Check for Updates",
+        "reportAnIssue": "Report an Issue"
     },
     "general": {
         "password": "Wachtwoord",
@@ -436,7 +450,11 @@
         "transactions": "Transacties",
         "security": "Beveiliging",
         "account_address": "Account adres",
-        "nodes": "Nodes"
+        "nodes": "Nodes",
+        "wallet": "Wallet",
+        "help": "Help",
+        "no_accounts": "You have no accounts, please create one.",
+        "add_profile": "Add Profile"
     },
     "dates": {
         "today": "Vandaag",
@@ -449,11 +467,11 @@
         "valueTx": "Ontvangst van {{value}} op {{account}}",
         "confirmed": "Uitgaande {{value}} van {{account}} is bevestigd",
         "failed": "Uitgaande {{value}} van {{account}} is mislukt",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "downloading_update": "Update aan het downloaden",
+        "update_ready": "Update gereed",
+        "update_error": "Er is een fout opgetreden tijdens het updaten, probeer het opnieuw",
+        "restart_install": "Herstart om te installeren",
+        "calc_minutes_remaining": "Resterende minuten aan het berekenen...",
+        "minutes_remaining": "{minutes, plural, one {1 minuut resterend} other {# minuten resterend}}"
     }
 }

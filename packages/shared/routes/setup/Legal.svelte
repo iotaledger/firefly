@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { createEventDispatcher } from 'svelte'
     import { OnboardingLayout, Text, Button, Scroller, Checkbox } from 'shared/components'
     export let locale
@@ -14,9 +14,7 @@
     let privacyPolicy
     let termsOfService
 
-    $: if (progress === 100 || checked) {
-        legalRead = true
-    }
+    $: legalRead = progress === 100 || checked
 
     const dispatch = createEventDispatcher()
 

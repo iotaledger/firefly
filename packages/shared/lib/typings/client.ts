@@ -7,8 +7,10 @@ export enum Network {
 
 export interface Node {
     url: string
-    password?: string
-    username?: string
+    auth?: {
+        password: string
+        username: string
+    }
 }
 
 export interface ClientOptions {

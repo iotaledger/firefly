@@ -362,19 +362,33 @@
         "exportNewStronghold": "Stronghold-fájl exportálása",
         "enableDeepLinks": "Automatikus adatkitöltés engedélyezése",
         "enableDeveloperMode": "Fejlesztői mód engedélyezése",
-        "enableSystemNotifications": "Enable system notifications",
+        "enableSystemNotifications": "Rendszer értesítések engedélyezése",
         "exportState": "Állapot exportálása",
         "outsourceProofOfWork": "Kiszabott munka kiszervezése",
         "unlock": "Felold",
         "update_firefly": "Firefly frissítése",
-        "restart_now": "Restart now",
+        "restart_now": "Újraindítás most",
         "save_backup": "Biztonsági mentés készítése",
         "customize_account": "Számla személyre szabása",
         "sync_account": "Számla szinkronizálása",
         "view_address_history": "Címek előzményeinek megjelenítése",
         "delete_account": "Számla törlése",
         "max": "Maximum",
-        "add_node": "Csomópont hozzáadása"
+        "add_node": "Csomópont hozzáadása",
+        "hide": "Hide",
+        "hideOthers": "Hide Others",
+        "showAll": "Show All",
+        "quit": "Quit",
+        "edit": "Edit",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "selectAll": "Select All",
+        "addAccount": "Add Account",
+        "checkForUpdates": "Check for Updates",
+        "reportAnIssue": "Report an Issue"
     },
     "general": {
         "password": "Jelszó",
@@ -436,7 +450,11 @@
         "transactions": "Tranzakciók",
         "security": "Biztonság",
         "account_address": "Számla címe",
-        "nodes": "Csomópontok"
+        "nodes": "Csomópontok",
+        "wallet": "Wallet",
+        "help": "Help",
+        "no_accounts": "You have no accounts, please create one.",
+        "add_profile": "Add Profile"
     },
     "dates": {
         "today": "Ma",
@@ -449,11 +467,11 @@
         "valueTx": "{{value}} érkezik a(z) {{account}} számlájára",
         "confirmed": "{{value}} sikeresen elküldve a(z) {{account}} számlájáról",
         "failed": "{{value}} elküldése a(z) {{account}} számlájáról sikertelen",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "downloading_update": "Frissítések letöltése",
+        "update_ready": "A frissítés készen áll",
+        "update_error": "Hiba történt a frissítés közben. Kérjük, próbálja újra!",
+        "restart_install": "Újraindítás a telepítés elvégzéséhez",
+        "calc_minutes_remaining": "Hátralévő idő kiszámítása...",
+        "minutes_remaining": "{minutes, plural,one {perc van hátra}other {perc van hátra}}"
     }
 }

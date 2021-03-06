@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { Icon, Text } from 'shared/components'
 
     export let label = undefined
@@ -7,7 +7,8 @@
 </script>
 
 <style type="text/scss">
-    div {
+    button {
+        @apply border-gray-500;
         :global(svg path) {
             stroke: var(--text-disabled-color);
             fill: none;
@@ -16,16 +17,25 @@
             stroke: white;
             fill: var(--ui-blue-color);
         }
+
+        &:hover,
+        &:focus {
+            :global(svg path) {
+                stroke: #9aadce;
+            }
+            :global(svg.active path) {
+                stroke: white;
+            }
+        }
     }
 </style>
 
-<div
+<button
     data-label="checkbox-input"
     class={`flex items-center cursor-pointer ${classes}`}
     on:click={() => {
         checked = !checked
     }}>
-    <Icon icon={checked ? "checkbox" : "checkbox-unchecked"} classes={`mr-3 ${checked ? 'active' : ''}`} />
+    <Icon icon={checked ? 'checkbox' : 'checkbox-unchecked'} classes={`mr-3 ${checked ? 'active' : ''}`} />
     <Text type="p" secondary={!checked}>{label}</Text>
-
-</div>
+</button>

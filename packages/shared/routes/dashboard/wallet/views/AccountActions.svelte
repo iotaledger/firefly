@@ -1,17 +1,19 @@
 <script lang="typescript">
-    import { getContext } from 'svelte'
-    import { Text, Button } from 'shared/components'
-    import { Send, Receive, ManageAccount } from '.'
+    import { Button, Text } from 'shared/components'
     import { accountRoute } from 'shared/lib/router'
     import { AccountRoutes } from 'shared/lib/typings/routes'
+    import type { WalletAccount } from 'shared/lib/wallet'
+    import { getContext } from 'svelte'
+    import type { Readable } from 'svelte/store'
+    import { ManageAccount, Receive, Send } from '.'
 
     export let locale
     export let send
     export let generateAddress
     export let internalTransfer
-    export let setAlias
+    export let isGeneratingAddress
 
-    const account = getContext('selectedAccount')
+    const account = getContext<Readable<WalletAccount>>('selectedAccount')
     function handleSendClick() {
         accountRoute.set(AccountRoutes.Send)
     }
@@ -25,12 +27,12 @@
                     {locale('general.send_funds')}
                     <Text type="p" smaller secondary>{locale('general.send_tokens_to_address')}</Text>
                 </Button>
-                <Receive {generateAddress} {locale} />
+                <Receive {isGeneratingAddress} {generateAddress} {locale} />
             </div>
         </div>
     </div>
 {:else if $accountRoute === AccountRoutes.Send}
     <Send {send} {internalTransfer} {locale} />
 {:else if $accountRoute === AccountRoutes.Manage}
-    <ManageAccount {locale} name={$account.name} {setAlias} />
+    <ManageAccount {locale} name={$account.alias} />
 {/if}

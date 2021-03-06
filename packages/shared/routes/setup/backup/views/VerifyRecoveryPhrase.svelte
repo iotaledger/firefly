@@ -1,10 +1,11 @@
-<script>
+<script lang="typescript">
     import { createEventDispatcher } from 'svelte'
     import { OnboardingLayout, RecoveryPhrase, Text, Button } from 'shared/components'
 
     export let locale
     export let mobile
     export let mnemonic
+    export let loading
 
     let recoveryPhraseInput
 
@@ -30,12 +31,12 @@
             <Text type="p" secondary classes="mb-4">{locale('views.verify_recovery_phrase.body')}</Text>
         </div>
         <div slot="leftpane__action">
-            <Button classes="w-full" disabled={!valid} onClick={() => handleContinue()}>
+            <Button classes="w-full" disabled={!valid || loading} onClick={() => handleContinue()}>
                 {locale('actions.verify_recovery_phrase')}
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex items-center justify-center p-16">
-            <RecoveryPhrase recoveryPhrase={mnemonic} bind:recoveryPhraseInput shuffle />
+            <RecoveryPhrase recoveryPhrase={mnemonic} bind:recoveryPhraseInput isVerification />
         </div>
     </OnboardingLayout>
 {/if}

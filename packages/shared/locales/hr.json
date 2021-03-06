@@ -374,7 +374,21 @@
         "view_address_history": "View address history",
         "delete_account": "Delete account",
         "max": "Max",
-        "add_node": "Add node"
+        "add_node": "Add node",
+        "hide": "Hide",
+        "hideOthers": "Hide Others",
+        "showAll": "Show All",
+        "quit": "Quit",
+        "edit": "Edit",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "selectAll": "Select All",
+        "addAccount": "Add Account",
+        "checkForUpdates": "Check for Updates",
+        "reportAnIssue": "Report an Issue"
     },
     "general": {
         "password": "Lozinka",
@@ -436,7 +450,11 @@
         "transactions": "Transactions",
         "security": "Sigurnost",
         "account_address": "Account Address",
-        "nodes": "Nodes"
+        "nodes": "Nodes",
+        "wallet": "Wallet",
+        "help": "Help",
+        "no_accounts": "You have no accounts, please create one.",
+        "add_profile": "Add Profile"
     },
     "dates": {
         "today": "Today",
@@ -450,10 +468,10 @@
         "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
         "failed": "Outgoing {{value}} from {{account}} has failed",
         "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "update_ready": "Ažuriranje je spremno",
+        "update_error": "Došlo je do pogreške tijekom ažuriranja. Molimo, pokušajte ponovo",
+        "restart_install": "Za instalaciju ponovo pokreni aplikaciju",
+        "calc_minutes_remaining": "Računam preostalo vrijeme...",
         "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     }
 }

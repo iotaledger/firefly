@@ -1,23 +1,22 @@
-<script>
-    import { shuffleArray } from 'shared/lib/helpers'
+<script lang="typescript">
     import { onMount } from 'svelte'
 
     export let recoveryPhrase = []
     export let recoveryPhraseInput = []
     let recoveryPhraseIndexes = []
 
-    export let shuffle = false
+    export let isVerification = false
     export let hide = false
     export let classes = ''
 
     let visibleRecoveryPhrase
 
     onMount(() => {
-        visibleRecoveryPhrase = shuffle ? shuffleArray(recoveryPhrase) : recoveryPhrase
+        visibleRecoveryPhrase = isVerification ? recoveryPhrase.slice().sort() : recoveryPhrase
     })
 
     const handleClick = (word, idx) => {
-        if (!shuffle || (recoveryPhraseInput.includes(word) && recoveryPhraseIndexes.includes(idx))) {
+        if (!isVerification || (recoveryPhraseInput.includes(word) && recoveryPhraseIndexes.includes(idx))) {
             return
         }
 
@@ -52,9 +51,9 @@
             <button
                 on:click|preventDefault={() => handleClick(word, i)}
                 class="px-6 py-4 flex flex-row items-center rounded-2xl bg-gray-50"
-                class:selected={shuffle && recoveryPhraseInput.indexOf(word) !== -1 && recoveryPhraseIndexes.indexOf(i) !== -1}
-                class:disabled={!shuffle}>
-                {#if !shuffle}<span class="text-gray-500 whitespace-pre">{`${i + 1}. `}</span>{/if}
+                class:selected={isVerification && recoveryPhraseInput.indexOf(word) !== -1 && recoveryPhraseIndexes.indexOf(i) !== -1}
+                class:disabled={!isVerification}>
+                {#if !isVerification}<span class="text-gray-500 whitespace-pre">{`${i + 1}. `}</span>{/if}
                 <span class={hide ? 'text-gray-500' : 'text-gray-800'}>{hide ? '********' : word}</span>
                 {#if recoveryPhraseIndexes.indexOf(i) !== -1}
                     <span class="font-bold text-16 leading-3 text-white">{recoveryPhraseIndexes.indexOf(i) + 1}</span>

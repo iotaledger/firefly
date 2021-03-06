@@ -144,7 +144,7 @@ module.exports = {
                 400: '#C4D1E8',
                 500: '#9AADCE',
                 600: '#7587AB',
-                700: '#4B5F84',
+                700: '#405985',
                 800: '#25395F',
                 900: '#192742',
             },
@@ -201,6 +201,8 @@ module.exports = {
         textColor: ['dark', 'responsive', 'hover', 'dark-hover', 'focus', 'group-hover'],
         backgroundColor: ['dark', 'responsive', 'hover', 'dark-hover', 'focus', 'group-hover'],
         backgroundOpacity: ['dark'],
+        opacity: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus', 'disabled'],
+        cursor: ['responsive', 'disabled'],
     },
     plugins: [
         // Reference: https://dev.to/smartmointy/tailwind-css-dark-mode-switch-with-javascript-2kl9

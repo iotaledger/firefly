@@ -1,15 +1,23 @@
-<script>
+<script lang="typescript">
     import { createEventDispatcher } from 'svelte'
     import { OnboardingLayout, RecoveryPhrase, Text, Button, Icon } from 'shared/components'
     export let locale
     export let mobile
     export let mnemonic
+
     const dispatch = createEventDispatcher()
+    let hide = true
+
+    $: visibilityToggleString = hide ? 'reveal_recovery_phrase' : 'hide_recovery_phrase'
+
     function handleContinueClick() {
         dispatch('next')
     }
     function handleBackClick() {
         dispatch('previous')
+    }
+    function handleMnemonicVisibilityClick() {
+        hide = !hide
     }
 </script>
 
@@ -27,8 +35,9 @@
         <div slot="leftpane__action">
             <Button classes="w-full" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex items-center justify-center p-16">
-            <RecoveryPhrase recoveryPhrase={mnemonic} />
+        <div slot="rightpane" class="w-full h-full flex flex-row flex-wrap items-center justify-center p-16">
+            <RecoveryPhrase classes="mb-8" recoveryPhrase={mnemonic} {hide} />
+            <Button onClick={handleMnemonicVisibilityClick}>{locale(`views.recovery_phrase.${visibilityToggleString}`)}</Button>
         </div>
     </OnboardingLayout>
 {/if}
