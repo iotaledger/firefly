@@ -129,4 +129,4 @@
     }
 </script>
 
-<div class="relative" style="height: calc(50vh - 130px);"><canvas bind:this={canvas} width="600" height="250" /></div>
+<div class="relative" style="height: calc(50vh - 150px);"><canvas bind:this={canvas} width="600" height="250" /></div>
