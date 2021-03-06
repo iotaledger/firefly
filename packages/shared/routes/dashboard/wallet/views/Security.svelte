@@ -63,7 +63,7 @@
         <SecurityTile
             title={locale('views.dashboard.security.version.title', { values: { version: $versionDetails.currentVersion } })}
             message={locale(`views.dashboard.security.version.${$versionDetails.upToDate ? 'up_to_date' : 'out_of_date'}`)}
-            color={$versionDetails.upToDate ? 'green' : 'red'}
+            color={$versionDetails.upToDate ? 'blue' : 'yellow'}
             icon="firefly"
             onClick={() => handleSecurityTileClick('version')} />
         <!-- Hardware Device -->
@@ -77,7 +77,7 @@
         <SecurityTile
             title={locale('views.dashboard.security.stronghold_status.title')}
             message={locale(`views.dashboard.security.stronghold_status.${strongholdStatusMessage}`)}
-            color={$activeProfile.isStrongholdLocked ? 'blue' : 'red'}
+            color={$activeProfile.isStrongholdLocked ? 'blue' : 'yellow'}
             icon="lock"
             onClick={() => (get(activeProfile).isStrongholdLocked ? handleSecurityTileClick('password') : lockStronghold())} />
         <!-- Stronghold backup -->
