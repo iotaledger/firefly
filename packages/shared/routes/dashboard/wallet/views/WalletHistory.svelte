@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { ActivityRow, Illustration, Text } from 'shared/components'
+    import { ActivityRow, Text } from 'shared/components'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import type { AccountMessage, WalletAccount } from 'shared/lib/wallet'
@@ -40,7 +40,6 @@
                 {/each}
             {:else}
                 <div class="h-full flex flex-col items-center justify-center text-center">
-                    <Illustration width="50%" illustration="no-history" />
                     <Text secondary classes="mt-6">{locale('general.no_recent_history')}</Text>
                 </div>
             {/if}
