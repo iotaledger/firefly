@@ -189,8 +189,8 @@
                 "title": "Resync accounts",
                 "description": ""
             },
-            "resetWallet": {
-                "title": "Reset wallet",
+            "deleteProfile": {
+                "title": "Delete profile",
                 "description": ""
             },
             "deepLinks": {

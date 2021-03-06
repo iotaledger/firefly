@@ -287,9 +287,9 @@
         </form>
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
-    <section id="resetWallet" class="w-3/4">
-        <Text type="h4" classes="mb-3">{locale('views.settings.resetWallet.title')}</Text>
-        <Text type="p" secondary classes="mb-5">{locale('views.settings.resetWallet.description')}</Text>
-        <Button classes="w-1/4" onClick={reset}>{locale('views.settings.resetWallet.title')}</Button>
+    <section id="deleteProfile" class="w-3/4">
+        <Text type="h4" classes="mb-3">{locale('views.settings.deleteProfile.title')}</Text>
+        <Text type="p" secondary classes="mb-5">{locale('views.settings.deleteProfile.description')}</Text>
+        <Button classes="w-1/4" onClick={reset}>{locale('views.settings.deleteProfile.title')}</Button>
     </section>
 </div>
