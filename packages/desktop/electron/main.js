@@ -103,6 +103,7 @@ function createWindow() {
         minHeight: 720,
         width: 1280,
         height: 720,
+        titleBarStyle: 'hidden',
         webPreferences: {
             ...defaultWebPreferences,
             preload: paths.preload,
@@ -302,7 +303,7 @@ export const openAboutWindow = () => {
         width: 300,
         height: 180,
         useContentSize: true,
-        titleBarStyle: 'hidden-inset',
+        titleBarStyle: 'hidden',
         show: false,
         fullscreenable: false,
         resizable: false,
