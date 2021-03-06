@@ -151,7 +151,7 @@ export const getBackupWarningColor = (lastBackupDate: Date) => {
     }
     const { lessThanAMonth, lessThanThreeMonths } = isRecentDate(lastBackupDate)
 
-    return lessThanAMonth ? 'blue' : lessThanThreeMonths ? 'yellow' : 'red'
+    return lessThanAMonth ? 'blue' : lessThanThreeMonths ? 'yellow' : 'orange'
 }
 
 /**

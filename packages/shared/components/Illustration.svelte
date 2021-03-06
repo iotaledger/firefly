@@ -20,8 +20,7 @@
         'import-from-text-desktop': 'onboarding/import-from-text-desktop.svg',
         'import-from-file-desktop': 'onboarding/import-from-file-desktop.svg',
         'import-from-file-password-desktop': 'onboarding/import-from-file-password-desktop.svg',
-        'congratulations-desktop': 'onboarding/congratulations-desktop.svg',
-        'no-history': 'wallet/no-history.svg',
+        'congratulations-desktop': 'onboarding/congratulations-desktop.svg'
     }
 </script>
 

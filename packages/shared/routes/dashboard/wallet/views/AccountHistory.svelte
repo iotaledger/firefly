@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { ActivityDetail, ActivityRow, Icon, Illustration, Text } from 'shared/components'
+    import { ActivityDetail, ActivityRow, Icon, Text } from 'shared/components'
     import { selectedMessage } from 'shared/lib/wallet'
 
     export let locale
@@ -34,7 +34,6 @@
                 {/each}
             {:else}
                 <div class="h-full flex flex-col items-center justify-center text-center">
-                    <Illustration width="50%" illustration="no-history" />
                     <Text secondary classes="mt-6">{locale('general.no_recent_history')}</Text>
                 </div>
             {/if}

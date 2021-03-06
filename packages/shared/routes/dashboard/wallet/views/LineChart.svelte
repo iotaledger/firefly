@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Chart, Dropdown, Text } from 'shared/components'
-    import type { ChartData } from 'shared/lib/chart'
     import {
+        ChartData,
         chartCurrency,
         chartTimeframe,
         DashboardChartType,
@@ -76,7 +76,7 @@
     <div class="flex justify-between items-center mb-2">
         {#if !$selectedAccount}
             <div class="flex space-x-4">
-                {#each Object.values(DashboardChartType) as chart, idx}
+                {#each Object.values(DashboardChartType) as chart}
                     <button on:click={() => selectedChart.set(chart)}>
                         <Text type="h4" disabled={chart !== $selectedChart}>{locale(`charts.${chart}`)}</Text>
                     </button>
@@ -99,6 +99,6 @@
         </div>
     </div>
     <div class="flex-auto">
-        <Chart type="line" {datasets} beginAtZero={$selectedChart === DashboardChartType.PORTFOLIO} {labels} {color} {xMaxTicks} yPrecision={7} />
+        <Chart type="line" {datasets} beginAtZero={$selectedChart !== DashboardChartType.TOKEN} {labels} {color} {xMaxTicks} yPrecision={7} />
     </div>
 </div>
