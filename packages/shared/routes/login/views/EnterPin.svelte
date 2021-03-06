@@ -113,7 +113,7 @@
     <div class="relative w-full h-full bg-white dark:bg-gray-900">
         <button
             data-label="back-button"
-            class="absolute top-0 left-0 pl-5 pt-5 disabled:opacity-50 cursor-pointer disabled:cursor-auto"
+            class="absolute top-12 left-5 disabled:opacity-50 cursor-pointer disabled:cursor-auto"
             disabled={hasReachedMaxAttempts}
             on:click={handleBackClick}>
             <div class="flex items-center">
