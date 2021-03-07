@@ -11,7 +11,8 @@ import type {
 } from './typings/bridge'
 import { ResponseTypes } from './typings/bridge'
 import type { ClientOptions } from './typings/client'
-import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, ErrorEventPayload, ErrorType, Event, TransactionEventPayload, TransferProgressEventPayload } from './typings/events'
+import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, ErrorEventPayload, Event, TransactionEventPayload, TransferProgressEventPayload } from './typings/events'
+import { ErrorType } from './typings/events'
 import type { Message } from './typings/message'
 import type { StrongholdStatus } from './typings/wallet'
 
@@ -144,12 +145,24 @@ Wallet.onMessage((message: MessageResponse) => {
 
         const { onSuccess, onError } = callbacksStore[id]
 
-        message.type === ResponseTypes.Error || message.type === ResponseTypes.Panic ? onError(
-            handleError(
-                message.payload.type,
-                message.payload.error
+        if (message.type === ResponseTypes.Error) {
+            onError(
+                handleError(
+                    message.payload.type,
+                    message.payload.error
+                    )
             )
-        ) : onSuccess(message)
+        } else if (message.type === ResponseTypes.Panic) {
+            onError(
+                    handleError(
+                    ErrorType.Panic,
+                    message.payload
+                )
+            )
+        }
+        else {
+            onSuccess(message)
+        }
     }
 
     // Delete callback id from callback store
