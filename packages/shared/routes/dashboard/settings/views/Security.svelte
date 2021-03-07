@@ -57,11 +57,14 @@
                     // Destroy wallet.rs actor for this profile
                     destroyActor($activeProfile.id)
 
-                    // Remove profile from (local) storage
-                    removeProfile($activeProfile.id)
-
                     resetWallet()
                     resetRouter()
+
+                    // Remove profile from (local) storage
+                    // Note: This should be the last step in the reset process. 
+                    // It should be done after the router is set back to default. 
+                    // Otherwise, parts of the application referencing $activeProfile will create an exception. 
+                    removeProfile($activeProfile.id)
                 },
                 onError(err) {
                     showAppNotification({
@@ -102,10 +105,12 @@
                     })
                 }
             })
-            .catch((err) => showAppNotification({
-                type: 'error',
-                message: locale(err.error),
-            }))
+            .catch((err) =>
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
+                })
+            )
     }
 
     function changePassword() {
@@ -204,7 +209,7 @@
             onSelect={(option) => {
                 updateProfile('settings.lockScreenTimeout', option.value)
             }}
-            value={assignTimeoutOptionLabel($activeProfile?.settings.lockScreenTimeout)}
+            value={assignTimeoutOptionLabel($activeProfile.settings.lockScreenTimeout)}
             items={lockScreenTimeoutOptions} />
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
@@ -218,7 +223,7 @@
                 bind:value={currentPassword}
                 showRevealToggle
                 {locale}
-                placeholder={locale('general.currentPassword')} 
+                placeholder={locale('general.currentPassword')}
                 autofocus />
             <Password
                 error={newPasswordError}
