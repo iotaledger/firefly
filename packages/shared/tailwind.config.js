@@ -10,7 +10,6 @@ module.exports = {
         // purgeLayersByDefault: true,
     },
     purge: {
-        enabled: true,
         content: ['../shared/**/*.svelte', '../shared/**/*.scss'],
         options: {
             // Needed to prevent purgecss from removing classes declared with string concatenation
@@ -213,7 +212,7 @@ module.exports = {
     },
     plugins: [
         // Reference: https://dev.to/smartmointy/tailwind-css-dark-mode-switch-with-javascript-2kl9
-        plugin(function ({ addVariant, prefix }) {
+        plugin(function({ addVariant, prefix }) {
             addVariant('dark', ({ modifySelectors, separator }) => {
                 modifySelectors(({ selector }) => {
                     return selectorParser((selectors) => {
@@ -225,7 +224,7 @@ module.exports = {
                 })
             })
         }),
-        plugin(function ({ addVariant, e }) {
+        plugin(function({ addVariant, e }) {
             addVariant('dark-hover', ({ modifySelectors, separator }) => {
                 modifySelectors(({ className }) => {
                     return `.scheme-dark .${e(`dark\:hover${separator}${className}`)}:hover`
