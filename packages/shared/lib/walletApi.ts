@@ -138,7 +138,10 @@ Wallet.onMessage((message: MessageResponse) => {
                 )
             )
         } else {
-            /** TODO: In case of unknown ids, add validation failure to error log */
+            handleError(
+                payload.type,
+                payload.error
+            )
         }
     } else {
         const { id } = message
