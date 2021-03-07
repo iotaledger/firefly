@@ -123,6 +123,7 @@ const rendererPlugins = [
     }),
     new DefinePlugin({
         devMode: JSON.stringify(mode === 'development'),
+        'process.platform': JSON.stringify(process.platform),
     }),
 ]
 
