@@ -150,7 +150,7 @@ Wallet.onMessage((message: MessageResponse) => {
                 handleError(
                     message.payload.type,
                     message.payload.error
-                    )
+                )
             )
         } else if (message.type === ResponseTypes.Panic) {
             onError(
