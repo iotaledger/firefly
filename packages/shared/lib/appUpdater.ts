@@ -169,6 +169,11 @@ export function updateInstall(): void {
 }
 
 export async function refreshVersionDetails(): Promise<void> {
-    const verDetails = await Electron.getVersionDetails();
-    versionDetails.set(verDetails)
+    //@ts-ignore This value is replaced by Webpack DefinePlugin
+    if (process.platform !== 'linux') {
+        const verDetails = await Electron.getVersionDetails()
+        versionDetails.set(verDetails)
+    } else {
+        // TODO: Use Snapcraft API to get version details
+    }
 }
