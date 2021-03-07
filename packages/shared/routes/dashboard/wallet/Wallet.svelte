@@ -463,7 +463,7 @@
         generateAddress={onGenerateAddress}
         {locale} />
 {:else}
-    <div class="w-full h-full flex flex-col p-10 flex-1">
+    <div class="w-full h-full flex flex-col p-10 flex-1 bg-gray-50 dark:bg-gray-900">
         <div class="w-full h-full flex flex-row space-x-4 flex-auto">
             <DashboardPane classes="w-1/3 h-full">
                 <!-- Total Balance, Accounts list & Send/Receive -->

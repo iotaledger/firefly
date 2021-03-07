@@ -71,7 +71,7 @@
     <Text type="p" classes="mb-2" smaller>{label}</Text>
 {/if}
 <dropdown-input
-    class="relative flex items-center w-full 
+    class="relative flex items-center w-full whitespace-nowrap
                 bg-white border border-solid border-gray-300 hover:border-gray-500 cursor-pointer"
     on:click={(e) => {
         e.stopPropagation()

@@ -36,10 +36,10 @@
             {/if}
         </div>
         <Text type="h4" classes="mt-5">{name}</Text>
+        {#if isDeveloper}
+            <div class={'bg-gray-500 rounded-full px-2 mt-4'}>
+                <Text type="p" classes="text-white">{locale('general.dev').toUpperCase()}</Text>
+            </div>
+        {/if}
     </div>
-    {#if isDeveloper}
-        <div class={'bg-gray-500 rounded-full px-2 absolute bottom-64'}>
-            <Text type="p" classes="text-white">{locale('general.dev').toUpperCase()}</Text>
-        </div>
-    {/if}
 </div>

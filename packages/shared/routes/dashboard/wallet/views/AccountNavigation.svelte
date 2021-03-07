@@ -36,7 +36,7 @@
         {#each accounts as acc}
             <button
                 on:click={() => handleAccountClick(acc.id)}
-                class="w-10 h-10 rounded-xl p-2 text-14 leading-140 font-bold text-center
+                class="w-10 h-10 rounded-xl p-2 text-14 leading-100 font-bold text-center
                 {activeAccount.id === acc.id ? `bg-${acc.color}-500 text-white` : 'bg-gray-200 text-gray-500'} 
                 hover:bg-{acc.color}-500 hover:text-white">{getInitials(acc.alias, 2)}
             </button>
