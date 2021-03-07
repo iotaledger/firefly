@@ -13,6 +13,7 @@ module.exports = {
         enabled: true,
         content: ['../shared/**/*.svelte', '../shared/**/*.scss'],
         options: {
+            // Needed to prevent purgecss from removing classes declared with string concatenation
             safelist: [
                 // `from-${color}` (gradients)
                 /^from-/,
@@ -20,9 +21,15 @@ module.exports = {
                 /^to-/,
                 // `bg-${color}`
                 /^bg-/,
+                /^hover:bg-/,
+                /^dark:bg-/,
                 // `text-${color}`
                 /^text-/,
+                /^hover:text-/,
+                /^dark:text-/,
                 /^grid-cols-/,
+                // `p-${size}`
+                /^p-/,
             ],
         },
     },
