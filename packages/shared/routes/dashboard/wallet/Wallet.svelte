@@ -128,16 +128,15 @@
     function getAccounts() {
         api.getAccounts({
             onSuccess(accountsResponse) {
+                syncAccounts()
+
                 const _totalBalance = {
                     balance: 0,
                     incoming: 0,
                     outgoing: 0,
                 }
 
-                if (accountsResponse.payload.length === 0) {
-                    accountsLoaded.set(true)
-                } else {
-                    for (const [idx, storedAccount] of accountsResponse.payload.entries()) {
+                for (const [idx, storedAccount] of accountsResponse.payload.entries()) {
                         getAccountMeta(storedAccount.id, (err, meta) => {
                             if (!err) {
                                 _totalBalance.balance += meta.balance
@@ -149,14 +148,12 @@
 
                                 if (idx === accountsResponse.payload.length - 1) {
                                     updateBalanceOverview(_totalBalance.balance, _totalBalance.incoming, _totalBalance.outgoing)
-                                    accountsLoaded.set(true)
                                 }
                             } else {
                                 console.error(err)
                             }
                         })
                     }
-                }
             },
             onError(err) {
                 showAppNotification({
@@ -216,12 +213,14 @@
         })
     }
 
-    function syncAccounts(payload) {
+    function syncAccounts() {
         api.syncAccounts({
             onSuccess(syncAccountsResponse) {
                 const syncedAccounts = syncAccountsResponse.payload
 
                 updateAccounts(syncedAccounts)
+
+                accountsLoaded.set(true)
             },
             onError(err) {
                 showAppNotification({
