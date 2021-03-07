@@ -187,9 +187,9 @@ dependencies = [
 
 [[package]]
 name = "async-trait"
-version = "0.1.45"
+version = "0.1.47"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d3340571769500ddef1e94b45055fabed6b08a881269b7570c830b8f32ef84ef"
+checksum = "7e098e9c493fdf92832223594d9a164f96bdf17ba81a42aff86f85c76768726a"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -270,7 +270,7 @@ dependencies = [
  "chrono",
  "fern",
  "log",
- "serde 1.0.123",
+ "serde 1.0.124",
  "thiserror",
 ]
 
@@ -283,7 +283,7 @@ dependencies = [
  "chrono",
  "fern",
  "log",
- "serde 1.0.123",
+ "serde 1.0.124",
  "thiserror",
 ]
 
@@ -331,7 +331,7 @@ dependencies = [
  "hex",
  "iota-crypto 0.2.0 (git+https://github.com/iotaledger/crypto.rs?rev=09ff1a94d6a87838589ccf1b874cfa3283a00f26)",
  "log",
- "serde 1.0.123",
+ "serde 1.0.124",
  "thiserror",
  "tokio",
  "tokio-stream",
@@ -357,7 +357,7 @@ dependencies = [
  "hex",
  "iota-crypto 0.3.0",
  "log",
- "serde 1.0.123",
+ "serde 1.0.124",
  "thiserror",
  "tokio",
  "tokio-stream",
@@ -375,7 +375,7 @@ dependencies = [
  "hex",
  "iota-crypto 0.2.0 (git+https://github.com/iotaledger/crypto.rs?rev=09ff1a94d6a87838589ccf1b874cfa3283a00f26)",
  "ref-cast",
- "serde 1.0.123",
+ "serde 1.0.124",
  "thiserror",
 ]
 
@@ -391,7 +391,7 @@ dependencies = [
  "hex",
  "iota-crypto 0.3.0",
  "ref-cast",
- "serde 1.0.123",
+ "serde 1.0.124",
  "thiserror",
 ]
 
@@ -407,7 +407,7 @@ dependencies = [
  "libp2p",
  "log",
  "rand 0.8.3",
- "serde 1.0.123",
+ "serde 1.0.124",
  "thiserror",
  "tokio",
  "tokio-stream",
@@ -426,7 +426,7 @@ dependencies = [
  "libp2p",
  "log",
  "rand 0.8.3",
- "serde 1.0.123",
+ "serde 1.0.124",
  "thiserror",
  "tokio",
  "tokio-stream",
@@ -483,7 +483,7 @@ dependencies = [
  "pin-project 1.0.5",
  "rand 0.8.3",
  "ref-cast",
- "serde 1.0.123",
+ "serde 1.0.124",
  "spin 0.7.1",
  "thiserror",
  "tokio",
@@ -519,7 +519,7 @@ dependencies = [
  "pin-project 1.0.5",
  "rand 0.8.3",
  "ref-cast",
- "serde 1.0.123",
+ "serde 1.0.124",
  "spin 0.7.1",
  "thiserror",
  "tokio",
@@ -549,7 +549,7 @@ dependencies = [
  "iota-crypto 0.2.0 (git+https://github.com/iotaledger/crypto.rs?rev=09ff1a94d6a87838589ccf1b874cfa3283a00f26)",
  "log",
  "num_cpus",
- "serde 1.0.123",
+ "serde 1.0.124",
  "serde_json",
  "tokio",
  "warp",
@@ -577,7 +577,7 @@ dependencies = [
  "iota-crypto 0.3.0",
  "log",
  "num_cpus",
- "serde 1.0.123",
+ "serde 1.0.124",
  "serde_json",
  "tokio",
  "warp",
@@ -610,7 +610,7 @@ dependencies = [
  "futures 0.3.13",
  "log",
  "reqwest",
- "serde 1.0.123",
+ "serde 1.0.124",
  "thiserror",
  "tokio",
 ]
@@ -630,7 +630,7 @@ dependencies = [
  "futures 0.3.13",
  "log",
  "reqwest",
- "serde 1.0.123",
+ "serde 1.0.124",
  "thiserror",
  "tokio",
 ]
@@ -642,7 +642,7 @@ source = "git+https://github.com/iotaledger/bee.git?branch=dev#c42171ff33c80cc2e
 dependencies = [
  "async-trait",
  "futures 0.3.13",
- "serde 1.0.123",
+ "serde 1.0.124",
 ]
 
 [[package]]
@@ -664,7 +664,7 @@ dependencies = [
  "lru",
  "rand 0.8.3",
  "ref-cast",
- "serde 1.0.123",
+ "serde 1.0.124",
  "thiserror",
  "tokio",
 ]
@@ -688,7 +688,7 @@ dependencies = [
  "lru",
  "rand 0.8.3",
  "ref-cast",
- "serde 1.0.123",
+ "serde 1.0.124",
  "thiserror",
  "tokio",
 ]
@@ -718,7 +718,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d175dfa69e619905c4c3cdb7c3c203fa3bdd5d51184e3afdb2742c0280493772"
 dependencies = [
  "byteorder",
- "serde 1.0.123",
+ "serde 1.0.124",
 ]
 
 [[package]]
@@ -929,7 +929,7 @@ dependencies = [
  "libc",
  "num-integer",
  "num-traits 0.2.14",
- "serde 1.0.123",
+ "serde 1.0.124",
  "time",
  "winapi",
 ]
@@ -1013,7 +1013,7 @@ dependencies = [
  "lazy_static",
  "nom",
  "rust-ini",
- "serde 1.0.123",
+ "serde 1.0.124",
  "serde-hjson",
  "serde_json",
  "toml",
@@ -1229,7 +1229,7 @@ dependencies = [
  "curve25519-dalek",
  "ed25519",
  "rand 0.7.3",
- "serde 1.0.123",
+ "serde 1.0.124",
  "sha2 0.9.3",
  "zeroize",
 ]
@@ -1909,9 +1909,9 @@ dependencies = [
 
 [[package]]
 name = "indexmap"
-version = "1.6.1"
+version = "1.6.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4fb1fa934250de4de8aef298d81c729a7d33d8c239daa3a7575e6b92bfc7313b"
+checksum = "824845a0bf897a9042383849b02c1bc219c2383772efcd5c6f9766fa4b81aef3"
 dependencies = [
  "autocfg",
  "hashbrown",
@@ -1954,7 +1954,7 @@ dependencies = [
  "once_cell",
  "paho-mqtt",
  "regex",
- "serde 1.0.123",
+ "serde 1.0.124",
  "serde_json",
  "thiserror",
  "tokio",
@@ -1977,7 +1977,7 @@ dependencies = [
  "hex",
  "iota-crypto 0.2.0 (git+https://github.com/iotaledger/crypto.rs.git?rev=527392202e78fa35620a9b30061d5e231a046ea2)",
  "num_cpus",
- "serde 1.0.123",
+ "serde 1.0.124",
  "serde_json",
  "thiserror",
  "tokio",
@@ -2063,7 +2063,7 @@ dependencies = [
  "futures 0.3.13",
  "iota-crypto 0.2.0 (git+https://github.com/iotaledger/crypto.rs?rev=09ff1a94d6a87838589ccf1b874cfa3283a00f26)",
  "riker",
- "serde 1.0.123",
+ "serde 1.0.124",
  "stronghold-engine",
  "stronghold-runtime",
  "stronghold-utils",
@@ -2075,7 +2075,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#9eedfd54d8001a4a164f46bb3918448d1ad0b31c"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#98c53ddae130a1ee80a8192526ad1da43594e495"
 dependencies = [
  "async-trait",
  "backtrace",
@@ -2093,7 +2093,7 @@ dependencies = [
  "rand 0.7.3",
  "riker",
  "rusqlite",
- "serde 1.0.123",
+ "serde 1.0.124",
  "serde_json",
  "serde_repr",
  "slip10",
@@ -2422,7 +2422,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "51b9bbe6c47d51fc3e1a9b945965946b4c44142ab8792c50835a980d362c2710"
 dependencies = [
  "cfg-if 1.0.0",
- "serde 1.0.123",
+ "serde 1.0.124",
 ]
 
 [[package]]
@@ -2863,7 +2863,7 @@ dependencies = [
  "data-encoding",
  "multihash",
  "percent-encoding",
- "serde 1.0.123",
+ "serde 1.0.124",
  "static_assertions",
  "unsigned-varint 0.7.0",
  "url",
@@ -3348,7 +3348,7 @@ dependencies = [
  "native-tls",
  "percent-encoding",
  "pin-project-lite",
- "serde 1.0.123",
+ "serde 1.0.124",
  "serde_urlencoded",
  "tokio",
  "tokio-native-tls",
@@ -3560,9 +3560,9 @@ checksum = "9dad3f759919b92c3068c696c15c3d17238234498bbdcc80f2c469606f948ac8"
 
 [[package]]
 name = "serde"
-version = "1.0.123"
+version = "1.0.124"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "92d5161132722baa40d802cc70b15262b98258453e85e5d1d365c757c73869ae"
+checksum = "bd761ff957cb2a45fbb9ab3da6512de9de55872866160b23c25f1a841e99d29f"
 dependencies = [
  "serde_derive",
 ]
@@ -3582,9 +3582,9 @@ dependencies = [
 
 [[package]]
 name = "serde_derive"
-version = "1.0.123"
+version = "1.0.124"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9391c295d64fc0abb2c556bad848f33cb8296276b1ad2677d1ae1ace4f258f31"
+checksum = "1800f7693e94e186f5e25a28291ae1570da908aff7d97a095dec1e56ff99069b"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -3599,7 +3599,7 @@ checksum = "799e97dc9fdae36a5c8b8f2cae9ce2ee9fdce2058c57a93e6099d919fd982f79"
 dependencies = [
  "itoa",
  "ryu",
- "serde 1.0.123",
+ "serde 1.0.124",
 ]
 
 [[package]]
@@ -3631,7 +3631,7 @@ dependencies = [
  "form_urlencoded",
  "itoa",
  "ryu",
- "serde 1.0.123",
+ "serde 1.0.124",
 ]
 
 [[package]]
@@ -3818,7 +3818,7 @@ source = "git+https://github.com/iotaledger/stronghold.rs?rev=0299572d1591f81ce2
 dependencies = [
  "once_cell",
  "paste",
- "serde 1.0.123",
+ "serde 1.0.124",
 ]
 
 [[package]]
@@ -3887,9 +3887,9 @@ checksum = "1e81da0851ada1f3e9d4312c704aa4f8806f0f9d69faaf8df2f3464b4a9437c2"
 
 [[package]]
 name = "syn"
-version = "1.0.61"
+version = "1.0.62"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ed22b90a0e734a23a7610f4283ac9e5acfb96cbb30dfefa540d66f866f1c09c5"
+checksum = "123a78a3596b24fee53a6464ce52d8ecbf62241e6294c7e7fe12086cd161f512"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -4088,7 +4088,7 @@ version = "0.5.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a31142970826733df8241ef35dc040ef98c679ab14d7c3e54d827099b3acecaa"
 dependencies = [
- "serde 1.0.123",
+ "serde 1.0.124",
 ]
 
 [[package]]
@@ -4282,7 +4282,7 @@ dependencies = [
  "log",
  "once_cell",
  "rustls",
- "serde 1.0.123",
+ "serde 1.0.124",
  "serde_json",
  "url",
  "webpki",
@@ -4299,7 +4299,7 @@ dependencies = [
  "idna",
  "matches",
  "percent-encoding",
- "serde 1.0.123",
+ "serde 1.0.124",
 ]
 
 [[package]]
@@ -4323,7 +4323,7 @@ version = "0.2.0"
 source = "git+https://github.com/iotaledger/stronghold.rs?rev=0299572d1591f81ce2b02973927bdcabfbece085#0299572d1591f81ce2b02973927bdcabfbece085"
 dependencies = [
  "anyhow",
- "serde 1.0.123",
+ "serde 1.0.124",
  "thiserror",
 ]
 
@@ -4372,7 +4372,7 @@ dependencies = [
  "log",
  "once_cell",
  "riker",
- "serde 1.0.123",
+ "serde 1.0.124",
  "serde_json",
  "tokio",
 ]
@@ -4405,7 +4405,7 @@ dependencies = [
  "percent-encoding",
  "pin-project 1.0.5",
  "scoped-tls",
- "serde 1.0.123",
+ "serde 1.0.124",
  "serde_json",
  "serde_urlencoded",
  "tokio",
@@ -4436,7 +4436,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7ee1280240b7c461d6a0071313e08f34a60b0365f14260362e5a2b17d1d31aa7"
 dependencies = [
  "cfg-if 1.0.0",
- "serde 1.0.123",
+ "serde 1.0.124",
  "serde_json",
  "wasm-bindgen-macro",
 ]
