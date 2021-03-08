@@ -189,8 +189,8 @@
                 "title": "Resync accounts",
                 "description": ""
             },
-            "resetWallet": {
-                "title": "Reset wallet",
+            "deleteProfile": {
+                "title": "Delete profile",
                 "description": ""
             },
             "deepLinks": {
@@ -319,11 +319,13 @@
         },
         "node": {
             "title_add": "Add a node",
+            "title_remove": "Remove a node",
             "title_details": "Node details",
             "node_address": "Node address",
             "optional_username": "Username (optional)",
             "optional_password": "Password (optional)",
-            "set_as_primary_node": "Set as primary node"
+            "set_as_primary_node": "Set as primary node",
+            "remove_confirmation": "Are you sure you want to remove node?"
         },
         "errorLog": {
             "title": "Error Log",
@@ -389,6 +391,7 @@
         "delete_account": "Delete account",
         "max": "Max",
         "add_node": "Add node",
+        "remove_node": "Remove node",
         "hide": "Hide",
         "hideOthers": "Hide Others",
         "showAll": "Show All",
@@ -404,7 +407,9 @@
         "checkForUpdates": "Check for Updates",
         "reportAnIssue": "Report an Issue",
         "clear": "Clear",
-        "hide_details": "Hide Details"
+        "hide_details": "Hide Details",
+        "yes": "Yes",
+        "no": "No"
     },
     "general": {
         "password": "Password",
@@ -484,7 +489,9 @@
         "transferSigning": "Signing the transaction",
         "transferPow": "Performing PoW",
         "transferBroadcasting": "Broadcasting transaction",
-        "transferComplete": "Transfer complete"
+        "transferComplete": "Transfer complete",
+        "creatingAccount": "Creating account, please wait...",
+        "updatingAccount": "Updating account, please wait..."
     },
     "dates": {
         "today": "Today",

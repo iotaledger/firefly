@@ -2,7 +2,7 @@
     import { Button, Checkbox, Illustration, Input, OnboardingLayout, Text } from 'shared/components'
     import { developerMode } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
-    import { createProfile, disposeNewProfile, newProfile } from 'shared/lib/profile'
+    import { createProfile, disposeNewProfile, newProfile, profiles } from 'shared/lib/profile'
     import { SetupType } from 'shared/lib/typings/routes'
     import { getStoragePath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
@@ -22,25 +22,26 @@
 
     function handleContinueClick(setupType) {
         let profile
+        error = ''
 
         if (profileName.length > MAX_PROFILE_NAME_LENGTH) {
-            error = locale('error.profile.length', {
+            return (error = locale('error.profile.length', {
                 values: {
                     length: MAX_PROFILE_NAME_LENGTH,
                 },
-            })
-        } else {
-            try {
-                profile = createProfile(profileName, isDeveloperProfile)
-
-                return Electron.getUserDataPath().then((path) => {
-                    initialise(profile.id, getStoragePath(path, profile.name))
-                    dispatch('next', { setupType })
-                })
-            } catch (error) {
-                console.error(error)
-            }
+            }))
         }
+
+        if (get(profiles).some((profile) => profile.name === profileName)) {
+            return (error = locale('error.profile.duplicate'))
+        }
+
+        profile = createProfile(profileName, isDeveloperProfile)
+
+        return Electron.getUserDataPath().then((path) => {
+            initialise(profile.id, getStoragePath(path, profile.name))
+            dispatch('next', { setupType })
+        })
     }
 
     function handleBackClick() {

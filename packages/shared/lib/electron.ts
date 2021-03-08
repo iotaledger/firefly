@@ -36,7 +36,7 @@ interface ElectronEventMap {
     "menu-navigate-settings": void;
     "menu-check-for-update": void;
     "menu-error-log": void;
-    "deepLink-params": string;
+    "deep-link-params": string;
     "version-details": VersionDetails;
     "version-progress": NativeProgress;
     "version-complete": void;

@@ -9,6 +9,7 @@
     import DeleteAccount from './DeleteAccount.svelte'
     import AddressHistory from './AddressHistory.svelte'
     import AddNode from './AddNode.svelte'
+    import RemoveNode from './RemoveNode.svelte'
     import Busy from './Busy.svelte'
     import ErrorLog from './ErrorLog.svelte'
 
@@ -27,12 +28,16 @@
         deleteAccount: DeleteAccount,
         addressHistory: AddressHistory,
         addNode: AddNode,
+        removeNode: RemoveNode,
         busy: Busy,
         errorLog: ErrorLog
     }
 
     const onkey = (e) => {
         if (!hideClose && e.key === 'Escape') {
+            if ('function' === typeof props?.onCancelled) {
+                props?.onCancelled()
+            }
             closePopup()
         }
     }
