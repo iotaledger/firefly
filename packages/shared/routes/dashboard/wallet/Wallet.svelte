@@ -24,6 +24,7 @@
         initialiseListeners,
         isTransferring,
         selectedAccountId,
+        transferState,
         updateAccounts,
         updateBalanceOverview,
         wallet,
