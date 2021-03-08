@@ -36,16 +36,12 @@
             return (error = locale('error.profile.duplicate'))
         }
 
-        try {
-            profile = createProfile(profileName, isDeveloperProfile)
+        profile = createProfile(profileName, isDeveloperProfile)
 
-            return Electron.getUserDataPath().then((path) => {
-                initialise(profile.id, getStoragePath(path, profile.name))
-                dispatch('next', { setupType })
-            })
-        } catch (err) {
-            error = err.message
-        }
+        return Electron.getUserDataPath().then((path) => {
+            initialise(profile.id, getStoragePath(path, profile.name))
+            dispatch('next', { setupType })
+        })
     }
 
     function handleBackClick() {
