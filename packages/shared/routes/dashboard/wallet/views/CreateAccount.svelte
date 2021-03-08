@@ -11,27 +11,29 @@
 
     const { accounts } = $wallet
 
-    let accountName
+    let accountAlias
 
     const MAX_ACCOUNT_NAME_LENGTH = 20
 
     const handleCreateClick = () => {
-        error = ''
-        if (accountName.length > MAX_ACCOUNT_NAME_LENGTH) {
-            return (error = locale('error.account.length', {
-                values: {
-                    length: MAX_ACCOUNT_NAME_LENGTH,
-                },
-            }))
+        if (accountAlias) {
+            error = ''
+            if (accountAlias.length > MAX_ACCOUNT_NAME_LENGTH) {
+                return (error = locale('error.account.length', {
+                    values: {
+                        length: MAX_ACCOUNT_NAME_LENGTH,
+                    },
+                }))
+            }
+            if ($accounts.find((a) => a.alias === accountAlias)) {
+                return (error = locale('error.account.duplicate'))
+            }
+            isBusy = true
+            onCreate(accountAlias, (err) => {
+                error = err || ''
+                isBusy = false
+            })
         }
-        if ($accounts.find(a => a.alias === accountName)) {
-            return (error = locale('error.account.duplicate'))
-        }
-        isBusy = true
-        onCreate(accountName, (err) => {
-            error = err || ''
-            isBusy = false
-        })
     }
     const handleCancelClick = () => {
         error = ''
@@ -47,7 +49,7 @@
         <div class="w-full h-full flex flex-col justify-between">
             <Input
                 {error}
-                bind:value={accountName}
+                bind:value={accountAlias}
                 placeholder={locale('general.account_name')}
                 autofocus
                 submitHandler={handleCreateClick}
@@ -61,7 +63,7 @@
     {#if !isBusy}
         <div class="flex flex-row justify-between px-2">
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
-            <Button disabled={!accountName || isBusy} classes="-mx-2 w-1/2" onClick={() => handleCreateClick()}>
+            <Button disabled={!accountAlias || isBusy} classes="-mx-2 w-1/2" onClick={() => handleCreateClick()}>
                 {locale('actions.create')}
             </Button>
         </div>
