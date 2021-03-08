@@ -62,7 +62,6 @@
     setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
-    let createAccountError = ''
 
     function getAccountMeta(
         accountId: string,
@@ -232,7 +231,7 @@
         })
     }
 
-    function onCreateAccount(alias) {
+    function onCreateAccount(alias, completeCallback) {
         const _create = () =>
             api.createAccount(
                 {
@@ -254,18 +253,19 @@
                                         const account = prepareAccountInfo(createAccountResponse.payload, meta)
                                         accounts.update((accounts) => [...accounts, account])
                                         walletRoute.set(WalletRoutes.Init)
+                                        completeCallback()
                                     } else {
-                                        console.error(err)
+                                        completeCallback(locale(err.error))
                                     }
                                 })
                             },
                             onError(err) {
-                                console.error(err)
+                                completeCallback(locale(err.error))
                             },
                         })
                     },
                     onError(err) {
-                        createAccountError = locale(err.error)
+                        completeCallback(locale(err.error))
                     },
                 }
             )
@@ -273,16 +273,13 @@
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
                 if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({ type: 'password', props: { onSuccess: _create } })
+                    openPopup({ type: 'password', props: { onSuccess: _create, onCancelled: completeCallback } })
                 } else {
                     _create()
                 }
             },
             onError(err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error),
-                })
+                completeCallback(locale(err.error))
             },
         })
     }
@@ -459,7 +456,7 @@
                 <!-- Total Balance, Accounts list & Send/Receive -->
                 <div class="flex flex-auto flex-col flex-shrink-0 h-full">
                     {#if $walletRoute === WalletRoutes.CreateAccount}
-                        <CreateAccount error={createAccountError} onCreate={onCreateAccount} {locale} />
+                        <CreateAccount onCreate={onCreateAccount} {locale} />
                     {:else}
                         <WalletBalance {locale} />
                         <DashboardPane classes="-mt-5 h-full">

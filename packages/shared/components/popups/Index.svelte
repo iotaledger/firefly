@@ -35,6 +35,9 @@
 
     const onkey = (e) => {
         if (!hideClose && e.key === 'Escape') {
+            if ('function' === typeof props?.onCancelled) {
+                props?.onCancelled()
+            }
             closePopup()
         }
     }
