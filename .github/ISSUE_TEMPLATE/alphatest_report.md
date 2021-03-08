@@ -43,4 +43,4 @@ Describe what actually happens.
 
 ## Errors
 
-Paste any errors that you see in the Error Log in the Firefly menu, including logs, errors, or screenshots.
+Paste any errors that you see from the Error Log in the Firefly menu or share screenshots of the issue.
