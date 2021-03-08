@@ -11,6 +11,7 @@ let activeProfileId = null
 const Wallet = binding
 Wallet.api = proxyApi(() => activeProfileId)
 
+// TODO: enable this only for dev after alpha
 Wallet.initLogger({
     color_enabled: true,
     outputs: [{
