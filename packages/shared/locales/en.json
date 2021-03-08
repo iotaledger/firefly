@@ -491,7 +491,9 @@
         "transferBroadcasting": "Broadcasting transaction",
         "transferComplete": "Transfer complete",
         "creatingAccount": "Creating account, please wait...",
-        "updatingAccount": "Updating account, please wait..."
+        "updatingAccount": "Updating account, please wait...",
+        "accountSyncing": "Account is syncing",
+        "accountSyncComplete": "Account sync complete"
     },
     "dates": {
         "today": "Today",
