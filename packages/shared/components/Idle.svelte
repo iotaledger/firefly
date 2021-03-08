@@ -9,7 +9,7 @@
 
     function handleEvent() {
         clearTimeout(timeout)
-        
+
         timeout = setTimeout(lock, $activeProfile.settings.lockScreenTimeout * 60 * 1000)
     }
 
