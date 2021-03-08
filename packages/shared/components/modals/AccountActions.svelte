@@ -89,9 +89,11 @@
             <Text smaller classes={`${$isSyncing ? "" : "group-hover:text-blue-500"}`}>{locale(`actions.sync_account`)}</Text>
         </button>
         <!-- Address history -->
+       <!-- TODO: Implement and enable -->
         <button
+            disabled
             on:click={() => handlViewAddressHistoryClick()}
-            class="group flex flex-row justify-start items-center hover:bg-blue-50 py-3 px-3 w-full">
+            class="group flex flex-row justify-start items-center hover:bg-blue-50 py-3 px-3 w-full opacity-50 pointer-events-none">
             <Icon icon="history" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
             <Text smaller classes="group-hover:text-blue-500">{locale(`actions.view_address_history`)}</Text>
         </button>
