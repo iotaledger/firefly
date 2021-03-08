@@ -15,6 +15,7 @@
     export let error = null
     export let numeric = false
     export let autofocus = false
+    export let submitHandler = undefined
 
     let revealed = false
     let type = 'password'
@@ -62,6 +63,7 @@
             {numeric}
             {autofocus}
             placeholder={placeholder || locale('general.password')} 
+            {submitHandler}
         />
         {#if showRevealToggle === true}
             <button type="button" on:click={() => revealToggle()} tabindex="-1" class="absolute top-3">
