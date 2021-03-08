@@ -100,11 +100,7 @@ export const saveProfile = (profile: Profile): Profile => {
  *
  * @returns {Profile}
  */
-export const createProfile = (profileName, isDeveloperProfile): Profile => {
-    if (get(profiles).some((profile) => profile.name === profileName)) {
-        throw new Error(`Profile with name ${profileName} already exists.`)
-    }
-
+ export const createProfile = (profileName, isDeveloperProfile): Profile => {
     const profile = {
         id: generateRandomId(),
         name: profileName,
