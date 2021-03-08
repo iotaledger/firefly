@@ -2,18 +2,16 @@
     import { Button, Input, Text } from 'shared/components'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
-    import { wallet } from 'shared/lib/wallet'
+    import { wallet, MAX_ACCOUNT_NAME_LENGTH } from 'shared/lib/wallet'
 
     export let locale
     export let onCreate
     export let error = ''
-    export let isBusy = false
 
     const { accounts } = $wallet
 
     let accountAlias
-
-    const MAX_ACCOUNT_NAME_LENGTH = 20
+    let isBusy = false
 
     const handleCreateClick = () => {
         if (accountAlias) {
