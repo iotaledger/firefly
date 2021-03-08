@@ -46,6 +46,7 @@
             clearInterval(timerId)
             attempts = 0
             timeRemainingBeforeNextAttempt = WAITING_TIME_AFTER_MAX_INCORRECT_ATTEMPTS
+            pinRef.resetAndFocus()
         } else {
             buttonText = setButtonText(timeRemainingBeforeNextAttempt)
             timeRemainingBeforeNextAttempt--
@@ -71,7 +72,7 @@
                                     isBusy = false
                                     showAppNotification({
                                         type: 'error',
-                                        message: locale(err.error)
+                                        message: locale(err.error),
                                     })
                                 },
                             })
@@ -82,11 +83,9 @@
                         if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
                             clearInterval(timerId)
                             timerId = setInterval(countdown, 1000)
+                        } else {
+                            pinRef.resetAndFocus()
                         }
-                        // This is necessary as the isBusy state change
-                        // is required to be processed to enable the
-                        // component before we can focus it
-                        setTimeout(() => pinRef.focus(), 100)
                     }
                 })
                 .catch((error) => {
@@ -129,7 +128,8 @@
                     bind:value={pinCode}
                     classes="mt-10"
                     on:submit={onSubmit}
-                    disabled={hasReachedMaxAttempts || isBusy} />
+                    disabled={hasReachedMaxAttempts || isBusy}
+                    autofocus />
                 <Text type="p" bold classes="mt-4 text-center">
                     {attempts > 0 ? locale('views.login.incorrect_attempts', {
                               values: { attempts: attempts.toString() },
