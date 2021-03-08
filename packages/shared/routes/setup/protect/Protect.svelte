@@ -21,7 +21,7 @@
 
     const dispatch = createEventDispatcher()
 
-    let state: ProtectState = ProtectState.Init
+    let state: ProtectState = ProtectState.Pin
     let stateHistory = []
 
     let pin = null
@@ -92,11 +92,16 @@
     }
 </script>
 
-{#if state === ProtectState.Init || state === ProtectState.Biometric}
+
+<!-- TODO: Readd Protect Init page
+    
+#if state === ProtectState.Init || state === ProtectState.Biometric}
     <Transition>
         <Protect on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
-{:else if state === ProtectState.Pin || state === ProtectState.Confirm}
+{/if}-->
+
+{#if state === ProtectState.Pin || state === ProtectState.Confirm}
     <Transition>
         <Pin on:next={_next} on:previous={_previous} pinCandidate={pin} {locale} {mobile} />
     </Transition>
