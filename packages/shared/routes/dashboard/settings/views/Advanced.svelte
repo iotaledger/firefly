@@ -103,7 +103,9 @@
             (node: Node) => node.url === option.value
         )
 
-        if (selectedNode.url !== $activeProfile.settings.node.url) {
+        if (selectedNode.url !== $activeProfile.settings.node?.url) {
+            updateProfile('settings.node', selectedNode)
+
             api.setClientOptions(
                 {
                     node: selectedNode,
@@ -111,9 +113,6 @@
                 },
                 {
                     onSuccess(response) {
-                        // Update profile in local storage
-                        updateProfile('settings.node', selectedNode)
-
                         // Update client options for accounts
                         accounts.update((_accounts) =>
                             _accounts.map((_account) =>
@@ -149,6 +148,10 @@
         openPopup({ type: 'addNode' })
     }
 
+    function handleRemoveNodeClick() {
+        openPopup({ type: 'removeNode' })
+    }
+
     function handleErrorLogClick() {
         openPopup({ type: 'errorLog' })
     }
@@ -165,7 +168,7 @@
                     showAppNotification({
                         type: 'error',
                         message: locale(err.error),
-                     })
+                    })
                 },
             })
         }
@@ -195,12 +198,18 @@
             <Text type="h4" classes="mb-3">{locale('general.nodes')}</Text>
             <Dropdown
                 onSelect={selectNode}
-                value={$activeProfile.settings.node.url}
+                value={$activeProfile.settings.node?.url}
                 items={[...DEFAULT_NODES, ...$activeProfile.settings.customNodes].map((node) => ({
                     value: node.url,
                     label: node.url,
                 }))} />
             <Button classes="w-1/4 mt-4" onClick={() => handleAddNodeClick()}>{locale('actions.add_node')}</Button>
+            <Button
+                classes="w-1/2 mt-4"
+                onClick={() => handleRemoveNodeClick()}
+                disabled={!$activeProfile.settings.customNodes.find((n) => n.url === $activeProfile.settings.node?.url)}>
+                {locale('actions.remove_node')}
+            </Button>
         </section>
         <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     {/if}
