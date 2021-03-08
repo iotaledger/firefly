@@ -484,7 +484,8 @@
         "transferSigning": "Signing the transaction",
         "transferPow": "Performing PoW",
         "transferBroadcasting": "Broadcasting transaction",
-        "transferComplete": "Transfer complete"
+        "transferComplete": "Transfer complete",
+        "creatingAccount": "Creating account, please wait..."
     },
     "dates": {
         "today": "Today",
