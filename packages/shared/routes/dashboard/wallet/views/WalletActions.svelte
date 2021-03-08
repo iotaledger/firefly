@@ -13,7 +13,6 @@
     export let internalTransfer
     export let generateAddress
     export let isGeneratingAddress 
-    export let createAccountError
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
     const accountsLoaded = getContext<Writable<boolean>>('walletAccountsLoaded')
@@ -47,7 +46,6 @@
         accountRoute.set(AccountRoutes.Init)
     }
     function handleCreateClick() {
-        createAccountError = ''
         walletRoute.set(WalletRoutes.CreateAccount)
     }
     function handleSendClick() {
