@@ -346,7 +346,10 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
  * @returns {AccountMessage[]}
  */
 export const getLatestMessages = (accounts: WalletAccount[], count = 10): AccountMessage[] => {
-    const messages: Set<AccountMessage> = new Set();
+    const messages: {
+        [key: string]: AccountMessage
+    } = {};
+
     const addresses: string[] = [];
 
     accounts.forEach((account) => {
@@ -355,20 +358,18 @@ export const getLatestMessages = (accounts: WalletAccount[], count = 10): Accoun
         })
 
         account.messages.forEach((message) => {
-            messages.add(
-                Object.assign<
-                    AccountMessage,
-                    Message,
-                    Partial<AccountMessage>
-                >(
-                    {} as AccountMessage,
-                    message,
-                    { account: account.index })
-            )
+            messages[message.id] = Object.assign<
+                AccountMessage,
+                Message,
+                Partial<AccountMessage>
+            >(
+                {} as AccountMessage,
+                message,
+                { account: account.index });
         })
     });
 
-    return Array.from(messages)
+    return Object.values(messages)
         .map(
             (message) => {
                 const outputs = message.payload.data.essence.data.outputs;
