@@ -89,7 +89,7 @@
             "deleteAppDataOnUninstall": false
         },
         "snap": {
-            "confinement": "strict",
+            "confinement": "classic",
             "buildPackages": [
                 "clang",
                 "cmake",
@@ -108,23 +108,7 @@
                 "home",
                 "gsettings",
                 "x11",
-                "unity7",
-                { 
-                    "browser-sandbox": {
-                        "interface": "browser-support", 
-                        "allow-sandbox": false
-                    }
-                },
-                "opengl",
-                {
-                    "personal-files": {
-                        "interface": "personal-files",
-                        "write": [
-                            "$HOME/.config/Firefly",
-                            "$HOME/.cache/fontconfig"
-                        ]
-                    }
-                }
+                "unity7"
             ]
         },
         "win": {
