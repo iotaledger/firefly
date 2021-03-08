@@ -27,13 +27,14 @@
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5">{locale('views.language.title')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.language.body')}</Text>
+            <!-- TODO: Implement and enable -->
             <Dropdown
                 value="English"
                 label={locale('general.language')}
                 items={[{ value: 1, label: 'English' }, { value: 2, label: 'Belula' }]}
                 disabled
-                classes="mb-4" />
-            <div>
+                classes="mb-4 opacity-50" />
+            <div class="pointer-events-none opacity-50">
                 <Text type="p" classes="mb-2 mt-4" smaller>{locale('general.appearance')}</Text>
                 <Radio value={false} bind:group={darkModeEnabled} label={locale('general.light_theme')} />
                 <Radio value={true} bind:group={darkModeEnabled} label={locale('general.dark_theme')} />
