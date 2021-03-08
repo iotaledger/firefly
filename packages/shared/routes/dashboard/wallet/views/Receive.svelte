@@ -40,7 +40,7 @@
                         <Icon icon="close" classes="text-gray-800 dark:text-white" />
                     </button>
                 </div>
-                <Dropdown valueKey={'alias'} value={selectedAccount.alias} items={$accounts} onSelect={handleDropdownSelect} disabled={$accounts.length === 1} />
+                <Dropdown valueKey={'alias'} value={selectedAccount.alias} items={$accounts} onSelect={handleDropdownSelect} />
             </div>
         {/if}
         <div
