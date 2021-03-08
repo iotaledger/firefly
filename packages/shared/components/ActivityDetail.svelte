@@ -46,10 +46,10 @@
 <div class="flex flex-col h-full min-h-0">
     <div
         class="px-4 pt-7 pb-3.5 mb-5 rounded-xl text-center items-center justify-center flex flex-row bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50">
-        <div>
+        <div class="flex flex-col flex-wrap justify-center items-center text-center">
             {#if senderAccount}
                 <div
-                    class="w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold text-center bg-{senderAccount?.color ?? 'blue'}-500 text-white">
+                    class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold text-center bg-{senderAccount?.color ?? 'blue'}-500 text-white">
                     {getInitials(senderAccount.alias, 2)}
                 </div>
                 {#if !incoming}
@@ -62,10 +62,10 @@
         <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
         <Text bold smaller>{formatUnit(value)}</Text>
         <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
-        <div class="flex flex-col flex-wrap justify-center text-center">
+        <div class="flex flex-col flex-wrap justify-center items-center text-center">
             {#if receiverAccount}
                 <div
-                    class="w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold bg-{receiverAccount?.color ?? 'blue'}-500 text-white">
+                    class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold bg-{receiverAccount?.color ?? 'blue'}-500 text-white">
                     {getInitials(receiverAccount.alias, 2)}
                 </div>
                 {#if incoming}
