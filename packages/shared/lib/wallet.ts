@@ -109,6 +109,8 @@ export const selectedMessage = writable<Message | null>(null)
 export const isTransferring = writable<boolean>(false)
 export const transferState = writable<TransferProgressEventType | "Complete" | null>(null)
 
+export const isSyncing = writable<boolean>(false)
+
 export const loggedIn = persistent<boolean>('loggedIn', false)
 
 export const api: ApiClient = window['__WALLET_API__']
