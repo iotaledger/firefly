@@ -70,6 +70,6 @@
     <!-- Action -->
     <div class="flex flex-row justify-between px-2">
         <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
-        <Button classes="-mx-2 w-1/2" onClick={() => handleSaveClick()}>{locale('actions.save')}</Button>
+        <Button disabled={!accountName} classes="-mx-2 w-1/2" onClick={() => handleSaveClick()}>{locale('actions.save')}</Button>
     </div>
 </div>
