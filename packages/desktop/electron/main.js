@@ -59,7 +59,8 @@ const defaultWebPreferences = {
     disableBlinkFeatures: 'Auxclick',
     webviewTag: false,
     enableWebSQL: false,
-    devTools: devMode,
+    // TODO: Remove before stable
+    devTools: true,
 }
 
 if (app.isPackaged) {
