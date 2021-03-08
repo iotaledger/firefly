@@ -118,7 +118,10 @@
             "timeStampServer": "http://timestamp.digicert.com"
         },
         "linux": {
-            "target": "snap",
+            "target": [
+                "snap",
+                "AppImage"
+            ],
             "executableName": "firefly-wallet",
             "desktop": {
                 "Name": "Firefly",
