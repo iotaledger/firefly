@@ -214,16 +214,17 @@
         <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     {/if}
 
-    <section id="proofOfWork" class="w-3/4">
+    <section id="proofOfWork" class="w-3/4 opacity-50">
         <Text type="h4" classes="mb-3">{locale('views.settings.proofOfWork.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.proofOfWork.description')}</Text>
-        <Checkbox label={locale('actions.outsourceProofOfWork')} bind:checked={outsourcePowChecked} />
+        <Checkbox label={locale('actions.outsourceProofOfWork')} disabled bind:checked={outsourcePowChecked} />
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
-    <section id="developerMode" class="w-3/4">
+    <!-- TODO: Implement and enable -->
+    <section id="developerMode" class="w-3/4 opacity-50">
         <Text type="h4" classes="mb-3">{locale('views.settings.developerMode.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.developerMode.description')}</Text>
-        <Checkbox label={locale('actions.enableDeveloperMode')} bind:checked={$developerMode} />
+        <Checkbox label={locale('actions.enableDeveloperMode')} disabled bind:checked={$developerMode} />
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <section id="deepLinks" class="w-3/4">
