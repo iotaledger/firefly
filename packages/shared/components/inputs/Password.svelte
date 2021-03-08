@@ -15,7 +15,11 @@
     export let error = null
     export let numeric = false
     export let autofocus = false
+<<<<<<< HEAD
     export let submitHandler = undefined
+=======
+    export let disabled = false
+>>>>>>> develop
 
     let revealed = false
     let type = 'password'
@@ -62,6 +66,7 @@
             {maxlength}
             {numeric}
             {autofocus}
+            {disabled}
             placeholder={placeholder || locale('general.password')} 
             {submitHandler}
         />

@@ -65,7 +65,7 @@ export enum SecuritySettings {
     AppLock = 'appLock',
     ChangePassword = 'changePassword',
     ChangePincode = 'changePincode',
-    ResetWallet = 'resetWallet',
+    DeleteProfile = 'deleteProfile',
 }
 
 export enum AdvancedSettings {
