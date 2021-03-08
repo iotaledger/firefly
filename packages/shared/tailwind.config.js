@@ -29,6 +29,8 @@ module.exports = {
                 /^grid-cols-/,
                 // `p-${size}`
                 /^p-/,
+                'fill-current',
+                'stroke-current',
             ],
         },
     },
