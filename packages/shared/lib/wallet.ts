@@ -370,23 +370,6 @@ export const getLatestMessages = (accounts: WalletAccount[], count = 10): Accoun
     });
 
     return Object.values(messages)
-        .map(
-            (message) => {
-                const outputs = message.payload.data.essence.data.outputs;
-                const inputs = message.payload.data.essence.data.inputs
-
-                return Object.assign(
-                    {},
-                    message,
-                    {
-                        internal: outputs.length && outputs.every(
-                            (output: Output) => addresses.includes(output.data.address)
-                        ) && inputs.length && inputs.every(
-                            (input: Input) => input.data.metadata ? addresses.includes(input.data.metadata.address) : false
-                        )
-                    })
-            }
-        )
         .sort((a, b) => {
             return <any>new Date(b.timestamp) - <any>new Date(a.timestamp)
         })
@@ -507,7 +490,7 @@ export const getAccountsBalanceHistory = (accounts: Account[], priceData: PriceD
                 } else {
                     balanceSoFar -= essence.value;
                 }
-                
+
                 accountBalanceVariations.push({ balance: balanceSoFar, timestamp: message.timestamp })
             })
             // Calculate the balance in each market data timestamp
