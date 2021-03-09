@@ -15,6 +15,8 @@ import type { TransferProgressEventType } from './typings/events'
 import type { Input, Message, Output } from './typings/message'
 import type { ApiClient } from './walletApi'
 
+export const MAX_ACCOUNT_NAME_LENGTH = 20
+
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
 export interface WalletAccount extends Account {
@@ -106,6 +108,8 @@ export const selectedMessage = writable<Message | null>(null)
 
 export const isTransferring = writable<boolean>(false)
 export const transferState = writable<TransferProgressEventType | "Complete" | null>(null)
+
+export const isSyncing = writable<boolean>(false)
 
 export const loggedIn = persistent<boolean>('loggedIn', false)
 
@@ -342,7 +346,10 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
  * @returns {AccountMessage[]}
  */
 export const getLatestMessages = (accounts: WalletAccount[], count = 10): AccountMessage[] => {
-    const messages: Set<AccountMessage> = new Set();
+    const messages: {
+        [key: string]: AccountMessage
+    } = {};
+
     const addresses: string[] = [];
 
     accounts.forEach((account) => {
@@ -351,20 +358,18 @@ export const getLatestMessages = (accounts: WalletAccount[], count = 10): Accoun
         })
 
         account.messages.forEach((message) => {
-            messages.add(
-                Object.assign<
-                    AccountMessage,
-                    Message,
-                    Partial<AccountMessage>
-                >(
-                    {} as AccountMessage,
-                    message,
-                    { account: account.index })
-            )
+            messages[message.id] = Object.assign<
+                AccountMessage,
+                Message,
+                Partial<AccountMessage>
+            >(
+                {} as AccountMessage,
+                message,
+                { account: account.index });
         })
     });
 
-    return Array.from(messages)
+    return Object.values(messages)
         .map(
             (message) => {
                 const outputs = message.payload.data.essence.data.outputs;

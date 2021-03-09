@@ -78,7 +78,7 @@ export function updateDisplayNotificationProgress(id: string, progress: number):
     displayNotifications.update((_currentNotifications) => {
         const notification = _currentNotifications.find(n => n.id === id)
         if (notification) {
-            notification.progress = Math.min(Math.max(progress, 0), 100);;
+            notification.progress = Math.min(Math.max(progress, 0), 100)
         }
         return _currentNotifications
     })
@@ -92,7 +92,11 @@ export function updateDisplayNotification(id: string, updateData: NotificationDa
             notification.subMessage = updateData.subMessage;
             notification.progress = updateData.progress;
             notification.actions = updateData.actions;
-            notification.timeout = updateData.timeout;
+            notification.timeout = updateData.timeout ?? NOTIFICATION_TIMEOUT_DEFAULT;
+
+            if (notification.timeout !== NOTIFICATION_TIMEOUT_NEVER) {
+                setTimeout(() => removeDisplayNotification(notification.id), notification.timeout);
+            }
         }
         return _currentNotifications
     })

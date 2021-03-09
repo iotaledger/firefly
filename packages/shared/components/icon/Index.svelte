@@ -14,7 +14,7 @@
         <div class={`w-8 h-8 flex justify-center items-center rounded-lg ${boxClasses}`}>
             <svg
                 data-label="icon"
-                class={classes}
+                class="flex-shrink-0 {classes}"
                 width={width || selected.width || '100%'}
                 height={height || selected.height || '100%'}
                 viewBox="0 0 {selected.width} {selected.height}"
@@ -39,7 +39,7 @@
     {:else}
         <svg
             data-label="icon"
-            class={classes}
+            class="flex-shrink-0 {classes}"
             width={width || selected.width || '100%'}
             height={height || selected.height || '100%'}
             viewBox="0 0 {selected.width} {selected.height}"

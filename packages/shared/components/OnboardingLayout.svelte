@@ -11,7 +11,7 @@
 <!--  -->
 <div data-label="onboarding-layout" class="relative w-full h-full flex flex-row bg-white dark:bg-blue-900">
     {#if allowBack}
-        <div data-label="back-button" class="absolute top-0 left-0 pl-5 pt-5" on:click={onBackClick}>
+        <div data-label="back-button" class="absolute top-12 left-5" on:click={onBackClick}>
             <Icon icon="arrow-left" classes="cursor-pointer text-blue-500" />
         </div>
     {/if}

@@ -23,9 +23,9 @@
 <div class="history overflow-y-auto">
     {#if $errorLog.length > 0}
         {#each $errorLog as error}
-            <div class="mb-7 flex flex-row flex-wrap">
+            <div class="mb-7">
                 <Text type="p" secondary>{new Date(error.time).toUTCString()}</Text>
-                <Text type="pre">{error.type}: {locale(error.message)}</Text>
+                <Text type="p">{error.type ?? 'EmptyType'}: {error.message ? locale(error.message)  : 'Missing error message'}</Text>
             </div>
         {/each}
     {:else}

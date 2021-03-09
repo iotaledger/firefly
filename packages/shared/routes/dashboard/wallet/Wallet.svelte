@@ -24,6 +24,7 @@
         initialiseListeners,
         isTransferring,
         selectedAccountId,
+        transferState,
         updateAccounts,
         updateBalanceOverview,
         wallet,
@@ -61,7 +62,6 @@
     setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
-    let createAccountError = ''
 
     function getAccountMeta(
         accountId: string,
@@ -128,16 +128,15 @@
     function getAccounts() {
         api.getAccounts({
             onSuccess(accountsResponse) {
+                syncAccounts()
+
                 const _totalBalance = {
                     balance: 0,
                     incoming: 0,
                     outgoing: 0,
                 }
 
-                if (accountsResponse.payload.length === 0) {
-                    accountsLoaded.set(true)
-                } else {
-                    for (const [idx, storedAccount] of accountsResponse.payload.entries()) {
+                for (const [idx, storedAccount] of accountsResponse.payload.entries()) {
                         getAccountMeta(storedAccount.id, (err, meta) => {
                             if (!err) {
                                 _totalBalance.balance += meta.balance
@@ -149,14 +148,12 @@
 
                                 if (idx === accountsResponse.payload.length - 1) {
                                     updateBalanceOverview(_totalBalance.balance, _totalBalance.incoming, _totalBalance.outgoing)
-                                    accountsLoaded.set(true)
                                 }
                             } else {
                                 console.error(err)
                             }
                         })
                     }
-                }
             },
             onError(err) {
                 showAppNotification({
@@ -216,12 +213,14 @@
         })
     }
 
-    function syncAccounts(payload) {
+    function syncAccounts() {
         api.syncAccounts({
             onSuccess(syncAccountsResponse) {
                 const syncedAccounts = syncAccountsResponse.payload
 
                 updateAccounts(syncedAccounts)
+
+                accountsLoaded.set(true)
             },
             onError(err) {
                 showAppNotification({
@@ -232,7 +231,7 @@
         })
     }
 
-    function onCreateAccount(alias) {
+    function onCreateAccount(alias, completeCallback) {
         const _create = () =>
             api.createAccount(
                 {
@@ -254,18 +253,19 @@
                                         const account = prepareAccountInfo(createAccountResponse.payload, meta)
                                         accounts.update((accounts) => [...accounts, account])
                                         walletRoute.set(WalletRoutes.Init)
+                                        completeCallback()
                                     } else {
-                                        console.error(err)
+                                        completeCallback(locale(err.error))
                                     }
                                 })
                             },
                             onError(err) {
-                                console.error(err)
+                                completeCallback(locale(err.error))
                             },
                         })
                     },
                     onError(err) {
-                        createAccountError = locale(err.error)
+                        completeCallback(locale(err.error))
                     },
                 }
             )
@@ -273,16 +273,13 @@
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
                 if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({ type: 'password', props: { onSuccess: _create } })
+                    openPopup({ type: 'password', props: { onSuccess: _create, onCancelled: completeCallback } })
                 } else {
                     _create()
                 }
             },
             onError(err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error),
-                })
+                completeCallback(locale(err.error))
             },
         })
     }
@@ -437,16 +434,6 @@
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
                 updateProfile('isStrongholdLocked', strongholdStatusResponse.payload.snapshot.status === 'Locked')
-                api.areLatestAddressesUnused({
-                    onSuccess(response) {
-                        if (!response.payload) {
-                            openPopup({ type: 'password', props: { onSuccess: syncAccounts } })
-                        }
-                    },
-                    onError(error) {
-                        console.error(error)
-                    },
-                })
             },
             onError(error) {
                 console.error(error)
@@ -463,18 +450,18 @@
         generateAddress={onGenerateAddress}
         {locale} />
 {:else}
-    <div class="w-full h-full flex flex-col p-10 flex-1">
+    <div class="w-full h-full flex flex-col p-10 flex-1 bg-gray-50 dark:bg-gray-900">
         <div class="w-full h-full flex flex-row space-x-4 flex-auto">
             <DashboardPane classes="w-1/3 h-full">
                 <!-- Total Balance, Accounts list & Send/Receive -->
                 <div class="flex flex-auto flex-col flex-shrink-0 h-full">
                     {#if $walletRoute === WalletRoutes.CreateAccount}
-                        <CreateAccount error={createAccountError} onCreate={onCreateAccount} {locale} />
+                        <CreateAccount onCreate={onCreateAccount} {locale} />
                     {:else}
                         <WalletBalance {locale} />
                         <DashboardPane classes="-mt-5 h-full">
                             <WalletActions
-                                isGeneratingAddress={isGeneratingAddress}
+                                {isGeneratingAddress}
                                 send={onSend}
                                 internalTransfer={onInternalTransfer}
                                 generateAddress={onGenerateAddress}

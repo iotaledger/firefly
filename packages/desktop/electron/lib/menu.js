@@ -60,6 +60,11 @@ const buildTemplate = () => {
                     label: state.strings.settings,
                     click: () => getWindow('main').webContents.send('menu-navigate-settings'),
                 },
+                {        
+                    // TODO: Remove before stable release
+                    label:  "Developer Tools",
+                    role: 'toggleDevTools'
+                },
                 {
                     label: state.strings.errorLog,
                     click: () => getWindow('main').webContents.send('menu-error-log')

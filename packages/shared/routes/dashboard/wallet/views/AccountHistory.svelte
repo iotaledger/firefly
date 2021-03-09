@@ -34,7 +34,7 @@
                 {/each}
             {:else}
                 <div class="h-full flex flex-col items-center justify-center text-center">
-                    <Text secondary classes="mt-6">{locale('general.no_recent_history')}</Text>
+                    <Text secondary>{locale('general.no_recent_history')}</Text>
                 </div>
             {/if}
         </div>

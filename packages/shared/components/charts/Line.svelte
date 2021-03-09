@@ -12,6 +12,7 @@
     export let yPrecision = 3
     export let color = 'blue' // TODO: each profile has a different color
     export let beginAtZero = false
+    export let inlineStyle = 'height: calc(50vh - 130px);'
 
     let canvas
     let chart
@@ -129,4 +130,4 @@
     }
 </script>
 
-<div class="relative" style="height: calc(50vh - 130px);"><canvas bind:this={canvas} width="600" height="250" /></div>
+<div class="relative" style={inlineStyle}><canvas bind:this={canvas} width="600" height="250" /></div>
