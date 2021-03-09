@@ -1,8 +1,9 @@
 <script lang="typescript">
     import { Button, Input, Text } from 'shared/components'
+    import { hasOnlyWhitespaces } from 'shared/lib/helpers'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { api, selectedAccountId, wallet, WalletAccount, MAX_ACCOUNT_NAME_LENGTH } from 'shared/lib/wallet'
+    import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountId, wallet, WalletAccount } from 'shared/lib/wallet'
 
     export let locale
     export let alias
@@ -12,6 +13,7 @@
 
     let accountAlias = alias
     let isBusy
+    $: isAliasValid = accountAlias && !hasOnlyWhitespaces(accountAlias)
 
     const handleSaveClick = () => {
         if (accountAlias) {
@@ -85,7 +87,7 @@
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()} disbled={isBusy}>
                 {locale('actions.cancel')}
             </Button>
-            <Button classes="-mx-2 w-1/2" onClick={() => handleSaveClick()} disabled={!accountAlias || isBusy}>
+            <Button classes="-mx-2 w-1/2" onClick={() => handleSaveClick()} disabled={!isAliasValid || isBusy}>
                 {locale('actions.save')}
             </Button>
         </div>

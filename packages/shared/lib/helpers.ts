@@ -171,4 +171,9 @@ export const convertHexToRGBA = (hexCode: string, opacity: number = 100) => {
     const b = parseInt(hex.substring(4, 6), 16);
 
     return `rgba(${r},${g},${b},${opacity / 100})`;
-};
+};/**
+ * Check if a string only contains whitespaces
+ * @param string
+ */
+
+export const hasOnlyWhitespaces = (string: string = '') => !/\S/.test(string)
