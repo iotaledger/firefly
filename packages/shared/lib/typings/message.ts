@@ -1,96 +1,103 @@
 import type { Bridge, CommunicationIds } from './bridge'
 import type { AccountIdentifier } from './account'
 
-type MessageVersion = 1
-
-export interface UTXOInput {
-    type: 'UTXO'
-    data: {
-        input: string;
-        metadata?: {
-            address: string;
-            amount: number;
-            index: number;
-            isSpent: boolean;
-            kind: 'SignatureLockedSingle' | 'SignatureLockedDustAllowance';
-            messageId: string;
-            transactionId: string;
-        }
-    }
-}
-
-export type Input = UTXOInput
-
-export interface SignatureLockedSingle {
-    type: 'SignatureLockedSingle'
-    data: {
-        address: string
-        amount: number
-        remainder: boolean
-    }
-}
-
-export interface SignatureLockedDustAllowance {
-    type: 'SignatureLockedDustAllowance'
-    data: {
-        address: string
-        amount: number
-        remainder: boolean
-    }
-}
-
-export type Output = SignatureLockedSingle | SignatureLockedDustAllowance
-
-export interface TransactionEssence {
-    inputs: Input[]
-    outputs: Output[]
-    // TODO: Add proper type for essence payload
-    payload?: any
-}
-
-export interface MessagePayload {
-    type: 'Transaction'
-    data: {
-        essence: {
-            data: TransactionEssence
-        }
-        unlock_blocks: {
-            type: 'Signature'
-            data: {
-                type: 'Ed25519'
-                data: {
-                    public_key: number[]
-                    signature: number[]
-                }
-            }
-        }
-    }
-}
-
-export interface Message {
-    broadcasted: boolean
-    id: string
-    incoming: boolean
-    nonce: number
-    parents: string[]
-    remainderValue: number
-    timestamp: string
-    value: number
-    version: MessageVersion
-    payload: MessagePayload
-}
+type MessageVersion = 1;
 
 export enum MessageType {
     /// Message received.
-    Received,
+    Received = 1,
     /// Message sent.
-    Sent,
+    Sent = 2,
     /// Message not broadcasted.
-    Failed,
+    Failed = 3,
     /// Message not confirmed.
-    Unconfirmed,
+    Unconfirmed = 4,
     /// A value message.
-    Value,
+    Value = 5,
+}
+
+export interface RegularEssence {
+    inputs: Input[];
+    outputs: Output[];
+    payload?: {
+        type: 'Indexation',
+        data: any;
+    };
+    incoming: boolean;
+    internal: boolean;
+    value: number;
+    remainderValue: number;
+}
+
+export type Essence = {
+    type: 'Regular',
+    data: RegularEssence
+}
+
+export interface UTXOInput {
+    input: string
+    metadata?: {
+        transactionId: string
+        messageId: string
+        index: number
+        amount: number
+        isSpent: boolean
+        address: string
+        kind: 'SignatureLockedSingle'
+    }
+}
+
+export type Input = { type: 'UTXO', data: UTXOInput }
+
+export interface SignatureLockedSingleOutput {
+    address: string
+    amount: number
+    remainder: boolean
+}
+
+export interface SignatureLockedDustAllowance {
+    address: string
+    amount: number
+    remainder: boolean
+}
+
+export type Output = {
+    type: 'SignatureLockedSingle',
+    data: SignatureLockedSingleOutput
+} | {
+    type: 'SignatureLockedDustAllowance',
+    data: SignatureLockedDustAllowance
+}
+
+export interface Transaction {
+    type: 'Transaction',
+    data: {
+        essence: Essence;
+        unlock_blocks: {
+            type: 'Signature';
+            data: {
+                type: 'Ed25519';
+                data: {
+                    public_key: number[];
+                    signature: number[]
+                }
+            }
+        }[]
+    }
+}
+
+export type Payload = Transaction;
+
+export interface Message {
+    id: string;
+    version: MessageVersion;
+    parents: string[];
+    payloadLength: number;
+    payload: Payload;
+    timestamp: string;
+    nonce: number;
+    confirmed?: boolean;
+    broadcasted: boolean;
 }
 
 export interface ListMessageFilter {

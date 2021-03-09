@@ -198,7 +198,7 @@ export const initialiseListeners = () => {
 
                 const locale = get(_) as (string) => string
                 const notificationMessage = locale('notifications.valueTx')
-                    .replace('{{value}}', formatUnit(message.value))
+                    .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
                     .replace('{{account}}', account.alias)
 
                 showSystemNotification({ type: "info", message: notificationMessage })
@@ -222,7 +222,7 @@ export const initialiseListeners = () => {
 
                 const locale = get(_) as (string) => string
                 const notificationMessage = locale(`notifications.${messageKey}`)
-                    .replace('{{value}}', formatUnit(message.value))
+                    .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
                     .replace('{{account}}', account.alias)
 
                 showSystemNotification({ type: "info", message: notificationMessage })
@@ -500,11 +500,14 @@ export const getAccountsBalanceHistory = (accounts: Account[], priceData: PriceD
             var balanceSoFar = 0;
             let accountBalanceVariations = [{ balance: balanceSoFar, timestamp: '0' }]
             messages.forEach((message) => {
-                if (message.incoming) {
-                    balanceSoFar += message.value;
+                const essence = message.payload.data.essence.data;
+
+                if (essence.incoming) {
+                    balanceSoFar += essence.value;
                 } else {
-                    balanceSoFar -= message.value;
+                    balanceSoFar -= essence.value;
                 }
+                
                 accountBalanceVariations.push({ balance: balanceSoFar, timestamp: message.timestamp })
             })
             // Calculate the balance in each market data timestamp

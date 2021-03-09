@@ -127,8 +127,8 @@ export const getAccountActivityData = (account: WalletAccount) => {
                     const message = messages[index]
                     const messageTimestamp = new Date(message.timestamp).getTime()
                     if (messageTimestamp >= start && messageTimestamp <= end) {
-                        const valueMiota = convertUnits(message.value, Unit.i, Unit.Mi)
-                        if (message.incoming) {
+                        const valueMiota = convertUnits(message.payload.data.essence.data.value, Unit.i, Unit.Mi)
+                        if (message.payload.data.essence.data.incoming) {
                             _incoming += valueMiota
                         }
                         else {

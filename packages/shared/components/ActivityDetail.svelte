@@ -6,14 +6,19 @@
     import { getContext } from 'svelte'
     import { date } from 'svelte-i18n'
     import type { Readable, Writable } from 'svelte/store'
+    import type { Essence } from 'shared/lib/typings/message'
 
     export let id
-    export let incoming
-    export let internal
-    export let value
-    export let payload
+
     export let timestamp
     export let locale
+
+    export let payload: {
+        data: {
+            essence: Essence
+        }
+    }
+
     export let onBackClick = () => {}
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
@@ -30,15 +35,15 @@
             ?.filter((output) => output?.data?.remainder === false)
             ?.map((output) => output?.data?.address) ?? []
 
-    $: senderAccount = !incoming
+    $: senderAccount = !payload.data.essence.data.incoming
         ? $activeAccount
-        : internal
+        : payload.data.essence.data.internal
         ? $accounts.find((acc) => acc.addresses.some((add) => senderAddress === add.address))
         : null
 
-    $: receiverAccount = incoming
+    $: receiverAccount = payload.data.essence.data.incoming
         ? $activeAccount
-        : internal
+        : payload.data.essence.data.internal
         ? $accounts.find((acc) => acc.addresses.some((add) => receiverAddresses.includes(add.address)))
         : null
 </script>
@@ -52,7 +57,7 @@
                     class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold text-center bg-{senderAccount?.color ?? 'blue'}-500 text-white">
                     {getInitials(senderAccount.alias, 2)}
                 </div>
-                {#if !incoming}
+                {#if !payload.data.essence.data.incoming}
                     <Text smaller>{locale('general.you')}</Text>
                 {/if}
             {:else}
@@ -60,7 +65,7 @@
             {/if}
         </div>
         <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
-        <Text bold smaller>{formatUnit(value)}</Text>
+        <Text bold smaller>{formatUnit(payload.data.essence.data.value)}</Text>
         <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
         <div class="flex flex-col flex-wrap justify-center items-center text-center">
             {#if receiverAccount}
@@ -68,11 +73,11 @@
                     class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold bg-{receiverAccount?.color ?? 'blue'}-500 text-white">
                     {getInitials(receiverAccount.alias, 2)}
                 </div>
-                {#if incoming}
+                {#if payload.data.essence.data.incoming}
                     <Text smaller>{locale('general.you')}</Text>
                 {/if}
             {/if}
-            {#if !incoming}
+            {#if !payload.data.essence.data.incoming}
                 {#each receiverAddresses as address}
                     <Text smaller>{truncateString(address, 3, 3, 3)}</Text>
                 {/each}
