@@ -152,6 +152,10 @@ function createWindow() {
     windows.main.webContents.on('will-navigate', _handleNavigation)
     windows.main.webContents.on('new-window', _handleNavigation)
 
+    windows.main.on('close', () => {
+        closeAboutWindow()
+    })
+
     /**
      * Handle permissions requests
      */
@@ -329,3 +333,11 @@ export const openAboutWindow = () => {
 
     return windows.about
 }
+
+export const closeAboutWindow = () => {
+    if (windows.about) {
+        windows.about.close()
+        windows.about = null
+    }
+}
+
