@@ -121,7 +121,7 @@
                 $currencies[CurrencyTypes.USD],
                 $exchangeRates[get(activeProfile).settings.currency]
             )} ${$activeProfile.settings.currency}`,
-            color: AccountColors[index],
+            color: AccountColors[index % AccountColors.length],
         })
     }
 
