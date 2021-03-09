@@ -198,7 +198,7 @@ export const initialiseListeners = () => {
 
                 const locale = get(_) as (string) => string
                 const notificationMessage = locale('notifications.valueTx')
-                    .replace('{{value}}', message.value.toString())
+                    .replace('{{value}}', formatUnit(message.value))
                     .replace('{{account}}', account.alias)
 
                 showSystemNotification({ type: "info", message: notificationMessage })
@@ -222,7 +222,7 @@ export const initialiseListeners = () => {
 
                 const locale = get(_) as (string) => string
                 const notificationMessage = locale(`notifications.${messageKey}`)
-                    .replace('{{value}}', message.value.toString())
+                    .replace('{{value}}', formatUnit(message.value))
                     .replace('{{account}}', account.alias)
 
                 showSystemNotification({ type: "info", message: notificationMessage })
