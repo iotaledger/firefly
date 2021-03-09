@@ -202,6 +202,7 @@ export const routerPrevious = () => {
 }
 
 export const resetRouter = () => {
+    dashboardRoute.set(Tabs.Wallet)
     walletRoute.set(WalletRoutes.Init)
     accountRoute.set(AccountRoutes.Init)
     settingsRoute.set(SettingsRoutes.Init)
