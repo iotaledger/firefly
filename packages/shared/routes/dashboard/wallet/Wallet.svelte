@@ -115,7 +115,7 @@
             depositAddress,
             alias,
             rawIotaBalance: balance,
-            balance: formatUnit(balance, 1),
+            balance: formatUnit(balance, 2),
             balanceEquiv: `${convertToFiat(
                 balance,
                 $currencies[CurrencyTypes.USD],
