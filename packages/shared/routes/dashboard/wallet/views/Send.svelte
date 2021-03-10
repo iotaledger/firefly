@@ -24,7 +24,7 @@
 
     let selectedSendType = SEND_TYPE.EXTERNAL
     let unit = Unit.Mi
-    let amount = convertUnits($sendParams.amount, Unit.i, unit)
+    let amount = convertUnits($sendParams.amount, Unit.i, unit).toString()
     let to = undefined
     let amountError = ''
     let addressPrefix = ($account ?? $accounts[0]).depositAddress.split('1')[0]
@@ -68,7 +68,6 @@
 
     $: accountsDropdownItems = $accounts.map((acc) => format(acc))
     $: from = $account ? format($account) : accountsDropdownItems[0]
-    $: $sendParams.amount = convertUnits(amount, unit, Unit.i)
 
     const handleSendTypeClick = (type) => {
         selectedSendType = type
@@ -91,42 +90,55 @@
     const handleSendClick = () => {
         amountError = ''
         addressError = ''
-        if ($sendParams.amount > from.balance) {
-            amountError = locale('error.send.amountTooHigh')
-        } else if ($sendParams.amount <= 0) {
-            amountError = locale('error.send.amountZero')
-        }
-        if (selectedSendType === SEND_TYPE.EXTERNAL) {
-            // Validate address length
-            if ($sendParams.address.length !== ADDRESS_LENGTH) {
-                addressError = locale('error.send.addressLength', {
-                    values: {
-                        length: ADDRESS_LENGTH,
-                    },
-                })
-            } else if (!validateBech32Address(addressPrefix, $sendParams.address)) {
-                addressError = locale('error.send.wrongAddressFormat', {
-                    values: {
-                        prefix: addressPrefix,
-                    },
-                })
-            }
-        }
 
-        if (!amountError && !addressError) {
-            if (selectedSendType === SEND_TYPE.INTERNAL) {
-                internalTransfer(from.id, to.id, $sendParams.amount)
-            } else {
-                send(from.id, $sendParams.address, $sendParams.amount)
+        if (unit === Unit.i && Number.parseInt(amount, 10).toString() !== amount) {
+            amountError = locale('error.send.amountNoFloat')
+        } else {
+            let amountAsFloat = Number.parseFloat(amount)
+            if (amountAsFloat.toString() !== amount) {
+                amountError = locale('error.send.amountInvalidFormat')
+            } else if (amountAsFloat > from.balance) {
+                amountError = locale('error.send.amountTooHigh')
+            } else if (amountAsFloat <= 0) {
+                amountError = locale('error.send.amountZero')
+            }
+
+            if (selectedSendType === SEND_TYPE.EXTERNAL) {
+                // Validate address length
+                if ($sendParams.address.length !== ADDRESS_LENGTH) {
+                    addressError = locale('error.send.addressLength', {
+                        values: {
+                            length: ADDRESS_LENGTH,
+                        },
+                    })
+                } else if (!validateBech32Address(addressPrefix, $sendParams.address)) {
+                    addressError = locale('error.send.wrongAddressFormat', {
+                        values: {
+                            prefix: addressPrefix,
+                        },
+                    })
+                }
+            }
+
+            if (!amountError && !addressError) {
+                $sendParams.amount = convertUnits(amountAsFloat, unit, Unit.i)
+
+                if (selectedSendType === SEND_TYPE.INTERNAL) {
+                    internalTransfer(from.id, to.id, $sendParams.amount)
+                } else {
+                    send(from.id, $sendParams.address, $sendParams.amount)
+                }
             }
         }
     }
+
     const handleBackClick = () => {
         accountRoute.set(AccountRoutes.Init)
         if (!$account) {
             walletRoute.set(WalletRoutes.Init)
         }
     }
+
     const format = (account: WalletAccount) => {
         return {
             ...account,
@@ -135,7 +147,7 @@
         }
     }
     const handleMaxClick = () => {
-        amount = convertUnits(from.balance, Unit.i, unit)
+        amount = convertUnits(from.balance, Unit.i, unit).toString()
     }
     onMount(() => {
         to = $accounts.length === 2 ? accountsDropdownItems[from.id === $accounts[0].id ? 1 : 0] : to
