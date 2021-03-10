@@ -69,7 +69,9 @@
         },
         "verify_recovery_phrase": {
             "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Select the words in the correct order."
+            "body": "Let's check you wrote down the phrase correctly. Select the words in the correct order.",
+            "reset_recovery_verification": "Reset recovery verification",
+            "creating_account": "Creating account, please wait..."
         },
         "backup_wallet": {
             "title": "Back up to a Stronghold file",
