@@ -3,6 +3,7 @@
     import { darkMode } from 'shared/lib/app'
     import { Text, Radio, Dropdown, Checkbox } from 'shared/components'
     import { exchangeRates } from 'shared/lib/currency'
+    import { updateAccountsBalanceEquiv, updateBalanceOverviewFiat } from 'shared/lib/wallet'
     import { addProfileCurrencyPriceData } from 'shared/lib/marketData'
     import { locales, setupI18n } from 'shared/lib/i18n'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
@@ -24,6 +25,8 @@
     const handleCurrencySelect = (item) => {
         updateProfile('settings.currency', item.value)
         addProfileCurrencyPriceData()
+        updateBalanceOverviewFiat()
+        updateAccountsBalanceEquiv()
     }
 </script>
 

@@ -98,6 +98,8 @@
         &.scheme-dark {
             @apply bg-blue-900;
         }
+
+        @apply select-none;
     }
 </style>
 

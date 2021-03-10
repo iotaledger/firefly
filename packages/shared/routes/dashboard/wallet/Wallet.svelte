@@ -115,13 +115,13 @@
             depositAddress,
             alias,
             rawIotaBalance: balance,
-            balance: formatUnit(balance, 0),
+            balance: formatUnit(balance, 2),
             balanceEquiv: `${convertToFiat(
                 balance,
                 $currencies[CurrencyTypes.USD],
                 $exchangeRates[get(activeProfile).settings.currency]
             )} ${$activeProfile.settings.currency}`,
-            color: AccountColors[index],
+            color: AccountColors[index % AccountColors.length],
         })
     }
 

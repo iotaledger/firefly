@@ -202,10 +202,6 @@ export const routerPrevious = () => {
 }
 
 export const resetRouter = () => {
-    walletRoute.set(WalletRoutes.Init)
-    accountRoute.set(AccountRoutes.Init)
-    settingsRoute.set(SettingsRoutes.Init)
-
     history.set([])
     let hasCompletedSetup: boolean = get(profiles).length > 0
     if (hasCompletedSetup) {
@@ -213,4 +209,9 @@ export const resetRouter = () => {
     } else {
         setRoute(AppRoute.Welcome)
     }
+
+    walletRoute.set(WalletRoutes.Init)
+    accountRoute.set(AccountRoutes.Init)
+    settingsRoute.set(SettingsRoutes.Init)
+    dashboardRoute.set(Tabs.Wallet)
 }
