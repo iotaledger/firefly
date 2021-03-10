@@ -386,7 +386,6 @@
         "restart_now": "Restart now",
         "save_backup": "Save backup",
         "customize_account": "Customise account",
-        "sync_account": "Sync account",
         "view_address_history": "View address history",
         "delete_account": "Delete account",
         "max": "Max",
@@ -491,9 +490,7 @@
         "transferBroadcasting": "Broadcasting transaction",
         "transferComplete": "Transfer complete",
         "creatingAccount": "Creating account, please wait...",
-        "updatingAccount": "Updating account, please wait...",
-        "accountSyncing": "Account is syncing",
-        "accountSyncComplete": "Account sync complete"
+        "updatingAccount": "Updating account, please wait..."
     },
     "dates": {
         "today": "Today",
