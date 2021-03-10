@@ -408,6 +408,26 @@ export const updateBalanceOverview = (balance: number, incoming: number, outgoin
 };
 
 /**
+ * Updates balance overview fiat value
+ *
+ * @method updateBalanceOverviewFiat
+ *
+ * @returns {void}
+ */
+export const updateBalanceOverviewFiat = (): void => {
+    const { balanceOverview } = get(wallet);
+    balanceOverview.update((overview) => {
+        return Object.assign<BalanceOverview, BalanceOverview, Partial<BalanceOverview>>({} as BalanceOverview, overview, {
+            balanceFiat: `${convertToFiat(
+                overview.balanceRaw,
+                get(currencies)[CurrencyTypes.USD],
+                get(exchangeRates)[get(activeProfile).settings.currency]
+            )} ${get(activeProfile).settings.currency}`,
+        });
+    });
+}
+
+/**
 * Updates accounts information after a successful sync accounts operation
 *
 * @method updateAccounts
@@ -449,6 +469,28 @@ function mergeProps<T>(existingPayload: T[], newPayload: T[], prop: string): T[]
     }, {})
 
     return Object.values(Object.assign({}, existingPayloadMap, newPayloadMap))
+}
+
+/**
+ * Updates balance fiat value for every account
+ *
+ * @method updateAccountBalanceEquiv
+ *
+ * @returns {void}
+ */
+export const updateAccountsBalanceEquiv = (): void => {
+    const { accounts } = get(wallet)
+    accounts.update((storedAccounts) => {
+        return storedAccounts.map((storedAccount) => {
+            return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
+                balanceEquiv: `${convertToFiat(
+                    storedAccount.rawIotaBalance,
+                    get(currencies)[CurrencyTypes.USD],
+                    get(exchangeRates)[get(activeProfile).settings.currency]
+                )} ${get(activeProfile).settings.currency}`,
+            })
+        })
+    })
 }
 
 /**
