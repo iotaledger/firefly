@@ -13,7 +13,7 @@
     export let locale
     export let mobile
 
-    let loading = false
+    let creatingAccount = false
 
     enum BackupState {
         Init = 'init',
@@ -80,12 +80,15 @@
                 }
 
                 break
-            case BackupState.Verify:
-            case BackupState.Success:
-                const _mnemonic = get(mnemonic).join(' ')
-                loading = true
 
-                // TODO: Instead of generated mnemonic, we should construct the phrase with what was chosen by the user
+            case BackupState.Success:
+                nextState = BackupState.Verify
+                break;
+
+            case BackupState.Verify:
+                const _mnemonic = get(mnemonic).join(' ')
+                creatingAccount = true
+
                 api.verifyMnemonic(_mnemonic, {
                     onSuccess(response) {
                         api.storeMnemonic(_mnemonic, {
@@ -108,7 +111,7 @@
                                                 type: 'error',
                                                 message: locale(err.error),
                                             })
-                                            loading = false
+                                            creatingAccount = false
                                         },
                                     }
                                 )
@@ -118,7 +121,7 @@
                                     type: 'error',
                                     message: locale(err.error),
                                 })
-                                loading = false
+                                creatingAccount = false
                             },
                         })
                     },
@@ -127,7 +130,7 @@
                             type: 'error',
                             message: locale(err.error),
                         })
-                        loading = false
+                        creatingAccount = false
                     },
                 })
 
@@ -160,7 +163,7 @@
     </Transition>
 {:else if state === BackupState.Verify}
     <Transition>
-        <VerifyRecoveryPhrase {loading} on:next={_next} on:previous={_previous} mnemonic={$mnemonic} {locale} {mobile} />
+        <VerifyRecoveryPhrase {creatingAccount} on:next={_next} on:previous={_previous} mnemonic={$mnemonic} {locale} {mobile} />
     </Transition>
 {:else if state === BackupState.Backup}
     <Transition>
