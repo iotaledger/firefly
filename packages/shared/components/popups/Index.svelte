@@ -12,6 +12,7 @@
     import RemoveNode from './RemoveNode.svelte'
     import Busy from './Busy.svelte'
     import ErrorLog from './ErrorLog.svelte'
+    import DeleteProfile from './DeleteProfile.svelte'
 
     export let locale = 'en'
     export let type = undefined
@@ -30,7 +31,8 @@
         addNode: AddNode,
         removeNode: RemoveNode,
         busy: Busy,
-        errorLog: ErrorLog
+        errorLog: ErrorLog,
+        deleteProfile: DeleteProfile
     }
 
     const onkey = (e) => {

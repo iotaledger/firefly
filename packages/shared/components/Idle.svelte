@@ -10,13 +10,17 @@
     function handleEvent() {
         clearTimeout(timeout)
 
-        timeout = setTimeout(lock, $activeProfile.settings.lockScreenTimeout * 60 * 1000)
+        if ($activeProfile) {
+            timeout = setTimeout(lock, $activeProfile.settings.lockScreenTimeout * 60 * 1000)
+        }
     }
 
     function lock() {
         api.lockStronghold({
             onSuccess() {
-                destroyActor($activeProfile.id)
+                if ($activeProfile) {
+                    destroyActor($activeProfile.id)
+                }
                 resetWallet()
                 resetRouter()
             },
