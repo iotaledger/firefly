@@ -4,7 +4,7 @@ import { persistent } from 'shared/lib/helpers'
 import { _ } from 'shared/lib/i18n'
 import type { HistoryData, PriceData } from 'shared/lib/marketData'
 import { HistoryDataProps } from 'shared/lib/marketData'
-import { showSystemNotification } from 'shared/lib/notifications'
+import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { formatUnit } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
@@ -573,4 +573,28 @@ export const getWalletBalanceHistory = (accountsBalanceHistory: BalanceHistory):
         })
     })
     return balanceHistory
+}
+
+/**
+ * Sync the accounts
+ */
+export function syncAccounts() {
+    isSyncing.set(true)
+    api.syncAccounts({
+        onSuccess(syncAccountsResponse) {
+            const syncedAccounts = syncAccountsResponse.payload
+
+            updateAccounts(syncedAccounts)
+
+            isSyncing.set(false)
+        },
+        onError(err) {
+            isSyncing.set(false)
+            const locale = get(_) as (string) => string
+            showAppNotification({
+                type: 'error',
+                message: locale(err.error),
+            })
+        },
+    })
 }
