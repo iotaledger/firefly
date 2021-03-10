@@ -290,7 +290,7 @@ export const updateAccountAfterBalanceChange = (
 
                 return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
                     rawIotaBalance,
-                    balance: formatUnit(rawIotaBalance, 0),
+                    balance: formatUnit(rawIotaBalance, 2),
                     balanceEquiv: `${convertToFiat(
                         rawIotaBalance,
                         get(currencies)[CurrencyTypes.USD],
