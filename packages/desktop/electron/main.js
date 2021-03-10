@@ -66,7 +66,7 @@ const defaultWebPreferences = {
 if (app.isPackaged) {
     paths.preload = path.join(app.getAppPath(), '/public/build/preload.js')
     paths.html = path.join(app.getAppPath(), '/public/index.html')
-    paths.aboutPreload = path.join(app.getAppPath(), '/public/lib/aboutPreload.js')
+    paths.aboutPreload = path.join(app.getAppPath(), '/public/build/lib/aboutPreload.js')
     paths.aboutHtml = path.join(app.getAppPath(), '/public/about.html')
 } else {
     // __dirname is desktop/public/build
