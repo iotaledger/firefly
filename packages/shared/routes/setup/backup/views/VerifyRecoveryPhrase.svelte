@@ -39,7 +39,7 @@
         <div slot="leftpane__action">
             <Button classes="w-full" disabled={!valid || creatingAccount} onClick={() => handleContinue()}>
                 {#if creatingAccount}
-                    <Spinner busy={creatingAccount} message={locale('views.verify_recovery_phrase.creating_account')} />
+                    <Spinner busy={creatingAccount} message={locale('views.verify_recovery_phrase.creating_account')} classes="justify-center" />
                 {:else}
                     {locale('actions.verify_recovery_phrase')}
                 {/if}
