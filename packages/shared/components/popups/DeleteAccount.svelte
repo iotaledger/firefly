@@ -54,8 +54,6 @@
                     error = locale(err.error)
                 },
             })
-        } else {
-            console.error('Cannot allow account deletion.')
         }
     }
     function handleMoveFundsClick() {
@@ -70,28 +68,34 @@
 
 {#if canDelete}
     <div class="mb-5">
-        <Text type="h4">{locale('popups.delete_account.title', { values: { name: $account?.alias } })}</Text>
+        <Text type="h4">{locale(`popups.delete_account.${hasMultipleAccounts ? "title" : "error_title"}`, { values: { name: $account?.alias } })}</Text>
     </div>
     <div class="flex w-full flex-row flex-wrap">
-        <Text type="p" secondary classes="mb-5">{locale('popups.delete_account.body')}</Text>
-        <Text type="p" secondary classes="mb-3">{locale('popups.delete_account.type_password')}</Text>
-        <Password
-            {error}
-            classes="w-full mb-8"
-            bind:value={password}
-            showRevealToggle
-            {locale}
-            placeholder={locale('general.password')}
-            autofocus
-            submitHandler={() => handleDeleteClick()}
-            disabled={isBusy} />
-        <div class="flex flex-row justify-between w-full space-x-4 px-8">
+        {#if hasMultipleAccounts}
+            <Text type="p" secondary classes="mb-5">{locale('popups.delete_account.body')}</Text>
+            <Text type="p" secondary classes="mb-3">{locale('popups.delete_account.type_password')}</Text>
+            <Password
+                {error}
+                classes="w-full mb-8"
+                bind:value={password}
+                showRevealToggle
+                {locale}
+                placeholder={locale('general.password')}
+                autofocus
+                submitHandler={() => handleDeleteClick()}
+                disabled={isBusy} />
+        {:else}
+            <Text type="p" secondary classes="mb-5">{locale('popups.delete_account.error_body_3')}</Text>
+        {/if}
+        <div class={`flex flex-row w-full space-x-4 px-8 ${hasMultipleAccounts ? 'justify-between' : 'justify-center'}`}>
             <Button secondary classes="w-1/2" onClick={() => handleCancelClick()} disabled={isBusy}>
-                {locale('actions.cancel')}
+                {locale(hasMultipleAccounts ? 'actions.cancel' : 'actions.close')}
             </Button>
-            <Button warning classes="w-1/2" onClick={() => handleDeleteClick()} type="submit" disabled={!password || isBusy}>
-                {locale('actions.delete_account')}
-            </Button>
+            {#if hasMultipleAccounts}
+                <Button warning classes="w-1/2" onClick={() => handleDeleteClick()} type="submit" disabled={!password || isBusy}>
+                    {locale('actions.delete_account')}
+                </Button>
+            {/if}
         </div>
     </div>
 {:else}

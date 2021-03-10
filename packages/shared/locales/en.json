@@ -311,7 +311,8 @@
             "delete_account": "Delete account",
             "error_title": "Unable to delete {name}",
             "error_body_1": "To delete an account you must have 0 balance.",
-            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
+            "error_body_3": "You cannot delete this account, you must have at least one."
         },
         "address_history": {
             "title": "{name} account address history",
