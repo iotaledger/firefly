@@ -6,18 +6,14 @@
     import { getContext } from 'svelte'
     import { date } from 'svelte-i18n'
     import type { Readable, Writable } from 'svelte/store'
-    import type { Essence } from 'shared/lib/typings/message'
+    import type { Payload } from 'shared/lib/typings/message'
 
     export let id
 
     export let timestamp
     export let locale
 
-    export let payload: {
-        data: {
-            essence: Essence
-        }
-    }
+    export let payload: Payload
 
     export let onBackClick = () => {}
 

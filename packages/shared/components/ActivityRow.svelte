@@ -3,20 +3,16 @@
     import { truncateString } from 'shared/lib/helpers'
     import { formatUnit } from 'shared/lib/units'
     import { date } from 'svelte-i18n'
-    import type { Essence } from 'shared/lib/typings/message'
+    import type { Payload } from 'shared/lib/typings/message'
 
     export let id
     export let timestamp
     export let confirmed
     export let color
 
-    export let payload: {
-        data: {
-            essence: Essence
-        }
-    }
+    export let payload: Payload
 
-    export let onClick = () => {}
+export let onClick = () => {}
 </script>
 
 <button
