@@ -2,6 +2,7 @@
     import { Button, Checkbox, Illustration, Input, OnboardingLayout, Text } from 'shared/components'
     import { developerMode } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
+    import { hasOnlyWhitespaces } from 'shared/lib/helpers'
     import { createProfile, disposeNewProfile, newProfile, profiles } from 'shared/lib/profile'
     import { SetupType } from 'shared/lib/typings/routes'
     import { getStoragePath, initialise } from 'shared/lib/wallet'
@@ -17,6 +18,8 @@
     // TODO: Remove defaulting to dev profile
     let isDeveloperProfile = true
     let profileName = get(newProfile)?.name ?? ''
+
+    $: isProfileNameValid = profileName && !hasOnlyWhitespaces(profileName)
 
     const MAX_PROFILE_NAME_LENGTH = 20
 
@@ -62,10 +65,14 @@
             {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap items-center space-x-4">
-            <Button secondary classes="flex-1" disabled={!profileName} onClick={() => handleContinueClick(SetupType.Import)}>
+            <Button
+                secondary
+                classes="flex-1"
+                disabled={!isProfileNameValid}
+                onClick={() => handleContinueClick(SetupType.Import)}>
                 {locale('actions.import_wallet')}
             </Button>
-            <Button classes="flex-1" disabled={!profileName} onClick={() => handleContinueClick(SetupType.New)}>
+            <Button classes="flex-1" disabled={!isProfileNameValid} onClick={() => handleContinueClick(SetupType.New)}>
                 {locale('actions.create_wallet')}
             </Button>
         </div>
