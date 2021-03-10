@@ -203,7 +203,16 @@
                     value: node.url,
                     label: node.url,
                 }))} />
-            <Button classes="w-1/4 mt-4" onClick={() => handleAddNodeClick()}>{locale('actions.add_node')}</Button>
+            
+            <!-- As client options (nodes) have association with accounts, disable "Add node" button if there are no accounts in wallet -->
+            <Button 
+            classes="w-1/4 mt-4"
+            
+             disabled={!$accounts.length} 
+             onClick={() => handleAddNodeClick()}
+             >
+             {locale('actions.add_node')}
+             </Button>
             <Button
                 classes="w-1/2 mt-4"
                 onClick={() => handleRemoveNodeClick()}
