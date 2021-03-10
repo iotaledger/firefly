@@ -9,7 +9,7 @@
     export let sortItems = false
     export let items = []
     export let small = false
-    export let onSelect = () => {}
+    export let onSelect = (_) => {}
 
     let dropdown = false
 
@@ -36,6 +36,9 @@
             @apply bg-gray-100;
         }
         nav {
+            .inner {
+                max-height: 235px;
+            }
             transition: opacity 0.25s;
             top: 50px; // TODO: unable to use tailwind inset
             left: 0px; // TODO: unable to use tailwind inset
@@ -45,9 +48,11 @@
                 @apply pointer-events-auto;
             }
             button {
-                &:hover,
                 &.active {
                     @apply bg-gray-100;
+                }
+                &:hover {
+                    @apply bg-gray-200;
                 }
             }
         }
@@ -59,6 +64,7 @@
             @apply rounded-lg;
             nav {
                 @apply rounded-lg;
+                top: 38px; // TODO: unable to use tailwind inset
             }
             :global(svg) {
                 right: 8px; // TODO: unable to use tailwind inset
@@ -85,12 +91,14 @@
     <Icon icon="chevron-down" classes="absolute text-gray-500 fill-current" />
     <nav
         class:active={dropdown}
-        class="absolute w-full overflow-y-auto bg-white border border-solid border-gray-500 pointer-events-none opacity-0 z-10 text-left">
-        {#each items as item}
-            <button
-                class="relative flex items-center bg-white p-4 w-full whitespace-nowrap"
-                on:click={() => onSelect(item)}
-                class:active={item[valueKey] === value}><Text type="p" smaller>{item[valueKey]}</Text></button>
-        {/each}
+        class="absolute w-full bg-white overflow-hidden border border-solid border-gray-500 pointer-events-none opacity-0 z-10 text-left">
+        <div class="inner overflow-y-auto">
+            {#each items as item}
+                <button
+                    class="relative flex items-center bg-white p-4 w-full whitespace-nowrap"
+                    on:click={() => onSelect(item)}
+                    class:active={item[valueKey] === value}><Text type="p" smaller>{item[valueKey]}</Text></button>
+            {/each}
+        </div>
     </nav>
 </dropdown-input>
