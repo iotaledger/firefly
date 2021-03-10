@@ -68,7 +68,7 @@
 
 {#if canDelete}
     <div class="mb-5">
-        <Text type="h4">{locale('popups.delete_account.title', { values: { name: $account?.alias } })}</Text>
+        <Text type="h4">{locale(`popups.delete_account.${hasMultipleAccounts ? "title" : "error_title"}`, { values: { name: $account?.alias } })}</Text>
     </div>
     <div class="flex w-full flex-row flex-wrap">
         {#if hasMultipleAccounts}
