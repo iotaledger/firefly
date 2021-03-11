@@ -53,6 +53,7 @@
                 }),
             },
             options: {
+                animation: false,
                 responsive: true,
                 maintainAspectRatio: false,
                 legend: {
