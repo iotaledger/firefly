@@ -2,8 +2,8 @@ name: "Crowdin"
 
 on:
   schedule:
-    # Weekly on Wednesday at 18:00 UTC
-    - cron: '0 18 * * WED'
+    # Daily at 18:00 UTC
+    - cron: '0 18 * * *'
   workflow_dispatch:
 
 jobs:
