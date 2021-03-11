@@ -326,7 +326,7 @@
             "optional_username": "Username (optional)",
             "optional_password": "Password (optional)",
             "set_as_primary_node": "Set as primary node",
-            "remove_confirmation": "Are you sure you want to remove node?"
+            "remove_confirmation": "Are you sure you want to remove this node?"
         },
         "errorLog": {
             "title": "Error Log",
@@ -334,7 +334,7 @@
         },
         "deleteProfile": {
             "title": "Delete profile",
-            "confirmation": "Are you sure you want to delete this profile, this operation cannot be undone?"
+            "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone."
         }
     },
     "charts": {
