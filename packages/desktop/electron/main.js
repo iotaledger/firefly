@@ -1,7 +1,7 @@
+import { initAutoUpdate } from './lib/appUpdater'
 const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
 const path = require('path')
 const Keychain = require('./lib/keychain')
-const { initAutoUpdate } = require('./lib/appUpdater')
 const { initMenu, contextMenu } = require('./lib/menu')
 
 /**
@@ -210,7 +210,7 @@ export const getOrInitWindow = (windowName) => {
 /**
  * Initialises the menu bar
  */
-initMenu(app, getWindow)
+initMenu()
 
 app.allowRendererProcessReuse = false
 

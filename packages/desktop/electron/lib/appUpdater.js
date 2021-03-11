@@ -1,6 +1,6 @@
+import { getOrInitWindow } from '../main'
 const { ipcMain } = require('electron')
 const { autoUpdater, CancellationToken } = require('electron-updater')
-const { getOrInitWindow } = require('../main')
 const packageJson = require('../../package.json')
 const electronLog = require('electron-log')
 
@@ -14,7 +14,7 @@ let versionDetails = {
 let downloadCancellation
 let ipcHandlersRegistered = false
 
-function initAutoUpdate(mainWindow) {
+export function initAutoUpdate(mainWindow) {
     if (!ipcHandlersRegistered) {
         // Registering more than one handler for an event causes an error
         // This will happen if the main window is closed and reopened on macOS since the app does not quit
@@ -57,30 +57,22 @@ function initAutoUpdate(mainWindow) {
     autoUpdater.checkForUpdates()
 }
 
-function updateDownload() {
+export function updateDownload() {
     downloadCancellation = new CancellationToken()
     autoUpdater.downloadUpdate(downloadCancellation)
 }
 
-function updateCancel() {
+export function updateCancel() {
     if (downloadCancellation) {
         downloadCancellation.cancel()
         downloadCancellation = undefined
     }
 }
 
-function updateInstall() {
+export function updateInstall() {
     autoUpdater.quitAndInstall()
 }
 
-function getVersionDetails() {
+export function getVersionDetails() {
     return versionDetails
-}
-
-module.exports = {
-    initAutoUpdate,
-    getVersionDetails,
-    updateDownload,
-    updateCancel,
-    updateInstall,
 }
