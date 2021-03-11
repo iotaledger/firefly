@@ -66,9 +66,7 @@
             walletRoute.set(route)
         })
         Electron.onEvent('menu-navigate-settings', () => {
-            if (get(appRoute) !== AppRoute.Dashboard) {
-                // TODO: Add settings from login
-            } else if (get(dashboardRoute) !== Tabs.Settings) {
+            if (get(dashboardRoute) !== Tabs.Settings) {
                 dashboardRoute.set(Tabs.Settings)
             }
         })
