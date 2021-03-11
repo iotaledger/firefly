@@ -11,7 +11,7 @@
         getTokenData,
         selectedChart,
     } from 'shared/lib/chart'
-    import { CurrencyTypes } from 'shared/lib/currency'
+    import { CurrencyTypes, formatCurrencyValue } from 'shared/lib/currency'
     import { HistoryDataProps, TIMEFRAME_MAP } from 'shared/lib/marketData'
     import { activeProfile } from 'shared/lib/profile'
     import { getContext, onMount } from 'svelte'
@@ -107,6 +107,6 @@
         {labels}
         {color}
         {xMaxTicks}
-        yPrecision={7}
+        formatYAxis={(value) => formatCurrencyValue(value, $chartCurrency, 4)}
         inlineStyle={$selectedAccount && 'height: calc(50vh - 150px);'} />
 </div>
