@@ -121,7 +121,7 @@ Wallet.onMessage((message: MessageResponse) => {
         // There is no message id
         // Something lower level has thrown an error
         // We should stop processing at this point
-        console.error("WalletAPI Error", message)
+        errorLog.update((log) => [ { type: ErrorType.ClientError, message: JSON.stringify(message), time: Date.now() }, ...log ])
         return
     }
 
