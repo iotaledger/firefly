@@ -326,7 +326,7 @@
             "optional_username": "Username (optional)",
             "optional_password": "Password (optional)",
             "set_as_primary_node": "Set as primary node",
-            "remove_confirmation": "Are you sure you want to remove node?"
+            "remove_confirmation": "Are you sure you want to remove this node?"
         },
         "errorLog": {
             "title": "Error Log",
@@ -334,7 +334,7 @@
         },
         "deleteProfile": {
             "title": "Delete profile",
-            "confirmation": "Are you sure you want to delete this profile, this operation cannot be undone?"
+            "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone."
         }
     },
     "charts": {
@@ -538,7 +538,7 @@
             "pattern": "Short keyboard patterns are easy to guess.",
             "names": "Common names and surnames are easy to guess.",
             "repeats": "Repeats like 'aaa' are easy to guess.",
-            "repeats2": "Repeats like 'abcabcabc' are easy to guess",
+            "repeats2": "Repeats like 'abcabcabc' are easy to guess.",
             "sequence": "Sequences of characters are easy to guess.",
             "years": "Recent years are easy to guess.",
             "dates": "Dates are easy to guess.",
