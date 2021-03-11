@@ -44,7 +44,7 @@ interface SendParams {
  * Input paramaters for sending transactions
  */
 export const sendParams = writable<SendParams>({ amount: 0, address: '', message: '' })
-export const clearSendParams = sendParams.set({ amount: 0, address: '', message: '' })
+export const clearSendParams = () => sendParams.set({ amount: 0, address: '', message: '' })
 
 /**
  * Determines whether a user is logged in
@@ -64,6 +64,7 @@ export const logout = () => {
     if (ap) {
         destroyActor(ap.id)
     }
+    clearSendParams()
     closePopup()
     resetWallet()
     resetRouter()
