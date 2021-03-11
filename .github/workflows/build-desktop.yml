@@ -143,6 +143,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Getting version
+      run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/desktop-}" >> $GITHUB_ENV
+
     - name: Downloading artifacts
       uses: actions/download-artifact@v2
       with:
