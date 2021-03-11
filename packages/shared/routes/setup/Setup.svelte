@@ -5,7 +5,7 @@
     import { hasOnlyWhitespaces } from 'shared/lib/helpers'
     import { createProfile, disposeNewProfile, newProfile, profiles } from 'shared/lib/profile'
     import { SetupType } from 'shared/lib/typings/routes'
-    import { getStoragePath, initialise } from 'shared/lib/wallet'
+    import { getStoragePath, initialise, api, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -20,8 +20,6 @@
     let profileName = get(newProfile)?.name ?? ''
 
     $: isProfileNameValid = profileName && !hasOnlyWhitespaces(profileName)
-
-    const MAX_PROFILE_NAME_LENGTH = 20
 
     function handleContinueClick(setupType) {
         if (profileName) {
@@ -44,6 +42,8 @@
 
             return Electron.getUserDataPath().then((path) => {
                 initialise(profile.id, getStoragePath(path, profile.name))
+                api.setStrongholdPasswordClearInterval({ secs: 0, nanos: 0 })
+
                 dispatch('next', { setupType })
             })
         }

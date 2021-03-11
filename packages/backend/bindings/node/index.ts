@@ -27,6 +27,7 @@ import {
 } from '../../../shared/lib/typings/message'
 import {
   LoggerConfig,
+  Duration,
   backup as _backup,
   restoreBackup as _restoreBackup,
   setStrongholdPassword as _setStrongholdPassword,
@@ -39,7 +40,8 @@ import {
   removeStorage as _removeStorage,
   lockStronghold as _lockStronghold,
   changeStrongholdPassword as _changeStrongholdPassword,
-  setClientOptions as _setClientOptions
+  setClientOptions as _setClientOptions,
+  setStrongholdPasswordClearInterval as _setStrongholdPasswordClearInterval
 } from '../../../shared/lib/typings/wallet'
 import { ClientOptions } from '../../../shared/lib/typings/client'
 
@@ -179,6 +181,9 @@ export const api = {
   },
   setClientOptions: function (options: ClientOptions): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _setClientOptions(sendMessage, __ids, options)
+  },
+  setStrongholdPasswordClearInterval: function (interval: Duration): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _setStrongholdPasswordClearInterval(sendMessage, __ids, interval)
   },
   onError: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'ErrorThrown')
