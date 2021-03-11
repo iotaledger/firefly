@@ -103,7 +103,7 @@
     <Chart
         type="line"
         {datasets}
-        beginAtZero={$selectedChart !== DashboardChartType.TOKEN}
+        beginAtZero={$selectedAccount || $selectedChart !== DashboardChartType.TOKEN}
         {labels}
         {color}
         {xMaxTicks}
