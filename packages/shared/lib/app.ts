@@ -63,4 +63,6 @@ export const logout = () => {
     resetWallet()
     resetRouter()
     loggedIn.set(false)
+
+    mnemonic.set(null)
 }
