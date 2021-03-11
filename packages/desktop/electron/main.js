@@ -33,7 +33,7 @@ app.commandLine.appendSwitch('js-flags', '--expose-gc')
  */
 const windows = {
     main: null,
-    about: null
+    about: null,
 }
 
 /**
@@ -45,7 +45,7 @@ let paths = {
     preload: '',
     html: '',
     aboutHtml: '',
-    aboutPreload: ''
+    aboutPreload: '',
 }
 
 /**
@@ -160,6 +160,10 @@ function createWindow() {
         closeAboutWindow()
     })
 
+    windows.main.on('closed', () => {
+        windows.main = null
+    })
+
     /**
      * Handle permissions requests
      */
@@ -183,6 +187,23 @@ app.whenReady().then(createWindow)
  * @returns {BrowserWindow} Requested window
  */
 export const getWindow = function (windowName) {
+    return windows[windowName]
+}
+
+/**
+ * Gets or creates the requested BrowserWindow instance
+ * @param {string} windowName
+ * @returns {BrowserWindow} Requested window
+ */
+export const getOrInitWindow = (windowName) => {
+    if (!windows[windowName]) {
+        if (windowName === 'main') {
+            return createWindow()
+        }
+        if (windowName === 'about') {
+            return openAboutWindow()
+        }
+    }
     return windows[windowName]
 }
 
@@ -350,4 +371,3 @@ export const closeAboutWindow = () => {
         windows.about = null
     }
 }
-

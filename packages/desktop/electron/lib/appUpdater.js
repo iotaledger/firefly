@@ -1,10 +1,9 @@
 const { ipcMain } = require('electron')
 const { autoUpdater, CancellationToken } = require('electron-updater')
-const path = require('path')
+const { getOrInitWindow } = require('../main')
 const packageJson = require('../../package.json')
 const electronLog = require('electron-log')
 
-let autoUpdateMainWindow
 let versionDetails = {
     upToDate: true,
     currentVersion: packageJson.version,
@@ -16,8 +15,6 @@ let downloadCancellation
 let ipcHandlersRegistered = false
 
 function initAutoUpdate(mainWindow) {
-    autoUpdateMainWindow = mainWindow
-
     if (!ipcHandlersRegistered) {
         // Registering more than one handler for an event causes an error
         // This will happen if the main window is closed and reopened on macOS since the app does not quit
@@ -42,21 +39,21 @@ function initAutoUpdate(mainWindow) {
         let releaseNotes = info.releaseNotes || ''
         releaseNotes = releaseNotes.replace(/<[^>]*>?/gm, '')
         versionDetails.changelog = releaseNotes
-        autoUpdateMainWindow.webContents.send('version-details', versionDetails)
+        getOrInitWindow('main').webContents.send('version-details', versionDetails)
     })
     autoUpdater.on('download-progress', (progressObj) => {
-        autoUpdateMainWindow.webContents.send('version-progress', progressObj)
+        getOrInitWindow('main').webContents.send('version-progress', progressObj)
     })
 
     autoUpdater.on('update-downloaded', (info) => {
-        autoUpdateMainWindow.webContents.send('version-complete', info)
+        getOrInitWindow('main').webContents.send('version-complete', info)
     })
 
     autoUpdater.on('error', (err) => {
-        autoUpdateMainWindow.webContents.send('version-error', err)
+        getOrInitWindow('main').webContents.send('version-error', err)
     })
 
-    autoUpdateMainWindow.webContents.send('version-details', versionDetails)
+    mainWindow.webContents.send('version-details', versionDetails)
     autoUpdater.checkForUpdates()
 }
 
