@@ -14,7 +14,7 @@ import type { ClientOptions } from './typings/client'
 import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, ErrorEventPayload, Event, TransactionEventPayload, TransferProgressEventPayload } from './typings/events'
 import { ErrorType } from './typings/events'
 import type { Message } from './typings/message'
-import type { StrongholdStatus } from './typings/wallet'
+import type { StrongholdStatus, Duration } from './typings/wallet'
 
 type CallbacksStore = {
     [id: string]: CallbacksPattern
@@ -69,6 +69,7 @@ const apiToResponseTypeMap = {
     removeStorage: ResponseTypes.DeletedStorage,
     lockStronghold: ResponseTypes.LockedStronghold,
     changeStrongholdPassword: ResponseTypes.StrongholdPasswordChanged,
+    setStrongholdPasswordClearInterval: ResponseTypes.StrongholdPasswordClearIntervalSet,
     ...eventsApiToResponseTypeMap
 }
 
@@ -108,6 +109,10 @@ const defaultCallbacks = {
     NewTransaction: {
         onSuccess: (response: Event<TransactionEventPayload>): void => { },
     },
+    StrongholdPasswordClearIntervalSet: {
+        onSuccess: (response: Event<void>): void => { },
+        onError: (error: ErrorMessage): void => { },
+    }
 }
 
 const eventsApiResponseTypes = Object.values(eventsApiToResponseTypeMap)
@@ -157,7 +162,7 @@ Wallet.onMessage((message: MessageResponse) => {
             )
         } else if (message.type === ResponseTypes.Panic) {
             onError(
-                    handleError(
+                handleError(
                     ErrorType.Panic,
                     message.payload
                 )
@@ -204,7 +209,7 @@ const storeCallbacks = (__id: string, type: ResponseTypes, callbacks?: Callbacks
  * @param {string} error
  */
 const handleError = (type: ErrorType | ValidatorErrorTypes, error: string): { type: ErrorType | ValidatorErrorTypes, error: string } => {
-    errorLog.update((log) => [ { type, message: error, time: Date.now() }, ...log ])
+    errorLog.update((log) => [{ type, message: error, time: Date.now() }, ...log])
 
     // TODO: Add full type list to remove this temporary fix
     const _getError = () => {
@@ -303,6 +308,7 @@ export interface ApiClient {
     setStoragePassword(newPinCode: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     removeStorage(callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     setClientOptions(clientOptions: ClientOptions, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
+    setStrongholdPasswordClearInterval(interval: Duration, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
 
     onStrongholdStatusChange(callbacks: { onSuccess: (response: Event<StrongholdStatus>) => void, onError: (err: ErrorEventPayload) => void })
     onNewTransaction(callbacks: { onSuccess: (response: Event<TransactionEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
