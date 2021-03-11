@@ -13,20 +13,26 @@ let versionDetails = {
     changelog: '',
 }
 let downloadCancellation
+let ipcHandlersRegistered = false
 
 function initAutoUpdate(mainWindow) {
     autoUpdateMainWindow = mainWindow
+
+    if (!ipcHandlersRegistered) {
+        // Registering more than one handler for an event causes an error
+        // This will happen if the main window is closed and reopened on macOS since the app does not quit
+        ipcMain.handle('update-download', () => updateDownload())
+        ipcMain.handle('update-cancel', () => updateCancel())
+        ipcMain.handle('update-install', () => updateInstall())
+        ipcMain.handle('update-get-version-details', () => getVersionDetails())
+        ipcHandlersRegistered = true
+    }
 
     autoUpdater.logger = electronLog
     autoUpdater.logger.transports.file.level = 'info'
 
     // Disable automatic update downloads
     autoUpdater.autoDownload = false
-
-    ipcMain.handle('update-download', () => updateDownload())
-    ipcMain.handle('update-cancel', () => updateCancel())
-    ipcMain.handle('update-install', () => updateInstall())
-    ipcMain.handle('update-get-version-details', () => getVersionDetails())
 
     autoUpdater.on('update-available', (info) => {
         versionDetails.upToDate = false
