@@ -39,16 +39,26 @@
         <div slot="leftpane__action">
             <Button classes="w-full" disabled={!valid || creatingAccount} onClick={() => handleContinue()}>
                 {#if creatingAccount}
-                    <Spinner busy={creatingAccount} message={locale('views.verify_recovery_phrase.creating_account')} classes="justify-center" />
+                    <Spinner
+                        busy={creatingAccount}
+                        message={locale('views.verify_recovery_phrase.creating_account')}
+                        classes="justify-center" />
                 {:else}
                     {locale('actions.verify_recovery_phrase')}
                 {/if}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex flex-row flex-wrap items-center justify-center p-16">
-            <RecoveryPhrase recoveryPhrase={mnemonic} bind:recoveryPhraseInput isVerification disabled={creatingAccount} />
-            <Button onClick={() => (recoveryPhraseInput = [])} disabled={creatingAccount}>
-                {locale('views.verify_recovery_phrase.reset_recovery_verification')}
+        <div slot="rightpane" class="w-full h-full flex flex-col flex-wrap items-center justify-center p-16">
+            <RecoveryPhrase
+                classes="mb-8"
+                recoveryPhrase={mnemonic}
+                bind:recoveryPhraseInput
+                isVerification
+                disabled={creatingAccount} />
+            <Button
+                onClick={() => (recoveryPhraseInput = [])}
+                disabled={creatingAccount || !recoveryPhraseInput || recoveryPhraseInput.length === 0}>
+                {locale('actions.reset')}
             </Button>
         </div>
     </OnboardingLayout>
