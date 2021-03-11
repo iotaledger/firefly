@@ -86,6 +86,10 @@ function isUrlAllowed(url) {
     return externalAllowlist.indexOf(new URL(url).hostname.replace('www.', '').replace('mailto:', '')) > -1
 }
 
+/**
+ * Create main window
+ * @returns {BrowserWindow} Main window
+ */
 function createWindow() {
     /**
      * Register iota file protocol
@@ -168,12 +172,15 @@ function createWindow() {
 
         return cb(permissionAllowlist.indexOf(permission) > -1)
     })
+
+    return windows.main
 }
 
 app.whenReady().then(createWindow)
 
 /**
- * Gets Window instance
+ * Gets BrowserWindow instance
+ * @returns {BrowserWindow} Requested window
  */
 export const getWindow = function (windowName) {
     return windows[windowName]
@@ -297,8 +304,11 @@ ipcMain.on('deep-link-request', () => {
     }
 })
 
+/**
+ * Create about window
+ * @returns {BrowserWindow} About window
+ */
 export const openAboutWindow = () => {
-
     if (windows.about !== null) {
         windows.about.focus()
         return windows.about
