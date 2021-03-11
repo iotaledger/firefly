@@ -7,12 +7,12 @@
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { priceData } from 'shared/lib/marketData'
     import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
+    import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import { formatUnit } from 'shared/lib/units'
-    import { showAppNotification } from 'shared/lib/notifications'
     import {
         AccountMessage,
         api,
@@ -24,8 +24,8 @@
         initialiseListeners,
         isTransferring,
         selectedAccountId,
+        syncAccounts,
         transferState,
-        updateAccounts,
         updateBalanceOverview,
         wallet,
         WalletAccount,
@@ -128,32 +128,40 @@
     function getAccounts() {
         api.getAccounts({
             onSuccess(accountsResponse) {
-                syncAccounts()
-
-                const _totalBalance = {
-                    balance: 0,
-                    incoming: 0,
-                    outgoing: 0,
+                const _continue = () => {
+                    accountsLoaded.set(true)
+                    syncAccounts()
                 }
 
-                for (const [idx, storedAccount] of accountsResponse.payload.entries()) {
+                if (accountsResponse.payload.length === 0) {
+                    _continue()
+                } else {
+                    const totalBalance = {
+                        balance: 0,
+                        incoming: 0,
+                        outgoing: 0,
+                    }
+
+                    for (const [idx, storedAccount] of accountsResponse.payload.entries()) {
                         getAccountMeta(storedAccount.id, (err, meta) => {
                             if (!err) {
-                                _totalBalance.balance += meta.balance
-                                _totalBalance.incoming += meta.incoming
-                                _totalBalance.outgoing += meta.outgoing
+                                totalBalance.balance += meta.balance
+                                totalBalance.incoming += meta.incoming
+                                totalBalance.outgoing += meta.outgoing
 
                                 const account = prepareAccountInfo(storedAccount, meta)
                                 accounts.update((accounts) => [...accounts, account])
 
                                 if (idx === accountsResponse.payload.length - 1) {
-                                    updateBalanceOverview(_totalBalance.balance, _totalBalance.incoming, _totalBalance.outgoing)
+                                    updateBalanceOverview(totalBalance.balance, totalBalance.incoming, totalBalance.outgoing)
+                                    _continue()
                                 }
                             } else {
                                 console.error(err)
                             }
                         })
                     }
+                }
             },
             onError(err) {
                 showAppNotification({
@@ -203,24 +211,6 @@
                 } else {
                     _generate()
                 }
-            },
-            onError(err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error),
-                })
-            },
-        })
-    }
-
-    function syncAccounts() {
-        api.syncAccounts({
-            onSuccess(syncAccountsResponse) {
-                const syncedAccounts = syncAccountsResponse.payload
-
-                updateAccounts(syncedAccounts)
-
-                accountsLoaded.set(true)
             },
             onError(err) {
                 showAppNotification({
@@ -372,8 +362,10 @@
                                     {
                                         messages: [
                                             Object.assign({}, response.payload, {
-                                            incoming: isReceiverAccount
-                                        }), ..._account.messages],
+                                                incoming: isReceiverAccount,
+                                            }),
+                                            ..._account.messages,
+                                        ],
                                     }
                                 )
                             }

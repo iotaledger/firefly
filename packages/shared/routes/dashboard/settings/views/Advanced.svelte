@@ -3,12 +3,12 @@
     import { Button, Checkbox, Dropdown, Radio, Text } from 'shared/components'
     import { developerMode } from 'shared/lib/app'
     import { DEFAULT_NODE, DEFAULT_NODES } from 'shared/lib/network'
+    import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import type { Node } from 'shared/lib/typings/client'
-    import { api, updateAccounts, wallet, WalletAccount } from 'shared/lib/wallet'
+    import { api, isSyncing, syncAccounts, wallet, WalletAccount } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
-    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale
 
@@ -155,30 +155,6 @@
     function handleErrorLogClick() {
         openPopup({ type: 'errorLog' })
     }
-
-    function resyncAccounts() {
-        const _sync = () => {
-            api.syncAccounts({
-                onSuccess(syncAccountsResponse) {
-                    const syncedAccounts = syncAccountsResponse.payload
-
-                    updateAccounts(syncedAccounts)
-                },
-                onError(err) {
-                    showAppNotification({
-                        type: 'error',
-                        message: locale(err.error),
-                    })
-                },
-            })
-        }
-
-        if ($activeProfile.isStrongholdLocked) {
-            openPopup({ type: 'password', props: { onSuccess: _sync } })
-        } else {
-            _sync()
-        }
-    }
 </script>
 
 <div>
@@ -245,7 +221,7 @@
     <section id="resyncAccounts" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.resyncAccounts.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.resyncAccounts.description')}</Text>
-        <Button classes="w-1/4" onClick={resyncAccounts}>{locale('actions.syncAll')}</Button>
+        <Button classes="w-1/4" onClick={syncAccounts} disabled={$isSyncing}>{locale('actions.syncAll')}</Button>
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <section id="errorLog" class="w-3/4">
