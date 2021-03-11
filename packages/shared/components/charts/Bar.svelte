@@ -123,6 +123,7 @@
                 }),
             },
             options: {
+                animation: false,
                 barRoundness: 1,
                 responsive: true,
                 maintainAspectRatio: false,
