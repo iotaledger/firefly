@@ -57,7 +57,7 @@
                         throw new Error('Invalid pin code!')
                     }
 
-                    await Electron.PincodeManager.set(get(activeProfile).id, pin)
+                    await Electron.PincodeManager.set(get(activeProfile)?.id, pin)
 
                     api.setStoragePassword(pin, {
                         onSuccess() {
@@ -91,7 +91,6 @@
         }
     }
 </script>
-
 
 <!-- TODO: Readd Protect Init page
     

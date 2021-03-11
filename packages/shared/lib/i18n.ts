@@ -1,6 +1,6 @@
-import { get, derived, writable } from 'svelte/store'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
-import { getLocaleFromNavigator, addMessages, dictionary, _, init } from 'svelte-i18n'
+import { addMessages, dictionary, getLocaleFromNavigator, init, _ } from 'svelte-i18n'
+import { derived, get, writable } from 'svelte/store'
 
 /*
  * Code following https://phrase.com/blog/posts/a-step-by-step-guide-to-svelte-localization-with-svelte-i18n-v3/
@@ -123,9 +123,9 @@ function loadJson(url) {
     return fetch(url).then((response) => response.json())
 }
 
-const dir = derived(activeProfile, ($activeProfile) => {
-    if ($activeProfile) {
-        return $activeProfile.settings.language === 'ar' ? 'rtl' : 'ltr'
+const dir = derived(activeProfile, (_activeProfile) => {
+    if (_activeProfile) {
+        return _activeProfile.settings.language === 'ar' ? 'rtl' : 'ltr'
     }
     return 'ltr'
 })

@@ -21,7 +21,8 @@
 
     function addCustomNode(node: Node, primary = false) {
         addressError = ''
-        const error = isNodeValid([...$activeProfile.settings.customNodes, ...DEFAULT_NODES], node)
+
+        const error = isNodeValid([...$activeProfile?.settings.customNodes, ...DEFAULT_NODES], node)
 
         if (error) {
             // TODO: Move locale to store and localise properly
@@ -29,7 +30,7 @@
         } else {
             isBusy = true
 
-            updateProfile('settings.customNodes', [...$activeProfile.settings.customNodes, node])
+            updateProfile('settings.customNodes', [...$activeProfile?.settings.customNodes, node])
             if (primary) {
                 updateProfile('settings.node', node)
             }

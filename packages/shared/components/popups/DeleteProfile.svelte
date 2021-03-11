@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
+    import { logout } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile, removeProfile } from 'shared/lib/profile'
-    import { resetRouter } from 'shared/lib/router'
-    import { api, destroyActor, resetWallet } from 'shared/lib/wallet'
+    import { api } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
 
     export let locale
@@ -14,25 +14,30 @@
 
     function deleteProfile() {
         isBusy = true
-        Electron.PincodeManager.remove(get(activeProfile).id).then((isRemoved) => {
+        const ap = get(activeProfile)
+        if (!ap) {
+            logout()
+            return
+        }
+
+        Electron.PincodeManager.remove(ap.id).then((isRemoved) => {
             if (!isRemoved) {
-                throw new Error('Something went wrong removing pincode entry.')
+                console.error('Something went wrong removing pincode entry.')
             }
 
             // Remove storage
             api.removeStorage({
                 onSuccess(res) {
-                    // Destroy wallet.rs actor for this profile
-                    destroyActor($activeProfile.id)
-
-                    resetWallet()
-                    resetRouter()
+                    logout()
 
                     // Remove profile from (local) storage
                     // Note: This should be the last step in the reset process.
                     // It should be done after the router is set back to default.
                     // Otherwise, parts of the application referencing $activeProfile will create an exception.
-                    removeProfile($activeProfile.id)
+                    const ap = get(activeProfile)
+                    if (ap) {
+                        removeProfile(ap.id)
+                    }
 
                     isBusy = false
                     closePopup()

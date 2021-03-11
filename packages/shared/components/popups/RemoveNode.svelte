@@ -6,6 +6,7 @@
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import type { ClientOptions } from 'shared/lib/typings/client'
     import { api, wallet, WalletAccount } from 'shared/lib/wallet'
+    import { get } from 'svelte/store'
 
     export let locale
 
@@ -16,53 +17,57 @@
     function removeCustomNode() {
         isBusy = true
 
-        const url = $activeProfile.settings.node.url
+        const ap = get(activeProfile)
 
-        updateProfile('settings.node', DEFAULT_NODE)
-        updateProfile(
-            'settings.customNodes',
-            $activeProfile.settings.customNodes.filter((n) => n.url !== url)
-        )
+        if (ap) {
+            const url = ap.settings.node.url
 
-        api.setClientOptions(
-            {
-                node: DEFAULT_NODE,
-                nodes: [],
-            },
-            {
-                onSuccess() {
-                    accounts.update((_accounts) =>
-                        _accounts.map((_account) => {
-                            return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                {} as WalletAccount,
-                                _account,
-                                {
-                                    clientOptions: Object.assign<ClientOptions, ClientOptions, ClientOptions>(
-                                        {},
-                                        _account.clientOptions,
-                                        {
-                                            node: DEFAULT_NODE,
-                                            nodes: [],
-                                        }
-                                    ),
-                                }
-                            )
+            updateProfile('settings.node', DEFAULT_NODE)
+            updateProfile(
+                'settings.customNodes',
+                ap.settings.customNodes.filter((n) => n.url !== url)
+            )
+
+            api.setClientOptions(
+                {
+                    node: DEFAULT_NODE,
+                    nodes: [],
+                },
+                {
+                    onSuccess() {
+                        accounts.update((_accounts) =>
+                            _accounts.map((_account) => {
+                                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+                                    {} as WalletAccount,
+                                    _account,
+                                    {
+                                        clientOptions: Object.assign<ClientOptions, ClientOptions, ClientOptions>(
+                                            {},
+                                            _account.clientOptions,
+                                            {
+                                                node: DEFAULT_NODE,
+                                                nodes: [],
+                                            }
+                                        ),
+                                    }
+                                )
+                            })
+                        )
+
+                        isBusy = false
+                        closePopup()
+                    },
+                    onError(err) {
+                        isBusy = false
+                        closePopup()
+                        showAppNotification({
+                            type: 'error',
+                            message: locale(err.error),
                         })
-                    )
-
-                    isBusy = false
-                    closePopup()
-                },
-                onError(err) {
-                    isBusy = false
-                    closePopup()
-                    showAppNotification({
-                        type: 'error',
-                        message: locale(err.error),
-                    })
-                },
-            }
-        )
+                    },
+                }
+            )
+        }
     }
 </script>
 

@@ -1,7 +1,7 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
-    import { Logo, Profile, Icon } from 'shared/components'
+    import { Icon, Logo, Profile } from 'shared/components'
     import { profiles, setActiveProfile } from 'shared/lib/profile'
+    import { createEventDispatcher } from 'svelte'
 
     export let locale
     export let mobile
