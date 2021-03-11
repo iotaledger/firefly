@@ -22,5 +22,5 @@
 {#if type === ChartType.Line}
     <LineChart {formatYAxis} {datasets} {labels} {tooltips} {xMaxTicks} {yMaxTicks} {yPrecision} {beginAtZero} {color} {inlineStyle} />
 {:else if type === ChartType.Bar}
-    <BarChart {datasets} {labels} {tooltips} {inlineStyle} />
+    <BarChart {formatYAxis} {datasets} {labels} {tooltips} {inlineStyle} />
 {/if}
