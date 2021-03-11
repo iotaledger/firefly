@@ -530,7 +530,7 @@
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length} characters.",
+            "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
             "duplicate": "A profile with this name already exists."
         },
         "password": {
@@ -548,21 +548,21 @@
             "similar": "This is similar to a common password.",
             "reasonWord": "A single word is easy to guess.",
             "incorrect": "Your password is incorrect.",
-            "length": "Your password can't be longer than {length} characters."
+            "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length} digits long.",
+            "length": "Your PIN must be {length, plural, one {1 digit} other {# digits}} long.",
             "match": "PINs do not match.",
             "incorrect": "Your current PIN is incorrect."
         },
         "account": {
-            "length": "Your account name can't be longer than {length} characters.",
+            "length": "Your account name can't be longer than {length, plural, one {1 character} other {# characters}}.",
             "empty": "You must use your latest account before creating a new one.",
             "notEmpty": "You must transfer your balance before deleting this account.",
             "duplicate": "An account with this name already exists."
         },
         "send": {
-            "addressLength": "Addresses should be {length} characters long.",
+            "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
             "amountTooHigh": "This is greater than your available balance.",
             "amountNoFloat": "If units are `i` you cannot use decimal places.",
             "amountInvalidFormat": "The amount appears to be an invalid number.",
@@ -583,7 +583,7 @@
             "invalid": "The backup file was not recognised.",
             "destination": "The backup destination was not valid.",
             "mnemonic": "The mnemonic is not valid.",
-            "seedTooShort": "The seed should be 81 characters long, it is {length}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
             "seedCharacters": "The seed should only contain characters A-Z or 9",
             "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}",
             "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase"
