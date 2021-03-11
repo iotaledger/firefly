@@ -68,5 +68,4 @@ export const logout = () => {
     resetWallet()
     resetRouter()
     clearActiveProfile()
-    loggedIn.set(false)
 }

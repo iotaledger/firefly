@@ -99,6 +99,9 @@ export const resetWallet = () => {
     accountsLoaded.set(false)
     selectedAccountId.set(null)
     selectedMessage.set(null)
+    isTransferring.set(false)
+    transferState.set(null)
+    isSyncing.set(null)
     loggedIn.set(false)
 }
 
