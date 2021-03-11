@@ -16,7 +16,6 @@
 
     $: selectedAccount = $currentAccount || $accounts[0]
 
-
     const handleDropdownSelect = (item) => {
         selectedAccount = item
     }
@@ -30,7 +29,7 @@
 </script>
 
 <div class="w-full h-full flex flex-col justify-between {!$currentAccount ? 'p-8' : ''}">
-    <div class="w-full h-full space-y-10 flex flex-auto flex-col flex-shrink-0">
+    <div class="w-full h-full space-y-5 flex flex-auto flex-col flex-shrink-0">
         {#if !$currentAccount}
             <div>
                 <div class="w-full flex flex-row justify-between items-start">
@@ -39,15 +38,15 @@
                         <Icon icon="close" classes="text-gray-800 dark:text-white" />
                     </button>
                 </div>
-                <Dropdown valueKey={'alias'} value={selectedAccount.alias} items={$accounts} onSelect={handleDropdownSelect} />
+                <Dropdown valueKey={'alias'} value={selectedAccount.alias} items={$accounts} onSelect={handleDropdownSelect} disabled={$accounts.length === 1} />
             </div>
         {/if}
         <div
             class="w-full h-full flex flex-col flex-auto rounded-2xl border border-solid border-gray-300 dark:border-gray-700 p-4">
             <div class="w-full flex flex-row justify-between items-start">
                 <Text type="p" smaler bold classes="mb-4">{locale('actions.receive')}</Text>
-                <button on:click={generateNewAddress}>
-                    <Icon icon="refresh" classes="text-gray-500 dark:text-white" />
+                <button on:click={generateNewAddress} class:pointer-events-none={isGeneratingAddress}>
+                    <Icon icon="refresh" classes="{isGeneratingAddress && 'animate-spin'} text-gray-500 dark:text-white" />
                 </button>
             </div>
             <div class="flex flex-auto items-center justify-center mb-6">

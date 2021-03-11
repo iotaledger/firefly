@@ -1,16 +1,19 @@
 <script lang="typescript">
+    import { Transition } from 'shared/components'
+    import { mnemonic, strongholdPassword } from 'shared/lib/app'
+    import { Electron } from 'shared/lib/electron'
+    import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
+    import { updateProfile } from 'shared/lib/profile'
+    import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
-    import { Backup, RecoveryPhrase, VerifyRecoveryPhrase, BackupToFile, Success } from './views/'
-    import { Transition } from 'shared/components'
-    import { mnemonic } from 'shared/lib/app'
-    import { updateProfile } from 'shared/lib/profile'
-    import { strongholdPassword } from 'shared/lib/app'
-    import { api } from 'shared/lib/wallet'
-    import { DEFAULT_NODES, DEFAULT_NODE, network } from 'shared/lib/network'
+    import { Backup, BackupToFile, RecoveryPhrase, Success, VerifyRecoveryPhrase } from './views/'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale
     export let mobile
+
+    let loading = false
 
     enum BackupState {
         Init = 'init',
@@ -53,7 +56,7 @@
                             },
                         })
                     })
-                        .then(() => window['Electron'].getStrongholdBackupDestination())
+                        .then(() => Electron.getStrongholdBackupDestination())
                         .then((result) => {
                             if (result) {
                                 return new Promise<void>((res, rej) => {
@@ -80,6 +83,7 @@
             case BackupState.Verify:
             case BackupState.Success:
                 const _mnemonic = get(mnemonic).join(' ')
+                loading = true
 
                 // TODO: Instead of generated mnemonic, we should construct the phrase with what was chosen by the user
                 api.verifyMnemonic(_mnemonic, {
@@ -90,8 +94,8 @@
                                     {
                                         signerType: { type: 'Stronghold' },
                                         clientOptions: {
-                                            node: DEFAULT_NODE.url,
-                                            nodes: DEFAULT_NODES.map(n => n.url),
+                                            node: DEFAULT_NODE,
+                                            nodes: DEFAULT_NODES,
                                             network: $network,
                                         },
                                     },
@@ -99,20 +103,31 @@
                                         onSuccess() {
                                             dispatch('next')
                                         },
-                                        onError() {
-                                            // TODO: handle error
-                                            console.error('create account error')
+                                        onError(err) {
+                                            showAppNotification({
+                                                type: 'error',
+                                                message: locale(err.error),
+                                            })
+                                            loading = false
                                         },
                                     }
                                 )
                             },
-                            onError(error) {
-                                console.log(error)
+                            onError(err) {
+                                showAppNotification({
+                                    type: 'error',
+                                    message: locale(err.error),
+                                })
+                                loading = false
                             },
                         })
                     },
-                    onError(error) {
-                        console.error('Error verifying mnemonic', error)
+                    onError(err) {
+                        showAppNotification({
+                            type: 'error',
+                            message: locale(err.error),
+                        })
+                        loading = false
                     },
                 })
 
@@ -145,7 +160,7 @@
     </Transition>
 {:else if state === BackupState.Verify}
     <Transition>
-        <VerifyRecoveryPhrase on:next={_next} on:previous={_previous} mnemonic={$mnemonic} {locale} {mobile} />
+        <VerifyRecoveryPhrase {loading} on:next={_next} on:previous={_previous} mnemonic={$mnemonic} {locale} {mobile} />
     </Transition>
 {:else if state === BackupState.Backup}
     <Transition>

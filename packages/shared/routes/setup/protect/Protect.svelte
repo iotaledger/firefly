@@ -1,17 +1,16 @@
 <script lang="typescript">
-    import { get } from 'svelte/store'
-    import { createEventDispatcher } from 'svelte'
     import { Transition } from 'shared/components'
-    import { api } from 'shared/lib/wallet'
+    import { Electron } from 'shared/lib/electron'
     import { activeProfile } from 'shared/lib/profile'
-
-    import { Protect, Pin } from './views/'
     import { validatePinFormat } from 'shared/lib/utils'
+    import { api } from 'shared/lib/wallet'
+    import { createEventDispatcher } from 'svelte'
+    import { get } from 'svelte/store'
+    import { Pin, Protect } from './views/'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale
     export let mobile
-
-    const PincodeManager = window['Electron']['PincodeManager']
 
     enum ProtectState {
         Init = 'init',
@@ -22,7 +21,7 @@
 
     const dispatch = createEventDispatcher()
 
-    let state: ProtectState = ProtectState.Init
+    let state: ProtectState = ProtectState.Pin
     let stateHistory = []
 
     let pin = null
@@ -58,14 +57,17 @@
                         throw new Error('Invalid pin code!')
                     }
 
-                    await PincodeManager.set(get(activeProfile).id, pin)
+                    await Electron.PincodeManager.set(get(activeProfile).id, pin)
 
                     api.setStoragePassword(pin, {
                         onSuccess() {
                             dispatch('next', { pin })
                         },
-                        onError(error) {
-                            console.error(error)
+                        onError(err) {
+                            showAppNotification({
+                                type: 'error',
+                                message: locale(err.error),
+                            })
                         },
                     })
                     break
@@ -90,11 +92,16 @@
     }
 </script>
 
-{#if state === ProtectState.Init || state === ProtectState.Biometric}
+
+<!-- TODO: Readd Protect Init page
+    
+#if state === ProtectState.Init || state === ProtectState.Biometric}
     <Transition>
         <Protect on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
-{:else if state === ProtectState.Pin || state === ProtectState.Confirm}
+{/if}-->
+
+{#if state === ProtectState.Pin || state === ProtectState.Confirm}
     <Transition>
         <Pin on:next={_next} on:previous={_previous} pinCandidate={pin} {locale} {mobile} />
     </Transition>

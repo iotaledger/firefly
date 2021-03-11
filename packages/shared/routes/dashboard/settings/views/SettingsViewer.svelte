@@ -24,7 +24,12 @@
 
     function scrollIntoView(id) {
         if (id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' })
+            const elem = document.getElementById(id)
+            if (elem) {
+                elem.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' })
+            } else {
+                console.error(`Element with id "${id}" missing in scrollIntoView`)
+            }
         }
     }
 </script>

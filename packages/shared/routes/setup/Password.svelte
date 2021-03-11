@@ -36,9 +36,8 @@
                 onSuccess() {
                     dispatch('next', { password })
                 },
-                onError(error) {
-                    // TODO: handle error
-                    console.log(error)
+                onError(err) {
+                    error = locale(err.error)
                 },
             })
         }
@@ -65,6 +64,7 @@
                     showStrengthLevel
                     strength={passwordStrength.score}
                     {locale} 
+                    autofocus
                 />
                 <Password 
                     bind:value={confirmedPassword} 

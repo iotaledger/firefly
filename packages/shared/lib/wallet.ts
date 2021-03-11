@@ -4,16 +4,18 @@ import { persistent } from 'shared/lib/helpers'
 import { _ } from 'shared/lib/i18n'
 import type { HistoryData, PriceData } from 'shared/lib/marketData'
 import { HistoryDataProps } from 'shared/lib/marketData'
-import { showSystemNotification } from 'shared/lib/notifications'
+import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { formatUnit } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
 import type { Account, SyncedAccount } from './typings/account'
 import type { Address } from './typings/address'
 import type { Actor } from './typings/bridge'
-import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, Event, TransactionEventPayload, TransferProgressEventPayload, TransferProgressEventType } from './typings/events'
+import type { TransferProgressEventType } from './typings/events'
 import type { Input, Message, Output } from './typings/message'
 import type { ApiClient } from './walletApi'
+
+export const MAX_ACCOUNT_NAME_LENGTH = 20
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
@@ -96,12 +98,18 @@ export const resetWallet = () => {
     accounts.set([])
     accountsLoaded.set(false)
     selectedAccountId.set(null)
+    selectedMessage.set(null)
     loggedIn.set(false)
 }
 
 export const selectedAccountId = writable<string | null>(null)
 
-export const transferState = writable<TransferProgressEventType | null>(null)
+export const selectedMessage = writable<Message | null>(null)
+
+export const isTransferring = writable<boolean>(false)
+export const transferState = writable<TransferProgressEventType | "Complete" | null>(null)
+
+export const isSyncing = writable<boolean>(false)
 
 export const loggedIn = persistent<boolean>('loggedIn', false)
 
@@ -190,7 +198,7 @@ export const initialiseListeners = () => {
 
                 const locale = get(_) as (string) => string
                 const notificationMessage = locale('notifications.valueTx')
-                    .replace('{{value}}', message.value.toString())
+                    .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
                     .replace('{{account}}', account.alias)
 
                 showSystemNotification({ type: "info", message: notificationMessage })
@@ -214,7 +222,7 @@ export const initialiseListeners = () => {
 
                 const locale = get(_) as (string) => string
                 const notificationMessage = locale(`notifications.${messageKey}`)
-                    .replace('{{value}}', message.value.toString())
+                    .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
                     .replace('{{account}}', account.alias)
 
                 showSystemNotification({ type: "info", message: notificationMessage })
@@ -282,7 +290,7 @@ export const updateAccountAfterBalanceChange = (
 
                 return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
                     rawIotaBalance,
-                    balance: formatUnit(rawIotaBalance, 0),
+                    balance: formatUnit(rawIotaBalance, 2),
                     balanceEquiv: `${convertToFiat(
                         rawIotaBalance,
                         get(currencies)[CurrencyTypes.USD],
@@ -297,6 +305,8 @@ export const updateAccountAfterBalanceChange = (
                     })
                 })
             }
+
+            return storedAccount;
         })
     })
 }
@@ -336,7 +346,10 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
  * @returns {AccountMessage[]}
  */
 export const getLatestMessages = (accounts: WalletAccount[], count = 10): AccountMessage[] => {
-    const messages: AccountMessage[] = [];
+    const messages: {
+        [key: string]: AccountMessage
+    } = {};
+
     const addresses: string[] = [];
 
     accounts.forEach((account) => {
@@ -344,28 +357,19 @@ export const getLatestMessages = (accounts: WalletAccount[], count = 10): Accoun
             addresses.push(address.address);
         })
 
-        messages.push(...account.messages.map((message) =>
-            Object.assign<AccountMessage, Message, Partial<AccountMessage>>({} as AccountMessage, message, { account: account.index })));
+        account.messages.forEach((message) => {
+            messages[message.id] = Object.assign<
+                AccountMessage,
+                Message,
+                Partial<AccountMessage>
+            >(
+                {} as AccountMessage,
+                message,
+                { account: account.index });
+        })
     });
 
-    return messages
-        .map(
-            (message) => {
-                const outputs = message.payload.data.essence.data.outputs;
-                const inputs = message.payload.data.essence.data.inputs
-
-                return Object.assign(
-                    {},
-                    message,
-                    {
-                        internal: outputs.length && outputs.every(
-                            (output: Output) => addresses.includes(output.data.address)
-                        ) && inputs.length && inputs.every(
-                            (input: Input) => input.data.metadata ? addresses.includes(input.data.metadata.address) : false
-                        )
-                    })
-            }
-        )
+    return Object.values(messages)
         .sort((a, b) => {
             return <any>new Date(b.timestamp) - <any>new Date(a.timestamp)
         })
@@ -402,6 +406,26 @@ export const updateBalanceOverview = (balance: number, incoming: number, outgoin
         });
     });
 };
+
+/**
+ * Updates balance overview fiat value
+ *
+ * @method updateBalanceOverviewFiat
+ *
+ * @returns {void}
+ */
+export const updateBalanceOverviewFiat = (): void => {
+    const { balanceOverview } = get(wallet);
+    balanceOverview.update((overview) => {
+        return Object.assign<BalanceOverview, BalanceOverview, Partial<BalanceOverview>>({} as BalanceOverview, overview, {
+            balanceFiat: `${convertToFiat(
+                overview.balanceRaw,
+                get(currencies)[CurrencyTypes.USD],
+                get(exchangeRates)[get(activeProfile).settings.currency]
+            )} ${get(activeProfile).settings.currency}`,
+        });
+    });
+}
 
 /**
 * Updates accounts information after a successful sync accounts operation
@@ -448,6 +472,28 @@ function mergeProps<T>(existingPayload: T[], newPayload: T[], prop: string): T[]
 }
 
 /**
+ * Updates balance fiat value for every account
+ *
+ * @method updateAccountBalanceEquiv
+ *
+ * @returns {void}
+ */
+export const updateAccountsBalanceEquiv = (): void => {
+    const { accounts } = get(wallet)
+    accounts.update((storedAccounts) => {
+        return storedAccounts.map((storedAccount) => {
+            return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
+                balanceEquiv: `${convertToFiat(
+                    storedAccount.rawIotaBalance,
+                    get(currencies)[CurrencyTypes.USD],
+                    get(exchangeRates)[get(activeProfile).settings.currency]
+                )} ${get(activeProfile).settings.currency}`,
+            })
+        })
+    })
+}
+
+/**
  * Gets balance history for each account in market data timestamps
  *
  * @method getLatestMessages
@@ -479,11 +525,14 @@ export const getAccountsBalanceHistory = (accounts: Account[], priceData: PriceD
             var balanceSoFar = 0;
             let accountBalanceVariations = [{ balance: balanceSoFar, timestamp: '0' }]
             messages.forEach((message) => {
-                if (message.incoming) {
-                    balanceSoFar += message.value;
+                const essence = message.payload.data.essence.data;
+
+                if (essence.incoming) {
+                    balanceSoFar += essence.value;
                 } else {
-                    balanceSoFar -= message.value;
+                    balanceSoFar -= essence.value;
                 }
+
                 accountBalanceVariations.push({ balance: balanceSoFar, timestamp: message.timestamp })
             })
             // Calculate the balance in each market data timestamp
@@ -552,4 +601,28 @@ export const getWalletBalanceHistory = (accountsBalanceHistory: BalanceHistory):
         })
     })
     return balanceHistory
+}
+
+/**
+ * Sync the accounts
+ */
+export function syncAccounts() {
+    isSyncing.set(true)
+    api.syncAccounts({
+        onSuccess(syncAccountsResponse) {
+            const syncedAccounts = syncAccountsResponse.payload
+
+            updateAccounts(syncedAccounts)
+
+            isSyncing.set(false)
+        },
+        onError(err) {
+            isSyncing.set(false)
+            const locale = get(_) as (string) => string
+            showAppNotification({
+                type: 'error',
+                message: locale(err.error),
+            })
+        },
+    })
 }

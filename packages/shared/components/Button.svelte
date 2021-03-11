@@ -229,7 +229,7 @@
                     </div>
                     {#if !disabled}
                         <div class="absolute right-0 flex items-center h-full">
-                            <Icon icon="arrow-right" classes="right" />
+                            <Icon icon="chevron-right" classes="right" />
                         </div>
                     {/if}
                 </div>

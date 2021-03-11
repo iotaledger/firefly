@@ -59,13 +59,14 @@ const defaultWebPreferences = {
     disableBlinkFeatures: 'Auxclick',
     webviewTag: false,
     enableWebSQL: false,
-    devTools: devMode,
+    // TODO: Remove before stable
+    devTools: true,
 }
 
 if (app.isPackaged) {
     paths.preload = path.join(app.getAppPath(), '/public/build/preload.js')
     paths.html = path.join(app.getAppPath(), '/public/index.html')
-    paths.aboutPreload = path.join(app.getAppPath(), '/public/lib/aboutPreload.js')
+    paths.aboutPreload = path.join(app.getAppPath(), '/public/build/lib/aboutPreload.js')
     paths.aboutHtml = path.join(app.getAppPath(), '/public/about.html')
 } else {
     // __dirname is desktop/public/build
@@ -103,6 +104,7 @@ function createWindow() {
         minHeight: 720,
         width: 1280,
         height: 720,
+        titleBarStyle: 'hidden',
         webPreferences: {
             ...defaultWebPreferences,
             preload: paths.preload,
@@ -149,6 +151,10 @@ function createWindow() {
      */
     windows.main.webContents.on('will-navigate', _handleNavigation)
     windows.main.webContents.on('new-window', _handleNavigation)
+
+    windows.main.on('close', () => {
+        closeAboutWindow()
+    })
 
     /**
      * Handle permissions requests
@@ -247,7 +253,7 @@ app.on('second-instance', (_e, args) => {
             const params = args.find((arg) => arg.startsWith('iota://'))
 
             if (params) {
-                windows.main.webContents.send('deepLink-params', params)
+                windows.main.webContents.send('deep-link-params', params)
             }
         }
         if (windows.main.isMinimized()) {
@@ -277,16 +283,16 @@ app.on('open-url', (event, url) => {
     event.preventDefault()
     deepLinkUrl = url
     if (windows.main) {
-        windows.main.webContents.send('deepLink-params', url)
+        windows.main.webContents.send('deep-link-params', url)
     }
 })
 
 /**
  * Proxy deep link event to the wallet application
  */
-ipcMain.on('deepLink-request', () => {
+ipcMain.on('deep-link-request', () => {
     if (deepLinkUrl) {
-        windows.main.webContents.send('deepLink-params', deepLinkUrl)
+        windows.main.webContents.send('deep-link-params', deepLinkUrl)
         deepLinkUrl = null
     }
 })
@@ -302,7 +308,7 @@ export const openAboutWindow = () => {
         width: 300,
         height: 180,
         useContentSize: true,
-        titleBarStyle: 'hidden-inset',
+        titleBarStyle: 'hidden',
         show: false,
         fullscreenable: false,
         resizable: false,
@@ -327,3 +333,11 @@ export const openAboutWindow = () => {
 
     return windows.about
 }
+
+export const closeAboutWindow = () => {
+    if (windows.about) {
+        windows.about.close()
+        windows.about = null
+    }
+}
+

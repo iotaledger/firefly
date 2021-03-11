@@ -1,12 +1,13 @@
 <script lang="typescript">
-    import { api } from 'shared/lib/wallet'
+    import { Button, Password, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import { Password, Button, Text } from 'shared/components'
+    import { api } from 'shared/lib/wallet'
 
     export let locale
 
     export let onSuccess
     export let onError
+    export let onCancelled
 
     let password
     let error = ''
@@ -20,10 +21,7 @@
                 }
             },
             onError(err) {
-                // TODO: Add proper error handling
-                if (err.payload.error.includes('try another password')){
-                     error = locale('error.password.incorrect')
-                }
+                error = locale(err.error)
                 if ('function' === typeof onError) {
                     onError(err)
                 }
@@ -31,6 +29,9 @@
         })
     }
     function handleCancelClick() {
+        if ('function' === typeof onCancelled) {
+            onCancelled()
+        }
         closePopup()
     }
 </script>
@@ -40,9 +41,18 @@
     <Text type="p" secondary>{locale('popups.password.subtitle')}</Text>
 </div>
 <form id="password-popup-form" class="flex justify-center w-full flex-row flex-wrap" on:submit={handleSubmit}>
-    <Password {error} classes="w-full mb-5" bind:value={password} showRevealToggle {locale} placeholder={locale('general.password')} autofocus/>
+    <Password
+        {error}
+        classes="w-full mb-5"
+        bind:value={password}
+        showRevealToggle
+        {locale}
+        placeholder={locale('general.password')}
+        autofocus />
     <div class="flex flex-row justify-between w-full space-x-4 px-8">
         <Button secondary classes="w-1/2" onClick={handleCancelClick}>{locale('actions.cancel')}</Button>
-        <Button classes="w-1/2" type="submit" form="password-popup-form">{locale('actions.unlock')}</Button>
+        <Button classes="w-1/2" type="submit" form="password-popup-form" disabled={!password || password.length === 0}>
+            {locale('actions.unlock')}
+        </Button>
     </div>
 </form>

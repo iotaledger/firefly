@@ -3,6 +3,7 @@
     import { darkMode } from 'shared/lib/app'
     import { Text, Radio, Dropdown, Checkbox } from 'shared/components'
     import { exchangeRates } from 'shared/lib/currency'
+    import { updateAccountsBalanceEquiv, updateBalanceOverviewFiat } from 'shared/lib/wallet'
     import { addProfileCurrencyPriceData } from 'shared/lib/marketData'
     import { locales, setupI18n } from 'shared/lib/i18n'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
@@ -24,6 +25,8 @@
     const handleCurrencySelect = (item) => {
         updateProfile('settings.currency', item.value)
         addProfileCurrencyPriceData()
+        updateBalanceOverviewFiat()
+        updateAccountsBalanceEquiv()
     }
 </script>
 
@@ -33,7 +36,8 @@
         <Text type="p" secondary>{locale('views.settings.profile.description')}</Text>
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
-    <section id="theme" class="w-3/4">
+    <!-- TODO: Implement and enable -->
+    <section id="theme" class="w-3/4 opacity-50 pointer-events-none">
         <Text type="h4" classes="mb-3">{locale('views.settings.theme.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.theme.description')}</Text>
         <Radio value={false} bind:group={darkModeEnabled} label={locale('general.light_theme')} />

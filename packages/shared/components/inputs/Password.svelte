@@ -2,7 +2,6 @@
 <script lang="typescript">
     import Input from './Input'
     import { Icon } from 'shared/components'
-    import { onMount } from 'svelte'
 
     export let value = ''
     export let classes = ''
@@ -16,6 +15,8 @@
     export let error = null
     export let numeric = false
     export let autofocus = false
+    export let submitHandler = undefined
+    export let disabled = false
 
     let revealed = false
     let type = 'password'
@@ -62,9 +63,11 @@
             {maxlength}
             {numeric}
             {autofocus}
+            {disabled}
             placeholder={placeholder || locale('general.password')} 
+            {submitHandler}
         />
-        {#if showRevealToggle === true}
+        {#if showRevealToggle === true && !disabled}
             <button type="button" on:click={() => revealToggle()} tabindex="-1" class="absolute top-3">
                 <Icon icon={revealed ? 'view' : 'hide'} classes="text-blue-500" />
             </button>

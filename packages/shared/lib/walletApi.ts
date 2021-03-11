@@ -1,5 +1,6 @@
 import Validator, { ErrorTypes as ValidatorErrorTypes } from 'shared/lib/validator'
 import * as Wallet from 'wallet-nodejs-binding'
+import { errorLog, getErrorMessage } from './events'
 import type { Account, AccountToCreate, Balance, SyncedAccount } from './typings/account'
 import type { Address } from './typings/address'
 import type {
@@ -10,7 +11,8 @@ import type {
 } from './typings/bridge'
 import { ResponseTypes } from './typings/bridge'
 import type { ClientOptions } from './typings/client'
-import type { ErrorType, BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, ErrorEventPayload, Event, TransactionEventPayload, TransferProgressEventPayload } from './typings/events'
+import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, ErrorEventPayload, Event, TransactionEventPayload, TransferProgressEventPayload } from './typings/events'
+import { ErrorType } from './typings/events'
 import type { Message } from './typings/message'
 import type { StrongholdStatus } from './typings/wallet'
 
@@ -130,25 +132,40 @@ Wallet.onMessage((message: MessageResponse) => {
             const { onError } = callbacksStore[id]
 
             onError(
-                createErrorMessage(
+                handleError(
                     payload.type,
                     payload.error
                 )
             )
         } else {
-            /** TODO: In case of unknown ids, add validation failure to error log */
+            handleError(
+                payload.type,
+                payload.error
+            )
         }
     } else {
         const { id } = message
 
         const { onSuccess, onError } = callbacksStore[id]
 
-        message.type === ResponseTypes.Error || message.type === ResponseTypes.Panic ? onError(
-            createErrorMessage(
-                message.payload.type,
-                message.payload.error
+        if (message.type === ResponseTypes.Error) {
+            onError(
+                handleError(
+                    message.payload.type,
+                    message.payload.error
+                )
             )
-        ) : onSuccess(message)
+        } else if (message.type === ResponseTypes.Panic) {
+            onError(
+                    handleError(
+                    ErrorType.Panic,
+                    message.payload
+                )
+            )
+        }
+        else {
+            onSuccess(message)
+        }
     }
 
     // Delete callback id from callback store
@@ -179,17 +196,32 @@ const storeCallbacks = (__id: string, type: ResponseTypes, callbacks?: Callbacks
 }
 
 /**
- * Creates error message 
+ * Emits formatted error and adds to error log 
  * 
- * @method createErrorMessage
+ * @method handleError
  * 
  * @param {ErrorType | ValidatorErrorTypes} type
  * @param {string} error
  */
-const createErrorMessage = (type: ErrorType | ValidatorErrorTypes, error: string): { type: ErrorType | ValidatorErrorTypes, error: string } => {
+const handleError = (type: ErrorType | ValidatorErrorTypes, error: string): { type: ErrorType | ValidatorErrorTypes, error: string } => {
+    errorLog.update((log) => [ { type, message: error, time: Date.now() }, ...log ])
+
+    // TODO: Add full type list to remove this temporary fix
+    const _getError = () => {
+        if (error.includes('try another password')) {
+            return ('error.password.incorrect')
+        }
+        if (error.includes('message history and balance')) {
+            return ('error.account.empty')
+        }
+
+        return getErrorMessage(type)
+    }
+
+
     return {
         type,
-        error
+        error: _getError()
     }
 };
 

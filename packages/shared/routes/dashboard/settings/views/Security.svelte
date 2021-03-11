@@ -1,11 +1,14 @@
 <script lang="typescript">
+    import { Button, Checkbox, Dropdown, Password, Spinner, Text } from 'shared/components'
+    import { Electron } from 'shared/lib/electron'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import passwordInfo from 'shared/lib/password'
+    import { openPopup } from 'shared/lib/popup'
+    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { PIN_LENGTH } from 'shared/lib/utils'
+    import { api } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
     import zxcvbn from 'zxcvbn'
-    import { Text, Dropdown, Password, Button, Checkbox } from 'shared/components'
-    import { updateProfile, activeProfile, removeProfile } from 'shared/lib/profile'
-    import { api, destroyActor } from 'shared/lib/wallet'
-    import { openPopup } from 'shared/lib/popup'
-    import passwordInfo from 'shared/lib/password';
 
     function assignTimeoutOptionLabel(timeInMinutes) {
         let label = ''
@@ -30,146 +33,218 @@
     let confirmedPassword = ''
     let currentPasswordError = ''
     let newPasswordError = ''
+    let exportBusy = false
+    let exportMessage = ''
 
     let currentPincode = ''
     let newPincode = ''
     let confirmedPincode = ''
     let currentPincodeError = ''
     let newPincodeError = ''
+    let pinCodeBusy = false
+    let pinCodeMessage = ''
+
+    let passwordChangeBusy = false
+    let passwordChangeMessage = ''
 
     const MAX_PASSWORD_LENGTH = 256
-    const MAX_PINCODE_LENGTH = 6
-    
+
     $: passwordStrength = zxcvbn(newPassword)
 
-    const PincodeManager = window['Electron']['PincodeManager']
+    function handleExportClick() {
+        resetErrors()
 
-    function reset() {
-        PincodeManager.remove(get(activeProfile).id).then((isRemoved) => {
-            if (!isRemoved) {
-                throw new Error('Something went wrong removing pincode entry.')
-            }
-
-            // Remove storage
-            api.removeStorage({
-                onSuccess(res) {
-                    // Destroy wallet.rs actor for this profile
-                    destroyActor($activeProfile.id)
-
-                    // Remove profile from (local) storage
-                    removeProfile($activeProfile.id)
-
-                    // Navigate
-                    navigate({ reset: true })
+        const _callback = (cancelled, err) => {
+            setTimeout(
+                () => {
+                    exportMessage = ''
                 },
-                onError(error) {
-                    console.error(error)
+                cancelled ? 0 : 2000
+            )
+            exportBusy = false
+            if (!cancelled) {
+                if (err) {
+                    exportMessage = locale('general.exportingStrongholdFailed')
+                    showAppNotification({
+                        type: 'error',
+                        message: locale(err),
+                    })
+                } else {
+                    exportMessage = locale('general.exportingStrongholdSuccess')
+                }
+            }
+        }
+
+        if (get(activeProfile).isStrongholdLocked) {
+            openPopup({
+                type: 'password',
+                props: {
+                    onSuccess: () => {
+                        exportBusy = true
+                        exportMessage = locale('general.exportingStronghold')
+                        exportStronghold(_callback)
+                    },
                 },
             })
-        })
-    }
-
-    function handleExportClick() {
-        if (get(activeProfile).isStrongholdLocked) {
-            openPopup({ type: 'password', props: { onSuccess: exportStronghold } })
         } else {
-            exportStronghold()
+            exportBusy = true
+            exportMessage = locale('general.exportingStronghold')
+            exportStronghold(_callback)
         }
     }
 
-    function exportStronghold(callback?: () => void) {
-        window['Electron']
-            .getStrongholdBackupDestination()
+    function exportStronghold(callback?: (cancelled: boolean, err?: string) => void) {
+        Electron.getStrongholdBackupDestination()
             .then((result) => {
                 if (result) {
                     api.backup(result, {
                         onSuccess() {
                             updateProfile('lastStrongholdBackupTime', new Date())
-
-                            if ('function' === typeof callback) {
-                                callback()
-                            }
+                            callback(false)
                         },
-                        onError(error) {
-                            console.error(error)
+                        onError(err) {
+                            callback(false, err.error)
                         },
                     })
+                } else {
+                    callback(true)
                 }
             })
-            .catch((error) => console.error(error))
+            .catch((err) => {
+                callback(false, err.error)
+            })
     }
 
     function changePassword() {
         resetErrors()
-        const _changePassword = () => {
-            console.log('changing password')
-            api.changeStrongholdPassword(currentPassword, newPassword, {
-                onSuccess() {},
-                onError(err) {
-                    // TODO: Add proper error handling
-                    if (err.payload.error.includes('try another password')){
-                        currentPasswordError = locale('error.password.incorrect')
-                    }
-                },
-            })
-        }
 
         if (newPassword.length > MAX_PASSWORD_LENGTH) {
-            newPasswordError = locale('error.password.length', { 
+            newPasswordError = locale('error.password.length', {
                 values: {
-                    length: MAX_PASSWORD_LENGTH
-                }
+                    length: MAX_PASSWORD_LENGTH,
+                },
             })
         } else if (newPassword !== confirmedPassword) {
             newPasswordError = locale('error.password.doNotMatch')
         } else if (passwordStrength.score !== 4) {
             newPasswordError = passwordStrength.feedback.warning
                 ? locale(`error.password.${passwordInfo[passwordStrength.feedback.warning]}`)
-                : locale('error.password.tooWeak');
+                : locale('error.password.tooWeak')
         } else {
-            if (exportStrongholdChecked) {
-                  return exportStronghold(_changePassword)
-             }
-            _changePassword()
+            passwordChangeBusy = true
+            passwordChangeMessage = locale('general.passwordUpdating')
+            let busyStart = Date.now()
+            const _clearMessage = () => {
+                setTimeout(() => (passwordChangeMessage = ''), 2000)
+            }
+            const _hideBusy = (message, timeout) => {
+                const diff = Date.now() - busyStart
+                if (diff < timeout) {
+                    setTimeout(() => {
+                        passwordChangeBusy = false
+                        passwordChangeMessage = message
+                        _clearMessage()
+                    }, timeout - diff)
+                } else {
+                    passwordChangeBusy = false
+                    passwordChangeMessage = message
+                    _clearMessage()
+                }
+            }
+
+            api.changeStrongholdPassword(currentPassword, newPassword, {
+                onSuccess() {
+                    if (exportStrongholdChecked) {
+                        passwordChangeMessage = locale('general.exportingStronghold')
+
+                        return exportStronghold((cancelled, err) => {
+                            if (cancelled) {
+                                _hideBusy('', 0)
+                            } else {
+                                if (err) {
+                                    currentPasswordError = locale(err)
+                                    _hideBusy(locale('general.passwordFailed'), 0)
+                                } else {
+                                    currentPassword = ''
+                                    newPassword = ''
+                                    confirmedPassword = ''
+                                    exportStrongholdChecked = false
+                                    _hideBusy(locale('general.passwordSuccess'), 2000)
+                                }
+                            }
+                        })
+                    } else {
+                        currentPassword = ''
+                        newPassword = ''
+                        confirmedPassword = ''
+                        exportStrongholdChecked = false
+                        _hideBusy(locale('general.passwordSuccess'), 2000)
+                    }
+                },
+                onError(err) {
+                    currentPasswordError = locale(err.error)
+                    _hideBusy(locale('general.passwordFailed'), 0)
+                },
+            })
         }
     }
 
     function changePincode() {
         resetErrors()
-        if (newPincode.length !== MAX_PINCODE_LENGTH) {
-            newPincodeError = locale('error.pincode.length', { 
+
+        if (newPincode.length !== PIN_LENGTH) {
+            newPincodeError = locale('error.pincode.length', {
                 values: {
-                    length: MAX_PINCODE_LENGTH
-                }
+                    length: PIN_LENGTH,
+                },
             })
         } else if (newPincode !== confirmedPincode) {
             newPincodeError = locale('error.pincode.match')
         } else {
-            PincodeManager.verify(get(activeProfile).id, currentPincode)
-            .then((valid) => {
-                if (valid) {
-                    return new Promise((resolve, reject) => {
-                        api.setStoragePassword(newPincode, {
-                            onSuccess() {
-                                PincodeManager.set(get(activeProfile).id, newPincode)
-                                    .then(resolve)
-                                    .then(() => {
-                                        currentPincode = ''
-                                        newPincode = ''
-                                        confirmedPincode = ''
-                                    })
-                                    .catch(reject)
-                            },
-                            onError(error) {
-                                reject(error)
-                            },
-                        })
-                    })
+            pinCodeBusy = true
+            pinCodeMessage = locale('general.pinCodeUpdating')
+
+            const _clear = (err?) => {
+                setTimeout(() => {
+                    pinCodeMessage = ''
+                }, 2000)
+                pinCodeBusy = false
+                if (err) {
+                    newPincodeError = err
+                    pinCodeMessage = locale('general.pinCodeFailed')
                 } else {
-                    currentPincodeError = locale('error.pincode.incorrect')
+                    pinCodeMessage = locale('general.pinCodeSuccess')
                 }
-            })
-            .catch(console.error)
+            }
+
+            Electron.PincodeManager.verify(get(activeProfile).id, currentPincode)
+                .then((valid) => {
+                    if (valid) {
+                        return new Promise<void>((resolve, reject) => {
+                            api.setStoragePassword(newPincode, {
+                                onSuccess() {
+                                    Electron.PincodeManager.set(get(activeProfile).id, newPincode)
+                                        .then(() => {
+                                            currentPincode = ''
+                                            newPincode = ''
+                                            confirmedPincode = ''
+                                            _clear()
+                                            resolve()
+                                        })
+                                        .catch(reject)
+                                },
+                                onError(err) {
+                                    _clear(locale(err.error))
+                                },
+                            })
+                        })
+                    } else {
+                        _clear(locale('error.pincode.incorrect'))
+                    }
+                })
+                .catch((err) => {
+                    _clear(err.message)
+                })
         }
     }
 
@@ -178,6 +253,16 @@
         newPasswordError = ''
         currentPincodeError = ''
         newPincodeError = ''
+        passwordChangeBusy = false
+        passwordChangeMessage = ''
+        pinCodeBusy = false
+        pinCodeMessage = ''
+        exportBusy = false
+        exportMessage = ''
+    }
+
+    function reset() {
+        openPopup({ type: 'deleteProfile' })
     }
 </script>
 
@@ -185,7 +270,10 @@
     <section id="exportStronghold" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.exportStronghold.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.exportStronghold.description')}</Text>
-        <Button classes="w-1/4 h-1/2" onClick={handleExportClick}>{locale('actions.export')}</Button>
+        <div class="flex flex-row items-center">
+            <Button classes="w-1/4 h-1/2" onClick={handleExportClick} disabled={exportBusy}>{locale('actions.export')}</Button>
+            <Spinner busy={exportBusy} message={exportMessage} classes="ml-2" />
+        </div>
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <section id="appLock" class="w-3/4">
@@ -209,7 +297,8 @@
                 bind:value={currentPassword}
                 showRevealToggle
                 {locale}
-                placeholder={locale('general.currentPassword')} />
+                placeholder={locale('general.currentPassword')}
+                disabled={passwordChangeBusy} />
             <Password
                 error={newPasswordError}
                 classes="mb-1"
@@ -219,22 +308,30 @@
                 showStrengthLevel
                 strength={passwordStrength.score}
                 {locale}
-                placeholder={locale('general.newPassword')} />
+                placeholder={locale('general.newPassword')}
+                disabled={passwordChangeBusy} />
             <Password
                 classes="mb-5"
                 bind:value={confirmedPassword}
                 showRevealToggle
                 {locale}
-                placeholder={locale('general.confirmNewPassword')} />
-            <Checkbox classes="mb-5" label={locale('actions.exportNewStronghold')} bind:checked={exportStrongholdChecked} />
-            <Button 
-                form="form-change-password" 
-                type="submit" 
-                classes="w-1/4" 
-                disabled={!currentPassword || !newPassword || !confirmedPassword}
-            >
-                {locale('views.settings.changePassword.title')}
-            </Button>
+                placeholder={locale('general.confirmNewPassword')}
+                disabled={passwordChangeBusy} />
+            <Checkbox
+                classes="mb-5"
+                label={locale('actions.exportNewStronghold')}
+                bind:checked={exportStrongholdChecked}
+                disabled={passwordChangeBusy} />
+            <div class="flex flex-row items-center">
+                <Button
+                    form="form-change-password"
+                    type="submit"
+                    classes="w-1/4"
+                    disabled={!currentPassword || !newPassword || !confirmedPassword || passwordChangeBusy}>
+                    {locale('views.settings.changePassword.title')}
+                </Button>
+                <Spinner busy={passwordChangeBusy} message={passwordChangeMessage} classes="ml-2" />
+            </div>
         </form>
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
@@ -250,7 +347,8 @@
                 {locale}
                 maxlength="6"
                 numeric
-                placeholder={locale('views.settings.changePincode.currentPincode')} />
+                placeholder={locale('views.settings.changePincode.currentPincode')}
+                disabled={pinCodeBusy} />
             <Password
                 error={newPincodeError}
                 classes="mb-1"
@@ -259,7 +357,8 @@
                 {locale}
                 maxlength="6"
                 numeric
-                placeholder={locale('views.settings.changePincode.newPincode')} />
+                placeholder={locale('views.settings.changePincode.newPincode')}
+                disabled={pinCodeBusy} />
             <Password
                 classes="mb-5"
                 bind:value={confirmedPincode}
@@ -267,21 +366,24 @@
                 {locale}
                 maxlength="6"
                 numeric
-                placeholder={locale('views.settings.changePincode.confirmNewPincode')} />
-            <Button 
-                type="submit" 
-                form="pincode-change-form" 
-                classes="w-1/4 mb-5"
-                disabled={!currentPincode || !newPincode || !confirmedPincode}
-            >
-                {locale('views.settings.changePincode.action')}
-            </Button>
+                placeholder={locale('views.settings.changePincode.confirmNewPincode')}
+                disabled={pinCodeBusy} />
+            <div class="flex flex-row items-center">
+                <Button
+                    type="submit"
+                    form="pincode-change-form"
+                    classes="w-1/4 mb-5"
+                    disabled={!currentPincode || !newPincode || !confirmedPincode || pinCodeBusy}>
+                    {locale('views.settings.changePincode.action')}
+                </Button>
+                <Spinner busy={pinCodeBusy} message={pinCodeMessage} classes="ml-2" />
+            </div>
         </form>
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
-    <section id="resetWallet" class="w-3/4">
-        <Text type="h4" classes="mb-3">{locale('views.settings.resetWallet.title')}</Text>
-        <Text type="p" secondary classes="mb-5">{locale('views.settings.resetWallet.description')}</Text>
-        <Button classes="w-1/4" onClick={reset}>{locale('views.settings.resetWallet.title')}</Button>
+    <section id="deleteProfile" class="w-3/4">
+        <Text type="h4" classes="mb-3">{locale('views.settings.deleteProfile.title')}</Text>
+        <Text type="p" secondary classes="mb-5">{locale('views.settings.deleteProfile.description')}</Text>
+        <Button classes="w-1/4" warning onClick={reset}>{locale('views.settings.deleteProfile.title')}</Button>
     </section>
 </div>

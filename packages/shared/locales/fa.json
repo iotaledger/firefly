@@ -1,14 +1,14 @@
 {
     "views": {
         "onboarding_1": {
-            "title": "Send, Receive & Manage your IOTA",
-            "body": "Firefly is a secure and easy-to-use IOTA wallet."
+            "title": "ارسال٬ دریافت و مدیریت آیوتا",
+            "body": "فایرفلای یک کیف پول آیوتای امن با استفاده آسان میباشد."
         },
         "legal": {
-            "title": "Legal",
-            "body": "Please review the Privacy Policy and Terms of Service.",
+            "title": "حقوقی",
+            "body": "لطفا قوانین و سیاست حفظ حریم خصوصی را مرور کنید.",
             "privacy_policy": {
-                "title": "Privacy Policy",
+                "title": "سیاست حفظ حریم خصوصی",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -17,7 +17,7 @@
                 "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "terms_of_service": {
-                "title": "Terms of Service",
+                "title": "قوانین",
                 "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -28,17 +28,17 @@
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
         "language": {
-            "title": "Language & appearance",
-            "body": "Choose your wallet’s language and theme"
+            "title": "زبان و ظاهر",
+            "body": "تم و زبان کیف پول خود را انتخاب کنید"
         },
         "setup": {
-            "title": "Set up your wallet",
-            "body": "You can create a new wallet or import an existing one.",
-            "profile_name": "Profile Name"
+            "title": "کیف پول خود را راه اندازی کنید",
+            "body": "شما میتوانید کیف پول جدید بسازید یا کیف پول قدیمی خود را وارد کنید.",
+            "profile_name": "نام پروفایل"
         },
         "password": {
-            "title": "Create a password",
-            "body": "You will be asked to enter your password to send tokens from your wallet. You need a strong password to protect your funds."
+            "title": "ایجاد رمز عبور",
+            "body": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -46,414 +46,545 @@
             "body_2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Set up PIN code",
-            "body_1": "Enter a 6-digit PIN below. You will be asked to enter your pin to login to your wallet.",
-            "body_2": "You can use numbers only."
+            "title": "تنظیم PIN کد",
+            "body_1": "یک PIN شش رقمی در زیر وارد کنید. شما به این PIN برای ورود به کیف پول خود احتیاج دارید.",
+            "body_2": "فقط از اعداد میتوانید استفاده کنید."
         },
         "confirm_pin": {
-            "title": "Verify your PIN code",
-            "body": "Re-enter your PIN code to proceed."
+            "title": "PIN کد خود را تایید کنید",
+            "body": "برای ادامه٬ PIN کد خود را دوباره وارد کنید."
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body_1": "You will now be shown a recovery phrase.",
-            "body_2": "Do not share this phrase with anyone. Your recovery phrase can be used to access your tokens from anywhere.",
-            "body_3": "If you lose your recovery phrase, you may lose your funds."
+            "title": "از کیف پول خود بک آپ بگیرید",
+            "body_1": "عبارت بازیابی هم اکنون به شما نشان داده میشود.",
+            "body_2": "این عبارت را با هیچکس به اشتراک نگذارید. عبارت بازیابی برای دسترسی شما به توکن های خود از هر مکانی استفاده میشود.",
+            "body_3": "در صورت گم کردن عبارت بازیابی٬ وجوه خود را از دست خواهید داد."
         },
         "recovery_phrase": {
-            "title": "Recovery phrase",
-            "body_1": "Carefully write down the words in the exact order.",
-            "body_2": "Keep your recovery phrase private and safely stored. Do not share it with anyone.",
-            "reveal_recovery_phrase": "Reveal recovery phrase",
-            "hide_recovery_phrase": "Hide recovery phrase"
+            "title": "عبارت بازیابی",
+            "body_1": "این کلمات را با دقت و به ترتیب یادداشت کنید.",
+            "body_2": "عبارت بازیابی را در مکانی امن و خصوصی نگه دارید و با هیچکس آن را به اشتراک نگذارید.",
+            "reveal_recovery_phrase": "عبارت بازیابی را نشان بده",
+            "hide_recovery_phrase": "عبارت بازیابی را پنهان کن"
         },
         "verify_recovery_phrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Select the words in the correct order."
+            "title": "عبارت بازیابی را تایید کنید",
+            "body": "برای اطمینان از اینکه عبارت را درست یادداشت کردید٬ آن کلمات را به ترتیب انتخاب کنید."
         },
         "backup_wallet": {
-            "title": "Back up to a Stronghold file",
-            "body": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup."
+            "title": "بک آپ به صورت یک فایل Stronghold",
+            "body": "برای گرفتن بک آپ از کیف پول خود به صورت فایل Stronghold رمز عبور خود را وارد کنید. رمز عبور برای رمزگذاری بک آپ شما استفاده میشود."
         },
         "recovery_phrase_saved": {
-            "title": "Successfully backed up",
-            "body": "You have backed up your wallet to a Stronghold."
+            "title": "بک آپ با موفقیت انجام شد",
+            "body": "شما از کیف پول خود یک بک آپ به صورت یک فایل Stronghold گرفته اید."
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your wallet is ready to go."
+            "title": "تبریک",
+            "body": "کیف پول شما آماده استفاده میباشد."
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have a recovery phrase or Stronghold back up, you can import it here."
+            "title": "یک کیف پول وارد کنید",
+            "body": "اگر عبارت بازیابی یا بک آپ Stronghold دارید٬ میتوانید اینجا وارد کنید."
         },
         "import_from_text": {
-            "title": "Restore your wallet with a recovery phrase or seed",
-            "body_1": "A recovery phrase is 24 words long. This is used to recover an existing Firefly wallet.",
-            "body_2": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body_3": "Enter your seed or recovery phrase"
+            "title": "کیف پول خود را توسط عبارت بازیابی یا سید بازگردانید",
+            "body_1": "عبارت بازیابی شامل 24 کلمه میباشد. این عبارت برای بازیابی کیف پول فایرفلای موجود استفاده میشود.",
+            "body_2": "یک سید از 81 کاراکتر تشکیل شده که برای بازیابی کیف پول قدیمی ترینیتی استفاده میشود.",
+            "body_3": "سید یا عبارت بازیابی خود را وارد کنید.",
+            "seed_detected": "81 character seed detected",
+            "phrase_detected": "24 word phrase detected"
         },
         "import_from_file": {
-            "title": "Restore your wallet from a backup file",
-            "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "کیف پول خود را توسط فایل بک آپ بازگردانید",
+            "body": "فایل بک آپ را برای بازگرداندن کیف پول خود وارد کنید. بک آپ میتواند یک استرانگ هُلد (stronghold.) و یا ترینیتی سیدوالت (kdbx.) باشد."
         },
         "import_backup_password": {
-            "title": "Restore your wallet from a SeedVault or Stronghold",
-            "body_1": "Please enter your backup password.",
-            "body_2": "This is the password you set when you first created your backup."
+            "title": "بازگردانی کیف پول خود توسط SeedVault یا Stronghold",
+            "body_1": "لطفا رمز عبور بک آپ خود را وارد کنید.",
+            "body_2": "این رمز عبوریست که برای اولین بار در گرفتن بک آپ آن را وارد کردید."
         },
         "import_success": {
-            "title": "You have successfully recovered your backup",
-            "body": "You can now set up your new wallet."
+            "title": "شما با موفقیت بک آپ خود را بازیابی کردید",
+            "body": "هم اکنون میتوانید کیف پول جدید خود را راه اندازی کنید."
         },
         "migrate": {
-            "title": "Migrate your funds",
-            "body_1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
-            "new": "Your new wallet"
+            "title": "توکن های خود را انتقال دائمی دهید.",
+            "body_1": "این یک فرایند خودکار میباشد تا توکن های شما به والت جدید منتقل شود. ما آدرس هایی را که قبلا استفاده شده و امنیت شما را پایین می آورد٬ چک میکنیم.",
+            "body_2": "این فرایند زمان بر میباشد. دستگاه خود را حین انتقال دائمی خاموش نکنید.",
+            "existing": "کیف پول قدیمی شما",
+            "new": "کیف پول جدید شما"
         },
         "migrate_failed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "موجودی شما",
+            "body": "آیا موجودی شما درست است؟"
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "تنظیمات",
             "generalSettings": {
-                "title": "General Settings",
+                "title": "تنظیمات عمومی",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "security": {
-                "title": "Security",
+                "title": "امنیت",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
+                "title": "تنظیمات پیشرفته",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Help & Information",
+                "title": "اطلاعات و راهنما",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profile": {
-                "title": "Profile",
+                "title": "پروفایل",
                 "description": ""
             },
             "sync": {
-                "title": "Sync accounts",
+                "title": "همگام سازی حساب ها",
                 "description": ""
             },
             "theme": {
-                "title": "Theme",
+                "title": "تم",
                 "description": ""
             },
             "language": {
-                "title": "Language",
+                "title": "زبان",
                 "description": ""
             },
             "currency": {
-                "title": "Currency",
+                "title": "واحد پول",
                 "description": ""
             },
             "notifications": {
-                "title": "Notifications",
+                "title": "اعلان‌ها",
                 "description": ""
             },
             "exportStronghold": {
-                "title": "Export Stronghold",
+                "title": "وارد کردن Stronghold",
                 "description": ""
             },
             "appLock": {
-                "title": "App Lock",
+                "title": "قفل اپلیکیشن",
                 "description": ""
             },
             "changePassword": {
-                "title": "Change password",
+                "title": "تغییر رمز عبور",
                 "description": ""
             },
             "changePincode": {
-                "title": "Change PIN code",
+                "title": "تغییر PIN کد",
                 "description": "",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "currentPincode": "PIN فعلی",
+                "newPincode": "PIN جدید",
+                "confirmNewPincode": "تایید PIN جدید",
+                "action": "تغییر PIN"
             },
             "resyncAccounts": {
-                "title": "Resync accounts",
+                "title": "همگام سازی مجدد حساب ها",
                 "description": ""
             },
-            "resetWallet": {
-                "title": "Reset wallet",
+            "deleteProfile": {
+                "title": "Delete profile",
                 "description": ""
             },
             "deepLinks": {
-                "title": "Deep links",
+                "title": "لینک عمیق",
                 "description": ""
             },
             "developerMode": {
-                "title": "Developer mode",
+                "title": "حالت برنامه نویسی",
                 "description": ""
             },
             "nodeSettings": {
-                "title": "Node settings",
+                "title": "تنظیمات نود",
                 "description": ""
             },
             "configureNodeList": {
-                "title": "Configure node list",
+                "title": "تنظیم لیست نود ",
                 "description": ""
             },
             "proofOfWork": {
-                "title": "Proof of work",
+                "title": "اثبات کار",
                 "description": ""
             },
             "errorLog": {
-                "title": "Error log",
+                "title": "گزارش خطا",
                 "description": ""
             },
             "stateExport": {
-                "title": "State export",
+                "title": "ایجاد فایل گزارش کلی",
                 "description": ""
             },
             "troubleshoot": {
-                "title": "Troubleshoot",
+                "title": "عیب یابی",
                 "description": ""
             },
             "documentation": {
-                "title": "Documentation",
+                "title": "مستندات",
                 "description": ""
             },
             "faq": {
-                "title": "FAQ",
+                "title": "پرسش و پاسخ های متداول",
                 "description": ""
             },
             "discord": {
-                "title": "Discord",
+                "title": "ديسكورد",
                 "description": ""
             },
             "about": {
-                "title": "About",
+                "title": "درباره ما",
                 "description": ""
             }
         },
         "login": {
-            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "please_wait": "لطفا {time, plural, one {1 ثانیه} other {# ثانیه}} صبر کنید",
+            "incorrect_attempts": "{attempts, plural, one {1 تلاش ناموفق} other {# تلاش ناموفق}}"
         },
         "dashboard": {
             "security": {
                 "version": {
-                    "title": "Firefly v{version}",
-                    "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "title": "فایرفلای {version}v",
+                    "up_to_date": "به روزرسانی شده",
+                    "out_of_date": "قدیمی"
                 },
                 "hardware_device": {
-                    "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "title": "دستگاه سخت افزاری",
+                    "none_detected": "چیزی یافت نشد"
                 },
                 "stronghold_status": {
-                    "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "title": "وضعیت Stronghold",
+                    "locked": "قفل شده",
+                    "unlocked": "باز شده"
                 },
                 "stronghold_backup": {
-                    "title": "Stronghold Backup",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "title": "بک آپ Stronghold",
+                    "weeks_ago": "{weeks, plural, one {# هفته} other {# هفته}} قبل"
                 }
             },
             "network": {
-                "network_operational": "Network Operational",
-                "network_degraded": "Network Degraded",
-                "network_down": "Network Down",
-                "status": "Status",
-                "messages_per_second": "Messages per second",
-                "confirmation_rate": "Confirmation rate"
+                "network_operational": "شبکه قابل استفاده",
+                "network_degraded": "شبکه تخریب شده",
+                "network_down": "شبکه از کار افتاده",
+                "status": "وضعیت",
+                "messages_per_second": "پیام ها در ثانیه",
+                "confirmation_rate": "سرعت تاییدیه"
             },
             "profile_modal": {
-                "all_settings": "All settings",
-                "logout": "Log out"
+                "all_settings": "همه تنظیمات",
+                "logout": "خروج از حساب"
             }
         }
     },
     "popups": {
         "password": {
-            "title": "Password required",
-            "subtitle": "Please enter your wallet password to unlock Stronghold"
+            "title": "رمز عبور مورد نیاز است",
+            "subtitle": "لطفا رمز عبور خود را برای باز کردن استرانگ هُلد وارد کنید."
         },
         "qr": {
-            "title": "Your QR code"
+            "title": "کد QR شما"
         },
         "version": {
-            "title": "Current version: {version}",
-            "up_to_date_title": "Firefly is up to date",
-            "up_to_date_description": "You are running the latest and safest version of Firefly.",
-            "update_available": "Firefly update available",
-            "update_details": "Version {version} - {date}"
+            "title": " نسخه فعلی : {version}",
+            "up_to_date_title": "فایرفلای به روز رسانی شده",
+            "up_to_date_description": "شما از به روزترین و امن ترین نسخه فایرفلای استفاده میکنید.",
+            "update_available": "نسخه به روز شده فایرفلای قابل دسترس است",
+            "update_details": " نسخه {version} - {date}"
         },
         "backup": {
-            "title": "Last backup: {date}",
-            "last_backup": "You last backed up {date}",
-            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
-            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "not_backed_up": "Not backed up",
-            "not_backed_up_description": "You have not backed up your Stronghold"
+            "title": "آخرین به روز رسانی: ",
+            "last_backup": "آخرین به روز رسانی در تاریخ {}",
+            "backup_description": "گرفتن بک آپ مهم میباشد٬ زیرا به شما اطمینان میدهد که کپی حساب ها و سوابق معاملات خود را داشته باشید.",
+            "backup_warning": "در صورت گم کردن بک آپ و عبارت بازیابی٬ دسترسی شما به وجوه خود از دست خواهد رفت.",
+            "not_backed_up": "بک آپ گرفته نشده",
+            "not_backed_up_description": "شما از استرانگ هُلد خود بک آپ نگرفته اید"
         },
         "delete_account": {
-            "title": "Delete {name}?",
+            "title": "حذف { name } ؟",
             "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Type your wallet’s password to confirm.",
-            "delete_account": "Delete account",
-            "error_title": "Unable to delete {name}",
-            "error_body_1": "To delete an account you must have 0 balance.",
-            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+            "type_password": "برای تایید رمز عبور والت خود را وارد کنید.",
+            "delete_account": "حذف حساب",
+            "error_title": "امکان حذف {name} وجود ندارد",
+            "error_body_1": "برای حذف حساب٬ موجودی شما باید صفر باشد.",
+            "error_body_2": "در حال حاضر٬ مانده حساب شما {} میباشد. لطفا این مبلغ را به حساب دیگری انتقال داده و دوباره امتحان کنید.",
+            "error_body_3": "You cannot delete this account, you must have at least one."
         },
         "address_history": {
-            "title": "{name} account address history",
-            "current_balance": "Current balance: {balance}"
+            "title": "سوابق آدرس حساب {name}",
+            "current_balance": "موجودی در حال حاضر :"
         },
         "node": {
-            "title_add": "Add a node",
-            "title_details": "Node details",
-            "node_address": "Node address",
-            "optional_username": "Username (optional)",
-            "optional_password": "Password (optional)",
-            "set_as_primary_node": "Set as primary node"
+            "title_add": "اضافه کردن نود",
+            "title_remove": "Remove a node",
+            "title_details": "جزییات نود",
+            "node_address": "آدرس نود",
+            "optional_username": "نام کاربری (اختیاری)",
+            "optional_password": "رمز عبور (اختیاری)",
+            "set_as_primary_node": "تنظیم به عنوان نود اصلی",
+            "remove_confirmation": "Are you sure you want to remove node?"
+        },
+        "errorLog": {
+            "title": "Error Log",
+            "empty": "The error log is empty."
+        },
+        "deleteProfile": {
+            "title": "Delete profile",
+            "confirmation": "Are you sure you want to delete this profile, this operation cannot be undone?"
         }
     },
+    "charts": {
+        "incoming_mi": "Incoming {value} Mi",
+        "outgoing_mi": "Outgoing {value} Mi",
+        "portoflio": "Portfolio",
+        "token": "Token",
+        "account_value": "Account Value",
+        "account_activity": "Account Activity"
+    },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "cancel": "Cancel",
-        "close": "Close",
-        "dismiss": "Dismiss",
-        "save": "Save",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
-        "setup_pin": "Set up PIN code",
-        "set_pin": "Set PIN code",
-        "confirm_pin": "Confirm PIN code",
-        "enter_your_pin": "Enter your PIN",
-        "save_backup_file": "Save backup file",
-        "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
-        "verify_recovery_phrase": "Verify recovery phrase",
-        "reveal_recovery_phrase": "Reveal recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "create": "Create",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
-        "visit_discord": "Visit Discord",
-        "drag_drop": "Drag & Drop",
-        "import_extentions": ".stronghold or .kdbx file",
-        "choose_file": "Choose a File",
-        "drop_here": "Drop your file here",
-        "syncAll": "Sync all",
-        "export": "Export",
-        "exportNewStronghold": "Export a new Stronghold",
-        "enableDeepLinks": "Enable deep links",
-        "enableDeveloperMode": "Enable developer mode",
-        "enableSystemNotifications": "Enable system notifications",
-        "exportState": "Export state",
-        "outsourceProofOfWork": "Outsource proof of work",
-        "unlock": "Unlock",
-        "update_firefly": "Update Firefly",
-        "restart_now": "Restart now",
-        "save_backup": "Save backup",
-        "customize_account": "Customise account",
-        "sync_account": "Sync account",
-        "view_address_history": "View address history",
-        "delete_account": "Delete account",
-        "max": "Max",
-        "add_node": "Add node"
+        "continue": "ادامه",
+        "back": "برگشت",
+        "cancel": "لغو",
+        "close": "بستن",
+        "dismiss": "نادیده گرفتن",
+        "save": "ذخیره",
+        "import_seed": "وارد کردن سید موجود",
+        "import_wallet": "وارد کردن کیف پول موجود",
+        "create_wallet": "ایجاد کیف پول جدید",
+        "save_password": "ذخیره رمزعبور",
+        "use_biometric": "استفاده از امنیت بیومتریک",
+        "setup_pin": "تنظیم PIN کد",
+        "set_pin": "PIN کد را انتخاب کنيد",
+        "confirm_pin": "پین کد را تايید کنید",
+        "enter_your_pin": "PIN خود را وارد کنيد",
+        "save_backup_file": "فایل بک آپ را ذخیره کنید",
+        "ive_written_recovery_phrase": "عبارت بازیابی خود را یادداشت کرده ام",
+        "verify_recovery_phrase": "عبارت بازیابی را تایید کنید",
+        "reveal_recovery_phrase": "عبارت بازیابی را نشان بده",
+        "import_seedvault": "وارد کردن SeedVault",
+        "check_again": "خیر٬ بررسی دوباره",
+        "import_from_file": "وارد کردن از یک فایل",
+        "send": "ارسال",
+        "receive": "دریافت",
+        "create": "ایجاد",
+        "begin_transfer": "شروع انتقال",
+        "try_again": "تلاش مجدد",
+        "visit_discord": "از دیسکورد بازدید کنید",
+        "drag_drop": "کشیدن و رها کردن",
+        "import_extentions": "فایل stronghold. یا kdbx.",
+        "choose_file": "یک فایل انتخاب کنید",
+        "drop_here": "فایل خود را این جا بیاندازید",
+        "syncAll": "همگام‌سازی همه",
+        "export": "استخراج",
+        "exportNewStronghold": "استخراج یک Stronghold جدید",
+        "enableDeepLinks": "فعالسازی لینک عمیق",
+        "enableDeveloperMode": "فعالسازی حالت برنامه نویسی",
+        "enableSystemNotifications": "فعالسازی اعلان های سیستم",
+        "exportState": "استخراج وضعیت",
+        "outsourceProofOfWork": "اثبات کار با منبع خارجی",
+        "unlock": "بازکردن",
+        "update_firefly": "به روز رسانی فایرفلای",
+        "restart_now": "بستن و باز کردن مجدد",
+        "save_backup": "ذخیره بک آپ",
+        "customize_account": "تنظیمات شخصی حساب",
+        "view_address_history": "نمایش سوابق آدرس",
+        "delete_account": "حذف حساب",
+        "max": "حداکثر",
+        "add_node": "اضافه کردن نود",
+        "remove_node": "Remove node",
+        "hide": "Hide",
+        "hideOthers": "Hide Others",
+        "showAll": "Show All",
+        "quit": "Quit",
+        "edit": "Edit",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "selectAll": "Select All",
+        "addAccount": "Add Account",
+        "checkForUpdates": "Check for Updates",
+        "reportAnIssue": "Report an Issue",
+        "clear": "Clear",
+        "hide_details": "Hide Details",
+        "yes": "Yes",
+        "no": "No"
     },
     "general": {
-        "password": "Password",
-        "confirm_password": "Confirm password",
-        "currentPassword": "Current password",
-        "newPassword": "New password",
-        "confirmNewPassword": "Confirm new password",
-        "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
-        "send_payment": "Send payment",
-        "move_funds": "Move funds",
-        "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
-        "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "move_funds_between_accounts": "Move funds between accounts",
-        "send_tokens_to_address": "Send tokens to an address",
-        "manage_account": "Manage Account",
-        "customize_account": "Customize your account",
-        "account": "Account",
-        "sending_to_address": "Sending to address",
-        "amount": "Amount",
-        "add_address": "Add Address",
-        "reference": "Reference",
-        "from": "From",
-        "to": "To",
-        "receive_funds": "Receive funds",
-        "my_address": "My Address",
-        "share_address": "Share an address",
-        "your_address": "Your address",
-        "generate_new_address": "Generate new address",
-        "copy_address": "Copy Address",
-        "have_text_backup": "I have a text backup",
-        "have_file_backup": "I have a file backup",
-        "enter_seed_or_phrase": "Enter a recovery phrase or seed",
-        "upload_seedvault_or_stronghold": "Import a Stronghold or SeedVault file",
-        "import": "Import",
+        "password": "رمز عبور",
+        "confirm_password": "تأیید رمز عبور",
+        "currentPassword": "رمز عبور فعلی",
+        "newPassword": "رمز عبور جدید",
+        "confirmNewPassword": "تأیید رمز عبور جديد",
+        "your_seed": "سید شما",
+        "recovery_phrase": "عبارت بازیابی",
+        "recent_activity": "فعالیت اخیر",
+        "sent": "ارسال شده",
+        "received": "دریافت شده",
+        "send_payment": "ارسال پرداخت",
+        "move_funds": "جابجایی وجه",
+        "send_funds": "ارسال وجه",
+        "send_to_address": "ارسال به یک آدرس",
+        "scan_qr_or_paste": "کد QR یا آدرس را وارد کنید",
+        "move_funds_between_accounts": "جابجایی وجه بین حساب ها",
+        "send_tokens_to_address": "ارسال توکن به یک آدرس",
+        "manage_account": "مدیریت حساب",
+        "customize_account": "تنظیمات شخصی حساب خود",
+        "account": "حساب",
+        "sending_to_address": "ارسال به آدرس",
+        "amount": "مقدار",
+        "add_address": "اضافه کردن آدرس",
+        "reference": "مرجع",
+        "from": "فرستنده",
+        "to": "گیرنده",
+        "receive_funds": "دریافت وجه",
+        "my_address": "آدرس من",
+        "share_address": "اشتراک گذاری یک آدرس",
+        "your_address": "آدرس شما",
+        "generate_new_address": "تولید آدرس جدید",
+        "copy_address": "کپی کردن آدرس",
+        "have_text_backup": "من یک فایل متنی بک آپ دارم",
+        "have_file_backup": "من یک فایل بک آپ دارم",
+        "enter_seed_or_phrase": "عبارت بازیابی یا سید خود را وارد کنید",
+        "upload_seedvault_or_stronghold": "یک فایل Stronghold یا SeedVault وارد کنید",
+        "import": "وارد کردن",
         "seedvault": "SeedVault",
-        "stronghold": "Stronghold",
-        "language": "Language",
-        "appearance": "Appearance",
-        "light_theme": "Light theme",
-        "dark_theme": "Dark theme",
-        "total_balance": "Total Balance",
-        "account_balance": "Account Balance",
-        "incoming": "Incoming",
-        "outgoing": "Outgoing",
-        "accounts": "Accounts",
-        "automaticNodeSelection": "Automatic node selection",
-        "manualNodeSelection": "Manual node selection",
-        "profiles": "Profiles",
-        "developerProfile": "Developer Profile",
-        "dev": "Dev",
-        "create_account": "Create an account",
-        "account_name": "Account name",
-        "latest_transactions": "Latest Transactions",
-        "transactions": "Transactions",
-        "security": "Security",
-        "account_address": "Account Address",
-        "nodes": "Nodes"
+        "stronghold": "استرانگ هُلد",
+        "language": "زبان",
+        "appearance": "ظاهر",
+        "light_theme": "تم روشن",
+        "dark_theme": "تم تاریک",
+        "total_balance": "موجودی کل",
+        "account_balance": "موجودی حساب",
+        "incoming": "ورودی",
+        "outgoing": "خروجی",
+        "accounts": "حساب ها",
+        "automaticNodeSelection": "انتخاب اتوماتیک نُد",
+        "manualNodeSelection": "انتخاب دستی نُد",
+        "profiles": "پروفایل ها",
+        "developerProfile": "پروفایل برنامه نویسی",
+        "dev": "برنامه نویس",
+        "create_account": "ایجاد حساب کاربری",
+        "account_name": "نام حساب",
+        "latest_transactions": "آخرین تراکنش ها",
+        "transactions": "تراکنش ها",
+        "security": "امنیت",
+        "account_address": "آدرس حساب",
+        "nodes": "نودها",
+        "wallet": "Wallet",
+        "help": "Help",
+        "you": "You",
+        "transaction_id": "Transaction ID",
+        "input_address": "Input Address",
+        "receive_address": "Receive Address",
+        "date": "Date",
+        "no_accounts": "You have no accounts, please create one.",
+        "loading_accounts": "Loading, please wait...",
+        "add_profile": "Add Profile",
+        "no_recent_history": "No recent history",
+        "transferSyncing": "Syncing account",
+        "transferSelectingInputs": "Selecting inputs",
+        "transferRemainderAddress": "Generating remainder deposit address",
+        "transferSigning": "Signing the transaction",
+        "transferPow": "Performing PoW",
+        "transferBroadcasting": "Broadcasting transaction",
+        "transferComplete": "Transfer complete",
+        "creatingAccount": "Creating account, please wait...",
+        "updatingAccount": "Updating account, please wait...",
+        "accountSyncing": "Account is syncing",
+        "accountSyncComplete": "Account sync complete",
+        "passwordUpdating": "Updating password...",
+        "passwordSuccess": "Updated password successfully",
+        "passwordFailed": "Updating password failed",
+        "exportingStronghold": "Exporting stronghold...",
+        "exportingStrongholdSuccess": "Exported stronghold successfully",
+        "exportingStrongholdFailed": "Exported stronghold failed",
+        "pinCodeUpdating": "Updating PIN code...",
+        "pinCodeSuccess": "Updated PIN code successfully",
+        "pinCodeFailed": "Updating PIN code failed"
     },
     "dates": {
-        "today": "Today",
-        "days_ago": "{time, plural, one {# day} other {# days}} ago",
-        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
-        "months_ago": "{time, plural, one {# month} other {# months}} ago",
-        "years_ago": "{time, plural, one {# year} other {# years}} ago"
+        "today": "امروز",
+        "days_ago": "{time, plural, one {# روز} other {# روز}} قبل",
+        "weeks_ago": "{time, plural, one {# هفته} other {# هفته}} قبل",
+        "months_ago": "{time, plural, one {# ماه} other {# ماه}} قبل",
+        "years_ago": "{time, plural, one {# سال} other {#سال}} قبل"
     },
     "notifications": {
-        "valueTx": "Receiving {{value}} to {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "valueTx": "در حال دریافت {{value}} به {{account}}",
+        "confirmed": "خروجی {{value}} از {{account}} تایید شد",
+        "failed": "خروجی {{value}} از {{account}} ناموفق بود",
+        "downloading_update": "درحال دانلود به‌روزرسانی",
+        "update_ready": "به روز رسانی انجام شد",
+        "update_error": "خطایی در طول این به روز رسانی رخ داد٬ لطفا دوباره امتحان کنید.",
+        "restart_install": "برای نصب٬ مجددا راه اندازی کنید",
+        "calc_minutes_remaining": "در حال شمارش زمان باقیمانده...",
+        "minutes_remaining": "{minutes, plural, one {1 دقیقه باقی مانده } other {# دقیقه باقی مانده}}"
+    },
+    "error": {
+        "profile": {
+            "length": "Your profile name can't be longer than {length} characters.",
+            "duplicate": "A profile with this name already exists."
+        },
+        "password": {
+            "doNotMatch": "Passwords do not match.",
+            "tooWeak": "Your new password is too weak.",
+            "row": "Straight rows of keys are easy to guess.",
+            "pattern": "Short keyboard patterns are easy to guess.",
+            "names": "Common names and surnames are easy to guess.",
+            "repeats": "Repeats like 'aaa' are easy to guess.",
+            "repeats2": "Repeats like 'abcabcabc' are easy to guess",
+            "sequence": "Sequences of characters are easy to guess.",
+            "years": "Recent years are easy to guess.",
+            "dates": "Dates are easy to guess.",
+            "common": "This is a very common password.",
+            "similar": "This is similar to a common password.",
+            "reasonWord": "A single word is easy to guess.",
+            "incorrect": "Your password is incorrect.",
+            "length": "Your password can't be longer than {length} characters."
+        },
+        "pincode": {
+            "length": "Your PIN must be {length} digits long.",
+            "match": "PINs do not match.",
+            "incorrect": "Your current PIN is incorrect."
+        },
+        "account": {
+            "length": "Your account name can't be longer than {length} characters.",
+            "empty": "You must use your latest account before creating a new one.",
+            "notEmpty": "You must transfer your balance before deleting this account.",
+            "duplicate": "An account with this name already exists."
+        },
+        "send": {
+            "addressLength": "Addresses should be {length} characters long.",
+            "amountTooHigh": "This is greater than your available balance.",
+            "amountNoFloat": "If units are `i` you cannot use decimal places.",
+            "amountInvalidFormat": "The amount appears to be an invalid number.",
+            "amountZero": "The amount must be greater than 0.",
+            "wrongAddressFormat": "Addresses start with the prefix {prefix}.",
+            "insufficientFunds": "This account has insufficient funds"
+        },
+        "node": {
+            "invalid": "Please enter a valid URL.",
+            "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
+            "duplicate": "This node has already been added.",
+            "unsynced": "The node you are trying to add is not synced."
+        },
+        "global": {
+            "generic": "Something went wrong."
+        },
+        "backup": {
+            "invalid": "The backup file was not recognised.",
+            "destination": "The backup destination was not valid.",
+            "mnemonic": "The mnemonic is not valid.",
+            "seedTooShort": "The seed should be 81 characters long, it is {length}",
+            "seedCharacters": "The seed should only contain characters A-Z or 9",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}",
+            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase"
+        }
     }
 }

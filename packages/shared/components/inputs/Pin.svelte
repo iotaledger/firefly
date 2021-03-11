@@ -8,6 +8,7 @@
     export let value = undefined
     export let classes = ''
     export let disabled = false
+    export let autofocus = false
 
     let inputs = new Array(PIN_LENGTH)
     $: value = inputs.join('')
@@ -21,7 +22,9 @@
     }
 
     onMount(async () => {
-        document.getElementById('input-0').focus()
+        if (autofocus) {
+            focus()
+        }
     })
 
     const changeHandler = function (e, i) {
@@ -89,7 +92,18 @@
     }
 
     export function focus() {
-        selectFirstEmpty()
+        if (!disabled) {
+            selectFirstEmpty()
+        }
+    }
+
+    export function resetAndFocus() {
+        if (!disabled) {
+            inputs = new Array(PIN_LENGTH)
+            selectFirstEmpty()
+        } else {
+            setTimeout(() => resetAndFocus(), 100)
+        }
     }
 </script>
 
@@ -139,7 +153,7 @@
                     @apply bg-blue-500;
                 }
                 &.disabled {
-                    @apply bg-gray-600;
+                    @apply bg-gray-400;
                 }
             }
         }

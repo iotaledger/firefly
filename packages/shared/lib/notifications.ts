@@ -1,6 +1,7 @@
-import { get, writable } from 'svelte/store'
-import { activeProfile } from 'shared/lib/profile'
-import { generateRandomId } from 'shared/lib/utils'
+import { activeProfile } from 'shared/lib/profile';
+import { generateRandomId } from 'shared/lib/utils';
+import { get, writable } from 'svelte/store';
+import { Electron } from './electron';
 
 const NOTIFICATION_TIMEOUT_DEFAULT = 5000
 export const NOTIFICATION_TIMEOUT_NEVER = -1
@@ -41,8 +42,10 @@ export function showNotification(notificationData: NotificationData, showSystemN
         notificationData.progress = Math.min(Math.max(notificationData.progress, 0), 100)
     }
 
-    if (showSystemNotification && get(activeProfile).settings.notifications && window['Electron']['NotificationManager']) {
-        window['Electron']['NotificationManager'].notify(notificationData.message)
+    if (showSystemNotification &&
+        get(activeProfile).settings.notifications &&
+        Electron.NotificationManager) {
+        Electron.NotificationManager.notify(notificationData.message)
     } else {
         for (const action of notificationData.actions) {
             if (!action.callback) {
@@ -87,11 +90,15 @@ export function updateDisplayNotification(id: string, updateData: NotificationDa
     displayNotifications.update((_currentNotifications) => {
         const notification = _currentNotifications.find((n) => n.id === id)
         if (notification) {
-            notification.message = updateData.message
-            notification.subMessage = updateData.subMessage
-            notification.progress = updateData.progress
-            notification.actions = updateData.actions
-            notification.timeout = updateData.timeout
+            notification.message = updateData.message;
+            notification.subMessage = updateData.subMessage;
+            notification.progress = updateData.progress;
+            notification.actions = updateData.actions;
+            notification.timeout = updateData.timeout ?? NOTIFICATION_TIMEOUT_DEFAULT;
+
+            if (notification.timeout !== NOTIFICATION_TIMEOUT_NEVER) {
+                setTimeout(() => removeDisplayNotification(notification.id), notification.timeout);
+            }
         }
         return _currentNotifications
     })

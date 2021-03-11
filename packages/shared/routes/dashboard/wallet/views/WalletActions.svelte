@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { AccountTile, Button, Text } from 'shared/components'
+    import { closePopup, openPopup } from 'shared/lib/popup'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { selectedAccountId, WalletAccount } from 'shared/lib/wallet'
@@ -11,9 +12,33 @@
     export let send
     export let internalTransfer
     export let generateAddress
+    export let isGeneratingAddress 
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
     const accountsLoaded = getContext<Writable<boolean>>('walletAccountsLoaded')
+
+    let startInit
+
+    if ($walletRoute === WalletRoutes.Init && !$accountsLoaded) {
+        startInit = Date.now()
+        openPopup({
+            type: 'busy',
+            hideClose: true,
+            fullScreen: true,
+            transition: false,
+        })
+    }
+
+    $: {
+        if ($accountsLoaded) {
+            const minTimeElapsed = 3000 - (Date.now() - startInit)
+            if (minTimeElapsed < 0) {
+                closePopup()
+            } else {
+                setTimeout(() => closePopup(), minTimeElapsed)
+            }
+        }
+    }
 
     function handleAccountClick(accountId) {
         selectedAccountId.set(accountId)
@@ -36,13 +61,11 @@
         <div data-label="accounts" class="w-full h-full flex flex-col flex-no-wrap justify-start mb-6">
             <div class="flex flex-row mb-6 justify-between items-center">
                 <Text type="h5">{locale('general.accounts')}</Text>
-                <Button onClick={handleCreateClick} secondary small icon="plus" disabled={!$accountsLoaded}>
+                <Button onClick={handleCreateClick} secondary small icon="plus">
                     {locale('actions.create')}
                 </Button>
             </div>
-            {#if !$accountsLoaded}
-                <Text overrideColor classes={'text-gray-600'}>{locale('general.loading_accounts')}</Text>
-            {:else if $accounts.length > 0}
+            {#if $accounts.length > 0}
                 <div class="grid grid-cols-{$accounts.length <= 2 ? $accounts.length : '3'} gap-2 w-full flex-auto">
                     {#each $accounts as account}
                         <AccountTile
@@ -71,5 +94,5 @@
 {:else if $walletRoute === WalletRoutes.Send}
     <Send {send} {internalTransfer} {locale} />
 {:else if $walletRoute === WalletRoutes.Receive}
-    <Receive {generateAddress} {locale} />
+    <Receive {isGeneratingAddress} {generateAddress} {locale} />
 {/if}

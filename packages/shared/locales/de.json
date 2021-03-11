@@ -38,7 +38,7 @@
         },
         "password": {
             "title": "Passwort erstellen",
-            "body": "Du wirst aufgefordert dein Passwort einzugeben, um Token von deiner Wallet zu senden. Du benötigst ein starkes Passwort, um dein Guthaben zu schützen."
+            "body": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -91,7 +91,9 @@
             "title": "Stelle deine Wallet aus einer Wiederherstellungsphrase oder einem Seed wieder her",
             "body_1": "Eine Wiederherstellungsphrase ist 24 Wörter lang. Sie wird benutzt, um eine bestehende Firefly Wallet wiederherzustellen.",
             "body_2": "Ein Seed besteht aus 81 Zeichen. Er wird benutzt, um eine ältere Trinity Wallet wiederherzustellen.",
-            "body_3": "Gib deinen Seed oder deine Wiederherstellungsphrase ein"
+            "body_3": "Gib deinen Seed oder deine Wiederherstellungsphrase ein",
+            "seed_detected": "81 character seed detected",
+            "phrase_detected": "24 word phrase detected"
         },
         "import_from_file": {
             "title": "Wallet aus einer Sicherungsdatei wiederherstellen",
@@ -187,8 +189,8 @@
                 "title": "Konten neu synchronisieren",
                 "description": ""
             },
-            "resetWallet": {
-                "title": "Wallet zurücksetzen",
+            "deleteProfile": {
+                "title": "Delete profile",
                 "description": ""
             },
             "deepLinks": {
@@ -309,7 +311,8 @@
             "delete_account": "Konto löschen",
             "error_title": "{name} kann nicht gelöscht werden",
             "error_body_1": "Um ein Konto zu löschen, benötigst du 0 Guthaben.",
-            "error_body_2": "Du hast derzeit {balance} auf deinem Konto. Bitte verschiebe dein Guthaben auf ein anderes Konto und versuche es erneut."
+            "error_body_2": "Du hast derzeit {balance} auf deinem Konto. Bitte verschiebe dein Guthaben auf ein anderes Konto und versuche es erneut.",
+            "error_body_3": "You cannot delete this account, you must have at least one."
         },
         "address_history": {
             "title": "{name} Adresshistorie",
@@ -317,12 +320,30 @@
         },
         "node": {
             "title_add": "Node hinzufügen",
+            "title_remove": "Remove a node",
             "title_details": "Node Details",
             "node_address": "Node Adresse",
             "optional_username": "Benutzername (optional)",
             "optional_password": "Passwort (optional)",
-            "set_as_primary_node": "Als primäre Node festlegen"
+            "set_as_primary_node": "Als primäre Node festlegen",
+            "remove_confirmation": "Are you sure you want to remove node?"
+        },
+        "errorLog": {
+            "title": "Error Log",
+            "empty": "The error log is empty."
+        },
+        "deleteProfile": {
+            "title": "Delete profile",
+            "confirmation": "Are you sure you want to delete this profile, this operation cannot be undone?"
         }
+    },
+    "charts": {
+        "incoming_mi": "Incoming {value} Mi",
+        "outgoing_mi": "Outgoing {value} Mi",
+        "portoflio": "Portfolio",
+        "token": "Token",
+        "account_value": "Account Value",
+        "account_activity": "Account Activity"
     },
     "actions": {
         "continue": "Weiter",
@@ -362,19 +383,37 @@
         "exportNewStronghold": "Neuen Stronghold exportieren",
         "enableDeepLinks": "Deep Links aktivieren",
         "enableDeveloperMode": "Entwicklermodus aktivieren",
-        "enableSystemNotifications": "Enable system notifications",
+        "enableSystemNotifications": "Aktiviere Systembenachrichtigungen",
         "exportState": "Status exportieren",
         "outsourceProofOfWork": "Proof of work auslagern",
         "unlock": "Entsperren",
         "update_firefly": "Firefly aktualisieren",
-        "restart_now": "Restart now",
+        "restart_now": "Jetzt Neustarten",
         "save_backup": "Backup speichern",
         "customize_account": "Konto anpassen",
-        "sync_account": "Konten synchronisieren",
         "view_address_history": "Adressverlauf anzeigen",
         "delete_account": "Konto löschen",
         "max": "Maximal",
-        "add_node": "Node hinzufügen"
+        "add_node": "Node hinzufügen",
+        "remove_node": "Remove node",
+        "hide": "Ausblenden",
+        "hideOthers": "Andere ausblenden",
+        "showAll": "Alle anzeigen",
+        "quit": "Beenden",
+        "edit": "Bearbeiten",
+        "undo": "Rückgängig",
+        "redo": "Wiederholen",
+        "cut": "Ausschneiden",
+        "copy": "Kopieren",
+        "paste": "Einfügen",
+        "selectAll": "Alles auswählen",
+        "addAccount": "Konto hinzufügen",
+        "checkForUpdates": "Suche nach Updates",
+        "reportAnIssue": "Ein Problem melden",
+        "clear": "Clear",
+        "hide_details": "Hide Details",
+        "yes": "Yes",
+        "no": "No"
     },
     "general": {
         "password": "Passwort",
@@ -436,7 +475,38 @@
         "transactions": "Transaktionen",
         "security": "Sicherheit",
         "account_address": "Konto Adresse",
-        "nodes": "Nodes"
+        "nodes": "Nodes",
+        "wallet": "Wallet",
+        "help": "Hilfe",
+        "you": "You",
+        "transaction_id": "Transaction ID",
+        "input_address": "Input Address",
+        "receive_address": "Receive Address",
+        "date": "Date",
+        "no_accounts": "Du hast keine Konten. Bitte erstelle ein Konto.",
+        "loading_accounts": "Loading, please wait...",
+        "add_profile": "Profil hinzufügen",
+        "no_recent_history": "No recent history",
+        "transferSyncing": "Syncing account",
+        "transferSelectingInputs": "Selecting inputs",
+        "transferRemainderAddress": "Generating remainder deposit address",
+        "transferSigning": "Signing the transaction",
+        "transferPow": "Performing PoW",
+        "transferBroadcasting": "Broadcasting transaction",
+        "transferComplete": "Transfer complete",
+        "creatingAccount": "Creating account, please wait...",
+        "updatingAccount": "Updating account, please wait...",
+        "accountSyncing": "Account is syncing",
+        "accountSyncComplete": "Account sync complete",
+        "passwordUpdating": "Updating password...",
+        "passwordSuccess": "Updated password successfully",
+        "passwordFailed": "Updating password failed",
+        "exportingStronghold": "Exporting stronghold...",
+        "exportingStrongholdSuccess": "Exported stronghold successfully",
+        "exportingStrongholdFailed": "Exported stronghold failed",
+        "pinCodeUpdating": "Updating PIN code...",
+        "pinCodeSuccess": "Updated PIN code successfully",
+        "pinCodeFailed": "Updating PIN code failed"
     },
     "dates": {
         "today": "Heute",
@@ -449,11 +519,72 @@
         "valueTx": "Du hast {{value}} in {{account}} erhalten",
         "confirmed": "Eine ausgehende Transaktion über {{value}} in {{account}} wurde bestätigt",
         "failed": "Ausgehende Transaktion {{value}} von {{account}} ist fehlgeschlagen",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "downloading_update": "Update lädt herunter",
+        "update_ready": "Update bereit",
+        "update_error": "Während des Updates ist ein Fehler aufgetreten. Versuche es erneut",
+        "restart_install": "Neustarten zum installieren",
+        "calc_minutes_remaining": "Berechne verbleibende Zeit...",
+        "minutes_remaining": "{minutes, plural, one {1 Minute verbleibend} other {# Minuten verbleibend}}"
+    },
+    "error": {
+        "profile": {
+            "length": "Your profile name can't be longer than {length} characters.",
+            "duplicate": "A profile with this name already exists."
+        },
+        "password": {
+            "doNotMatch": "Passwords do not match.",
+            "tooWeak": "Your new password is too weak.",
+            "row": "Straight rows of keys are easy to guess.",
+            "pattern": "Short keyboard patterns are easy to guess.",
+            "names": "Common names and surnames are easy to guess.",
+            "repeats": "Repeats like 'aaa' are easy to guess.",
+            "repeats2": "Repeats like 'abcabcabc' are easy to guess",
+            "sequence": "Sequences of characters are easy to guess.",
+            "years": "Recent years are easy to guess.",
+            "dates": "Dates are easy to guess.",
+            "common": "This is a very common password.",
+            "similar": "This is similar to a common password.",
+            "reasonWord": "A single word is easy to guess.",
+            "incorrect": "Your password is incorrect.",
+            "length": "Your password can't be longer than {length} characters."
+        },
+        "pincode": {
+            "length": "Your PIN must be {length} digits long.",
+            "match": "PINs do not match.",
+            "incorrect": "Your current PIN is incorrect."
+        },
+        "account": {
+            "length": "Your account name can't be longer than {length} characters.",
+            "empty": "You must use your latest account before creating a new one.",
+            "notEmpty": "You must transfer your balance before deleting this account.",
+            "duplicate": "An account with this name already exists."
+        },
+        "send": {
+            "addressLength": "Addresses should be {length} characters long.",
+            "amountTooHigh": "This is greater than your available balance.",
+            "amountNoFloat": "If units are `i` you cannot use decimal places.",
+            "amountInvalidFormat": "The amount appears to be an invalid number.",
+            "amountZero": "The amount must be greater than 0.",
+            "wrongAddressFormat": "Addresses start with the prefix {prefix}.",
+            "insufficientFunds": "This account has insufficient funds"
+        },
+        "node": {
+            "invalid": "Please enter a valid URL.",
+            "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
+            "duplicate": "This node has already been added.",
+            "unsynced": "The node you are trying to add is not synced."
+        },
+        "global": {
+            "generic": "Something went wrong."
+        },
+        "backup": {
+            "invalid": "The backup file was not recognised.",
+            "destination": "The backup destination was not valid.",
+            "mnemonic": "The mnemonic is not valid.",
+            "seedTooShort": "The seed should be 81 characters long, it is {length}",
+            "seedCharacters": "The seed should only contain characters A-Z or 9",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}",
+            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase"
+        }
     }
 }

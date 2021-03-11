@@ -1,4 +1,4 @@
-import { ReadAccountResponse, ResponseTypes } from './typings/bridge'
+import { ResponseTypes } from './typings/bridge'
 import type { MessageResponse } from './typings/bridge'
 import type { Account, SyncedAccount } from './typings/account'
 import type { Message } from './typings/message'
@@ -391,7 +391,7 @@ class MessageValidator extends Validator {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of broadcasted received.',
             })
-        } else if ('boolean' !== typeof payload.incoming) {
+        } else if ('boolean' !== typeof payload.payload.data.essence.data.incoming) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of incoming received.',
@@ -401,7 +401,7 @@ class MessageValidator extends Validator {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of nonce received.',
             })
-        } else if ('number' !== typeof payload.remainderValue) {
+        } else if ('number' !== typeof payload.payload.data.essence.data.remainderValue) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of remainderValue received.',

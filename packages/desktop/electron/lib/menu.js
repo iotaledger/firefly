@@ -60,15 +60,17 @@ const buildTemplate = () => {
                     label: state.strings.settings,
                     click: () => getWindow('main').webContents.send('menu-navigate-settings'),
                 },
-                {
-                    type: 'separator',
+                {        
+                    // TODO: Remove before stable release
+                    label:  "Developer Tools",
+                    role: 'toggleDevTools'
                 },
                 {
                     label: state.strings.errorLog,
-                    click: () => {
-                        // TODO: Add error log
-                    },
-                    enabled: state.enabled,
+                    click: () => getWindow('main').webContents.send('menu-error-log')
+                },
+                {
+                    type: 'separator',
                 },
             ],
         },

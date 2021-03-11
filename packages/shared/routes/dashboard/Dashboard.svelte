@@ -2,6 +2,7 @@
     import { Idle, Sidebar } from 'shared/components'
     import { logout, sendParams } from 'shared/lib/app'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
+    import { Electron } from 'shared/lib/electron'
     import { activeProfile } from 'shared/lib/profile'
     import { dashboardRoute, routerNext } from 'shared/lib/router'
     import { Tabs } from 'shared/lib/typings/routes'
@@ -10,6 +11,7 @@
     import { Settings, Wallet } from 'shared/routes'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale
     export let mobile
@@ -19,18 +21,20 @@
         settings: Settings,
     }
 
-    const DeepLinkManager = window['Electron']['DeepLinkManager']
-
     onMount(() => {
-        DeepLinkManager.requestDeepLink()
-        window['Electron'].onEvent('deepLink-params', (data) => handleDeepLinkRequest(data))
-        window['Electron'].onEvent('menu-logout', () => {
+        Electron.DeepLinkManager.requestDeepLink()
+        Electron.onEvent('deep-link-params', (data) => handleDeepLinkRequest(data))
+
+        Electron.onEvent('menu-logout', () => {
             api.lockStronghold({
                 onSuccess() {
                     logout()
                 },
-                onError(error) {
-                    console.error(error)
+                onError(err) {
+                    showAppNotification({
+                        type: 'error',
+                        message: locale(err.error),
+                    })
                 },
             })
         })

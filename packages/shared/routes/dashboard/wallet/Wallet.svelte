@@ -1,6 +1,5 @@
 <script lang="typescript">
     import type { Account as BaseAccount } from 'lib/typings/account'
-    import type { Address } from 'lib/typings/address'
     import type { ErrorEventPayload } from 'lib/typings/events'
     import { DashboardPane } from 'shared/components'
     import { sendParams } from 'shared/lib/app'
@@ -8,22 +7,28 @@
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { priceData } from 'shared/lib/marketData'
     import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
+    import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import { formatUnit } from 'shared/lib/units'
-    import type { BalanceOverview, AccountMessage, WalletAccount, BalanceHistory } from 'shared/lib/wallet'
     import {
+        AccountMessage,
         api,
+        BalanceHistory,
+        BalanceOverview,
         getAccountsBalanceHistory,
         getLatestMessages,
         getWalletBalanceHistory,
         initialiseListeners,
+        isTransferring,
         selectedAccountId,
-        updateAccounts,
+        syncAccounts,
+        transferState,
         updateBalanceOverview,
         wallet,
+        WalletAccount,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
     import { derived, get, Readable, Writable } from 'svelte/store'
@@ -110,41 +115,46 @@
             depositAddress,
             alias,
             rawIotaBalance: balance,
-            balance: formatUnit(balance, 0),
+            balance: formatUnit(balance, 2),
             balanceEquiv: `${convertToFiat(
                 balance,
                 $currencies[CurrencyTypes.USD],
                 $exchangeRates[get(activeProfile).settings.currency]
             )} ${$activeProfile.settings.currency}`,
-            color: AccountColors[index],
+            color: AccountColors[index % AccountColors.length],
         })
     }
 
     function getAccounts() {
         api.getAccounts({
             onSuccess(accountsResponse) {
-                const _totalBalance = {
-                    balance: 0,
-                    incoming: 0,
-                    outgoing: 0,
+                const _continue = () => {
+                    accountsLoaded.set(true)
+                    syncAccounts()
                 }
 
                 if (accountsResponse.payload.length === 0) {
-                    accountsLoaded.set(true)
+                    _continue()
                 } else {
+                    const totalBalance = {
+                        balance: 0,
+                        incoming: 0,
+                        outgoing: 0,
+                    }
+
                     for (const [idx, storedAccount] of accountsResponse.payload.entries()) {
                         getAccountMeta(storedAccount.id, (err, meta) => {
                             if (!err) {
-                                _totalBalance.balance += meta.balance
-                                _totalBalance.incoming += meta.incoming
-                                _totalBalance.outgoing += meta.outgoing
+                                totalBalance.balance += meta.balance
+                                totalBalance.incoming += meta.incoming
+                                totalBalance.outgoing += meta.outgoing
 
                                 const account = prepareAccountInfo(storedAccount, meta)
                                 accounts.update((accounts) => [...accounts, account])
 
                                 if (idx === accountsResponse.payload.length - 1) {
-                                    updateBalanceOverview(_totalBalance.balance, _totalBalance.incoming, _totalBalance.outgoing)
-                                    accountsLoaded.set(true)
+                                    updateBalanceOverview(totalBalance.balance, totalBalance.incoming, totalBalance.outgoing)
+                                    _continue()
                                 }
                             } else {
                                 console.error(err)
@@ -153,9 +163,11 @@
                     }
                 }
             },
-            onError(error) {
-                // TODO handle error
-                console.error(error)
+            onError(err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
+                })
             },
         })
     }
@@ -182,8 +194,12 @@
                     )
                     isGeneratingAddress = false
                 },
-                onError(error) {
-                    console.error(error)
+                onError(err) {
+                    isGeneratingAddress = false
+                    showAppNotification({
+                        type: 'error',
+                        message: locale(err.error),
+                    })
                 },
             })
         }
@@ -196,34 +212,24 @@
                     _generate()
                 }
             },
-            onError(error) {
-                console.error(error)
+            onError(err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
+                })
             },
         })
     }
 
-    function syncAccounts(payload) {
-        api.syncAccounts({
-            onSuccess(syncAccountsResponse) {
-                const syncedAccounts = syncAccountsResponse.payload
-
-                updateAccounts(syncedAccounts)
-            },
-            onError(error) {
-                console.error(error)
-            },
-        })
-    }
-
-    function onCreateAccount(alias) {
+    function onCreateAccount(alias, completeCallback) {
         const _create = () =>
             api.createAccount(
                 {
                     alias,
                     signerType: { type: 'Stronghold' },
                     clientOptions: {
-                        node: $accounts.length > 0 ? $accounts[0].clientOptions.node : DEFAULT_NODE.url,
-                        nodes: $accounts.length > 0 ? $accounts[0].clientOptions.nodes : DEFAULT_NODES.map(n => n.url),
+                        node: $accounts.length > 0 ? $accounts[0].clientOptions.node : DEFAULT_NODE,
+                        nodes: $accounts.length > 0 ? $accounts[0].clientOptions.nodes : DEFAULT_NODES,
                         // For subsequent accounts, use the network for any of the previous accounts
                         network: $accounts.length > 0 ? $accounts[0].clientOptions.network : $network,
                     },
@@ -237,21 +243,19 @@
                                         const account = prepareAccountInfo(createAccountResponse.payload, meta)
                                         accounts.update((accounts) => [...accounts, account])
                                         walletRoute.set(WalletRoutes.Init)
+                                        completeCallback()
                                     } else {
-                                        console.error(err)
+                                        completeCallback(locale(err.error))
                                     }
                                 })
                             },
                             onError(err) {
-                                console.error(err)
+                                completeCallback(locale(err.error))
                             },
                         })
                     },
                     onError(err) {
-                        // TODO: Add proper error handling
-                        if (err.payload.error.includes('message history and balance')){
-                            createAccountError = locale('error.account.empty')
-                        }
+                        completeCallback(locale(err.error))
                     },
                 }
             )
@@ -259,19 +263,20 @@
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
                 if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({ type: 'password', props: { onSuccess: _create } })
+                    openPopup({ type: 'password', props: { onSuccess: _create, onCancelled: completeCallback } })
                 } else {
                     _create()
                 }
             },
-            onError(error) {
-                console.error(error)
+            onError(err) {
+                completeCallback(locale(err.error))
             },
         })
     }
 
     function onSend(senderAccountId, receiveAddress, amount) {
         const _send = () => {
+            isTransferring.set(true)
             api.send(
                 senderAccountId,
                 {
@@ -300,11 +305,20 @@
                             })
                         })
 
-                        sendParams.set({ address: '', amount: 0, message: '' })
-                        walletRoute.set(WalletRoutes.Init)
+                        transferState.set('Complete')
+
+                        setTimeout(() => {
+                            sendParams.set({ address: '', amount: 0, message: '' })
+                            isTransferring.set(false)
+                            walletRoute.set(WalletRoutes.Init)
+                        }, 3000)
                     },
-                    onError(error) {
-                        console.error(error)
+                    onError(err) {
+                        isTransferring.set(false)
+                        showAppNotification({
+                            type: 'error',
+                            message: locale(err.error),
+                        })
                     },
                 }
             )
@@ -313,29 +327,45 @@
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
                 if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({ type: 'password', props: { onSuccess: _send } })
+                    openPopup({
+                        type: 'password',
+                        props: {
+                            onSuccess: _send,
+                        },
+                    })
                 } else {
                     _send()
                 }
             },
-            onError(error) {
-                console.error(error)
+            onError(err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
+                })
             },
         })
     }
 
     function onInternalTransfer(senderAccountId, receiverAccountId, amount) {
         const _internalTransfer = () => {
+            isTransferring.set(true)
             api.internalTransfer(senderAccountId, receiverAccountId, amount, {
                 onSuccess(response) {
                     accounts.update((_accounts) => {
                         return _accounts.map((_account) => {
-                            if (_account.id === senderAccountId || _account.id === receiverAccountId) {
+                            const isSenderAccount = _account.id === senderAccountId
+                            const isReceiverAccount = _account.id === receiverAccountId
+                            if (isSenderAccount || isReceiverAccount) {
                                 return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
                                     {} as WalletAccount,
                                     _account,
                                     {
-                                        messages: [response.payload, ..._account.messages],
+                                        messages: [
+                                            Object.assign({}, response.payload, {
+                                                incoming: isReceiverAccount,
+                                            }),
+                                            ..._account.messages,
+                                        ],
                                     }
                                 )
                             }
@@ -344,11 +374,20 @@
                         })
                     })
 
-                    sendParams.set({ address: '', amount: 0, message: '' })
-                    walletRoute.set(WalletRoutes.Init)
+                    transferState.set('Complete')
+
+                    setTimeout(() => {
+                        sendParams.set({ address: '', amount: 0, message: '' })
+                        isTransferring.set(false)
+                        walletRoute.set(WalletRoutes.Init)
+                    }, 3000)
                 },
-                onError(response) {
-                    console.error(response)
+                onError(err) {
+                    isTransferring.set(false)
+                    showAppNotification({
+                        type: 'error',
+                        message: locale(err.error),
+                    })
                 },
             })
         }
@@ -361,35 +400,11 @@
                     _internalTransfer()
                 }
             },
-            onError(error) {
-                console.error(error)
-            },
-        })
-    }
-
-    function onSetAlias(newAlias) {
-        api.setAlias($selectedAccountId, newAlias, {
-            onSuccess(res) {
-                accounts.update((_accounts) => {
-                    return _accounts.map((account) => {
-                        if (account.id === $selectedAccountId) {
-                            return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                {} as WalletAccount,
-                                account,
-                                {
-                                    alias: newAlias,
-                                }
-                            )
-                        }
-
-                        return account
-                    })
+            onError(err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
                 })
-
-                walletRoute.set(WalletRoutes.Init)
-            },
-            onError(error) {
-                console.error(error)
             },
         })
     }
@@ -411,16 +426,6 @@
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
                 updateProfile('isStrongholdLocked', strongholdStatusResponse.payload.snapshot.status === 'Locked')
-                api.areLatestAddressesUnused({
-                    onSuccess(response) {
-                        if (!response.payload) {
-                            openPopup({ type: 'password', props: { onSuccess: syncAccounts } })
-                        }
-                    },
-                    onError(error) {
-                        console.error(error)
-                    },
-                })
             },
             onError(error) {
                 console.error(error)
@@ -431,23 +436,24 @@
 
 {#if $walletRoute === WalletRoutes.Account && $selectedAccountId}
     <Account
+        {isGeneratingAddress}
         send={onSend}
         internalTransfer={onInternalTransfer}
         generateAddress={onGenerateAddress}
-        setAlias={onSetAlias}
         {locale} />
 {:else}
-    <div class="w-full h-full flex flex-col p-10 flex-1">
+    <div class="w-full h-full flex flex-col p-10 flex-1 bg-gray-50 dark:bg-gray-900">
         <div class="w-full h-full flex flex-row space-x-4 flex-auto">
             <DashboardPane classes="w-1/3 h-full">
                 <!-- Total Balance, Accounts list & Send/Receive -->
                 <div class="flex flex-auto flex-col flex-shrink-0 h-full">
                     {#if $walletRoute === WalletRoutes.CreateAccount}
-                        <CreateAccount error={createAccountError} onCreate={onCreateAccount} {locale} />
+                        <CreateAccount onCreate={onCreateAccount} {locale} />
                     {:else}
                         <WalletBalance {locale} />
                         <DashboardPane classes="-mt-5 h-full">
                             <WalletActions
+                                {isGeneratingAddress}
                                 send={onSend}
                                 internalTransfer={onInternalTransfer}
                                 generateAddress={onGenerateAddress}

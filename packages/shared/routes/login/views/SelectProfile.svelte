@@ -23,7 +23,7 @@
 {:else}
     <section class="flex flex-col h-screen bg-white dark:bg-gray-900 items-center">
         <Logo width="64px" logo="logo-firefly" classes="absolute top-20 transform left-1/2 -translate-x-1/2" />
-        <div class="h-full space-x-20 flex flex-wrap justify-center items-center content-center mt-10 mx-20">
+        <div class="h-full space-x-20 flex flex-wrap justify-center items-start content-center mt-10 mx-20">
             {#each $profiles as profile}
                 <div class="mb-6">
                     <Profile
@@ -37,7 +37,10 @@
                 </div>
             {/each}
             <div class="mb-6">
-                <Profile onClick={addProfile} name={locale('general.add_profile')} classes="border-solid border-2 border-gray-400 cursor-pointer">
+                <Profile
+                    onClick={addProfile}
+                    name={locale('general.add_profile')}
+                    classes="border-solid border-2 border-gray-400 cursor-pointer">
                     <Icon icon="plus" classes="text-blue-500" />
                 </Profile>
             </div>

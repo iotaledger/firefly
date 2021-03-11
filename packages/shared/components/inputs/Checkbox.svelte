@@ -4,6 +4,7 @@
     export let label = undefined
     export let checked = false
     export let classes = ''
+    export let disabled = false
 </script>
 
 <style type="text/scss">
@@ -18,13 +19,20 @@
             fill: var(--ui-blue-color);
         }
 
-        &:hover,
-        &:focus {
+        &:not(:disabled):hover,
+        &:not(:disabled):focus {
             :global(svg path) {
                 stroke: #9aadce;
             }
             :global(svg.active path) {
                 stroke: white;
+            }
+        }
+
+        &:disabled {
+            pointer-events: none;
+            :global(svg path) {
+                fill: var(--button-disabled-bg-color);
             }
         }
     }
@@ -33,9 +41,11 @@
 <button
     data-label="checkbox-input"
     class={`flex items-center cursor-pointer ${classes}`}
+    type="button"
+    {disabled}
     on:click={() => {
         checked = !checked
     }}>
     <Icon icon={checked ? 'checkbox' : 'checkbox-unchecked'} classes={`mr-3 ${checked ? 'active' : ''}`} />
-    <Text type="p" secondary={!checked}>{label}</Text>
+    <Text type="p" secondary={!checked || disabled}>{label}</Text>
 </button>

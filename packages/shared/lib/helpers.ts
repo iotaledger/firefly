@@ -35,7 +35,14 @@ export const persistent = <T>(key: string, initialValue: T): Writable<T> => {
  * Extract initials from string
  */
 export const getInitials = (string: string, maxChars: number) => {
-    let initialsArray = string.split(' ').map(n => n[0].toUpperCase())
+    let initialsArray = string
+        .trim()
+        .split(' ')
+        .map(
+            n =>
+                n?.match(/./ug)[0] // match characters for emoji compatibility 
+                    ?.toUpperCase()
+        )
     if (maxChars) {
         initialsArray = initialsArray.slice(0, maxChars)
     }
@@ -51,7 +58,7 @@ export const getInitials = (string: string, maxChars: number) => {
  * @param dotCount: Count of dots in between first and end portion. Default = 3
  */
 
-export const truncateString = (str: string, firstCharCount: number = 5, endCharCount: number = 5, dotCount: number = 3) => {
+export const truncateString = (str: string = '', firstCharCount: number = 5, endCharCount: number = 5, dotCount: number = 3) => {
     const MAX_LENGTH = 13
     if (str.length <= MAX_LENGTH) {
         return str
@@ -151,7 +158,7 @@ export const getBackupWarningColor = (lastBackupDate: Date) => {
     }
     const { lessThanAMonth, lessThanThreeMonths } = isRecentDate(lastBackupDate)
 
-    return lessThanAMonth ? 'blue' : lessThanThreeMonths ? 'yellow' : 'red'
+    return lessThanAMonth ? 'blue' : lessThanThreeMonths ? 'yellow' : 'orange'
 }
 
 /**
@@ -172,3 +179,10 @@ export const convertHexToRGBA = (hexCode: string, opacity: number = 100) => {
 
     return `rgba(${r},${g},${b},${opacity / 100})`;
 };
+
+/**
+ * Check if a string only contains whitespaces
+ * @param string
+ */
+
+export const hasOnlyWhitespaces = (string: string = '') => !/\S/.test(string)

@@ -1,8 +1,9 @@
-import { get, derived, writable } from 'svelte/store'
-import { persistent } from 'shared/lib/helpers'
-import { generateRandomId } from 'shared/lib/utils'
 import { AvailableExchangeRates } from 'shared/lib/currency'
+import { persistent } from 'shared/lib/helpers'
 import { DEFAULT_NODE } from 'shared/lib/network'
+import { generateRandomId } from 'shared/lib/utils'
+import { derived, get, writable } from 'svelte/store'
+import { Electron } from './electron'
 import type { Node } from './typings/client'
 
 /**
@@ -72,7 +73,7 @@ export const activeProfile = derived(
 )
 
 activeProfile.subscribe((profile) => {
-    window['Electron'].updateActiveProfile(profile ? profile.id : null)
+    Electron.updateActiveProfile(profile ? profile.id : null)
 })
 
 /**
@@ -99,11 +100,7 @@ export const saveProfile = (profile: Profile): Profile => {
  *
  * @returns {Profile}
  */
-export const createProfile = (profileName, isDeveloperProfile): Profile => {
-    if (get(profiles).some((profile) => profile.name === profileName)) {
-        throw new Error(`Profile with name ${profileName} already exists.`)
-    }
-
+ export const createProfile = (profileName, isDeveloperProfile): Profile => {
     const profile = {
         id: generateRandomId(),
         name: profileName,
@@ -179,7 +176,8 @@ export const removeProfile = (id: string): void => {
  *
  * @returns {void}
  */
-export const updateProfile = (path: string, value: string | boolean | Date | AvailableExchangeRates | Node | Node[]) => {
+export const updateProfile = (
+    path: string, value: string | boolean | Date | AvailableExchangeRates | Node | Node[]) => {
     const _update = (_profile) => {
         const pathList = path.split('.')
 

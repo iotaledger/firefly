@@ -1,9 +1,9 @@
 <script lang="typescript">
+    import { Button, Text } from 'shared/components'
     import { getInitials } from 'shared/lib/helpers'
-    import { Text, Button } from 'shared/components'
-    import { selectedAccountId } from 'shared/lib/wallet'
-    import { walletRoute, accountRoute } from 'shared/lib/router'
-    import { WalletRoutes, AccountRoutes } from 'shared/lib/typings/routes'
+    import { accountRoute, walletRoute } from 'shared/lib/router'
+    import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
+    import { selectedAccountId, selectedMessage } from 'shared/lib/wallet'
 
     export let locale
     export let accounts: {
@@ -17,9 +17,11 @@
 
     function handleAccountClick(accountId) {
         selectedAccountId.set(accountId)
+        selectedMessage.set(null)
     }
     function handleBackClick() {
         selectedAccountId.set(null)
+        selectedMessage.set(null)
         walletRoute.set(WalletRoutes.Init)
         accountRoute.set(AccountRoutes.Init)
     }
@@ -34,7 +36,7 @@
         {#each accounts as acc}
             <button
                 on:click={() => handleAccountClick(acc.id)}
-                class="w-10 h-10 rounded-xl p-2 text-14 leading-140 font-bold text-center
+                class="w-10 h-10 rounded-xl p-2 text-14 leading-100 font-bold text-center
                 {activeAccount.id === acc.id ? `bg-${acc.color}-500 text-white` : 'bg-gray-200 text-gray-500'} 
                 hover:bg-{acc.color}-500 hover:text-white">{getInitials(acc.alias, 2)}
             </button>

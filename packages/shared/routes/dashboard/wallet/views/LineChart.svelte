@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Chart, Dropdown, Text } from 'shared/components'
-    import type { ChartData } from 'shared/lib/chart'
     import {
+        ChartData,
         chartCurrency,
         chartTimeframe,
         DashboardChartType,
@@ -72,18 +72,18 @@
     }
 </script>
 
-<div data-label="portfolio-token-chart" class="w-full h-full px-8 py-4">
+<div data-label="line-chart" class="flex flex-col justify-between w-full h-full px-8 py-4">
     <div class="flex justify-between items-center mb-2">
         {#if !$selectedAccount}
             <div class="flex space-x-4">
-                {#each Object.values(DashboardChartType) as chart, idx}
+                {#each Object.values(DashboardChartType) as chart}
                     <button on:click={() => selectedChart.set(chart)}>
                         <Text type="h4" disabled={chart !== $selectedChart}>{locale(`charts.${chart}`)}</Text>
                     </button>
                 {/each}
             </div>
         {:else}
-            <Text type="h4">{locale('charts.account_value')}</Text>
+            <Text type="h4" classes="break-all mr-2">{locale('charts.account_value')}</Text>
         {/if}
         <div class="flex space-x-2">
             <span>
@@ -98,7 +98,13 @@
             </span>
         </div>
     </div>
-    <div class="flex-auto">
-        <Chart type="line" {datasets} beginAtZero={$selectedChart === DashboardChartType.PORTFOLIO} {labels} {color} {xMaxTicks} yPrecision={7} />
-    </div>
+    <Chart
+        type="line"
+        {datasets}
+        beginAtZero={$selectedChart !== DashboardChartType.TOKEN}
+        {labels}
+        {color}
+        {xMaxTicks}
+        yPrecision={7}
+        inlineStyle={$selectedAccount && 'height: calc(50vh - 150px);'} />
 </div>

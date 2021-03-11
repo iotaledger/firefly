@@ -29,7 +29,31 @@ export const icons = {
             },
         ],
     },
-    'arrow-right': {
+    'arrow-left': {
+        width: 24,
+        height: 24,
+        path: [
+            {
+                d:
+                    'M12.1385 4.26514C12.5443 4.6397 12.5697 5.27236 12.1952 5.67822L7.28365 11H20C20.5522 11 21 11.4477 21 12C21 12.5523 20.5522 13 20 13H7.28365L12.1951 18.3218C12.5697 18.7276 12.5443 19.3603 12.1385 19.7349C11.7326 20.1094 11.1 20.0841 10.7254 19.6782L3.63916 12L10.7254 4.32179C11.1 3.91594 11.7326 3.89057 12.1385 4.26514Z',
+                fillRule: 'evenodd',
+                clipRule: 'evenodd',
+            },
+        ],
+    },
+    'chevron-left': {
+        width: 24,
+        height: 24,
+        path: [
+            {
+                d:
+                    'M15.1385 4.26514C15.5443 4.6397 15.5697 5.27236 15.1952 5.67822L9.36074 12L15.1951 18.3218C15.5697 18.7276 15.5443 19.3603 15.1385 19.7349C14.7326 20.1094 14.1 20.0841 13.7254 19.6782L6.63916 12L13.7254 4.32179C14.1 3.91594 14.7326 3.89057 15.1385 4.26514Z',
+                fillRule: 'evenodd',
+                clipRule: 'evenodd',
+            },
+        ],
+    },
+    'chevron-right': {
         width: 24,
         height: 24,
         path: [
@@ -41,7 +65,7 @@ export const icons = {
             },
         ],
     },
-    'arrow-down': {
+    'chevron-down': {
         width: 24,
         height: 24,
         path: [
@@ -53,7 +77,7 @@ export const icons = {
             },
         ],
     },
-    'arrow-up': {
+    'chevron-up': {
         width: 24,
         height: 24,
         path: [
@@ -65,15 +89,51 @@ export const icons = {
             },
         ],
     },
-    'arrow-left': {
-        width: 24,
-        height: 24,
+    'small-chevron-right': {
+        width: 16,
+        height: 16,
         path: [
             {
-                d:
-                    'M12.1385 4.26514C12.5443 4.6397 12.5697 5.27236 12.1952 5.67822L7.28365 11H20C20.5522 11 21 11.4477 21 12C21 12.5523 20.5522 13 20 13H7.28365L12.1951 18.3218C12.5697 18.7276 12.5443 19.3603 12.1385 19.7349C11.7326 20.1094 11.1 20.0841 10.7254 19.6782L3.63916 12L10.7254 4.32179C11.1 3.91594 11.7326 3.89057 12.1385 4.26514Z',
-                fillRule: 'evenodd',
-                clipRule: 'evenodd',
+                d: 'M7 12L11 8L7 4',
+                strokeWidth: '2',
+                strokeLinecap: 'round',
+                fill: 'none',
+            },
+        ],
+    },
+    'small-chevron-down': {
+        width: 16,
+        height: 16,
+        path: [
+            {
+                d: 'M4 6L8 10L12 6',
+                strokeWidth: '2',
+                strokeLinecap: 'round',
+                fill: 'none',
+            },
+        ],
+    },
+    'small-chevron-left': {
+        width: 16,
+        height: 16,
+        path: [
+            {
+                d: 'M9 4L5 8L9 12',
+                strokeWidth: '2',
+                strokeLinecap: 'round',
+                fill: 'none',
+            },
+        ],
+    },
+    'small-chevron-up': {
+        width: 16,
+        height: 16,
+        path: [
+            {
+                d: 'M12 10L8 6L4 10',
+                strokeWidth: '2',
+                strokeLinecap: 'round',
+                fill: 'none',
             },
         ],
     },
@@ -88,16 +148,17 @@ export const icons = {
             {
                 d: 'M7 12L10.5 15.5L17 9',
                 strokeWidth: '2',
-                strokeLinecap: 'round'
+                strokeLinecap: 'round',
             },
         ],
     },
-    "checkbox-unchecked": {
+    'checkbox-unchecked': {
         width: 24,
         height: 24,
         path: [
             {
-                d: 'm0.55394,5.52478c0,-2.71689 2.28311,-5 5,-5l13.10204,0c2.71689,0 5,2.28311 5,5l0,13.0204c0,2.71689 -2.28311,5 -5,5l-13.10204,0c-2.71689,0 -5,-2.28311 -5,-5l0,-13.0204z'
+                d:
+                    'm0.55394,5.52478c0,-2.71689 2.28311,-5 5,-5l13.10204,0c2.71689,0 5,2.28311 5,5l0,13.0204c0,2.71689 -2.28311,5 -5,5l-13.10204,0c-2.71689,0 -5,-2.28311 -5,-5l0,-13.0204z',
             },
         ],
     },
@@ -106,20 +167,17 @@ export const icons = {
         height: 24,
         path: [
             {
-                d:
-                    'm0.66502,10.04926c0,-5.14384 4.16651,-9.31034 9.31034,-9.31034c5.14384,0 9.31034,4.16651 9.31034,9.31034c0,5.14384 -4.16651,9.31034 -9.31034,9.31034c-5.14384,0 -9.31034,-4.16651 -9.31034,-9.31034z',
+                d: 'M7 12L10.5 15.5L17 9',
+                strokeWidth: '2',
+                strokeLinecap: 'round',
             },
         ],
     },
-    "radio-unchecked": {
+    'radio-unchecked': {
         width: 24,
         height: 24,
-        path: [
-            {
-                d: 'm0.66502,10.04926c0,-5.14384 4.16651,-9.31034 9.31034,-9.31034c5.14384,0 9.31034,4.16651 9.31034,9.31034c0,5.14384 -4.16651,9.31034 -9.31034,9.31034c-5.14384,0 -9.31034,-4.16651 -9.31034,-9.31034z'
-            },
-        ],
-        fill: 'none'
+        path: [],
+        fill: 'none',
     },
     view: {
         width: 24,
@@ -669,15 +727,6 @@ export const icons = {
                     'M7 5V7H5C3.89543 7 3 7.89543 3 9V18C3 19.1046 3.89543 20 5 20H19C20.1046 20 21 19.1046 21 18V9C21 7.89543 20.1046 7 19 7H17V5C17 3.89543 16.1046 3 15 3H9C7.89543 3 7 3.89543 7 5ZM15 5H9V7H15V5ZM19 9V18H5L5 9H19Z',
                 fillRule: 'evenodd',
                 clipRule: 'evenodd',
-            },
-        ],
-    },
-    'chevron-right': {
-        width: 24,
-        height: 24,
-        path: [
-            {
-                d: 'M7 12L11 8L7 4',
             },
         ],
     },
