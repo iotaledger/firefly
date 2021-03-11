@@ -34,8 +34,11 @@ export const persistent = <T>(key: string, initialValue: T): Writable<T> => {
 /**
  * Extract initials from string
  */
-export const getInitials = (string: string, maxChars: number) => {
-    let initialsArray = string
+export const getInitials = (name: string | undefined, maxChars: number) => {
+    if (!name) {
+        return ""
+    }
+    let initialsArray = name
         .trim()
         .split(' ')
         .map(

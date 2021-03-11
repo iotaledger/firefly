@@ -24,27 +24,29 @@
     const MAX_PROFILE_NAME_LENGTH = 20
 
     function handleContinueClick(setupType) {
-        let profile
-        error = ''
+        if (profileName) {
+            let profile
+            error = ''
 
-        if (profileName.length > MAX_PROFILE_NAME_LENGTH) {
-            return (error = locale('error.profile.length', {
-                values: {
-                    length: MAX_PROFILE_NAME_LENGTH,
-                },
-            }))
+            if (profileName.length > MAX_PROFILE_NAME_LENGTH) {
+                return (error = locale('error.profile.length', {
+                    values: {
+                        length: MAX_PROFILE_NAME_LENGTH,
+                    },
+                }))
+            }
+
+            if (get(profiles).some((profile) => profile.name === profileName)) {
+                return (error = locale('error.profile.duplicate'))
+            }
+
+            profile = createProfile(profileName, isDeveloperProfile)
+
+            return Electron.getUserDataPath().then((path) => {
+                initialise(profile.id, getStoragePath(path, profile.name))
+                dispatch('next', { setupType })
+            })
         }
-
-        if (get(profiles).some((profile) => profile.name === profileName)) {
-            return (error = locale('error.profile.duplicate'))
-        }
-
-        profile = createProfile(profileName, isDeveloperProfile)
-
-        return Electron.getUserDataPath().then((path) => {
-            initialise(profile.id, getStoragePath(path, profile.name))
-            dispatch('next', { setupType })
-        })
     }
 
     function handleBackClick() {
@@ -59,7 +61,13 @@
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-4">{locale('views.setup.title')}</Text>
-            <Input {error} bind:value={profileName} placeholder={locale('views.setup.profile_name')} classes="w-full" autofocus />
+            <Input
+                {error}
+                bind:value={profileName}
+                placeholder={locale('views.setup.profile_name')}
+                classes="w-full"
+                autofocus
+                submitHandler={() => handleContinueClick(SetupType.New)} />
             {#if $developerMode}
                 <Checkbox label={locale('general.developerProfile')} bind:checked={isDeveloperProfile} />
             {/if}

@@ -41,7 +41,7 @@
                 {locale('actions.continue')}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex flex-row flex-wrap items-center justify-center p-16">
+        <div slot="rightpane" class="w-full h-full flex flex-col flex-wrap items-center justify-center p-16">
             {#if mnemonic !== undefined && mnemonic !== null}
                 <RecoveryPhrase classes="mb-8" recoveryPhrase={mnemonic} {hide} />
                 <Button onClick={handleMnemonicVisibilityClick}>
