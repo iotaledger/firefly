@@ -3,7 +3,7 @@ import { _ } from 'shared/lib/i18n'
 import type { WalletAccount } from 'shared/lib/wallet'
 import { date as i18nDate } from 'svelte-i18n'
 import { derived, get, writable } from 'svelte/store'
-import { CurrencyTypes } from './currency'
+import { CurrencyTypes, formatCurrencyValue } from './currency'
 import {
     HistoryDataProps,
     priceData
@@ -220,7 +220,8 @@ function formatLabel(timestamp: number): string {
 }
 
 function formatLineChartTooltip(data: (number | string), timestamp: number | string, showMiota: boolean = false): Tooltip {
-    const title: string = `${showMiota ? `1 ${Unit.Mi}: ` : ''}${data} ${get(chartCurrency).toUpperCase()}`
+    const currency = get(chartCurrency).toUpperCase()
+    const title: string = `${showMiota ? `1 ${Unit.Mi}: ` : ''}${formatCurrencyValue(data, currency, 3)} ${currency}`
     const label: string = get(i18nDate)(new Date(timestamp), {
         year: 'numeric',
         month: 'short',

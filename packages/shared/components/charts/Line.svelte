@@ -9,7 +9,7 @@
     export let datasets = []
     export let xMaxTicks = 7
     export let yMaxTicks = 6
-    export let yPrecision = 3
+    export let formatYAxis = (value) => Number(value.toString())
     export let color = 'blue' // TODO: each profile has a different color
     export let beginAtZero = false
     export let inlineStyle = 'height: calc(50vh - 130px);'
@@ -111,10 +111,9 @@
                             ticks: {
                                 autoSkip: true,
                                 maxTicksLimit: yMaxTicks,
-                                precision: yPrecision,
                                 beginAtZero,
                                 callback: function (value, index, values) {
-                                    return Number(value.toString())
+                                    return formatYAxis(value)
                                 },
                             },
                         },
