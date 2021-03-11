@@ -7,6 +7,7 @@
 
     const dispatch = createEventDispatcher()
     let hide = true
+    let hasRevealedRecoveryPhrase = false
 
     $: visibilityToggleString = hide ? 'reveal_recovery_phrase' : 'hide_recovery_phrase'
 
@@ -18,6 +19,7 @@
     }
     function handleMnemonicVisibilityClick() {
         hide = !hide
+        hasRevealedRecoveryPhrase = true
     }
 </script>
 
@@ -33,7 +35,7 @@
             </div>
         </div>
         <div slot="leftpane__action">
-            <Button classes="w-full" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
+            <Button disabled={!hasRevealedRecoveryPhrase} classes="w-full" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex flex-row flex-wrap items-center justify-center p-16">
             <RecoveryPhrase classes="mb-8" recoveryPhrase={mnemonic} {hide} />

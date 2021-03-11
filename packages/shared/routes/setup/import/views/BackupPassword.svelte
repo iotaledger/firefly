@@ -28,7 +28,7 @@
             <Text type="h3" highlighted classes="mb-5">{locale(`general.${importType}`)}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.import_backup_password.body_1')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.import_backup_password.body_2')}</Text>
-            <Password classes="mb-6" {error} bind:value={password} {locale} showRevealToggle/>
+            <Password classes="mb-6" {error} bind:value={password} {locale} showRevealToggle autofocus/>
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
             <Button secondary classes="flex-1" onClick={() => handleBackClick()}>{locale('actions.back')}</Button>
