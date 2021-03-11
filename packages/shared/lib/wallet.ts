@@ -1,6 +1,5 @@
 import { mnemonic } from 'shared/lib/app'
 import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
-import { persistent } from 'shared/lib/helpers'
 import { _ } from 'shared/lib/i18n'
 import type { HistoryData, PriceData } from 'shared/lib/marketData'
 import { HistoryDataProps } from 'shared/lib/marketData'
@@ -102,7 +101,6 @@ export const resetWallet = () => {
     isTransferring.set(false)
     transferState.set(null)
     isSyncing.set(null)
-    loggedIn.set(false)
 }
 
 export const selectedAccountId = writable<string | null>(null)
@@ -113,8 +111,6 @@ export const isTransferring = writable<boolean>(false)
 export const transferState = writable<TransferProgressEventType | "Complete" | null>(null)
 
 export const isSyncing = writable<boolean>(false)
-
-export const loggedIn = persistent<boolean>('loggedIn', false)
 
 export const api: ApiClient = window['__WALLET_API__']
 

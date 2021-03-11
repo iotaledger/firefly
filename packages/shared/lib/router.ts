@@ -214,4 +214,5 @@ export const resetRouter = () => {
     accountRoute.set(AccountRoutes.Init)
     settingsRoute.set(SettingsRoutes.Init)
     dashboardRoute.set(Tabs.Wallet)
+    loggedIn.set(false)
 }
