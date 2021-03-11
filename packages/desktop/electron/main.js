@@ -1,7 +1,7 @@
+import { initAutoUpdate } from './lib/appUpdater'
 const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
 const path = require('path')
 const Keychain = require('./lib/keychain')
-const { initAutoUpdate } = require('./lib/appUpdater')
 const { initMenu, contextMenu } = require('./lib/menu')
 
 /**
@@ -33,7 +33,7 @@ app.commandLine.appendSwitch('js-flags', '--expose-gc')
  */
 const windows = {
     main: null,
-    about: null
+    about: null,
 }
 
 /**
@@ -45,7 +45,7 @@ let paths = {
     preload: '',
     html: '',
     aboutHtml: '',
-    aboutPreload: ''
+    aboutPreload: '',
 }
 
 /**
@@ -86,6 +86,10 @@ function isUrlAllowed(url) {
     return externalAllowlist.indexOf(new URL(url).hostname.replace('www.', '').replace('mailto:', '')) > -1
 }
 
+/**
+ * Create main window
+ * @returns {BrowserWindow} Main window
+ */
 function createWindow() {
     /**
      * Register iota file protocol
@@ -156,6 +160,10 @@ function createWindow() {
         closeAboutWindow()
     })
 
+    windows.main.on('closed', () => {
+        windows.main = null
+    })
+
     /**
      * Handle permissions requests
      */
@@ -168,21 +176,41 @@ function createWindow() {
 
         return cb(permissionAllowlist.indexOf(permission) > -1)
     })
+
+    return windows.main
 }
 
 app.whenReady().then(createWindow)
 
 /**
- * Gets Window instance
+ * Gets BrowserWindow instance
+ * @returns {BrowserWindow} Requested window
  */
 export const getWindow = function (windowName) {
     return windows[windowName]
 }
 
 /**
+ * Gets or creates the requested BrowserWindow instance
+ * @param {string} windowName
+ * @returns {BrowserWindow} Requested window
+ */
+export const getOrInitWindow = (windowName) => {
+    if (!windows[windowName]) {
+        if (windowName === 'main') {
+            return createWindow()
+        }
+        if (windowName === 'about') {
+            return openAboutWindow()
+        }
+    }
+    return windows[windowName]
+}
+
+/**
  * Initialises the menu bar
  */
-initMenu(app, getWindow)
+initMenu()
 
 app.allowRendererProcessReuse = false
 
@@ -297,8 +325,11 @@ ipcMain.on('deep-link-request', () => {
     }
 })
 
+/**
+ * Create about window
+ * @returns {BrowserWindow} About window
+ */
 export const openAboutWindow = () => {
-
     if (windows.about !== null) {
         windows.about.focus()
         return windows.about
@@ -340,4 +371,3 @@ export const closeAboutWindow = () => {
         windows.about = null
     }
 }
-
