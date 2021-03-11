@@ -41,6 +41,7 @@
 <button
     data-label="checkbox-input"
     class={`flex items-center cursor-pointer ${classes}`}
+    type="button"
     {disabled}
     on:click={() => {
         checked = !checked

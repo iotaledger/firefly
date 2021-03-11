@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
+
     export let busy = false
     export let message = ''
     export let classes = ''

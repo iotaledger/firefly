@@ -52,6 +52,8 @@ export async function fetchNetworkStatus(): Promise<void> {
         },
     }
 
+    let updated = false
+
     for (let index = 0; index < NETWORK_STATUS_ENDPOINTS.length; index++) {
         const endpoint = NETWORK_STATUS_ENDPOINTS[index]
 
@@ -75,9 +77,22 @@ export async function fetchNetworkStatus(): Promise<void> {
 
             networkStatus.set(statusData)
 
+            updated = true
+
             break
         } catch (err) {
             console.error(err.name === "AbortError" ? new Error(`Could not fetch from ${endpoint}.`) : err)
         }
+    }
+
+    if (!updated) {
+        networkStatus.set({
+            itemsPerSecond: 0,
+            confirmedItemsPerSecond: 0,
+            confirmationRate: 0,
+            latestMilestoneIndex: 0,
+            latestMilestoneIndexTime: 0,
+            health: 0
+        })
     }
 }

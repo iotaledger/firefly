@@ -66,7 +66,7 @@ const defaultWebPreferences = {
 if (app.isPackaged) {
     paths.preload = path.join(app.getAppPath(), '/public/build/preload.js')
     paths.html = path.join(app.getAppPath(), '/public/index.html')
-    paths.aboutPreload = path.join(app.getAppPath(), '/public/lib/aboutPreload.js')
+    paths.aboutPreload = path.join(app.getAppPath(), '/public/build/lib/aboutPreload.js')
     paths.aboutHtml = path.join(app.getAppPath(), '/public/about.html')
 } else {
     // __dirname is desktop/public/build
@@ -151,6 +151,10 @@ function createWindow() {
      */
     windows.main.webContents.on('will-navigate', _handleNavigation)
     windows.main.webContents.on('new-window', _handleNavigation)
+
+    windows.main.on('close', () => {
+        closeAboutWindow()
+    })
 
     /**
      * Handle permissions requests
@@ -329,3 +333,11 @@ export const openAboutWindow = () => {
 
     return windows.about
 }
+
+export const closeAboutWindow = () => {
+    if (windows.about) {
+        windows.about.close()
+        windows.about = null
+    }
+}
+
