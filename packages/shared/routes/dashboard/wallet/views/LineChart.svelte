@@ -107,6 +107,6 @@
         {labels}
         {color}
         {xMaxTicks}
-        formatYAxis={(value) => formatCurrencyValue(value, $chartCurrency, 4)}
+        formatYAxis={(value) => formatCurrencyValue(value, $chartCurrency, undefined, undefined, 5)}
         inlineStyle={$selectedAccount && 'height: calc(50vh - 150px);'} />
 </div>

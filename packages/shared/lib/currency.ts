@@ -158,14 +158,14 @@ export const convertToFiat = (amount: number, usdPrice: number, conversionRate: 
  *
  * @returns {string}
  */
-export const formatCurrencyValue = (data: (number | string), currency: string, cryptoPrecision: number = 4): string => {
+export const formatCurrencyValue = (data: (number | string), currency: string, fiatFixed: number = 2, btcFixed: number = 7, ethFixed: number = 6, ): string => {
     const parsedData: number = parseFloat(data.toString())
     switch(currency.toLowerCase()) {
         case CurrencyTypes.BTC:
-            return parsedData.toPrecision(cryptoPrecision)
+            return parsedData.toFixed(btcFixed)
         case CurrencyTypes.ETH:
-            return parsedData.toPrecision(cryptoPrecision)
+            return parsedData.toFixed(ethFixed)
         default:
-            return parsedData.toFixed(2)
+            return parsedData.toFixed(fiatFixed)
     }
 }
