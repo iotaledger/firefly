@@ -7,6 +7,8 @@
     export let mobile
     export let pinCandidate
 
+    export let loading
+
     let pinInput
 
     const dispatch = createEventDispatcher()
@@ -44,7 +46,7 @@
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
             <Button secondary classes="flex-1" onClick={() => handleBackClick()}>{locale('actions.back')}</Button>
-            <Button classes="flex-1" disabled={!valid} onClick={() => onSubmit()}>{locale('actions.set_pin')}</Button>
+            <Button classes="flex-1" disabled={!valid || loading} onClick={() => onSubmit()}>{locale('actions.set_pin')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-end items-center">
             {#if !confirmInput}

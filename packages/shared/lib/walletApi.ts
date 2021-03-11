@@ -116,6 +116,7 @@ const eventsApiResponseTypes = Object.values(eventsApiToResponseTypeMap)
  * Response subscriber.
  * Receives messages from wallet.rs.
  */
+
 Wallet.onMessage((message: MessageResponse) => {
     if (message && message.id === undefined) {
         // There is no message id
@@ -126,7 +127,7 @@ Wallet.onMessage((message: MessageResponse) => {
     }
 
     const _deleteCallbackId = (_id: string) => {
-        // Do not delete callback ids for events api methods
+            // Do not delete callback ids for events api methods
         if (!eventsApiResponseTypes.includes(message.type)) {
             delete callbacksStore[_id]
         }
