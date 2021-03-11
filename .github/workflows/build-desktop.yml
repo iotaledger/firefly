@@ -1,6 +1,9 @@
 name: Build Firefly Desktop
 
 on:
+  push:
+    tags:
+      - desktop-*
   workflow_dispatch:
     inputs:
       debugElectronBuilder:
