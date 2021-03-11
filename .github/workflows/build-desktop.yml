@@ -7,6 +7,10 @@ on:
         description: "Verbose electron-builder output"     
         required: true
         default: "false"
+      uploadToS3:
+        description: "Upload auto-update files to S3"
+        required: true
+        default: "false"
 
 jobs:
   build:
@@ -127,3 +131,42 @@ jobs:
         path: |
           packages/desktop/out/firefly-desktop*
           packages/desktop/out/latest*
+  
+
+  release:
+    runs-on: ubuntu-latest
+    needs: [ build ]
+    if: github.event.inputs.uploadToS3 && github.event.inputs.uploadToS3 == 'true'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Downloading artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: trinity-desktop-windows-latest
+        path: assets
+
+    - name: Downloading artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: trinity-desktop-macos-latest
+        path: assets
+
+    - name: Downloading artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: trinity-desktop-ubuntu-latest
+        path: assets
+
+    - name: Listing artifacts
+      run: ls -al assets
+
+    - name: Upload to S3
+      run: |
+        aws s3 cp assets/ s3://iotaledger-files/4a1ddea1-10c1-4f1d-83f0-e14903931a46/releases/ --recursive --include "*" --exclude "*.sha256" --exclude "*.blockmap" --exclude "*.dmg" --exclude "*.asc" --acl public-read
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: eu-central-1
