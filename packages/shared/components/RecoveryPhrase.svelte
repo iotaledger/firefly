@@ -35,7 +35,7 @@
         ) {
             recoveryPhraseInput.pop()
             recoveryPhraseIndexes.pop()
-        } else if (!recoveryPhraseInput.includes(word) && !recoveryPhraseIndexes.includes(idx)) {
+        } else if (!recoveryPhraseIndexes.includes(idx)) {
             recoveryPhraseInput.push(word)
             recoveryPhraseIndexes.push(idx)
         }
@@ -71,10 +71,10 @@
             <button
                 on:click|preventDefault={() => handleClick(word, i)}
                 class="px-6 py-4 flex flex-row items-center rounded-2xl bg-gray-50"
-                class:selected={isVerification && recoveryPhraseInput.indexOf(word) !== -1 && recoveryPhraseIndexes.indexOf(i) !== -1}
+                class:selected={isVerification && recoveryPhraseIndexes.indexOf(i) !== -1}
                 class:disabled={!isVerification || disabled}>
                 {#if !isVerification}<span class="text-gray-500 whitespace-pre">{`${i + 1}. `}</span>{/if}
-                {#if isVerification && recoveryPhraseInput.indexOf(word) !== -1 && recoveryPhraseIndexes.indexOf(i) !== -1}
+                {#if isVerification && recoveryPhraseIndexes.indexOf(i) !== -1}
                     <span class="text-gray-300">{word}</span>
                     <span class="font-bold text-16 leading-3 text-white">{recoveryPhraseIndexes.indexOf(i) + 1}</span>
                 {:else}<span class={hide ? 'text-gray-500' : 'text-gray-800'}>{hide ? '********' : word}</span>{/if}
