@@ -1,7 +1,8 @@
-import { writable, get } from 'svelte/store'
+import { get, writable } from 'svelte/store'
 import { persistent } from './helpers'
+import { closePopup } from './popup'
+import { activeProfile, clearActiveProfile } from './profile'
 import { resetRouter } from './router'
-import { activeProfile } from './profile'
 import { destroyActor, resetWallet } from './wallet'
 /**
  * Notification content
@@ -59,8 +60,13 @@ export const developerMode = persistent<boolean>('developerMode', false)
  * Logout from current profile
  */
 export const logout = () => {
-    destroyActor(get(activeProfile).id)
+    const ap = get(activeProfile);
+    if (ap) {
+        destroyActor(ap.id)
+    }
+    closePopup()
     resetWallet()
     resetRouter()
+    clearActiveProfile()
     loggedIn.set(false)
 }
