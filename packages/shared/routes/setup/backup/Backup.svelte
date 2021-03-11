@@ -101,6 +101,8 @@
                                     },
                                     {
                                         onSuccess() {
+                                            // Clear mnemonic
+                                            mnemonic.set(null);
                                             dispatch('next')
                                         },
                                         onError(err) {
