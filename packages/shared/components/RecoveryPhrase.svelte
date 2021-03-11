@@ -11,6 +11,7 @@
     export let disabled = false
 
     let visibleRecoveryPhrase
+    let errorIndex = -1
 
     onMount(() => {
         visibleRecoveryPhrase = isVerification ? recoveryPhrase.slice().sort() : recoveryPhrase
@@ -19,6 +20,7 @@
     $: {
         if (recoveryPhraseInput.length === 0) {
             recoveryPhraseIndexes = []
+            errorIndex = -1
         }
     }
 
@@ -35,9 +37,14 @@
         ) {
             recoveryPhraseInput.pop()
             recoveryPhraseIndexes.pop()
-        } else if (!recoveryPhraseIndexes.includes(idx)) {
+            errorIndex = -1
+        } else if (!recoveryPhraseIndexes.includes(idx) && errorIndex === -1) {
             recoveryPhraseInput.push(word)
             recoveryPhraseIndexes.push(idx)
+
+            if (word !== recoveryPhrase[recoveryPhraseInput.length - 1]) {
+                errorIndex = idx
+            }
         }
         recoveryPhraseInput = recoveryPhraseInput
         recoveryPhraseIndexes = recoveryPhraseIndexes
@@ -61,6 +68,10 @@
                 @apply text-white;
                 @apply justify-between;
             }
+
+            &.errored {
+                @apply bg-red-500;
+            }
         }
     }
 </style>
@@ -72,7 +83,8 @@
                 on:click|preventDefault={() => handleClick(word, i)}
                 class="px-6 py-4 flex flex-row items-center rounded-2xl bg-gray-50"
                 class:selected={isVerification && recoveryPhraseIndexes.indexOf(i) !== -1}
-                class:disabled={!isVerification || disabled}>
+                class:disabled={!isVerification || disabled}
+                class:errored={errorIndex === i}>
                 {#if !isVerification}<span class="text-gray-500 whitespace-pre">{`${i + 1}. `}</span>{/if}
                 {#if isVerification && recoveryPhraseIndexes.indexOf(i) !== -1}
                     <span class="text-gray-300">{word}</span>
