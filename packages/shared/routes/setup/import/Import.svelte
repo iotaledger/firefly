@@ -3,6 +3,7 @@
     import { Transition } from 'shared/components'
     import { Import, TextImport, FileImport, BackupPassword, Success } from './views/'
     import { api } from 'shared/lib/wallet'
+    import { mnemonic } from 'shared/lib/app'
 
     export let locale
     export let mobile
@@ -46,6 +47,7 @@
                     dispatch('next', { importType })
                 } else {
                     importType = 'mnemonic'
+                    mnemonic.set(input.split(' '))
                     nextState = ImportState.Success
                 }
                 break

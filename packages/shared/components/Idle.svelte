@@ -1,29 +1,27 @@
 <script lang="typescript">
+    import { logout } from 'shared/lib/app'
     import { activeProfile } from 'shared/lib/profile'
-    import { resetRouter } from 'shared/lib/router'
     import { debounce } from 'shared/lib/utils'
-    import { api, destroyActor, resetWallet } from 'shared/lib/wallet'
+    import { api } from 'shared/lib/wallet'
     import { onDestroy } from 'svelte'
+    import { get } from 'svelte/store'
 
     let timeout
 
     function handleEvent() {
         clearTimeout(timeout)
 
-        if ($activeProfile) {
-            timeout = setTimeout(lock, $activeProfile.settings.lockScreenTimeout * 60 * 1000)
+        const ap = get(activeProfile)
+        if (ap) {
+            timeout = setTimeout(lock, ap.settings.lockScreenTimeout * 60 * 1000)
         }
     }
 
     function lock() {
+        logout()
+
         api.lockStronghold({
-            onSuccess() {
-                if ($activeProfile) {
-                    destroyActor($activeProfile.id)
-                }
-                resetWallet()
-                resetRouter()
-            },
+            onSuccess() {},
             onError(error) {
                 console.error(error)
             },

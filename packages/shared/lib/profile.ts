@@ -2,7 +2,7 @@ import { AvailableExchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
 import { DEFAULT_NODE } from 'shared/lib/network'
 import { generateRandomId } from 'shared/lib/utils'
-import { derived, get, writable } from 'svelte/store'
+import { derived, get, Readable, writable } from 'svelte/store'
 import { Electron } from './electron'
 import type { Node } from './typings/client'
 
@@ -63,7 +63,7 @@ export const newProfile = writable<Profile | null>(null)
 /**
  * Currently active profile
  */
-export const activeProfile = derived(
+export const activeProfile: Readable<Profile | undefined> = derived(
     [profiles, newProfile],
     ([$profiles, $newProfile]) =>
         $newProfile ||
@@ -100,7 +100,7 @@ export const saveProfile = (profile: Profile): Profile => {
  *
  * @returns {Profile}
  */
- export const createProfile = (profileName, isDeveloperProfile): Profile => {
+export const createProfile = (profileName, isDeveloperProfile): Profile => {
     const profile = {
         id: generateRandomId(),
         name: profileName,
@@ -152,6 +152,19 @@ export const setActiveProfile = (id: string): void => {
     profiles.update((_profiles) => _profiles.map((profile) => Object.assign({}, profile, { active: id === profile.id })))
 }
 
+
+
+/**
+ * Clears the active profile
+ *
+ * @method clearActiveProfile
+ *
+ * @returns {void}
+ */
+export const clearActiveProfile = (): void => {
+    profiles.update((_profiles) => _profiles.map((profile) => Object.assign({}, profile, { active: false })))
+}
+
 /**
  * Removes profile from storage
  *
@@ -197,7 +210,7 @@ export const updateProfile = (
     } else {
         profiles.update((_profiles) => {
             return _profiles.map((_profile) => {
-                if (_profile.id === get(activeProfile).id) {
+                if (_profile.id === get(activeProfile)?.id) {
                     return _update(_profile)
                 }
 

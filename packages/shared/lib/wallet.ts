@@ -1,6 +1,5 @@
 import { mnemonic } from 'shared/lib/app'
 import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
-import { persistent } from 'shared/lib/helpers'
 import { _ } from 'shared/lib/i18n'
 import type { HistoryData, PriceData } from 'shared/lib/marketData'
 import { HistoryDataProps } from 'shared/lib/marketData'
@@ -12,7 +11,7 @@ import type { Account, SyncedAccount } from './typings/account'
 import type { Address } from './typings/address'
 import type { Actor } from './typings/bridge'
 import type { TransferProgressEventType } from './typings/events'
-import type { Input, Message, Output } from './typings/message'
+import type { Message } from './typings/message'
 import type { ApiClient } from './walletApi'
 
 export const MAX_PROFILE_NAME_LENGTH = 20
@@ -103,7 +102,9 @@ export const resetWallet = () => {
     accountsLoaded.set(false)
     selectedAccountId.set(null)
     selectedMessage.set(null)
-    loggedIn.set(false)
+    isTransferring.set(false)
+    transferState.set(null)
+    isSyncing.set(null)
 }
 
 export const selectedAccountId = writable<string | null>(null)
@@ -114,8 +115,6 @@ export const isTransferring = writable<boolean>(false)
 export const transferState = writable<TransferProgressEventType | "Complete" | null>(null)
 
 export const isSyncing = writable<boolean>(false)
-
-export const loggedIn = persistent<boolean>('loggedIn', false)
 
 export const api: ApiClient = window['__WALLET_API__']
 
@@ -195,18 +194,16 @@ export const initialiseListeners = () => {
      */
     api.onNewTransaction({
         onSuccess(response) {
-            if (get(activeProfile).settings.notifications) {
-                const accounts = get(wallet).accounts
-                const account = get(accounts).find((account) => account.id === response.payload.accountId)
-                const message = response.payload.message
+            const accounts = get(wallet).accounts
+            const account = get(accounts).find((account) => account.id === response.payload.accountId)
+            const message = response.payload.message
 
-                const locale = get(_) as (string) => string
-                const notificationMessage = locale('notifications.valueTx')
-                    .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
-                    .replace('{{account}}', account.alias)
+            const locale = get(_) as (string) => string
+            const notificationMessage = locale('notifications.valueTx')
+                .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
+                .replace('{{account}}', account.alias)
 
-                showSystemNotification({ type: "info", message: notificationMessage })
-            }
+            showSystemNotification({ type: "info", message: notificationMessage })
 
             // Update account with new message
             saveNewMessage(response.payload.accountId, response.payload.message);
@@ -218,19 +215,17 @@ export const initialiseListeners = () => {
 
     api.onConfirmationStateChange({
         onSuccess(response) {
-            if (get(activeProfile).settings.notifications) {
-                const accounts = get(wallet).accounts
-                const account = get(accounts).find((account) => account.id === response.payload.accountId)
-                const message = response.payload.message
-                const messageKey = response.payload.confirmed ? 'confirmed' : 'failed'
+            const accounts = get(wallet).accounts
+            const account = get(accounts).find((account) => account.id === response.payload.accountId)
+            const message = response.payload.message
+            const messageKey = response.payload.confirmed ? 'confirmed' : 'failed'
 
-                const locale = get(_) as (string) => string
-                const notificationMessage = locale(`notifications.${messageKey}`)
-                    .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
-                    .replace('{{account}}', account.alias)
+            const locale = get(_) as (string) => string
+            const notificationMessage = locale(`notifications.${messageKey}`)
+                .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
+                .replace('{{account}}', account.alias)
 
-                showSystemNotification({ type: "info", message: notificationMessage })
-            }
+            showSystemNotification({ type: "info", message: notificationMessage })
         },
         onError(error) {
             console.error(error)
@@ -292,14 +287,16 @@ export const updateAccountAfterBalanceChange = (
             if (storedAccount.id === accountId) {
                 const rawIotaBalance = storedAccount.rawIotaBalance - spentBalance + receivedBalance;
 
+                const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD;
+
                 return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
                     rawIotaBalance,
                     balance: formatUnit(rawIotaBalance, 2),
                     balanceEquiv: `${convertToFiat(
                         rawIotaBalance,
                         get(currencies)[CurrencyTypes.USD],
-                        get(exchangeRates)[get(activeProfile).settings.currency]
-                    )} ${get(activeProfile).settings.currency}`,
+                        get(exchangeRates)[activeCurrency]
+                    )} ${activeCurrency}`,
                     addresses: storedAccount.addresses.map((_address: Address) => {
                         if (_address.address === address.address) {
                             return Object.assign<Address, Partial<Address>, Partial<Address>>({} as Address, _address, address)
@@ -394,6 +391,8 @@ export const getLatestMessages = (accounts: WalletAccount[], count = 10): Accoun
 export const updateBalanceOverview = (balance: number, incoming: number, outgoing: number): void => {
     const { balanceOverview } = get(wallet);
 
+    const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD;
+
     balanceOverview.update((overview) => {
         return Object.assign<BalanceOverview, BalanceOverview, Partial<BalanceOverview>>({} as BalanceOverview, overview, {
             incoming: formatUnit(incoming, 2),
@@ -405,8 +404,8 @@ export const updateBalanceOverview = (balance: number, incoming: number, outgoin
             balanceFiat: `${convertToFiat(
                 balance,
                 get(currencies)[CurrencyTypes.USD],
-                get(exchangeRates)[get(activeProfile).settings.currency]
-            )} ${get(activeProfile).settings.currency}`,
+                get(exchangeRates)[activeCurrency]
+            )} ${activeCurrency}`,
         });
     });
 };
@@ -420,13 +419,16 @@ export const updateBalanceOverview = (balance: number, incoming: number, outgoin
  */
 export const updateBalanceOverviewFiat = (): void => {
     const { balanceOverview } = get(wallet);
+
+    const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD;
+
     balanceOverview.update((overview) => {
         return Object.assign<BalanceOverview, BalanceOverview, Partial<BalanceOverview>>({} as BalanceOverview, overview, {
             balanceFiat: `${convertToFiat(
                 overview.balanceRaw,
                 get(currencies)[CurrencyTypes.USD],
-                get(exchangeRates)[get(activeProfile).settings.currency]
-            )} ${get(activeProfile).settings.currency}`,
+                get(exchangeRates)[activeCurrency]
+            )} ${activeCurrency}`,
         });
     });
 }
@@ -484,14 +486,17 @@ function mergeProps<T>(existingPayload: T[], newPayload: T[], prop: string): T[]
  */
 export const updateAccountsBalanceEquiv = (): void => {
     const { accounts } = get(wallet)
+
+    const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD;
+
     accounts.update((storedAccounts) => {
         return storedAccounts.map((storedAccount) => {
             return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
                 balanceEquiv: `${convertToFiat(
                     storedAccount.rawIotaBalance,
                     get(currencies)[CurrencyTypes.USD],
-                    get(exchangeRates)[get(activeProfile).settings.currency]
-                )} ${get(activeProfile).settings.currency}`,
+                    get(exchangeRates)[activeCurrency]
+                )} ${activeCurrency}`,
             })
         })
     })
