@@ -117,6 +117,14 @@ const eventsApiResponseTypes = Object.values(eventsApiToResponseTypeMap)
  * Receives messages from wallet.rs.
  */
 Wallet.onMessage((message: MessageResponse) => {
+    if (message && message.id === undefined) {
+        // There is no message id
+        // Something lower level has thrown an error
+        // We should stop processing at this point
+        errorLog.update((log) => [ { type: ErrorType.ClientError, message: JSON.stringify(message), time: Date.now() }, ...log ])
+        return
+    }
+
     const _deleteCallbackId = (_id: string) => {
         // Do not delete callback ids for events api methods
         if (!eventsApiResponseTypes.includes(message.type)) {

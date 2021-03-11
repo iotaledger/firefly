@@ -45,7 +45,7 @@
     }
 
     let splash = true
-    setupI18n({ withLocale: get(activeProfile) ? get(activeProfile).settings.language : 'en' })
+    setupI18n({ withLocale: get(activeProfile)?.settings.language ?? 'en' })
     onMount(async () => {
         setTimeout(() => {
             splash = false

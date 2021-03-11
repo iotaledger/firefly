@@ -1,13 +1,13 @@
 <script lang="typescript">
-    import { get } from 'svelte/store'
-    import { onMount, onDestroy } from 'svelte'
-    import { Text, SecurityTile } from 'shared/components'
-    import { diffDates, getBackupWarningColor } from 'shared/lib/helpers'
-    import { activeProfile, profiles } from 'shared/lib/profile'
-    import { openPopup } from 'shared/lib/popup'
-    import { api } from 'shared/lib/wallet'
+    import { SecurityTile, Text } from 'shared/components'
     import { versionDetails } from 'shared/lib/appUpdater'
+    import { diffDates, getBackupWarningColor } from 'shared/lib/helpers'
     import { showAppNotification } from 'shared/lib/notifications'
+    import { openPopup } from 'shared/lib/popup'
+    import { activeProfile, profiles } from 'shared/lib/profile'
+    import { api } from 'shared/lib/wallet'
+    import { onDestroy, onMount } from 'svelte'
+    import { get } from 'svelte/store'
 
     export let locale
 
@@ -17,7 +17,9 @@
     let strongholdStatusMessage
 
     function setup() {
-        const { isStrongholdLocked, lastStrongholdBackupTime } = get(activeProfile)
+        const ap = get(activeProfile);
+        const isStrongholdLocked = ap?.isStrongholdLocked
+        const lastStrongholdBackupTime = ap?.lastStrongholdBackupTime
         lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
         lastBackupDateFormatted = diffDates(lastBackupDate, new Date())
         color = getBackupWarningColor(lastBackupDate)
@@ -31,7 +33,7 @@
                 currentVersion: $versionDetails.currentVersion,
                 lastBackupDate,
                 lastBackupDateFormatted,
-                isStrongholdLocked: get(activeProfile).isStrongholdLocked,
+                isStrongholdLocked: get(activeProfile)?.isStrongholdLocked,
             },
         })
     }
@@ -77,13 +79,13 @@
         <SecurityTile
             title={locale('views.dashboard.security.stronghold_status.title')}
             message={locale(`views.dashboard.security.stronghold_status.${strongholdStatusMessage}`)}
-            color={$activeProfile.isStrongholdLocked ? 'blue' : 'yellow'}
+            color={$activeProfile?.isStrongholdLocked ? 'blue' : 'yellow'}
             icon="lock"
-            onClick={() => (get(activeProfile).isStrongholdLocked ? handleSecurityTileClick('password') : lockStronghold())} />
+            onClick={() => (get(activeProfile)?.isStrongholdLocked ? handleSecurityTileClick('password') : lockStronghold())} />
         <!-- Stronghold backup -->
         <SecurityTile
             title={locale('views.dashboard.security.stronghold_backup.title')}
-            message={$activeProfile.lastStrongholdBackupTime ? locale(`dates.${lastBackupDateFormatted.unit}`, {
+            message={$activeProfile?.lastStrongholdBackupTime ? locale(`dates.${lastBackupDateFormatted.unit}`, {
                       values: { time: lastBackupDateFormatted.value },
                   }) : locale('popups.backup.not_backed_up')}
             onClick={() => handleSecurityTileClick('backup')}

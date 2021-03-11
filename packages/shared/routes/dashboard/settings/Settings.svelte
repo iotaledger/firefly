@@ -1,12 +1,12 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
-    import { get } from 'svelte/store'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { activeProfile } from 'shared/lib/profile'
     import { settingsRoute } from 'shared/lib/router'
     import { SettingsRoutes } from 'shared/lib/typings/routes'
-
+    import { createEventDispatcher } from 'svelte'
+    import { get } from 'svelte/store'
     import { SettingsHome, SettingsViewer } from './views'
+
     export let locale
     export let mobile
 
@@ -17,7 +17,7 @@
     }
 
     $: {
-        if ($deepLinkRequestActive && !get(activeProfile).settings.deepLinking) {
+        if ($deepLinkRequestActive && !get(activeProfile)?.settings.deepLinking) {
             settingsRoute.set(SettingsRoutes.AdvancedSettings)
             deepLinkRequestActive.set(false)
         }

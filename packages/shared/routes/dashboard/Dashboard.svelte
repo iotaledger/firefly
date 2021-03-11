@@ -3,6 +3,7 @@
     import { logout, sendParams } from 'shared/lib/app'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { Electron } from 'shared/lib/electron'
+    import { showAppNotification } from 'shared/lib/notifications'
     import { activeProfile } from 'shared/lib/profile'
     import { dashboardRoute, routerNext } from 'shared/lib/router'
     import { Tabs } from 'shared/lib/typings/routes'
@@ -11,7 +12,6 @@
     import { Settings, Wallet } from 'shared/routes'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale
     export let mobile
@@ -54,7 +54,7 @@
             }
         }
 
-        if (!get(activeProfile).settings.deepLinking) {
+        if (!get(activeProfile)?.settings.deepLinking) {
             _redirect(Tabs.Settings)
             // TODO: Add alert system
             console.log('deep linking not enabled')

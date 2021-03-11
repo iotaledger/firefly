@@ -1,19 +1,19 @@
 <script lang="typescript">
+    import { Icon, Modal, Text } from 'shared/components'
+    import { logout } from 'shared/lib/app'
+    import { getInitials } from 'shared/lib/helpers'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { activeProfile } from 'shared/lib/profile'
+    import { api } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
     import { fade } from 'svelte/transition'
-    import { Text, Icon, Modal } from 'shared/components'
-    import { activeProfile } from 'shared/lib/profile'
-    import { getInitials } from 'shared/lib/helpers'
-    import { api } from 'shared/lib/wallet'
-    import { logout } from 'shared/lib/app'
-    import { showAppNotification } from 'shared/lib/notifications'
 
     export let isActive
     export let locale
     export let openSettings = () => {}
 
     const profileColor = 'blue' // TODO: each profile has a different color
-    const profileName = get(activeProfile).name
+    const profileName = get(activeProfile)?.name
     const profileInitial = getInitials(profileName, 1)
 
     const handleSettingsClick = () => {

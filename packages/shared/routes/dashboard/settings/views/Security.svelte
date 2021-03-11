@@ -75,7 +75,7 @@
             }
         }
 
-        if (get(activeProfile).isStrongholdLocked) {
+        if (get(activeProfile)?.isStrongholdLocked) {
             openPopup({
                 type: 'password',
                 props: {
@@ -217,13 +217,13 @@
                 }
             }
 
-            Electron.PincodeManager.verify(get(activeProfile).id, currentPincode)
+            Electron.PincodeManager.verify(get(activeProfile)?.id, currentPincode)
                 .then((valid) => {
                     if (valid) {
                         return new Promise<void>((resolve, reject) => {
                             api.setStoragePassword(newPincode, {
                                 onSuccess() {
-                                    Electron.PincodeManager.set(get(activeProfile).id, newPincode)
+                                    Electron.PincodeManager.set(get(activeProfile)?.id, newPincode)
                                         .then(() => {
                                             currentPincode = ''
                                             newPincode = ''
@@ -283,7 +283,7 @@
             onSelect={(option) => {
                 updateProfile('settings.lockScreenTimeout', option.value)
             }}
-            value={assignTimeoutOptionLabel($activeProfile.settings.lockScreenTimeout)}
+            value={assignTimeoutOptionLabel($activeProfile?.settings.lockScreenTimeout)}
             items={lockScreenTimeoutOptions} />
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
