@@ -6,6 +6,7 @@
         "packages/backend/bindings/node"
     ],
     "devDependencies": {
+        "covector": "^0.4.5",
         "patch-package": "^6.2.2"
     },
     "scripts": {

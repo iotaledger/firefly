@@ -1,0 +1,22 @@
+{
+  "gitSiteUrl": "https://github.com/iotaledger/firefly/",
+  "pkgManagers": {
+    "javascript": {
+      "version": true,
+      "getPublishedVersion": "npm view ${ pkg.pkg } version",
+      "publish": [
+        {
+          "command": "npm publish --access public",
+          "dryRunCommand": "echo publish here"
+        }
+      ]
+    }
+  },
+  "packages": {
+    "desktop": {
+      "path": "./packages/desktop",
+      "manager": "javascript",
+      "publish": false
+    }
+  }
+}
