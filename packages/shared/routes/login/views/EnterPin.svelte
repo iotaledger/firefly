@@ -109,7 +109,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <div class="relative w-full h-full bg-white dark:bg-gray-900">
+    <div class="relative w-full h-full bg-white dark:bg-blue-900">
         <button
             data-label="back-button"
             class="absolute top-12 left-5 disabled:opacity-50 cursor-pointer disabled:cursor-auto"

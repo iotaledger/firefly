@@ -24,7 +24,7 @@
     }
 </script>
 
-<div class="w-full h-full px-16 py-12 flex flex-1 bg-white">
+<div class="w-full h-full px-16 py-12 flex flex-1 bg-white dark:bg-gray-900">
     {#if $settingsRoute === SettingsRoutes.Init}
         <SettingsHome {mobile} {locale} />
     {:else}

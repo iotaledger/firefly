@@ -1,8 +1,8 @@
 <script lang="typescript">
-    import { SettingsRoutes, GeneralSettings, SecuritySettings, AdvancedSettings, HelpAndInfo } from 'shared/lib/typings/routes'
+    import { SettingsMenu, Text } from 'shared/components'
+    import { settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
-    import { Text, SettingsMenu } from 'shared/components'
-    import { settingsRoute } from 'shared/lib/router';
+    import { AdvancedSettings, GeneralSettings, HelpAndInfo, SecuritySettings, SettingsRoutes } from 'shared/lib/typings/routes'
 
     export let locale
     export let mobile

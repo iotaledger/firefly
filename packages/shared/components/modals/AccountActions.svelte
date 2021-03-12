@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Icon, Modal, Text } from 'shared/components'
+    import { Icon, Modal, Text, HR } from 'shared/components'
     import { openPopup } from 'shared/lib/popup'
     import { accountRoute } from 'shared/lib/router'
     import { AccountRoutes } from 'shared/lib/typings/routes'
@@ -55,7 +55,7 @@
             <Icon icon="history" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
             <Text smaller classes="group-hover:text-blue-500">{locale(`actions.view_address_history`)}</Text>
         </button>
-        <hr class="border-t border-solid border-gray-200 dark:border-gray-700" />
+        <HR />
         <!-- Delete -->
         <button
             on:click={() => handleDeleteAccountClick()}

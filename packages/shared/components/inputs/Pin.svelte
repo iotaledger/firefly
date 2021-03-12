@@ -109,10 +109,9 @@
 
 <style type="text/scss">
     pin-input {
-        height: 80px;
         @apply cursor-pointer;
-        user-select: none;
-        transition: border-color 0.25s;
+        @apply select-none;
+        @apply h-20;
 
         &:not(.disabled):focus-within,
         &:not(.disabled):hover {

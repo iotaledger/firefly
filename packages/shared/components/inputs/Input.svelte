@@ -47,8 +47,6 @@
         color: var(--text-secondary-color);
         background: var(--element-bg-color);
         border-radius: 10px;
-        box-shadow: -2px -2px 4px rgba(255, 255, 255, 0.2), 0px 4px 8px rgba(65, 114, 248, 0.08);
-        transition: border-color 0.25s;
 
         &:disabled {
             @apply pointer-events-none;

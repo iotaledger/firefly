@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Checkbox, Dropdown, Password, Spinner, Text } from 'shared/components'
+    import { Button, Checkbox, Dropdown, HR, Password, Spinner, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
@@ -275,7 +275,7 @@
             <Spinner busy={exportBusy} message={exportMessage} classes="ml-2" />
         </div>
     </section>
-    <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
+    <HR classes="pb-5 mt-5 justify-center" />
     <section id="appLock" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.appLock.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.appLock.description')}</Text>
@@ -286,7 +286,7 @@
             value={assignTimeoutOptionLabel($activeProfile?.settings.lockScreenTimeout)}
             items={lockScreenTimeoutOptions} />
     </section>
-    <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
+    <HR classes="pb-5 mt-5 justify-center" />
     <section id="changePassword" class="w-3/4">
         <form id="form-change-password" on:submit={changePassword}>
             <Text type="h4" classes="mb-3">{locale('views.settings.changePassword.title')}</Text>
@@ -334,7 +334,7 @@
             </div>
         </form>
     </section>
-    <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
+    <HR classes="pb-5 mt-5 justify-center" />
     <section id="changePincode" class="w-3/4">
         <form on:submit={changePincode} id="pincode-change-form">
             <Text type="h4" classes="mb-3">{locale('views.settings.changePincode.title')}</Text>
@@ -380,7 +380,7 @@
             </div>
         </form>
     </section>
-    <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
+    <HR classes="pb-5 mt-5 justify-center" />
     <section id="deleteProfile" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.deleteProfile.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.deleteProfile.description')}</Text>

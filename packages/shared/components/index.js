@@ -37,6 +37,7 @@ export { default as Idle } from './Idle.svelte'
 export { default as ToastContainer } from './ToastContainer.svelte'
 export { default as ProgressBar } from './ProgressBar.svelte'
 export { default as Spinner } from './Spinner.svelte'
+export { default as HR } from './HR.svelte'
 
 export * from './modals'
 // Charts

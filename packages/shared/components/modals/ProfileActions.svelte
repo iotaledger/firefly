@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Icon, Modal, Text } from 'shared/components'
+    import { Icon, Modal, Text, HR } from 'shared/components'
     import { logout } from 'shared/lib/app'
     import { getInitials } from 'shared/lib/helpers'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -43,7 +43,7 @@
             </div>
             <Text>{profileName}</Text>
         </div>
-        <hr class="border-t border-solid border-gray-200 dark:border-gray-700" />
+        <HR />
         <button
             on:click={() => handleSettingsClick()}
             class="group flex flex-row justify-start items-center hover:bg-blue-50 py-3 px-3 w-full">
