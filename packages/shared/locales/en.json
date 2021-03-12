@@ -80,8 +80,9 @@
             "body": "You have backed up your wallet to a Stronghold."
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your wallet is ready to go."
+            "title": "Funds migrated",
+            "body": "You have successfully migrated all your funds to the new network",
+            "export_migration": "Export migration log and finish Setup"
         },
         "import": {
             "title": "Import a wallet",
@@ -110,10 +111,10 @@
         },
         "migrate": {
             "title": "Migrate your funds",
-            "body_1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
-            "new": "Your new wallet"
+            "body_1": "This is an automated process to transfer your existing funds to the new network.",
+            "body_2": "Your funds will be locked until the Chrysalis network goes live in Aril 2021",
+            "learn": "Learn about the migration",
+            "migrating": "Migrating funds..."
         },
         "migrate_failed": {
             "title": "To do",
