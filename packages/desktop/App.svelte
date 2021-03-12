@@ -82,6 +82,9 @@
         Electron.onEvent('menu-error-log', async () => {
             openPopup({ type: 'errorLog' })
         })
+        Electron.onEvent('menu-diagnostics', async () => {
+            openPopup({ type: 'diagnostics' })
+        })
     })
 </script>
 

@@ -78,6 +78,10 @@ const buildTemplate = () => {
             click: () => getOrInitWindow('main').webContents.send('menu-error-log')
         },
         {
+            label: state.strings.diagnostics,
+            click: () => getOrInitWindow('main').webContents.send('menu-diagnostics')
+        },
+        {
             type: 'separator',
         },
     ])
