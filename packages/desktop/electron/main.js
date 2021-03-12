@@ -267,7 +267,6 @@ ipcMain.handle('diagnostics', (_e) => {
     const diagnostics = [
         { label: 'popups.diagnostics.platform', value: os.platform() },
         { label: 'popups.diagnostics.platformVersion', value: os.release() },
-        { label: 'popups.diagnostics.platformType', value: os.type() },
         { label: 'popups.diagnostics.platformArchitecture', value: os.arch() },
         { label: 'popups.diagnostics.cpuCount', value: os.cpus().length },
         { label: 'popups.diagnostics.totalMem', value: `${(os.totalmem() / 1048576 ).toFixed(1)} GB` },
