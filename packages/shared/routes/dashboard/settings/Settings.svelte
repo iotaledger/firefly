@@ -3,7 +3,7 @@
     import { activeProfile } from 'shared/lib/profile'
     import { settingsRoute } from 'shared/lib/router'
     import { SettingsRoutes } from 'shared/lib/typings/routes'
-    import { createEventDispatcher, onMount } from 'svelte'
+    import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
     import { SettingsHome, SettingsViewer } from './views'
 
@@ -23,7 +23,7 @@
         }
     }
 
-    onMount(() => {
+    onDestroy(() => {
         settingsRoute.set(SettingsRoutes.Init)
     })
 </script>
