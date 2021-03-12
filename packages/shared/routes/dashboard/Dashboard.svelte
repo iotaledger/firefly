@@ -3,7 +3,6 @@
     import { logout, sendParams } from 'shared/lib/app'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { Electron } from 'shared/lib/electron'
-    import { showAppNotification } from 'shared/lib/notifications'
     import { activeProfile } from 'shared/lib/profile'
     import { dashboardRoute, routerNext } from 'shared/lib/router'
     import { Tabs } from 'shared/lib/typings/routes'
@@ -27,17 +26,7 @@
         Electron.onEvent('deep-link-params', (data) => handleDeepLinkRequest(data))
 
         Electron.onEvent('menu-logout', () => {
-            api.lockStronghold({
-                onSuccess() {
-                    logout()
-                },
-                onError(err) {
-                    showAppNotification({
-                        type: 'error',
-                        message: locale(err.error),
-                    })
-                },
-            })
+            logout()
         })
     })
 
