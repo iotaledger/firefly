@@ -48,26 +48,6 @@ jobs:
           llvm-dev libclang-dev clang
       if: matrix.os == 'ubuntu-latest'
 
-    # paho.mqtt requires openssl and OPENSSL_ROOT_DIR on macOS
-    - name: Set OpenSSL location (macOS)
-      if: matrix.os == 'macos-latest'
-      run: echo "OPENSSL_ROOT_DIR=$(brew --prefix openssl@1.1)" >> $GITHUB_ENV
-    
-    - name: Set OpenSSL location (Linux)
-      if: matrix.os == 'ubuntu-latest'
-      run: echo "RUSTFLAGS=-L /usr/lib/x86_64-linux-gnu" >> $GITHUB_ENV
-    
-    # paho.mqtt requires openssl and OPENSSL_ROOT_DIR on Windows
-    # Prebuilt OpenSSL 1.1.1g from https://github.com/microsoft/vcpkg/releases/tag/2020.11
-    - name: Install OpenSSL (Windows)
-      if: matrix.os == 'windows-latest'
-      run: |
-        $ProgressPreference = 'SilentlyContinue'
-        Invoke-WebRequest https://iotaledger-files.s3.eu-central-1.amazonaws.com/prebuild/openssl/windows/vcpkg-export-openssl-1.1.1g.zip -OutFile openssl.zip
-        Expand-Archive openssl.zip
-        Remove-Item openssl.zip
-        echo "OPENSSL_ROOT_DIR=${{ github.workspace }}/openssl/installed/x64-windows-static" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-
     - name: Enable verbose output for electron-builder (macOS/Linux)
       run: echo "DEBUG=electron-builder" >> $GITHUB_ENV
       if: matrix.os != 'windows-latest' && github.event.inputs.debugElectronBuilder && github.event.inputs.debugElectronBuilder == 'true'
