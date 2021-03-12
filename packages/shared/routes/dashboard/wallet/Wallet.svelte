@@ -290,7 +290,7 @@
                     indexation: { index: 'firefly', data: new Array() },
                 },
                 {
-                    onSuccess(response) {
+                    onSuccess(response) {                        
                         accounts.update((_accounts) => {
                             return _accounts.map((_account) => {
                                 if (_account.id === senderAccountId) {

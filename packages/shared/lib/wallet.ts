@@ -467,19 +467,32 @@ export const updateBalanceOverviewFiat = (): void => {
 export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
     const { accounts } = get(wallet)
 
-    accounts.update((storedAccounts) => {
-        return storedAccounts.map((storedAccount) => {
-            const syncedAccount = syncedAccounts.find((_account) => _account.id === storedAccount.id)
+    const existingAccountIds = get(accounts).map((account) => account.id)
 
-            return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
-                // Update deposit address
-                depositAddress: syncedAccount.depositAddress.address,
-                // If we have received a new address, simply add it;
-                // If we have received an existing address, update the properties.
-                addresses: mergeProps(storedAccount.addresses, syncedAccount.addresses, 'address'),
-                messages: mergeProps(storedAccount.messages, syncedAccount.messages, 'id'),
-            })
-        })
+    const { newAccounts, existingAccounts } = syncedAccounts.reduce((acc, syncedAccount: SyncedAccount) => {
+        if (existingAccountIds.includes(syncedAccount.id)) {
+            acc.existingAccounts.push(syncedAccount);
+        } else {
+            acc.newAccounts.push(syncedAccount);
+        }
+
+        return acc;
+    }, { newAccounts: [], existingAccounts: [] })
+
+    accounts.update((storedAccounts) => {
+        return [
+            ...storedAccounts.map((storedAccount) => {
+                const syncedAccount = existingAccounts.find((_account) => _account.id === storedAccount.id)
+
+                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
+                    // Update deposit address
+                    depositAddress: syncedAccount.depositAddress.address,
+                    // If we have received a new address, simply add it;
+                    // If we have received an existing address, update the properties.
+                    addresses: mergeProps(storedAccount.addresses, syncedAccount.addresses, 'address'),
+                    messages: mergeProps(storedAccount.messages, syncedAccount.messages, 'id'),
+                })
+            }), ...newAccounts]
     })
 };
 
