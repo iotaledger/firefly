@@ -2,7 +2,6 @@
     import { logout } from 'shared/lib/app'
     import { activeProfile } from 'shared/lib/profile'
     import { debounce } from 'shared/lib/utils'
-    import { api } from 'shared/lib/wallet'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -19,13 +18,6 @@
 
     function lock() {
         logout()
-
-        api.lockStronghold({
-            onSuccess() {},
-            onError(error) {
-                console.error(error)
-            },
-        })
     }
 
     onDestroy(() => {
