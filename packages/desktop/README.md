@@ -9,17 +9,14 @@ For all platforms, the following are required:
 -   [Node.js](https://nodejs.org/en/) 12+ (note: there may be issues with Node.js 15 on Windows)
 -   [Yarn](https://classic.yarnpkg.com/en/docs/install)
 -   [Rust](https://www.rust-lang.org/tools/install)
--   [CMake](https://cmake.org/download/)
 
 ### macOS
 
 -   Xcode Command Line Tools
--   OpenSSL (`brew install openssl`)
 
 ### Windows
 
 -   [`windows-build-tools`](https://www.npmjs.com/package/windows-build-tools)
--   OpenSSL (can be installed with [vcpkg](https://github.com/microsoft/vcpkg) or [Chocolatey](https://chocolatey.org/packages/openssl))
 
 ### Linux
 
@@ -30,47 +27,6 @@ For all platforms, the following are required:
 -   `libssl` (Debian/Ubuntu: `libssl-dev`, Red Hat: `openssl-devel`, Arch Linux: `openssl`)
 -   `libusb` (Debian/Ubuntu: `libusb-1.0-0-dev`)
 -   `libudev` (Debian/Ubuntu: `libudev-dev`)
-
-## Building Node.js Bindings for Electron
-
-The following environment variables need to be set in order to compile the bindings properly when packaging the app:
-
-### macOS
-
-```bash
-export OPENSSL_LINK_STATIC=true
-export OPENSSL_ROOT_DIR=$(brew --prefix openssl)
-```
-
-### Windows
-
-```powershell
-set OPENSSL_LINK_STATIC=true
-```
-
-If using `vcpkg` to install OpenSSL:
-
-```powershell
-set VCPKGRS_DYNAMIC=1
-```
-
-If using Chocolatey to install OpenSSL:
-
-```powershell
-set OPENSSL_ROOT_DIR="C:\Program Files\OpenSSL-Win64"
-```
-
-### Linux
-
-```bash
-export OPENSSL_LINK_STATIC=true
-```
-
-On Debian and Ubuntu releases that use multiarch:
-
-```bash
-export RUSTFLAGS="-L /usr/lib/x86_64-linux-gnu"
-```
 
 ## Running the Firefly Snap
 
