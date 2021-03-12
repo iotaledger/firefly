@@ -4,7 +4,6 @@
 
     export let locale
     export let mobile
-    export let importType
 
     const dispatch = createEventDispatcher()
 
