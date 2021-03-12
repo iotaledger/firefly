@@ -103,11 +103,11 @@
                 <button class="text-left" on:click={() => setClipboard(id.toLowerCase())}>
                     <Text type="pre">{id}</Text>
                 </button>
-           </div>
+            </div>
         {/if}
         {#if senderAddress}
             <div class="mb-5">
-                <Text secondary>{locale('general.input_address')}</Text>
+                <Text secondary>{locale('general.inputAddress')}</Text>
                 <button class="text-left" on:click={() => setClipboard(senderAddress.toLowerCase())}>
                     <Text type="pre">{senderAddress}</Text>
                 </button>
@@ -115,7 +115,7 @@
         {/if}
         {#if receiverAddresses.length > 0}
             <div class="mb-5">
-                <Text secondary>{locale('general.receive_address')}</Text>
+                <Text secondary>{locale('general.receiveAddress')}</Text>
                 {#each receiverAddresses as receiver}
                     <button class="text-left" on:click={() => setClipboard(receiver.toLowerCase())}>
                         <Text type="pre" classes="mb-2">{receiver}</Text>
@@ -126,6 +126,6 @@
     </div>
 
     <div class="w-full flex justify-center">
-        <button on:click={onBackClick}><Text smaller highlighted>{locale('actions.hide_details')}</Text></button>
+        <button on:click={onBackClick}><Text smaller highlighted>{locale('actions.hideDetails')}</Text></button>
     </div>
 </div>

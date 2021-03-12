@@ -28,8 +28,8 @@
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
             <form on:submit={onSubmit} id="backup-form">
-                <Text type="h2" classes="mb-5">{locale('views.backup_wallet.title')}</Text>
-                <Text type="p" secondary classes="mb-8">{locale('views.backup_wallet.body')}</Text>
+                <Text type="h2" classes="mb-5">{locale('views.backupWallet.title')}</Text>
+                <Text type="p" secondary classes="mb-8">{locale('views.backupWallet.body')}</Text>
                 <Password bind:value={confirmPassword} {locale} autofocus />
             </form>
         </div>

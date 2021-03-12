@@ -1,29 +1,29 @@
 {
     "views": {
-        "onboarding_1": {
+        "onboarding1": {
             "title": "IOTA 보내기, 받기, 관리하기",
             "body": "Firefly는 안전하고 사용하기 쉬운 IOTA 지갑입니다."
         },
         "legal": {
             "title": "법적 고지",
             "body": "개인정보 보호 정책과 서비스 약관을 읽고 확인해 주세요.",
-            "privacy_policy": {
+            "privacyPolicy": {
                 "title": "개인정보 보호 정책",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "terms_of_service": {
+            "termsOfService": {
                 "title": "서비스 약관",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
@@ -34,7 +34,7 @@
         "setup": {
             "title": "지갑 설정하기",
             "body": "새로운 지갑을 만들거나 기존의 지갑을 불러올 수 있습니다.",
-            "profile_name": "프로필 이름"
+            "profileName": "프로필 이름"
         },
         "password": {
             "title": "비밀번호 만들기",
@@ -42,41 +42,41 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body_2": "Keep your PIN safe!"
+            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
+            "body2": "Keep your PIN safe!"
         },
         "pin": {
             "title": "PIN 번호 설정",
-            "body_1": "아래에 지갑에 접속하기 위해 사용할 6자리 PIN 번호를 입력해 주세요.",
-            "body_2": "숫자만 사용할 수 있습니다."
+            "body1": "아래에 지갑에 접속하기 위해 사용할 6자리 PIN 번호를 입력해 주세요.",
+            "body2": "숫자만 사용할 수 있습니다."
         },
-        "confirm_pin": {
+        "confirmPin": {
             "title": "PIN 번호 확인",
             "body": "PIN 번호를 다시 한번 입력해 주세요."
         },
         "backup": {
             "title": "지갑 백업",
-            "body_1": "이제 지갑 복구에 필요한 복원 문구를 확인합니다.",
-            "body_2": "복원 문구는 나 이외의 다른 사람에게 보여주지 마세요. 이 복원 문구가 있으면 어디서든 내 토큰에 접근할 수 있습니다.",
-            "body_3": "복원 문구를 잃어버리게 될 경우 지갑 잔고를 잃어버릴 수도 있습니다."
+            "body1": "이제 지갑 복구에 필요한 복원 문구를 확인합니다.",
+            "body2": "복원 문구는 나 이외의 다른 사람에게 보여주지 마세요. 이 복원 문구가 있으면 어디서든 내 토큰에 접근할 수 있습니다.",
+            "body3": "복원 문구를 잃어버리게 될 경우 지갑 잔고를 잃어버릴 수도 있습니다."
         },
-        "recovery_phrase": {
+        "recoveryPhrase": {
             "title": "복원 문구",
-            "body_1": "순서에 유의하며 복원 문구를 기록하세요.",
-            "body_2": "복원 문구를 안전하게 보관하고 나 이외의 다른 사람에게 보여주지 마세요.",
-            "reveal_recovery_phrase": "복원 문구 보기",
-            "hide_recovery_phrase": "복원 문구 숨기기"
+            "body1": "순서에 유의하며 복원 문구를 기록하세요.",
+            "body2": "복원 문구를 안전하게 보관하고 나 이외의 다른 사람에게 보여주지 마세요.",
+            "revealRecoveryPhrase": "복원 문구 보기",
+            "hideRecoveryPhrase": "복원 문구 숨기기"
         },
-        "verify_recovery_phrase": {
+        "verifyRecoveryPhrase": {
             "title": "복원 문구 확인",
             "body": "복원 문장을 정확히 기록하였는지 확인합니다. 아래에서 단어를 올바른 순서대로 선택해 주세요.",
-            "creating_account": "계정을 만드는 중입니다. 잠시 기다려주세요..."
+            "creatingAccount": "계정을 만드는 중입니다. 잠시 기다려주세요..."
         },
-        "backup_wallet": {
+        "backupWallet": {
             "title": "Stronghold 파일로 백업",
             "body": "지갑을 Stronghold 파일로 백업하기 위해 사용할 비밀번호를 입력하세요. 이 비밀번호를 사용해 백업을 암호화합니다."
         },
-        "recovery_phrase_saved": {
+        "recoveryPhraseSaved": {
             "title": "백업 성공",
             "body": "Stronghold로 지갑을 백업하였습니다."
         },
@@ -88,35 +88,35 @@
             "title": "지갑 불러오기",
             "body": "복원 문구 또는 Stronghold 백업을 가지고 있다면 불러올 수 있습니다."
         },
-        "import_from_text": {
+        "importFromText": {
             "title": "복원 문구 또는 시드로 지갑을 복구하기",
-            "body_1": "복원 문구는 24개의 단어로 이루어진 문장입니다. 복원 문구가 있으면 기존에 사용하던 Firefly 지갑을 복구할 수 있습니다.",
-            "body_2": "시드는 81개의 글자로 이루어져 있습니다. 시드가 있으면 기존에 사용하던 Trinity 지갑을 복구할 수 있습니다.",
-            "body_3": "시드 또는 복원 문구 입력",
-            "seed_detected": "81자의 시드 감지",
-            "phrase_detected": "24 개의 단어 구문 감지"
+            "body1": "복원 문구는 24개의 단어로 이루어진 문장입니다. 복원 문구가 있으면 기존에 사용하던 Firefly 지갑을 복구할 수 있습니다.",
+            "body2": "시드는 81개의 글자로 이루어져 있습니다. 시드가 있으면 기존에 사용하던 Trinity 지갑을 복구할 수 있습니다.",
+            "body3": "시드 또는 복원 문구 입력",
+            "seedDetected": "81자의 시드 감지",
+            "phraseDetected": "24 개의 단어 구문 감지"
         },
-        "import_from_file": {
+        "importFromFile": {
             "title": "백업 파일로부터 지갑 복구",
             "body": "지갑을 복구하는 데 사용할 백업 파일을 불러옵니다. Stronghold (.stronghold) 또는 Trinity 지갑의 SeedVault (.kdbx) 파일을 선택해 주세요."
         },
-        "import_backup_password": {
+        "importBackupPassword": {
             "title": "SeedVault 또는 Stronghold로부터 지갑 복구하기",
-            "body_1": "백업 파일의 비밀번호를 입력해 주세요.",
-            "body_2": "백업 파일을 처음 만들때 설정했던 비밀번호를 입력합니다."
+            "body1": "백업 파일의 비밀번호를 입력해 주세요.",
+            "body2": "백업 파일을 처음 만들때 설정했던 비밀번호를 입력합니다."
         },
-        "import_success": {
+        "importSuccess": {
             "title": "백업 파일에서부터의 복구 완료",
             "body": "이제 새로운 지갑을 설정할 수 있습니다."
         },
         "migrate": {
             "title": "잔고 옮기기",
-            "body_1": "당신의 자금을 새로운 지갑으로 자동으로 옮기는 과정입니다. '사용완료된 주소'를 확인해 보안이 취약해지지 않도록 합니다.",
-            "body_2": "시간이 다소 걸릴 수 있습니다. 자금을 옮기는 동안 기기를 끄지 마세요.",
+            "body1": "당신의 자금을 새로운 지갑으로 자동으로 옮기는 과정입니다. '사용완료된 주소'를 확인해 보안이 취약해지지 않도록 합니다.",
+            "body2": "시간이 다소 걸릴 수 있습니다. 자금을 옮기는 동안 기기를 끄지 마세요.",
             "existing": "옛날 지갑",
             "new": "새 지갑"
         },
-        "migrate_failed": {
+        "migrateFailed": {
             "title": "To do",
             "body": "To do"
         },
@@ -244,40 +244,40 @@
             }
         },
         "login": {
-            "please_wait": "{time, plural, one {1 초} other {# 초}} 정도 기다리세요.",
-            "incorrect_attempts": "{attempts, plural, one {1 잘못된 시도} other {# 잘못된 시도}}"
+            "pleaseWait": "{time, plural, one {1 초} other {# 초}} 정도 기다리세요.",
+            "incorrectAttempts": "{attempts, plural, one {1 잘못된 시도} other {# 잘못된 시도}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "파이어플라이 v{version}",
-                    "up_to_date": "최신 상태입니다.",
-                    "out_of_date": "구버전"
+                    "upToDate": "최신 상태입니다.",
+                    "outOfDate": "구버전"
                 },
-                "hardware_device": {
+                "hardwareDevice": {
                     "title": "하드웨어 장치",
-                    "none_detected": "확인된 사항이 없음"
+                    "noneDetected": "확인된 사항이 없음"
                 },
-                "stronghold_status": {
+                "strongholdStatus": {
                     "title": "'스트롱홀드' 상태",
                     "locked": "잠김",
                     "unlocked": "잠금 해제됨"
                 },
-                "stronghold_backup": {
+                "strongholdBackup": {
                     "title": "'스트롱홀드' 백업",
-                    "weeks_ago": "{weeks, plural, one {# 주} other {# 주}} 전"
+                    "weeksAgo": "{weeks, plural, one {# 주} other {# 주}} 전"
                 }
             },
             "network": {
-                "network_operational": "네트워크 운영자",
-                "network_degraded": "네트워크 성능저하",
-                "network_down": "네트워크 다운",
+                "networkOperational": "네트워크 운영자",
+                "networkDegraded": "네트워크 성능저하",
+                "networkDown": "네트워크 다운",
                 "status": "상태",
-                "messages_per_second": "초당 메세지",
-                "confirmation_rate": "승인율"
+                "messagesPerSecond": "초당 메세지",
+                "confirmationRate": "승인율"
             },
-            "profile_modal": {
-                "all_settings": "전체 설정",
+            "profileModal": {
+                "allSettings": "전체 설정",
                 "logout": "로그아웃"
             }
         }
@@ -292,42 +292,42 @@
         },
         "version": {
             "title": "현재 버전: {version}",
-            "up_to_date_title": "'파이어플라이'는 최신버전입니다.",
-            "up_to_date_description": "가장 최신의 안전한 '파이어플라이' 버전을 사용하고 있습니다.",
-            "update_available": "'파이어플라이' 업데이트 가능",
-            "update_details": "버전 {version} - {date}"
+            "upToDateTitle": "'파이어플라이'는 최신버전입니다.",
+            "upToDateDescription": "가장 최신의 안전한 '파이어플라이' 버전을 사용하고 있습니다.",
+            "updateAvailable": "'파이어플라이' 업데이트 가능",
+            "updateDetails": "버전 {version} - {date}"
         },
         "backup": {
             "title": "최종 백업: {date}",
-            "last_backup": "{date} 일에 최종 백업했습니다",
-            "backup_description": "계정과 거래기록의 카피본을 유지하기 위해서, 규칙적으로 백업하는 것이 중요합니다.",
-            "backup_warning": "백업과 '복구문장'을 잃어버리면, 당신의 자금에 접근할 수 없게 됩니다.",
-            "not_backed_up": "백업되지 않음",
-            "not_backed_up_description": "'스트롱홀드'를 백업하지 않았습니다."
+            "lastBackup": "{date} 일에 최종 백업했습니다",
+            "backupDescription": "계정과 거래기록의 카피본을 유지하기 위해서, 규칙적으로 백업하는 것이 중요합니다.",
+            "backupWarning": "백업과 '복구문장'을 잃어버리면, 당신의 자금에 접근할 수 없게 됩니다.",
+            "notBackedUp": "백업되지 않음",
+            "notBackedUpDescription": "'스트롱홀드'를 백업하지 않았습니다."
         },
-        "delete_account": {
+        "deleteAccount": {
             "title": "{name} 을/를 삭제할까요?",
             "body": "거래기록 및 기타 사항을 영구히 잃게됩니다.",
-            "type_password": "지갑 비밀번호를 입력하세요.",
-            "delete_account": "계정 삭제하기",
-            "error_title": "{name} 을/를 삭제할 수 없습니다",
-            "error_body_1": "계정을 삭제하기 위해서는 잔액이 0 이어야 합니다.",
-            "error_body_2": "이 계정에 잔액이 {balance} 만큼 남아있습니다. 이것을 다른 계정으로 옮기고 다시 시도하세요.",
-            "error_body_3": "이 계정은 삭제할 수 없습니다. 하나 이상의 계정이 있어야합니다."
+            "typePassword": "지갑 비밀번호를 입력하세요.",
+            "deleteAccount": "계정 삭제하기",
+            "errorTitle": "{name} 을/를 삭제할 수 없습니다",
+            "errorBody1": "계정을 삭제하기 위해서는 잔액이 0 이어야 합니다.",
+            "errorBody2": "이 계정에 잔액이 {balance} 만큼 남아있습니다. 이것을 다른 계정으로 옮기고 다시 시도하세요.",
+            "errorBody3": "이 계정은 삭제할 수 없습니다. 하나 이상의 계정이 있어야합니다."
         },
-        "address_history": {
+        "addressHistory": {
             "title": "{name} 계정 주소이력",
-            "current_balance": "현재 잔액: {balance}"
+            "currentBalance": "현재 잔액: {balance}"
         },
         "node": {
-            "title_add": "노드 추가",
-            "title_remove": "노드 삭제",
-            "title_details": "노드 세부사항",
-            "node_address": "노드 주소",
-            "optional_username": "사용자 이름 (선택사항)",
-            "optional_password": "비밀번호 (선택사항)",
-            "set_as_primary_node": "주 노드로 설정",
-            "remove_confirmation": "Are you sure you want to remove this node?"
+            "titleAdd": "노드 추가",
+            "titleRemove": "노드 삭제",
+            "titleDetails": "노드 세부사항",
+            "nodeAddress": "노드 주소",
+            "optionalUsername": "사용자 이름 (선택사항)",
+            "optionalPassword": "비밀번호 (선택사항)",
+            "setAsPrimaryNode": "주 노드로 설정",
+            "removeConfirmation": "Are you sure you want to remove this node?"
         },
         "errorLog": {
             "title": "오류 로그",
@@ -339,12 +339,12 @@
         }
     },
     "charts": {
-        "incoming_mi": "수신 {value} Mi",
-        "outgoing_mi": "발신 {value} Mi",
+        "incomingMi": "수신 {value} Mi",
+        "outgoingMi": "발신 {value} Mi",
         "portoflio": "포트폴리오",
         "token": "토큰",
-        "account_value": "계정 잔액",
-        "account_activity": "최근 활동"
+        "accountValue": "계정 잔액",
+        "accountActivity": "최근 활동"
     },
     "actions": {
         "continue": "계속하기",
@@ -353,32 +353,32 @@
         "close": "닫기",
         "dismiss": "무시하기",
         "save": "저장하기",
-        "import_seed": "기존 '시드'를 불러오기",
-        "import_wallet": "기존 지갑을 불러오기",
-        "create_wallet": "새 지갑 만들기",
-        "save_password": "비밀번호 저장하기",
-        "use_biometric": "생체인증 사용하기",
-        "setup_pin": "PIN코드 설정하기",
-        "set_pin": "PIN코드 설정",
-        "confirm_pin": "PIN코드 확인하기",
-        "enter_your_pin": "PIN코드 입력하기",
-        "save_backup_file": "백업파일 저장하기",
-        "ive_written_recovery_phrase": "'복구문장'을 옮겨 적었습니다.",
-        "verify_recovery_phrase": "복원 문구 확인",
-        "reveal_recovery_phrase": "'복구문장' 드러내기",
-        "import_seedvault": "시드볼트(SeedVault) 불러오기",
-        "check_again": "다시 확인하기",
-        "import_from_file": "파일에서 불러오기",
+        "importSeed": "기존 '시드'를 불러오기",
+        "importWallet": "기존 지갑을 불러오기",
+        "createWallet": "새 지갑 만들기",
+        "savePassword": "비밀번호 저장하기",
+        "useBiometric": "생체인증 사용하기",
+        "setupPin": "PIN코드 설정하기",
+        "setPin": "PIN코드 설정",
+        "confirmPin": "PIN코드 확인하기",
+        "enterYourPin": "PIN코드 입력하기",
+        "saveBackupFile": "백업파일 저장하기",
+        "iveWrittenRecoveryPhrase": "'복구문장'을 옮겨 적었습니다.",
+        "verifyRecoveryPhrase": "복원 문구 확인",
+        "revealRecoveryPhrase": "'복구문장' 드러내기",
+        "importSeedvault": "시드볼트(SeedVault) 불러오기",
+        "checkAgain": "다시 확인하기",
+        "importFromFile": "파일에서 불러오기",
         "send": "보내기",
         "receive": "받기",
         "create": "새로만들기",
-        "begin_transfer": "전송하기",
-        "try_again": "다시 시도하기",
-        "visit_discord": "디스코드 방문하기",
-        "drag_drop": "끌어서 놓기",
-        "import_extentions": ".stronghold 또는 .kdbx 파일",
-        "choose_file": "파일을 선택하기",
-        "drop_here": "여기에 파일 놓기",
+        "beginTransfer": "전송하기",
+        "tryAgain": "다시 시도하기",
+        "visitDiscord": "디스코드 방문하기",
+        "dragDrop": "끌어서 놓기",
+        "importExtentions": ".stronghold 또는 .kdbx 파일",
+        "chooseFile": "파일을 선택하기",
+        "dropHere": "여기에 파일 놓기",
         "syncAll": "모두 동기화하기",
         "export": "내보내기",
         "exportNewStronghold": "새로운 '스트롱홀드' 내보내기",
@@ -388,15 +388,15 @@
         "exportState": "상태 내보내기",
         "outsourceProofOfWork": "원격 작업증명 수행하기",
         "unlock": "잠금해제하기",
-        "update_firefly": "'파이어플라이' 업데이트하기",
-        "restart_now": "지금 다시 시작",
-        "save_backup": "백업 저장하기",
-        "customize_account": "취향대로 계정 설정하기",
-        "view_address_history": "주소이력 보기",
-        "delete_account": "계정 삭제하기",
+        "updateFirefly": "'파이어플라이' 업데이트하기",
+        "restartNow": "지금 다시 시작",
+        "saveBackup": "백업 저장하기",
+        "customizeAcount": "취향대로 계정 설정하기",
+        "viewAddressHistory": "주소이력 보기",
+        "deleteAccount": "계정 삭제하기",
         "max": "최대",
-        "add_node": "노드 추가",
-        "remove_node": "노드 삭제",
+        "addNode": "노드 추가",
+        "removeNode": "노드 삭제",
         "hide": "숨기기",
         "hideOthers": "나머지 숨기기",
         "showAll": "모두 보기",
@@ -412,57 +412,57 @@
         "checkForUpdates": "업데이트 확인",
         "reportAnIssue": "오류 신고",
         "clear": "지우기",
-        "hide_details": "세부 정보 숨기기",
+        "hideDetails": "세부 정보 숨기기",
         "yes": "예",
         "no": "아니오",
         "reset": "Reset"
     },
     "general": {
         "password": "비밀번호",
-        "confirm_password": "비밀번호 확인하기",
+        "confirmPassword": "비밀번호 확인하기",
         "currentPassword": "현재 비밀번호",
         "newPassword": "새 비밀번호",
         "confirmNewPassword": "새 비밀번호 확인하기",
-        "your_seed": "내 '시드'",
-        "recovery_phrase": "복구문장",
-        "recent_activity": "최근 활동",
+        "yourSeed": "내 '시드'",
+        "recoveryPhrase": "복구문장",
+        "recentActivity": "최근 활동",
         "sent": "보냄",
         "received": "받음",
-        "send_payment": "결제하기",
-        "move_funds": "자금 이체하기",
-        "send_funds": "자금 보내기",
-        "send_to_address": "특정주소로 보내기",
-        "scan_qr_or_paste": "QR 코드를 스캔하거나 주소를 복사해 붙이기",
-        "move_funds_between_accounts": "계정간 자금 이체하기",
-        "send_tokens_to_address": "특정주소로 토큰 보내기",
-        "manage_account": "계정 관리하기",
-        "customize_account": "취향대로 계정 설정하기",
+        "sendPayment": "결제하기",
+        "moveFunds": "자금 이체하기",
+        "sendFunds": "자금 보내기",
+        "sendToAddress": "특정주소로 보내기",
+        "scanQrOrPaste": "QR 코드를 스캔하거나 주소를 복사해 붙이기",
+        "moveFundsBetweenAccounts": "계정간 자금 이체하기",
+        "sendTokensToAddress": "특정주소로 토큰 보내기",
+        "manageAccount": "계정 관리하기",
+        "customizeAcount": "취향대로 계정 설정하기",
         "account": "계정",
-        "sending_to_address": "특정주소로 보내는 중",
+        "sendingToAddress": "특정주소로 보내는 중",
         "amount": "수량",
-        "add_address": "주소 추가하기",
+        "addAddress": "주소 추가하기",
         "reference": "참고",
         "from": "보낸이",
         "to": "받는이",
-        "receive_funds": "자금 받기",
-        "my_address": "내 주소",
-        "share_address": "주소 공유하기",
-        "your_address": "내 주소",
-        "generate_new_address": "새 주소 생성하기",
-        "copy_address": "주소 복사하기",
-        "have_text_backup": "'복구문장'을 알고 있습니다.",
-        "have_file_backup": "복구 '파일'을 가지고 있습니다.",
-        "enter_seed_or_phrase": "'복구문장'이나 '시드'를 입력하기",
-        "upload_seedvault_or_stronghold": "'스트롱홀드' 또는 '시드볼트' 파일 불러오기",
+        "receiveFunds": "자금 받기",
+        "myAddress": "내 주소",
+        "shareAddress": "주소 공유하기",
+        "yourAddress": "내 주소",
+        "generateNewAddress": "새 주소 생성하기",
+        "copyAddress": "주소 복사하기",
+        "haveTextBackup": "'복구문장'을 알고 있습니다.",
+        "haveFileBackup": "복구 '파일'을 가지고 있습니다.",
+        "enterSeedOrPhrase": "'복구문장'이나 '시드'를 입력하기",
+        "uploadSeedvaultOrStronghold": "'스트롱홀드' 또는 '시드볼트' 파일 불러오기",
         "import": "불러오기",
         "seedvault": "시드볼트(SeedVault)",
         "stronghold": "스트롱홀드(Stronghold)",
         "language": "언어",
         "appearance": "모양새",
-        "light_theme": "밝은 테마",
-        "dark_theme": "어두운 테마",
-        "total_balance": "총 잔액",
-        "account_balance": "계정 잔액",
+        "lightTheme": "밝은 테마",
+        "darkTheme": "어두운 테마",
+        "totalBalance": "총 잔액",
+        "accountBalance": "계정 잔액",
         "incoming": "받는중",
         "outgoing": "보내는중",
         "accounts": "계정",
@@ -471,24 +471,24 @@
         "profiles": "프로필",
         "developerProfile": "개발자 프로필",
         "dev": "개발",
-        "create_account": "계정 만들기",
-        "account_name": "계정 이름",
-        "latest_transactions": "최신 거래",
+        "createAccount": "계정 만들기",
+        "accountName": "계정 이름",
+        "latestTransactions": "최신 거래",
         "transactions": "거래내역",
         "security": "보안",
-        "account_address": "계정 주소",
+        "accountAddress": "계정 주소",
         "nodes": "노드",
         "wallet": "지갑",
         "help": "도움말",
         "you": "나",
         "transaction_id": "트랜잭션 ID",
-        "input_address": "주소 입력",
-        "receive_address": "입금 주소",
+        "inputAddress": "주소 입력",
+        "receiveAddress": "입금 주소",
         "date": "날짜",
-        "no_accounts": "계정이 없습니다. 생성해 주세요.",
-        "loading_accounts": "로딩 중. 잠시만 기다려 주세요...",
-        "add_profile": "프로필 추가",
-        "no_recent_history": "최근 기록 없음",
+        "noAccounts": "계정이 없습니다. 생성해 주세요.",
+        "loadingAccounts": "로딩 중. 잠시만 기다려 주세요...",
+        "addProfile": "프로필 추가",
+        "noRecentHistory": "최근 기록 없음",
         "transferSyncing": "계정 동기화중",
         "transferSelectingInputs": "입력 선택",
         "transferRemainderAddress": "입금 주소 생성",
@@ -512,21 +512,21 @@
     },
     "dates": {
         "today": "오늘",
-        "days_ago": "{time, plural, one {# 일} other {# 일}} 전",
-        "weeks_ago": "{time, plural, one {# 주} other {# 주}} 전",
-        "months_ago": "{time, plural, one {# 달} other {# 달}} 전",
-        "years_ago": "{time, plural, one {# 년} other {# 년}} 전"
+        "daysAgo": "{time, plural, one {# 일} other {# 일}} 전",
+        "weeksAgo": "{time, plural, one {# 주} other {# 주}} 전",
+        "monthsAgo": "{time, plural, one {# 달} other {# 달}} 전",
+        "yearsAgo": "{time, plural, one {# 년} other {# 년}} 전"
     },
     "notifications": {
         "valueTx": "계정 {{account}}에 {{value}}를 받는 중",
         "confirmed": "계정 {{account}}에서 {{value}}를 보내는 거래가 성공적으로 확인되었습니다",
         "failed": "계정 {{account}}에서 {{value}}를 보내는 거래가 실패하였습니다",
-        "downloading_update": "업데이트 다운로드",
-        "update_ready": "업데이트 준비됨",
-        "update_error": "업데이트 중 오류가 발생했습니다. 다시 시도해주세요.",
-        "restart_install": "재시작하여 설치",
-        "calc_minutes_remaining": "남은 시간 계산중...",
-        "minutes_remaining": "{minutes, plural, one {남은 시간 1분} other {남은 시간 #분}}"
+        "downloadingUpdate": "업데이트 다운로드",
+        "updateReady": "업데이트 준비됨",
+        "updateError": "업데이트 중 오류가 발생했습니다. 다시 시도해주세요.",
+        "restartInstall": "재시작하여 설치",
+        "calcMinutesRemaining": "남은 시간 계산중...",
+        "minutesRemaining": "{minutes, plural, one {남은 시간 1분} other {남은 시간 #분}}"
     },
     "error": {
         "profile": {

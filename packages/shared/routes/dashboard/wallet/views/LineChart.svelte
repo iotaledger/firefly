@@ -85,7 +85,7 @@
                 {/each}
             </div>
         {:else}
-            <Text type="h4" classes="break-all mr-2">{locale('charts.account_value')}</Text>
+            <Text type="h4" classes="break-all mr-2">{locale('charts.accountValue')}</Text>
         {/if}
         <div class="flex space-x-2">
             <span>

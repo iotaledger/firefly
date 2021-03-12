@@ -1,29 +1,29 @@
 {
     "views": {
-        "onboarding_1": {
+        "onboarding1": {
             "title": "IOTA gönder, iste ve düzenle",
             "body": "Firefly güvenli ve kullanımı kolay bir IOTA cüzdanıdır."
         },
         "legal": {
             "title": "Yasal",
             "body": "Lütfen Gizlilik Politikası ve Hizmet Şartları'nı inceleyin.",
-            "privacy_policy": {
+            "privacyPolicy": {
                 "title": "Gizlilik Politikası",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "terms_of_service": {
+            "termsOfService": {
                 "title": "Hizmet Şartları",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
@@ -34,7 +34,7 @@
         "setup": {
             "title": "Cüzdanınızı oluşturun",
             "body": "Yeni bir cüzdan oluşturabilir veya zaten var olan cüzdanınızı ekleyebilirsiniz.",
-            "profile_name": "Profil ismi"
+            "profileName": "Profil ismi"
         },
         "password": {
             "title": "Şifre oluşturun",
@@ -42,41 +42,41 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body_2": "Keep your PIN safe!"
+            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
+            "body2": "Keep your PIN safe!"
         },
         "pin": {
             "title": "PIN kodunuzu ayarlayın",
-            "body_1": "6 haneli PIN kodunuzu aşağıya girin. Cüzdanınıza girmek için PIN koduna ihtiyacınız vardır.",
-            "body_2": "Sadece sayı kullanabilirsiniz."
+            "body1": "6 haneli PIN kodunuzu aşağıya girin. Cüzdanınıza girmek için PIN koduna ihtiyacınız vardır.",
+            "body2": "Sadece sayı kullanabilirsiniz."
         },
-        "confirm_pin": {
+        "confirmPin": {
             "title": "PIN kodunuzu doğrulayın",
             "body": "Devam etmek için PIN kodunuzu tekrar girin."
         },
         "backup": {
             "title": "Cüzdanınızı yedekleyin",
-            "body_1": "Şimdi bir kurtarma ifadesi gösterilecek.",
-            "body_2": "Bu cümleyi kimseyle paylaşmayın. Bu cümle varlıklarınıza herhangi bir yerden ulaşmak için kullanılabilir.",
-            "body_3": "Eğer kurtarma cümlenizi kaybederseniz, varlıklarınızı da kaybedersiniz."
+            "body1": "Şimdi bir kurtarma ifadesi gösterilecek.",
+            "body2": "Bu cümleyi kimseyle paylaşmayın. Bu cümle varlıklarınıza herhangi bir yerden ulaşmak için kullanılabilir.",
+            "body3": "Eğer kurtarma cümlenizi kaybederseniz, varlıklarınızı da kaybedersiniz."
         },
-        "recovery_phrase": {
+        "recoveryPhrase": {
             "title": "Kurtarma cümlesi",
-            "body_1": "Carefully write down the words in the exact order.",
-            "body_2": "Kurtarma şifrenizi güvenli bir şekilde saklayın ve kimseyle paylaşmayın.",
-            "reveal_recovery_phrase": "Kurtarma ifadesini göster",
-            "hide_recovery_phrase": "Kurtarma sözcüğünü gizle"
+            "body1": "Carefully write down the words in the exact order.",
+            "body2": "Kurtarma şifrenizi güvenli bir şekilde saklayın ve kimseyle paylaşmayın.",
+            "revealRecoveryPhrase": "Kurtarma ifadesini göster",
+            "hideRecoveryPhrase": "Kurtarma sözcüğünü gizle"
         },
-        "verify_recovery_phrase": {
+        "verifyRecoveryPhrase": {
             "title": "Kurtarma şifrenizi doğrulayın",
             "body": "İfadeyi doğru yazdığınızı kontrol edelim. Doğru sıradaki kelimeleri seçin.",
-            "creating_account": "Creating account, please wait..."
+            "creatingAccount": "Creating account, please wait..."
         },
-        "backup_wallet": {
+        "backupWallet": {
             "title": "Bir Stronghold dosyasına yedekleyin",
             "body": "Cüzdanınızı bir Stronghold dosyasına yedeklemek için şifrenizi girin. Parolanız yedeklemeyi şifrelemek için kullanılır."
         },
-        "recovery_phrase_saved": {
+        "recoveryPhraseSaved": {
             "title": "Başarı ile yedeklendi",
             "body": "Cüzdanınızı Stronghold'a yedeklediniz."
         },
@@ -88,35 +88,35 @@
             "title": "Cüzdanı içe aktar",
             "body": "Bir kurtarma ifadeniz veya Stronghold yedeklemeniz varsa, buradan içe aktarabilirsiniz."
         },
-        "import_from_text": {
+        "importFromText": {
             "title": "Cüzdanınızı bir kurtarma ifadesi veya kelimesi ile geri yükleyin",
-            "body_1": "Bir kurtarma ifadesi 24 kelime uzunluktadır. Bu, mevcut bir Firefly cüzdanını kurtarmak için kullanılır.",
-            "body_2": "Bir seed 81 karakterden oluşur. Bu eski bir Trinity cüzdanından kurtarmak için kullanılır.",
-            "body_3": "Seed veya kurtarma ifadenizi girin",
-            "seed_detected": "81 character seed detected",
-            "phrase_detected": "24 word phrase detected"
+            "body1": "Bir kurtarma ifadesi 24 kelime uzunluktadır. Bu, mevcut bir Firefly cüzdanını kurtarmak için kullanılır.",
+            "body2": "Bir seed 81 karakterden oluşur. Bu eski bir Trinity cüzdanından kurtarmak için kullanılır.",
+            "body3": "Seed veya kurtarma ifadenizi girin",
+            "seedDetected": "81 character seed detected",
+            "phraseDetected": "24 word phrase detected"
         },
-        "import_from_file": {
+        "importFromFile": {
             "title": "Cüzdanınızı bir yedekleme dosyasından geri yükleyin",
             "body": "Cüzdanınızı geri yüklemek için bir yedekleme dosyasını içe aktarın. Yedekleme dosyaları Strongghold (.stronghold) veya Trinity SeedVault (.kdbx) olabilir."
         },
-        "import_backup_password": {
+        "importBackupPassword": {
             "title": "Cüzdanınızı SeedVault veya Stronghold ile geri yükleyin",
-            "body_1": "Lütfen yedek şifrenizi girin.",
-            "body_2": "Bu, yedeğinizi ilk oluşturduğunuzda belirlediğiniz paroladır."
+            "body1": "Lütfen yedek şifrenizi girin.",
+            "body2": "Bu, yedeğinizi ilk oluşturduğunuzda belirlediğiniz paroladır."
         },
-        "import_success": {
+        "importSuccess": {
             "title": "Yedeklemenizi başarıyla geri yüklediniz",
             "body": "Artık yeni cüzdanınızı kurabilirsiniz."
         },
         "migrate": {
             "title": "Varlıklarınızı taşıyın",
-            "body_1": "Bu, paranızı yeni cüzdanınıza aktarmak için otomatik bir işlemdir. Güvenliğinizi zayıflatan kullanılmış adresleri kontrol edeceğiz.",
-            "body_2": "Bu biraz zaman alabilir. Taşıma sırasında cihazınızı kapatmayın.",
+            "body1": "Bu, paranızı yeni cüzdanınıza aktarmak için otomatik bir işlemdir. Güvenliğinizi zayıflatan kullanılmış adresleri kontrol edeceğiz.",
+            "body2": "Bu biraz zaman alabilir. Taşıma sırasında cihazınızı kapatmayın.",
             "existing": "Eski cüzdanınız",
             "new": "Yeni cüzdanınız"
         },
-        "migrate_failed": {
+        "migrateFailed": {
             "title": "To do",
             "body": "To do"
         },
@@ -244,40 +244,40 @@
             }
         },
         "login": {
-            "please_wait": "Lütfen bekleyin {time, plural,one {1 saniye} other {#saniye}}",
-            "incorrect_attempts": "{attempts, plural,one {1 yanlış deneme}other {yanlış deneme}}"
+            "pleaseWait": "Lütfen bekleyin {time, plural,one {1 saniye} other {#saniye}}",
+            "incorrectAttempts": "{attempts, plural,one {1 yanlış deneme}other {yanlış deneme}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "Firefly versiyonu {version}",
-                    "up_to_date": "Güncel",
-                    "out_of_date": "Güncelleme gerekli"
+                    "upToDate": "Güncel",
+                    "outOfDate": "Güncelleme gerekli"
                 },
-                "hardware_device": {
+                "hardwareDevice": {
                     "title": "Donanım Aygıtı",
-                    "none_detected": "Hiçbiri bulunamadı"
+                    "noneDetected": "Hiçbiri bulunamadı"
                 },
-                "stronghold_status": {
+                "strongholdStatus": {
                     "title": "Stronghold Durumu",
                     "locked": "Kilitli",
                     "unlocked": "Kilidi Açık"
                 },
-                "stronghold_backup": {
+                "strongholdBackup": {
                     "title": "Stronghold Yedekleme",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "weeksAgo": "{weeks, plural, one {# week} other {# weeks}} ago"
                 }
             },
             "network": {
-                "network_operational": "Network Aktif",
-                "network_degraded": "Network Performans Sorunu",
-                "network_down": "Network Aktif Değil",
+                "networkOperational": "Network Aktif",
+                "networkDegraded": "Network Performans Sorunu",
+                "networkDown": "Network Aktif Değil",
                 "status": "Durum",
-                "messages_per_second": "Saniye başına mesaj sayısı",
-                "confirmation_rate": "Doğrulama Oranı"
+                "messagesPerSecond": "Saniye başına mesaj sayısı",
+                "confirmationRate": "Doğrulama Oranı"
             },
-            "profile_modal": {
-                "all_settings": "Tüm ayarlar",
+            "profileModal": {
+                "allSettings": "Tüm ayarlar",
                 "logout": "Çıkış yap"
             }
         }
@@ -292,42 +292,42 @@
         },
         "version": {
             "title": "Mevcut sürüm: {version}",
-            "up_to_date_title": "Firefly güncel",
-            "up_to_date_description": "En son ve güvenli Firefly sürümünü kullanıyorsunuz.",
-            "update_available": "Firefly güncellemesi mevcut",
-            "update_details": "Sürüm {version} - {date}"
+            "upToDateTitle": "Firefly güncel",
+            "upToDateDescription": "En son ve güvenli Firefly sürümünü kullanıyorsunuz.",
+            "updateAvailable": "Firefly güncellemesi mevcut",
+            "updateDetails": "Sürüm {version} - {date}"
         },
         "backup": {
             "title": "Son Yedekleme: {date}",
-            "last_backup": "Aldığınız son yedek {date}",
-            "backup_description": "Hesap ve işlem geçmişinizin bir kopyasını alabilmeniz için düzenli olarak yedek almanız önemlidir.",
-            "backup_warning": "Eğer yedeğinizi ve kurtarma şifrenizi kaybederseniz, hesabınıza erişimi kaybedeceksiniz.",
-            "not_backed_up": "Yedeklenmedi",
-            "not_backed_up_description": "Stronghold'unuzu yedeklemediniz"
+            "lastBackup": "Aldığınız son yedek {date}",
+            "backupDescription": "Hesap ve işlem geçmişinizin bir kopyasını alabilmeniz için düzenli olarak yedek almanız önemlidir.",
+            "backupWarning": "Eğer yedeğinizi ve kurtarma şifrenizi kaybederseniz, hesabınıza erişimi kaybedeceksiniz.",
+            "notBackedUp": "Yedeklenmedi",
+            "notBackedUpDescription": "Stronghold'unuzu yedeklemediniz"
         },
-        "delete_account": {
+        "deleteAccount": {
             "title": "Sil {name}?",
             "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Doğrulama için lütfen cüzdan şifrenizi giriniz.",
-            "delete_account": "Hesabı sil",
-            "error_title": "Silinemedi: {name}",
-            "error_body_1": "Bir hesabı silebilmek için hesap balansınız sıfır olmalıdır.",
-            "error_body_2": "Hesabınızda {balance} tutarında bakiye bulunmaktadır. Lütfen bakiyeyi başka bir hesaba taşıyıp, tekrar deneyiniz.",
-            "error_body_3": "You cannot delete this account, you must have at least one."
+            "typePassword": "Doğrulama için lütfen cüzdan şifrenizi giriniz.",
+            "deleteAccount": "Hesabı sil",
+            "errorTitle": "Silinemedi: {name}",
+            "errorBody1": "Bir hesabı silebilmek için hesap balansınız sıfır olmalıdır.",
+            "errorBody2": "Hesabınızda {balance} tutarında bakiye bulunmaktadır. Lütfen bakiyeyi başka bir hesaba taşıyıp, tekrar deneyiniz.",
+            "errorBody3": "You cannot delete this account, you must have at least one."
         },
-        "address_history": {
+        "addressHistory": {
             "title": "{name} hesap adres geçmişi",
-            "current_balance": "Mevcut bakiye: {balance}"
+            "currentBalance": "Mevcut bakiye: {balance}"
         },
         "node": {
-            "title_add": "Bir node ekle",
-            "title_remove": "Remove a node",
-            "title_details": "Node detayları",
-            "node_address": "Node adresi",
-            "optional_username": "Kullanıcı adı (opsiyonel)",
-            "optional_password": "Şifre (opsiyonel)",
-            "set_as_primary_node": "Birincil düğüm olarak ayarla",
-            "remove_confirmation": "Are you sure you want to remove this node?"
+            "titleAdd": "Bir node ekle",
+            "titleRemove": "Remove a node",
+            "titleDetails": "Node detayları",
+            "nodeAddress": "Node adresi",
+            "optionalUsername": "Kullanıcı adı (opsiyonel)",
+            "optionalPassword": "Şifre (opsiyonel)",
+            "setAsPrimaryNode": "Birincil düğüm olarak ayarla",
+            "removeConfirmation": "Are you sure you want to remove this node?"
         },
         "errorLog": {
             "title": "Error Log",
@@ -339,12 +339,12 @@
         }
     },
     "charts": {
-        "incoming_mi": "Incoming {value} Mi",
-        "outgoing_mi": "Outgoing {value} Mi",
+        "incomingMi": "Incoming {value} Mi",
+        "outgoingMi": "Outgoing {value} Mi",
         "portoflio": "Portfolio",
         "token": "Token",
-        "account_value": "Account Value",
-        "account_activity": "Account Activity"
+        "accountValue": "Account Value",
+        "accountActivity": "Account Activity"
     },
     "actions": {
         "continue": "Devam Et",
@@ -353,32 +353,32 @@
         "close": "Çıkış",
         "dismiss": "Vazgeç",
         "save": "Kaydet",
-        "import_seed": "Mevcut bir Seed'i içe aktarın",
-        "import_wallet": "Mevcut cüzdanı içe aktar",
-        "create_wallet": "Yeni cüzdan oluştur",
-        "save_password": "Parolayı kaydet",
-        "use_biometric": "Biyometrik güvenlik kullanın",
-        "setup_pin": "PIN kodunuzu ayarlayın",
-        "set_pin": "PIN kodunu ayarla",
-        "confirm_pin": "PIN kodunu onaylayın",
-        "enter_your_pin": "Pin'inizi girin",
-        "save_backup_file": "Yedek dosyasını kaydet",
-        "ive_written_recovery_phrase": "Kurtarma sözcüklerini not aldım",
-        "verify_recovery_phrase": "Kurtarma şifrenizi doğrulayın",
-        "reveal_recovery_phrase": "Kurtarma ifadesini göster",
-        "import_seedvault": "SeedVault'u içe aktar",
-        "check_again": "Tekrar kontrol ediniz",
-        "import_from_file": "Dosyadan İçe Aktar",
+        "importSeed": "Mevcut bir Seed'i içe aktarın",
+        "importWallet": "Mevcut cüzdanı içe aktar",
+        "createWallet": "Yeni cüzdan oluştur",
+        "savePassword": "Parolayı kaydet",
+        "useBiometric": "Biyometrik güvenlik kullanın",
+        "setupPin": "PIN kodunuzu ayarlayın",
+        "setPin": "PIN kodunu ayarla",
+        "confirmPin": "PIN kodunu onaylayın",
+        "enterYourPin": "Pin'inizi girin",
+        "saveBackupFile": "Yedek dosyasını kaydet",
+        "iveWrittenRecoveryPhrase": "Kurtarma sözcüklerini not aldım",
+        "verifyRecoveryPhrase": "Kurtarma şifrenizi doğrulayın",
+        "revealRecoveryPhrase": "Kurtarma ifadesini göster",
+        "importSeedvault": "SeedVault'u içe aktar",
+        "checkAgain": "Tekrar kontrol ediniz",
+        "importFromFile": "Dosyadan İçe Aktar",
         "send": "Gönder",
         "receive": "Al",
         "create": "Oluştur",
-        "begin_transfer": "Transfere başla",
-        "try_again": "Tekrar deneyin",
-        "visit_discord": "Discord'a uğra",
-        "drag_drop": "Sürükle & Bırak",
-        "import_extentions": ".stronghold veya .kdbx dosyası",
-        "choose_file": "Bir dosya seçin",
-        "drop_here": "Dosyanızı buraya bırakın",
+        "beginTransfer": "Transfere başla",
+        "tryAgain": "Tekrar deneyin",
+        "visitDiscord": "Discord'a uğra",
+        "dragDrop": "Sürükle & Bırak",
+        "importExtentions": ".stronghold veya .kdbx dosyası",
+        "chooseFile": "Bir dosya seçin",
+        "dropHere": "Dosyanızı buraya bırakın",
         "syncAll": "Tümünü eşitle",
         "export": "Dışarı Aktar",
         "exportNewStronghold": "Yeni bir Stronghold dışa aktarın",
@@ -388,15 +388,15 @@
         "exportState": "State dışa aktarın",
         "outsourceProofOfWork": "Dış kaynak iş gücü kanıtı",
         "unlock": "Kilidi Aç",
-        "update_firefly": "Firefly'ı güncelle",
-        "restart_now": "Restart now",
-        "save_backup": "Yedeği kaydet",
-        "customize_account": "Hesabı özelleştir",
-        "view_address_history": "View address history",
-        "delete_account": "Hesabı sil",
+        "updateFirefly": "Firefly'ı güncelle",
+        "restartNow": "Restart now",
+        "saveBackup": "Yedeği kaydet",
+        "customizeAcount": "Hesabı özelleştir",
+        "viewAddressHistory": "View address history",
+        "deleteAccount": "Hesabı sil",
         "max": "Max",
-        "add_node": "Add node",
-        "remove_node": "Remove node",
+        "addNode": "Add node",
+        "removeNode": "Remove node",
         "hide": "Hide",
         "hideOthers": "Hide Others",
         "showAll": "Show All",
@@ -412,57 +412,57 @@
         "checkForUpdates": "Check for Updates",
         "reportAnIssue": "Report an Issue",
         "clear": "Clear",
-        "hide_details": "Hide Details",
+        "hideDetails": "Hide Details",
         "yes": "Yes",
         "no": "No",
         "reset": "Reset"
     },
     "general": {
         "password": "Parola",
-        "confirm_password": "Parolayı doğrula",
+        "confirmPassword": "Parolayı doğrula",
         "currentPassword": "Geçerli parola",
         "newPassword": "Yeni parola",
         "confirmNewPassword": "Yeni parolayı doğrula",
-        "your_seed": "Seed'iniz",
-        "recovery_phrase": "Kurtarma cümlesi",
-        "recent_activity": "Son Hareketler",
+        "yourSeed": "Seed'iniz",
+        "recoveryPhrase": "Kurtarma cümlesi",
+        "recentActivity": "Son Hareketler",
         "sent": "Gönderildi",
         "received": "Alındı",
-        "send_payment": "Send payment",
-        "move_funds": "Move funds",
-        "send_funds": "Para gönderin",
-        "send_to_address": "Adrese Gönder",
-        "scan_qr_or_paste": "Bir QR kodunu tarayın veya bir Adres yapıştırın",
-        "move_funds_between_accounts": "Hesaplarınız arasında para aktarın",
-        "send_tokens_to_address": "Send tokens to an address",
-        "manage_account": "Hesap Yönetimi",
-        "customize_account": "Hesabınızı özelleştirin",
+        "sendPayment": "Send payment",
+        "moveFunds": "Move funds",
+        "sendFunds": "Para gönderin",
+        "sendToAddress": "Adrese Gönder",
+        "scanQrOrPaste": "Bir QR kodunu tarayın veya bir Adres yapıştırın",
+        "moveFundsBetweenAccounts": "Hesaplarınız arasında para aktarın",
+        "sendTokensToAddress": "Send tokens to an address",
+        "manageAccount": "Hesap Yönetimi",
+        "customizeAcount": "Hesabınızı özelleştirin",
         "account": "Hesap",
-        "sending_to_address": "Adrese gönderiliyor",
+        "sendingToAddress": "Adrese gönderiliyor",
         "amount": "Tutar",
-        "add_address": "Adres Ekle",
+        "addAddress": "Adres Ekle",
         "reference": "Referans",
         "from": "Gönderen",
         "to": "Kime",
-        "receive_funds": "Gelen varlıklar",
-        "my_address": "My Address",
-        "share_address": "Bir adres paylaşın",
-        "your_address": "Adresiniz",
-        "generate_new_address": "Yeni adres oluştur",
-        "copy_address": "Adresi Kopyala",
-        "have_text_backup": "Metin yedeğim var",
-        "have_file_backup": "Dosya yedeğim var",
-        "enter_seed_or_phrase": "Bir kurtarma ifadesi veya seed'i girin",
-        "upload_seedvault_or_stronghold": "Bir Stronghold veya SeedVault dosyasını içe aktarın",
+        "receiveFunds": "Gelen varlıklar",
+        "myAddress": "My Address",
+        "shareAddress": "Bir adres paylaşın",
+        "yourAddress": "Adresiniz",
+        "generateNewAddress": "Yeni adres oluştur",
+        "copyAddress": "Adresi Kopyala",
+        "haveTextBackup": "Metin yedeğim var",
+        "haveFileBackup": "Dosya yedeğim var",
+        "enterSeedOrPhrase": "Bir kurtarma ifadesi veya seed'i girin",
+        "uploadSeedvaultOrStronghold": "Bir Stronghold veya SeedVault dosyasını içe aktarın",
         "import": "İçe aktar",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Dil",
         "appearance": "Görünüm",
-        "light_theme": "Aydınlık tema",
-        "dark_theme": "Karanlık tema",
-        "total_balance": "Toplam Bakiye",
-        "account_balance": "Hesap Bakiyesi",
+        "lightTheme": "Aydınlık tema",
+        "darkTheme": "Karanlık tema",
+        "totalBalance": "Toplam Bakiye",
+        "accountBalance": "Hesap Bakiyesi",
         "incoming": "Gelen",
         "outgoing": "Giden",
         "accounts": "Hesaplar",
@@ -471,24 +471,24 @@
         "profiles": "Profiller",
         "developerProfile": "Geliştirici hesabı",
         "dev": "Geliştirici",
-        "create_account": "Bir hesap oluşturun",
-        "account_name": "Hesap adı",
-        "latest_transactions": "Son transferler",
+        "createAccount": "Bir hesap oluşturun",
+        "accountName": "Hesap adı",
+        "latestTransactions": "Son transferler",
         "transactions": "Transferler",
         "security": "Güvenlik",
-        "account_address": "Hesap adresi",
+        "accountAddress": "Hesap adresi",
         "nodes": "Düğümler",
         "wallet": "Wallet",
         "help": "Help",
         "you": "You",
         "transaction_id": "Transaction ID",
-        "input_address": "Input Address",
-        "receive_address": "Receive Address",
+        "inputAddress": "Input Address",
+        "receiveAddress": "Receive Address",
         "date": "Date",
-        "no_accounts": "You have no accounts, please create one.",
-        "loading_accounts": "Loading, please wait...",
-        "add_profile": "Add Profile",
-        "no_recent_history": "No recent history",
+        "noAccounts": "You have no accounts, please create one.",
+        "loadingAccounts": "Loading, please wait...",
+        "addProfile": "Add Profile",
+        "noRecentHistory": "No recent history",
         "transferSyncing": "Syncing account",
         "transferSelectingInputs": "Selecting inputs",
         "transferRemainderAddress": "Generating remainder deposit address",
@@ -512,21 +512,21 @@
     },
     "dates": {
         "today": "Bugün",
-        "days_ago": "{time, plural, one {# day} other {# days}} ago",
-        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
-        "months_ago": "{time, plural, one {# month} other {# months}} ago",
-        "years_ago": "{time, plural, one {# year} other {# years}} ago"
+        "daysAgo": "{time, plural, one {# day} other {# days}} ago",
+        "weeksAgo": "{time, plural, one {# week} other {# weeks}} ago",
+        "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
+        "yearsAgo": "{time, plural, one {# year} other {# years}} ago"
     },
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
         "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
         "failed": "Outgoing {{value}} from {{account}} has failed",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "downloadingUpdate": "Downloading update",
+        "updateReady": "Update ready",
+        "updateError": "An error occurred during the update, please try again",
+        "restartInstall": "Restart to install",
+        "calcMinutesRemaining": "Calculating minutes remaining...",
+        "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
     },
     "error": {
         "profile": {

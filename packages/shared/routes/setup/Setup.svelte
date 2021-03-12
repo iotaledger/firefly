@@ -64,7 +64,7 @@
             <Input
                 {error}
                 bind:value={profileName}
-                placeholder={locale('views.setup.profile_name')}
+                placeholder={locale('views.setup.profileName')}
                 classes="w-full"
                 autofocus
                 submitHandler={() => handleContinueClick(SetupType.New)} />
@@ -78,10 +78,10 @@
                 classes="flex-1"
                 disabled={!isProfileNameValid}
                 onClick={() => handleContinueClick(SetupType.Import)}>
-                {locale('actions.import_wallet')}
+                {locale('actions.importWallet')}
             </Button>
             <Button classes="flex-1" disabled={!isProfileNameValid} onClick={() => handleContinueClick(SetupType.New)}>
-                {locale('actions.create_wallet')}
+                {locale('actions.createWallet')}
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-end items-center">
