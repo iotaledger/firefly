@@ -62,6 +62,7 @@ export enum ResponseTypes {
     LockedStronghold = 'LockedStronghold',
     StrongholdPasswordChanged = 'StrongholdPasswordChanged',
     UpdatedAllClientOptions = 'UpdatedAllClientOptions',
+    StrongholdPasswordClearIntervalSet = 'StrongholdPasswordClearIntervalSet',
 }
 
 export enum Actions {

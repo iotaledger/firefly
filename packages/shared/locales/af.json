@@ -69,7 +69,8 @@
         },
         "verify_recovery_phrase": {
             "title": "Verifieer herstelfrase",
-            "body": "Kom ons kyk of jy die frase korrek neergeskryf het. Kies die woorde in die regte volgorde."
+            "body": "Kom ons kyk of jy die frase korrek neergeskryf het. Kies die woorde in die regte volgorde.",
+            "creating_account": "Creating account, please wait..."
         },
         "backup_wallet": {
             "title": "Back-up na 'n Stronghold lêer",
@@ -190,7 +191,7 @@
                 "description": ""
             },
             "deleteProfile": {
-                "title": "Delete profile",
+                "title": "Vee profiel uit",
                 "description": ""
             },
             "deepLinks": {
@@ -326,15 +327,15 @@
             "optional_username": "Username (opsioneel)",
             "optional_password": "Wagwoord (opsioneel)",
             "set_as_primary_node": "Stel as primêre Node",
-            "remove_confirmation": "Are you sure you want to remove node?"
+            "remove_confirmation": "Are you sure you want to remove this node?"
         },
         "errorLog": {
-            "title": "Error Log",
+            "title": "Foutlêer",
             "empty": "The error log is empty."
         },
         "deleteProfile": {
-            "title": "Delete profile",
-            "confirmation": "Are you sure you want to delete this profile, this operation cannot be undone?"
+            "title": "Vee profiel uit",
+            "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone."
         }
     },
     "charts": {
@@ -342,8 +343,8 @@
         "outgoing_mi": "Outgoing {value} Mi",
         "portoflio": "Portfolio",
         "token": "Token",
-        "account_value": "Account Value",
-        "account_activity": "Account Activity"
+        "account_value": "Rekening Balans",
+        "account_activity": "Rekeningaktiwiteit"
     },
     "actions": {
         "continue": "Gaan voort",
@@ -410,10 +411,11 @@
         "addAccount": "Voeg Rekening By",
         "checkForUpdates": "Soek vir opgraderings",
         "reportAnIssue": "Rapporteer 'n probleem",
-        "clear": "Clear",
-        "hide_details": "Hide Details",
-        "yes": "Yes",
-        "no": "No"
+        "clear": "Maak skoon",
+        "hide_details": "Versteek besonderhede",
+        "yes": "Ja",
+        "no": "Nee",
+        "reset": "Reset"
     },
     "general": {
         "password": "Wagwoord",
@@ -478,16 +480,16 @@
         "nodes": "Nodes",
         "wallet": "Beursie",
         "help": "Hulp",
-        "you": "You",
-        "transaction_id": "Transaction ID",
+        "you": "Jy",
+        "transaction_id": "Transaksie ID",
         "input_address": "Input Address",
         "receive_address": "Receive Address",
-        "date": "Date",
+        "date": "Datum",
         "no_accounts": "Jy het geen rekeninge nie, skep asseblief een.",
         "loading_accounts": "Loading, please wait...",
         "add_profile": "Voeg profiel by",
         "no_recent_history": "No recent history",
-        "transferSyncing": "Syncing account",
+        "transferSyncing": "Sinkroniseer rekening",
         "transferSelectingInputs": "Selecting inputs",
         "transferRemainderAddress": "Generating remainder deposit address",
         "transferSigning": "Signing the transaction",
@@ -501,7 +503,7 @@
         "passwordUpdating": "Updating password...",
         "passwordSuccess": "Updated password successfully",
         "passwordFailed": "Updating password failed",
-        "exportingStronghold": "Exporting stronghold...",
+        "exportingStronghold": "Export Stronghold...",
         "exportingStrongholdSuccess": "Exported stronghold successfully",
         "exportingStrongholdFailed": "Exported stronghold failed",
         "pinCodeUpdating": "Updating PIN code...",
@@ -528,7 +530,7 @@
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length} characters.",
+            "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
             "duplicate": "A profile with this name already exists."
         },
         "password": {
@@ -538,7 +540,7 @@
             "pattern": "Short keyboard patterns are easy to guess.",
             "names": "Common names and surnames are easy to guess.",
             "repeats": "Repeats like 'aaa' are easy to guess.",
-            "repeats2": "Repeats like 'abcabcabc' are easy to guess",
+            "repeats2": "Repeats like 'abcabcabc' are easy to guess.",
             "sequence": "Sequences of characters are easy to guess.",
             "years": "Recent years are easy to guess.",
             "dates": "Dates are easy to guess.",
@@ -546,21 +548,21 @@
             "similar": "This is similar to a common password.",
             "reasonWord": "A single word is easy to guess.",
             "incorrect": "Your password is incorrect.",
-            "length": "Your password can't be longer than {length} characters."
+            "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length} digits long.",
+            "length": "Your PIN must be {length, plural, one {1 digit} other {# digits}} long.",
             "match": "PINs do not match.",
-            "incorrect": "Your current PIN is incorrect."
+            "incorrect": "Jou huidige PIN is verkeerd."
         },
         "account": {
-            "length": "Your account name can't be longer than {length} characters.",
+            "length": "Your account name can't be longer than {length, plural, one {1 character} other {# characters}}.",
             "empty": "You must use your latest account before creating a new one.",
             "notEmpty": "You must transfer your balance before deleting this account.",
-            "duplicate": "An account with this name already exists."
+            "duplicate": "'n Rekening met hierdie naam bestaan alreeds."
         },
         "send": {
-            "addressLength": "Addresses should be {length} characters long.",
+            "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
             "amountTooHigh": "This is greater than your available balance.",
             "amountNoFloat": "If units are `i` you cannot use decimal places.",
             "amountInvalidFormat": "The amount appears to be an invalid number.",
@@ -569,19 +571,19 @@
             "insufficientFunds": "This account has insufficient funds"
         },
         "node": {
-            "invalid": "Please enter a valid URL.",
+            "invalid": "Sleutel 'n geldige URL in.",
             "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
-            "duplicate": "This node has already been added.",
+            "duplicate": "Hierdie Node is reeds gebruik.",
             "unsynced": "The node you are trying to add is not synced."
         },
         "global": {
-            "generic": "Something went wrong."
+            "generic": "Iets het skeefgeloop."
         },
         "backup": {
             "invalid": "The backup file was not recognised.",
             "destination": "The backup destination was not valid.",
             "mnemonic": "The mnemonic is not valid.",
-            "seedTooShort": "The seed should be 81 characters long, it is {length}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
             "seedCharacters": "The seed should only contain characters A-Z or 9",
             "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}",
             "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase"

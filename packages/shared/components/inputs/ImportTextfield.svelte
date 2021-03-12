@@ -88,6 +88,7 @@
         bind:value={content}
         on:keydown={debounce(handleKeyDown)}
         placeholder=""
-        spellcheck={false} />
+        spellcheck={false}
+        autofocus />
     <Text type="p" secondary {error}>{statusMessage}&nbsp;</Text>
 </div>

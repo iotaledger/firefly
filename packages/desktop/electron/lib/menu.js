@@ -26,7 +26,7 @@ export const initMenu = () => {
             mainMenu.popup(mainWindow)
         })
 
-        ipcMain.handle('updates-check', () => {})
+        ipcMain.handle('updates-check', () => { })
 
         mainMenu = createMenu()
     })
@@ -54,25 +54,34 @@ const buildTemplate = () => {
                 {
                     type: 'separator',
                 },
-                {
-                    label: state.strings.settings,
-                    click: () => getOrInitWindow('main').webContents.send('menu-navigate-settings'),
-                },
-                {
-                    // TODO: Remove before stable release
-                    label: 'Developer Tools',
-                    role: 'toggleDevTools',
-                },
-                {
-                    label: state.strings.errorLog,
-                    click: () => getOrInitWindow('main').webContents.send('menu-error-log'),
-                },
-                {
-                    type: 'separator',
-                },
             ],
         },
     ]
+
+    if (state.loggedIn) {
+        template[0].submenu = template[0].submenu.concat([
+            {
+                label: state.strings.settings,
+                click: () => getOrInitWindow('main').webContents.send('menu-navigate-settings'),
+            },
+        ])
+    }
+
+    template[0].submenu = template[0].submenu.concat([
+        {
+            // TODO: Remove before stable release
+            label: "Developer Tools",
+            role: 'toggleDevTools'
+        },
+        {
+            label: state.strings.errorLog,
+            click: () => getOrInitWindow('main').webContents.send('menu-error-log')
+        },
+        {
+            type: 'separator',
+        },
+    ])
+
 
     if (process.platform === 'darwin') {
         template[0].submenu = template[0].submenu.concat([

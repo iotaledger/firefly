@@ -6,6 +6,7 @@
     export let mobile
     export let importType
     export let error = ''
+    export let loading = false
 
     let password = ''
 
@@ -28,11 +29,11 @@
             <Text type="h3" highlighted classes="mb-5">{locale(`general.${importType}`)}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.import_backup_password.body_1')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.import_backup_password.body_2')}</Text>
-            <Password classes="mb-6" {error} bind:value={password} {locale} showRevealToggle/>
+            <Password classes="mb-6" {error} bind:value={password} {locale} showRevealToggle autofocus disabled={loading}/>
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-            <Button secondary classes="flex-1" onClick={() => handleBackClick()}>{locale('actions.back')}</Button>
-            <Button classes="flex-1" disabled={password.length === 0} onClick={() => handleContinue()}>{locale('actions.continue')}</Button>
+            <Button secondary classes="flex-1" onClick={() => handleBackClick()} disabled={loading}>{locale('actions.back')}</Button>
+            <Button classes="flex-1" disabled={password.length === 0 || loading} onClick={() => handleContinue()}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-end items-center">
             <Illustration width="100%" illustration="import-from-file-password-desktop" />

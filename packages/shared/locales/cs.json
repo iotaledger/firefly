@@ -38,7 +38,7 @@
         },
         "password": {
             "title": "Vytvoření hesla",
-            "body": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates."
+            "body": "Vaše heslo je příliš slabé. Použijte kombinaci slov a vyhněte se běžným frázím, jménům nebo datům."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -69,7 +69,8 @@
         },
         "verify_recovery_phrase": {
             "title": "Ověřte obnovovací frázi",
-            "body": "Zkontrolujme, zda jste správně zapsali frázi. Vyberte slova ve správném pořadí."
+            "body": "Zkontrolujme, zda jste správně zapsali frázi. Vyberte slova ve správném pořadí.",
+            "creating_account": "Vytváření účtu, čekejte prosím..."
         },
         "backup_wallet": {
             "title": "Zálohujte jako Stronghold soubor",
@@ -92,8 +93,8 @@
             "body_1": "Obnovovací fráze má 24 slov. Používá se k obnově stávající Firefly peněženky.",
             "body_2": "Seed obsahuje 81 znaků. Používá se k obnovení ze starší peněženky Trinity.",
             "body_3": "Zadejte váš seed nebo obnovovací frázi",
-            "seed_detected": "81 character seed detected",
-            "phrase_detected": "24 word phrase detected"
+            "seed_detected": "Bylo zjištěno 81 znaků seed",
+            "phrase_detected": "Zjištěna 24 slovní fráze"
         },
         "import_from_file": {
             "title": "Obnovit peněženku ze zálohy",
@@ -190,7 +191,7 @@
                 "description": ""
             },
             "deleteProfile": {
-                "title": "Delete profile",
+                "title": "Smazat profil",
                 "description": ""
             },
             "deepLinks": {
@@ -312,7 +313,7 @@
             "error_title": "Nelze odstranit {name}",
             "error_body_1": "Chcete-li odstranit účet, musíte mít nulový zůstatek.",
             "error_body_2": "V současné době zbývá {balance} na tomto účtu. Přesuňte tyto prostředky na jiný účet a zkuste to znovu.",
-            "error_body_3": "You cannot delete this account, you must have at least one."
+            "error_body_3": "Tento účet nelze odstranit, musíte mít alespoň jeden."
         },
         "address_history": {
             "title": "{name} historie adresy účtu",
@@ -320,30 +321,30 @@
         },
         "node": {
             "title_add": "Přidat uzel",
-            "title_remove": "Remove a node",
+            "title_remove": "Odstranit uzel",
             "title_details": "Detaily uzlu",
             "node_address": "Adresa uzlu",
             "optional_username": "Uživatelské jméno (volitelné)",
             "optional_password": "Heslo (volitelné)",
             "set_as_primary_node": "Nastavit jako hlavní uzel",
-            "remove_confirmation": "Are you sure you want to remove node?"
+            "remove_confirmation": "Are you sure you want to remove this node?"
         },
         "errorLog": {
-            "title": "Error Log",
-            "empty": "The error log is empty."
+            "title": "Záznam chyb",
+            "empty": "Protokol chyb je prázdný."
         },
         "deleteProfile": {
-            "title": "Delete profile",
-            "confirmation": "Are you sure you want to delete this profile, this operation cannot be undone?"
+            "title": "Smazat profil",
+            "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone."
         }
     },
     "charts": {
-        "incoming_mi": "Incoming {value} Mi",
-        "outgoing_mi": "Outgoing {value} Mi",
+        "incoming_mi": "Příchozí {value} Mi",
+        "outgoing_mi": "Odchozí {value} Mi",
         "portoflio": "Portfolio",
         "token": "Token",
-        "account_value": "Account Value",
-        "account_activity": "Account Activity"
+        "account_value": "Hodnota účtu",
+        "account_activity": "Aktivita na účtu"
     },
     "actions": {
         "continue": "Pokračovat",
@@ -395,7 +396,7 @@
         "delete_account": "Odstranit účet",
         "max": "Max",
         "add_node": "Přidat uzel",
-        "remove_node": "Remove node",
+        "remove_node": "Odstranit uzel",
         "hide": "Skrýt",
         "hideOthers": "Skrýt ostatní",
         "showAll": "Zobrazit vše",
@@ -410,10 +411,11 @@
         "addAccount": "Přidat účet",
         "checkForUpdates": "Kontrola aktualizací",
         "reportAnIssue": "Nahlásit problém",
-        "clear": "Clear",
-        "hide_details": "Hide Details",
-        "yes": "Yes",
-        "no": "No"
+        "clear": "Vymazat",
+        "hide_details": "Skrýt detaily",
+        "yes": "Ano",
+        "no": "Ne",
+        "reset": "Reset"
     },
     "general": {
         "password": "Heslo",
@@ -478,35 +480,35 @@
         "nodes": "Uzly",
         "wallet": "Peněženka",
         "help": "Pomoc",
-        "you": "You",
-        "transaction_id": "Transaction ID",
-        "input_address": "Input Address",
-        "receive_address": "Receive Address",
-        "date": "Date",
+        "you": "Ty",
+        "transaction_id": "ID transakce",
+        "input_address": "Vstupní adresa",
+        "receive_address": "Adresa příjemce",
+        "date": "Datum",
         "no_accounts": "Nemáte žádné účty, prosím vytvořte jej.",
-        "loading_accounts": "Loading, please wait...",
+        "loading_accounts": "Načítání, prosím počkejte...",
         "add_profile": "Přidat profil",
-        "no_recent_history": "No recent history",
-        "transferSyncing": "Syncing account",
-        "transferSelectingInputs": "Selecting inputs",
+        "no_recent_history": "Žádná nedávná historie",
+        "transferSyncing": "Synchronizace účtu",
+        "transferSelectingInputs": "Výběr vstupů",
         "transferRemainderAddress": "Generating remainder deposit address",
-        "transferSigning": "Signing the transaction",
-        "transferPow": "Performing PoW",
+        "transferSigning": "Podepisování transakce",
+        "transferPow": "Provádím PoW",
         "transferBroadcasting": "Broadcasting transaction",
-        "transferComplete": "Transfer complete",
-        "creatingAccount": "Creating account, please wait...",
-        "updatingAccount": "Updating account, please wait...",
-        "accountSyncing": "Account is syncing",
-        "accountSyncComplete": "Account sync complete",
-        "passwordUpdating": "Updating password...",
-        "passwordSuccess": "Updated password successfully",
-        "passwordFailed": "Updating password failed",
+        "transferComplete": "Přenos byl dokončen",
+        "creatingAccount": "Vytváření účtu, čekejte prosím...",
+        "updatingAccount": "Probíhá aktualizace účtu, čekejte prosím...",
+        "accountSyncing": "Účet se synchronizuje",
+        "accountSyncComplete": "Synchronizace účtu dokončena",
+        "passwordUpdating": "Aktualizuji heslo...",
+        "passwordSuccess": "Heslo bylo úspěšně aktualizováno",
+        "passwordFailed": "Aktualizace hesla se nezdařila",
         "exportingStronghold": "Exporting stronghold...",
         "exportingStrongholdSuccess": "Exported stronghold successfully",
         "exportingStrongholdFailed": "Exported stronghold failed",
-        "pinCodeUpdating": "Updating PIN code...",
-        "pinCodeSuccess": "Updated PIN code successfully",
-        "pinCodeFailed": "Updating PIN code failed"
+        "pinCodeUpdating": "Aktualizuji PIN kód...",
+        "pinCodeSuccess": "Kód PIN byl úspěšně aktualizován",
+        "pinCodeFailed": "Aktualizace PIN kódu selhala"
     },
     "dates": {
         "today": "Dnes",
@@ -528,7 +530,7 @@
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length} characters.",
+            "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
             "duplicate": "A profile with this name already exists."
         },
         "password": {
@@ -538,7 +540,7 @@
             "pattern": "Short keyboard patterns are easy to guess.",
             "names": "Common names and surnames are easy to guess.",
             "repeats": "Repeats like 'aaa' are easy to guess.",
-            "repeats2": "Repeats like 'abcabcabc' are easy to guess",
+            "repeats2": "Repeats like 'abcabcabc' are easy to guess.",
             "sequence": "Sequences of characters are easy to guess.",
             "years": "Recent years are easy to guess.",
             "dates": "Dates are easy to guess.",
@@ -546,21 +548,21 @@
             "similar": "This is similar to a common password.",
             "reasonWord": "A single word is easy to guess.",
             "incorrect": "Your password is incorrect.",
-            "length": "Your password can't be longer than {length} characters."
+            "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length} digits long.",
+            "length": "Your PIN must be {length, plural, one {1 digit} other {# digits}} long.",
             "match": "PINs do not match.",
             "incorrect": "Your current PIN is incorrect."
         },
         "account": {
-            "length": "Your account name can't be longer than {length} characters.",
+            "length": "Your account name can't be longer than {length, plural, one {1 character} other {# characters}}.",
             "empty": "You must use your latest account before creating a new one.",
             "notEmpty": "You must transfer your balance before deleting this account.",
             "duplicate": "An account with this name already exists."
         },
         "send": {
-            "addressLength": "Addresses should be {length} characters long.",
+            "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
             "amountTooHigh": "This is greater than your available balance.",
             "amountNoFloat": "If units are `i` you cannot use decimal places.",
             "amountInvalidFormat": "The amount appears to be an invalid number.",
@@ -581,7 +583,7 @@
             "invalid": "The backup file was not recognised.",
             "destination": "The backup destination was not valid.",
             "mnemonic": "The mnemonic is not valid.",
-            "seedTooShort": "The seed should be 81 characters long, it is {length}",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
             "seedCharacters": "The seed should only contain characters A-Z or 9",
             "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}",
             "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase"

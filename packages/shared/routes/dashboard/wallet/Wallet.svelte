@@ -109,6 +109,8 @@
         const { id, index, alias } = account
         const { balance, depositAddress } = meta
 
+        const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD
+
         return Object.assign<WalletAccount, BaseAccount, Partial<WalletAccount>>({} as WalletAccount, account, {
             id,
             index,
@@ -119,8 +121,8 @@
             balanceEquiv: `${convertToFiat(
                 balance,
                 $currencies[CurrencyTypes.USD],
-                $exchangeRates[get(activeProfile).settings.currency]
-            )} ${$activeProfile.settings.currency}`,
+                $exchangeRates[activeCurrency]
+            )} ${activeCurrency}`,
             color: AccountColors[index % AccountColors.length],
         })
     }
@@ -410,7 +412,7 @@
     }
 
     $: {
-        if ($deepLinkRequestActive && get(activeProfile).settings.deepLinking) {
+        if ($deepLinkRequestActive && get(activeProfile)?.settings.deepLinking) {
             walletRoute.set(WalletRoutes.Send)
             deepLinkRequestActive.set(false)
         }

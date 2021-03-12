@@ -1,6 +1,6 @@
-import { get, derived, writable } from 'svelte/store'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
-import { getLocaleFromNavigator, addMessages, dictionary, _, init } from 'svelte-i18n'
+import { addMessages, dictionary, getLocaleFromNavigator, init, _ } from 'svelte-i18n'
+import { derived, get, writable } from 'svelte/store'
 
 /*
  * Code following https://phrase.com/blog/posts/a-step-by-step-guide-to-svelte-localization-with-svelte-i18n-v3/
@@ -11,14 +11,16 @@ const MESSAGE_FILE_URL_TEMPLATE = 'locales/{locale}.json'
 // Locales our app supports
 export const locales = {
     en: 'English',
+    af: 'Afrikaans',
     ar: 'Arabic',
+    bg: 'Bulgarian',
+    ca: 'Catalan',
     cs: 'Czech',
     da: 'Danish',
     de: 'German',
     el: 'Greek',
-    es_ES: 'Spanish (Spain)',
-    es_LA: 'Spanish (Latin America)',
-    et: 'Estonian',
+    'es-ES': 'Spanish (Spain)',
+    'es-LA': 'Spanish (Latin America)',
     fa: 'Persian',
     fi: 'Finnish',
     fr: 'French',
@@ -29,28 +31,23 @@ export const locales = {
     id: 'Indonesian',
     it: 'Italian',
     ja: 'Japanese',
-    kn: 'Kannada',
     ko: 'Korean',
-    lt: 'Lithuanian',
-    lv: 'Latvian',
+    ku: 'Kurmanji (Kurdish)',
     nl: 'Dutch',
     no: 'Norwegian',
     pl: 'Polish',
-    pt_BR: 'Portuguese (Brazil)',
-    pt_PT: 'Portuguese (Portugal)',
+    'pt-BR': 'Portuguese (Brazil)',
+    'pt-PT': 'Portuguese (Portugal)',
     ro: 'Romanian',
     ru: 'Russian',
-    sk: 'Slovak',
-    sl: 'Slovenian',
-    sr: 'Serbian (Latin)',
-    sv_SE: 'Swedish',
-    ta: 'Tamil',
-    th: 'Thai',
+    sr: 'Serbian (Cyrillic)',
+    sv: 'Swedish',
     tr: 'Turkish',
-    ur: 'Urdu',
+    uk: 'Ukrainian',
+    ur: 'Urdu (Pakistan)',
     vi: 'Vietnamese',
-    zh_CN: 'Chinese (Simplified)',
-    zh_TW: 'Chinese (Traditional)',
+    'zh-CN': 'Chinese (Simplified)',
+    'zh-TW': 'Chinese (Traditional)',
 }
 
 // Init options: eg locale to show when we don't support the
@@ -123,9 +120,9 @@ function loadJson(url) {
     return fetch(url).then((response) => response.json())
 }
 
-const dir = derived(activeProfile, ($activeProfile) => {
-    if ($activeProfile) {
-        return $activeProfile.settings.language === 'ar' ? 'rtl' : 'ltr'
+const dir = derived(activeProfile, (_activeProfile) => {
+    if (_activeProfile) {
+        return _activeProfile.settings.language === 'ar' ? 'rtl' : 'ltr'
     }
     return 'ltr'
 })

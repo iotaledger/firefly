@@ -1800,7 +1800,7 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "0.5.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#aa4bea2f7220cf34efbc2eb933a8584104277664"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#2422c5c5be81dfda72709dcd7a536f27f0348bfc"
 dependencies = [
  "async-trait",
  "bee-common 0.3.1-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
@@ -1810,7 +1810,7 @@ dependencies = [
  "bee-rest-api",
  "chrono",
  "hex",
- "iota-crypto 0.2.0 (git+https://github.com/iotaledger/crypto.rs.git?rev=527392202e78fa35620a9b30061d5e231a046ea2)",
+ "iota-crypto 0.3.0 (git+https://github.com/iotaledger/crypto.rs.git?rev=61924d5c237254f5a6da0e9ac61cd7e7bb310058)",
  "num_cpus",
  "reqwest",
  "serde 1.0.124",
@@ -1834,7 +1834,7 @@ dependencies = [
 [[package]]
 name = "iota-core"
 version = "0.2.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#aa4bea2f7220cf34efbc2eb933a8584104277664"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#2422c5c5be81dfda72709dcd7a536f27f0348bfc"
 dependencies = [
  "bee-common 0.3.1-alpha (git+https://github.com/iotaledger/bee.git?rev=c42171ff33c80cc2efb183e244dc79b7f58d9ac4)",
  "bee-message",
@@ -1869,6 +1869,20 @@ dependencies = [
  "ed25519-zebra",
  "getrandom 0.2.2",
  "hmac 0.10.1",
+ "sha2 0.9.3",
+]
+
+[[package]]
+name = "iota-crypto"
+version = "0.3.0"
+source = "git+https://github.com/iotaledger/crypto.rs.git?rev=61924d5c237254f5a6da0e9ac61cd7e7bb310058#61924d5c237254f5a6da0e9ac61cd7e7bb310058"
+dependencies = [
+ "blake2",
+ "digest 0.9.0",
+ "ed25519-zebra",
+ "getrandom 0.2.2",
+ "hmac 0.10.1",
+ "serde 1.0.124",
  "sha2 0.9.3",
 ]
 
@@ -1919,7 +1933,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#446343d207fe64c31428deec77ab0dda687d3839"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#ef23c96112a3a475999f27e49698d874ea9a46cc"
 dependencies = [
  "async-trait",
  "backtrace",

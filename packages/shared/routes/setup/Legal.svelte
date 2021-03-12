@@ -6,7 +6,7 @@
 
     let checked = false
     let progress = 0
-    let legalRead = false
+    let termsAccepted = false
 
     let scroller
     let index
@@ -14,7 +14,7 @@
     let privacyPolicy
     let termsOfService
 
-    $: legalRead = progress === 100 || checked
+    $: termsAccepted = checked
 
     const dispatch = createEventDispatcher()
 
@@ -54,7 +54,7 @@
             <Checkbox label={locale('views.legal.checkbox')} bind:checked />
         </div>
         <div slot="leftpane__action">
-            <Button classes="w-full" disabled={!legalRead} onClick={() => handleContinueClick()}>
+            <Button classes="w-full" disabled={!termsAccepted} onClick={() => handleContinueClick()}>
                 {locale('actions.continue')}
             </Button>
         </div>

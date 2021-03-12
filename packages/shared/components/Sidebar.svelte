@@ -1,13 +1,13 @@
 <script lang="typescript">
-    import { onDestroy } from 'svelte'
-    import { get } from 'svelte/store'
-    import { Logo, Icon, NetworkIndicator, ProfileActionsModal } from 'shared/components'
+    import { Icon, Logo, NetworkIndicator, ProfileActionsModal } from 'shared/components'
+    import { getInitials } from 'shared/lib/helpers'
     import { networkStatus } from 'shared/lib/networkStatus'
     import { activeProfile } from 'shared/lib/profile'
-    import { getInitials } from 'shared/lib/helpers'
+    import { accountRoute, settingsRoute, walletRoute } from 'shared/lib/router'
+    import { AccountRoutes, SettingsRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { selectedAccountId } from 'shared/lib/wallet'
-    import { walletRoute, settingsRoute, accountRoute } from 'shared/lib/router'
-    import { WalletRoutes, AccountRoutes, SettingsRoutes } from 'shared/lib/typings/routes'
+    import { onDestroy } from 'svelte'
+    import { get } from 'svelte/store'
 
     export let locale
     export let activeTab
@@ -23,7 +23,7 @@
         2: 'green',
     }
 
-    const profileInitial = getInitials(get(activeProfile).name, 1)
+    const profileInitial = getInitials(get(activeProfile)?.name, 1)
 
     const unsubscribe = networkStatus.subscribe((data) => {
         healthStatus = data.health ?? 0
