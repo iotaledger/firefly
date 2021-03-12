@@ -218,6 +218,10 @@
                 "title": "Foutenlogboek",
                 "description": ""
             },
+            "diagnostics": {
+                "title": "Diagnostics",
+                "description": ""
+            },
             "stateExport": {
                 "title": "Status exporteren",
                 "description": ""
@@ -336,6 +340,20 @@
         "deleteProfile": {
             "title": "Profiel verwijderen",
             "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone."
+        },
+        "diagnostics": {
+            "title": "Diagnostics",
+            "node": "Node",
+            "language": "Node",
+            "currency": "Node",
+            "platform": "Platform",
+            "platformVersion": "Platform Version",
+            "platformType": "Platform Type",
+            "platformArchitecture": "Platform Architecture",
+            "cpuCount": "CPU Count",
+            "totalMem": "Total Memory",
+            "freeMem": "Free Memory",
+            "userPath": "User Path"
         }
     },
     "charts": {
@@ -481,7 +499,7 @@
         "wallet": "Portemonnee",
         "help": "Help",
         "you": "U",
-        "transaction_id": "Transactie ID",
+        "messageId": "Message ID",
         "input_address": "Input Address",
         "receive_address": "Receive Address",
         "date": "Datum",
@@ -526,7 +544,8 @@
         "update_error": "Er is een fout opgetreden tijdens het updaten, probeer het opnieuw",
         "restart_install": "Herstart om te installeren",
         "calc_minutes_remaining": "Resterende minuten aan het berekenen...",
-        "minutes_remaining": "{minutes, plural, one {1 minuut resterend} other {# minuten resterend}}"
+        "minutes_remaining": "{minutes, plural, one {1 minuut resterend} other {# minuten resterend}}",
+        "copied_to_clipboard": "Copied to clipboard"
     },
     "error": {
         "profile": {
