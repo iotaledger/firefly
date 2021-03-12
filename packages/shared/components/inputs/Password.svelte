@@ -66,6 +66,7 @@
             {disabled}
             placeholder={placeholder || locale('general.password')} 
             {submitHandler}
+            spellcheck="false"
         />
         {#if showRevealToggle === true && !disabled}
             <button type="button" on:click={() => revealToggle()} tabindex="-1" class="absolute top-3">
