@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
     import { errorLog } from 'shared/lib/events'
-    import { setClipboard } from 'shared/lib/helpers'
+    import { setClipboard } from 'shared/lib/utils'
     import { closePopup } from 'shared/lib/popup'
 
     export let locale

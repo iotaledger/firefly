@@ -20,7 +20,8 @@ export const MAX_ACCOUNT_NAME_LENGTH = 20
 
 export const MAX_PASSWORD_LENGTH = 256
 
-export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS = 8
+// Setting to 0 removes auto lock. We must lock Stronghold manually.
+export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS = 0
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
