@@ -1,9 +1,11 @@
 import { get, writable } from 'svelte/store'
 import { persistent } from './helpers'
+import { localize } from './i18n'
+import { showAppNotification } from './notifications'
 import { closePopup } from './popup'
 import { activeProfile, clearActiveProfile } from './profile'
 import { resetRouter } from './router'
-import { destroyActor, resetWallet } from './wallet'
+import { api, destroyActor, resetWallet } from './wallet'
 /**
  * Notification content
  */
@@ -61,13 +63,35 @@ export const developerMode = persistent<boolean>('developerMode', false)
  */
 export const logout = () => {
     const ap = get(activeProfile);
-    if (ap) {
-        destroyActor(ap.id)
+
+    const _cleanup = () => {
+        if (ap) {
+            destroyActor(ap.id)
+        }
+        clearSendParams()
+        closePopup()
+        resetWallet()
+        resetRouter()
+        clearActiveProfile()
+        mnemonic.set(null)
     }
-    clearSendParams()
-    closePopup()
-    resetWallet()
-    resetRouter()
-    clearActiveProfile()
-    mnemonic.set(null)
+
+    if (!ap?.isStrongholdLocked) {
+        api.lockStronghold({
+            onSuccess() {
+                _cleanup()
+            },
+            onError(err) {
+                _cleanup()
+
+                showAppNotification({
+                    type: 'error',
+                    message: localize(err.error),
+                })
+
+            },
+        })
+    } else {
+        _cleanup()
+    }
 }
