@@ -1,18 +1,19 @@
 <script lang="typescript">
-    import { fade } from 'svelte/transition'
     import { Icon } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import QR from './QR.svelte'
-    import Password from './Password.svelte'
-    import Version from './Version.svelte'
-    import Backup from './Backup.svelte'
-    import DeleteAccount from './DeleteAccount.svelte'
-    import AddressHistory from './AddressHistory.svelte'
+    import { fade } from 'svelte/transition'
     import AddNode from './AddNode.svelte'
-    import RemoveNode from './RemoveNode.svelte'
+    import AddressHistory from './AddressHistory.svelte'
+    import Backup from './Backup.svelte'
     import Busy from './Busy.svelte'
-    import ErrorLog from './ErrorLog.svelte'
+    import DeleteAccount from './DeleteAccount.svelte'
     import DeleteProfile from './DeleteProfile.svelte'
+    import Diagnostics from './Diagnostics.svelte'
+    import ErrorLog from './ErrorLog.svelte'
+    import Password from './Password.svelte'
+    import QR from './QR.svelte'
+    import RemoveNode from './RemoveNode.svelte'
+    import Version from './Version.svelte'
 
     export let locale = 'en'
     export let type = undefined
@@ -32,7 +33,8 @@
         removeNode: RemoveNode,
         busy: Busy,
         errorLog: ErrorLog,
-        deleteProfile: DeleteProfile
+        deleteProfile: DeleteProfile,
+        diagnostics: Diagnostics,
     }
 
     const onkey = (e) => {
@@ -63,8 +65,8 @@
 <popup
     in:fade={{ duration: transition ? 100 : 0 }}
     class={`flex items-center justify-center fixed top-0 left-0 w-screen p-6
-                h-screen overflow-hidden z-10 ${fullScreen ? "bg-white" : "bg-gray-800 bg-opacity-40"}`}>
-    <popup-content class={`bg-white dark:bg-gray-900 rounded-xl pt-6 px-8 pb-8 relative ${fullScreen ? "full-screen" : ""}`}>
+                h-screen overflow-hidden z-10 ${fullScreen ? 'bg-white' : 'bg-gray-800 bg-opacity-40'}`}>
+    <popup-content class={`bg-white dark:bg-gray-900 rounded-xl pt-6 px-8 pb-8 relative ${fullScreen ? 'full-screen' : ''}`}>
         {#if !hideClose}
             <button on:click={closePopup} class="absolute top-6 right-8">
                 <Icon icon="close" classes="text-gray-800 dark:text-white" />

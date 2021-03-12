@@ -15,6 +15,7 @@ export enum SettingsIcons {
     nodeSettings = 'settings',
     proofOfWork = 'work',
     errorLog = 'warning',
+    diagnostics = 'tools',
     stateExport = 'export',
     troubleshoot = 'tools',
     documentation = 'doc',
