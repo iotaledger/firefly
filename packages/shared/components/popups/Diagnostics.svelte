@@ -1,10 +1,9 @@
 <script lang="typescript">
-    import { activeProfile } from 'shared/lib/profile'
-
     import { Button, Text } from 'shared/components'
     import { versionDetails } from 'shared/lib/appUpdater'
     import { Electron } from 'shared/lib/electron'
-    import { setClipboard } from 'shared/lib/helpers'
+    import { activeProfile } from 'shared/lib/profile'
+    import { setClipboard } from 'shared/lib/utils'
 
     export let locale
 
