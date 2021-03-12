@@ -790,15 +790,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "cmake"
-version = "0.1.45"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "eb6210b637171dfba4cda12e579ac6dc73f5165ad56133e5d72ef3131f320855"
-dependencies = [
- "cc",
-]
-
-[[package]]
 name = "colored"
 version = "1.9.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1676,7 +1667,7 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "0.5.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?rev=aa4bea2f7220cf34efbc2eb933a8584104277664#aa4bea2f7220cf34efbc2eb933a8584104277664"
+source = "git+https://github.com/iotaledger/iota.rs?rev=db62b87f01dd89dbc52c19272892426e1e855c24#db62b87f01dd89dbc52c19272892426e1e855c24"
 dependencies = [
  "async-trait",
  "bee-common 0.3.1-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
@@ -1687,12 +1678,12 @@ dependencies = [
  "chrono",
  "futures",
  "hex",
- "iota-crypto 0.2.0 (git+https://github.com/iotaledger/crypto.rs.git?rev=527392202e78fa35620a9b30061d5e231a046ea2)",
+ "iota-crypto 0.3.0 (git+https://github.com/iotaledger/crypto.rs.git?rev=61924d5c237254f5a6da0e9ac61cd7e7bb310058)",
  "num_cpus",
  "once_cell",
- "paho-mqtt",
  "regex",
  "reqwest",
+ "rumqttc",
  "serde 1.0.124",
  "serde_json",
  "thiserror",
@@ -1703,7 +1694,7 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "0.5.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#2422c5c5be81dfda72709dcd7a536f27f0348bfc"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#db62b87f01dd89dbc52c19272892426e1e855c24"
 dependencies = [
  "async-trait",
  "bee-common 0.3.1-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
@@ -1726,18 +1717,18 @@ dependencies = [
 [[package]]
 name = "iota-core"
 version = "0.2.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?rev=aa4bea2f7220cf34efbc2eb933a8584104277664#aa4bea2f7220cf34efbc2eb933a8584104277664"
+source = "git+https://github.com/iotaledger/iota.rs?rev=db62b87f01dd89dbc52c19272892426e1e855c24#db62b87f01dd89dbc52c19272892426e1e855c24"
 dependencies = [
  "bee-common 0.3.1-alpha (git+https://github.com/iotaledger/bee.git?rev=c42171ff33c80cc2efb183e244dc79b7f58d9ac4)",
  "bee-message",
  "bee-pow",
- "iota-client 0.5.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?rev=aa4bea2f7220cf34efbc2eb933a8584104277664)",
+ "iota-client 0.5.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?rev=db62b87f01dd89dbc52c19272892426e1e855c24)",
 ]
 
 [[package]]
 name = "iota-core"
 version = "0.2.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#2422c5c5be81dfda72709dcd7a536f27f0348bfc"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#db62b87f01dd89dbc52c19272892426e1e855c24"
 dependencies = [
  "bee-common 0.3.1-alpha (git+https://github.com/iotaledger/bee.git?rev=c42171ff33c80cc2efb183e244dc79b7f58d9ac4)",
  "bee-message",
@@ -1760,19 +1751,6 @@ dependencies = [
  "sha2 0.9.3",
  "unicode-normalization",
  "x25519-dalek",
-]
-
-[[package]]
-name = "iota-crypto"
-version = "0.2.0"
-source = "git+https://github.com/iotaledger/crypto.rs.git?rev=527392202e78fa35620a9b30061d5e231a046ea2#527392202e78fa35620a9b30061d5e231a046ea2"
-dependencies = [
- "blake2",
- "digest 0.9.0",
- "ed25519-zebra",
- "getrandom 0.2.2",
- "hmac 0.10.1",
- "sha2 0.9.3",
 ]
 
 [[package]]
@@ -1822,7 +1800,7 @@ dependencies = [
  "anyhow",
  "bincode",
  "futures",
- "iota-crypto 0.2.0 (git+https://github.com/iotaledger/crypto.rs?rev=09ff1a94d6a87838589ccf1b874cfa3283a00f26)",
+ "iota-crypto 0.2.0",
  "riker",
  "serde 1.0.124",
  "stronghold-engine",
@@ -1836,7 +1814,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#9f03f606cee597638b0242f69fe97c4d4ed74ddd"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#5b82175c6b136ed6f1a964e46ac9442b5a8f0f88"
 dependencies = [
  "async-trait",
  "backtrace",
@@ -1846,7 +1824,7 @@ dependencies = [
  "futures",
  "getset",
  "hex",
- "iota-core 0.2.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?rev=aa4bea2f7220cf34efbc2eb933a8584104277664)",
+ "iota-core 0.2.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?rev=db62b87f01dd89dbc52c19272892426e1e855c24)",
  "iota-crypto 0.3.0 (git+https://github.com/iotaledger/crypto.rs?rev=fa67e9da78799186fbc8c7892d862221bd5d3171)",
  "iota-stronghold",
  "log",
@@ -2266,6 +2244,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "mqttbytes"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "80d411eb33f1496153262103cd18ec3ea6c33bc0d2156a7dcc8d6db0b58181da"
+dependencies = [
+ "bytes",
+]
+
+[[package]]
 name = "multihash"
 version = "0.13.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2533,30 +2520,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "paho-mqtt"
-version = "0.9.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d82fea0990fe54e75d575bbd9bc2ee5919fd10cc0b4a95f1967528083129fc4b"
-dependencies = [
- "futures",
- "futures-timer",
- "libc",
- "log",
- "paho-mqtt-sys",
- "thiserror",
-]
-
-[[package]]
-name = "paho-mqtt-sys"
-version = "0.5.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1ad9ac6a77a7e7c70cd51262b94ab666c9e4c38fb0f4201dba8d7f8589aa8ce4"
-dependencies = [
- "cmake",
- "openssl-sys",
-]
-
-[[package]]
 name = "parity-multiaddr"
 version = "0.11.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2712,6 +2675,12 @@ dependencies = [
  "wepoll-sys",
  "winapi",
 ]
+
+[[package]]
+name = "pollster"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1a0c427c464eaca5923b642b3b346792b9c98edd91026aa6a753435e42d2a07b"
 
 [[package]]
 name = "poly1305"
@@ -3105,6 +3074,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "rumqttc"
+version = "0.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "de758d1b983dc386aa083ab91e8c774415364fe236a2808fdf95d5d54c7e5e93"
+dependencies = [
+ "async-channel",
+ "bytes",
+ "http",
+ "log",
+ "mqttbytes",
+ "pollster",
+ "thiserror",
+ "tokio",
+ "tokio-rustls",
+ "webpki",
+]
+
+[[package]]
 name = "rusqlite"
 version = "0.24.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3451,7 +3438,7 @@ source = "git+https://github.com/iotaledger/stronghold.rs?rev=0299572d1591f81ce2
 dependencies = [
  "dirs-next",
  "hex",
- "iota-crypto 0.2.0 (git+https://github.com/iotaledger/crypto.rs?rev=09ff1a94d6a87838589ccf1b874cfa3283a00f26)",
+ "iota-crypto 0.2.0",
  "thiserror",
 ]
 
