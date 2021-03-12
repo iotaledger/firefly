@@ -220,6 +220,28 @@ export const initialiseListeners = () => {
             const message = response.payload.message
             const messageKey = response.payload.confirmed ? 'confirmed' : 'failed'
 
+            const accountMessage = account.messages.find((_message) => _message.id === message.id)
+            accountMessage.confirmed = response.payload.confirmed
+            accounts.update((storedAccounts) => {
+                return storedAccounts.map((storedAccount) => {
+                    if (storedAccount.id === account.id) {
+                        return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
+                            messages: storedAccount.messages.map((_message: Message) => {
+                                if (_message.id === message.id) {
+                                    return Object.assign<Message, Partial<Message>, Partial<Message>>(
+                                        {} as Message,
+                                        _message,
+                                        { confirmed: response.payload.confirmed }
+                                    )
+                                }
+                                return _message
+                            })
+                        })
+                    }
+                    return storedAccount
+                })
+            })
+
             const locale = get(_) as (string) => string
             const notificationMessage = locale(`notifications.${messageKey}`)
                 .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
