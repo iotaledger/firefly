@@ -1,6 +1,6 @@
 import { mnemonic } from 'shared/lib/app'
 import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
-import { _ } from 'shared/lib/i18n'
+import { localize } from 'shared/lib/i18n'
 import type { HistoryData, PriceData } from 'shared/lib/marketData'
 import { HistoryDataProps } from 'shared/lib/marketData'
 import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
@@ -20,7 +20,8 @@ export const MAX_ACCOUNT_NAME_LENGTH = 20
 
 export const MAX_PASSWORD_LENGTH = 256
 
-export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS = 8
+// Setting to 0 removes auto lock. We must lock Stronghold manually.
+export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS = 0
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'
 
@@ -200,8 +201,7 @@ export const initialiseListeners = () => {
             const account = get(accounts).find((account) => account.id === response.payload.accountId)
             const message = response.payload.message
 
-            const locale = get(_) as (string) => string
-            const notificationMessage = locale('notifications.valueTx')
+            const notificationMessage = localize('notifications.valueTx')
                 .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
                 .replace('{{account}}', account.alias)
 
@@ -244,8 +244,7 @@ export const initialiseListeners = () => {
                 })
             })
 
-            const locale = get(_) as (string) => string
-            const notificationMessage = locale(`notifications.${messageKey}`)
+            const notificationMessage = localize(`notifications.${messageKey}`)
                 .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
                 .replace('{{account}}', account.alias)
 
@@ -651,10 +650,9 @@ export function syncAccounts() {
         },
         onError(err) {
             isSyncing.set(false)
-            const locale = get(_) as (string) => string
             showAppNotification({
                 type: 'error',
-                message: locale(err.error),
+                message: localize(err.error),
             })
         },
     })

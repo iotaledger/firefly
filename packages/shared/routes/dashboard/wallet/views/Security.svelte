@@ -80,7 +80,7 @@
             title={locale('views.dashboard.security.stronghold_status.title')}
             message={locale(`views.dashboard.security.stronghold_status.${strongholdStatusMessage}`)}
             color={$activeProfile?.isStrongholdLocked ? 'blue' : 'yellow'}
-            icon="lock"
+            icon={$activeProfile?.isStrongholdLocked ? "lock" : "unlock"}
             onClick={() => (get(activeProfile)?.isStrongholdLocked ? handleSecurityTileClick('password') : lockStronghold())} />
         <!-- Stronghold backup -->
         <SecurityTile
