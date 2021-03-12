@@ -18,6 +18,8 @@ export const MAX_PROFILE_NAME_LENGTH = 20
 
 export const MAX_ACCOUNT_NAME_LENGTH = 20
 
+export const MAX_PASSWORD_LENGTH = 256
+
 export const STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS = 8
 
 export const WALLET_STORAGE_DIRECTORY = '__storage__'

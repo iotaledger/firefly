@@ -6,7 +6,7 @@
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { PIN_LENGTH } from 'shared/lib/utils'
-    import { api } from 'shared/lib/wallet'
+    import { api, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
     import zxcvbn from 'zxcvbn'
 
@@ -46,8 +46,6 @@
 
     let passwordChangeBusy = false
     let passwordChangeMessage = ''
-
-    const MAX_PASSWORD_LENGTH = 256
 
     $: passwordStrength = zxcvbn(newPassword)
 
