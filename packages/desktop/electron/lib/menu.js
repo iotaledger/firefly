@@ -64,6 +64,9 @@ const buildTemplate = () => {
                 label: state.strings.settings,
                 click: () => getOrInitWindow('main').webContents.send('menu-navigate-settings'),
             },
+            {
+                type: 'separator',
+            },
         ])
     }
 

@@ -1,4 +1,6 @@
 import { mnemonic } from 'shared/lib/app'
+import type { ErrorEventPayload } from 'lib/typings/events'
+import type { Account as BaseAccount } from 'lib/typings/account'
 import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
 import { localize } from 'shared/lib/i18n'
 import type { HistoryData, PriceData } from 'shared/lib/marketData'
@@ -13,6 +15,8 @@ import type { Actor } from './typings/bridge'
 import type { TransferProgressEventType } from './typings/events'
 import type { Message } from './typings/message'
 import type { ApiClient } from './walletApi'
+
+const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
 export const MAX_PROFILE_NAME_LENGTH = 20
 
@@ -468,20 +472,81 @@ export const updateBalanceOverviewFiat = (): void => {
 export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
     const { accounts } = get(wallet)
 
-    accounts.update((storedAccounts) => {
-        return storedAccounts.map((storedAccount) => {
-            const syncedAccount = syncedAccounts.find((_account) => _account.id === storedAccount.id)
+    const existingAccountIds = get(accounts).map((account) => account.id)
 
-            return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
-                // Update deposit address
-                depositAddress: syncedAccount.depositAddress.address,
-                // If we have received a new address, simply add it;
-                // If we have received an existing address, update the properties.
-                addresses: mergeProps(storedAccount.addresses, syncedAccount.addresses, 'address'),
-                messages: mergeProps(storedAccount.messages, syncedAccount.messages, 'id'),
-            })
+    const { newAccounts, existingAccounts } = syncedAccounts.reduce((acc, syncedAccount: SyncedAccount) => {
+        if (existingAccountIds.includes(syncedAccount.id)) {
+            acc.existingAccounts.push(syncedAccount);
+        } else {
+            acc.newAccounts.push(syncedAccount);
+        }
+
+        return acc;
+    }, { newAccounts: [], existingAccounts: [] })
+
+    const updatedStoredAccounts = get(accounts).map((storedAccount) => {
+        const syncedAccount = existingAccounts.find((_account) => _account.id === storedAccount.id)
+
+        return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
+            // Update deposit address
+            depositAddress: syncedAccount.depositAddress.address,
+            // If we have received a new address, simply add it;
+            // If we have received an existing address, update the properties.
+            addresses: mergeProps(storedAccount.addresses, syncedAccount.addresses, 'address'),
+            messages: mergeProps(storedAccount.messages, syncedAccount.messages, 'id'),
         })
     })
+
+    if (newAccounts.length) {
+        const totalBalance = {
+            balance: 0,
+            incoming: 0,
+            outgoing: 0,
+        }
+
+        const _accounts = []
+
+        for (const [idx, newAccount] of newAccounts.entries()) {
+            getAccountMeta(newAccount.id, (err, meta) => {
+                if (!err) {
+                    totalBalance.balance += meta.balance
+                    totalBalance.incoming += meta.incoming
+                    totalBalance.outgoing += meta.outgoing
+
+                    const account = prepareAccountInfo(Object.assign<
+                        WalletAccount, WalletAccount, Partial<WalletAccount>
+                    >({} as WalletAccount, newAccount, {
+                        alias: `Account ${newAccount.index + 1}`,
+                        clientOptions: existingAccounts[0].clientOptions,
+                        createdAt: new Date().toISOString(),
+                        signerType: existingAccounts[0].signerType,
+                        depositAddress: newAccount.depositAddress.address
+                    }), meta)
+
+                    _accounts.push(account)
+
+                    if (idx === newAccounts.length - 1) {
+                        const { balanceOverview } = get(wallet);
+                        const overview = get(balanceOverview);
+
+                        accounts.update(() => {
+                            return [...updatedStoredAccounts, ..._accounts]
+                        })
+
+                        updateBalanceOverview(
+                            overview.balanceRaw + totalBalance.balance,
+                            overview.incomingRaw + totalBalance.incoming,
+                            overview.outgoingRaw + totalBalance.outgoing
+                        )
+                    }
+                } else {
+                    console.error(err)
+                }
+            })
+        }
+    } else {
+        accounts.update(() => updatedStoredAccounts);
+    }
 };
 
 function mergeProps<T>(existingPayload: T[], newPayload: T[], prop: string): T[] {
@@ -655,5 +720,66 @@ export function syncAccounts() {
                 message: localize(err.error),
             })
         },
+    })
+}
+
+export const getAccountMeta = (accountId: string, callback: (
+    error: ErrorEventPayload,
+    meta?: {
+        balance: number
+        incoming: number
+        outgoing: number
+        depositAddress: string
+    }
+) => void) => {
+    api.getBalance(accountId, {
+        onSuccess(balanceResponse) {
+            api.latestAddress(accountId, {
+                onSuccess(latestAddressResponse) {
+                    callback(null, {
+                        balance: balanceResponse.payload.total,
+                        incoming: balanceResponse.payload.incoming,
+                        outgoing: balanceResponse.payload.outgoing,
+                        depositAddress: latestAddressResponse.payload.address,
+                    })
+                },
+                onError(error) {
+                    callback(error)
+                },
+            })
+        },
+        onError(error) {
+            callback(error)
+        },
+    })
+}
+
+export const prepareAccountInfo = (
+    account: BaseAccount,
+    meta: {
+        balance: number
+        incoming: number
+        outgoing: number
+        depositAddress: string
+    }
+) => {
+    const { id, index, alias } = account
+    const { balance, depositAddress } = meta
+
+    const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD
+
+    return Object.assign<WalletAccount, BaseAccount, Partial<WalletAccount>>({} as WalletAccount, account, {
+        id,
+        index,
+        depositAddress,
+        alias,
+        rawIotaBalance: balance,
+        balance: formatUnit(balance, 2),
+        balanceEquiv: `${convertToFiat(
+            balance,
+            get(currencies)[CurrencyTypes.USD],
+            get(exchangeRates)[activeCurrency]
+        )} ${activeCurrency}`,
+        color: ACCOUNT_COLORS[index % ACCOUNT_COLORS.length],
     })
 }
