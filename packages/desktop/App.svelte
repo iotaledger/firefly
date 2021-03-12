@@ -25,6 +25,7 @@
         Password,
         Protect,
         Setup,
+        BundleMiningWarning,
         Splash,
         Welcome,
     } from 'shared/routes'
@@ -151,6 +152,9 @@
     </Route>
     <Route route={AppRoute.Migrate}>
         <Migrate on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route={AppRoute.BundleMiningWarning}>
+        <BundleMiningWarning on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
     </Route>
     <Route route={AppRoute.Congratulations}>
         <Congratulations on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
