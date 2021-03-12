@@ -225,15 +225,15 @@ jobs:
         asset_name: firefly-desktop-${{ env.RELEASE_VERSION }}.AppImage
         asset_content_type: application/octet-stream
 
-    - name: Upload Linux code signature asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: assets/firefly-desktop-${{ env.RELEASE_VERSION }}.AppImage.asc
-        asset_name: firefly-desktop-${{ env.RELEASE_VERSION }}.AppImage.asc
-        asset_content_type: application/pgp-signature
+    # - name: Upload Linux code signature asset
+    #   uses: actions/upload-release-asset@v1
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   with:
+    #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+    #     asset_path: assets/firefly-desktop-${{ env.RELEASE_VERSION }}.AppImage.asc
+    #     asset_name: firefly-desktop-${{ env.RELEASE_VERSION }}.AppImage.asc
+    #     asset_content_type: application/pgp-signature
 
 
     - name: Listing artifacts
