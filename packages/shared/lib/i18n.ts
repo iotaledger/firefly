@@ -127,6 +127,8 @@ const dir = derived(activeProfile, (_activeProfile) => {
     return 'ltr'
 })
 
+const localize = get(_) as (string, values?) => string
+
 // We expose the svelte-i18n _ store so that our app has
 // a single API for i18n
-export { activeLocale, _, setupI18n, dir, isLocaleLoaded }
+export { activeLocale, _, setupI18n, dir, isLocaleLoaded, localize }
