@@ -2,7 +2,7 @@
     import zxcvbn from 'zxcvbn'
     import { createEventDispatcher } from 'svelte'
     import { OnboardingLayout, Password, Illustration, Text, Button } from 'shared/components'
-    import { api } from 'shared/lib/wallet'
+    import { api, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import passwordInfo from 'shared/lib/password';
 
     export let locale
@@ -14,8 +14,6 @@
 
     const dispatch = createEventDispatcher()
 
-    // TODO: move to config file
-    const MAX_PASSWORD_LENGTH = 256
     $: passwordStrength = zxcvbn(password)
 
     function handleContinueClick() {
