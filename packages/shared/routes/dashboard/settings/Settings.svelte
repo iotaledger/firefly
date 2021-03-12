@@ -3,7 +3,7 @@
     import { activeProfile } from 'shared/lib/profile'
     import { settingsRoute } from 'shared/lib/router'
     import { SettingsRoutes } from 'shared/lib/typings/routes'
-    import { createEventDispatcher } from 'svelte'
+    import { createEventDispatcher, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { SettingsHome, SettingsViewer } from './views'
 
@@ -22,6 +22,10 @@
             deepLinkRequestActive.set(false)
         }
     }
+
+    onMount(() => {
+        settingsRoute.set(SettingsRoutes.Init)
+    })
 </script>
 
 <div class="w-full h-full px-16 py-12 flex flex-1 bg-white">
