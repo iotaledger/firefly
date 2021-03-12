@@ -4,7 +4,7 @@
     import { exchangeRates } from 'shared/lib/currency'
     import { locales, setupI18n } from 'shared/lib/i18n'
     import { addProfileCurrencyPriceData } from 'shared/lib/marketData'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { activeProfile, updateProfile, appSettings } from 'shared/lib/profile'
     import { updateAccountsBalanceEquiv, updateBalanceOverviewFiat } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
 
@@ -18,7 +18,11 @@
 
     const setLanguage = (item) => {
         const locale = Object.keys(locales).find((key) => locales[key] === item.value)
-        updateProfile('settings.language', locale)
+        appSettings.set({
+            ...get(appSettings),
+            language: locale,
+        })
+
         setupI18n({ withLocale: locale })
     }
 
@@ -50,7 +54,7 @@
         <Dropdown
             sortItems={true}
             onSelect={(item) => setLanguage(item)}
-            value={locales[$activeProfile?.settings.language]}
+            value={locales[$appSettings.language]}
             items={Object.values(locales).map((locale) => ({ value: locale, label: locale }))} />
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />

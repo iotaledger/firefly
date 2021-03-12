@@ -1,8 +1,9 @@
 <script lang="typescript">
-    import { SettingsRoutes, GeneralSettings, SecuritySettings, AdvancedSettings, HelpAndInfo } from 'shared/lib/typings/routes'
+    import { SettingsRoutes, GeneralSettings, GeneralSettingsNoProfile, SecuritySettings, AdvancedSettings, HelpAndInfo } from 'shared/lib/typings/routes'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import { Text, SettingsMenu } from 'shared/components'
-    import { settingsRoute } from 'shared/lib/router';
+    import { settingsRoute } from 'shared/lib/router'
+    import { loggedIn, logout, sendParams } from 'shared/lib/app'
 
     export let locale
     export let mobile
@@ -18,20 +19,22 @@
                 icon="settings"
                 iconColor="bg-blue-500"
                 icons={SettingsIcons}
-                settings={GeneralSettings}
+                settings={$loggedIn ? GeneralSettings : GeneralSettingsNoProfile}
                 title={locale('views.settings.generalSettings.title')}
                 description={locale('views.settings.generalSettings.description')}
                 onClick={() => settingsRoute.set(SettingsRoutes.GeneralSettings)}
                 {locale} />
-            <SettingsMenu
-                icon="security"
-                iconColor="bg-yellow-500"
-                icons={SettingsIcons}
-                settings={SecuritySettings}
-                title={locale('views.settings.security.title')}
-                description={locale('views.settings.security.description')}
-                onClick={() => settingsRoute.set(SettingsRoutes.Security)}
-                {locale} />
+            {#if $loggedIn}
+                <SettingsMenu
+                    icon="security"
+                    iconColor="bg-yellow-500"
+                    icons={SettingsIcons}
+                    settings={SecuritySettings}
+                    title={locale('views.settings.security.title')}
+                    description={locale('views.settings.security.description')}
+                    onClick={() => settingsRoute.set(SettingsRoutes.Security)}
+                    {locale} />
+            {/if}
             <SettingsMenu
                 icon="tools"
                 iconColor="bg-green-600"

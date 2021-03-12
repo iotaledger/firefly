@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { Idle, Sidebar } from 'shared/components'
-    import { logout, sendParams } from 'shared/lib/app'
+    import { loggedIn, logout, sendParams } from 'shared/lib/app'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { Electron } from 'shared/lib/electron'
-    import { activeProfile } from 'shared/lib/profile'
+    import { appSettings } from 'shared/lib/profile'
     import { dashboardRoute, routerNext } from 'shared/lib/router'
     import { Tabs } from 'shared/lib/typings/routes'
     import { parseDeepLink } from 'shared/lib/utils'
@@ -44,7 +44,7 @@
             }
         }
 
-        if (!get(activeProfile)?.settings.deepLinking) {
+        if (!appSettings.deepLinking) {
             _redirect(Tabs.Settings)
             // TODO: Add alert system
             console.log('deep linking not enabled')
@@ -61,9 +61,13 @@
     <div>foo</div>
 {:else}
     <Idle />
-    <div class="flex flex-row w-full h-full">
-        <Sidebar bind:activeTab={$dashboardRoute} {locale} />
-        <!-- Dashboard Pane -->
-        <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
-    </div>
+    {#if $loggedIn}
+        <div class="flex flex-row w-full h-full">
+            <Sidebar bind:activeTab={$dashboardRoute} {locale} />
+            <!-- Dashboard Pane -->
+            <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
+        </div>
+    {:else}
+        <svelte:component this={tabs[Tabs.Settings]} {locale} on:next={routerNext} />
+    {/if}
 {/if}

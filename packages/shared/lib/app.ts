@@ -3,7 +3,7 @@ import { persistent } from './helpers'
 import { localize } from './i18n'
 import { showAppNotification } from './notifications'
 import { closePopup } from './popup'
-import { activeProfile, clearActiveProfile } from './profile'
+import { activeProfile, clearActiveProfile, isProfileStrongholdLocked } from './profile'
 import { resetRouter } from './router'
 import { api, destroyActor, resetWallet } from './wallet'
 /**
@@ -68,6 +68,7 @@ export const logout = () => {
         if (ap) {
             destroyActor(ap.id)
         }
+        isProfileStrongholdLocked.set(true)
         clearSendParams()
         closePopup()
         resetWallet()
@@ -76,7 +77,7 @@ export const logout = () => {
         mnemonic.set(null)
     }
 
-    if (!ap?.isStrongholdLocked) {
+    if (!get(isProfileStrongholdLocked)) {
         api.lockStronghold({
             onSuccess() {
                 _cleanup()

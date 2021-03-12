@@ -7,73 +7,72 @@ import { Electron } from './electron'
 import type { Node } from './typings/client'
 
 /**
- * Base profile interface —
+ * Profile
  */
-interface BaseProfile {
-    name: string
+interface Profile {
     id: string
-    active: boolean
-}
-
-/**
- * Extended profile interface (Extra properties associated with a profile)
- */
-interface ExtendedProfile {
-    /**
-     * Determines if stronghold is locked
-     */
-    isStrongholdLocked: boolean
+    name: string
     /**
      * Time for most recent stronghold back up
      */
-    lastStrongholdBackupTime: Date | null
-    /**
-     * User settings
-     */
-    settings: UserSettings
-}
+     lastStrongholdBackupTime: Date | null
+     /**
+      * User settings
+      */
+     settings: UserSettings
+     isDeveloperProfile: boolean
+
+ }
 
 /**
  * User Settings
  */
 export interface UserSettings {
-    deepLinking: boolean
     outsourcePow: boolean
-    language: string
     currency: AvailableExchangeRates
     notifications: boolean
+    automaticNodeSelection: boolean
     node: Node
     customNodes: Node[]
     /** Lock screen timeout in minutes */
     lockScreenTimeout: number
-    automaticNodeSelection: boolean
 }
 
 /**
- * Profile interface
+ * App Settings
  */
-interface Profile extends BaseProfile, ExtendedProfile {
-    isDeveloperProfile: boolean
+ export interface AppSettings {
+    deepLinking: boolean
+    language: string
 }
+
+export const activeProfileId = writable<string | null>(null)
 
 export const profiles = persistent<Profile[]>('profiles', [])
 
 export const newProfile = writable<Profile | null>(null)
 
+export const appSettings = persistent<AppSettings>('settings', {
+    deepLinking: false,
+    language: 'en'
+})
+
+export const isProfileStrongholdLocked = writable<boolean>(true)
+
 /**
  * Currently active profile
  */
 export const activeProfile: Readable<Profile | undefined> = derived(
-    [profiles, newProfile],
-    ([$profiles, $newProfile]) =>
+    [profiles, newProfile, activeProfileId],
+    ([$profiles, $newProfile, $activeProfileId]) =>
         $newProfile ||
         $profiles.find((_profile) => {
-            return _profile.active === true
+            return _profile.id === $activeProfileId
         })
 )
 
-activeProfile.subscribe((profile) => {
-    Electron.updateActiveProfile(profile ? profile.id : null)
+activeProfileId.subscribe((profileId) => {
+    Electron.updateActiveProfile(profileId)
 })
 
 /**
@@ -101,25 +100,20 @@ export const saveProfile = (profile: Profile): Profile => {
  * @returns {Profile}
  */
 export const createProfile = (profileName, isDeveloperProfile): Profile => {
-    const profile = {
+    const profile: Profile = {
         id: generateRandomId(),
         name: profileName,
-        active: true,
-        isStrongholdLocked: true,
         lastStrongholdBackupTime: null,
         isDeveloperProfile,
-        // Settings
         settings: {
-            deepLinking: false,
-            language: 'en',
             outsourcePow: false,
             currency: AvailableExchangeRates.USD,
             notifications: true,
+            automaticNodeSelection: true,
             node: DEFAULT_NODE,
             customNodes: [],
             // Minutes
             lockScreenTimeout: 5,
-            automaticNodeSelection: true,
         },
     }
 
@@ -149,10 +143,8 @@ export const disposeNewProfile = (): void => {
  * @returns {void}
  */
 export const setActiveProfile = (id: string): void => {
-    profiles.update((_profiles) => _profiles.map((profile) => Object.assign({}, profile, { active: id === profile.id })))
+    activeProfileId.set(id)
 }
-
-
 
 /**
  * Clears the active profile
@@ -162,7 +154,7 @@ export const setActiveProfile = (id: string): void => {
  * @returns {void}
  */
 export const clearActiveProfile = (): void => {
-    profiles.update((_profiles) => _profiles.map((profile) => Object.assign({}, profile, { active: false })))
+    activeProfileId.set(null)
 }
 
 /**
@@ -194,7 +186,7 @@ export const updateProfile = (
     const _update = (_profile) => {
         const pathList = path.split('.')
 
-        pathList.reduce((a, b: keyof ExtendedProfile | keyof UserSettings, level: number) => {
+        pathList.reduce((a, b: keyof Profile | keyof UserSettings, level: number) => {
             if (level === pathList.length - 1) {
                 a[b] = value
                 return value

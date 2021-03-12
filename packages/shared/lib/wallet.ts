@@ -4,7 +4,7 @@ import { localize } from 'shared/lib/i18n'
 import type { HistoryData, PriceData } from 'shared/lib/marketData'
 import { HistoryDataProps } from 'shared/lib/marketData'
 import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
-import { activeProfile, updateProfile } from 'shared/lib/profile'
+import { activeProfile, updateProfile, isProfileStrongholdLocked } from 'shared/lib/profile'
 import { formatUnit } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
 import type { Account, SyncedAccount } from './typings/account'
@@ -184,7 +184,7 @@ export const initialiseListeners = () => {
      */
     api.onStrongholdStatusChange({
         onSuccess(response) {
-            updateProfile('isStrongholdLocked', response.payload.snapshot.status === 'Locked')
+            isProfileStrongholdLocked.set(response.payload.snapshot.status === 'Locked')
         },
         onError(error) {
             console.error(error)

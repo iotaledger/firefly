@@ -4,7 +4,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { activeProfile, updateProfile, isProfileStrongholdLocked } from 'shared/lib/profile'
     import { PIN_LENGTH } from 'shared/lib/utils'
     import { api, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
@@ -73,7 +73,7 @@
             }
         }
 
-        if (get(activeProfile)?.isStrongholdLocked) {
+        if (get(isProfileStrongholdLocked)) {
             openPopup({
                 type: 'password',
                 props: {

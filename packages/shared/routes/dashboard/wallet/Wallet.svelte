@@ -9,7 +9,7 @@
     import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { activeProfile, appSettings, isProfileStrongholdLocked } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import { formatUnit } from 'shared/lib/units'
@@ -412,7 +412,7 @@
     }
 
     $: {
-        if ($deepLinkRequestActive && get(activeProfile)?.settings.deepLinking) {
+        if ($deepLinkRequestActive && $appSettings.deepLinking) {
             walletRoute.set(WalletRoutes.Send)
             deepLinkRequestActive.set(false)
         }
@@ -427,7 +427,7 @@
 
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
-                updateProfile('isStrongholdLocked', strongholdStatusResponse.payload.snapshot.status === 'Locked')
+                isProfileStrongholdLocked.set(strongholdStatusResponse.payload.snapshot.status === 'Locked')
             },
             onError(error) {
                 console.error(error)

@@ -1,25 +1,26 @@
 <script lang="typescript">
-    import type { ClientOptions } from 'lib/typings/client'
-    import { Button, Checkbox, Dropdown, Radio, Text } from 'shared/components'
-    import { developerMode } from 'shared/lib/app'
-    import { DEFAULT_NODE, DEFAULT_NODES } from 'shared/lib/network'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
-    import type { Node } from 'shared/lib/typings/client'
-    import { api, isSyncing, syncAccounts, wallet, WalletAccount } from 'shared/lib/wallet'
-    import { get } from 'svelte/store'
+    import type { ClientOptions } from 'lib/typings/client';
+import { Button,Checkbox,Dropdown,Radio,Text } from 'shared/components';
+import { developerMode } from 'shared/lib/app';
+import { DEFAULT_NODE,DEFAULT_NODES } from 'shared/lib/network';
+import { showAppNotification } from 'shared/lib/notifications';
+import { openPopup } from 'shared/lib/popup';
+import { activeProfile,appSettings,updateProfile } from 'shared/lib/profile';
+import type { Node } from 'shared/lib/typings/client';
+import { api,isSyncing,syncAccounts,wallet,WalletAccount } from 'shared/lib/wallet';
+import { get } from 'svelte/store';
+
 
     export let locale
 
     const { accounts } = $wallet
 
     let outsourcePowChecked = get(activeProfile)?.settings.outsourcePow
-    let deepLinkingChecked = get(activeProfile)?.settings.deepLinking
+    let deepLinkingChecked = $appSettings.deepLinking
     let automaticNodeSelection = get(activeProfile)?.settings.automaticNodeSelection
 
     $: updateProfile('settings.outsourcePow', outsourcePowChecked)
-    $: updateProfile('settings.deepLinking', deepLinkingChecked)
+    $: $appSettings.deepLinking = deepLinkingChecked
     $: updateProfile('settings.automaticNodeSelection', automaticNodeSelection)
 
     $: if (automaticNodeSelection) {

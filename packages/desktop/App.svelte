@@ -8,7 +8,7 @@
     import { fetchMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { activeProfile } from 'shared/lib/profile'
+    import { appSettings } from 'shared/lib/profile'
     import { dashboardRoute, initRouter, route as appRoute, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
     import { AppRoute, Tabs } from 'shared/lib/typings/routes'
     import { requestMnemonic } from 'shared/lib/wallet'
@@ -45,7 +45,7 @@
     }
 
     let splash = true
-    setupI18n({ withLocale: get(activeProfile)?.settings.language ?? 'en' })
+    setupI18n({ withLocale: appSettings.language })
     onMount(async () => {
         setTimeout(() => {
             splash = false
@@ -66,6 +66,7 @@
             walletRoute.set(route)
         })
         Electron.onEvent('menu-navigate-settings', () => {
+            appRoute.set(AppRoute.Dashboard)
             if (get(dashboardRoute) !== Tabs.Settings) {
                 dashboardRoute.set(Tabs.Settings)
             }

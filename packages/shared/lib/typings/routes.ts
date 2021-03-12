@@ -60,6 +60,11 @@ export enum GeneralSettings {
     Notifications = 'notifications',
 }
 
+export enum GeneralSettingsNoProfile {
+    Theme = 'theme',
+    Language = 'language',
+}
+
 export enum SecuritySettings {
     ExportStronghold = 'exportStronghold',
     AppLock = 'appLock',

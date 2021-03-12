@@ -1,4 +1,4 @@
-import { activeProfile, updateProfile } from 'shared/lib/profile'
+import { appSettings } from 'shared/lib/profile'
 import { addMessages, dictionary, getLocaleFromNavigator, init, _ } from 'svelte-i18n'
 import { derived, get, writable } from 'svelte/store'
 
@@ -81,7 +81,10 @@ const setupI18n = (options = { withLocale: null }) => {
         return loadJson(messagesFileUrl).then((messages) => {
             activeLocale = _locale
             addMessages(_locale, messages)
-            updateProfile('settings.language', _locale)
+            appSettings.set({
+                ...get(appSettings),
+                language: _locale
+            })
             isDownloading.set(false)
         })
     }
@@ -120,11 +123,8 @@ function loadJson(url) {
     return fetch(url).then((response) => response.json())
 }
 
-const dir = derived(activeProfile, (_activeProfile) => {
-    if (_activeProfile) {
-        return _activeProfile.settings.language === 'ar' ? 'rtl' : 'ltr'
-    }
-    return 'ltr'
+const dir = derived(appSettings, (_appSettings) => {
+    return _appSettings.language === 'ar' ? 'rtl' : 'ltr'
 })
 
 const localize = get(_) as (string, values?) => string
