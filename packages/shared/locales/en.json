@@ -499,7 +499,7 @@
         "wallet": "Wallet",
         "help": "Help",
         "you": "You",
-        "transaction_id": "Transaction ID",
+        "messageId": "Message ID",
         "input_address": "Input Address",
         "receive_address": "Receive Address",
         "date": "Date",
