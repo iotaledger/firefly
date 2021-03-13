@@ -9,12 +9,12 @@ import { showAppNotification, showSystemNotification } from 'shared/lib/notifica
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { formatUnit } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
-import type { Account, SyncedAccount } from './typings/account'
-import type { Address } from './typings/address'
-import type { Actor } from './typings/bridge'
+import type { Account, SyncedAccount } from 'shared/lib/typings/account'
+import type { Address } from 'shared/lib/typings/address'
+import type { Actor } from 'shared/lib/typings/bridge'
 import type { TransferProgressEventType } from './typings/events'
-import type { Message } from './typings/message'
-import type { ApiClient } from './walletApi'
+import type { Message } from 'shared/lib/typings/message'
+import type { ApiClient } from 'shared/lib/walletApi'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
