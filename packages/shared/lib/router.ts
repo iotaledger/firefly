@@ -38,7 +38,7 @@ export const path = readable<string>(null, (set) => {
 /**
  * Onboarding/setup type
  */
-let walletSetupType = writable<SetupType>(null)
+export const walletSetupType = writable<SetupType>(null)
 
 /*
  * Current view

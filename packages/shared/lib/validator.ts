@@ -658,6 +658,7 @@ export default class ValidatorService {
             [ResponseTypes.LockedStronghold]: this.createBaseValidator().getFirst(),
             [ResponseTypes.StrongholdPasswordChanged]: this.createBaseValidator().getFirst(),
             [ResponseTypes.UpdatedAllClientOptions]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.StrongholdPasswordClearIntervalSet]: this.createBaseValidator().getFirst(),
             [ResponseTypes.Error]: this.createBaseValidator().getFirst(),
             [ResponseTypes.Panic]: this.createBaseValidator().getFirst(),
             // Events

@@ -74,36 +74,6 @@ export const truncateString = (str: string = '', firstCharCount: number = 5, end
 }
 
 /**
- * Set text to clipboard
- */
-export const setClipboard = (input: string): boolean => {
-    try {
-        const textArea = document.createElement('textarea')
-        textArea.value = input
-        document.body.appendChild(textArea)
-
-        if (navigator.userAgent.match(/ipad|iphone/i)) {
-            const range = document.createRange()
-            range.selectNodeContents(textArea)
-            const selection = window.getSelection()
-            selection.removeAllRanges()
-            selection.addRange(range)
-            textArea.setSelectionRange(0, 999999)
-        } else {
-            textArea.select()
-        }
-
-        document.execCommand('copy')
-        document.body.removeChild(textArea)
-
-        return true
-    } catch (err) {
-        console.log(err)
-        return false
-    }
-}
-
-/**
  * Get difference between two dates in weeks
  * @param firstDate: first date to compare
  * @param secondDate: second sate to compare

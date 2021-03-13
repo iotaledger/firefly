@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Dropdown, Icon, QR, Text } from 'shared/components'
-    import { setClipboard } from 'shared/lib/helpers'
+    import { setClipboard } from 'shared/lib/utils'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import type { WalletAccount } from 'shared/lib/wallet'

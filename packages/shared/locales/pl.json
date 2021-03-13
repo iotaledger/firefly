@@ -38,7 +38,7 @@
         },
         "password": {
             "title": "Utwórz hasło",
-            "body": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates."
+            "body": "Potrzebujesz silnego hasła, aby chronić swoje środki. Użyj kombinacji słów i unikaj powszechnych zwrotów, nazw lub dat."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -69,7 +69,8 @@
         },
         "verify_recovery_phrase": {
             "title": "Sprawdź frazę odzyskiwania",
-            "body": "Sprawdźmy, czy poprawnie zapisałeś frazę odzyskiwania. Wybierz słowa w prawidłowej kolejności."
+            "body": "Sprawdźmy, czy poprawnie zapisałeś frazę odzyskiwania. Wybierz słowa w prawidłowej kolejności.",
+            "creating_account": "Tworzenie konta, proszę czekać..."
         },
         "backup_wallet": {
             "title": "Kopia zapasowa do pliku Stronghold",
@@ -92,8 +93,8 @@
             "body_1": "Fraza odzyskiwania zawiera 24 słowa. Jest ona używana do odzyskania istniejącego portfela Firefly.",
             "body_2": "Seed składa się z 81 znaków. Jest on używany do odzyskiwania środków z portfela starego typu (Trinity).",
             "body_3": "Wprowadź swój seed lub frazę odzyskiwania",
-            "seed_detected": "81 character seed detected",
-            "phrase_detected": "24 word phrase detected"
+            "seed_detected": "Wykryto seed o długości 81 znaków",
+            "phrase_detected": "Wykryto 24 wyrazową frazę odzyskiwania"
         },
         "import_from_file": {
             "title": "Przywróć portfel przy użyciu kopii zapasowej",
@@ -166,15 +167,15 @@
                 "description": ""
             },
             "exportStronghold": {
-                "title": "Eksportuj Stronghold",
+                "title": "Eksportowanie Stronghold",
                 "description": ""
             },
             "appLock": {
-                "title": "Blokada aplikacji",
+                "title": "Blokada ekranu aplikacji",
                 "description": ""
             },
             "changePassword": {
-                "title": "Zmień hasło",
+                "title": "Zmiana hasła",
                 "description": ""
             },
             "changePincode": {
@@ -186,11 +187,11 @@
                 "action": "Zmień PIN"
             },
             "resyncAccounts": {
-                "title": "Resynchronizuj konta",
+                "title": "Resynchronizacja konta",
                 "description": ""
             },
             "deleteProfile": {
-                "title": "Delete profile",
+                "title": "Usuwanie profilu",
                 "description": ""
             },
             "deepLinks": {
@@ -206,7 +207,7 @@
                 "description": ""
             },
             "configureNodeList": {
-                "title": "Konfiguruj listę serwerów",
+                "title": "Konfiguracja listy serwerów",
                 "description": ""
             },
             "proofOfWork": {
@@ -215,6 +216,10 @@
             },
             "errorLog": {
                 "title": "Dziennik błędów",
+                "description": ""
+            },
+            "diagnostics": {
+                "title": "Diagnostics",
                 "description": ""
             },
             "stateExport": {
@@ -254,7 +259,7 @@
                     "out_of_date": "Nieaktualne"
                 },
                 "hardware_device": {
-                    "title": "Urządzenie sprzętowe",
+                    "title": "Portfel sprzętowy",
                     "none_detected": "Nie wykryto"
                 },
                 "stronghold_status": {
@@ -312,7 +317,7 @@
             "error_title": "Nie można usunąć {name}",
             "error_body_1": "Aby usunąć konto, Twoje saldo musi wynosić 0.",
             "error_body_2": "Obecnie {balance} pozostało na tym koncie. Przenieś te środki na inne konto i spróbuj ponownie.",
-            "error_body_3": "You cannot delete this account, you must have at least one."
+            "error_body_3": "Nie można usunąć tego konta. Co najmniej jedno konto musi pozostać aktywne."
         },
         "address_history": {
             "title": "Historia adresów dla konta {name}",
@@ -320,30 +325,44 @@
         },
         "node": {
             "title_add": "Dodaj serwer",
-            "title_remove": "Remove a node",
+            "title_remove": "Usuń serwer",
             "title_details": "Szczegóły serwera",
             "node_address": "Adres serwera",
             "optional_username": "Nazwa użytkownika (opcjonalnie)",
             "optional_password": "Hasło (opcjonalnie)",
             "set_as_primary_node": "Ustaw jako serwer główny",
-            "remove_confirmation": "Are you sure you want to remove node?"
+            "remove_confirmation": "Czy na pewno chcesz usunąć ten serwer?"
         },
         "errorLog": {
-            "title": "Error Log",
-            "empty": "The error log is empty."
+            "title": "Dziennik błędów",
+            "empty": "Dziennik błędów jest pusty."
         },
         "deleteProfile": {
-            "title": "Delete profile",
-            "confirmation": "Are you sure you want to delete this profile, this operation cannot be undone?"
+            "title": "Usuwanie profilu",
+            "confirmation": "Czy na pewno chcesz usunąć ten profil? Tej operacji nie można cofnąć."
+        },
+        "diagnostics": {
+            "title": "Diagnostics",
+            "node": "Node",
+            "language": "Node",
+            "currency": "Node",
+            "platform": "Platform",
+            "platformVersion": "Platform Version",
+            "platformType": "Platform Type",
+            "platformArchitecture": "Platform Architecture",
+            "cpuCount": "CPU Count",
+            "totalMem": "Total Memory",
+            "freeMem": "Free Memory",
+            "userPath": "User Path"
         }
     },
     "charts": {
-        "incoming_mi": "Incoming {value} Mi",
-        "outgoing_mi": "Outgoing {value} Mi",
+        "incoming_mi": "Transakcja przychodząca {value} Mi",
+        "outgoing_mi": "Transakcja wychodząca {value} Mi",
         "portoflio": "Portfolio",
         "token": "Token",
-        "account_value": "Account Value",
-        "account_activity": "Account Activity"
+        "account_value": "Saldo konta",
+        "account_activity": "Aktywność konta"
     },
     "actions": {
         "continue": "Kontynuuj",
@@ -395,7 +414,7 @@
         "delete_account": "Usuń konto",
         "max": "Maks.",
         "add_node": "Dodaj serwer",
-        "remove_node": "Remove node",
+        "remove_node": "Usuń serwer",
         "hide": "Ukryj",
         "hideOthers": "Ukryj pozostałe",
         "showAll": "Pokaż wszystkie",
@@ -410,10 +429,11 @@
         "addAccount": "Dodaj konto",
         "checkForUpdates": "Sprawdź dostępność aktualizacji",
         "reportAnIssue": "Zgłoś problem",
-        "clear": "Clear",
-        "hide_details": "Hide Details",
-        "yes": "Yes",
-        "no": "No"
+        "clear": "Wyczyść",
+        "hide_details": "Ukryj szczegóły",
+        "yes": "Tak",
+        "no": "Nie",
+        "reset": "Resetuj"
     },
     "general": {
         "password": "Hasło",
@@ -461,8 +481,8 @@
         "dark_theme": "Tryb ciemny",
         "total_balance": "Wszystkie środki",
         "account_balance": "Saldo konta",
-        "incoming": "Przychodzące",
-        "outgoing": "Wychodzące",
+        "incoming": "Odebrano",
+        "outgoing": "Wysłano",
         "accounts": "Konta",
         "automaticNodeSelection": "Automatyczny wybór serwera",
         "manualNodeSelection": "Manualny wybór serwera",
@@ -478,35 +498,35 @@
         "nodes": "Serwery",
         "wallet": "Portfel",
         "help": "Pomoc",
-        "you": "You",
-        "transaction_id": "Transaction ID",
-        "input_address": "Input Address",
-        "receive_address": "Receive Address",
-        "date": "Date",
+        "you": "Ty",
+        "messageId": "Message ID",
+        "input_address": "Adres wejściowy",
+        "receive_address": "Adres odbiorczy",
+        "date": "Data",
         "no_accounts": "Nie posiadasz żadnego konta, proszę utworzyć konto.",
-        "loading_accounts": "Loading, please wait...",
+        "loading_accounts": "Wczytywanie, proszę czekać...",
         "add_profile": "Dodaj profil",
-        "no_recent_history": "No recent history",
-        "transferSyncing": "Syncing account",
-        "transferSelectingInputs": "Selecting inputs",
-        "transferRemainderAddress": "Generating remainder deposit address",
-        "transferSigning": "Signing the transaction",
-        "transferPow": "Performing PoW",
-        "transferBroadcasting": "Broadcasting transaction",
-        "transferComplete": "Transfer complete",
-        "creatingAccount": "Creating account, please wait...",
-        "updatingAccount": "Updating account, please wait...",
-        "accountSyncing": "Account is syncing",
-        "accountSyncComplete": "Account sync complete",
-        "passwordUpdating": "Updating password...",
-        "passwordSuccess": "Updated password successfully",
-        "passwordFailed": "Updating password failed",
-        "exportingStronghold": "Exporting stronghold...",
-        "exportingStrongholdSuccess": "Exported stronghold successfully",
-        "exportingStrongholdFailed": "Exported stronghold failed",
-        "pinCodeUpdating": "Updating PIN code...",
-        "pinCodeSuccess": "Updated PIN code successfully",
-        "pinCodeFailed": "Updating PIN code failed"
+        "no_recent_history": "Brak ostatniej aktywności",
+        "transferSyncing": "Synchronizacja konta",
+        "transferSelectingInputs": "Wybieranie danych wejściowych",
+        "transferRemainderAddress": "Generowanie adresu zwrotu",
+        "transferSigning": "Podpisywanie transakcji",
+        "transferPow": "Wykonywanie PoW",
+        "transferBroadcasting": "Nadawanie transakcji",
+        "transferComplete": "Transfer ukończony",
+        "creatingAccount": "Tworzenie konta, proszę czekać...",
+        "updatingAccount": "Aktualizacja konta, proszę czekać...",
+        "accountSyncing": "Trwa synchronizacja konta",
+        "accountSyncComplete": "Synchronizacja konta ukończona",
+        "passwordUpdating": "Aktualizacja hasła...",
+        "passwordSuccess": "Hasło zaktualizowane pomyślnie",
+        "passwordFailed": "Aktualizacja hasła nie powiodła się",
+        "exportingStronghold": "Eksportowanie stronghold...",
+        "exportingStrongholdSuccess": "Stronghold eksportowany pomyślnie",
+        "exportingStrongholdFailed": "Eksportowanie stronghold nie powiodło się",
+        "pinCodeUpdating": "Aktualizacja kodu PIN...",
+        "pinCodeSuccess": "Kod PIN zaktualizowany pomyślnie",
+        "pinCodeFailed": "Aktualizacja kodu PIN nie powiodła się"
     },
     "dates": {
         "today": "Dziś",
@@ -524,67 +544,68 @@
         "update_error": "Podczas aktualizacji wystąpił błąd, spróbuj ponownie",
         "restart_install": "Uruchom ponownie, aby zainstalować",
         "calc_minutes_remaining": "Obliczanie pozostałych minut...",
-        "minutes_remaining": "{minutes, plural, one {pozostała 1 minuta} few {pozostały # minuty} many {pozostało # minut} other {pozostało # minut}}"
+        "minutes_remaining": "{minutes, plural, one {pozostała 1 minuta} few {pozostały # minuty} many {pozostało # minut} other {pozostało # minut}}",
+        "copied_to_clipboard": "Copied to clipboard"
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length} characters.",
-            "duplicate": "A profile with this name already exists."
+            "length": "Twoja nazwa profilu nie może być dłuższa niż {length, plural, one {1 znak} few {# znaki} many {# znaków} other {# znaków}}.",
+            "duplicate": "Profil o takiej nazwie już istnieje."
         },
         "password": {
-            "doNotMatch": "Passwords do not match.",
-            "tooWeak": "Your new password is too weak.",
-            "row": "Straight rows of keys are easy to guess.",
-            "pattern": "Short keyboard patterns are easy to guess.",
-            "names": "Common names and surnames are easy to guess.",
-            "repeats": "Repeats like 'aaa' are easy to guess.",
-            "repeats2": "Repeats like 'abcabcabc' are easy to guess",
-            "sequence": "Sequences of characters are easy to guess.",
-            "years": "Recent years are easy to guess.",
-            "dates": "Dates are easy to guess.",
-            "common": "This is a very common password.",
-            "similar": "This is similar to a common password.",
-            "reasonWord": "A single word is easy to guess.",
-            "incorrect": "Your password is incorrect.",
-            "length": "Your password can't be longer than {length} characters."
+            "doNotMatch": "Hasła nie są zgodne.",
+            "tooWeak": "Twoje nowe hasło jest zbyt słabe.",
+            "row": "Użycie prostych rzędów klawiszy jest łatwe do odgadnięcia.",
+            "pattern": "Użycie klawiszy w krótkich odstępach jest łatwe do odgadnięcia.",
+            "names": "Powszechne imiona i nazwiska są łatwe do odgadnięcia.",
+            "repeats": "Powtórzenia takie jak „aaa” są łatwe do odgadnięcia.",
+            "repeats2": "Powtórzenia takie jak 'abcabcabc' są łatwe do odgadnięcia.",
+            "sequence": "Sekwencje znaków są łatwe do odgadnięcia.",
+            "years": "Ostatnie lata są łatwe do odgadnięcia.",
+            "dates": "Daty są łatwe do odgadnięcia.",
+            "common": "To jest bardzo popularne hasło.",
+            "similar": "To jest podobne do powszechnie używanego hasła.",
+            "reasonWord": "Jedno słowo jest łatwe do odgadnięcia.",
+            "incorrect": "Twoje hasło jest niepoprawne.",
+            "length": "Twoje hasło nie może być dłuższe niż {length, plural, one {1 znak} few {# znaki} many {# znaków} other {# znaków}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length} digits long.",
-            "match": "PINs do not match.",
-            "incorrect": "Your current PIN is incorrect."
+            "length": "Twój PIN musi składać się z {length, plural, one {1 cyfry} few {# cyfr} many {# cyfr} other {# cyfr}}.",
+            "match": "Kody PIN nie są zgodne.",
+            "incorrect": "Twój aktualny PIN jest nieprawidłowy."
         },
         "account": {
-            "length": "Your account name can't be longer than {length} characters.",
-            "empty": "You must use your latest account before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this account.",
-            "duplicate": "An account with this name already exists."
+            "length": "Nazwa konta nie może być dłuższa niż {length, plural, one {1 znak} few {# znaki} many {# znaków} other {# znaków}}.",
+            "empty": "Musisz użyć swojego ostatniego konta przed utworzeniem nowego.",
+            "notEmpty": "Musisz przenieść swoje środki przed usunięciem tego konta.",
+            "duplicate": "Konto o tej nazwie już istnieje."
         },
         "send": {
-            "addressLength": "Addresses should be {length} characters long.",
-            "amountTooHigh": "This is greater than your available balance.",
-            "amountNoFloat": "If units are `i` you cannot use decimal places.",
-            "amountInvalidFormat": "The amount appears to be an invalid number.",
-            "amountZero": "The amount must be greater than 0.",
-            "wrongAddressFormat": "Addresses start with the prefix {prefix}.",
-            "insufficientFunds": "This account has insufficient funds"
+            "addressLength": "Adresy powinny składać się z {length, plural, one {1 znaku} few {# znaków} many {# znaków} other {# znaków}}.",
+            "amountTooHigh": "To więcej niż Twoje dostępne saldo.",
+            "amountNoFloat": "Jeśli jednostki to \"i\", nie możesz użyć miejsc po przecinku.",
+            "amountInvalidFormat": "Wartość wydaje się być niepoprawna.",
+            "amountZero": "Wartość musi być większa niż 0.",
+            "wrongAddressFormat": "Adresy zaczynają się od prefiksu {prefix}.",
+            "insufficientFunds": "To konto nie posiada wystarczających środków"
         },
         "node": {
-            "invalid": "Please enter a valid URL.",
-            "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
-            "duplicate": "This node has already been added.",
-            "unsynced": "The node you are trying to add is not synced."
+            "invalid": "Wprowadź prawidłowy adres URL.",
+            "https": "HTTPS jest wymagany. Skonfiguruj profil dewelopera, aby używać niezabezpieczonych połączeń HTTP.",
+            "duplicate": "Ten serwer został już wcześniej dodany.",
+            "unsynced": "Serwer, który próbujesz dodać, nie jest zsynchronizowany."
         },
         "global": {
-            "generic": "Something went wrong."
+            "generic": "Coś poszło nie tak."
         },
         "backup": {
-            "invalid": "The backup file was not recognised.",
-            "destination": "The backup destination was not valid.",
-            "mnemonic": "The mnemonic is not valid.",
-            "seedTooShort": "The seed should be 81 characters long, it is {length}",
-            "seedCharacters": "The seed should only contain characters A-Z or 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}",
-            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase"
+            "invalid": "Plik kopii zapasowej nie został rozpoznany.",
+            "destination": "Miejsce docelowe kopii zapasowej nie jest prawidłowe.",
+            "mnemonic": "Mnemonik jest nieprawidłowy.",
+            "seedTooShort": "Seed powinien składać się z 81 znaków, ten ma {length, plural, one {1 znak} few {# znaki} many {# znaków} other {to #}}",
+            "seedCharacters": "Seed może składać się tylko z liter A-Z oraz cyfr 9",
+            "phraseWordCount": "We frazie odzyskiwania powinny znajdować się 24 słowa. Obecnie jest {length, plural, one {ono jedno} few {ich #} many {ich #} other {ich #}}",
+            "phraseUnrecognizedWord": "Nierozpoznane słowo \"{word}\" w Twojej frazie odzyskiwania"
         }
     }
 }

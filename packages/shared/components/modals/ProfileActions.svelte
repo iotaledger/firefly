@@ -2,9 +2,7 @@
     import { Icon, Modal, Text, HR } from 'shared/components'
     import { logout } from 'shared/lib/app'
     import { getInitials } from 'shared/lib/helpers'
-    import { showAppNotification } from 'shared/lib/notifications'
     import { activeProfile } from 'shared/lib/profile'
-    import { api } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
     import { fade } from 'svelte/transition'
 
@@ -21,17 +19,7 @@
         isActive = false
     }
     const handleLogoutClick = () => {
-        api.lockStronghold({
-            onSuccess() {
-                logout()
-            },
-            onError(err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error),
-                })
-            },
-        })
+        logout()
     }
 </script>
 

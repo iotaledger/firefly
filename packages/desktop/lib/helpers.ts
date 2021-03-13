@@ -16,6 +16,7 @@ export const getLocalisedMenuItems = (locale) => {
         security: locale('views.settings.security.title'),
         advancedSettings: locale('views.settings.advancedSettings.title'),
         errorLog: locale('views.settings.errorLog.title'),
+        diagnostics: locale('views.settings.diagnostics.title'),
         logout: locale('views.dashboard.profile_modal.logout'),
         hide: locale('actions.hide'),
         hideOthers: locale('actions.hideOthers'),

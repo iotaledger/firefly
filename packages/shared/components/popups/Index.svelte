@@ -1,18 +1,19 @@
 <script lang="typescript">
-    import { fade } from 'svelte/transition'
     import { Icon } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import QR from './QR.svelte'
-    import Password from './Password.svelte'
-    import Version from './Version.svelte'
-    import Backup from './Backup.svelte'
-    import DeleteAccount from './DeleteAccount.svelte'
-    import AddressHistory from './AddressHistory.svelte'
+    import { fade } from 'svelte/transition'
     import AddNode from './AddNode.svelte'
-    import RemoveNode from './RemoveNode.svelte'
+    import AddressHistory from './AddressHistory.svelte'
+    import Backup from './Backup.svelte'
     import Busy from './Busy.svelte'
-    import ErrorLog from './ErrorLog.svelte'
+    import DeleteAccount from './DeleteAccount.svelte'
     import DeleteProfile from './DeleteProfile.svelte'
+    import Diagnostics from './Diagnostics.svelte'
+    import ErrorLog from './ErrorLog.svelte'
+    import Password from './Password.svelte'
+    import QR from './QR.svelte'
+    import RemoveNode from './RemoveNode.svelte'
+    import Version from './Version.svelte'
 
     export let locale = 'en'
     export let type = undefined
@@ -33,6 +34,7 @@
         busy: Busy,
         errorLog: ErrorLog,
         deleteProfile: DeleteProfile,
+        diagnostics: Diagnostics,
     }
 
     const onkey = (e) => {

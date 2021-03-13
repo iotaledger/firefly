@@ -3,12 +3,11 @@
     import { logout, sendParams } from 'shared/lib/app'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { Electron } from 'shared/lib/electron'
-    import { showAppNotification } from 'shared/lib/notifications'
     import { activeProfile } from 'shared/lib/profile'
     import { dashboardRoute, routerNext } from 'shared/lib/router'
     import { Tabs } from 'shared/lib/typings/routes'
     import { parseDeepLink } from 'shared/lib/utils'
-    import { api } from 'shared/lib/wallet'
+    import { api, STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS } from 'shared/lib/wallet'
     import { Settings, Wallet } from 'shared/routes'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
@@ -22,21 +21,12 @@
     }
 
     onMount(() => {
+        api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
         Electron.DeepLinkManager.requestDeepLink()
         Electron.onEvent('deep-link-params', (data) => handleDeepLinkRequest(data))
 
         Electron.onEvent('menu-logout', () => {
-            api.lockStronghold({
-                onSuccess() {
-                    logout()
-                },
-                onError(err) {
-                    showAppNotification({
-                        type: 'error',
-                        message: locale(err.error),
-                    })
-                },
-            })
+            logout()
         })
     })
 

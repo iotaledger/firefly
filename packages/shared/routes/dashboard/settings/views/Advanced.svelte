@@ -155,6 +155,10 @@
     function handleErrorLogClick() {
         openPopup({ type: 'errorLog' })
     }
+
+    function handleDiagnosticsClick() {
+        openPopup({ type: 'diagnostics' })
+    }
 </script>
 
 <div>
@@ -223,6 +227,12 @@
         <Text type="h4" classes="mb-3">{locale('views.settings.errorLog.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.errorLog.description')}</Text>
         <Button classes="w-1/4" onClick={() => handleErrorLogClick()}>{locale('views.settings.errorLog.title')}</Button>
+    </section>
+    <HR classes="pb-5 mt-5 justify-center" />
+    <section id="diagnostics" class="w-3/4">
+        <Text type="h4" classes="mb-3">{locale('views.settings.diagnostics.title')}</Text>
+        <Text type="p" secondary classes="mb-5">{locale('views.settings.diagnostics.description')}</Text>
+        <Button classes="w-1/4" onClick={() => handleDiagnosticsClick()}>{locale('views.settings.diagnostics.title')}</Button>
     </section>
     <HR classes="pb-5 mt-5 justify-center" />
     <!-- TODO: Implemnet state export -->
