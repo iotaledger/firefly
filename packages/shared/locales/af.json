@@ -219,7 +219,7 @@
                 "description": ""
             },
             "diagnostics": {
-                "title": "Diagnostics",
+                "title": "Diagnostiek",
                 "description": ""
             },
             "stateExport": {
@@ -342,15 +342,12 @@
             "confirmation": "Is jy seker jy wil hierdie profiel uitvee? Hierdie bewerking kan nie ontdoen word nie."
         },
         "diagnostics": {
-            "title": "Diagnostics",
+            "title": "Diagnostiek",
             "node": "Node",
-            "language": "Node",
-            "currency": "Node",
             "platform": "Platform",
-            "platformVersion": "Platform Version",
-            "platformType": "Platform Type",
-            "platformArchitecture": "Platform Architecture",
-            "cpuCount": "CPU Count",
+            "platformVersion": "Platform weergawe",
+            "platformArchitecture": "Platformargitektuur",
+            "cpuCount": "CPU-telling",
             "totalMem": "Total Memory",
             "freeMem": "Free Memory",
             "userPath": "User Path"
@@ -545,7 +542,7 @@
         "restart_install": "Herbegin om te installeer",
         "calc_minutes_remaining": "Bereken oorblywende minute...",
         "minutes_remaining": "{minutes, plural, one {1 minuut oor} other {# minute oor}}",
-        "copied_to_clipboard": "Copied to clipboard"
+        "copied_to_clipboard": "Kopieer na knipbord"
     },
     "error": {
         "profile": {

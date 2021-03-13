@@ -219,7 +219,7 @@
                 "description": ""
             },
             "diagnostics": {
-                "title": "Diagnostics",
+                "title": "Diagnostiques",
                 "description": ""
             },
             "stateExport": {
@@ -342,18 +342,15 @@
             "confirmation": "Êtes-vous sûr de vouloir supprimer ce profil? Cette opération ne peut pas être annulée."
         },
         "diagnostics": {
-            "title": "Diagnostics",
-            "node": "Node",
-            "language": "Node",
-            "currency": "Node",
-            "platform": "Platform",
-            "platformVersion": "Platform Version",
-            "platformType": "Platform Type",
-            "platformArchitecture": "Platform Architecture",
-            "cpuCount": "CPU Count",
-            "totalMem": "Total Memory",
-            "freeMem": "Free Memory",
-            "userPath": "User Path"
+            "title": "Diagnostiques",
+            "node": "Noeud",
+            "platform": "Plateforme",
+            "platformVersion": "Version de la plateforme",
+            "platformArchitecture": "Architecture de la plateforme",
+            "cpuCount": "Nombre de CPUs",
+            "totalMem": "Mémoire totale",
+            "freeMem": "Mémoire disponible",
+            "userPath": "Chemin utilisateur"
         }
     },
     "charts": {
@@ -499,7 +496,7 @@
         "wallet": "Portefeuille",
         "help": "Aide",
         "you": "Vous",
-        "messageId": "Message ID",
+        "messageId": "ID du message",
         "input_address": "Adresses entrantes",
         "receive_address": "Adresse de réception",
         "date": "Date",
@@ -545,7 +542,7 @@
         "restart_install": "Redémarrer pour installer",
         "calc_minutes_remaining": "Calcul des minutes restantes...",
         "minutes_remaining": "{minutes, plural, one {Il reste 1 minute} other {# minutes restantes}}",
-        "copied_to_clipboard": "Copied to clipboard"
+        "copied_to_clipboard": "Copié dans le presse-papier"
     },
     "error": {
         "profile": {

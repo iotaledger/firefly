@@ -34,11 +34,11 @@
         "setup": {
             "title": "Настройте ваш кошелек",
             "body": "Вы можете создать новый кошелек или импортировать существующий.",
-            "profile_name": "Profile Name"
+            "profile_name": "Название профиля"
         },
         "password": {
             "title": "Придумайте пароль",
-            "body": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates."
+            "body": "Вам нужен надежный пароль для защиты ваших средств. Используйте комбинацию слов и избегайте распространенных фраз, имен или дат."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -65,12 +65,12 @@
             "body_1": "Внимательно запишите слова в точном порядке.",
             "body_2": "Держите вашу фразу восстановления в недоступном для других, безопасном месте. Не передавайте ее никому.",
             "reveal_recovery_phrase": "Показать фразу восстановлению",
-            "hide_recovery_phrase": "Hide recovery phrase"
+            "hide_recovery_phrase": "Скрыть восстановительную фразу"
         },
         "verify_recovery_phrase": {
             "title": "Проверьте фразу восстановления",
             "body": "Давайте проверим, что вы записали фразу правильно. Выберите слова в правильном порядке.",
-            "creating_account": "Creating account, please wait..."
+            "creating_account": "Создание аккаунта, пожалуйста, подождите..."
         },
         "backup_wallet": {
             "title": "Сделайте резервную копию в файл Stronghold",
@@ -344,11 +344,8 @@
         "diagnostics": {
             "title": "Diagnostics",
             "node": "Node",
-            "language": "Node",
-            "currency": "Node",
             "platform": "Platform",
             "platformVersion": "Platform Version",
-            "platformType": "Platform Type",
             "platformArchitecture": "Platform Architecture",
             "cpuCount": "CPU Count",
             "totalMem": "Total Memory",
