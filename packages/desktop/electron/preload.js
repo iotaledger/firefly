@@ -29,6 +29,15 @@ const Electron = {
             return result.filePaths[0]
         })
     },
+    exportStronghold: (defaultPath) => {
+        return ipcRenderer.invoke('show-save-dialog', { properties: ['createDirectory', 'showOverwriteConfirmation'], defaultPath }).then((result) => {
+            if (result.canceled) {
+                return null
+            }
+
+            return result.filePath
+        })
+    },
     /**
      * Gets directory for app's configuration files
      *

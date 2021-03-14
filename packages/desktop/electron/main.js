@@ -252,6 +252,9 @@ ipcMain.handle('keychain-remove', (_e, key) => {
 ipcMain.handle('show-open-dialog', (_e, options) => {
     return dialog.showOpenDialog(options)
 })
+ipcMain.handle('show-save-dialog', (_e, options) => {
+    return dialog.showSaveDialog(options)
+})
 
 // Miscellaneous
 ipcMain.handle('get-path', (_e, path) => {
