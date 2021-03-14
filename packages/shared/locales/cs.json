@@ -219,7 +219,7 @@
                 "description": ""
             },
             "diagnostics": {
-                "title": "Diagnostics",
+                "title": "Diagnostika",
                 "description": ""
             },
             "stateExport": {
@@ -342,18 +342,15 @@
             "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone."
         },
         "diagnostics": {
-            "title": "Diagnostics",
+            "title": "Diagnostika",
             "node": "Node",
-            "language": "Node",
-            "currency": "Node",
-            "platform": "Platform",
+            "platform": "Platforma",
             "platformVersion": "Platform Version",
-            "platformType": "Platform Type",
             "platformArchitecture": "Platform Architecture",
             "cpuCount": "CPU Count",
-            "totalMem": "Total Memory",
-            "freeMem": "Free Memory",
-            "userPath": "User Path"
+            "totalMem": "Celková paměť",
+            "freeMem": "Volná paměť",
+            "userPath": "Cesta uživatele"
         }
     },
     "charts": {
@@ -499,7 +496,7 @@
         "wallet": "Peněženka",
         "help": "Pomoc",
         "you": "Ty",
-        "messageId": "Message ID",
+        "messageId": "ID zprávy",
         "input_address": "Vstupní adresa",
         "receive_address": "Adresa příjemce",
         "date": "Datum",
@@ -545,7 +542,7 @@
         "restart_install": "Restartovat pro instalaci",
         "calc_minutes_remaining": "Výpočet zbývajících minut...",
         "minutes_remaining": "{minutes, plural, one {1 zbývající minuta} other {# zbývajících minut}}",
-        "copied_to_clipboard": "Copied to clipboard"
+        "copied_to_clipboard": "Zkopírováno do schránky"
     },
     "error": {
         "profile": {

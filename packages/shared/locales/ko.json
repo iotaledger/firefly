@@ -219,7 +219,7 @@
                 "description": ""
             },
             "diagnostics": {
-                "title": "Diagnostics",
+                "title": "진단",
                 "description": ""
             },
             "stateExport": {
@@ -342,18 +342,15 @@
             "confirmation": "이 프로필을 삭제 하시겠습니까? 이 작업은 되돌릴수 없습니다."
         },
         "diagnostics": {
-            "title": "Diagnostics",
-            "node": "Node",
-            "language": "Node",
-            "currency": "Node",
-            "platform": "Platform",
-            "platformVersion": "Platform Version",
-            "platformType": "Platform Type",
-            "platformArchitecture": "Platform Architecture",
-            "cpuCount": "CPU Count",
-            "totalMem": "Total Memory",
-            "freeMem": "Free Memory",
-            "userPath": "User Path"
+            "title": "진단",
+            "node": "노드",
+            "platform": "플랫폼",
+            "platformVersion": "플랫폼 버전",
+            "platformArchitecture": "플랫폼 구조",
+            "cpuCount": "CPU 수",
+            "totalMem": "전체 메모리",
+            "freeMem": "사용가능한 메모리",
+            "userPath": "사용자 경로"
         }
     },
     "charts": {
@@ -499,7 +496,7 @@
         "wallet": "지갑",
         "help": "도움말",
         "you": "나",
-        "messageId": "Message ID",
+        "messageId": "메시지 ID",
         "input_address": "주소 입력",
         "receive_address": "입금 주소",
         "date": "날짜",
@@ -545,7 +542,7 @@
         "restart_install": "재시작하여 설치",
         "calc_minutes_remaining": "남은 시간 계산중...",
         "minutes_remaining": "{minutes, plural, one {남은 시간 1분} other {남은 시간 #분}}",
-        "copied_to_clipboard": "Copied to clipboard"
+        "copied_to_clipboard": "클립보드에 복사되었습니다."
     },
     "error": {
         "profile": {

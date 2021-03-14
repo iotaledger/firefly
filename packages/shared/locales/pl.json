@@ -219,7 +219,7 @@
                 "description": ""
             },
             "diagnostics": {
-                "title": "Diagnostics",
+                "title": "Diagnostyka",
                 "description": ""
             },
             "stateExport": {
@@ -342,18 +342,15 @@
             "confirmation": "Czy na pewno chcesz usunąć ten profil? Tej operacji nie można cofnąć."
         },
         "diagnostics": {
-            "title": "Diagnostics",
-            "node": "Node",
-            "language": "Node",
-            "currency": "Node",
-            "platform": "Platform",
-            "platformVersion": "Platform Version",
-            "platformType": "Platform Type",
-            "platformArchitecture": "Platform Architecture",
-            "cpuCount": "CPU Count",
-            "totalMem": "Total Memory",
-            "freeMem": "Free Memory",
-            "userPath": "User Path"
+            "title": "Diagnostyka",
+            "node": "Serwer",
+            "platform": "Platforma",
+            "platformVersion": "Wersja platformy",
+            "platformArchitecture": "Architektura platformy",
+            "cpuCount": "Liczba procesorów",
+            "totalMem": "Pamięć calkowita",
+            "freeMem": "Wolna pamięć",
+            "userPath": "Ścieżka użytkownika"
         }
     },
     "charts": {
@@ -499,7 +496,7 @@
         "wallet": "Portfel",
         "help": "Pomoc",
         "you": "Ty",
-        "messageId": "Message ID",
+        "messageId": "ID wiadomości",
         "input_address": "Adres wejściowy",
         "receive_address": "Adres odbiorczy",
         "date": "Data",
@@ -545,7 +542,7 @@
         "restart_install": "Uruchom ponownie, aby zainstalować",
         "calc_minutes_remaining": "Obliczanie pozostałych minut...",
         "minutes_remaining": "{minutes, plural, one {pozostała 1 minuta} few {pozostały # minuty} many {pozostało # minut} other {pozostało # minut}}",
-        "copied_to_clipboard": "Copied to clipboard"
+        "copied_to_clipboard": "Skopiowano do schowka"
     },
     "error": {
         "profile": {

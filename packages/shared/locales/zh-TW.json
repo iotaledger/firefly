@@ -344,11 +344,8 @@
         "diagnostics": {
             "title": "Diagnostics",
             "node": "Node",
-            "language": "Node",
-            "currency": "Node",
             "platform": "Platform",
             "platformVersion": "Platform Version",
-            "platformType": "Platform Type",
             "platformArchitecture": "Platform Architecture",
             "cpuCount": "CPU Count",
             "totalMem": "Total Memory",
