@@ -7,6 +7,7 @@
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { PIN_LENGTH } from 'shared/lib/utils'
     import { api, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
+    import { getDefaultStrongholdName } from "shared/lib/utils";
     import { get } from 'svelte/store'
     import zxcvbn from 'zxcvbn'
 
@@ -92,7 +93,7 @@
     }
 
     function exportStronghold(callback?: (cancelled: boolean, err?: string) => void) {
-        Electron.getStrongholdBackupDestination()
+        Electron.exportStronghold(getDefaultStrongholdName())
             .then((result) => {
                 if (result) {
                     api.backup(result, {

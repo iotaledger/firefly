@@ -9,6 +9,7 @@
     import { get } from 'svelte/store'
     import { Backup, BackupToFile, RecoveryPhrase, Success, VerifyRecoveryPhrase } from './views/'
     import { showAppNotification } from 'shared/lib/notifications'
+    import { getDefaultStrongholdName } from "shared/lib/utils";
 
     export let locale
     export let mobile
@@ -56,7 +57,7 @@
                             },
                         })
                     })
-                        .then(() => Electron.getStrongholdBackupDestination())
+                        .then(() => Electron.exportStronghold(getDefaultStrongholdName()))
                         .then((result) => {
                             if (result) {
                                 return new Promise<void>((res, rej) => {

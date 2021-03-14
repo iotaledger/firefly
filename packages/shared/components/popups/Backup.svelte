@@ -7,6 +7,7 @@
     import { api } from 'shared/lib/wallet'
     import { date } from 'svelte-i18n'
     import { showAppNotification } from 'shared/lib/notifications'
+    import { getDefaultStrongholdName } from 'shared/lib/utils';
 
     export let locale
     export let lastBackupDate
@@ -28,7 +29,7 @@
     }
 
     function triggerBackup() {
-        Electron.getStrongholdBackupDestination()
+        Electron.exportStronghold(getDefaultStrongholdName())
             .then((result) => {
                 if (result) {
                     api.backup(result, {
