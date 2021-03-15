@@ -2,6 +2,7 @@ import { AvailableExchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
 import { DEFAULT_NODE } from 'shared/lib/network'
 import { generateRandomId } from 'shared/lib/utils'
+import { api } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
 import { Electron } from './electron'
 import type { Node } from './typings/client'
@@ -103,6 +104,7 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
     }
 
     newProfile.set(profile)
+    activeProfileId.set(null)
 
     return profile
 }
@@ -115,7 +117,18 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
  * @returns {void}
  */
 export const disposeNewProfile = (): void => {
+    const np = get(newProfile)
+    if (np) {
+        api.removeAccount(np.id, {
+            onSuccess() {
+            },
+            onError(err) {
+                console.error(err)
+            },
+        })
+    }
     newProfile.set(null)
+    activeProfileId.set(null)
 }
 
 /**
