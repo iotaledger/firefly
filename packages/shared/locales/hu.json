@@ -1,29 +1,29 @@
 {
     "views": {
-        "onboarding_1": {
+        "onboarding1": {
             "title": "Küldje, fogadja és kezelje IOTA tokenjeit",
             "body": "A Firefly egy biztonságos és könnyen kezelhető IOTA tárca."
         },
         "legal": {
             "title": "Jogi nyilatkozat",
             "body": "Kérjük, olvassa el az Adatvédelmi szabályzatot és a Felhasználási feltételeket!",
-            "privacy_policy": {
+            "privacyPolicy": {
                 "title": "Adatvédelmi Szabályzat",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "terms_of_service": {
+            "termsOfService": {
                 "title": "Általános Szolgáltatási Feltételek",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
@@ -34,48 +34,49 @@
         "setup": {
             "title": "Állítsa be tárcáját",
             "body": "Létrehozhat egy új kriptotárcát vagy importálhat egy létező tárcát.",
-            "profile_name": "Profilnév"
+            "profileName": "Profilnév"
         },
         "password": {
             "title": "Jelszó létrehozása",
-            "body": "A számlájáról való utaláshoz szüksége van jelszóra. Vagyonának biztonsága érdekében erős jelszót használjon."
+            "body": "Erős jelszó szükséges számlája védelmében. Használja szavak kombinációját és kerülje az általános kifejezéseket, neveket vagy dátumokat."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body_2": "Keep your PIN safe!"
+            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
+            "body2": "Keep your PIN safe!"
         },
         "pin": {
             "title": "PIN-kód beállítása",
-            "body_1": "Adjon meg egy 6 számjegyű PIN kódot! A PIN kódra a tárcába való belépéshez lesz szüksége.",
-            "body_2": "Csak számokat használhat."
+            "body1": "Adjon meg egy 6 számjegyű PIN-kódot! A PIN-kódra a tárcába való belépéshez lesz szüksége.",
+            "body2": "Csak számokat használhat."
         },
-        "confirm_pin": {
-            "title": "Erősítse meg a PIN kódját",
-            "body": "A folytatáshoz adja meg újból a PIN kódját!"
+        "confirmPin": {
+            "title": "Hitelesítse a PIN-kódját",
+            "body": "A folytatáshoz adja meg újból a PIN-kódját!"
         },
         "backup": {
             "title": "Készítsen biztonsági másolatot tárcájáról",
-            "body_1": "Most meg fognak jelenni a számla helyreállításához szükséges szavak.",
-            "body_2": "Soha senkivel ne ossza meg ezeket a helyreállítási szavakat! A helyreállítási szavak ismeretében bárki hozzáférhet a számlaegyenlegéhez.",
-            "body_3": "Ha elveszti a helyreállítási szavakat, örökre elveszítheti számlájának teljes egyenlegét."
+            "body1": "Most meg fognak jelenni a számla helyreállításához szükséges szavak.",
+            "body2": "Soha senkivel ne ossza meg ezeket a helyreállítási szavakat! A helyreállítási szavak ismeretében bárki hozzáférhet a számlaegyenlegéhez.",
+            "body3": "Ha elveszti a helyreállítási szavakat, örökre elveszítheti számlájának teljes egyenlegét."
         },
-        "recovery_phrase": {
+        "recoveryPhrase": {
             "title": "Helyreállítási szavak",
-            "body_1": "Különös figyelemmel jegyezze fel a szavakat azok pontos sorrendjében!",
-            "body_2": "Mindig őrizze a helyreállítási szavakat titkos és biztonságos helyen! Soha senkivel ne ossza meg!",
-            "reveal_recovery_phrase": "Helyreállítási szavak megjelenítése",
-            "hide_recovery_phrase": "Helyreállítási szavak elrejtése"
+            "body1": "Különös figyelemmel jegyezze fel a szavakat azok pontos sorrendjében!",
+            "body2": "Mindig őrizze a helyreállítási szavakat titkos és biztonságos helyen! Soha senkivel ne ossza meg!",
+            "revealRecoveryPhrase": "Helyreállítási szavak megjelenítése",
+            "hideRecoveryPhrase": "Helyreállítási szavak elrejtése"
         },
-        "verify_recovery_phrase": {
+        "verifyRecoveryPhrase": {
             "title": "Helyreállítási szavak ellenőrzése",
-            "body": "Most ellenőrizzük, hogy helyesen jegyezte-e fel a helyreállítási szavakat. Válassza ki a szavakat a megfelelő sorrendben!"
+            "body": "Most ellenőrizzük, hogy helyesen jegyezte-e fel a helyreállítási szavakat. Válassza ki a szavakat a megfelelő sorrendben!",
+            "creatingAccount": "Creating account, please wait..."
         },
-        "backup_wallet": {
+        "backupWallet": {
             "title": "Stronghold biztonsági mentés",
             "body": "Tárcája Stronghold-ba történő mentéséhez adja meg a jelszavát! A jelszava a biztonsági mentés titkosítására szolgál."
         },
-        "recovery_phrase_saved": {
+        "recoveryPhraseSaved": {
             "title": "Sikeres biztonsági mentés",
             "body": "Tárcájáról sikeres biztonsági mentést készített a Stronghold-ba."
         },
@@ -87,33 +88,35 @@
             "title": "Tárca importálása",
             "body": "Ha rendelkezik helyreállítási szavakkal vagy Stronghold biztonsági mentéssel, itt importálhatja azokat."
         },
-        "import_from_text": {
+        "importFromText": {
             "title": "Állítsa vissza tárcáját helyreállítási szavak vagy seed használatával",
-            "body_1": "A helyreállítási szavak 24 szóból állnak. Ezekkel lehet egy már meglévő Firefly tárcát visszaállítani.",
-            "body_2": "A seed 81 karakterből áll. Régebbi, Trinity tárcából történő helyreállításra szolgál.",
-            "body_3": "Írja be a seed-et vagy a helyreállítási szavakat"
+            "body1": "A helyreállítási szavak 24 szóból állnak. Ezekkel lehet egy már meglévő Firefly tárcát visszaállítani.",
+            "body2": "A seed 81 karakterből áll. Régebbi, Trinity tárcából történő helyreállításra szolgál.",
+            "body3": "Írja be a seed-et vagy a helyreállítási szavakat",
+            "seedDetected": "81 karakterből álló seed észlelve",
+            "phraseDetected": "24 word phrase detected"
         },
-        "import_from_file": {
+        "importFromFile": {
             "title": "Állítsa helyre tárcáját biztonsági mentésből",
             "body": "Tárcáját importálhatja egy meglévő biztonsági mentésből, mely lehet Stronghold (.stronghold) vagy Trinity SeedVault (.kdbx)."
         },
-        "import_backup_password": {
+        "importBackupPassword": {
             "title": "Állítsa helyre kriptotárcáját SeedVault- vagy Stronghold-fájlból",
-            "body_1": "Kérjük, adja meg a biztonsági mentés titkosításának feloldására szolgáló jelszavát!",
-            "body_2": "Ez az a jelszó, amelyet a biztonsági mentés első létrehozásakor adott meg."
+            "body1": "Kérjük, adja meg a biztonsági mentés titkosításának feloldására szolgáló jelszavát!",
+            "body2": "Ez az a jelszó, amelyet a biztonsági mentés első létrehozásakor adott meg."
         },
-        "import_success": {
+        "importSuccess": {
             "title": "Sikeresen helyreállította tárcáját a biztonsági mentésből",
             "body": "Most már beállíthatja tárcáját."
         },
         "migrate": {
             "title": "Egyenleg átvezetése",
-            "body_1": "Ez egy automatizált folyamat, melynek során egyenlegét átvezetjük új tárcájába. Ellenőrizni fogjuk, van-e olyan számlacímén egyenleg, amelyről már indított korábban utalást. Az ilyen számlacímek csökkentik az Ön tárcájának biztonságát.",
-            "body_2": "Ez hosszabb időt vehet igénybe. Ne kapcsolja ki az eszközét, amíg az átvezetés be nem fejeződik.",
+            "body1": "Ez egy automatizált folyamat, melynek során egyenlegét átvezetjük új tárcájába. Ellenőrizni fogjuk, van-e olyan címén egyenleg, amelyről már indított korábban utalást. Az ilyen címek csökkentik az Ön tárcájának biztonságát.",
+            "body2": "Ez hosszabb időt vehet igénybe. Ne kapcsolja ki az eszközét, amíg az átvezetés be nem fejeződik.",
             "existing": "Régi tárca",
             "new": "Új tárca"
         },
-        "migrate_failed": {
+        "migrateFailed": {
             "title": "To do",
             "body": "To do"
         },
@@ -176,19 +179,19 @@
                 "description": ""
             },
             "changePincode": {
-                "title": "PIN kód megváltoztatása",
+                "title": "PIN-kód megváltoztatása",
                 "description": "",
-                "currentPincode": "Jelenlegi PIN kód",
-                "newPincode": "Új PIN kód",
-                "confirmNewPincode": "Új PIN kód megerősítése",
-                "action": "PIN kód módosítása"
+                "currentPincode": "Jelenlegi PIN-kód",
+                "newPincode": "Új PIN-kód",
+                "confirmNewPincode": "Új PIN-kód megerősítése",
+                "action": "PIN-kód módosítása"
             },
             "resyncAccounts": {
                 "title": "Számlák újraszinkronizálása",
                 "description": ""
             },
-            "resetWallet": {
-                "title": "Tárca gyári állapotának visszaállítása",
+            "deleteProfile": {
+                "title": "Profil törlése",
                 "description": ""
             },
             "deepLinks": {
@@ -213,6 +216,10 @@
             },
             "errorLog": {
                 "title": "Hibanapló",
+                "description": ""
+            },
+            "diagnostics": {
+                "title": "Diagnostics",
                 "description": ""
             },
             "stateExport": {
@@ -241,40 +248,40 @@
             }
         },
         "login": {
-            "please_wait": "Kérjük várjon {time, plural, one {1 másodpercet} other {# másodpercet}}",
-            "incorrect_attempts": "{attempts, plural, one {1 hibás próbálkozás} other {# hibás próbálkozás}}"
+            "pleaseWait": "Kérjük várjon {time, plural, one {1 másodpercet} other {# másodpercet}}",
+            "incorrectAttempts": "{attempts, plural, one {1 hibás próbálkozás} other {# hibás próbálkozás}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "up_to_date": "Naprakész",
-                    "out_of_date": "Elavult"
+                    "upToDate": "Naprakész",
+                    "outOfDate": "Elavult"
                 },
-                "hardware_device": {
+                "hardwareDevice": {
                     "title": "Hardver eszköz",
-                    "none_detected": "Nincs találat"
+                    "noneDetected": "Nincs találat"
                 },
-                "stronghold_status": {
+                "strongholdStatus": {
                     "title": "Stronghold állapota",
                     "locked": "Zárolva",
                     "unlocked": "Feloldva"
                 },
-                "stronghold_backup": {
+                "strongholdBackup": {
                     "title": "Stronghold biztonsági mentés",
-                    "weeks_ago": "{weeks, plural, one {# héttel} other {# héttel}} ezelőtt"
+                    "weeksAgo": "{weeks, plural, one {# héttel} other {# héttel}} ezelőtt"
                 }
             },
             "network": {
-                "network_operational": "Hálózat elérhető",
-                "network_degraded": "Hálózati problémák",
-                "network_down": "Nincs hálózati kapcsolat",
+                "networkOperational": "Hálózat elérhető",
+                "networkDegraded": "Hálózati problémák",
+                "networkDown": "Nincs hálózati kapcsolat",
                 "status": "Állapot",
-                "messages_per_second": "Üzenet / másodperc",
-                "confirmation_rate": "Visszaigazolási arány"
+                "messagesPerSecond": "Üzenet / másodperc",
+                "confirmationRate": "Visszaigazolási arány"
             },
-            "profile_modal": {
-                "all_settings": "Összes beállítás",
+            "profileModal": {
+                "allSettings": "Összes beállítás",
                 "logout": "Kijelentkezés"
             }
         }
@@ -285,44 +292,74 @@
             "subtitle": "Adja meg a tárcája jelszavát a Stronghold feloldásához"
         },
         "qr": {
-            "title": "QR kód"
+            "title": "QR-kód"
         },
         "version": {
             "title": "Jelenlegi verzió: {version}",
-            "up_to_date_title": "Firefly naprakész",
-            "up_to_date_description": "Ön a Firefly legújabb és legbiztonságosabb verzióját használja.",
-            "update_available": "Firefly frissítés elérhető",
-            "update_details": "Verzió {version} - {date}"
+            "upToDateTitle": "Firefly naprakész",
+            "upToDateDescription": "Ön a Firefly legújabb és legbiztonságosabb verzióját használja.",
+            "updateAvailable": "Firefly frissítés elérhető",
+            "updateDetails": "Verzió {version} - {date}"
         },
         "backup": {
             "title": "Utolsó biztonsági mentés: {date}",
-            "last_backup": "Utolsó biztonsági mentés ideje: {date}",
-            "backup_description": "Fontos a rendszeres biztonsági mentés, hogy számláiról és tranzakcióiról legyen másolata.",
-            "backup_warning": "Ha elveszíti a biztonsági mentést és a helyreállítási szavakat, többé nem tud a számlájához hozzáférni.",
-            "not_backed_up": "Nincs biztonsági mentés",
-            "not_backed_up_description": "Nem készült még Stronghold biztonsági mentés"
+            "lastBackup": "Utolsó biztonsági mentés ideje: {date}",
+            "backupDescription": "Fontos a rendszeres biztonsági mentés, hogy számláiról és tranzakcióiról legyen másolata.",
+            "backupWarning": "Ha elveszíti a biztonsági mentést és a helyreállítási szavakat, többé nem tud a számlájához hozzáférni.",
+            "notBackedUp": "Nincs biztonsági mentés",
+            "notBackedUpDescription": "Nem készült még Stronghold biztonsági mentés"
         },
-        "delete_account": {
+        "deleteAccount": {
             "title": "{name} törlése?",
             "body": "Végleg elveszíti a tranzakciós naplót és talán más adatokat is.",
-            "type_password": "Írja be tárcája jelszavát a megerősítéshez.",
-            "delete_account": "Számla törlése",
-            "error_title": "{name} nem törölhető",
-            "error_body_1": "Számlája addig nem törölhető, amíg egyenlege nem nulla.",
-            "error_body_2": "Jelenleg {balance} maradt a számláján. Kérjük, küldje át ezt az összeget egy másik számlára, majd próbálja újra."
+            "typePassword": "Írja be tárcája jelszavát a megerősítéshez.",
+            "deleteAccount": "Számla törlése",
+            "errorTitle": "{name} nem törölhető",
+            "errorBody1": "Számlája addig nem törölhető, amíg egyenlege nem nulla.",
+            "errorBody2": "Jelenleg {balance} maradt a számláján. Kérjük, küldje át ezt az összeget egy másik számlára, majd próbálja újra.",
+            "errorBody3": "You cannot delete this account, you must have at least one."
         },
-        "address_history": {
+        "addressHistory": {
             "title": "{name} számla címeinek előzménye",
-            "current_balance": "Aktuális egyenleg: {balance}"
+            "currentBalance": "Aktuális egyenleg: {balance}"
         },
         "node": {
-            "title_add": "Csomópont hozzáadása",
-            "title_details": "Csomópont adatai",
-            "node_address": "Csomópont címe",
-            "optional_username": "Felhasználónév (nem kötelező)",
-            "optional_password": "Jelszó (nem kötelező)",
-            "set_as_primary_node": "Beállítás elsődleges csomópontként"
+            "titleAdd": "Csomópont hozzáadása",
+            "titleRemove": "Remove a node",
+            "titleDetails": "Csomópont adatai",
+            "nodeAddress": "Node címe",
+            "optionalUsername": "Felhasználónév (nem kötelező)",
+            "optionalPassword": "Jelszó (nem kötelező)",
+            "setAsPrimaryNode": "Beállítás elsődleges csomópontként",
+            "removeConfirmation": "Are you sure you want to remove this node?"
+        },
+        "errorLog": {
+            "title": "Hibanapló",
+            "empty": "The error log is empty."
+        },
+        "deleteProfile": {
+            "title": "Profil törlése",
+            "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone."
+        },
+        "diagnostics": {
+            "title": "Diagnostics",
+            "node": "Node",
+            "platform": "Platform",
+            "platformVersion": "Platform Version",
+            "platformArchitecture": "Platform Architecture",
+            "cpuCount": "CPU Count",
+            "totalMem": "Total Memory",
+            "freeMem": "Free Memory",
+            "userPath": "User Path"
         }
+    },
+    "charts": {
+        "incomingMi": "Incoming {value} Mi",
+        "outgoingMi": "Outgoing {value} Mi",
+        "portoflio": "Portfolio",
+        "token": "Token",
+        "accountValue": "Account Value",
+        "accountActivity": "Account Activity"
     },
     "actions": {
         "continue": "Tovább",
@@ -331,32 +368,32 @@
         "close": "Bezár",
         "dismiss": "Elvet",
         "save": "Mentés",
-        "import_seed": "Meglévő seed importálása",
-        "import_wallet": "Meglévő tárca importálása",
-        "create_wallet": "Új tárca létrehozása",
-        "save_password": "Jelszó mentése",
-        "use_biometric": "Biometrikus azonosítás használata",
-        "setup_pin": "PIN kód létrehozása",
-        "set_pin": "Állítsa be a PIN kódot",
-        "confirm_pin": "Erősítse meg a PIN kódot",
-        "enter_your_pin": "Írja be a PIN kódot",
-        "save_backup_file": "Biztonsági mentés készítése",
-        "ive_written_recovery_phrase": "Feljegyeztem a helyreállítási szavakat",
-        "verify_recovery_phrase": "Helyreállítási szavak ellenőrzése",
-        "reveal_recovery_phrase": "Helyreállítási szavak megjelenítése",
-        "import_seedvault": "SeedVault importálása",
-        "check_again": "Helytelen, ellenőrizze újra",
-        "import_from_file": "Importálás fájlból",
+        "importSeed": "Meglévő seed importálása",
+        "importWallet": "Meglévő tárca importálása",
+        "createWallet": "Új tárca létrehozása",
+        "savePassword": "Jelszó mentése",
+        "useBiometric": "Biometrikus azonosítás használata",
+        "setupPin": "PIN-kód létrehozása",
+        "setPin": "Állítsa be a PIN-kódot",
+        "confirmPin": "Erősítse meg a PIN-kódot",
+        "enterYourPin": "Írja be a PIN-kódot",
+        "saveBackupFile": "Biztonsági mentés készítése",
+        "iveWrittenRecoveryPhrase": "Feljegyeztem a helyreállítási szavakat",
+        "verifyRecoveryPhrase": "Helyreállítási szavak ellenőrzése",
+        "revealRecoveryPhrase": "Helyreállítási szavak megjelenítése",
+        "importSeedvault": "SeedVault importálása",
+        "checkAgain": "Helytelen, ellenőrizze újra",
+        "importFromFile": "Importálás fájlból",
         "send": "Küldés",
         "receive": "Fogadás",
         "create": "Létrehozás",
-        "begin_transfer": "Tranzakció indítása",
-        "try_again": "Újrapróbálkozás",
-        "visit_discord": "Discord-csatorna meglátogatása",
-        "drag_drop": "Fogd és vidd",
-        "import_extentions": ".stronghold- vagy .kdbx-fájl",
-        "choose_file": "Válasszon egy fájlt",
-        "drop_here": "Húzza ide a fájlt",
+        "beginTransfer": "Tranzakció indítása",
+        "tryAgain": "Újrapróbálkozás",
+        "visitDiscord": "Discord-csatorna meglátogatása",
+        "dragDrop": "Fogd és vidd",
+        "importExtentions": ".stronghold- vagy .kdbx-fájl",
+        "chooseFile": "Válasszon egy fájlt",
+        "dropHere": "Húzza ide a fájlt",
         "syncAll": "Összes szinkronizálása",
         "export": "Exportálás",
         "exportNewStronghold": "Stronghold-fájl exportálása",
@@ -366,76 +403,81 @@
         "exportState": "Állapot exportálása",
         "outsourceProofOfWork": "Kiszabott munka kiszervezése",
         "unlock": "Felold",
-        "update_firefly": "Firefly frissítése",
-        "restart_now": "Újraindítás most",
-        "save_backup": "Biztonsági mentés készítése",
-        "customize_account": "Számla személyre szabása",
-        "sync_account": "Számla szinkronizálása",
-        "view_address_history": "Címek előzményeinek megjelenítése",
-        "delete_account": "Számla törlése",
+        "updateFirefly": "Firefly frissítése",
+        "restartNow": "Újraindítás most",
+        "saveBackup": "Biztonsági mentés készítése",
+        "customizeAcount": "Customise account",
+        "viewAddressHistory": "Címek előzményeinek megjelenítése",
+        "deleteAccount": "Számla törlése",
         "max": "Maximum",
-        "add_node": "Csomópont hozzáadása",
-        "hide": "Hide",
-        "hideOthers": "Hide Others",
-        "showAll": "Show All",
-        "quit": "Quit",
-        "edit": "Edit",
-        "undo": "Undo",
-        "redo": "Redo",
-        "cut": "Cut",
-        "copy": "Copy",
-        "paste": "Paste",
-        "selectAll": "Select All",
-        "addAccount": "Add Account",
-        "checkForUpdates": "Check for Updates",
-        "reportAnIssue": "Report an Issue"
+        "addNode": "Csomópont hozzáadása",
+        "removeNode": "Remove node",
+        "hide": "Elrejt",
+        "hideOthers": "Többi elrejtése",
+        "showAll": "Összes megjelenítése",
+        "quit": "Kilépés",
+        "edit": "Szerkesztés",
+        "undo": "Visszavonás",
+        "redo": "Újra",
+        "cut": "Kivágás",
+        "copy": "Másolás",
+        "paste": "Beillesztés",
+        "selectAll": "Összes kiválasztása",
+        "addAccount": "Számla hozzáadása",
+        "checkForUpdates": "Frissítések keresése",
+        "reportAnIssue": "Hiba jelentése",
+        "clear": "Clear",
+        "hideDetails": "Hide Details",
+        "yes": "Igen",
+        "no": "Nem",
+        "reset": "Reset"
     },
     "general": {
         "password": "Jelszó",
-        "confirm_password": "Jelszó megerősítése",
+        "confirmPassword": "Jelszó megerősítése",
         "currentPassword": "Jelenlegi jelszó",
         "newPassword": "Új jelszó",
         "confirmNewPassword": "Új jelszó megerősítése",
-        "your_seed": "Seed",
-        "recovery_phrase": "Helyreállítási szavak",
-        "recent_activity": "Legutóbbi tevékenységek",
+        "yourSeed": "Seed",
+        "recoveryPhrase": "Helyreállítási szavak",
+        "recentActivity": "Legutóbbi tevékenységek",
         "sent": "Elküldött",
         "received": "Fogadott",
-        "send_payment": "Összeg küldése",
-        "move_funds": "Egyenlegátvezetés",
-        "send_funds": "Küldés számlára",
-        "send_to_address": "Küldés címre",
-        "scan_qr_or_paste": "QR kód beolvasása vagy számlacím beillesztése",
-        "move_funds_between_accounts": "Egyenleg átvezetése számlák között",
-        "send_tokens_to_address": "Tokenek küldése egy címre",
-        "manage_account": "Számla kezelése",
-        "customize_account": "Számla személyre szabása",
+        "sendPayment": "Összeg küldése",
+        "moveFunds": "Egyenlegátvezetés",
+        "sendFunds": "Küldés számlára",
+        "sendToAddress": "Küldés címre",
+        "scanQrOrPaste": "QR-kód beolvasása vagy cím beillesztése",
+        "moveFundsBetweenAccounts": "Egyenleg átvezetése számlák között",
+        "sendTokensToAddress": "Tokenek küldése egy címre",
+        "manageAccount": "Számla kezelése",
+        "customizeAcount": "Customize your account",
         "account": "Számla",
-        "sending_to_address": "Küldés számlacímre",
+        "sendingToAddress": "Küldés címre",
         "amount": "Összeg",
-        "add_address": "Cím hozzáadása",
+        "addAddress": "Cím hozzáadása",
         "reference": "Hivatkozás",
         "from": "Feladó",
         "to": "Címzett",
-        "receive_funds": "Pénz fogadása",
-        "my_address": "Címem",
-        "share_address": "Cím megosztása",
-        "your_address": "Az Ön címe",
-        "generate_new_address": "Új cím létrehozása",
-        "copy_address": "Cím másolása",
-        "have_text_backup": "Szöveges biztonsági mentésem van",
-        "have_file_backup": "Biztonsági mentésfájlom van",
-        "enter_seed_or_phrase": "Írja be a helyreállítási szavakat vagy a seed-et",
-        "upload_seedvault_or_stronghold": "Stronghold- vagy SeedVault-fájl importálása",
+        "receiveFunds": "Pénz fogadása",
+        "myAddress": "Címem",
+        "shareAddress": "Cím megosztása",
+        "yourAddress": "Az Ön címe",
+        "generateNewAddress": "Új cím létrehozása",
+        "copyAddress": "Cím másolása",
+        "haveTextBackup": "Szöveges biztonsági mentésem van",
+        "haveFileBackup": "Biztonsági mentésfájlom van",
+        "enterSeedOrPhrase": "Írja be a helyreállítási szavakat vagy a seed-et",
+        "uploadSeedvaultOrStronghold": "Stronghold- vagy SeedVault-fájl importálása",
         "import": "Importálás",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Nyelv",
         "appearance": "Megjelenés",
-        "light_theme": "Világos téma",
-        "dark_theme": "Sötét téma",
-        "total_balance": "Összesített egyenleg",
-        "account_balance": "Számlaegyenleg",
+        "lightTheme": "Világos téma",
+        "darkTheme": "Sötét téma",
+        "totalBalance": "Összesített egyenleg",
+        "accountBalance": "Számlaegyenleg",
         "incoming": "Bejövő",
         "outgoing": "Kimenő",
         "accounts": "Számlák",
@@ -444,34 +486,123 @@
         "profiles": "Profilok",
         "developerProfile": "Fejlesztői profil",
         "dev": "Fejlesztő",
-        "create_account": "Számla létrehozása",
-        "account_name": "Számla neve",
-        "latest_transactions": "Legutóbbi tranzakciók",
+        "createAccount": "Számla létrehozása",
+        "accountName": "Számla neve",
+        "latestTransactions": "Legutóbbi tranzakciók",
         "transactions": "Tranzakciók",
         "security": "Biztonság",
-        "account_address": "Számla címe",
+        "accountAddress": "Számla címe",
         "nodes": "Csomópontok",
-        "wallet": "Wallet",
-        "help": "Help",
-        "no_accounts": "You have no accounts, please create one.",
-        "add_profile": "Add Profile"
+        "wallet": "Tárca",
+        "help": "Segítség",
+        "you": "Ön",
+        "messageId": "Message ID",
+        "inputAddress": "Input Address",
+        "receiveAddress": "Receive Address",
+        "date": "Dátum",
+        "noAccounts": "Még nincsen számlája, kérjük hozzon létre egyet.",
+        "loadingAccounts": "Betöltés, kérem várjon...",
+        "addProfile": "Profil hozzáadása",
+        "noRecentHistory": "No recent history",
+        "transferSyncing": "Syncing account",
+        "transferSelectingInputs": "Selecting inputs",
+        "transferRemainderAddress": "Generating remainder deposit address",
+        "transferSigning": "Signing the transaction",
+        "transferPow": "Performing PoW",
+        "transferBroadcasting": "Broadcasting transaction",
+        "transferComplete": "Transfer complete",
+        "creatingAccount": "Creating account, please wait...",
+        "updatingAccount": "Updating account, please wait...",
+        "accountSyncing": "Account is syncing",
+        "accountSyncComplete": "Account sync complete",
+        "passwordUpdating": "Updating password...",
+        "passwordSuccess": "Updated password successfully",
+        "passwordFailed": "Updating password failed",
+        "exportingStronghold": "Exporting stronghold...",
+        "exportingStrongholdSuccess": "Exported stronghold successfully",
+        "exportingStrongholdFailed": "Exported stronghold failed",
+        "pinCodeUpdating": "PIN-kód frissítése...",
+        "pinCodeSuccess": "A PIN-kód sikeresen frissítve",
+        "pinCodeFailed": "A PIN-kód frissítése sikertelen"
     },
     "dates": {
         "today": "Ma",
-        "days_ago": "{time, plural, one {# nappal} other {# nappal}} ezelőtt",
-        "weeks_ago": "{time, plural, one {# héttel} other {# héttel}} ezelőtt",
-        "months_ago": "{time, plural, one {# hónappal} other {# hónappal}} ezelőtt",
-        "years_ago": "{time, plural, one {# évvel} other {# évvel}} ezelőtt"
+        "daysAgo": "{time, plural, one {# nappal} other {# nappal}} ezelőtt",
+        "weeksAgo": "{time, plural, one {# héttel} other {# héttel}} ezelőtt",
+        "monthsAgo": "{time, plural, one {# hónappal} other {# hónappal}} ezelőtt",
+        "yearsAgo": "{time, plural, one {# évvel} other {# évvel}} ezelőtt"
     },
     "notifications": {
         "valueTx": "{{value}} érkezik a(z) {{account}} számlájára",
         "confirmed": "{{value}} sikeresen elküldve a(z) {{account}} számlájáról",
         "failed": "{{value}} elküldése a(z) {{account}} számlájáról sikertelen",
-        "downloading_update": "Frissítések letöltése",
-        "update_ready": "A frissítés készen áll",
-        "update_error": "Hiba történt a frissítés közben. Kérjük, próbálja újra!",
-        "restart_install": "Újraindítás a telepítés elvégzéséhez",
-        "calc_minutes_remaining": "Hátralévő idő kiszámítása...",
-        "minutes_remaining": "{minutes, plural,one {perc van hátra}other {perc van hátra}}"
+        "downloadingUpdate": "Frissítések letöltése",
+        "updateReady": "A frissítés készen áll",
+        "updateError": "Hiba történt a frissítés közben. Kérjük, próbálja újra!",
+        "restartInstall": "Újraindítás a telepítés elvégzéséhez",
+        "calcMinutesRemaining": "Hátralévő idő kiszámítása...",
+        "minutesRemaining": "{minutes, plural,one {perc van hátra}other {perc van hátra}}",
+        "copiedToClipboard": "Copied to clipboard"
+    },
+    "error": {
+        "profile": {
+            "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "duplicate": "Már létezik profil ezzel a névvel."
+        },
+        "password": {
+            "doNotMatch": "A jelszavak nem egyeznek.",
+            "tooWeak": "Your new password is too weak.",
+            "row": "Straight rows of keys are easy to guess.",
+            "pattern": "Short keyboard patterns are easy to guess.",
+            "names": "Common names and surnames are easy to guess.",
+            "repeats": "Repeats like 'aaa' are easy to guess.",
+            "repeats2": "Repeats like 'abcabcabc' are easy to guess.",
+            "sequence": "Sequences of characters are easy to guess.",
+            "years": "Recent years are easy to guess.",
+            "dates": "Dates are easy to guess.",
+            "common": "This is a very common password.",
+            "similar": "This is similar to a common password.",
+            "reasonWord": "A single word is easy to guess.",
+            "incorrect": "Hibás jelszó.",
+            "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
+        },
+        "pincode": {
+            "length": "Your PIN must be {length, plural, one {1 digit} other {# digits}} long.",
+            "match": "A PIN-kódok nem egyeznek.",
+            "incorrect": "A jelenlegi PIN-kód helytelen."
+        },
+        "account": {
+            "length": "Your account name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "empty": "You must use your latest account before creating a new one.",
+            "notEmpty": "You must transfer your balance before deleting this account.",
+            "duplicate": "Már létezik számla ezzel a névvel."
+        },
+        "send": {
+            "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
+            "amountTooHigh": "This is greater than your available balance.",
+            "amountNoFloat": "If units are `i` you cannot use decimal places.",
+            "amountInvalidFormat": "The amount appears to be an invalid number.",
+            "amountZero": "The amount must be greater than 0.",
+            "wrongAddressFormat": "A címek {prefix} előtaggal kezdődnek.",
+            "insufficientFunds": "This account has insufficient funds"
+        },
+        "node": {
+            "invalid": "Kérjük adjon meg egy helyes URL-t.",
+            "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
+            "duplicate": "Ez a node már hozzá lett adva.",
+            "unsynced": "The node you are trying to add is not synced."
+        },
+        "global": {
+            "generic": "Valami hiba történt."
+        },
+        "backup": {
+            "invalid": "The backup file was not recognised.",
+            "destination": "The backup destination was not valid.",
+            "mnemonic": "The mnemonic is not valid.",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
+            "seedCharacters": "The seed should only contain characters A-Z or 9",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}",
+            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase"
+        }
     }
 }

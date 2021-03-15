@@ -391,7 +391,7 @@ class MessageValidator extends Validator {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of broadcasted received.',
             })
-        } else if ('boolean' !== typeof payload.incoming) {
+        } else if ('boolean' !== typeof payload.payload.data.essence.data.incoming) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of incoming received.',
@@ -401,7 +401,7 @@ class MessageValidator extends Validator {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of nonce received.',
             })
-        } else if ('number' !== typeof payload.remainderValue) {
+        } else if ('number' !== typeof payload.payload.data.essence.data.remainderValue) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of remainderValue received.',
@@ -658,6 +658,7 @@ export default class ValidatorService {
             [ResponseTypes.LockedStronghold]: this.createBaseValidator().getFirst(),
             [ResponseTypes.StrongholdPasswordChanged]: this.createBaseValidator().getFirst(),
             [ResponseTypes.UpdatedAllClientOptions]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.StrongholdPasswordClearIntervalSet]: this.createBaseValidator().getFirst(),
             [ResponseTypes.Error]: this.createBaseValidator().getFirst(),
             [ResponseTypes.Panic]: this.createBaseValidator().getFirst(),
             // Events

@@ -1,142 +1,145 @@
 {
     "views": {
-        "onboarding_1": {
+        "onboarding1": {
             "title": "Send, Receive & Manage your IOTA",
             "body": "Firefly is a secure and easy-to-use IOTA wallet."
         },
         "legal": {
             "title": "قانوني",
-            "body": "Please review the Privacy Policy and Terms of Service.",
-            "privacy_policy": {
+            "body": "الرجاء مراجعة سياسة الخصوصية و شروط الاستخدام.",
+            "privacyPolicy": {
                 "title": "سياسة الخصوصية",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "terms_of_service": {
+            "termsOfService": {
                 "title": "شروط الخدمة",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
         "language": {
             "title": "اللغة والمظهر",
-            "body": "Choose your wallet’s language and theme"
+            "body": "اختر لغة محفظتك و الموضوع الخاص بك"
         },
         "setup": {
-            "title": "Set up your wallet",
-            "body": "You can create a new wallet or import an existing one.",
-            "profile_name": "Profile Name"
+            "title": "اعداد محفظتك",
+            "body": "بإمكانك إنشاء محفظة جديدة او استيراد أخرى موجودة.",
+            "profileName": "Profile Name"
         },
         "password": {
             "title": "إنشاء كلمة السر",
-            "body": "You will be asked to enter your password to send tokens from your wallet. You need a strong password to protect your funds."
+            "body": "أنت بحاجة إلى كلمة مرور قوية لحماية رصيدك، استخدم مجموعة من الكلمات و تجنب الاسماء، العبارات أو التواريخ الشائعة."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body_2": "Keep your PIN safe!"
+            "body1": "قم بإعداد رمز PIN لتسجيل الدخول للتأكد من أنك الوحيد القادر على الدخول لمحفظتك.",
+            "body2": "حافظ على رقم الPIN الخاص بك بأمان!"
         },
         "pin": {
             "title": "تعيين رمز PIN",
-            "body_1": "أدخل رقم تعريف شخصي من 6 أرقام أدناه. سوف يطلب منك إدخال رقم التعريف الشخصي لتسجيل الدخول إلى محفظتك.",
-            "body_2": "يمكنك استخدام الأرقام فقط."
+            "body1": "أدخل رقم تعريف شخصي من 6 أرقام أدناه. سوف يطلب منك إدخال رقم التعريف الشخصي لتسجيل الدخول إلى محفظتك.",
+            "body2": "يمكنك استخدام الأرقام فقط."
         },
-        "confirm_pin": {
+        "confirmPin": {
             "title": "تحقق من رمز PIN الخاص بك",
             "body": "أعد إدخال رمز PIN الخاص بك للمتابعة."
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body_1": "You will now be shown a recovery phrase.",
-            "body_2": "Do not share this phrase with anyone. Your recovery phrase can be used to access your tokens from anywhere.",
-            "body_3": "If you lose your recovery phrase, you may lose your funds."
+            "title": "نسخ احتياطي لمحفظتك",
+            "body1": "You will now be shown a recovery phrase.",
+            "body2": "Do not share this phrase with anyone. Your recovery phrase can be used to access your tokens from anywhere.",
+            "body3": "If you lose your recovery phrase, you may lose your funds."
         },
-        "recovery_phrase": {
+        "recoveryPhrase": {
             "title": "Recovery phrase",
-            "body_1": "Carefully write down the words in the exact order.",
-            "body_2": "Keep your recovery phrase private and safely stored. Do not share it with anyone.",
-            "reveal_recovery_phrase": "Reveal recovery phrase",
-            "hide_recovery_phrase": "Hide recovery phrase"
+            "body1": "Carefully write down the words in the exact order.",
+            "body2": "Keep your recovery phrase private and safely stored. Do not share it with anyone.",
+            "revealRecoveryPhrase": "Reveal recovery phrase",
+            "hideRecoveryPhrase": "Hide recovery phrase"
         },
-        "verify_recovery_phrase": {
+        "verifyRecoveryPhrase": {
             "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Select the words in the correct order."
+            "body": "Let's check you wrote down the phrase correctly. Select the words in the correct order.",
+            "creatingAccount": "يتم إنشاء الحساب، الرجاء الانتظار..."
         },
-        "backup_wallet": {
+        "backupWallet": {
             "title": "Back up to a Stronghold file",
             "body": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup."
         },
-        "recovery_phrase_saved": {
+        "recoveryPhraseSaved": {
             "title": "Successfully backed up",
             "body": "You have backed up your wallet to a Stronghold."
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your wallet is ready to go."
+            "title": "تهانينا",
+            "body": "محفظتك جاهزة."
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have a recovery phrase or Stronghold back up, you can import it here."
+            "title": "استيراد محفظة",
+            "body": "إذا كان لديك عبارة استرداد او نسخة احتياطية محصّنة، بإمكانك استيرادها إلى هنا."
         },
-        "import_from_text": {
+        "importFromText": {
             "title": "Restore your wallet with a recovery phrase or seed",
-            "body_1": "A recovery phrase is 24 words long. This is used to recover an existing Firefly wallet.",
-            "body_2": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body_3": "Enter your seed or recovery phrase"
+            "body1": "A recovery phrase is 24 words long. This is used to recover an existing Firefly wallet.",
+            "body2": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
+            "body3": "Enter your seed or recovery phrase",
+            "seedDetected": "81 character seed detected",
+            "phraseDetected": "24 word phrase detected"
         },
-        "import_from_file": {
+        "importFromFile": {
             "title": "Restore your wallet from a backup file",
             "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
         },
-        "import_backup_password": {
+        "importBackupPassword": {
             "title": "Restore your wallet from a SeedVault or Stronghold",
-            "body_1": "Please enter your backup password.",
-            "body_2": "This is the password you set when you first created your backup."
+            "body1": "Please enter your backup password.",
+            "body2": "This is the password you set when you first created your backup."
         },
-        "import_success": {
+        "importSuccess": {
             "title": "You have successfully recovered your backup",
             "body": "You can now set up your new wallet."
         },
         "migrate": {
-            "title": "Migrate your funds",
-            "body_1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
-            "new": "Your new wallet"
+            "title": "ترحيل رصيدك",
+            "body1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
+            "body2": "It may take some time. Do not turn off your device during the migration.",
+            "existing": "محفظتك القديمة",
+            "new": "محفظتك الجديدة"
         },
-        "migrate_failed": {
+        "migrateFailed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
-            "body": "Is your balance correct?"
+            "title": "رصيدك",
+            "body": "هل رصيدك صحيح؟"
         },
         "settings": {
             "settings": "الاعدادات",
             "generalSettings": {
-                "title": "General Settings",
+                "title": "الإعدادات العامة",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "security": {
-                "title": "Security",
+                "title": "الحماية",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
+                "title": "الإعدادات المتقدمة",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "helpAndInfo": {
-                "title": "Help & Information",
+                "title": "المساعدة والمعلومات",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "profile": {
@@ -148,7 +151,7 @@
                 "description": ""
             },
             "theme": {
-                "title": "Theme",
+                "title": "الموضوع",
                 "description": ""
             },
             "language": {
@@ -164,11 +167,11 @@
                 "description": ""
             },
             "exportStronghold": {
-                "title": "Export Stronghold",
+                "title": "تصدير الملف المحصّن",
                 "description": ""
             },
             "appLock": {
-                "title": "App Lock",
+                "title": "قفل التطبيق",
                 "description": ""
             },
             "changePassword": {
@@ -176,59 +179,63 @@
                 "description": ""
             },
             "changePincode": {
-                "title": "Change PIN code",
+                "title": "تغيير رمز PIN",
                 "description": "",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "currentPincode": "رمز PIN الحالي",
+                "newPincode": "رمز PIN جديد",
+                "confirmNewPincode": "تأكيد رمز PIN الجديد",
+                "action": "تغيير رمز PIN"
             },
             "resyncAccounts": {
-                "title": "Resync accounts",
+                "title": "تحديث الحسابات",
                 "description": ""
             },
-            "resetWallet": {
-                "title": "Reset wallet",
+            "deleteProfile": {
+                "title": "حذف الملف الشخصي",
                 "description": ""
             },
             "deepLinks": {
-                "title": "Deep links",
+                "title": "روابط عميقة",
                 "description": ""
             },
             "developerMode": {
-                "title": "Developer mode",
+                "title": "وضع المبرمج",
                 "description": ""
             },
             "nodeSettings": {
-                "title": "Node settings",
+                "title": "إعدادات العقدة node",
                 "description": ""
             },
             "configureNodeList": {
-                "title": "Configure node list",
+                "title": "تكوين قائمة العقدة node",
                 "description": ""
             },
             "proofOfWork": {
-                "title": "Proof of work",
+                "title": "إثبات العمل",
                 "description": ""
             },
             "errorLog": {
                 "title": "سجل الخطأ",
                 "description": ""
             },
+            "diagnostics": {
+                "title": "التشخيص",
+                "description": ""
+            },
             "stateExport": {
-                "title": "State export",
+                "title": "تصدير الحالة",
                 "description": ""
             },
             "troubleshoot": {
-                "title": "Troubleshoot",
+                "title": "استكشاف الأخطاء",
                 "description": ""
             },
             "documentation": {
-                "title": "Documentation",
+                "title": "الوثائق",
                 "description": ""
             },
             "faq": {
-                "title": "FAQ",
+                "title": "أسئلة متكررة",
                 "description": ""
             },
             "discord": {
@@ -236,242 +243,366 @@
                 "description": ""
             },
             "about": {
-                "title": "About",
+                "title": "حول",
                 "description": ""
             }
         },
         "login": {
-            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "pleaseWait": "Please wait {time, plural, one {1 second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
                 "version": {
-                    "title": "Firefly v{version}",
-                    "up_to_date": "Up to date",
-                    "out_of_date": "Out of date"
+                    "title": "فايرفلاي v{version}",
+                    "upToDate": "Up to date",
+                    "outOfDate": "Out of date"
                 },
-                "hardware_device": {
+                "hardwareDevice": {
                     "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "noneDetected": "None detected"
                 },
-                "stronghold_status": {
+                "strongholdStatus": {
                     "title": "Stronghold Status",
                     "locked": "Locked",
                     "unlocked": "Unlocked"
                 },
-                "stronghold_backup": {
+                "strongholdBackup": {
                     "title": "Stronghold Backup",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "weeksAgo": "{weeks, plural, one {# week} other {# weeks}} ago"
                 }
             },
             "network": {
-                "network_operational": "Network Operational",
-                "network_degraded": "Network Degraded",
-                "network_down": "Network Down",
-                "status": "Status",
-                "messages_per_second": "Messages per second",
-                "confirmation_rate": "Confirmation rate"
+                "networkOperational": "Network Operational",
+                "networkDegraded": "Network Degraded",
+                "networkDown": "Network Down",
+                "status": "الحالة",
+                "messagesPerSecond": "Messages per second",
+                "confirmationRate": "Confirmation rate"
             },
-            "profile_modal": {
-                "all_settings": "All settings",
+            "profileModal": {
+                "allSettings": "All settings",
                 "logout": "Log out"
             }
         }
     },
     "popups": {
         "password": {
-            "title": "Password required",
-            "subtitle": "Please enter your wallet password to unlock Stronghold"
+            "title": "كلمة المرور مطلوبة",
+            "subtitle": "الرجاء إدخال كلمة مرور محفظتك لفتح الحصن"
         },
         "qr": {
-            "title": "Your QR code"
+            "title": "رمز QR الخاص بك"
         },
         "version": {
-            "title": "Current version: {version}",
-            "up_to_date_title": "Firefly is up to date",
-            "up_to_date_description": "You are running the latest and safest version of Firefly.",
-            "update_available": "Firefly update available",
-            "update_details": "Version {version} - {date}"
+            "title": "الإصدار الحالي: {version}",
+            "upToDateTitle": "Firefly is up to date",
+            "upToDateDescription": "You are running the latest and safest version of Firefly.",
+            "updateAvailable": "Firefly update available",
+            "updateDetails": "Version {version} - {date}"
         },
         "backup": {
-            "title": "Last backup: {date}",
-            "last_backup": "You last backed up {date}",
-            "backup_description": "من المهم النسخ الاحتياطي بانتظام للتأكد من أن لديك نسخة من حساباتك وسجل المعاملات.",
-            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "not_backed_up": "Not backed up",
-            "not_backed_up_description": "You have not backed up your Stronghold"
+            "title": "آخر نسخة احتياطية: {date}",
+            "lastBackup": "You last backed up {date}",
+            "backupDescription": "من المهم النسخ الاحتياطي بانتظام للتأكد من أن لديك نسخة من حساباتك وسجل المعاملات.",
+            "backupWarning": "If you lose your backup and recovery phrase you will lose access to your funds.",
+            "notBackedUp": "Not backed up",
+            "notBackedUpDescription": "You have not backed up your Stronghold"
         },
-        "delete_account": {
+        "deleteAccount": {
             "title": "Delete {name}?",
-            "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Type your wallet’s password to confirm.",
-            "delete_account": "Delete account",
-            "error_title": "Unable to delete {name}",
-            "error_body_1": "To delete an account you must have 0 balance.",
-            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+            "body": "سوف تفقد بشكل دائم سجل المعاملات الخاص بك وربما شيء آخر كذلك.",
+            "typePassword": "Type your wallet’s password to confirm.",
+            "deleteAccount": "Delete account",
+            "errorTitle": "Unable to delete {name}",
+            "errorBody1": "To delete an account you must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
+            "errorBody3": "You cannot delete this account, you must have at least one."
         },
-        "address_history": {
+        "addressHistory": {
             "title": "{name} account address history",
-            "current_balance": "Current balance: {balance}"
+            "currentBalance": "Current balance: {balance}"
         },
         "node": {
-            "title_add": "Add a node",
-            "title_details": "Node details",
-            "node_address": "Node address",
-            "optional_username": "Username (optional)",
-            "optional_password": "Password (optional)",
-            "set_as_primary_node": "Set as primary node"
+            "titleAdd": "Add a node",
+            "titleRemove": "Remove a node",
+            "titleDetails": "Node details",
+            "nodeAddress": "Node address",
+            "optionalUsername": "Username (optional)",
+            "optionalPassword": "Password (optional)",
+            "setAsPrimaryNode": "Set as primary node",
+            "removeConfirmation": "Are you sure you want to remove this node?"
+        },
+        "errorLog": {
+            "title": "سجل الأخطاء",
+            "empty": "سجل الأخطاء فارغ."
+        },
+        "deleteProfile": {
+            "title": "حذف الملف الشخصي",
+            "confirmation": "هل أنت متأكد من أنك تريد حذف هذا الملف الشخصي؟ لا يمكن التراجع عن هذه العملية."
+        },
+        "diagnostics": {
+            "title": "التشخيص",
+            "node": "عقدة node",
+            "platform": "المنصة",
+            "platformVersion": "إصدار المنصة",
+            "platformArchitecture": "بنية المنصة",
+            "cpuCount": "عدد المعالج",
+            "totalMem": "إجمالي الذاكرة",
+            "freeMem": "الذاكرة الحرة",
+            "userPath": "مسار المستخدم"
         }
+    },
+    "charts": {
+        "incomingMi": "Incoming {value} Mi",
+        "outgoingMi": "Outgoing {value} Mi",
+        "portoflio": "الحافظة",
+        "token": "رمز token",
+        "accountValue": "Account Value",
+        "accountActivity": "Account Activity"
     },
     "actions": {
         "continue": "مواصلة",
         "back": "الى الخلف",
         "cancel": "إلغاء",
         "close": "إغلاق",
-        "dismiss": "Dismiss",
+        "dismiss": "تجاهل",
         "save": "حفظ",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "إنشاء محفظة جديدة",
-        "save_password": "حفظ كلمة المرور",
-        "use_biometric": "Use biometric security",
-        "setup_pin": "تعيين رمز PIN",
-        "set_pin": "Set PIN code",
-        "confirm_pin": "Confirm PIN code",
-        "enter_your_pin": "Enter your PIN",
-        "save_backup_file": "Save backup file",
-        "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
-        "verify_recovery_phrase": "Verify recovery phrase",
-        "reveal_recovery_phrase": "Reveal recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
+        "importSeed": "Import an existing seed",
+        "importWallet": "Import existing wallet",
+        "createWallet": "إنشاء محفظة جديدة",
+        "savePassword": "حفظ كلمة المرور",
+        "useBiometric": "Use biometric security",
+        "setupPin": "تعيين رمز PIN",
+        "setPin": "Set PIN code",
+        "confirmPin": "Confirm PIN code",
+        "enterYourPin": "Enter your PIN",
+        "saveBackupFile": "Save backup file",
+        "iveWrittenRecoveryPhrase": "I’ve written down my recovery phrase",
+        "verifyRecoveryPhrase": "Verify recovery phrase",
+        "revealRecoveryPhrase": "Reveal recovery phrase",
+        "importSeedvault": "Import SeedVault",
+        "checkAgain": "No, Check Again",
+        "importFromFile": "Import from a file",
         "send": "إرسال",
         "receive": "استلام",
-        "create": "Create",
-        "begin_transfer": "بدء التحويل",
-        "try_again": "حاول مرة اخرى",
-        "visit_discord": "زيارة ديسكورد",
-        "drag_drop": "سحب و إفلات",
-        "import_extentions": ".stronghold or .kdbx file",
-        "choose_file": "Choose a File",
-        "drop_here": "Drop your file here",
-        "syncAll": "Sync all",
-        "export": "Export",
-        "exportNewStronghold": "Export a new Stronghold",
-        "enableDeepLinks": "Enable deep links",
-        "enableDeveloperMode": "Enable developer mode",
-        "enableSystemNotifications": "Enable system notifications",
-        "exportState": "Export state",
-        "outsourceProofOfWork": "Outsource proof of work",
-        "unlock": "Unlock",
-        "update_firefly": "Update Firefly",
-        "restart_now": "Restart now",
-        "save_backup": "Save backup",
-        "customize_account": "Customise account",
-        "sync_account": "Sync account",
-        "view_address_history": "View address history",
-        "delete_account": "حذف الحساب",
-        "max": "Max",
-        "add_node": "Add node",
-        "hide": "Hide",
-        "hideOthers": "Hide Others",
-        "showAll": "Show All",
-        "quit": "Quit",
-        "edit": "Edit",
-        "undo": "Undo",
-        "redo": "Redo",
-        "cut": "Cut",
-        "copy": "Copy",
-        "paste": "Paste",
-        "selectAll": "Select All",
-        "addAccount": "Add Account",
-        "checkForUpdates": "Check for Updates",
-        "reportAnIssue": "Report an Issue"
+        "create": "إنشاء",
+        "beginTransfer": "بدء التحويل",
+        "tryAgain": "حاول مرة اخرى",
+        "visitDiscord": "زيارة ديسكورد",
+        "dragDrop": "سحب و إفلات",
+        "importExtentions": ".stronghold or .kdbx file",
+        "chooseFile": "Choose a File",
+        "dropHere": "Drop your file here",
+        "syncAll": "مزامنة الكل",
+        "export": "تصدير",
+        "exportNewStronghold": "تصدير ملف محصّن جديد",
+        "enableDeepLinks": "تمكين الروابط العميقة",
+        "enableDeveloperMode": "تمكين وضع المبرمج",
+        "enableSystemNotifications": "تمكين إشعارات النظام",
+        "exportState": "تصدير الحالة",
+        "outsourceProofOfWork": "دليل المصادر الخارجية على العمل",
+        "unlock": "فتح",
+        "updateFirefly": "Update Firefly",
+        "restartNow": "Restart now",
+        "saveBackup": "Save backup",
+        "customizeAcount": "Customise account",
+        "viewAddressHistory": "View address history",
+        "deleteAccount": "حذف الحساب",
+        "max": "الحد الأقصى",
+        "addNode": "Add node",
+        "removeNode": "Remove node",
+        "hide": "إخفاء",
+        "hideOthers": "إخفاء الآخرين",
+        "showAll": "إظهار الكل",
+        "quit": "الخروج",
+        "edit": "تعديل",
+        "undo": "التراجع",
+        "redo": "إعادة الأمر",
+        "cut": "قص",
+        "copy": "نسخ",
+        "paste": "لصق",
+        "selectAll": "تحديد الكل",
+        "addAccount": "إضافة حساب",
+        "checkForUpdates": "التحقق من التحديثات",
+        "reportAnIssue": "الإبلاغ عن مشكلة",
+        "clear": "مسح",
+        "hideDetails": "Hide Details",
+        "yes": "نعم",
+        "no": "لا",
+        "reset": "إعادة الضبط"
     },
     "general": {
-        "password": "Password",
-        "confirm_password": "Confirm password",
-        "currentPassword": "Current password",
-        "newPassword": "New password",
-        "confirmNewPassword": "Confirm new password",
-        "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
-        "send_payment": "Send payment",
-        "move_funds": "Move funds",
-        "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
-        "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "move_funds_between_accounts": "Move funds between accounts",
-        "send_tokens_to_address": "Send tokens to an address",
-        "manage_account": "Manage Account",
-        "customize_account": "Customize your account",
-        "account": "Account",
-        "sending_to_address": "Sending to address",
-        "amount": "Amount",
-        "add_address": "Add Address",
-        "reference": "Reference",
+        "password": "كلمة المرور",
+        "confirmPassword": "Confirm password",
+        "currentPassword": "كلمة المرور الحالية",
+        "newPassword": "كلمة مرور جديدة",
+        "confirmNewPassword": "تأكيد كلمة المرور الجديدة",
+        "yourSeed": "Your Seed",
+        "recoveryPhrase": "Recovery Phrase",
+        "recentActivity": "Recent Activity",
+        "sent": "تم الارسال",
+        "received": "تم الاستلام",
+        "sendPayment": "Send payment",
+        "moveFunds": "Move funds",
+        "sendFunds": "Send funds",
+        "sendToAddress": "Send to an Address",
+        "scanQrOrPaste": "Scan a QR code or paste an Address",
+        "moveFundsBetweenAccounts": "Move funds between accounts",
+        "sendTokensToAddress": "Send tokens to an address",
+        "manageAccount": "Manage Account",
+        "customizeAcount": "Customize your account",
+        "account": "حساب",
+        "sendingToAddress": "Sending to address",
+        "amount": "المبلغ",
+        "addAddress": "Add Address",
+        "reference": "مرجع",
         "from": "مِن",
         "to": "الى",
-        "receive_funds": "Receive funds",
-        "my_address": "My Address",
-        "share_address": "Share an address",
-        "your_address": "Your address",
-        "generate_new_address": "Generate new address",
-        "copy_address": "Copy Address",
-        "have_text_backup": "I have a text backup",
-        "have_file_backup": "I have a file backup",
-        "enter_seed_or_phrase": "Enter a recovery phrase or seed",
-        "upload_seedvault_or_stronghold": "Import a Stronghold or SeedVault file",
-        "import": "Import",
-        "seedvault": "SeedVault",
-        "stronghold": "Stronghold",
-        "language": "Language",
-        "appearance": "Appearance",
-        "light_theme": "Light theme",
-        "dark_theme": "Dark theme",
-        "total_balance": "Total Balance",
-        "account_balance": "Account Balance",
+        "receiveFunds": "Receive funds",
+        "myAddress": "My Address",
+        "shareAddress": "Share an address",
+        "yourAddress": "Your address",
+        "generateNewAddress": "Generate new address",
+        "copyAddress": "Copy Address",
+        "haveTextBackup": "I have a text backup",
+        "haveFileBackup": "I have a file backup",
+        "enterSeedOrPhrase": "Enter a recovery phrase or seed",
+        "uploadSeedvaultOrStronghold": "Import a Stronghold or SeedVault file",
+        "import": "استيراد",
+        "seedvault": "Seedvault",
+        "stronghold": "ملف محصّن stronghold",
+        "language": "اللغة",
+        "appearance": "المظهر",
+        "lightTheme": "Light theme",
+        "darkTheme": "Dark theme",
+        "totalBalance": "Total Balance",
+        "accountBalance": "Account Balance",
         "incoming": "الواردة",
         "outgoing": "الصادرة",
-        "accounts": "Accounts",
-        "automaticNodeSelection": "Automatic node selection",
-        "manualNodeSelection": "Manual node selection",
-        "profiles": "Profiles",
-        "developerProfile": "Developer Profile",
+        "accounts": "الحسابات",
+        "automaticNodeSelection": "اختيار تلقائي للعقدة node",
+        "manualNodeSelection": "اختيار يدوي للعقدة node",
+        "profiles": "الملفات الشخصية",
+        "developerProfile": "الملف الشخصي للمبرمج",
         "dev": "المطور",
-        "create_account": "Create an account",
-        "account_name": "اسم الحساب",
-        "latest_transactions": "آخر المعاملات",
+        "createAccount": "إنشاء حساب",
+        "accountName": "اسم الحساب",
+        "latestTransactions": "آخر المعاملات",
         "transactions": "المعاملات",
         "security": "الحماية",
-        "account_address": "Account Address",
+        "accountAddress": "عنوان الحساب",
         "nodes": "العقد",
-        "wallet": "Wallet",
-        "help": "Help",
-        "no_accounts": "You have no accounts, please create one.",
-        "add_profile": "Add Profile"
+        "wallet": "المحفظة",
+        "help": "مساعدة",
+        "you": "أنت",
+        "messageId": "ID الرسالة",
+        "inputAddress": "عنوان الإدخال input",
+        "receiveAddress": "عنوان الاستلام",
+        "date": "التاريخ",
+        "noAccounts": "ليس لديك حسابات، الرجاء إنشاء حساب.",
+        "loadingAccounts": "جاري التحميل، الرجاء الانتظار...",
+        "addProfile": "إضافة ملف شخصي",
+        "noRecentHistory": "لا يوجد تاريخ حديث",
+        "transferSyncing": "مزامنة الحساب",
+        "transferSelectingInputs": "اختيار المدخلات inputs",
+        "transferRemainderAddress": "توليد عنوان الإيداع المتبقي",
+        "transferSigning": "توقيع المعاملة",
+        "transferPow": "يتم القيام بعملية PoW",
+        "transferBroadcasting": "يتم بث المعاملة",
+        "transferComplete": "تم التحويل",
+        "creatingAccount": "يتم إنشاء الحساب، الرجاء الانتظار...",
+        "updatingAccount": "جارٍ تحديث الحساب، الرجاء الانتظار...",
+        "accountSyncing": "يتم مزامنة الحساب",
+        "accountSyncComplete": "اكتمل مزامنة الحساب",
+        "passwordUpdating": "يتم تحديث كلمة المرور...",
+        "passwordSuccess": "تم تحديث كلمة المرور بنجاح",
+        "passwordFailed": "فشل تحديث كلمة المرور",
+        "exportingStronghold": "يتم تصدير الملف المحصّن...",
+        "exportingStrongholdSuccess": "تم تصدير الملف المحصّن بنجاح",
+        "exportingStrongholdFailed": "فشل تصدير الملف المحصّن",
+        "pinCodeUpdating": "يتم تحديث رمز PIN...",
+        "pinCodeSuccess": "تم تحديث رمز PIN بنجاح",
+        "pinCodeFailed": "فشل تحديث رمز PIN"
     },
     "dates": {
         "today": "اليوم",
-        "days_ago": "{time, plural, one {# day} other {# days}} ago",
-        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
-        "months_ago": "{time, plural, one {# month} other {# months}} ago",
-        "years_ago": "{time, plural, one {# year} other {# years}} ago"
+        "daysAgo": "{time, plural, one {# day} other {# days}} ago",
+        "weeksAgo": "{time, plural, one {# week} other {# weeks}} ago",
+        "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
+        "yearsAgo": "{time, plural, one {# year} other {# years}} ago"
     },
     "notifications": {
         "valueTx": "تلقي {{value}} إلى {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "confirmed": "تم تأكيد {{value}} الصادر من {{account}}",
+        "failed": "{{value}} الصادر من {{account}} فشل",
+        "downloadingUpdate": "Downloading update",
+        "updateReady": "Update ready",
+        "updateError": "An error occurred during the update, please try again",
+        "restartInstall": "Restart to install",
+        "calcMinutesRemaining": "Calculating minutes remaining...",
+        "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
+        "copiedToClipboard": "Copied to clipboard"
+    },
+    "error": {
+        "profile": {
+            "length": "لا يمكن أن يكون اسم ملفك الشخصي أطول من {length, plural, zero {} one {1 حرف} two {# حروف} few {# حروف} many {# حروف} other {# حروف}}.",
+            "duplicate": "يوجد بالفعل حساب بهذا الاسم."
+        },
+        "password": {
+            "doNotMatch": "كلمة المرور غير متطابقة.",
+            "tooWeak": "كلمة المرور الجديدة ضعيفة جدا.",
+            "row": "من السهل تخمين صفوف مباشرة من المفاتيح.",
+            "pattern": "من السهل تخمين أنماط لوحة المفاتيح القصيرة.",
+            "names": "من السهل تخمين الأسماء والألقاب الشائعة.",
+            "repeats": "التكرار مثل 'aaa' سهل التخمين.",
+            "repeats2": "التكرار مثل 'abcabc' سهل التخمين.",
+            "sequence": "من السهل تخمين الأحرف المتسلسة.",
+            "years": "من السهل تخمين السنوات الأخيرة.",
+            "dates": "من السهل تخمين التواريخ.",
+            "common": "هذه كلمة مرور شائعة جداً.",
+            "similar": "هذا شبيه بكلمة مرور شائعة.",
+            "reasonWord": "من السهل تخمين كلمة واحدة.",
+            "incorrect": "كلمة المرور غير صحيحة.",
+            "length": "كلمة المرو الخاصة بك لا يجب ان تكون أطول من {length, plural, one {1 حرف} other {# أحرف}}."
+        },
+        "pincode": {
+            "length": "رمز الPIN الخاص بك يجب ان يكون طوله {length, plural, one {1 رفم} other {# أرقام}}.",
+            "match": "أرقامPIN غير متطابقة.",
+            "incorrect": "رقم الPIN الحالي غير صحيح."
+        },
+        "account": {
+            "length": "لا يجب ان يكون اسم حسابك اطول من {length, plural, one {1 حرف} other {# احرف}}.",
+            "empty": "يجب عليك استخدام حسابك الأخير قبل إنشاء حساب جديد.",
+            "notEmpty": "يجب عليك نقل رصيدك قبل حذف هذا الحساب.",
+            "duplicate": "يوجد حساب بهذا الاسم مسبقاً."
+        },
+        "send": {
+            "addressLength": "يجب على العناوين ان تكون بطول {length, plural, one {1 حرف} other {# احرف}}.",
+            "amountTooHigh": "هذا أكبر من رصيدك المتاح.",
+            "amountNoFloat": "إذا كانت الوحدات 'i` لا يمكنك استخدام الأماكن العشرية.",
+            "amountInvalidFormat": "يبدو أن المبلغ رقم غير صالح.",
+            "amountZero": "يجب أن يكون المبلغ أكبر من 0.",
+            "wrongAddressFormat": "تبدأ العناوين بالبادئة {prefix}.",
+            "insufficientFunds": "هذا الحساب ليس لديه أموال كافية"
+        },
+        "node": {
+            "invalid": "الرجاء إدخال عنوان URL صالح.",
+            "https": "HTTPS مطلوب. إعداد ملف شخصي للمبرمج لاستخدام اتصالات HTTP غير آمنة.",
+            "duplicate": "تمت إضافة هذه العقدة node مسبقاً.",
+            "unsynced": "العقدة node التي تحاول إضافتها لم يتم مزامنتها."
+        },
+        "global": {
+            "generic": "حدث خطأ ما."
+        },
+        "backup": {
+            "invalid": "لم يتم التعرف على ملف النسخ الاحتياطي.",
+            "destination": "وجهة النسخ الاحتياطي غير صالحة.",
+            "mnemonic": "الذاكرة غير صالحة.",
+            "seedTooShort": "يجب على الseed ان يكون طولها 81 حرف, الآن طولها {length, plural, one { 1} other { #}}",
+            "seedCharacters": "يجب على الseed أن تحتوي فقط على أحرف A-Z أو 9",
+            "phraseWordCount": "يجب ان تتضمن عبارة الاسترداد على 24 كلمة, حالياََ تتضمن {length, plural, one { 1} other { #}}",
+            "phraseUnrecognizedWord": "كلمة غير متعرف عليها \"{word}\" في عبارة الاسترداد الخاصة بك"
+        }
     }
 }

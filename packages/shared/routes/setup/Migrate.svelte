@@ -23,8 +23,8 @@
     <OnboardingLayout allowBack={false}>
         <div slot="leftpane__content">
             <Text type="h1" classes="mb-5">{locale('views.migrate.title')}</Text>
-            <Text type="p" secondary classes="mb-4">{locale('views.migrate.body_1')}</Text>
-            <Text type="p" secondary highlighted classes="mb-8 font-bold">{locale('views.migrate.body_2')}</Text>
+            <Text type="p" secondary classes="mb-4">{locale('views.migrate.body1')}</Text>
+            <Text type="p" secondary highlighted classes="mb-8 font-bold">{locale('views.migrate.body2')}</Text>
             <div class="mt-24 flex justify-between">
                 <balance class="flex-col w-5/12 flex justify-center text-center">
                     <Text type="p" secondary classes="mb-3 uppercase">{locale('views.migrate.existing')}</Text>
@@ -45,7 +45,7 @@
             </div>
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-end items-center">
-            <Button disabled={loading} onClick={() => handleContinueClick()}>{locale('actions.begin_transfer')}</Button>
+            <Button disabled={loading} onClick={() => handleContinueClick()}>{locale('actions.beginTransfer')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex p-16">
             <Illustration width="100%" illustration="migrate-desktop" />

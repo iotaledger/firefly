@@ -1,9 +1,9 @@
 import { convertUnits, Unit } from '@iota/unit-converter'
-import { _ } from 'shared/lib/i18n'
+import { localize } from 'shared/lib/i18n'
 import type { WalletAccount } from 'shared/lib/wallet'
 import { date as i18nDate } from 'svelte-i18n'
 import { derived, get, writable } from 'svelte/store'
-import { CurrencyTypes } from './currency'
+import { CurrencyTypes, formatCurrencyValue } from './currency'
 import {
     HistoryDataProps,
     priceData
@@ -101,11 +101,10 @@ export function getAccountValueData(balanceHistory: BalanceHistory): ChartData {
 }
 
 export const getAccountActivityData = (account: WalletAccount) => {
-    const locale = get(_) as (string, values?) => string
     let now = new Date();
     let activityTimeframes: ActivityTimeframe[] = []
-    let incoming: ChartData = { data: [], tooltips: [], label: locale('general.incoming'), color: account.color || 'blue' } // TODO: profile colors
-    let outgoing: ChartData = { data: [], tooltips: [], label: locale('general.outgoing'), color: 'gray' } // TODO: profile colors
+    let incoming: ChartData = { data: [], tooltips: [], label: localize('general.incoming'), color: account.color || 'blue' } // TODO: profile colors
+    let outgoing: ChartData = { data: [], tooltips: [], label: localize('general.outgoing'), color: 'gray' } // TODO: profile colors
     let labels: string[] = []
     let messages: Message[] = account.messages.slice().sort((a, b) => {
         return <any>new Date(a.timestamp).getTime() - <any>new Date(b.timestamp).getTime()
@@ -127,8 +126,8 @@ export const getAccountActivityData = (account: WalletAccount) => {
                     const message = messages[index]
                     const messageTimestamp = new Date(message.timestamp).getTime()
                     if (messageTimestamp >= start && messageTimestamp <= end) {
-                        const valueMiota = convertUnits(message.value, Unit.i, Unit.Mi)
-                        if (message.incoming) {
+                        const valueMiota = convertUnits(message.payload.data.essence.data.value, Unit.i, Unit.Mi)
+                        if (message.payload.data.essence.data.incoming) {
                             _incoming += valueMiota
                         }
                         else {
@@ -144,7 +143,7 @@ export const getAccountActivityData = (account: WalletAccount) => {
                     year: 'numeric',
                     month: 'long'
                 }),
-                label: locale('charts.incoming_mi', {
+                label: localize('charts.incomingMi', {
                     values: {
                         value: _incoming
                     }
@@ -155,7 +154,7 @@ export const getAccountActivityData = (account: WalletAccount) => {
                 title: get(i18nDate)(new Date(start), {
                     year: 'numeric',
                     month: 'long'
-                }), label: locale('charts.outgoing_mi', {
+                }), label: localize('charts.outgoingMi', {
                     values: {
                         value: _outgoing
                     }
@@ -170,7 +169,7 @@ export const getAccountActivityData = (account: WalletAccount) => {
                 title: get(i18nDate)(new Date(start), {
                     year: 'numeric',
                     month: 'long'
-                }), label: locale('charts.incoming_mi', {
+                }), label: localize('charts.incomingMi', {
                     values: {
                         value: 0
                     }
@@ -181,7 +180,7 @@ export const getAccountActivityData = (account: WalletAccount) => {
                 title: get(i18nDate)(new Date(start), {
                     year: 'numeric',
                     month: 'long'
-                }), label: locale('charts.outgoing_mi', {
+                }), label: localize('charts.outgoingMi', {
                     values: {
                         value: 0
                     }
@@ -220,7 +219,8 @@ function formatLabel(timestamp: number): string {
 }
 
 function formatLineChartTooltip(data: (number | string), timestamp: number | string, showMiota: boolean = false): Tooltip {
-    const title: string = `${showMiota ? `1 ${Unit.Mi}: ` : ''}${data} ${get(chartCurrency).toUpperCase()}`
+    const currency = get(chartCurrency).toUpperCase()
+    const title: string = `${showMiota ? `1 ${Unit.Mi}: ` : ''}${formatCurrencyValue(data, currency, 3)} ${currency}`
     const label: string = get(i18nDate)(new Date(timestamp), {
         year: 'numeric',
         month: 'short',

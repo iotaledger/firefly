@@ -1,12 +1,12 @@
 <script lang="typescript">
     import { Button, Icon, Pin, Profile, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
+    import { showAppNotification } from 'shared/lib/notifications'
     import { activeProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
     import { api, getStoragePath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
-    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale
     export let mobile
@@ -30,7 +30,7 @@
     let buttonText = setButtonText(timeRemainingBeforeNextAttempt)
 
     function setButtonText(time) {
-        return locale('views.login.please_wait', { values: { time: time.toString() } })
+        return locale('views.login.pleaseWait', { values: { time: time.toString() } })
     }
 
     const dispatch = createEventDispatcher()
@@ -122,7 +122,7 @@
         </button>
         <div class="pt-40 pb-16 flex w-full h-full flex-col items-center justify-between">
             <div class="w-96 flex flex-row flex-wrap justify-center mb-20">
-                <Profile name={$activeProfile.name} bgColor="blue" />
+                <Profile name={$activeProfile?.name} bgColor="blue" />
                 <Pin
                     bind:this={pinRef}
                     bind:value={pinCode}
@@ -131,9 +131,9 @@
                     disabled={hasReachedMaxAttempts || isBusy}
                     autofocus />
                 <Text type="p" bold classes="mt-4 text-center">
-                    {attempts > 0 ? locale('views.login.incorrect_attempts', {
+                    {attempts > 0 ? locale('views.login.incorrectAttempts', {
                               values: { attempts: attempts.toString() },
-                          }) : locale('actions.enter_your_pin')}
+                          }) : locale('actions.enterYourPin')}
                 </Text>
             </div>
             <Button classes="w-96" disabled={!hasCorrectFormat || hasReachedMaxAttempts || isBusy} onClick={() => onSubmit()}>

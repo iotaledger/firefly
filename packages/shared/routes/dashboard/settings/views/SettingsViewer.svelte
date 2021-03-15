@@ -1,10 +1,9 @@
 <script lang="typescript">
-    import { SettingsRoutes, GeneralSettings, SecuritySettings, AdvancedSettings, HelpAndInfo } from 'shared/lib/typings/routes'
-    import { SettingsIcons } from 'shared/lib/typings/icons'
+    import { Icon, Scroller, SettingsNavigator, Text } from 'shared/components'
     import { settingsRoute } from 'shared/lib/router'
-    import { SettingsNavigator, Text, Scroller } from 'shared/components'
-    import { General, Security, Advanced } from './'
-
+    import { SettingsIcons } from 'shared/lib/typings/icons'
+    import { AdvancedSettings, GeneralSettings, HelpAndInfo, SecuritySettings, SettingsRoutes } from 'shared/lib/typings/routes'
+    import { Advanced, General, Security } from './'
     export let locale
     export let mobile
 
@@ -32,12 +31,18 @@
             }
         }
     }
+    function goToSettingsHome() {
+        settingsRoute.set(SettingsRoutes.Init)
+    }
 </script>
 
 {#if mobile}
     <div>foo</div>
 {:else}
-    <div class="flex flex-1 flex-row items-start">
+    <div class="relative flex flex-1 flex-row items-start">
+        <button on:click={goToSettingsHome} class="absolute top-0 right-0">
+            <Icon icon="close" classes="text-gray-800 dark:text-white" />
+        </button>
         <SettingsNavigator
             {routes}
             onSettingClick={(id) => scrollIntoView(id)}

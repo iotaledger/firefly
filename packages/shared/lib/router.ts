@@ -1,7 +1,8 @@
-import { readable, writable, get } from 'svelte/store'
-import { loggedIn, notification, walletPin, strongholdPassword } from 'shared/lib/app'
-import { AppRoute, SetupType, WalletRoutes, AccountRoutes, SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
+import { loggedIn, notification, strongholdPassword, walletPin } from 'shared/lib/app'
 import { profiles } from 'shared/lib/profile'
+import { AccountRoutes, AppRoute, SettingsRoutes, SetupType, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
+import { get, readable, writable } from 'svelte/store'
+import { deepLinkRequestActive } from './deepLinking'
 
 /**
  * Sets next route
@@ -37,7 +38,7 @@ export const path = readable<string>(null, (set) => {
 /**
  * Onboarding/setup type
  */
-let walletSetupType = writable<SetupType>(null)
+export const walletSetupType = writable<SetupType>(null)
 
 /*
  * Current view
@@ -202,10 +203,6 @@ export const routerPrevious = () => {
 }
 
 export const resetRouter = () => {
-    walletRoute.set(WalletRoutes.Init)
-    accountRoute.set(AccountRoutes.Init)
-    settingsRoute.set(SettingsRoutes.Init)
-
     history.set([])
     let hasCompletedSetup: boolean = get(profiles).length > 0
     if (hasCompletedSetup) {
@@ -213,4 +210,11 @@ export const resetRouter = () => {
     } else {
         setRoute(AppRoute.Welcome)
     }
+
+    walletRoute.set(WalletRoutes.Init)
+    accountRoute.set(AccountRoutes.Init)
+    settingsRoute.set(SettingsRoutes.Init)
+    dashboardRoute.set(Tabs.Wallet)
+    deepLinkRequestActive.set(false)
+    loggedIn.set(false)
 }

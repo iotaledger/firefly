@@ -45,6 +45,14 @@ const Electron = {
      */
     getUserDataPath: () => ipcRenderer.invoke('get-path', 'userData'),
     /**
+     * Gets diagnostics information for the system
+     *
+     * @method getDiagnostics
+     *
+     * @returns {Promise}
+     */
+     getDiagnostics: () => ipcRenderer.invoke('diagnostics'),
+     /**
      * Starts an update of the application
      *
      * @method updateDownload

@@ -1,10 +1,10 @@
 import { Electron, NativeProgress, VersionDetails } from 'shared/lib/electron'
-import { _ } from 'shared/lib/i18n'
+import { localize } from 'shared/lib/i18n'
 import {
     NotificationData, NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showAppNotification,
     updateDisplayNotification, updateDisplayNotificationProgress
 } from 'shared/lib/notifications'
-import { get, writable } from 'svelte/store'
+import { writable } from 'svelte/store'
 
 export const versionDetails = writable<VersionDetails>({
     upToDate: true,
@@ -52,8 +52,6 @@ export function updateDownload(): void {
     updateComplete.set(false)
     updateError.set(false)
 
-    const locale = get(_) as (string, values?) => string
-
     let progressSubscription;
     let minutesRemainingSubscription;
     let completeSubscription;
@@ -69,12 +67,12 @@ export function updateDownload(): void {
 
     const downloadingNotification: NotificationData = {
         type: "info",
-        message: locale('notifications.downloading_update'),
+        message: localize('notifications.downloadingUpdate'),
         progress: 0,
-        subMessage: locale('notifications.calc_minutes_remaining'),
+        subMessage: localize('notifications.calcMinutesRemaining'),
         actions: [
             {
-                label: locale('actions.cancel'),
+                label: localize('actions.cancel'),
                 callback: () => {
                     updateCancel()
                     cleanup();
@@ -95,9 +93,9 @@ export function updateDownload(): void {
             updateDisplayNotification(notificationId, {
                 ...downloadingNotification,
                 subMessage: minutesRemaining === -1
-                    ? locale('notifications.calc_minutes_remaining')
+                    ? localize('notifications.calcMinutesRemaining')
                     : (minutesRemaining < 1 ? "< " : "")
-                    + locale('notifications.minutes_remaining', {
+                    + localize('notifications.minutesRemaining', {
                         values: {
                             minutes: Math.ceil(minutesRemaining).toString()
                         }
@@ -112,12 +110,12 @@ export function updateDownload(): void {
                 notificationId,
                 {
                     type: "info",
-                    message: locale('notifications.update_ready'),
-                    subMessage: locale('notifications.restart_install'),
+                    message: localize('notifications.updateReady'),
+                    subMessage: localize('notifications.restartInstall'),
                     progress: undefined,
                     actions: [
                         {
-                            label: locale('actions.restart_now'),
+                            label: localize('actions.restartNow'),
                             callback: () => {
                                 cleanup()
                                 updateInstall()
@@ -125,7 +123,7 @@ export function updateDownload(): void {
                             isPrimary: true
                         },
                         {
-                            label: locale('actions.dismiss'),
+                            label: localize('actions.dismiss'),
                             callback: () => cleanup()
                         }
                     ]
@@ -139,11 +137,11 @@ export function updateDownload(): void {
                 notificationId,
                 {
                     type: "error",
-                    message: locale('notifications.update_error'),
+                    message: localize('notifications.updateError'),
                     progress: undefined,
                     actions: [
                         {
-                            label: locale('actions.dismiss'),
+                            label: localize('actions.dismiss'),
                             callback: () => cleanup(),
                             isPrimary: true
                         }

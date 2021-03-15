@@ -1,29 +1,29 @@
 {
     "views": {
-        "onboarding_1": {
+        "onboarding1": {
             "title": "Stuur, ontvang & bestuur jou IOTA",
             "body": "Firefly is ń veilig en maklik-om-te-gebruik IOTA beursie."
         },
         "legal": {
             "title": "Wettige",
             "body": "Lees die privaatheidsbeleid en diensvoorwaardes.",
-            "privacy_policy": {
+            "privacyPolicy": {
                 "title": "Privaatheidsbeleid",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "terms_of_service": {
+            "termsOfService": {
                 "title": "Diensvoorwaardes",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
@@ -34,49 +34,50 @@
         "setup": {
             "title": "Stel jou beursie op",
             "body": "Jy kan 'n nuwe beursie skep of 'n bestaande beursie invoer.",
-            "profile_name": "Profiel Naam"
+            "profileName": "Profiel Naam"
         },
         "password": {
             "title": "Skep 'n wagwoord",
-            "body": "Jy sal gevra word om jou wagwoord in te voer om tokens uit jou beursie te stuur. Jy het 'n sterk wagwoord nodig om jou fondse te beskerm."
+            "body": "Jy het 'n sterk wagwoord nodig om jou fondse te beskerm. Gebruik 'n kombinasie van woorde en vermy algemene frases, name of datums."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body_2": "Keep your PIN safe!"
+            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
+            "body2": "Keep your PIN safe!"
         },
         "pin": {
             "title": "Stel PIN-kode op",
-            "body_1": "Tik 'n 6-syfer PIN hieronder. Jy sal gevra word om jou PIN in te voer om aan te meld by jou beursie.",
-            "body_2": "Jy kan slegs getalle gebruik."
+            "body1": "Tik 'n 6-syfer PIN hieronder. Jy sal gevra word om jou PIN in te voer om aan te meld by jou beursie.",
+            "body2": "Jy kan slegs getalle gebruik."
         },
-        "confirm_pin": {
+        "confirmPin": {
             "title": "Verifieer jou PIN-kode",
             "body": "Voer weer jou PIN-kode in om voort te gaan."
         },
         "backup": {
             "title": "Back-up you beursie",
-            "body_1": "Jy sal nou vertoon word met 'n herstel frase.",
-            "body_2": "Moenie hierdie frase met iemand deel nie. Jou herstelfrase kan gebruik word om toegang tot jou tokens te kry.",
-            "body_3": "As jy jou herstelfrase verloor, kan jy jou geld verloor."
+            "body1": "Jy sal nou vertoon word met 'n herstel frase.",
+            "body2": "Moenie hierdie frase met iemand deel nie. Jou herstelfrase kan gebruik word om toegang tot jou tokens te kry.",
+            "body3": "As jy jou herstelfrase verloor, kan jy jou geld verloor."
         },
-        "recovery_phrase": {
+        "recoveryPhrase": {
             "title": "Herstel frase",
-            "body_1": "Skryf die woorde noukeurig neer in die presiese volgorde.",
-            "body_2": "Stoor you herstelfrase privaat en veilig. Moet dit met niemand deel nie.",
-            "reveal_recovery_phrase": "Openbaar herstelfrase",
-            "hide_recovery_phrase": "Versteek herstelfrase"
+            "body1": "Skryf die woorde noukeurig neer in die presiese volgorde.",
+            "body2": "Stoor you herstelfrase privaat en veilig. Moet dit met niemand deel nie.",
+            "revealRecoveryPhrase": "Openbaar herstelfrase",
+            "hideRecoveryPhrase": "Versteek herstelfrase"
         },
-        "verify_recovery_phrase": {
+        "verifyRecoveryPhrase": {
             "title": "Verifieer herstelfrase",
-            "body": "Kom ons kyk of jy die frase korrek neergeskryf het. Kies die woorde in die regte volgorde."
+            "body": "Kom ons kyk of jy die frase korrek neergeskryf het. Kies die woorde in die regte volgorde.",
+            "creatingAccount": "Skep tans rekening, wag asseblief..."
         },
-        "backup_wallet": {
+        "backupWallet": {
             "title": "Back-up na 'n Stronghold lêer",
-            "body": "Voer jou wagwoord in om you beursie na 'n Stronghold lêer te rugsteun. Jou wagwoord word gebruik om die back-up te enkripteer."
+            "body": "Voer jou wagwoord in om you beursie na 'n Stronghold lêer te back-up. Jou wagwoord word gebruik om die back-up te enkripteer."
         },
-        "recovery_phrase_saved": {
-            "title": "Rugsteun suksesvol",
+        "recoveryPhraseSaved": {
+            "title": "Backu-up suksesvol",
             "body": "Jy het jou beursie ge back-up na 'n Stronghold."
         },
         "congratulations": {
@@ -87,33 +88,35 @@
             "title": "Voer 'n beursie in",
             "body": "As jy 'n herstelfrase of 'n Stronghold back-up het, kan jy dit hier invoer."
         },
-        "import_from_text": {
+        "importFromText": {
             "title": "Herstel jou beursie met 'n herstelfrase of seed",
-            "body_1": "'N Herstelfrase is 24 woorde lank. Dit word gebruik om 'n bestaande Firefly beursie te herstel.",
-            "body_2": "'N seed bestaan uit 81 karakters. Dit word gebruik om van 'n ouer Trinity beursie te herstel.",
-            "body_3": "Voer you seed of herstelfrase in"
+            "body1": "'N Herstelfrase is 24 woorde lank. Dit word gebruik om 'n bestaande Firefly beursie te herstel.",
+            "body2": "'N seed bestaan uit 81 karakters. Dit word gebruik om van 'n ouer Trinity beursie te herstel.",
+            "body3": "Voer you seed of herstelfrase in",
+            "seedDetected": "81 karakter seed bespeur",
+            "phraseDetected": "24 woord frase bespeur"
         },
-        "import_from_file": {
+        "importFromFile": {
             "title": "Herstel u beursie uit 'n back-up lêer",
             "body": "Voer 'n rugsteunlêer in om jou beursie te herstel. Back-up kan 'n Stronghold (.stronghold) of 'n Trinity SeedVault (.kdbx) wees."
         },
-        "import_backup_password": {
+        "importBackupPassword": {
             "title": "Herstel jou beursie vanaf 'n SeedVault of 'n Stronghold",
-            "body_1": "Sleutel asb jou back-up wagwoord in.",
-            "body_2": "Dit is die wagwoord wat jy ingestel het toe jy die back-up gemaak het."
+            "body1": "Sleutel asb jou back-up wagwoord in.",
+            "body2": "Dit is die wagwoord wat jy ingestel het toe jy die back-up gemaak het."
         },
-        "import_success": {
+        "importSuccess": {
             "title": "Jy het jou back-up suksesvol herwin",
             "body": "Jy kan nou jou nuwe beursie instel."
         },
         "migrate": {
             "title": "Migreer jou fondse",
-            "body_1": "Hierdie is 'n outomatiese proses om jou fondse na jou nuwe beursie oor te dra. Ons sal kyk na spandeerde adresse wat jou sekuriteit verswak.",
-            "body_2": "Dit kan 'n rukkie neem. Moenie jou toestel tydens die migrasie afskakel nie.",
+            "body1": "Hierdie is 'n outomatiese proses om jou fondse na jou nuwe beursie oor te dra. Ons sal kyk na spandeerde adresse wat jou sekuriteit verswak.",
+            "body2": "Dit kan 'n rukkie neem. Moenie jou toestel tydens die migrasie afskakel nie.",
             "existing": "Jou ou beursie",
             "new": "Jou nuwe beursie"
         },
-        "migrate_failed": {
+        "migrateFailed": {
             "title": "To do",
             "body": "To do"
         },
@@ -187,8 +190,8 @@
                 "title": "Hersinkroniseer rekeninge",
                 "description": ""
             },
-            "resetWallet": {
-                "title": "Herstel Beursie",
+            "deleteProfile": {
+                "title": "Vee profiel uit",
                 "description": ""
             },
             "deepLinks": {
@@ -213,6 +216,10 @@
             },
             "errorLog": {
                 "title": "Foutlêer",
+                "description": ""
+            },
+            "diagnostics": {
+                "title": "Diagnostiek",
                 "description": ""
             },
             "stateExport": {
@@ -241,40 +248,40 @@
             }
         },
         "login": {
-            "please_wait": "Wag asseblief {time, plural, one {1 sekonde} other {# sekondes}}",
-            "incorrect_attempts": "{attempts, plural, one {1 verkeerde poging} other {# verkeerde pogings}}"
+            "pleaseWait": "Wag asseblief {time, plural, one {1 sekonde} other {# sekondes}}",
+            "incorrectAttempts": "{attempts, plural, one {1 verkeerde poging} other {# verkeerde pogings}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "up_to_date": "Tot op datum",
-                    "out_of_date": "Verouderd"
+                    "upToDate": "Tot op datum",
+                    "outOfDate": "Verouderd"
                 },
-                "hardware_device": {
+                "hardwareDevice": {
                     "title": "Hardeware-toestel",
-                    "none_detected": "Nie bespeur nie"
+                    "noneDetected": "Nie bespeur nie"
                 },
-                "stronghold_status": {
+                "strongholdStatus": {
                     "title": "Stronghold Status",
                     "locked": "Gesluit",
                     "unlocked": "Oopgesluit"
                 },
-                "stronghold_backup": {
+                "strongholdBackup": {
                     "title": "Stronghold Backup",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weke}} ago"
+                    "weeksAgo": "{weeks, plural, one {# week} other {# weke}} ago"
                 }
             },
             "network": {
-                "network_operational": "Netwerk Operasioneel",
-                "network_degraded": "Netwerk is nie optimaal nie",
-                "network_down": "Netwerk Af",
+                "networkOperational": "Netwerk Operasioneel",
+                "networkDegraded": "Netwerk is nie optimaal nie",
+                "networkDown": "Netwerk Af",
                 "status": "Status",
-                "messages_per_second": "Boodskappe per sekondes",
-                "confirmation_rate": "Confirmation tempo"
+                "messagesPerSecond": "Boodskappe per sekondes",
+                "confirmationRate": "Confirmation tempo"
             },
-            "profile_modal": {
-                "all_settings": "Alle instellings",
+            "profileModal": {
+                "allSettings": "Alle instellings",
                 "logout": "Log out"
             }
         }
@@ -289,40 +296,70 @@
         },
         "version": {
             "title": "Huidige weergawe: {version}",
-            "up_to_date_title": "Firefly is op datum",
-            "up_to_date_description": "Jy gebruik die nuutste en veiligste weergawe van Firefly.",
-            "update_available": "Firefly update beskikbaar",
-            "update_details": "Weergawe {version} - {date}"
+            "upToDateTitle": "Firefly is op datum",
+            "upToDateDescription": "Jy gebruik die nuutste en veiligste weergawe van Firefly.",
+            "updateAvailable": "Firefly update beskikbaar",
+            "updateDetails": "Weergawe {version} - {date}"
         },
         "backup": {
             "title": "Laaste backup: {date}",
-            "last_backup": "Jy het laas 'n backup op {date} gemaak",
-            "backup_description": "Dit is belangrik om gereeld 'n backup te maak om te verseker dat jy 'n afskrif van jou rekeninge en transaksiegeskiedenis het.",
-            "backup_warning": "As jy jou backup en herstelfrase verloor, verloor jy toegang tot jou fondse.",
-            "not_backed_up": "Nie gebackup",
-            "not_backed_up_description": "Jy het nie jou Stronghold gebackup nie"
+            "lastBackup": "Jy het laas 'n backup op {date} gemaak",
+            "backupDescription": "Dit is belangrik om gereeld 'n backup te maak om te verseker dat jy 'n afskrif van jou rekeninge en transaksiegeskiedenis het.",
+            "backupWarning": "As jy jou backup en herstelfrase verloor, verloor jy toegang tot jou fondse.",
+            "notBackedUp": "Nie gebackup",
+            "notBackedUpDescription": "Jy het nie jou Stronghold gebackup nie"
         },
-        "delete_account": {
+        "deleteAccount": {
             "title": "Verwyder {name}?",
             "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Voer die wagwoord van jou beursie in om te bevestig.",
-            "delete_account": "Verwyder rekening",
-            "error_title": "Kan nie {name} verwyder nie",
-            "error_body_1": "Om 'n rekening te verwyder, moet jy 0 balans hê.",
-            "error_body_2": "Jy het tans {balance} op hierdie rekening oor. Skuif hierdie fondse na 'n ander rekening en probeer weer."
+            "typePassword": "Voer die wagwoord van jou beursie in om te bevestig.",
+            "deleteAccount": "Verwyder rekening",
+            "errorTitle": "Kan nie {name} verwyder nie",
+            "errorBody1": "Om 'n rekening te verwyder, moet jy 0 balans hê.",
+            "errorBody2": "Jy het tans {balance} op hierdie rekening oor. Skuif hierdie fondse na 'n ander rekening en probeer weer.",
+            "errorBody3": "Jy kan nie hierdie rekening verwyder nie, jy moet ten minste een hê."
         },
-        "address_history": {
+        "addressHistory": {
             "title": "{name} rekeningadresgeskiedenis",
-            "current_balance": "Huidige balaans: {balance}"
+            "currentBalance": "Huidige balaans: {balance}"
         },
         "node": {
-            "title_add": "Add Node",
-            "title_details": "Node besonderhede",
-            "node_address": "Node adres",
-            "optional_username": "Username (opsioneel)",
-            "optional_password": "Wagwoord (opsioneel)",
-            "set_as_primary_node": "Stel as primêre Node"
+            "titleAdd": "Add Node",
+            "titleRemove": "Verwyder 'n node",
+            "titleDetails": "Node besonderhede",
+            "nodeAddress": "Node adres",
+            "optionalUsername": "Username (opsioneel)",
+            "optionalPassword": "Wagwoord (opsioneel)",
+            "setAsPrimaryNode": "Stel as primêre Node",
+            "removeConfirmation": "Is jy seker dat ujy hierdie node wil verwyder?"
+        },
+        "errorLog": {
+            "title": "Foutlêer",
+            "empty": "Die foutlêer is leeg."
+        },
+        "deleteProfile": {
+            "title": "Vee profiel uit",
+            "confirmation": "Is jy seker jy wil hierdie profiel uitvee? Hierdie bewerking kan nie ontdoen word nie."
+        },
+        "diagnostics": {
+            "title": "Diagnostiek",
+            "node": "Node",
+            "platform": "Platform",
+            "platformVersion": "Platform weergawe",
+            "platformArchitecture": "Platformargitektuur",
+            "cpuCount": "CPU-telling",
+            "totalMem": "Total Memory",
+            "freeMem": "Free Memory",
+            "userPath": "User Path"
         }
+    },
+    "charts": {
+        "incomingMi": "Inkomende {value} Mi",
+        "outgoingMi": "Uitgaande {value} Mi",
+        "portoflio": "Portefeulje",
+        "token": "Token",
+        "accountValue": "Rekening Balans",
+        "accountActivity": "Rekeningaktiwiteit"
     },
     "actions": {
         "continue": "Gaan voort",
@@ -331,32 +368,32 @@
         "close": "Maak toe",
         "dismiss": "Ontslaan",
         "save": "Save",
-        "import_seed": "Voer 'n bestaande seed in",
-        "import_wallet": "Voer bestaande beursie in",
-        "create_wallet": "Skep 'n nuwe beursie",
-        "save_password": "Stoor wagwoord",
-        "use_biometric": "Gebruik biometriese sekuriteit",
-        "setup_pin": "Stel PIN-kode op",
-        "set_pin": "Stel PIN-kode in",
-        "confirm_pin": "Bevestig die PIN-kode",
-        "enter_your_pin": "Tik you PIN in",
-        "save_backup_file": "Stoor back-up lêer",
-        "ive_written_recovery_phrase": "Ek het my herstelfrase neergeskryf",
-        "verify_recovery_phrase": "Verifieer herstelfrase",
-        "reveal_recovery_phrase": "Openbaar herstelfrase",
-        "import_seedvault": "Voer SeedVault in",
-        "check_again": "Nee, kyk weer",
-        "import_from_file": "Invoer vanaf 'n lêer",
+        "importSeed": "Voer 'n bestaande seed in",
+        "importWallet": "Voer bestaande beursie in",
+        "createWallet": "Skep 'n nuwe beursie",
+        "savePassword": "Stoor wagwoord",
+        "useBiometric": "Gebruik biometriese sekuriteit",
+        "setupPin": "Stel PIN-kode op",
+        "setPin": "Stel PIN-kode in",
+        "confirmPin": "Bevestig die PIN-kode",
+        "enterYourPin": "Tik you PIN in",
+        "saveBackupFile": "Stoor back-up lêer",
+        "iveWrittenRecoveryPhrase": "Ek het my herstelfrase neergeskryf",
+        "verifyRecoveryPhrase": "Verifieer herstelfrase",
+        "revealRecoveryPhrase": "Openbaar herstelfrase",
+        "importSeedvault": "Voer SeedVault in",
+        "checkAgain": "Nee, kyk weer",
+        "importFromFile": "Invoer vanaf 'n lêer",
         "send": "Stuur",
         "receive": "Ontvang",
         "create": "Skep",
-        "begin_transfer": "Begin oordrag",
-        "try_again": "Probeer weer",
-        "visit_discord": "Besoek Discord",
-        "drag_drop": "Sleep-en-los",
-        "import_extentions": ".stronghold of .kdbx lêer",
-        "choose_file": "Kies 'n lêer",
-        "drop_here": "Sit jou lêer hier neer",
+        "beginTransfer": "Begin oordrag",
+        "tryAgain": "Probeer weer",
+        "visitDiscord": "Besoek Discord",
+        "dragDrop": "Sleep-en-los",
+        "importExtentions": ".stronghold of .kdbx lêer",
+        "chooseFile": "Kies 'n lêer",
+        "dropHere": "Sit jou lêer hier neer",
         "syncAll": "Sinkroniseer almal",
         "export": "Export",
         "exportNewStronghold": "Export n nuwe Stronghold",
@@ -366,76 +403,81 @@
         "exportState": "Export staat",
         "outsourceProofOfWork": "Uitkontrakteer proof of work",
         "unlock": "Ontsluit",
-        "update_firefly": "Update Firefly",
-        "restart_now": "Herlaai nou",
-        "save_backup": "Stoor backup",
-        "customize_account": "Pas rekening aan",
-        "sync_account": "Sinkroniseer rekening",
-        "view_address_history": "Bekyk adresgeskiedenis",
-        "delete_account": "Verwyder rekening",
+        "updateFirefly": "Update Firefly",
+        "restartNow": "Herlaai nou",
+        "saveBackup": "Stoor backup",
+        "customizeAcount": "Customise account",
+        "viewAddressHistory": "Bekyk adresgeskiedenis",
+        "deleteAccount": "Verwyder rekening",
         "max": "Max",
-        "add_node": "Add Node",
-        "hide": "Hide",
-        "hideOthers": "Hide Others",
-        "showAll": "Show All",
-        "quit": "Quit",
+        "addNode": "Add Node",
+        "removeNode": "Verwyder node",
+        "hide": "Versteek",
+        "hideOthers": "Versteek Ander",
+        "showAll": "Vertoon alles",
+        "quit": "Sluit Af",
         "edit": "Edit",
-        "undo": "Undo",
-        "redo": "Redo",
-        "cut": "Cut",
-        "copy": "Copy",
-        "paste": "Paste",
-        "selectAll": "Select All",
-        "addAccount": "Add Account",
-        "checkForUpdates": "Check for Updates",
-        "reportAnIssue": "Report an Issue"
+        "undo": "Ontdoen",
+        "redo": "Herdoen",
+        "cut": "Knip",
+        "copy": "Kopieër",
+        "paste": "Plak",
+        "selectAll": "Kies Alles",
+        "addAccount": "Voeg Rekening By",
+        "checkForUpdates": "Soek vir opgraderings",
+        "reportAnIssue": "Rapporteer 'n probleem",
+        "clear": "Maak skoon",
+        "hideDetails": "Versteek besonderhede",
+        "yes": "Ja",
+        "no": "Nee",
+        "reset": "Stel terug"
     },
     "general": {
         "password": "Wagwoord",
-        "confirm_password": "Bevestig Wagwoord",
+        "confirmPassword": "Bevestig Wagwoord",
         "currentPassword": "Huidige wagwoord",
         "newPassword": "Nuwe wagwoord",
         "confirmNewPassword": "Bevestig nuwe wagwoord",
-        "your_seed": "Jou Seed",
-        "recovery_phrase": "Herstelfrase",
-        "recent_activity": "Onlangse aktiwiteite",
+        "yourSeed": "Jou Seed",
+        "recoveryPhrase": "Herstelfrase",
+        "recentActivity": "Onlangse aktiwiteite",
         "sent": "Gestuur",
         "received": "Ontvang",
-        "send_payment": "Stuur betaling",
-        "move_funds": "Skuif fondse",
-        "send_funds": "Stuur fondse",
-        "send_to_address": "Stuur na 'n adres",
-        "scan_qr_or_paste": "Skandeer 'n QR-kode of plak 'n adres",
-        "move_funds_between_accounts": "Skuif fondse tussen jou rekeninge",
-        "send_tokens_to_address": "Stuur tokens na 'n adres",
-        "manage_account": "Bestuur rekeninge",
-        "customize_account": "Pas you rekening aan",
+        "sendPayment": "Stuur betaling",
+        "moveFunds": "Skuif fondse",
+        "sendFunds": "Stuur fondse",
+        "sendToAddress": "Stuur na 'n adres",
+        "scanQrOrPaste": "Skandeer 'n QR-kode of plak 'n adres",
+        "moveFundsBetweenAccounts": "Skuif fondse tussen jou rekeninge",
+        "sendTokensToAddress": "Stuur tokens na 'n adres",
+        "manageAccount": "Bestuur rekeninge",
+        "customizeAcount": "Customize your account",
         "account": "Rekening",
-        "sending_to_address": "Oppad na adres",
+        "sendingToAddress": "Oppad na adres",
         "amount": "Bedrag",
-        "add_address": "Adres byvoeg",
+        "addAddress": "Adres byvoeg",
         "reference": "Verwysing",
         "from": "Van",
         "to": "Aan",
-        "receive_funds": "Ontvang fondse",
-        "my_address": "My adres",
-        "share_address": "Deel 'n adres",
-        "your_address": "Jou adres",
-        "generate_new_address": "Genereer nuwe adres",
-        "copy_address": "Kopieer Adres",
-        "have_text_backup": "Ek het 'n teks back-up",
-        "have_file_backup": "Ek het 'n lêer back-up",
-        "enter_seed_or_phrase": "Voer 'n herstelfrase of seed in",
-        "upload_seedvault_or_stronghold": "Voer 'n Stronghold of SeedVault lêer in",
+        "receiveFunds": "Ontvang fondse",
+        "myAddress": "My adres",
+        "shareAddress": "Deel 'n adres",
+        "yourAddress": "Jou adres",
+        "generateNewAddress": "Genereer nuwe adres",
+        "copyAddress": "Kopieer Adres",
+        "haveTextBackup": "Ek het 'n teks back-up",
+        "haveFileBackup": "Ek het 'n lêer back-up",
+        "enterSeedOrPhrase": "Voer 'n herstelfrase of seed in",
+        "uploadSeedvaultOrStronghold": "Voer 'n Stronghold of SeedVault lêer in",
         "import": "Invoer",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Taal",
         "appearance": "Voorkoms",
-        "light_theme": "Ligte tema",
-        "dark_theme": "Donker tema",
-        "total_balance": "Totale balans",
-        "account_balance": "Rekening balans",
+        "lightTheme": "Ligte tema",
+        "darkTheme": "Donker tema",
+        "totalBalance": "Totale balans",
+        "accountBalance": "Rekening balans",
         "incoming": "Inkomende",
         "outgoing": "Uitgaande",
         "accounts": "Rekeninge",
@@ -444,34 +486,123 @@
         "profiles": "Profiel",
         "developerProfile": "Ontwikkelaarsprofiel",
         "dev": "Dev",
-        "create_account": "Skep 'n rekening",
-        "account_name": "Rekening naam",
-        "latest_transactions": "Nuutste transaksie",
+        "createAccount": "Skep 'n rekening",
+        "accountName": "Rekening naam",
+        "latestTransactions": "Nuutste transaksie",
         "transactions": "Transaksies",
         "security": "Sekuriteit",
-        "account_address": "Rekeningadres",
+        "accountAddress": "Rekeningadres",
         "nodes": "Nodes",
-        "wallet": "Wallet",
-        "help": "Help",
-        "no_accounts": "You have no accounts, please create one.",
-        "add_profile": "Add Profile"
+        "wallet": "Beursie",
+        "help": "Hulp",
+        "you": "Jy",
+        "messageId": "Message ID",
+        "inputAddress": "Input adres",
+        "receiveAddress": "Ontvangs Adres",
+        "date": "Datum",
+        "noAccounts": "Jy het geen rekeninge nie, skep asseblief een.",
+        "loadingAccounts": "Wag asseblief terwyl dit laai...",
+        "addProfile": "Voeg profiel by",
+        "noRecentHistory": "Geen onlangse geskiedenis nie",
+        "transferSyncing": "Sinkroniseer rekening",
+        "transferSelectingInputs": "Kies inputs",
+        "transferRemainderAddress": "Genereer oorblyfsel deposito adres",
+        "transferSigning": "Onderteken die transaksie",
+        "transferPow": "Uitvoering van PoW",
+        "transferBroadcasting": "Uitsaai van die transaksie",
+        "transferComplete": "Oordrag voltooi",
+        "creatingAccount": "Skep tans rekening, wag asseblief...",
+        "updatingAccount": "Opdatering van rekening, wag asseblief...",
+        "accountSyncing": "Rekening word tans gesinkroniseer",
+        "accountSyncComplete": "Sinkronisering van rekening voltooi",
+        "passwordUpdating": "Wagwoord opdatering aan die gang...",
+        "passwordSuccess": "Wagwoord suksesvol opgedateer",
+        "passwordFailed": "Kon nie wagwoord opdateer nie",
+        "exportingStronghold": "Export Stronghold...",
+        "exportingStrongholdSuccess": "Die Stronghold is suksesvol uitgevoer",
+        "exportingStrongholdFailed": "Uitgevoer van die Stronghold het misluk",
+        "pinCodeUpdating": "Opdatering van PIN-kode...",
+        "pinCodeSuccess": "PIN-kode suksesvol opgedateer",
+        "pinCodeFailed": "Kon nie PIN-kode opdateer nie"
     },
     "dates": {
         "today": "Vandag",
-        "days_ago": "{time, plural, one {# dag} other {# dae}} ago",
-        "weeks_ago": "{time, plural, one {# week} other {# weke}} ago",
-        "months_ago": "{time, plural, one {# maand} other {# maande}} ago",
-        "years_ago": "{time, plural, one {# jaar} other {# jare}} ago"
+        "daysAgo": "{time, plural, one {# dag} other {# dae}} ago",
+        "weeksAgo": "{time, plural, one {# week} other {# weke}} ago",
+        "monthsAgo": "{time, plural, one {# maand} other {# maande}} ago",
+        "yearsAgo": "{time, plural, one {# jaar} other {# jare}} ago"
     },
     "notifications": {
         "valueTx": "Ontvang {{value}} na {{account}}",
         "confirmed": "Uitgaande {{value}} vanaf {{account}} is bevestig",
         "failed": "Uitgaande {{value}} vanaf {{account}} het nie oordra nie",
-        "downloading_update": "Besig om bywerking af te laai",
-        "update_ready": "Opdatering gereed",
-        "update_error": "'N Fout het tydens die opdatering voorgekom. Probeer asseblief weer",
-        "restart_install": "Herbegin om te installeer",
-        "calc_minutes_remaining": "Bereken oorblywende minute...",
-        "minutes_remaining": "{minutes, plural, one {1 minuut oor} other {# minute oor}}"
+        "downloadingUpdate": "Besig om bywerking af te laai",
+        "updateReady": "Opdatering gereed",
+        "updateError": "'N Fout het tydens die opdatering voorgekom. Probeer asseblief weer",
+        "restartInstall": "Herbegin om te installeer",
+        "calcMinutesRemaining": "Bereken oorblywende minute...",
+        "minutesRemaining": "{minutes, plural, one {1 minuut oor} other {# minute oor}}",
+        "copiedToClipboard": "Kopieer na knipbord"
+    },
+    "error": {
+        "profile": {
+            "length": "Jou profielnaam mag nie langer as {length, plural, karakter {1 karakter} other {# karakters}}.",
+            "duplicate": "Daar bestaan ​​reeds 'n profiel met hierdie naam."
+        },
+        "password": {
+            "doNotMatch": "Wagwoorde stem nie ooreen nie.",
+            "tooWeak": "Jou nuwe wagwoord is te swak.",
+            "row": "Reguit rye sleutels is maklik om te raai.",
+            "pattern": "Kort sleutelbord patrone is maklik om te raai.",
+            "names": "Algemene name en vanne is maklik om te raai.",
+            "repeats": "Herhalings soos 'aaa' is maklik om te raai.",
+            "repeats2": "Herhalings soos 'abcabcabc' is maklik om te raai.",
+            "sequence": "Rye van karakters is maklik om te raai.",
+            "years": "Die afgelope jare is maklik om te raai.",
+            "dates": "Datums is maklik om te raai.",
+            "common": "Hierdie is 'n baie algemene wagwoord.",
+            "similar": "Hierdie is soortgelyk aan 'n gewone wagwoord.",
+            "reasonWord": "'N Enkele woord is maklik om te raai.",
+            "incorrect": "Jou wagwoord is verkeerd.",
+            "length": "Jou wagwoord mag nie langer as {length, plural, one {1 karakter} other {# karakters}} wees nie."
+        },
+        "pincode": {
+            "length": "Jou PIN moet wees {length, plural, one {1 syfer} other {# syfers}} lank.",
+            "match": "PIN het nie ooreengestem nie.",
+            "incorrect": "Jou huidige PIN is verkeerd."
+        },
+        "account": {
+            "length": "Jou rekeningnaam mag nie langer as {length, plural, one {1 karakter} other {# karakters}} wees nie.",
+            "empty": "Jy moet jou nuutste rekening gebruik voordat jy 'n nuwe een skep.",
+            "notEmpty": "Jy moet jou saldo oordra voordat jy hierdie rekening uitvee.",
+            "duplicate": "'n Rekening met hierdie naam bestaan alreeds."
+        },
+        "send": {
+            "addressLength": "Adresse moet {length, plural, one {1 karakter} other {# karakters}} lank wees.",
+            "amountTooHigh": "Dit is groter as jou beskikbare balans.",
+            "amountNoFloat": "As eenhede 'i' is, kan jy nie desimale plekke gebruik nie.",
+            "amountInvalidFormat": "Die bedrag lyk na 'n ongeldige nommer.",
+            "amountZero": "Die bedrag moet groter as 0 wees.",
+            "wrongAddressFormat": "Adresse begin met die voorvoegsel {prefix}.",
+            "insufficientFunds": "Hierdie rekening het onvoldoende fondse"
+        },
+        "node": {
+            "invalid": "Sleutel 'n geldige URL in.",
+            "https": "HTTPS word vereis. Stel 'n ontwikkelaarprofiel op om onveilige HTTP-verbindings te gebruik.",
+            "duplicate": "Hierdie Node is reeds gebruik.",
+            "unsynced": "Die node wat jy probeer byvoeg, is nie gesinkroniseer nie."
+        },
+        "global": {
+            "generic": "Iets het skeefgeloop."
+        },
+        "backup": {
+            "invalid": "Die back-up is nie herken nie.",
+            "destination": "Die back-up was nie geldig nie.",
+            "mnemonic": "Die mnemoniese is nie geldig nie.",
+            "seedTooShort": "Die seed moet 81 karakters lank wees, dit {length, plural, one {is 1} other {is #}}",
+            "seedCharacters": "Die seed moet slegs karakters A-Z of 9 bevat",
+            "phraseWordCount": "Hier moet 24 woorde in jou herstelfrase wees, tans {length, plural, one {is daar 1} other {is daar #}}",
+            "phraseUnrecognizedWord": "Onherkenbare woord \"{word}\" in jou herstelfrase"
+        }
     }
 }

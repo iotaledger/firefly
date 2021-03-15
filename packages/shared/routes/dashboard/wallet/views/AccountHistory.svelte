@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { ActivityDetail, ActivityRow, Icon, Text } from 'shared/components'
-    import { selectedMessage } from 'shared/lib/wallet'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { api, isSyncing, selectedAccountId, selectedMessage } from 'shared/lib/wallet'
 
     export let locale
     export let transactions = []
@@ -13,6 +14,25 @@
     function handleBackClick() {
         selectedMessage.set(null)
     }
+
+    const handleSyncAccountClick = () => {
+        if (!$isSyncing) {
+            $isSyncing = true
+
+            api.syncAccount($selectedAccountId, {
+                onSuccess() {
+                    $isSyncing = false
+                },
+                onError(err) {
+                    $isSyncing = false
+                    showAppNotification({
+                        type: 'error',
+                        message: locale(err.error),
+                    })
+                },
+            })
+        }
+    }
 </script>
 
 <div class="h-full p-8 flex flex-col flex-auto flex-grow flex-shrink-0">
@@ -22,7 +42,14 @@
                 <Icon icon="arrow-left" classes="text-blue-500" />
             </button>
         {/if}
-        <Text type="h4">{locale('general.transactions')}</Text>
+        <div class="flex flex-1 flex-row justify-between">
+            <Text type="h4">{locale('general.transactions')}</Text>
+            {#if !$selectedMessage}
+                <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
+                    <Icon icon="refresh" classes="{$isSyncing && 'animate-spin'} text-gray-500 dark:text-white" />
+                </button>
+            {/if}
+        </div>
     </div>
     {#if $selectedMessage}
         <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} {locale} />
@@ -34,7 +61,7 @@
                 {/each}
             {:else}
                 <div class="h-full flex flex-col items-center justify-center text-center">
-                    <Text secondary>{locale('general.no_recent_history')}</Text>
+                    <Text secondary>{locale('general.noRecentHistory')}</Text>
                 </div>
             {/if}
         </div>

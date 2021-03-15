@@ -2,7 +2,9 @@ import type { ErrorTypes as ValidatorErrorTypes } from './validator'
 import type { ErrorType } from './typings/events'
 import { persistent } from 'shared/lib/helpers'
 
-const errorMessages = {
+const errorMessages: {
+    [key in keyof typeof ErrorType]: string;
+} = {
     'IoError': 'error.global.generic',
     'JsonError': 'error.global.generic',
     'ClientError': 'error.global.generic',
@@ -45,6 +47,7 @@ const errorMessages = {
     'BeeMessage': 'error.global.generic',
     // Nodes
     'UrlError': 'error.node.invalid',
+    'NodesNotSynced': 'error.node.unsynced',
     // Ledger
     'LedgerMiscError': 'error.global.generic',
     'LedgerDongleLocked': 'error.global.generic',

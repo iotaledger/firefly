@@ -1,6 +1,8 @@
 <script lang="typescript">
-    import { bindEvents } from 'shared/lib/utils'
     import { Icon } from 'shared/components'
+    import { bindEvents } from 'shared/lib/utils'
+    import { onMount } from 'svelte'
+
     export let events = {}
     export let onClick = () => ''
     export let secondary = false
@@ -14,6 +16,15 @@
     export let classes = ''
     export let type = 'button'
     export let form = ''
+    export let autofocus = false
+
+    let buttonElement
+
+    onMount(() => {
+        if (autofocus) {
+            buttonElement.focus()
+        }
+    })
 </script>
 
 <style type="text/scss">
@@ -30,7 +41,7 @@
         &:not(.with-icon):active {
             @apply bg-blue-700;
         }
-        
+
         &:disabled {
             @apply pointer-events-none;
             @apply bg-gray-200;
@@ -56,7 +67,7 @@
                 @apply border-blue-400;
                 @apply text-blue-600;
             }
-            
+
             &:disabled {
                 @apply pointer-events-none;
                 @apply bg-gray-50;
@@ -77,7 +88,7 @@
             &:active {
                 @apply bg-red-700;
             }
-            
+
             &:disabled {
                 @apply pointer-events-none;
                 @apply bg-gray-200;
@@ -117,7 +128,7 @@
             &:focus {
                 @apply border-gray-500;
             }
-            
+
             &:disabled {
                 :global(svg) {
                     @apply text-gray-500;
@@ -156,7 +167,7 @@
                 @apply text-gray-800;
             }
         }
-        
+
         &:disabled {
             @apply pointer-events-none;
             @apply bg-gray-200;
@@ -178,7 +189,7 @@
         class:active
         class:with-icon={icon}
         {disabled}
-        >
+        bind:this={buttonElement}>
         <Icon classes="mb-1" {icon} />
         <div class="text-12 leading-140">
             <slot />
@@ -197,7 +208,8 @@
         class:with-icon={icon}
         class:iconReverse
         class:active
-        {disabled}>
+        {disabled}
+        bind:this={buttonElement}>
         {#if icon}
             {#if small}
                 {#if iconReverse}

@@ -6,6 +6,7 @@
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import type { ClientOptions } from 'shared/lib/typings/client'
     import { api, wallet, WalletAccount } from 'shared/lib/wallet'
+    import { get } from 'svelte/store'
 
     export let locale
 
@@ -16,59 +17,63 @@
     function removeCustomNode() {
         isBusy = true
 
-        const url = $activeProfile.settings.node.url
+        const ap = get(activeProfile)
 
-        updateProfile('settings.node', DEFAULT_NODE)
-        updateProfile(
-            'settings.customNodes',
-            $activeProfile.settings.customNodes.filter((n) => n.url !== url)
-        )
+        if (ap) {
+            const url = ap.settings.node.url
 
-        api.setClientOptions(
-            {
-                node: DEFAULT_NODE,
-                nodes: [],
-            },
-            {
-                onSuccess() {
-                    accounts.update((_accounts) =>
-                        _accounts.map((_account) => {
-                            return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                {} as WalletAccount,
-                                _account,
-                                {
-                                    clientOptions: Object.assign<ClientOptions, ClientOptions, ClientOptions>(
-                                        {},
-                                        _account.clientOptions,
-                                        {
-                                            node: DEFAULT_NODE,
-                                            nodes: [],
-                                        }
-                                    ),
-                                }
-                            )
+            updateProfile('settings.node', DEFAULT_NODE)
+            updateProfile(
+                'settings.customNodes',
+                ap.settings.customNodes.filter((n) => n.url !== url)
+            )
+
+            api.setClientOptions(
+                {
+                    node: DEFAULT_NODE,
+                    nodes: [],
+                },
+                {
+                    onSuccess() {
+                        accounts.update((_accounts) =>
+                            _accounts.map((_account) => {
+                                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+                                    {} as WalletAccount,
+                                    _account,
+                                    {
+                                        clientOptions: Object.assign<ClientOptions, ClientOptions, ClientOptions>(
+                                            {},
+                                            _account.clientOptions,
+                                            {
+                                                node: DEFAULT_NODE,
+                                                nodes: [],
+                                            }
+                                        ),
+                                    }
+                                )
+                            })
+                        )
+
+                        isBusy = false
+                        closePopup()
+                    },
+                    onError(err) {
+                        isBusy = false
+                        closePopup()
+                        showAppNotification({
+                            type: 'error',
+                            message: locale(err.error),
                         })
-                    )
-
-                    isBusy = false
-                    closePopup()
-                },
-                onError(err) {
-                    isBusy = false
-                    closePopup()
-                    showAppNotification({
-                        type: 'error',
-                        message: locale(err.error),
-                    })
-                },
-            }
-        )
+                    },
+                }
+            )
+        }
     }
 </script>
 
-<Text type="h4" classes="mb-5">{locale('popups.node.title_remove')}</Text>
+<Text type="h4" classes="mb-5">{locale('popups.node.titleRemove')}</Text>
 <div class="w-full h-full mb-5">
-    <Text>{locale('popups.node.remove_confirmation')}</Text>
+    <Text>{locale('popups.node.removeConfirmation')}</Text>
 </div>
 <div class="flex flex-row justify-between space-x-4 w-full px-8 ">
     <Button secondary classes="w-1/2" onClick={() => closePopup()} disabled={isBusy}>{locale('actions.no')}</Button>

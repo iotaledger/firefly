@@ -20,12 +20,12 @@
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5">{locale('views.backup.title')}</Text>
-            <Text type="p" secondary classes="mb-4">{locale('views.backup.body_1')}</Text>
-            <Text type="p" secondary classes="mb-4">{locale('views.backup.body_2')}</Text>
-            <Text type="p" secondary highlighted classes="mb-4 font-bold">{locale('views.backup.body_3')}</Text>
+            <Text type="p" secondary classes="mb-4">{locale('views.backup.body1')}</Text>
+            <Text type="p" secondary classes="mb-4">{locale('views.backup.body2')}</Text>
+            <Text type="p" secondary highlighted classes="mb-4 font-bold">{locale('views.backup.body3')}</Text>
         </div>
         <div slot="leftpane__action">
-            <Button classes="w-full" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
+            <Button classes="w-full" onClick={() => handleContinueClick()} autofocus>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-end items-center">
             <Illustration illustration="protect-desktop" height="100%" width="auto" classes="h-full object-cover object-left" />
