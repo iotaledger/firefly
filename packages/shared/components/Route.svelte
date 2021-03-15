@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
-    import { route as appRoute } from 'shared/lib/router'
+    import { appRoute } from 'shared/lib/router'
 
     export let transition = true
     export let route = undefined

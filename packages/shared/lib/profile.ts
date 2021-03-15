@@ -15,14 +15,14 @@ interface Profile {
     /**
      * Time for most recent stronghold back up
      */
-     lastStrongholdBackupTime: Date | null
-     /**
-      * User settings
-      */
-     settings: UserSettings
-     isDeveloperProfile: boolean
+    lastStrongholdBackupTime: Date | null
+    /**
+     * User settings
+     */
+    settings: UserSettings
+    isDeveloperProfile: boolean
 
- }
+}
 
 /**
  * User Settings
@@ -30,7 +30,6 @@ interface Profile {
 export interface UserSettings {
     outsourcePow: boolean
     currency: AvailableExchangeRates
-    notifications: boolean
     automaticNodeSelection: boolean
     node: Node
     customNodes: Node[]
@@ -38,24 +37,11 @@ export interface UserSettings {
     lockScreenTimeout: number
 }
 
-/**
- * App Settings
- */
- export interface AppSettings {
-    deepLinking: boolean
-    language: string
-}
-
 export const activeProfileId = writable<string | null>(null)
 
 export const profiles = persistent<Profile[]>('profiles', [])
 
 export const newProfile = writable<Profile | null>(null)
-
-export const appSettings = persistent<AppSettings>('settings', {
-    deepLinking: false,
-    language: 'en'
-})
 
 export const isProfileStrongholdLocked = writable<boolean>(true)
 
@@ -108,7 +94,6 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
         settings: {
             outsourcePow: false,
             currency: AvailableExchangeRates.USD,
-            notifications: true,
             automaticNodeSelection: true,
             node: DEFAULT_NODE,
             customNodes: [],

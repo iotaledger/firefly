@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Popup, Route, ToastContainer } from 'shared/components'
-    import { darkMode, loggedIn, mobile } from 'shared/lib/app'
+    import { loggedIn, mobile } from 'shared/lib/app'
+    import { appSettings } from 'shared/lib/appSettings'
     import { refreshVersionDetails, versionDetails } from 'shared/lib/appUpdater'
     import { Electron } from 'shared/lib/electron'
     import { goto } from 'shared/lib/helpers'
@@ -8,8 +9,15 @@
     import { fetchMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { appSettings } from 'shared/lib/profile'
-    import { dashboardRoute, initRouter, route as appRoute, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
+    import {
+        appRoute,
+        dashboardRoute,
+        initRouter,
+        lastAppRoute,
+        routerNext,
+        routerPrevious,
+        walletRoute,
+    } from 'shared/lib/router'
     import { AppRoute, Tabs } from 'shared/lib/typings/routes'
     import { requestMnemonic } from 'shared/lib/wallet'
     import {
@@ -34,7 +42,7 @@
 
     const locale = activeLocale
 
-    $: $darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
+    $: $appSettings.darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
     $: if (activeLocale !== locale) {
         Electron.updateMenu('strings', getLocalisedMenuItems($_))
     }
@@ -45,7 +53,7 @@
     }
 
     let splash = true
-    setupI18n({ withLocale: appSettings.language })
+    setupI18n({ withLocale: $appSettings.language })
     onMount(async () => {
         setTimeout(() => {
             splash = false
@@ -66,6 +74,7 @@
             walletRoute.set(route)
         })
         Electron.onEvent('menu-navigate-settings', () => {
+            lastAppRoute.set(get(appRoute))
             appRoute.set(AppRoute.Dashboard)
             if (get(dashboardRoute) !== Tabs.Settings) {
                 dashboardRoute.set(Tabs.Settings)

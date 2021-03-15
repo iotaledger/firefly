@@ -4,7 +4,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, updateProfile, isProfileStrongholdLocked } from 'shared/lib/profile'
+    import { activeProfile, isProfileStrongholdLocked, updateProfile } from 'shared/lib/profile'
     import { PIN_LENGTH } from 'shared/lib/utils'
     import { api, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
@@ -25,7 +25,6 @@
     const lockScreenTimeoutOptions = [1, 5, 10, 30, 60].map((time) => ({ value: time, label: assignTimeoutOptionLabel(time) }))
 
     export let locale
-    export let navigate
 
     let exportStrongholdChecked
     let currentPassword = ''

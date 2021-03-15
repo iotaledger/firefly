@@ -1,19 +1,13 @@
 <script lang="typescript">
+    import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
-    import { appSettings } from 'shared/lib/profile'
     import { settingsRoute } from 'shared/lib/router'
     import { SettingsRoutes } from 'shared/lib/typings/routes'
-    import { createEventDispatcher, onDestroy } from 'svelte'
+    import { onDestroy } from 'svelte'
     import { SettingsHome, SettingsViewer } from './views'
 
     export let locale
     export let mobile
-
-    const dispatch = createEventDispatcher()
-
-    function navigate(params) {
-        dispatch('next', params)
-    }
 
     $: {
         if ($deepLinkRequestActive && !$appSettings.deepLinking) {
@@ -31,6 +25,6 @@
     {#if $settingsRoute === SettingsRoutes.Init}
         <SettingsHome {mobile} {locale} />
     {:else}
-        <SettingsViewer {mobile} {locale} {navigate} />
+        <SettingsViewer {mobile} {locale} />
     {/if}
 </div>

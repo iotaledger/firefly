@@ -1,4 +1,4 @@
-import { appSettings } from 'shared/lib/profile'
+import { appSettings } from 'shared/lib/appSettings'
 import { addMessages, dictionary, getLocaleFromNavigator, init, _ } from 'svelte-i18n'
 import { derived, get, writable } from 'svelte/store'
 
@@ -127,8 +127,19 @@ const dir = derived(appSettings, (_appSettings) => {
     return _appSettings.language === 'ar' ? 'rtl' : 'ltr'
 })
 
+
+const setLanguage = (item) => {
+    const locale = Object.keys(locales).find((key) => locales[key] === item.value)
+    appSettings.set({
+        ...get(appSettings),
+        language: locale,
+    })
+
+    setupI18n({ withLocale: locale })
+}
+
 const localize = get(_) as (string, values?) => string
 
 // We expose the svelte-i18n _ store so that our app has
 // a single API for i18n
-export { activeLocale, _, setupI18n, dir, isLocaleLoaded, localize }
+export { activeLocale, _, setupI18n, dir, isLocaleLoaded, localize, setLanguage }

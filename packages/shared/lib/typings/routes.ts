@@ -52,6 +52,13 @@ export enum SettingsRoutes {
     HelpAndInfo = 'helpAndInfo',
 }
 
+export enum SettingsRoutesNoProfile {
+    Init = 'init',
+    GeneralSettings = 'generalSettings',
+    AdvancedSettings = 'advancedSettings',
+    HelpAndInfo = 'helpAndInfo',
+}
+
 export enum GeneralSettings {
     Profile = 'profile',
     Theme = 'theme',
@@ -63,6 +70,7 @@ export enum GeneralSettings {
 export enum GeneralSettingsNoProfile {
     Theme = 'theme',
     Language = 'language',
+    Notifications = 'notifications',
 }
 
 export enum SecuritySettings {
@@ -81,6 +89,11 @@ export enum AdvancedSettings {
     ResyncAccounts = 'resyncAccounts',
     ErrorLog = 'errorLog',
     StateExport = 'stateExport',
+}
+
+export enum AdvancedSettingsNoProfile {
+    DeveloperMode = 'developerMode',
+    DeepLinks = 'deepLinks',
 }
 
 export enum HelpAndInfo {
