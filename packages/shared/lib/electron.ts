@@ -45,7 +45,7 @@ interface ElectronEventMap {
 }
 
 export interface IElectron {
-    getStrongholdBackupDestination(): Promise<string>;
+    getStrongholdBackupDestination(defaultPath: string): Promise<string | null>;
     getUserDataPath(): Promise<string>;
     getDiagnostics(): Promise<{ label: string; value: string; }[]>;
     updateActiveProfile(id: string): void;
