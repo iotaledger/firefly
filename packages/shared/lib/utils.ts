@@ -208,5 +208,5 @@ export const getDefaultStrongholdName = () : string => {
     // Match https://github.com/iotaledger/wallet.rs/blob/ffbeaa3466b44f79dd5f87e14ed1bdc4846d9e85/src/account_manager.rs#L1428
     // Trim milliseconds and replace colons with dashes
     const date = new Date().toISOString().slice(0, -5).replace(/:/g, "-")
-    return `${date}-iota-wallet-backup-wallet.stronghold`
+    return `firefly-backup-${date}.stronghold`
 }
