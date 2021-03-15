@@ -1,29 +1,29 @@
 {
     "views": {
-        "onboarding1": {
+        "onboarding_1": {
             "title": "Envoyer, Recevoir & Gérer vos IOTA",
             "body": "Firefly est un portefeuille IOTA sécurisé et facile à utiliser."
         },
         "legal": {
             "title": "Mentions légales",
             "body": "Veuillez consulter la politique de confidentialité et les conditions d'utilisation.",
-            "privacyPolicy": {
+            "privacy_policy": {
                 "title": "Politique de Confidentialité",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "termsOfService": {
+            "terms_of_service": {
                 "title": "Conditions d'Utilisation",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
@@ -34,7 +34,7 @@
         "setup": {
             "title": "Installez votre portefeuille",
             "body": "Vous pouvez créer un nouveau portefeuille ou importer un portefeuille existant.",
-            "profileName": "Nom du profil"
+            "profile_name": "Nom du profil"
         },
         "password": {
             "title": "Créer un mot de passe",
@@ -42,41 +42,41 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body2": "Keep your PIN safe!"
+            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
+            "body_2": "Keep your PIN safe!"
         },
         "pin": {
             "title": "Configurer le code PIN",
-            "body1": "Saisissez ci-dessous un code PIN à 6 chiffres. Il vous sera demandé de saisir votre code PIN pour vous connecter à votre portefeuille.",
-            "body2": "Vous ne pouvez utiliser que des chiffres."
+            "body_1": "Saisissez ci-dessous un code PIN à 6 chiffres. Il vous sera demandé de saisir votre code PIN pour vous connecter à votre portefeuille.",
+            "body_2": "Vous ne pouvez utiliser que des chiffres."
         },
-        "confirmPin": {
+        "confirm_pin": {
             "title": "Vérifiez votre code PIN",
             "body": "Saisissez à nouveau votre code PIN pour continuer."
         },
         "backup": {
             "title": "Sauvegarder votre portefeuille",
-            "body1": "Vous allez maintenant voir une phrase de récupération.",
-            "body2": "Ne partagez cette phrase avec personne. Votre phrase de récupération peut être utilisée pour accéder à vos jetons depuis n'importe quel endroit.",
-            "body3": "Si vous perdez votre phrase de récupération, vous risquez de perdre vos fonds."
+            "body_1": "Vous allez maintenant voir une phrase de récupération.",
+            "body_2": "Ne partagez cette phrase avec personne. Votre phrase de récupération peut être utilisée pour accéder à vos jetons depuis n'importe quel endroit.",
+            "body_3": "Si vous perdez votre phrase de récupération, vous risquez de perdre vos fonds."
         },
-        "recoveryPhrase": {
+        "recovery_phrase": {
             "title": "Phrase de récupération",
-            "body1": "Notez soigneusement les mots dans l'ordre exact.",
-            "body2": "Gardez secrète votre phrase de récupération et stockez-la de manière sécurisée. Ne la partagez avec personne.",
-            "revealRecoveryPhrase": "Afficher la phrase de récupération",
-            "hideRecoveryPhrase": "Masquer la phrase de récupération"
+            "body_1": "Notez soigneusement les mots dans l'ordre exact.",
+            "body_2": "Gardez secrète votre phrase de récupération et stockez-la de manière sécurisée. Ne la partagez avec personne.",
+            "reveal_recovery_phrase": "Afficher la phrase de récupération",
+            "hide_recovery_phrase": "Masquer la phrase de récupération"
         },
-        "verifyRecoveryPhrase": {
+        "verify_recovery_phrase": {
             "title": "Vérifier la phrase de récupération",
             "body": "Vérifions que vous avez noté la phrase correctement. Sélectionnez les mots dans le bon ordre.",
-            "creatingAccount": "Création du compte en cours, veuillez patienter..."
+            "creating_account": "Création du compte en cours, veuillez patienter..."
         },
-        "backupWallet": {
+        "backup_wallet": {
             "title": "Sauvegarder dans un fichier Stronghold",
             "body": "Saisissez votre mot de passe pour sauvegarder votre portefeuille dans un fichier Stronghold. Votre mot de passe est utilisé pour chiffrer la sauvegarde."
         },
-        "recoveryPhraseSaved": {
+        "recovery_phrase_saved": {
             "title": "Sauvegardé avec succès",
             "body": "Vous avez sauvegardé votre portefeuille dans un fichier Stronghold."
         },
@@ -88,35 +88,35 @@
             "title": "Importer un portefeuille",
             "body": "Si vous avez une phrase de récupération ou une sauvegarde Stronghold, vous pouvez l'importer ici."
         },
-        "importFromText": {
+        "import_from_text": {
             "title": "Restaurez votre portefeuille avec une phrase de récupération ou une seed",
-            "body1": "Une phrase de récupération est composée de 24 mots. Elle est utilisée pour récupérer un portefeuille Firefly existant.",
-            "body2": "Une seed est composée de 81 caractères. Elle est utilisée pour importer un ancien portefeuille Trinity.",
-            "body3": "Saisissez votre seed ou votre phrase de récupération",
-            "seedDetected": "Graine de 81 caractères détectée",
-            "phraseDetected": "Phrase de 24 mots détectée"
+            "body_1": "Une phrase de récupération est composée de 24 mots. Elle est utilisée pour récupérer un portefeuille Firefly existant.",
+            "body_2": "Une seed est composée de 81 caractères. Elle est utilisée pour importer un ancien portefeuille Trinity.",
+            "body_3": "Saisissez votre seed ou votre phrase de récupération",
+            "seed_detected": "Graine de 81 caractères détectée",
+            "phrase_detected": "Phrase de 24 mots détectée"
         },
-        "importFromFile": {
+        "import_from_file": {
             "title": "Restaurez votre portefeuille à partir d'un fichier de sauvegarde",
             "body": "Importez un fichier de sauvegarde pour restaurer votre portefeuille. Les sauvegardes peuvent être de type Stronghold (.stronghold) ou Trinity SeedVault (.kdbx)."
         },
-        "importBackupPassword": {
+        "import_backup_password": {
             "title": "Restaurez votre portefeuille à partir d'un fichier SeedVault ou Stronghold",
-            "body1": "Veuillez saisir votre mot de passe de sauvegarde.",
-            "body2": "C'est le mot de passe que vous avez défini lorsque vous avez créé votre sauvegarde pour la première fois."
+            "body_1": "Veuillez saisir votre mot de passe de sauvegarde.",
+            "body_2": "C'est le mot de passe que vous avez défini lorsque vous avez créé votre sauvegarde pour la première fois."
         },
-        "importSuccess": {
+        "import_success": {
             "title": "Vous avez récupéré votre sauvegarde avec succès",
             "body": "Vous pouvez maintenant installer votre nouveau portefeuille."
         },
         "migrate": {
             "title": "Migrer vos fonds",
-            "body1": "Ceci est un processus automatisé permettant de transférer vos fonds vers votre nouveau portefeuille. Nous vérifierons les adresses dépensées qui affaiblissent votre sécurité.",
-            "body2": "Cela peut prendre du temps. N'éteignez pas votre appareil pendant la migration.",
+            "body_1": "Ceci est un processus automatisé permettant de transférer vos fonds vers votre nouveau portefeuille. Nous vérifierons les adresses dépensées qui affaiblissent votre sécurité.",
+            "body_2": "Cela peut prendre du temps. N'éteignez pas votre appareil pendant la migration.",
             "existing": "Votre ancien portefeuille",
             "new": "Votre nouveau portefeuille"
         },
-        "migrateFailed": {
+        "migrate_failed": {
             "title": "To do",
             "body": "To do"
         },
@@ -248,40 +248,40 @@
             }
         },
         "login": {
-            "pleaseWait": "Veuillez attendre {time, plural, one {1 seconde} other {# secondes}}",
-            "incorrectAttempts": "{attempts, plural, one {1 tentative incorrecte} other {# tentatives incorrectes}}"
+            "please_wait": "Veuillez attendre {time, plural, one {1 seconde} other {# secondes}}",
+            "incorrect_attempts": "{attempts, plural, one {1 tentative incorrecte} other {# tentatives incorrectes}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "upToDate": "À jour",
-                    "outOfDate": "Obsolète"
+                    "up_to_date": "À jour",
+                    "out_of_date": "Obsolète"
                 },
-                "hardwareDevice": {
+                "hardware_device": {
                     "title": "Périphérique Matériel",
-                    "noneDetected": "Aucun périphérique détecté"
+                    "none_detected": "Aucun périphérique détecté"
                 },
-                "strongholdStatus": {
+                "stronghold_status": {
                     "title": "Statut StrongHold",
                     "locked": "Verrouillé",
                     "unlocked": "Déverrouillé"
                 },
-                "strongholdBackup": {
+                "stronghold_backup": {
                     "title": "Sauvegarde Stronghold",
-                    "weeksAgo": "Il y a {weeks, plural, one {# semaine} other {# semaines}}"
+                    "weeks_ago": "Il y a {weeks, plural, one {# semaine} other {# semaines}}"
                 }
             },
             "network": {
-                "networkOperational": "Réseau Opérationnel",
-                "networkDegraded": "Réseau Dégradé",
-                "networkDown": "Réseau Hors Service",
+                "network_operational": "Réseau Opérationnel",
+                "network_degraded": "Réseau Dégradé",
+                "network_down": "Réseau Hors Service",
                 "status": "Statut",
-                "messagesPerSecond": "Messages par seconde",
-                "confirmationRate": "Taux de confirmation"
+                "messages_per_second": "Messages par seconde",
+                "confirmation_rate": "Taux de confirmation"
             },
-            "profileModal": {
-                "allSettings": "Tous les paramètres",
+            "profile_modal": {
+                "all_settings": "Tous les paramètres",
                 "logout": "Déconnexion"
             }
         }
@@ -296,42 +296,42 @@
         },
         "version": {
             "title": "Version actuelle : {version}",
-            "upToDateTitle": "Firefly est à jour",
-            "upToDateDescription": "Vous utilisez la dernière et la plus sûre version de Firefly.",
-            "updateAvailable": "Mise à jour de Firefly disponible",
-            "updateDetails": "Version {version} - {date}"
+            "up_to_date_title": "Firefly est à jour",
+            "up_to_date_description": "Vous utilisez la dernière et la plus sûre version de Firefly.",
+            "update_available": "Mise à jour de Firefly disponible",
+            "update_details": "Version {version} - {date}"
         },
         "backup": {
             "title": "Dernière sauvegarde : {date}",
-            "lastBackup": "Vous avez sauvegardé la dernière fois le {date}",
-            "backupDescription": "Il est important de procéder régulièrement à une sauvegarde afin de vous assurer que vous avez une copie de vos comptes et de l'historique de vos transactions.",
-            "backupWarning": "Si vous perdez votre sauvegarde et votre phrase de récupération, vous perdrez l'accès à vos fonds.",
-            "notBackedUp": "Non sauvegardé",
-            "notBackedUpDescription": "Vous n'avez pas sauvegardé votre Stronghold"
+            "last_backup": "Vous avez sauvegardé la dernière fois le {date}",
+            "backup_description": "Il est important de procéder régulièrement à une sauvegarde afin de vous assurer que vous avez une copie de vos comptes et de l'historique de vos transactions.",
+            "backup_warning": "Si vous perdez votre sauvegarde et votre phrase de récupération, vous perdrez l'accès à vos fonds.",
+            "not_backed_up": "Non sauvegardé",
+            "not_backed_up_description": "Vous n'avez pas sauvegardé votre Stronghold"
         },
-        "deleteAccount": {
+        "delete_account": {
             "title": "Supprimer {name} ?",
             "body": "Vous perdrez définitivement votre historique de transactions et peut-être d'autres choses aussi.",
-            "typePassword": "Saisissez le mot de passe de votre portefeuille pour confirmer.",
-            "deleteAccount": "Supprimer le compte",
-            "errorTitle": "Impossible de supprimer {name}",
-            "errorBody1": "Pour supprimer un compte, vous devez avoir un solde de 0.",
-            "errorBody2": "Il vous reste actuellement {balance} sur ce compte. Veuillez déplacer ces fonds vers un autre compte et réessayez.",
-            "errorBody3": "Vous ne pouvez pas supprimer ce compte, vous devez en avoir au moins un."
+            "type_password": "Saisissez le mot de passe de votre portefeuille pour confirmer.",
+            "delete_account": "Supprimer le compte",
+            "error_title": "Impossible de supprimer {name}",
+            "error_body_1": "Pour supprimer un compte, vous devez avoir un solde de 0.",
+            "error_body_2": "Il vous reste actuellement {balance} sur ce compte. Veuillez déplacer ces fonds vers un autre compte et réessayez.",
+            "error_body_3": "Vous ne pouvez pas supprimer ce compte, vous devez en avoir au moins un."
         },
-        "addressHistory": {
+        "address_history": {
             "title": "Historique des adresses du compte {name}",
-            "currentBalance": "Solde actuel : {balance}"
+            "current_balance": "Solde actuel : {balance}"
         },
         "node": {
-            "titleAdd": "Ajouter un nœud",
-            "titleRemove": "Supprimer un noeud",
-            "titleDetails": "Détails du nœud",
-            "nodeAddress": "Adresse du noeud",
-            "optionalUsername": "Nom d'utilisateur (facultatif)",
-            "optionalPassword": "Mot de passe (facultatif)",
-            "setAsPrimaryNode": "Définir comme noeud principal",
-            "removeConfirmation": "Êtes-vous sûr de vouloir supprimer ce noeud ?"
+            "title_add": "Ajouter un nœud",
+            "title_remove": "Supprimer un noeud",
+            "title_details": "Détails du nœud",
+            "node_address": "Adresse du noeud",
+            "optional_username": "Nom d'utilisateur (facultatif)",
+            "optional_password": "Mot de passe (facultatif)",
+            "set_as_primary_node": "Définir comme noeud principal",
+            "remove_confirmation": "Êtes-vous sûr de vouloir supprimer ce noeud ?"
         },
         "errorLog": {
             "title": "Journal d'erreur",
@@ -354,12 +354,12 @@
         }
     },
     "charts": {
-        "incomingMi": "{value} Mi entrants",
-        "outgoingMi": "{value} Mi sortant",
+        "incoming_mi": "{value} Mi entrants",
+        "outgoing_mi": "{value} Mi sortant",
         "portoflio": "Portefeuille",
         "token": "Jeton",
-        "accountValue": "Valeur du compte",
-        "accountActivity": "Activité du compte"
+        "account_value": "Valeur du compte",
+        "account_activity": "Activité du compte"
     },
     "actions": {
         "continue": "Continuer",
@@ -368,32 +368,32 @@
         "close": "Fermer",
         "dismiss": "Ignorer",
         "save": "Sauvegarder",
-        "importSeed": "Importer une seed existante",
-        "importWallet": "Importer un portefeuille existant",
-        "createWallet": "Créer un nouveau portefeuille",
-        "savePassword": "Sauvegarder le mot de passe",
-        "useBiometric": "Utiliser la sécurité biométrique",
-        "setupPin": "Configurer le code PIN",
-        "setPin": "Définir le code PIN",
-        "confirmPin": "Confirmer le code PIN",
-        "enterYourPin": "Saisissez votre code PIN",
-        "saveBackupFile": "Enregistrer le fichier de sauvegarde",
-        "iveWrittenRecoveryPhrase": "J'ai noté ma phrase de récupération",
-        "verifyRecoveryPhrase": "Vérifier la phrase de récupération",
-        "revealRecoveryPhrase": "Afficher la phrase de récupération",
-        "importSeedvault": "Importer un SeedVault",
-        "checkAgain": "Non, vérifier à nouveau",
-        "importFromFile": "Importer à partir d'un fichier",
+        "import_seed": "Importer une seed existante",
+        "import_wallet": "Importer un portefeuille existant",
+        "create_wallet": "Créer un nouveau portefeuille",
+        "save_password": "Sauvegarder le mot de passe",
+        "use_biometric": "Utiliser la sécurité biométrique",
+        "setup_pin": "Configurer le code PIN",
+        "set_pin": "Définir le code PIN",
+        "confirm_pin": "Confirmer le code PIN",
+        "enter_your_pin": "Saisissez votre code PIN",
+        "save_backup_file": "Enregistrer le fichier de sauvegarde",
+        "ive_written_recovery_phrase": "J'ai noté ma phrase de récupération",
+        "verify_recovery_phrase": "Vérifier la phrase de récupération",
+        "reveal_recovery_phrase": "Afficher la phrase de récupération",
+        "import_seedvault": "Importer un SeedVault",
+        "check_again": "Non, vérifier à nouveau",
+        "import_from_file": "Importer à partir d'un fichier",
         "send": "Envoyer",
         "receive": "Recevoir",
         "create": "Créer",
-        "beginTransfer": "Démarrer le Transfert",
-        "tryAgain": "Réessayez",
-        "visitDiscord": "Visitez Discord",
-        "dragDrop": "Glisser & Déposer",
-        "importExtentions": "FIchier .stronghold ou .kdbx",
-        "chooseFile": "Sélectionnez un Fichier",
-        "dropHere": "Déposez votre fichier ici",
+        "begin_transfer": "Démarrer le Transfert",
+        "try_again": "Réessayez",
+        "visit_discord": "Visitez Discord",
+        "drag_drop": "Glisser & Déposer",
+        "import_extentions": "FIchier .stronghold ou .kdbx",
+        "choose_file": "Sélectionnez un Fichier",
+        "drop_here": "Déposez votre fichier ici",
         "syncAll": "Tout synchroniser",
         "export": "Exporter",
         "exportNewStronghold": "Exporter une nouvelle Stronghold",
@@ -403,15 +403,15 @@
         "exportState": "Exporter l'état",
         "outsourceProofOfWork": "Externaliser la preuve de travail",
         "unlock": "Déverrouiller",
-        "updateFirefly": "Mettre à jour Firefly",
-        "restartNow": "Redémarrer maintenant",
-        "saveBackup": "Enregistrer la sauvegarde",
-        "customizeAcount": "Personnaliser votre compte",
-        "viewAddressHistory": "Voir l'historique des adresses",
-        "deleteAccount": "Supprimer le compte",
+        "update_firefly": "Mettre à jour Firefly",
+        "restart_now": "Redémarrer maintenant",
+        "save_backup": "Enregistrer la sauvegarde",
+        "customize_account": "Personnaliser votre compte",
+        "view_address_history": "Voir l'historique des adresses",
+        "delete_account": "Supprimer le compte",
         "max": "Maximum",
-        "addNode": "Ajouter un nœud",
-        "removeNode": "Supprimer un noeud",
+        "add_node": "Ajouter un nœud",
+        "remove_node": "Supprimer un noeud",
         "hide": "Masquer",
         "hideOthers": "Masquer les autres",
         "showAll": "Montrer Tout",
@@ -427,57 +427,57 @@
         "checkForUpdates": "Rechercher des Mises à jour",
         "reportAnIssue": "Signaler une Anomalie",
         "clear": "Effacer",
-        "hideDetails": "Cacher détails",
+        "hide_details": "Cacher détails",
         "yes": "Oui",
         "no": "Non",
         "reset": "Réinitialiser"
     },
     "general": {
         "password": "Mot de passe",
-        "confirmPassword": "Confirmez le mot de passe",
+        "confirm_password": "Confirmez le mot de passe",
         "currentPassword": "Mot de passe actuel",
         "newPassword": "Nouveau mot de passe",
         "confirmNewPassword": "Confirmer le nouveau mot de passe",
-        "yourSeed": "Votre Seed",
-        "recoveryPhrase": "Phrase de Récupération",
-        "recentActivity": "Activité Récente",
+        "your_seed": "Votre Seed",
+        "recovery_phrase": "Phrase de Récupération",
+        "recent_activity": "Activité Récente",
         "sent": "Envoyé",
         "received": "Reçu",
-        "sendPayment": "Envoyer le paiement",
-        "moveFunds": "Déplacer des fonds",
-        "sendFunds": "Envoyer des fonds",
-        "sendToAddress": "Envoyer à une Adresse",
-        "scanQrOrPaste": "Scannez un QR code ou collez une Adresse",
-        "moveFundsBetweenAccounts": "Déplacer des fonds entre comptes",
-        "sendTokensToAddress": "Envoyer des jetons à une adresse",
-        "manageAccount": "Gérer Compte",
-        "customizeAcount": "Personnaliser votre compte",
+        "send_payment": "Envoyer le paiement",
+        "move_funds": "Déplacer des fonds",
+        "send_funds": "Envoyer des fonds",
+        "send_to_address": "Envoyer à une Adresse",
+        "scan_qr_or_paste": "Scannez un QR code ou collez une Adresse",
+        "move_funds_between_accounts": "Déplacer des fonds entre comptes",
+        "send_tokens_to_address": "Envoyer des jetons à une adresse",
+        "manage_account": "Gérer Compte",
+        "customize_account": "Personnaliser votre compte",
         "account": "Compte",
-        "sendingToAddress": "Envoi vers l'adresse",
+        "sending_to_address": "Envoi vers l'adresse",
         "amount": "Montant",
-        "addAddress": "Ajouter une Adresse",
+        "add_address": "Ajouter une Adresse",
         "reference": "Référence",
         "from": "De",
         "to": "À",
-        "receiveFunds": "Recevoir des fonds",
-        "myAddress": "Mon Adresse",
-        "shareAddress": "Partager une adresse",
-        "yourAddress": "Votre adresse",
-        "generateNewAddress": "Générer une nouvelle adresse",
-        "copyAddress": "Copier Adresse",
-        "haveTextBackup": "J'ai une sauvegarde texte",
-        "haveFileBackup": "J'ai une sauvegarde fichier",
-        "enterSeedOrPhrase": "Saisissez une phrase de récupération ou une seed",
-        "uploadSeedvaultOrStronghold": "Importer un fichier Stronghold ou SeedVault",
+        "receive_funds": "Recevoir des fonds",
+        "my_address": "Mon Adresse",
+        "share_address": "Partager une adresse",
+        "your_address": "Votre adresse",
+        "generate_new_address": "Générer une nouvelle adresse",
+        "copy_address": "Copier Adresse",
+        "have_text_backup": "J'ai une sauvegarde texte",
+        "have_file_backup": "J'ai une sauvegarde fichier",
+        "enter_seed_or_phrase": "Saisissez une phrase de récupération ou une seed",
+        "upload_seedvault_or_stronghold": "Importer un fichier Stronghold ou SeedVault",
         "import": "Importer",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Langue",
         "appearance": "Apparence",
-        "lightTheme": "Thème Clair",
-        "darkTheme": "Thème Sombre",
-        "totalBalance": "Solde Total",
-        "accountBalance": "Solde du Compte",
+        "light_theme": "Thème Clair",
+        "dark_theme": "Thème Sombre",
+        "total_balance": "Solde Total",
+        "account_balance": "Solde du Compte",
         "incoming": "Entrant",
         "outgoing": "Sortant",
         "accounts": "Comptes",
@@ -486,12 +486,12 @@
         "profiles": "Profils",
         "developerProfile": "Profil Développeur",
         "dev": "Dév",
-        "createAccount": "Créer un compte",
-        "accountName": "Nom du compte",
-        "latestTransactions": "Dernières Transactions",
+        "create_account": "Créer un compte",
+        "account_name": "Nom du compte",
+        "latest_transactions": "Dernières Transactions",
         "transactions": "Transactions",
         "security": "Sécurité",
-        "accountAddress": "Adresse du Compte",
+        "account_address": "Adresse du Compte",
         "nodes": "Nœuds",
         "wallet": "Portefeuille",
         "help": "Aide",
@@ -500,10 +500,10 @@
         "input_address": "Adresses entrantes",
         "receive_address": "Adresse de réception",
         "date": "Date",
-        "noAccounts": "Vous n'avez pas de compte, veuillez en créer un.",
-        "loadingAccounts": " Chargement, veuillez patienter...",
-        "addProfile": "Ajouter Profil",
-        "noRecentHistory": "Aucun historique récent",
+        "no_accounts": "Vous n'avez pas de compte, veuillez en créer un.",
+        "loading_accounts": " Chargement, veuillez patienter...",
+        "add_profile": "Ajouter Profil",
+        "no_recent_history": "Aucun historique récent",
         "transferSyncing": "Synchroniser le compte",
         "transferSelectingInputs": "Choisir entrée",
         "transferRemainderAddress": "Génération de l'adresse de dépôt restante",
@@ -527,10 +527,10 @@
     },
     "dates": {
         "today": "Aujourd'hui",
-        "daysAgo": "Il y a {time, plural, one {# jour} other {# jours}}",
-        "weeksAgo": "Il y a {time, plural, one {# semaine} other {# semaines}}",
-        "monthsAgo": "il y a {time, plural, one {# mois} other {# mois}}",
-        "yearsAgo": "il y a {time, plural, one {# année} other {# années}}"
+        "days_ago": "Il y a {time, plural, one {# jour} other {# jours}}",
+        "weeks_ago": "Il y a {time, plural, one {# semaine} other {# semaines}}",
+        "months_ago": "il y a {time, plural, one {# mois} other {# mois}}",
+        "years_ago": "il y a {time, plural, one {# année} other {# années}}"
     },
     "notifications": {
         "valueTx": "Réception de {{value}} sur {{account}}",

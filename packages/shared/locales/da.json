@@ -1,29 +1,29 @@
 {
     "views": {
-        "onboarding1": {
+        "onboarding_1": {
             "title": "Send, Modtag & Administrer dine IOTA",
             "body": "Firefly er en sikker og let anvendelig IOTA-tegnebog."
         },
         "legal": {
             "title": "Jura",
             "body": "Gennemgå venligst privatlivspolitikken samt vilkår og betingelser.",
-            "privacyPolicy": {
+            "privacy_policy": {
                 "title": "Privatlivspolitik",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "termsOfService": {
+            "terms_of_service": {
                 "title": "Vilkår og Betingelser",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
@@ -34,7 +34,7 @@
         "setup": {
             "title": "Konfigurer din tegnebog",
             "body": "Du kan oprette en ny tegnebog eller importere en eksisterende.",
-            "profileName": "Profile Name"
+            "profile_name": "Profile Name"
         },
         "password": {
             "title": "Opret en adgangskode",
@@ -42,41 +42,41 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body2": "Keep your PIN safe!"
+            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
+            "body_2": "Keep your PIN safe!"
         },
         "pin": {
             "title": "Vælg en PIN-kode",
-            "body1": "Indtast en 6-cifret PIN-kode nedenfor. Du vil blive bedt om at indtaste din pinkode, når du skal logge ind på din tegnebog.",
-            "body2": "Du kan kun bruge tal."
+            "body_1": "Indtast en 6-cifret PIN-kode nedenfor. Du vil blive bedt om at indtaste din pinkode, når du skal logge ind på din tegnebog.",
+            "body_2": "Du kan kun bruge tal."
         },
-        "confirmPin": {
+        "confirm_pin": {
             "title": "Bekræft din PIN-kode",
             "body": "Indtast din PIN-kode igen for at fortsætte."
         },
         "backup": {
             "title": "Sikkerhedskopier din tegnebog",
-            "body1": "Du vil nu blive vist en gendannelsessætning.",
-            "body2": "Del ikke denne sætning med nogen. Din gendannelsessætning kan bruges til at få adgang til dine tokens.",
-            "body3": "Hvis du mister din gendannelsessætning, kan du miste dine penge."
+            "body_1": "Du vil nu blive vist en gendannelsessætning.",
+            "body_2": "Del ikke denne sætning med nogen. Din gendannelsessætning kan bruges til at få adgang til dine tokens.",
+            "body_3": "Hvis du mister din gendannelsessætning, kan du miste dine penge."
         },
-        "recoveryPhrase": {
+        "recovery_phrase": {
             "title": "Gendannelsesssætning",
-            "body1": "Skriv omhyggeligt ordene ned i den rigtige rækkefølge.",
-            "body2": "Hold din genoprettelsessætning hemmelig og gem den et sikkert sted. Del den ikke med nogen.",
-            "revealRecoveryPhrase": "Vis gendannelsessætning",
-            "hideRecoveryPhrase": "Hide recovery phrase"
+            "body_1": "Skriv omhyggeligt ordene ned i den rigtige rækkefølge.",
+            "body_2": "Hold din genoprettelsessætning hemmelig og gem den et sikkert sted. Del den ikke med nogen.",
+            "reveal_recovery_phrase": "Vis gendannelsessætning",
+            "hide_recovery_phrase": "Hide recovery phrase"
         },
-        "verifyRecoveryPhrase": {
+        "verify_recovery_phrase": {
             "title": "Bekræft gendannelsessætning",
             "body": "Lad os tjekke om du skrev sætningen korrekt ned. Vælg ordene i den rigtige rækkefølge.",
-            "creatingAccount": "Creating account, please wait..."
+            "creating_account": "Creating account, please wait..."
         },
-        "backupWallet": {
+        "backup_wallet": {
             "title": "Sikkerhedskopiér til en Stronghold fil",
             "body": "Indtast din adgangskode for at sikkerhedskopiere din tegnebog til en Stronghold fil. Din adgangskode bruges til at kryptere sikkerhedskopien."
         },
-        "recoveryPhraseSaved": {
+        "recovery_phrase_saved": {
             "title": "Sikkerhedskopiering lykkedes",
             "body": "Du har sikkerhedskopieret din tegnebog til Stronghold."
         },
@@ -88,35 +88,35 @@
             "title": "Importér en tegnebog",
             "body": "Hvis du har en gendannelsessætning eller Stronghold backup, kan du importere den her."
         },
-        "importFromText": {
+        "import_from_text": {
             "title": "Gendan din tegnebog med en gendannelsessætning eller et seed",
-            "body1": "En gendannelsessætning er 24 ord lang. Den kan bruges til at gendanne en eksisterende Firefly tegnebog.",
-            "body2": "Et seed består af 81 tegn. Dette bruges til at gendanne fra en ældre Trinity tegnebog.",
-            "body3": "Indtast dit seed eller din gendannelsessætning",
-            "seedDetected": "81 character seed detected",
-            "phraseDetected": "24 word phrase detected"
+            "body_1": "En gendannelsessætning er 24 ord lang. Den kan bruges til at gendanne en eksisterende Firefly tegnebog.",
+            "body_2": "Et seed består af 81 tegn. Dette bruges til at gendanne fra en ældre Trinity tegnebog.",
+            "body_3": "Indtast dit seed eller din gendannelsessætning",
+            "seed_detected": "81 character seed detected",
+            "phrase_detected": "24 word phrase detected"
         },
-        "importFromFile": {
+        "import_from_file": {
             "title": "Gendan din tegnebog fra en backupfil",
             "body": "Importer en backupfil for at gendanne din tegnebog. Backups kan enten være en Stronghold-fil (.stronghold) eller en Trinity SeedVault (.kdbx)."
         },
-        "importBackupPassword": {
+        "import_backup_password": {
             "title": "Gendan din tegnebog fra en SeedVault eller Stronghold",
-            "body1": "Indtast venligst adgangskoden til din sikkerhedskopi.",
-            "body2": "Dette er den adgangskode du angav, da du først oprettede din backup."
+            "body_1": "Indtast venligst adgangskoden til din sikkerhedskopi.",
+            "body_2": "Dette er den adgangskode du angav, da du først oprettede din backup."
         },
-        "importSuccess": {
+        "import_success": {
             "title": "Du har gendannet din sikkerhedskopi med succes",
             "body": "Du kan nu konfigurere din nye tegnebog."
         },
         "migrate": {
             "title": "Migrér dine penge",
-            "body1": "Dette er en automatiseret proces til at overføre dine penge til din nye tegnebog. Vi tjekker samtidigt for brugte adresser, der svækker din sikkerhed.",
-            "body2": "Det kan tage nogen tid. Sluk ikke din enhed under migrationen.",
+            "body_1": "Dette er en automatiseret proces til at overføre dine penge til din nye tegnebog. Vi tjekker samtidigt for brugte adresser, der svækker din sikkerhed.",
+            "body_2": "Det kan tage nogen tid. Sluk ikke din enhed under migrationen.",
             "existing": "Din gamle tegnebog",
             "new": "Din nye tegnebog"
         },
-        "migrateFailed": {
+        "migrate_failed": {
             "title": "To do",
             "body": "To do"
         },
@@ -248,40 +248,40 @@
             }
         },
         "login": {
-            "pleaseWait": "Vent venligst {time, plural, one {1 sekund} other {# sekunder}}",
-            "incorrectAttempts": "{attempts, plural, one {1 forkert forsøg} other {# forkerte forsøg}}"
+            "please_wait": "Vent venligst {time, plural, one {1 sekund} other {# sekunder}}",
+            "incorrect_attempts": "{attempts, plural, one {1 forkert forsøg} other {# forkerte forsøg}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "upToDate": "Up to date",
-                    "outOfDate": "Out of date"
+                    "up_to_date": "Up to date",
+                    "out_of_date": "Out of date"
                 },
-                "hardwareDevice": {
+                "hardware_device": {
                     "title": "Hardware Device",
-                    "noneDetected": "None detected"
+                    "none_detected": "None detected"
                 },
-                "strongholdStatus": {
+                "stronghold_status": {
                     "title": "Stronghold Status",
                     "locked": "Locked",
                     "unlocked": "Unlocked"
                 },
-                "strongholdBackup": {
+                "stronghold_backup": {
                     "title": "Stronghold Backup",
-                    "weeksAgo": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
                 }
             },
             "network": {
-                "networkOperational": "Network Operational",
-                "networkDegraded": "Network Degraded",
-                "networkDown": "Network Down",
+                "network_operational": "Network Operational",
+                "network_degraded": "Network Degraded",
+                "network_down": "Network Down",
                 "status": "Status",
-                "messagesPerSecond": "Messages per second",
-                "confirmationRate": "Confirmation rate"
+                "messages_per_second": "Messages per second",
+                "confirmation_rate": "Confirmation rate"
             },
-            "profileModal": {
-                "allSettings": "All settings",
+            "profile_modal": {
+                "all_settings": "All settings",
                 "logout": "Log out"
             }
         }
@@ -296,42 +296,42 @@
         },
         "version": {
             "title": "Current version: {version}",
-            "upToDateTitle": "Firefly is up to date",
-            "upToDateDescription": "You are running the latest and safest version of Firefly.",
-            "updateAvailable": "Firefly update available",
-            "updateDetails": "Version {version} - {date}"
+            "up_to_date_title": "Firefly is up to date",
+            "up_to_date_description": "You are running the latest and safest version of Firefly.",
+            "update_available": "Firefly update available",
+            "update_details": "Version {version} - {date}"
         },
         "backup": {
             "title": "Last backup: {date}",
-            "lastBackup": "You last backed up {date}",
-            "backupDescription": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
-            "backupWarning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "notBackedUp": "Not backed up",
-            "notBackedUpDescription": "You have not backed up your Stronghold"
+            "last_backup": "You last backed up {date}",
+            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
+            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
+            "not_backed_up": "Not backed up",
+            "not_backed_up_description": "You have not backed up your Stronghold"
         },
-        "deleteAccount": {
+        "delete_account": {
             "title": "Delete {name}?",
             "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "typePassword": "Type your wallet’s password to confirm.",
-            "deleteAccount": "Delete account",
-            "errorTitle": "Unable to delete {name}",
-            "errorBody1": "To delete an account you must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
-            "errorBody3": "You cannot delete this account, you must have at least one."
+            "type_password": "Type your wallet’s password to confirm.",
+            "delete_account": "Delete account",
+            "error_title": "Unable to delete {name}",
+            "error_body_1": "To delete an account you must have 0 balance.",
+            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
+            "error_body_3": "You cannot delete this account, you must have at least one."
         },
-        "addressHistory": {
+        "address_history": {
             "title": "{name} account address history",
-            "currentBalance": "Current balance: {balance}"
+            "current_balance": "Current balance: {balance}"
         },
         "node": {
-            "titleAdd": "Add a node",
-            "titleRemove": "Remove a node",
-            "titleDetails": "Node details",
-            "nodeAddress": "Node address",
-            "optionalUsername": "Username (optional)",
-            "optionalPassword": "Password (optional)",
-            "setAsPrimaryNode": "Set as primary node",
-            "removeConfirmation": "Are you sure you want to remove this node?"
+            "title_add": "Add a node",
+            "title_remove": "Remove a node",
+            "title_details": "Node details",
+            "node_address": "Node address",
+            "optional_username": "Username (optional)",
+            "optional_password": "Password (optional)",
+            "set_as_primary_node": "Set as primary node",
+            "remove_confirmation": "Are you sure you want to remove this node?"
         },
         "errorLog": {
             "title": "Error Log",
@@ -354,12 +354,12 @@
         }
     },
     "charts": {
-        "incomingMi": "Incoming {value} Mi",
-        "outgoingMi": "Outgoing {value} Mi",
+        "incoming_mi": "Incoming {value} Mi",
+        "outgoing_mi": "Outgoing {value} Mi",
         "portoflio": "Portfolio",
         "token": "Token",
-        "accountValue": "Account Value",
-        "accountActivity": "Account Activity"
+        "account_value": "Account Value",
+        "account_activity": "Account Activity"
     },
     "actions": {
         "continue": "Fortsæt",
@@ -368,32 +368,32 @@
         "close": "Luk",
         "dismiss": "Dismiss",
         "save": "Gem",
-        "importSeed": "Importer et eksisterende seed",
-        "importWallet": "Importer eksisterende tegnebog",
-        "createWallet": "Opret ny tegnebog",
-        "savePassword": "Gem adgangskode",
-        "useBiometric": "Brug biometrisk sikkerhed",
-        "setupPin": "Vælg en PIN-kode",
-        "setPin": "Angiv pinkode",
-        "confirmPin": "Bekræft pinkode",
-        "enterYourPin": "Indtast din PIN-kode",
-        "saveBackupFile": "Gem backupfil",
-        "iveWrittenRecoveryPhrase": "Jeg har skrevet min gendannelsessætning ned",
-        "verifyRecoveryPhrase": "Bekræft gendannelsessætning",
-        "revealRecoveryPhrase": "Vis gendannelsessætning",
-        "importSeedvault": "Importér SeedVault",
-        "checkAgain": "Nej, Kontroller Igen",
-        "importFromFile": "Importer fra en fil",
+        "import_seed": "Importer et eksisterende seed",
+        "import_wallet": "Importer eksisterende tegnebog",
+        "create_wallet": "Opret ny tegnebog",
+        "save_password": "Gem adgangskode",
+        "use_biometric": "Brug biometrisk sikkerhed",
+        "setup_pin": "Vælg en PIN-kode",
+        "set_pin": "Angiv pinkode",
+        "confirm_pin": "Bekræft pinkode",
+        "enter_your_pin": "Indtast din PIN-kode",
+        "save_backup_file": "Gem backupfil",
+        "ive_written_recovery_phrase": "Jeg har skrevet min gendannelsessætning ned",
+        "verify_recovery_phrase": "Bekræft gendannelsessætning",
+        "reveal_recovery_phrase": "Vis gendannelsessætning",
+        "import_seedvault": "Importér SeedVault",
+        "check_again": "Nej, Kontroller Igen",
+        "import_from_file": "Importer fra en fil",
         "send": "Send",
         "receive": "Modtag",
         "create": "Opret",
-        "beginTransfer": "Begynd Overførsel",
-        "tryAgain": "Prøv igen",
-        "visitDiscord": "Besøg Discord",
-        "dragDrop": "Træk Og Slip",
-        "importExtentions": ".stronghold eller .kdbx fil",
-        "chooseFile": "Vælg fil",
-        "dropHere": "Slip din fil her",
+        "begin_transfer": "Begynd Overførsel",
+        "try_again": "Prøv igen",
+        "visit_discord": "Besøg Discord",
+        "drag_drop": "Træk Og Slip",
+        "import_extentions": ".stronghold eller .kdbx fil",
+        "choose_file": "Vælg fil",
+        "drop_here": "Slip din fil her",
         "syncAll": "Synkronisér alle",
         "export": "Eksportér",
         "exportNewStronghold": "Eksportér en ny Stronghold",
@@ -403,15 +403,15 @@
         "exportState": "Eksportér tilstand",
         "outsourceProofOfWork": "Outsource bevis for arbejde",
         "unlock": "Lås op",
-        "updateFirefly": "Update Firefly",
-        "restartNow": "Restart now",
-        "saveBackup": "Save backup",
-        "customizeAcount": "Customise account",
-        "viewAddressHistory": "View address history",
-        "deleteAccount": "Delete account",
+        "update_firefly": "Update Firefly",
+        "restart_now": "Restart now",
+        "save_backup": "Save backup",
+        "customize_account": "Customise account",
+        "view_address_history": "View address history",
+        "delete_account": "Delete account",
         "max": "Max",
-        "addNode": "Add node",
-        "removeNode": "Remove node",
+        "add_node": "Add node",
+        "remove_node": "Remove node",
         "hide": "Hide",
         "hideOthers": "Hide Others",
         "showAll": "Show All",
@@ -427,57 +427,57 @@
         "checkForUpdates": "Check for Updates",
         "reportAnIssue": "Report an Issue",
         "clear": "Clear",
-        "hideDetails": "Hide Details",
+        "hide_details": "Hide Details",
         "yes": "Yes",
         "no": "No",
         "reset": "Reset"
     },
     "general": {
         "password": "Adgangskode",
-        "confirmPassword": "Bekræft adgangskode",
+        "confirm_password": "Bekræft adgangskode",
         "currentPassword": "Nuværende adgangskode",
         "newPassword": "Ny adgangskode",
         "confirmNewPassword": "Bekræft ny adgangskode",
-        "yourSeed": "Dit seed",
-        "recoveryPhrase": "Gendannelsesssætning",
-        "recentActivity": "Seneste Aktivitet",
+        "your_seed": "Dit seed",
+        "recovery_phrase": "Gendannelsesssætning",
+        "recent_activity": "Seneste Aktivitet",
         "sent": "Sendt",
         "received": "Modtaget",
-        "sendPayment": "Send payment",
-        "moveFunds": "Move funds",
-        "sendFunds": "Send penge",
-        "sendToAddress": "Send til en adresse",
-        "scanQrOrPaste": "Scan en QR-kode eller indsæt en adresse",
-        "moveFundsBetweenAccounts": "Flyt midler mellem konti",
-        "sendTokensToAddress": "Send tokens to an address",
-        "manageAccount": "Administrér konto",
-        "customizeAcount": "Tilpas din konto",
+        "send_payment": "Send payment",
+        "move_funds": "Move funds",
+        "send_funds": "Send penge",
+        "send_to_address": "Send til en adresse",
+        "scan_qr_or_paste": "Scan en QR-kode eller indsæt en adresse",
+        "move_funds_between_accounts": "Flyt midler mellem konti",
+        "send_tokens_to_address": "Send tokens to an address",
+        "manage_account": "Administrér konto",
+        "customize_account": "Tilpas din konto",
         "account": "Konto",
-        "sendingToAddress": "Sender til adresse",
+        "sending_to_address": "Sender til adresse",
         "amount": "Beløb",
-        "addAddress": "Tilføj adresse",
+        "add_address": "Tilføj adresse",
         "reference": "Reference",
         "from": "Fra",
         "to": "Til",
-        "receiveFunds": "Modtag penge",
-        "myAddress": "My Address",
-        "shareAddress": "Del en adresse",
-        "yourAddress": "Din adresse",
-        "generateNewAddress": "Generér ny adresse",
-        "copyAddress": "Kopiér adresse",
-        "haveTextBackup": "Jeg har en tekst sikkerhedskopi",
-        "haveFileBackup": "Jeg har en fil sikkerhedskopi",
-        "enterSeedOrPhrase": "Indtast en gendannelsessætning eller seed",
-        "uploadSeedvaultOrStronghold": "Importér en Stronghold - eller SeedVault- fil",
+        "receive_funds": "Modtag penge",
+        "my_address": "My Address",
+        "share_address": "Del en adresse",
+        "your_address": "Din adresse",
+        "generate_new_address": "Generér ny adresse",
+        "copy_address": "Kopiér adresse",
+        "have_text_backup": "Jeg har en tekst sikkerhedskopi",
+        "have_file_backup": "Jeg har en fil sikkerhedskopi",
+        "enter_seed_or_phrase": "Indtast en gendannelsessætning eller seed",
+        "upload_seedvault_or_stronghold": "Importér en Stronghold - eller SeedVault- fil",
         "import": "Importér",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Sprog",
         "appearance": "Udseende",
-        "lightTheme": "Lyst tema",
-        "darkTheme": "Mørkt tema",
-        "totalBalance": "Saldo I Alt",
-        "accountBalance": "Account Balance",
+        "light_theme": "Lyst tema",
+        "dark_theme": "Mørkt tema",
+        "total_balance": "Saldo I Alt",
+        "account_balance": "Account Balance",
         "incoming": "Indgående",
         "outgoing": "Udgående",
         "accounts": "Konti",
@@ -486,24 +486,24 @@
         "profiles": "Profiler",
         "developerProfile": "Developer Profile",
         "dev": "Dev",
-        "createAccount": "Opret en konto",
-        "accountName": "Kontonavn",
-        "latestTransactions": "Seneste transaktioner",
+        "create_account": "Opret en konto",
+        "account_name": "Kontonavn",
+        "latest_transactions": "Seneste transaktioner",
         "transactions": "Transaktioner",
         "security": "Sikkerhed",
-        "accountAddress": "Konto adresse",
+        "account_address": "Konto adresse",
         "nodes": "Nodes",
         "wallet": "Wallet",
         "help": "Help",
         "you": "You",
         "messageId": "Message ID",
-        "inputAddress": "Input Address",
-        "receiveAddress": "Receive Address",
+        "input_address": "Input Address",
+        "receive_address": "Receive Address",
         "date": "Date",
-        "noAccounts": "You have no accounts, please create one.",
-        "loadingAccounts": "Loading, please wait...",
-        "addProfile": "Add Profile",
-        "noRecentHistory": "No recent history",
+        "no_accounts": "You have no accounts, please create one.",
+        "loading_accounts": "Loading, please wait...",
+        "add_profile": "Add Profile",
+        "no_recent_history": "No recent history",
         "transferSyncing": "Syncing account",
         "transferSelectingInputs": "Selecting inputs",
         "transferRemainderAddress": "Generating remainder deposit address",
@@ -527,22 +527,22 @@
     },
     "dates": {
         "today": "Today",
-        "daysAgo": "{time, plural, one {# day} other {# days}} ago",
-        "weeksAgo": "{time, plural, one {# week} other {# weeks}} ago",
-        "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
-        "yearsAgo": "{time, plural, one {# year} other {# years}} ago"
+        "days_ago": "{time, plural, one {# day} other {# days}} ago",
+        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
+        "months_ago": "{time, plural, one {# month} other {# months}} ago",
+        "years_ago": "{time, plural, one {# year} other {# years}} ago"
     },
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
         "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
         "failed": "Outgoing {{value}} from {{account}} has failed",
-        "downloadingUpdate": "Downloading update",
-        "updateReady": "Update ready",
-        "updateError": "An error occurred during the update, please try again",
-        "restartInstall": "Restart to install",
-        "calcMinutesRemaining": "Calculating minutes remaining...",
-        "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
-        "copiedToClipboard": "Copied to clipboard"
+        "downloading_update": "Downloading update",
+        "update_ready": "Update ready",
+        "update_error": "An error occurred during the update, please try again",
+        "restart_install": "Restart to install",
+        "calc_minutes_remaining": "Calculating minutes remaining...",
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
+        "copied_to_clipboard": "Copied to clipboard"
     },
     "error": {
         "profile": {
