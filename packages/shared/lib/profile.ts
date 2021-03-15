@@ -104,7 +104,7 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
     }
 
     newProfile.set(profile)
-    activeProfileId.set(null)
+    activeProfileId.set(profile.id)
 
     return profile
 }
@@ -119,8 +119,15 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
 export const disposeNewProfile = (): void => {
     const np = get(newProfile)
     if (np) {
-        api.removeAccount(np.id, {
+        api.removeStorage({
             onSuccess() {
+                api.removeAccount(np.id, {
+                    onSuccess() {
+                    },
+                    onError(err) {
+                        console.error(err)
+                    },
+                })
             },
             onError(err) {
                 console.error(err)
