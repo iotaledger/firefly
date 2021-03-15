@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Icon, SettingsMenu, Text } from 'shared/components'
     import { loggedIn } from 'shared/lib/app'
-    import { appRoute, lastAppRoute, settingsRoute } from 'shared/lib/router'
+    import { appRoute, dashboardRoute, lastAppRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import {
         AdvancedSettings,
@@ -11,6 +11,7 @@
         HelpAndInfo,
         SecuritySettings,
         SettingsRoutes,
+        Tabs,
     } from 'shared/lib/typings/routes'
 
     export let locale
@@ -18,6 +19,7 @@
 
     const closeSettingsHome = () => {
         appRoute.set($lastAppRoute)
+        dashboardRoute.set(Tabs.Wallet)
         lastAppRoute.set(null)
     }
 </script>
