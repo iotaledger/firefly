@@ -1,29 +1,29 @@
 {
     "views": {
-        "onboarding_1": {
+        "onboarding1": {
             "title": "Şandin, Standin & Rêveberî ya IOTA te",
             "body": "Firefly tûrikek IOTA ya ewledar û karanîna wê hêsan e."
         },
         "legal": {
             "title": "Nasnav",
             "body": "Ji kerema xwe polîtîqaya taybetîtiyê û Mercên Karûbar binirxînin.",
-            "privacy_policy": {
+            "privacyPolicy": {
                 "title": "Polîtîqa Taybetîyê",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "terms_of_service": {
+            "termsOfService": {
                 "title": "Mercên Karûberîyê",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
@@ -34,7 +34,7 @@
         "setup": {
             "title": "Cazdanka xwe saz bike",
             "body": "Hûn dikarin cuzdankek nû biafirînin an jî ya heyî pêxinîn.",
-            "profile_name": "Navê Profîlê"
+            "profileName": "Navê Profîlê"
         },
         "password": {
             "title": "Pêborînekê biafirîn",
@@ -42,41 +42,41 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body_2": "Keep your PIN safe!"
+            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
+            "body2": "Keep your PIN safe!"
         },
         "pin": {
             "title": "Qoda PIN saz bike",
-            "body_1": "6 jimarên PIN kodâ xa jêrê bikevin.\nJi bona ketina berîka we\nJi we re kodek PIN hewce dike. ",
-            "body_2": "Hûn dikarin tenê hejmaran bikar bînin. "
+            "body1": "6 jimarên PIN kodâ xa jêrê bikevin.\nJi bona ketina berîka we\nJi we re kodek PIN hewce dike. ",
+            "body2": "Hûn dikarin tenê hejmaran bikar bînin. "
         },
-        "confirm_pin": {
+        "confirmPin": {
             "title": "Koda Pîn-a xwe rast bikin",
             "body": "Ji bo berdewamiyê kodê pînê xwe ji nû ve bikin"
         },
         "backup": {
             "title": "Berîka xa diberke. ",
-            "body_1": "Hevokek başbûnê dê nuha nîşan bide. ",
-            "body_2": "Vê hevokê bi kesî re parve nekin.\nJi vê hevokê ba dikarin hebünênwe bigîhîşjin. ",
-            "body_3": "Ji win hevoka xılaskirinê lı bîrkin,wênê hebûnên xa jî in da bikin. "
+            "body1": "Hevokek başbûnê dê nuha nîşan bide. ",
+            "body2": "Vê hevokê bi kesî re parve nekin.\nJi vê hevokê ba dikarin hebünênwe bigîhîşjin. ",
+            "body3": "Ji win hevoka xılaskirinê lı bîrkin,wênê hebûnên xa jî in da bikin. "
         },
-        "recovery_phrase": {
+        "recoveryPhrase": {
             "title": "Hevoka Xilaskirinê. ",
-            "body_1": "Bi baldarî peyvan bi rêzê rast binivîsin",
-            "body_2": "Şîfra Xilaskirinê bi ewlehî veşêrin û kesîra parwe nekin. ",
-            "reveal_recovery_phrase": "Îfadâ Xilaskirinê nîşande. ",
-            "hide_recovery_phrase": "Bêja Xilaskirinê veşartî bike. "
+            "body1": "Bi baldarî peyvan bi rêzê rast binivîsin",
+            "body2": "Şîfra Xilaskirinê bi ewlehî veşêrin û kesîra parwe nekin. ",
+            "revealRecoveryPhrase": "Îfadâ Xilaskirinê nîşande. ",
+            "hideRecoveryPhrase": "Bêja Xilaskirinê veşartî bike. "
         },
-        "verify_recovery_phrase": {
+        "verifyRecoveryPhrase": {
             "title": "Şîfra Xilaskirinê rastke. ",
             "body": "Let's check you wrote down the phrase correctly. Select the words in the correct order.",
-            "creating_account": "Creating account, please wait..."
+            "creatingAccount": "Creating account, please wait..."
         },
-        "backup_wallet": {
+        "backupWallet": {
             "title": "Spas ji bo alîkariya te",
             "body": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup."
         },
-        "recovery_phrase_saved": {
+        "recoveryPhraseSaved": {
             "title": "Bi serfirazî piştgirî kirin",
             "body": "We berîka xwe li Stronghold'ê hilanîn."
         },
@@ -88,35 +88,35 @@
             "title": "Berîka xwe têxe malde",
             "body": "Amûrek ya xilaskirinê hebe an ji Stronghold'ê xilaskirinek hebe, hûn dikarin ji vir têxin hindir."
         },
-        "import_from_text": {
+        "importFromText": {
             "title": "Berîka xwe pê peyvekê an jî gotinekê xilas bikin",
-            "body_1": "Gotinek a xilaskirinê ji 24 peyva çê dibe. Ev, ji bo xilaskirina berîka Firefly tê bikaranîn.",
-            "body_2": "Yek seed ji 81 tîpan çêdibe. Ev, ji bo xilasbuna ji berikek Trinity a kevin tê bikaranîn.",
-            "body_3": "Seed an jî gotina xilaskirina xwe tekin",
-            "seed_detected": "81 character seed detected",
-            "phrase_detected": "24 word phrase detected"
+            "body1": "Gotinek a xilaskirinê ji 24 peyva çê dibe. Ev, ji bo xilaskirina berîka Firefly tê bikaranîn.",
+            "body2": "Yek seed ji 81 tîpan çêdibe. Ev, ji bo xilasbuna ji berikek Trinity a kevin tê bikaranîn.",
+            "body3": "Seed an jî gotina xilaskirina xwe tekin",
+            "seedDetected": "81 character seed detected",
+            "phraseDetected": "24 word phrase detected"
         },
-        "import_from_file": {
+        "importFromFile": {
             "title": "Berîka xwe ji pelê hilanînê vegerînin",
             "body": "Pelê hilanînê ji bo vegerandina berîka xwe têxin hundurê. Piştgirî dikarin bibin Stronghold (.stronghold) an Trinity SeedVault (.kdbx)."
         },
-        "import_backup_password": {
+        "importBackupPassword": {
             "title": "Berîka xwe ji SeedVault an jî ji Stronghold vegerînin",
-            "body_1": "Ji kerema xwe şîfreya xweya hilanînê binivîsin.",
-            "body_2": "Ev şîfreya we ye ku hûn danîn dema ku we yekem car hilanîna xwe afirandî ye."
+            "body1": "Ji kerema xwe şîfreya xweya hilanînê binivîsin.",
+            "body2": "Ev şîfreya we ye ku hûn danîn dema ku we yekem car hilanîna xwe afirandî ye."
         },
-        "import_success": {
+        "importSuccess": {
             "title": "We hilanîna xwe bi serfirazî vegerand",
             "body": "Hun dikarin berîka xwe a nû tomar bikî."
         },
         "migrate": {
             "title": "Hebûnên xwe bar bikin",
-            "body_1": "Ev pêvajoyek xweser e ku fonên xwe veguhezîne berîka xweya nû. Em ê navnîşanên xerckirî yên ku ewlehiya we qels dikin kontrol bikin.",
-            "body_2": "Dibe ku demek bikişîne. Di dema barkirinê de amûrê xwe qut nekin.",
+            "body1": "Ev pêvajoyek xweser e ku fonên xwe veguhezîne berîka xweya nû. Em ê navnîşanên xerckirî yên ku ewlehiya we qels dikin kontrol bikin.",
+            "body2": "Dibe ku demek bikişîne. Di dema barkirinê de amûrê xwe qut nekin.",
             "existing": "Berîka tê a kevin",
             "new": "Cizdan a te ya nu"
         },
-        "migrate_failed": {
+        "migrateFailed": {
             "title": "To do",
             "body": "To do"
         },
@@ -248,40 +248,40 @@
             }
         },
         "login": {
-            "please_wait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "pleaseWait": "Please wait {time, plural, one {1 second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "up_to_date": "Nutirîn",
-                    "out_of_date": "Out of date"
+                    "upToDate": "Nutirîn",
+                    "outOfDate": "Out of date"
                 },
-                "hardware_device": {
+                "hardwareDevice": {
                     "title": "Hardware Device",
-                    "none_detected": "None detected"
+                    "noneDetected": "None detected"
                 },
-                "stronghold_status": {
+                "strongholdStatus": {
                     "title": "Stronghold Status",
                     "locked": "Girtî",
                     "unlocked": "Vekirî"
                 },
-                "stronghold_backup": {
+                "strongholdBackup": {
                     "title": "Stronghold Backup",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "weeksAgo": "{weeks, plural, one {# week} other {# weeks}} ago"
                 }
             },
             "network": {
-                "network_operational": "Network Operational",
-                "network_degraded": "Network Degraded",
-                "network_down": "Network Down",
+                "networkOperational": "Network Operational",
+                "networkDegraded": "Network Degraded",
+                "networkDown": "Network Down",
                 "status": "Hal",
-                "messages_per_second": "Peyam di sanîyek de",
-                "confirmation_rate": "Confirmation rate"
+                "messagesPerSecond": "Peyam di sanîyek de",
+                "confirmationRate": "Confirmation rate"
             },
-            "profile_modal": {
-                "all_settings": "Hemu dilkirin",
+            "profileModal": {
+                "allSettings": "Hemu dilkirin",
                 "logout": "Log out"
             }
         }
@@ -296,42 +296,42 @@
         },
         "version": {
             "title": "Current version: {version}",
-            "up_to_date_title": "Firefly is up to date",
-            "up_to_date_description": "You are running the latest and safest version of Firefly.",
-            "update_available": "Firefly update available",
-            "update_details": "Version {version} - {date}"
+            "upToDateTitle": "Firefly is up to date",
+            "upToDateDescription": "You are running the latest and safest version of Firefly.",
+            "updateAvailable": "Firefly update available",
+            "updateDetails": "Version {version} - {date}"
         },
         "backup": {
             "title": "Last backup: {date}",
-            "last_backup": "You last backed up {date}",
-            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
-            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "not_backed_up": "Not backed up",
-            "not_backed_up_description": "You have not backed up your Stronghold"
+            "lastBackup": "You last backed up {date}",
+            "backupDescription": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
+            "backupWarning": "If you lose your backup and recovery phrase you will lose access to your funds.",
+            "notBackedUp": "Not backed up",
+            "notBackedUpDescription": "You have not backed up your Stronghold"
         },
-        "delete_account": {
+        "deleteAccount": {
             "title": "Delete {name}?",
             "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Type your wallet’s password to confirm.",
-            "delete_account": "Delete account",
-            "error_title": "Unable to delete {name}",
-            "error_body_1": "To delete an account you must have 0 balance.",
-            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
-            "error_body_3": "You cannot delete this account, you must have at least one."
+            "typePassword": "Type your wallet’s password to confirm.",
+            "deleteAccount": "Delete account",
+            "errorTitle": "Unable to delete {name}",
+            "errorBody1": "To delete an account you must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
+            "errorBody3": "You cannot delete this account, you must have at least one."
         },
-        "address_history": {
+        "addressHistory": {
             "title": "{name} account address history",
-            "current_balance": "Current balance: {balance}"
+            "currentBalance": "Current balance: {balance}"
         },
         "node": {
-            "title_add": "Add a node",
-            "title_remove": "Remove a node",
-            "title_details": "Node details",
-            "node_address": "Node address",
-            "optional_username": "Username (optional)",
-            "optional_password": "Password (optional)",
-            "set_as_primary_node": "Set as primary node",
-            "remove_confirmation": "Are you sure you want to remove this node?"
+            "titleAdd": "Add a node",
+            "titleRemove": "Remove a node",
+            "titleDetails": "Node details",
+            "nodeAddress": "Node address",
+            "optionalUsername": "Username (optional)",
+            "optionalPassword": "Password (optional)",
+            "setAsPrimaryNode": "Set as primary node",
+            "removeConfirmation": "Are you sure you want to remove this node?"
         },
         "errorLog": {
             "title": "Error Log",
@@ -354,12 +354,12 @@
         }
     },
     "charts": {
-        "incoming_mi": "Incoming {value} Mi",
-        "outgoing_mi": "Outgoing {value} Mi",
+        "incomingMi": "Incoming {value} Mi",
+        "outgoingMi": "Outgoing {value} Mi",
         "portoflio": "Portfolio",
         "token": "Token",
-        "account_value": "Account Value",
-        "account_activity": "Account Activity"
+        "accountValue": "Account Value",
+        "accountActivity": "Account Activity"
     },
     "actions": {
         "continue": "Continue",
@@ -368,32 +368,32 @@
         "close": "Close",
         "dismiss": "Dismiss",
         "save": "Save",
-        "import_seed": "Import an existing seed",
-        "import_wallet": "Import existing wallet",
-        "create_wallet": "Create new wallet",
-        "save_password": "Save password",
-        "use_biometric": "Use biometric security",
-        "setup_pin": "Qoda PIN saz bike",
-        "set_pin": "Set PIN code",
-        "confirm_pin": "Confirm PIN code",
-        "enter_your_pin": "Enter your PIN",
-        "save_backup_file": "Save backup file",
-        "ive_written_recovery_phrase": "I’ve written down my recovery phrase",
-        "verify_recovery_phrase": "Şîfra Xilaskirinê rastke. ",
-        "reveal_recovery_phrase": "Reveal recovery phrase",
-        "import_seedvault": "Import SeedVault",
-        "check_again": "No, Check Again",
-        "import_from_file": "Import from a file",
+        "importSeed": "Import an existing seed",
+        "importWallet": "Import existing wallet",
+        "createWallet": "Create new wallet",
+        "savePassword": "Save password",
+        "useBiometric": "Use biometric security",
+        "setupPin": "Qoda PIN saz bike",
+        "setPin": "Set PIN code",
+        "confirmPin": "Confirm PIN code",
+        "enterYourPin": "Enter your PIN",
+        "saveBackupFile": "Save backup file",
+        "iveWrittenRecoveryPhrase": "I’ve written down my recovery phrase",
+        "verifyRecoveryPhrase": "Şîfra Xilaskirinê rastke. ",
+        "revealRecoveryPhrase": "Îfadâ Xilaskirinê nîşande. ",
+        "importSeedvault": "Import SeedVault",
+        "checkAgain": "No, Check Again",
+        "importFromFile": "Import from a file",
         "send": "Send",
         "receive": "Receive",
         "create": "Create",
-        "begin_transfer": "Begin Transfer",
-        "try_again": "Try again",
-        "visit_discord": "Visit Discord",
-        "drag_drop": "Drag & Drop",
-        "import_extentions": ".stronghold or .kdbx file",
-        "choose_file": "Choose a File",
-        "drop_here": "Drop your file here",
+        "beginTransfer": "Begin Transfer",
+        "tryAgain": "Try again",
+        "visitDiscord": "Visit Discord",
+        "dragDrop": "Drag & Drop",
+        "importExtentions": ".stronghold or .kdbx file",
+        "chooseFile": "Choose a File",
+        "dropHere": "Drop your file here",
         "syncAll": "Sync all",
         "export": "Export",
         "exportNewStronghold": "Export a new Stronghold",
@@ -403,15 +403,15 @@
         "exportState": "Export state",
         "outsourceProofOfWork": "Outsource proof of work",
         "unlock": "Unlock",
-        "update_firefly": "Update Firefly",
-        "restart_now": "Restart now",
-        "save_backup": "Save backup",
-        "customize_account": "Customise account",
-        "view_address_history": "View address history",
-        "delete_account": "Delete account",
+        "updateFirefly": "Update Firefly",
+        "restartNow": "Restart now",
+        "saveBackup": "Save backup",
+        "customizeAcount": "Customise account",
+        "viewAddressHistory": "View address history",
+        "deleteAccount": "Delete account",
         "max": "Max",
-        "add_node": "Add node",
-        "remove_node": "Remove node",
+        "addNode": "Add node",
+        "removeNode": "Remove node",
         "hide": "Veşartin\n",
         "hideOthers": "Veşartinên Din\n",
         "showAll": "Hemî nîşan bide\n",
@@ -427,57 +427,57 @@
         "checkForUpdates": "Ji bo Nûvekirinan Kontrol bikin",
         "reportAnIssue": "Pirsgirêkekê ragihînin\n",
         "clear": "Clear",
-        "hide_details": "Hide Details",
+        "hideDetails": "Hide Details",
         "yes": "Yes",
         "no": "No",
         "reset": "Reset"
     },
     "general": {
         "password": "Password",
-        "confirm_password": "Confirm password",
+        "confirmPassword": "Confirm password",
         "currentPassword": "Current password",
         "newPassword": "New password",
         "confirmNewPassword": "Confirm new password",
-        "your_seed": "Your Seed",
-        "recovery_phrase": "Recovery Phrase",
-        "recent_activity": "Recent Activity",
+        "yourSeed": "Your Seed",
+        "recoveryPhrase": "Recovery Phrase",
+        "recentActivity": "Recent Activity",
         "sent": "Sent",
         "received": "Received",
-        "send_payment": "Send payment",
-        "move_funds": "Move funds",
-        "send_funds": "Send funds",
-        "send_to_address": "Send to an Address",
-        "scan_qr_or_paste": "Scan a QR code or paste an Address",
-        "move_funds_between_accounts": "Move funds between accounts",
-        "send_tokens_to_address": "Send tokens to an address",
-        "manage_account": "Manage Account",
-        "customize_account": "Customize your account",
+        "sendPayment": "Send payment",
+        "moveFunds": "Move funds",
+        "sendFunds": "Send funds",
+        "sendToAddress": "Send to an Address",
+        "scanQrOrPaste": "Scan a QR code or paste an Address",
+        "moveFundsBetweenAccounts": "Move funds between accounts",
+        "sendTokensToAddress": "Send tokens to an address",
+        "manageAccount": "Manage Account",
+        "customizeAcount": "Customize your account",
         "account": "Account",
-        "sending_to_address": "Sending to address",
+        "sendingToAddress": "Sending to address",
         "amount": "Amount",
-        "add_address": "Add Address",
+        "addAddress": "Add Address",
         "reference": "Reference",
         "from": "From",
         "to": "To",
-        "receive_funds": "Receive funds",
-        "my_address": "My Address",
-        "share_address": "Share an address",
-        "your_address": "Your address",
-        "generate_new_address": "Generate new address",
-        "copy_address": "Copy Address",
-        "have_text_backup": "I have a text backup",
-        "have_file_backup": "I have a file backup",
-        "enter_seed_or_phrase": "Enter a recovery phrase or seed",
-        "upload_seedvault_or_stronghold": "Import a Stronghold or SeedVault file",
+        "receiveFunds": "Receive funds",
+        "myAddress": "My Address",
+        "shareAddress": "Share an address",
+        "yourAddress": "Your address",
+        "generateNewAddress": "Generate new address",
+        "copyAddress": "Copy Address",
+        "haveTextBackup": "I have a text backup",
+        "haveFileBackup": "I have a file backup",
+        "enterSeedOrPhrase": "Enter a recovery phrase or seed",
+        "uploadSeedvaultOrStronghold": "Import a Stronghold or SeedVault file",
         "import": "Import",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Language",
         "appearance": "Appearance",
-        "light_theme": "Light theme",
-        "dark_theme": "Dark theme",
-        "total_balance": "Total Balance",
-        "account_balance": "Account Balance",
+        "lightTheme": "Light theme",
+        "darkTheme": "Dark theme",
+        "totalBalance": "Total Balance",
+        "accountBalance": "Account Balance",
         "incoming": "Incoming",
         "outgoing": "Outgoing",
         "accounts": "Accounts",
@@ -486,24 +486,24 @@
         "profiles": "Profiles",
         "developerProfile": "Developer Profile",
         "dev": "Dev",
-        "create_account": "Create an account",
-        "account_name": "Account name",
-        "latest_transactions": "Latest Transactions",
+        "createAccount": "Create an account",
+        "accountName": "Account name",
+        "latestTransactions": "Latest Transactions",
         "transactions": "Transactions",
         "security": "Ewlehî",
-        "account_address": "Account Address",
+        "accountAddress": "Account Address",
         "nodes": "Nodes",
         "wallet": "Tûrik",
         "help": "Alîkarî",
         "you": "You",
         "messageId": "Message ID",
-        "input_address": "Input Address",
-        "receive_address": "Receive Address",
+        "inputAddress": "Input Address",
+        "receiveAddress": "Receive Address",
         "date": "Date",
-        "no_accounts": "Hesabê we tune, ji kerema xwe yêk çêbikin.",
-        "loading_accounts": "Loading, please wait...",
-        "add_profile": "Profîlê zêde bikin\n",
-        "no_recent_history": "No recent history",
+        "noAccounts": "Hesabê we tune, ji kerema xwe yêk çêbikin.",
+        "loadingAccounts": "Loading, please wait...",
+        "addProfile": "Profîlê zêde bikin\n",
+        "noRecentHistory": "No recent history",
         "transferSyncing": "Syncing account",
         "transferSelectingInputs": "Selecting inputs",
         "transferRemainderAddress": "Generating remainder deposit address",
@@ -527,22 +527,22 @@
     },
     "dates": {
         "today": "Today",
-        "days_ago": "{time, plural, one {# day} other {# days}} ago",
-        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
-        "months_ago": "{time, plural, one {# month} other {# months}} ago",
-        "years_ago": "{time, plural, one {# year} other {# years}} ago"
+        "daysAgo": "{time, plural, one {# day} other {# days}} ago",
+        "weeksAgo": "{time, plural, one {# week} other {# weeks}} ago",
+        "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
+        "yearsAgo": "{time, plural, one {# year} other {# years}} ago"
     },
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
         "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
         "failed": "Outgoing {{value}} from {{account}} has failed",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
-        "copied_to_clipboard": "Copied to clipboard"
+        "downloadingUpdate": "Downloading update",
+        "updateReady": "Update ready",
+        "updateError": "An error occurred during the update, please try again",
+        "restartInstall": "Restart to install",
+        "calcMinutesRemaining": "Calculating minutes remaining...",
+        "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
+        "copiedToClipboard": "Copied to clipboard"
     },
     "error": {
         "profile": {
