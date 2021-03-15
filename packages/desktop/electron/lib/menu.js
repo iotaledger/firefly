@@ -59,6 +59,13 @@ const buildTemplate = () => {
                     click: () => getOrInitWindow('main').webContents.send('menu-navigate-settings'),
                 },
                 {
+                    type: 'separator',
+                },
+                {
+                    label: state.strings.diagnostics,
+                    click: () => getOrInitWindow('main').webContents.send('menu-diagnostics'),
+                },
+                {
                     // TODO: Remove before stable release
                     label: "Developer Tools",
                     role: 'toggleDevTools'
@@ -73,7 +80,6 @@ const buildTemplate = () => {
             ]
         }
     ]
-
 
     if (process.platform === 'darwin') {
         template[0].submenu = template[0].submenu.concat([

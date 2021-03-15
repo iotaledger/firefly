@@ -88,6 +88,7 @@ export enum AdvancedSettings {
     DeepLinks = 'deepLinks',
     ResyncAccounts = 'resyncAccounts',
     ErrorLog = 'errorLog',
+    Diagnostics = 'diagnostics',
     StateExport = 'stateExport',
 }
 

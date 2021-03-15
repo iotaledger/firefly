@@ -218,6 +218,10 @@
                 "title": "Virheloki",
                 "description": ""
             },
+            "diagnostics": {
+                "title": "Diagnostics",
+                "description": ""
+            },
             "stateExport": {
                 "title": "Tilan vienti",
                 "description": ""
@@ -336,6 +340,17 @@
         "deleteProfile": {
             "title": "Poista profiili",
             "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone."
+        },
+        "diagnostics": {
+            "title": "Diagnostics",
+            "node": "Node",
+            "platform": "Platform",
+            "platformVersion": "Platform Version",
+            "platformArchitecture": "Platform Architecture",
+            "cpuCount": "CPU Count",
+            "totalMem": "Total Memory",
+            "freeMem": "Free Memory",
+            "userPath": "User Path"
         }
     },
     "charts": {
@@ -481,7 +496,7 @@
         "wallet": "Lompakko",
         "help": "Ohje",
         "you": "Sinä",
-        "transaction_id": "Tapahtuman tunnus",
+        "messageId": "Message ID",
         "input_address": "Syötä osoite",
         "receive_address": "Vastaanota osoite",
         "date": "Päivämäärä",
@@ -526,7 +541,8 @@
         "update_error": "Päivityksen aikana tapahtui virhe, yritä uudelleen",
         "restart_install": "Käynnistä uudelleen asentaaksesi",
         "calc_minutes_remaining": "Lasketaan jäljellä olevia minuutteja...",
-        "minutes_remaining": "{minutes, plural, one {1 minuutti jäljellä} other {# minuuttia jäljellä}}"
+        "minutes_remaining": "{minutes, plural, one {1 minuutti jäljellä} other {# minuuttia jäljellä}}",
+        "copied_to_clipboard": "Copied to clipboard"
     },
     "error": {
         "profile": {

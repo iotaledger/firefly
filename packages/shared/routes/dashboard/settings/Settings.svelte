@@ -20,7 +20,7 @@
     onDestroy(() => {
         // When a new locale is loaded the pages are reloaded
         // so don't reset the router in this case
-        if (!$isLocaleLoaded) {
+        if ($isLocaleLoaded) {
             settingsRoute.set(SettingsRoutes.Init)
         }
     })

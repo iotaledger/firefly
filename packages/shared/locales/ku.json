@@ -218,6 +218,10 @@
                 "title": "Têketina çewtiyê",
                 "description": ""
             },
+            "diagnostics": {
+                "title": "Diagnostics",
+                "description": ""
+            },
             "stateExport": {
                 "title": "State export",
                 "description": ""
@@ -336,6 +340,17 @@
         "deleteProfile": {
             "title": "Delete profile",
             "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone."
+        },
+        "diagnostics": {
+            "title": "Diagnostics",
+            "node": "Node",
+            "platform": "Platform",
+            "platformVersion": "Platform Version",
+            "platformArchitecture": "Platform Architecture",
+            "cpuCount": "CPU Count",
+            "totalMem": "Total Memory",
+            "freeMem": "Free Memory",
+            "userPath": "User Path"
         }
     },
     "charts": {
@@ -481,7 +496,7 @@
         "wallet": "Tûrik",
         "help": "Alîkarî",
         "you": "You",
-        "transaction_id": "Transaction ID",
+        "messageId": "Message ID",
         "input_address": "Input Address",
         "receive_address": "Receive Address",
         "date": "Date",
@@ -526,7 +541,8 @@
         "update_error": "An error occurred during the update, please try again",
         "restart_install": "Restart to install",
         "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
+        "copied_to_clipboard": "Copied to clipboard"
     },
     "error": {
         "profile": {

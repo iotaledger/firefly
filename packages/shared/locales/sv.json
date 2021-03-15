@@ -218,6 +218,10 @@
                 "title": "Fellogg",
                 "description": ""
             },
+            "diagnostics": {
+                "title": "Diagnostik",
+                "description": ""
+            },
             "stateExport": {
                 "title": "Tillstånds-exportering",
                 "description": ""
@@ -327,7 +331,7 @@
             "optional_username": "Användarnamn (valfritt)",
             "optional_password": "Lösenord (frivilligt)",
             "set_as_primary_node": "Ställ in som primär nod",
-            "remove_confirmation": "Are you sure you want to remove this node?"
+            "remove_confirmation": "Är du säker på att du vill ta bort den här noden?"
         },
         "errorLog": {
             "title": "Fellogg",
@@ -335,7 +339,18 @@
         },
         "deleteProfile": {
             "title": "Radera profil",
-            "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone."
+            "confirmation": "Är du säker på att du vill ta bort denna profil? Denna åtgärd kan inte ångras."
+        },
+        "diagnostics": {
+            "title": "Diagnostik",
+            "node": "Nod",
+            "platform": "Plattform",
+            "platformVersion": "Plattformsversion",
+            "platformArchitecture": "Plattformsarkitektur",
+            "cpuCount": "Processorantal",
+            "totalMem": "Totalt minne",
+            "freeMem": "Ledigt minne",
+            "userPath": "Sökväg för användare"
         }
     },
     "charts": {
@@ -415,7 +430,7 @@
         "hide_details": "Dölj detaljer",
         "yes": "Ja",
         "no": "Nej",
-        "reset": "Reset"
+        "reset": "Återställ"
     },
     "general": {
         "password": "Lösenord",
@@ -481,7 +496,7 @@
         "wallet": "Plånbok",
         "help": "Hjälp",
         "you": "Du",
-        "transaction_id": "Transaktions ID",
+        "messageId": "Meddelande-ID",
         "input_address": "Inmatningsadress",
         "receive_address": "Mottagaradress",
         "date": "Datum",
@@ -526,11 +541,12 @@
         "update_error": "Ett fel inträffade under uppdateringen, försök igen",
         "restart_install": "Starta om för att installera",
         "calc_minutes_remaining": "Beräknar minuter kvar...",
-        "minutes_remaining": "{minutes, plural, one {1 minut kvar} other {# minuter kvar}}"
+        "minutes_remaining": "{minutes, plural, one {1 minut kvar} other {# minuter kvar}}",
+        "copied_to_clipboard": "Kopierad till urklipp"
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "length": "Ditt profilnamn kan inte vara längre än {length, plural, one {1 tecken} other {# tecken}}.",
             "duplicate": "En profil med detta namn finns redan."
         },
         "password": {
@@ -540,7 +556,7 @@
             "pattern": "Korta tangentbordsmönster är lätta att gissa sig till.",
             "names": "Vanliga namn och efternamn är enkelt att gissa.",
             "repeats": "Upprepningar som 'aaa' är lätta att gissa.",
-            "repeats2": "Repeats like 'abcabcabc' are easy to guess.",
+            "repeats2": "Upprepningar som 'abcabcabc' är lätta att gissa.",
             "sequence": "Sekvenser av tecken är lätta att gissa.",
             "years": "Senaste åren är lätta att gissa.",
             "dates": "Datum är lätta att gissa.",
@@ -548,21 +564,21 @@
             "similar": "Detta liknar ett vanligt lösenord.",
             "reasonWord": "Ett enda ord är lätt att gissa.",
             "incorrect": "Ditt lösenord är felaktigt.",
-            "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
+            "length": "Ditt lösenord kan inte vara längre än {length, plural, one {1 tecken} other {# tecken}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {1 digit} other {# digits}} long.",
+            "length": "Din PIN-kod måste vara {length, plural, one {1 siffra} other {# siffror}}.",
             "match": "PIN-koder matchar inte.",
             "incorrect": "Din nuvarande PIN-kod är felaktig."
         },
         "account": {
-            "length": "Your account name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "length": "Ditt kontonamn kan inte vara längre än {length, plural, one {1 tecken} other {# tecken}}.",
             "empty": "Du måste använda ditt senaste konto innan du kan skapa ett nytt.",
             "notEmpty": "Du måste överföra ditt saldo innan du kan ta bort detta konto.",
             "duplicate": "Ett konto med detta namn finns redan."
         },
         "send": {
-            "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
+            "addressLength": "Adresser bör vara {length, plural, one {1 tecken} other {# tecken}}.",
             "amountTooHigh": "Detta är större än ditt tillgängliga saldo.",
             "amountNoFloat": "Om enheten är `i` kan du inte använda decimaler.",
             "amountInvalidFormat": "Beloppet verkar vara ett ogiltigt nummer.",
@@ -583,7 +599,7 @@
             "invalid": "Säkerhetskopian kändes inte igen.",
             "destination": "Härkomsten för säkerhetskopian var inte giltig.",
             "mnemonic": "Mnemoteknik är inte giltig.",
-            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
+            "seedTooShort": "Din seed ska vara 81 tecken, den {length, plural, one {är 1} other {är #}}",
             "seedCharacters": "Din seed ska innehålla tecknen A-Z eller 9",
             "phraseWordCount": "Det ska finnas 24 ord i din återställningsfras, just nu är det {length, plural, one {är 1} other {är #}}",
             "phraseUnrecognizedWord": "Okänt ord \"{word}\" i din återställningsfras"

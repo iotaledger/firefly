@@ -156,6 +156,10 @@
     function handleErrorLogClick() {
         openPopup({ type: 'errorLog' })
     }
+
+    function handleDiagnosticsClick() {
+        openPopup({ type: 'diagnostics' })
+    }
 </script>
 
 <div>
@@ -222,14 +226,22 @@
             <Text type="p" secondary classes="mb-5">{locale('views.settings.resyncAccounts.description')}</Text>
             <Button classes="w-1/4" onClick={syncAccounts} disabled={$isSyncing}>{locale('actions.syncAll')}</Button>
         </section>
-        <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
-        <section id="errorLog" class="w-3/4">
-            <Text type="h4" classes="mb-3">{locale('views.settings.errorLog.title')}</Text>
-            <Text type="p" secondary classes="mb-5">{locale('views.settings.errorLog.description')}</Text>
-            <Button classes="w-1/4" onClick={() => handleErrorLogClick()}>{locale('views.settings.errorLog.title')}</Button>
-        </section>
-        <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
-        <!-- TODO: Implemnet state export -->
+    {/if}
+    <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
+    <section id="errorLog" class="w-3/4">
+        <Text type="h4" classes="mb-3">{locale('views.settings.errorLog.title')}</Text>
+        <Text type="p" secondary classes="mb-5">{locale('views.settings.errorLog.description')}</Text>
+        <Button classes="w-1/4" onClick={() => handleErrorLogClick()}>{locale('views.settings.errorLog.title')}</Button>
+    </section>
+    <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
+    <section id="diagnostics" class="w-3/4">
+        <Text type="h4" classes="mb-3">{locale('views.settings.diagnostics.title')}</Text>
+        <Text type="p" secondary classes="mb-5">{locale('views.settings.diagnostics.description')}</Text>
+        <Button classes="w-1/4" onClick={() => handleDiagnosticsClick()}>{locale('views.settings.diagnostics.title')}</Button>
+    </section>
+    <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
+    {#if $loggedIn}
+        <!-- TODO: Implement state export -->
         <section id="stateExport" class="w-3/4 opacity-50">
             <Text type="h4" classes="mb-3">{locale('views.settings.stateExport.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.stateExport.description')}</Text>
