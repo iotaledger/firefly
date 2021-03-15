@@ -11,6 +11,8 @@ export enum AppRoute {
     Balance='balance',
     Congratulations='congratulations',
     BundleMiningWarning = 'bundleMiningWarning',
+    SecuringSpentAddresses = 'securingSpentAddresses',
+    TransferFragmentedFunds = 'transferFragmentedFunds',
     Dashboard='dashboard',
     Login='login',
     Settings='settings',

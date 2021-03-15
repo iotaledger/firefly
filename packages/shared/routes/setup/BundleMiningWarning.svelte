@@ -27,7 +27,7 @@
             </div>
         </div>
         <div slot="box_content">
-            <Text type="h1" classes="mb-5 text-center">{locale('views.bundleMiningWarning.title')}</Text>
+            <Text type="h2" classes="mb-5 text-center">{locale('views.bundleMiningWarning.title')}</Text>
             <Text type="p" secondary classes="text-center">{locale('views.bundleMiningWarning.body_1')}</Text>
             <Text type="p" secondary classes="mb-4 text-center">{locale('views.bundleMiningWarning.body_2')}</Text>
             <Text type="p" secondary classes="mb-8 text-center">{locale('views.bundleMiningWarning.body_3')}</Text>

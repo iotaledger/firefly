@@ -1,5 +1,5 @@
 <script lang="typescript">
-    export let percent = 0
+    export let width = 0
     export let classes = ''
     export let message = ''
 </script>
@@ -7,21 +7,21 @@
 <style type="text/scss">
     div,
     .progress {
-        height: 48px;
-    }
-
-    .progress {
-        transition: width 0.25s;
-    }
-
-    .message {
+        height: 3rem;
         z-index: 1;
+    }
+    .progress {
+        -webkit-transition: width 1s ease-in-out;
+        -moz-transition: width 1s ease-in-out;
+        -o-transition: width 1s ease-in-out;
+        transition: width 1s ease-in-out;
+    }
+    .message {
+        z-index: 2;
     }
 </style>
 
-<div class={`relative flex justify-center items-center border border-solid rounded-2xl border-gray-300 ${classes}`}>
-    <span
-        class="absolute left-0 inline-block bg-blue-200 progress rounded-2xl"
-        style={`width:${Math.max(Math.min(percent, 100), 0)}%`} />
-    <span class="text-12 text-blue-500 message">{message}</span>
+<div class={`relative flex justify-center items-center bg-blue-500 rounded-2xl ${classes}`}>
+    <span class="absolute left-0 inline-block bg-yellow-500 progress rounded-2xl w-1/2" style="width: {width}%"/>
+    <span class="text-12 text-white font-bold message">{message}</span>
 </div>
