@@ -194,7 +194,7 @@ export const setClipboard = (input: string): boolean => {
         document.execCommand('copy')
         document.body.removeChild(textArea)
 
-        const notificationMessage = localize('notifications.copied_to_clipboard')
+        const notificationMessage = localize('notifications.copiedToClipboard')
         showAppNotification({ type: "info", message: notificationMessage })
 
         return true

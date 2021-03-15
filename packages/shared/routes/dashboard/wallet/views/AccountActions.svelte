@@ -24,8 +24,8 @@
         <div class="flex flex-col justify-between">
             <div class="flex flex-col justify-between items-center">
                 <Button icon="send" classes="w-full mb-5 p-4" secondary onClick={() => handleSendClick()}>
-                    {locale('general.send_funds')}
-                    <Text type="p" smaller secondary>{locale('general.send_tokens_to_address')}</Text>
+                    {locale('general.sendFunds')}
+                    <Text type="p" smaller secondary>{locale('general.sendTokensToAddress')}</Text>
                 </Button>
                 <Receive {isGeneratingAddress} {generateAddress} {locale} />
             </div>

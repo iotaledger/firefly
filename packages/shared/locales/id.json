@@ -1,29 +1,29 @@
 {
     "views": {
-        "onboarding_1": {
+        "onboarding1": {
             "title": "Kirim, Terima & Kelola IOTA Anda",
             "body": "Firefly dompet IOTA yang aman dan mudah dipakai."
         },
         "legal": {
             "title": "Legalitas",
             "body": "Harap mereviu Kebijakan Privasi dan Persyaratan Layanan.",
-            "privacy_policy": {
+            "privacyPolicy": {
                 "title": "Kebijakan Privasi",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "terms_of_service": {
+            "termsOfService": {
                 "title": "Persyaratan Layanan",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
@@ -34,7 +34,7 @@
         "setup": {
             "title": "Atur dompet Anda",
             "body": "Anda bisa membuat dompet baru atau mengimpornya.",
-            "profile_name": "Nama Profil"
+            "profileName": "Nama Profil"
         },
         "password": {
             "title": "Buat kata sandi",
@@ -42,41 +42,41 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body_2": "Keep your PIN safe!"
+            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
+            "body2": "Keep your PIN safe!"
         },
         "pin": {
             "title": "Atur kode PIN",
-            "body_1": "Masukkan PIN 6 digit. Anda akan diminta memasukkan pin untuk masuk ke dompet.",
-            "body_2": "Hanya nomor dipergunakan."
+            "body1": "Masukkan PIN 6 digit. Anda akan diminta memasukkan pin untuk masuk ke dompet.",
+            "body2": "Hanya nomor dipergunakan."
         },
-        "confirm_pin": {
+        "confirmPin": {
             "title": "Verifikasi kode PIN Anda",
             "body": "Masukkan kode PIN Anda untuk melanjutkan."
         },
         "backup": {
             "title": "Cadangkan dompet",
-            "body_1": "Frasa pemulihan akan diperlihatkan.",
-            "body_2": "Jangan bagikan frasa ini dengan siapa pun. Frasa pemulihan dapat dipakai untuk mengakses token Anda.",
-            "body_3": "Dana Anda dapat hilang jika Anda melupakan frasa pemulihan."
+            "body1": "Frasa pemulihan akan diperlihatkan.",
+            "body2": "Jangan bagikan frasa ini dengan siapa pun. Frasa pemulihan dapat dipakai untuk mengakses token Anda.",
+            "body3": "Dana Anda dapat hilang jika Anda melupakan frasa pemulihan."
         },
-        "recovery_phrase": {
+        "recoveryPhrase": {
             "title": "Frasa pemulihan",
-            "body_1": "Catat baik-baik kata yang ada secara berurutan.",
-            "body_2": "Simpan frasa pemulihan secara privat dan aman. Jangan sampai ada yang tahu.",
-            "reveal_recovery_phrase": "Perlihatkan frasa pemulihan",
-            "hide_recovery_phrase": "Sembunyikan kata-kata pemulihan"
+            "body1": "Catat baik-baik kata yang ada secara berurutan.",
+            "body2": "Simpan frasa pemulihan secara privat dan aman. Jangan sampai ada yang tahu.",
+            "revealRecoveryPhrase": "Perlihatkan frasa pemulihan",
+            "hideRecoveryPhrase": "Sembunyikan kata-kata pemulihan"
         },
-        "verify_recovery_phrase": {
+        "verifyRecoveryPhrase": {
             "title": "Verifikasi frasa pemulihan",
             "body": "Kita periksa apakah Anda mencatatnya dengan benar. Pilihlah kata sesuai urutan.",
-            "creating_account": "Menciptakan, tolong tunggu..."
+            "creatingAccount": "Menciptakan, tolong tunggu..."
         },
-        "backup_wallet": {
+        "backupWallet": {
             "title": "Cadangkan ke file Stronghold",
             "body": "Masukkan kata sandi untuk mencadangkan dompet ke Stronghold. Kata sandi dipakai untuk mengenkripsi cadangan."
         },
-        "recovery_phrase_saved": {
+        "recoveryPhraseSaved": {
             "title": "Berhasil dicadangkan",
             "body": "Anda telah mencadangkan dompet ke Stronghold."
         },
@@ -88,35 +88,35 @@
             "title": "Impor dompet",
             "body": "Anda bisa mengimpornya jika ada frasa pemulihan atau file Stronghold."
         },
-        "import_from_text": {
+        "importFromText": {
             "title": "Pulihkan dompet dengan frasa pemulihan atau seed",
-            "body_1": "Frasa pemulihan terdiri dari 24 kata. Ini akan dipakai untuk memulihkan dompet Firefly.",
-            "body_2": "Sebuah seed terdiri dari 81 karakter. Seed dipakai untuk pemulihan dompet lama Trinity.",
-            "body_3": "Masukkan seed atau frasa pemulihan",
-            "seed_detected": "Seed dengan 81 karakter terdeteksi",
-            "phrase_detected": "24 frase kata terdeteksi"
+            "body1": "Frasa pemulihan terdiri dari 24 kata. Ini akan dipakai untuk memulihkan dompet Firefly.",
+            "body2": "Sebuah seed terdiri dari 81 karakter. Seed dipakai untuk pemulihan dompet lama Trinity.",
+            "body3": "Masukkan seed atau frasa pemulihan",
+            "seedDetected": "Seed dengan 81 karakter terdeteksi",
+            "phraseDetected": "24 frase kata terdeteksi"
         },
-        "import_from_file": {
+        "importFromFile": {
             "title": "Pulihkan dompet dari file cadangan",
             "body": "Impor cadangan buat memulihkan dompet. Pencadangan bisa berupa file .stronghold atau .kdbx SeedVault Trinity."
         },
-        "import_backup_password": {
+        "importBackupPassword": {
             "title": "Pulihkan dompet dari SeedVault atau Stronghold",
-            "body_1": "Harap masukkan kata sandi cadangan.",
-            "body_2": "Ini adalah kata sandi yang dibuat saat pencadangan pertama Anda."
+            "body1": "Harap masukkan kata sandi cadangan.",
+            "body2": "Ini adalah kata sandi yang dibuat saat pencadangan pertama Anda."
         },
-        "import_success": {
+        "importSuccess": {
             "title": "Anda telah berhasil memulihkan pencadangan",
             "body": "Anda bisa membuat dompet baru."
         },
         "migrate": {
             "title": "Migrasikan dana Anda",
-            "body_1": "Ini adalah proses otomatis untuk mentransfer dana ke dompet baru Anda. \nKami akan memeriksa alamat yang sudah dibelanjakan yang melemahkan keamanan Anda.",
-            "body_2": "Mungkin butuh waktu. Jangan matikan perangkat Anda selama migrasi.",
+            "body1": "Ini adalah proses otomatis untuk mentransfer dana ke dompet baru Anda. \nKami akan memeriksa alamat yang sudah dibelanjakan yang melemahkan keamanan Anda.",
+            "body2": "Mungkin butuh waktu. Jangan matikan perangkat Anda selama migrasi.",
             "existing": "Dompet lama Anda",
             "new": "Dompet baru Anda"
         },
-        "migrate_failed": {
+        "migrateFailed": {
             "title": "To do",
             "body": "To do"
         },
@@ -248,40 +248,40 @@
             }
         },
         "login": {
-            "please_wait": "Harap tunggu {time, plural,one {1 detik}other {# detik}}",
-            "incorrect_attempts": "{attempts, plural,one {1 upaya gagal}other {# upaya gagal}}"
+            "pleaseWait": "Harap tunggu {time, plural,one {1 detik}other {# detik}}",
+            "incorrectAttempts": "{attempts, plural,one {1 upaya gagal}other {# upaya gagal}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "Firefly v",
-                    "up_to_date": "Terbaru",
-                    "out_of_date": "Ketinggalan jaman"
+                    "upToDate": "Terbaru",
+                    "outOfDate": "Ketinggalan jaman"
                 },
-                "hardware_device": {
+                "hardwareDevice": {
                     "title": "Perangkat keras",
-                    "none_detected": "Tidak terdeteksi"
+                    "noneDetected": "Tidak terdeteksi"
                 },
-                "stronghold_status": {
+                "strongholdStatus": {
                     "title": "Status stronghold",
                     "locked": "Terkunci",
                     "unlocked": "Tidak Terkunci"
                 },
-                "stronghold_backup": {
+                "strongholdBackup": {
                     "title": "Cadangan Stronghold",
-                    "weeks_ago": "{weeks, plural, one {# minggu} other {# minggu}} yang lalu"
+                    "weeksAgo": "{weeks, plural, one {# minggu} other {# minggu}} yang lalu"
                 }
             },
             "network": {
-                "network_operational": "Operasional jaringan",
-                "network_degraded": "Jaringan terdegradasi",
-                "network_down": "Jaringan mati",
+                "networkOperational": "Operasional jaringan",
+                "networkDegraded": "Jaringan terdegradasi",
+                "networkDown": "Jaringan mati",
                 "status": "Status",
-                "messages_per_second": "Pesan per detik",
-                "confirmation_rate": "Menilai konfirmasi"
+                "messagesPerSecond": "Pesan per detik",
+                "confirmationRate": "Menilai konfirmasi"
             },
-            "profile_modal": {
-                "all_settings": "Semua pengaturan",
+            "profileModal": {
+                "allSettings": "Semua pengaturan",
                 "logout": "Keluar"
             }
         }
@@ -296,42 +296,42 @@
         },
         "version": {
             "title": "Versi Saat Ini: {version}",
-            "up_to_date_title": "Firefly Anda sudah yang terbaru",
-            "up_to_date_description": "Anda menjalankan Firefly versi terbaru dan teraman.",
-            "update_available": "Pembaruan Firefly tersedia",
-            "update_details": "Versi {version} - {date}"
+            "upToDateTitle": "Firefly Anda sudah yang terbaru",
+            "upToDateDescription": "Anda menjalankan Firefly versi terbaru dan teraman.",
+            "updateAvailable": "Pembaruan Firefly tersedia",
+            "updateDetails": "Versi {version} - {date}"
         },
         "backup": {
             "title": "Cadangan terakhir {date}",
-            "last_backup": "Anda melakukan backup terakhir {date}",
-            "backup_description": "Penting untuk membuat cadangan secara teratur untuk memastikan Anda memiliki salinan akun dan riwayat transaksi Anda.",
-            "backup_warning": "Jika Anda kehilangan cadangan dan frase pemulihan, Anda akan kehilangan akses ke dana Anda.",
-            "not_backed_up": "Tidak dicadangkan",
-            "not_backed_up_description": "Anda belum mencadangkan Stronghold Anda"
+            "lastBackup": "Anda melakukan backup terakhir {date}",
+            "backupDescription": "Penting untuk membuat cadangan secara teratur untuk memastikan Anda memiliki salinan akun dan riwayat transaksi Anda.",
+            "backupWarning": "Jika Anda kehilangan cadangan dan frase pemulihan, Anda akan kehilangan akses ke dana Anda.",
+            "notBackedUp": "Tidak dicadangkan",
+            "notBackedUpDescription": "Anda belum mencadangkan Stronghold Anda"
         },
-        "delete_account": {
+        "deleteAccount": {
             "title": "Menghapus {name}?",
             "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Ketik kata sandi dompet Anda untuk mengonfirmasi.",
-            "delete_account": "Hapus akun",
-            "error_title": "Tidak dapat menghapus isian {name}",
-            "error_body_1": "Untuk menghapus akun Anda harus memiliki 0 saldo.",
-            "error_body_2": "Saat ini Anda memiliki sisa {balance} di akun ini. Harap pindahkan dana ini ke akun lain dan coba lagi.",
-            "error_body_3": "Anda tidak dapat menghapus akun ini, Anda harus memiliki setidaknya satu."
+            "typePassword": "Ketik kata sandi dompet Anda untuk mengonfirmasi.",
+            "deleteAccount": "Hapus akun",
+            "errorTitle": "Tidak dapat menghapus isian {name}",
+            "errorBody1": "Untuk menghapus akun Anda harus memiliki 0 saldo.",
+            "errorBody2": "Saat ini Anda memiliki sisa {balance} di akun ini. Harap pindahkan dana ini ke akun lain dan coba lagi.",
+            "errorBody3": "Anda tidak dapat menghapus akun ini, Anda harus memiliki setidaknya satu."
         },
-        "address_history": {
+        "addressHistory": {
             "title": "{name} riwayat alamat akun",
-            "current_balance": "Saldo saat ini: {balance}"
+            "currentBalance": "Saldo saat ini: {balance}"
         },
         "node": {
-            "title_add": "Tambahkan Node",
-            "title_remove": "Menghapus Node",
-            "title_details": "Node detailnya",
-            "node_address": "Alamat Node",
-            "optional_username": "Nama pengguna (opsional)",
-            "optional_password": "Kata Sandi (opsional)",
-            "set_as_primary_node": "Ditetapkan sebagai Node utama",
-            "remove_confirmation": "Anda yakin ingin menghapus node ini?"
+            "titleAdd": "Tambahkan Node",
+            "titleRemove": "Menghapus Node",
+            "titleDetails": "Node detailnya",
+            "nodeAddress": "Alamat Node",
+            "optionalUsername": "Nama pengguna (opsional)",
+            "optionalPassword": "Kata Sandi (opsional)",
+            "setAsPrimaryNode": "Ditetapkan sebagai Node utama",
+            "removeConfirmation": "Anda yakin ingin menghapus node ini?"
         },
         "errorLog": {
             "title": "Catatan eror",
@@ -354,12 +354,12 @@
         }
     },
     "charts": {
-        "incoming_mi": "Menerima {value} Mi",
-        "outgoing_mi": "Keluar {value} Mi",
+        "incomingMi": "Menerima {value} Mi",
+        "outgoingMi": "Keluar {value} Mi",
         "portoflio": "Portofolio",
         "token": "Token",
-        "account_value": "Nilai Akun",
-        "account_activity": "Aktivitas Akun"
+        "accountValue": "Nilai Akun",
+        "accountActivity": "Aktivitas Akun"
     },
     "actions": {
         "continue": "Lanjutkan",
@@ -368,32 +368,32 @@
         "close": "Tutup",
         "dismiss": "Menyingkirkan",
         "save": "Simpan",
-        "import_seed": "Impor seed lama",
-        "import_wallet": "Impor dompet lama",
-        "create_wallet": "Buat dompet baru",
-        "save_password": "Simpan kata sandi",
-        "use_biometric": "Pakai keamanan biometrik",
-        "setup_pin": "Atur kode PIN",
-        "set_pin": "Buat kode PIN",
-        "confirm_pin": "Konfirmasikan PIN",
-        "enter_your_pin": "Masukkan PIN",
-        "save_backup_file": "Simpan file pencadangan",
-        "ive_written_recovery_phrase": "Aku sudah menuliskan frasa pemulihan",
-        "verify_recovery_phrase": "Verifikasi frasa pemulihan",
-        "reveal_recovery_phrase": "Perlihatkan frasa pemulihan",
-        "import_seedvault": "Impor SeedVault",
-        "check_again": "Bukan, Periksa Lagi",
-        "import_from_file": "Impor dari file",
+        "importSeed": "Impor seed lama",
+        "importWallet": "Impor dompet lama",
+        "createWallet": "Buat dompet baru",
+        "savePassword": "Simpan kata sandi",
+        "useBiometric": "Pakai keamanan biometrik",
+        "setupPin": "Atur kode PIN",
+        "setPin": "Buat kode PIN",
+        "confirmPin": "Konfirmasikan PIN",
+        "enterYourPin": "Masukkan PIN",
+        "saveBackupFile": "Simpan file pencadangan",
+        "iveWrittenRecoveryPhrase": "Aku sudah menuliskan frasa pemulihan",
+        "verifyRecoveryPhrase": "Verifikasi frasa pemulihan",
+        "revealRecoveryPhrase": "Perlihatkan frasa pemulihan",
+        "importSeedvault": "Impor SeedVault",
+        "checkAgain": "Bukan, Periksa Lagi",
+        "importFromFile": "Impor dari file",
         "send": "Kirim",
         "receive": "Terima",
         "create": "Membuat",
-        "begin_transfer": "Mulai Transfer",
-        "try_again": "Coba kembali",
-        "visit_discord": "Kunjungi Discord",
-        "drag_drop": "Tarik & Letak",
-        "import_extentions": "file .stronghold atau .kdbx",
-        "choose_file": "Pilih sebuah File",
-        "drop_here": "Taruh file di sini",
+        "beginTransfer": "Mulai Transfer",
+        "tryAgain": "Coba kembali",
+        "visitDiscord": "Kunjungi Discord",
+        "dragDrop": "Tarik & Letak",
+        "importExtentions": "file .stronghold atau .kdbx",
+        "chooseFile": "Pilih sebuah File",
+        "dropHere": "Taruh file di sini",
         "syncAll": "Sinkronkan semua",
         "export": "Ekspor",
         "exportNewStronghold": "Ekspor Stronghold baru",
@@ -403,15 +403,15 @@
         "exportState": "Ekspor status",
         "outsourceProofOfWork": "Pindahkan pekerjaan",
         "unlock": "Buka",
-        "update_firefly": "Memperbarui Firefly",
-        "restart_now": "Start ulang sekarang",
-        "save_backup": "Simpan cadangan",
-        "customize_account": "Sesuaikan akun",
-        "view_address_history": "Lihat riwayat alamat",
-        "delete_account": "Hapus akun",
+        "updateFirefly": "Memperbarui Firefly",
+        "restartNow": "Start ulang sekarang",
+        "saveBackup": "Simpan cadangan",
+        "customizeAcount": "Customise account",
+        "viewAddressHistory": "Lihat riwayat alamat",
+        "deleteAccount": "Hapus akun",
         "max": "Maksimal",
-        "add_node": "Tambah Node",
-        "remove_node": "Menghapus Node",
+        "addNode": "Tambah Node",
+        "removeNode": "Menghapus Node",
         "hide": "Menyembunyikan",
         "hideOthers": "Sembunyikan Lainnya",
         "showAll": "Tunjukkan Semua",
@@ -427,57 +427,57 @@
         "checkForUpdates": "Periksa pembaruan",
         "reportAnIssue": "Laporkan Masalah",
         "clear": "Hapus",
-        "hide_details": "Sembunyikan Rincian",
+        "hideDetails": "Sembunyikan Rincian",
         "yes": "Iya",
         "no": "Tidak",
         "reset": "Setel ulang"
     },
     "general": {
         "password": "Kata sandi",
-        "confirm_password": "Setujui kata sandi",
+        "confirmPassword": "Setujui kata sandi",
         "currentPassword": "Sandi saat ini",
         "newPassword": "Kata Sandi Baru",
         "confirmNewPassword": "Konfirmasikan kata sandi baru",
-        "your_seed": "Seed Anda",
-        "recovery_phrase": "Frasa Pemulihan",
-        "recent_activity": "Aktivitas Terbaru",
+        "yourSeed": "Seed Anda",
+        "recoveryPhrase": "Frasa Pemulihan",
+        "recentActivity": "Aktivitas Terbaru",
         "sent": "Terkirim",
         "received": "Diterima",
-        "send_payment": "Kirim pembayaran",
-        "move_funds": "Memindahkan dana ke akun lain",
-        "send_funds": "Kirim dana",
-        "send_to_address": "Kirim ke sebuah Alamat",
-        "scan_qr_or_paste": "Pindai kode QR atau salin sebuah Alamat",
-        "move_funds_between_accounts": "Pindahkan dana antar rekening",
-        "send_tokens_to_address": "Kirim token ke suatu alamat",
-        "manage_account": "Kelola Akun",
-        "customize_account": "Sesuaikan akun",
+        "sendPayment": "Kirim pembayaran",
+        "moveFunds": "Memindahkan dana ke akun lain",
+        "sendFunds": "Kirim dana",
+        "sendToAddress": "Kirim ke sebuah Alamat",
+        "scanQrOrPaste": "Pindai kode QR atau salin sebuah Alamat",
+        "moveFundsBetweenAccounts": "Pindahkan dana antar rekening",
+        "sendTokensToAddress": "Kirim token ke suatu alamat",
+        "manageAccount": "Kelola Akun",
+        "customizeAcount": "Customize your account",
         "account": "Akun",
-        "sending_to_address": "Mengirim ke alamat",
+        "sendingToAddress": "Mengirim ke alamat",
         "amount": "Jumlah",
-        "add_address": "Tambah Alamat",
+        "addAddress": "Tambah Alamat",
         "reference": "Referensi",
         "from": "Dari",
         "to": "Ke",
-        "receive_funds": "Terima dana",
-        "my_address": "Alamat Saya",
-        "share_address": "Bagikan alamat",
-        "your_address": "Alamat Anda",
-        "generate_new_address": "Buatkan alamat baru",
-        "copy_address": "Salin Alamat",
-        "have_text_backup": "Aku punya cadangan teks",
-        "have_file_backup": "Aku punya cadangan file",
-        "enter_seed_or_phrase": "Masukkan frasa atau seed pemulihan",
-        "upload_seedvault_or_stronghold": "Impor file Stronghold atau SeedVault",
+        "receiveFunds": "Terima dana",
+        "myAddress": "Alamat Saya",
+        "shareAddress": "Bagikan alamat",
+        "yourAddress": "Alamat Anda",
+        "generateNewAddress": "Buatkan alamat baru",
+        "copyAddress": "Salin Alamat",
+        "haveTextBackup": "Aku punya cadangan teks",
+        "haveFileBackup": "Aku punya cadangan file",
+        "enterSeedOrPhrase": "Masukkan frasa atau seed pemulihan",
+        "uploadSeedvaultOrStronghold": "Impor file Stronghold atau SeedVault",
         "import": "Impor",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Bahasa",
         "appearance": "Tampilan",
-        "light_theme": "Motif terang",
-        "dark_theme": "Motif gelap",
-        "total_balance": "Saldo Total",
-        "account_balance": "Saldo Akun",
+        "lightTheme": "Motif terang",
+        "darkTheme": "Motif gelap",
+        "totalBalance": "Saldo Total",
+        "accountBalance": "Saldo Akun",
         "incoming": "Pemasukkan",
         "outgoing": "Pengeluaran",
         "accounts": "Akun",
@@ -486,24 +486,24 @@
         "profiles": "Profil",
         "developerProfile": "Profil pengembang",
         "dev": "Pengembang",
-        "create_account": "Buat akun",
-        "account_name": "Nama akun",
-        "latest_transactions": "Transaksi terbaru",
+        "createAccount": "Buat akun",
+        "accountName": "Nama akun",
+        "latestTransactions": "Transaksi terbaru",
         "transactions": "Transaksi",
         "security": "Keamanan",
-        "account_address": "Alamat Akun",
+        "accountAddress": "Alamat Akun",
         "nodes": "Nodes",
         "wallet": "Dompet",
         "help": "Bantuan",
         "you": "Kamu",
         "messageId": "ID Pesan",
-        "input_address": "Masukan alamat",
-        "receive_address": "Mendapatkan alamat",
+        "inputAddress": "Masukan alamat",
+        "receiveAddress": "Mendapatkan alamat",
         "date": "Tanggal",
-        "no_accounts": "Anda tidak memiliki akun, harap buat akun.",
-        "loading_accounts": "Sedang memuat, mohon tunggu...",
-        "add_profile": "Tambah profil",
-        "no_recent_history": "Tidak ada riwayat terkini",
+        "noAccounts": "Anda tidak memiliki akun, harap buat akun.",
+        "loadingAccounts": "Sedang memuat, mohon tunggu...",
+        "addProfile": "Tambah profil",
+        "noRecentHistory": "Tidak ada riwayat terkini",
         "transferSyncing": "Sinkronisasi akun",
         "transferSelectingInputs": "Memilih masukan",
         "transferRemainderAddress": "Menghasilkan alamat setoran sisa",
@@ -527,22 +527,22 @@
     },
     "dates": {
         "today": "Hari ini",
-        "days_ago": "{time, plural, one {# hari} other {# hari}} yang lalu",
-        "weeks_ago": "{time, plural, one {# minggu} other {# minggu}} yang lalu",
-        "months_ago": "{time, plural, one {# bulan} other {# bulan}} yang lalu",
-        "years_ago": "{time, plural, one {# tahun} other {# tahun}} yang lalu"
+        "daysAgo": "{time, plural, one {# hari} other {# hari}} yang lalu",
+        "weeksAgo": "{time, plural, one {# minggu} other {# minggu}} yang lalu",
+        "monthsAgo": "{time, plural, one {# bulan} other {# bulan}} yang lalu",
+        "yearsAgo": "{time, plural, one {# tahun} other {# tahun}} yang lalu"
     },
     "notifications": {
         "valueTx": "Menerima {{value}} ke {{account}}",
         "confirmed": "Keluar {{value}} dari {{account}} telah dikonfirmasi",
         "failed": "Keluar {{value}} dari {{account}} gagal",
-        "downloading_update": "Mengunduh pembaruan",
-        "update_ready": "Pembaruan siap",
-        "update_error": "Terjadi kesalahan selama pembaruan. Silakan mencoba kembali",
-        "restart_install": "Start ulang untuk menginstal",
-        "calc_minutes_remaining": "Menghitung menit yang tersisa...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {#sisa menit}}",
-        "copied_to_clipboard": "Salin ke papan klip"
+        "downloadingUpdate": "Mengunduh pembaruan",
+        "updateReady": "Pembaruan siap",
+        "updateError": "Terjadi kesalahan selama pembaruan. Silakan mencoba kembali",
+        "restartInstall": "Start ulang untuk menginstal",
+        "calcMinutesRemaining": "Menghitung menit yang tersisa...",
+        "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {#sisa menit}}",
+        "copiedToClipboard": "Salin ke papan klip"
     },
     "error": {
         "profile": {

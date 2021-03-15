@@ -96,17 +96,17 @@
     }
 </script>
 
-<Text type="h4" classes="mb-5">{locale('popups.node.title_add')}</Text>
+<Text type="h4" classes="mb-5">{locale('popups.node.titleAdd')}</Text>
 <div class="w-full h-full">
-    <Input bind:value={url} placeholder={locale('popups.node.node_address')} error={addressError} disabled={isBusy} autofocus />
+    <Input bind:value={url} placeholder={locale('popups.node.nodeAddress')} error={addressError} disabled={isBusy} autofocus />
     <Input
         classes="mt-3"
         bind:value={username}
-        placeholder={locale('popups.node.optional_username')}
+        placeholder={locale('popups.node.optionalUsername')}
         error={authError}
         disabled={isBusy} />
-    <Password classes="mt-3" bind:value={password} placeholder={locale('popups.node.optional_password')} disabled={isBusy} />
-    <Checkbox classes="my-8" label={locale('popups.node.set_as_primary_node')} bind:checked={primary} disabled={isBusy} />
+    <Password classes="mt-3" bind:value={password} placeholder={locale('popups.node.optionalPassword')} disabled={isBusy} />
+    <Checkbox classes="my-8" label={locale('popups.node.setAsPrimaryNode')} bind:checked={primary} disabled={isBusy} />
 </div>
 <div class="flex flex-row justify-between space-x-4 w-full px-8 ">
     <Button secondary classes="w-1/2" onClick={() => closePopup()} disabled={isBusy}>{locale('actions.cancel')}</Button>
@@ -114,6 +114,6 @@
         disabled={!url || isBusy}
         classes="w-1/2"
         onClick={() => addCustomNode({ url, auth: { username, password } }, primary)}>
-        {locale('actions.add_node')}
+        {locale('actions.addNode')}
     </Button>
 </div>

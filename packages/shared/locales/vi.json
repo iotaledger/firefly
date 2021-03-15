@@ -1,29 +1,29 @@
 {
     "views": {
-        "onboarding_1": {
+        "onboarding1": {
             "title": "Gửi, Nhận và Quản lý IOTA của bạn",
             "body": "Firefly là một ví IOTA an toàn và dễ sử dụng."
         },
         "legal": {
             "title": "Hợp lệ",
             "body": "Vui lòng xem lại Chính sách Bảo mật và Điều khoản Dịch vụ.",
-            "privacy_policy": {
+            "privacyPolicy": {
                 "title": "Chính sách Bảo mật",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "terms_of_service": {
+            "termsOfService": {
                 "title": "Điều khoản Dịch vụ",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
@@ -34,7 +34,7 @@
         "setup": {
             "title": "Thiết lập Ví của bạn",
             "body": "Bạn có thể tạo một Ví mới hoặc nhập vào từ một Ví hiện có.",
-            "profile_name": "Tên hồ sơ"
+            "profileName": "Tên hồ sơ"
         },
         "password": {
             "title": "Tạo mật khẩu",
@@ -42,41 +42,41 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body_2": "Keep your PIN safe!"
+            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
+            "body2": "Keep your PIN safe!"
         },
         "pin": {
             "title": "Thiết lập mã PIN",
-            "body_1": "Nhập mã PIN gồm 6 chữ số bên dưới. Bạn sẽ được yêu cầu nhập mã PIN để đăng nhập vào ví của mình.",
-            "body_2": "Bạn chỉ có thể sử dụng số."
+            "body1": "Nhập mã PIN gồm 6 chữ số bên dưới. Bạn sẽ được yêu cầu nhập mã PIN để đăng nhập vào ví của mình.",
+            "body2": "Bạn chỉ có thể sử dụng số."
         },
-        "confirm_pin": {
+        "confirmPin": {
             "title": "Xác thực mã PIN của bạn",
             "body": "Nhập lại mã PIN của bạn để tiếp tục."
         },
         "backup": {
             "title": "Sao lưu ví của bạn",
-            "body_1": "Bây giờ bạn sẽ được xem cụm từ để phục hồi tài khoản ví.",
-            "body_2": "Đừng bao giờ chia sẻ cụm từ này với bất kỳ ai. Cụm từ phục hồi tài khoản ví này của bạn có thể được sử dụng để truy cập vào tài khoản của bạn từ bất kỳ nơi nào.",
-            "body_3": "Nếu bạn làm mất cụm từ khôi phục tài khoản ví, bạn có thể sẽ bị mất tiền của mình."
+            "body1": "Bây giờ bạn sẽ được xem cụm từ để phục hồi tài khoản ví.",
+            "body2": "Đừng bao giờ chia sẻ cụm từ này với bất kỳ ai. Cụm từ phục hồi tài khoản ví này của bạn có thể được sử dụng để truy cập vào tài khoản của bạn từ bất kỳ nơi nào.",
+            "body3": "Nếu bạn làm mất cụm từ khôi phục tài khoản ví, bạn có thể sẽ bị mất tiền của mình."
         },
-        "recovery_phrase": {
+        "recoveryPhrase": {
             "title": "Cụm từ hồi phục tài khoản ví",
-            "body_1": "Ghi lại ra giấy một cách cẩn thận những từ sau đây chính xác theo thứ tự.",
-            "body_2": "Cất giữ cụm từ khôi phục tài khoản của bạn ở nơi riêng tư và an toàn. Đừng chia sẻ nó với bất kỳ ai.",
-            "reveal_recovery_phrase": "Hiển thị cụm từ khôi phục ví",
-            "hide_recovery_phrase": "Ẩn cụm từ khôi phục ví"
+            "body1": "Ghi lại ra giấy một cách cẩn thận những từ sau đây chính xác theo thứ tự.",
+            "body2": "Cất giữ cụm từ khôi phục tài khoản của bạn ở nơi riêng tư và an toàn. Đừng chia sẻ nó với bất kỳ ai.",
+            "revealRecoveryPhrase": "Hiển thị cụm từ khôi phục ví",
+            "hideRecoveryPhrase": "Ẩn cụm từ khôi phục ví"
         },
-        "verify_recovery_phrase": {
+        "verifyRecoveryPhrase": {
             "title": "Xác thực cụm từ phục hồi tài khoản ví",
             "body": "Hãy kiểm tra lại cụm từ đã được viết xuống một cách chính xác. Chọn các từ theo đúng thứ tự của chúng.",
-            "creating_account": "Creating account, please wait..."
+            "creatingAccount": "Creating account, please wait..."
         },
-        "backup_wallet": {
+        "backupWallet": {
             "title": "Sao lưu vào tập tin Stronghold",
             "body": "Nhập mật khẩu của bạn để sao lưu ví của bạn vào tập tin Stronghold. Mật khẩu của bạn được dùng để mã hóa việc sao lưu."
         },
-        "recovery_phrase_saved": {
+        "recoveryPhraseSaved": {
             "title": "Sao lưu thành công",
             "body": "Bạn vừa sao lưu tài khoản ví của mình vào Stronghold."
         },
@@ -88,35 +88,35 @@
             "title": "Nhập tài khoản vào ví",
             "body": "Nếu bạn có một cụm từ để phục hồi tài khoản ví hoặc một sao lưu Stronghold, bạn có thể nhập nó ở đây."
         },
-        "import_from_text": {
+        "importFromText": {
             "title": "Khôi phục tài khoản ví của bạn với cụm từ hoặc với seed",
-            "body_1": "Một cụm từ khôi phục là một cụm dài 24 từ. Nó được sử dụng để khôi phục tài khoản ví Firefly đã được tạo.",
-            "body_2": "Một seed gồm có 81 ký tự. Nó được dùng để khôi phục từ một tài khoản ví Trinity, phiên bản cũ hơn.",
-            "body_3": "Nhập vào seed hoặc cụm từ khôi phục của bạn",
-            "seed_detected": "81 character seed detected",
-            "phrase_detected": "24 word phrase detected"
+            "body1": "Một cụm từ khôi phục là một cụm dài 24 từ. Nó được sử dụng để khôi phục tài khoản ví Firefly đã được tạo.",
+            "body2": "Một seed gồm có 81 ký tự. Nó được dùng để khôi phục từ một tài khoản ví Trinity, phiên bản cũ hơn.",
+            "body3": "Nhập vào seed hoặc cụm từ khôi phục của bạn",
+            "seedDetected": "81 character seed detected",
+            "phraseDetected": "24 word phrase detected"
         },
-        "import_from_file": {
+        "importFromFile": {
             "title": "Khôi phục tài khoản ví của bạn từ tập tin sao lưu",
             "body": "Nhập vào một file sao lưu để khôi phục tài khoản ví của bạn. Sao lưu cũng có thể là một tập tin Stronghold (.stronghold) hoặc một tập tin Trinity SeedVault (.kdbx)."
         },
-        "import_backup_password": {
+        "importBackupPassword": {
             "title": "Khôi phục tài khoản ví của bạn từ SeedVault hoặc Stronghold",
-            "body_1": "Vui lòng nhập mật khẩu sao lưu của bạn.",
-            "body_2": "Đây là mật khẩu bạn đã đặt khi tạo bản sao lưu lần đầu tiên."
+            "body1": "Vui lòng nhập mật khẩu sao lưu của bạn.",
+            "body2": "Đây là mật khẩu bạn đã đặt khi tạo bản sao lưu lần đầu tiên."
         },
-        "import_success": {
+        "importSuccess": {
             "title": "Bạn đã khôi phục sao lưu của mình thành công",
             "body": "Bây giờ bạn có thể thiết lập một tài khoản ví mới."
         },
         "migrate": {
             "title": "Chuyền tiền của bạn",
-            "body_1": "Đây là một tiến trình tự động để chuyển tiền của bạn sang ví mới. Chúng tôi sẽ kiểm tra các địa chỉ đã sử dụng làm suy yếu bảo mật của bạn.",
-            "body_2": "Nó có thể mất một khoảng thời gian. Không tắt thiết bị của bạn trong quá trình chuyển tiền.",
+            "body1": "Đây là một tiến trình tự động để chuyển tiền của bạn sang ví mới. Chúng tôi sẽ kiểm tra các địa chỉ đã sử dụng làm suy yếu bảo mật của bạn.",
+            "body2": "Nó có thể mất một khoảng thời gian. Không tắt thiết bị của bạn trong quá trình chuyển tiền.",
             "existing": "Ví cũ của bạn",
             "new": "Ví mới của bạn"
         },
-        "migrate_failed": {
+        "migrateFailed": {
             "title": "To do",
             "body": "To do"
         },
@@ -248,40 +248,40 @@
             }
         },
         "login": {
-            "please_wait": "Vui lòng đợi {time, plural, one {1 second} other {# seconds}}",
-            "incorrect_attempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "pleaseWait": "Vui lòng đợi {time, plural, one {1 second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "Firefly phiên bản v{version}",
-                    "up_to_date": "Đã cập nhật",
-                    "out_of_date": "Đã cũ"
+                    "upToDate": "Đã cập nhật",
+                    "outOfDate": "Đã cũ"
                 },
-                "hardware_device": {
+                "hardwareDevice": {
                     "title": "Thiết bị phần cứng",
-                    "none_detected": "Không phát hiện được"
+                    "noneDetected": "Không phát hiện được"
                 },
-                "stronghold_status": {
+                "strongholdStatus": {
                     "title": "Tình trạng của Stronghold",
                     "locked": "Đã khóa",
                     "unlocked": "Đã mở khóa"
                 },
-                "stronghold_backup": {
+                "strongholdBackup": {
                     "title": "Sao lưu của Stronghold",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# tuần}} trước đó"
+                    "weeksAgo": "{weeks, plural, one {# week} other {# tuần}} trước đó"
                 }
             },
             "network": {
-                "network_operational": "Vận hành mạng",
-                "network_degraded": "Mạng bị xuống cấp",
-                "network_down": "Rớt mạng",
+                "networkOperational": "Vận hành mạng",
+                "networkDegraded": "Mạng bị xuống cấp",
+                "networkDown": "Rớt mạng",
                 "status": "Trạng thái",
-                "messages_per_second": "Số tin nhắn trên giây",
-                "confirmation_rate": "Tỷ lệ xác nhận"
+                "messagesPerSecond": "Số tin nhắn trên giây",
+                "confirmationRate": "Tỷ lệ xác nhận"
             },
-            "profile_modal": {
-                "all_settings": "Tất cả tùy chọn cài đặt",
+            "profileModal": {
+                "allSettings": "Tất cả tùy chọn cài đặt",
                 "logout": "Đăng xuất"
             }
         }
@@ -296,42 +296,42 @@
         },
         "version": {
             "title": "Phiên bản hiện tại: {version}",
-            "up_to_date_title": "Firefly đã cập nhật mới nhất",
-            "up_to_date_description": "Bạn đang chạy trên phiên bản Firefly mới nhất và an toàn nhất.",
-            "update_available": "Phiên bản cập nhật Firefly đang hiện hữu",
-            "update_details": "Phiên bản {version} - {date}"
+            "upToDateTitle": "Firefly đã cập nhật mới nhất",
+            "upToDateDescription": "Bạn đang chạy trên phiên bản Firefly mới nhất và an toàn nhất.",
+            "updateAvailable": "Phiên bản cập nhật Firefly đang hiện hữu",
+            "updateDetails": "Phiên bản {version} - {date}"
         },
         "backup": {
             "title": "Bản sao lưu mới nhất: {date}",
-            "last_backup": "Bạn đã thực hiện sau lưu lần cuối vào ngày {date}",
-            "backup_description": "Điểm quan trọng là cần sao lưu thường xuyên để chắc chắn rằng bạn có lưu giữ một bản sao các tài khoản của mình và lịch sử giao dịch.",
-            "backup_warning": "Nếu bạn mất bản sao lưu của mình và cụm từ khôi phục bạn sẽ mất quyền truy cập vào các tài khoản của mình.",
-            "not_backed_up": "Chưa được sao lưu",
-            "not_backed_up_description": "Bạn đã không thực hiện sao lưu Stronghold của bạn"
+            "lastBackup": "Bạn đã thực hiện sau lưu lần cuối vào ngày {date}",
+            "backupDescription": "Điểm quan trọng là cần sao lưu thường xuyên để chắc chắn rằng bạn có lưu giữ một bản sao các tài khoản của mình và lịch sử giao dịch.",
+            "backupWarning": "Nếu bạn mất bản sao lưu của mình và cụm từ khôi phục bạn sẽ mất quyền truy cập vào các tài khoản của mình.",
+            "notBackedUp": "Chưa được sao lưu",
+            "notBackedUpDescription": "Bạn đã không thực hiện sao lưu Stronghold của bạn"
         },
-        "delete_account": {
+        "deleteAccount": {
             "title": "Có xóa {name} hay không?",
             "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Nhập vào mật khẩu ví của bạn để xác nhận.",
-            "delete_account": "Xóa Tài khoản",
-            "error_title": "Không thể xóa {name}",
-            "error_body_1": "Để xóa một tài khoản bạn phải có số dư là 0.",
-            "error_body_2": "Bạn hiện đang có số dư {balance} còn lại trong tài khoản này. Xin vui lòng di chuyển đi số tiền này sang một tài khoản khác và thử lại một lần nữa.",
-            "error_body_3": "You cannot delete this account, you must have at least one."
+            "typePassword": "Nhập vào mật khẩu ví của bạn để xác nhận.",
+            "deleteAccount": "Xóa Tài khoản",
+            "errorTitle": "Không thể xóa {name}",
+            "errorBody1": "Để xóa một tài khoản bạn phải có số dư là 0.",
+            "errorBody2": "Bạn hiện đang có số dư {balance} còn lại trong tài khoản này. Xin vui lòng di chuyển đi số tiền này sang một tài khoản khác và thử lại một lần nữa.",
+            "errorBody3": "You cannot delete this account, you must have at least one."
         },
-        "address_history": {
+        "addressHistory": {
             "title": "{name} lịch sử địa chỉ ví",
-            "current_balance": "Số dư hiện tại: {balance}"
+            "currentBalance": "Số dư hiện tại: {balance}"
         },
         "node": {
-            "title_add": "Thêm Node",
-            "title_remove": "Remove a node",
-            "title_details": "Các chi tiết node",
-            "node_address": "Đia chỉ node",
-            "optional_username": "Tên người dùng (tùy chọn)",
-            "optional_password": "Mật khẩu (tùy chọn)",
-            "set_as_primary_node": "Thiết lập node chính",
-            "remove_confirmation": "Are you sure you want to remove this node?"
+            "titleAdd": "Thêm Node",
+            "titleRemove": "Remove a node",
+            "titleDetails": "Các chi tiết node",
+            "nodeAddress": "Đia chỉ node",
+            "optionalUsername": "Tên người dùng (tùy chọn)",
+            "optionalPassword": "Mật khẩu (tùy chọn)",
+            "setAsPrimaryNode": "Thiết lập node chính",
+            "removeConfirmation": "Are you sure you want to remove this node?"
         },
         "errorLog": {
             "title": "Error Log",
@@ -354,12 +354,12 @@
         }
     },
     "charts": {
-        "incoming_mi": "Incoming {value} Mi",
-        "outgoing_mi": "Outgoing {value} Mi",
+        "incomingMi": "Incoming {value} Mi",
+        "outgoingMi": "Outgoing {value} Mi",
         "portoflio": "Portfolio",
         "token": "Token",
-        "account_value": "Account Value",
-        "account_activity": "Account Activity"
+        "accountValue": "Account Value",
+        "accountActivity": "Account Activity"
     },
     "actions": {
         "continue": "Tiếp tục",
@@ -368,32 +368,32 @@
         "close": "Đóng",
         "dismiss": "Bỏ qua",
         "save": "Lưu",
-        "import_seed": "Nhập vào một seed hiện có",
-        "import_wallet": "Nhập vào một ví hiện có",
-        "create_wallet": "Khởi tạo ví mới",
-        "save_password": "Lưu mật khẩu",
-        "use_biometric": "Sử dụng bảo mật sinh trắc học",
-        "setup_pin": "Thiết lập mã PIN",
-        "set_pin": "Đặt mã PIN",
-        "confirm_pin": "Xác nhận mã PIN",
-        "enter_your_pin": "Nhập mã PIN của bạn",
-        "save_backup_file": "Lưu tập tin dự phòng",
-        "ive_written_recovery_phrase": "Tôi đã viết xuống giấy cụm từ phục hồi",
-        "verify_recovery_phrase": "Xác thực cụm từ phục hồi tài khoản ví",
-        "reveal_recovery_phrase": "Hiển thị cụm từ khôi phục ví",
-        "import_seedvault": "Nhập vào SeedVault",
-        "check_again": "Không, Kiểm tra lại",
-        "import_from_file": "Nhập từ tập tin",
+        "importSeed": "Nhập vào một seed hiện có",
+        "importWallet": "Nhập vào một ví hiện có",
+        "createWallet": "Khởi tạo ví mới",
+        "savePassword": "Lưu mật khẩu",
+        "useBiometric": "Sử dụng bảo mật sinh trắc học",
+        "setupPin": "Thiết lập mã PIN",
+        "setPin": "Đặt mã PIN",
+        "confirmPin": "Xác nhận mã PIN",
+        "enterYourPin": "Nhập mã PIN của bạn",
+        "saveBackupFile": "Lưu tập tin dự phòng",
+        "iveWrittenRecoveryPhrase": "Tôi đã viết xuống giấy cụm từ phục hồi",
+        "verifyRecoveryPhrase": "Xác thực cụm từ phục hồi tài khoản ví",
+        "revealRecoveryPhrase": "Hiển thị cụm từ khôi phục ví",
+        "importSeedvault": "Nhập vào SeedVault",
+        "checkAgain": "Không, Kiểm tra lại",
+        "importFromFile": "Nhập từ tập tin",
         "send": "Gửi",
         "receive": "Nhận",
         "create": "Tạo mới",
-        "begin_transfer": "Bắt đầu chuyển",
-        "try_again": "Thử lại",
-        "visit_discord": "Thăm Discord",
-        "drag_drop": "Kéo và Thả",
-        "import_extentions": "file có định dạng .stronghold hoặc .kdbx",
-        "choose_file": "Chọn một tập tin",
-        "drop_here": "Thả tập tin của bạn vào đây",
+        "beginTransfer": "Bắt đầu chuyển",
+        "tryAgain": "Thử lại",
+        "visitDiscord": "Thăm Discord",
+        "dragDrop": "Kéo và Thả",
+        "importExtentions": "file có định dạng .stronghold hoặc .kdbx",
+        "chooseFile": "Chọn một tập tin",
+        "dropHere": "Thả tập tin của bạn vào đây",
         "syncAll": "Đồng bộ tất cả",
         "export": "Xuất",
         "exportNewStronghold": "Xuất ra Stronghold",
@@ -403,15 +403,15 @@
         "exportState": "Xuất trạng thái",
         "outsourceProofOfWork": "Bằng chứng công việc thuê bên ngoài",
         "unlock": "Mở khóa",
-        "update_firefly": "Cập nhật ví Firefly",
-        "restart_now": "Khởi động lại ngay",
-        "save_backup": "Lưu bản sao lưu",
-        "customize_account": "Tùy chỉnh tài khoản",
-        "view_address_history": "Hiển thị lịch sử địa chỉ ví",
-        "delete_account": "Xóa Tài khoản",
+        "updateFirefly": "Cập nhật ví Firefly",
+        "restartNow": "Khởi động lại ngay",
+        "saveBackup": "Lưu bản sao lưu",
+        "customizeAcount": "Customise account",
+        "viewAddressHistory": "Hiển thị lịch sử địa chỉ ví",
+        "deleteAccount": "Xóa Tài khoản",
         "max": "Tối đa",
-        "add_node": "Thêm Node",
-        "remove_node": "Remove node",
+        "addNode": "Thêm Node",
+        "removeNode": "Remove node",
         "hide": "Ẩn",
         "hideOthers": "Ẩn các mục khác",
         "showAll": "Hiện tất cả",
@@ -427,57 +427,57 @@
         "checkForUpdates": "Kiểm tra cập nhật",
         "reportAnIssue": "Báo cáo sự cố",
         "clear": "Clear",
-        "hide_details": "Hide Details",
+        "hideDetails": "Hide Details",
         "yes": "Yes",
         "no": "No",
         "reset": "Reset"
     },
     "general": {
         "password": "Mật khẩu",
-        "confirm_password": "Xác nhận mật khẩu",
+        "confirmPassword": "Xác nhận mật khẩu",
         "currentPassword": "Mật khẩu hiện tại",
         "newPassword": "Mật khẩu mới",
         "confirmNewPassword": "Xác nhận mật khẩu mới",
-        "your_seed": "Seed của bạn",
-        "recovery_phrase": "Cụm từ hồi phục tài khoản ví",
-        "recent_activity": "Hoạt động gần đây",
+        "yourSeed": "Seed của bạn",
+        "recoveryPhrase": "Cụm từ hồi phục tài khoản ví",
+        "recentActivity": "Hoạt động gần đây",
         "sent": "Đã gửi",
         "received": "Đã nhận",
-        "send_payment": "Gửi thanh toán",
-        "move_funds": "Di chuyển Tiền",
-        "send_funds": "Gửi tiền",
-        "send_to_address": "Gửi đến địa chỉ",
-        "scan_qr_or_paste": "Quét mã QR hoặc dán vào một địa chỉ ví",
-        "move_funds_between_accounts": "Di chuyển tiền giữa các tài khoản của bạn",
-        "send_tokens_to_address": "Gửi các token tới một địa chỉ ví",
-        "manage_account": "Quản lý tài khoản",
-        "customize_account": "Tùy chỉnh tài khoản",
+        "sendPayment": "Gửi thanh toán",
+        "moveFunds": "Di chuyển Tiền",
+        "sendFunds": "Gửi tiền",
+        "sendToAddress": "Gửi đến địa chỉ",
+        "scanQrOrPaste": "Quét mã QR hoặc dán vào một địa chỉ ví",
+        "moveFundsBetweenAccounts": "Di chuyển tiền giữa các tài khoản của bạn",
+        "sendTokensToAddress": "Gửi các token tới một địa chỉ ví",
+        "manageAccount": "Quản lý tài khoản",
+        "customizeAcount": "Customize your account",
         "account": "Tài khoản",
-        "sending_to_address": "Gửi đến địa chỉ",
+        "sendingToAddress": "Gửi đến địa chỉ",
         "amount": "Số tiền",
-        "add_address": "Thêm địa chỉ",
+        "addAddress": "Thêm địa chỉ",
         "reference": "Tham chiếu",
         "from": "Từ",
         "to": "Đến",
-        "receive_funds": "Nhận tiền",
-        "my_address": "Địa chỉ của tôi",
-        "share_address": "Chia sẻ địa chỉ",
-        "your_address": "Địa chỉ ví của bạn",
-        "generate_new_address": "Tạo địa chỉ ví mới",
-        "copy_address": "Sao chép địa chỉ",
-        "have_text_backup": "Tôi có một văn bản sao lưu",
-        "have_file_backup": "Tôi có một tập tin sao lưu",
-        "enter_seed_or_phrase": "Nhập vào cụm từ khôi phục tài khoản ví hoặc seed",
-        "upload_seedvault_or_stronghold": "Nhập vào một tập tin Stronghold hoặc SeedVault",
+        "receiveFunds": "Nhận tiền",
+        "myAddress": "Địa chỉ của tôi",
+        "shareAddress": "Chia sẻ địa chỉ",
+        "yourAddress": "Địa chỉ ví của bạn",
+        "generateNewAddress": "Tạo địa chỉ ví mới",
+        "copyAddress": "Sao chép địa chỉ",
+        "haveTextBackup": "Tôi có một văn bản sao lưu",
+        "haveFileBackup": "Tôi có một tập tin sao lưu",
+        "enterSeedOrPhrase": "Nhập vào cụm từ khôi phục tài khoản ví hoặc seed",
+        "uploadSeedvaultOrStronghold": "Nhập vào một tập tin Stronghold hoặc SeedVault",
         "import": "Nhập vào",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Ngôn ngữ",
         "appearance": "Giao diện",
-        "light_theme": "Tông màu sáng",
-        "dark_theme": "Tông màu tối",
-        "total_balance": "Tổng số dư",
-        "account_balance": "Số dư tài khoản",
+        "lightTheme": "Tông màu sáng",
+        "darkTheme": "Tông màu tối",
+        "totalBalance": "Tổng số dư",
+        "accountBalance": "Số dư tài khoản",
         "incoming": "Tiền chuyển đến",
         "outgoing": "Tiền chuyển đi",
         "accounts": "Tài khoản",
@@ -486,24 +486,24 @@
         "profiles": "Hồ sơ cá nhân",
         "developerProfile": "Chế độ nhà phát triển",
         "dev": "Nhà phát triển",
-        "create_account": "Tạo tài khoản",
-        "account_name": "Tên tài khoản",
-        "latest_transactions": "Các giao dịch mới nhất",
+        "createAccount": "Tạo tài khoản",
+        "accountName": "Tên tài khoản",
+        "latestTransactions": "Các giao dịch mới nhất",
         "transactions": "Các giao dịch",
         "security": "Bảo mật",
-        "account_address": "Địa chỉ",
+        "accountAddress": "Địa chỉ",
         "nodes": "Các node",
         "wallet": "Ví tiền",
         "help": "Trợ giúp",
         "you": "You",
         "messageId": "Message ID",
-        "input_address": "Input Address",
-        "receive_address": "Receive Address",
+        "inputAddress": "Input Address",
+        "receiveAddress": "Receive Address",
         "date": "Date",
-        "no_accounts": "Bạn không có tài khoản, xin vui lòng hãy tạo tài khoản.",
-        "loading_accounts": "Loading, please wait...",
-        "add_profile": "Thêm cấu hình",
-        "no_recent_history": "No recent history",
+        "noAccounts": "Bạn không có tài khoản, xin vui lòng hãy tạo tài khoản.",
+        "loadingAccounts": "Loading, please wait...",
+        "addProfile": "Thêm cấu hình",
+        "noRecentHistory": "No recent history",
         "transferSyncing": "Syncing account",
         "transferSelectingInputs": "Selecting inputs",
         "transferRemainderAddress": "Generating remainder deposit address",
@@ -527,22 +527,22 @@
     },
     "dates": {
         "today": "Ngày hôm nay",
-        "days_ago": "{time, plural, one {# week} other {# tuần}} trước đó",
-        "weeks_ago": "{time, plural, one {# week} other {# tuần}} trước đó",
-        "months_ago": "{time, plural, one {# month} other {# months}} ago",
-        "years_ago": "{time, plural, one {# year} other {# years}} ago"
+        "daysAgo": "{time, plural, one {# week} other {# tuần}} trước đó",
+        "weeksAgo": "{time, plural, one {# week} other {# tuần}} trước đó",
+        "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
+        "yearsAgo": "{time, plural, one {# year} other {# years}} ago"
     },
     "notifications": {
         "valueTx": "Đang nhận {{value}} từ {{account}}",
         "confirmed": "Đang gửi đi {{value}} từ {{account}} đã được xác nhận",
         "failed": "Đang gửi đi {{value}} từ {{account}} đã thất bại",
-        "downloading_update": "Đang tải xuống bản cập nhật",
-        "update_ready": "Bản cập nhật đã sẵn sàng",
-        "update_error": "Có lỗi đã xảy ra trong quá trình cập nhật, vui lòng thử lại",
-        "restart_install": "Khởi động lại để cài đặt",
-        "calc_minutes_remaining": "Đang tính toán số phút còn lại...",
-        "minutes_remaining": "{minutes, plural, one {1 phút còn lại} other {# số phút còn lại}}",
-        "copied_to_clipboard": "Copied to clipboard"
+        "downloadingUpdate": "Đang tải xuống bản cập nhật",
+        "updateReady": "Bản cập nhật đã sẵn sàng",
+        "updateError": "Có lỗi đã xảy ra trong quá trình cập nhật, vui lòng thử lại",
+        "restartInstall": "Khởi động lại để cài đặt",
+        "calcMinutesRemaining": "Đang tính toán số phút còn lại...",
+        "minutesRemaining": "{minutes, plural, one {1 phút còn lại} other {# số phút còn lại}}",
+        "copiedToClipboard": "Copied to clipboard"
     },
     "error": {
         "profile": {

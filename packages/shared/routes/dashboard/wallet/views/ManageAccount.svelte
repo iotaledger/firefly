@@ -66,13 +66,13 @@
 <div class="w-full h-full flex flex-col justify-between p-8">
     <div>
         <div class="flex flex-row mb-6">
-            <Text type="h5">{locale('general.manage_account')}</Text>
+            <Text type="h5">{locale('general.manageAccount')}</Text>
         </div>
         <div class="w-full h-full flex flex-col justify-between">
             <Input
                 {error}
                 bind:value={accountAlias}
-                placeholder={locale('general.account_name')}
+                placeholder={locale('general.accountName')}
                 autofocus
                 submitHandler={handleSaveClick}
                 disabled={isBusy} />

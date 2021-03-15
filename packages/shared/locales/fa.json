@@ -1,29 +1,29 @@
 {
     "views": {
-        "onboarding_1": {
+        "onboarding1": {
             "title": "ارسال٬ دریافت و مدیریت آیوتا",
             "body": "فایرفلای یک کیف پول آیوتای امن با استفاده آسان میباشد."
         },
         "legal": {
             "title": "حقوقی",
             "body": "لطفا قوانین و سیاست حفظ حریم خصوصی را مرور کنید.",
-            "privacy_policy": {
+            "privacyPolicy": {
                 "title": "سیاست حفظ حریم خصوصی",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "terms_of_service": {
+            "termsOfService": {
                 "title": "قوانین",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
@@ -34,7 +34,7 @@
         "setup": {
             "title": "کیف پول خود را راه اندازی کنید",
             "body": "شما میتوانید کیف پول جدید بسازید یا کیف پول قدیمی خود را وارد کنید.",
-            "profile_name": "نام پروفایل"
+            "profileName": "نام پروفایل"
         },
         "password": {
             "title": "ایجاد رمز عبور",
@@ -42,41 +42,41 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body_2": "Keep your PIN safe!"
+            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
+            "body2": "Keep your PIN safe!"
         },
         "pin": {
             "title": "تنظیم PIN کد",
-            "body_1": "یک PIN شش رقمی در زیر وارد کنید. شما به این PIN برای ورود به کیف پول خود احتیاج دارید.",
-            "body_2": "فقط از اعداد میتوانید استفاده کنید."
+            "body1": "یک PIN شش رقمی در زیر وارد کنید. شما به این PIN برای ورود به کیف پول خود احتیاج دارید.",
+            "body2": "فقط از اعداد میتوانید استفاده کنید."
         },
-        "confirm_pin": {
+        "confirmPin": {
             "title": "PIN کد خود را تایید کنید",
             "body": "برای ادامه٬ PIN کد خود را دوباره وارد کنید."
         },
         "backup": {
             "title": "از کیف پول خود بک آپ بگیرید",
-            "body_1": "عبارت بازیابی هم اکنون به شما نشان داده میشود.",
-            "body_2": "این عبارت را با هیچکس به اشتراک نگذارید. عبارت بازیابی برای دسترسی شما به توکن های خود از هر مکانی استفاده میشود.",
-            "body_3": "در صورت گم کردن عبارت بازیابی٬ وجوه خود را از دست خواهید داد."
+            "body1": "عبارت بازیابی هم اکنون به شما نشان داده میشود.",
+            "body2": "این عبارت را با هیچکس به اشتراک نگذارید. عبارت بازیابی برای دسترسی شما به توکن های خود از هر مکانی استفاده میشود.",
+            "body3": "در صورت گم کردن عبارت بازیابی٬ وجوه خود را از دست خواهید داد."
         },
-        "recovery_phrase": {
+        "recoveryPhrase": {
             "title": "عبارت بازیابی",
-            "body_1": "این کلمات را با دقت و به ترتیب یادداشت کنید.",
-            "body_2": "عبارت بازیابی را در مکانی امن و خصوصی نگه دارید و با هیچکس آن را به اشتراک نگذارید.",
-            "reveal_recovery_phrase": "عبارت بازیابی را نشان بده",
-            "hide_recovery_phrase": "عبارت بازیابی را پنهان کن"
+            "body1": "این کلمات را با دقت و به ترتیب یادداشت کنید.",
+            "body2": "عبارت بازیابی را در مکانی امن و خصوصی نگه دارید و با هیچکس آن را به اشتراک نگذارید.",
+            "revealRecoveryPhrase": "عبارت بازیابی را نشان بده",
+            "hideRecoveryPhrase": "عبارت بازیابی را پنهان کن"
         },
-        "verify_recovery_phrase": {
+        "verifyRecoveryPhrase": {
             "title": "عبارت بازیابی را تایید کنید",
             "body": "برای اطمینان از اینکه عبارت را درست یادداشت کردید٬ آن کلمات را به ترتیب انتخاب کنید.",
-            "creating_account": "در حال ساختن حساب٬ لطفا صبر کنید..."
+            "creatingAccount": "در حال ساختن حساب٬ لطفا صبر کنید..."
         },
-        "backup_wallet": {
+        "backupWallet": {
             "title": "بک آپ به صورت یک فایل Stronghold",
             "body": "برای گرفتن بک آپ از کیف پول خود به صورت فایل Stronghold رمز عبور خود را وارد کنید. رمز عبور برای رمزگذاری بک آپ شما استفاده میشود."
         },
-        "recovery_phrase_saved": {
+        "recoveryPhraseSaved": {
             "title": "بک آپ با موفقیت انجام شد",
             "body": "شما از کیف پول خود یک بک آپ به صورت یک فایل Stronghold گرفته اید."
         },
@@ -88,35 +88,35 @@
             "title": "یک کیف پول وارد کنید",
             "body": "اگر عبارت بازیابی یا بک آپ Stronghold دارید٬ میتوانید اینجا وارد کنید."
         },
-        "import_from_text": {
+        "importFromText": {
             "title": "کیف پول خود را توسط عبارت بازیابی یا سید بازگردانید",
-            "body_1": "عبارت بازیابی شامل 24 کلمه میباشد. این عبارت برای بازیابی کیف پول فایرفلای موجود استفاده میشود.",
-            "body_2": "یک سید از 81 کاراکتر تشکیل شده که برای بازیابی کیف پول قدیمی ترینیتی استفاده میشود.",
-            "body_3": "سید یا عبارت بازیابی خود را وارد کنید.",
-            "seed_detected": "سید 81 کاراکتری یافت شد",
-            "phrase_detected": "عبارت 24 کلمه ای یافت شد"
+            "body1": "عبارت بازیابی شامل 24 کلمه میباشد. این عبارت برای بازیابی کیف پول فایرفلای موجود استفاده میشود.",
+            "body2": "یک سید از 81 کاراکتر تشکیل شده که برای بازیابی کیف پول قدیمی ترینیتی استفاده میشود.",
+            "body3": "سید یا عبارت بازیابی خود را وارد کنید.",
+            "seedDetected": "سید 81 کاراکتری یافت شد",
+            "phraseDetected": "عبارت 24 کلمه ای یافت شد"
         },
-        "import_from_file": {
+        "importFromFile": {
             "title": "کیف پول خود را توسط فایل بک آپ بازگردانید",
             "body": "فایل بک آپ را برای بازگرداندن کیف پول خود وارد کنید. بک آپ میتواند یک استرانگ هُلد (stronghold.) و یا ترینیتی سیدوالت (kdbx.) باشد."
         },
-        "import_backup_password": {
+        "importBackupPassword": {
             "title": "بازگردانی کیف پول خود توسط SeedVault یا Stronghold",
-            "body_1": "لطفا رمز عبور بک آپ خود را وارد کنید.",
-            "body_2": "این رمز عبوریست که برای اولین بار در گرفتن بک آپ آن را وارد کردید."
+            "body1": "لطفا رمز عبور بک آپ خود را وارد کنید.",
+            "body2": "این رمز عبوریست که برای اولین بار در گرفتن بک آپ آن را وارد کردید."
         },
-        "import_success": {
+        "importSuccess": {
             "title": "شما با موفقیت بک آپ خود را بازیابی کردید",
             "body": "هم اکنون میتوانید کیف پول جدید خود را راه اندازی کنید."
         },
         "migrate": {
             "title": "توکن های خود را انتقال دائمی دهید.",
-            "body_1": "این یک فرایند خودکار میباشد تا توکن های شما به والت جدید منتقل شود. ما آدرس هایی را که قبلا استفاده شده و امنیت شما را پایین می آورد٬ چک میکنیم.",
-            "body_2": "این فرایند زمان بر میباشد. دستگاه خود را حین انتقال دائمی خاموش نکنید.",
+            "body1": "این یک فرایند خودکار میباشد تا توکن های شما به والت جدید منتقل شود. ما آدرس هایی را که قبلا استفاده شده و امنیت شما را پایین می آورد٬ چک میکنیم.",
+            "body2": "این فرایند زمان بر میباشد. دستگاه خود را حین انتقال دائمی خاموش نکنید.",
             "existing": "کیف پول قدیمی شما",
             "new": "کیف پول جدید شما"
         },
-        "migrate_failed": {
+        "migrateFailed": {
             "title": "To do",
             "body": "To do"
         },
@@ -248,40 +248,40 @@
             }
         },
         "login": {
-            "please_wait": "لطفا {time, plural, one {1 ثانیه} other {# ثانیه}} صبر کنید",
-            "incorrect_attempts": "{attempts, plural, one {1 تلاش ناموفق} other {# تلاش ناموفق}}"
+            "pleaseWait": "لطفا {time, plural, one {1 ثانیه} other {# ثانیه}} صبر کنید",
+            "incorrectAttempts": "{attempts, plural, one {1 تلاش ناموفق} other {# تلاش ناموفق}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "فایرفلای {version}v",
-                    "up_to_date": "به روزرسانی شده",
-                    "out_of_date": "قدیمی"
+                    "upToDate": "به روزرسانی شده",
+                    "outOfDate": "قدیمی"
                 },
-                "hardware_device": {
+                "hardwareDevice": {
                     "title": "دستگاه سخت افزاری",
-                    "none_detected": "چیزی یافت نشد"
+                    "noneDetected": "چیزی یافت نشد"
                 },
-                "stronghold_status": {
+                "strongholdStatus": {
                     "title": "وضعیت Stronghold",
                     "locked": "قفل شده",
                     "unlocked": "باز شده"
                 },
-                "stronghold_backup": {
+                "strongholdBackup": {
                     "title": "بک آپ Stronghold",
-                    "weeks_ago": "{weeks, plural, one {# هفته} other {# هفته}} قبل"
+                    "weeksAgo": "{weeks, plural, one {# هفته} other {# هفته}} قبل"
                 }
             },
             "network": {
-                "network_operational": "شبکه قابل استفاده",
-                "network_degraded": "شبکه تخریب شده",
-                "network_down": "شبکه از کار افتاده",
+                "networkOperational": "شبکه قابل استفاده",
+                "networkDegraded": "شبکه تخریب شده",
+                "networkDown": "شبکه از کار افتاده",
                 "status": "وضعیت",
-                "messages_per_second": "پیام ها در ثانیه",
-                "confirmation_rate": "سرعت تاییدیه"
+                "messagesPerSecond": "پیام ها در ثانیه",
+                "confirmationRate": "سرعت تاییدیه"
             },
-            "profile_modal": {
-                "all_settings": "همه تنظیمات",
+            "profileModal": {
+                "allSettings": "همه تنظیمات",
                 "logout": "خروج از حساب"
             }
         }
@@ -296,42 +296,42 @@
         },
         "version": {
             "title": " نسخه فعلی : {version}",
-            "up_to_date_title": "فایرفلای به روز رسانی شده",
-            "up_to_date_description": "شما از به روزترین و امن ترین نسخه فایرفلای استفاده میکنید.",
-            "update_available": "نسخه به روز شده فایرفلای قابل دسترس است",
-            "update_details": " نسخه {version} - {date}"
+            "upToDateTitle": "فایرفلای به روز رسانی شده",
+            "upToDateDescription": "شما از به روزترین و امن ترین نسخه فایرفلای استفاده میکنید.",
+            "updateAvailable": "نسخه به روز شده فایرفلای قابل دسترس است",
+            "updateDetails": " نسخه {version} - {date}"
         },
         "backup": {
             "title": "آخرین به روز رسانی: ",
-            "last_backup": "آخرین به روز رسانی در تاریخ {}",
-            "backup_description": "گرفتن بک آپ مهم میباشد٬ زیرا به شما اطمینان میدهد که کپی حساب ها و سوابق معاملات خود را داشته باشید.",
-            "backup_warning": "در صورت گم کردن بک آپ و عبارت بازیابی٬ دسترسی شما به وجوه خود از دست خواهد رفت.",
-            "not_backed_up": "بک آپ گرفته نشده",
-            "not_backed_up_description": "شما از استرانگ هُلد خود بک آپ نگرفته اید"
+            "lastBackup": "آخرین به روز رسانی در تاریخ {}",
+            "backupDescription": "گرفتن بک آپ مهم میباشد٬ زیرا به شما اطمینان میدهد که کپی حساب ها و سوابق معاملات خود را داشته باشید.",
+            "backupWarning": "در صورت گم کردن بک آپ و عبارت بازیابی٬ دسترسی شما به وجوه خود از دست خواهد رفت.",
+            "notBackedUp": "بک آپ گرفته نشده",
+            "notBackedUpDescription": "شما از استرانگ هُلد خود بک آپ نگرفته اید"
         },
-        "delete_account": {
+        "deleteAccount": {
             "title": "حذف { name } ؟",
             "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "برای تایید رمز عبور والت خود را وارد کنید.",
-            "delete_account": "حذف حساب",
-            "error_title": "امکان حذف {name} وجود ندارد",
-            "error_body_1": "برای حذف حساب٬ موجودی شما باید صفر باشد.",
-            "error_body_2": "در حال حاضر٬ مانده حساب شما {} میباشد. لطفا این مبلغ را به حساب دیگری انتقال داده و دوباره امتحان کنید.",
-            "error_body_3": "شما نمیتوانید این حساب را حذف کنید٬ حداقل به یک حساب نیاز دارید."
+            "typePassword": "برای تایید رمز عبور والت خود را وارد کنید.",
+            "deleteAccount": "حذف حساب",
+            "errorTitle": "امکان حذف {name} وجود ندارد",
+            "errorBody1": "برای حذف حساب٬ موجودی شما باید صفر باشد.",
+            "errorBody2": "در حال حاضر٬ مانده حساب شما {} میباشد. لطفا این مبلغ را به حساب دیگری انتقال داده و دوباره امتحان کنید.",
+            "errorBody3": "شما نمیتوانید این حساب را حذف کنید٬ حداقل به یک حساب نیاز دارید."
         },
-        "address_history": {
+        "addressHistory": {
             "title": "سوابق آدرس حساب {name}",
-            "current_balance": "موجودی در حال حاضر :"
+            "currentBalance": "موجودی در حال حاضر :"
         },
         "node": {
-            "title_add": "اضافه کردن نود",
-            "title_remove": "حذف یک نود",
-            "title_details": "جزییات نود",
-            "node_address": "آدرس نود",
-            "optional_username": "نام کاربری (اختیاری)",
-            "optional_password": "رمز عبور (اختیاری)",
-            "set_as_primary_node": "تنظیم به عنوان نود اصلی",
-            "remove_confirmation": "آیا مطمئن به حذف این نود هستید؟"
+            "titleAdd": "اضافه کردن نود",
+            "titleRemove": "حذف یک نود",
+            "titleDetails": "جزییات نود",
+            "nodeAddress": "آدرس نود",
+            "optionalUsername": "نام کاربری (اختیاری)",
+            "optionalPassword": "رمز عبور (اختیاری)",
+            "setAsPrimaryNode": "تنظیم به عنوان نود اصلی",
+            "removeConfirmation": "آیا مطمئن به حذف این نود هستید؟"
         },
         "errorLog": {
             "title": "گزارش خطا",
@@ -354,12 +354,12 @@
         }
     },
     "charts": {
-        "incoming_mi": "ورودی {value} Mi",
-        "outgoing_mi": "خروجی {value} Mi",
+        "incomingMi": "ورودی {value} Mi",
+        "outgoingMi": "خروجی {value} Mi",
         "portoflio": "سبد سهام",
         "token": "توکن",
-        "account_value": "ارزش حساب",
-        "account_activity": "فعالیت حساب"
+        "accountValue": "ارزش حساب",
+        "accountActivity": "فعالیت حساب"
     },
     "actions": {
         "continue": "ادامه",
@@ -368,32 +368,32 @@
         "close": "بستن",
         "dismiss": "نادیده گرفتن",
         "save": "ذخیره",
-        "import_seed": "وارد کردن سید موجود",
-        "import_wallet": "وارد کردن کیف پول موجود",
-        "create_wallet": "ایجاد کیف پول جدید",
-        "save_password": "ذخیره رمزعبور",
-        "use_biometric": "استفاده از امنیت بیومتریک",
-        "setup_pin": "تنظیم PIN کد",
-        "set_pin": "PIN کد را انتخاب کنيد",
-        "confirm_pin": "پین کد را تايید کنید",
-        "enter_your_pin": "PIN خود را وارد کنيد",
-        "save_backup_file": "فایل بک آپ را ذخیره کنید",
-        "ive_written_recovery_phrase": "عبارت بازیابی خود را یادداشت کرده ام",
-        "verify_recovery_phrase": "عبارت بازیابی را تایید کنید",
-        "reveal_recovery_phrase": "عبارت بازیابی را نشان بده",
-        "import_seedvault": "وارد کردن SeedVault",
-        "check_again": "خیر٬ بررسی دوباره",
-        "import_from_file": "وارد کردن از یک فایل",
+        "importSeed": "وارد کردن سید موجود",
+        "importWallet": "وارد کردن کیف پول موجود",
+        "createWallet": "ایجاد کیف پول جدید",
+        "savePassword": "ذخیره رمزعبور",
+        "useBiometric": "استفاده از امنیت بیومتریک",
+        "setupPin": "تنظیم PIN کد",
+        "setPin": "PIN کد را انتخاب کنيد",
+        "confirmPin": "پین کد را تايید کنید",
+        "enterYourPin": "PIN خود را وارد کنيد",
+        "saveBackupFile": "فایل بک آپ را ذخیره کنید",
+        "iveWrittenRecoveryPhrase": "عبارت بازیابی خود را یادداشت کرده ام",
+        "verifyRecoveryPhrase": "عبارت بازیابی را تایید کنید",
+        "revealRecoveryPhrase": "عبارت بازیابی را نشان بده",
+        "importSeedvault": "وارد کردن SeedVault",
+        "checkAgain": "خیر٬ بررسی دوباره",
+        "importFromFile": "وارد کردن از یک فایل",
         "send": "ارسال",
         "receive": "دریافت",
         "create": "ایجاد",
-        "begin_transfer": "شروع انتقال",
-        "try_again": "تلاش مجدد",
-        "visit_discord": "از دیسکورد بازدید کنید",
-        "drag_drop": "کشیدن و رها کردن",
-        "import_extentions": "فایل stronghold. یا kdbx.",
-        "choose_file": "یک فایل انتخاب کنید",
-        "drop_here": "فایل خود را این جا بیاندازید",
+        "beginTransfer": "شروع انتقال",
+        "tryAgain": "تلاش مجدد",
+        "visitDiscord": "از دیسکورد بازدید کنید",
+        "dragDrop": "کشیدن و رها کردن",
+        "importExtentions": "فایل stronghold. یا kdbx.",
+        "chooseFile": "یک فایل انتخاب کنید",
+        "dropHere": "فایل خود را این جا بیاندازید",
         "syncAll": "همگام‌سازی همه",
         "export": "استخراج",
         "exportNewStronghold": "استخراج یک Stronghold جدید",
@@ -403,15 +403,15 @@
         "exportState": "استخراج وضعیت",
         "outsourceProofOfWork": "اثبات کار با منبع خارجی",
         "unlock": "بازکردن",
-        "update_firefly": "به روز رسانی فایرفلای",
-        "restart_now": "بستن و باز کردن مجدد",
-        "save_backup": "ذخیره بک آپ",
-        "customize_account": "تنظیمات شخصی حساب",
-        "view_address_history": "نمایش سوابق آدرس",
-        "delete_account": "حذف حساب",
+        "updateFirefly": "به روز رسانی فایرفلای",
+        "restartNow": "بستن و باز کردن مجدد",
+        "saveBackup": "ذخیره بک آپ",
+        "customizeAcount": "Customise account",
+        "viewAddressHistory": "نمایش سوابق آدرس",
+        "deleteAccount": "حذف حساب",
         "max": "حداکثر",
-        "add_node": "اضافه کردن نود",
-        "remove_node": "حذف نود",
+        "addNode": "اضافه کردن نود",
+        "removeNode": "حذف نود",
         "hide": "پنهان کردن",
         "hideOthers": "پنهان کردن بقیه",
         "showAll": "نمایش همه",
@@ -427,57 +427,57 @@
         "checkForUpdates": "بررسی برای بروزرسانی",
         "reportAnIssue": "گزارش مشکل",
         "clear": "پاک کردن",
-        "hide_details": "پنهان کردن جزئیات",
+        "hideDetails": "پنهان کردن جزئیات",
         "yes": "بله",
         "no": "نه",
         "reset": "بازنشانی"
     },
     "general": {
         "password": "رمز عبور",
-        "confirm_password": "تأیید رمز عبور",
+        "confirmPassword": "تأیید رمز عبور",
         "currentPassword": "رمز عبور فعلی",
         "newPassword": "رمز عبور جدید",
         "confirmNewPassword": "تأیید رمز عبور جديد",
-        "your_seed": "سید شما",
-        "recovery_phrase": "عبارت بازیابی",
-        "recent_activity": "فعالیت اخیر",
+        "yourSeed": "سید شما",
+        "recoveryPhrase": "عبارت بازیابی",
+        "recentActivity": "فعالیت اخیر",
         "sent": "ارسال شده",
         "received": "دریافت شده",
-        "send_payment": "ارسال پرداخت",
-        "move_funds": "جابجایی وجه",
-        "send_funds": "ارسال وجه",
-        "send_to_address": "ارسال به یک آدرس",
-        "scan_qr_or_paste": "کد QR یا آدرس را وارد کنید",
-        "move_funds_between_accounts": "جابجایی وجه بین حساب ها",
-        "send_tokens_to_address": "ارسال توکن به یک آدرس",
-        "manage_account": "مدیریت حساب",
-        "customize_account": "تنظیمات شخصی حساب خود",
+        "sendPayment": "ارسال پرداخت",
+        "moveFunds": "جابجایی وجه",
+        "sendFunds": "ارسال وجه",
+        "sendToAddress": "ارسال به یک آدرس",
+        "scanQrOrPaste": "کد QR یا آدرس را وارد کنید",
+        "moveFundsBetweenAccounts": "جابجایی وجه بین حساب ها",
+        "sendTokensToAddress": "ارسال توکن به یک آدرس",
+        "manageAccount": "مدیریت حساب",
+        "customizeAcount": "Customize your account",
         "account": "حساب",
-        "sending_to_address": "ارسال به آدرس",
+        "sendingToAddress": "ارسال به آدرس",
         "amount": "مقدار",
-        "add_address": "اضافه کردن آدرس",
+        "addAddress": "اضافه کردن آدرس",
         "reference": "مرجع",
         "from": "فرستنده",
         "to": "گیرنده",
-        "receive_funds": "دریافت وجه",
-        "my_address": "آدرس من",
-        "share_address": "اشتراک گذاری یک آدرس",
-        "your_address": "آدرس شما",
-        "generate_new_address": "تولید آدرس جدید",
-        "copy_address": "کپی کردن آدرس",
-        "have_text_backup": "من یک فایل متنی بک آپ دارم",
-        "have_file_backup": "من یک فایل بک آپ دارم",
-        "enter_seed_or_phrase": "عبارت بازیابی یا سید خود را وارد کنید",
-        "upload_seedvault_or_stronghold": "یک فایل Stronghold یا SeedVault وارد کنید",
+        "receiveFunds": "دریافت وجه",
+        "myAddress": "آدرس من",
+        "shareAddress": "اشتراک گذاری یک آدرس",
+        "yourAddress": "آدرس شما",
+        "generateNewAddress": "تولید آدرس جدید",
+        "copyAddress": "کپی کردن آدرس",
+        "haveTextBackup": "من یک فایل متنی بک آپ دارم",
+        "haveFileBackup": "من یک فایل بک آپ دارم",
+        "enterSeedOrPhrase": "عبارت بازیابی یا سید خود را وارد کنید",
+        "uploadSeedvaultOrStronghold": "یک فایل Stronghold یا SeedVault وارد کنید",
         "import": "وارد کردن",
         "seedvault": "SeedVault",
         "stronghold": "استرانگ هُلد",
         "language": "زبان",
         "appearance": "ظاهر",
-        "light_theme": "تم روشن",
-        "dark_theme": "تم تاریک",
-        "total_balance": "موجودی کل",
-        "account_balance": "موجودی حساب",
+        "lightTheme": "تم روشن",
+        "darkTheme": "تم تاریک",
+        "totalBalance": "موجودی کل",
+        "accountBalance": "موجودی حساب",
         "incoming": "ورودی",
         "outgoing": "خروجی",
         "accounts": "حساب ها",
@@ -486,24 +486,24 @@
         "profiles": "پروفایل ها",
         "developerProfile": "پروفایل برنامه نویسی",
         "dev": "برنامه نویس",
-        "create_account": "ایجاد حساب کاربری",
-        "account_name": "نام حساب",
-        "latest_transactions": "آخرین تراکنش ها",
+        "createAccount": "ایجاد حساب کاربری",
+        "accountName": "نام حساب",
+        "latestTransactions": "آخرین تراکنش ها",
         "transactions": "تراکنش ها",
         "security": "امنیت",
-        "account_address": "آدرس حساب",
+        "accountAddress": "آدرس حساب",
         "nodes": "نودها",
         "wallet": "کیف پول",
         "help": "راهنما",
         "you": "شما",
         "messageId": "Message ID",
-        "input_address": "آدرس ورودی",
-        "receive_address": "آدرس گیرنده",
+        "inputAddress": "آدرس ورودی",
+        "receiveAddress": "آدرس گیرنده",
         "date": "تاریخ",
-        "no_accounts": "شما حساب کاربری ندارید. لطفا یکی بسازید.",
-        "loading_accounts": "درحال بارگذاری، لطفاً صبر کنید...",
-        "add_profile": "افزودن پروفایل",
-        "no_recent_history": "تاریخچه اخیر وجود ندارد",
+        "noAccounts": "شما حساب کاربری ندارید. لطفا یکی بسازید.",
+        "loadingAccounts": "درحال بارگذاری، لطفاً صبر کنید...",
+        "addProfile": "افزودن پروفایل",
+        "noRecentHistory": "تاریخچه اخیر وجود ندارد",
         "transferSyncing": "همگام سازی حساب",
         "transferSelectingInputs": "در حال انتخاب ورودی ها",
         "transferRemainderAddress": "در حال تولید آدرس موجودی باقیمانده",
@@ -527,22 +527,22 @@
     },
     "dates": {
         "today": "امروز",
-        "days_ago": "{time, plural, one {# روز} other {# روز}} قبل",
-        "weeks_ago": "{time, plural, one {# هفته} other {# هفته}} قبل",
-        "months_ago": "{time, plural, one {# ماه} other {# ماه}} قبل",
-        "years_ago": "{time, plural, one {# سال} other {#سال}} قبل"
+        "daysAgo": "{time, plural, one {# روز} other {# روز}} قبل",
+        "weeksAgo": "{time, plural, one {# هفته} other {# هفته}} قبل",
+        "monthsAgo": "{time, plural, one {# ماه} other {# ماه}} قبل",
+        "yearsAgo": "{time, plural, one {# سال} other {#سال}} قبل"
     },
     "notifications": {
         "valueTx": "در حال دریافت {{value}} به {{account}}",
         "confirmed": "خروجی {{value}} از {{account}} تایید شد",
         "failed": "خروجی {{value}} از {{account}} ناموفق بود",
-        "downloading_update": "درحال دانلود به‌روزرسانی",
-        "update_ready": "به روز رسانی انجام شد",
-        "update_error": "خطایی در طول این به روز رسانی رخ داد٬ لطفا دوباره امتحان کنید.",
-        "restart_install": "برای نصب٬ مجددا راه اندازی کنید",
-        "calc_minutes_remaining": "در حال شمارش زمان باقیمانده...",
-        "minutes_remaining": "{minutes, plural, one {1 دقیقه باقی مانده } other {# دقیقه باقی مانده}}",
-        "copied_to_clipboard": "Copied to clipboard"
+        "downloadingUpdate": "درحال دانلود به‌روزرسانی",
+        "updateReady": "به روز رسانی انجام شد",
+        "updateError": "خطایی در طول این به روز رسانی رخ داد٬ لطفا دوباره امتحان کنید.",
+        "restartInstall": "برای نصب٬ مجددا راه اندازی کنید",
+        "calcMinutesRemaining": "در حال شمارش زمان باقیمانده...",
+        "minutesRemaining": "{minutes, plural, one {1 دقیقه باقی مانده } other {# دقیقه باقی مانده}}",
+        "copiedToClipboard": "Copied to clipboard"
     },
     "error": {
         "profile": {
