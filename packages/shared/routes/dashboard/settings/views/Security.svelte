@@ -93,7 +93,7 @@
     }
 
     function exportStronghold(callback?: (cancelled: boolean, err?: string) => void) {
-        Electron.exportStronghold(getDefaultStrongholdName())
+        Electron.getStrongholdBackupDestination(getDefaultStrongholdName())
             .then((result) => {
                 if (result) {
                     api.backup(result, {

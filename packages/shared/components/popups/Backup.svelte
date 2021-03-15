@@ -29,7 +29,7 @@
     }
 
     function triggerBackup() {
-        Electron.exportStronghold(getDefaultStrongholdName())
+        Electron.getStrongholdBackupDestination(getDefaultStrongholdName())
             .then((result) => {
                 if (result) {
                     api.backup(result, {

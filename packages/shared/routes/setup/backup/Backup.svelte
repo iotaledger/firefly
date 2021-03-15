@@ -57,7 +57,7 @@
                             },
                         })
                     })
-                        .then(() => Electron.exportStronghold(getDefaultStrongholdName()))
+                        .then(() => Electron.getStrongholdBackupDestination(getDefaultStrongholdName()))
                         .then((result) => {
                             if (result) {
                                 return new Promise<void>((res, rej) => {

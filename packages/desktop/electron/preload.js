@@ -20,16 +20,7 @@ const Electron = {
     PincodeManager,
     DeepLinkManager,
     NotificationManager,
-    getStrongholdBackupDestination: () => {
-        return ipcRenderer.invoke('show-open-dialog', { properties: ['openDirectory'] }).then((result) => {
-            if (result.canceled) {
-                return null
-            }
-
-            return result.filePaths[0]
-        })
-    },
-    exportStronghold: (defaultPath) => {
+    getStrongholdBackupDestination: (defaultPath) => {
         return ipcRenderer.invoke('show-save-dialog', { properties: ['createDirectory', 'showOverwriteConfirmation'], defaultPath }).then((result) => {
             if (result.canceled) {
                 return null
