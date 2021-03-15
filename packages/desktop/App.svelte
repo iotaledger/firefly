@@ -5,7 +5,7 @@
     import { refreshVersionDetails, versionDetails } from 'shared/lib/appUpdater'
     import { Electron } from 'shared/lib/electron'
     import { goto } from 'shared/lib/helpers'
-    import { activeLocale, dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
+    import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
     import { fetchMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { openPopup, popupState } from 'shared/lib/popup'
@@ -40,12 +40,8 @@
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
 
-    const locale = activeLocale
-
     $: $appSettings.darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
-    $: if (activeLocale !== locale) {
-        Electron.updateMenu('strings', getLocalisedMenuItems($_))
-    }
+    $: Electron.updateMenu('strings', getLocalisedMenuItems($_))
     $: Electron.updateMenu('loggedIn', $loggedIn)
 
     $: if (document.dir !== $dir) {
