@@ -9,7 +9,7 @@
     import { get } from 'svelte/store'
     import { Backup, BackupToFile, RecoveryPhrase, Success, VerifyRecoveryPhrase } from './views/'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { getDefaultStrongholdName } from "shared/lib/utils";
+    import { getDefaultStrongholdName } from 'shared/lib/utils';
 
     export let locale
     export let mobile
