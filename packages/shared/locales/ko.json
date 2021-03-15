@@ -219,7 +219,7 @@
                 "description": ""
             },
             "diagnostics": {
-                "title": "Diagnostics",
+                "title": "진단",
                 "description": ""
             },
             "stateExport": {
@@ -342,18 +342,15 @@
             "confirmation": "이 프로필을 삭제 하시겠습니까? 이 작업은 되돌릴수 없습니다."
         },
         "diagnostics": {
-            "title": "Diagnostics",
-            "node": "Node",
-            "language": "Node",
-            "currency": "Node",
-            "platform": "Platform",
-            "platformVersion": "Platform Version",
-            "platformType": "Platform Type",
-            "platformArchitecture": "Platform Architecture",
-            "cpuCount": "CPU Count",
-            "totalMem": "Total Memory",
-            "freeMem": "Free Memory",
-            "userPath": "User Path"
+            "title": "진단",
+            "node": "노드",
+            "platform": "플랫폼",
+            "platformVersion": "플랫폼 버전",
+            "platformArchitecture": "플랫폼 구조",
+            "cpuCount": "CPU 수",
+            "totalMem": "전체 메모리",
+            "freeMem": "사용가능한 메모리",
+            "userPath": "사용자 경로"
         }
     },
     "charts": {
@@ -499,9 +496,9 @@
         "wallet": "지갑",
         "help": "도움말",
         "you": "나",
-        "messageId": "Message ID",
-        "inputAddress": "주소 입력",
-        "receiveAddress": "입금 주소",
+        "messageId": "메시지 ID",
+        "input_address": "주소 입력",
+        "receive_address": "입금 주소",
         "date": "날짜",
         "noAccounts": "계정이 없습니다. 생성해 주세요.",
         "loadingAccounts": "로딩 중. 잠시만 기다려 주세요...",
@@ -539,13 +536,13 @@
         "valueTx": "계정 {{account}}에 {{value}}를 받는 중",
         "confirmed": "계정 {{account}}에서 {{value}}를 보내는 거래가 성공적으로 확인되었습니다",
         "failed": "계정 {{account}}에서 {{value}}를 보내는 거래가 실패하였습니다",
-        "downloadingUpdate": "업데이트 다운로드",
-        "updateReady": "업데이트 준비됨",
-        "updateError": "업데이트 중 오류가 발생했습니다. 다시 시도해주세요.",
-        "restartInstall": "재시작하여 설치",
-        "calcMinutesRemaining": "남은 시간 계산중...",
-        "minutesRemaining": "{minutes, plural, one {남은 시간 1분} other {남은 시간 #분}}",
-        "copiedToClipboard": "Copied to clipboard"
+        "downloading_update": "업데이트 다운로드",
+        "update_ready": "업데이트 준비됨",
+        "update_error": "업데이트 중 오류가 발생했습니다. 다시 시도해주세요.",
+        "restart_install": "재시작하여 설치",
+        "calc_minutes_remaining": "남은 시간 계산중...",
+        "minutes_remaining": "{minutes, plural, one {남은 시간 1분} other {남은 시간 #분}}",
+        "copied_to_clipboard": "클립보드에 복사되었습니다."
     },
     "error": {
         "profile": {

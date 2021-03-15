@@ -219,7 +219,7 @@
                 "description": ""
             },
             "diagnostics": {
-                "title": "Diagnostics",
+                "title": "Diagnostika",
                 "description": ""
             },
             "stateExport": {
@@ -342,18 +342,15 @@
             "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone."
         },
         "diagnostics": {
-            "title": "Diagnostics",
+            "title": "Diagnostika",
             "node": "Node",
-            "language": "Node",
-            "currency": "Node",
-            "platform": "Platform",
+            "platform": "Platforma",
             "platformVersion": "Platform Version",
-            "platformType": "Platform Type",
             "platformArchitecture": "Platform Architecture",
             "cpuCount": "CPU Count",
-            "totalMem": "Total Memory",
-            "freeMem": "Free Memory",
-            "userPath": "User Path"
+            "totalMem": "Celková paměť",
+            "freeMem": "Volná paměť",
+            "userPath": "Cesta uživatele"
         }
     },
     "charts": {
@@ -499,9 +496,9 @@
         "wallet": "Peněženka",
         "help": "Pomoc",
         "you": "Ty",
-        "messageId": "Message ID",
-        "inputAddress": "Vstupní adresa",
-        "receiveAddress": "Adresa příjemce",
+        "messageId": "ID zprávy",
+        "input_address": "Vstupní adresa",
+        "receive_address": "Adresa příjemce",
         "date": "Datum",
         "noAccounts": "Nemáte žádné účty, prosím vytvořte jej.",
         "loadingAccounts": "Načítání, prosím počkejte...",
@@ -539,13 +536,13 @@
         "valueTx": "Přijímání {{value}} na {{account}}",
         "confirmed": "Odchozí {{value}} od {{account}} byl potvrzen",
         "failed": "Odchozí {{value}} od {{account}} selhal",
-        "downloadingUpdate": "Stahování aktualizace",
-        "updateReady": "Aktualizace připravena",
-        "updateError": "Během aktualizace došlo k chybě, zkuste to prosím znovu",
-        "restartInstall": "Restartovat pro instalaci",
-        "calcMinutesRemaining": "Výpočet zbývajících minut...",
-        "minutesRemaining": "{minutes, plural, one {1 zbývající minuta} other {# zbývajících minut}}",
-        "copiedToClipboard": "Copied to clipboard"
+        "downloading_update": "Stahování aktualizace",
+        "update_ready": "Aktualizace připravena",
+        "update_error": "Během aktualizace došlo k chybě, zkuste to prosím znovu",
+        "restart_install": "Restartovat pro instalaci",
+        "calc_minutes_remaining": "Výpočet zbývajících minut...",
+        "minutes_remaining": "{minutes, plural, one {1 zbývající minuta} other {# zbývajících minut}}",
+        "copied_to_clipboard": "Zkopírováno do schránky"
     },
     "error": {
         "profile": {

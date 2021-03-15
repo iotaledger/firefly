@@ -219,7 +219,7 @@
                 "description": ""
             },
             "diagnostics": {
-                "title": "Diagnostics",
+                "title": "Diagnostyka",
                 "description": ""
             },
             "stateExport": {
@@ -342,18 +342,15 @@
             "confirmation": "Czy na pewno chcesz usunąć ten profil? Tej operacji nie można cofnąć."
         },
         "diagnostics": {
-            "title": "Diagnostics",
-            "node": "Node",
-            "language": "Node",
-            "currency": "Node",
-            "platform": "Platform",
-            "platformVersion": "Platform Version",
-            "platformType": "Platform Type",
-            "platformArchitecture": "Platform Architecture",
-            "cpuCount": "CPU Count",
-            "totalMem": "Total Memory",
-            "freeMem": "Free Memory",
-            "userPath": "User Path"
+            "title": "Diagnostyka",
+            "node": "Serwer",
+            "platform": "Platforma",
+            "platformVersion": "Wersja platformy",
+            "platformArchitecture": "Architektura platformy",
+            "cpuCount": "Liczba procesorów",
+            "totalMem": "Pamięć calkowita",
+            "freeMem": "Wolna pamięć",
+            "userPath": "Ścieżka użytkownika"
         }
     },
     "charts": {
@@ -499,9 +496,9 @@
         "wallet": "Portfel",
         "help": "Pomoc",
         "you": "Ty",
-        "messageId": "Message ID",
-        "inputAddress": "Adres wejściowy",
-        "receiveAddress": "Adres odbiorczy",
+        "messageId": "ID wiadomości",
+        "input_address": "Adres wejściowy",
+        "receive_address": "Adres odbiorczy",
         "date": "Data",
         "noAccounts": "Nie posiadasz żadnego konta, proszę utworzyć konto.",
         "loadingAccounts": "Wczytywanie, proszę czekać...",
@@ -539,13 +536,13 @@
         "valueTx": "Odbieranie {{value}} na konto {{account}}",
         "confirmed": "Transakcja wychodząca {{value}} z konta {{account}} została potwierdzona",
         "failed": "Wysyłka {{value}} z konta {{account}} nie powiodła się",
-        "downloadingUpdate": "Pobieranie aktualizacji",
-        "updateReady": "Aktualizacja jest gotowa",
-        "updateError": "Podczas aktualizacji wystąpił błąd, spróbuj ponownie",
-        "restartInstall": "Uruchom ponownie, aby zainstalować",
-        "calcMinutesRemaining": "Obliczanie pozostałych minut...",
-        "minutesRemaining": "{minutes, plural, one {pozostała 1 minuta} few {pozostały # minuty} many {pozostało # minut} other {pozostało # minut}}",
-        "copiedToClipboard": "Copied to clipboard"
+        "downloading_update": "Pobieranie aktualizacji",
+        "update_ready": "Aktualizacja jest gotowa",
+        "update_error": "Podczas aktualizacji wystąpił błąd, spróbuj ponownie",
+        "restart_install": "Uruchom ponownie, aby zainstalować",
+        "calc_minutes_remaining": "Obliczanie pozostałych minut...",
+        "minutes_remaining": "{minutes, plural, one {pozostała 1 minuta} few {pozostały # minuty} many {pozostało # minut} other {pozostało # minut}}",
+        "copied_to_clipboard": "Skopiowano do schowka"
     },
     "error": {
         "profile": {

@@ -219,7 +219,7 @@
                 "description": ""
             },
             "diagnostics": {
-                "title": "Diagnostics",
+                "title": "Διαγνωστικός Έλεγχος",
                 "description": ""
             },
             "stateExport": {
@@ -342,18 +342,15 @@
             "confirmation": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το προφίλ; αυτή η λειτουργία δεν μπορεί να αναιρεθεί."
         },
         "diagnostics": {
-            "title": "Diagnostics",
-            "node": "Node",
-            "language": "Node",
-            "currency": "Node",
-            "platform": "Platform",
-            "platformVersion": "Platform Version",
-            "platformType": "Platform Type",
-            "platformArchitecture": "Platform Architecture",
-            "cpuCount": "CPU Count",
-            "totalMem": "Total Memory",
-            "freeMem": "Free Memory",
-            "userPath": "User Path"
+            "title": "Διαγνωστικός Έλεγχος",
+            "node": "Κόμβος",
+            "platform": "Πλατφόρμα",
+            "platformVersion": "Έκδοση Πλατφόρμας",
+            "platformArchitecture": "Αρχιτεκτονική Πλατφόρμας",
+            "cpuCount": "Αριθμός Επεξεργαστή",
+            "totalMem": "Συνολική Μνήμη",
+            "freeMem": "Ελεύθερη μνήμη",
+            "userPath": "Διαδρομή Χρήστη"
         }
     },
     "charts": {
@@ -499,9 +496,9 @@
         "wallet": "Πορτοφόλι",
         "help": "Βοήθεια",
         "you": "Εσύ",
-        "messageId": "Message ID",
-        "inputAddress": "Εισαγωγή Διεύθυνσης",
-        "receiveAddress": "Διεύθυνση Λήψης",
+        "messageId": "Κωδικός Μηνύματος",
+        "input_address": "Εισαγωγή Διεύθυνσης",
+        "receive_address": "Διεύθυνση Λήψης",
         "date": "Ημερομηνία",
         "noAccounts": "Δεν έχετε λογαριασμούς, παρακαλώ δημιουργήστε έναν.",
         "loadingAccounts": "Φορτώνεται, παρακαλώ περιμένετε...",
@@ -539,13 +536,13 @@
         "valueTx": "Λήψη {{value}} στο {{account}}",
         "confirmed": "Τα εξερχόμενα {{value}} από {{account}} έχουν επιβεβαιωθεί",
         "failed": "Αποτυχία εξερχομένου {{value}} από {{account}}",
-        "downloadingUpdate": "Λήψη ενημέρωσης",
-        "updateReady": "Ενημέρωση έτοιμη",
-        "updateError": "Παρουσιάστηκε σφάλμα κατά τη διάρκεια της διαδικασίας. Παρακαλούμε δοκιμάστε ξανά",
-        "restartInstall": "Επανεκκίνηση για εγκατάσταση",
-        "calcMinutesRemaining": "Υπολογισμός υπολειπόμενων λεπτών...",
-        "minutesRemaining": "{minutes, plural, one {1 λεπτό απομένει} other {# λεπτά απομένουν}}",
-        "copiedToClipboard": "Copied to clipboard"
+        "downloading_update": "Λήψη ενημέρωσης",
+        "update_ready": "Ενημέρωση έτοιμη",
+        "update_error": "Παρουσιάστηκε σφάλμα κατά τη διάρκεια της διαδικασίας. Παρακαλούμε δοκιμάστε ξανά",
+        "restart_install": "Επανεκκίνηση για εγκατάσταση",
+        "calc_minutes_remaining": "Υπολογισμός υπολειπόμενων λεπτών...",
+        "minutes_remaining": "{minutes, plural, one {1 λεπτό απομένει} other {# λεπτά απομένουν}}",
+        "copied_to_clipboard": "Αντιγράφηκε στο πρόχειρο"
     },
     "error": {
         "profile": {

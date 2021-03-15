@@ -219,7 +219,7 @@
                 "description": ""
             },
             "diagnostics": {
-                "title": "Diagnostics",
+                "title": "Diagnóstico",
                 "description": ""
             },
             "stateExport": {
@@ -324,14 +324,14 @@
             "currentBalance": "Saldo actual: {balance}"
         },
         "node": {
-            "titleAdd": "Añadir un nodo",
-            "titleRemove": "Eliminar un nodo",
-            "titleDetails": "Detalles del nodo",
-            "nodeAddress": "Dirección del nodo",
-            "optionalUsername": "Nombre de usuario (opcional)",
-            "optionalPassword": "Contraseña (opcional)",
-            "setAsPrimaryNode": "Establecer como nodo principal",
-            "removeConfirmation": "Are you sure you want to remove this node?"
+            "title_add": "Añadir un nodo",
+            "title_remove": "Eliminar un nodo",
+            "title_details": "Detalles del nodo",
+            "node_address": "Dirección del nodo",
+            "optional_username": "Nombre de usuario (opcional)",
+            "optional_password": "Contraseña (opcional)",
+            "set_as_primary_node": "Establecer como nodo principal",
+            "remove_confirmation": "¿Estás seguro de que quieres eliminar este nodo?"
         },
         "errorLog": {
             "title": "Registro de errores",
@@ -339,21 +339,18 @@
         },
         "deleteProfile": {
             "title": "Eliminar perfil",
-            "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone."
+            "confirmation": "¿Está seguro que desea eliminar este perfil? Esta operación no se puede deshacer."
         },
         "diagnostics": {
-            "title": "Diagnostics",
-            "node": "Node",
-            "language": "Node",
-            "currency": "Node",
-            "platform": "Platform",
-            "platformVersion": "Platform Version",
-            "platformType": "Platform Type",
-            "platformArchitecture": "Platform Architecture",
-            "cpuCount": "CPU Count",
-            "totalMem": "Total Memory",
-            "freeMem": "Free Memory",
-            "userPath": "User Path"
+            "title": "Diagnóstico",
+            "node": "Nodo",
+            "platform": "Plataforma",
+            "platformVersion": "Versión de la plataforma",
+            "platformArchitecture": "Arquitectura de plataforma",
+            "cpuCount": "Recuento de CPU",
+            "totalMem": "Memoria total",
+            "freeMem": "Memoria libre",
+            "userPath": "Ruta de usuario"
         }
     },
     "charts": {
@@ -433,7 +430,7 @@
         "hideDetails": "Ocultar detalles",
         "yes": "Sí",
         "no": "No",
-        "reset": "Reset"
+        "reset": "Reiniciar"
     },
     "general": {
         "password": "Contraseña",
@@ -499,9 +496,9 @@
         "wallet": "Cartera",
         "help": "Ayuda",
         "you": "Tú",
-        "messageId": "Message ID",
-        "inputAddress": "Dirección de entrada",
-        "receiveAddress": "Dirección de recepción",
+        "messageId": "ID del mensaje",
+        "input_address": "Dirección de entrada",
+        "receive_address": "Dirección de recepción",
         "date": "Fecha",
         "noAccounts": "No tienes ninguna cuenta, por favor crea una.",
         "loadingAccounts": "Cargando, por favor espere...",
@@ -539,17 +536,17 @@
         "valueTx": "Recibiendo {{value}} a {{account}}",
         "confirmed": "Se ha confirmado el {{value}} saliente de {{account}}",
         "failed": "Ha fallado el {{value}} saliente de {{account}}",
-        "downloadingUpdate": "Descargando actualización",
-        "updateReady": "Actualización lista",
-        "updateError": "Se ha producido un error durante la actualización, por favor inténtalo de nuevo",
-        "restartInstall": "Reiniciar para instalar",
-        "calcMinutesRemaining": "Calculando minutos restantes...",
-        "minutesRemaining": "{minutes, plural, one {1 minuto restante} other {# minutos restantes}}",
-        "copiedToClipboard": "Copied to clipboard"
+        "downloading_update": "Descargando actualización",
+        "update_ready": "Actualización lista",
+        "update_error": "Se ha producido un error durante la actualización, por favor inténtalo de nuevo",
+        "restart_install": "Reiniciar para instalar",
+        "calc_minutes_remaining": "Calculando minutos restantes...",
+        "minutes_remaining": "{minutes, plural, one {1 minuto restante} other {# minutos restantes}}",
+        "copied_to_clipboard": "Copiado al portapapeles"
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "length": "Tu nombre de perfil no puede ser más largo de {length, plural, one {1 character } other {# caracteres}}.",
             "duplicate": "Ya existe un perfil con este nombre."
         },
         "password": {
@@ -559,7 +556,7 @@
             "pattern": "Los patrones de teclado cortos son fáciles de adivinar.",
             "names": "Los nombres y apellidos comunes son fáciles de adivinar.",
             "repeats": "Las repeticiones como 'aaa' son fáciles de adivinar.",
-            "repeats2": "Repeats like 'abcabcabc' are easy to guess.",
+            "repeats2": "Las repeticiones como 'abcabcabc' son fáciles de adivinar.",
             "sequence": "Las secuencias de caracteres son fáciles de adivinar.",
             "years": "Los últimos años son fáciles de adivinar.",
             "dates": "Las fechas son fáciles de adivinar.",
@@ -567,21 +564,21 @@
             "similar": "Esto es similar a una contraseña común.",
             "reasonWord": "Una sola palabra es fácil de adivinar.",
             "incorrect": "Tu contraseña es incorrecta.",
-            "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
+            "length": "Tu contraseña no puede ser más larga de {length, plural, one {1 character} other {# caracteres}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {1 digit} other {# digits}} long.",
+            "length": "Tu PIN debe tener {length, plural, one {1 digit} other {# dígitos}} de largo.",
             "match": "Los PIN no coinciden.",
             "incorrect": "El PIN actual es incorrecto."
         },
         "account": {
-            "length": "Your account name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "length": "Tu nombre de cuenta no puede tener más de {length, plural, one {1 character} other {# caracteres}}.",
             "empty": "Debes usar tu última cuenta antes de crear una nueva.",
             "notEmpty": "Debes transferir tu saldo antes de eliminar esta cuenta.",
             "duplicate": "Ya existe una cuenta con este nombre."
         },
         "send": {
-            "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
+            "addressLength": "Las direcciones deben tener {length, plural, one {1 character} other {# caracteres}} de largo.",
             "amountTooHigh": "Esto es mayor que su saldo disponible.",
             "amountNoFloat": "Si las unidades son `i` no puedes usar lugares decimales.",
             "amountInvalidFormat": "La cantidad parece ser un número no válido.",
@@ -602,7 +599,7 @@
             "invalid": "El archivo de copia de seguridad no fue reconocido.",
             "destination": "El destino de la copia de seguridad no era válido.",
             "mnemonic": "El mnemónico no es válido.",
-            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
+            "seedTooShort": "La semilla debe tener 81 caracteres, ahora {length, plural, one { 1} other {tiene # caracteres}}",
             "seedCharacters": "La semilla sólo debe contener caracteres A-Z o 9",
             "phraseWordCount": "Debe haber 24 palabras en su frase de recuperación, ahora mismo {length, plural, one {es 1} other {son #}}",
             "phraseUnrecognizedWord": "No se reconoce la palabra \"{word}\" en su frase de recuperación"

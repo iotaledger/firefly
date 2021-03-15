@@ -38,7 +38,7 @@
         },
         "password": {
             "title": "Crie uma senha",
-            "body": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates."
+            "body": "Você precisa de uma senha forte para proteger seus fundos. Use uma combinação de palavras e evite frases simples, nomes ou datas."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -70,7 +70,7 @@
         "verifyRecoveryPhrase": {
             "title": "Verificar frase de recuperação",
             "body": "Vamos verificar se você anotou a frase corretamente. Selecione as palavras na ordem correta.",
-            "creatingAccount": "Creating account, please wait..."
+            "creating_account": "Criando conta, por favor aguarde..."
         },
         "backupWallet": {
             "title": "Backup para um arquivo Stronghold",
@@ -90,11 +90,11 @@
         },
         "importFromText": {
             "title": "Recupere sua carteira com uma frase de recuperação ou seed",
-            "body1": "Uma frase de recuperação tem 24 palavras de comprimento. Ela é usada para recuperar uma carteira Firefly existente.",
-            "body2": "Uma seed é formada por 81 caracteres. Ela é usada para recuperar uma antiga carteira Trinity.",
-            "body3": "Digite sua seed ou frase de recuperação",
-            "seedDetected": "81 character seed detected",
-            "phraseDetected": "24 word phrase detected"
+            "body_1": "Uma frase de recuperação tem 24 palavras de comprimento. Ela é usada para recuperar uma carteira Firefly existente.",
+            "body_2": "Uma seed é formada por 81 caracteres. Ela é usada para recuperar uma antiga carteira Trinity.",
+            "body_3": "Digite sua seed ou frase de recuperação",
+            "seed_detected": "Seed de 81 caracteres detectada",
+            "phrase_detected": "Frase de 24 palavras detectada"
         },
         "importFromFile": {
             "title": "Restaure sua carteira a partir de um arquivo de backup",
@@ -191,7 +191,7 @@
                 "description": ""
             },
             "deleteProfile": {
-                "title": "Delete profile",
+                "title": "Excluir perfil",
                 "description": ""
             },
             "deepLinks": {
@@ -219,7 +219,7 @@
                 "description": ""
             },
             "diagnostics": {
-                "title": "Diagnostics",
+                "title": "Diagnósticos",
                 "description": ""
             },
             "stateExport": {
@@ -312,57 +312,54 @@
         "deleteAccount": {
             "title": "Excluir {name}?",
             "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "typePassword": "Digite a senha da sua carteira para confirmar.",
-            "deleteAccount": "Excluir conta",
-            "errorTitle": "Não foi possível excluir {name}",
-            "errorBody1": "Para excluir uma conta você deve ter 0 de saldo.",
-            "errorBody2": "Atualmente você tem {balance} restantes nesta conta. Por favor, mova esses fundos para uma conta diferente e tente novamente.",
-            "errorBody3": "You cannot delete this account, you must have at least one."
+            "type_password": "Digite a senha da sua carteira para confirmar.",
+            "delete_account": "Excluir conta",
+            "error_title": "Não foi possível excluir {name}",
+            "error_body_1": "Para excluir uma conta você deve ter 0 de saldo.",
+            "error_body_2": "Atualmente você tem {balance} restantes nesta conta. Por favor, mova esses fundos para uma conta diferente e tente novamente.",
+            "error_body_3": "Você não pode excluir esta conta, você deve ter pelo menos uma."
         },
-        "addressHistory": {
+        "address_history": {
             "title": "Histórico de endereço da conta {name}",
             "currentBalance": "Saldo atual: {balance}"
         },
         "node": {
-            "titleAdd": "Adicionar servidor",
-            "titleRemove": "Remove a node",
-            "titleDetails": "Detalhes do servidor",
-            "nodeAddress": "Endereço do servidor",
-            "optionalUsername": "Nome de usuário (opcional)",
-            "optionalPassword": "Senha (opcional)",
-            "setAsPrimaryNode": "Definir como servidor principal",
-            "removeConfirmation": "Are you sure you want to remove this node?"
+            "title_add": "Adicionar servidor",
+            "title_remove": "Remover um servidor",
+            "title_details": "Detalhes do servidor",
+            "node_address": "Endereço do servidor",
+            "optional_username": "Nome de usuário (opcional)",
+            "optional_password": "Senha (opcional)",
+            "set_as_primary_node": "Definir como servidor principal",
+            "remove_confirmation": "Você tem certeza que deseja remover este servidor?"
         },
         "errorLog": {
-            "title": "Error Log",
-            "empty": "The error log is empty."
+            "title": "Relatório de Erros",
+            "empty": "O relatório de erros está vazio."
         },
         "deleteProfile": {
-            "title": "Delete profile",
-            "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone."
+            "title": "Excluir perfil",
+            "confirmation": "Tem certeza de que deseja excluir este perfil? Esta ação não pode ser desfeita."
         },
         "diagnostics": {
-            "title": "Diagnostics",
-            "node": "Node",
-            "language": "Node",
-            "currency": "Node",
-            "platform": "Platform",
-            "platformVersion": "Platform Version",
-            "platformType": "Platform Type",
-            "platformArchitecture": "Platform Architecture",
-            "cpuCount": "CPU Count",
-            "totalMem": "Total Memory",
-            "freeMem": "Free Memory",
-            "userPath": "User Path"
+            "title": "Diagnósticos",
+            "node": "Servidor",
+            "platform": "Plataforma",
+            "platformVersion": "Versão da Plataforma",
+            "platformArchitecture": "Arquitetura da Plataforma",
+            "cpuCount": "Contagem de CPU",
+            "totalMem": "Memória Total",
+            "freeMem": "Memória Livre",
+            "userPath": "Caminho do Usuário"
         }
     },
     "charts": {
-        "incomingMi": "Incoming {value} Mi",
-        "outgoingMi": "Outgoing {value} Mi",
-        "portoflio": "Portfolio",
+        "incoming_mi": "Recebendo {value} Mi",
+        "outgoing_mi": "Enviando {value} Mi",
+        "portoflio": "Portfólio",
         "token": "Token",
-        "accountValue": "Account Value",
-        "accountActivity": "Account Activity"
+        "account_value": "Saldo da Conta",
+        "account_activity": "Atividade da Conta"
     },
     "actions": {
         "continue": "Continuar",
@@ -413,8 +410,8 @@
         "viewAddressHistory": "Ver histórico de endereços",
         "deleteAccount": "Excluir conta",
         "max": "Máx",
-        "addNode": "Adicionar servidor",
-        "removeNode": "Remove node",
+        "add_node": "Adicionar servidor",
+        "remove_node": "Remover servidor",
         "hide": "Ocultar",
         "hideOthers": "Ocultar Outros",
         "showAll": "Exibir Tudo",
@@ -429,11 +426,11 @@
         "addAccount": "Adicionar Conta",
         "checkForUpdates": "Verificar Atualizações",
         "reportAnIssue": "Reportar um Problema",
-        "clear": "Clear",
-        "hideDetails": "Hide Details",
-        "yes": "Yes",
-        "no": "No",
-        "reset": "Reset"
+        "clear": "Limpar",
+        "hide_details": "Ocultar Detalhes",
+        "yes": "Sim",
+        "no": "Não",
+        "reset": "Redefinir"
     },
     "general": {
         "password": "Senha",
@@ -498,35 +495,35 @@
         "nodes": "Servidores",
         "wallet": "Carteira",
         "help": "Ajuda",
-        "you": "You",
-        "messageId": "Message ID",
-        "inputAddress": "Input Address",
-        "receiveAddress": "Receive Address",
-        "date": "Date",
-        "noAccounts": "Você não possui contas, por favor, crie uma.",
-        "loadingAccounts": "Loading, please wait...",
-        "addProfile": "Adicionar Perfil",
-        "noRecentHistory": "No recent history",
-        "transferSyncing": "Syncing account",
-        "transferSelectingInputs": "Selecting inputs",
-        "transferRemainderAddress": "Generating remainder deposit address",
-        "transferSigning": "Signing the transaction",
-        "transferPow": "Performing PoW",
-        "transferBroadcasting": "Broadcasting transaction",
-        "transferComplete": "Transfer complete",
-        "creatingAccount": "Creating account, please wait...",
-        "updatingAccount": "Updating account, please wait...",
-        "accountSyncing": "Account is syncing",
-        "accountSyncComplete": "Account sync complete",
-        "passwordUpdating": "Updating password...",
-        "passwordSuccess": "Updated password successfully",
-        "passwordFailed": "Updating password failed",
-        "exportingStronghold": "Exporting stronghold...",
-        "exportingStrongholdSuccess": "Exported stronghold successfully",
-        "exportingStrongholdFailed": "Exported stronghold failed",
-        "pinCodeUpdating": "Updating PIN code...",
-        "pinCodeSuccess": "Updated PIN code successfully",
-        "pinCodeFailed": "Updating PIN code failed"
+        "you": "Você",
+        "messageId": "ID da Mensagem",
+        "input_address": "Endereço de Entrada",
+        "receive_address": "Endereço de Recebimento",
+        "date": "Data",
+        "no_accounts": "Você não possui contas, por favor, crie uma.",
+        "loading_accounts": "Carregando, por favor aguarde...",
+        "add_profile": "Adicionar Perfil",
+        "no_recent_history": "Nenhum histórico recente",
+        "transferSyncing": "Sincronizando conta",
+        "transferSelectingInputs": "Selecionando entradas",
+        "transferRemainderAddress": "Gerando o endereço de depósito restante",
+        "transferSigning": "Assinando transação",
+        "transferPow": "Realizando PoW",
+        "transferBroadcasting": "Transmitindo transação",
+        "transferComplete": "Transferência concluída",
+        "creatingAccount": "Criando conta, por favor aguarde...",
+        "updatingAccount": "Atualizando conta, por favor aguarde...",
+        "accountSyncing": "A conta está sincronizando",
+        "accountSyncComplete": "Sincronização da conta completa",
+        "passwordUpdating": "Atualizando senha...",
+        "passwordSuccess": "Senha atualizada com sucesso",
+        "passwordFailed": "Falha ao atualizar senha",
+        "exportingStronghold": "Exportando a stronghold...",
+        "exportingStrongholdSuccess": "Stronghold exportada com sucesso",
+        "exportingStrongholdFailed": "Falha na exportação da stronghold",
+        "pinCodeUpdating": "Atualizando código PIN...",
+        "pinCodeSuccess": "Código PIN atualizado com sucesso",
+        "pinCodeFailed": "Falha ao atualizar código PIN"
     },
     "dates": {
         "today": "Hoje",
@@ -539,73 +536,73 @@
         "valueTx": "Recebendo {{value}} para {{account}}",
         "confirmed": "Envio de {{value}} de {{account}} foi confirmado",
         "failed": "Envio de {{value}} de {{account}} falhou",
-        "downloadingUpdate": "Baixando atualização",
-        "updateReady": "Atualização está pronta",
-        "updateError": "Ocorreu um erro durante a atualização; por favor, tente novamente",
-        "restartInstall": "Reinicie para instalar",
-        "calcMinutesRemaining": "Calculando minutos restantes...",
-        "minutesRemaining": "{minutes, plural, one {1 minuto restante} other {# minutos restantes}}",
-        "copiedToClipboard": "Copied to clipboard"
+        "downloading_update": "Baixando atualização",
+        "update_ready": "Atualização está pronta",
+        "update_error": "Ocorreu um erro durante a atualização; por favor, tente novamente",
+        "restart_install": "Reinicie para instalar",
+        "calc_minutes_remaining": "Calculando minutos restantes...",
+        "minutes_remaining": "{minutes, plural, one {1 minuto restante} other {# minutos restantes}}",
+        "copied_to_clipboard": "Copiado para área de transferência"
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "duplicate": "A profile with this name already exists."
+            "length": "Seu nome de perfil não pode ter mais do que {length, plural, one {1 caractere} other {# caracteres}}.",
+            "duplicate": "Já existe um perfil com este nome."
         },
         "password": {
-            "doNotMatch": "Passwords do not match.",
-            "tooWeak": "Your new password is too weak.",
-            "row": "Straight rows of keys are easy to guess.",
-            "pattern": "Short keyboard patterns are easy to guess.",
-            "names": "Common names and surnames are easy to guess.",
-            "repeats": "Repeats like 'aaa' are easy to guess.",
-            "repeats2": "Repeats like 'abcabcabc' are easy to guess.",
-            "sequence": "Sequences of characters are easy to guess.",
-            "years": "Recent years are easy to guess.",
-            "dates": "Dates are easy to guess.",
-            "common": "This is a very common password.",
-            "similar": "This is similar to a common password.",
-            "reasonWord": "A single word is easy to guess.",
-            "incorrect": "Your password is incorrect.",
-            "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
+            "doNotMatch": "As senhas não conferem.",
+            "tooWeak": "Sua nova senha é muito fraca.",
+            "row": "Repetições de caracteres são fáceis de adivinhar.",
+            "pattern": "Sequências curtas do teclado são fáceis de adivinhar.",
+            "names": "Nomes e Sobrenomes são fáceis de adivinhar.",
+            "repeats": "Repetições como 'aaa' são fáceis de adivinhar.",
+            "repeats2": "Repetições como 'abcabcabc' são fáceis de adivinhar.",
+            "sequence": "Sequências de caracteres são fáceis de adivinhar.",
+            "years": "Anos recentes são fáceis de adivinhar.",
+            "dates": "Datas são fáceis de adivinhar.",
+            "common": "Essa é uma senha muito comum.",
+            "similar": "Essa senha é parecida com uma senha comum.",
+            "reasonWord": "Uma única palavra é fácil de adivinhar.",
+            "incorrect": "Sua senha está incorreta.",
+            "length": "Sua senha não pode ser maior que {length, plural, one {1 caractere} other {# caracteres}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {1 digit} other {# digits}} long.",
-            "match": "PINs do not match.",
-            "incorrect": "Your current PIN is incorrect."
+            "length": "Seu PIN deve ser de pelo menos {length, plural, one {1 dígito} other {# dígitos}}.",
+            "match": "Os PINs não correspondem.",
+            "incorrect": "Seu PIN atual está incorreto."
         },
         "account": {
-            "length": "Your account name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "empty": "You must use your latest account before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this account.",
-            "duplicate": "An account with this name already exists."
+            "length": "O nome da sua conta não pode ser maior que {length, plural, one {1 caractere} other {# carateres}}.",
+            "empty": "Você deve usar sua conta mais recente antes de criar uma nova.",
+            "notEmpty": "Você deve transferir seu saldo antes de apagar esta conta.",
+            "duplicate": "Uma conta com esse nome já existe."
         },
         "send": {
-            "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
-            "amountTooHigh": "This is greater than your available balance.",
-            "amountNoFloat": "If units are `i` you cannot use decimal places.",
-            "amountInvalidFormat": "The amount appears to be an invalid number.",
-            "amountZero": "The amount must be greater than 0.",
-            "wrongAddressFormat": "Addresses start with the prefix {prefix}.",
-            "insufficientFunds": "This account has insufficient funds"
+            "addressLength": "Endereços devem ser de pelo menos {length, plural, one {1 caractere} other {# caracteres}}.",
+            "amountTooHigh": "Isto é maior do que o seu saldo disponível.",
+            "amountNoFloat": "Se as unidades são `i`, você não pode usar casas decimais.",
+            "amountInvalidFormat": "O valor parece ser um número inválido.",
+            "amountZero": "O valor deve ser maior que 0.",
+            "wrongAddressFormat": "Os endereços começam com o prefixo {prefix}.",
+            "insufficientFunds": "Esta conta não tem fundos suficientes"
         },
         "node": {
-            "invalid": "Please enter a valid URL.",
-            "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
-            "duplicate": "This node has already been added.",
-            "unsynced": "The node you are trying to add is not synced."
+            "invalid": "Por favor, insira uma URL válida.",
+            "https": "É necessário utilizar HTTPS. Configure um perfil de desenvolvedor para usar conexões HTTP não seguras.",
+            "duplicate": "Este servidor já foi adicionado.",
+            "unsynced": "O servidor que você está tentando adicionar não está sincronizado."
         },
         "global": {
-            "generic": "Something went wrong."
+            "generic": "Algo deu errado."
         },
         "backup": {
-            "invalid": "The backup file was not recognised.",
-            "destination": "The backup destination was not valid.",
-            "mnemonic": "The mnemonic is not valid.",
-            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
-            "seedCharacters": "The seed should only contain characters A-Z or 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}",
-            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase"
+            "invalid": "O arquivo de backup não foi reconhecido.",
+            "destination": "O destino do backup não é válido.",
+            "mnemonic": "O mnemonic não é válido.",
+            "seedTooShort": "A seed deve conter 81 caracteres, atualmente {length, plural, one {contém 1} other {contém #}}",
+            "seedCharacters": "A seed deve conter apenas caracteres A-Z ou 9",
+            "phraseWordCount": "Deve haver 24 palavras em sua frase de recuperação, atualmente {length, plural, one {há 1} other {há #}}",
+            "phraseUnrecognizedWord": "Palavra \"{word}\" não reconhecida na sua frase de recuperação"
         }
     }
 }

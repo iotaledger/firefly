@@ -219,7 +219,7 @@
                 "description": ""
             },
             "diagnostics": {
-                "title": "Diagnostics",
+                "title": "Diagnose",
                 "description": ""
             },
             "stateExport": {
@@ -342,18 +342,15 @@
             "confirmation": "Willst du diesen Account wirklich löschen? Das kann nicht rückgängig gemacht werden."
         },
         "diagnostics": {
-            "title": "Diagnostics",
+            "title": "Diagnose",
             "node": "Node",
-            "language": "Node",
-            "currency": "Node",
-            "platform": "Platform",
-            "platformVersion": "Platform Version",
-            "platformType": "Platform Type",
-            "platformArchitecture": "Platform Architecture",
-            "cpuCount": "CPU Count",
-            "totalMem": "Total Memory",
-            "freeMem": "Free Memory",
-            "userPath": "User Path"
+            "platform": "Plattform",
+            "platformVersion": "Plattformversion",
+            "platformArchitecture": "Plattform-Architektur",
+            "cpuCount": "CPU-Anzahl",
+            "totalMem": "Gesamtspeicher",
+            "freeMem": "Freier Speicher",
+            "userPath": "Benutzerpfad"
         }
     },
     "charts": {
@@ -539,13 +536,13 @@
         "valueTx": "Du hast {{value}} in {{account}} erhalten",
         "confirmed": "Eine ausgehende Transaktion über {{value}} in {{account}} wurde bestätigt",
         "failed": "Ausgehende Transaktion {{value}} von {{account}} ist fehlgeschlagen",
-        "downloadingUpdate": "Update lädt herunter",
-        "updateReady": "Update bereit",
-        "updateError": "Während des Updates ist ein Fehler aufgetreten. Versuche es erneut",
-        "restartInstall": "Neustarten zum installieren",
-        "calcMinutesRemaining": "Berechne verbleibende Zeit...",
-        "minutesRemaining": "{minutes, plural, one {1 Minute verbleibend} other {# Minuten verbleibend}}",
-        "copiedToClipboard": "Copied to clipboard"
+        "downloading_update": "Update lädt herunter",
+        "update_ready": "Update bereit",
+        "update_error": "Während des Updates ist ein Fehler aufgetreten. Versuche es erneut",
+        "restart_install": "Neustarten zum installieren",
+        "calc_minutes_remaining": "Berechne verbleibende Zeit...",
+        "minutes_remaining": "{minutes, plural, one {1 Minute verbleibend} other {# Minuten verbleibend}}",
+        "copied_to_clipboard": "In die Zwischenablage kopiert"
     },
     "error": {
         "profile": {

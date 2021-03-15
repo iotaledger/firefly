@@ -38,7 +38,7 @@
         },
         "password": {
             "title": "Opprett passord",
-            "body": "Passordet ditt er for svakt. Bruk en kombinasjon av ord, og unngå vanlige fraser, navn eller datoer."
+            "body": "Passordet ditt er for svakt. Bruk en kombinasjon av ord og unngå vanlige fraser, navn eller datoer."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -47,8 +47,8 @@
         },
         "pin": {
             "title": "Opprett PIN-kode",
-            "body1": "Skriv inn en 6-sifret PIN-kode nedenfor. Du vil bli bedt om å fylle inn din pin for å logge inn i din lommebok.",
-            "body2": "Du kan kun bruke tall."
+            "body_1": "Skriv inn en 6-sifret PIN-kode nedenfor. Du vil bli bedt om å fylle inn din PIN for å logge inn i din lommebok.",
+            "body_2": "Du kan kun bruke tall."
         },
         "confirmPin": {
             "title": "Bekreft din PIN-kode",
@@ -56,16 +56,16 @@
         },
         "backup": {
             "title": "Sikkerhetskopier din lommebok",
-            "body1": "Du vil nå bli vist en gjenopprettingsfrase.",
-            "body2": "Ikke del denne frasen med noen. Din gjenopprettingsfrase kan brukes til å få tilgang til tokens fra hvor som helst.",
-            "body3": "Hvis du mister gjenopprettingsfrasen, kan du miste midlene dine."
+            "body_1": "Du vil nå bli vist en gjenopprettingsfrase.",
+            "body_2": "Ikke del denne frasen med noen. Din gjenopprettingsfrase kan brukes til å få tilgang til dine tokens fra hvor som helst.",
+            "body_3": "Hvis du mister gjenopprettingsfrasen, kan du miste midlene dine."
         },
         "recoveryPhrase": {
             "title": "Gjenopprettingsfrase",
-            "body1": "Skriv forsiktig ned ordene i riktig rekkefølge.",
-            "body2": "Hold gjenopprettingsfrasen privat og trygt lagret. Ikke del den med noen.",
-            "revealRecoveryPhrase": "Vis gjenopprettingsfrasen",
-            "hideRecoveryPhrase": "Skjul gjenoppretingsfrasen"
+            "body_1": "Skriv ordene nøye ned i riktig rekkefølge.",
+            "body_2": "Hold gjenopprettingsfrasen privat og trygt lagret. Ikke del den med noen.",
+            "reveal_recovery_phrase": "Vis gjenopprettingsfrasen",
+            "hide_recovery_phrase": "Skjul gjenoppretingsfrasen"
         },
         "verifyRecoveryPhrase": {
             "title": "Bekreft gjenopprettingsfrasen",
@@ -90,11 +90,11 @@
         },
         "importFromText": {
             "title": "Gjenopprette lommeboken med en gjenopprettingsfrase eller hovednøkkel",
-            "body1": "En gjenopprettingsfrase er 24 ord. Dette er brukt for å gjenopprette en eksisterende Firefly-lommebok.",
-            "body2": "Et hovednøkkel består av 81 tegn. Dette brukes for å gjenopprette fra en eldre Trinity lommebok.",
-            "body3": "Angi hovednøkkel eller gjenopprettingsfrase",
-            "seedDetected": "Passord med 81 karakterer er oppdaget",
-            "phraseDetected": "Ordrekke med 24 ord er oppdaget"
+            "body_1": "En gjenopprettingsfrase inneholder 24 ord. Den kan brukes til å gjenopprette en eksisterende Firefly-lommebok.",
+            "body_2": "En hovednøkkel består av 81 tegn. Denne brukes til å gjenopprette fra en eldre Trinity lommebok.",
+            "body_3": "Angi hovednøkkel eller gjenopprettingsfrase",
+            "seed_detected": "Hovednøkkel med 81 tegn oppdaget",
+            "phrase_detected": "Gjenopprettingsfrase med 24 ord oppdaget"
         },
         "importFromFile": {
             "title": "Gjenopprett lommeboken fra en sikkerhetskopi-fil",
@@ -219,7 +219,7 @@
                 "description": ""
             },
             "diagnostics": {
-                "title": "Diagnostics",
+                "title": "Diagnostikk",
                 "description": ""
             },
             "stateExport": {
@@ -269,7 +269,7 @@
                 },
                 "strongholdBackup": {
                     "title": "Stronghold sikkerhetskopi",
-                    "weeksAgo": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "weeks_ago": "{weeks, plural, one {# uke} other {# uker}} siden"
                 }
             },
             "network": {
@@ -277,8 +277,8 @@
                 "networkDegraded": "Nettverk ute av drift",
                 "networkDown": "Nettverket er nede",
                 "status": "Status",
-                "messagesPerSecond": "Meldinger per sekund",
-                "confirmationRate": "Bekreftelseshastighet"
+                "messages_per_second": "Meldinger per sekund",
+                "confirmation_rate": "Bekreftelsesrate"
             },
             "profileModal": {
                 "allSettings": "Alle innstillinger",
@@ -312,16 +312,16 @@
         "deleteAccount": {
             "title": "Slett {name}?",
             "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "typePassword": "Skriv inn passordet til lommeboken for å bekrefte.",
-            "deleteAccount": "Slett konto",
-            "errorTitle": "Kan ikke slette {name}",
-            "errorBody1": "For å slette kontoen må du ha 0 i saldo.",
-            "errorBody2": "Du har for øyeblikket {balance} igjen på denne kontoen. Vennligst flytt disse midlene til en annen konto og prøv på nytt.",
-            "errorBody3": "Du kan ikke slette denne kontoen. Du er nødt å ha minst én konto."
+            "type_password": "Skriv inn passordet til lommeboken for å bekrefte.",
+            "delete_account": "Slett konto",
+            "error_title": "Kan ikke slette {name}",
+            "error_body_1": "For å slette kontoen må du ha 0 i saldo.",
+            "error_body_2": "Du har for øyeblikket {balance} igjen på denne kontoen. Vennligst flytt disse midlene til en annen konto og prøv på nytt.",
+            "error_body_3": "Du kan ikke slette denne kontoen. Du er nødt å ha minst én konto."
         },
-        "addressHistory": {
-            "title": "{name} adressehistorikk for konto",
-            "currentBalance": "Gjeldende saldo: {balance}"
+        "address_history": {
+            "title": "Adressehistorikk for konto {name}",
+            "current_balance": "Nåværende saldo: {balance}"
         },
         "node": {
             "titleAdd": "Legg til en node.",
@@ -342,18 +342,15 @@
             "confirmation": "Er du sikker på at du vil slette denne profilen? Denne handlingen kan ikke angres."
         },
         "diagnostics": {
-            "title": "Diagnostics",
+            "title": "Diagnostikk",
             "node": "Node",
-            "language": "Node",
-            "currency": "Node",
-            "platform": "Platform",
-            "platformVersion": "Platform Version",
-            "platformType": "Platform Type",
-            "platformArchitecture": "Platform Architecture",
-            "cpuCount": "CPU Count",
-            "totalMem": "Total Memory",
-            "freeMem": "Free Memory",
-            "userPath": "User Path"
+            "platform": "Plattform",
+            "platformVersion": "Plattformversjon",
+            "platformArchitecture": "Plattform arkitektur",
+            "cpuCount": "Antall prosessorer",
+            "totalMem": "Totalt minne",
+            "freeMem": "Ledig minne",
+            "userPath": "Brukersti"
         }
     },
     "charts": {
@@ -404,7 +401,7 @@
         "enableDeveloperMode": "Aktiver utviklermodus",
         "enableSystemNotifications": "Aktiver varsler",
         "exportState": "Eksporter status",
-        "outsourceProofOfWork": "Outsource bevis på arbeid",
+        "outsourceProofOfWork": "Sett bort bevis på arbeid",
         "unlock": "Lås opp",
         "updateFirefly": "Oppdater Firefly",
         "restartNow": "Start på nytt nå",
@@ -430,10 +427,10 @@
         "checkForUpdates": "Søk etter oppdateringer",
         "reportAnIssue": "Rapportér en feil",
         "clear": "Tøm",
-        "hideDetails": "Skjul detaljer",
-        "yes": "Yes",
-        "no": "No",
-        "reset": "Reset"
+        "hide_details": "Skjul detaljer",
+        "yes": "Ja",
+        "no": "Nei",
+        "reset": "Tilbakestill"
     },
     "general": {
         "password": "Passord",
@@ -446,15 +443,15 @@
         "recentActivity": "Nylig aktivitet",
         "sent": "Sendt",
         "received": "Mottatt",
-        "sendPayment": "Send payment",
-        "moveFunds": "Move funds",
-        "sendFunds": "Send midler",
-        "sendToAddress": "Send til en adresse",
-        "scanQrOrPaste": "Skann en QR-kode eller lim inn en adresse",
-        "moveFundsBetweenAccounts": "Flytt midler mellom kontoer",
-        "sendTokensToAddress": "Send tokens to an address",
-        "manageAccount": "Administrer konto",
-        "customizeAcount": "Tilpass din konto",
+        "send_payment": "Send betaling",
+        "move_funds": "Flytt midler",
+        "send_funds": "Send midler",
+        "send_to_address": "Send til en adresse",
+        "scan_qr_or_paste": "Skann en QR-kode eller lim inn en adresse",
+        "move_funds_between_accounts": "Flytt midler mellom kontoer",
+        "send_tokens_to_address": "Send tokens til en adresse",
+        "manage_account": "Administrer konto",
+        "customize_account": "Tilpass din konto",
         "account": "Konto",
         "sendingToAddress": "Sender til adresse",
         "amount": "Beløp",
@@ -462,25 +459,25 @@
         "reference": "Referanse",
         "from": "Fra",
         "to": "Til",
-        "receiveFunds": "Motta midler",
-        "myAddress": "My Address",
-        "shareAddress": "Del en adresse",
-        "yourAddress": "Din adresse",
-        "generateNewAddress": "Generer en ny adresse",
-        "copyAddress": "Kopier adresse",
-        "haveTextBackup": "Jeg har en nedskrevet hovednøkkel",
-        "haveFileBackup": "Jeg har en sikkerhetskopi-fil",
-        "enterSeedOrPhrase": "Angi gjenopprettingsfrase eller hovednøkkel",
-        "uploadSeedvaultOrStronghold": "Importer en Stronghold eller SeedVault-fil",
+        "receive_funds": "Motta midler",
+        "my_address": "Min adresse",
+        "share_address": "Del en adresse",
+        "your_address": "Din adresse",
+        "generate_new_address": "Generer en ny adresse",
+        "copy_address": "Kopier adresse",
+        "have_text_backup": "Jeg har en nedskrevet hovednøkkel",
+        "have_file_backup": "Jeg har en sikkerhetskopi-fil",
+        "enter_seed_or_phrase": "Angi gjenopprettingsfrase eller hovednøkkel",
+        "upload_seedvault_or_stronghold": "Importer en Stronghold eller SeedVault-fil",
         "import": "Importer",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Språk",
         "appearance": "Utseende",
-        "lightTheme": "Lyst tema",
-        "darkTheme": "Mørkt tema",
-        "totalBalance": "Samlet saldo",
-        "accountBalance": "Account Balance",
+        "light_theme": "Lyst tema",
+        "dark_theme": "Mørkt tema",
+        "total_balance": "Samlet saldo",
+        "account_balance": "Kontosaldo",
         "incoming": "Innkommende",
         "outgoing": "Utgående",
         "accounts": "Kontoer",
@@ -496,56 +493,56 @@
         "security": "Sikkerhet",
         "accountAddress": "Kontoadresse",
         "nodes": "Noder",
-        "wallet": "Wallet",
-        "help": "Help",
-        "you": "You",
-        "messageId": "Message ID",
-        "inputAddress": "Input Address",
-        "receiveAddress": "Receive Address",
-        "date": "Date",
-        "noAccounts": "You have no accounts, please create one.",
-        "loadingAccounts": "Loading, please wait...",
-        "addProfile": "Add Profile",
-        "noRecentHistory": "No recent history",
-        "transferSyncing": "Syncing account",
-        "transferSelectingInputs": "Selecting inputs",
-        "transferRemainderAddress": "Generating remainder deposit address",
-        "transferSigning": "Signing the transaction",
-        "transferPow": "Performing PoW",
-        "transferBroadcasting": "Broadcasting transaction",
-        "transferComplete": "Transfer complete",
-        "creatingAccount": "Creating account, please wait...",
-        "updatingAccount": "Updating account, please wait...",
-        "accountSyncing": "Account is syncing",
-        "accountSyncComplete": "Account sync complete",
-        "passwordUpdating": "Updating password...",
-        "passwordSuccess": "Updated password successfully",
-        "passwordFailed": "Updating password failed",
-        "exportingStronghold": "Exporting stronghold...",
-        "exportingStrongholdSuccess": "Exported stronghold successfully",
-        "exportingStrongholdFailed": "Exported stronghold failed",
-        "pinCodeUpdating": "Updating PIN code...",
-        "pinCodeSuccess": "Updated PIN code successfully",
-        "pinCodeFailed": "Updating PIN code failed"
+        "wallet": "Lommebok",
+        "help": "Hjelp",
+        "you": "Du",
+        "messageId": "Meldings-ID",
+        "input_address": "Oppgi adresse",
+        "receive_address": "Mottaksadresse",
+        "date": "Dato",
+        "no_accounts": "Du har ingen kontoer, vennligst opprett en.",
+        "loading_accounts": "Laster inn, vennligst vent...",
+        "add_profile": "Legg til profil",
+        "no_recent_history": "Ingen nylig historie",
+        "transferSyncing": "Synkroniser konto",
+        "transferSelectingInputs": "Velger inndata",
+        "transferRemainderAddress": "Genererer innskuddsadresse for overskudd",
+        "transferSigning": "Signerer transaksjonen",
+        "transferPow": "Utfører bevis på arbeid",
+        "transferBroadcasting": "Promoterer transaksjonen",
+        "transferComplete": "Overføring fullført",
+        "creatingAccount": "Oppretter konto, vennligst vent...",
+        "updatingAccount": "Oppdaterer konto, vennligst vent...",
+        "accountSyncing": "Kontoen synkroniserer",
+        "accountSyncComplete": "Synkronisering av konto fullført",
+        "passwordUpdating": "Oppdater passord...",
+        "passwordSuccess": "Oppdatering av passord var vellykket",
+        "passwordFailed": "Oppdatering av passord mislyktes",
+        "exportingStronghold": "Eksporter Stronghold...",
+        "exportingStrongholdSuccess": "Eksportering av Stronghold var vellykket",
+        "exportingStrongholdFailed": "Eksportering av Stronghold feilet",
+        "pinCodeUpdating": "Oppdaterer PIN-kode...",
+        "pinCodeSuccess": "Oppdatering av PIN-kode var vellykket",
+        "pinCodeFailed": "Oppdatering av PIN-kode feilet"
     },
     "dates": {
-        "today": "Today",
-        "daysAgo": "{time, plural, one {# day} other {# days}} ago",
-        "weeksAgo": "{time, plural, one {# week} other {# weeks}} ago",
-        "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
-        "yearsAgo": "{time, plural, one {# year} other {# years}} ago"
+        "today": "I dag",
+        "days_ago": "{time, plural, one {# dag} other {# dager}} siden",
+        "weeks_ago": "{time, plural, one {# uke} other {# uker}} siden",
+        "months_ago": "{time, plural, one {# måned} other {# måneder}} siden",
+        "years_ago": "{time, plural, one {# år} other {# år}} siden"
     },
     "notifications": {
         "valueTx": "Mottar {{value}} til {{account}}",
         "confirmed": "Utgående {{value}} fra {{account}} er bekreftet",
         "failed": "Utgående {{value}} fra {{account}} mislyktes",
-        "downloadingUpdate": "Downloading update",
-        "updateReady": "Update ready",
-        "updateError": "An error occurred during the update, please try again",
-        "restartInstall": "Restart to install",
-        "calcMinutesRemaining": "Calculating minutes remaining...",
-        "minutesRemaining": "{minutes, plural, one {1 minutt gjenstår} other {# minutter gjenstår}}",
-        "copiedToClipboard": "Copied to clipboard"
+        "downloading_update": "Laster ned oppdatering",
+        "update_ready": "Oppdatering klar",
+        "update_error": "Det oppsto en feil under oppdateringen, vennligst prøv igjen",
+        "restart_install": "Start på nytt for å installere",
+        "calc_minutes_remaining": "Beregner minutter som gjenstår...",
+        "minutes_remaining": "{minutes, plural, one {1 minutt gjenstår} other {# minutter gjenstår}}",
+        "copied_to_clipboard": "Kopiert til utklippstavle"
     },
     "error": {
         "profile": {
@@ -601,10 +598,10 @@
         "backup": {
             "invalid": "Sikkerhetskopifilen ble ikke gjenkjent.",
             "destination": "Målet for sikkerhetskopieringen var ikke gyldig.",
-            "mnemonic": "The mnemonic is not valid.",
-            "seedTooShort": "Hovednøkkelen skal bestå av 81 tegn. Den {length, plural, one {is 1} other {inneholder nå #}}.",
+            "mnemonic": "Huskeregelen er ugyldig.",
+            "seedTooShort": "Hovednøkkelen skal bestå av 81 tegn. Den {length, plural, one {inneholder nå 1} other {inneholder nå #}}",
             "seedCharacters": "Hovednøkkelen skal kun inneholde bokstavene A-Z og tallet 9.",
-            "phraseWordCount": "Gjenopprettingsfrasen din skal inneholde 24 ord. Akkurat nå {length, plural, one {is 1} other {inneholder den #}}.",
+            "phraseWordCount": "Gjenopprettingsfrasen din skal inneholde 24 ord. Akkurat nå {length, plural, one {inneholder den 1} other {inneholder den #}}",
             "phraseUnrecognizedWord": "Ukjent ord \"{word}\" i gjenopprettingsfrasen din."
         }
     }

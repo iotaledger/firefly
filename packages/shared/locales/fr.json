@@ -219,7 +219,7 @@
                 "description": ""
             },
             "diagnostics": {
-                "title": "Diagnostics",
+                "title": "Diagnostiques",
                 "description": ""
             },
             "stateExport": {
@@ -342,18 +342,15 @@
             "confirmation": "Êtes-vous sûr de vouloir supprimer ce profil? Cette opération ne peut pas être annulée."
         },
         "diagnostics": {
-            "title": "Diagnostics",
-            "node": "Node",
-            "language": "Node",
-            "currency": "Node",
-            "platform": "Platform",
-            "platformVersion": "Platform Version",
-            "platformType": "Platform Type",
-            "platformArchitecture": "Platform Architecture",
-            "cpuCount": "CPU Count",
-            "totalMem": "Total Memory",
-            "freeMem": "Free Memory",
-            "userPath": "User Path"
+            "title": "Diagnostiques",
+            "node": "Noeud",
+            "platform": "Plateforme",
+            "platformVersion": "Version de la plateforme",
+            "platformArchitecture": "Architecture de la plateforme",
+            "cpuCount": "Nombre de CPUs",
+            "totalMem": "Mémoire totale",
+            "freeMem": "Mémoire disponible",
+            "userPath": "Chemin utilisateur"
         }
     },
     "charts": {
@@ -499,9 +496,9 @@
         "wallet": "Portefeuille",
         "help": "Aide",
         "you": "Vous",
-        "messageId": "Message ID",
-        "inputAddress": "Adresses entrantes",
-        "receiveAddress": "Adresse de réception",
+        "messageId": "ID du message",
+        "input_address": "Adresses entrantes",
+        "receive_address": "Adresse de réception",
         "date": "Date",
         "noAccounts": "Vous n'avez pas de compte, veuillez en créer un.",
         "loadingAccounts": " Chargement, veuillez patienter...",
@@ -539,13 +536,13 @@
         "valueTx": "Réception de {{value}} sur {{account}}",
         "confirmed": "Envoi de {{value}} depuis {{account}} confirmé",
         "failed": "Envoi de {{value}} depuis {{account}} en échec",
-        "downloadingUpdate": "Téléchargement de la mise à jour",
-        "updateReady": "Mise à jour prête",
-        "updateError": "Une erreur s'est produite pendant la mise à jour, veuillez réessayer",
-        "restartInstall": "Redémarrer pour installer",
-        "calcMinutesRemaining": "Calcul des minutes restantes...",
-        "minutesRemaining": "{minutes, plural, one {Il reste 1 minute} other {# minutes restantes}}",
-        "copiedToClipboard": "Copied to clipboard"
+        "downloading_update": "Téléchargement de la mise à jour",
+        "update_ready": "Mise à jour prête",
+        "update_error": "Une erreur s'est produite pendant la mise à jour, veuillez réessayer",
+        "restart_install": "Redémarrer pour installer",
+        "calc_minutes_remaining": "Calcul des minutes restantes...",
+        "minutes_remaining": "{minutes, plural, one {Il reste 1 minute} other {# minutes restantes}}",
+        "copied_to_clipboard": "Copié dans le presse-papier"
     },
     "error": {
         "profile": {
