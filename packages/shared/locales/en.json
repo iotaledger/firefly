@@ -121,7 +121,7 @@
             "body_1": "You have funds detected on a spent address. ",
             "body_2": "These are at risk of theft.",
             "body_3": "We recommend you run an automated process to help secure and transfer your funds safely.",
-            "learn": "Learn about spent addresses",
+            "learn": "Learn about spent addresses"
         },
         "migrate_failed": {
             "title": "To do",
