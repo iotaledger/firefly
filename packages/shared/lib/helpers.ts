@@ -91,13 +91,13 @@ export const diffDates = (firstDate: Date, secondDate: Date) => {
     const years = Math.floor(months / 12)
 
     if (years > 0) {
-        return { unit: 'years_ago', value: years }
+        return { unit: 'yearsAgo', value: years }
     } else if (months > 0) {
-        return { unit: 'months_ago', value: months }
+        return { unit: 'monthsAgo', value: months }
     } else if (weeks > 0) {
-        return { unit: 'weeks_ago', value: weeks }
+        return { unit: 'weeksAgo', value: weeks }
     } else if (days > 0) {
-        return { unit: 'days_ago', value: days }
+        return { unit: 'daysAgo', value: days }
     } else {
         return { unit: 'today' }
     }

@@ -33,12 +33,17 @@
         {#if !$currentAccount}
             <div>
                 <div class="w-full flex flex-row justify-between items-start">
-                    <Text type="h5" classes="mb-6">{locale('general.receive_funds')}</Text>
+                    <Text type="h5" classes="mb-6">{locale('general.receiveFunds')}</Text>
                     <button on:click={handleCloseClick}>
                         <Icon icon="close" classes="text-gray-800 dark:text-white" />
                     </button>
                 </div>
-                <Dropdown valueKey={'alias'} value={selectedAccount.alias} items={$accounts} onSelect={handleDropdownSelect} disabled={$accounts.length === 1} />
+                <Dropdown
+                    valueKey={'alias'}
+                    value={selectedAccount.alias}
+                    items={$accounts}
+                    onSelect={handleDropdownSelect}
+                    disabled={$accounts.length === 1} />
             </div>
         {/if}
         <div
@@ -53,14 +58,11 @@
                 <QR size={98} data={selectedAccount.depositAddress} />
             </div>
             <div class="mb-6">
-                <Text secondary smaller classes="mb-1">{locale('general.my_address')}</Text>
+                <Text secondary smaller classes="mb-1">{locale('general.myAddress')}</Text>
                 <Text type="pre">{selectedAccount.depositAddress}</Text>
             </div>
-            <Button
-                disabled={isGeneratingAddress}
-                classes="w-full"
-                onClick={() => setClipboard(selectedAccount.depositAddress)}>
-                {locale('general.copy_address')}
+            <Button disabled={isGeneratingAddress} classes="w-full" onClick={() => setClipboard(selectedAccount.depositAddress)}>
+                {locale('general.copyAddress')}
             </Button>
         </div>
     </div>

@@ -68,12 +68,16 @@
 
 {#if canDelete}
     <div class="mb-5">
-        <Text type="h4">{locale(`popups.delete_account.${hasMultipleAccounts ? "title" : "error_title"}`, { values: { name: $account?.alias } })}</Text>
+        <Text type="h4">
+            {locale(`popups.deleteAccount.${hasMultipleAccounts ? 'title' : 'errorTitle'}`, {
+                values: { name: $account?.alias },
+            })}
+        </Text>
     </div>
     <div class="flex w-full flex-row flex-wrap">
         {#if hasMultipleAccounts}
-            <Text type="p" secondary classes="mb-5">{locale('popups.delete_account.body')}</Text>
-            <Text type="p" secondary classes="mb-3">{locale('popups.delete_account.type_password')}</Text>
+            <Text type="p" secondary classes="mb-5">{locale('popups.deleteAccount.body')}</Text>
+            <Text type="p" secondary classes="mb-3">{locale('popups.deleteAccount.typePassword')}</Text>
             <Password
                 {error}
                 classes="w-full mb-8"
@@ -85,7 +89,7 @@
                 submitHandler={() => handleDeleteClick()}
                 disabled={isBusy} />
         {:else}
-            <Text type="p" secondary classes="mb-5">{locale('popups.delete_account.error_body_3')}</Text>
+            <Text type="p" secondary classes="mb-5">{locale('popups.deleteAccount.errorBody3')}</Text>
         {/if}
         <div class={`flex flex-row w-full space-x-4 px-8 ${hasMultipleAccounts ? 'justify-between' : 'justify-center'}`}>
             <Button secondary classes="w-1/2" onClick={() => handleCancelClick()} disabled={isBusy}>
@@ -93,23 +97,23 @@
             </Button>
             {#if hasMultipleAccounts}
                 <Button warning classes="w-1/2" onClick={() => handleDeleteClick()} type="submit" disabled={!password || isBusy}>
-                    {locale('actions.delete_account')}
+                    {locale('actions.deleteAccount')}
                 </Button>
             {/if}
         </div>
     </div>
 {:else}
     <div class="mb-5">
-        <Text type="h4">{locale('popups.delete_account.error_title', { values: { name: $account?.alias } })}</Text>
+        <Text type="h4">{locale('popups.deleteAccount.errorTitle', { values: { name: $account?.alias } })}</Text>
     </div>
     <div class="flex w-full flex-row flex-wrap">
-        <Text type="p" secondary classes="mb-3">{locale('popups.delete_account.error_body_1')}</Text>
+        <Text type="p" secondary classes="mb-3">{locale('popups.deleteAccount.errorBody1')}</Text>
         <Text type="p" secondary classes="mb-5">
-            {locale('popups.delete_account.error_body_2', { values: { balance: $account?.balance } })}
+            {locale('popups.deleteAccount.errorBody2', { values: { balance: $account?.balance } })}
         </Text>
         <div class="flex flex-row justify-between w-full space-x-4 px-8">
             <Button secondary classes="w-1/2" onClick={() => handleCancelClick()}>{locale('actions.dismiss')}</Button>
-            <Button classes="w-1/2" onClick={() => handleMoveFundsClick()}>{locale('general.move_funds')}</Button>
+            <Button classes="w-1/2" onClick={() => handleMoveFundsClick()}>{locale('general.moveFunds')}</Button>
         </div>
     </div>
 {/if}
