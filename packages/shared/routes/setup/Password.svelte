@@ -3,7 +3,7 @@
     import { createEventDispatcher } from 'svelte'
     import { OnboardingLayout, Password, Illustration, Text, Button } from 'shared/components'
     import { api, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
-    import passwordInfo from 'shared/lib/password';
+    import passwordInfo from 'shared/lib/password'
 
     export let locale
     export let mobile
@@ -18,17 +18,17 @@
 
     function handleContinueClick() {
         if (password.length > MAX_PASSWORD_LENGTH) {
-            error = locale('error.password.length', { 
+            error = locale('error.password.length', {
                 values: {
-                    length: MAX_PASSWORD_LENGTH
-                }
+                    length: MAX_PASSWORD_LENGTH,
+                },
             })
         } else if (password !== confirmedPassword) {
             error = locale('error.password.doNotMatch')
         } else if (passwordStrength.score !== 4) {
             error = passwordStrength.feedback.warning
                 ? locale(`error.password.${passwordInfo[passwordStrength.feedback.warning]}`)
-                : locale('error.password.tooWeak');
+                : locale('error.password.tooWeak')
         } else {
             api.setStrongholdPassword(password, {
                 onSuccess() {
@@ -61,20 +61,18 @@
                     showRevealToggle
                     showStrengthLevel
                     strength={passwordStrength.score}
-                    {locale} 
-                    autofocus
-                />
-                <Password 
-                    bind:value={confirmedPassword} 
-                    {locale} 
-                    placeholder={locale('general.confirm_password')} 
-                    showRevealToggle
-                />
+                    {locale}
+                    autofocus />
+                <Password
+                    bind:value={confirmedPassword}
+                    {locale}
+                    placeholder={locale('general.confirmPassword')}
+                    showRevealToggle />
             </form>
         </div>
         <div slot="leftpane__action">
             <Button type="submit" form="password-form" classes="w-full" disabled={!password || !confirmedPassword}>
-                {locale('actions.save_password')}
+                {locale('actions.savePassword')}
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-end items-center">

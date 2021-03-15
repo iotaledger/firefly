@@ -27,7 +27,7 @@
 
 <div data-label="latest-transactions" class="h-full p-8 flex-grow flex flex-col">
     <div class="w-full flex flex-row justify-between items-start">
-        <Text type="p" smaler bold classes="mb-5">{locale('general.latest_transactions')}</Text>
+        <Text type="p" smaler bold classes="mb-5">{locale('general.latestTransactions')}</Text>
         <button on:click={syncAccounts} class:pointer-events-none={$isSyncing}>
             <Icon icon="refresh" classes="{$isSyncing && 'animate-spin'} text-gray-500 dark:text-white" />
         </button>
@@ -42,7 +42,7 @@
             {/each}
         {:else}
             <div class="h-full flex flex-col items-center justify-center text-center">
-                <Text secondary>{locale('general.no_recent_history')}</Text>
+                <Text secondary>{locale('general.noRecentHistory')}</Text>
             </div>
         {/if}
     </div>

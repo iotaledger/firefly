@@ -36,13 +36,13 @@
             on:click={() => handleSettingsClick()}
             class="group flex flex-row justify-start items-center hover:bg-blue-50 py-3 px-3 w-full">
             <Icon icon="settings" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
-            <Text smaller classes="group-hover:text-blue-500">{locale(`views.dashboard.profile_modal.all_settings`)}</Text>
+            <Text smaller classes="group-hover:text-blue-500">{locale(`views.dashboard.profileModal.allSettings`)}</Text>
         </button>
         <button
             on:click={() => handleLogoutClick()}
             class="group flex flex-row justify-start items-center hover:bg-blue-50 py-3 px-3 w-full">
             <Icon icon="logout" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
-            <Text smaller classes="group-hover:text-blue-500">{locale(`views.dashboard.profile_modal.logout`)}</Text>
+            <Text smaller classes="group-hover:text-blue-500">{locale(`views.dashboard.profileModal.logout`)}</Text>
         </button>
     </profile-modal-content>
 </Modal>

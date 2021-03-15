@@ -37,12 +37,12 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
-            <Text type="h2" classes="mb-5">{locale('views.import_from_file.title')}</Text>
-            <Text type="p" secondary classes="mb-8">{locale('views.import_from_file.body')}</Text>
+            <Text type="h2" classes="mb-5">{locale('views.importFromFile.title')}</Text>
+            <Text type="p" secondary classes="mb-8">{locale('views.importFromFile.body')}</Text>
             <Dropzone
                 {onDrop}
                 {locale}
-                extentionsLabel={locale('actions.import_extentions')}
+                extentionsLabel={locale('actions.importExtentions')}
                 allowedExtensions=".kdbx,.stronghold" />
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">

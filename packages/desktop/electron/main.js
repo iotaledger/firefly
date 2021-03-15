@@ -252,6 +252,9 @@ ipcMain.handle('keychain-remove', (_e, key) => {
 ipcMain.handle('show-open-dialog', (_e, options) => {
     return dialog.showOpenDialog(options)
 })
+ipcMain.handle('show-save-dialog', (_e, options) => {
+    return dialog.showSaveDialog(options)
+})
 
 // Miscellaneous
 ipcMain.handle('get-path', (_e, path) => {
@@ -269,8 +272,8 @@ ipcMain.handle('diagnostics', (_e) => {
         { label: 'popups.diagnostics.platformVersion', value: os.release() },
         { label: 'popups.diagnostics.platformArchitecture', value: os.arch() },
         { label: 'popups.diagnostics.cpuCount', value: os.cpus().length },
-        { label: 'popups.diagnostics.totalMem', value: `${(os.totalmem() / 1048576 ).toFixed(1)} GB` },
-        { label: 'popups.diagnostics.freeMem', value: `${(os.freemem() / 1048576 ).toFixed(1)} GB` },
+        { label: 'popups.diagnostics.totalMem', value: `${(os.totalmem() / 1048576 ).toFixed(1)} MB` },
+        { label: 'popups.diagnostics.freeMem', value: `${(os.freemem() / 1048576 ).toFixed(1)} MB` },
         { label: 'popups.diagnostics.userPath', value: app.getPath('userData') },
     ]
     return diagnostics

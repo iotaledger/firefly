@@ -171,7 +171,6 @@
             <Radio value={false} bind:group={automaticNodeSelection} label={locale('general.manualNodeSelection')} />
         </section>
         <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
-
         {#if !automaticNodeSelection}
             <section id="configureNodeList" class="w-3/4">
                 <Text type="h4" classes="mb-3">{locale('views.settings.configureNodeList.title')}</Text>
@@ -188,18 +187,17 @@
 
                 <!-- As client options (nodes) have association with accounts, disable "Add node" button if there are no accounts in wallet -->
                 <Button classes="w-1/4 mt-4" disabled={!$accounts.length} onClick={() => handleAddNodeClick()}>
-                    {locale('actions.add_node')}
+                    {locale('actions.addNode')}
                 </Button>
                 <Button
                     classes="w-1/2 mt-4"
                     onClick={() => handleRemoveNodeClick()}
                     disabled={!$activeProfile?.settings.customNodes.find((n) => n.url === $activeProfile?.settings.node?.url)}>
-                    {locale('actions.remove_node')}
+                    {locale('actions.removeNode')}
                 </Button>
             </section>
             <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
         {/if}
-
         <section id="proofOfWork" class="w-3/4 opacity-50">
             <Text type="h4" classes="mb-3">{locale('views.settings.proofOfWork.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.proofOfWork.description')}</Text>
