@@ -219,7 +219,7 @@
                 "description": ""
             },
             "diagnostics": {
-                "title": "Diagnostics",
+                "title": "Diagnostik",
                 "description": ""
             },
             "stateExport": {
@@ -342,18 +342,15 @@
             "confirmation": "Är du säker på att du vill ta bort denna profil? Denna åtgärd kan inte ångras."
         },
         "diagnostics": {
-            "title": "Diagnostics",
-            "node": "Node",
-            "language": "Node",
-            "currency": "Node",
-            "platform": "Platform",
-            "platformVersion": "Platform Version",
-            "platformType": "Platform Type",
-            "platformArchitecture": "Platform Architecture",
-            "cpuCount": "CPU Count",
-            "totalMem": "Total Memory",
-            "freeMem": "Free Memory",
-            "userPath": "User Path"
+            "title": "Diagnostik",
+            "node": "Nod",
+            "platform": "Plattform",
+            "platformVersion": "Plattformsversion",
+            "platformArchitecture": "Plattformsarkitektur",
+            "cpuCount": "Processorantal",
+            "totalMem": "Totalt minne",
+            "freeMem": "Ledigt minne",
+            "userPath": "Sökväg för användare"
         }
     },
     "charts": {
@@ -499,7 +496,7 @@
         "wallet": "Plånbok",
         "help": "Hjälp",
         "you": "Du",
-        "messageId": "Message ID",
+        "messageId": "Meddelande-ID",
         "input_address": "Inmatningsadress",
         "receive_address": "Mottagaradress",
         "date": "Datum",
@@ -545,7 +542,7 @@
         "restart_install": "Starta om för att installera",
         "calc_minutes_remaining": "Beräknar minuter kvar...",
         "minutes_remaining": "{minutes, plural, one {1 minut kvar} other {# minuter kvar}}",
-        "copied_to_clipboard": "Copied to clipboard"
+        "copied_to_clipboard": "Kopierad till urklipp"
     },
     "error": {
         "profile": {
