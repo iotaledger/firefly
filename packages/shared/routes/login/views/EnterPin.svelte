@@ -115,9 +115,9 @@
             class="absolute top-12 left-5 disabled:opacity-50 cursor-pointer disabled:cursor-auto"
             disabled={hasReachedMaxAttempts}
             on:click={handleBackClick}>
-            <div class="flex items-center">
+            <div class="flex items-center space-x-2">
                 <Icon icon="arrow-left" classes="text-blue-500" />
-                <Text type="h4" classes="ml-6">{locale('general.profiles')}</Text>
+                <Text type="h4">{locale('general.profiles')}</Text>
             </div>
         </button>
         <div class="pt-40 pb-16 flex w-full h-full flex-col items-center justify-between">

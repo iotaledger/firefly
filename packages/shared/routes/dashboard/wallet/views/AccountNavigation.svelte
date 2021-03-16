@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Text } from 'shared/components'
+    import { Button, Text, Icon } from 'shared/components'
     import { getInitials } from 'shared/lib/helpers'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
@@ -28,9 +28,12 @@
 </script>
 
 <div class="relative flex flex-row justify-center items-center w-full py-5">
-    <div class="absolute left-0">
-        <Button secondary small icon="arrow-left" iconReverse onClick={handleBackClick}>{locale('actions.back')}</Button>
-    </div>
+    <button data-label="back-button" class="absolute left-0" on:click={handleBackClick}>
+        <div class="flex items-center space-x-2">
+            <Icon icon="arrow-left" classes="text-blue-500" />
+            <Text type="h4">{locale('actions.back')}</Text>
+        </div>
+    </button>
     <Text type="h3" classes="text-center">{activeAccount.alias}</Text>
     <div class="absolute right-0 flex flex-row space-x-4 account-switch">
         {#each accounts as acc}

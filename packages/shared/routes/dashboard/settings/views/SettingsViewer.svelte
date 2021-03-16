@@ -43,9 +43,9 @@
 {:else}
     <div class="flex flex-1 flex-row items-start">
         <button data-label="back-button" class="absolute top-8 left-8" on:click={handleBackClick}>
-            <div class="flex items-center">
+            <div class="flex items-center space-x-2">
                 <Icon icon="arrow-left" classes="text-blue-500" />
-                <Text type="h4" classes="ml-6">{locale('actions.back')}</Text>
+                <Text type="h4">{locale('actions.back')}</Text>
             </div>
         </button>
         <SettingsNavigator
