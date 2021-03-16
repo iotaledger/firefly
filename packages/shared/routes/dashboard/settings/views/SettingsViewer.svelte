@@ -1,9 +1,11 @@
 <script lang="typescript">
     import { Icon, Scroller, SettingsNavigator, Text } from 'shared/components'
-    import { settingsRoute } from 'shared/lib/router'
+    import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import { AdvancedSettings, GeneralSettings, HelpAndInfo, SecuritySettings, SettingsRoutes } from 'shared/lib/typings/routes'
+    import { onMount } from 'svelte'
     import { Advanced, General, Security } from './'
+
     export let locale
     export let mobile
 
@@ -34,6 +36,12 @@
     function goToSettingsHome() {
         settingsRoute.set(SettingsRoutes.Init)
     }
+    onMount(() => {
+        const child = $settingsChildRoute
+        if (child) {
+            scrollIntoView(child)
+        }
+    })
 </script>
 
 {#if mobile}
