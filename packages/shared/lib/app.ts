@@ -86,7 +86,6 @@ export const logout = () => {
         resetWallet()
         resetRouter()
         clearActiveProfile()
-        mnemonic.set(null)
     }
 
     if (!ap?.isStrongholdLocked) {
