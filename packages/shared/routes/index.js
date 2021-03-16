@@ -12,6 +12,10 @@ export { default as Import } from 'shared/routes/setup/import/Import.svelte'
 export { default as Balance } from 'shared/routes/setup/Balance.svelte'
 export { default as Migrate } from 'shared/routes/setup/Migrate.svelte'
 export { default as Congratulations } from 'shared/routes/setup/Congratulations.svelte'
+export { default as BundleMiningWarning } from 'shared/routes/setup/BundleMiningWarning.svelte'
+export { default as SecuringSpentAddresses } from 'shared/routes/setup/SecuringSpentAddresses.svelte'
+export { default as TransferFragmentedFunds } from 'shared/routes/setup/TransferFragmentedFunds.svelte'
+
 // dashboard
 export { default as Dashboard } from 'shared/routes/dashboard/Dashboard.svelte'
 export { default as Wallet } from 'shared/routes/dashboard/wallet/Wallet.svelte'

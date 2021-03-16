@@ -81,8 +81,9 @@
             "body": "You have backed up your wallet to a Stronghold."
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your wallet is ready to go."
+            "title": "Funds migrated",
+            "body": "You have successfully migrated all your funds to the new network",
+            "export_migration": "Export migration log and finish Setup"
         },
         "import": {
             "title": "Import a wallet",
@@ -114,7 +115,31 @@
             "body1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
             "body2": "It may take some time. Do not turn off your device during the migration.",
             "existing": "Your old wallet",
-            "new": "Your new wallet"
+            "new": "Your new wallet",
+            "learn": "Learn about the migration",
+            "beginMigration": "Begin Migration",
+            "migrating": "Migrating funds...",
+            "migrated": "migrated",
+            "migrationFailed": "Migration Failed"
+        },
+        "bundleMiningWarning": {
+            "title": "Warning",
+            "body_1": "You have funds detected on a spent address. ",
+            "body_2": "These are at risk of theft.",
+            "body_3": "We recommend you run an automated process to help secure and transfer your funds safely.",
+            "learn": "Learn about spent addresses"
+        },
+        "securing_spent_addresses":{
+            "title": "Securing spent addresses...",
+            "body_1": "You have funds detected on a spent address.",
+            "body_2": "These are at risk of theft.",
+            "body_3": "We recommend you run this automated process to help secure and transfer your funds safely.",
+            "learn": "Learn about spent addresses"
+        },
+        "transferFragmentedFunds":{
+            "body1": "You have too many addresses to migrate in one transaction. In order to migrate your funds to the new network, you must send multiple transactions.",
+            "migrate": "Migrate funds",
+            "transaction": "Transaction"
         },
         "migrateFailed": {
             "title": "To do",
