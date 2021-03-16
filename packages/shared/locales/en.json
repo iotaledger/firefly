@@ -112,8 +112,8 @@
         },
         "migrate": {
             "title": "Migrate your funds",
-            "body1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
-            "body2": "It may take some time. Do not turn off your device during the migration.",
+            "body_1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
+            "body_2": "It may take some time. Do not turn off your device during the migration.",
             "existing": "Your old wallet",
             "new": "Your new wallet",
             "learn": "Learn about the migration",
