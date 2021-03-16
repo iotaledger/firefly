@@ -59,7 +59,7 @@
                 classes="w-full" onClick={() => handleContinueClick()}>
                     <Spinner busy={loading} message={migratingFundsMessage} classes="justify-center" />
                     {#if !loading}
-                        Begin migration
+                        {locale('views.migrate.beginMigration')}
                     {/if}
                 </Button>
                 <div on:click={learnAboutMigrationsClick}>

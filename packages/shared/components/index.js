@@ -40,6 +40,7 @@ export { default as Toast } from './Toast.svelte'
 export { default as ProgressBar } from './ProgressBar.svelte'
 export { default as Spinner } from './Spinner.svelte'
 export { default as TransactionItem } from './TransactionItem.svelte'
+export { default as Tooltip } from './Tooltip.svelte'
 
 export * from './modals'
 // Charts

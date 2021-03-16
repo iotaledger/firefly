@@ -114,7 +114,10 @@
             "body_1": "This is an automated process to transfer your existing funds to the new network.",
             "body_2": "Your funds will be locked until the Chrysalis network goes live in Aril 2021",
             "learn": "Learn about the migration",
-            "migrating": "Migrating funds..."
+            "beginMigration": "Begin Migration",
+            "migrating": "Migrating funds...",
+            "migrated": "migrated",
+            "migrationFailed": "Migration Failed"
         },
         "bundleMiningWarning": {
             "title": "Warning",
@@ -130,9 +133,10 @@
             "body_3": "We recommend you run this automated process to help secure and transfer your funds safely.",
             "learn": "Learn about spent addresses"
         },
-        "transfer_fragmented_funds":{
-            "body_1": "You have too many addresses to migrate in one transaction. In order to migrate your funds to the new network, you must send multiple transactions.",
-            "migrate": "Migrate funds"
+        "transferFragmentedFunds":{
+            "body1": "You have too many addresses to migrate in one transaction. In order to migrate your funds to the new network, you must send multiple transactions.",
+            "migrate": "Migrate funds",
+            "transaction": "Transaction"
         },
         "migrate_failed": {
             "title": "To do",

@@ -5,13 +5,8 @@
     export let mobile
 
     const dispatch = createEventDispatcher()
-    let progressBarWidth = 0
+    let progressBarPercent = 0
     let progressBarMessage = ''
-
-    function setProgressBar(percent){
-        progressBarWidth = percent < 4 ? 4 : percent;
-        progressBarMessage = progressBarWidth.toString() +'% Completed'
-    }
 
     //TODO:
     const learnClick = () => {
@@ -24,8 +19,8 @@
     }
     //TODO: retrieve progress and call setProgressBar() to fill it up
     setInterval(() => { 
-        let random = Math.floor(Math.random() * 101)
-        setProgressBar(random)
+        progressBarPercent = Math.floor(Math.random() * 101)  
+        progressBarMessage = progressBarPercent.toString()+'% completed'
     }, 2500)
 
 </script>
@@ -36,7 +31,7 @@
     <BundleMiningLayout>
         <div slot="icon_boxed">
             <div class="flex justify-center items-center rounded-2xl w-12 h-12 bg-blue-500 shadow-lg">
-                <Icon boxed="true" icon="refresh" classes="text-white" />
+                <Icon boxed="true" icon="history" classes="text-white" />
             </div>
         </div>
         <div slot="box_content">
@@ -49,7 +44,7 @@
             </div>
         </div>
         <div slot="actions" class="w-2/5 mt-8">
-            <ProgressBar width={progressBarWidth} message={progressBarMessage}></ProgressBar>
+            <ProgressBar percent={progressBarPercent} message={progressBarMessage}></ProgressBar>
             <div on:click={handleCancelClick}>
                 <Text type="p" secondary highlighted classes="py-3.5 mt-4 font-bold cursor-pointer text-center">{locale('actions.cancel')}</Text>
             </div>
