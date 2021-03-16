@@ -215,5 +215,4 @@ export const resetRouter = () => {
     settingsRoute.set(SettingsRoutes.Init)
     dashboardRoute.set(Tabs.Wallet)
     deepLinkRequestActive.set(false)
-    loggedIn.set(false)
 }
