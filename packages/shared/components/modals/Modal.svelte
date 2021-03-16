@@ -3,9 +3,16 @@
     import { clickOutside } from 'shared/lib/actions'
 
     export let isActive = false
-    export let position = {}
+    export let position: {left?: number, right?: number, top?: number, bottom?: number} = {}
 
-    const { top = 'inherit', right = 'inherit', bottom = 'inherit', left = 'inherit' } = position
+    let style;
+
+    $: {
+        style = ''
+        for (const prop in position) {
+            style += `${prop}: ${position[prop]};`;
+        }
+    }
 </script>
 
 <style type="text/scss">
@@ -13,10 +20,6 @@
         position: absolute;
         min-width: 230px;
         box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-        top: var(--modal-position-top);
-        right: var(--modal-position-right);
-        bottom: var(--modal-position-bottom);
-        left: var(--modal-position-left);
     }
 </style>
 
@@ -26,7 +29,7 @@
         use:clickOutside
         on:clickOutside={() => (isActive = false)}
         class="bg-white dark:bg-gray-900 border border-solid border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden z-10"
-        style="--modal-position-top: {top}; --modal-position-right: {right}; --modal-position-bottom: {bottom}; --modal-position-left: {left};">
+        {style}>
         <slot />
     </modal-content>
 {/if}

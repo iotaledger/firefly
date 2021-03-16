@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
+    import { dir } from 'shared/lib/i18n'
 
     export let label = undefined
     export let checked = false
@@ -46,6 +47,8 @@
     on:click={() => {
         checked = !checked
     }}>
-    <Icon icon={checked ? 'checkbox' : 'checkbox-unchecked'} classes={`mr-3 ${checked ? 'active' : ''}`} />
+    <Icon
+        icon={checked ? 'checkbox' : 'checkbox-unchecked'}
+        classes={`${$dir === 'ltr' ? 'mr-3' : 'ml-3'} ${checked ? 'active' : ''}`} />
     <Text type="p" secondary={!checked || disabled}>{label}</Text>
 </button>

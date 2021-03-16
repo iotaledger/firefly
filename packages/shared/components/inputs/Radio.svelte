@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Icon } from 'shared/components'
+    import { dir } from 'shared/lib/i18n'
 
     export let value = undefined
     export let group = undefined
@@ -42,7 +43,7 @@
 <label
     class={`w-full flex items-center mb-4 text-12 leading-160 cursor-pointer text-gray-800 dark:text-white ${classes}`}>
     <input class="h-4 w-4 cursor-pointer" type="radio" bind:group {value} />
-    <div class={`mr-3 svg-container rounded-full border border-solid border-gray-300 ${value === group ? "active" : ""}`}>
+    <div class={`${$dir === "ltr" ? "mr-3" : "ml-3"} svg-container rounded-full border border-solid border-gray-300 ${value === group ? "active" : ""}`}>
         <Icon icon={value === group ? 'radio' : 'radio-unchecked'} />
     </div>
     {label}

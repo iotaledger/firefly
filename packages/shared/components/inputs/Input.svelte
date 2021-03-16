@@ -43,7 +43,6 @@
         margin: 0;
     }
     input {
-        padding: 15px 40px 16px 13px;
         color: var(--text-secondary-color);
         background: var(--element-bg-color);
         border-radius: 10px;
@@ -63,7 +62,7 @@
         {value}
         bind:this={inputElement}
         {maxlength}
-        class={`w-full relative text-12 leading-140 py-4 pr-8 pl-4 bg-white border border-solid ${classes} ${error ? 'border-red-300 hover:border-red-500 focus:border-red-500' : 'border-gray-300 hover:border-gray-500 focus:border-gray-500'} rounded-xl text-gray`}
+        class={`w-full relative text-12 leading-140 py-4 px-4 bg-white border border-solid ${classes} ${error ? 'border-red-300 hover:border-red-500 focus:border-red-500' : 'border-gray-300 hover:border-gray-500 focus:border-gray-500'} rounded-xl text-gray`}
         on:input={handleInput}
         on:keypress={onKeyPress}
         {disabled}
