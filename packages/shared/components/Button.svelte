@@ -64,13 +64,6 @@
                 }
             }
         }
-        &:disabled {
-            @apply pointer-events-none;
-            @apply bg-gray-200;
-            span {
-                @apply text-gray-500;
-            }
-        }
         &.secondary {
             @apply border;
             @apply border-solid;
@@ -246,7 +239,11 @@
                 @apply text-gray-500;
             }
             &.darkmode {
-                @apply bg-gray-800;
+                @apply bg-gray-700;
+                @apply bg-opacity-10;
+                span {
+                    @apply text-gray-700;
+                }
             }
         }
     }

@@ -117,9 +117,9 @@
         &:not(.disabled):hover {
             @apply border-gray-500;
         }
-
         &.disabled {
-            @apply cursor-default;
+            @apply pointer-events-none;
+            @apply opacity-50;
         }
         .input-wrapper {
             max-width: 204px;
@@ -134,9 +134,6 @@
                 &:focus {
                     @apply outline-none;
                 }
-                &:disabled {
-                    @apply cursor-default;
-                }
             }
         }
         .input-decorator-wrapper {
@@ -148,9 +145,6 @@
                 @apply bg-gray-400;
                 &.active {
                     @apply bg-blue-500;
-                }
-                &.disabled {
-                    @apply bg-gray-400;
                 }
             }
         }
