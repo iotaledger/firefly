@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { onDestroy } from 'svelte'
     import { Text, Modal } from 'shared/components'
+    import { dir } from 'shared/lib/i18n'
     import { networkStatus } from 'shared/lib/networkStatus'
     export let isActive
     export let locale
@@ -8,6 +9,12 @@
     let healthStatusText = 'networkOperational'
     let messagesPerSecond = 0
     let confirmationRate = 0
+
+    let pos: { [id: string]: string } = { bottom: '24px' }
+    dir.subscribe((val) => {
+        delete pos[val === 'ltr' ? 'right' : 'left']
+        pos[val === 'ltr' ? 'left' : 'right'] = '80px'
+    })
 
     const NETWORK_HEALTH_COLORS = {
         0: 'red',
@@ -27,7 +34,7 @@
     })
 </script>
 
-<Modal bind:isActive position={{ left: '80px', bottom: '25px' }}>
+<Modal bind:isActive position={pos}>
     <network-indicator-content class="flex flex-col">
         <Text type="h3" classes="px-7 pt-5">{locale('views.dashboard.network.status')}</Text>
         <div class="px-7 pb-5 text-13 text-{NETWORK_HEALTH_COLORS[healthStatus]}-500">

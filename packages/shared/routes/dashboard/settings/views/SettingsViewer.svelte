@@ -1,9 +1,11 @@
 <script lang="typescript">
     import { Icon, Scroller, SettingsNavigator, Text } from 'shared/components'
+    import { dir } from 'shared/lib/i18n'
     import { settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import { AdvancedSettings, GeneralSettings, HelpAndInfo, SecuritySettings, SettingsRoutes } from 'shared/lib/typings/routes'
     import { Advanced, General, Security } from './'
+
     export let locale
     export let mobile
 
@@ -40,7 +42,7 @@
     <div>foo</div>
 {:else}
     <div class="relative flex flex-1 flex-row items-start">
-        <button on:click={goToSettingsHome} class="absolute top-0 right-0">
+        <button on:click={goToSettingsHome} class={`absolute top-0 ${$dir === 'ltr' ? 'right-0' : 'left-0'}`}>
             <Icon icon="close" classes="text-gray-800 dark:text-white" />
         </button>
         <SettingsNavigator

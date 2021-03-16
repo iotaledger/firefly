@@ -1,7 +1,6 @@
-
 <script lang="typescript">
-    import Input from './Input'
-    import { Icon } from 'shared/components'
+    import { Icon, Input } from 'shared/components'
+    import { dir } from 'shared/lib/i18n'
 
     export let value = ''
     export let classes = ''
@@ -29,9 +28,6 @@
 
 <style type="text/scss">
     div {
-        button {
-            right: 12px; // TODO: unable to use tailwind inset
-        }
         strength-meter {
             span {
                 width: 22px;
@@ -51,11 +47,14 @@
     {#if showStrengthLevel}
         <strength-meter class="flex flex-row justify-end mb-2">
             {#each Array(strengthLevels) as _, i}
-                <span class="ml-1 w-1.5 h-0.5 rounded-lg bg-gray-300"class:strong={strength === 4} class:weak={i - strength < 0}/>
+                <span
+                    class="ml-1 w-1.5 h-0.5 rounded-lg bg-gray-300"
+                    class:strong={strength === 4}
+                    class:weak={i - strength < 0} />
             {/each}
         </strength-meter>
     {/if}
-    <div class='flex w-full relative'>
+    <div class="flex w-full relative">
         <Input
             {error}
             {type}
@@ -64,12 +63,17 @@
             {numeric}
             {autofocus}
             {disabled}
-            placeholder={placeholder || locale('general.password')} 
+            placeholder={placeholder || locale('general.password')}
             {submitHandler}
             spellcheck="false"
-        />
+            classes={showRevealToggle ? "pr-12" : "pl-12" } />
         {#if showRevealToggle === true && !disabled}
-            <button type="button" on:click={() => revealToggle()} tabindex="-1" class="absolute top-3">
+            <button
+                type="button"
+                on:click={() => revealToggle()}
+                tabindex="-1"
+                class="absolute top-3"
+                style={`${$dir === 'ltr' ? 'right' : 'left'}: 12px`}>
                 <Icon icon={revealed ? 'view' : 'hide'} classes="text-blue-500" />
             </button>
         {/if}
