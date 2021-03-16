@@ -34,7 +34,7 @@
                 items={[{ value: 1, label: 'English' }, { value: 2, label: 'Belula' }]}
                 disabled
                 classes="mb-4 opacity-50" />
-            <div class="pointer-events-none opacity-50">
+            <div>
                 <Text type="p" classes="mb-2 mt-4" smaller>{locale('general.appearance')}</Text>
                 <Radio value={false} bind:group={darkModeEnabled} label={locale('general.lightTheme')} />
                 <Radio value={true} bind:group={darkModeEnabled} label={locale('general.darkTheme')} />
