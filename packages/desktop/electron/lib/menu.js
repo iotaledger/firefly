@@ -64,6 +64,9 @@ const buildTemplate = () => {
                 label: state.strings.settings,
                 click: () => getOrInitWindow('main').webContents.send('menu-navigate-settings'),
             },
+            {
+                type: 'separator',
+            },
         ])
     }
 
@@ -76,6 +79,10 @@ const buildTemplate = () => {
         {
             label: state.strings.errorLog,
             click: () => getOrInitWindow('main').webContents.send('menu-error-log')
+        },
+        {
+            label: state.strings.diagnostics,
+            click: () => getOrInitWindow('main').webContents.send('menu-diagnostics')
         },
         {
             type: 'separator',

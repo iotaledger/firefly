@@ -143,7 +143,7 @@ export const getAccountActivityData = (account: WalletAccount) => {
                     year: 'numeric',
                     month: 'long'
                 }),
-                label: localize('charts.incoming_mi', {
+                label: localize('charts.incomingMi', {
                     values: {
                         value: _incoming
                     }
@@ -154,7 +154,7 @@ export const getAccountActivityData = (account: WalletAccount) => {
                 title: get(i18nDate)(new Date(start), {
                     year: 'numeric',
                     month: 'long'
-                }), label: localize('charts.outgoing_mi', {
+                }), label: localize('charts.outgoingMi', {
                     values: {
                         value: _outgoing
                     }
@@ -169,7 +169,7 @@ export const getAccountActivityData = (account: WalletAccount) => {
                 title: get(i18nDate)(new Date(start), {
                     year: 'numeric',
                     month: 'long'
-                }), label: localize('charts.incoming_mi', {
+                }), label: localize('charts.incomingMi', {
                     values: {
                         value: 0
                     }
@@ -180,7 +180,7 @@ export const getAccountActivityData = (account: WalletAccount) => {
                 title: get(i18nDate)(new Date(start), {
                     year: 'numeric',
                     month: 'long'
-                }), label: localize('charts.outgoing_mi', {
+                }), label: localize('charts.outgoingMi', {
                     values: {
                         value: 0
                     }

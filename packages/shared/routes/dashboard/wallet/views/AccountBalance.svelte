@@ -12,7 +12,7 @@
     <!-- Balance -->
     <div data-label="total-balance">
         <div class="flex flex-row justify-between items-center mb-2">
-            <Text type="p" overrideColor smaller classes="text-white">{locale('general.account_balance')}</Text>
+            <Text type="p" overrideColor smaller classes="text-white">{locale('general.accountBalance')}</Text>
             <button
                 on:click={() => onMenuClick()}
                 class="px-2 py-3 flex flex-row space-x-1 bg-opacity-10 bg-black rounded-lg text-white">

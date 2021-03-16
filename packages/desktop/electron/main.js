@@ -1,6 +1,7 @@
 import { initAutoUpdate } from './lib/appUpdater'
 const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
 const path = require('path')
+const os = require('os')
 const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
 
@@ -251,6 +252,9 @@ ipcMain.handle('keychain-remove', (_e, key) => {
 ipcMain.handle('show-open-dialog', (_e, options) => {
     return dialog.showOpenDialog(options)
 })
+ipcMain.handle('show-save-dialog', (_e, options) => {
+    return dialog.showSaveDialog(options)
+})
 
 // Miscellaneous
 ipcMain.handle('get-path', (_e, path) => {
@@ -259,6 +263,20 @@ ipcMain.handle('get-path', (_e, path) => {
         throw Error(`Path ${path} is not allowed`)
     }
     return app.getPath(path)
+})
+
+// Diagnostics
+ipcMain.handle('diagnostics', (_e) => {
+    const diagnostics = [
+        { label: 'popups.diagnostics.platform', value: os.platform() },
+        { label: 'popups.diagnostics.platformVersion', value: os.release() },
+        { label: 'popups.diagnostics.platformArchitecture', value: os.arch() },
+        { label: 'popups.diagnostics.cpuCount', value: os.cpus().length },
+        { label: 'popups.diagnostics.totalMem', value: `${(os.totalmem() / 1048576 ).toFixed(1)} MB` },
+        { label: 'popups.diagnostics.freeMem', value: `${(os.freemem() / 1048576 ).toFixed(1)} MB` },
+        { label: 'popups.diagnostics.userPath', value: app.getPath('userData') },
+    ]
+    return diagnostics
 })
 
 /**

@@ -1,29 +1,29 @@
 {
     "views": {
-        "onboarding_1": {
+        "onboarding1": {
             "title": "Enviar, rebre i gestionar eIs seus IOTA",
             "body": "Firefly és una cartera IOTA segura i fàcil d’utilitzar."
         },
         "legal": {
             "title": "Legal",
             "body": "Consulteu la Política de privacitat i els Termes i condicions.",
-            "privacy_policy": {
+            "privacyPolicy": {
                 "title": "Política de Privacitat",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "terms_of_service": {
+            "termsOfService": {
                 "title": "Condicions del servei",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
@@ -34,7 +34,7 @@
         "setup": {
             "title": "Configureu la cartera",
             "body": "Podeu crear una cartera nova o importar-ne una.",
-            "profile_name": "Nom del perfil"
+            "profileName": "Nom del perfil"
         },
         "password": {
             "title": "Crear una contrasenya",
@@ -42,41 +42,41 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body_2": "Keep your PIN safe!"
+            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
+            "body2": "Keep your PIN safe!"
         },
         "pin": {
             "title": "Configureu el codi PIN",
-            "body_1": "Introduïu un PIN de 6 dígits a continuació. Se us demanarà que introduïu el vostre PIN per iniciar la sessió a la cartera.",
-            "body_2": "Només podeu utilitzar números."
+            "body1": "Introduïu un PIN de 6 dígits a continuació. Se us demanarà que introduïu el vostre PIN per iniciar la sessió a la cartera.",
+            "body2": "Només podeu utilitzar números."
         },
-        "confirm_pin": {
+        "confirmPin": {
             "title": "Verifica el teu codi PIN",
             "body": "Torneu a introduir el vostre codi PIN per continuar."
         },
         "backup": {
             "title": "Feu una còpia de seguretat de la cartera",
-            "body_1": "Ara se us mostrarà una frase de recuperació.",
-            "body_2": "No comparteixis aquesta frase amb ningú. La vostra frase de recuperació es pot utilitzar per accedir a les vostres fitxes des de qualsevol lloc.",
-            "body_3": "Si perdeu la frase de recuperació, és possible que perdeu els vostres fons."
+            "body1": "Ara se us mostrarà una frase de recuperació.",
+            "body2": "No comparteixis aquesta frase amb ningú. La vostra frase de recuperació es pot utilitzar per accedir a les vostres fitxes des de qualsevol lloc.",
+            "body3": "Si perdeu la frase de recuperació, és possible que perdeu els vostres fons."
         },
-        "recovery_phrase": {
+        "recoveryPhrase": {
             "title": "Frase de recuperació",
-            "body_1": "Escriviu amb cura les paraules en l’ordre exacte.",
-            "body_2": "Mantingueu la frase de recuperació privada i emmagatzemada de manera segura. No el compartiu amb ningú.",
-            "reveal_recovery_phrase": "Mostrar la frase de recuperación",
-            "hide_recovery_phrase": "Amaga la frase de recuperació"
+            "body1": "Escriviu amb cura les paraules en l’ordre exacte.",
+            "body2": "Mantingueu la frase de recuperació privada i emmagatzemada de manera segura. No el compartiu amb ningú.",
+            "revealRecoveryPhrase": "Mostrar la frase de recuperación",
+            "hideRecoveryPhrase": "Amaga la frase de recuperació"
         },
-        "verify_recovery_phrase": {
+        "verifyRecoveryPhrase": {
             "title": "Verifiqueu la frase de recuperació",
             "body": "Anem a comprovar que heu escrit correctament la frase. Seleccioneu les paraules en l'ordre correcte.",
-            "creating_account": "S'està creant un compte, espereu..."
+            "creatingAccount": "S'està creant un compte, espereu..."
         },
-        "backup_wallet": {
+        "backupWallet": {
             "title": "Feu una còpia de seguretat en un fitxer Stronghold",
             "body": "Introduïu la vostra contrasenya per fer una còpia de seguretat de la cartera en un fitxer Stronghold. La vostra contrasenya s’utilitza per xifrar la còpia de seguretat."
         },
-        "recovery_phrase_saved": {
+        "recoveryPhraseSaved": {
             "title": "S'ha fet la còpia de seguretat amb èxit",
             "body": "Heu fet una còpia de seguretat de la vostra cartera a Stronghold."
         },
@@ -88,35 +88,35 @@
             "title": "Importeu una cartera",
             "body": "Si teniu una frase de recuperació o una còpia de seguretat de Stronghold, podeu importar-la aquí."
         },
-        "import_from_text": {
+        "importFromText": {
             "title": "Restaureu la cartera amb una frase de recuperació o una llavor",
-            "body_1": "Una frase de recuperació té 24 paraules. S’utilitza per recuperar una cartera Firefly existent.",
-            "body_2": "Una llavor consta de 81 caràcters. S’utilitza per recuperar-ne d’una cartera Trinity antiga.",
-            "body_3": "Introduïu la vostra llavor o la frase de recuperació",
-            "seed_detected": "S'ha detectat una llavor de 81 caràcters",
-            "phrase_detected": "Frase de 24 paraules detectada"
+            "body1": "Una frase de recuperació té 24 paraules. S’utilitza per recuperar una cartera Firefly existent.",
+            "body2": "Una llavor consta de 81 caràcters. S’utilitza per recuperar-ne d’una cartera Trinity antiga.",
+            "body3": "Introduïu la vostra llavor o la frase de recuperació",
+            "seedDetected": "S'ha detectat una llavor de 81 caràcters",
+            "phraseDetected": "Frase de 24 paraules detectada"
         },
-        "import_from_file": {
+        "importFromFile": {
             "title": "Restaureu la cartera des d'un fitxer de còpia de seguretat",
             "body": "Importeu una còpia de seguretat per restaurar la cartera. Les còpies de seguretat poden ser Stronghold (.stronghold) o Trinity SeedVault (.kdbx)."
         },
-        "import_backup_password": {
+        "importBackupPassword": {
             "title": "Restaureu la cartera des de SeedVault o Stronghold",
-            "body_1": "Introduïu la contrasenya de la vostra còpia de seguretat.",
-            "body_2": "Aquesta és la contrasenya que vau definir quan vau crear la còpia de seguretat per primera vegada."
+            "body1": "Introduïu la contrasenya de la vostra còpia de seguretat.",
+            "body2": "Aquesta és la contrasenya que vau definir quan vau crear la còpia de seguretat per primera vegada."
         },
-        "import_success": {
+        "importSuccess": {
             "title": "Heu recuperat amb èxit la vostra còpia de seguretat",
             "body": "Ara podeu configurar la vostra cartera nova."
         },
         "migrate": {
             "title": "Migra els teus fons",
-            "body_1": "Això es tracta d’un procés automatitzat per transferir els vostres fons a la vostra cartera nova. Comprovarem si hi ha adreces gastades que debilitin la vostra seguretat.",
-            "body_2": "Pot trigar una mica. No apagueu el dispositiu durant la migració.",
+            "body1": "Això es tracta d’un procés automatitzat per transferir els vostres fons a la vostra cartera nova. Comprovarem si hi ha adreces gastades que debilitin la vostra seguretat.",
+            "body2": "Pot trigar una mica. No apagueu el dispositiu durant la migració.",
             "existing": "La teva vella cartera",
             "new": "La vostra nova cartera"
         },
-        "migrate_failed": {
+        "migrateFailed": {
             "title": "To do",
             "body": "To do"
         },
@@ -218,6 +218,10 @@
                 "title": "Registres d'errors",
                 "description": ""
             },
+            "diagnostics": {
+                "title": "Diagnòstics",
+                "description": ""
+            },
             "stateExport": {
                 "title": "Exportació de l'estat",
                 "description": ""
@@ -244,40 +248,40 @@
             }
         },
         "login": {
-            "please_wait": "Siusplau espereu {time, plural, one {1 segon} other {# segons}}",
-            "incorrect_attempts": "{attempts, plural, one {1 intent incorrecte} other {# intents incorrectes}}"
+            "pleaseWait": "Siusplau espereu {time, plural, one {1 segon} other {# segons}}",
+            "incorrectAttempts": "{attempts, plural, one {1 intent incorrecte} other {# intents incorrectes}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "up_to_date": "Actualitzat",
-                    "out_of_date": "Obsolet"
+                    "upToDate": "Actualitzat",
+                    "outOfDate": "Obsolet"
                 },
-                "hardware_device": {
+                "hardwareDevice": {
                     "title": "Dispositiu de maquinari",
-                    "none_detected": "Cap detectat"
+                    "noneDetected": "Cap detectat"
                 },
-                "stronghold_status": {
+                "strongholdStatus": {
                     "title": "Estat de l'Stronghold",
                     "locked": "Bloquejat",
                     "unlocked": "Desbloquejat"
                 },
-                "stronghold_backup": {
+                "strongholdBackup": {
                     "title": "Còpia de seguretat Stronghold",
-                    "weeks_ago": "fa {weeks, plural, one {# setmana} other {# setmanes}}"
+                    "weeksAgo": "fa {weeks, plural, one {# setmana} other {# setmanes}}"
                 }
             },
             "network": {
-                "network_operational": "Operadors de xarxa",
-                "network_degraded": "Xarxa degradada",
-                "network_down": "Xarxa caiguda",
+                "networkOperational": "Operadors de xarxa",
+                "networkDegraded": "Xarxa degradada",
+                "networkDown": "Xarxa caiguda",
                 "status": "Estat",
-                "messages_per_second": "Missatges per segon",
-                "confirmation_rate": "Taxa de confirmació"
+                "messagesPerSecond": "Missatges per segon",
+                "confirmationRate": "Taxa de confirmació"
             },
-            "profile_modal": {
-                "all_settings": "Tots els paràmetres",
+            "profileModal": {
+                "allSettings": "Tots els paràmetres",
                 "logout": "Tancar sessió"
             }
         }
@@ -292,42 +296,42 @@
         },
         "version": {
             "title": "Versió actual: {version}",
-            "up_to_date_title": "Firefly està al dia",
-            "up_to_date_description": "Esteu executant la versió més recent i segura de Firefly.",
-            "update_available": "Actualització de Firefly disponible",
-            "update_details": "Versió {version} - {date}"
+            "upToDateTitle": "Firefly està al dia",
+            "upToDateDescription": "Esteu executant la versió més recent i segura de Firefly.",
+            "updateAvailable": "Actualització de Firefly disponible",
+            "updateDetails": "Versió {version} - {date}"
         },
         "backup": {
             "title": "Darrera còpia de seguretat: {date}",
-            "last_backup": "La teva última còpia de seguretat {date}",
-            "backup_description": "És important fer una còpia de seguretat periòdicament per assegurar-vos que teniu una còpia dels vostres comptes i de l'historial de transaccions.",
-            "backup_warning": "Si perdeu la frase de còpia de seguretat i recuperació, perdrà l'accés als vostres fons.",
-            "not_backed_up": "No s'ha fet una còpia de seguretat",
-            "not_backed_up_description": "No heu fet una còpia de seguretat de Stronghold"
+            "lastBackup": "La teva última còpia de seguretat {date}",
+            "backupDescription": "És important fer una còpia de seguretat periòdicament per assegurar-vos que teniu una còpia dels vostres comptes i de l'historial de transaccions.",
+            "backupWarning": "Si perdeu la frase de còpia de seguretat i recuperació, perdrà l'accés als vostres fons.",
+            "notBackedUp": "No s'ha fet una còpia de seguretat",
+            "notBackedUpDescription": "No heu fet una còpia de seguretat de Stronghold"
         },
-        "delete_account": {
+        "deleteAccount": {
             "title": "Suprimeix {name}?",
             "body": "Perdreu definitivament el vostre historial de transaccions i potser també alguna cosa més.",
-            "type_password": "Escriviu la contrasenya de la vostra cartera per confirmar-la.",
-            "delete_account": "Elimina el compte",
-            "error_title": "No es pot suprimir {name}",
-            "error_body_1": "Per eliminar un compte, heu de tenir 0 saldo.",
-            "error_body_2": "Actualment us queda {balance} en aquest compte. Moveu aquests fons a un altre compte i torneu-ho a provar.",
-            "error_body_3": "No podeu suprimir aquest compte, n'heu de tenir almenys un."
+            "typePassword": "Escriviu la contrasenya de la vostra cartera per confirmar-la.",
+            "deleteAccount": "Elimina el compte",
+            "errorTitle": "No es pot suprimir {name}",
+            "errorBody1": "Per eliminar un compte, heu de tenir 0 saldo.",
+            "errorBody2": "Actualment us queda {balance} en aquest compte. Moveu aquests fons a un altre compte i torneu-ho a provar.",
+            "errorBody3": "No podeu suprimir aquest compte, n'heu de tenir almenys un."
         },
-        "address_history": {
+        "addressHistory": {
             "title": "historial d'adreces del compte {name}",
-            "current_balance": "Saldo actual: {balance}"
+            "currentBalance": "Saldo actual: {balance}"
         },
         "node": {
-            "title_add": "Afegeix un node",
-            "title_remove": "Traieu un node",
-            "title_details": "Detalls del node",
-            "node_address": "Adreça del node",
-            "optional_username": "Nom d'usuari (opcional)",
-            "optional_password": "Contrasenya (opcional)",
-            "set_as_primary_node": "Estableix com a node principal",
-            "remove_confirmation": "Are you sure you want to remove this node?"
+            "titleAdd": "Afegeix un node",
+            "titleRemove": "Traieu un node",
+            "titleDetails": "Detalls del node",
+            "nodeAddress": "Adreça del node",
+            "optionalUsername": "Nom d'usuari (opcional)",
+            "optionalPassword": "Contrasenya (opcional)",
+            "setAsPrimaryNode": "Estableix com a node principal",
+            "removeConfirmation": "Are you sure you want to remove this node?"
         },
         "errorLog": {
             "title": "Registre d'errors",
@@ -335,16 +339,27 @@
         },
         "deleteProfile": {
             "title": "Suprimeix el perfil",
-            "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone."
+            "confirmation": "Esteu segur que voleu suprimir aquest perfil? Aquesta operació no es pot desfer."
+        },
+        "diagnostics": {
+            "title": "Diagnòstics",
+            "node": "Node",
+            "platform": "Plataforma",
+            "platformVersion": "Versió de plataforma",
+            "platformArchitecture": "Arquitectura de plataformes",
+            "cpuCount": "Recompte de CPU",
+            "totalMem": "Memòria total",
+            "freeMem": "Memòria lliure",
+            "userPath": "Camí de l'usuari"
         }
     },
     "charts": {
-        "incoming_mi": "Entrant {value} Mi",
-        "outgoing_mi": "Sortint {value} Mi",
+        "incomingMi": "Entrant {value} Mi",
+        "outgoingMi": "Sortint {value} Mi",
         "portoflio": "Portafoli",
         "token": "Token",
-        "account_value": "Valor del compte",
-        "account_activity": "Activitat del compte"
+        "accountValue": "Valor del compte",
+        "accountActivity": "Activitat del compte"
     },
     "actions": {
         "continue": "Continuar",
@@ -353,32 +368,32 @@
         "close": "Tancar",
         "dismiss": "Omet",
         "save": "Guardar",
-        "import_seed": "Importeu una llavor existent",
-        "import_wallet": "Importeu la cartera existent",
-        "create_wallet": "Crea una cartera nova",
-        "save_password": "Desa la contrasenya",
-        "use_biometric": "Utilitzeu seguretat biomètrica",
-        "setup_pin": "Configureu el codi PIN",
-        "set_pin": "Estableix el codi PIN",
-        "confirm_pin": "Confirmeu el codi PIN",
-        "enter_your_pin": "Introdueix el teu codi PIN",
-        "save_backup_file": "Guardar còpia de seguretat",
-        "ive_written_recovery_phrase": "He escrit la meva frase de recuperació",
-        "verify_recovery_phrase": "Verifiqueu la frase de recuperació",
-        "reveal_recovery_phrase": "Mostrar la frase de recuperació",
-        "import_seedvault": "Importar SeedVault",
-        "check_again": "Comprovar-ho un altre cop",
-        "import_from_file": "Importa des d'un fitxer",
+        "importSeed": "Importeu una llavor existent",
+        "importWallet": "Importeu la cartera existent",
+        "createWallet": "Crea una cartera nova",
+        "savePassword": "Desa la contrasenya",
+        "useBiometric": "Utilitzeu seguretat biomètrica",
+        "setupPin": "Configureu el codi PIN",
+        "setPin": "Estableix el codi PIN",
+        "confirmPin": "Confirmeu el codi PIN",
+        "enterYourPin": "Introdueix el teu codi PIN",
+        "saveBackupFile": "Guardar còpia de seguretat",
+        "iveWrittenRecoveryPhrase": "He escrit la meva frase de recuperació",
+        "verifyRecoveryPhrase": "Verifiqueu la frase de recuperació",
+        "revealRecoveryPhrase": "Mostrar la frase de recuperació",
+        "importSeedvault": "Importar SeedVault",
+        "checkAgain": "Comprovar-ho un altre cop",
+        "importFromFile": "Importa des d'un fitxer",
         "send": "Enviar",
         "receive": "Rebre",
         "create": "Crear",
-        "begin_transfer": "Iniciar la transferència",
-        "try_again": "Torna-ho a provar",
-        "visit_discord": "Visitar Discord",
-        "drag_drop": "Arrossegar",
-        "import_extentions": "fitxer .stronghold o .kdbx ",
-        "choose_file": "Selecciona un fitxer",
-        "drop_here": "Arrosega els fitxers aquí",
+        "beginTransfer": "Iniciar la transferència",
+        "tryAgain": "Torna-ho a provar",
+        "visitDiscord": "Visitar Discord",
+        "dragDrop": "Arrossegar",
+        "importExtentions": "fitxer .stronghold o .kdbx ",
+        "chooseFile": "Selecciona un fitxer",
+        "dropHere": "Arrosega els fitxers aquí",
         "syncAll": "Sincronitza-ho tot",
         "export": "Exportar",
         "exportNewStronghold": "Exporteu un nou Stronghold",
@@ -388,15 +403,15 @@
         "exportState": "Estat d'exportació",
         "outsourceProofOfWork": "Subcontractar proves de treball",
         "unlock": "Desbloqueja",
-        "update_firefly": "Actualitza Firefly",
-        "restart_now": "Reiniciar ara",
-        "save_backup": "Desa la còpia de seguretat",
-        "customize_account": "Personalitza el compte",
-        "view_address_history": "Veure l'historial d'adreces",
-        "delete_account": "Elimina el compte",
+        "updateFirefly": "Actualitza Firefly",
+        "restartNow": "Reiniciar ara",
+        "saveBackup": "Desa la còpia de seguretat",
+        "customizeAcount": "Customise account",
+        "viewAddressHistory": "Veure l'historial d'adreces",
+        "deleteAccount": "Elimina el compte",
         "max": "Màxim",
-        "add_node": "Afegeix un node",
-        "remove_node": "Elimina el node",
+        "addNode": "Afegeix un node",
+        "removeNode": "Elimina el node",
         "hide": "Oculta",
         "hideOthers": "Amaga els altres",
         "showAll": "Mostrar tots",
@@ -412,57 +427,57 @@
         "checkForUpdates": "Cerca actualitzacions",
         "reportAnIssue": "Notifica un problema",
         "clear": "Neteja",
-        "hide_details": "Amaga els detalls",
+        "hideDetails": "Amaga els detalls",
         "yes": "Si",
         "no": "No",
-        "reset": "Reset"
+        "reset": "Restableix"
     },
     "general": {
         "password": "Contrasenya",
-        "confirm_password": "Confirmar contrasenya",
+        "confirmPassword": "Confirmar contrasenya",
         "currentPassword": "Contrasenya actual",
         "newPassword": "Nova contrasenya",
         "confirmNewPassword": "Confirma la nova contrasenya",
-        "your_seed": "La teva llavor",
-        "recovery_phrase": "Frase de recuperació",
-        "recent_activity": "Activitat recent",
+        "yourSeed": "La teva llavor",
+        "recoveryPhrase": "Frase de recuperació",
+        "recentActivity": "Activitat recent",
         "sent": "Enviat",
         "received": "Rebut",
-        "send_payment": "Envia el pagament",
-        "move_funds": "Moure fons",
-        "send_funds": "Enviar fons",
-        "send_to_address": "Enviar a una adreça",
-        "scan_qr_or_paste": "Escaneja un codi QR o enganxa una adreça",
-        "move_funds_between_accounts": "Moure fons entre comptes",
-        "send_tokens_to_address": "Enviar fitxes a una adreça",
-        "manage_account": "Gestiona el compte",
-        "customize_account": "Personalitzeu el vostre compte",
+        "sendPayment": "Envia el pagament",
+        "moveFunds": "Moure fons",
+        "sendFunds": "Enviar fons",
+        "sendToAddress": "Enviar a una adreça",
+        "scanQrOrPaste": "Escaneja un codi QR o enganxa una adreça",
+        "moveFundsBetweenAccounts": "Moure fons entre comptes",
+        "sendTokensToAddress": "Enviar fitxes a una adreça",
+        "manageAccount": "Gestiona el compte",
+        "customizeAcount": "Customize your account",
         "account": "Compte",
-        "sending_to_address": "Enviant a l’adreça",
+        "sendingToAddress": "Enviant a l’adreça",
         "amount": "Quantitat",
-        "add_address": "Afegir adreça",
+        "addAddress": "Afegir adreça",
         "reference": "Referència",
         "from": "De",
         "to": "A",
-        "receive_funds": "Rebre fons",
-        "my_address": "La meva adreça",
-        "share_address": "Compartir una adreça",
-        "your_address": "La teva adreça",
-        "generate_new_address": "Generar una nova adreça",
-        "copy_address": "Copiar l'adreça",
-        "have_text_backup": "Tinc una còpia de seguretat (text)",
-        "have_file_backup": "Tinc una còpia de seguretat (fitxer)",
-        "enter_seed_or_phrase": "Introduïu una frase de recuperació o una llavor",
-        "upload_seedvault_or_stronghold": "Importeu un fitxer Stronghold o SeedVault",
+        "receiveFunds": "Rebre fons",
+        "myAddress": "La meva adreça",
+        "shareAddress": "Compartir una adreça",
+        "yourAddress": "La teva adreça",
+        "generateNewAddress": "Generar una nova adreça",
+        "copyAddress": "Copiar l'adreça",
+        "haveTextBackup": "Tinc una còpia de seguretat (text)",
+        "haveFileBackup": "Tinc una còpia de seguretat (fitxer)",
+        "enterSeedOrPhrase": "Introduïu una frase de recuperació o una llavor",
+        "uploadSeedvaultOrStronghold": "Importeu un fitxer Stronghold o SeedVault",
         "import": "Importar",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Llengua",
         "appearance": "Aspecte",
-        "light_theme": "Tema clar",
-        "dark_theme": "Tema fosc",
-        "total_balance": "Saldo Total",
-        "account_balance": "Saldo del compte",
+        "lightTheme": "Tema clar",
+        "darkTheme": "Tema fosc",
+        "totalBalance": "Saldo Total",
+        "accountBalance": "Saldo del compte",
         "incoming": "Entrant",
         "outgoing": "Sortint",
         "accounts": "Comptes",
@@ -471,24 +486,24 @@
         "profiles": "Perfils",
         "developerProfile": "Mode de desenvolupador",
         "dev": "Dev",
-        "create_account": "Crea un compte",
-        "account_name": "Nom del compte",
-        "latest_transactions": "Últimes transaccions",
+        "createAccount": "Crea un compte",
+        "accountName": "Nom del compte",
+        "latestTransactions": "Últimes transaccions",
         "transactions": "Transaccions",
         "security": "Seguretat",
-        "account_address": "Adreça del compte",
+        "accountAddress": "Adreça del compte",
         "nodes": "Nodes",
         "wallet": "Cartera",
         "help": "Ajuda",
         "you": "Tu",
-        "transaction_id": "ID de transacció",
-        "input_address": "Adreça d’entrada",
-        "receive_address": "Adreça de recepció",
+        "messageId": "ID del Missatge",
+        "inputAddress": "Adreça d’entrada",
+        "receiveAddress": "Adreça de recepció",
         "date": "Data",
-        "no_accounts": "No teniu comptes, creeu-ne un.",
-        "loading_accounts": "Carregant, espereu...",
-        "add_profile": "Afegeix un perfil",
-        "no_recent_history": "No hi ha història recent",
+        "noAccounts": "No teniu comptes, creeu-ne un.",
+        "loadingAccounts": "Carregant, espereu...",
+        "addProfile": "Afegeix un perfil",
+        "noRecentHistory": "No hi ha història recent",
         "transferSyncing": "Sincronitzant els comptes",
         "transferSelectingInputs": "Selecció d’entrades",
         "transferRemainderAddress": "S'està generant l'adreça de dipòsit restant",
@@ -512,25 +527,26 @@
     },
     "dates": {
         "today": "Avui",
-        "days_ago": "fa {time, plural, one {# dia} other {# dies}}",
-        "weeks_ago": "fa {time, plural, one {# setmana} other {# setmanes}}",
-        "months_ago": "fa {time, plural, one {# mes} other {# mesos}}",
-        "years_ago": "fa {time, plural, one {# any} other {# anys}}"
+        "daysAgo": "fa {time, plural, one {# dia} other {# dies}}",
+        "weeksAgo": "fa {time, plural, one {# setmana} other {# setmanes}}",
+        "monthsAgo": "fa {time, plural, one {# mes} other {# mesos}}",
+        "yearsAgo": "fa {time, plural, one {# any} other {# anys}}"
     },
     "notifications": {
         "valueTx": "S'està rebent {{value}} a {{account}}",
         "confirmed": "{{value}} de sortida de {{account}} s'ha confirmat",
         "failed": "Ha fallat el {{value}} de sortida de {{account}}",
-        "downloading_update": "S'està baixant l'actualització",
-        "update_ready": "Actualització llesta",
-        "update_error": "S'ha produït un error durant l'actualització. Torneu-ho a provar",
-        "restart_install": "Reinicieu per instal·lar",
-        "calc_minutes_remaining": "S'estan calculant els minuts restants...",
-        "minutes_remaining": "{minutes, plural, one {1 minut restant} other {# minuts restants}}"
+        "downloadingUpdate": "S'està baixant l'actualització",
+        "updateReady": "Actualització llesta",
+        "updateError": "S'ha produït un error durant l'actualització. Torneu-ho a provar",
+        "restartInstall": "Reinicieu per instal·lar",
+        "calcMinutesRemaining": "S'estan calculant els minuts restants...",
+        "minutesRemaining": "{minutes, plural, one {1 minut restant} other {# minuts restants}}",
+        "copiedToClipboard": "Copied to clipboard"
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "length": "El nom del vostre perfil no pot superar {length, plural, one {1 caràcter} other {# caràcters}}.",
             "duplicate": "Ja existeix un perfil amb aquest nom."
         },
         "password": {
@@ -540,7 +556,7 @@
             "pattern": "Els patrons de teclat curts són fàcils d’endevinar.",
             "names": "Els noms i cognoms comuns són fàcils d’endevinar.",
             "repeats": "Les repeticions com \"aaa\" són fàcils d'endevinar.",
-            "repeats2": "Repeats like 'abcabcabc' are easy to guess.",
+            "repeats2": "Les repeticions com \"abcabcabc\" són fàcils d'endevinar.",
             "sequence": "Les seqüències de personatges són fàcils d’endevinar.",
             "years": "Els darrers anys són fàcils d’endevinar.",
             "dates": "Les dates són fàcils d’endevinar.",
@@ -548,21 +564,21 @@
             "similar": "Això és similar a una contrasenya comuna.",
             "reasonWord": "Una sola paraula és fàcil d’endevinar.",
             "incorrect": "La contrasenya és incorrecta.",
-            "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
+            "length": "La vostra contrasenya no pot superar {length, plural, one {1 caràcter} other {# caràcters}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {1 digit} other {# digits}} long.",
+            "length": "El vostre PIN ha de tenir {length, plural, one {1 dígit} other {# dígits}}.",
             "match": "El PIN no coincideix.",
             "incorrect": "El vostre PIN actual és incorrecte."
         },
         "account": {
-            "length": "Your account name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "length": "El nom del compte no pot superar {length, plural, one {1 caràcter} other {# caràcters}}.",
             "empty": "Heu d'utilitzar el vostre darrer compte abans de crear-ne un de nou.",
             "notEmpty": "Heu de transferir el saldo abans de suprimir aquest compte.",
             "duplicate": "Ja existeix un compte amb aquest nom."
         },
         "send": {
-            "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
+            "addressLength": "Les adreces han de tenir {length, plural, one {1 caràcter} other {# caràcters}} més.",
             "amountTooHigh": "Això és superior al saldo disponible.",
             "amountNoFloat": "Si les unitats són `i` no podeu fer servir decimals.",
             "amountInvalidFormat": "Sembla que l’import no és vàlid.",
@@ -583,7 +599,7 @@
             "invalid": "No s'ha reconegut el fitxer de còpia de seguretat.",
             "destination": "La destinació de la còpia de seguretat no era vàlida.",
             "mnemonic": "El mnemotècnic no és vàlid.",
-            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
+            "seedTooShort": "La llavor ha de tenir 81 caràcters, {length, plural, one {és 1} other {són #}}",
             "seedCharacters": "La llavor només ha de contenir caràcters A-Z o 9",
             "phraseWordCount": "Hi ha d'haver 24 paraules a la frase de recuperació, actualment {length, plural, one {és 1} other {són #}}",
             "phraseUnrecognizedWord": "Paraula no reconeguda \"{word}\" a la frase de recuperació"

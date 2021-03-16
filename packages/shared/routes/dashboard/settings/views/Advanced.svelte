@@ -155,6 +155,10 @@
     function handleErrorLogClick() {
         openPopup({ type: 'errorLog' })
     }
+
+    function handleDiagnosticsClick() {
+        openPopup({ type: 'diagnostics' })
+    }
 </script>
 
 <div>
@@ -182,13 +186,13 @@
 
             <!-- As client options (nodes) have association with accounts, disable "Add node" button if there are no accounts in wallet -->
             <Button classes="w-1/4 mt-4" disabled={!$accounts.length} onClick={() => handleAddNodeClick()}>
-                {locale('actions.add_node')}
+                {locale('actions.addNode')}
             </Button>
             <Button
                 classes="w-1/2 mt-4"
                 onClick={() => handleRemoveNodeClick()}
                 disabled={!$activeProfile?.settings.customNodes.find((n) => n.url === $activeProfile?.settings.node?.url)}>
-                {locale('actions.remove_node')}
+                {locale('actions.removeNode')}
             </Button>
         </section>
         <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
@@ -223,6 +227,12 @@
         <Text type="h4" classes="mb-3">{locale('views.settings.errorLog.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.errorLog.description')}</Text>
         <Button classes="w-1/4" onClick={() => handleErrorLogClick()}>{locale('views.settings.errorLog.title')}</Button>
+    </section>
+    <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
+    <section id="diagnostics" class="w-3/4">
+        <Text type="h4" classes="mb-3">{locale('views.settings.diagnostics.title')}</Text>
+        <Text type="p" secondary classes="mb-5">{locale('views.settings.diagnostics.description')}</Text>
+        <Button classes="w-1/4" onClick={() => handleDiagnosticsClick()}>{locale('views.settings.diagnostics.title')}</Button>
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <!-- TODO: Implemnet state export -->

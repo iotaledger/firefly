@@ -17,7 +17,7 @@
     let strongholdStatusMessage
 
     function setup() {
-        const ap = get(activeProfile);
+        const ap = get(activeProfile)
         const isStrongholdLocked = ap?.isStrongholdLocked
         const lastStrongholdBackupTime = ap?.lastStrongholdBackupTime
         lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
@@ -64,30 +64,30 @@
         <!-- Firefly version -->
         <SecurityTile
             title={locale('views.dashboard.security.version.title', { values: { version: $versionDetails.currentVersion } })}
-            message={locale(`views.dashboard.security.version.${$versionDetails.upToDate ? 'up_to_date' : 'out_of_date'}`)}
+            message={locale(`views.dashboard.security.version.${$versionDetails.upToDate ? 'upToDate' : 'outOfDate'}`)}
             color={$versionDetails.upToDate ? 'blue' : 'yellow'}
             icon="firefly"
             onClick={() => handleSecurityTileClick('version')} />
         <!-- Hardware Device -->
         <SecurityTile
-            title={locale('views.dashboard.security.hardware_device.title')}
-            message={locale('views.dashboard.security.hardware_device.none_detected')}
+            title={locale('views.dashboard.security.hardwareDevice.title')}
+            message={locale('views.dashboard.security.hardwareDevice.noneDetected')}
             color="gray"
             icon="chip"
             classes="pointer-events-none" />
         <!-- Stronghold status -->
         <SecurityTile
-            title={locale('views.dashboard.security.stronghold_status.title')}
-            message={locale(`views.dashboard.security.stronghold_status.${strongholdStatusMessage}`)}
+            title={locale('views.dashboard.security.strongholdStatus.title')}
+            message={locale(`views.dashboard.security.strongholdStatus.${strongholdStatusMessage}`)}
             color={$activeProfile?.isStrongholdLocked ? 'blue' : 'yellow'}
-            icon={$activeProfile?.isStrongholdLocked ? "lock" : "unlock"}
+            icon={$activeProfile?.isStrongholdLocked ? 'lock' : 'unlock'}
             onClick={() => (get(activeProfile)?.isStrongholdLocked ? handleSecurityTileClick('password') : lockStronghold())} />
         <!-- Stronghold backup -->
         <SecurityTile
-            title={locale('views.dashboard.security.stronghold_backup.title')}
+            title={locale('views.dashboard.security.strongholdBackup.title')}
             message={$activeProfile?.lastStrongholdBackupTime ? locale(`dates.${lastBackupDateFormatted.unit}`, {
                       values: { time: lastBackupDateFormatted.value },
-                  }) : locale('popups.backup.not_backed_up')}
+                  }) : locale('popups.backup.notBackedUp')}
             onClick={() => handleSecurityTileClick('backup')}
             icon="shield"
             {color} />

@@ -42,13 +42,13 @@
 <div class="px-8 py-6 flex flex-col h-full justify-between">
     <div>
         <div class="flex flex-row mb-6">
-            <Text type="h5">{locale('general.create_account')}</Text>
+            <Text type="h5">{locale('general.createAccount')}</Text>
         </div>
         <div class="w-full h-full flex flex-col justify-between">
             <Input
                 {error}
                 bind:value={accountAlias}
-                placeholder={locale('general.account_name')}
+                placeholder={locale('general.accountName')}
                 autofocus
                 submitHandler={handleCreateClick}
                 disabled={isBusy} />
