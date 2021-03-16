@@ -1,4 +1,4 @@
-import { loggedIn, notification, strongholdPassword, walletPin } from 'shared/lib/app'
+import { loggedIn, login, strongholdPassword, walletPin } from 'shared/lib/app'
 import { profiles } from 'shared/lib/profile'
 import { AccountRoutes, AppRoute, SettingsRoutes, SetupType, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
 import { get, readable, writable } from 'svelte/store'
@@ -24,7 +24,6 @@ export const path = readable<string>(null, (set) => {
     const updatePath = (): void => {
         const pathName = window.location.hash.substr(1)
         set(pathName)
-        notification.set(null)
     }
 
     window.addEventListener('hashchange', updatePath)
@@ -96,7 +95,7 @@ export const routerNext = (event) => {
             if (shouldAddProfile) {
                 nextRoute = AppRoute.Setup
             } else {
-                loggedIn.set(true)
+                login()
                 nextRoute = AppRoute.Dashboard
             }
             break
@@ -171,7 +170,7 @@ export const routerNext = (event) => {
             nextRoute = AppRoute.Congratulations
             break
         case AppRoute.Congratulations:
-            loggedIn.set(true)
+            login()
             nextRoute = AppRoute.Dashboard
             break
     }

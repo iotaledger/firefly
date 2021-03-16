@@ -6,10 +6,6 @@ import { closePopup } from './popup'
 import { activeProfile, clearActiveProfile } from './profile'
 import { resetRouter } from './router'
 import { api, destroyActor, resetWallet } from './wallet'
-/**
- * Notification content
- */
-export const notification = writable<string>(null)
 
 /**
  * Mobile mode
@@ -57,6 +53,23 @@ export const loggedIn = writable<boolean>(false)
  * Determines if user can make developer profiles
  */
 export const developerMode = persistent<boolean>('developerMode', false)
+
+/**
+ * Cleanup the signup vars
+ */
+ export const cleanupSignup = () => {
+    mnemonic.set(null)
+    strongholdPassword.set(null)
+    walletPin.set(null)
+}
+
+/**
+ * Log in to the current profile
+ */
+export const login = () => {
+    cleanupSignup()
+    loggedIn.set(true)
+}
 
 /**
  * Logout from current profile
