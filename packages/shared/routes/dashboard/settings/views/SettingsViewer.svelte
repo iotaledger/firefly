@@ -4,6 +4,7 @@
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import { AdvancedSettings, GeneralSettings, HelpAndInfo, SecuritySettings, SettingsRoutes } from 'shared/lib/typings/routes'
     import { Advanced, General, Security } from './'
+
     export let locale
     export let mobile
 
@@ -31,7 +32,8 @@
             }
         }
     }
-    function goToSettingsHome() {
+
+    function handleBackClick() {
         settingsRoute.set(SettingsRoutes.Init)
     }
 </script>
@@ -39,9 +41,12 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <div class="relative flex flex-1 flex-row items-start">
-        <button on:click={goToSettingsHome} class="absolute top-0 right-0">
-            <Icon icon="close" classes="text-gray-800 dark:text-white" />
+    <div class="flex flex-1 flex-row items-start">
+        <button data-label="back-button" class="absolute top-8 left-8" on:click={handleBackClick}>
+            <div class="flex items-center">
+                <Icon icon="arrow-left" classes="text-blue-500" />
+                <Text type="h4" classes="ml-6">{locale('actions.back')}</Text>
+            </div>
         </button>
         <SettingsNavigator
             {routes}

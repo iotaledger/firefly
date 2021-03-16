@@ -62,7 +62,7 @@
 {:else}
     <Idle />
     <div class="flex flex-row w-full h-full">
-        <Sidebar bind:activeTab={$dashboardRoute} {locale} />
+        <Sidebar {locale} />
         <!-- Dashboard Pane -->
         <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
     </div>
