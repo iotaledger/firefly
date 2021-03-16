@@ -48,8 +48,8 @@
         {/if}
         <div
             class="w-full h-full flex flex-col flex-auto rounded-2xl border border-solid border-gray-300 dark:border-gray-700 p-4">
-            <div class="w-full flex flex-row justify-between items-start mb-1">
-                <Text type="p" smaler bold>{locale('actions.receive')}</Text>
+            <div class="w-full flex flex-row justify-between items-center mb-1">
+                <Text type="p" smaller bold>{locale('actions.receive')}</Text>
                 <button on:click={generateNewAddress} class:pointer-events-none={isGeneratingAddress}>
                     <Icon icon="refresh" classes="{isGeneratingAddress && 'animate-spin'} text-gray-500 dark:text-white" />
                 </button>

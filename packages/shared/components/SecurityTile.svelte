@@ -11,7 +11,7 @@
 
 <button
     on:click={() => onClick()}
-    class="flex flex-col flex-wrap justify-between text-left rounded-xl px-3 py-3 bg-{color}-50 dark:bg-gray-900 dark:bg-opacity-50 {classes}">
+    class="flex flex-col flex-wrap text-left rounded-xl px-3 py-3 bg-{color}-50 dark:bg-gray-900 dark:bg-opacity-50 {classes}">
     <Icon boxed {icon} classes="text-white" boxClasses="mb-2 bg-{color}-600" />
     <div>
         <Text>{title}</Text>
