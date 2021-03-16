@@ -11,7 +11,15 @@ import type {
 } from './typings/bridge'
 import { ResponseTypes } from './typings/bridge'
 import type { ClientOptions } from './typings/client'
-import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, ErrorEventPayload, Event, TransactionEventPayload, TransferProgressEventPayload } from './typings/events'
+import type {
+    BalanceChangeEventPayload,
+    ConfirmationStateChangeEventPayload,
+    ErrorEventPayload,
+    Event,
+    TransactionEventPayload,
+    TransferProgressEventPayload,
+    ReattachmentEventPayload
+} from './typings/events'
 import { ErrorType } from './typings/events'
 import type { Message } from './typings/message'
 import type { StrongholdStatus, Duration } from './typings/wallet'
@@ -127,12 +135,12 @@ Wallet.onMessage((message: MessageResponse) => {
         // There is no message id
         // Something lower level has thrown an error
         // We should stop processing at this point
-        errorLog.update((log) => [ { type: ErrorType.ClientError, message: JSON.stringify(message), time: Date.now() }, ...log ])
+        errorLog.update((log) => [{ type: ErrorType.ClientError, message: JSON.stringify(message), time: Date.now() }, ...log])
         return
     }
 
     const _deleteCallbackId = (_id: string) => {
-            // Do not delete callback ids for events api methods
+        // Do not delete callback ids for events api methods
         if (!eventsApiResponseTypes.includes(message.type)) {
             delete callbacksStore[_id]
         }
@@ -321,6 +329,7 @@ export interface ApiClient {
 
     onStrongholdStatusChange(callbacks: { onSuccess: (response: Event<StrongholdStatus>) => void, onError: (err: ErrorEventPayload) => void })
     onNewTransaction(callbacks: { onSuccess: (response: Event<TransactionEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
+    onReattachment(callbacks: { onSuccess: (response: Event<ReattachmentEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
     onConfirmationStateChange(callbacks: { onSuccess: (response: Event<ConfirmationStateChangeEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
     onBalanceChange(callbacks: { onSuccess: (response: Event<BalanceChangeEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
     onTransferProgress(callbacks: { onSuccess: (response: Event<TransferProgressEventPayload>) => void, onError: (err: ErrorEventPayload) => void })

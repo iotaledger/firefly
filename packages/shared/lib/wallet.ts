@@ -205,6 +205,22 @@ export const initialiseListeners = () => {
             const account = get(accounts).find((account) => account.id === response.payload.accountId)
             const message = response.payload.message
 
+            const essence = message.payload.data.essence
+
+            if (!essence.data.internal) {
+                const { balanceOverview } = get(wallet);
+                const overview = get(balanceOverview);
+
+                const incoming = essence.data.incoming ? overview.incomingRaw + essence.data.value : overview.incomingRaw;
+                const outgoing = essence.data.incoming ? overview.outgoingRaw : overview.outgoingRaw + essence.data.value;
+
+                updateBalanceOverview(
+                    overview.balanceRaw,
+                    incoming,
+                    outgoing
+                )
+            }
+
             const notificationMessage = localize('notifications.valueTx')
                 .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
                 .replace('{{account}}', account.alias)
@@ -219,12 +235,31 @@ export const initialiseListeners = () => {
         },
     })
 
+    /**
+     * Event listener for transfer confirmation state change
+     */
     api.onConfirmationStateChange({
         onSuccess(response) {
             const accounts = get(wallet).accounts
             const account = get(accounts).find((account) => account.id === response.payload.accountId)
             const message = response.payload.message
             const messageKey = response.payload.confirmed ? 'confirmed' : 'failed'
+
+            const essence = message.payload.data.essence
+
+            if (!essence.data.internal) {
+                const { balanceOverview } = get(wallet);
+                const overview = get(balanceOverview);
+
+                const incoming = essence.data.incoming ? overview.incomingRaw + essence.data.value : overview.incomingRaw;
+                const outgoing = essence.data.incoming ? overview.outgoingRaw : overview.outgoingRaw + essence.data.value;
+
+                updateBalanceOverview(
+                    overview.balanceRaw,
+                    incoming,
+                    outgoing
+                )
+            }
 
             const accountMessage = account.messages.find((_message) => _message.id === message.id)
             accountMessage.confirmed = response.payload.confirmed
@@ -271,11 +306,9 @@ export const initialiseListeners = () => {
             const { balanceOverview } = get(wallet);
             const overview = get(balanceOverview);
 
-            const incoming = overview.incomingRaw + balanceChange.received;
-            const outgoing = overview.outgoingRaw + balanceChange.spent;
             const balance = overview.balanceRaw - balanceChange.spent + balanceChange.received
 
-            updateBalanceOverview(balance, incoming, outgoing);
+            updateBalanceOverview(balance, overview.incomingRaw, overview.outgoingRaw);
 
         },
         onError(error) {
@@ -283,6 +316,22 @@ export const initialiseListeners = () => {
         },
     })
 
+    /**
+     * Event listener for reattachment
+     */
+    api.onReattachment({
+        onSuccess(response) {
+            // Replace original message with reattachment
+            replaceMessage(response.payload.accountId, response.payload.reattachedMessageId, response.payload.message);
+        },
+        onError(error) {
+            console.error(error)
+        },
+    })
+
+    /**
+     * Event listener for transfer progress
+     */
     api.onTransferProgress({
         onSuccess(response) {
             transferState.set(response.payload.event.type)
@@ -355,6 +404,37 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
             if (storedAccount.id === accountId) {
                 return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
                     messages: [message, ...storedAccount.messages]
+                })
+            }
+
+            return storedAccount;
+        })
+    })
+};
+
+/** 
+ * @method replaceMessage
+ * 
+ * @param {string} accountId 
+ * @param {string} messageId
+ * @param {Message} newMessage
+ * 
+ * @returns {void} 
+ */
+export const replaceMessage = (accountId: string, messageId: string, newMessage: Message): void => {
+    const { accounts } = get(wallet)
+
+    accounts.update((storedAccounts) => {
+        return storedAccounts.map((storedAccount: WalletAccount) => {
+            if (storedAccount.id === accountId) {
+                return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
+                    messages: storedAccount.messages.map((_message) => {
+                        if (_message.id === messageId) {
+                            return newMessage;
+                        }
+
+                        return _message;
+                    })
                 })
             }
 
