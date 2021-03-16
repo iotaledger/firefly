@@ -28,10 +28,11 @@
         @apply pr-10;
         @apply rounded-xl;
         :global(svg) {
-            right: 12px; // TODO: unable to use tailwind inset
+            @apply right-3;
         }
         &.disabled {
             @apply pointer-events-none;
+            @apply opacity-50;
         }
         nav {
             .inner {
@@ -63,11 +64,11 @@
 </style>
 
 {#if label}
-    <Text type="p" classes="mb-2" smaller>{label}</Text>
+    <Text type="p" classes="mb-2 {disabled && 'opacity-50'}" smaller>{label}</Text>
 {/if}
 <dropdown-input
-    class="relative flex items-center w-full whitespace-nowrap cursor-pointer
-        {disabled ? 'bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700' : 'bg-white dark:bg-gray-900 border border-solid border-gray-300 hover:border-gray-500 dark:border-gray-700 dark:hover:border-gray-700'}"
+    class="relative flex items-center w-full whitespace-nowrap cursor-pointer border border-solid
+    bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700"
     on:click={(e) => {
         e.stopPropagation()
         dropdown = !dropdown
@@ -76,12 +77,12 @@
     on:clickOutside={handleClickOutside}
     class:small
     class:disabled>
-    <Text type="p" smaller {disabled}>{value}</Text>
+    <Text type="p" smaller>{value}</Text>
     <Icon icon="chevron-down" classes="absolute text-gray-500 fill-current" />
     <nav
         class:active={dropdown}
         class="absolute w-full overflow-hidden pointer-events-none opacity-0 z-10 text-left 
-            bg-white dark:bg-gray-900 
+        bg-gray-50 dark:bg-gray-800
             border border-solid border-gray-300 hover:border-gray-500 dark:border-gray-700 dark:hover:border-gray-700">
         <div class="inner overflow-y-auto">
             {#each items as item}

@@ -123,18 +123,16 @@
         }
         .input-wrapper {
             max-width: 204px;
-
             input {
                 -webkit-text-security: none;
-                width: 14px;
-                height: 14px;
-                opacity: 0;
+                @apply w-3.5;
+                @apply h-3.5;
+                @apply opacity-0;
                 @apply bg-transparent;
                 @apply text-transparent;
                 @apply cursor-pointer;
-
                 &:focus {
-                    outline: none;
+                    @apply outline-none;
                 }
                 &:disabled {
                     @apply cursor-default;
@@ -145,8 +143,8 @@
             z-index: -1;
             max-width: 204px;
             input-decorator {
-                width: 14px;
-                height: 14px;
+                @apply w-3.5;
+                @apply h-3.5;
                 @apply bg-gray-400;
                 &.active {
                     @apply bg-blue-500;
@@ -161,7 +159,9 @@
 
 <pin-input
     style="--pin-input-size: {PIN_LENGTH}"
-    class={`flex items-center justify-center w-full relative z-0 bg-gray-50 border border-solid border-gray-300 rounded-xl ${classes}`}
+    class={`flex items-center justify-center w-full relative z-0 rounded-xl border border-solid
+            bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700
+            ${classes}`}
     class:disabled
     bind:this={root}
     on:click={selectFirstEmptyRoot}

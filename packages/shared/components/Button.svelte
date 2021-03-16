@@ -63,58 +63,6 @@
                     }
                 }
             }
-            &.darkmode {
-                @apply bg-gray-700;
-                @apply border-gray-700;
-                @apply bg-opacity-30;
-                @apply border-opacity-30;
-                span {
-                    @apply text-white;
-                }
-                &:hover {
-                    @apply bg-opacity-50;
-                    @apply border-opacity-50;
-                }
-                &:focus,
-                &:active {
-                    @apply bg-opacity-80;
-                    @apply border-opacity-50;
-                }
-                &:disabled {
-                    @apply bg-gray-700;
-                    @apply border-gray-700;
-                    @apply bg-opacity-10;
-                    @apply border-opacity-10;
-                    span {
-                        @apply text-gray-700;
-                    }
-                }
-                &.warning {
-                    @apply bg-red-500;
-                    @apply border-red-500;
-                    min-width: 100px;
-                    span {
-                        @apply text-white;
-                    }
-                    &:hover {
-                        @apply bg-red-600;
-                        @apply border-red-600;
-                    }
-                    &:active,
-                    &:focus {
-                        @apply bg-red-700;
-                        @apply border-red-700;
-                    }
-                    &:disabled {
-                        @apply pointer-events-none;
-                        @apply bg-gray-200;
-                        @apply border-gray-200;
-                        span {
-                            @apply text-gray-500;
-                        }
-                    }
-                }
-            }
         }
         &:disabled {
             @apply pointer-events-none;
@@ -150,22 +98,27 @@
                 }
             }
             &.darkmode {
-                @apply bg-transparent;
+                @apply bg-gray-700;
                 @apply border-gray-700;
+                @apply bg-opacity-30;
+                @apply border-opacity-30;
                 span {
                     @apply text-white;
                 }
                 &:hover {
-                    @apply bg-gray-700;
-                    @apply bg-opacity-20;
+                    @apply bg-opacity-50;
+                    @apply border-opacity-50;
                 }
-                &:active,
-                &:focus {
-                    @apply bg-gray-900;
-                    @apply border-gray-700;
+                &:focus,
+                &:active {
+                    @apply bg-opacity-80;
+                    @apply border-opacity-50;
                 }
                 &:disabled {
-                    @apply text-gray-700;
+                    @apply bg-gray-700;
+                    @apply border-gray-700;
+                    @apply bg-opacity-10;
+                    @apply border-opacity-10;
                     span {
                         @apply text-gray-700;
                     }
@@ -268,6 +221,22 @@
             &:active {
                 @apply text-gray-800;
             }
+            &.darkmode {
+                &,
+                &:hover,
+                &:active {
+                    @apply text-white;
+                }
+                &:hover {
+                    @apply bg-blue-900;
+                }
+                &:active {
+                    @apply bg-gray-900;
+                }
+                :global(svg) {
+                    @apply text-blue-500;
+                }
+            }
         }
 
         &:disabled {
@@ -275,6 +244,9 @@
             @apply bg-gray-200;
             span {
                 @apply text-gray-500;
+            }
+            &.darkmode {
+                @apply bg-gray-800;
             }
         }
     }
@@ -320,7 +292,7 @@
                     <div class="relative flex flex-row justify-between">
                         <div class="relative flex items-center flex-1">
                             <div class="absolute left-0 flex items-center">
-                                <Icon classes="mr-4" {icon} />
+                                <Icon width="16" height="16" classes="mr-4" {icon} />
                             </div>
                             <span class="font-bold text-12 leading-140"><slot /></span>
                         </div>
@@ -330,7 +302,7 @@
                         <div class="relative flex items-center flex-1">
                             <span class="font-bold text-12 leading-140"><slot /></span>
                             <div class="absolute right-0 flex items-center">
-                                <Icon classes="ml-4" {icon} />
+                                <Icon width="16" height="16" classes="ml-4" {icon} />
                             </div>
                         </div>
                     </div>

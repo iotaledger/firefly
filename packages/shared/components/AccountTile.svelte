@@ -23,7 +23,7 @@
 
 <button
     on:click={onClick}
-    class="size-{size} group rounded-2xl bg-gray-200 dark:bg-gray-900 hover:bg-{color}-500 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'}">
+    class="size-{size} group rounded-2xl bg-gray-200 dark:bg-gray-900 hover:bg-{color}-500 font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'}">
     <Text smaller={size === 's'} overrideColor classes="mb-2 text-gray-800 dark:text-white group-hover:text-white">{name}</Text>
     <div class="flex flex-row justify-between w-full flex-{size === 'l' ? 'nowrap' : 'wrap'}">
         <Text
