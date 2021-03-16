@@ -42,7 +42,6 @@ export { default as HR } from './HR.svelte'
 export * from './modals'
 // Charts
 export { default as Chart } from './charts/Index.svelte'
-export { default as ChartOption } from './charts/Option.svelte'
 export { default as BarChart } from './charts/Bar.svelte'
 export { default as LineChart } from './charts/Line.svelte'
 export * as ChartDefaults from './charts/defaults'
