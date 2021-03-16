@@ -345,7 +345,7 @@
                 showRevealToggle
                 {locale}
                 maxlength="6"
-                numeric
+                integer
                 placeholder={locale('views.settings.changePincode.currentPincode')}
                 disabled={pinCodeBusy} />
             <Password
@@ -355,7 +355,7 @@
                 showRevealToggle
                 {locale}
                 maxlength="6"
-                numeric
+                integer
                 placeholder={locale('views.settings.changePincode.newPincode')}
                 disabled={pinCodeBusy} />
             <Password
@@ -364,7 +364,7 @@
                 showRevealToggle
                 {locale}
                 maxlength="6"
-                numeric
+                integer
                 placeholder={locale('views.settings.changePincode.confirmNewPincode')}
                 disabled={pinCodeBusy} />
             <div class="flex flex-row items-center">

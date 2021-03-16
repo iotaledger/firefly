@@ -1,10 +1,11 @@
 <script lang="typescript">
-    import { convertUnits, Unit } from '@iota/unit-converter'
+    import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, ProgressBar, Text } from 'shared/components'
     import { sendParams } from 'shared/lib/app'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import type { TransferProgressEventType } from 'shared/lib/typings/events'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
+    import { convertUnitsNoE } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
     import { isTransferring, transferState, WalletAccount } from 'shared/lib/wallet'
     import { getContext, onMount } from 'svelte'
@@ -24,7 +25,7 @@
 
     let selectedSendType = SEND_TYPE.EXTERNAL
     let unit = Unit.Mi
-    let amount = convertUnits($sendParams.amount, Unit.i, unit).toString()
+    let amount = $sendParams.amount === 0 ? '' : convertUnitsNoE($sendParams.amount, Unit.i, unit)
     let to = undefined
     let amountError = ''
     let addressPrefix = ($account ?? $accounts[0]).depositAddress.split('1')[0]
@@ -121,7 +122,7 @@
             }
 
             if (!amountError && !addressError) {
-                $sendParams.amount = convertUnits(amountAsFloat, unit, Unit.i)
+                $sendParams.amount = convertUnitsNoE(amountAsFloat, unit, Unit.i)
 
                 if (selectedSendType === SEND_TYPE.INTERNAL) {
                     internalTransfer(from.id, to.id, $sendParams.amount)
@@ -147,7 +148,7 @@
         }
     }
     const handleMaxClick = () => {
-        amount = convertUnits(from.balance, Unit.i, unit).toString()
+        amount = convertUnitsNoE(from.balance, Unit.i, unit)
     }
     onMount(() => {
         to = $accounts.length === 2 ? accountsDropdownItems[from.id === $accounts[0].id ? 1 : 0] : to
@@ -196,7 +197,8 @@
                         maxClick={handleMaxClick}
                         {locale}
                         classes="mb-2"
-                        disabled={$isTransferring} />
+                        disabled={$isTransferring}
+                        autofocus />
                     {#if selectedSendType === SEND_TYPE.INTERNAL}
                         <Dropdown
                             value={to?.label || ''}
