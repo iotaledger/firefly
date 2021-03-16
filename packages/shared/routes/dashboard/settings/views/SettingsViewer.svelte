@@ -38,6 +38,7 @@
     }
     onMount(() => {
         const child = $settingsChildRoute
+        settingsChildRoute.set(null)
         if (child) {
             scrollIntoView(child)
         }
