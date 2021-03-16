@@ -1,17 +1,17 @@
 <script lang="typescript">
-    import { get } from 'svelte/store'
+    import { Checkbox, Dropdown, Radio, Text } from 'shared/components'
     import { darkMode } from 'shared/lib/app'
-    import { Text, Radio, Dropdown, Checkbox } from 'shared/components'
     import { exchangeRates } from 'shared/lib/currency'
-    import { updateAccountsBalanceEquiv, updateBalanceOverviewFiat } from 'shared/lib/wallet'
-    import { addProfileCurrencyPriceData } from 'shared/lib/marketData'
     import { locales, setupI18n } from 'shared/lib/i18n'
+    import { addProfileCurrencyPriceData } from 'shared/lib/marketData'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { updateAccountsBalanceEquiv, updateBalanceOverviewFiat } from 'shared/lib/wallet'
+    import { get } from 'svelte/store'
 
     export let locale
 
     let darkModeEnabled = $darkMode
-    let notificationsChecked = get(activeProfile).settings.notifications
+    let notificationsChecked = get(activeProfile)?.settings.notifications ?? true
 
     $: darkMode.set(darkModeEnabled)
     $: updateProfile('settings.notifications', notificationsChecked)
@@ -40,8 +40,8 @@
     <section id="theme" class="w-3/4 opacity-50 pointer-events-none">
         <Text type="h4" classes="mb-3">{locale('views.settings.theme.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.theme.description')}</Text>
-        <Radio value={false} bind:group={darkModeEnabled} label={locale('general.light_theme')} />
-        <Radio value={true} bind:group={darkModeEnabled} label={locale('general.dark_theme')} />
+        <Radio value={false} bind:group={darkModeEnabled} label={locale('general.lightTheme')} />
+        <Radio value={true} bind:group={darkModeEnabled} label={locale('general.darkTheme')} />
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <section id="language" class="w-3/4">
@@ -50,7 +50,7 @@
         <Dropdown
             sortItems={true}
             onSelect={(item) => setLanguage(item)}
-            value={locales[$activeProfile.settings.language]}
+            value={locales[$activeProfile?.settings.language]}
             items={Object.values(locales).map((locale) => ({ value: locale, label: locale }))} />
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
@@ -60,7 +60,7 @@
         <Dropdown
             sortItems={true}
             onSelect={handleCurrencySelect}
-            value={$activeProfile.settings.currency}
+            value={$activeProfile?.settings.currency}
             items={Object.keys($exchangeRates)
                 .map((currency) => ({ value: currency, label: currency }))
                 .sort()} />

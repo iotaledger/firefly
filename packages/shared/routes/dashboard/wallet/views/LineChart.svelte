@@ -1,8 +1,9 @@
 <script lang="typescript">
+    import type { BalanceHistory, WalletAccount } from 'lib/wallet'
     import { Chart, Dropdown, Text } from 'shared/components'
     import {
-        ChartData,
         chartCurrency,
+        ChartData,
         chartTimeframe,
         DashboardChartType,
         getAccountValueData,
@@ -10,16 +11,17 @@
         getTokenData,
         selectedChart,
     } from 'shared/lib/chart'
-    import { CurrencyTypes } from 'shared/lib/currency'
-    import { TIMEFRAME_MAP, HistoryDataProps } from 'shared/lib/marketData'
+    import { CurrencyTypes, formatCurrencyValue } from 'shared/lib/currency'
+    import { HistoryDataProps, TIMEFRAME_MAP } from 'shared/lib/marketData'
     import { activeProfile } from 'shared/lib/profile'
     import { getContext, onMount } from 'svelte'
+    import type { Readable } from 'svelte/store'
 
     export let locale
 
-    const walletBalanceHistory = getContext('walletBalanceHistory')
-    const accountsBalanceHistory = getContext('accountsBalanceHistory')
-    const selectedAccount = getContext('selectedAccount')
+    const walletBalanceHistory = getContext<Readable<BalanceHistory>>('walletBalanceHistory')
+    const accountsBalanceHistory = getContext<Readable<BalanceHistory>>('accountsBalanceHistory')
+    const selectedAccount = getContext<Readable<WalletAccount>>('selectedAccount')
 
     let chartData: ChartData = { labels: [], data: [], tooltips: [] }
     let currencyDropdown = []
@@ -37,7 +39,7 @@
                 chartData = getAccountValueData($accountsBalanceHistory[$selectedAccount.index])
                 switch ($chartTimeframe) {
                     case HistoryDataProps.ONE_HOUR:
-                    case HistoryDataProps.ONE_DAY:
+                    case HistoryDataProps.TWENTY_FOUR_HOURS:
                         xMaxTicks = 4
                         break
                     case HistoryDataProps.SEVEN_DAYS:
@@ -60,7 +62,7 @@
     }
 
     onMount(() => {
-        let profileCurrency = $activeProfile.settings.currency
+        let profileCurrency = $activeProfile?.settings.currency ?? CurrencyTypes.USD
         currencyDropdown = Object.values(CurrencyTypes).map((currency) => ({ value: currency, label: currency.toUpperCase() }))
         if (!CurrencyTypes[profileCurrency]) {
             currencyDropdown.push({ value: profileCurrency.toLocaleLowerCase(), label: profileCurrency })
@@ -83,7 +85,7 @@
                 {/each}
             </div>
         {:else}
-            <Text type="h4" classes="break-all mr-2">{locale('charts.account_value')}</Text>
+            <Text type="h4" classes="break-all mr-2">{locale('charts.accountValue')}</Text>
         {/if}
         <div class="flex space-x-2">
             <span>
@@ -101,10 +103,10 @@
     <Chart
         type="line"
         {datasets}
-        beginAtZero={$selectedChart !== DashboardChartType.TOKEN}
+        beginAtZero={$selectedAccount || $selectedChart !== DashboardChartType.TOKEN}
         {labels}
         {color}
         {xMaxTicks}
-        yPrecision={7}
+        formatYAxis={(value) => formatCurrencyValue(value, $chartCurrency, undefined, undefined, 5)}
         inlineStyle={$selectedAccount && 'height: calc(50vh - 150px);'} />
 </div>

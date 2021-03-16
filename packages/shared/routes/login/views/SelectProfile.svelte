@@ -1,7 +1,7 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
-    import { Logo, Profile, Icon } from 'shared/components'
+    import { Icon, Logo, Profile } from 'shared/components'
     import { profiles, setActiveProfile } from 'shared/lib/profile'
+    import { createEventDispatcher } from 'svelte'
 
     export let locale
     export let mobile
@@ -39,7 +39,7 @@
             <div class="mb-6">
                 <Profile
                     onClick={addProfile}
-                    name={locale('general.add_profile')}
+                    name={locale('general.addProfile')}
                     classes="border-solid border-2 border-gray-400 cursor-pointer">
                     <Icon icon="plus" classes="text-blue-500" />
                 </Profile>

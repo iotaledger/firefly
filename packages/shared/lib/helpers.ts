@@ -34,8 +34,11 @@ export const persistent = <T>(key: string, initialValue: T): Writable<T> => {
 /**
  * Extract initials from string
  */
-export const getInitials = (string: string, maxChars: number) => {
-    let initialsArray = string
+export const getInitials = (name: string | undefined, maxChars: number) => {
+    if (!name) {
+        return ""
+    }
+    let initialsArray = name
         .trim()
         .split(' ')
         .map(
@@ -71,36 +74,6 @@ export const truncateString = (str: string = '', firstCharCount: number = 5, end
 }
 
 /**
- * Set text to clipboard
- */
-export const setClipboard = (input: string): boolean => {
-    try {
-        const textArea = document.createElement('textarea')
-        textArea.value = input
-        document.body.appendChild(textArea)
-
-        if (navigator.userAgent.match(/ipad|iphone/i)) {
-            const range = document.createRange()
-            range.selectNodeContents(textArea)
-            const selection = window.getSelection()
-            selection.removeAllRanges()
-            selection.addRange(range)
-            textArea.setSelectionRange(0, 999999)
-        } else {
-            textArea.select()
-        }
-
-        document.execCommand('copy')
-        document.body.removeChild(textArea)
-
-        return true
-    } catch (err) {
-        console.log(err)
-        return false
-    }
-}
-
-/**
  * Get difference between two dates in weeks
  * @param firstDate: first date to compare
  * @param secondDate: second sate to compare
@@ -118,13 +91,13 @@ export const diffDates = (firstDate: Date, secondDate: Date) => {
     const years = Math.floor(months / 12)
 
     if (years > 0) {
-        return { unit: 'years_ago', value: years }
+        return { unit: 'yearsAgo', value: years }
     } else if (months > 0) {
-        return { unit: 'months_ago', value: months }
+        return { unit: 'monthsAgo', value: months }
     } else if (weeks > 0) {
-        return { unit: 'weeks_ago', value: weeks }
+        return { unit: 'weeksAgo', value: weeks }
     } else if (days > 0) {
-        return { unit: 'days_ago', value: days }
+        return { unit: 'daysAgo', value: days }
     } else {
         return { unit: 'today' }
     }

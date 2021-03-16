@@ -1,3 +1,5 @@
+import { localize } from 'shared/lib/i18n'
+import { showAppNotification } from 'shared/lib/notifications'
 import validUrl from 'valid-url'
 
 export const VALID_MAINNET_ADDRESS = /^iota1[02-9ac-hj-np-z]{59}$/
@@ -167,4 +169,44 @@ export function debounce(callback, wait = 500) {
         clearTimeout(_timeout)
         _timeout = setTimeout(() => callback.apply(context, args), wait)
     }
+}
+
+/**
+ * Set text to clipboard
+ */
+export const setClipboard = (input: string): boolean => {
+    try {
+        const textArea = document.createElement('textarea')
+        textArea.value = input
+        document.body.appendChild(textArea)
+
+        if (navigator.userAgent.match(/ipad|iphone/i)) {
+            const range = document.createRange()
+            range.selectNodeContents(textArea)
+            const selection = window.getSelection()
+            selection.removeAllRanges()
+            selection.addRange(range)
+            textArea.setSelectionRange(0, 999999)
+        } else {
+            textArea.select()
+        }
+
+        document.execCommand('copy')
+        document.body.removeChild(textArea)
+
+        const notificationMessage = localize('notifications.copiedToClipboard')
+        showAppNotification({ type: "info", message: notificationMessage })
+
+        return true
+    } catch (err) {
+        console.log(err)
+        return false
+    }
+}
+
+export const getDefaultStrongholdName = () : string => {
+    // Match https://github.com/iotaledger/wallet.rs/blob/ffbeaa3466b44f79dd5f87e14ed1bdc4846d9e85/src/account_manager.rs#L1428
+    // Trim milliseconds and replace colons with dashes
+    const date = new Date().toISOString().slice(0, -5).replace(/:/g, "-")
+    return `firefly-backup-${date}.stronghold`
 }

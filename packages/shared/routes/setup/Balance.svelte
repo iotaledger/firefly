@@ -47,7 +47,7 @@
             {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-between items-center space-x-4">
-            <Button secondary ghost classes="flex-1" onClick={() => console.log('foo')}>{locale('actions.check_again')}</Button>
+            <Button secondary classes="flex-1" onClick={() => console.log('foo')}>{locale('actions.check_again')}</Button>
             <Button classes="flex-1" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex p-16">

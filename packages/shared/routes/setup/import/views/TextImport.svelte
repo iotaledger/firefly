@@ -21,10 +21,10 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
-            <Text type="h2" classes="mb-5">{locale('views.import_from_text.title')}</Text>
-            <Text type="p" secondary classes="mb-4">{locale('views.import_from_text.body_1')}</Text>
-            <Text type="p" secondary classes="mb-8">{locale('views.import_from_text.body_2')}</Text>
-            <Text type="h5" classes="mb-4">{locale('views.import_from_text.body_3')}</Text>
+            <Text type="h2" classes="mb-5">{locale('views.importFromText.title')}</Text>
+            <Text type="p" secondary classes="mb-4">{locale('views.importFromText.body1')}</Text>
+            <Text type="p" secondary classes="mb-8">{locale('views.importFromText.body2')}</Text>
+            <Text type="h5" classes="mb-4">{locale('views.importFromText.body3')}</Text>
             <ImportTextfield bind:value={input} {locale} />
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">

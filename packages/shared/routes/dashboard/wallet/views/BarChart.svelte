@@ -25,6 +25,6 @@
 </script>
 
 <div data-label="bar-chart" class="flex flex-col justify-between w-full h-full px-8 py-4">
-    <Text type="h4" classes="mb-4">{locale('charts.account_activity')}</Text>
-    <Chart type="bar" {labels} datasets={[incoming, outgoing]} {color} />
+    <Text type="h4" classes="mb-4">{locale('charts.accountActivity')}</Text>
+    <Chart type="bar" {labels} datasets={[incoming, outgoing]} {color} formatYAxis={(value) => value.toFixed(2)} />
 </div>

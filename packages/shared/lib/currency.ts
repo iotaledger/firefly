@@ -147,3 +147,25 @@ export const currencies = writable<Currencies>({} as Currencies)
 export const convertToFiat = (amount: number, usdPrice: number, conversionRate: number): number => {
     return +(((amount * usdPrice) / 1000000) * conversionRate).toFixed(2)
 }
+
+/**
+ * Converts to appropriate decimal places for a given currency
+ *
+ * @method formatCurrencyValue
+ *
+ * @param {number | string} data
+ * @param {string} currency
+ *
+ * @returns {string}
+ */
+export const formatCurrencyValue = (data: (number | string), currency: string, fiatFixed: number = 2, btcFixed: number = 7, ethFixed: number = 6, ): string => {
+    const parsedData: number = parseFloat(data.toString())
+    switch(currency.toLowerCase()) {
+        case CurrencyTypes.BTC:
+            return parsedData.toFixed(btcFixed)
+        case CurrencyTypes.ETH:
+            return parsedData.toFixed(ethFixed)
+        default:
+            return parsedData.toFixed(fiatFixed)
+    }
+}

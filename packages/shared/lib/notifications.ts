@@ -43,7 +43,7 @@ export function showNotification(notificationData: NotificationData, showSystemN
     }
 
     if (showSystemNotification &&
-        get(activeProfile).settings.notifications &&
+        get(activeProfile)?.settings.notifications &&
         Electron.NotificationManager) {
         Electron.NotificationManager.notify(notificationData.message)
     } else {

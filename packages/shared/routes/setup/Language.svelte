@@ -36,8 +36,8 @@
                 classes="mb-4 opacity-50" />
             <div class="pointer-events-none opacity-50">
                 <Text type="p" classes="mb-2 mt-4" smaller>{locale('general.appearance')}</Text>
-                <Radio value={false} bind:group={darkModeEnabled} label={locale('general.light_theme')} />
-                <Radio value={true} bind:group={darkModeEnabled} label={locale('general.dark_theme')} />
+                <Radio value={false} bind:group={darkModeEnabled} label={locale('general.lightTheme')} />
+                <Radio value={true} bind:group={darkModeEnabled} label={locale('general.darkTheme')} />
             </div>
         </div>
         <div slot="leftpane__action">

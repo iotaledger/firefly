@@ -5,7 +5,7 @@
     import { hasOnlyWhitespaces } from 'shared/lib/helpers'
     import { createProfile, disposeNewProfile, newProfile, profiles } from 'shared/lib/profile'
     import { SetupType } from 'shared/lib/typings/routes'
-    import { getStoragePath, initialise } from 'shared/lib/wallet'
+    import { getStoragePath, initialise, api, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -21,30 +21,32 @@
 
     $: isProfileNameValid = profileName && !hasOnlyWhitespaces(profileName)
 
-    const MAX_PROFILE_NAME_LENGTH = 20
-
     function handleContinueClick(setupType) {
-        let profile
-        error = ''
+        if (profileName) {
+            let profile
+            error = ''
 
-        if (profileName.length > MAX_PROFILE_NAME_LENGTH) {
-            return (error = locale('error.profile.length', {
-                values: {
-                    length: MAX_PROFILE_NAME_LENGTH,
-                },
-            }))
+            if (profileName.length > MAX_PROFILE_NAME_LENGTH) {
+                return (error = locale('error.profile.length', {
+                    values: {
+                        length: MAX_PROFILE_NAME_LENGTH,
+                    },
+                }))
+            }
+
+            if (get(profiles).some((profile) => profile.name === profileName)) {
+                return (error = locale('error.profile.duplicate'))
+            }
+
+            profile = createProfile(profileName, isDeveloperProfile)
+
+            return Electron.getUserDataPath().then((path) => {
+                initialise(profile.id, getStoragePath(path, profile.name))
+                api.setStrongholdPasswordClearInterval({ secs: 0, nanos: 0 })
+
+                dispatch('next', { setupType })
+            })
         }
-
-        if (get(profiles).some((profile) => profile.name === profileName)) {
-            return (error = locale('error.profile.duplicate'))
-        }
-
-        profile = createProfile(profileName, isDeveloperProfile)
-
-        return Electron.getUserDataPath().then((path) => {
-            initialise(profile.id, getStoragePath(path, profile.name))
-            dispatch('next', { setupType })
-        })
     }
 
     function handleBackClick() {
@@ -59,7 +61,13 @@
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-4">{locale('views.setup.title')}</Text>
-            <Input {error} bind:value={profileName} placeholder={locale('views.setup.profile_name')} classes="w-full" autofocus />
+            <Input
+                {error}
+                bind:value={profileName}
+                placeholder={locale('views.setup.profileName')}
+                classes="w-full"
+                autofocus
+                submitHandler={() => handleContinueClick(SetupType.New)} />
             {#if $developerMode}
                 <Checkbox label={locale('general.developerProfile')} bind:checked={isDeveloperProfile} />
             {/if}
@@ -70,10 +78,10 @@
                 classes="flex-1"
                 disabled={!isProfileNameValid}
                 onClick={() => handleContinueClick(SetupType.Import)}>
-                {locale('actions.import_wallet')}
+                {locale('actions.importWallet')}
             </Button>
             <Button classes="flex-1" disabled={!isProfileNameValid} onClick={() => handleContinueClick(SetupType.New)}>
-                {locale('actions.create_wallet')}
+                {locale('actions.createWallet')}
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-end items-center">

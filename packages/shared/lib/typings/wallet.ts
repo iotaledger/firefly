@@ -27,6 +27,11 @@ export interface StrongholdPasswordChange {
     newPassword: string
 }
 
+export interface Duration {
+    secs: number
+    nanos: number
+}
+
 export function backup(bridge: Bridge, __ids: CommunicationIds, destinationPath: string) {
     return bridge({
         actorId: __ids.actorId,
@@ -142,6 +147,15 @@ export function setClientOptions(bridge: Bridge, __ids: CommunicationIds, payloa
         actorId: __ids.actorId,
         id: __ids.messageId,
         cmd: 'SetClientOptions',
+        payload,
+    })
+}
+
+export function setStrongholdPasswordClearInterval(bridge: Bridge, __ids: CommunicationIds, payload: Duration) {
+    return bridge({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        cmd: 'SetStrongholdPasswordClearInterval',
         payload,
     })
 }
