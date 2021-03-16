@@ -67,9 +67,9 @@ export function updateDownload(): void {
 
     const downloadingNotification: NotificationData = {
         type: "info",
-        message: localize('notifications.downloading_update'),
+        message: localize('notifications.downloadingUpdate'),
         progress: 0,
-        subMessage: localize('notifications.calc_minutes_remaining'),
+        subMessage: localize('notifications.calcMinutesRemaining'),
         actions: [
             {
                 label: localize('actions.cancel'),
@@ -93,9 +93,9 @@ export function updateDownload(): void {
             updateDisplayNotification(notificationId, {
                 ...downloadingNotification,
                 subMessage: minutesRemaining === -1
-                    ? localize('notifications.calc_minutes_remaining')
+                    ? localize('notifications.calcMinutesRemaining')
                     : (minutesRemaining < 1 ? "< " : "")
-                    + localize('notifications.minutes_remaining', {
+                    + localize('notifications.minutesRemaining', {
                         values: {
                             minutes: Math.ceil(minutesRemaining).toString()
                         }
@@ -110,12 +110,12 @@ export function updateDownload(): void {
                 notificationId,
                 {
                     type: "info",
-                    message: localize('notifications.update_ready'),
-                    subMessage: localize('notifications.restart_install'),
+                    message: localize('notifications.updateReady'),
+                    subMessage: localize('notifications.restartInstall'),
                     progress: undefined,
                     actions: [
                         {
-                            label: localize('actions.restart_now'),
+                            label: localize('actions.restartNow'),
                             callback: () => {
                                 cleanup()
                                 updateInstall()
@@ -137,7 +137,7 @@ export function updateDownload(): void {
                 notificationId,
                 {
                     type: "error",
-                    message: localize('notifications.update_error'),
+                    message: localize('notifications.updateError'),
                     progress: undefined,
                     actions: [
                         {

@@ -18,8 +18,8 @@
     const account = getContext<Readable<WalletAccount>>('selectedAccount')
 
     enum SEND_TYPE {
-        EXTERNAL = 'send_payment',
-        INTERNAL = 'move_funds',
+        EXTERNAL = 'sendPayment',
+        INTERNAL = 'moveFunds',
     }
 
     let selectedSendType = SEND_TYPE.EXTERNAL

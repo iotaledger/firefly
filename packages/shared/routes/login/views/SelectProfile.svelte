@@ -39,7 +39,7 @@
             <div class="mb-6">
                 <Profile
                     onClick={addProfile}
-                    name={locale('general.add_profile')}
+                    name={locale('general.addProfile')}
                     classes="border-solid border-2 border-gray-400 cursor-pointer">
                     <Icon icon="plus" classes="text-blue-500" />
                 </Profile>

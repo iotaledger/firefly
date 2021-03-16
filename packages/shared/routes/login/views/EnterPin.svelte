@@ -30,7 +30,7 @@
     let buttonText = setButtonText(timeRemainingBeforeNextAttempt)
 
     function setButtonText(time) {
-        return locale('views.login.please_wait', { values: { time: time.toString() } })
+        return locale('views.login.pleaseWait', { values: { time: time.toString() } })
     }
 
     const dispatch = createEventDispatcher()
@@ -131,9 +131,9 @@
                     disabled={hasReachedMaxAttempts || isBusy}
                     autofocus />
                 <Text type="p" bold classes="mt-4 text-center">
-                    {attempts > 0 ? locale('views.login.incorrect_attempts', {
+                    {attempts > 0 ? locale('views.login.incorrectAttempts', {
                               values: { attempts: attempts.toString() },
-                          }) : locale('actions.enter_your_pin')}
+                          }) : locale('actions.enterYourPin')}
                 </Text>
             </div>
             <Button classes="w-96" disabled={!hasCorrectFormat || hasReachedMaxAttempts || isBusy} onClick={() => onSubmit()}>

@@ -1,29 +1,29 @@
 {
     "views": {
-        "onboarding_1": {
+        "onboarding1": {
             "title": "भेजे, प्राप्त करे तथा प्रबंधन करे अपने आयोटा!",
             "body": "फायरफ्लाई एक सुरक्षित और प्रयोग करने में आसान आयोटा वॉलेट है।"
         },
         "legal": {
             "title": "कानूनी",
             "body": "कृपया समीक्षा करे प्राइवेसी पॉलिसी तथा सेवा की शर्तें|",
-            "privacy_policy": {
+            "privacyPolicy": {
                 "title": "प्राइवेसी पॉलिसी",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "terms_of_service": {
+            "termsOfService": {
                 "title": "सेवा की शर्तें",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
@@ -34,7 +34,7 @@
         "setup": {
             "title": "अपना वॉलेट सेट करें|",
             "body": "आप एक नया वॉलेट बना सकते हैं या एक मौजूदा आयात कर सकते हैं।",
-            "profile_name": "प्रोफ़ाइल नाम"
+            "profileName": "प्रोफ़ाइल नाम"
         },
         "password": {
             "title": "एक पासवर्ड बनाएं",
@@ -42,41 +42,41 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body_2": "Keep your PIN safe!"
+            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
+            "body2": "Keep your PIN safe!"
         },
         "pin": {
             "title": "पिन कोड सेट करें",
-            "body_1": "नीचे छह अंकों का पिन दर्ज करें। वॉलेट लॉग इन करने के लिए अपना पिन दर्ज करने के लिए कहा जाएगा|",
-            "body_2": "केवल संख्याओं का उपयोग करे|"
+            "body1": "नीचे छह अंकों का पिन दर्ज करें। वॉलेट लॉग इन करने के लिए अपना पिन दर्ज करने के लिए कहा जाएगा|",
+            "body2": "केवल संख्याओं का उपयोग करे|"
         },
-        "confirm_pin": {
+        "confirmPin": {
             "title": "अपना पिन कोड सत्यापित करें",
             "body": "आगे बढ़ने के लिए अपना पिन कोड पुनः दर्ज करें"
         },
         "backup": {
             "title": "अपने वॉलेट का बैकअप लें",
-            "body_1": "अब आपको एक पुनर्प्राप्ति वाक्यांश दिखाया जाएगा",
-            "body_2": "इस वाक्यांश को किसी के साथ साझा न करें। आपके पुनर्प्राप्ति वाक्यांश का उपयोग आपके टोकन को कहीं से भी एक्सेस करने के लिए किया जा सकता है|",
-            "body_3": "यदि आप अपना पुनर्प्राप्ति वाक्यांश खो देते हैं, तो आप अपने धन को खो सकते हैं।"
+            "body1": "अब आपको एक पुनर्प्राप्ति वाक्यांश दिखाया जाएगा",
+            "body2": "इस वाक्यांश को किसी के साथ साझा न करें। आपके पुनर्प्राप्ति वाक्यांश का उपयोग आपके टोकन को कहीं से भी एक्सेस करने के लिए किया जा सकता है|",
+            "body3": "यदि आप अपना पुनर्प्राप्ति वाक्यांश खो देते हैं, तो आप अपने धन को खो सकते हैं।"
         },
-        "recovery_phrase": {
+        "recoveryPhrase": {
             "title": "वसूली वाक्यांश",
-            "body_1": "सटीक क्रम में शब्दों को सावधानीपूर्वक लिखें|",
-            "body_2": "अपने पुनर्प्राप्ति वाक्यांश को निजी और सुरक्षित रूप से संग्रहीत रखें। इसे किसी के साथ साझा न करें।",
-            "reveal_recovery_phrase": "पुनर्प्राप्ति वाक्यांश प्रकट करें",
-            "hide_recovery_phrase": "अपने वसूली वाक्यांश को छुपाये"
+            "body1": "सटीक क्रम में शब्दों को सावधानीपूर्वक लिखें|",
+            "body2": "अपने पुनर्प्राप्ति वाक्यांश को निजी और सुरक्षित रूप से संग्रहीत रखें। इसे किसी के साथ साझा न करें।",
+            "revealRecoveryPhrase": "पुनर्प्राप्ति वाक्यांश प्रकट करें",
+            "hideRecoveryPhrase": "अपने वसूली वाक्यांश को छुपाये"
         },
-        "verify_recovery_phrase": {
+        "verifyRecoveryPhrase": {
             "title": "वसूली वाक्यांश सत्यापित करें",
             "body": "चलिए चेक करते हैं कि आपने वाक्यांश को सही ढंग से लिखा है। सही क्रम में शब्दों का चयन करें|",
-            "creating_account": "Creating account, please wait..."
+            "creatingAccount": "Creating account, please wait..."
         },
-        "backup_wallet": {
+        "backupWallet": {
             "title": "बैक अप लें स्ट्रॉन्गहोल्ड फाइल में|",
             "body": "अपने वॉलेट को एक स्ट्रॉन्गहोल्ड फाइल में बैकअप करने के लिए अपना पासवर्ड दर्ज करें। आपका पासवर्ड बैकअप एन्क्रिप्ट करने के लिए उपयोग किया जाता है।"
         },
-        "recovery_phrase_saved": {
+        "recoveryPhraseSaved": {
             "title": "सफलतापूर्वक बैकअप होगया",
             "body": "आपने अपना वॉलेट स्ट्रॉन्गहोल्ड में बैकअप कर लिया है"
         },
@@ -88,35 +88,35 @@
             "title": "वॉलेट आयात करें",
             "body": "यदि आपके पास एक पुनर्प्राप्ति वाक्यांश या स्ट्रॉन्गहोल्ड बैकअप है, तो आप इसे यहां आयात कर सकते हैं।"
         },
-        "import_from_text": {
+        "importFromText": {
             "title": "एक पुनर्प्राप्ति वाक्यांश या सीड के साथ अपने वॉलेट को पुनर्स्थापित करें",
-            "body_1": "एक पुनर्प्राप्ति वाक्यांश चौबीस शब्द लंबा होता है। इसका उपयोग मौजूदा फायरफ्लाई वॉलेट को पुनर्प्राप्त करने के लिए किया जाता है।",
-            "body_2": "एक सीड में इक्यासी वर्ण होते हैं। इसका उपयोग पुराने ट्रिनिटी वॉलेट से पुनर्प्राप्त करने के लिए किया जाता है।",
-            "body_3": "अपना सीड या पुनर्प्राप्ति वाक्यांश दर्ज करें",
-            "seed_detected": "81 character seed detected",
-            "phrase_detected": "24 word phrase detected"
+            "body1": "एक पुनर्प्राप्ति वाक्यांश चौबीस शब्द लंबा होता है। इसका उपयोग मौजूदा फायरफ्लाई वॉलेट को पुनर्प्राप्त करने के लिए किया जाता है।",
+            "body2": "एक सीड में इक्यासी वर्ण होते हैं। इसका उपयोग पुराने ट्रिनिटी वॉलेट से पुनर्प्राप्त करने के लिए किया जाता है।",
+            "body3": "अपना सीड या पुनर्प्राप्ति वाक्यांश दर्ज करें",
+            "seedDetected": "81 character seed detected",
+            "phraseDetected": "24 word phrase detected"
         },
-        "import_from_file": {
+        "importFromFile": {
             "title": "एक बैकअप फ़ाइल से अपने वॉलेट को पुनर्स्थापित करें",
             "body": "अपने बटुए को पुनर्स्थापित करने के लिए एक बैकअप फ़ाइल आयात करें। बैकअप या तो एक स्ट्रॉन्गहोल्ड फाइल (.stronghold) या एक ट्रिनिटी सीड़वॉल्ट फाइल (.kdbx) हो सकते हैं।"
         },
-        "import_backup_password": {
+        "importBackupPassword": {
             "title": "एक सीड़वॉल्ट या स्ट्रॉन्गहोल्ड से अपने वॉलेट को पुनर्स्थापित करें",
-            "body_1": "कृपया अपना बैकअप पासवर्ड डालें",
-            "body_2": "यह वह पासवर्ड है जिसे आपने पहली बार अपना बैकअप बनाते समय सेट किया था।"
+            "body1": "कृपया अपना बैकअप पासवर्ड डालें",
+            "body2": "यह वह पासवर्ड है जिसे आपने पहली बार अपना बैकअप बनाते समय सेट किया था।"
         },
-        "import_success": {
+        "importSuccess": {
             "title": "आपने अपना बैकअप सफलतापूर्वक प्राप्त कर लिया है",
             "body": "अब आप अपना नया वॉलेट सेट कर सकते हैं।"
         },
         "migrate": {
             "title": "अपने निधि को विस्थापित करें",
-            "body_1": "यह आपके फंड को आपके नए वॉलेट में स्थानांतरित करने की एक स्वचालित प्रक्रिया है। हम खर्च किए गए पतों की जांच करेंगे जो आपकी सुरक्षा को कमजोर करते हैं।",
-            "body_2": "इसमें कुछ समय लग सकता है। प्रवास के दौरान अपने डिवाइस को बंद न करें।",
+            "body1": "यह आपके फंड को आपके नए वॉलेट में स्थानांतरित करने की एक स्वचालित प्रक्रिया है। हम खर्च किए गए पतों की जांच करेंगे जो आपकी सुरक्षा को कमजोर करते हैं।",
+            "body2": "इसमें कुछ समय लग सकता है। प्रवास के दौरान अपने डिवाइस को बंद न करें।",
             "existing": "आपका पराना वालेट",
             "new": "आपका नए वालेट"
         },
-        "migrate_failed": {
+        "migrateFailed": {
             "title": "To do",
             "body": "To do"
         },
@@ -248,40 +248,40 @@
             }
         },
         "login": {
-            "please_wait": "कृपया {time, plural, one {1 सेकंड} other {# सेकंड}} प्रतीक्षा करें",
-            "incorrect_attempts": "{attempts, plural, one {1 गलत प्रयास} other {# गलत प्रयास}}"
+            "pleaseWait": "कृपया {time, plural, one {1 सेकंड} other {# सेकंड}} प्रतीक्षा करें",
+            "incorrectAttempts": "{attempts, plural, one {1 गलत प्रयास} other {# गलत प्रयास}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "फायरफ्लाई v{version}",
-                    "up_to_date": "आधुनिक",
-                    "out_of_date": "अप्रचलित"
+                    "upToDate": "आधुनिक",
+                    "outOfDate": "अप्रचलित"
                 },
-                "hardware_device": {
+                "hardwareDevice": {
                     "title": "हार्डवेयर उपकरण",
-                    "none_detected": "किसी का पता नहीं चला"
+                    "noneDetected": "किसी का पता नहीं चला"
                 },
-                "stronghold_status": {
+                "strongholdStatus": {
                     "title": "स्ट्रॉन्गहोल्ड स्टेटस",
                     "locked": "लॉक्ड",
                     "unlocked": "खुला"
                 },
-                "stronghold_backup": {
+                "strongholdBackup": {
                     "title": "स्ट्रॉन्गहोल्ड बैकअप",
-                    "weeks_ago": "{weeks, plural, one {# सप्ताह} other {# सप्ताह}} पहले"
+                    "weeksAgo": "{weeks, plural, one {# सप्ताह} other {# सप्ताह}} पहले"
                 }
             },
             "network": {
-                "network_operational": "नेटवर्क प्रचालन",
-                "network_degraded": "नेटवर्क पदावनत",
-                "network_down": "नेटवर्क डाउन",
+                "networkOperational": "नेटवर्क प्रचालन",
+                "networkDegraded": "नेटवर्क पदावनत",
+                "networkDown": "नेटवर्क डाउन",
                 "status": "स्टेटस",
-                "messages_per_second": "मेस्सगेस प्रति सेकंड",
-                "confirmation_rate": "पुष्टि दर"
+                "messagesPerSecond": "मेस्सगेस प्रति सेकंड",
+                "confirmationRate": "पुष्टि दर"
             },
-            "profile_modal": {
-                "all_settings": "सभी सेटिंग्स",
+            "profileModal": {
+                "allSettings": "सभी सेटिंग्स",
                 "logout": "लॉग आउट"
             }
         }
@@ -296,42 +296,42 @@
         },
         "version": {
             "title": "वर्तमान संस्करण: {version}",
-            "up_to_date_title": "फायरफ्लाई नवीनतम है",
-            "up_to_date_description": "आप फायरफ्लाई का नवीनतम और सबसे सुरक्षित संस्करण चला रहे हैं",
-            "update_available": "फायरफ्लाई अपडेट उपलब्ध है",
-            "update_details": "संस्करण {version} - {date}"
+            "upToDateTitle": "फायरफ्लाई नवीनतम है",
+            "upToDateDescription": "आप फायरफ्लाई का नवीनतम और सबसे सुरक्षित संस्करण चला रहे हैं",
+            "updateAvailable": "फायरफ्लाई अपडेट उपलब्ध है",
+            "updateDetails": "संस्करण {version} - {date}"
         },
         "backup": {
             "title": "पिछला बैकअप: {date}",
-            "last_backup": "आपका पिछला बैकअप {date}",
-            "backup_description": "यह सुनिश्चित करने के लिए नियमित रूप से बैकअप लेना महत्वपूर्ण है कि आपके पास अपने खातों और लेनदेन के इतिहास की एक प्रति है",
-            "backup_warning": "यदि आप अपना बैकअप और पुनर्प्राप्ति वाक्यांश खो देते हैं तो आप अपने फंड तक पहुंच खो देंगे",
-            "not_backed_up": "बैकअप नहीं है",
-            "not_backed_up_description": "आपने अपने स्ट्रॉन्गहोल्ड का बैकअप नहीं किया है"
+            "lastBackup": "आपका पिछला बैकअप {date}",
+            "backupDescription": "यह सुनिश्चित करने के लिए नियमित रूप से बैकअप लेना महत्वपूर्ण है कि आपके पास अपने खातों और लेनदेन के इतिहास की एक प्रति है",
+            "backupWarning": "यदि आप अपना बैकअप और पुनर्प्राप्ति वाक्यांश खो देते हैं तो आप अपने फंड तक पहुंच खो देंगे",
+            "notBackedUp": "बैकअप नहीं है",
+            "notBackedUpDescription": "आपने अपने स्ट्रॉन्गहोल्ड का बैकअप नहीं किया है"
         },
-        "delete_account": {
+        "deleteAccount": {
             "title": "हटाएँ {name}?",
             "body": "आप स्थायी रूप से अपना लेन-देन इतिहास खो देंगे और शायद कुछ और भी",
-            "type_password": "पुष्टि करने के लिए अपने वॉलेट का पासवर्ड टाइप करें",
-            "delete_account": "खाता नष्ट करें",
-            "error_title": "{name} हटाने में असमर्थ",
-            "error_body_1": "खाता हटाने के लिए आपके पास 0 बैलेंस होना चाहिए",
-            "error_body_2": "वर्तमान में आपके पास इस खाते पर {balance} बैलेंस है। कृपया इन निधियों को एक अलग खाते में ले जाएँ और पुनः प्रयास करें",
-            "error_body_3": "You cannot delete this account, you must have at least one."
+            "typePassword": "पुष्टि करने के लिए अपने वॉलेट का पासवर्ड टाइप करें",
+            "deleteAccount": "खाता नष्ट करें",
+            "errorTitle": "{name} हटाने में असमर्थ",
+            "errorBody1": "खाता हटाने के लिए आपके पास 0 बैलेंस होना चाहिए",
+            "errorBody2": "वर्तमान में आपके पास इस खाते पर {balance} बैलेंस है। कृपया इन निधियों को एक अलग खाते में ले जाएँ और पुनः प्रयास करें",
+            "errorBody3": "You cannot delete this account, you must have at least one."
         },
-        "address_history": {
+        "addressHistory": {
             "title": "{name} खाता पता इतिहास",
-            "current_balance": "वर्तमान बैलेंस: {balance}"
+            "currentBalance": "वर्तमान बैलेंस: {balance}"
         },
         "node": {
-            "title_add": "नया नोड जोड़ें",
-            "title_remove": "Remove a node",
-            "title_details": "नोड विवरण",
-            "node_address": "नोड एड्रेस",
-            "optional_username": "यूजरनाम (वैकल्पिक)",
-            "optional_password": "पासवर्ड (वैकल्पिक)",
-            "set_as_primary_node": "प्राथमिक नोड के रूप में सेट करें",
-            "remove_confirmation": "Are you sure you want to remove this node?"
+            "titleAdd": "नया नोड जोड़ें",
+            "titleRemove": "Remove a node",
+            "titleDetails": "नोड विवरण",
+            "nodeAddress": "नोड एड्रेस",
+            "optionalUsername": "यूजरनाम (वैकल्पिक)",
+            "optionalPassword": "पासवर्ड (वैकल्पिक)",
+            "setAsPrimaryNode": "प्राथमिक नोड के रूप में सेट करें",
+            "removeConfirmation": "Are you sure you want to remove this node?"
         },
         "errorLog": {
             "title": "Error Log",
@@ -354,12 +354,12 @@
         }
     },
     "charts": {
-        "incoming_mi": "Incoming {value} Mi",
-        "outgoing_mi": "Outgoing {value} Mi",
+        "incomingMi": "Incoming {value} Mi",
+        "outgoingMi": "Outgoing {value} Mi",
         "portoflio": "Portfolio",
         "token": "Token",
-        "account_value": "Account Value",
-        "account_activity": "Account Activity"
+        "accountValue": "Account Value",
+        "accountActivity": "Account Activity"
     },
     "actions": {
         "continue": "जारी रखें",
@@ -368,32 +368,32 @@
         "close": "बंद करें",
         "dismiss": "रद्द करें",
         "save": "सेव करें",
-        "import_seed": "एक मौजूदा सीड आयात करें",
-        "import_wallet": "मौजूदा वॉलेट आयात करें",
-        "create_wallet": "नया वॉलेट बनाएं",
-        "save_password": "पासवर्ड सहेजें",
-        "use_biometric": "बायोमेट्रिक सुरक्षा का उपयोग करें",
-        "setup_pin": "पिन कोड सेट करें",
-        "set_pin": "पिन कोड सेट करें",
-        "confirm_pin": "पिन कोड की पुष्टि करें",
-        "enter_your_pin": "अपना पिन डालें",
-        "save_backup_file": "बैकअप फाइल सहेजें",
-        "ive_written_recovery_phrase": "मैंने अपना पुनर्प्राप्ति वाक्यांश लिख लिया है",
-        "verify_recovery_phrase": "वसूली वाक्यांश सत्यापित करें",
-        "reveal_recovery_phrase": "पुनर्प्राप्ति वाक्यांश प्रकट करें",
-        "import_seedvault": "सीडवॉल्ट आयात करे",
-        "check_again": "नहीं, फिर से जाँच करें",
-        "import_from_file": "फ़ाइल से आयात करें",
+        "importSeed": "एक मौजूदा सीड आयात करें",
+        "importWallet": "मौजूदा वॉलेट आयात करें",
+        "createWallet": "नया वॉलेट बनाएं",
+        "savePassword": "पासवर्ड सहेजें",
+        "useBiometric": "बायोमेट्रिक सुरक्षा का उपयोग करें",
+        "setupPin": "पिन कोड सेट करें",
+        "setPin": "पिन कोड सेट करें",
+        "confirmPin": "पिन कोड की पुष्टि करें",
+        "enterYourPin": "अपना पिन डालें",
+        "saveBackupFile": "बैकअप फाइल सहेजें",
+        "iveWrittenRecoveryPhrase": "मैंने अपना पुनर्प्राप्ति वाक्यांश लिख लिया है",
+        "verifyRecoveryPhrase": "वसूली वाक्यांश सत्यापित करें",
+        "revealRecoveryPhrase": "पुनर्प्राप्ति वाक्यांश प्रकट करें",
+        "importSeedvault": "सीडवॉल्ट आयात करे",
+        "checkAgain": "नहीं, फिर से जाँच करें",
+        "importFromFile": "फ़ाइल से आयात करें",
         "send": "भेजें",
         "receive": "प्राप्त करें",
         "create": "बनाएं",
-        "begin_transfer": "स्थानांतरण शुरू करें",
-        "try_again": "फिर कोशिश करें",
-        "visit_discord": "डिस्कॉर्ड पर जाएँ",
-        "drag_drop": "खींचें और छोड़ें",
-        "import_extentions": ".stronghold या .kdbx फाइल",
-        "choose_file": "फ़ाइल चुनें",
-        "drop_here": "अपनी फाइल को यहां छोड़ें",
+        "beginTransfer": "स्थानांतरण शुरू करें",
+        "tryAgain": "फिर कोशिश करें",
+        "visitDiscord": "डिस्कॉर्ड पर जाएँ",
+        "dragDrop": "खींचें और छोड़ें",
+        "importExtentions": ".stronghold या .kdbx फाइल",
+        "chooseFile": "फ़ाइल चुनें",
+        "dropHere": "अपनी फाइल को यहां छोड़ें",
         "syncAll": "सभी सिंक करें",
         "export": "एक्सपोर्ट करे",
         "exportNewStronghold": "एक नया स्ट्रॉन्गहोल्ड निर्यात करें",
@@ -403,15 +403,15 @@
         "exportState": "स्थिति निर्यात करें",
         "outsourceProofOfWork": "आउटसोर्स प्रूफ ऑफ़ वर्क",
         "unlock": "अनलॉक करें",
-        "update_firefly": "अपडेट फायरफ्लाई",
-        "restart_now": "Restart now",
-        "save_backup": "बैकअप सहेजें",
-        "customize_account": "अनुकूलित करें अपना खाता",
-        "view_address_history": "एड्रेस का इतिहास देखें",
-        "delete_account": "खाता नष्ट करें",
+        "updateFirefly": "अपडेट फायरफ्लाई",
+        "restartNow": "Restart now",
+        "saveBackup": "बैकअप सहेजें",
+        "customizeAcount": "Customise account",
+        "viewAddressHistory": "एड्रेस का इतिहास देखें",
+        "deleteAccount": "खाता नष्ट करें",
         "max": "अधिकतम",
-        "add_node": "नया नोड जोड़ें",
-        "remove_node": "Remove node",
+        "addNode": "नया नोड जोड़ें",
+        "removeNode": "Remove node",
         "hide": "Hide",
         "hideOthers": "Hide Others",
         "showAll": "Show All",
@@ -427,57 +427,57 @@
         "checkForUpdates": "Check for Updates",
         "reportAnIssue": "Report an Issue",
         "clear": "Clear",
-        "hide_details": "Hide Details",
+        "hideDetails": "Hide Details",
         "yes": "Yes",
         "no": "No",
         "reset": "Reset"
     },
     "general": {
         "password": "पासवर्ड",
-        "confirm_password": "पासवर्ड की पुष्टि करें",
+        "confirmPassword": "पासवर्ड की पुष्टि करें",
         "currentPassword": "वर्तमान पासवर्ड",
         "newPassword": "नया पासवर्ड",
         "confirmNewPassword": "नए पासवर्ड की पुष्टि करें",
-        "your_seed": "आपका सीड",
-        "recovery_phrase": "पुनर्प्राप्ति वाक्यांश",
-        "recent_activity": "हाल की गतिविधि",
+        "yourSeed": "आपका सीड",
+        "recoveryPhrase": "पुनर्प्राप्ति वाक्यांश",
+        "recentActivity": "हाल की गतिविधि",
         "sent": "भेजे गए",
         "received": "प्राप्त हुआ",
-        "send_payment": "भुगतान भेजें",
-        "move_funds": "फंड्स भेजे",
-        "send_funds": "धनराशि भेजें",
-        "send_to_address": "स्वयं के पते पर भेजा जा रहा है",
-        "scan_qr_or_paste": "QR कोड स्कैन करें या एक पता पेस्ट करें",
-        "move_funds_between_accounts": "अपने खातों के बीच धन ले जाएँ",
-        "send_tokens_to_address": "एक पते पर टोकन भेजें",
-        "manage_account": "खाते का प्रबंधन",
-        "customize_account": "अनुकूलित करें अपना खाता",
+        "sendPayment": "भुगतान भेजें",
+        "moveFunds": "फंड्स भेजे",
+        "sendFunds": "धनराशि भेजें",
+        "sendToAddress": "स्वयं के पते पर भेजा जा रहा है",
+        "scanQrOrPaste": "QR कोड स्कैन करें या एक पता पेस्ट करें",
+        "moveFundsBetweenAccounts": "अपने खातों के बीच धन ले जाएँ",
+        "sendTokensToAddress": "एक पते पर टोकन भेजें",
+        "manageAccount": "खाते का प्रबंधन",
+        "customizeAcount": "Customize your account",
         "account": "खाता",
-        "sending_to_address": "स्वयं के पते पर भेजा जा रहा है",
+        "sendingToAddress": "स्वयं के पते पर भेजा जा रहा है",
         "amount": "रकम",
-        "add_address": "पता जोड़े",
+        "addAddress": "पता जोड़े",
         "reference": "संदर्भ",
         "from": "से",
         "to": "को",
-        "receive_funds": "पैसे प्राप्त करे",
-        "my_address": "मेरा पता:",
-        "share_address": "पता साझा करें",
-        "your_address": "आपका पता",
-        "generate_new_address": "नया पता उत्पन्न करें",
-        "copy_address": "पता कॉपी करें",
-        "have_text_backup": "मेरे पास एक लिखित में बैकअप है",
-        "have_file_backup": "मेरे पास एक फाइल में बैकअप है",
-        "enter_seed_or_phrase": "एक पुनर्प्राप्ति वाक्यांश या सीड दर्ज करें",
-        "upload_seedvault_or_stronghold": "एक स्ट्रॉन्गहोल्ड या सीड़वॉल्ट फ़ाइल आयात करें",
+        "receiveFunds": "पैसे प्राप्त करे",
+        "myAddress": "मेरा पता:",
+        "shareAddress": "पता साझा करें",
+        "yourAddress": "आपका पता",
+        "generateNewAddress": "नया पता उत्पन्न करें",
+        "copyAddress": "पता कॉपी करें",
+        "haveTextBackup": "मेरे पास एक लिखित में बैकअप है",
+        "haveFileBackup": "मेरे पास एक फाइल में बैकअप है",
+        "enterSeedOrPhrase": "एक पुनर्प्राप्ति वाक्यांश या सीड दर्ज करें",
+        "uploadSeedvaultOrStronghold": "एक स्ट्रॉन्गहोल्ड या सीड़वॉल्ट फ़ाइल आयात करें",
         "import": "आयात करना",
         "seedvault": "सीड़वॉल्ट",
         "stronghold": "स्ट्रॉन्गहोल्ड",
         "language": "भाषा ",
         "appearance": "दिखावट",
-        "light_theme": "लाइट थीम",
-        "dark_theme": "डार्क थीम",
-        "total_balance": "कुल शेष",
-        "account_balance": "खाते की बैलेंस राशि",
+        "lightTheme": "लाइट थीम",
+        "darkTheme": "डार्क थीम",
+        "totalBalance": "कुल शेष",
+        "accountBalance": "खाते की बैलेंस राशि",
         "incoming": "आने वाला",
         "outgoing": "बाहर जाने वाले",
         "accounts": "खाता",
@@ -486,24 +486,24 @@
         "profiles": "प्रोफाइल्स",
         "developerProfile": "डेवलपर मोड",
         "dev": "देव",
-        "create_account": "खाता बनाएं",
-        "account_name": "अकाउंट नाम",
-        "latest_transactions": "नवीनतम ट्रांसक्शन्स",
+        "createAccount": "खाता बनाएं",
+        "accountName": "अकाउंट नाम",
+        "latestTransactions": "नवीनतम ट्रांसक्शन्स",
         "transactions": "ट्रांसक्शन्स",
         "security": "सुरक्षा",
-        "account_address": "खाते का पता",
+        "accountAddress": "खाते का पता",
         "nodes": "नोड्स",
         "wallet": "Wallet",
         "help": "Help",
         "you": "You",
         "messageId": "Message ID",
-        "input_address": "Input Address",
-        "receive_address": "Receive Address",
+        "inputAddress": "Input Address",
+        "receiveAddress": "Receive Address",
         "date": "Date",
-        "no_accounts": "You have no accounts, please create one.",
-        "loading_accounts": "Loading, please wait...",
-        "add_profile": "Add Profile",
-        "no_recent_history": "No recent history",
+        "noAccounts": "You have no accounts, please create one.",
+        "loadingAccounts": "Loading, please wait...",
+        "addProfile": "Add Profile",
+        "noRecentHistory": "No recent history",
         "transferSyncing": "Syncing account",
         "transferSelectingInputs": "Selecting inputs",
         "transferRemainderAddress": "Generating remainder deposit address",
@@ -527,22 +527,22 @@
     },
     "dates": {
         "today": "आज",
-        "days_ago": "{time, plural, one {# दिन} other {# दिन}} पहले",
-        "weeks_ago": "{time, plural, one {# सप्ताह} other {# सप्ताह}} पहले",
-        "months_ago": "{time, plural, one {# महीना} other {# महीना}} पहले",
-        "years_ago": "{time, plural, one {# साल} other {# साल}} पहले"
+        "daysAgo": "{time, plural, one {# दिन} other {# दिन}} पहले",
+        "weeksAgo": "{time, plural, one {# सप्ताह} other {# सप्ताह}} पहले",
+        "monthsAgo": "{time, plural, one {# महीना} other {# महीना}} पहले",
+        "yearsAgo": "{time, plural, one {# साल} other {# साल}} पहले"
     },
     "notifications": {
         "valueTx": "{{value}} में {{account}} रिसीव हो रहा है",
         "confirmed": "{{account}} से आउटगोइंग {{value}} की पुष्टि हो गयी है",
         "failed": "{{account}} से आउटगोइंग {{value}} फ़ैल हो गयी है",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
-        "copied_to_clipboard": "Copied to clipboard"
+        "downloadingUpdate": "Downloading update",
+        "updateReady": "Update ready",
+        "updateError": "An error occurred during the update, please try again",
+        "restartInstall": "Restart to install",
+        "calcMinutesRemaining": "Calculating minutes remaining...",
+        "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
+        "copiedToClipboard": "Copied to clipboard"
     },
     "error": {
         "profile": {

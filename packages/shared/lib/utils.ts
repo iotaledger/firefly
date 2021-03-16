@@ -194,7 +194,7 @@ export const setClipboard = (input: string): boolean => {
         document.execCommand('copy')
         document.body.removeChild(textArea)
 
-        const notificationMessage = localize('notifications.copied_to_clipboard')
+        const notificationMessage = localize('notifications.copiedToClipboard')
         showAppNotification({ type: "info", message: notificationMessage })
 
         return true
@@ -202,4 +202,11 @@ export const setClipboard = (input: string): boolean => {
         console.log(err)
         return false
     }
+}
+
+export const getDefaultStrongholdName = () : string => {
+    // Match https://github.com/iotaledger/wallet.rs/blob/ffbeaa3466b44f79dd5f87e14ed1bdc4846d9e85/src/account_manager.rs#L1428
+    // Trim milliseconds and replace colons with dashes
+    const date = new Date().toISOString().slice(0, -5).replace(/:/g, "-")
+    return `firefly-backup-${date}.stronghold`
 }

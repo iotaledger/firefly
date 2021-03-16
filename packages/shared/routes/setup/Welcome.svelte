@@ -18,8 +18,8 @@
     <OnboardingLayout allowBack={false}>
         <div slot="leftpane__content">
             <Logo width="64px" logo="logo-firefly" classes="mb-10" />
-            <Text type="h1" classes="mb-4">{locale('views.onboarding_1.title')}</Text>
-            <Text type="p" secondary>{locale('views.onboarding_1.body')}</Text>
+            <Text type="h1" classes="mb-4">{locale('views.onboarding1.title')}</Text>
+            <Text type="p" secondary>{locale('views.onboarding1.body')}</Text>
         </div>
         <div slot="leftpane__action">
             <Button onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
