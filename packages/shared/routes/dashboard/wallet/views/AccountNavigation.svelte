@@ -29,7 +29,7 @@
 
 <div class="relative flex flex-row justify-center items-center w-full py-5">
     <button data-label="back-button" class="absolute left-0" on:click={handleBackClick}>
-        <div class="flex items-center space-x-2">
+        <div class="flex items-center space-x-3">
             <Icon icon="arrow-left" classes="text-blue-500" />
             <Text type="h4">{locale('actions.back')}</Text>
         </div>
