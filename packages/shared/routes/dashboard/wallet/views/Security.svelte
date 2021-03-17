@@ -4,7 +4,7 @@
     import { diffDates, getBackupWarningColor } from 'shared/lib/helpers'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, profiles } from 'shared/lib/profile'
+    import { activeProfile, isStrongholdLocked, profiles } from 'shared/lib/profile'
     import { api } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
@@ -18,12 +18,11 @@
 
     function setup() {
         const ap = get(activeProfile)
-        const isStrongholdLocked = ap?.isStrongholdLocked
         const lastStrongholdBackupTime = ap?.lastStrongholdBackupTime
         lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
         lastBackupDateFormatted = diffDates(lastBackupDate, new Date())
         color = getBackupWarningColor(lastBackupDate)
-        strongholdStatusMessage = isStrongholdLocked ? 'locked' : 'unlocked'
+        strongholdStatusMessage = get(isStrongholdLocked) ? 'locked' : 'unlocked'
     }
 
     function handleSecurityTileClick(popupType) {
@@ -33,7 +32,7 @@
                 currentVersion: $versionDetails.currentVersion,
                 lastBackupDate,
                 lastBackupDateFormatted,
-                isStrongholdLocked: get(activeProfile)?.isStrongholdLocked,
+                isStrongholdLocked: $isStrongholdLocked,
             },
         })
     }
@@ -58,8 +57,8 @@
     onDestroy(unsubscribe)
 </script>
 
-<div data-label="security" class="p-8 flex-grow flex flex-col">
-    <Text type="h4" classes="mb-5">{locale('general.security')}</Text>
+<div data-label="security" class="py-6 px-8 flex-grow flex flex-col">
+    <Text type="p" bold classes="mb-5">{locale('general.security')}</Text>
     <div class="grid grid-cols-2 gap-2">
         <!-- Firefly version -->
         <SecurityTile
@@ -79,9 +78,9 @@
         <SecurityTile
             title={locale('views.dashboard.security.strongholdStatus.title')}
             message={locale(`views.dashboard.security.strongholdStatus.${strongholdStatusMessage}`)}
-            color={$activeProfile?.isStrongholdLocked ? 'blue' : 'yellow'}
-            icon={$activeProfile?.isStrongholdLocked ? 'lock' : 'unlock'}
-            onClick={() => (get(activeProfile)?.isStrongholdLocked ? handleSecurityTileClick('password') : lockStronghold())} />
+            color={$isStrongholdLocked ? 'blue' : 'yellow'}
+            icon="lock"
+            onClick={() => ($isStrongholdLocked ? handleSecurityTileClick('password') : lockStronghold())} />
         <!-- Stronghold backup -->
         <SecurityTile
             title={locale('views.dashboard.security.strongholdBackup.title')}

@@ -56,13 +56,13 @@
     }
 </style>
 
-<toast-container class="flex flex-col">
+<toast-container class="flex flex-col relative z-20">
     <ul>
         {#each $displayNotifications as notification}
             <li
                 in:fade={{ duration: 100 }}
                 out:fade={{ duration: 100 }}
-                class="flex flex-row items-center bg-{TOAST_STYLE[notification.type].backgroundColor} rounded-lg overflow-hidden z-10 px-6 py-3">
+                class="flex flex-row items-center bg-{TOAST_STYLE[notification.type].backgroundColor} rounded-lg overflow-hidden z-20 px-6 py-3">
                 <div
                     style={"width:40px;height:40px"}
                     class="flex flex-shrink-0 justify-center items-center bg-{TOAST_STYLE[notification.type].iconBackgroundColor} rounded-lg text-{TOAST_STYLE[notification.type].iconColor}">

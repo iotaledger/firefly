@@ -14,7 +14,7 @@ import { deepLinkRequestActive } from './deepLinking'
  * @returns {void}
  */
 export const setRoute = (path: string): void => {
-    route.set(path)
+    appRoute.set(path)
 }
 
 /**
@@ -42,7 +42,7 @@ export const walletSetupType = writable<SetupType>(null)
 /*
  * Current view
  */
-export const route = writable<string>(null)
+export const appRoute = writable<string>(null)
 
 /**
  * Application route history
@@ -70,6 +70,11 @@ export const accountRoute = writable<AccountRoutes>(AccountRoutes.Init)
 export const settingsRoute = writable<SettingsRoutes>(SettingsRoutes.Init)
 
 /**
+ * Settings child route
+ */
+ export const settingsChildRoute = writable<string>(null)
+
+/**
  * Navigate to initial route
  */
 export const initRouter = () => {
@@ -85,7 +90,7 @@ export const initRouter = () => {
 // TODO: only handle route changes, not app variables
 export const routerNext = (event) => {
     let params = event.detail || {}
-    const currentRoute: string = get(route)
+    const currentRoute: string = get(appRoute)
     let nextRoute: AppRoute
 
     switch (currentRoute) {

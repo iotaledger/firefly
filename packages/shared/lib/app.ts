@@ -1,9 +1,8 @@
 import { get, writable } from 'svelte/store'
-import { persistent } from './helpers'
 import { localize } from './i18n'
 import { showAppNotification } from './notifications'
 import { closePopup } from './popup'
-import { activeProfile, clearActiveProfile } from './profile'
+import { activeProfile, clearActiveProfile, isStrongholdLocked } from './profile'
 import { resetRouter } from './router'
 import { api, destroyActor, resetWallet } from './wallet'
 
@@ -11,11 +10,6 @@ import { api, destroyActor, resetWallet } from './wallet'
  * Mobile mode
  */
 export const mobile = writable<boolean>(false)
-
-/**
- * Dark mode enabled state
- */
-export const darkMode = persistent<boolean>('darkMode', false)
 
 /**
  * Wallet access pin
@@ -71,6 +65,7 @@ export const login = () => {
 }
 
 /**
+
  * Logout from current profile
  */
 export const logout = () => {
@@ -80,6 +75,7 @@ export const logout = () => {
         if (ap) {
             destroyActor(ap.id)
         }
+        isStrongholdLocked.set(true)
         clearSendParams()
         closePopup()
         resetWallet()
@@ -88,7 +84,7 @@ export const logout = () => {
         loggedIn.set(false)
     }
 
-    if (!ap?.isStrongholdLocked) {
+    if (!get(isStrongholdLocked)) {
         api.lockStronghold({
             onSuccess() {
                 _cleanup()

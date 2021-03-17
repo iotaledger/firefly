@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Button, Checkbox, Illustration, Input, OnboardingLayout, Text } from 'shared/components'
-    import { cleanupSignup, developerMode } from 'shared/lib/app'
+    import { cleanupSignup } from 'shared/lib/app'
+    import { appSettings } from 'shared/lib/appSettings'
     import { Electron } from 'shared/lib/electron'
     import { hasOnlyWhitespaces } from 'shared/lib/helpers'
     import { createProfile, disposeNewProfile, newProfile, profiles } from 'shared/lib/profile'
@@ -69,7 +70,7 @@
                 classes="w-full"
                 autofocus
                 submitHandler={() => handleContinueClick(SetupType.New)} />
-            {#if $developerMode}
+            {#if $appSettings.developerMode}
                 <Checkbox label={locale('general.developerProfile')} bind:checked={isDeveloperProfile} />
             {/if}
         </div>
