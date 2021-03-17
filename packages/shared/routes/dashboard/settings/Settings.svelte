@@ -2,7 +2,7 @@
     import { Icon } from 'shared/components'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { activeProfile } from 'shared/lib/profile'
-    import { accountRoute, dashboardRoute, settingsRoute, walletRoute } from 'shared/lib/router'
+    import { accountRoute, dashboardRoute, settingsRoute, walletRoute, settingsChildRoute } from 'shared/lib/router'
     import { AccountRoutes, SettingsRoutes, WalletRoutes, Tabs } from 'shared/lib/typings/routes'
     import { selectedAccountId } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
@@ -34,6 +34,7 @@
 
     onDestroy(() => {
         settingsRoute.set(SettingsRoutes.Init)
+        settingsChildRoute.set(null)
     })
 </script>
 

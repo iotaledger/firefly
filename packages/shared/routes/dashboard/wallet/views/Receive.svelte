@@ -14,7 +14,7 @@
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
     const currentAccount = getContext<Readable<WalletAccount>>('selectedAccount')
 
-    $: selectedAccount = $currentAccount || $accounts[0]
+    let selectedAccount = $currentAccount || $accounts[0]
 
     const handleDropdownSelect = (item) => {
         selectedAccount = item
