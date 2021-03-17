@@ -25,6 +25,7 @@
         Password,
         Protect,
         Setup,
+        Secure,
         Splash,
         Welcome,
     } from 'shared/routes'
@@ -129,6 +130,9 @@
     </Route>
     <Route route={AppRoute.Setup}>
         <Setup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+    </Route>
+    <Route route={AppRoute.Secure}>
+        <Secure on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
     <Route route={AppRoute.Password}>
         <Password on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />

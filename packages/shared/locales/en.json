@@ -37,6 +37,11 @@
             "body2": "For now, let's start with your first profile name. You can add more profiles later",
             "profileName": "Profile Name"
         },
+        "secure": {
+            "title": "Secure your wallet",
+            "body1": "Your Firefly wallet is secured by a password and a PIN code.",
+            "body2": "Use the Recovery Kit PDF template to store your wallet's login credentials safely."
+        },
         "password": {
             "title": "Create a password",
             "body": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates."
@@ -431,7 +436,8 @@
         "hideDetails": "Hide Details",
         "yes": "Yes",
         "no": "No",
-        "reset": "Reset"
+        "reset": "Reset",
+        "downloadRecoveryKit": "Download recovery kit template"
     },
     "general": {
         "password": "Password",

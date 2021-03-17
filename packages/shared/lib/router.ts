@@ -73,7 +73,7 @@ export const settingsRoute = writable<SettingsRoutes>(SettingsRoutes.Init)
 /**
  * Settings child route
  */
- export const settingsChildRoute = writable<string>(null)
+export const settingsChildRoute = writable<string>(null)
 
 /**
  * Navigate to initial route
@@ -126,11 +126,14 @@ export const routerNext = (event) => {
             if (setupType) {
                 walletSetupType.set(setupType)
                 if (setupType === SetupType.New) {
-                    nextRoute = AppRoute.Password
+                    nextRoute = AppRoute.Secure
                 } else if (setupType === SetupType.Import) {
                     nextRoute = AppRoute.Import
                 }
             }
+            break
+        case AppRoute.Secure:
+            nextRoute = AppRoute.Password
             break
         case AppRoute.Password:
             const { password } = params

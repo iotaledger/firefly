@@ -11,6 +11,7 @@
         'settings-desktop': 'onboarding/settings-desktop.svg',
         'appearance-desktop': 'onboarding/appearance-desktop.svg',
         'setup-desktop': 'onboarding/setup-desktop.svg',
+        'secure-desktop': 'onboarding/secure-desktop.svg',
         'password-desktop': 'onboarding/password-desktop.svg',
         'protect-desktop': 'onboarding/protect-desktop.svg',
         'pin-desktop': 'onboarding/pin-desktop.svg',
