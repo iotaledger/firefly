@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Popup, Route, SpentAddress, ToastContainer, TransactionItem } from 'shared/components'
+    import { Popup, Route, ToastContainer } from 'shared/components'
     import { darkMode, loggedIn, mobile } from 'shared/lib/app'
     import { refreshVersionDetails, versionDetails } from 'shared/lib/appUpdater'
     import { Electron } from 'shared/lib/electron'
@@ -9,7 +9,7 @@
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { activeProfile } from 'shared/lib/profile'
-    import { dashboardRoute, initRouter, route as appRoute, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
+    import { dashboardRoute, initRouter, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
     import { AppRoute, Tabs } from 'shared/lib/typings/routes'
     import { requestMnemonic } from 'shared/lib/wallet'
     import {
