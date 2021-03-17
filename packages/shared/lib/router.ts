@@ -45,11 +45,6 @@ export const walletSetupType = writable<SetupType>(null)
  */
 export const appRoute = writable<string>(null)
 
-/*
- * Last app route
- */
-export const lastAppRoute = writable<string>(null)
-
 /**
  * Application route history
  */
@@ -225,7 +220,6 @@ export const resetRouter = () => {
     accountRoute.set(AccountRoutes.Init)
     settingsRoute.set(SettingsRoutes.Init)
     dashboardRoute.set(Tabs.Wallet)
-    lastAppRoute.set(null)
     deepLinkRequestActive.set(false)
     loggedIn.set(false)
 }

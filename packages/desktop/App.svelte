@@ -9,15 +9,7 @@
     import { fetchMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import {
-        appRoute,
-        dashboardRoute,
-        initRouter,
-        lastAppRoute,
-        routerNext,
-        routerPrevious,
-        walletRoute,
-    } from 'shared/lib/router'
+    import { dashboardRoute, initRouter, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
     import { AppRoute, Tabs } from 'shared/lib/typings/routes'
     import { requestMnemonic } from 'shared/lib/wallet'
     import {
@@ -32,6 +24,7 @@
         Migrate,
         Password,
         Protect,
+        Settings,
         Setup,
         Splash,
         Welcome,
@@ -49,6 +42,8 @@
     }
 
     let splash = true
+    let settings = false
+
     setupI18n({ withLocale: $appSettings.language })
     onMount(async () => {
         setTimeout(() => {
@@ -70,10 +65,12 @@
             walletRoute.set(route)
         })
         Electron.onEvent('menu-navigate-settings', () => {
-            lastAppRoute.set(get(appRoute))
-            appRoute.set(AppRoute.Dashboard)
-            if (get(dashboardRoute) !== Tabs.Settings) {
-                dashboardRoute.set(Tabs.Settings)
+            if ($loggedIn) {
+                if (get(dashboardRoute) !== Tabs.Settings) {
+                    dashboardRoute.set(Tabs.Settings)
+                }
+            } else {
+                settings = true
             }
         })
         Electron.onEvent('menu-check-for-update', async () => {
@@ -168,5 +165,9 @@
     <Route route={AppRoute.Login}>
         <Login on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} {goto} />
     </Route>
+    {#if settings}
+        <Settings locale={$_} handleClose={() => (settings = false)} />
+    {/if}
+
     <ToastContainer />
 {/if}

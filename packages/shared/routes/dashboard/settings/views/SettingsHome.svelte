@@ -1,7 +1,7 @@
 <script lang="typescript">
-    import { Icon, SettingsMenu, Text } from 'shared/components'
+    import { SettingsMenu, Text } from 'shared/components'
     import { loggedIn } from 'shared/lib/app'
-    import { appRoute, dashboardRoute, lastAppRoute, settingsChildRoute, settingsRoute } from 'shared/lib/router'
+    import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import {
         AdvancedSettings,
@@ -11,7 +11,6 @@
         HelpAndInfo,
         SecuritySettings,
         SettingsRoutes,
-        Tabs,
     } from 'shared/lib/typings/routes'
 
     export let locale

@@ -12,7 +12,6 @@ export enum AppRoute {
     Congratulations = 'congratulations',
     Dashboard = 'dashboard',
     Login = 'login',
-    Settings = 'settings'
 }
 
 export enum SetupType {

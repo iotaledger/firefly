@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Idle, Sidebar } from 'shared/components'
-    import { loggedIn, logout, sendParams } from 'shared/lib/app'
+    import { logout, sendParams } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { Electron } from 'shared/lib/electron'
@@ -61,13 +61,9 @@
     <div>foo</div>
 {:else}
     <Idle />
-    {#if $loggedIn}
-        <div class="flex flex-row w-full h-full">
-            <Sidebar {locale} />
-            <!-- Dashboard Pane -->
-            <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
-        </div>
-    {:else}
-        <Settings {locale} on:next={routerNext} />
-    {/if}
+    <div class="flex flex-row w-full h-full">
+        <Sidebar {locale} />
+        <!-- Dashboard Pane -->
+        <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={routerNext} />
+    </div>
 {/if}

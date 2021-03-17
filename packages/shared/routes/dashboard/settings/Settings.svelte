@@ -1,18 +1,9 @@
 <script lang="typescript">
-    import { loggedIn } from 'shared/lib/app'
     import { Icon } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { isLocaleLoaded } from 'shared/lib/i18n'
-    import {
-        accountRoute,
-        appRoute,
-        dashboardRoute,
-        lastAppRoute,
-        settingsChildRoute,
-        settingsRoute,
-        walletRoute,
-    } from 'shared/lib/router'
+    import { accountRoute, dashboardRoute, settingsChildRoute, settingsRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, SettingsRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
     import { selectedAccountId } from 'shared/lib/wallet'
     import { onDestroy } from 'svelte'
@@ -20,6 +11,7 @@
 
     export let locale
     export let mobile
+    export let handleClose
 
     $: {
         if ($deepLinkRequestActive && !$appSettings.deepLinking) {
@@ -29,16 +21,10 @@
     }
 
     function closeSettings() {
-        if ($loggedIn) {
-            dashboardRoute.set(Tabs.Wallet)
-            walletRoute.set(WalletRoutes.Init)
-            accountRoute.set(AccountRoutes.Init)
-            selectedAccountId.set(null)
-        } else {
-            appRoute.set($lastAppRoute)
-            dashboardRoute.set(Tabs.Wallet)
-            lastAppRoute.set(null)
-        }
+        dashboardRoute.set(Tabs.Wallet)
+        walletRoute.set(WalletRoutes.Init)
+        accountRoute.set(AccountRoutes.Init)
+        selectedAccountId.set(null)
     }
 
     onDestroy(() => {
@@ -52,7 +38,7 @@
 </script>
 
 <div class="relative w-full h-full px-16 py-12 flex flex-1 bg-white {$settingsRoute !== SettingsRoutes.Init && 'pt-20'} ">
-    <button on:click={closeSettings} class="absolute top-8 right-8">
+    <button on:click={handleClose || closeSettings} class="absolute top-8 right-8">
         <Icon icon="close" classes="text-gray-800 dark:text-white" />
     </button>
     {#if $settingsRoute === SettingsRoutes.Init}
