@@ -121,7 +121,9 @@ function loadJson(url) {
 }
 
 const dir = derived(appSettings, (_appSettings) => {
-    return _appSettings.language === 'ar' ? 'rtl' : 'ltr'
+    // TODO: Implement RTL support
+    // return appSettings.language === 'ar' ? 'rtl' : 'ltr'
+    return 'ltr'
 })
 
 
