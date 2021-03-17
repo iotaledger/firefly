@@ -4,10 +4,9 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
-    import { PIN_LENGTH } from 'shared/lib/utils'
+    import { activeProfile, isStrongholdLocked, updateProfile } from 'shared/lib/profile'
+    import { getDefaultStrongholdName, PIN_LENGTH } from 'shared/lib/utils'
     import { api, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
-    import { getDefaultStrongholdName } from 'shared/lib/utils';
     import { get } from 'svelte/store'
     import zxcvbn from 'zxcvbn'
 
@@ -26,7 +25,6 @@
     const lockScreenTimeoutOptions = [1, 5, 10, 30, 60].map((time) => ({ value: time, label: assignTimeoutOptionLabel(time) }))
 
     export let locale
-    export let navigate
 
     let exportStrongholdChecked
     let currentPassword = ''
@@ -74,7 +72,7 @@
             }
         }
 
-        if (get(activeProfile)?.isStrongholdLocked) {
+        if (get(isStrongholdLocked)) {
             openPopup({
                 type: 'password',
                 props: {

@@ -30,14 +30,7 @@
                 onSuccess(res) {
                     logout()
 
-                    // Remove profile from (local) storage
-                    // Note: This should be the last step in the reset process.
-                    // It should be done after the router is set back to default.
-                    // Otherwise, parts of the application referencing $activeProfile will create an exception.
-                    const ap = get(activeProfile)
-                    if (ap) {
-                        removeProfile(ap.id)
-                    }
+                    removeProfile(ap.id)
 
                     isBusy = false
                     closePopup()

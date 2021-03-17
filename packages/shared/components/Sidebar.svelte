@@ -10,7 +10,6 @@
     import { get } from 'svelte/store'
 
     export let locale
-    export let activeTab
 
     let showNetwork = false
     let healthStatus = 2

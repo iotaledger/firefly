@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { Idle, Sidebar } from 'shared/components'
     import { logout, sendParams } from 'shared/lib/app'
+    import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { Electron } from 'shared/lib/electron'
-    import { activeProfile } from 'shared/lib/profile'
     import { dashboardRoute, routerNext } from 'shared/lib/router'
     import { Tabs } from 'shared/lib/typings/routes'
     import { parseDeepLink } from 'shared/lib/utils'
@@ -44,7 +44,7 @@
             }
         }
 
-        if (!get(activeProfile)?.settings.deepLinking) {
+        if (!$appSettings.deepLinking) {
             _redirect(Tabs.Settings)
             // TODO: Add alert system
             console.log('deep linking not enabled')

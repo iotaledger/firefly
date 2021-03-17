@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { Button, Checkbox, Illustration, Input, OnboardingLayout, Text } from 'shared/components'
-    import { developerMode } from 'shared/lib/app'
+    import { appSettings } from 'shared/lib/appSettings'
     import { Electron } from 'shared/lib/electron'
     import { hasOnlyWhitespaces } from 'shared/lib/helpers'
     import { createProfile, disposeNewProfile, newProfile, profiles } from 'shared/lib/profile'
     import { SetupType } from 'shared/lib/typings/routes'
-    import { getStoragePath, initialise, api, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
+    import { api, getStoragePath, initialise, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -68,7 +68,7 @@
                 classes="w-full"
                 autofocus
                 submitHandler={() => handleContinueClick(SetupType.New)} />
-            {#if $developerMode}
+            {#if $appSettings.developerMode}
                 <Checkbox label={locale('general.developerProfile')} bind:checked={isDeveloperProfile} />
             {/if}
         </div>

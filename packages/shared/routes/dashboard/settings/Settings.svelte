@@ -1,25 +1,20 @@
 <script lang="typescript">
     import { Icon } from 'shared/components'
+    import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
-    import { activeProfile } from 'shared/lib/profile'
-    import { accountRoute, dashboardRoute, settingsRoute, walletRoute, settingsChildRoute } from 'shared/lib/router'
-    import { AccountRoutes, SettingsRoutes, WalletRoutes, Tabs } from 'shared/lib/typings/routes'
+    import { isLocaleLoaded } from 'shared/lib/i18n'
+    import { accountRoute, dashboardRoute, settingsChildRoute, settingsRoute, walletRoute } from 'shared/lib/router'
+    import { AccountRoutes, SettingsRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
     import { selectedAccountId } from 'shared/lib/wallet'
-    import { createEventDispatcher, onDestroy } from 'svelte'
-    import { get } from 'svelte/store'
+    import { onDestroy } from 'svelte'
     import { SettingsHome, SettingsViewer } from './views'
 
     export let locale
     export let mobile
-
-    const dispatch = createEventDispatcher()
-
-    function navigate(params) {
-        dispatch('next', params)
-    }
+    export let handleClose
 
     $: {
-        if ($deepLinkRequestActive && !get(activeProfile)?.settings.deepLinking) {
+        if ($deepLinkRequestActive && !$appSettings.deepLinking) {
             settingsRoute.set(SettingsRoutes.AdvancedSettings)
             deepLinkRequestActive.set(false)
         }
@@ -33,18 +28,22 @@
     }
 
     onDestroy(() => {
-        settingsRoute.set(SettingsRoutes.Init)
-        settingsChildRoute.set(null)
+        // When a new locale is loaded the pages are reloaded
+        // so don't reset the router in this case
+        if ($isLocaleLoaded) {
+            settingsRoute.set(SettingsRoutes.Init)
+            settingsChildRoute.set(null)
+        }
     })
 </script>
 
 <div class="relative w-full h-full px-16 py-12 flex flex-1 bg-white {$settingsRoute !== SettingsRoutes.Init && 'pt-20'} ">
-    <button on:click={closeSettings} class="absolute top-8 right-8">
+    <button on:click={handleClose || closeSettings} class="absolute top-8 right-8">
         <Icon icon="close" classes="text-gray-800 dark:text-white" />
     </button>
     {#if $settingsRoute === SettingsRoutes.Init}
         <SettingsHome {mobile} {locale} />
     {:else}
-        <SettingsViewer {mobile} {locale} {navigate} />
+        <SettingsViewer {mobile} {locale} />
     {/if}
 </div>

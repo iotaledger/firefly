@@ -82,6 +82,10 @@
     on:click={(e) => {
         e.stopPropagation()
         dropdown = !dropdown
+        const elem = document.getElementById(value)
+        if (elem) {
+            elem.scrollIntoView()
+        }
     }}
     use:clickOutside
     on:clickOutside={handleClickOutside}
@@ -95,6 +99,7 @@
         <div class="inner overflow-y-auto">
             {#each items as item}
                 <button
+                    id={item[valueKey]}
                     class="relative flex items-center bg-white p-4 w-full whitespace-nowrap"
                     on:click={() => onSelect(item)}
                     class:active={item[valueKey] === value}><Text type="p" smaller>{item[valueKey]}</Text></button>

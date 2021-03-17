@@ -1,8 +1,17 @@
 <script lang="typescript">
-    import { SettingsRoutes, GeneralSettings, SecuritySettings, AdvancedSettings, HelpAndInfo } from 'shared/lib/typings/routes'
+    import { SettingsMenu, Text } from 'shared/components'
+    import { loggedIn } from 'shared/lib/app'
+    import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
-    import { Text, SettingsMenu } from 'shared/components'
-    import { settingsChildRoute, settingsRoute } from 'shared/lib/router';
+    import {
+        AdvancedSettings,
+        AdvancedSettingsNoProfile,
+        GeneralSettings,
+        GeneralSettingsNoProfile,
+        HelpAndInfo,
+        SecuritySettings,
+        SettingsRoutes,
+    } from 'shared/lib/typings/routes'
 
     export let locale
     export let mobile
@@ -19,6 +28,7 @@
                 iconColor="bg-blue-500"
                 icons={SettingsIcons}
                 settings={GeneralSettings}
+                activeSettings={$loggedIn ? GeneralSettings : GeneralSettingsNoProfile}
                 title={locale('views.settings.generalSettings.title')}
                 description={locale('views.settings.generalSettings.description')}
                 onClick={(setting) => {
@@ -31,6 +41,7 @@
                 iconColor="bg-yellow-500"
                 icons={SettingsIcons}
                 settings={SecuritySettings}
+                activeSettings={$loggedIn ? SecuritySettings : undefined}
                 title={locale('views.settings.security.title')}
                 description={locale('views.settings.security.description')}
                 onClick={(setting) => {
@@ -43,6 +54,7 @@
                 iconColor="bg-green-600"
                 icons={SettingsIcons}
                 settings={AdvancedSettings}
+                activeSettings={$loggedIn ? AdvancedSettings : AdvancedSettingsNoProfile}
                 title={locale('views.settings.advancedSettings.title')}
                 description={locale('views.settings.advancedSettings.description')}
                 onClick={(setting) => {
@@ -55,6 +67,7 @@
                 iconColor="bg-purple-500"
                 icons={SettingsIcons}
                 settings={HelpAndInfo}
+                activeSettings={HelpAndInfo}
                 title={locale('views.settings.helpAndInfo.title')}
                 description={locale('views.settings.helpAndInfo.description')}
                 onClick={(setting) => {
