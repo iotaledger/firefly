@@ -4,7 +4,7 @@
     import { diffDates, getBackupWarningColor } from 'shared/lib/helpers'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, profiles, isProfileStrongholdLocked } from 'shared/lib/profile'
+    import { activeProfile, isStrongholdLocked, profiles } from 'shared/lib/profile'
     import { api } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
@@ -17,12 +17,12 @@
     let strongholdStatusMessage
 
     function setup() {
-        const ap = get(activeProfile);
+        const ap = get(activeProfile)
         const lastStrongholdBackupTime = ap?.lastStrongholdBackupTime
         lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
         lastBackupDateFormatted = diffDates(lastBackupDate, new Date())
         color = getBackupWarningColor(lastBackupDate)
-        strongholdStatusMessage = get(isProfileStrongholdLocked) ? 'locked' : 'unlocked'
+        strongholdStatusMessage = get(isStrongholdLocked) ? 'locked' : 'unlocked'
     }
 
     function handleSecurityTileClick(popupType) {
@@ -32,7 +32,7 @@
                 currentVersion: $versionDetails.currentVersion,
                 lastBackupDate,
                 lastBackupDateFormatted,
-                isStrongholdLocked: $isProfileStrongholdLocked,
+                isStrongholdLocked: $isStrongholdLocked,
             },
         })
     }
@@ -78,9 +78,9 @@
         <SecurityTile
             title={locale('views.dashboard.security.strongholdStatus.title')}
             message={locale(`views.dashboard.security.strongholdStatus.${strongholdStatusMessage}`)}
-            color={$isProfileStrongholdLocked ? 'blue' : 'yellow'}
+            color={$isStrongholdLocked ? 'blue' : 'yellow'}
             icon="lock"
-            onClick={() => ($isProfileStrongholdLocked ? handleSecurityTileClick('password') : lockStronghold())} />
+            onClick={() => ($isStrongholdLocked ? handleSecurityTileClick('password') : lockStronghold())} />
         <!-- Stronghold backup -->
         <SecurityTile
             title={locale('views.dashboard.security.strongholdBackup.title')}

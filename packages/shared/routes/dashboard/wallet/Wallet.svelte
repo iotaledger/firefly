@@ -7,7 +7,7 @@
     import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { isProfileStrongholdLocked } from 'shared/lib/profile'
+    import { isStrongholdLocked } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
@@ -360,7 +360,7 @@
 
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
-                isProfileStrongholdLocked.set(strongholdStatusResponse.payload.snapshot.status === 'Locked')
+                isStrongholdLocked.set(strongholdStatusResponse.payload.snapshot.status === 'Locked')
             },
             onError(error) {
                 console.error(error)

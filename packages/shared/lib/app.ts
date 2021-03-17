@@ -2,7 +2,7 @@ import { get, writable } from 'svelte/store'
 import { localize } from './i18n'
 import { showAppNotification } from './notifications'
 import { closePopup } from './popup'
-import { activeProfile, clearActiveProfile, isProfileStrongholdLocked } from './profile'
+import { activeProfile, clearActiveProfile, isStrongholdLocked } from './profile'
 import { resetRouter } from './router'
 import { api, destroyActor, resetWallet } from './wallet'
 
@@ -58,7 +58,7 @@ export const logout = () => {
         if (ap) {
             destroyActor(ap.id)
         }
-        isProfileStrongholdLocked.set(true)
+        isStrongholdLocked.set(true)
         clearSendParams()
         closePopup()
         resetWallet()
@@ -67,7 +67,7 @@ export const logout = () => {
         mnemonic.set(null)
     }
 
-    if (!get(isProfileStrongholdLocked)) {
+    if (!get(isStrongholdLocked)) {
         api.lockStronghold({
             onSuccess() {
                 _cleanup()

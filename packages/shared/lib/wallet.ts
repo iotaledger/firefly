@@ -1,20 +1,18 @@
 import { mnemonic } from 'shared/lib/app'
-import type { ErrorEventPayload } from 'shared/lib/typings/events'
-import type { Account as BaseAccount } from 'shared/lib/typings/account'
 import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
 import { localize } from 'shared/lib/i18n'
 import type { HistoryData, PriceData } from 'shared/lib/marketData'
 import { HistoryDataProps } from 'shared/lib/marketData'
 import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
-import { activeProfile, updateProfile, isProfileStrongholdLocked } from 'shared/lib/profile'
-import { formatUnit } from 'shared/lib/units'
-import { get, writable, Writable } from 'svelte/store'
-import type { Account, SyncedAccount } from 'shared/lib/typings/account'
+import { activeProfile, isStrongholdLocked } from 'shared/lib/profile'
+import type { Account, Account as BaseAccount, SyncedAccount } from 'shared/lib/typings/account'
 import type { Address } from 'shared/lib/typings/address'
 import type { Actor } from 'shared/lib/typings/bridge'
-import type { TransferProgressEventType } from 'shared/lib/typings/events'
+import type { ErrorEventPayload, TransferProgressEventType } from 'shared/lib/typings/events'
 import type { Message } from 'shared/lib/typings/message'
+import { formatUnit } from 'shared/lib/units'
 import type { ApiClient } from 'shared/lib/walletApi'
+import { get, writable, Writable } from 'svelte/store'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -189,7 +187,7 @@ export const initialiseListeners = () => {
      */
     api.onStrongholdStatusChange({
         onSuccess(response) {
-            isProfileStrongholdLocked.set(response.payload.snapshot.status === 'Locked')
+            isStrongholdLocked.set(response.payload.snapshot.status === 'Locked')
         },
         onError(error) {
             console.error(error)

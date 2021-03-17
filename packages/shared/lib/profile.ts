@@ -44,7 +44,7 @@ export const profiles = persistent<Profile[]>('profiles', [])
 
 export const newProfile = writable<Profile | null>(null)
 
-export const isProfileStrongholdLocked = writable<boolean>(true)
+export const isStrongholdLocked = writable<boolean>(true)
 
 /**
  * Currently active profile
