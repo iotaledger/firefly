@@ -122,7 +122,8 @@ function loadJson(url) {
 
 const dir = derived(activeProfile, (_activeProfile) => {
     if (_activeProfile) {
-        return _activeProfile.settings.language === 'ar' ? 'rtl' : 'ltr'
+        // TODO: Implement RTL support
+        // return _activeProfile.settings.language === 'ar' ? 'rtl' : 'ltr'
     }
     return 'ltr'
 })
