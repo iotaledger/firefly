@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
     import { BundleMiningLayout, Button, Icon, Text } from 'shared/components'
+    import { createEventDispatcher } from 'svelte'
 
     export let locale
     export let mobile
@@ -9,7 +9,7 @@
 
     // TODO:
     const learnClick = () => {
-        console.log("Learn more clicked")
+        console.log('Learn more clicked')
     }
     const handleContinueClick = () => {
         dispatch('next')

@@ -1,116 +1,97 @@
 <script lang="typescript">
-    import { Icon, Tooltip } from 'shared/components'
-    import Text from './Text.svelte';
-	import { onMount } from 'svelte';
+    import { Icon, Tooltip, Text } from 'shared/components'
+    import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
+    import { truncateString } from 'shared/lib/helpers'
     import { formatUnit } from 'shared/lib/units'
-    import {truncateString} from 'shared/lib/helpers'
-
+    import { get } from 'svelte/store'
 
     export let locale
-    export let name = ''
-    export let rawBalance = 0
-    export let humanReadableBalance = ''
-    export let fiatbalance = 0
+    export let address = ''
+    export let balance = 0
     export let selected = false
-    export let error = 0
-	export let showRiskLevel = false
-    export let riskLevel = -1
-    //risk level possible values
-    //0: very low
-    //1: low
-    //2: medium
-    //3: high
-    //4: very high
+    export let risk = undefined
+    export let showRiskLevel = false
+    export let disabled = false
+    export let onClick = () => {}
 
-	let showTooltip = false
+    const RISK_COLORS = {
+        0: 'green',
+        1: 'blue',
+        2: 'yellow',
+        3: 'orange',
+        4: 'red',
+    }
 
-	function toggleShow() {
-		showTooltip = !showTooltip
-	}
+    let showTooltip = false
+    let canMigrate = balance >= 1000000
+    let fiatBalance = `${convertToFiat(
+        balance,
+        get(currencies)[CurrencyTypes.USD],
+        get(exchangeRates)[AvailableExchangeRates.USD]
+    )} ${CurrencyTypes.USD}`
 
-	onMount(() => {
-		if(rawBalance < 1000000) error = 1
-        humanReadableBalance = formatUnit(rawBalance)
-	});
+    $: errorMessage = disabled ? locale('views.secureSpentAddresses.error') : null
 
-    function selectAddress(){
-        if(error != 1) selected = !selected
+    function toggleShow() {
+        showTooltip = !showTooltip
     }
 </script>
 
 <style type="text/scss">
-	.selected {
-		@apply border-2;
-		@apply border-blue-500;
-	}
-    .riskBars div {
-        @apply h-4;
-        @apply w-1;
-        @apply bg-gray-300;
-        @apply rounded-2xl;
+    button {
+        &:not(:disabled):hover,
+        &:not(:disabled):focus-within {
+            .radio-button {
+                @apply border-blue-500;
+            }
+        }
+        &:disabled {
+            @apply cursor-default;
+        }
+        .radio-button {
+            :global(svg path) {
+                @apply text-white;
+                @apply stroke-current;
+                fill: none;
+            }
+            &.active {
+                @apply border-0;
+                @apply bg-blue-500;
+            }
+        }
     }
-    .riskBars .veryLowRisk{
-        @apply bg-green-500;
-    }
-    .riskBars .lowRisk{
-        @apply bg-blue-500;
-    }
-    .riskBars .mediumRisk{
-        @apply bg-yellow-500;
-    } 
-    .riskBars .highRisk{
-        @apply bg-orange-500;
-    } 
-    .riskBars .veryHighRisk{
-        @apply bg-red-500;
-    }         
 </style>
 
-<div class="transaction-item relative flex justify-between border-solid border border-gray-200 rounded-2xl h-14 items-center pl-5 pr-6 focus:border-blue-500 mt-4
-{error != 1 ? 'cursor-pointer' : ''} {selected === true ? 'selected' : ''}" on:click="{() => selectAddress()}">
-    {#if showTooltip}<Tooltip classes="leftside" text={locale('views.secureSpentAddresses.error')}/>{/if}
+<button
+    class="w-full relative p-4 flex justify-between items-center border-solid border border-gray-200 rounded-2xl"
+    class:selected
+    {disabled}
+    on:click={onClick}>
     <div class="flex items-center justify-between w-full">
-        <div class="flex items-center">
-            {#if error === 1 && riskLevel == -1}    
-                <div class="w-6 h-6 bg-gray-100 rounded-full border border-solid border-gray-300 ml-3"/>
-            {:else}
-                <Icon icon=status-success classes="text-white bg-blue-500 rounded-full ml-3"/>
-            {/if}
-                <div class="ml-4">
-                    {#if error === 1}    
-                        <Text type="p" smaller secondary>{truncateString(name, 9, 9)}</Text>
-                    {:else}
-                        <Text type="p" smaller >{truncateString(name, 9, 9)}</Text>
-                    {/if}
-                    <Text type="p" secondary smaller classes="text-gray-500 mt-1" >
-                        {humanReadableBalance}
-                        <span class="mx-1">·</span>
-                        <span class="uppercase">{fiatbalance}</span>
-                    </Text>
-                </div>
-        </div>
-        {#if error === 1 && riskLevel == -1}    
-            <div class="flex items-center relative">
-                {#if error === 1}
-                    <div class="flex items-center relative" on:mouseenter={toggleShow} on:mouseleave={toggleShow} >
-                        <Icon icon=info classes="text-red-500 bg-white rounded-full ml-3"/>
-                    </div>
-                {/if}
+        <div class="flex items-center space-x-4 text-left">
+            <div class="radio-button w-6 h-6 mr-3 rounded-full border border-solid border-gray-300" class:active={selected}>
+                <Icon icon={!disabled || selected ? 'radio' : 'radio-unchecked'} />
             </div>
-        {:else}  
-            <div class="riskBars flex justify-between w-8">
-                {#if riskLevel === 0}
-                    <div class="veryLowRisk"/><div/><div/><div/><div/>
-                {:else if riskLevel === 1}  
-                    <div class="lowRisk"/><div class="lowRisk"/><div/><div/><div/>
-                {:else if riskLevel === 2}  
-                    <div class="mediumRisk"/><div class="mediumRisk"/><div class="mediumRisk"/><div/><div/>
-                {:else if riskLevel === 3}  
-                    <div class="highRisk" /><div class="highRisk" /><div class="highRisk" /><div class="highRisk" /><div/>
-                {:else if riskLevel === 4}  
-                    <div class="veryHighRisk" /> <div class="veryHighRisk" /> <div class="veryHighRisk" /> <div class="veryHighRisk" /> <div class="veryHighRisk" />
+            <div>
+                <Text type="pre" secondary={disabled} smaller>{truncateString(address, 9, 9)}</Text>
+                <Text type="p" secondary smaller>{formatUnit(balance)} · <span class="uppercase">{fiatBalance}</span></Text>
+            </div>
+        </div>
+        {#if showRiskLevel}
+            <risk-meter class="flex flex-row space-x-0.5">
+                {#each Array(Object.keys(RISK_COLORS).length) as _, i}
+                    <span class="h-4 w-1 rounded-2xl {i <= risk ? `bg-${RISK_COLORS?.[risk]}-500` : 'bg-gray-300'}" />
+                {/each}
+            </risk-meter>
+        {:else if disabled}
+            <div class="flex items-center relative" on:mouseenter={toggleShow} on:mouseleave={toggleShow}>
+                <Icon icon="info" classes="text-red-500 bg-white rounded-full ml-3" />
+                {#if showTooltip && errorMessage}
+                    <Tooltip>
+                        <Text>{errorMessage}</Text>
+                    </Tooltip>
                 {/if}
             </div>
         {/if}
     </div>
-</div>
+</button>

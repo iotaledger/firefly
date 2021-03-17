@@ -1,10 +1,10 @@
 <script lang="typescript">
-    import { Box,Button,Illustration,OnboardingLayout,Text } from 'shared/components';
-    import { AvailableExchangeRates,convertToFiat,currencies,CurrencyTypes,exchangeRates } from 'shared/lib/currency';
-    import { newProfile,saveProfile,setActiveProfile } from 'shared/lib/profile';
-    import { formatUnit } from 'shared/lib/units';
-    import { createEventDispatcher,onMount } from 'svelte';
-    import { get } from 'svelte/store';
+    import { Box, Button, Illustration, OnboardingLayout, Text } from 'shared/components'
+    import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
+    import { newProfile, saveProfile, setActiveProfile } from 'shared/lib/profile'
+    import { formatUnit } from 'shared/lib/units'
+    import { createEventDispatcher, onMount } from 'svelte'
+    import { get } from 'svelte/store'
 
     export let locale
     export let mobile
@@ -56,7 +56,9 @@
             {/if}
         </div>
         <div slot="leftpane__action">
-            <Button classes="w-full" onClick={() => handleContinueClick()}>{locale(`${wasMigrated ? 'views.congratulations.exportMigration' : 'actions.continue'}`)}</Button>
+            <Button classes="w-full" onClick={() => handleContinueClick()}>
+                {locale(`${wasMigrated ? 'views.congratulations.exportMigration' : 'actions.continue'}`)}
+            </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-end items-center">
             <Illustration width="100%" illustration="congratulations-desktop" />

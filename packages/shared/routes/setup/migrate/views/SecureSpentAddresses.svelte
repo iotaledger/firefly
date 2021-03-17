@@ -1,53 +1,34 @@
 <script lang="typescript">
-    import { Button,Illustration,OnboardingLayout,SpentAddress,Text } from 'shared/components';
-    import { AvailableExchangeRates,convertToFiat,currencies,CurrencyTypes,exchangeRates } from 'shared/lib/currency';
-    import { createEventDispatcher } from 'svelte';
-    import { get } from 'svelte/store';
+    import { Button, Illustration, OnboardingLayout, SpentAddress, Text } from 'shared/components'
+    import { createEventDispatcher } from 'svelte'
 
     export let locale
     export let mobile
 
     const dispatch = createEventDispatcher()
 
-    //TODO: Retrieve addresses
-    let balance1 = Math.floor(Math.random() * 2000000)
-    let balance2 = Math.floor(Math.random() * 2000000)
-    let balance3 = Math.floor(Math.random() * 2000000)
-    let balance4 = Math.floor(Math.random() * 2000000)
-    let balance5 = Math.floor(Math.random() * 2000000)
-    let fiatbalance1 = `${convertToFiat(balance1,get(currencies)[CurrencyTypes.USD],get(exchangeRates)[AvailableExchangeRates.USD])} ${CurrencyTypes.USD}`        
-    let fiatbalance2 = `${convertToFiat(balance2,get(currencies)[CurrencyTypes.USD],get(exchangeRates)[AvailableExchangeRates.USD])} ${CurrencyTypes.USD}`        
-    let fiatbalance3 = `${convertToFiat(balance3,get(currencies)[CurrencyTypes.USD],get(exchangeRates)[AvailableExchangeRates.USD])} ${CurrencyTypes.USD}`        
-    let fiatbalance4 = `${convertToFiat(balance4,get(currencies)[CurrencyTypes.USD],get(exchangeRates)[AvailableExchangeRates.USD])} ${CurrencyTypes.USD}`        
-    let fiatbalance5 = `${convertToFiat(balance5,get(currencies)[CurrencyTypes.USD],get(exchangeRates)[AvailableExchangeRates.USD])} ${CurrencyTypes.USD}`        
-	let addresses = [
-        {
-            name: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
-            rawBalance: balance1,
-            fiatbalance: fiatbalance1,
-        },
-        {
-            name: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
-            rawBalance: balance2,
-            fiatbalance: fiatbalance2,
-        }, 
-        {
-            name: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
-            rawBalance: balance3,
-            fiatbalance: fiatbalance3,
-        },
-        {
-            name: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
-            rawBalance: balance4,
-            fiatbalance: fiatbalance4,
-        },
-        {
-            name: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
-            rawBalance: balance5,
-            fiatbalance: fiatbalance5,
-        },                               
-    ]
-    let totalAddresses = addresses.length
+    // TODO: dummy
+    let addresses = Array.from({ length: 8 }, (_, id) => {
+        let balance = Math.floor(Math.random() * 4000000)
+        return {
+            id,
+            address: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
+            balance,
+            disabled: balance < 1000000,
+        }
+    })
+
+    let selectedAddresses = addresses.slice().filter((address) => !address.disabled)
+
+    function onAddressClick(address) {
+        var index = selectedAddresses.findIndex((_address) => _address.id === address.id)
+        if (index === -1) {
+            selectedAddresses.push(address)
+        } else {
+            selectedAddresses.splice(index, 1)
+        }
+        selectedAddresses = selectedAddresses
+    }
 
     function handleBackClick() {
         dispatch('previous')
@@ -56,50 +37,33 @@
         dispatch('next')
     }
     function handleSkipClick() {
-        console.log("Skip clicked")
+        console.log('Skip clicked')
     }
-
 </script>
-
-<style type="text/scss">
-    .scrollable{
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
-    *::-webkit-scrollbar {
-        @apply w-1;
-    }
-    *::-webkit-scrollbar-track {
-        @apply bg-gray-100;
-        background-clip: content-box; 
-        border: 14px solid transparent;
-    }
-    *::-webkit-scrollbar-thumb {
-        @apply bg-gray-300;
-        border-radius: 20px;
-    }
-</style>
-
 
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={() => dispatch('previous')}>
+    <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5 mt-5">{locale('views.secureSpentAddresses.title')}</Text>
-            <Text type="p" secondary>{locale('views.secureSpentAddresses.body1')}{totalAddresses}{locale('views.secureSpentAddresses.body2')}</Text>
-            <Text type="p" secondary classes="mb-6">{locale('views.secureSpentAddresses.body3')}</Text>
-            <div class="scrollable h-80 pr-5 pb-6">
+            <Text type="p" secondary>{locale('views.secureSpentAddresses.body1', { values: { number: addresses.length } })}</Text>
+            <Text type="p" secondary classes="mb-6">{locale('views.secureSpentAddresses.body2')}</Text>
+            <div class="h-80 overflow-y-auto space-y-2 w-full">
                 {#each addresses as address}
-                    <SpentAddress {...address} {locale} />
+                    <SpentAddress
+                        {...address}
+                        {locale}
+                        selected={selectedAddresses.find((_address) => _address.id === address.id)}
+                        onClick={() => onAddressClick(address)} />
                 {/each}
             </div>
         </div>
         <div slot="leftpane__action" class="flex flex-col items-center">
-            <Button classes="w-full py-3 mt-2" onClick={() => secureAddresses()}>
+            <Button classes="w-full mt-2" disabled={!selectedAddresses.length} onClick={() => secureAddresses()}>
                 {locale('views.secureSpentAddresses.title')}
             </Button>
-            <div on:click={handleSkipClick} >
+            <div on:click={handleSkipClick}>
                 <Text type="p" secondary highlighted classes="mt-7 font-bold cursor-pointer">{locale('actions.skip')}</Text>
             </div>
         </div>
@@ -108,5 +72,3 @@
         </div>
     </OnboardingLayout>
 {/if}
-
-

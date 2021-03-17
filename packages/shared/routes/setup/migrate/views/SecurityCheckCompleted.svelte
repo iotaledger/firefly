@@ -1,89 +1,70 @@
 <script lang="typescript">
-    import { Button, Illustration, OnboardingLayout, SpentAddress, Text } from 'shared/components';
-    import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency';
-    import { createEventDispatcher } from 'svelte';
-    import { get } from 'svelte/store';
+    import { Button, Illustration, OnboardingLayout, SpentAddress, Text } from 'shared/components'
+    import { createEventDispatcher } from 'svelte'
 
     export let locale
     export let mobile
 
     const dispatch = createEventDispatcher()
 
-    //TODO: Retrieve addresses
-    let balance1 = Math.floor(Math.random() * 2000000)
-    let balance2 = Math.floor(Math.random() * 2000000)
-    let balance3 = Math.floor(Math.random() * 2000000)
-    let balance4 = Math.floor(Math.random() * 2000000)
-    let balance5 = Math.floor(Math.random() * 2000000)
-    let fiatbalance1 = `${convertToFiat(balance1,get(currencies)[CurrencyTypes.USD],get(exchangeRates)[AvailableExchangeRates.USD])} ${CurrencyTypes.USD}`        
-    let fiatbalance2 = `${convertToFiat(balance2,get(currencies)[CurrencyTypes.USD],get(exchangeRates)[AvailableExchangeRates.USD])} ${CurrencyTypes.USD}`        
-    let fiatbalance3 = `${convertToFiat(balance3,get(currencies)[CurrencyTypes.USD],get(exchangeRates)[AvailableExchangeRates.USD])} ${CurrencyTypes.USD}`        
-    let fiatbalance4 = `${convertToFiat(balance4,get(currencies)[CurrencyTypes.USD],get(exchangeRates)[AvailableExchangeRates.USD])} ${CurrencyTypes.USD}`        
-    let fiatbalance5 = `${convertToFiat(balance5,get(currencies)[CurrencyTypes.USD],get(exchangeRates)[AvailableExchangeRates.USD])} ${CurrencyTypes.USD}`        
-	let addresses = [
-        {
-            name: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
-            rawBalance: balance1,
-            fiatbalance: fiatbalance1,
-            riskLevel: 2
-        },
-        {
-            name: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
-            rawBalance: balance2,
-            fiatbalance: fiatbalance2,
-            riskLevel: 0
-        }, 
-        {
-            name: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
-            rawBalance: balance3,
-            fiatbalance: fiatbalance3,
-            riskLevel: 1
-        },
-        {
-            name: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
-            rawBalance: balance4,
-            fiatbalance: fiatbalance4,
-            riskLevel: 4
-        },
-        {
-            name: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
-            rawBalance: balance5,
-            fiatbalance: fiatbalance5,
-            riskLevel: 3
-        },                               
-    ]
+    // TODO: dummy
+    let addresses = Array.from({ length: 4 }, (_, id) => {
+        let balance = Math.floor(Math.random() * 4000000)
+        return {
+            id,
+            address: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
+            balance,
+            disabled: false,
+            risk: id,
+        }
+    })
+
+    let selectedAddresses = addresses.slice()
+
+    function onAddressClick(address) {
+        var index = selectedAddresses.findIndex((_address) => _address.id === address.id)
+        if (index === -1) {
+            selectedAddresses.push(address)
+        } else {
+            selectedAddresses.splice(index, 1)
+        }
+        selectedAddresses = selectedAddresses
+    }
 
     function handleBackClick() {
         dispatch('previous')
     }
-    function handleContinueClick(){
+    function handleContinueClick() {
         dispatch('next')
     }
     function rerunProcess() {
         dispatch('previous')
     }
-
 </script>
-
 
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={() => dispatch('previous')}>
+    <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5 mt-5">{locale('views.securityCheckCompleted.title')}</Text>
             <Text type="p" secondary classes="mb-6">{locale('views.securityCheckCompleted.body1')}</Text>
-            <div class="overflow-y-auto h-80 pr-5 pb-6">
+            <div class="h-80 overflow-y-auto space-y-2 w-full">
                 {#each addresses as address}
-                    <SpentAddress {...address} {locale} showRiskLevel/>
+                    <SpentAddress
+                        {...address}
+                        {locale}
+                        selected={selectedAddresses.find((_address) => _address.id === address.id)}
+                        showRiskLevel
+                        onClick={() => onAddressClick(address)} />
                 {/each}
             </div>
         </div>
         <div slot="leftpane__action" class="flex flex-col items-center">
-            <Button secondary classes="w-full py-3 mt-2" onClick={() => rerunProcess()}>
+            <Button secondary disabled={!selectedAddresses.length} classes="w-full mt-2" onClick={() => rerunProcess()}>
                 {locale('views.securityCheckCompleted.rerun')}
             </Button>
-            <Button classes="w-full py-3 mt-4" onClick={() => handleContinueClick()}>
+            <Button disabled={!selectedAddresses.length} classes="w-full mt-4" onClick={() => handleContinueClick()}>
                 {locale('views.securityCheckCompleted.continueMigration')}
             </Button>
         </div>
@@ -92,5 +73,3 @@
         </div>
     </OnboardingLayout>
 {/if}
-
-

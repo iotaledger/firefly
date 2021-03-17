@@ -1,8 +1,8 @@
 <script lang="typescript">
-    import { createEventDispatcher, onDestroy } from 'svelte'
-    import { Box, Button, Illustration, OnboardingLayout, Spinner, Text, Toast } from 'shared/components'
+    import { Box, Button, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
     import { formatUnit } from 'shared/lib/units'
+    import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
 
     export let locale
@@ -43,7 +43,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick} >
+    <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
             <Text on:click={learnAboutMigrationsClick} type="h1" classes="mb-5 mt-5">{locale('views.migrate.title')}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.migrate.body1')}</Text>
@@ -61,9 +61,7 @@
             <Button disabled={loading} classes="w-full" onClick={() => handleContinueClick()}>
                 {#if loading}
                     <Spinner busy={loading} message={locale('views.migrate.migrating')} classes="justify-center" />
-                {:else}
-                    {locale('views.migrate.beginMigration')}
-                {/if}
+                {:else}{locale('views.migrate.beginMigration')}{/if}
             </Button>
             <div on:click={learnAboutMigrationsClick}>
                 <Text type="p" secondary highlighted classes="m-7 font-bold cursor-pointer">{locale('views.migrate.learn')}</Text>

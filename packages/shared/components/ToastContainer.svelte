@@ -23,9 +23,9 @@
 
 <toast-container class="flex flex-col">
     <ul class="space-y-2">
-        {#each toasts as notification}
+        {#each toasts as toast}
             <li in:fade={{ duration: 100 }} out:fade={{ duration: 100 }}>
-                <Toast {...notification} />
+                <Toast {...toast} />
             </li>
         {/each}
     </ul>

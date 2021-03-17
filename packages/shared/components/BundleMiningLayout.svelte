@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import {Box, Icon } from 'shared/components'
-    export let allowBack = true
+    import { Box, Icon } from 'shared/components'
+
     export let onBackClick = () => {}
 </script>
 
@@ -9,21 +9,19 @@
     <slot />
 {/if}
 
-
 <div data-label="back-button" class="absolute top-12 left-5" on:click={onBackClick}>
     <Icon icon="arrow-left" classes="cursor-pointer text-blue-500" />
 </div>
-<div data-label="bundleMining-layout" class="flex flex-col w-full h-screen justify-center items-center">
+<div data-label="bundle-mining-layout" class="flex flex-col w-full h-screen justify-center items-center">
     <div class="w-2/5 h-auto">
         <Box classes="bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 rounded-lg py-10 px-20">
             <div class="flex justify-center -mt-16">
-                <slot name="icon_boxed"/>
+                <slot name="icon_boxed" />
             </div>
-        <div class="mt-6">
-                <slot name="box_content"/>
+            <div class="mt-6">
+                <slot name="box_content" />
             </div>
         </Box>
     </div>
-    <slot name="actions"/>
+    <slot name="actions" />
 </div>
-

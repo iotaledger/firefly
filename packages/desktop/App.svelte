@@ -102,17 +102,16 @@
 
         @apply select-none;
     }
-    *::-webkit-scrollbar {
+    ::-webkit-scrollbar {
         @apply w-1;
     }
-    *::-webkit-scrollbar-track {
-        @apply bg-gray-100;
-        background-clip: content-box; 
-        border: 14px solid transparent;
-    }
-    *::-webkit-scrollbar-thumb {
+    ::-webkit-scrollbar-thumb {
         @apply bg-gray-300;
-        border-radius: 20px;
+        border-radius: 10px;
+    }
+    ::-webkit-scrollbar-track {
+        @apply bg-gray-100;
+        border-radius: 10px;
     }
 </style>
 

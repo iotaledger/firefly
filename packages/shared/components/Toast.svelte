@@ -1,7 +1,12 @@
 <script lang="typescript">
     import { Icon } from 'shared/components'
-    import type { Action } from 'shared/lib/typings/action'
     import Logo from './Logo.svelte'
+
+    type Action = {
+        label: string
+        isPrimary?: boolean
+        onClick?: () => void
+    }
 
     export let classes: string
     export let type: string
@@ -39,9 +44,6 @@
         },
     }
 </script>
-
-<style type="text/scss">
-</style>
 
 <div class="{classes} flex flex-row items-center bg-{TOAST_STYLE[type].backgroundColor} rounded-lg px-6 py-4">
     <div

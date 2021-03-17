@@ -1,87 +1,67 @@
 <script lang="typescript">
-    import { createEventDispatcher, onDestroy } from 'svelte'
     import { Button, Illustration, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
+    import { createEventDispatcher, onDestroy } from 'svelte'
 
     export let locale
     export let mobile
 
-    let loading, finished = false
-    let migratingFundsMessage = ""
+    let loading,
+        finished = false
+    let migratingFundsMessage = ''
     let timeouts = []
 
-    //TODO: Retrieve transactions
-	let transactions = [
-        {
-            id: 0,
-            name: locale('views.transferFragmentedFunds.transaction'),
-            amount: '4.63 i',
+    // TODO: dummy
+    let transactions = Array.from({ length: 5 }, (_, index) => {
+        let balance = Math.floor(Math.random() * 4000000)
+        return {
+            name: locale('views.transferFragmentedFunds.transaction', { values: { number: index + 1 } }),
+            balance,
             status: 0,
-            errorText: "this is the error message"
-        },
-        {
-            id: 1,
-            name: locale('views.transferFragmentedFunds.transaction'),
-            amount: '458.52 Mi',
-            status: 0,
-            errorText: "this is the error message"
-        }, 
-        {
-            id: 2,
-            name: locale('views.transferFragmentedFunds.transaction'),
-            amount: '4.63 i',
-            status: 0,
-            errorText: "this is the error message"
-        },
-        {
-            id: 3,
-            name: locale('views.transferFragmentedFunds.transaction'),
-            amount: '28.52 Mi',
-            status: 0,
-            errorText: "this is the error message"
-        },
-        {
-            id: 4,
-            name: locale('views.transferFragmentedFunds.transaction'),
-            amount: '8.52 Gi',
-            status: 0,
-            errorText: "this is the error message"
-        },                               
-    ]
+            errorText: null,
+        }
+    })
 
     const dispatch = createEventDispatcher()
 
     function handleBackClick() {
         dispatch('previous')
     }
-    function handleContinueClick(){
+    function handleContinueClick() {
         dispatch('next')
     }
+
     //TODO:
-    function migrateFunds(){
-        transactions = transactions.map((item) => ({...item, status:1}))
+    function migrateFunds() {
+        transactions = transactions.map((item) => ({ ...item, status: 1 }))
         loading = true
         migratingFundsMessage = locale('views.migrate.migrating')
         //TODO: dummy status updates
-        timeouts.push(setTimeout(() => {
-            transactions[0].status  = 2
-            transactions[1].status  = 2
-        }, 2000))
-        timeouts.push(setTimeout(() => {
-            transactions[2].status  = -1
-        }, 3000))
-        timeouts.push(setTimeout(() => {
-            transactions[3].status  = 2
-            transactions[4].status  = 2
-            loading = false
-            finished = true
-            migratingFundsMessage = locale('actions.continue')            
-        }, 3500))
+        timeouts.push(
+            setTimeout(() => {
+                transactions[0].status = 2
+                transactions[1].status = 2
+            }, 2000)
+        )
+        timeouts.push(
+            setTimeout(() => {
+                transactions[2].status = -1
+                transactions[2].errorText = 'Reasons why it failed'
+            }, 3000)
+        )
+        timeouts.push(
+            setTimeout(() => {
+                transactions[3].status = 2
+                transactions[4].status = 2
+                loading = false
+                finished = true
+                migratingFundsMessage = locale('actions.continue')
+            }, 3500)
+        )
     }
 
-    onDestroy(()=>{
-        timeouts.forEach(t => clearTimeout(t))
+    onDestroy(() => {
+        timeouts.forEach((t) => clearTimeout(t))
     })
-    
 </script>
 
 {#if mobile}
@@ -99,18 +79,12 @@
         </div>
         <div slot="leftpane__action" class="flex flex-col items-center space-x-4">
             {#if !finished}
-                <Button
-                disabled={loading}
-                classes="w-full py-3 mt-2 text-white" onClick={() => migrateFunds()}>
+                <Button disabled={loading} classes="w-full py-3 mt-2 text-white" onClick={() => migrateFunds()}>
                     <Spinner busy={loading} message={migratingFundsMessage} classes="justify-center" />
-                    {#if !loading && !finished}
-                        {locale('views.transferFragmentedFunds.migrate')}
-                    {/if}
+                    {#if !loading && !finished}{locale('views.transferFragmentedFunds.migrate')}{/if}
                 </Button>
             {:else}
-                <Button classes="w-full py-3 mt-2" onClick={() => handleContinueClick()}>
-                    {locale('actions.continue')}
-                </Button>
+                <Button classes="w-full py-3 mt-2" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
             {/if}
         </div>
         <div slot="rightpane" class="h-full flex">
@@ -118,5 +92,3 @@
         </div>
     </OnboardingLayout>
 {/if}
-
-

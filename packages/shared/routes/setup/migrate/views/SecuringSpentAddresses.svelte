@@ -1,6 +1,7 @@
 <script lang="typescript">
-    import { createEventDispatcher, onMount, onDestroy } from 'svelte'
-    import { BundleMiningLayout, Button, Icon, Text, ProgressBar } from 'shared/components'
+    import { BundleMiningLayout, Button, Icon, ProgressBar, Text } from 'shared/components'
+    import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+
     export let locale
     export let mobile
 
@@ -10,15 +11,14 @@
     let progressBarMessage = ''
     let timeout
     let interval
-    
+
     onMount(() => {
         //TODO: retrieve progress and call setProgressBar() to fill it up
-        interval = setInterval(() => { 
-            progressBarPercent = Math.floor(Math.random() * 101)  
-            progressBarMessage = progressBarPercent.toString()+'% completed'
+        interval = setInterval(() => {
+            progressBarPercent = Math.floor(Math.random() * 101)
+            progressBarMessage = progressBarPercent.toString() + '% completed'
         }, 2500)
-        timeout = setTimeout(() => { 
-            console.log('here!!')
+        timeout = setTimeout(() => {
             dispatch('next')
         }, 7500)
     })
@@ -29,11 +29,11 @@
 
     //TODO:
     const learnClick = () => {
-        console.log("Learn more clicked")
+        console.log('Learn more clicked')
     }
     //TODO:
     const handleCancelClick = () => {
-        console.log("Cancel clicked")
+        console.log('Cancel clicked')
         dispatch('previous')
     }
 
@@ -41,7 +41,6 @@
         clearTimeout(timeout)
         clearInterval(interval)
     })
-
 </script>
 
 {#if mobile}
@@ -63,9 +62,11 @@
             </div>
         </div>
         <div slot="actions" class="w-2/5 mt-8">
-            <ProgressBar percent={progressBarPercent} message={progressBarMessage}></ProgressBar>
+            <ProgressBar percent={progressBarPercent} message={progressBarMessage} />
             <div on:click={handleCancelClick}>
-                <Text type="p" secondary highlighted classes="py-3.5 mt-4 font-bold cursor-pointer text-center">{locale('actions.cancel')}</Text>
+                <Text type="p" secondary highlighted classes="py-3.5 mt-4 font-bold cursor-pointer text-center">
+                    {locale('actions.cancel')}
+                </Text>
             </div>
         </div>
     </BundleMiningLayout>

@@ -1,7 +1,14 @@
 <script lang="typescript">
-    import { Transition } from 'shared/components';
-    import { createEventDispatcher } from 'svelte';
-    import { BundleMiningWarning, Migrate, SecureSpentAddresses, SecuringSpentAddresses, SecurityCheckCompleted, TransferFragmentedFunds } from './views/';
+    import { Transition } from 'shared/components'
+    import { createEventDispatcher } from 'svelte'
+    import {
+        BundleMiningWarning,
+        Migrate,
+        SecureSpentAddresses,
+        SecuringSpentAddresses,
+        SecurityCheckCompleted,
+        TransferFragmentedFunds,
+    } from './views/'
 
     export let locale
     export let mobile
@@ -12,11 +19,11 @@
         BundleMiningWarning = 'bundleMiningWarning',
         SecureSpentAddresses = 'secureSpentAddresses',
         SecuringSpentAddresses = 'securingSpentAddresses',
-        SecurityCheckCompleted = 'securityCheckCompleted'
+        SecurityCheckCompleted = 'securityCheckCompleted',
     }
 
     // TODO: dummy
-    enum  MigrationType {
+    enum MigrationType {
         SingleBundle = 'singleBundle',
         FragmentedFunds = 'fragmentedFunds',
         SpentAddresses = 'spentAddresses',
@@ -26,6 +33,7 @@
 
     let state: MigrateState = MigrateState.Init
     let stateHistory = []
+
     // TODO: dummy
     let migrationType: MigrationType = MigrationType.SpentAddresses
 
@@ -34,34 +42,29 @@
         let params = event.detail || {}
         switch (state) {
             case MigrateState.Init:
-                if(migrationType === MigrationType.SingleBundle) {
+                if (migrationType === MigrationType.SingleBundle) {
                     dispatch('next')
-                }
-                else if(migrationType === MigrationType.FragmentedFunds) {
+                } else if (migrationType === MigrationType.FragmentedFunds) {
                     nextState = MigrateState.TransferFragmentedFunds
-                }
-                else if(migrationType === MigrationType.SpentAddresses) {
+                } else if (migrationType === MigrationType.SpentAddresses) {
                     nextState = MigrateState.BundleMiningWarning
                 }
-            break
+                break
             case MigrateState.TransferFragmentedFunds:
                 dispatch('next')
-            break
+                break
             case MigrateState.BundleMiningWarning:
                 nextState = MigrateState.SecureSpentAddresses
-            break
+                break
             case MigrateState.SecureSpentAddresses:
                 nextState = MigrateState.SecuringSpentAddresses
-            break
+                break
             case MigrateState.SecuringSpentAddresses:
                 nextState = MigrateState.SecurityCheckCompleted
-            break
+                break
             case MigrateState.SecurityCheckCompleted:
                 nextState = MigrateState.TransferFragmentedFunds
-            break
-            case MigrateState.TransferFragmentedFunds:
-                dispatch('next')
-            break
+                break
         }
         if (nextState) {
             stateHistory.push(state)
@@ -78,7 +81,6 @@
             dispatch('previous')
         }
     }
-
 </script>
 
 {#if state === MigrateState.Init}
@@ -106,4 +108,3 @@
         <SecurityCheckCompleted on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
 {/if}
-

@@ -121,7 +121,7 @@
             "learn": "Learn about the migration",
             "beginMigration": "Begin Migration",
             "migrating": "Migrating funds...",
-            "migrated": "migrated",
+            "migrated": "{balance} migrated",
             "migrationFailed": "Migration Failed"
         },
         "bundleMiningWarning": {
@@ -131,30 +131,29 @@
             "body3": "We recommend you run an automated process to help secure and transfer your funds safely.",
             "learn": "Learn about spent addresses"
         },
-        "secureSpentAddresses":{
+        "secureSpentAddresses": {
             "title": "Secure spent addresses",
-            "body1": "You have funds detected on ",            
-            "body2": " spent address.",          
-            "body3": "We recommend you run an automated process to help secure and transfer your funds safely.",          
+            "body1": "You have funds detected on {number} spent address.",            
+            "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",          
             "error": "You can’t migrate spent addresses with less than 1 Mi"           
         },
-        "securityCheckCompleted":{
+        "securityCheckCompleted": {
             "title": "Security check completed",
-            "body1": "We have calculated the security risk level.  Running this process again may lower your risk level.",            
+            "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",            
             "rerun": "Rerun process for selected addresses",
             "continueMigration": "Continue migration process"
         },
-        "securingSpentAddresses":{
+        "securingSpentAddresses": {
             "title": "Securing spent addresses...",
             "body1": "You have funds detected on a spent address.",
             "body2": "These are at risk of theft.",
             "body3": "We recommend you run this automated process to help secure and transfer your funds safely.",
             "learn": "Learn about spent addresses"
         },
-        "transferFragmentedFunds":{
+        "transferFragmentedFunds": {
             "body1": "You have too many addresses to migrate in one transaction. In order to migrate your funds to the new network, you must send multiple transactions.",
             "migrate": "Migrate funds",
-            "transaction": "Transaction"
+            "transaction": "Transaction {number}"
         },
         "migrateFailed": {
             "title": "To do",
