@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Button, Checkbox, Illustration, Input, OnboardingLayout, Text } from 'shared/components'
+    import { cleanupSignup } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { Electron } from 'shared/lib/electron'
     import { hasOnlyWhitespaces } from 'shared/lib/helpers'
@@ -50,6 +51,7 @@
     }
 
     function handleBackClick() {
+        cleanupSignup()
         disposeNewProfile()
         dispatch('previous')
     }

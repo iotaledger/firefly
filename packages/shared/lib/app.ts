@@ -7,11 +7,6 @@ import { resetRouter } from './router'
 import { api, destroyActor, resetWallet } from './wallet'
 
 /**
- * Notification content
- */
-export const notification = writable<string>(null)
-
-/**
  * Mobile mode
  */
 export const mobile = writable<boolean>(false)
@@ -49,6 +44,28 @@ export const clearSendParams = () => sendParams.set({ amount: 0, address: '', me
 export const loggedIn = writable<boolean>(false)
 
 /**
+ * Determines if user can make developer profiles
+ */
+export const developerMode = persistent<boolean>('developerMode', false)
+
+/**
+ * Cleanup the signup vars
+ */
+ export const cleanupSignup = () => {
+    mnemonic.set(null)
+    strongholdPassword.set(null)
+    walletPin.set(null)
+}
+
+/**
+ * Log in to the current profile
+ */
+export const login = () => {
+    loggedIn.set(true)
+}
+
+/**
+
  * Logout from current profile
  */
 export const logout = () => {
@@ -64,7 +81,7 @@ export const logout = () => {
         resetWallet()
         resetRouter()
         clearActiveProfile()
-        mnemonic.set(null)
+        loggedIn.set(false)
     }
 
     if (!get(isStrongholdLocked)) {
