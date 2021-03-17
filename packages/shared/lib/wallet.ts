@@ -466,14 +466,34 @@ export const getLatestMessages = (accounts: WalletAccount[], count = 10): Accoun
         })
 
         account.messages.forEach((message) => {
-            messages[message.id] = Object.assign<
-                AccountMessage,
-                Message,
-                Partial<AccountMessage>
-            >(
-                {} as AccountMessage,
-                message,
-                { account: account.index });
+
+            if (message.id in messages) {
+                const existingMessage = messages[message.id];
+
+                // If a copy of the message exists, only override it if the new message is confirmed and the existing one is unconfirmed
+                // Imagine an internal transfer (between accounts). 
+                // If the first account already updates the confirmation state as confirmed, there is a chance that the user might see the confirmation state
+                // changing from confirmed to unconfirmed. To avoid that, we always give preference to the message that's already confirmed. 
+                if (!existingMessage.confirmed && message.confirmed) {
+                    messages[message.id] = Object.assign<
+                        AccountMessage,
+                        Message,
+                        Partial<AccountMessage>
+                    >(
+                        {} as AccountMessage,
+                        message,
+                        { account: account.index });
+                }
+            } else {
+                messages[message.id] = Object.assign<
+                    AccountMessage,
+                    Message,
+                    Partial<AccountMessage>
+                >(
+                    {} as AccountMessage,
+                    message,
+                    { account: account.index });
+            }
         })
     });
 
