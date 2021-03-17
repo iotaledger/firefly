@@ -2,7 +2,7 @@
     import { SettingsRoutes, GeneralSettings, SecuritySettings, AdvancedSettings, HelpAndInfo } from 'shared/lib/typings/routes'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import { Text, SettingsMenu } from 'shared/components'
-    import { settingsRoute } from 'shared/lib/router';
+    import { settingsChildRoute, settingsRoute } from 'shared/lib/router';
 
     export let locale
     export let mobile
@@ -21,7 +21,10 @@
                 settings={GeneralSettings}
                 title={locale('views.settings.generalSettings.title')}
                 description={locale('views.settings.generalSettings.description')}
-                onClick={() => settingsRoute.set(SettingsRoutes.GeneralSettings)}
+                onClick={(setting) => {
+                    settingsRoute.set(SettingsRoutes.GeneralSettings)
+                    settingsChildRoute.set(setting)
+                }}
                 {locale} />
             <SettingsMenu
                 icon="security"
@@ -30,7 +33,10 @@
                 settings={SecuritySettings}
                 title={locale('views.settings.security.title')}
                 description={locale('views.settings.security.description')}
-                onClick={() => settingsRoute.set(SettingsRoutes.Security)}
+                onClick={(setting) => {
+                    settingsRoute.set(SettingsRoutes.Security)
+                    settingsChildRoute.set(setting)
+                }}
                 {locale} />
             <SettingsMenu
                 icon="tools"
@@ -39,7 +45,10 @@
                 settings={AdvancedSettings}
                 title={locale('views.settings.advancedSettings.title')}
                 description={locale('views.settings.advancedSettings.description')}
-                onClick={() => settingsRoute.set(SettingsRoutes.AdvancedSettings)}
+                onClick={(setting) => {
+                    settingsRoute.set(SettingsRoutes.AdvancedSettings)
+                    settingsChildRoute.set(setting)
+                }}
                 {locale} />
             <SettingsMenu
                 icon="info"
@@ -48,7 +57,10 @@
                 settings={HelpAndInfo}
                 title={locale('views.settings.helpAndInfo.title')}
                 description={locale('views.settings.helpAndInfo.description')}
-                onClick={() => settingsRoute.set(SettingsRoutes.HelpAndInfo)}
+                onClick={(setting) => {
+                    settingsRoute.set(SettingsRoutes.HelpAndInfo)
+                    settingsChildRoute.set(setting)
+                }}
                 {locale} />
         </div>
     </div>

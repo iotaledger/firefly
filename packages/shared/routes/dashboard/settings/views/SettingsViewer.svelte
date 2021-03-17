@@ -1,9 +1,11 @@
 <script lang="typescript">
     import { Icon, Scroller, SettingsNavigator, Text } from 'shared/components'
-    import { settingsRoute } from 'shared/lib/router'
+    import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import { AdvancedSettings, GeneralSettings, HelpAndInfo, SecuritySettings, SettingsRoutes } from 'shared/lib/typings/routes'
+    import { onMount } from 'svelte'
     import { Advanced, General, Security } from './'
+
     export let locale
     export let mobile
 
@@ -21,11 +23,11 @@
         helpAndInfo: HelpAndInfo,
     }
 
-    function scrollIntoView(id) {
+    function scrollIntoView(id, options = null) {
         if (id) {
             const elem = document.getElementById(id)
             if (elem) {
-                elem.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' })
+                elem.scrollIntoView(options ?? { behavior: 'smooth' })
             } else {
                 console.error(`Element with id "${id}" missing in scrollIntoView`)
             }
@@ -34,6 +36,13 @@
     function goToSettingsHome() {
         settingsRoute.set(SettingsRoutes.Init)
     }
+    onMount(() => {
+        const child = $settingsChildRoute
+        settingsChildRoute.set(null)
+        if (child) {
+            scrollIntoView(child, { behavior: 'auto' })
+        }
+    })
 </script>
 
 {#if mobile}

@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { activeProfile } from 'shared/lib/profile'
-    import { settingsRoute } from 'shared/lib/router'
+    import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsRoutes } from 'shared/lib/typings/routes'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
@@ -25,6 +25,7 @@
 
     onDestroy(() => {
         settingsRoute.set(SettingsRoutes.Init)
+        settingsChildRoute.set(null)
     })
 </script>
 
