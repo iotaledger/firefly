@@ -71,6 +71,11 @@ export const accountRoute = writable<AccountRoutes>(AccountRoutes.Init)
 export const settingsRoute = writable<SettingsRoutes>(SettingsRoutes.Init)
 
 /**
+ * Settings child route
+ */
+ export const settingsChildRoute = writable<string>(null)
+
+/**
  * Navigate to initial route
  */
 export const initRouter = () => {
