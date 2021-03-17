@@ -96,11 +96,10 @@
     html,
     body {
         @apply bg-white;
-        &.scheme-dark {
-            @apply bg-blue-900;
-        }
-
         @apply select-none;
+        &.scheme-dark {
+            @apply bg-gray-900;
+        }
     }
 </style>
 

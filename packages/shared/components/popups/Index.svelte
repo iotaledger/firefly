@@ -65,9 +65,9 @@
 <popup
     in:fade={{ duration: transition ? 100 : 0 }}
     class={`flex items-center justify-center fixed top-0 left-0 w-screen p-6
-                h-screen overflow-hidden z-10 ${fullScreen ? 'bg-white dark:bg-blue-900' : 'bg-gray-800 bg-opacity-40'}`}>
+                h-screen overflow-hidden z-10 ${fullScreen ? 'bg-white dark:bg-gray-900' : 'bg-gray-800 bg-opacity-40'}`}>
     <popup-content
-        class={`bg-white rounded-xl pt-6 px-8 pb-8 relative ${fullScreen ? 'full-screen dark:bg-blue-900' : 'dark:bg-gray-900'}`}>
+        class={`bg-white rounded-xl pt-6 px-8 pb-8 relative ${fullScreen ? 'full-screen dark:bg-gray-900' : 'dark:bg-gray-900'}`}>
         {#if !hideClose}
             <button on:click={closePopup} class="absolute top-6 right-8">
                 <Icon icon="close" classes="text-gray-800 dark:text-white" />
