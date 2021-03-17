@@ -1,4 +1,8 @@
 import { Unit, convertUnits } from '@iota/unit-converter'
+import Big from 'big.js'
+
+// Set this to avoid small numbers switching to exponential format
+Big.NE = -20
 
 /**
  * IOTA Units Map
@@ -63,4 +67,29 @@ const getUnit = (value: number): Unit => {
     }
 
     return bestUnits
+}
+
+/**
+ * Convert the value to different units.
+ * @param value The value to convert.
+ * @param fromUnit The form unit.
+ * @param toUnit The to unit.
+ * @returns The formatted unit.
+ */
+export const convertUnitsNoE = (value: number, fromUnit: Unit, toUnit: Unit): string => {
+    if (value === 0) {
+        return "0";
+    }
+
+    if (!value) {
+        return "";
+    }
+
+    if (fromUnit === toUnit) {
+        return value.toString();
+    }
+
+    const scaledValue = new Big(value).times(UNIT_MAP[fromUnit].val).div(UNIT_MAP[toUnit].val)
+
+    return toUnit === Unit.i ? scaledValue.toFixed(0) : scaledValue.toString();
 }
