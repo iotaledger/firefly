@@ -23,11 +23,11 @@
         helpAndInfo: HelpAndInfo,
     }
 
-    function scrollIntoView(id) {
+    function scrollIntoView(id, options = null) {
         if (id) {
             const elem = document.getElementById(id)
             if (elem) {
-                elem.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' })
+                elem.scrollIntoView(options ?? { behavior: 'smooth' })
             } else {
                 console.error(`Element with id "${id}" missing in scrollIntoView`)
             }
@@ -40,7 +40,7 @@
         const child = $settingsChildRoute
         settingsChildRoute.set(null)
         if (child) {
-            scrollIntoView(child)
+            scrollIntoView(child, { behavior: 'auto' })
         }
     })
 </script>
