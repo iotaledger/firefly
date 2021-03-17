@@ -1,19 +1,17 @@
 <script lang="typescript">
+    import { Icon, Modal, Text } from 'shared/components'
+    import { logout } from 'shared/lib/app'
+    import { getInitials } from 'shared/lib/helpers'
+    import { activeProfile } from 'shared/lib/profile'
     import { get } from 'svelte/store'
     import { fade } from 'svelte/transition'
-    import { Text, Icon, Modal } from 'shared/components'
-    import { activeProfile } from 'shared/lib/profile'
-    import { getInitials } from 'shared/lib/helpers'
-    import { api } from 'shared/lib/wallet'
-    import { logout } from 'shared/lib/app'
-    import { showAppNotification } from 'shared/lib/notifications'
 
     export let isActive
     export let locale
     export let openSettings = () => {}
 
     const profileColor = 'blue' // TODO: each profile has a different color
-    const profileName = get(activeProfile).name
+    const profileName = get(activeProfile)?.name
     const profileInitial = getInitials(profileName, 1)
 
     const handleSettingsClick = () => {
@@ -21,17 +19,7 @@
         isActive = false
     }
     const handleLogoutClick = () => {
-        api.lockStronghold({
-            onSuccess() {
-                logout()
-            },
-            onError(err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error),
-                })
-            },
-        })
+        logout()
     }
 </script>
 
@@ -48,13 +36,13 @@
             on:click={() => handleSettingsClick()}
             class="group flex flex-row justify-start items-center hover:bg-blue-50 py-3 px-3 w-full">
             <Icon icon="settings" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
-            <Text smaller classes="group-hover:text-blue-500">{locale(`views.dashboard.profile_modal.all_settings`)}</Text>
+            <Text smaller classes="group-hover:text-blue-500">{locale(`views.dashboard.profileModal.allSettings`)}</Text>
         </button>
         <button
             on:click={() => handleLogoutClick()}
             class="group flex flex-row justify-start items-center hover:bg-blue-50 py-3 px-3 w-full">
             <Icon icon="logout" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
-            <Text smaller classes="group-hover:text-blue-500">{locale(`views.dashboard.profile_modal.logout`)}</Text>
+            <Text smaller classes="group-hover:text-blue-500">{locale(`views.dashboard.profileModal.logout`)}</Text>
         </button>
     </profile-modal-content>
 </Modal>

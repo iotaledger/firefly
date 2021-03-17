@@ -59,7 +59,7 @@
                     statusMessage = seedValidations
                     error = true
                 } else {
-                    statusMessage = locale('views.import_from_text.seed_detected')
+                    statusMessage = locale('views.importFromText.seedDetected')
                     value = trimmedContent
                 }
             } else {
@@ -68,7 +68,7 @@
                     statusMessage = mnemonicValidations
                     error = true
                 } else {
-                    statusMessage = locale('views.import_from_text.phrase_detected')
+                    statusMessage = locale('views.importFromText.phraseDetected')
                     value = trimmedContent
                 }
             }
@@ -88,6 +88,7 @@
         bind:value={content}
         on:keydown={debounce(handleKeyDown)}
         placeholder=""
-        spellcheck={false} />
+        spellcheck={false}
+        autofocus />
     <Text type="p" secondary {error}>{statusMessage}&nbsp;</Text>
 </div>

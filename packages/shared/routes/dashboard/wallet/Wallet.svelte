@@ -29,14 +29,14 @@
         updateBalanceOverview,
         wallet,
         WalletAccount,
+        prepareAccountInfo,
+        getAccountMeta
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
     import { derived, get, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
 
     export let locale
-
-    const AccountColors = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
     const { accounts, balanceOverview, accountsLoaded } = $wallet
 
@@ -62,68 +62,6 @@
     setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
-
-    function getAccountMeta(
-        accountId: string,
-        callback: (
-            error: ErrorEventPayload,
-            meta?: {
-                balance: number
-                incoming: number
-                outgoing: number
-                depositAddress: string
-            }
-        ) => void
-    ) {
-        api.getBalance(accountId, {
-            onSuccess(balanceResponse) {
-                api.latestAddress(accountId, {
-                    onSuccess(latestAddressResponse) {
-                        callback(null, {
-                            balance: balanceResponse.payload.total,
-                            incoming: balanceResponse.payload.incoming,
-                            outgoing: balanceResponse.payload.outgoing,
-                            depositAddress: latestAddressResponse.payload.address,
-                        })
-                    },
-                    onError(error) {
-                        callback(error)
-                    },
-                })
-            },
-            onError(error) {
-                callback(error)
-            },
-        })
-    }
-
-    function prepareAccountInfo(
-        account: BaseAccount,
-        meta: {
-            balance: number
-            incoming: number
-            outgoing: number
-            depositAddress: string
-        }
-    ): WalletAccount {
-        const { id, index, alias } = account
-        const { balance, depositAddress } = meta
-
-        return Object.assign<WalletAccount, BaseAccount, Partial<WalletAccount>>({} as WalletAccount, account, {
-            id,
-            index,
-            depositAddress,
-            alias,
-            rawIotaBalance: balance,
-            balance: formatUnit(balance, 2),
-            balanceEquiv: `${convertToFiat(
-                balance,
-                $currencies[CurrencyTypes.USD],
-                $exchangeRates[get(activeProfile).settings.currency]
-            )} ${$activeProfile.settings.currency}`,
-            color: AccountColors[index % AccountColors.length],
-        })
-    }
 
     function getAccounts() {
         api.getAccounts({
@@ -288,7 +226,7 @@
                     indexation: { index: 'firefly', data: new Array() },
                 },
                 {
-                    onSuccess(response) {
+                    onSuccess(response) {                        
                         accounts.update((_accounts) => {
                             return _accounts.map((_account) => {
                                 if (_account.id === senderAccountId) {
@@ -410,7 +348,7 @@
     }
 
     $: {
-        if ($deepLinkRequestActive && get(activeProfile).settings.deepLinking) {
+        if ($deepLinkRequestActive && get(activeProfile)?.settings.deepLinking) {
             walletRoute.set(WalletRoutes.Send)
             deepLinkRequestActive.set(false)
         }

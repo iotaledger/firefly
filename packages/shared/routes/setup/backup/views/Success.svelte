@@ -7,8 +7,9 @@
 
     const dispatch = createEventDispatcher()
     let hide = true
+    let hasRevealedRecoveryPhrase = false
 
-    $: visibilityToggleString = hide ? 'reveal_recovery_phrase' : 'hide_recovery_phrase'
+    $: visibilityToggleString = hide ? 'revealRecoveryPhrase' : 'hideRecoveryPhrase'
 
     function handleContinueClick() {
         dispatch('next')
@@ -18,6 +19,7 @@
     }
     function handleMnemonicVisibilityClick() {
         hide = !hide
+        hasRevealedRecoveryPhrase = true
     }
 </script>
 
@@ -26,18 +28,20 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
-            <Text type="h2" classes="mb-5">{locale('views.recovery_phrase_saved.title')}</Text>
+            <Text type="h2" classes="mb-5">{locale('views.recoveryPhraseSaved.title')}</Text>
             <div class="flex flex-row items-center">
                 <Icon icon="checkmark" classes="checkmark mr-2 text-blue-500" />
-                <Text type="p" secondary>{locale('views.recovery_phrase_saved.body')}</Text>
+                <Text type="p" secondary>{locale('views.recoveryPhraseSaved.body')}</Text>
             </div>
         </div>
         <div slot="leftpane__action">
-            <Button classes="w-full" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
+            <Button disabled={!hasRevealedRecoveryPhrase} classes="w-full" onClick={() => handleContinueClick()}>
+                {locale('actions.continue')}
+            </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex flex-row flex-wrap items-center justify-center p-16">
             <RecoveryPhrase classes="mb-8" recoveryPhrase={mnemonic} {hide} />
-            <Button onClick={handleMnemonicVisibilityClick}>{locale(`views.recovery_phrase.${visibilityToggleString}`)}</Button>
+            <Button onClick={handleMnemonicVisibilityClick}>{locale(`views.recoveryPhrase.${visibilityToggleString}`)}</Button>
         </div>
     </OnboardingLayout>
 {/if}

@@ -20,13 +20,13 @@ const Electron = {
     PincodeManager,
     DeepLinkManager,
     NotificationManager,
-    getStrongholdBackupDestination: () => {
-        return ipcRenderer.invoke('show-open-dialog', { properties: ['openDirectory'] }).then((result) => {
+    getStrongholdBackupDestination: (defaultPath) => {
+        return ipcRenderer.invoke('show-save-dialog', { properties: ['createDirectory', 'showOverwriteConfirmation'], defaultPath }).then((result) => {
             if (result.canceled) {
                 return null
             }
 
-            return result.filePaths[0]
+            return result.filePath
         })
     },
     /**
@@ -38,6 +38,14 @@ const Electron = {
      */
     getUserDataPath: () => ipcRenderer.invoke('get-path', 'userData'),
     /**
+     * Gets diagnostics information for the system
+     *
+     * @method getDiagnostics
+     *
+     * @returns {Promise}
+     */
+     getDiagnostics: () => ipcRenderer.invoke('diagnostics'),
+     /**
      * Starts an update of the application
      *
      * @method updateDownload

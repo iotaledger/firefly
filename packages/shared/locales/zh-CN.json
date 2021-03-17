@@ -1,29 +1,29 @@
 {
     "views": {
-        "onboarding_1": {
+        "onboarding1": {
             "title": "发送、接收和管理您的 IOTA",
             "body": "Firefly是一款安全且易用的IOTA钱包。"
         },
         "legal": {
             "title": "法律条款",
             "body": "请查看隐私政策和服务条款。",
-            "privacy_policy": {
+            "privacyPolicy": {
                 "title": "隐私政策",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "terms_of_service": {
+            "termsOfService": {
                 "title": "服务条款",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
@@ -34,48 +34,49 @@
         "setup": {
             "title": "设置您的钱包",
             "body": "您可以创建一个新钱包或导入一个已有的钱包。",
-            "profile_name": "配置名称"
+            "profileName": "配置名称"
         },
         "password": {
             "title": "设置密码",
-            "body": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates."
+            "body": "您需要一个强大的密码来保护您的资金。可使用一些单词的组合，并避免常见的短语，名称或日期。"
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body_2": "Keep your PIN safe!"
+            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
+            "body2": "Keep your PIN safe!"
         },
         "pin": {
             "title": "设置PIN码",
-            "body_1": "请在下方输入 6 位数字的 PIN。您在登录钱包时需要输入 PIN。",
-            "body_2": "您只能使用数字。"
+            "body1": "请在下方输入 6 位数字的 PIN。您在登录钱包时需要输入 PIN。",
+            "body2": "您只能使用数字。"
         },
-        "confirm_pin": {
+        "confirmPin": {
             "title": "请验证您的 PIN",
             "body": "请重新输入您的 PIN 码来继续后面的操作。"
         },
         "backup": {
             "title": "请备份您的钱包",
-            "body_1": "您现在将看到一个恢复密语。",
-            "body_2": "请不要将此密语分享给任何人。您的恢复密语可以用来从任何地方访问您的令牌。",
-            "body_3": "如果您丢失了恢复密语，您很可能会丢失您的资金。"
+            "body1": "您现在将看到一个恢复密语。",
+            "body2": "请不要将此密语分享给任何人。您的恢复密语可以用来从任何地方访问您的令牌。",
+            "body3": "如果您丢失了恢复密语，您很可能会丢失您的资金。"
         },
-        "recovery_phrase": {
+        "recoveryPhrase": {
             "title": "恢复密语",
-            "body_1": "请仔细按正确的顺序写下这些单词。",
-            "body_2": "请秘密地保管好您的恢复密语并安全存储。不要与任何人共享它。",
-            "reveal_recovery_phrase": "显示恢复密语",
-            "hide_recovery_phrase": "隐藏恢复密语"
+            "body1": "请仔细按正确的顺序写下这些单词。",
+            "body2": "请秘密地保管好您的恢复密语并安全存储。不要与任何人共享它。",
+            "revealRecoveryPhrase": "显示恢复密语",
+            "hideRecoveryPhrase": "隐藏恢复密语"
         },
-        "verify_recovery_phrase": {
+        "verifyRecoveryPhrase": {
             "title": "验证恢复密语",
-            "body": "让我们检查你是否能正确地写下密语。请按照正确的顺序选择这些单词。"
+            "body": "让我们检查你是否能正确地写下密语。请按照正确的顺序选择这些单词。",
+            "creatingAccount": "正在创建帐户，请稍候..."
         },
-        "backup_wallet": {
+        "backupWallet": {
             "title": "备份到 Stronghold 文件",
             "body": "请输入您的密码来备份您的钱包到一个Stronghold文件。您的密码将用来加密这个备份文件。"
         },
-        "recovery_phrase_saved": {
+        "recoveryPhraseSaved": {
             "title": "备份成功",
             "body": "你已经将你的钱包备份到了一个Stronghold文件。"
         },
@@ -87,35 +88,35 @@
             "title": "导入钱包",
             "body": "如果您已有恢复恢复或是Stronghold的备份文件，您可以在此处导入。"
         },
-        "import_from_text": {
+        "importFromText": {
             "title": "用恢复恢复或种子恢复你的钱包",
-            "body_1": "恢复密语长度为24个单词。这个短语可用于恢复已有的Firefly钱包。",
-            "body_2": "种子由81个字符组成。它用于从旧的 Trinity 钱包中恢复。",
-            "body_3": "请输入您的种子或恢复密语",
-            "seed_detected": "81 character seed detected",
-            "phrase_detected": "24 word phrase detected"
+            "body1": "恢复密语长度为24个单词。这个短语可用于恢复已有的Firefly钱包。",
+            "body2": "种子由81个字符组成。它用于从旧的 Trinity 钱包中恢复。",
+            "body3": "请输入您的种子或恢复密语",
+            "seedDetected": "81 character seed detected",
+            "phraseDetected": "24 word phrase detected"
         },
-        "import_from_file": {
+        "importFromFile": {
             "title": "从备份文件恢复你的钱包",
             "body": "导入备份文件以恢复您的钱包。备份可以是 Stronghold (.stronghold) 或 Trinity SeedVault (.kdbx)格式。"
         },
-        "import_backup_password": {
+        "importBackupPassword": {
             "title": "从SeedVault或Stronghold文件恢复你的钱包",
-            "body_1": "请输入您的备份密码。",
-            "body_2": "这是您首次创建备份时设置的密码。"
+            "body1": "请输入您的备份密码。",
+            "body2": "这是您首次创建备份时设置的密码。"
         },
-        "import_success": {
+        "importSuccess": {
             "title": "您已成功恢复您的备份。",
             "body": "您现在可以设置您的新钱包。"
         },
         "migrate": {
             "title": "迁移您的资金",
-            "body_1": "这是一个将您的资金转账到您新钱包的自动化过程。我们将检查削弱您安全性的已花费地址。",
-            "body_2": "这可能需要一些时间。不要在迁移过程中关闭您的设备。",
+            "body1": "这是一个将您的资金转账到您新钱包的自动化过程。我们将检查削弱您安全性的已花费地址。",
+            "body2": "这可能需要一些时间。不要在迁移过程中关闭您的设备。",
             "existing": "您的旧钱包",
             "new": "您的新钱包"
         },
-        "migrate_failed": {
+        "migrateFailed": {
             "title": "To do",
             "body": "To do"
         },
@@ -190,7 +191,7 @@
                 "description": ""
             },
             "deleteProfile": {
-                "title": "Delete profile",
+                "title": "删除配置文件",
                 "description": ""
             },
             "deepLinks": {
@@ -215,6 +216,10 @@
             },
             "errorLog": {
                 "title": "错误日志",
+                "description": ""
+            },
+            "diagnostics": {
+                "title": "诊断程序",
                 "description": ""
             },
             "stateExport": {
@@ -243,40 +248,40 @@
             }
         },
         "login": {
-            "please_wait": "请等待 {time, plural, one {1 秒} other {# 秒}}",
-            "incorrect_attempts": "{attempts, plural, one {1 次失败重试} other {# 次失败重试}}"
+            "pleaseWait": "请等待 {time, plural, one {1 秒} other {# 秒}}",
+            "incorrectAttempts": "{attempts, plural, one {1 次失败重试} other {# 次失败重试}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "up_to_date": "最新的",
-                    "out_of_date": "已过期"
+                    "upToDate": "最新的",
+                    "outOfDate": "已过期"
                 },
-                "hardware_device": {
+                "hardwareDevice": {
                     "title": "硬件设备",
-                    "none_detected": "没有检测到"
+                    "noneDetected": "没有检测到"
                 },
-                "stronghold_status": {
+                "strongholdStatus": {
                     "title": "Stronghold 状态",
                     "locked": "锁定",
                     "unlocked": "解锁"
                 },
-                "stronghold_backup": {
+                "strongholdBackup": {
                     "title": "备份Stronghold",
-                    "weeks_ago": "{weeks, plural, one {# 周} other {# 周}} 前"
+                    "weeksAgo": "{weeks, plural, one {# 周} other {# 周}} 前"
                 }
             },
             "network": {
-                "network_operational": "网络运行",
-                "network_degraded": "网络降级",
-                "network_down": "网络中断",
+                "networkOperational": "网络运行",
+                "networkDegraded": "网络降级",
+                "networkDown": "网络中断",
                 "status": "状态",
-                "messages_per_second": "每秒信息数",
-                "confirmation_rate": "确认速度"
+                "messagesPerSecond": "每秒信息数",
+                "confirmationRate": "确认速度"
             },
-            "profile_modal": {
-                "all_settings": "所有设置",
+            "profileModal": {
+                "allSettings": "所有设置",
                 "logout": "退出账号"
             }
         }
@@ -291,59 +296,70 @@
         },
         "version": {
             "title": "当前版本: {version}",
-            "up_to_date_title": "Firefly 目前是最新版本",
-            "up_to_date_description": "你正在运行的Firefly版本是最新，最安全的。",
-            "update_available": "Firefly有可用的更新",
-            "update_details": "版本{version} - {date}"
+            "upToDateTitle": "Firefly 目前是最新版本",
+            "upToDateDescription": "你正在运行的Firefly版本是最新，最安全的。",
+            "updateAvailable": "Firefly有可用的更新",
+            "updateDetails": "版本{version} - {date}"
         },
         "backup": {
             "title": "上次备份: {date}",
-            "last_backup": "您上次的备份 {date}",
-            "backup_description": "定期备份您的账户和交易记录是非常重要的。",
-            "backup_warning": "如果您丢失了备份文件和恢复短语，您将再也不能访问您的资金",
-            "not_backed_up": "没有备份",
-            "not_backed_up_description": "您还没有备份您的 Stronghold"
+            "lastBackup": "您上次的备份 {date}",
+            "backupDescription": "定期备份您的账户和交易记录是非常重要的。",
+            "backupWarning": "如果您丢失了备份文件和恢复短语，您将再也不能访问您的资金",
+            "notBackedUp": "没有备份",
+            "notBackedUpDescription": "您还没有备份您的 Stronghold"
         },
-        "delete_account": {
+        "deleteAccount": {
             "title": "删除{name}?",
             "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "请输入您的钱包密码进行确认。",
-            "delete_account": "删除账户",
-            "error_title": "无法删除 {name}",
-            "error_body_1": "你只能删除余额为0的账户",
-            "error_body_2": "目前你的这个账户还有 {balance} 余额. 请把这些资金移动到另一个账户后重试。",
-            "error_body_3": "You cannot delete this account, you must have at least one."
+            "typePassword": "请输入您的钱包密码进行确认。",
+            "deleteAccount": "删除账户",
+            "errorTitle": "无法删除 {name}",
+            "errorBody1": "你只能删除余额为0的账户",
+            "errorBody2": "目前你的这个账户还有 {balance} 余额. 请把这些资金移动到另一个账户后重试。",
+            "errorBody3": "You cannot delete this account, you must have at least one."
         },
-        "address_history": {
+        "addressHistory": {
             "title": "{name} 账户地址历史记录",
-            "current_balance": "当前余额: {balance}"
+            "currentBalance": "当前余额: {balance}"
         },
         "node": {
-            "title_add": "添加节点",
-            "title_remove": "Remove a node",
-            "title_details": "节点详细信息",
-            "node_address": "节点地址",
-            "optional_username": "用户名(选填)",
-            "optional_password": "密码 (选填)",
-            "set_as_primary_node": "设为主节点",
-            "remove_confirmation": "Are you sure you want to remove node?"
+            "titleAdd": "添加节点",
+            "titleRemove": "Remove a node",
+            "titleDetails": "节点详细信息",
+            "nodeAddress": "节点地址",
+            "optionalUsername": "用户名(选填)",
+            "optionalPassword": "密码 (选填)",
+            "setAsPrimaryNode": "设为主节点",
+            "removeConfirmation": "Are you sure you want to remove this node?"
         },
         "errorLog": {
-            "title": "Error Log",
-            "empty": "The error log is empty."
+            "title": "错误日志",
+            "empty": "错误日志为空。"
         },
         "deleteProfile": {
-            "title": "Delete profile",
-            "confirmation": "Are you sure you want to delete this profile, this operation cannot be undone?"
+            "title": "删除配置文件",
+            "confirmation": "您确定要删除此配置文件吗？此操作无法撤消。"
+        },
+        "diagnostics": {
+            "title": "诊断程序",
+            "node": "节点",
+            "platform": "平台",
+            "platformVersion": "平台版本",
+            "platformArchitecture": "平台架构",
+            "cpuCount": "CPU 计数",
+            "totalMem": "总内存",
+            "freeMem": "空闲内存",
+            "userPath": "用户路径"
         }
     },
     "charts": {
-        "incoming_mi": "Incoming {value} Mi",
-        "outgoing_mi": "Outgoing {value} Mi",
-        "portoflio": "Portfolio",
-        "token": "Token",
-        "account_value": "Account Value",
-        "account_activity": "Account Activity"
+        "incomingMi": "Incoming {value} Mi",
+        "outgoingMi": "Outgoing {value} Mi",
+        "portoflio": "资产组合",
+        "token": "代币",
+        "accountValue": "Account Value",
+        "accountActivity": "Account Activity"
     },
     "actions": {
         "continue": "继续",
@@ -352,32 +368,32 @@
         "close": "关闭",
         "dismiss": "取消",
         "save": "保存",
-        "import_seed": "导入已有的种子",
-        "import_wallet": "导入现有钱包",
-        "create_wallet": "创建新钱包",
-        "save_password": "保存密码",
-        "use_biometric": "使用生物特征安全机制",
-        "setup_pin": "设置PIN码",
-        "set_pin": "设置PIN码",
-        "confirm_pin": "确认PIN码",
-        "enter_your_pin": "输入你的密码",
-        "save_backup_file": "保存备份文件",
-        "ive_written_recovery_phrase": "我已经写下我的恢复短语",
-        "verify_recovery_phrase": "验证恢复密语",
-        "reveal_recovery_phrase": "显示恢复密语",
-        "import_seedvault": "导入SeedVault",
-        "check_again": "不，再次检查",
-        "import_from_file": "从文件导入",
+        "importSeed": "导入已有的种子",
+        "importWallet": "导入现有钱包",
+        "createWallet": "创建新钱包",
+        "savePassword": "保存密码",
+        "useBiometric": "使用生物特征安全机制",
+        "setupPin": "设置PIN码",
+        "setPin": "设置PIN码",
+        "confirmPin": "确认PIN码",
+        "enterYourPin": "输入你的密码",
+        "saveBackupFile": "保存备份文件",
+        "iveWrittenRecoveryPhrase": "我已经写下我的恢复短语",
+        "verifyRecoveryPhrase": "验证恢复密语",
+        "revealRecoveryPhrase": "显示恢复密语",
+        "importSeedvault": "导入SeedVault",
+        "checkAgain": "不，再次检查",
+        "importFromFile": "从文件导入",
         "send": "发送",
         "receive": "接收",
         "create": "创建",
-        "begin_transfer": "开始传输",
-        "try_again": "重试",
-        "visit_discord": "访问 Discord",
-        "drag_drop": "拖放",
-        "import_extentions": ".stronghold 或 .kdbx 文件",
-        "choose_file": "选择一个文件",
-        "drop_here": "将您的文件拖放至此处",
+        "beginTransfer": "开始传输",
+        "tryAgain": "重试",
+        "visitDiscord": "访问 Discord",
+        "dragDrop": "拖放",
+        "importExtentions": ".stronghold 或 .kdbx 文件",
+        "chooseFile": "选择一个文件",
+        "dropHere": "将您的文件拖放至此处",
         "syncAll": "全部同步",
         "export": "导出",
         "exportNewStronghold": "导出一个新的Stronghold",
@@ -387,15 +403,15 @@
         "exportState": "导出状态",
         "outsourceProofOfWork": "外包工作证明",
         "unlock": "解锁",
-        "update_firefly": "更新Firefly",
-        "restart_now": "立即重启",
-        "save_backup": "保存备份",
-        "customize_account": "自定义你的账户",
-        "view_address_history": "显示地址历史记录",
-        "delete_account": "删除账户",
+        "updateFirefly": "更新Firefly",
+        "restartNow": "立即重启",
+        "saveBackup": "保存备份",
+        "customizeAcount": "Customise account",
+        "viewAddressHistory": "显示地址历史记录",
+        "deleteAccount": "删除账户",
         "max": "最大",
-        "add_node": "添加节点",
-        "remove_node": "Remove node",
+        "addNode": "添加节点",
+        "removeNode": "Remove node",
         "hide": "隐藏",
         "hideOthers": "隐藏其它",
         "showAll": "显示全部",
@@ -410,57 +426,58 @@
         "addAccount": "添加账户",
         "checkForUpdates": "检查更新",
         "reportAnIssue": "反馈问题",
-        "clear": "Clear",
-        "hide_details": "Hide Details",
-        "yes": "Yes",
-        "no": "No"
+        "clear": "清除",
+        "hideDetails": "Hide Details",
+        "yes": "是",
+        "no": "否",
+        "reset": "重置"
     },
     "general": {
         "password": "密码",
-        "confirm_password": "确认密码",
+        "confirmPassword": "确认密码",
         "currentPassword": "当前使用的密码",
         "newPassword": "新的密码",
         "confirmNewPassword": "再次确认新的密码",
-        "your_seed": "你的种子",
-        "recovery_phrase": "恢复密语",
-        "recent_activity": "最新活动",
+        "yourSeed": "你的种子",
+        "recoveryPhrase": "恢复密语",
+        "recentActivity": "最新活动",
         "sent": "已发送",
         "received": "已收到",
-        "send_payment": "发送付款",
-        "move_funds": "转移资金",
-        "send_funds": "资金转账",
-        "send_to_address": "发送至地址",
-        "scan_qr_or_paste": "扫描二维码或粘贴地址",
-        "move_funds_between_accounts": "账户之间的资金转移",
-        "send_tokens_to_address": "发送Token到另一个地址",
-        "manage_account": "账户管理",
-        "customize_account": "自定义你的账户",
+        "sendPayment": "发送付款",
+        "moveFunds": "转移资金",
+        "sendFunds": "资金转账",
+        "sendToAddress": "发送至地址",
+        "scanQrOrPaste": "扫描二维码或粘贴地址",
+        "moveFundsBetweenAccounts": "账户之间的资金转移",
+        "sendTokensToAddress": "发送Token到另一个地址",
+        "manageAccount": "账户管理",
+        "customizeAcount": "Customize your account",
         "account": "账号",
-        "sending_to_address": "发送至地址",
+        "sendingToAddress": "发送至地址",
         "amount": "金额",
-        "add_address": "新增地址",
+        "addAddress": "新增地址",
         "reference": "使用指南",
         "from": "从",
         "to": "到",
-        "receive_funds": "接收资金",
-        "my_address": "我的地址",
-        "share_address": "分享地址",
-        "your_address": "您的地址",
-        "generate_new_address": "生成新地址",
-        "copy_address": "复制地址",
-        "have_text_backup": "我有一个文本备份",
-        "have_file_backup": "我有一个文本备份",
-        "enter_seed_or_phrase": "输入恢复密语或种子",
-        "upload_seedvault_or_stronghold": "导入Strong或 SeedVault 文件",
+        "receiveFunds": "接收资金",
+        "myAddress": "我的地址",
+        "shareAddress": "分享地址",
+        "yourAddress": "您的地址",
+        "generateNewAddress": "生成新地址",
+        "copyAddress": "复制地址",
+        "haveTextBackup": "我有一个文本备份",
+        "haveFileBackup": "我有一个文本备份",
+        "enterSeedOrPhrase": "输入恢复密语或种子",
+        "uploadSeedvaultOrStronghold": "导入Strong或 SeedVault 文件",
         "import": "导入",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "语言",
         "appearance": "外观",
-        "light_theme": "浅色主题",
-        "dark_theme": "深色主题",
-        "total_balance": "总余额",
-        "account_balance": "账户余额",
+        "lightTheme": "浅色主题",
+        "darkTheme": "深色主题",
+        "totalBalance": "总余额",
+        "accountBalance": "账户余额",
         "incoming": "收到",
         "outgoing": "转出",
         "accounts": "帐户",
@@ -469,122 +486,123 @@
         "profiles": "用户配置",
         "developerProfile": "开发者模式",
         "dev": "开发者",
-        "create_account": "创建一个账户",
-        "account_name": "账户名称",
-        "latest_transactions": "最新交易",
+        "createAccount": "创建一个账户",
+        "accountName": "账户名称",
+        "latestTransactions": "最新交易",
         "transactions": "交易",
         "security": "安全设置",
-        "account_address": "账户地址",
+        "accountAddress": "账户地址",
         "nodes": "节点",
         "wallet": "钱包",
         "help": "帮助",
-        "you": "You",
-        "transaction_id": "Transaction ID",
-        "input_address": "Input Address",
-        "receive_address": "Receive Address",
-        "date": "Date",
-        "no_accounts": "您没有帐户，请创建一个。",
-        "loading_accounts": "Loading, please wait...",
-        "add_profile": "添加个人档案",
-        "no_recent_history": "No recent history",
-        "transferSyncing": "Syncing account",
-        "transferSelectingInputs": "Selecting inputs",
-        "transferRemainderAddress": "Generating remainder deposit address",
-        "transferSigning": "Signing the transaction",
-        "transferPow": "Performing PoW",
-        "transferBroadcasting": "Broadcasting transaction",
-        "transferComplete": "Transfer complete",
-        "creatingAccount": "Creating account, please wait...",
-        "updatingAccount": "Updating account, please wait...",
-        "accountSyncing": "Account is syncing",
-        "accountSyncComplete": "Account sync complete",
-        "passwordUpdating": "Updating password...",
-        "passwordSuccess": "Updated password successfully",
-        "passwordFailed": "Updating password failed",
-        "exportingStronghold": "Exporting stronghold...",
-        "exportingStrongholdSuccess": "Exported stronghold successfully",
-        "exportingStrongholdFailed": "Exported stronghold failed",
-        "pinCodeUpdating": "Updating PIN code...",
-        "pinCodeSuccess": "Updated PIN code successfully",
-        "pinCodeFailed": "Updating PIN code failed"
+        "you": "您",
+        "messageId": "消息 ID",
+        "inputAddress": "Input Address",
+        "receiveAddress": "Receive Address",
+        "date": "日期",
+        "noAccounts": "您没有帐户，请创建一个。",
+        "loadingAccounts": "Loading, please wait...",
+        "addProfile": "添加个人档案",
+        "noRecentHistory": "No recent history",
+        "transferSyncing": "正在同步账户",
+        "transferSelectingInputs": "选择输入",
+        "transferRemainderAddress": "生成剩余的存款地址",
+        "transferSigning": "签名交易",
+        "transferPow": "执行PoW",
+        "transferBroadcasting": "正在广播交易...",
+        "transferComplete": "转账完毕",
+        "creatingAccount": "正在创建帐户，请稍候...",
+        "updatingAccount": "正在更新帐户，请稍候...",
+        "accountSyncing": "帐户正在同步",
+        "accountSyncComplete": "帐户同步完成",
+        "passwordUpdating": "正在更新密码...",
+        "passwordSuccess": "密码更新成功",
+        "passwordFailed": "更新密码失败",
+        "exportingStronghold": "导出Stronghold...",
+        "exportingStrongholdSuccess": "Stronghold导出成功",
+        "exportingStrongholdFailed": "Stronghold导出失败",
+        "pinCodeUpdating": "正在更新 PIN 码...",
+        "pinCodeSuccess": "PIN 码更新成功",
+        "pinCodeFailed": "PIN 码更新失败"
     },
     "dates": {
         "today": "今日",
-        "days_ago": "{time, plural, one {# 天} other {# 天}} 前",
-        "weeks_ago": "{time, plural, one {# 周} other {# 周}} 前",
-        "months_ago": "{time, plural, one {# 月} other {# 月}} 前",
-        "years_ago": "{time, plural, one {# 年} other {# 年}} 前"
+        "daysAgo": "{time, plural, one {# 天} other {# 天}} 前",
+        "weeksAgo": "{time, plural, one {# 周} other {# 周}} 前",
+        "monthsAgo": "{time, plural, one {# 月} other {# 月}} 前",
+        "yearsAgo": "{time, plural, one {# 年} other {# 年}} 前"
     },
     "notifications": {
         "valueTx": "帐户 {{account}} 收到 {{value}}",
         "confirmed": "帐户 {{account}} 的 {{value}} 转出交易已确认",
         "failed": "帐户 {{account}} 的 {{value}} 转出交易未能成功。",
-        "downloading_update": "正在下载更新",
-        "update_ready": "更新已准备就绪",
-        "update_error": "更新过程中发生错误，请重试",
-        "restart_install": "重新启动后安装",
-        "calc_minutes_remaining": "正在计算剩余分钟...",
-        "minutes_remaining": "{minutes, plural, one {还剩最后一分钟...} other {还剩余 # 分钟...}}"
+        "downloadingUpdate": "正在下载更新",
+        "updateReady": "更新已准备就绪",
+        "updateError": "更新过程中发生错误，请重试",
+        "restartInstall": "重新启动后安装",
+        "calcMinutesRemaining": "正在计算剩余分钟...",
+        "minutesRemaining": "{minutes, plural, one {还剩最后一分钟...} other {还剩余 # 分钟...}}",
+        "copiedToClipboard": "Copied to clipboard"
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length} characters.",
-            "duplicate": "A profile with this name already exists."
+            "length": "您的配置名称不能超过 {length, plural, one {1 个字符} other {# 字符}}。",
+            "duplicate": "同名配置文件已存在。"
         },
         "password": {
-            "doNotMatch": "Passwords do not match.",
-            "tooWeak": "Your new password is too weak.",
-            "row": "Straight rows of keys are easy to guess.",
-            "pattern": "Short keyboard patterns are easy to guess.",
-            "names": "Common names and surnames are easy to guess.",
-            "repeats": "Repeats like 'aaa' are easy to guess.",
-            "repeats2": "Repeats like 'abcabcabc' are easy to guess",
-            "sequence": "Sequences of characters are easy to guess.",
-            "years": "Recent years are easy to guess.",
-            "dates": "Dates are easy to guess.",
-            "common": "This is a very common password.",
-            "similar": "This is similar to a common password.",
-            "reasonWord": "A single word is easy to guess.",
-            "incorrect": "Your password is incorrect.",
-            "length": "Your password can't be longer than {length} characters."
+            "doNotMatch": "密码不匹配。",
+            "tooWeak": "您的新密码太弱。",
+            "row": "连续排列的字符容易被猜到。",
+            "pattern": "短键盘模式很容易被猜到。",
+            "names": "常见的名字和姓氏很容易被猜测到。",
+            "repeats": "类似于“aaa”的字母组合容易被猜到。",
+            "repeats2": "类似于“abcabcabc”的重复字母组合容易被猜到。",
+            "sequence": "按序排列的字母序列很容易被猜测到。",
+            "years": "最近的年份容易被猜到。",
+            "dates": "日期通常容易被猜到。",
+            "common": "这是一个非常常见的密码。",
+            "similar": "这是一个与常用密码很类似的密码。",
+            "reasonWord": "单个单词容易被猜测到。",
+            "incorrect": "您的密码不正确。",
+            "length": "您的密码不能超过 {length, plural, one {1 个字符} other {# 字符}}。"
         },
         "pincode": {
-            "length": "Your PIN must be {length} digits long.",
-            "match": "PINs do not match.",
-            "incorrect": "Your current PIN is incorrect."
+            "length": "您的 PIN 必须是 {length, plural, one {1 个数字} other {# 个数字}}。",
+            "match": "PIN 码不匹配",
+            "incorrect": "您当前的 PIN 码不正确。"
         },
         "account": {
-            "length": "Your account name can't be longer than {length} characters.",
-            "empty": "You must use your latest account before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this account.",
-            "duplicate": "An account with this name already exists."
+            "length": "您的账户名称不能超过 {length, plural, one {1 个字符} other {# 字符}}。",
+            "empty": "您必须使用您的最新帐户才能创建一个新帐户。",
+            "notEmpty": "您必须在删除此帐户之前转账您的余额。",
+            "duplicate": "具有此名称的帐户已存在。"
         },
         "send": {
-            "addressLength": "Addresses should be {length} characters long.",
-            "amountTooHigh": "This is greater than your available balance.",
-            "amountNoFloat": "If units are `i` you cannot use decimal places.",
-            "amountInvalidFormat": "The amount appears to be an invalid number.",
-            "amountZero": "The amount must be greater than 0.",
-            "wrongAddressFormat": "Addresses start with the prefix {prefix}.",
-            "insufficientFunds": "This account has insufficient funds"
+            "addressLength": "地址的长度应该是 {length, plural,one {1 个字符} other {# 个字符}}。",
+            "amountTooHigh": "这大于您可用的余额。",
+            "amountNoFloat": "如果单位是 `i`，你不能使用小数点。",
+            "amountInvalidFormat": "金额似乎是一个无效的数字。",
+            "amountZero": "金额必须大于零。",
+            "wrongAddressFormat": "地址以前缀 {prefix} 开始。",
+            "insufficientFunds": "该账户资金不足"
         },
         "node": {
-            "invalid": "Please enter a valid URL.",
-            "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
-            "duplicate": "This node has already been added.",
-            "unsynced": "The node you are trying to add is not synced."
+            "invalid": "请输入有效的URL",
+            "https": "HTTPS 必须。可以设置一个开发者配置文件来使用不安全的 HTTP 连接。",
+            "duplicate": "此节点已被添加。",
+            "unsynced": "您正在尝试添加的节点未同步."
         },
         "global": {
-            "generic": "Something went wrong."
+            "generic": "发生了一些错误。"
         },
         "backup": {
-            "invalid": "The backup file was not recognised.",
-            "destination": "The backup destination was not valid.",
-            "mnemonic": "The mnemonic is not valid.",
-            "seedTooShort": "The seed should be 81 characters long, it is {length}",
-            "seedCharacters": "The seed should only contain characters A-Z or 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}",
-            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase"
+            "invalid": "备份文件无法识别。",
+            "destination": "备份路径无效。",
+            "mnemonic": "助记符无效。",
+            "seedTooShort": "种子长度应该是81个字符，而它 {length, plural, one {只有 1} other {是 #}} 个。",
+            "seedCharacters": "种子只能包含字符 A-Z 或 9",
+            "phraseWordCount": "您的恢复短语中应该有24个字，目前 {length, plural, one {是 1}other {是 #}} 个字",
+            "phraseUnrecognizedWord": "恢复短语中无法识别的单词“{word}”"
         }
     }
 }

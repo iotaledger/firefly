@@ -6,7 +6,8 @@
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { PIN_LENGTH } from 'shared/lib/utils'
-    import { api } from 'shared/lib/wallet'
+    import { api, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
+    import { getDefaultStrongholdName } from 'shared/lib/utils';
     import { get } from 'svelte/store'
     import zxcvbn from 'zxcvbn'
 
@@ -47,8 +48,6 @@
     let passwordChangeBusy = false
     let passwordChangeMessage = ''
 
-    const MAX_PASSWORD_LENGTH = 256
-
     $: passwordStrength = zxcvbn(newPassword)
 
     function handleExportClick() {
@@ -75,7 +74,7 @@
             }
         }
 
-        if (get(activeProfile).isStrongholdLocked) {
+        if (get(activeProfile)?.isStrongholdLocked) {
             openPopup({
                 type: 'password',
                 props: {
@@ -94,7 +93,7 @@
     }
 
     function exportStronghold(callback?: (cancelled: boolean, err?: string) => void) {
-        Electron.getStrongholdBackupDestination()
+        Electron.getStrongholdBackupDestination(getDefaultStrongholdName())
             .then((result) => {
                 if (result) {
                     api.backup(result, {
@@ -217,13 +216,13 @@
                 }
             }
 
-            Electron.PincodeManager.verify(get(activeProfile).id, currentPincode)
+            Electron.PincodeManager.verify(get(activeProfile)?.id, currentPincode)
                 .then((valid) => {
                     if (valid) {
                         return new Promise<void>((resolve, reject) => {
                             api.setStoragePassword(newPincode, {
                                 onSuccess() {
-                                    Electron.PincodeManager.set(get(activeProfile).id, newPincode)
+                                    Electron.PincodeManager.set(get(activeProfile)?.id, newPincode)
                                         .then(() => {
                                             currentPincode = ''
                                             newPincode = ''
@@ -283,7 +282,7 @@
             onSelect={(option) => {
                 updateProfile('settings.lockScreenTimeout', option.value)
             }}
-            value={assignTimeoutOptionLabel($activeProfile.settings.lockScreenTimeout)}
+            value={assignTimeoutOptionLabel($activeProfile?.settings.lockScreenTimeout)}
             items={lockScreenTimeoutOptions} />
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />

@@ -14,9 +14,9 @@
 
     const { accounts } = $wallet
 
-    let outsourcePowChecked = get(activeProfile).settings.outsourcePow
-    let deepLinkingChecked = get(activeProfile).settings.deepLinking
-    let automaticNodeSelection = get(activeProfile).settings.automaticNodeSelection
+    let outsourcePowChecked = get(activeProfile)?.settings.outsourcePow
+    let deepLinkingChecked = get(activeProfile)?.settings.deepLinking
+    let automaticNodeSelection = get(activeProfile)?.settings.automaticNodeSelection
 
     $: updateProfile('settings.outsourcePow', outsourcePowChecked)
     $: updateProfile('settings.deepLinking', deepLinkingChecked)
@@ -24,7 +24,7 @@
 
     $: if (automaticNodeSelection) {
         if ($accounts.some((account) => !account.clientOptions.nodes.length)) {
-            const _nodes = [...$activeProfile.settings.customNodes, ...DEFAULT_NODES]
+            const _nodes = [...$activeProfile?.settings.customNodes, ...DEFAULT_NODES]
             api.setClientOptions(
                 {
                     ...$accounts[0].clientOptions,
@@ -99,11 +99,11 @@
     }
 
     function selectNode(option) {
-        const selectedNode = [...DEFAULT_NODES, ...$activeProfile.settings.customNodes].find(
+        const selectedNode = [...DEFAULT_NODES, ...$activeProfile?.settings.customNodes].find(
             (node: Node) => node.url === option.value
         )
 
-        if (selectedNode.url !== $activeProfile.settings.node?.url) {
+        if (selectedNode.url !== $activeProfile?.settings.node?.url) {
             updateProfile('settings.node', selectedNode)
 
             api.setClientOptions(
@@ -155,6 +155,10 @@
     function handleErrorLogClick() {
         openPopup({ type: 'errorLog' })
     }
+
+    function handleDiagnosticsClick() {
+        openPopup({ type: 'diagnostics' })
+    }
 </script>
 
 <div>
@@ -174,26 +178,21 @@
             <Text type="h4" classes="mb-3">{locale('general.nodes')}</Text>
             <Dropdown
                 onSelect={selectNode}
-                value={$activeProfile.settings.node?.url}
-                items={[...DEFAULT_NODES, ...$activeProfile.settings.customNodes].map((node) => ({
+                value={$activeProfile?.settings.node?.url}
+                items={[...DEFAULT_NODES, ...$activeProfile?.settings.customNodes].map((node) => ({
                     value: node.url,
                     label: node.url,
                 }))} />
-            
+
             <!-- As client options (nodes) have association with accounts, disable "Add node" button if there are no accounts in wallet -->
-            <Button 
-            classes="w-1/4 mt-4"
-            
-             disabled={!$accounts.length} 
-             onClick={() => handleAddNodeClick()}
-             >
-             {locale('actions.add_node')}
-             </Button>
+            <Button classes="w-1/4 mt-4" disabled={!$accounts.length} onClick={() => handleAddNodeClick()}>
+                {locale('actions.addNode')}
+            </Button>
             <Button
                 classes="w-1/2 mt-4"
                 onClick={() => handleRemoveNodeClick()}
-                disabled={!$activeProfile.settings.customNodes.find((n) => n.url === $activeProfile.settings.node?.url)}>
-                {locale('actions.remove_node')}
+                disabled={!$activeProfile?.settings.customNodes.find((n) => n.url === $activeProfile?.settings.node?.url)}>
+                {locale('actions.removeNode')}
             </Button>
         </section>
         <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
@@ -228,6 +227,12 @@
         <Text type="h4" classes="mb-3">{locale('views.settings.errorLog.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.errorLog.description')}</Text>
         <Button classes="w-1/4" onClick={() => handleErrorLogClick()}>{locale('views.settings.errorLog.title')}</Button>
+    </section>
+    <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
+    <section id="diagnostics" class="w-3/4">
+        <Text type="h4" classes="mb-3">{locale('views.settings.diagnostics.title')}</Text>
+        <Text type="p" secondary classes="mb-5">{locale('views.settings.diagnostics.description')}</Text>
+        <Button classes="w-1/4" onClick={() => handleDiagnosticsClick()}>{locale('views.settings.diagnostics.title')}</Button>
     </section>
     <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     <!-- TODO: Implemnet state export -->

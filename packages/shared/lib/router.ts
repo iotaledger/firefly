@@ -1,7 +1,8 @@
-import { readable, writable, get } from 'svelte/store'
-import { loggedIn, notification, walletPin, strongholdPassword } from 'shared/lib/app'
-import { AppRoute, SetupType, WalletRoutes, AccountRoutes, SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
+import { loggedIn, notification, strongholdPassword, walletPin } from 'shared/lib/app'
 import { profiles } from 'shared/lib/profile'
+import { AccountRoutes, AppRoute, SettingsRoutes, SetupType, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
+import { get, readable, writable } from 'svelte/store'
+import { deepLinkRequestActive } from './deepLinking'
 
 /**
  * Sets next route
@@ -37,7 +38,7 @@ export const path = readable<string>(null, (set) => {
 /**
  * Onboarding/setup type
  */
-let walletSetupType = writable<SetupType>(null)
+export const walletSetupType = writable<SetupType>(null)
 
 /*
  * Current view
@@ -214,4 +215,6 @@ export const resetRouter = () => {
     accountRoute.set(AccountRoutes.Init)
     settingsRoute.set(SettingsRoutes.Init)
     dashboardRoute.set(Tabs.Wallet)
+    deepLinkRequestActive.set(false)
+    loggedIn.set(false)
 }

@@ -50,7 +50,7 @@
     }
 
     let splash = true
-    setupI18n({ withLocale: get(activeProfile) ? get(activeProfile).settings.language : 'en' })
+    setupI18n({ withLocale: get(activeProfile)?.settings.language ?? 'en' })
     onMount(async () => {
         setTimeout(() => {
             splash = false
@@ -71,9 +71,7 @@
             walletRoute.set(route)
         })
         Electron.onEvent('menu-navigate-settings', () => {
-            if (get(appRoute) !== AppRoute.Dashboard) {
-                // TODO: Add settings from login
-            } else if (get(dashboardRoute) !== Tabs.Settings) {
+            if (get(dashboardRoute) !== Tabs.Settings) {
                 dashboardRoute.set(Tabs.Settings)
             }
         })
@@ -88,6 +86,9 @@
         })
         Electron.onEvent('menu-error-log', async () => {
             openPopup({ type: 'errorLog' })
+        })
+        Electron.onEvent('menu-diagnostics', async () => {
+            openPopup({ type: 'diagnostics' })
         })
     })
 </script>

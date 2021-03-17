@@ -2,6 +2,7 @@
     import { Icon, Text } from 'shared/components'
     import { getInitials, truncateString } from 'shared/lib/helpers'
     import { formatUnit } from 'shared/lib/units'
+    import { setClipboard } from 'shared/lib/utils'
     import type { WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import { date } from 'svelte-i18n'
@@ -98,27 +99,33 @@
         {/if}
         {#if id}
             <div class="mb-5">
-                <Text secondary>{locale('general.transaction_id')}</Text>
-                <Text type="pre">{id}</Text>
+                <Text secondary>{locale('general.messageId')}</Text>
+                <button class="text-left" on:click={() => setClipboard(id.toLowerCase())}>
+                    <Text type="pre">{id}</Text>
+                </button>
             </div>
         {/if}
         {#if senderAddress}
             <div class="mb-5">
-                <Text secondary>{locale('general.input_address')}</Text>
-                <Text type="pre">{senderAddress}</Text>
+                <Text secondary>{locale('general.inputAddress')}</Text>
+                <button class="text-left" on:click={() => setClipboard(senderAddress.toLowerCase())}>
+                    <Text type="pre">{senderAddress}</Text>
+                </button>
             </div>
         {/if}
         {#if receiverAddresses.length > 0}
             <div class="mb-5">
-                <Text secondary>{locale('general.receive_address')}</Text>
+                <Text secondary>{locale('general.receiveAddress')}</Text>
                 {#each receiverAddresses as receiver}
-                    <Text type="pre" classes="mb-2">{receiver}</Text>
+                    <button class="text-left" on:click={() => setClipboard(receiver.toLowerCase())}>
+                        <Text type="pre" classes="mb-2">{receiver}</Text>
+                    </button>
                 {/each}
             </div>
         {/if}
     </div>
 
     <div class="w-full flex justify-center">
-        <button on:click={onBackClick}><Text smaller highlighted>{locale('actions.hide_details')}</Text></button>
+        <button on:click={onBackClick}><Text smaller highlighted>{locale('actions.hideDetails')}</Text></button>
     </div>
 </div>
