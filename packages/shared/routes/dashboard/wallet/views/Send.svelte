@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Unit } from '@iota/unit-converter'
+    import { convertUnits, Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, ProgressBar, Text } from 'shared/components'
     import { sendParams } from 'shared/lib/app'
     import { accountRoute, walletRoute } from 'shared/lib/router'
@@ -96,38 +96,41 @@
             amountError = locale('error.send.amountNoFloat')
         } else {
             let amountAsFloat = Number.parseFloat(amount)
-            if (amountAsFloat.toString() !== amount) {
+            if (Number.isNaN(amountAsFloat)) {
                 amountError = locale('error.send.amountInvalidFormat')
-            } else if (amountAsFloat > from.balance) {
-                amountError = locale('error.send.amountTooHigh')
-            } else if (amountAsFloat <= 0) {
-                amountError = locale('error.send.amountZero')
-            }
-
-            if (selectedSendType === SEND_TYPE.EXTERNAL) {
-                // Validate address length
-                if ($sendParams.address.length !== ADDRESS_LENGTH) {
-                    addressError = locale('error.send.addressLength', {
-                        values: {
-                            length: ADDRESS_LENGTH,
-                        },
-                    })
-                } else if (!validateBech32Address(addressPrefix, $sendParams.address)) {
-                    addressError = locale('error.send.wrongAddressFormat', {
-                        values: {
-                            prefix: addressPrefix,
-                        },
-                    })
+            } else {
+                const amountAsI = convertUnits(amountAsFloat, unit, Unit.i)
+                if (amountAsI > from.balance) {
+                    amountError = locale('error.send.amountTooHigh')
+                } else if (amountAsI <= 0) {
+                    amountError = locale('error.send.amountZero')
                 }
-            }
 
-            if (!amountError && !addressError) {
-                $sendParams.amount = convertUnitsNoE(amountAsFloat, unit, Unit.i)
+                if (selectedSendType === SEND_TYPE.EXTERNAL) {
+                    // Validate address length
+                    if ($sendParams.address.length !== ADDRESS_LENGTH) {
+                        addressError = locale('error.send.addressLength', {
+                            values: {
+                                length: ADDRESS_LENGTH,
+                            },
+                        })
+                    } else if (!validateBech32Address(addressPrefix, $sendParams.address)) {
+                        addressError = locale('error.send.wrongAddressFormat', {
+                            values: {
+                                prefix: addressPrefix,
+                            },
+                        })
+                    }
+                }
 
-                if (selectedSendType === SEND_TYPE.INTERNAL) {
-                    internalTransfer(from.id, to.id, $sendParams.amount)
-                } else {
-                    send(from.id, $sendParams.address, $sendParams.amount)
+                if (!amountError && !addressError) {
+                    $sendParams.amount = amountAsI
+
+                    if (selectedSendType === SEND_TYPE.INTERNAL) {
+                        internalTransfer(from.id, to.id, $sendParams.amount)
+                    } else {
+                        send(from.id, $sendParams.address, $sendParams.amount)
+                    }
                 }
             }
         }
