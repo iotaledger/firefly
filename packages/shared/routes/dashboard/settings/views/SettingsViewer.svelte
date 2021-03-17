@@ -33,7 +33,8 @@
             }
         }
     }
-    function goToSettingsHome() {
+
+    function handleBackClick() {
         settingsRoute.set(SettingsRoutes.Init)
     }
     onMount(() => {
@@ -48,9 +49,12 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <div class="relative flex flex-1 flex-row items-start">
-        <button on:click={goToSettingsHome} class="absolute top-0 right-0">
-            <Icon icon="close" classes="text-gray-800 dark:text-white" />
+    <div class="flex flex-1 flex-row items-start">
+        <button data-label="back-button" class="absolute top-8 left-8" on:click={handleBackClick}>
+            <div class="flex items-center space-x-3/>
+                <Icon icon="arrow-left" classes="text-blue-500" />
+                <Text type="h4">{locale('actions.back')}</Text>
+            </div>
         </button>
         <SettingsNavigator
             {routes}
