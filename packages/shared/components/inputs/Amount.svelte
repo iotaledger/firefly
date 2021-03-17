@@ -13,6 +13,8 @@
     export let disabled = false
     export let autofocus = false
 
+    const Units = Object.values(Unit).filter((x) => x !== 'Pi')
+
     let dropdown = false
 
     const clickOutside = () => {
@@ -67,7 +69,7 @@
             {#if !disabled && dropdown}
                 <nav
                     class="absolute w-10 overflow-y-auto bg-white border border-solid border-gray-500 z-10 text-left top-10 right-0">
-                    {#each Object.values(Unit) as _unit}
+                    {#each Units as _unit}
                         <button
                             id={_unit}
                             class="text-center w-full py-2"
