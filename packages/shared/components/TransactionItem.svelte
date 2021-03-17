@@ -26,7 +26,8 @@
 	}
 </style>
 
-<div class="transaction-item flex justify-between border-solid border border-gray-200 rounded-2xl h-14 items-center pl-5 pr-6 focus:border-blue-500 mt-4">
+<div class="transaction-item relative flex justify-between border-solid border border-gray-200 rounded-2xl h-14 items-center pl-5 pr-6 focus:border-blue-500 mt-4">
+    {#if showTooltip}<Tooltip classes="above" text={errorText} />{/if}
     <div class="flex items-center justify-between w-full">
         <div class="flex items-center">
             <Icon icon="double-chevron-right" classes="right text-blue-500" />
@@ -39,7 +40,6 @@
                 <Text type="p" secondary smaller>{locale('views.migrate.migrating')}</Text>
             {:else if status === -1}
                 <div class="flex items-center relative" on:mouseenter={toggleShow} on:mouseleave={toggleShow} >
-                    {#if showTooltip}<Tooltip text={errorText} />{/if}
                     <Text type="p" secondary smaller>{locale('views.migrate.migrationFailed')}</Text>
                     <Icon icon=status_error classes="text-white bg-red-500 rounded-full ml-3"/>
                 </div>
@@ -51,14 +51,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-

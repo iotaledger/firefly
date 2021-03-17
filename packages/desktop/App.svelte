@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Popup, Route, ToastContainer, TransactionItem } from 'shared/components'
+    import { Popup, Route, SpentAddress, ToastContainer, TransactionItem } from 'shared/components'
     import { darkMode, loggedIn, mobile } from 'shared/lib/app'
     import { refreshVersionDetails, versionDetails } from 'shared/lib/appUpdater'
     import { Electron } from 'shared/lib/electron'
@@ -26,6 +26,8 @@
         Protect,
         Setup,
         BundleMiningWarning,
+        SecureSpentAddresses,
+        SecurityCheckCompleted,
         SecuringSpentAddresses,
         TransferFragmentedFunds,
         Splash,
@@ -157,6 +159,12 @@
     </Route>
     <Route route={AppRoute.BundleMiningWarning}>
         <BundleMiningWarning on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route={AppRoute.SecureSpentAddresses}>
+        <SecureSpentAddresses on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
+    </Route>
+    <Route route={AppRoute.SecurityCheckCompleted}>
+        <SecurityCheckCompleted on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
     </Route>
     <Route route={AppRoute.SecuringSpentAddresses}>
         <SecuringSpentAddresses on:next={routerNext} mobile={$mobile} locale={$_} {goto} />

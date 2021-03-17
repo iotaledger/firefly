@@ -126,6 +126,18 @@
             "body_3": "We recommend you run an automated process to help secure and transfer your funds safely.",
             "learn": "Learn about spent addresses"
         },
+        "secureSpentAddresses":{
+            "title": "Secure spent addresses",
+            "body1": "You have funds detected on 8 spent address.",            
+            "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",          
+            "error": "You can’t migrate spent addresses with less than 1 Mi"           
+        },
+        "securityCheckCompleted":{
+            "title": "Security check completed",
+            "body1": "We have calculated the security risk level.  Running this process again may lower your risk level.",            
+            "rerun": "Rerun process for selected addresses",
+            "continueMigration": "Continue migration process"
+        },
         "securing_spent_addresses":{
             "title": "Securing spent addresses...",
             "body_1": "You have funds detected on a spent address.",
@@ -437,7 +449,8 @@
         "clear": "Clear",
         "hide_details": "Hide Details",
         "yes": "Yes",
-        "no": "No"
+        "no": "No",
+        "skip": "Skip"
     },
     "general": {
         "password": "Password",

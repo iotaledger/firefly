@@ -13,6 +13,8 @@ export enum AppRoute {
     BundleMiningWarning = 'bundleMiningWarning',
     SecuringSpentAddresses = 'securingSpentAddresses',
     TransferFragmentedFunds = 'transferFragmentedFunds',
+    SecureSpentAddresses = 'secureSpentAddresses',
+    SecurityCheckCompleted = 'securityCheckCompleted',
     Dashboard='dashboard',
     Login='login',
     Settings='settings',

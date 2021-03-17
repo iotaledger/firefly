@@ -15,6 +15,8 @@ export { default as Congratulations } from 'shared/routes/setup/Congratulations.
 export { default as BundleMiningWarning } from 'shared/routes/setup/BundleMiningWarning.svelte'
 export { default as SecuringSpentAddresses } from 'shared/routes/setup/SecuringSpentAddresses.svelte'
 export { default as TransferFragmentedFunds } from 'shared/routes/setup/TransferFragmentedFunds.svelte'
+export { default as SecureSpentAddresses } from 'shared/routes/setup/SecureSpentAddresses.svelte'
+export { default as SecurityCheckCompleted } from 'shared/routes/setup/SecurityCheckCompleted.svelte'
 
 // dashboard
 export { default as Dashboard } from 'shared/routes/dashboard/Dashboard.svelte'
