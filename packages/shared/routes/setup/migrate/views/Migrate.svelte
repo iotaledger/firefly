@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
+    import { createEventDispatcher, onDestroy } from 'svelte'
     import { Box, Button, Illustration, OnboardingLayout, Spinner, Text, Toast } from 'shared/components'
     import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
     import { formatUnit } from 'shared/lib/units'
@@ -18,13 +18,13 @@
     )} ${CurrencyTypes.USD}`
 
     let loading = false
-    let migratingFundsMessage = ''
+
+    let timeout
 
     function handleContinueClick() {
         loading = true
-        migratingFundsMessage = locale('views.migrate.migrating')
-        setTimeout(() => {
-            //dispatch('next')
+        timeout = setTimeout(() => {
+            dispatch('next')
         }, 2000)
     }
     //TODO: complete function functionality
@@ -34,16 +34,20 @@
     function handleBackClick() {
         dispatch('previous')
     }
+
+    onDestroy(() => {
+        clearTimeout(timeout)
+    })
 </script>
 
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick} class="">
+    <OnboardingLayout onBackClick={handleBackClick} >
         <div slot="leftpane__content">
             <Text on:click={learnAboutMigrationsClick} type="h1" classes="mb-5 mt-5">{locale('views.migrate.title')}</Text>
-            <Text type="p" secondary classes="mb-4">{locale('views.migrate.body_1')}</Text>
-            <Text type="p" secondary highlighted classes="mb-8 font-bold">{locale('views.migrate.body_2')}</Text>
+            <Text type="p" secondary classes="mb-4">{locale('views.migrate.body1')}</Text>
+            <Text type="p" secondary highlighted classes="mb-8 font-bold">{locale('views.migrate.body2')}</Text>
             <Box classes="bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 rounded-lg ">
                 <balance class="flex flex-col flex-grow items-center py-12">
                     <div class="flex mb-2">
@@ -55,8 +59,9 @@
         </div>
         <div slot="leftpane__action" class="flex flex-col items-center space-x-4">
             <Button disabled={loading} classes="w-full" onClick={() => handleContinueClick()}>
-                <Spinner busy={loading} message={migratingFundsMessage} classes="justify-center" />
-                {#if !loading}
+                {#if loading}
+                    <Spinner busy={loading} message={locale('views.migrate.migrating')} classes="justify-center" />
+                {:else}
                     {locale('views.migrate.beginMigration')}
                 {/if}
             </Button>

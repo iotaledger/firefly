@@ -12,15 +12,17 @@
         console.log("Learn more clicked")
     }
     const handleContinueClick = () => {
-        console.log("Continue clicked")
-        //dispatch('next')
+        dispatch('next')
+    }
+    function handleBackClick() {
+        dispatch('previous')
     }
 </script>
 
 {#if mobile}
     <div>foo</div>
 {:else}
-    <BundleMiningLayout>
+    <BundleMiningLayout onBackClick={handleBackClick}>
         <div slot="icon_boxed">
             <div class="flex justify-center items-center rounded-2xl w-12 h-12 bg-orange-300 shadow-lg">
                 <Icon boxed="true" icon="warning" classes="text-orange-700" />
@@ -28,9 +30,9 @@
         </div>
         <div slot="box_content">
             <Text type="h2" classes="mb-5 text-center">{locale('views.bundleMiningWarning.title')}</Text>
-            <Text type="p" secondary classes="text-center">{locale('views.bundleMiningWarning.body_1')}</Text>
-            <Text type="p" secondary classes="mb-4 text-center">{locale('views.bundleMiningWarning.body_2')}</Text>
-            <Text type="p" secondary classes="mb-8 text-center">{locale('views.bundleMiningWarning.body_3')}</Text>
+            <Text type="p" secondary classes="text-center">{locale('views.bundleMiningWarning.body1')}</Text>
+            <Text type="p" secondary classes="mb-4 text-center">{locale('views.bundleMiningWarning.body2')}</Text>
+            <Text type="p" secondary classes="mb-8 text-center">{locale('views.bundleMiningWarning.body3')}</Text>
             <div class="flex flex-col flex-grow items-center">
                 <Button secondary classes="w-56" onClick={() => learnClick()}>{locale('views.bundleMiningWarning.learn')}</Button>
             </div>

@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
+    import { createEventDispatcher, onDestroy } from 'svelte'
     import { Button, Illustration, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
 
     export let locale
@@ -7,6 +7,7 @@
 
     let loading, finished = false
     let migratingFundsMessage = ""
+    let timeouts = []
 
     //TODO: Retrieve transactions
 	let transactions = [
@@ -53,7 +54,7 @@
         dispatch('previous')
     }
     function handleContinueClick(){
-        console.log("next screen")
+        dispatch('next')
     }
     //TODO:
     function migrateFunds(){
@@ -61,35 +62,40 @@
         loading = true
         migratingFundsMessage = locale('views.migrate.migrating')
         //TODO: dummy status updates
-        setTimeout(() => {
+        timeouts.push(setTimeout(() => {
             transactions[0].status  = 2
             transactions[1].status  = 2
-        }, 2000)
-        setTimeout(() => {
+        }, 2000))
+        timeouts.push(setTimeout(() => {
             transactions[2].status  = -1
-        }, 3000)
-        setTimeout(() => {
+        }, 3000))
+        timeouts.push(setTimeout(() => {
             transactions[3].status  = 2
             transactions[4].status  = 2
             loading = false
             finished = true
             migratingFundsMessage = locale('actions.continue')            
-        }, 3500)
+        }, 3500))
     }
 
-
+    onDestroy(()=>{
+        timeouts.forEach(t => clearTimeout(t))
+    })
+    
 </script>
 
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={() => dispatch('previous')} class="">
+    <OnboardingLayout onBackClick={handleBackClick} class="">
         <div slot="leftpane__content">
             <Text type="h1" classes="mb-5 mt-5">{locale('views.migrate.title')}</Text>
             <Text type="p" secondary classes="mb-6">{locale('views.transferFragmentedFunds.body1')}</Text>
-            {#each transactions as transaction}
-                <TransactionItem {...transaction} {locale} />
-            {/each}
+            <div class="overflow-y-auto h-80 pr-5 pb-6">
+                {#each transactions as transaction}
+                    <TransactionItem {...transaction} {locale} />
+                {/each}
+            </div>
         </div>
         <div slot="leftpane__action" class="flex flex-col items-center space-x-4">
             {#if !finished}

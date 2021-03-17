@@ -3,6 +3,8 @@
     import Text from './Text.svelte';
 	import { onMount } from 'svelte';
     import { formatUnit } from 'shared/lib/units'
+    import {truncateString} from 'shared/lib/helpers'
+
 
     export let locale
     export let name = ''
@@ -48,10 +50,10 @@
         @apply rounded-2xl;
     }
     .riskBars .veryLowRisk{
-        @apply bg-green-400;
+        @apply bg-green-500;
     }
     .riskBars .lowRisk{
-        @apply bg-green-500;
+        @apply bg-blue-500;
     }
     .riskBars .mediumRisk{
         @apply bg-yellow-500;
@@ -69,16 +71,16 @@
     {#if showTooltip}<Tooltip classes="leftside" text={locale('views.secureSpentAddresses.error')}/>{/if}
     <div class="flex items-center justify-between w-full">
         <div class="flex items-center">
-            {#if error === 1}    
+            {#if error === 1 && riskLevel == -1}    
                 <div class="w-6 h-6 bg-gray-100 rounded-full border border-solid border-gray-300 ml-3"/>
             {:else}
-                <Icon icon=status_success classes="text-white bg-blue-500 rounded-full ml-3"/>
+                <Icon icon=status-success classes="text-white bg-blue-500 rounded-full ml-3"/>
             {/if}
                 <div class="ml-4">
                     {#if error === 1}    
-                        <Text type="p" smaller secondary>{name}</Text>
+                        <Text type="p" smaller secondary>{truncateString(name, 9, 9)}</Text>
                     {:else}
-                        <Text type="p" smaller >{name}</Text>
+                        <Text type="p" smaller >{truncateString(name, 9, 9)}</Text>
                     {/if}
                     <Text type="p" secondary smaller classes="text-gray-500 mt-1" >
                         {humanReadableBalance}

@@ -1,9 +1,9 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
-    import { Button, Illustration, OnboardingLayout, Spinner, Text, SpentAddress } from 'shared/components'
-    import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
-    import { formatUnit } from 'shared/lib/units'
-    import { get } from 'svelte/store'
+    import { Button,Illustration,OnboardingLayout,SpentAddress,Text } from 'shared/components';
+    import { AvailableExchangeRates,convertToFiat,currencies,CurrencyTypes,exchangeRates } from 'shared/lib/currency';
+    import { createEventDispatcher } from 'svelte';
+    import { get } from 'svelte/store';
+
     export let locale
     export let mobile
 
@@ -22,37 +22,38 @@
     let fiatbalance5 = `${convertToFiat(balance5,get(currencies)[CurrencyTypes.USD],get(exchangeRates)[AvailableExchangeRates.USD])} ${CurrencyTypes.USD}`        
 	let addresses = [
         {
-            name: 'iot1q9f0k...tzl2fcp98',
+            name: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
             rawBalance: balance1,
             fiatbalance: fiatbalance1,
         },
         {
-            name: 'iot1q9f0k...tzl2fcp98',
+            name: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
             rawBalance: balance2,
             fiatbalance: fiatbalance2,
         }, 
         {
-            name: 'iot1q9f0k...tzl2fcp98',
+            name: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
             rawBalance: balance3,
             fiatbalance: fiatbalance3,
         },
         {
-            name: 'iot1q9f0k...tzl2fcp98',
+            name: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
             rawBalance: balance4,
             fiatbalance: fiatbalance4,
         },
         {
-            name: 'iot1q9f0k...tzl2fcp98',
+            name: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
             rawBalance: balance5,
             fiatbalance: fiatbalance5,
         },                               
     ]
+    let totalAddresses = addresses.length
 
     function handleBackClick() {
         dispatch('previous')
     }
     function secureAddresses() {
-        console.log("Secure addresses clicked")
+        dispatch('next')
     }
     function handleSkipClick() {
         console.log("Skip clicked")
@@ -86,8 +87,8 @@
     <OnboardingLayout onBackClick={() => dispatch('previous')}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5 mt-5">{locale('views.secureSpentAddresses.title')}</Text>
-            <Text type="p" secondary>{locale('views.secureSpentAddresses.body1')}</Text>
-            <Text type="p" secondary classes="mb-6">{locale('views.secureSpentAddresses.body2')}</Text>
+            <Text type="p" secondary>{locale('views.secureSpentAddresses.body1')}{totalAddresses}{locale('views.secureSpentAddresses.body2')}</Text>
+            <Text type="p" secondary classes="mb-6">{locale('views.secureSpentAddresses.body3')}</Text>
             <div class="scrollable h-80 pr-5 pb-6">
                 {#each addresses as address}
                     <SpentAddress {...address} {locale} />

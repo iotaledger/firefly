@@ -41,12 +41,12 @@
             {:else if status === -1}
                 <div class="flex items-center relative" on:mouseenter={toggleShow} on:mouseleave={toggleShow} >
                     <Text type="p" secondary smaller>{locale('views.migrate.migrationFailed')}</Text>
-                    <Icon icon=status_error classes="text-white bg-red-500 rounded-full ml-3"/>
+                    <Icon icon=status-error classes="text-white bg-red-500 rounded-full ml-3"/>
                 </div>
             {:else if status === 2}
                 <Text type="p" secondary smaller classes="text-gray-500">{amount}</Text>
                 <Text type="p" secondary smaller classes="ml-1">{locale('views.migrate.migrated')}</Text>
-                <Icon icon=status_success classes="text-white bg-green-600 rounded-full ml-3"/>
+                <Icon icon=status-success classes="text-white bg-green-600 rounded-full ml-3"/>
             {/if}
         </div>
     </div>

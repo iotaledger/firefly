@@ -81,9 +81,11 @@
             "body": "You have backed up your wallet to a Stronghold."
         },
         "congratulations": {
-            "title": "Funds migrated",
-            "body": "You have successfully migrated all your funds to the new network",
-            "export_migration": "Export migration log and finish Setup"
+            "title": "Congratulations",
+            "body": "Your wallet is ready to go.",
+            "fundsMigrated": "Funds migrated",
+            "success": "You have successfully migrated all your funds to the new network",
+            "exportMigration": "Export migration log and finish Setup"
         },
         "import": {
             "title": "Import a wallet",
@@ -112,8 +114,8 @@
         },
         "migrate": {
             "title": "Migrate your funds",
-            "body_1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
-            "body_2": "It may take some time. Do not turn off your device during the migration.",
+            "body1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
+            "body2": "It may take some time. Do not turn off your device during the migration.",
             "existing": "Your old wallet",
             "new": "Your new wallet",
             "learn": "Learn about the migration",
@@ -124,15 +126,16 @@
         },
         "bundleMiningWarning": {
             "title": "Warning",
-            "body_1": "You have funds detected on a spent address. ",
-            "body_2": "These are at risk of theft.",
-            "body_3": "We recommend you run an automated process to help secure and transfer your funds safely.",
+            "body1": "You have funds detected on a spent address. ",
+            "body2": "These are at risk of theft.",
+            "body3": "We recommend you run an automated process to help secure and transfer your funds safely.",
             "learn": "Learn about spent addresses"
         },
         "secureSpentAddresses":{
             "title": "Secure spent addresses",
-            "body1": "You have funds detected on 8 spent address.",            
-            "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",          
+            "body1": "You have funds detected on ",            
+            "body2": " spent address.",          
+            "body3": "We recommend you run an automated process to help secure and transfer your funds safely.",          
             "error": "You can’t migrate spent addresses with less than 1 Mi"           
         },
         "securityCheckCompleted":{
@@ -141,11 +144,11 @@
             "rerun": "Rerun process for selected addresses",
             "continueMigration": "Continue migration process"
         },
-        "securing_spent_addresses":{
+        "securingSpentAddresses":{
             "title": "Securing spent addresses...",
-            "body_1": "You have funds detected on a spent address.",
-            "body_2": "These are at risk of theft.",
-            "body_3": "We recommend you run this automated process to help secure and transfer your funds safely.",
+            "body1": "You have funds detected on a spent address.",
+            "body2": "These are at risk of theft.",
+            "body3": "We recommend you run this automated process to help secure and transfer your funds safely.",
             "learn": "Learn about spent addresses"
         },
         "transferFragmentedFunds":{

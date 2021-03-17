@@ -25,11 +25,6 @@
         Password,
         Protect,
         Setup,
-        BundleMiningWarning,
-        SecureSpentAddresses,
-        SecurityCheckCompleted,
-        SecuringSpentAddresses,
-        TransferFragmentedFunds,
         Splash,
         Welcome,
     } from 'shared/routes'
@@ -107,6 +102,18 @@
 
         @apply select-none;
     }
+    *::-webkit-scrollbar {
+        @apply w-1;
+    }
+    *::-webkit-scrollbar-track {
+        @apply bg-gray-100;
+        background-clip: content-box; 
+        border: 14px solid transparent;
+    }
+    *::-webkit-scrollbar-thumb {
+        @apply bg-gray-300;
+        border-radius: 20px;
+    }
 </style>
 
 <!-- empty div to avoid auto-purge removing dark classes -->
@@ -156,22 +163,7 @@
         <Balance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
     <Route route={AppRoute.Migrate}>
-        <Migrate on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
-    </Route>
-    <Route route={AppRoute.BundleMiningWarning}>
-        <BundleMiningWarning on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
-    </Route>
-    <Route route={AppRoute.SecureSpentAddresses}>
-        <SecureSpentAddresses on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
-    </Route>
-    <Route route={AppRoute.SecurityCheckCompleted}>
-        <SecurityCheckCompleted on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
-    </Route>
-    <Route route={AppRoute.SecuringSpentAddresses}>
-        <SecuringSpentAddresses on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
-    </Route>
-    <Route route={AppRoute.TransferFragmentedFunds}>
-        <TransferFragmentedFunds on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
+        <Migrate on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} {goto} />
     </Route>
     <Route route={AppRoute.Congratulations}>
         <Congratulations on:next={routerNext} mobile={$mobile} locale={$_} {goto} />

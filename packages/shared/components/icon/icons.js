@@ -942,7 +942,7 @@ export const icons = {
             },
         ],
     },
-    status_success: {
+    'status-success': {
         width: 24,
         height: 24,
         path: [
@@ -955,7 +955,7 @@ export const icons = {
 
         ],
     },
-    status_error: {
+    'status-error': {
         width: 24,
         height: 24,
         path: [

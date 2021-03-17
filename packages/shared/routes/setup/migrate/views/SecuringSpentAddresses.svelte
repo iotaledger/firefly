@@ -1,12 +1,31 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
+    import { createEventDispatcher, onMount, onDestroy } from 'svelte'
     import { BundleMiningLayout, Button, Icon, Text, ProgressBar } from 'shared/components'
     export let locale
     export let mobile
 
     const dispatch = createEventDispatcher()
+
     let progressBarPercent = 0
     let progressBarMessage = ''
+    let timeout
+    let interval
+    
+    onMount(() => {
+        //TODO: retrieve progress and call setProgressBar() to fill it up
+        interval = setInterval(() => { 
+            progressBarPercent = Math.floor(Math.random() * 101)  
+            progressBarMessage = progressBarPercent.toString()+'% completed'
+        }, 2500)
+        timeout = setTimeout(() => { 
+            console.log('here!!')
+            dispatch('next')
+        }, 7500)
+    })
+
+    function handleBackClick() {
+        dispatch('previous')
+    }
 
     //TODO:
     const learnClick = () => {
@@ -15,30 +34,30 @@
     //TODO:
     const handleCancelClick = () => {
         console.log("Cancel clicked")
-        //dispatch('next')
+        dispatch('previous')
     }
-    //TODO: retrieve progress and call setProgressBar() to fill it up
-    setInterval(() => { 
-        progressBarPercent = Math.floor(Math.random() * 101)  
-        progressBarMessage = progressBarPercent.toString()+'% completed'
-    }, 2500)
+
+    onDestroy(() => {
+        clearTimeout(timeout)
+        clearInterval(interval)
+    })
 
 </script>
 
 {#if mobile}
     <div>foo</div>
 {:else}
-    <BundleMiningLayout>
+    <BundleMiningLayout onBackClick={handleBackClick}>
         <div slot="icon_boxed">
             <div class="flex justify-center items-center rounded-2xl w-12 h-12 bg-blue-500 shadow-lg">
                 <Icon boxed="true" icon="history" classes="text-white" />
             </div>
         </div>
         <div slot="box_content">
-            <Text type="h2" classes="mb-5 text-center">{locale('views.securing_spent_addresses.title')}</Text>
-            <Text type="p" secondary classes="text-center">{locale('views.bundleMiningWarning.body_1')}</Text>
-            <Text type="p" secondary classes="mb-4 text-center">{locale('views.bundleMiningWarning.body_2')}</Text>
-            <Text type="p" secondary classes="mb-8 text-center">{locale('views.bundleMiningWarning.body_3')}</Text>
+            <Text type="h2" classes="mb-5 text-center">{locale('views.securingSpentAddresses.title')}</Text>
+            <Text type="p" secondary classes="text-center">{locale('views.bundleMiningWarning.body1')}</Text>
+            <Text type="p" secondary classes="mb-4 text-center">{locale('views.bundleMiningWarning.body2')}</Text>
+            <Text type="p" secondary classes="mb-8 text-center">{locale('views.bundleMiningWarning.body3')}</Text>
             <div class="flex flex-col flex-grow items-center">
                 <Button secondary classes="w-56" onClick={() => learnClick()}>{locale('views.bundleMiningWarning.learn')}</Button>
             </div>
