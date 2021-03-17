@@ -95,6 +95,8 @@ export enum AdvancedSettings {
 export enum AdvancedSettingsNoProfile {
     DeveloperMode = 'developerMode',
     DeepLinks = 'deepLinks',
+    ErrorLog = 'errorLog',
+    Diagnostics = 'diagnostics',
 }
 
 export enum HelpAndInfo {
