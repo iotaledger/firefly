@@ -43,7 +43,7 @@
                 {onDrop}
                 {locale}
                 extentionsLabel={locale('actions.importExtentions')}
-                allowedExtensions=".kdbx,.stronghold" />
+                allowedExtensions={["kdbx", "stronghold"]} />
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
             <Button secondary classes="flex-1" onClick={() => handleBackClick()}>{locale('actions.back')}</Button>
