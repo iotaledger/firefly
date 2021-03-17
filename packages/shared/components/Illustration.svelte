@@ -9,6 +9,7 @@
     const illustrations = {
         'welcome-1-desktop': 'onboarding/welcome-1-desktop.svg',
         'settings-desktop': 'onboarding/settings-desktop.svg',
+        'appearance-desktop': 'onboarding/appearance-desktop.svg',
         'setup-desktop': 'onboarding/setup-desktop.svg',
         'password-desktop': 'onboarding/password-desktop.svg',
         'protect-desktop': 'onboarding/protect-desktop.svg',

@@ -116,9 +116,9 @@ export const routerNext = (event) => {
             nextRoute = AppRoute.Legal
             break
         case AppRoute.Legal:
-            nextRoute = AppRoute.Language
+            nextRoute = AppRoute.Appearance
             break
-        case AppRoute.Language:
+        case AppRoute.Appearance:
             nextRoute = AppRoute.Setup
             break
         case AppRoute.Setup:

@@ -18,7 +18,7 @@
         Congratulations,
         Dashboard,
         Import,
-        Language,
+        Appearance,
         Legal,
         Login,
         Migrate,
@@ -124,8 +124,8 @@
     <Route route={AppRoute.Legal}>
         <Legal on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
-    <Route route={AppRoute.Language}>
-        <Language on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+    <Route route={AppRoute.Appearance}>
+        <Appearance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
     <Route route={AppRoute.Setup}>
         <Setup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />

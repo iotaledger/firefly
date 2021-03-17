@@ -5,6 +5,7 @@
     export let group = undefined
     export let label = ''
     export let classes = ''
+    export let tabindex
 </script>
 
 <style type="text/scss">
@@ -40,9 +41,9 @@
 </style>
 
 <label
-    class={`w-full flex items-center mb-4 text-12 leading-160 cursor-pointer text-gray-800 dark:text-white ${classes}`}>
-    <input class="h-4 w-4 cursor-pointer" type="radio" bind:group {value} />
-    <div class={`mr-3 svg-container rounded-full border border-solid border-gray-300 ${value === group ? "active" : ""}`}>
+    class={`flex items-center ${label ? 'mb-4' : ''} text-12 leading-160 cursor-pointer text-gray-800 dark:text-white ${classes}`}>
+    <input class="h-4 w-4 cursor-pointer" type="radio" bind:group {value} {tabindex} />
+    <div class={`mr-3 svg-container rounded-full border border-solid border-gray-300 ${value === group ? 'active' : ''}`}>
         <Icon icon={value === group ? 'radio' : 'radio-unchecked'} />
     </div>
     {label}

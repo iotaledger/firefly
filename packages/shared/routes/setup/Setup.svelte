@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Checkbox, Illustration, Input, OnboardingLayout, Text } from 'shared/components'
+    import { Button, Checkbox, Illustration, Input, OnboardingLayout, Text, Icon } from 'shared/components'
     import { developerMode } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
     import { hasOnlyWhitespaces } from 'shared/lib/helpers'
@@ -61,6 +61,8 @@
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-4">{locale('views.setup.title')}</Text>
+            <Text type="p" secondary classes="mb-10">{locale('views.setup.body1')}</Text>
+            <Text type="p" secondary classes="mb-10">{locale('views.setup.body2')}</Text>
             <Input
                 {error}
                 bind:value={profileName}
@@ -69,23 +71,27 @@
                 autofocus
                 submitHandler={() => handleContinueClick(SetupType.New)} />
             {#if $developerMode}
-                <Checkbox label={locale('general.developerProfile')} bind:checked={isDeveloperProfile} />
+                <button
+                    on:click={() => (isDeveloperProfile = !isDeveloperProfile)}
+                    class="w-full flex flex-row p-4 mb-4 rounded-2xl border border-1 border-solid items-center justify-between border-gray-300 hover:border-gray-500 focus:border-gray-500">
+                    <div class="flex flex-row items-center">
+                        <Icon icon="dev" classes="text-blue-500" />
+                        <Text smaller classes="ml-3">{locale('general.developerProfile')}</Text>
+                    </div>
+                    <Checkbox bind:checked={isDeveloperProfile} classes="mb-0 pointer-events-none" tabindex={-1} />
+                </button>
             {/if}
         </div>
-        <div slot="leftpane__action" class="flex flex-row flex-wrap items-center space-x-4">
-            <Button
-                secondary
-                classes="flex-1"
-                disabled={!isProfileNameValid}
-                onClick={() => handleContinueClick(SetupType.Import)}>
+        <div slot="leftpane__action" class="flex flex-col">
+            <Button secondary classes="mb-4" disabled={!isProfileNameValid} onClick={() => handleContinueClick(SetupType.Import)}>
                 {locale('actions.importWallet')}
             </Button>
             <Button classes="flex-1" disabled={!isProfileNameValid} onClick={() => handleContinueClick(SetupType.New)}>
                 {locale('actions.createWallet')}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center">
-            <Illustration illustration="setup-desktop" height="100%" width="auto" classes="h-full object-cover object-left" />
+        <div slot="rightpane" class="w-full h-full flex justify-center p-16" style="background-color: #F7FFED">
+            <Illustration illustration="setup-desktop" width="auto" height="auto" />
         </div>
     </OnboardingLayout>
 {/if}

@@ -1,11 +1,11 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA",
-            "body": "Firefly is a secure and easy-to-use IOTA wallet."
+            "title": "Send, Receive & Manage your IOTA tokens",
+            "body": "Firefly is the official wallet of IOTA."
         },
         "legal": {
-            "title": "Legal",
+            "title": "Privacy Policy & Terms of Service",
             "body": "Please review the Privacy Policy and Terms of Service.",
             "privacyPolicy": {
                 "title": "Privacy Policy",
@@ -25,15 +25,16 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I have read and I accept the Privacy policy & ToS"
+            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
         },
-        "language": {
-            "title": "Language & appearance",
-            "body": "Choose your wallet’s language and theme"
+        "appearance": {
+            "title": "Appearance",
+            "body": "Choose your wallet’s theme"
         },
         "setup": {
             "title": "Set up your wallet",
-            "body": "You can create a new wallet or import an existing one.",
+            "body1": "You can create multiple user profiles to organize your wallets or separate user identities.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later",
             "profileName": "Profile Name"
         },
         "password": {
