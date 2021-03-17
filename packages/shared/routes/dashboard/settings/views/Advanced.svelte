@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import type { ClientOptions } from 'lib/typings/client'
     import { Button, Checkbox, Dropdown, Radio, Text } from 'shared/components'
     import { loggedIn } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
@@ -7,7 +6,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
-    import type { Node } from 'shared/lib/typings/client'
+    import type { ClientOptions, Node } from 'shared/lib/typings/client'
     import { api, isSyncing, syncAccounts, wallet, WalletAccount } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
 

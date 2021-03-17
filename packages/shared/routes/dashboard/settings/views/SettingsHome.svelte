@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Icon, SettingsMenu, Text } from 'shared/components'
     import { loggedIn } from 'shared/lib/app'
-    import { appRoute, dashboardRoute, lastAppRoute, settingsRoute } from 'shared/lib/router'
+    import { appRoute, dashboardRoute, lastAppRoute, settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import {
         AdvancedSettings,
@@ -16,44 +16,39 @@
 
     export let locale
     export let mobile
-
-    const closeSettingsHome = () => {
-        appRoute.set($lastAppRoute)
-        dashboardRoute.set(Tabs.Wallet)
-        lastAppRoute.set(null)
-    }
 </script>
 
 {#if mobile}
     <div>foo</div>
 {:else}
     <div class="h-full w-full flex flex-col">
-        <div class="flex flex-row justify-between mb-14">
-            <Text type="h2">{locale('views.settings.settings')}</Text>
-            <button on:click={closeSettingsHome}>
-                <Icon icon="close" classes="text-gray-800 dark:text-white" />
-            </button>
-        </div>
+        <Text type="h2" classes="mb-14">{locale('views.settings.settings')}</Text>
         <div class="flex flex-row items-start space-x-10">
             <SettingsMenu
                 icon="settings"
                 iconColor="bg-blue-500"
                 icons={SettingsIcons}
                 settings={GeneralSettings}
-                activeSettings={$loggedIn ? GeneralSettings : GeneralSettingsNoProfile }
+                activeSettings={$loggedIn ? GeneralSettings : GeneralSettingsNoProfile}
                 title={locale('views.settings.generalSettings.title')}
                 description={locale('views.settings.generalSettings.description')}
-                onClick={() => settingsRoute.set(SettingsRoutes.GeneralSettings)}
+                onClick={(setting) => {
+                    settingsRoute.set(SettingsRoutes.GeneralSettings)
+                    settingsChildRoute.set(setting)
+                }}
                 {locale} />
             <SettingsMenu
                 icon="security"
                 iconColor="bg-yellow-500"
                 icons={SettingsIcons}
                 settings={SecuritySettings}
-                activeSettings={$loggedIn ? SecuritySettings : undefined }
+                activeSettings={$loggedIn ? SecuritySettings : undefined}
                 title={locale('views.settings.security.title')}
                 description={locale('views.settings.security.description')}
-                onClick={() => settingsRoute.set(SettingsRoutes.Security)}
+                onClick={(setting) => {
+                    settingsRoute.set(SettingsRoutes.Security)
+                    settingsChildRoute.set(setting)
+                }}
                 {locale} />
             <SettingsMenu
                 icon="tools"
@@ -63,7 +58,10 @@
                 activeSettings={$loggedIn ? AdvancedSettings : AdvancedSettingsNoProfile}
                 title={locale('views.settings.advancedSettings.title')}
                 description={locale('views.settings.advancedSettings.description')}
-                onClick={() => settingsRoute.set(SettingsRoutes.AdvancedSettings)}
+                onClick={(setting) => {
+                    settingsRoute.set(SettingsRoutes.AdvancedSettings)
+                    settingsChildRoute.set(setting)
+                }}
                 {locale} />
             <SettingsMenu
                 icon="info"
@@ -73,7 +71,10 @@
                 activeSettings={HelpAndInfo}
                 title={locale('views.settings.helpAndInfo.title')}
                 description={locale('views.settings.helpAndInfo.description')}
-                onClick={() => settingsRoute.set(SettingsRoutes.HelpAndInfo)}
+                onClick={(setting) => {
+                    settingsRoute.set(SettingsRoutes.HelpAndInfo)
+                    settingsChildRoute.set(setting)
+                }}
                 {locale} />
         </div>
     </div>

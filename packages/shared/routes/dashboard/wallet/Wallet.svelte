@@ -1,40 +1,36 @@
 <script lang="typescript">
-    import type { Account as BaseAccount } from 'lib/typings/account'
-    import type { ErrorEventPayload } from 'lib/typings/events'
     import { DashboardPane } from 'shared/components'
     import { sendParams } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
-    import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { priceData } from 'shared/lib/marketData'
     import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, isProfileStrongholdLocked } from 'shared/lib/profile'
+    import { isProfileStrongholdLocked } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
-    import { formatUnit } from 'shared/lib/units'
     import {
         AccountMessage,
         api,
         BalanceHistory,
         BalanceOverview,
+        getAccountMeta,
         getAccountsBalanceHistory,
         getLatestMessages,
         getWalletBalanceHistory,
         initialiseListeners,
         isTransferring,
+        prepareAccountInfo,
         selectedAccountId,
         syncAccounts,
         transferState,
         updateBalanceOverview,
         wallet,
         WalletAccount,
-        prepareAccountInfo,
-        getAccountMeta
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
-    import { derived, get, Readable, Writable } from 'svelte/store'
+    import { derived, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
 
     export let locale
@@ -227,7 +223,7 @@
                     indexation: { index: 'firefly', data: new Array() },
                 },
                 {
-                    onSuccess(response) {                        
+                    onSuccess(response) {
                         accounts.update((_accounts) => {
                             return _accounts.map((_account) => {
                                 if (_account.id === senderAccountId) {

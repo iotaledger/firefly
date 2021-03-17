@@ -57,8 +57,8 @@
     onDestroy(unsubscribe)
 </script>
 
-<div data-label="security" class="p-8 flex-grow flex flex-col">
-    <Text type="h4" classes="mb-5">{locale('general.security')}</Text>
+<div data-label="security" class="py-6 px-8 flex-grow flex flex-col">
+    <Text type="p" bold classes="mb-5">{locale('general.security')}</Text>
     <div class="grid grid-cols-2 gap-2">
         <!-- Firefly version -->
         <SecurityTile

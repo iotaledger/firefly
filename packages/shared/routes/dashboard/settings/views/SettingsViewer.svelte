@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Icon, Scroller, SettingsNavigator, Text } from 'shared/components'
     import { loggedIn } from 'shared/lib/app'
-    import { settingsRoute } from 'shared/lib/router'
+    import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import {
         AdvancedSettings,
@@ -13,6 +13,7 @@
         SettingsRoutes,
         SettingsRoutesNoProfile,
     } from 'shared/lib/typings/routes'
+    import { onMount } from 'svelte'
     import { Advanced, General, Security } from './'
 
     export let locale
@@ -42,27 +43,38 @@
         }
     }
 
-    function scrollIntoView(id) {
+    function scrollIntoView(id, options = null) {
         if (id) {
             const elem = document.getElementById(id)
             if (elem) {
-                elem.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' })
+                elem.scrollIntoView(options ?? { behavior: 'smooth' })
             } else {
                 console.error(`Element with id "${id}" missing in scrollIntoView`)
             }
         }
     }
-    function goToSettingsHome() {
+
+    function handleBackClick() {
         settingsRoute.set(SettingsRoutes.Init)
     }
+    onMount(() => {
+        const child = $settingsChildRoute
+        settingsChildRoute.set(null)
+        if (child) {
+            scrollIntoView(child, { behavior: 'auto' })
+        }
+    })
 </script>
 
 {#if mobile}
     <div>foo</div>
 {:else}
-    <div class="relative flex flex-1 flex-row items-start">
-        <button on:click={goToSettingsHome} class="absolute top-0 right-0">
-            <Icon icon="close" classes="text-gray-800 dark:text-white" />
+    <div class="flex flex-1 flex-row items-start">
+        <button data-label="back-button" class="absolute top-8 left-8" on:click={handleBackClick}>
+            <div class="flex items-center space-x-3">
+                <Icon icon="arrow-left" classes="text-blue-500" />
+                <Text type="h4">{locale('actions.back')}</Text>
+            </div>
         </button>
         <SettingsNavigator
             {routes}
