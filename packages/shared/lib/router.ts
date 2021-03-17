@@ -1,4 +1,4 @@
-import { loggedIn, login, strongholdPassword, walletPin } from 'shared/lib/app'
+import { cleanupSignup, login, strongholdPassword, walletPin } from 'shared/lib/app'
 import { profiles } from 'shared/lib/profile'
 import { AccountRoutes, AppRoute, SettingsRoutes, SetupType, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
 import { get, readable, writable } from 'svelte/store'
@@ -170,6 +170,7 @@ export const routerNext = (event) => {
             nextRoute = AppRoute.Congratulations
             break
         case AppRoute.Congratulations:
+            cleanupSignup()
             login()
             nextRoute = AppRoute.Dashboard
             break

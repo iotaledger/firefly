@@ -67,7 +67,6 @@ export const developerMode = persistent<boolean>('developerMode', false)
  * Log in to the current profile
  */
 export const login = () => {
-    cleanupSignup()
     loggedIn.set(true)
 }
 
