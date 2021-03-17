@@ -2,7 +2,7 @@
     import { Icon } from 'shared/components'
     import { bindEvents } from 'shared/lib/utils'
     import { onMount } from 'svelte'
-    import { darkMode } from 'shared/lib/app'
+    import { appSettings } from 'shared/lib/appSettings'
     export let events = {}
     export let onClick = () => ''
     export let secondary = false
@@ -19,6 +19,7 @@
     export let autofocus = false
 
     let buttonElement
+    let darkModeEnabled = $appSettings.darkMode
 
     onMount(() => {
         if (autofocus) {
@@ -259,7 +260,7 @@
         class:secondary
         class:active
         class:with-icon={icon}
-        class:darkmode={$darkMode}
+        class:darkmode={darkModeEnabled}
         {disabled}
         bind:this={buttonElement}>
         <Icon classes="mb-1" {icon} />
@@ -280,7 +281,7 @@
         class:with-icon={icon}
         class:iconReverse
         class:active
-        class:darkmode={$darkMode}
+        class:darkmode={darkModeEnabled}
         {disabled}
         bind:this={buttonElement}>
         {#if icon}

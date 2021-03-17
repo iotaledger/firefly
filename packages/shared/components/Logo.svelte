@@ -1,12 +1,14 @@
 <script lang="typescript">
-    import { darkMode } from 'shared/lib/app'
+    import { appSettings } from 'shared/lib/appSettings'
 
     export let logo = undefined
     export let width = undefined
     export let height = undefined
     export let classes = ''
 
-    $: selected = logos[logo]?.[$darkMode ? 'darkmode' : 'default']
+    let darkModeEnabled = $appSettings.darkMode
+
+    $: selected = logos[logo]?.[darkModeEnabled ? 'darkmode' : 'default']
 
     const logos = {
         'logo-firefly-full': {

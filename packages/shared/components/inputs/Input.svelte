@@ -56,7 +56,7 @@
         {value}
         bind:this={inputElement}
         {maxlength}
-        class={`w-full relative text-12 leading-140 py-4 pr-8 pl-4 border border-solid rounded-xl 
+        class={`w-full text-12 leading-140 py-4 pr-8 pl-4 border border-solid rounded-xl 
             text-gray-500 dark:text-white bg-white dark:bg-gray-800 
             ${error ? 'border-red-300 hover:border-red-500 focus:border-red-500' : 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-gray-500 dark:focus:border-gray-600'} 
             ${classes}`}

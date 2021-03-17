@@ -1,12 +1,13 @@
 <script lang="typescript">
     import QRCode from 'qr.js/lib/QRCode'
-    import { darkMode } from 'shared/lib/app'
+    import { appSettings } from 'shared/lib/appSettings'
 
     export let data
     export let size = 150
 
     let qr
     let cells
+    let darkModeEnabled = $appSettings.darkMode
 
     $: data, create()
 
@@ -38,7 +39,7 @@
                     <rect
                         height={1}
                         key={cellIndex}
-                        style="fill: {cell ? ($darkMode ? '#ffffff' : '#000000') : 'none'};"
+                        style="fill: {cell ? (darkModeEnabled ? '#ffffff' : '#000000') : 'none'};"
                         width={1}
                         x={cellIndex}
                         y={rowIndex} />

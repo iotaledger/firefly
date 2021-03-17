@@ -72,6 +72,10 @@
     on:click={(e) => {
         e.stopPropagation()
         dropdown = !dropdown
+        const elem = document.getElementById(value)
+        if (elem) {
+            elem.scrollIntoView()
+        }
     }}
     use:clickOutside
     on:clickOutside={handleClickOutside}
@@ -90,6 +94,7 @@
                     class="relative flex items-center p-4 w-full whitespace-nowrap
                         {item[valueKey] === value && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'} 
                         hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
+                    id={item[valueKey]}
                     on:click={() => onSelect(item)}
                     class:active={item[valueKey] === value}><Text type="p" smaller>{item[valueKey]}</Text></button>
             {/each}
