@@ -1,4 +1,8 @@
 import { Unit, convertUnits } from '@iota/unit-converter'
+import Big from 'big.js'
+
+// Set this to avoid small numbers switching to exponential format
+Big.NE = -20
 
 /**
  * IOTA Units Map
@@ -73,49 +77,19 @@ const getUnit = (value: number): Unit => {
  * @returns The formatted unit.
  */
 export const convertUnitsNoE = (value: number, fromUnit: Unit, toUnit: Unit): string => {
-    if (!value) {
+    if (value === 0) {
         return "0";
     }
-    if (!UNIT_MAP[fromUnit]) {
-        throw new Error(`Unrecognized fromUnit ${fromUnit}`);
-    }
-    if (!UNIT_MAP[toUnit]) {
-        throw new Error(`Unrecognized toUnit ${toUnit}`);
-    }
-    if (fromUnit === "i" && value % 1 !== 0) {
-        throw new Error("If fromUnit is 'i' the value must be an integer value");
+
+    if (!value) {
+        return "";
     }
 
     if (fromUnit === toUnit) {
         return value.toString();
     }
 
-    const scaledValue = Math.abs(Number(value)) *
-        UNIT_MAP[fromUnit].val /
-        UNIT_MAP[toUnit].val;
-    const numDecimals = UNIT_MAP[toUnit].dp;
+    const scaledValue = new Big(value).times(UNIT_MAP[fromUnit].val).div(UNIT_MAP[toUnit].val)
 
-    // We cant use toFixed to just convert the new value to a string with
-    // fixed decimal places as it will round, which we don't want
-    // instead we want to convert the value to a string and manually
-    // truncate the number of digits after the decimal
-    // Unfortunately large numbers end up in scientific notation with
-    // the regular toString() so we use a custom conversion.
-    let fixed = scaledValue.toString();
-    if (fixed.includes("e")) {
-        fixed = scaledValue.toFixed(Number.parseInt(fixed.split("-")[1], 10));
-    }
-
-    // Now we have the number as a full string we can split it into
-    // whole and decimals parts
-    const parts = fixed.split(".");
-    if (parts.length === 1) {
-        parts.push("0");
-    }
-
-    // Now truncate the decimals by the number allowed on the toUnit
-    parts[1] = parts[1].slice(0, numDecimals);
-
-    // Finally join the parts
-    return toUnit === Unit.i ? parts[0] : `${parts[0]}.${parts[1] || "0"}`;
+    return toUnit === Unit.i ? scaledValue.toFixed(0) : scaledValue.toString();
 }

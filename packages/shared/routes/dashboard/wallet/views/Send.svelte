@@ -31,6 +31,9 @@
     let addressPrefix = ($account ?? $accounts[0]).depositAddress.split('1')[0]
     let addressError = ''
 
+    // This looks odd but sets a reactive dependency on amount, so when it changes the error will clear
+    $: amount, amountError = ''
+
     let transferSteps: {
         [key in TransferProgressEventType | 'Complete']: {
             label: string
