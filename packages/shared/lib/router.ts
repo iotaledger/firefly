@@ -163,12 +163,10 @@ export const routerNext = (event) => {
             nextRoute = AppRoute.Congratulations
             const { importType } = params
             walletSetupType.set(importType)
-            if (importType === SetupType.Mnemonic) {
-                nextRoute = AppRoute.Password
+            if (importType === SetupType.Mnemonic || importType === SetupType.Stronghold) {
+                nextRoute = AppRoute.Secure
             } else if (importType === SetupType.Seed || importType === SetupType.Seedvault) {
                 nextRoute = AppRoute.Balance
-            } else if (importType === SetupType.Stronghold) {
-                nextRoute = AppRoute.Protect
             }
             break
         case AppRoute.Balance:

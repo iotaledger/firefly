@@ -102,25 +102,31 @@
             "body": "If you have an existing seed or wallet back up file, you can import it here."
         },
         "importFromText": {
-            "title": "Restore your wallet with a recovery phrase or seed",
-            "body1": "A recovery phrase is 24 words long. This is used to recover an existing Firefly wallet.",
-            "body2": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body3": "Enter your seed or recovery phrase",
+            "title": "Type your seed or secret phase",
+            "body1": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+            "body2": "A secret phrase is a 24 word mnemonic. This is used to recover a newer Firefly wallet.",
+            "body3": "Enter your seed or secret phrase",
             "seedDetected": "81 character seed detected",
-            "phraseDetected": "24 word phrase detected"
+            "phraseDetected": "24 word secret phrase detected"
         },
         "importFromFile": {
-            "title": "Restore your wallet from a backup file",
-            "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "Restore your wallet using a backup file",
+            "body": "Upload a file to restore existing wallet funds. File backups can be either a Trinity SeedValue or a Firefly Stronghold."
         },
         "importBackupPassword": {
             "title": "Restore your wallet from a SeedVault or Stronghold",
-            "body1": "Please enter your backup password.",
-            "body2": "This is the password you set when you first created your backup."
+            "body1": "Please provide your backup password.",
+            "body2": "This is the password created when you first created your backup. This stops unauthorized access to your funds."
         },
         "importSuccess": {
-            "title": "You have successfully recovered your backup",
-            "body": "You can now set up your new wallet."
+            "mnemonicTitle": "You have successfully recovered your backup",
+            "mnemonicBody": "Your secret phrase is correct, you can now set up your new wallet.",
+            "seedTitle": "You have successfully recovered your backup",
+            "seedBody": "Your secret phrase is correct, you can now set up your new wallet.",
+            "seedvaultTitle": "Successfully imported",
+            "seedvaultBody": "Your password is correct, you can now continue.",
+            "strongholdTitle": "Successfully imported",
+            "strongholdBody": "Your password is correct, you can now continue."
         },
         "migrate": {
             "title": "Migrate your funds",
@@ -404,7 +410,7 @@
         "tryAgain": "Try again",
         "visitDiscord": "Visit Discord",
         "dragDrop": "Drag & Drop",
-        "importExtentions": ".stronghold or .kdbx file",
+        "importExtentions": ".kdbx or .stronghold file",
         "chooseFile": "Choose a File",
         "dropHere": "Drop your file here",
         "syncAll": "Sync all",

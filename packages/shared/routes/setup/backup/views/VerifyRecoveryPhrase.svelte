@@ -81,11 +81,11 @@
                     </button>
                 {/each}
             {:else}
-                <div class="flex flex-col items-center bg-gray-100 rounded-2xl mt-5">
-                    <div class="bg-green-100 rounded-2xl relative -top-5">
+                <div class="flex flex-col items-center bg-gray-100 rounded-2xl mt-10 p-5">
+                    <div class="bg-green-100 rounded-2xl relative -top-10">
                         <Icon icon="success-check" classes="text-white" />
                     </div>
-                    <Text type="h2" classes="mb-5">{locale('views.verifyRecoveryPhrase.verified')}</Text>
+                    <Text type="h2" classes="mb-5 text-center">{locale('views.verifyRecoveryPhrase.verified')}</Text>
                     <Text type="p" secondary classes="mb-10">{locale('views.verifyRecoveryPhrase.verifiedBody')}</Text>
                 </div>
             {/if}

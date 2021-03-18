@@ -241,6 +241,18 @@ export const asyncSetStoragePassword = (password) => {
     })
 }
 
+export const asyncRestoreBackup = (importFilePath, password) => {
+    return new Promise<void>((resolve, reject) => {
+        api.restoreBackup(importFilePath, password, {
+            onSuccess() {
+                resolve()
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
 
 export const asyncCreateAccount = () => {
     return new Promise<void>((resolve, reject) => {
