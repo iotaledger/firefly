@@ -23,7 +23,11 @@
     }
 
     let showTooltip = false
-    let canMigrate = balance >= 1000000
+    let errorBox
+    let tooltipTop,
+        tooltipLeft,
+        iconWidth = 0
+
     let fiatBalance = `${convertToFiat(
         balance,
         get(currencies)[CurrencyTypes.USD],
@@ -32,8 +36,13 @@
 
     $: errorMessage = disabled ? locale('views.secureSpentAddresses.error') : null
 
-    function toggleShow() {
+    function toggleShow(event) {
         showTooltip = !showTooltip
+        let coords = errorBox.getBoundingClientRect()
+        iconWidth = errorBox.offsetWidth / 2
+        tooltipLeft = coords.left
+        tooltipTop = coords.top
+        console.log(iconWidth)
     }
 </script>
 
@@ -63,7 +72,7 @@
 </style>
 
 <button
-    class="w-full relative p-4 flex justify-between items-center border-solid border border-gray-200 rounded-2xl"
+    class="w-full static p-4 flex justify-between items-center border-solid border border-gray-200 rounded-2xl"
     class:selected
     {disabled}
     on:click={onClick}>
@@ -84,10 +93,10 @@
                 {/each}
             </risk-meter>
         {:else if disabled}
-            <div class="flex items-center relative" on:mouseenter={toggleShow} on:mouseleave={toggleShow}>
+            <div class="flex items-center static" bind:this={errorBox} on:mouseenter={toggleShow} on:mouseleave={toggleShow}>
                 <Icon icon="info" classes="text-red-500 bg-white rounded-full ml-3" />
                 {#if showTooltip && errorMessage}
-                    <Tooltip>
+                    <Tooltip top={tooltipTop} left={tooltipLeft} elementWidth={iconWidth}>
                         <Text>{errorMessage}</Text>
                     </Tooltip>
                 {/if}
