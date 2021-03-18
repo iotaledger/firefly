@@ -53,12 +53,12 @@
         },
         "pin": {
             "title": "Set up PIN code",
-            "body1": "Enter a 6-digit PIN below. You will be asked to enter your pin to login to your wallet.",
-            "body2": "You can use numbers only."
+            "body1": "Enter a 6-digit PIN below. You will be asked for this frequently when you access your device.",
+            "body2": "Use numbers only"
         },
         "confirmPin": {
-            "title": "Verify your PIN code",
-            "body": "Re-enter your PIN code to proceed."
+            "title": "Confirm PIN code",
+            "body": "Confirm the PIN code you just created by repeating it."
         },
         "backup": {
             "title": "Back up your wallet",
