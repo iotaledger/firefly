@@ -130,7 +130,9 @@ const eventsApiResponseTypes = Object.values(eventsApiToResponseTypeMap)
  * Receives messages from wallet.rs.
  */
 
-Wallet.onMessage((message: MessageResponse) => {    
+Wallet.onMessage((message: MessageResponse) => {
+    console.log(message)
+    
     if (message && message.id === undefined) {
         // There is no message id
         // Something lower level has thrown an error

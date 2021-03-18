@@ -2,37 +2,38 @@
     import { Text, Button } from 'shared/components'
 
     export let locale = undefined
-    export let onDrop = () => {}
+    export let onDrop = (buffer?, name?, path?) => {}
     export let extentionsLabel = ''
-    export let allowedExtensions = '*'
+    export let allowedExtensions
 
     let dropping = false
     let fileName = null
 
-    // TODO: allow drop only allowedExtensions
     const onFile = (e) => {
         e.preventDefault()
         dropping = false
 
         const file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0]
-        fileName = file.name
 
-        // TODO: should we limit by size?
-        if (!file || file.size > 100000) {
+        if (!file) {
             fileName = null
-            return onDrop(false)
+            return onDrop()
         }
 
-        const filePath = file.path
+        if (allowedExtensions && allowedExtensions.length > 0) {
+            const ext = /\.([0-9a-z]+)$/i.exec(file.name)
+            if (!ext || !allowedExtensions.includes(ext[1])) {
+                fileName = null
+                return onDrop()
+            }
+        }
+
+        fileName = file.name
 
         const reader = new FileReader()
-        reader.fileName = fileName
-        reader.filePath = filePath
 
         reader.onload = (e) => {
-            const buffer = e.target.result
-            const name = e.target.fileName
-            onDrop(buffer, name, filePath)
+            onDrop(e.target.result, file.name, file.path)
         }
 
         reader.readAsArrayBuffer(file)
@@ -62,12 +63,12 @@
 </style>
 
 <dropzone
-    class="flex items-center justify-center p-7 w-full bg-gray-50 rounded-lg border border-solid border-gray-200"
+    class="flex items-center justify-center p-7 w-full rounded-lg border border-solid bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700"
     on:drop={onFile}
     on:dragenter={onEnter}
     on:dragleave={onLeave}
     on:dragover|preventDefault>
-    <content class:dropping class="flex flex-col items-center relative">
+    <content class:dropping class="flex flex-col items-center relative text-center">
         {#if dropping}
             <Text type="p" secondary smaller>{locale('actions.dropHere')}</Text>
         {:else if fileName}
@@ -88,7 +89,11 @@
                     17.6445L25 32C25 33.1045 25.8954 34 27 34L38 34C44.6274 34 50 28.6274 50 22C50 15.658 45.0802 10.4651 38.8489
                     10.0296C36.4827 4.15025 30.726 0 24 0C15.1634 0 8 7.16344 8 16L8.00009 16.0549C3.5001 16.5523 0 20.3674 0 25Z" />
             </svg>
-            <input class="absolute opacity-0 w-full h-full" type="file" on:change={onFile} accept={allowedExtensions} />
+            <input
+                class="absolute opacity-0 w-full h-full"
+                type="file"
+                on:change={onFile}
+                accept={allowedExtensions ? allowedExtensions.map((e) => `.${e}`).join(',') : '*'} />
             <Text type="h4">{locale('actions.dragDrop')}</Text>
             <Text classes="mb-12" type="p" secondary smaller>{extentionsLabel}</Text>
             <Button secondary onClick={onFile}>{locale('actions.chooseFile')}</Button>

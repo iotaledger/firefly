@@ -98,6 +98,7 @@ pub async fn init<A: Into<String>, F: Fn(String) + Send + Sync + 'static>(
         )
         .unwrap() //safe to unwrap, the storage password is None ^
         .with_polling_interval(Duration::from_millis(POLLING_INTERVAL_MS))
+        .with_sync_spent_outputs()
         .finish()
         .await
         .expect("failed to init account manager");

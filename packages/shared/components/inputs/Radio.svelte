@@ -11,38 +11,29 @@
     label {
         position: relative;
         :global(svg path) {
-            stroke: white;
+            @apply text-white;
+            @apply stroke-current;
             fill: none;
         }
-        input {
-            position: absolute;
-            left: 0;
-            opacity: 0;
-        }
-
-        .svg-container {
-            width: 24px;
-            height: 24px;
-
+        div {
             &.active {
-                border-width: 0;
-                background-color: var(--ui-blue-color);
+                @apply border-0;
+                @apply bg-blue-500;
             }
         }
 
         &:hover,
         &:focus-within {
-            .svg-container {
-                border-color: var(--ui-blue-color);
+            div {
+                @apply border-blue-500;
             }
         }
     }
 </style>
 
-<label
-    class={`w-full flex items-center mb-4 text-12 leading-160 cursor-pointer text-gray-800 dark:text-white ${classes}`}>
-    <input class="h-4 w-4 cursor-pointer" type="radio" bind:group {value} />
-    <div class={`mr-3 svg-container rounded-full border border-solid border-gray-300 ${value === group ? "active" : ""}`}>
+<label class="w-full flex items-center mb-4 text-12 leading-160 cursor-pointer text-gray-800 dark:text-white {classes}">
+    <input class="absolute left-0 opacity-0 h-4 w-4 cursor-pointer" type="radio" bind:group {value} />
+    <div class="w-6 h-6 mr-3 rounded-full border border-solid border-gray-300" class:active={value === group}>
         <Icon icon={value === group ? 'radio' : 'radio-unchecked'} />
     </div>
     {label}

@@ -22,38 +22,28 @@
 
 <style type="text/scss">
     dropdown-input {
-        transition: border-color 0.25s;
         min-height: 48px;
         @apply py-4;
         @apply pl-4;
         @apply pr-10;
         @apply rounded-xl;
         :global(svg) {
-            right: 12px; // TODO: unable to use tailwind inset
+            @apply right-3;
         }
         &.disabled {
             @apply pointer-events-none;
-            @apply bg-gray-100;
+            @apply opacity-50;
         }
         nav {
             .inner {
                 max-height: 235px;
             }
-            transition: opacity 0.25s;
-            top: 50px; // TODO: unable to use tailwind inset
-            left: 0px; // TODO: unable to use tailwind inset
+            top: 50px;
+            @apply left-0;
             @apply rounded-xl;
             &.active {
                 @apply opacity-100;
                 @apply pointer-events-auto;
-            }
-            button {
-                &.active {
-                    @apply bg-gray-100;
-                }
-                &:hover {
-                    @apply bg-gray-200;
-                }
             }
         }
         &.small {
@@ -63,39 +53,48 @@
             @apply pr-8;
             @apply rounded-lg;
             nav {
+                top: 38px;
                 @apply rounded-lg;
-                top: 38px; // TODO: unable to use tailwind inset
             }
             :global(svg) {
-                right: 8px; // TODO: unable to use tailwind inset
+                @apply right-2;
             }
         }
     }
 </style>
 
 {#if label}
-    <Text type="p" classes="mb-2" smaller>{label}</Text>
+    <Text type="p" classes="mb-2 {disabled && 'opacity-50'}" smaller>{label}</Text>
 {/if}
 <dropdown-input
-    class="relative flex items-center w-full whitespace-nowrap
-                bg-white border border-solid border-gray-300 hover:border-gray-500 cursor-pointer"
+    class="relative flex items-center w-full whitespace-nowrap cursor-pointer border border-solid
+    bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700"
     on:click={(e) => {
         e.stopPropagation()
         dropdown = !dropdown
+        const elem = document.getElementById(value)
+        if (elem) {
+            elem.scrollIntoView()
+        }
     }}
     use:clickOutside
     on:clickOutside={handleClickOutside}
     class:small
     class:disabled>
-    <Text type="p" smaller {disabled}>{value}</Text>
+    <Text type="p" smaller>{value}</Text>
     <Icon icon="chevron-down" classes="absolute text-gray-500 fill-current" />
     <nav
         class:active={dropdown}
-        class="absolute w-full bg-white overflow-hidden border border-solid border-gray-500 pointer-events-none opacity-0 z-10 text-left">
+        class="absolute w-full overflow-hidden pointer-events-none opacity-0 z-10 text-left 
+        bg-gray-50 dark:bg-gray-800
+            border border-solid border-gray-300 hover:border-gray-500 dark:border-gray-700 dark:hover:border-gray-700">
         <div class="inner overflow-y-auto">
             {#each items as item}
                 <button
-                    class="relative flex items-center bg-white p-4 w-full whitespace-nowrap"
+                    class="relative flex items-center p-4 w-full whitespace-nowrap
+                        {item[valueKey] === value && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'} 
+                        hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
+                    id={item[valueKey]}
                     on:click={() => onSelect(item)}
                     class:active={item[valueKey] === value}><Text type="p" smaller>{item[valueKey]}</Text></button>
             {/each}
