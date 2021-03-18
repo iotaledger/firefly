@@ -6,7 +6,7 @@
     export let routes
     export let route
     export let icons
-    export let onSettingClick = () => {}
+    export let onSettingClick = (_) => {}
 
     function changeRoute(setting) {
         document.getElementById('scroller').scrollTop = 0
@@ -31,7 +31,7 @@
                 {#each Object.values(settings[route]) as setting, i}
                     <button
                         on:click={() => onSettingClick(setting)}
-                        class="group flex flex-row justify-start items-center hover:bg-blue-50 py-2 rounded-lg w-full ml-6 text-left {Object.values(settings[route]).length - 1 === i && 'mb-4'}">
+                        class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-2 rounded-lg w-full ml-6 text-left {Object.values(settings[route]).length - 1 === i && 'mb-4'}">
                         <Icon icon={icons[setting]} classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
                         <Text type="p" classes="group-hover:text-blue-500">{locale(`views.settings.${setting}.title`)}</Text>
                     </button>

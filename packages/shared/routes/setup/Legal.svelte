@@ -24,12 +24,6 @@
     function handleBackClick() {
         dispatch('previous')
     }
-
-    function scrollIntoView(section) {
-        if (section) {
-            section.scrollIntoView({ behavior: 'smooth' })
-        }
-    }
 </script>
 
 <style type="text/scss">
@@ -52,7 +46,7 @@
                 {locale('actions.continue')}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex items-center px-40 py-20" style="background-color: #F6F9FF">
+        <div slot="rightpane" class="w-full h-full flex items-center px-40 py-20">
             <Scroller classes="w-full text-justify py-12 pr-10" threshold={70} bind:progress bind:index bind:this={scroller}>
                 <section class="mb-12" bind:this={privacyPolicy}>
                     <Text type="h1" classes="mb-5">{locale('views.legal.privacyPolicy.title')}</Text>

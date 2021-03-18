@@ -1,14 +1,14 @@
 <script lang="typescript">
-    import { Button, Icon, Illustration, OnboardingLayout, Radio, Text } from 'shared/components'
-    import { darkMode } from 'shared/lib/app'
+    import { Button, ButtonRadio, Icon, Illustration, OnboardingLayout, Radio, Text } from 'shared/components'
+    import { appSettings } from 'shared/lib/appSettings'
     import { createEventDispatcher } from 'svelte'
 
     export let locale
     export let mobile
 
-    let darkModeEnabled = $darkMode
+    let darkModeEnabled = $appSettings.darkMode
 
-    $: darkMode.set(darkModeEnabled)
+    $: $appSettings.darkMode = darkModeEnabled
 
     const dispatch = createEventDispatcher()
 
@@ -28,27 +28,12 @@
             <Text type="h2" classes="mb-5">{locale('views.appearance.title')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.appearance.body')}</Text>
             <Text type="p" classes="mb-2 mt-4" smaller>{locale('general.appearance')}</Text>
-            <!-- TODO: Enable -->
-            <div class="pointer-events-none opacity-50">
-                <button
-                    on:click={() => (darkModeEnabled = false)}
-                    class="w-full flex flex-row p-4 mb-4 rounded-2xl border border-1 border-solid items-center justify-between border-gray-300 hover:border-gray-500 focus:border-gray-500">
-                    <div class="flex flex-row items-center">
-                        <Icon icon="theme-light" classes="text-blue-500" />
-                        <Text smaller classes="ml-3">{locale('general.lightTheme')}</Text>
-                    </div>
-                    <Radio value={false} bind:group={darkModeEnabled} classes="mb-0" tabindex={-1} />
-                </button>
-                <button
-                    on:click={() => (darkModeEnabled = true)}
-                    class="w-full flex flex-row p-4 mb-4 rounded-2xl border border-1 border-solid items-center justify-between border-gray-300 hover:border-gray-500 focus:border-gray-500">
-                    <div class="flex flex-row items-center">
-                        <Icon icon="theme-dark" classes="text-blue-500" />
-                        <Text smaller classes="ml-3">{locale('general.darkTheme')}</Text>
-                    </div>
-                    <Radio value={true} bind:group={darkModeEnabled} classes="mb-0" tabindex={-1} />
-                </button>
-            </div>
+            <ButtonRadio icon="theme-light" value={false} bind:group={darkModeEnabled}>
+                {locale('general.lightTheme')}
+            </ButtonRadio>
+            <ButtonRadio icon="theme-dark" value={true} bind:group={darkModeEnabled}>
+                {locale('general.darkTheme')}
+            </ButtonRadio>
         </div>
         <div slot="leftpane__action">
             <Button onClick={() => handleContinueClick()} classes="w-full">{locale('actions.continue')}</Button>

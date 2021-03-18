@@ -1,26 +1,46 @@
 <script lang="typescript">
     import { Icon, Scroller, SettingsNavigator, Text } from 'shared/components'
+    import { loggedIn } from 'shared/lib/app'
     import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
-    import { AdvancedSettings, GeneralSettings, HelpAndInfo, SecuritySettings, SettingsRoutes } from 'shared/lib/typings/routes'
+    import {
+        AdvancedSettings,
+        AdvancedSettingsNoProfile,
+        GeneralSettings,
+        GeneralSettingsNoProfile,
+        HelpAndInfo,
+        SecuritySettings,
+        SettingsRoutes,
+        SettingsRoutesNoProfile,
+    } from 'shared/lib/typings/routes'
     import { onMount } from 'svelte'
     import { Advanced, General, Security } from './'
 
     export let locale
     export let mobile
 
-    export let navigate
-
     let scroller
     let index
 
-    const routes = Object.values(SettingsRoutes).filter((route) => route !== SettingsRoutes.Init)
+    const routes = Object.values($loggedIn ? SettingsRoutes : SettingsRoutesNoProfile).filter(
+        (route) => route !== SettingsRoutes.Init
+    )
 
-    const settings = {
-        generalSettings: GeneralSettings,
-        security: SecuritySettings,
-        advancedSettings: AdvancedSettings,
-        helpAndInfo: HelpAndInfo,
+    let settings
+
+    if ($loggedIn) {
+        settings = {
+            generalSettings: GeneralSettings,
+            security: SecuritySettings,
+            advancedSettings: AdvancedSettings,
+            helpAndInfo: HelpAndInfo,
+        }
+    } else {
+        settings = {
+            generalSettings: GeneralSettingsNoProfile,
+            advancedSettings: AdvancedSettingsNoProfile,
+            helpAndInfo: HelpAndInfo,
+        }
     }
 
     function scrollIntoView(id, options = null) {
@@ -75,7 +95,7 @@
                     {#if $settingsRoute === 'generalSettings'}
                         <General {locale} />
                     {:else if $settingsRoute === 'security'}
-                        <Security {navigate} {locale} />
+                        <Security {locale} />
                     {:else if $settingsRoute === 'advancedSettings'}
                         <Advanced {locale} />
                     {:else if $settingsRoute === 'helpAndInfo'}

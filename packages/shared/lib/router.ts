@@ -1,4 +1,4 @@
-import { loggedIn, notification, strongholdPassword, walletPin } from 'shared/lib/app'
+import { cleanupSignup, login, strongholdPassword, walletPin } from 'shared/lib/app'
 import { profiles } from 'shared/lib/profile'
 import { AccountRoutes, AppRoute, SettingsRoutes, SetupType, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
 import { get, readable, writable } from 'svelte/store'
@@ -14,7 +14,7 @@ import { deepLinkRequestActive } from './deepLinking'
  * @returns {void}
  */
 export const setRoute = (path: string): void => {
-    route.set(path)
+    appRoute.set(path)
 }
 
 /**
@@ -24,7 +24,6 @@ export const path = readable<string>(null, (set) => {
     const updatePath = (): void => {
         const pathName = window.location.hash.substr(1)
         set(pathName)
-        notification.set(null)
     }
 
     window.addEventListener('hashchange', updatePath)
@@ -43,7 +42,7 @@ export const walletSetupType = writable<SetupType>(null)
 /*
  * Current view
  */
-export const route = writable<string>(null)
+export const appRoute = writable<string>(null)
 
 /**
  * Application route history
@@ -91,7 +90,7 @@ export const initRouter = () => {
 // TODO: only handle route changes, not app variables
 export const routerNext = (event) => {
     let params = event.detail || {}
-    const currentRoute: string = get(route)
+    const currentRoute: string = get(appRoute)
     let nextRoute: AppRoute
 
     switch (currentRoute) {
@@ -101,7 +100,7 @@ export const routerNext = (event) => {
             if (shouldAddProfile) {
                 nextRoute = AppRoute.Setup
             } else {
-                loggedIn.set(true)
+                login()
                 nextRoute = AppRoute.Dashboard
             }
             break
@@ -179,7 +178,8 @@ export const routerNext = (event) => {
             nextRoute = AppRoute.Congratulations
             break
         case AppRoute.Congratulations:
-            loggedIn.set(true)
+            cleanupSignup()
+            login()
             nextRoute = AppRoute.Dashboard
             break
     }
@@ -224,5 +224,4 @@ export const resetRouter = () => {
     settingsRoute.set(SettingsRoutes.Init)
     dashboardRoute.set(Tabs.Wallet)
     deepLinkRequestActive.set(false)
-    loggedIn.set(false)
 }

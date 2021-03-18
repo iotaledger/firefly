@@ -81,7 +81,7 @@
         {#each visibleRecoveryPhrase as word, i}
             <button
                 on:click|preventDefault={() => handleClick(word, i)}
-                class="px-6 py-4 flex flex-row items-center rounded-2xl bg-gray-50"
+                class="px-6 py-4 flex flex-row items-center rounded-2xl bg-gray-50 dark:bg-gray-800"
                 class:selected={isVerification && recoveryPhraseIndexes.indexOf(i) !== -1}
                 class:disabled={!isVerification || disabled}
                 class:errored={errorIndex === i}>
@@ -89,7 +89,9 @@
                 {#if isVerification && recoveryPhraseIndexes.indexOf(i) !== -1}
                     <span class="text-gray-300">{word}</span>
                     <span class="font-bold text-16 leading-3 text-white">{recoveryPhraseIndexes.indexOf(i) + 1}</span>
-                {:else}<span class={hide ? 'text-gray-500' : 'text-gray-800'}>{hide ? '********' : word}</span>{/if}
+                {:else}
+                    <span class={hide ? 'text-gray-500' : 'text-gray-800 dark:text-white'}>{hide ? '********' : word}</span>
+                {/if}
             </button>
         {/each}
     </div>

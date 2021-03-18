@@ -71,8 +71,6 @@
         U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-@import 'themes.scss';
-
 *,
 *:after,
 *:before {
@@ -84,7 +82,7 @@
     font-weight: 500;
     font-family: 'DM Sans';
     font-style: normal;
-    transition: background 0.25s, color 0.25s;
+    transition: background 0.25s, color 0.25s, border-color 0.25s, opacity 0.25s;
 }
 html,
 body {

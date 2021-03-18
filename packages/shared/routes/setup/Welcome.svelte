@@ -1,6 +1,8 @@
 <script lang="typescript">
+    import { Button, Dropdown, Illustration, Logo, OnboardingLayout, Text } from 'shared/components'
+    import { appSettings } from 'shared/lib/appSettings'
+    import { locales, setLanguage, _ } from 'shared/lib/i18n'
     import { createEventDispatcher } from 'svelte'
-    import { OnboardingLayout, Illustration, Text, Button, Logo, Dropdown } from 'shared/components'
 
     export let locale
     export let mobile
@@ -9,6 +11,11 @@
 
     function handleContinueClick() {
         dispatch('next')
+    }
+
+    const handleLanguage = (item) => {
+        setLanguage(item)
+        locale = $_
     }
 </script>
 
@@ -20,13 +27,11 @@
             <Logo width="64px" logo="logo-firefly" classes="mb-10" />
             <Text type="h1" classes="mb-4">{locale('views.onboarding1.title')}</Text>
             <Text type="p" secondary classes="mb-10">{locale('views.onboarding1.body')}</Text>
-            <!-- TODO: Enable -->
             <Dropdown
-                value="English"
-                label={locale('general.language')}
-                items={[{ value: 1, label: 'English' }, { value: 2, label: 'Belula' }]}
-                disabled
-                classes="opacity-50" />
+                sortItems={true}
+                onSelect={handleLanguage}
+                value={locales[$appSettings.language]}
+                items={Object.values(locales).map((locale) => ({ value: locale, label: locale }))} />
         </div>
         <div slot="leftpane__action">
             <Button onClick={() => handleContinueClick()} classes="w-full">{locale('actions.continue')}</Button>

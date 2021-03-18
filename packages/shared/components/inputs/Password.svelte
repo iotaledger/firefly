@@ -1,4 +1,3 @@
-
 <script lang="typescript">
     import Input from './Input'
     import { Icon } from 'shared/components'
@@ -13,7 +12,7 @@
     export let locale = undefined
     export let maxlength = undefined
     export let error = null
-    export let numeric = false
+    export let integer = false
     export let autofocus = false
     export let submitHandler = undefined
     export let disabled = false
@@ -29,8 +28,9 @@
 
 <style type="text/scss">
     div {
-        button {
-            right: 12px; // TODO: unable to use tailwind inset
+        &:disabled {
+            @apply pointer-events-none;
+            @apply opacity-50;
         }
         strength-meter {
             span {
@@ -47,29 +47,31 @@
     }
 </style>
 
-<div class={classes}>
+<div class={classes} class:disabled>
     {#if showStrengthLevel}
         <strength-meter class="flex flex-row justify-end mb-2">
             {#each Array(strengthLevels) as _, i}
-                <span class="ml-1 w-1.5 h-0.5 rounded-lg bg-gray-300"class:strong={strength === 4} class:weak={i - strength < 0}/>
+                <span
+                    class="ml-1 w-1.5 h-0.5 rounded-lg bg-gray-300"
+                    class:strong={strength === 4}
+                    class:weak={i - strength < 0} />
             {/each}
         </strength-meter>
     {/if}
-    <div class='flex w-full relative'>
+    <div class="flex w-full relative">
         <Input
             {error}
             {type}
             bind:value
             {maxlength}
-            {numeric}
+            {integer}
             {autofocus}
             {disabled}
-            placeholder={placeholder || locale('general.password')} 
+            placeholder={placeholder || locale('general.password')}
             {submitHandler}
-            spellcheck="false"
-        />
+            spellcheck="false" />
         {#if showRevealToggle === true && !disabled}
-            <button type="button" on:click={() => revealToggle()} tabindex="-1" class="absolute top-3">
+            <button type="button" on:click={() => revealToggle()} tabindex="-1" class="absolute top-3 right-3">
                 <Icon icon={revealed ? 'view' : 'hide'} classes="text-blue-500" />
             </button>
         {/if}

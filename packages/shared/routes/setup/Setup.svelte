@@ -1,11 +1,11 @@
 <script lang="typescript">
-    import { Button, Checkbox, Illustration, Input, OnboardingLayout, Text, Icon } from 'shared/components'
-    import { developerMode } from 'shared/lib/app'
+    import { Button, ButtonCheckbox, Checkbox, Icon, Illustration, Input, OnboardingLayout, Text } from 'shared/components'
+    import { cleanupSignup, developerMode } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
     import { hasOnlyWhitespaces } from 'shared/lib/helpers'
     import { createProfile, disposeNewProfile, newProfile, profiles } from 'shared/lib/profile'
     import { SetupType } from 'shared/lib/typings/routes'
-    import { getStoragePath, initialise, api, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
+    import { api, getStoragePath, initialise, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -50,6 +50,7 @@
     }
 
     function handleBackClick() {
+        cleanupSignup()
         disposeNewProfile()
         dispatch('previous')
     }
@@ -71,19 +72,17 @@
                 autofocus
                 submitHandler={() => handleContinueClick(SetupType.New)} />
             {#if $developerMode}
-                <button
-                    on:click={() => (isDeveloperProfile = !isDeveloperProfile)}
-                    class="w-full flex flex-row p-4 mb-4 rounded-2xl border border-1 border-solid items-center justify-between border-gray-300 hover:border-gray-500 focus:border-gray-500">
-                    <div class="flex flex-row items-center">
-                        <Icon icon="dev" classes="text-blue-500" />
-                        <Text smaller classes="ml-3">{locale('general.developerProfile')}</Text>
-                    </div>
-                    <Checkbox bind:checked={isDeveloperProfile} classes="mb-0 pointer-events-none" tabindex={-1} />
-                </button>
+                <ButtonCheckbox icon="dev" bind:value={isDeveloperProfile}>
+                    {locale('general.developerProfile')}
+                </ButtonCheckbox>
             {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-col">
-            <Button secondary classes="flex-1 mb-4" disabled={!isProfileNameValid} onClick={() => handleContinueClick(SetupType.Import)}>
+            <Button
+                secondary
+                classes="flex-1 mb-4"
+                disabled={!isProfileNameValid}
+                onClick={() => handleContinueClick(SetupType.Import)}>
                 {locale('actions.importWallet')}
             </Button>
             <Button classes="flex-1" disabled={!isProfileNameValid} onClick={() => handleContinueClick(SetupType.New)}>

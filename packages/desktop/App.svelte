@@ -1,15 +1,15 @@
 <script lang="typescript">
     import { Popup, Route, ToastContainer } from 'shared/components'
-    import { darkMode, loggedIn, mobile } from 'shared/lib/app'
+    import { loggedIn, mobile } from 'shared/lib/app'
+    import { appSettings } from 'shared/lib/appSettings'
     import { refreshVersionDetails, versionDetails } from 'shared/lib/appUpdater'
     import { Electron } from 'shared/lib/electron'
     import { goto } from 'shared/lib/helpers'
-    import { activeLocale, dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
+    import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
     import { fetchMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { activeProfile } from 'shared/lib/profile'
-    import { dashboardRoute, initRouter, route as appRoute, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
+    import { dashboardRoute, initRouter, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
     import { AppRoute, Tabs } from 'shared/lib/typings/routes'
     import { requestMnemonic } from 'shared/lib/wallet'
     import {
@@ -24,6 +24,7 @@
         Migrate,
         Password,
         Protect,
+        Settings,
         Setup,
         Secure,
         Splash,
@@ -33,12 +34,8 @@
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
 
-    const locale = activeLocale
-
-    $: $darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
-    $: if (activeLocale !== locale) {
-        Electron.updateMenu('strings', getLocalisedMenuItems($_))
-    }
+    $: $appSettings.darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
+    $: Electron.updateMenu('strings', getLocalisedMenuItems($_))
     $: Electron.updateMenu('loggedIn', $loggedIn)
 
     $: if (document.dir !== $dir) {
@@ -46,7 +43,9 @@
     }
 
     let splash = true
-    setupI18n({ withLocale: get(activeProfile)?.settings.language ?? 'en' })
+    let settings = false
+
+    setupI18n({ withLocale: $appSettings.language })
     onMount(async () => {
         setTimeout(() => {
             splash = false
@@ -67,8 +66,12 @@
             walletRoute.set(route)
         })
         Electron.onEvent('menu-navigate-settings', () => {
-            if (get(dashboardRoute) !== Tabs.Settings) {
-                dashboardRoute.set(Tabs.Settings)
+            if ($loggedIn) {
+                if (get(dashboardRoute) !== Tabs.Settings) {
+                    dashboardRoute.set(Tabs.Settings)
+                }
+            } else {
+                settings = true
             }
         })
         Electron.onEvent('menu-check-for-update', async () => {
@@ -97,11 +100,10 @@
     html,
     body {
         @apply bg-white;
-        &.scheme-dark {
-            @apply bg-blue-900;
-        }
-
         @apply select-none;
+        &.scheme-dark {
+            @apply bg-gray-900;
+        }
     }
 </style>
 
@@ -166,5 +168,9 @@
     <Route route={AppRoute.Login}>
         <Login on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} {goto} />
     </Route>
+    {#if settings}
+        <Settings locale={$_} handleClose={() => (settings = false)} />
+    {/if}
+
     <ToastContainer />
 {/if}
