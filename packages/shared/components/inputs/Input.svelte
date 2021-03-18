@@ -8,24 +8,38 @@
     export let type = 'text'
     export let error
     export let maxlength = null
-    export let numeric = false
+    export let float = false
+    export let integer = false
     export let autofocus = false
     export let submitHandler = undefined
     export let disabled = false
 
     let inputElement
 
-    const handleInput = (event) => {
-        value = event.target.value
+    const handleInput = (e) => {
+        value = e.target.value
     }
 
     const onKeyPress = (e) => {
-        // if the input is numeric, we accept only numbers and enter press
-        if (numeric && e.keyCode !== 13 && (e.which < 48 || e.which > 57)) {
-            e.preventDefault()
-        }
-        if (e.keyCode === 13 && submitHandler) {
-            submitHandler()
+        if (e.keyCode !== 8) {
+            const isReturn = e.keyCode === 13
+            if (isReturn && submitHandler) {
+                submitHandler()
+            }
+            if (maxlength && value.length >= maxlength) {
+                e.preventDefault()
+            }
+            if ((float || integer) && !isReturn) {
+                // if the input is float, we accept one dot
+                if (float && (e.keyCode === 46 || e.keyCode === 190)) {
+                    if (value.indexOf('.') >= 0) {
+                        e.preventDefault()
+                    }
+                } else if (e.keyCode < 48 || e.keyCode > 57) {
+                    // if float or interger we accept numbers
+                    e.preventDefault()
+                }
+            }
         }
     }
 
@@ -63,7 +77,7 @@
         {value}
         bind:this={inputElement}
         {maxlength}
-        class={`w-full relative text-12 leading-140 py-4 pr-8 pl-4 bg-white border border-solid ${classes} ${error ? 'border-red-300 hover:border-red-500 focus:border-red-500' : 'border-gray-300 hover:border-gray-500 focus:border-gray-500'} rounded-xl text-gray`}
+        class={`w-full text-12 leading-140 py-4 pr-8 pl-4 bg-white border border-solid ${classes} ${error ? 'border-red-300 hover:border-red-500 focus:border-red-500' : 'border-gray-300 hover:border-gray-500 focus:border-gray-500'} rounded-xl text-gray`}
         on:input={handleInput}
         on:keypress={onKeyPress}
         {disabled}

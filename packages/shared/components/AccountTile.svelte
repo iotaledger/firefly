@@ -12,7 +12,7 @@
 <style type="text/scss">
     button {
         height: auto;
-        min-height: 92px;
+        min-height: 110px;
         &.size-m,
         &.size-l {
             height: 70%;
@@ -29,7 +29,7 @@
         <Text
             smaller={size === 's'}
             overrideColor
-            classes="block text-gray-800 dark:text-white group-hover:text-white group-hover:font-700">
+            classes="block text-gray-800 dark:text-white group-hover:text-white group-hover:font-700 mr-4">
             {balance}
         </Text>
         <Text smaller={size === 's'} overrideColor classes="block text-blue-500 dark:text-gray-600 group-hover:text-white">

@@ -1,4 +1,4 @@
-import { activeProfile } from 'shared/lib/profile';
+import { appSettings } from 'shared/lib/appSettings';
 import { generateRandomId } from 'shared/lib/utils';
 import { get, writable } from 'svelte/store';
 import { Electron } from './electron';
@@ -43,7 +43,7 @@ export function showNotification(notificationData: NotificationData, showSystemN
     }
 
     if (showSystemNotification &&
-        get(activeProfile)?.settings.notifications &&
+        get(appSettings).notifications &&
         Electron.NotificationManager) {
         Electron.NotificationManager.notify(notificationData.message)
     } else {

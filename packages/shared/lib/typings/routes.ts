@@ -12,7 +12,6 @@ export enum AppRoute {
     Congratulations = 'congratulations',
     Dashboard = 'dashboard',
     Login = 'login',
-    Settings = 'settings',
 }
 
 export enum SetupType {
@@ -52,11 +51,24 @@ export enum SettingsRoutes {
     HelpAndInfo = 'helpAndInfo',
 }
 
+export enum SettingsRoutesNoProfile {
+    Init = 'init',
+    GeneralSettings = 'generalSettings',
+    AdvancedSettings = 'advancedSettings',
+    HelpAndInfo = 'helpAndInfo',
+}
+
 export enum GeneralSettings {
     Profile = 'profile',
     Theme = 'theme',
     Language = 'language',
     Currency = 'currency',
+    Notifications = 'notifications',
+}
+
+export enum GeneralSettingsNoProfile {
+    Theme = 'theme',
+    Language = 'language',
     Notifications = 'notifications',
 }
 
@@ -77,6 +89,13 @@ export enum AdvancedSettings {
     ErrorLog = 'errorLog',
     Diagnostics = 'diagnostics',
     StateExport = 'stateExport',
+}
+
+export enum AdvancedSettingsNoProfile {
+    DeveloperMode = 'developerMode',
+    DeepLinks = 'deepLinks',
+    ErrorLog = 'errorLog',
+    Diagnostics = 'diagnostics',
 }
 
 export enum HelpAndInfo {

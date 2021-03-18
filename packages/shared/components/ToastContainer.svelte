@@ -21,7 +21,7 @@
     }
 </style>
 
-<toast-container class="flex flex-col">
+<toast-container class="flex flex-col relative z-20">
     <ul class="space-y-2">
         {#each toasts as toast}
             <li in:fade={{ duration: 100 }} out:fade={{ duration: 100 }}>
