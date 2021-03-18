@@ -52,7 +52,7 @@
         <div slot="leftpane__content">
             <form on:submit={handleContinueClick} id="password-form">
                 <Text type="h2" classes="mb-5">{locale('views.password.title')}</Text>
-                <Text type="p" secondary classes="mb-3">{locale('views.password.body')}</Text>
+                <Text type="p" secondary classes="mb-10">{locale('views.password.body')}</Text>
                 <Password
                     {error}
                     classes="mb-1"
