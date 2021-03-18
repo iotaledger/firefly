@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Illustration, OnboardingLayout, Text } from 'shared/components'
+    import { downloadRecoveryKit } from 'shared/lib/utils'
     import { createEventDispatcher } from 'svelte'
-    import { Electron } from 'shared/lib/electron'
 
     export let locale
     export let mobile
@@ -13,15 +13,7 @@
     }
 
     function handleDownloadClick() {
-        fetch("assets/docs/recovery-kit.pdf")
-        .then(response => response.arrayBuffer())
-        .then((data) => {
-            console.log(data)
-            Electron.saveRecoveryKit(data)
-        })
-        .catch(err =>{
-            console.error(err)
-        })
+        downloadRecoveryKit()
     }
 
     function handleBackClick() {

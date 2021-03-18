@@ -6,8 +6,7 @@
     export let locale
     export let mobile
     export let pinCandidate
-
-    export let loading
+    export let busy = false
 
     let pinInput
 
@@ -29,7 +28,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick}>
+    <OnboardingLayout onBackClick={handleBackClick} {busy}>
         <div slot="leftpane__content">
             {#if !confirmInput}
                 <Text type="h2" classes="mb-5">{locale('views.pin.title')}</Text>
@@ -43,7 +42,7 @@
             {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-            <Button classes="flex-1" disabled={!valid || loading} onClick={() => onSubmit()}>{locale(confirmInput ? 'actions.confirmPin' : 'actions.setPin')}</Button>
+            <Button classes="flex-1" disabled={!valid || busy} onClick={() => onSubmit()}>{locale(confirmInput ? 'actions.confirmPin' : 'actions.setPin')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center p-16" style="background-color: #FFF3F8;">
             {#if !confirmInput}

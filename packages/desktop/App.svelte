@@ -11,7 +11,6 @@
     import { openPopup, popupState } from 'shared/lib/popup'
     import { dashboardRoute, initRouter, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
     import { AppRoute, Tabs } from 'shared/lib/typings/routes'
-    import { requestMnemonic } from 'shared/lib/wallet'
     import {
         Backup,
         Balance,
@@ -146,7 +145,6 @@
         <Backup
             on:next={routerNext}
             on:previous={routerPrevious}
-            on:requestMnemonic={requestMnemonic}
             mobile={$mobile}
             locale={$_} />
     </Route>

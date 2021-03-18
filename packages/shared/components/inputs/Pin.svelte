@@ -37,7 +37,7 @@
         for (let j = 0; j <= PIN_LENGTH; j++) {
             if (j === PIN_LENGTH || !inputs[j]) {
                 inputs[j - 1] = ''
-                if (sibling.previousElementSibling) {
+                if (sibling?.previousElementSibling) {
                     sibling.previousElementSibling.focus()
                 }
                 break

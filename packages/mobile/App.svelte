@@ -8,7 +8,6 @@
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { initRouter, routerNext, routerPrevious } from 'shared/lib/router'
     import { AppRoute } from 'shared/lib/typings/routes'
-    import { requestMnemonic } from 'shared/lib/wallet'
     import {
         Backup,
         Balance,
@@ -114,7 +113,6 @@
         <Backup
             on:next={routerNext}
             on:previous={routerPrevious}
-            on:requestMnemonic={requestMnemonic}
             mobile={$mobile}
             locale={$_} />
     </Route>

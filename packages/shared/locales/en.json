@@ -68,27 +68,34 @@
         },
         "recoveryPhrase": {
             "title": "Recovery phrase",
-            "body1": "Carefully write down the words in the exact order.",
-            "body2": "Keep your recovery phrase private and safely stored. Do not share it with anyone.",
+            "body1": "Carefully copy the words in the exact order shown.",
+            "body2": "Keep this private and safely stored.",
             "revealRecoveryPhrase": "Reveal recovery phrase",
             "hideRecoveryPhrase": "Hide recovery phrase"
         },
         "verifyRecoveryPhrase": {
             "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Select the words in the correct order.",
-            "creatingAccount": "Creating account, please wait..."
+            "body": "Let's check you wrote down the phrase correctly. Please select the right word with the corresponding number.",
+            "word": "Word",
+            "verified": "Recovery phrase verified",
+            "verifiedBody": "Remember to keep it private and safely guarded."
         },
         "backupWallet": {
-            "title": "Back up to a Stronghold file",
-            "body": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup."
+            "title": "Back up to a file",
+            "body1": "Your wallet password is also used to encrypt a Stronghold backup. Enter your wallet password to save your recovery phrase backup to a file.",
+            "body2": "Reasons why backing up to a file is important:",
+            "reason1": "Recover your full history",
+            "reason2": "Save your settings",
+            "reason3": "Recover a complete wallet setup and configuration",
+            "reason4": "Import into other devices"
         },
         "recoveryPhraseSaved": {
             "title": "Successfully backed up",
             "body": "You have backed up your wallet to a Stronghold."
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your wallet is ready to go."
+            "title": "Wallet setup completed",
+            "body": "Your new wallet is ready to use."
         },
         "import": {
             "title": "Import a wallet",
@@ -411,7 +418,7 @@
         "unlock": "Unlock",
         "updateFirefly": "Update Firefly",
         "restartNow": "Restart now",
-        "saveBackup": "Save backup",
+        "saveBackup": "Save Stronghold backup",
         "customizeAcount": "Customise account",
         "viewAddressHistory": "View address history",
         "deleteAccount": "Delete account",
@@ -437,7 +444,9 @@
         "yes": "Yes",
         "no": "No",
         "reset": "Reset",
-        "downloadRecoveryKit": "Download recovery kit template"
+        "downloadRecoveryKit": "Download recovery kit template",
+        "skipBackup": "Skip file backup",
+        "finishSetup": "Finish setup"
     },
     "general": {
         "password": "Password",

@@ -3,7 +3,7 @@
     import { Electron } from 'shared/lib/electron'
     import { activeProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { api } from 'shared/lib/wallet'
+    import { api, asyncSetStoragePassword } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
     import { Pin, Protect } from './views/'
@@ -16,7 +16,7 @@
     export let locale
     export let mobile
 
-    let isVerifyingPin = false
+    let busy = false
 
     enum ProtectState {
         Init = 'init',
@@ -44,7 +44,7 @@
     // Verifies mnemonic syntactically
     // Stores mnemonic
     // Creates first account
-    function initialiseWallet(input: string): Promise<void> {        
+    function initialiseWallet(input: string): Promise<void> {
         return new Promise((resolve, reject) => {
             api.verifyMnemonic(input, {
                 onSuccess() {
@@ -100,40 +100,34 @@
                 break
             case ProtectState.Confirm:
                 try {
-                    isVerifyingPin = true
+                    busy = true
 
                     if (!validatePinFormat(pin)) {
                         throw new Error('Invalid pin code!')
                     }
 
                     await Electron.PincodeManager.set(get(activeProfile)?.id, pin)
+                    await asyncSetStoragePassword(pin)
 
-                    api.setStoragePassword(pin, {
-                        async onSuccess() {
-                            if ($walletSetupType === SetupType.Mnemonic) {
-                                await initialiseWallet(get(mnemonic).join(' '))
-                                
-                                // Clear mnemonic
-                                mnemonic.set(null)
-                                dispatch('next', { pin })
-                            } else {
-                                dispatch('next', { pin })
-                            }
+                    if ($walletSetupType === SetupType.Mnemonic) {
+                        await initialiseWallet(get(mnemonic).join(' '))
 
-                            isVerifyingPin = false
-                        },
-                        onError(err) {
-                            isVerifyingPin = false
-                            showAppNotification({
-                                type: 'error',
-                                message: locale(err.error),
-                            })
-                        },
-                    })
+                        // Clear mnemonic
+                        mnemonic.set(null)
+                        dispatch('next', { pin })
+                    } else {
+                        dispatch('next', { pin })
+                    }
                     break
-                } catch (error) {
-                    isVerifyingPin = false
-                    console.error(error)
+                } catch (err) {
+                    showAppNotification({
+                        type: 'error',
+                        message: locale(err.error),
+                    })
+
+                    console.log('Error', err)
+                } finally {
+                    busy = false
                 }
         }
         if (nextState) {
@@ -163,6 +157,6 @@
 
 {#if state === ProtectState.Pin || state === ProtectState.Confirm}
     <Transition>
-        <Pin loading={isVerifyingPin} on:next={_next} on:previous={_previous} pinCandidate={pin} {locale} {mobile} />
+        <Pin {busy} on:next={_next} on:previous={_previous} pinCandidate={pin} {locale} {mobile} />
     </Transition>
 {/if}

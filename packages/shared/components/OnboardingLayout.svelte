@@ -3,6 +3,7 @@
 
     export let allowBack = true
     export let onBackClick = () => {}
+    export let busy = false
 </script>
 
 <!-- https://github.com/sveltejs/svelte/issues/4546 -->
@@ -15,8 +16,10 @@
         <div class="w-full h-full flex flex-col justify-between" style="max-width: 406px;">
             <div class="flex flex-col">
                 {#if allowBack}
-                    <button on:click={onBackClick} class="mb-8">
-                        <Icon icon="arrow-left" classes="cursor-pointer text-blue-500" />
+                    <button on:click={onBackClick} class="mb-8" disabled={busy}>
+                        <Icon
+                            icon="arrow-left"
+                            classes={busy ? 'pointer-events-none text-gray-500' : 'cursor-pointer text-blue-500'} />
                     </button>
                 {/if}
                 <div data-label="leftpane-content">

@@ -2,141 +2,101 @@
     import { Transition } from 'shared/components'
     import { mnemonic, strongholdPassword } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
-    import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
-    import { updateProfile } from 'shared/lib/profile'
-    import { api } from 'shared/lib/wallet'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { newProfile, updateProfile } from 'shared/lib/profile'
+    import { getDefaultStrongholdName } from 'shared/lib/utils'
+    import {
+        initialise,
+        getStoragePath,
+        api,
+        asyncBackup,
+        asyncCreateAccount,
+        asyncStoreMnemonic,
+        asyncVerifyMnemonic,
+        requestMnemonic,
+        asyncSetStrongholdPassword,
+    } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
-    import { Backup, BackupToFile, RecoveryPhrase, Success, VerifyRecoveryPhrase } from './views/'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { getDefaultStrongholdName } from 'shared/lib/utils';
+    import { Backup, BackupToFile, RecoveryPhrase, VerifyRecoveryPhrase } from './views/'
 
     export let locale
     export let mobile
-
-    let creatingAccount = false
 
     enum BackupState {
         Init = 'init',
         RecoveryPhrase = 'recoveryPhrase',
         Verify = 'verify',
         Backup = 'backup',
-        Success = 'success',
     }
 
     const dispatch = createEventDispatcher()
 
     let state: BackupState = BackupState.Init
     let stateHistory = []
+    let busy = false
 
     const _next = async (event) => {
         let nextState
         let params = event.detail || {}
+
         switch (state) {
             case BackupState.Init:
-                dispatch('requestMnemonic')
+                try {
+                    busy = true
+
+                    await requestMnemonic()
+                } catch (err) {
+                    showAppNotification({
+                        type: 'error',
+                        message: locale(err.error),
+                    })
+
+                    console.log('Error', err)
+                } finally {
+                    busy = false
+                }
                 nextState = BackupState.RecoveryPhrase
                 break
+
             case BackupState.RecoveryPhrase:
-                const { options } = params
-                if (options === 'verify') {
-                    nextState = BackupState.Verify
-                } else if (options === 'backup') {
-                    nextState = BackupState.Backup
-                }
-                break
-            case BackupState.Backup:
-                try {
-                    await new Promise<void>((resolve, reject) => {
-                        api.storeMnemonic(get(mnemonic).join(' '), {
-                            onSuccess() {
-                                resolve()
-                            },
-                            onError(error) {
-                                reject(error)
-                            },
-                        })
-                    })
-                        .then(() => Electron.getStrongholdBackupDestination(getDefaultStrongholdName()))
-                        .then((result) => {
-                            if (result) {
-                                return new Promise<void>((res, rej) => {
-                                    api.backup(result, {
-                                        onSuccess() {
-                                            updateProfile('lastStrongholdBackupTime', new Date())
-                                            res()
-                                        },
-                                        onError(error) {
-                                            rej(error)
-                                        },
-                                    })
-                                })
-                            }
-
-                            throw new Error('Path not selected.')
-                        })
-                    nextState = BackupState.Success
-                } catch (error) {
-                    console.log('Error', error)
-                }
-
-                break
-
-            case BackupState.Success:
                 nextState = BackupState.Verify
-                break;
+                break
 
             case BackupState.Verify:
-                const _mnemonic = get(mnemonic).join(' ')
-                creatingAccount = true
+                nextState = BackupState.Backup
+                break
 
-                api.verifyMnemonic(_mnemonic, {
-                    onSuccess(response) {
-                        api.storeMnemonic(_mnemonic, {
-                            onSuccess(response) {
-                                api.createAccount(
-                                    {
-                                        signerType: { type: 'Stronghold' },
-                                        clientOptions: {
-                                            node: DEFAULT_NODE,
-                                            nodes: DEFAULT_NODES,
-                                            network: $network,
-                                        },
-                                    },
-                                    {
-                                        onSuccess() {
-                                            // Clear mnemonic
-                                            mnemonic.set(null);
-                                            dispatch('next')
-                                        },
-                                        onError(err) {
-                                            showAppNotification({
-                                                type: 'error',
-                                                message: locale(err.error),
-                                            })
-                                            creatingAccount = false
-                                        },
-                                    }
-                                )
-                            },
-                            onError(err) {
-                                showAppNotification({
-                                    type: 'error',
-                                    message: locale(err.error),
-                                })
-                                creatingAccount = false
-                            },
-                        })
-                    },
-                    onError(err) {
-                        showAppNotification({
-                            type: 'error',
-                            message: locale(err.error),
-                        })
-                        creatingAccount = false
-                    },
-                })
+            case BackupState.Backup:
+                try {
+                    const { skip } = params
 
+                    if (skip) {
+                        busy = true
+                        await asyncStoreMnemonic(get(mnemonic).join(' '))
+                        await asyncCreateAccount()
+                        dispatch('next')
+                    } else {
+                        const dest = await Electron.getStrongholdBackupDestination(getDefaultStrongholdName())
+                        if (dest) {
+                            busy = true
+                            await asyncStoreMnemonic(get(mnemonic).join(' '))
+                            await asyncCreateAccount()
+                            await asyncBackup(dest)
+                            updateProfile('lastStrongholdBackupTime', new Date())
+                            dispatch('next')
+                        }
+                    }
+                } catch (err) {
+                    showAppNotification({
+                        type: 'error',
+                        message: locale(err.error),
+                    })
+
+                    console.log('Error', err)
+                } finally {
+                    busy = false
+                }
                 break
         }
         if (nextState) {
@@ -158,22 +118,18 @@
 
 {#if state === BackupState.Init}
     <Transition>
-        <Backup on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <Backup on:next={_next} on:previous={_previous} {busy} {locale} {mobile} />
     </Transition>
 {:else if state === BackupState.RecoveryPhrase}
     <Transition>
-        <RecoveryPhrase on:next={_next} on:previous={_previous} mnemonic={$mnemonic} {locale} {mobile} />
+        <RecoveryPhrase on:next={_next} on:previous={_previous} {busy} mnemonic={$mnemonic} {locale} {mobile} />
     </Transition>
 {:else if state === BackupState.Verify}
     <Transition>
-        <VerifyRecoveryPhrase {creatingAccount} on:next={_next} on:previous={_previous} mnemonic={$mnemonic} {locale} {mobile} />
+        <VerifyRecoveryPhrase on:next={_next} on:previous={_previous} {busy} mnemonic={$mnemonic} {locale} {mobile} />
     </Transition>
 {:else if state === BackupState.Backup}
     <Transition>
-        <BackupToFile on:next={_next} on:previous={_previous} strongholdPassword={$strongholdPassword} {locale} {mobile} />
-    </Transition>
-{:else if state === BackupState.Success}
-    <Transition>
-        <Success on:next={_next} on:previous={_previous} mnemonic={$mnemonic} {locale} {mobile} />
+        <BackupToFile on:next={_next} on:previous={_previous} {busy} strongholdPassword={$strongholdPassword} {locale} {mobile} />
     </Transition>
 {/if}
