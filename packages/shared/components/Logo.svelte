@@ -19,6 +19,10 @@
             default: 'firefly_logo.svg',
             darkmode: 'firefly_logo.svg',
         },
+        'logo-stronghold': {
+            default: 'stronghold.svg',
+            darkmode: 'stronghold_darkmode.svg',
+        }
     }
 </script>
 

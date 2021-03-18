@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { date } from 'svelte-i18n'
     import { closePopup } from 'shared/lib/popup'
-    import { Text, Button } from 'shared/components'
+    import { Text, Button, Logo } from 'shared/components'
 
     import { versionDetails, updateDownload, updateBusy } from 'shared/lib/appUpdater'
 
@@ -27,8 +27,8 @@
 
 <Text type="h4" classes="mb-5">{locale('popups.version.title', { values: { version: $versionDetails.currentVersion } })}</Text>
 <div class="flex w-full flex-row flex-wrap">
-    <div class="w-full p-4 bg-gray-50 flex justify-center content-center">
-        <img src="assets/logos/firefly_logo_full.svg" alt="" />
+    <div class="w-full p-4 bg-gray-50 dark:bg-gray-800 flex justify-center content-center">
+        <Logo width="50%" logo="logo-firefly-full" />
     </div>
     {#if $versionDetails.upToDate}
         <div class="w-full text-center my-6 px-8">

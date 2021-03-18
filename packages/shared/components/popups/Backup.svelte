@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Text } from 'shared/components'
+    import { Button, Text, Logo } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { getBackupWarningColor } from 'shared/lib/helpers'
     import { closePopup, openPopup } from 'shared/lib/popup'
@@ -62,7 +62,9 @@
                   values: { date: $date(lastBackupDate, { format: 'long' }) },
               }) : locale('popups.backup.notBackedUp')}
     </Text>
-    <div class="w-full p-4 bg-gray-50 flex justify-center content-center"><img src="assets/logos/stronghold.svg" alt="" /></div>
+    <div class="w-full p-4 bg-gray-50 dark:bg-gray-800 flex justify-center content-center">        
+        <Logo width="50%" logo="logo-stronghold" />    
+    </div>
     <div class="w-full text-center my-6 px-8">
         <Text overrideColor type="h5" classes="mb-2 text-{color}-600">
             {#if !lastBackupDate}
