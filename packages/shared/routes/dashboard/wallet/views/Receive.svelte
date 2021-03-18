@@ -14,7 +14,7 @@
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
     const currentAccount = getContext<Readable<WalletAccount>>('selectedAccount')
 
-    $: selectedAccount = $currentAccount || $accounts[0]
+    let selectedAccount = $currentAccount || $accounts[0]
 
     const handleDropdownSelect = (item) => {
         selectedAccount = item
@@ -48,20 +48,20 @@
         {/if}
         <div
             class="w-full h-full flex flex-col flex-auto rounded-2xl border border-solid border-gray-300 dark:border-gray-700 p-4">
-            <div class="w-full flex flex-row justify-between items-start">
-                <Text type="p" smaler bold classes="mb-4">{locale('actions.receive')}</Text>
+            <div class="w-full flex flex-row justify-between items-center mb-1">
+                <Text type="p" smaller bold>{locale('actions.receive')}</Text>
                 <button on:click={generateNewAddress} class:pointer-events-none={isGeneratingAddress}>
                     <Icon icon="refresh" classes="{isGeneratingAddress && 'animate-spin'} text-gray-500 dark:text-white" />
                 </button>
             </div>
-            <div class="flex flex-auto items-center justify-center mb-6">
+            <div class="flex flex-auto items-center justify-center mb-4">
                 <QR size={98} data={selectedAccount.depositAddress} />
             </div>
             <div class="mb-6">
                 <Text secondary smaller classes="mb-1">{locale('general.myAddress')}</Text>
                 <Text type="pre">{selectedAccount.depositAddress}</Text>
             </div>
-            <Button disabled={isGeneratingAddress} classes="w-full" onClick={() => setClipboard(selectedAccount.depositAddress)}>
+            <Button small disabled={isGeneratingAddress} classes="w-full" onClick={() => setClipboard(selectedAccount.depositAddress)}>
                 {locale('general.copyAddress')}
             </Button>
         </div>

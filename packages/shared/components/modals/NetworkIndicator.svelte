@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onDestroy } from 'svelte'
-    import { Text, Modal } from 'shared/components'
+    import { Text, Modal, HR } from 'shared/components'
     import { networkStatus } from 'shared/lib/networkStatus'
     export let isActive
     export let locale
@@ -33,7 +33,7 @@
         <div class="px-7 pb-5 text-13 text-{NETWORK_HEALTH_COLORS[healthStatus]}-500">
             {locale(`views.dashboard.network.${healthStatusText}`)}
         </div>
-        <hr class="border-t border-solid border-gray-200 dark:border-gray-700" />
+        <HR />
         <div class="flex flex-row justify-between px-7 pt-5 pb-2">
             <span class="text-12 text-gray-800 dark:text-white">{locale('views.dashboard.network.messagesPerSecond')}</span>
             <span class="text-12 text-gray-500">{`${Math.round(messagesPerSecond)}`}</span>

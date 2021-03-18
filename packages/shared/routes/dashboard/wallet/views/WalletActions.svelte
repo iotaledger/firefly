@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { AccountTile, Button, Text } from 'shared/components'
+    import { loggedIn } from 'shared/lib/app'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
@@ -19,7 +20,7 @@
 
     let startInit
 
-    if ($walletRoute === WalletRoutes.Init && !$accountsLoaded) {
+    if ($walletRoute === WalletRoutes.Init && !$accountsLoaded && $loggedIn) {
         startInit = Date.now()
         openPopup({
             type: 'busy',

@@ -1,4 +1,4 @@
-import { activeProfile, updateProfile } from 'shared/lib/profile'
+import { appSettings } from 'shared/lib/appSettings'
 import { addMessages, dictionary, getLocaleFromNavigator, init, _ } from 'svelte-i18n'
 import { derived, get, writable } from 'svelte/store'
 
@@ -60,8 +60,6 @@ const INIT_OPTIONS = {
     warnOnMissingMessages: true,
 }
 
-let activeLocale
-
 // Internal store for tracking network
 // loading state
 const isDownloading = writable(false)
@@ -79,18 +77,20 @@ const setupI18n = (options = { withLocale: null }) => {
         const messagesFileUrl = MESSAGE_FILE_URL_TEMPLATE.replace('{locale}', _locale)
         // Download translation file for given locale/language
         return loadJson(messagesFileUrl).then((messages) => {
-            activeLocale = _locale
             addMessages(_locale, messages)
-            updateProfile('settings.language', _locale)
+            appSettings.set({
+                ...get(appSettings),
+                language: _locale
+            })
             isDownloading.set(false)
         })
     }
 }
 
 const isLocaleLoaded = derived(
-    [isDownloading, dictionary],
-    ([$isDownloading, $dictionary]) =>
-        !$isDownloading && $dictionary[activeLocale] && Object.keys($dictionary[activeLocale]).length > 0
+    [isDownloading, dictionary, appSettings],
+    ([$isDownloading, $dictionary, $appSettings]) =>
+        !$isDownloading && $dictionary[$appSettings.language] && Object.keys($dictionary[$appSettings.language]).length > 0
 )
 
 const hasLoadedLocale = (locale: string) => {
@@ -120,15 +120,25 @@ function loadJson(url) {
     return fetch(url).then((response) => response.json())
 }
 
-const dir = derived(activeProfile, (_activeProfile) => {
-    if (_activeProfile) {
-        return _activeProfile.settings.language === 'ar' ? 'rtl' : 'ltr'
-    }
+const dir = derived(appSettings, (_appSettings) => {
+    // TODO: Implement RTL support
+    // return appSettings.language === 'ar' ? 'rtl' : 'ltr'
     return 'ltr'
 })
+
+
+const setLanguage = (item) => {
+    const locale = Object.keys(locales).find((key) => locales[key] === item.value)
+    appSettings.set({
+        ...get(appSettings),
+        language: locale,
+    })
+
+    setupI18n({ withLocale: locale })
+}
 
 const localize = get(_) as (string, values?) => string
 
 // We expose the svelte-i18n _ store so that our app has
 // a single API for i18n
-export { activeLocale, _, setupI18n, dir, isLocaleLoaded, localize }
+export { _, setupI18n, dir, isLocaleLoaded, localize, setLanguage }

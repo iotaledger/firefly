@@ -46,7 +46,7 @@
                 {:else}{locale('actions.verifyRecoveryPhrase')}{/if}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex flex-col flex-wrap items-center justify-center p-16">
+        <div slot="rightpane" class="w-full h-full flex flex-col items-center justify-center p-4">
             <RecoveryPhrase
                 classes="mb-8"
                 recoveryPhrase={mnemonic}

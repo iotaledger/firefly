@@ -1,47 +1,80 @@
 <script lang="typescript">
     import { Icon, Scroller, SettingsNavigator, Text } from 'shared/components'
-    import { settingsRoute } from 'shared/lib/router'
+    import { loggedIn } from 'shared/lib/app'
+    import { settingsChildRoute, settingsRoute } from 'shared/lib/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
-    import { AdvancedSettings, GeneralSettings, HelpAndInfo, SecuritySettings, SettingsRoutes } from 'shared/lib/typings/routes'
+    import {
+        AdvancedSettings,
+        AdvancedSettingsNoProfile,
+        GeneralSettings,
+        GeneralSettingsNoProfile,
+        HelpAndInfo,
+        SecuritySettings,
+        SettingsRoutes,
+        SettingsRoutesNoProfile,
+    } from 'shared/lib/typings/routes'
+    import { onMount } from 'svelte'
     import { Advanced, General, Security } from './'
+
     export let locale
     export let mobile
-
-    export let navigate
 
     let scroller
     let index
 
-    const routes = Object.values(SettingsRoutes).filter((route) => route !== SettingsRoutes.Init)
+    const routes = Object.values($loggedIn ? SettingsRoutes : SettingsRoutesNoProfile).filter(
+        (route) => route !== SettingsRoutes.Init
+    )
 
-    const settings = {
-        generalSettings: GeneralSettings,
-        security: SecuritySettings,
-        advancedSettings: AdvancedSettings,
-        helpAndInfo: HelpAndInfo,
+    let settings
+
+    if ($loggedIn) {
+        settings = {
+            generalSettings: GeneralSettings,
+            security: SecuritySettings,
+            advancedSettings: AdvancedSettings,
+            helpAndInfo: HelpAndInfo,
+        }
+    } else {
+        settings = {
+            generalSettings: GeneralSettingsNoProfile,
+            advancedSettings: AdvancedSettingsNoProfile,
+            helpAndInfo: HelpAndInfo,
+        }
     }
 
-    function scrollIntoView(id) {
+    function scrollIntoView(id, options = null) {
         if (id) {
             const elem = document.getElementById(id)
             if (elem) {
-                elem.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' })
+                elem.scrollIntoView(options ?? { behavior: 'smooth' })
             } else {
                 console.error(`Element with id "${id}" missing in scrollIntoView`)
             }
         }
     }
-    function goToSettingsHome() {
+
+    function handleBackClick() {
         settingsRoute.set(SettingsRoutes.Init)
     }
+    onMount(() => {
+        const child = $settingsChildRoute
+        settingsChildRoute.set(null)
+        if (child) {
+            scrollIntoView(child, { behavior: 'auto' })
+        }
+    })
 </script>
 
 {#if mobile}
     <div>foo</div>
 {:else}
-    <div class="relative flex flex-1 flex-row items-start">
-        <button on:click={goToSettingsHome} class="absolute top-0 right-0">
-            <Icon icon="close" classes="text-gray-800 dark:text-white" />
+    <div class="flex flex-1 flex-row items-start">
+        <button data-label="back-button" class="absolute top-8 left-8" on:click={handleBackClick}>
+            <div class="flex items-center space-x-3">
+                <Icon icon="arrow-left" classes="text-blue-500" />
+                <Text type="h4">{locale('actions.back')}</Text>
+            </div>
         </button>
         <SettingsNavigator
             {routes}
@@ -62,7 +95,7 @@
                     {#if $settingsRoute === 'generalSettings'}
                         <General {locale} />
                     {:else if $settingsRoute === 'security'}
-                        <Security {navigate} {locale} />
+                        <Security {locale} />
                     {:else if $settingsRoute === 'advancedSettings'}
                         <Advanced {locale} />
                     {:else if $settingsRoute === 'helpAndInfo'}

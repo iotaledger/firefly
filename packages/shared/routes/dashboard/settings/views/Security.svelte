@@ -1,13 +1,12 @@
 <script lang="typescript">
-    import { Button, Checkbox, Dropdown, Password, Spinner, Text } from 'shared/components'
+    import { Button, Checkbox, Dropdown, HR, Password, Spinner, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
-    import { PIN_LENGTH } from 'shared/lib/utils'
+    import { activeProfile, isStrongholdLocked, updateProfile } from 'shared/lib/profile'
+    import { getDefaultStrongholdName, PIN_LENGTH } from 'shared/lib/utils'
     import { api, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
-    import { getDefaultStrongholdName } from 'shared/lib/utils';
     import { get } from 'svelte/store'
     import zxcvbn from 'zxcvbn'
 
@@ -26,7 +25,6 @@
     const lockScreenTimeoutOptions = [1, 5, 10, 30, 60].map((time) => ({ value: time, label: assignTimeoutOptionLabel(time) }))
 
     export let locale
-    export let navigate
 
     let exportStrongholdChecked
     let currentPassword = ''
@@ -74,7 +72,7 @@
             }
         }
 
-        if (get(activeProfile)?.isStrongholdLocked) {
+        if (get(isStrongholdLocked)) {
             openPopup({
                 type: 'password',
                 props: {
@@ -274,7 +272,7 @@
             <Spinner busy={exportBusy} message={exportMessage} classes="ml-2" />
         </div>
     </section>
-    <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
+    <HR classes="pb-5 mt-5 justify-center" />
     <section id="appLock" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.appLock.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.appLock.description')}</Text>
@@ -285,7 +283,7 @@
             value={assignTimeoutOptionLabel($activeProfile?.settings.lockScreenTimeout)}
             items={lockScreenTimeoutOptions} />
     </section>
-    <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
+    <HR classes="pb-5 mt-5 justify-center" />
     <section id="changePassword" class="w-3/4">
         <form id="form-change-password" on:submit={changePassword}>
             <Text type="h4" classes="mb-3">{locale('views.settings.changePassword.title')}</Text>
@@ -333,7 +331,7 @@
             </div>
         </form>
     </section>
-    <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
+    <HR classes="pb-5 mt-5 justify-center" />
     <section id="changePincode" class="w-3/4">
         <form on:submit={changePincode} id="pincode-change-form">
             <Text type="h4" classes="mb-3">{locale('views.settings.changePincode.title')}</Text>
@@ -345,7 +343,7 @@
                 showRevealToggle
                 {locale}
                 maxlength="6"
-                numeric
+                integer
                 placeholder={locale('views.settings.changePincode.currentPincode')}
                 disabled={pinCodeBusy} />
             <Password
@@ -355,7 +353,7 @@
                 showRevealToggle
                 {locale}
                 maxlength="6"
-                numeric
+                integer
                 placeholder={locale('views.settings.changePincode.newPincode')}
                 disabled={pinCodeBusy} />
             <Password
@@ -364,7 +362,7 @@
                 showRevealToggle
                 {locale}
                 maxlength="6"
-                numeric
+                integer
                 placeholder={locale('views.settings.changePincode.confirmNewPincode')}
                 disabled={pinCodeBusy} />
             <div class="flex flex-row items-center">
@@ -379,7 +377,7 @@
             </div>
         </form>
     </section>
-    <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
+    <HR classes="pb-5 mt-5 justify-center" />
     <section id="deleteProfile" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.deleteProfile.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.deleteProfile.description')}</Text>

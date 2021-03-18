@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import type { BalanceHistory, WalletAccount } from 'lib/wallet'
     import { Chart, Dropdown, Text } from 'shared/components'
     import {
         chartCurrency,
@@ -14,6 +13,7 @@
     import { CurrencyTypes, formatCurrencyValue } from 'shared/lib/currency'
     import { HistoryDataProps, TIMEFRAME_MAP } from 'shared/lib/marketData'
     import { activeProfile } from 'shared/lib/profile'
+    import type { BalanceHistory, WalletAccount } from 'shared/lib/wallet'
     import { getContext, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
 
