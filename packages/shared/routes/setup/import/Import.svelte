@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
-    import { mnemonic } from 'shared/lib/app'
+    import { mnemonic, seed } from 'shared/lib/app'
     import { newProfile } from 'shared/lib/profile'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
@@ -46,6 +46,9 @@
                 // Dummy
                 if (input.length === 81) {
                     importType = 'seed'
+
+                    seed.set(input)
+
                     dispatch('next', { importType })
                 } else {
                     importType = 'mnemonic'

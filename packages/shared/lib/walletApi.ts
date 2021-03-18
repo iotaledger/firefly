@@ -122,17 +122,17 @@ const eventsApiResponseTypes = Object.values(eventsApiToResponseTypeMap)
  * Receives messages from wallet.rs.
  */
 
-Wallet.onMessage((message: MessageResponse) => {
+Wallet.onMessage((message: MessageResponse) => {    
     if (message && message.id === undefined) {
         // There is no message id
         // Something lower level has thrown an error
         // We should stop processing at this point
-        errorLog.update((log) => [ { type: ErrorType.ClientError, message: JSON.stringify(message), time: Date.now() }, ...log ])
+        errorLog.update((log) => [{ type: ErrorType.ClientError, message: JSON.stringify(message), time: Date.now() }, ...log])
         return
     }
 
     const _deleteCallbackId = (_id: string) => {
-            // Do not delete callback ids for events api methods
+        // Do not delete callback ids for events api methods
         if (!eventsApiResponseTypes.includes(message.type)) {
             delete callbacksStore[_id]
         }
@@ -318,6 +318,15 @@ export interface ApiClient {
     removeStorage(callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     setClientOptions(clientOptions: ClientOptions, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     setStrongholdPasswordClearInterval(interval: Duration, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
+
+    // Migration
+    getMigrationData(
+        node: string,
+        seed: string,
+        securityLevel: number,
+        initialAddressIndex: number,
+        callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void }
+    )
 
     onStrongholdStatusChange(callbacks: { onSuccess: (response: Event<StrongholdStatus>) => void, onError: (err: ErrorEventPayload) => void })
     onNewTransaction(callbacks: { onSuccess: (response: Event<TransactionEventPayload>) => void, onError: (err: ErrorEventPayload) => void })

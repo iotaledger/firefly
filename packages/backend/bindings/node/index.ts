@@ -26,6 +26,11 @@ import {
   reattach as _reattach
 } from '../../../shared/lib/typings/message'
 import {
+  getMigrationData as _getMigrationData,
+  createMigrationBundle as _createMigrationBundle,
+  sendMigrationBundle as _sendMigrationBundle,
+} from '../../../shared/lib/typings/migration'
+import {
   LoggerConfig,
   Duration,
   backup as _backup,
@@ -185,6 +190,22 @@ export const api = {
   setStrongholdPasswordClearInterval: function (interval: Duration): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _setStrongholdPasswordClearInterval(sendMessage, __ids, interval)
   },
+  
+  // Migration related methods
+  getMigrationData: function (seed: string, node: string, securityLevel?: number, initialAddressIndex?: number):
+    ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _getMigrationData(sendMessage, __ids, seed, node, securityLevel, initialAddressIndex)
+  },
+  createMigrationBundle: function (seed: string, address: string):
+    ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _createMigrationBundle(sendMessage, __ids, seed, address)
+  },
+  sendMigrationBundle: function (node: string, bundleHash: string, mwm: number):
+    ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _sendMigrationBundle(sendMessage, __ids, node, bundleHash, mwm)
+  },
+
+  // Event emitters 
   onError: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'ErrorThrown')
   },

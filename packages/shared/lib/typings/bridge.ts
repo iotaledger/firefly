@@ -3,6 +3,7 @@ import type { Address } from './address'
 import type { AccountIdentifier, Account, Balance, SyncedAccount } from './account'
 import type { Message } from './message'
 import type { StrongholdStatus } from './wallet'
+import type { MigrationData } from './migration'
 
 export interface Actor {
     destroy(): void
@@ -63,6 +64,9 @@ export enum ResponseTypes {
     StrongholdPasswordChanged = 'StrongholdPasswordChanged',
     UpdatedAllClientOptions = 'UpdatedAllClientOptions',
     StrongholdPasswordClearIntervalSet = 'StrongholdPasswordClearIntervalSet',
+    MigrationData = 'MigrationData',
+    CreatedMigrationBundle = 'CreatedMigrationBundle',
+    SentMigrationBundle = 'SentMigrationBundle'
 }
 
 export enum Actions {
@@ -102,6 +106,13 @@ export type LockStrongholdResponse = Response<ResponseTypes.LockedStronghold, vo
 export type StrongholdPasswordChangeResponse = Response<ResponseTypes.StrongholdPasswordChanged, void>
 export type UpdatedAllClientOptions = Response<ResponseTypes.UpdatedAllClientOptions, void>
 
+/**
+ * Migration responses
+ */
+export type MigrationDataResponse = Response<ResponseTypes.MigrationData, MigrationData>
+export type CreatedMigrationBundleResponse = Response<ResponseTypes.CreatedMigrationBundle, string>
+export type SentMigrationBundleResponse = Response<ResponseTypes.SentMigrationBundle, void>
+
 export type MessageResponse =
     RemovedAccountResponse
     | CreatedAccountResponse
@@ -134,5 +145,9 @@ export type MessageResponse =
     | LockStrongholdResponse
     | StrongholdStatusResponse
     | UpdatedAllClientOptions
+    // Migration types
+    | MigrationDataResponse 
+    | CreatedMigrationBundleResponse
+    | SentMigrationBundleResponse
 
 export type Bridge = (message: BridgeMessage) => Promise<string>
