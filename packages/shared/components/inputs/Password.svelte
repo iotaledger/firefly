@@ -12,7 +12,7 @@
     export let locale = undefined
     export let maxlength = undefined
     export let error = null
-    export let numeric = false
+    export let integer = false
     export let autofocus = false
     export let submitHandler = undefined
     export let disabled = false
@@ -64,7 +64,7 @@
             {type}
             bind:value
             {maxlength}
-            {numeric}
+            {integer}
             {autofocus}
             {disabled}
             placeholder={placeholder || locale('general.password')}

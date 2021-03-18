@@ -53,7 +53,7 @@
             items={Object.values(locales).map((locale) => ({ value: locale, label: locale }))} />
     </section>
     {#if $loggedIn}
-    <HR classes="pb-5 mt-5 justify-center" />
+        <HR classes="pb-5 mt-5 justify-center" />
         <section id="currency" class="w-3/4">
             <Text type="h4" classes="mb-3">{locale('views.settings.currency.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.currency.description')}</Text>

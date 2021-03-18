@@ -5,6 +5,7 @@
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import type { TransferProgressEventType } from 'shared/lib/typings/events'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
+    import { convertUnitsNoE } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
     import { isTransferring, transferState, WalletAccount } from 'shared/lib/wallet'
     import { getContext, onMount } from 'svelte'
@@ -24,11 +25,14 @@
 
     let selectedSendType = SEND_TYPE.EXTERNAL
     let unit = Unit.Mi
-    let amount = convertUnits($sendParams.amount, Unit.i, unit).toString()
+    let amount = $sendParams.amount === 0 ? '' : convertUnitsNoE($sendParams.amount, Unit.i, unit)
     let to = undefined
     let amountError = ''
     let addressPrefix = ($account ?? $accounts[0]).depositAddress.split('1')[0]
     let addressError = ''
+
+    // This looks odd but sets a reactive dependency on amount, so when it changes the error will clear
+    $: amount, amountError = ''
 
     let transferSteps: {
         [key in TransferProgressEventType | 'Complete']: {
@@ -95,38 +99,41 @@
             amountError = locale('error.send.amountNoFloat')
         } else {
             let amountAsFloat = Number.parseFloat(amount)
-            if (amountAsFloat.toString() !== amount) {
+            if (Number.isNaN(amountAsFloat)) {
                 amountError = locale('error.send.amountInvalidFormat')
-            } else if (amountAsFloat > from.balance) {
-                amountError = locale('error.send.amountTooHigh')
-            } else if (amountAsFloat <= 0) {
-                amountError = locale('error.send.amountZero')
-            }
-
-            if (selectedSendType === SEND_TYPE.EXTERNAL) {
-                // Validate address length
-                if ($sendParams.address.length !== ADDRESS_LENGTH) {
-                    addressError = locale('error.send.addressLength', {
-                        values: {
-                            length: ADDRESS_LENGTH,
-                        },
-                    })
-                } else if (!validateBech32Address(addressPrefix, $sendParams.address)) {
-                    addressError = locale('error.send.wrongAddressFormat', {
-                        values: {
-                            prefix: addressPrefix,
-                        },
-                    })
+            } else {
+                const amountAsI = convertUnits(amountAsFloat, unit, Unit.i)
+                if (amountAsI > from.balance) {
+                    amountError = locale('error.send.amountTooHigh')
+                } else if (amountAsI <= 0) {
+                    amountError = locale('error.send.amountZero')
                 }
-            }
 
-            if (!amountError && !addressError) {
-                $sendParams.amount = convertUnits(amountAsFloat, unit, Unit.i)
+                if (selectedSendType === SEND_TYPE.EXTERNAL) {
+                    // Validate address length
+                    if ($sendParams.address.length !== ADDRESS_LENGTH) {
+                        addressError = locale('error.send.addressLength', {
+                            values: {
+                                length: ADDRESS_LENGTH,
+                            },
+                        })
+                    } else if (!validateBech32Address(addressPrefix, $sendParams.address)) {
+                        addressError = locale('error.send.wrongAddressFormat', {
+                            values: {
+                                prefix: addressPrefix,
+                            },
+                        })
+                    }
+                }
 
-                if (selectedSendType === SEND_TYPE.INTERNAL) {
-                    internalTransfer(from.id, to.id, $sendParams.amount)
-                } else {
-                    send(from.id, $sendParams.address, $sendParams.amount)
+                if (!amountError && !addressError) {
+                    $sendParams.amount = amountAsI
+
+                    if (selectedSendType === SEND_TYPE.INTERNAL) {
+                        internalTransfer(from.id, to.id, $sendParams.amount)
+                    } else {
+                        send(from.id, $sendParams.address, $sendParams.amount)
+                    }
                 }
             }
         }
@@ -147,7 +154,7 @@
         }
     }
     const handleMaxClick = () => {
-        amount = convertUnits(from.balance, Unit.i, unit).toString()
+        amount = convertUnitsNoE(from.balance, Unit.i, unit)
     }
     onMount(() => {
         to = $accounts.length === 2 ? accountsDropdownItems[from.id === $accounts[0].id ? 1 : 0] : to
@@ -196,7 +203,8 @@
                         maxClick={handleMaxClick}
                         {locale}
                         classes="mb-2"
-                        disabled={$isTransferring} />
+                        disabled={$isTransferring}
+                        autofocus />
                     {#if selectedSendType === SEND_TYPE.INTERNAL}
                         <Dropdown
                             value={to?.label || ''}
