@@ -99,7 +99,7 @@
         },
         "import": {
             "title": "Import a wallet",
-            "body": "If you have a recovery phrase or Stronghold back up, you can import it here."
+            "body": "If you have an existing seed or wallet back up file, you can import it here."
         },
         "importFromText": {
             "title": "Restore your wallet with a recovery phrase or seed",

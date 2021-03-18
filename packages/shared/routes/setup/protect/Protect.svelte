@@ -1,5 +1,3 @@
-<script>
-, asyncCreateAccount</script>
 <script lang="typescript">
     import { Transition } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
