@@ -42,11 +42,11 @@ export { default as Spinner } from './Spinner.svelte'
 export { default as SpentAddress } from './SpentAddress.svelte'
 export { default as TransactionItem } from './TransactionItem.svelte'
 export { default as Tooltip } from './Tooltip.svelte'
+export { default as HR } from './HR.svelte'
 
 export * from './modals'
 // Charts
 export { default as Chart } from './charts/Index.svelte'
-export { default as ChartOption } from './charts/Option.svelte'
 export { default as BarChart } from './charts/Bar.svelte'
 export { default as LineChart } from './charts/Line.svelte'
 export * as ChartDefaults from './charts/defaults'

@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Checkbox, Dropdown, Radio, Text } from 'shared/components'
+    import { Button, Checkbox, Dropdown, HR, Radio, Text } from 'shared/components'
     import { loggedIn } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { DEFAULT_NODE, DEFAULT_NODES } from 'shared/lib/network'
@@ -169,7 +169,7 @@
             <Radio value={true} bind:group={automaticNodeSelection} label={locale('general.automaticNodeSelection')} />
             <Radio value={false} bind:group={automaticNodeSelection} label={locale('general.manualNodeSelection')} />
         </section>
-        <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
+        <HR classes="pb-5 mt-5 justify-center" />
         {#if !automaticNodeSelection}
             <section id="configureNodeList" class="w-3/4">
                 <Text type="h4" classes="mb-3">{locale('views.settings.configureNodeList.title')}</Text>
@@ -195,14 +195,14 @@
                     {locale('actions.removeNode')}
                 </Button>
             </section>
-            <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
-        {/if}
+            <HR classes="pb-5 mt-5 justify-center" />
+            {/if}
         <section id="proofOfWork" class="w-3/4 opacity-50">
             <Text type="h4" classes="mb-3">{locale('views.settings.proofOfWork.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.proofOfWork.description')}</Text>
             <Checkbox label={locale('actions.outsourceProofOfWork')} disabled bind:checked={outsourcePowChecked} />
         </section>
-        <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
+        <HR classes="pb-5 mt-5 justify-center" />
     {/if}
     <!-- TODO: Implement and enable -->
     <section id="developerMode" class="w-3/4 opacity-50">
@@ -210,34 +210,34 @@
         <Text type="p" secondary classes="mb-5">{locale('views.settings.developerMode.description')}</Text>
         <Checkbox label={locale('actions.enableDeveloperMode')} disabled bind:checked={$appSettings.developerMode} />
     </section>
-    <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
+    <HR classes="pb-5 mt-5 justify-center" />
     <section id="deepLinks" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.deepLinks.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.deepLinks.description')}</Text>
         <Checkbox label={locale('actions.enableDeepLinks')} bind:checked={deepLinkingChecked} />
     </section>
     {#if $loggedIn}
-        <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
+         <HR classes="pb-5 mt-5 justify-center" />
         <section id="resyncAccounts" class="w-3/4">
             <Text type="h4" classes="mb-3">{locale('views.settings.resyncAccounts.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.resyncAccounts.description')}</Text>
             <Button classes="w-1/4" onClick={syncAccounts} disabled={$isSyncing}>{locale('actions.syncAll')}</Button>
         </section>
     {/if}
-    <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
+    <HR classes="pb-5 mt-5 justify-center" />
     <section id="errorLog" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.errorLog.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.errorLog.description')}</Text>
         <Button classes="w-1/4" onClick={() => handleErrorLogClick()}>{locale('views.settings.errorLog.title')}</Button>
     </section>
-    <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
+    <HR classes="pb-5 mt-5 justify-center" />
     <section id="diagnostics" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.diagnostics.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.diagnostics.description')}</Text>
         <Button classes="w-1/4" onClick={() => handleDiagnosticsClick()}>{locale('views.settings.diagnostics.title')}</Button>
     </section>
-    <hr class="border-t border-gray-100 w-full border-solid pb-5 mt-5 justify-center" />
     {#if $loggedIn}
+       <HR classes="pb-5 mt-5 justify-center" />
         <!-- TODO: Implement state export -->
         <section id="stateExport" class="w-3/4 opacity-50">
             <Text type="h4" classes="mb-3">{locale('views.settings.stateExport.title')}</Text>

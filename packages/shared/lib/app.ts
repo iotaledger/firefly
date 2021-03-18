@@ -1,4 +1,5 @@
 import { get, writable } from 'svelte/store'
+import { persistent } from './helpers'
 import { localize } from './i18n'
 import { showAppNotification } from './notifications'
 import { closePopup } from './popup'

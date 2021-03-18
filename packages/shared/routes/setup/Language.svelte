@@ -34,8 +34,7 @@
                 value={locales[$appSettings.language]}
                 items={Object.values(locales).map((locale) => ({ value: locale, label: locale }))}
                 classes="mb-4" />
-            <!-- TODO: Implement and enable -->
-            <div class="pointer-events-none opacity-50">
+            <div>
                 <Text type="p" classes="mb-2 mt-4" smaller>{locale('general.appearance')}</Text>
                 <Radio value={false} bind:group={darkModeEnabled} label={locale('general.lightTheme')} />
                 <Radio value={true} bind:group={darkModeEnabled} label={locale('general.darkTheme')} />
