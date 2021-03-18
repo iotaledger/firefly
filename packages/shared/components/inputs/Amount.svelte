@@ -29,6 +29,16 @@
 <style type="text/scss">
     amount-input {
         nav {
+            &.active {
+                @apply opacity-100;
+                @apply pointer-events-auto;
+            }
+        }
+    }
+    amount-input {
+        &.disabled {
+            @apply pointer-events-none;
+            @apply opacity-50;
             border-radius: 10px;
             button {
                 &:hover,
@@ -41,8 +51,8 @@
 </style>
 
 <svelte:window on:click={clickOutside} />
-<Text type="p" classes="mb-2" smaller>{label || locale('general.amount')}</Text>
-<amount-input class="relative block {classes}">
+<Text type="p" classes="mb-2 {disabled && 'opacity-50'}" smaller>{label || locale('general.amount')}</Text>
+<amount-input class:disabled class="relative block {classes}">
     <Input
         {error}
         placeholder={label || locale('general.amount')}
@@ -68,11 +78,12 @@
             {unit}
             {#if !disabled && dropdown}
                 <nav
-                    class="absolute w-10 overflow-y-auto bg-white border border-solid border-gray-500 z-10 text-left top-10 right-0">
+                    class="absolute w-10 overflow-y-auto bg-white border border-solid border-gray-500 z-10 text-left top-10 right-0 rounded-lg bg-gray-50 dark:bg-gray-800 border border-solid border-gray-300 hover:border-gray-500 dark:border-gray-700 dark:hover:border-gray-700">
                     {#each Units as _unit}
                         <button
                             id={_unit}
-                            class="text-center w-full py-2"
+                            class="text-center w-full py-2 {unit === _unit && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'} 
+                            hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
                             on:click={() => onSelect(_unit)}
                             class:active={unit === _unit}>
                             <Text type="p" smaller>{_unit}</Text>

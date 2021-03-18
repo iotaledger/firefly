@@ -63,12 +63,12 @@
 </style>
 
 <dropzone
-    class="flex items-center justify-center p-7 w-full bg-gray-50 rounded-lg border border-solid border-gray-200"
+    class="flex items-center justify-center p-7 w-full rounded-lg border border-solid bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700"
     on:drop={onFile}
     on:dragenter={onEnter}
     on:dragleave={onLeave}
     on:dragover|preventDefault>
-    <content class:dropping class="flex flex-col items-center relative">
+    <content class:dropping class="flex flex-col items-center relative text-center">
         {#if dropping}
             <Text type="p" secondary smaller>{locale('actions.dropHere')}</Text>
         {:else if fileName}

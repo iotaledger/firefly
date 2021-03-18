@@ -37,7 +37,8 @@
     })
 </script>
 
-<div class="relative w-full h-full px-16 py-12 flex flex-1 bg-white {$settingsRoute !== SettingsRoutes.Init && 'pt-20'} ">
+<div
+    class="relative w-full h-full px-16 py-12 flex flex-1 bg-white dark:bg-gray-900 {$settingsRoute !== SettingsRoutes.Init && 'pt-20'} ">
     <button on:click={handleClose || closeSettings} class="absolute top-8 right-8">
         <Icon icon="close" classes="text-gray-800 dark:text-white" />
     </button>
