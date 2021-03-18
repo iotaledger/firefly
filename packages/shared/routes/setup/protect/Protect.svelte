@@ -1,9 +1,11 @@
+<script>
+, asyncCreateAccount</script>
 <script lang="typescript">
     import { Transition } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { activeProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { api, asyncSetStoragePassword } from 'shared/lib/wallet'
+    import { api, asyncSetStoragePassword, asyncVerifyMnemonic, asyncCreateAccount } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
     import { Pin, Protect } from './views/'
@@ -40,47 +42,6 @@
             break
     }
 
-    // Initialises wallet from imported mnemonic
-    // Verifies mnemonic syntactically
-    // Stores mnemonic
-    // Creates first account
-    function initialiseWallet(input: string): Promise<void> {
-        return new Promise((resolve, reject) => {
-            api.verifyMnemonic(input, {
-                onSuccess() {
-                    api.storeMnemonic(input, {
-                        onSuccess() {
-                            api.createAccount(
-                                {
-                                    signerType: { type: 'Stronghold' },
-                                    clientOptions: {
-                                        node: DEFAULT_NODE,
-                                        nodes: DEFAULT_NODES,
-                                        network: $network,
-                                    },
-                                },
-                                {
-                                    onSuccess() {
-                                        resolve()
-                                    },
-                                    onError(error) {
-                                        reject(error)
-                                    },
-                                }
-                            )
-                        },
-                        onError(error) {
-                            reject(error)
-                        },
-                    })
-                },
-                onError(error) {
-                    reject(error)
-                },
-            })
-        })
-    }
-
     const _next = async (event) => {
         let nextState
         let params = event.detail || {}
@@ -110,7 +71,15 @@
                     await asyncSetStoragePassword(pin)
 
                     if ($walletSetupType === SetupType.Mnemonic) {
-                        await initialiseWallet(get(mnemonic).join(' '))
+                        // Initialises wallet from imported mnemonic
+                        // Verifies mnemonic syntactically
+                        // Stores mnemonic
+                        // Creates first account
+
+                        const m = get(mnemonic).join(' ')
+                        await asyncVerifyMnemonic(m)
+                        await asyncStoreMnemonic(m)
+                        await asyncCreateAccount()
 
                         // Clear mnemonic
                         mnemonic.set(null)

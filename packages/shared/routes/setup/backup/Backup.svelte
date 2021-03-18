@@ -3,19 +3,9 @@
     import { mnemonic, strongholdPassword } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { newProfile, updateProfile } from 'shared/lib/profile'
+    import { updateProfile } from 'shared/lib/profile'
     import { getDefaultStrongholdName } from 'shared/lib/utils'
-    import {
-        initialise,
-        getStoragePath,
-        api,
-        asyncBackup,
-        asyncCreateAccount,
-        asyncStoreMnemonic,
-        asyncVerifyMnemonic,
-        requestMnemonic,
-        asyncSetStrongholdPassword,
-    } from 'shared/lib/wallet'
+    import { asyncBackup, asyncCreateAccount, asyncStoreMnemonic, requestMnemonic } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
     import { Backup, BackupToFile, RecoveryPhrase, VerifyRecoveryPhrase } from './views/'
