@@ -36,7 +36,7 @@
                 {locale('actions.continue')}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center p-16" style="background-color: #FFF8EF">
+        <div slot="rightpane" class="w-full h-full flex justify-center p-16 bg-pastel-blue dark:bg-gray-900">
             <Illustration illustration="import-from-file-password-desktop" width="auto" height="auto" />
         </div>
     </OnboardingLayout>

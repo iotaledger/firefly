@@ -47,7 +47,7 @@
         <div slot="leftpane__action" class="flex flex-row justify-end items-center">
             <Button disabled={loading} onClick={() => handleContinueClick()}>{locale('actions.beginTransfer')}</Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex p-16">
+        <div slot="rightpane" class="w-full h-full flex p-16 bg-pastel-blue dark:bg-gray-900">
             <Illustration width="100%" illustration="migrate-desktop" />
         </div>
     </OnboardingLayout>

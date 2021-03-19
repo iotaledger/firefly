@@ -84,7 +84,7 @@
                 {locale('actions.savePassword')}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center">
+        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-pastel-yellow dark:bg-gray-900">
             <Illustration illustration="password-desktop" height="100%" width="auto" classes="h-full object-cover object-left" />
         </div>
     </OnboardingLayout>

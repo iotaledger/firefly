@@ -38,7 +38,7 @@
         <div slot="leftpane__action">
             <Button classes="w-full" onClick={() => handleContinueClick()}>{locale('actions.finishSetup')}</Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center p-16" style="background-color: #F3FCFE">
+        <div slot="rightpane" class="w-full h-full flex justify-center p-16 bg-pastel-blue dark:bg-gray-900">
             <Illustration illustration="congratulations-desktop" width="auto" height="auto" />
         </div>
     </OnboardingLayout>

@@ -28,7 +28,7 @@
         <div slot="leftpane__action">
             <Button classes="w-full" onClick={() => handleContinueClick()} autofocus>{locale('actions.continue')}</Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center p-16" style="background-color: #EFF0FE;">
+        <div slot="rightpane" class="w-full h-full flex justify-center p-16 bg-pastel-purple dark:bg-gray-900">
             <Illustration illustration="protect-desktop" width="auto" height="auto" />
         </div>
     </OnboardingLayout>

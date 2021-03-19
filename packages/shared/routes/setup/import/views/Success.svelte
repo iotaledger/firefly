@@ -33,6 +33,6 @@
             <Button classes="w-full" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
         <!-- TODO: missing illustration -->
-        <div slot="rightpane" class="w-full h-full" />
+        <div slot="rightpane" class="w-full h-full bg-pastel-green dark:bg-gray-900" />
     </OnboardingLayout>
 {/if}

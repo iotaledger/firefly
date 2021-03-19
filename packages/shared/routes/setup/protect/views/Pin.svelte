@@ -44,7 +44,7 @@
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
             <Button classes="flex-1" disabled={!valid || busy} onClick={() => onSubmit()}>{locale(confirmInput ? 'actions.confirmPin' : 'actions.setPin')}</Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center p-16" style="background-color: #FFF3F8;">
+        <div slot="rightpane" class="w-full h-full flex justify-center p-16 bg-pastel-pink dark:bg-gray-900">
             {#if !confirmInput}
                 <Illustration width="auto" height="auto" illustration="pin-desktop" />
             {:else}
