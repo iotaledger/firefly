@@ -110,8 +110,7 @@ function createWindow() {
         width: 1280,
         height: 720,
         titleBarStyle: 'hidden',
-        transparent: true,
-        frame: false,
+        frame: process.platform === 'linux',
         webPreferences: {
             ...defaultWebPreferences,
             preload: paths.preload,
@@ -283,7 +282,7 @@ ipcMain.handle('diagnostics', (_e) => {
 
 // Os
 ipcMain.handle('get-os', (_e) => {
-    return os.platform()
+    return process.platform
 })
 
 /**
