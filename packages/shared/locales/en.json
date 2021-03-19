@@ -132,19 +132,19 @@
             },
             "security": {
                 "title": "Security",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Change your password and adjust security-related settings"
             },
             "advancedSettings": {
                 "title": "Advanced Settings",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Tools and manual settings for technical users"
             },
             "helpAndInfo": {
                 "title": "Help & Information",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Find the answer to a question or get help with an issue"
             },
             "profile": {
                 "title": "Profile",
-                "description": ""
+                "description": "Change your profile name or set an avatar"
             },
             "sync": {
                 "title": "Sync accounts",
@@ -160,27 +160,27 @@
             },
             "currency": {
                 "title": "Currency",
-                "description": ""
+                "description": "Adjusts balance conversion and updates chart options"
             },
             "notifications": {
                 "title": "Notifications",
-                "description": ""
+                "description": "System notifications for payments"
             },
             "exportStronghold": {
-                "title": "Export Stronghold",
-                "description": ""
+                "title": "Export Backup",
+                "description": "Exports a complete encrypted backup of your wallet and latest transaction history"
             },
             "appLock": {
-                "title": "App Lock",
-                "description": ""
+                "title": "Automatic Lock",
+                "description": "Time elapsed before your wallet locks and logs you out"
             },
             "changePassword": {
                 "title": "Change password",
-                "description": ""
+                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
             },
             "changePincode": {
                 "title": "Change PIN code",
-                "description": "",
+                "description": "Your pin keeps your balance and transactions private",
                 "currentPincode": "Current PIN",
                 "newPincode": "New PIN",
                 "confirmNewPincode": "Confirm new PIN",
@@ -192,7 +192,7 @@
             },
             "deleteProfile": {
                 "title": "Delete profile",
-                "description": ""
+                "description": "Deletes your your entire wallet, profile and transaction history. Make sure you have a backup."
             },
             "deepLinks": {
                 "title": "Deep links",
