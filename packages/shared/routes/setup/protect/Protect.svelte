@@ -91,8 +91,6 @@
                         type: 'error',
                         message: locale(err.error),
                     })
-
-                    console.log('Error', err)
                 } finally {
                     busy = false
                 }
