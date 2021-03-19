@@ -279,7 +279,7 @@ dependencies = [
 [[package]]
 name = "bee-common"
 version = "0.3.1-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#22c38d0046cf28258b29d0204b17e9aa573a014c"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#a65bfad5dfdc8aa46d34b6b58899007a43d72340"
 dependencies = [
  "autocfg",
  "chrono",
@@ -304,7 +304,7 @@ dependencies = [
 [[package]]
 name = "bee-crypto"
 version = "0.2.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#22c38d0046cf28258b29d0204b17e9aa573a014c"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#a65bfad5dfdc8aa46d34b6b58899007a43d72340"
 dependencies = [
  "bee-ternary 0.4.1-alpha",
  "byteorder",
@@ -316,12 +316,22 @@ dependencies = [
 [[package]]
 name = "bee-ledger"
 version = "0.1.0-alpha"
+source = "git+https://github.com/iotaledger/bee.git?rev=217b5944b5e17fe5800955d212cfe8dddd992482#217b5944b5e17fe5800955d212cfe8dddd992482"
+dependencies = [
+ "bee-common 0.3.1-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
+ "bee-message 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=217b5944b5e17fe5800955d212cfe8dddd992482)",
+ "thiserror",
+]
+
+[[package]]
+name = "bee-ledger"
+version = "0.1.0-alpha"
 source = "git+https://github.com/iotaledger/bee.git?rev=26215e3af88af4c54f460df7cffc39d26fdd6e05#26215e3af88af4c54f460df7cffc39d26fdd6e05"
 dependencies = [
  "async-trait",
  "bee-common 0.3.1-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
  "bee-crypto 0.2.0-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
- "bee-message",
+ "bee-message 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=26215e3af88af4c54f460df7cffc39d26fdd6e05)",
  "bee-runtime",
  "bee-snapshot",
  "bee-storage",
@@ -342,17 +352,52 @@ dependencies = [
 [[package]]
 name = "bee-message"
 version = "0.1.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?rev=26215e3af88af4c54f460df7cffc39d26fdd6e05#26215e3af88af4c54f460df7cffc39d26fdd6e05"
+source = "git+https://github.com/iotaledger/bee.git?rev=217b5944b5e17fe5800955d212cfe8dddd992482#217b5944b5e17fe5800955d212cfe8dddd992482"
 dependencies = [
  "bech32",
  "bee-common 0.3.1-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
- "bee-pow",
+ "bee-pow 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=217b5944b5e17fe5800955d212cfe8dddd992482)",
  "digest 0.9.0",
  "hex",
  "iota-crypto 0.3.0 (git+https://github.com/iotaledger/crypto.rs?rev=c3bf565eba62d0b81144174c2ff917bfde282e49)",
  "ref-cast",
  "serde 1.0.124",
  "thiserror",
+]
+
+[[package]]
+name = "bee-message"
+version = "0.1.0-alpha"
+source = "git+https://github.com/iotaledger/bee.git?rev=26215e3af88af4c54f460df7cffc39d26fdd6e05#26215e3af88af4c54f460df7cffc39d26fdd6e05"
+dependencies = [
+ "bech32",
+ "bee-common 0.3.1-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
+ "bee-pow 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=26215e3af88af4c54f460df7cffc39d26fdd6e05)",
+ "digest 0.9.0",
+ "hex",
+ "iota-crypto 0.3.0 (git+https://github.com/iotaledger/crypto.rs?rev=c3bf565eba62d0b81144174c2ff917bfde282e49)",
+ "ref-cast",
+ "serde 1.0.124",
+ "thiserror",
+]
+
+[[package]]
+name = "bee-network"
+version = "0.1.0-alpha"
+source = "git+https://github.com/iotaledger/bee.git?rev=217b5944b5e17fe5800955d212cfe8dddd992482#217b5944b5e17fe5800955d212cfe8dddd992482"
+dependencies = [
+ "async-trait",
+ "bee-runtime",
+ "futures",
+ "lazy_static",
+ "libp2p",
+ "log",
+ "rand 0.8.3",
+ "serde 1.0.124",
+ "thiserror",
+ "tokio",
+ "tokio-stream",
+ "url",
 ]
 
 [[package]]
@@ -377,12 +422,32 @@ dependencies = [
 [[package]]
 name = "bee-pow"
 version = "0.1.0-alpha"
+source = "git+https://github.com/iotaledger/bee.git?rev=217b5944b5e17fe5800955d212cfe8dddd992482#217b5944b5e17fe5800955d212cfe8dddd992482"
+dependencies = [
+ "bee-crypto 0.2.0-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
+ "bee-ternary 0.4.1-alpha",
+ "iota-crypto 0.3.0 (git+https://github.com/iotaledger/crypto.rs?rev=c3bf565eba62d0b81144174c2ff917bfde282e49)",
+ "thiserror",
+]
+
+[[package]]
+name = "bee-pow"
+version = "0.1.0-alpha"
 source = "git+https://github.com/iotaledger/bee.git?rev=26215e3af88af4c54f460df7cffc39d26fdd6e05#26215e3af88af4c54f460df7cffc39d26fdd6e05"
 dependencies = [
  "bee-crypto 0.2.0-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
  "bee-ternary 0.4.1-alpha",
  "iota-crypto 0.3.0 (git+https://github.com/iotaledger/crypto.rs?rev=c3bf565eba62d0b81144174c2ff917bfde282e49)",
  "thiserror",
+]
+
+[[package]]
+name = "bee-protocol"
+version = "0.1.0-alpha"
+source = "git+https://github.com/iotaledger/bee.git?rev=217b5944b5e17fe5800955d212cfe8dddd992482#217b5944b5e17fe5800955d212cfe8dddd992482"
+dependencies = [
+ "bee-message 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=217b5944b5e17fe5800955d212cfe8dddd992482)",
+ "bee-network 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=217b5944b5e17fe5800955d212cfe8dddd992482)",
 ]
 
 [[package]]
@@ -395,9 +460,9 @@ dependencies = [
  "async-trait",
  "bee-common 0.3.1-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
  "bee-crypto 0.2.0-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
- "bee-ledger",
- "bee-message",
- "bee-network",
+ "bee-ledger 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=26215e3af88af4c54f460df7cffc39d26fdd6e05)",
+ "bee-message 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=26215e3af88af4c54f460df7cffc39d26fdd6e05)",
+ "bee-network 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=26215e3af88af4c54f460df7cffc39d26fdd6e05)",
  "bee-runtime",
  "bee-snapshot",
  "bee-storage",
@@ -424,12 +489,26 @@ dependencies = [
 [[package]]
 name = "bee-rest-api"
 version = "0.1.0-alpha"
+source = "git+https://github.com/iotaledger/bee.git?rev=217b5944b5e17fe5800955d212cfe8dddd992482#217b5944b5e17fe5800955d212cfe8dddd992482"
+dependencies = [
+ "bee-ledger 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=217b5944b5e17fe5800955d212cfe8dddd992482)",
+ "bee-message 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=217b5944b5e17fe5800955d212cfe8dddd992482)",
+ "bee-pow 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=217b5944b5e17fe5800955d212cfe8dddd992482)",
+ "bee-protocol 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=217b5944b5e17fe5800955d212cfe8dddd992482)",
+ "hex",
+ "serde 1.0.124",
+ "serde_json",
+]
+
+[[package]]
+name = "bee-rest-api"
+version = "0.1.0-alpha"
 source = "git+https://github.com/iotaledger/bee.git?rev=26215e3af88af4c54f460df7cffc39d26fdd6e05#26215e3af88af4c54f460df7cffc39d26fdd6e05"
 dependencies = [
- "bee-ledger",
- "bee-message",
- "bee-pow",
- "bee-protocol",
+ "bee-ledger 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=26215e3af88af4c54f460df7cffc39d26fdd6e05)",
+ "bee-message 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=26215e3af88af4c54f460df7cffc39d26fdd6e05)",
+ "bee-pow 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=26215e3af88af4c54f460df7cffc39d26fdd6e05)",
+ "bee-protocol 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=26215e3af88af4c54f460df7cffc39d26fdd6e05)",
  "bee-runtime",
  "hex",
  "serde 1.0.124",
@@ -439,7 +518,7 @@ dependencies = [
 [[package]]
 name = "bee-runtime"
 version = "0.1.1-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#22c38d0046cf28258b29d0204b17e9aa573a014c"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#a65bfad5dfdc8aa46d34b6b58899007a43d72340"
 dependencies = [
  "async-trait",
  "bee-storage",
@@ -455,7 +534,7 @@ source = "git+https://github.com/iotaledger/bee.git?rev=26215e3af88af4c54f460df7
 dependencies = [
  "async-trait",
  "bee-common 0.3.1-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
- "bee-message",
+ "bee-message 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=26215e3af88af4c54f460df7cffc39d26fdd6e05)",
  "bee-runtime",
  "bee-storage",
  "chrono",
@@ -471,7 +550,7 @@ dependencies = [
 [[package]]
 name = "bee-storage"
 version = "0.2.0-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#22c38d0046cf28258b29d0204b17e9aa573a014c"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#a65bfad5dfdc8aa46d34b6b58899007a43d72340"
 dependencies = [
  "async-trait",
  "futures",
@@ -485,7 +564,7 @@ source = "git+https://github.com/iotaledger/bee.git?rev=26215e3af88af4c54f460df7
 dependencies = [
  "async-trait",
  "bee-common 0.3.1-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
- "bee-message",
+ "bee-message 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=26215e3af88af4c54f460df7cffc39d26fdd6e05)",
  "bee-runtime",
  "bee-snapshot",
  "bee-storage",
@@ -514,7 +593,7 @@ dependencies = [
 [[package]]
 name = "bee-ternary"
 version = "0.4.1-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#22c38d0046cf28258b29d0204b17e9aa573a014c"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#a65bfad5dfdc8aa46d34b6b58899007a43d72340"
 dependencies = [
  "autocfg",
  "num-traits 0.2.14",
@@ -1394,12 +1473,13 @@ dependencies = [
 
 [[package]]
 name = "http-body"
-version = "0.4.0"
+version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2861bd27ee074e5ee891e8b539837a9430012e249d7f0ca2d795650f579c1994"
+checksum = "5dfb77c123b4e2f72a2069aeae0b4b4949cc7e966df277813fc16347e7549737"
 dependencies = [
  "bytes",
  "http",
+ "pin-project-lite",
 ]
 
 [[package]]
@@ -1541,9 +1621,9 @@ dependencies = [
  "async-trait",
  "bee-common 0.3.1-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
  "bee-crypto 0.2.0-alpha (git+https://github.com/iotaledger/bee.git?rev=c42171ff33c80cc2efb183e244dc79b7f58d9ac4)",
- "bee-message",
- "bee-pow",
- "bee-rest-api",
+ "bee-message 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=26215e3af88af4c54f460df7cffc39d26fdd6e05)",
+ "bee-pow 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=26215e3af88af4c54f460df7cffc39d26fdd6e05)",
+ "bee-rest-api 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=26215e3af88af4c54f460df7cffc39d26fdd6e05)",
  "chrono",
  "futures",
  "hex",
@@ -1564,14 +1644,14 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "0.5.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#72a62bc4934d736677eefbfb66c678bbebe1c814"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#23b8faf6ba7cce4a58fb47bb302bd56c4430758c"
 dependencies = [
  "async-trait",
  "bee-common 0.3.1-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
  "bee-crypto 0.2.0-alpha (git+https://github.com/iotaledger/bee.git?rev=c42171ff33c80cc2efb183e244dc79b7f58d9ac4)",
- "bee-message",
- "bee-pow",
- "bee-rest-api",
+ "bee-message 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=217b5944b5e17fe5800955d212cfe8dddd992482)",
+ "bee-pow 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=217b5944b5e17fe5800955d212cfe8dddd992482)",
+ "bee-rest-api 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=217b5944b5e17fe5800955d212cfe8dddd992482)",
  "chrono",
  "hex",
  "iota-crypto 0.3.0 (git+https://github.com/iotaledger/crypto.rs?rev=b849861b86c3f7357b7477de4253b7352b363627)",
@@ -1591,19 +1671,19 @@ version = "0.2.0-alpha.3"
 source = "git+https://github.com/iotaledger/iota.rs?rev=f837a9df7c0f3cecbff87eb6ac3d458d1e50dee0#f837a9df7c0f3cecbff87eb6ac3d458d1e50dee0"
 dependencies = [
  "bee-common 0.3.1-alpha (git+https://github.com/iotaledger/bee.git?rev=c42171ff33c80cc2efb183e244dc79b7f58d9ac4)",
- "bee-message",
- "bee-pow",
+ "bee-message 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=26215e3af88af4c54f460df7cffc39d26fdd6e05)",
+ "bee-pow 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=26215e3af88af4c54f460df7cffc39d26fdd6e05)",
  "iota-client 0.5.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?rev=f837a9df7c0f3cecbff87eb6ac3d458d1e50dee0)",
 ]
 
 [[package]]
 name = "iota-core"
 version = "0.2.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#72a62bc4934d736677eefbfb66c678bbebe1c814"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#23b8faf6ba7cce4a58fb47bb302bd56c4430758c"
 dependencies = [
  "bee-common 0.3.1-alpha (git+https://github.com/iotaledger/bee.git?rev=c42171ff33c80cc2efb183e244dc79b7f58d9ac4)",
- "bee-message",
- "bee-pow",
+ "bee-message 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=217b5944b5e17fe5800955d212cfe8dddd992482)",
+ "bee-pow 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=217b5944b5e17fe5800955d212cfe8dddd992482)",
  "iota-client 0.5.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?branch=dev)",
 ]
 
@@ -1662,7 +1742,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#c62b49201493acfda3e36d263b1190bf13beaca1"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#43f055b4e044ce32a10549a9e134d2386833ed1e"
 dependencies = [
  "async-trait",
  "backtrace",
@@ -1713,9 +1793,9 @@ checksum = "dd25036021b0de88a0aff6b850051563c6516d0bf53f8638938edbb9de732736"
 
 [[package]]
 name = "js-sys"
-version = "0.3.48"
+version = "0.3.49"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dc9f84f9b115ce7843d60706df1422a916680bfdfcbdb0447c5614ff9d7e4d78"
+checksum = "dc15e39392125075f60c95ba416f5381ff6c3a948ff02ab12464715adf56c821"
 dependencies = [
  "wasm-bindgen",
 ]
@@ -1741,9 +1821,9 @@ dependencies = [
 
 [[package]]
 name = "libc"
-version = "0.2.89"
+version = "0.2.90"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "538c092e5586f4cdd7dd8078c4a79220e3e168880218124dcbce860f0ea938c6"
+checksum = "ba4aede83fc3617411dc6993bc8c70919750c1c257c6ca6a502aed6e0e2394ae"
 
 [[package]]
 name = "libp2p"
@@ -2489,9 +2569,9 @@ dependencies = [
 
 [[package]]
 name = "pollster"
-version = "0.2.1"
+version = "0.2.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1a0c427c464eaca5923b642b3b346792b9c98edd91026aa6a753435e42d2a07b"
+checksum = "75721b4c756dd61e006f1d3fe1e44bda75ad3a3d8eaa45e9f32943cbe635e663"
 
 [[package]]
 name = "poly1305"
@@ -3765,9 +3845,9 @@ checksum = "fd6fbd9a79829dd1ad0cc20627bf1ed606756a7f77edff7b66b7064f9cb327c6"
 
 [[package]]
 name = "wasm-bindgen"
-version = "0.2.71"
+version = "0.2.72"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7ee1280240b7c461d6a0071313e08f34a60b0365f14260362e5a2b17d1d31aa7"
+checksum = "8fe8f61dba8e5d645a4d8132dc7a0a66861ed5e1045d2c0ed940fab33bac0fbe"
 dependencies = [
  "cfg-if 1.0.0",
  "serde 1.0.124",
@@ -3777,9 +3857,9 @@ dependencies = [
 
 [[package]]
 name = "wasm-bindgen-backend"
-version = "0.2.71"
+version = "0.2.72"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5b7d8b6942b8bb3a9b0e73fc79b98095a27de6fa247615e59d096754a3bc2aa8"
+checksum = "046ceba58ff062da072c7cb4ba5b22a37f00a302483f7e2a6cdc18fedbdc1fd3"
 dependencies = [
  "bumpalo",
  "lazy_static",
@@ -3792,9 +3872,9 @@ dependencies = [
 
 [[package]]
 name = "wasm-bindgen-futures"
-version = "0.4.21"
+version = "0.4.22"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8e67a5806118af01f0d9045915676b22aaebecf4178ae7021bc171dab0b897ab"
+checksum = "73157efb9af26fb564bb59a009afd1c7c334a44db171d280690d0c3faaec3468"
 dependencies = [
  "cfg-if 1.0.0",
  "js-sys",
@@ -3804,9 +3884,9 @@ dependencies = [
 
 [[package]]
 name = "wasm-bindgen-macro"
-version = "0.2.71"
+version = "0.2.72"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e5ac38da8ef716661f0f36c0d8320b89028efe10c7c0afde65baffb496ce0d3b"
+checksum = "0ef9aa01d36cda046f797c57959ff5f3c615c9cc63997a8d545831ec7976819b"
 dependencies = [
  "quote 1.0.9",
  "wasm-bindgen-macro-support",
@@ -3814,9 +3894,9 @@ dependencies = [
 
 [[package]]
 name = "wasm-bindgen-macro-support"
-version = "0.2.71"
+version = "0.2.72"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cc053ec74d454df287b9374ee8abb36ffd5acb95ba87da3ba5b7d3fe20eb401e"
+checksum = "96eb45c1b2ee33545a813a92dbb53856418bf7eb54ab34f7f7ff1448a5b3735d"
 dependencies = [
  "proc-macro2 1.0.24",
  "quote 1.0.9",
@@ -3827,9 +3907,9 @@ dependencies = [
 
 [[package]]
 name = "wasm-bindgen-shared"
-version = "0.2.71"
+version = "0.2.72"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7d6f8ec44822dd71f5f221a5847fb34acd9060535c1211b70a05844c0f6383b1"
+checksum = "b7148f4696fb4960a346eaa60bbfb42a1ac4ebba21f750f75fc1375b098d5ffa"
 
 [[package]]
 name = "wasm-timer"
@@ -3848,9 +3928,9 @@ dependencies = [
 
 [[package]]
 name = "web-sys"
-version = "0.3.48"
+version = "0.3.49"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ec600b26223b2948cedfde2a0aa6756dcf1fef616f43d7b3097aaf53a6c4d92b"
+checksum = "59fe19d70f5dacc03f6e46777213facae5ac3801575d56ca6cbd4c93dcd12310"
 dependencies = [
  "js-sys",
  "wasm-bindgen",

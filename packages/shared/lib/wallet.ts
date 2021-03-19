@@ -138,6 +138,19 @@ export const initialise = (id: string, storagePath: string): void => {
 }
 
 /**
+ * Removes event listeners for active actor
+ * 
+ * @method removeEventListeners
+ * 
+ * @param {string} id 
+ * 
+ * @returns {void}
+ */
+export const removeEventListeners = (id: string): void => {
+    actors[id].removeEventListeners()
+};
+
+/**
  * Destroys an actor & remove it from actors state
  *
  * @method destroyActor
