@@ -57,7 +57,7 @@
         @apply m-0;
     }
     input {
-        &.disabled {
+        &:disabled {
             @apply pointer-events-none;
             @apply opacity-50;
         }
