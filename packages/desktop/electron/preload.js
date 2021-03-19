@@ -46,13 +46,21 @@ const Electron = {
      * @returns {Promise}
      */
     getDiagnostics: () => ipcRenderer.invoke('diagnostics'),
-     /**
-     * Starts an update of the application
+    /**
+     * Gets os information for the system
      *
-     * @method updateDownload
+     * @method getOS
      *
-     * @returns void
+     * @returns {Promise}
      */
+    getOS: () => ipcRenderer.invoke('get-os'),
+    /**
+    * Starts an update of the application
+    *
+    * @method updateDownload
+    *
+    * @returns void
+    */
     updateDownload: () => ipcRenderer.invoke('update-download'),
     /**
      * Cancels an update of the application
@@ -92,6 +100,34 @@ const Electron = {
         }
     },
     /**
+     * Show the popup menu
+     * @returns {undefined}
+     */
+    popupMenu: () => {
+        ipcRenderer.invoke('menu-popup')
+    },
+    /**
+     * Minimize the app
+     * @returns {undefined}
+     */
+    minimize: () => {
+        ipcRenderer.invoke('minimize')
+    },
+    /**
+     * Maximize the app
+     * @returns {undefined}
+     */
+    maximize: () => {
+        ipcRenderer.invoke('maximize')
+    },
+    /**
+     * Close the app
+     * @returns {undefined}
+     */
+    close: () => {
+        ipcRenderer.invoke('close')
+    },
+    /*
      * Opens url and checks against acceptlist
      * @param {string} url - Target url
      * @returns {undefined}
@@ -122,7 +158,7 @@ const Electron = {
      * @returns 
      */
     saveRecoveryKit: (recoverKitData) => {
-        return ipcRenderer.invoke('show-save-dialog', { 
+        return ipcRenderer.invoke('show-save-dialog', {
             properties: ['createDirectory', 'showOverwriteConfirmation'],
             defaultPath: "firefly-recovery-kit.pdf",
             filters: [
