@@ -100,6 +100,7 @@
     body {
         @apply bg-white;
         @apply select-none;
+        -webkit-user-drag: none;
         &.scheme-dark {
             @apply bg-gray-900;
         }
@@ -169,4 +170,6 @@
     {/if}
 
     <ToastContainer />
+
+    <div style="-webkit-app-region: drag" class="w-full h-8 fixed left-20" />
 {/if}
