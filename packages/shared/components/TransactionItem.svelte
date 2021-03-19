@@ -24,9 +24,16 @@
     )} ${CurrencyTypes.USD}`
 
     let showTooltip = false
+    let errorBox
+    let tooltipTop,
+        tooltipLeft,
+        iconWidth = 0
 
     function toggleShow() {
         showTooltip = !showTooltip
+        iconWidth = errorBox.offsetWidth/2
+        tooltipLeft = errorBox.getBoundingClientRect().left
+        tooltipTop = errorBox.getBoundingClientRect().top
     }
 </script>
 
@@ -48,12 +55,12 @@
                 </Text>
                 <Icon icon="status-success" classes="text-white bg-green-600 rounded-full ml-3" />
             {:else if status === -1}
-                <div class="flex items-center relative" on:mouseenter={toggleShow} on:mouseleave={toggleShow}>
-                    <Text type="p" secondary smaller>{locale('views.migrate.migrationFailed')}</Text>
-                    <div class="relative">
-                        <Icon icon="status-error" classes="text-white bg-red-500 rounded-full ml-3" />
+                <div class="flex items-center relative">
+                    <Text type="p" secondary smaller classes="mr-3">{locale('views.migrate.migrationFailed')}</Text>
+                    <div class="relative" on:mouseenter={toggleShow} on:mouseleave={toggleShow} bind:this={errorBox}>
+                        <Icon icon="status-error" classes="text-white bg-red-500 rounded-full " />
                         {#if showTooltip && errorText}
-                            <Tooltip>
+                            <Tooltip topOffset={tooltipTop} leftOffset={tooltipLeft} elementWidth={iconWidth}>
                                 <Text>{errorText}</Text>
                             </Tooltip>
                         {/if}

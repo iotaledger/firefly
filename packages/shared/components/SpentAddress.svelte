@@ -36,13 +36,11 @@
 
     $: errorMessage = disabled ? locale('views.secureSpentAddresses.error') : null
 
-    function toggleShow(event) {
+    function toggleShow() {
         showTooltip = !showTooltip
-        let coords = errorBox.getBoundingClientRect()
-        iconWidth = errorBox.offsetWidth / 2
-        tooltipLeft = coords.left
-        tooltipTop = coords.top
-        console.log(iconWidth)
+        iconWidth = errorBox.offsetWidth/2
+        tooltipLeft = errorBox.getBoundingClientRect().left
+        tooltipTop = errorBox.getBoundingClientRect().top
     }
 </script>
 
@@ -93,10 +91,10 @@
                 {/each}
             </risk-meter>
         {:else if disabled}
-            <div class="flex items-center static" bind:this={errorBox} on:mouseenter={toggleShow} on:mouseleave={toggleShow}>
-                <Icon icon="info" classes="text-red-500 bg-white rounded-full ml-3" />
+            <div class="flex items-center static" on:mouseenter={toggleShow} on:mouseleave={toggleShow} bind:this={errorBox}>
+                <Icon icon="info" classes="text-red-500 bg-white rounded-full" />
                 {#if showTooltip && errorMessage}
-                    <Tooltip top={tooltipTop} left={tooltipLeft} elementWidth={iconWidth}>
+                    <Tooltip topOffset={tooltipTop} leftOffset={tooltipLeft} elementWidth={iconWidth}>
                         <Text>{errorMessage}</Text>
                     </Tooltip>
                 {/if}
