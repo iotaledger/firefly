@@ -42,8 +42,8 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body2": "Keep your PIN safe!"
+            "body1": "본인 만 지갑을 사용할 수 있도록 로그인 PIN을 설정하세요.",
+            "body2": "PIN을 안전하게 보관하세요!"
         },
         "pin": {
             "title": "PIN 번호 설정",
@@ -406,7 +406,7 @@
         "updateFirefly": "'파이어플라이' 업데이트하기",
         "restartNow": "지금 다시 시작",
         "saveBackup": "백업 저장하기",
-        "customizeAcount": "Customise account",
+        "customizeAcount": "계정 설정",
         "viewAddressHistory": "주소이력 보기",
         "deleteAccount": "계정 삭제하기",
         "max": "최대",
@@ -451,7 +451,7 @@
         "moveFundsBetweenAccounts": "계정간 자금 이체하기",
         "sendTokensToAddress": "특정주소로 토큰 보내기",
         "manageAccount": "계정 관리하기",
-        "customizeAcount": "Customize your account",
+        "customizeAcount": "사용자 계정 설정",
         "account": "계정",
         "sendingToAddress": "특정주소로 보내는 중",
         "amount": "수량",
@@ -500,6 +500,9 @@
         "inputAddress": "주소 입력",
         "receiveAddress": "입금 주소",
         "date": "날짜",
+        "status": "상태",
+        "confirmed": "Confirmed",
+        "pending": "Pending",
         "noAccounts": "계정이 없습니다. 생성해 주세요.",
         "loadingAccounts": "로딩 중. 잠시만 기다려 주세요...",
         "addProfile": "프로필 추가",

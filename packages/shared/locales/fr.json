@@ -34,7 +34,7 @@
         "setup": {
             "title": "Installez votre portefeuille",
             "body": "Vous pouvez créer un nouveau portefeuille ou importer un portefeuille existant.",
-            "profileName": "Nom du profil"
+            "profileName": "Nom du Profil"
         },
         "password": {
             "title": "Créer un mot de passe",
@@ -43,7 +43,7 @@
         "protect": {
             "title": "Protect your wallet",
             "body1": "Configurez un code PIN de connexion afin de vous assurer que vous seul pouvez utiliser votre portefeuille.",
-            "body2": "Gardez votre code PIN en sureté !"
+            "body2": "Conservez votre code PIN en sécurité!"
         },
         "pin": {
             "title": "Configurer le code PIN",
@@ -406,7 +406,7 @@
         "updateFirefly": "Mettre à jour Firefly",
         "restartNow": "Redémarrer maintenant",
         "saveBackup": "Enregistrer la sauvegarde",
-        "customizeAcount": "Customise account",
+        "customizeAcount": "Personnaliser votre compte",
         "viewAddressHistory": "Voir l'historique des adresses",
         "deleteAccount": "Supprimer le compte",
         "max": "Maximum",
@@ -451,7 +451,7 @@
         "moveFundsBetweenAccounts": "Déplacer des fonds entre comptes",
         "sendTokensToAddress": "Envoyer des jetons à une adresse",
         "manageAccount": "Gérer Compte",
-        "customizeAcount": "Customize your account",
+        "customizeAcount": "Personnaliser votre compte",
         "account": "Compte",
         "sendingToAddress": "Envoi vers l'adresse",
         "amount": "Montant",
@@ -500,6 +500,9 @@
         "inputAddress": "Adresses entrantes",
         "receiveAddress": "Adresse de réception",
         "date": "Date",
+        "status": "État",
+        "confirmed": "Confirmé",
+        "pending": "En cours",
         "noAccounts": "Vous n'avez pas de compte, veuillez en créer un.",
         "loadingAccounts": " Chargement, veuillez patienter...",
         "addProfile": "Ajouter Profil",

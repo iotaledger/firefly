@@ -42,8 +42,8 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body2": "Keep your PIN safe!"
+            "body1": "Configurare un PIN de inicio de sesión para asegurarse de que sólo usted puede entrar a su cartera.",
+            "body2": "¡Mantén tu PIN seguro!"
         },
         "pin": {
             "title": "Setear el código PIN",
@@ -93,8 +93,8 @@
             "body1": "Una frase de recuperación tiene 24 palabras. Esta se utiliza para recuperar una billetera de Firefly existente.",
             "body2": "Una semilla consta de 81 caracteres. Esta se utiliza para reestablecer desde una billetera Trinity más antigua.",
             "body3": "Introduce tu semilla o tu frase de recuperación",
-            "seedDetected": "81 character seed detected",
-            "phraseDetected": "24 word phrase detected"
+            "seedDetected": "Semilla de 81 caracteres detectada",
+            "phraseDetected": "Frase de 24 palabras detectada"
         },
         "importFromFile": {
             "title": "Restaura su billetera desde un archivo de respaldo",
@@ -317,7 +317,7 @@
             "errorTitle": "No se puede eliminar {name}",
             "errorBody1": "Para eliminar una cuenta debes tener saldo 0.",
             "errorBody2": "Actualmente tienes {balance} restantes en esta cuenta. Por favor, mueve estos fondos a una cuenta diferente e inténtalo de nuevo.",
-            "errorBody3": "You cannot delete this account, you must have at least one."
+            "errorBody3": "No puedes eliminar esta cuenta, debes tener al menos una."
         },
         "addressHistory": {
             "title": "{name} historial de direcciones de la cuenta",
@@ -325,13 +325,13 @@
         },
         "node": {
             "titleAdd": "Añadir un nodo",
-            "titleRemove": "Remove a node",
+            "titleRemove": "Eliminar un nodo",
             "titleDetails": "Detalles del nodo",
             "nodeAddress": "Dirección del nodo",
             "optionalUsername": "Nombre de usuario (opcional)",
             "optionalPassword": "Contraseña (opcional)",
             "setAsPrimaryNode": "Establecer como nodo principal",
-            "removeConfirmation": "Are you sure you want to remove this node?"
+            "removeConfirmation": "¿Estás seguro de que quieres eliminar este nodo?"
         },
         "errorLog": {
             "title": "Registro de errores",
@@ -354,12 +354,12 @@
         }
     },
     "charts": {
-        "incomingMi": "Incoming {value} Mi",
-        "outgoingMi": "Outgoing {value} Mi",
+        "incomingMi": "Entrando {value} Mi",
+        "outgoingMi": "Saliendo {value} Mi",
         "portoflio": "Portafolio",
         "token": "Token",
-        "accountValue": "Account Value",
-        "accountActivity": "Account Activity"
+        "accountValue": "Saldo de la cuenta",
+        "accountActivity": "Actividad de la cuenta"
     },
     "actions": {
         "continue": "Continuar",
@@ -406,12 +406,12 @@
         "updateFirefly": "Actualizar Firefly",
         "restartNow": "Reiniciar ahora",
         "saveBackup": "Guardar respaldo",
-        "customizeAcount": "Customise account",
+        "customizeAcount": "Personalizar cuenta",
         "viewAddressHistory": "Ver historial de direcciones",
         "deleteAccount": "Eliminar cuenta",
         "max": "Máx",
         "addNode": "Añadir nodo",
-        "removeNode": "Remove node",
+        "removeNode": "Eliminar nodo",
         "hide": "Ocultar",
         "hideOthers": "Ocultar otros",
         "showAll": "Mostrar todo",
@@ -427,7 +427,7 @@
         "checkForUpdates": "Buscar actualizaciones",
         "reportAnIssue": "Reportar un problema",
         "clear": "Limpiar",
-        "hideDetails": "Hide Details",
+        "hideDetails": "Ocultar detalles",
         "yes": "Sí",
         "no": "No",
         "reset": "Reiniciar"
@@ -451,7 +451,7 @@
         "moveFundsBetweenAccounts": "Mover fondos entre cuentas",
         "sendTokensToAddress": "Enviar tokens a una dirección",
         "manageAccount": "Administrar cuenta",
-        "customizeAcount": "Customize your account",
+        "customizeAcount": "Personaliza tu cuenta",
         "account": "Cuenta",
         "sendingToAddress": "Mandar a la dirección",
         "amount": "Cantidad",
@@ -497,13 +497,16 @@
         "help": "Ayuda",
         "you": "Tú",
         "messageId": "ID del mensaje",
-        "inputAddress": "Input Address",
-        "receiveAddress": "Receive Address",
+        "inputAddress": "Dirección de entrada",
+        "receiveAddress": "Dirección de recepción",
         "date": "Fecha",
+        "status": "Estado",
+        "confirmed": "Confirmado",
+        "pending": "Pendiente",
         "noAccounts": "No tienes ninguna cuenta, por favor crea una.",
-        "loadingAccounts": "Loading, please wait...",
+        "loadingAccounts": "Cargando, por favor espere...",
         "addProfile": "Añadir perfil",
-        "noRecentHistory": "No recent history",
+        "noRecentHistory": "No hay historial reciente",
         "transferSyncing": "Sincronizando cuenta",
         "transferSelectingInputs": "Seleccionando entradas",
         "transferRemainderAddress": "Generando dirección de depósito restante",
@@ -542,7 +545,7 @@
         "restartInstall": "Reiniciar para instalar",
         "calcMinutesRemaining": "Calculando minutos restantes...",
         "minutesRemaining": "{minutes, plural, one {1 minuto restante} other {# minutos restantes}}",
-        "copiedToClipboard": "Copied to clipboard"
+        "copiedToClipboard": "Copiado al portapapeles"
     },
     "error": {
         "profile": {

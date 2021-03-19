@@ -42,8 +42,8 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body2": "Keep your PIN safe!"
+            "body1": "Configurare un PIN de inicio de sesión para asegurarse de que sólo usted puede entrar a su cartera.",
+            "body2": "¡Mantén tu PIN seguro!"
         },
         "pin": {
             "title": "Código PIN",
@@ -500,6 +500,9 @@
         "inputAddress": "Dirección de entrada",
         "receiveAddress": "Dirección de recepción",
         "date": "Fecha",
+        "status": "Estado",
+        "confirmed": "Confirmado",
+        "pending": "Pendiente",
         "noAccounts": "No tienes ninguna cuenta, por favor crea una.",
         "loadingAccounts": "Cargando, por favor espere...",
         "addProfile": "Añadir perfil",
