@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import Error from 'shared/components'
+    import { Error } from 'shared/components'
     import { onMount } from 'svelte'
 
     export let value = ''
