@@ -5,46 +5,35 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile, removeProfile } from 'shared/lib/profile'
-    import { api } from 'shared/lib/wallet'
+    import { asyncRemoveStorage } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
 
     export let locale
 
     let isBusy = false
 
-    function deleteProfile() {
+    async function deleteProfile() {
         isBusy = true
         const ap = get(activeProfile)
-        if (!ap) {
-            logout()
-            return
-        }
 
-        Electron.PincodeManager.remove(ap.id).then((isRemoved) => {
-            if (!isRemoved) {
-                console.error('Something went wrong removing pincode entry.')
+        try {
+            if (ap) {
+                await Electron.PincodeManager.remove(ap.id)
             }
-
-            // Remove storage
-            api.removeStorage({
-                onSuccess(res) {
-                    logout()
-
-                    removeProfile(ap.id)
-
-                    isBusy = false
-                    closePopup()
-                },
-                onError(err) {
-                    isBusy = false
-                    closePopup()
-                    showAppNotification({
-                        type: 'error',
-                        message: locale(err.error),
-                    })
-                },
+            await asyncRemoveStorage()
+        } catch (err) {
+            showAppNotification({
+                type: 'error',
+                message: locale(err.error),
             })
-        })
+        } finally {
+            logout()
+
+            if (ap) {
+                removeProfile(ap.id)
+            }
+            isBusy = false
+        }
     }
 </script>
 

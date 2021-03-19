@@ -4,7 +4,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { activeProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { api, getStoragePath, initialise } from 'shared/lib/wallet'
+    import { asyncSetStoragePassword, initialiseProfileStorage } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -53,45 +53,38 @@
         }
     }
 
-    function onSubmit() {
+    async function onSubmit() {
         if (!hasReachedMaxAttempts) {
             const profile = get(activeProfile)
 
             isBusy = true
 
-            Electron.PincodeManager.verify(profile.id, pinCode)
-                .then((verified) => {
-                    if (verified === true) {
-                        return Electron.getUserDataPath().then((path) => {
-                            initialise(profile.id, getStoragePath(path, profile.name))
-                            api.setStoragePassword(pinCode, {
-                                onSuccess() {
-                                    dispatch('next')
-                                },
-                                onError(err) {
-                                    isBusy = false
-                                    showAppNotification({
-                                        type: 'error',
-                                        message: locale(err.error),
-                                    })
-                                },
-                            })
-                        })
-                    } else {
-                        isBusy = false
-                        attempts++
-                        if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
-                            clearInterval(timerId)
-                            timerId = setInterval(countdown, 1000)
-                        } else {
-                            pinRef.resetAndFocus()
-                        }
-                    }
-                })
-                .catch((error) => {
-                    console.error(error)
+            try {
+                const verified = await Electron.PincodeManager.verify(profile.id, pinCode)
+                if (verified === true) {
+                    await initialiseProfileStorage(profile)
+                    await asyncSetStoragePassword(pinCode)
+
+                    dispatch('next')
+                } else {
                     isBusy = false
+                    attempts++
+                    if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
+                        clearInterval(timerId)
+                        timerId = setInterval(countdown, 1000)
+                    } else {
+                        pinRef.resetAndFocus()
+                    }
+                }
+            } catch (err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
                 })
+                console.error(err)
+            } finally {
+                isBusy = false
+            }
         }
     }
 

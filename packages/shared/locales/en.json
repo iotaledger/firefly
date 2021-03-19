@@ -578,7 +578,8 @@
     "error": {
         "profile": {
             "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "duplicate": "A profile with this name already exists."
+            "duplicate": "A profile with this name already exists.",
+            "duplicateAccounts": "The profile \"{profile}\" already contains the accounts from this backup."
         },
         "password": {
             "doNotMatch": "Passwords do not match.",

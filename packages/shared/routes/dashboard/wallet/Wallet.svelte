@@ -7,12 +7,13 @@
     import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { isStrongholdLocked } from 'shared/lib/profile'
+    import { isStrongholdLocked, updateFirstAccount } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
         AccountMessage,
         api,
+        asyncGetAccounts,
         BalanceHistory,
         BalanceOverview,
         getAccountMeta,
@@ -60,51 +61,49 @@
 
     let isGeneratingAddress = false
 
-    function getAccounts() {
-        api.getAccounts({
-            onSuccess(accountsResponse) {
-                const _continue = () => {
-                    accountsLoaded.set(true)
-                    syncAccounts()
+    async function loadAccounts() {
+        try {
+            const accountsResponse = await asyncGetAccounts()
+
+            if (accountsResponse.payload.length === 0) {
+                accountsLoaded.set(true)
+                updateFirstAccount()
+                syncAccounts()
+            } else {
+                const totalBalance = {
+                    balance: 0,
+                    incoming: 0,
+                    outgoing: 0,
                 }
 
-                if (accountsResponse.payload.length === 0) {
-                    _continue()
-                } else {
-                    const totalBalance = {
-                        balance: 0,
-                        incoming: 0,
-                        outgoing: 0,
-                    }
+                for (const [idx, storedAccount] of accountsResponse.payload.entries()) {
+                    getAccountMeta(storedAccount.id, (err, meta) => {
+                        if (!err) {
+                            totalBalance.balance += meta.balance
+                            totalBalance.incoming += meta.incoming
+                            totalBalance.outgoing += meta.outgoing
 
-                    for (const [idx, storedAccount] of accountsResponse.payload.entries()) {
-                        getAccountMeta(storedAccount.id, (err, meta) => {
-                            if (!err) {
-                                totalBalance.balance += meta.balance
-                                totalBalance.incoming += meta.incoming
-                                totalBalance.outgoing += meta.outgoing
+                            const account = prepareAccountInfo(storedAccount, meta)
+                            accounts.update((accounts) => [...accounts, account])
+                        } else {
+                            console.error(err)
+                        }
 
-                                const account = prepareAccountInfo(storedAccount, meta)
-                                accounts.update((accounts) => [...accounts, account])
-
-                                if (idx === accountsResponse.payload.length - 1) {
-                                    updateBalanceOverview(totalBalance.balance, totalBalance.incoming, totalBalance.outgoing)
-                                    _continue()
-                                }
-                            } else {
-                                console.error(err)
-                            }
-                        })
-                    }
+                        if (idx === accountsResponse.payload.length - 1) {
+                            updateBalanceOverview(totalBalance.balance, totalBalance.incoming, totalBalance.outgoing)
+                            accountsLoaded.set(true)
+                            updateFirstAccount()
+                            syncAccounts()
+                        }
+                    })
                 }
-            },
-            onError(err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error),
-                })
-            },
-        })
+            }
+        } catch (err) {
+            showAppNotification({
+                type: 'error',
+                message: locale(err.error),
+            })
+        }
     }
 
     function onGenerateAddress(accountId) {
@@ -351,9 +350,9 @@
         }
     }
 
-    onMount(() => {
+    onMount(async () => {
         if (!$accountsLoaded) {
-            getAccounts()
+            await loadAccounts()
         }
 
         initialiseListeners()

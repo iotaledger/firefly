@@ -1,15 +1,16 @@
 import { mnemonic } from 'shared/lib/app'
 import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
+import { Electron } from 'shared/lib/electron'
 import { localize } from 'shared/lib/i18n'
-import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
 import type { HistoryData, PriceData } from 'shared/lib/marketData'
 import { HistoryDataProps } from 'shared/lib/marketData'
+import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
 import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
-import { activeProfile, isStrongholdLocked } from 'shared/lib/profile'
+import { activeProfile, isStrongholdLocked, Profile } from 'shared/lib/profile'
 import type { Account, Account as BaseAccount, SyncedAccount } from 'shared/lib/typings/account'
 import type { Address } from 'shared/lib/typings/address'
 import type { Actor } from 'shared/lib/typings/bridge'
-import type { ErrorEventPayload, TransferProgressEventType } from 'shared/lib/typings/events'
+import type { ErrorEventPayload, Event, TransferProgressEventType } from 'shared/lib/typings/events'
 import type { Message } from 'shared/lib/typings/message'
 import { formatUnit } from 'shared/lib/units'
 import type { ApiClient } from 'shared/lib/walletApi'
@@ -128,10 +129,11 @@ export const getStoragePath = (appPath: string, profileName: string): string => 
     return `${appPath}/${WALLET_STORAGE_DIRECTORY}/${profileName}`
 }
 
-export const initialise = (id: string, storagePath: string): void => {
-    const actor: Actor = window['__WALLET_INIT__'].run(id, storagePath)
-
-    actors[id] = actor
+export const initialiseProfileStorage = async (profile: Profile): Promise<void> => {
+    const userDataPath = await Electron.getUserDataPath()
+    const storagePath = getStoragePath(userDataPath, profile.name)
+    const actor: Actor = window['__WALLET_INIT__'].run(profile.id, storagePath)
+    actors[profile.id] = actor
 }
 
 /**
@@ -144,15 +146,21 @@ export const initialise = (id: string, storagePath: string): void => {
  * @returns {void}
  */
 export const destroyActor = (id: string): void => {
-    if (!actors[id]) {
-        throw new Error('No actor found for provided id.')
+    if (actors[id]) {
+        actors[id].destroy()
+        delete actors[id]
+    } else {
+        console.error("Trying to delete actor when it did not exist")
     }
+}
 
-    // Destroy actor
-    actors[id].destroy()
-
-    // Delete actor id from state
-    delete actors[id]
+/**
+ * Tests if we have the actor id
+ * @param id The id to check for
+ * @returns True is the actor exists
+ */
+export const hasActor = (id: string): boolean => {
+    return actors[id] !== undefined
 }
 
 /**
@@ -265,6 +273,36 @@ export const asyncCreateAccount = () => {
                     network: get(network),
                 },
             },
+            {
+                onSuccess() {
+                    resolve()
+                },
+                onError(err) {
+                    reject(err)
+                },
+            }
+        )
+    })
+}
+
+export const asyncGetAccounts = () => {
+    return new Promise<Event<Account[]>>((resolve, reject) => {
+        api.getAccounts(
+            {
+                onSuccess(accounts) {
+                    resolve(accounts)
+                },
+                onError(err) {
+                    reject(err)
+                },
+            }
+        )
+    })
+}
+
+export const asyncRemoveStorage = () => {
+    return new Promise<void>((resolve, reject) => {
+        api.removeStorage(
             {
                 onSuccess() {
                     resolve()

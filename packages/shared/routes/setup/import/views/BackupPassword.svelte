@@ -1,6 +1,6 @@
 <script lang="typescript">
+    import { Button, Illustration, OnboardingLayout, Password, Text } from 'shared/components'
     import { createEventDispatcher } from 'svelte'
-    import { OnboardingLayout, Password, Text, Button, Illustration } from 'shared/components'
 
     export let locale
     export let mobile
@@ -32,7 +32,7 @@
             <Password classes="mb-6" {error} bind:value={password} {locale} showRevealToggle autofocus disabled={busy} />
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-            <Button classes="flex-1" disabled={password.length === 0 || busy} onClick={() => handleContinue()}>
+            <Button classes="flex-1" disabled={password.length === 0 || busy || error} onClick={() => handleContinue()}>
                 {locale('actions.continue')}
             </Button>
         </div>

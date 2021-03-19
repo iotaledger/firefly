@@ -1,9 +1,16 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
     import { mnemonic } from 'shared/lib/app'
-    import { newProfile } from 'shared/lib/profile'
-    import { api, asyncRestoreBackup } from 'shared/lib/wallet'
+    import { createProfile, newProfile, profiles } from 'shared/lib/profile'
+    import {
+        asyncGetAccounts,
+        asyncRemoveStorage,
+        asyncRestoreBackup,
+        destroyActor,
+        initialiseProfileStorage,
+    } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
+    import { get } from 'svelte/store'
     import { BackupPassword, FileImport, Import, Success, TextImport } from './views/'
 
     export let locale
@@ -73,8 +80,33 @@
 
                 try {
                     await asyncRestoreBackup(importFilePath, password)
-                    $newProfile.lastStrongholdBackupTime = new Date()
-                    nextState = ImportState.Success
+                    const accountsResponse = await asyncGetAccounts()
+                    let canContinue = true
+                    if (accountsResponse.payload.length > 0) {
+                        const firstAccountId = accountsResponse.payload[0].id
+                        const allProfiles = get(profiles)
+                        const matchProfile = allProfiles.find((p) => p.firstAccountId === firstAccountId)
+                        if (matchProfile) {
+                            error = locale('error.profile.duplicateAccounts', {
+                                values: {
+                                    profile: matchProfile.name,
+                                },
+                            })
+                            canContinue = false
+                        }
+                    }
+                    if (canContinue) {
+                        $newProfile.lastStrongholdBackupTime = new Date()
+                        nextState = ImportState.Success
+                    } else {
+                        // If this backup is no good we need to remove it
+                        // At the moment there is no ability to remove just the stronghold
+                        // so we remove the whole profile and recreate it
+                        await asyncRemoveStorage()
+                        destroyActor($newProfile.id)
+                        const profile = createProfile($newProfile.name, $newProfile.isDeveloperProfile)
+                        await initialiseProfileStorage(profile)
+                    }
                 } catch (err) {
                     error = locale(err.error)
                 } finally {
@@ -93,6 +125,7 @@
         }
     }
     const _previous = () => {
+        error = ''
         let prevState = stateHistory.pop()
         if (prevState) {
             state = prevState

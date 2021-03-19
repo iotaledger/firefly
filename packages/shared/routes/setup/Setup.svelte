@@ -1,12 +1,11 @@
 <script lang="typescript">
     import { Button, ButtonCheckbox, Illustration, Input, OnboardingLayout, Text } from 'shared/components'
     import { cleanupSignup, developerMode } from 'shared/lib/app'
-    import { Electron } from 'shared/lib/electron'
     import { hasOnlyWhitespaces } from 'shared/lib/helpers'
     import { showAppNotification } from 'shared/lib/notifications'
     import { createProfile, disposeNewProfile, newProfile, profiles } from 'shared/lib/profile'
     import { SetupType } from 'shared/lib/typings/routes'
-    import { getStoragePath, initialise, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
+    import { initialiseProfileStorage, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -44,8 +43,7 @@
 
             try {
                 busy = true
-                const userDataPath = await Electron.getUserDataPath()
-                initialise($newProfile.id, getStoragePath(userDataPath, $newProfile.name))
+                await initialiseProfileStorage($newProfile)
 
                 dispatch('next', { setupType })
             } catch (err) {
@@ -61,9 +59,9 @@
         }
     }
 
-    function handleBackClick() {
+    async function handleBackClick() {
         cleanupSignup()
-        disposeNewProfile()
+        await disposeNewProfile()
         dispatch('previous')
     }
 </script>

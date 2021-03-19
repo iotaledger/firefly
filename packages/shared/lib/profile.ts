@@ -2,7 +2,7 @@ import { AvailableExchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
 import { DEFAULT_NODE } from 'shared/lib/network'
 import { generateRandomId } from 'shared/lib/utils'
-import { api } from 'shared/lib/wallet'
+import { asyncRemoveStorage, destroyActor, hasActor, wallet } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
 import { Electron } from './electron'
 import type { Node } from './typings/client'
@@ -10,9 +10,10 @@ import type { Node } from './typings/client'
 /**
  * Profile
  */
-interface Profile {
+export interface Profile {
     id: string
     name: string
+    firstAccountId: string
     /**
      * Time for most recent stronghold back up
      */
@@ -22,7 +23,6 @@ interface Profile {
      */
     settings: UserSettings
     isDeveloperProfile: boolean
-
 }
 
 /**
@@ -90,6 +90,7 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
     const profile: Profile = {
         id: generateRandomId(),
         name: profileName,
+        firstAccountId: '',
         lastStrongholdBackupTime: null,
         isDeveloperProfile,
         settings: {
@@ -116,23 +117,13 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
  *
  * @returns {void}
  */
-export const disposeNewProfile = (): void => {
-    const np = get(newProfile)
+export const disposeNewProfile = async (): Promise<void> => {
+    const np = get(newProfile);
     if (np) {
-        api.removeStorage({
-            onSuccess() {
-                api.removeAccount(np.id, {
-                    onSuccess() {
-                    },
-                    onError(err) {
-                        console.error(err)
-                    },
-                })
-            },
-            onError(err) {
-                console.error(err)
-            },
-        })
+        if (hasActor(np.id)) {
+            await asyncRemoveStorage()
+            destroyActor(np.id)
+        }
     }
     newProfile.set(null)
     activeProfileId.set(null)
@@ -215,4 +206,23 @@ export const updateProfile = (
             })
         })
     }
+}
+
+export const updateFirstAccount = () => {
+    profiles.update((_profiles) => {
+        return _profiles.map((_profile) => {
+            if (_profile.id === get(activeProfile)?.id) {
+                const w = get(wallet);
+                if (w) {
+                    const acc = get(w.accounts)
+            
+                    if (acc && acc.length > 0) {
+                        _profile.firstAccountId = acc[0].id
+                    }
+                }
+            }
+
+            return _profile
+        })
+    })
 }
