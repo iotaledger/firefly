@@ -47,8 +47,6 @@
             } finally {
                 busy = false
             }
-
-            dispatch('next', { password })
         }
     }
     function handleBackClick() {
