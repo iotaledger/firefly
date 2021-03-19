@@ -23,7 +23,7 @@
                         width="16"
                         height="16"
                         icon="small-chevron-right"
-                        classes="text-blue-500 absolute left-0 text-xl mt-0.5" />
+                        classes="text-blue-500 absolute left-1 top-0.4 text-xl" />
                 {/if}
                 <Text type="p" classes="mb-1">{locale(`views.settings.${setting}.title`)}</Text>
             </button>
