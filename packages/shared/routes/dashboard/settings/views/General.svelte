@@ -38,14 +38,12 @@
     <!-- TODO: Implement and enable -->
     <section id="theme" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.theme.title')}</Text>
-        <Text type="p" secondary classes="mb-5">{locale('views.settings.theme.description')}</Text>
         <Radio value={false} bind:group={darkModeEnabled} label={locale('general.lightTheme')} />
         <Radio value={true} bind:group={darkModeEnabled} label={locale('general.darkTheme')} />
     </section>
     <HR classes="pb-5 mt-5 justify-center" />
     <section id="language" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.language.title')}</Text>
-        <Text type="p" secondary classes="mb-5">{locale('views.settings.language.description')}</Text>
         <Dropdown
             sortItems={true}
             onSelect={handleLanguage}
