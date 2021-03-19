@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Popup, Route, ToastContainer } from 'shared/components'
+    import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import { loggedIn, mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { refreshVersionDetails, versionDetails } from 'shared/lib/appUpdater'
@@ -106,67 +106,69 @@
     }
 </style>
 
-<!-- empty div to avoid auto-purge removing dark classes -->
-<div class="scheme-dark" />
-{#if !$isLocaleLoaded || splash}
-    <Splash />
-{:else}
-    {#if $popupState.active}
-        <Popup
-            type={$popupState.type}
-            props={$popupState.props}
-            hideClose={$popupState.hideClose}
-            fullScreen={$popupState.fullScreen}
-            transition={$popupState.transition}
-            locale={$_} />
-    {/if}
-    <Route route={AppRoute.Welcome}>
-        <Welcome on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Legal}>
-        <Legal on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Language}>
-        <Language on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Setup}>
-        <Setup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Password}>
-        <Password on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Protect} transition={false}>
-        <Protect on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Backup} transition={false}>
-        <Backup
-            on:next={routerNext}
-            on:previous={routerPrevious}
-            on:requestMnemonic={requestMnemonic}
-            mobile={$mobile}
-            locale={$_} />
-    </Route>
-    <Route route={AppRoute.Import} transition={false}>
-        <Import on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Balance}>
-        <Balance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
-    </Route>
-    <Route route={AppRoute.Migrate}>
-        <Migrate on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
-    </Route>
-    <Route route={AppRoute.Congratulations}>
-        <Congratulations on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
-    </Route>
-    <Route route={AppRoute.Dashboard}>
-        <Dashboard mobile={$mobile} locale={$_} {goto} />
-    </Route>
-    <Route route={AppRoute.Login}>
-        <Login on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} {goto} />
-    </Route>
-    {#if settings}
-        <Settings locale={$_} handleClose={() => (settings = false)} />
-    {/if}
+<TitleBar>
+    <!-- empty div to avoid auto-purge removing dark classes -->
+    <div class="scheme-dark" />
+    {#if !$isLocaleLoaded || splash}
+        <Splash />
+    {:else}
+        {#if $popupState.active}
+            <Popup
+                type={$popupState.type}
+                props={$popupState.props}
+                hideClose={$popupState.hideClose}
+                fullScreen={$popupState.fullScreen}
+                transition={$popupState.transition}
+                locale={$_} />
+        {/if}
+        <Route route={AppRoute.Welcome}>
+            <Welcome on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Legal}>
+            <Legal on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Language}>
+            <Language on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Setup}>
+            <Setup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Password}>
+            <Password on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Protect} transition={false}>
+            <Protect on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Backup} transition={false}>
+            <Backup
+                on:next={routerNext}
+                on:previous={routerPrevious}
+                on:requestMnemonic={requestMnemonic}
+                mobile={$mobile}
+                locale={$_} />
+        </Route>
+        <Route route={AppRoute.Import} transition={false}>
+            <Import on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Balance}>
+            <Balance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Migrate}>
+            <Migrate on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
+        </Route>
+        <Route route={AppRoute.Congratulations}>
+            <Congratulations on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
+        </Route>
+        <Route route={AppRoute.Dashboard}>
+            <Dashboard mobile={$mobile} locale={$_} {goto} />
+        </Route>
+        <Route route={AppRoute.Login}>
+            <Login on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} {goto} />
+        </Route>
+        {#if settings}
+            <Settings locale={$_} handleClose={() => (settings = false)} />
+        {/if}
 
-    <ToastContainer />
-{/if}
+        <ToastContainer />
+    {/if}
+</TitleBar>

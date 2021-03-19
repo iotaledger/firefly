@@ -48,8 +48,13 @@ export interface IElectron {
     getStrongholdBackupDestination(defaultPath: string): Promise<string | null>;
     getUserDataPath(): Promise<string>;
     getDiagnostics(): Promise<{ label: string; value: string; }[]>;
+    getOS(): Promise<string>;
     updateActiveProfile(id: string): void;
     updateMenu(attribute: string, value: unknown): void;
+    popupMenu(): void;
+    maximize(): void;
+    minimize(): void;
+    close(): void;
 
     NotificationManager: INotificationManager;
 

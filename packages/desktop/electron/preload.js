@@ -44,7 +44,15 @@ const Electron = {
      *
      * @returns {Promise}
      */
-     getDiagnostics: () => ipcRenderer.invoke('diagnostics'),
+    getDiagnostics: () => ipcRenderer.invoke('get-os'),
+    /**
+     * Gets os information for the system
+     *
+     * @method getOS
+     *
+     * @returns {Promise}
+     */
+     getOS: () => ipcRenderer.invoke('diagnostics'),
      /**
      * Starts an update of the application
      *
@@ -89,6 +97,34 @@ const Electron = {
                 [attribute]: value
             })
         }
+    },
+    /**
+     * Show the popup menu
+     * @returns {undefined}
+     */
+    popupMenu: () => {
+        ipcRenderer.invoke('menu-popup')
+    },
+    /**
+     * Minimize the app
+     * @returns {undefined}
+     */
+     minimize: () => {
+        ipcRenderer.invoke('minimize')
+    },
+    /**
+     * Maximize the app
+     * @returns {undefined}
+     */
+     maximize: () => {
+        ipcRenderer.invoke('maximize')
+    },
+    /**
+     * Close the app
+     * @returns {undefined}
+     */
+     close: () => {
+        ipcRenderer.invoke('close')
     },
     /**
      * Add native window wallet event listener

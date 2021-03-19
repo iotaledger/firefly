@@ -110,6 +110,8 @@ function createWindow() {
         width: 1280,
         height: 720,
         titleBarStyle: 'hidden',
+        transparent: true,
+        frame: false,
         webPreferences: {
             ...defaultWebPreferences,
             preload: paths.preload,
@@ -277,6 +279,11 @@ ipcMain.handle('diagnostics', (_e) => {
         { label: 'popups.diagnostics.userPath', value: app.getPath('userData') },
     ]
     return diagnostics
+})
+
+// Os
+ipcMain.handle('get-os', (_e) => {
+    return os.platform()
 })
 
 /**
