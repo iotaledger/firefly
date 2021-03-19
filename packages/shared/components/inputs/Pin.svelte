@@ -33,16 +33,12 @@
     const handleBackspace = () => {
         // Search for the last child with a value
         // and remove it
-        let sibling = inputElements[0]
-        for (let j = 0; j <= PIN_LENGTH; j++) {
+        for (let j = 1; j <= PIN_LENGTH; j++) {
             if (j === PIN_LENGTH || !inputs[j]) {
                 inputs[j - 1] = ''
-                if (sibling?.previousElementSibling) {
-                    sibling.previousElementSibling.focus()
-                }
+                inputElements[j - 1].focus()
                 break
             }
-            sibling = sibling.nextElementSibling
         }
     }
 
@@ -64,17 +60,14 @@
             if (regex.test(e.key)) {
                 // Search from the first child to find the first
                 // empty value and start filling from there
-                let sibling = inputElements[0]
                 for (let j = 0; j < PIN_LENGTH; j++) {
-                    let nextInput = sibling.nextElementSibling
                     if (!inputs[j]) {
                         inputs[j] = e.key
-                        if (nextInput) {
-                            nextInput.focus()
+                        if (j < PIN_LENGTH - 1) {
+                            inputElements[j + 1].focus()
                         }
                         break
                     }
-                    sibling = nextInput
                 }
             }
         }
@@ -82,13 +75,11 @@
     }
 
     const selectFirstEmpty = () => {
-        let sibling = inputElements[0]
         for (let j = 0; j < PIN_LENGTH; j++) {
             if (!inputs[j] || j === PIN_LENGTH - 1) {
-                sibling.focus()
+                inputElements[j].focus()
                 return
             }
-            sibling = sibling.nextElementSibling
         }
     }
 
