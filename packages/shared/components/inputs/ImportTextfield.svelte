@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Text } from 'shared/components'
     import { debounce } from 'shared/lib/utils'
-    import { english } from './wordlists/english'
+    import { english } from 'shared/lib/wordlists/english'
 
     export let value = undefined
     export let locale
@@ -84,7 +84,7 @@
 
 <div>
     <textarea
-        class="text-12 leading-140 resize-none w-full p-4 pb-3 rounded-xl border border-solid 
+        class="text-14 leading-140 resize-none w-full p-4 pb-3 rounded-xl border border-solid 
             {error ? 'border-red-300 hover:border-red-500 focus:border-red-500' : 'border-gray-300 hover:border-gray-500 dark:border-gray-700 dark:hover:border-gray-700'} 
             text-gray-500 dark:text-white bg-white dark:bg-gray-800 "
         bind:value={content}

@@ -1,6 +1,7 @@
 import { mnemonic } from 'shared/lib/app'
 import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
 import { localize } from 'shared/lib/i18n'
+import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
 import type { HistoryData, PriceData } from 'shared/lib/marketData'
 import { HistoryDataProps } from 'shared/lib/marketData'
 import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
@@ -172,6 +173,108 @@ export const generateRecoveryPhrase = (): Promise<string[]> =>
 export const requestMnemonic = async () => {
     let recoveryPhrase = await generateRecoveryPhrase()
     mnemonic.set(recoveryPhrase)
+    return recoveryPhrase
+}
+
+export const asyncSetStrongholdPassword = (password) => {
+    return new Promise<void>((resolve, reject) => {
+        api.setStrongholdPassword(password, {
+            onSuccess() {
+                resolve()
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
+
+export const asyncStoreMnemonic = (mnemonic) => {
+    return new Promise<void>((resolve, reject) => {
+        api.storeMnemonic(mnemonic, {
+            onSuccess() {
+                resolve()
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
+
+export const asyncVerifyMnemonic = (mnemonic) => {
+    return new Promise<void>((resolve, reject) => {
+        api.verifyMnemonic(mnemonic, {
+            onSuccess() {
+                resolve()
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
+
+export const asyncBackup = (dest) => {
+    return new Promise<void>((resolve, reject) => {
+        api.backup(dest, {
+            onSuccess() {
+                resolve()
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
+
+export const asyncSetStoragePassword = (password) => {
+    return new Promise<void>((resolve, reject) => {
+        api.setStoragePassword(password, {
+            onSuccess() {
+                resolve()
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
+
+export const asyncRestoreBackup = (importFilePath, password) => {
+    return new Promise<void>((resolve, reject) => {
+        api.restoreBackup(importFilePath, password, {
+            onSuccess() {
+                resolve()
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
+
+export const asyncCreateAccount = () => {
+    return new Promise<void>((resolve, reject) => {
+        api.createAccount(
+            {
+                signerType: { type: 'Stronghold' },
+                clientOptions: {
+                    node: DEFAULT_NODE,
+                    nodes: DEFAULT_NODES,
+                    network: get(network),
+                },
+            },
+            {
+                onSuccess() {
+                    resolve()
+                },
+                onError(err) {
+                    reject(err)
+                },
+            }
+        )
+    })
 }
 
 /**

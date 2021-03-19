@@ -1,3 +1,4 @@
+import { Electron } from 'shared/lib/electron'
 import { localize } from 'shared/lib/i18n'
 import { showAppNotification } from 'shared/lib/notifications'
 import validUrl from 'valid-url'
@@ -204,9 +205,20 @@ export const setClipboard = (input: string): boolean => {
     }
 }
 
-export const getDefaultStrongholdName = () : string => {
+export const getDefaultStrongholdName = (): string => {
     // Match https://github.com/iotaledger/wallet.rs/blob/ffbeaa3466b44f79dd5f87e14ed1bdc4846d9e85/src/account_manager.rs#L1428
     // Trim milliseconds and replace colons with dashes
     const date = new Date().toISOString().slice(0, -5).replace(/:/g, "-")
     return `firefly-backup-${date}.stronghold`
+}
+
+export const downloadRecoveryKit = () => {
+    fetch('assets/docs/recovery-kit.pdf')
+        .then((response) => response.arrayBuffer())
+        .then((data) => {
+            Electron.saveRecoveryKit(data)
+        })
+        .catch((err) => {
+            console.error(err)
+        })
 }

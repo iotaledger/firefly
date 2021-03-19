@@ -11,14 +11,13 @@
     import { openPopup, popupState } from 'shared/lib/popup'
     import { dashboardRoute, initRouter, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
     import { AppRoute, Tabs } from 'shared/lib/typings/routes'
-    import { requestMnemonic } from 'shared/lib/wallet'
     import {
         Backup,
         Balance,
         Congratulations,
         Dashboard,
         Import,
-        Language,
+        Appearance,
         Legal,
         Login,
         Migrate,
@@ -26,6 +25,7 @@
         Protect,
         Settings,
         Setup,
+        Secure,
         Splash,
         Welcome,
     } from 'shared/routes'
@@ -126,11 +126,14 @@
     <Route route={AppRoute.Legal}>
         <Legal on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
-    <Route route={AppRoute.Language}>
-        <Language on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+    <Route route={AppRoute.Appearance}>
+        <Appearance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
     <Route route={AppRoute.Setup}>
         <Setup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+    </Route>
+    <Route route={AppRoute.Secure}>
+        <Secure on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
     </Route>
     <Route route={AppRoute.Password}>
         <Password on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
@@ -142,7 +145,6 @@
         <Backup
             on:next={routerNext}
             on:previous={routerPrevious}
-            on:requestMnemonic={requestMnemonic}
             mobile={$mobile}
             locale={$_} />
     </Route>
