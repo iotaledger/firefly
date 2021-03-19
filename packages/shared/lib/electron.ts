@@ -55,6 +55,8 @@ export interface IElectron {
     maximize(): void;
     minimize(): void;
     close(): void;
+    saveRecoveryKit(kitData: ArrayBuffer): Promise<void>;
+    openUrl(url: string): void;
 
     NotificationManager: INotificationManager;
 

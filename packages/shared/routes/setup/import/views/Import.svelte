@@ -21,7 +21,9 @@
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5">{locale('views.import.title')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.import.body')}</Text>
-            <Button icon="doc" classes="w-full mb-5" secondary onClick={() => handleContinueClick('text')}>
+        </div>
+        <div slot="leftpane__action">
+            <Button icon="language" classes="w-full mb-5" secondary onClick={() => handleContinueClick('text')}>
                 {locale('general.haveTextBackup')}
                 <Text type="p" secondary smaller>{locale('general.enterSeedOrPhrase')}</Text>
             </Button>

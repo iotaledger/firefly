@@ -127,7 +127,9 @@ Wallet.onMessage((message: MessageResponse) => {
         // There is no message id
         // Something lower level has thrown an error
         // We should stop processing at this point
-        errorLog.update((log) => [ { type: ErrorType.ClientError, message: JSON.stringify(message), time: Date.now() }, ...log ])
+        const newError = { type: ErrorType.ClientError, message: JSON.stringify(message), time: Date.now() };
+        errorLog.update((log) => [ newError, ...log ])
+        console.error(newError)
         return
     }
 
@@ -218,7 +220,9 @@ const storeCallbacks = (__id: string, type: ResponseTypes, callbacks?: Callbacks
  * @param {string} error
  */
 const handleError = (type: ErrorType | ValidatorErrorTypes, error: string): { type: ErrorType | ValidatorErrorTypes, error: string } => {
-    errorLog.update((log) => [{ type, message: error, time: Date.now() }, ...log])
+    const newError = { type, message: error, time: Date.now() };
+    errorLog.update((log) => [newError, ...log])
+    console.error(newError)
 
     // TODO: Add full type list to remove this temporary fix
     const _getError = () => {

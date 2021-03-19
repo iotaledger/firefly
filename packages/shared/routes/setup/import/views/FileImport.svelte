@@ -17,7 +17,6 @@
         dispatch('previous')
     }
 
-    // TODO error management
     const onDrop = (buffer, name, path) => {
         if (!buffer) {
             file = null
@@ -46,11 +45,10 @@
                 allowedExtensions={["kdbx", "stronghold"]} />
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-            <Button secondary classes="flex-1" onClick={() => handleBackClick()}>{locale('actions.back')}</Button>
             <Button classes="flex-1" disabled={!file} onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center">
-            <Illustration width="100%" illustration="import-from-file-desktop" />
+        <div slot="rightpane" class="w-full h-full flex justify-center p-16" style="background-color: #FFF8EF">
+            <Illustration illustration="import-from-file-desktop" width="auto" height="auto" />
         </div>
     </OnboardingLayout>
 {/if}

@@ -175,6 +175,7 @@ const buildTemplate = () => {
     template.push({
         label: state.strings.help,
         submenu: [
+            /** TODO: Add help links     
             {
                 label: state.strings.troubleshoot,
                 click: function () {
@@ -193,17 +194,17 @@ const buildTemplate = () => {
                 click: function () {
                     shell.openExternal('https://iota.org')
                 },
-            },
+            }**/
             {
                 label: state.strings.discord,
                 click: function () {
-                    shell.openExternal('https://iota.org')
+                    shell.openExternal('https://discord.iota.org')
                 },
             },
             {
                 label: state.strings.reportAnIssue,
                 click: function () {
-                    shell.openExternal('https://github.com/iotaledger/firefly/issues/new/choose')
+                    shell.openExternal('https://github.com/iotaledger/firefly/issues')
                 },
             },
         ],
