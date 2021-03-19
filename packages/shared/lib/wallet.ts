@@ -12,7 +12,7 @@ import type { ErrorEventPayload, TransferProgressEventType } from 'shared/lib/ty
 import type { Message } from 'shared/lib/typings/message'
 import { formatUnit } from 'shared/lib/units'
 import type { ApiClient } from 'shared/lib/walletApi'
-import { get, writable, Writable } from 'svelte/store'
+import { get, writable, Writable, derived } from 'svelte/store'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -90,6 +90,10 @@ export const wallet = writable<WalletState>({
     }),
     accounts: writable<WalletAccount[]>([]),
     accountsLoaded: writable<boolean>(false),
+})
+
+export const transactions = derived(get(wallet).accounts, ($accounts) => {
+    return getLatestMessages($accounts)
 })
 
 export const resetWallet = () => {
@@ -205,18 +209,23 @@ export const initialiseListeners = () => {
 
             const essence = message.payload.data.essence
 
-            if (!essence.data.internal) {
-                const { balanceOverview } = get(wallet);
-                const overview = get(balanceOverview);
+            const walletTransactions = get(transactions);
+            // if we already have this message on one of the accounts,
+            // we skip updating incoming/outgoing values.
+            if (!walletTransactions.some((transaction) => transaction.id === message.id)) {
+                if (!essence.data.internal) {
+                    const { balanceOverview } = get(wallet);
+                    const overview = get(balanceOverview);
 
-                const incoming = essence.data.incoming ? overview.incomingRaw + essence.data.value : overview.incomingRaw;
-                const outgoing = essence.data.incoming ? overview.outgoingRaw : overview.outgoingRaw + essence.data.value;
+                    const incoming = essence.data.incoming ? overview.incomingRaw + essence.data.value : overview.incomingRaw;
+                    const outgoing = essence.data.incoming ? overview.outgoingRaw : overview.outgoingRaw + essence.data.value;
 
-                updateBalanceOverview(
-                    overview.balanceRaw,
-                    incoming,
-                    outgoing
-                )
+                    updateBalanceOverview(
+                        overview.balanceRaw,
+                        incoming,
+                        outgoing
+                    );
+                }
             }
 
             const notificationMessage = localize('notifications.valueTx')
@@ -245,18 +254,23 @@ export const initialiseListeners = () => {
 
             const essence = message.payload.data.essence
 
-            if (!essence.data.internal) {
-                const { balanceOverview } = get(wallet);
-                const overview = get(balanceOverview);
+            if (response.payload.confirmed && !essence.data.internal) {
+                const walletTransactions = get(transactions);
+                // if we already have this message marked as confirmed,
+                // we skip updating incoming/outgoing values.
+                if (!walletTransactions.some((transaction) => transaction.id === message.id && transaction.confirmed)) {
+                    const { balanceOverview } = get(wallet);
+                    const overview = get(balanceOverview);
 
-                const incoming = essence.data.incoming ? overview.incomingRaw + essence.data.value : overview.incomingRaw;
-                const outgoing = essence.data.incoming ? overview.outgoingRaw : overview.outgoingRaw + essence.data.value;
+                    const incoming = essence.data.incoming ? overview.incomingRaw + essence.data.value : overview.incomingRaw;
+                    const outgoing = essence.data.incoming ? overview.outgoingRaw : overview.outgoingRaw + essence.data.value;
 
-                updateBalanceOverview(
-                    overview.balanceRaw,
-                    incoming,
-                    outgoing
-                )
+                    updateBalanceOverview(
+                        overview.balanceRaw,
+                        incoming,
+                        outgoing
+                    );
+                }
             }
 
             const accountMessage = account.messages.find((_message) => _message.id === message.id)
