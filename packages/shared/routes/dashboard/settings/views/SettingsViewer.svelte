@@ -14,7 +14,7 @@
         SettingsRoutesNoProfile,
     } from 'shared/lib/typings/routes'
     import { onMount } from 'svelte'
-    import { Advanced, General, Security } from './'
+    import { Advanced, General, Security, Help } from './'
 
     export let locale
     export let mobile
@@ -99,7 +99,7 @@
                     {:else if $settingsRoute === 'advancedSettings'}
                         <Advanced {locale} />
                     {:else if $settingsRoute === 'helpAndInfo'}
-                        <div />
+                        <Help {locale} />
                     {/if}
                 </div>
             </Scroller>

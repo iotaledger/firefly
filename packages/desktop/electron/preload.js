@@ -44,7 +44,7 @@ const Electron = {
      *
      * @returns {Promise}
      */
-     getDiagnostics: () => ipcRenderer.invoke('diagnostics'),
+    getDiagnostics: () => ipcRenderer.invoke('diagnostics'),
      /**
      * Starts an update of the application
      *
@@ -89,6 +89,14 @@ const Electron = {
                 [attribute]: value
             })
         }
+    },
+    /**
+     * Opens url and checks against acceptlist
+     * @param {string} url - Target url
+     * @returns {undefined}
+     */
+    openUrl: (url) => {
+        ipcRenderer.invoke('open-url', url)
     },
     /**
      * Add native window wallet event listener
