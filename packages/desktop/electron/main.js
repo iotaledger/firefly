@@ -82,9 +82,24 @@ if (app.isPackaged) {
  */
 function isUrlAllowed(url) {
     // TODO: Add links for T&C, privacy policy and help
-    const externalAllowlist = ['privacy@iota.org', 'explorer.iota.org']
+    const externalAllowlist = ['privacy@iota.org', 'iota.org', 'github.com', 'discord.iota.org']
 
     return externalAllowlist.indexOf(new URL(url).hostname.replace('www.', '').replace('mailto:', '')) > -1
+}
+
+/**
+ * Handles url navigation events
+ */
+const handleNavigation = (e, url) => {
+    e.preventDefault()
+
+    try {
+        if (isUrlAllowed(url)) {
+            shell.openExternal(url)
+        }
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 /**
@@ -129,18 +144,6 @@ function createWindow() {
         windows.main.loadFile(paths.html)
     }
 
-    const _handleNavigation = (e, url) => {
-        e.preventDefault()
-
-        try {
-            if (isUrlAllowed(url)) {
-                shell.openExternal(url)
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
     /**
      * Right click context menu for inputs
      */
@@ -154,8 +157,8 @@ function createWindow() {
     /**
      * Only allow external navigation to allowed domains
      */
-    windows.main.webContents.on('will-navigate', _handleNavigation)
-    windows.main.webContents.on('new-window', _handleNavigation)
+    windows.main.webContents.on('will-navigate', handleNavigation)
+    windows.main.webContents.on('new-window', handleNavigation)
 
     windows.main.on('close', () => {
         closeAboutWindow()
@@ -232,7 +235,12 @@ app.on('activate', function () {
     }
 })
 
-// IPC handlers for APIs exposed from main process
+// IPC handlers for APIs exposed from main proces
+
+// URLs
+ipcMain.handle('open-url', (_e, url) => {
+    return handleNavigation(_e, url)
+})
 
 // Keychain
 ipcMain.handle('keychain-getAll', (_e) => {
