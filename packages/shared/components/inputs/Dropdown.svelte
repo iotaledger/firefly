@@ -68,7 +68,7 @@
 {/if}
 <dropdown-input
     class="relative flex items-center w-full whitespace-nowrap cursor-pointer border border-solid
-    bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700"
+    bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700"
     on:click={(e) => {
         e.stopPropagation()
         dropdown = !dropdown

@@ -1,6 +1,6 @@
 <script lang="typescript">
+    import { Error } from 'shared/components'
     import { onMount } from 'svelte'
-    import Error from './Error'
 
     export let value = ''
     export let classes = ''
@@ -57,7 +57,7 @@
         @apply m-0;
     }
     input {
-        &.disabled {
+        &:disabled {
             @apply pointer-events-none;
             @apply opacity-50;
         }

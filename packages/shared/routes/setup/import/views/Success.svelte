@@ -4,6 +4,7 @@
 
     export let locale
     export let mobile
+    export let importType
 
     const dispatch = createEventDispatcher()
 
@@ -20,8 +21,13 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
-            <Text type="h2" classes="mb-5">{locale('views.importSuccess.title')}</Text>
-            <Text type="p" secondary>{locale('views.importSuccess.body')}</Text>
+            <div class="flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-5">
+                <div class="bg-green-100 rounded-2xl relative -top-10">
+                    <Icon icon="success-check" classes="text-white" />
+                </div>
+                <Text type="h2" classes="mb-5 text-center">{locale(`views.importSuccess.${importType}Title`)}</Text>
+                <Text type="p" secondary classes="mb-10">{locale(`views.importSuccess.${importType}Body`)}</Text>
+            </div>
         </div>
         <div slot="leftpane__action">
             <Button classes="w-full" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>

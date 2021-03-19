@@ -5,6 +5,7 @@ const NotificationManager = require('./lib/notificationManager')
 const { ipcRenderer, contextBridge } = require('electron')
 const { proxyApi } = require('../../shared/lib/walletApi')
 const { menuState } = require('./lib/menuState')
+const fs = require('fs');
 
 let activeProfileId = null
 
@@ -44,7 +45,7 @@ const Electron = {
      *
      * @returns {Promise}
      */
-     getDiagnostics: () => ipcRenderer.invoke('diagnostics'),
+    getDiagnostics: () => ipcRenderer.invoke('diagnostics'),
      /**
      * Starts an update of the application
      *
@@ -91,6 +92,14 @@ const Electron = {
         }
     },
     /**
+     * Opens url and checks against acceptlist
+     * @param {string} url - Target url
+     * @returns {undefined}
+     */
+    openUrl: (url) => {
+        ipcRenderer.invoke('open-url', url)
+    },
+    /**
      * Add native window wallet event listener
      * @param {string} event - Target event name
      * @param {function} callback - Event trigger callback
@@ -108,6 +117,31 @@ const Electron = {
         }
         listeners.push(callback)
     },
+    /**
+     * Save the recovery kit
+     * @returns 
+     */
+    saveRecoveryKit: (recoverKitData) => {
+        return ipcRenderer.invoke('show-save-dialog', { 
+            properties: ['createDirectory', 'showOverwriteConfirmation'],
+            defaultPath: "firefly-recovery-kit.pdf",
+            filters: [
+                { name: 'Pdf Document', extensions: ['pdf'] },
+                { name: 'All Files', extensions: ['*'] }
+            ]
+        }).then((result) => {
+            if (result.canceled) {
+                return
+            }
+
+            try {
+                fs.writeFileSync(result.filePath, Buffer.from(recoverKitData))
+            } catch (err) {
+                console.error(err)
+            }
+        })
+    },
+
 }
 
 contextBridge.exposeInMainWorld('__WALLET_INIT__', {
