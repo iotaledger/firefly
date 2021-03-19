@@ -111,7 +111,7 @@
         },
         "importFromFile": {
             "title": "Restore your wallet using a backup file",
-            "body": "Upload a file to restore existing wallet funds. File backups can be either a Trinity SeedValue or a Firefly Stronghold."
+            "body": "Upload a file to restore existing wallet funds. File backups can be either a Trinity SeedVault or a Firefly Stronghold."
         },
         "importBackupPassword": {
             "title": "Restore your wallet from a SeedVault or Stronghold",
