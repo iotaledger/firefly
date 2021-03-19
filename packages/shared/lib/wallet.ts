@@ -218,18 +218,23 @@ export const initialiseListeners = () => {
 
             const essence = message.payload.data.essence
 
-            if (!essence.data.internal) {
-                const { balanceOverview } = get(wallet);
-                const overview = get(balanceOverview);
+            if (!get(isSyncing)) {
+                if (!essence.data.internal) {
+                    const { balanceOverview } = get(wallet);
+                    const overview = get(balanceOverview);
 
-                const incoming = essence.data.incoming ? overview.incomingRaw + essence.data.value : overview.incomingRaw;
-                const outgoing = essence.data.incoming ? overview.outgoingRaw : overview.outgoingRaw + essence.data.value;
+                    const incoming = essence.data.incoming ? overview.incomingRaw + essence.data.value : overview.incomingRaw;
+                    const outgoing = essence.data.incoming ? overview.outgoingRaw : overview.outgoingRaw + essence.data.value;
 
-                updateBalanceOverview(
-                    overview.balanceRaw,
-                    incoming,
-                    outgoing
-                );
+                    updateBalanceOverview(
+                        overview.balanceRaw,
+                        incoming,
+                        outgoing
+                    );
+                }
+
+                // Update account with new message
+                saveNewMessage(response.payload.accountId, response.payload.message);
             }
 
             const notificationMessage = localize('notifications.valueTx')
@@ -237,9 +242,6 @@ export const initialiseListeners = () => {
                 .replace('{{account}}', account.alias)
 
             showSystemNotification({ type: "info", message: notificationMessage })
-
-            // Update account with new message
-            saveNewMessage(response.payload.accountId, response.payload.message);
         },
         onError(error) {
             console.error(error)
@@ -258,41 +260,43 @@ export const initialiseListeners = () => {
 
             const essence = message.payload.data.essence
 
-            if (response.payload.confirmed && !essence.data.internal) {
-                const { balanceOverview } = get(wallet);
-                const overview = get(balanceOverview);
+            if (!get(isSyncing)) {
+                if (response.payload.confirmed && !essence.data.internal) {
+                    const { balanceOverview } = get(wallet);
+                    const overview = get(balanceOverview);
 
-                const incoming = essence.data.incoming ? overview.incomingRaw + essence.data.value : overview.incomingRaw;
-                const outgoing = essence.data.incoming ? overview.outgoingRaw : overview.outgoingRaw + essence.data.value;
+                    const incoming = essence.data.incoming ? overview.incomingRaw + essence.data.value : overview.incomingRaw;
+                    const outgoing = essence.data.incoming ? overview.outgoingRaw : overview.outgoingRaw + essence.data.value;
 
-                updateBalanceOverview(
-                    overview.balanceRaw,
-                    incoming,
-                    outgoing
-                );
-            }
+                    updateBalanceOverview(
+                        overview.balanceRaw,
+                        incoming,
+                        outgoing
+                    );
+                }
 
-            const accountMessage = account.messages.find((_message) => _message.id === message.id)
-            accountMessage.confirmed = response.payload.confirmed
-            accounts.update((storedAccounts) => {
-                return storedAccounts.map((storedAccount) => {
-                    if (storedAccount.id === account.id) {
-                        return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
-                            messages: storedAccount.messages.map((_message: Message) => {
-                                if (_message.id === message.id) {
-                                    return Object.assign<Message, Partial<Message>, Partial<Message>>(
-                                        {} as Message,
-                                        _message,
-                                        { confirmed: response.payload.confirmed }
-                                    )
-                                }
-                                return _message
+                const accountMessage = account.messages.find((_message) => _message.id === message.id)
+                accountMessage.confirmed = response.payload.confirmed
+                accounts.update((storedAccounts) => {
+                    return storedAccounts.map((storedAccount) => {
+                        if (storedAccount.id === account.id) {
+                            return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
+                                messages: storedAccount.messages.map((_message: Message) => {
+                                    if (_message.id === message.id) {
+                                        return Object.assign<Message, Partial<Message>, Partial<Message>>(
+                                            {} as Message,
+                                            _message,
+                                            { confirmed: response.payload.confirmed }
+                                        )
+                                    }
+                                    return _message
+                                })
                             })
-                        })
-                    }
-                    return storedAccount
+                        }
+                        return storedAccount
+                    })
                 })
-            })
+            }
 
             const notificationMessage = localize(`notifications.${messageKey}`)
                 .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
@@ -310,17 +314,18 @@ export const initialiseListeners = () => {
      */
     api.onBalanceChange({
         onSuccess(response) {
-            const { payload: { accountId, address, balanceChange } } = response;
+            if (!get(isSyncing)) {
+                const { payload: { accountId, address, balanceChange } } = response;
 
-            updateAccountAfterBalanceChange(accountId, address, balanceChange.received, balanceChange.spent)
-
-            const { balanceOverview } = get(wallet);
-            const overview = get(balanceOverview);
-
-            const balance = overview.balanceRaw - balanceChange.spent + balanceChange.received
-
-            updateBalanceOverview(balance, overview.incomingRaw, overview.outgoingRaw);
-
+                updateAccountAfterBalanceChange(accountId, address, balanceChange.received, balanceChange.spent)
+    
+                const { balanceOverview } = get(wallet);
+                const overview = get(balanceOverview);
+    
+                const balance = overview.balanceRaw - balanceChange.spent + balanceChange.received
+    
+                updateBalanceOverview(balance, overview.incomingRaw, overview.outgoingRaw);
+            }
         },
         onError(error) {
             console.error(error)
