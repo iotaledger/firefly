@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
-    import { mnemonic, seed } from 'shared/lib/app'
+    import { mnemonic } from 'shared/lib/app'
+    import { getMigrationData } from 'shared/lib/migration'
     import { newProfile } from 'shared/lib/profile'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
@@ -8,6 +9,8 @@
 
     export let locale
     export let mobile
+
+    let isGettingMigrationData = false
 
     enum ImportState {
         Init = 'init',
@@ -45,11 +48,19 @@
                 const { input } = params
                 // Dummy
                 if (input.length === 81) {
-                    importType = 'seed'
+                    isGettingMigrationData = true
 
-                    seed.set(input)
+                    getMigrationData(input)
+                        .then(() => {
+                            isGettingMigrationData = false
 
-                    dispatch('next', { importType })
+                            importType = 'seed'
+                            dispatch('next', { importType })
+                        })
+                        .catch((error) => {
+                            console.error(error)
+                            isGettingMigrationData = false
+                        })
                 } else {
                     importType = 'mnemonic'
                     mnemonic.set(input.split(' '))
@@ -120,7 +131,7 @@
     </Transition>
 {:else if state === ImportState.TextImport}
     <Transition>
-        <TextImport on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <TextImport loading={isGettingMigrationData} on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
 {:else if state === ImportState.FileImport}
     <Transition>

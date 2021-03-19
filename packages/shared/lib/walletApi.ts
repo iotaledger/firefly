@@ -9,6 +9,7 @@ import type {
     ReadAccountsResponse, SetStrongholdPasswordResponse,
     SyncAccountsResponse
 } from './typings/bridge'
+import type { MigrationData } from './typings/migration'
 import { ResponseTypes } from './typings/bridge'
 import type { ClientOptions } from './typings/client'
 import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, ErrorEventPayload, Event, TransactionEventPayload, TransferProgressEventPayload } from './typings/events'
@@ -123,6 +124,7 @@ const eventsApiResponseTypes = Object.values(eventsApiToResponseTypeMap)
  */
 
 Wallet.onMessage((message: MessageResponse) => {    
+    console.log(message)
     if (message && message.id === undefined) {
         // There is no message id
         // Something lower level has thrown an error
@@ -321,11 +323,11 @@ export interface ApiClient {
 
     // Migration
     getMigrationData(
-        node: string,
         seed: string,
+        node: string,
         securityLevel: number,
         initialAddressIndex: number,
-        callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: Event<MigrationData>) => void, onError: (err: ErrorEventPayload) => void }
     )
 
     onStrongholdStatusChange(callbacks: { onSuccess: (response: Event<StrongholdStatus>) => void, onError: (err: ErrorEventPayload) => void })

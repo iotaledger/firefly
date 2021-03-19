@@ -27,11 +27,6 @@ export const strongholdPassword = writable<string>(null)
  */
 export const mnemonic = writable<Array<string>>(null)
 
-/**
- * IOTA WOTS seed. Required for WOTS to Ed25519 migration. 
- */
-export const seed = writable<string>(null)
-
 interface SendParams {
     amount: number
     address: string

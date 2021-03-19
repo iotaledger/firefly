@@ -661,6 +661,12 @@ export default class ValidatorService {
             [ResponseTypes.StrongholdPasswordClearIntervalSet]: this.createBaseValidator().getFirst(),
             [ResponseTypes.Error]: this.createBaseValidator().getFirst(),
             [ResponseTypes.Panic]: this.createBaseValidator().getFirst(),
+
+            // Migration
+            [ResponseTypes.MigrationData]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.CreatedMigrationBundle]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.SentMigrationBundle]: this.createBaseValidator().getFirst(),
+
             // Events
             [ResponseTypes.StrongholdStatusChange]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.NewTransaction]: this.createBaseEventValidator().getFirst(),

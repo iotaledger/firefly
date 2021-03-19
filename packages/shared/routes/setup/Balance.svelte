@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Box, Button, Illustration, OnboardingLayout, Text, Toast } from 'shared/components'
     import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
+    import { migration, getMigrationData } from 'shared/lib/migration'
     import { formatUnit } from 'shared/lib/units'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
@@ -8,7 +9,11 @@
     export let locale
     export let mobile
 
-    let balance = Math.floor(Math.random() * 2000000) // TODO: dummy
+    let isCheckingForBalance
+
+    const { seed, data } = $migration
+    const { balance, inputs } = $data
+
     let fiatbalance = `${convertToFiat(
         balance,
         get(currencies)[CurrencyTypes.USD],
@@ -24,6 +29,18 @@
     }
     function handleBackClick() {
         dispatch('previous')
+    }
+
+    function checkAgain() {
+        isCheckingForBalance = true
+        getMigrationData($seed, inputs.length)
+            .then(() => {
+                isCheckingForBalance = false
+            })
+            .catch((error) => {
+                isCheckingForBalance = false
+                console.error(error)
+            })
     }
 </script>
 
@@ -47,8 +64,8 @@
             {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-between items-center space-x-4">
-            <Button secondary classes="flex-1" onClick={() => console.log('foo')}>{locale('actions.check_again')}</Button>
-            <Button classes="flex-1" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
+            <Button disabled={isCheckingForBalance} secondary classes="flex-1" onClick={checkAgain}>{locale('actions.check_again')}</Button>
+            <Button disabled={isCheckingForBalance} classes="flex-1" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex p-16">
             <Illustration width="100%" illustration="balance-desktop" />

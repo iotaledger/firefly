@@ -6,6 +6,8 @@
 
     let input = ''
 
+    export let loading
+
     const dispatch = createEventDispatcher()
 
     function handleContinueClick() {
@@ -28,8 +30,8 @@
             <ImportTextfield bind:value={input} {locale} />
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-            <Button secondary classes="flex-1" onClick={() => handleBackClick()}>{locale('actions.back')}</Button>
-            <Button classes="flex-1" disabled={input.length === 0} onClick={() => handleContinueClick()}>
+            <Button disabled={loading} secondary classes="flex-1" onClick={() => handleBackClick()}>{locale('actions.back')}</Button>
+            <Button  classes="flex-1" disabled={input.length === 0 || loading} onClick={() => handleContinueClick()}>
                 {locale('actions.continue')}
             </Button>
         </div>

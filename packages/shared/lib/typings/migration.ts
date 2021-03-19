@@ -6,8 +6,10 @@ export interface MigrationData {
         address: string;
         balance: number;
         spent: boolean;
+        index: number;
+        securityLevel: number;
         spentBundleHashes: string[]
-    }
+    }[]
 }
 
 /**
@@ -61,7 +63,8 @@ export function createMigrationBundle(
     bridge: Bridge,
     __ids: CommunicationIds,
     seed: string,
-    address: string
+    inputIndexes: number[],
+    mine: boolean
 ) {
     return bridge({
         actorId: __ids.actorId,
@@ -69,7 +72,8 @@ export function createMigrationBundle(
         cmd: 'CreateMigrationBundle',
         payload: {
             seed,
-            address,
+            inputIndexes,
+            mine
         },
     })
 }
