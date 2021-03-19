@@ -100,6 +100,7 @@
     body {
         @apply bg-white;
         @apply select-none;
+        -webkit-user-drag: none;
         &.scheme-dark {
             @apply bg-gray-900;
         }
