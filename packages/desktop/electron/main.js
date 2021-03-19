@@ -80,11 +80,14 @@ if (app.isPackaged) {
 /**
  * Check URL against allowlist
  */
-function isUrlAllowed(url) {
+function isUrlAllowed(targetUrl) {
     // TODO: Add links for T&C, privacy policy and help
-    const externalAllowlist = ['privacy@iota.org', 'iota.org', 'github.com', 'discord.iota.org']
+    const externalAllowlist = ['privacy@iota.org', 'iota.org', 'github.com/iotaledger/firefly/issues', 'discord.iota.org']
 
-    return externalAllowlist.indexOf(new URL(url).hostname.replace('www.', '').replace('mailto:', '')) > -1
+    const url = new URL(targetUrl)
+    const domain = url.hostname.replace('www.', '').replace('mailto:', '')
+
+    return externalAllowlist.indexOf(domain) > -1 || externalAllowlist.indexOf(domain + url.pathname) > -1
 }
 
 /**
