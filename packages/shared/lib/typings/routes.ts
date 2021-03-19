@@ -104,5 +104,5 @@ export enum HelpAndInfo {
     Documentation = 'documentation',
     FAQ = 'faq',
     Discord = 'discord',
-    About = 'about',
+    ReportAnIssue = 'reportAnIssue',
 }

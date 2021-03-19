@@ -51,6 +51,7 @@ export interface IElectron {
     updateActiveProfile(id: string): void;
     updateMenu(attribute: string, value: unknown): void;
     saveRecoveryKit(kitData: ArrayBuffer): Promise<void>;
+    openUrl(url: string): void;
 
     NotificationManager: INotificationManager;
 
