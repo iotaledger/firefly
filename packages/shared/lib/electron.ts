@@ -50,6 +50,7 @@ export interface IElectron {
     getDiagnostics(): Promise<{ label: string; value: string; }[]>;
     updateActiveProfile(id: string): void;
     updateMenu(attribute: string, value: unknown): void;
+    saveRecoveryKit(kitData: ArrayBuffer): Promise<void>;
     openUrl(url: string): void;
 
     NotificationManager: INotificationManager;

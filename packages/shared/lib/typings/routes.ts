@@ -1,8 +1,9 @@
 export enum AppRoute {
     Welcome = 'welcome',
     Legal = 'legal',
-    Language = 'language',
+    Appearance = 'appearance',
     Setup = 'setup',
+    Secure = 'secure',
     Password = 'password',
     Protect = 'protect',
     Backup = 'backup',

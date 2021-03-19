@@ -1,11 +1,11 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA",
-            "body": "Firefly is a secure and easy-to-use IOTA wallet."
+            "title": "Send, Receive & Manage your IOTA tokens",
+            "body": "Firefly is the official wallet of IOTA."
         },
         "legal": {
-            "title": "Legal",
+            "title": "Privacy Policy & Terms of Service",
             "body": "Please review the Privacy Policy and Terms of Service.",
             "privacyPolicy": {
                 "title": "Privacy Policy",
@@ -25,20 +25,26 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I have read and I accept the Privacy policy & ToS"
+            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
         },
-        "language": {
-            "title": "Language & appearance",
-            "body": "Choose your wallet’s language and theme"
+        "appearance": {
+            "title": "Appearance",
+            "body": "Choose your wallet’s theme"
         },
         "setup": {
             "title": "Set up your wallet",
-            "body": "You can create a new wallet or import an existing one.",
+            "body1": "You can create multiple user profiles to organize your wallets or separate user identities.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later",
             "profileName": "Profile Name"
+        },
+        "secure": {
+            "title": "Secure your wallet",
+            "body1": "Your Firefly wallet is secured by a password and a PIN code.",
+            "body2": "Use the Recovery Kit PDF template to store your wallet's login credentials safely."
         },
         "password": {
             "title": "Create a password",
-            "body": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates."
+            "body": "You need a strong password to protect your funds. Use a combindation of words, and avoid common phrases, names or dates."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -47,12 +53,12 @@
         },
         "pin": {
             "title": "Set up PIN code",
-            "body1": "Enter a 6-digit PIN below. You will be asked to enter your pin to login to your wallet.",
-            "body2": "You can use numbers only."
+            "body1": "Enter a 6-digit PIN below. You will be asked for this frequently when you access your device.",
+            "body2": "Use numbers only"
         },
         "confirmPin": {
-            "title": "Verify your PIN code",
-            "body": "Re-enter your PIN code to proceed."
+            "title": "Confirm PIN code",
+            "body": "Confirm the PIN code you just created by repeating it."
         },
         "backup": {
             "title": "Back up your wallet",
@@ -62,52 +68,65 @@
         },
         "recoveryPhrase": {
             "title": "Recovery phrase",
-            "body1": "Carefully write down the words in the exact order.",
-            "body2": "Keep your recovery phrase private and safely stored. Do not share it with anyone.",
+            "body1": "Carefully copy the words in the exact order shown.",
+            "body2": "Keep this private and safely stored.",
             "revealRecoveryPhrase": "Reveal recovery phrase",
             "hideRecoveryPhrase": "Hide recovery phrase"
         },
         "verifyRecoveryPhrase": {
             "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Select the words in the correct order.",
-            "creatingAccount": "Creating account, please wait..."
+            "body": "Let's check you wrote down the phrase correctly. Please select the right word with the corresponding number.",
+            "word": "Word",
+            "verified": "Recovery phrase verified",
+            "verifiedBody": "Remember to keep it private and safely guarded."
         },
         "backupWallet": {
-            "title": "Back up to a Stronghold file",
-            "body": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup."
+            "title": "Back up to a file",
+            "body1": "Your wallet password is also used to encrypt a Stronghold backup. Enter your wallet password to save your recovery phrase backup to a file.",
+            "body2": "Reasons why backing up to a file is important:",
+            "reason1": "Recover your full history",
+            "reason2": "Save your settings",
+            "reason3": "Recover a complete wallet setup and configuration",
+            "reason4": "Import into other devices"
         },
         "recoveryPhraseSaved": {
             "title": "Successfully backed up",
             "body": "You have backed up your wallet to a Stronghold."
         },
         "congratulations": {
-            "title": "Congratulations",
-            "body": "Your wallet is ready to go."
+            "title": "Wallet setup completed",
+            "body": "Your new wallet is ready to use."
         },
         "import": {
             "title": "Import a wallet",
-            "body": "If you have a recovery phrase or Stronghold back up, you can import it here."
+            "body": "If you have an existing seed or wallet back up file, you can import it here."
         },
         "importFromText": {
-            "title": "Restore your wallet with a recovery phrase or seed",
-            "body1": "A recovery phrase is 24 words long. This is used to recover an existing Firefly wallet.",
-            "body2": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body3": "Enter your seed or recovery phrase",
+            "title": "Type your seed or secret phase",
+            "body1": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+            "body2": "A secret phrase is a 24 word mnemonic. This is used to recover a newer Firefly wallet.",
+            "body3": "Enter your seed or secret phrase",
             "seedDetected": "81 character seed detected",
-            "phraseDetected": "24 word phrase detected"
+            "phraseDetected": "24 word secret phrase detected"
         },
         "importFromFile": {
-            "title": "Restore your wallet from a backup file",
-            "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "Restore your wallet using a backup file",
+            "body": "Upload a file to restore existing wallet funds. File backups can be either a Trinity SeedVault or a Firefly Stronghold."
         },
         "importBackupPassword": {
             "title": "Restore your wallet from a SeedVault or Stronghold",
-            "body1": "Please enter your backup password.",
-            "body2": "This is the password you set when you first created your backup."
+            "body1": "Please provide your backup password.",
+            "body2": "This is the password created when you first created your backup. This stops unauthorized access to your funds."
         },
         "importSuccess": {
-            "title": "You have successfully recovered your backup",
-            "body": "You can now set up your new wallet."
+            "mnemonicTitle": "You have successfully recovered your backup",
+            "mnemonicBody": "Your secret phrase is correct, you can now set up your new wallet.",
+            "seedTitle": "You have successfully recovered your backup",
+            "seedBody": "Your secret phrase is correct, you can now set up your new wallet.",
+            "seedvaultTitle": "Successfully imported",
+            "seedvaultBody": "Your password is correct, you can now continue.",
+            "strongholdTitle": "Successfully imported",
+            "strongholdBody": "Your password is correct, you can now continue."
         },
         "migrate": {
             "title": "Migrate your funds",
@@ -396,7 +415,7 @@
         "tryAgain": "Try again",
         "visitDiscord": "Visit Discord",
         "dragDrop": "Drag & Drop",
-        "importExtentions": ".stronghold or .kdbx file",
+        "importExtentions": ".kdbx or .stronghold file",
         "chooseFile": "Choose a File",
         "dropHere": "Drop your file here",
         "syncAll": "Sync all",
@@ -410,7 +429,7 @@
         "unlock": "Unlock",
         "updateFirefly": "Update Firefly",
         "restartNow": "Restart now",
-        "saveBackup": "Save backup",
+        "saveBackup": "Save Stronghold backup",
         "customizeAcount": "Customise account",
         "viewAddressHistory": "View address history",
         "deleteAccount": "Delete account",
@@ -436,6 +455,9 @@
         "yes": "Yes",
         "no": "No",
         "reset": "Reset",
+        "downloadRecoveryKit": "Download recovery kit template",
+        "skipBackup": "Skip file backup",
+        "finishSetup": "Finish setup",
         "readDocumentation": "Read the documentation",
         "visitFaq": "Visit FAQ"
     },
@@ -533,7 +555,13 @@
         "exportingStrongholdFailed": "Exported stronghold failed",
         "pinCodeUpdating": "Updating PIN code...",
         "pinCodeSuccess": "Updated PIN code successfully",
-        "pinCodeFailed": "Updating PIN code failed"
+        "pinCodeFailed": "Updating PIN code failed",
+        "passwordStrength": "Password strength",
+        "passwordStrength0": "Bad",
+        "passwordStrength1": "Poor",
+        "passwordStrength2": "Weak",
+        "passwordStrength3": "Good",
+        "passwordStrength4": "Strong"
     },
     "dates": {
         "today": "Today",

@@ -42,5 +42,7 @@
         checked = !checked
     }}>
     <Icon icon={checked ? 'checkbox' : 'checkbox-unchecked'} classes={`mr-3 ${checked ? 'active' : ''}`} />
-    <Text type="p" secondary={!checked || disabled}>{label}</Text>
+    {#if label}
+        <Text type="p" secondary={!checked || disabled}>{label}</Text>
+    {/if}
 </button>

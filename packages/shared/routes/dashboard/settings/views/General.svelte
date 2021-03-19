@@ -34,7 +34,7 @@
     <section id="profile" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.profile.title')}</Text>
         <Text type="p" secondary>{locale('views.settings.profile.description')}</Text>
-    </section> 
+    </section>
     <HR classes="pb-5 mt-5 justify-center" /> -->
     <section id="theme" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.theme.title')}</Text>
