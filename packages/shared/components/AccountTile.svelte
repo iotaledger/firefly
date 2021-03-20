@@ -12,11 +12,13 @@
 <style type="text/scss">
     button {
         height: auto;
-        min-height: 110px;
+        min-height: 90px;
+        max-height: 110px;
         &.size-m,
         &.size-l {
-            height: 70%;
+            min-height: 140px;
             max-height: 140px;
+            height: 70%;
         }
     }
 </style>

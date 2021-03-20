@@ -65,7 +65,8 @@
                 <Button onClick={handleCreateClick} secondary small icon="plus">{locale('actions.create')}</Button>
             </div>
             {#if $accounts.length > 0}
-                <div class="grid grid-cols-{$accounts.length <= 2 ? $accounts.length : '3'} gap-2 w-full flex-auto">
+                <div
+                    class="grid grid-cols-{$accounts.length <= 2 ? $accounts.length : '3'} auto-rows-max gap-2 w-full flex-auto overflow-y-auto h-1">
                     {#each $accounts as account}
                         <AccountTile
                             color={account.color}
