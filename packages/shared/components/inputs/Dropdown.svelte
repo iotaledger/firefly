@@ -159,11 +159,11 @@
         class:active={dropdown}
         class="absolute w-full overflow-hidden pointer-events-none opacity-0 z-10 text-left 
         bg-white dark:bg-gray-800
-            border border-solid border-t-0 border-blue-500">
+            border border-solid border-blue-500 border-t-gray-500 dark:border-t-gray-700">
         <div class="inner overflow-y-auto" bind:this={navContainer}>
-            {#each items as item, index}
+            {#each items as item}
                 <button
-                    class="relative flex items-center p-4 w-full whitespace-nowrap {index === 0 && 'border-t border-solid border-gray-300 dark:border-gray-700'}
+                    class="relative flex items-center p-4 w-full whitespace-nowrap
                         {item[valueKey] === value && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'} 
                         hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
                     id={item[valueKey]}
