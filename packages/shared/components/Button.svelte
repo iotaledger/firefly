@@ -1,8 +1,9 @@
 <script lang="typescript">
     import { Icon } from 'shared/components'
+    import { appSettings } from 'shared/lib/appSettings'
     import { bindEvents } from 'shared/lib/utils'
     import { onMount } from 'svelte'
-    import { appSettings } from 'shared/lib/appSettings'
+
     export let events = {}
     export let onClick = () => ''
     export let secondary = false
@@ -12,6 +13,7 @@
     export let icon = undefined
     export let iconReverse = false
     export let xl = false
+    export let medium = false
     export let small = false
     export let classes = ''
     export let type = 'button'
@@ -155,6 +157,7 @@
                     @apply text-white;
                 }
             }
+
             &.darkmode {
                 @apply border-gray-700;
                 @apply bg-transparent;
@@ -216,16 +219,29 @@
                 @apply text-gray-800;
             }
             &.darkmode {
-                &,
-                &:hover,
-                &:active {
-                    @apply text-white;
-                }
+                @apply bg-gray-700;
+                @apply border-gray-700;
+                @apply bg-opacity-30;
+                @apply border-opacity-30;
+                @apply text-white;
                 &:hover {
-                    @apply bg-blue-900;
+                    @apply bg-opacity-50;
+                    @apply border-opacity-50;
                 }
+                &:focus,
                 &:active {
-                    @apply bg-gray-900;
+                    @apply bg-opacity-80;
+                    @apply border-opacity-50;
+                }
+                &:disabled {
+                    @apply bg-gray-700;
+                    @apply border-gray-700;
+                    @apply bg-opacity-10;
+                    @apply border-opacity-10;
+                    @apply text-gray-700;
+                    :global(svg) {
+                        @apply text-gray-500;
+                    }
                 }
                 :global(svg) {
                     @apply text-blue-500;
@@ -272,7 +288,7 @@
     <button
         {type}
         {form}
-        class={`cursor-pointer text-center rounded-2xl px-3 py-4 ${classes}`}
+        class="cursor-pointer text-center rounded-2xl px-3 {medium ? 'py-3' : 'py-4'} {classes}"
         use:bindEvents={events}
         on:click={onClick}
         class:secondary
