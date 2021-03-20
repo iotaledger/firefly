@@ -48,6 +48,7 @@
                     })
 
                     isBusy = false
+                    selectedAccountId.set(null)
                     walletRoute.set(WalletRoutes.Init)
                 },
                 onError(err) {

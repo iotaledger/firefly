@@ -33,7 +33,7 @@
 
     /** Chart data */
     $: {
-        if (locale || $selectedChart || $chartCurrency || $chartTimeframe || $walletBalanceHistory) {
+        if (locale || $selectedChart || $chartCurrency || $chartTimeframe || $walletBalanceHistory || $selectedAccount) {
             // Account value chart
             if ($selectedAccount) {
                 chartData = getAccountValueData($accountsBalanceHistory[$selectedAccount.index])
