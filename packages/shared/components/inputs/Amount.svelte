@@ -74,7 +74,7 @@
             {unit}
             {#if !disabled && dropdown}
                 <nav
-                    class="absolute w-10 overflow-y-auto z-10 text-left top-10 right-0 rounded-lg bg-white dark:bg-gray-800 border border-solid border-gray-300 dark:border-gray-700">
+                    class="absolute w-10 overflow-y-auto z-10 text-left top-11 right-0 rounded-lg bg-white dark:bg-gray-800 border border-solid border-gray-300 dark:border-gray-700">
                     {#each Units as _unit}
                         <button
                             id={_unit}

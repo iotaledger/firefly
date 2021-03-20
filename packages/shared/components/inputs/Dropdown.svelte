@@ -53,7 +53,7 @@
             .inner {
                 max-height: 235px;
             }
-            top: 49px;
+            top: 50px;
             border-radius: 0 0 0.625rem 0.625rem; // TODO: add to tailwind
             @apply left-0;
             &.active {
@@ -70,7 +70,7 @@
                 @apply rounded-lg;
             }
             nav {
-                top: 35px;
+                top: 36px;
                 @apply rounded-lg;
                 @apply rounded-tl-none;
                 @apply rounded-tr-none;
@@ -139,7 +139,11 @@
         <div class="w-full text-12 leading-140 {disabled ? 'text-gray-400 dark:text-gray-700' : 'text-gray-800 dark:text-white'}">
             {value || placeholder}
         </div>
-        <Icon icon="chevron-down" classes="absolute text-gray-500 fill-current" />
+        <Icon
+            icon={small ? 'small-chevron-down' : 'chevron-down'}
+            width={small ? 16 : 24}
+            height={small ? 16 : 24}
+            classes="absolute text-gray-500 fill-current" />
         {#if label}
             <floating-label
                 class="block text-gray-500 text-11 leading-120 overflow-hidden opacity-0 pointer-events-none absolute top-2 left-4 select-none whitespace-nowrap w-full"
@@ -152,11 +156,11 @@
         class:active={dropdown}
         class="absolute w-full overflow-hidden pointer-events-none opacity-0 z-10 text-left 
         bg-white dark:bg-gray-800
-            border border-solid border-blue-500">
+            border border-solid border-t-0 border-blue-500">
         <div class="inner overflow-y-auto">
-            {#each items as item}
+            {#each items as item, index}
                 <button
-                    class="relative flex items-center p-4 w-full whitespace-nowrap
+                    class="relative flex items-center p-4 w-full whitespace-nowrap {index === 0 && 'border-t border-solid border-gray-300 dark:border-gray-700'}
                         {item[valueKey] === value && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'} 
                         hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
                     id={item[valueKey]}
