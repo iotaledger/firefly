@@ -45,11 +45,7 @@
             <Button classes="flex-1" disabled={!valid || busy} onClick={() => onSubmit()}>{locale(confirmInput ? 'actions.confirmPin' : 'actions.setPin')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center p-16 bg-pastel-pink dark:bg-gray-900">
-            {#if !confirmInput}
-                <Illustration width="auto" height="auto" illustration="pin-desktop" />
-            {:else}
-                <Illustration width="auto" height="auto" illustration="repeat-pin-desktop" />
-            {/if}
+            <Illustration width="auto" height="auto" illustration={confirmInput ? 'repeat-pin-desktop' : 'pin-desktop'} />
         </div>
     </OnboardingLayout>
 {/if}

@@ -99,7 +99,7 @@
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center p-16 bg-pastel-green dark:bg-gray-900">
-            <Illustration illustration="setup-desktop" width="auto" height="auto" />
+            <Illustration illustration="setup-desktop" width="auto" height="100%" classes="object-cover"/>
         </div>
     </OnboardingLayout>
 {/if}

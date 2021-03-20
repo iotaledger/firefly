@@ -48,7 +48,7 @@
             <Button disabled={loading} onClick={() => handleContinueClick()}>{locale('actions.beginTransfer')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex p-16 bg-pastel-blue dark:bg-gray-900">
-            <Illustration width="100%" illustration="migrate-desktop" />
+            <Illustration width="100%" illustration="migrate-desktop" classes="object-scale-down"/>
         </div>
     </OnboardingLayout>
 {/if}

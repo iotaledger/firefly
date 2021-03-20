@@ -37,7 +37,7 @@
             <Button classes="flex-1" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center p-16 bg-pastel-orange dark:bg-gray-900">
-            <Illustration illustration="secure-desktop" width="auto" height="auto" />
+            <Illustration illustration="secure-desktop" width="auto" height="auto"/>
         </div>
     </OnboardingLayout>
 {/if}

@@ -37,7 +37,7 @@
             <Button onClick={() => handleContinueClick()} classes="w-full">{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center p-16 bg-pastel-blue dark:bg-gray-900">
-            <Illustration illustration="welcome-1-desktop" width="auto" height="auto" />
+            <Illustration illustration="welcome-1-desktop" width="100%" height="auto" classes="h-full object-cover object-left"/>
         </div>
     </OnboardingLayout>
 {/if}
