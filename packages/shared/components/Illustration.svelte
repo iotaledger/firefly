@@ -8,7 +8,6 @@
 
     const illustrations = {
         'welcome-1-desktop': 'onboarding/welcome-1-desktop.svg',
-        'settings-desktop': 'onboarding/settings-desktop.svg',
         'appearance-desktop': 'onboarding/appearance-desktop.svg',
         'setup-desktop': 'onboarding/setup-desktop.svg',
         'secure-desktop': 'onboarding/secure-desktop.svg',
@@ -22,7 +21,11 @@
         'import-from-text-desktop': 'onboarding/import-from-text-desktop.svg',
         'import-from-file-desktop': 'onboarding/import-from-file-desktop.svg',
         'import-from-file-password-desktop': 'onboarding/import-from-file-password-desktop.svg',
-        'congratulations-desktop': 'onboarding/congratulations-desktop.svg'
+        'import-from-text-success-desktop': 'onboarding/import-from-text-success-desktop.svg',
+        'import-from-file-success-desktop': 'onboarding/import-from-file-success-desktop.svg',
+        'congratulations-desktop': 'onboarding/congratulations-desktop.svg',
+        'migrate-desktop': 'onboarding/migrate-desktop.svg',
+        'migrate-failed-desktop': 'onboarding/migrate-failed-desktop.svg'
     }
 </script>
 

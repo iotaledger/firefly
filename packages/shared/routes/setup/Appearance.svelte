@@ -38,8 +38,8 @@
         <div slot="leftpane__action">
             <Button onClick={() => handleContinueClick()} classes="w-full">{locale('actions.continue')}</Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center p-16" style="background-color: #FFF8EF">
-            <Illustration illustration="appearance-desktop" width="auto" height="auto" />
+        <div slot="rightpane" class="w-full h-full flex justify-center p-16 bg-pastel-orange dark:bg-gray-900">
+            <Illustration illustration="appearance-desktop" width="auto" height="auto" classes="pb-24"/>
         </div>
     </OnboardingLayout>
 {/if}
