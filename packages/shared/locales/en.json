@@ -561,7 +561,8 @@
         "passwordStrength1": "Poor",
         "passwordStrength2": "Weak",
         "passwordStrength3": "Good",
-        "passwordStrength4": "Strong"
+        "passwordStrength4": "Strong",
+        "creatingProfile": "Creating profile, please wait..."
     },
     "dates": {
         "today": "Today",
