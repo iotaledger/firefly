@@ -446,7 +446,7 @@
         "sendPayment": "Send payment",
         "moveFunds": "Move funds",
         "sendFunds": "Send funds",
-        "sendToAddress": "Send to an Address",
+        "sendToAddress": "Send to address",
         "scanQrOrPaste": "Scan a QR code or paste an Address",
         "moveFundsBetweenAccounts": "Move funds between accounts",
         "sendTokensToAddress": "Send tokens to an address",

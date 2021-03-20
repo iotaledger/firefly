@@ -6,6 +6,7 @@
     export let amount = undefined
     export let unit = Unit.Mi
     export let label = undefined
+    export let placeholder = undefined
     export let locale = undefined
     export let classes = ''
     export let maxClick = () => {}
@@ -38,24 +39,19 @@
     amount-input {
         &.disabled {
             @apply pointer-events-none;
-            @apply opacity-50;
-            border-radius: 10px;
-            button {
-                &:hover,
-                &.active {
-                    @apply bg-gray-100;
-                }
+            actions {
+                @apply opacity-50;
             }
         }
     }
 </style>
 
 <svelte:window on:click={clickOutside} />
-<Text type="p" classes="mb-2 {disabled && 'opacity-50'}" smaller>{label || locale('general.amount')}</Text>
 <amount-input class:disabled class="relative block {classes}">
     <Input
         {error}
-        placeholder={label || locale('general.amount')}
+        label={label || locale('general.amount')}
+        placeholder={placeholder || locale('general.amount')}
         bind:value={amount}
         maxlength={17}
         {disabled}
@@ -73,12 +69,12 @@
                 e.stopPropagation()
                 dropdown = !dropdown
             }}
-            class={`w-10 h-full text-center px-2 border-l border-solid border-gray-500 ${disabled ? 'cursor-auto' : 'hover:text-blue-500 focus:text-blue-500 cursor-pointer'}`}
+            class={`w-10 h-full text-center px-2 border-l border-solid border-gray-300 dark:border-gray-700 ${disabled ? 'cursor-auto' : 'hover:text-blue-500 focus:text-blue-500 cursor-pointer'}`}
             {disabled}>
             {unit}
             {#if !disabled && dropdown}
                 <nav
-                    class="absolute w-10 overflow-y-auto bg-white border border-solid border-gray-500 z-10 text-left top-10 right-0 rounded-lg bg-gray-50 dark:bg-gray-800 border border-solid border-gray-300 hover:border-gray-500 dark:border-gray-700 dark:hover:border-gray-700">
+                    class="absolute w-10 overflow-y-auto z-10 text-left top-10 right-0 rounded-lg bg-white dark:bg-gray-800 border border-solid border-gray-300 dark:border-gray-700">
                     {#each Units as _unit}
                         <button
                             id={_unit}

@@ -32,7 +32,7 @@
     let addressError = ''
 
     // This looks odd but sets a reactive dependency on amount, so when it changes the error will clear
-    $: amount, amountError = ''
+    $: amount, (amountError = '')
 
     let transferSteps: {
         [key in TransferProgressEventType | 'Complete']: {
@@ -188,8 +188,9 @@
                 {#if !$account}
                     <div class="block mb-5">
                         <Dropdown
-                            value={from?.label || ''}
+                            value={from?.label || null}
                             label={locale('general.from')}
+                            placeholder={locale('general.from')}
                             items={accountsDropdownItems}
                             onSelect={handleFromSelect}
                             disabled={$accounts.length === 1 || $isTransferring} />
@@ -207,8 +208,9 @@
                         autofocus />
                     {#if selectedSendType === SEND_TYPE.INTERNAL}
                         <Dropdown
-                            value={to?.label || ''}
+                            value={to?.label || null}
                             label={locale('general.to')}
+                            placeholder={locale('general.to')}
                             items={accountsDropdownItems.filter((a) => from && a.id !== from.id)}
                             onSelect={handleToSelect}
                             disabled={$isTransferring || $accounts.length === 2} />
@@ -217,9 +219,9 @@
                             error={addressError}
                             bind:address={$sendParams.address}
                             {locale}
-                            label={locale('general.to')}
+                            label={locale('general.sendToAddress')}
                             disabled={$isTransferring}
-                            prefix={`${addressPrefix}...`} />
+                            placeholder={`${locale('general.sendToAddress')}\n${addressPrefix}...`} />
                     {/if}
                 </div>
             </div>
