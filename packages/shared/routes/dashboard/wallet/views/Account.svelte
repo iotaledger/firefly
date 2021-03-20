@@ -13,9 +13,8 @@
 
     const account = getContext<Readable<WalletAccount>>('selectedAccount')
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
-    const walletTransactions = getContext<Readable<AccountMessage[]>>('walletTransactions')
 
-    $: transactions = $account ? $walletTransactions.filter((tx) => tx.account === $account.index) : []
+    $: transactions = $account ? $account.messages : []
     $: navAccounts = $account ? $accounts.map(({ id, alias, color }) => ({ id, alias, color, active: $account.id === id })) : []
 
     let showActionsModal = false
