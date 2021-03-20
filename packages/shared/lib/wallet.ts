@@ -466,7 +466,7 @@ export const initialiseListeners = () => {
  */
 export const updateAccountAfterBalanceChange = (
     accountId: string,
-    address: Address | null,
+    address: Address,
     receivedBalance: number,
     spentBalance: number
 ): void => {
@@ -487,7 +487,7 @@ export const updateAccountAfterBalanceChange = (
                         get(currencies)[CurrencyTypes.USD],
                         get(exchangeRates)[activeCurrency]
                     )} ${activeCurrency}`,
-                    addresses: address === null ? storedAccount.addresses : storedAccount.addresses.map((_address: Address) => {
+                    addresses: storedAccount.addresses.map((_address: Address) => {
                         if (_address.address === address.address) {
                             return Object.assign<Address, Partial<Address>, Partial<Address>>({} as Address, _address, address)
                         }
