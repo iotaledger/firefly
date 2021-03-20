@@ -38,7 +38,7 @@
                         balance={$account.balance}
                         balanceEquiv={$account.balanceEquiv}
                         onMenuClick={handleMenuClick} />
-                    <DashboardPane classes="h-full -mt-5">
+                    <DashboardPane classes="h-full -mt-5 z-0">
                         <AccountActions {isGeneratingAddress} {send} {internalTransfer} {generateAddress} {locale} />
                     </DashboardPane>
                 </DashboardPane>

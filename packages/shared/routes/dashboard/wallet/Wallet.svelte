@@ -28,7 +28,7 @@
         updateBalanceOverview,
         wallet,
         WalletAccount,
-        removeEventListeners
+        removeEventListeners,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, Writable } from 'svelte/store'
@@ -389,7 +389,7 @@
                         <CreateAccount onCreate={onCreateAccount} {locale} />
                     {:else}
                         <WalletBalance {locale} />
-                        <DashboardPane classes="-mt-5 h-full">
+                        <DashboardPane classes="-mt-5 h-full z-0">
                             <WalletActions
                                 {isGeneratingAddress}
                                 send={onSend}

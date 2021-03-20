@@ -37,7 +37,7 @@
     }
 </script>
 
-<Modal bind:isActive position={{ top: '121px', right: 'calc((100% + 43px) * 0.6666666)' }}>
+<Modal bind:isActive position={{ top: '121px', right: 'calc((100% + 16px) * 0.6666666)' }}>
     <div class="flex flex-col">
         <!-- Customize -->
         <button
