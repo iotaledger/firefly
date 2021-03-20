@@ -21,8 +21,8 @@
 
 {#if $accountRoute === AccountRoutes.Init}
     <div class="w-full h-full flex flex-col justify-between p-8">
-        <div class="flex flex-col justify-between">
-            <div class="flex flex-col justify-between items-center">
+        <div class="flex flex-col justify-between h-full">
+            <div class="flex flex-col justify-between items-center h-full">
                 <Button icon="send" classes="w-full mb-6 p-4" secondary onClick={() => handleSendClick()}>
                     {locale('general.sendFunds')}
                     <Text type="p" smaller secondary>{locale('general.sendTokensToAddress')}</Text>

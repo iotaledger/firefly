@@ -161,14 +161,31 @@
     })
 </script>
 
+<style type="text/scss">
+    button.active {
+        @apply relative;
+        &:after {
+            content: '';
+            @apply bg-blue-500;
+            @apply w-full;
+            @apply rounded;
+            @apply h-0.5;
+            @apply absolute;
+            @apply -bottom-2.5;
+            @apply left-0;
+        }
+    }
+</style>
+
 <div class="w-full h-full flex flex-col justify-between p-8">
     <div>
-        <div class="flex flex-row mb-6 space-x-4">
+        <div class="flex flex-row mb-8 space-x-4">
             <button
                 on:click={() => handleSendTypeClick(SEND_TYPE.EXTERNAL)}
                 disabled={$isTransferring}
-                class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}>
-                <Text type="h5" disabled={SEND_TYPE.EXTERNAL !== selectedSendType || $isTransferring}>
+                class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}
+                class:active={SEND_TYPE.EXTERNAL === selectedSendType && !$isTransferring}>
+                <Text type="h5" secondary={SEND_TYPE.EXTERNAL !== selectedSendType || $isTransferring}>
                     {locale(`general.${SEND_TYPE.EXTERNAL}`)}
                 </Text>
             </button>
@@ -176,8 +193,9 @@
                 <button
                     on:click={() => handleSendTypeClick(SEND_TYPE.INTERNAL)}
                     disabled={$isTransferring}
-                    class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}>
-                    <Text type="h5" disabled={SEND_TYPE.INTERNAL !== selectedSendType || $isTransferring}>
+                    class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}
+                    class:active={SEND_TYPE.INTERNAL === selectedSendType && !$isTransferring}>
+                    <Text type="h5" secondary={SEND_TYPE.INTERNAL !== selectedSendType || $isTransferring}>
                         {locale(`general.${SEND_TYPE.INTERNAL}`)}
                     </Text>
                 </button>

@@ -29,10 +29,10 @@
     <div class="w-full flex flex-row justify-between items-start">
         <Text type="h5" classes="mb-5">{locale('general.latestTransactions')}</Text>
         <button on:click={syncAccounts} class:pointer-events-none={$isSyncing}>
-            <Icon icon="refresh" classes="{$isSyncing && 'animate-spin'} text-gray-500 dark:text-white" />
+            <Icon icon="refresh" classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white" />
         </button>
     </div>
-    <div class="overflow-y-auto flex-auto h-1 space-y-2">
+    <div class="overflow-y-auto flex-auto h-1 space-y-2.5">
         {#if $transactions?.length}
             {#each $transactions as transaction}
                 <ActivityRow

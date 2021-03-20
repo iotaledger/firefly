@@ -1,5 +1,6 @@
 <script lang="typescript">
     import Chart from 'chart.js'
+    import { appSettings } from 'shared/lib/appSettings'
     import tailwindConfig from 'shared/tailwind.config.js'
     import { afterUpdate, onMount } from 'svelte'
     import resolveConfig from 'tailwindcss/resolveConfig'
@@ -12,6 +13,8 @@
 
     let canvas
     let chart
+
+    let darkModeEnabled = $appSettings.darkMode
 
     const fullConfig = resolveConfig(tailwindConfig)
 
@@ -144,7 +147,12 @@
                     ],
                     yAxes: [
                         {
+                            gridLines: {
+                                display: false,
+                                drawBorder: false,
+                            },
                             ticks: {
+                                display: false,
                                 beginAtZero: true,
                                 autoSkip: true,
                                 maxTicksLimit: 4,

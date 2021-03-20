@@ -211,6 +211,19 @@ module.exports = {
                 800: '800',
                 900: '900',
             },
+            keyframes: {
+                spinReverse: {
+                    from: {
+                        transform: 'rotate(360deg)',
+                    },
+                    to: {
+                        transform: 'rotate(0deg)',
+                    },
+                },
+            },
+            animation: {
+                'spin-reverse': 'spinReverse 1s linear infinite;',
+            },
         },
     },
     variants: {

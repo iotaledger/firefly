@@ -268,7 +268,9 @@
         <Text type="h4" classes="mb-3">{locale('views.settings.exportStronghold.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.exportStronghold.description')}</Text>
         <div class="flex flex-row items-center">
-            <Button onClick={handleExportClick} disabled={exportBusy}>{locale('actions.export')}</Button>
+            <Button medium inlineStyle="min-width: 156px;" onClick={handleExportClick} disabled={exportBusy}>
+                {locale('actions.export')}
+            </Button>
             <Spinner busy={exportBusy} message={exportMessage} classes="ml-2" />
         </div>
     </section>
@@ -321,6 +323,7 @@
                 disabled={passwordChangeBusy} />
             <div class="flex flex-row items-center">
                 <Button
+                    medium
                     form="form-change-password"
                     type="submit"
                     disabled={!currentPassword || !newPassword || !confirmedPassword || passwordChangeBusy}>
@@ -366,6 +369,7 @@
                 disabled={pinCodeBusy} />
             <div class="flex flex-row items-center">
                 <Button
+                    medium
                     type="submit"
                     form="pincode-change-form"
                     classes="mb-5"
@@ -380,6 +384,8 @@
     <section id="deleteProfile" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.deleteProfile.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.deleteProfile.description')}</Text>
-        <Button warning onClick={reset}>{locale('views.settings.deleteProfile.title')}</Button>
+        <Button medium inlineStyle="min-width: 156px;" warning onClick={reset}>
+            {locale('views.settings.deleteProfile.title')}
+        </Button>
     </section>
 </div>

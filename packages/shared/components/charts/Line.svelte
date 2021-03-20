@@ -1,10 +1,10 @@
 <script lang="typescript">
     import Chart from 'chart.js'
+    import { appSettings } from 'shared/lib/appSettings'
     import { convertHexToRGBA } from 'shared/lib/helpers'
     import tailwindConfig from 'shared/tailwind.config.js'
     import { afterUpdate, onMount } from 'svelte'
     import resolveConfig from 'tailwindcss/resolveConfig'
-    import { appSettings } from 'shared/lib/appSettings'
 
     export let labels = []
     export let datasets = []
@@ -37,8 +37,8 @@
                 datasets: datasets.map((dataset) => {
                     const themeColor = fullConfig.theme.colors[dataset.color || color]
                     var gradient = canvas.getContext('2d').createLinearGradient(0, 0, 0, context.canvas.height)
-                    gradient.addColorStop(0, convertHexToRGBA(themeColor['300'], 15))
-                    gradient.addColorStop(1, convertHexToRGBA(themeColor['300'], 0))
+                    gradient.addColorStop(0, convertHexToRGBA(themeColor['500'], 30))
+                    gradient.addColorStop(1, convertHexToRGBA(themeColor['500'], 0))
                     return {
                         backgroundColor: gradient,
                         borderColor: themeColor['300'],

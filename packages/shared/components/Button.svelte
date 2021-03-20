@@ -19,6 +19,7 @@
     export let type = 'button'
     export let form = ''
     export let autofocus = false
+    export let inlineStyle = ''
 
     let buttonElement
     let darkModeEnabled = $appSettings.darkMode
@@ -65,6 +66,10 @@
                         @apply text-gray-500;
                     }
                 }
+            }
+            &.medium {
+                @apply pt-1.5;
+                @apply pb-2.5;
             }
         }
         &.secondary {
@@ -270,13 +275,14 @@
     <button
         {type}
         {form}
-        class={`xl cursor-pointer text-center rounded-2xl pt-8 pb-4 px-4 flex flex-col items-center ${classes}`}
+        class={`xl cursor-pointer text-center rounded-xl pt-8 pb-4 px-4 flex flex-col items-center ${classes}`}
         use:bindEvents={events}
         on:click={onClick}
         class:secondary
         class:active
         class:with-icon={icon}
         class:darkmode={darkModeEnabled}
+        style={inlineStyle}
         {disabled}
         bind:this={buttonElement}>
         <Icon classes="mb-1" {icon} />
@@ -288,16 +294,18 @@
     <button
         {type}
         {form}
-        class="cursor-pointer text-center rounded-2xl px-3 {medium ? 'py-3' : 'py-4'} {classes}"
+        class="cursor-pointer text-center rounded-xl px-3 pt-2.5 pb-3.5 {classes}"
         use:bindEvents={events}
         on:click={onClick}
         class:secondary
         class:warning
+        class:medium
         class:small
         class:with-icon={icon}
         class:iconReverse
         class:active
         class:darkmode={darkModeEnabled}
+        style={inlineStyle}
         {disabled}
         bind:this={buttonElement}>
         {#if icon}

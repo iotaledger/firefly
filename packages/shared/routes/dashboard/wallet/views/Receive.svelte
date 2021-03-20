@@ -28,6 +28,12 @@
     }
 </script>
 
+<style type="text/scss">
+    .receive-info {
+        max-height: 350px;
+    }
+</style>
+
 <div class="w-full h-full flex flex-col justify-between {!$currentAccount ? 'p-8' : ''}">
     <div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
         {#if !$currentAccount}
@@ -47,11 +53,13 @@
             </div>
         {/if}
         <div
-            class="w-full h-full flex flex-col flex-auto rounded-2xl border border-solid border-gray-300 dark:border-gray-700 p-4">
+            class="receive-info w-full h-full flex flex-col flex-auto rounded-xl border border-solid border-gray-300 dark:border-gray-700 p-4">
             <div class="w-full flex flex-row justify-between items-center mb-1">
                 <Text type="p" smaller bold>{locale('actions.receive')}</Text>
                 <button on:click={generateNewAddress} class:pointer-events-none={isGeneratingAddress}>
-                    <Icon icon="refresh" classes="{isGeneratingAddress && 'animate-spin'} text-gray-500 dark:text-white" />
+                    <Icon
+                        icon="refresh"
+                        classes="{isGeneratingAddress && 'animate-spin-reverse'} text-gray-500 dark:text-white" />
                 </button>
             </div>
             <div class="flex flex-auto items-center justify-center mb-4">
@@ -61,7 +69,7 @@
                 <Text secondary smaller classes="mb-1">{locale('general.myAddress')}</Text>
                 <Text type="pre">{selectedAccount.depositAddress}</Text>
             </div>
-            <Button small disabled={isGeneratingAddress} classes="w-full" onClick={() => setClipboard(selectedAccount.depositAddress)}>
+            <Button disabled={isGeneratingAddress} classes="w-full" onClick={() => setClipboard(selectedAccount.depositAddress)}>
                 {locale('general.copyAddress')}
             </Button>
         </div>

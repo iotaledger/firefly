@@ -29,8 +29,9 @@
     <Text bold smaller={size === 's'} overrideColor classes="mb-2 text-gray-800 dark:text-white group-hover:text-white">
         {name}
     </Text>
-    <div class="flex flex-row justify-between w-full flex-{size === 'l' ? 'nowrap' : 'wrap'}">
-        <Text smaller overrideColor classes="block text-gray-800 dark:text-white group-hover:text-white mr-4">{balance}</Text>
+    <div
+        class="flex {size === 'l' ? 'flex-row space-x-4' : 'flex-col space-y-1'} justify-between w-full flex-{size === 'l' ? 'nowrap' : 'wrap'}">
+        <Text smaller overrideColor classes="block text-gray-800 dark:text-white group-hover:text-white">{balance}</Text>
         <Text smaller overrideColor classes="block text-blue-500 dark:text-gray-600 group-hover:text-white">{balanceEquiv}</Text>
     </div>
 </button>
