@@ -1,18 +1,19 @@
 <script lang="typescript">
-    import { Button, Checkbox, Illustration, Input, OnboardingLayout, Text } from 'shared/components'
-    import { cleanupSignup } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
+    import { Button, ButtonCheckbox, Illustration, Input, OnboardingLayout, Text } from 'shared/components'
+    import { cleanupSignup, developerMode } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
     import { hasOnlyWhitespaces } from 'shared/lib/helpers'
+    import { showAppNotification } from 'shared/lib/notifications'
     import { createProfile, disposeNewProfile, newProfile, profiles } from 'shared/lib/profile'
     import { SetupType } from 'shared/lib/typings/routes'
-    import { api, getStoragePath, initialise, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
+    import { getStoragePath, initialise, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
 
     export let locale
     export let mobile
     let error = ''
+    let busy = false
 
     const dispatch = createEventDispatcher()
 
@@ -22,7 +23,7 @@
 
     $: isProfileNameValid = profileName && !hasOnlyWhitespaces(profileName)
 
-    function handleContinueClick(setupType) {
+    async function handleContinueClick(setupType) {
         if (profileName) {
             let profile
             error = ''
@@ -41,12 +42,20 @@
 
             profile = createProfile(profileName, isDeveloperProfile)
 
-            return Electron.getUserDataPath().then((path) => {
-                initialise(profile.id, getStoragePath(path, profile.name))
-                api.setStrongholdPasswordClearInterval({ secs: 0, nanos: 0 })
+            try {
+                busy = true
+                const userDataPath = await Electron.getUserDataPath()
+                initialise($newProfile.id, getStoragePath(userDataPath, $newProfile.name))
 
                 dispatch('next', { setupType })
-            })
+            } catch (err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
+                })
+            } finally {
+                busy = false
+            }
         }
     }
 
@@ -60,34 +69,37 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick}>
+    <OnboardingLayout onBackClick={handleBackClick} {busy}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-4">{locale('views.setup.title')}</Text>
+            <Text type="p" secondary classes="mb-10">{locale('views.setup.body1')}</Text>
+            <Text type="p" secondary classes="mb-10">{locale('views.setup.body2')}</Text>
             <Input
                 {error}
                 bind:value={profileName}
                 placeholder={locale('views.setup.profileName')}
                 classes="w-full"
                 autofocus
+                disabled={busy}
                 submitHandler={() => handleContinueClick(SetupType.New)} />
-            {#if $appSettings.developerMode}
-                <Checkbox label={locale('general.developerProfile')} bind:checked={isDeveloperProfile} />
+            {#if $developerMode}
+                <ButtonCheckbox icon="dev" bind:value={isDeveloperProfile}>{locale('general.developerProfile')}</ButtonCheckbox>
             {/if}
         </div>
-        <div slot="leftpane__action" class="flex flex-row flex-wrap items-center space-x-4">
+        <div slot="leftpane__action" class="flex flex-col">
             <Button
                 secondary
-                classes="flex-1"
-                disabled={!isProfileNameValid}
+                classes="flex-1 mb-4"
+                disabled={!isProfileNameValid || busy}
                 onClick={() => handleContinueClick(SetupType.Import)}>
                 {locale('actions.importWallet')}
             </Button>
-            <Button classes="flex-1" disabled={!isProfileNameValid} onClick={() => handleContinueClick(SetupType.New)}>
+            <Button classes="flex-1" disabled={!isProfileNameValid || busy} onClick={() => handleContinueClick(SetupType.New)}>
                 {locale('actions.createWallet')}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center">
-            <Illustration illustration="setup-desktop" height="100%" width="auto" classes="h-full object-cover object-left" />
+        <div slot="rightpane" class="w-full h-full flex justify-center p-16 bg-pastel-green dark:bg-gray-900">
+            <Illustration illustration="setup-desktop" width="auto" height="100%" classes="object-cover"/>
         </div>
     </OnboardingLayout>
 {/if}

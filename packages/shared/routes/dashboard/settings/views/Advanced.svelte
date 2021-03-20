@@ -173,9 +173,10 @@
         {#if !automaticNodeSelection}
             <section id="configureNodeList" class="w-3/4">
                 <Text type="h4" classes="mb-3">{locale('views.settings.configureNodeList.title')}</Text>
-                <Text type="p" secondary classes="mb-5">{locale('views.settings.configureNodeList.description')}</Text>
-                <!-- Nodes list -->
-                <Text type="h4" classes="mb-3">{locale('general.nodes')}</Text>
+                <!-- TODO: Implement full node list and correct nodes string
+                    <Text type="p" secondary classes="mb-5">{locale('views.settings.configureNodeList.description')}</Text>
+                -->
+                <Text type="h4" classes="mb-3">{locale('popups.diagnostics.node')}</Text>
                 <Dropdown
                     onSelect={selectNode}
                     value={$activeProfile?.settings.node?.url}
@@ -183,7 +184,6 @@
                         value: node.url,
                         label: node.url,
                     }))} />
-
                 <!-- As client options (nodes) have association with accounts, disable "Add node" button if there are no accounts in wallet -->
                 <Button classes="w-1/4 mt-4" disabled={!$accounts.length} onClick={() => handleAddNodeClick()}>
                     {locale('actions.addNode')}
@@ -197,12 +197,14 @@
             </section>
             <HR classes="pb-5 mt-5 justify-center" />
             {/if}
+        <!-- TODO: Implement remote proof of work
         <section id="proofOfWork" class="w-3/4 opacity-50">
             <Text type="h4" classes="mb-3">{locale('views.settings.proofOfWork.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.proofOfWork.description')}</Text>
             <Checkbox label={locale('actions.outsourceProofOfWork')} disabled bind:checked={outsourcePowChecked} />
         </section>
         <HR classes="pb-5 mt-5 justify-center" />
+        -->
     {/if}
     <!-- TODO: Implement and enable -->
     <section id="developerMode" class="w-3/4 opacity-50">
@@ -221,20 +223,20 @@
         <section id="resyncAccounts" class="w-3/4">
             <Text type="h4" classes="mb-3">{locale('views.settings.resyncAccounts.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.resyncAccounts.description')}</Text>
-            <Button classes="w-1/4" onClick={syncAccounts} disabled={$isSyncing}>{locale('actions.syncAll')}</Button>
+            <Button onClick={syncAccounts} disabled={$isSyncing}>{locale('actions.syncAll')}</Button>
         </section>
     {/if}
     <HR classes="pb-5 mt-5 justify-center" />
     <section id="errorLog" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.errorLog.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.errorLog.description')}</Text>
-        <Button classes="w-1/4" onClick={() => handleErrorLogClick()}>{locale('views.settings.errorLog.title')}</Button>
+        <Button onClick={() => handleErrorLogClick()}>{locale('views.settings.errorLog.title')}</Button>
     </section>
     <HR classes="pb-5 mt-5 justify-center" />
     <section id="diagnostics" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.diagnostics.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.diagnostics.description')}</Text>
-        <Button classes="w-1/4" onClick={() => handleDiagnosticsClick()}>{locale('views.settings.diagnostics.title')}</Button>
+        <Button onClick={() => handleDiagnosticsClick()}>{locale('views.settings.diagnostics.title')}</Button>
     </section>
     {#if $loggedIn}
        <HR classes="pb-5 mt-5 justify-center" />
@@ -242,7 +244,7 @@
         <section id="stateExport" class="w-3/4 opacity-50">
             <Text type="h4" classes="mb-3">{locale('views.settings.stateExport.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.stateExport.description')}</Text>
-            <Button classes="w-1/4" disabled onClick={() => {}}>{locale('actions.exportState')}</Button>
+            <Button disabled onClick={() => {}}>{locale('actions.exportState')}</Button>
         </section>
     {/if}
 </div>

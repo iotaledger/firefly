@@ -13,6 +13,7 @@
     export let onSelect = (_) => {}
 
     let dropdown = false
+    let navContainer
 
     items = sortItems ? items.sort((a, b) => (a.label > b.label ? 1 : -1)) : items
 
@@ -122,9 +123,11 @@
     on:click={(e) => {
         e.stopPropagation()
         dropdown = !dropdown
-        const elem = document.getElementById(value)
-        if (elem) {
-            elem.scrollIntoView()
+        if (dropdown) {
+            const elem = document.getElementById(value)
+            if (elem) {
+                navContainer.scrollTop = elem.offsetTop
+            }
         }
     }}
     use:clickOutside
@@ -157,7 +160,7 @@
         class="absolute w-full overflow-hidden pointer-events-none opacity-0 z-10 text-left 
         bg-white dark:bg-gray-800
             border border-solid border-t-0 border-blue-500">
-        <div class="inner overflow-y-auto">
+        <div class="inner overflow-y-auto" bind:this={navContainer}>
             {#each items as item, index}
                 <button
                     class="relative flex items-center p-4 w-full whitespace-nowrap {index === 0 && 'border-t border-solid border-gray-300 dark:border-gray-700'}

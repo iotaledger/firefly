@@ -23,10 +23,24 @@ export const initMenu = () => {
         })
 
         ipcMain.handle('menu-popup', () => {
-            mainMenu.popup(mainWindow)
+            mainMenu.popup(getOrInitWindow('main'))
         })
 
-        ipcMain.handle('updates-check', () => { })
+        ipcMain.handle('maximize', () => {
+            if (getOrInitWindow('main').isMaximized()) {
+                getOrInitWindow('main').restore();
+            } else {
+                getOrInitWindow('main').maximize();
+            }
+        })
+
+        ipcMain.handle('minimize', () => {
+            getOrInitWindow('main').minimize();
+        })
+
+        ipcMain.handle('close', () => {
+            getOrInitWindow('main').close();
+        })
 
         mainMenu = createMenu()
     })
@@ -161,6 +175,7 @@ const buildTemplate = () => {
     template.push({
         label: state.strings.help,
         submenu: [
+            /** TODO: Add help links     
             {
                 label: state.strings.troubleshoot,
                 click: function () {
@@ -179,17 +194,17 @@ const buildTemplate = () => {
                 click: function () {
                     shell.openExternal('https://iota.org')
                 },
-            },
+            }**/
             {
                 label: state.strings.discord,
                 click: function () {
-                    shell.openExternal('https://iota.org')
+                    shell.openExternal('https://discord.iota.org')
                 },
             },
             {
                 label: state.strings.reportAnIssue,
                 click: function () {
-                    shell.openExternal('https://github.com/iotaledger/firefly/issues/new/choose')
+                    shell.openExternal('https://github.com/iotaledger/firefly/issues')
                 },
             },
         ],

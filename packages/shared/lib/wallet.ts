@@ -1,6 +1,7 @@
 import { mnemonic } from 'shared/lib/app'
 import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
 import { localize } from 'shared/lib/i18n'
+import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
 import type { HistoryData, PriceData } from 'shared/lib/marketData'
 import { HistoryDataProps } from 'shared/lib/marketData'
 import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
@@ -134,6 +135,19 @@ export const initialise = (id: string, storagePath: string): void => {
 }
 
 /**
+ * Removes event listeners for active actor
+ * 
+ * @method removeEventListeners
+ * 
+ * @param {string} id 
+ * 
+ * @returns {void}
+ */
+export const removeEventListeners = (id: string): void => {
+    actors[id].removeEventListeners()
+};
+
+/**
  * Destroys an actor & remove it from actors state
  *
  * @method destroyActor
@@ -172,6 +186,108 @@ export const generateRecoveryPhrase = (): Promise<string[]> =>
 export const requestMnemonic = async () => {
     let recoveryPhrase = await generateRecoveryPhrase()
     mnemonic.set(recoveryPhrase)
+    return recoveryPhrase
+}
+
+export const asyncSetStrongholdPassword = (password) => {
+    return new Promise<void>((resolve, reject) => {
+        api.setStrongholdPassword(password, {
+            onSuccess() {
+                resolve()
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
+
+export const asyncStoreMnemonic = (mnemonic) => {
+    return new Promise<void>((resolve, reject) => {
+        api.storeMnemonic(mnemonic, {
+            onSuccess() {
+                resolve()
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
+
+export const asyncVerifyMnemonic = (mnemonic) => {
+    return new Promise<void>((resolve, reject) => {
+        api.verifyMnemonic(mnemonic, {
+            onSuccess() {
+                resolve()
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
+
+export const asyncBackup = (dest) => {
+    return new Promise<void>((resolve, reject) => {
+        api.backup(dest, {
+            onSuccess() {
+                resolve()
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
+
+export const asyncSetStoragePassword = (password) => {
+    return new Promise<void>((resolve, reject) => {
+        api.setStoragePassword(password, {
+            onSuccess() {
+                resolve()
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
+
+export const asyncRestoreBackup = (importFilePath, password) => {
+    return new Promise<void>((resolve, reject) => {
+        api.restoreBackup(importFilePath, password, {
+            onSuccess() {
+                resolve()
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
+
+export const asyncCreateAccount = () => {
+    return new Promise<void>((resolve, reject) => {
+        api.createAccount(
+            {
+                signerType: { type: 'Stronghold' },
+                clientOptions: {
+                    node: DEFAULT_NODE,
+                    nodes: DEFAULT_NODES,
+                    network: get(network),
+                },
+            },
+            {
+                onSuccess() {
+                    resolve()
+                },
+                onError(err) {
+                    reject(err)
+                },
+            }
+        )
+    })
 }
 
 /**
@@ -203,26 +319,62 @@ export const initialiseListeners = () => {
             const account = get(accounts).find((account) => account.id === response.payload.accountId)
             const message = response.payload.message
 
-            const notificationMessage = localize('notifications.valueTx')
-                .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
-                .replace('{{account}}', account.alias)
+            const essence = message.payload.data.essence
 
-            showSystemNotification({ type: "info", message: notificationMessage })
+            if (!essence.data.internal) {
+                const { balanceOverview } = get(wallet);
+                const overview = get(balanceOverview);
 
-            // Update account with new message
-            saveNewMessage(response.payload.accountId, response.payload.message);
+                const incoming = essence.data.incoming ? overview.incomingRaw + essence.data.value : overview.incomingRaw;
+                const outgoing = essence.data.incoming ? overview.outgoingRaw : overview.outgoingRaw + essence.data.value;
+
+                updateBalanceOverview(
+                    overview.balanceRaw,
+                    incoming,
+                    outgoing
+                );
+            }
+
+            if (!get(isSyncing)) {
+                // Update account with new message
+                saveNewMessage(response.payload.accountId, response.payload.message);
+                const notificationMessage = localize('notifications.valueTx')
+                    .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
+                    .replace('{{account}}', account.alias);
+
+                showSystemNotification({ type: "info", message: notificationMessage });
+            }
         },
         onError(error) {
             console.error(error)
         },
     })
 
+    /**
+     * Event listener for transfer confirmation state change
+     */
     api.onConfirmationStateChange({
         onSuccess(response) {
             const accounts = get(wallet).accounts
             const account = get(accounts).find((account) => account.id === response.payload.accountId)
             const message = response.payload.message
             const messageKey = response.payload.confirmed ? 'confirmed' : 'failed'
+
+            const essence = message.payload.data.essence
+
+            if (response.payload.confirmed && !essence.data.internal) {
+                const { balanceOverview } = get(wallet);
+                const overview = get(balanceOverview);
+
+                const incoming = essence.data.incoming ? overview.incomingRaw + essence.data.value : overview.incomingRaw;
+                const outgoing = essence.data.incoming ? overview.outgoingRaw : overview.outgoingRaw + essence.data.value;
+
+                updateBalanceOverview(
+                    overview.balanceRaw,
+                    incoming,
+                    outgoing
+                );
+            }
 
             const accountMessage = account.messages.find((_message) => _message.id === message.id)
             accountMessage.confirmed = response.payload.confirmed
@@ -269,18 +421,31 @@ export const initialiseListeners = () => {
             const { balanceOverview } = get(wallet);
             const overview = get(balanceOverview);
 
-            const incoming = overview.incomingRaw + balanceChange.received;
-            const outgoing = overview.outgoingRaw + balanceChange.spent;
             const balance = overview.balanceRaw - balanceChange.spent + balanceChange.received
 
-            updateBalanceOverview(balance, incoming, outgoing);
-
+            updateBalanceOverview(balance, overview.incomingRaw, overview.outgoingRaw);
         },
         onError(error) {
             console.error(error)
         },
     })
 
+    /**
+     * Event listener for reattachment
+     */
+    api.onReattachment({
+        onSuccess(response) {
+            // Replace original message with reattachment
+            replaceMessage(response.payload.accountId, response.payload.reattachedMessageId, response.payload.message);
+        },
+        onError(error) {
+            console.error(error)
+        },
+    })
+
+    /**
+     * Event listener for transfer progress
+     */
     api.onTransferProgress({
         onSuccess(response) {
             transferState.set(response.payload.event.type)
@@ -361,6 +526,37 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
     })
 };
 
+/** 
+ * @method replaceMessage
+ * 
+ * @param {string} accountId 
+ * @param {string} messageId
+ * @param {Message} newMessage
+ * 
+ * @returns {void} 
+ */
+export const replaceMessage = (accountId: string, messageId: string, newMessage: Message): void => {
+    const { accounts } = get(wallet)
+
+    accounts.update((storedAccounts) => {
+        return storedAccounts.map((storedAccount: WalletAccount) => {
+            if (storedAccount.id === accountId) {
+                return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
+                    messages: storedAccount.messages.map((_message) => {
+                        if (_message.id === messageId) {
+                            return newMessage;
+                        }
+
+                        return _message;
+                    })
+                })
+            }
+
+            return storedAccount;
+        })
+    })
+};
+
 /**
  * Gets latest messages
  *
@@ -384,14 +580,34 @@ export const getLatestMessages = (accounts: WalletAccount[], count = 10): Accoun
         })
 
         account.messages.forEach((message) => {
-            messages[message.id] = Object.assign<
-                AccountMessage,
-                Message,
-                Partial<AccountMessage>
-            >(
-                {} as AccountMessage,
-                message,
-                { account: account.index });
+
+            if (message.id in messages) {
+                const existingMessage = messages[message.id];
+
+                // If a copy of the message exists, only override it if the new message is confirmed and the existing one is unconfirmed
+                // Imagine an internal transfer (between accounts). 
+                // If the first account already updates the confirmation state as confirmed, there is a chance that the user might see the confirmation state
+                // changing from confirmed to unconfirmed. To avoid that, we always give preference to the message that's already confirmed. 
+                if (!existingMessage.confirmed && message.confirmed) {
+                    messages[message.id] = Object.assign<
+                        AccountMessage,
+                        Message,
+                        Partial<AccountMessage>
+                    >(
+                        {} as AccountMessage,
+                        message,
+                        { account: account.index });
+                }
+            } else {
+                messages[message.id] = Object.assign<
+                    AccountMessage,
+                    Message,
+                    Partial<AccountMessage>
+                >(
+                    {} as AccountMessage,
+                    message,
+                    { account: account.index });
+            }
         })
     });
 
