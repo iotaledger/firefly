@@ -135,6 +135,19 @@ export const initialise = (id: string, storagePath: string): void => {
 }
 
 /**
+ * Removes event listeners for active actor
+ * 
+ * @method removeEventListeners
+ * 
+ * @param {string} id 
+ * 
+ * @returns {void}
+ */
+export const removeEventListeners = (id: string): void => {
+    actors[id].removeEventListeners()
+};
+
+/**
  * Destroys an actor & remove it from actors state
  *
  * @method destroyActor
@@ -306,20 +319,41 @@ export const initialiseListeners = () => {
             const account = get(accounts).find((account) => account.id === response.payload.accountId)
             const message = response.payload.message
 
+            const essence = message.payload.data.essence
+
+            if (!get(isSyncing)) {
+                if (!essence.data.internal) {
+                    const { balanceOverview } = get(wallet);
+                    const overview = get(balanceOverview);
+
+                    const incoming = essence.data.incoming ? overview.incomingRaw + essence.data.value : overview.incomingRaw;
+                    const outgoing = essence.data.incoming ? overview.outgoingRaw : overview.outgoingRaw + essence.data.value;
+
+                    updateBalanceOverview(
+                        overview.balanceRaw,
+                        incoming,
+                        outgoing
+                    );
+                }
+
+                // Update account with new message
+                saveNewMessage(response.payload.accountId, response.payload.message);
+            }
+
             const notificationMessage = localize('notifications.valueTx')
                 .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
                 .replace('{{account}}', account.alias)
 
             showSystemNotification({ type: "info", message: notificationMessage })
-
-            // Update account with new message
-            saveNewMessage(response.payload.accountId, response.payload.message);
         },
         onError(error) {
             console.error(error)
         },
     })
 
+    /**
+     * Event listener for transfer confirmation state change
+     */
     api.onConfirmationStateChange({
         onSuccess(response) {
             const accounts = get(wallet).accounts
@@ -327,27 +361,45 @@ export const initialiseListeners = () => {
             const message = response.payload.message
             const messageKey = response.payload.confirmed ? 'confirmed' : 'failed'
 
-            const accountMessage = account.messages.find((_message) => _message.id === message.id)
-            accountMessage.confirmed = response.payload.confirmed
-            accounts.update((storedAccounts) => {
-                return storedAccounts.map((storedAccount) => {
-                    if (storedAccount.id === account.id) {
-                        return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
-                            messages: storedAccount.messages.map((_message: Message) => {
-                                if (_message.id === message.id) {
-                                    return Object.assign<Message, Partial<Message>, Partial<Message>>(
-                                        {} as Message,
-                                        _message,
-                                        { confirmed: response.payload.confirmed }
-                                    )
-                                }
-                                return _message
+            const essence = message.payload.data.essence
+
+            if (!get(isSyncing)) {
+                if (response.payload.confirmed && !essence.data.internal) {
+                    const { balanceOverview } = get(wallet);
+                    const overview = get(balanceOverview);
+
+                    const incoming = essence.data.incoming ? overview.incomingRaw + essence.data.value : overview.incomingRaw;
+                    const outgoing = essence.data.incoming ? overview.outgoingRaw : overview.outgoingRaw + essence.data.value;
+
+                    updateBalanceOverview(
+                        overview.balanceRaw,
+                        incoming,
+                        outgoing
+                    );
+                }
+
+                const accountMessage = account.messages.find((_message) => _message.id === message.id)
+                accountMessage.confirmed = response.payload.confirmed
+                accounts.update((storedAccounts) => {
+                    return storedAccounts.map((storedAccount) => {
+                        if (storedAccount.id === account.id) {
+                            return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
+                                messages: storedAccount.messages.map((_message: Message) => {
+                                    if (_message.id === message.id) {
+                                        return Object.assign<Message, Partial<Message>, Partial<Message>>(
+                                            {} as Message,
+                                            _message,
+                                            { confirmed: response.payload.confirmed }
+                                        )
+                                    }
+                                    return _message
+                                })
                             })
-                        })
-                    }
-                    return storedAccount
+                        }
+                        return storedAccount
+                    })
                 })
-            })
+            }
 
             const notificationMessage = localize(`notifications.${messageKey}`)
                 .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
@@ -365,25 +417,40 @@ export const initialiseListeners = () => {
      */
     api.onBalanceChange({
         onSuccess(response) {
-            const { payload: { accountId, address, balanceChange } } = response;
+            if (!get(isSyncing)) {
+                const { payload: { accountId, address, balanceChange } } = response;
 
-            updateAccountAfterBalanceChange(accountId, address, balanceChange.received, balanceChange.spent)
-
-            const { balanceOverview } = get(wallet);
-            const overview = get(balanceOverview);
-
-            const incoming = overview.incomingRaw + balanceChange.received;
-            const outgoing = overview.outgoingRaw + balanceChange.spent;
-            const balance = overview.balanceRaw - balanceChange.spent + balanceChange.received
-
-            updateBalanceOverview(balance, incoming, outgoing);
-
+                updateAccountAfterBalanceChange(accountId, address, balanceChange.received, balanceChange.spent)
+    
+                const { balanceOverview } = get(wallet);
+                const overview = get(balanceOverview);
+    
+                const balance = overview.balanceRaw - balanceChange.spent + balanceChange.received
+    
+                updateBalanceOverview(balance, overview.incomingRaw, overview.outgoingRaw);
+            }
         },
         onError(error) {
             console.error(error)
         },
     })
 
+    /**
+     * Event listener for reattachment
+     */
+    api.onReattachment({
+        onSuccess(response) {
+            // Replace original message with reattachment
+            replaceMessage(response.payload.accountId, response.payload.reattachedMessageId, response.payload.message);
+        },
+        onError(error) {
+            console.error(error)
+        },
+    })
+
+    /**
+     * Event listener for transfer progress
+     */
     api.onTransferProgress({
         onSuccess(response) {
             transferState.set(response.payload.event.type)
@@ -464,6 +531,37 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
     })
 };
 
+/** 
+ * @method replaceMessage
+ * 
+ * @param {string} accountId 
+ * @param {string} messageId
+ * @param {Message} newMessage
+ * 
+ * @returns {void} 
+ */
+export const replaceMessage = (accountId: string, messageId: string, newMessage: Message): void => {
+    const { accounts } = get(wallet)
+
+    accounts.update((storedAccounts) => {
+        return storedAccounts.map((storedAccount: WalletAccount) => {
+            if (storedAccount.id === accountId) {
+                return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
+                    messages: storedAccount.messages.map((_message) => {
+                        if (_message.id === messageId) {
+                            return newMessage;
+                        }
+
+                        return _message;
+                    })
+                })
+            }
+
+            return storedAccount;
+        })
+    })
+};
+
 /**
  * Gets latest messages
  *
@@ -487,14 +585,34 @@ export const getLatestMessages = (accounts: WalletAccount[], count = 10): Accoun
         })
 
         account.messages.forEach((message) => {
-            messages[message.id] = Object.assign<
-                AccountMessage,
-                Message,
-                Partial<AccountMessage>
-            >(
-                {} as AccountMessage,
-                message,
-                { account: account.index });
+
+            if (message.id in messages) {
+                const existingMessage = messages[message.id];
+
+                // If a copy of the message exists, only override it if the new message is confirmed and the existing one is unconfirmed
+                // Imagine an internal transfer (between accounts). 
+                // If the first account already updates the confirmation state as confirmed, there is a chance that the user might see the confirmation state
+                // changing from confirmed to unconfirmed. To avoid that, we always give preference to the message that's already confirmed. 
+                if (!existingMessage.confirmed && message.confirmed) {
+                    messages[message.id] = Object.assign<
+                        AccountMessage,
+                        Message,
+                        Partial<AccountMessage>
+                    >(
+                        {} as AccountMessage,
+                        message,
+                        { account: account.index });
+                }
+            } else {
+                messages[message.id] = Object.assign<
+                    AccountMessage,
+                    Message,
+                    Partial<AccountMessage>
+                >(
+                    {} as AccountMessage,
+                    message,
+                    { account: account.index });
+            }
         })
     });
 
