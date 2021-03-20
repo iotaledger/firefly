@@ -23,7 +23,7 @@
     <div class="w-full h-full flex flex-col justify-between p-8">
         <div class="flex flex-col justify-between">
             <div class="flex flex-col justify-between items-center">
-                <Button icon="send" classes="w-full mb-5 p-4" secondary onClick={() => handleSendClick()}>
+                <Button icon="send" classes="w-full mb-6 p-4" secondary onClick={() => handleSendClick()}>
                     {locale('general.sendFunds')}
                     <Text type="p" smaller secondary>{locale('general.sendTokensToAddress')}</Text>
                 </Button>

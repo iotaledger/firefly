@@ -186,7 +186,7 @@
         <div class="w-full h-full flex flex-col justify-between">
             <div>
                 {#if !$account}
-                    <div class="block mb-5">
+                    <div class="block mb-6">
                         <Dropdown
                             value={from?.label || null}
                             label={locale('general.from')}
@@ -203,7 +203,7 @@
                         bind:unit
                         maxClick={handleMaxClick}
                         {locale}
-                        classes="mb-2"
+                        classes="mb-6"
                         disabled={$isTransferring}
                         autofocus />
                     {#if selectedSendType === SEND_TYPE.INTERNAL}
