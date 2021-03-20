@@ -5,7 +5,7 @@ import { showAppNotification } from './notifications'
 import { closePopup } from './popup'
 import { activeProfile, clearActiveProfile, isStrongholdLocked } from './profile'
 import { resetRouter } from './router'
-import { api, destroyActor, resetWallet } from './wallet'
+import { api, destroyActor, removeEventListeners, resetWallet } from './wallet'
 
 /**
  * Mobile mode
@@ -76,6 +76,7 @@ export const logout = () => {
         if (ap) {
             destroyActor(ap.id)
         }
+
         isStrongholdLocked.set(true)
         clearSendParams()
         closePopup()

@@ -23,10 +23,24 @@ export const initMenu = () => {
         })
 
         ipcMain.handle('menu-popup', () => {
-            mainMenu.popup(mainWindow)
+            mainMenu.popup(getOrInitWindow('main'))
         })
 
-        ipcMain.handle('updates-check', () => { })
+        ipcMain.handle('maximize', () => {
+            if (getOrInitWindow('main').isMaximized()) {
+                getOrInitWindow('main').restore();
+            } else {
+                getOrInitWindow('main').maximize();
+            }
+        })
+
+        ipcMain.handle('minimize', () => {
+            getOrInitWindow('main').minimize();
+        })
+
+        ipcMain.handle('close', () => {
+            getOrInitWindow('main').close();
+        })
 
         mainMenu = createMenu()
     })

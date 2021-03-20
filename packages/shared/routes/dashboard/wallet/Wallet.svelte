@@ -7,7 +7,7 @@
     import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { isStrongholdLocked, updateFirstAccount } from 'shared/lib/profile'
+    import { activeProfile, isStrongholdLocked, updateFirstAccount } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
@@ -23,12 +23,13 @@
         initialiseListeners,
         isTransferring,
         prepareAccountInfo,
+        removeEventListeners,
         selectedAccountId,
         syncAccounts,
         transferState,
         updateBalanceOverview,
         wallet,
-        WalletAccount,
+        WalletAccount
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, Writable } from 'svelte/store'
@@ -355,7 +356,7 @@
             await loadAccounts()
         }
 
-        initialiseListeners()
+        initialiseListeners($activeProfile.id)
 
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {

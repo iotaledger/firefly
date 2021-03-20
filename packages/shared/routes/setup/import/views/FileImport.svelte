@@ -8,6 +8,9 @@
     let fileName
     let filePath
 
+    // TODO: remove this to enable seed support
+    $: isSeedVault = fileName && fileName.endsWith('.kdbx')
+
     const dispatch = createEventDispatcher()
 
     function handleContinueClick() {
@@ -42,13 +45,17 @@
                 {onDrop}
                 {locale}
                 extentionsLabel={locale('actions.importExtentions')}
-                allowedExtensions={["kdbx", "stronghold"]} />
+                allowedExtensions={['kdbx', 'stronghold']} />
+            {#if isSeedVault}
+                <!-- TODO: remove this when enabling seed support -->
+                <Text type="p" error secondary classes="mt-4">Seed Vaults are not currently supported.</Text>
+            {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-            <Button classes="flex-1" disabled={!file} onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
+            <Button classes="flex-1" disabled={!file || isSeedVault} onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center p-16" style="background-color: #FFF8EF">
-            <Illustration illustration="import-from-file-desktop" width="auto" height="auto" />
+        <div slot="rightpane" class="w-full h-full flex justify-center p-16 bg-pastel-blue dark:bg-gray-900">
+            <Illustration illustration="import-from-file-desktop" width="auto" height="100%" classes=""/>
         </div>
     </OnboardingLayout>
 {/if}

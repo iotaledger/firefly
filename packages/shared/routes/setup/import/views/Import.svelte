@@ -32,8 +32,8 @@
                 <Text type="p" secondary smaller>{locale('general.uploadSeedvaultOrStronghold')}</Text>
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center">
-            <Illustration width="100%" illustration="import-desktop" />
+        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-purple-green dark:bg-gray-900">
+            <Illustration width="100%" height="100%" illustration="import-desktop" classes="object-scale-down"/>
         </div>
     </OnboardingLayout>
 {/if}
