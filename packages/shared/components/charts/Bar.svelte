@@ -163,8 +163,8 @@
                     displayColors: false,
                     titleFontSize: 12,
                     bodyFontSize: 11,
-                    titleFontFamily: 'DM Sans',
-                    bodyFontFamily: 'DM Sans',
+                    titleFontFamily: 'Inter',
+                    bodyFontFamily: 'Inter',
                     bodyFontColor: fullConfig.theme.colors[color]['200'],
                     callbacks: {
                         title: function ([tooltipItem]) {

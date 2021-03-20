@@ -4,6 +4,7 @@
     import tailwindConfig from 'shared/tailwind.config.js'
     import { afterUpdate, onMount } from 'svelte'
     import resolveConfig from 'tailwindcss/resolveConfig'
+    import { appSettings } from 'shared/lib/appSettings'
 
     export let labels = []
     export let datasets = []
@@ -16,6 +17,8 @@
 
     let canvas
     let chart
+
+    let darkModeEnabled = $appSettings.darkMode
 
     const fullConfig = resolveConfig(tailwindConfig)
 
@@ -32,20 +35,16 @@
             data: {
                 labels,
                 datasets: datasets.map((dataset) => {
-                    const gradient = context.createLinearGradient(
-                        context.canvas.width / 2,
-                        0,
-                        context.canvas.width / 2,
-                        context.canvas.height / 1.2
-                    )
                     const themeColor = fullConfig.theme.colors[dataset.color || color]
-                    gradient.addColorStop(0, convertHexToRGBA(themeColor['400'], 40))
-                    gradient.addColorStop(1, convertHexToRGBA(themeColor['400'], 0))
+                    var gradient = canvas.getContext('2d').createLinearGradient(0, 0, 0, context.canvas.height)
+                    gradient.addColorStop(0, convertHexToRGBA(themeColor['300'], 15))
+                    gradient.addColorStop(1, convertHexToRGBA(themeColor['300'], 0))
                     return {
                         backgroundColor: gradient,
                         borderColor: themeColor['300'],
                         borderWidth: 2,
-                        pointBackgroundColor: themeColor['300'],
+                        pointBackgroundColor: themeColor['500'],
+                        pointBorderColor: themeColor['500'],
                         pointRadius: 0,
                         hoverRadius: 4,
                         ...dataset,
@@ -69,8 +68,8 @@
                     displayColors: false,
                     titleFontSize: 12,
                     bodyFontSize: 11,
-                    titleFontFamily: 'DM Sans',
-                    bodyFontFamily: 'DM Sans',
+                    titleFontFamily: 'Inter',
+                    bodyFontFamily: 'Inter',
                     bodyFontColor: fullConfig.theme.colors[color]['200'],
                     callbacks: {
                         title: function ([tooltipItem]) {
@@ -104,15 +103,26 @@
                                 maxRotation: 0,
                                 minRotation: 0,
                                 maxTicksLimit: xMaxTicks,
+                                padding: 7,
                             },
                         },
                     ],
                     yAxes: [
                         {
+                            gridLines: {
+                                color: darkModeEnabled
+                                    ? fullConfig.theme.colors.gray['700']
+                                    : fullConfig.theme.colors.gray['100'],
+                                zeroLineColor: darkModeEnabled
+                                    ? fullConfig.theme.colors.gray['700']
+                                    : fullConfig.theme.colors.gray['100'],
+                                drawBorder: false,
+                            },
                             ticks: {
                                 autoSkip: true,
                                 maxTicksLimit: yMaxTicks,
                                 beginAtZero,
+                                padding: 7,
                                 callback: function (value, index, values) {
                                     return formatYAxis(value)
                                 },
