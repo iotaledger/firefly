@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { convertUnits, Unit } from '@iota/unit-converter'
-    import { Address, Amount, Button, Dropdown, ProgressBar, Text } from 'shared/components'
+    import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
     import { sendParams } from 'shared/lib/app'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import type { TransferProgressEventType } from 'shared/lib/typings/events'
@@ -179,27 +179,35 @@
 
 <div class="w-full h-full flex flex-col justify-between p-8">
     <div>
-        <div class="flex flex-row mb-8 space-x-4">
-            <button
-                on:click={() => handleSendTypeClick(SEND_TYPE.EXTERNAL)}
-                disabled={$isTransferring}
-                class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}
-                class:active={SEND_TYPE.EXTERNAL === selectedSendType && !$isTransferring}>
-                <Text type="h5" secondary={SEND_TYPE.EXTERNAL !== selectedSendType || $isTransferring}>
-                    {locale(`general.${SEND_TYPE.EXTERNAL}`)}
-                </Text>
-            </button>
-            {#if $accounts.length > 1}
+        <div class="flex flex-row w-full justify-between mb-8">
+            <div class="flex flex-row space-x-4">
                 <button
-                    on:click={() => handleSendTypeClick(SEND_TYPE.INTERNAL)}
+                    on:click={() => handleSendTypeClick(SEND_TYPE.EXTERNAL)}
                     disabled={$isTransferring}
                     class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}
-                    class:active={SEND_TYPE.INTERNAL === selectedSendType && !$isTransferring}>
-                    <Text type="h5" secondary={SEND_TYPE.INTERNAL !== selectedSendType || $isTransferring}>
-                        {locale(`general.${SEND_TYPE.INTERNAL}`)}
+                    class:active={SEND_TYPE.EXTERNAL === selectedSendType && !$isTransferring}>
+                    <Text classes="text-left" type="h5" secondary={SEND_TYPE.EXTERNAL !== selectedSendType || $isTransferring}>
+                        {locale(`general.${SEND_TYPE.EXTERNAL}`)}
                     </Text>
                 </button>
-            {/if}
+                {#if $accounts.length > 1}
+                    <button
+                        on:click={() => handleSendTypeClick(SEND_TYPE.INTERNAL)}
+                        disabled={$isTransferring}
+                        class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}
+                        class:active={SEND_TYPE.INTERNAL === selectedSendType && !$isTransferring}>
+                        <Text
+                            classes="text-left"
+                            type="h5"
+                            secondary={SEND_TYPE.INTERNAL !== selectedSendType || $isTransferring}>
+                            {locale(`general.${SEND_TYPE.INTERNAL}`)}
+                        </Text>
+                    </button>
+                {/if}
+            </div>
+            <button on:click={handleBackClick}>
+                <Icon icon="close" classes="text-gray-800 dark:text-white" />
+            </button>
         </div>
         <div class="w-full h-full flex flex-col justify-between">
             <div>
