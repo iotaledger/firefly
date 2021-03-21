@@ -18,7 +18,7 @@
         }
         div {
             &.active {
-                @apply border-0;
+                @apply border-transparent;
                 @apply bg-blue-500;
             }
         }

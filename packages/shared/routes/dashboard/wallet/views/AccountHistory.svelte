@@ -36,25 +36,27 @@
 </script>
 
 <div class="h-full p-8 flex flex-col flex-auto flex-grow flex-shrink-0">
-    <div class="flex flex-row space-x-2 items-center mb-5">
+    <div class="mb-5">
         {#if $selectedMessage}
-            <button on:click={handleBackClick}>
+            <button class="flex flex-row space-x-2 items-center" on:click={handleBackClick}>
                 <Icon icon="arrow-left" classes="text-blue-500" />
+                <Text type="h5">{locale('general.transactions')}</Text>
             </button>
+        {:else}
+            <div class="flex flex-1 flex-row justify-between">
+                <Text type="h5">{locale('general.transactions')}</Text>
+                {#if !$selectedMessage}
+                    <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
+                        <Icon icon="refresh" classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white" />
+                    </button>
+                {/if}
+            </div>
         {/if}
-        <div class="flex flex-1 flex-row justify-between">
-            <Text type="h4">{locale('general.transactions')}</Text>
-            {#if !$selectedMessage}
-                <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
-                    <Icon icon="refresh" classes="{$isSyncing && 'animate-spin'} text-gray-500 dark:text-white" />
-                </button>
-            {/if}
-        </div>
     </div>
     {#if $selectedMessage}
         <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} {locale} />
     {:else}
-        <div class="overflow-y-auto flex-auto h-1 space-y-2">
+        <div class="overflow-y-auto flex-auto h-1 space-y-2.5">
             {#if transactions.length}
                 {#each transactions as transaction}
                     <ActivityRow onClick={() => handleTransactionClick(transaction)} {...transaction} {color} />

@@ -12,7 +12,7 @@
 
     export let payload: Payload
 
-export let onClick = () => {}
+    export let onClick = () => {}
 </script>
 
 <button
@@ -24,9 +24,9 @@ export let onClick = () => {}
         classes="text-white dark:text-{payload.data.essence.data.internal ? 'gray-500' : `${color}-${payload.data.essence.data.incoming ? '500' : '600'}`}"
         boxClasses="bg-{payload.data.essence.data.internal ? 'gray-500' : `${color}-${payload.data.essence.data.internal ? '500' : '600'}`} dark:bg-gray-900"
         icon={payload.data.essence.data.internal ? 'transfer' : payload.data.essence.data.incoming ? 'chevron-down' : 'chevron-up'} />
-    <div class="flex flex-col ml-4">
+    <div class="flex flex-col ml-3.5 space-y-1.5">
         <Text type="p" bold smaller>{truncateString(id)}</Text>
-        <Text type="p" secondary smaller>
+        <p class="text-10 leading-120 text-gray-500">
             {$date(new Date(timestamp), {
                 year: 'numeric',
                 month: 'short',
@@ -35,9 +35,11 @@ export let onClick = () => {}
                 minute: 'numeric',
                 hour12: false,
             })}
-        </Text>
+        </p>
     </div>
     <div class="flex-1 items-end flex flex-col ml-4">
-        <Text type="p" smaller>{`${!payload.data.essence.data.incoming ? '-' : ''}${formatUnit(payload.data.essence.data.value)}`}</Text>
+        <Text type="p" smaller>
+            {`${!payload.data.essence.data.incoming ? '-' : ''}${formatUnit(payload.data.essence.data.value)}`}
+        </Text>
     </div>
 </button>

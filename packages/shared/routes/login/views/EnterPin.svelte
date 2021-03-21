@@ -117,7 +117,7 @@
             on:click={handleBackClick}>
             <div class="flex items-center space-x-3">
                 <Icon icon="arrow-left" classes="text-blue-500" />
-                <Text type="h4">{locale('general.profiles')}</Text>
+                <Text type="h5">{locale('general.profiles')}</Text>
             </div>
         </button>
         <div class="pt-40 pb-16 flex w-full h-full flex-col items-center justify-between">

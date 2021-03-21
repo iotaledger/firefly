@@ -103,7 +103,24 @@
         -webkit-user-drag: none;
         &.scheme-dark {
             @apply bg-gray-900;
+            :global(::-webkit-scrollbar-thumb) {
+                @apply bg-gray-700;
+            }
+            :global(::-webkit-scrollbar-track) {
+                @apply bg-gray-900;
+            }
         }
+    }
+    ::-webkit-scrollbar {
+        @apply w-1;
+    }
+    ::-webkit-scrollbar-thumb {
+        @apply bg-gray-300;
+        border-radius: 10px;
+    }
+    ::-webkit-scrollbar-track {
+        @apply bg-gray-100;
+        border-radius: 10px;
     }
 </style>
 

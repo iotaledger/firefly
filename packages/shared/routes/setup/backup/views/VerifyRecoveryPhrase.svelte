@@ -86,7 +86,7 @@
                         <Icon icon="success-check" classes="text-white" />
                     </div>
                     <Text type="h2" classes="mb-5 text-center">{locale('views.verifyRecoveryPhrase.verified')}</Text>
-                    <Text type="p" secondary classes="mb-10">{locale('views.verifyRecoveryPhrase.verifiedBody')}</Text>
+                    <Text type="p" secondary classes="mb-2">{locale('views.verifyRecoveryPhrase.verifiedBody')}</Text>
                 </div>
             {/if}
         </div>
