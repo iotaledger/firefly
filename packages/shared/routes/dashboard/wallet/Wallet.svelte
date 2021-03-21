@@ -247,6 +247,7 @@
                             sendParams.set({ address: '', amount: 0, message: '' })
                             isTransferring.set(false)
                             walletRoute.set(WalletRoutes.Init)
+                            selectedAccountId.set(null)
                         }, 3000)
                     },
                     onError(err) {
@@ -316,6 +317,7 @@
                         sendParams.set({ address: '', amount: 0, message: '' })
                         isTransferring.set(false)
                         walletRoute.set(WalletRoutes.Init)
+                        selectedAccountId.set(null)
                     }, 3000)
                 },
                 onError(err) {
