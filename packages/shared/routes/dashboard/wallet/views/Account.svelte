@@ -27,7 +27,7 @@
 
 <!-- wait for account to load -->
 {#if $accounts && $account}
-    <div class="w-full h-full flex flex-col flex-nowrap px-10 pb-5 relative flex-1 bg-gray-50 dark:bg-gray-900">
+    <div class="w-full h-full flex flex-col flex-nowrap p-10 pt-0 relative flex-1 bg-gray-50 dark:bg-gray-900">
         <AccountNavigation {locale} accounts={navAccounts} />
         {#key $account}
             <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
@@ -38,7 +38,7 @@
                         balance={$account.balance}
                         balanceEquiv={$account.balanceEquiv}
                         onMenuClick={handleMenuClick} />
-                    <DashboardPane classes="h-full -mt-5">
+                    <DashboardPane classes="h-full -mt-5 z-0">
                         <AccountActions {isGeneratingAddress} {send} {internalTransfer} {generateAddress} {locale} />
                     </DashboardPane>
                 </DashboardPane>

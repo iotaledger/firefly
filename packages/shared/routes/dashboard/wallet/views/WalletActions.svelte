@@ -60,12 +60,13 @@
 {#if $walletRoute === WalletRoutes.Init}
     <div class="p-8 pt-4 flex flex-col h-full justify-between">
         <div data-label="accounts" class="w-full h-full flex flex-col flex-no-wrap justify-start mb-6">
-            <div class="flex flex-row mb-6 justify-between items-center">
-                <Text type="h5">{locale('general.accounts')}</Text>
-                <Button onClick={handleCreateClick} secondary small icon="plus">{locale('actions.create')}</Button>
+            <div class="flex flex-row mb-4 justify-between items-center">
+                <Text type="h5">{locale('general.myAccounts')}</Text>
+                <Button onClick={handleCreateClick} secondary small showHoverText icon="plus">{locale('actions.create')}</Button>
             </div>
             {#if $accounts.length > 0}
-                <div class="grid grid-cols-{$accounts.length <= 2 ? $accounts.length : '3'} gap-2 w-full flex-auto">
+                <div
+                    class="grid grid-cols-{$accounts.length <= 2 ? $accounts.length : '3'} auto-rows-max {$accounts.length <= 2 ? 'gap-4' : 'gap-2.5'} w-full flex-auto overflow-y-auto h-1">
                     {#each $accounts as account}
                         <AccountTile
                             color={account.color}
@@ -86,7 +87,7 @@
                 <Button xl secondary icon="receive" classes="w-1/2" onClick={handleReceiveClick}>
                     {locale('actions.receive')}
                 </Button>
-                <Button xl secondary icon="transfer" classes="w-1/2" onClick={handleSendClick}>{locale('actions.send')}</Button>
+                <Button xl secondary icon="send" classes="w-1/2" onClick={handleSendClick}>{locale('actions.send')}</Button>
             </div>
         {/if}
     </div>

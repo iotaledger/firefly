@@ -33,7 +33,7 @@
 
     /** Chart data */
     $: {
-        if (locale || $selectedChart || $chartCurrency || $chartTimeframe || $walletBalanceHistory) {
+        if (locale || $selectedChart || $chartCurrency || $chartTimeframe || $walletBalanceHistory || $selectedAccount) {
             // Account value chart
             if ($selectedAccount) {
                 chartData = getAccountValueData($accountsBalanceHistory[$selectedAccount.index])
@@ -74,18 +74,34 @@
     }
 </script>
 
+<style type="text/scss">
+    button.active {
+        @apply relative;
+        &:after {
+            content: '';
+            @apply bg-blue-500;
+            @apply w-full;
+            @apply rounded;
+            @apply h-0.5;
+            @apply absolute;
+            @apply -bottom-2.5;
+            @apply left-0;
+        }
+    }
+</style>
+
 <div data-label="line-chart" class="flex flex-col justify-between w-full h-full px-8 py-4">
     <div class="flex justify-between items-center mb-2">
         {#if !$selectedAccount}
             <div class="flex space-x-4">
                 {#each Object.values(DashboardChartType) as chart}
-                    <button on:click={() => selectedChart.set(chart)}>
-                        <Text type="h4" disabled={chart !== $selectedChart}>{locale(`charts.${chart}`)}</Text>
+                    <button on:click={() => selectedChart.set(chart)} class:active={chart === $selectedChart}>
+                        <Text type="h5" secondary={chart !== $selectedChart}>{locale(`charts.${chart}`)}</Text>
                     </button>
                 {/each}
             </div>
         {:else}
-            <Text type="h4" classes="break-all mr-2">{locale('charts.accountValue')}</Text>
+            <Text type="h5" classes="break-all mr-2">{locale('charts.accountValue')}</Text>
         {/if}
         <div class="flex space-x-2">
             <span>

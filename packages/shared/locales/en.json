@@ -299,7 +299,7 @@
             "network": {
                 "networkOperational": "Network Operational",
                 "networkDegraded": "Network Degraded",
-                "networkDown": "Network Down",
+                "networkDown": "Network Disconnected",
                 "status": "Status",
                 "messagesPerSecond": "Messages per second",
                 "confirmationRate": "Confirmation rate"
@@ -475,7 +475,7 @@
         "sendPayment": "Send payment",
         "moveFunds": "Move funds",
         "sendFunds": "Send funds",
-        "sendToAddress": "Send to an Address",
+        "sendToAddress": "Send to address",
         "scanQrOrPaste": "Scan a QR code or paste an Address",
         "moveFundsBetweenAccounts": "Move funds between accounts",
         "sendTokensToAddress": "Send tokens to an address",
@@ -509,7 +509,10 @@
         "accountBalance": "Account Balance",
         "incoming": "Incoming",
         "outgoing": "Outgoing",
+        "totalIn": "Total in",
+        "totalOut": "Total out",
         "accounts": "Accounts",
+        "myAccounts": "My accounts",
         "automaticNodeSelection": "Automatic node selection",
         "manualNodeSelection": "Manual node selection",
         "profiles": "Profiles",
