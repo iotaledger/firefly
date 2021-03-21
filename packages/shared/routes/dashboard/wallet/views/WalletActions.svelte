@@ -62,7 +62,7 @@
         <div data-label="accounts" class="w-full h-full flex flex-col flex-no-wrap justify-start mb-6">
             <div class="flex flex-row mb-4 justify-between items-center">
                 <Text type="h5">{locale('general.myAccounts')}</Text>
-                <Button onClick={handleCreateClick} secondary small icon="plus">{locale('actions.create')}</Button>
+                <Button onClick={handleCreateClick} secondary small showHoverText icon="plus">{locale('actions.create')}</Button>
             </div>
             {#if $accounts.length > 0}
                 <div

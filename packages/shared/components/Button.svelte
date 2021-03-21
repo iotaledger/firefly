@@ -20,6 +20,7 @@
     export let form = ''
     export let autofocus = false
     export let inlineStyle = ''
+    export let showHoverText = undefined
 
     let buttonElement
     let darkModeEnabled = $appSettings.darkMode
@@ -139,6 +140,35 @@
             @apply bg-white;
             @apply p-5;
             @apply text-left;
+            &.secondary.showHoverText {
+                @apply border-transparent;
+                @apply bg-transparent;
+                min-width: unset;
+                span {
+                    transform: translateX(5px);
+                    transition: all 0.2s;
+                    @apply font-500;
+                    @apply opacity-0;
+                    @apply overflow-hidden;
+                    @apply max-w-0;
+                }
+                :global(svg.showHoverText) {
+                    @apply text-blue-500;
+                }
+                &:hover {
+                    @apply border-gray-300;
+                    @apply bg-white;
+                    span {
+                        transform: translateX(0);
+                        @apply max-w-full;
+                        @apply opacity-100;
+                    }
+                    &.darkmode {
+                        @apply border-gray-700;
+                        @apply bg-transparent;
+                    }
+                }
+            }
             &.xl {
                 @apply pb-6;
                 @apply px-5;
@@ -313,6 +343,7 @@
         class:iconReverse
         class:active
         class:darkmode={darkModeEnabled}
+        class:showHoverText
         style={inlineStyle}
         {disabled}
         bind:this={buttonElement}>
@@ -332,7 +363,11 @@
                         <div class="relative flex items-center flex-1">
                             <span class="font-bold text-12 leading-140"><slot /></span>
                             <div class="absolute right-0 flex items-center">
-                                <Icon width="16" height="16" classes="ml-4" {icon} />
+                                <Icon
+                                    width={showHoverText ? 20 : 16}
+                                    height={showHoverText ? 20 : 16}
+                                    classes="ml-4 showHoverText"
+                                    {icon} />
                             </div>
                         </div>
                     </div>
