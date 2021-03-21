@@ -44,8 +44,8 @@
         },
         "password": {
             "title": "Create a password",
-            "body": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
-            "body1": "It is recommended that your write down your password in your Recovery Kit."
+            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
+            "body2": "It is recommended that your write down your password in your Recovery Kit."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -59,8 +59,8 @@
         },
         "confirmPin": {
             "title": "Verify your PIN code",
-            "body": "Your pin keeps your balance and transactions private.",
-            "body1": "Re-enter your PIN code to proceed. "
+            "body1": "Your pin keeps your balance and transactions private.",
+            "body2": "Re-enter your PIN code to proceed. "
         },
         "backup": {
             "title": "Back up your wallet",
