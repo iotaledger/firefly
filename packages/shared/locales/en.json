@@ -299,7 +299,7 @@
             "network": {
                 "networkOperational": "Network Operational",
                 "networkDegraded": "Network Degraded",
-                "networkDown": "Network Down",
+                "networkDown": "Network Disconnected",
                 "status": "Status",
                 "messagesPerSecond": "Messages per second",
                 "confirmationRate": "Confirmation rate"
