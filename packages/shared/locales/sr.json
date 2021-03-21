@@ -1,11 +1,11 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Пошаљите, примите и управљајте својим ИОТА-ом",
-            "body": "Фирефли је сигуран и једноставан за употребу ИОТА новчаник."
+            "title": "Send, Receive & Manage your IOTA tokens",
+            "body": "Firefly is the official wallet of IOTA."
         },
         "legal": {
-            "title": "Правне информације",
+            "title": "Privacy Policy & Terms of Service",
             "body": "Молимо прегледајте Политику приватности и Услове услуге.",
             "privacyPolicy": {
                 "title": "Правила о приватности",
@@ -25,20 +25,27 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I have read and I accept the Privacy policy & ToS"
+            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
         },
-        "language": {
-            "title": "Језик и изглед",
-            "body": "Изаберите језик и тему новчаника"
+        "appearance": {
+            "title": "Изглед",
+            "body": "Choose your wallet’s theme."
         },
         "setup": {
             "title": "Намести новчаник",
-            "body": "Можете да креирате нови новчаник или да увезете постојећи.",
+            "body1": "You can create multiple user profiles to keep your tokens separate and improve privacy.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Profile Name"
+        },
+        "secure": {
+            "title": "Secure your wallet",
+            "body1": "Save and print the Recovery Kit PDF template.",
+            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
         },
         "password": {
             "title": "Направите лозинку",
-            "body": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates."
+            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
+            "body2": "It is recommended that you write down your password in your Recovery Kit."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -47,42 +54,50 @@
         },
         "pin": {
             "title": "Подесите ПИН код",
-            "body1": "Унесите 6-цифрени ПИН испод. Од вас ће бити затражено да унесете свој пин да бисте се пријавили у свој новчаник.",
-            "body2": "Можете користити само бројеве."
+            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
+            "body2": "Use numbers only"
         },
         "confirmPin": {
             "title": "Потврдите свој ПИН код",
-            "body": "Поново унесите ПИН код да бисте наставили."
+            "body1": "Your PIN keeps your balance and transactions private.",
+            "body2": "Re-enter your PIN code to proceed. "
         },
         "backup": {
             "title": "Направите резервну копију новчаника",
-            "body1": "Сада ће вам се приказати фраза за опоравак.",
-            "body2": "Не делите ову фразу ни са ким. Ваша фраза за опоравак може се користити за приступ токенима са било ког места.",
+            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
+            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
             "body3": "Ако изгубите фразу за опоравак, можете изгубити средства."
         },
         "recoveryPhrase": {
             "title": "Фраза за опоравак",
-            "body1": "Пажљиво запишите речи тачним редоследом.",
-            "body2": "Нека ваша фраза за опоравак буде приватна и безбедно ускладиштена. Не делите је ни са ким.",
+            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
+            "body2": "Keep this private and safely stored.",
+            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
             "revealRecoveryPhrase": "Откривање фразе за опоравак",
             "hideRecoveryPhrase": "Hide recovery phrase"
         },
         "verifyRecoveryPhrase": {
             "title": "Верификујте фразу за опоравак",
-            "body": "Проверимо да ли сте правилно записали фразу. Изаберите речи у правилном редоследу.",
-            "creatingAccount": "Creating account, please wait..."
+            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
+            "word": "Word",
+            "verified": "Recovery phrase verified",
+            "verifiedBody": "Remember to keep it private and safely stored."
         },
         "backupWallet": {
             "title": "Направите резервну копију у датотеци Стронгхолд",
-            "body": "Унесите лозинку да бисте направили резервну копију новчаника у датотеци Стронгхолд. Ваша лозинка се користи за шифровање резервне копије."
+            "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
+            "body2": "Reasons why digital backups are important:",
+            "reason1": "Easily recover your wallet without typing in your recovery phrase",
+            "reason2": "Import your wallet to other devices",
+            "reason3": "Recover your full transaction history"
         },
         "recoveryPhraseSaved": {
             "title": "Израђена је резервна копија",
             "body": "Направили сте резервну копију новчаника у Стронгхолд."
         },
         "congratulations": {
-            "title": "Честитамо",
-            "body": "Новчаник је спреман за употребу."
+            "title": "Wallet setup completed",
+            "body": "Your new wallet is ready to use."
         },
         "import": {
             "title": "Увезите новчаник",
@@ -90,14 +105,14 @@
         },
         "importFromText": {
             "title": "Вратите новчаник помоћу фразе за опоравак или семена",
-            "body1": "Фраза за опоравак дуга је 24 речи. Ово се користи за опоравак постојећег Фирефли новчаника.",
-            "body2": "Семе се састоји од 81 знака. Ово се користи за опоравак од старијег новчаника Тринити.",
+            "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
+            "body2": "A recovery phrase is 24 words long (with spaces). This is used to recover an existing Firefly wallet.",
             "body3": "Унесите семе или фразу за опоравак",
             "seedDetected": "81 character seed detected",
-            "phraseDetected": "24 word phrase detected"
+            "phraseDetected": "24 word recovery phrase detected"
         },
         "importFromFile": {
-            "title": "Вратите новчаник из резервне датотеке",
+            "title": "Restore your wallet using a backup file",
             "body": "Увезите датотеку резервне копије да бисте вратили новчаник. Резервне копије могу бити Стронгхолд (.стронгхолд) или Тринити СеедВаулт (.кдбк)."
         },
         "importBackupPassword": {
@@ -107,7 +122,11 @@
         },
         "importSuccess": {
             "title": "Успешно сте опоравили резервну копију",
-            "body": "Сада можете да подесите свој новчаник."
+            "body": "Сада можете да подесите свој новчаник.",
+            "seedvaultTitle": "Successfully imported",
+            "seedvaultBody": "Your password is correct, you can now continue.",
+            "strongholdTitle": "Successfully imported",
+            "strongholdBody": "Your password is correct, you can now continue."
         },
         "migrate": {
             "title": "Мигрирајте своја средства",
@@ -132,19 +151,19 @@
             },
             "security": {
                 "title": "Сигурност",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Change your password and adjust security-related settings"
             },
             "advancedSettings": {
                 "title": "Напредна подешавања",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Tools and manual settings for technical users"
             },
             "helpAndInfo": {
                 "title": "Help & Information",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Find the answer to a question or get help with an issue"
             },
             "profile": {
                 "title": "Profile",
-                "description": ""
+                "description": "Change your profile name or set an avatar"
             },
             "sync": {
                 "title": "Sync accounts",
@@ -160,27 +179,27 @@
             },
             "currency": {
                 "title": "Валута",
-                "description": ""
+                "description": "Adjusts balance conversion and updates chart options"
             },
             "notifications": {
                 "title": "Обавештења",
-                "description": ""
+                "description": "System notifications for transaction events"
             },
             "exportStronghold": {
-                "title": "Извоз Стронгхолд-a",
-                "description": ""
+                "title": "Export Backup",
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
             },
             "appLock": {
-                "title": "Закључавање апликације",
-                "description": ""
+                "title": "Automatic Lock",
+                "description": "Time elapsed before your wallet locks and logs you out"
             },
             "changePassword": {
                 "title": "Change password",
-                "description": ""
+                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
             },
             "changePincode": {
                 "title": "Change PIN code",
-                "description": "",
+                "description": "Your PIN keeps your balance and transactions private",
                 "currentPincode": "Current PIN",
                 "newPincode": "New PIN",
                 "confirmNewPincode": "Confirm new PIN",
@@ -192,59 +211,64 @@
             },
             "deleteProfile": {
                 "title": "Delete profile",
-                "description": ""
+                "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
             },
             "deepLinks": {
                 "title": "Deep links",
-                "description": ""
+                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
             },
             "developerMode": {
                 "title": "Developer mode",
-                "description": ""
+                "description": "Connect to testnets and other developer features"
             },
             "nodeSettings": {
                 "title": "Node settings",
-                "description": ""
+                "description": "Select Manual to choose from the node list or connect to your own node"
             },
             "configureNodeList": {
-                "title": "Configure node list",
+                "title": "Select a node",
                 "description": ""
             },
             "proofOfWork": {
                 "title": "Proof of work",
-                "description": ""
+                "description": "Complete proof of work locally on your device or oursource to the node"
             },
             "errorLog": {
                 "title": "Error log",
-                "description": ""
+                "description": "View errors to debug an issue"
             },
             "diagnostics": {
                 "title": "Diagnostics",
-                "description": ""
+                "description": "View system and application information"
             },
             "stateExport": {
                 "title": "State export",
-                "description": ""
+                "description": "Export your transaction history to a .csv file"
             },
             "troubleshoot": {
                 "title": "Решавање проблема",
-                "description": ""
+                "description": "Use the troubleshooting wizard to solve common problems"
             },
             "documentation": {
                 "title": "Документација",
-                "description": ""
+                "description": "View the documentation for in depth explanations of how things work"
             },
             "faq": {
                 "title": "Најчешћа питања",
-                "description": ""
+                "title2": "Frequently Asked Questions",
+                "description": "View the FAQs to get help with a common problem or question"
             },
             "discord": {
                 "title": "Дискорд",
-                "description": ""
+                "description": "Get help from the IOTA community on Discord"
             },
             "about": {
                 "title": "О апликацији",
                 "description": ""
+            },
+            "reportAnIssue": {
+                "title": "Report an issue",
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
             }
         },
         "login": {
@@ -275,7 +299,7 @@
             "network": {
                 "networkOperational": "Network Operational",
                 "networkDegraded": "Network Degraded",
-                "networkDown": "Network Down",
+                "networkDown": "Network Disconnected",
                 "status": "Status",
                 "messagesPerSecond": "Messages per second",
                 "confirmationRate": "Confirmation rate"
@@ -310,14 +334,14 @@
             "notBackedUpDescription": "You have not backed up your Stronghold"
         },
         "deleteAccount": {
-            "title": "Delete {name}?",
-            "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "typePassword": "Type your wallet’s password to confirm.",
-            "deleteAccount": "Delete account",
-            "errorTitle": "Unable to delete {name}",
-            "errorBody1": "To delete an account you must have 0 balance.",
+            "title": "Remove {name}?",
+            "body": "You can add this account back later but you may lose your transaction history.",
+            "typePassword": "Type your wallet password to confirm.",
+            "deleteAccount": "Remove account",
+            "errorTitle": "Unable to remove {name}",
+            "errorBody1": "To remove an account it must have 0 balance.",
             "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
-            "errorBody3": "You cannot delete this account, you must have at least one."
+            "errorBody3": "You cannot remove this account, you must have at least one."
         },
         "addressHistory": {
             "title": "{name} account address history",
@@ -391,7 +415,7 @@
         "tryAgain": "Покушај поново",
         "visitDiscord": "Посетите Дисцорд",
         "dragDrop": "Превуци и испусти",
-        "importExtentions": ".стронгхолд или .кдбк датотека",
+        "importExtentions": ".kdbx or .stronghold file",
         "chooseFile": "Изабери датотеку",
         "dropHere": "Овде превуци фајлове",
         "syncAll": "Sync all",
@@ -405,10 +429,10 @@
         "unlock": "Unlock",
         "updateFirefly": "Update Firefly",
         "restartNow": "Restart now",
-        "saveBackup": "Save backup",
+        "saveBackup": "Save Stronghold backup",
         "customizeAcount": "Customise account",
         "viewAddressHistory": "View address history",
-        "deleteAccount": "Delete account",
+        "deleteAccount": "Remove account",
         "max": "Max",
         "addNode": "Add node",
         "removeNode": "Remove node",
@@ -430,7 +454,12 @@
         "hideDetails": "Hide Details",
         "yes": "Yes",
         "no": "No",
-        "reset": "Reset"
+        "reset": "Reset",
+        "downloadRecoveryKit": "Save Recovery Kit template",
+        "skipBackup": "Skip file backup",
+        "finishSetup": "Finish setup",
+        "readDocumentation": "Read the documentation",
+        "visitFaq": "Visit FAQ"
     },
     "general": {
         "password": "Лозинка",
@@ -446,7 +475,7 @@
         "sendPayment": "Send payment",
         "moveFunds": "Move funds",
         "sendFunds": "Пошаљите средства",
-        "sendToAddress": "Пошаљите на адресу",
+        "sendToAddress": "Send to address",
         "scanQrOrPaste": "Скенирајте КР код или налепите адресу",
         "moveFundsBetweenAccounts": "Move funds between accounts",
         "sendTokensToAddress": "Send tokens to an address",
@@ -480,7 +509,10 @@
         "accountBalance": "Account Balance",
         "incoming": "Долазни",
         "outgoing": "Одлазни",
+        "totalIn": "Total in",
+        "totalOut": "Total out",
         "accounts": "Рачуни",
+        "myAccounts": "My accounts",
         "automaticNodeSelection": "Automatic node selection",
         "manualNodeSelection": "Manual node selection",
         "profiles": "Профили",
@@ -526,7 +558,14 @@
         "exportingStrongholdFailed": "Exported stronghold failed",
         "pinCodeUpdating": "Updating PIN code...",
         "pinCodeSuccess": "Updated PIN code successfully",
-        "pinCodeFailed": "Updating PIN code failed"
+        "pinCodeFailed": "Updating PIN code failed",
+        "passwordStrength": "Password strength",
+        "passwordStrength0": "Bad",
+        "passwordStrength1": "Poor",
+        "passwordStrength2": "Weak",
+        "passwordStrength3": "Average",
+        "passwordStrength4": "Strong",
+        "creatingProfile": "Creating profile, please wait..."
     },
     "dates": {
         "today": "Today",
@@ -587,13 +626,16 @@
             "amountInvalidFormat": "The amount appears to be an invalid number.",
             "amountZero": "The amount must be greater than 0.",
             "wrongAddressFormat": "Addresses start with the prefix {prefix}.",
-            "insufficientFunds": "This account has insufficient funds"
+            "insufficientFunds": "This account has insufficient funds.",
+            "sendingDust": "You cannot send less than 1 Mi.",
+            "leavingDust": "You cannot leave less than 1 Mi on your address."
         },
         "node": {
             "invalid": "Please enter a valid URL.",
             "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
             "duplicate": "This node has already been added.",
-            "unsynced": "The node you are trying to add is not synced."
+            "unsynced": "The node is not in sync.",
+            "noSynced": "No synced nodes are available."
         },
         "global": {
             "generic": "Something went wrong."
@@ -604,7 +646,7 @@
             "mnemonic": "The mnemonic is not valid.",
             "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
             "seedCharacters": "The seed should only contain characters A-Z or 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
             "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase"
         }
     }
