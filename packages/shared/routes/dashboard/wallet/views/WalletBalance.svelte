@@ -26,15 +26,11 @@
             min-height: 234px;
             @apply absolute;
             @apply w-full;
+            @apply h-full;
             @apply h-auto;
-            @apply bg-cover;
-            @apply bg-no-repeat;
+            @apply object-cover;
             @apply top-0;
             @apply left-0;
-            background-image: url('assets/patterns/wallet-balance.svg');
-            &.darkmode {
-                background-image: url('assets/patterns/wallet-balance-darkmode.svg');
-            }
         }
     }
 </style>
@@ -48,7 +44,12 @@
         <Text type="h2" overrideColor classes="text-white">{$balance.balance}</Text>
         <Text type="p" overrideColor smaller classes="text-{color}-200">{$balance.balanceFiat}</Text>
     </div>
-    <div class="bg-pattern" class:darkmode={darkModeEnabled} />
+    <img
+        class="bg-pattern"
+        width="100%"
+        height="auto"
+        src={`assets/patterns/${darkModeEnabled ? 'wallet-balance-darkmode.svg' : 'wallet-balance.svg'}`}
+        alt="" />
     {#if $walletRoute === WalletRoutes.Init}
         <!-- Incoming/Outgoing -->
         <div data-label="total-movements" class="flex flex-row justify-between mt-8">
