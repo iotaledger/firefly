@@ -292,7 +292,7 @@
             <Text type="p" secondary classes="mb-5">{locale('views.settings.changePassword.description')}</Text>
             <Password
                 error={currentPasswordError}
-                classes="mb-1"
+                classes="mb-5"
                 bind:value={currentPassword}
                 showRevealToggle
                 {locale}
@@ -300,7 +300,7 @@
                 disabled={passwordChangeBusy} />
             <Password
                 error={newPasswordError}
-                classes="mb-1"
+                classes="mb-4"
                 bind:value={newPassword}
                 showRevealToggle
                 strengthLevels={4}
@@ -340,7 +340,7 @@
             <Text type="p" secondary classes="mb-5">{locale('views.settings.changePincode.description')}</Text>
             <Password
                 error={currentPincodeError}
-                classes="mb-1"
+                classes="mb-4"
                 bind:value={currentPincode}
                 showRevealToggle
                 {locale}
@@ -350,7 +350,7 @@
                 disabled={pinCodeBusy} />
             <Password
                 error={newPincodeError}
-                classes="mb-1"
+                classes="mb-4"
                 bind:value={newPincode}
                 showRevealToggle
                 {locale}
