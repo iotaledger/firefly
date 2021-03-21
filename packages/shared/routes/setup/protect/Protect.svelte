@@ -3,7 +3,7 @@
     import { Electron } from 'shared/lib/electron'
     import { activeProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { api, asyncSetStoragePassword, asyncVerifyMnemonic, asyncStoreMnemonic, asyncCreateAccount } from 'shared/lib/wallet'
+    import { api, setStoragePasswordAsync, verifyMnemonicAsync, storeMnemonicAsync, createAccountAsync } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
     import { Pin, Protect } from './views/'
@@ -66,7 +66,7 @@
                     }
 
                     await Electron.PincodeManager.set(get(activeProfile)?.id, pin)
-                    await asyncSetStoragePassword(pin)
+                    await setStoragePasswordAsync(pin)
 
                     if ($walletSetupType === SetupType.Mnemonic) {
                         // Initialises wallet from imported mnemonic
@@ -75,9 +75,9 @@
                         // Creates first account
 
                         const m = get(mnemonic).join(' ')
-                        await asyncVerifyMnemonic(m)
-                        await asyncStoreMnemonic(m)
-                        await asyncCreateAccount()
+                        await verifyMnemonicAsync(m)
+                        await storeMnemonicAsync(m)
+                        await createAccountAsync()
 
                         // Clear mnemonic
                         mnemonic.set(null)

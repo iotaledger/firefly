@@ -3,11 +3,11 @@
     import { mnemonic } from 'shared/lib/app'
     import { createProfile, newProfile, profiles } from 'shared/lib/profile'
     import {
-        asyncGetAccounts,
-        asyncRemoveStorage,
-        asyncRestoreBackup,
         destroyActor,
+        getAccountsAsync,
         initialiseProfileStorage,
+        removeStorageAsync,
+        restoreBackupAsync,
     } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
@@ -79,8 +79,8 @@
                 busy = true
 
                 try {
-                    await asyncRestoreBackup(importFilePath, password)
-                    const accountsResponse = await asyncGetAccounts()
+                    await restoreBackupAsync(importFilePath, password)
+                    const accountsResponse = await getAccountsAsync()
                     let canContinue = true
                     if (accountsResponse.payload.length > 0) {
                         const firstAccountId = accountsResponse.payload[0].id
@@ -102,7 +102,7 @@
                         // If this backup is no good we need to remove it
                         // At the moment there is no ability to remove just the stronghold
                         // so we remove the whole profile and recreate it
-                        await asyncRemoveStorage()
+                        await removeStorageAsync()
                         destroyActor($newProfile.id)
                         const profile = createProfile($newProfile.name, $newProfile.isDeveloperProfile)
                         await initialiseProfileStorage(profile)

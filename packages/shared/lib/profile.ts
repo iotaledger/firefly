@@ -2,7 +2,7 @@ import { AvailableExchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
 import { DEFAULT_NODE } from 'shared/lib/network'
 import { generateRandomId } from 'shared/lib/utils'
-import { asyncRemoveStorage, destroyActor, hasActor, wallet } from 'shared/lib/wallet'
+import { destroyActor, hasActor, removeStorageAsync, wallet } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
 import { Electron } from './electron'
 import type { Node } from './typings/client'
@@ -121,7 +121,7 @@ export const disposeNewProfile = async (): Promise<void> => {
     const np = get(newProfile);
     if (np) {
         if (hasActor(np.id)) {
-            await asyncRemoveStorage()
+            await removeStorageAsync()
             destroyActor(np.id)
         }
     }
@@ -215,7 +215,7 @@ export const updateFirstAccount = () => {
                 const w = get(wallet);
                 if (w) {
                     const acc = get(w.accounts)
-            
+
                     if (acc && acc.length > 0) {
                         _profile.firstAccountId = acc[0].id
                     }

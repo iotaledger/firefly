@@ -5,7 +5,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile, removeProfile } from 'shared/lib/profile'
-    import { asyncRemoveStorage } from 'shared/lib/wallet'
+    import { removeStorageAsync } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
 
     export let locale
@@ -20,7 +20,7 @@
             if (ap) {
                 await Electron.PincodeManager.remove(ap.id)
             }
-            await asyncRemoveStorage()
+            await removeStorageAsync()
         } catch (err) {
             showAppNotification({
                 type: 'error',

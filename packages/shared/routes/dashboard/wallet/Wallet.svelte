@@ -13,23 +13,22 @@
     import {
         AccountMessage,
         api,
-        asyncGetAccounts,
         BalanceHistory,
         BalanceOverview,
         getAccountMeta,
+        getAccountsAsync,
         getAccountsBalanceHistory,
         getLatestMessages,
         getWalletBalanceHistory,
         initialiseListeners,
         isTransferring,
         prepareAccountInfo,
-        removeEventListeners,
         selectedAccountId,
         syncAccounts,
         transferState,
         updateBalanceOverview,
         wallet,
-        WalletAccount
+        WalletAccount,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, Writable } from 'svelte/store'
@@ -64,7 +63,7 @@
 
     async function loadAccounts() {
         try {
-            const accountsResponse = await asyncGetAccounts()
+            const accountsResponse = await getAccountsAsync()
 
             if (accountsResponse.payload.length === 0) {
                 accountsLoaded.set(true)

@@ -156,7 +156,7 @@ export const removeEventListeners = (id: string): void => {
         actors[id].hasEventListeners = false
         try {
             actors[id].actor.removeEventListeners()
-        } catch {}
+        } catch { }
     }
 };
 
@@ -214,7 +214,7 @@ export const requestMnemonic = async () => {
     return recoveryPhrase
 }
 
-export const asyncSetStrongholdPassword = (password) => {
+export const setStrongholdPasswordAsync = (password) => {
     return new Promise<void>((resolve, reject) => {
         api.setStrongholdPassword(password, {
             onSuccess() {
@@ -227,7 +227,7 @@ export const asyncSetStrongholdPassword = (password) => {
     })
 }
 
-export const asyncStoreMnemonic = (mnemonic) => {
+export const storeMnemonicAsync = (mnemonic) => {
     return new Promise<void>((resolve, reject) => {
         api.storeMnemonic(mnemonic, {
             onSuccess() {
@@ -240,7 +240,7 @@ export const asyncStoreMnemonic = (mnemonic) => {
     })
 }
 
-export const asyncVerifyMnemonic = (mnemonic) => {
+export const verifyMnemonicAsync = (mnemonic) => {
     return new Promise<void>((resolve, reject) => {
         api.verifyMnemonic(mnemonic, {
             onSuccess() {
@@ -253,7 +253,7 @@ export const asyncVerifyMnemonic = (mnemonic) => {
     })
 }
 
-export const asyncBackup = (dest) => {
+export const backupAsync = (dest) => {
     return new Promise<void>((resolve, reject) => {
         api.backup(dest, {
             onSuccess() {
@@ -266,7 +266,7 @@ export const asyncBackup = (dest) => {
     })
 }
 
-export const asyncSetStoragePassword = (password) => {
+export const setStoragePasswordAsync = (password) => {
     return new Promise<void>((resolve, reject) => {
         api.setStoragePassword(password, {
             onSuccess() {
@@ -279,7 +279,7 @@ export const asyncSetStoragePassword = (password) => {
     })
 }
 
-export const asyncRestoreBackup = (importFilePath, password) => {
+export const restoreBackupAsync = (importFilePath, password) => {
     return new Promise<void>((resolve, reject) => {
         api.restoreBackup(importFilePath, password, {
             onSuccess() {
@@ -292,7 +292,7 @@ export const asyncRestoreBackup = (importFilePath, password) => {
     })
 }
 
-export const asyncCreateAccount = () => {
+export const createAccountAsync = () => {
     return new Promise<void>((resolve, reject) => {
         api.createAccount(
             {
@@ -315,7 +315,7 @@ export const asyncCreateAccount = () => {
     })
 }
 
-export const asyncGetAccounts = () => {
+export const getAccountsAsync = () => {
     return new Promise<Event<Account[]>>((resolve, reject) => {
         api.getAccounts(
             {
@@ -330,7 +330,7 @@ export const asyncGetAccounts = () => {
     })
 }
 
-export const asyncRemoveStorage = () => {
+export const removeStorageAsync = () => {
     return new Promise<void>((resolve, reject) => {
         api.removeStorage(
             {
@@ -355,9 +355,7 @@ export const asyncRemoveStorage = () => {
 export const initialiseListeners = (id: string) => {
     removeEventListeners(id)
 
-    if (actors[id]) {
-        actors[id].hasEventListeners = true
-    }
+    actors[id].hasEventListeners = true
 
     /**
      * Event listener for stronghold status change

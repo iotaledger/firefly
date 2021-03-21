@@ -4,7 +4,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { activeProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { asyncSetStoragePassword, initialiseProfileStorage } from 'shared/lib/wallet'
+    import { initialiseProfileStorage, setStoragePasswordAsync } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -63,7 +63,7 @@
                 const verified = await Electron.PincodeManager.verify(profile.id, pinCode)
                 if (verified === true) {
                     await initialiseProfileStorage(profile)
-                    await asyncSetStoragePassword(pinCode)
+                    await setStoragePasswordAsync(pinCode)
 
                     dispatch('next')
                 } else {
