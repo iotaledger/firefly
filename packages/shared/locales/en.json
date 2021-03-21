@@ -635,7 +635,7 @@
             "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
             "duplicate": "This node has already been added.",
             "unsynced": "The node is not in sync.",
-            "noSynced": "No synce∂d nodes are available."
+            "noSynced": "No synced nodes are available."
         },
         "global": {
             "generic": "Something went wrong."
