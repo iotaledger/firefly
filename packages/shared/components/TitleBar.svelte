@@ -69,7 +69,7 @@
         </nav>
     {/if}
     {#if os === 'darwin'}
-        <div style="-webkit-app-region: drag" class="w-full h-12 fixed left-20" />
+        <div style="-webkit-app-region: drag" class="w-full h-8 fixed left-20" />
     {/if}
     <div class={`fixed ${os === 'win32' ? 'top-12' : 'top-0'} left-0 right-0 bottom-0`}>
         <slot />
