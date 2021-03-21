@@ -54,12 +54,12 @@
         },
         "pin": {
             "title": "Set up PIN code",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your pin to access your profile.",
+            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
             "body2": "Use numbers only"
         },
         "confirmPin": {
             "title": "Verify your PIN code",
-            "body1": "Your pin keeps your balance and transactions private.",
+            "body1": "Your PIN keeps your balance and transactions private.",
             "body2": "Re-enter your PIN code to proceed. "
         },
         "backup": {
@@ -199,7 +199,7 @@
             },
             "changePincode": {
                 "title": "Change PIN code",
-                "description": "Your pin keeps your balance and transactions private",
+                "description": "Your PIN keeps your balance and transactions private",
                 "currentPincode": "Current PIN",
                 "newPincode": "New PIN",
                 "confirmNewPincode": "Confirm new PIN",
