@@ -19,36 +19,36 @@
             style="-webkit-app-region: drag">
             <button
                 on:click={() => Electron.popupMenu()}
-                class={`flex justify-center p-4 stroke-current text-gray-900 dark:text-gray-100 w-20 ${get(get(wallet).accountsLoaded) ? 'bg-white dark:bg-gray-800 border-solid border-r border-gray-100 dark:border-gray-800' : ''}`}
+                class={`flex justify-center p-4 stroke-current text-gray-500 dark:text-gray-100 w-20 ${get(get(wallet).accountsLoaded) ? 'bg-white dark:bg-gray-800 border-solid border-r border-gray-100 dark:border-gray-800' : ''}`}
                 style="-webkit-app-region: none">
-                <svg width="15" height="15" viewBox="0 0 15 15">
-                    <path d="M0 1h15v1h-15z" fill="currentColor" />
-                    <path d="M0 7h15v1h-15z" fill="currentColor" />
-                    <path d="M0 13h15v1h-15z" fill="currentColor" />
+                <svg width="18" height="12" viewBox="0 0 18 15">
+                    <path d="M0 1h18v1h-18z" stroke="currentColor" />
+                    <path d="M0 7h18v1h-18z" stroke="currentColor" />
+                    <path d="M0 13h18v1h-18z" stroke="currentColor" />
                 </svg>
             </button>
-            <div class="flex flex-row mr-2">
+            <div class="flex flex-row mr-3">
                 <button
                     on:click={() => Electron.minimize()}
-                    class="p-2 mr-2 stroke-current text-gray-900 dark:text-gray-100"
+                    class="p-2 mr-2 stroke-current text-gray-500 dark:text-gray-100"
                     style="-webkit-app-region: none">
-                    <svg width="15" height="15" viewBox="0 0 15 15">
-                        <path d="M0 12h15v1h-15z" fill="currentColor" />
+                    <svg width="12" height="12" viewBox="0 0 15 15">
+                        <path d="M0 8h15v1h-15z" stroke="currentColor" />
                     </svg>
                 </button>
                 <button
                     on:click={() => Electron.maximize()}
-                    class="p-2 mr-2 stroke-current text-gray-900 dark:text-gray-100"
+                    class="p-2 mr-2 stroke-current text-gray-500 dark:text-gray-100"
                     style="-webkit-app-region: none">
-                    <svg width="15" height="15" viewBox="0 0 15 15">
-                        <path d="M1 1v13h13v-13h-13zm-1-1h15v15h-15v-15z" fill="currentColor" />
+                    <svg width="12" height="12" viewBox="0 0 15 15">
+                        <path d="M1 1v13h13v-13h-13zm-1-1h15v15h-15v-15z" stroke="currentColor" />
                     </svg>
                 </button>
                 <button
                     on:click={() => Electron.close()}
-                    class="p-2 mr-2 stroke-current text-gray-900 dark:text-gray-100"
+                    class="p-2 mr-2 stroke-current text-gray-500 dark:text-gray-100"
                     style="-webkit-app-region: none">
-                    <svg width="15" height="15" viewBox="0 0 15 15">
+                    <svg width="12" height="12" viewBox="0 0 15 15">
                         <path
                             d="M7.425 6.718l6.718-6.718.707.707-6.718 6.718 6.718 6.718-.707.707-6.718-6.718-6.718 6.718-.707-.707 6.718-6.718-6.718-6.718.707-.707 6.718 6.718z"
                             fill="currentColor" />
