@@ -103,7 +103,8 @@
                 "Name": "Firefly",
                 "Comment": "Desktop wallet for IOTA",
                 "Categories": "Office;Network;Finance"
-            }
+            },
+            "icon": "./public/assets/icons/linux/icon256x256.png"
         },
         "mac": {
             "icon": "./public/assets/icons/mac/icon.icns",
