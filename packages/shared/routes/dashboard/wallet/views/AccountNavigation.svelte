@@ -31,7 +31,7 @@
     <button data-label="back-button" class="absolute left-0" on:click={handleBackClick}>
         <div class="flex items-center space-x-3">
             <Icon icon="arrow-left" classes="text-blue-500" />
-            <Text type="h4">{locale('actions.back')}</Text>
+            <Text type="h5">{locale('actions.back')}</Text>
         </div>
     </button>
     <Text type="h3" classes="text-center">{activeAccount.alias}</Text>

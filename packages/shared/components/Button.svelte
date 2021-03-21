@@ -38,6 +38,11 @@
         span {
             @apply text-white;
         }
+        &:not(.secondary) {
+            span {
+                @apply font-bold;
+            }
+        }
         &:not(.with-icon) {
             &:hover,
             &:focus {
@@ -132,9 +137,12 @@
             @apply border-solid;
             @apply border-gray-300;
             @apply bg-white;
-            @apply py-6;
-            @apply px-5;
+            @apply p-5;
             @apply text-left;
+            &.xl {
+                @apply pb-6;
+                @apply px-5;
+            }
             span {
                 @apply text-gray-800;
                 @apply ml-10;
@@ -345,7 +353,7 @@
                 </div>
             {/if}
         {:else}
-            <span class="font-bold text-12 leading-140"><slot /></span>
+            <span class="text-12 leading-140"><slot /></span>
         {/if}
     </button>
 {/if}

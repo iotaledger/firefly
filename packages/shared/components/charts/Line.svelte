@@ -41,8 +41,8 @@
                     gradient.addColorStop(1, convertHexToRGBA(themeColor['500'], 0))
                     return {
                         backgroundColor: gradient,
-                        borderColor: themeColor['300'],
-                        borderWidth: 2,
+                        borderColor: themeColor['500'],
+                        borderWidth: 1.5,
                         pointBackgroundColor: themeColor['500'],
                         pointBorderColor: themeColor['500'],
                         pointRadius: 0,

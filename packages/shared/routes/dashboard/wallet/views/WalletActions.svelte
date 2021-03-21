@@ -61,7 +61,7 @@
     <div class="p-8 pt-4 flex flex-col h-full justify-between">
         <div data-label="accounts" class="w-full h-full flex flex-col flex-no-wrap justify-start mb-6">
             <div class="flex flex-row mb-4 justify-between items-center">
-                <Text type="h5">{locale('general.accounts')}</Text>
+                <Text type="h5">{locale('general.myAccounts')}</Text>
                 <Button onClick={handleCreateClick} secondary small icon="plus">{locale('actions.create')}</Button>
             </div>
             {#if $accounts.length > 0}
@@ -87,7 +87,7 @@
                 <Button xl secondary icon="receive" classes="w-1/2" onClick={handleReceiveClick}>
                     {locale('actions.receive')}
                 </Button>
-                <Button xl secondary icon="transfer" classes="w-1/2" onClick={handleSendClick}>{locale('actions.send')}</Button>
+                <Button xl secondary icon="send" classes="w-1/2" onClick={handleSendClick}>{locale('actions.send')}</Button>
             </div>
         {/if}
     </div>
