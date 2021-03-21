@@ -17,7 +17,7 @@
         BalanceOverview,
         getAccountMeta,
         getAccountsBalanceHistory,
-        getLatestMessages,
+        getTransactions,
         getWalletBalanceHistory,
         initialiseListeners,
         isTransferring,
@@ -39,7 +39,7 @@
     const { accounts, balanceOverview, accountsLoaded } = $wallet
 
     const transactions = derived(accounts, ($accounts) => {
-        return getLatestMessages($accounts)
+        return getTransactions($accounts)
     })
     const accountsBalanceHistory = derived([accounts, priceData], ([$accounts, $priceData]) =>
         getAccountsBalanceHistory($accounts, $priceData)
