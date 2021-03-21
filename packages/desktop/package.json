@@ -71,10 +71,11 @@
         "dmg": {
             "iconSize": 120,
             "title": "${productName}",
+            "background": "public/assets/background/mac/background.png",
             "sign": false,
             "contents": [
                 {
-                    "x": 520,
+                    "x": 500,
                     "y": 250,
                     "type": "link",
                     "path": "/Applications"
