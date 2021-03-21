@@ -406,7 +406,7 @@ export const initialiseListeners = () => {
             // Notify user
             const messageKey = confirmed ? 'confirmed' : 'failed'
 
-            const _notify = (senderAccountAlias = null) => {
+            const _notify = (senderAccountAlias: string | null = null) => {
                 let notificationMessage
 
                 if (senderAccountAlias) {
@@ -438,7 +438,7 @@ export const initialiseListeners = () => {
                     // If this is an internal message, check if we have already receive confirmation state of this message
                     if (Object.keys(messageIds).includes(message.id)) {
                         _notify(
-                            get(accounts).find((account) => account.index === messageIds[message.id])
+                            get(accounts).find((account) => account.index === messageIds[message.id]).alias
                         );
 
                         confirmedInternalMessageIds.update((ids) => {
