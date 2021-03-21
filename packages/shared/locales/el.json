@@ -231,7 +231,7 @@
             },
             "proofOfWork": {
                 "title": "Απόδειξη της εργασίας (Proof of work)",
-                "description": "Complete proof of work locally on your device or oursource to the node"
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Αρχείο Σφαλμάτων",
@@ -646,7 +646,7 @@
             "mnemonic": "Το μνημονικό δεν είναι έγκυρο.",
             "seedTooShort": "Το seed πρέπει να έχει μήκος 81 χαρακτήρες, είναι {length, plural, one {1 χαρακτήρας} other {# χαρακτήρες}}",
             "seedCharacters": "Το seed πρέπει να περιέχει μόνο χαρακτήρες A-Z ή 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
+            "phraseWordCount": "Πρέπει να υπάρχουν 24 λέξεις στη φράση ανάκτησής σας, αυτή τη στιγμή {length, plural, one {είναι 1} other {είναι #}}.",
             "phraseUnrecognizedWord": "Μη αναγνωρίσιμη λέξη \"{word}\" στη φράση ανάκτησης σας"
         }
     }

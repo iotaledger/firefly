@@ -1,8 +1,8 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA tokens",
-            "body": "Firefly is the official wallet of IOTA."
+            "title": "Send, Motta og Håndter dine IOTA tokens",
+            "body": "Firefly er den offisielle lommeboken til IOTA."
         },
         "legal": {
             "title": "Privacy Policy & Terms of Service",
@@ -25,7 +25,7 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+            "checkbox": "Jeg har lest og godtar retningslinjer for personvern og tjenestevilkår"
         },
         "appearance": {
             "title": "Utseende",
@@ -231,7 +231,7 @@
             },
             "proofOfWork": {
                 "title": "Bevis på arbeid",
-                "description": "Complete proof of work locally on your device or oursource to the node"
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Feilmeldingslogg",

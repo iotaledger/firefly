@@ -1,11 +1,11 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA tokens",
-            "body": "Firefly is the official wallet of IOTA."
+            "title": "Envie, Receba e Gerencie suas IOTAs",
+            "body": "Firefly é a carteira oficial da IOTA."
         },
         "legal": {
-            "title": "Privacy Policy & Terms of Service",
+            "title": "Política de Privacidade e Termos de Serviço",
             "body": "Por favor, leia a Política de Privacidade e os Termos de Serviço.",
             "privacyPolicy": {
                 "title": "Política de Privacidade",
@@ -25,27 +25,27 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+            "checkbox": "Eu li e aceito a Política de Privacidade e Termos de Serviço"
         },
         "appearance": {
             "title": "Aparência",
-            "body": "Choose your wallet’s theme."
+            "body": "Escolha o tema da sua carteira."
         },
         "setup": {
             "title": "Configurar sua carteira",
-            "body1": "You can create multiple user profiles to keep your tokens separate and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "body1": "Você pode criar vários perfis de usuários para manter suas moedas separadas e melhorarar a privacidade.",
+            "body2": "Por agora, vamos começar com o nome do seu primeiro perfil. Você pode adicionar mais perfis mais tarde.",
             "profileName": "Nome do Perfil"
         },
         "secure": {
-            "title": "Secure your wallet",
-            "body1": "Save and print the Recovery Kit PDF template.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
+            "title": "Proteja sua carteira",
+            "body1": "Salvar e imprimir o modelo PDF do Kit de Restauração.",
+            "body2": "Se você preencher o Kit de Recuperação e armazená-lo de forma segura, você poderá sempre recuperar sua carteira."
         },
         "password": {
-            "title": "Crie uma senha",
-            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
-            "body2": "It is recommended that you write down your password in your Recovery Kit."
+            "title": "Criar uma senha",
+            "body1": "Você precisa de uma senha forte para proteger seus fundos. Use uma combinação de palavras, e evite frases comuns, nomes ou datas.",
+            "body2": "É recomendável que você anote sua senha no Kit de Recuperação."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -54,50 +54,50 @@
         },
         "pin": {
             "title": "Defina um código PIN",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
+            "body1": "Digite um PIN de 6 dígitos abaixo. O PIN será solicitado ao acessar seu perfil.",
+            "body2": "Usar apenas números"
         },
         "confirmPin": {
             "title": "Verifique seu código PIN",
-            "body1": "Your PIN keeps your balance and transactions private.",
-            "body2": "Re-enter your PIN code to proceed. "
+            "body1": "O seu PIN mantém seu saldo e transações privadas.",
+            "body2": "Digite novamente seu código PIN para continuar. "
         },
         "backup": {
             "title": "Fazer backup da sua carteira",
-            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+            "body1": "Agora você verá uma frase de recuperação. Anote-a no seu Kit de Recuperação.",
+            "body2": "Não compartilhe sua frase de recuperação com ninguém. Ela pode ser usada para acessar seus fundos de qualquer lugar.",
             "body3": "Se você perder sua frase de recuperação, poderá perder seus fundos."
         },
         "recoveryPhrase": {
             "title": "Frase de recuperação",
-            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-            "body2": "Keep this private and safely stored.",
-            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+            "body1": "No seu Kit de Recuperação, anote as palavras na ordem exata.",
+            "body2": "Mantenha isso em um lugar privado e armazenado com segurança.",
+            "body3": "É importante ter um backup escrito. Computadores geralmente falham e os arquivos podem ser corrompidos.",
             "revealRecoveryPhrase": "Revelar frase de recuperação",
             "hideRecoveryPhrase": "Ocultar frase de recuperação"
         },
         "verifyRecoveryPhrase": {
             "title": "Verificar frase de recuperação",
-            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
-            "word": "Word",
-            "verified": "Recovery phrase verified",
-            "verifiedBody": "Remember to keep it private and safely stored."
+            "body": "Vamos verificar se você escreveu a frase corretamente. Por favor, selecione cada palavra na ordem numerada.",
+            "word": "Palavra",
+            "verified": "Frase de recuperação verificada",
+            "verifiedBody": "Lembre-se de mantê-la privada e armazenada com segurança."
         },
         "backupWallet": {
             "title": "Backup para um arquivo Stronghold",
-            "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
-            "body2": "Reasons why digital backups are important:",
-            "reason1": "Easily recover your wallet without typing in your recovery phrase",
-            "reason2": "Import your wallet to other devices",
-            "reason3": "Recover your full transaction history"
+            "body1": "Digite sua senha para fazer backup de sua carteira para a Stronghold. Sua senha é usada para criptografar o backup.",
+            "body2": "Motivos dos quais backups digitais são importantes:",
+            "reason1": "Recupere facilmente sua carteira sem digitar sua frase de recuperação",
+            "reason2": "Importe sua carteira para outros dispositivos",
+            "reason3": "Recuperar histórico completo de transações"
         },
         "recoveryPhraseSaved": {
             "title": "Backup feito com sucesso",
             "body": "Você fez o backup de sua carteira para Stronghold."
         },
         "congratulations": {
-            "title": "Wallet setup completed",
-            "body": "Your new wallet is ready to use."
+            "title": "Configuração da carteira concluída",
+            "body": "Sua nova carteira está pronta para ser usada."
         },
         "import": {
             "title": "Importar uma carteira",
@@ -105,14 +105,14 @@
         },
         "importFromText": {
             "title": "Recupere sua carteira com uma frase de recuperação ou seed",
-            "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body2": "A recovery phrase is 24 words long (with spaces). This is used to recover an existing Firefly wallet.",
+            "body1": "Uma Seed consiste em 81 caracteres. Essa é usada para a restauração de uma carteira Trinity mais velha.",
+            "body2": "Uma frase de recuperação tem 24 palavras de comprimento (com espaços). Essa é usada para recuperar uma carteira Firefly existente.",
             "body3": "Digite sua seed ou frase de recuperação",
             "seedDetected": "Seed de 81 caracteres detectada",
-            "phraseDetected": "24 word recovery phrase detected"
+            "phraseDetected": "24 palavras de recuperação detectadas"
         },
         "importFromFile": {
-            "title": "Restore your wallet using a backup file",
+            "title": "Restaurar carteira usando um arquivo de backup",
             "body": "Importe um arquivo de backup para restaurar sua carteira. Os backups podem ser Stronghold (.stronghold) ou uma Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
@@ -123,10 +123,10 @@
         "importSuccess": {
             "title": "Você restaurou seu backup com sucesso",
             "body": "Agora você pode configurar a sua nova carteira.",
-            "seedvaultTitle": "Successfully imported",
-            "seedvaultBody": "Your password is correct, you can now continue.",
-            "strongholdTitle": "Successfully imported",
-            "strongholdBody": "Your password is correct, you can now continue."
+            "seedvaultTitle": "Importado com sucesso",
+            "seedvaultBody": "Sua senha está correta, você pode continuar.",
+            "strongholdTitle": "Importado com sucesso",
+            "strongholdBody": "Sua senha está correta, você pode continuar."
         },
         "migrate": {
             "title": "Migre seus fundos",
@@ -151,19 +151,19 @@
             },
             "security": {
                 "title": "Segurança",
-                "description": "Change your password and adjust security-related settings"
+                "description": "Altere sua senha e ajuste as configurações relacionadas à segurança"
             },
             "advancedSettings": {
                 "title": "Configurações Avançadas",
-                "description": "Tools and manual settings for technical users"
+                "description": "Ferramentas e configurações manuais para usuários técnicos"
             },
             "helpAndInfo": {
                 "title": "Ajuda & Informação",
-                "description": "Find the answer to a question or get help with an issue"
+                "description": "Encontre a resposta para uma pergunta ou obtenha ajuda em um problema"
             },
             "profile": {
                 "title": "Perfil",
-                "description": "Change your profile name or set an avatar"
+                "description": "Altere o nome do seu perfil ou defina um avatar"
             },
             "sync": {
                 "title": "Sincronizar contas",
@@ -179,27 +179,27 @@
             },
             "currency": {
                 "title": "Moeda",
-                "description": "Adjusts balance conversion and updates chart options"
+                "description": "Ajusta as opções de conversão e atualiza as opções do gráfico"
             },
             "notifications": {
                 "title": "Notificações",
-                "description": "System notifications for transaction events"
+                "description": "Notificações do sistema para eventos de transações"
             },
             "exportStronghold": {
-                "title": "Export Backup",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
+                "title": "Exportar Backup",
+                "description": "Exportar arquivo Stronghold - um backup completo criptografado da sua carteira e do histórico recente de transações."
             },
             "appLock": {
-                "title": "Automatic Lock",
-                "description": "Time elapsed before your wallet locks and logs you out"
+                "title": "Bloqueio Automático",
+                "description": "Tempo decorrido antes que sua carteira tranque e faça o logout"
             },
             "changePassword": {
                 "title": "Alterar Senha",
-                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
+                "description": "Sua senha é usada para proteger sua carteira. Você deve usar uma senha forte para proteger seus fundos."
             },
             "changePincode": {
                 "title": "Alterar código PIN",
-                "description": "Your PIN keeps your balance and transactions private",
+                "description": "Seu PIN mantém seu saldo e suas transações privadas",
                 "currentPincode": "PIN atual",
                 "newPincode": "Novo PIN",
                 "confirmNewPincode": "Confirme o novo PIN",
@@ -211,64 +211,64 @@
             },
             "deleteProfile": {
                 "title": "Excluir perfil",
-                "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
+                "description": "Exclui a carteira inteira, perfil e histórico de transações. Certifique-se de ter um backup."
             },
             "deepLinks": {
                 "title": "Links Profundos",
-                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
+                "description": "Preenche automaticamente os dados da transação no Firefly ao clicar num link iota://"
             },
             "developerMode": {
                 "title": "Modo de Desenvolvedor",
-                "description": "Connect to testnets and other developer features"
+                "description": "Conecta a testnets e outros recursos para desenvolvedores"
             },
             "nodeSettings": {
                 "title": "Configurações do servidor",
-                "description": "Select Manual to choose from the node list or connect to your own node"
+                "description": "Selecione Manual para escolher da lista de servidores ou conecte-se ao seu próprio servidor"
             },
             "configureNodeList": {
-                "title": "Select a node",
+                "title": "Selecionar um servidor",
                 "description": ""
             },
             "proofOfWork": {
                 "title": "Prova de Trabalho",
-                "description": "Complete proof of work locally on your device or oursource to the node"
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Registro de erro",
-                "description": "View errors to debug an issue"
+                "description": "Ver erros para depurar um problema"
             },
             "diagnostics": {
                 "title": "Diagnósticos",
-                "description": "View system and application information"
+                "description": "Exibir informações do sistema e aplicativo"
             },
             "stateExport": {
                 "title": "Exportar Estado",
-                "description": "Export your transaction history to a .csv file"
+                "description": "Exporte seu histórico de transações para um arquivo .csv"
             },
             "troubleshoot": {
                 "title": "Resolução de Problemas",
-                "description": "Use the troubleshooting wizard to solve common problems"
+                "description": "Use o assistente de solução de problemas para resolver problemas comuns"
             },
             "documentation": {
                 "title": "Documentação",
-                "description": "View the documentation for in depth explanations of how things work"
+                "description": "Veja a documentação para explicações aprofundadas sobre como as coisas funcionam"
             },
             "faq": {
                 "title": "FAQ",
-                "title2": "Frequently Asked Questions",
-                "description": "View the FAQs to get help with a common problem or question"
+                "title2": "Perguntas Frequentes",
+                "description": "Veja as FAQs para obter ajuda com um problema ou pergunta comum"
             },
             "discord": {
                 "title": "Discord",
-                "description": "Get help from the IOTA community on Discord"
+                "description": "Obtenha ajuda da comunidade IOTA no Discord"
             },
             "about": {
                 "title": "Sobre",
                 "description": ""
             },
             "reportAnIssue": {
-                "title": "Report an issue",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
+                "title": "Reportar um problema",
+                "description": "Relate um erro para os desenvolvedores. Verifique se o mesmo ainda não foi relatado."
             }
         },
         "login": {
@@ -299,7 +299,7 @@
             "network": {
                 "networkOperational": "Rede Operacional",
                 "networkDegraded": "Rede Degradada",
-                "networkDown": "Network Disconnected",
+                "networkDown": "Rede Desconectada",
                 "status": "Status",
                 "messagesPerSecond": "Mensagens por segundo",
                 "confirmationRate": "Taxa de confirmação"
@@ -334,14 +334,14 @@
             "notBackedUpDescription": "Você não fez o backup da sua Stronghold"
         },
         "deleteAccount": {
-            "title": "Remove {name}?",
-            "body": "You can add this account back later but you may lose your transaction history.",
-            "typePassword": "Type your wallet password to confirm.",
-            "deleteAccount": "Remove account",
-            "errorTitle": "Unable to remove {name}",
-            "errorBody1": "To remove an account it must have 0 balance.",
+            "title": "Excluir {name}?",
+            "body": "Você pode adicionar essa conta novamente mais tarde, mas poderá perder seu histórico de transações.",
+            "typePassword": "Digite a senha da carteira para confirmar.",
+            "deleteAccount": "Remover conta",
+            "errorTitle": "Não foi possível excluir {name}",
+            "errorBody1": "Para excluir uma conta você deve ter 0 de saldo.",
             "errorBody2": "Atualmente você tem {balance} restantes nesta conta. Por favor, mova esses fundos para uma conta diferente e tente novamente.",
-            "errorBody3": "You cannot remove this account, you must have at least one."
+            "errorBody3": "Você não pode excluir esta conta, você deve ter pelo menos uma conta."
         },
         "addressHistory": {
             "title": "Histórico de endereço da conta {name}",
@@ -415,7 +415,7 @@
         "tryAgain": "Tente novamente",
         "visitDiscord": "Visite o Discord",
         "dragDrop": "Arraste e solte",
-        "importExtentions": ".kdbx or .stronghold file",
+        "importExtentions": "Arquivo .kdbx ou .stronghold",
         "chooseFile": "Escolha um Arquivo",
         "dropHere": "Solte seu arquivo aqui",
         "syncAll": "Sincronizar tudo",
@@ -429,10 +429,10 @@
         "unlock": "Desbloquear",
         "updateFirefly": "Atualizar a Firefly",
         "restartNow": "Reiniciar agora",
-        "saveBackup": "Save Stronghold backup",
+        "saveBackup": "Salvar backup Stronghold",
         "customizeAcount": "Customizar a conta",
         "viewAddressHistory": "Ver histórico de endereços",
-        "deleteAccount": "Remove account",
+        "deleteAccount": "Excluir conta",
         "max": "Máx",
         "addNode": "Adicionar servidor",
         "removeNode": "Remover servidor",
@@ -455,11 +455,11 @@
         "yes": "Sim",
         "no": "Não",
         "reset": "Redefinir",
-        "downloadRecoveryKit": "Save Recovery Kit template",
-        "skipBackup": "Skip file backup",
-        "finishSetup": "Finish setup",
-        "readDocumentation": "Read the documentation",
-        "visitFaq": "Visit FAQ"
+        "downloadRecoveryKit": "Salvar modelo Kit de Recuperação",
+        "skipBackup": "Ignorar backup de arquivo",
+        "finishSetup": "Concluir configuração",
+        "readDocumentation": "Ler a documentação",
+        "visitFaq": "Visitar FAQ"
     },
     "general": {
         "password": "Senha",
@@ -475,7 +475,7 @@
         "sendPayment": "Enviar pagamento",
         "moveFunds": "Transferir fundos",
         "sendFunds": "Enviar fundos",
-        "sendToAddress": "Send to address",
+        "sendToAddress": "Enviar para o endereço",
         "scanQrOrPaste": "Escaneie um código QR ou cole um endereço",
         "moveFundsBetweenAccounts": "Mover fundos entre contas",
         "sendTokensToAddress": "Enviar tokens para um endereço",
@@ -509,10 +509,10 @@
         "accountBalance": "Saldo da Conta",
         "incoming": "Recebendo",
         "outgoing": "Enviando",
-        "totalIn": "Total in",
-        "totalOut": "Total out",
+        "totalIn": "Total recebido",
+        "totalOut": "Total enviado",
         "accounts": "Contas",
-        "myAccounts": "My accounts",
+        "myAccounts": "Minhas contas",
         "automaticNodeSelection": "Seleção automática de servidor",
         "manualNodeSelection": "Seleção manual do servidor",
         "profiles": "Perfis",
@@ -559,13 +559,13 @@
         "pinCodeUpdating": "Atualizando código PIN...",
         "pinCodeSuccess": "Código PIN atualizado com sucesso",
         "pinCodeFailed": "Falha ao atualizar código PIN",
-        "passwordStrength": "Password strength",
-        "passwordStrength0": "Bad",
-        "passwordStrength1": "Poor",
-        "passwordStrength2": "Weak",
-        "passwordStrength3": "Average",
-        "passwordStrength4": "Strong",
-        "creatingProfile": "Creating profile, please wait..."
+        "passwordStrength": "Força da senha",
+        "passwordStrength0": "Ruim",
+        "passwordStrength1": "Ruim",
+        "passwordStrength2": "Fraca",
+        "passwordStrength3": "Média",
+        "passwordStrength4": "Forte",
+        "creatingProfile": "Criando perfil, por favor aguarde..."
     },
     "dates": {
         "today": "Hoje",
@@ -626,16 +626,16 @@
             "amountInvalidFormat": "O valor parece ser um número inválido.",
             "amountZero": "O valor deve ser maior que 0.",
             "wrongAddressFormat": "Os endereços começam com o prefixo {prefix}.",
-            "insufficientFunds": "This account has insufficient funds.",
-            "sendingDust": "You cannot send less than 1 Mi.",
-            "leavingDust": "You cannot leave less than 1 Mi on your address."
+            "insufficientFunds": "Esta conta não tem fundos suficientes.",
+            "sendingDust": "Você não pode enviar menos de 1 Mi.",
+            "leavingDust": "Você não pode deixar menos do que 1 Mi no seu endereço."
         },
         "node": {
             "invalid": "Por favor, insira uma URL válida.",
             "https": "É necessário utilizar HTTPS. Configure um perfil de desenvolvedor para usar conexões HTTP não seguras.",
             "duplicate": "Este servidor já foi adicionado.",
-            "unsynced": "The node is not in sync.",
-            "noSynced": "No synced nodes are available."
+            "unsynced": "O servidor não está em sincronia.",
+            "noSynced": "Nenhum servidor sincronizado disponível."
         },
         "global": {
             "generic": "Algo deu errado."
@@ -646,7 +646,7 @@
             "mnemonic": "O mnemonic não é válido.",
             "seedTooShort": "A seed deve conter 81 caracteres, atualmente {length, plural, one {contém 1} other {contém #}}",
             "seedCharacters": "A seed deve conter apenas caracteres A-Z ou 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
+            "phraseWordCount": "Deve haver 24 palavras em sua frase de recuperação, atualmente {length, plural, one {há 1} other {há #}}.",
             "phraseUnrecognizedWord": "Palavra \"{word}\" não reconhecida na sua frase de recuperação"
         }
     }

@@ -231,7 +231,7 @@
             },
             "proofOfWork": {
                 "title": "Proof of Work",
-                "description": "Complete proof of work locally on your device or oursource to the node"
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Registro degli errori",
