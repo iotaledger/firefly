@@ -3,9 +3,8 @@
     import { getInitials } from 'shared/lib/helpers'
     import { networkStatus } from 'shared/lib/networkStatus'
     import { activeProfile } from 'shared/lib/profile'
-    import { accountRoute, dashboardRoute, settingsRoute, walletRoute } from 'shared/lib/router'
-    import { AccountRoutes, SettingsRoutes, WalletRoutes, Tabs } from 'shared/lib/typings/routes'
-    import { selectedAccountId } from 'shared/lib/wallet'
+    import { dashboardRoute, settingsRoute, resetWalletRoute } from 'shared/lib/router'
+    import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -38,10 +37,7 @@
     }
 
     function openWallet() {
-        dashboardRoute.set(Tabs.Wallet)
-        walletRoute.set(WalletRoutes.Init)
-        accountRoute.set(AccountRoutes.Init)
-        selectedAccountId.set(null)
+        resetWalletRoute()
     }
 </script>
 
