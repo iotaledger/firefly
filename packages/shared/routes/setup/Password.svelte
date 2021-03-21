@@ -58,8 +58,9 @@
     <OnboardingLayout onBackClick={handleBackClick} {busy}>
         <div slot="leftpane__content">
             <form on:submit={handleContinueClick} id="password-form">
-                <Text type="h2" classes="mb-5">{locale('views.password.title')}</Text>
-                <Text type="p" secondary classes="mb-10">{locale('views.password.body')}</Text>
+                <Text type="h2" classes="mb-6">{locale('views.password.title')}</Text>
+                <Text type="p" classes="mb-4" secondary>{locale('views.password.body')}</Text>
+                <Text type="p" classes="mb-10" secondary>{locale('views.password.body1')}</Text>
                 <Password
                     {error}
                     classes="mb-1"
@@ -73,6 +74,7 @@
                     disabled={busy} />
                 <Password
                     bind:value={confirmedPassword}
+                    classes="mb-5"
                     {locale}
                     placeholder={locale('general.confirmPassword')}
                     showRevealToggle

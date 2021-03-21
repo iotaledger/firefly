@@ -37,7 +37,8 @@
                 <Pin bind:value={pinInput} glimpse classes="w-full mx-auto block" on:submit={onSubmit} autofocus disabled={busy} />
             {:else}
                 <Text type="h2" classes="mb-5">{locale('views.confirmPin.title')}</Text>
-                <Text type="p" secondary classes="mb-8">{locale('views.confirmPin.body')}</Text>
+                <Text type="p" secondary classes="mb-4">{locale('views.confirmPin.body')}</Text>
+                <Text type="p" secondary classes="mb-8">{locale('views.confirmPin.body1')}</Text>
                 <Pin bind:value={pinInput} glimpse classes="w-full mx-auto block" on:submit={onSubmit} autofocus disabled={busy} />
             {/if}
         </div>
