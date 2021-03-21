@@ -1,11 +1,11 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Enviar, rebre i gestionar eIs seus IOTA",
-            "body": "Firefly és una cartera IOTA segura i fàcil d’utilitzar."
+            "title": "Send, Receive & Manage your IOTA tokens",
+            "body": "Firefly is the official wallet of IOTA."
         },
         "legal": {
-            "title": "Legal",
+            "title": "Privacy Policy & Terms of Service",
             "body": "Consulteu la Política de privacitat i els Termes i condicions.",
             "privacyPolicy": {
                 "title": "Política de Privacitat",
@@ -25,20 +25,27 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I have read and I accept the Privacy policy & ToS"
+            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
         },
-        "language": {
-            "title": "Llenguatge i aparença",
-            "body": "Trieu l'idioma i el tema de la cartera"
+        "appearance": {
+            "title": "Aspecte",
+            "body": "Choose your wallet’s theme."
         },
         "setup": {
             "title": "Configureu la cartera",
-            "body": "Podeu crear una cartera nova o importar-ne una.",
+            "body1": "You can create multiple user profiles to keep your tokens separate and improve privacy.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Nom del perfil"
+        },
+        "secure": {
+            "title": "Secure your wallet",
+            "body1": "Save and print the Recovery Kit PDF template.",
+            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
         },
         "password": {
             "title": "Crear una contrasenya",
-            "body": "Necessiteu una contrasenya segura per protegir els vostres fons. Utilitzeu una combinació de paraules i eviteu frases, noms o dates habituals."
+            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
+            "body2": "It is recommended that you write down your password in your Recovery Kit."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -47,42 +54,50 @@
         },
         "pin": {
             "title": "Configureu el codi PIN",
-            "body1": "Introduïu un PIN de 6 dígits a continuació. Se us demanarà que introduïu el vostre PIN per iniciar la sessió a la cartera.",
-            "body2": "Només podeu utilitzar números."
+            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
+            "body2": "Use numbers only"
         },
         "confirmPin": {
             "title": "Verifica el teu codi PIN",
-            "body": "Torneu a introduir el vostre codi PIN per continuar."
+            "body1": "Your PIN keeps your balance and transactions private.",
+            "body2": "Re-enter your PIN code to proceed. "
         },
         "backup": {
             "title": "Feu una còpia de seguretat de la cartera",
-            "body1": "Ara se us mostrarà una frase de recuperació.",
-            "body2": "No comparteixis aquesta frase amb ningú. La vostra frase de recuperació es pot utilitzar per accedir a les vostres fitxes des de qualsevol lloc.",
+            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
+            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
             "body3": "Si perdeu la frase de recuperació, és possible que perdeu els vostres fons."
         },
         "recoveryPhrase": {
             "title": "Frase de recuperació",
-            "body1": "Escriviu amb cura les paraules en l’ordre exacte.",
-            "body2": "Mantingueu la frase de recuperació privada i emmagatzemada de manera segura. No el compartiu amb ningú.",
+            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
+            "body2": "Keep this private and safely stored.",
+            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
             "revealRecoveryPhrase": "Mostrar la frase de recuperación",
             "hideRecoveryPhrase": "Amaga la frase de recuperació"
         },
         "verifyRecoveryPhrase": {
             "title": "Verifiqueu la frase de recuperació",
-            "body": "Anem a comprovar que heu escrit correctament la frase. Seleccioneu les paraules en l'ordre correcte.",
-            "creatingAccount": "S'està creant un compte, espereu..."
+            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
+            "word": "Word",
+            "verified": "Recovery phrase verified",
+            "verifiedBody": "Remember to keep it private and safely stored."
         },
         "backupWallet": {
             "title": "Feu una còpia de seguretat en un fitxer Stronghold",
-            "body": "Introduïu la vostra contrasenya per fer una còpia de seguretat de la cartera en un fitxer Stronghold. La vostra contrasenya s’utilitza per xifrar la còpia de seguretat."
+            "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
+            "body2": "Reasons why digital backups are important:",
+            "reason1": "Easily recover your wallet without typing in your recovery phrase",
+            "reason2": "Import your wallet to other devices",
+            "reason3": "Recover your full transaction history"
         },
         "recoveryPhraseSaved": {
             "title": "S'ha fet la còpia de seguretat amb èxit",
             "body": "Heu fet una còpia de seguretat de la vostra cartera a Stronghold."
         },
         "congratulations": {
-            "title": "Enhorabona",
-            "body": "La vostra cartera ja està a punt."
+            "title": "Wallet setup completed",
+            "body": "Your new wallet is ready to use."
         },
         "import": {
             "title": "Importeu una cartera",
@@ -90,14 +105,14 @@
         },
         "importFromText": {
             "title": "Restaureu la cartera amb una frase de recuperació o una llavor",
-            "body1": "Una frase de recuperació té 24 paraules. S’utilitza per recuperar una cartera Firefly existent.",
-            "body2": "Una llavor consta de 81 caràcters. S’utilitza per recuperar-ne d’una cartera Trinity antiga.",
+            "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
+            "body2": "A recovery phrase is 24 words long (with spaces). This is used to recover an existing Firefly wallet.",
             "body3": "Introduïu la vostra llavor o la frase de recuperació",
             "seedDetected": "S'ha detectat una llavor de 81 caràcters",
-            "phraseDetected": "Frase de 24 paraules detectada"
+            "phraseDetected": "24 word recovery phrase detected"
         },
         "importFromFile": {
-            "title": "Restaureu la cartera des d'un fitxer de còpia de seguretat",
+            "title": "Restore your wallet using a backup file",
             "body": "Importeu una còpia de seguretat per restaurar la cartera. Les còpies de seguretat poden ser Stronghold (.stronghold) o Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
@@ -107,7 +122,11 @@
         },
         "importSuccess": {
             "title": "Heu recuperat amb èxit la vostra còpia de seguretat",
-            "body": "Ara podeu configurar la vostra cartera nova."
+            "body": "Ara podeu configurar la vostra cartera nova.",
+            "seedvaultTitle": "Successfully imported",
+            "seedvaultBody": "Your password is correct, you can now continue.",
+            "strongholdTitle": "Successfully imported",
+            "strongholdBody": "Your password is correct, you can now continue."
         },
         "migrate": {
             "title": "Migra els teus fons",
@@ -132,19 +151,19 @@
             },
             "security": {
                 "title": "Seguretat",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Change your password and adjust security-related settings"
             },
             "advancedSettings": {
                 "title": "Configuració avançada",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Tools and manual settings for technical users"
             },
             "helpAndInfo": {
                 "title": "Informació i ajuda",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Find the answer to a question or get help with an issue"
             },
             "profile": {
                 "title": "Perfil",
-                "description": ""
+                "description": "Change your profile name or set an avatar"
             },
             "sync": {
                 "title": "Sincronitza els comptes",
@@ -160,27 +179,27 @@
             },
             "currency": {
                 "title": "Moneda",
-                "description": ""
+                "description": "Adjusts balance conversion and updates chart options"
             },
             "notifications": {
                 "title": "Notificacions",
-                "description": ""
+                "description": "System notifications for transaction events"
             },
             "exportStronghold": {
-                "title": "Exportar Stronghold",
-                "description": ""
+                "title": "Export Backup",
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
             },
             "appLock": {
-                "title": "Bloqueig d'aplicacions",
-                "description": ""
+                "title": "Automatic Lock",
+                "description": "Time elapsed before your wallet locks and logs you out"
             },
             "changePassword": {
                 "title": "Canviar contrasenya",
-                "description": ""
+                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
             },
             "changePincode": {
                 "title": "Canvia el codi PIN",
-                "description": "",
+                "description": "Your PIN keeps your balance and transactions private",
                 "currentPincode": "PIN actual",
                 "newPincode": "Nou PIN",
                 "confirmNewPincode": "Confirma el nou PIN",
@@ -192,59 +211,64 @@
             },
             "deleteProfile": {
                 "title": "Suprimeix el perfil",
-                "description": ""
+                "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
             },
             "deepLinks": {
                 "title": "Enllaços profunds",
-                "description": ""
+                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
             },
             "developerMode": {
                 "title": "Mode de desenvolupador",
-                "description": ""
+                "description": "Connect to testnets and other developer features"
             },
             "nodeSettings": {
                 "title": "Configuració dels dispositius",
-                "description": ""
+                "description": "Select Manual to choose from the node list or connect to your own node"
             },
             "configureNodeList": {
-                "title": "Configureu la llista de nodes",
+                "title": "Select a node",
                 "description": ""
             },
             "proofOfWork": {
                 "title": "Prova de Treball",
-                "description": ""
+                "description": "Complete proof of work locally on your device or oursource to the node"
             },
             "errorLog": {
                 "title": "Registres d'errors",
-                "description": ""
+                "description": "View errors to debug an issue"
             },
             "diagnostics": {
                 "title": "Diagnòstics",
-                "description": ""
+                "description": "View system and application information"
             },
             "stateExport": {
                 "title": "Exportació de l'estat",
-                "description": ""
+                "description": "Export your transaction history to a .csv file"
             },
             "troubleshoot": {
                 "title": "Resolució de problemes",
-                "description": ""
+                "description": "Use the troubleshooting wizard to solve common problems"
             },
             "documentation": {
                 "title": "Documentació",
-                "description": ""
+                "description": "View the documentation for in depth explanations of how things work"
             },
             "faq": {
                 "title": "FAQ",
-                "description": ""
+                "title2": "Frequently Asked Questions",
+                "description": "View the FAQs to get help with a common problem or question"
             },
             "discord": {
                 "title": "Discord",
-                "description": ""
+                "description": "Get help from the IOTA community on Discord"
             },
             "about": {
                 "title": "Sobre",
                 "description": ""
+            },
+            "reportAnIssue": {
+                "title": "Report an issue",
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
             }
         },
         "login": {
@@ -275,7 +299,7 @@
             "network": {
                 "networkOperational": "Operadors de xarxa",
                 "networkDegraded": "Xarxa degradada",
-                "networkDown": "Xarxa caiguda",
+                "networkDown": "Network Disconnected",
                 "status": "Estat",
                 "messagesPerSecond": "Missatges per segon",
                 "confirmationRate": "Taxa de confirmació"
@@ -310,14 +334,14 @@
             "notBackedUpDescription": "No heu fet una còpia de seguretat de Stronghold"
         },
         "deleteAccount": {
-            "title": "Suprimeix {name}?",
-            "body": "Perdreu definitivament el vostre historial de transaccions i potser també alguna cosa més.",
-            "typePassword": "Escriviu la contrasenya de la vostra cartera per confirmar-la.",
-            "deleteAccount": "Elimina el compte",
-            "errorTitle": "No es pot suprimir {name}",
-            "errorBody1": "Per eliminar un compte, heu de tenir 0 saldo.",
+            "title": "Remove {name}?",
+            "body": "You can add this account back later but you may lose your transaction history.",
+            "typePassword": "Type your wallet password to confirm.",
+            "deleteAccount": "Remove account",
+            "errorTitle": "Unable to remove {name}",
+            "errorBody1": "To remove an account it must have 0 balance.",
             "errorBody2": "Actualment us queda {balance} en aquest compte. Moveu aquests fons a un altre compte i torneu-ho a provar.",
-            "errorBody3": "No podeu suprimir aquest compte, n'heu de tenir almenys un."
+            "errorBody3": "You cannot remove this account, you must have at least one."
         },
         "addressHistory": {
             "title": "historial d'adreces del compte {name}",
@@ -391,7 +415,7 @@
         "tryAgain": "Torna-ho a provar",
         "visitDiscord": "Visitar Discord",
         "dragDrop": "Arrossegar",
-        "importExtentions": "fitxer .stronghold o .kdbx ",
+        "importExtentions": ".kdbx or .stronghold file",
         "chooseFile": "Selecciona un fitxer",
         "dropHere": "Arrosega els fitxers aquí",
         "syncAll": "Sincronitza-ho tot",
@@ -405,10 +429,10 @@
         "unlock": "Desbloqueja",
         "updateFirefly": "Actualitza Firefly",
         "restartNow": "Reiniciar ara",
-        "saveBackup": "Desa la còpia de seguretat",
+        "saveBackup": "Save Stronghold backup",
         "customizeAcount": "Personalitza el compte",
         "viewAddressHistory": "Veure l'historial d'adreces",
-        "deleteAccount": "Elimina el compte",
+        "deleteAccount": "Remove account",
         "max": "Màxim",
         "addNode": "Afegeix un node",
         "removeNode": "Elimina el node",
@@ -430,7 +454,12 @@
         "hideDetails": "Amaga els detalls",
         "yes": "Si",
         "no": "No",
-        "reset": "Restableix"
+        "reset": "Restableix",
+        "downloadRecoveryKit": "Save Recovery Kit template",
+        "skipBackup": "Skip file backup",
+        "finishSetup": "Finish setup",
+        "readDocumentation": "Read the documentation",
+        "visitFaq": "Visit FAQ"
     },
     "general": {
         "password": "Contrasenya",
@@ -446,7 +475,7 @@
         "sendPayment": "Envia el pagament",
         "moveFunds": "Moure fons",
         "sendFunds": "Enviar fons",
-        "sendToAddress": "Enviar a una adreça",
+        "sendToAddress": "Send to address",
         "scanQrOrPaste": "Escaneja un codi QR o enganxa una adreça",
         "moveFundsBetweenAccounts": "Moure fons entre comptes",
         "sendTokensToAddress": "Enviar fitxes a una adreça",
@@ -480,7 +509,10 @@
         "accountBalance": "Saldo del compte",
         "incoming": "Entrant",
         "outgoing": "Sortint",
+        "totalIn": "Total in",
+        "totalOut": "Total out",
         "accounts": "Comptes",
+        "myAccounts": "My accounts",
         "automaticNodeSelection": "Selecció automàtica de nodes",
         "manualNodeSelection": "Selecció manual de nodes",
         "profiles": "Perfils",
@@ -526,7 +558,14 @@
         "exportingStrongholdFailed": "No s'ha pogut exportar stronghold",
         "pinCodeUpdating": "S'està actualitzant el codi PIN...",
         "pinCodeSuccess": "S'ha actualitzat correctament el codi PIN",
-        "pinCodeFailed": "No s'ha pogut actualitzar el codi PIN"
+        "pinCodeFailed": "No s'ha pogut actualitzar el codi PIN",
+        "passwordStrength": "Password strength",
+        "passwordStrength0": "Bad",
+        "passwordStrength1": "Poor",
+        "passwordStrength2": "Weak",
+        "passwordStrength3": "Average",
+        "passwordStrength4": "Strong",
+        "creatingProfile": "Creating profile, please wait..."
     },
     "dates": {
         "today": "Avui",
@@ -587,13 +626,16 @@
             "amountInvalidFormat": "Sembla que l’import no és vàlid.",
             "amountZero": "L'import ha de ser superior a 0.",
             "wrongAddressFormat": "Les adreces comencen amb el prefix {prefix}.",
-            "insufficientFunds": "Aquest compte no té fons suficients"
+            "insufficientFunds": "This account has insufficient funds.",
+            "sendingDust": "You cannot send less than 1 Mi.",
+            "leavingDust": "You cannot leave less than 1 Mi on your address."
         },
         "node": {
             "invalid": "Si us plau, introdueix una URL vàlida.",
             "https": "Es requereix HTTPS. Configureu un perfil de desenvolupador per utilitzar connexions HTTP no segures.",
             "duplicate": "Aquest node ja s'ha afegit.",
-            "unsynced": "El node que intenteu afegir no està sincronitzat."
+            "unsynced": "The node is not in sync.",
+            "noSynced": "No synced nodes are available."
         },
         "global": {
             "generic": "Alguna cosa ha anat malament."
@@ -604,7 +646,7 @@
             "mnemonic": "El mnemotècnic no és vàlid.",
             "seedTooShort": "La llavor ha de tenir 81 caràcters, {length, plural, one {és 1} other {són #}}",
             "seedCharacters": "La llavor només ha de contenir caràcters A-Z o 9",
-            "phraseWordCount": "Hi ha d'haver 24 paraules a la frase de recuperació, actualment {length, plural, one {és 1} other {són #}}",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
             "phraseUnrecognizedWord": "Paraula no reconeguda \"{word}\" a la frase de recuperació"
         }
     }
