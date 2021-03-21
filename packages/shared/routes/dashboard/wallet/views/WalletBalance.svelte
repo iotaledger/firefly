@@ -57,14 +57,14 @@
                 <Icon boxed icon="small-chevron-down" classes="text-green-600" boxClasses="bg-white dark:bg-gray-900" />
                 <div>
                     <Text type="p" classes="text-white">{$balance.incoming}</Text>
-                    <Text type="p" overrideColor smaller classes="text-{color}-200">{locale('general.incoming')}</Text>
+                    <Text type="p" overrideColor smaller classes="text-{color}-200">{locale('general.totalIn')}</Text>
                 </div>
             </div>
             <div class="flex items-center space-x-4">
                 <Icon boxed icon="small-chevron-up" classes="text-blue-500" boxClasses="bg-white dark:bg-gray-900" />
                 <div>
                     <Text type="p" classes="text-white">{$balance.outgoing}</Text>
-                    <Text type="p" overrideColor smaller classes="text-{color}-200">{locale('general.outgoing')}</Text>
+                    <Text type="p" overrideColor smaller classes="text-{color}-200">{locale('general.totalOut')}</Text>
                 </div>
             </div>
         </div>
