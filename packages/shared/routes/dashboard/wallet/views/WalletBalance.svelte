@@ -24,6 +24,7 @@
         }
         .bg-pattern {
             min-height: 234px;
+            z-index: -1;
             @apply absolute;
             @apply w-full;
             @apply h-full;
