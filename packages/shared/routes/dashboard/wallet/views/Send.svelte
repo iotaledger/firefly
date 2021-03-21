@@ -107,6 +107,8 @@
                     amountError = locale('error.send.amountTooHigh')
                 } else if (amountAsI <= 0) {
                     amountError = locale('error.send.amountZero')
+                } else if (amountAsI < 1000000) {
+                    amountError = locale('error.send.sendingDust')
                 }
 
                 if (selectedSendType === SEND_TYPE.EXTERNAL) {
