@@ -24,7 +24,7 @@
         revealed = !revealed
     }
 
-    const STRENGTH_COLORS = ['gray-300', 'orange-500', 'yellow-500', 'yellow-300', 'green-700']
+    const STRENGTH_COLORS = ['gray-300', 'orange-500', 'yellow-600', 'yellow-300', 'green-700']
 </script>
 
 <style type="text/scss">
