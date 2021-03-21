@@ -287,6 +287,8 @@
             isTransferring.set(true)
             api.internalTransfer(senderAccountId, receiverAccountId, amount, {
                 onSuccess(response) {
+                    const message = response.payload;
+                    
                     accounts.update((_accounts) => {
                         return _accounts.map((_account) => {
                             const isSenderAccount = _account.id === senderAccountId
@@ -297,8 +299,16 @@
                                     _account,
                                     {
                                         messages: [
-                                            Object.assign({}, response.payload, {
-                                                incoming: isReceiverAccount,
+                                            Object.assign({}, message, {
+                                                payload: Object.assign({}, message.payload, {
+                                                    data: Object.assign({}, message.payload.data, {
+                                                        essence: Object.assign({}, message.payload.data.essence, {
+                                                            data: Object.assign({}, message.payload.data.essence.data, {
+                                                                incoming: isReceiverAccount,
+                                                            }),
+                                                        }),
+                                                    }),
+                                                }),
                                             }),
                                             ..._account.messages,
                                         ],
