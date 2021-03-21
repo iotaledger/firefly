@@ -187,7 +187,7 @@ export const destroyActor = (id: string): void => {
 /**
  * Tests if we have the actor id
  * @param id The id to check for
- * @returns True is the actor exists
+ * @returns True if the actor exists
  */
 export const hasActor = (id: string): boolean => {
     return actors[id] !== undefined
