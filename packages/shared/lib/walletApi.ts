@@ -11,10 +11,18 @@ import type {
 } from './typings/bridge'
 import { ResponseTypes } from './typings/bridge'
 import type { ClientOptions } from './typings/client'
-import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, ErrorEventPayload, Event, TransactionEventPayload, TransferProgressEventPayload } from './typings/events'
+import type {
+    BalanceChangeEventPayload,
+    ConfirmationStateChangeEventPayload,
+    ErrorEventPayload,
+    Event,
+    TransactionEventPayload,
+    TransferProgressEventPayload,
+    ReattachmentEventPayload
+} from './typings/events'
 import { ErrorType } from './typings/events'
 import type { Message } from './typings/message'
-import type { StrongholdStatus } from './typings/wallet'
+import type { StrongholdStatus, Duration } from './typings/wallet'
 
 type CallbacksStore = {
     [id: string]: CallbacksPattern
@@ -69,6 +77,7 @@ const apiToResponseTypeMap = {
     removeStorage: ResponseTypes.DeletedStorage,
     lockStronghold: ResponseTypes.LockedStronghold,
     changeStrongholdPassword: ResponseTypes.StrongholdPasswordChanged,
+    setStrongholdPasswordClearInterval: ResponseTypes.StrongholdPasswordClearIntervalSet,
     ...eventsApiToResponseTypeMap
 }
 
@@ -108,6 +117,10 @@ const defaultCallbacks = {
     NewTransaction: {
         onSuccess: (response: Event<TransactionEventPayload>): void => { },
     },
+    StrongholdPasswordClearIntervalSet: {
+        onSuccess: (response: Event<void>): void => { },
+        onError: (error: ErrorMessage): void => { },
+    }
 }
 
 const eventsApiResponseTypes = Object.values(eventsApiToResponseTypeMap)
@@ -116,7 +129,20 @@ const eventsApiResponseTypes = Object.values(eventsApiToResponseTypeMap)
  * Response subscriber.
  * Receives messages from wallet.rs.
  */
+
 Wallet.onMessage((message: MessageResponse) => {
+    console.log(message)
+
+    if (message && message.id === undefined) {
+        // There is no message id
+        // Something lower level has thrown an error
+        // We should stop processing at this point
+        const newError = { type: ErrorType.ClientError, message: JSON.stringify(message), time: Date.now() };
+        errorLog.update((log) => [newError, ...log])
+        console.error(newError)
+        return
+    }
+
     const _deleteCallbackId = (_id: string) => {
         // Do not delete callback ids for events api methods
         if (!eventsApiResponseTypes.includes(message.type)) {
@@ -157,7 +183,7 @@ Wallet.onMessage((message: MessageResponse) => {
             )
         } else if (message.type === ResponseTypes.Panic) {
             onError(
-                    handleError(
+                handleError(
                     ErrorType.Panic,
                     message.payload
                 )
@@ -204,7 +230,9 @@ const storeCallbacks = (__id: string, type: ResponseTypes, callbacks?: Callbacks
  * @param {string} error
  */
 const handleError = (type: ErrorType | ValidatorErrorTypes, error: string): { type: ErrorType | ValidatorErrorTypes, error: string } => {
-    errorLog.update((log) => [ { type, message: error, time: Date.now() }, ...log ])
+    const newError = { type, message: error, time: Date.now() };
+    errorLog.update((log) => [newError, ...log])
+    console.error(newError)
 
     // TODO: Add full type list to remove this temporary fix
     const _getError = () => {
@@ -303,9 +331,11 @@ export interface ApiClient {
     setStoragePassword(newPinCode: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     removeStorage(callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     setClientOptions(clientOptions: ClientOptions, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
+    setStrongholdPasswordClearInterval(interval: Duration, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
 
     onStrongholdStatusChange(callbacks: { onSuccess: (response: Event<StrongholdStatus>) => void, onError: (err: ErrorEventPayload) => void })
     onNewTransaction(callbacks: { onSuccess: (response: Event<TransactionEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
+    onReattachment(callbacks: { onSuccess: (response: Event<ReattachmentEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
     onConfirmationStateChange(callbacks: { onSuccess: (response: Event<ConfirmationStateChangeEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
     onBalanceChange(callbacks: { onSuccess: (response: Event<BalanceChangeEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
     onTransferProgress(callbacks: { onSuccess: (response: Event<TransferProgressEventPayload>) => void, onError: (err: ErrorEventPayload) => void })

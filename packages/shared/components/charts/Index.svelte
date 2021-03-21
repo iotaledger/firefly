@@ -16,10 +16,11 @@
     export let yPrecision
     export let beginAtZero
     export let inlineStyle
+    export let formatYAxis
 </script>
 
 {#if type === ChartType.Line}
-    <LineChart {datasets} {labels} {tooltips} {xMaxTicks} {yMaxTicks} {yPrecision} {beginAtZero} {color} {inlineStyle} />
+    <LineChart {formatYAxis} {datasets} {labels} {tooltips} {xMaxTicks} {yMaxTicks} {yPrecision} {beginAtZero} {color} {inlineStyle} />
 {:else if type === ChartType.Bar}
-    <BarChart {datasets} {labels} {tooltips} {inlineStyle} />
+    <BarChart {formatYAxis} {datasets} {labels} {tooltips} {inlineStyle} />
 {/if}

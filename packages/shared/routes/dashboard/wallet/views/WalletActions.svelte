@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { AccountTile, Button, Text } from 'shared/components'
+    import { loggedIn } from 'shared/lib/app'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
@@ -12,14 +13,14 @@
     export let send
     export let internalTransfer
     export let generateAddress
-    export let isGeneratingAddress 
+    export let isGeneratingAddress
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
     const accountsLoaded = getContext<Writable<boolean>>('walletAccountsLoaded')
 
     let startInit
 
-    if ($walletRoute === WalletRoutes.Init && !$accountsLoaded) {
+    if ($walletRoute === WalletRoutes.Init && !$accountsLoaded && $loggedIn) {
         startInit = Date.now()
         openPopup({
             type: 'busy',
@@ -61,26 +62,22 @@
         <div data-label="accounts" class="w-full h-full flex flex-col flex-no-wrap justify-start mb-6">
             <div class="flex flex-row mb-6 justify-between items-center">
                 <Text type="h5">{locale('general.accounts')}</Text>
-                <Button onClick={handleCreateClick} secondary small icon="plus" disabled={!$accountsLoaded}>
-                    {locale('actions.create')}
-                </Button>
+                <Button onClick={handleCreateClick} secondary small icon="plus">{locale('actions.create')}</Button>
             </div>
-            {#if $accountsLoaded}
-                {#if $accounts.length > 0}
-                    <div class="grid grid-cols-{$accounts.length <= 2 ? $accounts.length : '3'} gap-2 w-full flex-auto">
-                        {#each $accounts as account}
-                            <AccountTile
-                                color={account.color}
-                                name={account.alias}
-                                balance={account.balance}
-                                balanceEquiv={account.balanceEquiv}
-                                size={$accounts.length >= 3 ? 's' : $accounts.length === 2 ? 'm' : 'l'}
-                                onClick={() => handleAccountClick(account.id)} />
-                        {/each}
-                    </div>
-                {:else}
-                    <Text>{locale('general.no_accounts')}</Text>
-                {/if}
+            {#if $accounts.length > 0}
+                <div class="grid grid-cols-{$accounts.length <= 2 ? $accounts.length : '3'} gap-2 w-full flex-auto">
+                    {#each $accounts as account}
+                        <AccountTile
+                            color={account.color}
+                            name={account.alias}
+                            balance={account.balance}
+                            balanceEquiv={account.balanceEquiv}
+                            size={$accounts.length >= 3 ? 's' : $accounts.length === 2 ? 'm' : 'l'}
+                            onClick={() => handleAccountClick(account.id)} />
+                    {/each}
+                </div>
+            {:else}
+                <Text>{locale('general.noAccounts')}</Text>
             {/if}
         </div>
         {#if $accounts.length > 0}

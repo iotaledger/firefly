@@ -36,6 +36,7 @@ interface ElectronEventMap {
     "menu-navigate-settings": void;
     "menu-check-for-update": void;
     "menu-error-log": void;
+    "menu-diagnostics": void;
     "deep-link-params": string;
     "version-details": VersionDetails;
     "version-progress": NativeProgress;
@@ -44,10 +45,18 @@ interface ElectronEventMap {
 }
 
 export interface IElectron {
-    getStrongholdBackupDestination(): Promise<string>;
+    getStrongholdBackupDestination(defaultPath: string): Promise<string | null>;
     getUserDataPath(): Promise<string>;
+    getDiagnostics(): Promise<{ label: string; value: string; }[]>;
+    getOS(): Promise<string>;
     updateActiveProfile(id: string): void;
     updateMenu(attribute: string, value: unknown): void;
+    popupMenu(): void;
+    maximize(): void;
+    minimize(): void;
+    close(): void;
+    saveRecoveryKit(kitData: ArrayBuffer): Promise<void>;
+    openUrl(url: string): void;
 
     NotificationManager: INotificationManager;
 

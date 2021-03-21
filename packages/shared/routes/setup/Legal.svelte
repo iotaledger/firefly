@@ -6,7 +6,7 @@
 
     let checked = false
     let progress = 0
-    let legalRead = false
+    let termsAccepted = false
 
     let scroller
     let index
@@ -14,7 +14,7 @@
     let privacyPolicy
     let termsOfService
 
-    $: legalRead = progress === 100 || checked
+    $: termsAccepted = checked
 
     const dispatch = createEventDispatcher()
 
@@ -23,12 +23,6 @@
     }
     function handleBackClick() {
         dispatch('previous')
-    }
-
-    function scrollIntoView(section) {
-        if (section) {
-            section.scrollIntoView({ behavior: 'smooth' })
-        }
     }
 </script>
 
@@ -45,41 +39,33 @@
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5">{locale('views.legal.title')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.legal.body')}</Text>
-            <Button active={index === 0} icon="parchment" classes="w-full mb-5" onClick={() => scrollIntoView(privacyPolicy)}>
-                {locale('views.legal.privacy_policy.title')}
-            </Button>
-            <Button active={index === 1} icon="doc" classes="w-full mb-6" onClick={() => scrollIntoView(termsOfService)}>
-                {locale('views.legal.terms_of_service.title')}
-            </Button>
-            <Checkbox label={locale('views.legal.checkbox')} bind:checked />
         </div>
         <div slot="leftpane__action">
-            <Button classes="w-full" disabled={!legalRead} onClick={() => handleContinueClick()}>
+            <Checkbox label={locale('views.legal.checkbox')} bind:checked classes="mb-8" />
+            <Button classes="w-full" disabled={!termsAccepted} onClick={() => handleContinueClick()}>
                 {locale('actions.continue')}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full">
+        <div slot="rightpane" class="w-full h-full flex items-center px-40 py-20">
             <Scroller classes="w-full text-justify py-12 pr-10" threshold={70} bind:progress bind:index bind:this={scroller}>
-                <div class="max-w-sm">
-                    <section class="mb-12" bind:this={privacyPolicy}>
-                        <Text type="h1" classes="mb-5">{locale('views.legal.privacy_policy.title')}</Text>
-                        <Text type="p" secondary classes="mb-5">{locale('views.legal.privacy_policy.body_1')}</Text>
-                        <Text type="p" secondary classes="mb-5">{locale('views.legal.privacy_policy.body_2')}</Text>
-                        <Text type="p" secondary classes="mb-5">{locale('views.legal.privacy_policy.body_3')}</Text>
-                        <Text type="p" secondary classes="mb-5">{locale('views.legal.privacy_policy.body_4')}</Text>
-                        <Text type="p" secondary classes="mb-5">{locale('views.legal.privacy_policy.body_5')}</Text>
-                        <Text type="p" secondary classes="mb-10">{locale('views.legal.privacy_policy.body_6')}</Text>
-                    </section>
-                    <section bind:this={termsOfService}>
-                        <Text type="h1" classes="mb-5">{locale('views.legal.terms_of_service.title')}</Text>
-                        <Text type="p" secondary classes="mb-5">{locale('views.legal.terms_of_service.body_1')}</Text>
-                        <Text type="p" secondary classes="mb-5">{locale('views.legal.terms_of_service.body_2')}</Text>
-                        <Text type="p" secondary classes="mb-5">{locale('views.legal.terms_of_service.body_3')}</Text>
-                        <Text type="p" secondary classes="mb-5">{locale('views.legal.terms_of_service.body_4')}</Text>
-                        <Text type="p" secondary classes="mb-5">{locale('views.legal.terms_of_service.body_5')}</Text>
-                        <Text type="p" secondary classes="mb-10">{locale('views.legal.terms_of_service.body_6')}</Text>
-                    </section>
-                </div>
+                <section class="mb-12" bind:this={privacyPolicy}>
+                    <Text type="h1" classes="mb-5">{locale('views.legal.privacyPolicy.title')}</Text>
+                    <Text type="p" secondary classes="mb-5">{locale('views.legal.privacyPolicy.body1')}</Text>
+                    <Text type="p" secondary classes="mb-5">{locale('views.legal.privacyPolicy.body2')}</Text>
+                    <Text type="p" secondary classes="mb-5">{locale('views.legal.privacyPolicy.body3')}</Text>
+                    <Text type="p" secondary classes="mb-5">{locale('views.legal.privacyPolicy.body4')}</Text>
+                    <Text type="p" secondary classes="mb-5">{locale('views.legal.privacyPolicy.body5')}</Text>
+                    <Text type="p" secondary classes="mb-10">{locale('views.legal.privacyPolicy.body6')}</Text>
+                </section>
+                <section bind:this={termsOfService}>
+                    <Text type="h1" classes="mb-5">{locale('views.legal.termsOfService.title')}</Text>
+                    <Text type="p" secondary classes="mb-5">{locale('views.legal.termsOfService.body1')}</Text>
+                    <Text type="p" secondary classes="mb-5">{locale('views.legal.termsOfService.body2')}</Text>
+                    <Text type="p" secondary classes="mb-5">{locale('views.legal.termsOfService.body3')}</Text>
+                    <Text type="p" secondary classes="mb-5">{locale('views.legal.termsOfService.body4')}</Text>
+                    <Text type="p" secondary classes="mb-5">{locale('views.legal.termsOfService.body5')}</Text>
+                    <Text type="p" secondary classes="mb-10">{locale('views.legal.termsOfService.body6')}</Text>
+                </section>
             </Scroller>
         </div>
     </OnboardingLayout>

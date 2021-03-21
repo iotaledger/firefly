@@ -1,7 +1,8 @@
+import { initAutoUpdate } from './lib/appUpdater'
 const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
 const path = require('path')
+const os = require('os')
 const Keychain = require('./lib/keychain')
-const { initAutoUpdate } = require('./lib/appUpdater')
 const { initMenu, contextMenu } = require('./lib/menu')
 
 /**
@@ -33,7 +34,7 @@ app.commandLine.appendSwitch('js-flags', '--expose-gc')
  */
 const windows = {
     main: null,
-    about: null
+    about: null,
 }
 
 /**
@@ -45,7 +46,7 @@ let paths = {
     preload: '',
     html: '',
     aboutHtml: '',
-    aboutPreload: ''
+    aboutPreload: '',
 }
 
 /**
@@ -66,7 +67,7 @@ const defaultWebPreferences = {
 if (app.isPackaged) {
     paths.preload = path.join(app.getAppPath(), '/public/build/preload.js')
     paths.html = path.join(app.getAppPath(), '/public/index.html')
-    paths.aboutPreload = path.join(app.getAppPath(), '/public/lib/aboutPreload.js')
+    paths.aboutPreload = path.join(app.getAppPath(), '/public/build/lib/aboutPreload.js')
     paths.aboutHtml = path.join(app.getAppPath(), '/public/about.html')
 } else {
     // __dirname is desktop/public/build
@@ -79,13 +80,35 @@ if (app.isPackaged) {
 /**
  * Check URL against allowlist
  */
-function isUrlAllowed(url) {
+function isUrlAllowed(targetUrl) {
     // TODO: Add links for T&C, privacy policy and help
-    const externalAllowlist = ['privacy@iota.org', 'explorer.iota.org']
+    const externalAllowlist = ['privacy@iota.org', 'iota.org', 'github.com/iotaledger/firefly/issues', 'discord.iota.org']
 
-    return externalAllowlist.indexOf(new URL(url).hostname.replace('www.', '').replace('mailto:', '')) > -1
+    const url = new URL(targetUrl)
+    const domain = url.hostname.replace('www.', '').replace('mailto:', '')
+
+    return externalAllowlist.indexOf(domain) > -1 || externalAllowlist.indexOf(domain + url.pathname) > -1
 }
 
+/**
+ * Handles url navigation events
+ */
+const handleNavigation = (e, url) => {
+    e.preventDefault()
+
+    try {
+        if (isUrlAllowed(url)) {
+            shell.openExternal(url)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+/**
+ * Create main window
+ * @returns {BrowserWindow} Main window
+ */
 function createWindow() {
     /**
      * Register iota file protocol
@@ -105,6 +128,7 @@ function createWindow() {
         width: 1280,
         height: 720,
         titleBarStyle: 'hidden',
+        frame: process.platform === 'linux',
         webPreferences: {
             ...defaultWebPreferences,
             preload: paths.preload,
@@ -124,18 +148,6 @@ function createWindow() {
         windows.main.loadFile(paths.html)
     }
 
-    const _handleNavigation = (e, url) => {
-        e.preventDefault()
-
-        try {
-            if (isUrlAllowed(url)) {
-                shell.openExternal(url)
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
     /**
      * Right click context menu for inputs
      */
@@ -149,8 +161,16 @@ function createWindow() {
     /**
      * Only allow external navigation to allowed domains
      */
-    windows.main.webContents.on('will-navigate', _handleNavigation)
-    windows.main.webContents.on('new-window', _handleNavigation)
+    windows.main.webContents.on('will-navigate', handleNavigation)
+    windows.main.webContents.on('new-window', handleNavigation)
+
+    windows.main.on('close', () => {
+        closeAboutWindow()
+    })
+
+    windows.main.on('closed', () => {
+        windows.main = null
+    })
 
     /**
      * Handle permissions requests
@@ -164,21 +184,41 @@ function createWindow() {
 
         return cb(permissionAllowlist.indexOf(permission) > -1)
     })
+
+    return windows.main
 }
 
 app.whenReady().then(createWindow)
 
 /**
- * Gets Window instance
+ * Gets BrowserWindow instance
+ * @returns {BrowserWindow} Requested window
  */
 export const getWindow = function (windowName) {
     return windows[windowName]
 }
 
 /**
+ * Gets or creates the requested BrowserWindow instance
+ * @param {string} windowName
+ * @returns {BrowserWindow} Requested window
+ */
+export const getOrInitWindow = (windowName) => {
+    if (!windows[windowName]) {
+        if (windowName === 'main') {
+            return createWindow()
+        }
+        if (windowName === 'about') {
+            return openAboutWindow()
+        }
+    }
+    return windows[windowName]
+}
+
+/**
  * Initialises the menu bar
  */
-initMenu(app, getWindow)
+initMenu()
 
 app.allowRendererProcessReuse = false
 
@@ -199,7 +239,12 @@ app.on('activate', function () {
     }
 })
 
-// IPC handlers for APIs exposed from main process
+// IPC handlers for APIs exposed from main proces
+
+// URLs
+ipcMain.handle('open-url', (_e, url) => {
+    return handleNavigation(_e, url)
+})
 
 // Keychain
 ipcMain.handle('keychain-getAll', (_e) => {
@@ -219,6 +264,9 @@ ipcMain.handle('keychain-remove', (_e, key) => {
 ipcMain.handle('show-open-dialog', (_e, options) => {
     return dialog.showOpenDialog(options)
 })
+ipcMain.handle('show-save-dialog', (_e, options) => {
+    return dialog.showSaveDialog(options)
+})
 
 // Miscellaneous
 ipcMain.handle('get-path', (_e, path) => {
@@ -227,6 +275,25 @@ ipcMain.handle('get-path', (_e, path) => {
         throw Error(`Path ${path} is not allowed`)
     }
     return app.getPath(path)
+})
+
+// Diagnostics
+ipcMain.handle('diagnostics', (_e) => {
+    const diagnostics = [
+        { label: 'popups.diagnostics.platform', value: os.platform() },
+        { label: 'popups.diagnostics.platformVersion', value: os.release() },
+        { label: 'popups.diagnostics.platformArchitecture', value: os.arch() },
+        { label: 'popups.diagnostics.cpuCount', value: os.cpus().length },
+        { label: 'popups.diagnostics.totalMem', value: `${(os.totalmem() / 1048576 ).toFixed(1)} MB` },
+        { label: 'popups.diagnostics.freeMem', value: `${(os.freemem() / 1048576 ).toFixed(1)} MB` },
+        { label: 'popups.diagnostics.userPath', value: app.getPath('userData') },
+    ]
+    return diagnostics
+})
+
+// Os
+ipcMain.handle('get-os', (_e) => {
+    return process.platform
 })
 
 /**
@@ -293,8 +360,11 @@ ipcMain.on('deep-link-request', () => {
     }
 })
 
+/**
+ * Create about window
+ * @returns {BrowserWindow} About window
+ */
 export const openAboutWindow = () => {
-
     if (windows.about !== null) {
         windows.about.focus()
         return windows.about
@@ -328,4 +398,11 @@ export const openAboutWindow = () => {
     windows.about.setMenu(null)
 
     return windows.about
+}
+
+export const closeAboutWindow = () => {
+    if (windows.about) {
+        windows.about.close()
+        windows.about = null
+    }
 }

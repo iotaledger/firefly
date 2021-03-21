@@ -9,14 +9,8 @@
     export let ghost = false
 </script>
 
-<style type="text/scss">
-    a {
-        color: var(--text-highlighted-color); // TODO: tailwindify
-    }
-</style>
-
 <a
-    class="text-12 leading-140 cursor-pointer"
+    class="text-12 leading-140 cursor-pointer text-blue-500"
     data-label="link"
     use:bindEvents={events}
     {href}

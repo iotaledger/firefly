@@ -8,6 +8,7 @@
     export let datasets = []
     export let color = 'blue'
     export let inlineStyle = 'height: calc(50vh - 130px);'
+    export let formatYAxis = (value) => Number(value.toString())
 
     let canvas
     let chart
@@ -123,6 +124,7 @@
                 }),
             },
             options: {
+                animation: false,
                 barRoundness: 1,
                 responsive: true,
                 maintainAspectRatio: false,
@@ -146,6 +148,9 @@
                                 beginAtZero: true,
                                 autoSkip: true,
                                 maxTicksLimit: 4,
+                                callback: function (value, index, values) {
+                                    return formatYAxis(value)
+                                },
                             },
                         },
                     ],

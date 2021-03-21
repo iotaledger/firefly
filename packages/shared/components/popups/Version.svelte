@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { date } from 'svelte-i18n'
     import { closePopup } from 'shared/lib/popup'
-    import { Text, Button } from 'shared/components'
+    import { Text, Button, Logo } from 'shared/components'
 
     import { versionDetails, updateDownload, updateBusy } from 'shared/lib/appUpdater'
 
@@ -27,14 +27,14 @@
 
 <Text type="h4" classes="mb-5">{locale('popups.version.title', { values: { version: $versionDetails.currentVersion } })}</Text>
 <div class="flex w-full flex-row flex-wrap">
-    <div class="w-full p-4 bg-gray-50 flex justify-center content-center">
-        <img src="assets/logos/firefly_logo_full.svg" alt="" />
+    <div class="w-full p-4 bg-gray-50 dark:bg-gray-800 flex justify-center content-center">
+        <Logo width="50%" logo="logo-firefly-full" />
     </div>
     {#if $versionDetails.upToDate}
         <div class="w-full text-center my-6 px-8">
-            <Text type="h5" highlighted classes="mb-2">{locale('popups.version.up_to_date_title')}</Text>
+            <Text type="h5" highlighted classes="mb-2">{locale('popups.version.upToDateTitle')}</Text>
             <Text smaller secondary>
-                {locale('popups.version.up_to_date_description', { values: { version: $versionDetails.currentVersion } })}
+                {locale('popups.version.upToDateDescription', { values: { version: $versionDetails.currentVersion } })}
             </Text>
         </div>
         <div class="flex flex-row justify-center w-full">
@@ -43,10 +43,10 @@
     {:else}
         <div class="my-6">
             <Text smaller highlighted classes="mb-2">
-                {locale('popups.version.update_available', { values: { version: $versionDetails.currentVersion } })}
+                {locale('popups.version.updateAvailable', { values: { version: $versionDetails.currentVersion } })}
             </Text>
             <Text type="h5" classes="mb-2">
-                {locale('popups.version.update_details', {
+                {locale('popups.version.updateDetails', {
                     values: {
                         version: $versionDetails.newVersion,
                         date: $date($versionDetails.newVersionReleaseDate, { format: 'long' }),
@@ -60,7 +60,7 @@
         <div class="flex flex-row justify-between space-x-4 w-full px-8">
             <Button secondary classes="w-1/2" onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
             <Button classes="w-1/2" onClick={() => handleDownload()} bind:disabled={$updateBusy}>
-                {locale('actions.update_firefly')}
+                {locale('actions.updateFirefly')}
             </Button>
         </div>
     {/if}

@@ -1,16 +1,15 @@
 <script lang="typescript">
-    import { onDestroy } from 'svelte'
-    import { get } from 'svelte/store'
-    import { Logo, Icon, NetworkIndicator, ProfileActionsModal } from 'shared/components'
+    import { Icon, Logo, NetworkIndicator, ProfileActionsModal } from 'shared/components'
+    import { getInitials } from 'shared/lib/helpers'
     import { networkStatus } from 'shared/lib/networkStatus'
     import { activeProfile } from 'shared/lib/profile'
-    import { getInitials } from 'shared/lib/helpers'
+    import { accountRoute, dashboardRoute, settingsRoute, walletRoute } from 'shared/lib/router'
+    import { AccountRoutes, SettingsRoutes, WalletRoutes, Tabs } from 'shared/lib/typings/routes'
     import { selectedAccountId } from 'shared/lib/wallet'
-    import { walletRoute, settingsRoute, accountRoute } from 'shared/lib/router'
-    import { WalletRoutes, AccountRoutes, SettingsRoutes } from 'shared/lib/typings/routes'
+    import { onDestroy } from 'svelte'
+    import { get } from 'svelte/store'
 
     export let locale
-    export let activeTab
 
     let showNetwork = false
     let healthStatus = 2
@@ -23,7 +22,7 @@
         2: 'green',
     }
 
-    const profileInitial = getInitials(get(activeProfile).name, 1)
+    const profileInitial = getInitials(get(activeProfile)?.name, 1)
 
     const unsubscribe = networkStatus.subscribe((data) => {
         healthStatus = data.health ?? 0
@@ -33,33 +32,24 @@
         unsubscribe()
     })
 
-    enum Tabs {
-        Wallet = 'wallet',
-        Settings = 'settings',
-    }
-
-    function setActiveTab(tab: Tabs) {
-        activeTab = tab
-    }
-
     function openSettings() {
+        dashboardRoute.set(Tabs.Settings)
         settingsRoute.set(SettingsRoutes.Init)
-        setActiveTab(Tabs.Settings)
     }
 
     function openWallet() {
+        dashboardRoute.set(Tabs.Wallet)
         walletRoute.set(WalletRoutes.Init)
         accountRoute.set(AccountRoutes.Init)
         selectedAccountId.set(null)
-        setActiveTab(Tabs.Wallet)
     }
 </script>
 
 <aside
-    class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 h-screen relative w-20 px-5 pb-9 pt-9 border-solid border-r border-gray-100 dark:border-gray-800">
+    class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 h-full relative w-20 px-5 pb-9 pt-9 border-solid border-r border-gray-100 dark:border-gray-800">
     <Logo classes="mb-10" width="48px" logo="logo-firefly" />
     <nav class="flex flex-grow flex-col items-center justify-between pt-4">
-        <button class={activeTab === Tabs.Wallet ? 'text-blue-500' : 'text-gray-500'} on:click={() => openWallet()}>
+        <button class={$dashboardRoute === Tabs.Wallet ? 'text-blue-500' : 'text-gray-500'} on:click={() => openWallet()}>
             <Icon icon="wallet" />
         </button>
         <span class="flex flex-col items-center">

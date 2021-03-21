@@ -1,5 +1,5 @@
 import { app, Menu, ipcMain, shell } from 'electron'
-import { getWindow, openAboutWindow } from '../main'
+import { getOrInitWindow, openAboutWindow } from '../main'
 import { WalletRoutes } from 'shared/lib/typings/routes'
 import { menuState as state } from './menuState'
 /**
@@ -23,11 +23,23 @@ export const initMenu = () => {
         })
 
         ipcMain.handle('menu-popup', () => {
-            mainMenu.popup(mainWindow)
+            mainMenu.popup(getOrInitWindow('main'))
         })
 
-        ipcMain.handle('updates-check', () => {
-            
+        ipcMain.handle('maximize', () => {
+            if (getOrInitWindow('main').isMaximized()) {
+                getOrInitWindow('main').restore();
+            } else {
+                getOrInitWindow('main').maximize();
+            }
+        })
+
+        ipcMain.handle('minimize', () => {
+            getOrInitWindow('main').minimize();
+        })
+
+        ipcMain.handle('close', () => {
+            getOrInitWindow('main').close();
         })
 
         mainMenu = createMenu()
@@ -50,7 +62,7 @@ const buildTemplate = () => {
                 },
                 {
                     label: `${state.strings.checkForUpdates}...`,
-                    click: () => getWindow('main').webContents.send('menu-check-for-update'),
+                    click: () => getOrInitWindow('main').webContents.send('menu-check-for-update'),
                     enabled: state.enabled,
                 },
                 {
@@ -58,22 +70,29 @@ const buildTemplate = () => {
                 },
                 {
                     label: state.strings.settings,
-                    click: () => getWindow('main').webContents.send('menu-navigate-settings'),
-                },
-                {        
-                    // TODO: Remove before stable release
-                    label:  "Developer Tools",
-                    role: 'toggleDevTools'
-                },
-                {
-                    label: state.strings.errorLog,
-                    click: () => getWindow('main').webContents.send('menu-error-log')
+                    click: () => getOrInitWindow('main').webContents.send('menu-navigate-settings'),
                 },
                 {
                     type: 'separator',
                 },
-            ],
-        },
+                {
+                    label: state.strings.diagnostics,
+                    click: () => getOrInitWindow('main').webContents.send('menu-diagnostics'),
+                },
+                {
+                    // TODO: Remove before stable release
+                    label: "Developer Tools",
+                    role: 'toggleDevTools'
+                },
+                {
+                    label: state.strings.errorLog,
+                    click: () => getOrInitWindow('main').webContents.send('menu-error-log')
+                },
+                {
+                    type: 'separator',
+                },
+            ]
+        }
     ]
 
     if (process.platform === 'darwin') {
@@ -125,12 +144,12 @@ const buildTemplate = () => {
             submenu: [
                 {
                     label: state.strings.send,
-                    click: () => getWindow('main').webContents.send('menu-navigate-wallet', WalletRoutes.Send),
+                    click: () => getOrInitWindow('main').webContents.send('menu-navigate-wallet', WalletRoutes.Send),
                     enabled: state.enabled,
                 },
                 {
                     label: state.strings.receive,
-                    click: () => getWindow('main').webContents.send('menu-navigate-wallet', WalletRoutes.Receive),
+                    click: () => getOrInitWindow('main').webContents.send('menu-navigate-wallet', WalletRoutes.Receive),
                     enabled: state.enabled,
                 },
                 {
@@ -138,7 +157,7 @@ const buildTemplate = () => {
                 },
                 {
                     label: state.strings.addAccount,
-                    click: () => getWindow('main').webContents.send('menu-navigate-wallet', WalletRoutes.CreateAccount),
+                    click: () => getOrInitWindow('main').webContents.send('menu-navigate-wallet', WalletRoutes.CreateAccount),
                     enabled: state.enabled,
                 },
                 {
@@ -146,7 +165,7 @@ const buildTemplate = () => {
                 },
                 {
                     label: state.strings.logout,
-                    click: () => getWindow('main').webContents.send('menu-logout'),
+                    click: () => getOrInitWindow('main').webContents.send('menu-logout'),
                     enabled: state.enabled,
                 },
             ],
@@ -156,6 +175,7 @@ const buildTemplate = () => {
     template.push({
         label: state.strings.help,
         submenu: [
+            /** TODO: Add help links     
             {
                 label: state.strings.troubleshoot,
                 click: function () {
@@ -174,17 +194,17 @@ const buildTemplate = () => {
                 click: function () {
                     shell.openExternal('https://iota.org')
                 },
-            },
+            }**/
             {
                 label: state.strings.discord,
                 click: function () {
-                    shell.openExternal('https://iota.org')
+                    shell.openExternal('https://discord.iota.org')
                 },
             },
             {
                 label: state.strings.reportAnIssue,
                 click: function () {
-                    shell.openExternal('https://github.com/iotaledger/firefly/issues/new/choose')
+                    shell.openExternal('https://github.com/iotaledger/firefly/issues')
                 },
             },
         ],

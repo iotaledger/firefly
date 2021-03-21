@@ -98,6 +98,7 @@ pub async fn init<A: Into<String>, F: Fn(String) + Send + Sync + 'static>(
         )
         .unwrap() //safe to unwrap, the storage password is None ^
         .with_polling_interval(Duration::from_millis(POLLING_INTERVAL_MS))
+        .with_sync_spent_outputs()
         .finish()
         .await
         .expect("failed to init account manager");
@@ -123,12 +124,16 @@ pub async fn init<A: Into<String>, F: Fn(String) + Send + Sync + 'static>(
     .await;
 }
 
-pub async fn destroy<A: Into<String>>(actor_id: A) {
+pub async fn remove_event_listeners<A: Into<String>>(actor_id: A) {
     let mut actors = wallet_actors().lock().await;
-    let actor_id = actor_id.into();
+    if let Some(actor_data) = actors.get_mut(&actor_id.into()) {
+        remove_event_listeners_internal(&actor_data.listeners).await;
+        actor_data.listeners = Vec::new();
+    }
+}
 
-    if let Some(actor_data) = actors.remove(&actor_id) {
-        for (event_id, event_type) in &actor_data.listeners {
+async fn remove_event_listeners_internal(listeners: &[(EventId, EventType)]) {
+    for (event_id, event_type) in listeners.iter() {
             match event_type {
                 &EventType::ErrorThrown => remove_error_listener(event_id),
                 &EventType::BalanceChange => remove_balance_change_listener(event_id).await,
@@ -144,6 +149,14 @@ pub async fn destroy<A: Into<String>>(actor_id: A) {
                 &EventType::TransferProgress => remove_transfer_progress_listener(event_id).await,
             };
         }
+}
+
+pub async fn destroy<A: Into<String>>(actor_id: A) {
+    let mut actors = wallet_actors().lock().await;
+    let actor_id = actor_id.into();
+
+    if let Some(actor_data) = actors.remove(&actor_id) {
+        remove_event_listeners_internal(&actor_data.listeners).await;
 
         actor_data.actor.tell(actors::KillMessage, None);
         iota_wallet::with_actor_system(|sys| {

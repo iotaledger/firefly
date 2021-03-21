@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { onDestroy } from 'svelte'
-    import { Text, Modal } from 'shared/components'
+    import { Text, Modal, HR } from 'shared/components'
     import { networkStatus } from 'shared/lib/networkStatus'
     export let isActive
     export let locale
     let healthStatus = 2
-    let healthStatusText = 'network_operational'
+    let healthStatusText = 'networkOperational'
     let messagesPerSecond = 0
     let confirmationRate = 0
 
@@ -17,7 +17,7 @@
 
     const unsubscribe = networkStatus.subscribe((data) => {
         healthStatus = data.health ?? 0
-        healthStatusText = healthStatus === 0 ? 'network_down' : healthStatus === 1 ? 'network_degraded' : 'network_operational'
+        healthStatusText = healthStatus === 0 ? 'networkDown' : healthStatus === 1 ? 'networkDegraded' : 'networkOperational'
         messagesPerSecond = data.itemsPerSecond ?? 0
         confirmationRate = data.confirmationRate ?? 0
     })
@@ -33,13 +33,13 @@
         <div class="px-7 pb-5 text-13 text-{NETWORK_HEALTH_COLORS[healthStatus]}-500">
             {locale(`views.dashboard.network.${healthStatusText}`)}
         </div>
-        <hr class="border-t border-solid border-gray-200 dark:border-gray-700" />
+        <HR />
         <div class="flex flex-row justify-between px-7 pt-5 pb-2">
-            <span class="text-12 text-gray-800 dark:text-white">{locale('views.dashboard.network.messages_per_second')}</span>
+            <span class="text-12 text-gray-800 dark:text-white">{locale('views.dashboard.network.messagesPerSecond')}</span>
             <span class="text-12 text-gray-500">{`${Math.round(messagesPerSecond)}`}</span>
         </div>
         <div class="flex flex-row justify-between px-7 pb-5">
-            <span class="text-12 text-gray-800 dark:text-white">{locale('views.dashboard.network.confirmation_rate')}</span>
+            <span class="text-12 text-gray-800 dark:text-white">{locale('views.dashboard.network.confirmationRate')}</span>
             <span class="text-12 text-gray-500">{`${Math.round(confirmationRate)}%`}</span>
         </div>
     </network-indicator-content>

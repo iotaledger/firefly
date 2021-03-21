@@ -1,6 +1,8 @@
 <script lang="typescript">
-    import { bindEvents } from 'shared/lib/utils'
     import { Icon } from 'shared/components'
+    import { bindEvents } from 'shared/lib/utils'
+    import { onMount } from 'svelte'
+    import { appSettings } from 'shared/lib/appSettings'
     export let events = {}
     export let onClick = () => ''
     export let secondary = false
@@ -14,6 +16,16 @@
     export let classes = ''
     export let type = 'button'
     export let form = ''
+    export let autofocus = false
+
+    let buttonElement
+    let darkModeEnabled = $appSettings.darkMode
+
+    onMount(() => {
+        if (autofocus) {
+            buttonElement.focus()
+        }
+    })
 </script>
 
 <style type="text/scss">
@@ -23,19 +35,34 @@
         span {
             @apply text-white;
         }
-        &:not(.with-icon):hover,
-        &:not(.with-icon):focus {
-            @apply bg-blue-600;
-        }
-        &:not(.with-icon):active {
-            @apply bg-blue-700;
-        }
-        
-        &:disabled {
-            @apply pointer-events-none;
-            @apply bg-gray-200;
-            span {
-                @apply text-gray-500;
+        &:not(.with-icon) {
+            &:hover,
+            &:focus {
+                @apply bg-blue-600;
+            }
+            &:active {
+                @apply bg-blue-700;
+            }
+            &.warning {
+                @apply bg-red-500;
+                min-width: 100px;
+                span {
+                    @apply text-white;
+                }
+                &:hover {
+                    @apply bg-red-600;
+                }
+                &:active,
+                &:focus {
+                    @apply bg-red-700;
+                }
+                &:disabled {
+                    @apply pointer-events-none;
+                    @apply bg-gray-200;
+                    span {
+                        @apply text-gray-500;
+                    }
+                }
             }
         }
         &.secondary {
@@ -46,17 +73,17 @@
             span {
                 @apply text-blue-500;
             }
-            &:hover,
-            &:focus {
+            &:hover {
                 @apply bg-blue-50;
                 @apply border-blue-200;
             }
-            &:active {
+            &:active,
+            &:focus {
                 @apply bg-blue-100;
                 @apply border-blue-400;
                 @apply text-blue-600;
             }
-            
+
             &:disabled {
                 @apply pointer-events-none;
                 @apply bg-gray-50;
@@ -64,29 +91,36 @@
                     @apply text-gray-500;
                 }
             }
-        }
-        &.warning {
-            @apply bg-red-500;
-            min-width: 100px;
-            span {
-                @apply text-white;
-            }
-            &:hover {
-                @apply bg-red-600;
-            }
-            &:active {
-                @apply bg-red-700;
-            }
-            
-            &:disabled {
-                @apply pointer-events-none;
-                @apply bg-gray-200;
+            &.darkmode {
+                @apply bg-gray-700;
+                @apply border-gray-700;
+                @apply bg-opacity-30;
+                @apply border-opacity-30;
                 span {
-                    @apply text-gray-500;
+                    @apply text-white;
+                }
+                &:hover {
+                    @apply bg-opacity-50;
+                    @apply border-opacity-50;
+                }
+                &:focus,
+                &:active {
+                    @apply bg-opacity-80;
+                    @apply border-opacity-50;
+                }
+                &:disabled {
+                    @apply bg-gray-700;
+                    @apply border-gray-700;
+                    @apply bg-opacity-10;
+                    @apply border-opacity-10;
+                    span {
+                        @apply text-gray-700;
+                    }
                 }
             }
         }
         &.with-icon {
+            min-width: 200px;
             @apply border;
             @apply border-solid;
             @apply border-gray-300;
@@ -105,6 +139,15 @@
             :global(svg.right) {
                 @apply text-gray-500;
             }
+            &:hover,
+            &:focus {
+                @apply border-gray-500;
+            }
+            &:disabled {
+                :global(svg) {
+                    @apply text-gray-500;
+                }
+            }
             &.active {
                 @apply bg-blue-500;
                 span,
@@ -112,15 +155,32 @@
                     @apply text-white;
                 }
             }
-
-            &:hover,
-            &:focus {
-                @apply border-gray-500;
-            }
-            
-            &:disabled {
-                :global(svg) {
+            &.darkmode {
+                @apply border-gray-700;
+                @apply bg-transparent;
+                span {
+                    @apply text-white;
+                }
+                :global(svg, svg.right) {
                     @apply text-gray-500;
+                }
+                &:hover,
+                &:focus {
+                    @apply bg-gray-700;
+                    @apply bg-opacity-20;
+                }
+                &:disabled {
+                    :global(svg) {
+                        @apply text-gray-500;
+                    }
+                }
+                &.active {
+                    @apply bg-gray-700;
+                    @apply border-gray-700;
+                    span,
+                    :global(svg) {
+                        @apply text-white;
+                    }
                 }
             }
         }
@@ -155,13 +215,36 @@
             &:active {
                 @apply text-gray-800;
             }
+            &.darkmode {
+                &,
+                &:hover,
+                &:active {
+                    @apply text-white;
+                }
+                &:hover {
+                    @apply bg-blue-900;
+                }
+                &:active {
+                    @apply bg-gray-900;
+                }
+                :global(svg) {
+                    @apply text-blue-500;
+                }
+            }
         }
-        
+
         &:disabled {
             @apply pointer-events-none;
             @apply bg-gray-200;
             span {
                 @apply text-gray-500;
+            }
+            &.darkmode {
+                @apply bg-gray-700;
+                @apply bg-opacity-10;
+                span {
+                    @apply text-gray-700;
+                }
             }
         }
     }
@@ -177,8 +260,9 @@
         class:secondary
         class:active
         class:with-icon={icon}
+        class:darkmode={darkModeEnabled}
         {disabled}
-        >
+        bind:this={buttonElement}>
         <Icon classes="mb-1" {icon} />
         <div class="text-12 leading-140">
             <slot />
@@ -197,14 +281,16 @@
         class:with-icon={icon}
         class:iconReverse
         class:active
-        {disabled}>
+        class:darkmode={darkModeEnabled}
+        {disabled}
+        bind:this={buttonElement}>
         {#if icon}
             {#if small}
                 {#if iconReverse}
                     <div class="relative flex flex-row justify-between">
                         <div class="relative flex items-center flex-1">
                             <div class="absolute left-0 flex items-center">
-                                <Icon width={16} height={16} classes="mr-4" {icon} />
+                                <Icon width="16" height="16" classes="mr-4" {icon} />
                             </div>
                             <span class="font-bold text-12 leading-140"><slot /></span>
                         </div>
@@ -214,7 +300,7 @@
                         <div class="relative flex items-center flex-1">
                             <span class="font-bold text-12 leading-140"><slot /></span>
                             <div class="absolute right-0 flex items-center">
-                                <Icon width={16} height={16} classes="ml-4" {icon} />
+                                <Icon width="16" height="16" classes="ml-4" {icon} />
                             </div>
                         </div>
                     </div>
@@ -223,7 +309,7 @@
                 <div class="relative flex flex-row justify-between">
                     <div class="relative flex items-center flex-1">
                         <div class="absolute left-0 flex items-center">
-                            <Icon width={16} height={16} classes="mr-4" {icon} />
+                            <Icon classes="mr-4" {icon} />
                         </div>
                         <span class="font-bold text-12 leading-140"><slot /></span>
                     </div>

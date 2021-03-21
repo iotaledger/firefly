@@ -6,6 +6,7 @@ import type { StrongholdStatus } from './wallet'
 
 export interface Actor {
     destroy(): void
+    removeEventListeners(): void
 }
 
 export interface CommunicationIds {
@@ -62,6 +63,7 @@ export enum ResponseTypes {
     LockedStronghold = 'LockedStronghold',
     StrongholdPasswordChanged = 'StrongholdPasswordChanged',
     UpdatedAllClientOptions = 'UpdatedAllClientOptions',
+    StrongholdPasswordClearIntervalSet = 'StrongholdPasswordClearIntervalSet',
 }
 
 export enum Actions {

@@ -1,47 +1,45 @@
 <script lang="typescript">
-    import type { Account as BaseAccount } from 'lib/typings/account'
-    import type { ErrorEventPayload } from 'lib/typings/events'
     import { DashboardPane } from 'shared/components'
     import { sendParams } from 'shared/lib/app'
-    import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
+    import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { priceData } from 'shared/lib/marketData'
     import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
+    import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { activeProfile, isStrongholdLocked } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
-    import { formatUnit } from 'shared/lib/units'
-    import { showAppNotification } from 'shared/lib/notifications'
     import {
         AccountMessage,
         api,
         BalanceHistory,
         BalanceOverview,
+        getAccountMeta,
         getAccountsBalanceHistory,
-        getLatestMessages,
+        getTransactions,
         getWalletBalanceHistory,
         initialiseListeners,
         isTransferring,
+        prepareAccountInfo,
         selectedAccountId,
+        syncAccounts,
         transferState,
-        updateAccounts,
         updateBalanceOverview,
         wallet,
         WalletAccount,
+        removeEventListeners
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
-    import { derived, get, Readable, Writable } from 'svelte/store'
+    import { derived, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
 
     export let locale
 
-    const AccountColors = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
-
     const { accounts, balanceOverview, accountsLoaded } = $wallet
 
     const transactions = derived(accounts, ($accounts) => {
-        return getLatestMessages($accounts)
+        return getTransactions($accounts)
     })
     const accountsBalanceHistory = derived([accounts, priceData], ([$accounts, $priceData]) =>
         getAccountsBalanceHistory($accounts, $priceData)
@@ -63,97 +61,43 @@
 
     let isGeneratingAddress = false
 
-    function getAccountMeta(
-        accountId: string,
-        callback: (
-            error: ErrorEventPayload,
-            meta?: {
-                balance: number
-                incoming: number
-                outgoing: number
-                depositAddress: string
-            }
-        ) => void
-    ) {
-        api.getBalance(accountId, {
-            onSuccess(balanceResponse) {
-                api.latestAddress(accountId, {
-                    onSuccess(latestAddressResponse) {
-                        callback(null, {
-                            balance: balanceResponse.payload.total,
-                            incoming: balanceResponse.payload.incoming,
-                            outgoing: balanceResponse.payload.outgoing,
-                            depositAddress: latestAddressResponse.payload.address,
-                        })
-                    },
-                    onError(error) {
-                        callback(error)
-                    },
-                })
-            },
-            onError(error) {
-                callback(error)
-            },
-        })
-    }
-
-    function prepareAccountInfo(
-        account: BaseAccount,
-        meta: {
-            balance: number
-            incoming: number
-            outgoing: number
-            depositAddress: string
-        }
-    ): WalletAccount {
-        const { id, index, alias } = account
-        const { balance, depositAddress } = meta
-
-        return Object.assign<WalletAccount, BaseAccount, Partial<WalletAccount>>({} as WalletAccount, account, {
-            id,
-            index,
-            depositAddress,
-            alias,
-            rawIotaBalance: balance,
-            balance: formatUnit(balance, 0),
-            balanceEquiv: `${convertToFiat(
-                balance,
-                $currencies[CurrencyTypes.USD],
-                $exchangeRates[get(activeProfile).settings.currency]
-            )} ${$activeProfile.settings.currency}`,
-            color: AccountColors[index],
-        })
-    }
-
     function getAccounts() {
         api.getAccounts({
             onSuccess(accountsResponse) {
-                syncAccounts()
-
-                const _totalBalance = {
-                    balance: 0,
-                    incoming: 0,
-                    outgoing: 0,
+                const _continue = () => {
+                    accountsLoaded.set(true)
+                    syncAccounts()
                 }
 
-                for (const [idx, storedAccount] of accountsResponse.payload.entries()) {
+                if (accountsResponse.payload.length === 0) {
+                    _continue()
+                } else {
+                    const totalBalance = {
+                        balance: 0,
+                        incoming: 0,
+                        outgoing: 0,
+                    }
+
+                    for (const [idx, storedAccount] of accountsResponse.payload.entries()) {
                         getAccountMeta(storedAccount.id, (err, meta) => {
                             if (!err) {
-                                _totalBalance.balance += meta.balance
-                                _totalBalance.incoming += meta.incoming
-                                _totalBalance.outgoing += meta.outgoing
+                                totalBalance.balance += meta.balance
+                                totalBalance.incoming += meta.incoming
+                                totalBalance.outgoing += meta.outgoing
 
                                 const account = prepareAccountInfo(storedAccount, meta)
                                 accounts.update((accounts) => [...accounts, account])
 
                                 if (idx === accountsResponse.payload.length - 1) {
-                                    updateBalanceOverview(_totalBalance.balance, _totalBalance.incoming, _totalBalance.outgoing)
+                                    updateBalanceOverview(totalBalance.balance, totalBalance.incoming, totalBalance.outgoing)
+                                    _continue()
                                 }
                             } else {
                                 console.error(err)
                             }
                         })
                     }
+                }
             },
             onError(err) {
                 showAppNotification({
@@ -203,24 +147,6 @@
                 } else {
                     _generate()
                 }
-            },
-            onError(err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error),
-                })
-            },
-        })
-    }
-
-    function syncAccounts() {
-        api.syncAccounts({
-            onSuccess(syncAccountsResponse) {
-                const syncedAccounts = syncAccountsResponse.payload
-
-                updateAccounts(syncedAccounts)
-
-                accountsLoaded.set(true)
             },
             onError(err) {
                 showAppNotification({
@@ -372,8 +298,10 @@
                                     {
                                         messages: [
                                             Object.assign({}, response.payload, {
-                                            incoming: isReceiverAccount
-                                        }), ..._account.messages],
+                                                incoming: isReceiverAccount,
+                                            }),
+                                            ..._account.messages,
+                                        ],
                                     }
                                 )
                             }
@@ -418,7 +346,7 @@
     }
 
     $: {
-        if ($deepLinkRequestActive && get(activeProfile).settings.deepLinking) {
+        if ($deepLinkRequestActive && $appSettings.deepLinking) {
             walletRoute.set(WalletRoutes.Send)
             deepLinkRequestActive.set(false)
         }
@@ -429,11 +357,13 @@
             getAccounts()
         }
 
+        removeEventListeners($activeProfile.id)
+
         initialiseListeners()
 
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
-                updateProfile('isStrongholdLocked', strongholdStatusResponse.payload.snapshot.status === 'Locked')
+                isStrongholdLocked.set(strongholdStatusResponse.payload.snapshot.status === 'Locked')
             },
             onError(error) {
                 console.error(error)
@@ -441,6 +371,12 @@
         })
     })
 </script>
+
+<style type="text/scss">
+    :global(body.platform-win32) .wallet-wrapper {
+        @apply pt-0;
+    }
+</style>
 
 {#if $walletRoute === WalletRoutes.Account && $selectedAccountId}
     <Account
@@ -450,7 +386,7 @@
         generateAddress={onGenerateAddress}
         {locale} />
 {:else}
-    <div class="w-full h-full flex flex-col p-10 flex-1 bg-gray-50 dark:bg-gray-900">
+    <div class="wallet-wrapper w-full h-full flex flex-col p-10 flex-1 bg-gray-50 dark:bg-gray-900">
         <div class="w-full h-full flex flex-row space-x-4 flex-auto">
             <DashboardPane classes="w-1/3 h-full">
                 <!-- Total Balance, Accounts list & Send/Receive -->

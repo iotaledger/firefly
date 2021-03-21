@@ -2,27 +2,17 @@ import { AvailableExchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
 import { DEFAULT_NODE } from 'shared/lib/network'
 import { generateRandomId } from 'shared/lib/utils'
-import { derived, get, writable } from 'svelte/store'
+import { api } from 'shared/lib/wallet'
+import { derived, get, Readable, writable } from 'svelte/store'
 import { Electron } from './electron'
 import type { Node } from './typings/client'
 
 /**
- * Base profile interface —
+ * Profile
  */
-interface BaseProfile {
-    name: string
+interface Profile {
     id: string
-    active: boolean
-}
-
-/**
- * Extended profile interface (Extra properties associated with a profile)
- */
-interface ExtendedProfile {
-    /**
-     * Determines if stronghold is locked
-     */
-    isStrongholdLocked: boolean
+    name: string
     /**
      * Time for most recent stronghold back up
      */
@@ -31,49 +21,45 @@ interface ExtendedProfile {
      * User settings
      */
     settings: UserSettings
+    isDeveloperProfile: boolean
+
 }
 
 /**
  * User Settings
  */
 export interface UserSettings {
-    deepLinking: boolean
     outsourcePow: boolean
-    language: string
     currency: AvailableExchangeRates
-    notifications: boolean
+    automaticNodeSelection: boolean
     node: Node
     customNodes: Node[]
     /** Lock screen timeout in minutes */
     lockScreenTimeout: number
-    automaticNodeSelection: boolean
 }
 
-/**
- * Profile interface
- */
-interface Profile extends BaseProfile, ExtendedProfile {
-    isDeveloperProfile: boolean
-}
+export const activeProfileId = writable<string | null>(null)
 
 export const profiles = persistent<Profile[]>('profiles', [])
 
 export const newProfile = writable<Profile | null>(null)
 
+export const isStrongholdLocked = writable<boolean>(true)
+
 /**
  * Currently active profile
  */
-export const activeProfile = derived(
-    [profiles, newProfile],
-    ([$profiles, $newProfile]) =>
+export const activeProfile: Readable<Profile | undefined> = derived(
+    [profiles, newProfile, activeProfileId],
+    ([$profiles, $newProfile, $activeProfileId]) =>
         $newProfile ||
         $profiles.find((_profile) => {
-            return _profile.active === true
+            return _profile.id === $activeProfileId
         })
 )
 
-activeProfile.subscribe((profile) => {
-    Electron.updateActiveProfile(profile ? profile.id : null)
+activeProfileId.subscribe((profileId) => {
+    Electron.updateActiveProfile(profileId)
 })
 
 /**
@@ -100,30 +86,25 @@ export const saveProfile = (profile: Profile): Profile => {
  *
  * @returns {Profile}
  */
- export const createProfile = (profileName, isDeveloperProfile): Profile => {
-    const profile = {
+export const createProfile = (profileName, isDeveloperProfile): Profile => {
+    const profile: Profile = {
         id: generateRandomId(),
         name: profileName,
-        active: true,
-        isStrongholdLocked: true,
         lastStrongholdBackupTime: null,
         isDeveloperProfile,
-        // Settings
         settings: {
-            deepLinking: false,
-            language: 'en',
             outsourcePow: false,
             currency: AvailableExchangeRates.USD,
-            notifications: true,
+            automaticNodeSelection: true,
             node: DEFAULT_NODE,
             customNodes: [],
             // Minutes
             lockScreenTimeout: 5,
-            automaticNodeSelection: true,
         },
     }
 
     newProfile.set(profile)
+    activeProfileId.set(profile.id)
 
     return profile
 }
@@ -136,7 +117,25 @@ export const saveProfile = (profile: Profile): Profile => {
  * @returns {void}
  */
 export const disposeNewProfile = (): void => {
+    const np = get(newProfile)
+    if (np) {
+        api.removeStorage({
+            onSuccess() {
+                api.removeAccount(np.id, {
+                    onSuccess() {
+                    },
+                    onError(err) {
+                        console.error(err)
+                    },
+                })
+            },
+            onError(err) {
+                console.error(err)
+            },
+        })
+    }
     newProfile.set(null)
+    activeProfileId.set(null)
 }
 
 /**
@@ -149,7 +148,18 @@ export const disposeNewProfile = (): void => {
  * @returns {void}
  */
 export const setActiveProfile = (id: string): void => {
-    profiles.update((_profiles) => _profiles.map((profile) => Object.assign({}, profile, { active: id === profile.id })))
+    activeProfileId.set(id)
+}
+
+/**
+ * Clears the active profile
+ *
+ * @method clearActiveProfile
+ *
+ * @returns {void}
+ */
+export const clearActiveProfile = (): void => {
+    activeProfileId.set(null)
 }
 
 /**
@@ -181,7 +191,7 @@ export const updateProfile = (
     const _update = (_profile) => {
         const pathList = path.split('.')
 
-        pathList.reduce((a, b: keyof ExtendedProfile | keyof UserSettings, level: number) => {
+        pathList.reduce((a, b: keyof Profile | keyof UserSettings, level: number) => {
             if (level === pathList.length - 1) {
                 a[b] = value
                 return value
@@ -197,7 +207,7 @@ export const updateProfile = (
     } else {
         profiles.update((_profiles) => {
             return _profiles.map((_profile) => {
-                if (_profile.id === get(activeProfile).id) {
+                if (_profile.id === get(activeProfile)?.id) {
                     return _update(_profile)
                 }
 

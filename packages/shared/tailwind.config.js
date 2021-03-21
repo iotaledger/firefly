@@ -29,6 +29,7 @@ module.exports = {
                 /^grid-cols-/,
                 // `p-${size}`
                 /^p-/,
+                'scheme-dark',
                 'fill-current',
                 'stroke-current',
             ],
@@ -159,6 +160,14 @@ module.exports = {
             transparent: 'transparent',
             black: '#000',
             white: '#fff',
+            pastel: {
+                blue: '#EEFBFF',
+                orange: '#FFF8EF',
+                green: '#F7FFED',
+                yellow: '#FFF9EF',
+                pink: '#FFF3F8',
+                purple: '#EFF0FE',
+            }
         },
         extend: {
             fontSize: {

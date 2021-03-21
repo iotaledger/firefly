@@ -1,8 +1,10 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
     import { Transition } from 'shared/components'
-    import { Import, TextImport, FileImport, BackupPassword, Success } from './views/'
-    import { api } from 'shared/lib/wallet'
+    import { mnemonic } from 'shared/lib/app'
+    import { newProfile } from 'shared/lib/profile'
+    import { api, asyncRestoreBackup } from 'shared/lib/wallet'
+    import { createEventDispatcher } from 'svelte'
+    import { BackupPassword, FileImport, Import, Success, TextImport } from './views/'
 
     export let locale
     export let mobile
@@ -20,7 +22,8 @@
     let importType
     let importFile
     let importFilePath
-    
+    let busy = false
+
     let error = ''
 
     let state: ImportState = ImportState.Init
@@ -40,12 +43,12 @@
                 break
             case ImportState.TextImport:
                 const { input } = params
-                // Dummy
                 if (input.length === 81) {
                     importType = 'seed'
                     dispatch('next', { importType })
                 } else {
                     importType = 'mnemonic'
+                    mnemonic.set(input.split(' '))
                     nextState = ImportState.Success
                 }
                 break
@@ -62,27 +65,23 @@
                     importType = 'stronghold'
                 }
                 nextState = ImportState.BackupPassword
-
                 break
+
             case ImportState.BackupPassword:
                 const { password } = params
+                busy = true
 
                 try {
-                    await new Promise<void>((resolve, reject) => {
-                        api.restoreBackup(importFilePath, password, {
-                            onSuccess() {
-                                resolve()
-                            },
-                            onError(err) {
-                                reject(err)
-                            },
-                        })
-                    })
+                    await asyncRestoreBackup(importFilePath, password)
+                    $newProfile.lastStrongholdBackupTime = new Date()
                     nextState = ImportState.Success
                 } catch (err) {
                     error = locale(err.error)
+                } finally {
+                    busy = false
                 }
                 break
+
             case ImportState.Success:
                 dispatch('next', { importType })
                 break
@@ -117,7 +116,7 @@
     </Transition>
 {:else if state === ImportState.BackupPassword}
     <Transition>
-        <BackupPassword on:next={_next} on:previous={_previous} {importType} {error} {locale} {mobile}/>
+        <BackupPassword on:next={_next} on:previous={_previous} {importType} {error} {locale} {mobile} {busy} />
     </Transition>
 {:else if state === ImportState.Success}
     <Transition>

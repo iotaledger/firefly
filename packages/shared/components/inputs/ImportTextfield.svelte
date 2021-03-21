@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Text } from 'shared/components'
     import { debounce } from 'shared/lib/utils'
-    import { english } from './wordlists/english'
+    import { english } from 'shared/lib/wordlists/english'
 
     export let value = undefined
     export let locale
@@ -59,7 +59,7 @@
                     statusMessage = seedValidations
                     error = true
                 } else {
-                    statusMessage = locale('views.import_from_text.seed_detected')
+                    statusMessage = locale('views.importFromText.seedDetected')
                     value = trimmedContent
                 }
             } else {
@@ -68,7 +68,7 @@
                     statusMessage = mnemonicValidations
                     error = true
                 } else {
-                    statusMessage = locale('views.import_from_text.phrase_detected')
+                    statusMessage = locale('views.importFromText.phraseDetected')
                     value = trimmedContent
                 }
             }
@@ -84,10 +84,13 @@
 
 <div>
     <textarea
-        class="text-12 leading-140 resize-none w-full p-4 pb-3 rounded-xl border border-solid {error ? 'border-red-300 hover:border-red-500 focus:border-red-500' : 'border-gray-300 hover:border-gray-500 focus:border-gray-500'} bg-white text-gray-800"
+        class="text-14 leading-140 resize-none w-full p-4 pb-3 rounded-xl border border-solid 
+            {error ? 'border-red-300 hover:border-red-500 focus:border-red-500' : 'border-gray-300 hover:border-gray-500 dark:border-gray-700 dark:hover:border-gray-700'} 
+            text-gray-500 dark:text-white bg-white dark:bg-gray-800 "
         bind:value={content}
         on:keydown={debounce(handleKeyDown)}
         placeholder=""
-        spellcheck={false} />
+        spellcheck={false}
+        autofocus />
     <Text type="p" secondary {error}>{statusMessage}&nbsp;</Text>
 </div>

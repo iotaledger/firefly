@@ -1,29 +1,29 @@
 {
     "views": {
-        "onboarding_1": {
+        "onboarding1": {
             "title": "Lähetä, vastaanota ja hallitse IOTA-varojasi",
             "body": "Firefly on turvallinen ja helppokäyttöinen IOTA-lompakko."
         },
         "legal": {
             "title": "Oikeudelliset tiedot",
             "body": "Ole hyvä ja tutustu tietosuojakäytäntöön ja käyttöehtoihin.",
-            "privacy_policy": {
+            "privacyPolicy": {
                 "title": "Tietosuojakäytäntö",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "terms_of_service": {
+            "termsOfService": {
                 "title": "Käyttöehdot",
-                "body_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body_4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body_5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body_6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
+                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
+                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
+                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
+                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "checkbox": "I have read and I accept the Privacy policy & ToS"
         },
@@ -34,48 +34,49 @@
         "setup": {
             "title": "Määritä lompakko",
             "body": "Voit luoda uuden lompakon tai tuoda olemassaolevan.",
-            "profile_name": "Profilin nimi"
+            "profileName": "Profilin nimi"
         },
         "password": {
             "title": "Luo salasana",
-            "body": "Sinua pyydetään syöttämään salasanasi, jotta voit lähettää varoja lompakostasi. Tarvitset vahvan salasanan suojataksesi varojasi."
+            "body": "Tarvitset vahvan salasanan turvataksesi varasi. Käytä sanojen yhdistelmää ja vältä yleisiä ilmaisuja, nimiä tai päivämääriä."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body_1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body_2": "Keep your PIN safe!"
+            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
+            "body2": "Keep your PIN safe!"
         },
         "pin": {
             "title": "Määritä PIN-koodi",
-            "body_1": "Syötä 6-numeroinen PIN-koodi alla. Sinua pyydetään syöttämään PIN-koodisi kirjautuessasi lompakkoosi.",
-            "body_2": "Voit käyttää vain numeroita."
+            "body1": "Syötä 6-numeroinen PIN-koodi alla. Sinua pyydetään syöttämään PIN-koodisi kirjautuessasi lompakkoosi.",
+            "body2": "Voit käyttää vain numeroita."
         },
-        "confirm_pin": {
+        "confirmPin": {
             "title": "Vahvista PIN-koodisi",
             "body": "Syötä PIN-koodisi uudelleen jatkaaksesi."
         },
         "backup": {
             "title": "Varmuuskopioi lompakko",
-            "body_1": "Sinulle näytetään nyt palautuslauseke.",
-            "body_2": "Älä jaa tätä lauseketta kenenkään kanssa. Palautuslauseketta voidaan käyttään varoihisi pääsemiseen mistä tahansa.",
-            "body_3": "Jos menetät palautuslausekkeen, voit menettää varasi."
+            "body1": "Sinulle näytetään nyt palautuslauseke.",
+            "body2": "Älä jaa tätä lauseketta kenenkään kanssa. Palautuslauseketta voidaan käyttään varoihisi pääsemiseen mistä tahansa.",
+            "body3": "Jos menetät palautuslausekkeen, voit menettää varasi."
         },
-        "recovery_phrase": {
+        "recoveryPhrase": {
             "title": "Palautuslauseke",
-            "body_1": "Kirjoita sanat huolellisesti oikeassa järjestyksessä.",
-            "body_2": "Pidä palautuslausekkeesi vain itsesi tiedossa ja turvallisesti tallennettuna. Älä jaa sitä kenenkään kanssa.",
-            "reveal_recovery_phrase": "Näytä palautuslauseke",
-            "hide_recovery_phrase": "Piilota palautuslauseke"
+            "body1": "Kirjoita sanat huolellisesti oikeassa järjestyksessä.",
+            "body2": "Pidä palautuslausekkeesi vain itsesi tiedossa ja turvallisesti tallennettuna. Älä jaa sitä kenenkään kanssa.",
+            "revealRecoveryPhrase": "Näytä palautuslauseke",
+            "hideRecoveryPhrase": "Piilota palautuslauseke"
         },
-        "verify_recovery_phrase": {
+        "verifyRecoveryPhrase": {
             "title": "Vahvista palautuslauseke",
-            "body": "Tarkistetaan, että kirjoitit lausekkeen oikein. Valitse sanat oikeassa järjestyksessä."
+            "body": "Tarkistetaan, että kirjoitit lausekkeen oikein. Valitse sanat oikeassa järjestyksessä.",
+            "creatingAccount": "Luodaan tiliä, odota hetki..."
         },
-        "backup_wallet": {
+        "backupWallet": {
             "title": "Varmuuskopioi Stronghold-tiedostoon",
             "body": "Syötä salasanasi varmuuskopioidaksesi lompakkosi Stronghold-tiedostoon. Salasanaasi käytetään varmuuskopion salaukseen."
         },
-        "recovery_phrase_saved": {
+        "recoveryPhraseSaved": {
             "title": "Varmuuskopiointi onnistui",
             "body": "Olet varmuuskopioinut lompakkosi Stronghold-tiedostoon."
         },
@@ -87,33 +88,35 @@
             "title": "Tuo lompakko",
             "body": "Jos sinulla on palautuslauseke tai Stronghold-varmuuskopio, voit tuoda sen täällä."
         },
-        "import_from_text": {
+        "importFromText": {
             "title": "Palauta lompakkosi palautuslausekkeella tai seed-merkkijonolla",
-            "body_1": "Palautuslauseke on pituudeltaan 24 sanaa. Sitä käytetään olemassaolevan Firefly-lompakon palauttamiseen.",
-            "body_2": "Seed-merkkijonossa on 81 merkkiä. Sitä käytetään vanhan Trinity-lompakon palauttamiseen.",
-            "body_3": "Syötä seed-merkkijono tai palautuslauseke"
+            "body1": "Palautuslauseke on pituudeltaan 24 sanaa. Sitä käytetään olemassaolevan Firefly-lompakon palauttamiseen.",
+            "body2": "Seed-merkkijonossa on 81 merkkiä. Sitä käytetään vanhan Trinity-lompakon palauttamiseen.",
+            "body3": "Syötä seed-merkkijono tai palautuslauseke",
+            "seedDetected": "81 merkin seed-luku havaittu",
+            "phraseDetected": "24 sanan ilmaisu havaittu"
         },
-        "import_from_file": {
+        "importFromFile": {
             "title": "Palauta lompakko varmuuskopiotiedostosta",
             "body": "Tuo varmuuskopiotiedosto lompakon palauttamiseksi. Varmuuskopiot voivat olla joko Stronghold-tiedosto (.stronghold) tai Trinity SeedVault -tiedosto (.kdbx)."
         },
-        "import_backup_password": {
+        "importBackupPassword": {
             "title": "Palauta lompakkosi SeedVault- tai Stronghold-tiedostosta",
-            "body_1": "Syötä varmuuskopion salasanasi.",
-            "body_2": "Asetit tämän salasanan, kun loit varmuuskopion."
+            "body1": "Syötä varmuuskopion salasanasi.",
+            "body2": "Asetit tämän salasanan, kun loit varmuuskopion."
         },
-        "import_success": {
+        "importSuccess": {
             "title": "Varmuuskopion palautus onnistui",
             "body": "Voit nyt määrittää uuden lompakon."
         },
         "migrate": {
             "title": "Siirrä varasi",
-            "body_1": "Tämä on automatisoitu prosessi varojen siirtämiseksi uuteen lompakkoon. Tarkistamme käytetyt osoitteet, jotka heikentävät turvallisuuttasi.",
-            "body_2": "Tämä voi viedä jonkin aikaa. Älä sammuta laitettasi siirtoprosessin aikana.",
+            "body1": "Tämä on automatisoitu prosessi varojen siirtämiseksi uuteen lompakkoon. Tarkistamme käytetyt osoitteet, jotka heikentävät turvallisuuttasi.",
+            "body2": "Tämä voi viedä jonkin aikaa. Älä sammuta laitettasi siirtoprosessin aikana.",
             "existing": "Vanha lompakkosi",
             "new": "Uusi lompakkosi"
         },
-        "migrate_failed": {
+        "migrateFailed": {
             "title": "To do",
             "body": "To do"
         },
@@ -187,8 +190,8 @@
                 "title": "Uudelleen synkronoi tilit",
                 "description": ""
             },
-            "resetWallet": {
-                "title": "Tyhjennä lompakko",
+            "deleteProfile": {
+                "title": "Poista profiili",
                 "description": ""
             },
             "deepLinks": {
@@ -213,6 +216,10 @@
             },
             "errorLog": {
                 "title": "Virheloki",
+                "description": ""
+            },
+            "diagnostics": {
+                "title": "Diagnostics",
                 "description": ""
             },
             "stateExport": {
@@ -241,237 +248,364 @@
             }
         },
         "login": {
-            "please_wait": "Odota {time, plural, one {1 sekunti} other {# sekuntia}}",
-            "incorrect_attempts": "{attempts, plural, one {1 virheellinen yritys} other {# virheellistä yritystä}}"
+            "pleaseWait": "Odota {time, plural, one {1 sekunti} other {# sekuntia}}",
+            "incorrectAttempts": "{attempts, plural, one {1 virheellinen yritys} other {# virheellistä yritystä}}"
         },
         "dashboard": {
             "security": {
                 "version": {
                     "title": "Firefly v {version}",
-                    "up_to_date": "Ajan tasalla",
-                    "out_of_date": "Vanhentunut"
+                    "upToDate": "Ajan tasalla",
+                    "outOfDate": "Vanhentunut"
                 },
-                "hardware_device": {
+                "hardwareDevice": {
                     "title": "Laite",
-                    "none_detected": "Ei havaittu"
+                    "noneDetected": "Ei havaittu"
                 },
-                "stronghold_status": {
+                "strongholdStatus": {
                     "title": "Stronghold tilanne",
                     "locked": "Lukittu",
                     "unlocked": "Avattu"
                 },
-                "stronghold_backup": {
+                "strongholdBackup": {
                     "title": "Stronghold varmuuskopio",
-                    "weeks_ago": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "weeksAgo": "{weeks, plural, one {# viikko} other {# viikkoa}} sitten"
                 }
             },
             "network": {
-                "network_operational": "Network Operational",
-                "network_degraded": "Network Degraded",
-                "network_down": "Network Down",
-                "status": "Status",
-                "messages_per_second": "Messages per second",
-                "confirmation_rate": "Confirmation rate"
+                "networkOperational": "Verkko toiminnassa",
+                "networkDegraded": "Verkko heikentynyt",
+                "networkDown": "Verkko alhaalla",
+                "status": "Tila",
+                "messagesPerSecond": "Viestejä sekunnissa",
+                "confirmationRate": "Varmistus aste"
             },
-            "profile_modal": {
-                "all_settings": "All settings",
-                "logout": "Log out"
+            "profileModal": {
+                "allSettings": "Kaikki asetukset",
+                "logout": "Kirjaudu ulos"
             }
         }
     },
     "popups": {
         "password": {
             "title": "Salasana vaaditaan",
-            "subtitle": "Please enter your wallet password to unlock Stronghold"
+            "subtitle": "Ole hyvä ja anna lompakkosi salasana avataksesi Strongholdin"
         },
         "qr": {
             "title": "Sinun QR-koodisi"
         },
         "version": {
-            "title": "Current version: {version}",
-            "up_to_date_title": "Firefly is up to date",
-            "up_to_date_description": "You are running the latest and safest version of Firefly.",
-            "update_available": "Firefly update available",
-            "update_details": "Version {version} - {date}"
+            "title": "Nykyinen versio: {version}",
+            "upToDateTitle": "Firefly on ajan tasalla",
+            "upToDateDescription": "Käytössäsi on Fireflyn uusin ja turvallisin versio.",
+            "updateAvailable": "Firefly päivitys saatavilla",
+            "updateDetails": "Versio {version} - {date}"
         },
         "backup": {
-            "title": "Last backup: {date}",
-            "last_backup": "You last backed up {date}",
-            "backup_description": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
-            "backup_warning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "not_backed_up": "Not backed up",
-            "not_backed_up_description": "You have not backed up your Stronghold"
+            "title": "Viimeisin varmuuskopio: {date}",
+            "lastBackup": "Olet viimeksi varmuuskopioinut {date}",
+            "backupDescription": "On tärkeää varmuuskopioida säännöllisesti varmistaaksesi, että sinulla on kopio tileistäsi ja tapahtumahistoriastasi.",
+            "backupWarning": "Jos menetät varmuuskopio- ja palautuslauseesi, menetät pääsyn varoihisi.",
+            "notBackedUp": "Ei varmuuskopioitu",
+            "notBackedUpDescription": "Et ole varmuuskopioinut Strongholdiasi"
         },
-        "delete_account": {
-            "title": "Delete {name}?",
+        "deleteAccount": {
+            "title": "Poista {name}?",
             "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "type_password": "Type your wallet’s password to confirm.",
-            "delete_account": "Delete account",
-            "error_title": "Unable to delete {name}",
-            "error_body_1": "To delete an account you must have 0 balance.",
-            "error_body_2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again."
+            "typePassword": "Syötä lompakkosi salasana varmistaaksesi.",
+            "deleteAccount": "Poista tili",
+            "errorTitle": "Kohdetta {name} ei voi poistaa",
+            "errorBody1": "Jotta voit poistaa tilin, sinulla on oltava 0 saldo.",
+            "errorBody2": "Sinulla on tällä hetkellä {balance} jäljellä tällä tilillä. Ole hyvä ja siirrä nämä varat toiselle tilille ja yritä uudelleen.",
+            "errorBody3": "Et voi poistaa tätä tiliä, sinulla on oltava vähintään yksi."
         },
-        "address_history": {
-            "title": "{name} account address history",
-            "current_balance": "Current balance: {balance}"
+        "addressHistory": {
+            "title": "{name} tiliosoitteen historia",
+            "currentBalance": "Nykyinen saldo: {balance}"
         },
         "node": {
-            "title_add": "Add a node",
-            "title_details": "Node details",
-            "node_address": "Node address",
-            "optional_username": "Username (optional)",
-            "optional_password": "Password (optional)",
-            "set_as_primary_node": "Set as primary node"
+            "titleAdd": "Lisää solmu",
+            "titleRemove": "Poista solmu",
+            "titleDetails": "Solmun tiedot",
+            "nodeAddress": "Solmun osoite",
+            "optionalUsername": "Käyttäjänimi (valinnainen)",
+            "optionalPassword": "Salasana (valinnainen)",
+            "setAsPrimaryNode": "Aseta ensisijaiseksi solmuksi",
+            "removeConfirmation": "Are you sure you want to remove this node?"
+        },
+        "errorLog": {
+            "title": "Virheloki",
+            "empty": "Virheloki on tyhjä."
+        },
+        "deleteProfile": {
+            "title": "Poista profiili",
+            "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone."
+        },
+        "diagnostics": {
+            "title": "Diagnostics",
+            "node": "Node",
+            "platform": "Platform",
+            "platformVersion": "Platform Version",
+            "platformArchitecture": "Platform Architecture",
+            "cpuCount": "CPU Count",
+            "totalMem": "Total Memory",
+            "freeMem": "Free Memory",
+            "userPath": "User Path"
         }
+    },
+    "charts": {
+        "incomingMi": "Saapuva {value} Mi",
+        "outgoingMi": "Lähtevä {value} Mi",
+        "portoflio": "Portfolio",
+        "token": "Tokeni",
+        "accountValue": "Tilin arvo",
+        "accountActivity": "Tilin aktiivisuus"
     },
     "actions": {
         "continue": "Jatka",
         "back": "Takaisin",
         "cancel": "Peruuta",
         "close": "Sulje",
-        "dismiss": "Dismiss",
+        "dismiss": "Hylkää",
         "save": "Tallenna",
-        "import_seed": "Tuo olemassaoleva seed-merkkijono",
-        "import_wallet": "Tuo olemassaoleva lompakko",
-        "create_wallet": "Luo uusi lompakko",
-        "save_password": "Tallenna salasana",
-        "use_biometric": "Käytä biometristä suojausta",
-        "setup_pin": "Määritä PIN-koodi",
-        "set_pin": "Aseta PIN-koodi",
-        "confirm_pin": "Vahvista PIN-koodi",
-        "enter_your_pin": "Syötä PIN-koodi",
-        "save_backup_file": "Tallenna varmuuskopiotiedosto",
-        "ive_written_recovery_phrase": "Olen tallentanut palautuslausekkeeni",
-        "verify_recovery_phrase": "Vahvista palautuslauseke",
-        "reveal_recovery_phrase": "Näytä palautuslauseke",
-        "import_seedvault": "Tuo Seedvault-tiedosto",
-        "check_again": "Ei, tarkista uudelleen",
-        "import_from_file": "Tuo tiedostosta",
+        "importSeed": "Tuo olemassaoleva seed-merkkijono",
+        "importWallet": "Tuo olemassaoleva lompakko",
+        "createWallet": "Luo uusi lompakko",
+        "savePassword": "Tallenna salasana",
+        "useBiometric": "Käytä biometristä suojausta",
+        "setupPin": "Määritä PIN-koodi",
+        "setPin": "Aseta PIN-koodi",
+        "confirmPin": "Vahvista PIN-koodi",
+        "enterYourPin": "Syötä PIN-koodi",
+        "saveBackupFile": "Tallenna varmuuskopiotiedosto",
+        "iveWrittenRecoveryPhrase": "Olen tallentanut palautuslausekkeeni",
+        "verifyRecoveryPhrase": "Vahvista palautuslauseke",
+        "revealRecoveryPhrase": "Näytä palautuslauseke",
+        "importSeedvault": "Tuo Seedvault-tiedosto",
+        "checkAgain": "Ei, tarkista uudelleen",
+        "importFromFile": "Tuo tiedostosta",
         "send": "Lähetä",
         "receive": "Vastaanota",
         "create": "Luo",
-        "begin_transfer": "Aloita siirto",
-        "try_again": "Yritä uudelleen",
-        "visit_discord": "Vieraile Discordissa",
-        "drag_drop": "Vedä ja pudota",
-        "import_extentions": ".stronghold tai .kdbx tiedosto",
-        "choose_file": "Valitse tiedosto",
-        "drop_here": "Pudota tiedosto tähän",
+        "beginTransfer": "Aloita siirto",
+        "tryAgain": "Yritä uudelleen",
+        "visitDiscord": "Vieraile Discordissa",
+        "dragDrop": "Vedä ja pudota",
+        "importExtentions": ".stronghold tai .kdbx tiedosto",
+        "chooseFile": "Valitse tiedosto",
+        "dropHere": "Pudota tiedosto tähän",
         "syncAll": "Synkronoi kaikki",
         "export": "Vie",
         "exportNewStronghold": "Vie uuteen Strongholdiin",
         "enableDeepLinks": "Ota syvälinkit käyttöön",
         "enableDeveloperMode": "Ota kehittäjätila käyttöön",
-        "enableSystemNotifications": "Enable system notifications",
+        "enableSystemNotifications": "Ota järjestelmäilmoitukset käyttöön",
         "exportState": "Vienti tila",
         "outsourceProofOfWork": "Ulkoista todiste työstä (PoW)",
         "unlock": "Avaa",
-        "update_firefly": "Update Firefly",
-        "restart_now": "Restart now",
-        "save_backup": "Save backup",
-        "customize_account": "Customise account",
-        "sync_account": "Sync account",
-        "view_address_history": "View address history",
-        "delete_account": "Delete account",
-        "max": "Max",
-        "add_node": "Add node",
-        "hide": "Hide",
-        "hideOthers": "Hide Others",
-        "showAll": "Show All",
-        "quit": "Quit",
-        "edit": "Edit",
-        "undo": "Undo",
-        "redo": "Redo",
-        "cut": "Cut",
-        "copy": "Copy",
-        "paste": "Paste",
-        "selectAll": "Select All",
-        "addAccount": "Add Account",
-        "checkForUpdates": "Check for Updates",
-        "reportAnIssue": "Report an Issue"
+        "updateFirefly": "Päivitä Firefly",
+        "restartNow": "Käynnistä uudelleen nyt",
+        "saveBackup": "Tallenna varmuuskopio",
+        "customizeAcount": "Customise account",
+        "viewAddressHistory": "Näytä osoitehistoria",
+        "deleteAccount": "Poista tili",
+        "max": "Maksimi",
+        "addNode": "Lisää solmu",
+        "removeNode": "Poista solmu",
+        "hide": "Piilota",
+        "hideOthers": "Piilota Muut",
+        "showAll": "Näytä kaikki",
+        "quit": "Lopeta",
+        "edit": "Muokkaa",
+        "undo": "Kumoa",
+        "redo": "Toista",
+        "cut": "Leikkaa",
+        "copy": "Kopioi",
+        "paste": "Liitä",
+        "selectAll": "Valitse kaikki",
+        "addAccount": "Lisää tili",
+        "checkForUpdates": "Tarkista päivitykset",
+        "reportAnIssue": "Ilmoita ongelmasta",
+        "clear": "Tyhjennä",
+        "hideDetails": "Piilota tiedot",
+        "yes": "Kyllä",
+        "no": "Ei",
+        "reset": "Reset"
     },
     "general": {
         "password": "Salasana",
-        "confirm_password": "Vahvista salasana",
+        "confirmPassword": "Vahvista salasana",
         "currentPassword": "Nykyinen salasana",
         "newPassword": "Uusi salasana",
         "confirmNewPassword": "Vahvista uusi salasana",
-        "your_seed": "Sinun seed-merkkijonosi",
-        "recovery_phrase": "Palautuslauseke",
-        "recent_activity": "Viimeaikainen toiminta",
+        "yourSeed": "Sinun seed-merkkijonosi",
+        "recoveryPhrase": "Palautuslauseke",
+        "recentActivity": "Viimeaikainen toiminta",
         "sent": "Lähetetty",
         "received": "Vastaanotettu",
-        "send_payment": "Send payment",
-        "move_funds": "Move funds",
-        "send_funds": "Lähetä varoja",
-        "send_to_address": "Lähetä osoitteeseen",
-        "scan_qr_or_paste": "Skannaa QR-koodi tai liitä osoite",
-        "move_funds_between_accounts": "Siirrä varoja tilien välillä",
-        "send_tokens_to_address": "Send tokens to an address",
-        "manage_account": "Hallitse tiliä",
-        "customize_account": "Muokkaa tiliäsi",
+        "sendPayment": "Lähetä maksu",
+        "moveFunds": "Siirrä varoja",
+        "sendFunds": "Lähetä varoja",
+        "sendToAddress": "Lähetä osoitteeseen",
+        "scanQrOrPaste": "Skannaa QR-koodi tai liitä osoite",
+        "moveFundsBetweenAccounts": "Siirrä varoja tilien välillä",
+        "sendTokensToAddress": "Lähetä tokenit osoitteeseen",
+        "manageAccount": "Hallitse tiliä",
+        "customizeAcount": "Customize your account",
         "account": "Tili",
-        "sending_to_address": "Lähetys osoitteeseen",
+        "sendingToAddress": "Lähetys osoitteeseen",
         "amount": "Määrä",
-        "add_address": "Lisää osoite",
+        "addAddress": "Lisää osoite",
         "reference": "Viite",
         "from": "Mistä",
         "to": "Mihin",
-        "receive_funds": "Vastaanota varoja",
-        "my_address": "My Address",
-        "share_address": "Jaa osoite",
-        "your_address": "Osoitteesi",
-        "generate_new_address": "Luo uusi osoite",
-        "copy_address": "Kopioi osoite",
-        "have_text_backup": "Minulla on tekstimuotoinen varmuuskopio",
-        "have_file_backup": "Minulla on tiedostomuotoinen varmuuskopio",
-        "enter_seed_or_phrase": "Syötä palautuslauseke tai seed-merkkijono",
-        "upload_seedvault_or_stronghold": "Tuo Stronghold- tai SeedVault-tiedosto",
+        "receiveFunds": "Vastaanota varoja",
+        "myAddress": "Osoitteeni",
+        "shareAddress": "Jaa osoite",
+        "yourAddress": "Osoitteesi",
+        "generateNewAddress": "Luo uusi osoite",
+        "copyAddress": "Kopioi osoite",
+        "haveTextBackup": "Minulla on tekstimuotoinen varmuuskopio",
+        "haveFileBackup": "Minulla on tiedostomuotoinen varmuuskopio",
+        "enterSeedOrPhrase": "Syötä palautuslauseke tai seed-merkkijono",
+        "uploadSeedvaultOrStronghold": "Tuo Stronghold- tai SeedVault-tiedosto",
         "import": "Tuo",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Kieli",
         "appearance": "Ulkoasu",
-        "light_theme": "Vaalea teema",
-        "dark_theme": "Tumma teema",
-        "total_balance": "Saldo yhteensä",
-        "account_balance": "Account Balance",
+        "lightTheme": "Vaalea teema",
+        "darkTheme": "Tumma teema",
+        "totalBalance": "Saldo yhteensä",
+        "accountBalance": "Tilin saldo",
         "incoming": "Saapuva",
         "outgoing": "Lähtevä",
         "accounts": "Tilit",
         "automaticNodeSelection": "Automaattinen noodin valinta",
         "manualNodeSelection": "Manuaalinen noodin valinta",
         "profiles": "Profiilit",
-        "developerProfile": "Developer Profile",
-        "dev": "Dev",
-        "create_account": "Luo tili",
-        "account_name": "Tilin nimi",
-        "latest_transactions": "Viimeisimmät transaktiot",
+        "developerProfile": "Kehittäjäprofiili",
+        "dev": "Kehitys",
+        "createAccount": "Luo tili",
+        "accountName": "Tilin nimi",
+        "latestTransactions": "Viimeisimmät transaktiot",
         "transactions": "Transaktiot",
         "security": "Suojaus",
-        "account_address": "Tilin osoite",
-        "nodes": "Nodes",
-        "wallet": "Wallet",
-        "help": "Help",
-        "no_accounts": "You have no accounts, please create one.",
-        "add_profile": "Add Profile"
+        "accountAddress": "Tilin osoite",
+        "nodes": "Solmut",
+        "wallet": "Lompakko",
+        "help": "Ohje",
+        "you": "Sinä",
+        "messageId": "Message ID",
+        "inputAddress": "Syötä osoite",
+        "receiveAddress": "Vastaanota osoite",
+        "date": "Päivämäärä",
+        "status": "Tila",
+        "confirmed": "Confirmed",
+        "pending": "Pending",
+        "noAccounts": "Sinulla ei ole tilejä, ole hyvä ja luo tili.",
+        "loadingAccounts": "Ladataan, odota hetki...",
+        "addProfile": "Lisää profiili",
+        "noRecentHistory": "Ei viimeaikaista historiaa",
+        "transferSyncing": "Synkronoidaan tiliä",
+        "transferSelectingInputs": "Valitaan syötteet",
+        "transferRemainderAddress": "Luodaan jäljellä olevaa talletusosoitetta",
+        "transferSigning": "Allekirjoitetaan siirtoa",
+        "transferPow": "Suoritetaan PoW",
+        "transferBroadcasting": "Lähetetään siirtoa",
+        "transferComplete": "Siirto valmis",
+        "creatingAccount": "Luodaan tiliä, odota hetki...",
+        "updatingAccount": "Päivitetään tiliä, odota hetki...",
+        "accountSyncing": "Tili synkronoidaan",
+        "accountSyncComplete": "Tilin synkronointi valmis",
+        "passwordUpdating": "Päivitetään salasanaa...",
+        "passwordSuccess": "Salasanan päivitys onnistui",
+        "passwordFailed": "Salasanan päivittäminen epäonnistui",
+        "exportingStronghold": "Viedään Strongholdia...",
+        "exportingStrongholdSuccess": "Stronghold viety onnistuneesti",
+        "exportingStrongholdFailed": "Strongholdin vienti epäonnistui",
+        "pinCodeUpdating": "Päivitetään PIN-koodia...",
+        "pinCodeSuccess": "PIN-koodin päivitys onnistui",
+        "pinCodeFailed": "PIN-koodin päivitys epäonnistui"
     },
     "dates": {
-        "today": "Today",
-        "days_ago": "{time, plural, one {# day} other {# days}} ago",
-        "weeks_ago": "{time, plural, one {# week} other {# weeks}} ago",
-        "months_ago": "{time, plural, one {# month} other {# months}} ago",
-        "years_ago": "{time, plural, one {# year} other {# years}} ago"
+        "today": "Tänään",
+        "daysAgo": "{time, plural, one {# päivä} other {# päivää}} sitten",
+        "weeksAgo": "{time, plural, one {# viikko} other {# viikkoa}} sitten",
+        "monthsAgo": "{time, plural, one {# kuukausi} other {# kuukautta}} sitten",
+        "yearsAgo": "{time, plural, one {# vuosi} other {# vuotta}} sitten"
     },
     "notifications": {
-        "valueTx": "Receiving {{value}} to {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed",
-        "downloading_update": "Downloading update",
-        "update_ready": "Update ready",
-        "update_error": "An error occurred during the update, please try again",
-        "restart_install": "Restart to install",
-        "calc_minutes_remaining": "Calculating minutes remaining...",
-        "minutes_remaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}"
+        "valueTx": "Vastaanotetaan {{value}} tilille {{account}}",
+        "confirmed": "Lähtevä {{value}} tililtä {{account}} on vahvistettu",
+        "failed": "Lähtevä {{value}} tililtä {{account}} on epäonnistunut",
+        "downloadingUpdate": "Ladataan päivitystä",
+        "updateReady": "Päivitys valmis",
+        "updateError": "Päivityksen aikana tapahtui virhe, yritä uudelleen",
+        "restartInstall": "Käynnistä uudelleen asentaaksesi",
+        "calcMinutesRemaining": "Lasketaan jäljellä olevia minuutteja...",
+        "minutesRemaining": "{minutes, plural, one {1 minuutti jäljellä} other {# minuuttia jäljellä}}",
+        "copiedToClipboard": "Copied to clipboard"
+    },
+    "error": {
+        "profile": {
+            "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "duplicate": "Samanniminen profiili on jo olemassa."
+        },
+        "password": {
+            "doNotMatch": "Salasanat eivät täsmää.",
+            "tooWeak": "Uusi salasanasi on liian heikko.",
+            "row": "Suorat näppäimistön rivit on helppo arvata.",
+            "pattern": "Lyhyet näppäimistömallit on helppo arvata.",
+            "names": "Yleiset nimet ja sukunimet on helppo arvata.",
+            "repeats": "Toistuvat kuten 'aaa' on helppo arvata.",
+            "repeats2": "Repeats like 'abcabcabc' are easy to guess.",
+            "sequence": "Peräkkäiset merkit on helppo arvata.",
+            "years": "Viime vuodet on helppo arvata.",
+            "dates": "Päivämäärät on helppo arvata.",
+            "common": "Tämä on hyvin yleinen salasana.",
+            "similar": "Tämä on samankaltainen yleisesti käytetyn salasanan kanssa.",
+            "reasonWord": "Yksittäinen sana on helppo arvata.",
+            "incorrect": "Salasanasi on virheellinen.",
+            "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
+        },
+        "pincode": {
+            "length": "Your PIN must be {length, plural, one {1 digit} other {# digits}} long.",
+            "match": "PIN-koodit eivät täsmää.",
+            "incorrect": "Nykyinen PIN-koodisi on virheellinen."
+        },
+        "account": {
+            "length": "Your account name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "empty": "Sinun täytyy käyttää viimeisintä tiliäsi ennen uuden luomista.",
+            "notEmpty": "Sinun täytyy siirtää saldosi ennen kuin poistat tämän tilin.",
+            "duplicate": "Samanniminen tili on jo olemassa."
+        },
+        "send": {
+            "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
+            "amountTooHigh": "Tämä on suurempi kuin käytettävissä oleva saldosi.",
+            "amountNoFloat": "Jos yksiköt ovat `i`, et voi käyttää desimaaleja.",
+            "amountInvalidFormat": "Summa näyttää olevan virheellinen luku.",
+            "amountZero": "Summan on oltava suurempi kuin 0.",
+            "wrongAddressFormat": "Osoitteet alkavat etuliitteellä {prefix}.",
+            "insufficientFunds": "Tällä tilillä ei ole riittävästi varoja"
+        },
+        "node": {
+            "invalid": "Syötä kelvollinen URL-osoite.",
+            "https": "HTTPS vaaditaan. Määritä kehittäjäprofiili käyttääksesi suojaamattomia HTTP-yhteyksiä.",
+            "duplicate": "Tämä solmu on jo lisätty.",
+            "unsynced": "Solmu, jota yrität lisätä, ei ole synkronoitu."
+        },
+        "global": {
+            "generic": "Jokin meni pieleen."
+        },
+        "backup": {
+            "invalid": "Varmuuskopiotiedostoa ei tunnistettu.",
+            "destination": "Varmuuskopioinnin kohde ei kelpaa.",
+            "mnemonic": "Muistisääntö ei kelpaa.",
+            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
+            "seedCharacters": "Seed-luvun tulisi sisältää vain merkkejä A-Z tai 9",
+            "phraseWordCount": "Palautuslauseessasi pitäisi olla 24 sanaa, tällä hetkellä siellä {length, plural, one {on 1} other {on #}}",
+            "phraseUnrecognizedWord": "Tuntematon sana \"{word}\" palautuslauseessasi"
+        }
     }
 }

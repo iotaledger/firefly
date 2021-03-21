@@ -12,16 +12,16 @@
     const balance = getContext<Readable<BalanceOverview>>('walletBalance')
 </script>
 
-<div class="bg-gradient-to-b from-{color}-500 to-{color}-600 dark:from-gray-800 dark:to-gray-900 rounded-t-2xl pt-10 pb-12 px-8">
+<div class="bg-gradient-to-b from-{color}-500 to-{color}-600 dark:from-gray-800 dark:to-gray-900 rounded-t-2xl pt-6 pb-10 px-8">
     <!-- Balance -->
     <div data-label="total-balance">
-        <Text type="p" overrideColor smaller classes="text-white mb-2">{locale('general.total_balance')}</Text>
+        <Text type="p" overrideColor smaller classes="text-white mb-2">{locale('general.totalBalance')}</Text>
         <Text type="h2" overrideColor classes="text-white mb-2">{$balance.balance}</Text>
         <Text type="p" overrideColor smaller classes="text-{color}-300">{$balance.balanceFiat}</Text>
     </div>
     {#if $walletRoute === WalletRoutes.Init}
         <!-- Incoming/Outgoing -->
-        <div data-label="total-movements" class="flex flex-row justify-between mt-10">
+        <div data-label="total-movements" class="flex flex-row justify-between mt-8">
             <div class="flex items-center">
                 <Icon boxed icon="chevron-down" classes="text-white" boxClasses="bg-{color}-300 dark:bg-gray-900 mr-4" />
                 <div>

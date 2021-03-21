@@ -1,6 +1,6 @@
-import { get, derived, writable } from 'svelte/store'
-import { activeProfile, updateProfile } from 'shared/lib/profile'
-import { getLocaleFromNavigator, addMessages, dictionary, _, init } from 'svelte-i18n'
+import { appSettings } from 'shared/lib/appSettings'
+import { addMessages, dictionary, getLocaleFromNavigator, init, _ } from 'svelte-i18n'
+import { derived, get, writable } from 'svelte/store'
 
 /*
  * Code following https://phrase.com/blog/posts/a-step-by-step-guide-to-svelte-localization-with-svelte-i18n-v3/
@@ -11,14 +11,16 @@ const MESSAGE_FILE_URL_TEMPLATE = 'locales/{locale}.json'
 // Locales our app supports
 export const locales = {
     en: 'English',
+    af: 'Afrikaans',
     ar: 'Arabic',
+    bg: 'Bulgarian',
+    ca: 'Catalan',
     cs: 'Czech',
     da: 'Danish',
     de: 'German',
     el: 'Greek',
-    es_ES: 'Spanish (Spain)',
-    es_LA: 'Spanish (Latin America)',
-    et: 'Estonian',
+    'es-ES': 'Spanish (Spain)',
+    'es-LA': 'Spanish (Latin America)',
     fa: 'Persian',
     fi: 'Finnish',
     fr: 'French',
@@ -29,28 +31,23 @@ export const locales = {
     id: 'Indonesian',
     it: 'Italian',
     ja: 'Japanese',
-    kn: 'Kannada',
     ko: 'Korean',
-    lt: 'Lithuanian',
-    lv: 'Latvian',
+    ku: 'Kurmanji (Kurdish)',
     nl: 'Dutch',
     no: 'Norwegian',
     pl: 'Polish',
-    pt_BR: 'Portuguese (Brazil)',
-    pt_PT: 'Portuguese (Portugal)',
+    'pt-BR': 'Portuguese (Brazil)',
+    'pt-PT': 'Portuguese (Portugal)',
     ro: 'Romanian',
     ru: 'Russian',
-    sk: 'Slovak',
-    sl: 'Slovenian',
-    sr: 'Serbian (Latin)',
-    sv_SE: 'Swedish',
-    ta: 'Tamil',
-    th: 'Thai',
+    sr: 'Serbian (Cyrillic)',
+    sv: 'Swedish',
     tr: 'Turkish',
-    ur: 'Urdu',
+    uk: 'Ukrainian',
+    ur: 'Urdu (Pakistan)',
     vi: 'Vietnamese',
-    zh_CN: 'Chinese (Simplified)',
-    zh_TW: 'Chinese (Traditional)',
+    'zh-CN': 'Chinese (Simplified)',
+    'zh-TW': 'Chinese (Traditional)',
 }
 
 // Init options: eg locale to show when we don't support the
@@ -62,8 +59,6 @@ const INIT_OPTIONS = {
     formats: {},
     warnOnMissingMessages: true,
 }
-
-let activeLocale
 
 // Internal store for tracking network
 // loading state
@@ -82,18 +77,30 @@ const setupI18n = (options = { withLocale: null }) => {
         const messagesFileUrl = MESSAGE_FILE_URL_TEMPLATE.replace('{locale}', _locale)
         // Download translation file for given locale/language
         return loadJson(messagesFileUrl).then((messages) => {
-            activeLocale = _locale
             addMessages(_locale, messages)
-            updateProfile('settings.language', _locale)
+            appSettings.set({
+                ...get(appSettings),
+                language: _locale
+            })
             isDownloading.set(false)
+
+            // If we have not loaded "en" make sure we have it as a backup language
+            // in case the chosen language does not have all the translations
+            if (_locale !== "en" && !hasLoadedLocale("en")) {
+                const messagesFileUrl = MESSAGE_FILE_URL_TEMPLATE.replace('{locale}', 'en')
+                loadJson(messagesFileUrl)
+                    .then((messages) => {
+                        addMessages("en", messages)
+                    })
+            }
         })
     }
 }
 
 const isLocaleLoaded = derived(
-    [isDownloading, dictionary],
-    ([$isDownloading, $dictionary]) =>
-        !$isDownloading && $dictionary[activeLocale] && Object.keys($dictionary[activeLocale]).length > 0
+    [isDownloading, dictionary, appSettings],
+    ([$isDownloading, $dictionary, $appSettings]) =>
+        !$isDownloading && $dictionary[$appSettings.language] && Object.keys($dictionary[$appSettings.language]).length > 0
 )
 
 const hasLoadedLocale = (locale: string) => {
@@ -123,13 +130,25 @@ function loadJson(url) {
     return fetch(url).then((response) => response.json())
 }
 
-const dir = derived(activeProfile, ($activeProfile) => {
-    if ($activeProfile) {
-        return $activeProfile.settings.language === 'ar' ? 'rtl' : 'ltr'
-    }
+const dir = derived(appSettings, (_appSettings) => {
+    // TODO: Implement RTL support
+    // return appSettings.language === 'ar' ? 'rtl' : 'ltr'
     return 'ltr'
 })
 
+
+const setLanguage = (item) => {
+    const locale = Object.keys(locales).find((key) => locales[key] === item.value)
+    appSettings.set({
+        ...get(appSettings),
+        language: locale,
+    })
+
+    setupI18n({ withLocale: locale })
+}
+
+const localize = get(_) as (string, values?) => string
+
 // We expose the svelte-i18n _ store so that our app has
 // a single API for i18n
-export { activeLocale, _, setupI18n, dir, isLocaleLoaded }
+export { _, setupI18n, dir, isLocaleLoaded, localize, setLanguage }

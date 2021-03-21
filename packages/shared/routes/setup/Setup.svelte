@@ -1,16 +1,19 @@
 <script lang="typescript">
-    import { Button, Checkbox, Illustration, Input, OnboardingLayout, Text } from 'shared/components'
-    import { developerMode } from 'shared/lib/app'
+    import { Button, ButtonCheckbox, Illustration, Input, OnboardingLayout, Text } from 'shared/components'
+    import { cleanupSignup, developerMode } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
+    import { hasOnlyWhitespaces } from 'shared/lib/helpers'
+    import { showAppNotification } from 'shared/lib/notifications'
     import { createProfile, disposeNewProfile, newProfile, profiles } from 'shared/lib/profile'
     import { SetupType } from 'shared/lib/typings/routes'
-    import { getStoragePath, initialise } from 'shared/lib/wallet'
+    import { getStoragePath, initialise, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
 
     export let locale
     export let mobile
     let error = ''
+    let busy = false
 
     const dispatch = createEventDispatcher()
 
@@ -18,33 +21,46 @@
     let isDeveloperProfile = true
     let profileName = get(newProfile)?.name ?? ''
 
-    const MAX_PROFILE_NAME_LENGTH = 20
+    $: isProfileNameValid = profileName && !hasOnlyWhitespaces(profileName)
 
-    function handleContinueClick(setupType) {
-        let profile
-        error = ''
+    async function handleContinueClick(setupType) {
+        if (profileName) {
+            let profile
+            error = ''
 
-        if (profileName.length > MAX_PROFILE_NAME_LENGTH) {
-            return (error = locale('error.profile.length', {
-                values: {
-                    length: MAX_PROFILE_NAME_LENGTH,
-                },
-            }))
+            if (profileName.length > MAX_PROFILE_NAME_LENGTH) {
+                return (error = locale('error.profile.length', {
+                    values: {
+                        length: MAX_PROFILE_NAME_LENGTH,
+                    },
+                }))
+            }
+
+            if (get(profiles).some((profile) => profile.name === profileName)) {
+                return (error = locale('error.profile.duplicate'))
+            }
+
+            profile = createProfile(profileName, isDeveloperProfile)
+
+            try {
+                busy = true
+                const userDataPath = await Electron.getUserDataPath()
+                initialise($newProfile.id, getStoragePath(userDataPath, $newProfile.name))
+
+                dispatch('next', { setupType })
+            } catch (err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
+                })
+            } finally {
+                busy = false
+            }
         }
-
-        if (get(profiles).some((profile) => profile.name === profileName)) {
-            return (error = locale('error.profile.duplicate'))
-        }
-
-        profile = createProfile(profileName, isDeveloperProfile)
-
-        return Electron.getUserDataPath().then((path) => {
-            initialise(profile.id, getStoragePath(path, profile.name))
-            dispatch('next', { setupType })
-        })
     }
 
     function handleBackClick() {
+        cleanupSignup()
         disposeNewProfile()
         dispatch('previous')
     }
@@ -53,24 +69,37 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick}>
+    <OnboardingLayout onBackClick={handleBackClick} {busy}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-4">{locale('views.setup.title')}</Text>
-            <Input {error} bind:value={profileName} placeholder={locale('views.setup.profile_name')} classes="w-full" autofocus />
+            <Text type="p" secondary classes="mb-10">{locale('views.setup.body1')}</Text>
+            <Text type="p" secondary classes="mb-10">{locale('views.setup.body2')}</Text>
+            <Input
+                {error}
+                bind:value={profileName}
+                placeholder={locale('views.setup.profileName')}
+                classes="w-full"
+                autofocus
+                disabled={busy}
+                submitHandler={() => handleContinueClick(SetupType.New)} />
             {#if $developerMode}
-                <Checkbox label={locale('general.developerProfile')} bind:checked={isDeveloperProfile} />
+                <ButtonCheckbox icon="dev" bind:value={isDeveloperProfile}>{locale('general.developerProfile')}</ButtonCheckbox>
             {/if}
         </div>
-        <div slot="leftpane__action" class="flex flex-row flex-wrap items-center space-x-4">
-            <Button secondary classes="flex-1" disabled={!profileName} onClick={() => handleContinueClick(SetupType.Import)}>
-                {locale('actions.import_wallet')}
+        <div slot="leftpane__action" class="flex flex-col">
+            <Button
+                secondary
+                classes="flex-1 mb-4"
+                disabled={!isProfileNameValid || busy}
+                onClick={() => handleContinueClick(SetupType.Import)}>
+                {locale('actions.importWallet')}
             </Button>
-            <Button classes="flex-1" disabled={!profileName} onClick={() => handleContinueClick(SetupType.New)}>
-                {locale('actions.create_wallet')}
+            <Button classes="flex-1" disabled={!isProfileNameValid || busy} onClick={() => handleContinueClick(SetupType.New)}>
+                {locale('actions.createWallet')}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center">
-            <Illustration illustration="setup-desktop" height="100%" width="auto" classes="h-full object-cover object-left" />
+        <div slot="rightpane" class="w-full h-full flex justify-center p-16 bg-pastel-green dark:bg-gray-900">
+            <Illustration illustration="setup-desktop" width="auto" height="100%" classes="object-cover"/>
         </div>
     </OnboardingLayout>
 {/if}
