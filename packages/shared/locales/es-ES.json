@@ -1,8 +1,8 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA tokens",
-            "body": "Firefly is the official wallet of IOTA."
+            "title": "Envía, recibe y gestiona tus tokens IOTA",
+            "body": "Firefly es la billetera oficial de IOTA."
         },
         "legal": {
             "title": "Privacy Policy & Terms of Service",
@@ -231,7 +231,7 @@
             },
             "proofOfWork": {
                 "title": "Prueba de trabajo",
-                "description": "Complete proof of work locally on your device or oursource to the node"
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Registro de errores",

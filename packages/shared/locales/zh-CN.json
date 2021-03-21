@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA tokens",
+            "title": "发送，接收&管理您的IOTA",
             "body": "Firefly is the official wallet of IOTA."
         },
         "legal": {
@@ -33,7 +33,7 @@
         },
         "setup": {
             "title": "设置您的钱包",
-            "body1": "You can create multiple user profiles to keep your tokens separate and improve privacy.",
+            "body1": "您可创建多个用户来分别存储您的token以确保安全。",
             "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "配置名称"
         },
@@ -65,7 +65,7 @@
         "backup": {
             "title": "请备份您的钱包",
             "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+            "body2": "请勿与任何人分享您的恢复密语。因为该密语可从任何地点接触到您的tokens。",
             "body3": "如果您丢失了恢复密语，您很可能会丢失您的资金。"
         },
         "recoveryPhrase": {
@@ -231,7 +231,7 @@
             },
             "proofOfWork": {
                 "title": "工作量证明",
-                "description": "Complete proof of work locally on your device or oursource to the node"
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "错误日志",
@@ -341,7 +341,7 @@
             "errorTitle": "Unable to remove {name}",
             "errorBody1": "To remove an account it must have 0 balance.",
             "errorBody2": "目前你的这个账户还有 {balance} 余额. 请把这些资金移动到另一个账户后重试。",
-            "errorBody3": "You cannot remove this account, you must have at least one."
+            "errorBody3": "您需要至少拥有一个账户后才可删除此账户。"
         },
         "addressHistory": {
             "title": "{name} 账户地址历史记录",
@@ -512,7 +512,7 @@
         "totalIn": "Total in",
         "totalOut": "Total out",
         "accounts": "帐户",
-        "myAccounts": "My accounts",
+        "myAccounts": "我的账户",
         "automaticNodeSelection": "自动选择节点",
         "manualNodeSelection": "手动选择节点",
         "profiles": "用户配置",
@@ -559,7 +559,7 @@
         "pinCodeUpdating": "正在更新 PIN 码...",
         "pinCodeSuccess": "PIN 码更新成功",
         "pinCodeFailed": "PIN 码更新失败",
-        "passwordStrength": "Password strength",
+        "passwordStrength": "密码强度",
         "passwordStrength0": "Bad",
         "passwordStrength1": "Poor",
         "passwordStrength2": "Weak",

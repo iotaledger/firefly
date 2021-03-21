@@ -1,11 +1,11 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA tokens",
-            "body": "Firefly is the official wallet of IOTA."
+            "title": "Skicka, ta emot och hantera dina IOTA",
+            "body": "Firefly är den officiella plånboken för IOTA."
         },
         "legal": {
-            "title": "Privacy Policy & Terms of Service",
+            "title": "Integritetspolicy och användarvillkor",
             "body": "Läs igenom sekretesspolicyn och användarvillkoren.",
             "privacyPolicy": {
                 "title": "Sekretesspolicy",
@@ -25,27 +25,27 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+            "checkbox": "Jag har läst och accepterar integritetspolicyn och användarvillkoren"
         },
         "appearance": {
             "title": "Utseende",
-            "body": "Choose your wallet’s theme."
+            "body": "Välj din plånboks tema."
         },
         "setup": {
             "title": "Ställ in din plånbok",
-            "body1": "You can create multiple user profiles to keep your tokens separate and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "body1": "Du kan skapa flera användarprofiler för att hålla dina tokens separata och förbättra sekretessen.",
+            "body2": "Låt oss börja med ditt första profilnamn. Du kan lägga till fler profiler senare.",
             "profileName": "Profilnamn"
         },
         "secure": {
-            "title": "Secure your wallet",
-            "body1": "Save and print the Recovery Kit PDF template.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
+            "title": "Säkra din plånbok",
+            "body1": "Spara och skriv ut PDF-mallen för återställningsbladet.",
+            "body2": "Om du fyller i återställningsbladet och lagrar det på ett säkert sätt, kommer du alltid att kunna återställa din plånbok."
         },
         "password": {
             "title": "Skapa ett lösenord",
-            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
-            "body2": "It is recommended that you write down your password in your Recovery Kit."
+            "body1": "Du behöver ett starkt lösenord för att skydda dina pengar. Använd en kombination av ord och undvik vanliga fraser, namn eller datum.",
+            "body2": "Det rekommenderas att du skriver ner ditt lösenord i ditt återställningsblad."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -54,50 +54,50 @@
         },
         "pin": {
             "title": "Ställ in PIN-kod",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
+            "body1": "Ange en 6-siffrig PIN-kod nedan. Du kommer bli ombedd att ange din PIN-kod för att komma åt din profil.",
+            "body2": "Använd endast nummer"
         },
         "confirmPin": {
             "title": "Verifiera din PIN-kod",
-            "body1": "Your PIN keeps your balance and transactions private.",
-            "body2": "Re-enter your PIN code to proceed. "
+            "body1": "Din PIN-kod håller ditt saldo och dina transaktioner privata.",
+            "body2": "Ange din PIN-kod igen för att fortsätta. "
         },
         "backup": {
             "title": "Säkerhetskopiera din plånbok",
-            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+            "body1": "Du kommer nu att visas en återställningsfras. Skriv ner det i ditt återställningsblad.",
+            "body2": "Dela inte din återställningsfras med någon. Den kan användas för att komma åt dina tokens från var som helst.",
             "body3": "Om du förlorar din återställningsfras kan du förlora dina pengar."
         },
         "recoveryPhrase": {
             "title": "Återställningsfras",
-            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-            "body2": "Keep this private and safely stored.",
-            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+            "body1": "I ditt återställningsblad, skriv ner orden i exakt den ordning som visas.",
+            "body2": "Håll detta privat och lagrat på ett säkert sätt.",
+            "body3": "Det är viktigt att ha en fysisk säkerhetskopia. Datorer kan krascha och filer kan bli korrupta.",
             "revealRecoveryPhrase": "Visa återställningsfras",
             "hideRecoveryPhrase": "Dölj återställningsfras"
         },
         "verifyRecoveryPhrase": {
             "title": "Verifiera återställningsfras",
-            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
-            "word": "Word",
-            "verified": "Recovery phrase verified",
-            "verifiedBody": "Remember to keep it private and safely stored."
+            "body": "Låt oss kontrollera att du skrev ner frasen korrekt. Välj orden i rätt ordning.",
+            "word": "Ord",
+            "verified": "Återställningsfras verifierad",
+            "verifiedBody": "Kom ihåg att hålla den privat och lagrad på ett säkert sätt."
         },
         "backupWallet": {
             "title": "Säkerhetskopiera till en Stronghold-fil",
-            "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
-            "body2": "Reasons why digital backups are important:",
-            "reason1": "Easily recover your wallet without typing in your recovery phrase",
-            "reason2": "Import your wallet to other devices",
-            "reason3": "Recover your full transaction history"
+            "body1": "Ange ditt lösenord för att säkerhetskopiera din plånbok till en Stronghold-fil. Ditt lösenord används för att kryptera säkerhetskopian.",
+            "body2": "Anledningar till varför digitala säkerhetskopior är viktiga:",
+            "reason1": "Enkelt att återställa din plånbok utan att skriva in din återställningsfras",
+            "reason2": "Importera din plånbok till andra enheter",
+            "reason3": "Återställ hela din transaktionshistorik"
         },
         "recoveryPhraseSaved": {
             "title": "Säkerhetskopiering lyckades",
             "body": "Du har säkerhetskopierat din plånbok till en Stronghold."
         },
         "congratulations": {
-            "title": "Wallet setup completed",
-            "body": "Your new wallet is ready to use."
+            "title": "Installationen av plånboken slutförd",
+            "body": "Din nya plånbok är redo att användas."
         },
         "import": {
             "title": "Importera en plånbok",
@@ -105,14 +105,14 @@
         },
         "importFromText": {
             "title": "Återställ din plånbok med en återställningsfras eller seed",
-            "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body2": "A recovery phrase is 24 words long (with spaces). This is used to recover an existing Firefly wallet.",
+            "body1": "En seed består av 81 tecken. Denna används för att återställa plånboken från en äldre Trinity-plånbok.",
+            "body2": "En återställningsfras är 24 ord lång. Denna används för att återställa en befintlig Firefly-plånbok.",
             "body3": "Ange din seed eller återställningsfras",
             "seedDetected": "81 tecken lång seed upptäckt",
-            "phraseDetected": "24 word recovery phrase detected"
+            "phraseDetected": "24 ord lång återställningsfras upptäckt"
         },
         "importFromFile": {
-            "title": "Restore your wallet using a backup file",
+            "title": "Återställ din plånbok från en säkerhetskopia",
             "body": "Importera en säkerhetskopia för att återställa din plånbok. Säkerhetskopior kan antingen vara en Stronghold (.stronghold) eller en Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
@@ -123,10 +123,10 @@
         "importSuccess": {
             "title": "Du har framgångsrikt återställt din säkerhetskopia",
             "body": "Du kan nu ställa in din nya plånbok.",
-            "seedvaultTitle": "Successfully imported",
-            "seedvaultBody": "Your password is correct, you can now continue.",
-            "strongholdTitle": "Successfully imported",
-            "strongholdBody": "Your password is correct, you can now continue."
+            "seedvaultTitle": "Importen lyckades",
+            "seedvaultBody": "Ditt lösenord är korrekt, du kan nu fortsätta.",
+            "strongholdTitle": "Importen lyckades",
+            "strongholdBody": "Ditt lösenord är korrekt, du kan nu fortsätta."
         },
         "migrate": {
             "title": "Migrera dina tillgångar",
@@ -151,19 +151,19 @@
             },
             "security": {
                 "title": "Säkerhet",
-                "description": "Change your password and adjust security-related settings"
+                "description": "Ändra ditt lösenord och anpassa efter säkerhetsinställningar"
             },
             "advancedSettings": {
                 "title": "Avancerade inställningar",
-                "description": "Tools and manual settings for technical users"
+                "description": "Verktyg och manuella inställningar för avancerade användare"
             },
             "helpAndInfo": {
                 "title": "Hjälp & Information",
-                "description": "Find the answer to a question or get help with an issue"
+                "description": "Hitta svaret på en fråga eller få hjälp med ett problem"
             },
             "profile": {
                 "title": "Profil",
-                "description": "Change your profile name or set an avatar"
+                "description": "Ändra ditt profilnamn eller välj en avatar"
             },
             "sync": {
                 "title": "Synkronisera konton",
@@ -179,27 +179,27 @@
             },
             "currency": {
                 "title": "Valuta",
-                "description": "Adjusts balance conversion and updates chart options"
+                "description": "Justerar saldokonvertering och uppdaterar alternativ för diagram"
             },
             "notifications": {
                 "title": "Aviseringar",
-                "description": "System notifications for transaction events"
+                "description": "Systemaviseringar för transaktionshändelser"
             },
             "exportStronghold": {
-                "title": "Export Backup",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
+                "title": "Exportera säkerhetskopian",
+                "description": "Exportera till en Stronghold-fil - en komplett krypterad säkerhetskopia av din plånbok och senaste transaktionshistorik."
             },
             "appLock": {
-                "title": "Automatic Lock",
-                "description": "Time elapsed before your wallet locks and logs you out"
+                "title": "Automatiskt lås",
+                "description": "Tid som förflutit innan plånboken låser och loggar ut dig"
             },
             "changePassword": {
                 "title": "Ändra lösenord",
-                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
+                "description": "Ditt lösenord används för att säkra din plånbok. Du måste använda ett starkt lösenord för att skydda dina pengar."
             },
             "changePincode": {
                 "title": "Ändra PIN-kod",
-                "description": "Your PIN keeps your balance and transactions private",
+                "description": "Din PIN-kod håller ditt saldo och dina transaktioner privata",
                 "currentPincode": "Nuvarande PIN-kod",
                 "newPincode": "Ny PIN-kod",
                 "confirmNewPincode": "Bekräfta ny PIN-kod",
@@ -211,64 +211,64 @@
             },
             "deleteProfile": {
                 "title": "Radera profil",
-                "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
+                "description": "Tar bort hela din plånbok, profil och transaktionshistorik. Se till att du har en säkerhetskopia."
             },
             "deepLinks": {
                 "title": "Hyperlänkar",
-                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
+                "description": "Fyll automatiskt i transaktionsdata i Firefly när du klickar på en iota:// länk"
             },
             "developerMode": {
                 "title": "Utvecklarläge",
-                "description": "Connect to testnets and other developer features"
+                "description": "Anslut till testnät och andra utvecklarfunktioner"
             },
             "nodeSettings": {
                 "title": "Nod-inställningar",
-                "description": "Select Manual to choose from the node list or connect to your own node"
+                "description": "Välj Manuell för att välja från nodlistan eller för att ansluta till din egen nod"
             },
             "configureNodeList": {
-                "title": "Select a node",
+                "title": "Välj en nod",
                 "description": ""
             },
             "proofOfWork": {
                 "title": "Proof of work",
-                "description": "Complete proof of work locally on your device or oursource to the node"
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Felmeddelanden",
-                "description": "View errors to debug an issue"
+                "description": "Visa felmeddelanden för att felsöka ett problem"
             },
             "diagnostics": {
                 "title": "Diagnostik",
-                "description": "View system and application information"
+                "description": "Visa system- och applikationsinformation"
             },
             "stateExport": {
                 "title": "Tillstånds-exportering",
-                "description": "Export your transaction history to a .csv file"
+                "description": "Exportera din transaktionshistorik till en .csv-fil"
             },
             "troubleshoot": {
                 "title": "Felsök",
-                "description": "Use the troubleshooting wizard to solve common problems"
+                "description": "Använd felsökningsguiden för att lösa vanliga problem"
             },
             "documentation": {
                 "title": "Dokumentation",
-                "description": "View the documentation for in depth explanations of how things work"
+                "description": "Se dokumentationen för utförliga förklaringar av hur saker och ting fungerar"
             },
             "faq": {
                 "title": "Vanliga frågor (FAQ)",
-                "title2": "Frequently Asked Questions",
-                "description": "View the FAQs to get help with a common problem or question"
+                "title2": "Vanliga frågor (FAQ)",
+                "description": "Se FAQ för att få hjälp med ett vanligt problem eller fråga"
             },
             "discord": {
                 "title": "Discord",
-                "description": "Get help from the IOTA community on Discord"
+                "description": "Få hjälp från IOTA-communityn på Discord"
             },
             "about": {
                 "title": "Om",
                 "description": ""
             },
             "reportAnIssue": {
-                "title": "Report an issue",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
+                "title": "Rapportera ett fel",
+                "description": "Rapportera ett fel till utvecklarna. Kolla igenom för att se till att det inte redan har rapporterats."
             }
         },
         "login": {
@@ -299,7 +299,7 @@
             "network": {
                 "networkOperational": "Nätverk i drift",
                 "networkDegraded": "Nätverk försämrat",
-                "networkDown": "Network Disconnected",
+                "networkDown": "Nätverk frånkopplat",
                 "status": "Status",
                 "messagesPerSecond": "Meddelanden per sekund",
                 "confirmationRate": "Bekräftade meddelanden"
@@ -334,14 +334,14 @@
             "notBackedUpDescription": "Du har inte säkerhetskopierat din Stronghold"
         },
         "deleteAccount": {
-            "title": "Remove {name}?",
-            "body": "You can add this account back later but you may lose your transaction history.",
-            "typePassword": "Type your wallet password to confirm.",
-            "deleteAccount": "Remove account",
-            "errorTitle": "Unable to remove {name}",
-            "errorBody1": "To remove an account it must have 0 balance.",
+            "title": "Ta bort {name}?",
+            "body": "Du kan lägga till detta konto senare men du kan förlora din transaktionshistorik.",
+            "typePassword": "Ange ditt lösenord för att bekräfta.",
+            "deleteAccount": "Ta bort konto",
+            "errorTitle": "Det gick inte att ta bort {name}",
+            "errorBody1": "För att ta bort ett konto måste det ha 0 saldo.",
             "errorBody2": "Du har för närvarande {balance} kvar på detta konto. Vänligen flytta dessa pengar till ett annat konto och försök igen.",
-            "errorBody3": "You cannot remove this account, you must have at least one."
+            "errorBody3": "Du kan inte ta bort detta konto, du måste ha minst ett."
         },
         "addressHistory": {
             "title": "{name} kontoadress-historik",
@@ -415,7 +415,7 @@
         "tryAgain": "Försök igen",
         "visitDiscord": "Besök Discord",
         "dragDrop": "Dra & Släpp",
-        "importExtentions": ".kdbx or .stronghold file",
+        "importExtentions": ".kdbx eller .stronghold fil",
         "chooseFile": "Välj en fil",
         "dropHere": "Släpp din fil här",
         "syncAll": "Synkronisera alla",
@@ -432,7 +432,7 @@
         "saveBackup": "Save Stronghold backup",
         "customizeAcount": "Hantera ditt konto",
         "viewAddressHistory": "Visa adresshistorik",
-        "deleteAccount": "Remove account",
+        "deleteAccount": "Ta bort konto",
         "max": "Max",
         "addNode": "Lägg till nod",
         "removeNode": "Ta bort nod",
@@ -646,7 +646,7 @@
             "mnemonic": "Mnemonin är inte giltig.",
             "seedTooShort": "Din seed ska vara 81 tecken, den {length, plural, one {är 1} other {är #}}",
             "seedCharacters": "Din seed ska innehålla tecknen A-Z eller 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
+            "phraseWordCount": "Det ska finnas 24 ord i din återställningsfras, just nu är det {length, plural, one {är 1} other {är #}}.",
             "phraseUnrecognizedWord": "Okänt ord \"{word}\" i din återställningsfras"
         }
     }
