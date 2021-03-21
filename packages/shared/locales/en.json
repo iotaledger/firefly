@@ -634,7 +634,8 @@
             "invalid": "Please enter a valid URL.",
             "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
             "duplicate": "This node has already been added.",
-            "unsynced": "The node you are trying to add is not synced."
+            "unsynced": "The node is not in sync.",
+            "noSynced": "No synced nodes are available."
         },
         "global": {
             "generic": "Something went wrong."
