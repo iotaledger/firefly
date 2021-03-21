@@ -69,7 +69,7 @@
 
         &:disabled {
             &,
-            + floating-label {
+            + floating-label.floating-active {
                 @apply pointer-events-none;
                 @apply opacity-50;
             }
