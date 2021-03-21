@@ -8,7 +8,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, isStrongholdLocked } from 'shared/lib/profile'
-    import { walletRoute } from 'shared/lib/router'
+    import { walletRoute, resetWalletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
         AccountMessage,
@@ -246,7 +246,7 @@
                         setTimeout(() => {
                             sendParams.set({ address: '', amount: 0, message: '' })
                             isTransferring.set(false)
-                            walletRoute.set(WalletRoutes.Init)
+                            resetWalletRoute()
                         }, 3000)
                     },
                     onError(err) {
@@ -315,7 +315,7 @@
                     setTimeout(() => {
                         sendParams.set({ address: '', amount: 0, message: '' })
                         isTransferring.set(false)
-                        walletRoute.set(WalletRoutes.Init)
+                        resetWalletRoute()
                     }, 3000)
                 },
                 onError(err) {
