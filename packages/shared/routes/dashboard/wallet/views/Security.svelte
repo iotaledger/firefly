@@ -14,7 +14,6 @@
     let lastBackupDate
     let lastBackupDateFormatted
     let color
-    let strongholdStatusMessage
 
     function setup() {
         const ap = get(activeProfile)
@@ -22,7 +21,6 @@
         lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
         lastBackupDateFormatted = diffDates(lastBackupDate, new Date())
         color = getBackupWarningColor(lastBackupDate)
-        strongholdStatusMessage = get(isStrongholdLocked) ? 'locked' : 'unlocked'
     }
 
     function handleSecurityTileClick(popupType) {
@@ -58,7 +56,7 @@
 </script>
 
 <div data-label="security" class="py-6 px-8 flex-grow flex flex-col">
-    <Text type="p" bold classes="mb-5">{locale('general.security')}</Text>
+    <Text type="h5" classes="mb-5">{locale('general.security')}</Text>
     <div class="grid grid-cols-2 gap-2">
         <!-- Firefly version -->
         <SecurityTile
@@ -77,9 +75,9 @@
         <!-- Stronghold status -->
         <SecurityTile
             title={locale('views.dashboard.security.strongholdStatus.title')}
-            message={locale(`views.dashboard.security.strongholdStatus.${strongholdStatusMessage}`)}
+            message={locale(`views.dashboard.security.strongholdStatus.${$isStrongholdLocked ? 'locked' : 'unlocked'}`)}
             color={$isStrongholdLocked ? 'blue' : 'yellow'}
-            icon="lock"
+            icon={$isStrongholdLocked ? 'lock' : 'unlock'}
             onClick={() => ($isStrongholdLocked ? handleSecurityTileClick('password') : lockStronghold())} />
         <!-- Stronghold backup -->
         <SecurityTile

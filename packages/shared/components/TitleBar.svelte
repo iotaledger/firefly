@@ -6,6 +6,7 @@
 
     onMount(async () => {
         os = await Electron.getOS()
+        document.body.classList.add(`platform-${os}`)
     })
 </script>
 
@@ -43,5 +44,7 @@
     {#if os === 'darwin'}
         <div style="-webkit-app-region: drag" class="w-full h-8 fixed left-20" />
     {/if}
-    <slot />
+    <div class={`fixed ${os === 'win32' ? 'top-10' : 'top-0'} left-0 right-0 bottom-0`}>
+        <slot />
+    </div>
 </div>

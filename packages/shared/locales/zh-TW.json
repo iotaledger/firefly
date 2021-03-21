@@ -42,8 +42,8 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body2": "Keep your PIN safe!"
+            "body1": "設置登錄 PIN 碼，以確保只有您可以登入錢包。",
+            "body2": "確保您的 PIN 碼安全！"
         },
         "pin": {
             "title": "設置 PIN 碼",
@@ -93,8 +93,8 @@
             "body1": "恢復短語長24個字。這用於恢復現有的Firefly錢包。",
             "body2": "種子由81個字符組成。這用於從較舊的Trinity錢包中恢復。",
             "body3": "輸入您的種子或恢復詞組",
-            "seedDetected": "81 character seed detected",
-            "phraseDetected": "24 word phrase detected"
+            "seedDetected": "檢測到81個字符的種子",
+            "phraseDetected": "檢測到24個單詞的助記詞"
         },
         "importFromFile": {
             "title": "從備份文件還原您的錢包",
@@ -311,13 +311,13 @@
         },
         "deleteAccount": {
             "title": "刪除 {name}?",
-            "body": "You will permanently lose your transaction history and maybe something else as well.",
+            "body": "您將永久失去您的交易歷史記錄，也許還會丟失其他內容。",
             "typePassword": "請輸入您的錢包密碼以確認。",
             "deleteAccount": "刪除帳號",
             "errorTitle": "無法刪除 {name}",
             "errorBody1": "您只能刪除餘額為 0 的帳號。",
             "errorBody2": "目前您在這個帳號仍擁有 {balance} 餘額。請將這些資金移至另一個帳號後再重試。",
-            "errorBody3": "You cannot delete this account, you must have at least one."
+            "errorBody3": "您無法刪除此帳戶，您必須至少擁有一個帳戶。"
         },
         "addressHistory": {
             "title": "{name} 帳號地址歷史紀錄",
@@ -325,13 +325,13 @@
         },
         "node": {
             "titleAdd": "增加節點",
-            "titleRemove": "Remove a node",
+            "titleRemove": "刪除節點",
             "titleDetails": "節點詳細資訊",
             "nodeAddress": "節點地址",
             "optionalUsername": "使用者名稱 (選填)",
             "optionalPassword": "密碼 (選填)",
             "setAsPrimaryNode": "設定為主要節點",
-            "removeConfirmation": "Are you sure you want to remove this node?"
+            "removeConfirmation": "您確定要刪除此節點嗎？"
         },
         "errorLog": {
             "title": "錯誤紀錄檔",
@@ -354,12 +354,12 @@
         }
     },
     "charts": {
-        "incomingMi": "Incoming {value} Mi",
-        "outgoingMi": "Outgoing {value} Mi",
+        "incomingMi": "傳入 {value} Mi",
+        "outgoingMi": "支出  {value} Mi",
         "portoflio": "資料夾",
         "token": "代幣",
-        "accountValue": "Account Value",
-        "accountActivity": "Account Activity"
+        "accountValue": "賬戶餘額",
+        "accountActivity": "啟用帳戶"
     },
     "actions": {
         "continue": "繼續",
@@ -406,12 +406,12 @@
         "updateFirefly": "更新 Firefly",
         "restartNow": "立即重新啟動",
         "saveBackup": "儲存備份",
-        "customizeAcount": "Customise account",
+        "customizeAcount": "自定義帳號",
         "viewAddressHistory": "檢視地址歷史紀錄",
         "deleteAccount": "刪除帳號",
         "max": "最大",
         "addNode": "增加節點",
-        "removeNode": "Remove node",
+        "removeNode": "移除節點",
         "hide": "隱藏",
         "hideOthers": "隱藏其他",
         "showAll": "全部顯示",
@@ -427,7 +427,7 @@
         "checkForUpdates": "檢查更新",
         "reportAnIssue": "回報問題",
         "clear": "清除",
-        "hideDetails": "Hide Details",
+        "hideDetails": "隱藏詳細資訊",
         "yes": "是",
         "no": "否",
         "reset": "重置"
@@ -451,7 +451,7 @@
         "moveFundsBetweenAccounts": "在帳戶間轉移資產",
         "sendTokensToAddress": "發送代幣至另一個地址",
         "manageAccount": "管理帳戶",
-        "customizeAcount": "Customize your account",
+        "customizeAcount": "自定義您的帳戶",
         "account": "帳戶",
         "sendingToAddress": "正傳送到地址",
         "amount": "金額",
@@ -497,13 +497,16 @@
         "help": "幫助",
         "you": "你",
         "messageId": "訊息編號：",
-        "inputAddress": "Input Address",
-        "receiveAddress": "Receive Address",
+        "inputAddress": "輸入地址",
+        "receiveAddress": "收款地址",
         "date": "日期",
+        "status": "狀態",
+        "confirmed": "Confirmed",
+        "pending": "Pending",
         "noAccounts": "您沒有帳戶，請創建一個。",
-        "loadingAccounts": "Loading, please wait...",
+        "loadingAccounts": "加載請稍候...",
         "addProfile": "添加個人檔案",
-        "noRecentHistory": "No recent history",
+        "noRecentHistory": "沒有最近的歷史紀錄",
         "transferSyncing": "同步帳號",
         "transferSelectingInputs": "選擇輸入",
         "transferRemainderAddress": "生成剩餘存款地址",
@@ -542,7 +545,7 @@
         "restartInstall": "重新安裝",
         "calcMinutesRemaining": "正在計算剩餘時間...",
         "minutesRemaining": "分鐘, 複數, 一 剩下一分鐘 其他 剩下一分鐘",
-        "copiedToClipboard": "Copied to clipboard"
+        "copiedToClipboard": "複製到剪貼簿"
     },
     "error": {
         "profile": {

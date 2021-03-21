@@ -42,8 +42,8 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body2": "Keep your PIN safe!"
+            "body1": "Stel 'n login PIN op om seker te maak dat net jy jou beursie kan toegang.",
+            "body2": "Hou jou PIN veilig!"
         },
         "pin": {
             "title": "Stel PIN-kode op",
@@ -268,7 +268,7 @@
                     "unlocked": "Oopgesluit"
                 },
                 "strongholdBackup": {
-                    "title": "Stronghold Backup",
+                    "title": "Stronghold Back-up",
                     "weeksAgo": "{weeks, plural, one {# week} other {# weke}} ago"
                 }
             },
@@ -311,7 +311,7 @@
         },
         "deleteAccount": {
             "title": "Verwyder {name}?",
-            "body": "You will permanently lose your transaction history and maybe something else as well.",
+            "body": "Jy sal jou transaksiegeskiedenis permanent verloor en miskien ook iets anders.",
             "typePassword": "Voer die wagwoord van jou beursie in om te bevestig.",
             "deleteAccount": "Verwyder rekening",
             "errorTitle": "Kan nie {name} verwyder nie",
@@ -406,7 +406,7 @@
         "updateFirefly": "Update Firefly",
         "restartNow": "Herlaai nou",
         "saveBackup": "Stoor backup",
-        "customizeAcount": "Customise account",
+        "customizeAcount": "Pas rekening aan",
         "viewAddressHistory": "Bekyk adresgeskiedenis",
         "deleteAccount": "Verwyder rekening",
         "max": "Max",
@@ -451,7 +451,7 @@
         "moveFundsBetweenAccounts": "Skuif fondse tussen jou rekeninge",
         "sendTokensToAddress": "Stuur tokens na 'n adres",
         "manageAccount": "Bestuur rekeninge",
-        "customizeAcount": "Customize your account",
+        "customizeAcount": "Pas jou rekening aan",
         "account": "Rekening",
         "sendingToAddress": "Oppad na adres",
         "amount": "Bedrag",
@@ -500,6 +500,9 @@
         "inputAddress": "Input adres",
         "receiveAddress": "Ontvangs Adres",
         "date": "Datum",
+        "status": "Status",
+        "confirmed": "Bevestig",
+        "pending": "Hangende",
         "noAccounts": "Jy het geen rekeninge nie, skep asseblief een.",
         "loadingAccounts": "Wag asseblief terwyl dit laai...",
         "addProfile": "Voeg profiel by",

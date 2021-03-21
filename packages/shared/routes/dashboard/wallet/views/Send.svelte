@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { convertUnits, Unit } from '@iota/unit-converter'
-    import { Address, Amount, Button, Dropdown, ProgressBar, Text } from 'shared/components'
+    import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
     import { sendParams } from 'shared/lib/app'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import type { TransferProgressEventType } from 'shared/lib/typings/events'
@@ -32,7 +32,7 @@
     let addressError = ''
 
     // This looks odd but sets a reactive dependency on amount, so when it changes the error will clear
-    $: amount, amountError = ''
+    $: amount, (amountError = '')
 
     let transferSteps: {
         [key in TransferProgressEventType | 'Complete']: {
@@ -107,6 +107,8 @@
                     amountError = locale('error.send.amountTooHigh')
                 } else if (amountAsI <= 0) {
                     amountError = locale('error.send.amountZero')
+                } else if (amountAsI < 1000000) {
+                    amountError = locale('error.send.sendingDust')
                 }
 
                 if (selectedSendType === SEND_TYPE.EXTERNAL) {
@@ -161,35 +163,62 @@
     })
 </script>
 
+<style type="text/scss">
+    button.active {
+        @apply relative;
+        &:after {
+            content: '';
+            @apply bg-blue-500;
+            @apply w-full;
+            @apply rounded;
+            @apply h-0.5;
+            @apply absolute;
+            @apply -bottom-2.5;
+            @apply left-0;
+        }
+    }
+</style>
+
 <div class="w-full h-full flex flex-col justify-between p-8">
     <div>
-        <div class="flex flex-row mb-6 space-x-4">
-            <button
-                on:click={() => handleSendTypeClick(SEND_TYPE.EXTERNAL)}
-                disabled={$isTransferring}
-                class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}>
-                <Text type="h5" disabled={SEND_TYPE.EXTERNAL !== selectedSendType || $isTransferring}>
-                    {locale(`general.${SEND_TYPE.EXTERNAL}`)}
-                </Text>
-            </button>
-            {#if $accounts.length > 1}
+        <div class="flex flex-row w-full justify-between mb-8">
+            <div class="flex flex-row space-x-4">
                 <button
-                    on:click={() => handleSendTypeClick(SEND_TYPE.INTERNAL)}
+                    on:click={() => handleSendTypeClick(SEND_TYPE.EXTERNAL)}
                     disabled={$isTransferring}
-                    class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}>
-                    <Text type="h5" disabled={SEND_TYPE.INTERNAL !== selectedSendType || $isTransferring}>
-                        {locale(`general.${SEND_TYPE.INTERNAL}`)}
+                    class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}
+                    class:active={SEND_TYPE.EXTERNAL === selectedSendType && !$isTransferring}>
+                    <Text classes="text-left" type="h5" secondary={SEND_TYPE.EXTERNAL !== selectedSendType || $isTransferring}>
+                        {locale(`general.${SEND_TYPE.EXTERNAL}`)}
                     </Text>
                 </button>
-            {/if}
+                {#if $accounts.length > 1}
+                    <button
+                        on:click={() => handleSendTypeClick(SEND_TYPE.INTERNAL)}
+                        disabled={$isTransferring}
+                        class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}
+                        class:active={SEND_TYPE.INTERNAL === selectedSendType && !$isTransferring}>
+                        <Text
+                            classes="text-left"
+                            type="h5"
+                            secondary={SEND_TYPE.INTERNAL !== selectedSendType || $isTransferring}>
+                            {locale(`general.${SEND_TYPE.INTERNAL}`)}
+                        </Text>
+                    </button>
+                {/if}
+            </div>
+            <button on:click={handleBackClick}>
+                <Icon icon="close" classes="text-gray-800 dark:text-white" />
+            </button>
         </div>
         <div class="w-full h-full flex flex-col justify-between">
             <div>
                 {#if !$account}
-                    <div class="block mb-5">
+                    <div class="block mb-6">
                         <Dropdown
-                            value={from?.label || ''}
+                            value={from?.label || null}
                             label={locale('general.from')}
+                            placeholder={locale('general.from')}
                             items={accountsDropdownItems}
                             onSelect={handleFromSelect}
                             disabled={$accounts.length === 1 || $isTransferring} />
@@ -202,13 +231,14 @@
                         bind:unit
                         maxClick={handleMaxClick}
                         {locale}
-                        classes="mb-2"
+                        classes="mb-6"
                         disabled={$isTransferring}
                         autofocus />
                     {#if selectedSendType === SEND_TYPE.INTERNAL}
                         <Dropdown
-                            value={to?.label || ''}
+                            value={to?.label || null}
                             label={locale('general.to')}
+                            placeholder={locale('general.to')}
                             items={accountsDropdownItems.filter((a) => from && a.id !== from.id)}
                             onSelect={handleToSelect}
                             disabled={$isTransferring || $accounts.length === 2} />
@@ -217,9 +247,9 @@
                             error={addressError}
                             bind:address={$sendParams.address}
                             {locale}
-                            label={locale('general.to')}
+                            label={locale('general.sendToAddress')}
                             disabled={$isTransferring}
-                            prefix={`${addressPrefix}...`} />
+                            placeholder={`${locale('general.sendToAddress')}\n${addressPrefix}...`} />
                     {/if}
                 </div>
             </div>

@@ -48,12 +48,12 @@
         <div slot="leftpane__action">
             <Button secondary classes="w-full mb-4" disabled={busy} onClick={handleSkipBackup}>
                 {#if skipping && busy}
-                    <Spinner busy={true} message={locale('general.creatingAccount')} classes="justify-center" />
+                    <Spinner busy={true} message={locale('general.creatingProfile')} classes="justify-center" />
                 {:else}{locale('actions.skipBackup')}{/if}
             </Button>
             <Button type="submit" form="backup-form" classes="w-full" disabled={!valid || busy}>
                 {#if !skipping && busy}
-                    <Spinner busy={true} message={locale('general.creatingAccount')} classes="justify-center" />
+                    <Spinner busy={true} message={locale('general.creatingProfile')} classes="justify-center" />
                 {:else}{locale('actions.saveBackup')}{/if}
             </Button>
         </div>

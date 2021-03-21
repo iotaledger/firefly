@@ -42,8 +42,8 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body2": "Keep your PIN safe!"
+            "body1": "Sett opp en PIN-kode for å sikre at bare du kan åpne lommeboken.",
+            "body2": "Hold PIN-koden din trygg!"
         },
         "pin": {
             "title": "Opprett PIN-kode",
@@ -311,7 +311,7 @@
         },
         "deleteAccount": {
             "title": "Slett {name}?",
-            "body": "You will permanently lose your transaction history and maybe something else as well.",
+            "body": "Du vil permanent miste transaksjonshistorien din, og kanskje noe annet også.",
             "typePassword": "Skriv inn passordet til lommeboken for å bekrefte.",
             "deleteAccount": "Slett konto",
             "errorTitle": "Kan ikke slette {name}",
@@ -406,7 +406,7 @@
         "updateFirefly": "Oppdater Firefly",
         "restartNow": "Start på nytt nå",
         "saveBackup": "Lagre sikkerhetskopi",
-        "customizeAcount": "Customise account",
+        "customizeAcount": "Tilpass konto",
         "viewAddressHistory": "Vis adressehistorikk",
         "deleteAccount": "Slett konto",
         "max": "Maks",
@@ -451,7 +451,7 @@
         "moveFundsBetweenAccounts": "Flytt midler mellom kontoer",
         "sendTokensToAddress": "Send tokens til en adresse",
         "manageAccount": "Administrer konto",
-        "customizeAcount": "Customize your account",
+        "customizeAcount": "Tilpass din konto",
         "account": "Konto",
         "sendingToAddress": "Sender til adresse",
         "amount": "Beløp",
@@ -500,6 +500,9 @@
         "inputAddress": "Oppgi adresse",
         "receiveAddress": "Mottaksadresse",
         "date": "Dato",
+        "status": "Status",
+        "confirmed": "Confirmed",
+        "pending": "Pending",
         "noAccounts": "Du har ingen kontoer, vennligst opprett en.",
         "loadingAccounts": "Laster inn, vennligst vent...",
         "addProfile": "Legg til profil",
