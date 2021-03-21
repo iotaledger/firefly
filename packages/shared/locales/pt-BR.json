@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Envie, Receba e Gerencie seu IOTA",
+            "title": "Envie, Receba e Gerencie sua IOTA",
             "body": "Firefly é uma carteira IOTA segura e fácil de usar."
         },
         "legal": {
@@ -51,7 +51,7 @@
             "body2": "Você pode usar apenas números."
         },
         "confirmPin": {
-            "title": "Digite seu código PIN",
+            "title": "Verifique seu código PIN",
             "body": "Insira novamente seu PIN para prosseguir."
         },
         "backup": {
@@ -203,7 +203,7 @@
                 "description": ""
             },
             "nodeSettings": {
-                "title": "Configurações de Nó",
+                "title": "Configurações do servidor",
                 "description": ""
             },
             "configureNodeList": {
@@ -311,7 +311,7 @@
         },
         "deleteAccount": {
             "title": "Excluir {name}?",
-            "body": "You will permanently lose your transaction history and maybe something else as well.",
+            "body": "Você perderá permanentemente seu histórico de transações e talvez algo a mais também.",
             "typePassword": "Digite a senha da sua carteira para confirmar.",
             "deleteAccount": "Excluir conta",
             "errorTitle": "Não foi possível excluir {name}",
@@ -396,12 +396,12 @@
         "dropHere": "Solte seu arquivo aqui",
         "syncAll": "Sincronizar tudo",
         "export": "Exportar",
-        "exportNewStronghold": "Exportar uma nova fortaleza",
+        "exportNewStronghold": "Exportar uma nova Stronghold",
         "enableDeepLinks": "Ativar links profundos",
         "enableDeveloperMode": "Ativar modo de desenvolvedor",
         "enableSystemNotifications": "Ativar notificações do sistema",
         "exportState": "Exportar estado",
-        "outsourceProofOfWork": "Prova de origem de trabalho",
+        "outsourceProofOfWork": "Terceirizar prova de trabalho",
         "unlock": "Desbloquear",
         "updateFirefly": "Atualizar a Firefly",
         "restartNow": "Reiniciar agora",
@@ -444,14 +444,14 @@
         "sent": "Enviado",
         "received": "Recebido",
         "sendPayment": "Enviar pagamento",
-        "moveFunds": "Mover fundos",
+        "moveFunds": "Transferir fundos",
         "sendFunds": "Enviar fundos",
         "sendToAddress": "Enviar para um endereço",
         "scanQrOrPaste": "Escaneie um código QR ou cole um endereço",
         "moveFundsBetweenAccounts": "Mover fundos entre contas",
         "sendTokensToAddress": "Enviar tokens para um endereço",
         "manageAccount": "Gerenciar Conta",
-        "customizeAcount": "Customize your account",
+        "customizeAcount": "Customize sua conta",
         "account": "Conta",
         "sendingToAddress": "Enviando para o endereço",
         "amount": "Quantidade",
@@ -479,10 +479,10 @@
         "totalBalance": "Saldo Total",
         "accountBalance": "Saldo da Conta",
         "incoming": "Recebendo",
-        "outgoing": "Efetuadas",
+        "outgoing": "Enviando",
         "accounts": "Contas",
-        "automaticNodeSelection": "Seleção automática de nó",
-        "manualNodeSelection": "Seleção manual de nó",
+        "automaticNodeSelection": "Seleção automática de servidor",
+        "manualNodeSelection": "Seleção manual do servidor",
         "profiles": "Perfis",
         "developerProfile": "Perfil do Desenvolvedor",
         "dev": "Dev",
@@ -500,6 +500,9 @@
         "inputAddress": "Endereço de Entrada",
         "receiveAddress": "Endereço de Recebimento",
         "date": "Data",
+        "status": "Status",
+        "confirmed": "Confirmado",
+        "pending": "Pendente",
         "noAccounts": "Você não possui contas, por favor, crie uma.",
         "loadingAccounts": "Carregando, por favor aguarde...",
         "addProfile": "Adicionar Perfil",

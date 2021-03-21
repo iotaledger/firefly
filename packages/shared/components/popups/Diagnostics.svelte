@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
+    import { appSettings } from 'shared/lib/appSettings'
     import { versionDetails } from 'shared/lib/appUpdater'
     import { Electron } from 'shared/lib/electron'
     import { activeProfile } from 'shared/lib/profile'
@@ -22,7 +23,7 @@
     if ($activeProfile) {
         appVars.push({
             label: 'views.settings.language.title',
-            value: $activeProfile.settings.language,
+            value: $appSettings.language,
         })
         appVars.push({
             label: 'views.settings.currency.title',
@@ -46,7 +47,7 @@
     Electron.getDiagnostics().then((values) => (contentSystem = combineValues(values)))
 
     const handleCopyClick = () => {
-        setClipboard(contentSystem)
+        setClipboard(contentApp + '\r\n' + contentSystem)
     }
 </script>
 

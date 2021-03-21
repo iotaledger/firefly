@@ -1,5 +1,9 @@
 import Chart from 'chart.js'
+import tailwindConfig from 'shared/tailwind.config.js'
+import resolveConfig from 'tailwindcss/resolveConfig'
 
-Chart.defaults.global.defaultFontFamily = 'DM Sans'
-Chart.defaults.global.defaultFontSize = 10
-Chart.defaults.global.defaultFontColor = '#9AADCE'
+const fullConfig = resolveConfig(tailwindConfig)
+
+Chart.defaults.global.defaultFontFamily = 'Inter'
+Chart.defaults.global.defaultFontSize = 9
+Chart.defaults.global.defaultFontColor = fullConfig.theme.colors.gray['500']

@@ -42,8 +42,8 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body2": "Keep your PIN safe!"
+            "body1": "Stel een inlog pincode in om er zeker van te zijn dat u alleen uw portemonnee kunt invoeren.",
+            "body2": "Houd je pincode veilig!"
         },
         "pin": {
             "title": "PIN-code instellen",
@@ -311,7 +311,7 @@
         },
         "deleteAccount": {
             "title": "{name} verwijderen?",
-            "body": "You will permanently lose your transaction history and maybe something else as well.",
+            "body": "U verliest permanent uw transactiegeschiedenis en misschien ook nog iets anders.",
             "typePassword": "Voer je wallet wachtwoord in om te bevestigen.",
             "deleteAccount": "Account verwijderen",
             "errorTitle": "Kan {name} niet verwijderen",
@@ -406,7 +406,7 @@
         "updateFirefly": "Firefly bijwerken",
         "restartNow": "Herstart nu",
         "saveBackup": "Back-up opslaan",
-        "customizeAcount": "Customise account",
+        "customizeAcount": "Account aanpassen",
         "viewAddressHistory": "Bekijk adresgeschiedenis",
         "deleteAccount": "Account verwijderen",
         "max": "Max",
@@ -451,7 +451,7 @@
         "moveFundsBetweenAccounts": "Geld tussen rekeningen verplaatsen",
         "sendTokensToAddress": "Verstuur tokens naar een adres",
         "manageAccount": "Account beheren",
-        "customizeAcount": "Customize your account",
+        "customizeAcount": "Pas je account aan",
         "account": "Rekening",
         "sendingToAddress": "Naar een adres sturen",
         "amount": "Aantal",
@@ -500,6 +500,9 @@
         "inputAddress": "Voer adres in",
         "receiveAddress": "Adres van de ontvanger",
         "date": "Datum",
+        "status": "Status",
+        "confirmed": "Bevestigd",
+        "pending": "Lopende",
         "noAccounts": "Je hebt geen accounts, maak er een aan.",
         "loadingAccounts": "Laden, even geduld...",
         "addProfile": "Profiel Toevoegen",

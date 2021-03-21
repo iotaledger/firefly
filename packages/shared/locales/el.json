@@ -42,8 +42,8 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body2": "Keep your PIN safe!"
+            "body1": "Δημιουργήστε ένα PIN σύνδεσης για να βεβαιωθείτε ότι μόνο εσείς μπορείτε να έχετε πρόσβαση στο πορτοφόλι σας.",
+            "body2": "Κρατήστε το PIN σας ασφαλές!"
         },
         "pin": {
             "title": "Δημιουργία κωδικού PIN",
@@ -406,7 +406,7 @@
         "updateFirefly": "Ενημέρωση Firefly",
         "restartNow": "Επανεκκίνηση τώρα",
         "saveBackup": "Αποθήκευση αντιγράφου ασφαλείας",
-        "customizeAcount": "Customise account",
+        "customizeAcount": "Προσαρμογή λογαριασμού",
         "viewAddressHistory": "Προβολή ιστορικού διευθύνσεων",
         "deleteAccount": "Διαγραφή λογαριασμού",
         "max": "Μέγιστο",
@@ -451,7 +451,7 @@
         "moveFundsBetweenAccounts": "Μετακίνηση κεφαλαίων μεταξύ λογαριασμών",
         "sendTokensToAddress": "Αποστολή κεφαλαίων σε μια διεύθυνση",
         "manageAccount": "Διαχείριση λογαριασμού",
-        "customizeAcount": "Customize your account",
+        "customizeAcount": "Προσαρμόστε το λογαριασμό σας",
         "account": "Λογαριασμός",
         "sendingToAddress": "Αποστολή σε διεύθυνση",
         "amount": "Ποσό",
@@ -500,6 +500,9 @@
         "inputAddress": "Εισαγωγή Διεύθυνσης",
         "receiveAddress": "Διεύθυνση Λήψης",
         "date": "Ημερομηνία",
+        "status": "Κατάσταση",
+        "confirmed": "Επιβεβαιώθηκε",
+        "pending": "Εκκρεμεί",
         "noAccounts": "Δεν έχετε λογαριασμούς, παρακαλώ δημιουργήστε έναν.",
         "loadingAccounts": "Φορτώνεται, παρακαλώ περιμένετε...",
         "addProfile": "Προσθήκη Προφίλ",

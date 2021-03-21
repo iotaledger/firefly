@@ -242,6 +242,9 @@ const handleError = (type: ErrorType | ValidatorErrorTypes, error: string): { ty
         if (error.includes('message history and balance')) {
             return ('error.account.empty')
         }
+        if (error.includes('No synced node')) {
+            return ('error.node.noSynced')
+        }
 
         return getErrorMessage(type)
     }

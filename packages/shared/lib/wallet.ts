@@ -609,27 +609,52 @@ export const replaceMessage = (accountId: string, messageId: string, newMessage:
 };
 
 /**
- * Gets latest messages
+ * Gets the account messages. Appends account index and sort the message list.
  *
- * @method getLatestMessages
+ * @method getAccountMessages
+ *
+ * @param {WalletAccount} accounts
+ *
+ * @returns {AccountMessage[]}
+ */
+export const getAccountMessages = (account: WalletAccount): AccountMessage[] => {
+    const messages: {
+        [key: string]: AccountMessage
+    } = {};
+
+    account.messages.forEach((message) => {
+        messages[message.id] = Object.assign<
+            AccountMessage,
+            Message,
+            Partial<AccountMessage>
+        >(
+            {} as AccountMessage,
+            message,
+            { account: account.index });
+    });
+
+    return Object.values(messages)
+        .sort((a, b) => {
+            return <any>new Date(b.timestamp) - <any>new Date(a.timestamp)
+        })
+}
+
+/**
+ * Gets a slice of all transactions (on all accounts). Appends account index and sort the message list.
+ *
+ * @method getTransactions
  *
  * @param {WalletAccount} accounts
  * @param {number} [count]
  *
  * @returns {AccountMessage[]}
  */
-export const getLatestMessages = (accounts: WalletAccount[], count = 10): AccountMessage[] => {
+export const getTransactions = (accounts: WalletAccount[], count = 10): AccountMessage[] => {
     const messages: {
         [key: string]: AccountMessage
     } = {};
 
-    const addresses: string[] = [];
-
     accounts.forEach((account) => {
-        account.addresses.forEach((address: Address) => {
-            addresses.push(address.address);
-        })
-
         account.messages.forEach((message) => {
 
             if (message.id in messages) {
@@ -858,7 +883,7 @@ export const updateAccountsBalanceEquiv = (): void => {
 /**
  * Gets balance history for each account in market data timestamps
  *
- * @method getLatestMessages
+ * @method getAccountsBalanceHistory
  *
  * @param {Account} accounts
  * @param {PriceData} [priceData]
@@ -937,7 +962,7 @@ export const getAccountsBalanceHistory = (accounts: Account[], priceData: PriceD
 /**
  * Gets balance history for all accounts combined in market data timestamps
  *
- * @method getLatestMessages
+ * @method getWalletBalanceHistory
  *
  * @param {Account} accounts
  * @param {PriceData} [priceData]
