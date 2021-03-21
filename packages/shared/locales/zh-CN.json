@@ -42,8 +42,8 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body2": "Keep your PIN safe!"
+            "body1": "设置登录 PIN 码，确保只有您能访问您的钱包。",
+            "body2": "请安全保管您的 PIN 码！"
         },
         "pin": {
             "title": "设置PIN码",
@@ -93,8 +93,8 @@
             "body1": "恢复密语长度为24个单词。这个短语可用于恢复已有的Firefly钱包。",
             "body2": "种子由81个字符组成。它用于从旧的 Trinity 钱包中恢复。",
             "body3": "请输入您的种子或恢复密语",
-            "seedDetected": "81 character seed detected",
-            "phraseDetected": "24 word phrase detected"
+            "seedDetected": "检测到81个字符种子",
+            "phraseDetected": "检测到24个单词"
         },
         "importFromFile": {
             "title": "从备份文件恢复你的钱包",
@@ -311,13 +311,13 @@
         },
         "deleteAccount": {
             "title": "删除{name}?",
-            "body": "You will permanently lose your transaction history and maybe something else as well.",
+            "body": "您将永久丢失您的交易历史，也许还会丢失一些其他东西。",
             "typePassword": "请输入您的钱包密码进行确认。",
             "deleteAccount": "删除账户",
             "errorTitle": "无法删除 {name}",
             "errorBody1": "你只能删除余额为0的账户",
             "errorBody2": "目前你的这个账户还有 {balance} 余额. 请把这些资金移动到另一个账户后重试。",
-            "errorBody3": "You cannot delete this account, you must have at least one."
+            "errorBody3": "您不能删除这个账户，您必须至少有一个账户。"
         },
         "addressHistory": {
             "title": "{name} 账户地址历史记录",
@@ -325,13 +325,13 @@
         },
         "node": {
             "titleAdd": "添加节点",
-            "titleRemove": "Remove a node",
+            "titleRemove": "删除节点",
             "titleDetails": "节点详细信息",
             "nodeAddress": "节点地址",
             "optionalUsername": "用户名(选填)",
             "optionalPassword": "密码 (选填)",
             "setAsPrimaryNode": "设为主节点",
-            "removeConfirmation": "Are you sure you want to remove this node?"
+            "removeConfirmation": "您确定要删除此节点吗？"
         },
         "errorLog": {
             "title": "错误日志",
@@ -354,12 +354,12 @@
         }
     },
     "charts": {
-        "incomingMi": "Incoming {value} Mi",
-        "outgoingMi": "Outgoing {value} Mi",
+        "incomingMi": "传入 {value} Mi",
+        "outgoingMi": "发送 {value} Mi",
         "portoflio": "资产组合",
         "token": "代币",
-        "accountValue": "Account Value",
-        "accountActivity": "Account Activity"
+        "accountValue": "账户价值",
+        "accountActivity": "帐户活动"
     },
     "actions": {
         "continue": "继续",
@@ -406,12 +406,12 @@
         "updateFirefly": "更新Firefly",
         "restartNow": "立即重启",
         "saveBackup": "保存备份",
-        "customizeAcount": "Customise account",
+        "customizeAcount": "自定义账户",
         "viewAddressHistory": "显示地址历史记录",
         "deleteAccount": "删除账户",
         "max": "最大",
         "addNode": "添加节点",
-        "removeNode": "Remove node",
+        "removeNode": "删除节点",
         "hide": "隐藏",
         "hideOthers": "隐藏其它",
         "showAll": "显示全部",
@@ -427,7 +427,7 @@
         "checkForUpdates": "检查更新",
         "reportAnIssue": "反馈问题",
         "clear": "清除",
-        "hideDetails": "Hide Details",
+        "hideDetails": "隐藏详情",
         "yes": "是",
         "no": "否",
         "reset": "重置"
@@ -451,7 +451,7 @@
         "moveFundsBetweenAccounts": "账户之间的资金转移",
         "sendTokensToAddress": "发送Token到另一个地址",
         "manageAccount": "账户管理",
-        "customizeAcount": "Customize your account",
+        "customizeAcount": "自定义账户",
         "account": "账号",
         "sendingToAddress": "发送至地址",
         "amount": "金额",
@@ -497,13 +497,16 @@
         "help": "帮助",
         "you": "您",
         "messageId": "消息 ID",
-        "inputAddress": "Input Address",
-        "receiveAddress": "Receive Address",
+        "inputAddress": "输入地址",
+        "receiveAddress": "接收地址",
         "date": "日期",
+        "status": "状态",
+        "confirmed": "已确认",
+        "pending": "正在处理",
         "noAccounts": "您没有帐户，请创建一个。",
-        "loadingAccounts": "Loading, please wait...",
+        "loadingAccounts": "加载中，请稍候...",
         "addProfile": "添加个人档案",
-        "noRecentHistory": "No recent history",
+        "noRecentHistory": "没有最近的历史记录",
         "transferSyncing": "正在同步账户",
         "transferSelectingInputs": "选择输入",
         "transferRemainderAddress": "生成剩余的存款地址",
@@ -542,7 +545,7 @@
         "restartInstall": "重新启动后安装",
         "calcMinutesRemaining": "正在计算剩余分钟...",
         "minutesRemaining": "{minutes, plural, one {还剩最后一分钟...} other {还剩余 # 分钟...}}",
-        "copiedToClipboard": "Copied to clipboard"
+        "copiedToClipboard": "复制到剪贴板"
     },
     "error": {
         "profile": {

@@ -42,8 +42,8 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body2": "Keep your PIN safe!"
+            "body1": "Establiu un PIN d'accés per assegurar-vos de què només vostè pot entrar a la seva cartera.",
+            "body2": "Guardeu el vostre PIN en un lloc segur!"
         },
         "pin": {
             "title": "Configureu el codi PIN",
@@ -331,7 +331,7 @@
             "optionalUsername": "Nom d'usuari (opcional)",
             "optionalPassword": "Contrasenya (opcional)",
             "setAsPrimaryNode": "Estableix com a node principal",
-            "removeConfirmation": "Are you sure you want to remove this node?"
+            "removeConfirmation": "Esteu segur que voleu eliminar aquest node?"
         },
         "errorLog": {
             "title": "Registre d'errors",
@@ -406,7 +406,7 @@
         "updateFirefly": "Actualitza Firefly",
         "restartNow": "Reiniciar ara",
         "saveBackup": "Desa la còpia de seguretat",
-        "customizeAcount": "Customise account",
+        "customizeAcount": "Personalitza el compte",
         "viewAddressHistory": "Veure l'historial d'adreces",
         "deleteAccount": "Elimina el compte",
         "max": "Màxim",
@@ -451,7 +451,7 @@
         "moveFundsBetweenAccounts": "Moure fons entre comptes",
         "sendTokensToAddress": "Enviar fitxes a una adreça",
         "manageAccount": "Gestiona el compte",
-        "customizeAcount": "Customize your account",
+        "customizeAcount": "Personalitzeu el vostre compte",
         "account": "Compte",
         "sendingToAddress": "Enviant a l’adreça",
         "amount": "Quantitat",
@@ -500,6 +500,9 @@
         "inputAddress": "Adreça d’entrada",
         "receiveAddress": "Adreça de recepció",
         "date": "Data",
+        "status": "Estat",
+        "confirmed": "Confirmat",
+        "pending": "Pendent",
         "noAccounts": "No teniu comptes, creeu-ne un.",
         "loadingAccounts": "Carregant, espereu...",
         "addProfile": "Afegeix un perfil",
@@ -542,7 +545,7 @@
         "restartInstall": "Reinicieu per instal·lar",
         "calcMinutesRemaining": "S'estan calculant els minuts restants...",
         "minutesRemaining": "{minutes, plural, one {1 minut restant} other {# minuts restants}}",
-        "copiedToClipboard": "Copied to clipboard"
+        "copiedToClipboard": "Copiat al porta-retalls"
     },
     "error": {
         "profile": {
