@@ -1,6 +1,8 @@
 <script lang="typescript">
     import { Electron } from 'shared/lib/electron'
     import { popupState } from 'shared/lib/popup'
+    import { dashboardRoute } from 'shared/lib/router'
+    import { Tabs } from 'shared/lib/typings/routes'
     import { wallet } from 'shared/lib/wallet'
     import { onMount } from 'svelte'
 
@@ -8,6 +10,7 @@
 
     $: showingDashboard = $accountsLoaded && $popupState.type !== 'busy'
     $: showingPopup = $popupState.active && $popupState.type !== 'busy'
+    $: showingSettings = $dashboardRoute === Tabs.Settings
 
     let os = ''
 
@@ -20,7 +23,7 @@
 <div class="h-full w-full">
     {#if os === 'win32'}
         <nav
-            class={`fixed z-10 left-0 right-0 flex flex-row h-12 justify-between ${showingDashboard ? 'bg-gray-50' : 'bg-white'} dark:bg-gray-900`}
+            class={`fixed z-10 left-0 right-0 flex flex-row h-12 justify-between ${showingDashboard && !showingSettings ? 'bg-gray-50' : 'bg-white'} dark:bg-gray-900`}
             style="-webkit-app-region: drag">
             <button
                 on:click={() => Electron.popupMenu()}

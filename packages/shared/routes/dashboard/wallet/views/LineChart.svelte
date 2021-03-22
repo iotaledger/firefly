@@ -31,6 +31,8 @@
     $: labels = chartData.labels
     $: color = $selectedAccount ? $selectedAccount.color : 'blue'
 
+    const hasTitleBar = document.body.classList.contains(`platform-win32`)
+
     /** Chart data */
     $: {
         if (locale || $selectedChart || $chartCurrency || $chartTimeframe || $walletBalanceHistory || $selectedAccount) {
@@ -107,7 +109,7 @@
             <span>
                 <Dropdown small value={$chartCurrency.toUpperCase()} items={currencyDropdown} onSelect={handleCurrencySelect} />
             </span>
-            <span>
+            <span>  
                 <Dropdown
                     small
                     value={TIMEFRAME_MAP[$chartTimeframe]}
@@ -124,5 +126,5 @@
         {color}
         {xMaxTicks}
         formatYAxis={(value) => formatCurrencyValue(value, $chartCurrency, undefined, undefined, 5)}
-        inlineStyle={$selectedAccount && 'height: calc(50vh - 150px);'} />
+        inlineStyle={$selectedAccount && `height: calc(50vh - ${hasTitleBar ? '190' : '150'}px);`} />
 </div>
