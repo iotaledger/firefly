@@ -1640,7 +1640,7 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "0.5.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?rev=b3c6016b5f6bb28701cfed7a8ee768bbf476a8cc#b3c6016b5f6bb28701cfed7a8ee768bbf476a8cc"
+source = "git+https://github.com/iotaledger/iota.rs?rev=fb672067425ba8412e595eae52f52cf7236da220#fb672067425ba8412e595eae52f52cf7236da220"
 dependencies = [
  "async-trait",
  "bee-common 0.3.1-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
@@ -1691,12 +1691,12 @@ dependencies = [
 [[package]]
 name = "iota-core"
 version = "0.2.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?rev=b3c6016b5f6bb28701cfed7a8ee768bbf476a8cc#b3c6016b5f6bb28701cfed7a8ee768bbf476a8cc"
+source = "git+https://github.com/iotaledger/iota.rs?rev=fb672067425ba8412e595eae52f52cf7236da220#fb672067425ba8412e595eae52f52cf7236da220"
 dependencies = [
  "bee-common 0.3.1-alpha (git+https://github.com/iotaledger/bee.git?rev=c42171ff33c80cc2efb183e244dc79b7f58d9ac4)",
  "bee-message 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=217b5944b5e17fe5800955d212cfe8dddd992482)",
  "bee-pow 0.1.0-alpha (git+https://github.com/iotaledger/bee.git?rev=217b5944b5e17fe5800955d212cfe8dddd992482)",
- "iota-client 0.5.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?rev=b3c6016b5f6bb28701cfed7a8ee768bbf476a8cc)",
+ "iota-client 0.5.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?rev=fb672067425ba8412e595eae52f52cf7236da220)",
 ]
 
 [[package]]
@@ -1779,7 +1779,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=fix/client-management#9381c4c55d575a6f4609ede0d46c0fe40316ff34"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#593a20d55bcaec6645e5c36e0cd711bea92f69ed"
 dependencies = [
  "async-trait",
  "backtrace",
@@ -1788,7 +1788,7 @@ dependencies = [
  "futures",
  "getset",
  "hex",
- "iota-core 0.2.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?rev=b3c6016b5f6bb28701cfed7a8ee768bbf476a8cc)",
+ "iota-core 0.2.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?rev=fb672067425ba8412e595eae52f52cf7236da220)",
  "iota-crypto 0.3.0 (git+https://github.com/iotaledger/crypto.rs?rev=b849861b86c3f7357b7477de4253b7352b363627)",
  "iota-stronghold",
  "log",
