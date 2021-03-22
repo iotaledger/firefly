@@ -1,6 +1,8 @@
 import { convertUnits, Unit } from '@iota/unit-converter'
+import { convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
 import { localize } from 'shared/lib/i18n'
 import type { WalletAccount } from 'shared/lib/wallet'
+import { wallet } from 'shared/lib/wallet'
 import { date as i18nDate } from 'svelte-i18n'
 import { derived, get, writable } from 'svelte/store'
 import { CurrencyTypes, formatCurrencyValue } from './currency'
@@ -53,6 +55,11 @@ const fiatHistoryData = derived([priceData, chartCurrency, chartTimeframe], ([$p
     return $priceData?.[$chartCurrency]?.[$chartTimeframe]?.slice().sort((a, b) => a[0] - b[0]) ?? []
 })
 
+const walletBalance = derived(wallet, $wallet => {
+    const { balanceOverview } = $wallet
+    return get(balanceOverview)?.balanceRaw
+})
+
 export function getPortfolioData(balanceHistory: BalanceHistory): ChartData {
     let chartData: ChartData = { labels: [], data: [], tooltips: [] }
     const _fiatHistoryData = get(fiatHistoryData)
@@ -66,6 +73,11 @@ export function getPortfolioData(balanceHistory: BalanceHistory): ChartData {
         },
         { labels: [], data: [], tooltips: [] }
     )
+    // add current balance
+    const currentBalanceData = getCurrentBalancedata(get(walletBalance))
+    chartData.data.push(currentBalanceData.data)
+    chartData.labels.push(currentBalanceData.label)
+    chartData.tooltips.push(currentBalanceData.tooltip)
     return chartData
 }
 
@@ -84,7 +96,7 @@ export function getTokenData(): ChartData {
     return chartData
 }
 
-export function getAccountValueData(balanceHistory: BalanceHistory): ChartData {
+export function getAccountValueData(balanceHistory: BalanceHistory, accountBalance: number): ChartData {
     let chartData: ChartData = { labels: [], data: [], tooltips: [] }
     const _fiatHistoryData = get(fiatHistoryData)
     chartData = balanceHistory[get(chartTimeframe)].reduce(
@@ -97,6 +109,11 @@ export function getAccountValueData(balanceHistory: BalanceHistory): ChartData {
         },
         { labels: [], data: [], tooltips: [] }
     )
+    // add current balance
+    const currentBalanceData = getCurrentBalancedata(accountBalance)
+    chartData.data.push(currentBalanceData.data)
+    chartData.labels.push(currentBalanceData.label)
+    chartData.tooltips.push(currentBalanceData.tooltip)
     return chartData
 }
 
@@ -232,4 +249,10 @@ function formatLineChartTooltip(data: (number | string), timestamp: number | str
         hour12: false,
     })
     return { title, label }
+}
+
+function getCurrentBalancedata(balance): { data: number, label: string, tooltip: Tooltip } {
+    const now = new Date().getTime()
+    const fiatBalance = convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[get(chartCurrency).toUpperCase()])
+    return { data: fiatBalance, label: formatLabel(now), tooltip: formatLineChartTooltip(fiatBalance, now) }
 }

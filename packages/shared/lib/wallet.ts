@@ -73,6 +73,10 @@ export type BalanceHistory = {
     [HistoryDataProps.ONE_MONTH]: BalanceTimestamp[]
 }
 
+export type AccountsBalanceHistory = {
+    [accountIndex: number]: BalanceHistory
+}
+
 /** Active actors state */
 const actors: ActorState = {}
 
@@ -835,72 +839,67 @@ export const updateAccountsBalanceEquiv = (): void => {
  * @method getAccountsBalanceHistory
  *
  * @param {Account} accounts
+ * @param {number} balanceRaw
  * @param {PriceData} [priceData]
  *
  */
-export const getAccountsBalanceHistory = (accounts: Account[], priceData: PriceData): BalanceHistory => {
-    let balanceHistory: BalanceHistory = {
-        [HistoryDataProps.ONE_HOUR]: [],
-        [HistoryDataProps.TWENTY_FOUR_HOURS]: [],
-        [HistoryDataProps.SEVEN_DAYS]: [],
-        [HistoryDataProps.ONE_MONTH]: [],
-    }
+export const getAccountsBalanceHistory = (accounts: WalletAccount[], priceData: PriceData): AccountsBalanceHistory => {
+    let balanceHistory: AccountsBalanceHistory = {}
     if (priceData && accounts) {
         accounts.forEach((account) => {
-            let accountBalanceHistory: HistoryData = {
+            let accountBalanceHistory: BalanceHistory = {
                 [HistoryDataProps.ONE_HOUR]: [],
                 [HistoryDataProps.TWENTY_FOUR_HOURS]: [],
                 [HistoryDataProps.SEVEN_DAYS]: [],
                 [HistoryDataProps.ONE_MONTH]: [],
             }
             // Sort messages from last to newest
-            let messages = account.messages.sort((a, b) => {
-                return <any>new Date(a.timestamp).getTime() - <any>new Date(b.timestamp).getTime()
+            let messages = account.messages.slice().sort((a, b) => {
+                return <any>new Date(b.timestamp).getTime() - <any>new Date(a.timestamp).getTime()
             })
             // Calculate the variations for each account
-            var balanceSoFar = 0;
-            let accountBalanceVariations = [{ balance: balanceSoFar, timestamp: '0' }]
+            var trackedBalance = account.rawIotaBalance;
+            let accountBalanceVariations = [{ balance: trackedBalance, timestamp: new Date().toString() }]
             messages.forEach((message) => {
                 const essence = message.payload.data.essence.data;
 
                 if (essence.incoming) {
-                    balanceSoFar += essence.value;
+                    trackedBalance -= essence.value;
                 } else {
-                    balanceSoFar -= essence.value;
+                    trackedBalance += essence.value;
                 }
-
-                accountBalanceVariations.push({ balance: balanceSoFar, timestamp: message.timestamp })
+                accountBalanceVariations.push({ balance: trackedBalance, timestamp: message.timestamp })
             })
             // Calculate the balance in each market data timestamp
             let balanceHistoryInTimeframe = []
             Object.entries(priceData[CurrencyTypes.USD]).forEach(([timeframe, data]) => {
-                // sort market data from last to newest
-                let sortedData = data.sort((a, b) => a[0] - b[0])
+                // sort market data from newest to last
+                let sortedData = data.slice().sort((a, b) => b[0] - a[0])
                 balanceHistoryInTimeframe = []
                 // if there are no balance variations
                 if (accountBalanceVariations.length === 1) {
-                    balanceHistoryInTimeframe = sortedData.map(_data => ({ timestamp: _data[0], balance: 0 }))
+                    balanceHistoryInTimeframe = sortedData.map(_data => ({ timestamp: _data[0], balance: trackedBalance }))
                 }
                 else {
-                    let i = 1
-                    sortedData.forEach(data => {
-                        let data_timestamp = new Date(data[0] * 1000).getTime()
+                    let i = 0
+                    sortedData.forEach((data) => {
+                        let marketTimestamp = new Date(data[0] * 1000).getTime()
                         // find balance for each market data timepstamp
-                        for (i; i < accountBalanceVariations.length; i++) {
+                        for (i; i < accountBalanceVariations.length - 1; i++) {
                             let currentBalanceTimestamp = new Date(accountBalanceVariations[i].timestamp).getTime()
-                            let peviousBalanceTimestamp = new Date(accountBalanceVariations[i - 1].timestamp).getTime()
-                            if (data_timestamp >= peviousBalanceTimestamp && data_timestamp < currentBalanceTimestamp) {
-                                balanceHistoryInTimeframe.push({ timestamp: data[0], balance: accountBalanceVariations[i - 1].balance })
+                            let nextBalanceTimestamp = new Date(accountBalanceVariations[i + 1].timestamp).getTime()
+                            if (marketTimestamp > nextBalanceTimestamp && marketTimestamp <= currentBalanceTimestamp) {
+                                balanceHistoryInTimeframe.push({ timestamp: data[0], balance: accountBalanceVariations[i].balance })
                                 return
                             }
-                            else if (i === (accountBalanceVariations.length - 1)) {
-                                balanceHistoryInTimeframe.push({ timestamp: data[0], balance: accountBalanceVariations[i].balance })
+                            else if (marketTimestamp <= nextBalanceTimestamp && i === (accountBalanceVariations.length - 2)) {
+                                balanceHistoryInTimeframe.push({ timestamp: data[0], balance: 0 })
                                 return
                             }
                         }
                     })
                 }
-                accountBalanceHistory[timeframe] = balanceHistoryInTimeframe
+                accountBalanceHistory[timeframe] = balanceHistoryInTimeframe.reverse()
             })
             balanceHistory[account.index] = accountBalanceHistory
         })
