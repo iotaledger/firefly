@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Text } from 'shared/components'
     import { debounce } from 'shared/lib/utils'
+    import { asyncVerifyMnemonic } from 'shared/lib/wallet'
     import { english } from 'shared/lib/wordlists/english'
 
     export let value = undefined
@@ -42,7 +43,7 @@
         }
     }
 
-    const handleKeyDown = () => {
+    const handleKeyDown = async () => {
         value = ''
         statusMessage = ''
         error = false
@@ -68,8 +69,14 @@
                     statusMessage = mnemonicValidations
                     error = true
                 } else {
-                    statusMessage = locale('views.importFromText.phraseDetected')
-                    value = trimmedContent
+                    try {
+                        await asyncVerifyMnemonic(words.join(' '))
+                        statusMessage = locale('views.importFromText.phraseDetected')
+                        value = trimmedContent
+                    } catch (err) {
+                        error = true
+                        statusMessage = locale(err.error)
+                    }
                 }
             }
         }
