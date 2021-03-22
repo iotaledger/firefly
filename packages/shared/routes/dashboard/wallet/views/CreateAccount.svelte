@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Input, Text } from 'shared/components'
+    import { Button, Input, Spinner, Text } from 'shared/components'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import { wallet, MAX_ACCOUNT_NAME_LENGTH } from 'shared/lib/wallet'
@@ -56,7 +56,7 @@
     </div>
     <!-- Action -->
     {#if isBusy && !error}
-        <Text secondary classes="mb-3">{locale('general.creatingAccount')}</Text>
+        <Spinner busy={true} message={locale('general.creatingAccount')} classes="justify-center mb-4" />
     {/if}
     {#if !isBusy}
         <div class="flex flex-row justify-between px-2">
