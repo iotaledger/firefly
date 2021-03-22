@@ -1,8 +1,9 @@
 <script lang="typescript">
     import { Icon } from 'shared/components'
+    import { appSettings } from 'shared/lib/appSettings'
     import { bindEvents } from 'shared/lib/utils'
     import { onMount } from 'svelte'
-    import { appSettings } from 'shared/lib/appSettings'
+
     export let events = {}
     export let onClick = () => ''
     export let secondary = false
@@ -12,14 +13,17 @@
     export let icon = undefined
     export let iconReverse = false
     export let xl = false
+    export let medium = false
     export let small = false
     export let classes = ''
     export let type = 'button'
     export let form = ''
     export let autofocus = false
+    export let inlineStyle = ''
+    export let showHoverText = undefined
 
     let buttonElement
-    let darkModeEnabled = $appSettings.darkMode
+    $: darkModeEnabled = $appSettings.darkMode
 
     onMount(() => {
         if (autofocus) {
@@ -34,6 +38,11 @@
         min-width: 100px;
         span {
             @apply text-white;
+        }
+        &:not(.secondary) {
+            span {
+                @apply font-bold;
+            }
         }
         &:not(.with-icon) {
             &:hover,
@@ -63,6 +72,10 @@
                         @apply text-gray-500;
                     }
                 }
+            }
+            &.medium {
+                @apply pt-1.5;
+                @apply pb-2.5;
             }
         }
         &.secondary {
@@ -125,9 +138,41 @@
             @apply border-solid;
             @apply border-gray-300;
             @apply bg-white;
-            @apply py-6;
-            @apply px-5;
+            @apply p-5;
             @apply text-left;
+            &.secondary.showHoverText {
+                @apply border-transparent;
+                @apply bg-transparent;
+                min-width: unset;
+                span {
+                    transform: translateX(5px);
+                    transition: all 0.2s;
+                    @apply font-500;
+                    @apply opacity-0;
+                    @apply overflow-hidden;
+                    @apply max-w-0;
+                }
+                :global(svg.showHoverText) {
+                    @apply text-blue-500;
+                }
+                &:hover {
+                    @apply border-gray-300;
+                    @apply bg-white;
+                    span {
+                        transform: translateX(0);
+                        @apply max-w-full;
+                        @apply opacity-100;
+                    }
+                    &.darkmode {
+                        @apply border-gray-700;
+                        @apply bg-transparent;
+                    }
+                }
+            }
+            &.xl {
+                @apply pb-6;
+                @apply px-5;
+            }
             span {
                 @apply text-gray-800;
                 @apply ml-10;
@@ -155,6 +200,7 @@
                     @apply text-white;
                 }
             }
+
             &.darkmode {
                 @apply border-gray-700;
                 @apply bg-transparent;
@@ -216,16 +262,29 @@
                 @apply text-gray-800;
             }
             &.darkmode {
-                &,
-                &:hover,
-                &:active {
-                    @apply text-white;
-                }
+                @apply bg-gray-700;
+                @apply border-gray-700;
+                @apply bg-opacity-30;
+                @apply border-opacity-30;
+                @apply text-white;
                 &:hover {
-                    @apply bg-blue-900;
+                    @apply bg-opacity-50;
+                    @apply border-opacity-50;
                 }
+                &:focus,
                 &:active {
-                    @apply bg-gray-900;
+                    @apply bg-opacity-80;
+                    @apply border-opacity-50;
+                }
+                &:disabled {
+                    @apply bg-gray-700;
+                    @apply border-gray-700;
+                    @apply bg-opacity-10;
+                    @apply border-opacity-10;
+                    @apply text-gray-700;
+                    :global(svg) {
+                        @apply text-gray-500;
+                    }
                 }
                 :global(svg) {
                     @apply text-blue-500;
@@ -254,13 +313,14 @@
     <button
         {type}
         {form}
-        class={`xl cursor-pointer text-center rounded-2xl pt-8 pb-4 px-4 flex flex-col items-center ${classes}`}
+        class={`xl cursor-pointer text-center rounded-xl pt-8 pb-4 px-4 flex flex-col items-center ${classes}`}
         use:bindEvents={events}
         on:click={onClick}
         class:secondary
         class:active
         class:with-icon={icon}
         class:darkmode={darkModeEnabled}
+        style={inlineStyle}
         {disabled}
         bind:this={buttonElement}>
         <Icon classes="mb-1" {icon} />
@@ -272,16 +332,19 @@
     <button
         {type}
         {form}
-        class={`cursor-pointer text-center rounded-2xl px-3 py-4 ${classes}`}
+        class="cursor-pointer text-center rounded-xl px-3 pt-2.5 pb-3.5 {classes}"
         use:bindEvents={events}
         on:click={onClick}
         class:secondary
         class:warning
+        class:medium
         class:small
         class:with-icon={icon}
         class:iconReverse
         class:active
         class:darkmode={darkModeEnabled}
+        class:showHoverText
+        style={inlineStyle}
         {disabled}
         bind:this={buttonElement}>
         {#if icon}
@@ -300,7 +363,11 @@
                         <div class="relative flex items-center flex-1">
                             <span class="font-bold text-12 leading-140"><slot /></span>
                             <div class="absolute right-0 flex items-center">
-                                <Icon width="16" height="16" classes="ml-4" {icon} />
+                                <Icon
+                                    width={showHoverText ? 20 : 16}
+                                    height={showHoverText ? 20 : 16}
+                                    classes="ml-4 showHoverText"
+                                    {icon} />
                             </div>
                         </div>
                     </div>
@@ -321,7 +388,7 @@
                 </div>
             {/if}
         {:else}
-            <span class="font-bold text-12 leading-140"><slot /></span>
+            <span class="text-12 leading-140"><slot /></span>
         {/if}
     </button>
 {/if}

@@ -47,11 +47,11 @@
             {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-between items-center space-x-4">
-            <Button secondary classes="flex-1" onClick={() => console.log('foo')}>{locale('actions.check_again')}</Button>
+            <Button secondary classes="flex-1" onClick={() => console.log('foo')}>{locale('actions.checkAgain')}</Button>
             <Button classes="flex-1" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex p-16">
-            <Illustration width="100%" illustration="balance-desktop" />
+        <div slot="rightpane" class="w-full h-full flex p-16 bg-pastel-yellow dark:bg-gray-900">
+            <Illustration width="100%" illustration="balance-desktop" classes="h-full object-cover object-left" />
         </div>
     </OnboardingLayout>
 {/if}

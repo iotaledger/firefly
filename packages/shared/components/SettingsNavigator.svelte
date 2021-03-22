@@ -17,13 +17,13 @@
 <div class="flex flex-col w-1/3 h-full justify-start items-start">
     {#each routes as setting}
         <div class="flex flex-col w-40 items-start">
-            <button class="mb-1 pl-7 relative" on:click={() => changeRoute(setting)}>
+            <button class="mb-1 pl-7 relative text-left" on:click={() => changeRoute(setting)}>
                 {#if route === setting}
                     <Icon
                         width="16"
                         height="16"
                         icon="small-chevron-right"
-                        classes="text-blue-500 absolute left-0 text-xl mt-0.5" />
+                        classes="text-blue-500 absolute left-1 top-0.4 text-xl" />
                 {/if}
                 <Text type="p" classes="mb-1">{locale(`views.settings.${setting}.title`)}</Text>
             </button>

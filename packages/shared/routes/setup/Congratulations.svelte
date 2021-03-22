@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Box, Button, Illustration, OnboardingLayout, Text } from 'shared/components'
+    import { Box, Button, Icon, Illustration, OnboardingLayout, Text } from 'shared/components'
     import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
     import { newProfile, saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { formatUnit } from 'shared/lib/units'
@@ -51,17 +51,22 @@
                     </balance>
                 </Box>
             {:else}
-                <Text type="h1" classes="mb-5">{locale('views.congratulations.title')}</Text>
-                <Text type="p" secondary classes="mb-4">{locale('views.congratulations.body')}</Text>
+                <div class="flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-5">
+                    <div class="bg-green-100 rounded-2xl relative -top-10">
+                        <Icon icon="success-check" classes="text-white" />
+                    </div>
+                    <Text type="h2" classes="mb-5 text-center">{locale('views.congratulations.title')}</Text>
+                    <Text type="p" secondary classes="mb-2">{locale('views.congratulations.body')}</Text>
+                </div>
             {/if}
         </div>
         <div slot="leftpane__action">
             <Button classes="w-full" onClick={() => handleContinueClick()}>
-                {locale(`${wasMigrated ? 'views.congratulations.exportMigration' : 'actions.continue'}`)}
+                {locale(`${wasMigrated ? 'views.congratulations.exportMigration' : 'actions.finishSetup'}`)}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center">
-            <Illustration width="100%" illustration="congratulations-desktop" />
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
+            <Illustration illustration="congratulations-desktop" width="100%" height="auto" />
         </div>
     </OnboardingLayout>
 {/if}

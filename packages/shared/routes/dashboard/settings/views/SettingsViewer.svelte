@@ -14,7 +14,7 @@
         SettingsRoutesNoProfile,
     } from 'shared/lib/typings/routes'
     import { onMount } from 'svelte'
-    import { Advanced, General, Security } from './'
+    import { Advanced, General, Security, Help } from './'
 
     export let locale
     export let mobile
@@ -73,7 +73,7 @@
         <button data-label="back-button" class="absolute top-8 left-8" on:click={handleBackClick}>
             <div class="flex items-center space-x-3">
                 <Icon icon="arrow-left" classes="text-blue-500" />
-                <Text type="h4">{locale('actions.back')}</Text>
+                <Text type="h5">{locale('actions.back')}</Text>
             </div>
         </button>
         <SettingsNavigator
@@ -99,7 +99,7 @@
                     {:else if $settingsRoute === 'advancedSettings'}
                         <Advanced {locale} />
                     {:else if $settingsRoute === 'helpAndInfo'}
-                        <div />
+                        <Help {locale} />
                     {/if}
                 </div>
             </Scroller>

@@ -76,6 +76,9 @@ export function init(id: string, storagePath?: string) {
     destroy() {
       destroyed = true
       runtime.destroy()
+    },
+    removeEventListeners() {
+      runtime.removeEventListeners()
     }
   }
 }

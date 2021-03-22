@@ -82,6 +82,7 @@ export interface ErrorEventPayload {
 }
 
 export interface BalanceChangeEventPayload {
+    indexationId: string    
     accountId: string
     address: Address
     balanceChange: {
@@ -99,6 +100,13 @@ export interface ConfirmationStateChangeEventPayload {
     accountId: string
     message: Message
     confirmed: boolean
+}
+
+export interface ReattachmentEventPayload {
+    indexationId: string;
+    accountId: string;
+    message: Message;
+    reattachedMessageId: string;
 }
 
 export enum TransferProgressEventType {

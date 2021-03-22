@@ -2,10 +2,10 @@
     "views": {
         "onboarding1": {
             "title": "Skicka, ta emot och hantera dina IOTA",
-            "body": "Firefly är en säker och lättanvänd IOTA-plånbok."
+            "body": "Firefly är den officiella plånboken för IOTA."
         },
         "legal": {
-            "title": "Legal",
+            "title": "Integritetspolicy och användarvillkor",
             "body": "Läs igenom sekretesspolicyn och användarvillkoren.",
             "privacyPolicy": {
                 "title": "Sekretesspolicy",
@@ -25,20 +25,27 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I have read and I accept the Privacy policy & ToS"
+            "checkbox": "Jag har läst och accepterar integritetspolicyn och användarvillkoren"
         },
-        "language": {
-            "title": "Språk & utseende",
-            "body": "Välj språk och tema för din plånbok"
+        "appearance": {
+            "title": "Utseende",
+            "body": "Välj din plånboks tema."
         },
         "setup": {
             "title": "Ställ in din plånbok",
-            "body": "Du kan skapa en ny plånbok eller importera en befintlig.",
+            "body1": "Du kan skapa flera användarprofiler för att hålla dina tokens separata och förbättra sekretessen.",
+            "body2": "Låt oss börja med ditt första profilnamn. Du kan lägga till fler profiler senare.",
             "profileName": "Profilnamn"
+        },
+        "secure": {
+            "title": "Säkra din plånbok",
+            "body1": "Spara och skriv ut PDF-mallen för återställningsbladet.",
+            "body2": "Om du fyller i återställningsbladet och lagrar det på ett säkert sätt, kommer du alltid att kunna återställa din plånbok."
         },
         "password": {
             "title": "Skapa ett lösenord",
-            "body": "Du behöver ett starkt lösenord för att skydda dina pengar. Använd en kombination av ord och undvik vanliga fraser, namn eller datum."
+            "body1": "Du behöver ett starkt lösenord för att skydda dina pengar. Använd en kombination av ord och undvik vanliga fraser, namn eller datum.",
+            "body2": "Det rekommenderas att du skriver ner ditt lösenord i ditt återställningsblad."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -47,42 +54,50 @@
         },
         "pin": {
             "title": "Ställ in PIN-kod",
-            "body1": "Ange en 6-siffrig PIN-kod nedan. Du kommer att bli ombedd att ange din PIN-kod för att logga in på din plånbok.",
-            "body2": "Du kan endast använda siffror."
+            "body1": "Ange en 6-siffrig PIN-kod nedan. Du kommer bli ombedd att ange din PIN-kod för att komma åt din profil.",
+            "body2": "Använd endast nummer"
         },
         "confirmPin": {
             "title": "Verifiera din PIN-kod",
-            "body": "Ange din PIN-kod igen för att fortsätta."
+            "body1": "Din PIN-kod håller ditt saldo och dina transaktioner privata.",
+            "body2": "Ange din PIN-kod igen för att fortsätta. "
         },
         "backup": {
             "title": "Säkerhetskopiera din plånbok",
-            "body1": "Du kommer nu att visas en återställningsfras.",
-            "body2": "Dela inte denna fras med någon. Din återställningsfras kan användas för att komma åt dina tokens var som helst.",
+            "body1": "Du kommer nu att visas en återställningsfras. Skriv ner det i ditt återställningsblad.",
+            "body2": "Dela inte din återställningsfras med någon. Den kan användas för att komma åt dina tokens från var som helst.",
             "body3": "Om du förlorar din återställningsfras kan du förlora dina pengar."
         },
         "recoveryPhrase": {
             "title": "Återställningsfras",
-            "body1": "Var noggrann och skriv ner orden i exakt samma ordning.",
-            "body2": "Håll din återställningsfras för dig själv och lagrad på ett säkert sätt. Dela den inte med någon.",
+            "body1": "I ditt återställningsblad, skriv ner orden i exakt den ordning som visas.",
+            "body2": "Håll detta privat och lagrat på ett säkert sätt.",
+            "body3": "Det är viktigt att ha en fysisk säkerhetskopia. Datorer kan krascha och filer kan bli korrupta.",
             "revealRecoveryPhrase": "Visa återställningsfras",
             "hideRecoveryPhrase": "Dölj återställningsfras"
         },
         "verifyRecoveryPhrase": {
             "title": "Verifiera återställningsfras",
             "body": "Låt oss kontrollera att du skrev ner frasen korrekt. Välj orden i rätt ordning.",
-            "creatingAccount": "Skapar konto, vänligen vänta..."
+            "word": "Ord",
+            "verified": "Återställningsfras verifierad",
+            "verifiedBody": "Kom ihåg att hålla den privat och lagrad på ett säkert sätt."
         },
         "backupWallet": {
             "title": "Säkerhetskopiera till en Stronghold-fil",
-            "body": "Ange ditt lösenord för att säkerhetskopiera din plånbok till en Stronghold-fil. Ditt lösenord används för att kryptera säkerhetskopian."
+            "body1": "Ange ditt lösenord för att säkerhetskopiera din plånbok till en Stronghold-fil. Ditt lösenord används för att kryptera säkerhetskopian.",
+            "body2": "Anledningar till varför digitala säkerhetskopior är viktiga:",
+            "reason1": "Enkelt att återställa din plånbok utan att skriva in din återställningsfras",
+            "reason2": "Importera din plånbok till andra enheter",
+            "reason3": "Återställ hela din transaktionshistorik"
         },
         "recoveryPhraseSaved": {
             "title": "Säkerhetskopiering lyckades",
             "body": "Du har säkerhetskopierat din plånbok till en Stronghold."
         },
         "congratulations": {
-            "title": "Grattis",
-            "body": "Din plånbok är redo att användas."
+            "title": "Installationen av plånboken slutförd",
+            "body": "Din nya plånbok är redo att användas."
         },
         "import": {
             "title": "Importera en plånbok",
@@ -90,11 +105,11 @@
         },
         "importFromText": {
             "title": "Återställ din plånbok med en återställningsfras eller seed",
-            "body1": "En återställningsfras är 24 ord lång. Denna används för att återställa en befintlig Firefly plånbok.",
-            "body2": "En seed består av 81 tecken. Denna används för att återställa plånboken från en äldre Trinity-plånbok.",
+            "body1": "En seed består av 81 tecken. Denna används för att återställa plånboken från en äldre Trinity-plånbok.",
+            "body2": "En återställningsfras är 24 ord lång. Denna används för att återställa en befintlig Firefly-plånbok.",
             "body3": "Ange din seed eller återställningsfras",
             "seedDetected": "81 tecken lång seed upptäckt",
-            "phraseDetected": "24 ordfraser upptäckta"
+            "phraseDetected": "24 ord lång återställningsfras upptäckt"
         },
         "importFromFile": {
             "title": "Återställ din plånbok från en säkerhetskopia",
@@ -107,7 +122,11 @@
         },
         "importSuccess": {
             "title": "Du har framgångsrikt återställt din säkerhetskopia",
-            "body": "Du kan nu ställa in din nya plånbok."
+            "body": "Du kan nu ställa in din nya plånbok.",
+            "seedvaultTitle": "Importen lyckades",
+            "seedvaultBody": "Ditt lösenord är korrekt, du kan nu fortsätta.",
+            "strongholdTitle": "Importen lyckades",
+            "strongholdBody": "Ditt lösenord är korrekt, du kan nu fortsätta."
         },
         "migrate": {
             "title": "Migrera dina tillgångar",
@@ -132,19 +151,19 @@
             },
             "security": {
                 "title": "Säkerhet",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Ändra ditt lösenord och anpassa efter säkerhetsinställningar"
             },
             "advancedSettings": {
                 "title": "Avancerade inställningar",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Verktyg och manuella inställningar för avancerade användare"
             },
             "helpAndInfo": {
                 "title": "Hjälp & Information",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Hitta svaret på en fråga eller få hjälp med ett problem"
             },
             "profile": {
                 "title": "Profil",
-                "description": ""
+                "description": "Ändra ditt profilnamn eller välj en avatar"
             },
             "sync": {
                 "title": "Synkronisera konton",
@@ -160,27 +179,27 @@
             },
             "currency": {
                 "title": "Valuta",
-                "description": ""
+                "description": "Justerar saldokonvertering och uppdaterar alternativ för diagram"
             },
             "notifications": {
                 "title": "Aviseringar",
-                "description": ""
+                "description": "Systemaviseringar för transaktionshändelser"
             },
             "exportStronghold": {
-                "title": "Exportera Stronghold",
-                "description": ""
+                "title": "Exportera säkerhetskopian",
+                "description": "Exportera till en Stronghold-fil - en komplett krypterad säkerhetskopia av din plånbok och senaste transaktionshistorik."
             },
             "appLock": {
-                "title": "Applås",
-                "description": ""
+                "title": "Automatiskt lås",
+                "description": "Tid som förflutit innan plånboken låser och loggar ut dig"
             },
             "changePassword": {
                 "title": "Ändra lösenord",
-                "description": ""
+                "description": "Ditt lösenord används för att säkra din plånbok. Du måste använda ett starkt lösenord för att skydda dina pengar."
             },
             "changePincode": {
                 "title": "Ändra PIN-kod",
-                "description": "",
+                "description": "Din PIN-kod håller ditt saldo och dina transaktioner privata",
                 "currentPincode": "Nuvarande PIN-kod",
                 "newPincode": "Ny PIN-kod",
                 "confirmNewPincode": "Bekräfta ny PIN-kod",
@@ -192,59 +211,64 @@
             },
             "deleteProfile": {
                 "title": "Radera profil",
-                "description": ""
+                "description": "Tar bort hela din plånbok, profil och transaktionshistorik. Se till att du har en säkerhetskopia."
             },
             "deepLinks": {
                 "title": "Hyperlänkar",
-                "description": ""
+                "description": "Fyll automatiskt i transaktionsdata i Firefly när du klickar på en iota:// länk"
             },
             "developerMode": {
                 "title": "Utvecklarläge",
-                "description": ""
+                "description": "Anslut till testnät och andra utvecklarfunktioner"
             },
             "nodeSettings": {
                 "title": "Nod-inställningar",
-                "description": ""
+                "description": "Välj Manuell för att välja från nodlistan eller för att ansluta till din egen nod"
             },
             "configureNodeList": {
-                "title": "Konfigurera nodlista",
+                "title": "Välj en nod",
                 "description": ""
             },
             "proofOfWork": {
                 "title": "Proof of work",
-                "description": ""
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
-                "title": "Fellogg",
-                "description": ""
+                "title": "Felmeddelanden",
+                "description": "Visa felmeddelanden för att felsöka ett problem"
             },
             "diagnostics": {
                 "title": "Diagnostik",
-                "description": ""
+                "description": "Visa system- och applikationsinformation"
             },
             "stateExport": {
                 "title": "Tillstånds-exportering",
-                "description": ""
+                "description": "Exportera din transaktionshistorik till en .csv-fil"
             },
             "troubleshoot": {
                 "title": "Felsök",
-                "description": ""
+                "description": "Använd felsökningsguiden för att lösa vanliga problem"
             },
             "documentation": {
                 "title": "Dokumentation",
-                "description": ""
+                "description": "Se dokumentationen för utförliga förklaringar av hur saker och ting fungerar"
             },
             "faq": {
                 "title": "Vanliga frågor (FAQ)",
-                "description": ""
+                "title2": "Vanliga frågor (FAQ)",
+                "description": "Se FAQ för att få hjälp med ett vanligt problem eller fråga"
             },
             "discord": {
                 "title": "Discord",
-                "description": ""
+                "description": "Få hjälp från IOTA-communityn på Discord"
             },
             "about": {
                 "title": "Om",
                 "description": ""
+            },
+            "reportAnIssue": {
+                "title": "Rapportera ett fel",
+                "description": "Rapportera ett fel till utvecklarna. Kolla igenom för att se till att det inte redan har rapporterats."
             }
         },
         "login": {
@@ -275,10 +299,10 @@
             "network": {
                 "networkOperational": "Nätverk i drift",
                 "networkDegraded": "Nätverk försämrat",
-                "networkDown": "Nätverk nere",
+                "networkDown": "Nätverk frånkopplat",
                 "status": "Status",
                 "messagesPerSecond": "Meddelanden per sekund",
-                "confirmationRate": "Bekräftelseshastighet"
+                "confirmationRate": "Bekräftade meddelanden"
             },
             "profileModal": {
                 "allSettings": "Alla inställningar",
@@ -310,12 +334,12 @@
             "notBackedUpDescription": "Du har inte säkerhetskopierat din Stronghold"
         },
         "deleteAccount": {
-            "title": "Radera {name}?",
-            "body": "Du kommer permanent att förlora din transaktionshistorik och kanske något annat också.",
-            "typePassword": "Ange plånbokens lösenord för att bekräfta.",
-            "deleteAccount": "Radera konto",
+            "title": "Ta bort {name}?",
+            "body": "Du kan lägga till detta konto senare men du kan förlora din transaktionshistorik.",
+            "typePassword": "Ange ditt lösenord för att bekräfta.",
+            "deleteAccount": "Ta bort konto",
             "errorTitle": "Det gick inte att ta bort {name}",
-            "errorBody1": "För att ta bort ett konto måste du ha 0 saldo.",
+            "errorBody1": "För att ta bort ett konto måste det ha 0 saldo.",
             "errorBody2": "Du har för närvarande {balance} kvar på detta konto. Vänligen flytta dessa pengar till ett annat konto och försök igen.",
             "errorBody3": "Du kan inte ta bort detta konto, du måste ha minst ett."
         },
@@ -329,13 +353,13 @@
             "titleDetails": "Nod-detaljer",
             "nodeAddress": "Nod-adress",
             "optionalUsername": "Användarnamn (valfritt)",
-            "optionalPassword": "Lösenord (frivilligt)",
+            "optionalPassword": "Lösenord (valfritt)",
             "setAsPrimaryNode": "Ställ in som primär nod",
             "removeConfirmation": "Är du säker på att du vill ta bort den här noden?"
         },
         "errorLog": {
-            "title": "Fellogg",
-            "empty": "Felloggen är tom."
+            "title": "Felmeddelanden",
+            "empty": "Inga felmeddelanden."
         },
         "deleteProfile": {
             "title": "Radera profil",
@@ -391,7 +415,7 @@
         "tryAgain": "Försök igen",
         "visitDiscord": "Besök Discord",
         "dragDrop": "Dra & Släpp",
-        "importExtentions": ".stronghold eller .kdbx-fil",
+        "importExtentions": ".kdbx eller .stronghold fil",
         "chooseFile": "Välj en fil",
         "dropHere": "Släpp din fil här",
         "syncAll": "Synkronisera alla",
@@ -405,10 +429,10 @@
         "unlock": "Lås upp",
         "updateFirefly": "Uppdatera Firefly",
         "restartNow": "Starta om nu",
-        "saveBackup": "Spara säkerhetskopia",
+        "saveBackup": "Save Stronghold backup",
         "customizeAcount": "Hantera ditt konto",
         "viewAddressHistory": "Visa adresshistorik",
-        "deleteAccount": "Radera konto",
+        "deleteAccount": "Ta bort konto",
         "max": "Max",
         "addNode": "Lägg till nod",
         "removeNode": "Ta bort nod",
@@ -423,14 +447,19 @@
         "copy": "Kopiera",
         "paste": "Klistra in",
         "selectAll": "Välj alla",
-        "addAccount": "Lägg till konto",
+        "addAccount": "Skapa ett konto",
         "checkForUpdates": "Sök efter uppdateringar",
         "reportAnIssue": "Rapportera ett fel",
         "clear": "Rensa",
         "hideDetails": "Dölj detaljer",
         "yes": "Ja",
         "no": "Nej",
-        "reset": "Återställ"
+        "reset": "Återställ",
+        "downloadRecoveryKit": "Save Recovery Kit template",
+        "skipBackup": "Skip file backup",
+        "finishSetup": "Finish setup",
+        "readDocumentation": "Read the documentation",
+        "visitFaq": "Visit FAQ"
     },
     "general": {
         "password": "Lösenord",
@@ -441,12 +470,12 @@
         "yourSeed": "Din Seed",
         "recoveryPhrase": "Återställningsfras",
         "recentActivity": "Senaste aktivitet",
-        "sent": "Skickat",
+        "sent": "Skickad",
         "received": "Mottaget",
         "sendPayment": "Skicka betalning",
         "moveFunds": "Flytta pengar",
         "sendFunds": "Skicka pengar",
-        "sendToAddress": "Skicka till en adress",
+        "sendToAddress": "Send to address",
         "scanQrOrPaste": "Skanna en QR-kod eller klistra in en adress",
         "moveFundsBetweenAccounts": "Flytta pengar mellan dina konton",
         "sendTokensToAddress": "Skicka tokens till en adress",
@@ -480,7 +509,10 @@
         "accountBalance": "Kontosaldo",
         "incoming": "Inkommande",
         "outgoing": "Utgående",
+        "totalIn": "Total in",
+        "totalOut": "Total out",
         "accounts": "Konton",
+        "myAccounts": "My accounts",
         "automaticNodeSelection": "Automatiskt val av nod",
         "manualNodeSelection": "Manuellt val av nod",
         "profiles": "Profiler",
@@ -500,6 +532,9 @@
         "inputAddress": "Inmatningsadress",
         "receiveAddress": "Mottagaradress",
         "date": "Datum",
+        "status": "Status",
+        "confirmed": "Bekräftad",
+        "pending": "Väntar",
         "noAccounts": "Du har inga konton, vänligen skapa ett.",
         "loadingAccounts": "Laddar, vänligen vänta...",
         "addProfile": "Lägg till profil",
@@ -523,7 +558,14 @@
         "exportingStrongholdFailed": "Export av Stronghold misslyckades",
         "pinCodeUpdating": "Uppdaterar PIN-kod...",
         "pinCodeSuccess": "Uppdatering av PIN-kod lyckades",
-        "pinCodeFailed": "Uppdatering av PIN-kod misslyckades"
+        "pinCodeFailed": "Uppdatering av PIN-kod misslyckades",
+        "passwordStrength": "Password strength",
+        "passwordStrength0": "Bad",
+        "passwordStrength1": "Poor",
+        "passwordStrength2": "Weak",
+        "passwordStrength3": "Average",
+        "passwordStrength4": "Strong",
+        "creatingProfile": "Creating profile, please wait..."
     },
     "dates": {
         "today": "Idag",
@@ -534,7 +576,7 @@
     },
     "notifications": {
         "valueTx": "Tar emot {{value}} till {{account}}",
-        "confirmed": "Utgående {{value}} från {{account}} har bekräftats",
+        "confirmed": "Utgående {{value}} från {{account}} har blivit bekräftad",
         "failed": "Utgående {{value}} från {{account}} misslyckades",
         "downloadingUpdate": "Hämtar uppdatering",
         "updateReady": "Uppdatering redo",
@@ -584,13 +626,16 @@
             "amountInvalidFormat": "Beloppet verkar vara ett ogiltigt nummer.",
             "amountZero": "Beloppet måste vara större än 0.",
             "wrongAddressFormat": "Adresser börjar med prefixet {prefix}.",
-            "insufficientFunds": "Detta konto har inte tillräckligt med pengar"
+            "insufficientFunds": "This account has insufficient funds.",
+            "sendingDust": "You cannot send less than 1 Mi.",
+            "leavingDust": "You cannot leave less than 1 Mi on your address."
         },
         "node": {
             "invalid": "Ange en giltig URL.",
             "https": "HTTPS krävs. Konfigurera en utvecklarprofil för att använda osäkra HTTP-anslutningar.",
             "duplicate": "Den här noden har redan lagts till.",
-            "unsynced": "Noden du försöker lägga till är inte synkroniserad."
+            "unsynced": "The node is not in sync.",
+            "noSynced": "No synced nodes are available."
         },
         "global": {
             "generic": "Något gick fel."
@@ -598,10 +643,10 @@
         "backup": {
             "invalid": "Säkerhetskopian kändes inte igen.",
             "destination": "Härkomsten för säkerhetskopian var inte giltig.",
-            "mnemonic": "Mnemoteknik är inte giltig.",
+            "mnemonic": "Mnemonin är inte giltig.",
             "seedTooShort": "Din seed ska vara 81 tecken, den {length, plural, one {är 1} other {är #}}",
             "seedCharacters": "Din seed ska innehålla tecknen A-Z eller 9",
-            "phraseWordCount": "Det ska finnas 24 ord i din återställningsfras, just nu är det {length, plural, one {är 1} other {är #}}",
+            "phraseWordCount": "Det ska finnas 24 ord i din återställningsfras, just nu är det {length, plural, one {är 1} other {är #}}.",
             "phraseUnrecognizedWord": "Okänt ord \"{word}\" i din återställningsfras"
         }
     }

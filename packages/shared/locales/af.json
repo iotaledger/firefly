@@ -2,10 +2,10 @@
     "views": {
         "onboarding1": {
             "title": "Stuur, ontvang & bestuur jou IOTA",
-            "body": "Firefly is ń veilig en maklik-om-te-gebruik IOTA beursie."
+            "body": "Firefly is die amptelike beursie van IOTA."
         },
         "legal": {
-            "title": "Wettige",
+            "title": "Privaatheidsbeleid en diensvoorwaardes",
             "body": "Lees die privaatheidsbeleid en diensvoorwaardes.",
             "privacyPolicy": {
                 "title": "Privaatheidsbeleid",
@@ -25,64 +25,79 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I have read and I accept the Privacy policy & ToS"
+            "checkbox": "Ek het die privaatheidsbeleid en diensvoorwaardes gelees en aanvaar"
         },
-        "language": {
-            "title": "Taal en voorkoms",
-            "body": "Kies jou beursie se taal en tema"
+        "appearance": {
+            "title": "Voorkoms",
+            "body": "Kies jou beursie se tema."
         },
         "setup": {
             "title": "Stel jou beursie op",
-            "body": "Jy kan 'n nuwe beursie skep of 'n bestaande beursie invoer.",
+            "body1": "U kan verskeie gebruikersprofiele skep om u tokens apart te hou en privaatheid te verbeter.",
+            "body2": "Kom ons begin nou met jou eerste profielnaam. Jy kan later nog profiele byvoeg.",
             "profileName": "Profiel Naam"
+        },
+        "secure": {
+            "title": "Beveilig jou beursie",
+            "body1": "Stoor en druk die Recovery Kit PDF-sjabloon uit.",
+            "body2": "As jy die Recovery Kit invul en veilig stoor, sal jy jou beursie altyd kan herwin."
         },
         "password": {
             "title": "Skep 'n wagwoord",
-            "body": "Jy het 'n sterk wagwoord nodig om jou fondse te beskerm. Gebruik 'n kombinasie van woorde en vermy algemene frases, name of datums."
+            "body1": "Jy het 'n sterk wagwoord nodig om jou fondse te beskerm. Gebruik 'n kombinasie van woorde en vermy algemene frases, name of datums.",
+            "body2": "Dit word aanbeveel dat jy jou wagwoord in u Recovery Kit neerskryf."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body2": "Keep your PIN safe!"
+            "body1": "Stel 'n login PIN op om seker te maak dat net jy jou beursie kan toegang.",
+            "body2": "Hou jou PIN veilig!"
         },
         "pin": {
             "title": "Stel PIN-kode op",
             "body1": "Tik 'n 6-syfer PIN hieronder. Jy sal gevra word om jou PIN in te voer om aan te meld by jou beursie.",
-            "body2": "Jy kan slegs getalle gebruik."
+            "body2": "Gebruik slegs syfers"
         },
         "confirmPin": {
             "title": "Verifieer jou PIN-kode",
-            "body": "Voer weer jou PIN-kode in om voort te gaan."
+            "body1": "Jou PIN hou jou saldo en transaksies privaat.",
+            "body2": "Voer weer jou PIN-kode in om voort te gaan. "
         },
         "backup": {
             "title": "Back-up you beursie",
-            "body1": "Jy sal nou vertoon word met 'n herstel frase.",
-            "body2": "Moenie hierdie frase met iemand deel nie. Jou herstelfrase kan gebruik word om toegang tot jou tokens te kry.",
+            "body1": "Jy sal nou 'n herstelfrase sien. Skryf dit in jou Recovery Kit neer.",
+            "body2": "Moenie jou herstelfrase met enigiemand deel nie. Dit kan gebruik word om vanaf enige plek toegang tot jou tokens te kry.",
             "body3": "As jy jou herstelfrase verloor, kan jy jou geld verloor."
         },
         "recoveryPhrase": {
             "title": "Herstel frase",
-            "body1": "Skryf die woorde noukeurig neer in die presiese volgorde.",
-            "body2": "Stoor you herstelfrase privaat en veilig. Moet dit met niemand deel nie.",
+            "body1": "Skryf die woorde in u Recovery Kit neer in die regte volgorde.",
+            "body2": "Hou die privaat en stoor dit veilig.",
+            "body3": "Dit is belangrik om 'n geskrewe back-up te hê. Rekenaars breek dikwels en lêers kan korrup word.",
             "revealRecoveryPhrase": "Openbaar herstelfrase",
             "hideRecoveryPhrase": "Versteek herstelfrase"
         },
         "verifyRecoveryPhrase": {
             "title": "Verifieer herstelfrase",
             "body": "Kom ons kyk of jy die frase korrek neergeskryf het. Kies die woorde in die regte volgorde.",
-            "creatingAccount": "Skep tans rekening, wag asseblief..."
+            "word": "Woord:",
+            "verified": "Herstelfrase geverifieer",
+            "verifiedBody": "Onthou om dit privaat te hou and veilig te stoor."
         },
         "backupWallet": {
             "title": "Back-up na 'n Stronghold lêer",
-            "body": "Voer jou wagwoord in om you beursie na 'n Stronghold lêer te back-up. Jou wagwoord word gebruik om die back-up te enkripteer."
+            "body1": "Voer jou wagwoord in om you beursie na 'n Stronghold lêer te back-up. Jou wagwoord word gebruik om die back-up te enkripteer.",
+            "body2": "Redes waarom digitale back-ups belangrik is:",
+            "reason1": "Herwin jou beursie maklik sonder om jou herstelfrase in te tik",
+            "reason2": "Voer jou beursie na ander toestelle in",
+            "reason3": "Besigtig jou transaksie geskiedenis"
         },
         "recoveryPhraseSaved": {
             "title": "Backu-up suksesvol",
             "body": "Jy het jou beursie ge back-up na 'n Stronghold."
         },
         "congratulations": {
-            "title": "Baie geluk",
-            "body": "Jou beursie is gereed."
+            "title": "Wallet-opstelling is voltooi",
+            "body": "Jou nuwe beursie is gereed om te gebruik."
         },
         "import": {
             "title": "Voer 'n beursie in",
@@ -90,14 +105,14 @@
         },
         "importFromText": {
             "title": "Herstel jou beursie met 'n herstelfrase of seed",
-            "body1": "'N Herstelfrase is 24 woorde lank. Dit word gebruik om 'n bestaande Firefly beursie te herstel.",
-            "body2": "'N seed bestaan uit 81 karakters. Dit word gebruik om van 'n ouer Trinity beursie te herstel.",
+            "body1": "'N seed bestaan uit 81 karakters. Dit word gebruik om van 'n ouer Trinity beursie te herstel.",
+            "body2": "'N Herstelfrase is 24 woorde lank (met spasies). Dit word gebruik om 'n bestaande Firefly beursie te herstel.",
             "body3": "Voer you seed of herstelfrase in",
             "seedDetected": "81 karakter seed bespeur",
             "phraseDetected": "24 woord frase bespeur"
         },
         "importFromFile": {
-            "title": "Herstel u beursie uit 'n back-up lêer",
+            "title": "Herstel jou beursie uit 'n back-up lêer",
             "body": "Voer 'n rugsteunlêer in om jou beursie te herstel. Back-up kan 'n Stronghold (.stronghold) of 'n Trinity SeedVault (.kdbx) wees."
         },
         "importBackupPassword": {
@@ -107,7 +122,11 @@
         },
         "importSuccess": {
             "title": "Jy het jou back-up suksesvol herwin",
-            "body": "Jy kan nou jou nuwe beursie instel."
+            "body": "Jy kan nou jou nuwe beursie instel.",
+            "seedvaultTitle": "Suksesvol ingevoer",
+            "seedvaultBody": "Jou wagwoord is korrek, ju kan nou voortgaan.",
+            "strongholdTitle": "Suksesvol ingevoer",
+            "strongholdBody": "Jou wagwoord is korrek, ju kan nou voortgaan."
         },
         "migrate": {
             "title": "Migreer jou fondse",
@@ -132,19 +151,19 @@
             },
             "security": {
                 "title": "Sekuriteit",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Verander kou wagwoord en pas die veiligheidsverwante instellings aan"
             },
             "advancedSettings": {
                 "title": "Gevorderde instellings",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Gereedskap en handinstellings vir tegniese gebruikers"
             },
             "helpAndInfo": {
                 "title": "Help & Inligting",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Vind die antwoord op 'n vraag of kry hulp met 'n probleem"
             },
             "profile": {
                 "title": "Profiel",
-                "description": ""
+                "description": "Verander jou profielnaam of stel 'n avatar in"
             },
             "sync": {
                 "title": "Sinkroniseer rekening",
@@ -160,27 +179,27 @@
             },
             "currency": {
                 "title": "Geldeenheid",
-                "description": ""
+                "description": "Pas balansomskakeling aan en verander grafiekopsies"
             },
             "notifications": {
                 "title": "Kennisgewings",
-                "description": ""
+                "description": "Stelselkennisgewings vir transaksiegebeurtenisse"
             },
             "exportStronghold": {
-                "title": "Voer Stronghold uit",
-                "description": ""
+                "title": "Voer back-up uit",
+                "description": "Voer uit na 'n Stronghold-lêer - 'n volledige geënkripteerde back-up van jou beursie en die nuutste transaksiegeskiedenis."
             },
             "appLock": {
-                "title": "App Lock",
-                "description": ""
+                "title": "Sluit outomaties",
+                "description": "Die tyd wat verloop het voordat jou beursie sluit en jou uitlog"
             },
             "changePassword": {
                 "title": "Verander wagwoord",
-                "description": ""
+                "description": "Jou wagwoord word gebruik om jou beursie te beveilig. Ju moet 'n sterk wagwoord gebruik om jou fondse te beskerm."
             },
             "changePincode": {
                 "title": "Verander PIN-kode",
-                "description": "",
+                "description": "Jou PIN hou jou saldo en transaksies privaat",
                 "currentPincode": "Huidige PIN",
                 "newPincode": "Nuwe PIN",
                 "confirmNewPincode": "Bevestig nuwe PIN",
@@ -192,59 +211,64 @@
             },
             "deleteProfile": {
                 "title": "Vee profiel uit",
-                "description": ""
+                "description": "Verwyder jou hele beursie, profiel en transaksiegeskiedenis. Maak seker dat jy 'n back-up het."
             },
             "deepLinks": {
                 "title": "Deep links",
-                "description": ""
+                "description": "Vul transaksiedata outomaties in Firefly deur op 'n iota: // te click"
             },
             "developerMode": {
                 "title": "Ontwikkelaar mode",
-                "description": ""
+                "description": "Koppel aan testnets en ander ontwikkelaarfunksies"
             },
             "nodeSettings": {
                 "title": "Node instellings",
-                "description": ""
+                "description": "Kies Manual om uit die nodelys te kies of koppel aan jou eie node"
             },
             "configureNodeList": {
-                "title": "Stel die Node lys op",
+                "title": "Kies 'n node",
                 "description": ""
             },
             "proofOfWork": {
                 "title": "Proof of work",
-                "description": ""
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Foutlêer",
-                "description": ""
+                "description": "Kyk na foute om 'n probleem op te spoor"
             },
             "diagnostics": {
                 "title": "Diagnostiek",
-                "description": ""
+                "description": "Kyk na stelsel- en toepassingsinligting"
             },
             "stateExport": {
                 "title": "State export",
-                "description": ""
+                "description": "Voer jou transaksiegeskiedenis uit na 'n .csv-lêer"
             },
             "troubleshoot": {
                 "title": "Probleemoplossing",
-                "description": ""
+                "description": "Gebruik die wizard vir probleemoplossing om algemene probleme op te los"
             },
             "documentation": {
                 "title": "Dokumentasie",
-                "description": ""
+                "description": "Kyk na die dokumentasie vir diepgaande verduidelikings van hoe dinge werk"
             },
             "faq": {
                 "title": "FAQ",
-                "description": ""
+                "title2": "Gereelde vrae",
+                "description": "Kyk na die algemene vrae om hulp te kry met algemene probleme of vrae"
             },
             "discord": {
                 "title": "Discord",
-                "description": ""
+                "description": "Kry hulp van die IOTA-gemeenskap op Discord"
             },
             "about": {
                 "title": "Oor",
                 "description": ""
+            },
+            "reportAnIssue": {
+                "title": "Rapporteer 'n probleem",
+                "description": "Rapporteer 'n fout by die ontwikkelaars. Kyk eers om seker te maak dat dit nog nie gerapporteer is nie."
             }
         },
         "login": {
@@ -268,14 +292,14 @@
                     "unlocked": "Oopgesluit"
                 },
                 "strongholdBackup": {
-                    "title": "Stronghold Backup",
+                    "title": "Stronghold Back-up",
                     "weeksAgo": "{weeks, plural, one {# week} other {# weke}} ago"
                 }
             },
             "network": {
                 "networkOperational": "Netwerk Operasioneel",
                 "networkDegraded": "Netwerk is nie optimaal nie",
-                "networkDown": "Netwerk Af",
+                "networkDown": "Netwerk ontkoppel",
                 "status": "Status",
                 "messagesPerSecond": "Boodskappe per sekondes",
                 "confirmationRate": "Confirmation tempo"
@@ -311,7 +335,7 @@
         },
         "deleteAccount": {
             "title": "Verwyder {name}?",
-            "body": "You will permanently lose your transaction history and maybe something else as well.",
+            "body": "Jy kan hierdie rekening later weer byvoeg, maar jou transaksiegeskiedenis kan dalk verloor word.",
             "typePassword": "Voer die wagwoord van jou beursie in om te bevestig.",
             "deleteAccount": "Verwyder rekening",
             "errorTitle": "Kan nie {name} verwyder nie",
@@ -391,7 +415,7 @@
         "tryAgain": "Probeer weer",
         "visitDiscord": "Besoek Discord",
         "dragDrop": "Sleep-en-los",
-        "importExtentions": ".stronghold of .kdbx lêer",
+        "importExtentions": ".kdbx or .stronghold lêer",
         "chooseFile": "Kies 'n lêer",
         "dropHere": "Sit jou lêer hier neer",
         "syncAll": "Sinkroniseer almal",
@@ -405,8 +429,8 @@
         "unlock": "Ontsluit",
         "updateFirefly": "Update Firefly",
         "restartNow": "Herlaai nou",
-        "saveBackup": "Stoor backup",
-        "customizeAcount": "Customise account",
+        "saveBackup": "Save Stronghold Back-up",
+        "customizeAcount": "Pas rekening aan",
         "viewAddressHistory": "Bekyk adresgeskiedenis",
         "deleteAccount": "Verwyder rekening",
         "max": "Max",
@@ -430,7 +454,12 @@
         "hideDetails": "Versteek besonderhede",
         "yes": "Ja",
         "no": "Nee",
-        "reset": "Stel terug"
+        "reset": "Stel terug",
+        "downloadRecoveryKit": "Stoor die Recovery Kit-sjabloon",
+        "skipBackup": "Slaan lêer-Back-up oor",
+        "finishSetup": "Voltooi die opstelling",
+        "readDocumentation": "Lees die dokumentasie",
+        "visitFaq": "Besoek FAQ"
     },
     "general": {
         "password": "Wagwoord",
@@ -451,7 +480,7 @@
         "moveFundsBetweenAccounts": "Skuif fondse tussen jou rekeninge",
         "sendTokensToAddress": "Stuur tokens na 'n adres",
         "manageAccount": "Bestuur rekeninge",
-        "customizeAcount": "Customize your account",
+        "customizeAcount": "Pas jou rekening aan",
         "account": "Rekening",
         "sendingToAddress": "Oppad na adres",
         "amount": "Bedrag",
@@ -480,7 +509,10 @@
         "accountBalance": "Rekening balans",
         "incoming": "Inkomende",
         "outgoing": "Uitgaande",
+        "totalIn": "Totaal in",
+        "totalOut": "Totaak uit",
         "accounts": "Rekeninge",
+        "myAccounts": "My Rekeninge",
         "automaticNodeSelection": "Outomatiese node seleksie",
         "manualNodeSelection": "Manuele node seleksie",
         "profiles": "Profiel",
@@ -500,6 +532,9 @@
         "inputAddress": "Input adres",
         "receiveAddress": "Ontvangs Adres",
         "date": "Datum",
+        "status": "Status",
+        "confirmed": "Bevestig",
+        "pending": "Hangende",
         "noAccounts": "Jy het geen rekeninge nie, skep asseblief een.",
         "loadingAccounts": "Wag asseblief terwyl dit laai...",
         "addProfile": "Voeg profiel by",
@@ -523,7 +558,14 @@
         "exportingStrongholdFailed": "Uitgevoer van die Stronghold het misluk",
         "pinCodeUpdating": "Opdatering van PIN-kode...",
         "pinCodeSuccess": "PIN-kode suksesvol opgedateer",
-        "pinCodeFailed": "Kon nie PIN-kode opdateer nie"
+        "pinCodeFailed": "Kon nie PIN-kode opdateer nie",
+        "passwordStrength": "Wagwoord sterkte",
+        "passwordStrength0": "Sleg",
+        "passwordStrength1": "Swak",
+        "passwordStrength2": "Swak",
+        "passwordStrength3": "Gemiddeld",
+        "passwordStrength4": "Sterk",
+        "creatingProfile": "Skep tans profiel op, wag asseblief..."
     },
     "dates": {
         "today": "Vandag",
@@ -584,13 +626,16 @@
             "amountInvalidFormat": "Die bedrag lyk na 'n ongeldige nommer.",
             "amountZero": "Die bedrag moet groter as 0 wees.",
             "wrongAddressFormat": "Adresse begin met die voorvoegsel {prefix}.",
-            "insufficientFunds": "Hierdie rekening het onvoldoende fondse"
+            "insufficientFunds": "Hierdie rekening het onvoldoende fondse.",
+            "sendingDust": "Jy kan nie minder as 1 Mi. stuur nie.",
+            "leavingDust": "Jy kan nie minder as 1 Mi op jou adres los nie."
         },
         "node": {
             "invalid": "Sleutel 'n geldige URL in.",
             "https": "HTTPS word vereis. Stel 'n ontwikkelaarprofiel op om onveilige HTTP-verbindings te gebruik.",
             "duplicate": "Hierdie Node is reeds gebruik.",
-            "unsynced": "Die node wat jy probeer byvoeg, is nie gesinkroniseer nie."
+            "unsynced": "Die node is nie gesinkroniseer nie.",
+            "noSynced": "Geen gesinkroniseerde node is beskikbaar nie."
         },
         "global": {
             "generic": "Iets het skeefgeloop."
@@ -601,7 +646,7 @@
             "mnemonic": "Die mnemoniese is nie geldig nie.",
             "seedTooShort": "Die seed moet 81 karakters lank wees, dit {length, plural, one {is 1} other {is #}}",
             "seedCharacters": "Die seed moet slegs karakters A-Z of 9 bevat",
-            "phraseWordCount": "Hier moet 24 woorde in jou herstelfrase wees, tans {length, plural, one {is daar 1} other {is daar #}}",
+            "phraseWordCount": "Daar moet 24 woorde in jou herstelfase voorkom, tans is daar {length, plural, one {1} other {#}}.",
             "phraseUnrecognizedWord": "Onherkenbare woord \"{word}\" in jou herstelfrase"
         }
     }

@@ -268,7 +268,9 @@
         <Text type="h4" classes="mb-3">{locale('views.settings.exportStronghold.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.exportStronghold.description')}</Text>
         <div class="flex flex-row items-center">
-            <Button classes="w-1/4 h-1/2" onClick={handleExportClick} disabled={exportBusy}>{locale('actions.export')}</Button>
+            <Button medium inlineStyle="min-width: 156px;" onClick={handleExportClick} disabled={exportBusy}>
+                {locale('actions.export')}
+            </Button>
             <Spinner busy={exportBusy} message={exportMessage} classes="ml-2" />
         </div>
     </section>
@@ -290,7 +292,7 @@
             <Text type="p" secondary classes="mb-5">{locale('views.settings.changePassword.description')}</Text>
             <Password
                 error={currentPasswordError}
-                classes="mb-1"
+                classes="mb-5"
                 bind:value={currentPassword}
                 showRevealToggle
                 {locale}
@@ -298,7 +300,7 @@
                 disabled={passwordChangeBusy} />
             <Password
                 error={newPasswordError}
-                classes="mb-1"
+                classes="mb-4"
                 bind:value={newPassword}
                 showRevealToggle
                 strengthLevels={4}
@@ -321,9 +323,9 @@
                 disabled={passwordChangeBusy} />
             <div class="flex flex-row items-center">
                 <Button
+                    medium
                     form="form-change-password"
                     type="submit"
-                    classes="w-1/4"
                     disabled={!currentPassword || !newPassword || !confirmedPassword || passwordChangeBusy}>
                     {locale('views.settings.changePassword.title')}
                 </Button>
@@ -338,7 +340,7 @@
             <Text type="p" secondary classes="mb-5">{locale('views.settings.changePincode.description')}</Text>
             <Password
                 error={currentPincodeError}
-                classes="mb-1"
+                classes="mb-4"
                 bind:value={currentPincode}
                 showRevealToggle
                 {locale}
@@ -348,7 +350,7 @@
                 disabled={pinCodeBusy} />
             <Password
                 error={newPincodeError}
-                classes="mb-1"
+                classes="mb-4"
                 bind:value={newPincode}
                 showRevealToggle
                 {locale}
@@ -367,9 +369,10 @@
                 disabled={pinCodeBusy} />
             <div class="flex flex-row items-center">
                 <Button
+                    medium
                     type="submit"
                     form="pincode-change-form"
-                    classes="w-1/4 mb-5"
+                    classes="mb-5"
                     disabled={!currentPincode || !newPincode || !confirmedPincode || pinCodeBusy}>
                     {locale('views.settings.changePincode.action')}
                 </Button>
@@ -381,6 +384,8 @@
     <section id="deleteProfile" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.deleteProfile.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.deleteProfile.description')}</Text>
-        <Button classes="w-1/4" warning onClick={reset}>{locale('views.settings.deleteProfile.title')}</Button>
+        <Button medium inlineStyle="min-width: 156px;" warning onClick={reset}>
+            {locale('views.settings.deleteProfile.title')}
+        </Button>
     </section>
 </div>

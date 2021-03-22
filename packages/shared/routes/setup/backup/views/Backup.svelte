@@ -3,6 +3,7 @@
     import { OnboardingLayout, Illustration, Text, Button } from 'shared/components'
     export let locale
     export let mobile
+    export let busy
 
     const dispatch = createEventDispatcher()
 
@@ -17,7 +18,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick}>
+    <OnboardingLayout onBackClick={handleBackClick} {busy}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5">{locale('views.backup.title')}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.backup.body1')}</Text>
@@ -27,8 +28,8 @@
         <div slot="leftpane__action">
             <Button classes="w-full" onClick={() => handleContinueClick()} autofocus>{locale('actions.continue')}</Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center">
-            <Illustration illustration="protect-desktop" height="100%" width="auto" classes="h-full object-cover object-left" />
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-purple dark:bg-gray-900">
+            <Illustration illustration="backup-desktop" width="100%" height="auto" />
         </div>
     </OnboardingLayout>
 {/if}

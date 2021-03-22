@@ -6,6 +6,7 @@ import type { StrongholdStatus } from './wallet'
 
 export interface Actor {
     destroy(): void
+    removeEventListeners(): void
 }
 
 export interface CommunicationIds {
