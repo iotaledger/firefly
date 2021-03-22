@@ -529,7 +529,7 @@
         "help": "Help",
         "you": "You",
         "messageId": "Message ID",
-        "inputAddress": "Sender Address",
+        "inputAddress": "Send Address",
         "receiveAddress": "Receive Address",
         "date": "Date",
         "status": "Status",
