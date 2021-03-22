@@ -1,6 +1,6 @@
 {
     "name": "desktop",
-    "productName": "Firefly",
+    "productName": "Firefly Beta",
     "version": "0.3.0",
     "description": "IOTA wallet desktop",
     "main": "public/build/main.js",
