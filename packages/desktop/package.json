@@ -45,7 +45,7 @@
         "webpack-dev-server": "^3.11.2"
     },
     "build": {
-        "productName": "Firefly",
+        "productName": "Firefly Beta",
         "artifactName": "firefly-desktop-${version}.${ext}",
         "copyright": "IOTA Foundation",
         "directories": {
