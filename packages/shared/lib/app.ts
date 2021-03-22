@@ -31,13 +31,14 @@ interface SendParams {
     amount: number
     address: string
     message: string
+    isInternal: boolean
 }
 
 /**
  * Input paramaters for sending transactions
  */
-export const sendParams = writable<SendParams>({ amount: 0, address: '', message: '' })
-export const clearSendParams = () => sendParams.set({ amount: 0, address: '', message: '' })
+export const sendParams = writable<SendParams>({ amount: 0, address: '', message: '', isInternal: false })
+export const clearSendParams = () => sendParams.set({ amount: 0, address: '', message: '', isInternal: false })
 
 /**
  * Determines whether a user is logged in
