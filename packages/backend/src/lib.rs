@@ -13,6 +13,7 @@ use iota_wallet::{
         remove_new_transaction_listener, remove_reattachment_listener,
         remove_stronghold_status_change_listener, remove_transfer_progress_listener, EventId,
     },
+    client::drop_all as drop_clients,
 };
 use once_cell::sync::Lazy;
 use riker::actors::*;
@@ -156,6 +157,7 @@ pub async fn destroy<A: Into<String>>(actor_id: A) {
     let actor_id = actor_id.into();
 
     if let Some(actor_data) = actors.remove(&actor_id) {
+        drop_clients().await;
         remove_event_listeners_internal(&actor_data.listeners).await;
 
         actor_data.actor.tell(actors::KillMessage, None);
