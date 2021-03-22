@@ -172,22 +172,43 @@
                 },
                 {
                     onSuccess(createAccountResponse) {
-                        api.syncAccount(createAccountResponse.payload.id, {
-                            onSuccess(syncAccountResponse) {
-                                getAccountMeta(createAccountResponse.payload.id, (err, meta) => {
-                                    if (!err) {
-                                        const account = prepareAccountInfo(createAccountResponse.payload, meta)
-                                        accounts.update((accounts) => [...accounts, account])
-                                        walletRoute.set(WalletRoutes.Init)
-                                        completeCallback()
-                                    } else {
-                                        completeCallback(locale(err.error))
-                                    }
-                                })
-                            },
-                            onError(err) {
-                                completeCallback(locale(err.error))
-                            },
+                        const account: WalletAccount = prepareAccountInfo(createAccountResponse.payload, {
+                            balance: 0,
+                            incoming: 0,
+                            outgoing: 0,
+                            depositAddress: createAccountResponse.payload.addresses[0].address
+                        })
+                        // immediately store the account; we update it later after sync
+                        // we do this to allow offline account creation
+                        accounts.update((accounts) => [...accounts, account])
+                        return new Promise((resolve) => {
+                            api.syncAccount(createAccountResponse.payload.id, {
+                                onSuccess(_syncAccountResponse) {
+                                    getAccountMeta(createAccountResponse.payload.id, (err, meta) => {
+                                        if (!err) {
+                                            const account = prepareAccountInfo(createAccountResponse.payload, meta)
+                                            accounts.update((storedAccounts) => {
+                                                return storedAccounts.map((storedAccount) => {
+                                                    if (storedAccount.id === account.id) {
+                                                        return account
+                                                    }
+                                                    return storedAccount
+                                                })
+                                            })
+                                        }
+                                        resolve(null)
+                                    })
+                                },
+                                onError() {
+                                    // we ignore sync errors since the user can recover from it later
+                                    // this allows an account to be created by an offline user
+                                    resolve(null)
+                                },
+                            })
+                        })
+                        .then(() => {
+                            walletRoute.set(WalletRoutes.Init)
+                            completeCallback()
                         })
                     },
                     onError(err) {
