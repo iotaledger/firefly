@@ -32,14 +32,14 @@
                     <Icon icon="success-check" classes="text-white" />
                 </div>
                 <Text type="h2" classes="mb-5 text-center">{locale('views.congratulations.title')}</Text>
-                <Text type="p" secondary classes="mb-10">{locale('views.congratulations.body')}</Text>
+                <Text type="p" secondary classes="mb-2">{locale('views.congratulations.body')}</Text>
             </div>
         </div>
         <div slot="leftpane__action">
             <Button classes="w-full" onClick={() => handleContinueClick()}>{locale('actions.finishSetup')}</Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center p-16 bg-pastel-blue dark:bg-gray-900">
-            <Illustration illustration="congratulations-desktop" width="auto" height="auto"/>
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
+            <Illustration illustration="congratulations-desktop" width="100%" height="auto" />
         </div>
     </OnboardingLayout>
 {/if}

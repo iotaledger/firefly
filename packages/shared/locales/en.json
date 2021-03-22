@@ -29,22 +29,23 @@
         },
         "appearance": {
             "title": "Appearance",
-            "body": "Choose your wallet’s theme"
+            "body": "Choose your wallet’s theme."
         },
         "setup": {
             "title": "Set up your wallet",
-            "body1": "You can create multiple user profiles to organize your wallets or separate user identities.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later",
+            "body1": "You can create multiple user profiles to keep your tokens separate and improve privacy.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Profile Name"
         },
         "secure": {
             "title": "Secure your wallet",
-            "body1": "Your Firefly wallet is secured by a password and a PIN code.",
-            "body2": "Use the Recovery Kit PDF template to store your wallet's login credentials safely."
+            "body1": "Save and print the Recovery Kit PDF template.",
+            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
         },
         "password": {
             "title": "Create a password",
-            "body": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates."
+            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
+            "body2": "It is recommended that you write down your password in your Recovery Kit."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -53,41 +54,42 @@
         },
         "pin": {
             "title": "Set up PIN code",
-            "body1": "Enter a 6-digit PIN below. You will be asked for this frequently when you access your device.",
+            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
             "body2": "Use numbers only"
         },
         "confirmPin": {
-            "title": "Confirm PIN code",
-            "body": "Confirm the PIN code you just created by repeating it."
+            "title": "Verify your PIN code",
+            "body1": "Your PIN keeps your balance and transactions private.",
+            "body2": "Re-enter your PIN code to proceed. "
         },
         "backup": {
             "title": "Back up your wallet",
-            "body1": "You will now be shown a recovery phrase.",
-            "body2": "Do not share this phrase with anyone. Your recovery phrase can be used to access your tokens from anywhere.",
+            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
+            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
             "body3": "If you lose your recovery phrase, you may lose your funds."
         },
         "recoveryPhrase": {
             "title": "Recovery phrase",
-            "body1": "Carefully copy the words in the exact order shown.",
+            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
             "body2": "Keep this private and safely stored.",
+            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
             "revealRecoveryPhrase": "Reveal recovery phrase",
             "hideRecoveryPhrase": "Hide recovery phrase"
         },
         "verifyRecoveryPhrase": {
             "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Please select the right word with the corresponding number.",
+            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
             "word": "Word",
             "verified": "Recovery phrase verified",
-            "verifiedBody": "Remember to keep it private and safely guarded."
+            "verifiedBody": "Remember to keep it private and safely stored."
         },
         "backupWallet": {
-            "title": "Back up to a file",
-            "body1": "Your wallet password is also used to encrypt a Stronghold backup. Enter your wallet password to save your recovery phrase backup to a file.",
-            "body2": "Reasons why backing up to a file is important:",
-            "reason1": "Recover your full history",
-            "reason2": "Save your settings",
-            "reason3": "Recover a complete wallet setup and configuration",
-            "reason4": "Import into other devices"
+            "title": "Back up to a Stronghold file",
+            "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
+            "body2": "Reasons why digital backups are important:",
+            "reason1": "Easily recover your wallet without typing in your recovery phrase",
+            "reason2": "Import your wallet to other devices",
+            "reason3": "Recover your full transaction history"
         },
         "recoveryPhraseSaved": {
             "title": "Successfully backed up",
@@ -99,30 +101,28 @@
         },
         "import": {
             "title": "Import a wallet",
-            "body": "If you have an existing seed or wallet back up file, you can import it here."
+            "body": "If you have a recovery phrase or Stronghold back up, you can import it here."
         },
         "importFromText": {
-            "title": "Type your seed or secret phase",
-            "body1": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
-            "body2": "A secret phrase is a 24 word mnemonic. This is used to recover a newer Firefly wallet.",
-            "body3": "Enter your seed or secret phrase",
+            "title": "Restore your wallet with a recovery phrase or seed",
+            "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
+            "body2": "A recovery phrase is 24 words long (with spaces). This is used to recover an existing Firefly wallet.",
+            "body3": "Enter your seed or recovery phrase",
             "seedDetected": "81 character seed detected",
-            "phraseDetected": "24 word secret phrase detected"
+            "phraseDetected": "24 word recovery phrase detected"
         },
         "importFromFile": {
             "title": "Restore your wallet using a backup file",
-            "body": "Upload a file to restore existing wallet funds. File backups can be either a Trinity SeedVault or a Firefly Stronghold."
+            "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
             "title": "Restore your wallet from a SeedVault or Stronghold",
-            "body1": "Please provide your backup password.",
-            "body2": "This is the password created when you first created your backup. This stops unauthorized access to your funds."
+            "body1": "Please enter your backup password.",
+            "body2": "This is the password you set when you first created your backup."
         },
         "importSuccess": {
-            "mnemonicTitle": "You have successfully recovered your backup",
-            "mnemonicBody": "Your secret phrase is correct, you can now set up your new wallet.",
-            "seedTitle": "You have successfully recovered your backup",
-            "seedBody": "Your secret phrase is correct, you can now set up your new wallet.",
+            "title": "You have successfully recovered your backup",
+            "body": "You can now set up your new wallet.",
             "seedvaultTitle": "Successfully imported",
             "seedvaultBody": "Your password is correct, you can now continue.",
             "strongholdTitle": "Successfully imported",
@@ -199,7 +199,7 @@
             },
             "changePincode": {
                 "title": "Change PIN code",
-                "description": "Your pin keeps your balance and transactions private",
+                "description": "Your PIN keeps your balance and transactions private",
                 "currentPincode": "Current PIN",
                 "newPincode": "New PIN",
                 "confirmNewPincode": "Confirm new PIN",
@@ -231,7 +231,7 @@
             },
             "proofOfWork": {
                 "title": "Proof of work",
-                "description": "Complete proof of work locally on your device or oursource to the node"
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Error log",
@@ -287,12 +287,12 @@
                     "noneDetected": "None detected"
                 },
                 "strongholdStatus": {
-                    "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "title": "Wallet Status",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
                 },
                 "strongholdBackup": {
-                    "title": "Stronghold Backup",
+                    "title": "Wallet Backup",
                     "weeksAgo": "{weeks, plural, one {# week} other {# weeks}} ago"
                 }
             },
@@ -334,14 +334,14 @@
             "notBackedUpDescription": "You have not backed up your Stronghold"
         },
         "deleteAccount": {
-            "title": "Delete {name}?",
-            "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "typePassword": "Type your wallet’s password to confirm.",
-            "deleteAccount": "Delete account",
-            "errorTitle": "Unable to delete {name}",
-            "errorBody1": "To delete an account you must have 0 balance.",
+            "title": "Remove {name}?",
+            "body": "You can add this account back later but you may lose your transaction history.",
+            "typePassword": "Type your wallet password to confirm.",
+            "deleteAccount": "Remove account",
+            "errorTitle": "Unable to remove {name}",
+            "errorBody1": "To remove an account it must have 0 balance.",
             "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
-            "errorBody3": "You cannot delete this account, you must have at least one."
+            "errorBody3": "You cannot remove this account, you must have at least one."
         },
         "addressHistory": {
             "title": "{name} account address history",
@@ -432,7 +432,7 @@
         "saveBackup": "Save Stronghold backup",
         "customizeAcount": "Customise account",
         "viewAddressHistory": "View address history",
-        "deleteAccount": "Delete account",
+        "deleteAccount": "Remove account",
         "max": "Max",
         "addNode": "Add node",
         "removeNode": "Remove node",
@@ -455,7 +455,7 @@
         "yes": "Yes",
         "no": "No",
         "reset": "Reset",
-        "downloadRecoveryKit": "Download recovery kit template",
+        "downloadRecoveryKit": "Save Recovery Kit template",
         "skipBackup": "Skip file backup",
         "finishSetup": "Finish setup",
         "readDocumentation": "Read the documentation",
@@ -472,8 +472,8 @@
         "recentActivity": "Recent Activity",
         "sent": "Sent",
         "received": "Received",
-        "sendPayment": "Send payment",
-        "moveFunds": "Move funds",
+        "sendPayment": "Send Payment",
+        "moveFunds": "Internal Transfer",
         "sendFunds": "Send funds",
         "sendToAddress": "Send to address",
         "scanQrOrPaste": "Scan a QR code or paste an Address",
@@ -488,7 +488,7 @@
         "reference": "Reference",
         "from": "From",
         "to": "To",
-        "receiveFunds": "Receive funds",
+        "receiveFunds": "Receive Funds",
         "myAddress": "My Address",
         "shareAddress": "Share an address",
         "yourAddress": "Your address",
@@ -512,13 +512,13 @@
         "totalIn": "Total in",
         "totalOut": "Total out",
         "accounts": "Accounts",
-        "myAccounts": "My accounts",
+        "myAccounts": "My Accounts",
         "automaticNodeSelection": "Automatic node selection",
         "manualNodeSelection": "Manual node selection",
         "profiles": "Profiles",
         "developerProfile": "Developer Profile",
         "dev": "Dev",
-        "createAccount": "Create an account",
+        "createAccount": "Create an Account",
         "accountName": "Account name",
         "latestTransactions": "Latest Transactions",
         "transactions": "Transactions",
@@ -529,7 +529,7 @@
         "help": "Help",
         "you": "You",
         "messageId": "Message ID",
-        "inputAddress": "Input Address",
+        "inputAddress": "Send Address",
         "receiveAddress": "Receive Address",
         "date": "Date",
         "status": "Status",
@@ -563,7 +563,7 @@
         "passwordStrength0": "Bad",
         "passwordStrength1": "Poor",
         "passwordStrength2": "Weak",
-        "passwordStrength3": "Good",
+        "passwordStrength3": "Average",
         "passwordStrength4": "Strong",
         "creatingProfile": "Creating profile, please wait..."
     },
@@ -577,6 +577,7 @@
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
         "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
+        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
         "failed": "Outgoing {{value}} from {{account}} has failed",
         "downloadingUpdate": "Downloading update",
         "updateReady": "Update ready",
@@ -647,7 +648,7 @@
             "mnemonic": "The mnemonic is not valid.",
             "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
             "seedCharacters": "The seed should only contain characters A-Z or 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
             "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase"
         }
     }

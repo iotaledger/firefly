@@ -9,9 +9,15 @@
     $: selected = icons[icon]
 </script>
 
+<style type="text/scss">
+    .boxed {
+        border-radius: 0.625rem; // TODO: add to tailwind
+    }
+</style>
+
 {#if selected}
     {#if boxed}
-        <div class={`w-8 h-8 flex justify-center items-center rounded-lg ${boxClasses}`}>
+        <div class="boxed w-8 h-8 flex justify-center items-center {boxClasses}">
             <svg
                 data-label="icon"
                 class="flex-shrink-0 {classes}"

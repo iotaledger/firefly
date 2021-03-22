@@ -182,7 +182,7 @@
 <div class="w-full h-full flex flex-col justify-between p-8">
     <div>
         <div class="flex flex-row w-full justify-between mb-8">
-            <div class="flex flex-row space-x-4">
+            <div class="flex flex-row space-x-6">
                 <button
                     on:click={() => handleSendTypeClick(SEND_TYPE.EXTERNAL)}
                     disabled={$isTransferring}
@@ -257,7 +257,7 @@
     </div>
     {#if !$isTransferring}
         <div class="flex flex-row justify-between px-2">
-            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>{locale('actions.back')}</Button>
+            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>{locale('actions.cancel')}</Button>
             <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()}>{locale('actions.send')}</Button>
         </div>
     {/if}

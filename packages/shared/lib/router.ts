@@ -1,5 +1,6 @@
 import { cleanupSignup, login, strongholdPassword, walletPin } from 'shared/lib/app'
 import { profiles } from 'shared/lib/profile'
+import { selectedAccountId } from 'shared/lib/wallet'
 import { AccountRoutes, AppRoute, SettingsRoutes, SetupType, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
 import { get, readable, writable } from 'svelte/store'
 import { deepLinkRequestActive } from './deepLinking'
@@ -224,4 +225,11 @@ export const resetRouter = () => {
     settingsRoute.set(SettingsRoutes.Init)
     dashboardRoute.set(Tabs.Wallet)
     deepLinkRequestActive.set(false)
+}
+
+export const resetWalletRoute = () => {
+    dashboardRoute.set(Tabs.Wallet)
+    walletRoute.set(WalletRoutes.Init)
+    accountRoute.set(AccountRoutes.Init)
+    selectedAccountId.set(null)
 }

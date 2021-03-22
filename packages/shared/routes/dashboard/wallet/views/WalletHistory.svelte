@@ -32,7 +32,7 @@
             <Icon icon="refresh" classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white" />
         </button>
     </div>
-    <div class="overflow-y-auto flex-auto h-1 space-y-2.5">
+    <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2">
         {#if $transactions?.length}
             {#each $transactions as transaction}
                 <ActivityRow

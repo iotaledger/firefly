@@ -63,6 +63,7 @@ type WalletState = {
     balanceOverview: Writable<BalanceOverview>
     accounts: Writable<WalletAccount[]>
     accountsLoaded: Writable<boolean>
+    confirmedInternalMessageIds: Writable<{ [key: string]: number }>
 }
 
 type BalanceTimestamp = {
@@ -75,6 +76,10 @@ export type BalanceHistory = {
     [HistoryDataProps.SEVEN_DAYS]: BalanceTimestamp[]
     [HistoryDataProps.TWENTY_FOUR_HOURS]: BalanceTimestamp[]
     [HistoryDataProps.ONE_MONTH]: BalanceTimestamp[]
+}
+
+export type AccountsBalanceHistory = {
+    [accountIndex: number]: BalanceHistory
 }
 
 /** Active actors state */
@@ -95,6 +100,7 @@ export const wallet = writable<WalletState>({
     }),
     accounts: writable<WalletAccount[]>([]),
     accountsLoaded: writable<boolean>(false),
+    confirmedInternalMessageIds: writable<{ [key: string]: number }>({})
 })
 
 export const resetWallet = () => {
@@ -416,12 +422,13 @@ export const initialiseListeners = (id: string) => {
         onSuccess(response) {
             const accounts = get(wallet).accounts
             const account = get(accounts).find((account) => account.id === response.payload.accountId)
-            const message = response.payload.message
-            const messageKey = response.payload.confirmed ? 'confirmed' : 'failed'
 
+            const message = response.payload.message
+            const confirmed = response.payload.confirmed;
             const essence = message.payload.data.essence
 
-            if (response.payload.confirmed && !essence.data.internal) {
+
+            if (confirmed && !essence.data.internal) {
                 const { balanceOverview } = get(wallet);
                 const overview = get(balanceOverview);
 
@@ -435,8 +442,10 @@ export const initialiseListeners = (id: string) => {
                 );
             }
 
+            // Update state
             const accountMessage = account.messages.find((_message) => _message.id === message.id)
             accountMessage.confirmed = response.payload.confirmed
+
             accounts.update((storedAccounts) => {
                 return storedAccounts.map((storedAccount) => {
                     if (storedAccount.id === account.id) {
@@ -457,11 +466,57 @@ export const initialiseListeners = (id: string) => {
                 })
             })
 
-            const notificationMessage = localize(`notifications.${messageKey}`)
-                .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
-                .replace('{{account}}', account.alias)
+            // Notify user
+            const messageKey = confirmed ? 'confirmed' : 'failed'
 
-            showSystemNotification({ type: "info", message: notificationMessage })
+            const _notify = (senderAccountAlias: string | null = null) => {
+                let notificationMessage
+
+                if (senderAccountAlias) {
+                    notificationMessage = localize(`notifications.${messageKey}Internal`)
+                        .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
+                        .replace('{{senderAccount}}', senderAccountAlias)
+                        .replace('{{receiverAccount}}', account.alias)
+                } else {
+                    notificationMessage = localize(`notifications.${messageKey}`)
+                        .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
+                        .replace('{{account}}', account.alias)
+                }
+
+                showSystemNotification({ type: "info", message: notificationMessage })
+            }
+
+            const { confirmedInternalMessageIds } = get(wallet)
+            const messageIds = get(confirmedInternalMessageIds)
+
+            // If this event is emitted because a message failed, then this message will only exist on the sender account
+            // Therefore, show the notification (no need to group).
+            if (!confirmed) {
+                _notify()
+            } else {
+                // If this is an external message, notify (no need to group)
+                if (!essence.data.internal) {
+                    _notify();
+                } else {
+                    // If this is an internal message, check if we have already receive confirmation state of this message
+                    if (Object.keys(messageIds).includes(message.id)) {
+                        _notify(
+                            get(accounts).find((account) => account.index === messageIds[message.id]).alias
+                        );
+
+                        confirmedInternalMessageIds.update((ids) => {
+                            delete ids[message.id]
+
+                            return ids;
+                        })
+                    } else {
+                        // Otherwise, add the message id and do not notify yet
+                        messageIds[message.id] = account.index
+                    }
+                }
+            }
+
+
         },
         onError(error) {
             console.error(error)
@@ -894,72 +949,67 @@ export const updateAccountsBalanceEquiv = (): void => {
  * @method getAccountsBalanceHistory
  *
  * @param {Account} accounts
+ * @param {number} balanceRaw
  * @param {PriceData} [priceData]
  *
  */
-export const getAccountsBalanceHistory = (accounts: Account[], priceData: PriceData): BalanceHistory => {
-    let balanceHistory: BalanceHistory = {
-        [HistoryDataProps.ONE_HOUR]: [],
-        [HistoryDataProps.TWENTY_FOUR_HOURS]: [],
-        [HistoryDataProps.SEVEN_DAYS]: [],
-        [HistoryDataProps.ONE_MONTH]: [],
-    }
+export const getAccountsBalanceHistory = (accounts: WalletAccount[], priceData: PriceData): AccountsBalanceHistory => {
+    let balanceHistory: AccountsBalanceHistory = {}
     if (priceData && accounts) {
         accounts.forEach((account) => {
-            let accountBalanceHistory: HistoryData = {
+            let accountBalanceHistory: BalanceHistory = {
                 [HistoryDataProps.ONE_HOUR]: [],
                 [HistoryDataProps.TWENTY_FOUR_HOURS]: [],
                 [HistoryDataProps.SEVEN_DAYS]: [],
                 [HistoryDataProps.ONE_MONTH]: [],
             }
             // Sort messages from last to newest
-            let messages = account.messages.sort((a, b) => {
-                return <any>new Date(a.timestamp).getTime() - <any>new Date(b.timestamp).getTime()
+            let messages = account.messages.slice().sort((a, b) => {
+                return <any>new Date(b.timestamp).getTime() - <any>new Date(a.timestamp).getTime()
             })
             // Calculate the variations for each account
-            var balanceSoFar = 0;
-            let accountBalanceVariations = [{ balance: balanceSoFar, timestamp: '0' }]
+            var trackedBalance = account.rawIotaBalance;
+            let accountBalanceVariations = [{ balance: trackedBalance, timestamp: new Date().toString() }]
             messages.forEach((message) => {
                 const essence = message.payload.data.essence.data;
 
                 if (essence.incoming) {
-                    balanceSoFar += essence.value;
+                    trackedBalance -= essence.value;
                 } else {
-                    balanceSoFar -= essence.value;
+                    trackedBalance += essence.value;
                 }
-
-                accountBalanceVariations.push({ balance: balanceSoFar, timestamp: message.timestamp })
+                accountBalanceVariations.push({ balance: trackedBalance, timestamp: message.timestamp })
             })
             // Calculate the balance in each market data timestamp
             let balanceHistoryInTimeframe = []
             Object.entries(priceData[CurrencyTypes.USD]).forEach(([timeframe, data]) => {
-                // sort market data from last to newest
-                let sortedData = data.sort((a, b) => a[0] - b[0])
+                // sort market data from newest to last
+                let sortedData = data.slice().sort((a, b) => b[0] - a[0])
                 balanceHistoryInTimeframe = []
                 // if there are no balance variations
                 if (accountBalanceVariations.length === 1) {
-                    balanceHistoryInTimeframe = sortedData.map(_data => ({ timestamp: _data[0], balance: 0 }))
+                    balanceHistoryInTimeframe = sortedData.map(_data => ({ timestamp: _data[0], balance: trackedBalance }))
                 }
                 else {
-                    let i = 1
-                    sortedData.forEach(data => {
-                        let data_timestamp = new Date(data[0] * 1000).getTime()
+                    let i = 0
+                    sortedData.forEach((data) => {
+                        let marketTimestamp = new Date(data[0] * 1000).getTime()
                         // find balance for each market data timepstamp
-                        for (i; i < accountBalanceVariations.length; i++) {
+                        for (i; i < accountBalanceVariations.length - 1; i++) {
                             let currentBalanceTimestamp = new Date(accountBalanceVariations[i].timestamp).getTime()
-                            let peviousBalanceTimestamp = new Date(accountBalanceVariations[i - 1].timestamp).getTime()
-                            if (data_timestamp >= peviousBalanceTimestamp && data_timestamp < currentBalanceTimestamp) {
-                                balanceHistoryInTimeframe.push({ timestamp: data[0], balance: accountBalanceVariations[i - 1].balance })
+                            let nextBalanceTimestamp = new Date(accountBalanceVariations[i + 1].timestamp).getTime()
+                            if (marketTimestamp > nextBalanceTimestamp && marketTimestamp <= currentBalanceTimestamp) {
+                                balanceHistoryInTimeframe.push({ timestamp: data[0], balance: accountBalanceVariations[i].balance })
                                 return
                             }
-                            else if (i === (accountBalanceVariations.length - 1)) {
-                                balanceHistoryInTimeframe.push({ timestamp: data[0], balance: accountBalanceVariations[i].balance })
+                            else if (marketTimestamp <= nextBalanceTimestamp && i === (accountBalanceVariations.length - 2)) {
+                                balanceHistoryInTimeframe.push({ timestamp: data[0], balance: 0 })
                                 return
                             }
                         }
                     })
                 }
-                accountBalanceHistory[timeframe] = balanceHistoryInTimeframe
+                accountBalanceHistory[timeframe] = balanceHistoryInTimeframe.reverse()
             })
             balanceHistory[account.index] = accountBalanceHistory
         })

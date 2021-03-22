@@ -18,7 +18,7 @@
     let canvas
     let chart
 
-    let darkModeEnabled = $appSettings.darkMode
+    $: darkModeEnabled = $appSettings.darkMode
 
     const fullConfig = resolveConfig(tailwindConfig)
 

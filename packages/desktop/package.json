@@ -71,10 +71,11 @@
         "dmg": {
             "iconSize": 120,
             "title": "${productName}",
+            "background": "public/assets/background/mac/background.png",
             "sign": false,
             "contents": [
                 {
-                    "x": 520,
+                    "x": 500,
                     "y": 250,
                     "type": "link",
                     "path": "/Applications"
@@ -103,7 +104,8 @@
                 "Name": "Firefly",
                 "Comment": "Desktop wallet for IOTA",
                 "Categories": "Office;Network;Finance"
-            }
+            },
+            "icon": "./public/assets/icons/linux/icon256x256.png"
         },
         "mac": {
             "icon": "./public/assets/icons/mac/icon.icns",

@@ -36,7 +36,7 @@
         if (locale || $selectedChart || $chartCurrency || $chartTimeframe || $walletBalanceHistory || $selectedAccount) {
             // Account value chart
             if ($selectedAccount) {
-                chartData = getAccountValueData($accountsBalanceHistory[$selectedAccount.index])
+                chartData = getAccountValueData($accountsBalanceHistory[$selectedAccount.index], $selectedAccount.rawIotaBalance)
                 switch ($chartTimeframe) {
                     case HistoryDataProps.ONE_HOUR:
                     case HistoryDataProps.TWENTY_FOUR_HOURS:

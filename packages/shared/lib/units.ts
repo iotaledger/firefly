@@ -48,8 +48,8 @@ export const formatUnit = (value: number, decimalPlaces = 2): string => {
 const getUnit = (value: number): Unit => {
     let bestUnits: Unit = Unit.i
 
-    if (!value) {
-        return bestUnits
+    if (!value || value === 0) {
+        return Unit.Mi
     }
 
     const checkLength = Math.abs(value).toString().length

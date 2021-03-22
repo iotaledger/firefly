@@ -58,11 +58,12 @@
     <OnboardingLayout onBackClick={handleBackClick} {busy}>
         <div slot="leftpane__content">
             <form on:submit={handleContinueClick} id="password-form">
-                <Text type="h2" classes="mb-5">{locale('views.password.title')}</Text>
-                <Text type="p" secondary classes="mb-10">{locale('views.password.body')}</Text>
+                <Text type="h2" classes="mb-6">{locale('views.password.title')}</Text>
+                <Text type="p" classes="mb-4" secondary>{locale('views.password.body1')}</Text>
+                <Text type="p" classes="mb-10" secondary>{locale('views.password.body2')}</Text>
                 <Password
                     {error}
-                    classes="mb-1"
+                    classes="mb-4"
                     bind:value={password}
                     strengthLevels={4}
                     showRevealToggle
@@ -73,6 +74,7 @@
                     disabled={busy} />
                 <Password
                     bind:value={confirmedPassword}
+                    classes="mb-5"
                     {locale}
                     placeholder={locale('general.confirmPassword')}
                     showRevealToggle
@@ -84,8 +86,8 @@
                 {locale('actions.savePassword')}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center p-16 bg-pastel-yellow dark:bg-gray-900">
-            <Illustration illustration="password-desktop" height="100%" width="auto" />
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-yellow dark:bg-gray-900">
+            <Illustration illustration="password-desktop" width="100%" height="auto" />
         </div>
     </OnboardingLayout>
 {/if}

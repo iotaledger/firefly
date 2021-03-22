@@ -25,16 +25,19 @@
                 <div class="bg-green-100 rounded-2xl relative -top-10">
                     <Icon icon="success-check" classes="text-white" />
                 </div>
-                <Text type="h2" classes="mb-5 text-center">{locale(`views.importSuccess.${importType}Title`)}</Text>
-                <Text type="p" secondary classes="mb-10">{locale(`views.importSuccess.${importType}Body`)}</Text>
+                <Text type="h2" classes="mb-5 text-center">{locale(`views.importSuccess.title`)}</Text>
+                <Text type="p" secondary classes="mb-2">{locale(`views.importSuccess.body`)}</Text>
             </div>
         </div>
         <div slot="leftpane__action">
             <Button classes="w-full" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
         <!-- TODO: missing illustration -->
-        <div slot="rightpane" class="w-full h-full bg-pastel-green dark:bg-gray-900">
-            <Illustration illustration={ importType === 'seed' || importType === 'mnemonic' ? 'import-from-text-success-desktop' : 'import-from-file-success-desktop'} width="auto" height="100%" classes="h-full object-scale-down object-right"/>
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-green dark:bg-gray-900">
+            <Illustration
+                illustration={importType === 'seed' || importType === 'mnemonic' ? 'import-from-text-success-desktop' : 'import-from-file-success-desktop'}
+                width="100%"
+                height="auto" />
         </div>
     </OnboardingLayout>
 {/if}

@@ -32,10 +32,10 @@
             {#if slots}
                 <slot />
             {:else}
-                <Text type="h2" classes="text-white">{getInitials()}</Text>
+                <Text type="h3" classes="text-white">{getInitials()}</Text>
             {/if}
         </div>
-        <Text type="h4" classes="mt-5">{name}</Text>
+        <Text type="h5" classes="mt-5">{name}</Text>
         {#if isDeveloper}
             <div class="bg-gray-500 dark:bg-gray-700 dark:bg-opacity-20 rounded-full px-2 py-1 mt-4">
                 <Text type="p" smaller classes="text-white">{locale('general.dev').toUpperCase()}</Text>
