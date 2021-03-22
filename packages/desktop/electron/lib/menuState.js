@@ -10,7 +10,7 @@ export let menuState = {
         advancedSettings: "Advanced Settings",
         errorLog: "Error Log",
         diagnostics: "Diagnostics",
-        logout: "Log Out",
+        //logout: "Log Out",
         hide: "Hide",
         hideOthers: "Hide Others",
         showAll: "Show All",

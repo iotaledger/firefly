@@ -276,6 +276,9 @@ ipcMain.handle('get-path', (_e, path) => {
     }
     return app.getPath(path)
 })
+ipcMain.handle('quit', (_e) => {
+    app.quit()
+})
 
 // Diagnostics
 ipcMain.handle('diagnostics', (_e) => {

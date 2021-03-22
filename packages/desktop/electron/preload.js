@@ -127,6 +127,12 @@ const Electron = {
     close: () => {
         ipcRenderer.invoke('close')
     },
+    /**
+     * Quits the app
+     */
+    quit: () => {
+        ipcRenderer.invoke('quit')
+    },
     /*
      * Opens url and checks against acceptlist
      * @param {string} url - Target url
