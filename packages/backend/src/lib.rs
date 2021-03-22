@@ -157,7 +157,6 @@ pub async fn destroy<A: Into<String>>(actor_id: A) {
     let actor_id = actor_id.into();
 
     if let Some(actor_data) = actors.remove(&actor_id) {
-        drop_clients().await;
         remove_event_listeners_internal(&actor_data.listeners).await;
 
         actor_data.actor.tell(actors::KillMessage, None);
@@ -165,6 +164,10 @@ pub async fn destroy<A: Into<String>>(actor_id: A) {
             sys.stop(&actor_data.actor);
         })
         .await;
+
+        // delay to wait for the actor to be killed
+        tokio::time::sleep(Duration::from_millis(500)).await;
+        drop_clients().await;
 
         let mut message_receivers = message_receivers()
             .lock()
