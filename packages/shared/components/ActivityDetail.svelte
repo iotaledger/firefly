@@ -3,9 +3,9 @@
     import { getInitials, truncateString } from 'shared/lib/helpers'
     import { formatUnit } from 'shared/lib/units'
     import { setClipboard } from 'shared/lib/utils'
+    import { formatDate } from 'shared/lib/i18n'
     import type { WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import { date } from 'svelte-i18n'
     import type { Readable, Writable } from 'svelte/store'
     import type { Payload } from 'shared/lib/typings/message'
 
@@ -88,13 +88,12 @@
             <div class="mb-5">
                 <Text secondary>{locale('general.date')}</Text>
                 <Text smaller>
-                    {$date(new Date(timestamp), {
+                    {formatDate(new Date(timestamp), {
                         year: 'numeric',
                         month: 'long',
                         day: 'numeric',
                         hour: 'numeric',
                         minute: 'numeric',
-                        hour12: false,
                     })}
                 </Text>
             </div>

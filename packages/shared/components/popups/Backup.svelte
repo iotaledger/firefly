@@ -5,9 +5,9 @@
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { updateProfile } from 'shared/lib/profile'
     import { api } from 'shared/lib/wallet'
-    import { date } from 'svelte-i18n'
+    import { formatDate } from 'shared/lib/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { getDefaultStrongholdName } from 'shared/lib/utils';
+    import { getDefaultStrongholdName } from 'shared/lib/utils'
 
     export let locale
     export let lastBackupDate
@@ -59,11 +59,11 @@
 <div class="flex w-full flex-row flex-wrap">
     <Text type="h4" classes="mb-5">
         {lastBackupDate ? locale('popups.backup.title', {
-                  values: { date: $date(lastBackupDate, { format: 'long' }) },
+                  values: { date: formatDate(lastBackupDate, { format: 'long' }) },
               }) : locale('popups.backup.notBackedUp')}
     </Text>
-    <div class="w-full p-4 bg-gray-50 dark:bg-gray-800 flex justify-center content-center">        
-        <Logo width="50%" logo="logo-stronghold" />    
+    <div class="w-full p-4 bg-gray-50 dark:bg-gray-800 flex justify-center content-center">
+        <Logo width="50%" logo="logo-stronghold" />
     </div>
     <div class="w-full text-center my-6 px-8">
         <Text overrideColor type="h5" classes="mb-2 text-{color}-600">

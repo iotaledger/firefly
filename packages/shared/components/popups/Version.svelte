@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { date } from 'svelte-i18n'
+    import { formatDate } from 'shared/lib/i18n'
     import { closePopup } from 'shared/lib/popup'
     import { Text, Button, Logo } from 'shared/components'
 
@@ -49,7 +49,7 @@
                 {locale('popups.version.updateDetails', {
                     values: {
                         version: $versionDetails.newVersion,
-                        date: $date($versionDetails.newVersionReleaseDate, { format: 'long' }),
+                        date: formatDate($versionDetails.newVersionReleaseDate, { format: 'long' }),
                     },
                 })}
             </Text>
