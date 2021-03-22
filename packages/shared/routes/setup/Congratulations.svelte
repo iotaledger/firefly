@@ -40,16 +40,17 @@
     <OnboardingLayout allowBack={false}>
         <div slot="leftpane__content">
             {#if wasMigrated}
-                <Box classes="bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 rounded-lg p-10">
-                    <balance class="flex flex-col flex-grow items-center">
-                        <Text type="h1" classes="mb-5 text-center">{locale('views.congratulations.fundsMigrated')}</Text>
-                        <Text type="p" secondary classes="mb-4 text-center">{locale('views.congratulations.success')}</Text>
-                        <div class="flex mb-2 my-6">
-                            <Text type="h2">{formatUnit(balance)}</Text>
-                        </div>
-                        <Text type="p" highlighted classes="py-1 uppercase">{fiatbalance}</Text>
-                    </balance>
-                </Box>
+                <div class="flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-5">
+                    <div class="bg-green-100 rounded-2xl relative -top-10">
+                        <Icon icon="success-check" classes="text-white w-12 h-12" />
+                    </div>
+                    <Text type="h2" classes="mb-5 text-center">{locale('views.congratulations.fundsMigrated')}</Text>
+                    <Text type="p" secondary classes="mb-2 text-center">{locale('views.congratulations.success')}</Text>
+                    <div class="flex mb-2 my-6">
+                        <Text type="h2">{formatUnit(balance)}</Text>
+                    </div>
+                    <Text type="p" highlighted classes="py-1 uppercase">{fiatbalance}</Text>
+                </div>
             {:else}
                 <div class="flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-5">
                     <div class="bg-green-100 rounded-2xl relative -top-10">

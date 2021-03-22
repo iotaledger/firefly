@@ -14,7 +14,7 @@
 </div>
 <div data-label="bundle-mining-layout" class="flex flex-col w-full h-screen justify-center items-center">
     <div class="w-2/5 h-auto">
-        <Box classes="bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 rounded-lg py-10 px-20">
+        <Box classes="bg-gray-50 dark:bg-gray-800 dark:bg-opacity-50 rounded-lg py-10 px-20">
             <div class="flex justify-center -mt-16">
                 <slot name="icon_boxed" />
             </div>

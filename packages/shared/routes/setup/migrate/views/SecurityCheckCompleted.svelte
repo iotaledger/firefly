@@ -68,8 +68,8 @@
                 {locale('views.securityCheckCompleted.continueMigration')}
             </Button>
         </div>
-        <div slot="rightpane" class="h-full flex">
-            <Illustration illustration="migrate-desktop" height="100%" width="auto" classes="h-full object-cover object-left" />
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
+            <Illustration illustration="migrate-desktop" height="100%" width="auto"/>
         </div>
     </OnboardingLayout>
 {/if}

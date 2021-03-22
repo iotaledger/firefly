@@ -45,7 +45,7 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
-            <Text on:click={learnAboutMigrationsClick} type="h1" classes="mb-5 mt-5">{locale('views.migrate.title')}</Text>
+            <Text on:click={learnAboutMigrationsClick} type="h2" classes="mb-5 mt-5">{locale('views.migrate.title')}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.migrate.body1')}</Text>
             <Text type="p" secondary highlighted classes="mb-8 font-bold">{locale('views.migrate.body2')}</Text>
             <Box classes="bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 rounded-lg ">
@@ -67,8 +67,8 @@
                 <Text type="p" secondary highlighted classes="m-7 font-bold cursor-pointer">{locale('views.migrate.learn')}</Text>
             </div>
         </div>
-        <div slot="rightpane" class="h-full flex">
-            <Illustration illustration="migrate-desktop" height="100%" width="auto" classes="h-full object-cover object-left" />
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
+            <Illustration illustration="migrate-desktop" height="100%" width="auto"/>
         </div>
     </OnboardingLayout>
 {/if}

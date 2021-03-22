@@ -69,7 +69,7 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick} class="">
         <div slot="leftpane__content">
-            <Text type="h1" classes="mb-5 mt-5">{locale('views.migrate.title')}</Text>
+            <Text type="h2" classes="mb-5 mt-5">{locale('views.migrate.title')}</Text>
             <Text type="p" secondary classes="mb-6">{locale('views.transferFragmentedFunds.body1')}</Text>
             <div class="overflow-y-auto h-80 pr-5 pb-6">
                 {#each transactions as transaction}
@@ -87,8 +87,8 @@
                 <Button classes="w-full py-3 mt-2" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
             {/if}
         </div>
-        <div slot="rightpane" class="h-full flex">
-            <Illustration illustration="migrate-desktop" height="100%" width="auto" classes="h-full object-cover object-left" />
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
+            <Illustration illustration="migrate-desktop" height="100%" width="auto" />
         </div>
     </OnboardingLayout>
 {/if}

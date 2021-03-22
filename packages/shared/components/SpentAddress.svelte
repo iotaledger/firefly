@@ -92,7 +92,7 @@
             </risk-meter>
         {:else if disabled}
             <div class="flex items-center static" on:mouseenter={toggleShow} on:mouseleave={toggleShow} bind:this={errorBox}>
-                <Icon icon="info" classes="text-red-500 bg-white rounded-full" />
+                <Icon icon="info" classes="text-red-500 bg-white rounded-full dark:bg-gray-800" />
                 {#if showTooltip && errorMessage}
                     <Tooltip topOffset={tooltipTop} leftOffset={tooltipLeft} elementWidth={iconWidth}>
                         <Text>{errorMessage}</Text>
