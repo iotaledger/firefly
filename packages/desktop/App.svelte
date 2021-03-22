@@ -106,9 +106,6 @@
             :global(::-webkit-scrollbar-thumb) {
                 @apply bg-gray-700;
             }
-            :global(::-webkit-scrollbar-track) {
-                @apply bg-gray-900;
-            }
         }
     }
     ::-webkit-scrollbar {
@@ -119,8 +116,7 @@
         border-radius: 10px;
     }
     ::-webkit-scrollbar-track {
-        @apply bg-gray-100;
-        border-radius: 10px;
+        @apply bg-transparent;
     }
 </style>
 
