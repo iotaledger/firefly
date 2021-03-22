@@ -72,7 +72,7 @@
     <OnboardingLayout onBackClick={handleBackClick} {busy}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-4">{locale('views.setup.title')}</Text>
-            <Text type="p" secondary classes="mb-10">{locale('views.setup.body1')}</Text>
+            <Text type="p" secondary classes="mb-4">{locale('views.setup.body1')}</Text>
             <Text type="p" secondary classes="mb-10">{locale('views.setup.body2')}</Text>
             <Input
                 {error}

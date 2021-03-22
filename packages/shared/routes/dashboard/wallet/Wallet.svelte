@@ -8,7 +8,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, isStrongholdLocked } from 'shared/lib/profile'
-    import { walletRoute } from 'shared/lib/router'
+    import { walletRoute, resetWalletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
         AccountMessage,
@@ -172,22 +172,43 @@
                 },
                 {
                     onSuccess(createAccountResponse) {
-                        api.syncAccount(createAccountResponse.payload.id, {
-                            onSuccess(syncAccountResponse) {
-                                getAccountMeta(createAccountResponse.payload.id, (err, meta) => {
-                                    if (!err) {
-                                        const account = prepareAccountInfo(createAccountResponse.payload, meta)
-                                        accounts.update((accounts) => [...accounts, account])
-                                        walletRoute.set(WalletRoutes.Init)
-                                        completeCallback()
-                                    } else {
-                                        completeCallback(locale(err.error))
-                                    }
-                                })
-                            },
-                            onError(err) {
-                                completeCallback(locale(err.error))
-                            },
+                        const account: WalletAccount = prepareAccountInfo(createAccountResponse.payload, {
+                            balance: 0,
+                            incoming: 0,
+                            outgoing: 0,
+                            depositAddress: createAccountResponse.payload.addresses[0].address
+                        })
+                        // immediately store the account; we update it later after sync
+                        // we do this to allow offline account creation
+                        accounts.update((accounts) => [...accounts, account])
+                        return new Promise((resolve) => {
+                            api.syncAccount(createAccountResponse.payload.id, {
+                                onSuccess(_syncAccountResponse) {
+                                    getAccountMeta(createAccountResponse.payload.id, (err, meta) => {
+                                        if (!err) {
+                                            const account = prepareAccountInfo(createAccountResponse.payload, meta)
+                                            accounts.update((storedAccounts) => {
+                                                return storedAccounts.map((storedAccount) => {
+                                                    if (storedAccount.id === account.id) {
+                                                        return account
+                                                    }
+                                                    return storedAccount
+                                                })
+                                            })
+                                        }
+                                        resolve(null)
+                                    })
+                                },
+                                onError() {
+                                    // we ignore sync errors since the user can recover from it later
+                                    // this allows an account to be created by an offline user
+                                    resolve(null)
+                                },
+                            })
+                        })
+                        .then(() => {
+                            walletRoute.set(WalletRoutes.Init)
+                            completeCallback()
                         })
                     },
                     onError(err) {
@@ -246,7 +267,7 @@
                         setTimeout(() => {
                             sendParams.set({ address: '', amount: 0, message: '' })
                             isTransferring.set(false)
-                            walletRoute.set(WalletRoutes.Init)
+                            resetWalletRoute()
                         }, 3000)
                     },
                     onError(err) {
@@ -287,6 +308,8 @@
             isTransferring.set(true)
             api.internalTransfer(senderAccountId, receiverAccountId, amount, {
                 onSuccess(response) {
+                    const message = response.payload;
+                    
                     accounts.update((_accounts) => {
                         return _accounts.map((_account) => {
                             const isSenderAccount = _account.id === senderAccountId
@@ -297,8 +320,16 @@
                                     _account,
                                     {
                                         messages: [
-                                            Object.assign({}, response.payload, {
-                                                incoming: isReceiverAccount,
+                                            Object.assign({}, message, {
+                                                payload: Object.assign({}, message.payload, {
+                                                    data: Object.assign({}, message.payload.data, {
+                                                        essence: Object.assign({}, message.payload.data.essence, {
+                                                            data: Object.assign({}, message.payload.data.essence.data, {
+                                                                incoming: isReceiverAccount,
+                                                            }),
+                                                        }),
+                                                    }),
+                                                }),
                                             }),
                                             ..._account.messages,
                                         ],
@@ -315,7 +346,7 @@
                     setTimeout(() => {
                         sendParams.set({ address: '', amount: 0, message: '' })
                         isTransferring.set(false)
-                        walletRoute.set(WalletRoutes.Init)
+                        resetWalletRoute()
                     }, 3000)
                 },
                 onError(err) {

@@ -42,7 +42,6 @@
                 <Text type="p" secondary smaller classes="mb-2">- {locale('views.backupWallet.reason1')}</Text>
                 <Text type="p" secondary smaller classes="mb-2">- {locale('views.backupWallet.reason2')}</Text>
                 <Text type="p" secondary smaller classes="mb-2">- {locale('views.backupWallet.reason3')}</Text>
-                <Text type="p" secondary smaller classes="mb-2">- {locale('views.backupWallet.reason4')}</Text>
             </form>
         </div>
         <div slot="leftpane__action">

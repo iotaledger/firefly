@@ -27,7 +27,7 @@
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-4">{locale('views.secure.title')}</Text>
-            <Text type="p" secondary classes="mb-2">{locale('views.secure.body1')}</Text>
+            <Text type="p" secondary classes="mb-4">{locale('views.secure.body1')}</Text>
             <Text type="p" secondary classes="mb-10">{locale('views.secure.body2')}</Text>
         </div>
         <div slot="leftpane__action" class="flex flex-col">
