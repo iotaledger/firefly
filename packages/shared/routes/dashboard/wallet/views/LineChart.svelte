@@ -13,14 +13,14 @@
     import { CurrencyTypes, formatCurrencyValue } from 'shared/lib/currency'
     import { HistoryDataProps, TIMEFRAME_MAP } from 'shared/lib/marketData'
     import { activeProfile } from 'shared/lib/profile'
-    import type { BalanceHistory, WalletAccount } from 'shared/lib/wallet'
+    import type { AccountsBalanceHistory, BalanceHistory, WalletAccount } from 'shared/lib/wallet'
     import { getContext, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
 
     export let locale
 
     const walletBalanceHistory = getContext<Readable<BalanceHistory>>('walletBalanceHistory')
-    const accountsBalanceHistory = getContext<Readable<BalanceHistory>>('accountsBalanceHistory')
+    const accountsBalanceHistory = getContext<Readable<AccountsBalanceHistory>>('accountsBalanceHistory')
     const selectedAccount = getContext<Readable<WalletAccount>>('selectedAccount')
 
     let chartData: ChartData = { labels: [], data: [], tooltips: [] }

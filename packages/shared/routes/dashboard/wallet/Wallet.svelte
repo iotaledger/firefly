@@ -8,10 +8,11 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, isStrongholdLocked } from 'shared/lib/profile'
-    import { walletRoute, resetWalletRoute } from 'shared/lib/router'
+    import { resetWalletRoute, walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
         AccountMessage,
+        AccountsBalanceHistory,
         api,
         BalanceHistory,
         BalanceOverview,
@@ -22,13 +23,13 @@
         initialiseListeners,
         isTransferring,
         prepareAccountInfo,
+        removeEventListeners,
         selectedAccountId,
         syncAccounts,
         transferState,
         updateBalanceOverview,
         wallet,
         WalletAccount,
-        removeEventListeners,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, Writable } from 'svelte/store'
@@ -56,7 +57,7 @@
     setContext<Writable<boolean>>('walletAccountsLoaded', accountsLoaded)
     setContext<Readable<AccountMessage[]>>('walletTransactions', transactions)
     setContext<Readable<WalletAccount>>('selectedAccount', selectedAccount)
-    setContext<Readable<BalanceHistory>>('accountsBalanceHistory', accountsBalanceHistory)
+    setContext<Readable<AccountsBalanceHistory>>('accountsBalanceHistory', accountsBalanceHistory)
     setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
@@ -176,7 +177,7 @@
                             balance: 0,
                             incoming: 0,
                             outgoing: 0,
-                            depositAddress: createAccountResponse.payload.addresses[0].address
+                            depositAddress: createAccountResponse.payload.addresses[0].address,
                         })
                         // immediately store the account; we update it later after sync
                         // we do this to allow offline account creation
@@ -205,8 +206,7 @@
                                     resolve(null)
                                 },
                             })
-                        })
-                        .then(() => {
+                        }).then(() => {
                             walletRoute.set(WalletRoutes.Init)
                             completeCallback()
                         })
@@ -308,8 +308,8 @@
             isTransferring.set(true)
             api.internalTransfer(senderAccountId, receiverAccountId, amount, {
                 onSuccess(response) {
-                    const message = response.payload;
-                    
+                    const message = response.payload
+
                     accounts.update((_accounts) => {
                         return _accounts.map((_account) => {
                             const isSenderAccount = _account.id === senderAccountId
