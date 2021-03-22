@@ -14,7 +14,7 @@
 <p align="center">
   <a href="#about">About</a> ◈
   <a href="#installation">Installation</a> ◈
-  <a href="#getting-started">Getting staråted</a> ◈
+  <a href="#getting-started">Getting started</a> ◈
   <a href="#joining-the-discussion">Joining the discussion</a> 
 </p>
 
