@@ -70,7 +70,7 @@
                     error = true
                 } else {
                     try {
-                        await asyncVerifyMnemonic(words.join(' '))
+                        await asyncVerifyMnemonic(trimmedContent)
                         statusMessage = locale('views.importFromText.phraseDetected')
                         value = trimmedContent
                     } catch (err) {
