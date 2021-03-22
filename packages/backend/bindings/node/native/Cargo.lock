@@ -1509,7 +1509,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#e2108a74326412bfc1425037d31cfff7f090d97f"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#204a8961cb1cf0b05f297ca148d3e86e1b55706d"
 dependencies = [
  "async-trait",
  "backtrace",
@@ -1893,11 +1893,10 @@ dependencies = [
 
 [[package]]
 name = "miow"
-version = "0.3.6"
+version = "0.3.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5a33c1b55807fbed163481b5ba66db4b2fa6cde694a5027be10fb724206c5897"
+checksum = "b9f1c5b025cda876f66ef43a113f91ebc9f4ccef34843000e0adf6ebbab84e21"
 dependencies = [
- "socket2 0.3.19",
  "winapi",
 ]
 
