@@ -87,6 +87,6 @@
             onClick={() => ($isStrongholdLocked ? handleSecurityTileClick('password') : lockStronghold())}
             classes="col-span-2"
             toggle
-            toggleActive={$isStrongholdLocked} />
+            toggleActive={!$isStrongholdLocked} />
     </div>
 </div>
