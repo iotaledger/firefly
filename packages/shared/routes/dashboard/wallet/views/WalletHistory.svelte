@@ -25,7 +25,7 @@
     }
 </script>
 
-<div data-label="latest-transactions" class="h-full py-6 px-8 flex-grow flex flex-col">
+<div data-label="latest-transactions" class="h-full pt-6 pb-8 px-8 flex-grow flex flex-col">
     <div class="w-full flex flex-row justify-between items-start">
         <Text type="h5" classes="mb-5">{locale('general.latestTransactions')}</Text>
         <button on:click={syncAccounts} class:pointer-events-none={$isSyncing}>
