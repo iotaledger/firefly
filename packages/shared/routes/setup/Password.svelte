@@ -63,7 +63,7 @@
                 <Text type="p" classes="mb-10" secondary>{locale('views.password.body2')}</Text>
                 <Password
                     {error}
-                    classes="mb-1"
+                    classes="mb-4"
                     bind:value={password}
                     strengthLevels={4}
                     showRevealToggle
