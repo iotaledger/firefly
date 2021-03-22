@@ -14,8 +14,7 @@
 
 <style type="text/scss">
     button:not(.toggle) {
-        @apply h-0;
-        min-height: 139px;
+        min-height: 125px;
     }
 </style>
 
