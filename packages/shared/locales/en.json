@@ -287,12 +287,12 @@
                     "noneDetected": "None detected"
                 },
                 "strongholdStatus": {
-                    "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "title": "Wallet Status",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
                 },
                 "strongholdBackup": {
-                    "title": "Stronghold Backup",
+                    "title": "Wallet Backup",
                     "weeksAgo": "{weeks, plural, one {# week} other {# weeks}} ago"
                 }
             },
