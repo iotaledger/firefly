@@ -287,12 +287,12 @@
                     "noneDetected": "किसी का पता नहीं चला"
                 },
                 "strongholdStatus": {
-                    "title": "स्ट्रॉन्गहोल्ड स्टेटस",
-                    "locked": "लॉक्ड",
-                    "unlocked": "खुला"
+                    "title": "Wallet Status",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
                 },
                 "strongholdBackup": {
-                    "title": "स्ट्रॉन्गहोल्ड बैकअप",
+                    "title": "Wallet Backup",
                     "weeksAgo": "{weeks, plural, one {# सप्ताह} other {# सप्ताह}} पहले"
                 }
             },
@@ -472,8 +472,8 @@
         "recentActivity": "हाल की गतिविधि",
         "sent": "भेजे गए",
         "received": "प्राप्त हुआ",
-        "sendPayment": "भुगतान भेजें",
-        "moveFunds": "फंड्स भेजे",
+        "sendPayment": "Send Payment",
+        "moveFunds": "Internal Transfer",
         "sendFunds": "धनराशि भेजें",
         "sendToAddress": "Send to address",
         "scanQrOrPaste": "QR कोड स्कैन करें या एक पता पेस्ट करें",
@@ -488,7 +488,7 @@
         "reference": "संदर्भ",
         "from": "से",
         "to": "को",
-        "receiveFunds": "पैसे प्राप्त करे",
+        "receiveFunds": "Receive Funds",
         "myAddress": "मेरा पता:",
         "shareAddress": "पता साझा करें",
         "yourAddress": "आपका पता",
@@ -512,13 +512,13 @@
         "totalIn": "Total in",
         "totalOut": "Total out",
         "accounts": "खाता",
-        "myAccounts": "My accounts",
+        "myAccounts": "My Accounts",
         "automaticNodeSelection": "स्वचालित नोड चयन",
         "manualNodeSelection": "मैन्युअली नोड चुनना",
         "profiles": "प्रोफाइल्स",
         "developerProfile": "डेवलपर मोड",
         "dev": "देव",
-        "createAccount": "खाता बनाएं",
+        "createAccount": "Create an Account",
         "accountName": "अकाउंट नाम",
         "latestTransactions": "नवीनतम ट्रांसक्शन्स",
         "transactions": "ट्रांसक्शन्स",
@@ -529,7 +529,7 @@
         "help": "Help",
         "you": "You",
         "messageId": "Message ID",
-        "inputAddress": "Input Address",
+        "inputAddress": "Send Address",
         "receiveAddress": "Receive Address",
         "date": "Date",
         "status": "स्टेटस",
@@ -577,6 +577,7 @@
     "notifications": {
         "valueTx": "{{value}} में {{account}} रिसीव हो रहा है",
         "confirmed": "{{account}} से आउटगोइंग {{value}} की पुष्टि हो गयी है",
+        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
         "failed": "{{account}} से आउटगोइंग {{value}} फ़ैल हो गयी है",
         "downloadingUpdate": "Downloading update",
         "updateReady": "Update ready",

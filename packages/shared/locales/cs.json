@@ -1,11 +1,11 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA tokens",
+            "title": "Pošli, přijmi a spravuj IOTA tokeny",
             "body": "Firefly is the official wallet of IOTA."
         },
         "legal": {
-            "title": "Privacy Policy & Terms of Service",
+            "title": "Ochrana osobních údajů a smluvní podmínky",
             "body": "Zkontrolujte zásady ochrany osobních údajů a podmínky služby.",
             "privacyPolicy": {
                 "title": "Zásady ochrany osobních údajů",
@@ -38,7 +38,7 @@
             "profileName": "Název profilu"
         },
         "secure": {
-            "title": "Secure your wallet",
+            "title": "Zabezpečte Vaši peněženku",
             "body1": "Save and print the Recovery Kit PDF template.",
             "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
         },
@@ -55,7 +55,7 @@
         "pin": {
             "title": "Nastavení PIN kódu",
             "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
+            "body2": "Zadejte pouze čísla"
         },
         "confirmPin": {
             "title": "Ověřit PIN kód",
@@ -71,15 +71,15 @@
         "recoveryPhrase": {
             "title": "Fráze pro obnovení",
             "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-            "body2": "Keep this private and safely stored.",
-            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+            "body2": "Ponechat toto soukromé a bezpečně uložené.",
+            "body3": "Je důležité mít písemnou zálohu. Počítače často selhávají a soubory mohou být poškozeny.",
             "revealRecoveryPhrase": "Zobrazit obnovovací frázi",
             "hideRecoveryPhrase": "Skrýt frázi pro obnovení"
         },
         "verifyRecoveryPhrase": {
             "title": "Ověřte obnovovací frázi",
-            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
-            "word": "Word",
+            "body": "Zkontrolujme, zda jste správně zapsali frázi. Vyberte slova ve správném pořadí.",
+            "word": "Slovo",
             "verified": "Recovery phrase verified",
             "verifiedBody": "Remember to keep it private and safely stored."
         },
@@ -97,7 +97,7 @@
         },
         "congratulations": {
             "title": "Wallet setup completed",
-            "body": "Your new wallet is ready to use."
+            "body": "Vaše peněženka je připravena k použití."
         },
         "import": {
             "title": "Importovat peněženku",
@@ -123,9 +123,9 @@
         "importSuccess": {
             "title": "Úspěšně jste obnovili váš účet pomocí zálohy",
             "body": "Nyní můžete nastavit novou peněženku.",
-            "seedvaultTitle": "Successfully imported",
+            "seedvaultTitle": "Úspěšně importováno",
             "seedvaultBody": "Your password is correct, you can now continue.",
-            "strongholdTitle": "Successfully imported",
+            "strongholdTitle": "Úspěšně importováno",
             "strongholdBody": "Your password is correct, you can now continue."
         },
         "migrate": {
@@ -287,12 +287,12 @@
                     "noneDetected": "Nic nenalezeno"
                 },
                 "strongholdStatus": {
-                    "title": "Stronghold status",
-                    "locked": "Uzamčeno",
-                    "unlocked": "Odemčeno"
+                    "title": "Wallet Status",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
                 },
                 "strongholdBackup": {
-                    "title": "Stronghold záloha",
+                    "title": "Wallet Backup",
                     "weeksAgo": "před {weeks, plural, one {# týdnem} other {# týdny}}"
                 }
             },
@@ -472,8 +472,8 @@
         "recentActivity": "Nedávná aktivita",
         "sent": "Odesláno",
         "received": "Přijato",
-        "sendPayment": "Odeslat platbu",
-        "moveFunds": "Přesunout prostředky",
+        "sendPayment": "Send Payment",
+        "moveFunds": "Internal Transfer",
         "sendFunds": "Poslat tokeny",
         "sendToAddress": "Send to address",
         "scanQrOrPaste": "Naskenujte QR kód nebo vložte adresu",
@@ -488,7 +488,7 @@
         "reference": "Odkazy",
         "from": "Odkud",
         "to": "Komu",
-        "receiveFunds": "Přijmout tokeny",
+        "receiveFunds": "Receive Funds",
         "myAddress": "Moje adresa",
         "shareAddress": "Sdílet adresu",
         "yourAddress": "Vaše adresa",
@@ -512,13 +512,13 @@
         "totalIn": "Total in",
         "totalOut": "Total out",
         "accounts": "Účty",
-        "myAccounts": "My accounts",
+        "myAccounts": "My Accounts",
         "automaticNodeSelection": "Automatický výběr node",
         "manualNodeSelection": "Manuální výběr node",
         "profiles": "Profily",
         "developerProfile": "Vývojářský režim",
         "dev": "Vývojář",
-        "createAccount": "Vytvořit účet",
+        "createAccount": "Create an Account",
         "accountName": "Název účtu",
         "latestTransactions": "Poslední transakce",
         "transactions": "Transakce",
@@ -529,7 +529,7 @@
         "help": "Pomoc",
         "you": "Ty",
         "messageId": "ID zprávy",
-        "inputAddress": "Vstupní adresa",
+        "inputAddress": "Send Address",
         "receiveAddress": "Adresa příjemce",
         "date": "Datum",
         "status": "Stav",
@@ -577,6 +577,7 @@
     "notifications": {
         "valueTx": "Přijímání {{value}} na {{account}}",
         "confirmed": "Odchozí {{value}} od {{account}} byl potvrzen",
+        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
         "failed": "Odchozí {{value}} od {{account}} selhal",
         "downloadingUpdate": "Stahování aktualizace",
         "updateReady": "Aktualizace připravena",

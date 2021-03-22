@@ -287,12 +287,12 @@
                     "noneDetected": "چیزی یافت نشد"
                 },
                 "strongholdStatus": {
-                    "title": "وضعیت Stronghold",
-                    "locked": "قفل شده",
-                    "unlocked": "باز شده"
+                    "title": "Wallet Status",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
                 },
                 "strongholdBackup": {
-                    "title": "بک آپ Stronghold",
+                    "title": "Wallet Backup",
                     "weeksAgo": "{weeks, plural, one {# هفته} other {# هفته}} قبل"
                 }
             },
@@ -472,8 +472,8 @@
         "recentActivity": "فعالیت اخیر",
         "sent": "ارسال شده",
         "received": "دریافت شده",
-        "sendPayment": "ارسال پرداخت",
-        "moveFunds": "جابجایی وجه",
+        "sendPayment": "Send Payment",
+        "moveFunds": "Internal Transfer",
         "sendFunds": "ارسال وجه",
         "sendToAddress": "Send to address",
         "scanQrOrPaste": "کد QR یا آدرس را وارد کنید",
@@ -488,7 +488,7 @@
         "reference": "مرجع",
         "from": "فرستنده",
         "to": "گیرنده",
-        "receiveFunds": "دریافت وجه",
+        "receiveFunds": "Receive Funds",
         "myAddress": "آدرس من",
         "shareAddress": "اشتراک گذاری یک آدرس",
         "yourAddress": "آدرس شما",
@@ -512,13 +512,13 @@
         "totalIn": "Total in",
         "totalOut": "Total out",
         "accounts": "حساب ها",
-        "myAccounts": "My accounts",
+        "myAccounts": "My Accounts",
         "automaticNodeSelection": "انتخاب اتوماتیک نُد",
         "manualNodeSelection": "انتخاب دستی نُد",
         "profiles": "پروفایل ها",
         "developerProfile": "پروفایل برنامه نویسی",
         "dev": "برنامه نویس",
-        "createAccount": "ایجاد حساب کاربری",
+        "createAccount": "Create an Account",
         "accountName": "نام حساب",
         "latestTransactions": "آخرین تراکنش ها",
         "transactions": "تراکنش ها",
@@ -529,7 +529,7 @@
         "help": "راهنما",
         "you": "شما",
         "messageId": "Message ID",
-        "inputAddress": "آدرس ورودی",
+        "inputAddress": "Send Address",
         "receiveAddress": "آدرس گیرنده",
         "date": "تاریخ",
         "status": "وضعیت",
@@ -577,6 +577,7 @@
     "notifications": {
         "valueTx": "در حال دریافت {{value}} به {{account}}",
         "confirmed": "خروجی {{value}} از {{account}} تایید شد",
+        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
         "failed": "خروجی {{value}} از {{account}} ناموفق بود",
         "downloadingUpdate": "درحال دانلود به‌روزرسانی",
         "updateReady": "به روز رسانی انجام شد",
