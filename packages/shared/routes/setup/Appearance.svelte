@@ -31,15 +31,13 @@
             <ButtonRadio icon="theme-light" value={false} bind:group={darkModeEnabled}>
                 {locale('general.lightTheme')}
             </ButtonRadio>
-            <ButtonRadio icon="theme-dark" value={true} bind:group={darkModeEnabled}>
-                {locale('general.darkTheme')}
-            </ButtonRadio>
+            <ButtonRadio icon="theme-dark" value={true} bind:group={darkModeEnabled}>{locale('general.darkTheme')}</ButtonRadio>
         </div>
         <div slot="leftpane__action">
             <Button onClick={() => handleContinueClick()} classes="w-full">{locale('actions.continue')}</Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center p-16 bg-pastel-orange dark:bg-gray-900">
-            <Illustration illustration="appearance-desktop" width="auto" height="auto" classes="pb-24"/>
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-orange dark:bg-gray-900">
+            <Illustration illustration="appearance-desktop" width="100%" height="auto" />
         </div>
     </OnboardingLayout>
 {/if}

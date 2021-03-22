@@ -14,7 +14,7 @@
     textarea {
         @apply py-4;
         @apply pr-8;
-        @apply pl-4;
+        @apply pl-3;
         border-radius: 0.625rem; // TODO: add to tailwind
 
         &::placeholder {
@@ -23,15 +23,15 @@
 
         &:disabled {
             &,
-            + floating-label {
+            + floating-label.floating-active {
                 @apply pointer-events-none;
                 @apply opacity-50;
             }
         }
 
         &.floating-active {
-            @apply pt-5;
-            @apply pb-3;
+            @apply pt-6;
+            @apply pb-2;
         }
 
         + floating-label {
@@ -45,11 +45,11 @@
             @apply opacity-0;
             @apply pointer-events-none;
             @apply absolute;
-            @apply left-4;
+            @apply left-3;
             @apply select-none;
             @apply whitespace-nowrap;
             @apply w-full;
-            top: 7px;
+            top: 8px;
         }
         &:not(:disabled) {
             + floating-label {
@@ -81,11 +81,7 @@
             spellcheck={false}
             maxlength={ADDRESS_LENGTH} />
         {#if label}
-            <floating-label
-                class="block text-gray-500 text-11 leading-120 overflow-hidden opacity-0 pointer-events-none absolute top-2 left-4 select-none whitespace-nowrap w-full"
-                class:floating-active={address && label}>
-                {label}
-            </floating-label>
+            <floating-label class:floating-active={address && label}>{label}</floating-label>
         {/if}
     </address-input>
     {#if error}

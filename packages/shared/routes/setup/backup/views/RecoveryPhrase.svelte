@@ -34,7 +34,8 @@
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5">{locale('views.recoveryPhrase.title')}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.recoveryPhrase.body1')}</Text>
-            <Text type="p" secondary highlighted classes="font-bold">{locale('views.recoveryPhrase.body2')}</Text>
+            <Text type="p" secondary highlighted classes="font-bold mb-4">{locale('views.recoveryPhrase.body2')}</Text>
+            <Text type="p" secondary classes="mb-4">{locale('views.recoveryPhrase.body3')}</Text>
         </div>
         <div slot="leftpane__action" class="flex flex-col">
             <Button secondary classes="flex-1 mb-4" onClick={() => handleDownloadClick()}>

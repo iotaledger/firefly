@@ -31,7 +31,7 @@
             @apply border;
             @apply border-solid;
             @apply py-4;
-            @apply pl-4;
+            @apply pl-3;
             @apply pr-10;
         }
         &:not(.small) {
@@ -89,8 +89,8 @@
 
         &.floating-active {
             .selection {
-                @apply pt-5;
-                @apply pb-3;
+                @apply pt-6;
+                @apply pb-2;
             }
         }
 
@@ -105,11 +105,11 @@
             @apply opacity-0;
             @apply pointer-events-none;
             @apply absolute;
-            @apply left-4;
+            @apply left-3;
             @apply select-none;
             @apply whitespace-nowrap;
             @apply w-full;
-            top: 7px;
+            top: 8px;
             &.floating-active {
                 @apply opacity-100;
                 transform: none;
@@ -148,11 +148,7 @@
             height={small ? 16 : 24}
             classes="absolute text-gray-500 fill-current" />
         {#if label}
-            <floating-label
-                class="block text-gray-500 text-11 leading-120 overflow-hidden opacity-0 pointer-events-none absolute top-2 left-4 select-none whitespace-nowrap w-full"
-                class:floating-active={value && label}>
-                {label}
-            </floating-label>
+            <floating-label class:floating-active={value && label}>{label}</floating-label>
         {/if}
     </div>
     <nav
