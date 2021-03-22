@@ -287,12 +287,12 @@
                     "noneDetected": "Hiçbiri bulunamadı"
                 },
                 "strongholdStatus": {
-                    "title": "Stronghold Durumu",
-                    "locked": "Kilitli",
-                    "unlocked": "Kilidi Açık"
+                    "title": "Wallet Status",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
                 },
                 "strongholdBackup": {
-                    "title": "Stronghold Yedekleme",
+                    "title": "Wallet Backup",
                     "weeksAgo": "{weeks, plural, one {# week} other {# weeks}} ago"
                 }
             },
@@ -472,8 +472,8 @@
         "recentActivity": "Son Hareketler",
         "sent": "Gönderildi",
         "received": "Alındı",
-        "sendPayment": "Send payment",
-        "moveFunds": "Move funds",
+        "sendPayment": "Send Payment",
+        "moveFunds": "Internal Transfer",
         "sendFunds": "Para gönderin",
         "sendToAddress": "Send to address",
         "scanQrOrPaste": "Bir QR kodunu tarayın veya bir Adres yapıştırın",
@@ -488,7 +488,7 @@
         "reference": "Referans",
         "from": "Gönderen",
         "to": "Kime",
-        "receiveFunds": "Gelen varlıklar",
+        "receiveFunds": "Receive Funds",
         "myAddress": "My Address",
         "shareAddress": "Bir adres paylaşın",
         "yourAddress": "Adresiniz",
@@ -512,13 +512,13 @@
         "totalIn": "Total in",
         "totalOut": "Total out",
         "accounts": "Hesaplar",
-        "myAccounts": "My accounts",
+        "myAccounts": "My Accounts",
         "automaticNodeSelection": "Otomatik düğüm seçimi",
         "manualNodeSelection": "Manuel seçim",
         "profiles": "Profiller",
         "developerProfile": "Geliştirici hesabı",
         "dev": "Geliştirici",
-        "createAccount": "Bir hesap oluşturun",
+        "createAccount": "Create an Account",
         "accountName": "Hesap adı",
         "latestTransactions": "Son transferler",
         "transactions": "Transferler",
@@ -529,7 +529,7 @@
         "help": "Help",
         "you": "You",
         "messageId": "Message ID",
-        "inputAddress": "Input Address",
+        "inputAddress": "Send Address",
         "receiveAddress": "Receive Address",
         "date": "Date",
         "status": "Durum",
@@ -577,6 +577,7 @@
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
         "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
+        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
         "failed": "Outgoing {{value}} from {{account}} has failed",
         "downloadingUpdate": "Downloading update",
         "updateReady": "Update ready",

@@ -231,7 +231,7 @@
             },
             "proofOfWork": {
                 "title": "Prova de Trabalho",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "description": "Complete a prova de trabalho localmente no seu dispositivo ou terceirize para um servidor"
             },
             "errorLog": {
                 "title": "Registro de erro",
@@ -287,12 +287,12 @@
                     "noneDetected": "Nenhum detectado"
                 },
                 "strongholdStatus": {
-                    "title": "Status da Stronghold",
-                    "locked": "Bloqueado",
-                    "unlocked": "Desbloqueado"
+                    "title": "Wallet Status",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
                 },
                 "strongholdBackup": {
-                    "title": "Backup da Stronghold",
+                    "title": "Wallet Backup",
                     "weeksAgo": "{weeks, plural, one {# semana} other {# semanas}} atrás"
                 }
             },
@@ -472,8 +472,8 @@
         "recentActivity": "Atividade Recente",
         "sent": "Enviado",
         "received": "Recebido",
-        "sendPayment": "Enviar pagamento",
-        "moveFunds": "Transferir fundos",
+        "sendPayment": "Send Payment",
+        "moveFunds": "Internal Transfer",
         "sendFunds": "Enviar fundos",
         "sendToAddress": "Enviar para o endereço",
         "scanQrOrPaste": "Escaneie um código QR ou cole um endereço",
@@ -488,7 +488,7 @@
         "reference": "Referência",
         "from": "De",
         "to": "Para",
-        "receiveFunds": "Receber fundos",
+        "receiveFunds": "Receive Funds",
         "myAddress": "Meu Endereço",
         "shareAddress": "Compartilhar um endereço",
         "yourAddress": "Seu endereço",
@@ -512,13 +512,13 @@
         "totalIn": "Total recebido",
         "totalOut": "Total enviado",
         "accounts": "Contas",
-        "myAccounts": "Minhas contas",
+        "myAccounts": "My Accounts",
         "automaticNodeSelection": "Seleção automática de servidor",
         "manualNodeSelection": "Seleção manual do servidor",
         "profiles": "Perfis",
         "developerProfile": "Perfil do Desenvolvedor",
         "dev": "Dev",
-        "createAccount": "Criar uma conta",
+        "createAccount": "Create an Account",
         "accountName": "Nome da Conta",
         "latestTransactions": "Últimas transações",
         "transactions": "Transações",
@@ -529,7 +529,7 @@
         "help": "Ajuda",
         "you": "Você",
         "messageId": "ID da Mensagem",
-        "inputAddress": "Endereço de Entrada",
+        "inputAddress": "Send Address",
         "receiveAddress": "Endereço de Recebimento",
         "date": "Data",
         "status": "Status",
@@ -577,6 +577,7 @@
     "notifications": {
         "valueTx": "Recebendo {{value}} para {{account}}",
         "confirmed": "Envio de {{value}} de {{account}} foi confirmado",
+        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
         "failed": "Envio de {{value}} de {{account}} falhou",
         "downloadingUpdate": "Baixando atualização",
         "updateReady": "Atualização está pronta",

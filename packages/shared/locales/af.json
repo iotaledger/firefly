@@ -39,7 +39,7 @@
         },
         "secure": {
             "title": "Beveilig jou beursie",
-            "body1": "Stoor en druk die Recovery Kit PDF-sjabloon uit.",
+            "body1": "Stoor en print die Recovery Kit PDF form uit.",
             "body2": "As jy die Recovery Kit invul en veilig stoor, sal jy jou beursie altyd kan herwin."
         },
         "password": {
@@ -231,7 +231,7 @@
             },
             "proofOfWork": {
                 "title": "Proof of work",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "description": "Voltooi proof of work op jou toestel of uitvoer dit na 'n node"
             },
             "errorLog": {
                 "title": "Foutlêer",
@@ -287,12 +287,12 @@
                     "noneDetected": "Nie bespeur nie"
                 },
                 "strongholdStatus": {
-                    "title": "Stronghold Status",
-                    "locked": "Gesluit",
-                    "unlocked": "Oopgesluit"
+                    "title": "Beursie status",
+                    "locked": "Stronghold gesluit",
+                    "unlocked": "Stronghold oopgesluit"
                 },
                 "strongholdBackup": {
-                    "title": "Stronghold Back-up",
+                    "title": "Beursie Back-up",
                     "weeksAgo": "{weeks, plural, one {# week} other {# weke}} ago"
                 }
             },
@@ -302,7 +302,7 @@
                 "networkDown": "Netwerk ontkoppel",
                 "status": "Status",
                 "messagesPerSecond": "Boodskappe per sekondes",
-                "confirmationRate": "Confirmation tempo"
+                "confirmationRate": "Bevestig temp"
             },
             "profileModal": {
                 "allSettings": "Alle instellings",
@@ -381,7 +381,7 @@
         "incomingMi": "Inkomende {value} Mi",
         "outgoingMi": "Uitgaande {value} Mi",
         "portoflio": "Portefeulje",
-        "token": "Token",
+        "token": "Tokenprys",
         "accountValue": "Rekening Balans",
         "accountActivity": "Rekeningaktiwiteit"
     },
@@ -391,7 +391,7 @@
         "cancel": "Kanselleer",
         "close": "Maak toe",
         "dismiss": "Ontslaan",
-        "save": "Save",
+        "save": "Stoor",
         "importSeed": "Voer 'n bestaande seed in",
         "importWallet": "Voer bestaande beursie in",
         "createWallet": "Skep 'n nuwe beursie",
@@ -429,7 +429,7 @@
         "unlock": "Ontsluit",
         "updateFirefly": "Update Firefly",
         "restartNow": "Herlaai nou",
-        "saveBackup": "Save Stronghold Back-up",
+        "saveBackup": "Stoor Stronghold Back-up",
         "customizeAcount": "Pas rekening aan",
         "viewAddressHistory": "Bekyk adresgeskiedenis",
         "deleteAccount": "Verwyder rekening",
@@ -455,7 +455,7 @@
         "yes": "Ja",
         "no": "Nee",
         "reset": "Stel terug",
-        "downloadRecoveryKit": "Stoor die Recovery Kit-sjabloon",
+        "downloadRecoveryKit": "Stoor die Recovery Kit vorm",
         "skipBackup": "Slaan lêer-Back-up oor",
         "finishSetup": "Voltooi die opstelling",
         "readDocumentation": "Lees die dokumentasie",
@@ -473,7 +473,7 @@
         "sent": "Gestuur",
         "received": "Ontvang",
         "sendPayment": "Stuur betaling",
-        "moveFunds": "Skuif fondse",
+        "moveFunds": "Interne oordrag",
         "sendFunds": "Stuur fondse",
         "sendToAddress": "Stuur na 'n adres",
         "scanQrOrPaste": "Skandeer 'n QR-kode of plak 'n adres",
@@ -529,7 +529,7 @@
         "help": "Hulp",
         "you": "Jy",
         "messageId": "Message ID",
-        "inputAddress": "Input adres",
+        "inputAddress": "Stuur adres",
         "receiveAddress": "Ontvangs Adres",
         "date": "Datum",
         "status": "Status",
@@ -577,6 +577,7 @@
     "notifications": {
         "valueTx": "Ontvang {{value}} na {{account}}",
         "confirmed": "Uitgaande {{value}} vanaf {{account}} is bevestig",
+        "confirmedInternal": "{{value}} van {{senderAccount}} na {{receiverAccount}} hat bevestig",
         "failed": "Uitgaande {{value}} vanaf {{account}} het nie oordra nie",
         "downloadingUpdate": "Besig om bywerking af te laai",
         "updateReady": "Opdatering gereed",

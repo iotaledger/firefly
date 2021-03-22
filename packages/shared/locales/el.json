@@ -1,11 +1,11 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA tokens",
-            "body": "Firefly is the official wallet of IOTA."
+            "title": "Αποστολή, Λήψη και διαχείριση των IOTA σας",
+            "body": "Το Firefly είναι το επίσημο πορτοφόλι της IOTA."
         },
         "legal": {
-            "title": "Privacy Policy & Terms of Service",
+            "title": "Πολιτική Απορρήτου και Όροι Παροχής Υπηρεσιών",
             "body": "Παρακαλώ διαβάστε την Πολιτική απορρήτου και τους Όρους χρήσης.",
             "privacyPolicy": {
                 "title": "Πολιτική Απορρήτου",
@@ -25,27 +25,27 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+            "checkbox": "Έχω διαβάσει και αποδέχομαι την Πολιτική Προστασίας Προσωπικών Δεδομένων και τους Όρους Χρήσης"
         },
         "appearance": {
             "title": "Εμφάνιση",
-            "body": "Choose your wallet’s theme."
+            "body": "Επιλέξτε το θέμα του πορτοφολιού σας."
         },
         "setup": {
             "title": "Δημιουργία πορτοφολιού",
-            "body1": "You can create multiple user profiles to keep your tokens separate and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "body1": "Μπορείτε να δημιουργήσετε πολλαπλά προφίλ χρήστη για να κρατήσετε τα κεφάλαια σας ξεχωριστά και να βελτιώσετε το απόρρητο.",
+            "body2": "Προς το παρόν, ας ξεκινήσουμε με το όνομα του πρώτου σας προφίλ. Μπορείτε να προσθέσετε περισσότερα προφίλ αργότερα.",
             "profileName": "Όνομα Προφίλ"
         },
         "secure": {
-            "title": "Secure your wallet",
-            "body1": "Save and print the Recovery Kit PDF template.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
+            "title": "Ασφαλίστε το πορτοφόλι σας",
+            "body1": "Αποθήκευση και εκτύπωση του PDF κιτ αποκατάστασης.",
+            "body2": "Αν συμπληρώσετε το κιτ αποκατάστασης και το αποθηκεύσετε με ασφάλεια, θα μπορείτε πάντα να ανακτήσετε το πορτοφόλι σας."
         },
         "password": {
             "title": "Δημιουργία κωδικού πρόσβασης",
-            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
-            "body2": "It is recommended that you write down your password in your Recovery Kit."
+            "body1": "Χρειάζεστε έναν ισχυρό κωδικό πρόσβασης για την προστασία των κεφαλαίων σας. Χρησιμοποιήστε έναν συνδυασμό λέξεων και αποφύγετε κοινές φράσεις, ονόματα ή ημερομηνίες.",
+            "body2": "Συνιστάται να γράψετε τον κωδικό σας στο Recovery Kit."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -54,50 +54,50 @@
         },
         "pin": {
             "title": "Δημιουργία κωδικού PIN",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
+            "body1": "Εισαγάγετε ένα 6-ψήφιο PIN παρακάτω. Θα σας ζητηθεί το PIN σας για πρόσβαση στο προφίλ σας.",
+            "body2": "Χρησιμοποιήστε μόνο αριθμούς"
         },
         "confirmPin": {
             "title": "Επιβεβαιώστε τον κωδικό σας PIN",
-            "body1": "Your PIN keeps your balance and transactions private.",
-            "body2": "Re-enter your PIN code to proceed. "
+            "body1": "Το PIN σας κρατά προσωπικό το υπόλοιπο και τις συναλλαγές σας.",
+            "body2": "Εισάξετε ξανά τον κωδικό PIN σας για να προχωρήσετε. "
         },
         "backup": {
             "title": "Δημιουργήστε εφεδρικό αντίγραφο του πορτοφολιού σας",
-            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+            "body1": "Τώρα θα εμφανιστεί μια φράση ανάκτησης. Γράψτε την στο κιτ ανάκτησης.",
+            "body2": "Μην μοιράζεστε τη φράση ανάκτησης σας με κανέναν. Μπορεί να χρησιμοποιηθεί για πρόσβαση στα tokens σας από οπουδήποτε.",
             "body3": "Εάν χάσετε τη φράση ανάκτησης, ενδέχεται να χάσετε τα χρήματά σας."
         },
         "recoveryPhrase": {
             "title": "Φράση ανάκτησης",
-            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-            "body2": "Keep this private and safely stored.",
-            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+            "body1": "Γράψτε τις λέξεις με την ακριβή σειρά που εμφανίζεται στο κιτ ανάκτησης σας.",
+            "body2": "Διατηρήστε και αποθηκεύσετε αυτό ιδιωτικό και με ασφάλεια.",
+            "body3": "Είναι σημαντικό να έχουμε ένα γραπτό αντίγραφο ασφαλείας. Οι υπολογιστές συχνά αποτυγχάνουν και τα αρχεία μπορούν να καταστραφούν.",
             "revealRecoveryPhrase": "Εμφάνιση φράσης ανάκτησης",
             "hideRecoveryPhrase": "Απόκρυψη φράσης ανάκτησης"
         },
         "verifyRecoveryPhrase": {
             "title": "Επαληθεύστε τη φράση ανάκτησης",
-            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
-            "word": "Word",
-            "verified": "Recovery phrase verified",
-            "verifiedBody": "Remember to keep it private and safely stored."
+            "body": "Ας ελέγξουμε ότι έχετε γράψει σωστά τη φράση. Επιλέξτε τις λέξεις με τη σωστή σειρά.",
+            "word": "Λέξη",
+            "verified": "Η φράση ανάκτησης επαληθεύτηκε",
+            "verifiedBody": "Θυμηθείτε να το κρατήσετε ιδιωτικό και αποθηκευμένο με ασφάλεια."
         },
         "backupWallet": {
             "title": "Δημιουργία εφεδρικού αρχείου Stronghold",
-            "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
-            "body2": "Reasons why digital backups are important:",
-            "reason1": "Easily recover your wallet without typing in your recovery phrase",
-            "reason2": "Import your wallet to other devices",
-            "reason3": "Recover your full transaction history"
+            "body1": "Εισαγάγετε τον κωδικό πρόσβασής σας για να δημιουργήσετε αντίγραφο ασφαλείας του πορτοφολιού σας σε ένα αρχείο Stronghold. Ο κωδικός πρόσβασής σας χρησιμοποιείται για την κρυπτογράφηση του αντιγράφου ασφαλείας.",
+            "body2": "Λόγοι για τους οποίους τα ψηφιακά αντίγραφα ασφαλείας είναι σημαντικά:",
+            "reason1": "Εύκολα ανακτήστε το πορτοφόλι σας χωρίς να πληκτρολογήσετε τη φράση ανάκτησης",
+            "reason2": "Εισάγετε το πορτοφόλι σας σε άλλες συσκευές",
+            "reason3": "Ανακτήστε το πλήρες ιστορικό των συναλλαγών σας"
         },
         "recoveryPhraseSaved": {
             "title": "Επιτυχές αντίγραφο ασφαλείας",
             "body": "Δημιουργήσατε αντίγραφο ασφαλείας του πορτοφολιού σας σε Stronghold."
         },
         "congratulations": {
-            "title": "Wallet setup completed",
-            "body": "Your new wallet is ready to use."
+            "title": "Η ρύθμιση του πορτοφολιού ολοκληρώθηκε",
+            "body": "Το νέο σας πορτοφόλι είναι έτοιμο για χρήση."
         },
         "import": {
             "title": "Εισαγάγετε ένα πορτοφόλι",
@@ -105,14 +105,14 @@
         },
         "importFromText": {
             "title": "Επαναφέρετε το πορτοφόλι σας με φράση ανάκτησης ή seed",
-            "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body2": "A recovery phrase is 24 words long (with spaces). This is used to recover an existing Firefly wallet.",
+            "body1": "Ένα seed αποτελείται από 81 χαρακτήρες. Αυτό χρησιμοποιείται για ανάκτηση από παλαιότερο πορτοφόλι Trinity.",
+            "body2": "Μια φράση ανάκτησης έχει μήκος 24 λέξεων. Αυτή χρησιμοποιείται για την ανάκτηση ενός υπάρχοντος πορτοφολιού Firefly.",
             "body3": "Εισάγετε το seed σας ή τη φράση ανάκτησης σας",
             "seedDetected": "81 χαρακτήρες του seed ανιχνεύτηκαν",
-            "phraseDetected": "24 word recovery phrase detected"
+            "phraseDetected": "Εντοπίστηκε φράση 24 λέξεων"
         },
         "importFromFile": {
-            "title": "Restore your wallet using a backup file",
+            "title": "Επαναφορά του πορτοφολιού σας χρησιμοποιώντας ένα αρχείο αντιγράφου ασφαλείας",
             "body": "Εισάξετε το εφεδρικό αρχείο για επαναφορά του πορτοφολιού σας. Τα εφεδρικά αρχεία μπορούν να είναι Stronghold (.stronghold) ή Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
@@ -123,10 +123,10 @@
         "importSuccess": {
             "title": "Έχετε επαναφέρει το εφεδρικό σας αρχείο με επιτυχία",
             "body": "Τώρα μπορείτε να δημιουργήσετε το καινούριο σας πορτοφόλι.",
-            "seedvaultTitle": "Successfully imported",
-            "seedvaultBody": "Your password is correct, you can now continue.",
-            "strongholdTitle": "Successfully imported",
-            "strongholdBody": "Your password is correct, you can now continue."
+            "seedvaultTitle": "Εισήχθη με επιτυχία",
+            "seedvaultBody": "Ο κωδικός πρόσβασής σας είναι σωστός, τώρα μπορείτε να συνεχίσετε.",
+            "strongholdTitle": "Εισήχθη με επιτυχία",
+            "strongholdBody": "Ο κωδικός πρόσβασής σας είναι σωστός, τώρα μπορείτε να συνεχίσετε."
         },
         "migrate": {
             "title": "Μεταφέρετε τα χρήματα σας",
@@ -151,19 +151,19 @@
             },
             "security": {
                 "title": "Ασφάλεια",
-                "description": "Change your password and adjust security-related settings"
+                "description": "Αλλάξτε τον κωδικό πρόσβασής σας και ρυθμίστε τις ρυθμίσεις ασφαλείας"
             },
             "advancedSettings": {
                 "title": "Εξειδικευμένες Ρυθμίσεις",
-                "description": "Tools and manual settings for technical users"
+                "description": "Εργαλεία και χειροκίνητες ρυθμίσεις για τεχνικούς χρήστες"
             },
             "helpAndInfo": {
                 "title": "Βοήθεια και πληροφορίες",
-                "description": "Find the answer to a question or get help with an issue"
+                "description": "Βρείτε την απάντηση σε μια ερώτηση ή λάβετε βοήθεια με ένα θέμα"
             },
             "profile": {
                 "title": "Προφίλ",
-                "description": "Change your profile name or set an avatar"
+                "description": "Αλλάξτε το όνομα του προφίλ σας ή ορίστε ένα avatar"
             },
             "sync": {
                 "title": "Συγχρονισμός λογαριασμών",
@@ -179,27 +179,27 @@
             },
             "currency": {
                 "title": "Νόμισμα",
-                "description": "Adjusts balance conversion and updates chart options"
+                "description": "Ρυθμίζει τις επιλογές μετατροπής υπολοίπου και ενημερώνει το διάγραμμα"
             },
             "notifications": {
                 "title": "Ειδοποιήσεις",
-                "description": "System notifications for transaction events"
+                "description": "Ειδοποιήσεις συστήματος για συμβάντα συναλλαγών"
             },
             "exportStronghold": {
-                "title": "Export Backup",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
+                "title": "Εξαγωγή Αντιγράφου Ασφαλείας",
+                "description": "Εξαγωγή σε ένα αρχείο Stronghold - ένα πλήρες κρυπτογραφημένο αντίγραφο ασφαλείας του πορτοφολιού σας και το τελευταίο ιστορικό συναλλαγών."
             },
             "appLock": {
-                "title": "Automatic Lock",
-                "description": "Time elapsed before your wallet locks and logs you out"
+                "title": "Αυτόματο Κλείδωμα",
+                "description": "Χρόνος που πέρασε πριν κλειδώσει το πορτοφόλι σας και σας αποσυνδέσει"
             },
             "changePassword": {
                 "title": "Αλλαγή κωδικού",
-                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
+                "description": "Ο κωδικός πρόσβασής σας χρησιμοποιείται για την ασφάλιση του πορτοφολιού σας. Πρέπει να χρησιμοποιήσετε έναν ισχυρό κωδικό πρόσβασης για την προστασία των κεφαλαίων σας."
             },
             "changePincode": {
                 "title": "Αλλαγή κωδικού PIN",
-                "description": "Your PIN keeps your balance and transactions private",
+                "description": "Το PIN σας διατηρεί το υπόλοιπο και τις συναλλαγές σας ιδιωτικές",
                 "currentPincode": "Τρέχων Κωδικός PIN",
                 "newPincode": "Νέος κωδικός PIN",
                 "confirmNewPincode": "Επιβεβαιώστε το PIN",
@@ -211,64 +211,64 @@
             },
             "deleteProfile": {
                 "title": "Διαγραφή προφίλ",
-                "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
+                "description": "Διαγράφει ολόκληρο το πορτοφόλι σας, το προφίλ και το ιστορικό συναλλαγών. Βεβαιωθείτε ότι έχετε ένα αντίγραφο ασφαλείας."
             },
             "deepLinks": {
                 "title": "Απευθείας/Βαθιές συνδέσεις",
-                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
+                "description": "Αυτόματη συμπλήρωση δεδομένων συναλλαγών στο Firefly μόλις κάνετε κλικ σε έναν σύνδεσμο iota://"
             },
             "developerMode": {
                 "title": "Λειτουργία προγραμματιστή",
-                "description": "Connect to testnets and other developer features"
+                "description": "Σύνδεση σε δοκιμαστικά δίχτυα και άλλα χαρακτηριστικά προγραμματιστή"
             },
             "nodeSettings": {
                 "title": "Ρυθμίσεις κόμβου",
-                "description": "Select Manual to choose from the node list or connect to your own node"
+                "description": "Επιλέξτε το εγχειρίδιο για να επιλέξετε από τη λίστα κόμβων ή να συνδεθείτε στον δικό σας κόμβο"
             },
             "configureNodeList": {
-                "title": "Select a node",
+                "title": "Επιλέξτε κόμβο",
                 "description": ""
             },
             "proofOfWork": {
                 "title": "Απόδειξη της εργασίας (Proof of work)",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "description": "Πλήρης απόδειξη εργασίας (proof of work) τοπικά στη συσκευή σας ή εξωτερική ανάθεση στον κόμβο"
             },
             "errorLog": {
                 "title": "Αρχείο Σφαλμάτων",
-                "description": "View errors to debug an issue"
+                "description": "Προβολή σφαλμάτων στην αποσφαλμάτωση ενός προβλήματος"
             },
             "diagnostics": {
                 "title": "Διαγνωστικός Έλεγχος",
-                "description": "View system and application information"
+                "description": "Προβολή πληροφοριών συστήματος και εφαρμογών"
             },
             "stateExport": {
                 "title": "Εξαγωγή Κατάστασης",
-                "description": "Export your transaction history to a .csv file"
+                "description": "Εξαγωγή του ιστορικού συναλλαγών σας σε ένα αρχείο .csv"
             },
             "troubleshoot": {
                 "title": "Αντιμετώπιση προβλημάτων",
-                "description": "Use the troubleshooting wizard to solve common problems"
+                "description": "Χρησιμοποιήστε τον οδηγό αντιμετώπισης προβλημάτων για την επίλυση κοινών προβλημάτων"
             },
             "documentation": {
                 "title": "Εγχειρίδιο",
-                "description": "View the documentation for in depth explanations of how things work"
+                "description": "Δείτε την τεκμηρίωση για αναλυτικές εξηγήσεις για το πώς λειτουργούν τα πράγματα"
             },
             "faq": {
                 "title": "Συχνές Ερωτήσεις",
-                "title2": "Frequently Asked Questions",
-                "description": "View the FAQs to get help with a common problem or question"
+                "title2": "Συχνές Ερωτήσεις",
+                "description": "Δείτε τις Συχνές Ερωτήσεις για να λάβετε βοήθεια με ένα κοινό πρόβλημα ή ερώτηση"
             },
             "discord": {
                 "title": "Discord",
-                "description": "Get help from the IOTA community on Discord"
+                "description": "Λάβετε βοήθεια από την κοινότητα IOTA στο Discord"
             },
             "about": {
                 "title": "Σχετικά",
                 "description": ""
             },
             "reportAnIssue": {
-                "title": "Report an issue",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
+                "title": "Αναφορά προβλήματος",
+                "description": "Αναφέρετε ένα σφάλμα στους προγραμματιστές. Ελέγξτε μέσα για να βεβαιωθείτε ότι δεν έχει ήδη αναφερθεί."
             }
         },
         "login": {
@@ -287,19 +287,19 @@
                     "noneDetected": "Δεν ανιχνεύθηκε κανένα"
                 },
                 "strongholdStatus": {
-                    "title": "Κατάσταση Stronghold",
-                    "locked": "Κλειδωμένο",
-                    "unlocked": "Ξεκλείδωτο"
+                    "title": "Wallet Status",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
                 },
                 "strongholdBackup": {
-                    "title": "Αντίγραφο Stronghold",
+                    "title": "Wallet Backup",
                     "weeksAgo": "{weeks, plural, one {# εβδομάδα} other {# εβδομάδες}} πριν"
                 }
             },
             "network": {
                 "networkOperational": "Δίκτυο σε λειτουργία",
                 "networkDegraded": "Δίκτυο Υποβαθμισμένο",
-                "networkDown": "Network Disconnected",
+                "networkDown": "Αποσύνδεση Δικτύου",
                 "status": "Κατάσταση",
                 "messagesPerSecond": "Μηνύματα ανά δευτερόλεπτο",
                 "confirmationRate": "Ποσοστό επιβεβαίωσης"
@@ -334,14 +334,14 @@
             "notBackedUpDescription": "Δεν έχετε δημιουργήσει αντίγραφα ασφαλείας του Stronghold σας"
         },
         "deleteAccount": {
-            "title": "Remove {name}?",
-            "body": "You can add this account back later but you may lose your transaction history.",
-            "typePassword": "Type your wallet password to confirm.",
-            "deleteAccount": "Remove account",
-            "errorTitle": "Unable to remove {name}",
-            "errorBody1": "To remove an account it must have 0 balance.",
+            "title": "Αφαίρεση {name};",
+            "body": "Μπορείτε να προσθέσετε αυτόν τον λογαριασμό ξανά αργότερα, αλλά μπορεί να χάσετε το ιστορικό των συναλλαγών σας.",
+            "typePassword": "Πληκτρολογήστε τον κωδικό πρόσβασης του πορτοφολιού σας για επιβεβαίωση.",
+            "deleteAccount": "Αφαίρεση λογαριασμού",
+            "errorTitle": "Αδυναμία αφαίρεσης {name}",
+            "errorBody1": "Για να διαγράψετε ένα λογαριασμό, πρέπει να έχετε υπόλοιπο 0.",
             "errorBody2": "Αυτή τη στιγμή απομένει {balance} σε αυτόν τον λογαριασμό. Μετακινήστε αυτά τα κεφάλαια σε διαφορετικό λογαριασμό και προσπαθήστε ξανά.",
-            "errorBody3": "You cannot remove this account, you must have at least one."
+            "errorBody3": "Δεν μπορείτε να διαγράψετε αυτόν τον λογαριασμό, πρέπει να έχετε τουλάχιστον ένα."
         },
         "addressHistory": {
             "title": "{name} ιστορικό διευθύνσεων λογαριασμού",
@@ -415,7 +415,7 @@
         "tryAgain": "Προσπαθήστε ξανά",
         "visitDiscord": "Επισκεφτείτε το Discord",
         "dragDrop": "Σύρετε και τοποθετήστε",
-        "importExtentions": ".kdbx or .stronghold file",
+        "importExtentions": "Aρχείο .kdbx ή .stronghold",
         "chooseFile": "Επιλέξτε αρχείο",
         "dropHere": "Τοποθετήστε το αρχείο σας εδώ",
         "syncAll": "Συγχρονισμός όλων",
@@ -429,10 +429,10 @@
         "unlock": "Ξεκλείδωμα",
         "updateFirefly": "Ενημέρωση Firefly",
         "restartNow": "Επανεκκίνηση τώρα",
-        "saveBackup": "Save Stronghold backup",
+        "saveBackup": "Αποθήκευση αντιγράφου ασφαλείας Stronghold",
         "customizeAcount": "Προσαρμογή λογαριασμού",
         "viewAddressHistory": "Προβολή ιστορικού διευθύνσεων",
-        "deleteAccount": "Remove account",
+        "deleteAccount": "Αφαίρεση λογαριασμού",
         "max": "Μέγιστο",
         "addNode": "Προσθήκη κόμβου",
         "removeNode": "Αφαίρεση κόμβου",
@@ -455,11 +455,11 @@
         "yes": "Ναι",
         "no": "Όχι",
         "reset": "Επαναφορά",
-        "downloadRecoveryKit": "Save Recovery Kit template",
-        "skipBackup": "Skip file backup",
-        "finishSetup": "Finish setup",
-        "readDocumentation": "Read the documentation",
-        "visitFaq": "Visit FAQ"
+        "downloadRecoveryKit": "Αποθήκευση προτύπου κιτ αποκατάστασης",
+        "skipBackup": "Παράλειψη αντιγράφου ασφαλείας αρχείου",
+        "finishSetup": "Ολοκλήρωση εγκατάστασης",
+        "readDocumentation": "Διαβάστε την τεκμηρίωση",
+        "visitFaq": "Επισκεφθείτε Τις Συχνές Ερωτήσεις"
     },
     "general": {
         "password": "Κωδικός πρόσβασης",
@@ -472,10 +472,10 @@
         "recentActivity": "Πρόσφατη Δραστηριότητα",
         "sent": "Εστάλη",
         "received": "Ελήφθη",
-        "sendPayment": "Αποστολή πληρωμής",
-        "moveFunds": "Μετακίνηση κεφαλαίων",
+        "sendPayment": "Send Payment",
+        "moveFunds": "Internal Transfer",
         "sendFunds": "Αποστολή Χρημάτων",
-        "sendToAddress": "Send to address",
+        "sendToAddress": "Αποστολή προς διεύθυνση",
         "scanQrOrPaste": "Σαρώστε τον κωδικό QR ή επικολλήστε μια διεύθυνση",
         "moveFundsBetweenAccounts": "Μετακίνηση κεφαλαίων μεταξύ λογαριασμών",
         "sendTokensToAddress": "Αποστολή κεφαλαίων σε μια διεύθυνση",
@@ -488,7 +488,7 @@
         "reference": "Αναφορά",
         "from": "Από",
         "to": "Προς",
-        "receiveFunds": "Λάβετε χρήματα",
+        "receiveFunds": "Receive Funds",
         "myAddress": "Η διεύθυνσή μου",
         "shareAddress": "Μοιραστείτε μια διεύθυνση",
         "yourAddress": "Η διεύθυνση σας",
@@ -509,16 +509,16 @@
         "accountBalance": "Υπόλοιπο Λογαριασμού",
         "incoming": "Εισερχόμενο",
         "outgoing": "Εξερχόμενο",
-        "totalIn": "Total in",
-        "totalOut": "Total out",
+        "totalIn": "Σύνολο σε",
+        "totalOut": "Σύνολο σε",
         "accounts": "Λογαριασμοί",
-        "myAccounts": "My accounts",
+        "myAccounts": "My Accounts",
         "automaticNodeSelection": "Αυτόματη επιλογή κόμβου",
         "manualNodeSelection": "Μή αυτόματη επιλογή κόμβου/δικτύου",
         "profiles": "Προφίλ",
         "developerProfile": "Προφίλ Προγραμματιστή",
         "dev": "Προγραμματιστής",
-        "createAccount": "Δημιουργία λογαριασμού",
+        "createAccount": "Create an Account",
         "accountName": "Όνομα λογαριασμού",
         "latestTransactions": "Τελευταίες Συναλλαγές",
         "transactions": "Συναλλαγές",
@@ -529,7 +529,7 @@
         "help": "Βοήθεια",
         "you": "Εσύ",
         "messageId": "Κωδικός Μηνύματος",
-        "inputAddress": "Εισαγωγή Διεύθυνσης",
+        "inputAddress": "Send Address",
         "receiveAddress": "Διεύθυνση Λήψης",
         "date": "Ημερομηνία",
         "status": "Κατάσταση",
@@ -559,13 +559,13 @@
         "pinCodeUpdating": "Ενημέρωση κωδικού PIN...",
         "pinCodeSuccess": "Επιτυχής ενημέρωση κωδικού PIN",
         "pinCodeFailed": "Αποτυχία ενημέρωσης κωδικού PIN",
-        "passwordStrength": "Password strength",
-        "passwordStrength0": "Bad",
-        "passwordStrength1": "Poor",
-        "passwordStrength2": "Weak",
-        "passwordStrength3": "Average",
-        "passwordStrength4": "Strong",
-        "creatingProfile": "Creating profile, please wait..."
+        "passwordStrength": "Ισχύς Κωδικού Πρόσβασης",
+        "passwordStrength0": "Κακό",
+        "passwordStrength1": "Φτωχό",
+        "passwordStrength2": "Αδύναμο",
+        "passwordStrength3": "Μέσος όρος",
+        "passwordStrength4": "Δυνατό",
+        "creatingProfile": "Δημιουργία λογαριασμού, παρακαλώ περιμένετε..."
     },
     "dates": {
         "today": "Σήμερα",
@@ -577,6 +577,7 @@
     "notifications": {
         "valueTx": "Λήψη {{value}} στο {{account}}",
         "confirmed": "Τα εξερχόμενα {{value}} από {{account}} έχουν επιβεβαιωθεί",
+        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
         "failed": "Αποτυχία εξερχομένου {{value}} από {{account}}",
         "downloadingUpdate": "Λήψη ενημέρωσης",
         "updateReady": "Ενημέρωση έτοιμη",
@@ -626,16 +627,16 @@
             "amountInvalidFormat": "Το ποσό φαίνεται να είναι άκυρος αριθμός.",
             "amountZero": "Το ποσό πρέπει να είναι μεγαλύτερο από 0.",
             "wrongAddressFormat": "Οι διευθύνσεις ξεκινούν με το πρόθεμα {prefix}.",
-            "insufficientFunds": "This account has insufficient funds.",
-            "sendingDust": "You cannot send less than 1 Mi.",
-            "leavingDust": "You cannot leave less than 1 Mi on your address."
+            "insufficientFunds": "Αυτός ο λογαριασμός δεν έχει επαρκή κεφάλαια.",
+            "sendingDust": "Δεν μπορείτε να στείλετε λιγότερο από 1 Mi.",
+            "leavingDust": "Δεν μπορείτε να αφήσετε λιγότερο από 1 Mi στη διεύθυνσή σας."
         },
         "node": {
             "invalid": "Εισαγάγετε μια έγκυρη διεύθυνση URL.",
             "https": "Απαιτείται HTTPS. Ρυθμίστε ένα προφίλ προγραμματιστή για να χρησιμοποιήσετε μη ασφαλείς συνδέσεις HTTP.",
             "duplicate": "Αυτός ο κόμβος έχει ήδη προστεθεί.",
-            "unsynced": "The node is not in sync.",
-            "noSynced": "No synced nodes are available."
+            "unsynced": "Ο κόμβος δεν είναι σε συγχρονισμό.",
+            "noSynced": "Δεν υπάρχουν διαθέσιμοι συγχρονισμένοι κόμβοι."
         },
         "global": {
             "generic": "Κάτι πήγε στραβά."

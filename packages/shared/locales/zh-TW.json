@@ -1,11 +1,11 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA tokens",
-            "body": "Firefly is the official wallet of IOTA."
+            "title": "傳送、接收與管理您的 IOTA",
+            "body": "Firefly是IOTA的官方錢包。"
         },
         "legal": {
-            "title": "Privacy Policy & Terms of Service",
+            "title": "隱私政策和服務條款",
             "body": "請仔細檢閱「隱私權政策」與「服務條款」",
             "privacyPolicy": {
                 "title": "隱私權政策",
@@ -25,15 +25,15 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+            "checkbox": "我已經閱讀並且接受隱私政策和服務條款"
         },
         "appearance": {
             "title": "界面外觀",
-            "body": "Choose your wallet’s theme."
+            "body": "選擇你錢包的樣式。"
         },
         "setup": {
             "title": "設定您的錢包",
-            "body1": "You can create multiple user profiles to keep your tokens separate and improve privacy.",
+            "body1": "你可以創建多個用戶資料來儲存您的代幣並加強隱私。",
             "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "描述檔名稱"
         },
@@ -190,7 +190,7 @@
                 "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
             },
             "appLock": {
-                "title": "Automatic Lock",
+                "title": "自動鎖定",
                 "description": "Time elapsed before your wallet locks and logs you out"
             },
             "changePassword": {
@@ -226,7 +226,7 @@
                 "description": "Select Manual to choose from the node list or connect to your own node"
             },
             "configureNodeList": {
-                "title": "Select a node",
+                "title": "選擇一個節點",
                 "description": ""
             },
             "proofOfWork": {
@@ -287,12 +287,12 @@
                     "noneDetected": "偵測不到裝置"
                 },
                 "strongholdStatus": {
-                    "title": "Stronghold 狀態",
-                    "locked": "鎖定",
-                    "unlocked": "解鎖"
+                    "title": "Wallet Status",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
                 },
                 "strongholdBackup": {
-                    "title": "備份 Stronghold",
+                    "title": "Wallet Backup",
                     "weeksAgo": "{weeks, plural, one {# 周} other {# 周}} 前"
                 }
             },
@@ -472,8 +472,8 @@
         "recentActivity": "近期活動",
         "sent": "已支出",
         "received": "已接收",
-        "sendPayment": "送出交易",
-        "moveFunds": "轉移資金",
+        "sendPayment": "Send Payment",
+        "moveFunds": "Internal Transfer",
         "sendFunds": "發送資金",
         "sendToAddress": "Send to address",
         "scanQrOrPaste": "掃描QR碼 或 貼上地址",
@@ -488,7 +488,7 @@
         "reference": "參照",
         "from": "由",
         "to": "至",
-        "receiveFunds": "接收資產",
+        "receiveFunds": "Receive Funds",
         "myAddress": "我的地址",
         "shareAddress": "分享地址",
         "yourAddress": "您的地址",
@@ -512,13 +512,13 @@
         "totalIn": "Total in",
         "totalOut": "Total out",
         "accounts": "帳戶",
-        "myAccounts": "My accounts",
+        "myAccounts": "My Accounts",
         "automaticNodeSelection": "自動選取節點",
         "manualNodeSelection": "手動選取節點",
         "profiles": "設定檔",
         "developerProfile": "開發者資料",
         "dev": "開發者",
-        "createAccount": "建立帳戶",
+        "createAccount": "Create an Account",
         "accountName": "帳戶名稱",
         "latestTransactions": "最新交易",
         "transactions": "交易紀錄",
@@ -529,7 +529,7 @@
         "help": "幫助",
         "you": "你",
         "messageId": "訊息編號：",
-        "inputAddress": "輸入地址",
+        "inputAddress": "Send Address",
         "receiveAddress": "收款地址",
         "date": "日期",
         "status": "狀態",
@@ -559,7 +559,7 @@
         "pinCodeUpdating": "正在更新 PIN 碼...",
         "pinCodeSuccess": "更新 PIN 碼成功",
         "pinCodeFailed": "更 PIN 碼失敗",
-        "passwordStrength": "Password strength",
+        "passwordStrength": "密碼強度",
         "passwordStrength0": "Bad",
         "passwordStrength1": "Poor",
         "passwordStrength2": "Weak",
@@ -577,6 +577,7 @@
     "notifications": {
         "valueTx": "從 {{account}} 收到 {{value}}",
         "confirmed": "{{account}} 轉出的 {{value}} 已被確認",
+        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
         "failed": "{{account}} 轉出的 {{value}} 發生錯誤",
         "downloadingUpdate": "下載更新中",
         "updateReady": "準備更新",

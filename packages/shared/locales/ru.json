@@ -287,12 +287,12 @@
                     "noneDetected": "None detected"
                 },
                 "strongholdStatus": {
-                    "title": "Stronghold Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "title": "Wallet Status",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
                 },
                 "strongholdBackup": {
-                    "title": "Stronghold Backup",
+                    "title": "Wallet Backup",
                     "weeksAgo": "{weeks, plural, one {# week} other {# weeks}} ago"
                 }
             },
@@ -472,8 +472,8 @@
         "recentActivity": "Последние действия",
         "sent": "Отправлено",
         "received": "Получено",
-        "sendPayment": "Send payment",
-        "moveFunds": "Move funds",
+        "sendPayment": "Send Payment",
+        "moveFunds": "Internal Transfer",
         "sendFunds": "Отправить средства",
         "sendToAddress": "Send to address",
         "scanQrOrPaste": "Сканировать QR-код или вставить Адрес",
@@ -488,7 +488,7 @@
         "reference": "Ссылка",
         "from": "От",
         "to": "Кому",
-        "receiveFunds": "Получить средства",
+        "receiveFunds": "Receive Funds",
         "myAddress": "My Address",
         "shareAddress": "Поделиться адресом",
         "yourAddress": "Ваш адрес",
@@ -512,13 +512,13 @@
         "totalIn": "Total in",
         "totalOut": "Total out",
         "accounts": "Аккаунты",
-        "myAccounts": "My accounts",
+        "myAccounts": "My Accounts",
         "automaticNodeSelection": "Авто подбор Node (точка подключения к сети)",
         "manualNodeSelection": "Ручной выбор Node (точка подключения к сети)",
         "profiles": "Профили",
         "developerProfile": "Developer Profile",
         "dev": "Dev",
-        "createAccount": "Создать учетную запись",
+        "createAccount": "Create an Account",
         "accountName": "Название учетной записи",
         "latestTransactions": "Последние Транзакции",
         "transactions": "Транзакции",
@@ -529,7 +529,7 @@
         "help": "Help",
         "you": "You",
         "messageId": "Message ID",
-        "inputAddress": "Input Address",
+        "inputAddress": "Send Address",
         "receiveAddress": "Receive Address",
         "date": "Date",
         "status": "Status",
@@ -577,6 +577,7 @@
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
         "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
+        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
         "failed": "Outgoing {{value}} from {{account}} has failed",
         "downloadingUpdate": "Загрузка обновлений",
         "updateReady": "Обновление готово",
