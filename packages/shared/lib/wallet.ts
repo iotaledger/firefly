@@ -59,6 +59,7 @@ type WalletState = {
     balanceOverview: Writable<BalanceOverview>
     accounts: Writable<WalletAccount[]>
     accountsLoaded: Writable<boolean>
+    confirmedInternalMessageIds: Writable<{ [key: string]: number }>
 }
 
 type BalanceTimestamp = {
@@ -95,6 +96,7 @@ export const wallet = writable<WalletState>({
     }),
     accounts: writable<WalletAccount[]>([]),
     accountsLoaded: writable<boolean>(false),
+    confirmedInternalMessageIds: writable<{ [key: string]: number }>({})
 })
 
 export const resetWallet = () => {
@@ -361,12 +363,13 @@ export const initialiseListeners = () => {
         onSuccess(response) {
             const accounts = get(wallet).accounts
             const account = get(accounts).find((account) => account.id === response.payload.accountId)
-            const message = response.payload.message
-            const messageKey = response.payload.confirmed ? 'confirmed' : 'failed'
 
+            const message = response.payload.message
+            const confirmed = response.payload.confirmed;
             const essence = message.payload.data.essence
 
-            if (response.payload.confirmed && !essence.data.internal) {
+
+            if (confirmed && !essence.data.internal) {
                 const { balanceOverview } = get(wallet);
                 const overview = get(balanceOverview);
 
@@ -380,8 +383,10 @@ export const initialiseListeners = () => {
                 );
             }
 
+            // Update state
             const accountMessage = account.messages.find((_message) => _message.id === message.id)
             accountMessage.confirmed = response.payload.confirmed
+
             accounts.update((storedAccounts) => {
                 return storedAccounts.map((storedAccount) => {
                     if (storedAccount.id === account.id) {
@@ -402,11 +407,57 @@ export const initialiseListeners = () => {
                 })
             })
 
-            const notificationMessage = localize(`notifications.${messageKey}`)
-                .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
-                .replace('{{account}}', account.alias)
+            // Notify user
+            const messageKey = confirmed ? 'confirmed' : 'failed'
 
-            showSystemNotification({ type: "info", message: notificationMessage })
+            const _notify = (senderAccountAlias: string | null = null) => {
+                let notificationMessage
+
+                if (senderAccountAlias) {
+                    notificationMessage = localize(`notifications.${messageKey}Internal`)
+                        .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
+                        .replace('{{senderAccount}}', senderAccountAlias)
+                        .replace('{{receiverAccount}}', account.alias)
+                } else {
+                    notificationMessage = localize(`notifications.${messageKey}`)
+                        .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
+                        .replace('{{account}}', account.alias)
+                }
+
+                showSystemNotification({ type: "info", message: notificationMessage })
+            }
+
+            const { confirmedInternalMessageIds } = get(wallet)
+            const messageIds = get(confirmedInternalMessageIds)
+
+            // If this event is emitted because a message failed, then this message will only exist on the sender account
+            // Therefore, show the notification (no need to group).
+            if (!confirmed) {
+                _notify()
+            } else {
+                // If this is an external message, notify (no need to group)
+                if (!essence.data.internal) {
+                    _notify();
+                } else {
+                    // If this is an internal message, check if we have already receive confirmation state of this message
+                    if (Object.keys(messageIds).includes(message.id)) {
+                        _notify(
+                            get(accounts).find((account) => account.index === messageIds[message.id]).alias
+                        );
+
+                        confirmedInternalMessageIds.update((ids) => {
+                            delete ids[message.id]
+
+                            return ids;
+                        })
+                    } else {
+                        // Otherwise, add the message id and do not notify yet
+                        messageIds[message.id] = account.index
+                    }
+                }
+            }
+
+
         },
         onError(error) {
             console.error(error)
