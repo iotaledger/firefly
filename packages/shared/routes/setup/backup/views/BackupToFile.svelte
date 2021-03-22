@@ -56,8 +56,8 @@
                 {:else}{locale('actions.saveBackup')}{/if}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center p-16 bg-pastel-blue dark:bg-gray-900">
-            <Illustration illustration="backup-recovery-phrase-desktop" width="auto" height="auto" />
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
+            <Illustration illustration="backup-recovery-phrase-desktop" width="100%" height="auto" />
         </div>
     </OnboardingLayout>
 {/if}

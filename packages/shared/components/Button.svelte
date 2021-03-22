@@ -23,7 +23,7 @@
     export let showHoverText = undefined
 
     let buttonElement
-    let darkModeEnabled = $appSettings.darkMode
+    $: darkModeEnabled = $appSettings.darkMode
 
     onMount(() => {
         if (autofocus) {
