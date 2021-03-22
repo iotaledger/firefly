@@ -12,6 +12,7 @@
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
         AccountMessage,
+        AccountsBalanceHistory,
         api,
         BalanceHistory,
         BalanceOverview,
@@ -23,6 +24,7 @@
         initialiseListeners,
         isTransferring,
         prepareAccountInfo,
+        removeEventListeners,
         selectedAccountId,
         syncAccounts,
         transferState,
@@ -56,7 +58,7 @@
     setContext<Writable<boolean>>('walletAccountsLoaded', accountsLoaded)
     setContext<Readable<AccountMessage[]>>('walletTransactions', transactions)
     setContext<Readable<WalletAccount>>('selectedAccount', selectedAccount)
-    setContext<Readable<BalanceHistory>>('accountsBalanceHistory', accountsBalanceHistory)
+    setContext<Readable<AccountsBalanceHistory>>('accountsBalanceHistory', accountsBalanceHistory)
     setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false

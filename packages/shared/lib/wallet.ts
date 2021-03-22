@@ -2,7 +2,7 @@ import { mnemonic } from 'shared/lib/app'
 import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
 import { Electron } from 'shared/lib/electron'
 import { localize } from 'shared/lib/i18n'
-import type { HistoryData, PriceData } from 'shared/lib/marketData'
+import type { PriceData } from 'shared/lib/marketData'
 import { HistoryDataProps } from 'shared/lib/marketData'
 import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
 import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
@@ -1026,7 +1026,7 @@ export const getAccountsBalanceHistory = (accounts: WalletAccount[], priceData: 
  * @param {PriceData} [priceData]
  *
  */
-export const getWalletBalanceHistory = (accountsBalanceHistory: BalanceHistory): BalanceHistory => {
+export const getWalletBalanceHistory = (accountsBalanceHistory: AccountsBalanceHistory): BalanceHistory => {
     let balanceHistory: BalanceHistory = {
         [HistoryDataProps.ONE_HOUR]: [],
         [HistoryDataProps.TWENTY_FOUR_HOURS]: [],
