@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href=""><img src="trinity.png"></a>
+  <a href=""><img src="header-beta.png"></a>
 </h1>
 
 <h2 align="center">IOTA's upcoming wallet</h2>
