@@ -20,7 +20,7 @@
 
 <button
     on:click={() => onClick()}
-    class="relative flex {toggle ? 'flex-row items-center space-x-4' : 'flex-col flex-wrap '} justify-between text-left rounded-xl {toggle ? 'bg-gray-50 p-4' : `bg-${color}-50 px-4 pt-4 pb-5`} dark:bg-gray-900 dark:bg-opacity-50 {classes}"
+    class="relative flex {toggle ? 'flex-row items-center space-x-4' : 'flex-col flex-wrap '} justify-between text-left rounded-xl {toggle ? 'bg-gray-100 p-4' : `bg-${color}-50 px-4 pt-4 pb-5`} dark:bg-gray-900 dark:bg-opacity-50 {classes}"
     class:toggle>
     <div class="h-full {toggle ? 'flex flex-row items-center space-x-4' : 'flex flex-col justify-between flex-auto'} flex-nowrap">
         <Icon boxed {icon} classes="text-white" boxClasses="{toggle ? 'bg-gray-400' : `mb-2 bg-${color}-500`} dark:bg-gray-900" />

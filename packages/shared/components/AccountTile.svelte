@@ -25,7 +25,7 @@
 
 <button
     on:click={onClick}
-    class="size-{size} group rounded-xl bg-gray-200 dark:bg-gray-900 hover:bg-{color}-500 font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'}">
+    class="size-{size} group rounded-xl bg-gray-100 dark:bg-gray-900 hover:bg-{color}-500 font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'}">
     <Text bold smaller={size === 's'} overrideColor classes="mb-2 text-gray-800 dark:text-white group-hover:text-white">
         {name}
     </Text>
