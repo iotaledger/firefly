@@ -207,22 +207,3 @@ export const updateProfile = (
         })
     }
 }
-
-export const updateFirstAccount = () => {
-    profiles.update((_profiles) => {
-        return _profiles.map((_profile) => {
-            if (_profile.id === get(activeProfile)?.id) {
-                const w = get(wallet);
-                if (w) {
-                    const acc = get(w.accounts)
-
-                    if (acc && acc.length > 0) {
-                        _profile.firstAccountId = acc[0].id
-                    }
-                }
-            }
-
-            return _profile
-        })
-    })
-}

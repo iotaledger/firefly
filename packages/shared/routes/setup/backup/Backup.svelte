@@ -62,16 +62,18 @@
                     if (skip) {
                         busy = true
                         await storeMnemonicAsync(get(mnemonic).join(' '))
-                        await createAccountAsync()
+                        const createAccountPayload = await createAccountAsync()
+                        updateProfile('firstAccountId', createAccountPayload.payload.id)
                         dispatch('next')
                     } else {
                         const dest = await Electron.getStrongholdBackupDestination(getDefaultStrongholdName())
                         if (dest) {
                             busy = true
                             await storeMnemonicAsync(get(mnemonic).join(' '))
-                            await createAccountAsync()
+                            const createAccountPayload = await createAccountAsync()
                             await backupAsync(dest)
                             updateProfile('lastStrongholdBackupTime', new Date())
+                            updateProfile('firstAccountId', createAccountPayload.payload.id)
                             dispatch('next')
                         }
                     }

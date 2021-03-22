@@ -299,7 +299,7 @@ export const restoreBackupAsync = (importFilePath, password) => {
 }
 
 export const createAccountAsync = () => {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<Event<Account>>((resolve, reject) => {
         api.createAccount(
             {
                 signerType: { type: 'Stronghold' },
@@ -310,8 +310,8 @@ export const createAccountAsync = () => {
                 },
             },
             {
-                onSuccess() {
-                    resolve()
+                onSuccess(payload) {
+                    resolve(payload)
                 },
                 onError(err) {
                     reject(err)

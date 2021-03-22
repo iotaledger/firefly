@@ -81,7 +81,7 @@
                 try {
                     await restoreBackupAsync(importFilePath, password)
                     const accountsResponse = await getAccountsAsync()
-                    let canContinue = true
+                    let useFirstAccountId = ""
                     if (accountsResponse.payload.length > 0) {
                         const firstAccountId = accountsResponse.payload[0].id
                         const allProfiles = get(profiles)
@@ -92,11 +92,13 @@
                                     profile: matchProfile.name,
                                 },
                             })
-                            canContinue = false
+                        } else {
+                            useFirstAccountId = firstAccountId
                         }
                     }
-                    if (canContinue) {
+                    if (useFirstAccountId) {
                         $newProfile.lastStrongholdBackupTime = new Date()
+                        $newProfile.firstAccountId = useFirstAccountId
                         nextState = ImportState.Success
                     } else {
                         // If this backup is no good we need to remove it

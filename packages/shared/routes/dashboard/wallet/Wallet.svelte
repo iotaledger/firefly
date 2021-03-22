@@ -7,7 +7,7 @@
     import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, isStrongholdLocked, updateFirstAccount } from 'shared/lib/profile'
+    import { activeProfile, isStrongholdLocked } from 'shared/lib/profile'
     import { resetWalletRoute, walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
@@ -67,7 +67,6 @@
 
             if (accountsResponse.payload.length === 0) {
                 accountsLoaded.set(true)
-                updateFirstAccount()
                 syncAccounts()
             } else {
                 const totalBalance = {
@@ -92,7 +91,6 @@
                         if (idx === accountsResponse.payload.length - 1) {
                             updateBalanceOverview(totalBalance.balance, totalBalance.incoming, totalBalance.outgoing)
                             accountsLoaded.set(true)
-                            updateFirstAccount()
                             syncAccounts()
                         }
                     })
