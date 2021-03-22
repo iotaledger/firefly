@@ -892,8 +892,8 @@ export const getAccountsBalanceHistory = (accounts: WalletAccount[], priceData: 
                                 balanceHistoryInTimeframe.push({ timestamp: data[0], balance: accountBalanceVariations[i].balance })
                                 return
                             }
-                            else if (i === (accountBalanceVariations.length - 2)) {
-                                balanceHistoryInTimeframe.push({ timestamp: data[0], balance: accountBalanceVariations[i + 1].balance })
+                            else if (marketTimestamp <= nextBalanceTimestamp && i === (accountBalanceVariations.length - 2)) {
+                                balanceHistoryInTimeframe.push({ timestamp: data[0], balance: 0 })
                                 return
                             }
                         }
