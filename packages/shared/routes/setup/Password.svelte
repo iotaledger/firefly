@@ -63,7 +63,7 @@
                 <Text type="p" classes="mb-10" secondary>{locale('views.password.body2')}</Text>
                 <Password
                     {error}
-                    classes="mb-1"
+                    classes="mb-4"
                     bind:value={password}
                     strengthLevels={4}
                     showRevealToggle
@@ -86,8 +86,8 @@
                 {locale('actions.savePassword')}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center p-16 bg-pastel-yellow dark:bg-gray-900">
-            <Illustration illustration="password-desktop" height="100%" width="auto"/>
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-yellow dark:bg-gray-900">
+            <Illustration illustration="password-desktop" width="100%" height="auto" />
         </div>
     </OnboardingLayout>
 {/if}

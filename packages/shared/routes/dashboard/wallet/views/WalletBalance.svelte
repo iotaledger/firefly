@@ -10,7 +10,7 @@
     export let locale
     export let color = 'blue' // TODO: profiles will have different colors
 
-    let darkModeEnabled = $appSettings.darkMode
+    $: darkModeEnabled = $appSettings.darkMode
 
     const balance = getContext<Readable<BalanceOverview>>('walletBalance')
 </script>

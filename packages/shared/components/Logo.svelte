@@ -6,23 +6,22 @@
     export let height = undefined
     export let classes = ''
 
-    let darkModeEnabled = $appSettings.darkMode
-
-    $: selected = logos[logo]?.[darkModeEnabled ? 'darkmode' : 'default']
+    $: darkModeEnabled = $appSettings.darkMode
+    $: selected = logos[logo]?.[darkModeEnabled ? 'darkmode' : 'lightmode']
 
     const logos = {
         'logo-firefly-full': {
-            default: 'firefly_logo_full.svg',
+            lightmode: 'firefly_logo_full.svg',
             darkmode: 'firefly_logo_full_darkmode.svg',
         },
         'logo-firefly': {
-            default: 'firefly_logo.svg',
+            lightmode: 'firefly_logo.svg',
             darkmode: 'firefly_logo.svg',
         },
         'logo-stronghold': {
-            default: 'stronghold.svg',
+            lightmode: 'stronghold.svg',
             darkmode: 'stronghold_darkmode.svg',
-        }
+        },
     }
 </script>
 

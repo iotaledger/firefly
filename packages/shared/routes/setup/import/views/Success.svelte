@@ -33,8 +33,11 @@
             <Button classes="w-full" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
         <!-- TODO: missing illustration -->
-        <div slot="rightpane" class="w-full h-full bg-pastel-green dark:bg-gray-900">
-            <Illustration illustration={ importType === 'seed' || importType === 'mnemonic' ? 'import-from-text-success-desktop' : 'import-from-file-success-desktop'} width="auto" height="100%" classes="h-full object-scale-down object-right"/>
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-green dark:bg-gray-900">
+            <Illustration
+                illustration={importType === 'seed' || importType === 'mnemonic' ? 'import-from-text-success-desktop' : 'import-from-file-success-desktop'}
+                width="100%"
+                height="auto" />
         </div>
     </OnboardingLayout>
 {/if}

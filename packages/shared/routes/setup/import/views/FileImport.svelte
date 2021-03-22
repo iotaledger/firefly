@@ -52,10 +52,12 @@
             {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-            <Button classes="flex-1" disabled={!file || isSeedVault} onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
+            <Button classes="flex-1" disabled={!file || isSeedVault} onClick={() => handleContinueClick()}>
+                {locale('actions.continue')}
+            </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center p-16 bg-pastel-blue dark:bg-gray-900">
-            <Illustration illustration="import-from-file-desktop" width="auto" height="100%" classes=""/>
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
+            <Illustration illustration="import-from-file-desktop" width="100%" height="auto" />
         </div>
     </OnboardingLayout>
 {/if}

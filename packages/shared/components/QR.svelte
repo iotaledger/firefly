@@ -7,8 +7,8 @@
 
     let qr
     let cells
-    let darkModeEnabled = $appSettings.darkMode
 
+    $: darkModeEnabled = $appSettings.darkMode
     $: data, create()
 
     function create() {
