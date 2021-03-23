@@ -1,12 +1,12 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Küldje el, Fogadja és Kezelje IOTA tokenjeit",
-            "body": "Firefly is the official wallet of IOTA."
+            "title": "Küldje, fogadja és kezelje IOTA tokenjeit",
+            "body": "A Firefly a hivatalos IOTA tárca."
         },
         "legal": {
             "title": "Adatvédelmi irányelvek és Felhasználási feltételek",
-            "body": "Kérjük, olvassa el az Adatvédelmi irányelveket és a Felhasználási feltételeket!",
+            "body": "Kérjük, figyelmesen olvassa el az Adatvédelmi irányelveket és a Felhasználási feltételeket.",
             "privacyPolicy": {
                 "title": "Adatvédelmi Szabályzat",
                 "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
@@ -32,20 +32,20 @@
             "body": "Válassza ki tárcája megjelenését."
         },
         "setup": {
-            "title": "Állítsa be tárcáját",
-            "body1": "You can create multiple user profiles to keep your tokens separate and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "title": "Tárca beállítása",
+            "body1": "Több felhasználói profilt is létrehozhat a tokenek elkülönítése és a biztonság javítása érdekében.",
+            "body2": "Most kezdjük az első profilnévvel. Később további profilokat adhat hozzá.",
             "profileName": "Profilnév"
         },
         "secure": {
-            "title": "Tegye biztonságossá tárcáját",
-            "body1": "Save and print the Recovery Kit PDF template.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
+            "title": "Tárca biztonságossá tétele",
+            "body1": "Mentse el és nyomtassa ki a helyreállítási lap PDF-sablonját.",
+            "body2": "Ha kitölti és biztonságosan tárolja a helyreállítási lapot, akkor mindig helyre tudja állítani a tárcáját."
         },
         "password": {
             "title": "Jelszó létrehozása",
-            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
-            "body2": "It is recommended that you write down your password in your Recovery Kit."
+            "body1": "A számláján lévő összeg biztonságos tárolásának érdekében egy erős jelszóra van szüksége. Használja szavak kombinációját és kerülje az általános kifejezéseket, neveket vagy dátumokat.",
+            "body2": "Javasoljuk, hogy írja le jelszavát a helyreállítási lapra."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -54,42 +54,42 @@
         },
         "pin": {
             "title": "PIN-kód beállítása",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
+            "body1": "Adjon meg egy 6 számjegyű PIN-kódot. Ezzel fog hozzáférni a profiljához.",
             "body2": "Kérjük csak számokat használjon"
         },
         "confirmPin": {
-            "title": "Ellenőrizze PIN-kódját",
-            "body1": "Your PIN keeps your balance and transactions private.",
+            "title": "Erősítse meg PIN-kódját",
+            "body1": "A PIN-kódja segít egyenlegét és a tranzakcióit titokban tartani.",
             "body2": "A folytatáshoz adja meg újból a PIN-kódját!"
         },
         "backup": {
             "title": "Készítsen biztonsági másolatot tárcájáról",
-            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
-            "body3": "Ha elveszti a helyreállítási szavakat, örökre elveszítheti számlájának teljes egyenlegét."
+            "body1": "Most meg fogjuk mutatni a tárcája helyreállításához szükséges szavakat. Írja le őket a helyreállítási lapra.",
+            "body2": "Ne ossza meg senkivel a helyreállítási szavakat. Azokkal bárki bárhonnan hozzáférhet a tokenjeihez.",
+            "body3": "Ha elveszíti a helyreállítási szavakat, örökre elveszítheti számlájának teljes egyenlegét."
         },
         "recoveryPhrase": {
             "title": "Helyreállítási szavak",
-            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-            "body2": "Keep this private and safely stored.",
-            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+            "body1": "Írja le a helyreállítási lapra a szavakat azok pontos sorrendjében.",
+            "body2": "Ezt tárolja biztonságos helyen.",
+            "body3": "Fontos, hogy legyen egy írásos biztonsági másolata. A számítógépek gyakran meghibásodnak, és a fájlok megsérülhetnek.",
             "revealRecoveryPhrase": "Helyreállítási szavak megjelenítése",
             "hideRecoveryPhrase": "Helyreállítási szavak elrejtése"
         },
         "verifyRecoveryPhrase": {
             "title": "Helyreállítási szavak ellenőrzése",
-            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
+            "body": "Most leellenőrizzük, hogy helyesen írta-e le a helyreállítási szavakat. Kérjük, válassza ki az egyes szavakat a sorszámuk alapján.",
             "word": "Szó",
             "verified": "A helyreállítási szavak ellenőrizve",
-            "verifiedBody": "Remember to keep it private and safely stored."
+            "verifiedBody": "Ezt mindig tárolja biztonságos helyen!"
         },
         "backupWallet": {
             "title": "Biztonsági mentés Stronghold-ba",
-            "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
-            "body2": "Reasons why digital backups are important:",
-            "reason1": "Easily recover your wallet without typing in your recovery phrase",
-            "reason2": "Import your wallet to other devices",
-            "reason3": "Recover your full transaction history"
+            "body1": "Írja be jelszavát, hogy biztonsági másolatot készítsen a tárcájáról egy Stronghold fájlba. \nJelszavát a biztonsági másolat titkosításához használjuk.",
+            "body2": "Az alábbi okok miatt fontos a digitális biztonsági mentés:",
+            "reason1": "- Könnyen helyreállíthatja tárcáját anélkül, hogy beírná a helyreállítási szavakat",
+            "reason2": "- Könnyedén importálhatja tárcáját más eszközökre",
+            "reason3": "- Egyszerűen visszaállíthatja tranzakcióinak előzményeit"
         },
         "recoveryPhraseSaved": {
             "title": "Sikeres biztonsági mentés",
@@ -104,15 +104,15 @@
             "body": "Ha rendelkezik helyreállítási szavakkal vagy Stronghold biztonsági mentéssel, itt importálhatja azokat."
         },
         "importFromText": {
-            "title": "Állítsa vissza tárcáját helyreállítási szavak vagy seed használatával",
-            "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body2": "A recovery phrase is 24 words long (with spaces). This is used to recover an existing Firefly wallet.",
+            "title": "Állítsa helyre tárcáját helyreállítási szavak vagy seed használatával",
+            "body1": "A seed 81 karakterből áll. Régebbi, Trinity tárcából történő helyreállításra szolgál.",
+            "body2": "A helyreállítási szavak 24 szóból állnak. Egy létező Firefly tárca helyreállítására használhatóak.",
             "body3": "Írja be a seed-et vagy a helyreállítási szavakat",
             "seedDetected": "81 karakterből álló seed észlelve",
             "phraseDetected": "24 szóból álló helyreállítási szavak észlelve"
         },
         "importFromFile": {
-            "title": "Kérjük állítsa helyre tárcáját a biztonsági mentés segítségével",
+            "title": "Állítsa helyre tárcáját a biztonsági mentés használatával",
             "body": "Importálja tárcáját egy meglévő biztonsági mentésből, mely lehet Stronghold (.stronghold) vagy Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
@@ -183,7 +183,7 @@
             },
             "notifications": {
                 "title": "Értesítések",
-                "description": "System notifications for transaction events"
+                "description": "Rendszer értesítések a tranzakciós eseményekről"
             },
             "exportStronghold": {
                 "title": "Export Backup",
@@ -199,7 +199,7 @@
             },
             "changePincode": {
                 "title": "PIN-kód megváltoztatása",
-                "description": "Your PIN keeps your balance and transactions private",
+                "description": "A PIN-kódja segít egyenlegét és a tranzakcióit titokban tartani",
                 "currentPincode": "Jelenlegi PIN-kód",
                 "newPincode": "Új PIN-kód",
                 "confirmNewPincode": "Új PIN-kód megerősítése",
@@ -215,11 +215,11 @@
             },
             "deepLinks": {
                 "title": "Mélyhivatkozások",
-                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
+                "description": "A tranzakciós adatok automatikus kitöltése a Firefly-ban egy iota: // hivatkozásra kattintva"
             },
             "developerMode": {
                 "title": "Fejlesztői mód",
-                "description": "Connect to testnets and other developer features"
+                "description": "Csatlakozás tesztnetekhez és egyéb fejlesztői szolgáltatásokhoz"
             },
             "nodeSettings": {
                 "title": "Csomópont beállításai",
@@ -239,7 +239,7 @@
             },
             "diagnostics": {
                 "title": "Diagnosztika",
-                "description": "View system and application information"
+                "description": "Rendszer- és alkalmazásinformációk megtekintése"
             },
             "stateExport": {
                 "title": "Állapot exportálása",
@@ -398,11 +398,11 @@
         "savePassword": "Jelszó mentése",
         "useBiometric": "Biometrikus azonosítás használata",
         "setupPin": "PIN-kód beállítása",
-        "setPin": "Állítsa be a PIN-kódot",
-        "confirmPin": "Erősítse meg a PIN-kódot",
+        "setPin": "PIN-kód beállítása",
+        "confirmPin": "PIN-kód megerősítése",
         "enterYourPin": "Adja meg a PIN-kódját",
         "saveBackupFile": "Biztonsági mentés készítése",
-        "iveWrittenRecoveryPhrase": "Feljegyeztem a helyreállítási szavakat",
+        "iveWrittenRecoveryPhrase": "Leírtam a helyreállítási szavakat",
         "verifyRecoveryPhrase": "Helyreállítási szavak ellenőrzése",
         "revealRecoveryPhrase": "Helyreállítási szavak megjelenítése",
         "importSeedvault": "SeedVault importálása",
@@ -429,7 +429,7 @@
         "unlock": "Felold",
         "updateFirefly": "Firefly frissítése",
         "restartNow": "Újraindítás most",
-        "saveBackup": "Save Stronghold backup",
+        "saveBackup": "Mentés stronghold-ba",
         "customizeAcount": "Számla személyre szabása",
         "viewAddressHistory": "Címek előzményeinek megjelenítése",
         "deleteAccount": "Számla eltávolítása",
@@ -455,8 +455,8 @@
         "yes": "Igen",
         "no": "Nem",
         "reset": "Visszaállítás",
-        "downloadRecoveryKit": "Save Recovery Kit template",
-        "skipBackup": "Skip file backup",
+        "downloadRecoveryKit": "Helyreállítási sablon mentése",
+        "skipBackup": "Mentés kihagyása",
         "finishSetup": "Beállítás befejezése",
         "readDocumentation": "Dokumentáció elolvasása",
         "visitFaq": "GYIK megtekintése"
@@ -561,7 +561,7 @@
         "pinCodeFailed": "A PIN-kód frissítése sikertelen",
         "passwordStrength": "Jelszóerősség",
         "passwordStrength0": "Rossz",
-        "passwordStrength1": "Gyenge",
+        "passwordStrength1": "Nagyon gyenge",
         "passwordStrength2": "Gyenge",
         "passwordStrength3": "Átlagos",
         "passwordStrength4": "Erős",

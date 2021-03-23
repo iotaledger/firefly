@@ -287,12 +287,12 @@
                     "noneDetected": "Niet gedetecteerd"
                 },
                 "strongholdStatus": {
-                    "title": "Wallet Status",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "Portemonnee Status",
+                    "locked": "Stronghold vergrendeld",
+                    "unlocked": "Stronghold ontgrendeld"
                 },
                 "strongholdBackup": {
-                    "title": "Wallet Backup",
+                    "title": "Portemonnee back-up",
                     "weeksAgo": "{weeks, plural, one {# week} other {# weken}} geleden"
                 }
             },
@@ -472,8 +472,8 @@
         "recentActivity": "Recente activiteit",
         "sent": "Verzonden",
         "received": "Ontvangen",
-        "sendPayment": "Send Payment",
-        "moveFunds": "Internal Transfer",
+        "sendPayment": "Verstuur betaling",
+        "moveFunds": "Interne overdracht",
         "sendFunds": "Verstuur tokens",
         "sendToAddress": "Stuur naar rekening",
         "scanQrOrPaste": "Scan een QR-code of plak een adres",
@@ -488,7 +488,7 @@
         "reference": "Referentie",
         "from": "Van",
         "to": "Naar",
-        "receiveFunds": "Receive Funds",
+        "receiveFunds": "Geld ontvangen",
         "myAddress": "Mijn Adres",
         "shareAddress": "Een adres delen",
         "yourAddress": "Jouw adres",
@@ -512,13 +512,13 @@
         "totalIn": "Totaal inkomend",
         "totalOut": "Totaal uitgaand",
         "accounts": "Rekeningen",
-        "myAccounts": "My Accounts",
+        "myAccounts": "Mijn accounts",
         "automaticNodeSelection": "Automatische node selectie",
         "manualNodeSelection": "Handmatige node selectie",
         "profiles": "Profielen",
         "developerProfile": "Ontwikkelaar Profiel",
         "dev": "Ontwikkelaar",
-        "createAccount": "Create an Account",
+        "createAccount": "Maak een account aan",
         "accountName": "Accountnaam",
         "latestTransactions": "Meest recente transacties",
         "transactions": "Transacties",
@@ -529,7 +529,7 @@
         "help": "Help",
         "you": "U",
         "messageId": "Bericht ID",
-        "inputAddress": "Send Address",
+        "inputAddress": "Verzendadres",
         "receiveAddress": "Adres van de ontvanger",
         "date": "Datum",
         "status": "Status",
@@ -577,7 +577,7 @@
     "notifications": {
         "valueTx": "Ontvangst van {{value}} op {{account}}",
         "confirmed": "Uitgaande {{value}} van {{account}} is bevestigd",
-        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
+        "confirmedInternal": "{{value}} van {{senderAccount}} tot {{receiverAccount}} is bevestigd",
         "failed": "Uitgaande {{value}} van {{account}} is mislukt",
         "downloadingUpdate": "Update aan het downloaden",
         "updateReady": "Update gereed",

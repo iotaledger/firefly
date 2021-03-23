@@ -287,12 +287,12 @@
                     "noneDetected": "Δεν ανιχνεύθηκε κανένα"
                 },
                 "strongholdStatus": {
-                    "title": "Wallet Status",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "Κατάσταση Πορτοφολιού",
+                    "locked": "Stronghold κλειδωμένο",
+                    "unlocked": "Stronghold ξεκλείδωτο"
                 },
                 "strongholdBackup": {
-                    "title": "Wallet Backup",
+                    "title": "Αντίγραφο Ασφαλείας Πορτοφολιού",
                     "weeksAgo": "{weeks, plural, one {# εβδομάδα} other {# εβδομάδες}} πριν"
                 }
             },
@@ -472,8 +472,8 @@
         "recentActivity": "Πρόσφατη Δραστηριότητα",
         "sent": "Εστάλη",
         "received": "Ελήφθη",
-        "sendPayment": "Send Payment",
-        "moveFunds": "Internal Transfer",
+        "sendPayment": "Αποστολή Πληρωμής",
+        "moveFunds": "Εσωτερική Μεταφορά",
         "sendFunds": "Αποστολή Χρημάτων",
         "sendToAddress": "Αποστολή προς διεύθυνση",
         "scanQrOrPaste": "Σαρώστε τον κωδικό QR ή επικολλήστε μια διεύθυνση",
@@ -488,7 +488,7 @@
         "reference": "Αναφορά",
         "from": "Από",
         "to": "Προς",
-        "receiveFunds": "Receive Funds",
+        "receiveFunds": "Λήψη Χρημάτων",
         "myAddress": "Η διεύθυνσή μου",
         "shareAddress": "Μοιραστείτε μια διεύθυνση",
         "yourAddress": "Η διεύθυνση σας",
@@ -512,13 +512,13 @@
         "totalIn": "Σύνολο σε",
         "totalOut": "Σύνολο σε",
         "accounts": "Λογαριασμοί",
-        "myAccounts": "My Accounts",
+        "myAccounts": "Οι Λογαριασμοί Μου",
         "automaticNodeSelection": "Αυτόματη επιλογή κόμβου",
         "manualNodeSelection": "Μή αυτόματη επιλογή κόμβου/δικτύου",
         "profiles": "Προφίλ",
         "developerProfile": "Προφίλ Προγραμματιστή",
         "dev": "Προγραμματιστής",
-        "createAccount": "Create an Account",
+        "createAccount": "Δημιουργία Λογαριασμού",
         "accountName": "Όνομα λογαριασμού",
         "latestTransactions": "Τελευταίες Συναλλαγές",
         "transactions": "Συναλλαγές",
@@ -529,7 +529,7 @@
         "help": "Βοήθεια",
         "you": "Εσύ",
         "messageId": "Κωδικός Μηνύματος",
-        "inputAddress": "Send Address",
+        "inputAddress": "Αποστολή Διεύθυνσης",
         "receiveAddress": "Διεύθυνση Λήψης",
         "date": "Ημερομηνία",
         "status": "Κατάσταση",
@@ -577,7 +577,7 @@
     "notifications": {
         "valueTx": "Λήψη {{value}} στο {{account}}",
         "confirmed": "Τα εξερχόμενα {{value}} από {{account}} έχουν επιβεβαιωθεί",
-        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
+        "confirmedInternal": "{{value}} από {{senderAccount}} στο {{receiverAccount}} έχει επιβεβαιωθεί",
         "failed": "Αποτυχία εξερχομένου {{value}} από {{account}}",
         "downloadingUpdate": "Λήψη ενημέρωσης",
         "updateReady": "Ενημέρωση έτοιμη",

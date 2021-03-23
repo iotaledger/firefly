@@ -32,7 +32,7 @@
             "body": "Valitse lompakon teema."
         },
         "setup": {
-            "title": "Määritä lompakko",
+            "title": "Määritä lompakkosi",
             "body1": "Voit luoda useita käyttäjäprofiileja pitämään varasi erillään ja parantamaan yksityisyyttä.",
             "body2": "Aloitetaan ensimmäisen profiilisi nimellä. Voit luoda lisää profiileja myöhemmin.",
             "profileName": "Profilin nimi"
@@ -65,12 +65,12 @@
         "backup": {
             "title": "Varmuuskopioi lompakko",
             "body1": "Sinulle näytetään nyt palautuslauseke. Kirjoita se talteen palatussivullesi.",
-            "body2": "Älä jaa palautuslausekettasi kenenkään kanssa. Sitä voidaan käyttää varojesi käyttämiseen mistä tahansa.",
-            "body3": "Jos menetät palautuslausekkeen, voit menettää varasi."
+            "body2": "Älä jaa palautuslausekettasi kenenkään kanssa. Sitä voidaan käyttää varoihisi käsiksi pääsyyn mistä tahansa.",
+            "body3": "Jos menetät palautuslausekkeesi, voit menettää varasi."
         },
         "recoveryPhrase": {
             "title": "Palautuslauseke",
-            "body1": "Palautusivullasi, kirjoita sanat ylös täsmälleen näytetyssä järjestyksessä.",
+            "body1": "Kirjoita sanat ylös täsmälleen näytetyssä järjestyksessä palautussivullesi.",
             "body2": "Pidä tämä salassa ja turvallisesti talletettuna.",
             "body3": "On tärkeää olla kirjallinen varmuuskopio. Tietokoneet voivat vikaantua ja tiedostot korruptoitua.",
             "revealRecoveryPhrase": "Näytä palautuslauseke",
@@ -195,7 +195,7 @@
             },
             "changePassword": {
                 "title": "Vaihda salasana",
-                "description": "Salasanasi on käytetty lompakkosi suojaamiseen. Sinun on käytettävä vahvaa salasanaa varojesi suojaamiseksi."
+                "description": "Salasanaasi käytetään lompakkosi suojaamiseen. Sinun on käytettävä vahvaa salasanaa varojesi suojaamiseksi."
             },
             "changePincode": {
                 "title": "Vaihda PIN-koodi",
@@ -206,7 +206,7 @@
                 "action": "Vaihda PIN-koodi"
             },
             "resyncAccounts": {
-                "title": "Uudelleen synkronoi tilit",
+                "title": "Uudelleensynkronoi tilit",
                 "description": ""
             },
             "deleteProfile": {
@@ -222,7 +222,7 @@
                 "description": "Yhdistä testiverkkoihin ja muut kehittäjäominaisuudet"
             },
             "nodeSettings": {
-                "title": "Noodin asetukset",
+                "title": "Solmuasetukset",
                 "description": "Valitse Manuaalinen valitaksesi solmun listasta tai yhdistä omaan solmuun"
             },
             "configureNodeList": {
@@ -302,7 +302,7 @@
                 "networkDown": "Verkkoyhteys katkaistu",
                 "status": "Tila",
                 "messagesPerSecond": "Viestejä sekunnissa",
-                "confirmationRate": "Varmistus aste"
+                "confirmationRate": "Varhvistusaste"
             },
             "profileModal": {
                 "allSettings": "Kaikki asetukset",
@@ -329,7 +329,7 @@
             "title": "Viimeisin varmuuskopio: {date}",
             "lastBackup": "Olet viimeksi varmuuskopioinut {date}",
             "backupDescription": "On tärkeää varmuuskopioida säännöllisesti varmistaaksesi, että sinulla on kopio tileistäsi ja tapahtumahistoriastasi.",
-            "backupWarning": "Jos menetät varmuuskopio- ja palautuslauseesi, menetät pääsyn varoihisi.",
+            "backupWarning": "Jos menetät varmuuskopiosi ja palautuslausekkeesi, menetät pääsyn varoihisi.",
             "notBackedUp": "Ei varmuuskopioitu",
             "notBackedUpDescription": "Et ole varmuuskopioinut Strongholdiasi"
         },
@@ -424,7 +424,7 @@
         "enableDeepLinks": "Ota syvälinkit käyttöön",
         "enableDeveloperMode": "Ota kehittäjätila käyttöön",
         "enableSystemNotifications": "Ota järjestelmäilmoitukset käyttöön",
-        "exportState": "Vienti tila",
+        "exportState": "Vie tila",
         "outsourceProofOfWork": "Ulkoista todiste työstä (PoW)",
         "unlock": "Avaa",
         "updateFirefly": "Päivitä Firefly",
@@ -513,7 +513,7 @@
         "totalOut": "Yhteensä ulos",
         "accounts": "Tilit",
         "myAccounts": "Tilini",
-        "automaticNodeSelection": "Automaattinen noodin valinta",
+        "automaticNodeSelection": "Automaattinen solmun valinta",
         "manualNodeSelection": "Manuaalinen solmun valinta",
         "profiles": "Profiilit",
         "developerProfile": "Kehittäjäprofiili",
@@ -530,7 +530,7 @@
         "you": "Sinä",
         "messageId": "Viestitunniste",
         "inputAddress": "Lähdeosoite",
-        "receiveAddress": "Vastaanota osoite",
+        "receiveAddress": "Kohdeosoite",
         "date": "Päivämäärä",
         "status": "Tila",
         "confirmed": "Vahvistettu",

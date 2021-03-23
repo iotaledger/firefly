@@ -70,9 +70,9 @@
         },
         "recoveryPhrase": {
             "title": "Fraza odzyskiwania",
-            "body1": "Słowa w Twoim szablonie odzyskiwania muszą być zapisane w dokładnej kolejności.",
-            "body2": "Zachowaj to dla siebie i bezpiecznie przechowuj.",
-            "body3": "Ważne jest, aby mieć pisemną kopię zapasową. Komputery często zawodzą, a pliki mogą się uszkodzić.",
+            "body1": "Słowa w Twoim szablonie odzyskiwania muszą być zapisane w dokładnie ukazanej kolejności.",
+            "body2": "Zachowaj te wyrazy dla siebie i bezpiecznie je przechowuj.",
+            "body3": "Kopia zapasowa na piśmie jest bardzo ważna. Komputery często zawodzą, a pliki mogą ulegać uszkodzeniu.",
             "revealRecoveryPhrase": "Pokaż frazę odzyskiwania",
             "hideRecoveryPhrase": "Ukryj frazę odzyskiwania"
         },
@@ -390,7 +390,7 @@
         "back": "Wstecz",
         "cancel": "Anuluj",
         "close": "Zamknij",
-        "dismiss": "Zamknij",
+        "dismiss": "Anuluj",
         "save": "Zapisz",
         "importSeed": "Importuj istniejący klucz seed",
         "importWallet": "Importuj istniejący portfel",
