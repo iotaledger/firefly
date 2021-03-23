@@ -49,7 +49,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Defina um PIN de login para ter certeza que apenas você poderá entrar na sua carteira.",
+            "body1": "Defina um PIN de login para ter certeza que apenas você poderá acessar sua carteira.",
             "body2": "Mantenha seu PIN seguro!"
         },
         "pin": {
@@ -287,12 +287,12 @@
                     "noneDetected": "Nenhum detectado"
                 },
                 "strongholdStatus": {
-                    "title": "Wallet Status",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "Status da Carteira",
+                    "locked": "Stronghold trancada",
+                    "unlocked": "Stronghold aberta"
                 },
                 "strongholdBackup": {
-                    "title": "Wallet Backup",
+                    "title": "Backup da Carteira",
                     "weeksAgo": "{weeks, plural, one {# semana} other {# semanas}} atrás"
                 }
             },
@@ -472,8 +472,8 @@
         "recentActivity": "Atividade Recente",
         "sent": "Enviado",
         "received": "Recebido",
-        "sendPayment": "Send Payment",
-        "moveFunds": "Internal Transfer",
+        "sendPayment": "Enviar Pagamento",
+        "moveFunds": "Transferência Interna",
         "sendFunds": "Enviar fundos",
         "sendToAddress": "Enviar para o endereço",
         "scanQrOrPaste": "Escaneie um código QR ou cole um endereço",
@@ -488,7 +488,7 @@
         "reference": "Referência",
         "from": "De",
         "to": "Para",
-        "receiveFunds": "Receive Funds",
+        "receiveFunds": "Receber Fundos",
         "myAddress": "Meu Endereço",
         "shareAddress": "Compartilhar um endereço",
         "yourAddress": "Seu endereço",
@@ -512,13 +512,13 @@
         "totalIn": "Total recebido",
         "totalOut": "Total enviado",
         "accounts": "Contas",
-        "myAccounts": "My Accounts",
+        "myAccounts": "Minhas Contas",
         "automaticNodeSelection": "Seleção automática de servidor",
         "manualNodeSelection": "Seleção manual do servidor",
         "profiles": "Perfis",
         "developerProfile": "Perfil do Desenvolvedor",
         "dev": "Dev",
-        "createAccount": "Create an Account",
+        "createAccount": "Criar uma Conta",
         "accountName": "Nome da Conta",
         "latestTransactions": "Últimas transações",
         "transactions": "Transações",
@@ -577,7 +577,7 @@
     "notifications": {
         "valueTx": "Recebendo {{value}} para {{account}}",
         "confirmed": "Envio de {{value}} de {{account}} foi confirmado",
-        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
+        "confirmedInternal": "{{value}} de {{senderAccount}} para {{receiverAccount}} foi confirmado",
         "failed": "Envio de {{value}} de {{account}} falhou",
         "downloadingUpdate": "Baixando atualização",
         "updateReady": "Atualização está pronta",

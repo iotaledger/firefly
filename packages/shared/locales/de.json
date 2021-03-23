@@ -44,7 +44,7 @@
         },
         "password": {
             "title": "Passwort erstellen",
-            "body1": "Du benötigst ein starkes Passwort, um dein Guthaben zu schützen. Verwende eine Kombination von Wörtern und vermeide geläufige Phrasen, Namen oder Daten.",
+            "body1": "Du benötigst ein sicheres Passwort, um dein Guthaben zu schützen. Verwende eine Kombination von Wörtern und vermeide geläufige Phrasen, Namen oder Daten.",
             "body2": "Es wird empfohlen, das Password im Wiederherstellungs-Dokument zu notieren."
         },
         "protect": {
@@ -55,7 +55,7 @@
         "pin": {
             "title": "PIN-Code festlegen",
             "body1": "Gib unten eine 6-stellige PIN ein. Du wirst nach deiner PIN gefragt, wenn du auf dein Profil zugreifst.",
-            "body2": "Verwende nur Zahlen"
+            "body2": "Verwende ausschließlich Zahlen"
         },
         "confirmPin": {
             "title": "PIN-Code bestätigen",
@@ -84,10 +84,10 @@
             "verifiedBody": "Denke daran, diese privat und sicher aufzubewahren."
         },
         "backupWallet": {
-            "title": "Backup in eine Stronghold Datei",
+            "title": "Backup in eine Stronghold-Datei",
             "body1": "Gib dein Passwort ein, um deine Wallet in einer Stronghold-Datei zu sichern. Dein Passwort wird verwendet, um das Backup zu verschlüsseln.",
             "body2": "Gründe warum digitale Backups wichtig sind:",
-            "reason1": "Stelle deine Wallet ohne Eingabe der Wiederherstellungsphrase wieder her",
+            "reason1": "Wiederherstellen deiner Wallet, ohne Eingabe der Wiederherstellungsphrase",
             "reason2": "Importiere deine Wallet auf andere Geräte",
             "reason3": "Den gesamten Transaktionsverlauf wiederherstellen"
         },
@@ -280,7 +280,7 @@
                 "version": {
                     "title": "Firefly v{version}",
                     "upToDate": "Aktuell",
-                    "outOfDate": "veraltet"
+                    "outOfDate": "Veraltet"
                 },
                 "hardwareDevice": {
                     "title": "Geräte",
@@ -327,7 +327,7 @@
         },
         "backup": {
             "title": "Letztes Backup: {date}",
-            "lastBackup": "Dein letztes Backup ist vom {date}",
+            "lastBackup": "Zeitpunkt deines letzten Backup: {date}",
             "backupDescription": "Es ist wichtig, regelmäßig Backups zu erstellen, um sicherzugehen, dass du eine Kopie deiner Konten und Transaktionen hast.",
             "backupWarning": "Wenn du dein Backup und die Wiederherstellungsphrase verlierst, verlierst du Zugriff auf dein Guthaben.",
             "notBackedUp": "Noch kein Backup erstellt",
@@ -473,7 +473,7 @@
         "sent": "Gesendet",
         "received": "Empfangen",
         "sendPayment": "Zahlung senden",
-        "moveFunds": "Interne Übertragung",
+        "moveFunds": "Interner Transfer",
         "sendFunds": "Guthaben senden",
         "sendToAddress": "An Adresse senden",
         "scanQrOrPaste": "Scanne einen QR-Code oder füge eine Adresse ein",
@@ -529,8 +529,8 @@
         "help": "Hilfe",
         "you": "Du",
         "messageId": "Message ID",
-        "inputAddress": "Eingehende Adresse",
-        "receiveAddress": "Empfangsadresse",
+        "inputAddress": "Absendeadresse",
+        "receiveAddress": "Empfängeradresse",
         "date": "Datum",
         "status": "Status",
         "confirmed": "Bestätigt",
@@ -560,7 +560,7 @@
         "pinCodeSuccess": "PIN erfolgreich aktualisiert",
         "pinCodeFailed": "PIN konnte nicht aktualisiert werden",
         "passwordStrength": "Passwortstärke",
-        "passwordStrength0": "Schlecht",
+        "passwordStrength0": "Unsicher",
         "passwordStrength1": "Sehr schwach",
         "passwordStrength2": "Schwach",
         "passwordStrength3": "Durchschnittlich",
@@ -597,7 +597,7 @@
             "tooWeak": "Dein neues Passwort ist zu schwach.",
             "row": "Buchstabenfolgen sind leicht zu erraten.",
             "pattern": "Kurze Tastaturmuster sind leicht zu erraten.",
-            "names": "Verbreitete Vor- und Nachnamen sind leicht zu erraten.",
+            "names": "Geläufige Vor- und Nachnamen sind leicht zu erraten.",
             "repeats": "Wiederholungen wie z. B. \"aaa\" sind leicht zu erraten.",
             "repeats2": "Wiederholungen wie z. B. \"abcabcabc\" sind leicht zu erraten.",
             "sequence": "Wiederholungen von Zeichen sind leicht zu erraten.",
@@ -644,7 +644,7 @@
         "backup": {
             "invalid": "Die Backup Datei wurde nicht erkannt.",
             "destination": "Das Backup Ziel ist nicht gültig.",
-            "mnemonic": "Mnemorische Phrase nicht Gültig.",
+            "mnemonic": "Mnemorische Phrase nicht gültig.",
             "seedTooShort": "Der Seed sollte 81 Zeichen lang sein, er {length, plural, one {ist 1} other {ist #}}",
             "seedCharacters": "Der Seed enthält nur die Buchstaben A-Z oder 9",
             "phraseWordCount": "Es sollten 24 Wörter in deiner Wiederherstellungsphrase sein. Aktuell {length, plural, one {ist es 1} other {sind es #}}.",

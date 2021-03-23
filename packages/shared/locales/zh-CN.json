@@ -287,12 +287,12 @@
                     "noneDetected": "没有检测到"
                 },
                 "strongholdStatus": {
-                    "title": "Wallet Status",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "钱包状态",
+                    "locked": "Stronghold已锁定",
+                    "unlocked": "Stronghold已解锁"
                 },
                 "strongholdBackup": {
-                    "title": "Wallet Backup",
+                    "title": "钱包备份",
                     "weeksAgo": "{weeks, plural, one {# 周} other {# 周}} 前"
                 }
             },
@@ -512,13 +512,13 @@
         "totalIn": "收入总计",
         "totalOut": "支出总计",
         "accounts": "帐户",
-        "myAccounts": "My Accounts",
+        "myAccounts": "我的账户",
         "automaticNodeSelection": "自动选择节点",
         "manualNodeSelection": "手动选择节点",
         "profiles": "用户配置",
         "developerProfile": "开发者模式",
         "dev": "开发者",
-        "createAccount": "Create an Account",
+        "createAccount": "创建帐户",
         "accountName": "账户名称",
         "latestTransactions": "最新交易",
         "transactions": "交易",

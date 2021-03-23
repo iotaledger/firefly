@@ -64,8 +64,8 @@
         },
         "backup": {
             "title": "Cadangkan dompet",
-            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+            "body1": "Kata-kata untuk pemulihan akun akan dimunculkan. Silakan tuliskan kata-kata tersebut.",
+            "body2": "Jangan bagikan kata-kata pemulihan dengan siapapun. Ini dapat digunakan untuk mengakses tokenmu.",
             "body3": "Dana Anda dapat hilang jika Anda melupakan frasa pemulihan."
         },
         "recoveryPhrase": {
@@ -79,7 +79,7 @@
         "verifyRecoveryPhrase": {
             "title": "Verifikasi frasa pemulihan",
             "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
-            "word": "Word",
+            "word": "Kata",
             "verified": "Recovery phrase verified",
             "verifiedBody": "Remember to keep it private and safely stored."
         },
