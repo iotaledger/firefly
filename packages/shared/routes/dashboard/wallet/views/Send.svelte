@@ -33,6 +33,7 @@
 
     // This looks odd but sets a reactive dependency on amount, so when it changes the error will clear
     $: amount, (amountError = '')
+    $: $sendParams.address, (addressError = '')
 
     let transferSteps: {
         [key in TransferProgressEventType | 'Complete']: {
@@ -119,12 +120,8 @@
                                 length: ADDRESS_LENGTH,
                             },
                         })
-                    } else if (!validateBech32Address(addressPrefix, $sendParams.address)) {
-                        addressError = locale('error.send.wrongAddressFormat', {
-                            values: {
-                                prefix: addressPrefix,
-                            },
-                        })
+                    } else {
+                        addressError = validateBech32Address(addressPrefix, $sendParams.address)
                     }
                 }
 
@@ -259,7 +256,12 @@
     {#if !$isTransferring}
         <div class="flex flex-row justify-between px-2">
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>{locale('actions.cancel')}</Button>
-            <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()} disabled={selectedSendType === SEND_TYPE.INTERNAL && !to}>{locale('actions.send')}</Button>
+            <Button
+                classes="-mx-2 w-1/2"
+                onClick={() => handleSendClick()}
+                disabled={selectedSendType === SEND_TYPE.INTERNAL && !to}>
+                {locale('actions.send')}
+            </Button>
         </div>
     {/if}
     {#if $isTransferring}
