@@ -1,6 +1,5 @@
 <script lang="typescript">
     import { Button, Input, Text } from 'shared/components'
-    import { hasOnlyWhitespaces } from 'shared/lib/helpers'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountId, wallet, WalletAccount } from 'shared/lib/wallet'
@@ -12,24 +11,29 @@
     const { accounts } = $wallet
 
     let accountAlias = alias
-    let isBusy
-    $: isAliasValid = accountAlias && !hasOnlyWhitespaces(accountAlias)
+    let isBusy = false
+
+    $: isAccountAliasValid = accountAlias && accountAlias.trim()
+
+    // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
+    $: accountAlias, (error = '')
 
     const handleSaveClick = () => {
-        if (accountAlias) {
+        const trimmedAccountAlias = accountAlias.trim()
+        if (trimmedAccountAlias) {
             error = ''
-            if (accountAlias.length > MAX_ACCOUNT_NAME_LENGTH) {
+            if (trimmedAccountAlias.length > MAX_ACCOUNT_NAME_LENGTH) {
                 return (error = locale('error.account.length', {
                     values: {
                         length: MAX_ACCOUNT_NAME_LENGTH,
                     },
                 }))
             }
-            if ($accounts.find((a) => a.alias === accountAlias)) {
+            if ($accounts.find((a) => a.alias === trimmedAccountAlias)) {
                 return (error = locale('error.account.duplicate'))
             }
             isBusy = true
-            api.setAlias($selectedAccountId, accountAlias, {
+            api.setAlias($selectedAccountId, trimmedAccountAlias, {
                 onSuccess(res) {
                     accounts.update((_accounts) => {
                         return _accounts.map((account) => {
@@ -38,7 +42,7 @@
                                     {} as WalletAccount,
                                     account,
                                     {
-                                        alias: accountAlias,
+                                        alias: trimmedAccountAlias,
                                     }
                                 )
                             }
@@ -88,7 +92,7 @@
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()} disbled={isBusy}>
                 {locale('actions.cancel')}
             </Button>
-            <Button classes="-mx-2 w-1/2" onClick={() => handleSaveClick()} disabled={!isAliasValid || isBusy}>
+            <Button classes="-mx-2 w-1/2" onClick={() => handleSaveClick()} disabled={!isAccountAliasValid || isBusy}>
                 {locale('actions.save')}
             </Button>
         </div>

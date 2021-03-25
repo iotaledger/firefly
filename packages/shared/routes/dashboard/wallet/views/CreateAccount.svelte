@@ -2,7 +2,7 @@
     import { Button, Input, Spinner, Text } from 'shared/components'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
-    import { wallet, MAX_ACCOUNT_NAME_LENGTH } from 'shared/lib/wallet'
+    import { MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
 
     export let locale
     export let onCreate
@@ -10,24 +10,30 @@
 
     const { accounts } = $wallet
 
-    let accountAlias
+    let accountAlias = ''
     let isBusy = false
 
+    $: isAccountAliasValid = accountAlias && accountAlias.trim()
+
+    // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
+    $: accountAlias, (error = '')
+
     const handleCreateClick = () => {
-        if (accountAlias) {
+        const trimmedAccountAlias = accountAlias.trim()
+        if (trimmedAccountAlias) {
             error = ''
-            if (accountAlias.length > MAX_ACCOUNT_NAME_LENGTH) {
+            if (trimmedAccountAlias.length > MAX_ACCOUNT_NAME_LENGTH) {
                 return (error = locale('error.account.length', {
                     values: {
                         length: MAX_ACCOUNT_NAME_LENGTH,
                     },
                 }))
             }
-            if ($accounts.find((a) => a.alias === accountAlias)) {
+            if ($accounts.find((a) => a.alias === trimmedAccountAlias)) {
                 return (error = locale('error.account.duplicate'))
             }
             isBusy = true
-            onCreate(accountAlias, (err) => {
+            onCreate(trimmedAccountAlias, (err) => {
                 error = err || ''
                 isBusy = false
             })
@@ -61,7 +67,7 @@
     {#if !isBusy}
         <div class="flex flex-row justify-between px-2">
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
-            <Button disabled={!accountAlias || isBusy} classes="-mx-2 w-1/2" onClick={() => handleCreateClick()}>
+            <Button disabled={!isAccountAliasValid || isBusy} classes="-mx-2 w-1/2" onClick={() => handleCreateClick()}>
                 {locale('actions.create')}
             </Button>
         </div>

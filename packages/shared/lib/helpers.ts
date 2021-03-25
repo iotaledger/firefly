@@ -35,21 +35,21 @@ export const persistent = <T>(key: string, initialValue: T): Writable<T> => {
  * Extract initials from string
  */
 export const getInitials = (name: string | undefined, maxChars: number) => {
-    if (!name) {
+    if (!name || !name.trim()) {
         return ""
     }
     let initialsArray = name
         .trim()
         .split(' ')
         .map(
-            n =>
-                n?.match(/./ug)[0] // match characters for emoji compatibility 
-                    ?.toUpperCase()
+            n => n
+                ? n.match(/./ug)[0] // match characters for emoji compatibility 
+                : ''
         )
     if (maxChars) {
         initialsArray = initialsArray.slice(0, maxChars)
     }
-    return initialsArray.join('')
+    return initialsArray.join('').toUpperCase()
 }
 
 /**
@@ -152,10 +152,3 @@ export const convertHexToRGBA = (hexCode: string, opacity: number = 100) => {
 
     return `rgba(${r},${g},${b},${opacity / 100})`;
 };
-
-/**
- * Check if a string only contains whitespaces
- * @param string
- */
-
-export const hasOnlyWhitespaces = (string: string = '') => !/\S/.test(string)
