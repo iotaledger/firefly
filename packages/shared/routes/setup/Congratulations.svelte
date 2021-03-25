@@ -40,20 +40,18 @@
     <OnboardingLayout allowBack={false}>
         <div slot="leftpane__content">
             {#if wasMigrated}
-                <div class="flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-5">
-                    <div class="bg-green-100 rounded-2xl relative -top-10">
-                        <Icon icon="success-check" classes="text-white w-12 h-12" />
+                <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-10 pb-6">
+                    <div class="bg-green-100 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
+                        <Icon icon="success-check" classes="text-white" />
                     </div>
-                    <Text type="h2" classes="mb-5 text-center">{locale('views.congratulations.fundsMigrated')}</Text>
-                    <Text type="p" secondary classes="mb-2 text-center">{locale('views.congratulations.success')}</Text>
-                    <div class="flex mb-2 my-6">
-                        <Text type="h2">{formatUnit(balance)}</Text>
-                    </div>
+                    <Text type="h2" classes="mb-6 text-center">{locale('views.congratulations.fundsMigrated')}</Text>
+                    <Text type="p" secondary classes="mb-6 text-center">{locale('views.congratulations.success')}</Text>
+                    <Text type="h2">{formatUnit(balance)}</Text>
                     <Text type="p" highlighted classes="py-1 uppercase">{fiatbalance}</Text>
                 </div>
             {:else}
-                <div class="flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-5">
-                    <div class="bg-green-100 rounded-2xl relative -top-10">
+                <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-10 pb-6">
+                    <div class="bg-green-100 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
                         <Icon icon="success-check" classes="text-white" />
                     </div>
                     <Text type="h2" classes="mb-5 text-center">{locale('views.congratulations.title')}</Text>

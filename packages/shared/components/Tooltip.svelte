@@ -1,53 +1,68 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
+    import { appSettings } from 'shared/lib/appSettings'
     export let classes = ''
-    export let topOffset
-    export let leftOffset
-    export let elementWidth //width of hovered element
-    
+    export let parentLeft = 0
+    export let parentTop = 0
+    export let parentWidth = 0
+
     let tooltip
-    $: if (tooltip) {
-        tooltip.style.top = topOffset - tooltip.offsetHeight - 15 + 'px'
-        tooltip.style.left = leftOffset - tooltip.offsetWidth/2 + elementWidth + 'px'
-    }
+    let top = 0
+    let left = 0
+
+    $: darkModeEnabled = $appSettings.darkMode
+
+    onMount(() => {
+        top = parentTop - tooltip.offsetHeight - 15
+        left = parentLeft - tooltip.offsetWidth / 2 + parentWidth
+    })
 </script>
 
 <style type="text/scss">
     tooltip {
-        max-width: 15rem;
-    }
-    tooltip:after, triangle, triangleDark{
-        height: 0;
-        left: 50%;
-        margin-left: -10px;
-        position: absolute;
-        width: 0;
-    }
-/*     tooltip:after {
-        border-left: solid transparent 11px;
-        border-right: solid transparent 11px;
-        border-top: solid rgba(0,0,0,0.03) 11px;
-        bottom: -13px;
-    } */
-    triangle{
-        border-left: solid transparent 10px;
-        border-right: solid transparent 10px;
-        border-top: solid white 10px;
-        bottom: -10px;
-        content: " ";
-        z-index: 2;
-    }
-    triangleDark{
-        border-left: solid transparent 11px;
-        border-right: solid transparent 11px;
-        border-top: solid white 11px;
-        bottom: -11px;
-        content: " ";
-        z-index: 1;
+        triangle,
+        inner-dark {
+            @apply h-0;
+            @apply w-0;
+            @apply absolute;
+            @apply border-solid;
+            @apply border-8;
+            @apply border-b-0;
+            @apply border-white;
+            @apply border-l-transparent;
+            @apply border-r-transparent;
+            @apply transform;
+            @apply -translate-x-1/2;
+            @apply -bottom-2;
+            @apply left-1/2;
+            inner-dark {
+                bottom: 1px;
+                @apply hidden;
+                @apply border-gray-900;
+                @apply border-l-transparent;
+                @apply border-r-transparent;
+            }
+        }
+        &.darkmode {
+            triangle {
+                @apply border-gray-700;
+                @apply border-l-transparent;
+                @apply border-r-transparent;
+                inner-dark {
+                    @apply block;
+                }
+            }
+        }
     }
 </style>
 
-<tooltip class="fixed py-4 px-6 w-max shadow-lg border-white rounded-xl border border-solid bg-white cursor-pointer text-center z-10 dark:bg-gray-900 dark:border-gray-700 {classes}" bind:this={tooltip}>
+<tooltip
+    class="fixed text-center z-10 py-4 px-6 w-auto max-w-60 shadow-lg rounded-xl border border-solid bg-white dark:bg-gray-900 border-white dark:border-gray-700 {classes}"
+    class:darkmode={darkModeEnabled}
+    style="top: {top}px; left:{left}px;"
+    bind:this={tooltip}>
     <slot />
-    <triangle class="dark:border-gray-900" style="border-left-color: transparent; border-right-color: transparent;"/>
-    <triangleDark class="dark:border-gray-700 dark:block" style="border-left-color: transparent; border-right-color: transparent;"/>
+    <triangle>
+        <inner-dark class="border-gray-700" />
+    </triangle>
 </tooltip>

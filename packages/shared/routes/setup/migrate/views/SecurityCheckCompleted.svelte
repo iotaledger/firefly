@@ -46,10 +46,10 @@
     <div>foo</div>
 {:else}
     <OnboardingLayout onBackClick={handleBackClick}>
-        <div slot="leftpane__content">
-            <Text type="h2" classes="mb-5 mt-5">{locale('views.securityCheckCompleted.title')}</Text>
+        <div slot="leftpane__content" class="h-full flex flex-col flex-wrap">
+            <Text type="h2" classes="mb-5">{locale('views.securityCheckCompleted.title')}</Text>
             <Text type="p" secondary classes="mb-6">{locale('views.securityCheckCompleted.body1')}</Text>
-            <div class="h-80 overflow-y-auto space-y-2 w-full">
+            <div class="flex-auto overflow-y-auto h-1 space-y-4 w-full -mr-2 pr-2">
                 {#each addresses as address}
                     <SpentAddress
                         {...address}
@@ -69,7 +69,7 @@
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Illustration illustration="migrate-desktop" height="100%" width="auto"/>
+            <Illustration illustration="migrate-desktop" height="100%" width="auto" />
         </div>
     </OnboardingLayout>
 {/if}

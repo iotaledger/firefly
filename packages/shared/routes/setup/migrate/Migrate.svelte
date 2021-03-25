@@ -39,7 +39,6 @@
 
     const _next = async (event) => {
         let nextState
-        let params = event.detail || {}
         switch (state) {
             case MigrateState.Init:
                 if (migrationType === MigrationType.SingleBundle) {

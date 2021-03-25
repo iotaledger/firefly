@@ -8,19 +8,25 @@
     const dispatch = createEventDispatcher()
 
     let progressBarPercent = 0
-    let progressBarMessage = ''
     let timeout
     let interval
 
+    $: progressBarMessage = `${progressBarPercent}% completed`
+
     onMount(() => {
         //TODO: retrieve progress and call setProgressBar() to fill it up
-        interval = setInterval(() => {
-            progressBarPercent = Math.floor(Math.random() * 101)
-            progressBarMessage = progressBarPercent.toString() + '% completed'
-        }, 2500)
-        timeout = setTimeout(() => {
-            dispatch('next')
-        }, 7500)
+        let step = 5
+        interval = setInterval(function () {
+            progressBarPercent += step
+            if (progressBarPercent >= 100) {
+                clearInterval(interval)
+                timeout = setTimeout(() => {
+                    dispatch('next')
+                }, 1000)
+            } else if (progressBarPercent >= 70) {
+                step = 1
+            }
+        }, 100)
     })
 
     function handleBackClick() {

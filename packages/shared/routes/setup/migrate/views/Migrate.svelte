@@ -45,30 +45,26 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
-            <Text on:click={learnAboutMigrationsClick} type="h2" classes="mb-5 mt-5">{locale('views.migrate.title')}</Text>
+            <Text on:click={learnAboutMigrationsClick} type="h2" classes="mb-5">{locale('views.migrate.title')}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.migrate.body1')}</Text>
             <Text type="p" secondary highlighted classes="mb-8 font-bold">{locale('views.migrate.body2')}</Text>
-            <Box classes="bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 rounded-lg ">
-                <balance class="flex flex-col flex-grow items-center py-12">
-                    <div class="flex mb-2">
-                        <Text type="h2">{formatUnit(balance)}</Text>
-                    </div>
-                    <Text type="p" highlighted classes="py-1 uppercase">{fiatbalance}</Text>
-                </balance>
+            <Box classes="flex flex-col flex-grow items-center py-12 bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 rounded-lg ">
+                <Text type="h2">{formatUnit(balance)}</Text>
+                <Text type="p" highlighted classes="py-1 uppercase">{fiatbalance}</Text>
             </Box>
         </div>
-        <div slot="leftpane__action" class="flex flex-col items-center space-x-4">
+        <div slot="leftpane__action" class="flex flex-col space-y-7">
+            <button on:click={learnAboutMigrationsClick}>
+                <Text type="p" highlighted>{locale('views.migrate.learn')}</Text>
+            </button>
             <Button disabled={loading} classes="w-full" onClick={() => handleContinueClick()}>
                 {#if loading}
                     <Spinner busy={loading} message={locale('views.migrate.migrating')} classes="justify-center" />
                 {:else}{locale('views.migrate.beginMigration')}{/if}
             </Button>
-            <div on:click={learnAboutMigrationsClick}>
-                <Text type="p" secondary highlighted classes="m-7 font-bold cursor-pointer">{locale('views.migrate.learn')}</Text>
-            </div>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Illustration illustration="migrate-desktop" height="100%" width="auto"/>
+            <Illustration illustration="migrate-desktop" height="100%" width="auto" />
         </div>
     </OnboardingLayout>
 {/if}

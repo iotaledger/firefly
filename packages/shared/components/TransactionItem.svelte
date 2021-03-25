@@ -31,7 +31,7 @@
 
     function toggleShow() {
         showTooltip = !showTooltip
-        iconWidth = errorBox.offsetWidth/2
+        iconWidth = errorBox.offsetWidth / 2
         tooltipLeft = errorBox.getBoundingClientRect().left
         tooltipTop = errorBox.getBoundingClientRect().top
     }
@@ -41,7 +41,7 @@
     class="transaction-item relative flex justify-between border-solid border border-gray-200 rounded-2xl h-14 items-center pl-5 pr-6 focus:border-blue-500 mt-4">
     <div class="flex items-center justify-between w-full space-x-4">
         <div class="flex items-center">
-            <Icon icon="double-chevron-right" classes="right text-blue-500" />
+            <Icon icon="double-chevron-right" classes="text-blue-500" />
             <Text type="p" smaller classes="ml-4 whitespace-nowrap">{name}</Text>
         </div>
         <div class="flex items-center relative text-right">
