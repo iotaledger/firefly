@@ -29,9 +29,6 @@
             if (isEnter && submitHandler) {
                 submitHandler()
             }
-            if (maxlength && value.length >= maxlength) {
-                e.preventDefault()
-            }
             if ((float || integer) && !isEnter) {
                 // if the input is float, we accept one dot or comma depending on localization
                 if (float && (e.key === decimalSeparator)) {
