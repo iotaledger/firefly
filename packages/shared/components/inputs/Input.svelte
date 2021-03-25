@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Error } from 'shared/components'
+    import { getDecimalSeparator } from 'shared/lib/i18n'
     import { onMount } from 'svelte'
 
     export let value = ''
@@ -16,27 +17,28 @@
     export let disabled = false
 
     let inputElement
+    let decimalSeparator = getDecimalSeparator()
 
     const handleInput = (e) => {
         value = e.target.value
     }
 
     const onKeyPress = (e) => {
-        if (e.keyCode !== 8) {
-            const isReturn = e.keyCode === 13
-            if (isReturn && submitHandler) {
+        if (e.key !== 'Tab') {
+            const isEnter = e.key === 'Enter'
+            if (isEnter && submitHandler) {
                 submitHandler()
             }
             if (maxlength && value.length >= maxlength) {
                 e.preventDefault()
             }
-            if ((float || integer) && !isReturn) {
-                // if the input is float, we accept one dot
-                if (float && (e.keyCode === 46 || e.keyCode === 190)) {
-                    if (value.indexOf('.') >= 0) {
+            if ((float || integer) && !isEnter) {
+                // if the input is float, we accept one dot or comma depending on localization
+                if (float && (e.key === decimalSeparator)) {
+                    if (value.indexOf(decimalSeparator) >= 0) {
                         e.preventDefault()
                     }
-                } else if (e.keyCode < 48 || e.keyCode > 57) {
+                } else if ('0123456789'.indexOf(e.key) < 0) {
                     // if float or interger we accept numbers
                     e.preventDefault()
                 }

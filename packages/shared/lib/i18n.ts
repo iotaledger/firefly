@@ -147,8 +147,16 @@ const setLanguage = (item) => {
     setupI18n({ withLocale: locale })
 }
 
+const getDecimalSeparator = () => {
+    const numberWithDecimalSeparator = 1.1;
+    return Intl.NumberFormat(get(appSettings).language)
+        .formatToParts(numberWithDecimalSeparator)
+        .find(part => part.type === 'decimal')
+        .value;
+}
+
 const localize = get(_) as (string, values?) => string
 
 // We expose the svelte-i18n _ store so that our app has
 // a single API for i18n
-export { _, setupI18n, dir, isLocaleLoaded, localize, setLanguage }
+export { _, setupI18n, dir, isLocaleLoaded, localize, setLanguage, getDecimalSeparator }

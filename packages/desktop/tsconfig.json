@@ -2,7 +2,13 @@
     "extends": "@tsconfig/svelte/tsconfig.json",
     "compilerOptions": {
         "isolatedModules": false,
-        "allowJs": true
+        "allowJs": true,
+        "lib": [
+            "DOM",
+            "ESNext"
+        ]
     },
-    "include": ["../shared/**/*.ts"]
+    "include": [
+        "../shared/**/*.ts"
+    ]
 }
