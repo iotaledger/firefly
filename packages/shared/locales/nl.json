@@ -231,7 +231,7 @@
             },
             "proofOfWork": {
                 "title": "Proof of work",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "description": "Voltooi proof-of-work lokaal op uw apparaat of besteed deze uit aan de node"
             },
             "errorLog": {
                 "title": "Foutenlogboek",
@@ -287,12 +287,12 @@
                     "noneDetected": "Niet gedetecteerd"
                 },
                 "strongholdStatus": {
-                    "title": "Stronghold Status",
-                    "locked": "Vergrendeld",
-                    "unlocked": "Ontgrendeld"
+                    "title": "Portemonnee Status",
+                    "locked": "Stronghold vergrendeld",
+                    "unlocked": "Stronghold ontgrendeld"
                 },
                 "strongholdBackup": {
-                    "title": "Stronghold Back-up",
+                    "title": "Portemonnee back-up",
                     "weeksAgo": "{weeks, plural, one {# week} other {# weken}} geleden"
                 }
             },
@@ -473,7 +473,7 @@
         "sent": "Verzonden",
         "received": "Ontvangen",
         "sendPayment": "Verstuur betaling",
-        "moveFunds": "Tokens verplaatsen",
+        "moveFunds": "Interne overdracht",
         "sendFunds": "Verstuur tokens",
         "sendToAddress": "Stuur naar rekening",
         "scanQrOrPaste": "Scan een QR-code of plak een adres",
@@ -488,7 +488,7 @@
         "reference": "Referentie",
         "from": "Van",
         "to": "Naar",
-        "receiveFunds": "Tokens ontvangen",
+        "receiveFunds": "Geld ontvangen",
         "myAddress": "Mijn Adres",
         "shareAddress": "Een adres delen",
         "yourAddress": "Jouw adres",
@@ -512,13 +512,13 @@
         "totalIn": "Totaal inkomend",
         "totalOut": "Totaal uitgaand",
         "accounts": "Rekeningen",
-        "myAccounts": "Mijn rekeningen",
+        "myAccounts": "Mijn accounts",
         "automaticNodeSelection": "Automatische node selectie",
         "manualNodeSelection": "Handmatige node selectie",
         "profiles": "Profielen",
         "developerProfile": "Ontwikkelaar Profiel",
         "dev": "Ontwikkelaar",
-        "createAccount": "Account aanmaken",
+        "createAccount": "Maak een account aan",
         "accountName": "Accountnaam",
         "latestTransactions": "Meest recente transacties",
         "transactions": "Transacties",
@@ -529,7 +529,7 @@
         "help": "Help",
         "you": "U",
         "messageId": "Bericht ID",
-        "inputAddress": "Voer adres in",
+        "inputAddress": "Verzendadres",
         "receiveAddress": "Adres van de ontvanger",
         "date": "Datum",
         "status": "Status",
@@ -577,6 +577,7 @@
     "notifications": {
         "valueTx": "Ontvangst van {{value}} op {{account}}",
         "confirmed": "Uitgaande {{value}} van {{account}} is bevestigd",
+        "confirmedInternal": "{{value}} van {{senderAccount}} tot {{receiverAccount}} is bevestigd",
         "failed": "Uitgaande {{value}} van {{account}} is mislukt",
         "downloadingUpdate": "Update aan het downloaden",
         "updateReady": "Update gereed",

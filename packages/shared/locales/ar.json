@@ -1,11 +1,11 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA tokens",
-            "body": "Firefly is the official wallet of IOTA."
+            "title": "إرسال، تلقي وإدارة رموز IOTA الخاصة بك",
+            "body": "فايرفلاي هي المحفظة الرسمية لIOTA."
         },
         "legal": {
-            "title": "Privacy Policy & Terms of Service",
+            "title": "سياسة الخصوصية وشروط الخدمة",
             "body": "الرجاء مراجعة سياسة الخصوصية و شروط الاستخدام.",
             "privacyPolicy": {
                 "title": "سياسة الخصوصية",
@@ -25,27 +25,27 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+            "checkbox": "لقد قرأت وأقبل سياسة الخصوصية وشروط الخدمة"
         },
         "appearance": {
             "title": "المظهر",
-            "body": "Choose your wallet’s theme."
+            "body": "اختر مظهر محفظتك."
         },
         "setup": {
             "title": "اعداد محفظتك",
-            "body1": "You can create multiple user profiles to keep your tokens separate and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "body1": "يمكنك إنشاء ملفات شخصية متعددة للحفاظ على فصل الرموز وتحسين الخصوصية.",
+            "body2": "في الوقت الحالي، دعنا نبدأ باسم ملفك الشخصي الأول. يمكنك إضافة المزيد من الملفات الشخصية لاحقاً.",
             "profileName": "اسم الملف الشخصي"
         },
         "secure": {
-            "title": "Secure your wallet",
-            "body1": "Save and print the Recovery Kit PDF template.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
+            "title": "تأمين محفظتك",
+            "body1": "حفظ وطباعة مجموعة الاسترداد PDF.",
+            "body2": "إذا قمت بملء مجموعة الاسترداد وتخزينها بأمان، سوف تكون دائماً قادراً على استرداد محفظتك."
         },
         "password": {
             "title": "إنشاء كلمة السر",
-            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
-            "body2": "It is recommended that you write down your password in your Recovery Kit."
+            "body1": "تحتاج إلى كلمة مرور قوية لحماية أموالك. استخدم مجموعة من الكلمات وتجنب العبارات أو الأسماء أو التواريخ الشائعة.",
+            "body2": "ينصح بكتابة كلمة المرور الخاصة بك في مجموعة الاسترداد الخاصة بك."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -54,50 +54,50 @@
         },
         "pin": {
             "title": "تعيين رمز PIN",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
+            "body1": "أدخل رقم تعريف شخصي من 6 أرقام أدناه. سوف يطلب منك رقم التعريف الشخصي للوصول إلى ملفك الشخصي.",
+            "body2": "استخدام الأرقام فقط"
         },
         "confirmPin": {
             "title": "تحقق من رمز PIN الخاص بك",
-            "body1": "Your PIN keeps your balance and transactions private.",
-            "body2": "Re-enter your PIN code to proceed. "
+            "body1": "رمز PIN الخاص بك يحافظ على رصيدك ومعاملاتك الخاصة.",
+            "body2": "أعد إدخال رمز PIN الخاص بك للمتابعة. "
         },
         "backup": {
             "title": "نسخ احتياطي لمحفظتك",
-            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+            "body1": "سوف تظهر لك الآن عبارة الاسترداد. قم بكتابتها في مجموعة الاستعادة الخاصة بك.",
+            "body2": "لا تشارك عبارة الاسترداد الخاصة بك مع أي شخص. يمكن استخدامها للوصول إلى الرموز الخاصة بك من أي مكان.",
             "body3": "إذا فقدت عبارة الاسترداد الخاصة بك، قد تفقد أموالك."
         },
         "recoveryPhrase": {
             "title": "عبارة الاسترداد",
-            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-            "body2": "Keep this private and safely stored.",
-            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+            "body1": "في مجموعة الاستعادة الخاصة بك، قم بكتابة الكلمات بالترتيب الصحيح الظاهر.",
+            "body2": "الرجاء الحفاظ على هذا الرمز الخاص بأمان.",
+            "body3": "من المهم الحصول على نسخة احتياطية مكتوبة. غالباً ما تفشل الحواسيب ويمكن أن تتلف الملفات.",
             "revealRecoveryPhrase": "كشف عبارة الاسترداد",
             "hideRecoveryPhrase": "إخفاء عبارة الاسترداد"
         },
         "verifyRecoveryPhrase": {
             "title": "التحقق من عبارة الاسترداد",
-            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
-            "word": "Word",
-            "verified": "Recovery phrase verified",
-            "verifiedBody": "Remember to keep it private and safely stored."
+            "body": "دعنا نتأكد من كتابتك للعبارة بشكل صحيح. الرجاء تحديد كل كلمة بالترتيب المرقم.",
+            "word": "كلمة",
+            "verified": "تم التحقق من عبارة الاسترداد",
+            "verifiedBody": "تذكر أن تحافظ عليها مخزنة بأمان."
         },
         "backupWallet": {
             "title": "النسخ الاحتياطي لملف محصّن",
-            "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
-            "body2": "Reasons why digital backups are important:",
-            "reason1": "Easily recover your wallet without typing in your recovery phrase",
-            "reason2": "Import your wallet to other devices",
-            "reason3": "Recover your full transaction history"
+            "body1": "ادخل كلمة المرور الخاصة بك لإنشاء نسخة احتياطية لمحفظتك في ملف محصّن. يتم استخدام كلمة المرور الخاصة بك لتشفير النسخة الاحتياطية.",
+            "body2": "أسباب أهمية النسخ الاحتياطي الرقمي:",
+            "reason1": "استرداد محفظتك بسهولة دون كتابة عبارة الاسترداد الخاصة بك",
+            "reason2": "استيراد محفظتك إلى أجهزة أخرى",
+            "reason3": "استرداد سجل المعاملات الخاص بك بالكامل"
         },
         "recoveryPhraseSaved": {
             "title": "تم النسخ الاحتياطي بنجاح",
             "body": "لقد قمت بنسخ محفظتك احتياطياً إلى ملف محصن Stronghold."
         },
         "congratulations": {
-            "title": "Wallet setup completed",
-            "body": "Your new wallet is ready to use."
+            "title": "اكتمل إعداد المحفظة",
+            "body": "محفظتك الجديدة جاهزة للاستخدام."
         },
         "import": {
             "title": "استيراد محفظة",
@@ -105,14 +105,14 @@
         },
         "importFromText": {
             "title": "استعد محفظتك مع عبارة استرداد أو seed",
-            "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body2": "A recovery phrase is 24 words long (with spaces). This is used to recover an existing Firefly wallet.",
+            "body1": "الseed مكونة من 81 حرف او رقم، يستخدم للاستعادة من محفظة الترينيتي القديمة.",
+            "body2": "عبارة الاسترداد مكونة من 24 كلمة(مع الفراغات). تستخدم لاستعادة محفظة فايرفلاي موجودة.",
             "body3": "أدخل الseed أو عبارة الاسترداد الخاصة بك",
             "seedDetected": "تم اكتشاف seed مكون من 81 حرف",
-            "phraseDetected": "24 word recovery phrase detected"
+            "phraseDetected": "تم اكتشاف عبارة استرداد مكونة من 24 كلمة"
         },
         "importFromFile": {
-            "title": "Restore your wallet using a backup file",
+            "title": "استعادة محفظتك باستخدام ملف النسخ الاحتياطي",
             "body": "قم باستيراد نسخة احتياطية لاسترداد محفظتك.\nالنسخ الاحتياطية هي إما ملف محصّن (stronghold.) او محفظة ترينيتي seedvault (.kdbx)."
         },
         "importBackupPassword": {
@@ -123,10 +123,10 @@
         "importSuccess": {
             "title": "لقد قمت باستعادة النسخ الاحتياطي الخاص بك بنجاح",
             "body": "يمكنك الآن إعداد محفظتك الجديدة.",
-            "seedvaultTitle": "Successfully imported",
-            "seedvaultBody": "Your password is correct, you can now continue.",
-            "strongholdTitle": "Successfully imported",
-            "strongholdBody": "Your password is correct, you can now continue."
+            "seedvaultTitle": "تم الاستيراد بنجاح",
+            "seedvaultBody": "كلمة المرور الخاصة بك صحيحة، يمكنك الآن المتابعة.",
+            "strongholdTitle": "تم الاستيراد بنجاح",
+            "strongholdBody": "كلمة المرور الخاصة بك صحيحة، يمكنك الآن المتابعة."
         },
         "migrate": {
             "title": "ترحيل رصيدك",
@@ -151,19 +151,19 @@
             },
             "security": {
                 "title": "الحماية",
-                "description": "Change your password and adjust security-related settings"
+                "description": "تغيير كلمة المرور الخاصة بك وضبط الإعدادات المتصلة بالأمن"
             },
             "advancedSettings": {
                 "title": "الإعدادات المتقدمة",
-                "description": "Tools and manual settings for technical users"
+                "description": "الأدوات والإعدادات اليدوية للمستخدمين التقنيين"
             },
             "helpAndInfo": {
                 "title": "المساعدة والمعلومات",
-                "description": "Find the answer to a question or get help with an issue"
+                "description": "ابحث عن إجابة على سؤال أو احصل على مساعدة في مشكلة"
             },
             "profile": {
                 "title": "الملف الشخصي",
-                "description": "Change your profile name or set an avatar"
+                "description": "تغيير اسم ملفك الشخصي أو تعيين صورة شخصية"
             },
             "sync": {
                 "title": "مزامنة الحساب",
@@ -179,27 +179,27 @@
             },
             "currency": {
                 "title": "عملة",
-                "description": "Adjusts balance conversion and updates chart options"
+                "description": "تعديلات تحويل الرصيد وتحديث خيارات الرسم البياني"
             },
             "notifications": {
                 "title": "التنبيهات",
-                "description": "System notifications for transaction events"
+                "description": "إشعارات النظام لأحداث المعاملات"
             },
             "exportStronghold": {
-                "title": "Export Backup",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
+                "title": "تصدير النسخ الاحتياطي",
+                "description": "تصدير إلى ملف Stronghold - نسخة احتياطية مشفرة كاملة من محفظتك وأحدث سجل المعاملات."
             },
             "appLock": {
-                "title": "Automatic Lock",
-                "description": "Time elapsed before your wallet locks and logs you out"
+                "title": "قفل تلقائي",
+                "description": "انقضى الوقت قبل قفل محفظتك وسجلات الخروج"
             },
             "changePassword": {
                 "title": "تغيير كلمة المرور",
-                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
+                "description": "يتم استخدام كلمة المرور الخاصة بك لتأمين محفظتك. يجب عليك استخدام كلمة مرور قوية لحماية أموالك."
             },
             "changePincode": {
                 "title": "تغيير رمز PIN",
-                "description": "Your PIN keeps your balance and transactions private",
+                "description": "رمز PIN الخاص بك يحافظ على رصيدك والمعاملات بأمان",
                 "currentPincode": "رمز PIN الحالي",
                 "newPincode": "رمز PIN جديد",
                 "confirmNewPincode": "تأكيد رمز PIN الجديد",
@@ -211,43 +211,43 @@
             },
             "deleteProfile": {
                 "title": "حذف الملف الشخصي",
-                "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
+                "description": "يحذف كل محفظتك، الملف الشخصي وسجل المعاملات. تأكد من أن لديك نسخة احتياطية."
             },
             "deepLinks": {
                 "title": "روابط عميقة",
-                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
+                "description": "ملء بيانات المعاملات تلقائياً في Firefly عند النقر فوق رابط iota://"
             },
             "developerMode": {
                 "title": "وضع المبرمج",
-                "description": "Connect to testnets and other developer features"
+                "description": "الاتصال بالشبكات الاختبارية ومميزات المطور الأخرى"
             },
             "nodeSettings": {
                 "title": "إعدادات العقدة node",
-                "description": "Select Manual to choose from the node list or connect to your own node"
+                "description": "حدد الدليل لاختياره من قائمة الnodes أو قم بالاتصال بالnode الخاصة بك"
             },
             "configureNodeList": {
-                "title": "Select a node",
+                "title": "اختر عقدة node",
                 "description": ""
             },
             "proofOfWork": {
                 "title": "إثبات العمل",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "description": "اكمل الدليل على العمل محليا على جهازك أوخارجيا عن طريق العقدة node"
             },
             "errorLog": {
                 "title": "سجل الخطأ",
-                "description": "View errors to debug an issue"
+                "description": "عرض الأخطاء لتصحيح مشكلة"
             },
             "diagnostics": {
                 "title": "التشخيص",
-                "description": "View system and application information"
+                "description": "عرض معلومات النظام والتطبيق"
             },
             "stateExport": {
                 "title": "تصدير الحالة",
-                "description": "Export your transaction history to a .csv file"
+                "description": "تصدير سجل المعاملات الخاص بك إلى ملف .csv"
             },
             "troubleshoot": {
                 "title": "استكشاف الأخطاء",
-                "description": "Use the troubleshooting wizard to solve common problems"
+                "description": "استخدام معالج استكشاف الأخطاء لحل المشاكل الشائعة"
             },
             "documentation": {
                 "title": "الوثائق",
@@ -287,12 +287,12 @@
                     "noneDetected": "لم يتم التعرف على جهاز hardware"
                 },
                 "strongholdStatus": {
-                    "title": "حالة الملف المحصّن",
-                    "locked": "مقفل",
-                    "unlocked": "مفتوح"
+                    "title": "Wallet Status",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
                 },
                 "strongholdBackup": {
-                    "title": "نسخة احتياطية من الملف المحصّن",
+                    "title": "Wallet Backup",
                     "weeksAgo": " منذ {weeks, plural, one {# اسبوع} other {# اسابيع}}"
                 }
             },
@@ -472,8 +472,8 @@
         "recentActivity": "النشاط الأخير",
         "sent": "تم الارسال",
         "received": "تم الاستلام",
-        "sendPayment": "إرسال الدفع",
-        "moveFunds": "نقل الأموال",
+        "sendPayment": "Send Payment",
+        "moveFunds": "Internal Transfer",
         "sendFunds": "إرسال الأموال",
         "sendToAddress": "Send to address",
         "scanQrOrPaste": "قراءة رمز QR أو لصق عنوان",
@@ -488,7 +488,7 @@
         "reference": "مرجع",
         "from": "مِن",
         "to": "الى",
-        "receiveFunds": "تلقي الأموال",
+        "receiveFunds": "Receive Funds",
         "myAddress": "العنوان الخاص بي",
         "shareAddress": "مشاركة عنوان",
         "yourAddress": "عنوانك",
@@ -512,13 +512,13 @@
         "totalIn": "Total in",
         "totalOut": "Total out",
         "accounts": "الحسابات",
-        "myAccounts": "My accounts",
+        "myAccounts": "My Accounts",
         "automaticNodeSelection": "اختيار تلقائي للعقدة node",
         "manualNodeSelection": "اختيار يدوي للعقدة node",
         "profiles": "الملفات الشخصية",
         "developerProfile": "الملف الشخصي للمبرمج",
         "dev": "المطور",
-        "createAccount": "إنشاء حساب",
+        "createAccount": "Create an Account",
         "accountName": "اسم الحساب",
         "latestTransactions": "آخر المعاملات",
         "transactions": "المعاملات",
@@ -529,7 +529,7 @@
         "help": "مساعدة",
         "you": "أنت",
         "messageId": "ID الرسالة",
-        "inputAddress": "عنوان الإدخال input",
+        "inputAddress": "Send Address",
         "receiveAddress": "عنوان الاستلام",
         "date": "التاريخ",
         "status": "الحالة",
@@ -577,6 +577,7 @@
     "notifications": {
         "valueTx": "تلقي {{value}} إلى {{account}}",
         "confirmed": "تم تأكيد {{value}} الصادر من {{account}}",
+        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
         "failed": "{{value}} الصادر من {{account}} فشل",
         "downloadingUpdate": "يتم تنزيل التحديث",
         "updateReady": "التحديث جاهز",

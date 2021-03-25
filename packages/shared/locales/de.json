@@ -25,27 +25,27 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "Ich habe die Datenschutzrichtlinien und Nutzungsbedingungen gelesen und akzeptiere diese"
+            "checkbox": "Ich habe die Datenschutzerklärung und Nutzungsbedingungen gelesen und bin damit einverstanden"
         },
         "appearance": {
-            "title": "Design",
-            "body": "Wählen Sie das Erscheinungsbild Ihrer Wallet aus."
+            "title": "Erscheinungsbild",
+            "body": "Wähle das Erscheinungsbild deiner Wallet aus."
         },
         "setup": {
             "title": "Richte deine Wallet ein",
-            "body1": "Sie können mehrere Benutzerprofile erstellen, um Ihre Token getrennt zu halten und die Privatsphäre zu verbessern.",
+            "body1": "Du kannst mehrere Benutzerprofile erstellen, um deine Token getrennt zu halten und die Privatsphäre zu verbessern.",
             "body2": "Lass uns zunächst mit deinem ersten Profilnamen beginnen. Du kannst später weitere Profile hinzufügen.",
             "profileName": "Profilname"
         },
         "secure": {
             "title": "Sichere deine Wallet",
-            "body1": "Speichere und drucke die Wiederherstellungs-Kit PDF-Vorlage.",
-            "body2": "Wenn du das Wiederherstellungs-Kit ausfüllst und sicher speicherst, kannst du deine Wallet jederzeit wiederherstellen."
+            "body1": "Speicher die Wiederherstellungs-Dokument PDF-Vorlage ab und drucke sie aus.",
+            "body2": "Wenn du das Wiederherstellungs-Dokument ausfüllst und sicher aufbewahrst, kannst du deine Wallet jederzeit wiederherstellen."
         },
         "password": {
             "title": "Passwort erstellen",
-            "body1": "Sie benötigen ein starkes Passwort, um Ihr Guthaben zu schützen. Verwenden Sie eine Kombination von Wörtern und vermeiden Sie geläufige Phrasen, Namen oder Daten.",
-            "body2": "Es wird empfohlen, dass du dein Passwort im Wiederherstellungs-Kit notierst."
+            "body1": "Du benötigst ein sicheres Passwort, um dein Guthaben zu schützen. Verwende eine Kombination von Wörtern und vermeide geläufige Phrasen, Namen oder Daten.",
+            "body2": "Es wird empfohlen, das Password im Wiederherstellungs-Dokument zu notieren."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -54,8 +54,8 @@
         },
         "pin": {
             "title": "PIN-Code festlegen",
-            "body1": "Gib unten eine 6-stellige PIN ein. Du wirst nach deiner PIN gefragt wenn du auf dein Profil zugreifst.",
-            "body2": "verwende nur Zahlen"
+            "body1": "Gib unten eine 6-stellige PIN ein. Du wirst nach deiner PIN gefragt, wenn du auf dein Profil zugreifst.",
+            "body2": "Verwende ausschließlich Zahlen"
         },
         "confirmPin": {
             "title": "PIN-Code bestätigen",
@@ -63,16 +63,16 @@
             "body2": "Gib deinen PIN-Code erneut ein, um fortzufahren. "
         },
         "backup": {
-            "title": "Deine Wallet sichern",
-            "body1": "Dir wird nun eine Wiederherstellungsphrase angezeigt. Notiere diese in deinem Wiederherstellungs-Kit.",
+            "title": "Erstelle ein Backup deiner Wallet",
+            "body1": "Dir wird nun eine Wiederherstellungsphrase angezeigt. Notiere diese in deinem Wiederherstellungs-Dokument.",
             "body2": "Teile deine Wiederherstellungsphrase mit niemandem. Sie kann verwendet werden, um von überall auf deine Token zuzugreifen.",
             "body3": "Falls du deine Wiederherstellungsphrase verlierst, kannst du dein Guthaben verlieren."
         },
         "recoveryPhrase": {
             "title": "Wiederherstellungsphrase",
-            "body1": "Schreibe die Wörter in der selben Reihenfolge in das Wiederherstellungs-Kit, wie sie dir angezeigt werden.",
-            "body2": "Bewahre dies sicher und privat auf.",
-            "body3": "Es ist wichtig, ein schriftliches Backup zu haben. Computer können versagen und Dateien somit beschädigt werden.",
+            "body1": "Schreibe die Wörter in der selben Reihenfolge in das Wiederherstellungs-Dokument, wie sie dir angezeigt werden.",
+            "body2": "Bewahre es sicher auf.",
+            "body3": "Es ist wichtig, ein schriftliches Backup zu haben. Computer können Probleme haben und Dateien beschädigt werden.",
             "revealRecoveryPhrase": "Wiederherstellungsphrase anzeigen",
             "hideRecoveryPhrase": "Wiederherstellungsphrase ausblenden"
         },
@@ -81,14 +81,14 @@
             "body": "Lass uns überprüfen, ob du die Phrase korrekt notiert hast. Wähle die Wörter in der richtigen Reihenfolge.",
             "word": "Wort",
             "verified": "Wiederherstellungsphrase verifiziert",
-            "verifiedBody": "Denke daran, es privat und sicher aufzubewahren."
+            "verifiedBody": "Denke daran, diese privat und sicher aufzubewahren."
         },
         "backupWallet": {
-            "title": "Backup in eine Stronghold Datei",
+            "title": "Backup in eine Stronghold-Datei",
             "body1": "Gib dein Passwort ein, um deine Wallet in einer Stronghold-Datei zu sichern. Dein Passwort wird verwendet, um das Backup zu verschlüsseln.",
-            "body2": "Gründe warum digitale Sicherungen wichtig sind:",
-            "reason1": "Stelle deine Wallet ohne Eingabe der Wiederherstellungsphrase wieder her",
-            "reason2": "Importiere deine Brieftasche auf andere Geräte",
+            "body2": "Gründe warum digitale Backups wichtig sind:",
+            "reason1": "Wiederherstellen deiner Wallet, ohne Eingabe der Wiederherstellungsphrase",
+            "reason2": "Importiere deine Wallet auf andere Geräte",
             "reason3": "Den gesamten Transaktionsverlauf wiederherstellen"
         },
         "recoveryPhraseSaved": {
@@ -113,12 +113,12 @@
         },
         "importFromFile": {
             "title": "Wallet aus einem Backup wiederherstellen",
-            "body": "Importiere eine Sicherungsdatei, um deine Wallet wiederherzustellen. Backups können entweder ein Stronghold (.stronghold) oder ein Trinity SeedVault (.kdbx) sein."
+            "body": "Importiere ein Backup, um deine Wallet wiederherzustellen. Backups können entweder ein Stronghold (.stronghold) oder ein Trinity SeedVault (.kdbx) sein."
         },
         "importBackupPassword": {
             "title": "Wallet aus SeedVault oder Stronghold wiederherstellen",
-            "body1": "Bitte gib dein Sicherungspasswort ein.",
-            "body2": "Dies ist das Passwort, das du beim Erstellen deiner Sicherung festgelegt hast."
+            "body1": "Bitte gib dein Backup Passwort ein.",
+            "body2": "Dies ist das Passwort, das du beim Erstellen deines Backups festgelegt hast."
         },
         "importSuccess": {
             "title": "Du hast dein Backup erfolgreich wiederhergestellt",
@@ -155,7 +155,7 @@
             },
             "advancedSettings": {
                 "title": "Erweiterte Einstellungen",
-                "description": "Werkzeuge und manuelle Einstellungen für technisch versierte Benutzer"
+                "description": "Werkzeuge und Einstellungen für technisch versierte Benutzer"
             },
             "helpAndInfo": {
                 "title": "Hilfe und Information",
@@ -179,7 +179,7 @@
             },
             "currency": {
                 "title": "Währung",
-                "description": "Passt Guthaben Umrechnung an und Aktualisiert Diagramm Optionen"
+                "description": "Passt die Guthaben-Umrechnung und Chart-Optionen an"
             },
             "notifications": {
                 "title": "Benachrichtigungen",
@@ -187,15 +187,15 @@
             },
             "exportStronghold": {
                 "title": "Backup exportieren",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
+                "description": "Exportiere in eine Stronghold-Datei - ein vollständig verschlüsseltes Backup deiner Wallet und deines letzten Transaktionsverlaufs."
             },
             "appLock": {
                 "title": "Automatische Sperre",
-                "description": "Time elapsed before your wallet locks and logs you out"
+                "description": "Zeit, die vergehen muss, bevor sich dein Wallet sperrt und du abgemeldet wirst"
             },
             "changePassword": {
                 "title": "Passwort ändern",
-                "description": "Ihr Passwort wird verwendet, um Ihre Brieftasche zu sichern. Sie müssen ein starkes Passwort verwenden, um Ihr Guthaben zu schützen."
+                "description": "Dein Passwort wird verwendet, um deine Wallet zu sichern. Du musst ein starkes Passwort verwenden, damit dein Guthaben geschützt ist."
             },
             "changePincode": {
                 "title": "PIN ändern",
@@ -211,35 +211,35 @@
             },
             "deleteProfile": {
                 "title": "Profil löschen",
-                "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
+                "description": "Löscht deine gesamte Wallet inklusive Profil und Transaktionsverlauf. Stelle sicher, dass du ein Backup besitzt."
             },
             "deepLinks": {
                 "title": "Deep Links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
+                "description": "Transaktionsdaten automatisch in Firefly ausfüllen, wenn auf einen iota:// Link geklickt wird"
             },
             "developerMode": {
                 "title": "Entwicklermodus",
-                "description": "Connect to testnets and other developer features"
+                "description": "Mit Testnetzwerken verbinden und andere Entwickleroptionen"
             },
             "nodeSettings": {
                 "title": "Node-Einstellungen",
-                "description": "Select Manual to choose from the node list or connect to your own node"
+                "description": "Wähle Manuell, um aus der Node-Liste zu wählen oder verbinde dich mit deinem eigenen Node"
             },
             "configureNodeList": {
-                "title": "Wählen Sie einen Knoten aus",
+                "title": "Wähle einen Node aus",
                 "description": ""
             },
             "proofOfWork": {
                 "title": "Proof of Work",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "description": "Führe Proof of Work lokal auf deinem Gerät aus oder delegiere diesen an den Node"
             },
             "errorLog": {
                 "title": "Fehlerprotokoll",
-                "description": "View errors to debug an issue"
+                "description": "Fehler zum Debuggen eines Problems anzeigen"
             },
             "diagnostics": {
                 "title": "Diagnose",
-                "description": "View system and application information"
+                "description": "System- und Anwendungsinformationen anzeigen"
             },
             "stateExport": {
                 "title": "Status exportieren",
@@ -247,7 +247,7 @@
             },
             "troubleshoot": {
                 "title": "Fehlerbehebung",
-                "description": "Use the troubleshooting wizard to solve common problems"
+                "description": "Verwende den Assistenten zur Fehlerbehebung um häufige Probleme zu lösen"
             },
             "documentation": {
                 "title": "Dokumentation",
@@ -256,14 +256,14 @@
             "faq": {
                 "title": "Häufig gestellte Fragen",
                 "title2": "Häufig gestellte Fragen",
-                "description": "Sehe dir die FAQs an, um Hilfe bei einem häufigen Problem oder einer Frage zu erhalten"
+                "description": "In den FAQs findest du Hilfe zu häufigen Fragen und Problemen"
             },
             "discord": {
                 "title": "Discord",
                 "description": "Lass dir von der IOTA-Community auf Discord helfen"
             },
             "about": {
-                "title": "Über uns",
+                "title": "Über",
                 "description": ""
             },
             "reportAnIssue": {
@@ -280,29 +280,29 @@
                 "version": {
                     "title": "Firefly v{version}",
                     "upToDate": "Aktuell",
-                    "outOfDate": "veraltet"
+                    "outOfDate": "Veraltet"
                 },
                 "hardwareDevice": {
                     "title": "Geräte",
                     "noneDetected": "Keine erkannt"
                 },
                 "strongholdStatus": {
-                    "title": "Stronghold Status",
-                    "locked": "Gesperrt",
-                    "unlocked": "Entsperrt"
+                    "title": "Wallet-Status",
+                    "locked": "Stronghold gesperrt",
+                    "unlocked": "Stronghold entsperrt"
                 },
                 "strongholdBackup": {
-                    "title": "Stronghold Backup",
+                    "title": "Wallet-Backup",
                     "weeksAgo": "{weeks, plural, one {# Woche} other {# Wochen}}"
                 }
             },
             "network": {
                 "networkOperational": "Netzwerk funktionsfähig",
                 "networkDegraded": "Netzwerk verschlechtert",
-                "networkDown": "Netzwerk ist nicht verbunden",
+                "networkDown": "Netzwerk nicht verbunden",
                 "status": "Status",
                 "messagesPerSecond": "Nachrichten pro Sekunde",
-                "confirmationRate": "Bestaetigungsrate"
+                "confirmationRate": "Bestätigungsrate"
             },
             "profileModal": {
                 "allSettings": "Alle Einstellungen",
@@ -313,7 +313,7 @@
     "popups": {
         "password": {
             "title": "Passwort erforderlich",
-            "subtitle": "Bitte geben Sie Ihr Wallet-Passwort ein, um Stronghold zu entsperren"
+            "subtitle": "Gib bitte dein Wallet-Passwort ein, um Stronghold zu entsperren"
         },
         "qr": {
             "title": "Dein QR Code"
@@ -327,9 +327,9 @@
         },
         "backup": {
             "title": "Letztes Backup: {date}",
-            "lastBackup": "Dein letztes Backup ist vom {date}",
+            "lastBackup": "Zeitpunkt deines letzten Backup: {date}",
             "backupDescription": "Es ist wichtig, regelmäßig Backups zu erstellen, um sicherzugehen, dass du eine Kopie deiner Konten und Transaktionen hast.",
-            "backupWarning": "Wenn Sie Ihr Backup und die Wiederherstellungsphrase verlieren, verlieren Sie den Zugriff auf Ihr Guthaben.",
+            "backupWarning": "Wenn du dein Backup und die Wiederherstellungsphrase verlierst, verlierst du Zugriff auf dein Guthaben.",
             "notBackedUp": "Noch kein Backup erstellt",
             "notBackedUpDescription": "Du hast noch kein Backup für Stronghold erstellt"
         },
@@ -381,7 +381,7 @@
         "incomingMi": "Eingehende {value} Mi",
         "outgoingMi": "Ausgehende {value} Mi",
         "portoflio": "Portfolio",
-        "token": "Token",
+        "token": "Kurs",
         "accountValue": "Konto Wert",
         "accountActivity": "Kontoaktivität"
     },
@@ -401,7 +401,7 @@
         "setPin": "PIN-Code festlegen",
         "confirmPin": "PIN-Code bestätigen",
         "enterYourPin": "PIN eingeben",
-        "saveBackupFile": "Sicherungsdatei speichern",
+        "saveBackupFile": "Backup speichern",
         "iveWrittenRecoveryPhrase": "Ich habe meine Wiederherstellungsphrase aufgeschrieben",
         "verifyRecoveryPhrase": "Wiederherstellungsphrase bestätigen",
         "revealRecoveryPhrase": "Wiederherstellungsphrase anzeigen",
@@ -429,7 +429,7 @@
         "unlock": "Entsperren",
         "updateFirefly": "Firefly aktualisieren",
         "restartNow": "Jetzt Neustarten",
-        "saveBackup": "Stronghold-Sicherung speichern",
+        "saveBackup": "Stronghold-Backup speichern",
         "customizeAcount": "Konto anpassen",
         "viewAddressHistory": "Adressverlauf anzeigen",
         "deleteAccount": "Konto entfernen",
@@ -455,8 +455,8 @@
         "yes": "Ja",
         "no": "Nein",
         "reset": "Zurücksetzen",
-        "downloadRecoveryKit": "Wiederherstellungs-Kit Vorlage speichern",
-        "skipBackup": "Dateisicherung überspringen",
+        "downloadRecoveryKit": "Wiederherstellungs-Dokument Vorlage speichern",
+        "skipBackup": "Backup überspringen",
         "finishSetup": "Einrichtung abschließen",
         "readDocumentation": "Lese die Dokumentation",
         "visitFaq": "Gehe zu den FAQs"
@@ -473,7 +473,7 @@
         "sent": "Gesendet",
         "received": "Empfangen",
         "sendPayment": "Zahlung senden",
-        "moveFunds": "Guthaben verschieben",
+        "moveFunds": "Interner Transfer",
         "sendFunds": "Guthaben senden",
         "sendToAddress": "An Adresse senden",
         "scanQrOrPaste": "Scanne einen QR-Code oder füge eine Adresse ein",
@@ -494,23 +494,23 @@
         "yourAddress": "Deine Adresse",
         "generateNewAddress": "Neue Adresse erstellen",
         "copyAddress": "Adresse kopieren",
-        "haveTextBackup": "Ich habe eine Text-Sicherung",
-        "haveFileBackup": "Ich habe eine Datei-Sicherung",
+        "haveTextBackup": "Ich habe ein Text-Backup",
+        "haveFileBackup": "Ich habe ein Backup",
         "enterSeedOrPhrase": "Wiederherstellungsphrase oder Seed eingeben",
         "uploadSeedvaultOrStronghold": "Importiere eine Stronghold- oder SeedVault-Datei",
         "import": "Importieren",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Sprache",
-        "appearance": "Design",
+        "appearance": "Erscheinungsbild",
         "lightTheme": "Heller Modus",
         "darkTheme": "Dunkler Modus",
         "totalBalance": "Gesamtguthaben",
         "accountBalance": "Kontostand",
         "incoming": "Eingehend",
         "outgoing": "Ausgehend",
-        "totalIn": "Gesamt ein",
-        "totalOut": "Gesamt aus",
+        "totalIn": "Gesamt eingehend",
+        "totalOut": "Gesamt ausgehend",
         "accounts": "Konten",
         "myAccounts": "Meine Konten",
         "automaticNodeSelection": "Automatische Node-Verwaltung",
@@ -518,7 +518,7 @@
         "profiles": "Profile",
         "developerProfile": "Entwicklerprofil",
         "dev": "Entwickler",
-        "createAccount": "Neues Konto erstellen",
+        "createAccount": "Konto erstellen",
         "accountName": "Kontoname",
         "latestTransactions": "Neueste Transaktionen",
         "transactions": "Transaktionen",
@@ -529,8 +529,8 @@
         "help": "Hilfe",
         "you": "Du",
         "messageId": "Message ID",
-        "inputAddress": "Input Adresse",
-        "receiveAddress": "Empfangsadresse",
+        "inputAddress": "Absendeadresse",
+        "receiveAddress": "Empfängeradresse",
         "date": "Datum",
         "status": "Status",
         "confirmed": "Bestätigt",
@@ -560,7 +560,7 @@
         "pinCodeSuccess": "PIN erfolgreich aktualisiert",
         "pinCodeFailed": "PIN konnte nicht aktualisiert werden",
         "passwordStrength": "Passwortstärke",
-        "passwordStrength0": "Schlecht",
+        "passwordStrength0": "Unsicher",
         "passwordStrength1": "Sehr schwach",
         "passwordStrength2": "Schwach",
         "passwordStrength3": "Durchschnittlich",
@@ -577,6 +577,7 @@
     "notifications": {
         "valueTx": "Du hast {{value}} in {{account}} erhalten",
         "confirmed": "Eine ausgehende Transaktion über {{value}} von {{account}} wurde bestätigt",
+        "confirmedInternal": "{{value}} von {{senderAccount}} an {{receiverAccount}} wurde bestätigt",
         "failed": "Ausgehende Transaktion {{value}} von {{account}} ist fehlgeschlagen",
         "downloadingUpdate": "Update lädt herunter",
         "updateReady": "Update bereit",
@@ -596,7 +597,7 @@
             "tooWeak": "Dein neues Passwort ist zu schwach.",
             "row": "Buchstabenfolgen sind leicht zu erraten.",
             "pattern": "Kurze Tastaturmuster sind leicht zu erraten.",
-            "names": "Verbreitete Vor- und Nachnamen sind leicht zu erraten.",
+            "names": "Geläufige Vor- und Nachnamen sind leicht zu erraten.",
             "repeats": "Wiederholungen wie z. B. \"aaa\" sind leicht zu erraten.",
             "repeats2": "Wiederholungen wie z. B. \"abcabcabc\" sind leicht zu erraten.",
             "sequence": "Wiederholungen von Zeichen sind leicht zu erraten.",
@@ -643,7 +644,7 @@
         "backup": {
             "invalid": "Die Backup Datei wurde nicht erkannt.",
             "destination": "Das Backup Ziel ist nicht gültig.",
-            "mnemonic": "Mnemorische Phrase nicht Gültig.",
+            "mnemonic": "Mnemorische Phrase nicht gültig.",
             "seedTooShort": "Der Seed sollte 81 Zeichen lang sein, er {length, plural, one {ist 1} other {ist #}}",
             "seedCharacters": "Der Seed enthält nur die Buchstaben A-Z oder 9",
             "phraseWordCount": "Es sollten 24 Wörter in deiner Wiederherstellungsphrase sein. Aktuell {length, plural, one {ist es 1} other {sind es #}}.",

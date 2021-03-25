@@ -1,11 +1,11 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA tokens",
-            "body": "Firefly is the official wallet of IOTA."
+            "title": "Gửi, Nhận và Lưu giữ IOTA của bạn",
+            "body": "Firefly là ví chính thức của IOTA."
         },
         "legal": {
-            "title": "Privacy Policy & Terms of Service",
+            "title": "Chính sách Riêng tư & Điều khoản Dịch vụ",
             "body": "Vui lòng xem lại Chính sách Bảo mật và Điều khoản Dịch vụ.",
             "privacyPolicy": {
                 "title": "Chính sách Bảo mật",
@@ -25,21 +25,21 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+            "checkbox": "Tôi đã đọc và tôi chấp nhận Chính sách Riêng tư & Điều khoản Dịch vụ"
         },
         "appearance": {
             "title": "Giao diện",
-            "body": "Choose your wallet’s theme."
+            "body": "Chọn chủ đề cho ví của bạn."
         },
         "setup": {
             "title": "Thiết lập Ví của bạn",
-            "body1": "You can create multiple user profiles to keep your tokens separate and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "body1": "Bạn có thể tạo nhiều hồ sơ người dùng để giữ các mã token của bạn riêng biệt và cải thiện quyền riêng tư.",
+            "body2": "Bây giờ, hãy bắt đầu với tên hồ sơ đầu tiên của bạn. Bạn có thể thêm nhiều hồ sơ sau này.",
             "profileName": "Tên hồ sơ"
         },
         "secure": {
-            "title": "Secure your wallet",
-            "body1": "Save and print the Recovery Kit PDF template.",
+            "title": "Bảo mật ví của bạn",
+            "body1": "Lưu và in mẫu PDF của Bộ Khôi phục.",
             "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
         },
         "password": {
@@ -287,12 +287,12 @@
                     "noneDetected": "Không phát hiện được"
                 },
                 "strongholdStatus": {
-                    "title": "Tình trạng của Stronghold",
-                    "locked": "Đã khóa",
-                    "unlocked": "Đã mở khóa"
+                    "title": "Wallet Status",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
                 },
                 "strongholdBackup": {
-                    "title": "Sao lưu của Stronghold",
+                    "title": "Wallet Backup",
                     "weeksAgo": "{weeks, plural, one {# week} other {# tuần}} trước đó"
                 }
             },
@@ -472,8 +472,8 @@
         "recentActivity": "Hoạt động gần đây",
         "sent": "Đã gửi",
         "received": "Đã nhận",
-        "sendPayment": "Gửi thanh toán",
-        "moveFunds": "Di chuyển Tiền",
+        "sendPayment": "Send Payment",
+        "moveFunds": "Internal Transfer",
         "sendFunds": "Gửi tiền",
         "sendToAddress": "Send to address",
         "scanQrOrPaste": "Quét mã QR hoặc dán vào một địa chỉ ví",
@@ -488,7 +488,7 @@
         "reference": "Tham chiếu",
         "from": "Từ",
         "to": "Đến",
-        "receiveFunds": "Nhận tiền",
+        "receiveFunds": "Receive Funds",
         "myAddress": "Địa chỉ của tôi",
         "shareAddress": "Chia sẻ địa chỉ",
         "yourAddress": "Địa chỉ ví của bạn",
@@ -512,13 +512,13 @@
         "totalIn": "Total in",
         "totalOut": "Total out",
         "accounts": "Tài khoản",
-        "myAccounts": "My accounts",
+        "myAccounts": "My Accounts",
         "automaticNodeSelection": "Chọn node tự động",
         "manualNodeSelection": "Chọn node thủ công",
         "profiles": "Hồ sơ cá nhân",
         "developerProfile": "Chế độ nhà phát triển",
         "dev": "Nhà phát triển",
-        "createAccount": "Tạo tài khoản",
+        "createAccount": "Create an Account",
         "accountName": "Tên tài khoản",
         "latestTransactions": "Các giao dịch mới nhất",
         "transactions": "Các giao dịch",
@@ -529,7 +529,7 @@
         "help": "Trợ giúp",
         "you": "You",
         "messageId": "Message ID",
-        "inputAddress": "Input Address",
+        "inputAddress": "Send Address",
         "receiveAddress": "Receive Address",
         "date": "Date",
         "status": "Trạng thái",
@@ -577,6 +577,7 @@
     "notifications": {
         "valueTx": "Đang nhận {{value}} từ {{account}}",
         "confirmed": "Đang gửi đi {{value}} từ {{account}} đã được xác nhận",
+        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
         "failed": "Đang gửi đi {{value}} từ {{account}} đã thất bại",
         "downloadingUpdate": "Đang tải xuống bản cập nhật",
         "updateReady": "Bản cập nhật đã sẵn sàng",

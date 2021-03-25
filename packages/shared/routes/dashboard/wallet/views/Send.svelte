@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { convertUnits, Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
-    import { sendParams } from 'shared/lib/app'
+    import { clearSendParams, sendParams } from 'shared/lib/app'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import type { TransferProgressEventType } from 'shared/lib/typings/events'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
@@ -23,7 +23,7 @@
         INTERNAL = 'moveFunds',
     }
 
-    let selectedSendType = SEND_TYPE.EXTERNAL
+    let selectedSendType = $sendParams.isInternal ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
     let unit = Unit.Mi
     let amount = $sendParams.amount === 0 ? '' : convertUnitsNoE($sendParams.amount, Unit.i, unit)
     let to = undefined
@@ -142,6 +142,7 @@
     }
 
     const handleBackClick = () => {
+        clearSendParams()
         accountRoute.set(AccountRoutes.Init)
         if (!$account) {
             walletRoute.set(WalletRoutes.Init)
