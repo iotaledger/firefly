@@ -259,7 +259,7 @@
     {#if !$isTransferring}
         <div class="flex flex-row justify-between px-2">
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>{locale('actions.cancel')}</Button>
-            <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()}>{locale('actions.send')}</Button>
+            <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()} disabled={selectedSendType === SEND_TYPE.INTERNAL && !to}>{locale('actions.send')}</Button>
         </div>
     {/if}
     {#if $isTransferring}
