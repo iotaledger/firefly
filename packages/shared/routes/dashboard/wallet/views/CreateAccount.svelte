@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Button, Input, Spinner, Text } from 'shared/components'
+    import { getTrimmedLength } from 'shared/lib/helpers'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import { MAX_ACCOUNT_NAME_LENGTH, wallet } from 'shared/lib/wallet'
@@ -13,8 +14,6 @@
     let accountAlias = ''
     let isBusy = false
 
-    $: isAccountAliasValid = accountAlias && accountAlias.trim()
-
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
     $: accountAlias, (error = '')
 
@@ -22,7 +21,7 @@
         const trimmedAccountAlias = accountAlias.trim()
         if (trimmedAccountAlias) {
             error = ''
-            if (trimmedAccountAlias.length > MAX_ACCOUNT_NAME_LENGTH) {
+            if (getTrimmedLength(trimmedAccountAlias) > MAX_ACCOUNT_NAME_LENGTH) {
                 return (error = locale('error.account.length', {
                     values: {
                         length: MAX_ACCOUNT_NAME_LENGTH,
@@ -67,7 +66,7 @@
     {#if !isBusy}
         <div class="flex flex-row justify-between px-2">
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
-            <Button disabled={!isAccountAliasValid || isBusy} classes="-mx-2 w-1/2" onClick={() => handleCreateClick()}>
+            <Button disabled={!getTrimmedLength(accountAlias) || isBusy} classes="-mx-2 w-1/2" onClick={() => handleCreateClick()}>
                 {locale('actions.create')}
             </Button>
         </div>

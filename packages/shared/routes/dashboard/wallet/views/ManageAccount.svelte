@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Button, Input, Text } from 'shared/components'
+    import { getTrimmedLength } from 'shared/lib/helpers'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountId, wallet, WalletAccount } from 'shared/lib/wallet'
@@ -13,16 +14,19 @@
     let accountAlias = alias
     let isBusy = false
 
-    $: isAccountAliasValid = accountAlias && accountAlias.trim()
-
     // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
     $: accountAlias, (error = '')
 
     const handleSaveClick = () => {
         const trimmedAccountAlias = accountAlias.trim()
+        if (trimmedAccountAlias === alias) {
+            selectedAccountId.set(null)
+            walletRoute.set(WalletRoutes.Init)
+            return
+        }
         if (trimmedAccountAlias) {
             error = ''
-            if (trimmedAccountAlias.length > MAX_ACCOUNT_NAME_LENGTH) {
+            if (getTrimmedLength(trimmedAccountAlias) > MAX_ACCOUNT_NAME_LENGTH) {
                 return (error = locale('error.account.length', {
                     values: {
                         length: MAX_ACCOUNT_NAME_LENGTH,
@@ -92,7 +96,7 @@
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()} disbled={isBusy}>
                 {locale('actions.cancel')}
             </Button>
-            <Button classes="-mx-2 w-1/2" onClick={() => handleSaveClick()} disabled={!isAccountAliasValid || isBusy}>
+            <Button classes="-mx-2 w-1/2" onClick={() => handleSaveClick()} disabled={!getTrimmedLength(accountAlias) || isBusy}>
                 {locale('actions.save')}
             </Button>
         </div>

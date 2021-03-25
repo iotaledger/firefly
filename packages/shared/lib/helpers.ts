@@ -32,23 +32,38 @@ export const persistent = <T>(key: string, initialValue: T): Writable<T> => {
 }
 
 /**
+ * Get the length of a string after it has been trimmed supporting emojis
+ * @param name 
+ * @returns 
+ */
+export const getTrimmedLength = (name: string | undefined) => {
+    if (!name) {
+        return 0
+    }
+
+    return name.trim().match(/./gu).length
+}
+
+/**
  * Extract initials from string
  */
 export const getInitials = (name: string | undefined, maxChars: number) => {
     if (!name || !name.trim()) {
         return ""
     }
+
     let initialsArray = name
         .trim()
         .split(' ')
-        .map(
-            n => n
-                ? n.match(/./ug)[0] // match characters for emoji compatibility 
-                : ''
-        )
+        .filter(n => n)
+        .map(n => n.match(/./ug)) // match characters for emoji compatibility 
+        .filter(n => n)
+        .map(n => n[0])
+
     if (maxChars) {
         initialsArray = initialsArray.slice(0, maxChars)
     }
+
     return initialsArray.join('').toUpperCase()
 }
 
