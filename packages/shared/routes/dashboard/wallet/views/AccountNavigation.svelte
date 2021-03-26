@@ -72,7 +72,7 @@
     <Text type="h3" classes="flex-1 text-center mt-1 mx-5">{activeAccount.alias}</Text>
     <div class="flex-1 flex flex-row justify-end overflow-x-auto">
         <div class="flex flex-row pb-1" bind:this={accountElement}>
-            {#each accounts.concat(accounts).concat(accounts).concat(accounts).concat(accounts) as acc}
+            {#each accounts acc}
                 <button
                     on:click={() => handleAccountClick(acc.id)}
                     class="w-10 h-10 rounded-xl p-2 text-14 leading-100 font-bold text-center
