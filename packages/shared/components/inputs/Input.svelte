@@ -31,13 +31,40 @@
             }
             if ((float || integer) && !isEnter) {
                 // if the input is float, we accept one dot or comma depending on localization
-                if (float && (e.key === decimalSeparator)) {
+                if (float && e.key === decimalSeparator) {
                     if (value.indexOf(decimalSeparator) >= 0) {
                         e.preventDefault()
                     }
                 } else if ('0123456789'.indexOf(e.key) < 0) {
                     // if float or interger we accept numbers
                     e.preventDefault()
+                }
+            }
+        }
+    }
+
+    const onPaste = (e) => {
+        if (e.clipboardData && (float || integer)) {
+            const pasteVal = e.clipboardData.getData('text')
+            // Discard scientific notation or negative
+            if (pasteVal.indexOf('e') >= 0 || pasteVal.indexOf('-') >= 0) {
+                e.preventDefault()
+            } else if (float) {
+                const val = Number.parseFloat(pasteVal)
+                // Discard any number we can't parse as floats
+                if (Number.isNaN(val)) {
+                    e.preventDefault()
+                }
+            } else if (integer) {
+                // Dicard anything with a decimal separator
+                if (pasteVal.indexOf('.') >= 0 || pasteVal.indexOf(',') >= 0) {
+                    e.preventDefault()
+                } else {
+                    const val = Number.parseInt(pasteVal, 10)
+                    // Discard any number we can't parse as integers
+                    if (Number.isNaN(val)) {
+                        e.preventDefault()
+                    }
                 }
             }
         }
@@ -126,6 +153,7 @@
             class:floating-active={value && label}
             on:input={handleInput}
             on:keypress={onKeyPress}
+            on:paste={onPaste}
             {disabled}
             {...$$restProps}
             {placeholder} />
