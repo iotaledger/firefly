@@ -70,8 +70,8 @@
                 <Text type="h5">{locale('actions.back')}</Text>
             </div>
         </button>
-        <Text type="h3" classes="flex-1 text-center mt-1">{activeAccount.alias}</Text>
-        <div class="flex-1 flex flex-row justify-end ml-8 overflow-x-auto">
+        <Text type="h3" classes="flex-1 text-center mt-1 mx-5">{activeAccount.alias}</Text>
+        <div class="flex-1 flex flex-row justify-end overflow-x-auto">
             <div class="flex flex-row pb-1" bind:this={accountElement}>
                 {#each accounts as acc}
                     <button
