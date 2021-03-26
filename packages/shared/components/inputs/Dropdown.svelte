@@ -139,7 +139,7 @@
     <div
         class="selection relative flex items-center w-full whitespace-nowrap cursor-pointer
     bg-white dark:bg-gray-800 {dropdown ? 'border-blue-500' : 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700'}">
-        <div class="w-full text-12 leading-140 {disabled ? 'text-gray-400 dark:text-gray-700' : 'text-gray-800 dark:text-white'}">
+        <div class="w-full text-12 leading-140 text-gray-800 dark:text-white">
             {value || placeholder}
         </div>
         <Icon
