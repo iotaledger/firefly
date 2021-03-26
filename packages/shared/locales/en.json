@@ -620,8 +620,8 @@
             "notEmpty": "You must transfer your balance before deleting this account.",
             "duplicate": "An account with this name already exists.",
             "tilde": "A profile name can't start with the '~' character.",
-            "control": "A profile name can't contain control character.",
-            "startDot": "A profile name can't start with '.' character.",
+            "control": "A profile name can't contain a control character.",
+            "startDot": "A profile name can't start with the '.' character.",
             "chars": "A profile name can't contain the following characters <>:\"/\\|?*"
         },
         "send": {
