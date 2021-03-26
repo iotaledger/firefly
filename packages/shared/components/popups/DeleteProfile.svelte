@@ -4,7 +4,7 @@
     import { Electron } from 'shared/lib/electron'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
-    import { activeProfile, removeProfile } from 'shared/lib/profile'
+    import { activeProfile, removeProfile, removeProfileFolder } from 'shared/lib/profile'
     import { api } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
 
@@ -31,6 +31,7 @@
                     logout()
 
                     removeProfile(ap.id)
+                    removeProfileFolder(ap.name)
 
                     isBusy = false
                     closePopup()

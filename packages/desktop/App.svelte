@@ -9,23 +9,24 @@
     import { fetchMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { openPopup, popupState } from 'shared/lib/popup'
+    import { cleanupInProgressProfiles} from 'shared/lib/profile'
     import { dashboardRoute, initRouter, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
     import { AppRoute, Tabs } from 'shared/lib/typings/routes'
     import {
+        Appearance,
         Backup,
         Balance,
         Congratulations,
         Dashboard,
         Import,
-        Appearance,
         Legal,
         Login,
         Migrate,
         Password,
         Protect,
+        Secure,
         Settings,
         Setup,
-        Secure,
         Splash,
         Welcome,
     } from 'shared/routes'
@@ -88,6 +89,8 @@
         Electron.onEvent('menu-diagnostics', async () => {
             openPopup({ type: 'diagnostics' })
         })
+
+        await cleanupInProgressProfiles()
     })
 </script>
 
