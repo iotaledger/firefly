@@ -62,7 +62,7 @@
     }
 </style>
 
-<div class="flex flex-row justify-between items-start py-3" bind:this={rootElement}>
+<div class="flex flex-row justify-between items-start py-5" bind:this={rootElement}>
     <button data-label="back-button" class="flex-1 mt-1" on:click={handleBackClick} bind:this={buttonElement}>
         <div class="flex items-center space-x-3">
             <Icon icon="arrow-left" classes="text-blue-500" />
