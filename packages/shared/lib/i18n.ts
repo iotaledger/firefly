@@ -149,7 +149,7 @@ const setLanguage = (item) => {
 
 const getDecimalSeparator = () => {
     const numberWithDecimalSeparator = 1.1;
-    return Intl.NumberFormat(get(appSettings).language)
+    return Intl.NumberFormat(getLocaleFromNavigator())
         .formatToParts(numberWithDecimalSeparator)
         .find(part => part.type === 'decimal')
         .value;
