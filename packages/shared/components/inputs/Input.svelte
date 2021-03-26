@@ -45,7 +45,7 @@
         }
     }
 
-    const handleContexMenu = (e) => {
+    const handleContextMenu = (e) => {
         if (disableContextMenu) {
             e.preventDefault()
         }
