@@ -2,7 +2,7 @@
     import { Button, ButtonCheckbox, Illustration, Input, OnboardingLayout, Text } from 'shared/components'
     import { cleanupSignup, developerMode } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
-    import { getTrimmedLength } from 'shared/lib/helpers'
+    import { getTrimmedLength, validateFilenameChars } from 'shared/lib/helpers'
     import { showAppNotification } from 'shared/lib/notifications'
     import { createProfile, disposeNewProfile, newProfile, profiles } from 'shared/lib/profile'
     import { SetupType } from 'shared/lib/typings/routes'
@@ -31,6 +31,11 @@
         if (trimmedProfileName) {
             let profile
             error = ''
+
+            const validateError = validateFilenameChars(trimmedProfileName)
+            if (validateError) {
+                return (error = locale(`error.account.${validateError}`))
+            }
 
             if (getTrimmedLength(trimmedProfileName) > MAX_PROFILE_NAME_LENGTH) {
                 return (error = locale('error.profile.length', {

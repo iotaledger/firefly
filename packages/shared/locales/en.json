@@ -618,7 +618,11 @@
             "length": "Your account name can't be longer than {length, plural, one {1 character} other {# characters}}.",
             "empty": "You must use your latest account before creating a new one.",
             "notEmpty": "You must transfer your balance before deleting this account.",
-            "duplicate": "An account with this name already exists."
+            "duplicate": "An account with this name already exists.",
+            "tilde": "A profile name can't start with the '~' character.",
+            "control": "A profile name can't contain control character.",
+            "startDot": "A profile name can't start with '.' character.",
+            "chars": "A profile name can't contain the following characters <>:\"/\\|?*"
         },
         "send": {
             "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",

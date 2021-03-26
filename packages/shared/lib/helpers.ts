@@ -33,7 +33,7 @@ export const persistent = <T>(key: string, initialValue: T): Writable<T> => {
 
 /**
  * Get the length of a string after it has been trimmed supporting emojis
- * @param name 
+ * @param name The string to get the length of
  * @returns 
  */
 export const getTrimmedLength = (name: string | undefined) => {
@@ -42,6 +42,29 @@ export const getTrimmedLength = (name: string | undefined) => {
     }
 
     return name.trim().match(/./gu).length
+}
+
+/**
+ * Does the string contain invalid filename chars
+ * @param name The name to validate
+ * @returns 
+ */
+ export const validateFilenameChars = (name: string | undefined) => {
+    if (!name) {
+        return
+    }
+    if (name.startsWith("~")) {
+        return 'tilde'
+    } 
+    if (/[\u0000-\u001f\u0080-\u009f]/g.test(name)) {
+        return 'control'
+    } 
+    if (/^\.\./.test(name)) {
+		return 'startDot';
+	} 
+    if (/[<>:"/\\|?*]/g.test(name)) {
+        return 'chars'
+    }
 }
 
 /**
