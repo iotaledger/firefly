@@ -152,7 +152,7 @@ export const isValidHttpsUrl = (url) => {
  * Validate an address given its prefix.
  * @param prefix The bech32 hrp prefix to match.
  * @param addr The address to validate.
- * @returns True if it matches the bech32 format.
+ * @returns The error string to use if it does not validate.
  */
 export const validateBech32Address = (prefix, addr) => {
     if (!addr || !addr.startsWith(prefix)) {
