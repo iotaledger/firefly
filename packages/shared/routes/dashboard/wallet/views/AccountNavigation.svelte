@@ -62,26 +62,24 @@
     }
 </style>
 
-<div bind:this={rootElement} class="py-3">
-    <div class="flex flex-row justify-between items-start">
-        <button data-label="back-button" class="flex-1 mt-1" on:click={handleBackClick} bind:this={buttonElement}>
-            <div class="flex items-center space-x-3">
-                <Icon icon="arrow-left" classes="text-blue-500" />
-                <Text type="h5">{locale('actions.back')}</Text>
-            </div>
-        </button>
-        <Text type="h3" classes="flex-1 text-center mt-1 mx-5">{activeAccount.alias}</Text>
-        <div class="flex-1 flex flex-row justify-end overflow-x-auto">
-            <div class="flex flex-row pb-1" bind:this={accountElement}>
-                {#each accounts as acc}
-                    <button
-                        on:click={() => handleAccountClick(acc.id)}
-                        class="w-10 h-10 rounded-xl p-2 text-14 leading-100 font-bold text-center
+<div class="flex flex-row justify-between items-start py-3" bind:this={rootElement}>
+    <button data-label="back-button" class="flex-1 mt-1" on:click={handleBackClick} bind:this={buttonElement}>
+        <div class="flex items-center space-x-3">
+            <Icon icon="arrow-left" classes="text-blue-500" />
+            <Text type="h5">{locale('actions.back')}</Text>
+        </div>
+    </button>
+    <Text type="h3" classes="flex-1 text-center mt-1 mx-5">{activeAccount.alias}</Text>
+    <div class="flex-1 flex flex-row justify-end overflow-x-auto">
+        <div class="flex flex-row pb-1" bind:this={accountElement}>
+            {#each accounts.concat(accounts).concat(accounts).concat(accounts).concat(accounts) as acc}
+                <button
+                    on:click={() => handleAccountClick(acc.id)}
+                    class="w-10 h-10 rounded-xl p-2 text-14 leading-100 font-bold text-center
             {activeAccount.id === acc.id ? `bg-${acc.color}-500 text-white` : 'bg-gray-200 dark:bg-gray-700 text-gray-500'} 
             hover:bg-{acc.color}-500 hover:text-white">{getInitials(acc.alias, 2)}
-                    </button>
-                {/each}
-            </div>
+                </button>
+            {/each}
         </div>
     </div>
 </div>
