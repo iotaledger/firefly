@@ -25,7 +25,7 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "Ich habe die Datenschutzerklärung und Nutzungsbedingungen gelesen und bin damit einverstanden"
+            "checkbox": "Ich habe die Datenschutzerklärung und Nutzungsbedingungen gelesen und akzeptiere diese"
         },
         "appearance": {
             "title": "Erscheinungsbild",
@@ -87,13 +87,13 @@
             "title": "Backup in eine Stronghold-Datei",
             "body1": "Gib dein Passwort ein, um deine Wallet in einer Stronghold-Datei zu sichern. Dein Passwort wird verwendet, um das Backup zu verschlüsseln.",
             "body2": "Gründe warum digitale Backups wichtig sind:",
-            "reason1": "Wiederherstellen deiner Wallet, ohne Eingabe der Wiederherstellungsphrase",
-            "reason2": "Importiere deine Wallet auf andere Geräte",
-            "reason3": "Den gesamten Transaktionsverlauf wiederherstellen"
+            "reason1": "Wiederherstellen deiner Wallet ohne Eingabe der Wiederherstellungsphrase",
+            "reason2": "Importieren deiner Wallet auf anderen Geräten",
+            "reason3": "Wiederherstellen des gesamten Transaktionsverlauf"
         },
         "recoveryPhraseSaved": {
             "title": "Erfolgreich gesichert",
-            "body": "Du hast deine Wallet in einem Stronghold gesichert."
+            "body": "Du hast deine Wallet in Stronghold gesichert."
         },
         "congratulations": {
             "title": "Einrichten der Wallet abgeschlossen",
@@ -104,7 +104,7 @@
             "body": "Falls du eine Wiederherstellungsphrase oder ein Stronghold-Backup hast, kannst du es hier importieren."
         },
         "importFromText": {
-            "title": "Stelle deine Wallet aus einer Wiederherstellungsphrase oder einem Seed wieder her",
+            "title": "Stelle deine Wallet mit einer Wiederherstellungsphrase oder einem Seed wieder her",
             "body1": "Ein Seed besteht aus 81 Zeichen. Er wird benutzt, um von einer älteren Trinity Wallet wiederherzustellen.",
             "body2": "Eine Wiederherstellungsphrase ist 24 Wörter lang (mit Abständen). Diese wird benutzt, um eine bestehende Firefly Wallet wiederherzustellen.",
             "body3": "Gib deinen Seed oder deine Wiederherstellungsphrase ein",
@@ -187,10 +187,10 @@
             },
             "exportStronghold": {
                 "title": "Backup exportieren",
-                "description": "Exportiere in eine Stronghold-Datei - ein vollständig verschlüsseltes Backup deiner Wallet und deines letzten Transaktionsverlaufs."
+                "description": "Exportiere in eine Stronghold-Datei - ein vollständig verschlüsseltes Backup deiner Wallet und des gesamten Transaktionsverlaufs."
             },
             "appLock": {
-                "title": "Automatische Sperre",
+                "title": "Automatisches Sperren",
                 "description": "Zeit, die vergehen muss, bevor sich dein Wallet sperrt und du abgemeldet wirst"
             },
             "changePassword": {
@@ -211,7 +211,7 @@
             },
             "deleteProfile": {
                 "title": "Profil löschen",
-                "description": "Löscht deine gesamte Wallet inklusive Profil und Transaktionsverlauf. Stelle sicher, dass du ein Backup besitzt."
+                "description": "Löscht deine gesamte Wallet, inklusive Profil und Transaktionsverlauf. Stelle sicher, dass du ein Backup besitzt."
             },
             "deepLinks": {
                 "title": "Deep Links",
@@ -287,7 +287,7 @@
                     "noneDetected": "Keine erkannt"
                 },
                 "strongholdStatus": {
-                    "title": "Wallet-Status",
+                    "title": "Wallet Status",
                     "locked": "Stronghold gesperrt",
                     "unlocked": "Stronghold entsperrt"
                 },
@@ -297,8 +297,8 @@
                 }
             },
             "network": {
-                "networkOperational": "Netzwerk funktionsfähig",
-                "networkDegraded": "Netzwerk verschlechtert",
+                "networkOperational": "Netzwerk im Betrieb",
+                "networkDegraded": "Netzwerk eingeschränkt",
                 "networkDown": "Netzwerk nicht verbunden",
                 "status": "Status",
                 "messagesPerSecond": "Nachrichten pro Sekunde",
@@ -569,6 +569,7 @@
     },
     "dates": {
         "today": "Heute",
+        "yesterday": "Yesterday",
         "daysAgo": "Vor {time, plural, one {# Tag} other {# Tagen}}",
         "weeksAgo": "Vor {time, plural, one {# Woche} other {# Wochen}}",
         "monthsAgo": "Vor {time, plural, one {# Monat} other {# Monaten}}",

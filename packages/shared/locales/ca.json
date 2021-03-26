@@ -569,6 +569,7 @@
     },
     "dates": {
         "today": "Avui",
+        "yesterday": "Yesterday",
         "daysAgo": "fa {time, plural, one {# dia} other {# dies}}",
         "weeksAgo": "fa {time, plural, one {# setmana} other {# setmanes}}",
         "monthsAgo": "fa {time, plural, one {# mes} other {# mesos}}",

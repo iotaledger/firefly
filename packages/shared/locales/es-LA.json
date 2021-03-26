@@ -6,7 +6,7 @@
         },
         "legal": {
             "title": "Política de privacidad y términos de servicio",
-            "body": "Por favor revise la Política de Privacidad y los Términos del Servicio.",
+            "body": "Por favor revisa la Política de Privacidad y los Términos del Servicio.",
             "privacyPolicy": {
                 "title": "Política de Privacidad",
                 "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
@@ -32,7 +32,7 @@
             "body": "Elige el tema de tu cartera."
         },
         "setup": {
-            "title": "Configura tu billetera",
+            "title": "Configura tu cartera",
             "body1": "Puede crear múltiples perfiles de usuario para mantener sus fichas separadas y mejorar la privacidad.",
             "body2": "Por ahora, empecemos con tu nombre de perfil. Puedes añadir más perfiles más tarde.",
             "profileName": "Nombre del perfil"
@@ -544,7 +544,7 @@
         "transferRemainderAddress": "Generando dirección de depósito restante",
         "transferSigning": "Firmando la transacción",
         "transferPow": "Ejecutando PoW",
-        "transferBroadcasting": "Transacción de difusión",
+        "transferBroadcasting": "Promoviendo la transacción",
         "transferComplete": "Transferencia completada",
         "creatingAccount": "Creando cuenta, por favor espere...",
         "updatingAccount": "Actualizando cuenta, por favor espere...",
@@ -569,6 +569,7 @@
     },
     "dates": {
         "today": "Hoy",
+        "yesterday": "Yesterday",
         "daysAgo": "hace {time, plural, one {# día} other {# días}}",
         "weeksAgo": "hace {time, plural,one {# semana} other {# semanas}}",
         "monthsAgo": "hace {time, plural,one {# mes} other {# meses}}",
@@ -576,9 +577,9 @@
     },
     "notifications": {
         "valueTx": "Recibiendo {{value}} a {{account}}",
-        "confirmed": "Se ha confirmado el {{value}} saliente de {{account}}",
-        "confirmedInternal": "Se ha confirmado {{value}} de {{senderAccount}} a {{receiverAccount}}",
-        "failed": "Ha fallado el {{value}} saliente de {{account}}",
+        "confirmed": "Se ha confirmado la salida de {{value}} desde {{account}}",
+        "confirmedInternal": "Se ha confirmado {{value}} desde {{senderAccount}} a {{receiverAccount}}",
+        "failed": "Ha fallado la salida de {{value}} desde {{account}}",
         "downloadingUpdate": "Descargando actualización",
         "updateReady": "Actualización lista",
         "updateError": "Se ha producido un error durante la actualización, por favor inténtalo de nuevo",
@@ -595,7 +596,7 @@
         "password": {
             "doNotMatch": "Las contraseñas no coinciden.",
             "tooWeak": "Su nueva contraseña es demasiado débil.",
-            "row": "Las filas estrechas de las claves son fáciles de adivinar.",
+            "row": "Las series de teclas seguidas de la misma fila son fáciles de adivinar.",
             "pattern": "Los patrones de teclado cortos son fáciles de adivinar.",
             "names": "Los nombres y apellidos son fáciles de adivinar.",
             "repeats": "Las repeticiones como 'aaa' son fáciles de adivinar.",
@@ -610,20 +611,20 @@
             "length": "Tu contraseña no puede ser más larga de {length, plural, one {1 character} other {# caracteres}}."
         },
         "pincode": {
-            "length": "Tu PIN debe tener {length, plural, one {1 digit} other {# dígitos}} de largo.",
+            "length": "Tu PIN debe tener {length, plural, one {1 dígito} other {# dígitos}} de largo.",
             "match": "Los PIN no coinciden.",
             "incorrect": "El PIN actual es incorrecto."
         },
         "account": {
-            "length": "Tu nombre de cuenta no puede tener más de {length, plural, one {1 character} other {# caracteres}}.",
+            "length": "Tu nombre de cuenta no puede tener más de {length, plural, one {1 carácter} other {# caracteres}}.",
             "empty": "Debes usar tu última cuenta antes de crear una nueva.",
             "notEmpty": "Debes transferir tu saldo antes de eliminar esta cuenta.",
             "duplicate": "Ya existe una cuenta con este nombre."
         },
         "send": {
-            "addressLength": "Las direcciones deben tener {length, plural, one {1 character} other {# caracteres}} de largo.",
+            "addressLength": "Las direcciones deben tener {length, plural, one {1 carácter} other {# caracteres}} de largo.",
             "amountTooHigh": "Esto es mayor que su saldo disponible.",
-            "amountNoFloat": "Si las unidades son `i` no puedes usar decimales.",
+            "amountNoFloat": "Si las unidades son 'i' no puedes usar lugares decimales.",
             "amountInvalidFormat": "La cantidad parece ser un número no válido.",
             "amountZero": "La cantidad debe ser mayor que 0.",
             "wrongAddressFormat": "Las direcciones comienzan con el prefijo {prefix}.",
@@ -644,10 +645,10 @@
         "backup": {
             "invalid": "El archivo de copia de seguridad no fue reconocido.",
             "destination": "El destino de la copia de seguridad no era válido.",
-            "mnemonic": "El mnemónico no es válido.",
-            "seedTooShort": "La semilla debe tener 81 caracteres, {length, plural, one {es 1} other {es #}}",
-            "seedCharacters": "La semilla sólo debe contener caracteres A-Z o 9",
-            "phraseWordCount": "Debe haber 24 palabras en su frase de recuperación, ahora mismo {length, plural, one {es 1} other {son #}}.",
+            "mnemonic": "El mnemotécnico no es válido.",
+            "seedTooShort": "La semilla debe tener 81 caracteres, ahora tiene {length, plural, one {1 carácter} other {# caracteres}}",
+            "seedCharacters": "La semilla sólo debe contener caracteres A-Z ó 9",
+            "phraseWordCount": "Debería haber 24 palabras en su frase de recuperación, ahora mismo {length, plural, one {es 1} other {son #}}.",
             "phraseUnrecognizedWord": "No se reconoce la palabra \"{word}\" en su frase de recuperación"
         }
     }

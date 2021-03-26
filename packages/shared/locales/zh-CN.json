@@ -2,13 +2,13 @@
     "views": {
         "onboarding1": {
             "title": "发送，接收&管理您的IOTA",
-            "body": "Firefly是IOTA的官方钱包。"
+            "body": "萤火虫是爱而嗒的官方钱包。"
         },
         "legal": {
             "title": "隐私政策和服务条款",
-            "body": "请查看隐私政策和服务条款。",
+            "body": "请审查隐私政策和服务条款。",
             "privacyPolicy": {
-                "title": "隐私政策",
+                "title": "看 -> 合法 -> 隐私政策 -> 标题",
                 "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -17,7 +17,7 @@
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "termsOfService": {
-                "title": "服务条款",
+                "title": "看 -> 合法 -> 服务条款 -> 标题",
                 "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -25,21 +25,21 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "我已阅读过并接受隐私政策与服务条款"
+            "checkbox": "我已读过和接受隐私政策和服务条款"
         },
         "appearance": {
-            "title": "外观",
-            "body": "选择你钱包的主题。"
+            "title": "外表",
+            "body": "选择您的钱包的主题。"
         },
         "setup": {
             "title": "设置您的钱包",
-            "body1": "您可创建多个用户来分别存储您的token以确保安全。",
+            "body1": "您可创建多个用户配置文件来分别存储您的Token以确保安全。",
             "body2": "现在，让我们以您的第一个配置文件名开始。以后您可以添加更多的配置文件。",
             "profileName": "配置名称"
         },
         "secure": {
-            "title": "保障钱包安全",
-            "body1": "保存并打印Recovery Kit PDF模板。",
+            "title": "保障钱包的安全",
+            "body1": "保存和打印Recovery Kit PDF模板。",
             "body2": "如果您填写Recovery Kit并安全存储它，您就能够恢复您的钱包。"
         },
         "password": {
@@ -64,8 +64,8 @@
         },
         "backup": {
             "title": "请备份您的钱包",
-            "body1": "您现在将看到一个恢复短语。请在Recovery Kit中写下它。",
-            "body2": "请勿与任何人分享您的恢复密语。因为该密语可从任何地点接触到您的tokens。",
+            "body1": "您现在将看到一个恢复密语。请在Recovery Kit中写下它。",
+            "body2": "请勿与任何人分享您的恢复密语。因为该密语可从任何地点访问到您的Token。",
             "body3": "如果您丢失了恢复密语，您很可能会丢失您的资金。"
         },
         "recoveryPhrase": {
@@ -130,7 +130,7 @@
         },
         "migrate": {
             "title": "迁移您的资金",
-            "body1": "这是一个将您的资金转账到您新钱包的自动化过程。我们将检查削弱您安全性的已花费地址。",
+            "body1": "这是一个将您的资金发送到您新钱包的自动化过程。我们将检查削弱您安全性的已花费地址。",
             "body2": "这可能需要一些时间。不要在迁移过程中关闭您的设备。",
             "existing": "您的旧钱包",
             "new": "您的新钱包"
@@ -279,7 +279,7 @@
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "upToDate": "最新的",
+                    "upToDate": "最新版本",
                     "outOfDate": "已过期"
                 },
                 "hardwareDevice": {
@@ -302,7 +302,7 @@
                 "networkDown": "网络已断开",
                 "status": "状态",
                 "messagesPerSecond": "每秒信息数",
-                "confirmationRate": "确认速度"
+                "confirmationRate": "确认率"
             },
             "profileModal": {
                 "allSettings": "所有设置",
@@ -321,7 +321,7 @@
         "version": {
             "title": "当前版本: {version}",
             "upToDateTitle": "Firefly 目前是最新版本",
-            "upToDateDescription": "你正在运行的Firefly版本是最新，最安全的。",
+            "upToDateDescription": "你正在运行的Firefly是最新的，最安全的版本。",
             "updateAvailable": "Firefly有可用的更新",
             "updateDetails": "版本{version} - {date}"
         },
@@ -381,7 +381,7 @@
         "incomingMi": "传入 {value} Mi",
         "outgoingMi": "发送 {value} Mi",
         "portoflio": "资产组合",
-        "token": "代币",
+        "token": "Token",
         "accountValue": "账户价值",
         "accountActivity": "帐户活动"
     },
@@ -472,9 +472,9 @@
         "recentActivity": "最新活动",
         "sent": "已发送",
         "received": "已收到",
-        "sendPayment": "Send Payment",
-        "moveFunds": "Internal Transfer",
-        "sendFunds": "资金转账",
+        "sendPayment": "发送资金",
+        "moveFunds": "内部转账",
+        "sendFunds": "发送资金",
         "sendToAddress": "发送至地址",
         "scanQrOrPaste": "扫描二维码或粘贴地址",
         "moveFundsBetweenAccounts": "账户之间的资金转移",
@@ -488,7 +488,7 @@
         "reference": "使用指南",
         "from": "从",
         "to": "到",
-        "receiveFunds": "Receive Funds",
+        "receiveFunds": "接收资金",
         "myAddress": "我的地址",
         "shareAddress": "分享地址",
         "yourAddress": "您的地址",
@@ -529,7 +529,7 @@
         "help": "帮助",
         "you": "您",
         "messageId": "消息 ID",
-        "inputAddress": "Send Address",
+        "inputAddress": "发送地址",
         "receiveAddress": "接收地址",
         "date": "日期",
         "status": "状态",
@@ -560,15 +560,16 @@
         "pinCodeSuccess": "PIN 码更新成功",
         "pinCodeFailed": "PIN 码更新失败",
         "passwordStrength": "密码强度",
-        "passwordStrength0": "坏的",
+        "passwordStrength0": "糟糕的",
         "passwordStrength1": "差的",
         "passwordStrength2": "弱的",
-        "passwordStrength3": "平均",
+        "passwordStrength3": "一般",
         "passwordStrength4": "强壮的",
         "creatingProfile": "正在创建帐户，请稍候..."
     },
     "dates": {
         "today": "今日",
+        "yesterday": "Yesterday",
         "daysAgo": "{time, plural, one {# 天} other {# 天}} 前",
         "weeksAgo": "{time, plural, one {# 周} other {# 周}} 前",
         "monthsAgo": "{time, plural, one {# 月} other {# 月}} 前",
@@ -577,7 +578,7 @@
     "notifications": {
         "valueTx": "帐户 {{account}} 收到 {{value}}",
         "confirmed": "帐户 {{account}} 的 {{value}} 转出交易已确认",
-        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
+        "confirmedInternal": "{{value}} 从 {{senderAccount}} 到 {{receiverAccount}} 已确认",
         "failed": "帐户 {{account}} 的 {{value}} 转出交易未能成功。",
         "downloadingUpdate": "正在下载更新",
         "updateReady": "更新已准备就绪",
@@ -594,7 +595,7 @@
         },
         "password": {
             "doNotMatch": "密码不匹配。",
-            "tooWeak": "您的新密码太弱。",
+            "tooWeak": "您的新密码不够复杂。",
             "row": "连续排列的字符容易被猜到。",
             "pattern": "短键盘模式很容易被猜到。",
             "names": "常见的名字和姓氏很容易被猜测到。",

@@ -569,6 +569,7 @@
     },
     "dates": {
         "today": "I dag",
+        "yesterday": "Yesterday",
         "daysAgo": "{time, plural, one {# dag} other {# dager}} siden",
         "weeksAgo": "{time, plural, one {# uke} other {# uker}} siden",
         "monthsAgo": "{time, plural, one {# måned} other {# måneder}} siden",
