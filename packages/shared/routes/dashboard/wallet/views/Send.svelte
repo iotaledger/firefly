@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { convertUnits, Unit } from '@iota/unit-converter'
-    import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
+    import { Address, Amount, Button, Dropdown, Error, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import type { TransferProgressEventType } from 'shared/lib/typings/events'
@@ -30,9 +30,11 @@
     let amountError = ''
     let addressPrefix = ($account ?? $accounts[0]).depositAddress.split('1')[0]
     let addressError = ''
+    let toError = ''
 
     // This looks odd but sets a reactive dependency on amount, so when it changes the error will clear
     $: amount, (amountError = '')
+    $: to, (toError = '')
     $: $sendParams.address, (addressError = '')
 
     let transferSteps: {
@@ -123,9 +125,13 @@
                     } else {
                         addressError = validateBech32Address(addressPrefix, $sendParams.address)
                     }
+                } else {
+                    if (!to) {
+                        toError = locale('error.send.noToAccount')
+                    }
                 }
 
-                if (!amountError && !addressError) {
+                if (!amountError && !addressError && !toError) {
                     $sendParams.amount = amountAsI
 
                     if (selectedSendType === SEND_TYPE.INTERNAL) {
@@ -240,6 +246,7 @@
                             items={accountsDropdownItems.filter((a) => from && a.id !== from.id)}
                             onSelect={handleToSelect}
                             disabled={$isTransferring || $accounts.length === 2} />
+                        <Error error={toError} />
                     {:else}
                         <Address
                             error={addressError}
@@ -258,8 +265,7 @@
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>{locale('actions.cancel')}</Button>
             <Button
                 classes="-mx-2 w-1/2"
-                onClick={() => handleSendClick()}
-                disabled={selectedSendType === SEND_TYPE.INTERNAL && !to}>
+                onClick={() => handleSendClick()}>
                 {locale('actions.send')}
             </Button>
         </div>
