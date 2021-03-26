@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Unit } from '@iota/unit-converter'
     import { Input, Text } from 'shared/components'
-    import { convertUnitsNoE } from 'shared/lib/units'
+    import { convertUnitsNoE, UNIT_MAP } from 'shared/lib/units'
 
     export let amount = undefined
     export let unit = Unit.Mi
@@ -56,6 +56,7 @@
         maxlength={17}
         {disabled}
         {autofocus}
+        maxDecimals={UNIT_MAP[unit].dp}
         integer={unit === Unit.i}
         float={unit !== Unit.i} />
     <actions class="absolute right-0 top-2.5 h-8 flex flex-row items-center text-12 text-gray-500 dark:text-white">

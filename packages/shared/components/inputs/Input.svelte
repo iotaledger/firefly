@@ -15,6 +15,7 @@
     export let autofocus = false
     export let submitHandler = undefined
     export let disabled = false
+    export let maxDecimals = undefined
 
     let inputElement
     let decimalSeparator = getDecimalSeparator()
@@ -38,6 +39,23 @@
                 } else if ('0123456789'.indexOf(e.key) < 0) {
                     // if float or interger we accept numbers
                     e.preventDefault()
+                } else if (float && maxDecimals !== undefined && '0123456789'.indexOf(e.key) >= 0) {
+                    // If max decimals are set only allow certain number after decimal separator
+                    const sepPos = value.indexOf(decimalSeparator)
+                    if (sepPos >= 0) {
+                        // If caret position is after the separator then check
+                        if (e.target.selectionEnd > sepPos) {
+                            // If sel start and end are different that means
+                            // the text has been highlighted for overwrite
+                            // if they are the same then it single insertion
+                            if (e.target.selectionStart === e.target.selectionEnd) {
+                                const numDecimals = value.length - sepPos - 1
+                                if (numDecimals >= maxDecimals) {
+                                    e.preventDefault()
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -53,6 +71,9 @@
                 const val = Number.parseFloat(pasteVal)
                 // Discard any number we can't parse as floats
                 if (Number.isNaN(val)) {
+                    e.preventDefault()
+                } else if (maxDecimals !== undefined) {
+                    value = Number(val.toFixed(maxDecimals)).toString()
                     e.preventDefault()
                 }
             } else if (integer) {
