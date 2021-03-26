@@ -134,7 +134,7 @@
             class:floating-active={value && label}
             on:input={handleInput}
             on:keypress={onKeyPress}
-            on:contextmenu={handleContexMenu}
+            on:contextmenu={handleContextMenu}
             {disabled}
             {...$$restProps}
             {placeholder} />
