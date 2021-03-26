@@ -195,7 +195,7 @@
             },
             "changePassword": {
                 "title": "Schimbă parola",
-                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
+                "description": "Parola ta este folosită pentru a-ți securiza portofelul. Trebuie să foloseşti o parolă puternică pentru a-ți proteja fondurile."
             },
             "changePincode": {
                 "title": "Schimbă codul PIN",
@@ -215,7 +215,7 @@
             },
             "deepLinks": {
                 "title": "Legături profunde",
-                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
+                "description": "Completează automat datele tranzacției în Firefly la apăsarea unui link iota://"
             },
             "developerMode": {
                 "title": "Mod dezvoltator",
@@ -223,7 +223,7 @@
             },
             "nodeSettings": {
                 "title": "Setările nodului",
-                "description": "Select Manual to choose from the node list or connect to your own node"
+                "description": "Selectează Manual pentru a alege din lista de noduri sau pentru a te conecta la propriul nod"
             },
             "configureNodeList": {
                 "title": "Selectează un nod",
@@ -231,44 +231,44 @@
             },
             "proofOfWork": {
                 "title": "Dovadã de lucru",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "description": "Completează dovada de lucru local pe dispozitivul tău sau externalizează către nod"
             },
             "errorLog": {
                 "title": "Jurnal de erori",
-                "description": "View errors to debug an issue"
+                "description": "Vizualizează erorile pentru a depana o problemă"
             },
             "diagnostics": {
-                "title": "Diagnostics",
-                "description": "View system and application information"
+                "title": "Diagnostice",
+                "description": "Vizualizează informațiile de sistem și ale aplicației"
             },
             "stateExport": {
                 "title": "Exportare stare",
-                "description": "Export your transaction history to a .csv file"
+                "description": "Exportă istoricul tranzacțiilor tale într-un fișier .csv"
             },
             "troubleshoot": {
                 "title": "Depanare",
-                "description": "Use the troubleshooting wizard to solve common problems"
+                "description": "Foloseşte asistentul de depanare pentru a rezolva problemele comune"
             },
             "documentation": {
                 "title": "Documentaţie",
-                "description": "View the documentation for in depth explanations of how things work"
+                "description": "Vizualizează documentația pentru explicații detaliate ale modului în care funcționează lucrurile"
             },
             "faq": {
                 "title": "Întrebări frecvente",
-                "title2": "Frequently Asked Questions",
-                "description": "View the FAQs to get help with a common problem or question"
+                "title2": "Întrebări frecvente",
+                "description": "Vezi FAQ pentru a primi ajutor cu o problemă comună sau o întrebare"
             },
             "discord": {
                 "title": "Discord",
-                "description": "Get help from the IOTA community on Discord"
+                "description": "Obține ajutor de la comunitatea IOTA pe Discord"
             },
             "about": {
                 "title": "Despre",
                 "description": ""
             },
             "reportAnIssue": {
-                "title": "Report an issue",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
+                "title": "Raportează o problemă",
+                "description": "Raportează o eroare dezvoltatorilor. Verifică pentru a te asigura că nu a fost deja raportată."
             }
         },
         "login": {
@@ -287,32 +287,32 @@
                     "noneDetected": "Niciunul detectat"
                 },
                 "strongholdStatus": {
-                    "title": "Wallet Status",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "Stare portofel",
+                    "locked": "Stronghold blocat",
+                    "unlocked": "Stronghold deblocat"
                 },
                 "strongholdBackup": {
-                    "title": "Wallet Backup",
+                    "title": "Copie de rezervă Portofel",
                     "weeksAgo": "{weeks, plural, one {# săptămână} other {# săptămâni}}"
                 }
             },
             "network": {
                 "networkOperational": "Rețeaua este operațională",
-                "networkDegraded": "Network Degraded",
-                "networkDown": "Network Disconnected",
-                "status": "Status",
-                "messagesPerSecond": "Messages per second",
-                "confirmationRate": "Confirmation rate"
+                "networkDegraded": "Rețea degradată",
+                "networkDown": "Rețea deconectată",
+                "status": "Stare",
+                "messagesPerSecond": "Mesaje pe secundă",
+                "confirmationRate": "Rată de confirmare"
             },
             "profileModal": {
-                "allSettings": "All settings",
-                "logout": "Log out"
+                "allSettings": "Toate setările",
+                "logout": "Deconectează-te"
             }
         }
     },
     "popups": {
         "password": {
-            "title": "Password required",
+            "title": "Parolă necesară",
             "subtitle": "Please enter your wallet password to unlock Stronghold"
         },
         "qr": {
@@ -366,7 +366,7 @@
             "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone."
         },
         "diagnostics": {
-            "title": "Diagnostics",
+            "title": "Diagnostice",
             "node": "Node",
             "platform": "Platform",
             "platformVersion": "Platform Version",
@@ -532,7 +532,7 @@
         "inputAddress": "Send Address",
         "receiveAddress": "Receive Address",
         "date": "Date",
-        "status": "Status",
+        "status": "Stare",
         "confirmed": "Confirmed",
         "pending": "Pending",
         "noAccounts": "You have no accounts, please create one.",
@@ -569,6 +569,7 @@
     },
     "dates": {
         "today": "Today",
+        "yesterday": "Yesterday",
         "daysAgo": "{time, plural, one {# day} other {# days}} ago",
         "weeksAgo": "{time, plural, one {# week} other {# weeks}} ago",
         "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
