@@ -569,7 +569,7 @@
     },
     "dates": {
         "today": "오늘",
-        "yesterday": "Yesterday",
+        "yesterday": "어제",
         "daysAgo": "{time, plural, other {#일}} 전",
         "weeksAgo": "{time, plural, other {#주}} 전",
         "monthsAgo": "{time, plural, other {#개월}} 전",

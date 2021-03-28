@@ -569,7 +569,7 @@
     },
     "dates": {
         "today": "Vandag",
-        "yesterday": "Yesterday",
+        "yesterday": "Gister",
         "daysAgo": "{time, plural, one {# dag} other {# dae}} terug",
         "weeksAgo": "{time, plural, one {# week} other {# weke}} terug",
         "monthsAgo": "{time, plural, one {# maand} other {# maande}} terug",

@@ -529,7 +529,7 @@
         "help": "Ajuda",
         "you": "Você",
         "messageId": "ID da Mensagem",
-        "inputAddress": "Send Address",
+        "inputAddress": "Endereço de Envio",
         "receiveAddress": "Endereço de Recebimento",
         "date": "Data",
         "status": "Status",
@@ -569,7 +569,7 @@
     },
     "dates": {
         "today": "Hoje",
-        "yesterday": "Yesterday",
+        "yesterday": "Ontem",
         "daysAgo": "{time, plural, one {# dia} other {# dias}} atrás",
         "weeksAgo": "{time, plural, one {# semana} other {# semanas}} atrás",
         "monthsAgo": "{time, plural, one {# mês} other {# meses}} atrás",
