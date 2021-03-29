@@ -569,7 +569,7 @@
     },
     "dates": {
         "today": "Idag",
-        "yesterday": "Yesterday",
+        "yesterday": "Igår",
         "daysAgo": "{time, plural, one {# dag} other {# dagar}} sedan",
         "weeksAgo": "{time, plural, one {# vecka} other {# veckor}} sedan",
         "monthsAgo": "{time, plural, one {# månad} other {# månader}} sedan",

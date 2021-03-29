@@ -569,7 +569,7 @@
     },
     "dates": {
         "today": "Ma",
-        "yesterday": "Yesterday",
+        "yesterday": "Tegnap",
         "daysAgo": "{time, plural, one {# nappal} other {# nappal}} ezelőtt",
         "weeksAgo": "{time, plural, one {# héttel} other {# héttel}} ezelőtt",
         "monthsAgo": "{time, plural, one {# hónappal} other {# hónappal}} ezelőtt",
