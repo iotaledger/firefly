@@ -4,6 +4,7 @@ const path = require('path')
 const os = require('os')
 const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
+const electronSettings = require('electron-settings');
 
 /**
  * Set AppUserModelID for Windows notifications functionallity
@@ -121,12 +122,16 @@ function createWindow() {
         console.log(error) //eslint-disable-line no-console
     }
 
+    const mainWindowState = windowStateKeeper('main');
+
     // Create the browser window
     windows.main = new BrowserWindow({
+        x: mainWindowState.x,
+        y: mainWindowState.y,
+        width: mainWindowState.width,
+        height: mainWindowState.height,
         minWidth: 1280,
         minHeight: 720,
-        width: 1280,
-        height: 720,
         titleBarStyle: 'hidden',
         frame: process.platform === 'linux',
         webPreferences: {
@@ -134,6 +139,12 @@ function createWindow() {
             preload: paths.preload,
         },
     })
+
+    if (mainWindowState.isMaximized) {
+        windows.main.maximize();
+    }
+
+    mainWindowState.track(windows.main);
 
     if (devMode) {
         // Enable dev tools only in developer mode
@@ -284,8 +295,8 @@ ipcMain.handle('diagnostics', (_e) => {
         { label: 'popups.diagnostics.platformVersion', value: os.release() },
         { label: 'popups.diagnostics.platformArchitecture', value: os.arch() },
         { label: 'popups.diagnostics.cpuCount', value: os.cpus().length },
-        { label: 'popups.diagnostics.totalMem', value: `${(os.totalmem() / 1048576 ).toFixed(1)} MB` },
-        { label: 'popups.diagnostics.freeMem', value: `${(os.freemem() / 1048576 ).toFixed(1)} MB` },
+        { label: 'popups.diagnostics.totalMem', value: `${(os.totalmem() / 1048576).toFixed(1)} MB` },
+        { label: 'popups.diagnostics.freeMem', value: `${(os.freemem() / 1048576).toFixed(1)} MB` },
         { label: 'popups.diagnostics.userPath', value: app.getPath('userData') },
     ]
     return diagnostics
@@ -405,4 +416,58 @@ export const closeAboutWindow = () => {
         windows.about.close()
         windows.about = null
     }
+}
+
+function windowStateKeeper(windowName) {
+    let window, windowState;
+
+    function setBounds() {
+        try {
+            const has = electronSettings.hasSync(`windowState.${windowName}`);
+            if (has) {
+                windowState = electronSettings.getSync(`windowState.${windowName}`);
+                return;
+            }
+        } catch (err) {
+            console.error("Error getting window state", err)
+        }
+        // Default
+        windowState = {
+            x: undefined,
+            y: undefined,
+            width: 1280,
+            height: 720,
+        };
+    }
+
+    function saveState() {
+        if (!windowState.isMaximized) {
+            windowState = window.getBounds();
+        }
+        windowState.isMaximized = window.isMaximized();
+
+        try {
+            electronSettings.setSync(`windowState.${windowName}`, windowState);
+        } catch (err) {
+            console.error("Error saving window state", errr)
+        }
+    }
+
+    function track(win) {
+        window = win;
+        ['resize', 'move', 'close'].forEach(event => {
+            win.on(event, saveState);
+        });
+    }
+
+    setBounds();
+
+    return {
+        x: windowState.x,
+        y: windowState.y,
+        width: windowState.width,
+        height: windowState.height,
+        isMaximized: windowState.isMaximized,
+        track
+    };
 }

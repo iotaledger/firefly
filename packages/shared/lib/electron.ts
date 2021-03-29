@@ -54,9 +54,10 @@ export interface IElectron {
     updateActiveProfile(id: string): void;
     updateMenu(attribute: string, value: unknown): void;
     popupMenu(): void;
-    maximize(): void;
+    maximize(): Promise<boolean>;
     minimize(): void;
     close(): void;
+    isMaximized(): Promise<boolean>;
     saveRecoveryKit(kitData: ArrayBuffer): Promise<void>;
     openUrl(url: string): void;
     hookErrorLogger(logger: (error: Error) => void): void
