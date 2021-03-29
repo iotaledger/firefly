@@ -3,9 +3,10 @@ const PincodeManager = require('./lib/pincodeManager')
 const DeepLinkManager = require('./lib/deepLinkManager')
 const NotificationManager = require('./lib/notificationManager')
 const { ipcRenderer, contextBridge } = require('electron')
-const { proxyApi } = require('../../shared/lib/walletApi')
 const { menuState } = require('./lib/menuState')
 const fs = require('fs');
+const { proxyApi } = require('shared/lib/shell/walletApi')
+const { hookErrorLogger } = require('shared/lib/shell/errorLogger')
 
 let activeProfileId = null
 
@@ -177,7 +178,11 @@ const Electron = {
             }
         })
     },
-
+    /**
+     * Hook the logger
+     * @returns 
+     */
+    hookErrorLogger
 }
 
 contextBridge.exposeInMainWorld('__WALLET_INIT__', {

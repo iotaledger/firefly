@@ -569,6 +569,7 @@
     },
     "dates": {
         "today": "Ngày hôm nay",
+        "yesterday": "Yesterday",
         "daysAgo": "{time, plural, one {# week} other {# tuần}} trước đó",
         "weeksAgo": "{time, plural, one {# week} other {# tuần}} trước đó",
         "monthsAgo": "{time, plural, one {# month} other {# months}} ago",

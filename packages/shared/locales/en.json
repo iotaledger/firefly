@@ -569,6 +569,7 @@
     },
     "dates": {
         "today": "Today",
+        "yesterday": "Yesterday",
         "daysAgo": "{time, plural, one {# day} other {# days}} ago",
         "weeksAgo": "{time, plural, one {# week} other {# weeks}} ago",
         "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
@@ -626,8 +627,10 @@
             "amountNoFloat": "If units are `i` you cannot use decimal places.",
             "amountInvalidFormat": "The amount appears to be an invalid number.",
             "amountZero": "The amount must be greater than 0.",
-            "wrongAddressFormat": "Addresses start with the prefix {prefix}.",
+            "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
+            "wrongAddressFormat": "The address is not correctly formatted.",
             "insufficientFunds": "This account has insufficient funds.",
+            "noToAccount": "You have not selected an account to send the funds to.",
             "sendingDust": "You cannot send less than 1 Mi.",
             "leavingDust": "You cannot leave less than 1 Mi on your address." 
         },

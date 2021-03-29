@@ -569,6 +569,7 @@
     },
     "dates": {
         "today": "Vandaag",
+        "yesterday": "Yesterday",
         "daysAgo": "{time, plural, one {# dag} other {# dagen}} geleden",
         "weeksAgo": "{time, plural, one {# week} other {# weken}} geleden",
         "monthsAgo": "{time, plural, one {# maand} other {# maanden}} geleden",
@@ -648,7 +649,7 @@
             "seedTooShort": "De seed moet 81 tekens lang zijn, het {length, plural, one {is er nu 1} other {zijn er nu #}}",
             "seedCharacters": "De seed mag alleen de tekens A-Z of 9 bevatten",
             "phraseWordCount": "Uw herstelzin zou 24 woorden moeten bevatten, op dit moment {length, plural, one {is er 1} other {zijn er #}}.",
-            "phraseUnrecognizedWord": "Onherkend woord \"{word}\" in uw herstelzin."
+            "phraseUnrecognizedWord": "Het woord \"{word}\" is niet herkend in uw herstel zin"
         }
     }
 }

@@ -152,10 +152,19 @@ export const isValidHttpsUrl = (url) => {
  * Validate an address given its prefix.
  * @param prefix The bech32 hrp prefix to match.
  * @param addr The address to validate.
- * @returns True if it matches the bech32 format.
+ * @returns The error string to use if it does not validate.
  */
 export const validateBech32Address = (prefix, addr) => {
-    return new RegExp(`^${prefix}1[02-9ac-hj-np-z]{59}$`).test(addr)
+    if (!addr || !addr.startsWith(prefix)) {
+        return localize('error.send.wrongAddressPrefix', {
+            values: {
+                prefix: prefix,
+            },
+        })
+    }
+    if (!new RegExp(`^${prefix}1[02-9ac-hj-np-z]{59}$`).test(addr)) {
+        return localize('error.send.wrongAddressFormat')
+    }
 }
 
 /**

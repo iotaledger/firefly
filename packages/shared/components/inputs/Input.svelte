@@ -16,6 +16,7 @@
     export let submitHandler = undefined
     export let disabled = false
     export let maxDecimals = undefined
+    export let disableContextMenu = false
 
     let inputElement
     let decimalSeparator = getDecimalSeparator()
@@ -88,6 +89,12 @@
                     }
                 }
             }
+        }
+    }
+
+    const handleContextMenu = (e) => {
+        if (disableContextMenu) {
+            e.preventDefault()
         }
     }
 
@@ -175,6 +182,7 @@
             on:input={handleInput}
             on:keypress={onKeyPress}
             on:paste={onPaste}
+            on:contextmenu={handleContextMenu}
             {disabled}
             {...$$restProps}
             {placeholder} />
