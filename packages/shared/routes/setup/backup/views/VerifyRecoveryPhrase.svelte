@@ -13,9 +13,7 @@
     $: {
         valid =
             recoveryPhraseInput &&
-            mnemonic &&
-            mnemonic.length === recoveryPhraseInput.length &&
-            mnemonic.join('') === recoveryPhraseInput.join('')
+            mnemonic
     }
 
     const dispatch = createEventDispatcher()

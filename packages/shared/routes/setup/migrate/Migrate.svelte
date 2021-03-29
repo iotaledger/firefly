@@ -9,6 +9,7 @@
         SecurityCheckCompleted,
         TransferFragmentedFunds,
     } from './views/'
+    import { hasSingleBundle, hasBundlesWithSpentAddresses } from 'shared/lib/migration'
 
     export let locale
     export let mobile
@@ -35,20 +36,27 @@
     let stateHistory = []
 
     // TODO: dummy
-    let migrationType: MigrationType = MigrationType.SpentAddresses
+    let migrationType: MigrationType = MigrationType.FragmentedFunds
 
     const _next = async (event) => {
         let nextState
         let params = event.detail || {}
         switch (state) {
             case MigrateState.Init:
-                if (migrationType === MigrationType.SingleBundle) {
-                    dispatch('next')
-                } else if (migrationType === MigrationType.FragmentedFunds) {
-                    nextState = MigrateState.TransferFragmentedFunds
-                } else if (migrationType === MigrationType.SpentAddresses) {
+                console.log('hasSingleBundle', $hasSingleBundle)
+                console.log('hasBundlesWithSpentAddresses', $hasBundlesWithSpentAddresses)
+
+                if ($hasBundlesWithSpentAddresses) {
                     nextState = MigrateState.BundleMiningWarning
+                    break
                 }
+
+                if ($hasSingleBundle) {
+                    dispatch('next')
+                } else {
+                    nextState = MigrateState.TransferFragmentedFunds
+                }
+
                 break
             case MigrateState.TransferFragmentedFunds:
                 dispatch('next')

@@ -1,22 +1,19 @@
 <script lang="typescript">
     import { Button, Illustration, OnboardingLayout, SpentAddress, Text } from 'shared/components'
     import { createEventDispatcher } from 'svelte'
+    import { toggleInputSelection, spentAddressesFromBundles, MINIMUM_MIGRATION_BALANCE } from 'shared/lib/migration'
 
     export let locale
     export let mobile
 
     const dispatch = createEventDispatcher()
 
+    console.log('Spent addresses from bundles', $spentAddressesFromBundles)
+
     // TODO: dummy
-    let addresses = Array.from({ length: 8 }, (_, id) => {
-        let balance = Math.floor(Math.random() * 4000000)
-        return {
-            id,
-            address: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
-            balance,
-            disabled: balance < 1000000,
-        }
-    })
+    let addresses = $spentAddressesFromBundles.map((address) =>
+        Object.assign({}, address, { disabled: address.balance < MINIMUM_MIGRATION_BALANCE, id: address.index })
+    )
 
     let selectedAddresses = addresses.slice().filter((address) => !address.disabled)
 
@@ -27,6 +24,8 @@
         } else {
             selectedAddresses.splice(index, 1)
         }
+
+        toggleInputSelection(address)
         selectedAddresses = selectedAddresses
     }
 

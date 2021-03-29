@@ -329,6 +329,12 @@ export interface ApiClient {
         securityLevel: number,
         initialAddressIndex: number,
         callbacks: { onSuccess: (response: Event<MigrationData>) => void, onError: (err: ErrorEventPayload) => void }
+    ),
+    createMigrationBundle(
+        seed: string,
+        inputIndexes: number[],
+        mine: boolean,
+        callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void }
     )
 
     onStrongholdStatusChange(callbacks: { onSuccess: (response: Event<StrongholdStatus>) => void, onError: (err: ErrorEventPayload) => void })

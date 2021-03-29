@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { BundleMiningLayout, Button, Icon, ProgressBar, Text } from 'shared/components'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+    import { getInputIndexesForBundle, createMigrationBundle, selectedBundlesWithSpentAddresses } from 'shared/lib/migration'
 
     export let locale
     export let mobile
@@ -13,6 +14,15 @@
     let interval
 
     onMount(() => {
+        $selectedBundlesWithSpentAddresses.reduce(
+            (promise, bundle) =>
+                promise.then((acc) =>
+                    createMigrationBundle(getInputIndexesForBundle(bundle), true).then((result) => {
+                    }).catch((error) => console.error(error))
+                ),
+            Promise.resolve([])
+        )
+
         //TODO: retrieve progress and call setProgressBar() to fill it up
         interval = setInterval(() => {
             progressBarPercent = Math.floor(Math.random() * 101)

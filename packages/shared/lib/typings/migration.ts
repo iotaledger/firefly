@@ -1,16 +1,18 @@
 import type { Bridge, CommunicationIds } from './bridge'
 
+export interface Input {
+    address: string;
+    balance: number;
+    spent: boolean;
+    index: number;
+    securityLevel: number;
+    spentBundleHashes: string[]
+}
+
 export interface MigrationData {
     lastCheckedAddressIndex: number;
     balance: number;
-    inputs: {
-        address: string;
-        balance: number;
-        spent: boolean;
-        index: number;
-        securityLevel: number;
-        spentBundleHashes: string[]
-    }[]
+    inputs: Input[]
 }
 
 /**

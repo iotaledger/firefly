@@ -2,6 +2,7 @@
     import { Box, Button, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
     import { formatUnit } from 'shared/lib/units'
+    import { migration } from 'shared/lib/migration'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -10,7 +11,9 @@
 
     const dispatch = createEventDispatcher()
 
-    let balance = Math.floor(Math.random() * 2000000) // TODO: dummy
+    const {  data } = $migration
+    const { balance } = $data
+
     let fiatbalance = `${convertToFiat(
         balance,
         get(currencies)[CurrencyTypes.USD],
@@ -27,6 +30,7 @@
             dispatch('next')
         }, 2000)
     }
+    
     //TODO: complete function functionality
     function learnAboutMigrationsClick() {
         console.log('Learn about migration clicked')
