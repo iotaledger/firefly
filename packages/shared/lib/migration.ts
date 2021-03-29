@@ -39,12 +39,8 @@ export const migration = writable<MigrationState>({
  */
 export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0): Promise<void> => {
     return new Promise((resolve, reject) => {
-        console.log('Migrtaions eed', migrationSeed)
-        console.log('Initial', initialAddressIndex)
-
         api.getMigrationData(migrationSeed, [MIGRATION_NODE], PERMANODE, ADDRESS_SECURITY_LEVEL, initialAddressIndex, {
             onSuccess(response) {
-                console.log('Response', response)
                 const { seed, data } = get(migration)
 
                 if (initialAddressIndex === 0) {
