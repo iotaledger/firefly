@@ -12,25 +12,30 @@
     let password = ''
     let confirmedPassword = ''
     let error = ''
+    let errorConfirm = ''
     let busy = false
 
     const dispatch = createEventDispatcher()
 
     $: passwordStrength = zxcvbn(password)
+    $: password, confirmedPassword, (error = '', errorConfirm='')
 
     async function handleContinueClick() {
+        error = ''
+        errorConfirm = ''
+
         if (password.length > MAX_PASSWORD_LENGTH) {
             error = locale('error.password.length', {
                 values: {
                     length: MAX_PASSWORD_LENGTH,
                 },
             })
-        } else if (password !== confirmedPassword) {
-            error = locale('error.password.doNotMatch')
         } else if (passwordStrength.score !== 4) {
             error = passwordStrength.feedback.warning
                 ? locale(`error.password.${passwordInfo[passwordStrength.feedback.warning]}`)
                 : locale('error.password.tooWeak')
+        } else if (password !== confirmedPassword) {
+            errorConfirm = locale('error.password.doNotMatch')
         } else {
             try {
                 busy = true
@@ -73,6 +78,7 @@
                     autofocus
                     disabled={busy} />
                 <Password
+                    error={errorConfirm}
                     bind:value={confirmedPassword}
                     classes="mb-5"
                     {locale}

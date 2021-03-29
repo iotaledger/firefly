@@ -231,7 +231,7 @@
             },
             "proofOfWork": {
                 "title": "Preuve de travail",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "description": "Effectuer la preuve de travail localement sur votre appareil ou la faire prendre en charge par le nœud"
             },
             "errorLog": {
                 "title": "Journal des erreurs",
@@ -287,12 +287,12 @@
                     "noneDetected": "Aucun périphérique détecté"
                 },
                 "strongholdStatus": {
-                    "title": "Statut StrongHold",
-                    "locked": "Verrouillé",
-                    "unlocked": "Déverrouillé"
+                    "title": "Statut du portefeuille",
+                    "locked": "Stronghold verrouillé",
+                    "unlocked": "Stronghold déverrouillé"
                 },
                 "strongholdBackup": {
-                    "title": "Sauvegarde Stronghold",
+                    "title": "Copie de Sauvegarde du Portefeuille",
                     "weeksAgo": "Il y a {weeks, plural, one {# semaine} other {# semaines}}"
                 }
             },
@@ -473,7 +473,7 @@
         "sent": "Envoyé",
         "received": "Reçu",
         "sendPayment": "Envoyer le paiement",
-        "moveFunds": "Déplacer des fonds",
+        "moveFunds": "Transfert interne",
         "sendFunds": "Envoyer des fonds",
         "sendToAddress": "Envoyer à l'adresse",
         "scanQrOrPaste": "Scannez un QR code ou collez une Adresse",
@@ -529,7 +529,7 @@
         "help": "Aide",
         "you": "Vous",
         "messageId": "ID du message",
-        "inputAddress": "Adresses entrantes",
+        "inputAddress": "Adresse d'envoi",
         "receiveAddress": "Adresse de réception",
         "date": "Date",
         "status": "État",
@@ -564,11 +564,12 @@
         "passwordStrength1": "Médiocre",
         "passwordStrength2": "Faible",
         "passwordStrength3": "Moyenne",
-        "passwordStrength4": "Strong",
-        "creatingProfile": "Creating profile, please wait..."
+        "passwordStrength4": "Robuste",
+        "creatingProfile": "Création du profile, veuillez patienter..."
     },
     "dates": {
         "today": "Aujourd'hui",
+        "yesterday": "Hier",
         "daysAgo": "Il y a {time, plural, one {# jour} other {# jours}}",
         "weeksAgo": "Il y a {time, plural, one {# semaine} other {# semaines}}",
         "monthsAgo": "il y a {time, plural, one {# mois} other {# mois}}",
@@ -577,6 +578,7 @@
     "notifications": {
         "valueTx": "Réception de {{value}} sur {{account}}",
         "confirmed": "Envoi de {{value}} depuis {{account}} confirmé",
+        "confirmedInternal": "{{value}} de {{senderAccount}} à {{receiverAccount}} confirmé",
         "failed": "Envoi de {{value}} depuis {{account}} en échec",
         "downloadingUpdate": "Téléchargement de la mise à jour",
         "updateReady": "Mise à jour prête",
@@ -626,16 +628,16 @@
             "amountInvalidFormat": "Le montant semble être un nombre invalide.",
             "amountZero": "Le montant doit être supérieur à 0.",
             "wrongAddressFormat": "Les adresses commencent par le préfixe {prefix}.",
-            "insufficientFunds": "This account has insufficient funds.",
-            "sendingDust": "You cannot send less than 1 Mi.",
-            "leavingDust": "You cannot leave less than 1 Mi on your address."
+            "insufficientFunds": "Ce compte ne dispose pas de fonds suffisants.",
+            "sendingDust": "Vous ne pouvez pas envoyer moins de 1 Mi.",
+            "leavingDust": "Vous ne pouvez pas laisser moins de 1 Mi sur votre adresse."
         },
         "node": {
             "invalid": "Veuillez saisir une URL valide.",
             "https": "HTTPS est requis. Configurez un profil développeur pour utiliser des connexions HTTP non sécurisées.",
             "duplicate": "Ce noeud a déjà été ajouté.",
-            "unsynced": "The node is not in sync.",
-            "noSynced": "No synced nodes are available."
+            "unsynced": "Le noeud n'est pas synchronisé.",
+            "noSynced": "Aucun nœud synchronisé disponible."
         },
         "global": {
             "generic": "Une erreur s'est produite."

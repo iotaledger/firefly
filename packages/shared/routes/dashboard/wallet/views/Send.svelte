@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { convertUnits, Unit } from '@iota/unit-converter'
-    import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
-    import { sendParams } from 'shared/lib/app'
+    import { Address, Amount, Button, Dropdown, Error, Icon, ProgressBar, Text } from 'shared/components'
+    import { clearSendParams, sendParams } from 'shared/lib/app'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import type { TransferProgressEventType } from 'shared/lib/typings/events'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
@@ -23,16 +23,19 @@
         INTERNAL = 'moveFunds',
     }
 
-    let selectedSendType = SEND_TYPE.EXTERNAL
+    let selectedSendType = $sendParams.isInternal ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
     let unit = Unit.Mi
     let amount = $sendParams.amount === 0 ? '' : convertUnitsNoE($sendParams.amount, Unit.i, unit)
     let to = undefined
     let amountError = ''
     let addressPrefix = ($account ?? $accounts[0]).depositAddress.split('1')[0]
     let addressError = ''
+    let toError = ''
 
     // This looks odd but sets a reactive dependency on amount, so when it changes the error will clear
     $: amount, (amountError = '')
+    $: to, (toError = '')
+    $: $sendParams.address, (addressError = '')
 
     let transferSteps: {
         [key in TransferProgressEventType | 'Complete']: {
@@ -119,16 +122,16 @@
                                 length: ADDRESS_LENGTH,
                             },
                         })
-                    } else if (!validateBech32Address(addressPrefix, $sendParams.address)) {
-                        addressError = locale('error.send.wrongAddressFormat', {
-                            values: {
-                                prefix: addressPrefix,
-                            },
-                        })
+                    } else {
+                        addressError = validateBech32Address(addressPrefix, $sendParams.address)
+                    }
+                } else {
+                    if (!to) {
+                        toError = locale('error.send.noToAccount')
                     }
                 }
 
-                if (!amountError && !addressError) {
+                if (!amountError && !addressError && !toError) {
                     $sendParams.amount = amountAsI
 
                     if (selectedSendType === SEND_TYPE.INTERNAL) {
@@ -142,6 +145,7 @@
     }
 
     const handleBackClick = () => {
+        clearSendParams()
         accountRoute.set(AccountRoutes.Init)
         if (!$account) {
             walletRoute.set(WalletRoutes.Init)
@@ -242,6 +246,7 @@
                             items={accountsDropdownItems.filter((a) => from && a.id !== from.id)}
                             onSelect={handleToSelect}
                             disabled={$isTransferring || $accounts.length === 2} />
+                        <Error error={toError} />
                     {:else}
                         <Address
                             error={addressError}
@@ -258,7 +263,11 @@
     {#if !$isTransferring}
         <div class="flex flex-row justify-between px-2">
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>{locale('actions.cancel')}</Button>
-            <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()}>{locale('actions.send')}</Button>
+            <Button
+                classes="-mx-2 w-1/2"
+                onClick={() => handleSendClick()}>
+                {locale('actions.send')}
+            </Button>
         </div>
     {/if}
     {#if $isTransferring}

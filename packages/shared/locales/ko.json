@@ -1,12 +1,12 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA tokens",
-            "body": "Firefly is the official wallet of IOTA."
+            "title": "IOTA 보내기, 받기, 관리하기",
+            "body": "Firefly는 IOTA 공식 지갑입니다"
         },
         "legal": {
-            "title": "Privacy Policy & Terms of Service",
-            "body": "개인정보 보호 정책과 서비스 약관을 읽고 확인해 주세요.",
+            "title": "개인정보 보호 정책 & 이용 약관",
+            "body": "개인정보 보호 정책과 이용 약관을 읽고 확인해 주세요.",
             "privacyPolicy": {
                 "title": "개인정보 보호 정책",
                 "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
@@ -17,7 +17,7 @@
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "termsOfService": {
-                "title": "서비스 약관",
+                "title": "이용 약관",
                 "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -25,79 +25,79 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+            "checkbox": "개인정보 보호 정책과 이용 약관을 읽었으며 이에 동의합니다"
         },
         "appearance": {
             "title": "모양새",
-            "body": "Choose your wallet’s theme."
+            "body": "지갑의 모양새를 선택해 주세요."
         },
         "setup": {
             "title": "지갑 설정하기",
-            "body1": "You can create multiple user profiles to keep your tokens separate and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
-            "profileName": "프로필 이름"
+            "body1": "지갑에 여러 사용자를 등록하여 토큰을 사용자별로 관리하고 보안성을 높일 수 있습니다.",
+            "body2": "먼저 첫번째 사용자 이름부터 시작합시다. 나중에 추가로 사용자를 더 등록할 수 있습니다.",
+            "profileName": "사용자 이름"
         },
         "secure": {
-            "title": "Secure your wallet",
-            "body1": "Save and print the Recovery Kit PDF template.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
+            "title": "지갑을 안전하게 보관하기",
+            "body1": "복원 양식 PDF 파일을 받아 인쇄하세요.",
+            "body2": "복원 양식을 작성하여 보관하면 이 양식을 이용하여 지갑을 복원할 수 있습니다."
         },
         "password": {
             "title": "비밀번호 만들기",
-            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
-            "body2": "It is recommended that you write down your password in your Recovery Kit."
+            "body1": "비밀번호가 너무 약합니다. 여러 단어의 조합을 사용하고, 흔한 문장, 이름, 날짜 등은 피해 주세요.",
+            "body2": "복원 양식에 비밀번호를 기록하는 것을 권장합니다."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "본인 만 지갑을 사용할 수 있도록 로그인 PIN을 설정하세요.",
-            "body2": "PIN을 안전하게 보관하세요!"
+            "body1": "자기 자신 외에는 지갑에 접근할 수 없도록 PIN 번호를 설정하세요.",
+            "body2": "PIN 번호를 안전하게 보관하세요!"
         },
         "pin": {
-            "title": "PIN 번호 설정",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
+            "title": "PIN 번호 설정하기",
+            "body1": "지갑에 접속하기 위해 사용할 6자리 PIN 번호를 입력해 주세요.",
+            "body2": "숫자만 입력 가능"
         },
         "confirmPin": {
             "title": "PIN 번호 확인",
-            "body1": "Your PIN keeps your balance and transactions private.",
-            "body2": "Re-enter your PIN code to proceed. "
+            "body1": "PIN 번호는 잔고와 거래 내역을 남들에게서 숨기는 데에 사용됩니다.",
+            "body2": "PIN 번호를 다시 한번 입력해 주세요. "
         },
         "backup": {
             "title": "지갑 백업",
-            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
-            "body3": "복원 문구를 잃어버리게 될 경우 지갑 잔고를 잃어버릴 수도 있습니다."
+            "body1": "이제 복원 문구를 확인합니다. 이 문구를 복원 양식에 기록해 주세요.",
+            "body2": "복원 문구는 다른 사람에게 알려주지 마세요. 이 복원 문구가 있으면 어디에서나 토큰에 접근할 수 있습니다.",
+            "body3": "복원 문구를 잃어버리게 될 경우 지갑 잔고를 잃게 될 수도 있습니다."
         },
         "recoveryPhrase": {
             "title": "복원 문구",
-            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-            "body2": "Keep this private and safely stored.",
-            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+            "body1": "복원 양식에 아래에 보여지는 단어들을 순서에 맞게 정확히 기록하세요.",
+            "body2": "이 문구를 안전하게 보관하세요.",
+            "body3": "수기로 기록된 백업을 남겨 놓는 것이 중요합니다. 컴퓨터와 전자 파일은 오류를 발생시킬 수 있습니다.",
             "revealRecoveryPhrase": "복원 문구 보기",
             "hideRecoveryPhrase": "복원 문구 숨기기"
         },
         "verifyRecoveryPhrase": {
             "title": "복원 문구 확인",
-            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
-            "word": "Word",
-            "verified": "Recovery phrase verified",
-            "verifiedBody": "Remember to keep it private and safely stored."
+            "body": "복원 문구를 정확히 기록하였는지 확인합니다. 아래에서 단어를 순서에 맞게 선택해 주세요.",
+            "word": "단어",
+            "verified": "복원 문구가 확인되었습니다",
+            "verifiedBody": "복원 문구는 항상 안전하게 보관하도록 하세요."
         },
         "backupWallet": {
             "title": "Stronghold 파일로 백업",
-            "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
-            "body2": "Reasons why digital backups are important:",
-            "reason1": "Easily recover your wallet without typing in your recovery phrase",
-            "reason2": "Import your wallet to other devices",
-            "reason3": "Recover your full transaction history"
+            "body1": "지갑을 Stronghold 파일로 백업하기 위해 사용할 비밀번호를 입력하세요. 이 비밀번호를 사용해 백업을 암호화합니다.",
+            "body2": "아래와 같은 이유 때문에 전자 백업도 중요합니다.",
+            "reason1": "복원 문구를 일일히 입력하지 않고 지갑을 복원할 수 있습니다.",
+            "reason2": "다른 기기에서 지갑을 불러올 수 있습니다.",
+            "reason3": "전체 거래 내역을 복구할 수 있습니다."
         },
         "recoveryPhraseSaved": {
             "title": "백업 성공",
             "body": "Stronghold로 지갑을 백업하였습니다."
         },
         "congratulations": {
-            "title": "Wallet setup completed",
-            "body": "Your new wallet is ready to use."
+            "title": "지갑 설정 완료",
+            "body": "이제 새로 설정된 지갑을 사용할 수 있습니다."
         },
         "import": {
             "title": "지갑 불러오기",
@@ -105,14 +105,14 @@
         },
         "importFromText": {
             "title": "복원 문구 또는 시드로 지갑을 복구하기",
-            "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body2": "A recovery phrase is 24 words long (with spaces). This is used to recover an existing Firefly wallet.",
+            "body1": "시드는 81개의 글자로 이루어져 있습니다. 시드가 있으면 기존에 사용하던 Trinity 지갑을 복구할 수 있습니다.",
+            "body2": "복원 문구는 띄어쓰기와 24개의 단어로 이루어진 문장입니다. 복원 문구가 있으면 기존에 사용하던 Firefly 지갑을 복구할 수 있습니다.",
             "body3": "시드 또는 복원 문구 입력",
-            "seedDetected": "81자의 시드 감지",
-            "phraseDetected": "24 word recovery phrase detected"
+            "seedDetected": "81자의 시드 감지됨",
+            "phraseDetected": "24개 단어로 된 복원 문구 감지"
         },
         "importFromFile": {
-            "title": "Restore your wallet using a backup file",
+            "title": "백업 파일로부터 지갑 복구",
             "body": "지갑을 복구하는 데 사용할 백업 파일을 불러옵니다. Stronghold (.stronghold) 또는 Trinity 지갑의 SeedVault (.kdbx) 파일을 선택해 주세요."
         },
         "importBackupPassword": {
@@ -121,18 +121,18 @@
             "body2": "백업 파일을 처음 만들때 설정했던 비밀번호를 입력합니다."
         },
         "importSuccess": {
-            "title": "백업 파일에서부터의 복구 완료",
+            "title": "백업 파일에서 복구 완료",
             "body": "이제 새로운 지갑을 설정할 수 있습니다.",
-            "seedvaultTitle": "Successfully imported",
-            "seedvaultBody": "Your password is correct, you can now continue.",
-            "strongholdTitle": "Successfully imported",
-            "strongholdBody": "Your password is correct, you can now continue."
+            "seedvaultTitle": "가져오기 성공",
+            "seedvaultBody": "암호를 확인하였습니다. 다음 단계로 계속합니다.",
+            "strongholdTitle": "가져오기 성공",
+            "strongholdBody": "암호를 확인하였습니다. 다음 단계로 계속합니다."
         },
         "migrate": {
-            "title": "잔고 옮기기",
-            "body1": "당신의 자금을 새로운 지갑으로 자동으로 옮기는 과정입니다. '사용완료된 주소'를 확인해 보안이 취약해지지 않도록 합니다.",
-            "body2": "시간이 다소 걸릴 수 있습니다. 자금을 옮기는 동안 기기를 끄지 마세요.",
-            "existing": "옛날 지갑",
+            "title": "잔고 옮기는 중",
+            "body1": "새 지갑으로 잔액을 옮기는 중입니다. 이미 사용되어 보안에 취약할 수 있는 주소를 확인합니다.",
+            "body2": "시간이 다소 걸릴 수 있습니다. 잔액을 옮기는 동안 기기를 끄지 마세요.",
+            "existing": "이전 지갑",
             "new": "새 지갑"
         },
         "migrateFailed": {
@@ -151,26 +151,26 @@
             },
             "security": {
                 "title": "보안",
-                "description": "Change your password and adjust security-related settings"
+                "description": "비밀번호 변경 및 다른 보안 관련 설정들"
             },
             "advancedSettings": {
                 "title": "고급 설정",
-                "description": "Tools and manual settings for technical users"
+                "description": "고급 사용자들을 위한 도구들 및 설정들"
             },
             "helpAndInfo": {
-                "title": "도움말 정보",
-                "description": "Find the answer to a question or get help with an issue"
+                "title": "도움말 및 정보",
+                "description": "질문에 대한 답변들 및 도움말"
             },
             "profile": {
-                "title": "프로필",
-                "description": "Change your profile name or set an avatar"
+                "title": "사용자",
+                "description": "사용자 이름을 바꾸거나 사진 등록하기"
             },
             "sync": {
                 "title": "계정 동기화",
                 "description": ""
             },
             "theme": {
-                "title": "테마",
+                "title": "모양새",
                 "description": ""
             },
             "language": {
@@ -178,128 +178,128 @@
                 "description": ""
             },
             "currency": {
-                "title": "화폐",
-                "description": "Adjusts balance conversion and updates chart options"
+                "title": "통화",
+                "description": "잔고 계산 및 차트 설정에 반영됩니다"
             },
             "notifications": {
                 "title": "알림",
-                "description": "System notifications for transaction events"
+                "description": "거래 발생에 대한 시스템 알림"
             },
             "exportStronghold": {
-                "title": "Export Backup",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
+                "title": "백업 내보내기",
+                "description": "Stronghold 파일로 백업을 내보냅니다. Stronghold 파일은 암호화된 지갑과 최근의 거래 내역을 담고 있습니다."
             },
             "appLock": {
-                "title": "Automatic Lock",
-                "description": "Time elapsed before your wallet locks and logs you out"
+                "title": "자동 잠금",
+                "description": "지갑을 잠그고 자동으로 로그아웃하기까지 걸리는 시간"
             },
             "changePassword": {
-                "title": "비밀번호 변경하기",
-                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
+                "title": "비밀번호 변경",
+                "description": "암호는 지갑의 보안에 사용됩니다. 잔고를 안전하게 보관하기 위해 강력한 암호를 사용해야 합니다."
             },
             "changePincode": {
                 "title": "PIN 번호 변경",
-                "description": "Your PIN keeps your balance and transactions private",
+                "description": "PIN 번호는 잔고와 거래 내역을 다른 사람들에게서 숨기는 데에 사용됩니다",
                 "currentPincode": "기존 PIN 번호",
                 "newPincode": "새 PIN 번호",
                 "confirmNewPincode": "새 PIN 번호 확인",
-                "action": "PIN 번호 변경"
+                "action": "PIN 번호 변경하기"
             },
             "resyncAccounts": {
-                "title": "계정 동기화",
+                "title": "계정 다시 동기화",
                 "description": ""
             },
             "deleteProfile": {
-                "title": "프로필 삭제",
-                "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
+                "title": "사용자 삭제",
+                "description": "지갑, 사용자 및 거래 내역 전체를 삭제합니다. 삭제 전에 지갑을 백업해 놓았는지 확인하세요."
             },
             "deepLinks": {
-                "title": "웹페이지 링크",
-                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
+                "title": "딥 링크",
+                "description": "iota:// 로 시작하는 주소에 접근할 경우 자동으로 Firefly에 거래 관련 데이터 입력"
             },
             "developerMode": {
                 "title": "개발자 모드",
-                "description": "Connect to testnets and other developer features"
+                "description": "테스트넷 접속 및 기타 개발자 기능들"
             },
             "nodeSettings": {
                 "title": "노드 설정",
-                "description": "Select Manual to choose from the node list or connect to your own node"
+                "description": "수동을 선택하여 접속할 노드를 목록에서 수동으로 고르거나 직접 추가"
             },
             "configureNodeList": {
-                "title": "Select a node",
+                "title": "노드 선택",
                 "description": ""
             },
             "proofOfWork": {
                 "title": "작업증명",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "description": "작업증명을 기기에서 수행하거나 또는 외부 노드에서 수행"
             },
             "errorLog": {
                 "title": "오류 로그",
-                "description": "View errors to debug an issue"
+                "description": "문제 해결을 위해 오류 보기"
             },
             "diagnostics": {
                 "title": "진단",
-                "description": "View system and application information"
+                "description": "시스템 및 앱 정보 보기"
             },
             "stateExport": {
                 "title": "상태 내보내기",
-                "description": "Export your transaction history to a .csv file"
+                "description": "거래 내역을 .csv 파일로 내보내기"
             },
             "troubleshoot": {
-                "title": "문제 해결하기",
-                "description": "Use the troubleshooting wizard to solve common problems"
+                "title": "문제 해결",
+                "description": "문제 해결 마법사를 이용하여 일반적인 문제 해결하기"
             },
             "documentation": {
                 "title": "설명서",
-                "description": "View the documentation for in depth explanations of how things work"
+                "description": "설명서를 통해 지갑이 어떻게 작동하는지에 대한 상세한 설명 보기"
             },
             "faq": {
-                "title": "자주 묻는 질문(FAQ)",
-                "title2": "Frequently Asked Questions",
-                "description": "View the FAQs to get help with a common problem or question"
+                "title": "자주 묻는 질문",
+                "title2": "자주 묻는 질문",
+                "description": "자주 묻는 질문을 통해 일반적으로 발생할 수 있는 문제 해결하기"
             },
             "discord": {
                 "title": "디스코드(Discord)",
-                "description": "Get help from the IOTA community on Discord"
+                "description": "IOTA Discord 커뮤니티에서 도움 받기"
             },
             "about": {
                 "title": "관련 정보",
                 "description": ""
             },
             "reportAnIssue": {
-                "title": "Report an issue",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
+                "title": "오류 보고하기",
+                "description": "개발진에게 오류를 보고합니다. 보고하기 전에 이미 보고된 오류인지 다시 한번 확인해 주세요."
             }
         },
         "login": {
-            "pleaseWait": "{time, plural, one {1 초} other {# 초}} 정도 기다리세요.",
-            "incorrectAttempts": "{attempts, plural, one {1 잘못된 시도} other {# 잘못된 시도}}"
+            "pleaseWait": "{time, plural, other {#초간}} 기다리세요",
+            "incorrectAttempts": "{attempts, plural, other {잘못된 시도 #번}}"
         },
         "dashboard": {
             "security": {
                 "version": {
-                    "title": "파이어플라이 v{version}",
-                    "upToDate": "최신 상태입니다.",
+                    "title": "Firefly v{version}",
+                    "upToDate": "최신 버전",
                     "outOfDate": "구버전"
                 },
                 "hardwareDevice": {
                     "title": "하드웨어 장치",
-                    "noneDetected": "확인된 사항이 없음"
+                    "noneDetected": "발견된 하드웨어 장치 없음"
                 },
                 "strongholdStatus": {
-                    "title": "'스트롱홀드' 상태",
-                    "locked": "잠김",
-                    "unlocked": "잠금 해제됨"
+                    "title": "지갑 상태",
+                    "locked": "Stronghold 잠김",
+                    "unlocked": "Stronghold 잠금 해제"
                 },
                 "strongholdBackup": {
-                    "title": "'스트롱홀드' 백업",
-                    "weeksAgo": "{weeks, plural, one {# 주} other {# 주}} 전"
+                    "title": "지갑 백업",
+                    "weeksAgo": "{weeks, plural, other {#주}} 전"
                 }
             },
             "network": {
-                "networkOperational": "네트워크 운영자",
-                "networkDegraded": "네트워크 성능저하",
-                "networkDown": "Network Disconnected",
+                "networkOperational": "네트워크 정상",
+                "networkDegraded": "네트워크 성능 저하됨",
+                "networkDown": "네트워크 연결 끊김",
                 "status": "상태",
                 "messagesPerSecond": "초당 메세지",
                 "confirmationRate": "승인율"
@@ -312,39 +312,39 @@
     },
     "popups": {
         "password": {
-            "title": "비밀번호가 필요합니다.",
-            "subtitle": "'스트롱홀드'를 열기위해서 지갑 비밀번호를 입력하세요."
+            "title": "비밀번호 필요",
+            "subtitle": "Stronghold를 잠금 해제하기 위해 지갑 비밀번호를 입력하세요."
         },
         "qr": {
             "title": "나의 QR 코드"
         },
         "version": {
             "title": "현재 버전: {version}",
-            "upToDateTitle": "'파이어플라이'는 최신버전입니다.",
-            "upToDateDescription": "가장 최신의 안전한 '파이어플라이' 버전을 사용하고 있습니다.",
-            "updateAvailable": "'파이어플라이' 업데이트 가능",
+            "upToDateTitle": "Firefly가 최신 버전임",
+            "upToDateDescription": "안전한 Firefly 최신 버전을 사용하고 있습니다.",
+            "updateAvailable": "Firefly 업데이트 가능",
             "updateDetails": "버전 {version} - {date}"
         },
         "backup": {
-            "title": "최종 백업: {date}",
-            "lastBackup": "{date} 일에 최종 백업했습니다",
-            "backupDescription": "계정과 거래기록의 카피본을 유지하기 위해서, 규칙적으로 백업하는 것이 중요합니다.",
-            "backupWarning": "백업과 '복구문장'을 잃어버리면, 당신의 자금에 접근할 수 없게 됩니다.",
+            "title": "마지막 백업: {date}",
+            "lastBackup": "{date} 마지막으로 백업했습니다",
+            "backupDescription": "계정과 거래 기록의 사본을 유지하기 위해 규칙적으로 백업하는 것이 중요합니다.",
+            "backupWarning": "백업과 복원 문구를 잃어버리게 될 경우 지갑 잔고를 잃게 됩니다.",
             "notBackedUp": "백업되지 않음",
-            "notBackedUpDescription": "'스트롱홀드'를 백업하지 않았습니다."
+            "notBackedUpDescription": "아직 Stronghold를 백업하지 않았습니다."
         },
         "deleteAccount": {
-            "title": "Remove {name}?",
-            "body": "You can add this account back later but you may lose your transaction history.",
-            "typePassword": "Type your wallet password to confirm.",
-            "deleteAccount": "Remove account",
-            "errorTitle": "Unable to remove {name}",
-            "errorBody1": "To remove an account it must have 0 balance.",
-            "errorBody2": "이 계정에 잔액이 {balance} 만큼 남아있습니다. 이것을 다른 계정으로 옮기고 다시 시도하세요.",
-            "errorBody3": "You cannot remove this account, you must have at least one."
+            "title": "{name} 계정을 삭제할까요?",
+            "body": "나중에 이 계정을 다시 추가할 수 있지만 거래 내역은 복원되지 않습니다.",
+            "typePassword": "계정을 삭제하려면 지갑 비밀번호를 입력하세요.",
+            "deleteAccount": "계정 삭제",
+            "errorTitle": "{name} 계정을 삭제할 수 없습니다",
+            "errorBody1": "계정을 삭제하기 위해서는 잔액이 0이어야 합니다.",
+            "errorBody2": "이 계정에 잔액 {balance}가 남아있습니다. 이 잔액을 다른 계정으로 옮기고 다시 시도해 주세요.",
+            "errorBody3": "이 계정은 삭제할 수 없습니다. 하나 이상의 계정이 있어야 합니다."
         },
         "addressHistory": {
-            "title": "{name} 계정 주소이력",
+            "title": "{name} 계정 주소 이력",
             "currentBalance": "현재 잔액: {balance}"
         },
         "node": {
@@ -362,8 +362,8 @@
             "empty": "오류 로그가 비어 있습니다."
         },
         "deleteProfile": {
-            "title": "프로필 삭제",
-            "confirmation": "이 프로필을 삭제 하시겠습니까? 이 작업은 되돌릴수 없습니다."
+            "title": "사용자 삭제",
+            "confirmation": "이 사용자를 삭제할까요? 이 작업은 취소할 수 없습니다."
         },
         "diagnostics": {
             "title": "진단",
@@ -373,13 +373,13 @@
             "platformArchitecture": "플랫폼 구조",
             "cpuCount": "CPU 수",
             "totalMem": "전체 메모리",
-            "freeMem": "사용가능한 메모리",
+            "freeMem": "사용 가능한 메모리",
             "userPath": "사용자 경로"
         }
     },
     "charts": {
-        "incomingMi": "수신 {value} Mi",
-        "outgoingMi": "발신 {value} Mi",
+        "incomingMi": "{value} Mi 받음",
+        "outgoingMi": "{value} Mi 받음",
         "portoflio": "포트폴리오",
         "token": "토큰",
         "accountValue": "계정 잔액",
@@ -388,51 +388,51 @@
     "actions": {
         "continue": "계속하기",
         "back": "뒤로가기",
-        "cancel": "취소하기",
+        "cancel": "취소",
         "close": "닫기",
         "dismiss": "무시하기",
         "save": "저장하기",
-        "importSeed": "기존 '시드'를 불러오기",
-        "importWallet": "기존 지갑을 불러오기",
+        "importSeed": "기존 시드 불러오기",
+        "importWallet": "기존 지갑 불러오기",
         "createWallet": "새 지갑 만들기",
         "savePassword": "비밀번호 저장하기",
-        "useBiometric": "생체인증 사용하기",
-        "setupPin": "PIN코드 설정하기",
-        "setPin": "PIN코드 설정",
-        "confirmPin": "PIN코드 확인하기",
-        "enterYourPin": "PIN코드 입력하기",
-        "saveBackupFile": "백업파일 저장하기",
-        "iveWrittenRecoveryPhrase": "'복구문장'을 옮겨 적었습니다.",
+        "useBiometric": "생체 인증 사용하기",
+        "setupPin": "PIN 번호 설정하기",
+        "setPin": "PIN 번호 설정하기",
+        "confirmPin": "PIN 번호 확인하기",
+        "enterYourPin": "PIN 번호 입력하기",
+        "saveBackupFile": "백업 파일 저장하기",
+        "iveWrittenRecoveryPhrase": "복원 문구를 옮겨 적었습니다",
         "verifyRecoveryPhrase": "복원 문구 확인",
-        "revealRecoveryPhrase": "'복구문장' 드러내기",
-        "importSeedvault": "시드볼트(SeedVault) 불러오기",
+        "revealRecoveryPhrase": "복원 문구 보이기",
+        "importSeedvault": "SeedVault 불러오기",
         "checkAgain": "다시 확인하기",
         "importFromFile": "파일에서 불러오기",
         "send": "보내기",
         "receive": "받기",
-        "create": "새로만들기",
+        "create": "새로 만들기",
         "beginTransfer": "전송하기",
         "tryAgain": "다시 시도하기",
-        "visitDiscord": "디스코드 방문하기",
+        "visitDiscord": "Discord 방문하기",
         "dragDrop": "끌어서 놓기",
-        "importExtentions": ".kdbx or .stronghold file",
+        "importExtentions": ".kbdx 또는 .stronghold 파일",
         "chooseFile": "파일을 선택하기",
         "dropHere": "여기에 파일 놓기",
         "syncAll": "모두 동기화하기",
         "export": "내보내기",
-        "exportNewStronghold": "새로운 '스트롱홀드' 내보내기",
-        "enableDeepLinks": "웹페이지 링크 활성화하기",
+        "exportNewStronghold": "새 Stronghold 내보내기",
+        "enableDeepLinks": "딥 링크 활성화",
         "enableDeveloperMode": "개발자 모드 활성화하기",
         "enableSystemNotifications": "시스템 알림 켜기",
         "exportState": "상태 내보내기",
         "outsourceProofOfWork": "원격 작업증명 수행하기",
-        "unlock": "잠금해제하기",
-        "updateFirefly": "'파이어플라이' 업데이트하기",
+        "unlock": "잠금 해제",
+        "updateFirefly": "Firefly 업데이트",
         "restartNow": "지금 다시 시작",
-        "saveBackup": "Save Stronghold backup",
+        "saveBackup": "Stronghold 백업 저장하기",
         "customizeAcount": "계정 설정",
-        "viewAddressHistory": "주소이력 보기",
-        "deleteAccount": "Remove account",
+        "viewAddressHistory": "주소 이력 보기",
+        "deleteAccount": "계정 삭제하기",
         "max": "최대",
         "addNode": "노드 추가",
         "removeNode": "노드 삭제",
@@ -449,17 +449,17 @@
         "selectAll": "모두 선택",
         "addAccount": "계정 추가",
         "checkForUpdates": "업데이트 확인",
-        "reportAnIssue": "오류 신고",
+        "reportAnIssue": "오류 보고",
         "clear": "지우기",
         "hideDetails": "세부 정보 숨기기",
         "yes": "예",
         "no": "아니오",
         "reset": "초기화",
-        "downloadRecoveryKit": "Save Recovery Kit template",
-        "skipBackup": "Skip file backup",
-        "finishSetup": "Finish setup",
-        "readDocumentation": "Read the documentation",
-        "visitFaq": "Visit FAQ"
+        "downloadRecoveryKit": "복원 양식 파일 저장하기",
+        "skipBackup": "파일 백업 건너뛰기",
+        "finishSetup": "설정 완료하기",
+        "readDocumentation": "설명서 읽기",
+        "visitFaq": "자주 묻는 질문들 보기"
     },
     "general": {
         "password": "비밀번호",
@@ -467,60 +467,60 @@
         "currentPassword": "현재 비밀번호",
         "newPassword": "새 비밀번호",
         "confirmNewPassword": "새 비밀번호 확인하기",
-        "yourSeed": "내 '시드'",
-        "recoveryPhrase": "복구문장",
+        "yourSeed": "내 시드",
+        "recoveryPhrase": "복원 문구",
         "recentActivity": "최근 활동",
         "sent": "보냄",
         "received": "받음",
-        "sendPayment": "결제하기",
-        "moveFunds": "자금 이체하기",
+        "sendPayment": "보내기",
+        "moveFunds": "내부 전송",
         "sendFunds": "자금 보내기",
-        "sendToAddress": "Send to address",
+        "sendToAddress": "주소로 보내기",
         "scanQrOrPaste": "QR 코드를 스캔하거나 주소를 복사해 붙이기",
-        "moveFundsBetweenAccounts": "계정간 자금 이체하기",
-        "sendTokensToAddress": "특정주소로 토큰 보내기",
+        "moveFundsBetweenAccounts": "계정간 잔고 보내기",
+        "sendTokensToAddress": "주소로 토큰 보내기",
         "manageAccount": "계정 관리하기",
         "customizeAcount": "사용자 계정 설정",
         "account": "계정",
-        "sendingToAddress": "특정주소로 보내는 중",
+        "sendingToAddress": "주소로 보내는 중",
         "amount": "수량",
         "addAddress": "주소 추가하기",
         "reference": "참고",
         "from": "보낸이",
         "to": "받는이",
-        "receiveFunds": "자금 받기",
+        "receiveFunds": "받기",
         "myAddress": "내 주소",
         "shareAddress": "주소 공유하기",
         "yourAddress": "내 주소",
         "generateNewAddress": "새 주소 생성하기",
         "copyAddress": "주소 복사하기",
-        "haveTextBackup": "'복구문장'을 알고 있습니다.",
-        "haveFileBackup": "복구 '파일'을 가지고 있습니다.",
-        "enterSeedOrPhrase": "'복구문장'이나 '시드'를 입력하기",
-        "uploadSeedvaultOrStronghold": "'스트롱홀드' 또는 '시드볼트' 파일 불러오기",
+        "haveTextBackup": "복원 문구를 가지고 있습니다",
+        "haveFileBackup": "백업 파일을 가지고 있습니다",
+        "enterSeedOrPhrase": "복원 문구 또는 시드 입력하기",
+        "uploadSeedvaultOrStronghold": "Stronghold 또는 SeedVault 파일 가져오기",
         "import": "불러오기",
-        "seedvault": "시드볼트(SeedVault)",
-        "stronghold": "스트롱홀드(Stronghold)",
+        "seedvault": "SeedVault",
+        "stronghold": "Stronghold",
         "language": "언어",
         "appearance": "모양새",
         "lightTheme": "밝은 테마",
         "darkTheme": "어두운 테마",
         "totalBalance": "총 잔액",
         "accountBalance": "계정 잔액",
-        "incoming": "받는중",
-        "outgoing": "보내는중",
-        "totalIn": "Total in",
-        "totalOut": "Total out",
+        "incoming": "받음",
+        "outgoing": "보냄",
+        "totalIn": "전체 받은 양",
+        "totalOut": "전체 보낸 양",
         "accounts": "계정",
-        "myAccounts": "My accounts",
-        "automaticNodeSelection": "노드 자동선택",
-        "manualNodeSelection": "노드 수동선택",
-        "profiles": "프로필",
-        "developerProfile": "개발자 프로필",
-        "dev": "개발",
+        "myAccounts": "내 계정",
+        "automaticNodeSelection": "자동으로 노드 선택",
+        "manualNodeSelection": "수동으로 노드 선택",
+        "profiles": "사용자",
+        "developerProfile": "개발자",
+        "dev": "개발자",
         "createAccount": "계정 만들기",
         "accountName": "계정 이름",
-        "latestTransactions": "최신 거래",
+        "latestTransactions": "최근 거래",
         "transactions": "거래내역",
         "security": "보안",
         "accountAddress": "계정 주소",
@@ -529,67 +529,69 @@
         "help": "도움말",
         "you": "나",
         "messageId": "메시지 ID",
-        "inputAddress": "주소 입력",
-        "receiveAddress": "입금 주소",
+        "inputAddress": "보낸 주소",
+        "receiveAddress": "받은 주소",
         "date": "날짜",
         "status": "상태",
-        "confirmed": "Confirmed",
-        "pending": "Pending",
+        "confirmed": "승인됨",
+        "pending": "처리 중",
         "noAccounts": "계정이 없습니다. 생성해 주세요.",
-        "loadingAccounts": "로딩 중. 잠시만 기다려 주세요...",
-        "addProfile": "프로필 추가",
+        "loadingAccounts": "불러오는 중입니다. 잠시만 기다려 주세요...",
+        "addProfile": "사용자 추가",
         "noRecentHistory": "최근 기록 없음",
         "transferSyncing": "계정 동기화중",
-        "transferSelectingInputs": "입력 선택",
-        "transferRemainderAddress": "입금 주소 생성",
-        "transferSigning": "거래 체결",
-        "transferPow": "PoW 수행",
-        "transferBroadcasting": "거래 처리중",
+        "transferSelectingInputs": "보낼 주소를 선택하는 중",
+        "transferRemainderAddress": "나머지를 보낼 주소를 생성하는 중",
+        "transferSigning": "거래에 서명하는 중",
+        "transferPow": "작업 증명 수행중",
+        "transferBroadcasting": "거래를 송출하는 중",
         "transferComplete": "전송 완료",
-        "creatingAccount": "계정을 만드는 중입니다. 잠시 기다려주세요...",
-        "updatingAccount": "계정을 업데이트 중입니다. 잠시 기다려주세요...",
+        "creatingAccount": "계정을 만드는 중입니다. 잠시만 기다려 주세요...",
+        "updatingAccount": "계정을 업데이트 중입니다. 잠시만 기다려 주세요...",
         "accountSyncing": "계정이 동기화 중",
         "accountSyncComplete": "계정 동기화 완료",
-        "passwordUpdating": "비밀번호 업데이트 중...",
-        "passwordSuccess": "비밀번호 업데이트 성공",
-        "passwordFailed": "비밀번호 업데이트 실패",
-        "exportingStronghold": "스트롱홀드 내보내기...",
-        "exportingStrongholdSuccess": "스트롱홀드 내보내기 성공",
-        "exportingStrongholdFailed": "스트롱홀드 내보내기 실패",
-        "pinCodeUpdating": "PIN 코드 업데이트 중...",
-        "pinCodeSuccess": "PIN 코드 업데이트 성공",
-        "pinCodeFailed": "PIN 코드 업데이트 실패",
-        "passwordStrength": "Password strength",
-        "passwordStrength0": "Bad",
-        "passwordStrength1": "Poor",
-        "passwordStrength2": "Weak",
-        "passwordStrength3": "Average",
-        "passwordStrength4": "Strong",
-        "creatingProfile": "Creating profile, please wait..."
+        "passwordUpdating": "비밀번호를 변경합니다...",
+        "passwordSuccess": "비밀번호를 성공적으로 변경하였습니다",
+        "passwordFailed": "비밀번호를 변경하지 못했습니다",
+        "exportingStronghold": "Stronghold를 내보냅니다...",
+        "exportingStrongholdSuccess": "Stronghold를 성공적으로 내보냈습니다",
+        "exportingStrongholdFailed": "Stronghold를 내보내지 못했습니다",
+        "pinCodeUpdating": "PIN 번호를 변경합니다...",
+        "pinCodeSuccess": "PIN 번호를 성공적으로 변경하였습니다",
+        "pinCodeFailed": "PIN 번호를 변경하지 못했습니다",
+        "passwordStrength": "비밀번호 강도",
+        "passwordStrength0": "나쁨",
+        "passwordStrength1": "매우 약함",
+        "passwordStrength2": "약함",
+        "passwordStrength3": "보통",
+        "passwordStrength4": "강함",
+        "creatingProfile": "사용자를 만드는 중입니다. 잠시만 기다려 주세요..."
     },
     "dates": {
         "today": "오늘",
-        "daysAgo": "{time, plural, one {# 일} other {# 일}} 전",
-        "weeksAgo": "{time, plural, one {# 주} other {# 주}} 전",
-        "monthsAgo": "{time, plural, one {# 달} other {# 달}} 전",
-        "yearsAgo": "{time, plural, one {# 년} other {# 년}} 전"
+        "yesterday": "어제",
+        "daysAgo": "{time, plural, other {#일}} 전",
+        "weeksAgo": "{time, plural, other {#주}} 전",
+        "monthsAgo": "{time, plural, other {#개월}} 전",
+        "yearsAgo": "{time, plural, other {#년}} 전"
     },
     "notifications": {
-        "valueTx": "계정 {{account}}에 {{value}}를 받는 중",
-        "confirmed": "계정 {{account}}에서 {{value}}를 보내는 거래가 성공적으로 확인되었습니다",
-        "failed": "계정 {{account}}에서 {{value}}를 보내는 거래가 실패하였습니다",
-        "downloadingUpdate": "업데이트 다운로드",
+        "valueTx": "{{account}}에 {{value}}를 받는 중",
+        "confirmed": "{{account}}에서 {{value}}를 보내는 거래가 성공적으로 승인되었습니다",
+        "confirmedInternal": "{{senderAccount}}에서 {{receiverAccount}}로 {{value}}을 보내는 거래가 승인되었습니다",
+        "failed": "{{account}}에서 {{value}}를 보내는 거래가 실패하였습니다",
+        "downloadingUpdate": "업데이트 다운로드 중",
         "updateReady": "업데이트 준비됨",
         "updateError": "업데이트 중 오류가 발생했습니다. 다시 시도해주세요.",
         "restartInstall": "재시작하여 설치",
         "calcMinutesRemaining": "남은 시간 계산중...",
-        "minutesRemaining": "{minutes, plural, one {남은 시간 1분} other {남은 시간 #분}}",
+        "minutesRemaining": "{minutes, plural, other {남은 시간 #분}}",
         "copiedToClipboard": "클립보드에 복사되었습니다."
     },
     "error": {
         "profile": {
-            "length": "프로필 이름은 {length, plural, one {1 character} other {# 자}} 보다 길 수 없습니다.",
-            "duplicate": "이 이름의 프로필이 이미 존재합니다"
+            "length": "사용자 이름은 {length, plural, other {#글자}} 보다 길 수 없습니다.",
+            "duplicate": "같은 이름의 사용자가 이미 존재합니다"
         },
         "password": {
             "doNotMatch": "비밀번호가 맞지 않습니다.",
@@ -606,48 +608,48 @@
             "similar": "흔히 사용되는 비밀번호와 유사합니다.",
             "reasonWord": "하나의 단어로 구성된 암호는 추측하기 쉽습니다.",
             "incorrect": "비밀번호가 올바르지 않습니다.",
-            "length": "비밀번호는 {length, plural, one {1 character} other {# 자}} 보다 길 수 없습니다."
+            "length": "비밀번호는 {length, plural, other {#글자}}를 초과할 없습니다."
         },
         "pincode": {
-            "length": "PIN 코드는 {length, plural, one {1 digit} other {# 자}} 길이 여야합니다.",
-            "match": "핀 코드가 일치 하지 않습니다.",
-            "incorrect": "PIN 코드가 잘못되었습니다."
+            "length": "PIN 번호는 {length, plural, other {#자리}}로 구성되어야 합니다.",
+            "match": "PIN 번호가 일치하지 않습니다.",
+            "incorrect": "PIN 번호가 잘못되었습니다."
         },
         "account": {
-            "length": "계정 이름은 {length, plural, one {1 character} other {# 자}} 보다 길 수 없습니다.",
-            "empty": "새로운 것을 만들기 전에 최신 계정을 사용해야합니다.",
-            "notEmpty": "이 계정을 삭제하기 전에 잔액을 이체해야합니다.",
-            "duplicate": "이 이름의 계정이 이미 존재합니다."
+            "length": "계정 이름은 {length, plural, other {#글자}}보다 길 수 없습니다.",
+            "empty": "새 계정을 만들기 전에 아직 사용하지 않은 기존 계정을 사용해야 합니다.",
+            "notEmpty": "이 계정을 삭제하려면 계정에 남은 잔고를 비워야 합니다.",
+            "duplicate": "같은 이름의 계정이 이미 존재합니다."
         },
         "send": {
-            "addressLength": "주소는 {length, plural, one {1 characters} other {# 자}} 길이 여야합니다.",
+            "addressLength": "주소는 {length, plural, other {#글자}}여야 합니다.",
             "amountTooHigh": "사용 가능한 잔액보다 큽니다.",
             "amountNoFloat": "단위가 'i'이면 소수점을 사용할 수 없습니다.",
             "amountInvalidFormat": "금액에 잘못된 내용이 있습니다.",
-            "amountZero": "액수는 0보다 커야 함",
+            "amountZero": "보내는 양은 0보다 커야 합니다.",
             "wrongAddressFormat": "주소는 앞에 {prefix} 로 시작합니다.",
-            "insufficientFunds": "This account has insufficient funds.",
-            "sendingDust": "You cannot send less than 1 Mi.",
-            "leavingDust": "You cannot leave less than 1 Mi on your address."
+            "insufficientFunds": "계정에 잔고가 부족합니다.",
+            "sendingDust": "1 Mi 미만은 보낼 수 없습니다.",
+            "leavingDust": "주소에 1 Mi 미만을 남겨놓을 수 없습니다."
         },
         "node": {
-            "invalid": "유효한 URL을 입력하십시오.",
-            "https": "HTTPS가 필요합니다. 보안되지 않은 HTTP 연결을 사용하도록 개발자 프로필을 설정합니다.",
-            "duplicate": "이 노드는 이미 추가되었습니다.",
-            "unsynced": "The node is not in sync.",
-            "noSynced": "No synced nodes are available."
+            "invalid": "유효한 URL을 입력하세요.",
+            "https": "HTTPS 연결이 필요합니다. 사용자를 개발자로 설정해야 보안되지 않은 HTTP 연결을 사용할 수 있습니다.",
+            "duplicate": "이미 추가된 노드입니다.",
+            "unsynced": "동기화되지 않은 노드입니다.",
+            "noSynced": "사용할 수 있는 동기화된 노드가 없습니다."
         },
         "global": {
             "generic": "문제가 발생했습니다"
         },
         "backup": {
             "invalid": "백업 파일이 인식되지 않았습니다.",
-            "destination": "백업 대상이 유효하지 않습니다.",
+            "destination": "백업 장소가 유효하지 않습니다.",
             "mnemonic": "니모닉이 유효하지 않습니다.",
-            "seedTooShort": "시드는 길이가 81 자 여야합니다. 현재 {length, plural, one {is 1} other {# 자}} 입니다.",
-            "seedCharacters": "시드에는 'A-Z' 또는 '9' 문자 만 포함되어야합니다.",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
-            "phraseUnrecognizedWord": "복구 구문에서 인식 할 수없는 단어 \"{word}\""
+            "seedTooShort": "시드의 길이는 81글자여야 합니다. 현재 길이는 {length, plural, other {#글자}}입니다.",
+            "seedCharacters": "시드에는 A부터 Z까지의 알파벳과 숫자 9만 포함되어야 합니다.",
+            "phraseWordCount": "복원 문구는 24개의 단어로 이루어지며, 현재 {length, plural, other {#}}개의 단어를 입력하였습니다.",
+            "phraseUnrecognizedWord": "복원 문구에 인식할 수 없는 단어 \"{word}\"가 있습니다"
         }
     }
 }

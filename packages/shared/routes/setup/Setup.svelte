@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, ButtonCheckbox, Illustration, Input, OnboardingLayout, Text } from 'shared/components'
     import { cleanupSignup, developerMode } from 'shared/lib/app'
-    import { hasOnlyWhitespaces } from 'shared/lib/helpers'
+    import { getTrimmedLength, validateFilenameChars } from 'shared/lib/helpers'
     import { showAppNotification } from 'shared/lib/notifications'
     import { createProfile, disposeNewProfile, newProfile, profiles } from 'shared/lib/profile'
     import { SetupType } from 'shared/lib/typings/routes'
@@ -20,14 +20,23 @@
     let isDeveloperProfile = true
     let profileName = get(newProfile)?.name ?? ''
 
-    $: isProfileNameValid = profileName && !hasOnlyWhitespaces(profileName)
+    $: isProfileNameValid = profileName && profileName.trim()
+
+    // This looks odd but sets a reactive dependency on profileName, so when it changes the error will clear
+    $: profileName, (error = '')
 
     async function handleContinueClick(setupType) {
-        if (profileName) {
+        const trimmedProfileName = profileName.trim()
+        if (trimmedProfileName) {
             let profile
             error = ''
 
-            if (profileName.length > MAX_PROFILE_NAME_LENGTH) {
+            const validateError = validateFilenameChars(trimmedProfileName)
+            if (validateError) {
+                return (error = locale(`error.account.${validateError}`))
+            }
+
+            if (getTrimmedLength(trimmedProfileName) > MAX_PROFILE_NAME_LENGTH) {
                 return (error = locale('error.profile.length', {
                     values: {
                         length: MAX_PROFILE_NAME_LENGTH,
@@ -35,11 +44,11 @@
                 }))
             }
 
-            if (get(profiles).some((profile) => profile.name === profileName)) {
+            if (get(profiles).some((profile) => profile.name === trimmedProfileName)) {
                 return (error = locale('error.profile.duplicate'))
             }
 
-            profile = createProfile(profileName, isDeveloperProfile)
+            profile = createProfile(trimmedProfileName, isDeveloperProfile)
 
             try {
                 busy = true

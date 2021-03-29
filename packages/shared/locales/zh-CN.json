@@ -2,13 +2,13 @@
     "views": {
         "onboarding1": {
             "title": "发送，接收&管理您的IOTA",
-            "body": "Firefly is the official wallet of IOTA."
+            "body": "萤火虫是爱而嗒的官方钱包。"
         },
         "legal": {
-            "title": "Privacy Policy & Terms of Service",
-            "body": "请查看隐私政策和服务条款。",
+            "title": "隐私政策和服务条款",
+            "body": "请审查隐私政策和服务条款。",
             "privacyPolicy": {
-                "title": "隐私政策",
+                "title": "看 -> 合法 -> 隐私政策 -> 标题",
                 "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -17,7 +17,7 @@
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "termsOfService": {
-                "title": "服务条款",
+                "title": "看 -> 合法 -> 服务条款 -> 标题",
                 "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -25,27 +25,27 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+            "checkbox": "我已读过和接受隐私政策和服务条款"
         },
         "appearance": {
-            "title": "外观",
-            "body": "Choose your wallet’s theme."
+            "title": "外表",
+            "body": "选择您的钱包的主题。"
         },
         "setup": {
             "title": "设置您的钱包",
-            "body1": "您可创建多个用户来分别存储您的token以确保安全。",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "body1": "您可创建多个用户配置文件来分别存储您的Token以确保安全。",
+            "body2": "现在，让我们以您的第一个配置文件名开始。以后您可以添加更多的配置文件。",
             "profileName": "配置名称"
         },
         "secure": {
-            "title": "Secure your wallet",
-            "body1": "Save and print the Recovery Kit PDF template.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
+            "title": "保障钱包的安全",
+            "body1": "保存和打印Recovery Kit PDF模板。",
+            "body2": "如果您填写Recovery Kit并安全存储它，您就能够恢复您的钱包。"
         },
         "password": {
             "title": "设置密码",
-            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
-            "body2": "It is recommended that you write down your password in your Recovery Kit."
+            "body1": "您需要一个强大的密码来保护您的资金。可使用一些单词的组合，并避免常见的短语，名称或日期。",
+            "body2": "建议您在Recovery Kit中写下您的密码。"
         },
         "protect": {
             "title": "Protect your wallet",
@@ -54,50 +54,50 @@
         },
         "pin": {
             "title": "设置PIN码",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
+            "body1": "请在下方输入 6 位数字的 PIN 码。您在登录钱包时需要输入 PIN 码。",
+            "body2": "仅使用数字"
         },
         "confirmPin": {
             "title": "请验证您的 PIN",
-            "body1": "Your PIN keeps your balance and transactions private.",
-            "body2": "Re-enter your PIN code to proceed. "
+            "body1": "您的 PIN 码将保障您的余额和交易的隐私。",
+            "body2": "请重新输入您的 PIN 码以继续操作。"
         },
         "backup": {
             "title": "请备份您的钱包",
-            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-            "body2": "请勿与任何人分享您的恢复密语。因为该密语可从任何地点接触到您的tokens。",
+            "body1": "您现在将看到一个恢复密语。请在Recovery Kit中写下它。",
+            "body2": "请勿与任何人分享您的恢复密语。因为该密语可从任何地点访问到您的Token。",
             "body3": "如果您丢失了恢复密语，您很可能会丢失您的资金。"
         },
         "recoveryPhrase": {
             "title": "恢复密语",
-            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-            "body2": "Keep this private and safely stored.",
-            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+            "body1": "在您的Recovery Kit中，按显示的准确顺序填写单词。",
+            "body2": "秘密保管并安全存储",
+            "body3": "一个书面备份非常重要。计算机常常失败，文件可能损坏。",
             "revealRecoveryPhrase": "显示恢复密语",
             "hideRecoveryPhrase": "隐藏恢复密语"
         },
         "verifyRecoveryPhrase": {
             "title": "验证恢复密语",
-            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
-            "word": "Word",
-            "verified": "Recovery phrase verified",
-            "verifiedBody": "Remember to keep it private and safely stored."
+            "body": "让我们检查你是否能正确地写下密语。请按照正确的顺序选择这些单词。",
+            "word": "单词",
+            "verified": "恢复密语已验证",
+            "verifiedBody": "请记住将它秘密保管和安全存储。"
         },
         "backupWallet": {
             "title": "备份到 Stronghold 文件",
-            "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
-            "body2": "Reasons why digital backups are important:",
-            "reason1": "Easily recover your wallet without typing in your recovery phrase",
-            "reason2": "Import your wallet to other devices",
-            "reason3": "Recover your full transaction history"
+            "body1": "请输入您的密码来备份您的钱包到一个Stronghold文件。您的密码将用来加密这个备份文件。",
+            "body2": "数字备份很重要的原因：",
+            "reason1": "轻松恢复你的钱包而不输入你的恢复密语",
+            "reason2": "导入你的钱包到其他设备",
+            "reason3": "恢复您的全部交易记录"
         },
         "recoveryPhraseSaved": {
             "title": "备份成功",
             "body": "你已经将你的钱包备份到了一个Stronghold文件。"
         },
         "congratulations": {
-            "title": "Wallet setup completed",
-            "body": "Your new wallet is ready to use."
+            "title": "钱包设置完成",
+            "body": "您的新钱包已准备使用。"
         },
         "import": {
             "title": "导入钱包",
@@ -105,14 +105,14 @@
         },
         "importFromText": {
             "title": "用恢复恢复或种子恢复你的钱包",
-            "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body2": "A recovery phrase is 24 words long (with spaces). This is used to recover an existing Firefly wallet.",
+            "body1": "种子由81个字符组成。它用于从旧的 Trinity 钱包中恢复。",
+            "body2": "恢复密语长度为24个单词(含空格)。这个密语可用于恢复已有的Firefly钱包。",
             "body3": "请输入您的种子或恢复密语",
             "seedDetected": "检测到81个字符种子",
-            "phraseDetected": "24 word recovery phrase detected"
+            "phraseDetected": "检测到24个单词恢复密语"
         },
         "importFromFile": {
-            "title": "Restore your wallet using a backup file",
+            "title": "从备份文件恢复你的钱包",
             "body": "导入备份文件以恢复您的钱包。备份可以是 Stronghold (.stronghold) 或 Trinity SeedVault (.kdbx)格式。"
         },
         "importBackupPassword": {
@@ -123,14 +123,14 @@
         "importSuccess": {
             "title": "您已成功恢复您的备份。",
             "body": "您现在可以设置您的新钱包。",
-            "seedvaultTitle": "Successfully imported",
-            "seedvaultBody": "Your password is correct, you can now continue.",
-            "strongholdTitle": "Successfully imported",
-            "strongholdBody": "Your password is correct, you can now continue."
+            "seedvaultTitle": "导入成功",
+            "seedvaultBody": "您的密码正确，您现在可以继续。",
+            "strongholdTitle": "导入成功",
+            "strongholdBody": "您的密码正确，您现在可以继续。"
         },
         "migrate": {
             "title": "迁移您的资金",
-            "body1": "这是一个将您的资金转账到您新钱包的自动化过程。我们将检查削弱您安全性的已花费地址。",
+            "body1": "这是一个将您的资金发送到您新钱包的自动化过程。我们将检查削弱您安全性的已花费地址。",
             "body2": "这可能需要一些时间。不要在迁移过程中关闭您的设备。",
             "existing": "您的旧钱包",
             "new": "您的新钱包"
@@ -151,19 +151,19 @@
             },
             "security": {
                 "title": "安全设置",
-                "description": "Change your password and adjust security-related settings"
+                "description": "更改您的密码并调整安全相关的设置"
             },
             "advancedSettings": {
                 "title": "高级设置",
-                "description": "Tools and manual settings for technical users"
+                "description": "技术用户的工具和手动设置"
             },
             "helpAndInfo": {
                 "title": "帮助和信息",
-                "description": "Find the answer to a question or get help with an issue"
+                "description": "找到问题的答案或通过提交Issue来获得帮助"
             },
             "profile": {
                 "title": "配置信息",
-                "description": "Change your profile name or set an avatar"
+                "description": "更改您的账户名称或设置头像"
             },
             "sync": {
                 "title": "同步账户",
@@ -179,27 +179,27 @@
             },
             "currency": {
                 "title": "货币",
-                "description": "Adjusts balance conversion and updates chart options"
+                "description": "调整余额换算和变更图表选项"
             },
             "notifications": {
                 "title": "通知",
-                "description": "System notifications for transaction events"
+                "description": "交易事件的系统通知"
             },
             "exportStronghold": {
-                "title": "Export Backup",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
+                "title": "导出备份",
+                "description": "导出到 Stronghold文件 - 你钱包的完整加密备份和最新交易记录。"
             },
             "appLock": {
-                "title": "Automatic Lock",
-                "description": "Time elapsed before your wallet locks and logs you out"
+                "title": "自动锁定",
+                "description": "在你的钱包锁定并注销你之前所花费的时间"
             },
             "changePassword": {
                 "title": "修改密码",
-                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
+                "description": "您的密码是用来保护您的钱包的。您必须使用一个强大的密码来保护您的资金。"
             },
             "changePincode": {
                 "title": "修改 PIN 码",
-                "description": "Your PIN keeps your balance and transactions private",
+                "description": "您的 PIN 码将保障您的余额和交易的隐私。",
                 "currentPincode": "当前 PIN 码",
                 "newPincode": "新 PIN 码",
                 "confirmNewPincode": "确认新PIN码",
@@ -211,64 +211,64 @@
             },
             "deleteProfile": {
                 "title": "删除配置文件",
-                "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
+                "description": "删除您的整个钱包、账户信息和交易历史。请确保您有一个备份。"
             },
             "deepLinks": {
                 "title": "深链接",
-                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
+                "description": "在点击 iota:// 链接时自动填写Fifrefly 的交易数据"
             },
             "developerMode": {
                 "title": "开发者模式",
-                "description": "Connect to testnets and other developer features"
+                "description": "连接到测试网和其他开发者功能"
             },
             "nodeSettings": {
                 "title": "节点设置",
-                "description": "Select Manual to choose from the node list or connect to your own node"
+                "description": "从节点列表中选择手动选择或连接到您自己的节点"
             },
             "configureNodeList": {
-                "title": "Select a node",
+                "title": "选择节点",
                 "description": ""
             },
             "proofOfWork": {
                 "title": "工作量证明",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "description": "在您的本地设备或在外包节点上完成工作量证明"
             },
             "errorLog": {
                 "title": "错误日志",
-                "description": "View errors to debug an issue"
+                "description": "查看错误以调试问题"
             },
             "diagnostics": {
                 "title": "诊断程序",
-                "description": "View system and application information"
+                "description": "查看系统和应用程序信息"
             },
             "stateExport": {
                 "title": "状态导出",
-                "description": "Export your transaction history to a .csv file"
+                "description": "将您的交易历史记录导出到.csv文件"
             },
             "troubleshoot": {
                 "title": "故障排除",
-                "description": "Use the troubleshooting wizard to solve common problems"
+                "description": "使用故障排除向导解决常见问题"
             },
             "documentation": {
                 "title": "文档",
-                "description": "View the documentation for in depth explanations of how things work"
+                "description": "查看文档，深入解释如何工作"
             },
             "faq": {
                 "title": "常见问题",
-                "title2": "Frequently Asked Questions",
-                "description": "View the FAQs to get help with a common problem or question"
+                "title2": "常见问题",
+                "description": "查看常见问题以获得帮助"
             },
             "discord": {
                 "title": "Discord",
-                "description": "Get help from the IOTA community on Discord"
+                "description": "在 Discord 上从 IOTA 社区获得帮助"
             },
             "about": {
                 "title": "关于",
                 "description": ""
             },
             "reportAnIssue": {
-                "title": "Report an issue",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
+                "title": "反馈问题",
+                "description": "向开发者反馈错误。请检查以确保它尚未被报告过。"
             }
         },
         "login": {
@@ -279,7 +279,7 @@
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "upToDate": "最新的",
+                    "upToDate": "最新版本",
                     "outOfDate": "已过期"
                 },
                 "hardwareDevice": {
@@ -287,22 +287,22 @@
                     "noneDetected": "没有检测到"
                 },
                 "strongholdStatus": {
-                    "title": "Stronghold 状态",
-                    "locked": "锁定",
-                    "unlocked": "解锁"
+                    "title": "钱包状态",
+                    "locked": "Stronghold已锁定",
+                    "unlocked": "Stronghold已解锁"
                 },
                 "strongholdBackup": {
-                    "title": "备份Stronghold",
+                    "title": "钱包备份",
                     "weeksAgo": "{weeks, plural, one {# 周} other {# 周}} 前"
                 }
             },
             "network": {
                 "networkOperational": "网络运行",
                 "networkDegraded": "网络降级",
-                "networkDown": "Network Disconnected",
+                "networkDown": "网络已断开",
                 "status": "状态",
                 "messagesPerSecond": "每秒信息数",
-                "confirmationRate": "确认速度"
+                "confirmationRate": "确认率"
             },
             "profileModal": {
                 "allSettings": "所有设置",
@@ -321,7 +321,7 @@
         "version": {
             "title": "当前版本: {version}",
             "upToDateTitle": "Firefly 目前是最新版本",
-            "upToDateDescription": "你正在运行的Firefly版本是最新，最安全的。",
+            "upToDateDescription": "你正在运行的Firefly是最新的，最安全的版本。",
             "updateAvailable": "Firefly有可用的更新",
             "updateDetails": "版本{version} - {date}"
         },
@@ -334,12 +334,12 @@
             "notBackedUpDescription": "您还没有备份您的 Stronghold"
         },
         "deleteAccount": {
-            "title": "Remove {name}?",
-            "body": "You can add this account back later but you may lose your transaction history.",
-            "typePassword": "Type your wallet password to confirm.",
-            "deleteAccount": "Remove account",
-            "errorTitle": "Unable to remove {name}",
-            "errorBody1": "To remove an account it must have 0 balance.",
+            "title": "删除{name}?",
+            "body": "您可以稍后添加此账户，但您可能会丢失您的交易历史记录。",
+            "typePassword": "请输入您的钱包密码进行确认。",
+            "deleteAccount": "删除账户",
+            "errorTitle": "无法删除 {name}",
+            "errorBody1": "你只能删除余额为0的账户",
             "errorBody2": "目前你的这个账户还有 {balance} 余额. 请把这些资金移动到另一个账户后重试。",
             "errorBody3": "您需要至少拥有一个账户后才可删除此账户。"
         },
@@ -381,7 +381,7 @@
         "incomingMi": "传入 {value} Mi",
         "outgoingMi": "发送 {value} Mi",
         "portoflio": "资产组合",
-        "token": "代币",
+        "token": "Token",
         "accountValue": "账户价值",
         "accountActivity": "帐户活动"
     },
@@ -415,7 +415,7 @@
         "tryAgain": "重试",
         "visitDiscord": "访问 Discord",
         "dragDrop": "拖放",
-        "importExtentions": ".kdbx or .stronghold file",
+        "importExtentions": ".kdbx 或 .stronghold文件",
         "chooseFile": "选择一个文件",
         "dropHere": "将您的文件拖放至此处",
         "syncAll": "全部同步",
@@ -429,10 +429,10 @@
         "unlock": "解锁",
         "updateFirefly": "更新Firefly",
         "restartNow": "立即重启",
-        "saveBackup": "Save Stronghold backup",
+        "saveBackup": "保存Stronghold备份",
         "customizeAcount": "自定义账户",
         "viewAddressHistory": "显示地址历史记录",
-        "deleteAccount": "Remove account",
+        "deleteAccount": "删除账户",
         "max": "最大",
         "addNode": "添加节点",
         "removeNode": "删除节点",
@@ -455,11 +455,11 @@
         "yes": "是",
         "no": "否",
         "reset": "重置",
-        "downloadRecoveryKit": "Save Recovery Kit template",
-        "skipBackup": "Skip file backup",
-        "finishSetup": "Finish setup",
-        "readDocumentation": "Read the documentation",
-        "visitFaq": "Visit FAQ"
+        "downloadRecoveryKit": "保存Recovery Kit模板",
+        "skipBackup": "跳过文件备份",
+        "finishSetup": "完成设置",
+        "readDocumentation": "阅读文档",
+        "visitFaq": "访问常见问题"
     },
     "general": {
         "password": "密码",
@@ -472,10 +472,10 @@
         "recentActivity": "最新活动",
         "sent": "已发送",
         "received": "已收到",
-        "sendPayment": "发送付款",
-        "moveFunds": "转移资金",
-        "sendFunds": "资金转账",
-        "sendToAddress": "Send to address",
+        "sendPayment": "发送资金",
+        "moveFunds": "内部转账",
+        "sendFunds": "发送资金",
+        "sendToAddress": "发送至地址",
         "scanQrOrPaste": "扫描二维码或粘贴地址",
         "moveFundsBetweenAccounts": "账户之间的资金转移",
         "sendTokensToAddress": "发送Token到另一个地址",
@@ -509,8 +509,8 @@
         "accountBalance": "账户余额",
         "incoming": "收到",
         "outgoing": "转出",
-        "totalIn": "Total in",
-        "totalOut": "Total out",
+        "totalIn": "收入总计",
+        "totalOut": "支出总计",
         "accounts": "帐户",
         "myAccounts": "我的账户",
         "automaticNodeSelection": "自动选择节点",
@@ -518,7 +518,7 @@
         "profiles": "用户配置",
         "developerProfile": "开发者模式",
         "dev": "开发者",
-        "createAccount": "创建一个账户",
+        "createAccount": "创建帐户",
         "accountName": "账户名称",
         "latestTransactions": "最新交易",
         "transactions": "交易",
@@ -529,7 +529,7 @@
         "help": "帮助",
         "you": "您",
         "messageId": "消息 ID",
-        "inputAddress": "输入地址",
+        "inputAddress": "发送地址",
         "receiveAddress": "接收地址",
         "date": "日期",
         "status": "状态",
@@ -560,15 +560,16 @@
         "pinCodeSuccess": "PIN 码更新成功",
         "pinCodeFailed": "PIN 码更新失败",
         "passwordStrength": "密码强度",
-        "passwordStrength0": "Bad",
-        "passwordStrength1": "Poor",
-        "passwordStrength2": "Weak",
-        "passwordStrength3": "Average",
-        "passwordStrength4": "Strong",
-        "creatingProfile": "Creating profile, please wait..."
+        "passwordStrength0": "糟糕的",
+        "passwordStrength1": "差的",
+        "passwordStrength2": "弱的",
+        "passwordStrength3": "一般",
+        "passwordStrength4": "强壮的",
+        "creatingProfile": "正在创建帐户，请稍候..."
     },
     "dates": {
         "today": "今日",
+        "yesterday": "Yesterday",
         "daysAgo": "{time, plural, one {# 天} other {# 天}} 前",
         "weeksAgo": "{time, plural, one {# 周} other {# 周}} 前",
         "monthsAgo": "{time, plural, one {# 月} other {# 月}} 前",
@@ -577,6 +578,7 @@
     "notifications": {
         "valueTx": "帐户 {{account}} 收到 {{value}}",
         "confirmed": "帐户 {{account}} 的 {{value}} 转出交易已确认",
+        "confirmedInternal": "{{value}} 从 {{senderAccount}} 到 {{receiverAccount}} 已确认",
         "failed": "帐户 {{account}} 的 {{value}} 转出交易未能成功。",
         "downloadingUpdate": "正在下载更新",
         "updateReady": "更新已准备就绪",
@@ -593,7 +595,7 @@
         },
         "password": {
             "doNotMatch": "密码不匹配。",
-            "tooWeak": "您的新密码太弱。",
+            "tooWeak": "您的新密码不够复杂。",
             "row": "连续排列的字符容易被猜到。",
             "pattern": "短键盘模式很容易被猜到。",
             "names": "常见的名字和姓氏很容易被猜测到。",
@@ -626,16 +628,16 @@
             "amountInvalidFormat": "金额似乎是一个无效的数字。",
             "amountZero": "金额必须大于零。",
             "wrongAddressFormat": "地址以前缀 {prefix} 开始。",
-            "insufficientFunds": "This account has insufficient funds.",
-            "sendingDust": "You cannot send less than 1 Mi.",
-            "leavingDust": "You cannot leave less than 1 Mi on your address."
+            "insufficientFunds": "该账户资金不足。",
+            "sendingDust": "您的发送不能小于 1 Mi。",
+            "leavingDust": "您的地址余额不能少于1Mi。"
         },
         "node": {
             "invalid": "请输入有效的URL",
             "https": "HTTPS 必须。可以设置一个开发者配置文件来使用不安全的 HTTP 连接。",
             "duplicate": "此节点已被添加。",
-            "unsynced": "The node is not in sync.",
-            "noSynced": "No synced nodes are available."
+            "unsynced": "节点未同步。",
+            "noSynced": "没有可用的同步节点。"
         },
         "global": {
             "generic": "发生了一些错误。"
@@ -646,7 +648,7 @@
             "mnemonic": "助记符无效。",
             "seedTooShort": "种子长度应该是81个字符，而它 {length, plural, one {只有 1} other {是 #}} 个。",
             "seedCharacters": "种子只能包含字符 A-Z 或 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
+            "phraseWordCount": "您的恢复密语中应该有24个单词，目前 {length, plural, one {只有 1}other {是 #}} 个单词。",
             "phraseUnrecognizedWord": "恢复短语中无法识别的单词“{word}”"
         }
     }

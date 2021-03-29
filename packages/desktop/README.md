@@ -28,6 +28,34 @@ For all platforms, the following are required:
 -   `libusb` (Debian/Ubuntu: `libusb-1.0-0-dev`)
 -   `libudev` (Debian/Ubuntu: `libudev-dev`)
 
+## Building Firefly 
+
+```
+## in the root folder
+yarn
+
+## in packages/backend/bindings/node
+yarn
+
+## in packages/desktop
+yarn build
+```
+### Dev Mode
+
+```
+# in packages/desktop
+yarn start
+```
+### Production 
+
+```
+# in packages/desktop
+yarn compile:win
+```
+Change win to your operating system - mac, win or linux.
+
+Mac users need to `return true` in the notarization script in `packages/desktop/notarization`.
+
 ## Running the Firefly Snap
 
 To run the Firefly snap properly on Linux, you may need to run the following commands:

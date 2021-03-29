@@ -1,11 +1,11 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA tokens",
-            "body": "Firefly is the official wallet of IOTA."
+            "title": "Kirim, Terima & Kelola IOTA Anda",
+            "body": "Firefly adalah dompet resmi IOTA."
         },
         "legal": {
-            "title": "Privacy Policy & Terms of Service",
+            "title": "Kebijakan Privasi dan Persyaratan Layanan",
             "body": "Harap mereviu Kebijakan Privasi dan Persyaratan Layanan.",
             "privacyPolicy": {
                 "title": "Kebijakan Privasi",
@@ -25,47 +25,47 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+            "checkbox": "Saya telah membaca dan saya menerima Kebijakan Privasi & Persyaratan Layanan"
         },
         "appearance": {
             "title": "Tampilan",
-            "body": "Choose your wallet’s theme."
+            "body": "Pilih tema dompet Anda."
         },
         "setup": {
             "title": "Atur dompet Anda",
-            "body1": "You can create multiple user profiles to keep your tokens separate and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "body1": "Anda dapat membuat beberapa profil pengguna untuk memisahkan token Anda dan meningkatkan privasi.",
+            "body2": "Untuk saat ini, mari kita mulai dengan nama profil depan Anda. Anda dapat menambahkan lebih banyak profil nanti.",
             "profileName": "Nama Profil"
         },
         "secure": {
-            "title": "Secure your wallet",
-            "body1": "Save and print the Recovery Kit PDF template.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
+            "title": "Amankan dompet Anda",
+            "body1": "Simpan dan cetak template PDF dokumen pemulihan.",
+            "body2": "Jika Anda mengisi documen Pemulihan dan menyimpannya dengan aman, Anda akan selalu dapat memulihkan dompet Anda."
         },
         "password": {
             "title": "Buat kata sandi",
-            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
-            "body2": "It is recommended that you write down your password in your Recovery Kit."
+            "body1": "Anda membutuhkan kata sandi yang aman untuk melindungi dana Anda. Gunakan kombinasi kata, dan hindari frasa, nama, atau tanggal yang umum.",
+            "body2": "Anda disarankan untuk menuliskan kata sandi di documen Pemulihan Anda."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body2": "Keep your PIN safe!"
+            "body1": "Atur kode PIN login untuk memastikan bahwa hanya Anda yang dapat memasukkan dompet Anda.",
+            "body2": "Amankan PIN Anda!"
         },
         "pin": {
             "title": "Atur kode PIN",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
+            "body1": "Masukkan PIN 6 digit di bawah. Anda akan dimintai PIN untuk mengakses profil Anda.",
+            "body2": "Gunakan angka saja"
         },
         "confirmPin": {
             "title": "Verifikasi kode PIN Anda",
-            "body1": "Your PIN keeps your balance and transactions private.",
-            "body2": "Re-enter your PIN code to proceed. "
+            "body1": "Kode PIN Anda menjaga saldo dan transaksi Anda tetap pribadi.",
+            "body2": "Masukkan kembali kode PIN Anda untuk melanjutkan. "
         },
         "backup": {
             "title": "Cadangkan dompet",
-            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+            "body1": "Kata-kata untuk pemulihan akun akan dimunculkan. Silakan tuliskan kata-kata tersebut.",
+            "body2": "Jangan bagikan kata-kata pemulihan dengan siapapun. Ini dapat digunakan untuk mengakses tokenmu.",
             "body3": "Dana Anda dapat hilang jika Anda melupakan frasa pemulihan."
         },
         "recoveryPhrase": {
@@ -79,7 +79,7 @@
         "verifyRecoveryPhrase": {
             "title": "Verifikasi frasa pemulihan",
             "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
-            "word": "Word",
+            "word": "Kata",
             "verified": "Recovery phrase verified",
             "verifiedBody": "Remember to keep it private and safely stored."
         },
@@ -287,12 +287,12 @@
                     "noneDetected": "Tidak terdeteksi"
                 },
                 "strongholdStatus": {
-                    "title": "Status stronghold",
-                    "locked": "Terkunci",
-                    "unlocked": "Tidak Terkunci"
+                    "title": "Wallet Status",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
                 },
                 "strongholdBackup": {
-                    "title": "Cadangan Stronghold",
+                    "title": "Wallet Backup",
                     "weeksAgo": "{weeks, plural, one {# minggu} other {# minggu}} yang lalu"
                 }
             },
@@ -472,8 +472,8 @@
         "recentActivity": "Aktivitas Terbaru",
         "sent": "Terkirim",
         "received": "Diterima",
-        "sendPayment": "Kirim pembayaran",
-        "moveFunds": "Memindahkan dana ke akun lain",
+        "sendPayment": "Send Payment",
+        "moveFunds": "Internal Transfer",
         "sendFunds": "Kirim dana",
         "sendToAddress": "Send to address",
         "scanQrOrPaste": "Pindai kode QR atau salin sebuah Alamat",
@@ -488,7 +488,7 @@
         "reference": "Referensi",
         "from": "Dari",
         "to": "Ke",
-        "receiveFunds": "Terima dana",
+        "receiveFunds": "Receive Funds",
         "myAddress": "Alamat Saya",
         "shareAddress": "Bagikan alamat",
         "yourAddress": "Alamat Anda",
@@ -512,13 +512,13 @@
         "totalIn": "Total in",
         "totalOut": "Total out",
         "accounts": "Akun",
-        "myAccounts": "My accounts",
+        "myAccounts": "My Accounts",
         "automaticNodeSelection": "Pilih Node otomatis",
         "manualNodeSelection": "Pilihan Node manual",
         "profiles": "Profil",
         "developerProfile": "Profil pengembang",
         "dev": "Pengembang",
-        "createAccount": "Buat akun",
+        "createAccount": "Create an Account",
         "accountName": "Nama akun",
         "latestTransactions": "Transaksi terbaru",
         "transactions": "Transaksi",
@@ -529,7 +529,7 @@
         "help": "Bantuan",
         "you": "Kamu",
         "messageId": "ID Pesan",
-        "inputAddress": "Masukan alamat",
+        "inputAddress": "Send Address",
         "receiveAddress": "Mendapatkan alamat",
         "date": "Tanggal",
         "status": "Status",
@@ -569,6 +569,7 @@
     },
     "dates": {
         "today": "Hari ini",
+        "yesterday": "Yesterday",
         "daysAgo": "{time, plural, one {# hari} other {# hari}} yang lalu",
         "weeksAgo": "{time, plural, one {# minggu} other {# minggu}} yang lalu",
         "monthsAgo": "{time, plural, one {# bulan} other {# bulan}} yang lalu",
@@ -577,6 +578,7 @@
     "notifications": {
         "valueTx": "Menerima {{value}} ke {{account}}",
         "confirmed": "Keluar {{value}} dari {{account}} telah dikonfirmasi",
+        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
         "failed": "Keluar {{value}} dari {{account}} gagal",
         "downloadingUpdate": "Mengunduh pembaruan",
         "updateReady": "Pembaruan siap",

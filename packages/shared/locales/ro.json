@@ -1,11 +1,11 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA tokens",
-            "body": "Firefly is the official wallet of IOTA."
+            "title": "Trimite, Primește și Administrează-ți monezile IOTA",
+            "body": "Firefly este portofelul oficial al IOTA."
         },
         "legal": {
-            "title": "Privacy Policy & Terms of Service",
+            "title": "Politica de confidențialitate & Termenii de utilizare",
             "body": "Te rog să revizuiești Politica de Confidențialitate și Termeni și Condiții.",
             "privacyPolicy": {
                 "title": "Politică de confidenţialitate",
@@ -25,79 +25,79 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+            "checkbox": "Am citit și sunt de acord cu Politica de confidențialitate și Termenii de utilizare"
         },
         "appearance": {
             "title": "Afișare",
-            "body": "Choose your wallet’s theme."
+            "body": "Alege tema portofelului tău."
         },
         "setup": {
             "title": "Configurează portofelul tău",
-            "body1": "You can create multiple user profiles to keep your tokens separate and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "body1": "Poți crea mai multe profiluri de utilizator pentru a îți păstra token-urile separate și pentru a îmbunătăți confidențialitatea.",
+            "body2": "Pentru moment, să începem cu primul tău nume de profil. Poți adăuga mai multe profiluri mai târziu.",
             "profileName": "Nume Profil"
         },
         "secure": {
-            "title": "Secure your wallet",
-            "body1": "Save and print the Recovery Kit PDF template.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
+            "title": "Securizează-ți portofelul",
+            "body1": "Salvează și printează șablonul PDF al kitului de recuperare.",
+            "body2": "Dacă completezi Kit-ul de recuperare și îl păstrezi în siguranță, vei putea întotdeauna să îți recuperezi portofelul."
         },
         "password": {
             "title": "Creează o parolă",
-            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
-            "body2": "It is recommended that you write down your password in your Recovery Kit."
+            "body1": "Ai nevoie de o parolă puternică pentru a îți proteja fondurile. Utilizează o combinație de cuvinte și evită frazele, numele sau datele comune.",
+            "body2": "Se recomandă să notezi parola în setul de recuperare."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body2": "Keep your PIN safe!"
+            "body1": "Configurează un cod PIN de conectare pentru a te asigura că numai tu poți deschide portofelul.",
+            "body2": "Păstrează codul PIN în siguranță!"
         },
         "pin": {
             "title": "Setează-ți un cod PIN",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
+            "body1": "Introdu un cod PIN de 6 cifre mai jos. Ți se va solicita codul PIN pentru a îți accesa profilul.",
+            "body2": "Folosește doar numere"
         },
         "confirmPin": {
             "title": "Verifică-ți codul PIN",
-            "body1": "Your PIN keeps your balance and transactions private.",
-            "body2": "Re-enter your PIN code to proceed. "
+            "body1": "PIN-ul tău îți păstrează soldul și tranzacțiile private.",
+            "body2": "Reintrodu codul tău PIN pentru a continua. "
         },
         "backup": {
             "title": "Fă o copie de rezervă a portofelului",
-            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+            "body1": "Acum ți se va afișa o frază de recuperare. Scri-o în kitul tău de recuperare.",
+            "body2": "Nu împărtăși fraza de recuperare cu nimeni. Poate fi folosită pentru a accesa token-urile de oriunde.",
             "body3": "Dacă îți pierzi fraza de recuperare, îți poți pierde fondurile."
         },
         "recoveryPhrase": {
             "title": "Frază de recuperare",
-            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-            "body2": "Keep this private and safely stored.",
-            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+            "body1": "În Kitul de Recuperare, notează cuvintele în ordinea exactă afișată.",
+            "body2": "Păstrează această frază privată și stocată în siguranță.",
+            "body3": "Este important să avem o copie de rezervă scrisă. Calculatoarele de multe ori eșuează, iar fișierele pot fi corupte.",
             "revealRecoveryPhrase": "Afișează fraza de recuperare",
             "hideRecoveryPhrase": "Ascunde fraza de recuperare"
         },
         "verifyRecoveryPhrase": {
             "title": "Verifică fraza de recuperare",
-            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
-            "word": "Word",
-            "verified": "Recovery phrase verified",
-            "verifiedBody": "Remember to keep it private and safely stored."
+            "body": "Hai să verificăm că ai notat corect fraza. Selectează cuvintele în ordinea corectă.",
+            "word": "Cuvânt",
+            "verified": "Frază de recuperare verificată",
+            "verifiedBody": "Amintește-ți să o păstrezi privată și stocată în siguranță."
         },
         "backupWallet": {
             "title": "Fă o copie de rezervă într-un fișier Stronghold",
-            "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
-            "body2": "Reasons why digital backups are important:",
-            "reason1": "Easily recover your wallet without typing in your recovery phrase",
-            "reason2": "Import your wallet to other devices",
-            "reason3": "Recover your full transaction history"
+            "body1": "Introdu parola pentru a face o cope de rezervă într-un fișier Stronghold. Parola ta este folosită pentru a cripta copia de rezervă.",
+            "body2": "Motivele pentru care copiile de rezervă digitale sunt importante:",
+            "reason1": "Recuperează cu ușurință portofelul fără a tasta fraza de recuperare",
+            "reason2": "Importă portofelul pe alte dispozitive",
+            "reason3": "Recuperează istoricul complet al tranzacțiilor"
         },
         "recoveryPhraseSaved": {
             "title": "Copie de rezervă reușită",
             "body": "Ați făcut o copie de rezervă la un Stronghold."
         },
         "congratulations": {
-            "title": "Wallet setup completed",
-            "body": "Your new wallet is ready to use."
+            "title": "Configurarea portofelului finalizată",
+            "body": "Noul tău portofel este gata de utilizare."
         },
         "import": {
             "title": "Importă un portofel",
@@ -105,14 +105,14 @@
         },
         "importFromText": {
             "title": "Restaurează-ți portofelul cu o frază de recuperare sau cu seed-ul tău",
-            "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body2": "A recovery phrase is 24 words long (with spaces). This is used to recover an existing Firefly wallet.",
+            "body1": "Un seed este format din 81 de caractere. Acesta este folosit pentru a recupera de la un portofel mai vechi Trinity.",
+            "body2": "O frază de recuperare are 24 de cuvinte lungi (cu spații). Aceasta este folosită pentru a recupera un portofel Firefly existent.",
             "body3": "Introduce parola sau fraza de recuperare",
-            "seedDetected": "81 character seed detected",
-            "phraseDetected": "24 word recovery phrase detected"
+            "seedDetected": "Seed de 81 de caractere detectat",
+            "phraseDetected": "Frază de recuperare de 24 de cuvinte detectată"
         },
         "importFromFile": {
-            "title": "Restore your wallet using a backup file",
+            "title": "Restaurează-ți portofelul folosind o copie de rezervă",
             "body": "Importă un fișier de backup pentru a-ți restaura portofelul. Copiile de siguranță pot fi Stronghold (.stronghold) sau un SeedVault Trinity (.kdbx)."
         },
         "importBackupPassword": {
@@ -123,10 +123,10 @@
         "importSuccess": {
             "title": "Ai recuperat cu succes copia de rezervă",
             "body": "Acum poți configura noul tău portofel.",
-            "seedvaultTitle": "Successfully imported",
-            "seedvaultBody": "Your password is correct, you can now continue.",
-            "strongholdTitle": "Successfully imported",
-            "strongholdBody": "Your password is correct, you can now continue."
+            "seedvaultTitle": "Importat cu succes",
+            "seedvaultBody": "Parola ta este corectă, poți continua.",
+            "strongholdTitle": "Importat cu succes",
+            "strongholdBody": "Parola ta este corectă, poți continua."
         },
         "migrate": {
             "title": "Migrează-ți fondurile",
@@ -151,19 +151,19 @@
             },
             "security": {
                 "title": "Securitate",
-                "description": "Change your password and adjust security-related settings"
+                "description": "Schimbă-ți parola și ajustează setările legate de securitate"
             },
             "advancedSettings": {
                 "title": "Setări Avansate",
-                "description": "Tools and manual settings for technical users"
+                "description": "Instrumente și setări manuale pentru utilizatorii tehnici"
             },
             "helpAndInfo": {
                 "title": "Ajutor și Informații",
-                "description": "Find the answer to a question or get help with an issue"
+                "description": "Găsește răspunsul la o întrebare sau obține ajutor cu o problemă"
             },
             "profile": {
                 "title": "Profil",
-                "description": "Change your profile name or set an avatar"
+                "description": "Schimbă-ți numele profilului sau setează un avatar"
             },
             "sync": {
                 "title": "Sincronizează conturile",
@@ -179,27 +179,27 @@
             },
             "currency": {
                 "title": "Monedă",
-                "description": "Adjusts balance conversion and updates chart options"
+                "description": "Ajustează conversia soldului și opțiunile de actualizare ale graficului"
             },
             "notifications": {
                 "title": "Notificări",
-                "description": "System notifications for transaction events"
+                "description": "Notificări de sistem pentru evenimentele tranzacției"
             },
             "exportStronghold": {
-                "title": "Export Backup",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
+                "title": "Exportă fișierul de rezervă",
+                "description": "Exportă într-un fișier Stronghold - o copie de rezervă complet criptată a portofelului tău și istoricul ultimelor tranzacții."
             },
             "appLock": {
-                "title": "Automatic Lock",
-                "description": "Time elapsed before your wallet locks and logs you out"
+                "title": "Blocare automată",
+                "description": "Timpul scurs înainte de blocarea portofelului și de a te loga"
             },
             "changePassword": {
                 "title": "Schimbă parola",
-                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
+                "description": "Parola ta este folosită pentru a-ți securiza portofelul. Trebuie să foloseşti o parolă puternică pentru a-ți proteja fondurile."
             },
             "changePincode": {
                 "title": "Schimbă codul PIN",
-                "description": "Your PIN keeps your balance and transactions private",
+                "description": "PIN-ul tău îți păstrează soldul și tranzacțiile private",
                 "currentPincode": "PIN curent",
                 "newPincode": "Noul PIN",
                 "confirmNewPincode": "Confirmã noul PIN",
@@ -210,65 +210,65 @@
                 "description": ""
             },
             "deleteProfile": {
-                "title": "Delete profile",
-                "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
+                "title": "Șterge profilul",
+                "description": "Îți șterge întregul portofel, profilul și istoricul tranzacțiilor. Asigură-te că ai o copie de rezervă."
             },
             "deepLinks": {
                 "title": "Legături profunde",
-                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
+                "description": "Completează automat datele tranzacției în Firefly la apăsarea unui link iota://"
             },
             "developerMode": {
                 "title": "Mod dezvoltator",
-                "description": "Connect to testnets and other developer features"
+                "description": "Conectează-te la servere de test și alte funcții pentru dezvoltatori"
             },
             "nodeSettings": {
                 "title": "Setările nodului",
-                "description": "Select Manual to choose from the node list or connect to your own node"
+                "description": "Selectează Manual pentru a alege din lista de noduri sau pentru a te conecta la propriul nod"
             },
             "configureNodeList": {
-                "title": "Select a node",
+                "title": "Selectează un nod",
                 "description": ""
             },
             "proofOfWork": {
                 "title": "Dovadã de lucru",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "description": "Completează dovada de lucru local pe dispozitivul tău sau externalizează către nod"
             },
             "errorLog": {
                 "title": "Jurnal de erori",
-                "description": "View errors to debug an issue"
+                "description": "Vizualizează erorile pentru a depana o problemă"
             },
             "diagnostics": {
-                "title": "Diagnostics",
-                "description": "View system and application information"
+                "title": "Diagnostice",
+                "description": "Vizualizează informațiile de sistem și ale aplicației"
             },
             "stateExport": {
                 "title": "Exportare stare",
-                "description": "Export your transaction history to a .csv file"
+                "description": "Exportă istoricul tranzacțiilor tale într-un fișier .csv"
             },
             "troubleshoot": {
                 "title": "Depanare",
-                "description": "Use the troubleshooting wizard to solve common problems"
+                "description": "Foloseşte asistentul de depanare pentru a rezolva problemele comune"
             },
             "documentation": {
                 "title": "Documentaţie",
-                "description": "View the documentation for in depth explanations of how things work"
+                "description": "Vizualizează documentația pentru explicații detaliate ale modului în care funcționează lucrurile"
             },
             "faq": {
                 "title": "Întrebări frecvente",
-                "title2": "Frequently Asked Questions",
-                "description": "View the FAQs to get help with a common problem or question"
+                "title2": "Întrebări frecvente",
+                "description": "Vezi FAQ pentru a primi ajutor cu o problemă comună sau o întrebare"
             },
             "discord": {
                 "title": "Discord",
-                "description": "Get help from the IOTA community on Discord"
+                "description": "Obține ajutor de la comunitatea IOTA pe Discord"
             },
             "about": {
                 "title": "Despre",
                 "description": ""
             },
             "reportAnIssue": {
-                "title": "Report an issue",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
+                "title": "Raportează o problemă",
+                "description": "Raportează o eroare dezvoltatorilor. Verifică pentru a te asigura că nu a fost deja raportată."
             }
         },
         "login": {
@@ -287,32 +287,32 @@
                     "noneDetected": "Niciunul detectat"
                 },
                 "strongholdStatus": {
-                    "title": "Stare Stronghold",
-                    "locked": "Blocat",
-                    "unlocked": "Deblocat"
+                    "title": "Stare portofel",
+                    "locked": "Stronghold blocat",
+                    "unlocked": "Stronghold deblocat"
                 },
                 "strongholdBackup": {
-                    "title": "Rezervă Stronghold",
+                    "title": "Copie de rezervă Portofel",
                     "weeksAgo": "{weeks, plural, one {# săptămână} other {# săptămâni}}"
                 }
             },
             "network": {
                 "networkOperational": "Rețeaua este operațională",
-                "networkDegraded": "Network Degraded",
-                "networkDown": "Network Disconnected",
-                "status": "Status",
-                "messagesPerSecond": "Messages per second",
-                "confirmationRate": "Confirmation rate"
+                "networkDegraded": "Rețea degradată",
+                "networkDown": "Rețea deconectată",
+                "status": "Stare",
+                "messagesPerSecond": "Mesaje pe secundă",
+                "confirmationRate": "Rată de confirmare"
             },
             "profileModal": {
-                "allSettings": "All settings",
-                "logout": "Log out"
+                "allSettings": "Toate setările",
+                "logout": "Deconectează-te"
             }
         }
     },
     "popups": {
         "password": {
-            "title": "Password required",
+            "title": "Parolă necesară",
             "subtitle": "Please enter your wallet password to unlock Stronghold"
         },
         "qr": {
@@ -362,11 +362,11 @@
             "empty": "The error log is empty."
         },
         "deleteProfile": {
-            "title": "Delete profile",
+            "title": "Șterge profilul",
             "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone."
         },
         "diagnostics": {
-            "title": "Diagnostics",
+            "title": "Diagnostice",
             "node": "Node",
             "platform": "Platform",
             "platformVersion": "Platform Version",
@@ -472,8 +472,8 @@
         "recentActivity": "Activitate Recentă",
         "sent": "Trimis",
         "received": "Primit",
-        "sendPayment": "Send payment",
-        "moveFunds": "Move funds",
+        "sendPayment": "Send Payment",
+        "moveFunds": "Internal Transfer",
         "sendFunds": "Trimite fonduri",
         "sendToAddress": "Send to address",
         "scanQrOrPaste": "Scanează un cod QR sau lipește o Adresă",
@@ -488,7 +488,7 @@
         "reference": "Referinţă",
         "from": "De la",
         "to": "Către",
-        "receiveFunds": "Primește fonduri",
+        "receiveFunds": "Receive Funds",
         "myAddress": "My Address",
         "shareAddress": "Partajează o adresă",
         "yourAddress": "Adresa ta",
@@ -512,13 +512,13 @@
         "totalIn": "Total in",
         "totalOut": "Total out",
         "accounts": "Conturi",
-        "myAccounts": "My accounts",
+        "myAccounts": "My Accounts",
         "automaticNodeSelection": "Automatic node selection",
         "manualNodeSelection": "Manual node selection",
         "profiles": "Profiles",
         "developerProfile": "Developer Profile",
         "dev": "Dev",
-        "createAccount": "Create an account",
+        "createAccount": "Create an Account",
         "accountName": "Account name",
         "latestTransactions": "Latest Transactions",
         "transactions": "Transactions",
@@ -529,10 +529,10 @@
         "help": "Help",
         "you": "You",
         "messageId": "Message ID",
-        "inputAddress": "Input Address",
+        "inputAddress": "Send Address",
         "receiveAddress": "Receive Address",
         "date": "Date",
-        "status": "Status",
+        "status": "Stare",
         "confirmed": "Confirmed",
         "pending": "Pending",
         "noAccounts": "You have no accounts, please create one.",
@@ -569,6 +569,7 @@
     },
     "dates": {
         "today": "Today",
+        "yesterday": "Yesterday",
         "daysAgo": "{time, plural, one {# day} other {# days}} ago",
         "weeksAgo": "{time, plural, one {# week} other {# weeks}} ago",
         "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
@@ -577,6 +578,7 @@
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
         "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
+        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
         "failed": "Outgoing {{value}} from {{account}} has failed",
         "downloadingUpdate": "Downloading update",
         "updateReady": "Update ready",

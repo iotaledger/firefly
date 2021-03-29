@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { DashboardPane } from 'shared/components'
-    import { sendParams } from 'shared/lib/app'
+    import { clearSendParams } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { priceData } from 'shared/lib/marketData'
@@ -8,7 +8,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, isStrongholdLocked } from 'shared/lib/profile'
-    import { resetWalletRoute, walletRoute } from 'shared/lib/router'
+    import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
         AccountMessage,
@@ -262,9 +262,8 @@
                         transferState.set('Complete')
 
                         setTimeout(() => {
-                            sendParams.set({ address: '', amount: 0, message: '' })
+                            clearSendParams()
                             isTransferring.set(false)
-                            resetWalletRoute()
                         }, 3000)
                     },
                     onError(err) {
@@ -341,9 +340,8 @@
                     transferState.set('Complete')
 
                     setTimeout(() => {
-                        sendParams.set({ address: '', amount: 0, message: '' })
+                        clearSendParams(true)
                         isTransferring.set(false)
-                        resetWalletRoute()
                     }, 3000)
                 },
                 onError(err) {

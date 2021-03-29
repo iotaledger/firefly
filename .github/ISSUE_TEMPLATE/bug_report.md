@@ -2,7 +2,7 @@
 name: Report an issue in wallet
 about: Create a report to help us improve
 title: ""
-labels: alphatesting
+labels: bug
 ---
 
 ## Issue description

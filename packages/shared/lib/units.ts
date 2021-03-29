@@ -7,7 +7,7 @@ Big.NE = -20
 /**
  * IOTA Units Map
  */
-const UNIT_MAP: { [unit in Unit]: { val: number; dp: number } } = {
+export const UNIT_MAP: { [unit in Unit]: { val: number; dp: number } } = {
     i: { val: 1, dp: 0 },
     Ki: { val: 1000, dp: 3 },
     Mi: { val: 1000000, dp: 6 },
