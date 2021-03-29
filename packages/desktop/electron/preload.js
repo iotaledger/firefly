@@ -22,7 +22,13 @@ const Electron = {
     DeepLinkManager,
     NotificationManager,
     getStrongholdBackupDestination: (defaultPath) => {
-        return ipcRenderer.invoke('show-save-dialog', { properties: ['createDirectory', 'showOverwriteConfirmation'], defaultPath }).then((result) => {
+        return ipcRenderer.invoke('show-save-dialog', { 
+            properties: ['createDirectory', 'showOverwriteConfirmation'], 
+            defaultPath,
+            filters: [
+                { name: 'Stronghold Files', extensions: ['stronghold'] }
+            ]
+        }).then((result) => {
             if (result.canceled) {
                 return null
             }
