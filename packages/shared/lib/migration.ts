@@ -2,9 +2,13 @@ import { get, writable, Writable } from 'svelte/store'
 import type { MigrationData } from 'shared/lib/typings/migration'
 import { api } from 'shared/lib/wallet'
 
-export const MIGRATION_NODE = 'https://nodes.devnet.iota.org'
+export const MIGRATION_NODE = 'https://nodes.iota.org'
+
+export const PERMANODE = 'https://chronicle.iota.org/api'
 
 export const ADDRESS_SECURITY_LEVEL = 2
+
+export const MINIMUM_MIGRATION_BALANCE = 1000000
 
 interface MigrationState {
     data: Writable<MigrationData>,
@@ -16,6 +20,7 @@ interface MigrationState {
  */
 export const migration = writable<MigrationState>({
     data: writable<MigrationData>({
+        lastCheckedAddressIndex: 0,
         balance: 0,
         inputs: []
     }),
@@ -32,10 +37,14 @@ export const migration = writable<MigrationState>({
  * 
  * @returns {Promise<void} 
  */
-export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0): Promise<void> => {    
+export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0): Promise<void> => {
     return new Promise((resolve, reject) => {
-        api.getMigrationData(migrationSeed, MIGRATION_NODE, ADDRESS_SECURITY_LEVEL, initialAddressIndex, {
+        console.log('Migrtaions eed', migrationSeed)
+        console.log('Initial', initialAddressIndex)
+
+        api.getMigrationData(migrationSeed, [MIGRATION_NODE], PERMANODE, ADDRESS_SECURITY_LEVEL, initialAddressIndex, {
             onSuccess(response) {
+                console.log('Response', response)
                 const { seed, data } = get(migration)
 
                 if (initialAddressIndex === 0) {

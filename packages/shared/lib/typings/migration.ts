@@ -1,6 +1,7 @@
 import type { Bridge, CommunicationIds } from './bridge'
 
 export interface MigrationData {
+    lastCheckedAddressIndex: number;
     balance: number;
     inputs: {
         address: string;
@@ -30,7 +31,8 @@ export function getMigrationData(
     bridge: Bridge,
     __ids: CommunicationIds,
     seed: string,
-    node: string,
+    nodes: string[],
+    permanode: string,
     securityLevel?: number,
     initialAddressIndex?: number
 ) {
@@ -40,7 +42,8 @@ export function getMigrationData(
         cmd: 'GetMigrationData',
         payload: {
             seed,
-            node,
+            nodes,
+            permanode,
             securityLevel,
             initialAddressIndex
         },

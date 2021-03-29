@@ -190,15 +190,23 @@ export const api = {
   setStrongholdPasswordClearInterval: function (interval: Duration): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _setStrongholdPasswordClearInterval(sendMessage, __ids, interval)
   },
-  
+
   // Migration related methods
-  getMigrationData: function (seed: string, node: string, securityLevel?: number, initialAddressIndex?: number):
+  getMigrationData: function (seed: string, nodes: string[], permanode: string, securityLevel?: number, initialAddressIndex?: number):
     ((__ids: CommunicationIds) => Promise<string>) {
-    return (__ids: CommunicationIds) => _getMigrationData(sendMessage, __ids, seed, node, securityLevel, initialAddressIndex)
+    return (__ids: CommunicationIds) => _getMigrationData(
+      sendMessage,
+      __ids,
+      seed,
+      nodes,
+      permanode,
+      securityLevel,
+      initialAddressIndex
+    )
   },
-  createMigrationBundle: function (seed: string, address: string):
+  createMigrationBundle: function (seed: string, inputIndexes: number[], mine: boolean):
     ((__ids: CommunicationIds) => Promise<string>) {
-    return (__ids: CommunicationIds) => _createMigrationBundle(sendMessage, __ids, seed, address)
+    return (__ids: CommunicationIds) => _createMigrationBundle(sendMessage, __ids, seed, inputIndexes, mine)
   },
   sendMigrationBundle: function (node: string, bundleHash: string, mwm: number):
     ((__ids: CommunicationIds) => Promise<string>) {

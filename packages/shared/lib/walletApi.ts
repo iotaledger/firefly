@@ -324,7 +324,8 @@ export interface ApiClient {
     // Migration
     getMigrationData(
         seed: string,
-        node: string,
+        nodes: string[],
+        permanode: string,
         securityLevel: number,
         initialAddressIndex: number,
         callbacks: { onSuccess: (response: Event<MigrationData>) => void, onError: (err: ErrorEventPayload) => void }

@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { Box, Button, Illustration, OnboardingLayout, Text, Toast } from 'shared/components'
     import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
-    import { migration, getMigrationData } from 'shared/lib/migration'
+    import { migration, getMigrationData, MINIMUM_MIGRATION_BALANCE } from 'shared/lib/migration'
     import { formatUnit } from 'shared/lib/units'
-    import { createEventDispatcher } from 'svelte'
+    import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
 
     export let locale
@@ -12,15 +12,24 @@
     let isCheckingForBalance
 
     const { seed, data } = $migration
-    const { balance, inputs } = $data
+    const { balance, lastCheckedAddressIndex } = $data
 
-    let fiatbalance = `${convertToFiat(
-        balance,
-        get(currencies)[CurrencyTypes.USD],
-        get(exchangeRates)[AvailableExchangeRates.USD]
-    )} ${CurrencyTypes.USD}`
+    const getFiatBalance = (balance) =>
+        `${convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[AvailableExchangeRates.USD])} ${
+            CurrencyTypes.USD
+        }`
 
-    let error = balance < 1000000 // TODO: dummy 1 MIOTA
+    const hasInsufficientBalance = (balance) => balance < MINIMUM_MIGRATION_BALANCE
+
+    let fiatBalance = getFiatBalance(balance)
+    let error = hasInsufficientBalance(balance)
+    let formattedBalance = formatUnit(balance)
+
+    const unsubscribe = data.subscribe((_data) => {
+        fiatBalance = getFiatBalance(_data.balance)
+        formattedBalance = formatUnit(_data.balance)
+        error = hasInsufficientBalance(_data.balance)
+    })
 
     const dispatch = createEventDispatcher()
 
@@ -33,7 +42,7 @@
 
     function checkAgain() {
         isCheckingForBalance = true
-        getMigrationData($seed, inputs.length)
+        getMigrationData($seed, lastCheckedAddressIndex)
             .then(() => {
                 isCheckingForBalance = false
             })
@@ -42,6 +51,8 @@
                 console.error(error)
             })
     }
+
+    onDestroy(unsubscribe)
 </script>
 
 {#if mobile}
@@ -54,9 +65,9 @@
             <Box classes="bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 rounded-lg">
                 <balance class="flex flex-col flex-grow items-center py-12">
                     <div class="flex mb-2">
-                        <Text type="h2">{formatUnit(balance)}</Text>
+                        <Text type="h2">{formattedBalance}</Text>
                     </div>
-                    <Text type="p" highlighted classes="py-1 uppercase">{fiatbalance}</Text>
+                    <Text type="p" highlighted classes="py-1 uppercase">{fiatBalance}</Text>
                 </balance>
             </Box>
             {#if error}
@@ -64,8 +75,12 @@
             {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-between items-center space-x-4">
-            <Button disabled={isCheckingForBalance} secondary classes="flex-1" onClick={checkAgain}>{locale('actions.check_again')}</Button>
-            <Button disabled={isCheckingForBalance} classes="flex-1" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
+            <Button disabled={isCheckingForBalance} secondary classes="flex-1" onClick={checkAgain}>
+                {locale('actions.check_again')}
+            </Button>
+            <Button disabled={isCheckingForBalance} classes="flex-1" onClick={() => handleContinueClick()}>
+                {locale('actions.continue')}
+            </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex p-16">
             <Illustration width="100%" illustration="balance-desktop" />
