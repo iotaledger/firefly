@@ -5,6 +5,7 @@
 
     export let value = ''
     export let classes = ''
+    export let style = undefined
     export let label = undefined
     export let placeholder = undefined
     export let type = 'text'
@@ -15,6 +16,7 @@
     export let autofocus = false
     export let submitHandler = undefined
     export let disabled = false
+    export let isFocused = false
     export let maxDecimals = undefined
     export let disableContextMenu = false
 
@@ -177,7 +179,7 @@
             {maxlength}
             class="w-full text-12 leading-140 border border-solid
                 {disabled ? 'text-gray-400 dark:text-gray-700' : 'text-gray-800 dark:text-white'} bg-white dark:bg-gray-800 
-                {error ? 'border-red-300 hover:border-red-500 focus:border-red-500' : 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-blue-500 dark:focus:border-gray-600'}"
+                {isFocused ? 'border-blue-500' : error ? 'border-red-300 hover:border-red-500 focus:border-red-500' : 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-blue-500 dark:focus:border-gray-600'}"
             class:floating-active={value && label}
             on:input={handleInput}
             on:keypress={onKeyPress}
@@ -185,7 +187,8 @@
             on:contextmenu={handleContextMenu}
             {disabled}
             {...$$restProps}
-            {placeholder} />
+            {placeholder}
+            {style} />
         {#if label}
             <floating-label class:floating-active={value && label}>{label}</floating-label>
         {/if}
