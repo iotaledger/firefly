@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
+    import { onMount } from 'svelte'
 
     export let value = undefined
     export let label = undefined
@@ -11,6 +12,7 @@
     export let items = []
     export let small = false
     export let onSelect = (_) => {}
+    export let contentWidth = false
 
     let dropdown = false
     let navContainer
@@ -18,6 +20,8 @@
     let focusedItem
 
     items = sortItems ? items.sort((a, b) => (a.label > b.label ? 1 : -1)) : items
+
+    let navWidth
 
     const handleClickOutside = () => {
         dropdown = false
@@ -77,6 +81,11 @@
             }
         }
     }
+    onMount(() => {
+        if (contentWidth) {
+            navWidth = `width: ${navContainer.clientWidth + 8}px`
+        }
+    })
 </script>
 
 <style type="text/scss">
@@ -176,7 +185,7 @@
 </style>
 
 <dropdown-input
-    class="w-full relative"
+    class="relative {contentWidth ? "" : "w-full"}"
     on:click={(e) => {
         e.stopPropagation()
         toggleDropDown()
@@ -187,7 +196,8 @@
     class:active={dropdown}
     class:small
     class:floating-active={value && label}
-    class:disabled>
+    class:disabled
+    style={navWidth}>
     <div
         class="selection relative flex items-center w-full whitespace-nowrap cursor-pointer
     bg-white dark:bg-gray-800 focus:border-blue-500 {dropdown ? 'border-blue-500' : 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700'}"

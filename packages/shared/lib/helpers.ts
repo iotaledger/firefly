@@ -92,15 +92,22 @@ export const diffDates = (firstDate: Date, secondDate: Date) => {
 
     if (years > 0) {
         return { unit: 'yearsAgo', value: years }
-    } else if (months > 0) {
+    } 
+    if (months > 0) {
         return { unit: 'monthsAgo', value: months }
-    } else if (weeks > 0) {
+    } 
+    if (weeks > 0) {
         return { unit: 'weeksAgo', value: weeks }
-    } else if (days > 0) {
+    } 
+    if (days > 0) {
         return { unit: 'daysAgo', value: days }
-    } else {
-        return { unit: 'today' }
+    } 
+
+    if (firstDate.getDate() !== secondDate.getDate()) {
+        return { unit: 'yesterday' }
     }
+
+    return { unit: 'today' }
 }
 
 /**

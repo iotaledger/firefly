@@ -107,14 +107,15 @@
         {/if}
         <div class="flex space-x-2">
             <span>
-                <Dropdown small value={$chartCurrency.toUpperCase()} items={currencyDropdown} onSelect={handleCurrencySelect} />
+                <Dropdown small value={$chartCurrency.toUpperCase()} items={currencyDropdown} onSelect={handleCurrencySelect} contentWidth={true} />
             </span>
             <span>  
                 <Dropdown
                     small
                     value={TIMEFRAME_MAP[$chartTimeframe]}
                     items={Object.keys(TIMEFRAME_MAP).map((value) => ({ label: TIMEFRAME_MAP[value], value }))}
-                    onSelect={(newTimeframe) => chartTimeframe.set(newTimeframe.value)} />
+                    onSelect={(newTimeframe) => chartTimeframe.set(newTimeframe.value)}
+                    contentWidth={true} />
             </span>
         </div>
     </div>

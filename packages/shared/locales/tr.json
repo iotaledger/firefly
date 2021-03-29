@@ -569,6 +569,7 @@
     },
     "dates": {
         "today": "Bugün",
+        "yesterday": "Yesterday",
         "daysAgo": "{time, plural, one {# gün} other {# gün}} önce",
         "weeksAgo": "{time, plural, one {# hafta} other {# haftalar}} önce",
         "monthsAgo": "{time, plural, one {# ay} other {# ay}} önce",
@@ -624,18 +625,18 @@
             "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
             "amountTooHigh": "This is greater than your available balance.",
             "amountNoFloat": "If units are `i` you cannot use decimal places.",
-            "amountInvalidFormat": "The amount appears to be an invalid number.",
+            "amountInvalidFormat": "Miktar geçersiz görünüyor.",
             "amountZero": "Toplam miktar 0'dan büyük olmalıdır",
-            "wrongAddressFormat": "Addresses start with the prefix {prefix}.",
+            "wrongAddressFormat": "Adresler {prefix} ön eki ile başlar.",
             "insufficientFunds": "This account has insufficient funds.",
-            "sendingDust": "You cannot send less than 1 Mi.",
+            "sendingDust": "1 Mi den daha az gönderim yapamazsınız.",
             "leavingDust": "You cannot leave less than 1 Mi on your address."
         },
         "node": {
-            "invalid": "Please enter a valid URL.",
+            "invalid": "Lütfen geçerli bir URL giriniz.",
             "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
-            "duplicate": "This node has already been added.",
-            "unsynced": "The node is not in sync.",
+            "duplicate": "Bu sunucu zaten eklenmiş.",
+            "unsynced": "Ağ senkronize değil.",
             "noSynced": "Hiçbir düğüm mevcut değil"
         },
         "global": {

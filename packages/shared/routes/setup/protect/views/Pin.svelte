@@ -1,7 +1,7 @@
 <script lang="typescript">
-    import { OnboardingLayout, Illustration, Text, Button, Pin } from 'shared/components'
-    import { createEventDispatcher } from 'svelte'
+    import { Button, Illustration, OnboardingLayout, Pin, Text } from 'shared/components'
     import { validatePinFormat } from 'shared/lib/utils'
+    import { createEventDispatcher } from 'svelte'
 
     export let locale
     export let mobile
@@ -9,18 +9,27 @@
     export let busy = false
 
     let pinInput
+    let error = ''
 
     const dispatch = createEventDispatcher()
 
     $: confirmInput = pinCandidate !== null
-    $: valid = !!pinCandidate ? validatePinFormat(pinInput) && pinInput === pinCandidate : validatePinFormat(pinInput)
+    $: pinInput, (error = '')
 
     function onSubmit() {
-        if (valid) {
-            dispatch('next', !confirmInput ? { pinCandidate: pinInput } : null)
+        error = ''
+        if (validatePinFormat(pinInput)) {
+            if (confirmInput && pinInput !== pinCandidate) {
+                error = locale('error.pincode.match')
+            } else {
+                const pin = pinInput
+                pinInput = ''
+                dispatch('next', !confirmInput ? { pinCandidate: pin } : null)
+            }
         }
     }
     function handleBackClick() {
+        pinInput = ''
         dispatch('previous')
     }
 </script>
@@ -40,7 +49,8 @@
                     classes="w-full mx-auto block"
                     on:submit={onSubmit}
                     autofocus
-                    disabled={busy} />
+                    disabled={busy}
+                    {error} />
             {:else}
                 <Text type="h2" classes="mb-5">{locale('views.confirmPin.title')}</Text>
                 <Text type="p" secondary classes="mb-4">{locale('views.confirmPin.body1')}</Text>
@@ -51,11 +61,12 @@
                     classes="w-full mx-auto block"
                     on:submit={onSubmit}
                     autofocus
-                    disabled={busy} />
+                    disabled={busy}
+                    {error} />
             {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-            <Button classes="flex-1" disabled={!valid || busy} onClick={() => onSubmit()}>
+            <Button classes="flex-1" disabled={!validatePinFormat(pinInput) || busy} onClick={() => onSubmit()}>
                 {locale(confirmInput ? 'actions.confirmPin' : 'actions.setPin')}
             </Button>
         </div>

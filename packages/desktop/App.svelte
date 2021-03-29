@@ -109,7 +109,7 @@
         }
     }
     ::-webkit-scrollbar {
-        @apply w-1;
+        @apply w-3;
     }
     ::-webkit-scrollbar-thumb {
         @apply bg-gray-300;
