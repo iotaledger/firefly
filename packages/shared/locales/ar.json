@@ -251,24 +251,24 @@
             },
             "documentation": {
                 "title": "الوثائق",
-                "description": "View the documentation for in depth explanations of how things work"
+                "description": "عرض الوثائق لشرح متعمق لكيفية عمل الأشياء"
             },
             "faq": {
                 "title": "أسئلة متكررة",
-                "title2": "Frequently Asked Questions",
-                "description": "View the FAQs to get help with a common problem or question"
+                "title2": "الأسئلة المتكررة",
+                "description": "عرض الأسئلة المتكررة للحصول على المساعدة في مشكلة أو سؤال شائع"
             },
             "discord": {
                 "title": "ديسكورد",
-                "description": "Get help from the IOTA community on Discord"
+                "description": "الحصول على المساعدة من مجتمع IOTA على ديسكورد"
             },
             "about": {
                 "title": "حول",
                 "description": ""
             },
             "reportAnIssue": {
-                "title": "Report an issue",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
+                "title": "الإبلاغ عن مشكلة",
+                "description": "أبلغ عن خطأ للمطورين. تحقق للتأكد من أنه لم يتم الإبلاغ عنه بالفعل."
             }
         },
         "login": {
@@ -287,19 +287,19 @@
                     "noneDetected": "لم يتم التعرف على جهاز hardware"
                 },
                 "strongholdStatus": {
-                    "title": "Wallet Status",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "حالة المحفظة",
+                    "locked": "حصن Stronghold مقفل",
+                    "unlocked": "حصن Stronghold مفتوح"
                 },
                 "strongholdBackup": {
-                    "title": "Wallet Backup",
+                    "title": "النسخ الاحتياطي للمحفظة",
                     "weeksAgo": " منذ {weeks, plural, one {# اسبوع} other {# اسابيع}}"
                 }
             },
             "network": {
                 "networkOperational": "الشبكة العملية",
                 "networkDegraded": "الشبكة متضررة",
-                "networkDown": "Network Disconnected",
+                "networkDown": "تم قطع اتصال الشبكة",
                 "status": "الحالة",
                 "messagesPerSecond": "الرسائل في الثانية",
                 "confirmationRate": "معدل التأكيد"
@@ -334,14 +334,14 @@
             "notBackedUpDescription": "لم تقم بالنسخ الاحتياطي للملف المحصّن الخاص بك"
         },
         "deleteAccount": {
-            "title": "Remove {name}?",
-            "body": "You can add this account back later but you may lose your transaction history.",
-            "typePassword": "Type your wallet password to confirm.",
-            "deleteAccount": "Remove account",
-            "errorTitle": "Unable to remove {name}",
-            "errorBody1": "To remove an account it must have 0 balance.",
+            "title": "إزالة {name}؟",
+            "body": "يمكنك إضافة هذا الحساب لاحقاً ولكن قد تفقد سجل المعاملات الخاص بك.",
+            "typePassword": "اكتب كلمة مرور محفظتك للتأكيد.",
+            "deleteAccount": "إزالة الحساب",
+            "errorTitle": "غير قادر على إزالة {name}",
+            "errorBody1": "لإزالة حساب، يجب أن يكون رصيد صفر.",
             "errorBody2": "لديك حاليا {balance} متبقي على هذا الحساب. الرجاء نقل هذه الأموال إلى حساب مختلف وحاول مرة أخرى.",
-            "errorBody3": "You cannot remove this account, you must have at least one."
+            "errorBody3": "لا يمكنك إزالة هذا الحساب، يجب أن يكون لديك حساب واحد على الأقل."
         },
         "addressHistory": {
             "title": "سجل عنوان الحساب {name}",
@@ -415,7 +415,7 @@
         "tryAgain": "حاول مرة اخرى",
         "visitDiscord": "زيارة ديسكورد",
         "dragDrop": "سحب و إفلات",
-        "importExtentions": ".kdbx or .stronghold file",
+        "importExtentions": "ملف .kdbx أو .stronghold",
         "chooseFile": "اختر ملف",
         "dropHere": "أسقط ملفك هنا",
         "syncAll": "مزامنة الكل",
@@ -429,10 +429,10 @@
         "unlock": "فتح",
         "updateFirefly": "تحديث فايرفلاي",
         "restartNow": "إعادة التشغيل الآن",
-        "saveBackup": "Save Stronghold backup",
+        "saveBackup": "حفظ نسخة حصن Stronghold احتياطية",
         "customizeAcount": "تخصيص الحساب",
         "viewAddressHistory": "عرض سجل العناوين",
-        "deleteAccount": "Remove account",
+        "deleteAccount": "إزالة الحساب",
         "max": "الحد الأقصى",
         "addNode": "إضافة عقدة node",
         "removeNode": "إزالة العقدة node",
@@ -455,11 +455,11 @@
         "yes": "نعم",
         "no": "لا",
         "reset": "إعادة الضبط",
-        "downloadRecoveryKit": "Save Recovery Kit template",
-        "skipBackup": "Skip file backup",
-        "finishSetup": "Finish setup",
-        "readDocumentation": "Read the documentation",
-        "visitFaq": "Visit FAQ"
+        "downloadRecoveryKit": "حفظ مجموعة الاسترداد",
+        "skipBackup": "تخطي النسخ الاحتياطي للملف",
+        "finishSetup": "إنهاء الإعداد",
+        "readDocumentation": "قراءة الوثائق",
+        "visitFaq": "زيارة الأسئلة المكررة"
     },
     "general": {
         "password": "كلمة المرور",
@@ -472,10 +472,10 @@
         "recentActivity": "النشاط الأخير",
         "sent": "تم الارسال",
         "received": "تم الاستلام",
-        "sendPayment": "Send Payment",
-        "moveFunds": "Internal Transfer",
+        "sendPayment": "إرسال الدفع",
+        "moveFunds": "نقل داخلي",
         "sendFunds": "إرسال الأموال",
-        "sendToAddress": "Send to address",
+        "sendToAddress": "إرسال إلى العنوان",
         "scanQrOrPaste": "قراءة رمز QR أو لصق عنوان",
         "moveFundsBetweenAccounts": "نقل الأموال بين الحسابات",
         "sendTokensToAddress": "إرسال التوكينز إلى عنوان",
@@ -488,7 +488,7 @@
         "reference": "مرجع",
         "from": "مِن",
         "to": "الى",
-        "receiveFunds": "Receive Funds",
+        "receiveFunds": "استلام الأموال",
         "myAddress": "العنوان الخاص بي",
         "shareAddress": "مشاركة عنوان",
         "yourAddress": "عنوانك",
@@ -509,16 +509,16 @@
         "accountBalance": "رصيد الحساب",
         "incoming": "الواردة",
         "outgoing": "الصادرة",
-        "totalIn": "Total in",
-        "totalOut": "Total out",
+        "totalIn": "مجموع المدخول",
+        "totalOut": "إجمالي المدفوعات",
         "accounts": "الحسابات",
-        "myAccounts": "My Accounts",
+        "myAccounts": "حساباتي",
         "automaticNodeSelection": "اختيار تلقائي للعقدة node",
         "manualNodeSelection": "اختيار يدوي للعقدة node",
         "profiles": "الملفات الشخصية",
         "developerProfile": "الملف الشخصي للمبرمج",
         "dev": "المطور",
-        "createAccount": "Create an Account",
+        "createAccount": "إنشاء حساب",
         "accountName": "اسم الحساب",
         "latestTransactions": "آخر المعاملات",
         "transactions": "المعاملات",
@@ -529,7 +529,7 @@
         "help": "مساعدة",
         "you": "أنت",
         "messageId": "ID الرسالة",
-        "inputAddress": "Send Address",
+        "inputAddress": "إرسال العنوان",
         "receiveAddress": "عنوان الاستلام",
         "date": "التاريخ",
         "status": "الحالة",
@@ -559,16 +559,17 @@
         "pinCodeUpdating": "يتم تحديث رمز PIN...",
         "pinCodeSuccess": "تم تحديث رمز PIN بنجاح",
         "pinCodeFailed": "فشل تحديث رمز PIN",
-        "passwordStrength": "Password strength",
-        "passwordStrength0": "Bad",
-        "passwordStrength1": "Poor",
-        "passwordStrength2": "Weak",
-        "passwordStrength3": "Average",
-        "passwordStrength4": "Strong",
-        "creatingProfile": "Creating profile, please wait..."
+        "passwordStrength": "قوة كلمة المرور",
+        "passwordStrength0": "سيء",
+        "passwordStrength1": "ضعيف",
+        "passwordStrength2": "ضعيف",
+        "passwordStrength3": "متوسط",
+        "passwordStrength4": "قوي",
+        "creatingProfile": "يتم إنشاء الملف الشخصي، الرجاء الانتظار..."
     },
     "dates": {
         "today": "اليوم",
+        "yesterday": "Yesterday",
         "daysAgo": "منذ {time, plural, one {# يوم} other {# أيام}}",
         "weeksAgo": "منذ {time, plural, one {# اسبوع} other {# اسابيع}}",
         "monthsAgo": "منذ {time, plural, one {# شهر} other {# اشهر}}",
@@ -577,7 +578,7 @@
     "notifications": {
         "valueTx": "تلقي {{value}} إلى {{account}}",
         "confirmed": "تم تأكيد {{value}} الصادر من {{account}}",
-        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
+        "confirmedInternal": "تم تأكيد {{value}} من {{senderAccount}} إلى {{receiverAccount}}",
         "failed": "{{value}} الصادر من {{account}} فشل",
         "downloadingUpdate": "يتم تنزيل التحديث",
         "updateReady": "التحديث جاهز",
@@ -627,16 +628,16 @@
             "amountInvalidFormat": "يبدو أن المبلغ رقم غير صالح.",
             "amountZero": "يجب أن يكون المبلغ أكبر من 0.",
             "wrongAddressFormat": "تبدأ العناوين بالبادئة {prefix}.",
-            "insufficientFunds": "This account has insufficient funds.",
-            "sendingDust": "You cannot send less than 1 Mi.",
-            "leavingDust": "You cannot leave less than 1 Mi on your address."
+            "insufficientFunds": "هذا الحساب لا يملك الأموال الكافية.",
+            "sendingDust": "لا يمكنك إرسال أقل من 1 Mi.",
+            "leavingDust": "لا يمكنك ترك أقل من 1 Mi على عنوانك."
         },
         "node": {
             "invalid": "الرجاء إدخال عنوان URL صالح.",
             "https": "HTTPS مطلوب. إعداد ملف شخصي للمبرمج لاستخدام اتصالات HTTP غير آمنة.",
             "duplicate": "تمت إضافة هذه العقدة node مسبقاً.",
-            "unsynced": "The node is not in sync.",
-            "noSynced": "No synced nodes are available."
+            "unsynced": "العقدة node غير متزامنة.",
+            "noSynced": "لا يوجد عقد node متزامنة متاحة."
         },
         "global": {
             "generic": "حدث خطأ ما."
@@ -647,7 +648,7 @@
             "mnemonic": "الذاكرة غير صالحة.",
             "seedTooShort": "يجب على الseed ان يكون طولها 81 حرف, الآن طولها {length, plural, one { 1} other { #}}",
             "seedCharacters": "يجب على الseed أن تحتوي فقط على أحرف A-Z أو 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
+            "phraseWordCount": "يجب ان تتضمن عبارة الاسترداد على 24 كلمة, حالياََ تتضمن {length, plural, one { 1} other { #}}.",
             "phraseUnrecognizedWord": "كلمة غير متعرف عليها \"{word}\" في عبارة الاسترداد الخاصة بك"
         }
     }

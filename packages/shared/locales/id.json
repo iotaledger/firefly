@@ -569,6 +569,7 @@
     },
     "dates": {
         "today": "Hari ini",
+        "yesterday": "Yesterday",
         "daysAgo": "{time, plural, one {# hari} other {# hari}} yang lalu",
         "weeksAgo": "{time, plural, one {# minggu} other {# minggu}} yang lalu",
         "monthsAgo": "{time, plural, one {# bulan} other {# bulan}} yang lalu",

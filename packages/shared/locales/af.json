@@ -88,7 +88,7 @@
             "body1": "Voer jou wagwoord in om you beursie na 'n Stronghold lêer te back-up. Jou wagwoord word gebruik om die back-up te enkripteer.",
             "body2": "Redes waarom digitale back-ups belangrik is:",
             "reason1": "Herwin jou beursie maklik sonder om jou herstelfrase in te tik",
-            "reason2": "Voer jou beursie na ander toestelle in",
+            "reason2": "Verbind jou beursie na ander toestelle",
             "reason3": "Besigtig jou transaksie geskiedenis"
         },
         "recoveryPhraseSaved": {
@@ -100,7 +100,7 @@
             "body": "Jou nuwe beursie is gereed om te gebruik."
         },
         "import": {
-            "title": "Voer 'n beursie in",
+            "title": "Verbind 'n beursie",
             "body": "As jy 'n herstelfrase of 'n Stronghold back-up het, kan jy dit hier invoer."
         },
         "importFromText": {
@@ -569,10 +569,11 @@
     },
     "dates": {
         "today": "Vandag",
-        "daysAgo": "{time, plural, one {# dag} other {# dae}} ago",
-        "weeksAgo": "{time, plural, one {# week} other {# weke}} ago",
-        "monthsAgo": "{time, plural, one {# maand} other {# maande}} ago",
-        "yearsAgo": "{time, plural, one {# jaar} other {# jare}} ago"
+        "yesterday": "Gister",
+        "daysAgo": "{time, plural, one {# dag} other {# dae}} terug",
+        "weeksAgo": "{time, plural, one {# week} other {# weke}} terug",
+        "monthsAgo": "{time, plural, one {# maand} other {# maande}} terug",
+        "yearsAgo": "{time, plural, one {# jaar} other {# jare}} terug"
     },
     "notifications": {
         "valueTx": "Ontvang {{value}} na {{account}}",
