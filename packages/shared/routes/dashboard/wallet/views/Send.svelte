@@ -8,7 +8,7 @@
     import { convertUnitsNoE } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
     import { isTransferring, transferState, WalletAccount } from 'shared/lib/wallet'
-    import { getContext, onMount } from 'svelte'
+    import { getContext, onDestroy, onMount } from 'svelte'
     import type { Readable, Writable } from 'svelte/store'
 
     export let locale
@@ -33,6 +33,11 @@
 
     // This looks odd but sets a reactive dependency on amount, so when it changes the error will clear
     $: amount, (amountError = '')
+
+    const sendSubscription = sendParams.subscribe(s => {
+        selectedSendType = s.isInternal ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
+        amount = s.amount === 0 ? '' : convertUnitsNoE(s.amount, Unit.i, unit)
+    })
 
     let transferSteps: {
         [key in TransferProgressEventType | 'Complete']: {
@@ -161,6 +166,9 @@
     }
     onMount(() => {
         to = $accounts.length === 2 ? accountsDropdownItems[from.id === $accounts[0].id ? 1 : 0] : to
+    })
+    onDestroy(() => {
+        sendSubscription()
     })
 </script>
 
