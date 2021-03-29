@@ -14,6 +14,7 @@
     export let autofocus = false
     export let submitHandler = undefined
     export let disabled = false
+    export let disableContextMenu = false
 
     let inputElement
 
@@ -41,6 +42,12 @@
                     e.preventDefault()
                 }
             }
+        }
+    }
+
+    const handleContextMenu = (e) => {
+        if (disableContextMenu) {
+            e.preventDefault()
         }
     }
 
@@ -127,6 +134,7 @@
             class:floating-active={value && label}
             on:input={handleInput}
             on:keypress={onKeyPress}
+            on:contextmenu={handleContextMenu}
             {disabled}
             {...$$restProps}
             {placeholder} />
