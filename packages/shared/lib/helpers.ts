@@ -32,24 +32,62 @@ export const persistent = <T>(key: string, initialValue: T): Writable<T> => {
 }
 
 /**
+ * Get the length of a string after it has been trimmed supporting emojis
+ * @param name The string to get the length of
+ * @returns 
+ */
+export const getTrimmedLength = (name: string | undefined) => {
+    if (!name) {
+        return 0
+    }
+
+    return name.trim().match(/./gu).length
+}
+
+/**
+ * Does the string contain invalid filename chars
+ * @param name The name to validate
+ * @returns 
+ */
+ export const validateFilenameChars = (name: string | undefined) => {
+    if (!name) {
+        return
+    }
+    if (name.startsWith("~")) {
+        return 'tilde'
+    } 
+    if (/[\u0000-\u001f\u0080-\u009f]/g.test(name)) {
+        return 'control'
+    } 
+    if (/^\.\./.test(name)) {
+		return 'startDot';
+	} 
+    if (/[<>:"/\\|?*]/g.test(name)) {
+        return 'chars'
+    }
+}
+
+/**
  * Extract initials from string
  */
 export const getInitials = (name: string | undefined, maxChars: number) => {
-    if (!name) {
+    if (!name || !name.trim()) {
         return ""
     }
+
     let initialsArray = name
         .trim()
         .split(' ')
-        .map(
-            n =>
-                n?.match(/./ug)[0] // match characters for emoji compatibility 
-                    ?.toUpperCase()
-        )
+        .filter(n => n)
+        .map(n => n.match(/./ug)) // match characters for emoji compatibility 
+        .filter(n => n)
+        .map(n => n[0])
+
     if (maxChars) {
         initialsArray = initialsArray.slice(0, maxChars)
     }
-    return initialsArray.join('')
+
+    return initialsArray.join('').toUpperCase()
 }
 
 /**
@@ -159,10 +197,3 @@ export const convertHexToRGBA = (hexCode: string, opacity: number = 100) => {
 
     return `rgba(${r},${g},${b},${opacity / 100})`;
 };
-
-/**
- * Check if a string only contains whitespaces
- * @param string
- */
-
-export const hasOnlyWhitespaces = (string: string = '') => !/\S/.test(string)
