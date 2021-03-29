@@ -8,7 +8,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, isStrongholdLocked } from 'shared/lib/profile'
-    import { resetWalletRoute, walletRoute } from 'shared/lib/router'
+    import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
         AccountMessage,
@@ -267,7 +267,6 @@
                         setTimeout(() => {
                             clearSendParams()
                             isTransferring.set(false)
-                            resetWalletRoute()
                         }, 3000)
                     },
                     onError(err) {
@@ -344,9 +343,8 @@
                     transferState.set('Complete')
 
                     setTimeout(() => {
-                        clearSendParams()
+                        clearSendParams(true)
                         isTransferring.set(false)
-                        resetWalletRoute()
                     }, 3000)
                 },
                 onError(err) {

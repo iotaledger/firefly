@@ -195,11 +195,11 @@
             },
             "changePassword": {
                 "title": "Cambiar contraseña",
-                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
+                "description": "Tu contraseña se utiliza para proteger tu cartera. Debes utilizar una contraseña segura para proteger sus fondos."
             },
             "changePincode": {
                 "title": "Cambiar código PIN",
-                "description": "Your PIN keeps your balance and transactions private",
+                "description": "Tu PIN mantiene tu saldo y tus transacciones en privado",
                 "currentPincode": "PIN actual",
                 "newPincode": "Nuevo PIN",
                 "confirmNewPincode": "Confirmar nuevo PIN",
@@ -211,64 +211,64 @@
             },
             "deleteProfile": {
                 "title": "Eliminar perfil",
-                "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
+                "description": "Elimina toda la cartera, el perfil y el historial de transacciones. Asegúrate de tener una copia de seguridad."
             },
             "deepLinks": {
                 "title": "Enlaces profundos",
-                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
+                "description": "Rellenar automáticamente los datos de transacción en Firefly al hacer clic en un enlace iota://"
             },
             "developerMode": {
                 "title": "Modo de desarrollador",
-                "description": "Connect to testnets and other developer features"
+                "description": "Conectar a redes de pruebas y otras funcionalidades para desarrolladores"
             },
             "nodeSettings": {
                 "title": "Configuración de nodo",
-                "description": "Select Manual to choose from the node list or connect to your own node"
+                "description": "Selecciona Manual para elegir en la lista de nodos o conectar a tu propio nodo"
             },
             "configureNodeList": {
-                "title": "Select a node",
+                "title": "Selecciona un nodo",
                 "description": ""
             },
             "proofOfWork": {
                 "title": "Prueba de trabajo",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "description": "Completa la prueba de trabajo localmente en tu dispositivo o delégala al nodo"
             },
             "errorLog": {
                 "title": "Error de log",
-                "description": "View errors to debug an issue"
+                "description": "Ver errores para depurar un problema"
             },
             "diagnostics": {
                 "title": "Diagnóstico",
-                "description": "View system and application information"
+                "description": "Ver información del sistema y de la aplicación"
             },
             "stateExport": {
                 "title": "Exportar estado",
-                "description": "Export your transaction history to a .csv file"
+                "description": "Exporta tu historial de transacciones a un archivo .csv"
             },
             "troubleshoot": {
                 "title": "Resolución de problemas",
-                "description": "Use the troubleshooting wizard to solve common problems"
+                "description": "Usa el asistente de solución de problemas para resolver problemas comunes"
             },
             "documentation": {
                 "title": "Documentación",
-                "description": "View the documentation for in depth explanations of how things work"
+                "description": "Mira la documentación para obtener explicaciones detalladas de cómo funcionan las cosas"
             },
             "faq": {
                 "title": "Preguntas Frecuentes",
-                "title2": "Frequently Asked Questions",
-                "description": "View the FAQs to get help with a common problem or question"
+                "title2": "Preguntas frecuentes",
+                "description": "Mira las preguntas frecuentes para obtener ayuda con un problema o pregunta común"
             },
             "discord": {
                 "title": "Discord",
-                "description": "Get help from the IOTA community on Discord"
+                "description": "Obtén ayuda de la comunidad de IOTA en Discord"
             },
             "about": {
                 "title": "Acerca de",
                 "description": ""
             },
             "reportAnIssue": {
-                "title": "Report an issue",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
+                "title": "Informar de un problema",
+                "description": "Informa de un error a los desarrolladores. Comprueba que no haya sido reportado previamente."
             }
         },
         "login": {
@@ -287,19 +287,19 @@
                     "noneDetected": "Ninguna detectada"
                 },
                 "strongholdStatus": {
-                    "title": "Wallet Status",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "Estado de la cartera",
+                    "locked": "Stronghold bloqueado",
+                    "unlocked": "Stronghold desbloqueado"
                 },
                 "strongholdBackup": {
-                    "title": "Wallet Backup",
+                    "title": "Copia de seguridad de la cartera",
                     "weeksAgo": "hace {weeks, plural,one {# semana} other {# semanas}}"
                 }
             },
             "network": {
                 "networkOperational": "Red operativa",
                 "networkDegraded": "Red degradada",
-                "networkDown": "Network Disconnected",
+                "networkDown": "Red desconectada",
                 "status": "Estado",
                 "messagesPerSecond": "Mensajes por segundo",
                 "confirmationRate": "Tasa de confirmación"
@@ -334,14 +334,14 @@
             "notBackedUpDescription": "No has respaldado tu fortaleza"
         },
         "deleteAccount": {
-            "title": "Remove {name}?",
-            "body": "You can add this account back later but you may lose your transaction history.",
-            "typePassword": "Type your wallet password to confirm.",
-            "deleteAccount": "Remove account",
-            "errorTitle": "Unable to remove {name}",
-            "errorBody1": "To remove an account it must have 0 balance.",
+            "title": "¿Eliminar {name}?",
+            "body": "Puedes agregar esta cuenta más tarde, pero podrías perder el historial de transacciones.",
+            "typePassword": "Escribe la contraseña de tu cartera para confirmar.",
+            "deleteAccount": "Eliminar cuenta",
+            "errorTitle": "No se puede eliminar {name}",
+            "errorBody1": "Para eliminar una cuenta ésta debe tener saldo 0.",
             "errorBody2": "Actualmente tienes {balance} restantes en esta cuenta. Por favor, mueve estos fondos a una cuenta diferente e inténtalo de nuevo.",
-            "errorBody3": "You cannot remove this account, you must have at least one."
+            "errorBody3": "No puedes eliminar esta cuenta, debes tener al menos una."
         },
         "addressHistory": {
             "title": "{name} historial de direcciones de la cuenta",
@@ -415,7 +415,7 @@
         "tryAgain": "Inténtalo de nuevo",
         "visitDiscord": "Visita Discord",
         "dragDrop": "Arrastra y suelta",
-        "importExtentions": ".kdbx or .stronghold file",
+        "importExtentions": "Archivo .kdbx o .stronghold",
         "chooseFile": "Seleccionar un Archivo",
         "dropHere": "Coloca tu archivo aquí",
         "syncAll": "Sincronizar todo",
@@ -429,10 +429,10 @@
         "unlock": "Desbloquear",
         "updateFirefly": "Actualizar Firefly",
         "restartNow": "Reiniciar ahora",
-        "saveBackup": "Save Stronghold backup",
+        "saveBackup": "Guardar copia de seguridad de Stronghold",
         "customizeAcount": "Personalizar cuenta",
         "viewAddressHistory": "Ver historial de direcciones",
-        "deleteAccount": "Remove account",
+        "deleteAccount": "Eliminar cuenta",
         "max": "Máx",
         "addNode": "Añadir nodo",
         "removeNode": "Eliminar nodo",
@@ -455,11 +455,11 @@
         "yes": "Sí",
         "no": "No",
         "reset": "Reiniciar",
-        "downloadRecoveryKit": "Save Recovery Kit template",
-        "skipBackup": "Skip file backup",
-        "finishSetup": "Finish setup",
-        "readDocumentation": "Read the documentation",
-        "visitFaq": "Visit FAQ"
+        "downloadRecoveryKit": "Guardar plantilla de Kit de Recuperación",
+        "skipBackup": "Omitir copia de seguridad",
+        "finishSetup": "Finalizar la configuración",
+        "readDocumentation": "Leer la documentación",
+        "visitFaq": "Ver las preguntas frecuentes"
     },
     "general": {
         "password": "Contraseña",
@@ -472,10 +472,10 @@
         "recentActivity": "Actividad reciente",
         "sent": "Enviado",
         "received": "Recibido",
-        "sendPayment": "Send Payment",
-        "moveFunds": "Internal Transfer",
+        "sendPayment": "Enviar pago",
+        "moveFunds": "Transferencia interna",
         "sendFunds": "Enviar fondos",
-        "sendToAddress": "Send to address",
+        "sendToAddress": "Enviar a la dirección",
         "scanQrOrPaste": "Escanea un código QR o pega una dirección",
         "moveFundsBetweenAccounts": "Mover fondos entre cuentas",
         "sendTokensToAddress": "Enviar tokens a una dirección",
@@ -488,7 +488,7 @@
         "reference": "Nota",
         "from": "De",
         "to": "Para",
-        "receiveFunds": "Receive Funds",
+        "receiveFunds": "Recibir fondos",
         "myAddress": "Mi dirección",
         "shareAddress": "Compartir dirección",
         "yourAddress": "Su dirección",
@@ -509,16 +509,16 @@
         "accountBalance": "Saldo de la cuenta",
         "incoming": "Entrante",
         "outgoing": "Saliente",
-        "totalIn": "Total in",
-        "totalOut": "Total out",
+        "totalIn": "Total recibido",
+        "totalOut": "Total enviado",
         "accounts": "Cuentas",
-        "myAccounts": "My Accounts",
+        "myAccounts": "Mis cuentas",
         "automaticNodeSelection": "Selección automática de nodo",
         "manualNodeSelection": "Selección manual de nodo",
         "profiles": "Perfiles",
         "developerProfile": "Perfil de desarrollador",
         "dev": "Dev",
-        "createAccount": "Create an Account",
+        "createAccount": "Crear una cuenta",
         "accountName": "Nombre de cuenta",
         "latestTransactions": "Últimas transacciones",
         "transactions": "Transacciones",
@@ -529,7 +529,7 @@
         "help": "Ayuda",
         "you": "Tú",
         "messageId": "ID del mensaje",
-        "inputAddress": "Send Address",
+        "inputAddress": "Dirección remitente",
         "receiveAddress": "Dirección de recepción",
         "date": "Fecha",
         "status": "Estado",
@@ -559,9 +559,9 @@
         "pinCodeUpdating": "Actualizando código PIN...",
         "pinCodeSuccess": "Código PIN actualizado correctamente",
         "pinCodeFailed": "Error al actualizar el código PIN",
-        "passwordStrength": "Password strength",
-        "passwordStrength0": "Bad",
-        "passwordStrength1": "Poor",
+        "passwordStrength": "Seguridad de la contraseña",
+        "passwordStrength0": "Mala",
+        "passwordStrength1": "Pobre",
         "passwordStrength2": "Débil",
         "passwordStrength3": "Promedio",
         "passwordStrength4": "Fuerte",
@@ -569,7 +569,7 @@
     },
     "dates": {
         "today": "Hoy",
-        "yesterday": "Yesterday",
+        "yesterday": "Ayer",
         "daysAgo": "hace {time, plural, one {# día} other {# días}}",
         "weeksAgo": "hace {time, plural,one {# semana} other {# semanas}}",
         "monthsAgo": "hace {time, plural,one {# mes} other {# meses}}",

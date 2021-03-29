@@ -569,7 +569,7 @@
     },
     "dates": {
         "today": "Heute",
-        "yesterday": "Yesterday",
+        "yesterday": "Gestern",
         "daysAgo": "Vor {time, plural, one {# Tag} other {# Tagen}}",
         "weeksAgo": "Vor {time, plural, one {# Woche} other {# Wochen}}",
         "monthsAgo": "Vor {time, plural, one {# Monat} other {# Monaten}}",

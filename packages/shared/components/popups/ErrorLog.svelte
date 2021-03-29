@@ -1,8 +1,8 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
-    import { errorLog } from 'shared/lib/events'
-    import { setClipboard } from 'shared/lib/utils'
+    import { errorLog } from 'shared/lib/errors'
     import { closePopup } from 'shared/lib/popup'
+    import { setClipboard } from 'shared/lib/utils'
 
     export let locale
 
@@ -16,8 +16,8 @@
 
         for (const err of $errorLog) {
             str.push(new Date(err.time).toUTCString())
-            str.push(`${err.type ?? 'EmptyType'}: ${err.message ? locale(err.message) : 'Missing error message'}`)
-            str.push("")
+            str.push(`${err.type}: ${err.message}`)
+            str.push('')
         }
 
         setClipboard(str.join('\r\n'))
@@ -39,8 +39,8 @@
             <div class="mb-7">
                 <Text type="p" secondary>{new Date(error.time).toUTCString()}</Text>
                 <Text type="p">
-                    {error.type ?? 'EmptyType'}:
-                    {error.message ? locale(error.message) : 'Missing error message'}
+                    {error.type}:
+                    {error.message}
                 </Text>
             </div>
         {/each}
