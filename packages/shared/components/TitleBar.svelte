@@ -6,7 +6,7 @@
     import { Tabs } from 'shared/lib/typings/routes'
     import { wallet } from 'shared/lib/wallet'
     import tailwindConfig from 'shared/tailwind.config.js'
-    import { onMount } from 'svelte'
+    import { onDestroy, onMount } from 'svelte'
     import resolveConfig from 'tailwindcss/resolveConfig'
 
     const { accountsLoaded } = $wallet
@@ -26,7 +26,16 @@
         os = await Electron.getOS()
         isMaximized = await Electron.isMaximized()
         document.body.classList.add(`platform-${os}`)
+        window.addEventListener('resize', handleResize)
     })
+
+    onDestroy(() => {
+        window.removeEventListener('resize', handleResize)
+    })
+
+    async function handleResize() {
+        isMaximized = await Electron.isMaximized()
+    }
 </script>
 
 <div class="h-full w-full">
