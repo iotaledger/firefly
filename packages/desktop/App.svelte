@@ -4,28 +4,29 @@
     import { appSettings } from 'shared/lib/appSettings'
     import { refreshVersionDetails, versionDetails } from 'shared/lib/appUpdater'
     import { Electron } from 'shared/lib/electron'
+    import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
-    import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
+    import { dir, isLocaleLoaded, localize, setupI18n, _ } from 'shared/lib/i18n'
     import { fetchMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { dashboardRoute, initRouter, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
     import { AppRoute, Tabs } from 'shared/lib/typings/routes'
     import {
+        Appearance,
         Backup,
         Balance,
         Congratulations,
         Dashboard,
         Import,
-        Appearance,
         Legal,
         Login,
         Migrate,
         Password,
         Protect,
+        Secure,
         Settings,
         Setup,
-        Secure,
         Splash,
         Welcome,
     } from 'shared/routes'
@@ -87,6 +88,9 @@
         })
         Electron.onEvent('menu-diagnostics', async () => {
             openPopup({ type: 'diagnostics' })
+        })
+        Electron.hookErrorLogger((err) => {
+            addError(err)
         })
     })
 </script>

@@ -1,28 +1,20 @@
 import Validator, { ErrorTypes as ValidatorErrorTypes } from 'shared/lib/validator'
 import * as Wallet from 'wallet-nodejs-binding'
-import { errorLog, getErrorMessage } from './events'
-import type { Account, AccountToCreate, Balance, SyncedAccount } from './typings/account'
-import type { Address } from './typings/address'
 import type {
     CreatedAccountResponse,
     LatestAddressResponse, MessageResponse,
     ReadAccountsResponse, SetStrongholdPasswordResponse,
     SyncAccountsResponse
-} from './typings/bridge'
-import { ResponseTypes } from './typings/bridge'
-import type { ClientOptions } from './typings/client'
+} from '../typings/bridge'
+import { ResponseTypes } from '../typings/bridge'
 import type {
     BalanceChangeEventPayload,
-    ConfirmationStateChangeEventPayload,
-    ErrorEventPayload,
     Event,
-    TransactionEventPayload,
-    TransferProgressEventPayload,
-    ReattachmentEventPayload
-} from './typings/events'
-import { ErrorType } from './typings/events'
-import type { Message } from './typings/message'
-import type { StrongholdStatus, Duration } from './typings/wallet'
+    TransactionEventPayload
+} from '../typings/events'
+import { ErrorType } from '../typings/events'
+import { logError } from './errorLogger'
+import { getErrorMessage } from './walletErrors'
 
 type CallbacksStore = {
     [id: string]: CallbacksPattern
@@ -136,8 +128,7 @@ Wallet.onMessage((message: MessageResponse) => {
         // Something lower level has thrown an error
         // We should stop processing at this point
         const newError = { type: ErrorType.ClientError, message: JSON.stringify(message), time: Date.now() };
-        errorLog.update((log) => [newError, ...log])
-        console.error(newError)
+        logError(newError)
         return
     }
 
@@ -229,8 +220,7 @@ const storeCallbacks = (__id: string, type: ResponseTypes, callbacks?: Callbacks
  */
 const handleError = (type: ErrorType | ValidatorErrorTypes, error: string): { type: ErrorType | ValidatorErrorTypes, error: string } => {
     const newError = { type, message: error, time: Date.now() };
-    errorLog.update((log) => [newError, ...log])
-    console.error(newError)
+    logError(newError)
 
     // TODO: Add full type list to remove this temporary fix
     const _getError = () => {
@@ -298,46 +288,4 @@ const GenerateMiddleware = (activeProfileIdGetter: () => string) => ({
 
 export function proxyApi(activeProfileIdGetter: () => string) {
     return new Proxy(Wallet.api, GenerateMiddleware(activeProfileIdGetter))
-}
-
-export interface ApiClient {
-    generateMnemonic(callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void })
-    storeMnemonic(mnemonic: string, callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void })
-    verifyMnemonic(mnemonic: string, callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void })
-    getAccounts(callbacks: { onSuccess: (response: Event<Account[]>) => void, onError: (err: ErrorEventPayload) => void })
-    getBalance(accountId: string, callbacks: { onSuccess: (response: Event<Balance>) => void, onError: (err: ErrorEventPayload) => void })
-    latestAddress(accountId: string, callbacks: { onSuccess: (response: Event<Address>) => void, onError: (err: ErrorEventPayload) => void })
-    areLatestAddressesUnused(callbacks: { onSuccess: (response: Event<boolean>) => void, onError: (err: ErrorEventPayload) => void })
-    getUnusedAddress(accountId: string, callbacks: { onSuccess: (response: Event<Address>) => void, onError: (err: ErrorEventPayload) => void })
-    getStrongholdStatus(callbacks: { onSuccess: (response: Event<StrongholdStatus>) => void, onError: (err: ErrorEventPayload) => void })
-    syncAccounts(callbacks: { onSuccess: (response: Event<SyncedAccount[]>) => void, onError: (err: ErrorEventPayload) => void })
-    syncAccount(accountId: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    createAccount(account: AccountToCreate, callbacks: { onSuccess: (response: Event<Account>) => void, onError: (err: ErrorEventPayload) => void })
-    send(accountId: string, transfer: {
-        amount: number,
-        address: string,
-        remainder_value_strategy: {
-            strategy: string,
-        },
-        indexation: { index: string, data: number[] },
-    }, callbacks: { onSuccess: (response: Event<Message>) => void, onError: (err: ErrorEventPayload) => void })
-    internalTransfer(fromId: string, toId: string, amount: number, callbacks: { onSuccess: (response: Event<Message>) => void, onError: (err: ErrorEventPayload) => void })
-    setAlias(accountId: string, alias: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    lockStronghold(callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    setStrongholdPassword(password: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    changeStrongholdPassword(currentPassword: string, newPassword: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    backup(strongholdPath: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    restoreBackup(strongholdPath: string, password: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    removeAccount(accountId: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    setStoragePassword(newPinCode: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    removeStorage(callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    setClientOptions(clientOptions: ClientOptions, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    setStrongholdPasswordClearInterval(interval: Duration, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-
-    onStrongholdStatusChange(callbacks: { onSuccess: (response: Event<StrongholdStatus>) => void, onError: (err: ErrorEventPayload) => void })
-    onNewTransaction(callbacks: { onSuccess: (response: Event<TransactionEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
-    onReattachment(callbacks: { onSuccess: (response: Event<ReattachmentEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
-    onConfirmationStateChange(callbacks: { onSuccess: (response: Event<ConfirmationStateChangeEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
-    onBalanceChange(callbacks: { onSuccess: (response: Event<BalanceChangeEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
-    onTransferProgress(callbacks: { onSuccess: (response: Event<TransferProgressEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
 }
