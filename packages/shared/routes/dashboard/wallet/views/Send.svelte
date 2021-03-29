@@ -79,7 +79,7 @@
     $: from = $account ? format($account) : accountsDropdownItems[0]
 
     const handleSendTypeClick = (type) => {
-        selectedSendType = type
+        $sendParams.isInternal = type === SEND_TYPE.INTERNAL
         amountError = ''
     }
     const handleFromSelect = (item) => {
