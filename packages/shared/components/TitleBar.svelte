@@ -76,7 +76,7 @@
                                 height="11"
                                 stroke="currentColor"
                                 stroke-width="1.5"
-                                fill={darkModeEnabled ? fullConfig.theme.colors.gray['800'] : fullConfig.theme.colors.white} />
+                                fill={darkModeEnabled ? fullConfig.theme.colors.gray['900'] : fullConfig.theme.colors.white} />
                         {:else}
                             <rect x="2.5" y="2.5" width="11" height="11" rx="0.5" stroke="currentColor" stroke-width="1.5" />
                         {/if}
