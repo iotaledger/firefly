@@ -1,46 +1,26 @@
 <script lang="typescript">
     import { Text } from 'shared/components'
+    import type { Address } from 'shared/lib/typings/address'
+    import { formatUnit } from 'shared/lib/units'
+    import type { WalletAccount } from 'shared/lib/wallet'
+    import { date as i18nDate } from 'svelte-i18n'
+    import type { Readable } from 'svelte/store'
+    import { get } from 'svelte/store'
 
     export let locale
-    export let account
+    export let account: Readable<WalletAccount>
 
-    const dummyAddressHistory = [
-        {
-            date: '20 June 2020, 14:03',
-            address: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
-            balance: '0 Mi',
-        },
-        {
-            date: '20 June 2020, 14:03',
-            address: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
-            balance: '0 Mi',
-        },
-        {
-            date: '20 June 2020, 14:03',
-            address: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
-            balance: '0 Mi',
-        },
-        {
-            date: '20 June 2020, 14:03',
-            address: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
-            balance: '0 Mi',
-        },
-        {
-            date: '20 June 2020, 14:03',
-            address: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
-            balance: '0 Mi',
-        },
-        {
-            date: '20 June 2020, 14:03',
-            address: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
-            balance: '0 Mi',
-        },
-        {
-            date: '20 June 2020, 14:03',
-            address: 'iot1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98',
-            balance: '0 Mi',
-        },
-    ]
+    let addresses: Address[]
+    $: addresses = $account?.addresses ?? [] // TODO: sort by date when exposed
+
+    const date = get(i18nDate)(new Date(), {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+    }) // TODO: use real date when exposed
 </script>
 
 <style>
@@ -52,12 +32,14 @@
 <div class="mb-5">
     <Text type="h4">{locale('popups.addressHistory.title', { values: { name: $account.alias } })}</Text>
 </div>
-<div class="history overflow-y-auto">
-    {#each dummyAddressHistory as address}
-        <div class="mb-7 flex flex-row flex-wrap">
-            <Text type="p" secondary>{address.date}</Text>
-            <Text type="pre">{address.address}</Text>
-            <Text type="p">{locale('popups.addressHistory.currentBalance', { values: { balance: address.balance } })}</Text>
+<div class="history scrollable-y flex flex-row flex-wrap space-y-7">
+    {#each addresses as _addr}
+        <div class="flex flex-row flex-wrap space-y-1">
+            <Text type="p" secondary>{date}</Text>
+            <Text type="pre">{_addr.address}</Text>
+            <Text type="p">
+                {locale('popups.addressHistory.currentBalance', { values: { balance: formatUnit(_addr.balance) } })}
+            </Text>
         </div>
     {/each}
 </div>
