@@ -3,7 +3,7 @@ import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/
 import { localize } from 'shared/lib/i18n'
 import type { PriceData } from 'shared/lib/marketData'
 import { HistoryDataProps } from 'shared/lib/marketData'
-import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
+import { createClientOptions } from 'shared/lib/network'
 import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
 import { activeProfile, isStrongholdLocked } from 'shared/lib/profile'
 import type { Account, Account as BaseAccount, AccountToCreate, Balance, SyncedAccount } from 'shared/lib/typings/account'
@@ -319,11 +319,7 @@ export const asyncCreateAccount = () => {
         api.createAccount(
             {
                 signerType: { type: 'Stronghold' },
-                clientOptions: {
-                    node: DEFAULT_NODE,
-                    nodes: DEFAULT_NODES,
-                    network: get(network),
-                },
+                clientOptions: createClientOptions(true, true, [], ''),
             },
             {
                 onSuccess() {
@@ -1112,4 +1108,51 @@ export const prepareAccountInfo = (
         )} ${activeCurrency}`,
         color: ACCOUNT_COLORS[index % ACCOUNT_COLORS.length],
     })
+}
+
+export const updateAccountNetwork = (automaticNodeSelection, includeDefaultNodes, customNodes, primaryNodeUrl) => {
+    const clientOptions = createClientOptions(automaticNodeSelection, includeDefaultNodes, customNodes, primaryNodeUrl)
+    // const selectedNode = [...DEFAULT_NODES, ...$activeProfile?.settings.customNodes].find(
+    //     (node: Node) => node.url === option.value
+    // )
+
+    // if (selectedNode.url !== $activeProfile?.settings.node?.url) {
+    //     updateProfile('settings.node', selectedNode)
+
+    //     api.setClientOptions(
+    //         {
+    //             node: selectedNode,
+    //             nodes: [],
+    //         },
+    //         {
+    //             onSuccess(response) {
+    //                 // Update client options for accounts
+    //                 accounts.update((_accounts) =>
+    //                     _accounts.map((_account) =>
+    //                         Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+    //                             {} as WalletAccount,
+    //                             _account,
+    //                             {
+    //                                 clientOptions: Object.assign<ClientOptions, ClientOptions, ClientOptions>(
+    //                                     {} as ClientOptions,
+    //                                     _account.clientOptions,
+    //                                     {
+    //                                         nodes: [],
+    //                                         node: selectedNode,
+    //                                     }
+    //                                 ),
+    //                             }
+    //                         )
+    //                     )
+    //                 )
+    //             },
+    //             onError(err) {
+    //                 showAppNotification({
+    //                     type: 'error',
+    //                     message: locale(err.error),
+    //                 })
+    //             },
+    //         }
+    //     )
+    // }
 }

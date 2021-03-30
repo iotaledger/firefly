@@ -1,15 +1,7 @@
-import { writable } from 'svelte/store'
+import { get, writable } from 'svelte/store'
 import { Network } from './typings/client'
 import type { Node } from './typings/client'
 import { isValidUrl, isValidHttpsUrl } from './utils'
-
-export const DEFAULT_NODE: Node = {
-    url: 'https://api.hornet-0.testnet.chrysalis2.com',
-    auth: {
-        username: '',
-        password: ''
-    }
-}
 
 export const DEFAULT_NODES: Node[] = [
     'https://api.hornet-0.testnet.chrysalis2.com',
@@ -21,7 +13,8 @@ export const DEFAULT_NODES: Node[] = [
     auth: {
         username: '',
         password: ''
-    }
+    },
+    enabled: true
 }))
 
 /**
@@ -61,3 +54,12 @@ export const isNodeValid = (nodesList: Node[] = null, newNode: Node): string | u
 
     return undefined
 }
+
+export const createClientOptions = (automaticNodeSelection, includeDefaultNodes, customNodes, primaryNodeUrl) => {
+    return {
+        nodes: [],
+        node: undefined,
+        network: get(network)
+    }
+}
+

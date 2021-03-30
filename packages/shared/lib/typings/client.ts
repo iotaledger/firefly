@@ -10,12 +10,14 @@ export interface Node {
     auth?: {
         password: string
         username: string
-    }
+    },
+    enabled: boolean
 }
 
 export interface ClientOptions {
     nodes?: Node[]
     node?: Node
+    customNodes?: Node[]
     network?: Network
     localPow?: boolean
     nodeSyncEnabled?: boolean

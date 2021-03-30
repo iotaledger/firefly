@@ -1,6 +1,5 @@
 import { AvailableExchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
-import { DEFAULT_NODE } from 'shared/lib/network'
 import { generateRandomId } from 'shared/lib/utils'
 import { api } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
@@ -22,19 +21,15 @@ interface Profile {
      */
     settings: UserSettings
     isDeveloperProfile: boolean
-
 }
 
 /**
  * User Settings
  */
 export interface UserSettings {
-    outsourcePow: boolean
     currency: AvailableExchangeRates
     automaticNodeSelection: boolean
-    node: Node
-    customNodes: Node[]
-    /** Lock screen timeout in minutes */
+    includeDefaultNodes: boolean
     lockScreenTimeout: number
 }
 
@@ -93,12 +88,9 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
         lastStrongholdBackupTime: null,
         isDeveloperProfile,
         settings: {
-            outsourcePow: false,
             currency: AvailableExchangeRates.USD,
             automaticNodeSelection: true,
-            node: DEFAULT_NODE,
-            customNodes: [],
-            // Minutes
+            includeDefaultNodes: true,
             lockScreenTimeout: 5,
         },
     }

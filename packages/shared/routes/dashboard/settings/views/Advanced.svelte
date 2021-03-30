@@ -1,154 +1,51 @@
 <script lang="typescript">
-    import { Button, Checkbox, Dropdown, HR, Radio, Text } from 'shared/components'
+    import { Button, Checkbox, HR, Radio, Text } from 'shared/components'
     import { loggedIn } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
-    import { DEFAULT_NODE, DEFAULT_NODES } from 'shared/lib/network'
-    import { showAppNotification } from 'shared/lib/notifications'
+    import { DEFAULT_NODES } from 'shared/lib/network'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
-    import type { ClientOptions, Node } from 'shared/lib/typings/client'
-    import { api, isSyncing, syncAccounts, wallet, WalletAccount } from 'shared/lib/wallet'
+    import { isSyncing, syncAccounts, updateAccountNetwork, wallet } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
 
     export let locale
 
     const { accounts } = $wallet
 
-    let outsourcePowChecked = get(activeProfile)?.settings.outsourcePow
-    let deepLinkingChecked = $appSettings.deepLinking
-    let automaticNodeSelection = get(activeProfile)?.settings.automaticNodeSelection
+    let activeProfileSettings = get(activeProfile)?.settings
 
-    $: updateProfile('settings.outsourcePow', outsourcePowChecked)
+    let deepLinkingChecked = $appSettings.deepLinking
+    let automaticNodeSelection = activeProfileSettings?.automaticNodeSelection ?? true
+    let includeOfficialNodes = activeProfileSettings.includeOfficialNodes ?? true
+
+    let customNodes = []
+    let officialNodes = DEFAULT_NODES.slice()
+    let primaryNodeUrl = ''
+    let nodeContextMenu = undefined
+    let nodeContextMenuIsOfficial = false
+
+    $: {
+        if ($accounts && $accounts.length) {
+            customNodes = $accounts[0].clientOptions.customNodes ?? []
+            if ($accounts[0].clientOptions.node) {
+                primaryNodeUrl = $accounts[0].clientOptions.node.url
+            }
+        }
+    }
     $: $appSettings.deepLinking = deepLinkingChecked
     $: updateProfile('settings.automaticNodeSelection', automaticNodeSelection)
-
-    $: if (automaticNodeSelection) {
-        if ($accounts.some((account) => !account.clientOptions.nodes.length)) {
-            const _nodes = [...$activeProfile?.settings.customNodes, ...DEFAULT_NODES]
-            api.setClientOptions(
-                {
-                    ...$accounts[0].clientOptions,
-                    nodes: _nodes,
-                    node: DEFAULT_NODE,
-                },
-                {
-                    onSuccess() {
-                        updateProfile('settings.node', DEFAULT_NODE)
-                        accounts.update((_accounts) =>
-                            _accounts.map((_account) =>
-                                Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                    {} as WalletAccount,
-                                    _account,
-                                    {
-                                        clientOptions: Object.assign<ClientOptions, ClientOptions, ClientOptions>(
-                                            {} as ClientOptions,
-                                            _account.clientOptions,
-                                            {
-                                                nodes: _nodes,
-                                                node: DEFAULT_NODE,
-                                            }
-                                        ),
-                                    }
-                                )
-                            )
-                        )
-                    },
-                    onError(error) {
-                        console.error(error)
-                    },
-                }
-            )
-        }
-    } else {
-        if ($accounts.some((account) => account.clientOptions.nodes.length)) {
-            api.setClientOptions(
-                {
-                    ...$accounts[0].clientOptions,
-                    nodes: [],
-                    node: DEFAULT_NODE,
-                },
-                {
-                    onSuccess() {
-                        updateProfile('settings.node', DEFAULT_NODE)
-
-                        accounts.update((_accounts) =>
-                            _accounts.map((_account) =>
-                                Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                    {} as WalletAccount,
-                                    _account,
-                                    {
-                                        clientOptions: Object.assign<ClientOptions, ClientOptions, ClientOptions>(
-                                            {} as ClientOptions,
-                                            _account.clientOptions,
-                                            {
-                                                nodes: [],
-                                                node: DEFAULT_NODE,
-                                            }
-                                        ),
-                                    }
-                                )
-                            )
-                        )
-                    },
-                    onError(error) {
-                        console.error(error)
-                    },
-                }
-            )
-        }
-    }
-
-    function selectNode(option) {
-        const selectedNode = [...DEFAULT_NODES, ...$activeProfile?.settings.customNodes].find(
-            (node: Node) => node.url === option.value
-        )
-
-        if (selectedNode.url !== $activeProfile?.settings.node?.url) {
-            updateProfile('settings.node', selectedNode)
-
-            api.setClientOptions(
-                {
-                    node: selectedNode,
-                    nodes: [],
-                },
-                {
-                    onSuccess(response) {
-                        // Update client options for accounts
-                        accounts.update((_accounts) =>
-                            _accounts.map((_account) =>
-                                Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                    {} as WalletAccount,
-                                    _account,
-                                    {
-                                        clientOptions: Object.assign<ClientOptions, ClientOptions, ClientOptions>(
-                                            {} as ClientOptions,
-                                            _account.clientOptions,
-                                            {
-                                                nodes: [],
-                                                node: selectedNode,
-                                            }
-                                        ),
-                                    }
-                                )
-                            )
-                        )
-                    },
-                    onError(err) {
-                        showAppNotification({
-                            type: 'error',
-                            message: locale(err.error),
-                        })
-                    },
-                }
-            )
-        }
-    }
+    $: updateProfile('settings.includeOfficialNodes', includeOfficialNodes)
+    $: updateAccountNetwork(automaticNodeSelection, includeOfficialNodes, customNodes, primaryNodeUrl)
 
     function handleAddNodeClick() {
         openPopup({ type: 'addNode' })
     }
 
-    function handleRemoveNodeClick() {
+    function handlePropertiesNodeClick(nodeUrl) {
+        openPopup({ type: 'addNode' })
+    }
+
+    function handleRemoveNodeClick(nodeUrl) {
         openPopup({ type: 'removeNode' })
     }
 
@@ -173,18 +70,60 @@
         {#if !automaticNodeSelection}
             <section id="configureNodeList" class="w-3/4">
                 <Text type="h4" classes="mb-3">{locale('views.settings.configureNodeList.title')}</Text>
-                <!-- TODO: Implement full node list and correct nodes string
-                    <Text type="p" secondary classes="mb-5">{locale('views.settings.configureNodeList.description')}</Text>
-                -->
-                <Text type="h4" classes="mb-3">{locale('popups.diagnostics.node')}</Text>
-                <Dropdown
-                    onSelect={selectNode}
-                    value={$activeProfile?.settings.node?.url}
-                    items={[...DEFAULT_NODES, ...$activeProfile?.settings.customNodes].map((node) => ({
-                        value: node.url,
-                        label: node.url,
-                    }))} />
-                <!-- As client options (nodes) have association with accounts, disable "Add node" button if there are no accounts in wallet -->
+                <Text type="p" secondary classes="mb-5">{locale('views.settings.configureNodeList.description')}</Text>
+                <Checkbox label={locale('actions.includeOfficialNodeList')} bind:checked={includeOfficialNodes} classes="mb-5" />
+                <div class="flex flex-col border border-solid dark:border-gray-700 rounded-2xl overflow-hidden">
+                    {#if !includeOfficialNodes && customNodes.length === 0}
+                        <Text classes="p-3">{locale('view.settings.configureNodeList.noNodes')}</Text>
+                    {/if}
+                    {#if includeOfficialNodes}
+                        {#each officialNodes as officialNode}
+                            <div class="flex flex-row items-center justify-between h-12 p-3 dark:hover:bg-blue-400">
+                                <div class="flex flex=row">
+                                    <Text>{officialNode.url}</Text>
+                                    <Text>
+                                        {officialNode.url === primaryNodeUrl ? locale('view.settings.configureNodeList.primaryNode') : ''}
+                                    </Text>
+                                </div>
+                                <button
+                                    on:click={() => {
+                                        nodeContextMenuIsOfficial = true
+                                        nodeContextMenu = officialNode
+                                    }}
+                                    class="dark:text-white">...</button>
+                            </div>
+                        {/each}
+                    {/if}
+                    {#each customNodes as customNode}
+                        <div class="flex flex-row">
+                            <Text>{customNode.url}</Text>
+                            <Text>
+                                {customNode.url === primaryNodeUrl ? locale('view.settings.configureNodeList.primaryNode') : ''}
+                            </Text>
+                            <button
+                                on:click={() => {
+                                    nodeContextMenuIsOfficial = false
+                                    nodeContextMenu = customNode
+                                }}>...</button>
+                        </div>
+                    {/each}
+                    {#if nodeContextMenu}
+                        <div class="flex flex-col border border-solid dark:border-gray-700 rounded-2xl overflow-hidden">
+                            <button
+                                on:click={() => (nodeContextMenu.enabled = !nodeContextMenu.enabled)}>{locale(nodeContextMenu.enabled ? 'view.settings.configureNodeList.excludeNode' : 'view.settings.configureNodeList.includeNode')}</button>
+                            {#if !nodeContextMenuIsOfficial}
+                                <button
+                                    on:click={() => handlePropertiesNodeClick(nodeContextMenu.url)}>{locale('view.settings.viewDetails')}</button>
+                            {/if}
+                            <button
+                                on:click={() => (primaryNodeUrl = nodeContextMenu.url)}>{locale('view.settings.setAsPrimary')}</button>
+                            {#if !nodeContextMenuIsOfficial}
+                                <button
+                                    on:click={() => handleRemoveNodeClick(nodeContextMenu.url)}>{locale('view.settings.removeNode')}</button>
+                            {/if}
+                        </div>
+                    {/if}
+                </div>
                 <Button
                     medium
                     inlineStyle="min-width: 156px;"
@@ -193,25 +132,9 @@
                     onClick={() => handleAddNodeClick()}>
                     {locale('actions.addNode')}
                 </Button>
-                <Button
-                    medium
-                    inlineStyle="min-width: 156px;"
-                    classes="w-1/2 mt-4"
-                    onClick={() => handleRemoveNodeClick()}
-                    disabled={!$activeProfile?.settings.customNodes.find((n) => n.url === $activeProfile?.settings.node?.url)}>
-                    {locale('actions.removeNode')}
-                </Button>
             </section>
             <HR classes="pb-5 mt-5 justify-center" />
         {/if}
-        <!-- TODO: Implement remote proof of work
-        <section id="proofOfWork" class="w-3/4 opacity-50">
-            <Text type="h4" classes="mb-3">{locale('views.settings.proofOfWork.title')}</Text>
-            <Text type="p" secondary classes="mb-5">{locale('views.settings.proofOfWork.description')}</Text>
-            <Checkbox label={locale('actions.outsourceProofOfWork')} disabled bind:checked={outsourcePowChecked} />
-        </section>
-        <HR classes="pb-5 mt-5 justify-center" />
-        -->
     {/if}
     <!-- TODO: Implement and enable -->
     <section id="developerMode" class="w-3/4 opacity-50">
