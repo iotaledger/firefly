@@ -56,11 +56,14 @@ export interface IElectron {
     DeepLinkManager: IDeepLinkManager;
 
     PincodeManager: IPincodeManager;
-
     getVersionDetails(): Promise<VersionDetails>;
     updateInstall(): Promise<void>
     updateCancel(): Promise<void>
     updateDownload(): Promise<void>
+
+    // SeedVault API methods
+    importLegacySeed(buffer: any, password: string): Promise<string>;
+    validateSeedVault(buffer: any): Promise<boolean>;
 
     onEvent<K extends keyof ElectronEventMap>(eventName: K, callback: (param: ElectronEventMap[K]) => void);
 }

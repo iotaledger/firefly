@@ -146,6 +146,9 @@ module.exports = [
         },
     },
     {
+        externals: {
+            argon2: 'commonjs argon2'
+        },
         target: 'electron-main',
         entry: {
             'build/main': ['./electron/main.js'],

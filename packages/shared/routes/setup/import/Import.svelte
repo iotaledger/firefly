@@ -1,14 +1,17 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
     import { mnemonic } from 'shared/lib/app'
-    import { getMigrationData } from 'shared/lib/migration'
+    import { migration, getMigrationData } from 'shared/lib/migration'
     import { newProfile } from 'shared/lib/profile'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { BackupPassword, FileImport, Import, Success, TextImport } from './views/'
+    import { Electron } from 'shared/lib/electron'
 
     export let locale
     export let mobile
+
+    const { seed } = $migration
 
     let isGettingMigrationData = false
 
@@ -87,18 +90,31 @@
                 loading = true
 
                 try {
-                    await new Promise<void>((resolve, reject) => {
-                        api.restoreBackup(importFilePath, password, {
-                            onSuccess() {
-                                resolve()
-                            },
-                            onError(err) {
-                                reject(err)
-                            },
+                    if (importType === 'seedvault') {
+                        let isValid = await Electron.validateSeedVault(importFile)
+
+                        if (isValid) {
+                            const legacySeed = await Electron.importLegacySeed(importFile, password)
+
+                            seed.set(legacySeed)
+                        } else {
+                            console.error('Invalid SeedVault. Generate an error alert!')
+                        }
+                    } else {
+                        await new Promise<void>((resolve, reject) => {
+                            api.restoreBackup(importFilePath, password, {
+                                onSuccess() {
+                                    $newProfile.lastStrongholdBackupTime = new Date()
+                                    resolve()
+                                },
+                                onError(err) {
+                                    reject(err)
+                                },
+                            })
                         })
-                    })
+                    }
+
                     loading = false
-                    $newProfile.lastStrongholdBackupTime = new Date()
                     nextState = ImportState.Success
                 } catch (err) {
                     loading = false

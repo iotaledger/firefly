@@ -5,6 +5,7 @@ const NotificationManager = require('./lib/notificationManager')
 const { ipcRenderer, contextBridge } = require('electron')
 const { proxyApi } = require('../../shared/lib/walletApi')
 const { menuState } = require('./lib/menuState')
+const kdbx = require('./lib/kdbx')
 
 let activeProfileId = null
 
@@ -29,6 +30,36 @@ const Electron = {
             return result.filePath
         })
     },
+
+    /**
+     * Imports legacy IOTA seed
+     * 
+     * @method importLegacySeed
+     * 
+     * @param {Buffer} buffer 
+     * @param {string} password 
+     * 
+     * @returns {Promise<string>} 
+     */
+    importLegacySeed: (buffer, password) => {
+        return kdbx.importVault(buffer, password);
+    },
+
+    /**
+     * Validates Seed Vault
+     * 
+     * 
+     * @method validateSeedVault
+     * 
+     * @param {Buffer} buffer 
+     * 
+     * @returns {boolean} 
+     */
+    validateSeedVault: (buffer) => {
+        return kdbx.checkFormat(buffer);
+    },
+
+
     /**
      * Gets directory for app's configuration files
      *
@@ -44,14 +75,14 @@ const Electron = {
      *
      * @returns {Promise}
      */
-     getDiagnostics: () => ipcRenderer.invoke('diagnostics'),
-     /**
-     * Starts an update of the application
-     *
-     * @method updateDownload
-     *
-     * @returns void
-     */
+    getDiagnostics: () => ipcRenderer.invoke('diagnostics'),
+    /**
+    * Starts an update of the application
+    *
+    * @method updateDownload
+    *
+    * @returns void
+    */
     updateDownload: () => ipcRenderer.invoke('update-download'),
     /**
      * Cancels an update of the application
