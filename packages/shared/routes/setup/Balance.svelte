@@ -32,8 +32,8 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
-            <Text type="h1" classes="mb-5">{locale('views.balance.title')}</Text>
-            <Text type="p" secondary classes="mb-8">{locale('views.balance.body')}</Text>
+            <Text type="h2" classes="mb-3.5">{locale('views.balance.title')}</Text>
+            <Text type="p" secondary classes="mb-5">{locale('views.balance.body')}</Text>
             <Box classes="flex flex-col flex-grow items-center py-12 bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 rounded-lg ">
                 <Text type="h2">{formatUnit(balance)}</Text>
                 <Text type="p" highlighted classes="py-1 uppercase">{fiatbalance}</Text>
