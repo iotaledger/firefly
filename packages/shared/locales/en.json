@@ -586,7 +586,9 @@
         "restartInstall": "Restart to install",
         "calcMinutesRemaining": "Calculating minutes remaining...",
         "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
-        "copiedToClipboard": "Copied to clipboard"
+        "copiedToClipboard": "Copied to clipboard",
+        "deepLinkingIsNotEnabled": "Deep linking is not enable for the wallet.",
+        "deepLinkingInvalidFormat": "The format of the deep link was invalid."
     },
     "error": {
         "profile": {

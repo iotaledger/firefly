@@ -24,8 +24,8 @@
     }
 
     let selectedSendType = $sendParams.isInternal ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
-    let unit = Unit.Mi
-    let amount = $sendParams.amount === 0 ? '' : convertUnitsNoE($sendParams.amount, Unit.i, unit)
+    let unit = $sendParams.unit ?? Unit.Mi
+    let amount = $sendParams.amount === 0 ? '' : ($sendParams.unit ? $sendParams.amount.toString() : convertUnitsNoE($sendParams.amount, Unit.i, unit))
     let to = undefined
     let amountError = ''
     let addressPrefix = ($account ?? $accounts[0]).depositAddress.split('1')[0]

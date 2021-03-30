@@ -1,10 +1,10 @@
-import { Electron } from 'shared/lib/electron'
-import { localize } from 'shared/lib/i18n'
-import { showAppNotification } from 'shared/lib/notifications'
-import validUrl from 'valid-url'
+import { Unit } from '@iota/unit-converter';
+import { Electron } from 'shared/lib/electron';
+import { addError } from 'shared/lib/errors';
+import { localize } from 'shared/lib/i18n';
+import { showAppNotification } from 'shared/lib/notifications';
+import validUrl from 'valid-url';
 
-export const VALID_MAINNET_ADDRESS = /^iota1[02-9ac-hj-np-z]{59}$/
-export const VALID_DEVNET_ADDRESS = /^atoi1[02-9ac-hj-np-z]{59}$/
 export const ADDRESS_LENGTH = 64;
 export const PIN_LENGTH = 6;
 
@@ -23,8 +23,6 @@ export function bindEvents(element, events) {
         },
     }
 }
-
-
 
 /**
  * Validate pincode format
@@ -46,77 +44,63 @@ export const generateRandomId = (): string => {
 }
 
 /**
- * Parse a deep link (iota://)
+ * Parse a deep link for the wallet (iota://wallet)
  * @param  {string} data Deep link data
  * @return {ParsedURL}  The parsed address, message and/or amount values
  */
-export const parseDeepLink = (data) => {
-    const parsed = parseAddress(data)
-    if (!parsed) {
-        return null
-    }
-
-    return {
-        address: parsed.address,
-        message: parsed.message || '',
-        amount: parsed.amount ? parsed.amount.toString() : '0',
-    }
-}
-
-/** Parse an IOTA address input
- * @param {string} input
- * @returns {ParsedURL} - The parsed address, message and/or amount values
- */
-export const parseAddress = (input) => {
-    const result = {
-        address: null,
-        message: null,
-        amount: null,
-    }
-
-    if (!input || typeof input !== 'string') {
-        return null
-    }
-
-    if (input.match(VALID_MAINNET_ADDRESS) || input.match(VALID_DEVNET_ADDRESS)) {
-        result.address = input
-        return result
+export const parseWalletDeepLink = (addressPrefix, input) => {
+    if (!input || typeof input !== "string") {
+        return
     }
 
     try {
-        let parsed = {
-            address: null,
-            message: null,
-            amount: null,
-        }
+        const url = new URL(input)
 
-        if (input.toLowerCase().indexOf('iota:') === 0) {
-            const url = new URL(input)
-            parsed.address = url.hostname.toLowerCase()
-            parsed.message = url.searchParams.get('message')
-            parsed.amount = url.searchParams.get('amount')
+        if (url.protocol === "iota:" && url.host === "wallet") {
+            const pathParts = url.pathname.split("/")
+
+            if (pathParts.length < 1) {
+                addError({ time: Date.now(), type: "deepLink", message: `No address part in the url path` })
+                return
+            }
+
+            // Path starts with '/' so ignore the first one
+            const address = pathParts[1]
+
+            if (!new RegExp(`^${addressPrefix}1[02-9ac-hj-np-z]{59}$`).test(address)) {
+                addError({ time: Date.now(), type: "deepLink", message: `Address '${address}' does not match prefix '${addressPrefix}' or format` })
+                return
+            }
+
+            const amountParam = url.searchParams.get('amt')
+            const parsedAmount = Number.parseFloat(amountParam)
+            if (Number.isNaN(parsedAmount) || !Number.isFinite(parsedAmount)) {
+                addError({ time: Date.now(), type: "deepLink", message: `Amount is not a number '${amountParam}'` })
+                return
+            }
+
+            const unitParam: Unit = url.searchParams.get('unit') as Unit ?? Unit.i
+            if (!Object.values(Unit).includes(unitParam)) {
+                addError({ time: Date.now(), type: "deepLink", message: `Unit is not recognised '${unitParam}'` })
+            }
+
+            if (unitParam === "i" && !Number.isInteger(parsedAmount)) {
+                addError({ time: Date.now(), type: "deepLink", message: `For unit 'i' the amount must be an integer '${parsedAmount}'` })
+                return
+            }
+
+            return {
+                address,
+                amount: Math.abs(parsedAmount),
+                unit: unitParam,
+                message: url.searchParams.get('msg') ?? ''
+            }
         } else {
-            parsed = JSON.parse(input)
+            addError({ time: Date.now(), type: "deepLink", message: `Error handling deep link. Does not start with iota://wallet` })
         }
-
-        if (parsed.address.match(VALID_MAINNET_ADDRESS) || parsed.address.match(VALID_DEVNET_ADDRESS)) {
-            result.address = parsed.address
-        } else {
-            return null
-        }
-
-        if (parsed.message && typeof parsed.message === 'string') {
-            result.message = parsed.message
-        }
-
-        if (parsed.amount && String(parsed.amount) === String(parseInt(parsed.amount, 10))) {
-            result.amount = Math.abs(parseInt(parsed.amount, 10))
-        }
-    } catch (error) {
-        return null
+    } catch (err) {
+        addError({ time: Date.now(), type: "deepLink", message: `Error handling deep link. ${err.message}` })
     }
-
-    return result
 }
 
 /**

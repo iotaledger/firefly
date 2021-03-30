@@ -4,13 +4,16 @@
     import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { Electron } from 'shared/lib/electron'
+    import { showSystemNotification } from 'shared/lib/notifications'
     import { dashboardRoute, routerNext } from 'shared/lib/router'
     import { Tabs } from 'shared/lib/typings/routes'
-    import { parseDeepLink } from 'shared/lib/utils'
-    import { api, STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS } from 'shared/lib/wallet'
+    import { parseWalletDeepLink } from 'shared/lib/utils'
+    import { api, STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, wallet } from 'shared/lib/wallet'
     import { Settings, Wallet } from 'shared/routes'
-    import { onMount } from 'svelte'
+    import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
+
+    const { accountsLoaded, accounts } = $wallet
 
     export let locale
     export let mobile
@@ -20,15 +23,20 @@
         settings: Settings,
     }
 
-    onMount(() => {
-        api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
+    const accountsSubscription = accountsLoaded.subscribe(() => {
         Electron.DeepLinkManager.requestDeepLink()
         Electron.onEvent('deep-link-params', (data) => handleDeepLinkRequest(data))
+    })
+
+    onMount(() => {
+        api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
 
         Electron.onEvent('menu-logout', () => {
             logout()
         })
     })
+
+    onDestroy(accountsSubscription)
 
     /**
      * Handles deep link request
@@ -36,7 +44,6 @@
      * If deep linking is disabled, direct user to settings
      */
     const handleDeepLinkRequest = (data) => {
-        const parsedData = parseDeepLink(data)
         const _redirect = (tab) => {
             deepLinkRequestActive.set(true)
             if (get(dashboardRoute) !== tab) {
@@ -46,13 +53,23 @@
 
         if (!$appSettings.deepLinking) {
             _redirect(Tabs.Settings)
-            // TODO: Add alert system
-            console.log('deep linking not enabled')
-        } else if (parsedData) {
-            _redirect(Tabs.Wallet)
-            sendParams.set(parsedData)
+            showSystemNotification({ type: 'info', message: locale('notifications.deepLinkingIsNotEnabled') })
         } else {
-            console.log('error parsing')
+            if ($accounts && $accounts.length > 0) {
+                let addressPrefix = $accounts[0].depositAddress.split('1')[0]
+
+                const parsedData = parseWalletDeepLink(addressPrefix, data)
+
+                if (parsedData) {
+                    _redirect(Tabs.Wallet)
+                    sendParams.set({
+                        ...parsedData,
+                        isInternal: false,
+                    })
+                } else {
+                    showSystemNotification({ type: 'error', message: locale('notifications.deepLinkingInvalidFormat') })
+                }
+            }
         }
     }
 </script>

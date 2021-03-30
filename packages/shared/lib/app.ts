@@ -1,3 +1,4 @@
+import type { Unit } from '@iota/unit-converter'
 import { get, writable } from 'svelte/store'
 import { persistent } from './helpers'
 import { localize } from './i18n'
@@ -29,16 +30,17 @@ export const mnemonic = writable<Array<string>>(null)
 
 interface SendParams {
     amount: number
+    unit?: Unit
     address: string
     message: string
     isInternal: boolean
 }
 
 /**
- * Input paramaters for sending transactions
+ * Input parameters for sending transactions
  */
-export const sendParams = writable<SendParams>({ amount: 0, address: '', message: '', isInternal: false })
-export const clearSendParams = (isInternal = false) => sendParams.set({ amount: 0, address: '', message: '', isInternal })
+export const sendParams = writable<SendParams>({ amount: 0, unit: undefined, address: '', message: '', isInternal: false })
+export const clearSendParams = (isInternal = false) => sendParams.set({ amount: 0, unit: undefined, address: '', message: '', isInternal })
 
 /**
  * Determines whether a user is logged in
@@ -53,7 +55,7 @@ export const developerMode = persistent<boolean>('developerMode', false)
 /**
  * Cleanup the signup vars
  */
- export const cleanupSignup = () => {
+export const cleanupSignup = () => {
     mnemonic.set(null)
     strongholdPassword.set(null)
     walletPin.set(null)
