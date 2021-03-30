@@ -1,16 +1,17 @@
 <script lang="typescript">
     import { Chart, Dropdown, Text } from 'shared/components'
     import {
-        chartCurrency,
         ChartData,
-        chartTimeframe,
+        chartSelectors,
         DashboardChartType,
         getAccountValueData,
         getPortfolioData,
         getTokenData,
         selectedChart,
+        updateChartCurrency,
+        updateChartTimeframe,
     } from 'shared/lib/chart'
-    import { CurrencyTypes, formatCurrencyValue } from 'shared/lib/currency'
+    import { AvailableExchangeRates, CurrencyTypes, formatCurrencyValue } from 'shared/lib/currency'
     import { HistoryDataProps, TIMEFRAME_MAP } from 'shared/lib/marketData'
     import { activeProfile } from 'shared/lib/profile'
     import type { AccountsBalanceHistory, BalanceHistory, WalletAccount } from 'shared/lib/wallet'
@@ -35,11 +36,11 @@
 
     /** Chart data */
     $: {
-        if (locale || $selectedChart || $chartCurrency || $chartTimeframe || $walletBalanceHistory || $selectedAccount) {
+        if (locale || $selectedChart || $chartSelectors || $walletBalanceHistory || $selectedAccount) {
             // Account value chart
             if ($selectedAccount) {
                 chartData = getAccountValueData($accountsBalanceHistory[$selectedAccount.index], $selectedAccount.rawIotaBalance)
-                switch ($chartTimeframe) {
+                switch ($chartSelectors.timeframe) {
                     case HistoryDataProps.ONE_HOUR:
                     case HistoryDataProps.TWENTY_FOUR_HOURS:
                         xMaxTicks = 4
@@ -64,15 +65,22 @@
     }
 
     onMount(() => {
-        let profileCurrency = $activeProfile?.settings.currency ?? CurrencyTypes.USD
-        currencyDropdown = Object.values(CurrencyTypes).map((currency) => ({ value: currency, label: currency.toUpperCase() }))
+        let profileCurrency: AvailableExchangeRates = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
+        currencyDropdown = Object.values(CurrencyTypes).map((currency) => ({
+            value: currency.toUpperCase(),
+            label: currency.toUpperCase(),
+        }))
         if (!CurrencyTypes[profileCurrency]) {
-            currencyDropdown.push({ value: profileCurrency.toLocaleLowerCase(), label: profileCurrency })
+            currencyDropdown.push({ value: profileCurrency, label: profileCurrency })
+        }
+        // change to USD if previously selected currency is not in the list anymore
+        if (!currencyDropdown.some(({ value }) => value === $chartSelectors.currency)) {
+            updateChartCurrency(AvailableExchangeRates.USD)
         }
     })
 
     function handleCurrencySelect({ value: currency }) {
-        chartCurrency.set(currency)
+        updateChartCurrency(currency)
     }
 </script>
 
@@ -107,14 +115,19 @@
         {/if}
         <div class="flex space-x-2">
             <span>
-                <Dropdown small value={$chartCurrency.toUpperCase()} items={currencyDropdown} onSelect={handleCurrencySelect} contentWidth={true} />
-            </span>
-            <span>  
                 <Dropdown
                     small
-                    value={TIMEFRAME_MAP[$chartTimeframe]}
+                    value={$chartSelectors.currency}
+                    items={currencyDropdown}
+                    onSelect={handleCurrencySelect}
+                    contentWidth={true} />
+            </span>
+            <span>
+                <Dropdown
+                    small
+                    value={TIMEFRAME_MAP[$chartSelectors.timeframe]}
                     items={Object.keys(TIMEFRAME_MAP).map((value) => ({ label: TIMEFRAME_MAP[value], value }))}
-                    onSelect={(newTimeframe) => chartTimeframe.set(newTimeframe.value)}
+                    onSelect={(newTimeframe) => updateChartTimeframe(newTimeframe.value)}
                     contentWidth={true} />
             </span>
         </div>
@@ -126,6 +139,6 @@
         {labels}
         {color}
         {xMaxTicks}
-        formatYAxis={(value) => formatCurrencyValue(value, $chartCurrency, undefined, undefined, 5)}
+        formatYAxis={(value) => formatCurrencyValue(value, $chartSelectors.currency, undefined, undefined, 5)}
         inlineStyle={$selectedAccount && `height: calc(50vh - ${hasTitleBar ? '190' : '150'}px);`} />
 </div>
