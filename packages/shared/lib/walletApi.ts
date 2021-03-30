@@ -332,7 +332,7 @@ export interface ApiClient {
     ),
     createMigrationBundle(
         seed: string,
-        inputIndexes: number[],
+        inputAddressIndexes: number[],
         mine: boolean,
         timeoutSeconds: number,
         logFilePath: string,

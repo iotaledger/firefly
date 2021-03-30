@@ -68,7 +68,7 @@ export function createMigrationBundle(
     bridge: Bridge,
     __ids: CommunicationIds,
     seed: string,
-    inputIndexes: number[],
+    inputAddressIndexes: number[],
     mine: boolean,
     timeoutSeconds: number,
     logFilePath: string
@@ -79,7 +79,7 @@ export function createMigrationBundle(
         cmd: 'CreateMigrationBundle',
         payload: {
             seed,
-            inputIndexes,
+            inputAddressIndexes,
             mine,
             timeoutSeconds,
             logFilePath

@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
     import { mnemonic } from 'shared/lib/app'
-    import { migration, getMigrationData } from 'shared/lib/migration'
+    import { getMigrationData } from 'shared/lib/migration'
     import { newProfile } from 'shared/lib/profile'
     import { api } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
@@ -10,8 +10,6 @@
 
     export let locale
     export let mobile
-
-    const { seed } = $migration
 
     let isGettingMigrationData = false
 
@@ -96,7 +94,7 @@
                         if (isValid) {
                             const legacySeed = await Electron.importLegacySeed(importFile, password)
 
-                            seed.set(legacySeed)
+                            await getMigrationData(legacySeed)
                         } else {
                             console.error('Invalid SeedVault. Generate an error alert!')
                         }

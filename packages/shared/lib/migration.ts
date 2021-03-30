@@ -135,11 +135,11 @@ export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0)
  * 
  * @returns {Promise}
  */
-export const createMigrationBundle = (inputIndexes: number[], mine: boolean): Promise<any> => {
+export const createMigrationBundle = (inputAddressIndexes: number[], mine: boolean): Promise<any> => {
     const { seed } = get(migration)
 
     return new Promise((resolve, reject) => {
-        api.createMigrationBundle(get(seed), inputIndexes, mine, MINING_TIMEOUT_SECONDS, '', {
+        api.createMigrationBundle(get(seed), inputAddressIndexes, mine, MINING_TIMEOUT_SECONDS, './', {
             onSuccess(response) {
                 resolve(response)
             },
