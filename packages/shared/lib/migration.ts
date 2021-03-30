@@ -10,6 +10,8 @@ export const ADDRESS_SECURITY_LEVEL = 2
 
 export const MINIMUM_MIGRATION_BALANCE = 1000000
 
+export const MINING_TIMEOUT_SECONDS = 20
+
 const MAX_INPUTS_PER_BUNDLE = 2
 
 interface Bundle {
@@ -50,7 +52,7 @@ export const migration = writable<MigrationState>({
  * @returns {Promise<void} 
  */
 export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0): Promise<void> => {
-    // const { seed, data } = get(migration)
+    const { seed, data } = get(migration)
 
     // data.set({
     //     balance: 0,
@@ -94,7 +96,7 @@ export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0)
     //     lastCheckedAddressIndex: 30
     // })
 
-    // prepareBundles()
+    prepareBundles()
     return new Promise((resolve, reject) => {
         api.getMigrationData(migrationSeed, [MIGRATION_NODE], PERMANODE, ADDRESS_SECURITY_LEVEL, initialAddressIndex, {
             onSuccess(response) {
@@ -135,9 +137,9 @@ export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0)
  */
 export const createMigrationBundle = (inputIndexes: number[], mine: boolean): Promise<any> => {
     const { seed } = get(migration)
-    
+
     return new Promise((resolve, reject) => {
-        api.createMigrationBundle(get(seed), inputIndexes, mine, 1000000, '', {
+        api.createMigrationBundle(get(seed), inputIndexes, mine, MINING_TIMEOUT_SECONDS, '', {
             onSuccess(response) {
                 resolve(response)
             },

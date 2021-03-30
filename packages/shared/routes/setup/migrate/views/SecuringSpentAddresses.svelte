@@ -1,7 +1,12 @@
 <script lang="typescript">
     import { BundleMiningLayout, Button, Icon, ProgressBar, Text } from 'shared/components'
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
-    import { getInputIndexesForBundle, createMigrationBundle, selectedBundlesWithSpentAddresses } from 'shared/lib/migration'
+    import {
+        MINING_TIMEOUT_SECONDS,
+        getInputIndexesForBundle,
+        createMigrationBundle,
+        selectedBundlesWithSpentAddresses,
+    } from 'shared/lib/migration'
 
     export let locale
     export let mobile
@@ -9,29 +14,64 @@
     const dispatch = createEventDispatcher()
 
     let progressBarPercent = 0
-    let progressBarMessage = ''
+    let progressBarMessage = `${progressBarPercent} % completed`
+    let timeElapsed = 0
+
     let timeout
     let interval
 
     onMount(() => {
         $selectedBundlesWithSpentAddresses.reduce(
-            (promise, bundle) =>
+            (promise, bundle, idx) =>
                 promise.then((acc) =>
-                    createMigrationBundle(getInputIndexesForBundle(bundle), true).then((result) => {
-                    }).catch((error) => console.error(error))
+                    createMigrationBundle(getInputIndexesForBundle(bundle), true)
+                        .then((result) => {
+                            timeElapsed = (idx + 1) * MINING_TIMEOUT_SECONDS
+                            updateProgress()
+
+                            if (idx === $selectedBundlesWithSpentAddresses.length - 1) {
+                                clearInterval(interval)
+
+                                redirectWithTimeout()
+                            }
+                        })
+                        .catch((error) => {
+                            console.error(error)
+
+                            timeElapsed = (idx + 1) * MINING_TIMEOUT_SECONDS
+                            updateProgress()
+
+                            if (idx === $selectedBundlesWithSpentAddresses.length - 1) {
+                                clearInterval(interval)
+
+                                redirectWithTimeout()
+                            }
+                        })
                 ),
             Promise.resolve([])
         )
 
-        //TODO: retrieve progress and call setProgressBar() to fill it up
-        interval = setInterval(() => {
-            progressBarPercent = Math.floor(Math.random() * 101)
-            progressBarMessage = progressBarPercent.toString() + '% completed'
-        }, 2500)
+        initiateProgressBar()
+    })
+
+    function redirectWithTimeout(_timeout = 1000) {
         timeout = setTimeout(() => {
             dispatch('next')
-        }, 7500)
-    })
+        }, _timeout)
+    }
+
+    function updateProgress() {
+        progressBarPercent = Math.floor((timeElapsed / MINING_TIMEOUT_SECONDS) * $selectedBundlesWithSpentAddresses.length * 100)
+        progressBarMessage = progressBarPercent.toString() + '% completed'
+    }
+
+    function initiateProgressBar() {
+        interval = setInterval(() => {
+            timeElapsed += 2
+
+            updateProgress()
+        }, 2000)
+    }
 
     function handleBackClick() {
         dispatch('previous')
