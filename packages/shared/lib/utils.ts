@@ -57,49 +57,69 @@ export const parseWalletDeepLink = (addressPrefix, input) => {
         const url = new URL(input)
 
         if (url.protocol === "iota:" && url.host === "wallet") {
-            const pathParts = url.pathname.split("/")
+            // Remove any leading and trailing slashes
+            const pathParts = url.pathname.replace(/^\/+|\/+$/g, '').split("/")
 
-            if (pathParts.length < 1) {
-                addError({ time: Date.now(), type: "deepLink", message: `No address part in the url path` })
+            if (pathParts.length === 0) {
+                addError({ time: Date.now(), type: "deepLink", message: `No op part in the url path` })
                 return
             }
 
-            // Path starts with '/' so ignore the first one
-            const address = pathParts[1]
-
-            if (!new RegExp(`^${addressPrefix}1[02-9ac-hj-np-z]{59}$`).test(address)) {
-                addError({ time: Date.now(), type: "deepLink", message: `Address '${address}' does not match prefix '${addressPrefix}' or format` })
-                return
+            if (pathParts[0] === "send") {
+                return parseWalletSendDeepLink(addressPrefix, url, pathParts.slice(1))
             }
 
-            const amountParam = url.searchParams.get('amt')
-            const parsedAmount = Number.parseFloat(amountParam)
-            if (Number.isNaN(parsedAmount) || !Number.isFinite(parsedAmount)) {
-                addError({ time: Date.now(), type: "deepLink", message: `Amount is not a number '${amountParam}'` })
-                return
-            }
-
-            const unitParam: Unit = url.searchParams.get('unit') as Unit ?? Unit.i
-            if (!Object.values(Unit).includes(unitParam)) {
-                addError({ time: Date.now(), type: "deepLink", message: `Unit is not recognised '${unitParam}'` })
-            }
-
-            if (unitParam === "i" && !Number.isInteger(parsedAmount)) {
-                addError({ time: Date.now(), type: "deepLink", message: `For unit 'i' the amount must be an integer '${parsedAmount}'` })
-                return
-            }
-
-            return {
-                address,
-                amount: Math.abs(parsedAmount),
-                unit: unitParam,
-                message: url.searchParams.get('msg') ?? ''
-            }
+            addError({ time: Date.now(), type: "deepLink", message: `Unrecognized wallet action '${pathParts[0]}'` })
         } else {
             addError({ time: Date.now(), type: "deepLink", message: `Error handling deep link. Does not start with iota://wallet` })
         }
     } catch (err) {
         addError({ time: Date.now(), type: "deepLink", message: `Error handling deep link. ${err.message}` })
+    }
+}
+
+/**
+ * Parse a deep link for the wallet (iota://wallet/send)
+ * @param  {url} The url
+ * @param  {pathParts} The path parts
+ * @return {ParsedURL}  The parsed address, message and/or amount values
+ */
+ export const parseWalletSendDeepLink = (addressPrefix, url, pathParts) => {
+    if (pathParts.length === 0) {
+        addError({ time: Date.now(), type: "deepLink", message: `No address part in the url path` })
+        return
+    }
+
+    // Path starts with '/' so ignore the first one
+    const address = pathParts[0]
+
+    if (!new RegExp(`^${addressPrefix}1[02-9ac-hj-np-z]{59}$`).test(address)) {
+        addError({ time: Date.now(), type: "deepLink", message: `Address '${address}' does not match prefix '${addressPrefix}' or format` })
+        return
+    }
+
+    const amountParam = url.searchParams.get('amt')
+    const parsedAmount = Number.parseFloat(amountParam)
+    if (Number.isNaN(parsedAmount) || !Number.isFinite(parsedAmount)) {
+        addError({ time: Date.now(), type: "deepLink", message: `Amount is not a number '${amountParam}'` })
+        return
+    }
+
+    const unitParam: Unit = url.searchParams.get('unit') as Unit ?? Unit.i
+    if (!Object.values(Unit).includes(unitParam)) {
+        addError({ time: Date.now(), type: "deepLink", message: `Unit is not recognised '${unitParam}'` })
+    }
+
+    if (unitParam === "i" && !Number.isInteger(parsedAmount)) {
+        addError({ time: Date.now(), type: "deepLink", message: `For unit 'i' the amount must be an integer '${parsedAmount}'` })
+        return
+    }
+
+    return {
+        address,
+        amount: Math.abs(parsedAmount),
+        unit: unitParam,
+        message: url.searchParams.get('msg') ?? ''
     }
 }
 
