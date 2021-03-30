@@ -71,7 +71,7 @@ export function createMigrationBundle(
     inputAddressIndexes: number[],
     mine: boolean,
     timeoutSeconds: number,
-    logFilePath: string
+    logFileName: string
 ) {
     return bridge({
         actorId: __ids.actorId,
@@ -82,7 +82,7 @@ export function createMigrationBundle(
             inputAddressIndexes,
             mine,
             timeoutSeconds,
-            logFilePath
+            logFileName
         },
     })
 }

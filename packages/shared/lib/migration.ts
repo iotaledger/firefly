@@ -139,7 +139,7 @@ export const createMigrationBundle = (inputAddressIndexes: number[], mine: boole
     const { seed } = get(migration)
 
     return new Promise((resolve, reject) => {
-        api.createMigrationBundle(get(seed), inputAddressIndexes, mine, MINING_TIMEOUT_SECONDS, './', {
+        api.createMigrationBundle(get(seed), inputAddressIndexes, mine, MINING_TIMEOUT_SECONDS, 'migration', {
             onSuccess(response) {
                 resolve(response)
             },

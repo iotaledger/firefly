@@ -36,7 +36,9 @@
             loading = true
 
             createMigrationBundle(getInputIndexesForBundle($bundles[0]), false)
-                .then(console.log)
+                .then((response) => {
+                    dispatch('next')
+                })
                 .catch(console.error)
         } else {
             loading = true
