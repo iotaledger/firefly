@@ -43,9 +43,6 @@
         let params = event.detail || {}
         switch (state) {
             case MigrateState.Init:
-                console.log('hasSingleBundle', $hasSingleBundle)
-                console.log('hasBundlesWithSpentAddresses', $hasBundlesWithSpentAddresses)
-
                 if ($hasBundlesWithSpentAddresses) {
                     nextState = MigrateState.BundleMiningWarning
                     break

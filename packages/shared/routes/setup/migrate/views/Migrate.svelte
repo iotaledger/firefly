@@ -2,7 +2,14 @@
     import { Box, Button, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
     import { formatUnit } from 'shared/lib/units'
-    import { migration } from 'shared/lib/migration'
+    import {
+        getInputIndexesForBundle,
+        hasSingleBundle,
+        hasBundlesWithSpentAddresses,
+        migration,
+        createMigrationBundle,
+    } from 'shared/lib/migration'
+
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -11,7 +18,7 @@
 
     const dispatch = createEventDispatcher()
 
-    const {  data } = $migration
+    const { bundles, data } = $migration
     const { balance } = $data
 
     let fiatbalance = `${convertToFiat(
@@ -25,12 +32,20 @@
     let timeout
 
     function handleContinueClick() {
-        loading = true
-        timeout = setTimeout(() => {
-            dispatch('next')
-        }, 2000)
+        if ($hasSingleBundle && !$hasBundlesWithSpentAddresses) {
+            loading = true
+
+            createMigrationBundle(getInputIndexesForBundle($bundles[0]), false)
+                .then(console.log)
+                .catch(console.error)
+        } else {
+            loading = true
+            timeout = setTimeout(() => {
+                dispatch('next')
+            }, 2000)
+        }
     }
-    
+
     //TODO: complete function functionality
     function learnAboutMigrationsClick() {
         console.log('Learn about migration clicked')

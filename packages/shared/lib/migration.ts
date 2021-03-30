@@ -112,6 +112,8 @@ export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0)
                     })
                 }
 
+                prepareBundles()
+
                 resolve()
             },
             onError(error) {
@@ -133,7 +135,7 @@ export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0)
  */
 export const createMigrationBundle = (inputIndexes: number[], mine: boolean): Promise<any> => {
     const { seed } = get(migration)
-
+    
     return new Promise((resolve, reject) => {
         api.createMigrationBundle(get(seed), inputIndexes, mine, 1000000, '', {
             onSuccess(response) {
@@ -193,7 +195,7 @@ export const spentAddressesFromBundles = derived(get(migration).bundles, (_bundl
 
 export const hasSingleBundle = derived(get(migration).bundles, (_bundles) => _bundles.length === 1)
 
-export const hasBundlesWithSpentAddresses = derived(get(migration).bundles, (_bundles) => _bundles.some((bundle) => bundle.shouldMine === true))
+export const hasBundlesWithSpentAddresses = derived(get(migration).bundles, (_bundles) => _bundles.length && _bundles.some((bundle) => bundle.shouldMine === true))
 
 export const toggleInputSelection = (address: string): void => {
     const { bundles } = get(migration)

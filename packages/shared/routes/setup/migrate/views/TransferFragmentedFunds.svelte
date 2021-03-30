@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Button, Illustration, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
     import { createEventDispatcher, onDestroy } from 'svelte'
+    import { migration } from 'shared/lib/migration'
 
     export let locale
     export let mobile
@@ -10,16 +11,15 @@
     let migratingFundsMessage = ''
     let timeouts = []
 
+    const { bundles } = $migration
+
     // TODO: dummy
-    let transactions = Array.from({ length: 5 }, (_, index) => {
-        let balance = Math.floor(Math.random() * 4000000)
-        return {
-            name: locale('views.transferFragmentedFunds.transaction', { values: { number: index + 1 } }),
-            balance,
-            status: 0,
-            errorText: null,
-        }
-    })
+    let transactions = $bundles.map((_bundle, index) => ({
+        name: locale('views.transferFragmentedFunds.transaction', { values: { number: index + 1 } }),
+        balance: _bundle.inputs.reduce((acc, input) => acc + input.balance, 0),
+        status: 0,
+        errorText: null,
+    }))
 
     const dispatch = createEventDispatcher()
 
