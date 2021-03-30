@@ -7,7 +7,7 @@
     import { showSystemNotification } from 'shared/lib/notifications'
     import { dashboardRoute, routerNext } from 'shared/lib/router'
     import { Tabs } from 'shared/lib/typings/routes'
-    import { parseWalletDeepLink } from 'shared/lib/utils'
+    import { parseDeepLink } from 'shared/lib/utils'
     import { api, STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, wallet } from 'shared/lib/wallet'
     import { Settings, Wallet } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
@@ -58,12 +58,12 @@
             if ($accounts && $accounts.length > 0) {
                 let addressPrefix = $accounts[0].depositAddress.split('1')[0]
 
-                const parsedData = parseWalletDeepLink(addressPrefix, data)
+                const parsedData = parseDeepLink(addressPrefix, data)
 
-                if (parsedData) {
+                if (parsedData && parsedData.context === 'wallet' && parsedData.operation === 'send') {
                     _redirect(Tabs.Wallet)
                     sendParams.set({
-                        ...parsedData,
+                        ...parsedData.params,
                         isInternal: false,
                     })
                 } else {

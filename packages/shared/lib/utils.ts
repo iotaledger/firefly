@@ -44,11 +44,11 @@ export const generateRandomId = (): string => {
 }
 
 /**
- * Parse a deep link for the wallet (iota://wallet)
+ * Parse a deep link for the app (iota://)
  * @param  {string} data Deep link data
  * @return {ParsedURL}  The parsed address, message and/or amount values
  */
-export const parseWalletDeepLink = (addressPrefix, input) => {
+export const parseDeepLink = (addressPrefix, input) => {
     if (!input || typeof input !== "string") {
         return
     }
@@ -56,22 +56,26 @@ export const parseWalletDeepLink = (addressPrefix, input) => {
     try {
         const url = new URL(input)
 
-        if (url.protocol === "iota:" && url.host === "wallet") {
-            // Remove any leading and trailing slashes
-            const pathParts = url.pathname.replace(/^\/+|\/+$/g, '').split("/")
+        if (url.protocol === "iota:") {
+            if (url.host === "wallet") {
+                // Remove any leading and trailing slashes
+                const pathParts = url.pathname.replace(/^\/+|\/+$/g, '').split("/")
 
-            if (pathParts.length === 0) {
-                addError({ time: Date.now(), type: "deepLink", message: `No op part in the url path` })
-                return
+                if (pathParts.length === 0) {
+                    addError({ time: Date.now(), type: "deepLink", message: `No op part in the url path` })
+                    return
+                }
+
+                if (pathParts[0] === "send") {
+                    return parseWalletSendDeepLink(addressPrefix, url, pathParts.slice(1))
+                }
+
+                addError({ time: Date.now(), type: "deepLink", message: `Unrecognized wallet action '${pathParts[0]}'` })
+            } else {
+                addError({ time: Date.now(), type: "deepLink", message: `Unrecognized context '${url.host}'` })
             }
-
-            if (pathParts[0] === "send") {
-                return parseWalletSendDeepLink(addressPrefix, url, pathParts.slice(1))
-            }
-
-            addError({ time: Date.now(), type: "deepLink", message: `Unrecognized wallet action '${pathParts[0]}'` })
         } else {
-            addError({ time: Date.now(), type: "deepLink", message: `Error handling deep link. Does not start with iota://wallet` })
+            addError({ time: Date.now(), type: "deepLink", message: `Error handling deep link. Does not start with iota://` })
         }
     } catch (err) {
         addError({ time: Date.now(), type: "deepLink", message: `Error handling deep link. ${err.message}` })
@@ -84,7 +88,7 @@ export const parseWalletDeepLink = (addressPrefix, input) => {
  * @param  {pathParts} The path parts
  * @return {ParsedURL}  The parsed address, message and/or amount values
  */
- export const parseWalletSendDeepLink = (addressPrefix, url, pathParts) => {
+export const parseWalletSendDeepLink = (addressPrefix, url, pathParts) => {
     if (pathParts.length === 0) {
         addError({ time: Date.now(), type: "deepLink", message: `No address part in the url path` })
         return
@@ -116,10 +120,14 @@ export const parseWalletDeepLink = (addressPrefix, input) => {
     }
 
     return {
-        address,
-        amount: Math.abs(parsedAmount),
-        unit: unitParam,
-        message: url.searchParams.get('msg') ?? ''
+        context: "wallet",
+        operation: "send",
+        params: {
+            address,
+            amount: Math.abs(parsedAmount),
+            unit: unitParam,
+            message: url.searchParams.get('msg') ?? ''
+        }
     }
 }
 
