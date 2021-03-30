@@ -8,8 +8,6 @@
 
     const dispatch = createEventDispatcher()
 
-    console.log('Spent addresses from bundles', $spentAddressesFromBundles)
-
     // TODO: dummy
     let addresses = $spentAddressesFromBundles.map((address) =>
         Object.assign({}, address, { disabled: address.balance < MINIMUM_MIGRATION_BALANCE, id: address.index })

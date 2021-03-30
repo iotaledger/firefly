@@ -69,7 +69,9 @@ export function createMigrationBundle(
     __ids: CommunicationIds,
     seed: string,
     inputIndexes: number[],
-    mine: boolean
+    mine: boolean,
+    timeoutSeconds: number,
+    logFilePath: string
 ) {
     return bridge({
         actorId: __ids.actorId,
@@ -78,7 +80,9 @@ export function createMigrationBundle(
         payload: {
             seed,
             inputIndexes,
-            mine
+            mine,
+            timeoutSeconds,
+            logFilePath
         },
     })
 }

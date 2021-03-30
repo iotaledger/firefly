@@ -204,9 +204,9 @@ export const api = {
       initialAddressIndex
     )
   },
-  createMigrationBundle: function (seed: string, inputIndexes: number[], mine: boolean):
+  createMigrationBundle: function (seed: string, inputIndexes: number[], mine: boolean, timeoutSeconds: number, logFilePath: string):
     ((__ids: CommunicationIds) => Promise<string>) {
-    return (__ids: CommunicationIds) => _createMigrationBundle(sendMessage, __ids, seed, inputIndexes, mine)
+    return (__ids: CommunicationIds) => _createMigrationBundle(sendMessage, __ids, seed, inputIndexes, mine, timeoutSeconds, logFilePath)
   },
   sendMigrationBundle: function (node: string, bundleHash: string, mwm: number):
     ((__ids: CommunicationIds) => Promise<string>) {

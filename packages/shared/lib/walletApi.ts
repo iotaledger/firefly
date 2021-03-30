@@ -334,6 +334,8 @@ export interface ApiClient {
         seed: string,
         inputIndexes: number[],
         mine: boolean,
+        timeoutSeconds: number,
+        logFilePath: string,
         callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void }
     )
 

@@ -51,6 +51,7 @@ export const migration = writable<MigrationState>({
  */
 export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0): Promise<void> => {
     // const { seed, data } = get(migration)
+
     // data.set({
     //     balance: 0,
     //     inputs: [{
@@ -134,8 +135,7 @@ export const createMigrationBundle = (inputIndexes: number[], mine: boolean): Pr
     const { seed } = get(migration)
 
     return new Promise((resolve, reject) => {
-
-        api.createMigrationBundle(get(seed), inputIndexes, mine, {
+        api.createMigrationBundle(get(seed), inputIndexes, mine, 1000000, '', {
             onSuccess(response) {
                 resolve(response)
             },
