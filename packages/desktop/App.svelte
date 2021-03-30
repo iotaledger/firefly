@@ -99,28 +99,40 @@
     @tailwind base;
     @tailwind components;
     @tailwind utilities;
+
     @import '../shared/style/style.scss';
-    html,
-    body {
-        @apply bg-white;
-        @apply select-none;
-        -webkit-user-drag: none;
-        &.scheme-dark {
-            @apply bg-gray-900;
-            :global(::-webkit-scrollbar-thumb) {
-                @apply bg-gray-700;
+
+    @layer base {
+        html,
+        body {
+            @apply bg-white;
+            @apply select-none;
+            -webkit-user-drag: none;
+            &.scheme-dark {
+                @apply bg-gray-900;
+                :global(::-webkit-scrollbar-thumb) {
+                    @apply bg-gray-700;
+                }
             }
         }
+        ::-webkit-scrollbar {
+            @apply w-3;
+        }
+        ::-webkit-scrollbar-thumb {
+            @apply bg-gray-300;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            @apply bg-transparent;
+        }
     }
-    ::-webkit-scrollbar {
-        @apply w-3;
-    }
-    ::-webkit-scrollbar-thumb {
-        @apply bg-gray-300;
-        border-radius: 10px;
-    }
-    ::-webkit-scrollbar-track {
-        @apply bg-transparent;
+
+    @layer utilities {
+        .scrollable-y {
+            @apply overflow-y-auto;
+            @apply -mr-2;
+            @apply pr-2;
+        }
     }
 </style>
 
