@@ -1,6 +1,5 @@
-import type { ErrorTypes as ValidatorErrorTypes } from './validator'
-import type { ErrorType } from './typings/events'
-import { persistent } from 'shared/lib/helpers'
+import type { ErrorTypes as ValidatorErrorTypes } from '../validator'
+import type { ErrorType } from '../typings/events'
 
 const errorMessages: {
     [key in keyof typeof ErrorType]: string;
@@ -63,13 +62,3 @@ export const getErrorMessage = (type: ErrorType | ValidatorErrorTypes): string =
     return message ? message : 'error.global.generic'
 }
 
-/**
- * Error interface
- */
-interface Error {
-    time: number
-    type: ErrorType | ValidatorErrorTypes,
-    message: string
-}
-
-export const errorLog = persistent<Error[]>('errorLog', [])

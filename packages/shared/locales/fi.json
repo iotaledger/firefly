@@ -569,6 +569,7 @@
     },
     "dates": {
         "today": "Tänään",
+        "yesterday": "Yesterday",
         "daysAgo": "{time, plural, one {# päivä} other {# päivää}} sitten",
         "weeksAgo": "{time, plural, one {# viikko} other {# viikkoa}} sitten",
         "monthsAgo": "{time, plural, one {# kuukausi} other {# kuukautta}} sitten",

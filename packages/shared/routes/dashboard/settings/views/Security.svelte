@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Checkbox, Dropdown, HR, Password, Spinner, Text } from 'shared/components'
+    import { Button, Checkbox, Dropdown, HR, Password, Pin, Spinner, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
@@ -40,6 +40,7 @@
     let confirmedPincode = ''
     let currentPincodeError = ''
     let newPincodeError = ''
+    let confirmationPincodeError = ''
     let pinCodeBusy = false
     let pinCodeMessage = ''
 
@@ -196,7 +197,7 @@
                 },
             })
         } else if (newPincode !== confirmedPincode) {
-            newPincodeError = locale('error.pincode.match')
+            confirmationPincodeError = locale('error.pincode.match')
         } else {
             pinCodeBusy = true
             pinCodeMessage = locale('general.pinCodeUpdating')
@@ -207,7 +208,7 @@
                 }, 2000)
                 pinCodeBusy = false
                 if (err) {
-                    newPincodeError = err
+                    currentPincodeError = err
                     pinCodeMessage = locale('general.pinCodeFailed')
                 } else {
                     pinCodeMessage = locale('general.pinCodeSuccess')
@@ -250,6 +251,7 @@
         newPasswordError = ''
         currentPincodeError = ''
         newPincodeError = ''
+        confirmationPincodeError = ''
         passwordChangeBusy = false
         passwordChangeMessage = ''
         pinCodeBusy = false
@@ -338,41 +340,18 @@
         <form on:submit={changePincode} id="pincode-change-form">
             <Text type="h4" classes="mb-3">{locale('views.settings.changePincode.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.changePincode.description')}</Text>
-            <Password
-                error={currentPincodeError}
-                classes="mb-4"
-                bind:value={currentPincode}
-                showRevealToggle
-                {locale}
-                maxlength="6"
-                integer
-                placeholder={locale('views.settings.changePincode.currentPincode')}
-                disabled={pinCodeBusy} />
-            <Password
-                error={newPincodeError}
-                classes="mb-4"
-                bind:value={newPincode}
-                showRevealToggle
-                {locale}
-                maxlength="6"
-                integer
-                placeholder={locale('views.settings.changePincode.newPincode')}
-                disabled={pinCodeBusy} />
-            <Password
-                classes="mb-5"
-                bind:value={confirmedPincode}
-                showRevealToggle
-                {locale}
-                maxlength="6"
-                integer
-                placeholder={locale('views.settings.changePincode.confirmNewPincode')}
-                disabled={pinCodeBusy} />
+
+            <Text type="p" secondary smaller classes="mb-2">{locale('views.settings.changePincode.currentPincode')}</Text>
+            <Pin smaller error={currentPincodeError} classes="mb-4" bind:value={currentPincode} disabled={pinCodeBusy} />
+            <Text type="p" secondary smaller classes="mb-2">{locale('views.settings.changePincode.newPincode')}</Text>
+            <Pin smaller error={newPincodeError} classes="mb-4" bind:value={newPincode} disabled={pinCodeBusy} />
+            <Text type="p" secondary smaller classes="mb-2">{locale('views.settings.changePincode.confirmNewPincode')}</Text>
+            <Pin smaller error={confirmationPincodeError} classes="mb-4" bind:value={confirmedPincode} disabled={pinCodeBusy} />
             <div class="flex flex-row items-center">
                 <Button
                     medium
                     type="submit"
                     form="pincode-change-form"
-                    classes="mb-5"
                     disabled={!currentPincode || !newPincode || !confirmedPincode || pinCodeBusy}>
                     {locale('views.settings.changePincode.action')}
                 </Button>

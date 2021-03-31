@@ -187,15 +187,15 @@
             },
             "exportStronghold": {
                 "title": "Yedeği dışa aktar",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
+                "description": "Bir Stronghold dosyasına aktarın - cüzdanınızın ve en son işlem geçmişinizin şifrelenmiş tam yedeği."
             },
             "appLock": {
                 "title": "Otomatik Kilitleme",
-                "description": "Time elapsed before your wallet locks and logs you out"
+                "description": "Cüzdanınız kilitlenmeden ve oturumunuzu kapatmadan önce geçen süre"
             },
             "changePassword": {
-                "title": "Şifre Değişir",
-                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
+                "title": "Şifre Değiştir",
+                "description": "Parolanız, cüzdanınızın güvenliğini sağlamak için kullanılır. Bakiyenizi korumak için güçlü bir parola kullanın."
             },
             "changePincode": {
                 "title": "PIN kodunu değiştir",
@@ -231,36 +231,36 @@
             },
             "proofOfWork": {
                 "title": "İş Kanıtı",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "description": "PoW'u cihazınızda lokal olarak tamamlayın veya Node'a yaptırın"
             },
             "errorLog": {
                 "title": "Hata Kaydı",
-                "description": "View errors to debug an issue"
+                "description": "Bir sorunu gidermek için hataları görüntüleyin"
             },
             "diagnostics": {
                 "title": "Tanılama",
-                "description": "View system and application information"
+                "description": "Sistem ve uygulama bilgilerini görüntüleyin"
             },
             "stateExport": {
                 "title": "State dışa aktar",
-                "description": "Export your transaction history to a .csv file"
+                "description": "İşlem geçmişinizi bir .csv dosyasına aktarın"
             },
             "troubleshoot": {
                 "title": "Sorun giderme",
-                "description": "Use the troubleshooting wizard to solve common problems"
+                "description": "Yaygın sorunları çözmek için sorun giderme sihirbazını kullanın"
             },
             "documentation": {
                 "title": "Belgeler",
-                "description": "View the documentation for in depth explanations of how things work"
+                "description": "İşlerin nasıl yürüdüğüne dair ayrıntılı açıklamalar için dökümantasyonu görüntüleyin"
             },
             "faq": {
                 "title": "SSS",
                 "title2": "Sıkça Sorulan Sorular",
-                "description": "View the FAQs to get help with a common problem or question"
+                "description": "Yaygın bir sorun veya soru ile ilgili yardım almak için SSS'leri görüntüleyin"
             },
             "discord": {
                 "title": "Discord",
-                "description": "Get help from the IOTA community on Discord"
+                "description": "IOTA Discord topluluğundan yardım alın"
             },
             "about": {
                 "title": "Hakkında",
@@ -268,7 +268,7 @@
             },
             "reportAnIssue": {
                 "title": "Sorun rapor et",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
+                "description": "Geliştiricilere bir hata bildirin. Daha önce rapor edilmediğinden emin olmak için kontrol edin."
             }
         },
         "login": {
@@ -312,7 +312,7 @@
     },
     "popups": {
         "password": {
-            "title": "Lütfen Parolanızı Yazın",
+            "title": "Parola gerekli",
             "subtitle": "Stronghold'u açmak için lütfen cüzdan şifrenizi giriniz"
         },
         "qr": {
@@ -335,7 +335,7 @@
         },
         "deleteAccount": {
             "title": "%{name} kaldır",
-            "body": "You can add this account back later but you may lose your transaction history.",
+            "body": "Bu hesabı daha sonra tekrar ekleyebilirsiniz fakat işlem geçmişinizi kaybedebilirsiniz.",
             "typePassword": "Doğrulama için lütfen cüzdan şifrenizi giriniz.",
             "deleteAccount": "Hesabı Kaldır",
             "errorTitle": "Silinemedi: {name}",
@@ -371,7 +371,7 @@
             "platform": "Platform",
             "platformVersion": "Platform Sürümü",
             "platformArchitecture": "Platform Mimarisi",
-            "cpuCount": "CPU Count",
+            "cpuCount": "CPU Sayısı",
             "totalMem": "Toplam Hafıza",
             "freeMem": "Boş Hafıza",
             "userPath": "Kullanıcı yolu"
@@ -535,7 +535,7 @@
         "status": "Durum",
         "confirmed": "Onaylandı",
         "pending": "Bekleniyor",
-        "noAccounts": "You have no accounts, please create one.",
+        "noAccounts": "Hesabınız yok, lütfen bir tane oluşturun.",
         "loadingAccounts": "Yükleniyor, lütfen bekleyin...",
         "addProfile": "Profil Ekle",
         "noRecentHistory": "geçmiş yok",
@@ -543,7 +543,7 @@
         "transferSelectingInputs": "Girişlerin seçimi",
         "transferRemainderAddress": "Generating remainder deposit address",
         "transferSigning": "İşlemin imzalanması",
-        "transferPow": "Performing PoW",
+        "transferPow": "PoW yapılıyor",
         "transferBroadcasting": "İşlem yayınlanıyor",
         "transferComplete": "Transfer tamamlandı",
         "creatingAccount": "Yeni bir hesap oluşturuluyor, lütfen bekleyin...",
@@ -554,8 +554,8 @@
         "passwordSuccess": "Şifre başarıyla güncellendi",
         "passwordFailed": "Şifre güncellemesi yapılamadı",
         "exportingStronghold": "Stronghold Aktar...",
-        "exportingStrongholdSuccess": "Exported stronghold successfully",
-        "exportingStrongholdFailed": "Exported stronghold failed",
+        "exportingStrongholdSuccess": "Stronghold başarıyla dışa aktarıldı",
+        "exportingStrongholdFailed": "Stronghold dışa aktarımı başarısız oldu",
         "pinCodeUpdating": "Pın kodu güncelleniyor...",
         "pinCodeSuccess": "Şifre başarıyla güncellendi",
         "pinCodeFailed": "Şifre güncellemesi yapılamadı",
@@ -569,6 +569,7 @@
     },
     "dates": {
         "today": "Bugün",
+        "yesterday": "Dün",
         "daysAgo": "{time, plural, one {# gün} other {# gün}} önce",
         "weeksAgo": "{time, plural, one {# hafta} other {# haftalar}} önce",
         "monthsAgo": "{time, plural, one {# ay} other {# ay}} önce",
@@ -577,7 +578,7 @@
     "notifications": {
         "valueTx": "{{account}} 'a {{value}} alınıyor",
         "confirmed": "{{account}} hesabından giden {{value}} onaylandı",
-        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
+        "confirmedInternal": "{{senderAccount}} 'dan {{receiverAccount}} 'a {{value}} onaylandı",
         "failed": "{{account}} hesabından giden {{value}} onaylandı",
         "downloadingUpdate": "Güncelleme indiriliyor",
         "updateReady": "Güncelleme hazır",
@@ -595,17 +596,17 @@
         "password": {
             "doNotMatch": "Parolalar eşleşmiyor.",
             "tooWeak": "Yeni şifren oldukça zayıf",
-            "row": "Straight rows of keys are easy to guess.",
-            "pattern": "Short keyboard patterns are easy to guess.",
-            "names": "Common names and surnames are easy to guess.",
-            "repeats": "Repeats like 'aaa' are easy to guess.",
-            "repeats2": "Repeats like 'abcabcabc' are easy to guess.",
-            "sequence": "Sequences of characters are easy to guess.",
-            "years": "Recent years are easy to guess.",
-            "dates": "Dates are easy to guess.",
-            "common": "This is a very common password.",
-            "similar": "This is similar to a common password.",
-            "reasonWord": "A single word is easy to guess.",
+            "row": "Düz tuş satırlarının tahmin edilmesi kolaydır.",
+            "pattern": "Kısa klavye kalıplarının tahmin edilmesi kolaydır.",
+            "names": "Yaygın adların ve soyadların tahmin edilmesi kolaydır.",
+            "repeats": "Aaa gibi tekrarların tahmin edilmesi kolaydır.",
+            "repeats2": "'abcabcabc' gibi tekrarların tahmin edilmesi kolaydır.",
+            "sequence": "Karakter dizilerinin tahmin edilmesi kolaydır.",
+            "years": "Yakın tarihleri tahmin etmek daha kolaydır.",
+            "dates": "Tarihlerin tahmin edilmesi kolaydır.",
+            "common": "Bu çok yaygın bir parola.",
+            "similar": "Bu, yaygın olarak kullanılan bir parolaya benziyor.",
+            "reasonWord": "Tek bir kelimenin tahmin edilmesi kolaydır.",
             "incorrect": "Şifreniz doğru değil.",
             "length": "Şifreniz  {length, plural, one {1 character} other {# characters}} den daha fazla olamaz"
         },
@@ -615,27 +616,27 @@
             "incorrect": "Mevcut şifreniz yanlış."
         },
         "account": {
-            "length": "Your account name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "empty": "You must use your latest account before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this account.",
+            "length": "Hesap adınız {length, plural, one {1 karakter} other {# karakter}}den büyük olamaz.",
+            "empty": "Yenisini oluşturmadan önce en son hesabınızı kullanmalısınız.",
+            "notEmpty": "Bu hesabı silmeden önce bakiyenizi transfer etmelisiniz.",
             "duplicate": "Bu kullanıcı adıyla bir hesap zaten var."
         },
         "send": {
-            "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
-            "amountTooHigh": "This is greater than your available balance.",
-            "amountNoFloat": "If units are `i` you cannot use decimal places.",
-            "amountInvalidFormat": "The amount appears to be an invalid number.",
+            "addressLength": "Adresler {length, plural, one {1 karakter} other {# karakter}} uzunluğunda olmalıdır.",
+            "amountTooHigh": "Bu, mevcut bakiyenizden daha büyüktür.",
+            "amountNoFloat": "Birimler \"i\" ise, ondalık basamakları kullanamazsınız.",
+            "amountInvalidFormat": "Miktar geçersiz görünüyor.",
             "amountZero": "Toplam miktar 0'dan büyük olmalıdır",
-            "wrongAddressFormat": "Addresses start with the prefix {prefix}.",
-            "insufficientFunds": "This account has insufficient funds.",
-            "sendingDust": "You cannot send less than 1 Mi.",
-            "leavingDust": "You cannot leave less than 1 Mi on your address."
+            "wrongAddressFormat": "Adresler {prefix} ön eki ile başlar.",
+            "insufficientFunds": "Hesap bakiyesi yetersiz.",
+            "sendingDust": "1 Mi den daha az gönderim yapamazsınız.",
+            "leavingDust": "Adresinizde 1 Mi'den az bırakamazsınız."
         },
         "node": {
-            "invalid": "Please enter a valid URL.",
-            "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
-            "duplicate": "This node has already been added.",
-            "unsynced": "The node is not in sync.",
+            "invalid": "Lütfen geçerli bir URL giriniz.",
+            "https": "HTTPS gerekmektedir. Güvenli olmayan HTTP bağlantılarını kullanmak için bir geliştirici profili oluşturun.",
+            "duplicate": "Bu sunucu zaten eklenmiş.",
+            "unsynced": "Ağ senkronize değil.",
             "noSynced": "Hiçbir düğüm mevcut değil"
         },
         "global": {

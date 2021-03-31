@@ -4,8 +4,9 @@
     import { appSettings } from 'shared/lib/appSettings'
     import { refreshVersionDetails, versionDetails } from 'shared/lib/appUpdater'
     import { Electron } from 'shared/lib/electron'
+    import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
-    import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
+    import { dir, isLocaleLoaded, localize, setupI18n, _ } from 'shared/lib/i18n'
     import { fetchMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { openPopup, popupState } from 'shared/lib/popup'
@@ -89,9 +90,12 @@
         Electron.onEvent('menu-diagnostics', async () => {
             openPopup({ type: 'diagnostics' })
         })
+        Electron.hookErrorLogger((err) => {
+            addError(err)
+        })
 
         await cleanupInProgressProfiles()
-    })
+})
 </script>
 
 <style global type="text/scss">
@@ -112,7 +116,7 @@
         }
     }
     ::-webkit-scrollbar {
-        @apply w-1;
+        @apply w-3;
     }
     ::-webkit-scrollbar-thumb {
         @apply bg-gray-300;

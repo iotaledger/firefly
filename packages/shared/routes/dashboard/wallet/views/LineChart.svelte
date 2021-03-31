@@ -69,6 +69,10 @@
         if (!CurrencyTypes[profileCurrency]) {
             currencyDropdown.push({ value: profileCurrency.toLocaleLowerCase(), label: profileCurrency })
         }
+        // display USD values if previously selected currency is not in the list anymore
+        if (!currencyDropdown.some(({ value }) => value === $chartCurrency)) {
+            chartCurrency.set(CurrencyTypes.USD)
+        }
     })
 
     function handleCurrencySelect({ value: currency }) {
@@ -107,14 +111,15 @@
         {/if}
         <div class="flex space-x-2">
             <span>
-                <Dropdown small value={$chartCurrency.toUpperCase()} items={currencyDropdown} onSelect={handleCurrencySelect} />
+                <Dropdown small value={$chartCurrency.toUpperCase()} items={currencyDropdown} onSelect={handleCurrencySelect} contentWidth={true} />
             </span>
             <span>  
                 <Dropdown
                     small
                     value={TIMEFRAME_MAP[$chartTimeframe]}
                     items={Object.keys(TIMEFRAME_MAP).map((value) => ({ label: TIMEFRAME_MAP[value], value }))}
-                    onSelect={(newTimeframe) => chartTimeframe.set(newTimeframe.value)} />
+                    onSelect={(newTimeframe) => chartTimeframe.set(newTimeframe.value)}
+                    contentWidth={true} />
             </span>
         </div>
     </div>

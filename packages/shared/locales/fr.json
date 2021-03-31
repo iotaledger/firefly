@@ -569,6 +569,7 @@
     },
     "dates": {
         "today": "Aujourd'hui",
+        "yesterday": "Hier",
         "daysAgo": "Il y a {time, plural, one {# jour} other {# jours}}",
         "weeksAgo": "Il y a {time, plural, one {# semaine} other {# semaines}}",
         "monthsAgo": "il y a {time, plural, one {# mois} other {# mois}}",

@@ -569,6 +569,7 @@
     },
     "dates": {
         "today": "Σήμερα",
+        "yesterday": "Yesterday",
         "daysAgo": "πριν {time, plural, one {# μέρα} other {# μέρες}}",
         "weeksAgo": "πριν {time, plural, one {# εβδομάδα} other {# εβδομάδες}}",
         "monthsAgo": "πριν {time, plural, one {# μήνα} other {# μήνες}}",

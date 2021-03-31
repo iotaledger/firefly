@@ -25,7 +25,7 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+            "checkbox": "Četl jsem a souhlasím se Zásadami ochrany osobních údajů a podmínkami služby"
         },
         "appearance": {
             "title": "Vzhled",
@@ -80,7 +80,7 @@
             "title": "Ověřte obnovovací frázi",
             "body": "Zkontrolujme, zda jste správně zapsali frázi. Vyberte slova ve správném pořadí.",
             "word": "Slovo",
-            "verified": "Recovery phrase verified",
+            "verified": "Fráze obnovení ověřena",
             "verifiedBody": "Remember to keep it private and safely stored."
         },
         "backupWallet": {
@@ -88,15 +88,15 @@
             "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
             "body2": "Reasons why digital backups are important:",
             "reason1": "Easily recover your wallet without typing in your recovery phrase",
-            "reason2": "Import your wallet to other devices",
-            "reason3": "Recover your full transaction history"
+            "reason2": "Importovat peněženku do jiných zařízení",
+            "reason3": "Obnovit celou historii transakcí"
         },
         "recoveryPhraseSaved": {
             "title": "Úspěšně zálohováno",
             "body": "Zálohovali jste peněženku jako Stronghold soubor."
         },
         "congratulations": {
-            "title": "Wallet setup completed",
+            "title": "Nastavení peněženky dokončeno",
             "body": "Vaše peněženka je připravena k použití."
         },
         "import": {
@@ -124,9 +124,9 @@
             "title": "Úspěšně jste obnovili váš účet pomocí zálohy",
             "body": "Nyní můžete nastavit novou peněženku.",
             "seedvaultTitle": "Úspěšně importováno",
-            "seedvaultBody": "Your password is correct, you can now continue.",
+            "seedvaultBody": "Vaše heslo je správné, nyní můžete pokračovat.",
             "strongholdTitle": "Úspěšně importováno",
-            "strongholdBody": "Your password is correct, you can now continue."
+            "strongholdBody": "Vaše heslo je správné, nyní můžete pokračovat."
         },
         "migrate": {
             "title": "Migrujte vaše tokeny",
@@ -163,7 +163,7 @@
             },
             "profile": {
                 "title": "Profil",
-                "description": "Change your profile name or set an avatar"
+                "description": "Změňte jméno profilu nebo nastavte avatar"
             },
             "sync": {
                 "title": "Synchronizace účtů",
@@ -234,7 +234,7 @@
                 "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
-                "title": "Výpis chyb",
+                "title": "Záznam chyb",
                 "description": "View errors to debug an issue"
             },
             "diagnostics": {
@@ -569,6 +569,7 @@
     },
     "dates": {
         "today": "Dnes",
+        "yesterday": "Yesterday",
         "daysAgo": "{time, plural, one {Zbývá # den} few {Zbývají # dny} many {Zbývá # dní} other {Zbývá # dní}}",
         "weeksAgo": "před {time, plural, one {# týdnem} other {# týdny}}",
         "monthsAgo": "před {time, plural,\n  one {# měsícem}\n  few {# měsíci}\n  many {# měsíci}\n  other {# měsíci}\n}",

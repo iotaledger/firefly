@@ -3,12 +3,12 @@
     import { clearSendParams } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
-    import { priceData } from 'shared/lib/marketData'
+    import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
     import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, isStrongholdLocked } from 'shared/lib/profile'
-    import { resetWalletRoute, walletRoute } from 'shared/lib/router'
+    import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
         AccountMessage,
@@ -267,7 +267,6 @@
                         setTimeout(() => {
                             clearSendParams()
                             isTransferring.set(false)
-                            resetWalletRoute()
                         }, 3000)
                     },
                     onError(err) {
@@ -344,9 +343,8 @@
                     transferState.set('Complete')
 
                     setTimeout(() => {
-                        clearSendParams()
+                        clearSendParams(true)
                         isTransferring.set(false)
-                        resetWalletRoute()
                     }, 3000)
                 },
                 onError(err) {
@@ -400,6 +398,8 @@
                 console.error(error)
             },
         })
+
+        addProfileCurrencyPriceData()
     })
 </script>
 
