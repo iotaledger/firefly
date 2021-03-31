@@ -69,6 +69,10 @@
         if (!CurrencyTypes[profileCurrency]) {
             currencyDropdown.push({ value: profileCurrency.toLocaleLowerCase(), label: profileCurrency })
         }
+        // display USD values if previously selected currency is not in the list anymore
+        if (!currencyDropdown.some(({ value }) => value === $chartCurrency)) {
+            chartCurrency.set(CurrencyTypes.USD)
+        }
     })
 
     function handleCurrencySelect({ value: currency }) {

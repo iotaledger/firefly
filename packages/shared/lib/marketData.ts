@@ -221,7 +221,7 @@ export async function addProfileCurrencyPriceData(): Promise<void> {
     if (profile) {
         // get selected profile currency and add its estimated history
         const profileCurrency: string = profile.settings.currency.toLowerCase()
-        if (!get(priceData)[profileCurrency.toLowerCase()]) {
+        if (!Object.values(CurrencyTypes.USD).includes(profileCurrency)) {
             const profileCurrencyRate: number = get(exchangeRates)[profileCurrency.toUpperCase()]
             const usdHistory = get(priceData)[CurrencyTypes.USD]
             let profileCurrencyHistory = {};
