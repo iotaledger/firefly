@@ -29,7 +29,8 @@ interface Profile {
 export interface UserSettings {
     currency: AvailableExchangeRates
     automaticNodeSelection: boolean
-    includeDefaultNodes: boolean
+    includeOfficialNodes: boolean
+    disabledNodes: string[] | undefined
     lockScreenTimeout: number
 }
 
@@ -90,7 +91,8 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
         settings: {
             currency: AvailableExchangeRates.USD,
             automaticNodeSelection: true,
-            includeDefaultNodes: true,
+            includeOfficialNodes: true,
+            disabledNodes: undefined,
             lockScreenTimeout: 5,
         },
     }

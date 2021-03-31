@@ -227,7 +227,7 @@
             },
             "configureNodeList": {
                 "title": "Select a node",
-                "description": "",
+                "description": "Manage a list of nodes to use for wallet transactions.",
                 "primaryNode": "Primary node",
                 "excludeNode": "Exclude node",
                 "includeNode": "Include node",
@@ -357,6 +357,7 @@
         },
         "node": {
             "titleAdd": "Add a node",
+            "titleUpdate": "Update a node",
             "titleRemove": "Remove a node",
             "titleDetails": "Node details",
             "nodeAddress": "Node address",
@@ -443,6 +444,7 @@
         "deleteAccount": "Remove account",
         "max": "Max",
         "addNode": "Add node",
+        "updateNode": "Update node",
         "removeNode": "Remove node",
         "hide": "Hide",
         "hideOthers": "Hide Others",

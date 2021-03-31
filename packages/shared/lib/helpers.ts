@@ -197,3 +197,21 @@ export const convertHexToRGBA = (hexCode: string, opacity: number = 100) => {
 
     return `rgba(${r},${g},${b},${opacity / 100})`;
 };
+
+/**
+ * Strip trailing slashes from the text
+ * @param str The text to strip the values from
+ * @returns The stripped text
+ */
+export const stripTrailingSlash = (str) => {
+    return str ? str.replace(/\/+$/, '') : ''
+}
+
+/**
+ * Strip spaces from the text
+ * @param str The text to strip the values from
+ * @returns The stripped text
+ */
+ export const stripSpaces = (str) => {
+    return str ? str.replace(/ /g, '') : ''
+}
