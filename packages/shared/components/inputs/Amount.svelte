@@ -1,6 +1,8 @@
 <script lang="typescript">
-    import { Unit } from '@iota/unit-converter'
+    import { convertUnits, Unit } from '@iota/unit-converter'
     import { Input, Text } from 'shared/components'
+    import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
+    import { activeProfile } from 'shared/lib/profile'
     import { convertUnitsNoE, UNIT_MAP } from 'shared/lib/units'
 
     export let amount = undefined
@@ -20,6 +22,9 @@
     let navContainer
     let unitsButton
     let focusedItem
+
+    let profileCurrency: AvailableExchangeRates = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
+    $: fiatAmount = amountToFiat(amount)
 
     const clickOutside = () => {
         dropdown = false
@@ -76,6 +81,17 @@
             focusedItem = undefined
         }
     }
+
+    const amountToFiat = (_amount) => {
+        if (!amount) return null
+        const amountAsFloat = Number.parseFloat(_amount)
+        if (Number.isNaN(amountAsFloat)) {
+            return null
+        } else {
+            const amountAsI = convertUnits(amountAsFloat, unit, Unit.i)
+            return convertToFiat(amountAsI, $currencies[CurrencyTypes.USD], $exchangeRates[profileCurrency])
+        }
+    }
 </script>
 
 <style type="text/scss">
@@ -100,7 +116,7 @@
 <amount-input class:disabled class="relative block {classes}" on:keydown={handleKey}>
     <Input
         {error}
-        label={label || locale('general.amount')}
+        label={fiatAmount ? `${fiatAmount} ${profileCurrency}` : label || locale('general.amount')}
         placeholder={placeholder || locale('general.amount')}
         bind:value={amount}
         maxlength={17}
@@ -109,12 +125,12 @@
         maxDecimals={UNIT_MAP[unit].dp}
         integer={unit === Unit.i}
         float={unit !== Unit.i}
-        style={dropdown ? "border-bottom-right-radius: 0" : ""} 
+        style={dropdown ? 'border-bottom-right-radius: 0' : ''}
         isFocused={dropdown} />
     <actions class="absolute right-0 top-2.5 h-8 flex flex-row items-center text-12 text-gray-500 dark:text-white">
         <button
             on:click={maxClick}
-            class={`pr-3 ${disabled ? 'cursor-auto' : 'hover:text-blue-500 focus:text-blue-500 cursor-pointer'}`}
+            class={`pr-2 ${disabled ? 'cursor-auto' : 'hover:text-blue-500 focus:text-blue-500 cursor-pointer'}`}
             {disabled}>{locale('actions.max').toUpperCase()}</button>
         <button
             on:click={(e) => {
