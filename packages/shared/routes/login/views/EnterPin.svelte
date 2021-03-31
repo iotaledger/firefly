@@ -24,8 +24,12 @@
 
     let timeRemainingBeforeNextAttempt = WAITING_TIME_AFTER_MAX_INCORRECT_ATTEMPTS
 
-    $: hasCorrectFormat = validatePinFormat(pinCode)
     $: hasReachedMaxAttempts = attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS
+    $: {
+        if (validatePinFormat(pinCode)) {
+            onSubmit()
+        }
+    }
 
     let buttonText = setButtonText(timeRemainingBeforeNextAttempt)
 
@@ -121,7 +125,7 @@
             </div>
         </button>
         <div class="pt-40 pb-16 flex w-full h-full flex-col items-center justify-between">
-            <div class="w-96 flex flex-row flex-wrap justify-center mb-20">
+            <div class="w-96 flex flex-col flex-wrap items-center mb-20">
                 <Profile name={$activeProfile?.name} bgColor="blue" />
                 <Pin
                     bind:this={pinRef}
@@ -135,10 +139,10 @@
                               values: { attempts: attempts.toString() },
                           }) : locale('actions.enterYourPin')}
                 </Text>
+                {#if hasReachedMaxAttempts}
+                    <Text error classes="mt-6">{buttonText}</Text>
+                {/if}
             </div>
-            <Button classes="w-96" disabled={!hasCorrectFormat || hasReachedMaxAttempts || isBusy} onClick={() => onSubmit()}>
-                {hasReachedMaxAttempts ? buttonText : locale('actions.continue')}
-            </Button>
         </div>
     </div>
 {/if}
