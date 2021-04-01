@@ -389,7 +389,7 @@ export const initialiseListeners = () => {
                     .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
                     .replace('{{account}}', account.alias);
 
-                showSystemNotification({ type: "info", message: notificationMessage });
+                showSystemNotification({ type: "info", message: notificationMessage, contextData: { type: "valueTx", accountId: account.id } });
             }
         },
         onError(error) {
@@ -465,7 +465,7 @@ export const initialiseListeners = () => {
                         .replace('{{account}}', account.alias)
                 }
 
-                showSystemNotification({ type: "info", message: notificationMessage })
+                showSystemNotification({ type: "info", message: notificationMessage, contextData: { type: messageKey, accountId: account.id } });
             }
 
             const { confirmedInternalMessageIds } = get(wallet)
