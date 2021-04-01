@@ -13,7 +13,7 @@
     export let generateAddress
     export let internalTransfer
     export let isGeneratingAddress
-    const deletedAccounts = $activeProfile.deletedAccounts ?? []
+    const deletedAccounts = $activeProfile?.deletedAccounts ?? []
 
     const account = getContext<Readable<WalletAccount>>('selectedAccount')
     function handleSendClick() {

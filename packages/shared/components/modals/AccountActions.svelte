@@ -10,7 +10,7 @@
 
     const account = getContext<Readable<WalletAccount>>('selectedAccount')
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
-    const deletedAccounts = $activeProfile.deletedAccounts ?? []
+    const deletedAccounts = $activeProfile?.deletedAccounts ?? []
 
     export let isActive
     export let locale

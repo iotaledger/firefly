@@ -18,7 +18,7 @@
 
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
     const accountsLoaded = getContext<Writable<boolean>>('walletAccountsLoaded')
-    const deletedAccounts = $activeProfile.deletedAccounts ?? []
+    const deletedAccounts = $activeProfile?.deletedAccounts ?? []
 
     let startInit
 
