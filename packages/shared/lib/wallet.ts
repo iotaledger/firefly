@@ -1129,11 +1129,13 @@ export const buildAccountNetworkSettings = () => {
     let clientOptionNodes = []
     let primaryNodeUrl = ''
     let officialNodes = getOfficialNodes()
+    let localPow = true
 
     if (actualAccounts && actualAccounts.length > 0) {
         const clientOptions = actualAccounts[0].clientOptions
         if (clientOptions) {
             clientOptionNodes = clientOptions.nodes ?? []
+            localPow = clientOptions.localPow ?? true
 
             if (clientOptions.node) {
                 primaryNodeUrl = stripTrailingSlash(clientOptions.node.url)
@@ -1188,11 +1190,12 @@ export const buildAccountNetworkSettings = () => {
         automaticNodeSelection,
         includeOfficialNodes,
         nodes,
-        primaryNodeUrl
+        primaryNodeUrl,
+        localPow
     }
 }
 
-export const updateAccountNetworkSettings = async (automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl) => {
+export const updateAccountNetworkSettings = async (automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl, localPow) => {
     updateProfile('settings.automaticNodeSelection', automaticNodeSelection)
     updateProfile('settings.includeOfficialNodes', includeOfficialNodes)
 
@@ -1233,7 +1236,8 @@ export const updateAccountNetworkSettings = async (automaticNodeSelection, inclu
 
     const clientOptions = {
         nodes: clientNodes,
-        primaryNodeUrl: clientNode
+        primaryNodeUrl: clientNode,
+        localPow
     }
 
     api.setClientOptions(

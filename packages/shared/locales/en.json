@@ -434,7 +434,7 @@
         "enableDeveloperMode": "Enable developer mode",
         "enableSystemNotifications": "Enable system notifications",
         "exportState": "Export state",
-        "outsourceProofOfWork": "Outsource proof of work",
+        "localProofOfWork": "Local proof of work",
         "unlock": "Unlock",
         "updateFirefly": "Update Firefly",
         "restartNow": "Restart now",

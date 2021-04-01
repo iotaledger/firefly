@@ -10,7 +10,7 @@
     export let locale
 
     let deepLinkingChecked = $appSettings.deepLinking
-    let { automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl } = buildAccountNetworkSettings()
+    let { automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl, localPow } = buildAccountNetworkSettings()
 
     let contextPosition = { x: 0, y: 0 }
     let nodeContextMenu = undefined
@@ -33,7 +33,7 @@
             primaryNodeUrl = allEnabled[0].url
         }
     }
-    $: updateAccountNetworkSettings(automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl)
+    $: updateAccountNetworkSettings(automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl, localPow)
 
     function handleAddNodeClick() {
         openPopup({
@@ -202,6 +202,12 @@
             </section>
             <HR classes="pb-5 mt-5 justify-center" />
         {/if}
+        <section id="proofOfWork" class="w-3/4">
+            <Text type="h4" classes="mb-3">{locale('views.settings.proofOfWork.title')}</Text>
+            <Text type="p" secondary classes="mb-5">{locale('views.settings.proofOfWork.description')}</Text>
+            <Checkbox label={locale('actions.localProofOfWork')} bind:checked={localPow} />
+        </section>
+        <HR classes="pb-5 mt-5 justify-center" />
     {/if}
     <!-- TODO: Implement and enable -->
     <section id="developerMode" class="w-3/4 opacity-50">
