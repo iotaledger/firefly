@@ -5,16 +5,16 @@
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import type { WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import type { Readable, Writable } from 'svelte/store'
+    import type { Readable } from 'svelte/store'
 
     export let locale
     export let generateAddress = (accountId) => {}
     export let isGeneratingAddress = false
 
-    const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
+    const liveAccounts = getContext<Readable<WalletAccount[]>>('liveAccounts')
     const currentAccount = getContext<Readable<WalletAccount>>('selectedAccount')
 
-    let selectedAccount = $currentAccount || $accounts[0]
+    let selectedAccount = $currentAccount || $liveAccounts[0]
 
     const handleDropdownSelect = (item) => {
         selectedAccount = item
@@ -47,9 +47,9 @@
                 <Dropdown
                     valueKey={'alias'}
                     value={selectedAccount.alias}
-                    items={$accounts}
+                    items={$liveAccounts}
                     onSelect={handleDropdownSelect}
-                    disabled={$accounts.length === 1} />
+                    disabled={$liveAccounts.length === 1} />
             </div>
         {/if}
         <div

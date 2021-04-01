@@ -22,7 +22,7 @@ interface Profile {
      */
     settings: UserSettings
     isDeveloperProfile: boolean
-
+    deletedAccounts?: string[]
 }
 
 /**
@@ -36,6 +36,7 @@ export interface UserSettings {
     customNodes: Node[]
     /** Lock screen timeout in minutes */
     lockScreenTimeout: number
+    showDeletedAccounts?: boolean
 }
 
 export const activeProfileId = writable<string | null>(null)
@@ -187,7 +188,7 @@ export const removeProfile = (id: string): void => {
  * @returns {void}
  */
 export const updateProfile = (
-    path: string, value: string | boolean | Date | AvailableExchangeRates | Node | Node[]) => {
+    path: string, value: string | string[] | boolean | Date | AvailableExchangeRates | Node | Node[]) => {
     const _update = (_profile) => {
         const pathList = path.split('.')
 

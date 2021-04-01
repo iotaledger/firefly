@@ -9,14 +9,14 @@
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
     import { isTransferring, transferState, WalletAccount } from 'shared/lib/wallet'
     import { getContext, onMount } from 'svelte'
-    import type { Readable, Writable } from 'svelte/store'
+    import type { Readable } from 'svelte/store'
 
     export let locale
     export let send
     export let internalTransfer
 
-    const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
     const account = getContext<Readable<WalletAccount>>('selectedAccount')
+    const liveAccounts = getContext<Readable<WalletAccount[]>>('liveAccounts')
 
     enum SEND_TYPE {
         EXTERNAL = 'sendPayment',
@@ -28,7 +28,7 @@
     let amount = $sendParams.amount === 0 ? '' : convertUnitsNoE($sendParams.amount, Unit.i, unit)
     let to = undefined
     let amountError = ''
-    let addressPrefix = ($account ?? $accounts[0]).depositAddress.split('1')[0]
+    let addressPrefix = ($account ?? $liveAccounts[0]).depositAddress.split('1')[0]
     let addressError = ''
     let toError = ''
 
@@ -73,7 +73,7 @@
         },
     }
 
-    $: accountsDropdownItems = $accounts.map((acc) => format(acc))
+    $: accountsDropdownItems = $liveAccounts.map((acc) => format(acc))
     $: from = $account ? format($account) : accountsDropdownItems[0]
 
     const handleSendTypeClick = (type) => {
@@ -83,7 +83,7 @@
     const handleFromSelect = (item) => {
         from = item
         if (to === from) {
-            to = $accounts.length === 2 ? accountsDropdownItems[from.id === $accounts[0].id ? 1 : 0] : undefined
+            to = $liveAccounts.length === 2 ? accountsDropdownItems[from.id === $liveAccounts[0].id ? 1 : 0] : undefined
         }
         amountError = ''
     }
@@ -163,7 +163,7 @@
         amount = convertUnitsNoE(from.balance, Unit.i, unit)
     }
     onMount(() => {
-        to = $accounts.length === 2 ? accountsDropdownItems[from.id === $accounts[0].id ? 1 : 0] : to
+        to = $liveAccounts.length === 2 ? accountsDropdownItems[from.id === $liveAccounts[0].id ? 1 : 0] : to
     })
 </script>
 
@@ -196,7 +196,7 @@
                         {locale(`general.${SEND_TYPE.EXTERNAL}`)}
                     </Text>
                 </button>
-                {#if $accounts.length > 1}
+                {#if $liveAccounts.length > 1}
                     <button
                         on:click={() => handleSendTypeClick(SEND_TYPE.INTERNAL)}
                         disabled={$isTransferring}
@@ -225,7 +225,7 @@
                             placeholder={locale('general.from')}
                             items={accountsDropdownItems}
                             onSelect={handleFromSelect}
-                            disabled={$accounts.length === 1 || $isTransferring} />
+                            disabled={$liveAccounts.length === 1 || $isTransferring} />
                     </div>
                 {/if}
                 <div class="w-full block">
@@ -245,7 +245,7 @@
                             placeholder={locale('general.to')}
                             items={accountsDropdownItems.filter((a) => from && a.id !== from.id)}
                             onSelect={handleToSelect}
-                            disabled={$isTransferring || $accounts.length === 2} />
+                            disabled={$isTransferring || $liveAccounts.length === 2} />
                         <Error error={toError} />
                     {:else}
                         <Address
@@ -263,11 +263,7 @@
     {#if !$isTransferring}
         <div class="flex flex-row justify-between px-2">
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>{locale('actions.cancel')}</Button>
-            <Button
-                classes="-mx-2 w-1/2"
-                onClick={() => handleSendClick()}>
-                {locale('actions.send')}
-            </Button>
+            <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()}>{locale('actions.send')}</Button>
         </div>
     {/if}
     {#if $isTransferring}

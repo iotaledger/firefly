@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { Button, Password, Text } from 'shared/components'
     import { sendParams } from 'shared/lib/app'
-    import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
@@ -24,30 +23,18 @@
             error = ''
             api.setStrongholdPassword(password, {
                 onSuccess() {
-                    api.removeAccount($selectedAccountId, {
-                        onSuccess() {
-                            isBusy = false
+                    isBusy = false
 
-                            // 1. Close popup
-                            closePopup()
+                    // 1. Close popup
+                    closePopup()
 
-                            // 2. Remove account from walletAccounts
-                            deleteAccount($selectedAccountId)
+                    // 2. Remove account from walletAccounts
+                    deleteAccount($selectedAccountId)
 
-                            // 3. Go to main dashboard
-                            selectedAccountId.set(null)
-                            accountRoute.set(AccountRoutes.Init)
-                            walletRoute.set(WalletRoutes.Init)
-                        },
-                        onError(err) {
-                            isBusy = false
-
-                            showAppNotification({
-                                type: 'error',
-                                message: locale(err.error),
-                            })
-                        },
-                    })
+                    // 3. Go to main dashboard
+                    selectedAccountId.set(null)
+                    accountRoute.set(AccountRoutes.Init)
+                    walletRoute.set(WalletRoutes.Init)
                 },
                 onError(err) {
                     isBusy = false

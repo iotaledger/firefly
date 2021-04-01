@@ -13,10 +13,10 @@
     export let isGeneratingAddress
 
     const account = getContext<Readable<WalletAccount>>('selectedAccount')
-    const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
+    const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
 
     $: transactions = $account ? getAccountMessages($account) : []
-    $: navAccounts = $account ? $accounts.map(({ id, alias, color }) => ({ id, alias, color, active: $account.id === id })) : []
+    $: navAccounts = $account ? $viewableAccounts.map(({ id, alias, color }) => ({ id, alias, color, active: $account.id === id })) : []
 
     let showActionsModal = false
 
@@ -26,7 +26,7 @@
 </script>
 
 <!-- wait for account to load -->
-{#if $accounts && $account}
+{#if $viewableAccounts && $account}
     <div class="w-full h-full flex flex-col flex-nowrap p-10 pt-0 relative flex-1 bg-gray-50 dark:bg-gray-900">
         <AccountNavigation {locale} accounts={navAccounts} />
         {#key $account}

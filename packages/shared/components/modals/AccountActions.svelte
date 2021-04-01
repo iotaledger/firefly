@@ -1,17 +1,20 @@
 <script lang="typescript">
-    import { Icon, Modal, Text, HR } from 'shared/components'
+    import { HR, Icon, Modal, Text } from 'shared/components'
     import { openPopup } from 'shared/lib/popup'
+    import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { accountRoute } from 'shared/lib/router'
     import { AccountRoutes } from 'shared/lib/typings/routes'
-    import type { WalletAccount } from 'shared/lib/wallet'
+    import { selectedAccountId, WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import type { Readable, Writable } from 'svelte/store'
+    import type { Readable } from 'svelte/store'
 
     const account = getContext<Readable<WalletAccount>>('selectedAccount')
-    const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
+    const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
+    const deletedAccounts = $activeProfile.deletedAccounts ?? []
 
     export let isActive
     export let locale
+    let deleted = deletedAccounts.includes($selectedAccountId)
 
     const handleCustomiseAccountClick = () => {
         accountRoute.set(AccountRoutes.Manage)
@@ -27,9 +30,12 @@
             type: 'deleteAccount',
             props: {
                 account,
-                hasMultipleAccounts: $accounts.length > 1,
+                hasMultipleAccounts: $viewableAccounts.length > 1,
                 deleteAccount: (id) => {
-                    accounts.update((_accounts) => _accounts.filter((_account) => _account.id !== id))
+                    if (!deletedAccounts.includes(id)) {
+                        deletedAccounts.push(id)
+                        updateProfile('deletedAccounts', deletedAccounts)
+                    }
                 },
             },
         })
@@ -42,7 +48,8 @@
         <!-- Customize -->
         <button
             on:click={() => handleCustomiseAccountClick()}
-            class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full">
+            class="group flex flex-row justify-start items-center hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20 py-3 px-3 w-full {deleted ? "opacity-50 pointer-events-none" : ""}"
+            disabled={deleted}>
             <Icon icon="customize" classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
             <Text smaller classes="group-hover:text-blue-500">{locale(`actions.customizeAcount`)}</Text>
         </button>
@@ -59,7 +66,8 @@
         <!-- Delete -->
         <button
             on:click={() => handleDeleteAccountClick()}
-            class="group flex flex-row justify-start items-center hover:bg-red-50 dark:hover:bg-red-200 dark:hover:bg-opacity-20 py-4 px-3 w-full">
+            class="group flex flex-row justify-start items-center hover:bg-red-50 dark:hover:bg-red-200 dark:hover:bg-opacity-20 py-4 px-3 w-full {deleted ? "opacity-50 pointer-events-none" : ""}"
+            disabled={deleted}>
             <Icon icon="delete" classes="text-red-500 ml-1 mr-3" />
             <Text smaller classes="text-red-500" overrideColor>{locale(`actions.deleteAccount`)}</Text>
         </button>

@@ -209,6 +209,10 @@
                 "title": "Resync accounts",
                 "description": ""
             },
+            "showDeletedAccounts": {
+                "title": "Show removed accounts",
+                "description": "Selecting this options will show accounts that were previously removed."
+            },
             "deleteProfile": {
                 "title": "Delete profile",
                 "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
@@ -459,7 +463,8 @@
         "skipBackup": "Skip file backup",
         "finishSetup": "Finish setup",
         "readDocumentation": "Read the documentation",
-        "visitFaq": "Visit FAQ"
+        "visitFaq": "Visit FAQ",
+        "showDeletedAccounts": "Show removed accounts"
     },
     "general": {
         "password": "Password",
@@ -565,7 +570,8 @@
         "passwordStrength2": "Weak",
         "passwordStrength3": "Average",
         "passwordStrength4": "Strong",
-        "creatingProfile": "Creating profile, please wait..."
+        "creatingProfile": "Creating profile, please wait...",
+        "accountRemoved": "This account has been removed and can no longer be used."
     },
     "dates": {
         "today": "Today",

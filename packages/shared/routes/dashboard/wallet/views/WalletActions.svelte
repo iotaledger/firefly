@@ -2,11 +2,12 @@
     import { AccountTile, Button, Text } from 'shared/components'
     import { loggedIn } from 'shared/lib/app'
     import { closePopup, openPopup } from 'shared/lib/popup'
+    import { activeProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { selectedAccountId, WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import type { Writable } from 'svelte/store'
+    import type { Readable, Writable } from 'svelte/store'
     import { Receive, Send } from '.'
 
     export let locale
@@ -15,8 +16,9 @@
     export let generateAddress
     export let isGeneratingAddress
 
-    const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
+    const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
     const accountsLoaded = getContext<Writable<boolean>>('walletAccountsLoaded')
+    const deletedAccounts = $activeProfile.deletedAccounts ?? []
 
     let startInit
 
@@ -64,16 +66,17 @@
                 <Text type="h5">{locale('general.myAccounts')}</Text>
                 <Button onClick={handleCreateClick} secondary small showHoverText icon="plus">{locale('actions.create')}</Button>
             </div>
-            {#if $accounts.length > 0}
+            {#if $viewableAccounts.length > 0}
                 <div
-                    class="grid grid-cols-{$accounts.length <= 2 ? $accounts.length : '3'} auto-rows-max {$accounts.length <= 2 ? 'gap-4' : 'gap-2.5'} w-full flex-auto overflow-y-auto h-1 -mr-2 pr-2">
-                    {#each $accounts as account}
+                    class="grid grid-cols-{$viewableAccounts.length <= 2 ? $viewableAccounts.length : '3'} auto-rows-max {$viewableAccounts.length <= 2 ? 'gap-4' : 'gap-2.5'} w-full flex-auto overflow-y-auto h-1 -mr-2 pr-2">
+                    {#each $viewableAccounts as account}
                         <AccountTile
                             color={account.color}
                             name={account.alias}
                             balance={account.balance}
                             balanceEquiv={account.balanceEquiv}
-                            size={$accounts.length >= 3 ? 's' : $accounts.length === 2 ? 'm' : 'l'}
+                            deleted={deletedAccounts.includes(account.id)}
+                            size={$viewableAccounts.length >= 3 ? 's' : $viewableAccounts.length === 2 ? 'm' : 'l'}
                             onClick={() => handleAccountClick(account.id)} />
                     {/each}
                 </div>
@@ -81,7 +84,7 @@
                 <Text>{locale('general.noAccounts')}</Text>
             {/if}
         </div>
-        {#if $accounts.length > 0}
+        {#if $viewableAccounts.length > 0}
             <!-- Action Send / Receive -->
             <div class="flex flex-row justify-between space-x-4">
                 <Button xl secondary icon="receive" classes="w-1/2" onClick={handleReceiveClick}>

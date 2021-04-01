@@ -9,6 +9,7 @@ export enum SettingsIcons {
     changePassword = 'lock2',
     changePincode = 'lock',
     resyncAccounts = 'sync',
+    showDeletedAccounts = 'view',
     deleteProfile = 'reset',
     deepLinks = 'link',
     developerMode = 'dev',
