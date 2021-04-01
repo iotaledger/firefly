@@ -30,7 +30,7 @@
         })
 
         Electron.onEvent('notification-activated', (contextData) => {
-            if (contextData && contextData.type) {
+            if (contextData) {
                 if (
                     (contextData.type === 'confirmed' || contextData.type === 'failed' || contextData.type === 'valueTx') &&
                     contextData.accountId
@@ -43,7 +43,6 @@
                     accountRoute.set(AccountRoutes.Init)
                 }
             }
-            console.log('Noticication Dasta', contextData)
         })
     })
 
