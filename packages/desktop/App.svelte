@@ -7,7 +7,7 @@
     import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
     import { dir, isLocaleLoaded, localize, setupI18n, _ } from 'shared/lib/i18n'
-    import { fetchMarketData } from 'shared/lib/marketData'
+    import { pollMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { dashboardRoute, initRouter, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
@@ -52,7 +52,7 @@
             initRouter()
         }, 2000)
 
-        await fetchMarketData()
+        await pollMarketData()
         await pollNetworkStatus()
 
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
