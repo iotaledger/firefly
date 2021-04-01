@@ -68,6 +68,7 @@ export interface IElectron {
     PincodeManager: IPincodeManager;
 
     getVersionDetails(): Promise<VersionDetails>;
+    updateCheck(): Promise<void>
     updateInstall(): Promise<void>
     updateCancel(): Promise<void>
     updateDownload(): Promise<void>

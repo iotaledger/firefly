@@ -1,9 +1,9 @@
 <script lang="typescript">
-    import { date } from 'svelte-i18n'
+    import { Button, Logo, Text } from 'shared/components'
+    import { getVersionDetails, updateBusy, updateCheck, updateDownload, versionDetails } from 'shared/lib/appUpdater'
     import { closePopup } from 'shared/lib/popup'
-    import { Text, Button, Logo } from 'shared/components'
-
-    import { versionDetails, updateDownload, updateBusy } from 'shared/lib/appUpdater'
+    import { onMount } from 'svelte'
+    import { date } from 'svelte-i18n'
 
     export let locale
 
@@ -14,6 +14,14 @@
     function handleCancelClick() {
         closePopup()
     }
+
+    onMount(async () => {
+        // @ts-ignore: This value is replaced by Webpack DefinePlugin
+        if (!devMode) {
+            await getVersionDetails()
+            await updateCheck()
+        }
+    })
 </script>
 
 <style type="text/scss">

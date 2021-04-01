@@ -166,7 +166,11 @@ export function updateInstall(): void {
     Electron.updateInstall()
 }
 
-export async function refreshVersionDetails(): Promise<void> {
+export function updateCheck(): void {
+    Electron.updateCheck()
+}
+
+export async function getVersionDetails(): Promise<void> {
     const verDetails = await Electron.getVersionDetails();
     versionDetails.set(verDetails)
 }

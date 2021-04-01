@@ -86,6 +86,14 @@ const Electron = {
      */
     updateInstall: () => ipcRenderer.invoke('update-install'),
     /**
+     * Check for an update of the application
+     *
+     * @method updateCheck
+     *
+     * @returns void
+     */
+     updateCheck: () => ipcRenderer.invoke('update-check'),
+     /**
      * Get version details
      *
      * @method getVersionDetails
