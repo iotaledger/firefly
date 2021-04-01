@@ -6,6 +6,7 @@
     import { date as i18nDate } from 'svelte-i18n'
     import type { Readable } from 'svelte/store'
     import { get } from 'svelte/store'
+    import { setClipboard } from 'shared/lib/utils'
 
     export let locale
     export let account: Readable<WalletAccount>
@@ -36,7 +37,9 @@
     {#each addresses as _addr}
         <div class="flex flex-row flex-wrap space-y-1">
             <Text type="p" secondary>{date}</Text>
-            <Text type="pre">{_addr.address}</Text>
+            <button class="text-left" on:click={() => setClipboard(_addr.address.toLowerCase())}>
+                <Text type="pre">{_addr.address}</Text>
+            </button>
             <Text type="p">
                 {locale('popups.addressHistory.currentBalance', { values: { balance: formatUnit(_addr.balance) } })}
             </Text>
