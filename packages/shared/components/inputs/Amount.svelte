@@ -83,13 +83,14 @@
     }
 
     const amountToFiat = (_amount) => {
-        if (!amount) return null
         const amountAsFloat = Number.parseFloat(_amount)
+        if (!amount || amountAsFloat === 0) return null
         if (Number.isNaN(amountAsFloat)) {
             return null
         } else {
             const amountAsI = convertUnits(amountAsFloat, unit, Unit.i)
-            return convertToFiat(amountAsI, $currencies[CurrencyTypes.USD], $exchangeRates[profileCurrency])
+            const amountasFiat = convertToFiat(amountAsI, $currencies[CurrencyTypes.USD], $exchangeRates[profileCurrency])
+            return amountasFiat === 0 ? '< 0.01' : amountasFiat;
         }
     }
 </script>
