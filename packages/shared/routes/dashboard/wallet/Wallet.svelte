@@ -7,7 +7,7 @@
     import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, isStrongholdLocked } from 'shared/lib/profile'
+    import { activeProfile, isStrongholdLocked, updateProfile } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
@@ -64,7 +64,7 @@
     const liveAccounts: Readable<WalletAccount[]> = derived([activeProfile, accounts], ([$activeProfile, $accounts]) => {
         if (!$activeProfile) {
             return []
-        }    
+        }
         return $accounts.filter((a) => !$activeProfile.deletedAccounts.includes(a.id))
     })
 
@@ -177,63 +177,101 @@
     }
 
     function onCreateAccount(alias, completeCallback) {
-        const _create = () =>
-            api.createAccount(
-                {
-                    alias,
-                    signerType: { type: 'Stronghold' },
-                    clientOptions: {
-                        node: $accounts.length > 0 ? $accounts[0].clientOptions.node : DEFAULT_NODE,
-                        nodes: $accounts.length > 0 ? $accounts[0].clientOptions.nodes : DEFAULT_NODES,
-                        // For subsequent accounts, use the network for any of the previous accounts
-                        network: $accounts.length > 0 ? $accounts[0].clientOptions.network : $network,
-                    },
-                },
-                {
-                    onSuccess(createAccountResponse) {
-                        const account: WalletAccount = prepareAccountInfo(createAccountResponse.payload, {
-                            balance: 0,
-                            incoming: 0,
-                            outgoing: 0,
-                            depositAddress: createAccountResponse.payload.addresses[0].address,
-                        })
-                        // immediately store the account; we update it later after sync
-                        // we do this to allow offline account creation
-                        accounts.update((accounts) => [...accounts, account])
-                        return new Promise((resolve) => {
-                            api.syncAccount(createAccountResponse.payload.id, {
-                                onSuccess(_syncAccountResponse) {
-                                    getAccountMeta(createAccountResponse.payload.id, (err, meta) => {
-                                        if (!err) {
-                                            const account = prepareAccountInfo(createAccountResponse.payload, meta)
-                                            accounts.update((storedAccounts) => {
-                                                return storedAccounts.map((storedAccount) => {
-                                                    if (storedAccount.id === account.id) {
-                                                        return account
-                                                    }
-                                                    return storedAccount
-                                                })
-                                            })
+        const _create = () => {
+            // If the last account in the accounts list is deleted and has no
+            // messages on it, we can reuse it, otherwise the wallet will complain
+            // about the last account not being used
+            const lastAccount = $accounts[$accounts.length - 1]
+            const deletedAccounts = $activeProfile?.deletedAccounts ?? []
+            const deletedAccountIndex = deletedAccounts.indexOf(lastAccount.id)
+            if (deletedAccountIndex >= 0 && lastAccount.messages && lastAccount.messages.length === 0) {
+                api.setAlias(lastAccount.id, alias, {
+                    onSuccess() {
+                        accounts.update((_accounts) => {
+                            return _accounts.map((account) => {
+                                if (account.id === lastAccount.id) {
+                                    return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+                                        {} as WalletAccount,
+                                        account,
+                                        {
+                                            alias,
                                         }
-                                        resolve(null)
-                                    })
-                                },
-                                onError() {
-                                    // we ignore sync errors since the user can recover from it later
-                                    // this allows an account to be created by an offline user
-                                    resolve(null)
-                                },
+                                    )
+                                }
+
+                                return account
                             })
-                        }).then(() => {
-                            walletRoute.set(WalletRoutes.Init)
-                            completeCallback()
                         })
+
+                        deletedAccounts.splice(deletedAccountIndex, 1)
+                        updateProfile('deletedAccounts', deletedAccounts)
+
+                        walletRoute.set(WalletRoutes.Init)
+                        completeCallback()
                     },
                     onError(err) {
                         completeCallback(locale(err.error))
                     },
-                }
-            )
+                })
+            } else {
+                api.createAccount(
+                    {
+                        alias,
+                        signerType: { type: 'Stronghold' },
+                        clientOptions: {
+                            node: $accounts.length > 0 ? $accounts[0].clientOptions.node : DEFAULT_NODE,
+                            nodes: $accounts.length > 0 ? $accounts[0].clientOptions.nodes : DEFAULT_NODES,
+                            // For subsequent accounts, use the network for any of the previous accounts
+                            network: $accounts.length > 0 ? $accounts[0].clientOptions.network : $network,
+                        },
+                    },
+                    {
+                        onSuccess(createAccountResponse) {
+                            const account: WalletAccount = prepareAccountInfo(createAccountResponse.payload, {
+                                balance: 0,
+                                incoming: 0,
+                                outgoing: 0,
+                                depositAddress: createAccountResponse.payload.addresses[0].address,
+                            })
+                            // immediately store the account; we update it later after sync
+                            // we do this to allow offline account creation
+                            accounts.update((accounts) => [...accounts, account])
+                            return new Promise((resolve) => {
+                                api.syncAccount(createAccountResponse.payload.id, {
+                                    onSuccess(_syncAccountResponse) {
+                                        getAccountMeta(createAccountResponse.payload.id, (err, meta) => {
+                                            if (!err) {
+                                                const account = prepareAccountInfo(createAccountResponse.payload, meta)
+                                                accounts.update((storedAccounts) => {
+                                                    return storedAccounts.map((storedAccount) => {
+                                                        if (storedAccount.id === account.id) {
+                                                            return account
+                                                        }
+                                                        return storedAccount
+                                                    })
+                                                })
+                                            }
+                                            resolve(null)
+                                        })
+                                    },
+                                    onError() {
+                                        // we ignore sync errors since the user can recover from it later
+                                        // this allows an account to be created by an offline user
+                                        resolve(null)
+                                    },
+                                })
+                            }).then(() => {
+                                walletRoute.set(WalletRoutes.Init)
+                                completeCallback()
+                            })
+                        },
+                        onError(err) {
+                            completeCallback(locale(err.error))
+                        },
+                    }
+                )
+            }
+        }
 
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
