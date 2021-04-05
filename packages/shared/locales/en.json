@@ -152,7 +152,7 @@
         },
         "secureSpentAddresses": {
             "title": "Secure spent addresses",
-            "body1": "You have funds detected on {number} spent address.",            
+            "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.", 
             "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",          
             "error": "You can’t migrate spent addresses with less than 1 Mi"           
         },
