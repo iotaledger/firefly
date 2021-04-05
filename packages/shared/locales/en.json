@@ -163,11 +163,7 @@
             "continueMigration": "Continue migration process"
         },
         "securingSpentAddresses": {
-            "title": "Securing spent addresses...",
-            "body1": "You have funds detected on a spent address.",
-            "body2": "These are at risk of theft.",
-            "body3": "We recommend you run this automated process to help secure and transfer your funds safely.",
-            "learn": "Learn about spent addresses"
+            "title": "Securing spent addresses..."
         },
         "transferFragmentedFunds": {
             "body1": "You have too many addresses to migrate in one transaction. In order to migrate your funds to the new network, you must send multiple transactions.",
