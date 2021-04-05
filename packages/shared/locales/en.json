@@ -607,7 +607,7 @@
             "dates": "Dates are easy to guess.",
             "common": "This is a very common password.",
             "similar": "This is similar to a common password.",
-            "reasonWord": "A single word is easy to guess.",
+            "word": "A single word is easy to guess.",
             "incorrect": "Your password is incorrect.",
             "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
         },
