@@ -145,7 +145,7 @@
         },
         "bundleMiningWarning": {
             "title": "Warning",
-            "body1": "You have funds detected on a spent address. ",
+            "body1": "You have funds detected on a spent address.",
             "body2": "These are at risk of theft.",
             "body3": "We recommend you run an automated process to help secure and transfer your funds safely.",
             "learn": "Learn about spent addresses"
