@@ -15,8 +15,8 @@
     export let onClick = () => {}
 
     const RISK_COLORS = {
-        0: 'green',
-        1: 'blue',
+        0: 'blue',
+        1: 'green',
         2: 'yellow',
         3: 'orange',
         4: 'red',
@@ -81,7 +81,9 @@
                 <Icon icon={!disabled && selected ? 'radio' : 'radio-unchecked'} />
             </div>
             <div>
-                <Text type="pre" secondary={disabled} smaller>{truncateString(address, 9, 9)}</Text>
+                <Text type="pre" secondary={disabled} smaller classes={disabled && 'line-through'}>
+                    {truncateString(address, 9, 9)}
+                </Text>
                 <Text type="p" secondary smaller>{formatUnit(balance)} · <span class="uppercase">{fiatBalance}</span></Text>
             </div>
         </div>
@@ -89,7 +91,7 @@
             <risk-meter class="flex flex-row space-x-0.5">
                 {#each Array(Object.keys(RISK_COLORS).length) as _, i}
                     <span
-                        class="h-4 w-1 rounded-2xl {i <= risk ? `bg-${RISK_COLORS?.[risk]}-500` : 'bg-gray-300 dark:border-gray-700'}" />
+                        class="h-4 w-1 rounded-2xl {i <= risk ? `bg-${RISK_COLORS?.[risk]}-500` : 'bg-gray-300 dark:bg-gray-700'}" />
                 {/each}
             </risk-meter>
         {:else if disabled}
@@ -98,7 +100,7 @@
                 on:mouseenter={toggleTooltip}
                 on:mouseleave={toggleTooltip}
                 bind:this={errorBox}>
-                <Icon icon="info" classes="text-red-500 bg-white rounded-full dark:bg-gray-800" />
+                <Icon icon="exclamation" classes="text-red-500 bg-white rounded-full dark:bg-gray-800" />
                 {#if showTooltip && errorMessage}
                     <Tooltip {parentTop} {parentLeft} {parentWidth}>
                         <Text>{errorMessage}</Text>

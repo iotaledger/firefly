@@ -168,7 +168,8 @@
         "transferFragmentedFunds": {
             "body1": "You have too many addresses to migrate in one transaction. In order to migrate your funds to the new network, you must send multiple transactions.",
             "migrate": "Migrate funds",
-            "transaction": "Transaction {number}"
+            "transaction": "Transaction {number}",
+            "rerun": "Rerun migration process"
         },
         "migrateFailed": {
             "title": "To do",
@@ -427,6 +428,7 @@
         "cancel": "Cancel",
         "close": "Close",
         "dismiss": "Dismiss",
+        "proceedAnyway": "Proceed anyway",
         "save": "Save",
         "importSeed": "Import an existing seed",
         "importWallet": "Import existing wallet",

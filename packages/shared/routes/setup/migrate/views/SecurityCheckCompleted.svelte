@@ -17,7 +17,7 @@
             disabled: false,
             risk: id,
         }
-    })
+    }).sort((a, b) => b.risk - a.risk)
 
     let selectedAddresses = addresses.slice()
 

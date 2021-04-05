@@ -5,8 +5,9 @@
     export let locale
     export let mobile
 
-    let loading,
-        finished = false
+    let busy = false
+    let migrated = false
+    let fullSuccess = false
     let migratingFundsMessage = ''
     let timeouts = []
 
@@ -29,11 +30,15 @@
     function handleContinueClick() {
         dispatch('next')
     }
+    function handleRerunClick() {
+        migrateFunds()
+    }
 
     //TODO:
     function migrateFunds() {
         transactions = transactions.map((item) => ({ ...item, status: 1 }))
-        loading = true
+        busy = true
+        migrated = false
         migratingFundsMessage = locale('views.migrate.migrating')
         //TODO: dummy status updates
         timeouts.push(
@@ -52,11 +57,12 @@
             setTimeout(() => {
                 transactions[3].status = 2
                 transactions[4].status = 2
-                loading = false
-                finished = true
+                busy = false
+                migrated = true
                 migratingFundsMessage = locale('actions.continue')
             }, 3500)
         )
+        fullSuccess = false
     }
 
     onDestroy(() => {
@@ -77,14 +83,21 @@
                 {/each}
             </div>
         </div>
-        <div slot="leftpane__action" class="flex flex-col items-center space-x-4">
-            {#if !finished}
-                <Button disabled={loading} classes="w-full py-3 mt-2 text-white" onClick={() => migrateFunds()}>
-                    <Spinner busy={loading} message={migratingFundsMessage} classes="justify-center" />
-                    {#if !loading && !finished}{locale('views.transferFragmentedFunds.migrate')}{/if}
+        <div slot="leftpane__action" class="flex flex-col items-center space-y-4">
+            {#if !migrated}
+                <Button disabled={busy} classes="w-full py-3 mt-2 text-white" onClick={() => migrateFunds()}>
+                    <Spinner {busy} message={migratingFundsMessage} classes="justify-center" />
+                    {#if !busy && !migrated}{locale('views.transferFragmentedFunds.migrate')}{/if}
                 </Button>
-            {:else}
+            {:else if fullSuccess}
                 <Button classes="w-full py-3 mt-2" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
+            {:else}
+                <Button classes="w-full py-3 mt-2" onClick={() => handleRerunClick()}>
+                    {locale('views.transferFragmentedFunds.rerun')}
+                </Button>
+                <Button secondary classes="w-full py-3 mt-2" onClick={() => handleContinueClick()}>
+                    {locale('actions.proceedAnyway')}
+                </Button>
             {/if}
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">

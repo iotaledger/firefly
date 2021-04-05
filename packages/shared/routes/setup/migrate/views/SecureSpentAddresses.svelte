@@ -16,7 +16,7 @@
             balance,
             disabled: balance < 1000000,
         }
-    })
+    }).sort((a, b) => b.balance - a.balance)
 
     let selectedAddresses = addresses.slice().filter((address) => !address.disabled)
 
@@ -35,9 +35,6 @@
     }
     function secureAddresses() {
         dispatch('next')
-    }
-    function handleSkipClick() {
-        console.log('Skip clicked')
     }
 </script>
 
@@ -59,10 +56,7 @@
                 {/each}
             </div>
         </div>
-        <div slot="leftpane__action" class="flex flex-col space-y-7">
-            <button on:click={handleSkipClick}>
-                <Text type="p" highlighted>{locale('views.migrate.learn')}</Text>
-            </button>
+        <div slot="leftpane__action">
             <Button classes="w-full" disabled={!selectedAddresses.length} onClick={() => secureAddresses()}>
                 {locale('views.secureSpentAddresses.title')}
             </Button>
