@@ -181,7 +181,7 @@
         "balance": {
             "title": "Your balance",
             "body": "Is your balance correct?",
-            "error": "The minimum migration amount is 1Mi. You won’t be able to migrate your funds to the Chrysalis network. "
+            "error": "The minimum migration amount is 1 Mi. You won’t be able to migrate your funds to the Chrysalis network. "
         },
         "settings": {
             "settings": "Settings",
