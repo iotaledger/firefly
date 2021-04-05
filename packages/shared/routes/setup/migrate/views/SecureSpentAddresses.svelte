@@ -8,7 +8,6 @@
 
     const dispatch = createEventDispatcher()
 
-    // TODO: dummy
     let addresses = $spentAddressesFromBundles.map((address) =>
         Object.assign({}, address, { disabled: address.balance < MINIMUM_MIGRATION_BALANCE, id: address.index })
     )
@@ -34,7 +33,7 @@
         dispatch('next')
     }
     function handleSkipClick() {
-        console.log('Skip clicked')
+        dispatch('next', { skippedMining: true })
     }
 </script>
 

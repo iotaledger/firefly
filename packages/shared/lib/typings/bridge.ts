@@ -3,7 +3,7 @@ import type { Address } from './address'
 import type { AccountIdentifier, Account, Balance, SyncedAccount } from './account'
 import type { Message } from './message'
 import type { StrongholdStatus } from './wallet'
-import type { MigrationData } from './migration'
+import type { MigrationData, MigrationBundle } from './migration'
 
 export interface Actor {
     destroy(): void
@@ -110,7 +110,7 @@ export type UpdatedAllClientOptions = Response<ResponseTypes.UpdatedAllClientOpt
  * Migration responses
  */
 export type MigrationDataResponse = Response<ResponseTypes.MigrationData, MigrationData>
-export type CreatedMigrationBundleResponse = Response<ResponseTypes.CreatedMigrationBundle, string>
+export type CreatedMigrationBundleResponse = Response<ResponseTypes.CreatedMigrationBundle, MigrationBundle>
 export type SentMigrationBundleResponse = Response<ResponseTypes.SentMigrationBundle, void>
 
 export type MessageResponse =

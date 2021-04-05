@@ -15,6 +15,11 @@ export interface MigrationData {
     inputs: Input[]
 }
 
+export interface MigrationBundle {
+    bundleHash: string;
+    crackability: number;
+}
+
 /**
  * Gets data related to seed
  * 
@@ -34,9 +39,9 @@ export function getMigrationData(
     __ids: CommunicationIds,
     seed: string,
     nodes: string[],
-    permanode: string,
     securityLevel?: number,
-    initialAddressIndex?: number
+    initialAddressIndex?: number,
+    permanode?: string,
 ) {
     return bridge({
         actorId: __ids.actorId,
@@ -103,7 +108,7 @@ export function createMigrationBundle(
 export function sendMigrationBundle(
     bridge: Bridge,
     __ids: CommunicationIds,
-    node: string,
+    nodes: string[],
     bundleHash: string,
     mwm: number
 ) {
@@ -112,7 +117,7 @@ export function sendMigrationBundle(
         id: __ids.messageId,
         cmd: 'SendMigrationBundle',
         payload: {
-            node,
+            nodes,
             bundleHash,
             mwm
         },

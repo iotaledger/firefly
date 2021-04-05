@@ -1,3 +1,4 @@
+const fs = require('fs')
 const binding = require('wallet-nodejs-binding')
 const PincodeManager = require('./lib/pincodeManager')
 const DeepLinkManager = require('./lib/deepLinkManager')
@@ -28,6 +29,25 @@ const Electron = {
             }
 
             return result.filePath
+        })
+    },
+
+    exportMigrationLog: (sourcePath, defaultFileName) => {
+        return ipcRenderer.invoke('show-save-dialog', { properties: ['createDirectory', 'showOverwriteConfirmation'], defaultPath: defaultFileName }).then((result) => {
+            if (result.canceled) {
+                return null
+            }
+
+            return new Promise((resolve, reject) => {
+                fs.copyFile(sourcePath, result.filePath, (err) => {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        resolve(true)
+                    }
+                });
+            })
+
         })
     },
 

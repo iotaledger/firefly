@@ -192,25 +192,25 @@ export const api = {
   },
 
   // Migration related methods
-  getMigrationData: function (seed: string, nodes: string[], permanode: string, securityLevel?: number, initialAddressIndex?: number):
+  getMigrationData: function (seed: string, nodes: string[], securityLevel?: number, initialAddressIndex?: number, permanode?: string):
     ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _getMigrationData(
       sendMessage,
       __ids,
       seed,
       nodes,
-      permanode,
       securityLevel,
-      initialAddressIndex
+      initialAddressIndex,
+      permanode,
     )
   },
   createMigrationBundle: function (seed: string, inputAddressIndexes: number[], mine: boolean, timeoutSeconds: number, logFileName: string):
     ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _createMigrationBundle(sendMessage, __ids, seed, inputAddressIndexes, mine, timeoutSeconds, logFileName)
   },
-  sendMigrationBundle: function (node: string, bundleHash: string, mwm: number):
+  sendMigrationBundle: function (nodes: string[], bundleHash: string, mwm: number):
     ((__ids: CommunicationIds) => Promise<string>) {
-    return (__ids: CommunicationIds) => _sendMigrationBundle(sendMessage, __ids, node, bundleHash, mwm)
+    return (__ids: CommunicationIds) => _sendMigrationBundle(sendMessage, __ids, nodes, bundleHash, mwm)
   },
 
   // Event emitters 

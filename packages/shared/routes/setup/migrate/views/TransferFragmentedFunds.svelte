@@ -1,7 +1,12 @@
 <script lang="typescript">
     import { Button, Illustration, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
     import { createEventDispatcher, onDestroy } from 'svelte'
-    import { migration } from 'shared/lib/migration'
+    import {
+        migration,
+        getInputIndexesForBundle,
+        createMigrationBundle,
+        sendMigrationBundle,
+    } from 'shared/lib/migration'
 
     export let locale
     export let mobile
@@ -9,12 +14,11 @@
     let loading,
         finished = false
     let migratingFundsMessage = ''
-    let timeouts = []
 
-    const { bundles } = $migration
+    const { didComplete, bundles } = $migration
 
-    // TODO: dummy
     let transactions = $bundles.map((_bundle, index) => ({
+        ..._bundle,
         name: locale('views.transferFragmentedFunds.transaction', { values: { number: index + 1 } }),
         balance: _bundle.inputs.reduce((acc, input) => acc + input.balance, 0),
         status: 0,
@@ -26,42 +30,68 @@
     function handleBackClick() {
         dispatch('previous')
     }
+
     function handleContinueClick() {
+        didComplete.set(true)
         dispatch('next')
     }
 
-    //TODO:
+    function finish() {
+        loading = false
+        finished = true
+        migratingFundsMessage = locale('actions.continue')
+    }
+
     function migrateFunds() {
+        // TODO: Rethink if we need to only update status of the transaction we are actually sending
         transactions = transactions.map((item) => ({ ...item, status: 1 }))
         loading = true
         migratingFundsMessage = locale('views.migrate.migrating')
-        //TODO: dummy status updates
-        timeouts.push(
-            setTimeout(() => {
-                transactions[0].status = 2
-                transactions[1].status = 2
-            }, 2000)
-        )
-        timeouts.push(
-            setTimeout(() => {
-                transactions[2].status = -1
-                transactions[2].errorText = 'Reasons why it failed'
-            }, 3000)
-        )
-        timeouts.push(
-            setTimeout(() => {
-                transactions[3].status = 2
-                transactions[4].status = 2
-                loading = false
-                finished = true
-                migratingFundsMessage = locale('actions.continue')
-            }, 3500)
+
+        transactions.reduce(
+            (promise, transaction, idx) =>
+                // @ts-ignore
+                promise
+                    .then((acc) => {
+                        if (transaction.bundleHash) {
+                            return sendMigrationBundle(transaction.bundleHash)
+                        }
+
+                        return createMigrationBundle(getInputIndexesForBundle(transaction), false).then((result) =>
+                            sendMigrationBundle(result.payload.bundleHash)
+                        )
+                    })
+                    .then(() => {
+                        transactions = transactions.map((_transaction, i) => {
+                            if (i === idx) {
+                                return { ..._transaction, status: 2 }
+                            }
+
+                            return _transaction
+                        })
+
+                        if (idx === transactions.length - 1) {
+                            finish()
+                        }
+                    })
+                    .catch((error) => {
+                        console.error(error)
+
+                        if (idx === transactions.length - 1) {
+                            finish()
+                        }
+
+                        transactions = transactions.map((_transaction, i) => {
+                            if (i === idx) {
+                                return { ..._transaction, status: -1, errorText: 'Migration failed' }
+                            }
+
+                            return _transaction
+                        })
+                    }),
+            Promise.resolve([])
         )
     }
-
-    onDestroy(() => {
-        timeouts.forEach((t) => clearTimeout(t))
-    })
 </script>
 
 {#if mobile}

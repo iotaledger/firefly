@@ -54,14 +54,16 @@
         initiateProgressBar()
     })
 
-    function redirectWithTimeout(_timeout = 1000) {
+    function redirectWithTimeout(_timeout = 1500) {
         timeout = setTimeout(() => {
             dispatch('next')
         }, _timeout)
     }
 
     function updateProgress() {
-        progressBarPercent = Math.floor((timeElapsed / MINING_TIMEOUT_SECONDS) * $selectedBundlesWithSpentAddresses.length * 100)
+        progressBarPercent = Math.floor(
+            (timeElapsed / (MINING_TIMEOUT_SECONDS * $selectedBundlesWithSpentAddresses.length)) * 100
+        )
         progressBarMessage = progressBarPercent.toString() + '% completed'
     }
 

@@ -62,7 +62,9 @@
                 nextState = MigrateState.SecureSpentAddresses
                 break
             case MigrateState.SecureSpentAddresses:
-                nextState = MigrateState.SecuringSpentAddresses
+                const { skippedMining } = params
+
+                nextState = skippedMining ? MigrateState.TransferFragmentedFunds : MigrateState.SecuringSpentAddresses
                 break
             case MigrateState.SecuringSpentAddresses:
                 nextState = MigrateState.SecurityCheckCompleted

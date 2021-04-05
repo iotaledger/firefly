@@ -35,6 +35,20 @@
     function toggleShow() {
         showTooltip = !showTooltip
     }
+
+    function getRiskColor(_risk) {
+        if (_risk >= 0 && _risk <= 0.25) {
+            return 'green'
+        } else if (_risk >= 0.25 && _risk <= 0.5) {
+            return 'blue'
+        } else if (_risk >= 0.5 && _risk <= 0.75) {
+            return 'yellow'
+        } else if (_risk >= 0.75 && _risk <= 1) {
+            return 'orange'
+        } else if (_risk > 1) {
+            return 'red'
+        }
+    }
 </script>
 
 <style type="text/scss">
@@ -80,7 +94,7 @@
         {#if showRiskLevel}
             <risk-meter class="flex flex-row space-x-0.5">
                 {#each Array(Object.keys(RISK_COLORS).length) as _, i}
-                    <span class="h-4 w-1 rounded-2xl {i <= risk ? `bg-${RISK_COLORS?.[risk]}-500` : 'bg-gray-300'}" />
+                    <span class="h-4 w-1 rounded-2xl {i <= risk ? `bg-${getRiskColor(risk)}-500` : 'bg-gray-300'}" />
                 {/each}
             </risk-meter>
         {:else if disabled}

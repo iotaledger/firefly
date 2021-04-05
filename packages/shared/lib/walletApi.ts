@@ -9,7 +9,7 @@ import type {
     ReadAccountsResponse, SetStrongholdPasswordResponse,
     SyncAccountsResponse
 } from './typings/bridge'
-import type { MigrationData } from './typings/migration'
+import type { MigrationBundle, MigrationData } from './typings/migration'
 import { ResponseTypes } from './typings/bridge'
 import type { ClientOptions } from './typings/client'
 import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, ErrorEventPayload, Event, TransactionEventPayload, TransferProgressEventPayload } from './typings/events'
@@ -123,7 +123,7 @@ const eventsApiResponseTypes = Object.values(eventsApiToResponseTypeMap)
  * Receives messages from wallet.rs.
  */
 
-Wallet.onMessage((message: MessageResponse) => {    
+Wallet.onMessage((message: MessageResponse) => {
     console.log(message)
     if (message && message.id === undefined) {
         // There is no message id
@@ -325,9 +325,9 @@ export interface ApiClient {
     getMigrationData(
         seed: string,
         nodes: string[],
-        permanode: string,
         securityLevel: number,
         initialAddressIndex: number,
+        permanode: string | undefined,
         callbacks: { onSuccess: (response: Event<MigrationData>) => void, onError: (err: ErrorEventPayload) => void }
     ),
     createMigrationBundle(
@@ -336,8 +336,14 @@ export interface ApiClient {
         mine: boolean,
         timeoutSeconds: number,
         logFilePath: string,
-        callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void }
-    )
+        callbacks: { onSuccess: (response: Event<MigrationBundle>) => void, onError: (err: ErrorEventPayload) => void }
+    ),
+    sendMigrationBundle(
+        node: string[],
+        bundleHash: string,
+        mwm: number,
+        callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void }
+    ),
 
     onStrongholdStatusChange(callbacks: { onSuccess: (response: Event<StrongholdStatus>) => void, onError: (err: ErrorEventPayload) => void })
     onNewTransaction(callbacks: { onSuccess: (response: Event<TransactionEventPayload>) => void, onError: (err: ErrorEventPayload) => void })

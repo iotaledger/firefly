@@ -8,6 +8,7 @@
         hasBundlesWithSpentAddresses,
         migration,
         createMigrationBundle,
+        sendMigrationBundle,
     } from 'shared/lib/migration'
 
     import { createEventDispatcher, onDestroy } from 'svelte'
@@ -18,7 +19,7 @@
 
     const dispatch = createEventDispatcher()
 
-    const { bundles, data } = $migration
+    const { didComplete, bundles, data } = $migration
     const { balance } = $data
 
     let fiatbalance = `${convertToFiat(
@@ -36,7 +37,9 @@
             loading = true
 
             createMigrationBundle(getInputIndexesForBundle($bundles[0]), false)
-                .then((response) => {
+                .then((response) => sendMigrationBundle(response.payload.bundleHash))
+                .then(() => {
+                    didComplete.set(true)
                     dispatch('next')
                 })
                 .catch(console.error)

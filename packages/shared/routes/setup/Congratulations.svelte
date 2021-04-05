@@ -1,16 +1,22 @@
 <script lang="typescript">
     import { Box, Button, Illustration, OnboardingLayout, Text } from 'shared/components'
     import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
-    import { newProfile, saveProfile, setActiveProfile } from 'shared/lib/profile'
+    import { newProfile, saveProfile, setActiveProfile, activeProfile } from 'shared/lib/profile'
     import { formatUnit } from 'shared/lib/units'
     import { createEventDispatcher, onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { getStoragePath } from 'shared/lib/wallet'
+    import { LOG_FILE_NAME, migration } from 'shared/lib/migration'
+    import { Electron } from 'shared/lib/electron'
 
     export let locale
     export let mobile
 
+    const { data, didComplete } = $migration
+    const { balance } = $data
+
     // TODO: dummy
-    let wasMigrated = true
+    let wasMigrated = didComplete
 
     onMount(() => {
         // This is the last screen in onboarding for all flows i.e., if you create a new wallet or import stronghold
@@ -22,7 +28,6 @@
 
     const dispatch = createEventDispatcher()
 
-    let balance = Math.floor(Math.random() * 2000000) // TODO: dummy
     let fiatbalance = `${convertToFiat(
         balance,
         get(currencies)[CurrencyTypes.USD],
@@ -30,7 +35,22 @@
     )} ${CurrencyTypes.USD}`
 
     const handleContinueClick = () => {
-        dispatch('next')
+        if (wasMigrated) {
+            Electron.getUserDataPath()
+                .then((path) => {
+                    const source = getStoragePath(path, $activeProfile.name)
+
+                    return Electron.exportMigrationLog(`${source}/${LOG_FILE_NAME}`, LOG_FILE_NAME)
+                })
+                .then((result) => {
+                    if (result) {
+                        dispatch('next')
+                    }
+                })
+                .catch(console.error)
+        } else {
+            dispatch('next')
+        }
     }
 </script>
 

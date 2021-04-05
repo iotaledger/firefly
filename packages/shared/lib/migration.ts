@@ -1,28 +1,34 @@
 import { get, derived, writable, Writable } from 'svelte/store'
-import type { MigrationData, Input } from 'shared/lib/typings/migration'
+import type { MigrationBundle, MigrationData, Input } from 'shared/lib/typings/migration'
 import { api } from 'shared/lib/wallet'
 
-export const MIGRATION_NODE = 'https://nodes.iota.org'
+export const LOG_FILE_NAME = 'migration'
+
+export const MIGRATION_NODE = 'https://nodes.devnet.iota.org'
 
 export const PERMANODE = 'https://chronicle.iota.org/api'
 
 export const ADDRESS_SECURITY_LEVEL = 2
 
-export const MINIMUM_MIGRATION_BALANCE = 1000000
+export const MINIMUM_MIGRATION_BALANCE = 100
 
-export const MINING_TIMEOUT_SECONDS = 20
+/** Bundle mining timeout for each bundle */
+export const MINING_TIMEOUT_SECONDS = 60
+
+export const MINIMUM_WEIGHT_MAGNITUDE = 14;
 
 const MAX_INPUTS_PER_BUNDLE = 2
 
 interface Bundle {
     shouldMine: boolean;
     bundleHash?: string;
+    crackability?: number;
     selected: boolean;
     inputs: Input[];
-
 }
 
 interface MigrationState {
+    didComplete: Writable<boolean>;
     data: Writable<MigrationData>,
     seed: Writable<string>
     bundles: Writable<Bundle[]>
@@ -32,6 +38,7 @@ interface MigrationState {
  * Migration state
  */
 export const migration = writable<MigrationState>({
+    didComplete: writable<boolean>(false),
     data: writable<MigrationData>({
         lastCheckedAddressIndex: 0,
         balance: 0,
@@ -96,9 +103,14 @@ export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0)
     //     lastCheckedAddressIndex: 30
     // })
 
-    prepareBundles()
+    // prepareBundles()
     return new Promise((resolve, reject) => {
-        api.getMigrationData(migrationSeed, [MIGRATION_NODE], PERMANODE, ADDRESS_SECURITY_LEVEL, initialAddressIndex, {
+        api.getMigrationData(
+            migrationSeed,
+            [MIGRATION_NODE],
+            ADDRESS_SECURITY_LEVEL,
+            initialAddressIndex,
+            undefined, {
             onSuccess(response) {
                 const { seed, data } = get(migration)
 
@@ -139,8 +151,9 @@ export const createMigrationBundle = (inputAddressIndexes: number[], mine: boole
     const { seed } = get(migration)
 
     return new Promise((resolve, reject) => {
-        api.createMigrationBundle(get(seed), inputAddressIndexes, mine, MINING_TIMEOUT_SECONDS, 'migration', {
+        api.createMigrationBundle(get(seed), inputAddressIndexes, mine, MINING_TIMEOUT_SECONDS, LOG_FILE_NAME, {
             onSuccess(response) {
+                assignBundleHash(inputAddressIndexes, response.payload)
                 resolve(response)
             },
             onError(error) {
@@ -148,6 +161,43 @@ export const createMigrationBundle = (inputAddressIndexes: number[], mine: boole
             },
         })
     })
+};
+
+export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAGNITUDE): Promise<void> => {
+    return new Promise((resolve, reject) => {
+        api.sendMigrationBundle([MIGRATION_NODE], bundleHash, mwm, {
+            onSuccess(response) {
+                resolve()
+            },
+            onError(error) {
+                reject(error)
+            },
+        })
+    })
+}
+
+/**
+ * 
+ * @param inputAddressIndexes 
+ * @param migrationBundle 
+ */
+export const assignBundleHash = (inputAddressIndexes: number[], migrationBundle: MigrationBundle): void => {
+    const { bundles } = get(migration);
+
+    bundles.update((_bundles) => {
+        return _bundles.map((bundle) => {
+            const indexes = bundle.inputs.map((input) => input.index);
+            if (indexes.length && indexes.every((index) => inputAddressIndexes.includes(index))) {
+                return Object.assign({}, bundle, {
+                    bundleHash: migrationBundle.bundleHash,
+                    crackability: parseInt(migrationBundle.crackability.toString())
+                })
+            }
+
+            return bundle
+        })
+    })
+
 };
 
 export const prepareBundles = () => {
@@ -192,7 +242,10 @@ export const getInputIndexesForBundle = (bundle: Bundle): number[] => {
 export const spentAddressesFromBundles = derived(get(migration).bundles, (_bundles) => _bundles
     .filter((bundle) => bundle.shouldMine === true)
     // TODO: Perhaps use a different way to gather inputs
-    .map((bundle) => bundle.inputs[0])
+    .map((bundle) => Object.assign({}, bundle.inputs[0], {
+        bundleHash: bundle.bundleHash,
+        crackability: bundle.crackability
+    }))
 )
 
 export const hasSingleBundle = derived(get(migration).bundles, (_bundles) => _bundles.length === 1)
