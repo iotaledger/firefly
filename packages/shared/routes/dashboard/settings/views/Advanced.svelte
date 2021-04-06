@@ -230,7 +230,7 @@
         <section id="resyncAccounts" class="w-3/4">
             <Text type="h4" classes="mb-3">{locale('views.settings.resyncAccounts.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.resyncAccounts.description')}</Text>
-            <Button medium inlineStyle="min-width: 156px;" onClick={syncAccounts} disabled={$isSyncing}>
+            <Button medium inlineStyle="min-width: 156px;" onClick={() => syncAccounts(true)} disabled={$isSyncing}>
                 {locale('actions.syncAll')}
             </Button>
         </section>

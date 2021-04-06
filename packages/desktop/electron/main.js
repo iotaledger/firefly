@@ -129,6 +129,7 @@ function createWindow() {
         height: 720,
         titleBarStyle: 'hidden',
         frame: process.platform === 'linux',
+        icon: process.platform === 'linux' ? path.join(__dirname, '../assets/icons/linux/icon256x256.png') : undefined,
         webPreferences: {
             ...defaultWebPreferences,
             preload: paths.preload,
