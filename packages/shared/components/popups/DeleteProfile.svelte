@@ -41,6 +41,7 @@
                 } finally {
                     isBusy = false
                     closePopup()
+                    logout()
                 }
             },
             onError(err) {
