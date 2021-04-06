@@ -1,5 +1,5 @@
 pub use iota_wallet::{
-    account_manager::{AccountManager, ManagerStorage, DEFAULT_STORAGE_FOLDER},
+    account_manager::{AccountManager, DEFAULT_STORAGE_FOLDER},
     actor::{
         Message as WalletMessage, MessageType as WalletMessageType, Response, ResponseType,
         WalletMessageHandler,
@@ -43,7 +43,7 @@ impl Default for WalletActor {
         let wallet_message_handler = Arc::new(Mutex::new(runtime.block_on(async move {
             WalletMessageHandler::with_manager(
                 AccountManager::builder()
-                    .with_storage(DEFAULT_STORAGE_FOLDER, ManagerStorage::Sqlite, None)
+                    .with_storage(DEFAULT_STORAGE_FOLDER, None)
                     .unwrap() //safe to unwrap, the storage password is None ^
                     .with_polling_interval(Duration::from_millis(crate::POLLING_INTERVAL_MS))
                     .finish()

@@ -1033,13 +1033,20 @@ export const getWalletBalanceHistory = (accountsBalanceHistory: AccountsBalanceH
 /**
  * Sync the accounts
  */
-export function syncAccounts() {
+export function syncAccounts(showConfirmation) {
     isSyncing.set(true)
     api.syncAccounts({
         onSuccess(syncAccountsResponse) {
             const syncedAccounts = syncAccountsResponse.payload
 
             updateAccounts(syncedAccounts)
+
+            if (showConfirmation) {
+                showAppNotification({
+                    type: 'info',
+                    message: localize('notifications.accountsSynchronized'),
+                })
+            }
 
             isSyncing.set(false)
         },
