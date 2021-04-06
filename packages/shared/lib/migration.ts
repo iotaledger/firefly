@@ -10,7 +10,7 @@ export const PERMANODE = 'https://chronicle.iota.org/api'
 
 export const ADDRESS_SECURITY_LEVEL = 2
 
-export const MINIMUM_MIGRATION_BALANCE = 100
+export const MINIMUM_MIGRATION_BALANCE = 1000
 
 /** Bundle mining timeout for each bundle */
 export const MINING_TIMEOUT_SECONDS = 60
@@ -201,6 +201,61 @@ export const assignBundleHash = (inputAddressIndexes: number[], migrationBundle:
 
 };
 
+const selectInputsForUnspentAddresses = (inputs: Input[]) => {
+    const createChunks = (_inputs: Input[]) => {
+        const chunks = [];
+
+        _inputs.forEach(_input => {
+            const chunk = chunks
+                .find(_chunk => {
+                    const sum = _chunk.reduce((acc, chunkInput) => acc + chunkInput.balance);
+
+                    return (sum + _input >= MINIMUM_MIGRATION_BALANCE) && _chunk.length < MAX_INPUTS_PER_BUNDLE;
+                });
+
+            if (chunk)
+                chunk.push(_input);
+            else
+                chunks.push([_input]);
+        });
+
+        return chunks;
+    }
+
+    const chunks = createChunks(inputs);
+
+    const { chunksWithCorrectBalance, chunksWithLessBalance } = chunks.reduce((acc, chunk) => {
+        if (chunk.reduce((acc, chunkInput) => acc + chunkInput.balance) < MAX_INPUTS_PER_BUNDLE) {
+            acc.chunksWithLessBalance.push(chunk);
+        } else {
+            acc.chunksWithCorrectBalance.push(chunk);
+        }
+
+        return acc
+    }, { chunksWithCorrectBalance: [], chunksWithLessBalance: [] })
+
+    let remainingChunks = []
+
+    chunksWithLessBalance.forEach((chunk) => {
+        chunk.forEach((c) => remainingChunks.push(c))
+    })
+
+    let chunkIndex = 0
+
+    remainingChunks.forEach((b) => {
+        chunksWithCorrectBalance[chunkIndex].push(b)
+
+        // If runs out of chunks, reset
+        if (!chunksWithCorrectBalance[chunkIndex + 1]) {
+            chunkIndex = 0
+        } else {
+            chunkIndex++
+        }
+    })
+
+    return chunksWithCorrectBalance;
+};
+
 export const prepareBundles = () => {
     const { data, bundles } = get(migration)
     const { inputs } = get(data)
@@ -216,20 +271,10 @@ export const prepareBundles = () => {
         return acc;
     }, { spent: [], unspent: [] })
 
-    const unspentInputChunks = unspent.reduce((acc, input, index) => {
-        const chunkIndex = Math.floor(index / MAX_INPUTS_PER_BUNDLE)
-
-        if (!acc[chunkIndex]) {
-            acc[chunkIndex] = []
-        }
-
-        acc[chunkIndex].push(input)
-
-        return acc
-    }, [])
+    const unspentInputChunks = selectInputsForUnspentAddresses(unspent)
 
     bundles.set([
-        ...spent.map((input) => ({ selected: input.balance > MINIMUM_MIGRATION_BALANCE, shouldMine: true, inputs: [input] })),
+        ...spent.map((input) => ({ selected: input.balance >= MINIMUM_MIGRATION_BALANCE, shouldMine: true, inputs: [input] })),
         ...unspentInputChunks.map((inputs) => ({ selected: true, shouldMine: false, inputs }))
     ])
 };
