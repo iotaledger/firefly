@@ -11,6 +11,13 @@ import {
 } from './marketData'
 import type { Node } from './typings/client'
 
+interface MigratedTransaction {
+    address: string;
+    balance: string;
+    timestamp: string
+    index: number;
+}
+
 /**
  * Profile
  */
@@ -25,7 +32,8 @@ interface Profile {
      * User settings
      */
     settings: UserSettings
-    isDeveloperProfile: boolean
+    isDeveloperProfile: boolean,
+    migratedTransactions?: MigratedTransaction[]
 }
 
 /**
@@ -195,7 +203,7 @@ export const removeProfile = (id: string): void => {
  * @returns {void}
  */
 export const updateProfile = (
-    path: string, value: string | boolean | Date | AvailableExchangeRates | Node | Node[] | ChartSelectors | HistoryDataProps) => {
+    path: string, value: MigratedTransaction[] | string | boolean | Date | AvailableExchangeRates | Node | Node[] | ChartSelectors | HistoryDataProps) => {
     const _update = (_profile) => {
         const pathList = path.split('.')
 

@@ -1,6 +1,7 @@
 import { get, derived, writable, Writable } from 'svelte/store'
 import type { MigrationBundle, MigrationData, Input } from 'shared/lib/typings/migration'
 import { api } from 'shared/lib/wallet'
+import { activeProfile, updateProfile } from 'shared/lib/profile'
 
 export const LOG_FILE_NAME = 'migration'
 
@@ -165,15 +166,34 @@ export const createMigrationBundle = (inputAddressIndexes: number[], mine: boole
 
 export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAGNITUDE): Promise<void> => {
     return new Promise((resolve, reject) => {
-        // setTimeout(() => resolve(), 4000)
-        api.sendMigrationBundle([MIGRATION_NODE], bundleHash, mwm, {
-            onSuccess() {
-                resolve()
-            },
-            onError(error) {
-                reject(error)
-            },
-        })
+        setTimeout(() => {
+            const _activeProfile = get(activeProfile)
+
+            updateProfile(
+                'migratedTransactions',
+                _activeProfile.migratedTransactions ? [..._activeProfile.migratedTransactions, {
+                    address: 'x'.repeat(81),
+                    balance: '10 Mi',
+                    timestamp: new Date().toISOString(),
+                    index: 0
+                }] : [{
+                    address: 'x'.repeat(81),
+                    balance: '10 Mi',
+                    timestamp: new Date().toISOString(),
+                    index: 0
+                }]
+            )
+
+            resolve()
+        }, 4000)
+        // api.sendMigrationBundle([MIGRATION_NODE], bundleHash, mwm, {
+        //     onSuccess() {
+        //         resolve()
+        //     },
+        //     onError(error) {
+        //         reject(error)
+        //     },
+        // })
     })
 }
 

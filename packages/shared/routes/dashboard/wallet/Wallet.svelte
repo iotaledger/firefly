@@ -32,16 +32,20 @@
         WalletAccount,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
-    import { derived, Readable, Writable } from 'svelte/store'
+    import { writable, derived, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
 
     export let locale
 
     const { accounts, balanceOverview, accountsLoaded } = $wallet
 
-    const transactions = derived(accounts, ($accounts) => {
-        return getTransactions($accounts)
-    })
+    const transactions =
+        $activeProfile.migratedTransactions && $activeProfile.migratedTransactions.length
+            ? writable($activeProfile.migratedTransactions)
+            : derived(accounts, ($accounts) => {
+                  return getTransactions($accounts)
+              })
+
     const accountsBalanceHistory = derived([accounts, priceData], ([$accounts, $priceData]) =>
         getAccountsBalanceHistory($accounts, $priceData)
     )
