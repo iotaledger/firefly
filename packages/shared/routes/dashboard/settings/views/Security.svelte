@@ -34,6 +34,7 @@
     let newPasswordError = ''
     let exportBusy = false
     let exportMessage = ''
+    let exportPassword = ''
 
     let currentPincode = ''
     let newPincode = ''
@@ -73,29 +74,16 @@
             }
         }
 
-        if (get(isStrongholdLocked)) {
-            openPopup({
-                type: 'password',
-                props: {
-                    onSuccess: () => {
-                        exportBusy = true
-                        exportMessage = locale('general.exportingStronghold')
-                        exportStronghold(_callback)
-                    },
-                },
-            })
-        } else {
-            exportBusy = true
-            exportMessage = locale('general.exportingStronghold')
-            exportStronghold(_callback)
-        }
+        exportBusy = true
+        exportMessage = locale('general.exportingStronghold')
+        exportStronghold(exportPassword, _callback)
     }
 
-    function exportStronghold(callback?: (cancelled: boolean, err?: string) => void) {
+    function exportStronghold(password: string, callback?: (cancelled: boolean, err?: string) => void) {
         Electron.getStrongholdBackupDestination(getDefaultStrongholdName())
             .then((result) => {
                 if (result) {
-                    api.backup(result, {
+                    api.backup(result, password, {
                         onSuccess() {
                             updateProfile('lastStrongholdBackupTime', new Date())
                             callback(false)
@@ -157,7 +145,7 @@
                     if (exportStrongholdChecked) {
                         passwordChangeMessage = locale('general.exportingStronghold')
 
-                        return exportStronghold((cancelled, err) => {
+                        return exportStronghold(newPassword, (cancelled, err) => {
                             if (cancelled) {
                                 _hideBusy('', 0)
                             } else {
@@ -272,6 +260,13 @@
         <Text type="h4" classes="mb-3">{locale('views.settings.exportStronghold.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.exportStronghold.description')}</Text>
         <div class="flex flex-row items-center">
+            <Password
+                classes="mr-4"
+                bind:value={exportPassword}
+                showRevealToggle
+                {locale}
+                placeholder={locale('general.password')}
+                disabled={exportBusy} />
             <Button medium inlineStyle="min-width: 156px;" onClick={handleExportClick} disabled={exportBusy}>
                 {locale('actions.export')}
             </Button>
