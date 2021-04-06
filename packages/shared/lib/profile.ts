@@ -231,7 +231,7 @@ export const cleanupInProgressProfiles = async () => {
     const inProgressProfile = get(profileInProgress)
     if (inProgressProfile) {
         profileInProgress.update(() => undefined)
-        await removeProfileFolder
+        await removeProfileFolder(inProgressProfile)
     }
 }
 
@@ -242,7 +242,7 @@ export const cleanupInProgressProfiles = async () => {
  *
  * @returns {void}
  */
- export const removeProfileFolder = async (profileName) => {
+export const removeProfileFolder = async (profileName) => {
     try {
         const userDataPath = await Electron.getUserDataPath()
         const profileStoragePath = getStoragePath(userDataPath, profileName)
