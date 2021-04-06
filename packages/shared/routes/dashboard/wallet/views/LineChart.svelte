@@ -79,10 +79,6 @@
         if (!currencyDropdown.some(({ value }) => value === $activeProfile?.settings.chartSelectors.currency)) {
             updateProfile('settings.chartSelectors.currency', AvailableExchangeRates.USD)
         }
-        // display USD values if previously selected currency is not in the list anymore
-        if (!currencyDropdown.some(({ value }) => value === $chartCurrency)) {
-            chartCurrency.set(CurrencyTypes.USD)
-        }
     })
 
     function handleCurrencySelect({ value: currency }) {
