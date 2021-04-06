@@ -4,9 +4,10 @@ const PincodeManager = require('./lib/pincodeManager')
 const DeepLinkManager = require('./lib/deepLinkManager')
 const NotificationManager = require('./lib/notificationManager')
 const { ipcRenderer, contextBridge } = require('electron')
-const { proxyApi } = require('../../shared/lib/walletApi')
 const { menuState } = require('./lib/menuState')
 const kdbx = require('./lib/kdbx')
+const { proxyApi } = require('shared/lib/shell/walletApi')
+const { hookErrorLogger } = require('shared/lib/shell/errorLogger')
 
 let activeProfileId = null
 
@@ -23,7 +24,13 @@ const Electron = {
     DeepLinkManager,
     NotificationManager,
     getStrongholdBackupDestination: (defaultPath) => {
-        return ipcRenderer.invoke('show-save-dialog', { properties: ['createDirectory', 'showOverwriteConfirmation'], defaultPath }).then((result) => {
+        return ipcRenderer.invoke('show-save-dialog', {
+            properties: ['createDirectory', 'showOverwriteConfirmation'],
+            defaultPath,
+            filters: [
+                { name: 'Stronghold Files', extensions: ['stronghold'] }
+            ]
+        }).then((result) => {
             if (result.canceled) {
                 return null
             }
@@ -97,6 +104,14 @@ const Electron = {
      */
     getDiagnostics: () => ipcRenderer.invoke('diagnostics'),
     /**
+     * Gets os information for the system
+     *
+     * @method getOS
+     *
+     * @returns {Promise}
+     */
+    getOS: () => ipcRenderer.invoke('get-os'),
+    /**
     * Starts an update of the application
     *
     * @method updateDownload
@@ -142,6 +157,42 @@ const Electron = {
         }
     },
     /**
+     * Show the popup menu
+     * @returns {undefined}
+     */
+    popupMenu: () => {
+        ipcRenderer.invoke('menu-popup')
+    },
+    /**
+     * Minimize the app
+     * @returns {undefined}
+     */
+    minimize: () => {
+        ipcRenderer.invoke('minimize')
+    },
+    /**
+     * Maximize the app
+     * @returns {undefined}
+     */
+    maximize: () => {
+        ipcRenderer.invoke('maximize')
+    },
+    /**
+     * Close the app
+     * @returns {undefined}
+     */
+    close: () => {
+        ipcRenderer.invoke('close')
+    },
+    /*
+     * Opens url and checks against acceptlist
+     * @param {string} url - Target url
+     * @returns {undefined}
+     */
+    openUrl: (url) => {
+        ipcRenderer.invoke('open-url', url)
+    },
+    /**
      * Add native window wallet event listener
      * @param {string} event - Target event name
      * @param {function} callback - Event trigger callback
@@ -159,6 +210,35 @@ const Electron = {
         }
         listeners.push(callback)
     },
+    /**
+     * Save the recovery kit
+     * @returns 
+     */
+    saveRecoveryKit: (recoverKitData) => {
+        return ipcRenderer.invoke('show-save-dialog', {
+            properties: ['createDirectory', 'showOverwriteConfirmation'],
+            defaultPath: "firefly-recovery-kit.pdf",
+            filters: [
+                { name: 'Pdf Document', extensions: ['pdf'] },
+                { name: 'All Files', extensions: ['*'] }
+            ]
+        }).then((result) => {
+            if (result.canceled) {
+                return
+            }
+
+            try {
+                fs.writeFileSync(result.filePath, Buffer.from(recoverKitData))
+            } catch (err) {
+                console.error(err)
+            }
+        })
+    },
+    /**
+     * Hook the logger
+     * @returns 
+     */
+    hookErrorLogger
 }
 
 contextBridge.exposeInMainWorld('__WALLET_INIT__', {

@@ -79,7 +79,7 @@ const rendererRules = [
         test: /\.(woff|woff2)?$/,
         type: 'asset/resource',
         generator: {
-            filename: 'assets/fonts/[hash][ext][query]',
+            filename: ({ filename }) => filename.replace('../shared/', ''),
         },
     },
     {

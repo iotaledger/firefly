@@ -3,9 +3,8 @@
     import { getInitials } from 'shared/lib/helpers'
     import { networkStatus } from 'shared/lib/networkStatus'
     import { activeProfile } from 'shared/lib/profile'
-    import { accountRoute, dashboardRoute, settingsRoute, walletRoute } from 'shared/lib/router'
-    import { AccountRoutes, SettingsRoutes, WalletRoutes, Tabs } from 'shared/lib/typings/routes'
-    import { selectedAccountId } from 'shared/lib/wallet'
+    import { dashboardRoute, settingsRoute, resetWalletRoute } from 'shared/lib/router'
+    import { SettingsRoutes, Tabs } from 'shared/lib/typings/routes'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -38,17 +37,23 @@
     }
 
     function openWallet() {
-        dashboardRoute.set(Tabs.Wallet)
-        walletRoute.set(WalletRoutes.Init)
-        accountRoute.set(AccountRoutes.Init)
-        selectedAccountId.set(null)
+        resetWalletRoute()
     }
+
+    const hasTitleBar = document.body.classList.contains(`platform-win32`)
 </script>
+
+<style type="text/scss">
+    :global(body.platform-win32) aside {
+        @apply -top-12;
+        @apply pt-12;
+    }
+</style>
 
 <aside
     class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 h-screen relative w-20 px-5 pb-9 pt-9 border-solid border-r border-gray-100 dark:border-gray-800">
-    <Logo classes="mb-10" width="48px" logo="logo-firefly" />
-    <nav class="flex flex-grow flex-col items-center justify-between pt-4">
+    <Logo classes="logo mb-9 {hasTitleBar ? "mt-3": ""}" width="48px" logo="logo-firefly" />
+    <nav class="flex flex-grow flex-col items-center justify-between">
         <button class={$dashboardRoute === Tabs.Wallet ? 'text-blue-500' : 'text-gray-500'} on:click={() => openWallet()}>
             <Icon icon="wallet" />
         </button>

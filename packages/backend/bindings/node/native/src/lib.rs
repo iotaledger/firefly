@@ -7,7 +7,7 @@ use std::sync::{
 };
 use tokio::runtime::Runtime;
 use wallet_actor_system::{
-    destroy as destroy_actor, init as init_actor, init_logger as init_backend_logger,
+    destroy as destroy_actor, remove_event_listeners as remove_actor_event_listeners, init as init_actor, init_logger as init_backend_logger,
     listen as add_event_listener, send_message as send_actor_message, EventType,
     LoggerConfigBuilder,
 };
@@ -102,6 +102,13 @@ declare_types! {
             let this = cx.this();
             let actor_id = cx.borrow(&this, |emitter| emitter.actor_id.clone());
             block_on(destroy_actor(actor_id));
+            Ok(cx.undefined().upcast())
+        }
+
+        method removeEventListeners(mut cx) {
+            let this = cx.this();
+            let actor_id = cx.borrow(&this, |emitter| emitter.actor_id.clone());
+            block_on(remove_actor_event_listeners(actor_id));
             Ok(cx.undefined().upcast())
         }
 

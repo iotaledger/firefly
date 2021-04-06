@@ -2,10 +2,10 @@
     "views": {
         "onboarding1": {
             "title": "Pošli, přijmi a spravuj IOTA tokeny",
-            "body": "Firefly je bezpečná a snadno použitelná IOTA peněženka."
+            "body": "Firefly is the official wallet of IOTA."
         },
         "legal": {
-            "title": "Právní ustanovení",
+            "title": "Ochrana osobních údajů a smluvní podmínky",
             "body": "Zkontrolujte zásady ochrany osobních údajů a podmínky služby.",
             "privacyPolicy": {
                 "title": "Zásady ochrany osobních údajů",
@@ -25,63 +25,78 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I have read and I accept the Privacy policy & ToS"
+            "checkbox": "Četl jsem a souhlasím se Zásadami ochrany osobních údajů a podmínkami služby"
         },
-        "language": {
-            "title": "Jazyk a vzhled",
-            "body": "Vyberte jazyk a šablonu vaší peněženky"
+        "appearance": {
+            "title": "Vzhled",
+            "body": "Choose your wallet’s theme."
         },
         "setup": {
             "title": "Nastavení peněženky",
-            "body": "Můžete vytvořit novou nebo importovat existující peněženku.",
+            "body1": "You can create multiple user profiles to keep your tokens separate and improve privacy.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Název profilu"
+        },
+        "secure": {
+            "title": "Zabezpečte Vaši peněženku",
+            "body1": "Save and print the Recovery Kit PDF template.",
+            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
         },
         "password": {
             "title": "Vytvoření hesla",
-            "body": "Vaše heslo je příliš slabé. Použijte kombinaci slov a vyhněte se běžným frázím, jménům nebo datům."
+            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
+            "body2": "It is recommended that you write down your password in your Recovery Kit."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body2": "Keep your PIN safe!"
+            "body1": "Nastavte PIN pro přihlášení k peněžence.",
+            "body2": "Udržujte svůj PIN v bezpečí!"
         },
         "pin": {
             "title": "Nastavení PIN kódu",
-            "body1": "Zadejte 6místný kód PIN. Pro přihlášení do vaší peněženky budete požádáni o zadání PIN kódu.",
-            "body2": "Můžete použít pouze čísla."
+            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
+            "body2": "Zadejte pouze čísla"
         },
         "confirmPin": {
             "title": "Ověřit PIN kód",
-            "body": "Pro pokračování zadejte svůj PIN kód."
+            "body1": "Your PIN keeps your balance and transactions private.",
+            "body2": "Re-enter your PIN code to proceed. "
         },
         "backup": {
             "title": "Zálohovat peněženku",
-            "body1": "Nyní vám bude zobrazena obnovovací fráze.",
-            "body2": "Nesdílejte tuto frázi s nikým. Obnovovací fráze slouží pro přístup k vašim tokenům odkudkoliv.",
+            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
+            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
             "body3": "Pokud ztratíte vaši obnovovací frázi, můžete přijít o tokeny."
         },
         "recoveryPhrase": {
             "title": "Fráze pro obnovení",
-            "body1": "Pečlivě si zapište slova v tomto pořadí.",
-            "body2": "Zachovejte klíčová slova v soukromém a bezpečném úložišti. Nesdílejte je s nikým.",
+            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
+            "body2": "Ponechat toto soukromé a bezpečně uložené.",
+            "body3": "Je důležité mít písemnou zálohu. Počítače často selhávají a soubory mohou být poškozeny.",
             "revealRecoveryPhrase": "Zobrazit obnovovací frázi",
             "hideRecoveryPhrase": "Skrýt frázi pro obnovení"
         },
         "verifyRecoveryPhrase": {
             "title": "Ověřte obnovovací frázi",
             "body": "Zkontrolujme, zda jste správně zapsali frázi. Vyberte slova ve správném pořadí.",
-            "creatingAccount": "Vytváření účtu, čekejte prosím..."
+            "word": "Slovo",
+            "verified": "Fráze obnovení ověřena",
+            "verifiedBody": "Remember to keep it private and safely stored."
         },
         "backupWallet": {
             "title": "Zálohujte jako Stronghold soubor",
-            "body": "Zadejte heslo pro zálohování peněženky jako Stronghold soubor. Vaše heslo bude použito k zašifrování zálohy."
+            "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
+            "body2": "Reasons why digital backups are important:",
+            "reason1": "Easily recover your wallet without typing in your recovery phrase",
+            "reason2": "Importovat peněženku do jiných zařízení",
+            "reason3": "Obnovit celou historii transakcí"
         },
         "recoveryPhraseSaved": {
             "title": "Úspěšně zálohováno",
             "body": "Zálohovali jste peněženku jako Stronghold soubor."
         },
         "congratulations": {
-            "title": "Blahopřejeme",
+            "title": "Nastavení peněženky dokončeno",
             "body": "Vaše peněženka je připravena k použití."
         },
         "import": {
@@ -90,14 +105,14 @@
         },
         "importFromText": {
             "title": "Obnovte vaši peněženku s obnovovací frází nebo přes seed",
-            "body1": "Obnovovací fráze má 24 slov. Používá se k obnově stávající Firefly peněženky.",
-            "body2": "Seed obsahuje 81 znaků. Používá se k obnovení ze starší peněženky Trinity.",
+            "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
+            "body2": "A recovery phrase is 24 words long (with spaces). This is used to recover an existing Firefly wallet.",
             "body3": "Zadejte váš seed nebo obnovovací frázi",
             "seedDetected": "Bylo zjištěno 81 znaků seed",
-            "phraseDetected": "Zjištěna 24 slovní fráze"
+            "phraseDetected": "24 word recovery phrase detected"
         },
         "importFromFile": {
-            "title": "Obnovit peněženku ze zálohy",
+            "title": "Restore your wallet using a backup file",
             "body": "Importujte zálohu pro obnovení vaší peněženky. Zálohy jsou soubory typu Stronghold (.stronghold) nebo Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
@@ -107,7 +122,11 @@
         },
         "importSuccess": {
             "title": "Úspěšně jste obnovili váš účet pomocí zálohy",
-            "body": "Nyní můžete nastavit novou peněženku."
+            "body": "Nyní můžete nastavit novou peněženku.",
+            "seedvaultTitle": "Úspěšně importováno",
+            "seedvaultBody": "Vaše heslo je správné, nyní můžete pokračovat.",
+            "strongholdTitle": "Úspěšně importováno",
+            "strongholdBody": "Vaše heslo je správné, nyní můžete pokračovat."
         },
         "migrate": {
             "title": "Migrujte vaše tokeny",
@@ -132,19 +151,19 @@
             },
             "security": {
                 "title": "Zabezpečení",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Change your password and adjust security-related settings"
             },
             "advancedSettings": {
                 "title": "Pokročilé nastavení",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Tools and manual settings for technical users"
             },
             "helpAndInfo": {
                 "title": "Nápověda",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Find the answer to a question or get help with an issue"
             },
             "profile": {
                 "title": "Profil",
-                "description": ""
+                "description": "Změňte jméno profilu nebo nastavte avatar"
             },
             "sync": {
                 "title": "Synchronizace účtů",
@@ -160,27 +179,27 @@
             },
             "currency": {
                 "title": "Měna",
-                "description": ""
+                "description": "Adjusts balance conversion and updates chart options"
             },
             "notifications": {
                 "title": "Oznámení",
-                "description": ""
+                "description": "System notifications for transaction events"
             },
             "exportStronghold": {
-                "title": "Exportovat Stronghold",
-                "description": ""
+                "title": "Export Backup",
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
             },
             "appLock": {
-                "title": "Zámek aplikace",
-                "description": ""
+                "title": "Automatic Lock",
+                "description": "Time elapsed before your wallet locks and logs you out"
             },
             "changePassword": {
                 "title": "Změna hesla",
-                "description": ""
+                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
             },
             "changePincode": {
                 "title": "Změnit PIN kód",
-                "description": "",
+                "description": "Your PIN keeps your balance and transactions private",
                 "currentPincode": "Aktuální PIN kód",
                 "newPincode": "Nový PIN",
                 "confirmNewPincode": "Potvrďte nový PIN",
@@ -192,59 +211,64 @@
             },
             "deleteProfile": {
                 "title": "Smazat profil",
-                "description": ""
+                "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
             },
             "deepLinks": {
                 "title": "Hluboké odkazy",
-                "description": ""
+                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
             },
             "developerMode": {
                 "title": "Vývojářský režim",
-                "description": ""
+                "description": "Connect to testnets and other developer features"
             },
             "nodeSettings": {
                 "title": "Nastavení node",
-                "description": ""
+                "description": "Select Manual to choose from the node list or connect to your own node"
             },
             "configureNodeList": {
-                "title": "Konfigurovat seznam node",
+                "title": "Select a node",
                 "description": ""
             },
             "proofOfWork": {
                 "title": "Proof of Work",
-                "description": ""
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
-                "title": "Výpis chyb",
-                "description": ""
+                "title": "Záznam chyb",
+                "description": "View errors to debug an issue"
             },
             "diagnostics": {
                 "title": "Diagnostika",
-                "description": ""
+                "description": "View system and application information"
             },
             "stateExport": {
                 "title": "Export stavu",
-                "description": ""
+                "description": "Export your transaction history to a .csv file"
             },
             "troubleshoot": {
                 "title": "Řešení problémů",
-                "description": ""
+                "description": "Use the troubleshooting wizard to solve common problems"
             },
             "documentation": {
                 "title": "Dokumentace",
-                "description": ""
+                "description": "View the documentation for in depth explanations of how things work"
             },
             "faq": {
                 "title": "Časté dotazy",
-                "description": ""
+                "title2": "Frequently Asked Questions",
+                "description": "View the FAQs to get help with a common problem or question"
             },
             "discord": {
                 "title": "Discord",
-                "description": ""
+                "description": "Get help from the IOTA community on Discord"
             },
             "about": {
                 "title": "O aplikaci",
                 "description": ""
+            },
+            "reportAnIssue": {
+                "title": "Report an issue",
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
             }
         },
         "login": {
@@ -263,19 +287,19 @@
                     "noneDetected": "Nic nenalezeno"
                 },
                 "strongholdStatus": {
-                    "title": "Stronghold status",
-                    "locked": "Uzamčeno",
-                    "unlocked": "Odemčeno"
+                    "title": "Wallet Status",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
                 },
                 "strongholdBackup": {
-                    "title": "Stronghold záloha",
+                    "title": "Wallet Backup",
                     "weeksAgo": "před {weeks, plural, one {# týdnem} other {# týdny}}"
                 }
             },
             "network": {
                 "networkOperational": "Síť v provozu",
                 "networkDegraded": "Zhoršená funkčnost sítě",
-                "networkDown": "Síť mimo provoz",
+                "networkDown": "Network Disconnected",
                 "status": "Stav",
                 "messagesPerSecond": "Zprávy za sekundu",
                 "confirmationRate": "Míra potvrzení"
@@ -310,14 +334,14 @@
             "notBackedUpDescription": "Nezazálohovali jste váš Stronghold"
         },
         "deleteAccount": {
-            "title": "Chcete smazat {name}?",
-            "body": "Trvale ztratíte historii transakcí a možná i něco jiného.",
-            "typePassword": "Zadejte heslo vaší peněženky pro potvrzení.",
-            "deleteAccount": "Odstranit účet",
-            "errorTitle": "Nelze odstranit {name}",
-            "errorBody1": "Chcete-li odstranit účet, musíte mít nulový zůstatek.",
+            "title": "Remove {name}?",
+            "body": "You can add this account back later but you may lose your transaction history.",
+            "typePassword": "Type your wallet password to confirm.",
+            "deleteAccount": "Remove account",
+            "errorTitle": "Unable to remove {name}",
+            "errorBody1": "To remove an account it must have 0 balance.",
             "errorBody2": "V současné době zbývá {balance} na tomto účtu. Přesuňte tyto prostředky na jiný účet a zkuste to znovu.",
-            "errorBody3": "Tento účet nelze odstranit, musíte mít alespoň jeden."
+            "errorBody3": "You cannot remove this account, you must have at least one."
         },
         "addressHistory": {
             "title": "{name} historie adresy účtu",
@@ -391,7 +415,7 @@
         "tryAgain": "Zkuste to znovu",
         "visitDiscord": "Navštivte Discord",
         "dragDrop": "Přetáhněte",
-        "importExtentions": ".stronghold nebo .kdbx soubor",
+        "importExtentions": ".kdbx or .stronghold file",
         "chooseFile": "Vyberte soubor",
         "dropHere": "Přesuňte soubor sem",
         "syncAll": "Synchronizovat vše",
@@ -405,10 +429,10 @@
         "unlock": "Odemknout",
         "updateFirefly": "Aktualizovat Firefly",
         "restartNow": "Restartovat nyní",
-        "saveBackup": "Uložit zálohu",
-        "customizeAcount": "Customise account",
+        "saveBackup": "Save Stronghold backup",
+        "customizeAcount": "Přizpůsobit účet",
         "viewAddressHistory": "Zobrazit historii adresy",
-        "deleteAccount": "Odstranit účet",
+        "deleteAccount": "Remove account",
         "max": "Max",
         "addNode": "Přidat uzel",
         "removeNode": "Odstranit uzel",
@@ -430,7 +454,12 @@
         "hideDetails": "Skrýt detaily",
         "yes": "Ano",
         "no": "Ne",
-        "reset": "Reset"
+        "reset": "Resetovat",
+        "downloadRecoveryKit": "Save Recovery Kit template",
+        "skipBackup": "Skip file backup",
+        "finishSetup": "Finish setup",
+        "readDocumentation": "Read the documentation",
+        "visitFaq": "Visit FAQ"
     },
     "general": {
         "password": "Heslo",
@@ -443,15 +472,15 @@
         "recentActivity": "Nedávná aktivita",
         "sent": "Odesláno",
         "received": "Přijato",
-        "sendPayment": "Odeslat platbu",
-        "moveFunds": "Přesunout prostředky",
+        "sendPayment": "Send Payment",
+        "moveFunds": "Internal Transfer",
         "sendFunds": "Poslat tokeny",
-        "sendToAddress": "Poslat na adresu",
+        "sendToAddress": "Send to address",
         "scanQrOrPaste": "Naskenujte QR kód nebo vložte adresu",
         "moveFundsBetweenAccounts": "Převod mezi účty",
         "sendTokensToAddress": "Poslat tokeny na adresu",
         "manageAccount": "Správa účtu",
-        "customizeAcount": "Customize your account",
+        "customizeAcount": "Přizpůsobení účtu",
         "account": "Účet",
         "sendingToAddress": "Odeslání na adresu",
         "amount": "Částka",
@@ -459,7 +488,7 @@
         "reference": "Odkazy",
         "from": "Odkud",
         "to": "Komu",
-        "receiveFunds": "Přijmout tokeny",
+        "receiveFunds": "Receive Funds",
         "myAddress": "Moje adresa",
         "shareAddress": "Sdílet adresu",
         "yourAddress": "Vaše adresa",
@@ -480,13 +509,16 @@
         "accountBalance": "Zůstatek účtu",
         "incoming": "Příchozí",
         "outgoing": "Odchozí",
+        "totalIn": "Total in",
+        "totalOut": "Total out",
         "accounts": "Účty",
+        "myAccounts": "My Accounts",
         "automaticNodeSelection": "Automatický výběr node",
         "manualNodeSelection": "Manuální výběr node",
         "profiles": "Profily",
         "developerProfile": "Vývojářský režim",
         "dev": "Vývojář",
-        "createAccount": "Vytvořit účet",
+        "createAccount": "Create an Account",
         "accountName": "Název účtu",
         "latestTransactions": "Poslední transakce",
         "transactions": "Transakce",
@@ -497,19 +529,22 @@
         "help": "Pomoc",
         "you": "Ty",
         "messageId": "ID zprávy",
-        "inputAddress": "Vstupní adresa",
+        "inputAddress": "Send Address",
         "receiveAddress": "Adresa příjemce",
         "date": "Datum",
+        "status": "Stav",
+        "confirmed": "Potvrzeno",
+        "pending": "Čekající",
         "noAccounts": "Nemáte žádné účty, prosím vytvořte jej.",
         "loadingAccounts": "Načítání, prosím počkejte...",
         "addProfile": "Přidat profil",
         "noRecentHistory": "Žádná nedávná historie",
         "transferSyncing": "Synchronizace účtu",
         "transferSelectingInputs": "Výběr vstupů",
-        "transferRemainderAddress": "Generating remainder deposit address",
+        "transferRemainderAddress": "Generování zbývajících adres",
         "transferSigning": "Podepisování transakce",
         "transferPow": "Provádím PoW",
-        "transferBroadcasting": "Broadcasting transaction",
+        "transferBroadcasting": "Zveřejňování transakce",
         "transferComplete": "Přenos byl dokončen",
         "creatingAccount": "Vytváření účtu, čekejte prosím...",
         "updatingAccount": "Probíhá aktualizace účtu, čekejte prosím...",
@@ -519,14 +554,22 @@
         "passwordSuccess": "Heslo bylo úspěšně aktualizováno",
         "passwordFailed": "Aktualizace hesla se nezdařila",
         "exportingStronghold": "Exportování Stronghold...",
-        "exportingStrongholdSuccess": "Exported stronghold successfully",
-        "exportingStrongholdFailed": "Exported stronghold failed",
+        "exportingStrongholdSuccess": "Exportován Stronghold úspěšně",
+        "exportingStrongholdFailed": "Export Strongholdu selhal",
         "pinCodeUpdating": "Aktualizuji PIN kód...",
         "pinCodeSuccess": "Kód PIN byl úspěšně aktualizován",
-        "pinCodeFailed": "Aktualizace PIN kódu selhala"
+        "pinCodeFailed": "Aktualizace PIN kódu selhala",
+        "passwordStrength": "Password strength",
+        "passwordStrength0": "Bad",
+        "passwordStrength1": "Poor",
+        "passwordStrength2": "Weak",
+        "passwordStrength3": "Average",
+        "passwordStrength4": "Strong",
+        "creatingProfile": "Creating profile, please wait..."
     },
     "dates": {
         "today": "Dnes",
+        "yesterday": "Yesterday",
         "daysAgo": "{time, plural, one {Zbývá # den} few {Zbývají # dny} many {Zbývá # dní} other {Zbývá # dní}}",
         "weeksAgo": "před {time, plural, one {# týdnem} other {# týdny}}",
         "monthsAgo": "před {time, plural,\n  one {# měsícem}\n  few {# měsíci}\n  many {# měsíci}\n  other {# měsíci}\n}",
@@ -535,6 +578,7 @@
     "notifications": {
         "valueTx": "Přijímání {{value}} na {{account}}",
         "confirmed": "Odchozí {{value}} od {{account}} byl potvrzen",
+        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
         "failed": "Odchozí {{value}} od {{account}} selhal",
         "downloadingUpdate": "Stahování aktualizace",
         "updateReady": "Aktualizace připravena",
@@ -546,63 +590,66 @@
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "duplicate": "A profile with this name already exists."
+            "length": "Profil nemůže být delší než {length, plural, one {1 znak} few {# znaky} other {# znaků}}.",
+            "duplicate": "Profil s tímto jménem již existuje."
         },
         "password": {
-            "doNotMatch": "Passwords do not match.",
+            "doNotMatch": "Hesla se neshodují.",
             "tooWeak": "Nové heslo je příliš slabé",
-            "row": "Straight rows of keys are easy to guess.",
-            "pattern": "Short keyboard patterns are easy to guess.",
-            "names": "Common names and surnames are easy to guess.",
-            "repeats": "Repeats like 'aaa' are easy to guess.",
-            "repeats2": "Repeats like 'abcabcabc' are easy to guess.",
-            "sequence": "Sequences of characters are easy to guess.",
-            "years": "Recent years are easy to guess.",
-            "dates": "Dates are easy to guess.",
-            "common": "This is a very common password.",
-            "similar": "This is similar to a common password.",
-            "reasonWord": "A single word is easy to guess.",
-            "incorrect": "Your password is incorrect.",
-            "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
+            "row": "Postupné řady znaků se dají lehce uhodnout.",
+            "pattern": "Krátké klávesnicové kombinace lze snadno uhodnout.",
+            "names": "Běžná jména a příjmení se dají lehce uhodnout.",
+            "repeats": "Řetězce typu 'aaa' se dají lehce uhodnout.",
+            "repeats2": "Řetězce typu 'abcabcabc' se dají lehce uhodnout.",
+            "sequence": "Posloupnosti znaků se dají lehce uhodnout.",
+            "years": "Nedávné roky se dají lehce uhodnout.",
+            "dates": "Datum lze snadno uhodnout.",
+            "common": "Toto je velmi běžné heslo.",
+            "similar": "Toto je podobné běžnému heslu.",
+            "reasonWord": "Jedno slovo se dá lehce uhodnout.",
+            "incorrect": "Heslo není správné.",
+            "length": "Heslo nemůže být delší než {length, plural, one {1 znak} few {# znaky} other {# znaků}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {1 digit} other {# digits}} long.",
-            "match": "PINs do not match.",
-            "incorrect": "Your current PIN is incorrect."
+            "length": "PIN musí být {length, plural, one {1 číslici} few {# číslice} other {# číslic}}.",
+            "match": "Kódy PIN se neshodují.",
+            "incorrect": "Současný PIN je nesprávný."
         },
         "account": {
-            "length": "Your account name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "empty": "You must use your latest account before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this account.",
-            "duplicate": "An account with this name already exists."
+            "length": "Profilové jméno nemůže být delší než {length, plural, one {1 znak} other {# znaky}}.",
+            "empty": "Před vytvořením nového účtu musíte použít poslední účet.",
+            "notEmpty": "Před smazáním tohoto účtu musíte převést svůj zůstatek.",
+            "duplicate": "Účet s tímto názvem již existuje."
         },
         "send": {
-            "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
-            "amountTooHigh": "This is greater than your available balance.",
-            "amountNoFloat": "If units are `i` you cannot use decimal places.",
-            "amountInvalidFormat": "The amount appears to be an invalid number.",
-            "amountZero": "The amount must be greater than 0.",
-            "wrongAddressFormat": "Addresses start with the prefix {prefix}.",
-            "insufficientFunds": "This account has insufficient funds"
+            "addressLength": "Adresy by měly mít {length, plural, one {1 znak} other {# znaky}}.",
+            "amountTooHigh": "To je více než disponibilní zůstatek.",
+            "amountNoFloat": "U jednotky `i` nelze použít desetinná místa.",
+            "amountInvalidFormat": "Zdá se, že částka je neplatné číslo.",
+            "amountZero": "Částka musí být větší než 0.",
+            "wrongAddressFormat": "Adresy začínají předponou {prefix}.",
+            "insufficientFunds": "This account has insufficient funds.",
+            "sendingDust": "You cannot send less than 1 Mi.",
+            "leavingDust": "You cannot leave less than 1 Mi on your address."
         },
         "node": {
-            "invalid": "Please enter a valid URL.",
-            "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
+            "invalid": "Zadejte platnou adresu URL.",
+            "https": "Je vyžadováno HTTPS. Nastavte vývojářský profil pro užití nezabezpečených HTTP připojení.",
             "duplicate": "Tato node již byla přidána.",
-            "unsynced": "Node, kterou se pokoušíte přidat, není synchronizována."
+            "unsynced": "The node is not in sync.",
+            "noSynced": "No synced nodes are available."
         },
         "global": {
-            "generic": "Something went wrong."
+            "generic": "Něco se pokazilo."
         },
         "backup": {
-            "invalid": "The backup file was not recognised.",
-            "destination": "The backup destination was not valid.",
-            "mnemonic": "The mnemonic is not valid.",
-            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
-            "seedCharacters": "The seed should only contain characters A-Z or 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}",
-            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase"
+            "invalid": "Záložní soubor nebyl rozpoznán.",
+            "destination": "Záložní destinace není platná.",
+            "mnemonic": "Mnemonika není platná.",
+            "seedTooShort": "Seed by měl být 81 znaků dlouhý, {length, plural, one {je 1} other {je #}}",
+            "seedCharacters": "Seed by měl obsahovat pouze znaky A-Z nebo 9",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
+            "phraseUnrecognizedWord": "Nerozpoznané slovo \"{word} v obnovovací frázi"
         }
     }
 }

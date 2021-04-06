@@ -1,5 +1,6 @@
 import { cleanupSignup, login, strongholdPassword, walletPin } from 'shared/lib/app'
 import { profiles } from 'shared/lib/profile'
+import { selectedAccountId } from 'shared/lib/wallet'
 import { AccountRoutes, AppRoute, SettingsRoutes, SetupType, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
 import { get, readable, writable } from 'svelte/store'
 import { deepLinkRequestActive } from './deepLinking'
@@ -72,7 +73,7 @@ export const settingsRoute = writable<SettingsRoutes>(SettingsRoutes.Init)
 /**
  * Settings child route
  */
- export const settingsChildRoute = writable<string>(null)
+export const settingsChildRoute = writable<string>(null)
 
 /**
  * Navigate to initial route
@@ -115,9 +116,9 @@ export const routerNext = (event) => {
             nextRoute = AppRoute.Legal
             break
         case AppRoute.Legal:
-            nextRoute = AppRoute.Language
+            nextRoute = AppRoute.Appearance
             break
-        case AppRoute.Language:
+        case AppRoute.Appearance:
             nextRoute = AppRoute.Setup
             break
         case AppRoute.Setup:
@@ -125,11 +126,14 @@ export const routerNext = (event) => {
             if (setupType) {
                 walletSetupType.set(setupType)
                 if (setupType === SetupType.New) {
-                    nextRoute = AppRoute.Password
+                    nextRoute = AppRoute.Secure
                 } else if (setupType === SetupType.Import) {
                     nextRoute = AppRoute.Import
                 }
             }
+            break
+        case AppRoute.Secure:
+            nextRoute = AppRoute.Password
             break
         case AppRoute.Password:
             const { password } = params
@@ -161,11 +165,11 @@ export const routerNext = (event) => {
             const { importType } = params
             walletSetupType.set(importType)
             if (importType === SetupType.Mnemonic) {
-                nextRoute = AppRoute.Password
-            } else if (importType === SetupType.Seed || importType === SetupType.Seedvault) {
-                nextRoute = AppRoute.Balance
+                nextRoute = AppRoute.Secure
             } else if (importType === SetupType.Stronghold) {
                 nextRoute = AppRoute.Protect
+            } else if (importType === SetupType.Seed || importType === SetupType.Seedvault) {
+                nextRoute = AppRoute.Balance
             }
             break
         case AppRoute.Balance:
@@ -221,4 +225,11 @@ export const resetRouter = () => {
     settingsRoute.set(SettingsRoutes.Init)
     dashboardRoute.set(Tabs.Wallet)
     deepLinkRequestActive.set(false)
+}
+
+export const resetWalletRoute = () => {
+    dashboardRoute.set(Tabs.Wallet)
+    walletRoute.set(WalletRoutes.Init)
+    accountRoute.set(AccountRoutes.Init)
+    selectedAccountId.set(null)
 }

@@ -7,7 +7,7 @@ Big.NE = -20
 /**
  * IOTA Units Map
  */
-const UNIT_MAP: { [unit in Unit]: { val: number; dp: number } } = {
+export const UNIT_MAP: { [unit in Unit]: { val: number; dp: number } } = {
     i: { val: 1, dp: 0 },
     Ki: { val: 1000, dp: 3 },
     Mi: { val: 1000000, dp: 6 },
@@ -48,8 +48,8 @@ export const formatUnit = (value: number, decimalPlaces = 2): string => {
 const getUnit = (value: number): Unit => {
     let bestUnits: Unit = Unit.i
 
-    if (!value) {
-        return bestUnits
+    if (!value || value === 0) {
+        return Unit.Mi
     }
 
     const checkLength = Math.abs(value).toString().length

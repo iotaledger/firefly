@@ -25,14 +25,14 @@
     }
 </script>
 
-<div data-label="latest-transactions" class="h-full py-6 px-8 flex-grow flex flex-col">
+<div data-label="latest-transactions" class="h-full pt-6 pb-8 px-8 flex-grow flex flex-col">
     <div class="w-full flex flex-row justify-between items-start">
-        <Text type="p" bold classes="mb-5">{locale('general.latestTransactions')}</Text>
+        <Text type="h5" classes="mb-5">{locale('general.latestTransactions')}</Text>
         <button on:click={syncAccounts} class:pointer-events-none={$isSyncing}>
-            <Icon icon="refresh" classes="{$isSyncing && 'animate-spin'} text-gray-500 dark:text-white" />
+            <Icon icon="refresh" classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white" />
         </button>
     </div>
-    <div class="overflow-y-auto flex-auto h-1 space-y-2">
+    <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2">
         {#if $transactions?.length}
             {#each $transactions as transaction}
                 <ActivityRow

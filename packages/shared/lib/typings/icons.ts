@@ -21,5 +21,5 @@ export enum SettingsIcons {
     documentation = 'doc',
     faq = 'speech',
     discord = 'discord',
-    about = 'help',
+    reportAnIssue = 'help',
 }

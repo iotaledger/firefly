@@ -20,6 +20,8 @@
     let timeout
     let interval
 
+    $: progressBarMessage = `${progressBarPercent}% completed`
+
     onMount(() => {
         $selectedBundlesWithSpentAddresses.reduce(
             (promise, bundle, idx) =>

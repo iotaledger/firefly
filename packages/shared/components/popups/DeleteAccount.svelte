@@ -58,7 +58,7 @@
     }
     function handleMoveFundsClick() {
         closePopup()
-        sendParams.update((params) => ({ ...params, amount: $account.rawIotaBalance })) // TODO: fix input amount
+        sendParams.update((params) => ({ ...params, amount: $account.rawIotaBalance, isInternal: true }))
         accountRoute.set(AccountRoutes.Send)
     }
     function handleCancelClick() {

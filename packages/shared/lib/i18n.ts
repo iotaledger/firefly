@@ -83,6 +83,16 @@ const setupI18n = (options = { withLocale: null }) => {
                 language: _locale
             })
             isDownloading.set(false)
+
+            // If we have not loaded "en" make sure we have it as a backup language
+            // in case the chosen language does not have all the translations
+            if (_locale !== "en" && !hasLoadedLocale("en")) {
+                const messagesFileUrl = MESSAGE_FILE_URL_TEMPLATE.replace('{locale}', 'en')
+                loadJson(messagesFileUrl)
+                    .then((messages) => {
+                        addMessages("en", messages)
+                    })
+            }
         })
     }
 }
@@ -137,8 +147,16 @@ const setLanguage = (item) => {
     setupI18n({ withLocale: locale })
 }
 
+const getDecimalSeparator = () => {
+    const numberWithDecimalSeparator = 1.1;
+    return Intl.NumberFormat(getLocaleFromNavigator())
+        .formatToParts(numberWithDecimalSeparator)
+        .find(part => part.type === 'decimal')
+        .value;
+}
+
 const localize = get(_) as (string, values?) => string
 
 // We expose the svelte-i18n _ store so that our app has
 // a single API for i18n
-export { _, setupI18n, dir, isLocaleLoaded, localize, setLanguage }
+export { _, setupI18n, dir, isLocaleLoaded, localize, setLanguage, getDecimalSeparator }

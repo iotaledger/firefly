@@ -1,7 +1,7 @@
 {
     "name": "desktop",
-    "productName": "Firefly",
-    "version": "0.1.0",
+    "productName": "Firefly Beta",
+    "version": "0.3.1",
     "description": "IOTA wallet desktop",
     "main": "public/build/main.js",
     "repository": "git@github.com:iotaledger/new-wallet.git",
@@ -32,7 +32,7 @@
         "copy-webpack-plugin": "^7.0.0",
         "cross-env": "^7.0.2",
         "css-loader": "^5.0.1",
-        "electron": "9.3.5",
+        "electron": "9.4.4",
         "electron-builder": "^22.9.1",
         "electron-notarize": "^1.0.0",
         "mini-css-extract-plugin": "^1.3.5",
@@ -47,7 +47,7 @@
         "webpack-dev-server": "^3.11.2"
     },
     "build": {
-        "productName": "Firefly",
+        "productName": "Firefly Beta",
         "artifactName": "firefly-desktop-${version}.${ext}",
         "copyright": "IOTA Foundation",
         "directories": {
@@ -73,10 +73,11 @@
         "dmg": {
             "iconSize": 120,
             "title": "${productName}",
+            "background": "public/assets/background/mac/background.png",
             "sign": false,
             "contents": [
                 {
-                    "x": 520,
+                    "x": 500,
                     "y": 250,
                     "type": "link",
                     "path": "/Applications"
@@ -105,7 +106,8 @@
                 "Name": "Firefly",
                 "Comment": "Desktop wallet for IOTA",
                 "Categories": "Office;Network;Finance"
-            }
+            },
+            "icon": "./public/assets/icons/linux/icon256x256.png"
         },
         "mac": {
             "icon": "./public/assets/icons/mac/icon.icns",

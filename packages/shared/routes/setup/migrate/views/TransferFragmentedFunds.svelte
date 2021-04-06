@@ -1,18 +1,14 @@
 <script lang="typescript">
     import { Button, Illustration, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
     import { createEventDispatcher, onDestroy } from 'svelte'
-    import {
-        migration,
-        getInputIndexesForBundle,
-        createMigrationBundle,
-        sendMigrationBundle,
-    } from 'shared/lib/migration'
+    import { migration, getInputIndexesForBundle, createMigrationBundle, sendMigrationBundle } from 'shared/lib/migration'
 
     export let locale
     export let mobile
 
-    let loading,
-        finished = false
+    let busy = false
+    let migrated = false
+    let fullSuccess = false
     let migratingFundsMessage = ''
 
     const { didComplete, bundles } = $migration
@@ -35,17 +31,21 @@
         didComplete.set(true)
         dispatch('next')
     }
+    function handleRerunClick() {
+        migrateFunds()
+    }
 
     function finish() {
-        loading = false
-        finished = true
+        busy = false
+        migrated = true
         migratingFundsMessage = locale('actions.continue')
     }
 
     function migrateFunds() {
         // TODO: Rethink if we need to only update status of the transaction we are actually sending
         transactions = transactions.map((item) => ({ ...item, status: 1 }))
-        loading = true
+        busy = true
+        migrated = false
         migratingFundsMessage = locale('views.migrate.migrating')
 
         transactions.reduce(
@@ -91,6 +91,7 @@
                     }),
             Promise.resolve([])
         )
+        fullSuccess = false
     }
 </script>
 
@@ -98,27 +99,34 @@
     <div>foo</div>
 {:else}
     <OnboardingLayout onBackClick={handleBackClick} class="">
-        <div slot="leftpane__content">
-            <Text type="h1" classes="mb-5 mt-5">{locale('views.migrate.title')}</Text>
+        <div slot="leftpane__content" class="h-full flex flex-col flex-wrap">
+            <Text type="h2" classes="mb-5">{locale('views.migrate.title')}</Text>
             <Text type="p" secondary classes="mb-6">{locale('views.transferFragmentedFunds.body1')}</Text>
-            <div class="overflow-y-auto h-80 pr-5 pb-6">
+            <div class="flex-auto overflow-y-auto h-1 space-y-4 w-full -mr-2 pr-2">
                 {#each transactions as transaction}
                     <TransactionItem {...transaction} {locale} />
                 {/each}
             </div>
         </div>
-        <div slot="leftpane__action" class="flex flex-col items-center space-x-4">
-            {#if !finished}
-                <Button disabled={loading} classes="w-full py-3 mt-2 text-white" onClick={() => migrateFunds()}>
-                    <Spinner busy={loading} message={migratingFundsMessage} classes="justify-center" />
-                    {#if !loading && !finished}{locale('views.transferFragmentedFunds.migrate')}{/if}
+        <div slot="leftpane__action" class="flex flex-col items-center space-y-4">
+            {#if !migrated}
+                <Button disabled={busy} classes="w-full py-3 mt-2 text-white" onClick={() => migrateFunds()}>
+                    <Spinner {busy} message={migratingFundsMessage} classes="justify-center" />
+                    {#if !busy && !migrated}{locale('views.transferFragmentedFunds.migrate')}{/if}
                 </Button>
-            {:else}
+            {:else if fullSuccess}
                 <Button classes="w-full py-3 mt-2" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
+            {:else}
+                <Button classes="w-full py-3 mt-2" onClick={() => handleRerunClick()}>
+                    {locale('views.transferFragmentedFunds.rerun')}
+                </Button>
+                <Button secondary classes="w-full py-3 mt-2" onClick={() => handleContinueClick()}>
+                    {locale('actions.proceedAnyway')}
+                </Button>
             {/if}
         </div>
-        <div slot="rightpane" class="h-full flex">
-            <Illustration illustration="migrate-desktop" height="100%" width="auto" classes="h-full object-cover object-left" />
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
+            <Illustration illustration="migrate-desktop" height="100%" width="auto" />
         </div>
     </OnboardingLayout>
 {/if}

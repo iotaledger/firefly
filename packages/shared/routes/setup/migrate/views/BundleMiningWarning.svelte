@@ -24,8 +24,8 @@
 {:else}
     <BundleMiningLayout onBackClick={handleBackClick}>
         <div slot="icon_boxed">
-            <div class="flex justify-center items-center rounded-2xl w-12 h-12 bg-orange-300 shadow-lg">
-                <Icon boxed="true" icon="warning" classes="text-orange-700" />
+            <div class="flex justify-center items-center rounded-2xl w-12 h-12 bg-orange-600 shadow-lg">
+                <Icon boxed="true" icon="warning-filled" classes="text-white" />
             </div>
         </div>
         <div slot="box_content">

@@ -1,11 +1,11 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Şandin, Standin & Rêveberî ya IOTA te",
-            "body": "Firefly tûrikek IOTA ya ewledar û karanîna wê hêsan e."
+            "title": "Send, Receive & Manage your IOTA tokens",
+            "body": "Firefly is the official wallet of IOTA."
         },
         "legal": {
-            "title": "Nasnav",
+            "title": "Privacy Policy & Terms of Service",
             "body": "Ji kerema xwe polîtîqaya taybetîtiyê û Mercên Karûbar binirxînin.",
             "privacyPolicy": {
                 "title": "Polîtîqa Taybetîyê",
@@ -25,20 +25,27 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I have read and I accept the Privacy policy & ToS"
+            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
         },
-        "language": {
-            "title": "bibîn ->ziman ->kûmik",
-            "body": "Ziman û rengê cuzdanka xwe hilbijêrin"
+        "appearance": {
+            "title": "Appearance",
+            "body": "Choose your wallet’s theme."
         },
         "setup": {
             "title": "Cazdanka xwe saz bike",
-            "body": "Hûn dikarin cuzdankek nû biafirînin an jî ya heyî pêxinîn.",
+            "body1": "You can create multiple user profiles to keep your tokens separate and improve privacy.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Navê Profîlê"
+        },
+        "secure": {
+            "title": "Secure your wallet",
+            "body1": "Save and print the Recovery Kit PDF template.",
+            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
         },
         "password": {
             "title": "Pêborînekê biafirîn",
-            "body": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates."
+            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
+            "body2": "It is recommended that you write down your password in your Recovery Kit."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -47,42 +54,50 @@
         },
         "pin": {
             "title": "Qoda PIN saz bike",
-            "body1": "6 jimarên PIN kodâ xa jêrê bikevin.\nJi bona ketina berîka we\nJi we re kodek PIN hewce dike. ",
-            "body2": "Hûn dikarin tenê hejmaran bikar bînin. "
+            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
+            "body2": "Use numbers only"
         },
         "confirmPin": {
             "title": "Koda Pîn-a xwe rast bikin",
-            "body": "Ji bo berdewamiyê kodê pînê xwe ji nû ve bikin"
+            "body1": "Your PIN keeps your balance and transactions private.",
+            "body2": "Re-enter your PIN code to proceed. "
         },
         "backup": {
             "title": "Berîka xa diberke. ",
-            "body1": "Hevokek başbûnê dê nuha nîşan bide. ",
-            "body2": "Vê hevokê bi kesî re parve nekin.\nJi vê hevokê ba dikarin hebünênwe bigîhîşjin. ",
+            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
+            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
             "body3": "Ji win hevoka xılaskirinê lı bîrkin,wênê hebûnên xa jî in da bikin. "
         },
         "recoveryPhrase": {
             "title": "Hevoka Xilaskirinê. ",
-            "body1": "Bi baldarî peyvan bi rêzê rast binivîsin",
-            "body2": "Şîfra Xilaskirinê bi ewlehî veşêrin û kesîra parwe nekin. ",
+            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
+            "body2": "Keep this private and safely stored.",
+            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
             "revealRecoveryPhrase": "Îfadâ Xilaskirinê nîşande. ",
             "hideRecoveryPhrase": "Bêja Xilaskirinê veşartî bike. "
         },
         "verifyRecoveryPhrase": {
             "title": "Şîfra Xilaskirinê rastke. ",
-            "body": "Let's check you wrote down the phrase correctly. Select the words in the correct order.",
-            "creatingAccount": "Creating account, please wait..."
+            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
+            "word": "Word",
+            "verified": "Recovery phrase verified",
+            "verifiedBody": "Remember to keep it private and safely stored."
         },
         "backupWallet": {
             "title": "Spas ji bo alîkariya te",
-            "body": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup."
+            "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
+            "body2": "Reasons why digital backups are important:",
+            "reason1": "Easily recover your wallet without typing in your recovery phrase",
+            "reason2": "Import your wallet to other devices",
+            "reason3": "Recover your full transaction history"
         },
         "recoveryPhraseSaved": {
             "title": "Bi serfirazî piştgirî kirin",
             "body": "We berîka xwe li Stronghold'ê hilanîn."
         },
         "congratulations": {
-            "title": "Pîroz be",
-            "body": "Berîka we amade ye."
+            "title": "Wallet setup completed",
+            "body": "Your new wallet is ready to use."
         },
         "import": {
             "title": "Berîka xwe têxe malde",
@@ -90,14 +105,14 @@
         },
         "importFromText": {
             "title": "Berîka xwe pê peyvekê an jî gotinekê xilas bikin",
-            "body1": "Gotinek a xilaskirinê ji 24 peyva çê dibe. Ev, ji bo xilaskirina berîka Firefly tê bikaranîn.",
-            "body2": "Yek seed ji 81 tîpan çêdibe. Ev, ji bo xilasbuna ji berikek Trinity a kevin tê bikaranîn.",
+            "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
+            "body2": "A recovery phrase is 24 words long (with spaces). This is used to recover an existing Firefly wallet.",
             "body3": "Seed an jî gotina xilaskirina xwe tekin",
             "seedDetected": "81 character seed detected",
-            "phraseDetected": "24 word phrase detected"
+            "phraseDetected": "24 word recovery phrase detected"
         },
         "importFromFile": {
-            "title": "Berîka xwe ji pelê hilanînê vegerînin",
+            "title": "Restore your wallet using a backup file",
             "body": "Pelê hilanînê ji bo vegerandina berîka xwe têxin hundurê. Piştgirî dikarin bibin Stronghold (.stronghold) an Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
@@ -107,7 +122,11 @@
         },
         "importSuccess": {
             "title": "We hilanîna xwe bi serfirazî vegerand",
-            "body": "Hun dikarin berîka xwe a nû tomar bikî."
+            "body": "Hun dikarin berîka xwe a nû tomar bikî.",
+            "seedvaultTitle": "Successfully imported",
+            "seedvaultBody": "Your password is correct, you can now continue.",
+            "strongholdTitle": "Successfully imported",
+            "strongholdBody": "Your password is correct, you can now continue."
         },
         "migrate": {
             "title": "Hebûnên xwe bar bikin",
@@ -132,19 +151,19 @@
             },
             "security": {
                 "title": "Ewlehî",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Change your password and adjust security-related settings"
             },
             "advancedSettings": {
                 "title": "Sazkariyên pêşketî",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Tools and manual settings for technical users"
             },
             "helpAndInfo": {
                 "title": "Alîkarî & Agahî",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Find the answer to a question or get help with an issue"
             },
             "profile": {
                 "title": "Jînname",
-                "description": ""
+                "description": "Change your profile name or set an avatar"
             },
             "sync": {
                 "title": "Hesabê xwe hevdem bike",
@@ -160,27 +179,27 @@
             },
             "currency": {
                 "title": "Diravcins",
-                "description": ""
+                "description": "Adjusts balance conversion and updates chart options"
             },
             "notifications": {
                 "title": "Hişyarî",
-                "description": ""
+                "description": "System notifications for transaction events"
             },
             "exportStronghold": {
-                "title": "Stronghold barke",
-                "description": ""
+                "title": "Export Backup",
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
             },
             "appLock": {
-                "title": "Qulfa app",
-                "description": ""
+                "title": "Automatic Lock",
+                "description": "Time elapsed before your wallet locks and logs you out"
             },
             "changePassword": {
                 "title": "Pêborînê biguherînê",
-                "description": ""
+                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
             },
             "changePincode": {
                 "title": "Qoda PIN'ê biguherîne",
-                "description": "",
+                "description": "Your PIN keeps your balance and transactions private",
                 "currentPincode": "PIN'a heyî",
                 "newPincode": "PIN'a nû",
                 "confirmNewPincode": "PIN'a nû tomarbike",
@@ -192,59 +211,64 @@
             },
             "deleteProfile": {
                 "title": "Delete profile",
-                "description": ""
+                "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
             },
             "deepLinks": {
                 "title": "Girêdanên kûr",
-                "description": ""
+                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
             },
             "developerMode": {
                 "title": "Mode ya pêşdebir",
-                "description": ""
+                "description": "Connect to testnets and other developer features"
             },
             "nodeSettings": {
                 "title": "Sazkirina girêk",
-                "description": ""
+                "description": "Select Manual to choose from the node list or connect to your own node"
             },
             "configureNodeList": {
-                "title": "Node an çê bike",
+                "title": "Select a node",
                 "description": ""
             },
             "proofOfWork": {
                 "title": "Delîlên kar",
-                "description": ""
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Têketina çewtiyê",
-                "description": ""
+                "description": "View errors to debug an issue"
             },
             "diagnostics": {
                 "title": "Diagnostics",
-                "description": ""
+                "description": "View system and application information"
             },
             "stateExport": {
                 "title": "State export",
-                "description": ""
+                "description": "Export your transaction history to a .csv file"
             },
             "troubleshoot": {
                 "title": "Sererastkirin",
-                "description": ""
+                "description": "Use the troubleshooting wizard to solve common problems"
             },
             "documentation": {
                 "title": "Belgekirin",
-                "description": ""
+                "description": "View the documentation for in depth explanations of how things work"
             },
             "faq": {
                 "title": "Pirsên tê kirin",
-                "description": ""
+                "title2": "Frequently Asked Questions",
+                "description": "View the FAQs to get help with a common problem or question"
             },
             "discord": {
                 "title": "Lihevnekirin",
-                "description": ""
+                "description": "Get help from the IOTA community on Discord"
             },
             "about": {
                 "title": "Ji dor",
                 "description": ""
+            },
+            "reportAnIssue": {
+                "title": "Report an issue",
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
             }
         },
         "login": {
@@ -263,19 +287,19 @@
                     "noneDetected": "None detected"
                 },
                 "strongholdStatus": {
-                    "title": "Stronghold Status",
-                    "locked": "Girtî",
-                    "unlocked": "Vekirî"
+                    "title": "Wallet Status",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
                 },
                 "strongholdBackup": {
-                    "title": "Stronghold Backup",
+                    "title": "Wallet Backup",
                     "weeksAgo": "{weeks, plural, one {# week} other {# weeks}} ago"
                 }
             },
             "network": {
                 "networkOperational": "Network Operational",
                 "networkDegraded": "Network Degraded",
-                "networkDown": "Network Down",
+                "networkDown": "Network Disconnected",
                 "status": "Hal",
                 "messagesPerSecond": "Peyam di sanîyek de",
                 "confirmationRate": "Confirmation rate"
@@ -310,14 +334,14 @@
             "notBackedUpDescription": "You have not backed up your Stronghold"
         },
         "deleteAccount": {
-            "title": "Delete {name}?",
-            "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "typePassword": "Type your wallet’s password to confirm.",
-            "deleteAccount": "Delete account",
-            "errorTitle": "Unable to delete {name}",
-            "errorBody1": "To delete an account you must have 0 balance.",
+            "title": "Remove {name}?",
+            "body": "You can add this account back later but you may lose your transaction history.",
+            "typePassword": "Type your wallet password to confirm.",
+            "deleteAccount": "Remove account",
+            "errorTitle": "Unable to remove {name}",
+            "errorBody1": "To remove an account it must have 0 balance.",
             "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
-            "errorBody3": "You cannot delete this account, you must have at least one."
+            "errorBody3": "You cannot remove this account, you must have at least one."
         },
         "addressHistory": {
             "title": "{name} account address history",
@@ -391,7 +415,7 @@
         "tryAgain": "Try again",
         "visitDiscord": "Visit Discord",
         "dragDrop": "Drag & Drop",
-        "importExtentions": ".stronghold or .kdbx file",
+        "importExtentions": ".kdbx or .stronghold file",
         "chooseFile": "Choose a File",
         "dropHere": "Drop your file here",
         "syncAll": "Sync all",
@@ -405,10 +429,10 @@
         "unlock": "Unlock",
         "updateFirefly": "Update Firefly",
         "restartNow": "Restart now",
-        "saveBackup": "Save backup",
+        "saveBackup": "Save Stronghold backup",
         "customizeAcount": "Customise account",
         "viewAddressHistory": "View address history",
-        "deleteAccount": "Delete account",
+        "deleteAccount": "Remove account",
         "max": "Max",
         "addNode": "Add node",
         "removeNode": "Remove node",
@@ -430,7 +454,12 @@
         "hideDetails": "Hide Details",
         "yes": "Yes",
         "no": "No",
-        "reset": "Reset"
+        "reset": "Reset",
+        "downloadRecoveryKit": "Save Recovery Kit template",
+        "skipBackup": "Skip file backup",
+        "finishSetup": "Finish setup",
+        "readDocumentation": "Read the documentation",
+        "visitFaq": "Visit FAQ"
     },
     "general": {
         "password": "Password",
@@ -443,10 +472,10 @@
         "recentActivity": "Recent Activity",
         "sent": "Sent",
         "received": "Received",
-        "sendPayment": "Send payment",
-        "moveFunds": "Move funds",
+        "sendPayment": "Send Payment",
+        "moveFunds": "Internal Transfer",
         "sendFunds": "Send funds",
-        "sendToAddress": "Send to an Address",
+        "sendToAddress": "Send to address",
         "scanQrOrPaste": "Scan a QR code or paste an Address",
         "moveFundsBetweenAccounts": "Move funds between accounts",
         "sendTokensToAddress": "Send tokens to an address",
@@ -459,7 +488,7 @@
         "reference": "Reference",
         "from": "From",
         "to": "To",
-        "receiveFunds": "Receive funds",
+        "receiveFunds": "Receive Funds",
         "myAddress": "My Address",
         "shareAddress": "Share an address",
         "yourAddress": "Your address",
@@ -480,13 +509,16 @@
         "accountBalance": "Account Balance",
         "incoming": "Incoming",
         "outgoing": "Outgoing",
+        "totalIn": "Total in",
+        "totalOut": "Total out",
         "accounts": "Accounts",
+        "myAccounts": "My Accounts",
         "automaticNodeSelection": "Automatic node selection",
         "manualNodeSelection": "Manual node selection",
         "profiles": "Profiles",
         "developerProfile": "Developer Profile",
         "dev": "Dev",
-        "createAccount": "Create an account",
+        "createAccount": "Create an Account",
         "accountName": "Account name",
         "latestTransactions": "Latest Transactions",
         "transactions": "Transactions",
@@ -497,9 +529,12 @@
         "help": "Alîkarî",
         "you": "You",
         "messageId": "Message ID",
-        "inputAddress": "Input Address",
+        "inputAddress": "Send Address",
         "receiveAddress": "Receive Address",
         "date": "Date",
+        "status": "Hal",
+        "confirmed": "Confirmed",
+        "pending": "Pending",
         "noAccounts": "Hesabê we tune, ji kerema xwe yêk çêbikin.",
         "loadingAccounts": "Loading, please wait...",
         "addProfile": "Profîlê zêde bikin\n",
@@ -523,10 +558,18 @@
         "exportingStrongholdFailed": "Exported stronghold failed",
         "pinCodeUpdating": "Updating PIN code...",
         "pinCodeSuccess": "Updated PIN code successfully",
-        "pinCodeFailed": "Updating PIN code failed"
+        "pinCodeFailed": "Updating PIN code failed",
+        "passwordStrength": "Password strength",
+        "passwordStrength0": "Bad",
+        "passwordStrength1": "Poor",
+        "passwordStrength2": "Weak",
+        "passwordStrength3": "Average",
+        "passwordStrength4": "Strong",
+        "creatingProfile": "Creating profile, please wait..."
     },
     "dates": {
         "today": "Today",
+        "yesterday": "Yesterday",
         "daysAgo": "{time, plural, one {# day} other {# days}} ago",
         "weeksAgo": "{time, plural, one {# week} other {# weeks}} ago",
         "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
@@ -535,6 +578,7 @@
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
         "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
+        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
         "failed": "Outgoing {{value}} from {{account}} has failed",
         "downloadingUpdate": "Downloading update",
         "updateReady": "Update ready",
@@ -584,13 +628,16 @@
             "amountInvalidFormat": "The amount appears to be an invalid number.",
             "amountZero": "The amount must be greater than 0.",
             "wrongAddressFormat": "Addresses start with the prefix {prefix}.",
-            "insufficientFunds": "This account has insufficient funds"
+            "insufficientFunds": "This account has insufficient funds.",
+            "sendingDust": "You cannot send less than 1 Mi.",
+            "leavingDust": "You cannot leave less than 1 Mi on your address."
         },
         "node": {
             "invalid": "Please enter a valid URL.",
             "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
             "duplicate": "This node has already been added.",
-            "unsynced": "The node you are trying to add is not synced."
+            "unsynced": "The node is not in sync.",
+            "noSynced": "No synced nodes are available."
         },
         "global": {
             "generic": "Something went wrong."
@@ -601,7 +648,7 @@
             "mnemonic": "The mnemonic is not valid.",
             "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
             "seedCharacters": "The seed should only contain characters A-Z or 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
             "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase"
         }
     }

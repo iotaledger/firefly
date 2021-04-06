@@ -3,6 +3,9 @@ contact_links:
   - name: Discord
     url: https://discord.iota.org/
     about: Please ask and answer questions here.
+  - name: Translation issues
+    url: https://crowdin.com/project/iota-firefly
+    about: Issues with translations can be resolved on Crowdin.
   - name: Security vulnerabilities
     url: security@iota.org
     about: Please report security vulnerabilities here.

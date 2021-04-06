@@ -7,6 +7,7 @@ import type { MigrationData, MigrationBundle } from './migration'
 
 export interface Actor {
     destroy(): void
+    removeEventListeners(): void
 }
 
 export interface CommunicationIds {

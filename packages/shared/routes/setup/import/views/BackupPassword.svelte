@@ -6,14 +6,16 @@
     export let mobile
     export let importType
     export let error = ''
-    export let loading = false
+    export let busy = false
 
     let password = ''
 
     const dispatch = createEventDispatcher()
 
     function handleContinue() {
-        dispatch('next', { password })
+        if (password) {
+            dispatch('next', { password })
+        }
     }
     function handleBackClick() {
         dispatch('previous')
@@ -23,24 +25,21 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick}>
+    <OnboardingLayout onBackClick={handleBackClick} {busy}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-4">{locale('general.import')}</Text>
             <Text type="h3" highlighted classes="mb-5">{locale(`general.${importType}`)}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.importBackupPassword.body1')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.importBackupPassword.body2')}</Text>
-            <Password classes="mb-6" {error} bind:value={password} {locale} showRevealToggle autofocus disabled={loading} />
+            <Password classes="mb-6" {error} bind:value={password} {locale} showRevealToggle autofocus disabled={busy} submitHandler={handleContinue} />
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-            <Button secondary classes="flex-1" onClick={() => handleBackClick()} disabled={loading}>
-                {locale('actions.back')}
-            </Button>
-            <Button classes="flex-1" disabled={password.length === 0 || loading} onClick={() => handleContinue()}>
+            <Button classes="flex-1" disabled={password.length === 0 || busy} onClick={() => handleContinue()}>
                 {locale('actions.continue')}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center">
-            <Illustration width="100%" illustration="import-from-file-password-desktop" />
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
+            <Illustration illustration="import-from-file-password-desktop" width="100%" height="auto" />
         </div>
     </OnboardingLayout>
 {/if}

@@ -1,11 +1,11 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Gửi, Nhận và Quản lý IOTA của bạn",
-            "body": "Firefly là một ví IOTA an toàn và dễ sử dụng."
+            "title": "Gửi, Nhận và Lưu giữ IOTA của bạn",
+            "body": "Firefly là ví chính thức của IOTA."
         },
         "legal": {
-            "title": "Hợp lệ",
+            "title": "Chính sách Riêng tư & Điều khoản Dịch vụ",
             "body": "Vui lòng xem lại Chính sách Bảo mật và Điều khoản Dịch vụ.",
             "privacyPolicy": {
                 "title": "Chính sách Bảo mật",
@@ -25,20 +25,27 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I have read and I accept the Privacy policy & ToS"
+            "checkbox": "Tôi đã đọc và tôi chấp nhận Chính sách Riêng tư & Điều khoản Dịch vụ"
         },
-        "language": {
-            "title": "Ngôn ngữ và giao diện",
-            "body": "Chọn ngôn ngữ và chủ đề cho Ví của bạn"
+        "appearance": {
+            "title": "Giao diện",
+            "body": "Chọn chủ đề cho ví của bạn."
         },
         "setup": {
             "title": "Thiết lập Ví của bạn",
-            "body": "Bạn có thể tạo một Ví mới hoặc nhập vào từ một Ví hiện có.",
+            "body1": "Bạn có thể tạo nhiều hồ sơ người dùng để giữ các mã token của bạn riêng biệt và cải thiện quyền riêng tư.",
+            "body2": "Bây giờ, hãy bắt đầu với tên hồ sơ đầu tiên của bạn. Bạn có thể thêm nhiều hồ sơ sau này.",
             "profileName": "Tên hồ sơ"
+        },
+        "secure": {
+            "title": "Bảo mật ví của bạn",
+            "body1": "Lưu và in mẫu PDF của Bộ Khôi phục.",
+            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
         },
         "password": {
             "title": "Tạo mật khẩu",
-            "body": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates."
+            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
+            "body2": "It is recommended that you write down your password in your Recovery Kit."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -47,42 +54,50 @@
         },
         "pin": {
             "title": "Thiết lập mã PIN",
-            "body1": "Nhập mã PIN gồm 6 chữ số bên dưới. Bạn sẽ được yêu cầu nhập mã PIN để đăng nhập vào ví của mình.",
-            "body2": "Bạn chỉ có thể sử dụng số."
+            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
+            "body2": "Use numbers only"
         },
         "confirmPin": {
             "title": "Xác thực mã PIN của bạn",
-            "body": "Nhập lại mã PIN của bạn để tiếp tục."
+            "body1": "Your PIN keeps your balance and transactions private.",
+            "body2": "Re-enter your PIN code to proceed. "
         },
         "backup": {
             "title": "Sao lưu ví của bạn",
-            "body1": "Bây giờ bạn sẽ được xem cụm từ để phục hồi tài khoản ví.",
-            "body2": "Đừng bao giờ chia sẻ cụm từ này với bất kỳ ai. Cụm từ phục hồi tài khoản ví này của bạn có thể được sử dụng để truy cập vào tài khoản của bạn từ bất kỳ nơi nào.",
+            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
+            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
             "body3": "Nếu bạn làm mất cụm từ khôi phục tài khoản ví, bạn có thể sẽ bị mất tiền của mình."
         },
         "recoveryPhrase": {
             "title": "Cụm từ hồi phục tài khoản ví",
-            "body1": "Ghi lại ra giấy một cách cẩn thận những từ sau đây chính xác theo thứ tự.",
-            "body2": "Cất giữ cụm từ khôi phục tài khoản của bạn ở nơi riêng tư và an toàn. Đừng chia sẻ nó với bất kỳ ai.",
+            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
+            "body2": "Keep this private and safely stored.",
+            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
             "revealRecoveryPhrase": "Hiển thị cụm từ khôi phục ví",
             "hideRecoveryPhrase": "Ẩn cụm từ khôi phục ví"
         },
         "verifyRecoveryPhrase": {
             "title": "Xác thực cụm từ phục hồi tài khoản ví",
-            "body": "Hãy kiểm tra lại cụm từ đã được viết xuống một cách chính xác. Chọn các từ theo đúng thứ tự của chúng.",
-            "creatingAccount": "Creating account, please wait..."
+            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
+            "word": "Word",
+            "verified": "Recovery phrase verified",
+            "verifiedBody": "Remember to keep it private and safely stored."
         },
         "backupWallet": {
             "title": "Sao lưu vào tập tin Stronghold",
-            "body": "Nhập mật khẩu của bạn để sao lưu ví của bạn vào tập tin Stronghold. Mật khẩu của bạn được dùng để mã hóa việc sao lưu."
+            "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
+            "body2": "Reasons why digital backups are important:",
+            "reason1": "Easily recover your wallet without typing in your recovery phrase",
+            "reason2": "Import your wallet to other devices",
+            "reason3": "Recover your full transaction history"
         },
         "recoveryPhraseSaved": {
             "title": "Sao lưu thành công",
             "body": "Bạn vừa sao lưu tài khoản ví của mình vào Stronghold."
         },
         "congratulations": {
-            "title": "Xin chúc mừng",
-            "body": "Ví của bạn đã sẵn sàng để sử dụng."
+            "title": "Wallet setup completed",
+            "body": "Your new wallet is ready to use."
         },
         "import": {
             "title": "Nhập tài khoản vào ví",
@@ -90,14 +105,14 @@
         },
         "importFromText": {
             "title": "Khôi phục tài khoản ví của bạn với cụm từ hoặc với seed",
-            "body1": "Một cụm từ khôi phục là một cụm dài 24 từ. Nó được sử dụng để khôi phục tài khoản ví Firefly đã được tạo.",
-            "body2": "Một seed gồm có 81 ký tự. Nó được dùng để khôi phục từ một tài khoản ví Trinity, phiên bản cũ hơn.",
+            "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
+            "body2": "A recovery phrase is 24 words long (with spaces). This is used to recover an existing Firefly wallet.",
             "body3": "Nhập vào seed hoặc cụm từ khôi phục của bạn",
             "seedDetected": "81 character seed detected",
-            "phraseDetected": "24 word phrase detected"
+            "phraseDetected": "24 word recovery phrase detected"
         },
         "importFromFile": {
-            "title": "Khôi phục tài khoản ví của bạn từ tập tin sao lưu",
+            "title": "Restore your wallet using a backup file",
             "body": "Nhập vào một file sao lưu để khôi phục tài khoản ví của bạn. Sao lưu cũng có thể là một tập tin Stronghold (.stronghold) hoặc một tập tin Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
@@ -107,7 +122,11 @@
         },
         "importSuccess": {
             "title": "Bạn đã khôi phục sao lưu của mình thành công",
-            "body": "Bây giờ bạn có thể thiết lập một tài khoản ví mới."
+            "body": "Bây giờ bạn có thể thiết lập một tài khoản ví mới.",
+            "seedvaultTitle": "Successfully imported",
+            "seedvaultBody": "Your password is correct, you can now continue.",
+            "strongholdTitle": "Successfully imported",
+            "strongholdBody": "Your password is correct, you can now continue."
         },
         "migrate": {
             "title": "Chuyền tiền của bạn",
@@ -132,19 +151,19 @@
             },
             "security": {
                 "title": "Bảo mật",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Change your password and adjust security-related settings"
             },
             "advancedSettings": {
                 "title": "Thiết lập nâng cao",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Tools and manual settings for technical users"
             },
             "helpAndInfo": {
                 "title": "Thông tin trợ giúp",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Find the answer to a question or get help with an issue"
             },
             "profile": {
                 "title": "Hồ sơ cá nhân",
-                "description": ""
+                "description": "Change your profile name or set an avatar"
             },
             "sync": {
                 "title": "Đồng bộ tài khoản",
@@ -160,27 +179,27 @@
             },
             "currency": {
                 "title": "Tiền tệ",
-                "description": ""
+                "description": "Adjusts balance conversion and updates chart options"
             },
             "notifications": {
                 "title": "Các thông báo",
-                "description": ""
+                "description": "System notifications for transaction events"
             },
             "exportStronghold": {
-                "title": "Xuất ra Stronghold",
-                "description": ""
+                "title": "Export Backup",
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
             },
             "appLock": {
-                "title": "Khóa ứng dụng",
-                "description": ""
+                "title": "Automatic Lock",
+                "description": "Time elapsed before your wallet locks and logs you out"
             },
             "changePassword": {
                 "title": "Đổi mật khẩu",
-                "description": ""
+                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
             },
             "changePincode": {
                 "title": "Thay đổi mã PIN",
-                "description": "",
+                "description": "Your PIN keeps your balance and transactions private",
                 "currentPincode": "Mã PIN hiện tại",
                 "newPincode": "Mã PIN mới",
                 "confirmNewPincode": "Xác nhận mã PIN mới",
@@ -192,59 +211,64 @@
             },
             "deleteProfile": {
                 "title": "Delete profile",
-                "description": ""
+                "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
             },
             "deepLinks": {
                 "title": "Các liên kết sâu",
-                "description": ""
+                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
             },
             "developerMode": {
                 "title": "Chế độ nhà phát triển",
-                "description": ""
+                "description": "Connect to testnets and other developer features"
             },
             "nodeSettings": {
                 "title": "Cấu hình node",
-                "description": ""
+                "description": "Select Manual to choose from the node list or connect to your own node"
             },
             "configureNodeList": {
-                "title": "Cấu hình danh sách node",
+                "title": "Select a node",
                 "description": ""
             },
             "proofOfWork": {
                 "title": "Bằng chứng công việc (PoW)",
-                "description": ""
+                "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "Bản ghi lỗi",
-                "description": ""
+                "description": "View errors to debug an issue"
             },
             "diagnostics": {
                 "title": "Diagnostics",
-                "description": ""
+                "description": "View system and application information"
             },
             "stateExport": {
                 "title": "Xuất ra trạng thái",
-                "description": ""
+                "description": "Export your transaction history to a .csv file"
             },
             "troubleshoot": {
                 "title": "Xử lý sự cố",
-                "description": ""
+                "description": "Use the troubleshooting wizard to solve common problems"
             },
             "documentation": {
                 "title": "Tài liệu",
-                "description": ""
+                "description": "View the documentation for in depth explanations of how things work"
             },
             "faq": {
                 "title": "CÂU HỎI THƯỜNG GẶP",
-                "description": ""
+                "title2": "Frequently Asked Questions",
+                "description": "View the FAQs to get help with a common problem or question"
             },
             "discord": {
                 "title": "Tài khoản Discord",
-                "description": ""
+                "description": "Get help from the IOTA community on Discord"
             },
             "about": {
                 "title": "Thông tin về ứng dụng",
                 "description": ""
+            },
+            "reportAnIssue": {
+                "title": "Report an issue",
+                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
             }
         },
         "login": {
@@ -263,19 +287,19 @@
                     "noneDetected": "Không phát hiện được"
                 },
                 "strongholdStatus": {
-                    "title": "Tình trạng của Stronghold",
-                    "locked": "Đã khóa",
-                    "unlocked": "Đã mở khóa"
+                    "title": "Wallet Status",
+                    "locked": "Stronghold locked",
+                    "unlocked": "Stronghold unlocked"
                 },
                 "strongholdBackup": {
-                    "title": "Sao lưu của Stronghold",
+                    "title": "Wallet Backup",
                     "weeksAgo": "{weeks, plural, one {# week} other {# tuần}} trước đó"
                 }
             },
             "network": {
                 "networkOperational": "Vận hành mạng",
                 "networkDegraded": "Mạng bị xuống cấp",
-                "networkDown": "Rớt mạng",
+                "networkDown": "Network Disconnected",
                 "status": "Trạng thái",
                 "messagesPerSecond": "Số tin nhắn trên giây",
                 "confirmationRate": "Tỷ lệ xác nhận"
@@ -310,14 +334,14 @@
             "notBackedUpDescription": "Bạn đã không thực hiện sao lưu Stronghold của bạn"
         },
         "deleteAccount": {
-            "title": "Có xóa {name} hay không?",
-            "body": "You will permanently lose your transaction history and maybe something else as well.",
-            "typePassword": "Nhập vào mật khẩu ví của bạn để xác nhận.",
-            "deleteAccount": "Xóa Tài khoản",
-            "errorTitle": "Không thể xóa {name}",
-            "errorBody1": "Để xóa một tài khoản bạn phải có số dư là 0.",
+            "title": "Remove {name}?",
+            "body": "You can add this account back later but you may lose your transaction history.",
+            "typePassword": "Type your wallet password to confirm.",
+            "deleteAccount": "Remove account",
+            "errorTitle": "Unable to remove {name}",
+            "errorBody1": "To remove an account it must have 0 balance.",
             "errorBody2": "Bạn hiện đang có số dư {balance} còn lại trong tài khoản này. Xin vui lòng di chuyển đi số tiền này sang một tài khoản khác và thử lại một lần nữa.",
-            "errorBody3": "You cannot delete this account, you must have at least one."
+            "errorBody3": "You cannot remove this account, you must have at least one."
         },
         "addressHistory": {
             "title": "{name} lịch sử địa chỉ ví",
@@ -391,7 +415,7 @@
         "tryAgain": "Thử lại",
         "visitDiscord": "Thăm Discord",
         "dragDrop": "Kéo và Thả",
-        "importExtentions": "file có định dạng .stronghold hoặc .kdbx",
+        "importExtentions": ".kdbx or .stronghold file",
         "chooseFile": "Chọn một tập tin",
         "dropHere": "Thả tập tin của bạn vào đây",
         "syncAll": "Đồng bộ tất cả",
@@ -405,10 +429,10 @@
         "unlock": "Mở khóa",
         "updateFirefly": "Cập nhật ví Firefly",
         "restartNow": "Khởi động lại ngay",
-        "saveBackup": "Lưu bản sao lưu",
+        "saveBackup": "Save Stronghold backup",
         "customizeAcount": "Customise account",
         "viewAddressHistory": "Hiển thị lịch sử địa chỉ ví",
-        "deleteAccount": "Xóa Tài khoản",
+        "deleteAccount": "Remove account",
         "max": "Tối đa",
         "addNode": "Thêm Node",
         "removeNode": "Remove node",
@@ -430,7 +454,12 @@
         "hideDetails": "Hide Details",
         "yes": "Yes",
         "no": "No",
-        "reset": "Reset"
+        "reset": "Reset",
+        "downloadRecoveryKit": "Save Recovery Kit template",
+        "skipBackup": "Skip file backup",
+        "finishSetup": "Finish setup",
+        "readDocumentation": "Read the documentation",
+        "visitFaq": "Visit FAQ"
     },
     "general": {
         "password": "Mật khẩu",
@@ -443,10 +472,10 @@
         "recentActivity": "Hoạt động gần đây",
         "sent": "Đã gửi",
         "received": "Đã nhận",
-        "sendPayment": "Gửi thanh toán",
-        "moveFunds": "Di chuyển Tiền",
+        "sendPayment": "Send Payment",
+        "moveFunds": "Internal Transfer",
         "sendFunds": "Gửi tiền",
-        "sendToAddress": "Gửi đến địa chỉ",
+        "sendToAddress": "Send to address",
         "scanQrOrPaste": "Quét mã QR hoặc dán vào một địa chỉ ví",
         "moveFundsBetweenAccounts": "Di chuyển tiền giữa các tài khoản của bạn",
         "sendTokensToAddress": "Gửi các token tới một địa chỉ ví",
@@ -459,7 +488,7 @@
         "reference": "Tham chiếu",
         "from": "Từ",
         "to": "Đến",
-        "receiveFunds": "Nhận tiền",
+        "receiveFunds": "Receive Funds",
         "myAddress": "Địa chỉ của tôi",
         "shareAddress": "Chia sẻ địa chỉ",
         "yourAddress": "Địa chỉ ví của bạn",
@@ -480,13 +509,16 @@
         "accountBalance": "Số dư tài khoản",
         "incoming": "Tiền chuyển đến",
         "outgoing": "Tiền chuyển đi",
+        "totalIn": "Total in",
+        "totalOut": "Total out",
         "accounts": "Tài khoản",
+        "myAccounts": "My Accounts",
         "automaticNodeSelection": "Chọn node tự động",
         "manualNodeSelection": "Chọn node thủ công",
         "profiles": "Hồ sơ cá nhân",
         "developerProfile": "Chế độ nhà phát triển",
         "dev": "Nhà phát triển",
-        "createAccount": "Tạo tài khoản",
+        "createAccount": "Create an Account",
         "accountName": "Tên tài khoản",
         "latestTransactions": "Các giao dịch mới nhất",
         "transactions": "Các giao dịch",
@@ -497,9 +529,12 @@
         "help": "Trợ giúp",
         "you": "You",
         "messageId": "Message ID",
-        "inputAddress": "Input Address",
+        "inputAddress": "Send Address",
         "receiveAddress": "Receive Address",
         "date": "Date",
+        "status": "Trạng thái",
+        "confirmed": "Confirmed",
+        "pending": "Pending",
         "noAccounts": "Bạn không có tài khoản, xin vui lòng hãy tạo tài khoản.",
         "loadingAccounts": "Loading, please wait...",
         "addProfile": "Thêm cấu hình",
@@ -523,10 +558,18 @@
         "exportingStrongholdFailed": "Exported stronghold failed",
         "pinCodeUpdating": "Updating PIN code...",
         "pinCodeSuccess": "Updated PIN code successfully",
-        "pinCodeFailed": "Updating PIN code failed"
+        "pinCodeFailed": "Updating PIN code failed",
+        "passwordStrength": "Password strength",
+        "passwordStrength0": "Bad",
+        "passwordStrength1": "Poor",
+        "passwordStrength2": "Weak",
+        "passwordStrength3": "Average",
+        "passwordStrength4": "Strong",
+        "creatingProfile": "Creating profile, please wait..."
     },
     "dates": {
         "today": "Ngày hôm nay",
+        "yesterday": "Yesterday",
         "daysAgo": "{time, plural, one {# week} other {# tuần}} trước đó",
         "weeksAgo": "{time, plural, one {# week} other {# tuần}} trước đó",
         "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
@@ -535,6 +578,7 @@
     "notifications": {
         "valueTx": "Đang nhận {{value}} từ {{account}}",
         "confirmed": "Đang gửi đi {{value}} từ {{account}} đã được xác nhận",
+        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
         "failed": "Đang gửi đi {{value}} từ {{account}} đã thất bại",
         "downloadingUpdate": "Đang tải xuống bản cập nhật",
         "updateReady": "Bản cập nhật đã sẵn sàng",
@@ -584,13 +628,16 @@
             "amountInvalidFormat": "The amount appears to be an invalid number.",
             "amountZero": "The amount must be greater than 0.",
             "wrongAddressFormat": "Addresses start with the prefix {prefix}.",
-            "insufficientFunds": "This account has insufficient funds"
+            "insufficientFunds": "This account has insufficient funds.",
+            "sendingDust": "You cannot send less than 1 Mi.",
+            "leavingDust": "You cannot leave less than 1 Mi on your address."
         },
         "node": {
             "invalid": "Please enter a valid URL.",
             "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
             "duplicate": "This node has already been added.",
-            "unsynced": "The node you are trying to add is not synced."
+            "unsynced": "The node is not in sync.",
+            "noSynced": "No synced nodes are available."
         },
         "global": {
             "generic": "Something went wrong."
@@ -601,7 +648,7 @@
             "mnemonic": "The mnemonic is not valid.",
             "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
             "seedCharacters": "The seed should only contain characters A-Z or 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}",
+            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
             "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase"
         }
     }

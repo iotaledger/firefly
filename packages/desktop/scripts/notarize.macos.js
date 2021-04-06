@@ -19,7 +19,7 @@ exports.default = async () => {
 
     await notarize({
         appBundleId: 'org.iota.firefly',
-        appPath: path.resolve(__dirname, '../out/mac/Firefly.app'),
+        appPath: path.resolve(__dirname, '../out/mac/Firefly Beta.app'),
         appleId: APPLE_ID,
         appleIdPassword: APPLE_ID_PASSWORD,
         ascProvider: 'UG77RJKZHH',

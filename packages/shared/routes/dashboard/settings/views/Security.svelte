@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Checkbox, Dropdown, HR, Password, Spinner, Text } from 'shared/components'
+    import { Button, Checkbox, Dropdown, HR, Password, Pin, Spinner, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
@@ -40,6 +40,7 @@
     let confirmedPincode = ''
     let currentPincodeError = ''
     let newPincodeError = ''
+    let confirmationPincodeError = ''
     let pinCodeBusy = false
     let pinCodeMessage = ''
 
@@ -124,9 +125,11 @@
         } else if (newPassword !== confirmedPassword) {
             newPasswordError = locale('error.password.doNotMatch')
         } else if (passwordStrength.score !== 4) {
-            newPasswordError = passwordStrength.feedback.warning
-                ? locale(`error.password.${passwordInfo[passwordStrength.feedback.warning]}`)
-                : locale('error.password.tooWeak')
+            let errKey = 'error.password.tooWeak'
+            if (passwordStrength.feedback.warning && passwordInfo[passwordStrength.feedback.warning]) {
+                errKey = `error.password.${passwordInfo[passwordStrength.feedback.warning]}`
+            }
+            newPasswordError = locale(errKey)
         } else {
             passwordChangeBusy = true
             passwordChangeMessage = locale('general.passwordUpdating')
@@ -196,7 +199,7 @@
                 },
             })
         } else if (newPincode !== confirmedPincode) {
-            newPincodeError = locale('error.pincode.match')
+            confirmationPincodeError = locale('error.pincode.match')
         } else {
             pinCodeBusy = true
             pinCodeMessage = locale('general.pinCodeUpdating')
@@ -207,7 +210,7 @@
                 }, 2000)
                 pinCodeBusy = false
                 if (err) {
-                    newPincodeError = err
+                    currentPincodeError = err
                     pinCodeMessage = locale('general.pinCodeFailed')
                 } else {
                     pinCodeMessage = locale('general.pinCodeSuccess')
@@ -250,6 +253,7 @@
         newPasswordError = ''
         currentPincodeError = ''
         newPincodeError = ''
+        confirmationPincodeError = ''
         passwordChangeBusy = false
         passwordChangeMessage = ''
         pinCodeBusy = false
@@ -268,7 +272,9 @@
         <Text type="h4" classes="mb-3">{locale('views.settings.exportStronghold.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.exportStronghold.description')}</Text>
         <div class="flex flex-row items-center">
-            <Button classes="w-1/4 h-1/2" onClick={handleExportClick} disabled={exportBusy}>{locale('actions.export')}</Button>
+            <Button medium inlineStyle="min-width: 156px;" onClick={handleExportClick} disabled={exportBusy}>
+                {locale('actions.export')}
+            </Button>
             <Spinner busy={exportBusy} message={exportMessage} classes="ml-2" />
         </div>
     </section>
@@ -290,7 +296,7 @@
             <Text type="p" secondary classes="mb-5">{locale('views.settings.changePassword.description')}</Text>
             <Password
                 error={currentPasswordError}
-                classes="mb-1"
+                classes="mb-5"
                 bind:value={currentPassword}
                 showRevealToggle
                 {locale}
@@ -298,7 +304,7 @@
                 disabled={passwordChangeBusy} />
             <Password
                 error={newPasswordError}
-                classes="mb-1"
+                classes="mb-4"
                 bind:value={newPassword}
                 showRevealToggle
                 strengthLevels={4}
@@ -321,9 +327,9 @@
                 disabled={passwordChangeBusy} />
             <div class="flex flex-row items-center">
                 <Button
+                    medium
                     form="form-change-password"
                     type="submit"
-                    classes="w-1/4"
                     disabled={!currentPassword || !newPassword || !confirmedPassword || passwordChangeBusy}>
                     {locale('views.settings.changePassword.title')}
                 </Button>
@@ -336,40 +342,18 @@
         <form on:submit={changePincode} id="pincode-change-form">
             <Text type="h4" classes="mb-3">{locale('views.settings.changePincode.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.changePincode.description')}</Text>
-            <Password
-                error={currentPincodeError}
-                classes="mb-1"
-                bind:value={currentPincode}
-                showRevealToggle
-                {locale}
-                maxlength="6"
-                integer
-                placeholder={locale('views.settings.changePincode.currentPincode')}
-                disabled={pinCodeBusy} />
-            <Password
-                error={newPincodeError}
-                classes="mb-1"
-                bind:value={newPincode}
-                showRevealToggle
-                {locale}
-                maxlength="6"
-                integer
-                placeholder={locale('views.settings.changePincode.newPincode')}
-                disabled={pinCodeBusy} />
-            <Password
-                classes="mb-5"
-                bind:value={confirmedPincode}
-                showRevealToggle
-                {locale}
-                maxlength="6"
-                integer
-                placeholder={locale('views.settings.changePincode.confirmNewPincode')}
-                disabled={pinCodeBusy} />
+
+            <Text type="p" secondary smaller classes="mb-2">{locale('views.settings.changePincode.currentPincode')}</Text>
+            <Pin smaller error={currentPincodeError} classes="mb-4" bind:value={currentPincode} disabled={pinCodeBusy} />
+            <Text type="p" secondary smaller classes="mb-2">{locale('views.settings.changePincode.newPincode')}</Text>
+            <Pin smaller error={newPincodeError} classes="mb-4" bind:value={newPincode} disabled={pinCodeBusy} />
+            <Text type="p" secondary smaller classes="mb-2">{locale('views.settings.changePincode.confirmNewPincode')}</Text>
+            <Pin smaller error={confirmationPincodeError} classes="mb-4" bind:value={confirmedPincode} disabled={pinCodeBusy} />
             <div class="flex flex-row items-center">
                 <Button
+                    medium
                     type="submit"
                     form="pincode-change-form"
-                    classes="w-1/4 mb-5"
                     disabled={!currentPincode || !newPincode || !confirmedPincode || pinCodeBusy}>
                     {locale('views.settings.changePincode.action')}
                 </Button>
@@ -381,6 +365,8 @@
     <section id="deleteProfile" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.deleteProfile.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.deleteProfile.description')}</Text>
-        <Button classes="w-1/4" warning onClick={reset}>{locale('views.settings.deleteProfile.title')}</Button>
+        <Button medium inlineStyle="min-width: 156px;" warning onClick={reset}>
+            {locale('views.settings.deleteProfile.title')}
+        </Button>
     </section>
 </div>

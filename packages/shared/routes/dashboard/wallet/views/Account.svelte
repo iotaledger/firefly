@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { AccountActionsModal, DashboardPane } from 'shared/components'
-    import type { AccountMessage, WalletAccount } from 'shared/lib/wallet'
+    import type { WalletAccount } from 'shared/lib/wallet'
+    import { getAccountMessages } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable, Writable } from 'svelte/store'
     import { AccountActions, AccountBalance, AccountHistory, AccountNavigation, BarChart, LineChart } from '.'
@@ -13,9 +14,8 @@
 
     const account = getContext<Readable<WalletAccount>>('selectedAccount')
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
-    const walletTransactions = getContext<Readable<AccountMessage[]>>('walletTransactions')
 
-    $: transactions = $account ? $walletTransactions.filter((tx) => tx.account === $account.index) : []
+    $: transactions = $account ? getAccountMessages($account) : []
     $: navAccounts = $account ? $accounts.map(({ id, alias, color }) => ({ id, alias, color, active: $account.id === id })) : []
 
     let showActionsModal = false
@@ -27,7 +27,7 @@
 
 <!-- wait for account to load -->
 {#if $accounts && $account}
-    <div class="w-full h-full flex flex-col flex-nowrap px-10 pb-5 relative flex-1 bg-gray-50 dark:bg-gray-900">
+    <div class="w-full h-full flex flex-col flex-nowrap p-10 pt-0 relative flex-1 bg-gray-50 dark:bg-gray-900">
         <AccountNavigation {locale} accounts={navAccounts} />
         {#key $account}
             <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
@@ -38,7 +38,7 @@
                         balance={$account.balance}
                         balanceEquiv={$account.balanceEquiv}
                         onMenuClick={handleMenuClick} />
-                    <DashboardPane classes="h-full -mt-5">
+                    <DashboardPane classes="h-full -mt-5 z-0">
                         <AccountActions {isGeneratingAddress} {send} {internalTransfer} {generateAddress} {locale} />
                     </DashboardPane>
                 </DashboardPane>

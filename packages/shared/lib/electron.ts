@@ -1,3 +1,4 @@
+import type { Error } from "./errors";
 import type { WalletRoutes } from "./typings/routes";
 
 export type VersionDetails = {
@@ -37,6 +38,7 @@ interface ElectronEventMap {
     "menu-check-for-update": void;
     "menu-error-log": void;
     "menu-diagnostics": void;
+    "log-error": void;
     "deep-link-params": string;
     "version-details": VersionDetails;
     "version-progress": NativeProgress;
@@ -49,8 +51,16 @@ export interface IElectron {
     exportMigrationLog(sourcePath: string, defaultFileName: string): Promise<boolean | null>;
     getUserDataPath(): Promise<string>;
     getDiagnostics(): Promise<{ label: string; value: string; }[]>;
+    getOS(): Promise<string>;
     updateActiveProfile(id: string): void;
     updateMenu(attribute: string, value: unknown): void;
+    popupMenu(): void;
+    maximize(): void;
+    minimize(): void;
+    close(): void;
+    saveRecoveryKit(kitData: ArrayBuffer): Promise<void>;
+    openUrl(url: string): void;
+    hookErrorLogger(logger: (error: Error) => void): void
 
     NotificationManager: INotificationManager;
 

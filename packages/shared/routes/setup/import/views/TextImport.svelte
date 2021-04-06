@@ -5,6 +5,7 @@
     export let mobile
 
     let input = ''
+    let isSeed = false
 
     export let loading
 
@@ -30,13 +31,12 @@
             <ImportTextfield bind:value={input} {locale} />
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-            <Button disabled={loading} secondary classes="flex-1" onClick={() => handleBackClick()}>{locale('actions.back')}</Button>
-            <Button  classes="flex-1" disabled={input.length === 0 || loading} onClick={() => handleContinueClick()}>
+            <Button classes="flex-1" disabled={input.length === 0 || loading} onClick={() => handleContinueClick()}>
                 {locale('actions.continue')}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center">
-            <Illustration width="100%" illustration="import-from-text-desktop" />
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
+            <Illustration illustration="import-from-text-desktop" width="auto" height="100%" />
         </div>
     </OnboardingLayout>
 {/if}

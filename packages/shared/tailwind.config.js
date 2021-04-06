@@ -29,6 +29,7 @@ module.exports = {
                 /^grid-cols-/,
                 // `p-${size}`
                 /^p-/,
+                'scheme-dark',
                 'fill-current',
                 'stroke-current',
             ],
@@ -159,6 +160,14 @@ module.exports = {
             transparent: 'transparent',
             black: '#000',
             white: '#fff',
+            pastel: {
+                blue: '#EEFBFF',
+                orange: '#FFF8EF',
+                green: '#F7FFED',
+                yellow: '#FFF9EF',
+                pink: '#FFF3F8',
+                purple: '#EFF0FE',
+            },
         },
         extend: {
             fontSize: {
@@ -202,6 +211,19 @@ module.exports = {
                 800: '800',
                 900: '900',
             },
+            keyframes: {
+                spinReverse: {
+                    from: {
+                        transform: 'rotate(360deg)',
+                    },
+                    to: {
+                        transform: 'rotate(0deg)',
+                    },
+                },
+            },
+            animation: {
+                'spin-reverse': 'spinReverse 1s linear infinite;',
+            },
         },
     },
     variants: {
@@ -213,7 +235,49 @@ module.exports = {
         cursor: ['responsive', 'disabled'],
     },
     plugins: [
-        // Reference: https://dev.to/smartmointy/tailwind-css-dark-mode-switch-with-javascript-2kl9
+        // Add individual border colors
+        // Source: https://github.com/tailwindlabs/tailwindcss/issues/559#issuecomment-639118372
+        plugin(function({ addUtilities, theme, config }) {
+            const themeColors = theme('colors')
+            const individualBorderColors = Object.keys(themeColors).map((colorName) => {
+                if (typeof themeColors[colorName] === 'string') {
+                    return {
+                        [`.border-b-${colorName}`]: {
+                            borderBottomColor: themeColors[colorName],
+                        },
+                        [`.border-t-${colorName}`]: {
+                            borderTopColor: themeColors[colorName],
+                        },
+                        [`.border-l-${colorName}`]: {
+                            borderLeftColor: themeColors[colorName],
+                        },
+                        [`.border-r-${colorName}`]: {
+                            borderRightColor: themeColors[colorName],
+                        },
+                    }
+                } else if (typeof themeColors[colorName] === 'object') {
+                    return Object.keys(themeColors[colorName]).map((colorTint) => {
+                        return {
+                            [`.border-b-${colorName}-${colorTint}`]: {
+                                borderBottomColor: themeColors[colorName][colorTint],
+                            },
+                            [`.border-t-${colorName}-${colorTint}`]: {
+                                borderTopColor: themeColors[colorName][colorTint],
+                            },
+                            [`.border-l-${colorName}-${colorTint}`]: {
+                                borderLeftColor: themeColors[colorName][colorTint],
+                            },
+                            [`.border-r-${colorName}-${colorTint}`]: {
+                                borderRightColor: themeColors[colorName][colorTint],
+                            },
+                        }
+                    })
+                }
+            })
+            addUtilities(individualBorderColors)
+        }),
+        // Add darkmode
+        // Source: https://dev.to/smartmointy/tailwind-css-dark-mode-switch-with-javascript-2kl9
         plugin(function({ addVariant, prefix }) {
             addVariant('dark', ({ modifySelectors, separator }) => {
                 modifySelectors(({ selector }) => {

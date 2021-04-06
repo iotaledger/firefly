@@ -1,18 +1,21 @@
 import { mnemonic } from 'shared/lib/app'
 import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
 import { localize } from 'shared/lib/i18n'
-import type { HistoryData, PriceData } from 'shared/lib/marketData'
+import type { PriceData } from 'shared/lib/marketData'
 import { HistoryDataProps } from 'shared/lib/marketData'
+import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
 import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
 import { activeProfile, isStrongholdLocked } from 'shared/lib/profile'
-import type { Account, Account as BaseAccount, SyncedAccount } from 'shared/lib/typings/account'
+import type { Account, Account as BaseAccount, AccountToCreate, Balance, SyncedAccount } from 'shared/lib/typings/account'
 import type { Address } from 'shared/lib/typings/address'
 import type { Actor } from 'shared/lib/typings/bridge'
-import type { ErrorEventPayload, TransferProgressEventType } from 'shared/lib/typings/events'
+import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, ErrorEventPayload, Event, ReattachmentEventPayload, TransactionEventPayload, TransferProgressEventPayload, TransferProgressEventType } from 'shared/lib/typings/events'
 import type { Message } from 'shared/lib/typings/message'
 import { formatUnit } from 'shared/lib/units'
-import type { ApiClient } from 'shared/lib/walletApi'
 import { get, writable, Writable } from 'svelte/store'
+import type { ClientOptions } from './typings/client'
+import type { MigrationData, MigrationBundle } from 'shared/lib/typings/migration'
+import type { Duration, StrongholdStatus } from './typings/wallet'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -58,6 +61,7 @@ type WalletState = {
     balanceOverview: Writable<BalanceOverview>
     accounts: Writable<WalletAccount[]>
     accountsLoaded: Writable<boolean>
+    confirmedInternalMessageIds: Writable<{ [key: string]: number }>
 }
 
 type BalanceTimestamp = {
@@ -70,6 +74,10 @@ export type BalanceHistory = {
     [HistoryDataProps.SEVEN_DAYS]: BalanceTimestamp[]
     [HistoryDataProps.TWENTY_FOUR_HOURS]: BalanceTimestamp[]
     [HistoryDataProps.ONE_MONTH]: BalanceTimestamp[]
+}
+
+export type AccountsBalanceHistory = {
+    [accountIndex: number]: BalanceHistory
 }
 
 /** Active actors state */
@@ -90,6 +98,7 @@ export const wallet = writable<WalletState>({
     }),
     accounts: writable<WalletAccount[]>([]),
     accountsLoaded: writable<boolean>(false),
+    confirmedInternalMessageIds: writable<{ [key: string]: number }>({})
 })
 
 export const resetWallet = () => {
@@ -121,7 +130,71 @@ export const transferState = writable<TransferProgressEventType | "Complete" | n
 
 export const isSyncing = writable<boolean>(false)
 
-export const api: ApiClient = window['__WALLET_API__']
+export const api: {
+    generateMnemonic(callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void })
+    storeMnemonic(mnemonic: string, callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void })
+    verifyMnemonic(mnemonic: string, callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void })
+    getAccounts(callbacks: { onSuccess: (response: Event<Account[]>) => void, onError: (err: ErrorEventPayload) => void })
+    getBalance(accountId: string, callbacks: { onSuccess: (response: Event<Balance>) => void, onError: (err: ErrorEventPayload) => void })
+    latestAddress(accountId: string, callbacks: { onSuccess: (response: Event<Address>) => void, onError: (err: ErrorEventPayload) => void })
+    areLatestAddressesUnused(callbacks: { onSuccess: (response: Event<boolean>) => void, onError: (err: ErrorEventPayload) => void })
+    getUnusedAddress(accountId: string, callbacks: { onSuccess: (response: Event<Address>) => void, onError: (err: ErrorEventPayload) => void })
+    getStrongholdStatus(callbacks: { onSuccess: (response: Event<StrongholdStatus>) => void, onError: (err: ErrorEventPayload) => void })
+    syncAccounts(callbacks: { onSuccess: (response: Event<SyncedAccount[]>) => void, onError: (err: ErrorEventPayload) => void })
+    syncAccount(accountId: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
+    createAccount(account: AccountToCreate, callbacks: { onSuccess: (response: Event<Account>) => void, onError: (err: ErrorEventPayload) => void })
+    send(accountId: string, transfer: {
+        amount: number,
+        address: string,
+        remainder_value_strategy: {
+            strategy: string,
+        },
+        indexation: { index: string, data: number[] },
+    }, callbacks: { onSuccess: (response: Event<Message>) => void, onError: (err: ErrorEventPayload) => void })
+    internalTransfer(fromId: string, toId: string, amount: number, callbacks: { onSuccess: (response: Event<Message>) => void, onError: (err: ErrorEventPayload) => void })
+    setAlias(accountId: string, alias: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
+    lockStronghold(callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
+    setStrongholdPassword(password: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
+    changeStrongholdPassword(currentPassword: string, newPassword: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
+    backup(strongholdPath: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
+    restoreBackup(strongholdPath: string, password: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
+    removeAccount(accountId: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
+    setStoragePassword(newPinCode: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
+    removeStorage(callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
+    setClientOptions(clientOptions: ClientOptions, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
+    setStrongholdPasswordClearInterval(interval: Duration, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
+
+    onStrongholdStatusChange(callbacks: { onSuccess: (response: Event<StrongholdStatus>) => void, onError: (err: ErrorEventPayload) => void })
+    onNewTransaction(callbacks: { onSuccess: (response: Event<TransactionEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
+    onReattachment(callbacks: { onSuccess: (response: Event<ReattachmentEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
+    onConfirmationStateChange(callbacks: { onSuccess: (response: Event<ConfirmationStateChangeEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
+    onBalanceChange(callbacks: { onSuccess: (response: Event<BalanceChangeEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
+    onTransferProgress(callbacks: { onSuccess: (response: Event<TransferProgressEventPayload>) => void, onError: (err: ErrorEventPayload) => void }),
+
+    // Migration
+    getMigrationData(
+        seed: string,
+        nodes: string[],
+        securityLevel: number,
+        initialAddressIndex: number,
+        permanode: string | undefined,
+        callbacks: { onSuccess: (response: Event<MigrationData>) => void, onError: (err: ErrorEventPayload) => void }
+    ),
+    createMigrationBundle(
+        seed: string,
+        inputAddressIndexes: number[],
+        mine: boolean,
+        timeoutSeconds: number,
+        logFilePath: string,
+        callbacks: { onSuccess: (response: Event<MigrationBundle>) => void, onError: (err: ErrorEventPayload) => void }
+    ),
+    sendMigrationBundle(
+        node: string[],
+        bundleHash: string,
+        mwm: number,
+        callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void }
+    ),
+} = window['__WALLET_API__']
 
 export const getStoragePath = (appPath: string, profileName: string): string => {
     return `${appPath}/${WALLET_STORAGE_DIRECTORY}/${profileName}`
@@ -132,6 +205,19 @@ export const initialise = (id: string, storagePath: string): void => {
 
     actors[id] = actor
 }
+
+/**
+ * Removes event listeners for active actor
+ * 
+ * @method removeEventListeners
+ * 
+ * @param {string} id 
+ * 
+ * @returns {void}
+ */
+export const removeEventListeners = (id: string): void => {
+    actors[id].removeEventListeners()
+};
 
 /**
  * Destroys an actor & remove it from actors state
@@ -172,6 +258,108 @@ export const generateRecoveryPhrase = (): Promise<string[]> =>
 export const requestMnemonic = async () => {
     let recoveryPhrase = await generateRecoveryPhrase()
     mnemonic.set(recoveryPhrase)
+    return recoveryPhrase
+}
+
+export const asyncSetStrongholdPassword = (password) => {
+    return new Promise<void>((resolve, reject) => {
+        api.setStrongholdPassword(password, {
+            onSuccess() {
+                resolve()
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
+
+export const asyncStoreMnemonic = (mnemonic) => {
+    return new Promise<void>((resolve, reject) => {
+        api.storeMnemonic(mnemonic, {
+            onSuccess() {
+                resolve()
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
+
+export const asyncVerifyMnemonic = (mnemonic) => {
+    return new Promise<void>((resolve, reject) => {
+        api.verifyMnemonic(mnemonic, {
+            onSuccess() {
+                resolve()
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
+
+export const asyncBackup = (dest) => {
+    return new Promise<void>((resolve, reject) => {
+        api.backup(dest, {
+            onSuccess() {
+                resolve()
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
+
+export const asyncSetStoragePassword = (password) => {
+    return new Promise<void>((resolve, reject) => {
+        api.setStoragePassword(password, {
+            onSuccess() {
+                resolve()
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
+
+export const asyncRestoreBackup = (importFilePath, password) => {
+    return new Promise<void>((resolve, reject) => {
+        api.restoreBackup(importFilePath, password, {
+            onSuccess() {
+                resolve()
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
+
+export const asyncCreateAccount = () => {
+    return new Promise<void>((resolve, reject) => {
+        api.createAccount(
+            {
+                signerType: { type: 'Stronghold' },
+                clientOptions: {
+                    node: DEFAULT_NODE,
+                    nodes: DEFAULT_NODES,
+                    network: get(network),
+                },
+            },
+            {
+                onSuccess() {
+                    resolve()
+                },
+                onError(err) {
+                    reject(err)
+                },
+            }
+        )
+    })
 }
 
 /**
@@ -203,29 +391,68 @@ export const initialiseListeners = () => {
             const account = get(accounts).find((account) => account.id === response.payload.accountId)
             const message = response.payload.message
 
-            const notificationMessage = localize('notifications.valueTx')
-                .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
-                .replace('{{account}}', account.alias)
+            const essence = message.payload.data.essence
 
-            showSystemNotification({ type: "info", message: notificationMessage })
+            if (!essence.data.internal) {
+                const { balanceOverview } = get(wallet);
+                const overview = get(balanceOverview);
 
-            // Update account with new message
-            saveNewMessage(response.payload.accountId, response.payload.message);
+                const incoming = essence.data.incoming ? overview.incomingRaw + essence.data.value : overview.incomingRaw;
+                const outgoing = essence.data.incoming ? overview.outgoingRaw : overview.outgoingRaw + essence.data.value;
+
+                updateBalanceOverview(
+                    overview.balanceRaw,
+                    incoming,
+                    outgoing
+                );
+            }
+
+            if (!get(isSyncing)) {
+                // Update account with new message
+                saveNewMessage(response.payload.accountId, response.payload.message);
+                const notificationMessage = localize('notifications.valueTx')
+                    .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
+                    .replace('{{account}}', account.alias);
+
+                showSystemNotification({ type: "info", message: notificationMessage });
+            }
         },
         onError(error) {
             console.error(error)
         },
     })
 
+    /**
+     * Event listener for transfer confirmation state change
+     */
     api.onConfirmationStateChange({
         onSuccess(response) {
             const accounts = get(wallet).accounts
             const account = get(accounts).find((account) => account.id === response.payload.accountId)
-            const message = response.payload.message
-            const messageKey = response.payload.confirmed ? 'confirmed' : 'failed'
 
+            const message = response.payload.message
+            const confirmed = response.payload.confirmed;
+            const essence = message.payload.data.essence
+
+
+            if (confirmed && !essence.data.internal) {
+                const { balanceOverview } = get(wallet);
+                const overview = get(balanceOverview);
+
+                const incoming = essence.data.incoming ? overview.incomingRaw + essence.data.value : overview.incomingRaw;
+                const outgoing = essence.data.incoming ? overview.outgoingRaw : overview.outgoingRaw + essence.data.value;
+
+                updateBalanceOverview(
+                    overview.balanceRaw,
+                    incoming,
+                    outgoing
+                );
+            }
+
+            // Update state
             const accountMessage = account.messages.find((_message) => _message.id === message.id)
             accountMessage.confirmed = response.payload.confirmed
+
             accounts.update((storedAccounts) => {
                 return storedAccounts.map((storedAccount) => {
                     if (storedAccount.id === account.id) {
@@ -246,11 +473,57 @@ export const initialiseListeners = () => {
                 })
             })
 
-            const notificationMessage = localize(`notifications.${messageKey}`)
-                .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
-                .replace('{{account}}', account.alias)
+            // Notify user
+            const messageKey = confirmed ? 'confirmed' : 'failed'
 
-            showSystemNotification({ type: "info", message: notificationMessage })
+            const _notify = (senderAccountAlias: string | null = null) => {
+                let notificationMessage
+
+                if (senderAccountAlias) {
+                    notificationMessage = localize(`notifications.${messageKey}Internal`)
+                        .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
+                        .replace('{{senderAccount}}', senderAccountAlias)
+                        .replace('{{receiverAccount}}', account.alias)
+                } else {
+                    notificationMessage = localize(`notifications.${messageKey}`)
+                        .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
+                        .replace('{{account}}', account.alias)
+                }
+
+                showSystemNotification({ type: "info", message: notificationMessage })
+            }
+
+            const { confirmedInternalMessageIds } = get(wallet)
+            const messageIds = get(confirmedInternalMessageIds)
+
+            // If this event is emitted because a message failed, then this message will only exist on the sender account
+            // Therefore, show the notification (no need to group).
+            if (!confirmed) {
+                _notify()
+            } else {
+                // If this is an external message, notify (no need to group)
+                if (!essence.data.internal) {
+                    _notify();
+                } else {
+                    // If this is an internal message, check if we have already receive confirmation state of this message
+                    if (Object.keys(messageIds).includes(message.id)) {
+                        _notify(
+                            get(accounts).find((account) => account.index === messageIds[message.id]).alias
+                        );
+
+                        confirmedInternalMessageIds.update((ids) => {
+                            delete ids[message.id]
+
+                            return ids;
+                        })
+                    } else {
+                        // Otherwise, add the message id and do not notify yet
+                        messageIds[message.id] = account.index
+                    }
+                }
+            }
+
+
         },
         onError(error) {
             console.error(error)
@@ -269,18 +542,31 @@ export const initialiseListeners = () => {
             const { balanceOverview } = get(wallet);
             const overview = get(balanceOverview);
 
-            const incoming = overview.incomingRaw + balanceChange.received;
-            const outgoing = overview.outgoingRaw + balanceChange.spent;
             const balance = overview.balanceRaw - balanceChange.spent + balanceChange.received
 
-            updateBalanceOverview(balance, incoming, outgoing);
-
+            updateBalanceOverview(balance, overview.incomingRaw, overview.outgoingRaw);
         },
         onError(error) {
             console.error(error)
         },
     })
 
+    /**
+     * Event listener for reattachment
+     */
+    api.onReattachment({
+        onSuccess(response) {
+            // Replace original message with reattachment
+            replaceMessage(response.payload.accountId, response.payload.reattachedMessageId, response.payload.message);
+        },
+        onError(error) {
+            console.error(error)
+        },
+    })
+
+    /**
+     * Event listener for transfer progress
+     */
     api.onTransferProgress({
         onSuccess(response) {
             transferState.set(response.payload.event.type)
@@ -361,37 +647,113 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
     })
 };
 
+/** 
+ * @method replaceMessage
+ * 
+ * @param {string} accountId 
+ * @param {string} messageId
+ * @param {Message} newMessage
+ * 
+ * @returns {void} 
+ */
+export const replaceMessage = (accountId: string, messageId: string, newMessage: Message): void => {
+    const { accounts } = get(wallet)
+
+    accounts.update((storedAccounts) => {
+        return storedAccounts.map((storedAccount: WalletAccount) => {
+            if (storedAccount.id === accountId) {
+                return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
+                    messages: storedAccount.messages.map((_message) => {
+                        if (_message.id === messageId) {
+                            return newMessage;
+                        }
+
+                        return _message;
+                    })
+                })
+            }
+
+            return storedAccount;
+        })
+    })
+};
+
 /**
- * Gets latest messages
+ * Gets the account messages. Appends account index and sort the message list.
  *
- * @method getLatestMessages
+ * @method getAccountMessages
+ *
+ * @param {WalletAccount} accounts
+ *
+ * @returns {AccountMessage[]}
+ */
+export const getAccountMessages = (account: WalletAccount): AccountMessage[] => {
+    const messages: {
+        [key: string]: AccountMessage
+    } = {};
+
+    account.messages.forEach((message) => {
+        messages[message.id] = Object.assign<
+            AccountMessage,
+            Message,
+            Partial<AccountMessage>
+        >(
+            {} as AccountMessage,
+            message,
+            { account: account.index });
+    });
+
+    return Object.values(messages)
+        .sort((a, b) => {
+            return <any>new Date(b.timestamp) - <any>new Date(a.timestamp)
+        })
+}
+
+/**
+ * Gets a slice of all transactions (on all accounts). Appends account index and sort the message list.
+ *
+ * @method getTransactions
  *
  * @param {WalletAccount} accounts
  * @param {number} [count]
  *
  * @returns {AccountMessage[]}
  */
-export const getLatestMessages = (accounts: WalletAccount[], count = 10): AccountMessage[] => {
+export const getTransactions = (accounts: WalletAccount[], count = 10): AccountMessage[] => {
     const messages: {
         [key: string]: AccountMessage
     } = {};
 
-    const addresses: string[] = [];
-
     accounts.forEach((account) => {
-        account.addresses.forEach((address: Address) => {
-            addresses.push(address.address);
-        })
-
         account.messages.forEach((message) => {
-            messages[message.id] = Object.assign<
-                AccountMessage,
-                Message,
-                Partial<AccountMessage>
-            >(
-                {} as AccountMessage,
-                message,
-                { account: account.index });
+
+            if (message.id in messages) {
+                const existingMessage = messages[message.id];
+
+                // If a copy of the message exists, only override it if the new message is confirmed and the existing one is unconfirmed
+                // Imagine an internal transfer (between accounts). 
+                // If the first account already updates the confirmation state as confirmed, there is a chance that the user might see the confirmation state
+                // changing from confirmed to unconfirmed. To avoid that, we always give preference to the message that's already confirmed. 
+                if (!existingMessage.confirmed && message.confirmed) {
+                    messages[message.id] = Object.assign<
+                        AccountMessage,
+                        Message,
+                        Partial<AccountMessage>
+                    >(
+                        {} as AccountMessage,
+                        message,
+                        { account: account.index });
+                }
+            } else {
+                messages[message.id] = Object.assign<
+                    AccountMessage,
+                    Message,
+                    Partial<AccountMessage>
+                >(
+                    {} as AccountMessage,
+                    message,
+                    { account: account.index });
+            }
         })
     });
 
@@ -591,75 +953,70 @@ export const updateAccountsBalanceEquiv = (): void => {
 /**
  * Gets balance history for each account in market data timestamps
  *
- * @method getLatestMessages
+ * @method getAccountsBalanceHistory
  *
  * @param {Account} accounts
+ * @param {number} balanceRaw
  * @param {PriceData} [priceData]
  *
  */
-export const getAccountsBalanceHistory = (accounts: Account[], priceData: PriceData): BalanceHistory => {
-    let balanceHistory: BalanceHistory = {
-        [HistoryDataProps.ONE_HOUR]: [],
-        [HistoryDataProps.TWENTY_FOUR_HOURS]: [],
-        [HistoryDataProps.SEVEN_DAYS]: [],
-        [HistoryDataProps.ONE_MONTH]: [],
-    }
+export const getAccountsBalanceHistory = (accounts: WalletAccount[], priceData: PriceData): AccountsBalanceHistory => {
+    let balanceHistory: AccountsBalanceHistory = {}
     if (priceData && accounts) {
         accounts.forEach((account) => {
-            let accountBalanceHistory: HistoryData = {
+            let accountBalanceHistory: BalanceHistory = {
                 [HistoryDataProps.ONE_HOUR]: [],
                 [HistoryDataProps.TWENTY_FOUR_HOURS]: [],
                 [HistoryDataProps.SEVEN_DAYS]: [],
                 [HistoryDataProps.ONE_MONTH]: [],
             }
             // Sort messages from last to newest
-            let messages = account.messages.sort((a, b) => {
-                return <any>new Date(a.timestamp).getTime() - <any>new Date(b.timestamp).getTime()
+            let messages = account.messages.slice().sort((a, b) => {
+                return <any>new Date(b.timestamp).getTime() - <any>new Date(a.timestamp).getTime()
             })
             // Calculate the variations for each account
-            var balanceSoFar = 0;
-            let accountBalanceVariations = [{ balance: balanceSoFar, timestamp: '0' }]
+            var trackedBalance = account.rawIotaBalance;
+            let accountBalanceVariations = [{ balance: trackedBalance, timestamp: new Date().toString() }]
             messages.forEach((message) => {
                 const essence = message.payload.data.essence.data;
 
                 if (essence.incoming) {
-                    balanceSoFar += essence.value;
+                    trackedBalance -= essence.value;
                 } else {
-                    balanceSoFar -= essence.value;
+                    trackedBalance += essence.value;
                 }
-
-                accountBalanceVariations.push({ balance: balanceSoFar, timestamp: message.timestamp })
+                accountBalanceVariations.push({ balance: trackedBalance, timestamp: message.timestamp })
             })
             // Calculate the balance in each market data timestamp
             let balanceHistoryInTimeframe = []
             Object.entries(priceData[CurrencyTypes.USD]).forEach(([timeframe, data]) => {
-                // sort market data from last to newest
-                let sortedData = data.sort((a, b) => a[0] - b[0])
+                // sort market data from newest to last
+                let sortedData = data.slice().sort((a, b) => b[0] - a[0])
                 balanceHistoryInTimeframe = []
                 // if there are no balance variations
                 if (accountBalanceVariations.length === 1) {
-                    balanceHistoryInTimeframe = sortedData.map(_data => ({ timestamp: _data[0], balance: 0 }))
+                    balanceHistoryInTimeframe = sortedData.map(_data => ({ timestamp: _data[0], balance: trackedBalance }))
                 }
                 else {
-                    let i = 1
-                    sortedData.forEach(data => {
-                        let data_timestamp = new Date(data[0] * 1000).getTime()
+                    let i = 0
+                    sortedData.forEach((data) => {
+                        let marketTimestamp = new Date(data[0] * 1000).getTime()
                         // find balance for each market data timepstamp
-                        for (i; i < accountBalanceVariations.length; i++) {
+                        for (i; i < accountBalanceVariations.length - 1; i++) {
                             let currentBalanceTimestamp = new Date(accountBalanceVariations[i].timestamp).getTime()
-                            let peviousBalanceTimestamp = new Date(accountBalanceVariations[i - 1].timestamp).getTime()
-                            if (data_timestamp >= peviousBalanceTimestamp && data_timestamp < currentBalanceTimestamp) {
-                                balanceHistoryInTimeframe.push({ timestamp: data[0], balance: accountBalanceVariations[i - 1].balance })
+                            let nextBalanceTimestamp = new Date(accountBalanceVariations[i + 1].timestamp).getTime()
+                            if (marketTimestamp > nextBalanceTimestamp && marketTimestamp <= currentBalanceTimestamp) {
+                                balanceHistoryInTimeframe.push({ timestamp: data[0], balance: accountBalanceVariations[i].balance })
                                 return
                             }
-                            else if (i === (accountBalanceVariations.length - 1)) {
-                                balanceHistoryInTimeframe.push({ timestamp: data[0], balance: accountBalanceVariations[i].balance })
+                            else if (marketTimestamp <= nextBalanceTimestamp && i === (accountBalanceVariations.length - 2)) {
+                                balanceHistoryInTimeframe.push({ timestamp: data[0], balance: 0 })
                                 return
                             }
                         }
                     })
                 }
-                accountBalanceHistory[timeframe] = balanceHistoryInTimeframe
+                accountBalanceHistory[timeframe] = balanceHistoryInTimeframe.reverse()
             })
             balanceHistory[account.index] = accountBalanceHistory
         })
@@ -670,13 +1027,13 @@ export const getAccountsBalanceHistory = (accounts: Account[], priceData: PriceD
 /**
  * Gets balance history for all accounts combined in market data timestamps
  *
- * @method getLatestMessages
+ * @method getWalletBalanceHistory
  *
  * @param {Account} accounts
  * @param {PriceData} [priceData]
  *
  */
-export const getWalletBalanceHistory = (accountsBalanceHistory: BalanceHistory): BalanceHistory => {
+export const getWalletBalanceHistory = (accountsBalanceHistory: AccountsBalanceHistory): BalanceHistory => {
     let balanceHistory: BalanceHistory = {
         [HistoryDataProps.ONE_HOUR]: [],
         [HistoryDataProps.TWENTY_FOUR_HOURS]: [],
@@ -701,13 +1058,20 @@ export const getWalletBalanceHistory = (accountsBalanceHistory: BalanceHistory):
 /**
  * Sync the accounts
  */
-export function syncAccounts() {
+export function syncAccounts(showConfirmation) {
     isSyncing.set(true)
     api.syncAccounts({
         onSuccess(syncAccountsResponse) {
             const syncedAccounts = syncAccountsResponse.payload
 
             updateAccounts(syncedAccounts)
+
+            if (showConfirmation) {
+                showAppNotification({
+                    type: 'info',
+                    message: localize('notifications.accountsSynchronized'),
+                })
+            }
 
             isSyncing.set(false)
         },

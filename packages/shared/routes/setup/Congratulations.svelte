@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Box, Button, Illustration, OnboardingLayout, Text } from 'shared/components'
+    import { Box, Button, Icon, Illustration, OnboardingLayout, Text } from 'shared/components'
     import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
     import { newProfile, saveProfile, setActiveProfile, activeProfile } from 'shared/lib/profile'
     import { formatUnit } from 'shared/lib/units'
@@ -60,28 +60,32 @@
     <OnboardingLayout allowBack={false}>
         <div slot="leftpane__content">
             {#if wasMigrated}
-                <Box classes="bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 rounded-lg p-10">
-                    <balance class="flex flex-col flex-grow items-center">
-                        <Text type="h1" classes="mb-5 text-center">{locale('views.congratulations.fundsMigrated')}</Text>
-                        <Text type="p" secondary classes="mb-4 text-center">{locale('views.congratulations.success')}</Text>
-                        <div class="flex mb-2 my-6">
-                            <Text type="h2">{formatUnit(balance)}</Text>
-                        </div>
-                        <Text type="p" highlighted classes="py-1 uppercase">{fiatbalance}</Text>
-                    </balance>
-                </Box>
+                <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-10 pb-6">
+                    <div class="bg-green-100 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
+                        <Icon icon="success-check" classes="text-white" />
+                    </div>
+                    <Text type="h2" classes="mb-6 text-center">{locale('views.congratulations.fundsMigrated')}</Text>
+                    <Text type="p" secondary classes="mb-6 text-center">{locale('views.congratulations.success')}</Text>
+                    <Text type="h2">{formatUnit(balance)}</Text>
+                    <Text type="p" highlighted classes="py-1 uppercase">{fiatbalance}</Text>
+                </div>
             {:else}
-                <Text type="h1" classes="mb-5">{locale('views.congratulations.title')}</Text>
-                <Text type="p" secondary classes="mb-4">{locale('views.congratulations.body')}</Text>
+                <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-10 pb-6">
+                    <div class="bg-green-100 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
+                        <Icon icon="success-check" classes="text-white" />
+                    </div>
+                    <Text type="h2" classes="mb-5 text-center">{locale('views.congratulations.title')}</Text>
+                    <Text type="p" secondary classes="mb-2">{locale('views.congratulations.body')}</Text>
+                </div>
             {/if}
         </div>
         <div slot="leftpane__action">
             <Button classes="w-full" onClick={() => handleContinueClick()}>
-                {locale(`${wasMigrated ? 'views.congratulations.exportMigration' : 'actions.continue'}`)}
+                {locale(`${wasMigrated ? 'views.congratulations.exportMigration' : 'actions.finishSetup'}`)}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center">
-            <Illustration width="100%" illustration="congratulations-desktop" />
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
+            <Illustration illustration="congratulations-desktop" width="100%" height="auto" />
         </div>
     </OnboardingLayout>
 {/if}
