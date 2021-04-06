@@ -2,11 +2,11 @@
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import { loggedIn, mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
-    import { getVersionDetails, updateCheck, versionDetails } from 'shared/lib/appUpdater'
+    import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
     import { Electron } from 'shared/lib/electron'
     import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
-    import { dir, isLocaleLoaded, localize, setupI18n, _ } from 'shared/lib/i18n'
+    import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
     import { fetchMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { openPopup, popupState } from 'shared/lib/popup'
@@ -58,10 +58,7 @@
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
         if (!devMode) {
             await getVersionDetails()
-
-            setInterval(() => {
-                updateCheck()
-            }, 900000) // 15 minutes
+            await pollVersion()
         }
         Electron.onEvent('menu-navigate-wallet', (route) => {
             if (get(dashboardRoute) !== Tabs.Wallet) {
