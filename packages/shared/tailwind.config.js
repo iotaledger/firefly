@@ -220,9 +220,27 @@ module.exports = {
                         transform: 'rotate(0deg)',
                     },
                 },
+                shake: {
+                    '8%, 41%': {
+                        transform: 'translateX(-10px)',
+                    },
+                    '25%, 58%': {
+                        transform: 'translateX(10px)',
+                    },
+                    '75%': {
+                        transform: 'translateX(-5px)',
+                    },
+                    '92%': {
+                        transform: 'translateX(5px)',
+                    },
+                    '0%, 100%': {
+                        transform: 'translateX(0)',
+                    },
+                },
             },
             animation: {
                 'spin-reverse': 'spinReverse 1s linear infinite;',
+                shake: 'shake .5s linear;',
             },
         },
     },
