@@ -587,7 +587,7 @@
         "calcMinutesRemaining": "Calculating minutes remaining...",
         "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Copied to clipboard",
-        "accountsSynchronized": "Account synchronization complete."
+        "accountsSynchronized": "Account synchronization complete"
     },
     "error": {
         "profile": {
