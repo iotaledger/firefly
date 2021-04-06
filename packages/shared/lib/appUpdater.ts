@@ -109,7 +109,7 @@ export function updateDownload(): void {
             updateDisplayNotification(
                 notificationId,
                 {
-                    type: "info",
+                    ...downloadingNotification,
                     message: localize('notifications.updateReady'),
                     subMessage: localize('notifications.restartInstall'),
                     progress: undefined,
@@ -136,6 +136,7 @@ export function updateDownload(): void {
             updateDisplayNotification(
                 notificationId,
                 {
+                    ...downloadingNotification,
                     type: "error",
                     message: localize('notifications.updateError'),
                     progress: undefined,

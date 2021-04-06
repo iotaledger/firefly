@@ -138,7 +138,6 @@
 
         + floating-label {
             transform: translateY(3px);
-            transition: all 0.2s ease-out;
             @apply block;
             @apply text-gray-500;
             @apply text-11;
@@ -151,11 +150,14 @@
             @apply select-none;
             @apply whitespace-nowrap;
             @apply w-full;
+            @apply transition-none;
             top: 8px;
         }
         &:not(:disabled) {
             + floating-label {
                 &.floating-active {
+                    @apply transition-all;
+                    @apply ease-out;
                     @apply opacity-100;
                     transform: none;
                 }
