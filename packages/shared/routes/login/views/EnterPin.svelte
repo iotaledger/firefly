@@ -113,7 +113,7 @@
 
     onDestroy(() => {
         clearInterval(maxAttemptsTimer)
-        clearInterval(shakeTimeout)
+        clearTimeout(shakeTimeout)
     })
 </script>
 
