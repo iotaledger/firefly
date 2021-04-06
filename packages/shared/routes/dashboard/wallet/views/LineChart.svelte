@@ -2,18 +2,15 @@
     import { Chart, Dropdown, Text } from 'shared/components'
     import {
         ChartData,
-        chartSelectors,
         DashboardChartType,
         getAccountValueData,
         getPortfolioData,
         getTokenData,
         selectedChart,
-        updateChartCurrency,
-        updateChartTimeframe,
     } from 'shared/lib/chart'
     import { AvailableExchangeRates, CurrencyTypes, formatCurrencyValue } from 'shared/lib/currency'
     import { HistoryDataProps, TIMEFRAME_MAP } from 'shared/lib/marketData'
-    import { activeProfile } from 'shared/lib/profile'
+    import { activeProfile, updateProfile } from 'shared/lib/profile'
     import type { AccountsBalanceHistory, BalanceHistory, WalletAccount } from 'shared/lib/wallet'
     import { getContext, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
@@ -36,30 +33,35 @@
 
     /** Chart data */
     $: {
-        if (locale || $selectedChart || $chartSelectors || $walletBalanceHistory || $selectedAccount) {
-            // Account value chart
-            if ($selectedAccount) {
-                chartData = getAccountValueData($accountsBalanceHistory[$selectedAccount.index], $selectedAccount.rawIotaBalance)
-                switch ($chartSelectors.timeframe) {
-                    case HistoryDataProps.ONE_HOUR:
-                    case HistoryDataProps.TWENTY_FOUR_HOURS:
-                        xMaxTicks = 4
-                        break
-                    case HistoryDataProps.SEVEN_DAYS:
-                    case HistoryDataProps.ONE_MONTH:
-                        xMaxTicks = 6
-                        break
+        if (locale || $selectedChart || $activeProfile?.settings.chartSelectors || $walletBalanceHistory || $selectedAccount) {
+            if ($activeProfile?.settings) {
+                // Account value chart
+                if ($selectedAccount) {
+                    chartData = getAccountValueData(
+                        $accountsBalanceHistory[$selectedAccount.index],
+                        $selectedAccount.rawIotaBalance
+                    )
+                    switch ($activeProfile?.settings.chartSelectors.timeframe) {
+                        case HistoryDataProps.ONE_HOUR:
+                        case HistoryDataProps.TWENTY_FOUR_HOURS:
+                            xMaxTicks = 4
+                            break
+                        case HistoryDataProps.SEVEN_DAYS:
+                        case HistoryDataProps.ONE_MONTH:
+                            xMaxTicks = 6
+                            break
+                    }
+                } else {
+                    // Token value chart
+                    if ($selectedChart === DashboardChartType.TOKEN) {
+                        chartData = getTokenData()
+                    }
+                    // Portfolio value chart
+                    if ($selectedChart === DashboardChartType.PORTFOLIO) {
+                        chartData = getPortfolioData($walletBalanceHistory)
+                    }
+                    xMaxTicks = undefined
                 }
-            } else {
-                // Token value chart
-                if ($selectedChart === DashboardChartType.TOKEN) {
-                    chartData = getTokenData()
-                }
-                // Portfolio value chart
-                if ($selectedChart === DashboardChartType.PORTFOLIO) {
-                    chartData = getPortfolioData($walletBalanceHistory)
-                }
-                xMaxTicks = undefined
             }
         }
     }
@@ -74,13 +76,13 @@
             currencyDropdown.push({ value: profileCurrency, label: profileCurrency })
         }
         // change to USD if previously selected currency is not in the list anymore
-        if (!currencyDropdown.some(({ value }) => value === $chartSelectors.currency)) {
-            updateChartCurrency(AvailableExchangeRates.USD)
+        if (!currencyDropdown.some(({ value }) => value === $activeProfile?.settings.chartSelectors.currency)) {
+            updateProfile('settings.chartSelectors.currency', AvailableExchangeRates.USD)
         }
     })
 
     function handleCurrencySelect({ value: currency }) {
-        updateChartCurrency(currency)
+        updateProfile('settings.chartSelectors.currency', currency)
     }
 </script>
 
@@ -117,7 +119,7 @@
             <span>
                 <Dropdown
                     small
-                    value={$chartSelectors.currency}
+                    value={$activeProfile?.settings.chartSelectors.currency}
                     items={currencyDropdown}
                     onSelect={handleCurrencySelect}
                     contentWidth={true} />
@@ -125,9 +127,9 @@
             <span>
                 <Dropdown
                     small
-                    value={TIMEFRAME_MAP[$chartSelectors.timeframe]}
+                    value={TIMEFRAME_MAP[$activeProfile?.settings.chartSelectors.timeframe]}
                     items={Object.keys(TIMEFRAME_MAP).map((value) => ({ label: TIMEFRAME_MAP[value], value }))}
-                    onSelect={(newTimeframe) => updateChartTimeframe(newTimeframe.value)}
+                    onSelect={(newTimeframe) => updateProfile('settings.chartSelectors.timeframe', newTimeframe.value)}
                     contentWidth={true} />
             </span>
         </div>
@@ -139,6 +141,6 @@
         {labels}
         {color}
         {xMaxTicks}
-        formatYAxis={(value) => formatCurrencyValue(value, $chartSelectors.currency, undefined, undefined, 5)}
+        formatYAxis={(value) => formatCurrencyValue(value, $activeProfile?.settings.chartSelectors.currency, undefined, undefined, 5)}
         inlineStyle={$selectedAccount && `height: calc(50vh - ${hasTitleBar ? '190' : '150'}px);`} />
 </div>
