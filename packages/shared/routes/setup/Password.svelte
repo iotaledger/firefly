@@ -31,9 +31,11 @@
                 },
             })
         } else if (passwordStrength.score !== 4) {
-            error = passwordStrength.feedback.warning
-                ? locale(`error.password.${passwordInfo[passwordStrength.feedback.warning]}`)
-                : locale('error.password.tooWeak')
+            let errKey = 'error.password.tooWeak'
+            if (passwordStrength.feedback.warning && passwordInfo[passwordStrength.feedback.warning]) {
+                errKey = `error.password.${passwordInfo[passwordStrength.feedback.warning]}`
+            }
+            error = locale(errKey)
         } else if (password !== confirmedPassword) {
             errorConfirm = locale('error.password.doNotMatch')
         } else {

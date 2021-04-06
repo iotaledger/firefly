@@ -11,6 +11,8 @@ const passwordReasons = {
     'This is a very common password': 'common',
     'This is similar to a commonly used password': 'similar',
     'A word by itself is easy to guess': 'word',
+    'This is a top-10 common password': 'common',
+    'This is a top-100 common password': 'common',
 };
 
 export default passwordReasons;

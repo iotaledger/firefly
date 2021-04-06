@@ -4,7 +4,11 @@ import { DEFAULT_NODE } from 'shared/lib/network'
 import { generateRandomId } from 'shared/lib/utils'
 import { api } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
+import type { ChartSelectors } from './chart'
 import { Electron } from './electron'
+import {
+    HistoryDataProps
+} from './marketData'
 import type { Node } from './typings/client'
 
 /**
@@ -37,6 +41,7 @@ export interface UserSettings {
     /** Lock screen timeout in minutes */
     lockScreenTimeout: number
     showDeletedAccounts?: boolean
+    chartSelectors: ChartSelectors
 }
 
 export const activeProfileId = writable<string | null>(null)
@@ -101,6 +106,10 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
             customNodes: [],
             // Minutes
             lockScreenTimeout: 5,
+            chartSelectors: {
+                currency: AvailableExchangeRates.USD,
+                timeframe: HistoryDataProps.SEVEN_DAYS
+            }
         },
     }
 
@@ -188,7 +197,7 @@ export const removeProfile = (id: string): void => {
  * @returns {void}
  */
 export const updateProfile = (
-    path: string, value: string | string[] | boolean | Date | AvailableExchangeRates | Node | Node[]) => {
+    path: string, value: string | string[] | boolean | Date | AvailableExchangeRates | Node | Node[] | ChartSelectors | HistoryDataProps) => {
     const _update = (_profile) => {
         const pathList = path.split('.')
 
