@@ -25,7 +25,11 @@ export const persistent = <T>(key: string, initialValue: T): Writable<T> => {
     const state = writable(value)
 
     state.subscribe(($value): void => {
-        localStorage.setItem(key, JSON.stringify($value))
+        if ($value === undefined || $value === null) {
+            localStorage.removeItem(key)
+        } else {
+            localStorage.setItem(key, JSON.stringify($value))
+        }
     })
 
     return state

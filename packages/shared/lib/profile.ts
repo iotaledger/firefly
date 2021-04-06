@@ -1,7 +1,7 @@
 import { AvailableExchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
 import { generateRandomId } from 'shared/lib/utils'
-import { api } from 'shared/lib/wallet'
+import { api, getStoragePath } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
 import type { ChartSelectors } from './chart'
 import { Electron } from './electron'
@@ -43,6 +43,8 @@ export interface UserSettings {
 export const activeProfileId = writable<string | null>(null)
 
 export const profiles = persistent<Profile[]>('profiles', [])
+
+export const profileInProgress = persistent<string | undefined>('profileInProgress', undefined)
 
 export const newProfile = writable<Profile | null>(null)
 
@@ -120,18 +122,11 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
  *
  * @returns {void}
  */
-export const disposeNewProfile = (): void => {
+export const disposeNewProfile = () => {
     const np = get(newProfile)
     if (np) {
         api.removeStorage({
             onSuccess() {
-                api.removeAccount(np.id, {
-                    onSuccess() {
-                    },
-                    onError(err) {
-                        console.error(err)
-                    },
-                })
             },
             onError(err) {
                 console.error(err)
@@ -218,5 +213,37 @@ export const updateProfile = (
                 return _profile
             })
         })
+    }
+}
+
+/**
+ * Cleanup any in progress profiles
+ *
+ * @method cleanupInProgressProfiles
+ *
+ * @returns {void}
+ */
+export const cleanupInProgressProfiles = async () => {
+    const inProgressProfile = get(profileInProgress)
+    if (inProgressProfile) {
+        profileInProgress.update(() => undefined)
+        await removeProfileFolder(inProgressProfile)
+    }
+}
+
+/**
+ * Remove the profile folder from storage
+ *
+ * @method removeProfileFolder
+ *
+ * @returns {void}
+ */
+export const removeProfileFolder = async (profileName) => {
+    try {
+        const userDataPath = await Electron.getUserDataPath()
+        const profileStoragePath = getStoragePath(userDataPath, profileName)
+        await Electron.removeProfileFolder(profileStoragePath)
+    } catch (err) {
+        console.error(err)
     }
 }
