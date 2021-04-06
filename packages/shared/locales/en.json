@@ -207,7 +207,7 @@
             },
             "resyncAccounts": {
                 "title": "Resync accounts",
-                "description": ""
+                "description": "Starts a background task to make sure your accounts are up to date."
             },
             "deleteProfile": {
                 "title": "Delete profile",
@@ -587,7 +587,8 @@
         "restartInstall": "Restart to install",
         "calcMinutesRemaining": "Calculating minutes remaining...",
         "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
-        "copiedToClipboard": "Copied to clipboard"
+        "copiedToClipboard": "Copied to clipboard",
+        "accountsSynchronized": "Account synchronization complete"
     },
     "error": {
         "profile": {
