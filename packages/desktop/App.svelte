@@ -10,6 +10,7 @@
     import { fetchMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { openPopup, popupState } from 'shared/lib/popup'
+    import { cleanupInProgressProfiles} from 'shared/lib/profile'
     import { dashboardRoute, initRouter, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
     import { AppRoute, Tabs } from 'shared/lib/typings/routes'
     import {
@@ -92,7 +93,9 @@
         Electron.hookErrorLogger((err) => {
             addError(err)
         })
-    })
+
+        await cleanupInProgressProfiles()
+})
 </script>
 
 <style global type="text/scss">

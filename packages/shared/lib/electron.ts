@@ -52,6 +52,7 @@ export interface IElectron {
     getDiagnostics(): Promise<{ label: string; value: string; }[]>;
     getOS(): Promise<string>;
     updateActiveProfile(id: string): void;
+    removeProfileFolder(profilePath: string): Promise<void>;
     updateMenu(attribute: string, value: unknown): void;
     popupMenu(): void;
     maximize(): void;
