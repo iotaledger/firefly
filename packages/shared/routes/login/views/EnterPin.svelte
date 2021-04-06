@@ -15,6 +15,7 @@
     let pinCode = ''
     let isBusy = false
     let pinRef
+    let shake = false
 
     /** Maximum number of consecutive (incorrect) attempts allowed to the user */
     const MAX_PINCODE_INCORRECT_ATTEMPTS = 3
@@ -39,7 +40,8 @@
 
     const dispatch = createEventDispatcher()
 
-    let timerId = null
+    let maxAttemptsTimer = null
+    let shakeTimeout = null
 
     function countdown() {
         if (!hasReachedMaxAttempts) {
@@ -47,7 +49,7 @@
         }
 
         if (timeRemainingBeforeNextAttempt == -1) {
-            clearInterval(timerId)
+            clearInterval(maxAttemptsTimer)
             attempts = 0
             timeRemainingBeforeNextAttempt = WAITING_TIME_AFTER_MAX_INCORRECT_ATTEMPTS
             pinRef.resetAndFocus()
@@ -82,14 +84,18 @@
                             })
                         })
                     } else {
-                        isBusy = false
-                        attempts++
-                        if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
-                            clearInterval(timerId)
-                            timerId = setInterval(countdown, 1000)
-                        } else {
-                            pinRef.resetAndFocus()
-                        }
+                        shake = true
+                        shakeTimeout = setTimeout(() => {
+                            shake = false
+                            isBusy = false
+                            attempts++
+                            if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
+                                clearInterval(maxAttemptsTimer)
+                                maxAttemptsTimer = setInterval(countdown, 1000)
+                            } else {
+                                pinRef.resetAndFocus()
+                            }
+                        }, 1000)
                     }
                 })
                 .catch((error) => {
@@ -106,7 +112,8 @@
     }
 
     onDestroy(() => {
-        clearInterval(timerId)
+        clearInterval(maxAttemptsTimer)
+        clearInterval(shakeTimeout)
     })
 </script>
 
@@ -130,7 +137,7 @@
                 <Pin
                     bind:this={pinRef}
                     bind:value={pinCode}
-                    classes="mt-10"
+                    classes="mt-10 {shake && 'animate-shake'}"
                     on:submit={onSubmit}
                     disabled={hasReachedMaxAttempts || isBusy}
                     autofocus />
