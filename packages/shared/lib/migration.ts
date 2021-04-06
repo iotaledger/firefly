@@ -165,15 +165,15 @@ export const createMigrationBundle = (inputAddressIndexes: number[], mine: boole
 
 export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAGNITUDE): Promise<void> => {
     return new Promise((resolve, reject) => {
-        setTimeout(() => resolve(), 4000)
-        // api.sendMigrationBundle([MIGRATION_NODE], bundleHash, mwm, {
-        //     onSuccess() {
-        //         resolve()
-        //     },
-        //     onError(error) {
-        //         reject(error)
-        //     },
-        // })
+        // setTimeout(() => resolve(), 4000)
+        api.sendMigrationBundle([MIGRATION_NODE], bundleHash, mwm, {
+            onSuccess() {
+                resolve()
+            },
+            onError(error) {
+                reject(error)
+            },
+        })
     })
 }
 
