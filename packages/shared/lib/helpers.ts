@@ -101,7 +101,7 @@ export const getInitials = (name: string | undefined, maxChars: number) => {
 
 export const truncateString = (str: string = '', firstCharCount: number = 5, endCharCount: number = 5, dotCount: number = 3) => {
     const MAX_LENGTH = 13
-    if (str.length <= MAX_LENGTH) {
+    if (!str || str.length <= MAX_LENGTH) {
         return str
     }
     let convertedStr = ''
