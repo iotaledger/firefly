@@ -21,6 +21,7 @@ export function initAutoUpdate(mainWindow) {
         ipcMain.handle('update-download', () => updateDownload())
         ipcMain.handle('update-cancel', () => updateCancel())
         ipcMain.handle('update-install', () => updateInstall())
+        ipcMain.handle('update-check', () => updateCheck())
         ipcMain.handle('update-get-version-details', () => getVersionDetails())
         ipcHandlersRegistered = true
     }
@@ -54,7 +55,8 @@ export function initAutoUpdate(mainWindow) {
     })
 
     mainWindow.webContents.send('version-details', versionDetails)
-    autoUpdater.checkForUpdates()
+
+    updateCheck()
 }
 
 export function updateDownload() {
@@ -71,6 +73,10 @@ export function updateCancel() {
 
 export function updateInstall() {
     autoUpdater.quitAndInstall()
+}
+
+export function updateCheck() {
+    autoUpdater.checkForUpdates()
 }
 
 export function getVersionDetails() {
