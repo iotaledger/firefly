@@ -172,8 +172,8 @@
                 @apply rounded-full;
                 @apply bg-blue-500;
                 @apply opacity-0;
-                transition: opacity 1s;
                 &.active {
+                    transition: opacity 1s;
                     @apply opacity-100;
                 }
             }
