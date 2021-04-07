@@ -5,7 +5,7 @@ import { activeProfile, updateProfile } from 'shared/lib/profile'
 
 export const LOG_FILE_NAME = 'migration'
 
-export const MIGRATION_NODE = 'https://nodes.devnet.iota.org'
+export const MIGRATION_NODE = 'https://nodes-migration-legacy.iota.cafe:443'
 
 export const PERMANODE = 'https://chronicle.iota.org/api'
 
