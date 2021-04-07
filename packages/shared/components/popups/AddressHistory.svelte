@@ -12,7 +12,13 @@
     export let account: Readable<WalletAccount>
 
     let addresses: Address[]
-    $: addresses = $account?.addresses ?? [] // TODO: sort by date when exposed
+    $: addresses = $account?.addresses.slice().sort((a, b) => {
+        if (a.keyIndex === b.keyIndex) {
+            return a.internal ? 1 : -1
+        }
+
+        return a.keyIndex - b.keyIndex;
+    }) ?? [] // TODO: sort by date when exposed
 
     const date = get(i18nDate)(new Date(), {
         year: 'numeric',
