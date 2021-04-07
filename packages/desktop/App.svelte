@@ -7,10 +7,10 @@
     import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
     import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
-    import { fetchMarketData } from 'shared/lib/marketData'
+    import { pollMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { cleanupInProgressProfiles} from 'shared/lib/profile'
+    import { cleanupInProgressProfiles } from 'shared/lib/profile'
     import { dashboardRoute, initRouter, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
     import { AppRoute, Tabs } from 'shared/lib/typings/routes'
     import {
@@ -53,7 +53,7 @@
             initRouter()
         }, 2000)
 
-        await fetchMarketData()
+        await pollMarketData()
         await pollNetworkStatus()
 
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
@@ -95,7 +95,7 @@
         })
 
         await cleanupInProgressProfiles()
-})
+    })
 </script>
 
 <style global type="text/scss">
@@ -157,7 +157,7 @@
                     @apply border-gray-800;
                 }
             }
-            
+
             .scroll-tertiary {
                 &::-webkit-scrollbar-thumb {
                     @apply border-gray-900;
