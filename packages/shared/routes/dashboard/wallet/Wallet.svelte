@@ -39,9 +39,6 @@
 
     const { accounts, balanceOverview, accountsLoaded } = $wallet
 
-    const transactions = derived(accounts, ($accounts) => {
-        return getTransactions($accounts)
-    })
     const accountsBalanceHistory = derived([accounts, priceData], ([$accounts, $priceData]) =>
         getAccountsBalanceHistory($accounts, $priceData)
     )
@@ -68,6 +65,10 @@
         return $accounts.filter((a) => !$activeProfile.deletedAccounts?.includes(a.id))
     })
 
+    const transactions = derived(viewableAccounts, ($viewableAccounts) => {
+        return getTransactions($viewableAccounts)
+    })
+
     setContext<Writable<BalanceOverview>>('walletBalance', balanceOverview)
     setContext<Writable<WalletAccount[]>>('walletAccounts', accounts)
     setContext<Readable<WalletAccount[]>>('viewableAccounts', viewableAccounts)
@@ -85,7 +86,7 @@
             onSuccess(accountsResponse) {
                 const _continue = () => {
                     accountsLoaded.set(true)
-                    syncAccounts()
+                    syncAccounts(false)
                 }
 
                 if (accountsResponse.payload.length === 0) {
