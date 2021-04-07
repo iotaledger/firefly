@@ -58,14 +58,14 @@
         }
         return $activeProfile.settings.showDeletedAccounts
             ? $accounts
-            : $accounts.filter((a) => !$activeProfile.deletedAccounts.includes(a.id))
+            : $accounts.filter((a) => !$activeProfile.deletedAccounts?.includes(a.id))
     })
 
     const liveAccounts: Readable<WalletAccount[]> = derived([activeProfile, accounts], ([$activeProfile, $accounts]) => {
         if (!$activeProfile) {
             return []
         }
-        return $accounts.filter((a) => !$activeProfile.deletedAccounts.includes(a.id))
+        return $accounts.filter((a) => !$activeProfile.deletedAccounts?.includes(a.id))
     })
 
     setContext<Writable<BalanceOverview>>('walletBalance', balanceOverview)
