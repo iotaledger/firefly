@@ -165,6 +165,13 @@
             }
         }
     }
+    @layer utilities {
+        .scrollable-y {
+            @apply overflow-y-auto;
+            @apply -mr-2;
+            @apply pr-2;
+        }
+    }
 </style>
 
 <TitleBar>
