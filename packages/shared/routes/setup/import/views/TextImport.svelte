@@ -28,7 +28,7 @@
             <Text type="p" secondary classes="mb-4">{locale('views.importFromText.body1')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.importFromText.body2')}</Text>
             <Text type="h5" classes="mb-4">{locale('views.importFromText.body3')}</Text>
-            <ImportTextfield bind:value={input} {locale} />
+            <ImportTextfield disabled={loading} bind:value={input} {locale} />
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
             <Button classes="flex-1" disabled={input.length === 0 || loading} onClick={() => handleContinueClick()}>

@@ -7,6 +7,8 @@
     export let value = undefined
     export let locale
 
+    export let disabled = false
+
     let statusMessage = ''
     let content = ''
     let error = false
@@ -48,7 +50,10 @@
         statusMessage = ''
         error = false
 
-        content = content.replace(/\r/g, '').replace(/\n/g, '').replace(/  +/g, ' ')
+        content = content
+            .replace(/\r/g, '')
+            .replace(/\n/g, '')
+            .replace(/  +/g, ' ')
 
         let trimmedContent = content.trim()
 
@@ -91,9 +96,9 @@
 
 <div>
     <textarea
-        class="text-14 leading-140 resize-none w-full p-4 pb-3 rounded-xl border border-solid 
-            {error ? 'border-red-300 hover:border-red-500 focus:border-red-500' : 'border-gray-300 hover:border-gray-500 dark:border-gray-700 dark:hover:border-gray-700'} 
-            text-gray-500 dark:text-white bg-white dark:bg-gray-800 "
+        {disabled}
+        class="text-14 leading-140 resize-none w-full p-4 pb-3 rounded-xl border border-solid {error ? 'border-red-300 hover:border-red-500 focus:border-red-500' : 'border-gray-300 hover:border-gray-500 dark:border-gray-700 dark:hover:border-gray-700'}
+        text-gray-500 dark:text-white bg-white dark:bg-gray-800 "
         bind:value={content}
         on:keydown={debounce(handleKeyDown)}
         placeholder=""
