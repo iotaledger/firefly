@@ -1247,7 +1247,7 @@ export const updateAccountNetworkSettings = async (automaticNodeSelection, inclu
 
     const clientOptions = {
         nodes: clientNodes,
-        primaryNodeUrl: clientNode,
+        node: clientNode,
         localPow
     }
 
