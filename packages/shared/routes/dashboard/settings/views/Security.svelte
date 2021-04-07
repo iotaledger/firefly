@@ -125,9 +125,11 @@
         } else if (newPassword !== confirmedPassword) {
             newPasswordError = locale('error.password.doNotMatch')
         } else if (passwordStrength.score !== 4) {
-            newPasswordError = passwordStrength.feedback.warning
-                ? locale(`error.password.${passwordInfo[passwordStrength.feedback.warning]}`)
-                : locale('error.password.tooWeak')
+            let errKey = 'error.password.tooWeak'
+            if (passwordStrength.feedback.warning && passwordInfo[passwordStrength.feedback.warning]) {
+                errKey = `error.password.${passwordInfo[passwordStrength.feedback.warning]}`
+            }
+            newPasswordError = locale(errKey)
         } else {
             passwordChangeBusy = true
             passwordChangeMessage = locale('general.passwordUpdating')
