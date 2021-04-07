@@ -381,7 +381,7 @@
             "errorBody3": "You cannot remove this account, you must have at least one."
         },
         "addressHistory": {
-            "title": "{name} account address history",
+            "title": "{name} address history",
             "currentBalance": "Current balance: {balance}"
         },
         "node": {

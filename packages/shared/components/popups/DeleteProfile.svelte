@@ -4,7 +4,7 @@
     import { Electron } from 'shared/lib/electron'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
-    import { activeProfile, removeProfile } from 'shared/lib/profile'
+    import { activeProfile, removeProfile, removeProfileFolder } from 'shared/lib/profile'
     import { api } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
 
@@ -18,38 +18,31 @@
         isBusy = true
         error = ''
         api.setStrongholdPassword(password, {
-            onSuccess() {
-                const ap = get(activeProfile)
-                if (!ap) {
-                    logout()
-                    return
-                }
+            async onSuccess() {
+                try {
+                    const ap = get(activeProfile)
+                    if (!ap) {
+                        logout()
+                        return
+                    }
 
-                Electron.PincodeManager.remove(ap.id).then((isRemoved) => {
+                    const isRemoved = await Electron.PincodeManager.remove(ap.id)
                     if (!isRemoved) {
                         console.error('Something went wrong removing pincode entry.')
                     }
 
-                    // Remove storage
-                    api.removeStorage({
-                        onSuccess(res) {
-                            logout()
-
-                            removeProfile(ap.id)
-
-                            isBusy = false
-                            closePopup()
-                        },
-                        onError(err) {
-                            isBusy = false
-                            closePopup()
-                            showAppNotification({
-                                type: 'error',
-                                message: locale(err.error),
-                            })
-                        },
+                    removeProfile(ap.id)
+                    await removeProfileFolder(ap.name)
+                } catch (err) {
+                    showAppNotification({
+                        type: 'error',
+                        message: locale(err.error),
                     })
-                })
+                } finally {
+                    isBusy = false
+                    closePopup()
+                    logout()
+                }
             },
             onError(err) {
                 isBusy = false
@@ -76,5 +69,7 @@
 </div>
 <div class="flex flex-row justify-between space-x-4 w-full px-8 ">
     <Button secondary classes="w-1/2" onClick={() => closePopup()} disabled={isBusy}>{locale('actions.no')}</Button>
-    <Button disabled={!password || isBusy} classes="w-1/2" onClick={() => deleteProfile()} warning>{locale('actions.yes')}</Button>
+    <Button disabled={!password || isBusy} classes="w-1/2" onClick={() => deleteProfile()} warning>
+        {locale('actions.yes')}
+    </Button>
 </div>
