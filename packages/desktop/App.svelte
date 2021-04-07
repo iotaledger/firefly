@@ -2,7 +2,7 @@
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import { loggedIn, mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
-    import { refreshVersionDetails, versionDetails } from 'shared/lib/appUpdater'
+    import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
     import { Electron } from 'shared/lib/electron'
     import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
@@ -58,7 +58,8 @@
 
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
         if (!devMode) {
-            await refreshVersionDetails()
+            await getVersionDetails()
+            await pollVersion()
         }
         Electron.onEvent('menu-navigate-wallet', (route) => {
             if (get(dashboardRoute) !== Tabs.Wallet) {
@@ -76,7 +77,6 @@
             }
         })
         Electron.onEvent('menu-check-for-update', async () => {
-            await refreshVersionDetails()
             openPopup({
                 type: 'version',
                 props: {
