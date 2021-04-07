@@ -166,34 +166,34 @@ export const createMigrationBundle = (inputAddressIndexes: number[], mine: boole
 
 export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAGNITUDE): Promise<void> => {
     return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            const _activeProfile = get(activeProfile)
+        // setTimeout(() => {
+        //     const _activeProfile = get(activeProfile)
 
-            updateProfile(
-                'migratedTransactions',
-                _activeProfile.migratedTransactions ? [..._activeProfile.migratedTransactions, {
-                    address: 'x'.repeat(81),
-                    balance: '10 Mi',
-                    timestamp: new Date().toISOString(),
-                    index: 0
-                }] : [{
-                    address: 'x'.repeat(81),
-                    balance: '10 Mi',
-                    timestamp: new Date().toISOString(),
-                    index: 0
-                }]
-            )
+        //     updateProfile(
+        //         'migratedTransactions',
+        //         _activeProfile.migratedTransactions ? [..._activeProfile.migratedTransactions, {
+        //             address: 'x'.repeat(81),
+        //             balance: '10 Mi',
+        //             timestamp: new Date().toISOString(),
+        //             index: 0
+        //         }] : [{
+        //             address: 'x'.repeat(81),
+        //             balance: '10 Mi',
+        //             timestamp: new Date().toISOString(),
+        //             index: 0
+        //         }]
+        //     )
 
-            resolve()
-        }, 4000)
-        // api.sendMigrationBundle([MIGRATION_NODE], bundleHash, mwm, {
-        //     onSuccess() {
-        //         resolve()
-        //     },
-        //     onError(error) {
-        //         reject(error)
-        //     },
-        // })
+        //     resolve()
+        // }, 4000)
+        api.sendMigrationBundle([MIGRATION_NODE], bundleHash, mwm, {
+            onSuccess() {
+                resolve()
+            },
+            onError(error) {
+                reject(error)
+            },
+        })
     })
 }
 
