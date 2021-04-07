@@ -3,8 +3,8 @@
     import { Electron } from 'shared/lib/electron'
     import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
-    import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, isStrongholdLocked, updateProfile } from 'shared/lib/profile'
+    import { openPopup, closePopup } from 'shared/lib/popup'
+    import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { getDefaultStrongholdName, PIN_LENGTH } from 'shared/lib/utils'
     import { api, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
@@ -34,7 +34,6 @@
     let newPasswordError = ''
     let exportBusy = false
     let exportMessage = ''
-    let exportPassword = ''
 
     let currentPincode = ''
     let newPincode = ''
@@ -74,9 +73,18 @@
             }
         }
 
-        exportBusy = true
-        exportMessage = locale('general.exportingStronghold')
-        exportStronghold(exportPassword, _callback)
+        openPopup({
+            type: 'password',
+            props: {
+                onSubmit: (password) => {
+                    exportBusy = true
+                    exportMessage = locale('general.exportingStronghold')
+                    exportStronghold(password, _callback)
+                    closePopup()
+                },
+                subtitle: locale('popups.password.backup')
+            },
+        })
     }
 
     function exportStronghold(password: string, callback?: (cancelled: boolean, err?: string) => void) {
@@ -260,13 +268,6 @@
         <Text type="h4" classes="mb-3">{locale('views.settings.exportStronghold.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.exportStronghold.description')}</Text>
         <div class="flex flex-row items-center">
-            <Password
-                classes="mr-4"
-                bind:value={exportPassword}
-                showRevealToggle
-                {locale}
-                placeholder={locale('general.password')}
-                disabled={exportBusy} />
             <Button medium inlineStyle="min-width: 156px;" onClick={handleExportClick} disabled={exportBusy}>
                 {locale('actions.export')}
             </Button>
