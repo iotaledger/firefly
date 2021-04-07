@@ -13,7 +13,9 @@
     const dispatch = createEventDispatcher()
 
     function handleContinue() {
-        dispatch('next', { password })
+        if (password) {
+            dispatch('next', { password })
+        }
     }
     function handleBackClick() {
         dispatch('previous')
@@ -29,7 +31,7 @@
             <Text type="h3" highlighted classes="mb-5">{locale(`general.${importType}`)}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.importBackupPassword.body1')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.importBackupPassword.body2')}</Text>
-            <Password classes="mb-6" {error} bind:value={password} {locale} showRevealToggle autofocus disabled={busy} />
+            <Password classes="mb-6" {error} bind:value={password} {locale} showRevealToggle autofocus disabled={busy} submitHandler={handleContinue} />
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
             <Button classes="flex-1" disabled={password.length === 0 || busy} onClick={() => handleContinue()}>

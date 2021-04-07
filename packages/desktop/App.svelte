@@ -6,10 +6,11 @@
     import { Electron } from 'shared/lib/electron'
     import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
-    import { dir, isLocaleLoaded, localize, setupI18n, _ } from 'shared/lib/i18n'
+    import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
     import { pollMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { openPopup, popupState } from 'shared/lib/popup'
+    import { cleanupInProgressProfiles } from 'shared/lib/profile'
     import { dashboardRoute, initRouter, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
     import { AppRoute, Tabs } from 'shared/lib/typings/routes'
     import {
@@ -92,6 +93,8 @@
         Electron.hookErrorLogger((err) => {
             addError(err)
         })
+
+        await cleanupInProgressProfiles()
     })
 </script>
 
@@ -105,22 +108,62 @@
         @apply bg-white;
         @apply select-none;
         -webkit-user-drag: none;
+
+        ::-webkit-scrollbar {
+            @apply w-5;
+            @apply h-5;
+        }
+
+        ::-webkit-scrollbar-track {
+            @apply bg-transparent;
+        }
+
+        ::-webkit-scrollbar-corner {
+            @apply bg-transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            @apply bg-gray-300;
+            @apply border-solid;
+            @apply rounded-2xl;
+            border-width: 7px;
+            /* This needs to match the background it is displayed on
+               and can be override in local components using the secondary 
+               and tertiary styles */
+            @apply border-white;
+        }
+
+        .scroll-secondary {
+            &::-webkit-scrollbar-thumb {
+                @apply border-white;
+            }
+        }
+
+        .scroll-tertiary {
+            &::-webkit-scrollbar-thumb {
+                @apply border-gray-50;
+            }
+        }
+
         &.scheme-dark {
             @apply bg-gray-900;
             :global(::-webkit-scrollbar-thumb) {
                 @apply bg-gray-700;
+                @apply border-gray-900;
+            }
+
+            .scroll-secondary {
+                &::-webkit-scrollbar-thumb {
+                    @apply border-gray-800;
+                }
+            }
+
+            .scroll-tertiary {
+                &::-webkit-scrollbar-thumb {
+                    @apply border-gray-900;
+                }
             }
         }
-    }
-    ::-webkit-scrollbar {
-        @apply w-3;
-    }
-    ::-webkit-scrollbar-thumb {
-        @apply bg-gray-300;
-        border-radius: 10px;
-    }
-    ::-webkit-scrollbar-track {
-        @apply bg-transparent;
     }
 </style>
 
@@ -161,11 +204,7 @@
             <Protect on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
         </Route>
         <Route route={AppRoute.Backup} transition={false}>
-            <Backup
-                on:next={routerNext}
-                on:previous={routerPrevious}
-                mobile={$mobile}
-                locale={$_} />
+            <Backup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
         </Route>
         <Route route={AppRoute.Import} transition={false}>
             <Import on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
