@@ -68,7 +68,7 @@
             </div>
             {#if $viewableAccounts.length > 0}
                 <div
-                    class="grid grid-cols-{$viewableAccounts.length <= 2 ? $viewableAccounts.length : '3'} auto-rows-max {$viewableAccounts.length <= 2 ? 'gap-4' : 'gap-2.5'} w-full flex-auto overflow-y-auto h-1 -mr-2 pr-2">
+                    class="grid grid-cols-{$viewableAccounts.length <= 2 ? $viewableAccounts.length : '3'} auto-rows-max {$viewableAccounts.length <= 2 ? 'gap-4' : 'gap-2.5'} w-full flex-auto overflow-y-auto h-1 -mr-2 pr-2 scroll-secondary">
                     {#each $viewableAccounts as account}
                         <AccountTile
                             color={account.color}
