@@ -1,15 +1,22 @@
 <script lang="typescript">
     import { Button, Illustration, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
     import { createEventDispatcher, onDestroy } from 'svelte'
-    import { migration, getInputIndexesForBundle, createMigrationBundle, sendMigrationBundle } from 'shared/lib/migration'
+    import {
+        migration,
+        getInputIndexesForBundle,
+        createMigrationBundle,
+        sendMigrationBundle,
+        unmigratedBundles,
+        hasMigratedAllBundles,
+    } from 'shared/lib/migration'
 
     export let locale
     export let mobile
 
     let busy = false
     let migrated = false
-    let fullSuccess = false
     let migratingFundsMessage = ''
+    let fullSuccess = $hasMigratedAllBundles
 
     const { didComplete, bundles } = $migration
 
@@ -21,6 +28,10 @@
         errorText: null,
     }))
 
+    const unsubscribe = hasMigratedAllBundles.subscribe((_hasMigrationAllBundles) => {
+        fullSuccess = _hasMigrationAllBundles
+    })
+
     const dispatch = createEventDispatcher()
 
     function handleBackClick() {
@@ -31,8 +42,67 @@
         didComplete.set(true)
         dispatch('next')
     }
+
     function handleRerunClick() {
-        migrateFunds()
+        const _unmigratedBundles = $unmigratedBundles
+        const unmigratedBundleIndexes = _unmigratedBundles.map((_bundle) => _bundle.index)
+
+        // TODO: What happens if this fails too? Do we proceed?
+        transactions = transactions.map((item) => {
+            if (unmigratedBundleIndexes.includes(item.index)) {
+                return { ...item, status: 1 }
+            }
+
+            return item
+        })
+
+        busy = true
+        migrated = false
+        migratingFundsMessage = locale('views.migrate.migrating')
+
+        _unmigratedBundles.reduce(
+            (promise, transaction, idx) =>
+                // @ts-ignore
+                promise
+                    .then((acc) => {
+                        if (transaction.bundleHash) {
+                            return sendMigrationBundle(transaction.bundleHash)
+                        }
+
+                        return createMigrationBundle(getInputIndexesForBundle(transaction), false).then((result) =>
+                            sendMigrationBundle(result.payload.bundleHash)
+                        )
+                    })
+                    .then(() => {
+                        transactions = transactions.map((_transaction) => {
+                            if (_transaction.index === transaction.index) {
+                                return { ..._transaction, status: 2 }
+                            }
+
+                            return _transaction
+                        })
+
+                        if (idx === _unmigratedBundles.length - 1) {
+                            finish()
+                        }
+                    })
+                    .catch((error) => {
+                        console.error(error)
+
+                        if (idx === _unmigratedBundles.length - 1) {
+                            finish()
+                        }
+
+                        transactions = transactions.map((_transaction, i) => {
+                            if (_transaction.index === transaction.index) {
+                                return { ..._transaction, status: -1, errorText: 'Migration failed' }
+                            }
+
+                            return _transaction
+                        })
+                    }),
+            Promise.resolve([])
+        )
     }
 
     function finish() {
@@ -40,6 +110,8 @@
         migrated = true
         migratingFundsMessage = locale('actions.continue')
     }
+
+    onDestroy(unsubscribe)
 
     function migrateFunds() {
         // TODO: Rethink if we need to only update status of the transaction we are actually sending
@@ -91,7 +163,6 @@
                     }),
             Promise.resolve([])
         )
-        fullSuccess = false
     }
 </script>
 

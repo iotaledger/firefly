@@ -18,12 +18,14 @@ export const MINING_TIMEOUT_SECONDS = 60
 
 export const MINIMUM_WEIGHT_MAGNITUDE = 14;
 
-const MAX_INPUTS_PER_BUNDLE = 2
+const MAX_INPUTS_PER_BUNDLE = 1
 
 interface Bundle {
+    index: number;
     shouldMine: boolean;
     bundleHash?: string;
     crackability?: number;
+    migrated: boolean;
     selected: boolean;
     inputs: Input[];
 }
@@ -188,6 +190,18 @@ export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAG
         // }, 4000)
         api.sendMigrationBundle([MIGRATION_NODE], bundleHash, mwm, {
             onSuccess() {
+                const { bundles } = get(migration);
+
+                // Update bundle and mark it as migrated
+                bundles.update((_bundles) => {
+                    return _bundles.map((bundle) => {
+                        if (bundle.bundleHash === bundleHash) {
+                            return Object.assign({}, bundle, { migrated: true })
+                        }
+
+                        return bundle
+                    })
+                })
                 resolve()
             },
             onError(error) {
@@ -223,20 +237,27 @@ export const assignBundleHash = (inputAddressIndexes: number[], migrationBundle:
 
 const selectInputsForUnspentAddresses = (inputs: Input[]) => {
     const createChunks = (_inputs: Input[]) => {
-        const chunks = [];
+        let chunks = [];
 
         _inputs.forEach(_input => {
-            const chunk = chunks
-                .find(_chunk => {
-                    const sum = _chunk.reduce((acc, chunkInput) => acc + chunkInput.balance);
+            const chunkIndex = chunks
+                .findIndex(_chunk => {
+                    const sum = _chunk.reduce((acc, chunkInput) => acc + chunkInput.balance, 0);
 
-                    return (sum + _input >= MINIMUM_MIGRATION_BALANCE) && _chunk.length < MAX_INPUTS_PER_BUNDLE;
+                    return (sum + _input.balance) >= MINIMUM_MIGRATION_BALANCE && _chunk.length < MAX_INPUTS_PER_BUNDLE;
                 });
 
-            if (chunk)
-                chunk.push(_input);
-            else
-                chunks.push([_input]);
+            if (chunkIndex > -1) {
+                chunks = chunks.map((_chunk, idx) => {
+                    if (idx === chunkIndex) {
+                        return [..._chunk, _input]
+                    }
+
+                    return _chunk
+                })
+            } else {
+                chunks = [...chunks, [_input]]
+            }
         });
 
         return chunks;
@@ -245,7 +266,7 @@ const selectInputsForUnspentAddresses = (inputs: Input[]) => {
     const chunks = createChunks(inputs);
 
     const { chunksWithCorrectBalance, chunksWithLessBalance } = chunks.reduce((acc, chunk) => {
-        if (chunk.reduce((acc, chunkInput) => acc + chunkInput.balance) < MAX_INPUTS_PER_BUNDLE) {
+        if (chunk.reduce((acc, chunkInput) => acc + chunkInput.balance) < MINIMUM_MIGRATION_BALANCE, 0) {
             acc.chunksWithLessBalance.push(chunk);
         } else {
             acc.chunksWithCorrectBalance.push(chunk);
@@ -294,9 +315,9 @@ export const prepareBundles = () => {
     const unspentInputChunks = selectInputsForUnspentAddresses(unspent)
 
     bundles.set([
-        ...spent.map((input) => ({ selected: input.balance >= MINIMUM_MIGRATION_BALANCE, shouldMine: true, inputs: [input] })),
-        ...unspentInputChunks.map((inputs) => ({ selected: true, shouldMine: false, inputs }))
-    ])
+        ...spent.map((input) => ({ migrated: false, selected: input.balance >= MINIMUM_MIGRATION_BALANCE, shouldMine: true, inputs: [input] })),
+        ...unspentInputChunks.map((inputs) => ({ migrated: false, selected: true, shouldMine: false, inputs }))
+    ].map((_, index) => ({ ..._, index })))
 };
 
 export const getInputIndexesForBundle = (bundle: Bundle): number[] => {
@@ -333,4 +354,12 @@ export const toggleInputSelection = (address: string): void => {
 export const selectedBundlesWithSpentAddresses = derived(get(migration).bundles, (_bundles) => _bundles.filter((bundle) =>
     bundle.selected === true &&
     bundle.shouldMine === true
+))
+
+export const unmigratedBundles = derived(get(migration).bundles, (_bundles) => _bundles.filter((bundle) =>
+    bundle.migrated === false
+))
+
+export const hasMigratedAllBundles = derived(get(migration).bundles, (_bundles) => _bundles.length && _bundles.every((bundle) =>
+    bundle.migrated === true
 ))
