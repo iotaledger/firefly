@@ -1,10 +1,3 @@
-export enum Network {
-    Mainnet = 'mainnet',
-    Testnet = 'testnet',
-    Devnet = 'devnet',
-    Comnet = 'comnet',
-}
-
 export interface Node {
     url: string
     auth?: {
@@ -17,7 +10,7 @@ export interface Node {
 export interface ClientOptions {
     nodes?: Node[]
     node?: Node
-    network?: Network
+    network?: string
     localPow?: boolean
     nodeSyncEnabled?: boolean
     nodePoolUrls?: string[]

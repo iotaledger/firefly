@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Button, ButtonCheckbox, Illustration, Input, OnboardingLayout, Text } from 'shared/components'
-    import { cleanupSignup, developerMode } from 'shared/lib/app'
+    import { appSettings } from 'shared/lib/appSettings'
+    import { cleanupSignup } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
     import { getTrimmedLength, validateFilenameChars } from 'shared/lib/helpers'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -93,7 +94,7 @@
                 autofocus
                 disabled={busy}
                 submitHandler={() => handleContinueClick(SetupType.New)} />
-            {#if $developerMode}
+            {#if $appSettings.developerMode}
                 <ButtonCheckbox icon="dev" bind:value={isDeveloperProfile}>{locale('general.developerProfile')}</ButtonCheckbox>
             {/if}
         </div>

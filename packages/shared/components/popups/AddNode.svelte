@@ -1,23 +1,37 @@
 <script lang="typescript">
     import { Button, Input, Password, Text } from 'shared/components'
+    import { appSettings } from 'shared/lib/appSettings'
     import { stripSpaces, stripTrailingSlash } from 'shared/lib/helpers'
-    import { isNodeUrlValid } from 'shared/lib/network'
+    import { getNodeNetworkInfo, isNodeUrlValid } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
-    
+
     export let locale
     export let onSuccess
     export let node
     export let nodes
+    export let network
 
     let url = node?.url ?? ''
     let username = node?.auth?.username ?? ''
     let password = node?.auth?.password ?? ''
+    let isDisabled = node?.disabled ?? false
+    let isPrimary = node?.isPrimary ?? false
     let addressError = ''
+    let addressWarn = ''
     let authError = ''
     let isBusy = false
 
+    $:{
+        addressWarn = ''
+        url = stripSpaces(url)
+        if ($appSettings.developerMode && url.length > 4 && url.startsWith("http:")) {
+            addressWarn = locale('popups.node.httpWarning')
+        }
+    }
+
     async function addCustomNode() {
+        let newNetworkId
         try {
             isBusy = true
             addressError = ''
@@ -31,9 +45,23 @@
             if (node) {
                 allNodes = allNodes.filter((n) => n.url !== node.url)
             }
-            const validErr = isNodeUrlValid(allNodes, url)
+            const validErr = isNodeUrlValid(allNodes, url, $appSettings.developerMode)
             if (validErr) {
                 addressError = locale(validErr)
+            }
+            if (!addressError) {
+                const info = await getNodeNetworkInfo(url)
+                newNetworkId = info?.networkId
+
+                if (!newNetworkId) {
+                    addressError = locale('error.node.networkNotReachable')
+                } else if (newNetworkId !== network) {
+                    addressError = locale('error.node.networkMismatch', { 
+                        values: {
+                            networkId: newNetworkId
+                        } 
+                    })
+                }
             }
         } catch (err) {
             showAppNotification({
@@ -51,8 +79,12 @@
                         url,
                         auth: {
                             username,
-                            password
-                        }
+                            password,
+                        },
+                        networkId: newNetworkId,
+                        disabled: isDisabled,
+                        isPrimary: isPrimary,
+                        isCustom: true,
                     })
                 }
             }
@@ -63,6 +95,9 @@
 <Text type="h4" classes="mb-5">{locale(`popups.node.title${node ? 'Update' : 'Add'}`)}</Text>
 <div class="w-full h-full">
     <Input bind:value={url} placeholder={locale('popups.node.nodeAddress')} error={addressError} disabled={isBusy} autofocus />
+    {#if addressWarn}
+        <Text overrideColor classes="text-orange-500 mt-2">{addressWarn}</Text>
+    {/if}
     <Input
         classes="mt-3"
         bind:value={username}

@@ -34,7 +34,14 @@ export interface UserSettings {
     currency: AvailableExchangeRates
     automaticNodeSelection: boolean
     includeOfficialNodes: boolean
-    disabledNodes: string[] | undefined
+    customNodes: {
+        url: string
+        disabled: boolean
+        networkId: string
+        isPrimary: boolean
+    }[] | undefined
+    networkId: string | undefined
+    customNetworkId: string | undefined
     /** Lock screen timeout in minutes */
     lockScreenTimeout: number,
     chartSelectors: ChartSelectors
@@ -100,7 +107,9 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
             currency: AvailableExchangeRates.USD,
             automaticNodeSelection: true,
             includeOfficialNodes: true,
-            disabledNodes: undefined,
+            customNodes: undefined,
+            networkId: undefined,
+            customNetworkId: undefined,
             lockScreenTimeout: 5,
             chartSelectors: {
                 currency: AvailableExchangeRates.USD,

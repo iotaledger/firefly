@@ -235,7 +235,10 @@
                 "setAsPrimary": "Set as primary",
                 "removeNode": "Remove node",
                 "includeOfficialNodeList": "Include official node list",
-                "noNodes": "There are no nodes, automatic selection will be used instead."
+                "noNodes": "There are no nodes, automatic selection will be used instead.",
+                "network": "Network",
+                "customNetwork": "Custom network",
+                "customNetworkId": "Custom network id"
             },
             "proofOfWork": {
                 "title": "Proof of work",
@@ -364,7 +367,8 @@
             "optionalUsername": "Username (optional)",
             "optionalPassword": "Password (optional)",
             "setAsPrimaryNode": "Set as primary node",
-            "removeConfirmation": "Are you sure you want to remove this node?"
+            "removeConfirmation": "Are you sure you want to remove this node?",
+            "httpWarning": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         },
         "errorLog": {
             "title": "Error Log",
@@ -652,10 +656,12 @@
         },
         "node": {
             "invalid": "Please enter a valid URL.",
-            "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
+            "https": "HTTPS is required. Enabled developer mode to use unsecured HTTP connections.",
             "duplicate": "This node has already been added.",
             "unsynced": "The node is not in sync.",
-            "noSynced": "No synced nodes are available."
+            "noSynced": "No synced nodes are available.",
+            "networkMismatch": "The network id for your node is \"{networkId}\" which does not match the current network.",
+            "networkNotReachable": "The network id for your node could not be retrieved, unable to add node."
         },
         "global": {
             "generic": "Something went wrong."
