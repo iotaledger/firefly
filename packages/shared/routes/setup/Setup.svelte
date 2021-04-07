@@ -4,7 +4,7 @@
     import { Electron } from 'shared/lib/electron'
     import { getTrimmedLength, validateFilenameChars } from 'shared/lib/helpers'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { createProfile, disposeNewProfile, newProfile, profiles } from 'shared/lib/profile'
+    import { cleanupInProgressProfiles, createProfile, disposeNewProfile, newProfile, profileInProgress, profiles } from 'shared/lib/profile'
     import { SetupType } from 'shared/lib/typings/routes'
     import { getStoragePath, initialise, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
@@ -50,6 +50,7 @@
             }
 
             profile = createProfile(trimmedProfileName, isDeveloperProfile)
+            profileInProgress.set(trimmedProfileName)
 
             try {
                 busy = true
@@ -68,9 +69,10 @@
         }
     }
 
-    function handleBackClick() {
+    async function handleBackClick() {
         cleanupSignup()
         disposeNewProfile()
+        await cleanupInProgressProfiles()
         dispatch('previous')
     }
 </script>

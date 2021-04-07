@@ -79,7 +79,7 @@
             {/if}
         </div>
     </div>
-    <div class="mb-6 h-full overflow-y-auto pr-2">
+    <div class="mb-6 h-full overflow-y-auto pr-2 scroll-secondary">
         <div class="mb-5">
             <Text secondary>{locale('general.status')}</Text>
             <Text smaller>{locale(`general.${confirmed ? 'confirmed' : 'pending'}`)}</Text>

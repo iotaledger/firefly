@@ -13,6 +13,11 @@ export const MARKETDATA_ENDPOINTS = ['https://nodes.iota.works/api/market']
  */
 const DEFAULT_MARKETDATA_ENDPOINT_TIMEOUT = 5000
 
+/**
+ * Default interval for polling the market data
+ */
+ const DEFAULT_MARKETDATA_POLL_INTERVAL = 300000 // 5 minutes
+
 export enum HistoryDataProps {
     ONE_HOUR = '1h',
     TWENTY_FOUR_HOURS = '24h',
@@ -140,6 +145,14 @@ export const TIMEFRAME_MAP = {
     [HistoryDataProps.TWENTY_FOUR_HOURS]: Timeframes.TWENTY_FOUR_HOURS,
     [HistoryDataProps.SEVEN_DAYS]: Timeframes.SEVEN_DAYS,
     [HistoryDataProps.ONE_MONTH]: Timeframes.ONE_MONTH,
+}
+
+/**
+ * Poll the market data at an interval.
+ */
+ export async function pollMarketData(): Promise<void> {
+    await fetchMarketData()
+    setInterval(async () => fetchMarketData(), DEFAULT_MARKETDATA_POLL_INTERVAL)
 }
 
 /**
