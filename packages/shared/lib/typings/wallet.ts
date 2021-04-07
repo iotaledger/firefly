@@ -32,12 +32,15 @@ export interface Duration {
     nanos: number
 }
 
-export function backup(bridge: Bridge, __ids: CommunicationIds, destinationPath: string) {
+export function backup(bridge: Bridge, __ids: CommunicationIds, destination: string, password: string) {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
         cmd: 'Backup',
-        payload: destinationPath,
+        payload: {
+            destination, 
+            password
+        },
     })
 }
 

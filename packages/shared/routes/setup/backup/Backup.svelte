@@ -67,10 +67,11 @@
                     } else {
                         const dest = await Electron.getStrongholdBackupDestination(getDefaultStrongholdName())
                         if (dest) {
+
                             busy = true
                             await asyncStoreMnemonic(get(mnemonic).join(' '))
                             await asyncCreateAccount()
-                            await asyncBackup(dest)
+                            await asyncBackup(dest, $strongholdPassword)
                             updateProfile('lastStrongholdBackupTime', new Date())
                             dispatch('next')
                         }

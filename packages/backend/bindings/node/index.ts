@@ -163,8 +163,8 @@ export const api = {
   reattach: function (accountId: AccountIdentifier, messageId: string): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _reattach(sendMessage, __ids, accountId, messageId)
   },
-  backup: function (destinationPath: string): ((__ids: CommunicationIds) => Promise<string>) {
-    return (__ids: CommunicationIds) => _backup(sendMessage, __ids, destinationPath)
+  backup: function (destinationPath: string, password: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _backup(sendMessage, __ids, destinationPath, password)
   },
   restoreBackup: function (backupPath: string, password: string): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _restoreBackup(sendMessage, __ids, backupPath, password)

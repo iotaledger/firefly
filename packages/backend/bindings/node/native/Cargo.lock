@@ -1822,7 +1822,7 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "0.5.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#30d9a4b6660d4110b26e18b2223a585538f2ecdd"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#261c6dbd34048af0a8f4d54dc66c9e7aa975ad39"
 dependencies = [
  "async-trait",
  "bee-common 0.3.1-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
@@ -1901,7 +1901,7 @@ dependencies = [
 [[package]]
 name = "iota-core"
 version = "0.2.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#30d9a4b6660d4110b26e18b2223a585538f2ecdd"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#261c6dbd34048af0a8f4d54dc66c9e7aa975ad39"
 dependencies = [
  "iota-client 0.5.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?branch=dev)",
 ]
@@ -2005,7 +2005,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=migration#bf9b38a1ce6b256119af012906301aeb14a70e7c"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=migration#10ace615cd94ab33839a0c4bd91f81001f1406b4"
 dependencies = [
  "async-trait",
  "backtrace",
@@ -2099,9 +2099,9 @@ dependencies = [
 
 [[package]]
 name = "libc"
-version = "0.2.92"
+version = "0.2.93"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "56d855069fafbb9b344c0f962150cd2c1187975cb1c22c1522c240d8c4986714"
+checksum = "9385f66bf6105b241aa65a61cb923ef20efc665cb9f9bb50ac2f0c4b7f378d41"
 
 [[package]]
 name = "libp2p"
@@ -4104,9 +4104,9 @@ checksum = "879f6906492a7cd215bfa4cf595b600146ccfac0c79bcbd1f3000162af5e8b06"
 
 [[package]]
 name = "unicode-bidi"
-version = "0.3.4"
+version = "0.3.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "49f2bd0c6468a8230e1db229cff8029217cf623c767ea5d60bfbd42729ea54d5"
+checksum = "eeb8be209bb1c96b7c177c7420d26e04eccacb0eeae6b980e35fcb74678107e0"
 dependencies = [
  "matches",
 ]
