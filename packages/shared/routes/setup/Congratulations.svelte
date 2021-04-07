@@ -1,7 +1,7 @@
 <script lang="typescript">
-    import { Box, Button, Icon, Illustration, OnboardingLayout, Text } from 'shared/components'
+    import { Button, Icon, Illustration, OnboardingLayout, Text } from 'shared/components'
     import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
-    import { newProfile, saveProfile, setActiveProfile, activeProfile } from 'shared/lib/profile'
+    import { newProfile, saveProfile, setActiveProfile, profileInProgress } from 'shared/lib/profile'
     import { formatUnit } from 'shared/lib/units'
     import { createEventDispatcher, onMount } from 'svelte'
     import { get } from 'svelte/store'
@@ -23,6 +23,8 @@
         // When this component mounts, ensure that the profile is persisted in the local storage.
         saveProfile($newProfile)
         setActiveProfile($newProfile.id)
+
+        profileInProgress.set(undefined)
         newProfile.set(null)
     })
 

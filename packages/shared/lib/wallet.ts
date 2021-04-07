@@ -414,7 +414,7 @@ export const initialiseListeners = () => {
                     .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
                     .replace('{{account}}', account.alias);
 
-                showSystemNotification({ type: "info", message: notificationMessage });
+                showSystemNotification({ type: "info", message: notificationMessage, contextData: { type: "valueTx", accountId: account.id } });
             }
         },
         onError(error) {
@@ -476,21 +476,21 @@ export const initialiseListeners = () => {
             // Notify user
             const messageKey = confirmed ? 'confirmed' : 'failed'
 
-            const _notify = (senderAccountAlias: string | null = null) => {
+            const _notify = (accountFrom: string | null = null, accountTo: string | null = null) => {
                 let notificationMessage
 
-                if (senderAccountAlias) {
+                if (accountFrom) {
                     notificationMessage = localize(`notifications.${messageKey}Internal`)
                         .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
-                        .replace('{{senderAccount}}', senderAccountAlias)
-                        .replace('{{receiverAccount}}', account.alias)
+                        .replace('{{senderAccount}}', accountFrom)
+                        .replace('{{receiverAccount}}', accountTo)
                 } else {
                     notificationMessage = localize(`notifications.${messageKey}`)
                         .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
                         .replace('{{account}}', account.alias)
                 }
 
-                showSystemNotification({ type: "info", message: notificationMessage })
+                showSystemNotification({ type: "info", message: notificationMessage, contextData: { type: messageKey, accountId: account.id } });
             }
 
             const { confirmedInternalMessageIds } = get(wallet)
@@ -507,9 +507,13 @@ export const initialiseListeners = () => {
                 } else {
                     // If this is an internal message, check if we have already receive confirmation state of this message
                     if (Object.keys(messageIds).includes(message.id)) {
-                        _notify(
-                            get(accounts).find((account) => account.index === messageIds[message.id]).alias
-                        );
+                        const account1 = get(accounts).find((account) => account.index === messageIds[message.id]).alias
+                        const account2 = account.alias
+                        if (essence.data.incoming) {
+                            _notify(account1, account2);
+                        } else {
+                            _notify(account2, account1);
+                        }
 
                         confirmedInternalMessageIds.update((ids) => {
                             delete ids[message.id]

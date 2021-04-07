@@ -56,7 +56,7 @@
     {#if $selectedMessage}
         <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} {locale} />
     {:else}
-        <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2">
+        <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
             {#if transactions.length}
                 {#each transactions as transaction}
                     <ActivityRow onClick={() => handleTransactionClick(transaction)} {...transaction} {color} />
