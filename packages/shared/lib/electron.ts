@@ -18,7 +18,7 @@ export type NativeProgress = {
 }
 
 export interface INotificationManager {
-    notify(message: string): void
+    notify(message: string, contextData: any): void
 }
 
 export interface IDeepLinkManager {
@@ -44,6 +44,7 @@ interface ElectronEventMap {
     "version-progress": NativeProgress;
     "version-complete": void;
     "version-error": Error;
+    "notification-activated": any;
 }
 
 export interface IElectron {
