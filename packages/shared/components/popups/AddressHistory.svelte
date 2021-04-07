@@ -17,8 +17,8 @@
             return a.internal ? 1 : -1
         }
 
-        return a.keyIndex - b.keyIndex;
-    }) ?? [] // TODO: sort by date when exposed
+        return b.keyIndex - a.keyIndex ;
+    }) ?? []
 
     const date = get(i18nDate)(new Date(), {
         year: 'numeric',
