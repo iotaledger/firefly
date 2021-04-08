@@ -1204,7 +1204,7 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "0.5.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?rev=7a9ef60fea1c865d59c744e0f6cc54371a4cebda#7a9ef60fea1c865d59c744e0f6cc54371a4cebda"
+source = "git+https://github.com/iotaledger/iota.rs?rev=52a6a02763f0faa5c0f75e6474950eccfd0e6efa#52a6a02763f0faa5c0f75e6474950eccfd0e6efa"
 dependencies = [
  "async-trait",
  "bee-common",
@@ -1229,11 +1229,44 @@ dependencies = [
 ]
 
 [[package]]
+name = "iota-client"
+version = "0.5.0-alpha.3"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#52a6a02763f0faa5c0f75e6474950eccfd0e6efa"
+dependencies = [
+ "async-trait",
+ "bee-common",
+ "bee-crypto 0.2.0-alpha",
+ "bee-message",
+ "bee-pow",
+ "bee-rest-api",
+ "futures",
+ "hex",
+ "iota-crypto 0.3.0 (git+https://github.com/iotaledger/crypto.rs.git?rev=b849861b86c3f7357b7477de4253b7352b363627)",
+ "log",
+ "num_cpus",
+ "regex",
+ "reqwest",
+ "serde 1.0.125",
+ "serde_json",
+ "thiserror",
+ "tokio",
+ "url",
+]
+
+[[package]]
 name = "iota-core"
 version = "0.2.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?rev=7a9ef60fea1c865d59c744e0f6cc54371a4cebda#7a9ef60fea1c865d59c744e0f6cc54371a4cebda"
+source = "git+https://github.com/iotaledger/iota.rs?rev=52a6a02763f0faa5c0f75e6474950eccfd0e6efa#52a6a02763f0faa5c0f75e6474950eccfd0e6efa"
 dependencies = [
- "iota-client",
+ "iota-client 0.5.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?rev=52a6a02763f0faa5c0f75e6474950eccfd0e6efa)",
+]
+
+[[package]]
+name = "iota-core"
+version = "0.2.0-alpha.3"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#52a6a02763f0faa5c0f75e6474950eccfd0e6efa"
+dependencies = [
+ "iota-client 0.5.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?branch=dev)",
 ]
 
 [[package]]
@@ -1301,7 +1334,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#3ebc2b9eeb6ee94e156299ca5a769e548bbc8e38"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#8963d59383c4378039bd38594b8be29565a9e96d"
 dependencies = [
  "async-trait",
  "backtrace",
@@ -1310,7 +1343,7 @@ dependencies = [
  "futures",
  "getset",
  "hex",
- "iota-core",
+ "iota-core 0.2.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?rev=52a6a02763f0faa5c0f75e6474950eccfd0e6efa)",
  "iota-crypto 0.4.2",
  "iota-stronghold",
  "log",
@@ -3165,7 +3198,7 @@ checksum = "6a02e4885ed3bc0f2de90ea6dd45ebcbb66dacffe03547fadbb0eeae2770887d"
 name = "wallet-actor-system"
 version = "0.1.0"
 dependencies = [
- "iota-core",
+ "iota-core 0.2.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?branch=dev)",
  "iota-wallet",
  "log",
  "once_cell",
