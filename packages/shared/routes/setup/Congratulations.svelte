@@ -1,13 +1,13 @@
 <script lang="typescript">
     import { Button, Icon, Illustration, OnboardingLayout, Text } from 'shared/components'
     import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
-    import { newProfile, saveProfile, setActiveProfile, profileInProgress } from 'shared/lib/profile'
+    import { Electron } from 'shared/lib/electron'
+    import { LOG_FILE_NAME, migration } from 'shared/lib/migration'
+    import { activeProfile, newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { formatUnit } from 'shared/lib/units'
+    import { getStoragePath } from 'shared/lib/wallet'
     import { createEventDispatcher, onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { getStoragePath } from 'shared/lib/wallet'
-    import { LOG_FILE_NAME, migration } from 'shared/lib/migration'
-    import { Electron } from 'shared/lib/electron'
 
     export let locale
     export let mobile
