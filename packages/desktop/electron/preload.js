@@ -19,6 +19,15 @@ const Electron = {
     updateActiveProfile(id) {
         activeProfileId = id
     },
+    removeProfileFolder(profilePath) {
+        ipcRenderer.invoke('get-path', 'userData').then((userDataPath) => {
+            // Check that the removing profile path matches the user data path
+            // so that we don't try and remove things outside our scope
+            if (profilePath.startsWith(userDataPath)) {
+                fs.rmdirSync(profilePath, { recursive: true })
+            }
+        })
+    },
     PincodeManager,
     DeepLinkManager,
     NotificationManager,
@@ -86,6 +95,14 @@ const Electron = {
      */
     updateInstall: () => ipcRenderer.invoke('update-install'),
     /**
+     * Check for an update of the application
+     *
+     * @method updateCheck
+     *
+     * @returns void
+     */
+     updateCheck: () => ipcRenderer.invoke('update-check'),
+     /**
      * Get version details
      *
      * @method getVersionDetails

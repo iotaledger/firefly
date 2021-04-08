@@ -285,8 +285,8 @@ ipcMain.handle('diagnostics', (_e) => {
         { label: 'popups.diagnostics.platformVersion', value: os.release() },
         { label: 'popups.diagnostics.platformArchitecture', value: os.arch() },
         { label: 'popups.diagnostics.cpuCount', value: os.cpus().length },
-        { label: 'popups.diagnostics.totalMem', value: `${(os.totalmem() / 1048576 ).toFixed(1)} MB` },
-        { label: 'popups.diagnostics.freeMem', value: `${(os.freemem() / 1048576 ).toFixed(1)} MB` },
+        { label: 'popups.diagnostics.totalMem', value: `${(os.totalmem() / 1048576).toFixed(1)} MB` },
+        { label: 'popups.diagnostics.freeMem', value: `${(os.freemem() / 1048576).toFixed(1)} MB` },
         { label: 'popups.diagnostics.userPath', value: app.getPath('userData') },
     ]
     return diagnostics
@@ -359,6 +359,14 @@ ipcMain.on('deep-link-request', () => {
         windows.main.webContents.send('deep-link-params', deepLinkUrl)
         deepLinkUrl = null
     }
+})
+
+/**
+ * Proxy notification activated to the wallet application
+ */
+ipcMain.on('notification-activated', (ev, contextData) => {
+    windows.main.focus()
+    windows.main.webContents.send('notification-activated', contextData)
 })
 
 /**

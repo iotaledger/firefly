@@ -19,6 +19,7 @@ export type NotificationData = {
     id?: string
     ts?: number
     timeout?: number
+    contextData?: any
 }
 
 export const displayNotifications = writable<Array<NotificationData>>([]);
@@ -43,7 +44,7 @@ export function showNotification(notificationData: NotificationData, showSystemN
     if (showSystemNotification &&
         get(appSettings).notifications &&
         Electron.NotificationManager) {
-        Electron.NotificationManager.notify(notificationData.message)
+        Electron.NotificationManager.notify(notificationData.message, notificationData.contextData)
     } else {
         for (const action of notificationData.actions) {
             if (!action.callback) {
