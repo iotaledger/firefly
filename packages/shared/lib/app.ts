@@ -77,7 +77,6 @@ export const logout = () => {
         if (ap) {
             destroyActor(ap.id)
         }
-
         isStrongholdLocked.set(true)
         clearSendParams()
         closePopup()
