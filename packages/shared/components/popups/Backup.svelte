@@ -24,12 +24,12 @@
 
     function handleBackupClick() {
         error = ''
-        busy = true
         api.setStrongholdPassword(password, {
-            onSuccess(response) {
+            onSuccess() {
                 Electron.getStrongholdBackupDestination(getDefaultStrongholdName())
                     .then((result) => {
                         if (result) {
+                            busy = true
                             api.backup(result, password, {
                                 onSuccess() {
                                     updateProfile('lastStrongholdBackupTime', new Date())
