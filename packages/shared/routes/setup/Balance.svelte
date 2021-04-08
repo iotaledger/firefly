@@ -12,7 +12,7 @@
     let isCheckingForBalance
 
     const { seed, data } = $migration
-    const { balance, lastCheckedAddressIndex } = $data
+    const { balance } = $data
 
     const getFiatBalance = (balance) =>
         `${convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[AvailableExchangeRates.USD])} ${
@@ -42,7 +42,7 @@
 
     function checkAgain() {
         isCheckingForBalance = true
-        getMigrationData($seed, lastCheckedAddressIndex)
+        getMigrationData($seed, $data.lastCheckedAddressIndex)
             .then(() => {
                 isCheckingForBalance = false
             })

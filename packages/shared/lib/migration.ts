@@ -125,7 +125,8 @@ export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0)
                     data.update((_existingData) => {
                         return Object.assign({}, _existingData, {
                             balance: _existingData.balance + response.payload.balance,
-                            inputs: [..._existingData.inputs, ...response.payload.inputs]
+                            inputs: [..._existingData.inputs, ...response.payload.inputs],
+                            lastCheckedAddressIndex: response.payload.lastCheckedAddressIndex
                         })
                     })
                 }
