@@ -2,15 +2,15 @@
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import { loggedIn, mobile } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
-    import { refreshVersionDetails, versionDetails } from 'shared/lib/appUpdater'
+    import { getVersionDetails, pollVersion, versionDetails } from 'shared/lib/appUpdater'
     import { Electron } from 'shared/lib/electron'
     import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
     import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
-    import { fetchMarketData } from 'shared/lib/marketData'
+    import { pollMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { cleanupInProgressProfiles} from 'shared/lib/profile'
+    import { cleanupInProgressProfiles } from 'shared/lib/profile'
     import { dashboardRoute, initRouter, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
     import { AppRoute, Tabs } from 'shared/lib/typings/routes'
     import {
@@ -53,12 +53,13 @@
             initRouter()
         }, 2000)
 
-        await fetchMarketData()
+        await pollMarketData()
         await pollNetworkStatus()
 
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
         if (!devMode) {
-            await refreshVersionDetails()
+            await getVersionDetails()
+            await pollVersion()
         }
         Electron.onEvent('menu-navigate-wallet', (route) => {
             if (get(dashboardRoute) !== Tabs.Wallet) {
@@ -76,7 +77,6 @@
             }
         })
         Electron.onEvent('menu-check-for-update', async () => {
-            await refreshVersionDetails()
             openPopup({
                 type: 'version',
                 props: {
@@ -95,7 +95,7 @@
         })
 
         await cleanupInProgressProfiles()
-})
+    })
 </script>
 
 <style global type="text/scss">
@@ -157,12 +157,19 @@
                     @apply border-gray-800;
                 }
             }
-            
+
             .scroll-tertiary {
                 &::-webkit-scrollbar-thumb {
                     @apply border-gray-900;
                 }
             }
+        }
+    }
+    @layer utilities {
+        .scrollable-y {
+            @apply overflow-y-auto;
+            @apply -mr-2;
+            @apply pr-2;
         }
     }
 </style>
