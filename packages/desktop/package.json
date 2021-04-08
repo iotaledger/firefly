@@ -19,7 +19,6 @@
     },
     "dependencies": {
         "electron-log": "^4.3.1",
-        "electron-settings": "^4.0.2",
         "electron-updater": "^4.3.5",
         "keytar": "^7.3.0",
         "shared": "0.0.0",

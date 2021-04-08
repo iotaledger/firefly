@@ -2,9 +2,9 @@ import { initAutoUpdate } from './lib/appUpdater'
 const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
 const path = require('path')
 const os = require('os')
+const fs = require('fs')
 const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
-const electronSettings = require('electron-settings');
 
 /**
  * Set AppUserModelID for Windows notifications functionallity
@@ -122,7 +122,7 @@ function createWindow() {
         console.log(error) //eslint-disable-line no-console
     }
 
-    const mainWindowState = windowStateKeeper('main');
+    const mainWindowState = windowStateKeeper('main', 'settings.json');
 
     // Create the browser window
     windows.main = new BrowserWindow({
@@ -418,19 +418,17 @@ export const closeAboutWindow = () => {
     }
 }
 
-function windowStateKeeper(windowName) {
+function windowStateKeeper(windowName, settingsFilename) {
     let window, windowState;
 
     function setBounds() {
-        try {
-            const has = electronSettings.hasSync(`windowState.${windowName}`);
-            if (has) {
-                windowState = electronSettings.getSync(`windowState.${windowName}`);
-                return;
-            }
-        } catch (err) {
-            console.error("Error getting window state", err)
+        const settings = loadJsonConfig(settingsFilename)
+
+        if (settings && settings.windowState && settings.windowState[windowName]) {
+            windowState = settings.windowState[windowName]
+            return
         }
+
         // Default
         windowState = {
             x: undefined,
@@ -441,16 +439,18 @@ function windowStateKeeper(windowName) {
     }
 
     function saveState() {
+        windowState.isMaximized = window.isMaximized();
         if (!windowState.isMaximized) {
             windowState = window.getBounds();
         }
-        windowState.isMaximized = window.isMaximized();
 
-        try {
-            electronSettings.setSync(`windowState.${windowName}`, windowState);
-        } catch (err) {
-            console.error("Error saving window state", errr)
-        }
+        let settings = loadJsonConfig(settingsFilename)
+
+        settings = settings || {}
+        settings.windowState = settings.windowState || {}
+        settings.windowState[windowName] = windowState
+
+        saveJsonConfig(settingsFilename, settings)
     }
 
     function track(win) {
@@ -470,4 +470,26 @@ function windowStateKeeper(windowName) {
         isMaximized: windowState.isMaximized,
         track
     };
+}
+
+function saveJsonConfig(filename, data) {
+    try {
+        const userDataPath = app.getPath('userData')
+        const configFilename = path.join(userDataPath, filename)
+        fs.writeFileSync(configFilename, JSON.stringify(data))
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+function loadJsonConfig(filename) {
+    try {
+        const userDataPath = app.getPath('userData')
+        const configFilename = path.join(userDataPath, filename)
+        return JSON.parse(fs.readFileSync(configFilename).toString())
+    } catch (err) {
+        if (!err.message.includes('ENOENT')) {
+            console.error(err)
+        }
+    }
 }
