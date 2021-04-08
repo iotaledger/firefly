@@ -30,13 +30,6 @@
                 account,
                 hasMultipleAccounts: $accounts.length > 1,
                 deleteAccount: (id) => {
-                    // If we are deleting the first account
-                    // we must update the firstAccountId to be index 1
-                    // These should both exist as you can not delete an
-                    // account if there is not another one in the profile
-                    if (id === $accounts[0].id) {
-                        updateProfile('firstAccountId', $accounts[1].id)
-                    }
                     accounts.update((_accounts) => _accounts.filter((_account) => _account.id !== id))
                 },
             },
