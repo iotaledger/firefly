@@ -1,7 +1,6 @@
 <script lang="typescript">
-    import { HR, Icon, Modal, Text } from 'shared/components'
+    import { Icon, Modal, Text, HR } from 'shared/components'
     import { openPopup } from 'shared/lib/popup'
-    import { updateProfile } from 'shared/lib/profile'
     import { accountRoute } from 'shared/lib/router'
     import { AccountRoutes } from 'shared/lib/typings/routes'
     import type { WalletAccount } from 'shared/lib/wallet'
