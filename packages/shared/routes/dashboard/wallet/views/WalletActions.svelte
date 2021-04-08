@@ -49,17 +49,11 @@
     function handleCreateClick() {
         walletRoute.set(WalletRoutes.CreateAccount)
     }
-    function handleSendClick() {
-        walletRoute.set(WalletRoutes.Send)
-    }
-    function handleReceiveClick() {
-        walletRoute.set(WalletRoutes.Receive)
-    }
 </script>
 
 {#if $walletRoute === WalletRoutes.Init}
     <div class="p-8 pt-4 flex flex-col h-full justify-between">
-        <div data-label="accounts" class="w-full h-full flex flex-col flex-no-wrap justify-start mb-6">
+        <div data-label="accounts" class="w-full h-full flex flex-col flex-no-wrap justify-start">
             <div class="flex flex-row mb-4 justify-between items-center">
                 <Text type="h5">{locale('general.myAccounts')}</Text>
                 <Button onClick={handleCreateClick} secondary small showHoverText icon="plus">{locale('actions.create')}</Button>
@@ -81,15 +75,6 @@
                 <Text>{locale('general.noAccounts')}</Text>
             {/if}
         </div>
-        {#if $accounts.length > 0}
-            <!-- Action Send / Receive -->
-            <div class="flex flex-row justify-between space-x-4">
-                <Button xl secondary icon="receive" classes="w-1/2" onClick={handleReceiveClick}>
-                    {locale('actions.receive')}
-                </Button>
-                <Button xl secondary icon="send" classes="w-1/2" onClick={handleSendClick}>{locale('actions.send')}</Button>
-            </div>
-        {/if}
     </div>
 {:else if $walletRoute === WalletRoutes.Send}
     <Send {send} {internalTransfer} {locale} />

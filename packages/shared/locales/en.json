@@ -507,7 +507,7 @@
         "appearance": "Appearance",
         "lightTheme": "Light theme",
         "darkTheme": "Dark theme",
-        "totalBalance": "Total Balance",
+        "balance": "Balance",
         "accountBalance": "Account Balance",
         "incoming": "Incoming",
         "outgoing": "Outgoing",
