@@ -4,7 +4,6 @@
     import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
-    import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, isStrongholdLocked } from 'shared/lib/profile'
@@ -164,12 +163,7 @@
                 {
                     alias,
                     signerType: { type: 'Stronghold' },
-                    clientOptions: {
-                        node: $accounts.length > 0 ? $accounts[0].clientOptions.node : DEFAULT_NODE,
-                        nodes: $accounts.length > 0 ? $accounts[0].clientOptions.nodes : DEFAULT_NODES,
-                        // For subsequent accounts, use the network for any of the previous accounts
-                        network: $accounts.length > 0 ? $accounts[0].clientOptions.network : $network,
-                    },
+                    clientOptions: $accounts[0].clientOptions,
                 },
                 {
                     onSuccess(createAccountResponse) {

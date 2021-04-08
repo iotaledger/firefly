@@ -10,7 +10,6 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { walletSetupType } from 'shared/lib/router'
     import { mnemonic } from 'shared/lib/app'
-    import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
     import { SetupType } from 'shared/lib/typings/routes'
 
     export let locale
