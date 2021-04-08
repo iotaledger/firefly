@@ -15,6 +15,7 @@
     import QR from './QR.svelte'
     import RemoveNode from './RemoveNode.svelte'
     import Version from './Version.svelte'
+    import Transaction from './Transaction.svelte'
 
     export let locale = 'en'
     export let type = undefined
@@ -38,6 +39,7 @@
         errorLog: ErrorLog,
         deleteProfile: DeleteProfile,
         diagnostics: Diagnostics,
+        transaction: Transaction,
     }
 
     const onkey = (e) => {

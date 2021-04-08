@@ -2,6 +2,7 @@
     import { convertUnits, Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Error, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
+    import { closePopup, openPopup } from 'shared/lib/popup'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import type { TransferProgressEventType } from 'shared/lib/typings/events'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
@@ -138,14 +139,26 @@
 
                 if (!amountError && !addressError && !toError) {
                     $sendParams.amount = amountAsI
-
-                    if (selectedSendType === SEND_TYPE.INTERNAL) {
-                        internalTransfer(from.id, to.id, $sendParams.amount)
-                    } else {
-                        send(from.id, $sendParams.address, $sendParams.amount)
-                    }
+                    openPopup({
+                        type: 'transaction',
+                        props: {
+                            internal: selectedSendType === SEND_TYPE.INTERNAL,
+                            amount: $sendParams.amount,
+                            to: selectedSendType === SEND_TYPE.INTERNAL ? to.alias : $sendParams.address,
+                            onConfirm: triggerSend,
+                        },
+                    })
                 }
             }
+        }
+    }
+
+    const triggerSend = () => {
+        closePopup()
+        if (selectedSendType === SEND_TYPE.INTERNAL) {
+            internalTransfer(from.id, to.id, $sendParams.amount)
+        } else {
+            send(from.id, $sendParams.address, $sendParams.amount)
         }
     }
 
