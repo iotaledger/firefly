@@ -683,9 +683,7 @@ export const getAccountMessages = (account: WalletAccount): AccountMessage[] => 
     });
 
     return Object.values(messages)
-        .sort((a, b) => {
-            return <any>new Date(b.timestamp) - <any>new Date(a.timestamp)
-        })
+        .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
 }
 
 /**
@@ -737,9 +735,7 @@ export const getTransactions = (accounts: WalletAccount[], count = 10): AccountM
     });
 
     return Object.values(messages)
-        .sort((a, b) => {
-            return <any>new Date(b.timestamp) - <any>new Date(a.timestamp)
-        })
+        .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
         .slice(0, count)
 }
 
@@ -950,9 +946,7 @@ export const getAccountsBalanceHistory = (accounts: WalletAccount[], priceData: 
                 [HistoryDataProps.ONE_MONTH]: [],
             }
             // Sort messages from last to newest
-            let messages = account.messages.slice().sort((a, b) => {
-                return <any>new Date(b.timestamp).getTime() - <any>new Date(a.timestamp).getTime()
-            })
+            let messages = account.messages.slice().sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
             // Calculate the variations for each account
             var trackedBalance = account.rawIotaBalance;
             let accountBalanceVariations = [{ balance: trackedBalance, timestamp: new Date().toString() }]

@@ -16,6 +16,7 @@
         api,
         BalanceHistory,
         BalanceOverview,
+        getAccountMessages,
         getAccountMeta,
         getAccountsBalanceHistory,
         getTransactions,
@@ -51,6 +52,9 @@
     const selectedAccount = derived([selectedAccountId, accounts], ([$selectedAccountId, $accounts]) =>
         $accounts.find((acc) => acc.id === $selectedAccountId)
     )
+    const accountTransactions = derived([selectedAccount], ([$selectedAccount]) => {
+        return $selectedAccount ? getAccountMessages($selectedAccount) : []
+    })
 
     setContext<Writable<BalanceOverview>>('walletBalance', balanceOverview)
     setContext<Writable<WalletAccount[]>>('walletAccounts', accounts)
@@ -58,6 +62,7 @@
     setContext<Readable<AccountMessage[]>>('walletTransactions', transactions)
     setContext<Readable<WalletAccount>>('selectedAccount', selectedAccount)
     setContext<Readable<AccountsBalanceHistory>>('accountsBalanceHistory', accountsBalanceHistory)
+    setContext<Readable<AccountMessage[]>>('accountTransactions', accountTransactions)
     setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
@@ -67,7 +72,7 @@
             onSuccess(accountsResponse) {
                 const _continue = () => {
                     accountsLoaded.set(true)
-                    syncAccounts()
+                    syncAccounts(false)
                 }
 
                 if (accountsResponse.payload.length === 0) {
