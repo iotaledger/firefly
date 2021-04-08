@@ -207,7 +207,7 @@
             },
             "resyncAccounts": {
                 "title": "Hesabı Yeniden Eşitle",
-                "description": ""
+                "description": "Hesaplarınızın güncel olduğundan emin olmak için bir arka plan görevi başlatır."
             },
             "deleteProfile": {
                 "title": "Profili sil",
@@ -313,7 +313,8 @@
     "popups": {
         "password": {
             "title": "Parola gerekli",
-            "subtitle": "Stronghold'u açmak için lütfen cüzdan şifrenizi giriniz"
+            "subtitle": "Please enter your password to unlock Stronghold",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "QR Kodunuz"
@@ -336,7 +337,7 @@
         "deleteAccount": {
             "title": "%{name} kaldır",
             "body": "Bu hesabı daha sonra tekrar ekleyebilirsiniz fakat işlem geçmişinizi kaybedebilirsiniz.",
-            "typePassword": "Doğrulama için lütfen cüzdan şifrenizi giriniz.",
+            "typePassword": "Type your password to confirm.",
             "deleteAccount": "Hesabı Kaldır",
             "errorTitle": "Silinemedi: {name}",
             "errorBody1": "Bir hesabı silebilmek için hesap balansınız sıfır olmalıdır.",
@@ -344,7 +345,7 @@
             "errorBody3": "Bu hesabı silemezsiniz, en azından bir hesap bulunmalıdır."
         },
         "addressHistory": {
-            "title": "{name} hesap adres geçmişi",
+            "title": "{name} address history",
             "currentBalance": "Mevcut bakiye: {balance}"
         },
         "node": {
@@ -363,7 +364,8 @@
         },
         "deleteProfile": {
             "title": "Profili sil",
-            "confirmation": "Bu dosyayı silmek istiyor musunuz? Bu işlem geri alınamaz."
+            "confirmation": "Bu dosyayı silmek istiyor musunuz? Bu işlem geri alınamaz.",
+            "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
             "title": "Tanılama",
@@ -541,7 +543,7 @@
         "noRecentHistory": "geçmiş yok",
         "transferSyncing": "Hesap senkronize ediliyor",
         "transferSelectingInputs": "Girişlerin seçimi",
-        "transferRemainderAddress": "Generating remainder deposit address",
+        "transferRemainderAddress": "Kalan mevduat adresi oluşturuluyor",
         "transferSigning": "İşlemin imzalanması",
         "transferPow": "PoW yapılıyor",
         "transferBroadcasting": "İşlem yayınlanıyor",
@@ -586,7 +588,8 @@
         "restartInstall": "Yüklemenizi yeniden başlatın",
         "calcMinutesRemaining": "Kalan dakikalar hesaplanıyor",
         "minutesRemaining": "{minutes, plural, one {1 dakika kaldı} other {# dakika kaldı}}",
-        "copiedToClipboard": "Panoya kopyalandı"
+        "copiedToClipboard": "Panoya kopyalandı",
+        "accountsSynchronized": "Hesap senkronizasyonu tamamlandı"
     },
     "error": {
         "profile": {
@@ -606,7 +609,7 @@
             "dates": "Tarihlerin tahmin edilmesi kolaydır.",
             "common": "Bu çok yaygın bir parola.",
             "similar": "Bu, yaygın olarak kullanılan bir parolaya benziyor.",
-            "reasonWord": "Tek bir kelimenin tahmin edilmesi kolaydır.",
+            "word": "Tek bir kelimenin tahmin edilmesi kolaydır.",
             "incorrect": "Şifreniz doğru değil.",
             "length": "Şifreniz  {length, plural, one {1 character} other {# characters}} den daha fazla olamaz"
         },
@@ -619,7 +622,11 @@
             "length": "Hesap adınız {length, plural, one {1 karakter} other {# karakter}}den büyük olamaz.",
             "empty": "Yenisini oluşturmadan önce en son hesabınızı kullanmalısınız.",
             "notEmpty": "Bu hesabı silmeden önce bakiyenizi transfer etmelisiniz.",
-            "duplicate": "Bu kullanıcı adıyla bir hesap zaten var."
+            "duplicate": "Bu kullanıcı adıyla bir hesap zaten var.",
+            "tilde": "Profile ismi '~' karakteri ile başlayamaz.",
+            "control": "Profil ismi bir kontrol karakteri içermemeli.",
+            "startDot": "Profile ismi '.' karakteri ile başlayamaz.",
+            "chars": "Profil ismi belirtilen karakterlerden birini içeremez: <>:\"/\\|?*"
         },
         "send": {
             "addressLength": "Adresler {length, plural, one {1 karakter} other {# karakter}} uzunluğunda olmalıdır.",
@@ -627,8 +634,10 @@
             "amountNoFloat": "Birimler \"i\" ise, ondalık basamakları kullanamazsınız.",
             "amountInvalidFormat": "Miktar geçersiz görünüyor.",
             "amountZero": "Toplam miktar 0'dan büyük olmalıdır",
-            "wrongAddressFormat": "Adresler {prefix} ön eki ile başlar.",
+            "wrongAddressPrefix": "Adresler {prefix} ön eki ile başlar.",
+            "wrongAddressFormat": "Adres doğru şekilde biçimlendirilmemiş.",
             "insufficientFunds": "Hesap bakiyesi yetersiz.",
+            "noToAccount": "Bakiyeyi göndermek için bir hesap seçmediniz.",
             "sendingDust": "1 Mi den daha az gönderim yapamazsınız.",
             "leavingDust": "Adresinizde 1 Mi'den az bırakamazsınız."
         },

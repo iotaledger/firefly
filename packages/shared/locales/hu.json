@@ -207,7 +207,7 @@
             },
             "resyncAccounts": {
                 "title": "Számlák újraszinkronizálása",
-                "description": ""
+                "description": "Egy háttérben futó folyamatot indít, hogy számláinak adatait frissítse."
             },
             "deleteProfile": {
                 "title": "Profil törlése",
@@ -313,7 +313,8 @@
     "popups": {
         "password": {
             "title": "Jelszó szükséges",
-            "subtitle": "Adja meg tárcája jelszavát a Stronghold feloldásához"
+            "subtitle": "Please enter your password to unlock Stronghold",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "QR-kód"
@@ -336,7 +337,7 @@
         "deleteAccount": {
             "title": "{name} számla biztosan törölhető?",
             "body": "Később vissza tudja állítani ezt a számlát, de a tranzakciós előzmények elveszhetnek.",
-            "typePassword": "Adja meg tárcájának jelszavát a törlés megerősítéséhez!",
+            "typePassword": "Type your password to confirm.",
             "deleteAccount": "Számla törlése",
             "errorTitle": "{name} számla nem törölhető",
             "errorBody1": "Számlája addig nem törölhető, amíg egyenlege nem nulla.",
@@ -344,7 +345,7 @@
             "errorBody3": "Nem tudja törölni ezt a számlát, legalább eggyel rendelkeznie kell."
         },
         "addressHistory": {
-            "title": "{name} számla címeinek előzménye",
+            "title": "{name} korábban használt címei",
             "currentBalance": "Aktuális egyenleg: {balance}"
         },
         "node": {
@@ -363,7 +364,8 @@
         },
         "deleteProfile": {
             "title": "Profil törlése",
-            "confirmation": "Biztosan törölni kívánja ezt a profilt? A műveletet nem tudja visszavonni."
+            "confirmation": "Biztosan törölni kívánja ezt a profilt? A műveletet nem tudja visszavonni.",
+            "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
             "title": "Diagnosztika",
@@ -586,7 +588,8 @@
         "restartInstall": "Újraindítás a telepítés befejezéséhez",
         "calcMinutesRemaining": "Hátralévő idő kiszámítása...",
         "minutesRemaining": "{minutes, plural, one {1 perc van hátra} other {# perc van hátra}}",
-        "copiedToClipboard": "A vágólapra másolva"
+        "copiedToClipboard": "A vágólapra másolva",
+        "accountsSynchronized": "Számlák sikeresen szinkronizálva"
     },
     "error": {
         "profile": {
@@ -606,7 +609,7 @@
             "dates": "A dátumokat könnyen kitalálhatják.",
             "common": "Ez egy nagyon gyakran használt jelszó.",
             "similar": "Ez nagyon hasonlít egy gyakran használt jelszóra.",
-            "reasonWord": "Az egyetlen szóból álló jelszót könnyen kitalálhatják.",
+            "word": "Az egyetlen szóból álló jelszót könnyen kitalálhatják.",
             "incorrect": "A jelszó helytelen.",
             "length": "A jelszó nem lehet hosszabb, mint {length, plural, one {1 karakter} other {# karakter}}."
         },
@@ -619,7 +622,11 @@
             "length": "A számla neve nem lehet {length, plural, one {1 karakternél} other {# karakternél}} hosszabb.",
             "empty": "Új számlát csak akkor hozhat létre, ha már legalább egyszer használta a legutóbb létrehozott számláját.",
             "notEmpty": "A számla törlése előtt a teljes egyenlegét át kell vezetnie egy másik számlára.",
-            "duplicate": "Már létezik ilyen nevű számla."
+            "duplicate": "Már létezik ilyen nevű számla.",
+            "tilde": "A profilnév nem kezdődhet “~” karakterrel.",
+            "control": "A profilnév csak nyomtatható karaktereket tartalmazhat.",
+            "startDot": "A profilnév nem kezdődhet “.” karakterrel.",
+            "chars": "A profilnévben nem fordulhatnak elő a következő karakterek: <>:”/\\|?*"
         },
         "send": {
             "addressLength": "A címnek {length, plural, one {1 karakter} other {# karakter}} hosszúnak kell lennie.",
@@ -627,8 +634,10 @@
             "amountNoFloat": "Ha az átutalandó összeg egysége `i`, akkor nem használhat tizedesjegyeket.",
             "amountInvalidFormat": "Úgy tűnik, hogy az összeg egy érvénytelen szám.",
             "amountZero": "Az összegnek nagyobbnak kell lennie, mint 0.",
-            "wrongAddressFormat": "A címek {prefix} előtaggal kezdődnek.",
+            "wrongAddressPrefix": "A címeknek {prefix} előtaggal kell kezdődniük.",
+            "wrongAddressFormat": "A cím nem megfelelő formátumú.",
             "insufficientFunds": "Nincs elég fedezet a számláján a tranzakció végrehajtásához.",
+            "noToAccount": "Nem választott célszámlát a küldéshez.",
             "sendingDust": "1 Mi-nél kevesebbet nem lehet elküldeni.",
             "leavingDust": "Minimum 1 Mi-nek maradnia kell a számláján."
         },

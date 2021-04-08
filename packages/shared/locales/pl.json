@@ -207,7 +207,7 @@
             },
             "resyncAccounts": {
                 "title": "Resynchronizacja konta",
-                "description": ""
+                "description": "Uruchamia zadanie w tle, aby upewnić się, że Twoje konta pozostaną aktualne."
             },
             "deleteProfile": {
                 "title": "Usuwanie profilu",
@@ -313,7 +313,8 @@
     "popups": {
         "password": {
             "title": "Hasło wymagane",
-            "subtitle": "Podaj hasło swojego portfela, aby odblokować Stronghold"
+            "subtitle": "Please enter your password to unlock Stronghold",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "Twój kod QR"
@@ -336,7 +337,7 @@
         "deleteAccount": {
             "title": "Usunąć {name}?",
             "body": "Możesz dodać to konto później, ale możesz utracić historię transakcji.",
-            "typePassword": "Wpisz hasło portfela, aby potwierdzić.",
+            "typePassword": "Type your password to confirm.",
             "deleteAccount": "Usuń konto",
             "errorTitle": "Nie można usunąć {name}",
             "errorBody1": "Aby usunąć konto, Twoje saldo musi wynosić 0.",
@@ -363,7 +364,8 @@
         },
         "deleteProfile": {
             "title": "Usuwanie profilu",
-            "confirmation": "Czy na pewno chcesz usunąć ten profil? Tej operacji nie można cofnąć."
+            "confirmation": "Czy na pewno chcesz usunąć ten profil? Tej operacji nie można cofnąć.",
+            "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
             "title": "Diagnostyka",
@@ -586,7 +588,8 @@
         "restartInstall": "Uruchom ponownie, aby zainstalować",
         "calcMinutesRemaining": "Obliczanie pozostałych minut...",
         "minutesRemaining": "{minutes, plural, one {pozostała 1 minuta} few {pozostały # minuty} many {pozostało # minut} other {pozostało # minut}}",
-        "copiedToClipboard": "Skopiowano do schowka"
+        "copiedToClipboard": "Skopiowano do schowka",
+        "accountsSynchronized": "Synchronizacja konta zakończona"
     },
     "error": {
         "profile": {
@@ -606,7 +609,7 @@
             "dates": "Daty są łatwe do odgadnięcia.",
             "common": "To jest bardzo popularne hasło.",
             "similar": "To jest podobne do powszechnie używanego hasła.",
-            "reasonWord": "Jedno słowo jest łatwe do odgadnięcia.",
+            "word": "Jedno słowo jest łatwe do odgadnięcia.",
             "incorrect": "Twoje hasło jest niepoprawne.",
             "length": "Twoje hasło nie może być dłuższe niż {length, plural, one {1 znak} few {# znaki} many {# znaków} other {# znaków}}."
         },
@@ -619,7 +622,11 @@
             "length": "Nazwa konta nie może być dłuższa niż {length, plural, one {1 znak} few {# znaki} many {# znaków} other {# znaków}}.",
             "empty": "Musisz użyć swojego ostatniego konta przed utworzeniem nowego.",
             "notEmpty": "Musisz przenieść swoje środki przed usunięciem tego konta.",
-            "duplicate": "Konto o tej nazwie już istnieje."
+            "duplicate": "Konto o tej nazwie już istnieje.",
+            "tilde": "Nazwa profilu nie może zaczynać się od znaku '~'.",
+            "control": "Nazwa profilu nie może zawierać znaku kontrolnego.",
+            "startDot": "Nazwa profilu nie może zaczynać się od kropki.",
+            "chars": "Nazwa profilu nie może zawierać następujących znaków: <>:\"/\\|?*"
         },
         "send": {
             "addressLength": "Adresy powinny składać się z {length, plural, one {1 znaku} few {# znaków} many {# znaków} other {# znaków}}.",
@@ -627,8 +634,10 @@
             "amountNoFloat": "Jeśli jednostki to \"i\", nie możesz użyć miejsc po przecinku.",
             "amountInvalidFormat": "Wartość wydaje się być niepoprawna.",
             "amountZero": "Wartość musi być większa niż 0.",
-            "wrongAddressFormat": "Adresy zaczynają się od prefiksu {prefix}.",
+            "wrongAddressPrefix": "Adresy zaczynają się od prefiksu {prefix}.",
+            "wrongAddressFormat": "Adres nie jest poprawnie sformatowany.",
             "insufficientFunds": "To konto nie ma wystarczających środków.",
+            "noToAccount": "Nie wybrano konta docelowego do wysyłki środków.",
             "sendingDust": "Nie możesz wysłać mniej niż 1 Mi.",
             "leavingDust": "Na Twoim adresie nie może pozostać mniej niż 1 Mi."
         },

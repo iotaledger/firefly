@@ -207,7 +207,7 @@
             },
             "resyncAccounts": {
                 "title": "Resincronizar cuentas",
-                "description": ""
+                "description": "Comienza una tarea en segundo plano para asegurar que tus cuentas están actualizadas."
             },
             "deleteProfile": {
                 "title": "Eliminar perfil",
@@ -313,7 +313,8 @@
     "popups": {
         "password": {
             "title": "Contraseña requerida",
-            "subtitle": "Por favor, proporcione la contraseña de su billetera para desbloquear Stronghold"
+            "subtitle": "Please enter your password to unlock Stronghold",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "Tu código QR"
@@ -336,7 +337,7 @@
         "deleteAccount": {
             "title": "¿Eliminar {name}?",
             "body": "Puedes agregar esta cuenta más tarde, pero podrías perder el historial de transacciones.",
-            "typePassword": "Escribe la contraseña de tu cartera para confirmar.",
+            "typePassword": "Type your password to confirm.",
             "deleteAccount": "Eliminar cuenta",
             "errorTitle": "No se puede eliminar {name}",
             "errorBody1": "Para eliminar una cuenta ésta debe tener saldo 0.",
@@ -344,7 +345,7 @@
             "errorBody3": "No puedes eliminar esta cuenta, debes tener al menos una."
         },
         "addressHistory": {
-            "title": "{name} historial de direcciones de la cuenta",
+            "title": "{name} historial de direcciones",
             "currentBalance": "Saldo actual: {balance}"
         },
         "node": {
@@ -363,7 +364,8 @@
         },
         "deleteProfile": {
             "title": "Eliminar perfil",
-            "confirmation": "¿Está seguro que desea eliminar este perfil? Esta operación no se puede deshacer."
+            "confirmation": "¿Está seguro que desea eliminar este perfil? Esta operación no se puede deshacer.",
+            "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
             "title": "Diagnóstico",
@@ -586,7 +588,8 @@
         "restartInstall": "Reiniciar para instalar",
         "calcMinutesRemaining": "Calculando minutos restantes...",
         "minutesRemaining": "{minutes, plural, one {1 minuto restante} other {# minutos restantes}}",
-        "copiedToClipboard": "Copiado al portapapeles"
+        "copiedToClipboard": "Copiado al portapapeles",
+        "accountsSynchronized": "Sincronización de cuenta completa"
     },
     "error": {
         "profile": {
@@ -606,7 +609,7 @@
             "dates": "Las fechas son fáciles de adivinar.",
             "common": "Esta es una contraseña muy común.",
             "similar": "Esto es similar a una contraseña común.",
-            "reasonWord": "Una sola palabra es fácil de adivinar.",
+            "word": "Una sola palabra es fácil de adivinar.",
             "incorrect": "Tu contraseña es incorrecta.",
             "length": "Tu contraseña no puede ser más larga de {length, plural, one {1 character} other {# caracteres}}."
         },
@@ -619,7 +622,11 @@
             "length": "Tu nombre de cuenta no puede tener más de {length, plural, one {1 carácter} other {# caracteres}}.",
             "empty": "Debes usar tu última cuenta antes de crear una nueva.",
             "notEmpty": "Debes transferir tu saldo antes de eliminar esta cuenta.",
-            "duplicate": "Ya existe una cuenta con este nombre."
+            "duplicate": "Ya existe una cuenta con este nombre.",
+            "tilde": "El nombre de perfil no puede empezar con el carácter '~'.",
+            "control": "El nombre de perfil no puede contener un caracter de control.",
+            "startDot": "El nombre de perfil no puede empezar con el carácter '.'",
+            "chars": "El nombre de perfil no puede contener los siguientes caracteres <>:/\\|?*"
         },
         "send": {
             "addressLength": "Las direcciones deben tener {length, plural, one {1 carácter} other {# caracteres}} de largo.",
@@ -627,8 +634,10 @@
             "amountNoFloat": "Si las unidades son 'i' no puedes usar lugares decimales.",
             "amountInvalidFormat": "La cantidad parece ser un número no válido.",
             "amountZero": "La cantidad debe ser mayor que 0.",
-            "wrongAddressFormat": "Las direcciones comienzan con el prefijo {prefix}.",
+            "wrongAddressPrefix": "Las direcciones comienzan con el prefijo {prefix}.",
+            "wrongAddressFormat": "The address is not correctly formatted.",
             "insufficientFunds": "Esta cuenta no tiene fondos suficientes.",
+            "noToAccount": "You have not selected an account to send the funds to.",
             "sendingDust": "No puedes enviar menos de 1 Mi.",
             "leavingDust": "No puede dejar menos de 1 Mi en su dirección."
         },
