@@ -1,7 +1,8 @@
-import { get, derived, writable, Writable } from 'svelte/store'
-import type { MigrationBundle, MigrationData, Input } from 'shared/lib/typings/migration'
-import { api } from 'shared/lib/wallet'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
+import type { Input, MigrationBundle, MigrationData } from 'shared/lib/typings/migration'
+import Validator from 'shared/lib/validator'
+import { api } from 'shared/lib/wallet'
+import { derived, get, writable, Writable } from 'svelte/store'
 
 export const LOG_FILE_NAME = 'migration'
 
@@ -51,6 +52,10 @@ export const migration = writable<MigrationState>({
     bundles: writable<Bundle[]>([])
 })
 
+/*
+ * Chrysalis status
+ */
+export const chrysalisLive = writable<Boolean>(false)
 /**
  * Gets migration data and sets it to state
  * 
@@ -363,3 +368,99 @@ export const unmigratedBundles = derived(get(migration).bundles, (_bundles) => _
 export const hasMigratedAllBundles = derived(get(migration).bundles, (_bundles) => _bundles.length && _bundles.every((bundle) =>
     bundle.migrated === true
 ))
+
+/**
+ * List of chrysalis node endpoints to detect when is live
+ */
+export const CHRYSALIS_NODE_ENDPOINTS = ['https://api.hornet-0.testnet.chrysalis2.com/api/v1/info']
+/**
+* Default timeout for a request made to an endpoint
+*/
+const DEFAULT_CHRYSALIS_NODE_ENDPOINT_TIMEOUT = 5000
+/**
+* Mainnet ID used in a chrysalis node
+*/
+const MAINNET_ID = 'mainnet'
+/**
+ * Default interval for polling the market data
+ */
+const DEFAULT_CHRYSALIS_NODE_POLL_INTERVAL = 300000 // 5 minutes
+type ChrysalisNode = {
+    data: ChrysalisNodeData
+}
+type ChrysalisNodeData = {
+    networkId: string
+}
+export type ChrysalisNodeDataValidationResponse = {
+    type: 'ChrysalisNode'
+    payload: ChrysalisNode
+}
+let chrysalisStatusIntervalID = null
+/**
+ * Poll the Chrysalis mainnet status at an interval
+ */
+export async function pollChrysalisStatus(): Promise<void> {
+    await checkChrysalisStatus()
+    chrysalisStatusIntervalID = setInterval(async () => checkChrysalisStatus(), DEFAULT_CHRYSALIS_NODE_POLL_INTERVAL)
+}
+/**
+ * Stops Chrysalis mainnet poll
+ */
+function stopPoll(): void {
+    if (chrysalisStatusIntervalID) {
+        clearInterval(chrysalisStatusIntervalID)
+    }
+}
+/**
+ * Fetches Chrysalis mainnet status
+ *
+ * @method fetchMarketData
+ *
+ * @returns {Promise<void>}
+ */
+export async function checkChrysalisStatus(): Promise<void> {
+    const requestOptions: RequestInit = {
+        headers: {
+            Accept: 'application/json',
+        },
+    }
+    for (let index = 0; index < CHRYSALIS_NODE_ENDPOINTS.length; index++) {
+        const endpoint = CHRYSALIS_NODE_ENDPOINTS[index]
+        try {
+            const abortController = new AbortController()
+            const timerId = setTimeout(
+                () => {
+                    if (abortController) {
+                        abortController.abort();
+                    }
+                },
+                DEFAULT_CHRYSALIS_NODE_ENDPOINT_TIMEOUT);
+
+            requestOptions.signal = abortController.signal;
+
+            const response = await fetch(endpoint, requestOptions);
+
+            clearTimeout(timerId)
+
+            const jsonResponse: ChrysalisNode = await response.json()
+
+            const { isValid, payload } = new Validator().performValidation({
+                type: 'ChrysalisNode',
+                payload: jsonResponse,
+            })
+            if (isValid) {
+                const nodeData: ChrysalisNodeData = jsonResponse?.data
+                if (nodeData?.networkId === MAINNET_ID) {
+                    chrysalisLive.set(true)
+                    stopPoll()
+                    break
+                }
+            } else {
+                throw new Error(payload.error)
+            }
+            break
+        } catch (err) {
+            console.error(err.name === "AbortError" ? new Error(`Could not fetch from ${endpoint}.`) : err)
+        }
+    }
+}
