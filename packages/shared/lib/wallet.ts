@@ -44,10 +44,7 @@ export interface AccountMessage extends Message {
 }
 
 interface ActorState {
-    [id: string]: {
-        actor: Actor;
-        hasEventListeners: boolean;
-    }
+    [id: string]: Actor
 }
 
 export type BalanceOverview = {
@@ -183,10 +180,7 @@ export const initialiseProfileStorage = async (profile: Profile): Promise<void> 
     const userDataPath = await Electron.getUserDataPath()
     const storagePath = getStoragePath(userDataPath, profile.name)
     const actor: Actor = window['__WALLET_INIT__'].run(profile.id, storagePath)
-    actors[profile.id] = {
-        actor,
-        hasEventListeners: false
-    }
+    actors[profile.id] = actor
 }
 
 /**
@@ -199,12 +193,7 @@ export const initialiseProfileStorage = async (profile: Profile): Promise<void> 
  * @returns {void}
  */
 export const removeEventListeners = (id: string): void => {
-    if (actors[id] && actors[id].hasEventListeners) {
-        actors[id].hasEventListeners = false
-        try {
-            actors[id].actor.removeEventListeners()
-        } catch { }
-    }
+    actors[id].removeEventListeners()
 };
 
 /**
@@ -401,8 +390,6 @@ export const removeStorageAsync = () => {
  */
 export const initialiseListeners = (id: string) => {
     removeEventListeners(id)
-
-    actors[id].hasEventListeners = true
 
     /**
      * Event listener for stronghold status change
