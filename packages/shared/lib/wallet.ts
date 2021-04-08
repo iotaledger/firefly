@@ -323,7 +323,7 @@ export const asyncCreateAccount = () => {
                 signerType: { type: 'Stronghold' },
                 clientOptions: {
                     nodes: officialNodes,
-                    node: officialNodes[0],
+                    node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
                     network: get(network)
                 }
             },
