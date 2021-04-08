@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Icon, Illustration, OnboardingLayout, Text } from 'shared/components'
     import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
-    import { newProfile, saveProfile, setActiveProfile, profileInProgress } from 'shared/lib/profile'
+    import { activeProfile, newProfile, saveProfile, setActiveProfile, profileInProgress } from 'shared/lib/profile'
     import { formatUnit } from 'shared/lib/units'
     import { createEventDispatcher, onMount } from 'svelte'
     import { get } from 'svelte/store'
