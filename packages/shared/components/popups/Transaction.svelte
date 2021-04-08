@@ -1,5 +1,6 @@
 <script lang="typescript">
-    import { AvailableExchangeRates,convertToFiat,currencies,CurrencyTypes,exchangeRates } from 'shared/lib/currency'
+    import { Button, Illustration, Text } from 'shared/components'
+    import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile } from 'shared/lib/profile'
     import { formatUnit } from 'shared/lib/units'
@@ -29,7 +30,7 @@
 
 <style type="text/scss">
     .illustration {
-        :global(img){
+        :global(img) {
             max-height: 260px;
             object-position: 0 10px;
         }
