@@ -2,7 +2,7 @@ import { AvailableExchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
 import { DEFAULT_NODE } from 'shared/lib/network'
 import { generateRandomId } from 'shared/lib/utils'
-import { api, getStoragePath } from 'shared/lib/wallet'
+import { api, destroyActor, getStoragePath } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
 import type { ChartSelectors } from './chart'
 import { Electron } from './electron'
@@ -136,6 +136,7 @@ export const disposeNewProfile = () => {
                 console.error(err)
             },
         })
+        destroyActor(np.id)
     }
     newProfile.set(null)
     activeProfileId.set(null)
