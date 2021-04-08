@@ -2,6 +2,7 @@
     import { AccountTile, Button, Text } from 'shared/components'
     import { loggedIn } from 'shared/lib/app'
     import { closePopup, openPopup } from 'shared/lib/popup'
+    import { activeProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { selectedAccountId, WalletAccount } from 'shared/lib/wallet'
@@ -41,6 +42,8 @@
         }
     }
 
+    $: waitingChrysalis = $activeProfile?.migratedTransactions?.length > 0
+
     function handleAccountClick(accountId) {
         selectedAccountId.set(accountId)
         walletRoute.set(WalletRoutes.Account)
@@ -62,7 +65,9 @@
         <div data-label="accounts" class="w-full h-full flex flex-col flex-no-wrap justify-start mb-6">
             <div class="flex flex-row mb-4 justify-between items-center">
                 <Text type="h5">{locale('general.myAccounts')}</Text>
-                <Button onClick={handleCreateClick} secondary small showHoverText icon="plus">{locale('actions.create')}</Button>
+                <Button disabled={waitingChrysalis} onClick={handleCreateClick} secondary small showHoverText icon="plus">
+                    {locale('actions.create')}
+                </Button>
             </div>
             {#if $accounts.length > 0}
                 <div
@@ -74,6 +79,7 @@
                             balance={account.balance}
                             balanceEquiv={account.balanceEquiv}
                             size={$accounts.length >= 3 ? 's' : $accounts.length === 2 ? 'm' : 'l'}
+                            disabled={waitingChrysalis}
                             onClick={() => handleAccountClick(account.id)} />
                     {/each}
                 </div>
@@ -84,10 +90,12 @@
         {#if $accounts.length > 0}
             <!-- Action Send / Receive -->
             <div class="flex flex-row justify-between space-x-4">
-                <Button xl secondary icon="receive" classes="w-1/2" onClick={handleReceiveClick}>
+                <Button disabled={waitingChrysalis} xl secondary icon="receive" classes="w-1/2" onClick={handleReceiveClick}>
                     {locale('actions.receive')}
                 </Button>
-                <Button xl secondary icon="send" classes="w-1/2" onClick={handleSendClick}>{locale('actions.send')}</Button>
+                <Button disabled={waitingChrysalis} xl secondary icon="send" classes="w-1/2" onClick={handleSendClick}>
+                    {locale('actions.send')}
+                </Button>
             </div>
         {/if}
     </div>

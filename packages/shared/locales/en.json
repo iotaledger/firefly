@@ -606,7 +606,8 @@
         "passwordStrength2": "Weak",
         "passwordStrength3": "Average",
         "passwordStrength4": "Strong",
-        "creatingProfile": "Creating profile, please wait..."
+        "creatingProfile": "Creating profile, please wait...",
+        "fundMigration": "Fund migration"
     },
     "dates": {
         "today": "Today",
