@@ -206,18 +206,15 @@ export const removeEventListeners = (id: string): void => {
  * @returns {void}
  */
 export const destroyActor = (id: string): void => {
-    try {
-        if (actors[id]) {
-            removeEventListeners(id)
-            actors[id].actor.destroy()
-            delete actors[id]
-        } else {
-            console.error("Trying to delete actor when it did not exist")
-        }
-    } catch (err) {
-        console.error(err)
-
+    if (!actors[id]) {
+        throw new Error('No actor found for provided id.')
     }
+
+    // Destroy actor
+    actors[id].destroy()
+
+    // Delete actor id from state
+    delete actors[id]
 }
 
 /**
@@ -388,9 +385,7 @@ export const removeStorageAsync = () => {
  *
  * @returns {void}
  */
-export const initialiseListeners = (id: string) => {
-    removeEventListeners(id)
-
+export const initialiseListeners = () => {
     /**
      * Event listener for stronghold status change
      */

@@ -24,7 +24,6 @@
         initialiseListeners,
         isTransferring,
         prepareAccountInfo,
-        removeEventListeners,
         selectedAccountId,
         syncAccounts,
         transferState,
@@ -383,7 +382,7 @@
             await loadAccounts()
         }
 
-        initialiseListeners($activeProfile.id)
+        initialiseListeners()
 
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
