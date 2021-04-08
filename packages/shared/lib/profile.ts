@@ -11,9 +11,9 @@ import {
 } from './marketData'
 import type { Node } from './typings/client'
 
-interface MigratedTransaction {
+export interface MigratedTransaction {
     address: string;
-    balance: string;
+    balance: number;
     timestamp: string
     index: number;
 }

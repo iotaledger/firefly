@@ -3,10 +3,13 @@
     import { clearSendParams } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
+    import { Electron } from 'shared/lib/electron'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
+    import { chrysalisLive, pollChrysalisStatus } from 'shared/lib/migration'
     import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
-    import { showAppNotification } from 'shared/lib/notifications'
+    import { NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
+    import type { MigratedTransaction } from 'shared/lib/profile'
     import { activeProfile, isStrongholdLocked } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
@@ -31,8 +34,8 @@
         wallet,
         WalletAccount,
     } from 'shared/lib/wallet'
-    import { onMount, setContext } from 'svelte'
-    import { writable, derived, Readable, Writable } from 'svelte/store'
+    import { onDestroy, onMount, setContext } from 'svelte'
+    import { derived, Readable, writable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
 
     export let locale
@@ -59,7 +62,7 @@
     setContext<Writable<BalanceOverview>>('walletBalance', balanceOverview)
     setContext<Writable<WalletAccount[]>>('walletAccounts', accounts)
     setContext<Writable<boolean>>('walletAccountsLoaded', accountsLoaded)
-    setContext<Readable<AccountMessage[]>>('walletTransactions', transactions)
+    setContext<Readable<AccountMessage[] | MigratedTransaction[]>>('walletTransactions', transactions)
     setContext<Readable<WalletAccount>>('selectedAccount', selectedAccount)
     setContext<Readable<AccountsBalanceHistory>>('accountsBalanceHistory', accountsBalanceHistory)
     setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
@@ -385,7 +388,59 @@
         }
     }
 
-    onMount(() => {
+    let chrysalisStatusUnsubscribe
+    $: if ($accountsLoaded && $activeProfile?.migratedTransactions?.length > 0) {
+        chrysalisStatusUnsubscribe = chrysalisLive.subscribe((live) => {
+            let migrationNotificationId = null
+            const idlePopupTimeout = 5000 // TODO: improve this, move idle popup logic to Wallet.svelte
+            if (typeof live === 'boolean' && live === false) {
+                setTimeout(() => {
+                    migrationNotificationId = showAppNotification({
+                        type: 'warning',
+                        message: locale('notifications.migratedAccountChrysalisDown'),
+                        progress: undefined,
+                        timeout: NOTIFICATION_TIMEOUT_NEVER,
+                        actions: [
+                            {
+                                label: locale('actions.viewStatus'),
+                                isPrimary: true,
+                                callback: () => Electron.openUrl('chrysalis.iota.org'),
+                            },
+                            {
+                                label: locale('actions.dismiss'),
+                                callback: () => removeDisplayNotification(migrationNotificationId),
+                            },
+                        ],
+                    })
+                }, idlePopupTimeout)
+            } else {
+                removeDisplayNotification(migrationNotificationId)
+                if ($activeProfile?.migratedTransactions?.length > 0) {
+                    setTimeout(() => {
+                        migrationNotificationId = showAppNotification({
+                            type: 'warning',
+                            message: locale('notifications.migratedAccountChrysalisUp'),
+                            progress: undefined,
+                            timeout: NOTIFICATION_TIMEOUT_NEVER,
+                            actions: [
+                                {
+                                    label: locale('actions.viewStatus'),
+                                    isPrimary: true,
+                                    callback: () => Electron.openUrl('chrysalis.iota.org'),
+                                },
+                                {
+                                    label: locale('actions.dismiss'),
+                                    callback: () => removeDisplayNotification(migrationNotificationId),
+                                },
+                            ],
+                        })
+                    }, idlePopupTimeout)
+                }
+            }
+        })
+    }
+
+    onMount(async () => {
         if (!$accountsLoaded) {
             getAccounts()
         }
@@ -404,6 +459,15 @@
         })
 
         addProfileCurrencyPriceData()
+        if ($activeProfile?.migratedTransactions?.length > 0) {
+            await pollChrysalisStatus()
+        }
+    })
+
+    onDestroy(() => {
+        if (chrysalisStatusUnsubscribe) {
+            chrysalisStatusUnsubscribe()
+        }
     })
 </script>
 

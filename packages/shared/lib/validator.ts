@@ -1,10 +1,11 @@
-import { ResponseTypes } from './typings/bridge'
-import type { MessageResponse } from './typings/bridge'
+import type { MarketDataValidationResponse } from 'shared/lib/marketData'
+import type { ChrysalisNodeDataValidationResponse } from 'shared/lib/migration'
 import type { Account, SyncedAccount } from './typings/account'
+import type { Address } from './typings/address'
+import type { MessageResponse } from './typings/bridge'
+import { ResponseTypes } from './typings/bridge'
 import type { Message } from './typings/message'
 import type { StrongholdStatus } from './typings/wallet'
-import type { Address } from './typings/address'
-import type { MarketDataValidationResponse } from 'shared/lib/marketData'
 
 type Validators =
     | IdValidator
@@ -677,6 +678,8 @@ export default class ValidatorService {
             [ResponseTypes.TransferProgress]: this.createBaseEventValidator().getFirst(),
             // Market data
             MarketData: new ValidatorChainBuilder().add(new TypeValidator()).getFirst(),
+            // Chrysalis node
+            ChrysalisNode: new ValidatorChainBuilder().add(new TypeValidator()).getFirst(),
         }
     }
 
@@ -711,7 +714,7 @@ export default class ValidatorService {
      *
      * @returns {ValidationResponse}
      */
-    performValidation(response: MessageResponse | MarketDataValidationResponse): ValidationResponse {
+    performValidation(response: MessageResponse | MarketDataValidationResponse | ChrysalisNodeDataValidationResponse): ValidationResponse {
         return this.validators[response.type].isValid(response)
     }
 }
