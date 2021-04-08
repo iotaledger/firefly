@@ -3,7 +3,7 @@
     import { Electron } from 'shared/lib/electron'
     import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
-    import { openPopup, closePopup } from 'shared/lib/popup'
+    import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { getDefaultStrongholdName, PIN_LENGTH } from 'shared/lib/utils'
     import { api, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
@@ -76,13 +76,13 @@
         openPopup({
             type: 'password',
             props: {
-                onSubmit: (password) => {
+                onSuccess: (password) => {
                     exportBusy = true
                     exportMessage = locale('general.exportingStronghold')
                     exportStronghold(password, _callback)
-                    closePopup()
                 },
-                subtitle: locale('popups.password.backup')
+                returnPassword: true,
+                subtitle: locale('popups.password.backup'),
             },
         })
     }
