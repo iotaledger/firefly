@@ -60,14 +60,14 @@
             </div>
             {#if $accounts.length > 0}
                 <div
-                    class="grid grid-cols-{$accounts.length <= 2 ? $accounts.length : '3'} auto-rows-max {$accounts.length <= 2 ? 'gap-4' : 'gap-2.5'} w-full flex-auto overflow-y-auto h-1 -mr-2 pr-2 scroll-secondary">
+                    class="grid {$accounts.length === 1 ? 'grid-cols-1' : 'grid-cols-2'} auto-rows-max gap-4 w-full flex-auto overflow-y-auto h-1 -mr-2 pr-2 scroll-secondary">
                     {#each $accounts as account}
                         <AccountTile
                             color={account.color}
                             name={account.alias}
                             balance={account.balance}
                             balanceEquiv={account.balanceEquiv}
-                            size={$accounts.length >= 3 ? 's' : $accounts.length === 2 ? 'm' : 'l'}
+                            size={$accounts.length === 1 ? 'l' : 'm'}
                             onClick={() => handleAccountClick(account.id)} />
                     {/each}
                 </div>
