@@ -332,7 +332,8 @@
             "backupDescription": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
             "backupWarning": "If you lose your backup and recovery phrase you will lose access to your funds.",
             "notBackedUp": "Not backed up",
-            "notBackedUpDescription": "You have not backed up your Stronghold"
+            "notBackedUpDescription": "You have not backed up your Stronghold",
+            "exporting": "Exporting..."
         },
         "deleteAccount": {
             "title": "Remove {name}?",

@@ -1,13 +1,13 @@
 <script lang="typescript">
-    import { Button, Password, Text, Logo } from 'shared/components'
+    import { Button, Logo, Password, Spinner, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
     import { getBackupWarningColor } from 'shared/lib/helpers'
-    import { closePopup, openPopup } from 'shared/lib/popup'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { closePopup } from 'shared/lib/popup'
     import { updateProfile } from 'shared/lib/profile'
+    import { getDefaultStrongholdName } from 'shared/lib/utils'
     import { api } from 'shared/lib/wallet'
     import { date } from 'svelte-i18n'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { getDefaultStrongholdName } from 'shared/lib/utils';
 
     export let locale
     export let lastBackupDate
@@ -15,30 +15,46 @@
 
     let color = getBackupWarningColor(lastBackupDate)
     let password = ''
+    let busy = false
+    let error = ''
 
     function handleCancelClick() {
         closePopup()
     }
 
     function handleBackupClick() {
-        Electron.getStrongholdBackupDestination(getDefaultStrongholdName())
-            .then((result) => {
-                if (result) {
-                    api.backup(result, password, {
-                        onSuccess() {
-                            updateProfile('lastStrongholdBackupTime', new Date())
-                            closePopup()
-                        },
-                        onError(err) {
-                            showAppNotification({
-                                type: 'error',
-                                message: locale(err.error),
+        error = ''
+        busy = true
+        api.setStrongholdPassword(password, {
+            onSuccess(response) {
+                Electron.getStrongholdBackupDestination(getDefaultStrongholdName())
+                    .then((result) => {
+                        if (result) {
+                            api.backup(result, password, {
+                                onSuccess() {
+                                    updateProfile('lastStrongholdBackupTime', new Date())
+                                    busy = false
+                                    closePopup()
+                                },
+                                onError(err) {
+                                    busy = false
+                                    error = locale(err.error)
+                                },
                             })
-                        },
+                        } else {
+                            busy = false
+                        }
                     })
-                }
-            })
-            .catch((error) => console.error(error))
+                    .catch((error) => {
+                        busy = false
+                        console.error(error)
+                    })
+            },
+            onError(err) {
+                busy = false
+                error = locale(err.error)
+            }
+        })
     }
 </script>
 
@@ -81,12 +97,18 @@
                 bind:value={password}
                 showRevealToggle
                 {locale}
+                disabled={busy}
                 placeholder={locale('general.password')}
-                autofocus />
+                autofocus 
+                error={error} />
             <div class="flex flex-row justify-between w-full space-x-4 px-8">
-                <Button secondary classes="w-1/2" onClick={handleCancelClick}>{locale('actions.cancel')}</Button>
-                <Button classes="w-1/2" type="submit" form="password-popup-form" disabled={!password || password.length === 0}>
-                    {locale('actions.saveBackup')}
+                <Button secondary classes="w-1/2" onClick={handleCancelClick} disabled={busy}>{locale('actions.cancel')}</Button>
+                <Button classes="w-1/2" type="submit" form="password-popup-form" disabled={!password || password.length === 0 || busy}>
+                    {#if busy}
+                        <Spinner busy={true} message={locale('popups.backup.exporting')} classes="justify-center" />
+                    {:else}
+                        {locale('actions.saveBackup')}
+                    {/if}
                 </Button>
             </div>
         </form>
