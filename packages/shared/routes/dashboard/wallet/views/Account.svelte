@@ -3,7 +3,7 @@
     import type { WalletAccount } from 'shared/lib/wallet'
     import { getAccountMessages } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import type { Readable, Writable } from 'svelte/store'
+    import type { Readable } from 'svelte/store'
     import { AccountActions, AccountBalance, AccountHistory, AccountNavigation, BarChart, LineChart } from '.'
 
     export let locale

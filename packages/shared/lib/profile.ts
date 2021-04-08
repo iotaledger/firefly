@@ -26,7 +26,7 @@ interface Profile {
      */
     settings: UserSettings
     isDeveloperProfile: boolean
-    deletedAccounts?: string[]
+    hiddenAccounts?: string[]
 }
 
 /**
@@ -40,7 +40,7 @@ export interface UserSettings {
     customNodes: Node[]
     /** Lock screen timeout in minutes */
     lockScreenTimeout: number
-    showDeletedAccounts?: boolean
+    showHiddenAccounts?: boolean
     chartSelectors: ChartSelectors
 }
 

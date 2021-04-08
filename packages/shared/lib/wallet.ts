@@ -834,7 +834,7 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
             addresses: mergeProps(storedAccount.addresses, syncedAccount.addresses, 'address'),
             messages: mergeProps(storedAccount.messages, syncedAccount.messages, 'id'),
         })
-    })
+    }).sort((a, b) => a.index - b.index)
 
     if (newAccounts.length) {
         const totalBalance = {

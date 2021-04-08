@@ -18,7 +18,7 @@
 
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
     const accountsLoaded = getContext<Writable<boolean>>('walletAccountsLoaded')
-    const deletedAccounts = $activeProfile?.deletedAccounts ?? []
+    const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
 
     let startInit
 
@@ -75,7 +75,7 @@
                             name={account.alias}
                             balance={account.balance}
                             balanceEquiv={account.balanceEquiv}
-                            deleted={deletedAccounts.includes(account.id)}
+                            hidden={hiddenAccounts.includes(account.id)}
                             size={$viewableAccounts.length >= 3 ? 's' : $viewableAccounts.length === 2 ? 'm' : 'l'}
                             onClick={() => handleAccountClick(account.id)} />
                     {/each}

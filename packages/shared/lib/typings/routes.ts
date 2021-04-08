@@ -87,7 +87,7 @@ export enum AdvancedSettings {
     DeveloperMode = 'developerMode',
     DeepLinks = 'deepLinks',
     ResyncAccounts = 'resyncAccounts',
-    showDeletedAccounts = 'showDeletedAccounts',
+    HiddenAccounts = 'hiddenAccounts',
     ErrorLog = 'errorLog',
     Diagnostics = 'diagnostics',
     StateExport = 'stateExport',

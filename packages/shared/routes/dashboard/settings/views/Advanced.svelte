@@ -17,12 +17,12 @@
     let outsourcePowChecked = get(activeProfile)?.settings.outsourcePow
     let deepLinkingChecked = $appSettings.deepLinking
     let automaticNodeSelection = get(activeProfile)?.settings.automaticNodeSelection
-    let showDeletedAccounts = get(activeProfile)?.settings.showDeletedAccounts
+    let showHiddenAccounts = get(activeProfile)?.settings.showHiddenAccounts
 
     $: updateProfile('settings.outsourcePow', outsourcePowChecked)
     $: $appSettings.deepLinking = deepLinkingChecked
     $: updateProfile('settings.automaticNodeSelection', automaticNodeSelection)
-    $: updateProfile('settings.showDeletedAccounts', showDeletedAccounts)
+    $: updateProfile('settings.showHiddenAccounts', showHiddenAccounts)
 
     $: if (automaticNodeSelection) {
         if ($accounts.some((account) => !account.clientOptions.nodes.length)) {
@@ -237,10 +237,10 @@
             </Button>
         </section>
         <HR classes="pb-5 mt-5 justify-center" />
-        <section id="showDeletedAccounts" class="w-3/4">
-            <Text type="h4" classes="mb-3">{locale('views.settings.showDeletedAccounts.title')}</Text>
-            <Text type="p" secondary classes="mb-5">{locale('views.settings.showDeletedAccounts.description')}</Text>
-            <Checkbox label={locale('actions.showDeletedAccounts')} bind:checked={showDeletedAccounts} />
+        <section id="hiddenAccounts" class="w-3/4">
+            <Text type="h4" classes="mb-3">{locale('views.settings.hiddenAccounts.title')}</Text>
+            <Text type="p" secondary classes="mb-5">{locale('views.settings.hiddenAccounts.description')}</Text>
+            <Checkbox label={locale('actions.showHiddenAccounts')} bind:checked={showHiddenAccounts} />
         </section>
     {/if}
     <HR classes="pb-5 mt-5 justify-center" />

@@ -53,16 +53,34 @@
         if (!$activeProfile) {
             return []
         }
-        return $activeProfile.settings.showDeletedAccounts
-            ? $accounts
-            : $accounts.filter((a) => !$activeProfile.deletedAccounts?.includes(a.id))
+
+        if ($activeProfile.settings.showHiddenAccounts) {
+            let sortedAccounts = $accounts.sort((a, b) => a.index - b.index)
+
+            // If the last account is "hidden" and has no value, messages or history treat it as "deleted"
+            // This account will get re-used if someone creates a new one
+            if (sortedAccounts.length > 1 && $activeProfile.hiddenAccounts) {
+                const lastAccount = sortedAccounts[sortedAccounts.length - 1]
+                if (
+                    $activeProfile.hiddenAccounts.includes(lastAccount.id) &&
+                    lastAccount.rawIotaBalance === 0 &&
+                    lastAccount.messages.length === 0
+                ) {
+                    sortedAccounts.pop()
+                }
+            }
+
+            return sortedAccounts
+        }
+
+        return $accounts.filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id)).sort((a, b) => a.index - b.index)
     })
 
     const liveAccounts: Readable<WalletAccount[]> = derived([activeProfile, accounts], ([$activeProfile, $accounts]) => {
         if (!$activeProfile) {
             return []
         }
-        return $accounts.filter((a) => !$activeProfile.deletedAccounts?.includes(a.id))
+        return $accounts.filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id)).sort((a, b) => a.index - b.index)
     })
 
     const transactions = derived(viewableAccounts, ($viewableAccounts) => {
@@ -177,20 +195,46 @@
         })
     }
 
+    function findReuseAccount() {
+        // If the last account in the accounts list is "deleted" and has no
+        // messages on it, we can reuse it, otherwise the wallet will complain
+        // about the last account not being used
+        const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
+
+        if (hiddenAccounts.length > 0) {
+            const lastAccount = $accounts[$accounts.length - 1]
+            const hiddenAccountIndex = hiddenAccounts.indexOf(lastAccount.id)
+            if (
+                hiddenAccountIndex >= 0 &&
+                lastAccount.rawIotaBalance === 0 &&
+                lastAccount.messages &&
+                lastAccount.messages.length === 0
+            ) {
+                return lastAccount.id
+            }
+
+            // If we have restarted the app we might not have been notified of the empty account
+            // so it wont appear in the accounts list, so check in the hidden list to see
+            // if there is an id not in the accounts list
+            for (const hiddenAccount of hiddenAccounts) {
+                if (!$accounts.some((a) => a.id === hiddenAccount)) {
+                    return hiddenAccount
+                }
+            }
+        }
+    }
+
     function onCreateAccount(alias, completeCallback) {
         const _create = () => {
-            // If the last account in the accounts list is deleted and has no
-            // messages on it, we can reuse it, otherwise the wallet will complain
-            // about the last account not being used
-            const lastAccount = $accounts[$accounts.length - 1]
-            const deletedAccounts = $activeProfile?.deletedAccounts ?? []
-            const deletedAccountIndex = deletedAccounts.indexOf(lastAccount.id)
-            if (deletedAccountIndex >= 0 && lastAccount.messages && lastAccount.messages.length === 0) {
-                api.setAlias(lastAccount.id, alias, {
+            const reuseAccountId = findReuseAccount()
+            if (reuseAccountId) {
+                api.setAlias(reuseAccountId, alias, {
                     onSuccess() {
+                        let hasUpdated = false
                         accounts.update((_accounts) => {
                             return _accounts.map((account) => {
-                                if (account.id === lastAccount.id) {
+                                if (account.id === reuseAccountId) {
+                                    hasUpdated = true
                                     return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
                                         {} as WalletAccount,
                                         account,
@@ -204,8 +248,28 @@
                             })
                         })
 
-                        deletedAccounts.splice(deletedAccountIndex, 1)
-                        updateProfile('deletedAccounts', deletedAccounts)
+                        // We didn't have the account in the list to update
+                        // so we need to retrieve the details from the wallet manually
+                        if (!hasUpdated) {
+                            api.getAccounts({
+                                onSuccess(accountsResponse) {
+                                    const ac = accountsResponse.payload.find(a => a.id === reuseAccountId)
+                                    if (ac) {
+                                        getAccountMeta(reuseAccountId, (err, meta) => {
+                                            if (!err) {
+                                                const account = prepareAccountInfo(ac, meta)
+                                                accounts.update((accounts) => [...accounts, account])
+                                            }
+                                        })
+                                    }
+                                },
+                                onError() {
+                                }
+                            })
+                        }
+
+                        const hiddenAccounts = ($activeProfile?.hiddenAccounts ?? []).filter((a) => a !== reuseAccountId)
+                        updateProfile('hiddenAccounts', hiddenAccounts)
 
                         walletRoute.set(WalletRoutes.Init)
                         completeCallback()

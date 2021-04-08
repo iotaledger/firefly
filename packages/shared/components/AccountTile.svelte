@@ -7,7 +7,7 @@
     export let balanceEquiv = ''
     export let color = 'turquoise'
     export let size = 's'
-    export let deleted = false
+    export let hidden = false
 </script>
 
 <style type="text/scss">
@@ -26,7 +26,7 @@
 
 <button
     on:click={onClick}
-    class="size-{size} group rounded-xl bg-gray-100 dark:bg-gray-900 hover:bg-{color}-500 font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} {deleted ? 'opacity-50' : ''}">
+    class="size-{size} group rounded-xl bg-gray-100 dark:bg-gray-900 hover:bg-{color}-500 font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} {hidden ? 'opacity-50' : ''}">
     <div class="w-full">
         <Text
             bold
