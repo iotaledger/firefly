@@ -207,7 +207,7 @@
             },
             "resyncAccounts": {
                 "title": "Resync accounts",
-                "description": ""
+                "description": "Starts a background task to make sure your accounts are up to date."
             },
             "deleteProfile": {
                 "title": "Delete profile",
@@ -313,7 +313,8 @@
     "popups": {
         "password": {
             "title": "Password required",
-            "subtitle": "Please enter your wallet password to unlock Stronghold"
+            "subtitle": "Please enter your password to unlock Stronghold",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "Your QR code"
@@ -336,7 +337,7 @@
         "deleteAccount": {
             "title": "Remove {name}?",
             "body": "You can add this account back later but you may lose your transaction history.",
-            "typePassword": "Type your wallet password to confirm.",
+            "typePassword": "Type your password to confirm.",
             "deleteAccount": "Remove account",
             "errorTitle": "Unable to remove {name}",
             "errorBody1": "To remove an account it must have 0 balance.",
@@ -344,7 +345,7 @@
             "errorBody3": "You cannot remove this account, you must have at least one."
         },
         "addressHistory": {
-            "title": "{name} account address history",
+            "title": "{name} address history",
             "currentBalance": "Current balance: {balance}"
         },
         "node": {
@@ -363,7 +364,8 @@
         },
         "deleteProfile": {
             "title": "Delete profile",
-            "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone."
+            "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone.",
+            "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
             "title": "Diagnostics",
@@ -586,7 +588,8 @@
         "restartInstall": "Restart to install",
         "calcMinutesRemaining": "Calculating minutes remaining...",
         "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
-        "copiedToClipboard": "Copied to clipboard"
+        "copiedToClipboard": "Copied to clipboard",
+        "accountsSynchronized": "Account synchronization complete"
     },
     "error": {
         "profile": {
@@ -607,7 +610,7 @@
             "dates": "Dates are easy to guess.",
             "common": "This is a very common password.",
             "similar": "This is similar to a common password.",
-            "reasonWord": "A single word is easy to guess.",
+            "word": "A single word is easy to guess.",
             "incorrect": "Your password is incorrect.",
             "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
         },

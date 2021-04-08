@@ -120,8 +120,8 @@ export function reattach(accountId: AccountIdentifier, messageId: string): Promi
   return _reattach(sendMessage, accountId, messageId)
 }
 
-export function backup(destinationPath: string): Promise<number> {
-  return _backup(sendMessage, destinationPath)
+export function backup(destinationPath: string, password: string): Promise<number> {
+  return _backup(sendMessage, destinationPath, password)
 }
 
 export function restoreBackup(backupPath: string, password: string): Promise<number> {

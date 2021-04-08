@@ -71,7 +71,7 @@
                             busy = true
                             await storeMnemonicAsync(get(mnemonic).join(' '))
                             const createAccountPayload = await createAccountAsync()
-                            await backupAsync(dest)
+                            await backupAsync(dest, get(strongholdPassword))
                             updateProfile('lastStrongholdBackupTime', new Date())
                             updateProfile('firstAccountId', createAccountPayload.payload.id)
                             dispatch('next')

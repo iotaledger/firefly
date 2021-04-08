@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Illustration, OnboardingLayout, Icon, Text } from 'shared/components'
-    import { newProfile, saveProfile, setActiveProfile } from 'shared/lib/profile'
+    import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { createEventDispatcher, onMount } from 'svelte'
 
     export let locale
@@ -12,6 +12,7 @@
         saveProfile($newProfile)
         setActiveProfile($newProfile.id)
 
+        profileInProgress.set(undefined)
         newProfile.set(null)
     })
 

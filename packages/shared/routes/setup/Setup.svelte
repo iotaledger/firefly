@@ -3,7 +3,7 @@
     import { cleanupSignup, developerMode } from 'shared/lib/app'
     import { getTrimmedLength, validateFilenameChars } from 'shared/lib/helpers'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { createProfile, disposeNewProfile, newProfile, profiles } from 'shared/lib/profile'
+    import { cleanupInProgressProfiles, createProfile, disposeNewProfile, newProfile, profileInProgress, profiles } from 'shared/lib/profile'
     import { SetupType } from 'shared/lib/typings/routes'
     import { initialiseProfileStorage, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
@@ -49,6 +49,7 @@
             }
 
             profile = createProfile(trimmedProfileName, isDeveloperProfile)
+            profileInProgress.set(trimmedProfileName)
 
             try {
                 busy = true
@@ -69,6 +70,7 @@
     async function handleBackClick() {
         cleanupSignup()
         await disposeNewProfile()
+        await cleanupInProgressProfiles()
         dispatch('previous')
     }
 </script>

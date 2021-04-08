@@ -25,7 +25,11 @@ export const persistent = <T>(key: string, initialValue: T): Writable<T> => {
     const state = writable(value)
 
     state.subscribe(($value): void => {
-        localStorage.setItem(key, JSON.stringify($value))
+        if ($value === undefined || $value === null) {
+            localStorage.removeItem(key)
+        } else {
+            localStorage.setItem(key, JSON.stringify($value))
+        }
     })
 
     return state
@@ -101,7 +105,7 @@ export const getInitials = (name: string | undefined, maxChars: number) => {
 
 export const truncateString = (str: string = '', firstCharCount: number = 5, endCharCount: number = 5, dotCount: number = 3) => {
     const MAX_LENGTH = 13
-    if (str.length <= MAX_LENGTH) {
+    if (!str || str.length <= MAX_LENGTH) {
         return str
     }
     let convertedStr = ''

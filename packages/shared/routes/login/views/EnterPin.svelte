@@ -15,6 +15,7 @@
     let pinCode = ''
     let isBusy = false
     let pinRef
+    let shake = false
 
     /** Maximum number of consecutive (incorrect) attempts allowed to the user */
     const MAX_PINCODE_INCORRECT_ATTEMPTS = 3
@@ -24,8 +25,12 @@
 
     let timeRemainingBeforeNextAttempt = WAITING_TIME_AFTER_MAX_INCORRECT_ATTEMPTS
 
-    $: hasCorrectFormat = validatePinFormat(pinCode)
     $: hasReachedMaxAttempts = attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS
+    $: {
+        if (validatePinFormat(pinCode)) {
+            onSubmit()
+        }
+    }
 
     let buttonText = setButtonText(timeRemainingBeforeNextAttempt)
 
@@ -35,7 +40,8 @@
 
     const dispatch = createEventDispatcher()
 
-    let timerId = null
+    let maxAttemptsTimer = null
+    let shakeTimeout = null
 
     function countdown() {
         if (!hasReachedMaxAttempts) {
@@ -43,7 +49,7 @@
         }
 
         if (timeRemainingBeforeNextAttempt == -1) {
-            clearInterval(timerId)
+            clearInterval(maxAttemptsTimer)
             attempts = 0
             timeRemainingBeforeNextAttempt = WAITING_TIME_AFTER_MAX_INCORRECT_ATTEMPTS
             pinRef.resetAndFocus()
@@ -70,10 +76,21 @@
                     isBusy = false
                     attempts++
                     if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
-                        clearInterval(timerId)
-                        timerId = setInterval(countdown, 1000)
+                        clearInterval(maxAttemptsTimer)
+                        maxAttemptsTimer = setInterval(countdown, 1000)
                     } else {
-                        pinRef.resetAndFocus()
+                        shake = true
+                        shakeTimeout = setTimeout(() => {
+                            shake = false
+                            isBusy = false
+                            attempts++
+                            if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
+                                clearInterval(maxAttemptsTimer)
+                                maxAttemptsTimer = setInterval(countdown, 1000)
+                            } else {
+                                pinRef.resetAndFocus()
+                            }
+                        }, 1000)
                     }
                 }
             } catch (err) {
@@ -95,7 +112,8 @@
     }
 
     onDestroy(() => {
-        clearInterval(timerId)
+        clearInterval(maxAttemptsTimer)
+        clearTimeout(shakeTimeout)
     })
 </script>
 
@@ -114,12 +132,12 @@
             </div>
         </button>
         <div class="pt-40 pb-16 flex w-full h-full flex-col items-center justify-between">
-            <div class="w-96 flex flex-row flex-wrap justify-center mb-20">
+            <div class="w-96 flex flex-col flex-wrap items-center mb-20">
                 <Profile name={$activeProfile?.name} bgColor="blue" />
                 <Pin
                     bind:this={pinRef}
                     bind:value={pinCode}
-                    classes="mt-10"
+                    classes="mt-10 {shake && 'animate-shake'}"
                     on:submit={onSubmit}
                     disabled={hasReachedMaxAttempts || isBusy}
                     autofocus />
@@ -128,10 +146,10 @@
                               values: { attempts: attempts.toString() },
                           }) : locale('actions.enterYourPin')}
                 </Text>
+                {#if hasReachedMaxAttempts}
+                    <Text error classes="mt-6">{buttonText}</Text>
+                {/if}
             </div>
-            <Button classes="w-96" disabled={!hasCorrectFormat || hasReachedMaxAttempts || isBusy} onClick={() => onSubmit()}>
-                {hasReachedMaxAttempts ? buttonText : locale('actions.continue')}
-            </Button>
         </div>
     </div>
 {/if}

@@ -72,7 +72,7 @@
     onMount(() => {
         const elems = focusableElements()
         if (elems && elems.length > 0) {
-            elems[hideClose ? 0 : 1].focus()
+            elems[hideClose || elems.length === 1 ? 0 : 1].focus()
         }
     })
 </script>

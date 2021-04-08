@@ -3,7 +3,7 @@
     import { clearSendParams } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
-    import { priceData } from 'shared/lib/marketData'
+    import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
     import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
@@ -393,6 +393,8 @@
                 console.error(error)
             },
         })
+
+        addProfileCurrencyPriceData()
     })
 </script>
 

@@ -6,6 +6,8 @@ import {
 } from 'shared/lib/notifications'
 import { writable } from 'svelte/store'
 
+const DEFAULT_APP_UPDATER_POLL_INTERVAL = 900000 // 15 Minutes
+
 export const versionDetails = writable<VersionDetails>({
     upToDate: true,
     currentVersion: '',
@@ -109,7 +111,7 @@ export function updateDownload(): void {
             updateDisplayNotification(
                 notificationId,
                 {
-                    type: "info",
+                    ...downloadingNotification,
                     message: localize('notifications.updateReady'),
                     subMessage: localize('notifications.restartInstall'),
                     progress: undefined,
@@ -136,6 +138,7 @@ export function updateDownload(): void {
             updateDisplayNotification(
                 notificationId,
                 {
+                    ...downloadingNotification,
                     type: "error",
                     message: localize('notifications.updateError'),
                     progress: undefined,
@@ -166,7 +169,15 @@ export function updateInstall(): void {
     Electron.updateInstall()
 }
 
-export async function refreshVersionDetails(): Promise<void> {
+export function updateCheck(): void {
+    Electron.updateCheck()
+}
+
+export async function getVersionDetails(): Promise<void> {
     const verDetails = await Electron.getVersionDetails();
     versionDetails.set(verDetails)
+}
+
+export async function pollVersion(): Promise<void> {
+    setInterval(async () => updateCheck(), DEFAULT_APP_UPDATER_POLL_INTERVAL)
 }

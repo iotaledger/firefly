@@ -3,8 +3,8 @@
     import { Electron } from 'shared/lib/electron'
     import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
-    import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, isStrongholdLocked, updateProfile } from 'shared/lib/profile'
+    import { openPopup, closePopup } from 'shared/lib/popup'
+    import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { getDefaultStrongholdName, PIN_LENGTH } from 'shared/lib/utils'
     import { api, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
@@ -73,29 +73,25 @@
             }
         }
 
-        if (get(isStrongholdLocked)) {
-            openPopup({
-                type: 'password',
-                props: {
-                    onSuccess: () => {
-                        exportBusy = true
-                        exportMessage = locale('general.exportingStronghold')
-                        exportStronghold(_callback)
-                    },
+        openPopup({
+            type: 'password',
+            props: {
+                onSubmit: (password) => {
+                    exportBusy = true
+                    exportMessage = locale('general.exportingStronghold')
+                    exportStronghold(password, _callback)
+                    closePopup()
                 },
-            })
-        } else {
-            exportBusy = true
-            exportMessage = locale('general.exportingStronghold')
-            exportStronghold(_callback)
-        }
+                subtitle: locale('popups.password.backup')
+            },
+        })
     }
 
-    function exportStronghold(callback?: (cancelled: boolean, err?: string) => void) {
+    function exportStronghold(password: string, callback?: (cancelled: boolean, err?: string) => void) {
         Electron.getStrongholdBackupDestination(getDefaultStrongholdName())
             .then((result) => {
                 if (result) {
-                    api.backup(result, {
+                    api.backup(result, password, {
                         onSuccess() {
                             updateProfile('lastStrongholdBackupTime', new Date())
                             callback(false)
@@ -125,9 +121,11 @@
         } else if (newPassword !== confirmedPassword) {
             newPasswordError = locale('error.password.doNotMatch')
         } else if (passwordStrength.score !== 4) {
-            newPasswordError = passwordStrength.feedback.warning
-                ? locale(`error.password.${passwordInfo[passwordStrength.feedback.warning]}`)
-                : locale('error.password.tooWeak')
+            let errKey = 'error.password.tooWeak'
+            if (passwordStrength.feedback.warning && passwordInfo[passwordStrength.feedback.warning]) {
+                errKey = `error.password.${passwordInfo[passwordStrength.feedback.warning]}`
+            }
+            newPasswordError = locale(errKey)
         } else {
             passwordChangeBusy = true
             passwordChangeMessage = locale('general.passwordUpdating')
@@ -155,7 +153,7 @@
                     if (exportStrongholdChecked) {
                         passwordChangeMessage = locale('general.exportingStronghold')
 
-                        return exportStronghold((cancelled, err) => {
+                        return exportStronghold(newPassword, (cancelled, err) => {
                             if (cancelled) {
                                 _hideBusy('', 0)
                             } else {
