@@ -350,7 +350,8 @@
     "popups": {
         "password": {
             "title": "Password required",
-            "subtitle": "Please enter your wallet password to unlock Stronghold"
+            "subtitle": "Please enter your password to unlock Stronghold",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "Your QR code"
@@ -373,7 +374,7 @@
         "deleteAccount": {
             "title": "Remove {name}?",
             "body": "You can add this account back later but you may lose your transaction history.",
-            "typePassword": "Type your wallet password to confirm.",
+            "typePassword": "Type your password to confirm.",
             "deleteAccount": "Remove account",
             "errorTitle": "Unable to remove {name}",
             "errorBody1": "To remove an account it must have 0 balance.",
@@ -401,7 +402,7 @@
         "deleteProfile": {
             "title": "Delete profile",
             "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone.",
-            "typePassword": "Type your wallet password to confirm."
+            "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
             "title": "Diagnostics",

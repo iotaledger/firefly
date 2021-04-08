@@ -71,7 +71,7 @@
                             busy = true
                             await asyncStoreMnemonic(get(mnemonic).join(' '))
                             await asyncCreateAccount()
-                            await asyncBackup(dest, $strongholdPassword)
+                            await asyncBackup(dest, get(strongholdPassword))
                             updateProfile('lastStrongholdBackupTime', new Date())
                             dispatch('next')
                         }

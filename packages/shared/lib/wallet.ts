@@ -300,7 +300,7 @@ export const asyncVerifyMnemonic = (mnemonic) => {
     })
 }
 
-export const asyncBackup = (dest, password) => {
+export const asyncBackup = (dest: string, password: string) => {
     return new Promise<void>((resolve, reject) => {
         api.backup(dest, password, {
             onSuccess() {
