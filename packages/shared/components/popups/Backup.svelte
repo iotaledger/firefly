@@ -105,7 +105,7 @@
                 <Button secondary classes="w-1/2" onClick={handleCancelClick} disabled={busy}>{locale('actions.cancel')}</Button>
                 <Button classes="w-1/2" type="submit" form="password-popup-form" disabled={!password || password.length === 0 || busy}>
                     {#if busy}
-                        <Spinner busy={true} message={locale('popups.backup.exporting')} classes="justify-center" />
+                        <Spinner busy={true} message={locale('popups.backup.saving')} classes="justify-center" />
                     {:else}
                         {locale('actions.saveBackup')}
                     {/if}
