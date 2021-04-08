@@ -12,14 +12,15 @@ export const PERMANODE = 'https://chronicle.iota.org/api'
 
 export const ADDRESS_SECURITY_LEVEL = 2
 
-export const MINIMUM_MIGRATION_BALANCE = 1000
+/** Minimum migration balance */
+export const MINIMUM_MIGRATION_BALANCE = 1000000
 
 /** Bundle mining timeout for each bundle */
-export const MINING_TIMEOUT_SECONDS = 60
+export const MINING_TIMEOUT_SECONDS = 60 * 10
 
 export const MINIMUM_WEIGHT_MAGNITUDE = 14;
 
-const MAX_INPUTS_PER_BUNDLE = 1
+const MAX_INPUTS_PER_BUNDLE = 30
 
 interface Bundle {
     index: number;
