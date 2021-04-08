@@ -86,7 +86,7 @@ describe('binding', () => {
               })
             }
             fs.mkdirSync('./backup')
-            lib.api.backup('./backup')(communicationIds(actorId))
+            lib.api.backup('./backup', 'password')(communicationIds(actorId))
             break
           }
           case 3: {

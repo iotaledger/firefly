@@ -155,7 +155,7 @@ export const api: {
     lockStronghold(callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     setStrongholdPassword(password: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     changeStrongholdPassword(currentPassword: string, newPassword: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    backup(strongholdPath: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
+    backup(strongholdPath: string, password: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     restoreBackup(strongholdPath: string, password: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     removeAccount(accountId: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     setStoragePassword(newPinCode: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
@@ -275,9 +275,9 @@ export const asyncVerifyMnemonic = (mnemonic) => {
     })
 }
 
-export const asyncBackup = (dest) => {
+export const asyncBackup = (dest: string, password: string) => {
     return new Promise<void>((resolve, reject) => {
-        api.backup(dest, {
+        api.backup(dest, password, {
             onSuccess() {
                 resolve()
             },
@@ -389,7 +389,7 @@ export const initialiseListeners = () => {
                     .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
                     .replace('{{account}}', account.alias);
 
-                showSystemNotification({ type: "info", message: notificationMessage });
+                showSystemNotification({ type: "info", message: notificationMessage, contextData: { type: "valueTx", accountId: account.id } });
             }
         },
         onError(error) {
@@ -465,7 +465,7 @@ export const initialiseListeners = () => {
                         .replace('{{account}}', account.alias)
                 }
 
-                showSystemNotification({ type: "info", message: notificationMessage })
+                showSystemNotification({ type: "info", message: notificationMessage, contextData: { type: messageKey, accountId: account.id } });
             }
 
             const { confirmedInternalMessageIds } = get(wallet)

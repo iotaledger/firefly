@@ -4,10 +4,10 @@
     import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { Electron } from 'shared/lib/electron'
-    import { dashboardRoute, routerNext } from 'shared/lib/router'
-    import { Tabs } from 'shared/lib/typings/routes'
+    import { accountRoute, dashboardRoute, routerNext, walletRoute } from 'shared/lib/router'
+    import { AccountRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
     import { parseDeepLink } from 'shared/lib/utils'
-    import { api, STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS } from 'shared/lib/wallet'
+    import { api, selectedAccountId, STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS } from 'shared/lib/wallet'
     import { Settings, Wallet } from 'shared/routes'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
@@ -27,6 +27,22 @@
 
         Electron.onEvent('menu-logout', () => {
             logout()
+        })
+
+        Electron.onEvent('notification-activated', (contextData) => {
+            if (contextData) {
+                if (
+                    (contextData.type === 'confirmed' || contextData.type === 'failed' || contextData.type === 'valueTx') &&
+                    contextData.accountId
+                ) {
+                    selectedAccountId.set(contextData.accountId)
+                    if (get(dashboardRoute) !== Tabs.Wallet) {
+                        dashboardRoute.set(Tabs.Wallet)
+                    }
+                    walletRoute.set(WalletRoutes.Account)
+                    accountRoute.set(AccountRoutes.Init)
+                }
+            }
         })
     })
 
