@@ -429,6 +429,7 @@ export const initialiseListeners = () => {
             const { internalTransfersInProgress } = get(wallet)
             const transfers = get(internalTransfersInProgress)
 
+            // Are we tracking an internal transfer for this message id
             if (transfers[message.id]) {
                 account1 = get(accounts).find((account) => account.id === transfers[message.id].from)
                 account2 = get(accounts).find((account) => account.id === transfers[message.id].to)
@@ -440,6 +441,7 @@ export const initialiseListeners = () => {
                 account1 = get(accounts).find((account) => account.id === response.payload.accountId)
             }
 
+            // If this is a confirmation of a regular transfer update the balance overview
             if (confirmed && !essence.data.internal) {
                 const { balanceOverview } = get(wallet);
                 const overview = get(balanceOverview);
@@ -454,8 +456,10 @@ export const initialiseListeners = () => {
                 );
             }
 
+            // Update the confirmation state of all messages with this id
             const confirmationChanged = updateAllMessagesState(accounts, message.id, response.payload.confirmed)
 
+            // If the state has changed then display a notification
             if (confirmationChanged) {
                 const messageKey = confirmed ? 'confirmed' : 'failed'
 
