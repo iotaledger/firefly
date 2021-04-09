@@ -1,7 +1,5 @@
 <script lang="typescript">
     import { AccountTile, Button, Text } from 'shared/components'
-    import { loggedIn } from 'shared/lib/app'
-    import { closePopup, openPopup } from 'shared/lib/popup'
     import { activeProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
@@ -17,30 +15,6 @@
     export let isGeneratingAddress
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
-    const accountsLoaded = getContext<Writable<boolean>>('walletAccountsLoaded')
-
-    let startInit
-
-    if ($walletRoute === WalletRoutes.Init && !$accountsLoaded && $loggedIn) {
-        startInit = Date.now()
-        openPopup({
-            type: 'busy',
-            hideClose: true,
-            fullScreen: true,
-            transition: false,
-        })
-    }
-
-    $: {
-        if ($accountsLoaded) {
-            const minTimeElapsed = 3000 - (Date.now() - startInit)
-            if (minTimeElapsed < 0) {
-                closePopup()
-            } else {
-                setTimeout(() => closePopup(), minTimeElapsed)
-            }
-        }
-    }
 
     $: waitingChrysalis = $activeProfile?.migratedTransactions?.length > 0
 
