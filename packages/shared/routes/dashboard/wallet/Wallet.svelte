@@ -432,7 +432,6 @@
                         transfers[message.id] = {
                             from: senderAccountId,
                             to: receiverAccountId,
-                            amount,
                         }
 
                         return transfers

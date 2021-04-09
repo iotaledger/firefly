@@ -65,7 +65,6 @@ type WalletState = {
         [key: string]: {
             from: string
             to: string
-            amount: number
         }
     }>
 }
@@ -108,7 +107,6 @@ export const wallet = writable<WalletState>({
         [key: string]: {
             from: string
             to: string
-            amount: number
         }
     }>({})
 })
