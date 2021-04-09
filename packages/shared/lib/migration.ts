@@ -113,6 +113,7 @@ export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0)
     // })
 
     // prepareBundles()
+    prepareBundles()
     return new Promise((resolve, reject) => {
         api.getMigrationData(
             migrationSeed,
@@ -239,73 +240,114 @@ export const assignBundleHash = (inputAddressIndexes: number[], migrationBundle:
             return bundle
         })
     })
-
 };
 
-const selectInputsForUnspentAddresses = (inputs: Input[]) => {
-    const createChunks = (_inputs: Input[]) => {
-        let chunks = [];
+/**
+ * Prepares inputs (as bundles) for unspent addresses.
+ * Steps:
+ *   - Categorises inputs in two groups 1) inputs with balance >= MINIMUM_MIGRATION_BALANCE 2) inputs with balance < MINIMUM_MIGRATION_BALANCE
+ *   - Creates chunks of category 1 input addresses such that length of each chunk should not exceed MAX_INPUTS_PER_BUNDLE
+ *   - For category 2: 
+ *         - Sort the inputs in descending order based on balance;
+ *         - Pick first N inputs (where N = MAX_INPUTS_PER_BUNDLE) and see if their accumulative balance >= MINIMUM_MIGRATION_BALANCE
+ *         - If yes, then repeat the process for next N inputs. Otherwise, iterate on the remaining inputs and add it to a chunk that has space for more inputs
+ *         - If there's no chunk with space left, then ignore these funds. NOTE THAT THESE FUNDS WILL ESSENTIALLY BE LOST!
+ * 
+ * NOTE: If the total sum of provided inputs are less than MINIMUM_MIGRATION_BALANCE, then this method will just return and empty array as those funds can't be migrated.
+ * 
+ * This method gives precedence to max inputs over funds. It ensures, a maximum a bundle could have is 30 inputs and their accumulative balance >= MINIMUM_MIGRATION_BALANCE
+ * 
+ * @method selectInputsForUnspentAddresses
+ * 
+ * @params {Input[]} inputs
+ * 
+ * @returns {Input[][]}
+ */
+const selectInputsForUnspentAddresses = (inputs: Input[]): Input[][] => {
+    const totalInputsBalance: number = inputs.reduce((acc, input) => acc + input.balance, 0);
 
-        _inputs.forEach(_input => {
-            const chunkIndex = chunks
-                .findIndex(_chunk => {
-                    const sum = _chunk.reduce((acc, chunkInput) => acc + chunkInput.balance, 0);
-
-                    return (sum + _input.balance) >= MINIMUM_MIGRATION_BALANCE && _chunk.length < MAX_INPUTS_PER_BUNDLE;
-                });
-
-            if (chunkIndex > -1) {
-                chunks = chunks.map((_chunk, idx) => {
-                    if (idx === chunkIndex) {
-                        return [..._chunk, _input]
-                    }
-
-                    return _chunk
-                })
-            } else {
-                chunks = [...chunks, [_input]]
-            }
-        });
-
-        return chunks;
+    // If the total sum of unspent addresses is less than MINIMUM MIGRATION BALANCE, just return an empty array as these funds cannot be migrated
+    if (totalInputsBalance < MINIMUM_MIGRATION_BALANCE) {
+        return [];
     }
 
-    const chunks = createChunks(inputs);
-
-    const { chunksWithCorrectBalance, chunksWithLessBalance } = chunks.reduce((acc, chunk) => {
-        if (chunk.reduce((acc, chunkInput) => acc + chunkInput.balance) < MINIMUM_MIGRATION_BALANCE, 0) {
-            acc.chunksWithLessBalance.push(chunk);
+    const { inputsWithEnoughBalance, inputsWithLowBalance } = inputs.reduce((acc, input) => {
+        if (input.balance >= MINIMUM_MIGRATION_BALANCE) {
+            acc.inputsWithEnoughBalance.push(input);
         } else {
-            acc.chunksWithCorrectBalance.push(chunk);
+            acc.inputsWithLowBalance.push(input);
         }
+
+        return acc;
+    }, { inputsWithEnoughBalance: [], inputsWithLowBalance: [] })
+
+    let chunks = inputsWithEnoughBalance.reduce((acc, input, index) => {
+        const chunkIndex = Math.floor(index / MAX_INPUTS_PER_BUNDLE)
+
+        if (!acc[chunkIndex]) {
+            acc[chunkIndex] = [] // start a new chunk
+        }
+
+        acc[chunkIndex].push(input)
 
         return acc
-    }, { chunksWithCorrectBalance: [], chunksWithLessBalance: [] })
+    }, [])
 
-    let remainingChunks = []
+    const fill = (_inputs) => {
+        _inputs.every((input) => {
+            const chunkIndexWithSpaceForInput = chunks.findIndex((chunk) => chunk.length < MAX_INPUTS_PER_BUNDLE);
 
-    chunksWithLessBalance.forEach((chunk) => {
-        chunk.forEach((c) => remainingChunks.push(c))
-    })
+            if (chunkIndexWithSpaceForInput > -1) {
+                chunks = chunks.map((chunk, idx) => {
+                    if (idx === chunkIndexWithSpaceForInput) {
+                        return [...chunk, input]
+                    }
 
-    let chunkIndex = 0
+                    return chunk
+                })
 
-    remainingChunks.forEach((b) => {
-        chunksWithCorrectBalance[chunkIndex].push(b)
+                return true;
+            }
 
-        // If runs out of chunks, reset
-        if (!chunksWithCorrectBalance[chunkIndex + 1]) {
-            chunkIndex = 0
-        } else {
-            chunkIndex++
+            // If there is no space, then exit
+            return false;
+        })
+    }
+
+    const totalBalanceOnInputsWithLowBalance: number = inputsWithLowBalance.reduce((acc, input) => acc + input.balance, 0)
+
+    // If all the remaining input addresses have accumulative balance less than the minimum migration balance,
+    // Then sort the inputs in descending order and try to pair the
+    if (totalBalanceOnInputsWithLowBalance < MINIMUM_MIGRATION_BALANCE) {
+        const sorted = inputsWithLowBalance.slice().sort((a, b) => b.balance - a.balance)
+
+        fill(sorted)
+    } else {
+        let startIndex = 0
+
+        const sorted = inputsWithLowBalance.slice().sort((a, b) => b.balance - a.balance)
+        const max = Math.ceil(sorted.length / MAX_INPUTS_PER_BUNDLE);
+
+        while (startIndex < max) {
+            const inputsSubset = sorted.slice(startIndex * MAX_INPUTS_PER_BUNDLE, (startIndex + 1) * MAX_INPUTS_PER_BUNDLE)
+            const balanceOnInputsSubset = inputsSubset.reduce((acc, input) => acc + input.balance, 0);
+
+            if (balanceOnInputsSubset >= MINIMUM_MIGRATION_BALANCE) {
+                chunks = [...chunks, inputsSubset]
+            } else {
+                fill(inputsSubset)
+            }
+
+            startIndex++;
         }
-    })
+    }
 
-    return chunksWithCorrectBalance;
+    return chunks;
 };
 
 export const prepareBundles = () => {
     const { data, bundles } = get(migration)
+
     const { inputs } = get(data)
 
     // Categorise spent vs unspent inputs
