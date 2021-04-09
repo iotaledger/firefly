@@ -155,7 +155,7 @@
                         },
                     ],
                 })
-            } else {
+            } else if (typeof live === 'boolean' && live === true) {
                 removeDisplayNotification(migrationNotificationId)
                 migrationNotificationId = null
                 if ($activeProfile?.migratedTransactions?.length > 0) {
