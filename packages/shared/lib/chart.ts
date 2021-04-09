@@ -251,7 +251,7 @@ function formatLabel(timestamp: number): string {
 }
 
 function formatLineChartTooltip(data: (number | string), timestamp: number | string, showMiota: boolean = false): Tooltip {
-    const currency = get(activeProfile)?.settings.chartSelectors.currency
+    const currency = get(activeProfile)?.settings.chartSelectors.currency ?? ''
     const title: string = `${showMiota ? `1 ${Unit.Mi}: ` : ''}${formatCurrencyValue(data, currency, 3)} ${currency}`
     const label: string = get(i18nDate)(new Date(timestamp), {
         year: 'numeric',
