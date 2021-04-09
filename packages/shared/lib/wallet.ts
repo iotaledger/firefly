@@ -556,14 +556,14 @@ export const initialiseListeners = () => {
 }
 
 const updateAllMessagesState = (accounts, messageId, confirmation) => {
-    let conirmationHasChanged = false
+    let confirmationHasChanged = false
 
     accounts.update((storedAccounts) => {
         return storedAccounts.map((storedAccount) => {
             return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
                 messages: storedAccount.messages.map((_message: Message) => {
                     if (_message.id === messageId) {
-                        conirmationHasChanged = _message.confirmed !== confirmation
+                        confirmationHasChanged = _message.confirmed !== confirmation
                         _message.confirmed = confirmation
                     }
                     return _message
@@ -572,7 +572,7 @@ const updateAllMessagesState = (accounts, messageId, confirmation) => {
         })
     })
 
-    return conirmationHasChanged
+    return confirmationHasChanged
 }
 
 /**
