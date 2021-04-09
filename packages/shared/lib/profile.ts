@@ -1,8 +1,7 @@
 import { AvailableExchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
-import { DEFAULT_NODE } from 'shared/lib/network'
 import { generateRandomId } from 'shared/lib/utils'
-import { api, getStoragePath } from 'shared/lib/wallet'
+import { api, destroyActor, getStoragePath } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
 import type { ChartSelectors } from './chart'
 import { Electron } from './electron'
@@ -33,11 +32,10 @@ interface Profile {
  * User Settings
  */
 export interface UserSettings {
-    outsourcePow: boolean
     currency: AvailableExchangeRates
     automaticNodeSelection: boolean
-    node: Node
-    customNodes: Node[]
+    includeOfficialNodes: boolean
+    disabledNodes: string[] | undefined
     /** Lock screen timeout in minutes */
     lockScreenTimeout: number
     showHiddenAccounts?: boolean
@@ -101,12 +99,10 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
         lastStrongholdBackupTime: null,
         isDeveloperProfile,
         settings: {
-            outsourcePow: false,
             currency: AvailableExchangeRates.USD,
             automaticNodeSelection: true,
-            node: DEFAULT_NODE,
-            customNodes: [],
-            // Minutes
+            includeOfficialNodes: true,
+            disabledNodes: undefined,
             lockScreenTimeout: 5,
             chartSelectors: {
                 currency: AvailableExchangeRates.USD,
@@ -138,6 +134,7 @@ export const disposeNewProfile = () => {
                 console.error(err)
             },
         })
+        destroyActor(np.id)
     }
     newProfile.set(null)
     activeProfileId.set(null)

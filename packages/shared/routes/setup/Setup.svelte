@@ -4,10 +4,17 @@
     import { Electron } from 'shared/lib/electron'
     import { getTrimmedLength, validateFilenameChars } from 'shared/lib/helpers'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { cleanupInProgressProfiles, createProfile, disposeNewProfile, newProfile, profileInProgress, profiles } from 'shared/lib/profile'
+    import {
+        cleanupInProgressProfiles,
+        createProfile,
+        disposeNewProfile,
+        newProfile,
+        profileInProgress,
+        profiles,
+    } from 'shared/lib/profile'
     import { SetupType } from 'shared/lib/typings/routes'
-    import { getStoragePath, initialise, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
-    import { createEventDispatcher } from 'svelte'
+    import { destroyActor, getStoragePath, initialise, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
+    import { createEventDispatcher, onMount } from 'svelte'
     import { get } from 'svelte/store'
 
     export let locale
@@ -49,19 +56,33 @@
                 return (error = locale('error.profile.duplicate'))
             }
 
-            profile = createProfile(trimmedProfileName, isDeveloperProfile)
-            profileInProgress.set(trimmedProfileName)
+            const previousInitializedId = $newProfile?.id
+            const nameChanged = $newProfile?.name !== trimmedProfileName
+
+            // If the name has changed from the previous initialization
+            // then make sure we cleanup the last profile and actor
+            if (nameChanged && previousInitializedId) {
+                // The initialized profile name has changed
+                // so we need to destroy the previous actor
+                destroyActor(previousInitializedId)
+            }
 
             try {
                 busy = true
-                const userDataPath = await Electron.getUserDataPath()
-                initialise($newProfile.id, getStoragePath(userDataPath, $newProfile.name))
+
+                if (nameChanged) {
+                    profile = createProfile(trimmedProfileName, isDeveloperProfile)
+                    profileInProgress.set(trimmedProfileName)
+
+                    const userDataPath = await Electron.getUserDataPath()
+                    initialise($newProfile.id, getStoragePath(userDataPath, $newProfile.name))
+                }
 
                 dispatch('next', { setupType })
             } catch (err) {
                 showAppNotification({
                     type: 'error',
-                    message: locale(err.error),
+                    message: locale(err.error ? err.error : 'error.global.generic'),
                 })
             } finally {
                 busy = false
