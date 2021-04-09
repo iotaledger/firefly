@@ -177,6 +177,9 @@ export const getStoragePath = (appPath: string, profileName: string): string => 
 }
 
 export const initialise = (id: string, storagePath: string): void => {
+    if (Object.keys(actors).length > 0) {
+        console.error("Initialise called when another actor already initialised")
+    }
     const actor: Actor = window['__WALLET_INIT__'].run(id, storagePath)
 
     actors[id] = actor
@@ -205,15 +208,15 @@ export const removeEventListeners = (id: string): void => {
  * @returns {void}
  */
 export const destroyActor = (id: string): void => {
-    if (!actors[id]) {
-        throw new Error('No actor found for provided id.')
+    if (actors[id]) {
+        try {
+            actors[id].destroy()
+        } catch (err) {
+            console.error(err)
+        } finally {
+            delete actors[id]
+        }
     }
-
-    // Destroy actor
-    actors[id].destroy()
-
-    // Delete actor id from state
-    delete actors[id]
 }
 
 /**
