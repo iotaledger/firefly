@@ -4,7 +4,7 @@ use actors::{dispatch, DispatchMessage, WalletActor, WalletActorMsg};
 use iota::common::logger::logger_init;
 pub use iota::common::logger::LoggerConfigBuilder;
 use iota_wallet::{
-    account_manager::{AccountManager, ManagerStorage, DEFAULT_STORAGE_FOLDER},
+    account_manager::{AccountManager, DEFAULT_STORAGE_FOLDER},
     event::{
         on_balance_change, on_broadcast, on_confirmation_state_change, on_error,
         on_new_transaction, on_reattachment, on_stronghold_status_change, on_transfer_progress,
@@ -94,7 +94,6 @@ pub async fn init<A: Into<String>, F: Fn(String) + Send + Sync + 'static>(
                 Some(path) => path.as_ref().to_path_buf(),
                 None => PathBuf::from(DEFAULT_STORAGE_FOLDER),
             },
-            ManagerStorage::Sqlite,
             None,
         )
         .unwrap() //safe to unwrap, the storage password is None ^

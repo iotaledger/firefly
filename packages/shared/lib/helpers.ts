@@ -25,7 +25,11 @@ export const persistent = <T>(key: string, initialValue: T): Writable<T> => {
     const state = writable(value)
 
     state.subscribe(($value): void => {
-        localStorage.setItem(key, JSON.stringify($value))
+        if ($value === undefined || $value === null) {
+            localStorage.removeItem(key)
+        } else {
+            localStorage.setItem(key, JSON.stringify($value))
+        }
     })
 
     return state
@@ -101,7 +105,7 @@ export const getInitials = (name: string | undefined, maxChars: number) => {
 
 export const truncateString = (str: string = '', firstCharCount: number = 5, endCharCount: number = 5, dotCount: number = 3) => {
     const MAX_LENGTH = 13
-    if (str.length <= MAX_LENGTH) {
+    if (!str || str.length <= MAX_LENGTH) {
         return str
     }
     let convertedStr = ''
@@ -197,3 +201,21 @@ export const convertHexToRGBA = (hexCode: string, opacity: number = 100) => {
 
     return `rgba(${r},${g},${b},${opacity / 100})`;
 };
+
+/**
+ * Strip trailing slashes from the text
+ * @param str The text to strip the values from
+ * @returns The stripped text
+ */
+export const stripTrailingSlash = (str) => {
+    return str ? str.replace(/\/+$/, '') : ''
+}
+
+/**
+ * Strip spaces from the text
+ * @param str The text to strip the values from
+ * @returns The stripped text
+ */
+ export const stripSpaces = (str) => {
+    return str ? str.replace(/ /g, '') : ''
+}

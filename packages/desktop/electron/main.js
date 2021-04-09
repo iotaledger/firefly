@@ -134,6 +134,7 @@ function createWindow() {
         minHeight: 720,
         titleBarStyle: 'hidden',
         frame: process.platform === 'linux',
+        icon: process.platform === 'linux' ? path.join(__dirname, '../assets/icons/linux/icon256x256.png') : undefined,
         webPreferences: {
             ...defaultWebPreferences,
             preload: paths.preload,
@@ -369,6 +370,14 @@ ipcMain.on('deep-link-request', () => {
         windows.main.webContents.send('deep-link-params', deepLinkUrl)
         deepLinkUrl = null
     }
+})
+
+/**
+ * Proxy notification activated to the wallet application
+ */
+ipcMain.on('notification-activated', (ev, contextData) => {
+    windows.main.focus()
+    windows.main.webContents.send('notification-activated', contextData)
 })
 
 /**
