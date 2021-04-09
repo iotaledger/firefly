@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Stuur, ontvang & bestuur jou IOTA",
+            "title": "Stuur, ontvang en bestuur u IOTA-tokens",
             "body": "Firefly is die amptelike beursie van IOTA."
         },
         "legal": {
@@ -32,29 +32,29 @@
             "body": "Kies jou beursie se tema."
         },
         "setup": {
-            "title": "Stel jou beursie op",
+            "title": "Stel u beursie op",
             "body1": "U kan verskeie gebruikersprofiele skep om u tokens apart te hou en privaatheid te verbeter.",
             "body2": "Kom ons begin nou met jou eerste profielnaam. Jy kan later nog profiele byvoeg.",
             "profileName": "Profiel Naam"
         },
         "secure": {
-            "title": "Beveilig jou beursie",
-            "body1": "Stoor en print die Recovery Kit PDF form uit.",
-            "body2": "As jy die Recovery Kit invul en veilig stoor, sal jy jou beursie altyd kan herwin."
+            "title": "Beveilig U beursie",
+            "body1": "Stoor en druk die Recovery Kit PDF form uit.",
+            "body2": "As U die Recovery Kit invul en veilig stoor, sal U jou beursie altyd kan herwin."
         },
         "password": {
             "title": "Skep 'n wagwoord",
-            "body1": "Jy het 'n sterk wagwoord nodig om jou fondse te beskerm. Gebruik 'n kombinasie van woorde en vermy algemene frases, name of datums.",
+            "body1": "U het 'n sterk wagwoord nodig om U fondse te beskerm. Gebruik 'n kombinasie van woorde en vermy algemene frases, name of datums.",
             "body2": "Dit word aanbeveel dat jy jou wagwoord in u Recovery Kit neerskryf."
         },
         "protect": {
             "title": "Protect your wallet",
             "body1": "Stel 'n login PIN op om seker te maak dat net jy jou beursie kan toegang.",
-            "body2": "Hou jou PIN veilig!"
+            "body2": "Hou U PIN veilig!"
         },
         "pin": {
             "title": "Stel PIN-kode op",
-            "body1": "Tik 'n 6-syfer PIN hieronder. Jy sal gevra word om jou PIN in te voer om aan te meld by jou beursie.",
+            "body1": "Tik 'n 6-syfer PIN hieronder. U sal gevra word om U PIN in te voer om aan te meld by U beursie.",
             "body2": "Gebruik slegs syfers"
         },
         "confirmPin": {
@@ -207,7 +207,7 @@
             },
             "resyncAccounts": {
                 "title": "Hersinkroniseer rekeninge",
-                "description": ""
+                "description": "Starts a background task to make sure your accounts are up to date."
             },
             "deleteProfile": {
                 "title": "Vee profiel uit",
@@ -313,7 +313,8 @@
     "popups": {
         "password": {
             "title": "Wagwoord benodig",
-            "subtitle": "Voer asseblief you beursie-wagwoord in om Stronghold te ontsluit"
+            "subtitle": "Please enter your password to unlock Stronghold",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "Jou QR code"
@@ -336,7 +337,7 @@
         "deleteAccount": {
             "title": "Verwyder {name}?",
             "body": "Jy kan hierdie rekening later weer byvoeg, maar jou transaksiegeskiedenis kan dalk verloor word.",
-            "typePassword": "Voer die wagwoord van jou beursie in om te bevestig.",
+            "typePassword": "Type your password to confirm.",
             "deleteAccount": "Verwyder rekening",
             "errorTitle": "Kan nie {name} verwyder nie",
             "errorBody1": "Om 'n rekening te verwyder, moet jy 0 balans hê.",
@@ -344,7 +345,7 @@
             "errorBody3": "Jy kan nie hierdie rekening verwyder nie, jy moet ten minste een hê."
         },
         "addressHistory": {
-            "title": "{name} rekeningadresgeskiedenis",
+            "title": "{name} address history",
             "currentBalance": "Huidige balaans: {balance}"
         },
         "node": {
@@ -363,7 +364,8 @@
         },
         "deleteProfile": {
             "title": "Vee profiel uit",
-            "confirmation": "Is jy seker jy wil hierdie profiel uitvee? Hierdie bewerking kan nie ontdoen word nie."
+            "confirmation": "Is jy seker jy wil hierdie profiel uitvee? Hierdie bewerking kan nie ontdoen word nie.",
+            "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
             "title": "Diagnostiek",
@@ -586,7 +588,8 @@
         "restartInstall": "Herbegin om te installeer",
         "calcMinutesRemaining": "Bereken oorblywende minute...",
         "minutesRemaining": "{minutes, plural, one {1 minuut oor} other {# minute oor}}",
-        "copiedToClipboard": "Kopieer na knipbord"
+        "copiedToClipboard": "Kopieer na knipbord",
+        "accountsSynchronized": "Account synchronization complete"
     },
     "error": {
         "profile": {
@@ -606,7 +609,7 @@
             "dates": "Datums is maklik om te raai.",
             "common": "Hierdie is 'n baie algemene wagwoord.",
             "similar": "Hierdie is soortgelyk aan 'n gewone wagwoord.",
-            "reasonWord": "'N Enkele woord is maklik om te raai.",
+            "word": "'N Enkele woord is maklik om te raai.",
             "incorrect": "Jou wagwoord is verkeerd.",
             "length": "Jou wagwoord mag nie langer as {length, plural, one {1 karakter} other {# karakters}} wees nie."
         },
@@ -619,7 +622,11 @@
             "length": "Jou rekeningnaam mag nie langer as {length, plural, one {1 karakter} other {# karakters}} wees nie.",
             "empty": "Jy moet jou nuutste rekening gebruik voordat jy 'n nuwe een skep.",
             "notEmpty": "Jy moet jou saldo oordra voordat jy hierdie rekening uitvee.",
-            "duplicate": "'n Rekening met hierdie naam bestaan alreeds."
+            "duplicate": "'n Rekening met hierdie naam bestaan alreeds.",
+            "tilde": "'N Profielnaam kan nie met die' ~ 'karakter begin nie.",
+            "control": "'N Profielnaam kan nie 'n beheerkarakter bevat nie.",
+            "startDot": "'N Profielnaam kan nie begin met die'. ' karakter.",
+            "chars": "'N Profielnaam kan nie die volgende karakters bevat nie <>: \"/ \\ |? *"
         },
         "send": {
             "addressLength": "Adresse moet {length, plural, one {1 karakter} other {# karakters}} lank wees.",
@@ -627,8 +634,10 @@
             "amountNoFloat": "As eenhede 'i' is, kan jy nie desimale plekke gebruik nie.",
             "amountInvalidFormat": "Die bedrag lyk na 'n ongeldige nommer.",
             "amountZero": "Die bedrag moet groter as 0 wees.",
-            "wrongAddressFormat": "Adresse begin met die voorvoegsel {prefix}.",
+            "wrongAddressPrefix": "Adresse begin met die voorvoegsel {prefix}.",
+            "wrongAddressFormat": "Die adres is nie korrek geformateer nie.",
             "insufficientFunds": "Hierdie rekening het onvoldoende fondse.",
+            "noToAccount": "Jy het nie 'n rekening gekies om die fondse na te stuur nie.",
             "sendingDust": "Jy kan nie minder as 1 Mi. stuur nie.",
             "leavingDust": "Jy kan nie minder as 1 Mi op jou adres los nie."
         },

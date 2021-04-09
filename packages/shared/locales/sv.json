@@ -207,7 +207,7 @@
             },
             "resyncAccounts": {
                 "title": "Synkronisera om konton",
-                "description": ""
+                "description": "Startar en bakgrundsprocess för att se till att dina konton är uppdaterade."
             },
             "deleteProfile": {
                 "title": "Radera profil",
@@ -313,7 +313,8 @@
     "popups": {
         "password": {
             "title": "Lösenord krävs",
-            "subtitle": "Ange din plånboks lösenord för att låsa upp Stronghold"
+            "subtitle": "Please enter your password to unlock Stronghold",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "Din QR-kod"
@@ -336,7 +337,7 @@
         "deleteAccount": {
             "title": "Ta bort {name}?",
             "body": "Du kan lägga till detta konto senare men du kan förlora din transaktionshistorik.",
-            "typePassword": "Ange ditt lösenord för att bekräfta.",
+            "typePassword": "Type your password to confirm.",
             "deleteAccount": "Ta bort konto",
             "errorTitle": "Det gick inte att ta bort {name}",
             "errorBody1": "För att ta bort ett konto måste det ha 0 saldo.",
@@ -344,7 +345,7 @@
             "errorBody3": "Du kan inte ta bort detta konto, du måste ha minst ett."
         },
         "addressHistory": {
-            "title": "{name} kontoadress-historik",
+            "title": "{name} adresshistorik",
             "currentBalance": "Nuvarande saldo: {balance}"
         },
         "node": {
@@ -363,7 +364,8 @@
         },
         "deleteProfile": {
             "title": "Radera profil",
-            "confirmation": "Är du säker på att du vill ta bort denna profil? Denna åtgärd kan inte ångras."
+            "confirmation": "Är du säker på att du vill ta bort denna profil? Denna åtgärd kan inte ångras.",
+            "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
             "title": "Diagnostik",
@@ -586,7 +588,8 @@
         "restartInstall": "Starta om för att installera",
         "calcMinutesRemaining": "Beräknar minuter kvar...",
         "minutesRemaining": "{minutes, plural, one {1 minut kvar} other {# minuter kvar}}",
-        "copiedToClipboard": "Kopierad till urklipp"
+        "copiedToClipboard": "Kopierad till urklipp",
+        "accountsSynchronized": "Kontosynkronisering slutförd"
     },
     "error": {
         "profile": {
@@ -606,7 +609,7 @@
             "dates": "Datum är lätta att gissa.",
             "common": "Detta är ett mycket vanligt lösenord.",
             "similar": "Detta liknar ett vanligt lösenord.",
-            "reasonWord": "Ett enda ord är lätt att gissa.",
+            "word": "Ett enda ord är enkelt att gissa.",
             "incorrect": "Ditt lösenord är felaktigt.",
             "length": "Ditt lösenord kan inte vara längre än {length, plural, one {1 tecken} other {# tecken}}."
         },
@@ -619,7 +622,11 @@
             "length": "Ditt kontonamn kan inte vara längre än {length, plural, one {1 tecken} other {# tecken}}.",
             "empty": "Du måste använda ditt senaste konto innan du kan skapa ett nytt.",
             "notEmpty": "Du måste överföra ditt saldo innan du kan ta bort detta konto.",
-            "duplicate": "Ett konto med detta namn finns redan."
+            "duplicate": "Ett konto med detta namn finns redan.",
+            "tilde": "Ett profilnamn kan inte börja med '~' tecken.",
+            "control": "Ett profilnamn får inte innehålla ett kontrolltecken (TAB, ny rad et cetera).",
+            "startDot": "Ett profilnamn kan inte börja med en punkt.",
+            "chars": "Ett profilnamn får inte innehålla följande tecken <>:\"/\\|?*"
         },
         "send": {
             "addressLength": "Adresser bör vara {length, plural, one {1 tecken} other {# tecken}}.",
@@ -627,8 +634,10 @@
             "amountNoFloat": "Om enheten är `i` kan du inte använda decimaler.",
             "amountInvalidFormat": "Beloppet verkar vara ett ogiltigt nummer.",
             "amountZero": "Beloppet måste vara större än 0.",
-            "wrongAddressFormat": "Adresser börjar med prefixet {prefix}.",
+            "wrongAddressPrefix": "Adresser börjar med prefixet {prefix}.",
+            "wrongAddressFormat": "Adressen är inte korrekt formaterad.",
             "insufficientFunds": "Detta konto har inte tillräckligt med pengar.",
+            "noToAccount": "Du har inte valt ett konto att skicka pengar till.",
             "sendingDust": "Du kan inte skicka mindre än 1 Mi.",
             "leavingDust": "Du kan inte lämna mindre än 1 Mi på din adress."
         },
