@@ -134,23 +134,22 @@ const Electron = {
      * Minimize the app
      * @returns {undefined}
      */
-    minimize: () => {
-        ipcRenderer.invoke('minimize')
-    },
+    minimize: () => ipcRenderer.invoke('minimize'),
     /**
      * Maximize the app
      * @returns {undefined}
      */
-    maximize: () => {
-        ipcRenderer.invoke('maximize')
-    },
+    maximize: () => ipcRenderer.invoke('maximize'),
+    /**
+     * Is the app maximized
+     * @returns {boolean}
+     */
+    isMaximized: () => ipcRenderer.invoke('isMaximized'),
     /**
      * Close the app
      * @returns {undefined}
      */
-    close: () => {
-        ipcRenderer.invoke('close')
-    },
+    close: () => ipcRenderer.invoke('close'),
     /*
      * Opens url and checks against acceptlist
      * @param {string} url - Target url
