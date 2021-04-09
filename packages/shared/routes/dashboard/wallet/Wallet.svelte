@@ -8,11 +8,12 @@
     import { chrysalisLive, pollChrysalisStatus } from 'shared/lib/migration'
     import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
     import { NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
-    import { openPopup } from 'shared/lib/popup'
+    import { openPopup, closePopup } from 'shared/lib/popup'
     import type { MigratedTransaction } from 'shared/lib/profile'
     import { activeProfile, isStrongholdLocked } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
+    import { loggedIn } from 'shared/lib/app'
     import {
         AccountMessage,
         AccountsBalanceHistory,
@@ -68,6 +69,10 @@
     setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
+    let startInit
+    let chrysalisStatusUnsubscribe
+    let migrationNotificationId
+    let busy
 
     function getAccounts() {
         api.getAccounts({
@@ -388,23 +393,68 @@
         }
     }
 
-    let chrysalisStatusUnsubscribe
-    $: if ($accountsLoaded && $activeProfile?.migratedTransactions?.length > 0) {
-        chrysalisStatusUnsubscribe = chrysalisLive.subscribe((live) => {
-            let migrationNotificationId = null
-            const idlePopupTimeout = 5000 // TODO: improve this, move idle popup logic to Wallet.svelte
-            if (typeof live === 'boolean' && live === false) {
+    if ($walletRoute === WalletRoutes.Init && !$accountsLoaded && $loggedIn) {
+        startInit = Date.now()
+        busy = true
+        openPopup({
+            type: 'busy',
+            hideClose: true,
+            fullScreen: true,
+            transition: false,
+        })
+    }
+    $: {
+        if ($accountsLoaded) {
+            const minTimeElapsed = 3000 - (Date.now() - startInit)
+            if (minTimeElapsed < 0) {
+                busy = false
+                closePopup()
+            } else {
                 setTimeout(() => {
+                    busy = false
+                    closePopup()
+                }, minTimeElapsed)
+            }
+        }
+    }
+
+    $: if (!busy && $activeProfile?.migratedTransactions?.length > 0) {
+        handleChrysalisStatusNotifications()
+    }
+    function handleChrysalisStatusNotifications() {
+        chrysalisStatusUnsubscribe = chrysalisLive.subscribe((live) => {
+            if (typeof live === 'boolean' && live === false) {
+                migrationNotificationId = showAppNotification({
+                    type: 'warning',
+                    message: locale('notifications.migratedAccountChrysalisDown'),
+                    progress: undefined,
+                    timeout: NOTIFICATION_TIMEOUT_NEVER,
+                    actions: [
+                        {
+                            label: locale('actions.viewStatus'),
+                            isPrimary: true,
+                            callback: () => Electron.openUrl('https://chrysalis.iota.org'),
+                        },
+                        {
+                            label: locale('actions.dismiss'),
+                            callback: () => removeDisplayNotification(migrationNotificationId),
+                        },
+                    ],
+                })
+            } else {
+                removeDisplayNotification(migrationNotificationId)
+                migrationNotificationId = undefined
+                if ($activeProfile?.migratedTransactions?.length > 0) {
                     migrationNotificationId = showAppNotification({
                         type: 'warning',
-                        message: locale('notifications.migratedAccountChrysalisDown'),
+                        message: locale('notifications.migratedAccountChrysalisUp'),
                         progress: undefined,
                         timeout: NOTIFICATION_TIMEOUT_NEVER,
                         actions: [
                             {
                                 label: locale('actions.viewStatus'),
                                 isPrimary: true,
-                                callback: () => Electron.openUrl('chrysalis.iota.org'),
+                                callback: () => Electron.openUrl('https://chrysalis.iota.org'),
                             },
                             {
                                 label: locale('actions.dismiss'),
@@ -412,29 +462,6 @@
                             },
                         ],
                     })
-                }, idlePopupTimeout)
-            } else {
-                removeDisplayNotification(migrationNotificationId)
-                if ($activeProfile?.migratedTransactions?.length > 0) {
-                    setTimeout(() => {
-                        migrationNotificationId = showAppNotification({
-                            type: 'warning',
-                            message: locale('notifications.migratedAccountChrysalisUp'),
-                            progress: undefined,
-                            timeout: NOTIFICATION_TIMEOUT_NEVER,
-                            actions: [
-                                {
-                                    label: locale('actions.viewStatus'),
-                                    isPrimary: true,
-                                    callback: () => Electron.openUrl('chrysalis.iota.org'),
-                                },
-                                {
-                                    label: locale('actions.dismiss'),
-                                    callback: () => removeDisplayNotification(migrationNotificationId),
-                                },
-                            ],
-                        })
-                    }, idlePopupTimeout)
                 }
             }
         })
@@ -467,6 +494,9 @@
     onDestroy(() => {
         if (chrysalisStatusUnsubscribe) {
             chrysalisStatusUnsubscribe()
+        }
+        if (migrationNotificationId) {
+            removeDisplayNotification(migrationNotificationId)
         }
     })
 </script>
