@@ -349,7 +349,7 @@
         },
         "deleteAccount": {
             "title": "Delete {name}?",
-            "body": "This account has no transaction history so can safely be deleted.",
+            "body": "This account has no transaction history. It can safely be deleted.",
             "typePassword": "Type your wallet password to confirm.",
             "hideAccount": "Delete account",
             "errorTitle": "Unable to delete {name}",
@@ -357,7 +357,7 @@
         },
         "hideAccount": {
             "title": "Hide {name}?",
-            "body": "You can show this account again later but you may lose your transaction history.",
+            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
             "typePassword": "Type your wallet password to confirm.",
             "hideAccount": "Hide account",
             "errorTitle": "Unable to hide {name}",
@@ -461,7 +461,7 @@
         "customizeAcount": "Customise account",
         "viewAddressHistory": "View address history",
         "hideAccount": "Hide account",
-        "showAccount": "Show account",
+        "showAccount": "Unhide account",
         "deleteAccount": "Delete account",
         "max": "Max",
         "addNode": "Add node",
@@ -599,7 +599,7 @@
         "passwordStrength3": "Average",
         "passwordStrength4": "Strong",
         "creatingProfile": "Creating profile, please wait...",
-        "accountRemoved": "This account has been hidden and can no longer be used to perform transfers."
+        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
     },
     "dates": {
         "today": "Today",
