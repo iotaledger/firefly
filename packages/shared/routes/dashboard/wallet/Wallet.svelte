@@ -4,10 +4,9 @@
     import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
-    import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, isStrongholdLocked } from 'shared/lib/profile'
+    import { activeProfile, isStrongholdLocked, updateProfile } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
@@ -40,9 +39,6 @@
 
     const { accounts, balanceOverview, accountsLoaded } = $wallet
 
-    const transactions = derived(accounts, ($accounts) => {
-        return getTransactions($accounts)
-    })
     const accountsBalanceHistory = derived([accounts, priceData], ([$accounts, $priceData]) =>
         getAccountsBalanceHistory($accounts, $priceData)
     )
@@ -56,8 +52,48 @@
         return $selectedAccount ? getAccountMessages($selectedAccount) : []
     })
 
+    const viewableAccounts: Readable<WalletAccount[]> = derived([activeProfile, accounts], ([$activeProfile, $accounts]) => {
+        if (!$activeProfile) {
+            return []
+        }
+
+        if ($activeProfile.settings.showHiddenAccounts) {
+            let sortedAccounts = $accounts.sort((a, b) => a.index - b.index)
+
+            // If the last account is "hidden" and has no value, messages or history treat it as "deleted"
+            // This account will get re-used if someone creates a new one
+            if (sortedAccounts.length > 1 && $activeProfile.hiddenAccounts) {
+                const lastAccount = sortedAccounts[sortedAccounts.length - 1]
+                if (
+                    $activeProfile.hiddenAccounts.includes(lastAccount.id) &&
+                    lastAccount.rawIotaBalance === 0 &&
+                    lastAccount.messages.length === 0
+                ) {
+                    sortedAccounts.pop()
+                }
+            }
+
+            return sortedAccounts
+        }
+
+        return $accounts.filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id)).sort((a, b) => a.index - b.index)
+    })
+
+    const liveAccounts: Readable<WalletAccount[]> = derived([activeProfile, accounts], ([$activeProfile, $accounts]) => {
+        if (!$activeProfile) {
+            return []
+        }
+        return $accounts.filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id)).sort((a, b) => a.index - b.index)
+    })
+
+    const transactions = derived(viewableAccounts, ($viewableAccounts) => {
+        return getTransactions($viewableAccounts)
+    })
+
     setContext<Writable<BalanceOverview>>('walletBalance', balanceOverview)
     setContext<Writable<WalletAccount[]>>('walletAccounts', accounts)
+    setContext<Readable<WalletAccount[]>>('viewableAccounts', viewableAccounts)
+    setContext<Readable<WalletAccount[]>>('liveAccounts', liveAccounts)
     setContext<Writable<boolean>>('walletAccountsLoaded', accountsLoaded)
     setContext<Readable<AccountMessage[]>>('walletTransactions', transactions)
     setContext<Readable<WalletAccount>>('selectedAccount', selectedAccount)
@@ -163,64 +199,143 @@
         })
     }
 
+    function findReuseAccount() {
+        // If the last account in the accounts list is "deleted" and has no
+        // messages on it, we can reuse it, otherwise the wallet will complain
+        // about the last account not being used
+        const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
+
+        if (hiddenAccounts.length > 0) {
+            const lastAccount = $accounts[$accounts.length - 1]
+            const hiddenAccountIndex = hiddenAccounts.indexOf(lastAccount.id)
+            if (
+                hiddenAccountIndex >= 0 &&
+                lastAccount.rawIotaBalance === 0 &&
+                lastAccount.messages &&
+                lastAccount.messages.length === 0
+            ) {
+                return lastAccount.id
+            }
+
+            // If we have restarted the app we might not have been notified of the empty account
+            // so it wont appear in the accounts list, so check in the hidden list to see
+            // if there is an id not in the accounts list
+            for (const hiddenAccount of hiddenAccounts) {
+                if (!$accounts.some((a) => a.id === hiddenAccount)) {
+                    return hiddenAccount
+                }
+            }
+        }
+    }
+
     function onCreateAccount(alias, completeCallback) {
-        const _create = () =>
-            api.createAccount(
-                {
-                    alias,
-                    signerType: { type: 'Stronghold' },
-                    clientOptions: {
-                        node: $accounts.length > 0 ? $accounts[0].clientOptions.node : DEFAULT_NODE,
-                        nodes: $accounts.length > 0 ? $accounts[0].clientOptions.nodes : DEFAULT_NODES,
-                        // For subsequent accounts, use the network for any of the previous accounts
-                        network: $accounts.length > 0 ? $accounts[0].clientOptions.network : $network,
-                    },
-                },
-                {
-                    onSuccess(createAccountResponse) {
-                        const account: WalletAccount = prepareAccountInfo(createAccountResponse.payload, {
-                            balance: 0,
-                            incoming: 0,
-                            outgoing: 0,
-                            depositAddress: createAccountResponse.payload.addresses[0].address,
-                        })
-                        // immediately store the account; we update it later after sync
-                        // we do this to allow offline account creation
-                        accounts.update((accounts) => [...accounts, account])
-                        return new Promise((resolve) => {
-                            api.syncAccount(createAccountResponse.payload.id, {
-                                onSuccess(_syncAccountResponse) {
-                                    getAccountMeta(createAccountResponse.payload.id, (err, meta) => {
-                                        if (!err) {
-                                            const account = prepareAccountInfo(createAccountResponse.payload, meta)
-                                            accounts.update((storedAccounts) => {
-                                                return storedAccounts.map((storedAccount) => {
-                                                    if (storedAccount.id === account.id) {
-                                                        return account
-                                                    }
-                                                    return storedAccount
-                                                })
-                                            })
+        const _create = () => {
+            const reuseAccountId = findReuseAccount()
+            if (reuseAccountId) {
+                api.setAlias(reuseAccountId, alias, {
+                    onSuccess() {
+                        let hasUpdated = false
+                        accounts.update((_accounts) => {
+                            return _accounts.map((account) => {
+                                if (account.id === reuseAccountId) {
+                                    hasUpdated = true
+                                    return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
+                                        {} as WalletAccount,
+                                        account,
+                                        {
+                                            alias,
                                         }
-                                        resolve(null)
-                                    })
+                                    )
+                                }
+
+                                return account
+                            })
+                        })
+
+                        // We didn't have the account in the list to update
+                        // so we need to retrieve the details from the wallet manually
+                        if (!hasUpdated) {
+                            api.getAccounts({
+                                onSuccess(accountsResponse) {
+                                    const ac = accountsResponse.payload.find(a => a.id === reuseAccountId)
+                                    if (ac) {
+                                        getAccountMeta(reuseAccountId, (err, meta) => {
+                                            if (!err) {
+                                                const account = prepareAccountInfo(ac, meta)
+                                                accounts.update((accounts) => [...accounts, account])
+                                            }
+                                        })
+                                    }
                                 },
                                 onError() {
-                                    // we ignore sync errors since the user can recover from it later
-                                    // this allows an account to be created by an offline user
-                                    resolve(null)
-                                },
+                                }
                             })
-                        }).then(() => {
-                            walletRoute.set(WalletRoutes.Init)
-                            completeCallback()
-                        })
+                        }
+
+                        const hiddenAccounts = ($activeProfile?.hiddenAccounts ?? []).filter((a) => a !== reuseAccountId)
+                        updateProfile('hiddenAccounts', hiddenAccounts)
+
+                        walletRoute.set(WalletRoutes.Init)
+                        completeCallback()
                     },
                     onError(err) {
                         completeCallback(locale(err.error))
                     },
-                }
-            )
+                })
+            } else {
+                api.createAccount(
+                    {
+                        alias,
+                        signerType: { type: 'Stronghold' },
+                        clientOptions: $accounts[0].clientOptions,
+                    },
+                    {
+                        onSuccess(createAccountResponse) {
+                            const account: WalletAccount = prepareAccountInfo(createAccountResponse.payload, {
+                                balance: 0,
+                                incoming: 0,
+                                outgoing: 0,
+                                depositAddress: createAccountResponse.payload.addresses[0].address,
+                            })
+                            // immediately store the account; we update it later after sync
+                            // we do this to allow offline account creation
+                            accounts.update((accounts) => [...accounts, account])
+                            return new Promise((resolve) => {
+                                api.syncAccount(createAccountResponse.payload.id, {
+                                    onSuccess(_syncAccountResponse) {
+                                        getAccountMeta(createAccountResponse.payload.id, (err, meta) => {
+                                            if (!err) {
+                                                const account = prepareAccountInfo(createAccountResponse.payload, meta)
+                                                accounts.update((storedAccounts) => {
+                                                    return storedAccounts.map((storedAccount) => {
+                                                        if (storedAccount.id === account.id) {
+                                                            return account
+                                                        }
+                                                        return storedAccount
+                                                    })
+                                                })
+                                            }
+                                            resolve(null)
+                                        })
+                                    },
+                                    onError() {
+                                        // we ignore sync errors since the user can recover from it later
+                                        // this allows an account to be created by an offline user
+                                        resolve(null)
+                                    },
+                                })
+                            }).then(() => {
+                                walletRoute.set(WalletRoutes.Init)
+                                completeCallback()
+                            })
+                        },
+                        onError(err) {
+                            completeCallback(locale(err.error))
+                        },
+                    }
+                )
+            }
+        }
 
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {

@@ -10,7 +10,8 @@ export interface Node {
     auth?: {
         password: string
         username: string
-    }
+    },
+    disabled?: boolean
 }
 
 export interface ClientOptions {

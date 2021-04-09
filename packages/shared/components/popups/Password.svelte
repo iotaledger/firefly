@@ -6,23 +6,20 @@
     export let locale
 
     export let onSuccess
-    export let onSubmit
     export let onError
     export let onCancelled
     export let subtitle
-    
+    export let returnPassword = false
+
     let password
     let error = ''
 
     function handleSubmit() {
-        if (onSubmit) {
-            return onSubmit(password)
-        }
         api.setStrongholdPassword(password, {
             onSuccess(response) {
                 closePopup()
                 if ('function' === typeof onSuccess) {
-                    onSuccess(response)
+                    onSuccess(returnPassword ? password : response)
                 }
             },
             onError(err) {

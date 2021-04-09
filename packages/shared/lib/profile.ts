@@ -1,8 +1,7 @@
 import { AvailableExchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
-import { DEFAULT_NODE } from 'shared/lib/network'
 import { generateRandomId } from 'shared/lib/utils'
-import { api, getStoragePath } from 'shared/lib/wallet'
+import { api, destroyActor, getStoragePath } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
 import type { ChartSelectors } from './chart'
 import { Electron } from './electron'
@@ -26,19 +25,20 @@ interface Profile {
      */
     settings: UserSettings
     isDeveloperProfile: boolean
+    hiddenAccounts?: string[]
 }
 
 /**
  * User Settings
  */
 export interface UserSettings {
-    outsourcePow: boolean
     currency: AvailableExchangeRates
     automaticNodeSelection: boolean
-    node: Node
-    customNodes: Node[]
+    includeOfficialNodes: boolean
+    disabledNodes: string[] | undefined
     /** Lock screen timeout in minutes */
-    lockScreenTimeout: number,
+    lockScreenTimeout: number
+    showHiddenAccounts?: boolean
     chartSelectors: ChartSelectors
 }
 
@@ -99,12 +99,10 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
         lastStrongholdBackupTime: null,
         isDeveloperProfile,
         settings: {
-            outsourcePow: false,
             currency: AvailableExchangeRates.USD,
             automaticNodeSelection: true,
-            node: DEFAULT_NODE,
-            customNodes: [],
-            // Minutes
+            includeOfficialNodes: true,
+            disabledNodes: undefined,
             lockScreenTimeout: 5,
             chartSelectors: {
                 currency: AvailableExchangeRates.USD,
@@ -136,6 +134,7 @@ export const disposeNewProfile = () => {
                 console.error(err)
             },
         })
+        destroyActor(np.id)
     }
     newProfile.set(null)
     activeProfileId.set(null)
@@ -190,7 +189,7 @@ export const removeProfile = (id: string): void => {
  * @returns {void}
  */
 export const updateProfile = (
-    path: string, value: string | boolean | Date | AvailableExchangeRates | Node | Node[] | ChartSelectors | HistoryDataProps) => {
+    path: string, value: string | string[] | boolean | Date | AvailableExchangeRates | Node | Node[] | ChartSelectors | HistoryDataProps) => {
     const _update = (_profile) => {
         const pathList = path.split('.')
 
