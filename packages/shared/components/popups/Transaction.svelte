@@ -45,7 +45,7 @@
     <div class="illustration w-full bg-pastel-yellow dark:bg-gray-900 flex justify-center">
         <Illustration illustration="balance-desktop" />
     </div>
-    <div class="w-full text-center my-9 px-11">
+    <div class="w-full text-center my-9 px-10">
         <Text type="h4" highlighted classes="mb-3">
             {locale('popups.transaction.body', { values: { amount: displayedAmount } })}
         </Text>

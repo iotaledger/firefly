@@ -7,6 +7,7 @@
     import AddressHistory from './AddressHistory.svelte'
     import Backup from './Backup.svelte'
     import Busy from './Busy.svelte'
+    import HideAccount from './HideAccount.svelte'
     import DeleteAccount from './DeleteAccount.svelte'
     import DeleteProfile from './DeleteProfile.svelte'
     import Diagnostics from './Diagnostics.svelte'
@@ -32,6 +33,7 @@
         version: Version,
         backup: Backup,
         deleteAccount: DeleteAccount,
+        hideAccount: HideAccount,
         addressHistory: AddressHistory,
         addNode: AddNode,
         removeNode: RemoveNode,

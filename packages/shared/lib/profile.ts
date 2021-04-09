@@ -25,6 +25,7 @@ interface Profile {
      */
     settings: UserSettings
     isDeveloperProfile: boolean
+    hiddenAccounts?: string[]
 }
 
 /**
@@ -36,7 +37,8 @@ export interface UserSettings {
     includeOfficialNodes: boolean
     disabledNodes: string[] | undefined
     /** Lock screen timeout in minutes */
-    lockScreenTimeout: number,
+    lockScreenTimeout: number
+    showHiddenAccounts?: boolean
     chartSelectors: ChartSelectors
 }
 
@@ -187,7 +189,7 @@ export const removeProfile = (id: string): void => {
  * @returns {void}
  */
 export const updateProfile = (
-    path: string, value: string | boolean | Date | AvailableExchangeRates | Node | Node[] | ChartSelectors | HistoryDataProps) => {
+    path: string, value: string | string[] | boolean | Date | AvailableExchangeRates | Node | Node[] | ChartSelectors | HistoryDataProps) => {
     const _update = (_profile) => {
         const pathList = path.split('.')
 

@@ -1,15 +1,20 @@
 <script lang="typescript">
-    import { Button, Checkbox, HR, Radio, Text } from 'shared/components'
-    import { clickOutside } from 'shared/lib/actions'
-    import { loggedIn } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
-    import { getOfficialNodes } from 'shared/lib/network'
-    import { openPopup } from 'shared/lib/popup'
-    import { buildAccountNetworkSettings, isSyncing, syncAccounts, updateAccountNetworkSettings } from 'shared/lib/wallet'
+    import { activeProfile, updateProfile } from 'shared/lib/profile';
+    import { Button, Checkbox, HR, Radio, Text } from 'shared/components';
+    import { clickOutside } from 'shared/lib/actions';
+    import { loggedIn } from 'shared/lib/app';
+    import { appSettings } from 'shared/lib/appSettings';
+    import { getOfficialNodes } from 'shared/lib/network';
+    import { openPopup } from 'shared/lib/popup';
+    import { buildAccountNetworkSettings, isSyncing, syncAccounts, updateAccountNetworkSettings } from 'shared/lib/wallet';
+    import { get } from 'svelte/store';
 
     export let locale
 
     let deepLinkingChecked = $appSettings.deepLinking
+
+    let showHiddenAccounts = get(activeProfile)?.settings.showHiddenAccounts
+
     let { automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl, localPow } = buildAccountNetworkSettings()
 
     let contextPosition = { x: 0, y: 0 }
@@ -17,6 +22,9 @@
     let nodesContainer
 
     $: $appSettings.deepLinking = deepLinkingChecked
+
+    $: updateProfile('settings.showHiddenAccounts', showHiddenAccounts)
+
     $: {
         const officialNodes = getOfficialNodes()
         const nonOfficialNodes = nodes.filter((n) => !officialNodes.find((d) => d.url === n.url))
@@ -229,6 +237,12 @@
             <Button medium inlineStyle="min-width: 156px;" onClick={() => syncAccounts(true)} disabled={$isSyncing}>
                 {locale('actions.syncAll')}
             </Button>
+        </section>
+        <HR classes="pb-5 mt-5 justify-center" />
+        <section id="hiddenAccounts" class="w-3/4">
+            <Text type="h4" classes="mb-3">{locale('views.settings.hiddenAccounts.title')}</Text>
+            <Text type="p" secondary classes="mb-5">{locale('views.settings.hiddenAccounts.description')}</Text>
+            <Checkbox label={locale('actions.showHiddenAccounts')} bind:checked={showHiddenAccounts} />
         </section>
     {/if}
     <HR classes="pb-5 mt-5 justify-center" />

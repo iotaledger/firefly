@@ -6,6 +6,7 @@
     export let balance = ''
     export let balanceEquiv = ''
     export let color = 'turquoise'
+    export let hidden = false
     export let size = 'm' // m, l
 </script>
 
@@ -22,7 +23,7 @@
 
 <button
     on:click={onClick}
-    class="size-{size} group rounded-xl bg-gray-100 dark:bg-gray-900 hover:bg-{color}-500 font-400 flex flex-col justify-between text-left p-6 {size === 'm' && 'py-4'}">
+    class="size-{size} group rounded-xl bg-gray-100 dark:bg-gray-900 hover:bg-{color}-500 font-400 flex flex-col justify-between text-left p-6 {size === 'm' && 'py-4'} {hidden ? 'opacity-50' : ''}">
     <div class="w-full">
         <Text
             bold
