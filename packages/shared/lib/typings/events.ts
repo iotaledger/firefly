@@ -82,7 +82,7 @@ export interface ErrorEventPayload {
 }
 
 export interface BalanceChangeEventPayload {
-    indexationId: string    
+    indexationId: string
     accountId: string
     address: Address
     balanceChange: {
@@ -127,4 +127,52 @@ export enum TransferProgressEventType {
 export interface TransferProgressEventPayload {
     accountId: string
     event: { type: TransferProgressEventType }
+}
+
+export enum MigrationProgressEventType {
+    // Syncing account.
+    SyncingAccount = 'SyncingAccount',
+    /// Performing input selection.
+    SelectingInputs = 'SelectingInputs',
+    /// Generating remainder value deposit address.
+    GeneratingRemainderDepositAddress = 'GeneratingRemainderDepositAddress',
+    /// Signing the transaction.
+    SigningTransaction = 'SigningTransaction',
+    /// Performing PoW.
+    PerformingPoW = 'PerformingPoW',
+    /// Broadcasting.
+    Broadcasting = 'Broadcasting',
+}
+
+export interface FetchingMigrationDataEvent {
+    type: 'FetchingMigrationData'
+    data: {
+        initialAddresIndex: number
+        finalAddressIndex: number
+    }
+}
+
+export interface MiningEvent {
+    type: 'MiningBundle'
+    data: {
+        address: string
+    }
+}
+
+export interface SigningBundleEvent {
+    type: 'SigningBundle'
+    data: {
+        addresses: string[]
+    }
+}
+
+export interface BroadcastingBundleEvent {
+    type: 'BroadcastingBundle'
+    data: {
+        bundleHash: string
+    }
+}
+
+export interface MigrationProgressEventPayload {
+    event: FetchingMigrationDataEvent | MiningEvent | SigningBundleEvent | BroadcastingBundleEvent
 }

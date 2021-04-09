@@ -9,7 +9,7 @@ import { activeProfile, isStrongholdLocked } from 'shared/lib/profile'
 import type { Account, Account as BaseAccount, AccountToCreate, Balance, SyncedAccount } from 'shared/lib/typings/account'
 import type { Address } from 'shared/lib/typings/address'
 import type { Actor } from 'shared/lib/typings/bridge'
-import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, ErrorEventPayload, Event, ReattachmentEventPayload, TransactionEventPayload, TransferProgressEventPayload, TransferProgressEventType } from 'shared/lib/typings/events'
+import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, ErrorEventPayload, Event, ReattachmentEventPayload, TransactionEventPayload, TransferProgressEventPayload, TransferProgressEventType, MigrationProgressEventPayload } from 'shared/lib/typings/events'
 import type { Message } from 'shared/lib/typings/message'
 import { formatUnit } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
@@ -170,6 +170,7 @@ export const api: {
     onConfirmationStateChange(callbacks: { onSuccess: (response: Event<ConfirmationStateChangeEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
     onBalanceChange(callbacks: { onSuccess: (response: Event<BalanceChangeEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
     onTransferProgress(callbacks: { onSuccess: (response: Event<TransferProgressEventPayload>) => void, onError: (err: ErrorEventPayload) => void }),
+    onMigrationProgress(callbacks: { onSuccess: (response: Event<MigrationProgressEventPayload>) => void, onError: (err: ErrorEventPayload) => void }),
 
     // Migration
     getMigrationData(

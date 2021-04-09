@@ -241,4 +241,7 @@ export const api = {
   onTransferProgress: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'TransferProgress')
   },
+  onMigrationProgress: function (): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'MigrationProgress')
+  },
 };

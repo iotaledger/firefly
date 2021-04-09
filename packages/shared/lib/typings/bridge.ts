@@ -51,6 +51,7 @@ export enum ResponseTypes {
     Broadcast = 'Broadcast',
     StrongholdStatusChange = 'StrongholdStatusChange',
     TransferProgress = 'TransferProgress',
+    MigrationProgress = 'MigrationProgress',
     GeneratedMnemonic = 'GeneratedMnemonic',
     StoredMnemonic = 'StoredMnemonic',
     VerifiedMnemonic = 'VerifiedMnemonic',
@@ -147,7 +148,7 @@ export type MessageResponse =
     | StrongholdStatusResponse
     | UpdatedAllClientOptions
     // Migration types
-    | MigrationDataResponse 
+    | MigrationDataResponse
     | CreatedMigrationBundleResponse
     | SentMigrationBundleResponse
 
