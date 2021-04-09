@@ -113,7 +113,6 @@ export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0)
     // })
 
     // prepareBundles()
-    prepareBundles()
     return new Promise((resolve, reject) => {
         api.getMigrationData(
             migrationSeed,
