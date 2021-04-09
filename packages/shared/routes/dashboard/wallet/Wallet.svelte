@@ -37,7 +37,7 @@
 
     export let locale
 
-    const { accounts, balanceOverview, accountsLoaded } = $wallet
+    const { accounts, balanceOverview, accountsLoaded, internalTransfersInProgress } = $wallet
 
     const accountsBalanceHistory = derived([accounts, priceData], ([$accounts, $priceData]) =>
         getAccountsBalanceHistory($accounts, $priceData)
@@ -257,7 +257,7 @@
                         if (!hasUpdated) {
                             api.getAccounts({
                                 onSuccess(accountsResponse) {
-                                    const ac = accountsResponse.payload.find(a => a.id === reuseAccountId)
+                                    const ac = accountsResponse.payload.find((a) => a.id === reuseAccountId)
                                     if (ac) {
                                         getAccountMeta(reuseAccountId, (err, meta) => {
                                             if (!err) {
@@ -267,8 +267,7 @@
                                         })
                                     }
                                 },
-                                onError() {
-                                }
+                                onError() {},
                             })
                         }
 
@@ -428,6 +427,15 @@
             api.internalTransfer(senderAccountId, receiverAccountId, amount, {
                 onSuccess(response) {
                     const message = response.payload
+
+                    internalTransfersInProgress.update((transfers) => {
+                        transfers[message.id] = {
+                            from: senderAccountId,
+                            to: receiverAccountId,
+                        }
+
+                        return transfers
+                    })
 
                     accounts.update((_accounts) => {
                         return _accounts.map((_account) => {
