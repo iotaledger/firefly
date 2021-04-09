@@ -1,15 +1,19 @@
 <script lang="typescript">
     import { Idle, Sidebar } from 'shared/components'
-    import { logout, sendParams } from 'shared/lib/app'
+    import { loggedIn, logout, sendParams } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { Electron } from 'shared/lib/electron'
+    import { chrysalisLive, pollChrysalisStatus } from 'shared/lib/migration'
+    import { NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
+    import { closePopup, openPopup } from 'shared/lib/popup'
+    import { activeProfile } from 'shared/lib/profile'
     import { accountRoute, dashboardRoute, routerNext, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, Tabs, WalletRoutes } from 'shared/lib/typings/routes'
     import { parseDeepLink } from 'shared/lib/utils'
-    import { api, selectedAccountId, STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS } from 'shared/lib/wallet'
+    import { api, selectedAccountId, STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, wallet } from 'shared/lib/wallet'
     import { Settings, Wallet } from 'shared/routes'
-    import { onMount } from 'svelte'
+    import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
 
     export let locale
@@ -20,7 +24,14 @@
         settings: Settings,
     }
 
-    onMount(() => {
+    const { accountsLoaded } = $wallet
+
+    let startInit
+    let chrysalisStatusUnsubscribe
+    let busy
+    let migrationNotificationId
+
+    onMount(async () => {
         api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
         Electron.DeepLinkManager.requestDeepLink()
         Electron.onEvent('deep-link-params', (data) => handleDeepLinkRequest(data))
@@ -44,6 +55,19 @@
                 }
             }
         })
+
+        if ($activeProfile?.migratedTransactions?.length > 0) {
+            await pollChrysalisStatus()
+        }
+    })
+
+    onDestroy(() => {
+        if (chrysalisStatusUnsubscribe) {
+            chrysalisStatusUnsubscribe()
+        }
+        if (migrationNotificationId) {
+            removeDisplayNotification(migrationNotificationId)
+        }
     })
 
     /**
@@ -70,6 +94,91 @@
         } else {
             console.log('error parsing')
         }
+    }
+
+    $: {
+        if ($deepLinkRequestActive && $appSettings.deepLinking) {
+            walletRoute.set(WalletRoutes.Send)
+            deepLinkRequestActive.set(false)
+        }
+    }
+
+    if ($walletRoute === WalletRoutes.Init && !$accountsLoaded && $loggedIn) {
+        startInit = Date.now()
+        busy = true
+        openPopup({
+            type: 'busy',
+            hideClose: true,
+            fullScreen: true,
+            transition: false,
+        })
+    }
+    $: {
+        if ($accountsLoaded) {
+            const minTimeElapsed = 3000 - (Date.now() - startInit)
+            if (minTimeElapsed < 0) {
+                busy = false
+                closePopup()
+            } else {
+                setTimeout(() => {
+                    busy = false
+                    closePopup()
+                }, minTimeElapsed)
+            }
+        }
+    }
+
+    $: if (!busy && $accountsLoaded) {
+        if (get(activeProfile)?.migratedTransactions?.length > 0) {
+            handleChrysalisStatusNotifications()
+        }
+    }
+    function handleChrysalisStatusNotifications() {
+        chrysalisStatusUnsubscribe = chrysalisLive.subscribe((live) => {
+            if (typeof live === 'boolean' && live === false) {
+                removeDisplayNotification(migrationNotificationId) // clean first otherwise it shows up while whatching
+                migrationNotificationId = null
+                migrationNotificationId = showAppNotification({
+                    type: 'warning',
+                    message: locale('notifications.migratedAccountChrysalisDown'),
+                    progress: undefined,
+                    timeout: NOTIFICATION_TIMEOUT_NEVER,
+                    actions: [
+                        {
+                            label: locale('actions.viewStatus'),
+                            isPrimary: true,
+                            callback: () => Electron.openUrl('https://chrysalis.iota.org'),
+                        },
+                        {
+                            label: locale('actions.dismiss'),
+                            callback: () => removeDisplayNotification(migrationNotificationId),
+                        },
+                    ],
+                })
+            } else {
+                removeDisplayNotification(migrationNotificationId)
+                migrationNotificationId = null
+                if ($activeProfile?.migratedTransactions?.length > 0) {
+                    const migrationNotificationId = showAppNotification({
+                        type: 'warning',
+                        message: locale('notifications.migratedAccountChrysalisUp'),
+                        progress: undefined,
+                        timeout: NOTIFICATION_TIMEOUT_NEVER,
+                        actions: [
+                            {
+                                label: locale('actions.viewStatus'),
+                                isPrimary: true,
+                                callback: () => Electron.openUrl('https://chrysalis.iota.org'),
+                            },
+                            {
+                                label: locale('actions.dismiss'),
+                                callback: () => removeDisplayNotification(migrationNotificationId),
+                            },
+                        ],
+                    })
+                }
+            }
+        })
     }
 </script>
 

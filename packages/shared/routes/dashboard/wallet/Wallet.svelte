@@ -1,19 +1,14 @@
 <script lang="typescript">
     import { DashboardPane } from 'shared/components'
     import { clearSendParams } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
-    import { deepLinkRequestActive } from 'shared/lib/deepLinking'
-    import { Electron } from 'shared/lib/electron'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
-    import { chrysalisLive, pollChrysalisStatus } from 'shared/lib/migration'
     import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
-    import { NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
-    import { openPopup, closePopup } from 'shared/lib/popup'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { openPopup } from 'shared/lib/popup'
     import type { MigratedTransaction } from 'shared/lib/profile'
     import { activeProfile, isStrongholdLocked } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
-    import { loggedIn } from 'shared/lib/app'
     import {
         AccountMessage,
         AccountsBalanceHistory,
@@ -35,7 +30,7 @@
         wallet,
         WalletAccount,
     } from 'shared/lib/wallet'
-    import { onDestroy, onMount, setContext } from 'svelte'
+    import { onMount, setContext } from 'svelte'
     import { derived, Readable, writable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
 
@@ -44,7 +39,7 @@
     const { accounts, balanceOverview, accountsLoaded } = $wallet
 
     const transactions =
-        $activeProfile.migratedTransactions && $activeProfile.migratedTransactions.length
+        $activeProfile?.migratedTransactions && $activeProfile?.migratedTransactions.length
             ? writable($activeProfile.migratedTransactions)
             : derived(accounts, ($accounts) => {
                   return getTransactions($accounts)
@@ -69,10 +64,6 @@
     setContext<Readable<BalanceHistory>>('walletBalanceHistory', walletBalanceHistory)
 
     let isGeneratingAddress = false
-    let startInit
-    let chrysalisStatusUnsubscribe
-    let migrationNotificationId
-    let busy
 
     function getAccounts() {
         api.getAccounts({
@@ -386,87 +377,6 @@
         })
     }
 
-    $: {
-        if ($deepLinkRequestActive && $appSettings.deepLinking) {
-            walletRoute.set(WalletRoutes.Send)
-            deepLinkRequestActive.set(false)
-        }
-    }
-
-    if ($walletRoute === WalletRoutes.Init && !$accountsLoaded && $loggedIn) {
-        startInit = Date.now()
-        busy = true
-        openPopup({
-            type: 'busy',
-            hideClose: true,
-            fullScreen: true,
-            transition: false,
-        })
-    }
-    $: {
-        if ($accountsLoaded) {
-            const minTimeElapsed = 3000 - (Date.now() - startInit)
-            if (minTimeElapsed < 0) {
-                busy = false
-                closePopup()
-            } else {
-                setTimeout(() => {
-                    busy = false
-                    closePopup()
-                }, minTimeElapsed)
-            }
-        }
-    }
-
-    $: if (!busy && $activeProfile?.migratedTransactions?.length > 0) {
-        handleChrysalisStatusNotifications()
-    }
-    function handleChrysalisStatusNotifications() {
-        chrysalisStatusUnsubscribe = chrysalisLive.subscribe((live) => {
-            if (typeof live === 'boolean' && live === false) {
-                migrationNotificationId = showAppNotification({
-                    type: 'warning',
-                    message: locale('notifications.migratedAccountChrysalisDown'),
-                    progress: undefined,
-                    timeout: NOTIFICATION_TIMEOUT_NEVER,
-                    actions: [
-                        {
-                            label: locale('actions.viewStatus'),
-                            isPrimary: true,
-                            callback: () => Electron.openUrl('https://chrysalis.iota.org'),
-                        },
-                        {
-                            label: locale('actions.dismiss'),
-                            callback: () => removeDisplayNotification(migrationNotificationId),
-                        },
-                    ],
-                })
-            } else {
-                removeDisplayNotification(migrationNotificationId)
-                migrationNotificationId = undefined
-                if ($activeProfile?.migratedTransactions?.length > 0) {
-                    migrationNotificationId = showAppNotification({
-                        type: 'warning',
-                        message: locale('notifications.migratedAccountChrysalisUp'),
-                        progress: undefined,
-                        timeout: NOTIFICATION_TIMEOUT_NEVER,
-                        actions: [
-                            {
-                                label: locale('actions.viewStatus'),
-                                isPrimary: true,
-                                callback: () => Electron.openUrl('https://chrysalis.iota.org'),
-                            },
-                            {
-                                label: locale('actions.dismiss'),
-                                callback: () => removeDisplayNotification(migrationNotificationId),
-                            },
-                        ],
-                    })
-                }
-            }
-        })
-    }
-
     onMount(async () => {
         if (!$accountsLoaded) {
             getAccounts()
@@ -486,18 +396,6 @@
         })
 
         addProfileCurrencyPriceData()
-        if ($activeProfile?.migratedTransactions?.length > 0) {
-            await pollChrysalisStatus()
-        }
-    })
-
-    onDestroy(() => {
-        if (chrysalisStatusUnsubscribe) {
-            chrysalisStatusUnsubscribe()
-        }
-        if (migrationNotificationId) {
-            removeDisplayNotification(migrationNotificationId)
-        }
     })
 </script>
 
