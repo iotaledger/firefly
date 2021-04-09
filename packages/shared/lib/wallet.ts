@@ -61,7 +61,13 @@ type WalletState = {
     balanceOverview: Writable<BalanceOverview>
     accounts: Writable<WalletAccount[]>
     accountsLoaded: Writable<boolean>
-    confirmedInternalMessageIds: Writable<{ [key: string]: number }>
+    internalTransfersInProgress: Writable<{
+        [key: string]: {
+            from: string
+            to: string
+            amount: number
+        }
+    }>
 }
 
 type BalanceTimestamp = {
@@ -98,11 +104,17 @@ export const wallet = writable<WalletState>({
     }),
     accounts: writable<WalletAccount[]>([]),
     accountsLoaded: writable<boolean>(false),
-    confirmedInternalMessageIds: writable<{ [key: string]: number }>({})
+    internalTransfersInProgress: writable<{
+        [key: string]: {
+            from: string
+            to: string
+            amount: number
+        }
+    }>({})
 })
 
 export const resetWallet = () => {
-    const { balanceOverview, accounts, accountsLoaded } = get(wallet)
+    const { balanceOverview, accounts, accountsLoaded, internalTransfersInProgress } = get(wallet)
     balanceOverview.set({
         incoming: '0 Mi',
         incomingRaw: 0,
@@ -114,6 +126,7 @@ export const resetWallet = () => {
     })
     accounts.set([])
     accountsLoaded.set(false)
+    internalTransfersInProgress.set({})
     selectedAccountId.set(null)
     selectedMessage.set(null)
     isTransferring.set(false)
@@ -408,12 +421,26 @@ export const initialiseListeners = () => {
     api.onConfirmationStateChange({
         onSuccess(response) {
             const accounts = get(wallet).accounts
-            const account = get(accounts).find((account) => account.id === response.payload.accountId)
-
             const message = response.payload.message
             const confirmed = response.payload.confirmed;
             const essence = message.payload.data.essence
 
+            let account1
+            let account2
+
+            const { internalTransfersInProgress } = get(wallet)
+            const transfers = get(internalTransfersInProgress)
+
+            if (transfers[message.id]) {
+                account1 = get(accounts).find((account) => account.id === transfers[message.id].from)
+                account2 = get(accounts).find((account) => account.id === transfers[message.id].to)
+                internalTransfersInProgress.update((transfers) => {
+                    delete transfers[message.id]
+                    return transfers
+                })
+            } else {
+                account1 = get(accounts).find((account) => account.id === response.payload.accountId)
+            }
 
             if (confirmed && !essence.data.internal) {
                 const { balanceOverview } = get(wallet);
@@ -429,85 +456,50 @@ export const initialiseListeners = () => {
                 );
             }
 
-            // Update state
-            const accountMessage = account.messages.find((_message) => _message.id === message.id)
-            accountMessage.confirmed = response.payload.confirmed
+            const confirmationChanged = updateAllMessagesState(accounts, message.id, response.payload.confirmed)
 
-            accounts.update((storedAccounts) => {
-                return storedAccounts.map((storedAccount) => {
-                    if (storedAccount.id === account.id) {
-                        return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
-                            messages: storedAccount.messages.map((_message: Message) => {
-                                if (_message.id === message.id) {
-                                    return Object.assign<Message, Partial<Message>, Partial<Message>>(
-                                        {} as Message,
-                                        _message,
-                                        { confirmed: response.payload.confirmed }
-                                    )
-                                }
-                                return _message
-                            })
-                        })
-                    }
-                    return storedAccount
-                })
-            })
+            if (confirmationChanged) {
+                const messageKey = confirmed ? 'confirmed' : 'failed'
 
-            // Notify user
-            const messageKey = confirmed ? 'confirmed' : 'failed'
+                const _notify = (accountTo: string | null = null) => {
+                    let notificationMessage
 
-            const _notify = (accountFrom: string | null = null, accountTo: string | null = null) => {
-                let notificationMessage
-
-                if (accountFrom) {
-                    notificationMessage = localize(`notifications.${messageKey}Internal`)
-                        .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
-                        .replace('{{senderAccount}}', accountFrom)
-                        .replace('{{receiverAccount}}', accountTo)
-                } else {
-                    notificationMessage = localize(`notifications.${messageKey}`)
-                        .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
-                        .replace('{{account}}', account.alias)
-                }
-
-                showSystemNotification({ type: "info", message: notificationMessage, contextData: { type: messageKey, accountId: account.id } });
-            }
-
-            const { confirmedInternalMessageIds } = get(wallet)
-            const messageIds = get(confirmedInternalMessageIds)
-
-            // If this event is emitted because a message failed, then this message will only exist on the sender account
-            // Therefore, show the notification (no need to group).
-            if (!confirmed) {
-                _notify()
-            } else {
-                // If this is an external message, notify (no need to group)
-                if (!essence.data.internal) {
-                    _notify();
-                } else {
-                    // If this is an internal message, check if we have already receive confirmation state of this message
-                    if (Object.keys(messageIds).includes(message.id)) {
-                        const account1 = get(accounts).find((account) => account.index === messageIds[message.id]).alias
-                        const account2 = account.alias
-                        if (essence.data.incoming) {
-                            _notify(account1, account2);
-                        } else {
-                            _notify(account2, account1);
-                        }
-
-                        confirmedInternalMessageIds.update((ids) => {
-                            delete ids[message.id]
-
-                            return ids;
-                        })
+                    if (accountTo) {
+                        notificationMessage = localize(`notifications.${messageKey}Internal`)
+                            .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
+                            .replace('{{senderAccount}}', account1.alias)
+                            .replace('{{receiverAccount}}', accountTo)
                     } else {
-                        // Otherwise, add the message id and do not notify yet
-                        messageIds[message.id] = account.index
+                        if (essence.data.internal && confirmed) {
+                            // If this is a confirmed internal message but we don't
+                            // have the account info it is most likely that someone logged
+                            // out before an internal transfer completed so the internalTransfersInProgress
+                            // was wiped, display the anonymous account message instead
+                            notificationMessage = localize(`notifications.confirmedInternalNoAccounts`)
+                                .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
+                        } else {
+                            notificationMessage = localize(`notifications.${messageKey}`)
+                                .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
+                                .replace('{{account}}', account1.alias)
+                        }
+                    }
+
+                    showSystemNotification({ type: "info", message: notificationMessage, contextData: { type: messageKey, accountId: account1.id } });
+                }
+
+                // If this event is emitted because a message failed, then this message will only exist on the sender account
+                // Therefore, show the notification (no need to group).
+                if (!confirmed) {
+                    _notify()
+                } else {
+                    // If we have 2 accounts this was an internal transfer
+                    if (account1 && account2) {
+                        _notify(account2.alias);
+                    } else {
+                        _notify()
                     }
                 }
             }
-
-
         },
         onError(error) {
             console.error(error)
@@ -559,6 +551,26 @@ export const initialiseListeners = () => {
             console.error(error)
         }
     })
+}
+
+const updateAllMessagesState = (accounts, messageId, confirmation) => {
+    let conirmationHasChanged = false
+
+    accounts.update((storedAccounts) => {
+        return storedAccounts.map((storedAccount) => {
+            return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
+                messages: storedAccount.messages.map((_message: Message) => {
+                    if (_message.id === messageId) {
+                        conirmationHasChanged = _message.confirmed !== confirmation
+                        _message.confirmed = confirmation
+                    }
+                    return _message
+                })
+            })
+        })
+    })
+
+    return conirmationHasChanged
 }
 
 /**
