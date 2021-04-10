@@ -1,7 +1,7 @@
 import { AvailableExchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
 import { generateRandomId } from 'shared/lib/utils'
-import { api, destroyActor, getStoragePath } from 'shared/lib/wallet'
+import { asyncRemoveStorage, destroyActor, getStoragePath } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
 import type { ChartSelectors } from './chart'
 import { Electron } from './electron'
@@ -124,16 +124,14 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
  *
  * @returns {void}
  */
-export const disposeNewProfile = () => {
+export const disposeNewProfile = async () => {
     const np = get(newProfile)
     if (np) {
-        api.removeStorage({
-            onSuccess() {
-            },
-            onError(err) {
-                console.error(err)
-            },
-        })
+        try {
+            await asyncRemoveStorage()
+        } catch (err) {
+            console.error(err)
+        }
         destroyActor(np.id)
     }
     newProfile.set(null)

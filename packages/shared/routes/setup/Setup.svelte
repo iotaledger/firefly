@@ -92,7 +92,7 @@
 
     async function handleBackClick() {
         cleanupSignup()
-        disposeNewProfile()
+        await disposeNewProfile()
         await cleanupInProgressProfiles()
         dispatch('previous')
     }

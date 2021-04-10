@@ -353,6 +353,19 @@ export const asyncCreateAccount = () => {
     })
 }
 
+export const asyncRemoveStorage = () => {
+    return new Promise<void>((resolve, reject) => {
+        api.removeStorage({
+            onSuccess() {
+                resolve()
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
+
 /**
  * Initialises event listeners from wallet library
  *
