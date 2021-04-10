@@ -250,15 +250,6 @@
                     </div>
                 {/if}
                 <div class="w-full block">
-                    <Amount
-                        error={amountError}
-                        bind:amount
-                        bind:unit
-                        maxClick={handleMaxClick}
-                        {locale}
-                        classes="mb-6"
-                        disabled={$isTransferring}
-                        autofocus />
                     {#if selectedSendType === SEND_TYPE.INTERNAL}
                         <Dropdown
                             value={to?.label || null}
@@ -266,8 +257,9 @@
                             placeholder={locale('general.to')}
                             items={accountsDropdownItems.filter((a) => from && a.id !== from.id)}
                             onSelect={handleToSelect}
-                            disabled={$isTransferring || $liveAccounts.length === 2} />
-                        <Error error={toError} />
+                            disabled={$isTransferring || $liveAccounts.length === 2}
+                            error={toError} 
+                            classes="mb-6" />
                     {:else}
                         <Address
                             error={addressError}
@@ -275,8 +267,17 @@
                             {locale}
                             label={locale('general.sendToAddress')}
                             disabled={$isTransferring}
-                            placeholder={`${locale('general.sendToAddress')}\n${addressPrefix}...`} />
+                            placeholder={`${locale('general.sendToAddress')}\n${addressPrefix}...`}                         
+                            classes="mb-6"/>
                     {/if}
+                    <Amount
+                        error={amountError}
+                        bind:amount
+                        bind:unit
+                        maxClick={handleMaxClick}
+                        {locale}
+                        disabled={$isTransferring}
+                        autofocus />
                 </div>
             </div>
         </div>
