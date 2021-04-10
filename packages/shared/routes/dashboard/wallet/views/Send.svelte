@@ -124,7 +124,7 @@
 
                 if (selectedSendType === SEND_TYPE.EXTERNAL) {
                     // Validate address length
-                    if ($sendParams.address.length !== ADDRESS_LENGTH) {
+                    if (address.length !== ADDRESS_LENGTH) {
                         addressError = locale('error.send.addressLength', {
                             values: {
                                 length: ADDRESS_LENGTH,
