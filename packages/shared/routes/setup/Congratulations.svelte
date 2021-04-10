@@ -2,11 +2,11 @@
     import { Button, Icon, Illustration, OnboardingLayout, Text } from 'shared/components'
     import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
     import { Electron } from 'shared/lib/electron'
-    import { LOG_FILE_NAME, migration } from 'shared/lib/migration'
+    import { LOG_FILE_NAME, migration, resetMigrationState } from 'shared/lib/migration'
     import { activeProfile, newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { formatUnit } from 'shared/lib/units'
     import { getStoragePath } from 'shared/lib/wallet'
-    import { createEventDispatcher, onMount } from 'svelte'
+    import { createEventDispatcher, onMount, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
 
     export let locale
@@ -54,6 +54,12 @@
             dispatch('next')
         }
     }
+
+    onDestroy(() => {
+        if (wasMigrated) {
+            resetMigrationState()
+        }
+    })
 </script>
 
 {#if mobile}

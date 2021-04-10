@@ -18,7 +18,7 @@ export const ADDRESS_SECURITY_LEVEL = 2
 export const MINIMUM_MIGRATION_BALANCE = 1000000
 
 /** Bundle mining timeout for each bundle */
-export const MINING_TIMEOUT_SECONDS = 60 * 10 
+export const MINING_TIMEOUT_SECONDS = 60 * 10
 
 export const MINIMUM_WEIGHT_MAGNITUDE = 14;
 
@@ -395,6 +395,25 @@ export const toggleInputSelection = (address: string): void => {
 
         return bundle
     }))
+}
+
+/**
+ * Resets migration state
+ * 
+ * @method resetMigrationState
+ * 
+ * @returns {void}
+ */
+export const resetMigrationState = (): void => {
+    const { didComplete, data, seed, bundles } = get(migration)
+    didComplete.set(false)
+    data.set({
+        lastCheckedAddressIndex: 0,
+        balance: 0,
+        inputs: []
+    })
+    seed.set(null)
+    bundles.set([])
 }
 
 export const selectedBundlesWithSpentAddresses = derived(get(migration).bundles, (_bundles) => _bundles.filter((bundle) =>
