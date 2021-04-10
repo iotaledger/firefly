@@ -131,7 +131,7 @@
                             },
                         })
                     } else {
-                        addressError = validateBech32Address(addressPrefix, $sendParams.address)
+                        addressError = validateBech32Address(addressPrefix, address)
                     }
                 } else {
                     if (!to) {
@@ -140,6 +140,7 @@
                 }
 
                 if (!amountError && !addressError && !toError) {
+                    $sendParams.address = address
                     $sendParams.amount = amountAsI
                     openPopup({
                         type: 'transaction',
