@@ -24,7 +24,13 @@ const Electron = {
             // Check that the removing profile path matches the user data path
             // so that we don't try and remove things outside our scope
             if (profilePath.startsWith(userDataPath)) {
-                fs.rmdirSync(profilePath, { recursive: true })
+                try {
+                    // Sometime the DB can still be locked while it is flushing
+                    // so retry if we receive a busy exception
+                    fs.rmdirSync(profilePath, { recursive: true, maxRetries: 30, retryDelay: 500 })
+                } catch (err) {
+                    console.log(err)
+                }
             }
         })
     },
