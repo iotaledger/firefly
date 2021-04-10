@@ -3,26 +3,24 @@ import type { Input, MigrationBundle, MigrationData } from 'shared/lib/typings/m
 import Validator from 'shared/lib/validator'
 import { api } from 'shared/lib/wallet'
 import { derived, get, writable, Writable } from 'svelte/store'
-import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
-import { formatUnit } from 'shared/lib/units'
 
-export const LOG_FILE_NAME = 'migration'
+export const LOG_FILE_NAME = 'migration.log'
 
-export const MIGRATION_NODE = 'https://nodes-migration-legacy.iota.cafe:443'
+export const MIGRATION_NODE = 'https://nodes.devnet.iota.org'
 
 export const PERMANODE = 'https://chronicle.iota.org/api'
 
 export const ADDRESS_SECURITY_LEVEL = 2
 
 /** Minimum migration balance */
-export const MINIMUM_MIGRATION_BALANCE = 1000000
+export const MINIMUM_MIGRATION_BALANCE = 100
 
 /** Bundle mining timeout for each bundle */
-export const MINING_TIMEOUT_SECONDS = 60 * 10
+export const MINING_TIMEOUT_SECONDS = 60
 
 export const MINIMUM_WEIGHT_MAGNITUDE = 14;
 
-const MAX_INPUTS_PER_BUNDLE = 30
+const MAX_INPUTS_PER_BUNDLE = 1
 
 interface Bundle {
     index: number;
@@ -429,6 +427,16 @@ export const hasMigratedAllBundles = derived(get(migration).bundles, (_bundles) 
     bundle.migrated === true
 ))
 
+export const totalMigratedBalance = derived(get(migration).bundles, (_bundles) => {
+    return _bundles.reduce((acc, bundle) => {
+        if (bundle.migrated) {
+            return acc + bundle.inputs.reduce((_acc, input) => _acc + input.balance, 0)
+        }
+
+        return acc
+    }, 0)
+})
+
 /**
  * List of chrysalis node endpoints to detect when is live
  */
@@ -524,3 +532,11 @@ export async function checkChrysalisStatus(): Promise<void> {
         }
     }
 }
+
+api.onMigrationProgress({
+    onSuccess(response) {
+        console.log('Response', response)
+    }, onError(error) {
+        console.log('Error', error)
+    }
+})

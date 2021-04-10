@@ -2,7 +2,7 @@
     import { Button, Icon, Illustration, OnboardingLayout, Text } from 'shared/components'
     import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
     import { Electron } from 'shared/lib/electron'
-    import { LOG_FILE_NAME, migration, resetMigrationState } from 'shared/lib/migration'
+    import { LOG_FILE_NAME, migration, resetMigrationState, totalMigratedBalance } from 'shared/lib/migration'
     import { activeProfile, newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { formatUnit } from 'shared/lib/units'
     import { getStoragePath } from 'shared/lib/wallet'
@@ -31,7 +31,8 @@
     const dispatch = createEventDispatcher()
 
     let fiatbalance = `${convertToFiat(
-        balance,
+        // Only show actually migrated balance to user
+        $totalMigratedBalance,
         get(currencies)[CurrencyTypes.USD],
         get(exchangeRates)[AvailableExchangeRates.USD]
     )} ${CurrencyTypes.USD}`
