@@ -56,7 +56,9 @@
         console.log('Learn about migration clicked')
     }
     function handleBackClick() {
-        dispatch('previous')
+        if (!loading) {
+            dispatch('previous')
+        }
     }
 
     onDestroy(() => {

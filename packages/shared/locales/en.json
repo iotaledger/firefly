@@ -141,7 +141,8 @@
             "beginMigration": "Begin Migration",
             "migrating": "Migrating funds...",
             "migrated": "{balance} migrated",
-            "migrationFailed": "Migration Failed"
+            "migrationFailed": "Migration Failed",
+            "noAddressesForMigration": "You do not have any other addresses to migrate. Please select any of the above to continue."
         },
         "bundleMiningWarning": {
             "title": "Warning",

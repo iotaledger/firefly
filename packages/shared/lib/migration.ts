@@ -1,5 +1,6 @@
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import type { Input, MigrationBundle, MigrationData } from 'shared/lib/typings/migration'
+import type { Address } from 'shared/lib/typings/address'
 import Validator from 'shared/lib/validator'
 import { api } from 'shared/lib/wallet'
 import { derived, get, writable, Writable } from 'svelte/store'
@@ -13,14 +14,14 @@ export const PERMANODE = 'https://chronicle.iota.org/api'
 export const ADDRESS_SECURITY_LEVEL = 2
 
 /** Minimum migration balance */
-export const MINIMUM_MIGRATION_BALANCE = 100
+export const MINIMUM_MIGRATION_BALANCE = 1000000
 
 /** Bundle mining timeout for each bundle */
-export const MINING_TIMEOUT_SECONDS = 60
+export const MINING_TIMEOUT_SECONDS = 60 * 10
 
 export const MINIMUM_WEIGHT_MAGNITUDE = 14;
 
-const MAX_INPUTS_PER_BUNDLE = 1
+const MAX_INPUTS_PER_BUNDLE = 30
 
 interface Bundle {
     index: number;
@@ -371,23 +372,25 @@ export const getInputIndexesForBundle = (bundle: Bundle): number[] => {
 }
 
 export const spentAddressesFromBundles = derived(get(migration).bundles, (_bundles) => _bundles
-    .filter((bundle) => bundle.shouldMine === true)
+    .filter((bundle) => bundle.migrated === false && bundle.shouldMine === true)
     // TODO: Perhaps use a different way to gather inputs
     .map((bundle) => Object.assign({}, bundle.inputs[0], {
+        selected: bundle.selected,
         bundleHash: bundle.bundleHash,
         crackability: bundle.crackability
     }))
 )
 
-export const hasSingleBundle = derived(get(migration).bundles, (_bundles) => _bundles.length === 1)
+export const hasSingleBundle = derived(get(migration).bundles, (_bundles) => _bundles.length === 1 && _bundles[0].selected === true)
 
-export const hasBundlesWithSpentAddresses = derived(get(migration).bundles, (_bundles) => _bundles.length && _bundles.some((bundle) => bundle.shouldMine === true))
+export const hasBundlesWithSpentAddresses = derived(get(migration).bundles, (_bundles) => _bundles.length && _bundles.some((bundle) => bundle.shouldMine === true &&
+    bundle.selected === true))
 
-export const toggleInputSelection = (address: string): void => {
+export const toggleInputSelection = (address: Address): void => {
     const { bundles } = get(migration)
 
     bundles.update((_bundles) => _bundles.map((bundle) => {
-        if (bundle.inputs.some((input) => input.address === address)) {
+        if (bundle.inputs.some((input) => input.address === address.address)) {
             return Object.assign({}, bundle, { selected: !bundle.selected })
         }
 
@@ -414,22 +417,34 @@ export const resetMigrationState = (): void => {
     bundles.set([])
 }
 
+export const selectedUnmigratedBundles = derived(get(migration).bundles, (_bundles) => _bundles.filter((bundle) =>
+    bundle.selected === true && bundle.migrated === false
+))
+
 export const selectedBundlesWithSpentAddresses = derived(get(migration).bundles, (_bundles) => _bundles.filter((bundle) =>
     bundle.selected === true &&
     bundle.shouldMine === true
 ))
 
 export const unmigratedBundles = derived(get(migration).bundles, (_bundles) => _bundles.filter((bundle) =>
+    bundle.selected === true &&
     bundle.migrated === false
 ))
 
 export const hasMigratedAllBundles = derived(get(migration).bundles, (_bundles) => _bundles.length && _bundles.every((bundle) =>
+    bundle.selected === true &&
     bundle.migrated === true
 ))
 
+export const hasMigratedAllSelectedBundles = derived(get(migration).bundles, (_bundles) => {
+    const selectedBundles = _bundles.filter((bundle) => bundle.selected === true)
+
+    return selectedBundles.length && selectedBundles.every((bundle) => bundle.migrated === true)
+});
+
 export const totalMigratedBalance = derived(get(migration).bundles, (_bundles) => {
     return _bundles.reduce((acc, bundle) => {
-        if (bundle.migrated) {
+        if (bundle.selected && bundle.migrated) {
             return acc + bundle.inputs.reduce((_acc, input) => _acc + input.balance, 0)
         }
 

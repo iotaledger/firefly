@@ -1,7 +1,13 @@
 <script lang="typescript">
     import { Button, Illustration, OnboardingLayout, SpentAddress, Text } from 'shared/components'
     import { createEventDispatcher } from 'svelte'
-    import { toggleInputSelection, spentAddressesFromBundles } from 'shared/lib/migration'
+    import {
+        toggleInputSelection,
+        spentAddressesFromBundles,
+        selectedUnmigratedBundles,
+        MINIMUM_MIGRATION_BALANCE,
+    } from 'shared/lib/migration'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale
     export let mobile
@@ -9,10 +15,16 @@
     const dispatch = createEventDispatcher()
 
     let addresses = $spentAddressesFromBundles
-        .map((address) => Object.assign({}, address, { disabled: false, id: address.index, risk: address.crackability }))
+        .map((address) =>
+            Object.assign({}, address, {
+                disabled: address.balance < MINIMUM_MIGRATION_BALANCE,
+                id: address.index,
+                risk: address.crackability,
+            })
+        )
         .sort((a, b) => b.risk - a.risk)
 
-    let selectedAddresses = addresses.slice()
+    let selectedAddresses = addresses.filter((address) => address.disabled === false && address.selected === true)
 
     function onAddressClick(address) {
         var index = selectedAddresses.findIndex((_address) => _address.id === address.id)
@@ -30,7 +42,18 @@
         dispatch('previous')
     }
     function handleContinueClick() {
-        dispatch('next')
+        if (selectedAddresses.length) {
+            dispatch('next')
+        } else {
+            if (selectedUnmigratedBundles.length) {
+                dispatch('next', { skippedMining: true })
+            } else {
+                showAppNotification({
+                    type: 'error',
+                    message: locale('views.migrate.noAddressesForMigration'),
+                })
+            }
+        }
     }
     function rerunProcess() {
         dispatch('previous')
@@ -59,7 +82,7 @@
             <Button secondary disabled={!selectedAddresses.length} classes="w-full mt-2" onClick={() => rerunProcess()}>
                 {locale('views.securityCheckCompleted.rerun')}
             </Button>
-            <Button disabled={!selectedAddresses.length} classes="w-full mt-4" onClick={() => handleContinueClick()}>
+            <Button classes="w-full mt-4" onClick={() => handleContinueClick()}>
                 {locale('views.securityCheckCompleted.continueMigration')}
             </Button>
         </div>

@@ -40,6 +40,8 @@
 
     const _next = async (event) => {
         let nextState
+        let params = event.detail || {}
+
         switch (state) {
             case MigrateState.Init:
                 if ($hasBundlesWithSpentAddresses) {
@@ -61,7 +63,8 @@
                 nextState = MigrateState.SecureSpentAddresses
                 break
             case MigrateState.SecureSpentAddresses:
-                nextState = MigrateState.SecuringSpentAddresses
+                const { skippedMining } = params
+                nextState = skippedMining ? MigrateState.TransferFragmentedFunds : MigrateState.SecuringSpentAddresses
                 break
             case MigrateState.SecuringSpentAddresses:
                 nextState = MigrateState.SecurityCheckCompleted

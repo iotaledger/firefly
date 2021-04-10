@@ -7,7 +7,8 @@
         createMigrationBundle,
         sendMigrationBundle,
         unmigratedBundles,
-        hasMigratedAllBundles,
+        hasMigratedAllSelectedBundles,
+        selectedUnmigratedBundles,
     } from 'shared/lib/migration'
 
     export let locale
@@ -16,11 +17,11 @@
     let busy = false
     let migrated = false
     let migratingFundsMessage = ''
-    let fullSuccess = $hasMigratedAllBundles
+    let fullSuccess = $hasMigratedAllSelectedBundles
 
-    const { didComplete, bundles } = $migration
+    const { didComplete } = $migration
 
-    let transactions = $bundles.map((_bundle, index) => ({
+    let transactions = $selectedUnmigratedBundles.map((_bundle, index) => ({
         ..._bundle,
         name: locale('views.transferFragmentedFunds.transaction', { values: { number: index + 1 } }),
         balance: _bundle.inputs.reduce((acc, input) => acc + input.balance, 0),
@@ -28,14 +29,16 @@
         errorText: null,
     }))
 
-    const unsubscribe = hasMigratedAllBundles.subscribe((_hasMigrationAllBundles) => {
-        fullSuccess = _hasMigrationAllBundles
+    const unsubscribe = hasMigratedAllSelectedBundles.subscribe((_hasMigratedAllSelectedBundles) => {
+        fullSuccess = _hasMigratedAllSelectedBundles
     })
 
     const dispatch = createEventDispatcher()
 
     function handleBackClick() {
-        dispatch('previous')
+        if (!busy) {
+            dispatch('previous')
+        }
     }
 
     function handleContinueClick() {

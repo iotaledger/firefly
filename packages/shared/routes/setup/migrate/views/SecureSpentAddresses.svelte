@@ -1,18 +1,26 @@
 <script lang="typescript">
     import { Button, Illustration, OnboardingLayout, SpentAddress, Text } from 'shared/components'
     import { createEventDispatcher } from 'svelte'
-    import { toggleInputSelection, spentAddressesFromBundles, MINIMUM_MIGRATION_BALANCE } from 'shared/lib/migration'
+    import {
+        toggleInputSelection,
+        spentAddressesFromBundles,
+        MINIMUM_MIGRATION_BALANCE,
+        selectedUnmigratedBundles,
+    } from 'shared/lib/migration'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale
     export let mobile
 
     const dispatch = createEventDispatcher()
 
-    let addresses = $spentAddressesFromBundles.map((address) =>
-        Object.assign({}, address, { disabled: address.balance < MINIMUM_MIGRATION_BALANCE, id: address.index })
-    ).sort((a, b) => b.balance - a.balance)
+    let addresses = $spentAddressesFromBundles
+        .map((address) =>
+            Object.assign({}, address, { disabled: address.balance < MINIMUM_MIGRATION_BALANCE, id: address.index })
+        )
+        .sort((a, b) => b.balance - a.balance)
 
-    let selectedAddresses = addresses.slice().filter((address) => !address.disabled)
+    let selectedAddresses = addresses.filter((address) => address.disabled === false && address.selected === true)
 
     function onAddressClick(address) {
         var index = selectedAddresses.findIndex((_address) => _address.id === address.id)
@@ -30,7 +38,15 @@
         dispatch('previous')
     }
     function secureAddresses() {
-        dispatch('next')
+        if (selectedAddresses.length) {
+            dispatch('next')
+        } else {
+            if (selectedUnmigratedBundles.length) {
+                dispatch('next', { skippedMining: true })
+            } else {
+                showAppNotification({ type: 'error', message: locale('views.migrate.noAddressesForMigration') })
+            }
+        }
     }
     function handleSkipClick() {
         dispatch('next', { skippedMining: true })
@@ -56,9 +72,7 @@
             </div>
         </div>
         <div slot="leftpane__action">
-            <Button classes="w-full" disabled={!selectedAddresses.length} onClick={() => secureAddresses()}>
-                {locale('views.secureSpentAddresses.title')}
-            </Button>
+            <Button classes="w-full" onClick={() => secureAddresses()}>{locale('views.secureSpentAddresses.title')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
             <Illustration illustration="migrate-desktop" height="100%" width="auto" />

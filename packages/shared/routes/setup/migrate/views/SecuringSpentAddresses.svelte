@@ -88,7 +88,7 @@
     //TODO:
     const handleCancelClick = () => {
         console.log('Cancel clicked')
-        dispatch('previous')
+        // dispatch('previous')
     }
 
     onDestroy(() => {
