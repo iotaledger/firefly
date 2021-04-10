@@ -27,6 +27,7 @@
     let selectedSendType = $sendParams.isInternal ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
     let unit = Unit.Mi
     let amount = $sendParams.amount === 0 ? '' : convertUnitsNoE($sendParams.amount, Unit.i, unit)
+    let address = $sendParams.address
     let to = undefined
     let amountError = ''
     let addressPrefix = ($account ?? $liveAccounts[0]).depositAddress.split('1')[0]
@@ -36,11 +37,12 @@
     // This looks odd but sets a reactive dependency on amount, so when it changes the error will clear
     $: amount, (amountError = '')
     $: to, (toError = '')
-    $: $sendParams.address, (addressError = '')
+    $: address, (addressError = '')
 
     const sendSubscription = sendParams.subscribe((s) => {
         selectedSendType = s.isInternal ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
         amount = s.amount === 0 ? '' : convertUnitsNoE(s.amount, Unit.i, unit)
+        address = s.address
     })
 
     let transferSteps: {
@@ -263,7 +265,7 @@
                     {:else}
                         <Address
                             error={addressError}
-                            bind:address={$sendParams.address}
+                            bind:address={address}
                             {locale}
                             label={locale('general.sendToAddress')}
                             disabled={$isTransferring}
