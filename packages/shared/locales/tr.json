@@ -209,6 +209,10 @@
                 "title": "Hesabı Yeniden Eşitle",
                 "description": "Hesaplarınızın güncel olduğundan emin olmak için bir arka plan görevi başlatır."
             },
+            "hiddenAccounts": {
+                "title": "Hidden accounts",
+                "description": "Selecting this options will show accounts that were previously hidden."
+            },
             "deleteProfile": {
                 "title": "Profili sil",
                 "description": "Cüzdanınız tamamını, profilinizi ve işlem geçmişinizi siler. Bir yedeğiniz olduğundan emin olun."
@@ -223,11 +227,19 @@
             },
             "nodeSettings": {
                 "title": "Ağ Ayarları",
-                "description": "Kendi node’unuza ve ya listeden seçtiğiniz bir node’a bağlanmak için Manual’i seçiniz."
+                "description": "Select Manual to configure the node settings and connect to your own node"
             },
             "configureNodeList": {
                 "title": "Seçilmiş Sayfa",
-                "description": ""
+                "description": "Manage the list of nodes your wallet connects to.",
+                "primaryNode": "Primary node",
+                "excludeNode": "Exclude node",
+                "includeNode": "Include node",
+                "viewDetails": "View details",
+                "setAsPrimary": "Set as primary",
+                "removeNode": "Düğüm kaldır",
+                "includeOfficialNodeList": "Include official node list",
+                "noNodes": "There are no nodes, automatic selection will be used instead."
             },
             "proofOfWork": {
                 "title": "İş Kanıtı",
@@ -332,17 +344,26 @@
             "backupDescription": "Hesap ve işlem geçmişinizin bir kopyasını alabilmeniz için düzenli olarak yedek almanız önemlidir.",
             "backupWarning": "Eğer yedeğinizi ve kurtarma şifrenizi kaybederseniz, hesabınıza erişimi kaybedeceksiniz.",
             "notBackedUp": "Yedeklenmedi",
-            "notBackedUpDescription": "Stronghold'unuzu yedeklemediniz"
+            "notBackedUpDescription": "Stronghold'unuzu yedeklemediniz",
+            "saving": "Saving..."
         },
         "deleteAccount": {
-            "title": "%{name} kaldır",
-            "body": "Bu hesabı daha sonra tekrar ekleyebilirsiniz fakat işlem geçmişinizi kaybedebilirsiniz.",
-            "typePassword": "Type your password to confirm.",
-            "deleteAccount": "Hesabı Kaldır",
-            "errorTitle": "Silinemedi: {name}",
-            "errorBody1": "Bir hesabı silebilmek için hesap balansınız sıfır olmalıdır.",
-            "errorBody2": "Hesabınızda {balance} tutarında bakiye bulunmaktadır. Lütfen bakiyeyi başka bir hesaba taşıyıp, tekrar deneyiniz.",
-            "errorBody3": "Bu hesabı silemezsiniz, en azından bir hesap bulunmalıdır."
+            "title": "Delete {name}?",
+            "body": "This account has no transaction history. It can safely be deleted.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Delete account",
+            "errorTitle": "Unable to delete {name}",
+            "errorBody1": "You cannot delete this account, you must have at least one."
+        },
+        "hideAccount": {
+            "title": "Hide {name}?",
+            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Hide account",
+            "errorTitle": "Unable to hide {name}",
+            "errorBody1": "To hide an account it must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
+            "errorBody3": "You cannot hide this account, you must have at least one."
         },
         "addressHistory": {
             "title": "{name} address history",
@@ -350,6 +371,7 @@
         },
         "node": {
             "titleAdd": "Bir node ekle",
+            "titleUpdate": "Update a node",
             "titleRemove": "Düğüm kaldır",
             "titleDetails": "Node detayları",
             "nodeAddress": "Node adresi",
@@ -377,6 +399,10 @@
             "totalMem": "Toplam Hafıza",
             "freeMem": "Boş Hafıza",
             "userPath": "Kullanıcı yolu"
+        },
+        "transaction": {
+            "title": "Confirm transaction",
+            "body": "You’re about to send {amount} to"
         }
     },
     "charts": {
@@ -427,16 +453,19 @@
         "enableDeveloperMode": "Geliştirici modunu etkinleştir",
         "enableSystemNotifications": "Bildirimleri etkinleştir",
         "exportState": "State dışa aktarın",
-        "outsourceProofOfWork": "Dış kaynak iş gücü kanıtı",
+        "localProofOfWork": "Local proof of work",
         "unlock": "Kilidi Aç",
         "updateFirefly": "Firefly'ı güncelle",
         "restartNow": "Şimdi yeniden başlat",
         "saveBackup": "Stronghold yedeklemeyi kaydet",
         "customizeAcount": "Hesabı özelleştir",
         "viewAddressHistory": "Adres geçmişini göster",
-        "deleteAccount": "Hesabı Kaldır",
+        "hideAccount": "Hide account",
+        "showAccount": "Unhide account",
+        "deleteAccount": "Delete account",
         "max": "En yüksek",
         "addNode": "Düğüm ekle",
+        "updateNode": "Update node",
         "removeNode": "Düğüm kaldır",
         "hide": "Sakla",
         "hideOthers": "Diğerlerini sakla",
@@ -461,7 +490,9 @@
         "skipBackup": "Kurtarma dosyasını geç",
         "finishSetup": "Kurulumu Bitir",
         "readDocumentation": "Dokümantasyonu oku",
-        "visitFaq": "FAQ ziyaret et"
+        "visitFaq": "FAQ ziyaret et",
+        "showHiddenAccounts": "Show hidden accounts",
+        "confirm": "Confirm"
     },
     "general": {
         "password": "Parola",
@@ -507,7 +538,7 @@
         "appearance": "Görünüm",
         "lightTheme": "Aydınlık tema",
         "darkTheme": "Karanlık tema",
-        "totalBalance": "Toplam Bakiye",
+        "balance": "Balance",
         "accountBalance": "Hesap Bakiyesi",
         "incoming": "Gelen",
         "outgoing": "Giden",
@@ -567,7 +598,8 @@
         "passwordStrength2": "Zayıf",
         "passwordStrength3": "Ortalama",
         "passwordStrength4": "Güçlü",
-        "creatingProfile": "Yeni bir hesap oluşturuluyor, lütfen bekleyin..."
+        "creatingProfile": "Yeni bir hesap oluşturuluyor, lütfen bekleyin...",
+        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
     },
     "dates": {
         "today": "Bugün",
@@ -581,6 +613,7 @@
         "valueTx": "{{account}} 'a {{value}} alınıyor",
         "confirmed": "{{account}} hesabından giden {{value}} onaylandı",
         "confirmedInternal": "{{senderAccount}} 'dan {{receiverAccount}} 'a {{value}} onaylandı",
+        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
         "failed": "{{account}} hesabından giden {{value}} onaylandı",
         "downloadingUpdate": "Güncelleme indiriliyor",
         "updateReady": "Güncelleme hazır",

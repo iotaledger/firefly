@@ -209,6 +209,10 @@
                 "title": "계정 다시 동기화",
                 "description": "계정이 최신 상태인지 확인하기 위해 백그라운드 작업을 시작합니다."
             },
+            "hiddenAccounts": {
+                "title": "Hidden accounts",
+                "description": "Selecting this options will show accounts that were previously hidden."
+            },
             "deleteProfile": {
                 "title": "사용자 삭제",
                 "description": "지갑, 사용자 및 거래 내역 전체를 삭제합니다. 삭제 전에 지갑을 백업해 놓았는지 확인하세요."
@@ -223,11 +227,19 @@
             },
             "nodeSettings": {
                 "title": "노드 설정",
-                "description": "수동을 선택하여 접속할 노드를 목록에서 수동으로 고르거나 직접 추가"
+                "description": "Select Manual to configure the node settings and connect to your own node"
             },
             "configureNodeList": {
                 "title": "노드 선택",
-                "description": ""
+                "description": "Manage the list of nodes your wallet connects to.",
+                "primaryNode": "Primary node",
+                "excludeNode": "Exclude node",
+                "includeNode": "Include node",
+                "viewDetails": "View details",
+                "setAsPrimary": "Set as primary",
+                "removeNode": "노드 삭제",
+                "includeOfficialNodeList": "Include official node list",
+                "noNodes": "There are no nodes, automatic selection will be used instead."
             },
             "proofOfWork": {
                 "title": "작업증명",
@@ -332,17 +344,26 @@
             "backupDescription": "계정과 거래 기록의 사본을 유지하기 위해 규칙적으로 백업하는 것이 중요합니다.",
             "backupWarning": "백업과 복원 문구를 잃어버리게 될 경우 지갑 잔고를 잃게 됩니다.",
             "notBackedUp": "백업되지 않음",
-            "notBackedUpDescription": "아직 Stronghold를 백업하지 않았습니다."
+            "notBackedUpDescription": "아직 Stronghold를 백업하지 않았습니다.",
+            "saving": "Saving..."
         },
         "deleteAccount": {
-            "title": "{name} 계정을 삭제할까요?",
-            "body": "나중에 이 계정을 다시 추가할 수 있지만 거래 내역은 복원되지 않습니다.",
-            "typePassword": "Type your password to confirm.",
-            "deleteAccount": "계정 삭제",
-            "errorTitle": "{name} 계정을 삭제할 수 없습니다",
-            "errorBody1": "계정을 삭제하기 위해서는 잔액이 0이어야 합니다.",
-            "errorBody2": "이 계정에 잔액 {balance}가 남아있습니다. 이 잔액을 다른 계정으로 옮기고 다시 시도해 주세요.",
-            "errorBody3": "이 계정은 삭제할 수 없습니다. 하나 이상의 계정이 있어야 합니다."
+            "title": "Delete {name}?",
+            "body": "This account has no transaction history. It can safely be deleted.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Delete account",
+            "errorTitle": "Unable to delete {name}",
+            "errorBody1": "You cannot delete this account, you must have at least one."
+        },
+        "hideAccount": {
+            "title": "Hide {name}?",
+            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Hide account",
+            "errorTitle": "Unable to hide {name}",
+            "errorBody1": "To hide an account it must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
+            "errorBody3": "You cannot hide this account, you must have at least one."
         },
         "addressHistory": {
             "title": "주소 {name} 이력",
@@ -350,6 +371,7 @@
         },
         "node": {
             "titleAdd": "노드 추가",
+            "titleUpdate": "Update a node",
             "titleRemove": "노드 삭제",
             "titleDetails": "노드 세부사항",
             "nodeAddress": "노드 주소",
@@ -377,6 +399,10 @@
             "totalMem": "전체 메모리",
             "freeMem": "사용 가능한 메모리",
             "userPath": "사용자 경로"
+        },
+        "transaction": {
+            "title": "Confirm transaction",
+            "body": "You’re about to send {amount} to"
         }
     },
     "charts": {
@@ -427,16 +453,19 @@
         "enableDeveloperMode": "개발자 모드 활성화하기",
         "enableSystemNotifications": "시스템 알림 켜기",
         "exportState": "상태 내보내기",
-        "outsourceProofOfWork": "원격 작업증명 수행하기",
+        "localProofOfWork": "Local proof of work",
         "unlock": "잠금 해제",
         "updateFirefly": "Firefly 업데이트",
         "restartNow": "지금 다시 시작",
         "saveBackup": "Stronghold 백업 저장하기",
         "customizeAcount": "계정 설정",
         "viewAddressHistory": "주소 이력 보기",
-        "deleteAccount": "계정 삭제하기",
+        "hideAccount": "Hide account",
+        "showAccount": "Unhide account",
+        "deleteAccount": "Delete account",
         "max": "최대",
         "addNode": "노드 추가",
+        "updateNode": "Update node",
         "removeNode": "노드 삭제",
         "hide": "숨기기",
         "hideOthers": "나머지 숨기기",
@@ -461,7 +490,9 @@
         "skipBackup": "파일 백업 건너뛰기",
         "finishSetup": "설정 완료하기",
         "readDocumentation": "설명서 읽기",
-        "visitFaq": "자주 묻는 질문들 보기"
+        "visitFaq": "자주 묻는 질문들 보기",
+        "showHiddenAccounts": "Show hidden accounts",
+        "confirm": "Confirm"
     },
     "general": {
         "password": "비밀번호",
@@ -507,7 +538,7 @@
         "appearance": "모양새",
         "lightTheme": "밝은 테마",
         "darkTheme": "어두운 테마",
-        "totalBalance": "총 잔액",
+        "balance": "Balance",
         "accountBalance": "계정 잔액",
         "incoming": "받음",
         "outgoing": "보냄",
@@ -567,7 +598,8 @@
         "passwordStrength2": "약함",
         "passwordStrength3": "보통",
         "passwordStrength4": "강함",
-        "creatingProfile": "사용자를 만드는 중입니다. 잠시만 기다려 주세요..."
+        "creatingProfile": "사용자를 만드는 중입니다. 잠시만 기다려 주세요...",
+        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
     },
     "dates": {
         "today": "오늘",
@@ -581,6 +613,7 @@
         "valueTx": "{{account}}에 {{value}}를 받는 중",
         "confirmed": "{{account}}에서 {{value}}를 보내는 거래가 성공적으로 승인되었습니다",
         "confirmedInternal": "{{senderAccount}}에서 {{receiverAccount}}로 {{value}}을 보내는 거래가 승인되었습니다",
+        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
         "failed": "{{account}}에서 {{value}}를 보내는 거래가 실패하였습니다",
         "downloadingUpdate": "업데이트 다운로드 중",
         "updateReady": "업데이트 준비됨",

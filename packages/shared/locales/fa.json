@@ -209,6 +209,10 @@
                 "title": "همگام سازی مجدد حساب ها",
                 "description": "Starts a background task to make sure your accounts are up to date."
             },
+            "hiddenAccounts": {
+                "title": "Hidden accounts",
+                "description": "Selecting this options will show accounts that were previously hidden."
+            },
             "deleteProfile": {
                 "title": "حذف پروفایل",
                 "description": "تمام کیف پول، پروفایل و سوابق تراکنش ها را حذف میکند. از داشتن بک آپ مطمئن شوید."
@@ -223,11 +227,19 @@
             },
             "nodeSettings": {
                 "title": "تنظیمات نود",
-                "description": "برای گزینش بین لیست نود یا اتصال به نود خود گزینه Manual را انتخاب کنید"
+                "description": "Select Manual to configure the node settings and connect to your own node"
             },
             "configureNodeList": {
                 "title": "انتخاب نود",
-                "description": ""
+                "description": "Manage the list of nodes your wallet connects to.",
+                "primaryNode": "Primary node",
+                "excludeNode": "Exclude node",
+                "includeNode": "Include node",
+                "viewDetails": "View details",
+                "setAsPrimary": "Set as primary",
+                "removeNode": "حذف نود",
+                "includeOfficialNodeList": "Include official node list",
+                "noNodes": "There are no nodes, automatic selection will be used instead."
             },
             "proofOfWork": {
                 "title": "اثبات کار",
@@ -332,17 +344,26 @@
             "backupDescription": "گرفتن بک آپ مهم میباشد، زیرا به شما اطمینان میدهد که کپی حساب ها و سوابق معاملات خود را داشته باشید.",
             "backupWarning": "در صورت گم کردن بک آپ و عبارت بازیابی، دسترسی شما به وجوه خود از دست خواهد رفت.",
             "notBackedUp": "بک آپ گرفته نشده",
-            "notBackedUpDescription": "شما از استرانگ هُلد خود بک آپ نگرفته اید"
+            "notBackedUpDescription": "شما از استرانگ هُلد خود بک آپ نگرفته اید",
+            "saving": "Saving..."
         },
         "deleteAccount": {
-            "title": "حذف {name}?",
-            "body": "شما میتوانید دوباره این حساب را اضافه کنید ولی سوابق تراکنش های خود را از دست خواهید داد.",
-            "typePassword": "Type your password to confirm.",
-            "deleteAccount": "حذف حساب",
-            "errorTitle": "امکان حذف {name} وجود ندارد",
-            "errorBody1": "برای حذف یک حساب، موجودی آن باید صفر باشد.",
-            "errorBody2": "در حال حاضر مانده حساب شما {balance} میباشد. لطفا این مبلغ را به حساب دیگری انتقال داده و دوباره امتحان کنید.",
-            "errorBody3": "شما نمیتوانید این حساب را حذف کنید، حداقل به یک حساب نیاز دارید."
+            "title": "Delete {name}?",
+            "body": "This account has no transaction history. It can safely be deleted.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Delete account",
+            "errorTitle": "Unable to delete {name}",
+            "errorBody1": "You cannot delete this account, you must have at least one."
+        },
+        "hideAccount": {
+            "title": "Hide {name}?",
+            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Hide account",
+            "errorTitle": "Unable to hide {name}",
+            "errorBody1": "To hide an account it must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
+            "errorBody3": "You cannot hide this account, you must have at least one."
         },
         "addressHistory": {
             "title": "{name} address history",
@@ -350,6 +371,7 @@
         },
         "node": {
             "titleAdd": "اضافه کردن نود",
+            "titleUpdate": "Update a node",
             "titleRemove": "حذف نود",
             "titleDetails": "جزییات نود",
             "nodeAddress": "آدرس نود",
@@ -377,6 +399,10 @@
             "totalMem": "کل حافظه",
             "freeMem": "حافظه آزاد",
             "userPath": "مسیر کاربر"
+        },
+        "transaction": {
+            "title": "Confirm transaction",
+            "body": "You’re about to send {amount} to"
         }
     },
     "charts": {
@@ -427,16 +453,19 @@
         "enableDeveloperMode": "فعالسازی حالت برنامه نویسی",
         "enableSystemNotifications": "فعالسازی اعلان های سیستم",
         "exportState": "استخراج وضعیت",
-        "outsourceProofOfWork": "اثبات کار با منبع خارجی",
+        "localProofOfWork": "Local proof of work",
         "unlock": "بازکردن",
         "updateFirefly": "به روز رسانی فایرفلای",
         "restartNow": "شروع مجدد فوری",
         "saveBackup": "ذخیره بک آپ Stronghold",
         "customizeAcount": "شخصی سازی حساب",
         "viewAddressHistory": "نمایش سوابق آدرس",
-        "deleteAccount": "حذف حساب",
+        "hideAccount": "Hide account",
+        "showAccount": "Unhide account",
+        "deleteAccount": "Delete account",
         "max": "حداکثر",
         "addNode": "اضافه کردن نود",
+        "updateNode": "Update node",
         "removeNode": "حذف نود",
         "hide": "پنهان کردن",
         "hideOthers": "پنهان کردن بقیه",
@@ -461,7 +490,9 @@
         "skipBackup": "رد شدن از بک آپ گیری فایل",
         "finishSetup": "پایان راه اندازی",
         "readDocumentation": "مستندات را بخوانید",
-        "visitFaq": "بخش سوالات متداول را ببینید"
+        "visitFaq": "بخش سوالات متداول را ببینید",
+        "showHiddenAccounts": "Show hidden accounts",
+        "confirm": "Confirm"
     },
     "general": {
         "password": "رمز عبور",
@@ -507,7 +538,7 @@
         "appearance": "ظاهر",
         "lightTheme": "تم روشن",
         "darkTheme": "تم تاریک",
-        "totalBalance": "موجودی کل",
+        "balance": "Balance",
         "accountBalance": "موجودی حساب",
         "incoming": "ورودی",
         "outgoing": "خروجی",
@@ -567,7 +598,8 @@
         "passwordStrength2": "ضعیف",
         "passwordStrength3": "متوسط",
         "passwordStrength4": "قوی",
-        "creatingProfile": "در حال ساختن پروفایل، لطفا صبر کنید..."
+        "creatingProfile": "در حال ساختن پروفایل، لطفا صبر کنید...",
+        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
     },
     "dates": {
         "today": "امروز",
@@ -581,6 +613,7 @@
         "valueTx": "در حال دریافت {{value}} به {{account}}",
         "confirmed": "خروجی {{value}} از {{account}} تایید شد",
         "confirmedInternal": "میزان {{value}} از {{senderAccount}} به {{receiverAccount}} تایید شد.",
+        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
         "failed": "خروجی {{value}} از {{account}} ناموفق بود",
         "downloadingUpdate": "درحال دانلود به‌روزرسانی",
         "updateReady": "به روز رسانی انجام شد",

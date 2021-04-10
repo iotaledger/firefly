@@ -209,6 +209,10 @@
                 "title": "Hesabê xwe ji hevdemê rake",
                 "description": "Starts a background task to make sure your accounts are up to date."
             },
+            "hiddenAccounts": {
+                "title": "Hesabên veşartî",
+                "description": "Ev jêgirtin hesabên berîya niha hatîn veşartin dê bidê nîşan."
+            },
             "deleteProfile": {
                 "title": "Delete profile",
                 "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
@@ -223,11 +227,19 @@
             },
             "nodeSettings": {
                 "title": "Sazkirina girêk",
-                "description": "Select Manual to choose from the node list or connect to your own node"
+                "description": "Select Manual to configure the node settings and connect to your own node"
             },
             "configureNodeList": {
                 "title": "Select a node",
-                "description": ""
+                "description": "Manage the list of nodes your wallet connects to.",
+                "primaryNode": "Primary node",
+                "excludeNode": "Exclude node",
+                "includeNode": "Include node",
+                "viewDetails": "View details",
+                "setAsPrimary": "Set as primary",
+                "removeNode": "Remove node",
+                "includeOfficialNodeList": "Include official node list",
+                "noNodes": "There are no nodes, automatic selection will be used instead."
             },
             "proofOfWork": {
                 "title": "Delîlên kar",
@@ -332,17 +344,26 @@
             "backupDescription": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
             "backupWarning": "If you lose your backup and recovery phrase you will lose access to your funds.",
             "notBackedUp": "Not backed up",
-            "notBackedUpDescription": "You have not backed up your Stronghold"
+            "notBackedUpDescription": "You have not backed up your Stronghold",
+            "saving": "Saving..."
         },
         "deleteAccount": {
-            "title": "Remove {name}?",
-            "body": "You can add this account back later but you may lose your transaction history.",
-            "typePassword": "Type your password to confirm.",
-            "deleteAccount": "Remove account",
-            "errorTitle": "Unable to remove {name}",
-            "errorBody1": "To remove an account it must have 0 balance.",
+            "title": "Delete {name}?",
+            "body": "This account has no transaction history. It can safely be deleted.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Delete account",
+            "errorTitle": "Unable to delete {name}",
+            "errorBody1": "You cannot delete this account, you must have at least one."
+        },
+        "hideAccount": {
+            "title": "Hide {name}?",
+            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Hide account",
+            "errorTitle": "Unable to hide {name}",
+            "errorBody1": "To hide an account it must have 0 balance.",
             "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
-            "errorBody3": "You cannot remove this account, you must have at least one."
+            "errorBody3": "You cannot hide this account, you must have at least one."
         },
         "addressHistory": {
             "title": "{name} address history",
@@ -350,6 +371,7 @@
         },
         "node": {
             "titleAdd": "Add a node",
+            "titleUpdate": "Update a node",
             "titleRemove": "Remove a node",
             "titleDetails": "Node details",
             "nodeAddress": "Node address",
@@ -377,6 +399,10 @@
             "totalMem": "Total Memory",
             "freeMem": "Free Memory",
             "userPath": "User Path"
+        },
+        "transaction": {
+            "title": "Confirm transaction",
+            "body": "You’re about to send {amount} to"
         }
     },
     "charts": {
@@ -427,16 +453,19 @@
         "enableDeveloperMode": "Enable developer mode",
         "enableSystemNotifications": "Enable system notifications",
         "exportState": "Export state",
-        "outsourceProofOfWork": "Outsource proof of work",
+        "localProofOfWork": "Local proof of work",
         "unlock": "Unlock",
         "updateFirefly": "Update Firefly",
         "restartNow": "Restart now",
         "saveBackup": "Save Stronghold backup",
         "customizeAcount": "Customise account",
         "viewAddressHistory": "View address history",
-        "deleteAccount": "Remove account",
+        "hideAccount": "Hide account",
+        "showAccount": "Unhide account",
+        "deleteAccount": "Delete account",
         "max": "Max",
         "addNode": "Add node",
+        "updateNode": "Update node",
         "removeNode": "Remove node",
         "hide": "Veşartin\n",
         "hideOthers": "Veşartinên Din\n",
@@ -461,7 +490,9 @@
         "skipBackup": "Skip file backup",
         "finishSetup": "Finish setup",
         "readDocumentation": "Read the documentation",
-        "visitFaq": "Visit FAQ"
+        "visitFaq": "Visit FAQ",
+        "showHiddenAccounts": "Show hidden accounts",
+        "confirm": "Confirm"
     },
     "general": {
         "password": "Password",
@@ -507,7 +538,7 @@
         "appearance": "Appearance",
         "lightTheme": "Light theme",
         "darkTheme": "Dark theme",
-        "totalBalance": "Total Balance",
+        "balance": "Balance",
         "accountBalance": "Account Balance",
         "incoming": "Incoming",
         "outgoing": "Outgoing",
@@ -567,7 +598,8 @@
         "passwordStrength2": "Weak",
         "passwordStrength3": "Average",
         "passwordStrength4": "Strong",
-        "creatingProfile": "Creating profile, please wait..."
+        "creatingProfile": "Creating profile, please wait...",
+        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
     },
     "dates": {
         "today": "Today",
@@ -581,6 +613,7 @@
         "valueTx": "Receiving {{value}} to {{account}}",
         "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
         "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
+        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
         "failed": "Outgoing {{value}} from {{account}} has failed",
         "downloadingUpdate": "Downloading update",
         "updateReady": "Update ready",

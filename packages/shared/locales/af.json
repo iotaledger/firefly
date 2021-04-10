@@ -209,6 +209,10 @@
                 "title": "Hersinkroniseer rekeninge",
                 "description": "Starts a background task to make sure your accounts are up to date."
             },
+            "hiddenAccounts": {
+                "title": "Hidden accounts",
+                "description": "Selecting this options will show accounts that were previously hidden."
+            },
             "deleteProfile": {
                 "title": "Vee profiel uit",
                 "description": "Verwyder jou hele beursie, profiel en transaksiegeskiedenis. Maak seker dat jy 'n back-up het."
@@ -223,11 +227,19 @@
             },
             "nodeSettings": {
                 "title": "Node instellings",
-                "description": "Kies Manual om uit die nodelys te kies of koppel aan jou eie node"
+                "description": "Select Manual to configure the node settings and connect to your own node"
             },
             "configureNodeList": {
                 "title": "Kies 'n node",
-                "description": ""
+                "description": "Manage the list of nodes your wallet connects to.",
+                "primaryNode": "Primary node",
+                "excludeNode": "Exclude node",
+                "includeNode": "Include node",
+                "viewDetails": "View details",
+                "setAsPrimary": "Set as primary",
+                "removeNode": "Verwyder node",
+                "includeOfficialNodeList": "Include official node list",
+                "noNodes": "There are no nodes, automatic selection will be used instead."
             },
             "proofOfWork": {
                 "title": "Proof of work",
@@ -313,8 +325,8 @@
     "popups": {
         "password": {
             "title": "Wagwoord benodig",
-            "subtitle": "Please enter your password to unlock Stronghold",
-            "backup": "Please enter your password to export a backup"
+            "subtitle": "Voer asseblief you beursie-wagwoord in om Stronghold te ontsluit",
+            "backup": "Voer asseblief you wagwoord in om you back-up export"
         },
         "qr": {
             "title": "Jou QR code"
@@ -332,17 +344,26 @@
             "backupDescription": "Dit is belangrik om gereeld 'n backup te maak om te verseker dat jy 'n afskrif van jou rekeninge en transaksiegeskiedenis het.",
             "backupWarning": "As jy jou backup en herstelfrase verloor, verloor jy toegang tot jou fondse.",
             "notBackedUp": "Nie gebackup",
-            "notBackedUpDescription": "Jy het nie jou Stronghold gebackup nie"
+            "notBackedUpDescription": "Jy het nie jou Stronghold gebackup nie",
+            "saving": "Saving..."
         },
         "deleteAccount": {
-            "title": "Verwyder {name}?",
-            "body": "Jy kan hierdie rekening later weer byvoeg, maar jou transaksiegeskiedenis kan dalk verloor word.",
-            "typePassword": "Type your password to confirm.",
-            "deleteAccount": "Verwyder rekening",
-            "errorTitle": "Kan nie {name} verwyder nie",
-            "errorBody1": "Om 'n rekening te verwyder, moet jy 0 balans hê.",
-            "errorBody2": "Jy het tans {balance} op hierdie rekening oor. Skuif hierdie fondse na 'n ander rekening en probeer weer.",
-            "errorBody3": "Jy kan nie hierdie rekening verwyder nie, jy moet ten minste een hê."
+            "title": "Delete {name}?",
+            "body": "This account has no transaction history. It can safely be deleted.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Delete account",
+            "errorTitle": "Unable to delete {name}",
+            "errorBody1": "You cannot delete this account, you must have at least one."
+        },
+        "hideAccount": {
+            "title": "Hide {name}?",
+            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Hide account",
+            "errorTitle": "Unable to hide {name}",
+            "errorBody1": "To hide an account it must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
+            "errorBody3": "You cannot hide this account, you must have at least one."
         },
         "addressHistory": {
             "title": "{name} address history",
@@ -350,6 +371,7 @@
         },
         "node": {
             "titleAdd": "Add Node",
+            "titleUpdate": "Update a node",
             "titleRemove": "Verwyder 'n node",
             "titleDetails": "Node besonderhede",
             "nodeAddress": "Node adres",
@@ -365,7 +387,7 @@
         "deleteProfile": {
             "title": "Vee profiel uit",
             "confirmation": "Is jy seker jy wil hierdie profiel uitvee? Hierdie bewerking kan nie ontdoen word nie.",
-            "typePassword": "Type your password to confirm."
+            "typePassword": "Tik in you wagwoord om te bevestig."
         },
         "diagnostics": {
             "title": "Diagnostiek",
@@ -377,6 +399,10 @@
             "totalMem": "Total Memory",
             "freeMem": "Free Memory",
             "userPath": "User Path"
+        },
+        "transaction": {
+            "title": "Confirm transaction",
+            "body": "You’re about to send {amount} to"
         }
     },
     "charts": {
@@ -427,16 +453,19 @@
         "enableDeveloperMode": "Activeer ontwikkelaarsmode",
         "enableSystemNotifications": "Aktiveer stelselkennisgewings",
         "exportState": "Export staat",
-        "outsourceProofOfWork": "Uitkontrakteer proof of work",
+        "localProofOfWork": "Local proof of work",
         "unlock": "Ontsluit",
         "updateFirefly": "Update Firefly",
         "restartNow": "Herlaai nou",
         "saveBackup": "Stoor Stronghold Back-up",
         "customizeAcount": "Pas rekening aan",
         "viewAddressHistory": "Bekyk adresgeskiedenis",
-        "deleteAccount": "Verwyder rekening",
+        "hideAccount": "Hide account",
+        "showAccount": "Unhide account",
+        "deleteAccount": "Delete account",
         "max": "Max",
         "addNode": "Add Node",
+        "updateNode": "Update node",
         "removeNode": "Verwyder node",
         "hide": "Versteek",
         "hideOthers": "Versteek Ander",
@@ -461,7 +490,9 @@
         "skipBackup": "Slaan lêer-Back-up oor",
         "finishSetup": "Voltooi die opstelling",
         "readDocumentation": "Lees die dokumentasie",
-        "visitFaq": "Besoek FAQ"
+        "visitFaq": "Besoek FAQ",
+        "showHiddenAccounts": "Show hidden accounts",
+        "confirm": "Confirm"
     },
     "general": {
         "password": "Wagwoord",
@@ -507,7 +538,7 @@
         "appearance": "Voorkoms",
         "lightTheme": "Ligte tema",
         "darkTheme": "Donker tema",
-        "totalBalance": "Totale balans",
+        "balance": "Balance",
         "accountBalance": "Rekening balans",
         "incoming": "Inkomende",
         "outgoing": "Uitgaande",
@@ -567,7 +598,8 @@
         "passwordStrength2": "Swak",
         "passwordStrength3": "Gemiddeld",
         "passwordStrength4": "Sterk",
-        "creatingProfile": "Skep tans profiel op, wag asseblief..."
+        "creatingProfile": "Skep tans profiel op, wag asseblief...",
+        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
     },
     "dates": {
         "today": "Vandag",
@@ -581,6 +613,7 @@
         "valueTx": "Ontvang {{value}} na {{account}}",
         "confirmed": "Uitgaande {{value}} vanaf {{account}} is bevestig",
         "confirmedInternal": "{{value}} van {{senderAccount}} na {{receiverAccount}} hat bevestig",
+        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
         "failed": "Uitgaande {{value}} vanaf {{account}} het nie oordra nie",
         "downloadingUpdate": "Besig om bywerking af te laai",
         "updateReady": "Opdatering gereed",

@@ -209,6 +209,10 @@
                 "title": "重新同步帳戶",
                 "description": "Starts a background task to make sure your accounts are up to date."
             },
+            "hiddenAccounts": {
+                "title": "Hidden accounts",
+                "description": "Selecting this options will show accounts that were previously hidden."
+            },
             "deleteProfile": {
                 "title": "刪除設定檔",
                 "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
@@ -223,11 +227,19 @@
             },
             "nodeSettings": {
                 "title": "節點設定",
-                "description": "Select Manual to choose from the node list or connect to your own node"
+                "description": "Select Manual to configure the node settings and connect to your own node"
             },
             "configureNodeList": {
                 "title": "選擇一個節點",
-                "description": ""
+                "description": "Manage the list of nodes your wallet connects to.",
+                "primaryNode": "Primary node",
+                "excludeNode": "Exclude node",
+                "includeNode": "Include node",
+                "viewDetails": "View details",
+                "setAsPrimary": "Set as primary",
+                "removeNode": "移除節點",
+                "includeOfficialNodeList": "Include official node list",
+                "noNodes": "There are no nodes, automatic selection will be used instead."
             },
             "proofOfWork": {
                 "title": "工作量證明",
@@ -332,17 +344,26 @@
             "backupDescription": "定期備份您的帳號以及交易紀錄是非常重要的。",
             "backupWarning": "如果您遺失了備份以及註記詞，您將無法存取您的資金。",
             "notBackedUp": "沒有備份",
-            "notBackedUpDescription": "您還沒有備份您的 Stronghold"
+            "notBackedUpDescription": "您還沒有備份您的 Stronghold",
+            "saving": "Saving..."
         },
         "deleteAccount": {
-            "title": "Remove {name}?",
-            "body": "You can add this account back later but you may lose your transaction history.",
-            "typePassword": "Type your password to confirm.",
-            "deleteAccount": "Remove account",
-            "errorTitle": "Unable to remove {name}",
-            "errorBody1": "To remove an account it must have 0 balance.",
-            "errorBody2": "目前您在這個帳號仍擁有 {balance} 餘額。請將這些資金移至另一個帳號後再重試。",
-            "errorBody3": "You cannot remove this account, you must have at least one."
+            "title": "Delete {name}?",
+            "body": "This account has no transaction history. It can safely be deleted.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Delete account",
+            "errorTitle": "Unable to delete {name}",
+            "errorBody1": "You cannot delete this account, you must have at least one."
+        },
+        "hideAccount": {
+            "title": "Hide {name}?",
+            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Hide account",
+            "errorTitle": "Unable to hide {name}",
+            "errorBody1": "To hide an account it must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
+            "errorBody3": "You cannot hide this account, you must have at least one."
         },
         "addressHistory": {
             "title": "{name} address history",
@@ -350,6 +371,7 @@
         },
         "node": {
             "titleAdd": "增加節點",
+            "titleUpdate": "Update a node",
             "titleRemove": "刪除節點",
             "titleDetails": "節點詳細資訊",
             "nodeAddress": "節點地址",
@@ -377,6 +399,10 @@
             "totalMem": "記憶體總量",
             "freeMem": "可用記憶體",
             "userPath": "使用者路徑"
+        },
+        "transaction": {
+            "title": "Confirm transaction",
+            "body": "You’re about to send {amount} to"
         }
     },
     "charts": {
@@ -427,16 +453,19 @@
         "enableDeveloperMode": "開啟開發者模式",
         "enableSystemNotifications": "啟用系統通知",
         "exportState": "匯出狀態",
-        "outsourceProofOfWork": "外派工作量証明",
+        "localProofOfWork": "Local proof of work",
         "unlock": "解鎖",
         "updateFirefly": "更新 Firefly",
         "restartNow": "立即重新啟動",
         "saveBackup": "Save Stronghold backup",
         "customizeAcount": "自定義帳號",
         "viewAddressHistory": "檢視地址歷史紀錄",
-        "deleteAccount": "Remove account",
+        "hideAccount": "Hide account",
+        "showAccount": "Unhide account",
+        "deleteAccount": "Delete account",
         "max": "最大",
         "addNode": "增加節點",
+        "updateNode": "Update node",
         "removeNode": "移除節點",
         "hide": "隱藏",
         "hideOthers": "隱藏其他",
@@ -461,7 +490,9 @@
         "skipBackup": "Skip file backup",
         "finishSetup": "Finish setup",
         "readDocumentation": "Read the documentation",
-        "visitFaq": "Visit FAQ"
+        "visitFaq": "Visit FAQ",
+        "showHiddenAccounts": "Show hidden accounts",
+        "confirm": "Confirm"
     },
     "general": {
         "password": "密碼",
@@ -507,7 +538,7 @@
         "appearance": "界面外觀",
         "lightTheme": "淺色主題",
         "darkTheme": "深色主題",
-        "totalBalance": "總額",
+        "balance": "Balance",
         "accountBalance": "帳號餘額",
         "incoming": "傳入",
         "outgoing": "傳出",
@@ -567,7 +598,8 @@
         "passwordStrength2": "Weak",
         "passwordStrength3": "Average",
         "passwordStrength4": "Strong",
-        "creatingProfile": "Creating profile, please wait..."
+        "creatingProfile": "Creating profile, please wait...",
+        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
     },
     "dates": {
         "today": "今天",
@@ -581,6 +613,7 @@
         "valueTx": "從 {{account}} 收到 {{value}}",
         "confirmed": "{{account}} 轉出的 {{value}} 已被確認",
         "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
+        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
         "failed": "{{account}} 轉出的 {{value}} 發生錯誤",
         "downloadingUpdate": "下載更新中",
         "updateReady": "準備更新",

@@ -187,19 +187,19 @@
             },
             "exportStronghold": {
                 "title": "Izvezi sigurnosnu kopiju",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
+                "description": "Izvoz u Stronghold datoteku - potpunu enkriptiranu kopiju vašeg novčanika i najnovijih transakcija."
             },
             "appLock": {
-                "title": "Automatic Lock",
-                "description": "Time elapsed before your wallet locks and logs you out"
+                "title": "Automatsko zaključavanje",
+                "description": "Preostalo vrijeme do zaključavanja novčanika i odjave"
             },
             "changePassword": {
                 "title": "Promijenite lozinku",
-                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
+                "description": "Lozinka služi zaštiti novčanika. Upotrijebite jaku lozinku kako biste zaštitili svoja sredstva."
             },
             "changePincode": {
                 "title": "Promijenite PIN kod",
-                "description": "Your PIN keeps your balance and transactions private",
+                "description": "Vaš PIN čuva privatnost vaših sredstava i transakcija",
                 "currentPincode": "Trenutni PIN",
                 "newPincode": "Novi PIN",
                 "confirmNewPincode": "Potvrdite novi PIN",
@@ -209,66 +209,78 @@
                 "title": "Ponovno sinkroniziranje računa",
                 "description": "Pokreće pozadinski postupak koji će provjeriti jesu li svi vaši računi aktualni."
             },
+            "hiddenAccounts": {
+                "title": "Hidden accounts",
+                "description": "Selecting this options will show accounts that were previously hidden."
+            },
             "deleteProfile": {
                 "title": "Izbrišite profil",
-                "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
+                "description": "Brisanje cijelog novčanika, profila i povijesti transakcija. Uvjerite se da imate pričuvnu kopiju."
             },
             "deepLinks": {
                 "title": "Deep Links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
+                "description": "Automatski ispuni podatke o transakciji unutar Fireflyja nakon klika na iota:// poveznicu"
             },
             "developerMode": {
                 "title": "Razvojno okruženje",
-                "description": "Connect to testnets and other developer features"
+                "description": "Spoji se na testnet i ostale razvojne alate"
             },
             "nodeSettings": {
-                "title": "Node settings",
-                "description": "Select Manual to choose from the node list or connect to your own node"
+                "title": "Node postavke",
+                "description": "Select Manual to configure the node settings and connect to your own node"
             },
             "configureNodeList": {
-                "title": "Select a node",
-                "description": ""
+                "title": "Odaberi node",
+                "description": "Manage the list of nodes your wallet connects to.",
+                "primaryNode": "Primary node",
+                "excludeNode": "Exclude node",
+                "includeNode": "Include node",
+                "viewDetails": "View details",
+                "setAsPrimary": "Set as primary",
+                "removeNode": "Ukloni node",
+                "includeOfficialNodeList": "Include official node list",
+                "noNodes": "There are no nodes, automatic selection will be used instead."
             },
             "proofOfWork": {
-                "title": "Proof of work",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "title": "Proof of Work",
+                "description": "Odradi Proof of work lokalno na svojem uređaju ili ga outsourceaj nodeu"
             },
             "errorLog": {
-                "title": "Error log",
-                "description": "View errors to debug an issue"
+                "title": "Evidencija grešaka",
+                "description": "Pogledaj greške u svrhu debugiranja"
             },
             "diagnostics": {
-                "title": "Diagnostics",
-                "description": "View system and application information"
+                "title": "Dijagnostika",
+                "description": "Vidi informacije o sustavu i aplikaciji"
             },
             "stateExport": {
-                "title": "State export",
-                "description": "Export your transaction history to a .csv file"
+                "title": "Izvoz stanja",
+                "description": "Izvezi povijest transakcija u .csv datoteku"
             },
             "troubleshoot": {
                 "title": "Rješavanje problema",
-                "description": "Use the troubleshooting wizard to solve common problems"
+                "description": "Upotrijebi čarobnjaka za greške u svrhu rješavanja uobičajenih problema"
             },
             "documentation": {
                 "title": "Dokumentacija",
-                "description": "View the documentation for in depth explanations of how things work"
+                "description": "Pogledaj dokumentaciju za dubinsko pojašnjenje principa rada"
             },
             "faq": {
                 "title": "Često postavljana pitanja",
-                "title2": "Frequently Asked Questions",
-                "description": "View the FAQs to get help with a common problem or question"
+                "title2": "Često postavljana pitanja",
+                "description": "Vidi često postavljana pitanja za pomoć s rješavanjem uobičajenih problema"
             },
             "discord": {
                 "title": "Discord",
-                "description": "Get help from the IOTA community on Discord"
+                "description": "Potraži pomoć od IOTA zajednice na Discordu"
             },
             "about": {
                 "title": "O aplikaciji",
                 "description": ""
             },
             "reportAnIssue": {
-                "title": "Report an issue",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
+                "title": "Prijavi problem",
+                "description": "Prijavi bug developerima. Prvo provjeri nije li ista greška već prijavljena."
             }
         },
         "login": {
@@ -313,36 +325,45 @@
     "popups": {
         "password": {
             "title": "Potrebna je lozinka",
-            "subtitle": "Please enter your password to unlock Stronghold",
-            "backup": "Please enter your password to export a backup"
+            "subtitle": "Za otključavanje Strongholda molimo unesi lozinku",
+            "backup": "Unesi lozinku za izvoz pričuvne kopije"
         },
         "qr": {
-            "title": "Your QR code"
+            "title": "Tvoj QR kod"
         },
         "version": {
-            "title": "Current version: {version}",
-            "upToDateTitle": "Firefly is up to date",
-            "upToDateDescription": "You are running the latest and safest version of Firefly.",
-            "updateAvailable": "Firefly update available",
-            "updateDetails": "Version {version} - {date}"
+            "title": "Trenutna verzija: {version}",
+            "upToDateTitle": "Firefly je ažuriran",
+            "upToDateDescription": "Koristiš najnoviju i najsigurniju verziju Fireflyja.",
+            "updateAvailable": "Dostupno je Firefly ažuriranje",
+            "updateDetails": "Verzija {version} - {date}"
         },
         "backup": {
-            "title": "Last backup: {date}",
-            "lastBackup": "You last backed up {date}",
-            "backupDescription": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
-            "backupWarning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "notBackedUp": "Not backed up",
-            "notBackedUpDescription": "You have not backed up your Stronghold"
+            "title": "Posljednja pričuvna kopija: {date}",
+            "lastBackup": "Zadnja pričuvna kopija napravljena je {date}",
+            "backupDescription": "Važno je redovito izrađivati pričuvne kopije kako biste uvijek imali kopiju računa i povijesti transakcija.",
+            "backupWarning": "Izgubite li pričuvnu kopiju i frazu za oporavak, izgubit ćete pristup svojim sredstvima.",
+            "notBackedUp": "Nije napravljena pričuvna kopija",
+            "notBackedUpDescription": "Niste napravili pričuvnu kopiju svojeg Strongholda",
+            "saving": "Saving..."
         },
         "deleteAccount": {
-            "title": "Remove {name}?",
-            "body": "You can add this account back later but you may lose your transaction history.",
-            "typePassword": "Type your password to confirm.",
-            "deleteAccount": "Remove account",
-            "errorTitle": "Unable to remove {name}",
-            "errorBody1": "To remove an account it must have 0 balance.",
+            "title": "Delete {name}?",
+            "body": "This account has no transaction history. It can safely be deleted.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Delete account",
+            "errorTitle": "Unable to delete {name}",
+            "errorBody1": "You cannot delete this account, you must have at least one."
+        },
+        "hideAccount": {
+            "title": "Hide {name}?",
+            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Hide account",
+            "errorTitle": "Unable to hide {name}",
+            "errorBody1": "To hide an account it must have 0 balance.",
             "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
-            "errorBody3": "You cannot remove this account, you must have at least one."
+            "errorBody3": "You cannot hide this account, you must have at least one."
         },
         "addressHistory": {
             "title": "{name} povijest adresa",
@@ -350,6 +371,7 @@
         },
         "node": {
             "titleAdd": "Dodaj node",
+            "titleUpdate": "Update a node",
             "titleRemove": "Ukloni node",
             "titleDetails": "Pojedinosti nodea",
             "nodeAddress": "Adresa nodea",
@@ -365,7 +387,7 @@
         "deleteProfile": {
             "title": "Izbrišite profil",
             "confirmation": "Sigurno želiš obrisati ovaj profil? Ova akcija se ne može poništiti.",
-            "typePassword": "Type your password to confirm."
+            "typePassword": "Za potvrdu unesite lozinku."
         },
         "diagnostics": {
             "title": "Dijagnostika",
@@ -377,6 +399,10 @@
             "totalMem": "Ukupna memorija",
             "freeMem": "Slobodna memorija",
             "userPath": "Korisnička putanja"
+        },
+        "transaction": {
+            "title": "Confirm transaction",
+            "body": "You’re about to send {amount} to"
         }
     },
     "charts": {
@@ -427,17 +453,20 @@
         "enableDeveloperMode": "Umogući razvojne alate",
         "enableSystemNotifications": "Omogući obavijesti",
         "exportState": "Izvezi stanje (State)",
-        "outsourceProofOfWork": "Outsourcaj Proof of Work (PoW)",
+        "localProofOfWork": "Local proof of work",
         "unlock": "Otključaj",
         "updateFirefly": "Ažuriraj Firefly",
         "restartNow": "Ponovno pokreni",
         "saveBackup": "Spremi Stronghold pričuvnu kopiju",
         "customizeAcount": "Prilagodi račun",
         "viewAddressHistory": "Povijest adresa",
-        "deleteAccount": "Ukloni račun",
-        "max": "Max",
-        "addNode": "Add node",
-        "removeNode": "Remove node",
+        "hideAccount": "Hide account",
+        "showAccount": "Unhide account",
+        "deleteAccount": "Delete account",
+        "max": "Maksimum",
+        "addNode": "Dodaj node",
+        "updateNode": "Update node",
+        "removeNode": "Ukloni node",
         "hide": "Sakrij",
         "hideOthers": "Sakrij ostalo",
         "showAll": "Pokaži sve",
@@ -452,37 +481,39 @@
         "addAccount": "Dodaj Račun",
         "checkForUpdates": "Potraži ažuriranja",
         "reportAnIssue": "Prijavi problem",
-        "clear": "Clear",
-        "hideDetails": "Hide Details",
-        "yes": "Yes",
-        "no": "No",
-        "reset": "Reset",
-        "downloadRecoveryKit": "Save Recovery Kit template",
-        "skipBackup": "Skip file backup",
-        "finishSetup": "Finish setup",
-        "readDocumentation": "Read the documentation",
-        "visitFaq": "Visit FAQ"
+        "clear": "Očisti",
+        "hideDetails": "Sakrij detalje",
+        "yes": "Da",
+        "no": "Ne",
+        "reset": "Resetiraj",
+        "downloadRecoveryKit": "Spremi predložak Recovery Kita",
+        "skipBackup": "Preskoči izradu pričuvne kopije",
+        "finishSetup": "Završi postavljanje",
+        "readDocumentation": "Pročitajte dokumentaciju",
+        "visitFaq": "Posjeti često postavljana pitanja",
+        "showHiddenAccounts": "Show hidden accounts",
+        "confirm": "Confirm"
     },
     "general": {
         "password": "Lozinka",
         "confirmPassword": "Potvrda lozinke",
-        "currentPassword": "Current password",
-        "newPassword": "New password",
-        "confirmNewPassword": "Confirm new password",
+        "currentPassword": "Trenutna lozinka",
+        "newPassword": "Nova lozinka",
+        "confirmNewPassword": "Potvrdi novu lozinku",
         "yourSeed": "Vaš Seed",
         "recoveryPhrase": "Fraza za oporavak",
         "recentActivity": "Nedavne Aktivnosti",
         "sent": "Poslano",
         "received": "Primljeno",
-        "sendPayment": "Send Payment",
-        "moveFunds": "Internal Transfer",
+        "sendPayment": "Pošalji uplatu",
+        "moveFunds": "Interni prijenos",
         "sendFunds": "Pošaljite sredstva",
-        "sendToAddress": "Send to address",
+        "sendToAddress": "Slanje na adresu",
         "scanQrOrPaste": "Skenirajte QR kod ili zalijepite Adresu",
-        "moveFundsBetweenAccounts": "Move funds between accounts",
-        "sendTokensToAddress": "Send tokens to an address",
-        "manageAccount": "Manage Account",
-        "customizeAcount": "Customize your account",
+        "moveFundsBetweenAccounts": "Prebacite sredstva između svojih računa",
+        "sendTokensToAddress": "Šalji tokene na adresu",
+        "manageAccount": "Upravljaj računom",
+        "customizeAcount": "Prilagodi svoj račun",
         "account": "Račun",
         "sendingToAddress": "Slanje na adresu",
         "amount": "Iznos",
@@ -490,12 +521,12 @@
         "reference": "Referenca",
         "from": "Od",
         "to": "Za",
-        "receiveFunds": "Receive Funds",
-        "myAddress": "My Address",
+        "receiveFunds": "Primi sredstva",
+        "myAddress": "Moja adresa",
         "shareAddress": "Podijelite adresu",
         "yourAddress": "Vaša adresa",
         "generateNewAddress": "Stvorite novu adresu",
-        "copyAddress": "Copy Address",
+        "copyAddress": "Kopiraj adresu",
         "haveTextBackup": "Imam tekstualnu pričuvnu kopiju",
         "haveFileBackup": "Imam datoteku s pričuvnom kopijom",
         "enterSeedOrPhrase": "Unesite frazu za oporavak ili seed",
@@ -507,40 +538,40 @@
         "appearance": "Prikaz",
         "lightTheme": "Svijetla tema",
         "darkTheme": "Tamna tema",
-        "totalBalance": "Ukupno stanje",
-        "accountBalance": "Account Balance",
+        "balance": "Balance",
+        "accountBalance": "Stanje računa",
         "incoming": "Dolazni",
         "outgoing": "Odlazni",
-        "totalIn": "Total in",
-        "totalOut": "Total out",
+        "totalIn": "Ukupno unutra",
+        "totalOut": "Ukupno van",
         "accounts": "Računi",
-        "myAccounts": "My Accounts",
-        "automaticNodeSelection": "Automatic node selection",
-        "manualNodeSelection": "Manual node selection",
-        "profiles": "Profiles",
-        "developerProfile": "Developer Profile",
-        "dev": "Dev",
-        "createAccount": "Create an Account",
-        "accountName": "Account name",
-        "latestTransactions": "Latest Transactions",
-        "transactions": "Transactions",
+        "myAccounts": "Moji Računi",
+        "automaticNodeSelection": "Automatski odabir nodea",
+        "manualNodeSelection": "Ručni odabir nodea",
+        "profiles": "Profili",
+        "developerProfile": "Developer profil",
+        "dev": "Programer",
+        "createAccount": "Napravi račun",
+        "accountName": "Naziv računa",
+        "latestTransactions": "Najnovije transakcije",
+        "transactions": "Transakcije",
         "security": "Sigurnost",
-        "accountAddress": "Account Address",
-        "nodes": "Nodes",
+        "accountAddress": "Adresa računa",
+        "nodes": "Nodeovi",
         "wallet": "Novčanik",
         "help": "Pomoć",
-        "you": "You",
-        "messageId": "Message ID",
-        "inputAddress": "Send Address",
-        "receiveAddress": "Receive Address",
-        "date": "Date",
+        "you": "Ti",
+        "messageId": "ID poruke",
+        "inputAddress": "Adresa s koje je poslano",
+        "receiveAddress": "Adresa na koju je poslano",
+        "date": "Datum",
         "status": "Stanje",
-        "confirmed": "Confirmed",
-        "pending": "Pending",
+        "confirmed": "Potvrđeno",
+        "pending": "U tijeku",
         "noAccounts": "Ne posjeduješ niti jedan račun, molimo kreiraj jedan.",
-        "loadingAccounts": "Loading, please wait...",
+        "loadingAccounts": "Učitavanje. Molimo pričekajte...",
         "addProfile": "Dodaj profil",
-        "noRecentHistory": "No recent history",
+        "noRecentHistory": "Nema nedavnih povijesnih podataka",
         "transferSyncing": "Sinkroniziranje računa",
         "transferSelectingInputs": "Odabir inputa",
         "transferRemainderAddress": "Generating remainder deposit address",
@@ -555,74 +586,76 @@
         "passwordUpdating": "Ažuriram lozinku...",
         "passwordSuccess": "Lozinka je uspješno ažurirana",
         "passwordFailed": "Ažuriranje lozinke nije uspjelo",
-        "exportingStronghold": "Exporting stronghold...",
-        "exportingStrongholdSuccess": "Exported stronghold successfully",
-        "exportingStrongholdFailed": "Exported stronghold failed",
-        "pinCodeUpdating": "Updating PIN code...",
-        "pinCodeSuccess": "Updated PIN code successfully",
-        "pinCodeFailed": "Updating PIN code failed",
-        "passwordStrength": "Password strength",
-        "passwordStrength0": "Bad",
-        "passwordStrength1": "Poor",
-        "passwordStrength2": "Weak",
-        "passwordStrength3": "Average",
-        "passwordStrength4": "Strong",
-        "creatingProfile": "Creating profile, please wait..."
+        "exportingStronghold": "Izvozim Stronghold...",
+        "exportingStrongholdSuccess": "Stronghold je uspješno izvezen",
+        "exportingStrongholdFailed": "Izvoz Strongholda nije uspio",
+        "pinCodeUpdating": "Mijenjam PIN kod...",
+        "pinCodeSuccess": "PIN uspiješno promijenjen",
+        "pinCodeFailed": "Promjena PIN koda nije uspjela",
+        "passwordStrength": "Snaga lozinke",
+        "passwordStrength0": "Loše",
+        "passwordStrength1": "Slabo",
+        "passwordStrength2": "Slabo",
+        "passwordStrength3": "Osrednje",
+        "passwordStrength4": "Jako",
+        "creatingProfile": "Stvaram račun, molim pričekajte...",
+        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
     },
     "dates": {
-        "today": "Today",
-        "yesterday": "Yesterday",
+        "today": "Danas",
+        "yesterday": "Jučer",
         "daysAgo": "{time, plural, one {# day} other {# days}} ago",
         "weeksAgo": "{time, plural, one {# week} other {# weeks}} ago",
         "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
         "yearsAgo": "{time, plural, one {# year} other {# years}} ago"
     },
     "notifications": {
-        "valueTx": "Receiving {{value}} to {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed",
-        "downloadingUpdate": "Downloading update",
+        "valueTx": "Primanje {{value}} na {{account}} u tijeku",
+        "confirmed": "Odlazna transakcija od {{value}} s {{account}} je potvrđena",
+        "confirmedInternal": "{{value}} od {{senderAccount}} prema {{receiverAccount}} je potvrđena",
+        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
+        "failed": "Odlazna transakcija od {{value}} s {{account}} nije uspjela",
+        "downloadingUpdate": "Preuzimanje ažuriranja",
         "updateReady": "Ažuriranje je spremno",
         "updateError": "Došlo je do pogreške tijekom ažuriranja. Molimo, pokušajte ponovo",
         "restartInstall": "Za instalaciju ponovo pokreni aplikaciju",
         "calcMinutesRemaining": "Računam preostalo vrijeme...",
         "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
-        "copiedToClipboard": "Copied to clipboard",
+        "copiedToClipboard": "Kopirano u međuspremnik",
         "accountsSynchronized": "Sinkronizacija računa je završena"
     },
     "error": {
         "profile": {
             "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "duplicate": "A profile with this name already exists."
+            "duplicate": "Profil s ovim imenom već postoji."
         },
         "password": {
-            "doNotMatch": "Passwords do not match.",
-            "tooWeak": "Your new password is too weak.",
-            "row": "Straight rows of keys are easy to guess.",
-            "pattern": "Short keyboard patterns are easy to guess.",
-            "names": "Common names and surnames are easy to guess.",
-            "repeats": "Repeats like 'aaa' are easy to guess.",
-            "repeats2": "Repeats like 'abcabcabc' are easy to guess.",
-            "sequence": "Sequences of characters are easy to guess.",
-            "years": "Recent years are easy to guess.",
-            "dates": "Dates are easy to guess.",
-            "common": "This is a very common password.",
-            "similar": "This is similar to a common password.",
+            "doNotMatch": "Lozinke nisu iste.",
+            "tooWeak": "Preslaba nova lozinka.",
+            "row": "Slova u nizu lako je pogoditi.",
+            "pattern": "Kratke uzorke na tipkovnici lako je pogoditi.",
+            "names": "Uobičajena imena i prezimena je lako pogoditi.",
+            "repeats": "Ponavljanja poput 'aaa' je lako pogoditi.",
+            "repeats2": "Ponavljanja poput 'abcabcabc' je lako pogoditi.",
+            "sequence": "Sekvence znakova poput abc je lako pogoditi.",
+            "years": "Nedavne godine je lako pogoditi.",
+            "dates": "Datume je često lako pogoditi.",
+            "common": "Ovo je vrlo često korištena lozinka.",
+            "similar": "Ovo je preslično često korištenoj lozinki.",
             "word": "Jednu je riječ lako pogoditi.",
-            "incorrect": "Your password is incorrect.",
+            "incorrect": "Lozinka nije točna.",
             "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
         },
         "pincode": {
             "length": "Your PIN must be {length, plural, one {1 digit} other {# digits}} long.",
-            "match": "PINs do not match.",
-            "incorrect": "Your current PIN is incorrect."
+            "match": "PINovi se ne podudaraju.",
+            "incorrect": "Vaš trenutni PIN je netočan."
         },
         "account": {
             "length": "Your account name can't be longer than {length, plural, one {1 character} other {# characters}}.",
             "empty": "You must use your latest account before creating a new one.",
             "notEmpty": "You must transfer your balance before deleting this account.",
-            "duplicate": "An account with this name already exists.",
+            "duplicate": "Račun s ovim imenom već postoji.",
             "tilde": "Ime profila ne može početi znakom '~'.",
             "control": "Ime profila ne smije sadržavati Ctrl znak.",
             "startDot": "Ime profila ne može početi točkom.",
@@ -630,30 +663,30 @@
         },
         "send": {
             "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
-            "amountTooHigh": "This is greater than your available balance.",
-            "amountNoFloat": "If units are `i` you cannot use decimal places.",
-            "amountInvalidFormat": "The amount appears to be an invalid number.",
-            "amountZero": "The amount must be greater than 0.",
+            "amountTooHigh": "Ovo je više od sredstava koja su vam na raspolaganju.",
+            "amountNoFloat": "Ako je jedinica `i`, ne možete koristiti decimalna mjesta.",
+            "amountInvalidFormat": "Djeluje da je iznos nevažeći broj.",
+            "amountZero": "Iznos mora biti veći od 0.",
             "wrongAddressPrefix": "Adrese započinju prefiksom {prefix}.",
             "wrongAddressFormat": "Adresa nije u ispravnom formatu.",
-            "insufficientFunds": "This account has insufficient funds.",
+            "insufficientFunds": "Ovaj račun nema dovoljno sredstava.",
             "noToAccount": "Niste odabrali račun na koji želite poslati sredstva.",
-            "sendingDust": "You cannot send less than 1 Mi.",
-            "leavingDust": "You cannot leave less than 1 Mi on your address."
+            "sendingDust": "Ne možete slati manje od 1 Mi.",
+            "leavingDust": "Ne možet ostaviti manje od 1 Mi na svojoj adresi."
         },
         "node": {
-            "invalid": "Please enter a valid URL.",
-            "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
-            "duplicate": "This node has already been added.",
-            "unsynced": "The node is not in sync.",
-            "noSynced": "No synced nodes are available."
+            "invalid": "Molimo unesite valjani URL.",
+            "https": "HTTPS je obavezan. Postavite developerski profil kako biste koristili nesigurne HTTP veze.",
+            "duplicate": "Ovaj je node već dodan.",
+            "unsynced": "Node nije sinkroniziran.",
+            "noSynced": "Nema dostupnih sinkroniziranih nodeova."
         },
         "global": {
-            "generic": "Something went wrong."
+            "generic": "Došlo je do greške."
         },
         "backup": {
-            "invalid": "The backup file was not recognised.",
-            "destination": "The backup destination was not valid.",
+            "invalid": "Sigurnosna kopija nije prepoznata.",
+            "destination": "Destinacija za pričuvnu kopiju je nevažeća.",
             "mnemonic": "The mnemonic is not valid.",
             "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
             "seedCharacters": "The seed should only contain characters A-Z or 9",

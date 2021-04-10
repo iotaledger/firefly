@@ -209,6 +209,10 @@
                 "title": "Повторить синхронизацию учетных записей",
                 "description": "Starts a background task to make sure your accounts are up to date."
             },
+            "hiddenAccounts": {
+                "title": "Скрытые учетные записи",
+                "description": "При выборе этого параметра будут показаны учетные записи, которые были ранее скрыты."
+            },
             "deleteProfile": {
                 "title": "Delete profile",
                 "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
@@ -223,11 +227,19 @@
             },
             "nodeSettings": {
                 "title": "Настройка Node (точка подключения к сети)",
-                "description": "Select Manual to choose from the node list or connect to your own node"
+                "description": "Выберите Вручную для настройки параметров узла и подключения к вашему собственному узлу"
             },
             "configureNodeList": {
                 "title": "Select a node",
-                "description": ""
+                "description": "Управление списком узлов, к которым подключается ваш кошелек.",
+                "primaryNode": "Основной узел",
+                "excludeNode": "Исключить узел",
+                "includeNode": "Включить узел",
+                "viewDetails": "Посмотреть детали",
+                "setAsPrimary": "Установить как основной",
+                "removeNode": "Удалить узел",
+                "includeOfficialNodeList": "Включить список официальных узлов",
+                "noNodes": "Узлы не выбраны, вместо этого узлы будут выбираться автоматически."
             },
             "proofOfWork": {
                 "title": "Доказательство Работы (PoW)",
@@ -332,17 +344,26 @@
             "backupDescription": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
             "backupWarning": "If you lose your backup and recovery phrase you will lose access to your funds.",
             "notBackedUp": "Not backed up",
-            "notBackedUpDescription": "You have not backed up your Stronghold"
+            "notBackedUpDescription": "You have not backed up your Stronghold",
+            "saving": "Сохранение..."
         },
         "deleteAccount": {
-            "title": "Remove {name}?",
-            "body": "You can add this account back later but you may lose your transaction history.",
-            "typePassword": "Type your password to confirm.",
-            "deleteAccount": "Remove account",
-            "errorTitle": "Unable to remove {name}",
-            "errorBody1": "To remove an account it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
-            "errorBody3": "You cannot remove this account, you must have at least one."
+            "title": "Удалить {name}?",
+            "body": "Эта учетная запись не имеет истории транзакций. Ее можно безопасно удалить.",
+            "typePassword": "Введите пароль для подтверждения.",
+            "hideAccount": "Удалить учетную запись",
+            "errorTitle": "Не удается удалить {name}",
+            "errorBody1": "Вы не можете удалить эту учетную запись, у вас должна быть хотя бы одна."
+        },
+        "hideAccount": {
+            "title": "Скрыть {name}?",
+            "body": "Вы можете найти эту учетную запись позже, включив \"Показать скрытые учетные записи\" в расширенных настройках.",
+            "typePassword": "Введите пароль для подтверждения.",
+            "hideAccount": "Скрыть учетную запись",
+            "errorTitle": "Не удается скрыть {name}",
+            "errorBody1": "Чтобы скрыть учетную запись, она должна иметь нулевой баланс.",
+            "errorBody2": "В настоящее время на этом аккаунте осталось {balance}. Переведите эти средства на другой счет и повторите попытку.",
+            "errorBody3": "Вы не можете скрыть эту учетную запись, вы должны иметь хотя бы одну."
         },
         "addressHistory": {
             "title": "{name} address history",
@@ -350,6 +371,7 @@
         },
         "node": {
             "titleAdd": "Add a node",
+            "titleUpdate": "Обновить узел",
             "titleRemove": "Remove a node",
             "titleDetails": "Node details",
             "nodeAddress": "Node address",
@@ -377,6 +399,10 @@
             "totalMem": "Total Memory",
             "freeMem": "Free Memory",
             "userPath": "User Path"
+        },
+        "transaction": {
+            "title": "Подтвердить транзакцию",
+            "body": "Вы собираетесь отправить {amount}"
         }
     },
     "charts": {
@@ -427,16 +453,19 @@
         "enableDeveloperMode": "Активировать режим Разработчика",
         "enableSystemNotifications": "Включить систему уведомлений",
         "exportState": "Экспортировать отчет",
-        "outsourceProofOfWork": "Делегировать PoW",
+        "localProofOfWork": "Локальное доказательство выполнения работы",
         "unlock": "Разблокировать",
         "updateFirefly": "Update Firefly",
         "restartNow": "Перезагрузить сейчас",
         "saveBackup": "Save Stronghold backup",
         "customizeAcount": "Customise account",
         "viewAddressHistory": "View address history",
-        "deleteAccount": "Remove account",
+        "hideAccount": "Скрыть учетную запись",
+        "showAccount": "Показать учетную запись",
+        "deleteAccount": "Удалить учетную запись",
         "max": "Max",
         "addNode": "Add node",
+        "updateNode": "Обновить узел",
         "removeNode": "Remove node",
         "hide": "Hide",
         "hideOthers": "Hide Others",
@@ -461,7 +490,9 @@
         "skipBackup": "Skip file backup",
         "finishSetup": "Finish setup",
         "readDocumentation": "Read the documentation",
-        "visitFaq": "Visit FAQ"
+        "visitFaq": "Visit FAQ",
+        "showHiddenAccounts": "Показать скрытые учетные записи",
+        "confirm": "Подтвердить"
     },
     "general": {
         "password": "Пароль",
@@ -507,7 +538,7 @@
         "appearance": "Внешний вид",
         "lightTheme": "Светлая тема",
         "darkTheme": "Тёмная тема",
-        "totalBalance": "Общий баланс",
+        "balance": "Баланс",
         "accountBalance": "Account Balance",
         "incoming": "Входящие",
         "outgoing": "Исходящие",
@@ -567,7 +598,8 @@
         "passwordStrength2": "Weak",
         "passwordStrength3": "Average",
         "passwordStrength4": "Strong",
-        "creatingProfile": "Creating profile, please wait..."
+        "creatingProfile": "Creating profile, please wait...",
+        "accountRemoved": "Эта учетная запись скрыта. Сделайте её видимой для выполнения переводов."
     },
     "dates": {
         "today": "Today",
@@ -581,6 +613,7 @@
         "valueTx": "Receiving {{value}} to {{account}}",
         "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
         "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
+        "confirmedInternalNoAccounts": "Внутренний перевод {{value}} подтвержден",
         "failed": "Outgoing {{value}} from {{account}} has failed",
         "downloadingUpdate": "Загрузка обновлений",
         "updateReady": "Обновление готово",

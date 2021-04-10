@@ -209,6 +209,10 @@
                 "title": "Resincronizar cuentas",
                 "description": "Comienza una tarea en segundo plano para asegurar que tus cuentas están actualizadas."
             },
+            "hiddenAccounts": {
+                "title": "Hidden accounts",
+                "description": "Selecting this options will show accounts that were previously hidden."
+            },
             "deleteProfile": {
                 "title": "Eliminar perfil",
                 "description": "Elimina toda la cartera, el perfil y el historial de transacciones. Asegúrate de tener una copia de seguridad."
@@ -223,11 +227,19 @@
             },
             "nodeSettings": {
                 "title": "Configuración de nodo",
-                "description": "Selecciona Manual para elegir en la lista de nodos o conectar a tu propio nodo"
+                "description": "Select Manual to configure the node settings and connect to your own node"
             },
             "configureNodeList": {
                 "title": "Selecciona un nodo",
-                "description": ""
+                "description": "Manage the list of nodes your wallet connects to.",
+                "primaryNode": "Primary node",
+                "excludeNode": "Exclude node",
+                "includeNode": "Include node",
+                "viewDetails": "View details",
+                "setAsPrimary": "Set as primary",
+                "removeNode": "Eliminar nodo",
+                "includeOfficialNodeList": "Include official node list",
+                "noNodes": "There are no nodes, automatic selection will be used instead."
             },
             "proofOfWork": {
                 "title": "Prueba de trabajo",
@@ -332,17 +344,26 @@
             "backupDescription": "Es importante hacer una copia de seguridad con regularidad para asegurarse de que tiene una copia de sus cuentas y el historial de transacciones.",
             "backupWarning": "Si pierde su copia de seguridad y su frase de recuperación perderá el acceso a sus fondos.",
             "notBackedUp": "No está respaldado",
-            "notBackedUpDescription": "No has respaldado tu fortaleza"
+            "notBackedUpDescription": "No has respaldado tu fortaleza",
+            "saving": "Saving..."
         },
         "deleteAccount": {
-            "title": "¿Eliminar {name}?",
-            "body": "Puedes agregar esta cuenta más tarde, pero podrías perder el historial de transacciones.",
-            "typePassword": "Type your password to confirm.",
-            "deleteAccount": "Eliminar cuenta",
-            "errorTitle": "No se puede eliminar {name}",
-            "errorBody1": "Para eliminar una cuenta ésta debe tener saldo 0.",
-            "errorBody2": "Actualmente tienes {balance} restantes en esta cuenta. Por favor, mueve estos fondos a una cuenta diferente e inténtalo de nuevo.",
-            "errorBody3": "No puedes eliminar esta cuenta, debes tener al menos una."
+            "title": "Delete {name}?",
+            "body": "This account has no transaction history. It can safely be deleted.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Delete account",
+            "errorTitle": "Unable to delete {name}",
+            "errorBody1": "You cannot delete this account, you must have at least one."
+        },
+        "hideAccount": {
+            "title": "Hide {name}?",
+            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Hide account",
+            "errorTitle": "Unable to hide {name}",
+            "errorBody1": "To hide an account it must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
+            "errorBody3": "You cannot hide this account, you must have at least one."
         },
         "addressHistory": {
             "title": "{name} historial de direcciones",
@@ -350,6 +371,7 @@
         },
         "node": {
             "titleAdd": "Añadir un nodo",
+            "titleUpdate": "Update a node",
             "titleRemove": "Eliminar un nodo",
             "titleDetails": "Detalles del nodo",
             "nodeAddress": "Dirección del nodo",
@@ -377,6 +399,10 @@
             "totalMem": "Memoria total",
             "freeMem": "Memoria libre",
             "userPath": "Ruta de usuario"
+        },
+        "transaction": {
+            "title": "Confirm transaction",
+            "body": "You’re about to send {amount} to"
         }
     },
     "charts": {
@@ -427,16 +453,19 @@
         "enableDeveloperMode": "Habilitar modo de desarrollador",
         "enableSystemNotifications": "Habilitar notificaciones del sistema",
         "exportState": "Exportar estado",
-        "outsourceProofOfWork": "Externalizar prueba de trabajo",
+        "localProofOfWork": "Local proof of work",
         "unlock": "Desbloquear",
         "updateFirefly": "Actualizar Firefly",
         "restartNow": "Reiniciar ahora",
         "saveBackup": "Guardar copia de seguridad de Stronghold",
         "customizeAcount": "Personalizar cuenta",
         "viewAddressHistory": "Ver historial de direcciones",
-        "deleteAccount": "Eliminar cuenta",
+        "hideAccount": "Hide account",
+        "showAccount": "Unhide account",
+        "deleteAccount": "Delete account",
         "max": "Máx",
         "addNode": "Añadir nodo",
+        "updateNode": "Update node",
         "removeNode": "Eliminar nodo",
         "hide": "Ocultar",
         "hideOthers": "Ocultar otros",
@@ -461,7 +490,9 @@
         "skipBackup": "Omitir copia de seguridad",
         "finishSetup": "Finalizar la configuración",
         "readDocumentation": "Leer la documentación",
-        "visitFaq": "Ver las preguntas frecuentes"
+        "visitFaq": "Ver las preguntas frecuentes",
+        "showHiddenAccounts": "Show hidden accounts",
+        "confirm": "Confirm"
     },
     "general": {
         "password": "Contraseña",
@@ -507,7 +538,7 @@
         "appearance": "Apariencia",
         "lightTheme": "Tema claro",
         "darkTheme": "Tema oscuro",
-        "totalBalance": "Saldo total",
+        "balance": "Balance",
         "accountBalance": "Saldo de la cuenta",
         "incoming": "Entrante",
         "outgoing": "Saliente",
@@ -567,7 +598,8 @@
         "passwordStrength2": "Débil",
         "passwordStrength3": "Promedio",
         "passwordStrength4": "Fuerte",
-        "creatingProfile": "Creando perfil, por favor espere..."
+        "creatingProfile": "Creando perfil, por favor espere...",
+        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
     },
     "dates": {
         "today": "Hoy",
@@ -581,6 +613,7 @@
         "valueTx": "Recibiendo {{value}} a {{account}}",
         "confirmed": "Se ha confirmado la salida de {{value}} desde {{account}}",
         "confirmedInternal": "Se ha confirmado {{value}} desde {{senderAccount}} a {{receiverAccount}}",
+        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
         "failed": "Ha fallado la salida de {{value}} desde {{account}}",
         "downloadingUpdate": "Descargando actualización",
         "updateReady": "Actualización lista",
