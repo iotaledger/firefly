@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { ADDRESS_LENGTH } from 'shared/lib/utils'
-    import Error from './Error'
+    import { Error } from 'shared/components'
 
     export let address = undefined
     export let classes = ''
@@ -68,8 +68,8 @@
     }
 </style>
 
-<div>
-    <address-input class="flex relative {classes}" {disabled}>
+<div class="{classes}">
+    <address-input class="flex relative" {disabled}>
         <textarea
             bind:value={address}
             class="w-full text-12 leading-140 border border-solid resize-none

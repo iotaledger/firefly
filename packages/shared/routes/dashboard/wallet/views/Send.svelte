@@ -27,6 +27,7 @@
     let selectedSendType = $sendParams.isInternal ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
     let unit = Unit.Mi
     let amount = $sendParams.amount === 0 ? '' : convertUnitsNoE($sendParams.amount, Unit.i, unit)
+    let address = $sendParams.address
     let to = undefined
     let amountError = ''
     let addressPrefix = ($account ?? $liveAccounts[0]).depositAddress.split('1')[0]
@@ -36,11 +37,12 @@
     // This looks odd but sets a reactive dependency on amount, so when it changes the error will clear
     $: amount, (amountError = '')
     $: to, (toError = '')
-    $: $sendParams.address, (addressError = '')
+    $: address, (addressError = '')
 
     const sendSubscription = sendParams.subscribe((s) => {
         selectedSendType = s.isInternal ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
         amount = s.amount === 0 ? '' : convertUnitsNoE(s.amount, Unit.i, unit)
+        address = s.address
     })
 
     let transferSteps: {
@@ -122,14 +124,14 @@
 
                 if (selectedSendType === SEND_TYPE.EXTERNAL) {
                     // Validate address length
-                    if ($sendParams.address.length !== ADDRESS_LENGTH) {
+                    if (address.length !== ADDRESS_LENGTH) {
                         addressError = locale('error.send.addressLength', {
                             values: {
                                 length: ADDRESS_LENGTH,
                             },
                         })
                     } else {
-                        addressError = validateBech32Address(addressPrefix, $sendParams.address)
+                        addressError = validateBech32Address(addressPrefix, address)
                     }
                 } else {
                     if (!to) {
@@ -138,6 +140,7 @@
                 }
 
                 if (!amountError && !addressError && !toError) {
+                    $sendParams.address = address
                     $sendParams.amount = amountAsI
                     openPopup({
                         type: 'transaction',
@@ -250,15 +253,6 @@
                     </div>
                 {/if}
                 <div class="w-full block">
-                    <Amount
-                        error={amountError}
-                        bind:amount
-                        bind:unit
-                        maxClick={handleMaxClick}
-                        {locale}
-                        classes="mb-6"
-                        disabled={$isTransferring}
-                        autofocus />
                     {#if selectedSendType === SEND_TYPE.INTERNAL}
                         <Dropdown
                             value={to?.label || null}
@@ -266,17 +260,27 @@
                             placeholder={locale('general.to')}
                             items={accountsDropdownItems.filter((a) => from && a.id !== from.id)}
                             onSelect={handleToSelect}
-                            disabled={$isTransferring || $liveAccounts.length === 2} />
-                        <Error error={toError} />
+                            disabled={$isTransferring || $liveAccounts.length === 2}
+                            error={toError} 
+                            classes="mb-6" />
                     {:else}
                         <Address
                             error={addressError}
-                            bind:address={$sendParams.address}
+                            bind:address={address}
                             {locale}
                             label={locale('general.sendToAddress')}
                             disabled={$isTransferring}
-                            placeholder={`${locale('general.sendToAddress')}\n${addressPrefix}...`} />
+                            placeholder={`${locale('general.sendToAddress')}\n${addressPrefix}...`}                         
+                            classes="mb-6"/>
                     {/if}
+                    <Amount
+                        error={amountError}
+                        bind:amount
+                        bind:unit
+                        maxClick={handleMaxClick}
+                        {locale}
+                        disabled={$isTransferring}
+                        autofocus />
                 </div>
             </div>
         </div>
