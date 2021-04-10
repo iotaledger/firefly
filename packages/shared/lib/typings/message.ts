@@ -98,6 +98,7 @@ export interface Message {
     nonce: number;
     confirmed?: boolean;
     broadcasted: boolean;
+    migratedFromLegacy: boolean;
 }
 
 export interface ListMessageFilter {

@@ -16,7 +16,7 @@
     const { balance } = $data
 
     // TODO: dummy
-    let wasMigrated = didComplete
+    let wasMigrated = $didComplete
 
     onMount(() => {
         // This is the last screen in onboarding for all flows i.e., if you create a new wallet or import stronghold

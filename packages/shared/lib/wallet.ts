@@ -14,7 +14,7 @@ import type { Message } from 'shared/lib/typings/message'
 import { formatUnit } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
 import type { ClientOptions } from './typings/client'
-import type { MigrationData, MigrationBundle } from 'shared/lib/typings/migration'
+import type { MigrationData, MigrationBundle, SendMigrationBundleResponse } from 'shared/lib/typings/migration'
 import type { Duration, StrongholdStatus } from './typings/wallet'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
@@ -42,6 +42,7 @@ export interface AccountMessage extends Message {
     account: number;
     internal: boolean;
 }
+
 
 interface ActorState {
     [id: string]: Actor
@@ -193,7 +194,7 @@ export const api: {
         node: string[],
         bundleHash: string,
         mwm: number,
-        callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void }
+        callbacks: { onSuccess: (response: Event<SendMigrationBundleResponse>) => void, onError: (err: ErrorEventPayload) => void }
     ),
 } = window['__WALLET_API__']
 
@@ -363,6 +364,29 @@ export const asyncCreateAccount = () => {
     })
 }
 
+export const checkForMigratedMessages = (accountId: string, messages: Message[]) => {
+    const accounts = get(wallet).accounts
+
+    const account = get(accounts).find((account) => account.id === accountId)
+
+    // Only check migrated messages for first account as the migrated messages are sent there
+    if (account && account.index === 0) {
+        const _activeProfile = get(activeProfile)
+
+        if (_activeProfile.migratedTransactions && _activeProfile.migratedTransactions.length) {
+            const addresses = _activeProfile.migratedTransactions.map((transaction) => transaction.address)
+
+            messages.forEach((message) => {
+                if (message.migratedFromLegacy) {
+                    if (addresses.includes(message.address)) {
+
+                    }
+                }
+            })
+        }
+    }
+};
+
 /**
  * Initialises event listeners from wallet library
  *
@@ -409,6 +433,8 @@ export const initialiseListeners = () => {
             }
 
             if (!get(isSyncing)) {
+                checkForMigratedMessages(response.payload.accountId, [response.payload.message])
+
                 // Update account with new message
                 saveNewMessage(response.payload.accountId, response.payload.message);
                 const notificationMessage = localize('notifications.valueTx')

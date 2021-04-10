@@ -3,6 +3,8 @@ import type { Input, MigrationBundle, MigrationData } from 'shared/lib/typings/m
 import Validator from 'shared/lib/validator'
 import { api } from 'shared/lib/wallet'
 import { derived, get, writable, Writable } from 'svelte/store'
+import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
+import { formatUnit } from 'shared/lib/units'
 
 export const LOG_FILE_NAME = 'migration'
 
@@ -16,7 +18,7 @@ export const ADDRESS_SECURITY_LEVEL = 2
 export const MINIMUM_MIGRATION_BALANCE = 1000000
 
 /** Bundle mining timeout for each bundle */
-export const MINING_TIMEOUT_SECONDS = 60 * 10
+export const MINING_TIMEOUT_SECONDS = 60 * 10 
 
 export const MINIMUM_WEIGHT_MAGNITUDE = 14;
 
@@ -175,28 +177,8 @@ export const createMigrationBundle = (inputAddressIndexes: number[], mine: boole
 
 export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAGNITUDE): Promise<void> => {
     return new Promise((resolve, reject) => {
-        // setTimeout(() => {
-        //     const _activeProfile = get(activeProfile)
-
-        //     updateProfile(
-        //         'migratedTransactions',
-        //         _activeProfile.migratedTransactions ? [..._activeProfile.migratedTransactions, {
-        //             address: 'x'.repeat(81),
-        //             balance: '10 Mi',
-        //             timestamp: new Date().toISOString(),
-        //             index: 0
-        //         }] : [{
-        //             address: 'x'.repeat(81),
-        //             balance: '10 Mi',
-        //             timestamp: new Date().toISOString(),
-        //             index: 0
-        //         }]
-        //     )
-
-        //     resolve()
-        // }, 4000)
         api.sendMigrationBundle([MIGRATION_NODE], bundleHash, mwm, {
-            onSuccess() {
+            onSuccess(response) {
                 const { bundles } = get(migration);
 
                 // Update bundle and mark it as migrated
@@ -209,6 +191,22 @@ export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAG
                         return bundle
                     })
                 })
+
+                // Persist these bundles in local storage
+                const _activeProfile = get(activeProfile)
+
+                const migratedTransaction = {
+                    address: response.payload.address,
+                    balance: response.payload.value,
+                    timestamp: new Date().toISOString(),
+                    // Account index. Since we migrate funds to account at 0th index
+                    index: 0
+                }
+
+                updateProfile(
+                    'migratedTransactions',
+                    _activeProfile.migratedTransactions ? [..._activeProfile.migratedTransactions, migratedTransaction] : [migratedTransaction]
+                )
                 resolve()
             },
             onError(error) {
@@ -505,5 +503,31 @@ export async function checkChrysalisStatus(): Promise<void> {
         } catch (err) {
             console.error(err.name === "AbortError" ? new Error(`Could not fetch from ${endpoint}.`) : err)
         }
+    }
+}
+
+export const getMigrationBalanceOverview = () => {
+    const _activeProfile = get(activeProfile)
+    const activeCurrency = _activeProfile?.settings.currency ?? CurrencyTypes.USD;
+
+
+    const balanceRaw = _activeProfile.migratedTransactions.reduce((acc, transaction) => acc + transaction.balance, 122222222220)
+    const balance = formatUnit(balanceRaw, 2)
+
+    const balanceFiat = `${convertToFiat(
+        balanceRaw,
+        get(currencies)[CurrencyTypes.USD],
+        get(exchangeRates)[activeCurrency]
+    )} ${activeCurrency}`
+
+
+    return {
+        balanceRaw,
+        balanceFiat,
+        balance,
+        incoming: '0 Mi',
+        incomingRaw: 0,
+        outgoing: '0 Mi',
+        outgoingRaw: 0,
     }
 }

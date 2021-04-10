@@ -20,6 +20,11 @@ export interface MigrationBundle {
     crackability: number;
 }
 
+export interface SendMigrationBundleResponse {
+    address: string;
+    value: number;
+}
+
 /**
  * Gets data related to seed
  * 

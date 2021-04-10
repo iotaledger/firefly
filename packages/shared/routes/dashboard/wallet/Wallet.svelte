@@ -5,8 +5,7 @@
     import { DEFAULT_NODE, DEFAULT_NODES, network } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import type { MigratedTransaction } from 'shared/lib/profile'
-    import { activeProfile, isStrongholdLocked } from 'shared/lib/profile'
+    import { isStrongholdLocked, activeProfile, MigratedTransaction } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
@@ -33,17 +32,68 @@
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, writable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
+    import { getMigrationBalanceOverview  } from 'shared/lib/migration'
 
     export let locale
 
     const { accounts, balanceOverview, accountsLoaded } = $wallet
 
-    const transactions =
-        $activeProfile?.migratedTransactions && $activeProfile?.migratedTransactions.length
+    let hasMigratedTransactions = $activeProfile?.migratedTransactions && $activeProfile?.migratedTransactions.length;
+
+    let transactions =
+        hasMigratedTransactions
             ? writable($activeProfile.migratedTransactions)
             : derived(accounts, ($accounts) => {
                   return getTransactions($accounts)
               })
+
+    const updateBalance = (balanceOverview) => {
+        _balanceOverview.update((_balance) => {
+            if (hasMigratedTransactions) {
+                return Object.assign({}, balanceOverview, getMigrationBalanceOverview())
+            }
+
+            return balanceOverview
+        })
+    }
+
+    const updateAccounts = (accounts) => {
+        _accounts.update((_existing) => {
+            if (hasMigratedTransactions) {
+               return accounts.map((_account) => {
+                if (_account.index === 0) {
+                    const overview = getMigrationBalanceOverview()
+            
+            return Object.assign({}, _account, {
+                balance: overview.balance,
+                rawIotaBalance: overview.balanceRaw,
+                balanceEquiv: overview.balanceFiat
+            })
+                }
+
+                return _account
+            })
+            }
+            return accounts
+        })
+    }
+
+    let _balanceOverview = writable({})
+    let _accounts = writable([])
+
+    accountsLoaded.subscribe((loaded) => {
+        if (loaded) {
+            updateBalance($balanceOverview)
+            updateAccounts($accounts)
+        }
+    })
+  
+    activeProfile.subscribe((profile) => {
+       hasMigratedTransactions =  profile?.migratedTransactions && profile?.migratedTransactions.length;
+       updateBalance($balanceOverview)
+       updateAccounts($accounts)
+    })
+
 
     const accountsBalanceHistory = derived([accounts, priceData], ([$accounts, $priceData]) =>
         getAccountsBalanceHistory($accounts, $priceData)
@@ -55,8 +105,8 @@
         $accounts.find((acc) => acc.id === $selectedAccountId)
     )
 
-    setContext<Writable<BalanceOverview>>('walletBalance', balanceOverview)
-    setContext<Writable<WalletAccount[]>>('walletAccounts', accounts)
+    setContext<Writable<BalanceOverview>>('walletBalance', _balanceOverview)
+    setContext<Writable<WalletAccount[]>>('walletAccounts', _accounts)
     setContext<Writable<boolean>>('walletAccountsLoaded', accountsLoaded)
     setContext<Readable<AccountMessage[] | MigratedTransaction[]>>('walletTransactions', transactions)
     setContext<Readable<WalletAccount>>('selectedAccount', selectedAccount)
