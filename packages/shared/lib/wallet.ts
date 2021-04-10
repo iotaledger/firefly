@@ -378,7 +378,7 @@ export const checkForMigratedMessages = (accountId: string, messages: Message[])
 
             messages.forEach((message) => {
                 if (message.migratedFromLegacy) {
-                    if (addresses.includes(message.address)) {
+                    if (addresses.includes('s')) {
 
                     }
                 }

@@ -32,7 +32,6 @@
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, writable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
-    import { getMigrationBalanceOverview  } from 'shared/lib/migration'
 
     export let locale
 
@@ -46,52 +45,9 @@
             : derived(accounts, ($accounts) => {
                   return getTransactions($accounts)
               })
-
-    const updateBalance = (balanceOverview) => {
-        _balanceOverview.update((_balance) => {
-            if (hasMigratedTransactions) {
-                return Object.assign({}, balanceOverview, getMigrationBalanceOverview())
-            }
-
-            return balanceOverview
-        })
-    }
-
-    const updateAccounts = (accounts) => {
-        _accounts.update((_existing) => {
-            if (hasMigratedTransactions) {
-               return accounts.map((_account) => {
-                if (_account.index === 0) {
-                    const overview = getMigrationBalanceOverview()
-            
-            return Object.assign({}, _account, {
-                balance: overview.balance,
-                rawIotaBalance: overview.balanceRaw,
-                balanceEquiv: overview.balanceFiat
-            })
-                }
-
-                return _account
-            })
-            }
-            return accounts
-        })
-    }
-
-    let _balanceOverview = writable({})
-    let _accounts = writable([])
-
-    accountsLoaded.subscribe((loaded) => {
-        if (loaded) {
-            updateBalance($balanceOverview)
-            updateAccounts($accounts)
-        }
-    })
   
     activeProfile.subscribe((profile) => {
        hasMigratedTransactions =  profile?.migratedTransactions && profile?.migratedTransactions.length;
-       updateBalance($balanceOverview)
-       updateAccounts($accounts)
     })
 
 
@@ -105,8 +61,8 @@
         $accounts.find((acc) => acc.id === $selectedAccountId)
     )
 
-    setContext<Writable<BalanceOverview>>('walletBalance', _balanceOverview)
-    setContext<Writable<WalletAccount[]>>('walletAccounts', _accounts)
+    setContext<Writable<BalanceOverview>>('walletBalance', balanceOverview)
+    setContext<Writable<WalletAccount[]>>('walletAccounts', accounts)
     setContext<Writable<boolean>>('walletAccountsLoaded', accountsLoaded)
     setContext<Readable<AccountMessage[] | MigratedTransaction[]>>('walletTransactions', transactions)
     setContext<Readable<WalletAccount>>('selectedAccount', selectedAccount)

@@ -505,29 +505,3 @@ export async function checkChrysalisStatus(): Promise<void> {
         }
     }
 }
-
-export const getMigrationBalanceOverview = () => {
-    const _activeProfile = get(activeProfile)
-    const activeCurrency = _activeProfile?.settings.currency ?? CurrencyTypes.USD;
-
-
-    const balanceRaw = _activeProfile.migratedTransactions.reduce((acc, transaction) => acc + transaction.balance, 122222222220)
-    const balance = formatUnit(balanceRaw, 2)
-
-    const balanceFiat = `${convertToFiat(
-        balanceRaw,
-        get(currencies)[CurrencyTypes.USD],
-        get(exchangeRates)[activeCurrency]
-    )} ${activeCurrency}`
-
-
-    return {
-        balanceRaw,
-        balanceFiat,
-        balance,
-        incoming: '0 Mi',
-        incomingRaw: 0,
-        outgoing: '0 Mi',
-        outgoingRaw: 0,
-    }
-}
