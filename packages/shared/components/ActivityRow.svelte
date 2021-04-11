@@ -4,6 +4,11 @@
     import { formatUnit } from 'shared/lib/units'
     import { date } from 'svelte-i18n'
     import type { Payload } from 'shared/lib/typings/message'
+    import type { Readable, Writable } from 'svelte/store'
+    import { AccountMessage, isSyncing, selectedAccountId, selectedMessage, syncAccounts, WalletAccount } from 'shared/lib/wallet'
+    import { getContext } from 'svelte'
+
+    const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
 
     export let id
     export let timestamp
@@ -16,6 +21,24 @@
 
     let cachedMigrationTx = !payload 
     let milestoneMessage = payload?.type === 'Milestone'
+
+    const getMessageValue = () => {
+        if (cachedMigrationTx) {
+            return formatUnit(balance)
+        }
+
+        if (milestoneMessage) {
+            const funds = payload.data.essence.receipt.data.funds;
+
+            const firstAccount = $accounts.find((acc) => acc.index === 0)
+            const firstAccountAddresses = firstAccount.addresses.map((address) => address.address)
+            
+            const totalValue = funds.filter((fund) => firstAccountAddresses.includes(fund.output.address)).reduce((acc, fund) => acc+ fund.output.amount, 0)
+
+            return formatUnit(totalValue);
+        }
+    return `${!payload.data.essence.data.incoming ? '-' : ''}${formatUnit(payload.data.essence.data.value)}`
+};
     
     export let onClick = () => {}
 </script>
@@ -23,8 +46,8 @@
 <button
     on:click={onClick}
     data-label="transaction-row"
-    class="w-full text-left flex rounded-2xl items-center bg-gray-0 dark:10bg-gray-900 dark:bg-opacity-50 p-4 {(!confirmed || cachedMigrationTx) && 'opacity-50'} {false && 'pointer-events-none'}"
-    disabled={false}>
+    class="w-full text-left flex rounded-2xl items-center bg-gray-0 dark:10bg-gray-900 dark:bg-opacity-50 p-4 {(!confirmed || cachedMigrationTx) && 'opacity-50'} {cachedMigrationTx && 'pointer-events-none'}"
+    disabled={cachedMigrationTx}>
     {#if cachedMigrationTx || milestoneMessage}
         <Icon boxed classes="text-white" boxClasses="bg-gray-500 dark:bg-gray-900" icon="double-chevron-right" />
     {:else}
@@ -49,7 +72,7 @@
     </div>
     <div class="flex-1 items-end flex flex-col ml-4">
         <Text type="p" smaller>
-            {cachedMigrationTx || milestoneMessage ? formatUnit(balance) : `${!payload.data.essence.data.incoming ? '-' : ''}${formatUnit(payload.data.essence.data.value)}`}
+            {getMessageValue()}
         </Text>
     </div>
 </button>

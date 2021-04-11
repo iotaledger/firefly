@@ -28,6 +28,7 @@
         updateBalanceOverview,
         wallet,
         WalletAccount,
+        processMigratedTransactions
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, writable, Writable } from 'svelte/store'
@@ -99,6 +100,8 @@
                                 const account = prepareAccountInfo(storedAccount, meta)
                                 accounts.update((accounts) => [...accounts, account])
 
+                                processMigratedTransactions(storedAccount.id, storedAccount.messages)
+                                
                                 if (idx === accountsResponse.payload.length - 1) {
                                     updateBalanceOverview(totalBalance.balance, totalBalance.incoming, totalBalance.outgoing)
                                     _continue()
