@@ -1,7 +1,8 @@
-import { writable } from 'svelte/store'
+import { writable, get } from 'svelte/store'
 import type { Node } from './typings/client'
 import { Network } from './typings/client'
 import { isValidHttpsUrl, isValidUrl } from './utils'
+import { activeProfile } from 'shared/lib/profile'
 
 const DEFAULT_NODES: Node[] = [
     'https://api.hornet-0.testnet.chrysalis2.com',
@@ -34,7 +35,7 @@ export const isNodeUrlValid = (nodesList: Node[], newUrl: string): string | unde
     }
 
     // Only allow HTTPS nodes
-    if (!isValidHttpsUrl(newUrl)) {
+    if (!get(activeProfile).isDeveloperProfile && !isValidHttpsUrl(newUrl)) {
         return 'error.node.https'
     }
 
