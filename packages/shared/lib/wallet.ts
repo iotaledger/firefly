@@ -151,7 +151,7 @@ export const api: {
     areLatestAddressesUnused(callbacks: { onSuccess: (response: Event<boolean>) => void, onError: (err: ErrorEventPayload) => void })
     getUnusedAddress(accountId: string, callbacks: { onSuccess: (response: Event<Address>) => void, onError: (err: ErrorEventPayload) => void })
     getStrongholdStatus(callbacks: { onSuccess: (response: Event<StrongholdStatus>) => void, onError: (err: ErrorEventPayload) => void })
-    syncAccounts(callbacks: { onSuccess: (response: Event<SyncedAccount[]>) => void, onError: (err: ErrorEventPayload) => void })
+    syncAccounts(addressIndex: number, gapLimit: number, callbacks: { onSuccess: (response: Event<SyncedAccount[]>) => void, onError: (err: ErrorEventPayload) => void })
     syncAccount(accountId: string, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     createAccount(account: AccountToCreate, callbacks: { onSuccess: (response: Event<Account>) => void, onError: (err: ErrorEventPayload) => void })
     send(accountId: string, transfer: {
@@ -1063,9 +1063,9 @@ export const getWalletBalanceHistory = (accountsBalanceHistory: AccountsBalanceH
 /**
  * Sync the accounts
  */
-export function syncAccounts(showConfirmation) {
+export function syncAccounts(showConfirmation, addressIndex?: number, gapLimit?: number) {
     isSyncing.set(true)
-    api.syncAccounts({
+    api.syncAccounts(addressIndex, gapLimit, {
         onSuccess(syncAccountsResponse) {
             const syncedAccounts = syncAccountsResponse.payload
 
