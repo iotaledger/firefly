@@ -136,8 +136,10 @@
     $: if ($activeProfile) {
         if (!get(activeProfile)?.migratedTransactions?.length && migrationNotificationId) {
             removeDisplayNotification(migrationNotificationId)
+            migrationNotificationId = null
             if (chrysalisStatusUnsubscribe) {
                 chrysalisStatusUnsubscribe()
+                chrysalisStatusUnsubscribe = null
             }
         }
     }
