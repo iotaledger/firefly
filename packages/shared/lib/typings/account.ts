@@ -95,12 +95,12 @@ export function getAccounts(bridge: Bridge, __ids: CommunicationIds): Promise<st
     })
 }
 
-export function syncAccounts(bridge: Bridge, __ids: CommunicationIds): Promise<string> {
+export function syncAccounts(bridge: Bridge, __ids: CommunicationIds, addressIndex?: number, gapLimit?: number): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
         cmd: 'SyncAccounts',
-        payload: {}
+        payload: { addressIndex, gapLimit }
     })
 }
 
