@@ -8,21 +8,21 @@ import { derived, get, writable, Writable } from 'svelte/store'
 
 export const LOG_FILE_NAME = 'migration.log'
 
-export const MIGRATION_NODE = 'https://nodes.devnet.iota.org'
+export const MIGRATION_NODE = 'https://nodes-migration-legacy.iota.cafe'
 
 export const PERMANODE = 'https://chronicle.iota.org/api'
 
 export const ADDRESS_SECURITY_LEVEL = 2
 
 /** Minimum migration balance */
-export const MINIMUM_MIGRATION_BALANCE = 100
+export const MINIMUM_MIGRATION_BALANCE = 1000000
 
 /** Bundle mining timeout for each bundle */
 export const MINING_TIMEOUT_SECONDS = 60
 
 export const MINIMUM_WEIGHT_MAGNITUDE = 14;
 
-const MAX_INPUTS_PER_BUNDLE = 3
+const MAX_INPUTS_PER_BUNDLE = 10
 
 interface Bundle {
     index: number;
@@ -456,7 +456,7 @@ export const totalMigratedBalance = derived(get(migration).bundles, (_bundles) =
 /**
  * List of chrysalis node endpoints to detect when is live
  */
-export const CHRYSALIS_NODE_ENDPOINTS = ['https://api.hornet-0.testnet.chrysalis2.com/api/v1/info']
+export const CHRYSALIS_NODE_ENDPOINTS = ['https://api.hornet-0.testnet.chrysalis2.com/api/v1/info', 'https://api.lb-0.migration.iota.cafe/api/v1/info']
 /**
 * Default timeout for a request made to an endpoint
 */
@@ -549,10 +549,14 @@ export async function checkChrysalisStatus(): Promise<void> {
     }
 }
 
-api.onMigrationProgress({
-    onSuccess(response) {
-        console.log('Response', response)
-    }, onError(error) {
-        console.log('Error', error)
-    }
-})
+const initialiseMigrationListeners = () => {
+    api.onMigrationProgress({
+        onSuccess(response) {
+            console.log('Response', response)
+        }, onError(error) {
+            console.log('Error', error)
+        }
+    })
+}
+
+
