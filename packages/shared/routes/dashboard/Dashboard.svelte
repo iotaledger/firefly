@@ -133,33 +133,44 @@
             handleChrysalisStatusNotifications()
         }
     }
+    $: if ($activeProfile) {
+        if (!get(activeProfile)?.migratedTransactions?.length && migrationNotificationId) {
+            removeDisplayNotification(migrationNotificationId)
+            if (chrysalisStatusUnsubscribe) {
+                chrysalisStatusUnsubscribe()
+            }
+        }
+    }
+
     function handleChrysalisStatusNotifications() {
         chrysalisStatusUnsubscribe = chrysalisLive.subscribe((live) => {
             if (typeof live === 'boolean' && live === false) {
                 removeDisplayNotification(migrationNotificationId) // clean first otherwise it shows up while whatching
                 migrationNotificationId = null
-                migrationNotificationId = showAppNotification({
-                    type: 'warning',
-                    message: locale('notifications.migratedAccountChrysalisDown'),
-                    progress: undefined,
-                    timeout: NOTIFICATION_TIMEOUT_NEVER,
-                    actions: [
-                        {
-                            label: locale('actions.viewStatus'),
-                            isPrimary: true,
-                            callback: () => Electron.openUrl('https://chrysalis.iota.org'),
-                        },
-                        {
-                            label: locale('actions.dismiss'),
-                            callback: () => removeDisplayNotification(migrationNotificationId),
-                        },
-                    ],
-                })
+                if (get(activeProfile)?.migratedTransactions?.length) {
+                    migrationNotificationId = showAppNotification({
+                        type: 'warning',
+                        message: locale('notifications.migratedAccountChrysalisDown'),
+                        progress: undefined,
+                        timeout: NOTIFICATION_TIMEOUT_NEVER,
+                        actions: [
+                            {
+                                label: locale('actions.viewStatus'),
+                                isPrimary: true,
+                                callback: () => Electron.openUrl('https://chrysalis.iota.org'),
+                            },
+                            {
+                                label: locale('actions.dismiss'),
+                                callback: () => removeDisplayNotification(migrationNotificationId),
+                            },
+                        ],
+                    })
+                }
             } else if (typeof live === 'boolean' && live === true) {
                 removeDisplayNotification(migrationNotificationId)
                 migrationNotificationId = null
                 if ($activeProfile?.migratedTransactions?.length) {
-                    const migrationNotificationId = showAppNotification({
+                    migrationNotificationId = showAppNotification({
                         type: 'warning',
                         message: locale('notifications.migratedAccountChrysalisUp'),
                         progress: undefined,
