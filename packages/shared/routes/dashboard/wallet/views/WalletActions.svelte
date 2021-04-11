@@ -16,7 +16,7 @@
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
 
-    $: waitingChrysalis = $activeProfile?.migratedTransactions?.length > 0
+    $: waitingChrysalis = $activeProfile?.migratedTransactions?.length
 
     function handleAccountClick(accountId) {
         selectedAccountId.set(accountId)

@@ -37,19 +37,17 @@
 
     const { accounts, balanceOverview, accountsLoaded } = $wallet
 
-    let hasMigratedTransactions = $activeProfile?.migratedTransactions && $activeProfile?.migratedTransactions.length;
+    let hasMigratedTransactions = $activeProfile?.migratedTransactions?.length
 
-    let transactions =
-        hasMigratedTransactions
-            ? writable($activeProfile.migratedTransactions)
-            : derived(accounts, ($accounts) => {
-                  return getTransactions($accounts)
-              })
-  
+    let transactions = hasMigratedTransactions
+        ? writable($activeProfile?.migratedTransactions ?? [])
+        : derived(accounts, ($accounts) => {
+              return getTransactions($accounts)
+          })
+
     activeProfile.subscribe((profile) => {
-       hasMigratedTransactions =  profile?.migratedTransactions && profile?.migratedTransactions.length;
+        hasMigratedTransactions = profile?.migratedTransactions?.length
     })
-
 
     const accountsBalanceHistory = derived([accounts, priceData], ([$accounts, $priceData]) =>
         getAccountsBalanceHistory($accounts, $priceData)

@@ -56,7 +56,7 @@
             }
         })
 
-        if ($activeProfile?.migratedTransactions?.length > 0) {
+        if ($activeProfile?.migratedTransactions?.length) {
             await pollChrysalisStatus()
         }
     })
@@ -129,7 +129,7 @@
     }
 
     $: if (!busy && $accountsLoaded) {
-        if (get(activeProfile)?.migratedTransactions?.length > 0) {
+        if (get(activeProfile)?.migratedTransactions?.length) {
             handleChrysalisStatusNotifications()
         }
     }
@@ -158,7 +158,7 @@
             } else if (typeof live === 'boolean' && live === true) {
                 removeDisplayNotification(migrationNotificationId)
                 migrationNotificationId = null
-                if ($activeProfile?.migratedTransactions?.length > 0) {
+                if ($activeProfile?.migratedTransactions?.length) {
                     const migrationNotificationId = showAppNotification({
                         type: 'warning',
                         message: locale('notifications.migratedAccountChrysalisUp'),

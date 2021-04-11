@@ -25,11 +25,7 @@
         }
     }
 
-    let shouldDisableActivityRow = $activeProfile.migratedTransactions && $activeProfile.migratedTransactions.length > 0
-
-    activeProfile.subscribe((_activeProfile) => {
-        shouldDisableActivityRow = _activeProfile.migratedTransactions && _activeProfile.migratedTransactions.length > 0        
-    })
+    $: shouldDisableActivityRow = $activeProfile?.migratedTransactions?.length
 </script>
 
 <div data-label="latest-transactions" class="h-full pt-6 pb-8 px-8 flex-grow flex flex-col">
