@@ -207,7 +207,7 @@
             },
             "resyncAccounts": {
                 "title": "Torneu a sincronitzar els comptes",
-                "description": ""
+                "description": "Starts a background task to make sure your accounts are up to date."
             },
             "deleteProfile": {
                 "title": "Suprimeix el perfil",
@@ -313,7 +313,8 @@
     "popups": {
         "password": {
             "title": "Es requereix la contrasenya",
-            "subtitle": "Introduïu la contrasenya de la cartera per desbloquejar Stronghold"
+            "subtitle": "Please enter your password to unlock Stronghold",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "El teu codi QR"
@@ -336,7 +337,7 @@
         "deleteAccount": {
             "title": "Eliminar {name}?",
             "body": "Podràs afegir aquest compte més tard, però és possible que perdis l'historial de transaccions.",
-            "typePassword": "Escriu la contrasenya de la teva cartera per confirmar-la.",
+            "typePassword": "Type your password to confirm.",
             "deleteAccount": "Esborrar el compte",
             "errorTitle": "No es pot suprimir {name}",
             "errorBody1": "Per eliminar un compte, heu de tenir 0 saldo.",
@@ -344,7 +345,7 @@
             "errorBody3": "No podeu suprimir aquest compte, n'heu de tenir almenys un."
         },
         "addressHistory": {
-            "title": "historial d'adreces del compte {name}",
+            "title": "{name} address history",
             "currentBalance": "Saldo actual: {balance}"
         },
         "node": {
@@ -363,7 +364,8 @@
         },
         "deleteProfile": {
             "title": "Suprimeix el perfil",
-            "confirmation": "Esteu segur que voleu suprimir aquest perfil? Aquesta operació no es pot desfer."
+            "confirmation": "Esteu segur que voleu suprimir aquest perfil? Aquesta operació no es pot desfer.",
+            "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
             "title": "Diagnòstics",
@@ -586,7 +588,8 @@
         "restartInstall": "Reinicieu per instal·lar",
         "calcMinutesRemaining": "S'estan calculant els minuts restants...",
         "minutesRemaining": "{minutes, plural, one {1 minut restant} other {# minuts restants}}",
-        "copiedToClipboard": "Copiat al porta-retalls"
+        "copiedToClipboard": "Copiat al porta-retalls",
+        "accountsSynchronized": "Account synchronization complete"
     },
     "error": {
         "profile": {
@@ -606,7 +609,7 @@
             "dates": "Les dates són fàcils d’endevinar.",
             "common": "Aquesta és una contrasenya molt comuna.",
             "similar": "Això és similar a una contrasenya comuna.",
-            "reasonWord": "Una sola paraula és fàcil d’endevinar.",
+            "word": "A single word is easy to guess.",
             "incorrect": "La contrasenya és incorrecta.",
             "length": "La vostra contrasenya no pot superar {length, plural, one {1 caràcter} other {# caràcters}}."
         },
@@ -619,7 +622,11 @@
             "length": "El nom del compte no pot superar {length, plural, one {1 caràcter} other {# caràcters}}.",
             "empty": "Heu d'utilitzar el vostre darrer compte abans de crear-ne un de nou.",
             "notEmpty": "Heu de transferir el saldo abans de suprimir aquest compte.",
-            "duplicate": "Ja existeix un compte amb aquest nom."
+            "duplicate": "Ja existeix un compte amb aquest nom.",
+            "tilde": "A profile name can't start with the '~' character.",
+            "control": "A profile name can't contain a control character.",
+            "startDot": "A profile name can't start with the '.' character.",
+            "chars": "A profile name can't contain the following characters <>:\"/\\|?*"
         },
         "send": {
             "addressLength": "Les adreces han de tenir {length, plural, one {1 caràcter} other {# caràcters}} més.",
@@ -627,8 +634,10 @@
             "amountNoFloat": "Si les unitats són `i` no podeu fer servir decimals.",
             "amountInvalidFormat": "Sembla que l’import no és vàlid.",
             "amountZero": "L'import ha de ser superior a 0.",
-            "wrongAddressFormat": "Les adreces comencen amb el prefix {prefix}.",
+            "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
+            "wrongAddressFormat": "The address is not correctly formatted.",
             "insufficientFunds": "Aquest compte no té fons suficients.",
+            "noToAccount": "You have not selected an account to send the funds to.",
             "sendingDust": "No es possible enviar menys d'1 Mi.",
             "leavingDust": "No és possible deixar menys d'1 Mi a la teva adreça."
         },

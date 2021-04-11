@@ -207,7 +207,7 @@
             },
             "resyncAccounts": {
                 "title": "Risincronizza gli account",
-                "description": ""
+                "description": "Avvia un'attività in background per assicurarsi che i tuoi account siano aggiornati."
             },
             "deleteProfile": {
                 "title": "Elimina profilo",
@@ -313,7 +313,8 @@
     "popups": {
         "password": {
             "title": "Password necessaria",
-            "subtitle": "Si prega di inserire la password del wallet per sbloccare lo Stronghold"
+            "subtitle": "Please enter your password to unlock Stronghold",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "Il tuo codice QR"
@@ -336,7 +337,7 @@
         "deleteAccount": {
             "title": "Rimuovere {name}?",
             "body": "Puoi aggiungere questo account più tardi, ma potresti perdere la cronologia delle transazioni.",
-            "typePassword": "Digita la password del tuo wallet per confermare.",
+            "typePassword": "Type your password to confirm.",
             "deleteAccount": "Rimuovi conto",
             "errorTitle": "Impossibile eliminare {name}",
             "errorBody1": "Per eliminare un account devi avere il saldo a 0.",
@@ -363,7 +364,8 @@
         },
         "deleteProfile": {
             "title": "Elimina profilo",
-            "confirmation": "Si è sicuri di voler eliminare questo profilo? Questa azione non può essere annullata."
+            "confirmation": "Si è sicuri di voler eliminare questo profilo? Questa azione non può essere annullata.",
+            "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
             "title": "Diagnostiche",
@@ -586,7 +588,8 @@
         "restartInstall": "Riavvia per installare",
         "calcMinutesRemaining": "Calcolo dei minuti rimanenti...",
         "minutesRemaining": "{minutes, plural, one {1 minuto rimanente} other {# minuti rimanenti}}",
-        "copiedToClipboard": "Copiato negli appunti"
+        "copiedToClipboard": "Copiato negli appunti",
+        "accountsSynchronized": "Sincronizzazione completata"
     },
     "error": {
         "profile": {
@@ -606,7 +609,7 @@
             "dates": "Le date sono facili da indovinare.",
             "common": "Questa password è molto comune.",
             "similar": "Questa è simile ad una password comune.",
-            "reasonWord": "Una sola parola è facile da indovinare.",
+            "word": "Una sola parola è facile da indovinare.",
             "incorrect": "La password non è corretta.",
             "length": "La tua password non può essere più lunga di {length, plural, one {1 carattere} other {# caratteri}}."
         },
@@ -619,7 +622,11 @@
             "length": "Il nome del tuo account non può essere più lungo di {length, plural, one {1 carattere} other {# caratteri}}.",
             "empty": "Devi usare il tuo conto più recente prima di crearne uno nuovo.",
             "notEmpty": "Devi trasferire il tuo saldo prima di eliminare questo conto.",
-            "duplicate": "Esiste già un account con questo nome."
+            "duplicate": "Esiste già un account con questo nome.",
+            "tilde": "Un nome del profilo non può iniziare con il carattere '~'.",
+            "control": "Un nome del profilo non può contenere un carattere di controllo.",
+            "startDot": "Un nome del profilo non può iniziare con il carattere '.'",
+            "chars": "Un nome del profilo non può contenere i seguenti caratteri <>:\"/\\<unk>?*"
         },
         "send": {
             "addressLength": "Gli indirizzi dovrebbero essere lunghi {length, plural, one {1 carattere} other {# caratteri}}.",
@@ -627,8 +634,10 @@
             "amountNoFloat": "Se le unità sono `i` non puoi usare le posizioni decimali.",
             "amountInvalidFormat": "L'importo sembra essere un numero non valido.",
             "amountZero": "L'importo deve essere maggiore di 0.",
-            "wrongAddressFormat": "Gli indirizzi iniziano con il prefisso {prefix}.",
+            "wrongAddressPrefix": "Gli indirizzi iniziano con il prefisso {prefix}.",
+            "wrongAddressFormat": "L'indirizzo non è formattato correttamente.",
             "insufficientFunds": "Questo conto non ha sufficienti fondi.",
+            "noToAccount": "Non è stato selezionato un account a cui inviare i fondi.",
             "sendingDust": "Non puoi inviare meno di 1 Mi.",
             "leavingDust": "Non puoi lasciare meno di 1 Mi sul tuo indirizzo."
         },

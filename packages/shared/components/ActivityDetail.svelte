@@ -23,7 +23,7 @@
     let receiverAccount: WalletAccount
 
     let senderAddress: string =
-        payload?.data?.essence?.data?.inputs?.find((input) => input?.type === 'UTXO')?.data?.metadata?.address ?? null
+        payload?.data?.essence?.data?.inputs?.find((input) => /utxo/i.test(input?.type))?.data?.metadata?.address ?? null
 
     let receiverAddresses: string[] =
         payload?.data?.essence?.data?.outputs

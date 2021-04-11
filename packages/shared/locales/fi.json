@@ -207,7 +207,7 @@
             },
             "resyncAccounts": {
                 "title": "Uudelleensynkronoi tilit",
-                "description": ""
+                "description": "Starts a background task to make sure your accounts are up to date."
             },
             "deleteProfile": {
                 "title": "Poista profiili",
@@ -313,7 +313,8 @@
     "popups": {
         "password": {
             "title": "Salasana vaaditaan",
-            "subtitle": "Ole hyvä ja anna lompakkosi salasana avataksesi Strongholdin"
+            "subtitle": "Please enter your password to unlock Stronghold",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "Sinun QR-koodisi"
@@ -336,7 +337,7 @@
         "deleteAccount": {
             "title": "Poista {name}?",
             "body": "Voit lisätä tämän tilin takaisin myöhemmin, mutta voit menettää tapahtumahistoriasi.",
-            "typePassword": "Syötä lompakkosi salasana varmistaaksesi.",
+            "typePassword": "Type your password to confirm.",
             "deleteAccount": "Poista tili",
             "errorTitle": "Kohdetta {name} ei voi poistaa",
             "errorBody1": "Jotta voit poistaa tilin, sillä on oltava 0 saldo.",
@@ -344,7 +345,7 @@
             "errorBody3": "Et voi poistaa tätä tiliä, sinulla on oltava vähintään yksi."
         },
         "addressHistory": {
-            "title": "{name} tiliosoitteen historia",
+            "title": "{name} address history",
             "currentBalance": "Nykyinen saldo: {balance}"
         },
         "node": {
@@ -363,7 +364,8 @@
         },
         "deleteProfile": {
             "title": "Poista profiili",
-            "confirmation": "Oletko varma, että haluat poistaa tämän profiilin? Tätä toimintoa ei voi peruuttaa."
+            "confirmation": "Oletko varma, että haluat poistaa tämän profiilin? Tätä toimintoa ei voi peruuttaa.",
+            "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
             "title": "Diagnostiikka",
@@ -569,7 +571,7 @@
     },
     "dates": {
         "today": "Tänään",
-        "yesterday": "Yesterday",
+        "yesterday": "Eilen",
         "daysAgo": "{time, plural, one {# päivä} other {# päivää}} sitten",
         "weeksAgo": "{time, plural, one {# viikko} other {# viikkoa}} sitten",
         "monthsAgo": "{time, plural, one {# kuukausi} other {# kuukautta}} sitten",
@@ -586,7 +588,8 @@
         "restartInstall": "Käynnistä uudelleen asentaaksesi",
         "calcMinutesRemaining": "Lasketaan jäljellä olevia minuutteja...",
         "minutesRemaining": "{minutes, plural, one {1 minuutti jäljellä} other {# minuuttia jäljellä}}",
-        "copiedToClipboard": "Kopioitu leikepöydälle"
+        "copiedToClipboard": "Kopioitu leikepöydälle",
+        "accountsSynchronized": "Account synchronization complete"
     },
     "error": {
         "profile": {
@@ -606,7 +609,7 @@
             "dates": "Päivämäärät on helppo arvata.",
             "common": "Tämä on hyvin yleinen salasana.",
             "similar": "Tämä on samankaltainen yleisesti käytetyn salasanan kanssa.",
-            "reasonWord": "Yksittäinen sana on helppo arvata.",
+            "word": "A single word is easy to guess.",
             "incorrect": "Salasanasi on virheellinen.",
             "length": "Salasanasi ei voi olla pidempi kuin {length, plural, one {1 merkki} other {# merkkiä}}."
         },
@@ -619,7 +622,11 @@
             "length": "Tilisi nimi ei voi olla pidempi kuin {length, plural, one {1 merkki} other {# merkkiä}}.",
             "empty": "Sinun täytyy käyttää viimeisintä tiliäsi ennen uuden luomista.",
             "notEmpty": "Sinun täytyy siirtää saldosi ennen kuin poistat tämän tilin.",
-            "duplicate": "Samanniminen tili on jo olemassa."
+            "duplicate": "Samanniminen tili on jo olemassa.",
+            "tilde": "A profile name can't start with the '~' character.",
+            "control": "A profile name can't contain a control character.",
+            "startDot": "A profile name can't start with the '.' character.",
+            "chars": "A profile name can't contain the following characters <>:\"/\\|?*"
         },
         "send": {
             "addressLength": "Osoitteiden tulee olla {length, plural, one {1 merkin pituinen} other {# merkkiä pitkä}}.",
@@ -627,8 +634,10 @@
             "amountNoFloat": "Jos yksiköt ovat `i`, et voi käyttää desimaaleja.",
             "amountInvalidFormat": "Summa näyttää olevan virheellinen luku.",
             "amountZero": "Summan on oltava suurempi kuin 0.",
-            "wrongAddressFormat": "Osoitteet alkavat etuliitteellä {prefix}.",
+            "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
+            "wrongAddressFormat": "The address is not correctly formatted.",
             "insufficientFunds": "Tällä tilillä ei ole riittävästi varoja.",
+            "noToAccount": "You have not selected an account to send the funds to.",
             "sendingDust": "Et voi lähettää alle 1 Mi.",
             "leavingDust": "Et voi jättää alle 1 Mi osoitteeseesi."
         },

@@ -141,6 +141,6 @@
         {labels}
         {color}
         {xMaxTicks}
-        formatYAxis={(value) => formatCurrencyValue(value, $activeProfile?.settings.chartSelectors.currency, undefined, undefined, 5)}
+        formatYAxis={(value) => formatCurrencyValue(value, $activeProfile?.settings.chartSelectors.currency ?? '', undefined, undefined, 5)}
         inlineStyle={$selectedAccount && `height: calc(50vh - ${hasTitleBar ? '190' : '150'}px);`} />
 </div>

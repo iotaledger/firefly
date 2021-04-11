@@ -105,8 +105,8 @@
         },
         "importFromText": {
             "title": "Stelle deine Wallet mit einer Wiederherstellungsphrase oder einem Seed wieder her",
-            "body1": "Ein Seed besteht aus 81 Zeichen. Er wird benutzt, um von einer älteren Trinity Wallet wiederherzustellen.",
-            "body2": "Eine Wiederherstellungsphrase ist 24 Wörter lang (mit Abständen). Diese wird benutzt, um eine bestehende Firefly Wallet wiederherzustellen.",
+            "body1": "Ein Seed besteht aus 81 Zeichen. Dieser wird benötigt, um von einer älteren Trinity Wallet wiederherzustellen.",
+            "body2": "Eine Wiederherstellungsphrase ist 24 Wörter lang (mit Leerzeichen). Diese wird benutzt, um eine bestehende Firefly Wallet wiederherzustellen.",
             "body3": "Gib deinen Seed oder deine Wiederherstellungsphrase ein",
             "seedDetected": "81 Zeichen Seed erkannt",
             "phraseDetected": "24 Wörter Wiederherstellungsphrase erkannt"
@@ -207,7 +207,7 @@
             },
             "resyncAccounts": {
                 "title": "Konten neu synchronisieren",
-                "description": ""
+                "description": "Startet einen Prozess im Hintergrund, um sicherzustellen, dass deine Konten auf dem aktuellsten Stand sind."
             },
             "deleteProfile": {
                 "title": "Profil löschen",
@@ -256,7 +256,7 @@
             "faq": {
                 "title": "Häufig gestellte Fragen",
                 "title2": "Häufig gestellte Fragen",
-                "description": "In den FAQs findest du Hilfe zu häufigen Fragen und Problemen"
+                "description": "Schaue in die FAQs, um Hilfe bei häufigen Fragen und Problemen zu erhalten"
             },
             "discord": {
                 "title": "Discord",
@@ -313,7 +313,8 @@
     "popups": {
         "password": {
             "title": "Passwort erforderlich",
-            "subtitle": "Gib bitte dein Wallet-Passwort ein, um Stronghold zu entsperren"
+            "subtitle": "Please enter your password to unlock Stronghold",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "Dein QR Code"
@@ -336,7 +337,7 @@
         "deleteAccount": {
             "title": "{name} entfernen?",
             "body": "Du kannst dieses Konto später wieder hinzufügen, jedoch könntest du deinen Transaktionsverlauf verlieren.",
-            "typePassword": "Gib dein Wallet Passwort zur Bestätigung ein.",
+            "typePassword": "Type your password to confirm.",
             "deleteAccount": "Konto entfernen",
             "errorTitle": "{name} kann nicht entfernt werden",
             "errorBody1": "Um ein Konto zu entfernen, muss es ein Guthaben von 0 aufweisen.",
@@ -344,7 +345,7 @@
             "errorBody3": "Du kannst dieses Konto nicht löschen. Es muss mindestes eins vorhanden sein."
         },
         "addressHistory": {
-            "title": "{name} Adresshistorie",
+            "title": "{name} Adressverlauf",
             "currentBalance": "Aktuelles Guthaben: {balance}"
         },
         "node": {
@@ -363,7 +364,8 @@
         },
         "deleteProfile": {
             "title": "Profil löschen",
-            "confirmation": "Willst du dieses Profil wirklich löschen? Dies kann nicht rückgängig gemacht werden."
+            "confirmation": "Willst du dieses Profil wirklich löschen? Dies kann nicht rückgängig gemacht werden.",
+            "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
             "title": "Diagnose",
@@ -382,7 +384,7 @@
         "outgoingMi": "Ausgehende {value} Mi",
         "portoflio": "Portfolio",
         "token": "Kurs",
-        "accountValue": "Konto Wert",
+        "accountValue": "Kontowert",
         "accountActivity": "Kontoaktivität"
     },
     "actions": {
@@ -535,10 +537,10 @@
         "status": "Status",
         "confirmed": "Bestätigt",
         "pending": "Ausstehend",
-        "noAccounts": "Du hast keine Konten. Bitte erstelle ein Konto.",
+        "noAccounts": "Du hast keine Konten. Bitte erstelle eines.",
         "loadingAccounts": "Lädt, bitte warten...",
         "addProfile": "Profil hinzufügen",
-        "noRecentHistory": "Keine aktueller Verlauf",
+        "noRecentHistory": "Kein aktueller Verlauf",
         "transferSyncing": "Synchronisiere Konto",
         "transferSelectingInputs": "Wähle Inputs",
         "transferRemainderAddress": "Erzeuge Rest-Einzahlungsadresse",
@@ -586,7 +588,8 @@
         "restartInstall": "Neustarten zum installieren",
         "calcMinutesRemaining": "Berechne verbleibende Zeit...",
         "minutesRemaining": "{minutes, plural, one {1 Minute verbleibend} other {# Minuten verbleibend}}",
-        "copiedToClipboard": "In die Zwischenablage kopiert"
+        "copiedToClipboard": "In die Zwischenablage kopiert",
+        "accountsSynchronized": "Synchronisation der Konten abgeschlossen"
     },
     "error": {
         "profile": {
@@ -606,7 +609,7 @@
             "dates": "Datumsangaben sind häufig leicht zu erraten.",
             "common": "Dies ist ein sehr häufig verwendetes Passwort.",
             "similar": "Dies ähnelt einem häufig verwendeten Passwort.",
-            "reasonWord": "Ein einzelnes Wort ist zu leicht zu erraten.",
+            "word": "Ein einzelnes Wort ist zu leicht zu erraten.",
             "incorrect": "Dein Passwort ist falsch.",
             "length": "Dein Passwort darf nicht länger als {length, plural, one {1 Zeichen} other {# Zeichen}} sein."
         },
@@ -619,7 +622,11 @@
             "length": "Dein Kontoname darf nicht länger als {length, plural, one {1 Zeichen} other {# Zeichen}} sein.",
             "empty": "Du musst dein neuestes Konto verwenden, bevor du ein neues erstellen kannst.",
             "notEmpty": "Du musst dein Guthaben transferieren bevor dieses Konto gelöscht werden kann.",
-            "duplicate": "Ein Konto mit diesem Namen existiert bereits."
+            "duplicate": "Ein Konto mit diesem Namen existiert bereits.",
+            "tilde": "Ein Profilname kann nicht mit dem Zeichen '~' beginnen.",
+            "control": "Ein Profilname darf kein Kontrollzeichen enthalten.",
+            "startDot": "Ein Profilname kann nicht mit dem Zeichen '.' beginnen.",
+            "chars": "Ein Profilname darf die folgenden Zeichen nicht enthalten: <>:\"/\\|?*"
         },
         "send": {
             "addressLength": "Adressen sollten {length, plural, one {1 Zeichen} other {# Zeichen}} lang sein.",
@@ -627,8 +634,10 @@
             "amountNoFloat": "Wenn Einheiten `i` sind, können keine Dezimalstellen verwendet werden.",
             "amountInvalidFormat": "Der Betrag scheint eine ungültige Zahl zu sein.",
             "amountZero": "Betrag muss größer als 0 sein.",
-            "wrongAddressFormat": "Adressen beginnen mit dem Präfix {prefix}.",
+            "wrongAddressPrefix": "Adressen beginnen mit dem Präfix {prefix}.",
+            "wrongAddressFormat": "Die Adresse ist nicht korrekt formatiert.",
             "insufficientFunds": "Dieses Konto hat nicht genug Guthaben.",
+            "noToAccount": "Sie haben kein Konto ausgewählt, auf welches das Guthaben gesendet werden soll.",
             "sendingDust": "Du kannst nicht weniger als 1 Mi senden.",
             "leavingDust": "Du kannst nicht weniger als 1 Mi auf deiner Adresse hinterlassen."
         },

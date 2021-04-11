@@ -27,11 +27,17 @@ export const initMenu = () => {
         })
 
         ipcMain.handle('maximize', () => {
-            if (getOrInitWindow('main').isMaximized()) {
+            const isMaximized = getOrInitWindow('main').isMaximized()
+            if (isMaximized) {
                 getOrInitWindow('main').restore();
             } else {
                 getOrInitWindow('main').maximize();
             }
+            return !isMaximized
+        })
+
+        ipcMain.handle('isMaximized', () => {
+            return getOrInitWindow('main').isMaximized()
         })
 
         ipcMain.handle('minimize', () => {

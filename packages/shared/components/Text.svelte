@@ -5,16 +5,22 @@
     export let highlighted = false
     export let bold = false
     export let smaller = false
+    export let bigger = false
     export let error = false
     export let overrideColor = false
     export let classes = '' // ISSUE: https://github.com/tailwindlabs/tailwindcss/discussions/1446
 </script>
 
 <style type="text/scss">
-    p {
+    p,
+    pre {
         &.smaller {
             @apply text-12;
             @apply leading-120;
+        }
+        &.bigger {
+            @apply text-16;
+            @apply leading-140;
         }
     }
     h1,
@@ -99,6 +105,7 @@
         class:highlighted
         class:error
         class:smaller
+        class:bigger
         class:font-bold={bold}>
         <slot />
     </p>
@@ -110,6 +117,7 @@
         class:highlighted
         class:error
         class:smaller
+        class:bigger
         class:font-bold={bold}>
         <slot />
     </pre>

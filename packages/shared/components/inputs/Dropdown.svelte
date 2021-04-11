@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Icon, Text } from 'shared/components'
+    import { Icon, Text, Error } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { onMount } from 'svelte'
 
@@ -13,6 +13,8 @@
     export let small = false
     export let onSelect = (_) => {}
     export let contentWidth = false
+    export let error = ''
+    export let classes = ''
 
     let dropdown = false
     let navContainer
@@ -185,7 +187,7 @@
 </style>
 
 <dropdown-input
-    class="relative {contentWidth ? "" : "w-full"}"
+    class="relative {contentWidth ? "" : "w-full" } {classes}"
     on:click={(e) => {
         e.stopPropagation()
         toggleDropDown()
@@ -213,6 +215,9 @@
             <floating-label class:floating-active={value && label}>{label}</floating-label>
         {/if}
     </div>
+    {#if error}
+        <Error {error} />
+    {/if}
     <nav
         class:active={dropdown}
         class="absolute w-full overflow-hidden pointer-events-none opacity-0 z-10 text-left 

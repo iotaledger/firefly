@@ -207,7 +207,7 @@
             },
             "resyncAccounts": {
                 "title": "تحديث الحسابات",
-                "description": ""
+                "description": "Starts a background task to make sure your accounts are up to date."
             },
             "deleteProfile": {
                 "title": "حذف الملف الشخصي",
@@ -313,7 +313,8 @@
     "popups": {
         "password": {
             "title": "كلمة المرور مطلوبة",
-            "subtitle": "الرجاء إدخال كلمة مرور محفظتك لفتح الحصن"
+            "subtitle": "Please enter your password to unlock Stronghold",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "رمز QR الخاص بك"
@@ -336,7 +337,7 @@
         "deleteAccount": {
             "title": "إزالة {name}؟",
             "body": "يمكنك إضافة هذا الحساب لاحقاً ولكن قد تفقد سجل المعاملات الخاص بك.",
-            "typePassword": "اكتب كلمة مرور محفظتك للتأكيد.",
+            "typePassword": "Type your password to confirm.",
             "deleteAccount": "إزالة الحساب",
             "errorTitle": "غير قادر على إزالة {name}",
             "errorBody1": "لإزالة حساب، يجب أن يكون رصيد صفر.",
@@ -344,7 +345,7 @@
             "errorBody3": "لا يمكنك إزالة هذا الحساب، يجب أن يكون لديك حساب واحد على الأقل."
         },
         "addressHistory": {
-            "title": "سجل عنوان الحساب {name}",
+            "title": "{name} address history",
             "currentBalance": "الرصيد الحالي: {balance}"
         },
         "node": {
@@ -363,7 +364,8 @@
         },
         "deleteProfile": {
             "title": "حذف الملف الشخصي",
-            "confirmation": "هل أنت متأكد من أنك تريد حذف هذا الملف الشخصي؟ لا يمكن التراجع عن هذه العملية."
+            "confirmation": "هل أنت متأكد من أنك تريد حذف هذا الملف الشخصي؟ لا يمكن التراجع عن هذه العملية.",
+            "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
             "title": "التشخيص",
@@ -569,7 +571,7 @@
     },
     "dates": {
         "today": "اليوم",
-        "yesterday": "Yesterday",
+        "yesterday": "الأمس",
         "daysAgo": "منذ {time, plural, one {# يوم} other {# أيام}}",
         "weeksAgo": "منذ {time, plural, one {# اسبوع} other {# اسابيع}}",
         "monthsAgo": "منذ {time, plural, one {# شهر} other {# اشهر}}",
@@ -586,7 +588,8 @@
         "restartInstall": "إعادة التشغيل للتثبيت",
         "calcMinutesRemaining": "يتم حساب الدقائق المتبقية...",
         "minutesRemaining": "{minutes, plural, one {1 دقيقة متبقية} other {# دقائق متبقية}}",
-        "copiedToClipboard": "تم النسخ إلى الحافظة"
+        "copiedToClipboard": "تم النسخ إلى الحافظة",
+        "accountsSynchronized": "Account synchronization complete"
     },
     "error": {
         "profile": {
@@ -606,7 +609,7 @@
             "dates": "من السهل تخمين التواريخ.",
             "common": "هذه كلمة مرور شائعة جداً.",
             "similar": "هذا شبيه بكلمة مرور شائعة.",
-            "reasonWord": "من السهل تخمين كلمة واحدة.",
+            "word": "A single word is easy to guess.",
             "incorrect": "كلمة المرور غير صحيحة.",
             "length": "كلمة المرو الخاصة بك لا يجب ان تكون أطول من {length, plural, one {1 حرف} other {# أحرف}}."
         },
@@ -619,7 +622,11 @@
             "length": "لا يجب ان يكون اسم حسابك اطول من {length, plural, one {1 حرف} other {# احرف}}.",
             "empty": "يجب عليك استخدام حسابك الأخير قبل إنشاء حساب جديد.",
             "notEmpty": "يجب عليك نقل رصيدك قبل حذف هذا الحساب.",
-            "duplicate": "يوجد حساب بهذا الاسم مسبقاً."
+            "duplicate": "يوجد حساب بهذا الاسم مسبقاً.",
+            "tilde": "A profile name can't start with the '~' character.",
+            "control": "A profile name can't contain a control character.",
+            "startDot": "A profile name can't start with the '.' character.",
+            "chars": "A profile name can't contain the following characters <>:\"/\\|?*"
         },
         "send": {
             "addressLength": "يجب على العناوين ان تكون بطول {length, plural, one {1 حرف} other {# احرف}}.",
@@ -627,8 +634,10 @@
             "amountNoFloat": "إذا كانت الوحدات 'i` لا يمكنك استخدام الأماكن العشرية.",
             "amountInvalidFormat": "يبدو أن المبلغ رقم غير صالح.",
             "amountZero": "يجب أن يكون المبلغ أكبر من 0.",
-            "wrongAddressFormat": "تبدأ العناوين بالبادئة {prefix}.",
+            "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
+            "wrongAddressFormat": "The address is not correctly formatted.",
             "insufficientFunds": "هذا الحساب لا يملك الأموال الكافية.",
+            "noToAccount": "You have not selected an account to send the funds to.",
             "sendingDust": "لا يمكنك إرسال أقل من 1 Mi.",
             "leavingDust": "لا يمكنك ترك أقل من 1 Mi على عنوانك."
         },
