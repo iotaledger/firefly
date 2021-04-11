@@ -86,19 +86,21 @@ export interface Transaction {
     }
 }
 
+interface ReceiptFunds {
+    output: {
+        address: string;
+        amount: number;
+        remainder: boolean;
+    },
+    tailTransactionHash: number[]
+}
+
 interface Receipt {
     type: 'Receipt',
     data: {
         last: boolean;
         migratedAt: number;
-        funds: {
-            output: {
-                address: string;
-                amount: number;
-                remainder: false
-            },
-            tailTransactionHash: number[]
-        }[],
+        funds: ReceiptFunds[],
         transaction: {
             data: {
                 input: {
