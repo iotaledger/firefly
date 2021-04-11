@@ -209,6 +209,10 @@
                 "title": "Számlák újraszinkronizálása",
                 "description": "Egy háttérben futó folyamatot indít, hogy számláinak adatait frissítse."
             },
+            "hiddenAccounts": {
+                "title": "Rejtett számlák",
+                "description": "A beállítás engedélyezésével a korábban elrejtett számlák is megjelennek."
+            },
             "deleteProfile": {
                 "title": "Profil törlése",
                 "description": "A teljes tárca, profil és tranzakciós előzmények törlése. Győzödjön meg róla, hogy van biztonsági mentése!"
@@ -223,11 +227,19 @@
             },
             "nodeSettings": {
                 "title": "Csomópont beállításai",
-                "description": "Használja a kézi csomópont kiválasztást a csomópont lista eléréséhez vagy saját csomópont hozzáadásához"
+                "description": "Használja a kézi csomópont kiválasztást a csomópont beállításainak módosításához és saját csomópont használatához"
             },
             "configureNodeList": {
                 "title": "Válasszon egy csomópontot",
-                "description": ""
+                "description": "A tárca által használható csomópontok listájának módosítása.",
+                "primaryNode": "Elsődleges csomópont",
+                "excludeNode": "Csomópont mellőzése",
+                "includeNode": "Csomópont használata",
+                "viewDetails": "Részletek megtekintése",
+                "setAsPrimary": "Beállítás elsődlegesként",
+                "removeNode": "Csomópont eltávolítása",
+                "includeOfficialNodeList": "Hivatalos csomópont lista használata",
+                "noNodes": "Nincs egyetlen csomópont sem. Automatikus csomópont kiválasztás engedélyezve."
             },
             "proofOfWork": {
                 "title": "Kiszabott munka elvégzése",
@@ -313,8 +325,8 @@
     "popups": {
         "password": {
             "title": "Jelszó szükséges",
-            "subtitle": "Please enter your password to unlock Stronghold",
-            "backup": "Please enter your password to export a backup"
+            "subtitle": "Adja meg jelszavát a Stronghold feloldásához",
+            "backup": "Adja meg jelszavát a biztonsági mentés készítéséhez"
         },
         "qr": {
             "title": "QR-kód"
@@ -332,17 +344,26 @@
             "backupDescription": "Fontos a rendszeres biztonsági mentés, hogy számláiról és tranzakcióiról legyen másolata.",
             "backupWarning": "Ha elveszíti a biztonsági mentést és a helyreállítási szavakat, többé nem tud a számlájához hozzáférni.",
             "notBackedUp": "Nincs biztonsági mentés",
-            "notBackedUpDescription": "Nem készült még Stronghold biztonsági mentés"
+            "notBackedUpDescription": "Nem készült még Stronghold biztonsági mentés",
+            "saving": "Mentés folyamatban..."
         },
         "deleteAccount": {
-            "title": "{name} számla biztosan törölhető?",
-            "body": "Később vissza tudja állítani ezt a számlát, de a tranzakciós előzmények elveszhetnek.",
-            "typePassword": "Type your password to confirm.",
-            "deleteAccount": "Számla törlése",
-            "errorTitle": "{name} számla nem törölhető",
-            "errorBody1": "Számlája addig nem törölhető, amíg egyenlege nem nulla.",
+            "title": "{name} törölhető?",
+            "body": "A számlának nincs tranzakciós előzménye, ezért biztonságosan törölhető.",
+            "typePassword": "Adja meg tárcájának jelszavát a törléshez.",
+            "hideAccount": "Számla törlése",
+            "errorTitle": "{name} nem törölhető",
+            "errorBody1": "Nem tudja törölni ezt a számlát, legalább egy számlával rendelkeznie kell."
+        },
+        "hideAccount": {
+            "title": "{name} elrejthető?",
+            "body": "A számlát később megtalálja a haladó beállításokban lévő \"Rejtett számlák megjelenítése\" engedélyezésével.",
+            "typePassword": "Adja meg tárcájának jelszavát a törléshez.",
+            "hideAccount": "Számla elrejtése",
+            "errorTitle": "{name} számla nem rejthető el",
+            "errorBody1": "Számlája addig nem rejthető el, amíg egyenlege nem nulla.",
             "errorBody2": "Jelenleg {balance} maradt a számláján. Kérjük, küldje át ezt az összeget egy másik számlára, majd próbálja újra!",
-            "errorBody3": "Nem tudja törölni ezt a számlát, legalább eggyel rendelkeznie kell."
+            "errorBody3": "Nem tudja elrejteni ezt a számlát, legalább egy számlával rendelkeznie kell."
         },
         "addressHistory": {
             "title": "{name} korábban használt címei",
@@ -350,6 +371,7 @@
         },
         "node": {
             "titleAdd": "Csomópont hozzáadása",
+            "titleUpdate": "Csomópont frissítése",
             "titleRemove": "Csomópont eltávolítása",
             "titleDetails": "Csomópont adatai",
             "nodeAddress": "Csomópont címe",
@@ -365,7 +387,7 @@
         "deleteProfile": {
             "title": "Profil törlése",
             "confirmation": "Biztosan törölni kívánja ezt a profilt? A műveletet nem tudja visszavonni.",
-            "typePassword": "Type your password to confirm."
+            "typePassword": "Adja meg jelszavát a profil törléséhez."
         },
         "diagnostics": {
             "title": "Diagnosztika",
@@ -377,6 +399,10 @@
             "totalMem": "Összes memória",
             "freeMem": "Szabad memória",
             "userPath": "Felhasználói útvonal"
+        },
+        "transaction": {
+            "title": "Küldés jóváhagyása",
+            "body": "{amount} küldése"
         }
     },
     "charts": {
@@ -427,16 +453,19 @@
         "enableDeveloperMode": "Fejlesztői mód engedélyezése",
         "enableSystemNotifications": "Rendszer értesítések engedélyezése",
         "exportState": "Állapot exportálása",
-        "outsourceProofOfWork": "Kiszabott munka kiszervezése",
+        "localProofOfWork": "Kiszabott munka elvégzése helyben",
         "unlock": "Felold",
         "updateFirefly": "Firefly frissítése",
         "restartNow": "Újraindítás most",
         "saveBackup": "Mentés Stronghold-ba",
         "customizeAcount": "Számla személyre szabása",
         "viewAddressHistory": "Címek előzményeinek megjelenítése",
+        "hideAccount": "Számla elrejtése",
+        "showAccount": "Számla megjelenítése",
         "deleteAccount": "Számla törlése",
         "max": "Maximum",
         "addNode": "Csomópont hozzáadása",
+        "updateNode": "Csomópont frissítése",
         "removeNode": "Csomópont eltávolítása",
         "hide": "Elrejt",
         "hideOthers": "Többi elrejtése",
@@ -461,7 +490,9 @@
         "skipBackup": "Biztonsági mentés kihagyása",
         "finishSetup": "Beállítás befejezése",
         "readDocumentation": "Dokumentáció elolvasása",
-        "visitFaq": "GYIK megtekintése"
+        "visitFaq": "GYIK megtekintése",
+        "showHiddenAccounts": "Rejtett számlák megjelenítése",
+        "confirm": "Megerősít"
     },
     "general": {
         "password": "Jelszó",
@@ -507,7 +538,7 @@
         "appearance": "Megjelenés",
         "lightTheme": "Világos megjelenés",
         "darkTheme": "Sötét megjelenés",
-        "totalBalance": "Összesített egyenleg",
+        "balance": "Egyenleg",
         "accountBalance": "Számlaegyenleg",
         "incoming": "Bejövő",
         "outgoing": "Kimenő",
@@ -567,7 +598,8 @@
         "passwordStrength2": "Gyenge",
         "passwordStrength3": "Átlagos",
         "passwordStrength4": "Erős",
-        "creatingProfile": "Profil létrehozása folyamatban, kérjük várjon..."
+        "creatingProfile": "Profil létrehozása folyamatban, kérjük várjon...",
+        "accountRemoved": "Rejtett számláról nem tud küldeni. Állítsa be előbb a rejtett számlák megjelenítését."
     },
     "dates": {
         "today": "Ma",
@@ -581,6 +613,7 @@
         "valueTx": "{{value}} érkezik a(z) {{account}} számlájára",
         "confirmed": "{{value}} sikeresen elküldve a(z) {{account}} számlájáról",
         "confirmedInternal": "{{value}} a {{senderAccount}} számláról a {{receiverAccount}} számlára megérkezett",
+        "confirmedInternalNoAccounts": "{{value}} számlák közötti egyenlegátvezetés sikeres",
         "failed": "{{value}} elküldése a(z) {{account}} számlájáról sikertelen",
         "downloadingUpdate": "Frissítések letöltése folyamatban...",
         "updateReady": "A frissítés készen áll",

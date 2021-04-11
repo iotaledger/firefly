@@ -209,6 +209,10 @@
                 "title": "Opakovaná synchronizace účtů",
                 "description": "Starts a background task to make sure your accounts are up to date."
             },
+            "hiddenAccounts": {
+                "title": "Hidden accounts",
+                "description": "Selecting this options will show accounts that were previously hidden."
+            },
             "deleteProfile": {
                 "title": "Smazat profil",
                 "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
@@ -223,11 +227,19 @@
             },
             "nodeSettings": {
                 "title": "Nastavení node",
-                "description": "Select Manual to choose from the node list or connect to your own node"
+                "description": "Select Manual to configure the node settings and connect to your own node"
             },
             "configureNodeList": {
                 "title": "Select a node",
-                "description": ""
+                "description": "Manage the list of nodes your wallet connects to.",
+                "primaryNode": "Primary node",
+                "excludeNode": "Exclude node",
+                "includeNode": "Include node",
+                "viewDetails": "View details",
+                "setAsPrimary": "Set as primary",
+                "removeNode": "Odstranit uzel",
+                "includeOfficialNodeList": "Include official node list",
+                "noNodes": "There are no nodes, automatic selection will be used instead."
             },
             "proofOfWork": {
                 "title": "Proof of Work",
@@ -313,8 +325,8 @@
     "popups": {
         "password": {
             "title": "Heslo požadováno",
-            "subtitle": "Please enter your password to unlock Stronghold",
-            "backup": "Please enter your password to export a backup"
+            "subtitle": "Zadejte heslo své peněženky pro odemčení Stronghold",
+            "backup": "Zadejte heslo pro export zálohy"
         },
         "qr": {
             "title": "Váš QR kód"
@@ -332,17 +344,26 @@
             "backupDescription": "Pravidelná záloha je důležitá pro zachování kopie účtů a historie transakcí.",
             "backupWarning": "Ztratíte-li frázi pro zálohování a obnovení, ztratíte přístup ke svým prostředkům.",
             "notBackedUp": "Zatím nezálohováno",
-            "notBackedUpDescription": "Nezazálohovali jste váš Stronghold"
+            "notBackedUpDescription": "Nezazálohovali jste váš Stronghold",
+            "saving": "Saving..."
         },
         "deleteAccount": {
-            "title": "Remove {name}?",
-            "body": "You can add this account back later but you may lose your transaction history.",
-            "typePassword": "Type your password to confirm.",
-            "deleteAccount": "Remove account",
-            "errorTitle": "Unable to remove {name}",
-            "errorBody1": "To remove an account it must have 0 balance.",
-            "errorBody2": "V současné době zbývá {balance} na tomto účtu. Přesuňte tyto prostředky na jiný účet a zkuste to znovu.",
-            "errorBody3": "You cannot remove this account, you must have at least one."
+            "title": "Delete {name}?",
+            "body": "This account has no transaction history. It can safely be deleted.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Delete account",
+            "errorTitle": "Unable to delete {name}",
+            "errorBody1": "You cannot delete this account, you must have at least one."
+        },
+        "hideAccount": {
+            "title": "Hide {name}?",
+            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Hide account",
+            "errorTitle": "Unable to hide {name}",
+            "errorBody1": "To hide an account it must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
+            "errorBody3": "You cannot hide this account, you must have at least one."
         },
         "addressHistory": {
             "title": "{name} historie adres",
@@ -350,6 +371,7 @@
         },
         "node": {
             "titleAdd": "Přidat uzel",
+            "titleUpdate": "Update a node",
             "titleRemove": "Odstranit uzel",
             "titleDetails": "Detaily uzlu",
             "nodeAddress": "Adresa uzlu",
@@ -365,7 +387,7 @@
         "deleteProfile": {
             "title": "Smazat profil",
             "confirmation": "Opravdu chcete smazat tento profil? Tuto operaci nelze vrátit zpět.",
-            "typePassword": "Type your password to confirm."
+            "typePassword": "Zadejte své heslo pro potvrzení."
         },
         "diagnostics": {
             "title": "Diagnostika",
@@ -377,6 +399,10 @@
             "totalMem": "Celková paměť",
             "freeMem": "Volná paměť",
             "userPath": "Cesta uživatele"
+        },
+        "transaction": {
+            "title": "Confirm transaction",
+            "body": "You’re about to send {amount} to"
         }
     },
     "charts": {
@@ -427,16 +453,19 @@
         "enableDeveloperMode": "Povolit vývojářský režim",
         "enableSystemNotifications": "Povolit upozornění",
         "exportState": "Exportovat stav",
-        "outsourceProofOfWork": "Outsourcovaný Proof of Work",
+        "localProofOfWork": "Local proof of work",
         "unlock": "Odemknout",
         "updateFirefly": "Aktualizovat Firefly",
         "restartNow": "Restartovat nyní",
         "saveBackup": "Save Stronghold backup",
         "customizeAcount": "Přizpůsobit účet",
         "viewAddressHistory": "Zobrazit historii adresy",
-        "deleteAccount": "Remove account",
+        "hideAccount": "Hide account",
+        "showAccount": "Unhide account",
+        "deleteAccount": "Delete account",
         "max": "Max",
         "addNode": "Přidat uzel",
+        "updateNode": "Update node",
         "removeNode": "Odstranit uzel",
         "hide": "Skrýt",
         "hideOthers": "Skrýt ostatní",
@@ -461,7 +490,9 @@
         "skipBackup": "Skip file backup",
         "finishSetup": "Finish setup",
         "readDocumentation": "Read the documentation",
-        "visitFaq": "Visit FAQ"
+        "visitFaq": "Visit FAQ",
+        "showHiddenAccounts": "Show hidden accounts",
+        "confirm": "Confirm"
     },
     "general": {
         "password": "Heslo",
@@ -507,7 +538,7 @@
         "appearance": "Vzhled",
         "lightTheme": "Světlé téma",
         "darkTheme": "Tmavé téma",
-        "totalBalance": "Celkový zůstatek",
+        "balance": "Balance",
         "accountBalance": "Zůstatek účtu",
         "incoming": "Příchozí",
         "outgoing": "Odchozí",
@@ -567,7 +598,8 @@
         "passwordStrength2": "Weak",
         "passwordStrength3": "Average",
         "passwordStrength4": "Strong",
-        "creatingProfile": "Creating profile, please wait..."
+        "creatingProfile": "Creating profile, please wait...",
+        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
     },
     "dates": {
         "today": "Dnes",
@@ -581,6 +613,7 @@
         "valueTx": "Přijímání {{value}} na {{account}}",
         "confirmed": "Odchozí {{value}} od {{account}} byl potvrzen",
         "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
+        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
         "failed": "Odchozí {{value}} od {{account}} selhal",
         "downloadingUpdate": "Stahování aktualizace",
         "updateReady": "Aktualizace připravena",
