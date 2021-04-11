@@ -6,7 +6,6 @@
     import { getContext } from 'svelte'
     import type { Readable, Writable } from 'svelte/store'
     import { get } from 'svelte/store'
-    import { activeProfile } from 'shared/lib/profile'
 
     export let locale
 
@@ -24,8 +23,6 @@
             console.error('Could not find source account')
         }
     }
-
-    $: shouldDisableActivityRow = $activeProfile?.migratedTransactions?.length
 </script>
 
 <div data-label="latest-transactions" class="h-full pt-6 pb-8 px-8 flex-grow flex flex-col">
@@ -39,7 +36,6 @@
         {#if $transactions?.length}
             {#each $transactions as transaction}
                 <ActivityRow
-                    shouldDisable={shouldDisableActivityRow}
                     {...transaction}
                     onClick={() => handleTransactionClick(transaction)}
                     color={$accounts.find((acc) => acc.index === transaction.account)?.color}

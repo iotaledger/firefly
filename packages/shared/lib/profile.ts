@@ -15,7 +15,7 @@ export interface MigratedTransaction {
     address: string;
     balance: number;
     timestamp: string
-    index: number;
+    account: number;
 }
 
 /**

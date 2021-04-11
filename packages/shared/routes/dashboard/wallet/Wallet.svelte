@@ -28,6 +28,7 @@
         updateBalanceOverview,
         wallet,
         WalletAccount,
+        processMigratedTransactions,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, writable, Writable } from 'svelte/store'
@@ -39,11 +40,12 @@
 
     let hasMigratedTransactions = $activeProfile?.migratedTransactions?.length
 
-    let transactions = hasMigratedTransactions
-        ? writable($activeProfile?.migratedTransactions ?? [])
-        : derived(accounts, ($accounts) => {
-              return getTransactions($accounts)
-          })
+    let transactions = derived([accounts, activeProfile], ([$accounts, $activeProfile]) => {
+        if ($activeProfile?.migratedTransactions?.length) {
+            return $activeProfile.migratedTransactions
+        }
+        return getTransactions($accounts)
+    })
 
     activeProfile.subscribe((profile) => {
         hasMigratedTransactions = profile?.migratedTransactions?.length
@@ -95,6 +97,8 @@
 
                                 const account = prepareAccountInfo(storedAccount, meta)
                                 accounts.update((accounts) => [...accounts, account])
+
+                                processMigratedTransactions(storedAccount.id, storedAccount.messages)
 
                                 if (idx === accountsResponse.payload.length - 1) {
                                     updateBalanceOverview(totalBalance.balance, totalBalance.incoming, totalBalance.outgoing)

@@ -2,7 +2,6 @@
     import { ActivityDetail, ActivityRow, Icon, Text } from 'shared/components'
     import { showAppNotification } from 'shared/lib/notifications'
     import { api, isSyncing, selectedAccountId, selectedMessage } from 'shared/lib/wallet'
-    import { activeProfile } from 'shared/lib/profile'
 
     export let locale
     export let transactions = []
@@ -15,8 +14,6 @@
     function handleBackClick() {
         selectedMessage.set(null)
     }
-
-    $: shouldDisableActivityRow = $activeProfile?.migratedTransactions?.length
 
     const handleSyncAccountClick = () => {
         if (!$isSyncing) {
@@ -62,11 +59,7 @@
         <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
             {#if transactions.length}
                 {#each transactions as transaction}
-                    <ActivityRow
-                        shouldDisable={shouldDisableActivityRow}
-                        onClick={() => handleTransactionClick(transaction)}
-                        {...transaction}
-                        {color} />
+                    <ActivityRow onClick={() => handleTransactionClick(transaction)} {...transaction} {color} />
                 {/each}
             {:else}
                 <div class="h-full flex flex-col items-center justify-center text-center">

@@ -200,7 +200,7 @@ export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAG
                     balance: response.payload.value,
                     timestamp: new Date().toISOString(),
                     // Account index. Since we migrate funds to account at 0th index
-                    index: 0
+                    account: 0
                 }
 
                 updateProfile(
