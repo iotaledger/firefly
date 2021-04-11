@@ -512,9 +512,9 @@ checksum = "631ae5198c9be5e753e5cc215e1bd73c2b466a3565173db433f52bb9d3e66dba"
 
 [[package]]
 name = "cast"
-version = "0.2.3"
+version = "0.2.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4b9434b9a5aa1450faa3f9cb14ea0e8c53bb5d2b3c1bfd1ab4fc03e9f33fbfb0"
+checksum = "8f566d1fbeb40ec78c78344e9983f46ff9eb4e944fa930ed01b7d72b72a37c11"
 dependencies = [
  "rustc_version",
 ]
@@ -1601,7 +1601,7 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "0.5.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#8f14d53075222c91560db24478695a7db2238f16"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#41ea7137878f5cba426c01e6520460180496a4bb"
 dependencies = [
  "async-trait",
  "bee-common",
@@ -1679,7 +1679,7 @@ dependencies = [
 [[package]]
 name = "iota-core"
 version = "0.2.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#8f14d53075222c91560db24478695a7db2238f16"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#41ea7137878f5cba426c01e6520460180496a4bb"
 dependencies = [
  "iota-client 0.5.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?branch=dev)",
 ]
@@ -1783,7 +1783,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=migration#4fdd0f4531e7d9197d73f8fb2b078e255002eeb9"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=migration#64e69b3b486b144a5bec5b5dad119b80f5b32467"
 dependencies = [
  "async-trait",
  "backtrace",
