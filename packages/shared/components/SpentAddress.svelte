@@ -44,15 +44,20 @@
     }
 
     function getRiskColor(_risk) {
-        if (_risk >= 0 && _risk <= 0.25) {
+        // Very high risk: score  > 10^-13      
+        // high risk: 10^-13 > score > 10^-15
+        // medium risk: 10^-15 > score > 10^-17
+        // low risk: 10^-17 > score > 10^-19
+        // very low risk: score < 10^-19
+        if (_risk < 10 ** -19) {
             return 'green'
-        } else if (_risk >= 0.25 && _risk <= 0.5) {
+        } else if (_risk > 10 ** -19 && _risk < 10 ** -17) {
             return 'blue'
-        } else if (_risk >= 0.5 && _risk <= 0.75) {
+        } else if (_risk > 10 ** -17 && _risk < 10 ** -15) {
             return 'yellow'
-        } else if (_risk >= 0.75 && _risk <= 1) {
+        } else if (_risk > 10 ** -15 && _risk < 10 ** -13) {
             return 'orange'
-        } else if (_risk > 1) {
+        } else if (_risk > 10 ** -13) {
             return 'red'
         }
     }
@@ -83,7 +88,8 @@
 </style>
 
 <button
-    class="w-full static p-4 flex justify-between items-center border-solid border border-gray-300 dark:border-gray-700 rounded-2xl"
+    class="w-full static p-4 flex justify-between items-center border-solid border border-gray-300 dark:border-gray-700
+    rounded-2xl"
     class:selected
     {disabled}
     on:click={onClick}>
@@ -98,13 +104,17 @@
                 <Text type="pre" secondary={disabled} smaller classes={disabled && 'line-through'}>
                     {truncateString(address, 9, 9)}
                 </Text>
-                <Text type="p" secondary smaller>{formatUnit(balance)} · <span class="uppercase">{fiatBalance}</span></Text>
+                <Text type="p" secondary smaller>
+                    {formatUnit(balance)} ·
+                    <span class="uppercase">{fiatBalance}</span>
+                </Text>
             </div>
         </div>
         {#if showRiskLevel}
             <risk-meter class="flex flex-row space-x-0.5">
                 {#each Array(Object.keys(RISK_COLORS).length) as _, i}
-                    <span class="h-4 w-1 rounded-2xl {i <= risk ? `bg-${getRiskColor(risk)}-500` : 'bg-gray-300 dark:bg-gray-700'}" />
+                    <span
+                        class="h-4 w-1 rounded-2xl {i <= risk ? `bg-${getRiskColor(risk)}-500` : 'bg-gray-300 dark:bg-gray-700'}" />
                 {/each}
             </risk-meter>
         {:else if disabled}
