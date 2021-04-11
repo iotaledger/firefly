@@ -39,13 +39,14 @@
 
     let hasMigratedTransactions = $activeProfile?.migratedTransactions && $activeProfile?.migratedTransactions.length;
 
-    let transactions =
-        hasMigratedTransactions
-            ? writable($activeProfile.migratedTransactions)
-            : derived(accounts, ($accounts) => {
-                  return getTransactions($accounts)
-              })
-  
+    let transactions = derived([accounts, activeProfile], ([$accounts, $activeProfile]) => {
+        if ($activeProfile?.migratedTransactions && $activeProfile?.migratedTransactions.length) {
+            return $activeProfile.migratedTransactions
+        }
+
+        return getTransactions($accounts)
+    })
+   
     activeProfile.subscribe((profile) => {
        hasMigratedTransactions =  profile?.migratedTransactions && profile?.migratedTransactions.length;
     })

@@ -16,12 +16,6 @@
         selectedMessage.set(null)
     }
 
-    let shouldDisableActivityRow = $activeProfile.migratedTransactions && $activeProfile.migratedTransactions.length > 0
-
-    activeProfile.subscribe((_activeProfile) => {
-        shouldDisableActivityRow = _activeProfile.migratedTransactions && _activeProfile.migratedTransactions.length > 0
-    })
-
     const handleSyncAccountClick = () => {
         if (!$isSyncing) {
             $isSyncing = true
@@ -67,7 +61,6 @@
             {#if transactions.length}
                 {#each transactions as transaction}
                     <ActivityRow
-                        shouldDisable={shouldDisableActivityRow}
                         onClick={() => handleTransactionClick(transaction)}
                         {...transaction}
                         {color} />

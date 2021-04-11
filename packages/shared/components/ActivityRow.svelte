@@ -12,11 +12,10 @@
     export let payload: Payload
     export let locale
 
-    export let shouldDisable
-
     export let balance // migration tx
 
-    let migrationTx = !payload || payload.type === 'Milestone'
+    let cachedMigrationTx = !payload 
+    let milestoneMessage = payload?.type === 'Milestone'
     
     export let onClick = () => {}
 </script>
@@ -24,9 +23,9 @@
 <button
     on:click={onClick}
     data-label="transaction-row"
-    class="w-full text-left flex rounded-2xl items-center bg-gray-0 dark:10bg-gray-900 dark:bg-opacity-50 p-4 {(!confirmed || shouldDisable) && 'opacity-50'} {shouldDisable && 'pointer-events-none'}"
-    disabled={shouldDisable}>
-    {#if migrationTx}
+    class="w-full text-left flex rounded-2xl items-center bg-gray-0 dark:10bg-gray-900 dark:bg-opacity-50 p-4 {(!confirmed || cachedMigrationTx) && 'opacity-50'} {false && 'pointer-events-none'}"
+    disabled={false}>
+    {#if cachedMigrationTx || milestoneMessage}
         <Icon boxed classes="text-white" boxClasses="bg-gray-500 dark:bg-gray-900" icon="double-chevron-right" />
     {:else}
         <Icon
@@ -36,7 +35,7 @@
             icon={payload.data.essence.data.internal ? 'transfer' : payload.data.essence.data.incoming ? 'chevron-down' : 'chevron-up'} />
     {/if}
     <div class="flex flex-col ml-3.5 space-y-1.5">
-        <Text type="p" bold smaller>{migrationTx ? locale('general.fundMigration') : truncateString(id)}</Text>
+        <Text type="p" bold smaller>{cachedMigrationTx || milestoneMessage ? locale('general.fundMigration') : truncateString(id)}</Text>
         <p class="text-10 leading-120 text-gray-500">
             {$date(new Date(timestamp), {
                 year: 'numeric',
@@ -50,7 +49,7 @@
     </div>
     <div class="flex-1 items-end flex flex-col ml-4">
         <Text type="p" smaller>
-            {migrationTx ? formatUnit(balance) : `${!payload.data.essence.data.incoming ? '-' : ''}${formatUnit(payload.data.essence.data.value)}`}
+            {cachedMigrationTx || milestoneMessage ? formatUnit(balance) : `${!payload.data.essence.data.incoming ? '-' : ''}${formatUnit(payload.data.essence.data.value)}`}
         </Text>
     </div>
 </button>

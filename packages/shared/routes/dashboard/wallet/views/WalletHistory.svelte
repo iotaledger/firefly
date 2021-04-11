@@ -24,12 +24,6 @@
             console.error('Could not find source account')
         }
     }
-
-    let shouldDisableActivityRow = $activeProfile.migratedTransactions && $activeProfile.migratedTransactions.length > 0
-
-    activeProfile.subscribe((_activeProfile) => {
-        shouldDisableActivityRow = _activeProfile.migratedTransactions && _activeProfile.migratedTransactions.length > 0        
-    })
 </script>
 
 <div data-label="latest-transactions" class="h-full pt-6 pb-8 px-8 flex-grow flex flex-col">
@@ -43,7 +37,6 @@
         {#if $transactions?.length}
             {#each $transactions as transaction}
                 <ActivityRow
-                    shouldDisable={shouldDisableActivityRow}
                     {...transaction}
                     onClick={() => handleTransactionClick(transaction)}
                     color={$accounts.find((acc) => acc.index === transaction.account)?.color}

@@ -126,7 +126,8 @@ interface MilestoneEssence {
     parents: string[];
     publicKeys: number[];
     receipt: Receipt;
-    timstamp: number;
+    timestamp: number;
+    value: number;
 }
 
 export interface Milestone {
