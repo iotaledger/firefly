@@ -207,7 +207,7 @@
             },
             "resyncAccounts": {
                 "title": "Resynchroniser les comptes",
-                "description": ""
+                "description": "Démarre une tâche en arrière-plan pour s'assurer que vos comptes sont à jour."
             },
             "deleteProfile": {
                 "title": "Supprimer le profil",
@@ -313,7 +313,8 @@
     "popups": {
         "password": {
             "title": "Mot de passe obligatoire",
-            "subtitle": "Veuillez saisir le mot de passe de votre portefeuille pour déverrouiller Stronghold"
+            "subtitle": "Please enter your password to unlock Stronghold",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "Votre QR code"
@@ -336,7 +337,7 @@
         "deleteAccount": {
             "title": "Supprimer {name}?",
             "body": "Vous pouvez rajouter ce compte plus tard mais vous risquez de perdre l'historique de vos transactions.",
-            "typePassword": "Saisissez le mot de passe de votre portefeuille pour confirmer.",
+            "typePassword": "Type your password to confirm.",
             "deleteAccount": "Supprimer le compte",
             "errorTitle": "Impossible de supprimer {name}",
             "errorBody1": "Pour supprimer un compte, son soldedoit être nul.",
@@ -344,7 +345,7 @@
             "errorBody3": "Vous ne pouvez pas supprimer ce compte, vous devez en avoir au moins un."
         },
         "addressHistory": {
-            "title": "Historique des adresses du compte {name}",
+            "title": "Historique de l'adresse {name}",
             "currentBalance": "Solde actuel : {balance}"
         },
         "node": {
@@ -363,7 +364,8 @@
         },
         "deleteProfile": {
             "title": "Supprimer le profil",
-            "confirmation": "Êtes-vous sûr de vouloir supprimer ce profil? Cette opération ne peut pas être annulée."
+            "confirmation": "Êtes-vous sûr de vouloir supprimer ce profil? Cette opération ne peut pas être annulée.",
+            "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
             "title": "Diagnostiques",
@@ -586,7 +588,8 @@
         "restartInstall": "Redémarrer pour installer",
         "calcMinutesRemaining": "Calcul des minutes restantes...",
         "minutesRemaining": "{minutes, plural, one {Il reste 1 minute} other {# minutes restantes}}",
-        "copiedToClipboard": "Copié dans le presse-papier"
+        "copiedToClipboard": "Copié dans le presse-papier",
+        "accountsSynchronized": "Synchronisation du compte terminée"
     },
     "error": {
         "profile": {
@@ -606,7 +609,7 @@
             "dates": "Les dates sont faciles à deviner.",
             "common": "C'est un mot de passe très courant.",
             "similar": "Ceci est similaire à un mot de passe couramment utilisé.",
-            "reasonWord": "Un seul mot est facile à deviner.",
+            "word": "Un simple mot est facile à deviner.",
             "incorrect": "Votre mot de passe est incorrect.",
             "length": "Votre mot de passe ne doit pas contenir plus de {length, plural, one {1 caractère} other {# caractères}}."
         },
@@ -619,7 +622,11 @@
             "length": "Le nom de votre compte ne doit pas contenir plus de {length, plural, one {1 caractère} other {# caractères}}.",
             "empty": "Vous devez utiliser votre dernier compte avant d'en créer un nouveau.",
             "notEmpty": "Vous devez transférer votre solde avant de supprimer ce compte.",
-            "duplicate": "Un compte avec ce nom existe déjà."
+            "duplicate": "Un compte avec ce nom existe déjà.",
+            "tilde": "Un nom de profil ne peut pas commencer par le caractère '~'.",
+            "control": "Un nom de profil ne peut pas contenir de caractère de contrôle.",
+            "startDot": "Un nom de profil ne peut pas commencer par un point.",
+            "chars": "Un nom de profil ne peut pas contenir les caractères suivants <>:\"/\\|?*"
         },
         "send": {
             "addressLength": "Les adresses devraient comporter {length, plural, one {1 caractère} other {# caractères}}.",
@@ -627,8 +634,10 @@
             "amountNoFloat": "Si les unités sont `i`, vous ne pouvez pas utiliser de décimales.",
             "amountInvalidFormat": "Le montant semble être un nombre invalide.",
             "amountZero": "Le montant doit être supérieur à 0.",
-            "wrongAddressFormat": "Les adresses commencent par le préfixe {prefix}.",
+            "wrongAddressPrefix": "Les adresses commencent par le préfixe {prefix}.",
+            "wrongAddressFormat": "L'adresse n'est pas correctement formatée.",
             "insufficientFunds": "Ce compte ne dispose pas de fonds suffisants.",
+            "noToAccount": "Vous n'avez pas sélectionné de compte vers lequel envoyer les fonds.",
             "sendingDust": "Vous ne pouvez pas envoyer moins de 1 Mi.",
             "leavingDust": "Vous ne pouvez pas laisser moins de 1 Mi sur votre adresse."
         },

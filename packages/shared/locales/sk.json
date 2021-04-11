@@ -5,7 +5,7 @@
             "body": "Firefly je oficiálna IOTA peňaženka."
         },
         "legal": {
-            "title": "Zásady ochrany osobných údajov a zmluvné podmienky",
+            "title": "Ochrana osobných údajov a zmluvné podmienky",
             "body": "Prosím preštudujte si Zásady ochrany osobných údajov a zmluvné podmienky.",
             "privacyPolicy": {
                 "title": "Zásady ochrany osobných údajov",
@@ -207,7 +207,7 @@
             },
             "resyncAccounts": {
                 "title": "Nanovo synchronizovať účty",
-                "description": ""
+                "description": "Starts a background task to make sure your accounts are up to date."
             },
             "deleteProfile": {
                 "title": "Odstrániť profil",
@@ -313,7 +313,8 @@
     "popups": {
         "password": {
             "title": "Heslo je vyžadované",
-            "subtitle": "Prosím zadajte heslo vašej peňaženky pre odomknutie Strongholdu"
+            "subtitle": "Please enter your password to unlock Stronghold",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "Váš QR kód"
@@ -336,7 +337,7 @@
         "deleteAccount": {
             "title": "Odstrániť {name}?",
             "body": "Tento účet môžete neskôr pridať naspäť, no môžete prísť o históriu transakcii.",
-            "typePassword": "Zadajte heslo svojej peňaženky pre potvrdenie.",
+            "typePassword": "Type your password to confirm.",
             "deleteAccount": "Odstrániť účet",
             "errorTitle": "Nemožno odstrániť {name}",
             "errorBody1": "Pre odstránenie účtu musí mať nulový zostatok.",
@@ -344,7 +345,7 @@
             "errorBody3": "Nemôžete odstrániť tento účet, musíte mať aspoň jeden."
         },
         "addressHistory": {
-            "title": "História adresy účtu {name}",
+            "title": "{name} address history",
             "currentBalance": "Aktuálny zostatok: {balance}"
         },
         "node": {
@@ -363,7 +364,8 @@
         },
         "deleteProfile": {
             "title": "Odstrániť profil",
-            "confirmation": "Naozaj chcete odstrániť tento profil? Túto akciu nie je možné vrátiť späť."
+            "confirmation": "Naozaj chcete odstrániť tento profil? Túto akciu nie je možné vrátiť späť.",
+            "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
             "title": "Diagnostika",
@@ -586,7 +588,8 @@
         "restartInstall": "Pre inštaláciu reštartujte",
         "calcMinutesRemaining": "Výpočet zostávajúcich minút...",
         "minutesRemaining": "{minutes, plural, one {ostáva 1 minúta} \nfew {ostávajú # minúty} \nmany {ostáva # minút} \nother {ostáva # minút}}",
-        "copiedToClipboard": "Skopírované do schránky"
+        "copiedToClipboard": "Skopírované do schránky",
+        "accountsSynchronized": "Account synchronization complete"
     },
     "error": {
         "profile": {
@@ -606,7 +609,7 @@
             "dates": "Dátumy sú ľahko uhádnuteľné.",
             "common": "Toto je veľmi bežné heslo.",
             "similar": "Toto heslo je podobné bežne používaným heslám.",
-            "reasonWord": "Samotné slovo sa dá ľahko uhádnuť.",
+            "word": "A single word is easy to guess.",
             "incorrect": "Vaše heslo je nesprávne.",
             "length": "Vaše heslo nesmie byť dlhšie ako {length, plural, one {1 znak} few {# znaky} other {# znakov}}."
         },
@@ -619,7 +622,11 @@
             "length": "Názov vášho účtu nemôže byť dlhší ako {length, plural, one {1 znak} few {# znaky} other {# znakov}}.",
             "empty": "Musíte použiť svoj najnovší účet pred vytvorením nového.",
             "notEmpty": "Pred odstránením tohto účtu musíte previesť svoj zostatok.",
-            "duplicate": "Účet s týmto menom už existuje."
+            "duplicate": "Účet s týmto menom už existuje.",
+            "tilde": "A profile name can't start with the '~' character.",
+            "control": "A profile name can't contain a control character.",
+            "startDot": "A profile name can't start with the '.' character.",
+            "chars": "A profile name can't contain the following characters <>:\"/\\|?*"
         },
         "send": {
             "addressLength": "Adresy by mali mať dĺžku {length, plural, one {1 znak} other {# znakov}}.",
@@ -627,8 +634,10 @@
             "amountNoFloat": "Ak sú jednotky `i`, nemôžete použiť desatinné miesta.",
             "amountInvalidFormat": "Zdá sa, že čiastka je neplatné číslo.",
             "amountZero": "Hodnota musí byť vyššia ako 0.",
-            "wrongAddressFormat": "Adresy začínajú s predponou {prefix}.",
+            "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
+            "wrongAddressFormat": "The address is not correctly formatted.",
             "insufficientFunds": "Tento účet nemá dostatok prostriedkov.",
+            "noToAccount": "You have not selected an account to send the funds to.",
             "sendingDust": "Nemôžete odoslať menej ako 1 Mi.",
             "leavingDust": "Zostatok vašej adresy nemôže byť nižší ako 1 Mi."
         },

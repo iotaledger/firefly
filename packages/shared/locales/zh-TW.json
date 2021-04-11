@@ -207,7 +207,7 @@
             },
             "resyncAccounts": {
                 "title": "重新同步帳戶",
-                "description": ""
+                "description": "Starts a background task to make sure your accounts are up to date."
             },
             "deleteProfile": {
                 "title": "刪除設定檔",
@@ -313,7 +313,8 @@
     "popups": {
         "password": {
             "title": "必須輸入密碼",
-            "subtitle": "請輸入您的密碼以解鎖 Stronghold"
+            "subtitle": "Please enter your password to unlock Stronghold",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "您的QR碼"
@@ -336,7 +337,7 @@
         "deleteAccount": {
             "title": "Remove {name}?",
             "body": "You can add this account back later but you may lose your transaction history.",
-            "typePassword": "Type your wallet password to confirm.",
+            "typePassword": "Type your password to confirm.",
             "deleteAccount": "Remove account",
             "errorTitle": "Unable to remove {name}",
             "errorBody1": "To remove an account it must have 0 balance.",
@@ -344,7 +345,7 @@
             "errorBody3": "You cannot remove this account, you must have at least one."
         },
         "addressHistory": {
-            "title": "{name} 帳號地址歷史紀錄",
+            "title": "{name} address history",
             "currentBalance": "目前餘額: {balance}"
         },
         "node": {
@@ -363,7 +364,8 @@
         },
         "deleteProfile": {
             "title": "刪除設定檔",
-            "confirmation": "是否確定要刪除此檔？此操作無法撤銷。"
+            "confirmation": "是否確定要刪除此檔？此操作無法撤銷。",
+            "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
             "title": "應用診斷",
@@ -586,7 +588,8 @@
         "restartInstall": "重新安裝",
         "calcMinutesRemaining": "正在計算剩餘時間...",
         "minutesRemaining": "分鐘, 複數, 一 剩下一分鐘 其他 剩下一分鐘",
-        "copiedToClipboard": "複製到剪貼簿"
+        "copiedToClipboard": "複製到剪貼簿",
+        "accountsSynchronized": "Account synchronization complete"
     },
     "error": {
         "profile": {
@@ -606,7 +609,7 @@
             "dates": "日期很容易被猜到",
             "common": "這是非常常見的密碼.",
             "similar": "這和常用密碼非常類似.",
-            "reasonWord": "只有一個單字很容易被猜到",
+            "word": "A single word is easy to guess.",
             "incorrect": "密碼不正確",
             "length": "你的密碼長度不能超過 {length, plural, one {1 character} other {# 字符}}."
         },
@@ -619,7 +622,11 @@
             "length": "你的帳號長度不能超過 {length, plural, one {1 character} other {# 字符}}.",
             "empty": "您必須使用最後存在的帳戶，在您創建新的帳戶之前。",
             "notEmpty": "您必須先轉移餘額，才能刪除該帳戶。",
-            "duplicate": "相同名稱的帳戶已存在。"
+            "duplicate": "相同名稱的帳戶已存在。",
+            "tilde": "A profile name can't start with the '~' character.",
+            "control": "A profile name can't contain a control character.",
+            "startDot": "A profile name can't start with the '.' character.",
+            "chars": "A profile name can't contain the following characters <>:\"/\\|?*"
         },
         "send": {
             "addressLength": "地址應為 {length, plural, one {1 character} other {# 字符}} 長度",
@@ -627,8 +634,10 @@
             "amountNoFloat": "如果單位是“ i”，則不能使用小數位。",
             "amountInvalidFormat": "該金額是無效數字。",
             "amountZero": "金額必須大於0。",
-            "wrongAddressFormat": "地址必須以 {prefix} 為字首。",
+            "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
+            "wrongAddressFormat": "The address is not correctly formatted.",
             "insufficientFunds": "This account has insufficient funds.",
+            "noToAccount": "You have not selected an account to send the funds to.",
             "sendingDust": "You cannot send less than 1 Mi.",
             "leavingDust": "You cannot leave less than 1 Mi on your address."
         },

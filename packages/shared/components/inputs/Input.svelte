@@ -190,7 +190,8 @@
             {disabled}
             {...$$restProps}
             {placeholder}
-            {style} />
+            {style}
+            spellcheck={false} />
         {#if label}
             <floating-label class:floating-active={value && label}>{label}</floating-label>
         {/if}

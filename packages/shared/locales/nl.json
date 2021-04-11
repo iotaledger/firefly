@@ -207,7 +207,7 @@
             },
             "resyncAccounts": {
                 "title": "Accounts opnieuw synchroniseren",
-                "description": ""
+                "description": "Starts a background task to make sure your accounts are up to date."
             },
             "deleteProfile": {
                 "title": "Profiel verwijderen",
@@ -313,7 +313,8 @@
     "popups": {
         "password": {
             "title": "Wachtwoord vereist",
-            "subtitle": "Voer het wachtwoord van je wallet in om Stronghold te ontgrendelen"
+            "subtitle": "Please enter your password to unlock Stronghold",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "Jouw QR-code"
@@ -336,7 +337,7 @@
         "deleteAccount": {
             "title": "Verwijder {name}?",
             "body": "U kunt dit account later opnieuw toevoegen, maar u kunt uw transactiegeschiedenis verliezen.",
-            "typePassword": "Voer het wachtwoord van uw portemonnee in om te bevestigen.",
+            "typePassword": "Type your password to confirm.",
             "deleteAccount": "Rekening verwijderen",
             "errorTitle": "Kan {name} niet verwijderen",
             "errorBody1": "Om een rekening te verwijderen moet het 0 saldo hebben.",
@@ -344,7 +345,7 @@
             "errorBody3": "U kunt deze rekening niet verwijderen, u moet er ten minste één hebben."
         },
         "addressHistory": {
-            "title": "{name} account adresgechiedenis",
+            "title": "{name} address history",
             "currentBalance": "Huidig saldo: {balance}"
         },
         "node": {
@@ -363,7 +364,8 @@
         },
         "deleteProfile": {
             "title": "Profiel verwijderen",
-            "confirmation": "Weet je zeker dat je dit profiel wil verwijderen? Deze handeling kan niet ongedaan worden gemaakt."
+            "confirmation": "Weet je zeker dat je dit profiel wil verwijderen? Deze handeling kan niet ongedaan worden gemaakt.",
+            "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
             "title": "Foutrapportages",
@@ -586,7 +588,8 @@
         "restartInstall": "Herstart om te installeren",
         "calcMinutesRemaining": "Resterende minuten aan het berekenen...",
         "minutesRemaining": "{minutes, plural, one {1 minuut resterend} other {# minuten resterend}}",
-        "copiedToClipboard": "Gekopieerd naar het klembord"
+        "copiedToClipboard": "Gekopieerd naar het klembord",
+        "accountsSynchronized": "Account synchronization complete"
     },
     "error": {
         "profile": {
@@ -606,7 +609,7 @@
             "dates": "Datums zijn makkelijk te raden.",
             "common": "Dit is een veelvoorkomend wachtwoord.",
             "similar": "Dit is vergelijkbaar met een veelgebruikt wachtwoord.",
-            "reasonWord": "Een enkel woord is makkelijk te raden.",
+            "word": "A single word is easy to guess.",
             "incorrect": "Uw wachtwoord is niet correct.",
             "length": "Uw wachtwoord kan niet langer zijn dan {length, plural, one {1 teken} other {# tekens}}."
         },
@@ -619,7 +622,11 @@
             "length": "Uw accountnaam mag niet langer zijn dan {length, plural, one {1 karakter} other {# karakters}}.",
             "empty": "U moet uw laatste account gebruiken voordat u een nieuwe aanmaakt.",
             "notEmpty": "U moet het openstaande saldo overboeken voordat u deze rekening verwijdert.",
-            "duplicate": "Een account met deze naam bestaat al."
+            "duplicate": "Een account met deze naam bestaat al.",
+            "tilde": "Een profielnaam kan niet beginnen met het teken '~'.",
+            "control": "Een profielnaam mag geen controleteken bevatten.",
+            "startDot": "Een profielnaam kan niet beginnen met het '.' karakter.",
+            "chars": "Een profielnaam mag de volgende tekens niet bevatten <>:\"/\\×?*"
         },
         "send": {
             "addressLength": "Adressen moeten {length, plural, one {1 teken} other {# tekens}} lang zijn.",
@@ -627,8 +634,10 @@
             "amountNoFloat": "Als de eenheden `i` zijn, kunt u geen cijfers achter de comma gebruiken.",
             "amountInvalidFormat": "De opgegeven waarde lijkt een ongeldige waarde te zijn.",
             "amountZero": "De waarde moet groter zijn dan 0.",
-            "wrongAddressFormat": "Adressen beginnen met {prefix}.",
+            "wrongAddressPrefix": "Adressen beginnen met het voorvoegsel {prefix}.",
+            "wrongAddressFormat": "Het adres is niet correct opgemaakt.",
             "insufficientFunds": "Deze rekening heeft onvoldoende saldo.",
+            "noToAccount": "U heeft geen account geselecteerd om de bedragen naar toe te sturen.",
             "sendingDust": "U kunt niet minder dan 1 Mi verzenden.",
             "leavingDust": "U kunt niet minder dan 1 Mi op uw rekening achterlaten."
         },

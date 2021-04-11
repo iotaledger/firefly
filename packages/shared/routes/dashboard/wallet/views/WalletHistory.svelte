@@ -1,8 +1,10 @@
 <script lang="typescript">
     import { ActivityRow, Icon, Text } from 'shared/components'
+    import { showAppNotification } from 'shared/lib/notifications'
+    import { openPopup } from 'shared/lib/popup';
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { AccountMessage, isSyncing, selectedAccountId, selectedMessage, syncAccounts, WalletAccount } from 'shared/lib/wallet'
+    import { api, AccountMessage, isSyncing, selectedAccountId, selectedMessage, syncAccounts, WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable, Writable } from 'svelte/store'
     import { get } from 'svelte/store'
@@ -23,12 +25,30 @@
             console.error('Could not find source account')
         }
     }
+
+    function handleSyncClick() {
+        api.getStrongholdStatus({
+            onSuccess(strongholdStatusResponse) {
+                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                    openPopup({ type: 'password', props: { onSuccess: () => syncAccounts(false, 0, 10) } })
+                } else {
+                    syncAccounts(false)
+                }
+            },
+            onError(err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
+                })
+            },
+        })
+    }
 </script>
 
 <div data-label="latest-transactions" class="h-full pt-6 pb-8 px-8 flex-grow flex flex-col">
     <div class="w-full flex flex-row justify-between items-start">
         <Text type="h5" classes="mb-5">{locale('general.latestTransactions')}</Text>
-        <button on:click={() => syncAccounts(false)} class:pointer-events-none={$isSyncing}>
+        <button on:click={() => handleSyncClick()} class:pointer-events-none={$isSyncing}>
             <Icon icon="refresh" classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white" />
         </button>
     </div>
