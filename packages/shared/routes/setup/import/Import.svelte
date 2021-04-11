@@ -102,7 +102,6 @@
                         $newProfile.lastStrongholdBackupTime = new Date()
                     }
 
-                    loading = false
                     nextState = ImportState.Success
                 } catch (err) {
                     error = locale(err.error)
