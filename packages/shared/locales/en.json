@@ -589,7 +589,7 @@
         "syncingAccounts": "Syncing accounts...",
         "exportingStronghold": "Exporting Stronghold...",
         "exportingStrongholdSuccess": "Exported Stronghold successfully",
-        "exportingStrongholdFailed": "Exported Stronghold failed",
+        "exportingStrongholdFailed": "Exporting Stronghold failed",
         "pinCodeUpdating": "Updating PIN code...",
         "pinCodeSuccess": "Updated PIN code successfully",
         "pinCodeFailed": "Updating PIN code failed",
