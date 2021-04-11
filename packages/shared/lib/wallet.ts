@@ -420,6 +420,8 @@ export const initialiseListeners = () => {
                     showSystemNotification({ type: "info", message: notificationMessage, contextData: { type: "valueTx", accountId: account.id } });
                 }
             } else if (message.payload.type === 'Milestone') {
+                // Update account with new message
+                saveNewMessage(response.payload.accountId, response.payload.message);
                 processMigratedTransactions(response.payload.accountId, [response.payload.message])
             }
         },
@@ -1179,7 +1181,7 @@ export const processMigratedTransactions = (accountId: string, messages: Message
 
                     const funds = message.payload.data.essence.receipt.data.funds;
                     const outputAddresses = funds.filter((fund) => migrationAddresses.includes(fund.output.address)).map((fund) => fund.output.address)
-                    
+
                     const updatedMigratedTransactions = _activeProfile.migratedTransactions.filter((transaction) => !outputAddresses.includes(transaction.address))
 
                     updateProfile(
