@@ -392,20 +392,10 @@ class MessageValidator extends Validator {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of broadcasted received.',
             })
-        } else if ('boolean' !== typeof payload.payload.data.essence.data.incoming) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of incoming received.',
-            })
         } else if ('number' !== typeof payload.nonce) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of nonce received.',
-            })
-        } else if ('number' !== typeof payload.payload.data.essence.data.remainderValue) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of remainderValue received.',
             })
         } else if ('string' !== typeof payload.timestamp) {
             return super.createResponse(false, {

@@ -1,8 +1,9 @@
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import type { Input, MigrationBundle, MigrationData } from 'shared/lib/typings/migration'
 import type { Address } from 'shared/lib/typings/address'
+import type { Message } from 'shared/lib/typings/message'
 import Validator from 'shared/lib/validator'
-import { api } from 'shared/lib/wallet'
+import { api, WalletAccount } from 'shared/lib/wallet'
 import { derived, get, writable, Writable } from 'svelte/store'
 
 export const LOG_FILE_NAME = 'migration.log'
@@ -14,14 +15,14 @@ export const PERMANODE = 'https://chronicle.iota.org/api'
 export const ADDRESS_SECURITY_LEVEL = 2
 
 /** Minimum migration balance */
-export const MINIMUM_MIGRATION_BALANCE = 1000000
+export const MINIMUM_MIGRATION_BALANCE = 100
 
 /** Bundle mining timeout for each bundle */
-export const MINING_TIMEOUT_SECONDS = 60 * 10
+export const MINING_TIMEOUT_SECONDS = 60
 
 export const MINIMUM_WEIGHT_MAGNITUDE = 14;
 
-const MAX_INPUTS_PER_BUNDLE = 30
+const MAX_INPUTS_PER_BUNDLE = 3
 
 interface Bundle {
     index: number;

@@ -53,6 +53,7 @@ export interface AccountToCreate {
 }
 
 export interface SyncedAccount {
+    index: number
     id: string
     depositAddress: Address
     isEmpty: boolean

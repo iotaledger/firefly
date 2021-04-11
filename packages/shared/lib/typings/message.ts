@@ -86,7 +86,56 @@ export interface Transaction {
     }
 }
 
-export type Payload = Transaction;
+interface Receipt {
+    type: 'Receipt',
+    data: {
+        last: boolean;
+        migratedAt: number;
+        funds: {
+            output: {
+                address: string;
+                amount: number;
+                remainder: false
+            },
+            tailTransactionHash: number[]
+        }[],
+        transaction: {
+            data: {
+                input: {
+                    data: string;
+                    type: 'Treasury'
+                },
+                output: {
+                    data: {
+                        amount: number;
+                    }
+                }
+            },
+            type: 'TreasuryTransaction'
+        }
+    }
+}
+
+interface MilestoneEssence {
+    index: number;
+    merkleProof: number[];
+    nextPowScore: number;
+    nextPowScoreMilestoneIndex: number;
+    parents: string[];
+    publicKeys: number[];
+    receipt: Receipt;
+    timstamp: number;
+}
+
+export interface Milestone {
+    type: 'Milestone',
+    data: {
+        essence: MilestoneEssence,
+        signatures: number[]
+    }
+}
+
+export type Payload = Transaction | Milestone;
 
 export interface Message {
     id: string;
@@ -98,7 +147,6 @@ export interface Message {
     nonce: number;
     confirmed?: boolean;
     broadcasted: boolean;
-    migratedFromLegacy: boolean;
 }
 
 export interface ListMessageFilter {
