@@ -98,7 +98,7 @@
 
                         transactions = transactions.map((_transaction, i) => {
                             if (_transaction.index === transaction.index) {
-                                return { ..._transaction, status: -1, errorText: 'Migration failed' }
+                                return { ..._transaction, status: -1, errorText: locale('views.migrate.migrationFailed') }
                             }
 
                             return _transaction

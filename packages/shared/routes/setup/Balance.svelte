@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Box, Button, Illustration, OnboardingLayout, Text, Toast } from 'shared/components'
+    import { Box, Button, Illustration, OnboardingLayout, Text, Toast, Spinner } from 'shared/components'
     import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
     import { migration, getMigrationData, MINIMUM_MIGRATION_BALANCE } from 'shared/lib/migration'
     import { formatUnit } from 'shared/lib/units'
@@ -37,7 +37,9 @@
         dispatch('next')
     }
     function handleBackClick() {
-        dispatch('previous')
+        if (!isCheckingForBalance) {
+            dispatch('previous')
+        }
     }
 
     function checkAgain() {
@@ -71,8 +73,17 @@
             {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-between items-center space-x-4">
-            <Button secondary classes="flex-1" disabled={isCheckingForBalance} onClick={checkAgain}>{locale('actions.checkAgain')}</Button>
-            <Button classes="flex-1" disabled={isCheckingForBalance || error} onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
+            <Button secondary classes="flex-1" disabled={isCheckingForBalance} onClick={checkAgain}>
+                {#if isCheckingForBalance}
+                    <Spinner
+                        busy={isCheckingForBalance}
+                        message={locale('views.migrate.findingBalance')}
+                        classes="justify-center" />
+                {:else}{locale('actions.checkAgain')}{/if}
+            </Button>
+            <Button classes="flex-1" disabled={isCheckingForBalance || error} onClick={() => handleContinueClick()}>
+                {locale('actions.continue')}
+            </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-yellow dark:bg-gray-900">
             <Illustration illustration="balance-desktop" height="100%" width="auto" />

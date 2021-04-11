@@ -5,10 +5,11 @@ import type { Message } from 'shared/lib/typings/message'
 import Validator from 'shared/lib/validator'
 import { api, WalletAccount } from 'shared/lib/wallet'
 import { derived, get, writable, Writable } from 'svelte/store'
+import { localize } from 'shared/lib/i18n'
 
 export const LOG_FILE_NAME = 'migration.log'
 
-export const MIGRATION_NODE = 'https://nodes-migration-legacy.iota.cafe'
+export const MIGRATION_NODE = ' https://nodes-migration-legacy.iota.cafe'
 
 export const PERMANODE = 'https://chronicle.iota.org/api'
 
@@ -549,7 +550,7 @@ export async function checkChrysalisStatus(): Promise<void> {
     }
 }
 
-const initialiseMigrationListeners = () => {
+export const initialiseMigrationListeners = () => {
     api.onMigrationProgress({
         onSuccess(response) {
             console.log('Response', response)

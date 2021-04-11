@@ -1,12 +1,14 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
-    import { OnboardingLayout, Password, Text, Button, Illustration } from 'shared/components'
+    import { OnboardingLayout, Password, Text, Button, Illustration, Spinner } from 'shared/components'
 
     export let locale
     export let mobile
     export let importType
     export let error = ''
     export let busy = false
+
+    export let isGettingMigrationData
 
     let password = ''
 
@@ -18,7 +20,9 @@
         }
     }
     function handleBackClick() {
-        dispatch('previous')
+        if (!busy && !isGettingMigrationData) {
+            dispatch('previous')
+        }
     }
 </script>
 
@@ -31,11 +35,27 @@
             <Text type="h3" highlighted classes="mb-5">{locale(`general.${importType}`)}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.importBackupPassword.body1')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.importBackupPassword.body2')}</Text>
-            <Password classes="mb-6" {error} bind:value={password} {locale} showRevealToggle autofocus disabled={busy} submitHandler={handleContinue} />
+            <Password
+                classes="mb-6"
+                {error}
+                bind:value={password}
+                {locale}
+                showRevealToggle
+                autofocus
+                disabled={busy}
+                submitHandler={handleContinue} />
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-            <Button classes="flex-1" disabled={password.length === 0 || busy} onClick={() => handleContinue()}>
-                {locale('actions.continue')}
+            <Button
+                classes="flex-1"
+                disabled={password.length === 0 || busy || isGettingMigrationData}
+                onClick={() => handleContinue()}>
+                {#if isGettingMigrationData}
+                    <Spinner
+                        busy={isGettingMigrationData}
+                        message={locale('views.migrate.restoringWallet')}
+                        classes="justify-center" />
+                {:else}{locale('actions.continue')}{/if}
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">

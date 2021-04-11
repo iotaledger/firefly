@@ -86,17 +86,23 @@
                 const { password } = params
                 busy = true
 
+                error = ''
+
                 try {
                     if (importType === 'seedvault') {
-                        let isValid = await Electron.validateSeedVault(importFile)
+                        // Instead of using "busy", we are deliberately using "isGettingMigrationData"
+                        // We do not want to display the spinner in FileImport if stronghold is being imported.
+                        isGettingMigrationData = true
 
-                        if (isValid) {
-                            const legacySeed = await Electron.importLegacySeed(importFile, password)
+                        const legacySeed = await Electron.importLegacySeed(importFile, password).catch((error) => {
+                            throw error
+                        })
 
+                        if (legacySeed) {
                             await getMigrationData(legacySeed)
-                        } else {
-                            console.error('Invalid SeedVault. Generate an error alert!')
                         }
+
+                        isGettingMigrationData = false
                     } else {
                         await asyncRestoreBackup(importFilePath, password)
                         $newProfile.lastStrongholdBackupTime = new Date()
@@ -104,9 +110,14 @@
 
                     nextState = ImportState.Success
                 } catch (err) {
-                    error = locale(err.error)
+                    if (err && err.name === 'KdbxError' && err.code === 'InvalidKey') {
+                        error = locale('views.migrate.incorrectSeedVaultPassword')
+                    } else {
+                        error = locale(err.error)
+                    }
                 } finally {
                     busy = false
+                    isGettingMigrationData = false
                 }
                 break
 
@@ -136,7 +147,7 @@
     </Transition>
 {:else if state === ImportState.TextImport}
     <Transition>
-        <TextImport loading={isGettingMigrationData} on:next={_next} on:previous={_previous} {locale} {mobile} />
+        <TextImport {isGettingMigrationData} on:next={_next} on:previous={_previous} {locale} {mobile} />
     </Transition>
 {:else if state === ImportState.FileImport}
     <Transition>
@@ -144,7 +155,7 @@
     </Transition>
 {:else if state === ImportState.BackupPassword}
     <Transition>
-        <BackupPassword on:next={_next} on:previous={_previous} {importType} {error} {locale} {mobile} {busy} />
+        <BackupPassword on:next={_next} on:previous={_previous} {isGettingMigrationData} {importType} {error} {locale} {mobile} {busy} />
     </Transition>
 {:else if state === ImportState.Success}
     <Transition>

@@ -142,7 +142,13 @@
             "migrating": "Migrating funds...",
             "migrated": "{balance} migrated",
             "migrationFailed": "Migration Failed",
-            "noAddressesForMigration": "You do not have any other addresses to migrate. Please select any of the above to continue."
+            "noAddressesForMigration": "You do not have any other addresses to migrate. Please select any of the above to continue.",
+            "restoringWallet": "Restoring wallet...",
+            "findingBalance": "Finding balance...",
+            "incorrectSeedVaultPassword": "Incorrect SeedVault password.",
+            "signingBundle": "Signing bundle",
+            "broadcastingBundle": "Broadcasting bundle",
+            "miningBundle": "Mining bundle"
         },
         "bundleMiningWarning": {
             "title": "Warning",

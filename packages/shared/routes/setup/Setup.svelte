@@ -7,6 +7,7 @@
     import { cleanupInProgressProfiles, createProfile, disposeNewProfile, newProfile, profileInProgress, profiles } from 'shared/lib/profile'
     import { SetupType } from 'shared/lib/typings/routes'
     import { getStoragePath, initialise, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
+    import { initialiseMigrationListeners } from 'shared/lib/migration'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -57,6 +58,9 @@
                 const userDataPath = await Electron.getUserDataPath()
                 initialise($newProfile.id, getStoragePath(userDataPath, $newProfile.name))
 
+                // Migration listeners
+                initialiseMigrationListeners();
+                
                 dispatch('next', { setupType })
             } catch (err) {
                 showAppNotification({
