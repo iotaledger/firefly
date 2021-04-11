@@ -19,14 +19,16 @@
 
     export let balance // migration tx
 
-    let cachedMigrationTx = !payload
-    let milestoneMessage = payload?.type === 'Milestone'
+    let messageValue = ''
+
+    $: cachedMigrationTx = !payload
+    $: milestoneMessage = payload?.type === 'Milestone'
+    $: cachedMigrationTx, milestoneMessage, (messageValue = getMessageValue())
 
     const getMessageValue = () => {
         if (cachedMigrationTx) {
             return formatUnit(balance)
         }
-
         if (milestoneMessage) {
             const funds = payload.data.essence.receipt.data.funds
 
@@ -73,6 +75,6 @@
         </p>
     </div>
     <div class="flex-1 items-end flex flex-col ml-4">
-        <Text type="p" smaller>{getMessageValue()}</Text>
+        <Text type="p" smaller>{messageValue}</Text>
     </div>
 </button>
