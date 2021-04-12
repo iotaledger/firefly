@@ -11,7 +11,7 @@ import type { Account, Account as BaseAccount, AccountToCreate, Balance, SyncedA
 import type { Address } from 'shared/lib/typings/address'
 import type { Actor } from 'shared/lib/typings/bridge'
 import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, ErrorEventPayload, Event, ReattachmentEventPayload, TransactionEventPayload, TransferProgressEventPayload, TransferProgressEventType } from 'shared/lib/typings/events'
-import type { Message } from 'shared/lib/typings/message'
+import type { Message, Payload } from 'shared/lib/typings/message'
 import { formatUnit } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
 import type { ClientOptions } from './typings/client'
@@ -977,8 +977,9 @@ export const getAccountsBalanceHistory = (accounts: WalletAccount[], priceData: 
                 [HistoryDataProps.SEVEN_DAYS]: [],
                 [HistoryDataProps.ONE_MONTH]: [],
             }
-            // Sort messages from last to newest
-            let messages = account.messages.slice().sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+            let messages: Message[] = account?.messages?.slice()
+                ?.filter((message) => !isSelfTransaction(message.payload, account)) // Remove self transactions
+                ?.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()) ?? [] // Sort messages from last to newest
             // Calculate the variations for each account
             var trackedBalance = account.rawIotaBalance;
             let accountBalanceVariations = [{ balance: trackedBalance, timestamp: new Date().toString() }]
@@ -1301,4 +1302,29 @@ export const updateAccountNetworkSettings = async (automaticNodeSelection, inclu
             },
         }
     )
+}
+
+/**
+ * Check if a message was emitted and received by the provided account
+ *
+ * @method getWalletBalanceHistory
+ *
+ * @param {Payload} payload
+ * @param {WalletAccount} account
+ *
+ */
+export const isSelfTransaction = (payload: Payload, account: WalletAccount): boolean => {
+    const accountAddresses = account?.addresses?.map(add => add.address) ?? []
+    if (payload && accountAddresses.length) {
+        const senderAddress: string =
+            payload?.data?.essence?.data?.inputs?.find((input) => /utxo/i.test(input?.type))?.data?.metadata?.address ?? null
+
+        const receiverAddresses: string[] =
+            payload?.data?.essence?.data?.outputs
+                ?.filter((output) => output?.data?.remainder === false)
+                ?.map((output) => output?.data?.address) ?? []
+        const transactionAddresses = [senderAddress, ...receiverAddresses]
+        return senderAddress && receiverAddresses.length && transactionAddresses.every((txAddress) => accountAddresses.indexOf(txAddress) !== -1)
+    }
+    return false
 }
