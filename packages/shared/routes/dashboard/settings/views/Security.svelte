@@ -301,7 +301,8 @@
                 showRevealToggle
                 {locale}
                 placeholder={locale('general.currentPassword')}
-                disabled={passwordChangeBusy} />
+                disabled={passwordChangeBusy} 
+                submitHandler={changePassword} />
             <Password
                 error={newPasswordError}
                 classes="mb-4"
@@ -312,7 +313,8 @@
                 strength={passwordStrength.score}
                 {locale}
                 placeholder={locale('general.newPassword')}
-                disabled={passwordChangeBusy} />
+                disabled={passwordChangeBusy} 
+                submitHandler={changePassword} />
             <Password
                 classes="mb-5"
                 bind:value={confirmedPassword}
@@ -345,9 +347,9 @@
             <Text type="p" secondary classes="mb-5">{locale('views.settings.changePincode.description')}</Text>
 
             <Text type="p" secondary smaller classes="mb-2">{locale('views.settings.changePincode.currentPincode')}</Text>
-            <Pin smaller error={currentPincodeError} classes="mb-4" bind:value={currentPincode} disabled={pinCodeBusy} />
+            <Pin smaller error={currentPincodeError} classes="mb-4" bind:value={currentPincode} disabled={pinCodeBusy} on:submit={changePincode} />
             <Text type="p" secondary smaller classes="mb-2">{locale('views.settings.changePincode.newPincode')}</Text>
-            <Pin smaller error={newPincodeError} classes="mb-4" bind:value={newPincode} disabled={pinCodeBusy} />
+            <Pin smaller error={newPincodeError} classes="mb-4" bind:value={newPincode} disabled={pinCodeBusy} on:submit={changePincode} />
             <Text type="p" secondary smaller classes="mb-2">{locale('views.settings.changePincode.confirmNewPincode')}</Text>
             <Pin smaller error={confirmationPincodeError} classes="mb-4" bind:value={confirmedPincode} disabled={pinCodeBusy} on:submit={changePincode} />
             <div class="flex flex-row items-center">
