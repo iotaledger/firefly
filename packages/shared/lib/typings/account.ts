@@ -141,6 +141,7 @@ enum AccountMethod {
     SyncAccount,
     IsLatestAddressUnused,
     SetAlias,
+    GetNodeInfo,
 }
 
 function _callAccountMethod(
@@ -217,4 +218,8 @@ export function syncAccount(
     options?: SyncAccountOptions
 ): Promise<string> {
     return _callAccountMethod(bridge, __ids, AccountMethod.SyncAccount, accountId, options || {})
+}
+
+export function getNodeInfo(bridge: Bridge, __ids: CommunicationIds, accountId: AccountIdentifier, url?: string): Promise<string> {
+    return _callAccountMethod(bridge, __ids, AccountMethod.GetNodeInfo, accountId, url)
 }
