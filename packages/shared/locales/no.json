@@ -210,8 +210,8 @@
                 "description": "Starter en bakgrunnsoppgave for å sørge for at kontoene dine er oppdaterte."
             },
             "hiddenAccounts": {
-                "title": "Hidden accounts",
-                "description": "Selecting this options will show accounts that were previously hidden."
+                "title": "Skjulte kontoer",
+                "description": "Velg denne for å vise kontoer som tidligere var skjulte."
             },
             "deleteProfile": {
                 "title": "Slett profil",
@@ -227,19 +227,19 @@
             },
             "nodeSettings": {
                 "title": "Node-innstillinger",
-                "description": "Select Manual to configure the node settings and connect to your own node"
+                "description": "Velg Manuell for å konfigurere node-innstillinger og koble til din egen node"
             },
             "configureNodeList": {
                 "title": "Velg en node",
-                "description": "Manage the list of nodes your wallet connects to.",
-                "primaryNode": "Primary node",
-                "excludeNode": "Exclude node",
-                "includeNode": "Include node",
-                "viewDetails": "View details",
-                "setAsPrimary": "Set as primary",
+                "description": "Administrer listen med noder lommeboken din kobler til.",
+                "primaryNode": "Primær node",
+                "excludeNode": "Ekskluder node",
+                "includeNode": "Inkluder node",
+                "viewDetails": "Se detaljer",
+                "setAsPrimary": "Sett som primær",
                 "removeNode": "Fjern node",
-                "includeOfficialNodeList": "Include official node list",
-                "noNodes": "There are no nodes, automatic selection will be used instead."
+                "includeOfficialNodeList": "Inkluder offisiell liste av noder",
+                "noNodes": "Ingen noder, automatisk valg brukes i stedet."
             },
             "proofOfWork": {
                 "title": "Bevis på arbeid",
@@ -345,25 +345,25 @@
             "backupWarning": "Hvis du mister din backup og gjenopprettingsfrase mister du tilgang til dine midler.",
             "notBackedUp": "Ikke sikkerhetskopiert",
             "notBackedUpDescription": "Du har ikke sikkerhetskopiert ditt Stronghold",
-            "saving": "Saving..."
+            "saving": "Lagrer..."
         },
         "deleteAccount": {
-            "title": "Delete {name}?",
-            "body": "This account has no transaction history. It can safely be deleted.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Delete account",
-            "errorTitle": "Unable to delete {name}",
-            "errorBody1": "You cannot delete this account, you must have at least one."
+            "title": "Slett {name}?",
+            "body": "Denne kontoen har ingen transaksjonshistorikk. Den kan trygt slettes.",
+            "typePassword": "Skriv inn passordet til lommeboken for å bekrefte.",
+            "hideAccount": "Slett konto",
+            "errorTitle": "Kunne ikke slette {name}",
+            "errorBody1": "Du kan ikke slette denne kontoen, du må ha minst én."
         },
         "hideAccount": {
-            "title": "Hide {name}?",
-            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Hide account",
-            "errorTitle": "Unable to hide {name}",
-            "errorBody1": "To hide an account it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
-            "errorBody3": "You cannot hide this account, you must have at least one."
+            "title": "Skjul {name}?",
+            "body": "Du kan finne denne kontoen senere ved å slå på \"Vis skjulte kontoer\" i Avanserte innstillinger.",
+            "typePassword": "Skriv inn passordet til lommeboken for å bekrefte.",
+            "hideAccount": "Skjul konto",
+            "errorTitle": "Kunne ikke skjule {name}",
+            "errorBody1": "For å skjule en konto må den ha en saldo på 0.",
+            "errorBody2": "Du har for øyeblikket {balance} igjen på denne kontoen. Vennligst overfør disse midlene til en annen konto og prøv på nytt.",
+            "errorBody3": "Du kan ikke skjule denne kontoen, du må ha minst én."
         },
         "addressHistory": {
             "title": "{name} adressehistorikk",
@@ -371,7 +371,7 @@
         },
         "node": {
             "titleAdd": "Legg til en node",
-            "titleUpdate": "Update a node",
+            "titleUpdate": "Oppdater en node",
             "titleRemove": "Fjern en node",
             "titleDetails": "Detaljer om node",
             "nodeAddress": "Node-adresse",
@@ -401,8 +401,8 @@
             "userPath": "Brukersti"
         },
         "transaction": {
-            "title": "Confirm transaction",
-            "body": "You’re about to send {amount} to"
+            "title": "Bekreft transaksjon",
+            "body": "Du er i ferd med å sende {amount} til"
         }
     },
     "charts": {
@@ -453,19 +453,19 @@
         "enableDeveloperMode": "Aktiver utviklermodus",
         "enableSystemNotifications": "Aktiver varsler",
         "exportState": "Eksporter status",
-        "localProofOfWork": "Local proof of work",
+        "localProofOfWork": "Lokal proof of work",
         "unlock": "Lås opp",
         "updateFirefly": "Oppdater Firefly",
         "restartNow": "Start på nytt nå",
         "saveBackup": "Lagre Stronghold sikkerhetskopi",
         "customizeAcount": "Tilpass konto",
         "viewAddressHistory": "Vis adressehistorikk",
-        "hideAccount": "Hide account",
-        "showAccount": "Unhide account",
-        "deleteAccount": "Delete account",
+        "hideAccount": "Skjul konto",
+        "showAccount": "Vis konto",
+        "deleteAccount": "Slett konto",
         "max": "Maks",
         "addNode": "Legg til node",
-        "updateNode": "Update node",
+        "updateNode": "Oppdater node",
         "removeNode": "Fjern node",
         "hide": "Skjul",
         "hideOthers": "Skjul andre",
@@ -491,8 +491,8 @@
         "finishSetup": "Fullfør oppsett",
         "readDocumentation": "Les dokumentasjonen",
         "visitFaq": "Besøk FAQ",
-        "showHiddenAccounts": "Show hidden accounts",
-        "confirm": "Confirm"
+        "showHiddenAccounts": "Vis skjulte kontoer",
+        "confirm": "Bekreft"
     },
     "general": {
         "password": "Passord",
@@ -538,7 +538,7 @@
         "appearance": "Utseende",
         "lightTheme": "Lyst tema",
         "darkTheme": "Mørkt tema",
-        "balance": "Balance",
+        "balance": "Saldo",
         "accountBalance": "Kontosaldo",
         "incoming": "Innkommende",
         "outgoing": "Utgående",
@@ -586,9 +586,10 @@
         "passwordUpdating": "Oppdater passord...",
         "passwordSuccess": "Oppdatering av passord var vellykket",
         "passwordFailed": "Oppdatering av passord mislyktes",
-        "exportingStronghold": "Eksporter Stronghold...",
-        "exportingStrongholdSuccess": "Eksportering av Stronghold var vellykket",
-        "exportingStrongholdFailed": "Eksportering av Stronghold feilet",
+        "syncingAccounts": "Syncing accounts...",
+        "exportingStronghold": "Exporting Stronghold...",
+        "exportingStrongholdSuccess": "Exported Stronghold successfully",
+        "exportingStrongholdFailed": "Exporting Stronghold failed",
         "pinCodeUpdating": "Oppdaterer PIN-kode...",
         "pinCodeSuccess": "Oppdatering av PIN-kode var vellykket",
         "pinCodeFailed": "Oppdatering av PIN-kode feilet",
@@ -599,7 +600,7 @@
         "passwordStrength3": "Gjennomsnittlig",
         "passwordStrength4": "Sterk",
         "creatingProfile": "Oppretter profil, vennligst vent...",
-        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
+        "accountRemoved": "Denne kontoen er skjult. Vis den for å utføre overføringer."
     },
     "dates": {
         "today": "I dag",
@@ -613,7 +614,7 @@
         "valueTx": "Mottar {{value}} til {{account}}",
         "confirmed": "Utgående {{value}} fra {{account}} er bekreftet",
         "confirmedInternal": "{{value}} fra {{senderAccount}} til {{receiverAccount}} er bekreftet",
-        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
+        "confirmedInternalNoAccounts": "Intern overføring på {{value}} er bekreftet",
         "failed": "Utgående {{value}} fra {{account}} mislyktes",
         "downloadingUpdate": "Laster ned oppdatering",
         "updateReady": "Oppdatering klar",
