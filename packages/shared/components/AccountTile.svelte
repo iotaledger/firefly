@@ -6,28 +6,29 @@
     export let balance = ''
     export let balanceEquiv = ''
     export let color = 'turquoise'
-    export let size = 's'
+    export let hidden = false
+    export let size = 'm' // m, l
 </script>
 
 <style type="text/scss">
     button {
         height: auto;
-        min-height: 90px;
-        max-height: 110px;
-        &.size-m,
+        min-height: 100px;
+        max-height: 100%;
         &.size-l {
             min-height: 140px;
-            max-height: 140px;
-            height: 70%;
         }
     }
 </style>
 
 <button
     on:click={onClick}
-    class="size-{size} group rounded-xl bg-gray-100 dark:bg-gray-900 hover:bg-{color}-500 font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'}">
+    class="size-{size} group rounded-xl bg-gray-100 dark:bg-gray-900 hover:bg-{color}-500 font-400 flex flex-col justify-between text-left p-6 {size === 'm' && 'py-4'} {hidden ? 'opacity-50' : ''}">
     <div class="w-full">
-        <Text bold smaller={size === 's'} overrideColor classes="mb-2 text-gray-800 dark:text-white group-hover:text-white overflow-hidden overflow-ellipsis">
+        <Text
+            bold
+            overrideColor
+            classes="mb-2 text-gray-800 dark:text-white group-hover:text-white overflow-hidden overflow-ellipsis">
             {name}
         </Text>
     </div>

@@ -64,6 +64,7 @@
         }
 
     }
+    $: updateAccountNetworkSettings(automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl, localPow)
 
     $: $appSettings.deepLinking = deepLinkingChecked
     $: {
@@ -318,9 +319,18 @@
         <section id="resyncAccounts" class="w-3/4">
             <Text type="h4" classes="mb-3">{locale('views.settings.resyncAccounts.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.resyncAccounts.description')}</Text>
-            <Button medium inlineStyle="min-width: 156px;" onClick={() => syncAccounts(true)} disabled={$isSyncing}>
-                {locale('actions.syncAll')}
-            </Button>
+            <div class="flex flex-row items-center">
+                <Button medium inlineStyle="min-width: 156px;" onClick={() => handleResyncAccountsClick()} disabled={$isSyncing}>
+                    {locale('actions.syncAll')}
+                </Button>
+                <Spinner busy={$isSyncing} message={$isSyncing ? locale('general.syncingAccounts') : ''} classes="ml-2" />
+            </div>
+        </section>
+        <HR classes="pb-5 mt-5 justify-center" />
+        <section id="hiddenAccounts" class="w-3/4">
+            <Text type="h4" classes="mb-3">{locale('views.settings.hiddenAccounts.title')}</Text>
+            <Text type="p" secondary classes="mb-5">{locale('views.settings.hiddenAccounts.description')}</Text>
+            <Checkbox label={locale('actions.showHiddenAccounts')} bind:checked={showHiddenAccounts} />
         </section>
     {/if}
     <HR classes="pb-5 mt-5 justify-center" />

@@ -5,7 +5,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile, removeProfile, removeProfileFolder } from 'shared/lib/profile'
-    import { api } from 'shared/lib/wallet'
+    import { api, asyncRemoveStorage } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
 
     export let locale
@@ -21,18 +21,35 @@
             async onSuccess() {
                 try {
                     const ap = get(activeProfile)
-                    if (!ap) {
-                        logout()
-                        return
+
+                    if (ap) {
+                        // First remove the storage for the profile
+                        await asyncRemoveStorage()
+
+                        // Remove the from from pin manager
+                        const isRemoved = await Electron.PincodeManager.remove(ap.id)
+                        if (!isRemoved) {
+                            console.error('Something went wrong removing pincode entry.')
+                        }
                     }
 
-                    const isRemoved = await Electron.PincodeManager.remove(ap.id)
-                    if (!isRemoved) {
-                        console.error('Something went wrong removing pincode entry.')
-                    }
+                    // We have to logout before the profile is removed
+                    // from the profile list otherwise the activeProfile which is
+                    // derived from profiles is undefined and the actor
+                    // is not destroyed
+                    logout()
 
-                    removeProfile(ap.id)
-                    await removeProfileFolder(ap.name)
+                    // Now that all the resources have been freed we try
+                    // and remove the profile folder, this will retry until locks
+                    // can be gained
+                    if (ap) {
+                        // And remove the profile from the active list of profiles
+                        removeProfile(ap.id)
+
+                        // Remove the profile folder this will wait until it can get
+                        // the lock on the resources
+                        await removeProfileFolder(ap.name)
+                    }
                 } catch (err) {
                     showAppNotification({
                         type: 'error',
@@ -40,8 +57,6 @@
                     })
                 } finally {
                     isBusy = false
-                    closePopup()
-                    logout()
                 }
             },
             onError(err) {

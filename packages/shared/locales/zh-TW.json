@@ -207,7 +207,11 @@
             },
             "resyncAccounts": {
                 "title": "重新同步帳戶",
-                "description": ""
+                "description": "Starts a background task to make sure your accounts are up to date."
+            },
+            "hiddenAccounts": {
+                "title": "Hidden accounts",
+                "description": "Selecting this options will show accounts that were previously hidden."
             },
             "deleteProfile": {
                 "title": "刪除設定檔",
@@ -223,11 +227,19 @@
             },
             "nodeSettings": {
                 "title": "節點設定",
-                "description": "Select Manual to choose from the node list or connect to your own node"
+                "description": "Select Manual to configure the node settings and connect to your own node"
             },
             "configureNodeList": {
                 "title": "選擇一個節點",
-                "description": ""
+                "description": "Manage the list of nodes your wallet connects to.",
+                "primaryNode": "Primary node",
+                "excludeNode": "Exclude node",
+                "includeNode": "Include node",
+                "viewDetails": "View details",
+                "setAsPrimary": "Set as primary",
+                "removeNode": "移除節點",
+                "includeOfficialNodeList": "Include official node list",
+                "noNodes": "There are no nodes, automatic selection will be used instead."
             },
             "proofOfWork": {
                 "title": "工作量證明",
@@ -313,7 +325,8 @@
     "popups": {
         "password": {
             "title": "必須輸入密碼",
-            "subtitle": "請輸入您的密碼以解鎖 Stronghold"
+            "subtitle": "Please enter your password to unlock Stronghold",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "您的QR碼"
@@ -331,24 +344,34 @@
             "backupDescription": "定期備份您的帳號以及交易紀錄是非常重要的。",
             "backupWarning": "如果您遺失了備份以及註記詞，您將無法存取您的資金。",
             "notBackedUp": "沒有備份",
-            "notBackedUpDescription": "您還沒有備份您的 Stronghold"
+            "notBackedUpDescription": "您還沒有備份您的 Stronghold",
+            "saving": "Saving..."
         },
         "deleteAccount": {
-            "title": "Remove {name}?",
-            "body": "You can add this account back later but you may lose your transaction history.",
+            "title": "Delete {name}?",
+            "body": "This account has no transaction history. It can safely be deleted.",
             "typePassword": "Type your wallet password to confirm.",
-            "deleteAccount": "Remove account",
-            "errorTitle": "Unable to remove {name}",
-            "errorBody1": "To remove an account it must have 0 balance.",
-            "errorBody2": "目前您在這個帳號仍擁有 {balance} 餘額。請將這些資金移至另一個帳號後再重試。",
-            "errorBody3": "You cannot remove this account, you must have at least one."
+            "hideAccount": "Delete account",
+            "errorTitle": "Unable to delete {name}",
+            "errorBody1": "You cannot delete this account, you must have at least one."
+        },
+        "hideAccount": {
+            "title": "Hide {name}?",
+            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Hide account",
+            "errorTitle": "Unable to hide {name}",
+            "errorBody1": "To hide an account it must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
+            "errorBody3": "You cannot hide this account, you must have at least one."
         },
         "addressHistory": {
-            "title": "{name} 帳號地址歷史紀錄",
+            "title": "{name} address history",
             "currentBalance": "目前餘額: {balance}"
         },
         "node": {
             "titleAdd": "增加節點",
+            "titleUpdate": "Update a node",
             "titleRemove": "刪除節點",
             "titleDetails": "節點詳細資訊",
             "nodeAddress": "節點地址",
@@ -363,7 +386,8 @@
         },
         "deleteProfile": {
             "title": "刪除設定檔",
-            "confirmation": "是否確定要刪除此檔？此操作無法撤銷。"
+            "confirmation": "是否確定要刪除此檔？此操作無法撤銷。",
+            "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
             "title": "應用診斷",
@@ -375,6 +399,10 @@
             "totalMem": "記憶體總量",
             "freeMem": "可用記憶體",
             "userPath": "使用者路徑"
+        },
+        "transaction": {
+            "title": "Confirm transaction",
+            "body": "You’re about to send {amount} to"
         }
     },
     "charts": {
@@ -425,16 +453,19 @@
         "enableDeveloperMode": "開啟開發者模式",
         "enableSystemNotifications": "啟用系統通知",
         "exportState": "匯出狀態",
-        "outsourceProofOfWork": "外派工作量証明",
+        "localProofOfWork": "Local proof of work",
         "unlock": "解鎖",
         "updateFirefly": "更新 Firefly",
         "restartNow": "立即重新啟動",
         "saveBackup": "Save Stronghold backup",
         "customizeAcount": "自定義帳號",
         "viewAddressHistory": "檢視地址歷史紀錄",
-        "deleteAccount": "Remove account",
+        "hideAccount": "Hide account",
+        "showAccount": "Unhide account",
+        "deleteAccount": "Delete account",
         "max": "最大",
         "addNode": "增加節點",
+        "updateNode": "Update node",
         "removeNode": "移除節點",
         "hide": "隱藏",
         "hideOthers": "隱藏其他",
@@ -459,7 +490,9 @@
         "skipBackup": "Skip file backup",
         "finishSetup": "Finish setup",
         "readDocumentation": "Read the documentation",
-        "visitFaq": "Visit FAQ"
+        "visitFaq": "Visit FAQ",
+        "showHiddenAccounts": "Show hidden accounts",
+        "confirm": "Confirm"
     },
     "general": {
         "password": "密碼",
@@ -505,7 +538,7 @@
         "appearance": "界面外觀",
         "lightTheme": "淺色主題",
         "darkTheme": "深色主題",
-        "totalBalance": "總額",
+        "balance": "Balance",
         "accountBalance": "帳號餘額",
         "incoming": "傳入",
         "outgoing": "傳出",
@@ -565,7 +598,8 @@
         "passwordStrength2": "Weak",
         "passwordStrength3": "Average",
         "passwordStrength4": "Strong",
-        "creatingProfile": "Creating profile, please wait..."
+        "creatingProfile": "Creating profile, please wait...",
+        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
     },
     "dates": {
         "today": "今天",
@@ -579,6 +613,7 @@
         "valueTx": "從 {{account}} 收到 {{value}}",
         "confirmed": "{{account}} 轉出的 {{value}} 已被確認",
         "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
+        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
         "failed": "{{account}} 轉出的 {{value}} 發生錯誤",
         "downloadingUpdate": "下載更新中",
         "updateReady": "準備更新",
@@ -586,7 +621,8 @@
         "restartInstall": "重新安裝",
         "calcMinutesRemaining": "正在計算剩餘時間...",
         "minutesRemaining": "分鐘, 複數, 一 剩下一分鐘 其他 剩下一分鐘",
-        "copiedToClipboard": "複製到剪貼簿"
+        "copiedToClipboard": "複製到剪貼簿",
+        "accountsSynchronized": "Account synchronization complete"
     },
     "error": {
         "profile": {
@@ -606,7 +642,7 @@
             "dates": "日期很容易被猜到",
             "common": "這是非常常見的密碼.",
             "similar": "這和常用密碼非常類似.",
-            "reasonWord": "只有一個單字很容易被猜到",
+            "word": "A single word is easy to guess.",
             "incorrect": "密碼不正確",
             "length": "你的密碼長度不能超過 {length, plural, one {1 character} other {# 字符}}."
         },
@@ -619,7 +655,11 @@
             "length": "你的帳號長度不能超過 {length, plural, one {1 character} other {# 字符}}.",
             "empty": "您必須使用最後存在的帳戶，在您創建新的帳戶之前。",
             "notEmpty": "您必須先轉移餘額，才能刪除該帳戶。",
-            "duplicate": "相同名稱的帳戶已存在。"
+            "duplicate": "相同名稱的帳戶已存在。",
+            "tilde": "A profile name can't start with the '~' character.",
+            "control": "A profile name can't contain a control character.",
+            "startDot": "A profile name can't start with the '.' character.",
+            "chars": "A profile name can't contain the following characters <>:\"/\\|?*"
         },
         "send": {
             "addressLength": "地址應為 {length, plural, one {1 character} other {# 字符}} 長度",
@@ -627,8 +667,10 @@
             "amountNoFloat": "如果單位是“ i”，則不能使用小數位。",
             "amountInvalidFormat": "該金額是無效數字。",
             "amountZero": "金額必須大於0。",
-            "wrongAddressFormat": "地址必須以 {prefix} 為字首。",
+            "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
+            "wrongAddressFormat": "The address is not correctly formatted.",
             "insufficientFunds": "This account has insufficient funds.",
+            "noToAccount": "You have not selected an account to send the funds to.",
             "sendingDust": "You cannot send less than 1 Mi.",
             "leavingDust": "You cannot leave less than 1 Mi on your address."
         },

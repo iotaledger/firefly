@@ -64,30 +64,30 @@
         },
         "backup": {
             "title": "Utwórz kopię zapasową portfela",
-            "body1": "W następnym oknie zobaczysz frazę odzyskiwania. Zapisz ją w swoim szablonie odzyskiwania.",
-            "body2": "Nie udostępniaj swojej frazy odzyskiwania nikomu. Może być ona użyta do uzyskania dostępu do Twoich środków z dowolnego miejsca.",
-            "body3": "Jeśli stracisz swoją frazę odzyskiwania, możesz stracić swoje środki."
+            "body1": "W następnym oknie zobaczysz wyrazy ratunkowe. Zapisz je w swoim szablonie odzyskiwania.",
+            "body2": "Nie udostępniaj swoich wyrazów ratunkowych nikomu. Mogą być one użyte do uzyskania dostępu do Twoich środków z dowolnego miejsca.",
+            "body3": "Jeśli stracisz swoje wyrazy ratunkowe, możesz stracić swoje środki."
         },
         "recoveryPhrase": {
-            "title": "Fraza odzyskiwania",
+            "title": "Wyrazy ratunkowe",
             "body1": "Słowa w Twoim szablonie odzyskiwania muszą być zapisane w dokładnie ukazanej kolejności.",
             "body2": "Zachowaj te wyrazy dla siebie i bezpiecznie je przechowuj.",
             "body3": "Kopia zapasowa na piśmie jest bardzo ważna. Komputery często zawodzą, a pliki mogą ulegać uszkodzeniu.",
-            "revealRecoveryPhrase": "Pokaż frazę odzyskiwania",
-            "hideRecoveryPhrase": "Ukryj frazę odzyskiwania"
+            "revealRecoveryPhrase": "Pokaż wyrazy ratunkowe",
+            "hideRecoveryPhrase": "Ukryj wyrazy ratunkowe"
         },
         "verifyRecoveryPhrase": {
-            "title": "Sprawdź frazę odzyskiwania",
-            "body": "Sprawdźmy, czy zapisałeś frazę poprawnie. Wybierz słowa w odpowiedniej kolejności.",
+            "title": "Zweryfikuj wyrazy ratunkowe",
+            "body": "Sprawdźmy, czy zapisałeś wyrazy poprawnie. Wybierz słowa w odpowiedniej kolejności.",
             "word": "Słowo",
-            "verified": "Fraza odzyskiwania zweryfikowana",
+            "verified": "Wyrazy ratunkowe zostały zweryfikowane",
             "verifiedBody": "Pamiętaj, aby zatrzymać ją dla siebie oraz w bezpiecznym miejscu."
         },
         "backupWallet": {
             "title": "Kopia zapasowa do pliku Stronghold",
             "body1": "Wprowadź hasło, aby utworzyć kopię zapasową portfela do pliku Stronghold. Twoje hasło jest używane do szyfrowania kopii zapasowej.",
             "body2": "Powody, dla których cyfrowe kopie zapasowe są ważne:",
-            "reason1": "Łatwe odzyskiwanie portfela bez wpisywania frazy odzyskiwania",
+            "reason1": "Łatwe odzyskiwanie portfela bez wpisywania wyrazów ratunkowych",
             "reason2": "Możliwość importu swojego portfela do innych urządzeń",
             "reason3": "Odzyskiwanie pełnej historii transakcji"
         },
@@ -101,15 +101,15 @@
         },
         "import": {
             "title": "Importuj portfel",
-            "body": "Jeśli masz frazę odzyskiwania lub kopię zapasową Stronghold, możesz zaimportować je tutaj."
+            "body": "Jeśli posiadasz wyrazy ratunkowe lub kopię zapasową Stronghold, możesz zaimportować je tutaj."
         },
         "importFromText": {
-            "title": "Przywróć portfel za pomocą frazy odzyskiwania lub klucza seed",
+            "title": "Przywróć portfel za pomocą wyrazów ratunkowych lub klucza seed",
             "body1": "Seed składa się z 81 znaków. Jest używany do odzyskiwania konta z portfela starego typu (Trinity).",
-            "body2": "Fraza odzyskiwania ma długość 24 słów (oddzielonych od siebie spacją). Jest ona używana do odzyskania istniejącego portfela Firefly.",
-            "body3": "Wprowadź swój seed lub frazę odzyskiwania",
+            "body2": "Wyrazy ratunkowe składają się z 24 słów (oddzielonych od siebie spacją). Są one używane do odzyskania istniejącego portfela Firefly.",
+            "body3": "Wprowadź swój seed lub wyrazy ratunkowe",
             "seedDetected": "Wykryto seed o długości 81 znaków",
-            "phraseDetected": "Wykryto 24 wyrazową frazę odzyskiwania"
+            "phraseDetected": "Wykryto wyrazy ratunkowe (24 słowa)"
         },
         "importFromFile": {
             "title": "Przywróć portfel przy użyciu pliku kopii zapasowej",
@@ -207,7 +207,11 @@
             },
             "resyncAccounts": {
                 "title": "Resynchronizacja konta",
-                "description": ""
+                "description": "Uruchamia zadanie w tle, aby upewnić się, że Twoje konta pozostaną aktualne."
+            },
+            "hiddenAccounts": {
+                "title": "Ukryte konta",
+                "description": "Wybranie tych opcji pokaże konta, które były wcześniej ukryte."
             },
             "deleteProfile": {
                 "title": "Usuwanie profilu",
@@ -227,7 +231,15 @@
             },
             "configureNodeList": {
                 "title": "Wybierz serwer",
-                "description": ""
+                "description": "Zarządzaj listą serwerów, z którymi połączony jest portfel.",
+                "primaryNode": "Serwer główny",
+                "excludeNode": "Wyklucz serwer",
+                "includeNode": "Uwzględnij serwer",
+                "viewDetails": "Pokaż szczegóły",
+                "setAsPrimary": "Ustaw jako główny",
+                "removeNode": "Usuń serwer",
+                "includeOfficialNodeList": "Uwzględnij oficjalną listę serwerów",
+                "noNodes": "Brak serwerów, zamiast tego zostanie użyty automatyczny wybór."
             },
             "proofOfWork": {
                 "title": "Proof of work",
@@ -313,7 +325,8 @@
     "popups": {
         "password": {
             "title": "Hasło wymagane",
-            "subtitle": "Podaj hasło swojego portfela, aby odblokować Stronghold"
+            "subtitle": "Wprowadź swoje hasło, aby odblokować Stronghold",
+            "backup": "Wprowadź swoje hasło, aby wyeksportować kopię zapasową"
         },
         "qr": {
             "title": "Twój kod QR"
@@ -327,21 +340,30 @@
         },
         "backup": {
             "title": "Ostatnia kopia zapasowa: {date}",
-            "lastBackup": "Ostatnia kopia {date}",
+            "lastBackup": "Ostatnia kopia została wykonana {date}",
             "backupDescription": "Ważne jest regularne tworzenie kopii zapasowych, aby upewnić się, że posiadasz kopię swoich kont i historii transakcji.",
-            "backupWarning": "Jeśli utracisz swoją kopię zapasową oraz frazę odzyskiwania, stracisz dostęp do swoich środków.",
+            "backupWarning": "Jeśli utracisz swoją kopię zapasową oraz wyrazy ratunkowe, stracisz dostęp do swoich środków.",
             "notBackedUp": "Nie wykonano kopii zapasowej",
-            "notBackedUpDescription": "Nie wykonałeś kopii zapasowej Stronghold"
+            "notBackedUpDescription": "Nie wykonałeś kopii zapasowej Stronghold",
+            "saving": "Zapisywanie..."
         },
         "deleteAccount": {
             "title": "Usunąć {name}?",
-            "body": "Możesz dodać to konto później, ale możesz utracić historię transakcji.",
+            "body": "To konto nie ma historii transakcji. Można je bezpiecznie usunąć.",
             "typePassword": "Wpisz hasło portfela, aby potwierdzić.",
-            "deleteAccount": "Usuń konto",
+            "hideAccount": "Usuń konto",
             "errorTitle": "Nie można usunąć {name}",
-            "errorBody1": "Aby usunąć konto, Twoje saldo musi wynosić 0.",
-            "errorBody2": "Obecnie {balance} pozostało na tym koncie. Przenieś te środki na inne konto i spróbuj ponownie.",
-            "errorBody3": "Nie można usunąć tego konta. Co najmniej jedno konto musi pozostać aktywne."
+            "errorBody1": "Nie możesz usunąć tego konta. Co najmniej jedno konto musi pozostać aktywne."
+        },
+        "hideAccount": {
+            "title": "Ukryć {name}?",
+            "body": "Konto będziesz mógł odnaleźć poprzez włączenie opcji \"Pokaż ukryte konta\" w ustawieniach zaawansowanych.",
+            "typePassword": "Wpisz hasło portfela, aby potwierdzić.",
+            "hideAccount": "Ukryj konto",
+            "errorTitle": "Nie można ukryć konta {name}",
+            "errorBody1": "Aby ukryć konto, jego saldo musi wynosić 0.",
+            "errorBody2": "Posiadasz obecnie {balance} na tym koncie. Przenieś te środki na inne konto i spróbuj ponownie.",
+            "errorBody3": "Nie możesz ukryć tego konta. Co najmniej jedno konto musi pozostać aktywne."
         },
         "addressHistory": {
             "title": "Historia adresów dla konta {name}",
@@ -349,6 +371,7 @@
         },
         "node": {
             "titleAdd": "Dodaj serwer",
+            "titleUpdate": "Aktualizuj serwer",
             "titleRemove": "Usuń serwer",
             "titleDetails": "Szczegóły serwera",
             "nodeAddress": "Adres serwera",
@@ -363,7 +386,8 @@
         },
         "deleteProfile": {
             "title": "Usuwanie profilu",
-            "confirmation": "Czy na pewno chcesz usunąć ten profil? Tej operacji nie można cofnąć."
+            "confirmation": "Czy na pewno chcesz usunąć ten profil? Tej operacji nie można cofnąć.",
+            "typePassword": "Wpisz swoje hasło, aby potwierdzić."
         },
         "diagnostics": {
             "title": "Diagnostyka",
@@ -375,6 +399,10 @@
             "totalMem": "Pamięć calkowita",
             "freeMem": "Wolna pamięć",
             "userPath": "Ścieżka użytkownika"
+        },
+        "transaction": {
+            "title": "Potwierdź transakcję",
+            "body": "Zamierzasz wysłać {amount} do"
         }
     },
     "charts": {
@@ -402,9 +430,9 @@
         "confirmPin": "Potwierdź kod PIN",
         "enterYourPin": "Wprowadź swój PIN",
         "saveBackupFile": "Zapisz plik kopii zapasowej",
-        "iveWrittenRecoveryPhrase": "Zapisałem moją frazę odzyskiwania",
-        "verifyRecoveryPhrase": "Sprawdź frazę odzyskiwania",
-        "revealRecoveryPhrase": "Pokaż frazę odzyskiwania",
+        "iveWrittenRecoveryPhrase": "Zapisałem swoje wyrazy ratunkowe",
+        "verifyRecoveryPhrase": "Sprawdź wyrazy ratunkowe",
+        "revealRecoveryPhrase": "Pokaż wyrazy ratunkowe",
         "importSeedvault": "Importuj plik SeedVault",
         "checkAgain": "Nie, sprawdź ponownie",
         "importFromFile": "Importuj z pliku",
@@ -425,16 +453,19 @@
         "enableDeveloperMode": "Włącz tryb deweloperski",
         "enableSystemNotifications": "Włącz powiadomienia",
         "exportState": "Eksportuj stan",
-        "outsourceProofOfWork": "Wykonuj proof of work zdalnie",
+        "localProofOfWork": "Lokalny proof of work",
         "unlock": "Odblokuj",
         "updateFirefly": "Zaktualizuj Firefly",
         "restartNow": "Uruchom ponownie teraz",
         "saveBackup": "Zapisz kopię zapasową Stronghold",
         "customizeAcount": "Dostosuj konto",
         "viewAddressHistory": "Pokaż historię adresów",
+        "hideAccount": "Ukryj konto",
+        "showAccount": "Odkryj konto",
         "deleteAccount": "Usuń konto",
         "max": "Maks.",
         "addNode": "Dodaj serwer",
+        "updateNode": "Aktualizuj serwer",
         "removeNode": "Usuń serwer",
         "hide": "Ukryj",
         "hideOthers": "Ukryj pozostałe",
@@ -459,7 +490,9 @@
         "skipBackup": "Pomiń kopię zapasową do pliku",
         "finishSetup": "Zakończ konfigurację",
         "readDocumentation": "Przeczytaj dokumentację",
-        "visitFaq": "Odwiedź FAQ"
+        "visitFaq": "Odwiedź FAQ",
+        "showHiddenAccounts": "Pokaż ukryte konta",
+        "confirm": "Potwierdź"
     },
     "general": {
         "password": "Hasło",
@@ -468,7 +501,7 @@
         "newPassword": "Nowe hasło",
         "confirmNewPassword": "Potwierdź nowe hasło",
         "yourSeed": "Twój seed",
-        "recoveryPhrase": "Fraza odzyskiwania",
+        "recoveryPhrase": "Wyrazy ratunkowe",
         "recentActivity": "Ostatnia aktywność",
         "sent": "Wysłano",
         "received": "Odebrano",
@@ -496,7 +529,7 @@
         "copyAddress": "Kopiuj adres",
         "haveTextBackup": "Mam zapasową kopię tekstową",
         "haveFileBackup": "Mam zapasową kopię w pliku",
-        "enterSeedOrPhrase": "Wprowadź frazę odzyskiwania lub seed",
+        "enterSeedOrPhrase": "Wprowadź wyrazy ratunkowe lub seed",
         "uploadSeedvaultOrStronghold": "Importuj plik Stronghold lub SeedVault",
         "import": "Importuj",
         "seedvault": "SeedVault",
@@ -505,7 +538,7 @@
         "appearance": "Wygląd",
         "lightTheme": "Tryb jasny",
         "darkTheme": "Tryb ciemny",
-        "totalBalance": "Wszystkie środki",
+        "balance": "Saldo",
         "accountBalance": "Saldo konta",
         "incoming": "Odebrano",
         "outgoing": "Wysłano",
@@ -565,10 +598,11 @@
         "passwordStrength2": "Słaba",
         "passwordStrength3": "Wystarczająca",
         "passwordStrength4": "Silna",
-        "creatingProfile": "Tworzenie profilu, proszę czekać..."
+        "creatingProfile": "Tworzenie profilu, proszę czekać...",
+        "accountRemoved": "To konto jest ukryte. Odkryj je, aby móc wykonywać transfery."
     },
     "dates": {
-        "today": "Dziś",
+        "today": "Dzisiaj",
         "yesterday": "Wczoraj",
         "daysAgo": "{time, plural, one {# dzień} few {# dni} many {# dni} other {# dni}} temu",
         "weeksAgo": "{time, plural, one {# tydzień} few {# tygodnie} many {# tygodni} other {# tygodni}} temu",
@@ -579,6 +613,7 @@
         "valueTx": "Odbieranie {{value}} na konto {{account}}",
         "confirmed": "Transakcja wychodząca {{value}} z konta {{account}} została potwierdzona",
         "confirmedInternal": "Transfer {{value}} z konta {{senderAccount}} na konto {{receiverAccount}} został potwierdzony",
+        "confirmedInternalNoAccounts": "{{value}} wewnętrzny transfer został potwierdzony",
         "failed": "Wysyłka {{value}} z konta {{account}} nie powiodła się",
         "downloadingUpdate": "Pobieranie aktualizacji",
         "updateReady": "Aktualizacja jest gotowa",
@@ -586,7 +621,8 @@
         "restartInstall": "Uruchom ponownie, aby zainstalować",
         "calcMinutesRemaining": "Obliczanie pozostałych minut...",
         "minutesRemaining": "{minutes, plural, one {pozostała 1 minuta} few {pozostały # minuty} many {pozostało # minut} other {pozostało # minut}}",
-        "copiedToClipboard": "Skopiowano do schowka"
+        "copiedToClipboard": "Skopiowano do schowka",
+        "accountsSynchronized": "Synchronizacja konta zakończona"
     },
     "error": {
         "profile": {
@@ -606,7 +642,7 @@
             "dates": "Daty są łatwe do odgadnięcia.",
             "common": "To jest bardzo popularne hasło.",
             "similar": "To jest podobne do powszechnie używanego hasła.",
-            "reasonWord": "Jedno słowo jest łatwe do odgadnięcia.",
+            "word": "Jedno słowo jest łatwe do odgadnięcia.",
             "incorrect": "Twoje hasło jest niepoprawne.",
             "length": "Twoje hasło nie może być dłuższe niż {length, plural, one {1 znak} few {# znaki} many {# znaków} other {# znaków}}."
         },
@@ -619,7 +655,11 @@
             "length": "Nazwa konta nie może być dłuższa niż {length, plural, one {1 znak} few {# znaki} many {# znaków} other {# znaków}}.",
             "empty": "Musisz użyć swojego ostatniego konta przed utworzeniem nowego.",
             "notEmpty": "Musisz przenieść swoje środki przed usunięciem tego konta.",
-            "duplicate": "Konto o tej nazwie już istnieje."
+            "duplicate": "Konto o tej nazwie już istnieje.",
+            "tilde": "Nazwa profilu nie może zaczynać się od znaku '~'.",
+            "control": "Nazwa profilu nie może zawierać znaku kontrolnego.",
+            "startDot": "Nazwa profilu nie może zaczynać się od kropki.",
+            "chars": "Nazwa profilu nie może zawierać następujących znaków: <>:\"/\\|?*"
         },
         "send": {
             "addressLength": "Adresy powinny składać się z {length, plural, one {1 znaku} few {# znaków} many {# znaków} other {# znaków}}.",
@@ -627,8 +667,10 @@
             "amountNoFloat": "Jeśli jednostki to \"i\", nie możesz użyć miejsc po przecinku.",
             "amountInvalidFormat": "Wartość wydaje się być niepoprawna.",
             "amountZero": "Wartość musi być większa niż 0.",
-            "wrongAddressFormat": "Adresy zaczynają się od prefiksu {prefix}.",
+            "wrongAddressPrefix": "Adresy zaczynają się od prefiksu {prefix}.",
+            "wrongAddressFormat": "Adres nie jest poprawnie sformatowany.",
             "insufficientFunds": "To konto nie ma wystarczających środków.",
+            "noToAccount": "Nie wybrano konta docelowego do wysyłki środków.",
             "sendingDust": "Nie możesz wysłać mniej niż 1 Mi.",
             "leavingDust": "Na Twoim adresie nie może pozostać mniej niż 1 Mi."
         },
@@ -648,8 +690,8 @@
             "mnemonic": "Mnemonik jest nieprawidłowy.",
             "seedTooShort": "Seed powinien składać się z 81 znaków, ten ma {length, plural, one {1 znak} few {# znaki} many {# znaków} other {to #}}",
             "seedCharacters": "Seed może składać się tylko z liter A-Z oraz cyfr 9",
-            "phraseWordCount": "We frazie odzyskiwania powinny znajdowac się 24 słowa. Aktualnie jest {length, plural, one {ono 1} few {ich #} many {ich #} other {ich #}}.",
-            "phraseUnrecognizedWord": "Nierozpoznane słowo \"{word}\" w Twojej frazie odzyskiwania"
+            "phraseWordCount": "Wyrazy ratunkowe składają się z 24 słów. Aktualnie jest {length, plural, one {ono 1} few {ich #} many {ich #} other {ich #}}.",
+            "phraseUnrecognizedWord": "Nierozpoznane słowo \"{word}\" w Twoich wyrazach ratunkowych"
         }
     }
 }

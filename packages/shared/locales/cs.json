@@ -2,7 +2,7 @@
     "views": {
         "onboarding1": {
             "title": "Pošli, přijmi a spravuj IOTA tokeny",
-            "body": "Firefly is the official wallet of IOTA."
+            "body": "Firefly je oficiální peněženka IOTA."
         },
         "legal": {
             "title": "Ochrana osobních údajů a smluvní podmínky",
@@ -33,19 +33,19 @@
         },
         "setup": {
             "title": "Nastavení peněženky",
-            "body1": "You can create multiple user profiles to keep your tokens separate and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "body1": "Můžete vytvořit více uživatelských profilů pro oddělení tokenů a zlepšení soukromí.",
+            "body2": "Zatím začněme s názvem Vašeho prvního profilu. Další profily můžete přidat později.",
             "profileName": "Název profilu"
         },
         "secure": {
             "title": "Zabezpečte Vaši peněženku",
-            "body1": "Save and print the Recovery Kit PDF template.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
+            "body1": "Uložit a vytisknout šablonu PDF pro obnovení.",
+            "body2": "Pokud vyplníte obnovovací sadu a uložíte ji bezpečně, budete vždy moci obnovit Vaši peněženku."
         },
         "password": {
-            "title": "Vytvoření hesla",
-            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
-            "body2": "It is recommended that you write down your password in your Recovery Kit."
+            "title": "Vytvořte heslo",
+            "body1": "Vaše heslo je příliš slabé. Použijte kombinaci slov a vyhněte se běžným frázím, jménům nebo datům.",
+            "body2": "Doporučuje se zapsat své heslo do své sady pro obnovení."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -65,7 +65,7 @@
         "backup": {
             "title": "Zálohovat peněženku",
             "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+            "body2": "Nesdílejte svá obnovovací fráze s nikým. Lze ji použít pro přístup k vašim tokenům odkudkoliv.",
             "body3": "Pokud ztratíte vaši obnovovací frázi, můžete přijít o tokeny."
         },
         "recoveryPhrase": {
@@ -86,8 +86,8 @@
         "backupWallet": {
             "title": "Zálohujte jako Stronghold soubor",
             "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
-            "body2": "Reasons why digital backups are important:",
-            "reason1": "Easily recover your wallet without typing in your recovery phrase",
+            "body2": "Důvody, proč jsou digitální zálohy důležité:",
+            "reason1": "Snadno obnovte Vaši peněženku bez psaní Vašich klíčových slov",
             "reason2": "Importovat peněženku do jiných zařízení",
             "reason3": "Obnovit celou historii transakcí"
         },
@@ -207,7 +207,11 @@
             },
             "resyncAccounts": {
                 "title": "Opakovaná synchronizace účtů",
-                "description": ""
+                "description": "Starts a background task to make sure your accounts are up to date."
+            },
+            "hiddenAccounts": {
+                "title": "Hidden accounts",
+                "description": "Selecting this options will show accounts that were previously hidden."
             },
             "deleteProfile": {
                 "title": "Smazat profil",
@@ -223,11 +227,19 @@
             },
             "nodeSettings": {
                 "title": "Nastavení node",
-                "description": "Select Manual to choose from the node list or connect to your own node"
+                "description": "Select Manual to configure the node settings and connect to your own node"
             },
             "configureNodeList": {
                 "title": "Select a node",
-                "description": ""
+                "description": "Manage the list of nodes your wallet connects to.",
+                "primaryNode": "Primary node",
+                "excludeNode": "Exclude node",
+                "includeNode": "Include node",
+                "viewDetails": "View details",
+                "setAsPrimary": "Set as primary",
+                "removeNode": "Odstranit uzel",
+                "includeOfficialNodeList": "Include official node list",
+                "noNodes": "There are no nodes, automatic selection will be used instead."
             },
             "proofOfWork": {
                 "title": "Proof of Work",
@@ -313,7 +325,8 @@
     "popups": {
         "password": {
             "title": "Heslo požadováno",
-            "subtitle": "Zadejte heslo své peněženky pro odemčení Stronghold"
+            "subtitle": "Zadejte heslo své peněženky pro odemčení Stronghold",
+            "backup": "Zadejte heslo pro export zálohy"
         },
         "qr": {
             "title": "Váš QR kód"
@@ -331,24 +344,34 @@
             "backupDescription": "Pravidelná záloha je důležitá pro zachování kopie účtů a historie transakcí.",
             "backupWarning": "Ztratíte-li frázi pro zálohování a obnovení, ztratíte přístup ke svým prostředkům.",
             "notBackedUp": "Zatím nezálohováno",
-            "notBackedUpDescription": "Nezazálohovali jste váš Stronghold"
+            "notBackedUpDescription": "Nezazálohovali jste váš Stronghold",
+            "saving": "Saving..."
         },
         "deleteAccount": {
-            "title": "Remove {name}?",
-            "body": "You can add this account back later but you may lose your transaction history.",
+            "title": "Delete {name}?",
+            "body": "This account has no transaction history. It can safely be deleted.",
             "typePassword": "Type your wallet password to confirm.",
-            "deleteAccount": "Remove account",
-            "errorTitle": "Unable to remove {name}",
-            "errorBody1": "To remove an account it must have 0 balance.",
-            "errorBody2": "V současné době zbývá {balance} na tomto účtu. Přesuňte tyto prostředky na jiný účet a zkuste to znovu.",
-            "errorBody3": "You cannot remove this account, you must have at least one."
+            "hideAccount": "Delete account",
+            "errorTitle": "Unable to delete {name}",
+            "errorBody1": "You cannot delete this account, you must have at least one."
+        },
+        "hideAccount": {
+            "title": "Hide {name}?",
+            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Hide account",
+            "errorTitle": "Unable to hide {name}",
+            "errorBody1": "To hide an account it must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
+            "errorBody3": "You cannot hide this account, you must have at least one."
         },
         "addressHistory": {
-            "title": "{name} historie adresy účtu",
+            "title": "{name} historie adres",
             "currentBalance": "Aktuální zůstatek: {balance}"
         },
         "node": {
             "titleAdd": "Přidat uzel",
+            "titleUpdate": "Update a node",
             "titleRemove": "Odstranit uzel",
             "titleDetails": "Detaily uzlu",
             "nodeAddress": "Adresa uzlu",
@@ -363,7 +386,8 @@
         },
         "deleteProfile": {
             "title": "Smazat profil",
-            "confirmation": "Opravdu chcete smazat tento profil? Tuto operaci nelze vrátit zpět."
+            "confirmation": "Opravdu chcete smazat tento profil? Tuto operaci nelze vrátit zpět.",
+            "typePassword": "Zadejte své heslo pro potvrzení."
         },
         "diagnostics": {
             "title": "Diagnostika",
@@ -375,6 +399,10 @@
             "totalMem": "Celková paměť",
             "freeMem": "Volná paměť",
             "userPath": "Cesta uživatele"
+        },
+        "transaction": {
+            "title": "Confirm transaction",
+            "body": "You’re about to send {amount} to"
         }
     },
     "charts": {
@@ -425,16 +453,19 @@
         "enableDeveloperMode": "Povolit vývojářský režim",
         "enableSystemNotifications": "Povolit upozornění",
         "exportState": "Exportovat stav",
-        "outsourceProofOfWork": "Outsourcovaný Proof of Work",
+        "localProofOfWork": "Local proof of work",
         "unlock": "Odemknout",
         "updateFirefly": "Aktualizovat Firefly",
         "restartNow": "Restartovat nyní",
         "saveBackup": "Save Stronghold backup",
         "customizeAcount": "Přizpůsobit účet",
         "viewAddressHistory": "Zobrazit historii adresy",
-        "deleteAccount": "Remove account",
+        "hideAccount": "Hide account",
+        "showAccount": "Unhide account",
+        "deleteAccount": "Delete account",
         "max": "Max",
         "addNode": "Přidat uzel",
+        "updateNode": "Update node",
         "removeNode": "Odstranit uzel",
         "hide": "Skrýt",
         "hideOthers": "Skrýt ostatní",
@@ -459,7 +490,9 @@
         "skipBackup": "Skip file backup",
         "finishSetup": "Finish setup",
         "readDocumentation": "Read the documentation",
-        "visitFaq": "Visit FAQ"
+        "visitFaq": "Visit FAQ",
+        "showHiddenAccounts": "Show hidden accounts",
+        "confirm": "Confirm"
     },
     "general": {
         "password": "Heslo",
@@ -505,7 +538,7 @@
         "appearance": "Vzhled",
         "lightTheme": "Světlé téma",
         "darkTheme": "Tmavé téma",
-        "totalBalance": "Celkový zůstatek",
+        "balance": "Balance",
         "accountBalance": "Zůstatek účtu",
         "incoming": "Příchozí",
         "outgoing": "Odchozí",
@@ -565,7 +598,8 @@
         "passwordStrength2": "Weak",
         "passwordStrength3": "Average",
         "passwordStrength4": "Strong",
-        "creatingProfile": "Creating profile, please wait..."
+        "creatingProfile": "Creating profile, please wait...",
+        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
     },
     "dates": {
         "today": "Dnes",
@@ -579,6 +613,7 @@
         "valueTx": "Přijímání {{value}} na {{account}}",
         "confirmed": "Odchozí {{value}} od {{account}} byl potvrzen",
         "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
+        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
         "failed": "Odchozí {{value}} od {{account}} selhal",
         "downloadingUpdate": "Stahování aktualizace",
         "updateReady": "Aktualizace připravena",
@@ -586,7 +621,8 @@
         "restartInstall": "Restartovat pro instalaci",
         "calcMinutesRemaining": "Výpočet zbývajících minut...",
         "minutesRemaining": "{minutes, plural, one {1 zbývající minuta} other {# zbývajících minut}}",
-        "copiedToClipboard": "Zkopírováno do schránky"
+        "copiedToClipboard": "Zkopírováno do schránky",
+        "accountsSynchronized": "Synchronizace účtu dokončena"
     },
     "error": {
         "profile": {
@@ -606,7 +642,7 @@
             "dates": "Datum lze snadno uhodnout.",
             "common": "Toto je velmi běžné heslo.",
             "similar": "Toto je podobné běžnému heslu.",
-            "reasonWord": "Jedno slovo se dá lehce uhodnout.",
+            "word": "Jedno slovo se dá lehce uhodnout.",
             "incorrect": "Heslo není správné.",
             "length": "Heslo nemůže být delší než {length, plural, one {1 znak} few {# znaky} other {# znaků}}."
         },
@@ -619,7 +655,11 @@
             "length": "Profilové jméno nemůže být delší než {length, plural, one {1 znak} other {# znaky}}.",
             "empty": "Před vytvořením nového účtu musíte použít poslední účet.",
             "notEmpty": "Před smazáním tohoto účtu musíte převést svůj zůstatek.",
-            "duplicate": "Účet s tímto názvem již existuje."
+            "duplicate": "Účet s tímto názvem již existuje.",
+            "tilde": "Název profilu nemůže začínat znakem '~'.",
+            "control": "Název profilu nemůže obsahovat kontrolní znak.",
+            "startDot": "Název profilu nemůže začínat znakem „.“.",
+            "chars": "Název profilu nemůže obsahovat následující znaky <>:\"/\\|?*"
         },
         "send": {
             "addressLength": "Adresy by měly mít {length, plural, one {1 znak} other {# znaky}}.",
@@ -627,8 +667,10 @@
             "amountNoFloat": "U jednotky `i` nelze použít desetinná místa.",
             "amountInvalidFormat": "Zdá se, že částka je neplatné číslo.",
             "amountZero": "Částka musí být větší než 0.",
-            "wrongAddressFormat": "Adresy začínají předponou {prefix}.",
+            "wrongAddressPrefix": "Adresy začínají předponou {prefix}.",
+            "wrongAddressFormat": "Adresa nemá správný formát.",
             "insufficientFunds": "This account has insufficient funds.",
+            "noToAccount": "Nevybrali jste účet, na který chcete poslat finanční prostředky.",
             "sendingDust": "You cannot send less than 1 Mi.",
             "leavingDust": "You cannot leave less than 1 Mi on your address."
         },

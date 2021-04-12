@@ -14,7 +14,7 @@ export type ExtendedNode = {
     networkId: string
 }
 
-/**c
+/**
  * Default timeout for a request made to an endpoint
  */
 const DEFAULT_NODE_ENDPOINT_TIMEOUT = 5000

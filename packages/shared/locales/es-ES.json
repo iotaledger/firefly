@@ -101,12 +101,12 @@
         },
         "import": {
             "title": "Importar una cartera",
-            "body": "Si tiene una frase de recuperación o una copia de seguridad de Strongholt, puede importarla aquí."
+            "body": "Si tiene una frase de recuperación o una copia de seguridad de Stronghold, puede importarla aquí."
         },
         "importFromText": {
             "title": "Restaura tu cartera con una frase de recuperación o semilla",
             "body1": "Una semilla consta de 81 caracteres. Esta se utiliza para recuperar tus fondos de una cartera Trinity antigua.",
-            "body2": "Una frase de recuperación tiene 24 palabras de longitud (con espacios). Esta se utiliza para recuperar una cartera Firefly existente.",
+            "body2": "Una frase de recuperación tiene 24 palabras (con espacios). Esta se utiliza para recuperar una cartera Firefly existente.",
             "body3": "Introduce tu semilla o tu frase de recuperación",
             "seedDetected": "Semilla de 81 caracteres detectada",
             "phraseDetected": "Frase de recuperación de 24 palabras detectada"
@@ -116,7 +116,7 @@
             "body": "Importa un archivo de copia de seguridad para restaurar tu cartera. Las copias de seguridad pueden ser de tipo Stronghold (.stronghold) o Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
-            "title": "Restaura tu cartera desde SeedVault o Stronghold",
+            "title": "Restaura tu cartera desde un SeedVault o Stronghold",
             "body1": "Por favor, introduce tu contraseña de respaldo.",
             "body2": "Esta es la contraseña que configuraste cuando creaste por primera vez tu copia de seguridad."
         },
@@ -141,7 +141,7 @@
         },
         "balance": {
             "title": "Tu saldo",
-            "body": "¿Tu saldo es correcto?"
+            "body": "¿Su saldo es correcto?"
         },
         "settings": {
             "settings": "Ajustes",
@@ -151,7 +151,7 @@
             },
             "security": {
                 "title": "Seguridad",
-                "description": "Cambia tu contraseña y ajusta la configuración de seguridad"
+                "description": "Cambie su contraseña y ajuste la configuración de seguridad"
             },
             "advancedSettings": {
                 "title": "Ajustes Avanzados",
@@ -163,14 +163,14 @@
             },
             "profile": {
                 "title": "Perfil",
-                "description": "Cambia el nombre de tu perfil o establece un avatar"
+                "description": "Cambie el nombre de su perfil o establezca un avatar"
             },
             "sync": {
                 "title": "Sincronizar cuentas",
                 "description": ""
             },
             "theme": {
-                "title": "Tema visual",
+                "title": "Tema",
                 "description": ""
             },
             "language": {
@@ -179,7 +179,7 @@
             },
             "currency": {
                 "title": "Divisa",
-                "description": "Ajusta las opciones de conversión de balances y actualiza la configuración de gráficos"
+                "description": "Ajuste las opciones de conversión de balances y actualice la configuración de gráficos"
             },
             "notifications": {
                 "title": "Notificaciones",
@@ -187,7 +187,7 @@
             },
             "exportStronghold": {
                 "title": "Exportar copia de seguridad",
-                "description": "Exporta a un archivo Stronghold - una copia de seguridad cifrada completa de tu cartera y el historial de transacciones más reciente."
+                "description": "Exporte a un archivo Stronghold - una copia de seguridad cifrada completa de su cartera y el historial de transacciones más reciente."
             },
             "appLock": {
                 "title": "Bloqueo automático",
@@ -195,11 +195,11 @@
             },
             "changePassword": {
                 "title": "Cambiar contraseña",
-                "description": "Tu contraseña se utiliza para proteger tu cartera. Debes utilizar una contraseña segura para proteger sus fondos."
+                "description": "Su contraseña se utiliza para proteger su billetera. Debe utilizar una contraseña segura para proteger sus fondos."
             },
             "changePincode": {
                 "title": "Cambiar código PIN",
-                "description": "Tu PIN mantiene tu saldo y tus transacciones en privado",
+                "description": "Tu PIN mantiene tu saldo y transacciones en privado",
                 "currentPincode": "PIN actual",
                 "newPincode": "Nuevo PIN",
                 "confirmNewPincode": "Confirmar nuevo PIN",
@@ -207,7 +207,11 @@
             },
             "resyncAccounts": {
                 "title": "Resincronizar cuentas",
-                "description": ""
+                "description": "Starts a background task to make sure your accounts are up to date."
+            },
+            "hiddenAccounts": {
+                "title": "Hidden accounts",
+                "description": "Selecting this options will show accounts that were previously hidden."
             },
             "deleteProfile": {
                 "title": "Eliminar perfil",
@@ -223,11 +227,19 @@
             },
             "nodeSettings": {
                 "title": "Ajustes del nodo",
-                "description": "Selecciona Manual para elegir en la lista de nodos o conectar a tu propio nodo"
+                "description": "Select Manual to configure the node settings and connect to your own node"
             },
             "configureNodeList": {
                 "title": "Selecciona un nodo",
-                "description": ""
+                "description": "Manage the list of nodes your wallet connects to.",
+                "primaryNode": "Primary node",
+                "excludeNode": "Exclude node",
+                "includeNode": "Include node",
+                "viewDetails": "View details",
+                "setAsPrimary": "Set as primary",
+                "removeNode": "Eliminar nodo",
+                "includeOfficialNodeList": "Include official node list",
+                "noNodes": "There are no nodes, automatic selection will be used instead."
             },
             "proofOfWork": {
                 "title": "Prueba de trabajo",
@@ -243,7 +255,7 @@
             },
             "stateExport": {
                 "title": "Exportar estado",
-                "description": "Exporta tu historial de transacciones a un archivo .csv"
+                "description": "Exportar su historial de transacciones a un archivo .csv"
             },
             "troubleshoot": {
                 "title": "Resolución de problemas",
@@ -267,8 +279,8 @@
                 "description": ""
             },
             "reportAnIssue": {
-                "title": "Informar de un problema",
-                "description": "Informa de un error a los desarrolladores. Comprueba que no haya sido reportado previamente."
+                "title": "Reportar un problema",
+                "description": "Reportar un error a los desarrolladores. Comprueba que no ha sido reportado antes."
             }
         },
         "login": {
@@ -313,7 +325,8 @@
     "popups": {
         "password": {
             "title": "Se requiere contraseña",
-            "subtitle": "Por favor, proporciona la contraseña de tu cartera para desbloquear Stronghold"
+            "subtitle": "Please enter your password to unlock Stronghold",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "Tu código QR"
@@ -331,24 +344,34 @@
             "backupDescription": "Es importante hacer una copia de seguridad con regularidad para asegurarte de que tienes una copia de tus cuentas y del historial de transacciones.",
             "backupWarning": "Si pierdes tu copia de seguridad y tu frase de recuperación perderás el acceso a tus fondos.",
             "notBackedUp": "No está respaldado",
-            "notBackedUpDescription": "No has hecho una copia de seguridad de Stronghold"
+            "notBackedUpDescription": "No has hecho una copia de seguridad de Stronghold",
+            "saving": "Saving..."
         },
         "deleteAccount": {
-            "title": "¿Eliminar a {name}?",
-            "body": "Puedes agregar esta cuenta más tarde, pero podrías perder el historial de transacciones.",
-            "typePassword": "Escribe la contraseña de tu cartera para confirmar.",
-            "deleteAccount": "Eliminar cuenta",
-            "errorTitle": "No se puede eliminar {name}",
-            "errorBody1": "Para eliminar una cuenta ésta debe tener saldo 0.",
-            "errorBody2": "Actualmente tienes {balance} restantes en esta cuenta. Por favor, mueve estos fondos a una cuenta diferente e inténtalo de nuevo.",
-            "errorBody3": "No puedes eliminar esta cuenta, debes tener al menos una."
+            "title": "Delete {name}?",
+            "body": "This account has no transaction history. It can safely be deleted.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Delete account",
+            "errorTitle": "Unable to delete {name}",
+            "errorBody1": "You cannot delete this account, you must have at least one."
+        },
+        "hideAccount": {
+            "title": "Hide {name}?",
+            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Hide account",
+            "errorTitle": "Unable to hide {name}",
+            "errorBody1": "To hide an account it must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
+            "errorBody3": "You cannot hide this account, you must have at least one."
         },
         "addressHistory": {
-            "title": "{name} historial de direcciones de la cuenta",
+            "title": "{name} address history",
             "currentBalance": "Saldo actual: {balance}"
         },
         "node": {
             "titleAdd": "Añadir un nodo",
+            "titleUpdate": "Update a node",
             "titleRemove": "Eliminar un nodo",
             "titleDetails": "Detalles del nodo",
             "nodeAddress": "Dirección del nodo",
@@ -363,7 +386,8 @@
         },
         "deleteProfile": {
             "title": "Eliminar perfil",
-            "confirmation": "¿Está seguro que desea eliminar este perfil? Esta operación no se puede deshacer."
+            "confirmation": "¿Está seguro que desea eliminar este perfil? Esta operación no se puede deshacer.",
+            "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
             "title": "Diagnóstico",
@@ -375,6 +399,10 @@
             "totalMem": "Memoria total",
             "freeMem": "Memoria libre",
             "userPath": "Ruta de usuario"
+        },
+        "transaction": {
+            "title": "Confirm transaction",
+            "body": "You’re about to send {amount} to"
         }
     },
     "charts": {
@@ -425,16 +453,19 @@
         "enableDeveloperMode": "Habilitar modo de desarrollador",
         "enableSystemNotifications": "Habilitar notificaciones del sistema",
         "exportState": "Exportar estado",
-        "outsourceProofOfWork": "Externalizar prueba de trabajo",
+        "localProofOfWork": "Local proof of work",
         "unlock": "Desbloquear",
         "updateFirefly": "Actualizar Firefly",
         "restartNow": "Reiniciar ahora",
         "saveBackup": "Guardar copia de seguridad de Stronghold",
         "customizeAcount": "Personalizar cuenta",
         "viewAddressHistory": "Ver historial de direcciones",
-        "deleteAccount": "Eliminar cuenta",
+        "hideAccount": "Hide account",
+        "showAccount": "Unhide account",
+        "deleteAccount": "Delete account",
         "max": "Máx",
         "addNode": "Añadir nodo",
+        "updateNode": "Update node",
         "removeNode": "Eliminar nodo",
         "hide": "Ocultar",
         "hideOthers": "Ocultar otros",
@@ -459,7 +490,9 @@
         "skipBackup": "Omitir copia de seguridad",
         "finishSetup": "Finalizar la configuración",
         "readDocumentation": "Leer la documentación",
-        "visitFaq": "Ver las preguntas frecuentes"
+        "visitFaq": "Ver las preguntas frecuentes",
+        "showHiddenAccounts": "Show hidden accounts",
+        "confirm": "Confirm"
     },
     "general": {
         "password": "Contraseña",
@@ -505,7 +538,7 @@
         "appearance": "Apariencia",
         "lightTheme": "Tema claro",
         "darkTheme": "Tema oscuro",
-        "totalBalance": "Saldo total",
+        "balance": "Balance",
         "accountBalance": "Saldo de la cuenta",
         "incoming": "Entrante",
         "outgoing": "Saliente",
@@ -565,7 +598,8 @@
         "passwordStrength2": "Débil",
         "passwordStrength3": "Promedio",
         "passwordStrength4": "Fuerte",
-        "creatingProfile": "Creando perfil, por favor espera..."
+        "creatingProfile": "Creando perfil, por favor espera...",
+        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
     },
     "dates": {
         "today": "Hoy",
@@ -579,6 +613,7 @@
         "valueTx": "Recibiendo {{value}} en {{account}}",
         "confirmed": "Se ha confirmado la salida de {{value}} desde {{account}}",
         "confirmedInternal": "Se ha confirmado {{value}} desde {{senderAccount}} a {{receiverAccount}}",
+        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
         "failed": "Ha fallado la salida de {{value}} desde {{account}}",
         "downloadingUpdate": "Descargando actualización",
         "updateReady": "Actualización lista",
@@ -586,7 +621,8 @@
         "restartInstall": "Reiniciar para instalar",
         "calcMinutesRemaining": "Calculando minutos restantes...",
         "minutesRemaining": "{minutes, plural, one {1 minuto restante} other {# minutos restantes}}",
-        "copiedToClipboard": "Copiado al portapapeles"
+        "copiedToClipboard": "Copiado al portapapeles",
+        "accountsSynchronized": "Account synchronization complete"
     },
     "error": {
         "profile": {
@@ -606,7 +642,7 @@
             "dates": "Las fechas son fáciles de adivinar.",
             "common": "Esta es una contraseña muy común.",
             "similar": "Esto es similar a una contraseña común.",
-            "reasonWord": "Una sola palabra es fácil de adivinar.",
+            "word": "A single word is easy to guess.",
             "incorrect": "Tu contraseña es incorrecta.",
             "length": "Tu contraseña no puede ser más larga de {length, plural, one {1 carácter} other {# caracteres}}."
         },
@@ -619,7 +655,11 @@
             "length": "Tu nombre de cuenta no puede tener más de {length, plural, one {1 carácter} other {# caracteres}}.",
             "empty": "Debes usar tu última cuenta antes de crear una nueva.",
             "notEmpty": "Debes transferir tu saldo antes de eliminar esta cuenta.",
-            "duplicate": "Ya existe una cuenta con este nombre."
+            "duplicate": "Ya existe una cuenta con este nombre.",
+            "tilde": "El nombre de perfil no puede empezar con el carácter '~'.",
+            "control": "El nombre del perfil no puede contener un carácter de control.",
+            "startDot": "El nombre de perfil no puede empezar con el carácter '.'.",
+            "chars": "A profile name can't contain the following characters <>:\"/\\|?*"
         },
         "send": {
             "addressLength": "Las direcciones deben tener {length, plural, one {1 carácter} other {# caracteres}} de largo.",
@@ -627,8 +667,10 @@
             "amountNoFloat": "Si las unidades son 'i' no puedes usar lugares decimales.",
             "amountInvalidFormat": "La cantidad no parece un número válido.",
             "amountZero": "La cantidad debe ser mayor que 0.",
-            "wrongAddressFormat": "Las direcciones comienzan con el prefijo {prefix}.",
+            "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
+            "wrongAddressFormat": "La dirección no tiene el formato correcto.",
             "insufficientFunds": "Esta cuenta no tiene fondos suficientes.",
+            "noToAccount": "No ha seleccionado una cuenta a la que enviar los fondos.",
             "sendingDust": "No puedes enviar menos de 1 Mi.",
             "leavingDust": "No puedes dejar menos de 1 Mi en tu dirección."
         },

@@ -29,17 +29,10 @@
             label: 'views.settings.currency.title',
             value: $activeProfile.settings.currency,
         })
-        if ($activeProfile.settings.automaticNodeSelection) {
-            appVars.push({
-                label: 'views.settings.nodeSettings.title',
-                value: locale('general.automaticNodeSelection'),
-            })
-        } else {
-            appVars.push({
-                label: 'views.settings.nodeSettings.title',
-                value: $activeProfile.settings.node.url,
-            })
-        }
+        appVars.push({
+            label: 'views.settings.nodeSettings.title',
+            value: locale(`general.${$activeProfile.settings.automaticNodeSelection ? 'automaticNodeSelection' : 'manualNodeSelection'}`),
+        })
     }
 
     contentApp = combineValues(appVars)

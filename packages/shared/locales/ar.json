@@ -207,7 +207,11 @@
             },
             "resyncAccounts": {
                 "title": "تحديث الحسابات",
-                "description": ""
+                "description": "Starts a background task to make sure your accounts are up to date."
+            },
+            "hiddenAccounts": {
+                "title": "Hidden accounts",
+                "description": "Selecting this options will show accounts that were previously hidden."
             },
             "deleteProfile": {
                 "title": "حذف الملف الشخصي",
@@ -223,11 +227,19 @@
             },
             "nodeSettings": {
                 "title": "إعدادات العقدة node",
-                "description": "حدد الدليل لاختياره من قائمة الnodes أو قم بالاتصال بالnode الخاصة بك"
+                "description": "Select Manual to configure the node settings and connect to your own node"
             },
             "configureNodeList": {
                 "title": "اختر عقدة node",
-                "description": ""
+                "description": "Manage the list of nodes your wallet connects to.",
+                "primaryNode": "Primary node",
+                "excludeNode": "Exclude node",
+                "includeNode": "Include node",
+                "viewDetails": "View details",
+                "setAsPrimary": "Set as primary",
+                "removeNode": "إزالة العقدة node",
+                "includeOfficialNodeList": "Include official node list",
+                "noNodes": "There are no nodes, automatic selection will be used instead."
             },
             "proofOfWork": {
                 "title": "إثبات العمل",
@@ -313,7 +325,8 @@
     "popups": {
         "password": {
             "title": "كلمة المرور مطلوبة",
-            "subtitle": "الرجاء إدخال كلمة مرور محفظتك لفتح الحصن"
+            "subtitle": "Please enter your password to unlock Stronghold",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "رمز QR الخاص بك"
@@ -331,24 +344,34 @@
             "backupDescription": "من المهم النسخ الاحتياطي بانتظام للتأكد من أن لديك نسخة من حساباتك وسجل المعاملات.",
             "backupWarning": "إذا فقدت النسخة الاحتياطية وعبارات الاسترداد الخاصة بك سوف تفقد الوصول إلى أموالك.",
             "notBackedUp": "لم يتم النسخ الاحتياطي",
-            "notBackedUpDescription": "لم تقم بالنسخ الاحتياطي للملف المحصّن الخاص بك"
+            "notBackedUpDescription": "لم تقم بالنسخ الاحتياطي للملف المحصّن الخاص بك",
+            "saving": "Saving..."
         },
         "deleteAccount": {
-            "title": "إزالة {name}؟",
-            "body": "يمكنك إضافة هذا الحساب لاحقاً ولكن قد تفقد سجل المعاملات الخاص بك.",
-            "typePassword": "اكتب كلمة مرور محفظتك للتأكيد.",
-            "deleteAccount": "إزالة الحساب",
-            "errorTitle": "غير قادر على إزالة {name}",
-            "errorBody1": "لإزالة حساب، يجب أن يكون رصيد صفر.",
-            "errorBody2": "لديك حاليا {balance} متبقي على هذا الحساب. الرجاء نقل هذه الأموال إلى حساب مختلف وحاول مرة أخرى.",
-            "errorBody3": "لا يمكنك إزالة هذا الحساب، يجب أن يكون لديك حساب واحد على الأقل."
+            "title": "Delete {name}?",
+            "body": "This account has no transaction history. It can safely be deleted.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Delete account",
+            "errorTitle": "Unable to delete {name}",
+            "errorBody1": "You cannot delete this account, you must have at least one."
+        },
+        "hideAccount": {
+            "title": "Hide {name}?",
+            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Hide account",
+            "errorTitle": "Unable to hide {name}",
+            "errorBody1": "To hide an account it must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
+            "errorBody3": "You cannot hide this account, you must have at least one."
         },
         "addressHistory": {
-            "title": "سجل عنوان الحساب {name}",
+            "title": "{name} address history",
             "currentBalance": "الرصيد الحالي: {balance}"
         },
         "node": {
             "titleAdd": "إضافة عقدة node",
+            "titleUpdate": "Update a node",
             "titleRemove": "إزالة عقدة node",
             "titleDetails": "تفاصيل العقدة node",
             "nodeAddress": "عنوان العقدة node",
@@ -363,7 +386,8 @@
         },
         "deleteProfile": {
             "title": "حذف الملف الشخصي",
-            "confirmation": "هل أنت متأكد من أنك تريد حذف هذا الملف الشخصي؟ لا يمكن التراجع عن هذه العملية."
+            "confirmation": "هل أنت متأكد من أنك تريد حذف هذا الملف الشخصي؟ لا يمكن التراجع عن هذه العملية.",
+            "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
             "title": "التشخيص",
@@ -375,6 +399,10 @@
             "totalMem": "إجمالي الذاكرة",
             "freeMem": "الذاكرة الحرة",
             "userPath": "مسار المستخدم"
+        },
+        "transaction": {
+            "title": "Confirm transaction",
+            "body": "You’re about to send {amount} to"
         }
     },
     "charts": {
@@ -425,16 +453,19 @@
         "enableDeveloperMode": "تمكين وضع المبرمج",
         "enableSystemNotifications": "تمكين إشعارات النظام",
         "exportState": "تصدير الحالة",
-        "outsourceProofOfWork": "دليل المصادر الخارجية على العمل",
+        "localProofOfWork": "Local proof of work",
         "unlock": "فتح",
         "updateFirefly": "تحديث فايرفلاي",
         "restartNow": "إعادة التشغيل الآن",
         "saveBackup": "حفظ نسخة حصن Stronghold احتياطية",
         "customizeAcount": "تخصيص الحساب",
         "viewAddressHistory": "عرض سجل العناوين",
-        "deleteAccount": "إزالة الحساب",
+        "hideAccount": "Hide account",
+        "showAccount": "Unhide account",
+        "deleteAccount": "Delete account",
         "max": "الحد الأقصى",
         "addNode": "إضافة عقدة node",
+        "updateNode": "Update node",
         "removeNode": "إزالة العقدة node",
         "hide": "إخفاء",
         "hideOthers": "إخفاء الآخرين",
@@ -459,7 +490,9 @@
         "skipBackup": "تخطي النسخ الاحتياطي للملف",
         "finishSetup": "إنهاء الإعداد",
         "readDocumentation": "قراءة الوثائق",
-        "visitFaq": "زيارة الأسئلة المكررة"
+        "visitFaq": "زيارة الأسئلة المكررة",
+        "showHiddenAccounts": "Show hidden accounts",
+        "confirm": "Confirm"
     },
     "general": {
         "password": "كلمة المرور",
@@ -505,7 +538,7 @@
         "appearance": "المظهر",
         "lightTheme": "المظهر الفاتح",
         "darkTheme": "المظهر الداكن",
-        "totalBalance": "إجمالي الرصيد",
+        "balance": "Balance",
         "accountBalance": "رصيد الحساب",
         "incoming": "الواردة",
         "outgoing": "الصادرة",
@@ -565,11 +598,12 @@
         "passwordStrength2": "ضعيف",
         "passwordStrength3": "متوسط",
         "passwordStrength4": "قوي",
-        "creatingProfile": "يتم إنشاء الملف الشخصي، الرجاء الانتظار..."
+        "creatingProfile": "يتم إنشاء الملف الشخصي، الرجاء الانتظار...",
+        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
     },
     "dates": {
         "today": "اليوم",
-        "yesterday": "Yesterday",
+        "yesterday": "الأمس",
         "daysAgo": "منذ {time, plural, one {# يوم} other {# أيام}}",
         "weeksAgo": "منذ {time, plural, one {# اسبوع} other {# اسابيع}}",
         "monthsAgo": "منذ {time, plural, one {# شهر} other {# اشهر}}",
@@ -579,6 +613,7 @@
         "valueTx": "تلقي {{value}} إلى {{account}}",
         "confirmed": "تم تأكيد {{value}} الصادر من {{account}}",
         "confirmedInternal": "تم تأكيد {{value}} من {{senderAccount}} إلى {{receiverAccount}}",
+        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
         "failed": "{{value}} الصادر من {{account}} فشل",
         "downloadingUpdate": "يتم تنزيل التحديث",
         "updateReady": "التحديث جاهز",
@@ -586,7 +621,8 @@
         "restartInstall": "إعادة التشغيل للتثبيت",
         "calcMinutesRemaining": "يتم حساب الدقائق المتبقية...",
         "minutesRemaining": "{minutes, plural, one {1 دقيقة متبقية} other {# دقائق متبقية}}",
-        "copiedToClipboard": "تم النسخ إلى الحافظة"
+        "copiedToClipboard": "تم النسخ إلى الحافظة",
+        "accountsSynchronized": "Account synchronization complete"
     },
     "error": {
         "profile": {
@@ -606,7 +642,7 @@
             "dates": "من السهل تخمين التواريخ.",
             "common": "هذه كلمة مرور شائعة جداً.",
             "similar": "هذا شبيه بكلمة مرور شائعة.",
-            "reasonWord": "من السهل تخمين كلمة واحدة.",
+            "word": "A single word is easy to guess.",
             "incorrect": "كلمة المرور غير صحيحة.",
             "length": "كلمة المرو الخاصة بك لا يجب ان تكون أطول من {length, plural, one {1 حرف} other {# أحرف}}."
         },
@@ -619,7 +655,11 @@
             "length": "لا يجب ان يكون اسم حسابك اطول من {length, plural, one {1 حرف} other {# احرف}}.",
             "empty": "يجب عليك استخدام حسابك الأخير قبل إنشاء حساب جديد.",
             "notEmpty": "يجب عليك نقل رصيدك قبل حذف هذا الحساب.",
-            "duplicate": "يوجد حساب بهذا الاسم مسبقاً."
+            "duplicate": "يوجد حساب بهذا الاسم مسبقاً.",
+            "tilde": "A profile name can't start with the '~' character.",
+            "control": "A profile name can't contain a control character.",
+            "startDot": "A profile name can't start with the '.' character.",
+            "chars": "A profile name can't contain the following characters <>:\"/\\|?*"
         },
         "send": {
             "addressLength": "يجب على العناوين ان تكون بطول {length, plural, one {1 حرف} other {# احرف}}.",
@@ -627,8 +667,10 @@
             "amountNoFloat": "إذا كانت الوحدات 'i` لا يمكنك استخدام الأماكن العشرية.",
             "amountInvalidFormat": "يبدو أن المبلغ رقم غير صالح.",
             "amountZero": "يجب أن يكون المبلغ أكبر من 0.",
-            "wrongAddressFormat": "تبدأ العناوين بالبادئة {prefix}.",
+            "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
+            "wrongAddressFormat": "The address is not correctly formatted.",
             "insufficientFunds": "هذا الحساب لا يملك الأموال الكافية.",
+            "noToAccount": "You have not selected an account to send the funds to.",
             "sendingDust": "لا يمكنك إرسال أقل من 1 Mi.",
             "leavingDust": "لا يمكنك ترك أقل من 1 Mi على عنوانك."
         },

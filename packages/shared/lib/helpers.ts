@@ -45,7 +45,7 @@ export const getTrimmedLength = (name: string | undefined) => {
         return 0
     }
 
-    return name.trim().match(/./gu).length
+    return name.trim().match(/./gu)?.length ?? 0
 }
 
 /**

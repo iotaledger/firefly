@@ -1,7 +1,7 @@
 import { AvailableExchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
 import { generateRandomId } from 'shared/lib/utils'
-import { api, getStoragePath } from 'shared/lib/wallet'
+import { asyncRemoveStorage, destroyActor, getStoragePath } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
 import type { ChartSelectors } from './chart'
 import { Electron } from './electron'
@@ -25,6 +25,7 @@ interface Profile {
      */
     settings: UserSettings
     isDeveloperProfile: boolean
+    hiddenAccounts?: string[]
 }
 
 /**
@@ -43,7 +44,8 @@ export interface UserSettings {
     networkId: string | undefined
     customNetworkId: string | undefined
     /** Lock screen timeout in minutes */
-    lockScreenTimeout: number,
+    lockScreenTimeout: number
+    showHiddenAccounts?: boolean
     chartSelectors: ChartSelectors
 }
 
@@ -131,16 +133,15 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
  *
  * @returns {void}
  */
-export const disposeNewProfile = () => {
+export const disposeNewProfile = async () => {
     const np = get(newProfile)
     if (np) {
-        api.removeStorage({
-            onSuccess() {
-            },
-            onError(err) {
-                console.error(err)
-            },
-        })
+        try {
+            await asyncRemoveStorage()
+        } catch (err) {
+            console.error(err)
+        }
+        destroyActor(np.id)
     }
     newProfile.set(null)
     activeProfileId.set(null)
@@ -195,7 +196,7 @@ export const removeProfile = (id: string): void => {
  * @returns {void}
  */
 export const updateProfile = (
-    path: string, value: string | boolean | Date | AvailableExchangeRates | Node | Node[] | ChartSelectors | HistoryDataProps) => {
+    path: string, value: string | string[] | boolean | Date | AvailableExchangeRates | Node | Node[] | ChartSelectors | HistoryDataProps) => {
     const _update = (_profile) => {
         const pathList = path.split('.')
 

@@ -24,7 +24,13 @@ const Electron = {
             // Check that the removing profile path matches the user data path
             // so that we don't try and remove things outside our scope
             if (profilePath.startsWith(userDataPath)) {
-                fs.rmdirSync(profilePath, { recursive: true })
+                try {
+                    // Sometime the DB can still be locked while it is flushing
+                    // so retry if we receive a busy exception
+                    fs.rmdirSync(profilePath, { recursive: true, maxRetries: 30, retryDelay: 500 })
+                } catch (err) {
+                    console.log(err)
+                }
             }
         })
     },
@@ -134,23 +140,22 @@ const Electron = {
      * Minimize the app
      * @returns {undefined}
      */
-    minimize: () => {
-        ipcRenderer.invoke('minimize')
-    },
+    minimize: () => ipcRenderer.invoke('minimize'),
     /**
      * Maximize the app
      * @returns {undefined}
      */
-    maximize: () => {
-        ipcRenderer.invoke('maximize')
-    },
+    maximize: () => ipcRenderer.invoke('maximize'),
+    /**
+     * Is the app maximized
+     * @returns {boolean}
+     */
+    isMaximized: () => ipcRenderer.invoke('isMaximized'),
     /**
      * Close the app
      * @returns {undefined}
      */
-    close: () => {
-        ipcRenderer.invoke('close')
-    },
+    close: () => ipcRenderer.invoke('close'),
     /*
      * Opens url and checks against acceptlist
      * @param {string} url - Target url

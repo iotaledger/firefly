@@ -3,7 +3,7 @@
     import { Electron } from 'shared/lib/electron'
     import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
-    import { openPopup, closePopup } from 'shared/lib/popup'
+    import { openPopup } from 'shared/lib/popup'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { getDefaultStrongholdName, PIN_LENGTH } from 'shared/lib/utils'
     import { api, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
@@ -76,13 +76,13 @@
         openPopup({
             type: 'password',
             props: {
-                onSubmit: (password) => {
+                onSuccess: (password) => {
                     exportBusy = true
                     exportMessage = locale('general.exportingStronghold')
                     exportStronghold(password, _callback)
-                    closePopup()
                 },
-                subtitle: locale('popups.password.backup')
+                returnPassword: true,
+                subtitle: locale('popups.password.backup'),
             },
         })
     }
@@ -110,137 +110,141 @@
     }
 
     function changePassword() {
-        resetErrors()
+        if (currentPassword && newPassword && confirmedPassword) {
+            resetErrors()
 
-        if (newPassword.length > MAX_PASSWORD_LENGTH) {
-            newPasswordError = locale('error.password.length', {
-                values: {
-                    length: MAX_PASSWORD_LENGTH,
-                },
-            })
-        } else if (newPassword !== confirmedPassword) {
-            newPasswordError = locale('error.password.doNotMatch')
-        } else if (passwordStrength.score !== 4) {
-            let errKey = 'error.password.tooWeak'
-            if (passwordStrength.feedback.warning && passwordInfo[passwordStrength.feedback.warning]) {
-                errKey = `error.password.${passwordInfo[passwordStrength.feedback.warning]}`
-            }
-            newPasswordError = locale(errKey)
-        } else {
-            passwordChangeBusy = true
-            passwordChangeMessage = locale('general.passwordUpdating')
-            let busyStart = Date.now()
-            const _clearMessage = () => {
-                setTimeout(() => (passwordChangeMessage = ''), 2000)
-            }
-            const _hideBusy = (message, timeout) => {
-                const diff = Date.now() - busyStart
-                if (diff < timeout) {
-                    setTimeout(() => {
+            if (newPassword.length > MAX_PASSWORD_LENGTH) {
+                newPasswordError = locale('error.password.length', {
+                    values: {
+                        length: MAX_PASSWORD_LENGTH,
+                    },
+                })
+            } else if (newPassword !== confirmedPassword) {
+                newPasswordError = locale('error.password.doNotMatch')
+            } else if (passwordStrength.score !== 4) {
+                let errKey = 'error.password.tooWeak'
+                if (passwordStrength.feedback.warning && passwordInfo[passwordStrength.feedback.warning]) {
+                    errKey = `error.password.${passwordInfo[passwordStrength.feedback.warning]}`
+                }
+                newPasswordError = locale(errKey)
+            } else {
+                passwordChangeBusy = true
+                passwordChangeMessage = locale('general.passwordUpdating')
+                let busyStart = Date.now()
+                const _clearMessage = () => {
+                    setTimeout(() => (passwordChangeMessage = ''), 2000)
+                }
+                const _hideBusy = (message, timeout) => {
+                    const diff = Date.now() - busyStart
+                    if (diff < timeout) {
+                        setTimeout(() => {
+                            passwordChangeBusy = false
+                            passwordChangeMessage = message
+                            _clearMessage()
+                        }, timeout - diff)
+                    } else {
                         passwordChangeBusy = false
                         passwordChangeMessage = message
                         _clearMessage()
-                    }, timeout - diff)
-                } else {
-                    passwordChangeBusy = false
-                    passwordChangeMessage = message
-                    _clearMessage()
-                }
-            }
-
-            api.changeStrongholdPassword(currentPassword, newPassword, {
-                onSuccess() {
-                    if (exportStrongholdChecked) {
-                        passwordChangeMessage = locale('general.exportingStronghold')
-
-                        return exportStronghold(newPassword, (cancelled, err) => {
-                            if (cancelled) {
-                                _hideBusy('', 0)
-                            } else {
-                                if (err) {
-                                    currentPasswordError = locale(err)
-                                    _hideBusy(locale('general.passwordFailed'), 0)
-                                } else {
-                                    currentPassword = ''
-                                    newPassword = ''
-                                    confirmedPassword = ''
-                                    exportStrongholdChecked = false
-                                    _hideBusy(locale('general.passwordSuccess'), 2000)
-                                }
-                            }
-                        })
-                    } else {
-                        currentPassword = ''
-                        newPassword = ''
-                        confirmedPassword = ''
-                        exportStrongholdChecked = false
-                        _hideBusy(locale('general.passwordSuccess'), 2000)
                     }
-                },
-                onError(err) {
-                    currentPasswordError = locale(err.error)
-                    _hideBusy(locale('general.passwordFailed'), 0)
-                },
-            })
+                }
+
+                api.changeStrongholdPassword(currentPassword, newPassword, {
+                    onSuccess() {
+                        if (exportStrongholdChecked) {
+                            passwordChangeMessage = locale('general.exportingStronghold')
+
+                            return exportStronghold(newPassword, (cancelled, err) => {
+                                if (cancelled) {
+                                    _hideBusy('', 0)
+                                } else {
+                                    if (err) {
+                                        currentPasswordError = locale(err)
+                                        _hideBusy(locale('general.passwordFailed'), 0)
+                                    } else {
+                                        currentPassword = ''
+                                        newPassword = ''
+                                        confirmedPassword = ''
+                                        exportStrongholdChecked = false
+                                        _hideBusy(locale('general.passwordSuccess'), 2000)
+                                    }
+                                }
+                            })
+                        } else {
+                            currentPassword = ''
+                            newPassword = ''
+                            confirmedPassword = ''
+                            exportStrongholdChecked = false
+                            _hideBusy(locale('general.passwordSuccess'), 2000)
+                        }
+                    },
+                    onError(err) {
+                        currentPasswordError = locale(err.error)
+                        _hideBusy(locale('general.passwordFailed'), 0)
+                    },
+                })
+            }
         }
     }
 
     function changePincode() {
-        resetErrors()
+        if (currentPincode && newPincode && confirmedPincode) {
+            resetErrors()
 
-        if (newPincode.length !== PIN_LENGTH) {
-            newPincodeError = locale('error.pincode.length', {
-                values: {
-                    length: PIN_LENGTH,
-                },
-            })
-        } else if (newPincode !== confirmedPincode) {
-            confirmationPincodeError = locale('error.pincode.match')
-        } else {
-            pinCodeBusy = true
-            pinCodeMessage = locale('general.pinCodeUpdating')
+            if (newPincode.length !== PIN_LENGTH) {
+                newPincodeError = locale('error.pincode.length', {
+                    values: {
+                        length: PIN_LENGTH,
+                    },
+                })
+            } else if (newPincode !== confirmedPincode) {
+                confirmationPincodeError = locale('error.pincode.match')
+            } else {
+                pinCodeBusy = true
+                pinCodeMessage = locale('general.pinCodeUpdating')
 
-            const _clear = (err?) => {
-                setTimeout(() => {
-                    pinCodeMessage = ''
-                }, 2000)
-                pinCodeBusy = false
-                if (err) {
-                    currentPincodeError = err
-                    pinCodeMessage = locale('general.pinCodeFailed')
-                } else {
-                    pinCodeMessage = locale('general.pinCodeSuccess')
-                }
-            }
-
-            Electron.PincodeManager.verify(get(activeProfile)?.id, currentPincode)
-                .then((valid) => {
-                    if (valid) {
-                        return new Promise<void>((resolve, reject) => {
-                            api.setStoragePassword(newPincode, {
-                                onSuccess() {
-                                    Electron.PincodeManager.set(get(activeProfile)?.id, newPincode)
-                                        .then(() => {
-                                            currentPincode = ''
-                                            newPincode = ''
-                                            confirmedPincode = ''
-                                            _clear()
-                                            resolve()
-                                        })
-                                        .catch(reject)
-                                },
-                                onError(err) {
-                                    _clear(locale(err.error))
-                                },
-                            })
-                        })
+                const _clear = (err?) => {
+                    setTimeout(() => {
+                        pinCodeMessage = ''
+                    }, 2000)
+                    pinCodeBusy = false
+                    if (err) {
+                        currentPincodeError = err
+                        pinCodeMessage = locale('general.pinCodeFailed')
                     } else {
-                        _clear(locale('error.pincode.incorrect'))
+                        pinCodeMessage = locale('general.pinCodeSuccess')
                     }
-                })
-                .catch((err) => {
-                    _clear(err.message)
-                })
+                }
+
+                Electron.PincodeManager.verify(get(activeProfile)?.id, currentPincode)
+                    .then((valid) => {
+                        if (valid) {
+                            return new Promise<void>((resolve, reject) => {
+                                api.setStoragePassword(newPincode, {
+                                    onSuccess() {
+                                        Electron.PincodeManager.set(get(activeProfile)?.id, newPincode)
+                                            .then(() => {
+                                                currentPincode = ''
+                                                newPincode = ''
+                                                confirmedPincode = ''
+                                                _clear()
+                                                resolve()
+                                            })
+                                            .catch(reject)
+                                    },
+                                    onError(err) {
+                                        _clear(locale(err.error))
+                                    },
+                                })
+                            })
+                        } else {
+                            _clear(locale('error.pincode.incorrect'))
+                        }
+                    })
+                    .catch((err) => {
+                        _clear(err.message)
+                    })
+            }
         }
     }
 
@@ -297,7 +301,8 @@
                 showRevealToggle
                 {locale}
                 placeholder={locale('general.currentPassword')}
-                disabled={passwordChangeBusy} />
+                disabled={passwordChangeBusy} 
+                submitHandler={changePassword} />
             <Password
                 error={newPasswordError}
                 classes="mb-4"
@@ -308,14 +313,16 @@
                 strength={passwordStrength.score}
                 {locale}
                 placeholder={locale('general.newPassword')}
-                disabled={passwordChangeBusy} />
+                disabled={passwordChangeBusy} 
+                submitHandler={changePassword} />
             <Password
                 classes="mb-5"
                 bind:value={confirmedPassword}
                 showRevealToggle
                 {locale}
                 placeholder={locale('general.confirmNewPassword')}
-                disabled={passwordChangeBusy} />
+                disabled={passwordChangeBusy} 
+                submitHandler={changePassword} />
             <Checkbox
                 classes="mb-5"
                 label={locale('actions.exportNewStronghold')}
@@ -340,11 +347,11 @@
             <Text type="p" secondary classes="mb-5">{locale('views.settings.changePincode.description')}</Text>
 
             <Text type="p" secondary smaller classes="mb-2">{locale('views.settings.changePincode.currentPincode')}</Text>
-            <Pin smaller error={currentPincodeError} classes="mb-4" bind:value={currentPincode} disabled={pinCodeBusy} />
+            <Pin smaller error={currentPincodeError} classes="mb-4" bind:value={currentPincode} disabled={pinCodeBusy} on:submit={changePincode} />
             <Text type="p" secondary smaller classes="mb-2">{locale('views.settings.changePincode.newPincode')}</Text>
-            <Pin smaller error={newPincodeError} classes="mb-4" bind:value={newPincode} disabled={pinCodeBusy} />
+            <Pin smaller error={newPincodeError} classes="mb-4" bind:value={newPincode} disabled={pinCodeBusy} on:submit={changePincode} />
             <Text type="p" secondary smaller classes="mb-2">{locale('views.settings.changePincode.confirmNewPincode')}</Text>
-            <Pin smaller error={confirmationPincodeError} classes="mb-4" bind:value={confirmedPincode} disabled={pinCodeBusy} />
+            <Pin smaller error={confirmationPincodeError} classes="mb-4" bind:value={confirmedPincode} disabled={pinCodeBusy} on:submit={changePincode} />
             <div class="flex flex-row items-center">
                 <Button
                     medium
