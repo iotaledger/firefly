@@ -9,7 +9,7 @@ export const LOG_FILE_NAME = 'migration.log'
 
 export const MIGRATION_NODE = 'https://nodes-legacy.iotatestmigration.net/ '
 
-export const PERMANODE = 'http://permanode.migration.iota.cafe:4000/api'
+export const PERMANODE = 'http://permanode.iotatestmigration.net:4000/api`'
 
 export const ADDRESS_SECURITY_LEVEL = 2
 
