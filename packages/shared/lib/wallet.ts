@@ -598,7 +598,7 @@ const updateAllMessagesState = (accounts, messageId, confirmation) => {
  */
 export const updateAccountAfterBalanceChange = (
     accountId: string,
-    address: Address,
+    address: string,
     receivedBalance: number,
     spentBalance: number
 ): void => {
@@ -611,7 +611,7 @@ export const updateAccountAfterBalanceChange = (
 
                 const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD;
 
-                return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
+                return Object.assign<WalletAccount, Partial<WalletAccount>>(storedAccount, {
                     rawIotaBalance,
                     balance: formatUnit(rawIotaBalance, 2),
                     balanceEquiv: `${convertToFiat(
@@ -620,8 +620,8 @@ export const updateAccountAfterBalanceChange = (
                         get(exchangeRates)[activeCurrency]
                     )} ${activeCurrency}`,
                     addresses: storedAccount.addresses.map((_address: Address) => {
-                        if (_address.address === address.address) {
-                            return Object.assign<Address, Partial<Address>, Partial<Address>>({} as Address, _address, address)
+                        if (_address.address === address) {
+                            _address.balance += receivedBalance - spentBalance
                         }
 
                         return _address

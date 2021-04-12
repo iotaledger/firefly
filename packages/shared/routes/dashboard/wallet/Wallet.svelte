@@ -158,13 +158,11 @@
                     accounts.update((accounts) =>
                         accounts.map((account) => {
                             if (account.id === accountId) {
-                                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                    {} as WalletAccount,
-                                    account,
-                                    {
-                                        depositAddress: response.payload.address,
-                                    }
-                                )
+                                account.depositAddress = response.payload.address
+
+                                if (!account.addresses.some(a => a.address === response.payload.address)) {
+                                    account.addresses.push(response.payload)
+                                }
                             }
 
                             return account
