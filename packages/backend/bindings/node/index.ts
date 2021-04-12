@@ -19,7 +19,8 @@ import {
   syncAccount as _syncAccount,
   isLatestAddressUnused as _isLatestAddressUnused,
   areLatestAddressesUnused as _areLatestAddressesUnused,
-  setAlias as _setAlias
+  setAlias as _setAlias,
+  getNodeInfo as _getNodeInfo
 } from '../../../shared/lib/typings/account'
 import {
   Transfer,
@@ -187,6 +188,9 @@ export const api = {
   },
   setStrongholdPasswordClearInterval: function (interval: Duration): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _setStrongholdPasswordClearInterval(sendMessage, __ids, interval)
+  },
+  getNodeInfo: function (accountId: AccountIdentifier, url?: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _getNodeInfo(sendMessage, __ids, accountId, url)
   },
   onError: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'ErrorThrown')
