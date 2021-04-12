@@ -10,7 +10,7 @@
     import { pollMarketData } from 'shared/lib/marketData'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { cleanupInProgressProfiles } from 'shared/lib/profile'
+    import { cleanupEmptyProfiles, cleanupInProgressProfiles } from 'shared/lib/profile'
     import { dashboardRoute, initRouter, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
     import { AppRoute, Tabs } from 'shared/lib/typings/routes'
     import {
@@ -95,6 +95,7 @@
         })
 
         await cleanupInProgressProfiles()
+        await cleanupEmptyProfiles()
     })
 </script>
 

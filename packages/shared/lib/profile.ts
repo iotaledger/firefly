@@ -1,7 +1,7 @@
 import { AvailableExchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
 import { generateRandomId } from 'shared/lib/utils'
-import { asyncRemoveStorage, destroyActor, getStoragePath } from 'shared/lib/wallet'
+import { asyncRemoveStorage, destroyActor, getStoragePath, getWalletStoragePath } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
 import type { ChartSelectors } from './chart'
 import { Electron } from './electron'
@@ -244,6 +244,34 @@ export const removeProfileFolder = async (profileName) => {
         const userDataPath = await Electron.getUserDataPath()
         const profileStoragePath = getStoragePath(userDataPath, profileName)
         await Electron.removeProfileFolder(profileStoragePath)
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+/**
+ * Cleanup profile listed that have nothing stored and stored profiles not in app.
+ * 
+ * @method cleanupEmptyProfiles
+ *
+ * @returns {void}
+ */
+export const cleanupEmptyProfiles = async() => {
+    try {
+        const userDataPath = await Electron.getUserDataPath()
+        const profileStoragePath = getWalletStoragePath(userDataPath)
+        const storedProfiles = await Electron.listProfileFolders(profileStoragePath)
+
+        profiles.update((_profiles) => {
+            return _profiles.filter(p => storedProfiles.includes(p.name))
+        })
+
+        const appProfiles = get(profiles).map(p => p.name)
+        for (const storedProfile of storedProfiles) {
+            if (!appProfiles.includes(storedProfile)) {
+                await removeProfileFolder(storedProfile) 
+            }
+        }
     } catch (err) {
         console.error(err)
     }

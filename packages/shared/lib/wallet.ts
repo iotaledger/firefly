@@ -183,8 +183,12 @@ export const api: {
     onTransferProgress(callbacks: { onSuccess: (response: Event<TransferProgressEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
 } = window['__WALLET_API__']
 
+export const getWalletStoragePath = (appPath: string): string => {
+    return `${appPath}/${WALLET_STORAGE_DIRECTORY}/`
+}
+
 export const getStoragePath = (appPath: string, profileName: string): string => {
-    return `${appPath}/${WALLET_STORAGE_DIRECTORY}/${profileName}`
+    return `${getWalletStoragePath(appPath)}${profileName}`
 }
 
 export const initialise = (id: string, storagePath: string): void => {
