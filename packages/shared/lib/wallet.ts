@@ -7,7 +7,7 @@ import { HistoryDataProps } from 'shared/lib/marketData'
 import { getOfficialNodes, network } from 'shared/lib/network'
 import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
 import { activeProfile, isStrongholdLocked, updateProfile } from 'shared/lib/profile'
-import type { Account, Account as BaseAccount, AccountToCreate, Balance, SyncedAccount } from 'shared/lib/typings/account'
+import type { Account, AccountToCreate, Balance, SyncedAccount } from 'shared/lib/typings/account'
 import type { Address } from 'shared/lib/typings/address'
 import type { Actor } from 'shared/lib/typings/bridge'
 import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, ErrorEventPayload, Event, ReattachmentEventPayload, TransactionEventPayload, TransferProgressEventPayload, TransferProgressEventType } from 'shared/lib/typings/events'
@@ -231,6 +231,15 @@ export const destroyActor = (id: string): void => {
 }
 
 /**
+ * Tests if we have the actor id
+ * @param id The id to check for
+ * @returns True if the actor exists
+ */
+export const hasActor = (id: string): boolean => {
+    return actors[id] !== undefined
+}
+
+/**
  * Generate BIP39 Mnemonic Recovery Phrase
  */
 export const generateRecoveryPhrase = (): Promise<string[]> =>
@@ -251,7 +260,7 @@ export const requestMnemonic = async () => {
     return recoveryPhrase
 }
 
-export const asyncSetStrongholdPassword = (password) => {
+export const setStrongholdPasswordAsync = (password) => {
     return new Promise<void>((resolve, reject) => {
         api.setStrongholdPassword(password, {
             onSuccess() {
@@ -264,7 +273,7 @@ export const asyncSetStrongholdPassword = (password) => {
     })
 }
 
-export const asyncStoreMnemonic = (mnemonic) => {
+export const storeMnemonicAsync = (mnemonic) => {
     return new Promise<void>((resolve, reject) => {
         api.storeMnemonic(mnemonic, {
             onSuccess() {
@@ -277,7 +286,7 @@ export const asyncStoreMnemonic = (mnemonic) => {
     })
 }
 
-export const asyncVerifyMnemonic = (mnemonic) => {
+export const verifyMnemonicAsync = (mnemonic) => {
     return new Promise<void>((resolve, reject) => {
         api.verifyMnemonic(mnemonic, {
             onSuccess() {
@@ -290,7 +299,7 @@ export const asyncVerifyMnemonic = (mnemonic) => {
     })
 }
 
-export const asyncBackup = (dest: string, password: string) => {
+export const backupAsync = (dest: string, password: string) => {
     return new Promise<void>((resolve, reject) => {
         api.backup(dest, password, {
             onSuccess() {
@@ -303,7 +312,7 @@ export const asyncBackup = (dest: string, password: string) => {
     })
 }
 
-export const asyncSetStoragePassword = (password) => {
+export const setStoragePasswordAsync = (password) => {
     return new Promise<void>((resolve, reject) => {
         api.setStoragePassword(password, {
             onSuccess() {
@@ -316,7 +325,7 @@ export const asyncSetStoragePassword = (password) => {
     })
 }
 
-export const asyncRestoreBackup = (importFilePath, password) => {
+export const restoreBackupAsync = (importFilePath, password) => {
     return new Promise<void>((resolve, reject) => {
         api.restoreBackup(importFilePath, password, {
             onSuccess() {
@@ -329,18 +338,24 @@ export const asyncRestoreBackup = (importFilePath, password) => {
     })
 }
 
-export const asyncCreateAccount = () => {
-    return new Promise<void>((resolve, reject) => {
-        const officialNodes = getOfficialNodes()
-        api.createAccount(
+export const getAccountsAsync = () => {
+    return new Promise<Event<Account[]>>((resolve, reject) => {
+        api.getAccounts(
             {
-                signerType: { type: 'Stronghold' },
-                clientOptions: {
-                    nodes: officialNodes,
-                    node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-                    network: get(network)
-                }
-            },
+                onSuccess(accounts) {
+                    resolve(accounts)
+                },
+                onError(err) {
+                    reject(err)
+                },
+            }
+        )
+    })
+}
+
+export const removeStorageAsync = () => {
+    return new Promise<void>((resolve, reject) => {
+        api.removeStorage(
             {
                 onSuccess() {
                     resolve()
@@ -1123,7 +1138,7 @@ export const getAccountMeta = (accountId: string, callback: (
 }
 
 export const prepareAccountInfo = (
-    account: BaseAccount,
+    account: Account,
     meta: {
         balance: number
         incoming: number
@@ -1136,7 +1151,7 @@ export const prepareAccountInfo = (
 
     const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD
 
-    return Object.assign<WalletAccount, BaseAccount, Partial<WalletAccount>>({} as WalletAccount, account, {
+    return Object.assign<WalletAccount, Account, Partial<WalletAccount>>({} as WalletAccount, account, {
         id,
         index,
         depositAddress,

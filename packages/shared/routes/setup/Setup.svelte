@@ -14,7 +14,7 @@
     } from 'shared/lib/profile'
     import { SetupType } from 'shared/lib/typings/routes'
     import { destroyActor, getStoragePath, initialise, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
-    import { createEventDispatcher, onMount } from 'svelte'
+    import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
 
     export let locale

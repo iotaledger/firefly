@@ -5,7 +5,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { updateProfile } from 'shared/lib/profile'
     import { getDefaultStrongholdName } from 'shared/lib/utils'
-    import { asyncBackup, asyncCreateAccount, asyncStoreMnemonic, requestMnemonic } from 'shared/lib/wallet'
+    import { backupAsync, createAccountAsync, requestMnemonic, storeMnemonicAsync } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
     import { Backup, BackupToFile, RecoveryPhrase, VerifyRecoveryPhrase } from './views/'
@@ -61,17 +61,19 @@
 
                     if (skip) {
                         busy = true
-                        await asyncStoreMnemonic(get(mnemonic).join(' '))
-                        await asyncCreateAccount()
+                        await storeMnemonicAsync(get(mnemonic).join(' '))
+                        const createAccountPayload = await createAccountAsync()
+                        updateProfile('firstAccountId', createAccountPayload.payload.id)
                         dispatch('next')
                     } else {
                         const dest = await Electron.getStrongholdBackupDestination(getDefaultStrongholdName())
                         if (dest) {
                             busy = true
-                            await asyncStoreMnemonic(get(mnemonic).join(' '))
-                            await asyncCreateAccount()
-                            await asyncBackup(dest, get(strongholdPassword))
+                            await storeMnemonicAsync(get(mnemonic).join(' '))
+                            const createAccountPayload = await createAccountAsync()
+                            await backupAsync(dest, get(strongholdPassword))
                             updateProfile('lastStrongholdBackupTime', new Date())
+                            updateProfile('firstAccountId', createAccountPayload.payload.id)
                             dispatch('next')
                         }
                     }

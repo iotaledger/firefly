@@ -4,7 +4,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { activeProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
-    import { api, getStoragePath, initialise } from 'shared/lib/wallet'
+    import { initialiseProfileStorage, setStoragePasswordAsync } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -59,30 +59,25 @@
         }
     }
 
-    function onSubmit() {
+    async function onSubmit() {
         if (!hasReachedMaxAttempts) {
             const profile = get(activeProfile)
 
             isBusy = true
 
-            Electron.PincodeManager.verify(profile.id, pinCode)
-                .then((verified) => {
-                    if (verified === true) {
-                        return Electron.getUserDataPath().then((path) => {
-                            initialise(profile.id, getStoragePath(path, profile.name))
-                            api.setStoragePassword(pinCode, {
-                                onSuccess() {
-                                    dispatch('next')
-                                },
-                                onError(err) {
-                                    isBusy = false
-                                    showAppNotification({
-                                        type: 'error',
-                                        message: locale(err.error),
-                                    })
-                                },
-                            })
-                        })
+            try {
+                const verified = await Electron.PincodeManager.verify(profile.id, pinCode)
+                if (verified === true) {
+                    await initialiseProfileStorage(profile)
+                    await setStoragePasswordAsync(pinCode)
+
+                    dispatch('next')
+                } else {
+                    isBusy = false
+                    attempts++
+                    if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
+                        clearInterval(maxAttemptsTimer)
+                        maxAttemptsTimer = setInterval(countdown, 1000)
                     } else {
                         shake = true
                         shakeTimeout = setTimeout(() => {
@@ -97,11 +92,16 @@
                             }
                         }, 1000)
                     }
+                }
+            } catch (err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
                 })
-                .catch((error) => {
-                    console.error(error)
-                    isBusy = false
-                })
+                console.error(err)
+            } finally {
+                isBusy = false
+            }
         }
     }
 

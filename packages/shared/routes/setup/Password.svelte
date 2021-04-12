@@ -1,8 +1,8 @@
 <script lang="typescript">
-    import { showAppNotification } from 'shared/lib/notifications'
     import { Button, Illustration, OnboardingLayout, Password, Text } from 'shared/components'
+    import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
-    import { asyncSetStrongholdPassword, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
+    import { MAX_PASSWORD_LENGTH, setStrongholdPasswordAsync } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import zxcvbn from 'zxcvbn'
 
@@ -41,7 +41,7 @@
         } else {
             try {
                 busy = true
-                await asyncSetStrongholdPassword(password)
+                await setStrongholdPasswordAsync(password)
 
                 dispatch('next', { password })
             } catch (err) {

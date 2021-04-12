@@ -15,7 +15,7 @@
     let error = ''
     let password
 
-    function deleteProfile() {
+    async function deleteProfile() {
         isBusy = true
         error = ''
         api.setStrongholdPassword(password, {

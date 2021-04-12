@@ -13,9 +13,10 @@ import type { Node } from './typings/client'
 /**
  * Profile
  */
-interface Profile {
+export interface Profile {
     id: string
     name: string
+    firstAccountId: string
     /**
      * Time for most recent stronghold back up
      */
@@ -96,6 +97,7 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
     const profile: Profile = {
         id: generateRandomId(),
         name: profileName,
+        firstAccountId: '',
         lastStrongholdBackupTime: null,
         isDeveloperProfile,
         settings: {

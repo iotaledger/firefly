@@ -23,7 +23,6 @@
         initialiseListeners,
         isTransferring,
         prepareAccountInfo,
-        removeEventListeners,
         selectedAccountId,
         syncAccounts,
         transferState,
@@ -110,7 +109,6 @@
                     accountsLoaded.set(true)
                     syncAccounts(false)
                 }
-
                 if (accountsResponse.payload.length === 0) {
                     _continue()
                 } else {
@@ -119,17 +117,14 @@
                         incoming: 0,
                         outgoing: 0,
                     }
-
                     for (const [idx, storedAccount] of accountsResponse.payload.entries()) {
                         getAccountMeta(storedAccount.id, (err, meta) => {
                             if (!err) {
                                 totalBalance.balance += meta.balance
                                 totalBalance.incoming += meta.incoming
                                 totalBalance.outgoing += meta.outgoing
-
                                 const account = prepareAccountInfo(storedAccount, meta)
                                 accounts.update((accounts) => [...accounts, account])
-
                                 if (idx === accountsResponse.payload.length - 1) {
                                     updateBalanceOverview(totalBalance.balance, totalBalance.incoming, totalBalance.outgoing)
                                     _continue()
@@ -507,12 +502,10 @@
         }
     }
 
-    onMount(() => {
+    onMount(async () => {
         if (!$accountsLoaded) {
-            getAccounts()
+            await getAccounts()
         }
-
-        removeEventListeners($activeProfile.id)
 
         initialiseListeners()
 
