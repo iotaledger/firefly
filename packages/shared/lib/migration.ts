@@ -1,17 +1,15 @@
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import type { Input, MigrationBundle, MigrationData } from 'shared/lib/typings/migration'
 import type { Address } from 'shared/lib/typings/address'
-import type { Message } from 'shared/lib/typings/message'
 import Validator from 'shared/lib/validator'
-import { api, WalletAccount } from 'shared/lib/wallet'
+import { api } from 'shared/lib/wallet'
 import { derived, get, writable, Writable } from 'svelte/store'
-import { localize } from 'shared/lib/i18n'
 
 export const LOG_FILE_NAME = 'migration.log'
 
-export const MIGRATION_NODE = ' https://nodes-migration-legacy.iota.cafe'
+export const MIGRATION_NODE = 'https://nodes-legacy.iotatestmigration.net/ '
 
-export const PERMANODE = 'https://chronicle.iota.org/api'
+export const PERMANODE = 'http://permanode.migration.iota.cafe:4000/api'
 
 export const ADDRESS_SECURITY_LEVEL = 2
 
@@ -19,7 +17,7 @@ export const ADDRESS_SECURITY_LEVEL = 2
 export const MINIMUM_MIGRATION_BALANCE = 1000000
 
 /** Bundle mining timeout for each bundle */
-export const MINING_TIMEOUT_SECONDS = 60
+export const MINING_TIMEOUT_SECONDS = 60 * 10
 
 export const MINIMUM_WEIGHT_MAGNITUDE = 14;
 
@@ -33,6 +31,7 @@ interface Bundle {
     migrated: boolean;
     selected: boolean;
     inputs: Input[];
+    miningRuns: number;
 }
 
 interface MigrationState {
@@ -122,7 +121,7 @@ export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0)
             [MIGRATION_NODE],
             ADDRESS_SECURITY_LEVEL,
             initialAddressIndex,
-            undefined, {
+            PERMANODE, {
             onSuccess(response) {
                 const { seed, data } = get(migration)
 
@@ -160,13 +159,13 @@ export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0)
  * 
  * @returns {Promise}
  */
-export const createMigrationBundle = (inputAddressIndexes: number[], mine: boolean): Promise<any> => {
+export const createMigrationBundle = (inputAddressIndexes: number[], offset: number, mine: boolean): Promise<any> => {
     const { seed } = get(migration)
 
     return new Promise((resolve, reject) => {
-        api.createMigrationBundle(get(seed), inputAddressIndexes, mine, MINING_TIMEOUT_SECONDS, LOG_FILE_NAME, {
+        api.createMigrationBundle(get(seed), inputAddressIndexes, mine, MINING_TIMEOUT_SECONDS, offset, LOG_FILE_NAME, {
             onSuccess(response) {
-                assignBundleHash(inputAddressIndexes, response.payload)
+                assignBundleHash(inputAddressIndexes, response.payload, mine)
                 resolve(response)
             },
             onError(error) {
@@ -222,16 +221,28 @@ export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAG
  * @param inputAddressIndexes 
  * @param migrationBundle 
  */
-export const assignBundleHash = (inputAddressIndexes: number[], migrationBundle: MigrationBundle): void => {
+export const assignBundleHash = (inputAddressIndexes: number[], migrationBundle: MigrationBundle, didMine: boolean): void => {
     const { bundles } = get(migration);
 
     bundles.update((_bundles) => {
         return _bundles.map((bundle) => {
             const indexes = bundle.inputs.map((input) => input.index);
             if (indexes.length && indexes.every((index) => inputAddressIndexes.includes(index))) {
+                const isNewCrackabilityScoreLowerThanPrevious = bundle.bundleHash && bundle.crackability && migrationBundle.crackability < bundle.crackability
+
+                // If bundle hash is already set, that means bundle mining has already been performed for this
+                if (bundle.bundleHash) {
+                    return Object.assign({}, bundle, {
+                        miningRuns: didMine ? bundle.miningRuns + 1 : bundle.miningRuns,
+                        bundleHash: isNewCrackabilityScoreLowerThanPrevious ? migrationBundle.bundleHash : bundle.bundleHash,
+                        crackability: isNewCrackabilityScoreLowerThanPrevious ? migrationBundle.crackability : bundle.crackability
+                    })
+                }
+
                 return Object.assign({}, bundle, {
+                    miningRuns: didMine ? bundle.miningRuns + 1 : bundle.miningRuns,
                     bundleHash: migrationBundle.bundleHash,
-                    crackability: parseInt(migrationBundle.crackability.toString())
+                    crackability: migrationBundle.crackability
                 })
             }
 
@@ -362,8 +373,8 @@ export const prepareBundles = () => {
     const unspentInputChunks = selectInputsForUnspentAddresses(unspent)
 
     bundles.set([
-        ...spent.map((input) => ({ migrated: false, selected: input.balance >= MINIMUM_MIGRATION_BALANCE, shouldMine: true, inputs: [input] })),
-        ...unspentInputChunks.map((inputs) => ({ migrated: false, selected: true, shouldMine: false, inputs }))
+        ...spent.map((input) => ({ miningRuns: 0, migrated: false, selected: input.balance >= MINIMUM_MIGRATION_BALANCE, shouldMine: true, inputs: [input] })),
+        ...unspentInputChunks.map((inputs) => ({ miningRuns: 0, migrated: false, selected: true, shouldMine: false, inputs }))
     ].map((_, index) => ({ ..._, index })))
 };
 

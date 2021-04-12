@@ -207,9 +207,9 @@ export const api = {
       permanode,
     )
   },
-  createMigrationBundle: function (seed: string, inputAddressIndexes: number[], mine: boolean, timeoutSeconds: number, logFileName: string):
+  createMigrationBundle: function (seed: string, inputAddressIndexes: number[], mine: boolean, timeoutSeconds: number, offset: number, logFileName: string):
     ((__ids: CommunicationIds) => Promise<string>) {
-    return (__ids: CommunicationIds) => _createMigrationBundle(sendMessage, __ids, seed, inputAddressIndexes, mine, timeoutSeconds, logFileName)
+    return (__ids: CommunicationIds) => _createMigrationBundle(sendMessage, __ids, seed, inputAddressIndexes, mine, timeoutSeconds, offset, logFileName)
   },
   sendMigrationBundle: function (nodes: string[], bundleHash: string, mwm: number):
     ((__ids: CommunicationIds) => Promise<string>) {

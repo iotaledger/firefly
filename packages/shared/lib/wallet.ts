@@ -199,6 +199,7 @@ export const api: {
         inputAddressIndexes: number[],
         mine: boolean,
         timeoutSeconds: number,
+        offset: number,
         logFilePath: string,
         callbacks: { onSuccess: (response: Event<MigrationBundle>) => void, onError: (err: ErrorEventPayload) => void }
     ),

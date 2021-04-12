@@ -33,9 +33,10 @@ export interface SendMigrationBundleResponse {
  * @param {Bridge} bridge 
  * @param {CommunicationIds} __ids 
  * @param {string} seed 
- * @param {string} node 
+ * @param {string[]} nodes 
  * @param {number} [securityLevel] 
  * @param {number} [initialAddressIndex]
+ * @param {string} [permanode]
  *  
  * @returns {Promise}
  */
@@ -70,7 +71,11 @@ export function getMigrationData(
  * @param {Bridge} bridge 
  * @param {CommunicationIds} __ids 
  * @param {string} seed 
- * @param {string} address 
+ * @param {number[]} inputAddressIndexes
+ * @param {boolean} mine
+ * @param {number} timeoutSeconds
+ * @param {number} offset
+ * @param {string} logFileName
  * 
  * @returns {Promise}
  */
@@ -81,6 +86,7 @@ export function createMigrationBundle(
     inputAddressIndexes: number[],
     mine: boolean,
     timeoutSeconds: number,
+    offset: number,
     logFileName: string
 ) {
     return bridge({
@@ -92,6 +98,7 @@ export function createMigrationBundle(
             inputAddressIndexes,
             mine,
             timeoutSeconds,
+            offset,
             logFileName
         },
     })
@@ -104,7 +111,7 @@ export function createMigrationBundle(
  * 
  * @param {Bridge} bridge 
  * @param {CommunicationIds} __ids 
- * @param {string} node 
+ * @param {string[]} node 
  * @param {string} bundleHash
  * @param {number} mwm 
  * 

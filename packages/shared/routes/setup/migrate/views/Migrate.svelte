@@ -36,7 +36,7 @@
         if ($hasSingleBundle && !$hasBundlesWithSpentAddresses) {
             loading = true
 
-            createMigrationBundle(getInputIndexesForBundle($bundles[0]), false)
+            createMigrationBundle(getInputIndexesForBundle($bundles[0]), 0, false)
                 .then((response) => sendMigrationBundle(response.payload.bundleHash))
                 .then(() => {
                     didComplete.set(true)

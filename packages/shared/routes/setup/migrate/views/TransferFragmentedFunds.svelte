@@ -72,7 +72,7 @@
                             return sendMigrationBundle(transaction.bundleHash)
                         }
 
-                        return createMigrationBundle(getInputIndexesForBundle(transaction), false).then((result) =>
+                        return createMigrationBundle(getInputIndexesForBundle(transaction), 0, false).then((result) =>
                             sendMigrationBundle(result.payload.bundleHash)
                         )
                     })
@@ -132,7 +132,7 @@
                             return sendMigrationBundle(transaction.bundleHash)
                         }
 
-                        return createMigrationBundle(getInputIndexesForBundle(transaction), false).then((result) =>
+                        return createMigrationBundle(getInputIndexesForBundle(transaction), 0, false).then((result) =>
                             sendMigrationBundle(result.payload.bundleHash)
                         )
                     })

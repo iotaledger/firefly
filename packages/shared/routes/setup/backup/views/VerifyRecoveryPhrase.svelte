@@ -57,8 +57,7 @@
     }
 
     onMount(() => {
-        verified = true
-        // fillChoices()
+        fillChoices()
     })
 </script>
 
