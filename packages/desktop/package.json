@@ -1,6 +1,6 @@
 {
     "name": "desktop",
-    "productName": "Firefly Beta",
+    "productName": "Firefly Migration",
     "version": "0.4.0",
     "description": "IOTA wallet desktop",
     "main": "public/build/main.js",
@@ -47,7 +47,7 @@
         "webpack-dev-server": "^3.11.2"
     },
     "build": {
-        "productName": "Firefly Beta",
+        "productName": "Firefly Migration",
         "artifactName": "firefly-desktop-${version}.${ext}",
         "copyright": "IOTA Foundation",
         "directories": {
