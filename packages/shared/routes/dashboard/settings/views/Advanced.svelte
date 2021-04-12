@@ -1,15 +1,28 @@
 <script lang="typescript">
-    import { Button, Checkbox, Dropdown, HR, Input, Radio, Text } from 'shared/components'
+    import { Button, Checkbox, Dropdown, HR, Input, Radio, Spinner, Text } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { loggedIn } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
-    import { ExtendedNode, getOfficialDefaultNetwork, getOfficialNodes, getOfficialNetworks } from 'shared/lib/network'
+    import { ExtendedNode, getOfficialDefaultNetwork, getOfficialNetworks, getOfficialNodes } from 'shared/lib/network'
+    import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { buildAccountNetworkSettings, isSyncing, syncAccounts, updateAccountNetworkSettings, wallet } from 'shared/lib/wallet'
+    import { activeProfile } from 'shared/lib/profile'
+    import {
+        api,
+        buildAccountNetworkSettings,
+        isSyncing,
+        syncAccounts,
+        updateAccountNetworkSettings,
+        wallet,
+    } from 'shared/lib/wallet'
+    import { get } from 'svelte/store'
 
     export let locale
 
     let deepLinkingChecked = $appSettings.deepLinking
+
+    let showHiddenAccounts = get(activeProfile)?.settings.showHiddenAccounts
+
     let {
         automaticNodeSelection,
         includeOfficialNodes,
@@ -47,24 +60,23 @@
     ]
 
     const ensurePrimary = (networkId, hintUrl?) => {
-        const networkNodes = nodes.filter(n => n.networkId === networkId)
+        const networkNodes = nodes.filter((n) => n.networkId === networkId)
         if (networkNodes.length > 0) {
             if (hintUrl) {
-                const found = networkNodes.find(n => n.url === hintUrl)
+                const found = networkNodes.find((n) => n.url === hintUrl)
                 if (found) {
                     found.isPrimary = true
                     return
                 }
             }
 
-            const allEnabled = networkNodes.filter(n => !n.disabled)
+            const allEnabled = networkNodes.filter((n) => !n.disabled)
             if (allEnabled.length > 0) {
                 allEnabled[0].isPrimary = true
             }
         }
-
     }
-    $: updateAccountNetworkSettings(automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl, localPow)
+    $: updateAccountNetworkSettings(automaticNodeSelection, includeOfficialNodes, nodes, localPow, networkId, customNetworkId)
 
     $: $appSettings.deepLinking = deepLinkingChecked
     $: {
@@ -147,6 +159,24 @@
                 onSuccess: (node) => {
                     nodes = nodes.filter((n) => n.url !== node.url)
                 },
+            },
+        })
+    }
+
+    function handleResyncAccountsClick() {
+        api.getStrongholdStatus({
+            onSuccess(strongholdStatusResponse) {
+                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                    openPopup({ type: 'password', props: { onSuccess: () => syncAccounts(true, 0, 10) } })
+                } else {
+                    syncAccounts(true, 0, 10)
+                }
+            },
+            onError(err) {
+                showAppNotification({
+                    type: 'error',
+                    message: locale(err.error),
+                })
             },
         })
     }

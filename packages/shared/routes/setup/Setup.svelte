@@ -111,7 +111,7 @@
                 {error}
                 bind:value={profileName}
                 placeholder={locale('views.setup.profileName')}
-                classes="w-full"
+                classes="w-full mb-4"
                 autofocus
                 disabled={busy}
                 submitHandler={() => handleContinueClick(SetupType.New)} />

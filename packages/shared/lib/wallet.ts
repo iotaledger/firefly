@@ -7,7 +7,7 @@ import { HistoryDataProps } from 'shared/lib/marketData'
 import { ExtendedNode, getOfficialDefaultNetwork, getOfficialNetworks, getOfficialNodes } from 'shared/lib/network'
 import { showAppNotification, showSystemNotification } from 'shared/lib/notifications'
 import { activeProfile, isStrongholdLocked, updateProfile } from 'shared/lib/profile'
-import type { Account, Account as BaseAccount, AccountToCreate, Balance, SyncedAccount } from 'shared/lib/typings/account'
+import type { Account, AccountToCreate, Balance, SyncedAccount } from 'shared/lib/typings/account'
 import type { Address } from 'shared/lib/typings/address'
 import type { Actor } from 'shared/lib/typings/bridge'
 import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, ErrorEventPayload, Event, ReattachmentEventPayload, TransactionEventPayload, TransferProgressEventPayload, TransferProgressEventType } from 'shared/lib/typings/events'
@@ -15,7 +15,7 @@ import type { Message } from 'shared/lib/typings/message'
 import { formatUnit } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
 import type { ClientOptions } from './typings/client'
-import type { Duration, StrongholdStatus } from './typings/wallet'
+import type { Duration, NodeInfo, StrongholdStatus } from './typings/wallet'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -174,7 +174,7 @@ export const api: {
     removeStorage(callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     setClientOptions(clientOptions: ClientOptions, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     setStrongholdPasswordClearInterval(interval: Duration, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
-    getNodeInfo(accountId: string, url: string | undefined, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
+    getNodeInfo(accountId: string, url: string | undefined, callbacks: { onSuccess: (response: Event<NodeInfo>) => void, onError: (err: ErrorEventPayload) => void })
 
     onStrongholdStatusChange(callbacks: { onSuccess: (response: Event<StrongholdStatus>) => void, onError: (err: ErrorEventPayload) => void })
     onNewTransaction(callbacks: { onSuccess: (response: Event<TransactionEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
@@ -363,6 +363,20 @@ export const asyncRemoveStorage = () => {
             },
             onError(err) {
                 reject(err)
+            },
+        })
+    })
+}
+
+export const asyncGetNodeInfo = (url) => {
+    return new Promise<NodeInfo | undefined>((resolve) => {
+        api.getNodeInfo(get(selectedAccountId), url, {
+            onSuccess(response) {
+                resolve(response.payload)
+            },
+            onError(err) {
+                console.error(err)
+                resolve(undefined)
             },
         })
     })
@@ -1124,7 +1138,7 @@ export const getAccountMeta = (accountId: string, callback: (
 }
 
 export const prepareAccountInfo = (
-    account: BaseAccount,
+    account: Account,
     meta: {
         balance: number
         incoming: number
@@ -1137,7 +1151,7 @@ export const prepareAccountInfo = (
 
     const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD
 
-    return Object.assign<WalletAccount, BaseAccount, Partial<WalletAccount>>({} as WalletAccount, account, {
+    return Object.assign<WalletAccount, Account, Partial<WalletAccount>>({} as WalletAccount, account, {
         id,
         index,
         depositAddress,
