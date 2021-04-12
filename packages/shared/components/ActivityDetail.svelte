@@ -16,7 +16,7 @@
     export let payload: Payload
     export let onBackClick = () => {}
 
-    const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
+    const accounts = getContext<Writable<WalletAccount[]>>('viewableAccounts')
     const activeAccount = getContext<Readable<WalletAccount>>('selectedAccount')
 
     let senderAccount: WalletAccount
