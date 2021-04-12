@@ -7,6 +7,7 @@
     import AddressHistory from './AddressHistory.svelte'
     import Backup from './Backup.svelte'
     import Busy from './Busy.svelte'
+    import HideAccount from './HideAccount.svelte'
     import DeleteAccount from './DeleteAccount.svelte'
     import DeleteProfile from './DeleteProfile.svelte'
     import Diagnostics from './Diagnostics.svelte'
@@ -15,6 +16,7 @@
     import QR from './QR.svelte'
     import RemoveNode from './RemoveNode.svelte'
     import Version from './Version.svelte'
+    import Transaction from './Transaction.svelte'
 
     export let locale = 'en'
     export let type = undefined
@@ -31,6 +33,7 @@
         version: Version,
         backup: Backup,
         deleteAccount: DeleteAccount,
+        hideAccount: HideAccount,
         addressHistory: AddressHistory,
         addNode: AddNode,
         removeNode: RemoveNode,
@@ -38,6 +41,7 @@
         errorLog: ErrorLog,
         deleteProfile: DeleteProfile,
         diagnostics: Diagnostics,
+        transaction: Transaction,
     }
 
     const onkey = (e) => {

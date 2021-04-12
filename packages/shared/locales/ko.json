@@ -207,7 +207,11 @@
             },
             "resyncAccounts": {
                 "title": "계정 다시 동기화",
-                "description": ""
+                "description": "계정이 최신 상태인지 확인하기 위해 백그라운드 작업을 시작합니다."
+            },
+            "hiddenAccounts": {
+                "title": "Hidden accounts",
+                "description": "Selecting this options will show accounts that were previously hidden."
             },
             "deleteProfile": {
                 "title": "사용자 삭제",
@@ -223,11 +227,19 @@
             },
             "nodeSettings": {
                 "title": "노드 설정",
-                "description": "수동을 선택하여 접속할 노드를 목록에서 수동으로 고르거나 직접 추가"
+                "description": "Select Manual to configure the node settings and connect to your own node"
             },
             "configureNodeList": {
                 "title": "노드 선택",
-                "description": ""
+                "description": "Manage the list of nodes your wallet connects to.",
+                "primaryNode": "Primary node",
+                "excludeNode": "Exclude node",
+                "includeNode": "Include node",
+                "viewDetails": "View details",
+                "setAsPrimary": "Set as primary",
+                "removeNode": "노드 삭제",
+                "includeOfficialNodeList": "Include official node list",
+                "noNodes": "There are no nodes, automatic selection will be used instead."
             },
             "proofOfWork": {
                 "title": "작업증명",
@@ -313,7 +325,8 @@
     "popups": {
         "password": {
             "title": "비밀번호 필요",
-            "subtitle": "Stronghold를 잠금 해제하기 위해 지갑 비밀번호를 입력하세요."
+            "subtitle": "Please enter your password to unlock Stronghold",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "나의 QR 코드"
@@ -331,24 +344,34 @@
             "backupDescription": "계정과 거래 기록의 사본을 유지하기 위해 규칙적으로 백업하는 것이 중요합니다.",
             "backupWarning": "백업과 복원 문구를 잃어버리게 될 경우 지갑 잔고를 잃게 됩니다.",
             "notBackedUp": "백업되지 않음",
-            "notBackedUpDescription": "아직 Stronghold를 백업하지 않았습니다."
+            "notBackedUpDescription": "아직 Stronghold를 백업하지 않았습니다.",
+            "saving": "Saving..."
         },
         "deleteAccount": {
-            "title": "{name} 계정을 삭제할까요?",
-            "body": "나중에 이 계정을 다시 추가할 수 있지만 거래 내역은 복원되지 않습니다.",
-            "typePassword": "계정을 삭제하려면 지갑 비밀번호를 입력하세요.",
-            "deleteAccount": "계정 삭제",
-            "errorTitle": "{name} 계정을 삭제할 수 없습니다",
-            "errorBody1": "계정을 삭제하기 위해서는 잔액이 0이어야 합니다.",
-            "errorBody2": "이 계정에 잔액 {balance}가 남아있습니다. 이 잔액을 다른 계정으로 옮기고 다시 시도해 주세요.",
-            "errorBody3": "이 계정은 삭제할 수 없습니다. 하나 이상의 계정이 있어야 합니다."
+            "title": "Delete {name}?",
+            "body": "This account has no transaction history. It can safely be deleted.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Delete account",
+            "errorTitle": "Unable to delete {name}",
+            "errorBody1": "You cannot delete this account, you must have at least one."
+        },
+        "hideAccount": {
+            "title": "Hide {name}?",
+            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Hide account",
+            "errorTitle": "Unable to hide {name}",
+            "errorBody1": "To hide an account it must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
+            "errorBody3": "You cannot hide this account, you must have at least one."
         },
         "addressHistory": {
-            "title": "{name} 계정 주소 이력",
+            "title": "주소 {name} 이력",
             "currentBalance": "현재 잔액: {balance}"
         },
         "node": {
             "titleAdd": "노드 추가",
+            "titleUpdate": "Update a node",
             "titleRemove": "노드 삭제",
             "titleDetails": "노드 세부사항",
             "nodeAddress": "노드 주소",
@@ -363,7 +386,8 @@
         },
         "deleteProfile": {
             "title": "사용자 삭제",
-            "confirmation": "이 사용자를 삭제할까요? 이 작업은 취소할 수 없습니다."
+            "confirmation": "이 사용자를 삭제할까요? 이 작업은 취소할 수 없습니다.",
+            "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
             "title": "진단",
@@ -375,6 +399,10 @@
             "totalMem": "전체 메모리",
             "freeMem": "사용 가능한 메모리",
             "userPath": "사용자 경로"
+        },
+        "transaction": {
+            "title": "Confirm transaction",
+            "body": "You’re about to send {amount} to"
         }
     },
     "charts": {
@@ -425,16 +453,19 @@
         "enableDeveloperMode": "개발자 모드 활성화하기",
         "enableSystemNotifications": "시스템 알림 켜기",
         "exportState": "상태 내보내기",
-        "outsourceProofOfWork": "원격 작업증명 수행하기",
+        "localProofOfWork": "Local proof of work",
         "unlock": "잠금 해제",
         "updateFirefly": "Firefly 업데이트",
         "restartNow": "지금 다시 시작",
         "saveBackup": "Stronghold 백업 저장하기",
         "customizeAcount": "계정 설정",
         "viewAddressHistory": "주소 이력 보기",
-        "deleteAccount": "계정 삭제하기",
+        "hideAccount": "Hide account",
+        "showAccount": "Unhide account",
+        "deleteAccount": "Delete account",
         "max": "최대",
         "addNode": "노드 추가",
+        "updateNode": "Update node",
         "removeNode": "노드 삭제",
         "hide": "숨기기",
         "hideOthers": "나머지 숨기기",
@@ -459,7 +490,9 @@
         "skipBackup": "파일 백업 건너뛰기",
         "finishSetup": "설정 완료하기",
         "readDocumentation": "설명서 읽기",
-        "visitFaq": "자주 묻는 질문들 보기"
+        "visitFaq": "자주 묻는 질문들 보기",
+        "showHiddenAccounts": "Show hidden accounts",
+        "confirm": "Confirm"
     },
     "general": {
         "password": "비밀번호",
@@ -505,7 +538,7 @@
         "appearance": "모양새",
         "lightTheme": "밝은 테마",
         "darkTheme": "어두운 테마",
-        "totalBalance": "총 잔액",
+        "balance": "Balance",
         "accountBalance": "계정 잔액",
         "incoming": "받음",
         "outgoing": "보냄",
@@ -565,7 +598,8 @@
         "passwordStrength2": "약함",
         "passwordStrength3": "보통",
         "passwordStrength4": "강함",
-        "creatingProfile": "사용자를 만드는 중입니다. 잠시만 기다려 주세요..."
+        "creatingProfile": "사용자를 만드는 중입니다. 잠시만 기다려 주세요...",
+        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
     },
     "dates": {
         "today": "오늘",
@@ -579,6 +613,7 @@
         "valueTx": "{{account}}에 {{value}}를 받는 중",
         "confirmed": "{{account}}에서 {{value}}를 보내는 거래가 성공적으로 승인되었습니다",
         "confirmedInternal": "{{senderAccount}}에서 {{receiverAccount}}로 {{value}}을 보내는 거래가 승인되었습니다",
+        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
         "failed": "{{account}}에서 {{value}}를 보내는 거래가 실패하였습니다",
         "downloadingUpdate": "업데이트 다운로드 중",
         "updateReady": "업데이트 준비됨",
@@ -586,7 +621,8 @@
         "restartInstall": "재시작하여 설치",
         "calcMinutesRemaining": "남은 시간 계산중...",
         "minutesRemaining": "{minutes, plural, other {남은 시간 #분}}",
-        "copiedToClipboard": "클립보드에 복사되었습니다."
+        "copiedToClipboard": "클립보드에 복사되었습니다.",
+        "accountsSynchronized": "계정 동기화 완료"
     },
     "error": {
         "profile": {
@@ -606,7 +642,7 @@
             "dates": "날짜는 추측하기 쉽습니다.",
             "common": "매우 흔한 비밀번호입니다.",
             "similar": "흔히 사용되는 비밀번호와 유사합니다.",
-            "reasonWord": "하나의 단어로 구성된 암호는 추측하기 쉽습니다.",
+            "word": "하나의 단어로 구성된 암호는 추측하기 쉽습니다.",
             "incorrect": "비밀번호가 올바르지 않습니다.",
             "length": "비밀번호는 {length, plural, other {#글자}}를 초과할 없습니다."
         },
@@ -619,7 +655,11 @@
             "length": "계정 이름은 {length, plural, other {#글자}}보다 길 수 없습니다.",
             "empty": "새 계정을 만들기 전에 아직 사용하지 않은 기존 계정을 사용해야 합니다.",
             "notEmpty": "이 계정을 삭제하려면 계정에 남은 잔고를 비워야 합니다.",
-            "duplicate": "같은 이름의 계정이 이미 존재합니다."
+            "duplicate": "같은 이름의 계정이 이미 존재합니다.",
+            "tilde": "사용자 이름은 `~`로 시작할 수 없습니다.",
+            "control": "사용자 이름은 제어 문자를 포함할 수 없습니다.",
+            "startDot": "사용자 이름은 '.'로 시작할 수 없습니다.",
+            "chars": "사용자 이름은 <>:\"/\\|?*을 포함할 수 없습니다."
         },
         "send": {
             "addressLength": "주소는 {length, plural, other {#글자}}여야 합니다.",
@@ -627,8 +667,10 @@
             "amountNoFloat": "단위가 'i'이면 소수점을 사용할 수 없습니다.",
             "amountInvalidFormat": "금액에 잘못된 내용이 있습니다.",
             "amountZero": "보내는 양은 0보다 커야 합니다.",
-            "wrongAddressFormat": "주소는 앞에 {prefix} 로 시작합니다.",
+            "wrongAddressPrefix": "주소는 {prefix}로 시작합니다.",
+            "wrongAddressFormat": "주소가 형식에 맞지 않습니다.",
             "insufficientFunds": "계정에 잔고가 부족합니다.",
+            "noToAccount": "보낼 계정을 선택하지 않았습니다.",
             "sendingDust": "1 Mi 미만은 보낼 수 없습니다.",
             "leavingDust": "주소에 1 Mi 미만을 남겨놓을 수 없습니다."
         },

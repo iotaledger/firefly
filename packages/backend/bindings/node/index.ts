@@ -130,8 +130,8 @@ export const api = {
   getAccounts: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _getAccounts(sendMessage, __ids)
   },
-  syncAccounts: function (): ((__ids: CommunicationIds) => Promise<string>) {
-    return (__ids: CommunicationIds) => _syncAccounts(sendMessage, __ids)
+  syncAccounts: function (addressIndex?: number, gapLimit?: number): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _syncAccounts(sendMessage, __ids, addressIndex, gapLimit)
   },
   areLatestAddressesUnused: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _areLatestAddressesUnused(sendMessage, __ids)

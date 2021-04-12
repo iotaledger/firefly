@@ -1,8 +1,7 @@
 import { AvailableExchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
-import { DEFAULT_NODE } from 'shared/lib/network'
 import { generateRandomId } from 'shared/lib/utils'
-import { api, getStoragePath } from 'shared/lib/wallet'
+import { asyncRemoveStorage, destroyActor, getStoragePath } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
 import type { ChartSelectors } from './chart'
 import { Electron } from './electron'
@@ -33,6 +32,7 @@ interface Profile {
      */
     settings: UserSettings
     isDeveloperProfile: boolean,
+    hiddenAccounts?: string[],
     migratedTransactions?: MigratedTransaction[]
 }
 
@@ -40,13 +40,13 @@ interface Profile {
  * User Settings
  */
 export interface UserSettings {
-    outsourcePow: boolean
     currency: AvailableExchangeRates
     automaticNodeSelection: boolean
-    node: Node
-    customNodes: Node[]
+    includeOfficialNodes: boolean
+    disabledNodes: string[] | undefined
     /** Lock screen timeout in minutes */
-    lockScreenTimeout: number,
+    lockScreenTimeout: number
+    showHiddenAccounts?: boolean
     chartSelectors: ChartSelectors
 }
 
@@ -107,12 +107,10 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
         lastStrongholdBackupTime: null,
         isDeveloperProfile,
         settings: {
-            outsourcePow: false,
             currency: AvailableExchangeRates.USD,
             automaticNodeSelection: true,
-            node: DEFAULT_NODE,
-            customNodes: [],
-            // Minutes
+            includeOfficialNodes: true,
+            disabledNodes: undefined,
             lockScreenTimeout: 5,
             chartSelectors: {
                 currency: AvailableExchangeRates.USD,
@@ -134,16 +132,15 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
  *
  * @returns {void}
  */
-export const disposeNewProfile = () => {
+export const disposeNewProfile = async () => {
     const np = get(newProfile)
     if (np) {
-        api.removeStorage({
-            onSuccess() {
-            },
-            onError(err) {
-                console.error(err)
-            },
-        })
+        try {
+            await asyncRemoveStorage()
+        } catch (err) {
+            console.error(err)
+        }
+        destroyActor(np.id)
     }
     newProfile.set(null)
     activeProfileId.set(null)
@@ -198,7 +195,7 @@ export const removeProfile = (id: string): void => {
  * @returns {void}
  */
 export const updateProfile = (
-    path: string, value: MigratedTransaction[] | string | boolean | Date | AvailableExchangeRates | Node | Node[] | ChartSelectors | HistoryDataProps) => {
+    path: string, value: string | string[] | boolean | Date | AvailableExchangeRates | Node | Node[] | ChartSelectors | HistoryDataProps | MigratedTransaction[]) => {
     const _update = (_profile) => {
         const pathList = path.split('.')
 

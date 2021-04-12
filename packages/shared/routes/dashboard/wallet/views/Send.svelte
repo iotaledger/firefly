@@ -2,6 +2,7 @@
     import { convertUnits, Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Error, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
+    import { closePopup, openPopup } from 'shared/lib/popup'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import type { TransferProgressEventType } from 'shared/lib/typings/events'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
@@ -9,14 +10,14 @@
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
     import { isTransferring, transferState, WalletAccount } from 'shared/lib/wallet'
     import { getContext, onDestroy, onMount } from 'svelte'
-    import type { Readable, Writable } from 'svelte/store'
+    import type { Readable } from 'svelte/store'
 
     export let locale
     export let send
     export let internalTransfer
 
-    const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
     const account = getContext<Readable<WalletAccount>>('selectedAccount')
+    const liveAccounts = getContext<Readable<WalletAccount[]>>('liveAccounts')
 
     enum SEND_TYPE {
         EXTERNAL = 'sendPayment',
@@ -26,20 +27,22 @@
     let selectedSendType = $sendParams.isInternal ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
     let unit = Unit.Mi
     let amount = $sendParams.amount === 0 ? '' : convertUnitsNoE($sendParams.amount, Unit.i, unit)
+    let address = $sendParams.address
     let to = undefined
     let amountError = ''
-    let addressPrefix = ($account ?? $accounts[0]).depositAddress.split('1')[0]
+    let addressPrefix = ($account ?? $liveAccounts[0]).depositAddress.split('1')[0]
     let addressError = ''
     let toError = ''
 
     // This looks odd but sets a reactive dependency on amount, so when it changes the error will clear
     $: amount, (amountError = '')
     $: to, (toError = '')
-    $: $sendParams.address, (addressError = '')
+    $: address, (addressError = '')
 
-    const sendSubscription = sendParams.subscribe(s => {
+    const sendSubscription = sendParams.subscribe((s) => {
         selectedSendType = s.isInternal ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
         amount = s.amount === 0 ? '' : convertUnitsNoE(s.amount, Unit.i, unit)
+        address = s.address
     })
 
     let transferSteps: {
@@ -78,7 +81,7 @@
         },
     }
 
-    $: accountsDropdownItems = $accounts.map((acc) => format(acc))
+    $: accountsDropdownItems = $liveAccounts.map((acc) => format(acc))
     $: from = $account ? format($account) : accountsDropdownItems[0]
 
     const handleSendTypeClick = (type) => {
@@ -88,7 +91,7 @@
     const handleFromSelect = (item) => {
         from = item
         if (to === from) {
-            to = $accounts.length === 2 ? accountsDropdownItems[from.id === $accounts[0].id ? 1 : 0] : undefined
+            to = $liveAccounts.length === 2 ? accountsDropdownItems[from.id === $liveAccounts[0].id ? 1 : 0] : undefined
         }
         amountError = ''
     }
@@ -121,14 +124,14 @@
 
                 if (selectedSendType === SEND_TYPE.EXTERNAL) {
                     // Validate address length
-                    if ($sendParams.address.length !== ADDRESS_LENGTH) {
+                    if (address.length !== ADDRESS_LENGTH) {
                         addressError = locale('error.send.addressLength', {
                             values: {
                                 length: ADDRESS_LENGTH,
                             },
                         })
                     } else {
-                        addressError = validateBech32Address(addressPrefix, $sendParams.address)
+                        addressError = validateBech32Address(addressPrefix, address)
                     }
                 } else {
                     if (!to) {
@@ -137,15 +140,28 @@
                 }
 
                 if (!amountError && !addressError && !toError) {
+                    $sendParams.address = address
                     $sendParams.amount = amountAsI
-
-                    if (selectedSendType === SEND_TYPE.INTERNAL) {
-                        internalTransfer(from.id, to.id, $sendParams.amount)
-                    } else {
-                        send(from.id, $sendParams.address, $sendParams.amount)
-                    }
+                    openPopup({
+                        type: 'transaction',
+                        props: {
+                            internal: selectedSendType === SEND_TYPE.INTERNAL,
+                            amount: $sendParams.amount,
+                            to: selectedSendType === SEND_TYPE.INTERNAL ? to.alias : $sendParams.address,
+                            onConfirm: triggerSend,
+                        },
+                    })
                 }
             }
+        }
+    }
+
+    const triggerSend = () => {
+        closePopup()
+        if (selectedSendType === SEND_TYPE.INTERNAL) {
+            internalTransfer(from.id, to.id, $sendParams.amount)
+        } else {
+            send(from.id, $sendParams.address, $sendParams.amount)
         }
     }
 
@@ -168,7 +184,7 @@
         amount = convertUnitsNoE(from.balance, Unit.i, unit)
     }
     onMount(() => {
-        to = $accounts.length === 2 ? accountsDropdownItems[from.id === $accounts[0].id ? 1 : 0] : to
+        to = $liveAccounts.length === 2 ? accountsDropdownItems[from.id === $liveAccounts[0].id ? 1 : 0] : to
     })
     onDestroy(() => {
         sendSubscription()
@@ -204,7 +220,7 @@
                         {locale(`general.${SEND_TYPE.EXTERNAL}`)}
                     </Text>
                 </button>
-                {#if $accounts.length > 1}
+                {#if $liveAccounts.length > 1}
                     <button
                         on:click={() => handleSendTypeClick(SEND_TYPE.INTERNAL)}
                         disabled={$isTransferring}
@@ -233,19 +249,10 @@
                             placeholder={locale('general.from')}
                             items={accountsDropdownItems}
                             onSelect={handleFromSelect}
-                            disabled={$accounts.length === 1 || $isTransferring} />
+                            disabled={$liveAccounts.length === 1 || $isTransferring} />
                     </div>
                 {/if}
                 <div class="w-full block">
-                    <Amount
-                        error={amountError}
-                        bind:amount
-                        bind:unit
-                        maxClick={handleMaxClick}
-                        {locale}
-                        classes="mb-6"
-                        disabled={$isTransferring}
-                        autofocus />
                     {#if selectedSendType === SEND_TYPE.INTERNAL}
                         <Dropdown
                             value={to?.label || null}
@@ -253,17 +260,27 @@
                             placeholder={locale('general.to')}
                             items={accountsDropdownItems.filter((a) => from && a.id !== from.id)}
                             onSelect={handleToSelect}
-                            disabled={$isTransferring || $accounts.length === 2} />
-                        <Error error={toError} />
+                            disabled={$isTransferring || $liveAccounts.length === 2}
+                            error={toError} 
+                            classes="mb-6" />
                     {:else}
                         <Address
                             error={addressError}
-                            bind:address={$sendParams.address}
+                            bind:address={address}
                             {locale}
                             label={locale('general.sendToAddress')}
                             disabled={$isTransferring}
-                            placeholder={`${locale('general.sendToAddress')}\n${addressPrefix}...`} />
+                            placeholder={`${locale('general.sendToAddress')}\n${addressPrefix}...`}                         
+                            classes="mb-6"/>
                     {/if}
+                    <Amount
+                        error={amountError}
+                        bind:amount
+                        bind:unit
+                        maxClick={handleMaxClick}
+                        {locale}
+                        disabled={$isTransferring}
+                        autofocus />
                 </div>
             </div>
         </div>
@@ -271,11 +288,7 @@
     {#if !$isTransferring}
         <div class="flex flex-row justify-between px-2">
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>{locale('actions.cancel')}</Button>
-            <Button
-                classes="-mx-2 w-1/2"
-                onClick={() => handleSendClick()}>
-                {locale('actions.send')}
-            </Button>
+            <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()}>{locale('actions.send')}</Button>
         </div>
     {/if}
     {#if $isTransferring}

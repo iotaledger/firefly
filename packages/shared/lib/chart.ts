@@ -140,9 +140,7 @@ export const getAccountActivityData = (account: WalletAccount) => {
     let incoming: ChartData = { data: [], tooltips: [], label: localize('general.incoming'), color: account.color || 'blue' } // TODO: profile colors
     let outgoing: ChartData = { data: [], tooltips: [], label: localize('general.outgoing'), color: 'gray' } // TODO: profile colors
     let labels: string[] = []
-    let messages: Message[] = account.messages.slice().sort((a, b) => {
-        return <any>new Date(a.timestamp).getTime() - <any>new Date(b.timestamp).getTime()
-    })
+    let messages: Message[] = account.messages.slice().sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime())
     for (var i = 0; i < BAR_CHART_ACTIVITY_MONTHS; i++) {
         let start: number = new Date(now.getFullYear(), now.getMonth() - i, 1).getTime();
         let end: number = new Date(now.getFullYear(), now.getMonth() - i + 1, 0).getTime();
@@ -256,7 +254,7 @@ function formatLabel(timestamp: number): string {
 }
 
 function formatLineChartTooltip(data: (number | string), timestamp: number | string, showMiota: boolean = false): Tooltip {
-    const currency = get(activeProfile)?.settings.chartSelectors.currency
+    const currency = get(activeProfile)?.settings.chartSelectors.currency ?? ''
     const title: string = `${showMiota ? `1 ${Unit.Mi}: ` : ''}${formatCurrencyValue(data, currency, 3)} ${currency}`
     const label: string = get(i18nDate)(new Date(timestamp), {
         year: 'numeric',

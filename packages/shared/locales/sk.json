@@ -5,7 +5,7 @@
             "body": "Firefly je oficiálna IOTA peňaženka."
         },
         "legal": {
-            "title": "Zásady ochrany osobných údajov a zmluvné podmienky",
+            "title": "Ochrana osobných údajov a zmluvné podmienky",
             "body": "Prosím preštudujte si Zásady ochrany osobných údajov a zmluvné podmienky.",
             "privacyPolicy": {
                 "title": "Zásady ochrany osobných údajov",
@@ -207,7 +207,11 @@
             },
             "resyncAccounts": {
                 "title": "Nanovo synchronizovať účty",
-                "description": ""
+                "description": "Starts a background task to make sure your accounts are up to date."
+            },
+            "hiddenAccounts": {
+                "title": "Hidden accounts",
+                "description": "Selecting this options will show accounts that were previously hidden."
             },
             "deleteProfile": {
                 "title": "Odstrániť profil",
@@ -223,11 +227,19 @@
             },
             "nodeSettings": {
                 "title": "Nastavenia uzla",
-                "description": "Zvoľte Manuálne pre voľbu uzla zo zoznamu alebo pripojenie sa na vlastný uzol"
+                "description": "Select Manual to configure the node settings and connect to your own node"
             },
             "configureNodeList": {
                 "title": "Zvoliť uzol",
-                "description": ""
+                "description": "Manage the list of nodes your wallet connects to.",
+                "primaryNode": "Primary node",
+                "excludeNode": "Exclude node",
+                "includeNode": "Include node",
+                "viewDetails": "View details",
+                "setAsPrimary": "Set as primary",
+                "removeNode": "Odstrániť uzol",
+                "includeOfficialNodeList": "Include official node list",
+                "noNodes": "There are no nodes, automatic selection will be used instead."
             },
             "proofOfWork": {
                 "title": "Proof of Work",
@@ -313,7 +325,8 @@
     "popups": {
         "password": {
             "title": "Heslo je vyžadované",
-            "subtitle": "Prosím zadajte heslo vašej peňaženky pre odomknutie Strongholdu"
+            "subtitle": "Please enter your password to unlock Stronghold",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "Váš QR kód"
@@ -331,24 +344,34 @@
             "backupDescription": "Je dôležité zálohovať pravidelne pre uistenie sa, že máte kópiu vašich účtov a histórií transakcií.",
             "backupWarning": "Ak stratíte vašu zálohu a frázu obnovenia, stratíte prístup k svojim prostriedkom.",
             "notBackedUp": "Nezálohované",
-            "notBackedUpDescription": "Nezálohovali ste svoj Stronghold"
+            "notBackedUpDescription": "Nezálohovali ste svoj Stronghold",
+            "saving": "Saving..."
         },
         "deleteAccount": {
-            "title": "Odstrániť {name}?",
-            "body": "Tento účet môžete neskôr pridať naspäť, no môžete prísť o históriu transakcii.",
-            "typePassword": "Zadajte heslo svojej peňaženky pre potvrdenie.",
-            "deleteAccount": "Odstrániť účet",
-            "errorTitle": "Nemožno odstrániť {name}",
-            "errorBody1": "Pre odstránenie účtu musí mať nulový zostatok.",
-            "errorBody2": "Na tomto účte je váš momentálny zostatok {balance}. Prosím, presuňte tieto prostriedky na iný účet a skúste znova.",
-            "errorBody3": "Nemôžete odstrániť tento účet, musíte mať aspoň jeden."
+            "title": "Delete {name}?",
+            "body": "This account has no transaction history. It can safely be deleted.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Delete account",
+            "errorTitle": "Unable to delete {name}",
+            "errorBody1": "You cannot delete this account, you must have at least one."
+        },
+        "hideAccount": {
+            "title": "Hide {name}?",
+            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Hide account",
+            "errorTitle": "Unable to hide {name}",
+            "errorBody1": "To hide an account it must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
+            "errorBody3": "You cannot hide this account, you must have at least one."
         },
         "addressHistory": {
-            "title": "História adresy účtu {name}",
+            "title": "{name} address history",
             "currentBalance": "Aktuálny zostatok: {balance}"
         },
         "node": {
             "titleAdd": "Pridať uzol",
+            "titleUpdate": "Update a node",
             "titleRemove": "Odstrániť uzol",
             "titleDetails": "Detaily uzla",
             "nodeAddress": "Adresa uzla",
@@ -363,7 +386,8 @@
         },
         "deleteProfile": {
             "title": "Odstrániť profil",
-            "confirmation": "Naozaj chcete odstrániť tento profil? Túto akciu nie je možné vrátiť späť."
+            "confirmation": "Naozaj chcete odstrániť tento profil? Túto akciu nie je možné vrátiť späť.",
+            "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
             "title": "Diagnostika",
@@ -375,6 +399,10 @@
             "totalMem": "Celková pamäť",
             "freeMem": "Voľná pamäť",
             "userPath": "Používateľská cesta"
+        },
+        "transaction": {
+            "title": "Confirm transaction",
+            "body": "You’re about to send {amount} to"
         }
     },
     "charts": {
@@ -425,16 +453,19 @@
         "enableDeveloperMode": "Zapnúť vývojársky režim",
         "enableSystemNotifications": "Zapnúť systémové notifikácie",
         "exportState": "Exportovať stav",
-        "outsourceProofOfWork": "Proof of work outsourcing",
+        "localProofOfWork": "Local proof of work",
         "unlock": "Odomknúť",
         "updateFirefly": "Aktualizovať Firefly",
         "restartNow": "Reštartovať",
         "saveBackup": "Uložiť Stronghold zálohu",
         "customizeAcount": "Upraviť konto",
         "viewAddressHistory": "Zobraziť históriu adresy",
-        "deleteAccount": "Odstrániť účet",
+        "hideAccount": "Hide account",
+        "showAccount": "Unhide account",
+        "deleteAccount": "Delete account",
         "max": "Max",
         "addNode": "Pridať uzol",
+        "updateNode": "Update node",
         "removeNode": "Odstrániť uzol",
         "hide": "Skryť",
         "hideOthers": "Skryť ostatné",
@@ -459,7 +490,9 @@
         "skipBackup": "Preskočiť súborovú zálohu",
         "finishSetup": "Dokončiť nastavenia",
         "readDocumentation": "Prečítajte si dokumentáciu",
-        "visitFaq": "Navštíviť FAQ"
+        "visitFaq": "Navštíviť FAQ",
+        "showHiddenAccounts": "Show hidden accounts",
+        "confirm": "Confirm"
     },
     "general": {
         "password": "Heslo",
@@ -505,7 +538,7 @@
         "appearance": "Vzhľad",
         "lightTheme": "Svetlý motív",
         "darkTheme": "Tmavý motív",
-        "totalBalance": "Celkový zostatok",
+        "balance": "Balance",
         "accountBalance": "Zostatok na účte",
         "incoming": "Prichádzajúce",
         "outgoing": "Odchádzajúce",
@@ -565,7 +598,8 @@
         "passwordStrength2": "Slabé",
         "passwordStrength3": "Priemerné",
         "passwordStrength4": "Silné",
-        "creatingProfile": "Vytváranie profilu, prosím počkajte..."
+        "creatingProfile": "Vytváranie profilu, prosím počkajte...",
+        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
     },
     "dates": {
         "today": "Dnes",
@@ -579,6 +613,7 @@
         "valueTx": "Prijímanie {{value}} na {{account}}",
         "confirmed": "Odchádzajúce {{value}} z {{account}} boli potvrdené",
         "confirmedInternal": "{{value}} od {{senderAccount}} pre {{receiverAccount}} bolo potvrdených",
+        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
         "failed": "Odchádzajúce {{value}} od {{account}} zlyhalo",
         "downloadingUpdate": "Sťahuje sa aktualizácia",
         "updateReady": "Aktualizácia je pripravená",
@@ -586,7 +621,8 @@
         "restartInstall": "Pre inštaláciu reštartujte",
         "calcMinutesRemaining": "Výpočet zostávajúcich minút...",
         "minutesRemaining": "{minutes, plural, one {ostáva 1 minúta} \nfew {ostávajú # minúty} \nmany {ostáva # minút} \nother {ostáva # minút}}",
-        "copiedToClipboard": "Skopírované do schránky"
+        "copiedToClipboard": "Skopírované do schránky",
+        "accountsSynchronized": "Account synchronization complete"
     },
     "error": {
         "profile": {
@@ -606,7 +642,7 @@
             "dates": "Dátumy sú ľahko uhádnuteľné.",
             "common": "Toto je veľmi bežné heslo.",
             "similar": "Toto heslo je podobné bežne používaným heslám.",
-            "reasonWord": "Samotné slovo sa dá ľahko uhádnuť.",
+            "word": "A single word is easy to guess.",
             "incorrect": "Vaše heslo je nesprávne.",
             "length": "Vaše heslo nesmie byť dlhšie ako {length, plural, one {1 znak} few {# znaky} other {# znakov}}."
         },
@@ -619,7 +655,11 @@
             "length": "Názov vášho účtu nemôže byť dlhší ako {length, plural, one {1 znak} few {# znaky} other {# znakov}}.",
             "empty": "Musíte použiť svoj najnovší účet pred vytvorením nového.",
             "notEmpty": "Pred odstránením tohto účtu musíte previesť svoj zostatok.",
-            "duplicate": "Účet s týmto menom už existuje."
+            "duplicate": "Účet s týmto menom už existuje.",
+            "tilde": "A profile name can't start with the '~' character.",
+            "control": "A profile name can't contain a control character.",
+            "startDot": "A profile name can't start with the '.' character.",
+            "chars": "A profile name can't contain the following characters <>:\"/\\|?*"
         },
         "send": {
             "addressLength": "Adresy by mali mať dĺžku {length, plural, one {1 znak} other {# znakov}}.",
@@ -627,8 +667,10 @@
             "amountNoFloat": "Ak sú jednotky `i`, nemôžete použiť desatinné miesta.",
             "amountInvalidFormat": "Zdá sa, že čiastka je neplatné číslo.",
             "amountZero": "Hodnota musí byť vyššia ako 0.",
-            "wrongAddressFormat": "Adresy začínajú s predponou {prefix}.",
+            "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
+            "wrongAddressFormat": "The address is not correctly formatted.",
             "insufficientFunds": "Tento účet nemá dostatok prostriedkov.",
+            "noToAccount": "You have not selected an account to send the funds to.",
             "sendingDust": "Nemôžete odoslať menej ako 1 Mi.",
             "leavingDust": "Zostatok vašej adresy nemôže byť nižší ako 1 Mi."
         },

@@ -30,6 +30,12 @@
     [slot='rightpane'] section {
         scroll-margin: 3rem;
     }
+
+    :global(.legal-scroll-bar) {
+            &::-webkit-scrollbar-thumb {
+                @apply border-gray-100;
+            }
+        }
 </style>
 
 {#if mobile}
@@ -47,7 +53,7 @@
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex items-center px-40 py-20">
-            <Scroller classes="w-full text-justify py-12 pr-10" threshold={70} bind:progress bind:index bind:this={scroller}>
+            <Scroller classes="w-full text-justify py-12 pr-10 legal-scroll-bar" threshold={70} bind:progress bind:index bind:this={scroller}>
                 <section class="mb-12" bind:this={privacyPolicy}>
                     <Text type="h1" classes="mb-5">{locale('views.legal.privacyPolicy.title')}</Text>
                     <Text type="p" secondary classes="mb-5">{locale('views.legal.privacyPolicy.body1')}</Text>

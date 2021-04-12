@@ -207,7 +207,11 @@
             },
             "resyncAccounts": {
                 "title": "重新同步账户",
-                "description": ""
+                "description": "Starts a background task to make sure your accounts are up to date."
+            },
+            "hiddenAccounts": {
+                "title": "Hidden accounts",
+                "description": "Selecting this options will show accounts that were previously hidden."
             },
             "deleteProfile": {
                 "title": "删除配置文件",
@@ -223,11 +227,19 @@
             },
             "nodeSettings": {
                 "title": "节点设置",
-                "description": "从节点列表中选择手动选择或连接到您自己的节点"
+                "description": "Select Manual to configure the node settings and connect to your own node"
             },
             "configureNodeList": {
                 "title": "选择节点",
-                "description": ""
+                "description": "Manage the list of nodes your wallet connects to.",
+                "primaryNode": "Primary node",
+                "excludeNode": "Exclude node",
+                "includeNode": "Include node",
+                "viewDetails": "View details",
+                "setAsPrimary": "Set as primary",
+                "removeNode": "删除节点",
+                "includeOfficialNodeList": "Include official node list",
+                "noNodes": "There are no nodes, automatic selection will be used instead."
             },
             "proofOfWork": {
                 "title": "工作量证明",
@@ -313,7 +325,8 @@
     "popups": {
         "password": {
             "title": "需要输入密码",
-            "subtitle": "请输入你的钱包密码来解锁Stronghold"
+            "subtitle": "Please enter your password to unlock Stronghold",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "你的二维码"
@@ -331,24 +344,34 @@
             "backupDescription": "定期备份您的账户和交易记录是非常重要的。",
             "backupWarning": "如果您丢失了备份文件和恢复短语，您将再也不能访问您的资金",
             "notBackedUp": "没有备份",
-            "notBackedUpDescription": "您还没有备份您的 Stronghold"
+            "notBackedUpDescription": "您还没有备份您的 Stronghold",
+            "saving": "Saving..."
         },
         "deleteAccount": {
-            "title": "删除{name}?",
-            "body": "您可以稍后添加此账户，但您可能会丢失您的交易历史记录。",
-            "typePassword": "请输入您的钱包密码进行确认。",
-            "deleteAccount": "删除账户",
-            "errorTitle": "无法删除 {name}",
-            "errorBody1": "你只能删除余额为0的账户",
-            "errorBody2": "目前你的这个账户还有 {balance} 余额. 请把这些资金移动到另一个账户后重试。",
-            "errorBody3": "您需要至少拥有一个账户后才可删除此账户。"
+            "title": "Delete {name}?",
+            "body": "This account has no transaction history. It can safely be deleted.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Delete account",
+            "errorTitle": "Unable to delete {name}",
+            "errorBody1": "You cannot delete this account, you must have at least one."
+        },
+        "hideAccount": {
+            "title": "Hide {name}?",
+            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Hide account",
+            "errorTitle": "Unable to hide {name}",
+            "errorBody1": "To hide an account it must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
+            "errorBody3": "You cannot hide this account, you must have at least one."
         },
         "addressHistory": {
-            "title": "{name} 账户地址历史记录",
+            "title": "{name} address history",
             "currentBalance": "当前余额: {balance}"
         },
         "node": {
             "titleAdd": "添加节点",
+            "titleUpdate": "Update a node",
             "titleRemove": "删除节点",
             "titleDetails": "节点详细信息",
             "nodeAddress": "节点地址",
@@ -363,7 +386,8 @@
         },
         "deleteProfile": {
             "title": "删除配置文件",
-            "confirmation": "您确定要删除此配置文件吗？此操作无法撤消。"
+            "confirmation": "您确定要删除此配置文件吗？此操作无法撤消。",
+            "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
             "title": "诊断程序",
@@ -375,6 +399,10 @@
             "totalMem": "总内存",
             "freeMem": "空闲内存",
             "userPath": "用户路径"
+        },
+        "transaction": {
+            "title": "Confirm transaction",
+            "body": "You’re about to send {amount} to"
         }
     },
     "charts": {
@@ -425,16 +453,19 @@
         "enableDeveloperMode": "打开开发者模式",
         "enableSystemNotifications": "启用系统通知",
         "exportState": "导出状态",
-        "outsourceProofOfWork": "外包工作证明",
+        "localProofOfWork": "Local proof of work",
         "unlock": "解锁",
         "updateFirefly": "更新Firefly",
         "restartNow": "立即重启",
         "saveBackup": "保存Stronghold备份",
         "customizeAcount": "自定义账户",
         "viewAddressHistory": "显示地址历史记录",
-        "deleteAccount": "删除账户",
+        "hideAccount": "Hide account",
+        "showAccount": "Unhide account",
+        "deleteAccount": "Delete account",
         "max": "最大",
         "addNode": "添加节点",
+        "updateNode": "Update node",
         "removeNode": "删除节点",
         "hide": "隐藏",
         "hideOthers": "隐藏其它",
@@ -459,7 +490,9 @@
         "skipBackup": "跳过文件备份",
         "finishSetup": "完成设置",
         "readDocumentation": "阅读文档",
-        "visitFaq": "访问常见问题"
+        "visitFaq": "访问常见问题",
+        "showHiddenAccounts": "Show hidden accounts",
+        "confirm": "Confirm"
     },
     "general": {
         "password": "密码",
@@ -505,7 +538,7 @@
         "appearance": "外观",
         "lightTheme": "浅色主题",
         "darkTheme": "深色主题",
-        "totalBalance": "总余额",
+        "balance": "Balance",
         "accountBalance": "账户余额",
         "incoming": "收到",
         "outgoing": "转出",
@@ -565,11 +598,12 @@
         "passwordStrength2": "弱的",
         "passwordStrength3": "一般",
         "passwordStrength4": "强壮的",
-        "creatingProfile": "正在创建帐户，请稍候..."
+        "creatingProfile": "正在创建帐户，请稍候...",
+        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
     },
     "dates": {
         "today": "今日",
-        "yesterday": "Yesterday",
+        "yesterday": "昨天",
         "daysAgo": "{time, plural, one {# 天} other {# 天}} 前",
         "weeksAgo": "{time, plural, one {# 周} other {# 周}} 前",
         "monthsAgo": "{time, plural, one {# 月} other {# 月}} 前",
@@ -579,6 +613,7 @@
         "valueTx": "帐户 {{account}} 收到 {{value}}",
         "confirmed": "帐户 {{account}} 的 {{value}} 转出交易已确认",
         "confirmedInternal": "{{value}} 从 {{senderAccount}} 到 {{receiverAccount}} 已确认",
+        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
         "failed": "帐户 {{account}} 的 {{value}} 转出交易未能成功。",
         "downloadingUpdate": "正在下载更新",
         "updateReady": "更新已准备就绪",
@@ -586,7 +621,8 @@
         "restartInstall": "重新启动后安装",
         "calcMinutesRemaining": "正在计算剩余分钟...",
         "minutesRemaining": "{minutes, plural, one {还剩最后一分钟...} other {还剩余 # 分钟...}}",
-        "copiedToClipboard": "复制到剪贴板"
+        "copiedToClipboard": "复制到剪贴板",
+        "accountsSynchronized": "Account synchronization complete"
     },
     "error": {
         "profile": {
@@ -606,7 +642,7 @@
             "dates": "日期通常容易被猜到。",
             "common": "这是一个非常常见的密码。",
             "similar": "这是一个与常用密码很类似的密码。",
-            "reasonWord": "单个单词容易被猜测到。",
+            "word": "A single word is easy to guess.",
             "incorrect": "您的密码不正确。",
             "length": "您的密码不能超过 {length, plural, one {1 个字符} other {# 字符}}。"
         },
@@ -619,7 +655,11 @@
             "length": "您的账户名称不能超过 {length, plural, one {1 个字符} other {# 字符}}。",
             "empty": "您必须使用您的最新帐户才能创建一个新帐户。",
             "notEmpty": "您必须在删除此帐户之前转账您的余额。",
-            "duplicate": "具有此名称的帐户已存在。"
+            "duplicate": "具有此名称的帐户已存在。",
+            "tilde": "配置名称不能以“~”字符开头。",
+            "control": "配置名称不能包含控制字符。",
+            "startDot": "配置名称不能以 '.' 字符开头。",
+            "chars": "配置名称不能包含以下字符 <>:\"/\\|?*"
         },
         "send": {
             "addressLength": "地址的长度应该是 {length, plural,one {1 个字符} other {# 个字符}}。",
@@ -627,8 +667,10 @@
             "amountNoFloat": "如果单位是 `i`，你不能使用小数点。",
             "amountInvalidFormat": "金额似乎是一个无效的数字。",
             "amountZero": "金额必须大于零。",
-            "wrongAddressFormat": "地址以前缀 {prefix} 开始。",
+            "wrongAddressPrefix": "地址以前缀 {prefix} 开始。",
+            "wrongAddressFormat": "地址格式不正确。",
             "insufficientFunds": "该账户资金不足。",
+            "noToAccount": "您尚未选择一个账户来发送资金。",
             "sendingDust": "您的发送不能小于 1 Mi。",
             "leavingDust": "您的地址余额不能少于1Mi。"
         },

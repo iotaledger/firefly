@@ -6,20 +6,18 @@
     export let balance = ''
     export let balanceEquiv = ''
     export let color = 'turquoise'
-    export let size = 's'
+    export let size = 'm' // m, l
+    export let hidden = false
     export let disabled = false
 </script>
 
 <style type="text/scss">
     button {
         height: auto;
-        min-height: 90px;
-        max-height: 110px;
-        &.size-m,
+        min-height: 100px;
+        max-height: 100%;
         &.size-l {
             min-height: 140px;
-            max-height: 140px;
-            height: 70%;
         }
         &:disabled {
             @apply pointer-events-none;
@@ -30,7 +28,7 @@
 
 <button
     on:click={onClick}
-    class="size-{size} group rounded-xl bg-gray-100 dark:bg-gray-900 hover:bg-{color}-500 font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'}"
+    class="size-{size} group rounded-xl bg-gray-100 dark:bg-gray-900 hover:bg-{color}-500 font-400 flex flex-col justify-between text-left p-{size === 's' ? '3' : '6'} {hidden ? 'opacity-50' : ''}"
     {disabled}>
     <div class="w-full">
         <Text

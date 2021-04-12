@@ -207,7 +207,11 @@
             },
             "resyncAccounts": {
                 "title": "Risincronizza gli account",
-                "description": ""
+                "description": "Avvia un'attività in background per assicurarsi che i tuoi account siano aggiornati."
+            },
+            "hiddenAccounts": {
+                "title": "Account nascosti",
+                "description": "Selezionando questa opzione, verranno visualizzati gli account precedentemente nascosti."
             },
             "deleteProfile": {
                 "title": "Elimina profilo",
@@ -227,7 +231,15 @@
             },
             "configureNodeList": {
                 "title": "Seleziona un nodo",
-                "description": ""
+                "description": "Gestisci l'elenco dei nodi a cui si connette il tuo wallet.",
+                "primaryNode": "Nodo primario",
+                "excludeNode": "Escludi nodo",
+                "includeNode": "Includi nodo",
+                "viewDetails": "Mostra dettagli",
+                "setAsPrimary": "Imposta come primario",
+                "removeNode": "Rimuovi Nodo",
+                "includeOfficialNodeList": "Includi la lista dei nodi ufficiali",
+                "noNodes": "Non ci sono nodi, verrà invece utilizzata la selezione automatica."
             },
             "proofOfWork": {
                 "title": "Proof of Work",
@@ -313,7 +325,8 @@
     "popups": {
         "password": {
             "title": "Password necessaria",
-            "subtitle": "Si prega di inserire la password del wallet per sbloccare lo Stronghold"
+            "subtitle": "Si prega di inserire la password del wallet per sbloccare lo Stronghold",
+            "backup": "Inserisci la tua password per esportare un backup"
         },
         "qr": {
             "title": "Il tuo codice QR"
@@ -331,17 +344,26 @@
             "backupDescription": "È importante eseguire regolarmente il backup per assicurarsi di avere una copia dei tuoi account e della cronologia delle transazioni.",
             "backupWarning": "Se perdi la tua frase di backup e recupero perderai l'accesso ai tuoi fondi.",
             "notBackedUp": "Backup non eseguito",
-            "notBackedUpDescription": "Non hai eseguito il backup del tuo Stronghold"
+            "notBackedUpDescription": "Non hai eseguito il backup del tuo Stronghold",
+            "saving": "Salvataggio..."
         },
         "deleteAccount": {
-            "title": "Rimuovere {name}?",
-            "body": "Puoi aggiungere questo account più tardi, ma potresti perdere la cronologia delle transazioni.",
+            "title": "Eliminare {name}?",
+            "body": "Questo account non ha una cronologia delle transazioni. Può essere eliminato in tutta sicurezza.",
             "typePassword": "Digita la password del tuo wallet per confermare.",
-            "deleteAccount": "Rimuovi conto",
+            "hideAccount": "Cancella conto",
             "errorTitle": "Impossibile eliminare {name}",
-            "errorBody1": "Per eliminare un account devi avere il saldo a 0.",
+            "errorBody1": "Non puoi eliminare questo account, devi averne almeno uno."
+        },
+        "hideAccount": {
+            "title": "Nascondere {name}?",
+            "body": "Puoi trovare questo account in seguito abilitando \"Mostra account nascosti\" nelle impostazioni avanzate.",
+            "typePassword": "Digita la password del tuo wallet per confermare.",
+            "hideAccount": "Nascondi questo account",
+            "errorTitle": "Impossibile nascondere {name}",
+            "errorBody1": "Per nascondere un account deve avere saldo 0.",
             "errorBody2": "Al momento hai {balance} rimanenti su questo account. Si prega di spostare questi fondi su un altro account e riprovare.",
-            "errorBody3": "Non puoi eliminare questo account, devi averne almeno uno."
+            "errorBody3": "Non puoi nascondere questo account, devi averne almeno uno."
         },
         "addressHistory": {
             "title": "cronologia degli indirizzi di {name}",
@@ -349,6 +371,7 @@
         },
         "node": {
             "titleAdd": "Aggiungi un nodo",
+            "titleUpdate": "Aggiorna un nodo",
             "titleRemove": "Rimuovere un nodo",
             "titleDetails": "Dettagli del nodo",
             "nodeAddress": "Indirizzo del nodo",
@@ -363,7 +386,8 @@
         },
         "deleteProfile": {
             "title": "Elimina profilo",
-            "confirmation": "Si è sicuri di voler eliminare questo profilo? Questa azione non può essere annullata."
+            "confirmation": "Si è sicuri di voler eliminare questo profilo? Questa azione non può essere annullata.",
+            "typePassword": "Digita la password per confermare."
         },
         "diagnostics": {
             "title": "Diagnostiche",
@@ -375,6 +399,10 @@
             "totalMem": "Memoria Totale",
             "freeMem": "Memoria libera",
             "userPath": "Percorso Utente"
+        },
+        "transaction": {
+            "title": "Conferma la transazione",
+            "body": "Stai per inviare {amount} a"
         }
     },
     "charts": {
@@ -425,16 +453,19 @@
         "enableDeveloperMode": "Abilita Modalità Sviluppatore",
         "enableSystemNotifications": "Abilita notifiche di sistema",
         "exportState": "Esporta stato",
-        "outsourceProofOfWork": "Proof of Work remoto",
+        "localProofOfWork": "Proof of work locale",
         "unlock": "Sblocca",
         "updateFirefly": "Aggiorna Firefly",
         "restartNow": "Riavvia ora",
         "saveBackup": "Salva un backup di Stronghold",
         "customizeAcount": "Personalizza il conto",
         "viewAddressHistory": "Visualizza cronologia indirizzi",
-        "deleteAccount": "Rimuovi conto",
+        "hideAccount": "Nascondi questo account",
+        "showAccount": "Mostra account",
+        "deleteAccount": "Cancella conto",
         "max": "Massimo",
         "addNode": "Aggiungi nodo",
+        "updateNode": "Aggiorna nodo",
         "removeNode": "Rimuovi Nodo",
         "hide": "Nascondi",
         "hideOthers": "Nascondi altri",
@@ -459,7 +490,9 @@
         "skipBackup": "Salta il file di backup",
         "finishSetup": "Termina la configurazione",
         "readDocumentation": "Leggi la documentazione",
-        "visitFaq": "Visita le Domande Frequenti"
+        "visitFaq": "Visita le Domande Frequenti",
+        "showHiddenAccounts": "Mostra account nascosti",
+        "confirm": "Conferma"
     },
     "general": {
         "password": "Password",
@@ -505,7 +538,7 @@
         "appearance": "Aspetto",
         "lightTheme": "Tema chiaro",
         "darkTheme": "Tema Scuro",
-        "totalBalance": "Saldo totale",
+        "balance": "Saldo",
         "accountBalance": "Saldo account",
         "incoming": "In entrata",
         "outgoing": "In uscita",
@@ -529,7 +562,7 @@
         "help": "Aiuto",
         "you": "Tu",
         "messageId": "ID messaggio",
-        "inputAddress": "Invia Indirizzo",
+        "inputAddress": "Indirizzo di invio",
         "receiveAddress": "Indirizzo di ricezione",
         "date": "Data",
         "status": "Stato",
@@ -565,7 +598,8 @@
         "passwordStrength2": "Debole",
         "passwordStrength3": "Media",
         "passwordStrength4": "Sicura",
-        "creatingProfile": "Creazione profilo, attendere prego..."
+        "creatingProfile": "Creazione profilo, attendere prego...",
+        "accountRemoved": "Questo account è nascosto. Mostralo per eseguire i trasferimenti."
     },
     "dates": {
         "today": "Oggi",
@@ -579,6 +613,7 @@
         "valueTx": "In ricezione {{value}} sul conto {{account}}",
         "confirmed": "Invio confermato di {{value}} dal conto {{account}}",
         "confirmedInternal": "{{value}} da {{senderAccount}} a {{receiverAccount}} confermati",
+        "confirmedInternalNoAccounts": "{{value}} trasferimento interno confermato",
         "failed": "L'invio di {{value}} dal conto {{account}} è fallito",
         "downloadingUpdate": "Download aggiornamento in corso",
         "updateReady": "Aggiornamento pronto",
@@ -586,7 +621,8 @@
         "restartInstall": "Riavvia per installare",
         "calcMinutesRemaining": "Calcolo dei minuti rimanenti...",
         "minutesRemaining": "{minutes, plural, one {1 minuto rimanente} other {# minuti rimanenti}}",
-        "copiedToClipboard": "Copiato negli appunti"
+        "copiedToClipboard": "Copiato negli appunti",
+        "accountsSynchronized": "Sincronizzazione completata"
     },
     "error": {
         "profile": {
@@ -606,7 +642,7 @@
             "dates": "Le date sono facili da indovinare.",
             "common": "Questa password è molto comune.",
             "similar": "Questa è simile ad una password comune.",
-            "reasonWord": "Una sola parola è facile da indovinare.",
+            "word": "Una sola parola è facile da indovinare.",
             "incorrect": "La password non è corretta.",
             "length": "La tua password non può essere più lunga di {length, plural, one {1 carattere} other {# caratteri}}."
         },
@@ -619,7 +655,11 @@
             "length": "Il nome del tuo account non può essere più lungo di {length, plural, one {1 carattere} other {# caratteri}}.",
             "empty": "Devi usare il tuo conto più recente prima di crearne uno nuovo.",
             "notEmpty": "Devi trasferire il tuo saldo prima di eliminare questo conto.",
-            "duplicate": "Esiste già un account con questo nome."
+            "duplicate": "Esiste già un account con questo nome.",
+            "tilde": "Un nome del profilo non può iniziare con il carattere '~'.",
+            "control": "Un nome del profilo non può contenere un carattere di controllo.",
+            "startDot": "Un nome del profilo non può iniziare con il carattere '.'",
+            "chars": "Un nome del profilo non può contenere i seguenti caratteri <>:\"/\\<unk>?*"
         },
         "send": {
             "addressLength": "Gli indirizzi dovrebbero essere lunghi {length, plural, one {1 carattere} other {# caratteri}}.",
@@ -627,8 +667,10 @@
             "amountNoFloat": "Se le unità sono `i` non puoi usare le posizioni decimali.",
             "amountInvalidFormat": "L'importo sembra essere un numero non valido.",
             "amountZero": "L'importo deve essere maggiore di 0.",
-            "wrongAddressFormat": "Gli indirizzi iniziano con il prefisso {prefix}.",
+            "wrongAddressPrefix": "Gli indirizzi iniziano con il prefisso {prefix}.",
+            "wrongAddressFormat": "L'indirizzo non è formattato correttamente.",
             "insufficientFunds": "Questo conto non ha sufficienti fondi.",
+            "noToAccount": "Non è stato selezionato un account a cui inviare i fondi.",
             "sendingDust": "Non puoi inviare meno di 1 Mi.",
             "leavingDust": "Non puoi lasciare meno di 1 Mi sul tuo indirizzo."
         },

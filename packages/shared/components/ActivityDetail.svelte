@@ -24,9 +24,9 @@
 
     const prepareSenderAddress = () => {
         if (payload.type === 'Transaction') {
-            return payload?.data?.essence?.data?.inputs?.find((input) => input?.type === 'UTXO')?.data?.metadata?.address ?? null;
+            return payload?.data?.essence?.data?.inputs?.find((input) => input?.type === 'UTXO')?.data?.metadata?.address ?? null
         } else if (payload.type === 'Milestone') {
-                return 'Legacy Network'
+            return 'Legacy Network'
         }
 
         return null
@@ -34,18 +34,22 @@
 
     const prepareReceiverAddress = () => {
         if (payload.type === 'Transaction') {
-            return payload?.data?.essence?.data?.outputs
-            ?.filter((output) => output?.data?.remainder === false)
-            ?.map((output) => output?.data?.address) ?? [];
+            return (
+                payload?.data?.essence?.data?.outputs
+                    ?.filter((output) => output?.data?.remainder === false)
+                    ?.map((output) => output?.data?.address) ?? []
+            )
         } else if (payload.type === 'Milestone') {
-            const funds = payload.data.essence.receipt.data.funds;
+            const funds = payload.data.essence.receipt.data.funds
 
             const firstAccount = $accounts.find((acc) => acc.index === 0)
             const firstAccountAddresses = firstAccount.addresses.map((address) => address.address)
-            
-            const receiverAddresses = funds.filter((fund) => firstAccountAddresses.includes(fund.output.address)).map((fund) => fund.output.address)
 
-            return receiverAddresses;
+            const receiverAddresses = funds
+                .filter((fund) => firstAccountAddresses.includes(fund.output.address))
+                .map((fund) => fund.output.address)
+
+            return receiverAddresses
         }
 
         return []
@@ -53,11 +57,11 @@
 
     const prepareSenderAccount = () => {
         if (payload.type === 'Transaction') {
-        return !payload.data.essence.data.incoming
-        ? $activeAccount
-        : payload.data.essence.data.internal
-        ? $accounts.find((acc) => acc.addresses.some((add) => senderAddress === add.address))
-        : null;
+            return !payload.data.essence.data.incoming
+                ? $activeAccount
+                : payload.data.essence.data.internal
+                ? $accounts.find((acc) => acc.addresses.some((add) => senderAddress === add.address))
+                : null
         }
 
         return null
@@ -69,27 +73,29 @@
         }
 
         return payload.data.essence.data.incoming
-        ? $activeAccount
-        : payload.data.essence.data.internal
-        ? $accounts.find((acc) => acc.addresses.some((add) => receiverAddresses.includes(add.address)))
-        : null;
+            ? $activeAccount
+            : payload.data.essence.data.internal
+            ? $accounts.find((acc) => acc.addresses.some((add) => receiverAddresses.includes(add.address)))
+            : null
     }
 
     const getMilestoneMessageValue = () => {
-         const funds = payload.data.essence.receipt.data.funds;
+        const funds = payload.data.essence.receipt.data.funds
 
-            const firstAccount = $accounts.find((acc) => acc.index === 0)
-            const firstAccountAddresses = firstAccount.addresses.map((address) => address.address)
-            
-            const totalValue = funds.filter((fund) => firstAccountAddresses.includes(fund.output.address)).reduce((acc, fund) => acc+ fund.output.amount, 0)
+        const firstAccount = $accounts.find((acc) => acc.index === 0)
+        const firstAccountAddresses = firstAccount.addresses.map((address) => address.address)
 
-            return totalValue;
+        const totalValue = funds
+            .filter((fund) => firstAccountAddresses.includes(fund.output.address))
+            .reduce((acc, fund) => acc + fund.output.amount, 0)
+
+        return totalValue
     }
 
     let senderAddress: string = prepareSenderAddress()
 
     let receiverAddresses: string[] = prepareReceiverAddress()
-      
+
     $: senderAccount = prepareSenderAccount()
 
     $: receiverAccount = prepareReceiverAccount()
@@ -112,7 +118,9 @@
             {/if}
         </div>
         <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
-        <Text bold smaller>{formatUnit(payload.type === 'Milestone' ? getMilestoneMessageValue() : payload.data.essence.data.value)}</Text>
+        <Text bold smaller>
+            {formatUnit(payload.type === 'Milestone' ? getMilestoneMessageValue() : payload.data.essence.data.value)}
+        </Text>
         <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
         <div class="flex flex-col flex-wrap justify-center items-center text-center">
             {#if receiverAccount}
