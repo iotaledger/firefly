@@ -30,17 +30,13 @@
             ?.filter((output) => output?.data?.remainder === false)
             ?.map((output) => output?.data?.address) ?? []
 
-    $: senderAccount = !payload.data.essence.data.incoming
-        ? $activeAccount
-        : payload.data.essence.data.internal
-        ? $accounts.find((acc) => acc.addresses.some((add) => senderAddress === add.address))
+    $: senderAccount = senderAddress
+        ? $accounts?.find((acc) => acc.addresses.some((add) => senderAddress === add.address)) ?? null
+        : null
+    $: receiverAccount = receiverAddresses?.length
+        ? $accounts.find((acc) => acc.addresses.some((add) => receiverAddresses.includes(add.address))) ?? null
         : null
 
-    $: receiverAccount = payload.data.essence.data.incoming
-        ? $activeAccount
-        : payload.data.essence.data.internal
-        ? $accounts.find((acc) => acc.addresses.some((add) => receiverAddresses.includes(add.address)))
-        : null
 </script>
 
 <div class="flex flex-col h-full min-h-0">
