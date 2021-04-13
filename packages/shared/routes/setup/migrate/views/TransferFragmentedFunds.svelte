@@ -176,7 +176,7 @@
         <div slot="leftpane__content" class="h-full flex flex-col flex-wrap">
             <Text type="h2" classes="mb-5">{locale('views.migrate.title')}</Text>
             <Text type="p" secondary classes="mb-6">{locale('views.transferFragmentedFunds.body1')}</Text>
-            <div class="flex-auto overflow-y-auto h-1 space-y-4 w-full -mr-2 pr-2">
+            <div class="flex-auto overflow-y-auto h-1 space-y-4 w-full scrollable-y scroll-secondary">
                 {#each transactions as transaction}
                     <TransactionItem {...transaction} {locale} />
                 {/each}
