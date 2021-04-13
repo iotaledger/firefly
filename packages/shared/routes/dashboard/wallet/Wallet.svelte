@@ -451,6 +451,7 @@
                                                         essence: Object.assign({}, message.payload.data.essence, {
                                                             data: Object.assign({}, message.payload.data.essence.data, {
                                                                 incoming: isReceiverAccount,
+                                                                internal: true
                                                             }),
                                                         }),
                                                     }),
