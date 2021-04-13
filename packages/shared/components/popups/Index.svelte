@@ -18,6 +18,7 @@
     import Version from './Version.svelte'
     import Transaction from './Transaction.svelte'
     import RiskFunds from './RiskFunds.svelte'
+    import MissingBundle from './MissingBundle.svelte'
 
     export let locale = 'en'
     export let type = undefined
@@ -44,6 +45,7 @@
         diagnostics: Diagnostics,
         transaction: Transaction,
         riskFunds: RiskFunds,
+        missingBundle: MissingBundle,
     }
 
     const onkey = (e) => {

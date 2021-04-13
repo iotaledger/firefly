@@ -475,6 +475,9 @@ export const totalMigratedBalance = derived(get(migration).bundles, (_bundles) =
     }, 0)
 })
 
+export const hasAnySpentAddressWithNoBundleHashes = derived(get(migration).bundles, (_bundles) => _bundles.length &&
+    _bundles.some((bundle) => bundle.inputs.some((input) => input.spent && input.spentBundleHashes.length)))
+
 /**
  * List of chrysalis node endpoints to detect when is live
  */
