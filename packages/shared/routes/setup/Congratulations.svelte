@@ -42,7 +42,7 @@
                 .then((path) => {
                     const source = getStoragePath(path, $activeProfile.name)
 
-                    return Electron.exportMigrationLog(`${source}/${LOG_FILE_NAME}`, LOG_FILE_NAME)
+                    return Electron.exportMigrationLog(`${source}/${LOG_FILE_NAME}`, `${$activeProfile.name}-${LOG_FILE_NAME}`)
                 })
                 .then((result) => {
                     if (result) {
