@@ -62,7 +62,9 @@
             icon={payload.data.essence.data.internal ? 'transfer' : payload.data.essence.data.incoming ? 'chevron-down' : 'chevron-up'} />
     {/if}
     <div class="flex flex-col ml-3.5 space-y-1.5">
-        <Text type="p" bold smaller>{true || milestoneMessage ? locale('general.fundMigration') : truncateString(id)}</Text>
+        <Text type="p" bold smaller>
+            {cachedMigrationTx || milestoneMessage ? locale('general.fundMigration') : truncateString(id)}
+        </Text>
         <p class="text-10 leading-120 text-gray-500">
             {$date(new Date(timestamp), {
                 year: 'numeric',
