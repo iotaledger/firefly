@@ -411,15 +411,13 @@ export const initialiseListeners = () => {
                 );
             }
 
-            if (!get(isSyncing)) {
-                // Update account with new message
-                saveNewMessage(response.payload.accountId, response.payload.message);
-                const notificationMessage = localize('notifications.valueTx')
-                    .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
-                    .replace('{{account}}', account.alias);
+            saveNewMessage(response.payload.accountId, response.payload.message);
 
-                showSystemNotification({ type: "info", message: notificationMessage, contextData: { type: "valueTx", accountId: account.id } });
-            }
+            const notificationMessage = localize('notifications.valueTx')
+                .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
+                .replace('{{account}}', account.alias);
+
+            showSystemNotification({ type: "info", message: notificationMessage, contextData: { type: "valueTx", accountId: account.id } });
         },
         onError(error) {
             console.error(error)
@@ -648,9 +646,11 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
     accounts.update((storedAccounts) => {
         return storedAccounts.map((storedAccount: WalletAccount) => {
             if (storedAccount.id === accountId) {
-                return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
-                    messages: [message, ...storedAccount.messages]
-                })
+                const hasMessage = storedAccount.messages.some(m => m.id === message.id)
+
+                if (!hasMessage) {
+                    storedAccount.messages.push(message)
+                }
             }
 
             return storedAccount;
