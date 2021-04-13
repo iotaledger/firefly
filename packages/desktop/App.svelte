@@ -172,6 +172,9 @@
             @apply pr-2;
         }
     }
+    img {
+        -webkit-user-drag: none;
+    }
 </style>
 
 <TitleBar>
