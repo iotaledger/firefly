@@ -1,13 +1,15 @@
 <script lang="typescript">
-    import { Button, Illustration, OnboardingLayout, SpentAddress, Text } from 'shared/components'
-    import { createEventDispatcher } from 'svelte'
+    import { Button, Illustration, Link, OnboardingLayout, SpentAddress, Text } from 'shared/components'
     import {
-        toggleInputSelection,
-        spentAddressesFromBundles,
-        selectedUnmigratedBundles,
         MINIMUM_MIGRATION_BALANCE,
+        selectedUnmigratedBundles,
+        spentAddressesFromBundles,
+        toggleInputSelection,
     } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
+    import { openPopup, closePopup } from 'shared/lib/popup'
+    import { RiskLevel } from 'shared/lib/typings/migration'
+    import { createEventDispatcher } from 'svelte'
 
     export let locale
     export let mobile
@@ -43,7 +45,17 @@
     }
     function handleContinueClick() {
         if (selectedAddresses.length) {
-            dispatch('next')
+            if (selectedAddresses.find((address) => address?.risk > RiskLevel.MEDIUM)) {
+                openPopup({
+                    type: 'riskFunds',
+                    props: {
+                        onProceed: () => {
+                            closePopup()
+                            dispatch('next')
+                        },
+                    },
+                })
+            }
         } else {
             if (selectedUnmigratedBundles.length) {
                 dispatch('next', { skippedMining: true })
@@ -55,6 +67,16 @@
             }
         }
     }
+    function handleSkipClick() {
+        if (selectedUnmigratedBundles.length) {
+            dispatch('next', { skippedMining: true })
+        } else {
+            showAppNotification({
+                type: 'error',
+                message: locale('views.migrate.noAddressesForMigration'),
+            })
+        }
+    }
     function rerunProcess() {
         dispatch('previous')
     }
@@ -63,8 +85,8 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick}>
-        <div slot="leftpane__content" class="h-full flex flex-col flex-wrap">
+    <OnboardingLayout onBackClick={handleBackClick} classes="relative">
+        <div slot="leftpane__content" class="relative h-full flex flex-col flex-wrap">
             <Text type="h2" classes="mb-5">{locale('views.securityCheckCompleted.title')}</Text>
             <Text type="p" secondary classes="mb-6">{locale('views.securityCheckCompleted.body1')}</Text>
             <div class="flex-auto overflow-y-auto h-1 space-y-4 w-full -mr-2 pr-2">
@@ -77,6 +99,7 @@
                         onClick={() => onAddressClick(address)} />
                 {/each}
             </div>
+            <Link onClick={handleSkipClick} classes="absolute -top-12 right-0">{locale('actions.skip')}</Link>
         </div>
         <div slot="leftpane__action" class="flex flex-col items-center">
             <Button secondary disabled={!selectedAddresses.length} classes="w-full mt-2" onClick={() => rerunProcess()}>
