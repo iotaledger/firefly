@@ -171,7 +171,7 @@ checksum = "6c7f7096bc256f5e5cb960f60dfc4f4ef979ca65abe7fb9d5a4f77150d3783d4"
 [[package]]
 name = "bee-common"
 version = "0.4.1"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#fc4ba834e84b3312a2c48e0a9cc62a995ad1fd6d"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#5b1a42bfd4112fc2b477e245208cdaf62ff6c77c"
 dependencies = [
  "autocfg",
  "chrono",
@@ -196,7 +196,7 @@ dependencies = [
 [[package]]
 name = "bee-crypto"
 version = "0.2.1-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#fc4ba834e84b3312a2c48e0a9cc62a995ad1fd6d"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#5b1a42bfd4112fc2b477e245208cdaf62ff6c77c"
 dependencies = [
  "bee-ternary 0.4.2-alpha",
  "byteorder",
@@ -287,7 +287,7 @@ dependencies = [
 [[package]]
 name = "bee-ternary"
 version = "0.4.2-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#fc4ba834e84b3312a2c48e0a9cc62a995ad1fd6d"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#5b1a42bfd4112fc2b477e245208cdaf62ff6c77c"
 dependencies = [
  "autocfg",
  "num-traits 0.2.14",
@@ -1230,7 +1230,7 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "0.5.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#f84c97ddccb4a4323d300b32cc6028ff9eabe98b"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#1446775ab6918d6242fe76d16c750bafd7bba5d7"
 dependencies = [
  "async-trait",
  "bee-common",
@@ -1263,7 +1263,7 @@ dependencies = [
 [[package]]
 name = "iota-core"
 version = "0.2.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?branch=dev#f84c97ddccb4a4323d300b32cc6028ff9eabe98b"
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#1446775ab6918d6242fe76d16c750bafd7bba5d7"
 dependencies = [
  "iota-client 0.5.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?branch=dev)",
 ]
@@ -1333,7 +1333,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#0bdf04d62e05bb7b457f863df6edd9cdedc30c83"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#a6eff8bb393640937768dbd12a8ac06183951ca2"
 dependencies = [
  "async-trait",
  "backtrace",
