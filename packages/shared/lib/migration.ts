@@ -414,7 +414,7 @@ export const toggleInputSelection = (address: Address): void => {
 export const unselectAllUnspent = (): void => {
     const { bundles } = get(migration)
     bundles.update((_bundles) => _bundles.map((bundle) => {
-        if (!bundle.shouldMine) {
+        if (bundle.shouldMine) {
             return Object.assign({}, bundle, { selected: false })
         }
         return bundle
