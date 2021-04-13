@@ -16,7 +16,7 @@
     export let payload: Payload
     export let onBackClick = () => {}
 
-    const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
+    const accounts = getContext<Writable<WalletAccount[]>>('viewableAccounts')
     const activeAccount = getContext<Readable<WalletAccount>>('selectedAccount')
 
     let senderAccount: WalletAccount
@@ -24,7 +24,9 @@
 
     const prepareSenderAddress = () => {
         if (payload.type === 'Transaction') {
-            return payload?.data?.essence?.data?.inputs?.find((input) => input?.type === 'UTXO')?.data?.metadata?.address ?? null
+            return (
+                payload?.data?.essence?.data?.inputs?.find((input) => /utxo/i.test(input?.type))?.data?.metadata?.address ?? null
+            )
         } else if (payload.type === 'Milestone') {
             return 'Legacy Network'
         }

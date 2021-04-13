@@ -2,8 +2,10 @@
     import { Icon, Text, Tooltip } from 'shared/components'
     import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
     import { truncateString } from 'shared/lib/helpers'
+    import { RiskLevel } from 'shared/lib/typings/migration'
     import { formatUnit } from 'shared/lib/units'
     import { get } from 'svelte/store'
+    import { onMount } from 'svelte'
 
     export let locale
     export let address = ''
@@ -14,19 +16,21 @@
     export let disabled = false
     export let onClick = () => {}
 
-    const RISK_COLORS = {
-        0: 'blue',
-        1: 'green',
-        2: 'yellow',
-        3: 'orange',
-        4: 'red',
-    }
-
-    let showTooltip = false
+    let showErrorTooltip = false
+    let showRiskTooltip = false
     let errorBox
+    let riskBox
     let parentTop,
         parentLeft,
         parentWidth = 0
+
+    enum TooltipType {
+        Risk,
+        Error,
+    }
+
+    let riskColor = 'gray'
+    let localeRiskLevel = ''
 
     let fiatBalance = `${convertToFiat(
         balance,
@@ -36,31 +40,38 @@
 
     $: errorMessage = disabled ? locale('views.secureSpentAddresses.error') : null
 
-    function toggleTooltip() {
-        showTooltip = !showTooltip
-        parentWidth = errorBox.offsetWidth / 2
-        parentLeft = errorBox.getBoundingClientRect().left
-        parentTop = errorBox.getBoundingClientRect().top
-    }
-
-    function getRiskColor(_risk) {
-        // Very high risk: score  > 10^-13      
-        // high risk: 10^-13 > score > 10^-15
-        // medium risk: 10^-15 > score > 10^-17
-        // low risk: 10^-17 > score > 10^-19
-        // very low risk: score < 10^-19
-        if (_risk < 10 ** -19) {
-            return 'green'
-        } else if (_risk > 10 ** -19 && _risk < 10 ** -17) {
-            return 'blue'
-        } else if (_risk > 10 ** -17 && _risk < 10 ** -15) {
-            return 'yellow'
-        } else if (_risk > 10 ** -15 && _risk < 10 ** -13) {
-            return 'orange'
-        } else if (_risk > 10 ** -13) {
-            return 'red'
+    function toggleTooltip(type: TooltipType) {
+        if (type === TooltipType.Risk) {
+            showRiskTooltip = !showRiskTooltip
+            parentWidth = riskBox.offsetWidth / 2
+            parentLeft = riskBox.getBoundingClientRect().left
+            parentTop = riskBox.getBoundingClientRect().top
+        } else if (type === TooltipType.Error) {
+            showErrorTooltip = !showErrorTooltip
+            parentWidth = errorBox.offsetWidth / 2
+            parentLeft = errorBox.getBoundingClientRect().left
+            parentTop = errorBox.getBoundingClientRect().top
         }
     }
+
+    onMount(() => {
+        if (risk < RiskLevel.LOW) {
+            riskColor = 'green'
+            localeRiskLevel = 'veryLow'
+        } else if (risk > RiskLevel.LOW && risk < RiskLevel.MEDIUM) {
+            riskColor = 'blue'
+            localeRiskLevel = 'low'
+        } else if (risk > RiskLevel.MEDIUM && risk < RiskLevel.HIGH) {
+            riskColor = 'yellow'
+            localeRiskLevel = 'medium'
+        } else if (risk > RiskLevel.HIGH && risk < RiskLevel.VERYHIGH) {
+            riskColor = 'orange'
+            localeRiskLevel = 'high'
+        } else if (risk > RiskLevel.VERYHIGH) {
+            riskColor = 'red'
+            localeRiskLevel = 'veryHigh'
+        }
+    })
 </script>
 
 <style type="text/scss">
@@ -104,27 +115,32 @@
                 <Text type="pre" secondary={disabled} smaller classes={disabled && 'line-through'}>
                     {truncateString(address, 9, 9)}
                 </Text>
-                <Text type="p" secondary smaller>
-                    {formatUnit(balance)} ·
-                    <span class="uppercase">{fiatBalance}</span>
-                </Text>
+                <Text type="p" secondary smaller>{formatUnit(balance)} · <span class="uppercase">{fiatBalance}</span></Text>
             </div>
         </div>
         {#if showRiskLevel}
-            <risk-meter class="flex flex-row space-x-0.5">
-                {#each Array(Object.keys(RISK_COLORS).length) as _, i}
-                    <span
-                        class="h-4 w-1 rounded-2xl {i <= risk ? `bg-${getRiskColor(risk)}-500` : 'bg-gray-300 dark:bg-gray-700'}" />
+            <risk-meter
+                bind:this={riskBox}
+                on:mouseenter={() => toggleTooltip(TooltipType.Risk)}
+                on:mouseleave={() => toggleTooltip(TooltipType.Risk)}
+                class="flex flex-row space-x-0.5">
+                {#each Array(Object.keys(RiskLevel).length / 2) as _, i}
+                    <span class="h-4 w-1 rounded-2xl {i <= risk ? `bg-${riskColor}-500` : 'bg-gray-300 dark:bg-gray-700'}" />
                 {/each}
             </risk-meter>
+            {#if showRiskTooltip}
+                <Tooltip {parentTop} {parentLeft} {parentWidth}>
+                    <Text>{locale('tooltips.risk.title', { values: { risk: locale(`tooltips.risk.${localeRiskLevel}`) } })}</Text>
+                </Tooltip>
+            {/if}
         {:else if disabled}
             <div
                 class="flex items-center static"
-                on:mouseenter={toggleTooltip}
-                on:mouseleave={toggleTooltip}
+                on:mouseenter={() => toggleTooltip(TooltipType.Error)}
+                on:mouseleave={() => toggleTooltip(TooltipType.Error)}
                 bind:this={errorBox}>
                 <Icon icon="exclamation" classes="text-red-500 bg-white rounded-full dark:bg-gray-800" />
-                {#if showTooltip && errorMessage}
+                {#if showErrorTooltip && errorMessage}
                     <Tooltip {parentTop} {parentLeft} {parentWidth}>
                         <Text>{errorMessage}</Text>
                     </Tooltip>

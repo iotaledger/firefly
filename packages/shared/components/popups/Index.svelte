@@ -17,6 +17,7 @@
     import RemoveNode from './RemoveNode.svelte'
     import Version from './Version.svelte'
     import Transaction from './Transaction.svelte'
+    import RiskFunds from './RiskFunds.svelte'
 
     export let locale = 'en'
     export let type = undefined
@@ -42,6 +43,7 @@
         deleteProfile: DeleteProfile,
         diagnostics: Diagnostics,
         transaction: Transaction,
+        riskFunds: RiskFunds,
     }
 
     const onkey = (e) => {
