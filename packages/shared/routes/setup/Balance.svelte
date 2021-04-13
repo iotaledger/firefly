@@ -1,14 +1,16 @@
 <script lang="typescript">
-    import { Box, Button, Illustration, OnboardingLayout, Text, Toast, Spinner } from 'shared/components'
+    import { Box, Button, Illustration, OnboardingLayout, Spinner, Text, Toast } from 'shared/components'
     import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
     import {
+        getMigrationData,
+        hasAnySpentAddressWithNoBundleHashes,
+        migration,
+        MINIMUM_MIGRATION_BALANCE,
         hasLowBalanceOnAllSpentAddresses,
         bundlesWithUnspentAddresses,
         resetMigrationState,
-        migration,
-        getMigrationData,
-        MINIMUM_MIGRATION_BALANCE,
     } from 'shared/lib/migration'
+    import { closePopup, openPopup } from 'shared/lib/popup'
     import { formatUnit } from 'shared/lib/units'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
@@ -54,7 +56,19 @@
     const dispatch = createEventDispatcher()
 
     function handleContinueClick() {
-        dispatch('next')
+        if ($hasAnySpentAddressWithNoBundleHashes) {
+            openPopup({
+                type: 'missingBundle',
+                props: {
+                    onProceed: () => {
+                        closePopup()
+                        dispatch('next')
+                    },
+                },
+            })
+        } else {
+            dispatch('next')
+        }
     }
     function handleBackClick() {
         if (!isCheckingForBalance) {

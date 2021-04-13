@@ -454,6 +454,12 @@
         "riskFunds": {
             "title": "Warning: your funds are at risk",
             "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        },
+        "missingBundle": {
+            "title": "Lorem ipsum",
+            "body": "You have spent addresses but Firefly was not able to find the associated history. This could be because the transaction was made a long time ago. You can proceed but these funds are at risk during migration.",
+            "learnMore": "Learn more about spent addresses",
+            "proceed": "I understand the risk"
         }
     },
     "charts": {

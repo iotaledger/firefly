@@ -1,13 +1,15 @@
 <script lang="typescript">
-    import { Button, Illustration, OnboardingLayout, SpentAddress, Text } from 'shared/components'
-    import { createEventDispatcher } from 'svelte'
+    import { Button, Illustration, Link, OnboardingLayout, SpentAddress, Text } from 'shared/components'
     import {
-        toggleInputSelection,
-        spentAddressesFromBundles,
         MINIMUM_MIGRATION_BALANCE,
         selectedUnmigratedBundles,
+        spentAddressesFromBundles,
+        toggleInputSelection,
+        unselectAllUnspent,
     } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
+    import { closePopup, openPopup } from 'shared/lib/popup'
+    import { createEventDispatcher } from 'svelte'
 
     export let locale
     export let mobile
@@ -39,17 +41,35 @@
     }
     function secureAddresses() {
         if (selectedAddresses.length) {
-            dispatch('next')
+            if (selectedAddresses?.length < $spentAddressesFromBundles?.length) {
+                triggerPopup()
+            } else {
+                dispatch('next')
+            }
         } else {
             if (selectedUnmigratedBundles.length) {
-                dispatch('next', { skippedMining: true })
+                triggerPopup(true)
             } else {
                 showAppNotification({ type: 'error', message: locale('views.migrate.noAddressesForMigration') })
             }
         }
     }
+
     function handleSkipClick() {
-        dispatch('next', { skippedMining: true })
+        unselectAllUnspent()
+        triggerPopup(true)
+    }
+
+    function triggerPopup(skippedMining = false) {
+        openPopup({
+            type: 'riskFunds',
+            props: {
+                onProceed: () => {
+                    closePopup()
+                    dispatch('next', { skippedMining })
+                },
+            },
+        })
     }
 </script>
 
@@ -57,11 +77,11 @@
     <div>foo</div>
 {:else}
     <OnboardingLayout onBackClick={handleBackClick}>
-        <div slot="leftpane__content" class="h-full flex flex-col flex-wrap">
+        <div slot="leftpane__content" class="relative h-full flex flex-col flex-wrap">
             <Text type="h2" classes="mb-5">{locale('views.secureSpentAddresses.title')}</Text>
             <Text type="p" secondary>{locale('views.secureSpentAddresses.body1', { values: { number: addresses.length } })}</Text>
             <Text type="p" secondary classes="mb-6">{locale('views.secureSpentAddresses.body2')}</Text>
-            <div class="flex-auto overflow-y-auto h-1 space-y-4 w-full -mr-2 pr-2">
+            <div class="flex-auto overflow-y-auto h-1 space-y-4 w-full scrollable-y scroll-secondary">
                 {#each addresses as address}
                     <SpentAddress
                         {...address}
@@ -70,6 +90,7 @@
                         onClick={() => onAddressClick(address)} />
                 {/each}
             </div>
+            <Link onClick={handleSkipClick} classes="absolute -top-12 right-0">{locale('actions.skip')}</Link>
         </div>
         <div slot="leftpane__action">
             <Button classes="w-full" onClick={() => secureAddresses()}>{locale('views.secureSpentAddresses.title')}</Button>

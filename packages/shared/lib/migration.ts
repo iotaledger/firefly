@@ -413,6 +413,16 @@ export const toggleInputSelection = (address: Address): void => {
     }))
 }
 
+export const unselectAllUnspent = (): void => {
+    const { bundles } = get(migration)
+    bundles.update((_bundles) => _bundles.map((bundle) => {
+        if (bundle.shouldMine) {
+            return Object.assign({}, bundle, { selected: false })
+        }
+        return bundle
+    }))
+}
+
 /**
  * Resets migration state
  * 
@@ -479,6 +489,9 @@ export const bundlesWithUnspentAddresses = derived(get(migration).bundles, (_bun
     bundle.selected === true &&
     bundle.shouldMine === false
 ))
+
+export const hasAnySpentAddressWithNoBundleHashes = derived(get(migration).bundles, (_bundles) => _bundles.length &&
+    _bundles.some((bundle) => bundle.inputs.some((input) => input.spent && input.spentBundleHashes.length)))
 
 /**
  * List of chrysalis node endpoints to detect when is live
