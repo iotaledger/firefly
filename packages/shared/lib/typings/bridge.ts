@@ -68,7 +68,8 @@ export enum ResponseTypes {
     StrongholdPasswordClearIntervalSet = 'StrongholdPasswordClearIntervalSet',
     MigrationData = 'MigrationData',
     CreatedMigrationBundle = 'CreatedMigrationBundle',
-    SentMigrationBundle = 'SentMigrationBundle'
+    SentMigrationBundle = 'SentMigrationBundle',
+    LegacySeedChecksum = 'SeedChecksum'
 }
 
 export enum Actions {
@@ -107,6 +108,7 @@ export type DeleteStorageResponse = Response<ResponseTypes.DeletedStorage, void>
 export type LockStrongholdResponse = Response<ResponseTypes.LockedStronghold, void>
 export type StrongholdPasswordChangeResponse = Response<ResponseTypes.StrongholdPasswordChanged, void>
 export type UpdatedAllClientOptions = Response<ResponseTypes.UpdatedAllClientOptions, void>
+export type LegacySeedChecksum = Response<ResponseTypes.LegacySeedChecksum, string>
 
 /**
  * Migration responses
@@ -147,6 +149,8 @@ export type MessageResponse =
     | LockStrongholdResponse
     | StrongholdStatusResponse
     | UpdatedAllClientOptions
+    | LegacySeedChecksum
+
     // Migration types
     | MigrationDataResponse
     | CreatedMigrationBundleResponse

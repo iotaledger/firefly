@@ -19,7 +19,7 @@ import {
   syncAccount as _syncAccount,
   isLatestAddressUnused as _isLatestAddressUnused,
   areLatestAddressesUnused as _areLatestAddressesUnused,
-  setAlias as _setAlias
+  setAlias as _setAlias,
 } from '../../../shared/lib/typings/account'
 import {
   Transfer,
@@ -46,7 +46,8 @@ import {
   lockStronghold as _lockStronghold,
   changeStrongholdPassword as _changeStrongholdPassword,
   setClientOptions as _setClientOptions,
-  setStrongholdPasswordClearInterval as _setStrongholdPasswordClearInterval
+  setStrongholdPasswordClearInterval as _setStrongholdPasswordClearInterval,
+  getLegacySeedChecksum as _getLegacySeedChecksum
 } from '../../../shared/lib/typings/wallet'
 import { ClientOptions } from '../../../shared/lib/typings/client'
 
@@ -192,6 +193,9 @@ export const api = {
   },
   setStrongholdPasswordClearInterval: function (interval: Duration): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _setStrongholdPasswordClearInterval(sendMessage, __ids, interval)
+  },
+  getLegacySeedChecksum: function (seed: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _getLegacySeedChecksum(sendMessage, __ids, seed)
   },
 
   // Migration related methods

@@ -653,6 +653,9 @@ export default class ValidatorService {
             [ResponseTypes.Error]: this.createBaseValidator().getFirst(),
             [ResponseTypes.Panic]: this.createBaseValidator().getFirst(),
 
+            // Legacy seed APIs
+            [ResponseTypes.LegacySeedChecksum]: this.createBaseValidator().getFirst(),
+
             // Migration
             [ResponseTypes.MigrationData]: this.createBaseValidator().getFirst(),
             [ResponseTypes.CreatedMigrationBundle]: this.createBaseValidator().getFirst(),

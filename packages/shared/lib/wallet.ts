@@ -177,6 +177,10 @@ export const api: {
     setClientOptions(clientOptions: ClientOptions, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     setStrongholdPasswordClearInterval(interval: Duration, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
 
+    // Legacy seed APIs
+    getLegacySeedChecksum(seed: string, callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void })
+
+
     onStrongholdStatusChange(callbacks: { onSuccess: (response: Event<StrongholdStatus>) => void, onError: (err: ErrorEventPayload) => void })
     onNewTransaction(callbacks: { onSuccess: (response: Event<TransactionEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
     onReattachment(callbacks: { onSuccess: (response: Event<ReattachmentEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
@@ -277,6 +281,28 @@ export const requestMnemonic = async () => {
     let recoveryPhrase = await generateRecoveryPhrase()
     mnemonic.set(recoveryPhrase)
     return recoveryPhrase
+}
+
+/**
+ * Get legacy seed checksum
+ * 
+ * @method asyncGetLegacySeedChecksum
+ * 
+ * @param {string} seed
+ *  
+ * @returns {Promise<Event<string>>}
+ */
+export const asyncGetLegacySeedChecksum = (seed: string): Promise<Event<string>> => {
+    return new Promise<Event<string>>((resolve, reject) => {
+        api.getLegacySeedChecksum(seed, {
+            onSuccess(response) {
+                resolve(response)
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
 }
 
 export const asyncSetStrongholdPassword = (password) => {
