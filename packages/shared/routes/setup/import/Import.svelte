@@ -47,6 +47,8 @@
                 break
             case ImportState.TextImport:
                 const { input } = params
+                error = ''
+
                 if (input.length === 81) {
                     isGettingMigrationData = true
 
@@ -58,7 +60,7 @@
                             dispatch('next', { importType })
                         })
                         .catch((error) => {
-                            console.error(error)
+                            error = locale('views.migrate.problemRestoringWallet')
                             isGettingMigrationData = false
                         })
                 } else {
@@ -155,7 +157,15 @@
     </Transition>
 {:else if state === ImportState.BackupPassword}
     <Transition>
-        <BackupPassword on:next={_next} on:previous={_previous} {isGettingMigrationData} {importType} {error} {locale} {mobile} {busy} />
+        <BackupPassword
+            on:next={_next}
+            on:previous={_previous}
+            {isGettingMigrationData}
+            {importType}
+            {error}
+            {locale}
+            {mobile}
+            {busy} />
     </Transition>
 {:else if state === ImportState.Success}
     <Transition>

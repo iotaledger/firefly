@@ -1,7 +1,14 @@
 <script lang="typescript">
     import { Box, Button, Illustration, OnboardingLayout, Text, Toast, Spinner } from 'shared/components'
     import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
-    import { migration, getMigrationData, MINIMUM_MIGRATION_BALANCE } from 'shared/lib/migration'
+    import {
+        hasLowBalanceOnAllSpentAddresses,
+        bundlesWithUnspentAddresses,
+        resetMigrationState,
+        migration,
+        getMigrationData,
+        MINIMUM_MIGRATION_BALANCE,
+    } from 'shared/lib/migration'
     import { formatUnit } from 'shared/lib/units'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
@@ -22,14 +29,27 @@
     const hasInsufficientBalance = (balance) => balance < MINIMUM_MIGRATION_BALANCE
 
     let fiatBalance = getFiatBalance(balance)
-    let error = hasInsufficientBalance(balance)
+
+    let error = getError(balance)
     let formattedBalance = formatUnit(balance)
 
     const unsubscribe = data.subscribe((_data) => {
         fiatBalance = getFiatBalance(_data.balance)
         formattedBalance = formatUnit(_data.balance)
-        error = hasInsufficientBalance(_data.balance)
+        error = getError(_data.balance)
     })
+
+    function getError(_balance) {
+        if (hasInsufficientBalance(_balance)) {
+            return locale('views.balance.error')
+        }
+
+        if ($hasLowBalanceOnAllSpentAddresses && !$bundlesWithUnspentAddresses.length) {
+            return locale('views.migrate.minimumMigrationAmountSpentAddresses')
+        }
+
+        return null
+    }
 
     const dispatch = createEventDispatcher()
 
@@ -38,6 +58,8 @@
     }
     function handleBackClick() {
         if (!isCheckingForBalance) {
+            // If a user goes back from this point, reset migration state
+            resetMigrationState()
             dispatch('previous')
         }
     }
@@ -69,7 +91,7 @@
                 <Text type="p" highlighted classes="py-1 uppercase">{fiatBalance}</Text>
             </Box>
             {#if error}
-                <Toast classes="mt-4" type="error" message={locale('views.balance.error')} />
+                <Toast classes="mt-4" type="error" message={error} />
             {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-between items-center space-x-4">

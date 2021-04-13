@@ -17,7 +17,7 @@ export const ADDRESS_SECURITY_LEVEL = 2
 export const MINIMUM_MIGRATION_BALANCE = 1000000
 
 /** Bundle mining timeout for each bundle */
-export const MINING_TIMEOUT_SECONDS = 60 * 10
+export const MINING_TIMEOUT_SECONDS = 60
 
 export const MINIMUM_WEIGHT_MAGNITUDE = 14;
 
@@ -70,7 +70,9 @@ export const chrysalisLive = writable<Boolean>(false)
  * @returns {Promise<void} 
  */
 export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0): Promise<void> => {
-    const { seed, data } = get(migration)
+    console.log('Migration seed', migrationSeed)
+    console.log('Initial address index', initialAddressIndex)
+    // const { seed, data } = get(migration)
 
     // data.set({
     //     balance: 0,
@@ -464,6 +466,19 @@ export const totalMigratedBalance = derived(get(migration).bundles, (_bundles) =
         return acc
     }, 0)
 })
+
+export const hasLowBalanceOnAllSpentAddresses = derived(get(migration).bundles, (_bundles) => {
+    const bundlesWithSpentAddresses = _bundles.filter((bundle) =>
+        bundle.shouldMine === true
+    );
+
+    return bundlesWithSpentAddresses.length && bundlesWithSpentAddresses.every((bundle) => bundle.inputs.every((input) => input.balance < MINIMUM_MIGRATION_BALANCE))
+})
+
+export const bundlesWithUnspentAddresses = derived(get(migration).bundles, (_bundles) => _bundles.filter((bundle) =>
+    bundle.selected === true &&
+    bundle.shouldMine === false
+))
 
 /**
  * List of chrysalis node endpoints to detect when is live

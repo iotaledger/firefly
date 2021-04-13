@@ -148,7 +148,9 @@
             "incorrectSeedVaultPassword": "Incorrect SeedVault password.",
             "signingBundle": "Signing bundle",
             "broadcastingBundle": "Broadcasting bundle",
-            "miningBundle": "Mining bundle"
+            "miningBundle": "Mining bundle",
+            "problemRestoringWallet": "There was a problem restoring your wallet. Please try again.",
+            "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. You won’t be able to migrate your funds to the Chrysalis network."
         },
         "bundleMiningWarning": {
             "title": "Warning",
@@ -160,13 +162,13 @@
         },
         "secureSpentAddresses": {
             "title": "Secure spent addresses",
-            "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.", 
-            "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",          
-            "error": "You can’t migrate spent addresses with less than 1 Mi"           
+            "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.",
+            "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",
+            "error": "You can’t migrate spent addresses with less than 1 Mi"
         },
         "securityCheckCompleted": {
             "title": "Security check completed",
-            "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",            
+            "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
             "rerun": "Rerun process for selected addresses",
             "continueMigration": "Continue migration process"
         },
