@@ -20,7 +20,7 @@
         }) ?? []
 
     const handleCopyClick = () => {
-        setClipboard(addresses.map((a) => `${a.address.toLowerCase()},${formatUnit(a.balance)},${a.balance}`).join('\r\n'))
+        setClipboard(addresses.map((a) => `${a.address.toLowerCase()},${a.balance}`).join('\r\n'))
     }
 </script>
 
