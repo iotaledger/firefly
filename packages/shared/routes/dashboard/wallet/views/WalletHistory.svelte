@@ -1,10 +1,19 @@
 <script lang="typescript">
     import { ActivityRow, Icon, Text } from 'shared/components'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup } from 'shared/lib/popup';
+    import { openPopup } from 'shared/lib/popup'
+    import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { api, AccountMessage, isSyncing, selectedAccountId, selectedMessage, syncAccounts, WalletAccount } from 'shared/lib/wallet'
+    import {
+        AccountMessage,
+        api,
+        isSyncing,
+        selectedAccountId,
+        selectedMessage,
+        syncAccounts,
+        WalletAccount,
+    } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import type { Readable, Writable } from 'svelte/store'
     import { get } from 'svelte/store'
@@ -32,7 +41,9 @@
                 if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
                     openPopup({ type: 'password', props: { onSuccess: () => syncAccounts(false, 0, 10) } })
                 } else {
-                    syncAccounts(false)
+                    const gapLimit = $activeProfile?.gapLimit
+                    syncAccounts(false, gapLimit ?? 0, gapLimit)
+                    updateProfile('gapLimit', undefined)
                 }
             },
             onError(err) {
