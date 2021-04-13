@@ -411,6 +411,11 @@ export const toggleInputSelection = (address: Address): void => {
     }))
 }
 
+export const unselectAllInput = (): void => {
+    const { bundles } = get(migration)
+    bundles.update((_bundles) => _bundles.map((bundle) => ({ ...bundle, selected: false })))
+}
+
 /**
  * Resets migration state
  * 
