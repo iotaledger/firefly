@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Box, Button, Illustration, OnboardingLayout, Text, Toast, Spinner } from 'shared/components'
     import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
-    import { migration, getMigrationData, MINIMUM_MIGRATION_BALANCE } from 'shared/lib/migration'
+    import { resetMigrationState, migration, getMigrationData, MINIMUM_MIGRATION_BALANCE } from 'shared/lib/migration'
     import { formatUnit } from 'shared/lib/units'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
@@ -54,7 +54,10 @@
             })
     }
 
-    onDestroy(unsubscribe)
+    onDestroy(() => {
+        unsubscribe()
+        resetMigrationState()
+    })
 </script>
 
 {#if mobile}
