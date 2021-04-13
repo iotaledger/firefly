@@ -25,6 +25,14 @@ export interface SendMigrationBundleResponse {
     value: number;
 }
 
+export enum RiskLevel {
+    VERYHIGH = 10 ** -13,
+    HIGH = 10 ^ -15,
+    MEDIUM = 10 ^ -17,
+    LOW = 10 ^ -19,
+    VERYLOW = 0
+}
+
 /**
  * Gets data related to seed
  * 
