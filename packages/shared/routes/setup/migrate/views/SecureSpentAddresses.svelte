@@ -5,7 +5,7 @@
         selectedUnmigratedBundles,
         spentAddressesFromBundles,
         toggleInputSelection,
-        unselectAllInput,
+        unselectAllUnspent,
     } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
@@ -56,7 +56,7 @@
     }
 
     function handleSkipClick() {
-        unselectAllInput()
+        unselectAllUnspent()
         triggerPopup(true)
     }
 
