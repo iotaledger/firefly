@@ -151,7 +151,8 @@
             "miningBundle": "Mining bundle",
             "problemRestoringWallet": "There was a problem restoring your wallet. Please try again.",
             "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. You won’t be able to migrate your funds to the Chrysalis network.",
-            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. You won't be able to migrate your funds to the Chrysalis network."
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. You won't be able to migrate your funds to the Chrysalis network.",
+            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value.  You can proceed anyway. Only {value} will be lost."
         },
         "bundleMiningWarning": {
             "title": "Warning",

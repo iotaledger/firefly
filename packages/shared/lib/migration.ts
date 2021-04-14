@@ -463,6 +463,11 @@ export const bundlesWithUnspentAddresses = derived(get(migration).bundles, (_bun
 export const hasAnySpentAddressWithNoBundleHashes = derived(get(migration).bundles, (_bundles) => _bundles.length &&
     _bundles.some((bundle) => bundle.inputs.some((input) => input.spent && !input.spentBundleHashes.length)))
 
+
+export const unselectedInputs = derived([get(migration).data, get(migration).bundles], ([data, bundles]) => {
+    return data.inputs.filter((input) => !bundles.some((bundle) => bundle.inputs.some((bundleInput) => bundleInput.address === input.address)))
+})
+
 /**
  * List of chrysalis node endpoints to detect when is live
  */

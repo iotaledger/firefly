@@ -9,6 +9,7 @@
         hasLowBalanceOnAllSpentAddresses,
         bundlesWithUnspentAddresses,
         resetMigrationState,
+        unselectedInputs,
     } from 'shared/lib/migration'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { formatUnit } from 'shared/lib/units'
@@ -54,15 +55,37 @@
 
     function getError(_balance) {
         if (hasInsufficientBalance(_balance)) {
-            return locale('views.balance.error')
+            return {
+                allowToProceed: false,
+                text: locale('views.balance.error'),
+            }
         }
 
         if ($hasLowBalanceOnAllSpentAddresses && !$bundlesWithUnspentAddresses.length) {
-            return locale('views.migrate.minimumMigrationAmountSpentAddresses')
+            return {
+                allowToProceed: false,
+                text: locale('views.migrate.minimumMigrationAmountSpentAddresses'),
+            }
         }
 
         if (!_bundles.length) {
-            return locale('views.migrate.tooManyAddressesToMigrate')
+            return {
+                allowToProceed: false,
+                text: locale('views.migrate.tooManyAddressesToMigrate'),
+            }
+        }
+
+        if ($unselectedInputs) {
+            const totalUnselectedBalance = $unselectedInputs.reduce((acc, input) => acc + input.balance, 0)
+
+            return {
+                allowToProceed: true,
+                text: locale('views.migrate.cannotMigrateAllYourFunds', {
+                    values: {
+                        value: `${formatUnit(totalUnselectedBalance)} (${getFiatBalance(totalUnselectedBalance).toUpperCase()})`,
+                    },
+                }),
+            }
         }
 
         return null
@@ -120,7 +143,7 @@
                 <Text type="p" highlighted classes="py-1 uppercase">{fiatBalance}</Text>
             </Box>
             {#if error}
-                <Toast classes="mt-4" type="error" message={error} />
+                <Toast classes="mt-4" type="error" message={error.text} />
             {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-row justify-between items-center space-x-4">
@@ -132,7 +155,7 @@
                         classes="justify-center" />
                 {:else}{locale('actions.checkAgain')}{/if}
             </Button>
-            <Button classes="flex-1" disabled={isCheckingForBalance || error} onClick={() => handleContinueClick()}>
+            <Button classes="flex-1" disabled={isCheckingForBalance || !error.allowToProceed} onClick={() => handleContinueClick()}>
                 {locale('actions.continue')}
             </Button>
         </div>
