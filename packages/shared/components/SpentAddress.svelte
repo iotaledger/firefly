@@ -62,19 +62,19 @@
             riskColor = 'green'
             localeRiskLevel = 'veryLow'
             riskBars = 1
-        } else if (risk > RiskLevel.LOW && risk < RiskLevel.MEDIUM) {
+        } else if (risk >= RiskLevel.LOW && risk < RiskLevel.MEDIUM) {
             riskColor = 'blue'
             localeRiskLevel = 'low'
             riskBars = 2
-        } else if (risk > RiskLevel.MEDIUM && risk < RiskLevel.HIGH) {
+        } else if (risk >= RiskLevel.MEDIUM && risk < RiskLevel.HIGH) {
             riskColor = 'yellow'
             localeRiskLevel = 'medium'
             riskBars = 3
-        } else if (risk > RiskLevel.HIGH && risk < RiskLevel.VERYHIGH) {
+        } else if (risk >= RiskLevel.HIGH && risk < RiskLevel.VERYHIGH) {
             riskColor = 'orange'
             localeRiskLevel = 'high'
             riskBars = 4
-        } else if (risk > RiskLevel.VERYHIGH) {
+        } else if (risk >= RiskLevel.VERYHIGH) {
             riskColor = 'red'
             localeRiskLevel = 'veryHigh'
             riskBars = 5
