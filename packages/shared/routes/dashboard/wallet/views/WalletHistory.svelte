@@ -42,7 +42,7 @@
                     openPopup({ type: 'password', props: { onSuccess: () => syncAccounts(false, 0, 10) } })
                 } else {
                     const gapLimit = $activeProfile?.gapLimit
-                    syncAccounts(false, gapLimit ?? 0, gapLimit)
+                    syncAccounts(false, gapLimit === undefined ? undefined : 0, gapLimit)
                     updateProfile('gapLimit', undefined)
                 }
             },
