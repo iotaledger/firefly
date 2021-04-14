@@ -414,6 +414,11 @@ export const hasMigratedAllBundles = derived(get(migration).bundles, (_bundles) 
     bundle.migrated === true
 ))
 
+export const hasMigratedAnyBundle = derived(get(migration).bundles, (_bundles) => _bundles.some((bundle) =>
+    bundle.selected === true &&
+    bundle.migrated === true
+))
+
 export const hasMigratedAllSelectedBundles = derived(get(migration).bundles, (_bundles) => {
     const selectedBundles = _bundles.filter((bundle) => bundle.selected === true)
 

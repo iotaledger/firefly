@@ -100,7 +100,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <BundleMiningLayout onBackClick={handleBackClick}>
+    <BundleMiningLayout allowBack={false}>
         <div slot="icon_boxed">
             <div class="flex justify-center items-center rounded-2xl w-12 h-12 bg-blue-500 shadow-lg">
                 <Icon boxed="true" icon="history" classes="text-white" />
@@ -118,11 +118,6 @@
         </div>
         <div slot="actions" class="w-2/5 mt-8">
             <ProgressBar percent={progressBarPercent} message={progressBarMessage} />
-            <div on:click={handleCancelClick}>
-                <Text type="p" secondary highlighted classes="py-3.5 mt-4 font-bold cursor-pointer text-center">
-                    {locale('actions.cancel')}
-                </Text>
-            </div>
         </div>
     </BundleMiningLayout>
 {/if}

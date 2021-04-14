@@ -2,6 +2,8 @@
     import { Box, Icon } from 'shared/components'
 
     export let onBackClick = () => {}
+
+    export let allowBack = true
 </script>
 
 <!-- https://github.com/sveltejs/svelte/issues/4546 -->
@@ -9,9 +11,11 @@
     <slot />
 {/if}
 
-<div data-label="back-button" class="absolute top-12 left-5" on:click={onBackClick}>
-    <Icon icon="arrow-left" classes="cursor-pointer text-blue-500" />
-</div>
+{#if allowBack}
+    <div data-label="back-button" class="absolute top-12 left-5" on:click={onBackClick}>
+        <Icon icon="arrow-left" classes="cursor-pointer text-blue-500" />
+    </div>
+{/if}
 <div data-label="bundle-mining-layout" class="flex flex-col w-full h-screen justify-center items-center">
     <div class="w-2/5 h-auto">
         <Box classes="bg-gray-50 dark:bg-gray-800 dark:bg-opacity-50 rounded-lg py-10 px-20">

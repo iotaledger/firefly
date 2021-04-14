@@ -9,6 +9,7 @@
         unmigratedBundles,
         hasMigratedAllSelectedBundles,
         selectedUnmigratedBundles,
+        hasMigratedAnyBundle
     } from 'shared/lib/migration'
 
     export let locale
@@ -172,7 +173,7 @@
 {#if mobile}
     <div>foo</div>
 {:else}
-    <OnboardingLayout onBackClick={handleBackClick} class="">
+    <OnboardingLayout allowBack={!$hasMigratedAnyBundle} onBackClick={handleBackClick} class="">
         <div slot="leftpane__content" class="h-full flex flex-col flex-wrap">
             <Text type="h2" classes="mb-5">{locale('views.migrate.title')}</Text>
             <Text type="p" secondary classes="mb-6">{locale('views.transferFragmentedFunds.body1')}</Text>
