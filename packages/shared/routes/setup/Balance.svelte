@@ -21,7 +21,9 @@
     let isCheckingForBalance
 
     const { seed, data, bundles } = $migration
-    const { balance } = $data
+
+    let _data = $data
+    let _bundles = $bundles
 
     const getFiatBalance = (balance) =>
         `${convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[AvailableExchangeRates.USD])} ${
@@ -30,12 +32,21 @@
 
     const hasInsufficientBalance = (balance) => balance < MINIMUM_MIGRATION_BALANCE
 
+    const { balance } = _data
+
     let fiatBalance = getFiatBalance(balance)
 
     let error = getError(balance)
     let formattedBalance = formatUnit(balance)
 
-    const unsubscribe = data.subscribe((_data) => {
+    bundles.subscribe((updatedBundles) => {
+        _bundles = updatedBundles
+        error = getError(_data.balance)
+    })
+
+    const unsubscribe = data.subscribe((updatedData) => {
+        _data = updatedData
+
         fiatBalance = getFiatBalance(_data.balance)
         formattedBalance = formatUnit(_data.balance)
         error = getError(_data.balance)
@@ -50,7 +61,7 @@
             return locale('views.migrate.minimumMigrationAmountSpentAddresses')
         }
 
-        if (!$bundles.length) {
+        if (!_bundles.length) {
             return locale('views.migrate.tooManyAddressesToMigrate')
         }
 
