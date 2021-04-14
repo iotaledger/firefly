@@ -2,6 +2,7 @@ import { Electron } from 'shared/lib/electron'
 import { localize } from 'shared/lib/i18n'
 import { showAppNotification } from 'shared/lib/notifications'
 import validUrl from 'valid-url'
+import { Bech32 } from "shared/lib/bech32"
 
 export const VALID_MAINNET_ADDRESS = /^iota1[02-9ac-hj-np-z]{59}$/
 export const VALID_DEVNET_ADDRESS = /^atoi1[02-9ac-hj-np-z]{59}$/
@@ -164,6 +165,17 @@ export const validateBech32Address = (prefix, addr) => {
     }
     if (!new RegExp(`^${prefix}1[02-9ac-hj-np-z]{59}$`).test(addr)) {
         return localize('error.send.wrongAddressFormat')
+    }
+
+    let isValid = false
+    try {
+        const decoded = Bech32.decode(addr)
+        isValid = decoded && decoded.humanReadablePart === prefix
+    } catch {
+    }
+
+    if (!isValid) {
+        return localize('error.send.invalidAddress')
     }
 }
 
