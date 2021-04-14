@@ -27,9 +27,9 @@ export interface SendMigrationBundleResponse {
 
 export enum RiskLevel {
     VERYHIGH = 10 ** -13,
-    HIGH = 10 ^ -15,
-    MEDIUM = 10 ^ -17,
-    LOW = 10 ^ -19,
+    HIGH = 10 ** -15,
+    MEDIUM = 10 ** -17,
+    LOW = 10 ** -19,
     VERYLOW = 0
 }
 
