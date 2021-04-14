@@ -366,7 +366,19 @@ export const toggleInputSelection = (address: Address): void => {
     }))
 }
 
-export const unselectAllUnspent = (): void => {
+export const selectBundlesWithSpentAddresses = (): void => {
+    const { bundles } = get(migration)
+    bundles.update((_bundles) => _bundles.map((bundle) => {
+        if (bundle.shouldMine) {
+            const inputsSum = bundle.inputs.reduce((acc, input) => acc + input.balance, 0)
+
+            return Object.assign({}, bundle, { selected: inputsSum >= MINIMUM_MIGRATION_BALANCE })
+        }
+        return bundle
+    }))
+}
+
+export const unselectBundlesWithSpentAddresses = (): void => {
     const { bundles } = get(migration)
     bundles.update((_bundles) => _bundles.map((bundle) => {
         if (bundle.shouldMine) {

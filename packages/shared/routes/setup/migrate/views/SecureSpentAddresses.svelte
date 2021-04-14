@@ -5,7 +5,8 @@
         selectedUnmigratedBundles,
         spentAddressesFromBundles,
         toggleInputSelection,
-        unselectAllUnspent,
+        unselectBundlesWithSpentAddresses,
+        selectBundlesWithSpentAddresses
     } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
@@ -37,8 +38,12 @@
     }
 
     function handleBackClick() {
+        // If a user goes back, automatically select all bundles with spent addresses
+        selectBundlesWithSpentAddresses()
+        
         dispatch('previous')
     }
+
     function secureAddresses() {
         if (selectedAddresses.length) {
             if (selectedAddresses?.length < addresses?.filter((_address) => !_address.disabled)?.length) {
@@ -56,7 +61,7 @@
     }
 
     function handleSkipClick() {
-        unselectAllUnspent()
+        unselectBundlesWithSpentAddresses()
         triggerPopup(true)
     }
 
