@@ -46,12 +46,12 @@
             return locale('views.balance.error')
         }
 
-        if (!$bundles.length) {
-            return locale('views.migrate.tooManyAddressesToMigrate')
-        }
-
         if ($hasLowBalanceOnAllSpentAddresses && !$bundlesWithUnspentAddresses.length) {
             return locale('views.migrate.minimumMigrationAmountSpentAddresses')
+        }
+
+        if (!$bundles.length) {
+            return locale('views.migrate.tooManyAddressesToMigrate')
         }
 
         return null
