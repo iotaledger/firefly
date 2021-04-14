@@ -46,6 +46,10 @@
         error = getError(_data.balance)
     })
 
+    unselectedInputs.subscribe(() => {
+        error = getError(_data.balance)
+    })
+
     const unsubscribe = data.subscribe((updatedData) => {
         _data = updatedData
 
