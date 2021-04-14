@@ -1,4 +1,5 @@
-import { writable } from 'svelte/store'
+import { derived, get, writable } from 'svelte/store'
+import { appSettings } from 'shared/lib/appSettings'
 
 export enum CurrencyTypes {
     BTC = 'btc',
@@ -134,6 +135,13 @@ export const exchangeRates = writable<ExchangeRates>(DEFAULT_EXCHANGE_RATES)
 export const currencies = writable<Currencies>({} as Currencies)
 
 /**
+ * Calculate the decimal separator based on the language
+ */
+export const decimalSeparator = derived([appSettings], ([$activeSettings]) =>
+    calculateDecimalSeparator($activeSettings)
+)
+
+/**
  * Converts iotas to fiat equivalent
  *
  * @method convertToFiat
@@ -162,10 +170,35 @@ export const formatCurrencyValue = (data: (number | string), currency: string, f
     const parsedData: number = parseFloat(data.toString())
     switch(currency.toLowerCase()) {
         case CurrencyTypes.BTC:
-            return parsedData.toFixed(btcFixed)
+            return replaceCurrencyDecimal(parsedData.toFixed(btcFixed))
         case CurrencyTypes.ETH:
-            return parsedData.toFixed(ethFixed)
+            return replaceCurrencyDecimal(parsedData.toFixed(ethFixed))
         default:
-            return parsedData.toFixed(fiatFixed)
+            return replaceCurrencyDecimal(parsedData.toFixed(fiatFixed))
     }
 }
+
+const calculateDecimalSeparator = (appSettings) => {
+    const language = appSettings.language
+    return Intl.NumberFormat(language)
+        .formatToParts(1.1)
+        .find(part => part.type === 'decimal')
+        .value;
+}
+
+export const getAllDecimalSeparators = () => {
+    return ['.', ',']
+}
+
+export const parseCurrency = (valueString: string): number => {
+    return Number.parseFloat(valueString.replace(get(decimalSeparator), '.'))
+}
+
+export const formatCurrency = (value: number, maxDecimals: number = 2): string => {
+    return Number(value.toFixed(maxDecimals)).toString().replace('.', get(decimalSeparator))
+}
+
+export const replaceCurrencyDecimal = (value: string): string => {
+    return value.replace('.', get(decimalSeparator))
+}
+

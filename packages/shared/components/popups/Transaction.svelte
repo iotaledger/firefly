@@ -1,7 +1,13 @@
 <script lang="typescript">
     import { Button, Illustration, Text } from 'shared/components'
-    import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
-    import { appSettings } from 'shared/lib/appSettings'
+    import {
+        AvailableExchangeRates,
+        convertToFiat,
+        currencies,
+        CurrencyTypes,
+        exchangeRates,
+        formatCurrency,
+    } from 'shared/lib/currency'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile } from 'shared/lib/profile'
     import { formatUnit } from 'shared/lib/units'
@@ -13,14 +19,12 @@
     export let amount = 0
     export let onConfirm = () => {}
 
-    let displayedAmount = `${formatUnit(amount)} (${converToFiat(amount)})`
+    let displayedAmount = `${formatUnit(amount)} (${localConvertToFiat(amount)})`
 
-    function converToFiat(amount) {
+    function localConvertToFiat(amount) {
         const activeCurrency = get(activeProfile)?.settings.currency ?? AvailableExchangeRates.USD
-        return `${convertToFiat(
-            amount,
-            get(currencies)[CurrencyTypes.USD],
-            get(exchangeRates)[activeCurrency]
+        return `${formatCurrency(
+            convertToFiat(amount, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[activeCurrency])
         )} ${activeCurrency}`
     }
 

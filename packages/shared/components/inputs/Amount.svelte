@@ -1,7 +1,16 @@
 <script lang="typescript">
     import { convertUnits, Unit } from '@iota/unit-converter'
     import { Input, Text } from 'shared/components'
-    import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
+    import {
+        AvailableExchangeRates,
+        convertToFiat,
+        currencies,
+        CurrencyTypes,
+        exchangeRates,
+        formatCurrency,
+        parseCurrency,
+        replaceCurrencyDecimal,
+    } from 'shared/lib/currency'
     import { activeProfile } from 'shared/lib/profile'
     import { convertUnitsNoE, UNIT_MAP } from 'shared/lib/units'
 
@@ -83,14 +92,14 @@
     }
 
     const amountToFiat = (_amount) => {
-        const amountAsFloat = Number.parseFloat(_amount)
-        if (!amount || amountAsFloat === 0) return null
-        if (Number.isNaN(amountAsFloat)) {
+        if (!amount) return null
+        const amountAsFloat = parseCurrency(_amount)
+        if (amountAsFloat === 0 || Number.isNaN(amountAsFloat)) {
             return null
         } else {
             const amountAsI = convertUnits(amountAsFloat, unit, Unit.i)
             const amountasFiat = convertToFiat(amountAsI, $currencies[CurrencyTypes.USD], $exchangeRates[profileCurrency])
-            return amountasFiat === 0 ? '< 0.01' : amountasFiat;
+            return amountasFiat === 0 ? replaceCurrencyDecimal(`< 0.01`) : formatCurrency(amountasFiat)
         }
     }
 </script>

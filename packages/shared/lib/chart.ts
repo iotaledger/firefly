@@ -1,5 +1,5 @@
 import { convertUnits, Unit } from '@iota/unit-converter'
-import { AvailableExchangeRates, convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
+import { AvailableExchangeRates, convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
 import { localize } from 'shared/lib/i18n'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import type { WalletAccount } from 'shared/lib/wallet'
@@ -179,7 +179,7 @@ export const getAccountActivityData = (account: WalletAccount) => {
                 }),
                 label: localize('charts.incomingMi', {
                     values: {
-                        value: _incoming
+                        value: formatCurrency(_incoming)
                     }
                 })
             })
@@ -190,7 +190,7 @@ export const getAccountActivityData = (account: WalletAccount) => {
                     month: 'long'
                 }), label: localize('charts.outgoingMi', {
                     values: {
-                        value: _outgoing
+                        value: formatCurrency(_outgoing)
                     }
                 })
             })

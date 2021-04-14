@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Error } from 'shared/components'
-    import { getDecimalSeparator } from 'shared/lib/i18n'
+    import { decimalSeparator, getAllDecimalSeparators, formatCurrency, parseCurrency } from 'shared/lib/currency'
     import { onMount } from 'svelte'
 
     export let value = ''
@@ -21,7 +21,7 @@
     export let disableContextMenu = false
 
     let inputElement
-    let decimalSeparator = getDecimalSeparator()
+    let allDecimalSeparators = getAllDecimalSeparators()
 
     const handleInput = (e) => {
         value = e.target.value
@@ -35,8 +35,8 @@
             }
             if ((float || integer) && !isEnter) {
                 // if the input is float, we accept one dot or comma depending on localization
-                if (float && e.key === decimalSeparator) {
-                    if (value.indexOf(decimalSeparator) >= 0) {
+                if (float && e.key === $decimalSeparator) {
+                    if (value.indexOf($decimalSeparator) >= 0) {
                         e.preventDefault()
                     }
                 } else if ('0123456789'.indexOf(e.key) < 0) {
@@ -44,7 +44,7 @@
                     e.preventDefault()
                 } else if (float && maxDecimals !== undefined && '0123456789'.indexOf(e.key) >= 0) {
                     // If max decimals are set only allow certain number after decimal separator
-                    const sepPos = value.indexOf(decimalSeparator)
+                    const sepPos = value.indexOf($decimalSeparator)
                     if (sepPos >= 0) {
                         // If caret position is after the separator then check
                         if (e.target.selectionEnd > sepPos) {
@@ -71,17 +71,17 @@
             if (pasteVal.indexOf('e') >= 0 || pasteVal.indexOf('-') >= 0) {
                 e.preventDefault()
             } else if (float) {
-                const val = Number.parseFloat(pasteVal)
-                // Discard any number we can't parse as floats
+                const val = parseCurrency(pasteVal)
+                // Discard any numbers we can't parse as floats
                 if (Number.isNaN(val)) {
                     e.preventDefault()
                 } else if (maxDecimals !== undefined) {
-                    value = Number(val.toFixed(maxDecimals)).toString()
+                    value = formatCurrency(val, maxDecimals)
                     e.preventDefault()
                 }
             } else if (integer) {
                 // Dicard anything with a decimal separator
-                if (pasteVal.indexOf('.') >= 0 || pasteVal.indexOf(',') >= 0) {
+                if (allDecimalSeparators.some((sep) => pasteVal.indexOf(sep) >= 0)) {
                     e.preventDefault()
                 } else {
                     const val = Number.parseInt(pasteVal, 10)

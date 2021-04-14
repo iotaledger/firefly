@@ -1,5 +1,5 @@
 import { mnemonic } from 'shared/lib/app'
-import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
+import { convertToFiat, currencies, CurrencyTypes, exchangeRates, formatCurrency } from 'shared/lib/currency'
 import { stripTrailingSlash } from 'shared/lib/helpers'
 import { localize } from 'shared/lib/i18n'
 import type { PriceData } from 'shared/lib/marketData'
@@ -612,11 +612,11 @@ export const updateAccountAfterBalanceChange = (
                 return Object.assign<WalletAccount, Partial<WalletAccount>>(storedAccount, {
                     rawIotaBalance,
                     balance: formatUnit(rawIotaBalance, 2),
-                    balanceEquiv: `${convertToFiat(
+                    balanceEquiv: `${formatCurrency(convertToFiat(
                         rawIotaBalance,
                         get(currencies)[CurrencyTypes.USD],
                         get(exchangeRates)[activeCurrency]
-                    )} ${activeCurrency}`,
+                    ))} ${activeCurrency}`,
                     addresses: storedAccount.addresses.map((_address: Address) => {
                         if (_address.address === address) {
                             _address.balance += receivedBalance - spentBalance
@@ -795,11 +795,11 @@ export const updateBalanceOverview = (balance: number, incoming: number, outgoin
             outgoingRaw: outgoing,
             balance: formatUnit(balance, 2),
             balanceRaw: balance,
-            balanceFiat: `${convertToFiat(
+            balanceFiat: `${formatCurrency(convertToFiat(
                 balance,
                 get(currencies)[CurrencyTypes.USD],
                 get(exchangeRates)[activeCurrency]
-            )} ${activeCurrency}`,
+            ))} ${activeCurrency}`,
         });
     });
 };
@@ -818,11 +818,11 @@ export const updateBalanceOverviewFiat = (): void => {
 
     balanceOverview.update((overview) => {
         return Object.assign<BalanceOverview, BalanceOverview, Partial<BalanceOverview>>({} as BalanceOverview, overview, {
-            balanceFiat: `${convertToFiat(
+            balanceFiat: `${formatCurrency(convertToFiat(
                 overview.balanceRaw,
                 get(currencies)[CurrencyTypes.USD],
                 get(exchangeRates)[activeCurrency]
-            )} ${activeCurrency}`,
+            ))} ${activeCurrency}`,
         });
     });
 }
@@ -947,11 +947,11 @@ export const updateAccountsBalanceEquiv = (): void => {
     accounts.update((storedAccounts) => {
         return storedAccounts.map((storedAccount) => {
             return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
-                balanceEquiv: `${convertToFiat(
+                balanceEquiv: `${formatCurrency(convertToFiat(
                     storedAccount.rawIotaBalance,
                     get(currencies)[CurrencyTypes.USD],
                     get(exchangeRates)[activeCurrency]
-                )} ${activeCurrency}`,
+                ))} ${activeCurrency}`,
             })
         })
     })
@@ -1143,11 +1143,11 @@ export const prepareAccountInfo = (
         alias,
         rawIotaBalance: balance,
         balance: formatUnit(balance, 2),
-        balanceEquiv: `${convertToFiat(
+        balanceEquiv: `${formatCurrency(convertToFiat(
             balance,
             get(currencies)[CurrencyTypes.USD],
             get(exchangeRates)[activeCurrency]
-        )} ${activeCurrency}`,
+        ))} ${activeCurrency}`,
         color: ACCOUNT_COLORS[index % ACCOUNT_COLORS.length],
     })
 }

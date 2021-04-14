@@ -1,5 +1,6 @@
-import { Unit, convertUnits } from '@iota/unit-converter'
+import { convertUnits, Unit } from '@iota/unit-converter'
 import Big from 'big.js'
+import { replaceCurrencyDecimal } from 'shared/lib/currency'
 
 // Set this to avoid small numbers switching to exponential format
 Big.NE = -20
@@ -33,7 +34,7 @@ export const formatUnit = (value: number, decimalPlaces = 2): string => {
         return `0 ${unit}`
     }
 
-    return unit === Unit.i ? `${value} ${Unit.i}` : `${convertUnits(value, Unit.i, unit).toFixed(decimalPlaces)} ${unit}`
+    return replaceCurrencyDecimal(unit === Unit.i ? `${value} ${Unit.i}` : `${convertUnits(value, Unit.i, unit).toFixed(decimalPlaces)} ${unit}`)
 }
 
 /**
