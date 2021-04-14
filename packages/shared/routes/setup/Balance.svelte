@@ -75,7 +75,7 @@
             }
         }
 
-        if ($unselectedInputs) {
+        if ($unselectedInputs.length) {
             const totalUnselectedBalance = $unselectedInputs.reduce((acc, input) => acc + input.balance, 0)
 
             return {
@@ -88,7 +88,10 @@
             }
         }
 
-        return null
+        return {
+            allowToProceed: true,
+            text: null,
+        }
     }
 
     const dispatch = createEventDispatcher()
@@ -142,7 +145,7 @@
                 <Text type="h2">{formattedBalance}</Text>
                 <Text type="p" highlighted classes="py-1 uppercase">{fiatBalance}</Text>
             </Box>
-            {#if error}
+            {#if error.text}
                 <Toast classes="mt-4" type="error" message={error.text} />
             {/if}
         </div>
