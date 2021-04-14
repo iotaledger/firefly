@@ -366,6 +366,19 @@ export const asyncRemoveStorage = () => {
     })
 }
 
+export const asyncSyncAccounts = (addressIndex?, gapLimit?) => {
+    return new Promise<SyncedAccount[]>((resolve, reject) => {
+        api.syncAccounts(addressIndex, gapLimit, {
+            onSuccess(response) {
+                resolve(response.payload)
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
+
 /**
  * Initialises event listeners from wallet library
  *

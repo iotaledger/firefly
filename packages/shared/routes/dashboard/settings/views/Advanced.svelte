@@ -117,6 +117,10 @@
     function handleDiagnosticsClick() {
         openPopup({ type: 'diagnostics' })
     }
+
+    function handleBalanceFinderClick() {
+        openPopup({ type: 'balanceFinder', hideClose: true })
+    }
 </script>
 
 <style type="text/scss">
@@ -258,6 +262,16 @@
                     {locale('actions.syncAll')}
                 </Button>
                 <Spinner busy={$isSyncing} message={$isSyncing ? locale('general.syncingAccounts') : ''} classes="ml-2" />
+            </div>
+        </section>
+        <HR classes="pb-5 mt-5 justify-center" />
+        <section id="balanceFinder" class="w-3/4">
+            <Text type="h4" classes="mb-3">{locale('views.settings.balanceFinder.title')}</Text>
+            <Text type="p" secondary classes="mb-5">{locale('views.settings.balanceFinder.description')}</Text>
+            <div class="flex flex-row items-center">
+                <Button medium inlineStyle="min-width: 156px;" onClick={() => handleBalanceFinderClick()}>
+                    {locale('actions.findBalances')}
+                </Button>
             </div>
         </section>
         <HR classes="pb-5 mt-5 justify-center" />

@@ -209,6 +209,10 @@
                 "title": "Resync accounts",
                 "description": "Starts a background task to make sure your accounts are up to date."
             },
+            "balanceFinder": {
+                "title": "Balance finder",
+                "description": "Perform an extended search of your addresses for tokens."
+            },
             "hiddenAccounts": {
                 "title": "Hidden accounts",
                 "description": "Selecting this options will show accounts that were previously hidden."
@@ -403,6 +407,11 @@
         "transaction": {
             "title": "Confirm transaction",
             "body": "You’re about to send {amount} to"
+        },
+        "balanceFinder": {
+            "title": "Balance finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances.",
+            "totalWalletBalance": "Total wallet balance"
         }
     },
     "charts": {
@@ -492,7 +501,11 @@
         "readDocumentation": "Read the documentation",
         "visitFaq": "Visit FAQ",
         "showHiddenAccounts": "Show hidden accounts",
-        "confirm": "Confirm"
+        "confirm": "Confirm",
+        "findBalances": "Find balances",
+        "searchBalances": "Search for balances",
+        "searchAgain": "Search again",
+        "searching": "Searching..."
     },
     "general": {
         "password": "Password",
