@@ -26,10 +26,11 @@
     let _data = $data
     let _bundles = $bundles
 
-    const getFiatBalance = (balance) =>
-        `${convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[AvailableExchangeRates.USD])} ${
-            CurrencyTypes.USD
-        }`
+    const getFiatBalance = (balance) =>{
+        const balanceAsFiat = convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[AvailableExchangeRates.USD])
+        
+        return `${balanceAsFiat === 0 ? '< 0.01' : balanceAsFiat} ${CurrencyTypes.USD}`
+    }
 
     const hasInsufficientBalance = (balance) => balance < MINIMUM_MIGRATION_BALANCE
 
