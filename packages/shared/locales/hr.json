@@ -210,8 +210,8 @@
                 "description": "Pokreće pozadinski postupak koji će provjeriti jesu li svi vaši računi aktualni."
             },
             "hiddenAccounts": {
-                "title": "Hidden accounts",
-                "description": "Selecting this options will show accounts that were previously hidden."
+                "title": "Skriveni računi",
+                "description": "Odaberite ovu opciju za prikaz računa koji su ranije bili skriveni."
             },
             "deleteProfile": {
                 "title": "Izbrišite profil",
@@ -227,19 +227,19 @@
             },
             "nodeSettings": {
                 "title": "Node postavke",
-                "description": "Select Manual to configure the node settings and connect to your own node"
+                "description": "Odaberi Ručno za konfiguriranje nodea i spajanje na vlastiti node"
             },
             "configureNodeList": {
                 "title": "Odaberi node",
-                "description": "Manage the list of nodes your wallet connects to.",
-                "primaryNode": "Primary node",
-                "excludeNode": "Exclude node",
-                "includeNode": "Include node",
-                "viewDetails": "View details",
-                "setAsPrimary": "Set as primary",
+                "description": "Uređivanje popisa nodeova na koji se spaja vaš novčanik.",
+                "primaryNode": "Primarni node",
+                "excludeNode": "Izuzmi node",
+                "includeNode": "Priključi node",
+                "viewDetails": "Pogledaj detalje",
+                "setAsPrimary": "Koristi kao primarno",
                 "removeNode": "Ukloni node",
-                "includeOfficialNodeList": "Include official node list",
-                "noNodes": "There are no nodes, automatic selection will be used instead."
+                "includeOfficialNodeList": "Uključi popis službenih nodeova",
+                "noNodes": "Nema nodeova na raspolaganju. Upotrijebit ćemo automatski odabir."
             },
             "proofOfWork": {
                 "title": "Proof of Work",
@@ -345,25 +345,25 @@
             "backupWarning": "Izgubite li pričuvnu kopiju i frazu za oporavak, izgubit ćete pristup svojim sredstvima.",
             "notBackedUp": "Nije napravljena pričuvna kopija",
             "notBackedUpDescription": "Niste napravili pričuvnu kopiju svojeg Strongholda",
-            "saving": "Saving..."
+            "saving": "Spremanje..."
         },
         "deleteAccount": {
-            "title": "Delete {name}?",
-            "body": "This account has no transaction history. It can safely be deleted.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Delete account",
-            "errorTitle": "Unable to delete {name}",
-            "errorBody1": "You cannot delete this account, you must have at least one."
+            "title": "Obriši {name}?",
+            "body": "Ovj račun nema povijest transakcija i zato ga je sigurno obrisati.",
+            "typePassword": "Za potvrdu unesite lozinku novčanika.",
+            "hideAccount": "Brisanje računa",
+            "errorTitle": "Nije moguće ukloniti {name}",
+            "errorBody1": "Ne možete ukloniti ovaj račun. Mora postojati barem jedan."
         },
         "hideAccount": {
-            "title": "Hide {name}?",
-            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Hide account",
-            "errorTitle": "Unable to hide {name}",
-            "errorBody1": "To hide an account it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
-            "errorBody3": "You cannot hide this account, you must have at least one."
+            "title": "Sakrij {name}?",
+            "body": "Možete pronaći ovaj račun ako omogućite \"Pokaži skrivene račune\" u Naprednim postavkama.",
+            "typePassword": "Za potvrdu unesite lozinku novčanika.",
+            "hideAccount": "Sakrij račun",
+            "errorTitle": "Nije moguće sakriti {name}",
+            "errorBody1": "Kako biste sakrili račun, na njemu ne smije biti sredstava.",
+            "errorBody2": "Trenutno na ovom računu imate {balance}. Molimo prenesite sredstva na drugi račun i pokušajte ponovo.",
+            "errorBody3": "Ne možete ukloniti ovaj račun. Mora postojati barem jedan."
         },
         "addressHistory": {
             "title": "{name} povijest adresa",
@@ -371,7 +371,7 @@
         },
         "node": {
             "titleAdd": "Dodaj node",
-            "titleUpdate": "Update a node",
+            "titleUpdate": "Obnovi node",
             "titleRemove": "Ukloni node",
             "titleDetails": "Pojedinosti nodea",
             "nodeAddress": "Adresa nodea",
@@ -401,8 +401,8 @@
             "userPath": "Korisnička putanja"
         },
         "transaction": {
-            "title": "Confirm transaction",
-            "body": "You’re about to send {amount} to"
+            "title": "Potvrdi transakciju",
+            "body": "Ovim ćete poslati {amount} na račun"
         }
     },
     "charts": {
@@ -453,19 +453,19 @@
         "enableDeveloperMode": "Umogući razvojne alate",
         "enableSystemNotifications": "Omogući obavijesti",
         "exportState": "Izvezi stanje (State)",
-        "localProofOfWork": "Local proof of work",
+        "localProofOfWork": "Lokalni Proof of work",
         "unlock": "Otključaj",
         "updateFirefly": "Ažuriraj Firefly",
         "restartNow": "Ponovno pokreni",
         "saveBackup": "Spremi Stronghold pričuvnu kopiju",
         "customizeAcount": "Prilagodi račun",
         "viewAddressHistory": "Povijest adresa",
-        "hideAccount": "Hide account",
-        "showAccount": "Unhide account",
-        "deleteAccount": "Delete account",
+        "hideAccount": "Sakrij račun",
+        "showAccount": "Pokaži račun",
+        "deleteAccount": "Izbriši račun",
         "max": "Maksimum",
         "addNode": "Dodaj node",
-        "updateNode": "Update node",
+        "updateNode": "Obnovi node",
         "removeNode": "Ukloni node",
         "hide": "Sakrij",
         "hideOthers": "Sakrij ostalo",
@@ -491,8 +491,8 @@
         "finishSetup": "Završi postavljanje",
         "readDocumentation": "Pročitajte dokumentaciju",
         "visitFaq": "Posjeti često postavljana pitanja",
-        "showHiddenAccounts": "Show hidden accounts",
-        "confirm": "Confirm"
+        "showHiddenAccounts": "Prikaži skrivene račune",
+        "confirm": "Potvrdi"
     },
     "general": {
         "password": "Lozinka",
@@ -538,7 +538,7 @@
         "appearance": "Prikaz",
         "lightTheme": "Svijetla tema",
         "darkTheme": "Tamna tema",
-        "balance": "Balance",
+        "balance": "Stanje računa",
         "accountBalance": "Stanje računa",
         "incoming": "Dolazni",
         "outgoing": "Odlazni",
@@ -586,6 +586,7 @@
         "passwordUpdating": "Ažuriram lozinku...",
         "passwordSuccess": "Lozinka je uspješno ažurirana",
         "passwordFailed": "Ažuriranje lozinke nije uspjelo",
+        "syncingAccounts": "Sinkroniziranje računa...",
         "exportingStronghold": "Izvozim Stronghold...",
         "exportingStrongholdSuccess": "Stronghold je uspješno izvezen",
         "exportingStrongholdFailed": "Izvoz Strongholda nije uspio",
@@ -599,7 +600,7 @@
         "passwordStrength3": "Osrednje",
         "passwordStrength4": "Jako",
         "creatingProfile": "Stvaram račun, molim pričekajte...",
-        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
+        "accountRemoved": "Ovaj je račun skriven. Kako biste mogli raditi transfere prvo ga morate prikazati."
     },
     "dates": {
         "today": "Danas",
@@ -613,7 +614,7 @@
         "valueTx": "Primanje {{value}} na {{account}} u tijeku",
         "confirmed": "Odlazna transakcija od {{value}} s {{account}} je potvrđena",
         "confirmedInternal": "{{value}} od {{senderAccount}} prema {{receiverAccount}} je potvrđena",
-        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
+        "confirmedInternalNoAccounts": "Interni transfer {{value}} je potvrđen",
         "failed": "Odlazna transakcija od {{value}} s {{account}} nije uspjela",
         "downloadingUpdate": "Preuzimanje ažuriranja",
         "updateReady": "Ažuriranje je spremno",
@@ -653,8 +654,8 @@
         },
         "account": {
             "length": "Your account name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "empty": "You must use your latest account before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this account.",
+            "empty": "Morate upotrijebiti najnoviji račun prije no što možete stvoriti još jedan.",
+            "notEmpty": "Morate prebaciti sredstva drugdje prije no što možete obrisati račun.",
             "duplicate": "Račun s ovim imenom već postoji.",
             "tilde": "Ime profila ne može početi znakom '~'.",
             "control": "Ime profila ne smije sadržavati Ctrl znak.",
@@ -688,10 +689,10 @@
             "invalid": "Sigurnosna kopija nije prepoznata.",
             "destination": "Destinacija za pričuvnu kopiju je nevažeća.",
             "mnemonic": "The mnemonic is not valid.",
-            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
-            "seedCharacters": "The seed should only contain characters A-Z or 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
-            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase"
+            "seedTooShort": "Seed mora imati 81 znak, trenutno ih ima {length, plural, one {jedan} other {#}}",
+            "seedCharacters": "Seed može sadržavati samo slova od A do Z i broj 9",
+            "phraseWordCount": "Vaša fraza za oiporavak mora se sastojati od 24 riječi. Trenutno {length, plural, one {je samo jedna} other {ih ima samo #}}.",
+            "phraseUnrecognizedWord": "Ne prepoznajemo riječ \"{word}\" u vašoj frazi za oporavak"
         }
     }
 }

@@ -419,7 +419,7 @@
         })
     }
 
-    function onInternalTransfer(senderAccountId, receiverAccountId, amount) {
+    function onInternalTransfer(senderAccountId, receiverAccountId, amount, internal) {
         const _internalTransfer = () => {
             isTransferring.set(true)
             api.internalTransfer(senderAccountId, receiverAccountId, amount, {
@@ -451,6 +451,7 @@
                                                         essence: Object.assign({}, message.payload.data.essence, {
                                                             data: Object.assign({}, message.payload.data.essence.data, {
                                                                 incoming: isReceiverAccount,
+                                                                internal: true
                                                             }),
                                                         }),
                                                     }),
@@ -469,7 +470,7 @@
                     transferState.set('Complete')
 
                     setTimeout(() => {
-                        clearSendParams(true)
+                        clearSendParams(internal)
                         isTransferring.set(false)
                     }, 3000)
                 },

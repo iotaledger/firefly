@@ -586,6 +586,7 @@
         "passwordUpdating": "Jelszó frissítése...",
         "passwordSuccess": "A jelszó sikeresen frissítve",
         "passwordFailed": "A jelszó frissítése sikertelen",
+        "syncingAccounts": "Számlák szinkronizálása...",
         "exportingStronghold": "Stronghold exportálása...",
         "exportingStrongholdSuccess": "Stronghold sikeresen exportálva",
         "exportingStrongholdFailed": "Stronghold exportálása sikertelen",
