@@ -1,5 +1,5 @@
-import { derived, get, writable } from 'svelte/store'
-import { appSettings } from 'shared/lib/appSettings'
+import { get, writable } from 'svelte/store'
+import { activeProfile } from 'shared/lib/profile'
 
 export enum CurrencyTypes {
     BTC = 'btc',
@@ -90,7 +90,7 @@ export type ExchangeRates = {
 /**
  * Default exchange rates
  */
-const DEFAULT_EXCHANGE_RATES = {
+const DEFAULT_EXCHANGE_RATES: { [key in AvailableExchangeRates ]: number} = {
     [AvailableExchangeRates.AUD]: 1,
     [AvailableExchangeRates.BGN]: 1,
     [AvailableExchangeRates.BRL]: 1,
@@ -127,19 +127,51 @@ const DEFAULT_EXCHANGE_RATES = {
 }
 
 /**
+ * Currency formats
+ */
+ const CURRENCY_FORMATS: { [key in AvailableExchangeRates ]: { decimalSeparator: string }} = {
+    [AvailableExchangeRates.AUD]: { decimalSeparator: '.' },
+    [AvailableExchangeRates.BGN]: { decimalSeparator: ',' },
+    [AvailableExchangeRates.BRL]: { decimalSeparator: ',' },
+    [AvailableExchangeRates.CAD]: { decimalSeparator: '.' },
+    [AvailableExchangeRates.CHF]: { decimalSeparator: '.' },
+    [AvailableExchangeRates.CNY]: { decimalSeparator: '.' },
+    [AvailableExchangeRates.CZK]: { decimalSeparator: ',' },
+    [AvailableExchangeRates.DKK]: { decimalSeparator: ',' },
+    [AvailableExchangeRates.EUR]: { decimalSeparator: ',' },
+    [AvailableExchangeRates.GBP]: { decimalSeparator: '.' },
+    [AvailableExchangeRates.HKD]: { decimalSeparator: '.' },
+    [AvailableExchangeRates.HRK]: { decimalSeparator: ',' },
+    [AvailableExchangeRates.HUF]: { decimalSeparator: ',' },
+    [AvailableExchangeRates.IDR]: { decimalSeparator: ',' },
+    [AvailableExchangeRates.ILS]: { decimalSeparator: '.' },
+    [AvailableExchangeRates.INR]: { decimalSeparator: '.' },
+    [AvailableExchangeRates.ISK]: { decimalSeparator: ',' },
+    [AvailableExchangeRates.JPY]: { decimalSeparator: '.' },
+    [AvailableExchangeRates.KRW]: { decimalSeparator: '.' },
+    [AvailableExchangeRates.MXN]: { decimalSeparator: '.' },
+    [AvailableExchangeRates.MYR]: { decimalSeparator: '.' },
+    [AvailableExchangeRates.NOK]: { decimalSeparator: ',' },
+    [AvailableExchangeRates.NZD]: { decimalSeparator: '.' },
+    [AvailableExchangeRates.PHP]: { decimalSeparator: '.' },
+    [AvailableExchangeRates.PLN]: { decimalSeparator: ',' },
+    [AvailableExchangeRates.RON]: { decimalSeparator: ',' },
+    [AvailableExchangeRates.RUB]: { decimalSeparator: ',' },
+    [AvailableExchangeRates.SEK]: { decimalSeparator: ',' },
+    [AvailableExchangeRates.SGD]: { decimalSeparator: '.' },
+    [AvailableExchangeRates.THB]: { decimalSeparator: '.' },
+    [AvailableExchangeRates.TRY]: { decimalSeparator: ',' },
+    [AvailableExchangeRates.USD]: { decimalSeparator: '.' },
+    [AvailableExchangeRates.ZAR]: { decimalSeparator: ',' },
+}
+
+/**
  * Exchange rates
  */
 export const exchangeRates = writable<ExchangeRates>(DEFAULT_EXCHANGE_RATES)
 
 /** Currencies with price */
 export const currencies = writable<Currencies>({} as Currencies)
-
-/**
- * Calculate the decimal separator based on the language
- */
-export const decimalSeparator = derived([appSettings], ([$activeSettings]) =>
-    calculateDecimalSeparator($activeSettings)
-)
 
 /**
  * Converts iotas to fiat equivalent
@@ -178,12 +210,9 @@ export const formatCurrencyValue = (data: (number | string), currency: string, f
     }
 }
 
-const calculateDecimalSeparator = (appSettings) => {
-    const language = appSettings.language
-    return Intl.NumberFormat(language)
-        .formatToParts(1.1)
-        .find(part => part.type === 'decimal')
-        .value;
+export const getDecimalSeparator = () => {
+    const profileCurrency = get(activeProfile)?.settings.currency
+    return CURRENCY_FORMATS[profileCurrency ?? AvailableExchangeRates.USD].decimalSeparator
 }
 
 export const getAllDecimalSeparators = () => {
@@ -191,14 +220,14 @@ export const getAllDecimalSeparators = () => {
 }
 
 export const parseCurrency = (valueString: string): number => {
-    return Number.parseFloat(valueString.replace(get(decimalSeparator), '.'))
+    return Number.parseFloat(valueString.replace(getDecimalSeparator(), '.'))
 }
 
 export const formatCurrency = (value: number, maxDecimals: number = 2): string => {
-    return Number(value.toFixed(maxDecimals)).toString().replace('.', get(decimalSeparator))
+    return Number(value.toFixed(maxDecimals)).toString().replace('.', getDecimalSeparator())
 }
 
 export const replaceCurrencyDecimal = (value: string): string => {
-    return value.replace('.', get(decimalSeparator))
+    return value.replace('.', getDecimalSeparator())
 }
 

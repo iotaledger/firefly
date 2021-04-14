@@ -817,13 +817,14 @@ export const updateBalanceOverviewFiat = (): void => {
     const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD;
 
     balanceOverview.update((overview) => {
-        return Object.assign<BalanceOverview, BalanceOverview, Partial<BalanceOverview>>({} as BalanceOverview, overview, {
-            balanceFiat: `${formatCurrency(convertToFiat(
+        overview.balance = formatUnit(overview.balanceRaw, 2)
+        overview.balanceFiat = `${formatCurrency(convertToFiat(
                 overview.balanceRaw,
                 get(currencies)[CurrencyTypes.USD],
                 get(exchangeRates)[activeCurrency]
-            ))} ${activeCurrency}`,
-        });
+            ))} ${activeCurrency}`
+
+        return overview
     });
 }
 
@@ -945,15 +946,15 @@ export const updateAccountsBalanceEquiv = (): void => {
     const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD;
 
     accounts.update((storedAccounts) => {
-        return storedAccounts.map((storedAccount) => {
-            return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
-                balanceEquiv: `${formatCurrency(convertToFiat(
+        for (const storedAccount of storedAccounts) {
+            storedAccount.balance = formatUnit(storedAccount.rawIotaBalance, 2)
+            storedAccount.balanceEquiv = `${formatCurrency(convertToFiat(
                     storedAccount.rawIotaBalance,
                     get(currencies)[CurrencyTypes.USD],
                     get(exchangeRates)[activeCurrency]
-                ))} ${activeCurrency}`,
-            })
-        })
+                ))} ${activeCurrency}`
+        }
+        return storedAccounts
     })
 }
 

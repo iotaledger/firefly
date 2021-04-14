@@ -13,7 +13,7 @@ import type { Node } from './typings/client'
 /**
  * Profile
  */
-interface Profile {
+export interface Profile {
     id: string
     name: string
     /**

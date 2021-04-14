@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Error } from 'shared/components'
-    import { decimalSeparator, getAllDecimalSeparators, formatCurrency, parseCurrency } from 'shared/lib/currency'
+    import { formatCurrency, getAllDecimalSeparators, getDecimalSeparator, parseCurrency } from 'shared/lib/currency'
     import { onMount } from 'svelte'
 
     export let value = ''
@@ -22,6 +22,7 @@
 
     let inputElement
     let allDecimalSeparators = getAllDecimalSeparators()
+    let decimalSeparator = getDecimalSeparator()
 
     const handleInput = (e) => {
         value = e.target.value
@@ -35,8 +36,8 @@
             }
             if ((float || integer) && !isEnter) {
                 // if the input is float, we accept one dot or comma depending on localization
-                if (float && e.key === $decimalSeparator) {
-                    if (value.indexOf($decimalSeparator) >= 0) {
+                if (float && e.key === decimalSeparator) {
+                    if (value.indexOf(decimalSeparator) >= 0) {
                         e.preventDefault()
                     }
                 } else if ('0123456789'.indexOf(e.key) < 0) {
@@ -44,7 +45,7 @@
                     e.preventDefault()
                 } else if (float && maxDecimals !== undefined && '0123456789'.indexOf(e.key) >= 0) {
                     // If max decimals are set only allow certain number after decimal separator
-                    const sepPos = value.indexOf($decimalSeparator)
+                    const sepPos = value.indexOf(decimalSeparator)
                     if (sepPos >= 0) {
                         // If caret position is after the separator then check
                         if (e.target.selectionEnd > sepPos) {

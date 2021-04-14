@@ -39,7 +39,7 @@
         dropdown = false
     }
     const onSelect = (index) => {
-        amount = convertUnitsNoE(amount, unit, index)
+        amount = convertUnitsNoE(parseCurrency(amount), unit, index)
         unit = index
     }
 
