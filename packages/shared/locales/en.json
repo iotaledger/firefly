@@ -314,7 +314,7 @@
                 "networkDown": "Network Disconnected",
                 "status": "Status",
                 "messagesPerSecond": "Messages per second",
-                "confirmationRate": "Confirmation rate"
+                "referencedRate": "Referenced rate"
             },
             "profileModal": {
                 "allSettings": "All settings",

@@ -1,12 +1,6 @@
-import { writable } from 'svelte/store'
-
-/**
- * Network status endpoints list
- */
-export const NETWORK_STATUS_ENDPOINTS = [
-    'https://explorer-api.iota.org/stats/chrysalis',
-    'https://explorer-api.iota.works/stats/chrysalis',
-]
+import { get, writable } from 'svelte/store'
+import { asyncGetNodeInfo, wallet } from "shared/lib/wallet"
+import { getOfficialNodes } from './network'
 
 /**
  * Default timeout for a request made to an endpoint
@@ -19,24 +13,32 @@ const DEFAULT_NETWORK_STATUS_ENDPOINT_TIMEOUT = 5000
 const DEFAULT_NETWORK_STATUS_POLL_INTERVAL = 10000
 
 type StatusData = {
-    itemsPerSecond?: number
-    confirmedItemsPerSecond?: number
-    confirmationRate?: number
-    latestMilestoneIndex?: number
-    latestMilestoneIndexTime?: number
+    messagesPerSecond?: number
+    referencedRate?: number
     health?: number
-    healthReason?: string
 }
 
 export const networkStatus = writable<StatusData>({})
+
+let pollInterval
 
 /**
  * Poll the network status at an interval.
  */
 export async function pollNetworkStatus(): Promise<void> {
     await fetchNetworkStatus()
-    setInterval(async () => fetchNetworkStatus(), DEFAULT_NETWORK_STATUS_POLL_INTERVAL)
+    pollInterval = setInterval(async () => fetchNetworkStatus(), DEFAULT_NETWORK_STATUS_POLL_INTERVAL)
 }
+
+const { accounts, accountsLoaded } = get(wallet)
+
+accountsLoaded.subscribe((val) => {
+    if (val) {
+        pollNetworkStatus()
+    } else {
+        clearInterval(pollInterval)
+    }
+})
 
 /**
  * Fetches network status data
@@ -54,8 +56,12 @@ export async function fetchNetworkStatus(): Promise<void> {
 
     let updated = false
 
-    for (let index = 0; index < NETWORK_STATUS_ENDPOINTS.length; index++) {
-        const endpoint = NETWORK_STATUS_ENDPOINTS[index]
+    const accs = get(accounts)
+
+    if (accs.length > 0) {
+        const account0 = accs[0]
+        const clientOptions = account0.clientOptions
+        const node = clientOptions.node ?? getOfficialNodes()[0]
 
         try {
             const abortController = new AbortController()
@@ -69,29 +75,34 @@ export async function fetchNetworkStatus(): Promise<void> {
 
             requestOptions.signal = abortController.signal;
 
-            const response = await fetch(endpoint, requestOptions);
+            const response = await asyncGetNodeInfo(account0.id, node.url)
 
             clearTimeout(timerId)
 
-            const statusData: StatusData = await response.json()
+            const timeSinceLastMsInMinutes = (Date.now() - (response.nodeinfo.latestMilestoneTimestamp * 1000)) / 60000;
+            let health = 0; //bad
+            if (timeSinceLastMsInMinutes < 2) {
+                health = 2; // good
+            } else if (timeSinceLastMsInMinutes < 5) {
+                health = 1; // degraded
+            }
 
-            networkStatus.set(statusData)
+            networkStatus.set({
+                messagesPerSecond: response.nodeinfo.messagesPerSecond,
+                referencedRate: response.nodeinfo.referencedRate,
+                health
+            })
 
             updated = true
-
-            break
         } catch (err) {
-            console.error(err.name === "AbortError" ? new Error(`Could not fetch from ${endpoint}.`) : err)
+            console.error(err.name === "AbortError" ? new Error(`Could not fetch from ${node.url}.`) : err)
         }
     }
 
     if (!updated) {
         networkStatus.set({
-            itemsPerSecond: 0,
-            confirmedItemsPerSecond: 0,
-            confirmationRate: 0,
-            latestMilestoneIndex: 0,
-            latestMilestoneIndexTime: 0,
+            messagesPerSecond: 0,
+            referencedRate: 0,
             health: 0
         })
     }

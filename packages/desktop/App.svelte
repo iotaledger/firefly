@@ -8,7 +8,6 @@
     import { goto } from 'shared/lib/helpers'
     import { dir, isLocaleLoaded, setupI18n, _ } from 'shared/lib/i18n'
     import { pollMarketData } from 'shared/lib/marketData'
-    import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { cleanupInProgressProfiles } from 'shared/lib/profile'
     import { dashboardRoute, initRouter, routerNext, routerPrevious, walletRoute } from 'shared/lib/router'
@@ -54,7 +53,6 @@
         }, 2000)
 
         await pollMarketData()
-        await pollNetworkStatus()
 
         // @ts-ignore: This value is replaced by Webpack DefinePlugin
         if (!devMode) {

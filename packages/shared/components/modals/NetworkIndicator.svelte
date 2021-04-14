@@ -7,7 +7,7 @@
     let healthStatus = 2
     let healthStatusText = 'networkOperational'
     let messagesPerSecond = 0
-    let confirmationRate = 0
+    let referencedRate = 0
 
     const NETWORK_HEALTH_COLORS = {
         0: 'red',
@@ -18,8 +18,8 @@
     const unsubscribe = networkStatus.subscribe((data) => {
         healthStatus = data.health ?? 0
         healthStatusText = healthStatus === 0 ? 'networkDown' : healthStatus === 1 ? 'networkDegraded' : 'networkOperational'
-        messagesPerSecond = data.itemsPerSecond ?? 0
-        confirmationRate = data.confirmationRate ?? 0
+        messagesPerSecond = data.messagesPerSecond ?? 0
+        referencedRate = data.referencedRate ?? 0
     })
 
     onDestroy(() => {
@@ -39,8 +39,8 @@
             <span class="text-12 text-gray-500">{`${Math.round(messagesPerSecond)}`}</span>
         </div>
         <div class="flex flex-row justify-between px-7 pb-5">
-            <span class="text-12 text-gray-800 dark:text-white">{locale('views.dashboard.network.confirmationRate')}</span>
-            <span class="text-12 text-gray-500">{`${Math.round(confirmationRate)}%`}</span>
+            <span class="text-12 text-gray-800 dark:text-white">{locale('views.dashboard.network.referencedRate')}</span>
+            <span class="text-12 text-gray-500">{`${Math.round(referencedRate)}%`}</span>
         </div>
     </network-indicator-content>
 </Modal>
