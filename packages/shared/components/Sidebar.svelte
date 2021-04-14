@@ -52,15 +52,17 @@
 
 <aside
     class="flex flex-col justify-center items-center bg-white dark:bg-gray-800 h-screen relative w-20 px-5 pb-9 pt-9 border-solid border-r border-gray-100 dark:border-gray-800">
-    <Logo classes="logo mb-9 {hasTitleBar ? "mt-3": ""}" width="48px" logo="logo-firefly" />
+    <Logo classes="logo mb-9 {hasTitleBar ? 'mt-3' : ''}" width="48px" logo="logo-firefly" />
     <nav class="flex flex-grow flex-col items-center justify-between">
         <button class={$dashboardRoute === Tabs.Wallet ? 'text-blue-500' : 'text-gray-500'} on:click={() => openWallet()}>
             <Icon icon="wallet" />
         </button>
         <span class="flex flex-col items-center">
-            <button class="mb-7 health-status" on:click={() => (showNetwork = true)}>
-                <Icon icon="network" classes="text-{NETWORK_HEALTH_COLORS[healthStatus]}-500" />
-            </button>
+            {#if $activeProfile?.settings.showNetworkStatus}
+                <button class="mb-7 health-status" on:click={() => (showNetwork = true)}>
+                    <Icon icon="network" classes="text-{NETWORK_HEALTH_COLORS[healthStatus]}-500" />
+                </button>
+            {/if}
             <button
                 class="w-8 h-8 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
                 on:click={() => (showProfile = true)}>

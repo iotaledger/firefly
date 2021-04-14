@@ -12,9 +12,11 @@
 
     let darkModeEnabled = $appSettings.darkMode
     let notificationsChecked = $appSettings.notifications
+    let showNetworkStatus = $activeProfile?.settings.showNetworkStatus
 
     $: $appSettings.darkMode = darkModeEnabled
     $: $appSettings.notifications = notificationsChecked
+    $: updateProfile('settings.showNetworkStatus', showNetworkStatus)
 
     const handleCurrencySelect = (item) => {
         updateProfile('settings.currency', item.value)
@@ -70,4 +72,12 @@
         <Text type="p" secondary classes="mb-5">{locale('views.settings.notifications.description')}</Text>
         <Checkbox label={locale('actions.enableSystemNotifications')} bind:checked={notificationsChecked} />
     </section>
+    {#if $loggedIn}
+        <HR classes="pb-5 mt-5 justify-center" />
+        <section id="networkStatus" class="w-3/4">
+            <Text type="h4" classes="mb-3">{locale('views.settings.networkStatus.title')}</Text>
+            <Text type="p" secondary classes="mb-5">{locale('views.settings.networkStatus.description')}</Text>
+            <Checkbox label={locale('actions.showNetworkStatus')} bind:checked={showNetworkStatus} />
+        </section>
+    {/if}
 </div>

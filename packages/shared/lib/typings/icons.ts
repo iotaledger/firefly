@@ -4,6 +4,7 @@ export enum SettingsIcons {
     language = 'language',
     currency = 'currency',
     notifications = 'bell',
+    networkStatus = 'view',
     exportStronghold = 'export',
     appLock = 'lock3',
     changePassword = 'lock2',

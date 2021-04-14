@@ -65,6 +65,7 @@ export enum GeneralSettings {
     Language = 'language',
     Currency = 'currency',
     Notifications = 'notifications',
+    NetworkStatus = 'networkStatus',
 }
 
 export enum GeneralSettingsNoProfile {

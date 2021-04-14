@@ -185,6 +185,10 @@
                 "title": "Notifications",
                 "description": "System notifications for transaction events"
             },
+            "networkStatus": {
+                "title": "Network status",
+                "description": "Show the network status indicator"
+            },
             "exportStronghold": {
                 "title": "Export Backup",
                 "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
@@ -492,7 +496,8 @@
         "readDocumentation": "Read the documentation",
         "visitFaq": "Visit FAQ",
         "showHiddenAccounts": "Show hidden accounts",
-        "confirm": "Confirm"
+        "confirm": "Confirm",
+        "showNetworkStatus": "Show network status indicator"
     },
     "general": {
         "password": "Password",
