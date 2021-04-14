@@ -20,7 +20,7 @@
 
     let isCheckingForBalance
 
-    const { seed, data } = $migration
+    const { seed, data, bundles } = $migration
     const { balance } = $data
 
     const getFiatBalance = (balance) =>
@@ -44,6 +44,10 @@
     function getError(_balance) {
         if (hasInsufficientBalance(_balance)) {
             return locale('views.balance.error')
+        }
+
+        if (!$bundles.length) {
+            return locale('views.migrate.tooManyAddressesToMigrate')
         }
 
         if ($hasLowBalanceOnAllSpentAddresses && !$bundlesWithUnspentAddresses.length) {
