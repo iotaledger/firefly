@@ -20,7 +20,7 @@
         .map((address) =>
             Object.assign({}, address, { disabled: address.balance < MINIMUM_MIGRATION_BALANCE, id: address.index })
         )
-        .sort((a, b) => b.balance - a.balance)
+        .sort((a, b) => Number(a.disabled) - Number(b.disabled))
 
     let selectedAddresses = addresses.filter((address) => address.disabled === false && address.selected === true)
 
