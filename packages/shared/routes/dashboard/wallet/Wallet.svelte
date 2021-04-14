@@ -32,7 +32,7 @@
         WalletAccount,
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
-    import { derived, get, Readable, Writable } from 'svelte/store'
+    import { derived, Readable, Writable } from 'svelte/store'
     import { Account, CreateAccount, LineChart, Security, WalletActions, WalletBalance, WalletHistory } from './views/'
 
     export let locale
