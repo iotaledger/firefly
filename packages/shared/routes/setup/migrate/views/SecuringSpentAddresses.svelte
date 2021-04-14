@@ -110,7 +110,7 @@
             <Text type="h2" classes="mb-5 text-center">{locale('views.securingSpentAddresses.title')}</Text>
             <Text type="p" secondary classes="text-center">{locale('views.bundleMiningWarning.body1')}</Text>
             <Text type="p" secondary classes="mb-4 text-center">{locale('views.bundleMiningWarning.body2')}</Text>
-            <Text type="p" secondary classes="mb-4 text-center">{locale('views.bundleMiningWarning.body2')}</Text>
+            <Text type="p" secondary classes="mb-4 text-center">{locale('views.bundleMiningWarning.body3')}</Text>
             <Text type="p" secondary classes="mb-8 text-center">{locale('views.bundleMiningWarning.body4')}</Text>
             <div class="flex flex-col flex-grow items-center">
                 <Button secondary classes="w-56" onClick={() => learnClick()}>{locale('views.bundleMiningWarning.learn')}</Button>

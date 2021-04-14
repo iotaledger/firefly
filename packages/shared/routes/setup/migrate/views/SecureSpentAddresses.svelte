@@ -41,7 +41,7 @@
     }
     function secureAddresses() {
         if (selectedAddresses.length) {
-            if (selectedAddresses?.length < $spentAddressesFromBundles?.length) {
+            if (selectedAddresses?.length < addresses?.filter((_address) => !_address.disabled)?.length) {
                 triggerPopup()
             } else {
                 dispatch('next')

@@ -128,7 +128,7 @@
                     <span class="h-4 w-1 rounded-2xl {i <= risk ? `bg-${riskColor}-500` : 'bg-gray-300 dark:bg-gray-700'}" />
                 {/each}
             </risk-meter>
-            {#if showRiskTooltip}
+            {#if showRiskTooltip && risk}
                 <Tooltip {parentTop} {parentLeft} {parentWidth}>
                     <Text>{locale('tooltips.risk.title', { values: { risk: locale(`tooltips.risk.${localeRiskLevel}`) } })}</Text>
                 </Tooltip>
