@@ -24,6 +24,7 @@
                 risk: address.crackability,
             })
         )
+        .sort((a, b) => Number(a.disabled) - Number(b.disabled))
         .sort((a, b) => b.risk - a.risk)
 
     let selectedAddresses = addresses.filter((address) => address.disabled === false && address.selected === true)

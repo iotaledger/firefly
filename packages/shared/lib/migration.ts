@@ -17,7 +17,7 @@ export const ADDRESS_SECURITY_LEVEL = 2
 export const MINIMUM_MIGRATION_BALANCE = 1000000
 
 /** Bundle mining timeout for each bundle */
-export const MINING_TIMEOUT_SECONDS = 60
+export const MINING_TIMEOUT_SECONDS = 60 * 10
 
 export const MINIMUM_WEIGHT_MAGNITUDE = 14;
 
@@ -70,53 +70,6 @@ export const chrysalisLive = writable<Boolean>(false)
  * @returns {Promise<void} 
  */
 export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0): Promise<void> => {
-    console.log('Migration seed', migrationSeed)
-    console.log('Initial address index', initialAddressIndex)
-    // const { seed, data } = get(migration)
-
-    // data.set({
-    //     balance: 0,
-    //     inputs: [{
-    //         address: 'A'.repeat(81),
-    //         index: 0,
-    //         balance: 11111110,
-    //         spent: true,
-    //         securityLevel: 2,
-    //         spentBundleHashes: ['9'.repeat(81)]
-    //     }, {
-    //         address: 'B'.repeat(81),
-    //         index: 1,
-    //         balance: 10,
-    //         spent: false,
-    //         securityLevel: 2,
-    //         spentBundleHashes: []
-    //     }, {
-    //         address: 'C'.repeat(81),
-    //         index: 2,
-    //         balance: 110,
-    //         spent: true,
-    //         securityLevel: 2,
-    //         spentBundleHashes: ['9'.repeat(81)]
-
-    //     }, {
-    //         address: 'D'.repeat(81),
-    //         index: 3,
-    //         balance: 12210,
-    //         spent: false,
-    //         securityLevel: 2,
-    //         spentBundleHashes: []
-    //     }, {
-    //         address: 'E'.repeat(81),
-    //         index: 4,
-    //         balance: 12210,
-    //         spent: false,
-    //         securityLevel: 2,
-    //         spentBundleHashes: []
-    //     }],
-    //     lastCheckedAddressIndex: 30
-    // })
-
-    // prepareBundles()
     return new Promise((resolve, reject) => {
         api.getMigrationData(
             migrationSeed,
@@ -491,7 +444,7 @@ export const bundlesWithUnspentAddresses = derived(get(migration).bundles, (_bun
 ))
 
 export const hasAnySpentAddressWithNoBundleHashes = derived(get(migration).bundles, (_bundles) => _bundles.length &&
-    _bundles.some((bundle) => bundle.inputs.some((input) => input.spent && input.spentBundleHashes.length)))
+    _bundles.some((bundle) => bundle.inputs.some((input) => input.spent && !input.spentBundleHashes.length)))
 
 /**
  * List of chrysalis node endpoints to detect when is live
