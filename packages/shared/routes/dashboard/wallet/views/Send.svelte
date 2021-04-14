@@ -8,13 +8,15 @@
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { convertUnitsNoE } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
-    import { isTransferring, transferState, WalletAccount } from 'shared/lib/wallet'
+    import { isTransferring, transferState, WalletAccount, wallet } from 'shared/lib/wallet'
     import { getContext, onDestroy, onMount } from 'svelte'
     import type { Readable } from 'svelte/store'
 
     export let locale
     export let send
     export let internalTransfer
+
+    const { accounts } = $wallet
 
     const account = getContext<Readable<WalletAccount>>('selectedAccount')
     const liveAccounts = getContext<Readable<WalletAccount[]>>('liveAccounts')
@@ -140,15 +142,30 @@
                 }
 
                 if (!amountError && !addressError && !toError) {
+                    // If this is an external send but the dest address is in one of
+                    // the other accounts switch it to an internal transfer
+                    let internal = selectedSendType === SEND_TYPE.INTERNAL
+
+                    if (!internal) {
+                        for (const acc of $accounts) {
+                            const internalAddress = acc.addresses.find((a) => a.address === address)
+                            if (internalAddress) {
+                                internal = true
+                                to = acc
+                                break
+                            }
+                        }
+                    }
+
                     $sendParams.address = address
                     $sendParams.amount = amountAsI
                     openPopup({
                         type: 'transaction',
                         props: {
-                            internal: selectedSendType === SEND_TYPE.INTERNAL,
+                            internal,
                             amount: $sendParams.amount,
-                            to: selectedSendType === SEND_TYPE.INTERNAL ? to.alias : $sendParams.address,
-                            onConfirm: triggerSend,
+                            to: internal ? to.alias : $sendParams.address,
+                            onConfirm: () => triggerSend(internal),
                         },
                     })
                 }
@@ -156,10 +173,14 @@
         }
     }
 
-    const triggerSend = () => {
+    const triggerSend = (internal) => {
         closePopup()
-        if (selectedSendType === SEND_TYPE.INTERNAL) {
-            internalTransfer(from.id, to.id, $sendParams.amount)
+        if (internal) {
+            // We pass the original selectedSendType in case we are masquerading as 
+            // an internal transfer by a send to an address in one of our
+            // other accounts. When the transfer completes it resets
+            // the send params to where it was
+            internalTransfer(from.id, to.id, $sendParams.amount, selectedSendType === SEND_TYPE.INTERNAL)
         } else {
             send(from.id, $sendParams.address, $sendParams.amount)
         }
@@ -261,17 +282,19 @@
                             items={accountsDropdownItems.filter((a) => from && a.id !== from.id)}
                             onSelect={handleToSelect}
                             disabled={$isTransferring || $liveAccounts.length === 2}
-                            error={toError} 
-                            classes="mb-6" />
+                            error={toError}
+                            classes="mb-6" 
+                            autofocus />
                     {:else}
                         <Address
                             error={addressError}
-                            bind:address={address}
+                            bind:address
                             {locale}
                             label={locale('general.sendToAddress')}
                             disabled={$isTransferring}
-                            placeholder={`${locale('general.sendToAddress')}\n${addressPrefix}...`}                         
-                            classes="mb-6"/>
+                            placeholder={`${locale('general.sendToAddress')}\n${addressPrefix}...`}
+                            classes="mb-6"
+                            autofocus />
                     {/if}
                     <Amount
                         error={amountError}
@@ -279,8 +302,7 @@
                         bind:unit
                         maxClick={handleMaxClick}
                         {locale}
-                        disabled={$isTransferring}
-                        autofocus />
+                        disabled={$isTransferring} />
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Text } from 'shared/components'
+    import { Button, Text } from 'shared/components'
     import type { Address } from 'shared/lib/typings/address'
     import { formatUnit } from 'shared/lib/units'
     import type { WalletAccount } from 'shared/lib/wallet'
@@ -10,13 +10,18 @@
     export let account: Readable<WalletAccount>
 
     let addresses: Address[]
-    $: addresses = $account?.addresses.slice().sort((a, b) => {
-        if (a.keyIndex === b.keyIndex) {
-            return a.internal ? 1 : -1
-        }
+    $: addresses =
+        $account?.addresses.slice().sort((a, b) => {
+            if (a.keyIndex === b.keyIndex) {
+                return a.internal ? 1 : -1
+            }
 
-        return b.keyIndex - a.keyIndex ;
-    }) ?? []
+            return b.keyIndex - a.keyIndex
+        }) ?? []
+
+    const handleCopyClick = () => {
+        setClipboard(addresses.map((a) => `${a.address.toLowerCase()},${a.balance}`).join('\r\n'))
+    }
 </script>
 
 <style>
@@ -39,4 +44,7 @@
             </Text>
         </div>
     {/each}
+</div>
+<div class="flex w-full justify-center pt-8">
+    <Button classes="w-1/2" onClick={() => handleCopyClick()}>{locale('actions.copy')}</Button>
 </div>
