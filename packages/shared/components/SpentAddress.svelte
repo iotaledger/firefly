@@ -13,7 +13,6 @@
     export let selected = false
     export let risk = undefined
     export let showRiskLevel = false
-    export let disabled = false
     export let onClick = () => {}
 
     let showErrorTooltip = false
@@ -38,8 +37,6 @@
         get(currencies)[CurrencyTypes.USD],
         get(exchangeRates)[AvailableExchangeRates.USD]
     )} ${CurrencyTypes.USD}`
-
-    $: errorMessage = disabled ? locale('views.secureSpentAddresses.error') : null
 
     function toggleTooltip(type: TooltipType) {
         if (risk) {
@@ -110,51 +107,38 @@
     class="w-full static p-4 flex justify-between items-center border-solid border border-gray-300 dark:border-gray-700
     rounded-2xl"
     class:selected
-    {disabled}
     on:click={onClick}>
     <div class="flex items-center justify-between w-full">
         <div class="flex items-center space-x-4 text-left">
             <div
                 class="radio-button w-6 h-6 mr-3 rounded-full border border-solid border-gray-300 dark:border-gray-700"
                 class:active={selected}>
-                <Icon icon={!disabled && selected ? 'radio' : 'radio-unchecked'} />
+                <Icon icon={selected ? 'radio' : 'radio-unchecked'} />
             </div>
             <div>
-                <Text type="pre" secondary={disabled} smaller classes={disabled && 'line-through'}>
+                <Text type="pre" smaller>
                     {truncateString(address, 9, 9)}
                 </Text>
                 <Text type="p" secondary smaller>{formatUnit(balance)} · <span class="uppercase">{fiatBalance}</span></Text>
             </div>
         </div>
         {#if showRiskLevel}
-            <risk-meter
-                bind:this={riskBox}
-                on:mouseenter={() => toggleTooltip(TooltipType.Risk)}
-                on:mouseleave={() => toggleTooltip(TooltipType.Risk)}
-                class="flex flex-row space-x-0.5">
-                {#each Array(Object.keys(RiskLevel).length / 2) as _, i}
-                    <span
-                        class="h-4 w-1 rounded-2xl {i <= riskBars - 1 ? `bg-${riskColor}-500` : 'bg-gray-300 dark:bg-gray-700'}" />
-                {/each}
-            </risk-meter>
+                <risk-meter
+                    bind:this={riskBox}
+                    on:mouseenter={() => toggleTooltip(TooltipType.Risk)}
+                    on:mouseleave={() => toggleTooltip(TooltipType.Risk)}
+                    class="flex flex-row items-center space-x-0.5">
+                    <Icon icon="info" classes="mr-1 text-gray-800 dark:text-white" width={20} height={20} />
+                    {#each Array(Object.keys(RiskLevel).length / 2) as _, i}
+                        <span
+                            class="h-4 w-1 rounded-2xl {i <= riskBars - 1 ? `bg-${riskColor}-500` : 'bg-gray-300 dark:bg-gray-700'}" />
+                    {/each}
+                </risk-meter>
             {#if showRiskTooltip && risk}
                 <Tooltip {parentTop} {parentLeft} {parentWidth}>
                     <Text>{locale('tooltips.risk.title', { values: { risk: locale(`tooltips.risk.${localeRiskLevel}`) } })}</Text>
                 </Tooltip>
             {/if}
-        {:else if disabled}
-            <div
-                class="flex items-center static"
-                on:mouseenter={() => toggleTooltip(TooltipType.Error)}
-                on:mouseleave={() => toggleTooltip(TooltipType.Error)}
-                bind:this={errorBox}>
-                <Icon icon="exclamation" classes="text-red-500 bg-white rounded-full dark:bg-gray-800" />
-                {#if showErrorTooltip && errorMessage}
-                    <Tooltip {parentTop} {parentLeft} {parentWidth}>
-                        <Text>{errorMessage}</Text>
-                    </Tooltip>
-                {/if}
-            </div>
         {/if}
     </div>
 </button>
