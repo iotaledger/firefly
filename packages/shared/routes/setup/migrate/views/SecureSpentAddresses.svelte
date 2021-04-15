@@ -75,8 +75,9 @@
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content" class="relative h-full flex flex-col flex-wrap">
             <Text type="h2" classes="mb-5">{locale('views.secureSpentAddresses.title')}</Text>
-            <Text type="p" secondary>{locale('views.secureSpentAddresses.body1', { values: { number: addresses.length } })}</Text>
-            <Text type="p" secondary classes="mb-6">{locale('views.secureSpentAddresses.body2')}</Text>
+            <Text type="p mb-4" secondary>{locale('views.secureSpentAddresses.body1', { values: { number: addresses.length } })}</Text>
+            <Text type="p" secondary classes="mb-4">{locale('views.secureSpentAddresses.body2')}</Text>
+            <Text type="p" secondary classes="mb-6">{locale('views.migrate.noAddressesForMigration')}</Text>
             <div class="flex-auto overflow-y-auto h-1 space-y-4 w-full scrollable-y scroll-secondary">
                 {#each addresses as address}
                     <SpentAddress

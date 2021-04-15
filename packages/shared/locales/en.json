@@ -99,7 +99,7 @@
             "title": "Wallet setup completed",
             "body": "Your new wallet is ready to use.",
             "fundsMigrated": "Funds migrated",
-            "success": "You have successfully migrated all your funds to the new network",
+            "success": "You have successfully migrated your funds to the new network",
             "exportMigration": "Export migration log and finish Setup"
         },
         "import": {
@@ -133,7 +133,7 @@
         },
         "migrate": {
             "title": "Migrate your funds",
-            "body1": "This is an automated process to transfer your funds to your new wallet. We will check for spent addresses that weaken your security.",
+            "body1": "This is an automated process to transfer your funds to your new wallet.",
             "body2": "It may take some time. Do not turn off your device during the migration.",
             "existing": "Your old wallet",
             "new": "Your new wallet",
@@ -150,16 +150,15 @@
             "broadcastingBundle": "Broadcasting bundle",
             "miningBundle": "Mining bundle",
             "problemRestoringWallet": "There was a problem restoring your wallet. Please try again.",
-            "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. You won’t be able to migrate your funds to the Chrysalis network.",
-            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. You won't be able to migrate your funds to the Chrysalis network.",
-            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value.  You can proceed anyway. Only {value} will be lost."
+            "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
+            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. Only {value} will be lost."
         },
         "bundleMiningWarning": {
             "title": "Warning",
-            "body1": "You have funds detected on a spent address.",
-            "body2": "These are at risk of theft.",
-            "body3": "We recommend you run an automated process to help secure and transfer your funds safely.",
-            "body4": "If you close the app you will need to restart the whole migration.",
+            "body1": "You have funds on a spent address.",
+            "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",
+            "body3": "If you close the app you will need to restart the whole migration.",
             "learn": "Learn about spent addresses"
         },
         "secureSpentAddresses": {
@@ -171,11 +170,14 @@
         "securityCheckCompleted": {
             "title": "Security check completed",
             "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
+            "body2": "When you are happy with the risk level(s) press continue.",
             "rerun": "Rerun process for selected addresses",
-            "continueMigration": "Continue migration process"
+            "continueMigration": "Continue migration"
         },
         "securingSpentAddresses": {
-            "title": "Securing spent addresses..."
+            "title": "Securing spent addresses...",
+            "body1": "This process will take 10 minutes.",
+            "body2": "Your computer will run at full capacity, so do something else while you wait for this to complete."
         },
         "transferFragmentedFunds": {
             "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
@@ -189,8 +191,9 @@
         },
         "balance": {
             "title": "Your balance",
-            "body": "Is your balance correct?",
-            "error": "The minimum migration amount is 1 Mi. You won’t be able to migrate your funds to the Chrysalis network. "
+            "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
+            "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
+            "zeroBalance": "Try check again. If you still can't find your balance you might have entered your seed incorrectly."
         },
         "settings": {
             "settings": "Settings",
@@ -455,11 +458,12 @@
         },
         "riskFunds": {
             "title": "Warning: your funds are at risk",
-            "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
+            "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
         },
         "missingBundle": {
-            "title": "Lorem ipsum",
-            "body": "You have spent addresses but Firefly was not able to find the associated history. This could be because the transaction was made a long time ago. You can proceed but these funds are at risk during migration.",
+            "title": "Warning: your funds are at risk",
+            "body": "You have funds on spent addresses. But the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but these funds are at risk during migration.",
             "learnMore": "Learn more about spent addresses",
             "proceed": "I understand the risk"
         }
@@ -494,7 +498,7 @@
         "verifyRecoveryPhrase": "Verify recovery phrase",
         "revealRecoveryPhrase": "Reveal recovery phrase",
         "importSeedvault": "Import SeedVault",
-        "checkAgain": "No, Check Again",
+        "checkAgain": "Check Again",
         "importFromFile": "Import from a file",
         "send": "Send",
         "receive": "Receive",

@@ -54,6 +54,7 @@
                     closePopup()
                     dispatch('next', { skippedMining })
                 },
+                subtitle: locale('popups.riskFunds.body2')
             },
         })
     }
@@ -65,7 +66,8 @@
     <OnboardingLayout allowBack={false} classes="relative">
         <div slot="leftpane__content" class="h-full flex flex-col flex-wrap">
             <Text type="h2" classes="mb-5">{locale('views.securityCheckCompleted.title')}</Text>
-            <Text type="p" secondary classes="mb-6">{locale('views.securityCheckCompleted.body1')}</Text>
+            <Text type="p" secondary classes="mb-4">{locale('views.securityCheckCompleted.body1')}</Text>
+            <Text type="p" secondary classes="mb-6">{locale('views.securityCheckCompleted.body2')}</Text>
             <div class="flex-auto overflow-y-auto h-1 space-y-4 w-full scrollable-y scroll-secondary">
                 {#each addresses as address}
                     <SpentAddress
