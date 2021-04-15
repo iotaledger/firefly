@@ -1,14 +1,30 @@
 <script lang="typescript">
-    import { Button, ButtonRadio, Icon, Illustration, OnboardingLayout, Radio, Text } from 'shared/components'
+    import { Animation, Button, ButtonRadio, OnboardingLayout, Text } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
-    import { createEventDispatcher } from 'svelte'
+    import { createEventDispatcher, onMount } from 'svelte'
 
     export let locale
     export let mobile
 
+    const BLINK_SEGMENTS = [[1, 200]]
+    const SWITCH_SEGMENTS = [
+        [200, 239],
+        [1, 200],
+    ]
+
     let darkModeEnabled = $appSettings.darkMode
 
+    let _clonedVariable = undefined
+    let onBlinkEnd = undefined
+    let segments = BLINK_SEGMENTS
+
     $: $appSettings.darkMode = darkModeEnabled
+
+    $: if (_clonedVariable !== undefined && _clonedVariable !== darkModeEnabled) {
+        _clonedVariable = darkModeEnabled // ghetto reactive implementation
+        segments = SWITCH_SEGMENTS
+        onBlinkEnd = restartAnimation
+    }
 
     const dispatch = createEventDispatcher()
 
@@ -18,6 +34,14 @@
     function handleBackClick() {
         dispatch('previous')
     }
+    function restartAnimation() {
+        segments = BLINK_SEGMENTS
+        onBlinkEnd = null
+    }
+
+    onMount(() => {
+        _clonedVariable = darkModeEnabled
+    })
 </script>
 
 {#if mobile}
@@ -27,7 +51,7 @@
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-5">{locale('views.appearance.title')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.appearance.body')}</Text>
-            <Text type="p" classes="mb-2 mt-4" smaller>{locale('general.appearance')}</Text>
+            <Text type="p" secondary classes="mb-2 mt-4" smaller>{locale('general.appearance')}</Text>
             <ButtonRadio icon="theme-light" value={false} bind:group={darkModeEnabled}>
                 {locale('general.lightTheme')}
             </ButtonRadio>
@@ -37,7 +61,7 @@
             <Button onClick={() => handleContinueClick()} classes="w-full">{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-orange dark:bg-gray-900">
-            <Illustration illustration="appearance-desktop" width="100%" height="auto" />
+            <Animation animation="appearance-desktop" {segments} />
         </div>
     </OnboardingLayout>
 {/if}
