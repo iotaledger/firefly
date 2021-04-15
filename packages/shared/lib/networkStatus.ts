@@ -4,11 +4,6 @@ import { getOfficialNodes } from 'shared/lib/network'
 import { activeProfile } from 'shared/lib/profile'
 
 /**
- * Default timeout for a request made to an endpoint
- */
-const DEFAULT_NETWORK_STATUS_ENDPOINT_TIMEOUT = 5000
-
-/**
  * Default interval for polling the network status
  */
 const DEFAULT_NETWORK_STATUS_POLL_INTERVAL = 10000
@@ -50,12 +45,6 @@ accountsLoaded.subscribe((val) => {
  */
 export async function fetchNetworkStatus(): Promise<void> {
     if (get(activeProfile)?.settings.showNetworkStatus) {
-        const requestOptions: RequestInit = {
-            headers: {
-                Accept: 'application/json',
-            },
-        }
-
         let updated = false
 
         const accs = get(accounts)
@@ -66,20 +55,8 @@ export async function fetchNetworkStatus(): Promise<void> {
             const node = clientOptions.node ?? getOfficialNodes()[0]
 
             try {
-                const abortController = new AbortController()
-                const timerId = setTimeout(
-                    () => {
-                        if (abortController) {
-                            abortController.abort();
-                        }
-                    },
-                    DEFAULT_NETWORK_STATUS_ENDPOINT_TIMEOUT);
-
-                requestOptions.signal = abortController.signal;
-
+                // TODO add user/pass support when implemented in wallet.rs
                 const response = await asyncGetNodeInfo(account0.id, node.url)
-
-                clearTimeout(timerId)
 
                 const timeSinceLastMsInMinutes = (Date.now() - (response.nodeinfo.latestMilestoneTimestamp * 1000)) / 60000;
                 let health = 0; //bad
