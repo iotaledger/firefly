@@ -59,6 +59,13 @@
     })
 
     function getError(_balance) {
+        if (_balance === 0) {
+            return {
+                allowToProceed: false,
+                text: locale('views.balance.zeroBalance'),
+            }
+        }
+
         if (hasInsufficientBalance(_balance)) {
             return {
                 allowToProceed: false,
