@@ -326,9 +326,10 @@ export const prepareBundles = () => {
     }, { spent: [], unspent: [] })
 
     const unspentInputChunks = selectInputsForUnspentAddresses(unspent)
+    const spentInputs = spent.filter((input) => input.balance >= MINIMUM_MIGRATION_BALANCE)
 
     bundles.set([
-        ...spent.map((input) => ({ miningRuns: 0, migrated: false, selected: input.balance >= MINIMUM_MIGRATION_BALANCE, shouldMine: true, inputs: [input] })),
+        ...spentInputs.map((input) => ({ miningRuns: 0, migrated: false, selected: true, shouldMine: true, inputs: [input] })),
         ...unspentInputChunks.map((inputs) => ({ miningRuns: 0, migrated: false, selected: true, shouldMine: false, inputs }))
     ].map((_, index) => ({ ..._, index })))
 };

@@ -17,7 +17,7 @@
 
     const dispatch = createEventDispatcher()
 
-    let addresses = $spentAddressesFromBundles.filter((address) => address.balance >= MINIMUM_MIGRATION_BALANCE)
+    let addresses = $spentAddressesFromBundles
         .map((address) =>
             Object.assign({}, address, { disabled: address.balance < MINIMUM_MIGRATION_BALANCE, id: address.index })
         )
