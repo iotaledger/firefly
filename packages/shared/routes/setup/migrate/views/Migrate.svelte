@@ -9,9 +9,10 @@
         migration,
         createMigrationBundle,
         sendMigrationBundle,
-        unselectedInputs
+        unselectedInputs,
         confirmedBundles,
     } from 'shared/lib/migration'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
@@ -55,9 +56,15 @@
             createMigrationBundle(getInputIndexesForBundle($bundles[0]), 0, false)
                 .then((response) => {
                     singleMigrationBundleHash = response.payload.bundleHash
-                    sendMigrationBundle(response.payload.bundleHash)
+                    return sendMigrationBundle(response.payload.bundleHash)
                 })
-                .catch(console.error)
+                .catch(() => {
+                    loading = false
+                    showAppNotification({
+                        type: 'error',
+                        message: locale('error.global.generic'),
+                    })
+                })
         } else {
             loading = true
             timeout = setTimeout(() => {
