@@ -26,10 +26,10 @@ export enum HistoryDataProps {
 }
 
 enum Timeframes {
-    ONE_HOUR = '1 hour',
-    TWENTY_FOUR_HOURS = '1 day',
-    SEVEN_DAYS = '1 week',
-    ONE_MONTH = '1 month',
+    ONE_HOUR = '1Hour',
+    TWENTY_FOUR_HOURS = '1Day',
+    SEVEN_DAYS = '1Week',
+    ONE_MONTH = '1Month',
 }
 
 enum Histories {
