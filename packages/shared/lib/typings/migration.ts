@@ -23,6 +23,7 @@ export interface MigrationBundle {
 export interface SendMigrationBundleResponse {
     address: string;
     value: number;
+    tailTransactionHash: string;
 }
 
 export enum RiskLevel {

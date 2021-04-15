@@ -153,6 +153,7 @@ export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAG
                 const migratedTransaction = {
                     address: response.payload.address,
                     balance: response.payload.value,
+                    tailTransactionHash: response.payload.tailTransactionHash,
                     timestamp: new Date().toISOString(),
                     // Account index. Since we migrate funds to account at 0th index
                     account: 0
