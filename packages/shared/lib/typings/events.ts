@@ -1,5 +1,4 @@
 import type { ResponseTypes } from './bridge'
-import type { Address } from './address'
 import type { Message } from './message'
 
 // Reference: https://github.com/iotaledger/wallet.rs/blob/develop/src/error.rs
@@ -84,7 +83,7 @@ export interface ErrorEventPayload {
 export interface BalanceChangeEventPayload {
     indexationId: string
     accountId: string
-    address: Address
+    address: string
     balanceChange: {
         spent: number;
         received: number;

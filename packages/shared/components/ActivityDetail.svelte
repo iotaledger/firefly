@@ -1,13 +1,13 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
     import { getInitials, truncateString } from 'shared/lib/helpers'
+    import type { Payload } from 'shared/lib/typings/message'
     import { formatUnit } from 'shared/lib/units'
     import { setClipboard } from 'shared/lib/utils'
     import type { WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
     import { date } from 'svelte-i18n'
     import type { Readable, Writable } from 'svelte/store'
-    import type { Payload } from 'shared/lib/typings/message'
 
     export let id
     export let timestamp
@@ -101,6 +101,10 @@
     $: senderAccount = prepareSenderAccount()
 
     $: receiverAccount = prepareReceiverAccount()
+
+    function isAccountSameAsActive(account) {
+        return account && $activeAccount && account?.id === $activeAccount?.id
+    }
 </script>
 
 <div class="flex flex-col h-full min-h-0">
@@ -112,7 +116,7 @@
                     class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold text-center bg-{senderAccount?.color ?? 'blue'}-500 text-white">
                     {getInitials(senderAccount.alias, 2)}
                 </div>
-                {#if payload.type === 'Transaction' && !payload.data.essence.data.incoming}
+                {#if isAccountSameAsActive(senderAccount)}
                     <Text smaller>{locale('general.you')}</Text>
                 {/if}
             {:else}
@@ -134,7 +138,9 @@
                     <Text smaller>{locale('general.you')}</Text>
                 {/if}
             {/if}
-            {#if payload.type === 'Transaction' && !payload.data.essence.data.incoming}
+            {#if isAccountSameAsActive(receiverAccount)}
+                <Text smaller>{locale('general.you')}</Text>
+            {:else}
                 {#each receiverAddresses as address}
                     <Text smaller>{truncateString(address, 3, 3, 3)}</Text>
                 {/each}

@@ -10,8 +10,18 @@ import { activeProfile, isStrongholdLocked, updateProfile } from 'shared/lib/pro
 import type { Account, Account as BaseAccount, AccountToCreate, Balance, SyncedAccount } from 'shared/lib/typings/account'
 import type { Address } from 'shared/lib/typings/address'
 import type { Actor } from 'shared/lib/typings/bridge'
-import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, ErrorEventPayload, Event, ReattachmentEventPayload, TransactionEventPayload, TransferProgressEventPayload, TransferProgressEventType, MigrationProgressEventPayload } from 'shared/lib/typings/events'
-import type { Message } from 'shared/lib/typings/message'
+import type {
+    BalanceChangeEventPayload,
+    ConfirmationStateChangeEventPayload,
+    ErrorEventPayload,
+    Event,
+    ReattachmentEventPayload,
+    TransactionEventPayload,
+    TransferProgressEventPayload,
+    TransferProgressEventType,
+    MigrationProgressEventPayload
+} from 'shared/lib/typings/events'
+import type { Message, Payload } from 'shared/lib/typings/message'
 import { formatUnit } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
 import type { ClientOptions } from './typings/client'
@@ -318,6 +328,19 @@ export const asyncSetStrongholdPassword = (password) => {
     })
 }
 
+export const asyncChangeStrongholdPassword = (currentPassword, newPassword) => {
+    return new Promise<void>((resolve, reject) => {
+        api.changeStrongholdPassword(currentPassword, newPassword, {
+            onSuccess() {
+                resolve()
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
+
 export const asyncStoreMnemonic = (mnemonic) => {
     return new Promise<void>((resolve, reject) => {
         api.storeMnemonic(mnemonic, {
@@ -469,6 +492,7 @@ export const initialiseListeners = () => {
                 if (!get(isSyncing)) {
                     // Update account with new message
                     saveNewMessage(response.payload.accountId, response.payload.message);
+
                     const notificationMessage = localize('notifications.valueTx')
                         .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
                         .replace('{{account}}', account.alias);
@@ -665,7 +689,7 @@ const updateAllMessagesState = (accounts, messageId, confirmation) => {
  */
 export const updateAccountAfterBalanceChange = (
     accountId: string,
-    address: Address,
+    address: string,
     receivedBalance: number,
     spentBalance: number
 ): void => {
@@ -678,7 +702,7 @@ export const updateAccountAfterBalanceChange = (
 
                 const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD;
 
-                return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
+                return Object.assign<WalletAccount, Partial<WalletAccount>>(storedAccount, {
                     rawIotaBalance,
                     balance: formatUnit(rawIotaBalance, 2),
                     balanceEquiv: `${convertToFiat(
@@ -687,8 +711,8 @@ export const updateAccountAfterBalanceChange = (
                         get(exchangeRates)[activeCurrency]
                     )} ${activeCurrency}`,
                     addresses: storedAccount.addresses.map((_address: Address) => {
-                        if (_address.address === address.address) {
-                            return Object.assign<Address, Partial<Address>, Partial<Address>>({} as Address, _address, address)
+                        if (_address.address === address) {
+                            _address.balance += receivedBalance - spentBalance
                         }
 
                         return _address
@@ -715,9 +739,11 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
     accounts.update((storedAccounts) => {
         return storedAccounts.map((storedAccount: WalletAccount) => {
             if (storedAccount.id === accountId) {
-                return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
-                    messages: [message, ...storedAccount.messages]
-                })
+                const hasMessage = storedAccount.messages.some(m => m.id === message.id)
+
+                if (!hasMessage) {
+                    storedAccount.messages.push(message)
+                }
             }
 
             return storedAccount;
@@ -1044,8 +1070,9 @@ export const getAccountsBalanceHistory = (accounts: WalletAccount[], priceData: 
                 [HistoryDataProps.SEVEN_DAYS]: [],
                 [HistoryDataProps.ONE_MONTH]: [],
             }
-            // Sort messages from last to newest
-            let messages = account.messages.slice().sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+            let messages: Message[] = account?.messages?.slice()
+                ?.filter((message) => !isSelfTransaction(message.payload, account)) // Remove self transactions
+                ?.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()) ?? [] // Sort messages from last to newest
             // Calculate the variations for each account
             var trackedBalance = account.rawIotaBalance;
             let accountBalanceVariations = [{ balance: trackedBalance, timestamp: new Date().toString() }]
@@ -1401,4 +1428,44 @@ export const updateAccountNetworkSettings = async (automaticNodeSelection, inclu
             },
         }
     )
+}
+
+/**
+ * Check if a message was emitted and received by the provided account
+ *
+ * @method getWalletBalanceHistory
+ *
+ * @param {Payload} payload
+ * @param {WalletAccount} account
+ *
+ */
+export const isSelfTransaction = (payload: Payload, account: WalletAccount): boolean => {
+    const accountAddresses = account?.addresses?.map(add => add.address) ?? []
+    if (payload && accountAddresses.length) {
+        const getSenderAddress = () => {
+            if (payload.type === 'Transaction') {
+                return payload?.data?.essence?.data?.inputs?.find((input) => /utxo/i.test(input?.type))?.data?.metadata?.address ?? null
+            }
+
+            return null
+        }
+
+        const getReceiverAddress = () => {
+            if (payload.type === 'Transaction') {
+                return payload?.data?.essence?.data?.outputs
+                    ?.filter((output) => output?.data?.remainder === false)
+                    ?.map((output) => output?.data?.address) ?? []
+            }
+
+            return null;
+        }
+
+        const senderAddress: string =  getSenderAddress()
+
+        const receiverAddresses: string[] = getReceiverAddress()
+
+        const transactionAddresses = [senderAddress, ...receiverAddresses]
+        return senderAddress && receiverAddresses.length && transactionAddresses.every((txAddress) => accountAddresses.indexOf(txAddress) !== -1)
+    }
+    return false
 }

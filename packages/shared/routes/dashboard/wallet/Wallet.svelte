@@ -110,7 +110,9 @@
             onSuccess(accountsResponse) {
                 const _continue = () => {
                     accountsLoaded.set(true)
-                    syncAccounts(false)
+                    const gapLimit = $activeProfile?.gapLimit ?? 10
+                    syncAccounts(false, 0, gapLimit)
+                    updateProfile('gapLimit', 10)
                 }
 
                 if (accountsResponse.payload.length === 0) {
@@ -162,13 +164,11 @@
                     accounts.update((accounts) =>
                         accounts.map((account) => {
                             if (account.id === accountId) {
-                                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                    {} as WalletAccount,
-                                    account,
-                                    {
-                                        depositAddress: response.payload.address,
-                                    }
-                                )
+                                account.depositAddress = response.payload.address
+
+                                if (!account.addresses.some(a => a.address === response.payload.address)) {
+                                    account.addresses.push(response.payload)
+                                }
                             }
 
                             return account
@@ -425,7 +425,7 @@
         })
     }
 
-    function onInternalTransfer(senderAccountId, receiverAccountId, amount) {
+    function onInternalTransfer(senderAccountId, receiverAccountId, amount, internal) {
         const _internalTransfer = () => {
             isTransferring.set(true)
             api.internalTransfer(senderAccountId, receiverAccountId, amount, {
@@ -457,6 +457,7 @@
                                                         essence: Object.assign({}, message.payload.data.essence, {
                                                             data: Object.assign({}, message.payload.data.essence.data, {
                                                                 incoming: isReceiverAccount,
+                                                                internal: true
                                                             }),
                                                         }),
                                                     }),
@@ -475,7 +476,7 @@
                     transferState.set('Complete')
 
                     setTimeout(() => {
-                        clearSendParams(true)
+                        clearSendParams(internal)
                         isTransferring.set(false)
                     }, 3000)
                 },

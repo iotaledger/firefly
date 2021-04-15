@@ -60,7 +60,8 @@ export enum SettingsRoutesNoProfile {
 }
 
 export enum GeneralSettings {
-    Profile = 'profile',
+    // TODO: Implement and enable
+    // Profile = 'profile',
     Theme = 'theme',
     Language = 'language',
     Currency = 'currency',
@@ -90,7 +91,8 @@ export enum AdvancedSettings {
     HiddenAccounts = 'hiddenAccounts',
     ErrorLog = 'errorLog',
     Diagnostics = 'diagnostics',
-    StateExport = 'stateExport',
+    // TODO: Implement and enable
+    //StateExport = 'stateExport',
 }
 
 export enum AdvancedSettingsNoProfile {

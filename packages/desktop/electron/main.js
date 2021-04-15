@@ -397,8 +397,8 @@ export const openAboutWindow = () => {
     }
 
     windows.about = new BrowserWindow({
-        width: 300,
-        height: 180,
+        width: 380,
+        height: 230,
         useContentSize: true,
         titleBarStyle: 'hidden',
         show: false,

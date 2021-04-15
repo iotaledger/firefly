@@ -35,7 +35,15 @@
             })
         }
         for (let i = 0; i < words.length; i++) {
-            if (!english.includes(words[i])) {
+            const includesWord = english.includes(words[i])
+            const includesWordOtherCase = english.includes(words[i].toLowerCase())
+            if (!includesWord && includesWordOtherCase) {
+                return locale('error.backup.phraseCaseWord', {
+                    values: {
+                        word: words[i],
+                    },
+                })
+            } else if (!includesWord) {
                 return locale('error.backup.phraseUnrecognizedWord', {
                     values: {
                         word: words[i],
