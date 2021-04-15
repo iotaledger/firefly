@@ -142,6 +142,8 @@ export enum MigrationProgressEventType {
     PerformingPoW = 'PerformingPoW',
     /// Broadcasting.
     Broadcasting = 'Broadcasting',
+    // Transaction confirmed (through promotion & reattachment)
+    TransactionConfirmed = 'TransactionConfirmed'
 }
 
 export interface FetchingMigrationDataEvent {
@@ -173,6 +175,15 @@ export interface BroadcastingBundleEvent {
     }
 }
 
+
+export interface LegacyTransactionConfirmedEvent {
+    type: 'TransactionConfirmed'
+    data: {
+        bundleHash: string
+    }
+}
+
+
 export interface MigrationProgressEventPayload {
-    event: FetchingMigrationDataEvent | MiningEvent | SigningBundleEvent | BroadcastingBundleEvent
+    event: FetchingMigrationDataEvent | MiningEvent | SigningBundleEvent | BroadcastingBundleEvent | LegacyTransactionConfirmedEvent
 }

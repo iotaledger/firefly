@@ -7,9 +7,10 @@
         createMigrationBundle,
         sendMigrationBundle,
         unmigratedBundles,
-        hasMigratedAllSelectedBundles,
         selectedUnmigratedBundles,
-        hasMigratedAnyBundle
+        hasMigratedAnyBundle,
+        confirmedBundles,
+        hasMigratedAndConfirmedAllSelectedBundles
     } from 'shared/lib/migration'
 
     export let locale
@@ -18,7 +19,7 @@
     let busy = false
     let migrated = false
     let migratingFundsMessage = ''
-    let fullSuccess = $hasMigratedAllSelectedBundles
+    let fullSuccess = $hasMigratedAndConfirmedAllSelectedBundles
 
     const { didComplete } = $migration
 
@@ -30,8 +31,22 @@
         errorText: null,
     }))
 
-    const unsubscribe = hasMigratedAllSelectedBundles.subscribe((_hasMigratedAllSelectedBundles) => {
-        fullSuccess = _hasMigratedAllSelectedBundles
+    const unsubscribe = hasMigratedAndConfirmedAllSelectedBundles.subscribe((_hasMigratedAndConfirmedAllSelectedBundles) => {
+        fullSuccess = _hasMigratedAndConfirmedAllSelectedBundles
+    })
+
+    confirmedBundles.subscribe((newConfirmedBundles) => {
+        newConfirmedBundles.forEach((bundle) => {
+            if (bundle.bundleHash && bundle.confirmed) {
+                transactions = transactions.map((item) => {
+                    if (item.bundleHash === bundle.bundleHash) {
+                        return { ...item, status: 2 }
+                    }
+
+                    return item
+                })
+            }
+        })
     })
 
     const dispatch = createEventDispatcher()
@@ -70,25 +85,28 @@
                 promise
                     .then((acc) => {
                         if (transaction.bundleHash) {
-                            return sendMigrationBundle(transaction.bundleHash)
+                            return sendMigrationBundle(transaction.bundleHash).then(() => {
+                                if (idx === transactions.length - 1) {
+                                    finish()
+                                }
+                            })
                         }
 
                         return createMigrationBundle(getInputIndexesForBundle(transaction), 0, false).then((result) =>
-                            sendMigrationBundle(result.payload.bundleHash)
+                            sendMigrationBundle(result.payload.bundleHash).then(() => {
+                                transactions = transactions.map((_transaction, i) => {
+                                    if (i === idx) {
+                                        return { ..._transaction, bundleHash: result.payload.bundleHash }
+                                    }
+
+                                    return _transaction
+                                })
+
+                                if (idx === transactions.length - 1) {
+                                    finish()
+                                }
+                            })
                         )
-                    })
-                    .then(() => {
-                        transactions = transactions.map((_transaction) => {
-                            if (_transaction.index === transaction.index) {
-                                return { ..._transaction, status: 2 }
-                            }
-
-                            return _transaction
-                        })
-
-                        if (idx === _unmigratedBundles.length - 1) {
-                            finish()
-                        }
                     })
                     .catch((error) => {
                         console.error(error)
@@ -130,26 +148,30 @@
                 promise
                     .then((acc) => {
                         if (transaction.bundleHash) {
-                            return sendMigrationBundle(transaction.bundleHash)
+                            return sendMigrationBundle(transaction.bundleHash).then(() => {
+                                if (idx === transactions.length - 1) {
+                                    finish()
+                                }
+                            })
                         }
 
                         return createMigrationBundle(getInputIndexesForBundle(transaction), 0, false).then((result) =>
-                            sendMigrationBundle(result.payload.bundleHash)
+                            sendMigrationBundle(result.payload.bundleHash).then(() => {
+                                transactions = transactions.map((_transaction, i) => {
+                                    if (i === idx) {
+                                        return { ..._transaction, bundleHash: result.payload.bundleHash }
+                                    }
+
+                                    return _transaction
+                                })
+
+                                if (idx === transactions.length - 1) {
+                                    finish()
+                                }
+                            })
                         )
                     })
-                    .then(() => {
-                        transactions = transactions.map((_transaction, i) => {
-                            if (i === idx) {
-                                return { ..._transaction, status: 2 }
-                            }
 
-                            return _transaction
-                        })
-
-                        if (idx === transactions.length - 1) {
-                            finish()
-                        }
-                    })
                     .catch((error) => {
                         console.error(error)
 
