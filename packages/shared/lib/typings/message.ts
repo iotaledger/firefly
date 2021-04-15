@@ -92,7 +92,7 @@ interface ReceiptFunds {
         amount: number;
         remainder: boolean;
     },
-    tailTransactionHash: number[]
+    tailTransactionHash: string
 }
 
 interface Receipt {

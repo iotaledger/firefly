@@ -15,6 +15,7 @@ export interface MigratedTransaction {
     balance: number;
     timestamp: string
     account: number;
+    tailTransactionHash: string;
 }
 
 /**

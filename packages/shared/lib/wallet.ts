@@ -1235,12 +1235,14 @@ export const processMigratedTransactions = (accountId: string, messages: Message
                 const _activeProfile = get(activeProfile)
 
                 if (_activeProfile.migratedTransactions && _activeProfile.migratedTransactions.length) {
-                    const migrationAddresses = _activeProfile.migratedTransactions.map((transaction) => transaction.address)
-
                     const funds = message.payload.data.essence.receipt.data.funds;
-                    const outputAddresses = funds.filter((fund) => migrationAddresses.includes(fund.output.address)).map((fund) => fund.output.address)
 
-                    const updatedMigratedTransactions = _activeProfile.migratedTransactions.filter((transaction) => !outputAddresses.includes(transaction.address))
+                    const tailTransactionHashes = funds.map((fund) => fund.tailTransactionHash)
+
+                    const updatedMigratedTransactions = _activeProfile.migratedTransactions.filter((transaction) => !tailTransactionHashes.includes(
+                        transaction.tailTransactionHash
+                    )
+                    )
 
                     updateProfile(
                         'migratedTransactions',
