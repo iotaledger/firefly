@@ -33,6 +33,7 @@ interface Bundle {
     selected: boolean;
     inputs: Input[];
     miningRuns: number;
+    confirmed: boolean;
 }
 
 interface MigrationState {
@@ -331,8 +332,8 @@ export const prepareBundles = () => {
     const spentInputs = spent.filter((input) => input.balance >= MINIMUM_MIGRATION_BALANCE)
 
     bundles.set([
-        ...spentInputs.map((input) => ({ miningRuns: 0, migrated: false, selected: true, shouldMine: true, selectedToMine: true, inputs: [input] })),
-        ...unspentInputChunks.map((inputs) => ({ miningRuns: 0, migrated: false, selected: true, shouldMine: false, selectedToMine: false, inputs }))
+        ...spentInputs.map((input) => ({ confirmed: false, miningRuns: 0, migrated: false, selected: true, shouldMine: true, selectedToMine: true, inputs: [input] })),
+        ...unspentInputChunks.map((inputs) => ({ confirmed: false, miningRuns: 0, migrated: false, selected: true, shouldMine: false, selectedToMine: false, inputs }))
     ].map((_, index) => ({ ..._, index })))
 };
 
@@ -428,6 +429,12 @@ export const hasMigratedAllSelectedBundles = derived(get(migration).bundles, (_b
     return selectedBundles.length && selectedBundles.every((bundle) => bundle.migrated === true)
 });
 
+export const hasMigratedAndConfirmedAllSelectedBundles = derived(get(migration).bundles, (_bundles) => {
+    const selectedBundles = _bundles.filter((bundle) => bundle.selected === true)
+
+    return selectedBundles.length && selectedBundles.every((bundle) => bundle.migrated === true && bundle.confirmed === true)
+});
+
 export const totalMigratedBalance = derived(get(migration).bundles, (_bundles) => {
     return _bundles.reduce((acc, bundle) => {
         if (bundle.selected && bundle.migrated) {
@@ -458,6 +465,11 @@ export const hasAnySpentAddressWithNoBundleHashes = derived(get(migration).bundl
 export const unselectedInputs = derived([get(migration).data, get(migration).bundles], ([data, bundles]) => {
     return data.inputs.filter((input) => !bundles.some((bundle) => bundle.inputs.some((bundleInput) => bundleInput.address === input.address)))
 })
+
+export const confirmedBundles = derived(get(migration).bundles, (_bundles) => _bundles.filter((bundle) =>
+    bundle.selected === true &&
+    bundle.confirmed === true
+))
 
 /**
  * List of chrysalis node endpoints to detect when is live
@@ -558,6 +570,18 @@ export async function checkChrysalisStatus(): Promise<void> {
 export const initialiseMigrationListeners = () => {
     api.onMigrationProgress({
         onSuccess(response) {
+            if (response.payload.event.type === 'TransactionConfirmed') {
+                const { bundles } = get(migration)
+
+                bundles.update((_bundles) => _bundles.map((bundle) => {
+                    // @ts-ignore
+                    if (bundle.bundleHash && bundle.bundleHash === response.payload.event.data.bundleHash) {
+                        return Object.assign({}, bundle, { confirmed: true })
+                    }
+
+                    return bundle
+                }))
+            }
             console.log('Response', response)
         }, onError(error) {
             console.log('Error', error)

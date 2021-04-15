@@ -10,6 +10,7 @@
         createMigrationBundle,
         sendMigrationBundle,
         unselectedInputs
+        confirmedBundles,
     } from 'shared/lib/migration'
 
     import { createEventDispatcher, onDestroy } from 'svelte'
@@ -35,15 +36,26 @@
 
     let timeout
 
+    let singleMigrationBundleHash
+
+    confirmedBundles.subscribe((newConfirmedBundles) => {
+        newConfirmedBundles.forEach((bundle) => {
+            if (bundle.bundleHash && bundle.bundleHash === singleMigrationBundleHash && bundle.confirmed) {
+                didComplete.set(true)
+                loading = false
+                dispatch('next')
+            }
+        })
+    })
+
     function handleContinueClick() {
         if ($hasSingleBundle && !$hasBundlesWithSpentAddresses) {
             loading = true
 
             createMigrationBundle(getInputIndexesForBundle($bundles[0]), 0, false)
-                .then((response) => sendMigrationBundle(response.payload.bundleHash))
-                .then(() => {
-                    didComplete.set(true)
-                    dispatch('next')
+                .then((response) => {
+                    singleMigrationBundleHash = response.payload.bundleHash
+                    sendMigrationBundle(response.payload.bundleHash)
                 })
                 .catch(console.error)
         } else {

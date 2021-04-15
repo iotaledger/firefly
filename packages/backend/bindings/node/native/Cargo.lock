@@ -1658,7 +1658,11 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "0.5.0-alpha.3"
+<<<<<<< HEAD
 source = "git+https://github.com/iotaledger/iota.rs?branch=dev#08560299dec61d7c52c70ff031d5682336d9d2fa"
+=======
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#2b84478c71b0078d7776974bb066bd7aa74cea38"
+>>>>>>> feat/migration-temp
 dependencies = [
  "async-trait",
  "bee-common",
@@ -1736,7 +1740,11 @@ dependencies = [
 [[package]]
 name = "iota-core"
 version = "0.2.0-alpha.3"
+<<<<<<< HEAD
 source = "git+https://github.com/iotaledger/iota.rs?branch=dev#08560299dec61d7c52c70ff031d5682336d9d2fa"
+=======
+source = "git+https://github.com/iotaledger/iota.rs?branch=dev#2b84478c71b0078d7776974bb066bd7aa74cea38"
+>>>>>>> feat/migration-temp
 dependencies = [
  "iota-client 0.5.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?branch=dev)",
 ]
@@ -1850,7 +1858,11 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
+<<<<<<< HEAD
 source = "git+https://github.com/iotaledger/wallet.rs?branch=migration#291ed39599164228c155942bb28ff718ac72982b"
+=======
+source = "git+https://github.com/iotaledger/wallet.rs?branch=migration#2e7a36622be374127dd34ca1f6bed43fab8500d8"
+>>>>>>> feat/migration-temp
 dependencies = [
  "async-trait",
  "backtrace",
