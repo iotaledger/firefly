@@ -9,6 +9,7 @@
         migration,
         createMigrationBundle,
         sendMigrationBundle,
+        unselectedInputs
     } from 'shared/lib/migration'
 
     import { createEventDispatcher, onDestroy } from 'svelte'
@@ -22,8 +23,10 @@
     const { didComplete, bundles, data } = $migration
     const { balance } = $data
 
+    let migratableBalance = balance - $unselectedInputs.reduce((acc, input) => acc + input.balance, 0)
+
     let fiatbalance = `${convertToFiat(
-        balance,
+        migratableBalance,
         get(currencies)[CurrencyTypes.USD],
         get(exchangeRates)[AvailableExchangeRates.USD]
     )} ${CurrencyTypes.USD}`
@@ -70,7 +73,7 @@
             <Text type="p" secondary classes="mb-4">{locale('views.migrate.body1')}</Text>
             <Text type="p" secondary highlighted classes="mb-8 font-bold">{locale('views.migrate.body2')}</Text>
             <Box classes="flex flex-col flex-grow items-center py-12 bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 rounded-lg ">
-                <Text type="h2">{formatUnit(balance)}</Text>
+                <Text type="h2">{formatUnit(migratableBalance)}</Text>
                 <Text type="p" highlighted classes="py-1 uppercase">{fiatbalance}</Text>
             </Box>
         </div>
