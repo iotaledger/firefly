@@ -5,7 +5,7 @@
         MINING_TIMEOUT_SECONDS,
         getInputIndexesForBundle,
         createMigrationBundle,
-        selectedBundlesWithSpentAddresses,
+        selectedBundlesToMine,
     } from 'shared/lib/migration'
 
     export let locale
@@ -23,7 +23,7 @@
     $: progressBarMessage = `${progressBarPercent}% completed`
 
     onMount(() => {
-        $selectedBundlesWithSpentAddresses.reduce(
+        $selectedBundlesToMine.reduce(
             (promise, bundle, idx) =>
                 promise.then((acc) =>
                     createMigrationBundle(getInputIndexesForBundle(bundle), bundle.miningRuns * 10 ** 7, true)
@@ -31,7 +31,7 @@
                             timeElapsed = (idx + 1) * MINING_TIMEOUT_SECONDS
                             updateProgress()
 
-                            if (idx === $selectedBundlesWithSpentAddresses.length - 1) {
+                            if (idx === $selectedBundlesToMine.length - 1) {
                                 clearInterval(interval)
 
                                 redirectWithTimeout()
@@ -43,7 +43,7 @@
                             timeElapsed = (idx + 1) * MINING_TIMEOUT_SECONDS
                             updateProgress()
 
-                            if (idx === $selectedBundlesWithSpentAddresses.length - 1) {
+                            if (idx === $selectedBundlesToMine.length - 1) {
                                 clearInterval(interval)
 
                                 redirectWithTimeout()
@@ -64,7 +64,7 @@
 
     function updateProgress() {
         progressBarPercent = Math.floor(
-            (timeElapsed / (MINING_TIMEOUT_SECONDS * $selectedBundlesWithSpentAddresses.length)) * 100
+            (timeElapsed / (MINING_TIMEOUT_SECONDS * $selectedBundlesToMine.length)) * 100
         )
         progressBarMessage = progressBarPercent.toString() + '% completed'
     }

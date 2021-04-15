@@ -1,12 +1,9 @@
 <script lang="typescript">
     import { Button, Illustration, OnboardingLayout, SpentAddress, Text } from 'shared/components'
     import {
-        MINIMUM_MIGRATION_BALANCE,
-        selectedUnmigratedBundles,
+        toggleMiningSelection,
         spentAddressesFromBundles,
-        toggleInputSelection,
     } from 'shared/lib/migration'
-    import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { RiskLevel } from 'shared/lib/typings/migration'
     import { createEventDispatcher } from 'svelte'
@@ -19,15 +16,13 @@
     let addresses = $spentAddressesFromBundles
         .map((address) =>
             Object.assign({}, address, {
-                disabled: address.balance < MINIMUM_MIGRATION_BALANCE,
                 id: address.index,
                 risk: address.crackability,
             })
         )
-        .sort((a, b) => Number(a.disabled) - Number(b.disabled))
         .sort((a, b) => b.risk - a.risk)
 
-    let selectedAddresses = addresses.filter((address) => address.disabled === false && address.selected === true)
+    let selectedAddresses = addresses.filter((address) => address.selectedToMine === true)
 
     function onAddressClick(address) {
         var index = selectedAddresses.findIndex((_address) => _address.id === address.id)
@@ -37,29 +32,15 @@
             selectedAddresses.splice(index, 1)
         }
 
-        toggleInputSelection(address)
+        toggleMiningSelection(address)
         selectedAddresses = selectedAddresses
     }
 
-    function handleBackClick() {
-        dispatch('previous')
-    }
     function handleContinueClick() {
-        if (addresses.length) {
-            if (addresses.find((address) => address?.risk > RiskLevel.MEDIUM)) {
-                triggerPopup()
-            } else {
-                dispatch('next', { skippedMining: true })
-            }
+        if (addresses.find((address) => address?.risk > RiskLevel.MEDIUM)) {
+            triggerPopup()
         } else {
-            if (selectedUnmigratedBundles.length) {
-                dispatch('next', { skippedMining: true })
-            } else {
-                showAppNotification({
-                    type: 'error',
-                    message: locale('views.migrate.noAddressesForMigration'),
-                })
-            }
+            dispatch('next', { skippedMining: true })
         }
     }
     function rerunProcess() {

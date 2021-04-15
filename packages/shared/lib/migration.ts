@@ -26,6 +26,7 @@ const MAX_INPUTS_PER_BUNDLE = 10
 interface Bundle {
     index: number;
     shouldMine: boolean;
+    selectedToMine: boolean;
     bundleHash?: string;
     crackability?: number;
     migrated: boolean;
@@ -330,8 +331,8 @@ export const prepareBundles = () => {
     const spentInputs = spent.filter((input) => input.balance >= MINIMUM_MIGRATION_BALANCE)
 
     bundles.set([
-        ...spentInputs.map((input) => ({ miningRuns: 0, migrated: false, selected: true, shouldMine: true, inputs: [input] })),
-        ...unspentInputChunks.map((inputs) => ({ miningRuns: 0, migrated: false, selected: true, shouldMine: false, inputs }))
+        ...spentInputs.map((input) => ({ miningRuns: 0, migrated: false, selected: true, shouldMine: true, selectedToMine: true, inputs: [input] })),
+        ...unspentInputChunks.map((inputs) => ({ miningRuns: 0, migrated: false, selected: true, shouldMine: false, selectedToMine: false, inputs }))
     ].map((_, index) => ({ ..._, index })))
 };
 
@@ -345,7 +346,7 @@ export const spentAddressesFromBundles = derived(get(migration).bundles, (_bundl
     .filter((bundle) => bundle.migrated === false && bundle.shouldMine === true)
     // TODO: Perhaps use a different way to gather inputs
     .map((bundle) => Object.assign({}, bundle.inputs[0], {
-        selected: bundle.selected,
+        selectedToMine: bundle.selectedToMine,
         bundleHash: bundle.bundleHash,
         crackability: bundle.crackability
     }))
@@ -356,35 +357,23 @@ export const hasSingleBundle = derived(get(migration).bundles, (_bundles) => _bu
 export const hasBundlesWithSpentAddresses = derived(get(migration).bundles, (_bundles) => _bundles.length && _bundles.some((bundle) => bundle.shouldMine === true &&
     bundle.selected === true))
 
-export const toggleInputSelection = (address: Address): void => {
+export const toggleMiningSelection = (address: Address): void => {
     const { bundles } = get(migration)
 
     bundles.update((_bundles) => _bundles.map((bundle) => {
         if (bundle.inputs.some((input) => input.address === address.address)) {
-            return Object.assign({}, bundle, { selected: !bundle.selected })
+            return Object.assign({}, bundle, { selectedToMine: !bundle.selectedToMine })
         }
 
         return bundle
     }))
 }
 
-export const selectBundlesWithSpentAddresses = (): void => {
+export const selectAllAddressesForMining = (): void => {
     const { bundles } = get(migration)
     bundles.update((_bundles) => _bundles.map((bundle) => {
         if (bundle.shouldMine) {
-            const inputsSum = bundle.inputs.reduce((acc, input) => acc + input.balance, 0)
-
-            return Object.assign({}, bundle, { selected: inputsSum >= MINIMUM_MIGRATION_BALANCE })
-        }
-        return bundle
-    }))
-}
-
-export const unselectBundlesWithSpentAddresses = (): void => {
-    const { bundles } = get(migration)
-    bundles.update((_bundles) => _bundles.map((bundle) => {
-        if (bundle.shouldMine) {
-            return Object.assign({}, bundle, { selected: false })
+            return Object.assign({}, bundle, { selectedtoMine: true })
         }
         return bundle
     }))
@@ -413,8 +402,8 @@ export const selectedUnmigratedBundles = derived(get(migration).bundles, (_bundl
     bundle.selected === true && bundle.migrated === false
 ))
 
-export const selectedBundlesWithSpentAddresses = derived(get(migration).bundles, (_bundles) => _bundles.filter((bundle) =>
-    bundle.selected === true &&
+export const selectedBundlesToMine = derived(get(migration).bundles, (_bundles) => _bundles.filter((bundle) =>
+    bundle.selectedToMine === true &&
     bundle.shouldMine === true
 ))
 

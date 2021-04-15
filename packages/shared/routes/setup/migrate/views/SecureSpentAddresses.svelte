@@ -1,12 +1,9 @@
 <script lang="typescript">
     import { Button, Illustration, Link, OnboardingLayout, SpentAddress, Text } from 'shared/components'
     import {
-        MINIMUM_MIGRATION_BALANCE,
-        selectedUnmigratedBundles,
         spentAddressesFromBundles,
-        toggleInputSelection,
-        unselectBundlesWithSpentAddresses,
-        selectBundlesWithSpentAddresses
+        toggleMiningSelection,
+        selectAllAddressesForMining
     } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
@@ -19,11 +16,10 @@
 
     let addresses = $spentAddressesFromBundles
         .map((address) =>
-            Object.assign({}, address, { disabled: address.balance < MINIMUM_MIGRATION_BALANCE, id: address.index })
+            Object.assign({}, address, { id: address.index })
         )
-        .sort((a, b) => Number(a.disabled) - Number(b.disabled))
 
-    let selectedAddresses = addresses.filter((address) => address.disabled === false && address.selected === true)
+    let selectedAddresses = addresses.filter((address) => address.selectedToMine === true)
 
     function onAddressClick(address) {
         var index = selectedAddresses.findIndex((_address) => _address.id === address.id)
@@ -33,35 +29,30 @@
             selectedAddresses.splice(index, 1)
         }
 
-        toggleInputSelection(address)
+        toggleMiningSelection(address)
         selectedAddresses = selectedAddresses
     }
 
     function handleBackClick() {
         // If a user goes back, automatically select all bundles with spent addresses
-        selectBundlesWithSpentAddresses()
+        selectAllAddressesForMining()
         
         dispatch('previous')
     }
 
     function secureAddresses() {
         if (selectedAddresses.length) {
-            if (selectedAddresses?.length < addresses?.filter((_address) => !_address.disabled)?.length) {
+            if (selectedAddresses?.length < addresses?.length) {
                 triggerPopup()
             } else {
                 dispatch('next')
             }
         } else {
-            if (selectedUnmigratedBundles.length) {
-                triggerPopup(true)
-            } else {
-                showAppNotification({ type: 'error', message: locale('views.migrate.noAddressesForMigration') })
-            }
+             showAppNotification({ type: 'error', message: locale('views.migrate.noAddressesForMigration') })
         }
     }
 
     function handleSkipClick() {
-        unselectBundlesWithSpentAddresses()
         triggerPopup(true)
     }
 
