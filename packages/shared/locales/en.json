@@ -205,10 +205,6 @@
                 "confirmNewPincode": "Confirm new PIN",
                 "action": "Change PIN"
             },
-            "resyncAccounts": {
-                "title": "Resync accounts",
-                "description": "Starts a background task to make sure your accounts are up to date."
-            },
             "balanceFinder": {
                 "title": "Balance finder",
                 "description": "Perform an extended search of your addresses for tokens."

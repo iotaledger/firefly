@@ -1,14 +1,13 @@
 <script lang="typescript">
-    import { activeProfile, updateProfile } from 'shared/lib/profile';
-    import { Button, Checkbox, HR, Radio, Text, Spinner } from 'shared/components';
-    import { clickOutside } from 'shared/lib/actions';
-    import { loggedIn } from 'shared/lib/app';
-    import { appSettings } from 'shared/lib/appSettings';
-    import { getOfficialNodes } from 'shared/lib/network';
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup } from 'shared/lib/popup';
-    import { api, syncAccounts, buildAccountNetworkSettings, isSyncing, updateAccountNetworkSettings } from 'shared/lib/wallet';
-    import { get } from 'svelte/store';
+    import { Button, Checkbox, HR, Radio, Text } from 'shared/components'
+    import { clickOutside } from 'shared/lib/actions'
+    import { loggedIn } from 'shared/lib/app'
+    import { appSettings } from 'shared/lib/appSettings'
+    import { getOfficialNodes } from 'shared/lib/network'
+    import { openPopup } from 'shared/lib/popup'
+    import { activeProfile, updateProfile } from 'shared/lib/profile'
+    import { buildAccountNetworkSettings, updateAccountNetworkSettings } from 'shared/lib/wallet'
+    import { get } from 'svelte/store'
 
     export let locale
 
@@ -88,24 +87,6 @@
                 onSuccess: (node) => {
                     nodes = nodes.filter((n) => n.url !== node.url)
                 },
-            },
-        })
-    }
-
-    function handleResyncAccountsClick() {
-        api.getStrongholdStatus({
-            onSuccess(strongholdStatusResponse) {
-                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({ type: 'password', props: { onSuccess: () => syncAccounts(true, 0, 10) } })
-                } else {
-                    syncAccounts(true, 0, 10)
-                }
-            },
-            onError(err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error),
-                })
             },
         })
     }
@@ -253,17 +234,6 @@
         <Checkbox label={locale('actions.enableDeepLinks')} bind:checked={deepLinkingChecked} />
     </section>
     {#if $loggedIn}
-        <HR classes="pb-5 mt-5 justify-center" />
-        <section id="resyncAccounts" class="w-3/4">
-            <Text type="h4" classes="mb-3">{locale('views.settings.resyncAccounts.title')}</Text>
-            <Text type="p" secondary classes="mb-5">{locale('views.settings.resyncAccounts.description')}</Text>
-            <div class="flex flex-row items-center">
-                <Button medium inlineStyle="min-width: 156px;" onClick={() => handleResyncAccountsClick()} disabled={$isSyncing}>
-                    {locale('actions.syncAll')}
-                </Button>
-                <Spinner busy={$isSyncing} message={$isSyncing ? locale('general.syncingAccounts') : ''} classes="ml-2" />
-            </div>
-        </section>
         <HR classes="pb-5 mt-5 justify-center" />
         <section id="balanceFinder" class="w-3/4">
             <Text type="h4" classes="mb-3">{locale('views.settings.balanceFinder.title')}</Text>
