@@ -195,9 +195,6 @@
                 <Button classes="w-full py-3 mt-2" onClick={() => handleRerunClick()}>
                     {locale('views.transferFragmentedFunds.rerun')}
                 </Button>
-                <Button secondary classes="w-full py-3 mt-2" onClick={() => handleContinueClick()}>
-                    {locale('actions.proceedAnyway')}
-                </Button>
             {/if}
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">

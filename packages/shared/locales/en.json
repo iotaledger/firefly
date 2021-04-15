@@ -178,10 +178,10 @@
             "title": "Securing spent addresses..."
         },
         "transferFragmentedFunds": {
-            "body1": "You have too many addresses to migrate in one transaction. In order to migrate your funds to the new network, you must send multiple transactions.",
+            "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
             "migrate": "Migrate funds",
             "transaction": "Transaction {number}",
-            "rerun": "Rerun migration process"
+            "rerun": "Try again"
         },
         "migrateFailed": {
             "title": "To do",
