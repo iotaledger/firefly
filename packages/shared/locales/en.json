@@ -153,7 +153,8 @@
             "problemRestoringWallet": "There was a problem restoring your wallet. Please try again.",
             "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
             "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
-            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. Only {value} will be lost."
+            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. Only {value} will be lost.",
+            "error": "There was an error migrating your funds. Please try again."
         },
         "bundleMiningWarning": {
             "title": "Warning",
@@ -458,13 +459,13 @@
             "body": "You’re about to send {amount} to"
         },
         "riskFunds": {
-            "title": "Warning: your funds are at risk",
+            "title": "Warning: funds at risk during migration",
             "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
             "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
         },
         "missingBundle": {
-            "title": "Warning: your funds are at risk",
-            "body": "You have funds on spent addresses. But the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but these funds are at risk during migration.",
+            "title": "Warning: funds at risk during migration",
+            "body": "You have funds on spent addresses. But the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
             "learnMore": "Learn more about spent addresses",
             "proceed": "I understand the risk"
         }

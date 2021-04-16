@@ -70,7 +70,7 @@
                     loading = false
                     showAppNotification({
                         type: 'error',
-                        message: locale('error.global.generic'),
+                        message: locale('views.migrate.error'),
                     })
                 })
         } else {
