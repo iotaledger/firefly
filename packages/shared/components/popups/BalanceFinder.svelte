@@ -1,8 +1,7 @@
 <script lang="typescript">
-    import { Button, Spinner, Text } from 'shared/components'
-    import { showAppNotification } from 'shared/lib/notifications'
+    import { Button, Password, Spinner, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import { asyncSyncAccounts, updateAccounts, wallet } from 'shared/lib/wallet'
+    import { asyncSetStrongholdPassword, asyncSyncAccounts, updateAccounts, wallet } from 'shared/lib/wallet'
 
     export let locale
 
@@ -10,19 +9,20 @@
 
     let addressIndex = 0
     let gapIndex = 50
+    let password
+    let error = ''
     let isBusy = false
 
     async function handleFindBalances() {
         try {
+            error = ''
             isBusy = true
+            await asyncSetStrongholdPassword(password)
             const syncedAccounts = await asyncSyncAccounts(addressIndex, gapIndex)
             updateAccounts(syncedAccounts)
             addressIndex += gapIndex
         } catch (err) {
-            showAppNotification({
-                type: 'error',
-                message: locale(err.error),
-            })
+            error = locale(err.error)
         } finally {
             isBusy = false
         }
@@ -39,16 +39,24 @@
     <div class="flex w-full flex-row flex-wrap mb-6 justify-between">
         <Text type="p">{locale('popups.balanceFinder.totalWalletBalance')}</Text>
         <Text type="p" highlighted>{$balanceOverview.balance}</Text>
-        <Text type="p" secondary>{$balanceOverview.balanceFiat}</Text>
+        <Text type="p" secondary classes="mb-6">{$balanceOverview.balanceFiat}</Text>
+        <Text type="p" secondary classes="mb-3">{locale('popups.balanceFinder.typePassword')}</Text>
+        <Password
+            {error}
+            classes="w-full mb-2"
+            bind:value={password}
+            showRevealToggle
+            {locale}
+            placeholder={locale('general.password')}
+            autofocus
+            submitHandler={() => handleFindBalances()}
+            disabled={isBusy} />
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" secondary onClick={handleCancelClick} disabled={isBusy}>{locale('actions.cancel')}</Button>
-        <Button classes="w-full" onClick={handleFindBalances} disabled={isBusy}>
+        <Button classes="w-full" onClick={handleFindBalances} disabled={!password || isBusy}>
             {#if isBusy}
-                <Spinner
-                    busy={true}
-                    message={locale(`actions.searching`)}
-                    classes="justify-center" />
+                <Spinner busy={true} message={locale(`actions.searching`)} classes="justify-center" />
             {:else}{locale(`actions.${addressIndex ? 'searchAgain' : 'searchBalances'}`)}{/if}
         </Button>
     </div>

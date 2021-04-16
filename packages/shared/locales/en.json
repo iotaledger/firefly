@@ -407,7 +407,8 @@
         "balanceFinder": {
             "title": "Balance finder",
             "body": "Perform a more exhaustive search of addresses to find missing balances.",
-            "totalWalletBalance": "Total wallet balance"
+            "totalWalletBalance": "Total wallet balance",
+            "typePassword": "Type your password to allow searching."
         }
     },
     "charts": {
