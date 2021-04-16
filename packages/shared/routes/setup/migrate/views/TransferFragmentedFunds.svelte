@@ -120,7 +120,7 @@
                                 return _transaction
                             })
 
-                            sendMigrationBundle(result.payload.bundleHash).then(() => {
+                            return sendMigrationBundle(result.payload.bundleHash).then(() => {
                                 migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, result.payload.bundleHash]
                             })
                         })
@@ -172,7 +172,7 @@
                                 return _transaction
                             })
 
-                            sendMigrationBundle(result.payload.bundleHash).then(() => {
+                            return sendMigrationBundle(result.payload.bundleHash).then(() => {
                                 if (idx === 0) {
                                     // When the first migration bundle is broadcast, then persist profile
                                     saveProfile($newProfile)
