@@ -178,7 +178,7 @@
         },
         "securingSpentAddresses": {
             "title": "Securing spent addresses...",
-            "body1": "This process will take 10 minutes.",
+            "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
             "body2": "Your computer will run at full capacity, so do something else while you wait for this to complete."
         },
         "transferFragmentedFunds": {
