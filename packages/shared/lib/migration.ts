@@ -460,14 +460,11 @@ export const bundlesWithUnspentAddresses = derived(get(migration).bundles, (_bun
 ))
 
 export const hasAnySpentAddressWithNoBundleHashes = derived(get(migration).bundles, (_bundles) => _bundles.length &&
-    _bundles.some((bundle) => bundle.inputs.some((input) => input.spent && (
-        Array.isArray(input.spentBundleHashes && !input.spentBundleHashes.length) || input.spentBundleHashes === null
-    )
-    ))
+    _bundles.some((bundle) => bundle.inputs.some((input) => input.spent && (Array.isArray(input.spentBundleHashes && !input.spentBundleHashes.length) || input.spentBundleHashes === null))))
 
 export const unselectedInputs = derived([get(migration).data, get(migration).bundles], ([data, bundles]) => {
-        return data.inputs.filter((input) => !bundles.some((bundle) => bundle.inputs.some((bundleInput) => bundleInput.address === input.address)))
-    })
+    return data.inputs.filter((input) => !bundles.some((bundle) => bundle.inputs.some((bundleInput) => bundleInput.address === input.address)))
+})
 
 export const confirmedBundles = derived(get(migration).bundles, (_bundles) => _bundles.filter((bundle) =>
     bundle.selected === true &&
