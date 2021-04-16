@@ -2,7 +2,7 @@ const { notarize } = require('electron-notarize')
 const path = require('path')
 
 exports.default = async () => {
-    /*if (process.platform !== 'darwin') {
+    if (process.platform !== 'darwin') {
         return true
     }
 
@@ -23,6 +23,5 @@ exports.default = async () => {
         appleId: APPLE_ID,
         appleIdPassword: APPLE_ID_PASSWORD,
         ascProvider: 'UG77RJKZHH',
-    })*/
-    return true
+    })
 }
