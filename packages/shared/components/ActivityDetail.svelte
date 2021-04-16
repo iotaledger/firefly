@@ -1,7 +1,6 @@
 <script lang="typescript">
-    import { receiverAddressesFromPayload, sendAddressFromPayload } from 'shared/lib/helpers'
     import { Icon, Text } from 'shared/components'
-    import { getInitials, truncateString } from 'shared/lib/helpers'
+    import { getInitials, receiverAddressesFromPayload, sendAddressFromPayload, truncateString } from 'shared/lib/helpers'
     import type { Payload } from 'shared/lib/typings/message'
     import { formatUnit } from 'shared/lib/units'
     import { setClipboard } from 'shared/lib/utils'
@@ -33,7 +32,7 @@
         : null
 
     function isAccountYours(account) {
-        return $accounts.find(a => a.id === account.id)
+        return $accounts.find((a) => a.id === account.id)
     }
 </script>
 
