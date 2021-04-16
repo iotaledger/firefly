@@ -600,7 +600,14 @@
         "passwordStrength3": "Average",
         "passwordStrength4": "Strong",
         "creatingProfile": "Creating profile, please wait...",
-        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
+        "accountRemoved": "This account is hidden. Unhide it to perform transfers.",
+        "receivingTo": "Receiving to",
+        "sendingFrom": "Sending from",
+        "receivedTo": "Received to",
+        "sentFrom": "Sent from",
+        "receiving": "Receiving",
+        "sending": "Sending"
+
     },
     "dates": {
         "today": "Today",
