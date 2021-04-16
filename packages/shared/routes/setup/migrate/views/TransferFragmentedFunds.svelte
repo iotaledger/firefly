@@ -112,7 +112,6 @@
                         }
 
                         return createMigrationBundle(getInputIndexesForBundle(transaction), 0, false).then((result) => {
-
                             transactions = transactions.map((_transaction) => {
                                 if (_transaction.index === transaction.index) {
                                     return { ..._transaction, bundleHash: result.payload.bundleHash }
@@ -174,12 +173,14 @@
                             })
 
                             sendMigrationBundle(result.payload.bundleHash).then(() => {
-                                // When the first migration bundle is broadcast, then persist profile
-                                saveProfile($newProfile)
-                                setActiveProfile($newProfile.id)
+                                if (idx === 0) {
+                                    // When the first migration bundle is broadcast, then persist profile
+                                    saveProfile($newProfile)
+                                    setActiveProfile($newProfile.id)
 
-                                profileInProgress.set(undefined)
-                                newProfile.set(null)
+                                    profileInProgress.set(undefined)
+                                    newProfile.set(null)
+                                }
 
                                 migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, result.payload.bundleHash]
                             })
