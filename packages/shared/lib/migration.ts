@@ -332,9 +332,7 @@ export const prepareBundles = () => {
     const unspentInputChunks = selectInputsForUnspentAddresses(unspent)
     const spentInputs = spent.filter((input) => input.balance >= MINIMUM_MIGRATION_BALANCE)
 
-    const _shouldMine = (input) => {
-        return (Array.isArray(input.spentBundleHashes && input.spentBundleHashes.length))
-    }
+    const _shouldMine = (input) => (input.spentBundleHashes && input.spentBundleHashes.length > 0)
 
     bundles.set([
         ...spentInputs.map((input) => ({ confirmed: false, miningRuns: 0, migrated: false, selected: true, shouldMine: _shouldMine(input), selectedToMine: true, inputs: [input] })),
