@@ -18,13 +18,15 @@
     let wasMigrated = $didComplete
 
     onMount(() => {
-        // This is the last screen in onboarding for all flows i.e., if you create a new wallet or import stronghold
-        // When this component mounts, ensure that the profile is persisted in the local storage.
-        saveProfile($newProfile)
-        setActiveProfile($newProfile.id)
+        if (!wasMigrated) {
+            // This is the last screen in onboarding for all flows i.e., if you create a new wallet or import stronghold
+            // When this component mounts, ensure that the profile is persisted in the local storage.
+            saveProfile($newProfile)
+            setActiveProfile($newProfile.id)
 
-        profileInProgress.set(undefined)
-        newProfile.set(null)
+            profileInProgress.set(undefined)
+            newProfile.set(null)
+        }
     })
 
     const dispatch = createEventDispatcher()

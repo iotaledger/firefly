@@ -10,8 +10,9 @@
         selectedUnmigratedBundles,
         hasMigratedAnyBundle,
         confirmedBundles,
-        hasMigratedAndConfirmedAllSelectedBundles
+        hasMigratedAndConfirmedAllSelectedBundles,
     } from 'shared/lib/migration'
+    import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
 
     export let locale
     export let mobile
@@ -33,11 +34,30 @@
 
     const unsubscribe = hasMigratedAndConfirmedAllSelectedBundles.subscribe((_hasMigratedAndConfirmedAllSelectedBundles) => {
         fullSuccess = _hasMigratedAndConfirmedAllSelectedBundles
+
+        migrated = _hasMigratedAndConfirmedAllSelectedBundles
+
+        if (_hasMigratedAndConfirmedAllSelectedBundles) {
+            migratingFundsMessage = locale('actions.continue')
+            busy = false
+        }
     })
+
+    let migratedAndUnconfirmedBundles = []
 
     confirmedBundles.subscribe((newConfirmedBundles) => {
         newConfirmedBundles.forEach((bundle) => {
             if (bundle.bundleHash && bundle.confirmed) {
+                const hadMigratedAndUnconfirmedBundles = migratedAndUnconfirmedBundles.length > 0
+                migratedAndUnconfirmedBundles = migratedAndUnconfirmedBundles.filter(
+                    (bundleHash) => bundleHash !== bundle.bundleHash
+                )
+
+                if (hadMigratedAndUnconfirmedBundles && migratedAndUnconfirmedBundles.length === 0) {
+                    migrated = true
+                    busy = false
+                }
+
                 transactions = transactions.map((item) => {
                     if (item.bundleHash === bundle.bundleHash) {
                         return { ...item, status: 2 }
@@ -69,7 +89,7 @@
         // TODO: What happens if this fails too? Do we proceed?
         transactions = transactions.map((item) => {
             if (unmigratedBundleIndexes.includes(item.index)) {
-                return { ...item, status: 1 }
+                return { ...item, status: 1, errorText: null }
             }
 
             return item
@@ -86,34 +106,27 @@
                     .then((acc) => {
                         if (transaction.bundleHash) {
                             return sendMigrationBundle(transaction.bundleHash).then(() => {
-                                if (idx === transactions.length - 1) {
-                                    finish()
-                                }
+                                migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, transaction.bundleHash]
                             })
                         }
 
-                        return createMigrationBundle(getInputIndexesForBundle(transaction), 0, false).then((result) =>
-                            sendMigrationBundle(result.payload.bundleHash).then(() => {
-                                transactions = transactions.map((_transaction, i) => {
-                                    if (i === idx) {
-                                        return { ..._transaction, bundleHash: result.payload.bundleHash }
-                                    }
+                        return createMigrationBundle(getInputIndexesForBundle(transaction), 0, false).then((result) => {
 
-                                    return _transaction
-                                })
-
-                                if (idx === transactions.length - 1) {
-                                    finish()
+                            transactions = transactions.map((_transaction) => {
+                                if (_transaction.index === transaction.index) {
+                                    return { ..._transaction, bundleHash: result.payload.bundleHash }
                                 }
+
+                                return _transaction
                             })
-                        )
+
+                            sendMigrationBundle(result.payload.bundleHash).then(() => {
+                                migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, result.payload.bundleHash]
+                            })
+                        })
                     })
                     .catch((error) => {
                         console.error(error)
-
-                        if (idx === _unmigratedBundles.length - 1) {
-                            finish()
-                        }
 
                         transactions = transactions.map((_transaction, i) => {
                             if (_transaction.index === transaction.index) {
@@ -125,12 +138,6 @@
                     }),
             Promise.resolve([])
         )
-    }
-
-    function finish() {
-        busy = false
-        migrated = true
-        migratingFundsMessage = locale('actions.continue')
     }
 
     onDestroy(unsubscribe)
@@ -149,38 +156,37 @@
                     .then((acc) => {
                         if (transaction.bundleHash) {
                             return sendMigrationBundle(transaction.bundleHash).then(() => {
-                                if (idx === transactions.length - 1) {
-                                    finish()
-                                }
+                                migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, transaction.bundleHash]
                             })
                         }
 
-                        return createMigrationBundle(getInputIndexesForBundle(transaction), 0, false).then((result) =>
-                            sendMigrationBundle(result.payload.bundleHash).then(() => {
-                                transactions = transactions.map((_transaction, i) => {
-                                    if (i === idx) {
-                                        return { ..._transaction, bundleHash: result.payload.bundleHash }
-                                    }
-
-                                    return _transaction
-                                })
-
-                                if (idx === transactions.length - 1) {
-                                    finish()
+                        return createMigrationBundle(getInputIndexesForBundle(transaction), 0, false).then((result) => {
+                            transactions = transactions.map((_transaction, i) => {
+                                if (_transaction.index === transaction.index) {
+                                    return { ..._transaction, bundleHash: result.payload.bundleHash }
                                 }
+
+                                return _transaction
                             })
-                        )
+
+                            sendMigrationBundle(result.payload.bundleHash).then(() => {
+                                // When the first migration bundle is broadcast, then persist profile
+                                saveProfile($newProfile)
+                                setActiveProfile($newProfile.id)
+
+                                profileInProgress.set(undefined)
+                                newProfile.set(null)
+
+                                migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, result.payload.bundleHash]
+                            })
+                        })
                     })
 
                     .catch((error) => {
                         console.error(error)
 
-                        if (idx === transactions.length - 1) {
-                            finish()
-                        }
-
                         transactions = transactions.map((_transaction, i) => {
-                            if (i === idx) {
+                            if (_transaction.index === transaction.index) {
                                 return { ..._transaction, status: -1, errorText: 'Migration failed' }
                             }
 

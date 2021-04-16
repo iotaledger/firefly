@@ -13,6 +13,7 @@
         confirmedBundles,
     } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
+    import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
 
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
@@ -56,7 +57,14 @@
             createMigrationBundle(getInputIndexesForBundle($bundles[0]), 0, false)
                 .then((response) => {
                     singleMigrationBundleHash = response.payload.bundleHash
-                    return sendMigrationBundle(response.payload.bundleHash)
+                    return sendMigrationBundle(response.payload.bundleHash).then(() => {
+                        // Save profile
+                        saveProfile($newProfile)
+                        setActiveProfile($newProfile.id)
+
+                        profileInProgress.set(undefined)
+                        newProfile.set(null)
+                    })
                 })
                 .catch(() => {
                     loading = false

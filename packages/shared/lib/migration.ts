@@ -171,6 +171,7 @@ export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAG
                 reject(error)
             },
         })
+
     })
 }
 
