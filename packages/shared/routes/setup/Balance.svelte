@@ -10,6 +10,7 @@
         bundlesWithUnspentAddresses,
         resetMigrationState,
         unselectedInputs,
+        spentAddressesWithNoBundleHashes
     } from 'shared/lib/migration'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { formatUnit } from 'shared/lib/units'
@@ -109,6 +110,7 @@
     const dispatch = createEventDispatcher()
 
     function handleContinueClick() {
+        const spentAddressesWithNoBundleHashesTotalBalance = $spentAddressesWithNoBundleHashes.reduce((acc, input) => acc + input.balance, 0)
         if ($hasAnySpentAddressWithNoBundleHashes) {
             openPopup({
                 type: 'missingBundle',
@@ -117,6 +119,7 @@
                         closePopup()
                         dispatch('next')
                     },
+                    balance: `${formatUnit(spentAddressesWithNoBundleHashesTotalBalance)} (${getFiatBalance(spentAddressesWithNoBundleHashesTotalBalance).toUpperCase()})`
                 },
             })
         } else {

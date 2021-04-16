@@ -332,8 +332,12 @@ export const prepareBundles = () => {
     const unspentInputChunks = selectInputsForUnspentAddresses(unspent)
     const spentInputs = spent.filter((input) => input.balance >= MINIMUM_MIGRATION_BALANCE)
 
+    const _shouldMine = (input) => {
+        return (Array.isArray(input.spentBundleHashes && input.spentBundleHashes.length))
+    }
+
     bundles.set([
-        ...spentInputs.map((input) => ({ confirmed: false, miningRuns: 0, migrated: false, selected: true, shouldMine: true, selectedToMine: true, inputs: [input] })),
+        ...spentInputs.map((input) => ({ confirmed: false, miningRuns: 0, migrated: false, selected: true, shouldMine: _shouldMine(input), selectedToMine: true, inputs: [input] })),
         ...unspentInputChunks.map((inputs) => ({ confirmed: false, miningRuns: 0, migrated: false, selected: true, shouldMine: false, selectedToMine: false, inputs }))
     ].map((_, index) => ({ ..._, index })))
 };
@@ -461,6 +465,9 @@ export const bundlesWithUnspentAddresses = derived(get(migration).bundles, (_bun
 
 export const hasAnySpentAddressWithNoBundleHashes = derived(get(migration).bundles, (_bundles) => _bundles.length &&
     _bundles.some((bundle) => bundle.inputs.some((input) => input.spent && (Array.isArray(input.spentBundleHashes && !input.spentBundleHashes.length) || input.spentBundleHashes === null))))
+
+
+export const spentAddressesWithNoBundleHashes = derived([get(migration).data, get(migration).bundles], ([data]) => data.inputs.filter((input) => input.spent && input.balance >= MINIMUM_MIGRATION_BALANCE && (Array.isArray(input.spentBundleHashes && !input.spentBundleHashes.length) || input.spentBundleHashes === null)))
 
 export const unselectedInputs = derived([get(migration).data, get(migration).bundles], ([data, bundles]) => {
     return data.inputs.filter((input) => !bundles.some((bundle) => bundle.inputs.some((bundleInput) => bundleInput.address === input.address)))
