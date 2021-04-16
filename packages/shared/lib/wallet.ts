@@ -302,11 +302,11 @@ export const requestMnemonic = async () => {
  *  
  * @returns {Promise<Event<string>>}
  */
-export const asyncGetLegacySeedChecksum = (seed: string): Promise<Event<string>> => {
-    return new Promise<Event<string>>((resolve, reject) => {
+export const asyncGetLegacySeedChecksum = (seed: string): Promise<string> => {
+    return new Promise<string>((resolve, reject) => {
         api.getLegacySeedChecksum(seed, {
             onSuccess(response) {
-                resolve(response)
+                resolve(response.payload)
             },
             onError(err) {
                 reject(err)

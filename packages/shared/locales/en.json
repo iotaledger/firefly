@@ -112,7 +112,8 @@
             "body2": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
             "body3": "Enter your seed or recovery phrase",
             "seedDetected": "81 character seed detected",
-            "phraseDetected": "24 word recovery phrase detected"
+            "phraseDetected": "24 word recovery phrase detected",
+            "checksum": "Checksum"
         },
         "importFromFile": {
             "title": "Restore your wallet using a backup file",

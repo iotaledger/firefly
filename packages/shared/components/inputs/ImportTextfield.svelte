@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Text } from 'shared/components'
     import { debounce } from 'shared/lib/utils'
-    import { asyncVerifyMnemonic } from 'shared/lib/wallet'
+    import { asyncGetLegacySeedChecksum, asyncVerifyMnemonic } from 'shared/lib/wallet'
     import { english } from 'shared/lib/wordlists/english'
 
     export let value = undefined
@@ -12,6 +12,7 @@
     let statusMessage = ''
     let content = ''
     let error = false
+    let seedChecksum = ''
 
     const isSeed = (value: string): string | undefined => {
         if (value.length !== 81) {
@@ -57,6 +58,7 @@
         value = ''
         statusMessage = ''
         error = false
+        seedChecksum = ''
 
         content = content
             .replace(/\r/g, '')
@@ -75,6 +77,7 @@
                 } else {
                     statusMessage = locale('views.importFromText.seedDetected')
                     value = trimmedContent
+                    seedChecksum = await asyncGetLegacySeedChecksum(value)
                 }
             } else {
                 const mnemonicValidations = isMnemonic(words)
@@ -112,5 +115,13 @@
         placeholder=""
         spellcheck={false}
         autofocus />
-    <Text type="p" secondary {error}>{statusMessage}&nbsp;</Text>
+    <div class="flex flex-row items-start justify-between">
+        <Text type="p" secondary {error}>{statusMessage}&nbsp;</Text>
+        {#if seedChecksum}
+            <div class="flex flex-row items-center ml-2">
+                <Text type="p" secondary classes="mr-2">{locale('views.importFromText.checksum')}</Text>
+                <Text type="p" highlighted smaller>{seedChecksum}</Text>
+            </div>
+        {/if}
+    </div>
 </div>
