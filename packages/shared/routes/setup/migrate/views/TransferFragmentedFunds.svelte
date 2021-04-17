@@ -64,7 +64,7 @@
 
                 if (
                     hadMigratedAndUnconfirmedBundles &&
-                    migratedAndUnconfirmedBundles.length === 0 && 
+                    migratedAndUnconfirmedBundles.length === 0 &&
                     // // Do not update if there are some migrations in progress of broadcast
                     !transactions.some((transaction) => transaction.status === 1)
                 ) {
@@ -141,7 +141,14 @@
                             return _transaction
                         })
 
-                        if (transactions.length && transactions.every((transaction) => transaction.status === -1)) {
+                        if (
+                            idx === _unmigratedBundles.length - 1 &&
+                            _unmigratedBundles.every((bundle) => {
+                                const tx = transactions.find((tx) => tx.index === bundle.index)
+
+                                return tx.status === -1
+                            })
+                        ) {
                             migrated = true
                             busy = false
                         }
@@ -205,7 +212,12 @@
                             return _transaction
                         })
 
-                        if (transactions.length && transactions.every((transaction) => transaction.status === -1)) {
+                        if (
+                            idx === transactions.length - 1 &&
+                            transactions.every((tx) => {
+                                return tx.status === -1
+                            })
+                        ) {
                             migrated = true
                             busy = false
                         }
