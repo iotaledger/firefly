@@ -1466,9 +1466,9 @@ dependencies = [
 
 [[package]]
 name = "httparse"
-version = "1.3.6"
+version = "1.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bc35c995b9d93ec174cf9a27d425c7892722101e14993cd227fdb51d70cf9589"
+checksum = "4a1ce40d6fc9764887c2fdc7305c3dcc429ba11ff981c1509416afd5697e4437"
 
 [[package]]
 name = "httpdate"
@@ -1557,7 +1557,7 @@ dependencies = [
 [[package]]
 name = "iota-bundle-miner"
 version = "0.1.0-alpha.0"
-source = "git+https://github.com/iotaledger/iota.rs?rev=b6b97e4994f799dbc5fe572118d915d9f9ce6756#b6b97e4994f799dbc5fe572118d915d9f9ce6756"
+source = "git+https://github.com/iotaledger/iota.rs?rev=38e3f187b8716c01352b7ed4e8c44573bea40331#38e3f187b8716c01352b7ed4e8c44573bea40331"
 dependencies = [
  "bee-crypto 0.2.1-alpha",
  "bee-signing",
@@ -1574,7 +1574,7 @@ dependencies = [
 [[package]]
 name = "iota-client"
 version = "0.5.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?rev=b6b97e4994f799dbc5fe572118d915d9f9ce6756#b6b97e4994f799dbc5fe572118d915d9f9ce6756"
+source = "git+https://github.com/iotaledger/iota.rs?rev=38e3f187b8716c01352b7ed4e8c44573bea40331#38e3f187b8716c01352b7ed4e8c44573bea40331"
 dependencies = [
  "bee-common",
  "bee-common-derive",
@@ -1687,14 +1687,14 @@ dependencies = [
 [[package]]
 name = "iota-core"
 version = "0.2.0-alpha.3"
-source = "git+https://github.com/iotaledger/iota.rs?rev=b6b97e4994f799dbc5fe572118d915d9f9ce6756#b6b97e4994f799dbc5fe572118d915d9f9ce6756"
+source = "git+https://github.com/iotaledger/iota.rs?rev=38e3f187b8716c01352b7ed4e8c44573bea40331#38e3f187b8716c01352b7ed4e8c44573bea40331"
 dependencies = [
  "bee-crypto 0.2.1-alpha",
  "bee-signing",
  "bee-ternary 0.4.2-alpha",
  "bee-transaction 0.1.0-alpha (git+https://github.com/Alex6323/bee-p.git?rev=02965e78a5cd43d0fb773771470ab3d891066562)",
  "iota-bundle-miner",
- "iota-client 0.5.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?rev=b6b97e4994f799dbc5fe572118d915d9f9ce6756)",
+ "iota-client 0.5.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?rev=38e3f187b8716c01352b7ed4e8c44573bea40331)",
 ]
 
 [[package]]
@@ -1823,7 +1823,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=migration#09183ce42413ea34d439d97e3e3689d12c9a7006"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=migration#cc6878c38e9df2147ee36f50239e1b656e25e7e2"
 dependencies = [
  "async-trait",
  "backtrace",
@@ -1833,7 +1833,7 @@ dependencies = [
  "futures",
  "getset",
  "hex",
- "iota-core 0.2.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?rev=b6b97e4994f799dbc5fe572118d915d9f9ce6756)",
+ "iota-core 0.2.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?rev=38e3f187b8716c01352b7ed4e8c44573bea40331)",
  "iota-core 0.2.0-alpha.3 (git+https://github.com/iotaledger/iota.rs?rev=f84c97ddccb4a4323d300b32cc6028ff9eabe98b)",
  "iota-crypto 0.4.2 (git+https://github.com/iotaledger/crypto.rs?branch=dev)",
  "iota-stronghold",
@@ -3849,9 +3849,9 @@ dependencies = [
 
 [[package]]
 name = "vcpkg"
-version = "0.2.11"
+version = "0.2.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b00bca6106a5e23f3eee943593759b7fcddb00554332e856d990c893966879fb"
+checksum = "cbdbff6266a24120518560b5dc983096efb98462e51d0d68169895b237be3e5d"
 
 [[package]]
 name = "vec_map"
