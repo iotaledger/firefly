@@ -227,6 +227,10 @@ export const parseCurrency = (valueString: string, currency: string | undefined 
 }
 
 export const formatCurrency = (value: number, currency: string | undefined = undefined, minDecimals: number | undefined = undefined, maxDecimals: number | undefined = undefined, grouped: boolean = false): string => {
+    if (Number.isNaN(value)) {
+        return ''
+    }
+
     const appLanguage = get(appSettings).language
 
     if (!currency) {
