@@ -233,7 +233,7 @@
             <Balance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
         </Route>
         <Route route={AppRoute.Migrate}>
-            <Migrate on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
+            <Migrate on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} {goto} />
         </Route>
         <Route route={AppRoute.Congratulations}>
             <Congratulations on:next={routerNext} mobile={$mobile} locale={$_} {goto} />

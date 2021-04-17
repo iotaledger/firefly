@@ -4,6 +4,7 @@
     import { Electron } from 'shared/lib/electron'
     import { getTrimmedLength, validateFilenameChars } from 'shared/lib/helpers'
     import { showAppNotification } from 'shared/lib/notifications'
+    import { initialiseMigrationListeners } from 'shared/lib/migration'
     import {
         cleanupInProgressProfiles,
         createProfile,
@@ -75,6 +76,8 @@
 
                     const userDataPath = await Electron.getUserDataPath()
                     initialise($newProfile.id, getStoragePath(userDataPath, $newProfile.name))
+
+                    initialiseMigrationListeners()
                 }
 
                 dispatch('next')

@@ -3,26 +3,28 @@ import { generateRandomId } from 'shared/lib/utils';
 import { get, writable } from 'svelte/store';
 import { Electron } from './electron';
 
-const NOTIFICATION_TIMEOUT_DEFAULT = 5000;
-export const NOTIFICATION_TIMEOUT_NEVER = -1;
+const NOTIFICATION_TIMEOUT_DEFAULT = 5000
+export const NOTIFICATION_TIMEOUT_NEVER = -1
+
+export type NotificationAction = {
+    label: string
+    isPrimary?: boolean
+    callback?: (notificationData: NotificationData, actionIndex: number) => void
+}
 
 export type NotificationData = {
     type: 'info' | 'warning' | 'error'
     message: string
     progress?: number
     subMessage?: string
-    actions?: {
-        label: string
-        isPrimary?: boolean;
-        callback?: (notificationData: NotificationData, actionIndex: number) => void
-    }[],
+    actions?: NotificationAction[]
     id?: string
     ts?: number
     timeout?: number
     contextData?: any
 }
 
-export const displayNotifications = writable<Array<NotificationData>>([]);
+export const displayNotifications = writable<Array<NotificationData>>([])
 
 export function showSystemNotification(notificationData: NotificationData): string {
     return showNotification(notificationData, true)
@@ -34,11 +36,11 @@ export function showAppNotification(notificationData: NotificationData): string 
 
 export function showNotification(notificationData: NotificationData, showSystemNotification: boolean): string {
     notificationData.id = generateRandomId()
-    notificationData.ts = Date.now();
-    notificationData.actions = notificationData.actions ?? [];
-    notificationData.timeout = notificationData.timeout ?? NOTIFICATION_TIMEOUT_DEFAULT;
+    notificationData.ts = Date.now()
+    notificationData.actions = notificationData.actions ?? []
+    notificationData.timeout = notificationData.timeout ?? NOTIFICATION_TIMEOUT_DEFAULT
     if (notificationData.progress !== undefined) {
-        notificationData.progress = Math.min(Math.max(notificationData.progress, 0), 100);
+        notificationData.progress = Math.min(Math.max(notificationData.progress, 0), 100)
     }
 
     if (showSystemNotification &&
@@ -59,15 +61,15 @@ export function showNotification(notificationData: NotificationData, showSystemN
     }
 
     if (notificationData.timeout !== NOTIFICATION_TIMEOUT_NEVER) {
-        setTimeout(() => removeDisplayNotification(notificationData.id), notificationData.timeout);
+        setTimeout(() => removeDisplayNotification(notificationData.id), notificationData.timeout)
     }
 
-    return notificationData.id;
+    return notificationData.id
 }
 
 export function removeDisplayNotification(id: string): void {
     displayNotifications.update((_currentNotifications) => {
-        const idx = _currentNotifications.findIndex(n => n.id === id)
+        const idx = _currentNotifications.findIndex((n) => n.id === id)
         if (idx >= 0) {
             _currentNotifications.splice(idx, 1)
         }
@@ -77,7 +79,7 @@ export function removeDisplayNotification(id: string): void {
 
 export function updateDisplayNotificationProgress(id: string, progress: number): void {
     displayNotifications.update((_currentNotifications) => {
-        const notification = _currentNotifications.find(n => n.id === id)
+        const notification = _currentNotifications.find((n) => n.id === id)
         if (notification) {
             notification.progress = Math.min(Math.max(progress, 0), 100)
         }
@@ -87,7 +89,7 @@ export function updateDisplayNotificationProgress(id: string, progress: number):
 
 export function updateDisplayNotification(id: string, updateData: NotificationData): void {
     displayNotifications.update((_currentNotifications) => {
-        const notification = _currentNotifications.find(n => n.id === id)
+        const notification = _currentNotifications.find((n) => n.id === id)
         if (notification) {
             notification.message = updateData.message;
             notification.subMessage = updateData.subMessage;

@@ -10,11 +10,22 @@ import { activeProfile, isStrongholdLocked, updateProfile } from 'shared/lib/pro
 import type { Account, Account as BaseAccount, AccountToCreate, Balance, SyncedAccount } from 'shared/lib/typings/account'
 import type { Address } from 'shared/lib/typings/address'
 import type { Actor } from 'shared/lib/typings/bridge'
-import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, ErrorEventPayload, Event, ReattachmentEventPayload, TransactionEventPayload, TransferProgressEventPayload, TransferProgressEventType } from 'shared/lib/typings/events'
+import type {
+    BalanceChangeEventPayload,
+    ConfirmationStateChangeEventPayload,
+    ErrorEventPayload,
+    Event,
+    ReattachmentEventPayload,
+    TransactionEventPayload,
+    TransferProgressEventPayload,
+    TransferProgressEventType,
+    MigrationProgressEventPayload
+} from 'shared/lib/typings/events'
 import type { Message, Payload } from 'shared/lib/typings/message'
 import { formatUnit } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
 import type { ClientOptions } from './typings/client'
+import type { MigrationData, MigrationBundle, SendMigrationBundleResponse } from 'shared/lib/typings/migration'
 import type { Duration, StrongholdStatus } from './typings/wallet'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
@@ -42,6 +53,7 @@ export interface AccountMessage extends Message {
     account: number;
     internal: boolean;
 }
+
 
 interface ActorState {
     [id: string]: Actor
@@ -175,12 +187,42 @@ export const api: {
     setClientOptions(clientOptions: ClientOptions, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     setStrongholdPasswordClearInterval(interval: Duration, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
 
+    // Legacy seed APIs
+    getLegacySeedChecksum(seed: string, callbacks: { onSuccess: (response: Event<string>) => void, onError: (err: ErrorEventPayload) => void })
+
+
     onStrongholdStatusChange(callbacks: { onSuccess: (response: Event<StrongholdStatus>) => void, onError: (err: ErrorEventPayload) => void })
     onNewTransaction(callbacks: { onSuccess: (response: Event<TransactionEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
     onReattachment(callbacks: { onSuccess: (response: Event<ReattachmentEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
     onConfirmationStateChange(callbacks: { onSuccess: (response: Event<ConfirmationStateChangeEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
     onBalanceChange(callbacks: { onSuccess: (response: Event<BalanceChangeEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
-    onTransferProgress(callbacks: { onSuccess: (response: Event<TransferProgressEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
+    onTransferProgress(callbacks: { onSuccess: (response: Event<TransferProgressEventPayload>) => void, onError: (err: ErrorEventPayload) => void }),
+    onMigrationProgress(callbacks: { onSuccess: (response: Event<MigrationProgressEventPayload>) => void, onError: (err: ErrorEventPayload) => void }),
+
+    // Migration
+    getMigrationData(
+        seed: string,
+        nodes: string[],
+        securityLevel: number,
+        initialAddressIndex: number,
+        permanode: string | undefined,
+        callbacks: { onSuccess: (response: Event<MigrationData>) => void, onError: (err: ErrorEventPayload) => void }
+    ),
+    createMigrationBundle(
+        seed: string,
+        inputAddressIndexes: number[],
+        mine: boolean,
+        timeoutSeconds: number,
+        offset: number,
+        logFilePath: string,
+        callbacks: { onSuccess: (response: Event<MigrationBundle>) => void, onError: (err: ErrorEventPayload) => void }
+    ),
+    sendMigrationBundle(
+        node: string[],
+        bundleHash: string,
+        mwm: number,
+        callbacks: { onSuccess: (response: Event<SendMigrationBundleResponse>) => void, onError: (err: ErrorEventPayload) => void }
+    ),
 } = window['__WALLET_API__']
 
 export const getStoragePath = (appPath: string, profileName: string): string => {
@@ -249,6 +291,28 @@ export const requestMnemonic = async () => {
     let recoveryPhrase = await generateRecoveryPhrase()
     mnemonic.set(recoveryPhrase)
     return recoveryPhrase
+}
+
+/**
+ * Get legacy seed checksum
+ * 
+ * @method asyncGetLegacySeedChecksum
+ * 
+ * @param {string} seed
+ *  
+ * @returns {Promise<Event<string>>}
+ */
+export const asyncGetLegacySeedChecksum = (seed: string): Promise<string> => {
+    return new Promise<string>((resolve, reject) => {
+        api.getLegacySeedChecksum(seed, {
+            onSuccess(response) {
+                resolve(response.payload)
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
 }
 
 export const asyncSetStrongholdPassword = (password) => {
@@ -408,29 +472,41 @@ export const initialiseListeners = () => {
             const account = get(accounts).find((account) => account.id === response.payload.accountId)
             const message = response.payload.message
 
-            const essence = message.payload.data.essence
+            if (message.payload.type === 'Transaction') {
+                const essence = message.payload.data.essence
 
-            if (!essence.data.internal) {
-                const { balanceOverview } = get(wallet);
-                const overview = get(balanceOverview);
+                if (!essence.data.internal) {
+                    const { balanceOverview } = get(wallet);
+                    const overview = get(balanceOverview);
 
-                const incoming = essence.data.incoming ? overview.incomingRaw + essence.data.value : overview.incomingRaw;
-                const outgoing = essence.data.incoming ? overview.outgoingRaw : overview.outgoingRaw + essence.data.value;
+                    const incoming = essence.data.incoming ? overview.incomingRaw + essence.data.value : overview.incomingRaw;
+                    const outgoing = essence.data.incoming ? overview.outgoingRaw : overview.outgoingRaw + essence.data.value;
 
-                updateBalanceOverview(
-                    overview.balanceRaw,
-                    incoming,
-                    outgoing
-                );
+                    updateBalanceOverview(
+                        overview.balanceRaw,
+                        incoming,
+                        outgoing
+                    );
+                }
+
+                if (!get(isSyncing)) {
+                    // Update account with new message
+                    saveNewMessage(response.payload.accountId, response.payload.message);
+
+                    const notificationMessage = localize('notifications.valueTx')
+                        .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
+                        .replace('{{account}}', account.alias);
+
+                    showSystemNotification({ type: "info", message: notificationMessage, contextData: { type: "valueTx", accountId: account.id } });
+                }
+            } else if (message.payload.type === 'Milestone') {
+                // Update account with new message
+                saveNewMessage(response.payload.accountId, response.payload.message);
+                processMigratedTransactions(response.payload.accountId, [response.payload.message],
+
+                    // New transaction will only emit an event for fluid migrations
+                    [])
             }
-
-            saveNewMessage(response.payload.accountId, response.payload.message);
-
-            const notificationMessage = localize('notifications.valueTx')
-                .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
-                .replace('{{account}}', account.alias);
-
-            showSystemNotification({ type: "info", message: notificationMessage, contextData: { type: "valueTx", accountId: account.id } });
         },
         onError(error) {
             console.error(error)
@@ -444,88 +520,95 @@ export const initialiseListeners = () => {
         onSuccess(response) {
             const accounts = get(wallet).accounts
             const message = response.payload.message
-            const confirmed = response.payload.confirmed;
-            const essence = message.payload.data.essence
 
-            let account1
-            let account2
+            if (message.payload.type === 'Transaction') {
+                const confirmed = response.payload.confirmed;
+                const essence = message.payload.data.essence
 
-            const { internalTransfersInProgress } = get(wallet)
-            const transfers = get(internalTransfersInProgress)
+                let account1
+                let account2
 
-            // Are we tracking an internal transfer for this message id
-            if (transfers[message.id]) {
-                account1 = get(accounts).find((account) => account.id === transfers[message.id].from)
-                account2 = get(accounts).find((account) => account.id === transfers[message.id].to)
-                internalTransfersInProgress.update((transfers) => {
-                    delete transfers[message.id]
-                    return transfers
-                })
-            } else {
-                account1 = get(accounts).find((account) => account.id === response.payload.accountId)
-            }
+                const { internalTransfersInProgress } = get(wallet)
+                const transfers = get(internalTransfersInProgress)
 
-            // If this is a confirmation of a regular transfer update the balance overview
-            if (confirmed && !essence.data.internal) {
-                const { balanceOverview } = get(wallet);
-                const overview = get(balanceOverview);
+                // Are we tracking an internal transfer for this message id
+                if (transfers[message.id]) {
+                    account1 = get(accounts).find((account) => account.id === transfers[message.id].from)
+                    account2 = get(accounts).find((account) => account.id === transfers[message.id].to)
+                    internalTransfersInProgress.update((transfers) => {
+                        delete transfers[message.id]
+                        return transfers
+                    })
+                } else {
+                    account1 = get(accounts).find((account) => account.id === response.payload.accountId)
+                }
 
-                const incoming = essence.data.incoming ? overview.incomingRaw + essence.data.value : overview.incomingRaw;
-                const outgoing = essence.data.incoming ? overview.outgoingRaw : overview.outgoingRaw + essence.data.value;
+                // If this is a confirmation of a regular transfer update the balance overview
+                if (confirmed && !essence.data.internal) {
+                    const { balanceOverview } = get(wallet);
+                    const overview = get(balanceOverview);
 
-                updateBalanceOverview(
-                    overview.balanceRaw,
-                    incoming,
-                    outgoing
-                );
-            }
+                    const incoming = essence.data.incoming ? overview.incomingRaw + essence.data.value : overview.incomingRaw;
+                    const outgoing = essence.data.incoming ? overview.outgoingRaw : overview.outgoingRaw + essence.data.value;
 
-            // Update the confirmation state of all messages with this id
-            const confirmationChanged = updateAllMessagesState(accounts, message.id, response.payload.confirmed)
+                    updateBalanceOverview(
+                        overview.balanceRaw,
+                        incoming,
+                        outgoing
+                    );
+                }
 
-            // If the state has changed then display a notification
-            if (confirmationChanged) {
-                const messageKey = confirmed ? 'confirmed' : 'failed'
+                // Update the confirmation state of all messages with this id
+                const confirmationChanged = updateAllMessagesState(accounts, message.id, response.payload.confirmed)
 
-                const _notify = (accountTo: string | null = null) => {
-                    let notificationMessage
+                // If the state has changed then display a notification
+                if (confirmationChanged) {
+                    const messageKey = confirmed ? 'confirmed' : 'failed'
 
-                    if (accountTo) {
-                        notificationMessage = localize(`notifications.${messageKey}Internal`)
-                            .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
-                            .replace('{{senderAccount}}', account1.alias)
-                            .replace('{{receiverAccount}}', accountTo)
-                    } else {
-                        if (essence.data.internal && confirmed) {
-                            // If this is a confirmed internal message but we don't
-                            // have the account info it is most likely that someone logged
-                            // out before an internal transfer completed so the internalTransfersInProgress
-                            // was wiped, display the anonymous account message instead
-                            notificationMessage = localize(`notifications.confirmedInternalNoAccounts`)
-                                .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
-                        } else {
-                            notificationMessage = localize(`notifications.${messageKey}`)
-                                .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
-                                .replace('{{account}}', account1.alias)
+                    const _notify = (accountTo: string | null = null) => {
+                        let notificationMessage
+
+                        if (message.payload.type === 'Transaction') {
+                            if (accountTo) {
+                                notificationMessage = localize(`notifications.${messageKey}Internal`)
+                                    .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
+                                    .replace('{{senderAccount}}', account1.alias)
+                                    .replace('{{receiverAccount}}', accountTo)
+                            } else {
+                                if (essence.data.internal && confirmed) {
+                                    // If this is a confirmed internal message but we don't
+                                    // have the account info it is most likely that someone logged
+                                    // out before an internal transfer completed so the internalTransfersInProgress
+                                    // was wiped, display the anonymous account message instead
+                                    notificationMessage = localize(`notifications.confirmedInternalNoAccounts`)
+                                        .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
+                                } else {
+                                    notificationMessage = localize(`notifications.${messageKey}`)
+                                        .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
+                                        .replace('{{account}}', account1.alias)
+                                }
+                            }
+
+                            showSystemNotification({ type: "info", message: notificationMessage, contextData: { type: messageKey, accountId: account1.id } });
                         }
                     }
 
-                    showSystemNotification({ type: "info", message: notificationMessage, contextData: { type: messageKey, accountId: account1.id } });
-                }
-
-                // If this event is emitted because a message failed, then this message will only exist on the sender account
-                // Therefore, show the notification (no need to group).
-                if (!confirmed) {
-                    _notify()
-                } else {
-                    // If we have 2 accounts this was an internal transfer
-                    if (account1 && account2) {
-                        _notify(account2.alias);
-                    } else {
+                    // If this event is emitted because a message failed, then this message will only exist on the sender account
+                    // Therefore, show the notification (no need to group).
+                    if (!confirmed) {
                         _notify()
+                    } else {
+                        // If we have 2 accounts this was an internal transfer
+                        if (account1 && account2) {
+                            _notify(account2.alias);
+                        } else {
+                            _notify()
+                        }
                     }
                 }
             }
+
+
         },
         onError(error) {
             console.error(error)
@@ -537,7 +620,7 @@ export const initialiseListeners = () => {
      */
     api.onBalanceChange({
         onSuccess(response) {
-            const { payload: { accountId, address, balanceChange } } = response;
+            const { payload: { accountId, address, balanceChange, messageId } } = response;
 
             updateAccountAfterBalanceChange(accountId, address, balanceChange.received, balanceChange.spent)
 
@@ -547,6 +630,15 @@ export const initialiseListeners = () => {
             const balance = overview.balanceRaw - balanceChange.spent + balanceChange.received
 
             updateBalanceOverview(balance, overview.incomingRaw, overview.outgoingRaw);
+
+            // Migration
+            if (messageId === '0'.repeat(64)) {
+                updateProfile(
+                    'migratedTransactions',
+                    []
+                )
+            }
+
         },
         onError(error) {
             console.error(error)
@@ -997,12 +1089,13 @@ export const getAccountsBalanceHistory = (accounts: WalletAccount[], priceData: 
             var trackedBalance = account.rawIotaBalance;
             let accountBalanceVariations = [{ balance: trackedBalance, timestamp: new Date().toString() }]
             messages.forEach((message) => {
-                const essence = message.payload.data.essence.data;
+                const essence = message.payload.type === 'Transaction' &&
+                    message.payload.data.essence.data
 
-                if (essence.incoming) {
-                    trackedBalance -= essence.value;
+                if (essence && essence.incoming) {
+                    trackedBalance -= essence.value || 0;
                 } else {
-                    trackedBalance += essence.value;
+                    trackedBalance += essence.value || 0;
                 }
                 accountBalanceVariations.push({ balance: trackedBalance, timestamp: message.timestamp })
             })
@@ -1082,6 +1175,10 @@ export function syncAccounts(showConfirmation, addressIndex?: number, gapLimit?:
     api.syncAccounts(addressIndex, gapLimit, {
         onSuccess(syncAccountsResponse) {
             const syncedAccounts = syncAccountsResponse.payload
+
+            const firstAccount = syncedAccounts.find(account => account.index === 0)
+
+            processMigratedTransactions(firstAccount.id, firstAccount.messages, firstAccount.addresses)
 
             updateAccounts(syncedAccounts)
 
@@ -1165,6 +1262,50 @@ export const prepareAccountInfo = (
     })
 }
 
+export const processMigratedTransactions = (accountId: string, messages: Message[], addresses: Address[]): void => {
+    const accounts = get(wallet).accounts
+
+    messages.forEach((message: Message) => {
+        if (message.payload.type === 'Milestone') {
+            const account = get(accounts).find((account) => account.id === accountId);
+
+            // Only check migrated messages for first account as the migrated messages are sent there
+            if (account && account.index === 0) {
+                const _activeProfile = get(activeProfile)
+
+                if (_activeProfile.migratedTransactions && _activeProfile.migratedTransactions.length) {
+                    const funds = message.payload.data.essence.receipt.data.funds;
+
+                    const tailTransactionHashes = funds.map((fund) => fund.tailTransactionHash)
+
+                    const updatedMigratedTransactions = _activeProfile.migratedTransactions.filter((transaction) => !tailTransactionHashes.includes(transaction.tailTransactionHash))
+
+                    updateProfile(
+                        'migratedTransactions',
+                        updatedMigratedTransactions
+                    )
+                }
+            }
+        }
+    })
+
+    const _activeProfile = get(activeProfile)
+
+    if (_activeProfile.migratedTransactions && _activeProfile.migratedTransactions.length) {
+        // For pre-snapshot migrations, there will be no messages
+        addresses.forEach((address) => {
+            const outputs = address.outputs;
+
+            if (outputs.some((output) => output.messageId === '0'.repeat(64))) {
+                updateProfile(
+                    'migratedTransactions',
+                    []
+                )
+            }
+        })
+    }
+
+}
 export const buildAccountNetworkSettings = () => {
     let activeProfileSettings = get(activeProfile)?.settings
 
@@ -1329,13 +1470,28 @@ export const updateAccountNetworkSettings = async (automaticNodeSelection, inclu
 export const isSelfTransaction = (payload: Payload, account: WalletAccount): boolean => {
     const accountAddresses = account?.addresses?.map(add => add.address) ?? []
     if (payload && accountAddresses.length) {
-        const senderAddress: string =
-            payload?.data?.essence?.data?.inputs?.find((input) => /utxo/i.test(input?.type))?.data?.metadata?.address ?? null
+        const getSenderAddress = () => {
+            if (payload.type === 'Transaction') {
+                return payload?.data?.essence?.data?.inputs?.find((input) => /utxo/i.test(input?.type))?.data?.metadata?.address ?? null
+            }
 
-        const receiverAddresses: string[] =
-            payload?.data?.essence?.data?.outputs
-                ?.filter((output) => output?.data?.remainder === false)
-                ?.map((output) => output?.data?.address) ?? []
+            return null
+        }
+
+        const getReceiverAddress = () => {
+            if (payload.type === 'Transaction') {
+                return payload?.data?.essence?.data?.outputs
+                    ?.filter((output) => output?.data?.remainder === false)
+                    ?.map((output) => output?.data?.address) ?? []
+            }
+
+            return null;
+        }
+
+        const senderAddress: string = getSenderAddress()
+
+        const receiverAddresses: string[] = getReceiverAddress()
+
         const transactionAddresses = [senderAddress, ...receiverAddresses]
         return senderAddress && receiverAddresses.length && transactionAddresses.every((txAddress) => accountAddresses.indexOf(txAddress) !== -1)
     }

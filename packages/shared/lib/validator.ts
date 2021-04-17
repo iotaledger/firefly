@@ -1,10 +1,11 @@
-import { ResponseTypes } from './typings/bridge'
-import type { MessageResponse } from './typings/bridge'
+import type { MarketDataValidationResponse } from 'shared/lib/marketData'
+import type { ChrysalisNodeDataValidationResponse } from 'shared/lib/migration'
 import type { Account, SyncedAccount } from './typings/account'
+import type { Address } from './typings/address'
+import type { MessageResponse } from './typings/bridge'
+import { ResponseTypes } from './typings/bridge'
 import type { Message } from './typings/message'
 import type { StrongholdStatus } from './typings/wallet'
-import type { Address } from './typings/address'
-import type { MarketDataValidationResponse } from 'shared/lib/marketData'
 
 type Validators =
     | IdValidator
@@ -391,20 +392,10 @@ class MessageValidator extends Validator {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of broadcasted received.',
             })
-        } else if ('boolean' !== typeof payload.payload.data.essence.data.incoming) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of incoming received.',
-            })
         } else if ('number' !== typeof payload.nonce) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid type of nonce received.',
-            })
-        } else if ('number' !== typeof payload.payload.data.essence.data.remainderValue) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of remainderValue received.',
             })
         } else if ('string' !== typeof payload.timestamp) {
             return super.createResponse(false, {
@@ -661,6 +652,15 @@ export default class ValidatorService {
             [ResponseTypes.StrongholdPasswordClearIntervalSet]: this.createBaseValidator().getFirst(),
             [ResponseTypes.Error]: this.createBaseValidator().getFirst(),
             [ResponseTypes.Panic]: this.createBaseValidator().getFirst(),
+
+            // Legacy seed APIs
+            [ResponseTypes.LegacySeedChecksum]: this.createBaseValidator().getFirst(),
+
+            // Migration
+            [ResponseTypes.MigrationData]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.CreatedMigrationBundle]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.SentMigrationBundle]: this.createBaseValidator().getFirst(),
+
             // Events
             [ResponseTypes.StrongholdStatusChange]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.NewTransaction]: this.createBaseEventValidator().getFirst(),
@@ -669,8 +669,11 @@ export default class ValidatorService {
             [ResponseTypes.BalanceChange]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.ConfirmationStateChange]: this.createBaseEventValidator().getFirst(),
             [ResponseTypes.TransferProgress]: this.createBaseEventValidator().getFirst(),
+            [ResponseTypes.MigrationProgress]: this.createBaseEventValidator().getFirst(),
             // Market data
             MarketData: new ValidatorChainBuilder().add(new TypeValidator()).getFirst(),
+            // Chrysalis node
+            ChrysalisNode: new ValidatorChainBuilder().add(new TypeValidator()).getFirst(),
         }
     }
 
@@ -705,7 +708,7 @@ export default class ValidatorService {
      *
      * @returns {ValidationResponse}
      */
-    performValidation(response: MessageResponse | MarketDataValidationResponse): ValidationResponse {
+    performValidation(response: MessageResponse | MarketDataValidationResponse | ChrysalisNodeDataValidationResponse): ValidationResponse {
         return this.validators[response.type].isValid(response)
     }
 }

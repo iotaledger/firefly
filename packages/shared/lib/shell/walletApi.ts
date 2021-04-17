@@ -39,6 +39,7 @@ const eventsApiToResponseTypeMap = {
     onBroadcast: ResponseTypes.Broadcast,
     onStrongholdStatusChange: ResponseTypes.StrongholdStatusChange,
     onTransferProgress: ResponseTypes.TransferProgress,
+    onMigrationProgress: ResponseTypes.MigrationProgress,
 }
 
 const apiToResponseTypeMap = {
@@ -70,6 +71,7 @@ const apiToResponseTypeMap = {
     lockStronghold: ResponseTypes.LockedStronghold,
     changeStrongholdPassword: ResponseTypes.StrongholdPasswordChanged,
     setStrongholdPasswordClearInterval: ResponseTypes.StrongholdPasswordClearIntervalSet,
+    getLegacySeedChecksum: ResponseTypes.LegacySeedChecksum,
     ...eventsApiToResponseTypeMap
 }
 
@@ -123,6 +125,7 @@ const eventsApiResponseTypes = Object.values(eventsApiToResponseTypeMap)
  */
 
 Wallet.onMessage((message: MessageResponse) => {
+    console.log(message)
     if (message && message.id === undefined) {
         // There is no message id
         // Something lower level has thrown an error

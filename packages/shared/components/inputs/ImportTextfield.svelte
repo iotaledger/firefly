@@ -1,15 +1,18 @@
 <script lang="typescript">
     import { Text } from 'shared/components'
     import { debounce } from 'shared/lib/utils'
-    import { asyncVerifyMnemonic } from 'shared/lib/wallet'
+    import { asyncGetLegacySeedChecksum, asyncVerifyMnemonic } from 'shared/lib/wallet'
     import { english } from 'shared/lib/wordlists/english'
 
     export let value = undefined
     export let locale
 
+    export let disabled = false
+
     let statusMessage = ''
     let content = ''
     let error = false
+    let seedChecksum = ''
 
     const isSeed = (value: string): string | undefined => {
         if (value.length !== 81) {
@@ -55,8 +58,12 @@
         value = ''
         statusMessage = ''
         error = false
+        seedChecksum = ''
 
-        content = content.replace(/\r/g, '').replace(/\n/g, '').replace(/  +/g, ' ')
+        content = content
+            .replace(/\r/g, '')
+            .replace(/\n/g, '')
+            .replace(/  +/g, ' ')
 
         let trimmedContent = content.trim()
 
@@ -70,6 +77,7 @@
                 } else {
                     statusMessage = locale('views.importFromText.seedDetected')
                     value = trimmedContent
+                    seedChecksum = await asyncGetLegacySeedChecksum(value)
                 }
             } else {
                 const mnemonicValidations = isMnemonic(words)
@@ -99,13 +107,21 @@
 
 <div>
     <textarea
-        class="text-14 leading-140 resize-none w-full p-4 pb-3 rounded-xl border border-solid 
-            {error ? 'border-red-300 hover:border-red-500 focus:border-red-500' : 'border-gray-300 hover:border-gray-500 dark:border-gray-700 dark:hover:border-gray-700'} 
-            text-gray-500 dark:text-white bg-white dark:bg-gray-800 "
+        {disabled}
+        class="text-14 leading-140 resize-none w-full p-4 pb-3 rounded-xl border border-solid {error ? 'border-red-300 hover:border-red-500 focus:border-red-500' : 'border-gray-300 hover:border-gray-500 dark:border-gray-700 dark:hover:border-gray-700'}
+        text-gray-500 dark:text-white bg-white dark:bg-gray-800 "
         bind:value={content}
         on:keydown={debounce(handleKeyDown)}
         placeholder=""
         spellcheck={false}
         autofocus />
-    <Text type="p" secondary {error}>{statusMessage}&nbsp;</Text>
+    <div class="flex flex-row items-start justify-between">
+        <Text type="p" secondary {error}>{statusMessage}&nbsp;</Text>
+        {#if seedChecksum}
+            <div class="flex flex-row items-center ml-2">
+                <Text type="p" secondary classes="mr-1">{locale('views.importFromText.checksum')}:</Text>
+                <Text type="p" highlighted>{seedChecksum}</Text>
+            </div>
+        {/if}
+    </div>
 </div>

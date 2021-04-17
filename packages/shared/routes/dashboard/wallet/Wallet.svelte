@@ -1,12 +1,10 @@
 <script lang="typescript">
     import { DashboardPane } from 'shared/components'
     import { clearSendParams } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
-    import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, isStrongholdLocked, updateProfile } from 'shared/lib/profile'
+    import { activeProfile, isStrongholdLocked, MigratedTransaction, updateProfile } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
@@ -86,7 +84,10 @@
         return $accounts.filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id)).sort((a, b) => a.index - b.index)
     })
 
-    const transactions = derived(viewableAccounts, ($viewableAccounts) => {
+    const transactions = derived([viewableAccounts, activeProfile], ([$viewableAccounts, $activeProfile]) => {
+        if ($activeProfile?.migratedTransactions?.length) {
+            return $activeProfile.migratedTransactions
+        }
         return getTransactions($viewableAccounts)
     })
 
@@ -95,7 +96,7 @@
     setContext<Readable<WalletAccount[]>>('viewableAccounts', viewableAccounts)
     setContext<Readable<WalletAccount[]>>('liveAccounts', liveAccounts)
     setContext<Writable<boolean>>('walletAccountsLoaded', accountsLoaded)
-    setContext<Readable<AccountMessage[]>>('walletTransactions', transactions)
+    setContext<Readable<AccountMessage[] | MigratedTransaction[]>>('walletTransactions', transactions)
     setContext<Readable<WalletAccount>>('selectedAccount', selectedAccount)
     setContext<Readable<AccountsBalanceHistory>>('accountsBalanceHistory', accountsBalanceHistory)
     setContext<Readable<AccountMessage[]>>('accountTransactions', accountTransactions)
@@ -503,14 +504,7 @@
         })
     }
 
-    $: {
-        if ($deepLinkRequestActive && $appSettings.deepLinking) {
-            walletRoute.set(WalletRoutes.Send)
-            deepLinkRequestActive.set(false)
-        }
-    }
-
-    onMount(() => {
+    onMount(async () => {
         if (!$accountsLoaded) {
             getAccounts()
         }
