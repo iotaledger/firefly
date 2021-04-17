@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Illustration, OnboardingLayout, Icon, Text } from 'shared/components'
+    import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { createEventDispatcher, onMount } from 'svelte'
 
@@ -40,7 +40,7 @@
             <Button classes="w-full" onClick={() => handleContinueClick()}>{locale('actions.finishSetup')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Illustration illustration="congratulations-desktop" width="100%" height="auto" />
+            <Animation animation="congratulations-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

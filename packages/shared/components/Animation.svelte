@@ -1,7 +1,7 @@
 <script>
-    import { onDestroy } from 'svelte'
-    import { appSettings } from 'shared/lib/appSettings'
     import lottie from 'lottie-web'
+    import { appSettings } from 'shared/lib/appSettings'
+    import { onDestroy } from 'svelte'
 
     export let animation = undefined
     export let classes = ''
@@ -106,7 +106,7 @@
             loop,
             autoplay,
         }
-        lottieAnimation && lottie.destroy()
+        destroyAnimation()
         lottieAnimation = lottie.loadAnimation(options)
     }
 
@@ -121,10 +121,19 @@
         }
     }
 
+    function destroyAnimation() {
+        if (lottieAnimation) {
+            try {
+                lottieAnimation.destroy()
+            } catch (e) {
+                console.error(e)
+            }
+        }
+    }
     onDestroy(() => {
         if (lottieAnimation) {
             lottieAnimation.removeEventListener('DOMLoaded', handleSegments)
-            lottieAnimation.destroy()
+            destroyAnimation()
         }
     })
 </script>

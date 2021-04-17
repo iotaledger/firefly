@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, ButtonCheckbox, Illustration, Input, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, ButtonCheckbox, Input, OnboardingLayout, Text } from 'shared/components'
     import { cleanupSignup, developerMode } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
     import { getTrimmedLength, validateFilenameChars } from 'shared/lib/helpers'
@@ -14,7 +14,7 @@
     } from 'shared/lib/profile'
     import { SetupType } from 'shared/lib/typings/routes'
     import { destroyActor, getStoragePath, initialise, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
-    import { createEventDispatcher, onMount } from 'svelte'
+    import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
 
     export let locale
@@ -130,8 +130,8 @@
                 {locale('actions.createWallet')}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center p-16 bg-pastel-green dark:bg-gray-900">
-            <Illustration illustration="setup-desktop" width="100%" height="auto" classes="object-cover" />
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-green dark:bg-gray-900">
+            <Animation animation="setup-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

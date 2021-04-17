@@ -1,6 +1,6 @@
 <script lang="typescript">
+    import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import { createEventDispatcher } from 'svelte'
-    import { OnboardingLayout, Text, Button, Icon, Illustration } from 'shared/components'
 
     export let locale
     export let mobile
@@ -34,10 +34,8 @@
         </div>
         <!-- TODO: missing illustration -->
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-green dark:bg-gray-900">
-            <Illustration
-                illustration={importType === 'seed' || importType === 'mnemonic' ? 'import-from-text-success-desktop' : 'import-from-file-success-desktop'}
-                width="100%"
-                height="auto" />
+            <Animation
+                animation={importType === 'seed' || importType === 'mnemonic' ? 'import-from-text-success-desktop' : 'import-from-file-success-desktop'} />
         </div>
     </OnboardingLayout>
 {/if}

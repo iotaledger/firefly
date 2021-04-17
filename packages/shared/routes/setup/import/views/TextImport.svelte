@@ -1,6 +1,7 @@
 <script lang="typescript">
+    import { Animation, Button, ImportTextfield, OnboardingLayout, Text } from 'shared/components'
     import { createEventDispatcher } from 'svelte'
-    import { OnboardingLayout, Illustration, Text, ImportTextfield, Button } from 'shared/components'
+
     export let locale
     export let mobile
 
@@ -41,7 +42,7 @@
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Illustration illustration="import-from-text-desktop" width="auto" height="100%" />
+            <Animation animation="import-from-text-desktop" />
         </div>
     </OnboardingLayout>
 {/if}
