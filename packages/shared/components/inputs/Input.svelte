@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Error } from 'shared/components'
-    import { formatCurrency, getAllDecimalSeparators, getDecimalSeparator, parseCurrency } from 'shared/lib/currency'
+    import { formatNumber, getAllDecimalSeparators, getDecimalSeparator, parseCurrency } from 'shared/lib/currency'
     import { onMount } from 'svelte'
 
     export let value = ''
@@ -77,7 +77,7 @@
                 if (Number.isNaN(val)) {
                     e.preventDefault()
                 } else if (maxDecimals !== undefined) {
-                    value = formatCurrency(val, maxDecimals)
+                    value = formatNumber(val, maxDecimals, undefined, 0)
                     e.preventDefault()
                 }
             } else if (integer) {

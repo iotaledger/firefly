@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { convertUnits, Unit } from '@iota/unit-converter'
+    import { Unit } from '@iota/unit-converter'
     import { Input, Text } from 'shared/components'
     import {
         AvailableExchangeRates,
@@ -12,7 +12,7 @@
         replaceCurrencyDecimal,
     } from 'shared/lib/currency'
     import { activeProfile } from 'shared/lib/profile'
-    import { convertUnitsNoE, UNIT_MAP } from 'shared/lib/units'
+    import { changeUnits, formatUnitPrecision, UNIT_MAP } from 'shared/lib/units'
 
     export let amount = undefined
     export let unit = Unit.Mi
@@ -26,6 +26,7 @@
     export let autofocus = false
 
     const Units = Object.values(Unit).filter((x) => x !== 'Pi')
+    const MAX_VALUE = 2779530283000000
 
     let dropdown = false
     let navContainer
@@ -34,12 +35,22 @@
 
     let profileCurrency: AvailableExchangeRates = $activeProfile?.settings.currency ?? AvailableExchangeRates.USD
     $: fiatAmount = amountToFiat(amount)
+    $: {
+        if (amount.length > 0) {
+            const rawVal = changeUnits(parseCurrency(amount), unit, Unit.i)
+            if (rawVal > MAX_VALUE) {
+                amount = formatUnitPrecision(MAX_VALUE, unit, false)
+            }
+        }
+    }
 
     const clickOutside = () => {
         dropdown = false
     }
     const onSelect = (index) => {
-        amount = convertUnitsNoE(parseCurrency(amount), unit, index)
+        if (amount.length > 0) {
+            amount = formatUnitPrecision(changeUnits(parseCurrency(amount), unit, Unit.i), index, false)
+        }
         unit = index
     }
 
@@ -97,7 +108,7 @@
         if (amountAsFloat === 0 || Number.isNaN(amountAsFloat)) {
             return null
         } else {
-            const amountAsI = convertUnits(amountAsFloat, unit, Unit.i)
+            const amountAsI = changeUnits(amountAsFloat, unit, Unit.i)
             const amountasFiat = convertToFiat(amountAsI, $currencies[CurrencyTypes.USD], $exchangeRates[profileCurrency])
             return amountasFiat === 0 ? replaceCurrencyDecimal(`< 0.01`) : formatCurrency(amountasFiat)
         }
@@ -126,7 +137,7 @@
 <amount-input class:disabled class="relative block {classes}" on:keydown={handleKey}>
     <Input
         {error}
-        label={fiatAmount ? `${fiatAmount} ${profileCurrency}` : label || locale('general.amount')}
+        label={fiatAmount ?? (label || locale('general.amount'))}
         placeholder={placeholder || locale('general.amount')}
         bind:value={amount}
         maxlength={17}

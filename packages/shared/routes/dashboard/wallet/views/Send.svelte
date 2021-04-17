@@ -1,13 +1,13 @@
 <script lang="typescript">
-    import { convertUnits, Unit } from '@iota/unit-converter'
+    import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
-    import { parseCurrency, replaceCurrencyDecimal } from 'shared/lib/currency'
+    import { parseCurrency } from 'shared/lib/currency'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import type { TransferProgressEventType } from 'shared/lib/typings/events'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
-    import { convertUnitsNoE } from 'shared/lib/units'
+    import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
     import { isTransferring, transferState, wallet, WalletAccount } from 'shared/lib/wallet'
     import { getContext, onDestroy, onMount } from 'svelte'
@@ -27,25 +27,30 @@
         INTERNAL = 'moveFunds',
     }
 
-    let selectedSendType = $sendParams.isInternal ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
+    let selectedSendType = SEND_TYPE.EXTERNAL
     let unit = Unit.Mi
-    let amount = $sendParams.amount === 0 ? '' : replaceCurrencyDecimal(convertUnitsNoE($sendParams.amount, Unit.i, unit))
-    let address = $sendParams.address
+    let amount = ''
+    let address = ''
     let to = undefined
     let amountError = ''
     let addressPrefix = ($account ?? $liveAccounts[0]).depositAddress.split('1')[0]
     let addressError = ''
     let toError = ''
+    let amountRaw
 
     // This looks odd but sets a reactive dependency on amount, so when it changes the error will clear
     $: amount, (amountError = '')
     $: to, (toError = '')
     $: address, (addressError = '')
 
-    const sendSubscription = sendParams.subscribe((s) => {
+    const updateFromSendParams = ((s) => {
         selectedSendType = s.isInternal ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
-        amount = s.amount === 0 ? '' : replaceCurrencyDecimal(convertUnitsNoE(s.amount, Unit.i, unit))
+        amount = s.amount === 0 ? '' : formatUnitPrecision(s.amount, unit, false)
         address = s.address
+    })
+
+    const sendSubscription = sendParams.subscribe((s) => {
+        updateFromSendParams(s)
     })
 
     let transferSteps: {
@@ -88,7 +93,7 @@
     $: from = $account ? format($account) : accountsDropdownItems[0]
 
     const handleSendTypeClick = (type) => {
-        $sendParams.isInternal = type === SEND_TYPE.INTERNAL
+        selectedSendType = type
         amountError = ''
     }
     const handleFromSelect = (item) => {
@@ -109,14 +114,16 @@
         amountError = ''
         addressError = ''
 
-        if (unit === Unit.i && Number.parseInt(amount, 10).toString() !== amount) {
+        if (amount.length === 0) {
+            amountError = locale('error.send.amountInvalidFormat')
+        } else if (unit === Unit.i && Number.parseInt(amount, 10).toString() !== amount) {
             amountError = locale('error.send.amountNoFloat')
         } else {
             let amountAsFloat = parseCurrency(amount)
             if (Number.isNaN(amountAsFloat)) {
                 amountError = locale('error.send.amountInvalidFormat')
             } else {
-                const amountAsI = convertUnits(amountAsFloat, unit, Unit.i)
+                const amountAsI = changeUnits(amountAsFloat, unit, Unit.i)
                 if (amountAsI > from.balance) {
                     amountError = locale('error.send.amountTooHigh')
                 } else if (amountAsI <= 0) {
@@ -158,14 +165,14 @@
                         }
                     }
 
-                    $sendParams.address = address
-                    $sendParams.amount = amountAsI
+                    amountRaw = amountAsI
                     openPopup({
                         type: 'transaction',
                         props: {
                             internal,
-                            amount: $sendParams.amount,
-                            to: internal ? to.alias : $sendParams.address,
+                            amount: amountRaw,
+                            unit,
+                            to: internal ? to.alias : address,
                             onConfirm: () => triggerSend(internal),
                         },
                     })
@@ -181,9 +188,9 @@
             // an internal transfer by a send to an address in one of our
             // other accounts. When the transfer completes it resets
             // the send params to where it was
-            internalTransfer(from.id, to.id, $sendParams.amount, selectedSendType === SEND_TYPE.INTERNAL)
+            internalTransfer(from.id, to.id, amountRaw, selectedSendType === SEND_TYPE.INTERNAL)
         } else {
-            send(from.id, $sendParams.address, $sendParams.amount)
+            send(from.id, address, amountRaw)
         }
     }
 
@@ -203,9 +210,10 @@
         }
     }
     const handleMaxClick = () => {
-        amount = replaceCurrencyDecimal(convertUnitsNoE(from.balance, Unit.i, unit))
+        amount = formatUnitPrecision(from.balance, unit, false)
     }
     onMount(() => {
+        updateFromSendParams($sendParams)
         to = $liveAccounts.length === 2 ? accountsDropdownItems[from.id === $liveAccounts[0].id ? 1 : 0] : to
     })
     onDestroy(() => {
@@ -285,7 +293,7 @@
                             disabled={$isTransferring || $liveAccounts.length === 2}
                             error={toError}
                             classes="mb-6"
-                            autofocus />
+                            autofocus={$liveAccounts.length > 2} />
                     {:else}
                         <Address
                             error={addressError}
@@ -303,7 +311,9 @@
                         bind:unit
                         maxClick={handleMaxClick}
                         {locale}
-                        disabled={$isTransferring} />
+                        disabled={$isTransferring}
+                        autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2}
+                    />
                 </div>
             </div>
         </div>

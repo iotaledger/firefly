@@ -1,7 +1,8 @@
-import { convertUnits, Unit } from '@iota/unit-converter'
+import { Unit } from '@iota/unit-converter'
 import { AvailableExchangeRates, convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
 import { localize } from 'shared/lib/i18n'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
+import { changeUnits } from 'shared/lib/units'
 import type { WalletAccount } from 'shared/lib/wallet'
 import { isSelfTransaction, wallet } from 'shared/lib/wallet'
 import { date as i18nDate } from 'svelte-i18n'
@@ -160,17 +161,19 @@ export const getAccountActivityData = (account: WalletAccount) => {
                     const message = messages[index]
                     const messageTimestamp = new Date(message.timestamp).getTime()
                     if (messageTimestamp >= start && messageTimestamp <= end) {
-                        const valueMiota = convertUnits(message.payload.data.essence.data.value, Unit.i, Unit.Mi)
                         if (message.payload.data.essence.data.incoming) {
-                            _incoming += valueMiota
+                            _incoming += message.payload.data.essence.data.value
                         }
                         else {
-                            _outgoing += valueMiota
+                            _outgoing += message.payload.data.essence.data.value
                         }
                     }
                     else if (messageTimestamp > end) return
                 }
             }
+            _incoming = changeUnits(_incoming, Unit.i, Unit.Mi)
+            _outgoing = changeUnits(_outgoing, Unit.i, Unit.Mi)
+
             incoming.data.unshift(_incoming)
             incoming.tooltips.unshift({
                 title: get(i18nDate)(new Date(start), {

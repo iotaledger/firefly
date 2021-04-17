@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
     import { truncateString } from 'shared/lib/helpers'
-    import { formatUnit } from 'shared/lib/units'
+    import { formatUnitBestMatch } from 'shared/lib/units'
     import { date } from 'svelte-i18n'
     import type { Payload } from 'shared/lib/typings/message'
 
@@ -39,7 +39,7 @@
     </div>
     <div class="flex-1 items-end flex flex-col ml-4">
         <Text type="p" smaller>
-            {`${!payload.data.essence.data.incoming ? '-' : ''}${formatUnit(payload.data.essence.data.value)}`}
+            {`${!payload.data.essence.data.incoming ? '-' : ''}${formatUnitBestMatch(payload.data.essence.data.value)}`}
         </Text>
     </div>
 </button>
