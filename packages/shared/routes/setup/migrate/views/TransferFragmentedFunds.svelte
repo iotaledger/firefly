@@ -12,7 +12,6 @@
         confirmedBundles,
         hasMigratedAndConfirmedAllSelectedBundles,
     } from 'shared/lib/migration'
-    import { showAppNotification } from 'shared/lib/notifications'
     import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
 
     export let locale
@@ -127,11 +126,6 @@
                     })
                     .catch((error) => {
                         console.error(error)
-
-                        showAppNotification({
-                            type: 'error',
-                            message: locale('views.migrate.error'),
-                        })
 
                         transactions = transactions.map((_transaction, i) => {
                             if (_transaction.index === transaction.index) {
