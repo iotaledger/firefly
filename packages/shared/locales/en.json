@@ -31,11 +31,17 @@
             "title": "Appearance",
             "body": "Choose your wallet’s theme."
         },
-        "setup": {
-            "title": "Set up your wallet",
-            "body1": "You can create multiple user profiles to keep your tokens separate and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+        "profile": {
+            "title": "Create a profile",
+            "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
+            "body2": "For now, let’s start with your first profile name. You can add more profiles later.",
             "profileName": "Profile Name"
+        },
+        "setup": {
+            "title": "Set up a wallet",
+            "chrysalisTitle": "Chrysalis Network Update",
+            "chrysalisBody": "From the 21st April, manual migration of tokens to the new Chrysalis network will commence. We recommend you migrate any existing funds as soon as possible.",
+            "learnMore": "Learn about the migration"
         },
         "secure": {
             "title": "Secure your wallet",
@@ -425,8 +431,10 @@
         "dismiss": "Dismiss",
         "save": "Save",
         "importSeed": "Import an existing seed",
-        "importWallet": "Import existing wallet",
+        "restoreWallet": "Migrate or restore a wallet",
+        "restoreWalletDescription": "Restore an existing wallet or migrate to Chrysalis",
         "createWallet": "Create new wallet",
+        "createWalletDescription": "Create a fresh wallet running on Chrysalis",
         "savePassword": "Save password",
         "useBiometric": "Use biometric security",
         "setupPin": "Set up PIN code",
@@ -496,7 +504,8 @@
         "readDocumentation": "Read the documentation",
         "visitFaq": "Visit FAQ",
         "showHiddenAccounts": "Show hidden accounts",
-        "confirm": "Confirm"
+        "confirm": "Confirm",
+        "saveProfile": "Save profile"
     },
     "general": {
         "password": "Password",
@@ -554,6 +563,7 @@
         "manualNodeSelection": "Manual node selection",
         "profiles": "Profiles",
         "developerProfile": "Developer Profile",
+        "developerProfileDescription": "Allows you to connect to testnets",
         "dev": "Dev",
         "createAccount": "Create an Account",
         "accountName": "Account name",

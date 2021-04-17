@@ -99,7 +99,7 @@ export const routerNext = (event) => {
             const { shouldAddProfile } = params
 
             if (shouldAddProfile) {
-                nextRoute = AppRoute.Setup
+                nextRoute = AppRoute.Profile
             } else {
                 login()
                 nextRoute = AppRoute.Dashboard
@@ -119,6 +119,9 @@ export const routerNext = (event) => {
             nextRoute = AppRoute.Appearance
             break
         case AppRoute.Appearance:
+            nextRoute = AppRoute.Profile
+            break
+        case AppRoute.Profile:
             nextRoute = AppRoute.Setup
             break
         case AppRoute.Setup:
