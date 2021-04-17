@@ -45,7 +45,8 @@
 
     const updateFromSendParams = ((s) => {
         selectedSendType = s.isInternal ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
-        amount = s.amount === 0 ? '' : formatUnitPrecision(s.amount, unit, false)
+        unit = Unit.i
+        amount = s.amount === 0 ? '' : formatUnitPrecision(s.amount, Unit.i, false)
         address = s.address
     })
 
