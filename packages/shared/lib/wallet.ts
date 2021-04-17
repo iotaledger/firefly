@@ -1483,6 +1483,10 @@ export const isSelfTransaction = (payload: Payload, account: WalletAccount): boo
                 return payload?.data?.essence?.data?.outputs
                     ?.filter((output) => output?.data?.remainder === false)
                     ?.map((output) => output?.data?.address) ?? []
+            } else if (payload.type === 'Milestone') {
+                return payload?.data?.essence?.receipt?.data?.funds
+                    ?.filter((receiptFunds) => receiptFunds?.output?.remainder === false)
+                    ?.map((receiptFunds) => receiptFunds?.output?.address) ?? []
             }
 
             return null;
