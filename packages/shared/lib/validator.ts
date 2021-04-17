@@ -599,7 +599,7 @@ class TypeValidator extends Validator {
     isValid(response: MessageResponse): ValidationResponse {
         const payload = response.payload as NodeInfo
 
-        if ('object' !== typeof payload.nodeinfo) {
+        if (!payload.nodeinfo || 'object' !== typeof payload.nodeinfo) {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'No node info.',
