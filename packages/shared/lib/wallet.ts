@@ -502,7 +502,10 @@ export const initialiseListeners = () => {
             } else if (message.payload.type === 'Milestone') {
                 // Update account with new message
                 saveNewMessage(response.payload.accountId, response.payload.message);
-                processMigratedTransactions(response.payload.accountId, [response.payload.message])
+                processMigratedTransactions(response.payload.accountId, [response.payload.message],
+
+                    // New transaction will only emit an event for fluid migrations
+                    [])
             }
         },
         onError(error) {
@@ -617,7 +620,7 @@ export const initialiseListeners = () => {
      */
     api.onBalanceChange({
         onSuccess(response) {
-            const { payload: { accountId, address, balanceChange } } = response;
+            const { payload: { accountId, address, balanceChange, messageId } } = response;
 
             updateAccountAfterBalanceChange(accountId, address, balanceChange.received, balanceChange.spent)
 
@@ -627,6 +630,15 @@ export const initialiseListeners = () => {
             const balance = overview.balanceRaw - balanceChange.spent + balanceChange.received
 
             updateBalanceOverview(balance, overview.incomingRaw, overview.outgoingRaw);
+
+            // Migration
+            if (messageId === '0'.repeat(64)) {
+                updateProfile(
+                    'migratedTransactions',
+                    []
+                )
+            }
+
         },
         onError(error) {
             console.error(error)
@@ -1166,7 +1178,7 @@ export function syncAccounts(showConfirmation, addressIndex?: number, gapLimit?:
 
             const firstAccount = syncedAccounts.find(account => account.index === 0)
 
-            processMigratedTransactions(firstAccount.id, firstAccount.messages)
+            processMigratedTransactions(firstAccount.id, firstAccount.messages, firstAccount.addresses)
 
             updateAccounts(syncedAccounts)
 
@@ -1250,7 +1262,7 @@ export const prepareAccountInfo = (
     })
 }
 
-export const processMigratedTransactions = (accountId: string, messages: Message[]): void => {
+export const processMigratedTransactions = (accountId: string, messages: Message[], addresses: Address[]): void => {
     const accounts = get(wallet).accounts
 
     messages.forEach((message: Message) => {
@@ -1276,6 +1288,22 @@ export const processMigratedTransactions = (accountId: string, messages: Message
             }
         }
     })
+
+    const _activeProfile = get(activeProfile)
+
+    if (_activeProfile.migratedTransactions && _activeProfile.migratedTransactions.length) {
+        // For pre-snapshot migrations, there will be no messages
+        addresses.forEach((address) => {
+            const outputs = address.outputs;
+
+            if (outputs.some((output) => output.messageId === '0'.repeat(64))) {
+                updateProfile(
+                    'migratedTransactions',
+                    []
+                )
+            }
+        })
+    }
 
 }
 export const buildAccountNetworkSettings = () => {
@@ -1460,7 +1488,7 @@ export const isSelfTransaction = (payload: Payload, account: WalletAccount): boo
             return null;
         }
 
-        const senderAddress: string =  getSenderAddress()
+        const senderAddress: string = getSenderAddress()
 
         const receiverAddresses: string[] = getReceiverAddress()
 
