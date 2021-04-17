@@ -21,7 +21,6 @@
         initialiseListeners,
         isTransferring,
         prepareAccountInfo,
-        processMigratedTransactions,
         removeEventListeners,
         selectedAccountId,
         syncAccounts,
@@ -133,8 +132,6 @@
 
                                 const account = prepareAccountInfo(storedAccount, meta)
                                 accounts.update((accounts) => [...accounts, account])
-
-                                processMigratedTransactions(storedAccount.id, storedAccount.messages)
 
                                 if (idx === accountsResponse.payload.length - 1) {
                                     updateBalanceOverview(totalBalance.balance, totalBalance.incoming, totalBalance.outgoing)

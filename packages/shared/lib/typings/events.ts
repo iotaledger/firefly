@@ -82,6 +82,7 @@ export interface ErrorEventPayload {
 
 export interface BalanceChangeEventPayload {
     indexationId: string
+    messageId: string
     accountId: string
     address: string
     balanceChange: {
