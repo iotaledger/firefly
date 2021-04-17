@@ -49,14 +49,10 @@
         newConfirmedBundles.forEach((bundle) => {
             if (bundle.bundleHash && bundle.confirmed) {
                 const hadMigratedAndUnconfirmedBundles = migratedAndUnconfirmedBundles.length > 0
+
                 migratedAndUnconfirmedBundles = migratedAndUnconfirmedBundles.filter(
                     (bundleHash) => bundleHash !== bundle.bundleHash
                 )
-
-                if (hadMigratedAndUnconfirmedBundles && migratedAndUnconfirmedBundles.length === 0) {
-                    migrated = true
-                    busy = false
-                }
 
                 transactions = transactions.map((item) => {
                     if (item.bundleHash === bundle.bundleHash) {
@@ -65,6 +61,16 @@
 
                     return item
                 })
+
+                if (
+                    hadMigratedAndUnconfirmedBundles &&
+                    migratedAndUnconfirmedBundles.length === 0 && 
+                    // // Do not update if there are some migrations in progress of broadcast
+                    !transactions.some((transaction) => transaction.status === 1)
+                ) {
+                    migrated = true
+                    busy = false
+                }
             }
         })
     })
