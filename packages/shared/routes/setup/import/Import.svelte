@@ -3,10 +3,11 @@
     import { mnemonic } from 'shared/lib/app'
     import { getMigrationData } from 'shared/lib/migration'
     import { newProfile } from 'shared/lib/profile'
-    import { api, asyncRestoreBackup } from 'shared/lib/wallet'
+    import { asyncRestoreBackup } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { BackupPassword, FileImport, Import, Success, TextImport } from './views/'
     import { Electron } from 'shared/lib/electron'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale
     export let mobile
@@ -59,8 +60,11 @@
                             importType = 'seed'
                             dispatch('next', { importType })
                         })
-                        .catch((error) => {
-                            error = locale('views.migrate.problemRestoringWallet')
+                        .catch(() => {
+                            showAppNotification({
+                                type: 'error',
+                                message: locale('views.migrate.problemRestoringWallet'),
+                            })
                             isGettingMigrationData = false
                         })
                 } else {

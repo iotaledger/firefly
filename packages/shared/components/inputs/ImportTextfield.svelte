@@ -119,8 +119,8 @@
         <Text type="p" secondary {error}>{statusMessage}&nbsp;</Text>
         {#if seedChecksum}
             <div class="flex flex-row items-center ml-2">
-                <Text type="p" secondary classes="mr-2">{locale('views.importFromText.checksum')}</Text>
-                <Text type="p" highlighted smaller>{seedChecksum}</Text>
+                <Text type="p" secondary classes="mr-1">{locale('views.importFromText.checksum')}:</Text>
+                <Text type="p" highlighted>{seedChecksum}</Text>
             </div>
         {/if}
     </div>
