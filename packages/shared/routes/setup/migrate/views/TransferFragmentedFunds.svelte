@@ -127,10 +127,12 @@
                     })
                     .catch((error) => {
                         console.error(error)
+
                         showAppNotification({
                             type: 'error',
                             message: locale('views.migrate.error'),
                         })
+
                         transactions = transactions.map((_transaction, i) => {
                             if (_transaction.index === transaction.index) {
                                 return { ..._transaction, status: -1, errorText: locale('views.migrate.migrationFailed') }
@@ -138,6 +140,11 @@
 
                             return _transaction
                         })
+
+                        if (transactions.length && transactions.every((transaction) => transaction.status === -1)) {
+                            migrated = true
+                            busy = false
+                        }
                     }),
             Promise.resolve([])
         )
@@ -197,6 +204,11 @@
 
                             return _transaction
                         })
+
+                        if (transactions.length && transactions.every((transaction) => transaction.status === -1)) {
+                            migrated = true
+                            busy = false
+                        }
                     }),
             Promise.resolve([])
         )
