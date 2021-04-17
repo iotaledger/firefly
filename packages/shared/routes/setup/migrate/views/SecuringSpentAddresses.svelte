@@ -26,7 +26,7 @@
         $selectedBundlesToMine.reduce(
             (promise, bundle, idx) =>
                 promise.then((acc) =>
-                    createMigrationBundle(getInputIndexesForBundle(bundle), bundle.miningRuns * 10 ** 7, true)
+                    createMigrationBundle(getInputIndexesForBundle(bundle), bundle.miningRuns * 10 ** 8, true)
                         .then((result) => {
                             timeElapsed = (idx + 1) * MINING_TIMEOUT_SECONDS
                             updateProgress()
