@@ -9,6 +9,7 @@
 
     let addressIndex = 0
     let gapIndex = 50
+    let accountDiscoveryThreshold = 10
     let password
     let error = ''
     let isBusy = false
@@ -18,7 +19,7 @@
             error = ''
             isBusy = true
             await asyncSetStrongholdPassword(password)
-            const syncedAccounts = await asyncSyncAccounts(addressIndex, gapIndex)
+            const syncedAccounts = await asyncSyncAccounts(addressIndex, gapIndex, accountDiscoveryThreshold)
             updateAccounts(syncedAccounts)
             addressIndex += gapIndex
         } catch (err) {
