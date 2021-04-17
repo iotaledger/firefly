@@ -13,6 +13,11 @@ export const MARKETDATA_ENDPOINTS = ['https://nodes.iota.works/api/market']
  */
 const DEFAULT_MARKETDATA_ENDPOINT_TIMEOUT = 5000
 
+/**
+ * Default interval for polling the market data
+ */
+ const DEFAULT_MARKETDATA_POLL_INTERVAL = 300000 // 5 minutes
+
 export enum HistoryDataProps {
     ONE_HOUR = '1h',
     TWENTY_FOUR_HOURS = '24h',
@@ -21,10 +26,10 @@ export enum HistoryDataProps {
 }
 
 enum Timeframes {
-    ONE_HOUR = '1 hour',
-    TWENTY_FOUR_HOURS = '1 day',
-    SEVEN_DAYS = '1 week',
-    ONE_MONTH = '1 month',
+    ONE_HOUR = '1Hour',
+    TWENTY_FOUR_HOURS = '1Day',
+    SEVEN_DAYS = '1Week',
+    ONE_MONTH = '1Month',
 }
 
 enum Histories {
@@ -143,6 +148,14 @@ export const TIMEFRAME_MAP = {
 }
 
 /**
+ * Poll the market data at an interval.
+ */
+ export async function pollMarketData(): Promise<void> {
+    await fetchMarketData()
+    setInterval(async () => fetchMarketData(), DEFAULT_MARKETDATA_POLL_INTERVAL)
+}
+
+/**
  * Fetches market data
  *
  * @method fetchMarketData
@@ -221,7 +234,7 @@ export async function addProfileCurrencyPriceData(): Promise<void> {
     if (profile) {
         // get selected profile currency and add its estimated history
         const profileCurrency: string = profile.settings.currency.toLowerCase()
-        if (!get(priceData)[profileCurrency.toLowerCase()]) {
+        if (!Object.values(CurrencyTypes.USD).includes(profileCurrency)) {
             const profileCurrencyRate: number = get(exchangeRates)[profileCurrency.toUpperCase()]
             const usdHistory = get(priceData)[CurrencyTypes.USD]
             let profileCurrencyHistory = {};

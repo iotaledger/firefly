@@ -27,6 +27,35 @@ For all platforms, the following are required:
 -   `libssl` (Debian/Ubuntu: `libssl-dev`, Red Hat: `openssl-devel`, Arch Linux: `openssl`)
 -   `libusb` (Debian/Ubuntu: `libusb-1.0-0-dev`)
 -   `libudev` (Debian/Ubuntu: `libudev-dev`)
+-   `gnome-keyring`, `keepassxc`, or another secrets manager that implements the [freedesktop.org Secrets API](https://www.freedesktop.org/wiki/Specifications/secret-storage-spec/)
+
+## Building Firefly 
+
+```
+## in the root folder
+yarn
+
+## in packages/backend/bindings/node
+yarn
+
+## in packages/desktop
+yarn build
+```
+### Dev Mode
+
+```
+# in packages/desktop
+yarn start
+```
+### Production 
+
+```
+# in packages/desktop
+yarn compile:win
+```
+Change win to your operating system - mac, win or linux.
+
+Mac users need to `return true` in the notarization script in `packages/desktop/notarization`.
 
 ## Running the Firefly Snap
 

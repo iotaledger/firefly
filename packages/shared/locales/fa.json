@@ -1,11 +1,11 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA tokens",
-            "body": "Firefly is the official wallet of IOTA."
+            "title": "ارسال، دریافت و مدیریت توکن های آیوتا",
+            "body": "فایرفلای کیف پول رسمی آیوتا است."
         },
         "legal": {
-            "title": "Privacy Policy & Terms of Service",
+            "title": "اطلاع از حریم خصوصی/شرایط استفاده",
             "body": "لطفا قوانین و سیاست حفظ حریم خصوصی را مرور کنید.",
             "privacyPolicy": {
                 "title": "سیاست حفظ حریم خصوصی",
@@ -25,94 +25,94 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+            "checkbox": "من سیاست حریم خصوصی و شرایط استفاده را مطالعه کرده و میپذیرم"
         },
         "appearance": {
             "title": "ظاهر",
-            "body": "Choose your wallet’s theme."
+            "body": "تم کیف پول خود را انتخاب کنید."
         },
         "setup": {
-            "title": "کیف پول خود را راه اندازی کنید",
-            "body1": "You can create multiple user profiles to keep your tokens separate and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "title": "راه اندازی کیف پول",
+            "body1": "شما میتوانید برای نگهداری توکن های خود به صورت جداگانه و ارتقای حریم خصوصی، چندین پروفایل کاربری درست کنید.",
+            "body2": "برای الان٬ از نام اولین پروفایل خود شروع کنید. شما میتوانید پروفایل های بیشتری را بعدا اضافه کنید.",
             "profileName": "نام پروفایل"
         },
         "secure": {
-            "title": "Secure your wallet",
-            "body1": "Save and print the Recovery Kit PDF template.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
+            "title": "ایمن سازی کیف پول",
+            "body1": "قالب PDF کیت بازیابی را ذخیره و پرینت کنید.",
+            "body2": "اگر کیت بازیابی خود را پر کرده و در جایی امن نگهداری کنید٬ میتوانید در آینده کیف پول خود را بازیابی کنید."
         },
         "password": {
             "title": "ایجاد رمز عبور",
-            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
-            "body2": "It is recommended that you write down your password in your Recovery Kit."
+            "body1": "برای حفاظت از حساب خود به رمز عبور قوی نیاز دارید. از ترکیب کلمات استفاده کنید و از عبارات رایج٬ نام ها یا تاریخ ها بپرهیزید.",
+            "body2": "توصیه میشود کلمه عبور خود را در کیت بازیابی یادداشت کنید."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body2": "Keep your PIN safe!"
+            "body1": "PIN ورود خود را راه اندازی کنید تا اطمینان حاصل کنید که تنها خودتان میتوانید به کیف پول خود وارد شوید.",
+            "body2": "PIN خود را امن نگه دارید!"
         },
         "pin": {
             "title": "تنظیم PIN کد",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
+            "body1": "یک PIN شش رقمی در زیر وارد کنید. شما به این PIN برای دسترسی به پروفایل خود احتیاج دارید.",
+            "body2": "فقط از اعداد استفاده کنید"
         },
         "confirmPin": {
-            "title": "PIN کد خود را تایید کنید",
-            "body1": "Your PIN keeps your balance and transactions private.",
-            "body2": "Re-enter your PIN code to proceed. "
+            "title": "تایید PIN کد",
+            "body1": "PIN موجودی و تراکنش های شما را خصوصی نگه میدارد.",
+            "body2": "برای ادامه، PIN کد خود را دوباره وارد کنید. "
         },
         "backup": {
-            "title": "از کیف پول خود بک آپ بگیرید",
-            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
-            "body3": "در صورت گم کردن عبارت بازیابی٬ وجوه خود را از دست خواهید داد."
+            "title": "بک آپ گیری از کیف پول",
+            "body1": "عبارت بازیابی الان به شما نشان داده خواهد شد. آن را در کیت بازیابی خود یادداشت کنید.",
+            "body2": "عبارت بازیابی خود را با هیچکس به اشتراک نگذارید. این عبارت دسترسی به توکن های شما را از هرجا ممکن میسازد.",
+            "body3": "در صورت گم کردن عبارت بازیابی، وجوه خود را از دست خواهید داد."
         },
         "recoveryPhrase": {
             "title": "عبارت بازیابی",
-            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-            "body2": "Keep this private and safely stored.",
-            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+            "body1": "در کیت بازیابی٬ تمام کلمات را به ترتیب نشان داده شده یادداشت کنید.",
+            "body2": "این را در جایی امن و خصوصی نگهداری کنید.",
+            "body3": "مهم است که بک آپ این عبارت را در جایی یادداشت کنید. کامپیوترها میتوانند خراب شوند و فایل ها از بین بروند.",
             "revealRecoveryPhrase": "عبارت بازیابی را نشان بده",
             "hideRecoveryPhrase": "عبارت بازیابی را پنهان کن"
         },
         "verifyRecoveryPhrase": {
             "title": "عبارت بازیابی را تایید کنید",
-            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
-            "word": "Word",
-            "verified": "Recovery phrase verified",
-            "verifiedBody": "Remember to keep it private and safely stored."
+            "body": "برای اطمینان از اینکه عبارت را درست یادداشت کردید٬ لطفا هر کلمه را به ترتیب شماره انتخاب کنید.",
+            "word": "کلمه",
+            "verified": "عبارت بازیابی تایید شد",
+            "verifiedBody": "به خاطر بسپارید که این عبارت را در جایی امن و خصوصی نگهداری کنید."
         },
         "backupWallet": {
             "title": "بک آپ به صورت یک فایل Stronghold",
-            "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
-            "body2": "Reasons why digital backups are important:",
-            "reason1": "Easily recover your wallet without typing in your recovery phrase",
-            "reason2": "Import your wallet to other devices",
-            "reason3": "Recover your full transaction history"
+            "body1": "برای گرفتن بک آپ از کیف پول خود به صورت فایل Stronghold رمز عبور خود را وارد کنید. رمز عبور برای رمزگذاری بک آپ شما استفاده میشود.",
+            "body2": "دلایلی که چرا گرفتن بک آپ دیجیتال مهم است:",
+            "reason1": "بازیابی کیف پول شما به راحتی و بدون تایپ کردن عبارت بازیابی",
+            "reason2": "وارد کردن کیف پول خود به دستگاه های دیگر",
+            "reason3": "بازیابی پیشینه‌ی کامل تراکنش شما"
         },
         "recoveryPhraseSaved": {
             "title": "بک آپ با موفقیت انجام شد",
             "body": "شما از کیف پول خود یک بک آپ به صورت یک فایل Stronghold گرفته اید."
         },
         "congratulations": {
-            "title": "Wallet setup completed",
-            "body": "Your new wallet is ready to use."
+            "title": "راه اندازی کیف پول کامل شد",
+            "body": "کیف پول جدید شما آماده استفاده میباشد."
         },
         "import": {
             "title": "یک کیف پول وارد کنید",
             "body": "اگر عبارت بازیابی یا بک آپ Stronghold دارید٬ میتوانید اینجا وارد کنید."
         },
         "importFromText": {
-            "title": "کیف پول خود را توسط عبارت بازیابی یا سید بازگردانید",
-            "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body2": "A recovery phrase is 24 words long (with spaces). This is used to recover an existing Firefly wallet.",
+            "title": "بازگردانی کیف پول توسط عبارت بازیابی یا سید",
+            "body1": "یک سید از 81 کاراکتر تشکیل شده که برای بازیابی کیف پول قدیمی تر ترینیتی استفاده میشود.",
+            "body2": "عبارت بازیابی شامل 24 کلمه (با فاصله) میباشد. این عبارت برای بازیابی کیف پول فایرفلای موجود استفاده میشود.",
             "body3": "سید یا عبارت بازیابی خود را وارد کنید.",
             "seedDetected": "سید 81 کاراکتری یافت شد",
-            "phraseDetected": "24 word recovery phrase detected"
+            "phraseDetected": "عبارت بازیابی 24 کلمه ای یافت شد"
         },
         "importFromFile": {
-            "title": "Restore your wallet using a backup file",
+            "title": "بازگرداندنی کیف پول توسط فایل بک آپ",
             "body": "فایل بک آپ را برای بازگرداندن کیف پول خود وارد کنید. بک آپ میتواند یک استرانگ هُلد (stronghold.) و یا ترینیتی سیدوالت (kdbx.) باشد."
         },
         "importBackupPassword": {
@@ -123,13 +123,13 @@
         "importSuccess": {
             "title": "شما با موفقیت بک آپ خود را بازیابی کردید",
             "body": "هم اکنون میتوانید کیف پول جدید خود را راه اندازی کنید.",
-            "seedvaultTitle": "Successfully imported",
-            "seedvaultBody": "Your password is correct, you can now continue.",
-            "strongholdTitle": "Successfully imported",
-            "strongholdBody": "Your password is correct, you can now continue."
+            "seedvaultTitle": "با موفقیت وارد شد",
+            "seedvaultBody": "رمز عبور شما درست است٬ میتوانید ادامه دهید.",
+            "strongholdTitle": "با موفقیت وارد شد",
+            "strongholdBody": "رمز عبور شما درست است٬ میتوانید ادامه دهید."
         },
         "migrate": {
-            "title": "توکن های خود را انتقال دائمی دهید.",
+            "title": "توکن های خود را انتقال دائمی دهید",
             "body1": "این یک فرایند خودکار میباشد تا توکن های شما به والت جدید منتقل شود. ما آدرس هایی را که قبلا استفاده شده و امنیت شما را پایین می آورد٬ چک میکنیم.",
             "body2": "این فرایند زمان بر میباشد. دستگاه خود را حین انتقال دائمی خاموش نکنید.",
             "existing": "کیف پول قدیمی شما",
@@ -151,19 +151,19 @@
             },
             "security": {
                 "title": "امنیت",
-                "description": "Change your password and adjust security-related settings"
+                "description": "تغییر رمز عبور و تنظیمات مربوط به امنیت"
             },
             "advancedSettings": {
                 "title": "تنظیمات پیشرفته",
-                "description": "Tools and manual settings for technical users"
+                "description": "تنظیمات مربوط به ابزار و راهنما برای کاربران فنی"
             },
             "helpAndInfo": {
                 "title": "اطلاعات و راهنما",
-                "description": "Find the answer to a question or get help with an issue"
+                "description": "یافتن پاسخ یک سوال یا درخواست کمک برای حل مشکل"
             },
             "profile": {
                 "title": "پروفایل",
-                "description": "Change your profile name or set an avatar"
+                "description": "تغییر اسم پروفایل یا انتخاب ظاهر"
             },
             "sync": {
                 "title": "همگام سازی حساب ها",
@@ -179,27 +179,27 @@
             },
             "currency": {
                 "title": "واحد پول",
-                "description": "Adjusts balance conversion and updates chart options"
+                "description": "تنظیمات مربوط به تبدیل باقیمانده حساب و به روز رسانی گزینه های نمودار را انجام میدهد"
             },
             "notifications": {
                 "title": "اعلان‌ها",
-                "description": "System notifications for transaction events"
+                "description": "اعلانات سیستم برای تراکنش ها"
             },
             "exportStronghold": {
-                "title": "Export Backup",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
+                "title": "استخراج بک آپ",
+                "description": "استخراج به صورت فایل Stronghold ٬بک آپی کامل و رمزنگاری شده از کیف پول شما به همراه سوابق آخرین تراکنش ها."
             },
             "appLock": {
-                "title": "Automatic Lock",
-                "description": "Time elapsed before your wallet locks and logs you out"
+                "title": "ﻗﻔﻞ ﺧﻮﺩﮐﺎﺭ",
+                "description": "زمان قبل از اینکه کیف پول شما قفل شود و شما را از سیستم خارج کند، سپری شده است"
             },
             "changePassword": {
                 "title": "تغییر رمز عبور",
-                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
+                "description": "رمز عبور برای امنیت کیف پول شما استفاده میشود. برای حفاظت از وجوه خود باید از رمز عبور قوی استفاده کنید."
             },
             "changePincode": {
                 "title": "تغییر PIN کد",
-                "description": "Your PIN keeps your balance and transactions private",
+                "description": "PIN موجودی و تراکنش های شما را خصوصی نگه میدارد",
                 "currentPincode": "PIN فعلی",
                 "newPincode": "PIN جدید",
                 "confirmNewPincode": "تایید PIN جدید",
@@ -207,68 +207,80 @@
             },
             "resyncAccounts": {
                 "title": "همگام سازی مجدد حساب ها",
-                "description": ""
+                "description": "Starts a background task to make sure your accounts are up to date."
+            },
+            "hiddenAccounts": {
+                "title": "Hidden accounts",
+                "description": "Selecting this options will show accounts that were previously hidden."
             },
             "deleteProfile": {
                 "title": "حذف پروفایل",
-                "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
+                "description": "تمام کیف پول، پروفایل و سوابق تراکنش ها را حذف میکند. از داشتن بک آپ مطمئن شوید."
             },
             "deepLinks": {
                 "title": "لینک عمیق",
-                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
+                "description": "با کلیک بر لینک //:iota به صورت خودکار اطلاعات تراکنش را در فایرفلای وارد کنید"
             },
             "developerMode": {
                 "title": "حالت برنامه نویسی",
-                "description": "Connect to testnets and other developer features"
+                "description": "اتصال به شبکه های آزمایشی و امکانات دیگر برنامه نویسی"
             },
             "nodeSettings": {
                 "title": "تنظیمات نود",
-                "description": "Select Manual to choose from the node list or connect to your own node"
+                "description": "Select Manual to configure the node settings and connect to your own node"
             },
             "configureNodeList": {
-                "title": "Select a node",
-                "description": ""
+                "title": "انتخاب نود",
+                "description": "Manage the list of nodes your wallet connects to.",
+                "primaryNode": "Primary node",
+                "excludeNode": "Exclude node",
+                "includeNode": "Include node",
+                "viewDetails": "View details",
+                "setAsPrimary": "Set as primary",
+                "removeNode": "حذف نود",
+                "includeOfficialNodeList": "Include official node list",
+                "noNodes": "There are no nodes, automatic selection will be used instead."
             },
             "proofOfWork": {
                 "title": "اثبات کار",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "description": "اتمام اثبات کار به صورت محلی روی دستگاه خود یا برون سپاری به نود"
             },
             "errorLog": {
                 "title": "گزارش خطا",
-                "description": "View errors to debug an issue"
+                "description": "نمایش خطاها برای برطرف کردن مشکل"
             },
             "diagnostics": {
-                "title": "Diagnostics",
-                "description": "View system and application information"
+                "title": "عیب شناسی",
+                "description": "نمایش اطلاعات سیستم و اپلیکیشن"
             },
             "stateExport": {
                 "title": "ایجاد فایل گزارش کلی",
-                "description": "Export your transaction history to a .csv file"
+                "description": "استخراج سوابق ترکنش ها به صورت فایل csv"
             },
             "troubleshoot": {
                 "title": "عیب یابی",
-                "description": "Use the troubleshooting wizard to solve common problems"
+                "description": "استفاده از جادوگر عیب یابی برای حل مشکلات متداول"
             },
             "documentation": {
                 "title": "مستندات",
-                "description": "View the documentation for in depth explanations of how things work"
+                "description": "نمایش مستندات برای توضیحات کامل که هر چیز چگونه کار میکند"
             },
             "faq": {
                 "title": "پرسش و پاسخ های متداول",
-                "title2": "Frequently Asked Questions",
-                "description": "View the FAQs to get help with a common problem or question"
+                "title2": "سوالات متداول",
+                "description": "نمایش سوالات متداول برای کمک به حل یک مشکل یا سوال"
             },
             "discord": {
                 "title": "ديسكورد",
-                "description": "Get help from the IOTA community on Discord"
+                "description": "کمک گرفتن از انجمن آیوتا در دیسکورد"
             },
             "about": {
                 "title": "درباره ما",
                 "description": ""
             },
             "reportAnIssue": {
-                "title": "Report an issue",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
+                "title": "گزارش یک مشکل",
+                "description": "گزارش یک باگ به توسعه دهندگان. اول چک کنید تا مطمئن شوید که قبلا گزارش نشده باشد."
             }
         },
         "login": {
@@ -278,7 +290,7 @@
         "dashboard": {
             "security": {
                 "version": {
-                    "title": "فایرفلای {version}v",
+                    "title": "فایرفلای v {version}",
                     "upToDate": "به روزرسانی شده",
                     "outOfDate": "قدیمی"
                 },
@@ -287,19 +299,19 @@
                     "noneDetected": "چیزی یافت نشد"
                 },
                 "strongholdStatus": {
-                    "title": "وضعیت Stronghold",
-                    "locked": "قفل شده",
-                    "unlocked": "باز شده"
+                    "title": "وضعیت کیف پول",
+                    "locked": "Stronghold قفل شد",
+                    "unlocked": "Stronghold باز شد"
                 },
                 "strongholdBackup": {
-                    "title": "بک آپ Stronghold",
+                    "title": "بک آپ کیف پول",
                     "weeksAgo": "{weeks, plural, one {# هفته} other {# هفته}} قبل"
                 }
             },
             "network": {
                 "networkOperational": "شبکه قابل استفاده",
                 "networkDegraded": "شبکه تخریب شده",
-                "networkDown": "Network Disconnected",
+                "networkDown": "شبکه قطع شد",
                 "status": "وضعیت",
                 "messagesPerSecond": "پیام ها در ثانیه",
                 "confirmationRate": "سرعت تاییدیه"
@@ -313,43 +325,54 @@
     "popups": {
         "password": {
             "title": "رمز عبور مورد نیاز است",
-            "subtitle": "لطفا رمز عبور خود را برای باز کردن استرانگ هُلد وارد کنید."
+            "subtitle": "Please enter your password to unlock Stronghold",
+            "backup": "Please enter your password to export a backup"
         },
         "qr": {
             "title": "کد QR شما"
         },
         "version": {
-            "title": " نسخه فعلی : {version}",
+            "title": "نسخه فعلی: {version}",
             "upToDateTitle": "فایرفلای به روز رسانی شده",
             "upToDateDescription": "شما از به روزترین و امن ترین نسخه فایرفلای استفاده میکنید.",
             "updateAvailable": "نسخه به روز شده فایرفلای قابل دسترس است",
-            "updateDetails": " نسخه {version} - {date}"
+            "updateDetails": "نسخه {version} - {date}"
         },
         "backup": {
-            "title": "آخرین به روز رسانی: ",
-            "lastBackup": "آخرین به روز رسانی در تاریخ {}",
-            "backupDescription": "گرفتن بک آپ مهم میباشد٬ زیرا به شما اطمینان میدهد که کپی حساب ها و سوابق معاملات خود را داشته باشید.",
-            "backupWarning": "در صورت گم کردن بک آپ و عبارت بازیابی٬ دسترسی شما به وجوه خود از دست خواهد رفت.",
+            "title": "آخرین به روز رسانی: {date}",
+            "lastBackup": "آخرین به روز رسانی در تاریخ {date}",
+            "backupDescription": "گرفتن بک آپ مهم میباشد، زیرا به شما اطمینان میدهد که کپی حساب ها و سوابق معاملات خود را داشته باشید.",
+            "backupWarning": "در صورت گم کردن بک آپ و عبارت بازیابی، دسترسی شما به وجوه خود از دست خواهد رفت.",
             "notBackedUp": "بک آپ گرفته نشده",
-            "notBackedUpDescription": "شما از استرانگ هُلد خود بک آپ نگرفته اید"
+            "notBackedUpDescription": "شما از استرانگ هُلد خود بک آپ نگرفته اید",
+            "saving": "Saving..."
         },
         "deleteAccount": {
-            "title": "Remove {name}?",
-            "body": "You can add this account back later but you may lose your transaction history.",
+            "title": "Delete {name}?",
+            "body": "This account has no transaction history. It can safely be deleted.",
             "typePassword": "Type your wallet password to confirm.",
-            "deleteAccount": "Remove account",
-            "errorTitle": "Unable to remove {name}",
-            "errorBody1": "To remove an account it must have 0 balance.",
-            "errorBody2": "در حال حاضر٬ مانده حساب شما {} میباشد. لطفا این مبلغ را به حساب دیگری انتقال داده و دوباره امتحان کنید.",
-            "errorBody3": "You cannot remove this account, you must have at least one."
+            "hideAccount": "Delete account",
+            "errorTitle": "Unable to delete {name}",
+            "errorBody1": "You cannot delete this account, you must have at least one."
+        },
+        "hideAccount": {
+            "title": "Hide {name}?",
+            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Hide account",
+            "errorTitle": "Unable to hide {name}",
+            "errorBody1": "To hide an account it must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
+            "errorBody3": "You cannot hide this account, you must have at least one."
         },
         "addressHistory": {
-            "title": "سوابق آدرس حساب {name}",
-            "currentBalance": "موجودی در حال حاضر :"
+            "title": "{name} address history",
+            "currentBalance": "موجودی در حال حاضر: {balance}"
         },
         "node": {
             "titleAdd": "اضافه کردن نود",
-            "titleRemove": "حذف یک نود",
+            "titleUpdate": "Update a node",
+            "titleRemove": "حذف نود",
             "titleDetails": "جزییات نود",
             "nodeAddress": "آدرس نود",
             "optionalUsername": "نام کاربری (اختیاری)",
@@ -363,18 +386,23 @@
         },
         "deleteProfile": {
             "title": "حذف پروفایل",
-            "confirmation": "آیا مطمئن هستید می خواهید این پروفایل را حذف کنید؟ این عمل قابل بازگشت نیست."
+            "confirmation": "آیا مطمئن هستید می خواهید این پروفایل را حذف کنید؟ این عمل قابل بازگشت نیست.",
+            "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
-            "title": "Diagnostics",
-            "node": "Node",
-            "platform": "Platform",
-            "platformVersion": "Platform Version",
-            "platformArchitecture": "Platform Architecture",
-            "cpuCount": "CPU Count",
-            "totalMem": "Total Memory",
-            "freeMem": "Free Memory",
-            "userPath": "User Path"
+            "title": "عیب شناسی",
+            "node": "نود",
+            "platform": "پلتفرم",
+            "platformVersion": "نسخه پلتفرم",
+            "platformArchitecture": "معماری پلتفرم",
+            "cpuCount": "تعداد هسته CPU",
+            "totalMem": "کل حافظه",
+            "freeMem": "حافظه آزاد",
+            "userPath": "مسیر کاربر"
+        },
+        "transaction": {
+            "title": "Confirm transaction",
+            "body": "You’re about to send {amount} to"
         }
     },
     "charts": {
@@ -387,7 +415,7 @@
     },
     "actions": {
         "continue": "ادامه",
-        "back": "برگشت",
+        "back": "بازگشت",
         "cancel": "لغو",
         "close": "بستن",
         "dismiss": "نادیده گرفتن",
@@ -406,17 +434,17 @@
         "verifyRecoveryPhrase": "عبارت بازیابی را تایید کنید",
         "revealRecoveryPhrase": "عبارت بازیابی را نشان بده",
         "importSeedvault": "وارد کردن SeedVault",
-        "checkAgain": "خیر٬ بررسی دوباره",
+        "checkAgain": "خیر، بررسی دوباره",
         "importFromFile": "وارد کردن از یک فایل",
         "send": "ارسال",
         "receive": "دریافت",
         "create": "ایجاد",
         "beginTransfer": "شروع انتقال",
         "tryAgain": "تلاش مجدد",
-        "visitDiscord": "از دیسکورد بازدید کنید",
+        "visitDiscord": "بازدید دیسکورد",
         "dragDrop": "کشیدن و رها کردن",
-        "importExtentions": ".kdbx or .stronghold file",
-        "chooseFile": "یک فایل انتخاب کنید",
+        "importExtentions": "فایل stronghold یا kdbx",
+        "chooseFile": "انتخاب فایل",
         "dropHere": "فایل خود را این جا بیاندازید",
         "syncAll": "همگام‌سازی همه",
         "export": "استخراج",
@@ -425,16 +453,19 @@
         "enableDeveloperMode": "فعالسازی حالت برنامه نویسی",
         "enableSystemNotifications": "فعالسازی اعلان های سیستم",
         "exportState": "استخراج وضعیت",
-        "outsourceProofOfWork": "اثبات کار با منبع خارجی",
+        "localProofOfWork": "Local proof of work",
         "unlock": "بازکردن",
         "updateFirefly": "به روز رسانی فایرفلای",
-        "restartNow": "بستن و باز کردن مجدد",
-        "saveBackup": "Save Stronghold backup",
-        "customizeAcount": "Customise account",
+        "restartNow": "شروع مجدد فوری",
+        "saveBackup": "ذخیره بک آپ Stronghold",
+        "customizeAcount": "شخصی سازی حساب",
         "viewAddressHistory": "نمایش سوابق آدرس",
-        "deleteAccount": "Remove account",
+        "hideAccount": "Hide account",
+        "showAccount": "Unhide account",
+        "deleteAccount": "Delete account",
         "max": "حداکثر",
         "addNode": "اضافه کردن نود",
+        "updateNode": "Update node",
         "removeNode": "حذف نود",
         "hide": "پنهان کردن",
         "hideOthers": "پنهان کردن بقیه",
@@ -455,11 +486,13 @@
         "yes": "بله",
         "no": "نه",
         "reset": "بازنشانی",
-        "downloadRecoveryKit": "Save Recovery Kit template",
-        "skipBackup": "Skip file backup",
-        "finishSetup": "Finish setup",
-        "readDocumentation": "Read the documentation",
-        "visitFaq": "Visit FAQ"
+        "downloadRecoveryKit": "ذخیره قالب کیت بازیابی",
+        "skipBackup": "رد شدن از بک آپ گیری فایل",
+        "finishSetup": "پایان راه اندازی",
+        "readDocumentation": "مستندات را بخوانید",
+        "visitFaq": "بخش سوالات متداول را ببینید",
+        "showHiddenAccounts": "Show hidden accounts",
+        "confirm": "Confirm"
     },
     "general": {
         "password": "رمز عبور",
@@ -473,14 +506,14 @@
         "sent": "ارسال شده",
         "received": "دریافت شده",
         "sendPayment": "ارسال پرداخت",
-        "moveFunds": "جابجایی وجه",
+        "moveFunds": "انتقال داخلی",
         "sendFunds": "ارسال وجه",
-        "sendToAddress": "Send to address",
+        "sendToAddress": "ارسال به آدرس",
         "scanQrOrPaste": "کد QR یا آدرس را وارد کنید",
         "moveFundsBetweenAccounts": "جابجایی وجه بین حساب ها",
         "sendTokensToAddress": "ارسال توکن به یک آدرس",
         "manageAccount": "مدیریت حساب",
-        "customizeAcount": "Customize your account",
+        "customizeAcount": "شخصی سازی حساب خود",
         "account": "حساب",
         "sendingToAddress": "ارسال به آدرس",
         "amount": "مقدار",
@@ -505,20 +538,20 @@
         "appearance": "ظاهر",
         "lightTheme": "تم روشن",
         "darkTheme": "تم تاریک",
-        "totalBalance": "موجودی کل",
+        "balance": "Balance",
         "accountBalance": "موجودی حساب",
         "incoming": "ورودی",
         "outgoing": "خروجی",
-        "totalIn": "Total in",
-        "totalOut": "Total out",
+        "totalIn": "کل دریافتی",
+        "totalOut": "کل ارسالی",
         "accounts": "حساب ها",
-        "myAccounts": "My accounts",
+        "myAccounts": "حساب کاربری من",
         "automaticNodeSelection": "انتخاب اتوماتیک نُد",
         "manualNodeSelection": "انتخاب دستی نُد",
         "profiles": "پروفایل ها",
         "developerProfile": "پروفایل برنامه نویسی",
         "dev": "برنامه نویس",
-        "createAccount": "ایجاد حساب کاربری",
+        "createAccount": "ایجاد یک حساب کاربری",
         "accountName": "نام حساب",
         "latestTransactions": "آخرین تراکنش ها",
         "transactions": "تراکنش ها",
@@ -528,13 +561,13 @@
         "wallet": "کیف پول",
         "help": "راهنما",
         "you": "شما",
-        "messageId": "Message ID",
-        "inputAddress": "آدرس ورودی",
+        "messageId": "شناسه پیام",
+        "inputAddress": "ارسال آدرس",
         "receiveAddress": "آدرس گیرنده",
         "date": "تاریخ",
         "status": "وضعیت",
-        "confirmed": "Confirmed",
-        "pending": "Pending",
+        "confirmed": "تایید شده",
+        "pending": "در حال بررسی",
         "noAccounts": "شما حساب کاربری ندارید. لطفا یکی بسازید.",
         "loadingAccounts": "درحال بارگذاری، لطفاً صبر کنید...",
         "addProfile": "افزودن پروفایل",
@@ -542,33 +575,36 @@
         "transferSyncing": "همگام سازی حساب",
         "transferSelectingInputs": "در حال انتخاب ورودی ها",
         "transferRemainderAddress": "در حال تولید آدرس موجودی باقیمانده",
-        "transferSigning": "در حال صحتگذاری تراکنش",
+        "transferSigning": "در حال صحه گذاری تراکنش",
         "transferPow": "در حال انجام اثبات کار",
         "transferBroadcasting": "در حال انتشار تراکنش",
         "transferComplete": "انتقال کامل شد",
-        "creatingAccount": "در حال ساختن حساب٬ لطفا صبر کنید...",
-        "updatingAccount": "در حال به روز رسانی حساب٬ لطفا صبر کنید...",
+        "creatingAccount": "در حال ساختن حساب، لطفا صبر کنید...",
+        "updatingAccount": "در حال به روز رسانی حساب، لطفا صبر کنید...",
         "accountSyncing": "حساب در حال همگام سازی است",
         "accountSyncComplete": "همگام سازی حساب انجام شد",
         "passwordUpdating": "در حال به روز رسانی رمز عبور...",
         "passwordSuccess": "به روز رسانی رمز عبور کامل شد",
         "passwordFailed": "به روز رسانی رمز عبور ناموفق بود",
-        "exportingStronghold": "در حال وارد کردن Stronghold...",
-        "exportingStrongholdSuccess": "ورود Stronghold با موفقیت انجام شد",
-        "exportingStrongholdFailed": "ورود Stronghold ناموفق بود",
+        "syncingAccounts": "Syncing accounts...",
+        "exportingStronghold": "Exporting Stronghold...",
+        "exportingStrongholdSuccess": "Exported Stronghold successfully",
+        "exportingStrongholdFailed": "Exporting Stronghold failed",
         "pinCodeUpdating": "در حال به روز رسانی کد PIN...",
         "pinCodeSuccess": "به روز رسانی کد PIN با موفقیت انجام شد",
         "pinCodeFailed": "به روز رسانی کد PIN با ناموفق بود",
-        "passwordStrength": "Password strength",
-        "passwordStrength0": "Bad",
-        "passwordStrength1": "Poor",
-        "passwordStrength2": "Weak",
-        "passwordStrength3": "Average",
-        "passwordStrength4": "Strong",
-        "creatingProfile": "Creating profile, please wait..."
+        "passwordStrength": "قدرت رمز عبور",
+        "passwordStrength0": "بد",
+        "passwordStrength1": "ضعیف",
+        "passwordStrength2": "ضعیف",
+        "passwordStrength3": "متوسط",
+        "passwordStrength4": "قوی",
+        "creatingProfile": "در حال ساختن پروفایل، لطفا صبر کنید...",
+        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
     },
     "dates": {
         "today": "امروز",
+        "yesterday": "دیروز",
         "daysAgo": "{time, plural, one {# روز} other {# روز}} قبل",
         "weeksAgo": "{time, plural, one {# هفته} other {# هفته}} قبل",
         "monthsAgo": "{time, plural, one {# ماه} other {# ماه}} قبل",
@@ -577,14 +613,17 @@
     "notifications": {
         "valueTx": "در حال دریافت {{value}} به {{account}}",
         "confirmed": "خروجی {{value}} از {{account}} تایید شد",
+        "confirmedInternal": "میزان {{value}} از {{senderAccount}} به {{receiverAccount}} تایید شد.",
+        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
         "failed": "خروجی {{value}} از {{account}} ناموفق بود",
         "downloadingUpdate": "درحال دانلود به‌روزرسانی",
         "updateReady": "به روز رسانی انجام شد",
-        "updateError": "خطایی در طول این به روز رسانی رخ داد٬ لطفا دوباره امتحان کنید.",
-        "restartInstall": "برای نصب٬ مجددا راه اندازی کنید",
+        "updateError": "خطایی در طول این به روز رسانی رخ داد، لطفا دوباره امتحان کنید",
+        "restartInstall": "برای نصب، مجددا راه اندازی کنید",
         "calcMinutesRemaining": "در حال شمارش زمان باقیمانده...",
         "minutesRemaining": "{minutes, plural, one {1 دقیقه باقی مانده } other {# دقیقه باقی مانده}}",
-        "copiedToClipboard": "Copied to clipboard"
+        "copiedToClipboard": "در کلیپ‌بورد کپی شد",
+        "accountsSynchronized": "Account synchronization complete"
     },
     "error": {
         "profile": {
@@ -594,7 +633,7 @@
         "password": {
             "doNotMatch": "رمزهای عبور یکسان نیستند.",
             "tooWeak": "رمزعبور جدید شما ضعیف است.",
-            "row": "استقاده از کلید های ردیفی یا سر راستی آسان و قابل حدس زدن میباشد.",
+            "row": "استفاده از کلید های ردیفی یا سر راستی آسان و قابل حدس زدن میباشد.",
             "pattern": "الگوهای کوتاه صفحه کلید به راحتی قابل حدس زدن میباشد.",
             "names": "نام و نام خانوادگی مرسوم به راحتی قابل حدس میباشد.",
             "repeats": "تکرار حرف ها کنار یکدیگر مانند 'aaa' به راحتی قابل حدس زدن میباشد.",
@@ -604,7 +643,7 @@
             "dates": "تاریخ ها اغلب آسان و قابل حدس زدن میباشد.",
             "common": "این یک رمز عبور بسیار رایج میباشد.",
             "similar": "این رمز مشابه یک رمز عبور رایج میباشد.",
-            "reasonWord": "یک کلمه به راحتی قابل حدس زدن میباشد.",
+            "word": "یک کلمه به راحتی قابل حدس زدن میباشد.",
             "incorrect": "رمز عبور شما نامعتبر است.",
             "length": "رمز عبور شما نمیتواند بیشتر از {length, plural, one {1 کاراکتر} other {# کاراکتر}} باشد."
         },
@@ -615,27 +654,33 @@
         },
         "account": {
             "length": "نام حساب شما نمیتواند بیشتر از {length, plural, one {1 کاراکتر} other {# کاراکتر}} باشد.",
-            "empty": "قبل از ساختن یک حساب جدید٬ باید از حساب اخیر خود استفاده کنید.",
-            "notEmpty": "شما باید قبل از حذف این حساب٬ موجودی خود را انتقال دهید.",
-            "duplicate": "حسابی با همین نام از قبل وجود دارد."
+            "empty": "قبل از ایجاد یک حساب جدید، باید از حساب اخیر خود استفاده کنید.",
+            "notEmpty": "شما باید قبل از حذف این حساب، موجودی خود را انتقال دهید.",
+            "duplicate": "حسابی با همین نام از قبل وجود دارد.",
+            "tilde": "اسم پروفایل نمیتواند با کاراکتر '~' شروع شود.",
+            "control": "اسم پروفایل نمیتواند از کاراکتر کنترلی تشکیل شده باشد.",
+            "startDot": "اسم پروفایل نمیتواند با کاراکتر '.' شروع شود.",
+            "chars": "اسم پروفایل نمیتواند از کاراکترهای <>:\"/\\|?* تشکیل شده باشد"
         },
         "send": {
             "addressLength": "آدرس ها باید {length, plural, one {1 کاراکتری} other {# کاراکتری}} باشند.",
             "amountTooHigh": "این مقدار بیشتر از موجودی حساب شماست.",
-            "amountNoFloat": "اگر واحدها `i` باشند٬ نمیتوانید از اعشار استفاده کنید.",
+            "amountNoFloat": "اگر واحدها `i` باشند، نمیتوانید از اعشار استفاده کنید.",
             "amountInvalidFormat": "این مقدار نامعتبر میباشد.",
             "amountZero": "مقدار باید از 0 بیشتر باشد.",
-            "wrongAddressFormat": "آدرس ها با پیشوند {prefix} شروع میشوند.",
-            "insufficientFunds": "This account has insufficient funds.",
-            "sendingDust": "You cannot send less than 1 Mi.",
-            "leavingDust": "You cannot leave less than 1 Mi on your address."
+            "wrongAddressPrefix": "آدرس ها با پیشوند {prefix} شروع میشوند.",
+            "wrongAddressFormat": "این آدرس به درستی فرمت نشده.",
+            "insufficientFunds": "این حساب موجودی کافی ندارد.",
+            "noToAccount": "شما حساب دریافت کننده را انتخاب نکرده اید.",
+            "sendingDust": "شما کمتر از 1Mi نمیتوانید ارسال کنید.",
+            "leavingDust": "در آدرس شما کمتر از 1Mi نمیتواند باشد."
         },
         "node": {
             "invalid": "لطفا یک URL معتبر وارد کنید.",
-            "https": "HTTPS لازم است. برای استفاده از اتصالات HTTP بدون امنیت ، یک پروفایل برنامه نویس تنظیم کنید.",
+            "https": "HTTPS لازم است. برای استفاده از اتصالات HTTP بدون امنیت، یک پروفایل برنامه نویس تنظیم کنید.",
             "duplicate": "این نود قبلا اضافه شده است.",
-            "unsynced": "The node is not in sync.",
-            "noSynced": "No synced nodes are available."
+            "unsynced": "این نود هماهنگ نیست.",
+            "noSynced": "هیچ نود همگام شده ای در دسترس نمیباشد."
         },
         "global": {
             "generic": "مشکلی پیش آمد."
@@ -646,7 +691,7 @@
             "mnemonic": "نام حفظی معتبر نمی باشد.",
             "seedTooShort": "سید باید 81 کاراکتری باشد٬ این {length, plural, one {1 کاراکتریست} other {کاراکتریست #}}",
             "seedCharacters": "سید فقط میتواند از کاراکتر A-Z یا 9 تشکیل شده باشد.",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
+            "phraseWordCount": "عبارت بازیابی شما باید 24 کلمه ای باشد٬ در حال حاضر {length, plural, one {1 کلمه ایست} other {کلمه ایست #}}.",
             "phraseUnrecognizedWord": "کلمه نا آشنا \"{word}\" در عبارت بازیابی شما یافت شد"
         }
     }

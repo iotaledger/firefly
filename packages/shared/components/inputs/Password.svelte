@@ -46,8 +46,10 @@
     {#if showStrengthLevel}
         <strength-meter class="flex flex-row justify-between items-center mb-2">
             <div class="flex flex-row">
-                <Text smaller secondary>{locale("general.passwordStrength")}:</Text>
-                <Text smaller overrideColor classes={`text-${STRENGTH_COLORS[strength]} uppercase ml-2`}>{locale(`general.passwordStrength${strength}`)}</Text>
+                <Text smaller secondary>{locale('general.passwordStrength')}:</Text>
+                <Text smaller overrideColor classes={`text-${STRENGTH_COLORS[strength]} uppercase ml-2`}>
+                    {locale(`general.passwordStrength${strength}`)}
+                </Text>
             </div>
             <div class="flex flex-row justify-end">
                 {#each Array(strengthLevels) as _, i}
@@ -67,6 +69,7 @@
             {disabled}
             placeholder={placeholder || locale('general.password')}
             {submitHandler}
+            disableContextMenu={true}
             spellcheck="false" />
         {#if showRevealToggle === true && !disabled}
             <button type="button" on:click={() => revealToggle()} tabindex="-1" class="absolute top-3 right-3">

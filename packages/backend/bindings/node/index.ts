@@ -125,8 +125,8 @@ export const api = {
   getAccounts: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _getAccounts(sendMessage, __ids)
   },
-  syncAccounts: function (): ((__ids: CommunicationIds) => Promise<string>) {
-    return (__ids: CommunicationIds) => _syncAccounts(sendMessage, __ids)
+  syncAccounts: function (addressIndex?: number, gapLimit?: number): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _syncAccounts(sendMessage, __ids, addressIndex, gapLimit)
   },
   areLatestAddressesUnused: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _areLatestAddressesUnused(sendMessage, __ids)
@@ -158,8 +158,8 @@ export const api = {
   reattach: function (accountId: AccountIdentifier, messageId: string): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _reattach(sendMessage, __ids, accountId, messageId)
   },
-  backup: function (destinationPath: string): ((__ids: CommunicationIds) => Promise<string>) {
-    return (__ids: CommunicationIds) => _backup(sendMessage, __ids, destinationPath)
+  backup: function (destinationPath: string, password: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _backup(sendMessage, __ids, destinationPath, password)
   },
   restoreBackup: function (backupPath: string, password: string): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _restoreBackup(sendMessage, __ids, backupPath, password)

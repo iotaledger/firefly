@@ -181,6 +181,7 @@ module.exports = {
                 20: pxToRem(20),
                 22: pxToRem(22),
                 24: pxToRem(24),
+                28: pxToRem(28),
                 30: pxToRem(30),
                 32: pxToRem(32),
                 36: pxToRem(36),
@@ -220,9 +221,27 @@ module.exports = {
                         transform: 'rotate(0deg)',
                     },
                 },
+                shake: {
+                    '8%, 41%': {
+                        transform: 'translateX(-10px)',
+                    },
+                    '25%, 58%': {
+                        transform: 'translateX(10px)',
+                    },
+                    '75%': {
+                        transform: 'translateX(-5px)',
+                    },
+                    '92%': {
+                        transform: 'translateX(5px)',
+                    },
+                    '0%, 100%': {
+                        transform: 'translateX(0)',
+                    },
+                },
             },
             animation: {
                 'spin-reverse': 'spinReverse 1s linear infinite;',
+                shake: 'shake .5s linear;',
             },
         },
     },

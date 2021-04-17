@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Text } from 'shared/components'
     import { debounce } from 'shared/lib/utils'
+    import { asyncVerifyMnemonic } from 'shared/lib/wallet'
     import { english } from 'shared/lib/wordlists/english'
 
     export let value = undefined
@@ -32,7 +33,15 @@
             })
         }
         for (let i = 0; i < words.length; i++) {
-            if (!english.includes(words[i])) {
+            const includesWord = english.includes(words[i])
+            const includesWordOtherCase = english.includes(words[i].toLowerCase())
+            if (!includesWord && includesWordOtherCase) {
+                return locale('error.backup.phraseCaseWord', {
+                    values: {
+                        word: words[i],
+                    },
+                })
+            } else if (!includesWord) {
                 return locale('error.backup.phraseUnrecognizedWord', {
                     values: {
                         word: words[i],
@@ -42,7 +51,7 @@
         }
     }
 
-    const handleKeyDown = () => {
+    const handleKeyDown = async () => {
         value = ''
         statusMessage = ''
         error = false
@@ -68,8 +77,14 @@
                     statusMessage = mnemonicValidations
                     error = true
                 } else {
-                    statusMessage = locale('views.importFromText.phraseDetected')
-                    value = trimmedContent
+                    try {
+                        await asyncVerifyMnemonic(trimmedContent)
+                        statusMessage = locale('views.importFromText.phraseDetected')
+                        value = trimmedContent
+                    } catch (err) {
+                        error = true
+                        statusMessage = locale(err.error)
+                    }
                 }
             }
         }

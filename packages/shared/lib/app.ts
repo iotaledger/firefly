@@ -31,13 +31,14 @@ interface SendParams {
     amount: number
     address: string
     message: string
+    isInternal: boolean
 }
 
 /**
  * Input paramaters for sending transactions
  */
-export const sendParams = writable<SendParams>({ amount: 0, address: '', message: '' })
-export const clearSendParams = () => sendParams.set({ amount: 0, address: '', message: '' })
+export const sendParams = writable<SendParams>({ amount: 0, address: '', message: '', isInternal: false })
+export const clearSendParams = (isInternal = false) => sendParams.set({ amount: 0, address: '', message: '', isInternal })
 
 /**
  * Determines whether a user is logged in
@@ -52,7 +53,7 @@ export const developerMode = persistent<boolean>('developerMode', false)
 /**
  * Cleanup the signup vars
  */
- export const cleanupSignup = () => {
+export const cleanupSignup = () => {
     mnemonic.set(null)
     strongholdPassword.set(null)
     walletPin.set(null)
@@ -70,37 +71,41 @@ export const login = () => {
  * Logout from current profile
  */
 export const logout = () => {
-    const ap = get(activeProfile);
+    return new Promise<void>((resolve) => {
+        const ap = get(activeProfile);
 
-    const _cleanup = () => {
-        if (ap) {
-            destroyActor(ap.id)
+        const _cleanup = () => {
+            if (ap) {
+                destroyActor(ap.id)
+            }
+            isStrongholdLocked.set(true)
+            clearSendParams()
+            closePopup()
+            resetWallet()
+            resetRouter()
+            clearActiveProfile()
+            loggedIn.set(false)
+
+            resolve()
         }
-        isStrongholdLocked.set(true)
-        clearSendParams()
-        closePopup()
-        resetWallet()
-        resetRouter()
-        clearActiveProfile()
-        loggedIn.set(false)
-    }
 
-    if (!get(isStrongholdLocked)) {
-        api.lockStronghold({
-            onSuccess() {
-                _cleanup()
-            },
-            onError(err) {
-                _cleanup()
+        if (!get(isStrongholdLocked)) {
+            api.lockStronghold({
+                onSuccess() {
+                    _cleanup()
+                },
+                onError(err) {
+                    _cleanup()
 
-                showAppNotification({
-                    type: 'error',
-                    message: localize(err.error),
-                })
+                    showAppNotification({
+                        type: 'error',
+                        message: localize(err.error),
+                    })
 
-            },
-        })
-    } else {
-        _cleanup()
-    }
+                },
+            })
+        } else {
+            _cleanup()
+        }
+    })
 }

@@ -207,7 +207,11 @@
             },
             "resyncAccounts": {
                 "title": "Accounts opnieuw synchroniseren",
-                "description": ""
+                "description": "Start een achtergrondtaak om ervoor te zorgen dat je accounts up-to-date zijn."
+            },
+            "hiddenAccounts": {
+                "title": "Verborgen rekeningen",
+                "description": "Door deze optie te selecteren worden eerder verborgen rekeningen getoond."
             },
             "deleteProfile": {
                 "title": "Profiel verwijderen",
@@ -223,15 +227,23 @@
             },
             "nodeSettings": {
                 "title": "Node instellingen",
-                "description": "Selecteer Handmatig om uit de node lijst te kiezen of maak verbinding met uw eigen node"
+                "description": "Selecteer Handmatig om de node instellingen in te stellen en verbinding te maken met uw eigen node"
             },
             "configureNodeList": {
                 "title": "Selecteer een node",
-                "description": ""
+                "description": "Beheer de lijst met nodes waarmee uw portemonnee verbinding maakt.",
+                "primaryNode": "Primaire node",
+                "excludeNode": "Node uitsluiten",
+                "includeNode": "Node toevoegen",
+                "viewDetails": "Details weergeven",
+                "setAsPrimary": "Instellen als primair",
+                "removeNode": "Verwijder node",
+                "includeOfficialNodeList": "Voeg officiële node lijst toe",
+                "noNodes": "Er zijn geen nodes, automatische selectie zal in plaats daarvan worden gebruikt."
             },
             "proofOfWork": {
                 "title": "Proof of work",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "description": "Voltooi proof-of-work lokaal op uw apparaat of besteed deze uit aan de node"
             },
             "errorLog": {
                 "title": "Foutenlogboek",
@@ -287,12 +299,12 @@
                     "noneDetected": "Niet gedetecteerd"
                 },
                 "strongholdStatus": {
-                    "title": "Stronghold Status",
-                    "locked": "Vergrendeld",
-                    "unlocked": "Ontgrendeld"
+                    "title": "Portemonnee Status",
+                    "locked": "Stronghold vergrendeld",
+                    "unlocked": "Stronghold ontgrendeld"
                 },
                 "strongholdBackup": {
-                    "title": "Stronghold Back-up",
+                    "title": "Portemonnee back-up",
                     "weeksAgo": "{weeks, plural, one {# week} other {# weken}} geleden"
                 }
             },
@@ -313,7 +325,8 @@
     "popups": {
         "password": {
             "title": "Wachtwoord vereist",
-            "subtitle": "Voer het wachtwoord van je wallet in om Stronghold te ontgrendelen"
+            "subtitle": "Voer je wachtwoord in om Stronghold te ontgrendelen",
+            "backup": "Voer je wachtwoord in om een back-up te exporteren"
         },
         "qr": {
             "title": "Jouw QR-code"
@@ -331,24 +344,34 @@
             "backupDescription": "Het is belangrijk om regelmatig een back-up te maken om er zeker van te zijn dat je een kopie hebt van je accounts en transactiegeschiedenis.",
             "backupWarning": "Als je je back-up en herstelzin kwijt raakt verlies je toegang tot je fondsen.",
             "notBackedUp": "Geen back-up gemaakt",
-            "notBackedUpDescription": "Je hebt geen back-up van je Stronghold gemaakt"
+            "notBackedUpDescription": "Je hebt geen back-up van je Stronghold gemaakt",
+            "saving": "Opslaan..."
         },
         "deleteAccount": {
             "title": "Verwijder {name}?",
-            "body": "U kunt dit account later opnieuw toevoegen, maar u kunt uw transactiegeschiedenis verliezen.",
-            "typePassword": "Voer het wachtwoord van uw portemonnee in om te bevestigen.",
-            "deleteAccount": "Rekening verwijderen",
+            "body": "Dit account heeft geen transactiegeschiedenis. Het kan veilig worden verwijderd.",
+            "typePassword": "Voer je portemonnee wachtwoord in om te bevestigen.",
+            "hideAccount": "Verwijder account",
             "errorTitle": "Kan {name} niet verwijderen",
-            "errorBody1": "Om een rekening te verwijderen moet het 0 saldo hebben.",
-            "errorBody2": "Je hebt momenteel {balance} op deze rekening staan. Verplaats dit bedrag naar een ander account en probeer het opnieuw.",
-            "errorBody3": "U kunt deze rekening niet verwijderen, u moet er ten minste één hebben."
+            "errorBody1": "U kunt dit account niet verwijderen, er moet minstens 1 account zijn."
+        },
+        "hideAccount": {
+            "title": "{name} verbergen?",
+            "body": "U kunt dit account later terugvinden door \"Verborgen accounts weergeven\" in te schakelen in Geavanceerde Instellingen.",
+            "typePassword": "Voer je portemonnee wachtwoord in om te bevestigen.",
+            "hideAccount": "Account verbergen",
+            "errorTitle": "{name} kan niet worden verborgen",
+            "errorBody1": "Om een account te verbergen moet het saldo 0 hebben.",
+            "errorBody2": "U heeft momenteel nog {balance} staan op deze rekening. Verplaats deze bedragen naar een ander account en probeer het opnieuw.",
+            "errorBody3": "U kunt dit account niet verbergen, u moet ten minste één hebben."
         },
         "addressHistory": {
-            "title": "{name} account adresgechiedenis",
+            "title": "{name} adresgeschiedenis",
             "currentBalance": "Huidig saldo: {balance}"
         },
         "node": {
             "titleAdd": "Node toevoegen",
+            "titleUpdate": "Een node bijwerken",
             "titleRemove": "Verwijder node",
             "titleDetails": "Node details",
             "nodeAddress": "Node adres",
@@ -363,7 +386,8 @@
         },
         "deleteProfile": {
             "title": "Profiel verwijderen",
-            "confirmation": "Weet je zeker dat je dit profiel wil verwijderen? Deze handeling kan niet ongedaan worden gemaakt."
+            "confirmation": "Weet je zeker dat je dit profiel wil verwijderen? Deze handeling kan niet ongedaan worden gemaakt.",
+            "typePassword": "Voer je wachtwoord in om te bevestigen."
         },
         "diagnostics": {
             "title": "Foutrapportages",
@@ -375,6 +399,10 @@
             "totalMem": "Totaal Geheugen",
             "freeMem": "Vrij Geheugen",
             "userPath": "Gebruikerspad"
+        },
+        "transaction": {
+            "title": "Bevestig transactie",
+            "body": "Je staat op het punt {amount} te sturen naar"
         }
     },
     "charts": {
@@ -425,16 +453,19 @@
         "enableDeveloperMode": "Ontwikkelaarsmodus inschakelen",
         "enableSystemNotifications": "Notificaties inschakelen",
         "exportState": "Status exporteren",
-        "outsourceProofOfWork": "Proof of work uitbesteden",
+        "localProofOfWork": "Lokaal bewijs van werk",
         "unlock": "Ontgrendel",
         "updateFirefly": "Firefly bijwerken",
         "restartNow": "Herstart nu",
         "saveBackup": "Sla Stronghold back-up op",
         "customizeAcount": "Account aanpassen",
         "viewAddressHistory": "Bekijk adresgeschiedenis",
-        "deleteAccount": "Rekening verwijderen",
+        "hideAccount": "Account verbergen",
+        "showAccount": "Account zichtbaar maken",
+        "deleteAccount": "Verwijder account",
         "max": "Max",
         "addNode": "Node toevoegen",
+        "updateNode": "Node bijwerken",
         "removeNode": "Verwijder node",
         "hide": "Verberg",
         "hideOthers": "Verberg Andere",
@@ -459,7 +490,9 @@
         "skipBackup": "Bestandsback-up overslaan",
         "finishSetup": "Installatie voltooien",
         "readDocumentation": "Lees de documentatie",
-        "visitFaq": "Bezoek veelgestelde vragen"
+        "visitFaq": "Bezoek veelgestelde vragen",
+        "showHiddenAccounts": "Toon verborgen accounts",
+        "confirm": "Bevestig"
     },
     "general": {
         "password": "Wachtwoord",
@@ -473,7 +506,7 @@
         "sent": "Verzonden",
         "received": "Ontvangen",
         "sendPayment": "Verstuur betaling",
-        "moveFunds": "Tokens verplaatsen",
+        "moveFunds": "Interne overdracht",
         "sendFunds": "Verstuur tokens",
         "sendToAddress": "Stuur naar rekening",
         "scanQrOrPaste": "Scan een QR-code of plak een adres",
@@ -488,7 +521,7 @@
         "reference": "Referentie",
         "from": "Van",
         "to": "Naar",
-        "receiveFunds": "Tokens ontvangen",
+        "receiveFunds": "Geld ontvangen",
         "myAddress": "Mijn Adres",
         "shareAddress": "Een adres delen",
         "yourAddress": "Jouw adres",
@@ -505,20 +538,20 @@
         "appearance": "Vormgeving",
         "lightTheme": "Lichte modus",
         "darkTheme": "Donkere modus",
-        "totalBalance": "Totaalsaldo",
+        "balance": "Saldo",
         "accountBalance": "Rekeningsaldo",
         "incoming": "Inkomend",
         "outgoing": "Uitgaand",
         "totalIn": "Totaal inkomend",
         "totalOut": "Totaal uitgaand",
         "accounts": "Rekeningen",
-        "myAccounts": "Mijn rekeningen",
+        "myAccounts": "Mijn accounts",
         "automaticNodeSelection": "Automatische node selectie",
         "manualNodeSelection": "Handmatige node selectie",
         "profiles": "Profielen",
         "developerProfile": "Ontwikkelaar Profiel",
         "dev": "Ontwikkelaar",
-        "createAccount": "Account aanmaken",
+        "createAccount": "Maak een account aan",
         "accountName": "Accountnaam",
         "latestTransactions": "Meest recente transacties",
         "transactions": "Transacties",
@@ -529,7 +562,7 @@
         "help": "Help",
         "you": "U",
         "messageId": "Bericht ID",
-        "inputAddress": "Voer adres in",
+        "inputAddress": "Verzendadres",
         "receiveAddress": "Adres van de ontvanger",
         "date": "Datum",
         "status": "Status",
@@ -553,9 +586,10 @@
         "passwordUpdating": "Wachtwoord bijwerken...",
         "passwordSuccess": "Wachtwoord succesvol bijgewerkt",
         "passwordFailed": "Wachtwoord bijwerken mislukt",
-        "exportingStronghold": "Exporteren van stronghold...",
-        "exportingStrongholdSuccess": "Stronghold bestand succesvol geëxporteerd",
-        "exportingStrongholdFailed": "Exporteren stronghold bestand mislukt",
+        "syncingAccounts": "Accounts synchroniseren...",
+        "exportingStronghold": "Exporteren van Stronghold...",
+        "exportingStrongholdSuccess": "Stronghold succesvol geexporteerd",
+        "exportingStrongholdFailed": "Exporteren Stronghold mislukt",
         "pinCodeUpdating": "PIN-code bijwerken...",
         "pinCodeSuccess": "PIN-code succesvol bijgewerkt",
         "pinCodeFailed": "PIN-code bijwerken mislukt",
@@ -565,10 +599,12 @@
         "passwordStrength2": "Zwak",
         "passwordStrength3": "Gemiddeld",
         "passwordStrength4": "Sterk",
-        "creatingProfile": "Profiel aanmaken, even geduld alstublieft..."
+        "creatingProfile": "Profiel aanmaken, even geduld alstublieft...",
+        "accountRemoved": "Dit account is verborgen. Toon het om overschrijvingen uit te voeren."
     },
     "dates": {
         "today": "Vandaag",
+        "yesterday": "Gisteren",
         "daysAgo": "{time, plural, one {# dag} other {# dagen}} geleden",
         "weeksAgo": "{time, plural, one {# week} other {# weken}} geleden",
         "monthsAgo": "{time, plural, one {# maand} other {# maanden}} geleden",
@@ -577,6 +613,8 @@
     "notifications": {
         "valueTx": "Ontvangst van {{value}} op {{account}}",
         "confirmed": "Uitgaande {{value}} van {{account}} is bevestigd",
+        "confirmedInternal": "{{value}} van {{senderAccount}} tot {{receiverAccount}} is bevestigd",
+        "confirmedInternalNoAccounts": "{{value}} interne overdracht is bevestigd",
         "failed": "Uitgaande {{value}} van {{account}} is mislukt",
         "downloadingUpdate": "Update aan het downloaden",
         "updateReady": "Update gereed",
@@ -584,7 +622,8 @@
         "restartInstall": "Herstart om te installeren",
         "calcMinutesRemaining": "Resterende minuten aan het berekenen...",
         "minutesRemaining": "{minutes, plural, one {1 minuut resterend} other {# minuten resterend}}",
-        "copiedToClipboard": "Gekopieerd naar het klembord"
+        "copiedToClipboard": "Gekopieerd naar het klembord",
+        "accountsSynchronized": "Account synchronisatie voltooid"
     },
     "error": {
         "profile": {
@@ -604,7 +643,7 @@
             "dates": "Datums zijn makkelijk te raden.",
             "common": "Dit is een veelvoorkomend wachtwoord.",
             "similar": "Dit is vergelijkbaar met een veelgebruikt wachtwoord.",
-            "reasonWord": "Een enkel woord is makkelijk te raden.",
+            "word": "Een enkel woord is makkelijk te raden.",
             "incorrect": "Uw wachtwoord is niet correct.",
             "length": "Uw wachtwoord kan niet langer zijn dan {length, plural, one {1 teken} other {# tekens}}."
         },
@@ -617,7 +656,11 @@
             "length": "Uw accountnaam mag niet langer zijn dan {length, plural, one {1 karakter} other {# karakters}}.",
             "empty": "U moet uw laatste account gebruiken voordat u een nieuwe aanmaakt.",
             "notEmpty": "U moet het openstaande saldo overboeken voordat u deze rekening verwijdert.",
-            "duplicate": "Een account met deze naam bestaat al."
+            "duplicate": "Een account met deze naam bestaat al.",
+            "tilde": "Een profielnaam kan niet beginnen met het teken '~'.",
+            "control": "Een profielnaam mag geen controleteken bevatten.",
+            "startDot": "Een profielnaam kan niet beginnen met het '.' karakter.",
+            "chars": "Een profielnaam mag de volgende tekens niet bevatten <>:\"/\\×?*"
         },
         "send": {
             "addressLength": "Adressen moeten {length, plural, one {1 teken} other {# tekens}} lang zijn.",
@@ -625,8 +668,10 @@
             "amountNoFloat": "Als de eenheden `i` zijn, kunt u geen cijfers achter de comma gebruiken.",
             "amountInvalidFormat": "De opgegeven waarde lijkt een ongeldige waarde te zijn.",
             "amountZero": "De waarde moet groter zijn dan 0.",
-            "wrongAddressFormat": "Adressen beginnen met {prefix}.",
+            "wrongAddressPrefix": "Adressen beginnen met het voorvoegsel {prefix}.",
+            "wrongAddressFormat": "Het adres is niet correct opgemaakt.",
             "insufficientFunds": "Deze rekening heeft onvoldoende saldo.",
+            "noToAccount": "U heeft geen account geselecteerd om de bedragen naar toe te sturen.",
             "sendingDust": "U kunt niet minder dan 1 Mi verzenden.",
             "leavingDust": "U kunt niet minder dan 1 Mi op uw rekening achterlaten."
         },
@@ -647,7 +692,7 @@
             "seedTooShort": "De seed moet 81 tekens lang zijn, het {length, plural, one {is er nu 1} other {zijn er nu #}}",
             "seedCharacters": "De seed mag alleen de tekens A-Z of 9 bevatten",
             "phraseWordCount": "Uw herstelzin zou 24 woorden moeten bevatten, op dit moment {length, plural, one {is er 1} other {zijn er #}}.",
-            "phraseUnrecognizedWord": "Onherkend woord \"{word}\" in uw herstelzin."
+            "phraseUnrecognizedWord": "Het woord \"{word}\" is niet herkend in uw herstel zin"
         }
     }
 }

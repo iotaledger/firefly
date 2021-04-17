@@ -2,12 +2,19 @@
     import { Button, ButtonCheckbox, Illustration, Input, OnboardingLayout, Text } from 'shared/components'
     import { cleanupSignup, developerMode } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
-    import { hasOnlyWhitespaces } from 'shared/lib/helpers'
+    import { getTrimmedLength, validateFilenameChars } from 'shared/lib/helpers'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { createProfile, disposeNewProfile, newProfile, profiles } from 'shared/lib/profile'
+    import {
+        cleanupInProgressProfiles,
+        createProfile,
+        disposeNewProfile,
+        newProfile,
+        profileInProgress,
+        profiles,
+    } from 'shared/lib/profile'
     import { SetupType } from 'shared/lib/typings/routes'
-    import { getStoragePath, initialise, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
-    import { createEventDispatcher } from 'svelte'
+    import { destroyActor, getStoragePath, initialise, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
+    import { createEventDispatcher, onMount } from 'svelte'
     import { get } from 'svelte/store'
 
     export let locale
@@ -21,14 +28,23 @@
     let isDeveloperProfile = true
     let profileName = get(newProfile)?.name ?? ''
 
-    $: isProfileNameValid = profileName && !hasOnlyWhitespaces(profileName)
+    $: isProfileNameValid = profileName && profileName.trim()
+
+    // This looks odd but sets a reactive dependency on profileName, so when it changes the error will clear
+    $: profileName, (error = '')
 
     async function handleContinueClick(setupType) {
-        if (profileName) {
+        const trimmedProfileName = profileName.trim()
+        if (trimmedProfileName) {
             let profile
             error = ''
 
-            if (profileName.length > MAX_PROFILE_NAME_LENGTH) {
+            const validateError = validateFilenameChars(trimmedProfileName)
+            if (validateError) {
+                return (error = locale(`error.account.${validateError}`))
+            }
+
+            if (getTrimmedLength(trimmedProfileName) > MAX_PROFILE_NAME_LENGTH) {
                 return (error = locale('error.profile.length', {
                     values: {
                         length: MAX_PROFILE_NAME_LENGTH,
@@ -36,22 +52,37 @@
                 }))
             }
 
-            if (get(profiles).some((profile) => profile.name === profileName)) {
+            if (get(profiles).some((profile) => profile.name === trimmedProfileName)) {
                 return (error = locale('error.profile.duplicate'))
             }
 
-            profile = createProfile(profileName, isDeveloperProfile)
+            const previousInitializedId = $newProfile?.id
+            const nameChanged = $newProfile?.name !== trimmedProfileName
+
+            // If the name has changed from the previous initialization
+            // then make sure we cleanup the last profile and actor
+            if (nameChanged && previousInitializedId) {
+                // The initialized profile name has changed
+                // so we need to destroy the previous actor
+                destroyActor(previousInitializedId)
+            }
 
             try {
                 busy = true
-                const userDataPath = await Electron.getUserDataPath()
-                initialise($newProfile.id, getStoragePath(userDataPath, $newProfile.name))
+
+                if (nameChanged) {
+                    profile = createProfile(trimmedProfileName, isDeveloperProfile)
+                    profileInProgress.set(trimmedProfileName)
+
+                    const userDataPath = await Electron.getUserDataPath()
+                    initialise($newProfile.id, getStoragePath(userDataPath, $newProfile.name))
+                }
 
                 dispatch('next', { setupType })
             } catch (err) {
                 showAppNotification({
                     type: 'error',
-                    message: locale(err.error),
+                    message: locale(err.error ? err.error : 'error.global.generic'),
                 })
             } finally {
                 busy = false
@@ -59,9 +90,10 @@
         }
     }
 
-    function handleBackClick() {
+    async function handleBackClick() {
         cleanupSignup()
-        disposeNewProfile()
+        await disposeNewProfile()
+        await cleanupInProgressProfiles()
         dispatch('previous')
     }
 </script>

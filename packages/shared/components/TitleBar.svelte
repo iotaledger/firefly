@@ -1,27 +1,48 @@
 <script lang="typescript">
+    import { appSettings } from 'shared/lib/appSettings'
     import { Electron } from 'shared/lib/electron'
     import { popupState } from 'shared/lib/popup'
+    import { dashboardRoute } from 'shared/lib/router'
+    import { Tabs } from 'shared/lib/typings/routes'
     import { wallet } from 'shared/lib/wallet'
-    import { onMount } from 'svelte'
+    import tailwindConfig from 'shared/tailwind.config.js'
+    import { onDestroy, onMount } from 'svelte'
+    import resolveConfig from 'tailwindcss/resolveConfig'
 
     const { accountsLoaded } = $wallet
 
     $: showingDashboard = $accountsLoaded && $popupState.type !== 'busy'
     $: showingPopup = $popupState.active && $popupState.type !== 'busy'
+    $: showingSettings = $dashboardRoute === Tabs.Settings
 
     let os = ''
+    let isMaximized = false
+
+    $: darkModeEnabled = $appSettings.darkMode
+
+    const fullConfig = resolveConfig(tailwindConfig)
 
     onMount(async () => {
         os = await Electron.getOS()
+        isMaximized = await Electron.isMaximized()
         document.body.classList.add(`platform-${os}`)
+        window.addEventListener('resize', handleResize)
     })
+
+    onDestroy(() => {
+        window.removeEventListener('resize', handleResize)
+    })
+
+    async function handleResize() {
+        isMaximized = await Electron.isMaximized()
+    }
 </script>
 
 <div class="h-full w-full">
     {#if os === 'win32'}
         <nav
-            class={`fixed z-10 left-0 right-0 flex flex-row h-12 justify-between ${showingDashboard ? 'bg-gray-50' : 'bg-white'} dark:bg-gray-900`}
-            style="-webkit-app-region: drag">
+            class={`fixed z-10 left-0 right-0 top-0 flex flex-row h-12 justify-between ${showingDashboard && !showingSettings ? 'bg-gray-50' : 'bg-white'} dark:bg-gray-900`}>
+            <div class="absolute left-16 top-1 right-36 h-9" style="-webkit-app-region: drag" />
             <button
                 on:click={() => Electron.popupMenu()}
                 class={`flex justify-center p-4 stroke-current text-gray-500 dark:text-gray-100 w-20 ${showingDashboard ? 'bg-white dark:bg-gray-800 border-solid border-r border-gray-100 dark:border-gray-800' : ''}`}
@@ -42,11 +63,23 @@
                     </svg>
                 </button>
                 <button
-                    on:click={() => Electron.maximize()}
-                    class="p-2 mr-2 stroke-current text-gray-500 dark:text-gray-100"
+                    on:click={async () => (isMaximized = await Electron.maximize())}
+                    class="p-2 mr-2 stroke-current text-gray-500 dark:text-gray-100 fill-current"
                     style="-webkit-app-region: none">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <rect x="2.5" y="2.5" width="11" height="11" rx="0.5" stroke="currentColor" stroke-width="1.5" />
+                        {#if isMaximized}
+                            <rect x="4.5" y="0.5" width="11" height="11" stroke="currentColor" stroke-width="1.5" />
+                            <rect
+                                x="0.5"
+                                y="4.5"
+                                width="11"
+                                height="11"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                fill={darkModeEnabled ? fullConfig.theme.colors.gray['900'] : (showingDashboard && !showingSettings ? fullConfig.theme.colors.gray['50'] : fullConfig.theme.colors.white)} />
+                        {:else}
+                            <rect x="2.5" y="2.5" width="11" height="11" rx="0.5" stroke="currentColor" stroke-width="1.5" />
+                        {/if}
                     </svg>
                 </button>
                 <button

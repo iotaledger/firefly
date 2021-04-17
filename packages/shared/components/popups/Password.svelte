@@ -8,6 +8,8 @@
     export let onSuccess
     export let onError
     export let onCancelled
+    export let subtitle
+    export let returnPassword = false
 
     let password
     let error = ''
@@ -17,7 +19,7 @@
             onSuccess(response) {
                 closePopup()
                 if ('function' === typeof onSuccess) {
-                    onSuccess(response)
+                    onSuccess(returnPassword ? password : response)
                 }
             },
             onError(err) {
@@ -38,7 +40,7 @@
 
 <div class="mb-5">
     <Text type="h4">{locale('popups.password.title')}</Text>
-    <Text type="p" secondary>{locale('popups.password.subtitle')}</Text>
+    <Text type="p" secondary>{subtitle ?? locale('popups.password.subtitle')}</Text>
 </div>
 <form id="password-popup-form" class="flex justify-center w-full flex-row flex-wrap" on:submit={handleSubmit}>
     <Password

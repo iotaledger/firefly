@@ -1,6 +1,7 @@
 <script lang="typescript">
+    import { Error } from 'shared/components'
     import { ADDRESS_LENGTH } from 'shared/lib/utils'
-    import Error from './Error'
+    import { onMount } from 'svelte'
 
     export let address = undefined
     export let classes = ''
@@ -8,6 +9,15 @@
     export let label = undefined
     export let placeholder = undefined
     export let error = ''
+    export let autofocus = false
+
+    let textAreaElement
+
+    onMount(() => {
+        if (autofocus) {
+            textAreaElement.focus()
+        }
+    })
 </script>
 
 <style type="text/scss">
@@ -68,9 +78,10 @@
     }
 </style>
 
-<div>
-    <address-input class="flex relative {classes}" {disabled}>
+<div class={classes}>
+    <address-input class="flex relative" {disabled}>
         <textarea
+            bind:this={textAreaElement}
             bind:value={address}
             class="w-full text-12 leading-140 border border-solid resize-none
                 {disabled ? 'text-gray-400 dark:text-gray-700' : 'text-gray-800 dark:text-white'} bg-white dark:bg-gray-800 

@@ -3,9 +3,10 @@ const PincodeManager = require('./lib/pincodeManager')
 const DeepLinkManager = require('./lib/deepLinkManager')
 const NotificationManager = require('./lib/notificationManager')
 const { ipcRenderer, contextBridge } = require('electron')
-const { proxyApi } = require('../../shared/lib/walletApi')
 const { menuState } = require('./lib/menuState')
 const fs = require('fs');
+const { proxyApi } = require('shared/lib/shell/walletApi')
+const { hookErrorLogger } = require('shared/lib/shell/errorLogger')
 
 let activeProfileId = null
 
@@ -18,11 +19,32 @@ const Electron = {
     updateActiveProfile(id) {
         activeProfileId = id
     },
+    removeProfileFolder(profilePath) {
+        ipcRenderer.invoke('get-path', 'userData').then((userDataPath) => {
+            // Check that the removing profile path matches the user data path
+            // so that we don't try and remove things outside our scope
+            if (profilePath.startsWith(userDataPath)) {
+                try {
+                    // Sometime the DB can still be locked while it is flushing
+                    // so retry if we receive a busy exception
+                    fs.rmdirSync(profilePath, { recursive: true, maxRetries: 30, retryDelay: 500 })
+                } catch (err) {
+                    console.log(err)
+                }
+            }
+        })
+    },
     PincodeManager,
     DeepLinkManager,
     NotificationManager,
     getStrongholdBackupDestination: (defaultPath) => {
-        return ipcRenderer.invoke('show-save-dialog', { properties: ['createDirectory', 'showOverwriteConfirmation'], defaultPath }).then((result) => {
+        return ipcRenderer.invoke('show-save-dialog', { 
+            properties: ['createDirectory', 'showOverwriteConfirmation'], 
+            defaultPath,
+            filters: [
+                { name: 'Stronghold Files', extensions: ['stronghold'] }
+            ]
+        }).then((result) => {
             if (result.canceled) {
                 return null
             }
@@ -79,6 +101,14 @@ const Electron = {
      */
     updateInstall: () => ipcRenderer.invoke('update-install'),
     /**
+     * Check for an update of the application
+     *
+     * @method updateCheck
+     *
+     * @returns void
+     */
+     updateCheck: () => ipcRenderer.invoke('update-check'),
+     /**
      * Get version details
      *
      * @method getVersionDetails
@@ -110,23 +140,22 @@ const Electron = {
      * Minimize the app
      * @returns {undefined}
      */
-    minimize: () => {
-        ipcRenderer.invoke('minimize')
-    },
+    minimize: () => ipcRenderer.invoke('minimize'),
     /**
      * Maximize the app
      * @returns {undefined}
      */
-    maximize: () => {
-        ipcRenderer.invoke('maximize')
-    },
+    maximize: () => ipcRenderer.invoke('maximize'),
+    /**
+     * Is the app maximized
+     * @returns {boolean}
+     */
+    isMaximized: () => ipcRenderer.invoke('isMaximized'),
     /**
      * Close the app
      * @returns {undefined}
      */
-    close: () => {
-        ipcRenderer.invoke('close')
-    },
+    close: () => ipcRenderer.invoke('close'),
     /*
      * Opens url and checks against acceptlist
      * @param {string} url - Target url
@@ -177,7 +206,11 @@ const Electron = {
             }
         })
     },
-
+    /**
+     * Hook the logger
+     * @returns 
+     */
+    hookErrorLogger
 }
 
 contextBridge.exposeInMainWorld('__WALLET_INIT__', {

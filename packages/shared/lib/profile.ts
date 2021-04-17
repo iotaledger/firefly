@@ -1,10 +1,13 @@
 import { AvailableExchangeRates } from 'shared/lib/currency'
 import { persistent } from 'shared/lib/helpers'
-import { DEFAULT_NODE } from 'shared/lib/network'
 import { generateRandomId } from 'shared/lib/utils'
-import { api } from 'shared/lib/wallet'
+import { asyncRemoveStorage, destroyActor, getStoragePath } from 'shared/lib/wallet'
 import { derived, get, Readable, writable } from 'svelte/store'
+import type { ChartSelectors } from './chart'
 import { Electron } from './electron'
+import {
+    HistoryDataProps
+} from './marketData'
 import type { Node } from './typings/client'
 
 /**
@@ -22,25 +25,29 @@ interface Profile {
      */
     settings: UserSettings
     isDeveloperProfile: boolean
-
+    hiddenAccounts?: string[]
+    gapLimit?: number
 }
 
 /**
  * User Settings
  */
 export interface UserSettings {
-    outsourcePow: boolean
     currency: AvailableExchangeRates
     automaticNodeSelection: boolean
-    node: Node
-    customNodes: Node[]
+    includeOfficialNodes: boolean
+    disabledNodes: string[] | undefined
     /** Lock screen timeout in minutes */
     lockScreenTimeout: number
+    showHiddenAccounts?: boolean
+    chartSelectors: ChartSelectors
 }
 
 export const activeProfileId = writable<string | null>(null)
 
 export const profiles = persistent<Profile[]>('profiles', [])
+
+export const profileInProgress = persistent<string | undefined>('profileInProgress', undefined)
 
 export const newProfile = writable<Profile | null>(null)
 
@@ -92,14 +99,17 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
         name: profileName,
         lastStrongholdBackupTime: null,
         isDeveloperProfile,
+        gapLimit: 10,
         settings: {
-            outsourcePow: false,
             currency: AvailableExchangeRates.USD,
             automaticNodeSelection: true,
-            node: DEFAULT_NODE,
-            customNodes: [],
-            // Minutes
+            includeOfficialNodes: true,
+            disabledNodes: undefined,
             lockScreenTimeout: 5,
+            chartSelectors: {
+                currency: AvailableExchangeRates.USD,
+                timeframe: HistoryDataProps.SEVEN_DAYS
+            }
         },
     }
 
@@ -116,23 +126,15 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
  *
  * @returns {void}
  */
-export const disposeNewProfile = (): void => {
+export const disposeNewProfile = async () => {
     const np = get(newProfile)
     if (np) {
-        api.removeStorage({
-            onSuccess() {
-                api.removeAccount(np.id, {
-                    onSuccess() {
-                    },
-                    onError(err) {
-                        console.error(err)
-                    },
-                })
-            },
-            onError(err) {
-                console.error(err)
-            },
-        })
+        try {
+            await asyncRemoveStorage()
+        } catch (err) {
+            console.error(err)
+        }
+        destroyActor(np.id)
     }
     newProfile.set(null)
     activeProfileId.set(null)
@@ -187,7 +189,7 @@ export const removeProfile = (id: string): void => {
  * @returns {void}
  */
 export const updateProfile = (
-    path: string, value: string | boolean | Date | AvailableExchangeRates | Node | Node[]) => {
+    path: string, value: string | string[] | boolean | Date | number | AvailableExchangeRates | Node | Node[] | ChartSelectors | HistoryDataProps) => {
     const _update = (_profile) => {
         const pathList = path.split('.')
 
@@ -214,5 +216,37 @@ export const updateProfile = (
                 return _profile
             })
         })
+    }
+}
+
+/**
+ * Cleanup any in progress profiles
+ *
+ * @method cleanupInProgressProfiles
+ *
+ * @returns {void}
+ */
+export const cleanupInProgressProfiles = async () => {
+    const inProgressProfile = get(profileInProgress)
+    if (inProgressProfile) {
+        profileInProgress.update(() => undefined)
+        await removeProfileFolder(inProgressProfile)
+    }
+}
+
+/**
+ * Remove the profile folder from storage
+ *
+ * @method removeProfileFolder
+ *
+ * @returns {void}
+ */
+export const removeProfileFolder = async (profileName) => {
+    try {
+        const userDataPath = await Electron.getUserDataPath()
+        const profileStoragePath = getStoragePath(userDataPath, profileName)
+        await Electron.removeProfileFolder(profileStoragePath)
+    } catch (err) {
+        console.error(err)
     }
 }

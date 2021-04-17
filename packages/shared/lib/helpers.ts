@@ -25,31 +25,73 @@ export const persistent = <T>(key: string, initialValue: T): Writable<T> => {
     const state = writable(value)
 
     state.subscribe(($value): void => {
-        localStorage.setItem(key, JSON.stringify($value))
+        if ($value === undefined || $value === null) {
+            localStorage.removeItem(key)
+        } else {
+            localStorage.setItem(key, JSON.stringify($value))
+        }
     })
 
     return state
 }
 
 /**
+ * Get the length of a string after it has been trimmed supporting emojis
+ * @param name The string to get the length of
+ * @returns 
+ */
+export const getTrimmedLength = (name: string | undefined) => {
+    if (!name) {
+        return 0
+    }
+
+    return name.trim().match(/./gu)?.length ?? 0
+}
+
+/**
+ * Does the string contain invalid filename chars
+ * @param name The name to validate
+ * @returns 
+ */
+ export const validateFilenameChars = (name: string | undefined) => {
+    if (!name) {
+        return
+    }
+    if (name.startsWith("~")) {
+        return 'tilde'
+    } 
+    if (/[\u0000-\u001f\u0080-\u009f]/g.test(name)) {
+        return 'control'
+    } 
+    if (/^\.\./.test(name)) {
+		return 'startDot';
+	} 
+    if (/[<>:"/\\|?*]/g.test(name)) {
+        return 'chars'
+    }
+}
+
+/**
  * Extract initials from string
  */
 export const getInitials = (name: string | undefined, maxChars: number) => {
-    if (!name) {
+    if (!name || !name.trim()) {
         return ""
     }
+
     let initialsArray = name
         .trim()
         .split(' ')
-        .map(
-            n =>
-                n?.match(/./ug)[0] // match characters for emoji compatibility 
-                    ?.toUpperCase()
-        )
+        .filter(n => n)
+        .map(n => n.match(/./ug)) // match characters for emoji compatibility 
+        .filter(n => n)
+        .map(n => n[0])
+
     if (maxChars) {
         initialsArray = initialsArray.slice(0, maxChars)
     }
-    return initialsArray.join('')
+
+    return initialsArray.join('').toUpperCase()
 }
 
 /**
@@ -63,7 +105,7 @@ export const getInitials = (name: string | undefined, maxChars: number) => {
 
 export const truncateString = (str: string = '', firstCharCount: number = 5, endCharCount: number = 5, dotCount: number = 3) => {
     const MAX_LENGTH = 13
-    if (str.length <= MAX_LENGTH) {
+    if (!str || str.length <= MAX_LENGTH) {
         return str
     }
     let convertedStr = ''
@@ -92,15 +134,22 @@ export const diffDates = (firstDate: Date, secondDate: Date) => {
 
     if (years > 0) {
         return { unit: 'yearsAgo', value: years }
-    } else if (months > 0) {
+    } 
+    if (months > 0) {
         return { unit: 'monthsAgo', value: months }
-    } else if (weeks > 0) {
+    } 
+    if (weeks > 0) {
         return { unit: 'weeksAgo', value: weeks }
-    } else if (days > 0) {
+    } 
+    if (days > 0) {
         return { unit: 'daysAgo', value: days }
-    } else {
-        return { unit: 'today' }
+    } 
+
+    if (firstDate.getDate() !== secondDate.getDate()) {
+        return { unit: 'yesterday' }
     }
+
+    return { unit: 'today' }
 }
 
 /**
@@ -154,8 +203,19 @@ export const convertHexToRGBA = (hexCode: string, opacity: number = 100) => {
 };
 
 /**
- * Check if a string only contains whitespaces
- * @param string
+ * Strip trailing slashes from the text
+ * @param str The text to strip the values from
+ * @returns The stripped text
  */
+export const stripTrailingSlash = (str) => {
+    return str ? str.replace(/\/+$/, '') : ''
+}
 
-export const hasOnlyWhitespaces = (string: string = '') => !/\S/.test(string)
+/**
+ * Strip spaces from the text
+ * @param str The text to strip the values from
+ * @returns The stripped text
+ */
+ export const stripSpaces = (str) => {
+    return str ? str.replace(/ /g, '') : ''
+}

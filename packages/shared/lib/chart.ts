@@ -1,8 +1,9 @@
 import { convertUnits, Unit } from '@iota/unit-converter'
-import { convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
+import { AvailableExchangeRates, convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
 import { localize } from 'shared/lib/i18n'
+import { activeProfile, updateProfile } from 'shared/lib/profile'
 import type { WalletAccount } from 'shared/lib/wallet'
-import { wallet } from 'shared/lib/wallet'
+import { isSelfTransaction, wallet } from 'shared/lib/wallet'
 import { date as i18nDate } from 'svelte-i18n'
 import { derived, get, writable } from 'svelte/store'
 import { CurrencyTypes, formatCurrencyValue } from './currency'
@@ -42,17 +43,33 @@ export enum AccountChartType {
 
 const BAR_CHART_ACTIVITY_MONTHS = 6
 
-/** Selected currency on chart */
-export const chartCurrency = writable<CurrencyTypes>(CurrencyTypes.USD)
+export interface ChartSelectors {
+    currency: AvailableExchangeRates,
+    timeframe: HistoryDataProps
+}
 
-/** Selected time frame on chart */
-export const chartTimeframe = writable<HistoryDataProps>(HistoryDataProps.SEVEN_DAYS)
+export interface Chart {
+    time: number
+    type: string,
+    message: string
+}
 
 /** Selected chart */
 export const selectedChart = writable<DashboardChartType>(DashboardChartType.PORTFOLIO)
 
-const fiatHistoryData = derived([priceData, chartCurrency, chartTimeframe], ([$priceData, $chartCurrency, $chartTimeframe]) => {
-    return $priceData?.[$chartCurrency]?.[$chartTimeframe]?.slice().sort((a, b) => a[0] - b[0]) ?? []
+const fiatHistoryData = derived([priceData, activeProfile], ([$priceData, $activeProfile]) => {
+    if ($activeProfile?.settings) {
+        // back compatibility: init profile chartSelectors
+        if (!$activeProfile?.settings.chartSelectors) {
+            let chartSelectors = {
+                currency: AvailableExchangeRates.USD,
+                timeframe: HistoryDataProps.SEVEN_DAYS,
+            }
+            updateProfile('settings.chartSelectors', chartSelectors)
+        }
+        //
+        return $priceData?.[$activeProfile?.settings.chartSelectors.currency.toLocaleLowerCase()]?.[$activeProfile?.settings.chartSelectors.timeframe]?.slice().sort((a, b) => a[0] - b[0]) ?? []
+    }
 })
 
 const walletBalance = derived(wallet, $wallet => {
@@ -63,7 +80,7 @@ const walletBalance = derived(wallet, $wallet => {
 export function getPortfolioData(balanceHistory: BalanceHistory): ChartData {
     let chartData: ChartData = { labels: [], data: [], tooltips: [] }
     const _fiatHistoryData = get(fiatHistoryData)
-    chartData = balanceHistory[get(chartTimeframe)].reduce(
+    chartData = balanceHistory[get(activeProfile)?.settings.chartSelectors.timeframe].reduce(
         (acc, values, index) => {
             const fiatBalance = ((values.balance * _fiatHistoryData[index][1]) / 1000000).toFixed(5)
             acc.data.push(fiatBalance)
@@ -99,7 +116,7 @@ export function getTokenData(): ChartData {
 export function getAccountValueData(balanceHistory: BalanceHistory, accountBalance: number): ChartData {
     let chartData: ChartData = { labels: [], data: [], tooltips: [] }
     const _fiatHistoryData = get(fiatHistoryData)
-    chartData = balanceHistory[get(chartTimeframe)].reduce(
+    chartData = balanceHistory[get(activeProfile)?.settings.chartSelectors.timeframe].reduce(
         (acc, values, index) => {
             const fiatBalance = ((values.balance * _fiatHistoryData[index][1]) / 1000000).toFixed(5)
             acc.data.push(fiatBalance)
@@ -123,9 +140,9 @@ export const getAccountActivityData = (account: WalletAccount) => {
     let incoming: ChartData = { data: [], tooltips: [], label: localize('general.incoming'), color: account.color || 'blue' } // TODO: profile colors
     let outgoing: ChartData = { data: [], tooltips: [], label: localize('general.outgoing'), color: 'gray' } // TODO: profile colors
     let labels: string[] = []
-    let messages: Message[] = account.messages.slice().sort((a, b) => {
-        return <any>new Date(a.timestamp).getTime() - <any>new Date(b.timestamp).getTime()
-    })
+    let messages: Message[] = account.messages.slice()
+        ?.filter(({ payload }) => !isSelfTransaction(payload, account)) // Remove self transactions
+        ?.sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()) ?? []
     for (var i = 0; i < BAR_CHART_ACTIVITY_MONTHS; i++) {
         let start: number = new Date(now.getFullYear(), now.getMonth() - i, 1).getTime();
         let end: number = new Date(now.getFullYear(), now.getMonth() - i + 1, 0).getTime();
@@ -133,7 +150,7 @@ export const getAccountActivityData = (account: WalletAccount) => {
         labels.unshift(
             get(i18nDate)(new Date(start), { month: 'short' }))
     }
-    if (account.messages.length) {
+    if (messages?.length) {
         let index = 0
         activityTimeframes.forEach(({ start, end }) => {
             let _incoming = 0
@@ -216,7 +233,7 @@ export const getAccountActivityData = (account: WalletAccount) => {
 function formatLabel(timestamp: number): string {
     const date: Date = new Date(timestamp)
     var formattedLabel: string = ''
-    switch (get(chartTimeframe)) {
+    switch (get(activeProfile)?.settings.chartSelectors.timeframe) {
         case HistoryDataProps.ONE_HOUR:
         case HistoryDataProps.TWENTY_FOUR_HOURS:
             formattedLabel = get(i18nDate)(new Date(date), {
@@ -236,7 +253,7 @@ function formatLabel(timestamp: number): string {
 }
 
 function formatLineChartTooltip(data: (number | string), timestamp: number | string, showMiota: boolean = false): Tooltip {
-    const currency = get(chartCurrency).toUpperCase()
+    const currency = get(activeProfile)?.settings.chartSelectors.currency ?? ''
     const title: string = `${showMiota ? `1 ${Unit.Mi}: ` : ''}${formatCurrencyValue(data, currency, 3)} ${currency}`
     const label: string = get(i18nDate)(new Date(timestamp), {
         year: 'numeric',
@@ -253,6 +270,6 @@ function formatLineChartTooltip(data: (number | string), timestamp: number | str
 
 function getCurrentBalancedata(balance): { data: number, label: string, tooltip: Tooltip } {
     const now = new Date().getTime()
-    const fiatBalance = convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[get(chartCurrency).toUpperCase()])
+    const fiatBalance = convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[get(activeProfile)?.settings.chartSelectors.currency])
     return { data: fiatBalance, label: formatLabel(now), tooltip: formatLineChartTooltip(fiatBalance, now) }
 }

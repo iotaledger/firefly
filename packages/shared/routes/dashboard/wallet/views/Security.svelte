@@ -57,9 +57,9 @@
     onDestroy(unsubscribe)
 </script>
 
-<div data-label="security" class="py-6 px-8 flex-grow flex flex-col h-full">
+<div data-label="security" class="pt-6 pb-8 px-8 flex-grow flex flex-col h-full">
     <Text type="h5" classes="mb-5">{locale('general.security')}</Text>
-    <div class="grid grid-cols-2 gap-3 auto-rows-max w-full overflow-y-auto flex-auto h-1 -mr-2 pr-2">
+    <div class="grid grid-cols-2 gap-3 auto-rows-max w-full overflow-y-auto flex-auto h-1 -mr-2 pr-2 scroll-secondary">
         <!-- Stronghold backup -->
         <SecurityTile
             title={locale('views.dashboard.security.strongholdBackup.title')}

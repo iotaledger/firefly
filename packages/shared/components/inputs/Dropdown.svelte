@@ -1,6 +1,7 @@
 <script lang="typescript">
-    import { Icon, Text } from 'shared/components'
+    import { Icon, Text, Error } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
+    import { onMount } from 'svelte'
 
     export let value = undefined
     export let label = undefined
@@ -11,15 +12,86 @@
     export let items = []
     export let small = false
     export let onSelect = (_) => {}
+    export let contentWidth = false
+    export let error = ''
+    export let classes = ''
+    export let autofocus = false
 
     let dropdown = false
     let navContainer
+    let divContainer
+    let focusedItem
 
     items = sortItems ? items.sort((a, b) => (a.label > b.label ? 1 : -1)) : items
+
+    let navWidth
 
     const handleClickOutside = () => {
         dropdown = false
     }
+
+    const toggleDropDown = () => {
+        dropdown = !dropdown
+        if (dropdown) {
+            let elem = document.getElementById(value)
+            if (!elem) {
+                elem = navContainer.firstChild
+            }
+            if (elem) {
+                navContainer.scrollTop = elem.offsetTop
+                elem.focus()
+            }
+        } else {
+            divContainer.focus()
+            focusedItem = undefined
+        }
+    }
+
+    const focusItem = (itemId) => {
+        let elem = document.getElementById(itemId)
+        focusedItem = elem
+    }
+
+    const handleKey = (e) => {
+        if (!dropdown) {
+            // Note that space uses code not key, this is intentional
+            if (e.key === 'Enter' || e.key === 'ArrowDown' || e.code === 'Space') {
+                toggleDropDown()
+                e.preventDefault()
+            }
+        } else {
+            if (e.key === 'Escape') {
+                toggleDropDown()
+                e.preventDefault()
+            } else if (e.key === 'ArrowDown') {
+                if (focusedItem) {
+                    const children = [...navContainer.children]
+                    const idx = children.indexOf(focusedItem)
+                    if (idx < children.length - 1) {
+                        children[idx + 1].focus()
+                        e.preventDefault()
+                    }
+                }
+            } else if (e.key === 'ArrowUp') {
+                if (focusedItem) {
+                    const children = [...navContainer.children]
+                    const idx = children.indexOf(focusedItem)
+                    if (idx > 0) {
+                        children[idx - 1].focus()
+                        e.preventDefault()
+                    }
+                }
+            }
+        }
+    }
+    onMount(() => {
+        if (contentWidth) {
+            navWidth = `width: ${navContainer.clientWidth + 8}px`
+        }
+        if (autofocus) {
+            divContainer.focus()
+        }
+    })
 </script>
 
 <style type="text/scss">
@@ -119,29 +191,25 @@
 </style>
 
 <dropdown-input
-    class="w-full relative"
+    class="relative {contentWidth ? "" : "w-full" } {classes}"
     on:click={(e) => {
         e.stopPropagation()
-        dropdown = !dropdown
-        if (dropdown) {
-            const elem = document.getElementById(value)
-            if (elem) {
-                navContainer.scrollTop = elem.offsetTop
-            }
-        }
+        toggleDropDown()
     }}
     use:clickOutside
     on:clickOutside={handleClickOutside}
+    on:keydown={handleKey}
     class:active={dropdown}
     class:small
     class:floating-active={value && label}
-    class:disabled>
+    class:disabled
+    style={navWidth}>
     <div
         class="selection relative flex items-center w-full whitespace-nowrap cursor-pointer
-    bg-white dark:bg-gray-800 {dropdown ? 'border-blue-500' : 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700'}">
-        <div class="w-full text-12 leading-140 {disabled ? 'text-gray-400 dark:text-gray-700' : 'text-gray-800 dark:text-white'}">
-            {value || placeholder}
-        </div>
+    bg-white dark:bg-gray-800 focus:border-blue-500 {dropdown ? 'border-blue-500' : 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700'}"
+        tabindex="0"
+        bind:this={divContainer}>
+        <div class="w-full text-12 leading-140 text-gray-800 dark:text-white">{value || placeholder}</div>
         <Icon
             icon={small ? 'small-chevron-down' : 'chevron-down'}
             width={small ? 16 : 24}
@@ -151,19 +219,25 @@
             <floating-label class:floating-active={value && label}>{label}</floating-label>
         {/if}
     </div>
+    {#if error}
+        <Error {error} />
+    {/if}
     <nav
         class:active={dropdown}
         class="absolute w-full overflow-hidden pointer-events-none opacity-0 z-10 text-left 
         bg-white dark:bg-gray-800
             border border-solid border-blue-500 border-t-gray-500 dark:border-t-gray-700">
-        <div class="inner overflow-y-auto" bind:this={navContainer}>
+        <div class="inner overflow-y-auto scroll-secondary" bind:this={navContainer}>
             {#each items as item}
                 <button
                     class="relative flex items-center p-4 w-full whitespace-nowrap
                         {item[valueKey] === value && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'} 
-                        hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
+                        hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20
+                        focus:bg-gray-200 dark:focus:bg-gray-800 dark:focus:bg-opacity-20"
                     id={item[valueKey]}
                     on:click={() => onSelect(item)}
+                    on:focus={() => focusItem(item[valueKey])}
+                    tabindex={dropdown ? 0 : -1}
                     class:active={item[valueKey] === value}><Text type="p" smaller>{item[valueKey]}</Text></button>
             {/each}
         </div>

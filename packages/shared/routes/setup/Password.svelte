@@ -1,40 +1,53 @@
 <script lang="typescript">
-    import { showAppNotification } from 'shared/lib/notifications'
     import { Button, Illustration, OnboardingLayout, Password, Text } from 'shared/components'
+    import { strongholdPassword } from 'shared/lib/app'
+    import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
-    import { asyncSetStrongholdPassword, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
+    import { asyncChangeStrongholdPassword, asyncSetStrongholdPassword, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import zxcvbn from 'zxcvbn'
 
     export let locale
     export let mobile
 
+    let existingPassword = $strongholdPassword
     let password = ''
     let confirmedPassword = ''
     let error = ''
+    let errorConfirm = ''
     let busy = false
 
     const dispatch = createEventDispatcher()
 
     $: passwordStrength = zxcvbn(password)
+    $: password, confirmedPassword, ((error = ''), (errorConfirm = ''))
 
     async function handleContinueClick() {
+        error = ''
+        errorConfirm = ''
+
         if (password.length > MAX_PASSWORD_LENGTH) {
             error = locale('error.password.length', {
                 values: {
                     length: MAX_PASSWORD_LENGTH,
                 },
             })
-        } else if (password !== confirmedPassword) {
-            error = locale('error.password.doNotMatch')
         } else if (passwordStrength.score !== 4) {
-            error = passwordStrength.feedback.warning
-                ? locale(`error.password.${passwordInfo[passwordStrength.feedback.warning]}`)
-                : locale('error.password.tooWeak')
+            let errKey = 'error.password.tooWeak'
+            if (passwordStrength.feedback.warning && passwordInfo[passwordStrength.feedback.warning]) {
+                errKey = `error.password.${passwordInfo[passwordStrength.feedback.warning]}`
+            }
+            error = locale(errKey)
+        } else if (password !== confirmedPassword) {
+            errorConfirm = locale('error.password.doNotMatch')
         } else {
             try {
                 busy = true
-                await asyncSetStrongholdPassword(password)
+                if (existingPassword) {
+                    await asyncChangeStrongholdPassword(existingPassword, password)
+                } else {
+                    await asyncSetStrongholdPassword(password)
+                }
 
                 dispatch('next', { password })
             } catch (err) {
@@ -73,6 +86,7 @@
                     autofocus
                     disabled={busy} />
                 <Password
+                    error={errorConfirm}
                     bind:value={confirmedPassword}
                     classes="mb-5"
                     {locale}

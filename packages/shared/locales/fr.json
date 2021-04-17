@@ -207,7 +207,11 @@
             },
             "resyncAccounts": {
                 "title": "Resynchroniser les comptes",
-                "description": ""
+                "description": "Démarre une tâche en arrière-plan pour s'assurer que vos comptes sont à jour."
+            },
+            "hiddenAccounts": {
+                "title": "Comptes cachés",
+                "description": "La sélection de cette option affichera les comptes qui étaient précédemment masqués."
             },
             "deleteProfile": {
                 "title": "Supprimer le profil",
@@ -223,15 +227,23 @@
             },
             "nodeSettings": {
                 "title": "Paramètres du serveur",
-                "description": "Sélectionnez le mode Manuel pour choisir parmi la liste de nœuds ou vous connecter à votre propre nœud"
+                "description": "Sélectionnez le mode Manuel pour configurer les nœuds et vous connecter à votre propre nœud"
             },
             "configureNodeList": {
                 "title": "Sélectionner un serveur",
-                "description": ""
+                "description": "Gérer la liste des nœuds auxquels votre portefeuille se connecte.",
+                "primaryNode": "Noeud principal",
+                "excludeNode": "Exclure le noeud",
+                "includeNode": "Inclure le noeud",
+                "viewDetails": "Voir les détails",
+                "setAsPrimary": "Définir comme noeud principal",
+                "removeNode": "Supprimer le noeud",
+                "includeOfficialNodeList": "Inclure la liste officielle des nœuds",
+                "noNodes": "Il n'y a pas de nœud, la sélection automatique sera utilisée à la place."
             },
             "proofOfWork": {
                 "title": "Preuve de travail",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "description": "Effectuer la preuve de travail localement sur votre appareil ou la faire prendre en charge par le nœud"
             },
             "errorLog": {
                 "title": "Journal des erreurs",
@@ -287,12 +299,12 @@
                     "noneDetected": "Aucun périphérique détecté"
                 },
                 "strongholdStatus": {
-                    "title": "Statut StrongHold",
-                    "locked": "Verrouillé",
-                    "unlocked": "Déverrouillé"
+                    "title": "Statut du portefeuille",
+                    "locked": "Stronghold verrouillé",
+                    "unlocked": "Stronghold déverrouillé"
                 },
                 "strongholdBackup": {
-                    "title": "Sauvegarde Stronghold",
+                    "title": "Copie de Sauvegarde du Portefeuille",
                     "weeksAgo": "Il y a {weeks, plural, one {# semaine} other {# semaines}}"
                 }
             },
@@ -313,7 +325,8 @@
     "popups": {
         "password": {
             "title": "Mot de passe obligatoire",
-            "subtitle": "Veuillez saisir le mot de passe de votre portefeuille pour déverrouiller Stronghold"
+            "subtitle": "Veuillez saisir votre mot de passe pour déverrouiller Stronghold",
+            "backup": "Veuillez saisir votre mot de passe pour exporter une sauvegarde"
         },
         "qr": {
             "title": "Votre QR code"
@@ -331,24 +344,34 @@
             "backupDescription": "Il est important de procéder régulièrement à une sauvegarde afin de vous assurer que vous avez une copie de vos comptes et de l'historique de vos transactions.",
             "backupWarning": "Si vous perdez votre sauvegarde et votre phrase de récupération, vous perdrez l'accès à vos fonds.",
             "notBackedUp": "Non sauvegardé",
-            "notBackedUpDescription": "Vous n'avez pas sauvegardé votre Stronghold"
+            "notBackedUpDescription": "Vous n'avez pas sauvegardé votre Stronghold",
+            "saving": "Enregistrement..."
         },
         "deleteAccount": {
-            "title": "Supprimer {name}?",
-            "body": "Vous pouvez rajouter ce compte plus tard mais vous risquez de perdre l'historique de vos transactions.",
+            "title": "Supprimer {name} ?",
+            "body": "Ce compte n'a pas d'historique de transaction. Il peut être supprimé en toute sécurité.",
             "typePassword": "Saisissez le mot de passe de votre portefeuille pour confirmer.",
-            "deleteAccount": "Supprimer le compte",
+            "hideAccount": "Supprimer le compte",
             "errorTitle": "Impossible de supprimer {name}",
-            "errorBody1": "Pour supprimer un compte, son soldedoit être nul.",
+            "errorBody1": "Vous ne pouvez pas supprimer ce compte, vous devez en avoir au moins un."
+        },
+        "hideAccount": {
+            "title": "Cacher {name} ?",
+            "body": "Vous pourrez retrouver ce compte plus tard en activant \"Afficher les comptes cachés\" dans les Paramètres Avancés.",
+            "typePassword": "Saisissez le mot de passe de votre portefeuille pour confirmer.",
+            "hideAccount": "Masquer le compte",
+            "errorTitle": "Impossible de masquer {name}",
+            "errorBody1": "Pour masquer un compte, il doit avoir un solde de 0.",
             "errorBody2": "Il vous reste actuellement {balance} sur ce compte. Veuillez déplacer ces fonds vers un autre compte et réessayez.",
-            "errorBody3": "Vous ne pouvez pas supprimer ce compte, vous devez en avoir au moins un."
+            "errorBody3": "Vous ne pouvez pas masquer ce compte, vous devez en avoir au moins un."
         },
         "addressHistory": {
-            "title": "Historique des adresses du compte {name}",
+            "title": "Historique de l'adresse {name}",
             "currentBalance": "Solde actuel : {balance}"
         },
         "node": {
             "titleAdd": "Ajouter un nœud",
+            "titleUpdate": "Mettre à jour un noeud",
             "titleRemove": "Supprimer un noeud",
             "titleDetails": "Détails du nœud",
             "nodeAddress": "Adresse du noeud",
@@ -363,7 +386,8 @@
         },
         "deleteProfile": {
             "title": "Supprimer le profil",
-            "confirmation": "Êtes-vous sûr de vouloir supprimer ce profil? Cette opération ne peut pas être annulée."
+            "confirmation": "Êtes-vous sûr de vouloir supprimer ce profil? Cette opération ne peut pas être annulée.",
+            "typePassword": "Saisissez votre mot de passe pour confirmer."
         },
         "diagnostics": {
             "title": "Diagnostiques",
@@ -375,6 +399,10 @@
             "totalMem": "Mémoire totale",
             "freeMem": "Mémoire disponible",
             "userPath": "Chemin utilisateur"
+        },
+        "transaction": {
+            "title": "Confirmer la transaction",
+            "body": "Vous êtes sur le point d'envoyer {amount} à"
         }
     },
     "charts": {
@@ -425,16 +453,19 @@
         "enableDeveloperMode": "Activer le mode développeur",
         "enableSystemNotifications": "Activer les notifications système",
         "exportState": "Exporter l'état",
-        "outsourceProofOfWork": "Externaliser la preuve de travail",
+        "localProofOfWork": "Preuve de travail locale",
         "unlock": "Déverrouiller",
         "updateFirefly": "Mettre à jour Firefly",
         "restartNow": "Redémarrer maintenant",
         "saveBackup": "Enregistrer la sauvegarde de Stronghold",
         "customizeAcount": "Personnaliser votre compte",
         "viewAddressHistory": "Voir l'historique des adresses",
+        "hideAccount": "Masquer le compte",
+        "showAccount": "Démasquer le compte",
         "deleteAccount": "Supprimer le compte",
         "max": "Maximum",
         "addNode": "Ajouter un nœud",
+        "updateNode": "Mettre à jour le noeud",
         "removeNode": "Supprimer un noeud",
         "hide": "Masquer",
         "hideOthers": "Masquer les autres",
@@ -459,7 +490,9 @@
         "skipBackup": "Ignorer la sauvegarde du fichier",
         "finishSetup": "Terminer la configuration",
         "readDocumentation": "Consulter la documentation",
-        "visitFaq": "Visitez la FAQ"
+        "visitFaq": "Visitez la FAQ",
+        "showHiddenAccounts": "Afficher les comptes masqués",
+        "confirm": "Confirmer"
     },
     "general": {
         "password": "Mot de passe",
@@ -473,7 +506,7 @@
         "sent": "Envoyé",
         "received": "Reçu",
         "sendPayment": "Envoyer le paiement",
-        "moveFunds": "Déplacer des fonds",
+        "moveFunds": "Transfert interne",
         "sendFunds": "Envoyer des fonds",
         "sendToAddress": "Envoyer à l'adresse",
         "scanQrOrPaste": "Scannez un QR code ou collez une Adresse",
@@ -505,7 +538,7 @@
         "appearance": "Apparence",
         "lightTheme": "Thème Clair",
         "darkTheme": "Thème Sombre",
-        "totalBalance": "Solde Total",
+        "balance": "Solde",
         "accountBalance": "Solde du Compte",
         "incoming": "Entrant",
         "outgoing": "Sortant",
@@ -529,7 +562,7 @@
         "help": "Aide",
         "you": "Vous",
         "messageId": "ID du message",
-        "inputAddress": "Adresses entrantes",
+        "inputAddress": "Adresse d'envoi",
         "receiveAddress": "Adresse de réception",
         "date": "Date",
         "status": "État",
@@ -553,9 +586,10 @@
         "passwordUpdating": "Mise à jour du mot de passe...",
         "passwordSuccess": "Mot de passe mis à jour avec succès",
         "passwordFailed": "La mise à jour du mot de passe a échoué",
-        "exportingStronghold": "Export Stronghold...",
-        "exportingStrongholdSuccess": "stronghold exporté avec succès",
-        "exportingStrongholdFailed": "Echec de l'export de stronghold",
+        "syncingAccounts": "Synchronisation des comptes...",
+        "exportingStronghold": "Export Stronghold en cours...",
+        "exportingStrongholdSuccess": "Stronghold exporté avec succès",
+        "exportingStrongholdFailed": "L'export Stronghold a échoué",
         "pinCodeUpdating": "Mise à jour du code PIN...",
         "pinCodeSuccess": "Code PIN mis à jour avec succès",
         "pinCodeFailed": "La mise à jour du code PIN a échoué",
@@ -564,11 +598,13 @@
         "passwordStrength1": "Médiocre",
         "passwordStrength2": "Faible",
         "passwordStrength3": "Moyenne",
-        "passwordStrength4": "Strong",
-        "creatingProfile": "Creating profile, please wait..."
+        "passwordStrength4": "Robuste",
+        "creatingProfile": "Création du profile, veuillez patienter...",
+        "accountRemoved": "Ce compte est masqué. Démasquez-le pour effectuer des transferts."
     },
     "dates": {
         "today": "Aujourd'hui",
+        "yesterday": "Hier",
         "daysAgo": "Il y a {time, plural, one {# jour} other {# jours}}",
         "weeksAgo": "Il y a {time, plural, one {# semaine} other {# semaines}}",
         "monthsAgo": "il y a {time, plural, one {# mois} other {# mois}}",
@@ -577,6 +613,8 @@
     "notifications": {
         "valueTx": "Réception de {{value}} sur {{account}}",
         "confirmed": "Envoi de {{value}} depuis {{account}} confirmé",
+        "confirmedInternal": "{{value}} de {{senderAccount}} à {{receiverAccount}} confirmé",
+        "confirmedInternalNoAccounts": "Le transfert interne de {{value}} à été confirmé",
         "failed": "Envoi de {{value}} depuis {{account}} en échec",
         "downloadingUpdate": "Téléchargement de la mise à jour",
         "updateReady": "Mise à jour prête",
@@ -584,7 +622,8 @@
         "restartInstall": "Redémarrer pour installer",
         "calcMinutesRemaining": "Calcul des minutes restantes...",
         "minutesRemaining": "{minutes, plural, one {Il reste 1 minute} other {# minutes restantes}}",
-        "copiedToClipboard": "Copié dans le presse-papier"
+        "copiedToClipboard": "Copié dans le presse-papier",
+        "accountsSynchronized": "Synchronisation du compte terminée"
     },
     "error": {
         "profile": {
@@ -604,7 +643,7 @@
             "dates": "Les dates sont faciles à deviner.",
             "common": "C'est un mot de passe très courant.",
             "similar": "Ceci est similaire à un mot de passe couramment utilisé.",
-            "reasonWord": "Un seul mot est facile à deviner.",
+            "word": "Un simple mot est facile à deviner.",
             "incorrect": "Votre mot de passe est incorrect.",
             "length": "Votre mot de passe ne doit pas contenir plus de {length, plural, one {1 caractère} other {# caractères}}."
         },
@@ -617,7 +656,11 @@
             "length": "Le nom de votre compte ne doit pas contenir plus de {length, plural, one {1 caractère} other {# caractères}}.",
             "empty": "Vous devez utiliser votre dernier compte avant d'en créer un nouveau.",
             "notEmpty": "Vous devez transférer votre solde avant de supprimer ce compte.",
-            "duplicate": "Un compte avec ce nom existe déjà."
+            "duplicate": "Un compte avec ce nom existe déjà.",
+            "tilde": "Un nom de profil ne peut pas commencer par le caractère '~'.",
+            "control": "Un nom de profil ne peut pas contenir de caractère de contrôle.",
+            "startDot": "Un nom de profil ne peut pas commencer par un point.",
+            "chars": "Un nom de profil ne peut pas contenir les caractères suivants <>:\"/\\|?*"
         },
         "send": {
             "addressLength": "Les adresses devraient comporter {length, plural, one {1 caractère} other {# caractères}}.",
@@ -625,17 +668,19 @@
             "amountNoFloat": "Si les unités sont `i`, vous ne pouvez pas utiliser de décimales.",
             "amountInvalidFormat": "Le montant semble être un nombre invalide.",
             "amountZero": "Le montant doit être supérieur à 0.",
-            "wrongAddressFormat": "Les adresses commencent par le préfixe {prefix}.",
-            "insufficientFunds": "This account has insufficient funds.",
-            "sendingDust": "You cannot send less than 1 Mi.",
-            "leavingDust": "You cannot leave less than 1 Mi on your address."
+            "wrongAddressPrefix": "Les adresses commencent par le préfixe {prefix}.",
+            "wrongAddressFormat": "L'adresse n'est pas correctement formatée.",
+            "insufficientFunds": "Ce compte ne dispose pas de fonds suffisants.",
+            "noToAccount": "Vous n'avez pas sélectionné de compte vers lequel envoyer les fonds.",
+            "sendingDust": "Vous ne pouvez pas envoyer moins de 1 Mi.",
+            "leavingDust": "Vous ne pouvez pas laisser moins de 1 Mi sur votre adresse."
         },
         "node": {
             "invalid": "Veuillez saisir une URL valide.",
             "https": "HTTPS est requis. Configurez un profil développeur pour utiliser des connexions HTTP non sécurisées.",
             "duplicate": "Ce noeud a déjà été ajouté.",
-            "unsynced": "The node is not in sync.",
-            "noSynced": "No synced nodes are available."
+            "unsynced": "Le noeud n'est pas synchronisé.",
+            "noSynced": "Aucun nœud synchronisé disponible."
         },
         "global": {
             "generic": "Une erreur s'est produite."
@@ -644,7 +689,7 @@
             "invalid": "Le fichier de sauvegarde n'a pas été reconnu.",
             "destination": "La destination de la sauvegarde n'était pas valide.",
             "mnemonic": "Le mnémonique n'est pas valide.",
-            "seedTooShort": "La seed devrait contenir 81 caractères, elle en contient {length, plural, one {est 1} other {est #}}",
+            "seedTooShort": "La seed devrait contenir 81 caractères, elle en contient {length, plural, one {1} other {#}}",
             "seedCharacters": "La seed (graine) ne doit contenir que des caractères A-Z ou le chiffre 9",
             "phraseWordCount": "Il devrait y avoir 24 mots dans votre phrase de récupération, actuellement il y en a {length, plural, one {1} other {#}}.",
             "phraseUnrecognizedWord": "Mot \"{word}\" non reconnu dans votre phrase de récupération"

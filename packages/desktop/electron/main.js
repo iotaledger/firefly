@@ -2,6 +2,7 @@ import { initAutoUpdate } from './lib/appUpdater'
 const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
 const path = require('path')
 const os = require('os')
+const fs = require('fs')
 const Keychain = require('./lib/keychain')
 const { initMenu, contextMenu } = require('./lib/menu')
 
@@ -121,19 +122,30 @@ function createWindow() {
         console.log(error) //eslint-disable-line no-console
     }
 
+    const mainWindowState = windowStateKeeper('main', 'settings.json');
+
     // Create the browser window
     windows.main = new BrowserWindow({
+        x: mainWindowState.x,
+        y: mainWindowState.y,
+        width: mainWindowState.width,
+        height: mainWindowState.height,
         minWidth: 1280,
         minHeight: 720,
-        width: 1280,
-        height: 720,
         titleBarStyle: 'hidden',
         frame: process.platform === 'linux',
+        icon: process.platform === 'linux' ? path.join(__dirname, '../assets/icons/linux/icon256x256.png') : undefined,
         webPreferences: {
             ...defaultWebPreferences,
             preload: paths.preload,
         },
     })
+
+    if (mainWindowState.isMaximized) {
+        windows.main.maximize();
+    }
+
+    mainWindowState.track(windows.main);
 
     if (devMode) {
         // Enable dev tools only in developer mode
@@ -284,8 +296,8 @@ ipcMain.handle('diagnostics', (_e) => {
         { label: 'popups.diagnostics.platformVersion', value: os.release() },
         { label: 'popups.diagnostics.platformArchitecture', value: os.arch() },
         { label: 'popups.diagnostics.cpuCount', value: os.cpus().length },
-        { label: 'popups.diagnostics.totalMem', value: `${(os.totalmem() / 1048576 ).toFixed(1)} MB` },
-        { label: 'popups.diagnostics.freeMem', value: `${(os.freemem() / 1048576 ).toFixed(1)} MB` },
+        { label: 'popups.diagnostics.totalMem', value: `${(os.totalmem() / 1048576).toFixed(1)} MB` },
+        { label: 'popups.diagnostics.freeMem', value: `${(os.freemem() / 1048576).toFixed(1)} MB` },
         { label: 'popups.diagnostics.userPath', value: app.getPath('userData') },
     ]
     return diagnostics
@@ -361,6 +373,14 @@ ipcMain.on('deep-link-request', () => {
 })
 
 /**
+ * Proxy notification activated to the wallet application
+ */
+ipcMain.on('notification-activated', (ev, contextData) => {
+    windows.main.focus()
+    windows.main.webContents.send('notification-activated', contextData)
+})
+
+/**
  * Create about window
  * @returns {BrowserWindow} About window
  */
@@ -371,8 +391,8 @@ export const openAboutWindow = () => {
     }
 
     windows.about = new BrowserWindow({
-        width: 300,
-        height: 180,
+        width: 380,
+        height: 230,
         useContentSize: true,
         titleBarStyle: 'hidden',
         show: false,
@@ -404,5 +424,81 @@ export const closeAboutWindow = () => {
     if (windows.about) {
         windows.about.close()
         windows.about = null
+    }
+}
+
+function windowStateKeeper(windowName, settingsFilename) {
+    let window, windowState;
+
+    function setBounds() {
+        const settings = loadJsonConfig(settingsFilename)
+
+        if (settings && settings.windowState && settings.windowState[windowName]) {
+            windowState = settings.windowState[windowName]
+            return
+        }
+
+        // Default
+        windowState = {
+            x: undefined,
+            y: undefined,
+            width: 1280,
+            height: 720,
+        };
+    }
+
+    function saveState() {
+        windowState.isMaximized = window.isMaximized();
+        if (!windowState.isMaximized) {
+            windowState = window.getBounds();
+        }
+
+        let settings = loadJsonConfig(settingsFilename)
+
+        settings = settings || {}
+        settings.windowState = settings.windowState || {}
+        settings.windowState[windowName] = windowState
+
+        saveJsonConfig(settingsFilename, settings)
+    }
+
+    function track(win) {
+        window = win;
+        ['resize', 'move', 'close'].forEach(event => {
+            win.on(event, saveState);
+        });
+    }
+
+    setBounds();
+
+    return {
+        x: windowState.x,
+        y: windowState.y,
+        width: windowState.width,
+        height: windowState.height,
+        isMaximized: windowState.isMaximized,
+        track
+    };
+}
+
+function saveJsonConfig(filename, data) {
+    try {
+        const userDataPath = app.getPath('userData')
+        const configFilename = path.join(userDataPath, filename)
+        fs.writeFileSync(configFilename, JSON.stringify(data))
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+function loadJsonConfig(filename) {
+    try {
+        const userDataPath = app.getPath('userData')
+        const configFilename = path.join(userDataPath, filename)
+        return JSON.parse(fs.readFileSync(configFilename).toString())
+    } catch (err) {
+        if (!err.message.includes('ENOENT')) {
+            console.error(err)
+        }
     }
 }

@@ -1,3 +1,4 @@
+import type { Error } from "./errors";
 import type { WalletRoutes } from "./typings/routes";
 
 export type VersionDetails = {
@@ -17,7 +18,7 @@ export type NativeProgress = {
 }
 
 export interface INotificationManager {
-    notify(message: string): void
+    notify(message: string, contextData: any): void
 }
 
 export interface IDeepLinkManager {
@@ -37,11 +38,13 @@ interface ElectronEventMap {
     "menu-check-for-update": void;
     "menu-error-log": void;
     "menu-diagnostics": void;
+    "log-error": void;
     "deep-link-params": string;
     "version-details": VersionDetails;
     "version-progress": NativeProgress;
     "version-complete": void;
     "version-error": Error;
+    "notification-activated": any;
 }
 
 export interface IElectron {
@@ -50,13 +53,16 @@ export interface IElectron {
     getDiagnostics(): Promise<{ label: string; value: string; }[]>;
     getOS(): Promise<string>;
     updateActiveProfile(id: string): void;
+    removeProfileFolder(profilePath: string): Promise<void>;
     updateMenu(attribute: string, value: unknown): void;
     popupMenu(): void;
-    maximize(): void;
+    maximize(): Promise<boolean>;
     minimize(): void;
     close(): void;
+    isMaximized(): Promise<boolean>;
     saveRecoveryKit(kitData: ArrayBuffer): Promise<void>;
     openUrl(url: string): void;
+    hookErrorLogger(logger: (error: Error) => void): void
 
     NotificationManager: INotificationManager;
 
@@ -65,6 +71,7 @@ export interface IElectron {
     PincodeManager: IPincodeManager;
 
     getVersionDetails(): Promise<VersionDetails>;
+    updateCheck(): Promise<void>
     updateInstall(): Promise<void>
     updateCancel(): Promise<void>
     updateDownload(): Promise<void>
