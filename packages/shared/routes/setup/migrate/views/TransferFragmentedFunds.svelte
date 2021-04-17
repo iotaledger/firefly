@@ -22,6 +22,8 @@
     let migratingFundsMessage = ''
     let fullSuccess = $hasMigratedAndConfirmedAllSelectedBundles
 
+    let hasBroadcastAnyBundle = false
+
     const { didComplete } = $migration
 
     let transactions = $selectedUnmigratedBundles.map((_bundle, index) => ({
@@ -157,6 +159,15 @@
         )
     }
 
+    function persistProfile() {
+        // When the first migration bundle is broadcast, then persist profile
+        saveProfile($newProfile)
+        setActiveProfile($newProfile.id)
+
+        profileInProgress.set(undefined)
+        newProfile.set(null)
+    }
+
     onDestroy(unsubscribe)
 
     function migrateFunds() {
@@ -173,6 +184,12 @@
                     .then((acc) => {
                         if (transaction.bundleHash) {
                             return sendMigrationBundle(transaction.bundleHash).then(() => {
+                                if (!hasBroadcastAnyBundle) {
+                                    hasBroadcastAnyBundle = true
+
+                                    persistProfile()
+                                }
+
                                 migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, transaction.bundleHash]
                             })
                         }
@@ -187,13 +204,10 @@
                             })
 
                             return sendMigrationBundle(result.payload.bundleHash).then(() => {
-                                if (idx === 0) {
-                                    // When the first migration bundle is broadcast, then persist profile
-                                    saveProfile($newProfile)
-                                    setActiveProfile($newProfile.id)
+                                if (!hasBroadcastAnyBundle) {
+                                    hasBroadcastAnyBundle = true
 
-                                    profileInProgress.set(undefined)
-                                    newProfile.set(null)
+                                    persistProfile()
                                 }
 
                                 migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, result.payload.bundleHash]
