@@ -601,10 +601,10 @@
         "passwordStrength4": "Strong",
         "creatingProfile": "Creating profile, please wait...",
         "accountRemoved": "This account is hidden. Unhide it to perform transfers.",
-        "receivingTo": "Receiving to",
-        "sendingFrom": "Sending from",
-        "receivedTo": "Received to",
-        "sentFrom": "Sent from",
+        "receivingTo": "Receiving to {account}",
+        "sendingFrom": "Sending from {account}",
+        "receivedTo": "Received to {account}",
+        "sentFrom": "Sent from {account}",
         "receiving": "Receiving",
         "sending": "Sending"
 
