@@ -106,7 +106,7 @@
         "importFromText": {
             "title": "Recupere sua carteira com uma frase de recuperação ou seed",
             "body1": "Uma Seed consiste em 81 caracteres. Essa é usada para a restauração de uma carteira Trinity mais velha.",
-            "body2": "Uma frase de recuperação tem 24 palavras de comprimento (com espaços). Essa é usada para recuperar uma carteira Firefly existente.",
+            "body2": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
             "body3": "Digite sua seed ou frase de recuperação",
             "seedDetected": "Seed de 81 caracteres detectada",
             "phraseDetected": "24 palavras de recuperação detectadas"
@@ -210,8 +210,8 @@
                 "description": "Inicia uma tarefa em segundo plano para certificar-se de que suas contas estão atualizadas."
             },
             "hiddenAccounts": {
-                "title": "Hidden accounts",
-                "description": "Selecting this options will show accounts that were previously hidden."
+                "title": "Contas ocultas",
+                "description": "Selecionando esta opção mostrará contas que estavam ocultas anteriormente."
             },
             "deleteProfile": {
                 "title": "Excluir perfil",
@@ -227,19 +227,19 @@
             },
             "nodeSettings": {
                 "title": "Configurações do servidor",
-                "description": "Select Manual to configure the node settings and connect to your own node"
+                "description": "Selecione Manual para a opção de servidores ou conecte-se ao seu próprio servidor"
             },
             "configureNodeList": {
                 "title": "Selecionar um servidor",
-                "description": "Manage the list of nodes your wallet connects to.",
-                "primaryNode": "Primary node",
-                "excludeNode": "Exclude node",
-                "includeNode": "Include node",
-                "viewDetails": "View details",
-                "setAsPrimary": "Set as primary",
+                "description": "Gerencie a lista de servidores que sua carteira se conecta.",
+                "primaryNode": "Servidor primário",
+                "excludeNode": "Excluir servidor",
+                "includeNode": "Incluir servidor",
+                "viewDetails": "Ver detalhes",
+                "setAsPrimary": "Definir como principal",
                 "removeNode": "Remover servidor",
-                "includeOfficialNodeList": "Include official node list",
-                "noNodes": "There are no nodes, automatic selection will be used instead."
+                "includeOfficialNodeList": "Incluir a lista de servidores oficiais",
+                "noNodes": "Não há servidores, a seleção automática será usada."
             },
             "proofOfWork": {
                 "title": "Prova de Trabalho",
@@ -325,8 +325,8 @@
     "popups": {
         "password": {
             "title": "Senha requerida",
-            "subtitle": "Please enter your password to unlock Stronghold",
-            "backup": "Please enter your password to export a backup"
+            "subtitle": "Por favor, digite a senha da sua carteira para desbloquear a Stronghold",
+            "backup": "Por favor, digite sua senha para exportar um backup"
         },
         "qr": {
             "title": "Seu QR code"
@@ -345,33 +345,33 @@
             "backupWarning": "Se você perder seu backup e sua frase de recuperação, você perderá o acesso aos seus fundos.",
             "notBackedUp": "Backup ainda não realizado",
             "notBackedUpDescription": "Você não fez o backup da sua Stronghold",
-            "saving": "Saving..."
+            "saving": "Salvando..."
         },
         "deleteAccount": {
-            "title": "Delete {name}?",
-            "body": "This account has no transaction history. It can safely be deleted.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Delete account",
-            "errorTitle": "Unable to delete {name}",
-            "errorBody1": "You cannot delete this account, you must have at least one."
+            "title": "Excluir {name}?",
+            "body": "Essa conta não tem histórico de transações. Ela pode ser excluída com segurança.",
+            "typePassword": "Digite a senha da carteira para confirmar.",
+            "hideAccount": "Excluir conta",
+            "errorTitle": "Não foi possível excluir {name}",
+            "errorBody1": "Você não pode excluir esta conta, você deve ter pelo menos uma conta."
         },
         "hideAccount": {
-            "title": "Hide {name}?",
-            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Hide account",
-            "errorTitle": "Unable to hide {name}",
-            "errorBody1": "To hide an account it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
-            "errorBody3": "You cannot hide this account, you must have at least one."
+            "title": "Ocultar {name}?",
+            "body": "Você pode encontrar essa conta ativando \"Mostrar contas ocultas\" em Configurações Avançadas.",
+            "typePassword": "Digite a senha da carteira para confirmar.",
+            "hideAccount": "Ocultar conta",
+            "errorTitle": "Não foi possível ocultar {name}",
+            "errorBody1": "Para ocultar uma conta, ela deve ter 0 de saldo.",
+            "errorBody2": "Atualmente você tem {balance} restantes nesta conta. Por favor, mova esses fundos para uma conta diferente e tente novamente.",
+            "errorBody3": "Você não pode ocultar esta conta, você deve ter pelo menos uma conta."
         },
         "addressHistory": {
-            "title": "{name} address history",
+            "title": "{name} histórico de endereços",
             "currentBalance": "Saldo atual: {balance}"
         },
         "node": {
             "titleAdd": "Adicionar servidor",
-            "titleUpdate": "Update a node",
+            "titleUpdate": "Atualizar um servidor",
             "titleRemove": "Remover um servidor",
             "titleDetails": "Detalhes do servidor",
             "nodeAddress": "Endereço do servidor",
@@ -387,7 +387,7 @@
         "deleteProfile": {
             "title": "Excluir perfil",
             "confirmation": "Tem certeza de que deseja excluir este perfil? Esta ação não pode ser desfeita.",
-            "typePassword": "Type your password to confirm."
+            "typePassword": "Digite sua senha para confirmar."
         },
         "diagnostics": {
             "title": "Diagnósticos",
@@ -401,8 +401,8 @@
             "userPath": "Caminho do Usuário"
         },
         "transaction": {
-            "title": "Confirm transaction",
-            "body": "You’re about to send {amount} to"
+            "title": "Confirmar transação",
+            "body": "Você está prestes a enviar {amount} para"
         }
     },
     "charts": {
@@ -411,7 +411,11 @@
         "portoflio": "Portfólio",
         "token": "Token",
         "accountValue": "Saldo da Conta",
-        "accountActivity": "Atividade da Conta"
+        "accountActivity": "Atividade da Conta",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "Continuar",
@@ -453,19 +457,19 @@
         "enableDeveloperMode": "Ativar modo de desenvolvedor",
         "enableSystemNotifications": "Ativar notificações do sistema",
         "exportState": "Exportar estado",
-        "localProofOfWork": "Local proof of work",
+        "localProofOfWork": "Prova de trabalho local",
         "unlock": "Desbloquear",
         "updateFirefly": "Atualizar a Firefly",
         "restartNow": "Reiniciar agora",
         "saveBackup": "Salvar backup Stronghold",
         "customizeAcount": "Customizar a conta",
         "viewAddressHistory": "Ver histórico de endereços",
-        "hideAccount": "Hide account",
-        "showAccount": "Unhide account",
-        "deleteAccount": "Delete account",
+        "hideAccount": "Ocultar conta",
+        "showAccount": "Reexibir conta",
+        "deleteAccount": "Excluir conta",
         "max": "Máx",
         "addNode": "Adicionar servidor",
-        "updateNode": "Update node",
+        "updateNode": "Atualizar servidor",
         "removeNode": "Remover servidor",
         "hide": "Ocultar",
         "hideOthers": "Ocultar Outros",
@@ -491,8 +495,8 @@
         "finishSetup": "Concluir configuração",
         "readDocumentation": "Ler a documentação",
         "visitFaq": "Visitar FAQ",
-        "showHiddenAccounts": "Show hidden accounts",
-        "confirm": "Confirm"
+        "showHiddenAccounts": "Mostrar contas ocultas",
+        "confirm": "Confirmar"
     },
     "general": {
         "password": "Senha",
@@ -538,7 +542,7 @@
         "appearance": "Aparência",
         "lightTheme": "Tema Claro",
         "darkTheme": "Tema Escuro",
-        "balance": "Balance",
+        "balance": "Saldo",
         "accountBalance": "Saldo da Conta",
         "incoming": "Recebendo",
         "outgoing": "Enviando",
@@ -586,10 +590,10 @@
         "passwordUpdating": "Atualizando senha...",
         "passwordSuccess": "Senha atualizada com sucesso",
         "passwordFailed": "Falha ao atualizar senha",
-        "syncingAccounts": "Syncing accounts...",
-        "exportingStronghold": "Exporting Stronghold...",
-        "exportingStrongholdSuccess": "Exported Stronghold successfully",
-        "exportingStrongholdFailed": "Exporting Stronghold failed",
+        "syncingAccounts": "Sincronizando contas...",
+        "exportingStronghold": "Exportando Stronghold...",
+        "exportingStrongholdSuccess": "Stronghold exportada com sucesso",
+        "exportingStrongholdFailed": "Falha na exportação da Stronghold",
         "pinCodeUpdating": "Atualizando código PIN...",
         "pinCodeSuccess": "Código PIN atualizado com sucesso",
         "pinCodeFailed": "Falha ao atualizar código PIN",
@@ -600,7 +604,7 @@
         "passwordStrength3": "Média",
         "passwordStrength4": "Forte",
         "creatingProfile": "Criando perfil, por favor aguarde...",
-        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
+        "accountRemoved": "Esta conta está oculta. Exiba a conta para realizar transferências."
     },
     "dates": {
         "today": "Hoje",
@@ -614,7 +618,7 @@
         "valueTx": "Recebendo {{value}} para {{account}}",
         "confirmed": "Envio de {{value}} de {{account}} foi confirmado",
         "confirmedInternal": "{{value}} de {{senderAccount}} para {{receiverAccount}} foi confirmado",
-        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
+        "confirmedInternalNoAccounts": "{{value}} transferência interna confirmada",
         "failed": "Envio de {{value}} de {{account}} falhou",
         "downloadingUpdate": "Baixando atualização",
         "updateReady": "Atualização está pronta",
@@ -623,7 +627,7 @@
         "calcMinutesRemaining": "Calculando minutos restantes...",
         "minutesRemaining": "{minutes, plural, one {1 minuto restante} other {# minutos restantes}}",
         "copiedToClipboard": "Copiado para área de transferência",
-        "accountsSynchronized": "Account synchronization complete"
+        "accountsSynchronized": "Sincronização da conta concluída"
     },
     "error": {
         "profile": {
@@ -643,7 +647,7 @@
             "dates": "Datas são fáceis de adivinhar.",
             "common": "Essa é uma senha muito comum.",
             "similar": "Essa senha é parecida com uma senha comum.",
-            "word": "A single word is easy to guess.",
+            "word": "Uma única palavra é fácil de adivinhar.",
             "incorrect": "Sua senha está incorreta.",
             "length": "Sua senha não pode ser maior que {length, plural, one {1 caractere} other {# caracteres}}."
         },
@@ -670,6 +674,7 @@
             "amountZero": "O valor deve ser maior que 0.",
             "wrongAddressPrefix": "Endereços começam com o prefixo {prefix}.",
             "wrongAddressFormat": "O endereço não está formatado corretamente.",
+            "invalidAddress": "O endereço não é válido.",
             "insufficientFunds": "Esta conta não tem fundos suficientes.",
             "noToAccount": "Você não selecionou uma conta para enviar os fundos.",
             "sendingDust": "Você não pode enviar menos de 1 Mi.",
@@ -692,7 +697,8 @@
             "seedTooShort": "A seed deve conter 81 caracteres, atualmente {length, plural, one {contém 1} other {contém #}}",
             "seedCharacters": "A seed deve conter apenas caracteres A-Z ou 9",
             "phraseWordCount": "Deve haver 24 palavras em sua frase de recuperação, atualmente {length, plural, one {há 1} other {há #}}.",
-            "phraseUnrecognizedWord": "Palavra \"{word}\" não reconhecida na sua frase de recuperação"
+            "phraseUnrecognizedWord": "Palavra \"{word}\" não reconhecida na sua frase de recuperação",
+            "phraseCaseWord": "The word \"{word}\" should be lower case"
         }
     }
 }

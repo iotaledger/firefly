@@ -106,7 +106,7 @@
         "importFromText": {
             "title": "Ripristina il tuo portafoglio con una frase di recupero o un seed",
             "body1": "Un seed è composto da 81 caratteri. E' utilizzato per recuperare un portafoglio da un vecchio portafoglio Trinity.",
-            "body2": "Una frase di recupero è lunga 24 parole. Viene utilizzata per recuperare un portafoglio Firefly esistente.",
+            "body2": "Una frase di recupero è lunga 24 parole, tutte minuscole, con spazi. Viene utilizzata per recuperare un wallet Firefly.",
             "body3": "Inserisci il tuo seed o la frase di recupero",
             "seedDetected": "Rilevato seed di 81 caratteri",
             "phraseDetected": "Rilevata frase di recupero da 24 parole"
@@ -411,7 +411,11 @@
         "portoflio": "Portafoglio",
         "token": "Token",
         "accountValue": "Valore dell'conto",
-        "accountActivity": "Attività del conto"
+        "accountActivity": "Attività del conto",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "Continua",
@@ -586,10 +590,10 @@
         "passwordUpdating": "Aggiornamento password...",
         "passwordSuccess": "Password aggiornata con successo",
         "passwordFailed": "Aggiornamento password non riuscito",
-        "syncingAccounts": "Syncing accounts...",
-        "exportingStronghold": "Exporting Stronghold...",
-        "exportingStrongholdSuccess": "Exported Stronghold successfully",
-        "exportingStrongholdFailed": "Exporting Stronghold failed",
+        "syncingAccounts": "Sincronizzazione account in corso...",
+        "exportingStronghold": "Esportazione stronghold...",
+        "exportingStrongholdSuccess": "Stronghold esportato con successo",
+        "exportingStrongholdFailed": "Esportazione di Stroghold fallita",
         "pinCodeUpdating": "Aggiornamento codice PIN...",
         "pinCodeSuccess": "Codice PIN aggiornato con successo",
         "pinCodeFailed": "Aggiornamento codice PIN non riuscito",
@@ -670,6 +674,7 @@
             "amountZero": "L'importo deve essere maggiore di 0.",
             "wrongAddressPrefix": "Gli indirizzi iniziano con il prefisso {prefix}.",
             "wrongAddressFormat": "L'indirizzo non è formattato correttamente.",
+            "invalidAddress": "L'indirizzo non è valido.",
             "insufficientFunds": "Questo conto non ha sufficienti fondi.",
             "noToAccount": "Non è stato selezionato un account a cui inviare i fondi.",
             "sendingDust": "Non puoi inviare meno di 1 Mi.",
@@ -692,7 +697,8 @@
             "seedTooShort": "Il seme dovrebbe essere lungo 81 caratteri, è {length, plural, one {è 1} other {è #}}",
             "seedCharacters": "Il seme deve contenere solo caratteri A-Z o 9",
             "phraseWordCount": "Ci dovrebbero essere 24 parole nella tua frase di recupero, attualmente ci sono {length, plural, one {è 1} other {sono #}}.",
-            "phraseUnrecognizedWord": "Parola \"{word}\" non riconosciuta nella tua frase di recupero"
+            "phraseUnrecognizedWord": "Parola \"{word}\" non riconosciuta nella tua frase di recupero",
+            "phraseCaseWord": "La parola \"{word}\" dovrebbe essere minuscola"
         }
     }
 }
