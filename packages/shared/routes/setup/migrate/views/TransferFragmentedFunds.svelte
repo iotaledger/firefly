@@ -190,10 +190,7 @@
 
                     .catch((error) => {
                         console.error(error)
-                        showAppNotification({
-                            type: 'error',
-                            message: locale('views.migrate.error'),
-                        })
+
                         transactions = transactions.map((_transaction, i) => {
                             if (_transaction.index === transaction.index) {
                                 return { ..._transaction, status: -1, errorText: 'Migration failed' }
