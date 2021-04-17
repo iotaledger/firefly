@@ -113,6 +113,24 @@
     const handleSendClick = () => {
         amountError = ''
         addressError = ''
+        toError = ''
+
+        if (selectedSendType === SEND_TYPE.EXTERNAL) {
+            // Validate address length
+            if (address.length !== ADDRESS_LENGTH) {
+                addressError = locale('error.send.addressLength', {
+                    values: {
+                        length: ADDRESS_LENGTH,
+                    },
+                })
+            } else {
+                addressError = validateBech32Address(addressPrefix, address)
+            }
+        } else {
+            if (!to) {
+                toError = locale('error.send.noToAccount')
+            }
+        }
 
         if (amount.length === 0) {
             amountError = locale('error.send.amountInvalidFormat')
@@ -123,61 +141,43 @@
             if (Number.isNaN(amountAsFloat)) {
                 amountError = locale('error.send.amountInvalidFormat')
             } else {
-                const amountAsI = changeUnits(amountAsFloat, unit, Unit.i)
-                if (amountAsI > from.balance) {
+                amountRaw = changeUnits(amountAsFloat, unit, Unit.i)
+                if (amountRaw > from.balance) {
                     amountError = locale('error.send.amountTooHigh')
-                } else if (amountAsI <= 0) {
+                } else if (amountRaw <= 0) {
                     amountError = locale('error.send.amountZero')
-                } else if (amountAsI < 1000000) {
+                } else if (amountRaw < 1000000) {
                     amountError = locale('error.send.sendingDust')
                 }
+            }
+        }
 
-                if (selectedSendType === SEND_TYPE.EXTERNAL) {
-                    // Validate address length
-                    if (address.length !== ADDRESS_LENGTH) {
-                        addressError = locale('error.send.addressLength', {
-                            values: {
-                                length: ADDRESS_LENGTH,
-                            },
-                        })
-                    } else {
-                        addressError = validateBech32Address(addressPrefix, address)
+        if (!amountError && !addressError && !toError) {
+            // If this is an external send but the dest address is in one of
+            // the other accounts switch it to an internal transfer
+            let internal = selectedSendType === SEND_TYPE.INTERNAL
+
+            if (!internal) {
+                for (const acc of $accounts) {
+                    const internalAddress = acc.addresses.find((a) => a.address === address)
+                    if (internalAddress) {
+                        internal = true
+                        to = acc
+                        break
                     }
-                } else {
-                    if (!to) {
-                        toError = locale('error.send.noToAccount')
-                    }
-                }
-
-                if (!amountError && !addressError && !toError) {
-                    // If this is an external send but the dest address is in one of
-                    // the other accounts switch it to an internal transfer
-                    let internal = selectedSendType === SEND_TYPE.INTERNAL
-
-                    if (!internal) {
-                        for (const acc of $accounts) {
-                            const internalAddress = acc.addresses.find((a) => a.address === address)
-                            if (internalAddress) {
-                                internal = true
-                                to = acc
-                                break
-                            }
-                        }
-                    }
-
-                    amountRaw = amountAsI
-                    openPopup({
-                        type: 'transaction',
-                        props: {
-                            internal,
-                            amount: amountRaw,
-                            unit,
-                            to: internal ? to.alias : address,
-                            onConfirm: () => triggerSend(internal),
-                        },
-                    })
                 }
             }
+
+            openPopup({
+                type: 'transaction',
+                props: {
+                    internal,
+                    amount: amountRaw,
+                    unit,
+                    to: internal ? to.alias : address,
+                    onConfirm: () => triggerSend(internal),
+                },
+            })
         }
     }
 

@@ -26,6 +26,7 @@ export interface Profile {
     settings: UserSettings
     isDeveloperProfile: boolean
     hiddenAccounts?: string[]
+    gapLimit?: number
 }
 
 /**
@@ -98,6 +99,7 @@ export const createProfile = (profileName, isDeveloperProfile): Profile => {
         name: profileName,
         lastStrongholdBackupTime: null,
         isDeveloperProfile,
+        gapLimit: 10,
         settings: {
             currency: AvailableExchangeRates.USD,
             automaticNodeSelection: true,
@@ -187,7 +189,7 @@ export const removeProfile = (id: string): void => {
  * @returns {void}
  */
 export const updateProfile = (
-    path: string, value: string | string[] | boolean | Date | AvailableExchangeRates | Node | Node[] | ChartSelectors | HistoryDataProps) => {
+    path: string, value: string | string[] | boolean | Date | number | AvailableExchangeRates | Node | Node[] | ChartSelectors | HistoryDataProps) => {
     const _update = (_profile) => {
         const pathList = path.split('.')
 

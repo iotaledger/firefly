@@ -264,6 +264,19 @@ export const asyncSetStrongholdPassword = (password) => {
     })
 }
 
+export const asyncChangeStrongholdPassword = (currentPassword, newPassword) => {
+    return new Promise<void>((resolve, reject) => {
+        api.changeStrongholdPassword(currentPassword, newPassword, {
+            onSuccess() {
+                resolve()
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
+
 export const asyncStoreMnemonic = (mnemonic) => {
     return new Promise<void>((resolve, reject) => {
         api.storeMnemonic(mnemonic, {

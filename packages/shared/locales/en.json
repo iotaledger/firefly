@@ -411,7 +411,11 @@
         "portoflio": "Portfolio",
         "token": "Token",
         "accountValue": "Account Value",
-        "accountActivity": "Account Activity"
+        "accountActivity": "Account Activity",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "Continue",
@@ -670,6 +674,7 @@
             "amountZero": "The amount must be greater than 0.",
             "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
             "wrongAddressFormat": "The address is not correctly formatted.",
+            "invalidAddress": "The address is not valid.",
             "insufficientFunds": "This account has insufficient funds.",
             "noToAccount": "You have not selected an account to send the funds to.",
             "sendingDust": "You cannot send less than 1 Mi.",

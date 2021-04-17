@@ -151,6 +151,7 @@
                     @apply opacity-0;
                     @apply overflow-hidden;
                     @apply max-w-0;
+                    @apply whitespace-nowrap;
                 }
                 :global(svg.showHoverText) {
                     @apply text-blue-500;
