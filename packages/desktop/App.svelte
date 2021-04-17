@@ -28,6 +28,7 @@
         Secure,
         Settings,
         Setup,
+        Profile,
         Splash,
         Welcome,
     } from 'shared/routes'
@@ -206,6 +207,9 @@
         </Route>
         <Route route={AppRoute.Appearance}>
             <Appearance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
+        <Route route={AppRoute.Profile}>
+            <Profile on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
         </Route>
         <Route route={AppRoute.Setup}>
             <Setup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />

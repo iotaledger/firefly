@@ -22,6 +22,10 @@
             lightmode: 'stronghold.svg',
             darkmode: 'stronghold_darkmode.svg',
         },
+        'logo-chrysalis-gem': {
+            lightmode: 'chrysalis_gem.svg',
+            darkmode: 'chrysalis_gem.svg',
+        },
     }
 </script>
 
