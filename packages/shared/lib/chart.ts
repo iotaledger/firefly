@@ -1,8 +1,8 @@
 import { Unit } from '@iota/unit-converter'
-import { AvailableExchangeRates, convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
+import { AvailableExchangeRates, convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
 import { localize } from 'shared/lib/i18n'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
-import { changeUnits } from 'shared/lib/units'
+import { formatUnitPrecision } from 'shared/lib/units'
 import type { WalletAccount } from 'shared/lib/wallet'
 import { isSelfTransaction, wallet } from 'shared/lib/wallet'
 import { date as i18nDate } from 'svelte-i18n'
@@ -171,8 +171,6 @@ export const getAccountActivityData = (account: WalletAccount) => {
                     else if (messageTimestamp > end) return
                 }
             }
-            _incoming = changeUnits(_incoming, Unit.i, Unit.Mi)
-            _outgoing = changeUnits(_outgoing, Unit.i, Unit.Mi)
 
             incoming.data.unshift(_incoming)
             incoming.tooltips.unshift({
@@ -182,7 +180,7 @@ export const getAccountActivityData = (account: WalletAccount) => {
                 }),
                 label: localize('charts.incomingMi', {
                     values: {
-                        value: formatCurrency(_incoming)
+                        value: formatUnitPrecision(_incoming, Unit.Mi, true)
                     }
                 })
             })
@@ -193,7 +191,7 @@ export const getAccountActivityData = (account: WalletAccount) => {
                     month: 'long'
                 }), label: localize('charts.outgoingMi', {
                     values: {
-                        value: formatCurrency(_outgoing)
+                        value: formatUnitPrecision(_outgoing, Unit.Mi, true)
                     }
                 })
             })
