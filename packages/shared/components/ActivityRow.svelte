@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
     import { receiverAddressesFromPayload, sendAddressFromPayload } from 'shared/lib/helpers'
+    import { formatDate } from 'shared/lib/i18n'
     import type { Payload } from 'shared/lib/typings/message'
-    import { formatUnit } from 'shared/lib/units'
+    import { formatUnitBestMatch } from 'shared/lib/units'
     import type { WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import { formatDate } from 'shared/lib/i18n'
     import type { Writable } from 'svelte/store'
 
     export let timestamp
@@ -94,7 +94,7 @@
     </div>
     <div class="flex-1 items-end flex flex-col ml-4">
         <Text type="p" smaller>
-            {`${!payload.data.essence.data.incoming ? '-' : ''}${formatUnit(payload.data.essence.data.value)}`}
+            {`${!payload.data.essence.data.incoming ? '-' : ''}${formatUnitBestMatch(payload.data.essence.data.value)}`}
         </Text>
     </div>
 </button>

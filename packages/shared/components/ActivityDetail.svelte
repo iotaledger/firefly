@@ -1,8 +1,9 @@
 <script lang="typescript">
+    import { Unit } from '@iota/unit-converter'
     import { Icon, Text } from 'shared/components'
     import { getInitials, receiverAddressesFromPayload, sendAddressFromPayload, truncateString } from 'shared/lib/helpers'
     import type { Payload } from 'shared/lib/typings/message'
-    import { formatUnit } from 'shared/lib/units'
+    import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { setClipboard } from 'shared/lib/utils'
     import { formatDate } from 'shared/lib/i18n'
     import type { WalletAccount } from 'shared/lib/wallet'
@@ -53,7 +54,7 @@
             {/if}
         </div>
         <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
-        <Text bold smaller>{formatUnit(payload.data.essence.data.value)}</Text>
+        <Text bold smaller>{formatUnitBestMatch(payload.data.essence.data.value)}</Text>
         <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
         <div class="flex flex-col flex-wrap justify-center items-center text-center">
             {#if receiverAccount}
@@ -116,6 +117,14 @@
                 {/each}
             </div>
         {/if}
+        <div class="mb-5">
+            <Text secondary>{locale('general.amount')}</Text>
+            <button class="text-left" on:click={() => setClipboard(payload.data.essence.data.value.toString())}>
+                <Text type="pre" classes="mb-2">
+                    {formatUnitPrecision(payload.data.essence.data.value, Unit.i, true, true)}
+                </Text>
+            </button>
+        </div>
     </div>
 
     <div class="w-full flex justify-center">
