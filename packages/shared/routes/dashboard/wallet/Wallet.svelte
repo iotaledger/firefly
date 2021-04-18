@@ -108,7 +108,9 @@
             onSuccess(accountsResponse) {
                 const _continue = () => {
                     accountsLoaded.set(true)
-                    syncAccounts(false)
+                    const gapLimit = $activeProfile?.gapLimit ?? 10
+                    syncAccounts(false, 0, gapLimit)
+                    updateProfile('gapLimit', 10)
                 }
 
                 if (accountsResponse.payload.length === 0) {
@@ -120,22 +122,27 @@
                         outgoing: 0,
                     }
 
-                    for (const [idx, storedAccount] of accountsResponse.payload.entries()) {
-                        getAccountMeta(storedAccount.id, (err, meta) => {
+                    let completeCount = 0
+                    let newAccounts = []
+                    for (const payloadAccount of accountsResponse.payload) {
+                        getAccountMeta(payloadAccount.id, (err, meta) => {
                             if (!err) {
                                 totalBalance.balance += meta.balance
                                 totalBalance.incoming += meta.incoming
                                 totalBalance.outgoing += meta.outgoing
 
-                                const account = prepareAccountInfo(storedAccount, meta)
-                                accounts.update((accounts) => [...accounts, account])
-
-                                if (idx === accountsResponse.payload.length - 1) {
-                                    updateBalanceOverview(totalBalance.balance, totalBalance.incoming, totalBalance.outgoing)
-                                    _continue()
-                                }
+                                const account = prepareAccountInfo(payloadAccount, meta)
+                                newAccounts.push(account)
                             } else {
                                 console.error(err)
+                            }
+
+                            completeCount++
+
+                            if (completeCount === accountsResponse.payload.length) {
+                                accounts.update((accounts) => [...accounts, ...newAccounts].sort((a, b) => a.index - b.index))
+                                updateBalanceOverview(totalBalance.balance, totalBalance.incoming, totalBalance.outgoing)
+                                _continue()
                             }
                         })
                     }
@@ -160,7 +167,7 @@
                             if (account.id === accountId) {
                                 account.depositAddress = response.payload.address
 
-                                if (!account.addresses.some(a => a.address === response.payload.address)) {
+                                if (!account.addresses.some((a) => a.address === response.payload.address)) {
                                     account.addresses.push(response.payload)
                                 }
                             }
@@ -451,7 +458,7 @@
                                                         essence: Object.assign({}, message.payload.data.essence, {
                                                             data: Object.assign({}, message.payload.data.essence.data, {
                                                                 incoming: isReceiverAccount,
-                                                                internal: true
+                                                                internal: true,
                                                             }),
                                                         }),
                                                     }),

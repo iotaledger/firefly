@@ -106,7 +106,7 @@
         "importFromText": {
             "title": "Återställ din plånbok med en återställningsfras eller seed",
             "body1": "En seed består av 81 tecken. Denna används för att återställa plånboken från en äldre Trinity-plånbok.",
-            "body2": "En återställningsfras är 24 ord lång. Denna används för att återställa en befintlig Firefly-plånbok.",
+            "body2": "En återställningsfras är 24 ord lång, endast små bokstäver och mellanrum mellan varje ord. Denna används för att återställa en befintlig Firefly-plånbok.",
             "body3": "Ange din seed eller återställningsfras",
             "seedDetected": "81 tecken lång seed upptäckt",
             "phraseDetected": "24 ord lång återställningsfras upptäckt"
@@ -411,7 +411,11 @@
         "portoflio": "Portfölj",
         "token": "Token",
         "accountValue": "Kontovärde",
-        "accountActivity": "Kontoaktivitet"
+        "accountActivity": "Kontoaktivitet",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "Fortsätt",
@@ -670,6 +674,7 @@
             "amountZero": "Beloppet måste vara större än 0.",
             "wrongAddressPrefix": "Adresser börjar med prefixet {prefix}.",
             "wrongAddressFormat": "Adressen är inte korrekt formaterad.",
+            "invalidAddress": "Adressen är inte giltig.",
             "insufficientFunds": "Detta konto har inte tillräckligt med tillgångar.",
             "noToAccount": "Du har inte valt ett konto att skicka IOTA till.",
             "sendingDust": "Du kan inte skicka mindre än 1 Mi.",
@@ -692,7 +697,8 @@
             "seedTooShort": "Din seed ska vara 81 tecken, den {length, plural, one {är 1} other {är #}}",
             "seedCharacters": "Din seed ska innehålla tecknen A-Z eller 9",
             "phraseWordCount": "Det ska finnas 24 ord i din återställningsfras, just nu är det {length, plural, one {är 1} other {är #}}.",
-            "phraseUnrecognizedWord": "Okänt ord \"{word}\" i din återställningsfras"
+            "phraseUnrecognizedWord": "Okänt ord \"{word}\" i din återställningsfras",
+            "phraseCaseWord": "Ordet \"{word}\" ska vara skrivet med små bokstäver"
         }
     }
 }

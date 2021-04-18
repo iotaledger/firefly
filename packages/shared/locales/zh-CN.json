@@ -106,7 +106,7 @@
         "importFromText": {
             "title": "用恢复恢复或种子恢复你的钱包",
             "body1": "种子由81个字符组成。它用于从旧的 Trinity 钱包中恢复。",
-            "body2": "恢复密语长度为24个单词(含空格)。这个密语可用于恢复已有的Firefly钱包。",
+            "body2": "恢复密语长度为24个单词，单词间由空格隔开。这个密语可用于恢复已有的Firefly钱包。",
             "body3": "请输入您的种子或恢复密语",
             "seedDetected": "检测到81个字符种子",
             "phraseDetected": "检测到24个单词恢复密语"
@@ -411,7 +411,11 @@
         "portoflio": "资产组合",
         "token": "Token",
         "accountValue": "账户价值",
-        "accountActivity": "帐户活动"
+        "accountActivity": "帐户活动",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "继续",
@@ -670,6 +674,7 @@
             "amountZero": "金额必须大于零。",
             "wrongAddressPrefix": "地址以前缀 {prefix} 开始。",
             "wrongAddressFormat": "地址格式不正确。",
+            "invalidAddress": "地址无效的",
             "insufficientFunds": "该账户资金不足。",
             "noToAccount": "您尚未选择一个账户来发送资金。",
             "sendingDust": "您的发送不能小于 1 Mi。",
@@ -692,7 +697,8 @@
             "seedTooShort": "种子长度应该是81个字符，而它 {length, plural, one {只有 1} other {是 #}} 个。",
             "seedCharacters": "种子只能包含字符 A-Z 或 9",
             "phraseWordCount": "您的恢复密语中应该有24个单词，目前 {length, plural, one {只有 1}other {是 #}} 个单词。",
-            "phraseUnrecognizedWord": "恢复短语中无法识别的单词“{word}”"
+            "phraseUnrecognizedWord": "恢复短语中无法识别的单词“{word}”",
+            "phraseCaseWord": "单词 \"{word}\" 应为小写"
         }
     }
 }

@@ -6,13 +6,20 @@
     import { get } from 'svelte/store'
 
     let timeout
+    let isDestroyed = false
 
     function handleEvent() {
-        clearTimeout(timeout)
+        // The events are debounced so the component can get onDestroy
+        // called and be followed by a debounced handleEvent so
+        // make sure the idle doesn't get triggered again when its
+        // already destroyed
+        if (!isDestroyed) {
+            clearTimeout(timeout)
 
-        const ap = get(activeProfile)
-        if (ap) {
-            timeout = setTimeout(lock, ap.settings.lockScreenTimeout * 60 * 1000)
+            const ap = get(activeProfile)
+            if (ap) {
+                timeout = setTimeout(lock, ap.settings.lockScreenTimeout * 60 * 1000)
+            }
         }
     }
 
@@ -21,6 +28,7 @@
     }
 
     onDestroy(() => {
+        isDestroyed = true
         clearTimeout(timeout)
     })
 </script>
