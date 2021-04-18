@@ -1171,7 +1171,7 @@ export const getWalletBalanceHistory = (accountsBalanceHistory: AccountsBalanceH
 /**
  * Sync the accounts
  */
-export function syncAccounts(showConfirmation, addressIndex?: number, gapLimit?: number) {
+export function syncAccounts(showConfirmation, addressIndex?: number, gapLimit?: number, showErrorNotification = true) {
     isSyncing.set(true)
     api.syncAccounts(addressIndex, gapLimit, {
         onSuccess(syncAccountsResponse) {
@@ -1194,10 +1194,13 @@ export function syncAccounts(showConfirmation, addressIndex?: number, gapLimit?:
         },
         onError(err) {
             isSyncing.set(false)
-            showAppNotification({
-                type: 'error',
-                message: localize(err.error),
-            })
+
+            if (showErrorNotification) {
+                showAppNotification({
+                    type: 'error',
+                    message: localize(err.error),
+                })
+            }
         },
     })
 }

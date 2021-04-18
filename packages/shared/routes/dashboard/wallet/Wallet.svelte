@@ -111,7 +111,7 @@
                 const _continue = () => {
                     accountsLoaded.set(true)
                     const gapLimit = $activeProfile?.gapLimit ?? 10
-                    syncAccounts(false, 0, gapLimit)
+                    syncAccounts(false, 0, gapLimit, false)
                     updateProfile('gapLimit', 10)
                 }
 
