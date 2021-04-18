@@ -5,7 +5,7 @@
     import { formatUnit } from 'shared/lib/units'
     import type { WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import { date } from 'svelte-i18n'
+    import { formatDate } from 'shared/lib/i18n'
     import type { Writable } from 'svelte/store'
 
     export let timestamp
@@ -83,13 +83,12 @@
     <div class="flex flex-col ml-3.5 space-y-1.5">
         <Text type="p" bold smaller>{locale(direction, { values: { account: accountAlias } })}</Text>
         <p class="text-10 leading-120 text-gray-500">
-            {$date(new Date(timestamp), {
+            {formatDate(new Date(timestamp), {
                 year: 'numeric',
                 month: 'short',
                 day: 'numeric',
                 hour: 'numeric',
                 minute: 'numeric',
-                hour12: false,
             })}
         </p>
     </div>

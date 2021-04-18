@@ -855,7 +855,7 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
             addresses: mergeProps(storedAccount.addresses, syncedAccount.addresses, 'address'),
             messages: mergeProps(storedAccount.messages, syncedAccount.messages, 'id'),
         })
-    }).sort((a, b) => a.index - b.index)
+    })
 
     if (newAccounts.length) {
         const totalBalance = {
@@ -865,8 +865,9 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
         }
 
         const _accounts = []
+        let completeCount = 0
 
-        for (const [idx, newAccount] of newAccounts.entries()) {
+        for (const newAccount of newAccounts) {
             getAccountMeta(newAccount.id, (err, meta) => {
                 if (!err) {
                     totalBalance.balance += meta.balance
@@ -884,28 +885,30 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
                     }), meta)
 
                     _accounts.push(account)
-
-                    if (idx === newAccounts.length - 1) {
-                        const { balanceOverview } = get(wallet);
-                        const overview = get(balanceOverview);
-
-                        accounts.update(() => {
-                            return [...updatedStoredAccounts, ..._accounts]
-                        })
-
-                        updateBalanceOverview(
-                            overview.balanceRaw + totalBalance.balance,
-                            overview.incomingRaw + totalBalance.incoming,
-                            overview.outgoingRaw + totalBalance.outgoing
-                        )
-                    }
                 } else {
                     console.error(err)
                 }
+
+                completeCount++
+                if (completeCount === newAccounts.length) {
+                    const { balanceOverview } = get(wallet);
+                    const overview = get(balanceOverview);
+
+                    accounts.update(() => {
+                        return [...updatedStoredAccounts, ..._accounts].sort((a, b) => a.index - b.index)
+                    })
+
+                    updateBalanceOverview(
+                        overview.balanceRaw + totalBalance.balance,
+                        overview.incomingRaw + totalBalance.incoming,
+                        overview.outgoingRaw + totalBalance.outgoing
+                    )
+                }
+
             })
         }
     } else {
-        accounts.update(() => updatedStoredAccounts);
+        accounts.update(() => updatedStoredAccounts.sort((a, b) => a.index - b.index));
     }
 };
 
