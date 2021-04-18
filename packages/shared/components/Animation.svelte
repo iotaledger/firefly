@@ -18,6 +18,10 @@
             lightmode: 'appearance-desktop.json',
             darkmode: 'appearance-desktop-darkmode.json',
         },
+        'profile-desktop': {
+            lightmode: 'profile-desktop.json',
+            darkmode: 'profile-desktop-darkmode.json',
+        },
         'setup-desktop': {
             lightmode: 'setup-desktop.json',
             darkmode: 'setup-desktop-darkmode.json',
