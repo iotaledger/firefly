@@ -31,11 +31,17 @@
             "title": "Внешний вид",
             "body": "Выбери тему своего кошелька."
         },
-        "setup": {
-            "title": "Настройте ваш кошелек",
-            "body1": "Ты можешь создать несколько профилей, чтобы сохранить свои токены отдельно и повысить безопасность.",
+        "profile": {
+            "title": "Создать профиль",
+            "body1": "Вы можете создать несколько профилей, чтобы организовать ваши кошельки и повысить безопасность.",
             "body2": "Теперь давай начнем с твоего первого профиля. Ты можешь добавить дополнительные профили позже.",
-            "profileName": "Название профиля"
+            "profileName": "Имя профиля"
+        },
+        "setup": {
+            "title": "Настройте кошелек",
+            "chrysalisTitle": "Обновление сети Chrysalis",
+            "chrysalisBody": "С 21 апреля пользователи могут перенести их токены в новую сеть Chrysalis. Мы рекомендуем вам как можно скорее перенести ваши токены.",
+            "learnMore": "Узнайте о миграции"
         },
         "secure": {
             "title": "Защити твой кошелек",
@@ -97,7 +103,10 @@
         },
         "congratulations": {
             "title": "Настройка кошелька завершена",
-            "body": "Твой новый кошелек готов к использованию."
+            "body": "Твой новый кошелек готов к использованию.",
+            "fundsMigrated": "Средства перенесены",
+            "success": "Вы успешно перевели свои средства в новую сеть",
+            "exportMigration": "Экспорт журнала миграции и завершение настройки"
         },
         "import": {
             "title": "Импортировать кошелёк",
@@ -109,7 +118,8 @@
             "body2": "Ключевая фраза длиной 24 слов, все маленькими буквами с пробелами между ними. Используется для восстановления существующего кошелька Firefly.",
             "body3": "Введите вашу фразу восстановления или мнемонику",
             "seedDetected": "Обнаружено 81 символ seed",
-            "phraseDetected": "Обнаружена фраза восстановления 24 слов"
+            "phraseDetected": "Обнаружена фраза восстановления 24 слов",
+            "checksum": "Контрольная сумма"
         },
         "importFromFile": {
             "title": "Восстанови кошелек с помощью файла резервной копии",
@@ -130,10 +140,58 @@
         },
         "migrate": {
             "title": "Мигрируйте свои средства",
-            "body1": "Это автоматизированный процесс перемищение ваших средств на новый кошелёк. Мы проверим потраченные адреса, которые ослабляют вашу безопасность.",
+            "body1": "Это автоматизированный процесс перевода ваших средств на новый кошелек.",
             "body2": "Это может занять некоторое время. Не выключайте устройство во время миграции.",
             "existing": "Ваш старый кошелёк",
-            "new": "Ваш новый кошелёк"
+            "new": "Ваш новый кошелёк",
+            "learn": "Узнайте о миграции",
+            "beginMigration": "Начать миграцию",
+            "migrating": "Перевод средств...",
+            "migrated": "{баланс} перенесён",
+            "migrationFailed": "Сбой переноса данных",
+            "noAddressesForMigration": "Пожалуйста, выберите адреса, которые вы хотите использовать.",
+            "restoringWallet": "Восстановление кошелька...",
+            "findingBalance": "Поиск баланса...",
+            "incorrectSeedVaultPassword": "Неправильный пароль сида.",
+            "signingBundle": "Пакет подписи",
+            "broadcastingBundle": "Передача пакета",
+            "miningBundle": "Майнинг данных",
+            "problemRestoringWallet": "При ресторинге кошелька возникла проблема. Пожалуйста, попробуйте ещё раз.",
+            "minimumMigrationAmountSpentAddresses": "Минимальная сумма миграции для каждого потраченного адреса составляет 1 мега айота. Проверьте снова, если ваш баланс неправильный.",
+            "tooManyAddressesToMigrate": "У вас слишком много адресов с низким балансом для миграции. Проверьте правильность отображения баланса.",
+            "cannotMigrateAllYourFunds": "Мы не можем перенести все ваши средства, потому что некоторые адреса слишком низки. Вы все равно можете продолжить. {value} будет потерян.",
+            "error": "Произошла ошибка при миграции ваших средств. Пожалуйста, попробуйте еще раз."
+        },
+        "bundleMiningWarning": {
+            "title": "Предупреждение",
+            "body1": "У вас есть средства на одном или несколько потраченных адресов.",
+            "body2": "Мы рекомендуем вам запустить автоматизированный процесс для безопасного и надёжного перевода средств.",
+            "body3": "Если вы закроете приложение, вам нужно будет перезапустить весь процесс миграции.",
+            "learn": "Узнайте о потраченных адресах"
+        },
+        "secureSpentAddresses": {
+            "title": "Безопасные потраченные адреса",
+            "body1": "Обнаружены ваши средства {number, plural, one {# потраченный адрес} other {# потраченные адреса}}.",
+            "body2": "Мы рекомендуем вам запустить автоматизированный процесс для безопасного и надёжного перевода средств.",
+            "error": "Вы не можете мигрировать потраченные адреса с менее чем 1 Mi"
+        },
+        "securityCheckCompleted": {
+            "title": "Проверка безопасности завершена",
+            "body1": "Мы рассчитали уровень риска безопасности. Перезапуск этого процесса может снизить уровень вашего риска.",
+            "body2": "Когда вы довольны уровнем риска, нажмите продолжить.",
+            "rerun": "Перезапусти процесс для выбранный адресов",
+            "continueMigration": "Продолжить миграцию"
+        },
+        "securingSpentAddresses": {
+            "title": "Защищаем потраченные адреса...",
+            "body1": "Этот процесс займет {minutes, plural, one {1 минуту} other {# минут}}.",
+            "body2": "Ваш компьютер будет работать с полной мощностью, вы можете делать что-то другое, пока вы ждёте завершения."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Фаерфлай приступает к миграции ваших средств. Это может занять некоторое время.",
+            "migrate": "Миграция средств",
+            "transaction": "Транзакция {number}",
+            "rerun": "Попрoбуйте снова"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,13 +199,15 @@
         },
         "balance": {
             "title": "Ваш баланс",
-            "body": "Верен ли ваш баланс?"
+            "body": "Убедитесь, что баланс правильный, прежде чем продолжить. Вы можете проверить ещё раз, если что-то выглядит неправильно.",
+            "error": "Минимальная сумма миграции составляет 1 мега айота. Проверьте снова, если ваш баланс неправильный.",
+            "zeroBalance": "Попробуйте проверить снова. Если вы все ещё не нашли ваш баланс, возможно, вы ввели ваш сид неправильно."
         },
         "settings": {
             "settings": "Настройки",
             "generalSettings": {
                 "title": "Общие настройки",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Настройте внешний вид вашего кошелька и другие общие настройки"
             },
             "security": {
                 "title": "Настройки Безопасности",
@@ -187,23 +247,23 @@
             },
             "exportStronghold": {
                 "title": "Экспорт резервной копии",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
+                "description": "Экспорт в файл Stronghold - полная зашифрованная резервная копия вашего кошелька и последняя история транзакций."
             },
             "appLock": {
-                "title": "Automatic Lock",
-                "description": "Time elapsed before your wallet locks and logs you out"
+                "title": "Автоматическая блокировка",
+                "description": "Время, прошедшее перед блокировкой кошелька и выходом из него"
             },
             "changePassword": {
                 "title": "Изменить пароль",
-                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
+                "description": "Ваш пароль используется для защиты вашего кошелька. Вы должны использовать надежный пароль для защиты ваших средств."
             },
             "changePincode": {
-                "title": "Change PIN code",
-                "description": "Your PIN keeps your balance and transactions private",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "title": "Изменить PIN-код",
+                "description": "Ваш PIN-код хранит ваш баланс и транзакции тайными",
+                "currentPincode": "Текущий PIN-код",
+                "newPincode": "Новый PIN-код",
+                "confirmNewPincode": "Подтвердите новый PIN",
+                "action": "Изменить PIN-код"
             },
             "resyncAccounts": {
                 "title": "Повторить синхронизацию учетных записей",
@@ -214,23 +274,23 @@
                 "description": "При выборе этого параметра будут показаны учетные записи, которые были ранее скрыты."
             },
             "deleteProfile": {
-                "title": "Delete profile",
-                "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
+                "title": "Удалить профиль",
+                "description": "Удаляет весь ваш кошелек, профиль и историю транзакций. Убедитесь, что у вас есть резервная копия."
             },
             "deepLinks": {
                 "title": "Умные ссылки",
-                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
+                "description": "Автоматически заполнить данные транзакций в Firefly при нажатии на ссылку iota://"
             },
             "developerMode": {
                 "title": "Режим Разработчика",
-                "description": "Connect to testnets and other developer features"
+                "description": "Подключиться к testnets и другим функциям разработчика"
             },
             "nodeSettings": {
                 "title": "Настройка Node (точка подключения к сети)",
                 "description": "Выберите Вручную для настройки параметров узла и подключения к вашему собственному узлу"
             },
             "configureNodeList": {
-                "title": "Select a node",
+                "title": "Выберите узел",
                 "description": "Управление списком узлов, к которым подключается ваш кошелек.",
                 "primaryNode": "Основной узел",
                 "excludeNode": "Исключить узел",
@@ -243,19 +303,19 @@
             },
             "proofOfWork": {
                 "title": "Доказательство Работы (PoW)",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "description": "Завершите подтверждение работы локально на вашем устройстве или аутсорсите на узел"
             },
             "errorLog": {
                 "title": "Журнал ошибок",
-                "description": "View errors to debug an issue"
+                "description": "Просмотреть ошибки для отладки проблемы"
             },
             "diagnostics": {
-                "title": "Diagnostics",
-                "description": "View system and application information"
+                "title": "Диагностика",
+                "description": "Просмотр информации о системе и приложении"
             },
             "stateExport": {
                 "title": "Экспортировать Состояние Кошелька",
-                "description": "Export your transaction history to a .csv file"
+                "description": "Экспорт истории транзакций в .csv файл"
             },
             "troubleshoot": {
                 "title": "Диагностика",
@@ -403,6 +463,17 @@
         "transaction": {
             "title": "Подтвердить транзакцию",
             "body": "Вы собираетесь отправить {amount}"
+        },
+        "riskFunds": {
+            "title": "Warning: funds at risk during migration",
+            "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
+            "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
+        },
+        "missingBundle": {
+            "title": "Warning: funds at risk during migration",
+            "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
+            "learnMore": "Learn more about spent addresses",
+            "proceed": "I understand the risk"
         }
     },
     "charts": {
@@ -423,10 +494,13 @@
         "cancel": "Отменить",
         "close": "Закрыть",
         "dismiss": "Отклонить",
+        "proceedAnyway": "Proceed anyway",
         "save": "Сохранить",
         "importSeed": "Импортировать существующую мнемонику",
-        "importWallet": "Импортировать существующий кошелек",
+        "restoreWallet": "Migrate or restore a wallet",
+        "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
         "createWallet": "Создать новый кошелек",
+        "createWalletDescription": "Create a fresh wallet running on Chrysalis",
         "savePassword": "Сохранить пароль",
         "useBiometric": "Использовать биометрическую защиту",
         "setupPin": "Задайте PIN-код",
@@ -438,7 +512,7 @@
         "verifyRecoveryPhrase": "Проверьте фразу восстановления",
         "revealRecoveryPhrase": "Показать фразу восстановлению",
         "importSeedvault": "Импортировать SeedVault",
-        "checkAgain": "Нет, проверьте снова",
+        "checkAgain": "Check Again",
         "importFromFile": "Импортировать из файла",
         "send": "Отправить",
         "receive": "Получить",
@@ -489,12 +563,14 @@
         "hideDetails": "Hide Details",
         "yes": "Yes",
         "no": "No",
+        "skip": "Skip",
         "reset": "Reset",
         "downloadRecoveryKit": "Save Recovery Kit template",
         "skipBackup": "Skip file backup",
         "finishSetup": "Finish setup",
         "readDocumentation": "Read the documentation",
         "visitFaq": "Visit FAQ",
+        "viewStatus": "View status",
         "showHiddenAccounts": "Показать скрытые учетные записи",
         "confirm": "Подтвердить"
     },
@@ -554,6 +630,7 @@
         "manualNodeSelection": "Ручной выбор Node (точка подключения к сети)",
         "profiles": "Профили",
         "developerProfile": "Developer Profile",
+        "developerProfileDescription": "Allows you to connect to testnets",
         "dev": "Dev",
         "createAccount": "Create an Account",
         "accountName": "Название учетной записи",
@@ -604,6 +681,7 @@
         "passwordStrength3": "Средний",
         "passwordStrength4": "Сильный",
         "creatingProfile": "Создание аккаунта, пожалуйста подожди...",
+        "fundMigration": "Fund migration",
         "accountRemoved": "Эта учетная запись скрыта. Сделайте её видимой для выполнения переводов."
     },
     "dates": {
@@ -627,7 +705,9 @@
         "calcMinutesRemaining": "Вычисление оставшихся минут...",
         "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Copied to clipboard",
-        "accountsSynchronized": "Account synchronization complete"
+        "accountsSynchronized": "Account synchronization complete",
+        "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
+        "migratedAccountChrysalisUp": "Your funds will become available shortly"
     },
     "error": {
         "profile": {
@@ -699,6 +779,16 @@
             "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
             "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
             "phraseCaseWord": "The word \"{word}\" should be lower case"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Risk level: {risk}",
+            "veryHigh": "Very high",
+            "high": "High",
+            "medium": "Medium",
+            "low": "Low",
+            "veryLow": "Very low"
         }
     }
 }

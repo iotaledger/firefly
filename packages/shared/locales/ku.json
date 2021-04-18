@@ -31,11 +31,17 @@
             "title": "Xûyanîn",
             "body": "Rengê cuzdanka xwe bijêrin."
         },
+        "profile": {
+            "title": "Create a profile",
+            "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "profileName": "Profile Name"
+        },
         "setup": {
-            "title": "Cazdanka xwe saz bike",
-            "body1": "Jibo hûn tokenên xwe cuda bigirîn û ewlehîyê zêde bikîn, dikarîn profîlên bikarhênerên ciyawaz saz bikî.",
-            "body2": "Em sereke bi navê profîla we ya yekem destpê bikin. Paşê hûn dikarin hinek profîl lê zêdebikin.",
-            "profileName": "Navê Profîlê"
+            "title": "Set up a wallet",
+            "chrysalisTitle": "Chrysalis Network Update",
+            "chrysalisBody": "From April 21st, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
+            "learnMore": "Learn about the migration"
         },
         "secure": {
             "title": "Cuzdanka xwe bikin ewlehiyê de.",
@@ -97,7 +103,10 @@
         },
         "congratulations": {
             "title": "Sazkirina cuzdankê dawî nehat",
-            "body": "Cuzdank amadeye jibo bikaranînê."
+            "body": "Cuzdank amadeye jibo bikaranînê.",
+            "fundsMigrated": "Funds migrated",
+            "success": "You have successfully migrated your funds to the new network",
+            "exportMigration": "Export migration log and finish setup"
         },
         "import": {
             "title": "Berîka xwe têxe malde",
@@ -109,7 +118,8 @@
             "body2": "Vegotonek ya rizgarkirinê 24 peyva dirêje. Ev, jibo cuzdanek heyî ya Firefly tomar bikî tê karanîn.",
             "body3": "Seed an jî gotina xilaskirina xwe tekin",
             "seedDetected": "Tîpek 81 seed hat dîtin",
-            "phraseDetected": "24 pêyva rizgarkirinê hat dîtin"
+            "phraseDetected": "24 pêyva rizgarkirinê hat dîtin",
+            "checksum": "Checksum"
         },
         "importFromFile": {
             "title": "Bikaranîna dosya cîgirî cuzdanka xwe rizgar bikin",
@@ -130,10 +140,58 @@
         },
         "migrate": {
             "title": "Hebûnên xwe bar bikin",
-            "body1": "Ev pêvajoyek xweser e ku fonên xwe veguhezîne berîka xweya nû. Em ê navnîşanên xerckirî yên ku ewlehiya we qels dikin kontrol bikin.",
+            "body1": "This is an automated process to transfer your funds to your new wallet.",
             "body2": "Dibe ku demek bikişîne. Di dema barkirinê de amûrê xwe qut nekin.",
             "existing": "Berîka tê a kevin",
-            "new": "Cizdan a te ya nu"
+            "new": "Cizdan a te ya nu",
+            "learn": "Learn about the migration",
+            "beginMigration": "Begin Migration",
+            "migrating": "Migrating funds...",
+            "migrated": "{balance} migrated",
+            "migrationFailed": "Migration Failed",
+            "noAddressesForMigration": "Please select the addresses you wish to secure.",
+            "restoringWallet": "Restoring wallet...",
+            "findingBalance": "Finding balance...",
+            "incorrectSeedVaultPassword": "Incorrect SeedVault password.",
+            "signingBundle": "Signing bundle",
+            "broadcastingBundle": "Broadcasting bundle",
+            "miningBundle": "Mining bundle",
+            "problemRestoringWallet": "There was a problem restoring your wallet. Please try again.",
+            "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
+            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. {value} will be lost.",
+            "error": "There was an error migrating your funds. Please try again."
+        },
+        "bundleMiningWarning": {
+            "title": "Warning",
+            "body1": "You have funds on one or more spent addresses.",
+            "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
+            "body3": "If you close the app you will need to restart the whole migration.",
+            "learn": "Learn about spent addresses"
+        },
+        "secureSpentAddresses": {
+            "title": "Secure spent addresses",
+            "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.",
+            "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",
+            "error": "You can’t migrate spent addresses with less than 1 Mi"
+        },
+        "securityCheckCompleted": {
+            "title": "Security check completed",
+            "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
+            "body2": "When you are happy with the risk level(s) press continue.",
+            "rerun": "Rerun process for selected addresses",
+            "continueMigration": "Continue migration"
+        },
+        "securingSpentAddresses": {
+            "title": "Securing spent addresses...",
+            "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
+            "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
+            "migrate": "Migrate funds",
+            "transaction": "Transaction {number}",
+            "rerun": "Dîsa biceribîne"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,7 +199,9 @@
         },
         "balance": {
             "title": "Hevsenga te",
-            "body": "Bîlançoya we rast e?"
+            "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
+            "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
+            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly."
         },
         "settings": {
             "settings": "Mîhengên",
@@ -403,6 +463,17 @@
         "transaction": {
             "title": "Kirarê bipêjirîn",
             "body": "Wê tu ewqasî {amount} hinêrî"
+        },
+        "riskFunds": {
+            "title": "Warning: funds at risk during migration",
+            "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
+            "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
+        },
+        "missingBundle": {
+            "title": "Warning: funds at risk during migration",
+            "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
+            "learnMore": "Learn more about spent addresses",
+            "proceed": "I understand the risk"
         }
     },
     "charts": {
@@ -412,10 +483,10 @@
         "token": "Token",
         "accountValue": "Bihayê Hesabê",
         "accountActivity": "Çalakiyên Hesabê",
-        "timeframe1Hour": "1 hour",
-        "timeframe1Day": "1 day",
-        "timeframe1Week": "1 week",
-        "timeframe1Month": "1 month"
+        "timeframe1Hour": "1 demjimêr",
+        "timeframe1Day": "1 roj",
+        "timeframe1Week": "1 hefte",
+        "timeframe1Month": "1 mang"
     },
     "actions": {
         "continue": "Berdewam",
@@ -423,10 +494,13 @@
         "cancel": "Betal",
         "close": "Derkeve",
         "dismiss": "Devjêberde",
+        "proceedAnyway": "Proceed anyway",
         "save": "Tomarkirin",
         "importSeed": "Seed'ek heyî barbikê hundir",
-        "importWallet": "Cuzdanka heyî barbikê hundir",
+        "restoreWallet": "Migrate or restore a wallet",
+        "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
         "createWallet": "Cuzdanek nû çêke",
+        "createWalletDescription": "Create a fresh wallet running on Chrysalis",
         "savePassword": "Pêborînê tomar bike",
         "useBiometric": "Ewlehîya bîyometrîk bikarbînin",
         "setupPin": "Qoda PIN saz bike",
@@ -438,7 +512,7 @@
         "verifyRecoveryPhrase": "Şîfra Xilaskirinê rastke. ",
         "revealRecoveryPhrase": "Hevoka rizgarkirinê nîşanbide",
         "importSeedvault": "SeedVault barbikê hundir",
-        "checkAgain": "Dîsa kontrol bike",
+        "checkAgain": "Check Again",
         "importFromFile": "Ji dosyayê barbikê hundir",
         "send": "Rêke",
         "receive": "Wergir",
@@ -489,12 +563,14 @@
         "hideDetails": "Derbarê dade",
         "yes": "Erê",
         "no": "Na",
+        "skip": "Skip",
         "reset": "Bîne serî",
         "downloadRecoveryKit": "Kîta rizgarkirinê tomar bike",
         "skipBackup": "Dosîya rizgarkirinê veke",
         "finishSetup": "Sazîyê biqedîn",
         "readDocumentation": "Belgenamê bixwîne",
         "visitFaq": "Here PPP",
+        "viewStatus": "View status",
         "showHiddenAccounts": "Hesabên veşartî nîşan bidin",
         "confirm": "Tomarkirin"
     },
@@ -554,6 +630,7 @@
         "manualNodeSelection": "Jêgirtina node ya manuel",
         "profiles": "Profîl",
         "developerProfile": "Hesaba Pêşvebir",
+        "developerProfileDescription": "Allows you to connect to testnets",
         "dev": "Pêşvebir",
         "createAccount": "Hesabekê Çêke",
         "accountName": "Navê Hesabê",
@@ -604,6 +681,7 @@
         "passwordStrength3": "Nacîn",
         "passwordStrength4": "Bihêze",
         "creatingProfile": "Profîlek nû çêdibe, ji kerema xwe rawestin...",
+        "fundMigration": "Fund migration",
         "accountRemoved": "Ev hesab veşartî ye. Wê veke ku veguheztinan pêk bîne."
     },
     "dates": {
@@ -627,7 +705,9 @@
         "calcMinutesRemaining": "Xulekên mayîn tên hesabkirin...",
         "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# xulek maye}}",
         "copiedToClipboard": "Li rûnûsgehê hate kopîkirin",
-        "accountsSynchronized": "Senkronîzekirina hesabê serkeft"
+        "accountsSynchronized": "Senkronîzekirina hesabê serkeft",
+        "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
+        "migratedAccountChrysalisUp": "Your funds will become available shortly"
     },
     "error": {
         "profile": {
@@ -699,6 +779,16 @@
             "phraseWordCount": "Divê di hevoka başbûna we de 24 peyv hebin, ku niha li wir e {length, plural, one {is 1} other {are #}}.",
             "phraseUnrecognizedWord": "Di hevoka başbûna we de peyva \"{word}\" a ku nayê nas kirin",
             "phraseCaseWord": "Divê pêyv \"{word}\" bi tîpa piçûk be"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Risk level: {risk}",
+            "veryHigh": "Very high",
+            "high": "High",
+            "medium": "Medium",
+            "low": "Low",
+            "veryLow": "Very low"
         }
     }
 }

@@ -31,11 +31,17 @@
             "title": "Vzhľad",
             "body": "Zvoľte si motív peňaženky."
         },
-        "setup": {
-            "title": "Nastavte svoju peňaženku",
-            "body1": "Teraz môžete vytvoriť viaceré používateľské profily pre uchovávanie vašich tokenov oddelene a zvýšenie súkromia.",
-            "body2": "Nateraz poďme začať s názvom vášho prvého profilu. Ďalšie profily môžete pridať neskôr.",
+        "profile": {
+            "title": "Vytvoriť profil",
+            "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Názov profilu"
+        },
+        "setup": {
+            "title": "Set up a wallet",
+            "chrysalisTitle": "Chrysalis Network Update",
+            "chrysalisBody": "From April 21st, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
+            "learnMore": "Learn about the migration"
         },
         "secure": {
             "title": "Zabezpečte svoju peňaženku",
@@ -97,7 +103,10 @@
         },
         "congratulations": {
             "title": "Nastavenie peňaženky dokončené",
-            "body": "Vaša nová peňaženka je pripravená na použitie."
+            "body": "Vaša nová peňaženka je pripravená na použitie.",
+            "fundsMigrated": "Funds migrated",
+            "success": "You have successfully migrated your funds to the new network",
+            "exportMigration": "Export migration log and finish setup"
         },
         "import": {
             "title": "Importovať peňaženku",
@@ -109,7 +118,8 @@
             "body2": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
             "body3": "Zadajte váš seed alebo frázu obnovenia",
             "seedDetected": "81 znakový seed detegovaný",
-            "phraseDetected": "24-slovná fráza obnovenia detegovaná"
+            "phraseDetected": "24-slovná fráza obnovenia detegovaná",
+            "checksum": "Checksum"
         },
         "importFromFile": {
             "title": "Obnovte svoju peňaženky pomocou zálohy zo súboru",
@@ -130,10 +140,58 @@
         },
         "migrate": {
             "title": "Migrujte vaše prostriedky",
-            "body1": "Toto je automatizovaný proces pre prevod vašich prostriedkov do novej peňaženky. Vykonáme kontrolu existencie použitých adries, ktoré môžu oslabiť zabezpečenie.",
+            "body1": "This is an automated process to transfer your funds to your new wallet.",
             "body2": "Môže to nejakú dobu trvať. Počas migrácie svoje zariadenie nevypínajte.",
             "existing": "Vaša stará peňaženka",
-            "new": "Vaša nová peňaženka"
+            "new": "Vaša nová peňaženka",
+            "learn": "Learn about the migration",
+            "beginMigration": "Begin Migration",
+            "migrating": "Migrating funds...",
+            "migrated": "{balance} migrated",
+            "migrationFailed": "Migration Failed",
+            "noAddressesForMigration": "Please select the addresses you wish to secure.",
+            "restoringWallet": "Restoring wallet...",
+            "findingBalance": "Finding balance...",
+            "incorrectSeedVaultPassword": "Incorrect SeedVault password.",
+            "signingBundle": "Signing bundle",
+            "broadcastingBundle": "Broadcasting bundle",
+            "miningBundle": "Mining bundle",
+            "problemRestoringWallet": "There was a problem restoring your wallet. Please try again.",
+            "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
+            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. {value} will be lost.",
+            "error": "There was an error migrating your funds. Please try again."
+        },
+        "bundleMiningWarning": {
+            "title": "Warning",
+            "body1": "You have funds on one or more spent addresses.",
+            "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
+            "body3": "If you close the app you will need to restart the whole migration.",
+            "learn": "Learn about spent addresses"
+        },
+        "secureSpentAddresses": {
+            "title": "Secure spent addresses",
+            "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.",
+            "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",
+            "error": "You can’t migrate spent addresses with less than 1 Mi"
+        },
+        "securityCheckCompleted": {
+            "title": "Security check completed",
+            "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
+            "body2": "When you are happy with the risk level(s) press continue.",
+            "rerun": "Rerun process for selected addresses",
+            "continueMigration": "Continue migration"
+        },
+        "securingSpentAddresses": {
+            "title": "Securing spent addresses...",
+            "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
+            "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
+            "migrate": "Migrate funds",
+            "transaction": "Transaction {number}",
+            "rerun": "Skúsiť znova"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,7 +199,9 @@
         },
         "balance": {
             "title": "Váš zostatok",
-            "body": "Je váš zostatok správny?"
+            "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
+            "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
+            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly."
         },
         "settings": {
             "settings": "Nastavenia",
@@ -403,6 +463,17 @@
         "transaction": {
             "title": "Confirm transaction",
             "body": "You’re about to send {amount} to"
+        },
+        "riskFunds": {
+            "title": "Warning: funds at risk during migration",
+            "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
+            "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
+        },
+        "missingBundle": {
+            "title": "Warning: funds at risk during migration",
+            "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
+            "learnMore": "Learn more about spent addresses",
+            "proceed": "I understand the risk"
         }
     },
     "charts": {
@@ -423,10 +494,13 @@
         "cancel": "Zrušiť",
         "close": "Zatvoriť",
         "dismiss": "Zavrieť",
+        "proceedAnyway": "Proceed anyway",
         "save": "Uložiť",
         "importSeed": "Importovať existujúci seed",
-        "importWallet": "Importovať existujúcu peňaženku",
+        "restoreWallet": "Migrate or restore a wallet",
+        "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
         "createWallet": "Vytvoriť novú peňaženku",
+        "createWalletDescription": "Create a fresh wallet running on Chrysalis",
         "savePassword": "Uložiť heslo",
         "useBiometric": "Použiť zabezpečenie biometriou",
         "setupPin": "Nastaviť PIN kód",
@@ -438,7 +512,7 @@
         "verifyRecoveryPhrase": "Overiť frázu pre obnovenie",
         "revealRecoveryPhrase": "Ukázať frázu pre obnovenie",
         "importSeedvault": "Importovať SeedVault",
-        "checkAgain": "Nie, skontrolujte znovu",
+        "checkAgain": "Check Again",
         "importFromFile": "Importovať zo súboru",
         "send": "Odoslať",
         "receive": "Prijať",
@@ -489,12 +563,14 @@
         "hideDetails": "Skryť detaily",
         "yes": "Áno",
         "no": "Nie",
+        "skip": "Skip",
         "reset": "Resetovať",
         "downloadRecoveryKit": "Uložiť šablónu dokumentu pre overenie",
         "skipBackup": "Preskočiť súborovú zálohu",
         "finishSetup": "Dokončiť nastavenia",
         "readDocumentation": "Prečítajte si dokumentáciu",
         "visitFaq": "Navštíviť FAQ",
+        "viewStatus": "View status",
         "showHiddenAccounts": "Show hidden accounts",
         "confirm": "Confirm"
     },
@@ -554,6 +630,7 @@
         "manualNodeSelection": "Manuálny výber uzla",
         "profiles": "Profily",
         "developerProfile": "Vývojársky profil",
+        "developerProfileDescription": "Allows you to connect to testnets",
         "dev": "Vývojár",
         "createAccount": "Vytvoriť účet",
         "accountName": "Názov účtu",
@@ -604,6 +681,7 @@
         "passwordStrength3": "Priemerné",
         "passwordStrength4": "Silné",
         "creatingProfile": "Vytváranie profilu, prosím počkajte...",
+        "fundMigration": "Fund migration",
         "accountRemoved": "This account is hidden. Unhide it to perform transfers."
     },
     "dates": {
@@ -627,7 +705,9 @@
         "calcMinutesRemaining": "Výpočet zostávajúcich minút...",
         "minutesRemaining": "{minutes, plural, one {ostáva 1 minúta} \nfew {ostávajú # minúty} \nmany {ostáva # minút} \nother {ostáva # minút}}",
         "copiedToClipboard": "Skopírované do schránky",
-        "accountsSynchronized": "Account synchronization complete"
+        "accountsSynchronized": "Account synchronization complete",
+        "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
+        "migratedAccountChrysalisUp": "Your funds will become available shortly"
     },
     "error": {
         "profile": {
@@ -699,6 +779,16 @@
             "phraseWordCount": "Vo vašej fráze obnovenia by malo byť 24 slov, teraz tam {length, plural, one {je 1} other {sú #}}.",
             "phraseUnrecognizedWord": "Neznáme slovo \"{word}\" vo vašej fráze obnovenia",
             "phraseCaseWord": "The word \"{word}\" should be lower case"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Risk level: {risk}",
+            "veryHigh": "Very high",
+            "high": "High",
+            "medium": "Medium",
+            "low": "Low",
+            "veryLow": "Very low"
         }
     }
 }
