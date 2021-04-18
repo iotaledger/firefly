@@ -19,7 +19,8 @@ import {
   syncAccount as _syncAccount,
   isLatestAddressUnused as _isLatestAddressUnused,
   areLatestAddressesUnused as _areLatestAddressesUnused,
-  setAlias as _setAlias
+  setAlias as _setAlias,
+  getNodeInfo as _getNodeInfo
 } from '../../../shared/lib/typings/account'
 import {
   Transfer,
@@ -125,8 +126,8 @@ export const api = {
   getAccounts: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _getAccounts(sendMessage, __ids)
   },
-  syncAccounts: function (addressIndex?: number, gapLimit?: number): ((__ids: CommunicationIds) => Promise<string>) {
-    return (__ids: CommunicationIds) => _syncAccounts(sendMessage, __ids, addressIndex, gapLimit)
+  syncAccounts: function (addressIndex?: number, gapLimit?: number, accountDiscoveryThreshold?: number): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _syncAccounts(sendMessage, __ids, addressIndex, gapLimit, accountDiscoveryThreshold)
   },
   areLatestAddressesUnused: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _areLatestAddressesUnused(sendMessage, __ids)
@@ -187,6 +188,9 @@ export const api = {
   },
   setStrongholdPasswordClearInterval: function (interval: Duration): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => _setStrongholdPasswordClearInterval(sendMessage, __ids, interval)
+  },
+  getNodeInfo: function (accountId: AccountIdentifier, url?: string): ((__ids: CommunicationIds) => Promise<string>) {
+    return (__ids: CommunicationIds) => _getNodeInfo(sendMessage, __ids, accountId, url)
   },
   onError: function (): ((__ids: CommunicationIds) => Promise<string>) {
     return (__ids: CommunicationIds) => addon.listen(__ids.actorId, __ids.messageId, 'ErrorThrown')

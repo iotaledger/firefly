@@ -4,7 +4,13 @@
     import { asyncVerifyMnemonic } from 'shared/lib/wallet'
     import { english } from 'shared/lib/wordlists/english'
 
+    enum Type {
+        Seed = 'seed',
+        Mnemonic = 'mnemonic',
+    }
+
     export let value = undefined
+    export let type: Type = Type.Seed
     export let locale
 
     let statusMessage = ''
@@ -62,7 +68,7 @@
 
         if (trimmedContent.length >= 3) {
             const words = trimmedContent.split(' ')
-            if (words.length === 1 && /[A-Z]+/.test(words[0])) {
+            if (type === Type.Seed) {
                 const seedValidations = isSeed(trimmedContent)
                 if (seedValidations) {
                     statusMessage = seedValidations
@@ -71,7 +77,7 @@
                     statusMessage = locale('views.importFromText.seedDetected')
                     value = trimmedContent
                 }
-            } else {
+            } else if (type === Type.Mnemonic) {
                 const mnemonicValidations = isMnemonic(words)
                 if (mnemonicValidations) {
                     statusMessage = mnemonicValidations

@@ -39,10 +39,10 @@
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
                 if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({ type: 'password', props: { onSuccess: () => syncAccounts(false, 0, 10) } })
+                    openPopup({ type: 'password', props: { onSuccess: () => syncAccounts(false, 0, 10, 5) } })
                 } else {
                     const gapLimit = $activeProfile?.gapLimit
-                    syncAccounts(false, gapLimit === undefined ? undefined : 0, gapLimit)
+                    syncAccounts(false, gapLimit === undefined ? undefined : 0, gapLimit, 5)
                     updateProfile('gapLimit', undefined)
                 }
             },
@@ -69,7 +69,9 @@
                 <ActivityRow
                     {...transaction}
                     onClick={() => handleTransactionClick(transaction)}
-                    color={$accounts.find((acc) => acc.index === transaction.account)?.color} />
+                    color={$accounts.find((acc) => acc.index === transaction.account)?.color}
+                    {locale}
+                    includeFullSender />
             {/each}
         {:else}
             <div class="h-full flex flex-col items-center justify-center text-center">

@@ -56,8 +56,6 @@
 
     /**
      * Handles deep link request
-     * If deep linking is enabled, fill send input parameters
-     * If deep linking is disabled, direct user to settings
      */
     const handleDeepLinkRequest = (data) => {
         const _redirect = (tab) => {
