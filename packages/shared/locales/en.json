@@ -40,7 +40,7 @@
         "setup": {
             "title": "Set up a wallet",
             "chrysalisTitle": "Chrysalis Network Update",
-            "chrysalisBody": "From the 21st April, manual migration of tokens to the new Chrysalis network will commence. We recommend you migrate any existing funds as soon as possible.",
+            "chrysalisBody": "From April 21st, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
             "learnMore": "Learn about the migration"
         },
         "secure": {
@@ -159,7 +159,7 @@
             "problemRestoringWallet": "There was a problem restoring your wallet. Please try again.",
             "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
             "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
-            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. Only {value} will be lost.",
+            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. {value} will be lost.",
             "error": "There was an error migrating your funds. Please try again."
         },
         "bundleMiningWarning": {
@@ -185,7 +185,7 @@
         "securingSpentAddresses": {
             "title": "Securing spent addresses...",
             "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
-            "body2": "Your computer will run at full capacity, so do something else while you wait for this to complete."
+            "body2": "Your computer will run at full capacity, you may do something else while you wait for this to complete."
         },
         "transferFragmentedFunds": {
             "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
@@ -498,7 +498,7 @@
         "save": "Save",
         "importSeed": "Import an existing seed",
         "restoreWallet": "Migrate or restore a wallet",
-        "restoreWalletDescription": "Restore an existing wallet or migrate to Chrysalis",
+        "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
         "createWallet": "Create new wallet",
         "createWalletDescription": "Create a fresh wallet running on Chrysalis",
         "savePassword": "Save password",
@@ -572,8 +572,7 @@
         "visitFaq": "Visit FAQ",
         "viewStatus": "View status",
         "showHiddenAccounts": "Show hidden accounts",
-        "confirm": "Confirm",
-        "saveProfile": "Save profile"
+        "confirm": "Confirm"
     },
     "general": {
         "password": "Password",
