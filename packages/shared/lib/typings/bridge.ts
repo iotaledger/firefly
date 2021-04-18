@@ -2,7 +2,7 @@ import type { ErrorEventPayload } from './events'
 import type { Address } from './address'
 import type { AccountIdentifier, Account, Balance, SyncedAccount } from './account'
 import type { Message } from './message'
-import type { StrongholdStatus } from './wallet'
+import type { NodeInfo, StrongholdStatus } from './wallet'
 
 export interface Actor {
     destroy(): void
@@ -64,6 +64,7 @@ export enum ResponseTypes {
     StrongholdPasswordChanged = 'StrongholdPasswordChanged',
     UpdatedAllClientOptions = 'UpdatedAllClientOptions',
     StrongholdPasswordClearIntervalSet = 'StrongholdPasswordClearIntervalSet',
+    NodeInfo = 'NodeInfo',
 }
 
 export enum Actions {
@@ -102,6 +103,7 @@ export type DeleteStorageResponse = Response<ResponseTypes.DeletedStorage, void>
 export type LockStrongholdResponse = Response<ResponseTypes.LockedStronghold, void>
 export type StrongholdPasswordChangeResponse = Response<ResponseTypes.StrongholdPasswordChanged, void>
 export type UpdatedAllClientOptions = Response<ResponseTypes.UpdatedAllClientOptions, void>
+export type GetNodeInfoResponse = Response<ResponseTypes.NodeInfo, NodeInfo>
 
 export type MessageResponse =
     RemovedAccountResponse
@@ -135,5 +137,6 @@ export type MessageResponse =
     | LockStrongholdResponse
     | StrongholdStatusResponse
     | UpdatedAllClientOptions
+    | GetNodeInfoResponse
 
 export type Bridge = (message: BridgeMessage) => Promise<string>

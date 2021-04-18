@@ -15,7 +15,7 @@ import type { Message, Payload } from 'shared/lib/typings/message'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
 import type { ClientOptions } from './typings/client'
-import type { Duration, StrongholdStatus } from './typings/wallet'
+import type { Duration, NodeInfo, StrongholdStatus } from './typings/wallet'
 
 const ACCOUNT_COLORS = ['turquoise', 'green', 'orange', 'yellow', 'purple', 'pink']
 
@@ -173,6 +173,7 @@ export const api: {
     removeStorage(callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     setClientOptions(clientOptions: ClientOptions, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
     setStrongholdPasswordClearInterval(interval: Duration, callbacks: { onSuccess: (response: Event<void>) => void, onError: (err: ErrorEventPayload) => void })
+    getNodeInfo(accountId: string, url: string | undefined, callbacks: { onSuccess: (response: Event<NodeInfo>) => void, onError: (err: ErrorEventPayload) => void })
 
     onStrongholdStatusChange(callbacks: { onSuccess: (response: Event<StrongholdStatus>) => void, onError: (err: ErrorEventPayload) => void })
     onNewTransaction(callbacks: { onSuccess: (response: Event<TransactionEventPayload>) => void, onError: (err: ErrorEventPayload) => void })
