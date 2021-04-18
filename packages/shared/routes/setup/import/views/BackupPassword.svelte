@@ -1,12 +1,15 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
-    import { OnboardingLayout, Password, Text, Button, Illustration } from 'shared/components'
+    import { Button, Illustration, OnboardingLayout, Password, Text } from 'shared/components'
+    import { createEventDispatcher, getContext } from 'svelte'
+    import type { Writable } from 'svelte/store'
+    import type { ImportType } from '../Import.svelte'
 
     export let locale
     export let mobile
-    export let importType
     export let error = ''
     export let busy = false
+
+    const importType = getContext<Writable<ImportType>>('importType')
 
     let password = ''
 
@@ -28,10 +31,18 @@
     <OnboardingLayout onBackClick={handleBackClick} {busy}>
         <div slot="leftpane__content">
             <Text type="h2" classes="mb-4">{locale('general.import')}</Text>
-            <Text type="h3" highlighted classes="mb-5">{locale(`general.${importType}`)}</Text>
+            <Text type="h3" highlighted classes="mb-5">{locale(`general.${$importType}`)}</Text>
             <Text type="p" secondary classes="mb-4">{locale('views.importBackupPassword.body1')}</Text>
             <Text type="p" secondary classes="mb-8">{locale('views.importBackupPassword.body2')}</Text>
-            <Password classes="mb-6" {error} bind:value={password} {locale} showRevealToggle autofocus disabled={busy} submitHandler={handleContinue} />
+            <Password
+                classes="mb-6"
+                {error}
+                bind:value={password}
+                {locale}
+                showRevealToggle
+                autofocus
+                disabled={busy}
+                submitHandler={handleContinue} />
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
             <Button classes="flex-1" disabled={password.length === 0 || busy} onClick={() => handleContinue()}>
