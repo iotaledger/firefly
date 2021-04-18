@@ -478,15 +478,17 @@ export const confirmedBundles = derived(get(migration).bundles, (_bundles) => _b
 /**
  * List of chrysalis node endpoints to detect when is live
  */
-export const CHRYSALIS_NODE_ENDPOINTS = ['https://api.hornet-0.testnet.chrysalis2.com/api/v1/info', 'https://api.lb-0.migration.iota.cafe/api/v1/info']
+// TODO: Update to mainnet chrysalis endpoint
+export const CHRYSALIS_NODE_ENDPOINTS = ['https://api.lb-0.migration3.iotatestmigration.net/api/v1/info']
 /**
 * Default timeout for a request made to an endpoint
 */
 const DEFAULT_CHRYSALIS_NODE_ENDPOINT_TIMEOUT = 5000
 /**
-* Mainnet ID used in a chrysalis node
+* Mainnet ID used in a chrysalis node 
 */
-const MAINNET_ID = 'mainnet'
+// TODO: Update to 'mainnet'
+const MAINNET_ID = 'migration3'
 /**
  * Default interval for polling the market data
  */
