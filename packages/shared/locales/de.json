@@ -325,8 +325,8 @@
     "popups": {
         "password": {
             "title": "Passwort erforderlich",
-            "subtitle": "Gebe bitte dein Wallet-Passwort ein, um Stronghold zu entsperren",
-            "backup": "Gebe bitte dein Wallet-Passwort ein, um das Backup zu exportieren"
+            "subtitle": "Gib bitte dein Wallet-Passwort ein, um Stronghold zu entsperren",
+            "backup": "Gib bitte dein Wallet-Passwort ein, um das Backup zu exportieren"
         },
         "qr": {
             "title": "Dein QR Code"
@@ -387,7 +387,7 @@
         "deleteProfile": {
             "title": "Profil löschen",
             "confirmation": "Willst du dieses Profil wirklich löschen? Dies kann nicht rückgängig gemacht werden.",
-            "typePassword": "Gebe zur Bestätigung dein Passwort ein."
+            "typePassword": "Gib zur Bestätigung dein Passwort ein."
         },
         "diagnostics": {
             "title": "Diagnose",
@@ -411,7 +411,11 @@
         "portoflio": "Portfolio",
         "token": "Kurs",
         "accountValue": "Kontowert",
-        "accountActivity": "Kontoaktivität"
+        "accountActivity": "Kontoaktivität",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "Weiter",
@@ -529,7 +533,7 @@
         "copyAddress": "Adresse kopieren",
         "haveTextBackup": "Ich habe ein Text-Backup",
         "haveFileBackup": "Ich habe ein Backup",
-        "enterSeedOrPhrase": "Gebe eine Wiederherstellungsphrase oder einen Seed ein",
+        "enterSeedOrPhrase": "Wiederherstellungsphrase oder Seed eingeben",
         "uploadSeedvaultOrStronghold": "Importiere eine Stronghold- oder SeedVault-Datei",
         "import": "Importieren",
         "seedvault": "SeedVault",
@@ -670,13 +674,14 @@
             "amountZero": "Betrag muss größer als 0 sein.",
             "wrongAddressPrefix": "Adressen beginnen mit dem Präfix {prefix}.",
             "wrongAddressFormat": "Die Adresse ist nicht korrekt formatiert.",
+            "invalidAddress": "Die Adresse ist ungültig.",
             "insufficientFunds": "Dieses Konto hat nicht genug Guthaben.",
             "noToAccount": "Sie haben kein Konto ausgewählt, auf welches das Guthaben gesendet werden soll.",
             "sendingDust": "Du kannst nicht weniger als 1 Mi senden.",
             "leavingDust": "Du kannst nicht weniger als 1 Mi auf deiner Adresse hinterlassen."
         },
         "node": {
-            "invalid": "Gebe eine gültige URL ein.",
+            "invalid": "Gib eine gültige URL ein.",
             "https": "HTTPS wird benötigt. Benutze ein Entwicklerprofil um ungesicherte HTTP Verbindungen zu nutzen.",
             "duplicate": "Dieser Node wurde bereits hinzugefügt.",
             "unsynced": "Der Node ist nicht synchronisiert.",
@@ -691,8 +696,9 @@
             "mnemonic": "Mnemorische Phrase nicht gültig.",
             "seedTooShort": "Der Seed sollte 81 Zeichen lang sein, er {length, plural, one {ist 1} other {ist #}}",
             "seedCharacters": "Der Seed enthält nur die Buchstaben A-Z oder 9",
-            "phraseWordCount": "Es sollten 24 Wörter in deiner Wiederherstellungsphrase sein. Aktuell {length, plural, one {ist es 1} other {sind es #}}.",
-            "phraseUnrecognizedWord": "Unbekanntes Wort \"{word}\" in deiner Wiederherstellungsphrase"
+            "phraseWordCount": "Deine Wiederherstellungsphrase sollte aus 24 Wörtern bestehen. Aktuell {length, plural, one {ist es 1} other {sind es #}}.",
+            "phraseUnrecognizedWord": "Unbekanntes Wort \"{word}\" in deiner Wiederherstellungsphrase",
+            "phraseCaseWord": "Das Wort \"{word}\" sollte in Kleinbuchstaben sein"
         }
     }
 }

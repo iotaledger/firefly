@@ -106,7 +106,7 @@
         "importFromText": {
             "title": "Herstel je wallet met een herstelzin of seed",
             "body1": "Een seed bestaat uit 81 tekens. Deze wordt gebruikt om te herstellen vanuit een oudere Trinity portemonnee.",
-            "body2": "Een herstel zin is 24 woorden lang (met spaties). Dit wordt gebruikt om een bestaande Firefly portemonnee te herstellen.",
+            "body2": "Een herstel zin is 24 woorden lang, bestaat uitzonderlijk uit kleine letters en gescheiden middels spaties. Dit wordt gebruikt om een bestaande Firefly portemonnee te herstellen.",
             "body3": "Voer je seed of herstelzin in",
             "seedDetected": "81 karakters gedetecteerd",
             "phraseDetected": "24-woord herstelzin gedetecteerd"
@@ -411,7 +411,11 @@
         "portoflio": "Portfolio",
         "token": "Token",
         "accountValue": "Accountwaarde",
-        "accountActivity": "Recente activiteit"
+        "accountActivity": "Recente activiteit",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "Doorgaan",
@@ -670,6 +674,7 @@
             "amountZero": "De waarde moet groter zijn dan 0.",
             "wrongAddressPrefix": "Adressen beginnen met het voorvoegsel {prefix}.",
             "wrongAddressFormat": "Het adres is niet correct opgemaakt.",
+            "invalidAddress": "Het adres is niet geldig.",
             "insufficientFunds": "Deze rekening heeft onvoldoende saldo.",
             "noToAccount": "U heeft geen account geselecteerd om de bedragen naar toe te sturen.",
             "sendingDust": "U kunt niet minder dan 1 Mi verzenden.",
@@ -692,7 +697,8 @@
             "seedTooShort": "De seed moet 81 tekens lang zijn, het {length, plural, one {is er nu 1} other {zijn er nu #}}",
             "seedCharacters": "De seed mag alleen de tekens A-Z of 9 bevatten",
             "phraseWordCount": "Uw herstelzin zou 24 woorden moeten bevatten, op dit moment {length, plural, one {is er 1} other {zijn er #}}.",
-            "phraseUnrecognizedWord": "Het woord \"{word}\" is niet herkend in uw herstel zin"
+            "phraseUnrecognizedWord": "Het woord \"{word}\" is niet herkend in uw herstel zin",
+            "phraseCaseWord": "Het woord \"{word}\" mag alleen uit kleine letters bestaan"
         }
     }
 }

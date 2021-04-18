@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Motta og Håndter dine IOTA tokens",
+            "title": "Send, motta og håndter dine IOTA tokens",
             "body": "Firefly er den offisielle lommeboken til IOTA."
         },
         "legal": {
@@ -34,11 +34,11 @@
         "setup": {
             "title": "Sett opp lommeboken din",
             "body1": "Du kan opprette flere brukerprofiler for å holde dine tokens adskilt og forbedre personvernet.",
-            "body2": "La oss starte med det første profilnavnet ditt for nå. Du kan legge til flere profiler senere.",
+            "body2": "La oss nå starte med ditt første profilnavn. Du kan legge til flere profiler senere.",
             "profileName": "Profilnavn"
         },
         "secure": {
-            "title": "Sikre lommeboken din",
+            "title": "Sikre din lommebok",
             "body1": "Last ned og skriv ut Recovery Kit PDF-malen.",
             "body2": "Hvis du fyller ut Recovery Kit og oppbevarer det på et trygt sted, vil du alltid kunne gjenopprette lommeboken din."
         },
@@ -72,7 +72,7 @@
             "title": "Gjenopprettingsfrase",
             "body1": "I ditt Recovery Kit, skriv ned ordene i den eksakte rekkefølgen som vises.",
             "body2": "Oppbevar denne privat og trygt lagret.",
-            "body3": "Det er viktig å ha en skriftlig sikkerhetskopi. Datamaskiner mislykkes og filer kan ofte forsvinne.",
+            "body3": "Det er viktig å ha en skriftlig sikkerhetskopi. Datamaskiner feiler ofte og filer kan forsvinne.",
             "revealRecoveryPhrase": "Vis gjenopprettingsfrasen",
             "hideRecoveryPhrase": "Skjul gjenoppretingsfrasen"
         },
@@ -87,7 +87,7 @@
             "title": "Sikkerhetskopier til en Stronghold-fil",
             "body1": "Skriv inn passordet for å sikkerhetskopiere lommeboken til en Stronghold-fil. Passordet brukes til å kryptere sikkerhetskopien.",
             "body2": "Årsaker til at digitale sikkerhetskopier er viktig:",
-            "reason1": "Gjenopprette lommeboken din enkelt uten å skrive inn gjenopprettingsfrasen",
+            "reason1": "Gjenopprett lommeboken din enkelt uten å skrive inn gjenopprettingsfrasen",
             "reason2": "Importer lommeboken din til andre enheter",
             "reason3": "Gjenopprett hele transaksjonshistorikken"
         },
@@ -101,19 +101,19 @@
         },
         "import": {
             "title": "Importer en lommebok",
-            "body": "Her kan du importere en eksisterende lommebok ved hjelp av en gjenopprettingsfrase, hovednøkkel eller sikkerhetskopi på fil."
+            "body": "Hvis du har en gjenopprettingsfrase eller en Stronghold-sikkerhetskopiering, kan du importere den her."
         },
         "importFromText": {
-            "title": "Gjenopprette lommeboken med en gjenopprettingsfrase eller hovednøkkel",
+            "title": "Gjenopprett lommeboken med en gjenopprettingsfrase eller hovednøkkel",
             "body1": "En hovednøkkel består av 81 tegn. Denne brukes til å gjenopprette en eldre Trinity-lommebok.",
-            "body2": "En gjenopprettingsfrase består av 24 ord (med mellomrom). Denne brukes til å gjenopprette en eksisterende Firefly-lommebok.",
+            "body2": "En gjenopprettingsfrase består av 24 ord med små bokstaver, skilt med mellomrom. Den brukes til å gjenopprette en eksisterende Firefly-lommebok.",
             "body3": "Angi gjenopprettingsfrasen eller hovednøkkelen din",
             "seedDetected": "Hovednøkkel med 81 tegn oppdaget",
             "phraseDetected": "24 ords gjenopprettingsfrase oppdaget"
         },
         "importFromFile": {
-            "title": "Gjenopprett lommeboken din ved hjelp av en fil med sikkerhetskopi",
-            "body": "Importer en sikkerhetskopi for å gjenopprette lommeboken. Filen kan enten være et Stronghold (.stronghold) eller et Trinity SeedVault (.kdbx)."
+            "title": "Gjenopprett lommeboken din ved hjelp av en sikkerhetskopifil",
+            "body": "Importer en sikkerhetskopifil for å gjenopprette lommeboken. Sikkerhetskopier kan enten være et Stronghold (.stronghold) eller et Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
             "title": "Gjenopprett din lommebok fra et SeedVault eller Stronghold",
@@ -123,9 +123,9 @@
         "importSuccess": {
             "title": "Gjenopprettingen av sikkerhetskopien var vellykket",
             "body": "Du kan nå sette opp den nye lommeboken din.",
-            "seedvaultTitle": "Importert vellykket",
+            "seedvaultTitle": "Importering vellykket",
             "seedvaultBody": "Passordet ditt er riktig, du kan nå fortsette.",
-            "strongholdTitle": "Importert vellykket",
+            "strongholdTitle": "Importering vellykket",
             "strongholdBody": "Passordet er riktig, du kan nå fortsette."
         },
         "migrate": {
@@ -179,7 +179,7 @@
             },
             "currency": {
                 "title": "Valuta",
-                "description": "Justerer saldokonvertering og oppdaterer valuta-valg for grafer"
+                "description": "Justerer saldokonvertering og oppdater innstillinger for grafen"
             },
             "notifications": {
                 "title": "Varslinger",
@@ -219,7 +219,7 @@
             },
             "deepLinks": {
                 "title": "Dyplenker",
-                "description": "Fyller automatisk inn transaksjonsdata i Firefly ved å klikke en iota:// lenke"
+                "description": "Fyll automatisk inn transaksjonsdata i Firefly ved å klikke en iota:// lenke"
             },
             "developerMode": {
                 "title": "Utviklermodus",
@@ -231,15 +231,15 @@
             },
             "configureNodeList": {
                 "title": "Velg en node",
-                "description": "Administrer listen med noder lommeboken din kobler til.",
+                "description": "Administrer listen over noder lommeboken din kobler til.",
                 "primaryNode": "Primær node",
                 "excludeNode": "Ekskluder node",
                 "includeNode": "Inkluder node",
                 "viewDetails": "Se detaljer",
                 "setAsPrimary": "Sett som primær",
                 "removeNode": "Fjern node",
-                "includeOfficialNodeList": "Inkluder offisiell liste av noder",
-                "noNodes": "Ingen noder, automatisk valg brukes i stedet."
+                "includeOfficialNodeList": "Inkluder offisiell liste over noder",
+                "noNodes": "Ingen noder, automatisk selektering brukes i stedet."
             },
             "proofOfWork": {
                 "title": "Bevis på arbeid",
@@ -280,7 +280,7 @@
             },
             "reportAnIssue": {
                 "title": "Rapporter et problem",
-                "description": "Rapporter en feil til utviklerne. Sjekk gjennom, for å forsikre deg om at den ikke allerede er rapportert."
+                "description": "Rapporter en feil til utviklerne. Sjekk gjennom for å forsikre deg om at den ikke allerede er rapportert."
             }
         },
         "login": {
@@ -299,12 +299,12 @@
                     "noneDetected": "Ingen oppdaget"
                 },
                 "strongholdStatus": {
-                    "title": "Lommebok-status",
+                    "title": "Lommebok status",
                     "locked": "Stronghold låst",
                     "unlocked": "Stronghold ulåst"
                 },
                 "strongholdBackup": {
-                    "title": "Sikkerhetskopiering av lommebok",
+                    "title": "Sikkerhetskopi av lommebok",
                     "weeksAgo": "{weeks, plural, one {# uke} other {# uker}} siden"
                 }
             },
@@ -411,7 +411,11 @@
         "portoflio": "Portefølje",
         "token": "Token",
         "accountValue": "Kontoverdi",
-        "accountActivity": "Kontoaktivitet"
+        "accountActivity": "Kontoaktivitet",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "Fortsett",
@@ -443,8 +447,8 @@
         "tryAgain": "Prøv på nytt",
         "visitDiscord": "Besøk Discord",
         "dragDrop": "Dra & slipp",
-        "importExtentions": ".kdbx eller .stronghold",
-        "chooseFile": "Velg fil",
+        "importExtentions": ".kdbx eller .stronghold fil",
+        "chooseFile": "Velg en fil",
         "dropHere": "Slipp filen her",
         "syncAll": "Synkroniser alle",
         "export": "Eksporter",
@@ -486,7 +490,7 @@
         "yes": "Ja",
         "no": "Nei",
         "reset": "Tilbakestill",
-        "downloadRecoveryKit": "Last ned Recovery Kit",
+        "downloadRecoveryKit": "Lagre mal for Recovery Kit",
         "skipBackup": "Hopp over filsikkerhetskopi",
         "finishSetup": "Fullfør oppsett",
         "readDocumentation": "Les dokumentasjonen",
@@ -528,7 +532,7 @@
         "generateNewAddress": "Generer en ny adresse",
         "copyAddress": "Kopier adresse",
         "haveTextBackup": "Jeg har en nedskrevet sikkerhetskopi",
-        "haveFileBackup": "Jeg har en sikkerhetskopi på fil",
+        "haveFileBackup": "Jeg har en sikkerhetskopi-fil",
         "enterSeedOrPhrase": "Angi en gjenopprettingsfrase eller hovednøkkel",
         "uploadSeedvaultOrStronghold": "Importer en Stronghold- eller SeedVault-fil",
         "import": "Importer",
@@ -563,7 +567,7 @@
         "you": "Du",
         "messageId": "Meldings-ID",
         "inputAddress": "Avsenders adresse",
-        "receiveAddress": "Mottakers adresse",
+        "receiveAddress": "Mottaksadresse",
         "date": "Dato",
         "status": "Status",
         "confirmed": "Bekreftet",
@@ -572,7 +576,7 @@
         "loadingAccounts": "Laster inn, vennligst vent...",
         "addProfile": "Legg til profil",
         "noRecentHistory": "Ingen nylig historie",
-        "transferSyncing": "Synkroniser konto",
+        "transferSyncing": "Synkroniserer konto",
         "transferSelectingInputs": "Velger inndata",
         "transferRemainderAddress": "Genererer innskuddsadresse for overskudd",
         "transferSigning": "Signerer transaksjonen",
@@ -583,7 +587,7 @@
         "updatingAccount": "Oppdaterer konto, vennligst vent...",
         "accountSyncing": "Kontoen synkroniserer",
         "accountSyncComplete": "Synkronisering av konto fullført",
-        "passwordUpdating": "Oppdater passord...",
+        "passwordUpdating": "Oppdaterer passord...",
         "passwordSuccess": "Oppdatering av passord var vellykket",
         "passwordFailed": "Oppdatering av passord mislyktes",
         "syncingAccounts": "Synkroniserer kontoer...",
@@ -594,7 +598,7 @@
         "pinCodeSuccess": "Oppdatering av PIN-kode var vellykket",
         "pinCodeFailed": "Oppdatering av PIN-kode feilet",
         "passwordStrength": "Passordstyrke",
-        "passwordStrength0": "Veldig dårlig",
+        "passwordStrength0": "Dårlig",
         "passwordStrength1": "Dårlig",
         "passwordStrength2": "Svak",
         "passwordStrength3": "Gjennomsnittlig",
@@ -670,6 +674,7 @@
             "amountZero": "Beløpet må være større enn 0.",
             "wrongAddressPrefix": "Adresser starter med prefikset {prefix}.",
             "wrongAddressFormat": "Adressen er ikke riktig formatert.",
+            "invalidAddress": "Adressen er ugyldig.",
             "insufficientFunds": "Denne kontoen har ikke nok midler.",
             "noToAccount": "Du har ikke valgt en konto å sende midlene til.",
             "sendingDust": "Du kan ikke sende mindre enn 1 Mi.",
@@ -689,10 +694,11 @@
             "invalid": "Sikkerhetskopifilen ble ikke gjenkjent.",
             "destination": "Målet for sikkerhetskopieringen var ikke gyldig.",
             "mnemonic": "Huskeregelen er ugyldig.",
-            "seedTooShort": "Hovednøkkelen må inneholde 81 tegn, den inneholder nå {length, plural, one {1} other {#}}",
+            "seedTooShort": "Hovednøkkelen skal bestå av 81 tegn. Den {length, plural, one {inneholder nå 1} other {inneholder nå #}}",
             "seedCharacters": "Hovednøkkelen skal kun inneholde bokstavene A-Z og tallet 9.",
             "phraseWordCount": "Det skal være 24 ord i gjenopprettingsfrasen din, akkurat nå er det {length, plural, one {1} other {#}}.",
-            "phraseUnrecognizedWord": "Ukjent ord \"{word}\" i gjenopprettingsfrasen din."
+            "phraseUnrecognizedWord": "Ukjent ord \"{word}\" i gjenopprettingsfrasen din.",
+            "phraseCaseWord": "Ordet \"{word}\" kan kun ha små bokstaver"
         }
     }
 }

@@ -6,7 +6,7 @@
         },
         "legal": {
             "title": "개인정보 보호 정책 & 이용 약관",
-            "body": "개인정보 보호 정책과 이용 약관을 읽고 확인해 주세요.",
+            "body": "개인정보 보호 정책과 서비스 약관을 검토바랍니다.",
             "privacyPolicy": {
                 "title": "개인정보 보호 정책",
                 "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
@@ -17,7 +17,7 @@
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "termsOfService": {
-                "title": "이용 약관",
+                "title": "서비스 약관",
                 "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -25,17 +25,17 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "개인정보 보호 정책과 이용 약관을 읽었으며 이에 동의합니다"
+            "checkbox": "개인정보 보호 정책과 서비스 약관을 읽었으며 이에 동의합니다"
         },
         "appearance": {
             "title": "모양새",
-            "body": "지갑의 모양새를 선택해 주세요."
+            "body": "지갑의 테마를 선택해 주세요."
         },
         "setup": {
             "title": "지갑 설정하기",
             "body1": "지갑에 여러 사용자를 등록하여 토큰을 사용자별로 관리하고 보안성을 높일 수 있습니다.",
-            "body2": "먼저 첫번째 사용자 이름부터 시작합시다. 나중에 추가로 사용자를 더 등록할 수 있습니다.",
-            "profileName": "사용자 이름"
+            "body2": "먼저 첫번째 프로필 이름부터 시작합시다. 나중에 더 많은 프로필들을 추가할 수 있습니다.",
+            "profileName": "프로필 이름"
         },
         "secure": {
             "title": "지갑을 안전하게 보관하기",
@@ -44,29 +44,29 @@
         },
         "password": {
             "title": "비밀번호 만들기",
-            "body1": "비밀번호가 너무 약합니다. 여러 단어의 조합을 사용하고, 흔한 문장, 이름, 날짜 등은 피해 주세요.",
-            "body2": "복원 양식에 비밀번호를 기록하는 것을 권장합니다."
+            "body1": "잔고를 보호하기 위해서는 강력한 비밀번호가 필요합니다. 여러 단어의 조합을 사용하고, 흔한 문장, 이름, 날짜 등은 피해 주세요.",
+            "body2": "비밀번호를 복원 양식에 기록하는 것을 권장합니다."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "자기 자신 외에는 지갑에 접근할 수 없도록 PIN 번호를 설정하세요.",
-            "body2": "PIN 번호를 안전하게 보관하세요!"
+            "body1": "본인 만 지갑을 사용할 수 있도록 로그인 PIN을 설정하세요.",
+            "body2": "PIN을 안전하게 보관하세요!"
         },
         "pin": {
-            "title": "PIN 번호 설정하기",
-            "body1": "지갑에 접속하기 위해 사용할 6자리 PIN 번호를 입력해 주세요.",
+            "title": "PIN코드 설정하기",
+            "body1": "프로필에 접근하기 위해 사용할 숫자로 된 6자리 PIN을 입력해 주세요.",
             "body2": "숫자만 입력 가능"
         },
         "confirmPin": {
-            "title": "PIN 번호 확인",
-            "body1": "PIN 번호는 잔고와 거래 내역을 남들에게서 숨기는 데에 사용됩니다.",
-            "body2": "PIN 번호를 다시 한번 입력해 주세요. "
+            "title": "PIN 코드 확인",
+            "body1": "PIN은 잔고와 거래 내역을 다른 사람들로부터 보호하기 위해 사용됩니다.",
+            "body2": "PIN 코드를 다시 한번 입력해 주세요. "
         },
         "backup": {
             "title": "지갑 백업",
             "body1": "이제 복원 문구를 확인합니다. 이 문구를 복원 양식에 기록해 주세요.",
             "body2": "복원 문구는 다른 사람에게 알려주지 마세요. 이 복원 문구가 있으면 어디에서나 토큰에 접근할 수 있습니다.",
-            "body3": "복원 문구를 잃어버리게 될 경우 지갑 잔고를 잃게 될 수도 있습니다."
+            "body3": "복원 문구를 잃어버리게 될 경우 지갑 잔고를 잃어버릴 수도 있습니다."
         },
         "recoveryPhrase": {
             "title": "복원 문구",
@@ -87,7 +87,7 @@
             "title": "Stronghold 파일로 백업",
             "body1": "지갑을 Stronghold 파일로 백업하기 위해 사용할 비밀번호를 입력하세요. 이 비밀번호를 사용해 백업을 암호화합니다.",
             "body2": "아래와 같은 이유 때문에 전자 백업도 중요합니다.",
-            "reason1": "복원 문구를 일일히 입력하지 않고 지갑을 복원할 수 있습니다.",
+            "reason1": "복원 문구를 입력하지 않고 지갑을 쉽게 복원할 수 있습니다.",
             "reason2": "다른 기기에서 지갑을 불러올 수 있습니다.",
             "reason3": "전체 거래 내역을 복구할 수 있습니다."
         },
@@ -106,7 +106,7 @@
         "importFromText": {
             "title": "복원 문구 또는 시드로 지갑을 복구하기",
             "body1": "시드는 81개의 글자로 이루어져 있습니다. 시드가 있으면 기존에 사용하던 Trinity 지갑을 복구할 수 있습니다.",
-            "body2": "복원 문구는 띄어쓰기와 24개의 단어로 이루어진 문장입니다. 복원 문구가 있으면 기존에 사용하던 Firefly 지갑을 복구할 수 있습니다.",
+            "body2": "복원 문구는 띄어쓰기와 24개의 소문자 단어로 이루어진 문장입니다. 복원 문구가 있으면 기존에 사용하던 Firefly 지갑을 복구할 수 있습니다.",
             "body3": "시드 또는 복원 문구 입력",
             "seedDetected": "81자의 시드 감지됨",
             "phraseDetected": "24개 단어로 된 복원 문구 감지"
@@ -162,15 +162,15 @@
                 "description": "질문에 대한 답변들 및 도움말"
             },
             "profile": {
-                "title": "사용자",
-                "description": "사용자 이름을 바꾸거나 사진 등록하기"
+                "title": "프로필",
+                "description": "프로필 이름을 바꾸거나 사진 등록하기"
             },
             "sync": {
                 "title": "계정 동기화",
                 "description": ""
             },
             "theme": {
-                "title": "모양새",
+                "title": "테마",
                 "description": ""
             },
             "language": {
@@ -194,27 +194,27 @@
                 "description": "지갑을 잠그고 자동으로 로그아웃하기까지 걸리는 시간"
             },
             "changePassword": {
-                "title": "비밀번호 변경",
+                "title": "비밀번호 변경하기",
                 "description": "암호는 지갑의 보안에 사용됩니다. 잔고를 안전하게 보관하기 위해 강력한 암호를 사용해야 합니다."
             },
             "changePincode": {
-                "title": "PIN 번호 변경",
-                "description": "PIN 번호는 잔고와 거래 내역을 다른 사람들에게서 숨기는 데에 사용됩니다",
-                "currentPincode": "기존 PIN 번호",
-                "newPincode": "새 PIN 번호",
-                "confirmNewPincode": "새 PIN 번호 확인",
-                "action": "PIN 번호 변경하기"
+                "title": "PIN 코드 변경",
+                "description": "PIN은 잔고와 거래 내역을 다른 사람들로부터 보호하기 위해 사용됩니다.",
+                "currentPincode": "기존 PIN",
+                "newPincode": "새 PIN",
+                "confirmNewPincode": "새 PIN 확인",
+                "action": "PIN 변경하기"
             },
             "resyncAccounts": {
                 "title": "계정 다시 동기화",
                 "description": "계정이 최신 상태인지 확인하기 위해 백그라운드 작업을 시작합니다."
             },
             "hiddenAccounts": {
-                "title": "Hidden accounts",
-                "description": "Selecting this options will show accounts that were previously hidden."
+                "title": "숨겨진 계정",
+                "description": "이 옵션을 선택하면 이전에 숨겨진 계정이 표시됩니다."
             },
             "deleteProfile": {
-                "title": "사용자 삭제",
+                "title": "프로필 삭제",
                 "description": "지갑, 사용자 및 거래 내역 전체를 삭제합니다. 삭제 전에 지갑을 백업해 놓았는지 확인하세요."
             },
             "deepLinks": {
@@ -227,19 +227,19 @@
             },
             "nodeSettings": {
                 "title": "노드 설정",
-                "description": "Select Manual to configure the node settings and connect to your own node"
+                "description": "수동을 선택하여 접속할 노드를 목록에서 수동으로 고르거나 직접 추가"
             },
             "configureNodeList": {
                 "title": "노드 선택",
-                "description": "Manage the list of nodes your wallet connects to.",
-                "primaryNode": "Primary node",
-                "excludeNode": "Exclude node",
-                "includeNode": "Include node",
-                "viewDetails": "View details",
-                "setAsPrimary": "Set as primary",
+                "description": "지갑이 연결되는 노드 목록을 관리합니다.",
+                "primaryNode": "주 노드",
+                "excludeNode": "이 노드 제외하기",
+                "includeNode": "포함 노드",
+                "viewDetails": "상세 보기",
+                "setAsPrimary": "주 노드로 설정",
                 "removeNode": "노드 삭제",
-                "includeOfficialNodeList": "Include official node list",
-                "noNodes": "There are no nodes, automatic selection will be used instead."
+                "includeOfficialNodeList": "공식 노드 목록 포함",
+                "noNodes": "노드가 없으며 대신 자동 선택이 사용됩니다."
             },
             "proofOfWork": {
                 "title": "작업증명",
@@ -262,7 +262,7 @@
                 "description": "문제 해결 마법사를 이용하여 일반적인 문제 해결하기"
             },
             "documentation": {
-                "title": "설명서",
+                "title": "문서",
                 "description": "설명서를 통해 지갑이 어떻게 작동하는지에 대한 상세한 설명 보기"
             },
             "faq": {
@@ -291,7 +291,7 @@
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "upToDate": "최신 버전",
+                    "upToDate": "최신 상태입니다.",
                     "outOfDate": "구버전"
                 },
                 "hardwareDevice": {
@@ -325,8 +325,8 @@
     "popups": {
         "password": {
             "title": "비밀번호 필요",
-            "subtitle": "Please enter your password to unlock Stronghold",
-            "backup": "Please enter your password to export a backup"
+            "subtitle": "Stronghold를 잠금 해제하기 위해 지갑 비밀번호를 입력하세요.",
+            "backup": "백업을 내보내기 위해 비밀번호를 입력해주세요"
         },
         "qr": {
             "title": "나의 QR 코드"
@@ -345,25 +345,25 @@
             "backupWarning": "백업과 복원 문구를 잃어버리게 될 경우 지갑 잔고를 잃게 됩니다.",
             "notBackedUp": "백업되지 않음",
             "notBackedUpDescription": "아직 Stronghold를 백업하지 않았습니다.",
-            "saving": "Saving..."
+            "saving": "저장 중..."
         },
         "deleteAccount": {
-            "title": "Delete {name}?",
-            "body": "This account has no transaction history. It can safely be deleted.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Delete account",
-            "errorTitle": "Unable to delete {name}",
-            "errorBody1": "You cannot delete this account, you must have at least one."
+            "title": "{name} 계정을 삭제할까요?",
+            "body": "이 계정에는 거래내역이 없으며, 안전하게 삭제될 수 있습니다.",
+            "typePassword": "계정을 삭제하려면 지갑 비밀번호를 입력하세요.",
+            "hideAccount": "계정 삭제하기",
+            "errorTitle": "{name} 계정을 삭제할 수 없습니다",
+            "errorBody1": "이 계정은 삭제할 수 없습니다. 하나 이상의 계정이 있어야합니다."
         },
         "hideAccount": {
-            "title": "Hide {name}?",
-            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Hide account",
-            "errorTitle": "Unable to hide {name}",
-            "errorBody1": "To hide an account it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
-            "errorBody3": "You cannot hide this account, you must have at least one."
+            "title": "{name} 계정을 숨길까요?",
+            "body": "숨겨진 계정은 고급설정의 \"숨겨진 계정 보이기\"를 활성화하면 다시 찾을 수 있습니다.",
+            "typePassword": "계정을 삭제하려면 지갑 비밀번호를 입력하세요.",
+            "hideAccount": "계정 숨기기",
+            "errorTitle": "{name} 계정을 숨길 수 없습니다",
+            "errorBody1": "계정을 숨기기 위해서는 잔액이 0이어야 합니다.",
+            "errorBody2": "이 계정에 잔액 {balance} 가 남아있습니다. 이 잔액을 다른 계정으로 옮기고 다시 시도해 주세요.",
+            "errorBody3": "이 계정은 숨길 수 없습니다. 하나 이상의 계정이 있어야합니다."
         },
         "addressHistory": {
             "title": "주소 {name} 이력",
@@ -371,7 +371,7 @@
         },
         "node": {
             "titleAdd": "노드 추가",
-            "titleUpdate": "Update a node",
+            "titleUpdate": "노드 변경",
             "titleRemove": "노드 삭제",
             "titleDetails": "노드 세부사항",
             "nodeAddress": "노드 주소",
@@ -387,7 +387,7 @@
         "deleteProfile": {
             "title": "사용자 삭제",
             "confirmation": "이 사용자를 삭제할까요? 이 작업은 취소할 수 없습니다.",
-            "typePassword": "Type your password to confirm."
+            "typePassword": "프로필을 삭제하려면 비밀번호를 입력하세요."
         },
         "diagnostics": {
             "title": "진단",
@@ -401,17 +401,21 @@
             "userPath": "사용자 경로"
         },
         "transaction": {
-            "title": "Confirm transaction",
-            "body": "You’re about to send {amount} to"
+            "title": "트랜잭션 확인",
+            "body": "{amount} 만큼 보내려고 합니다"
         }
     },
     "charts": {
         "incomingMi": "{value} Mi 받음",
-        "outgoingMi": "{value} Mi 받음",
+        "outgoingMi": "{value} Mi 보냄",
         "portoflio": "포트폴리오",
         "token": "토큰",
         "accountValue": "계정 잔액",
-        "accountActivity": "최근 활동"
+        "accountActivity": "최근 활동",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "계속하기",
@@ -425,10 +429,10 @@
         "createWallet": "새 지갑 만들기",
         "savePassword": "비밀번호 저장하기",
         "useBiometric": "생체 인증 사용하기",
-        "setupPin": "PIN 번호 설정하기",
-        "setPin": "PIN 번호 설정하기",
-        "confirmPin": "PIN 번호 확인하기",
-        "enterYourPin": "PIN 번호 입력하기",
+        "setupPin": "PIN코드 설정하기",
+        "setPin": "PIN코드 설정",
+        "confirmPin": "PIN코드 확인하기",
+        "enterYourPin": "PIN 입력하기",
         "saveBackupFile": "백업 파일 저장하기",
         "iveWrittenRecoveryPhrase": "복원 문구를 옮겨 적었습니다",
         "verifyRecoveryPhrase": "복원 문구 확인",
@@ -445,7 +449,7 @@
         "dragDrop": "끌어서 놓기",
         "importExtentions": ".kbdx 또는 .stronghold 파일",
         "chooseFile": "파일을 선택하기",
-        "dropHere": "여기에 파일 놓기",
+        "dropHere": "파일을 여기로 끌어넣으세요.",
         "syncAll": "모두 동기화하기",
         "export": "내보내기",
         "exportNewStronghold": "새 Stronghold 내보내기",
@@ -453,19 +457,19 @@
         "enableDeveloperMode": "개발자 모드 활성화하기",
         "enableSystemNotifications": "시스템 알림 켜기",
         "exportState": "상태 내보내기",
-        "localProofOfWork": "Local proof of work",
+        "localProofOfWork": "내 기기로 작업증명",
         "unlock": "잠금 해제",
         "updateFirefly": "Firefly 업데이트",
         "restartNow": "지금 다시 시작",
         "saveBackup": "Stronghold 백업 저장하기",
         "customizeAcount": "계정 설정",
         "viewAddressHistory": "주소 이력 보기",
-        "hideAccount": "Hide account",
-        "showAccount": "Unhide account",
-        "deleteAccount": "Delete account",
+        "hideAccount": "계정 숨기기",
+        "showAccount": "계정 숨김취소",
+        "deleteAccount": "계정 삭제하기",
         "max": "최대",
         "addNode": "노드 추가",
-        "updateNode": "Update node",
+        "updateNode": "노드 변경",
         "removeNode": "노드 삭제",
         "hide": "숨기기",
         "hideOthers": "나머지 숨기기",
@@ -491,8 +495,8 @@
         "finishSetup": "설정 완료하기",
         "readDocumentation": "설명서 읽기",
         "visitFaq": "자주 묻는 질문들 보기",
-        "showHiddenAccounts": "Show hidden accounts",
-        "confirm": "Confirm"
+        "showHiddenAccounts": "숨긴 계정 보이기",
+        "confirm": "확인"
     },
     "general": {
         "password": "비밀번호",
@@ -538,8 +542,8 @@
         "appearance": "모양새",
         "lightTheme": "밝은 테마",
         "darkTheme": "어두운 테마",
-        "balance": "Balance",
-        "accountBalance": "계정 잔액",
+        "balance": "잔고",
+        "accountBalance": "계정 잔고",
         "incoming": "받음",
         "outgoing": "보냄",
         "totalIn": "전체 받은 양",
@@ -548,8 +552,8 @@
         "myAccounts": "내 계정",
         "automaticNodeSelection": "자동으로 노드 선택",
         "manualNodeSelection": "수동으로 노드 선택",
-        "profiles": "사용자",
-        "developerProfile": "개발자",
+        "profiles": "프로필",
+        "developerProfile": "개발자 프로필",
         "dev": "개발자",
         "createAccount": "계정 만들기",
         "accountName": "계정 이름",
@@ -570,37 +574,37 @@
         "pending": "처리 중",
         "noAccounts": "계정이 없습니다. 생성해 주세요.",
         "loadingAccounts": "불러오는 중입니다. 잠시만 기다려 주세요...",
-        "addProfile": "사용자 추가",
+        "addProfile": "프로필 추가",
         "noRecentHistory": "최근 기록 없음",
-        "transferSyncing": "계정 동기화중",
+        "transferSyncing": "계정 동기화 중",
         "transferSelectingInputs": "보낼 주소를 선택하는 중",
         "transferRemainderAddress": "나머지를 보낼 주소를 생성하는 중",
         "transferSigning": "거래에 서명하는 중",
-        "transferPow": "작업 증명 수행중",
+        "transferPow": "작업 증명 수행 중",
         "transferBroadcasting": "거래를 송출하는 중",
         "transferComplete": "전송 완료",
         "creatingAccount": "계정을 만드는 중입니다. 잠시만 기다려 주세요...",
         "updatingAccount": "계정을 업데이트 중입니다. 잠시만 기다려 주세요...",
-        "accountSyncing": "계정이 동기화 중",
+        "accountSyncing": "계정 동기화 중",
         "accountSyncComplete": "계정 동기화 완료",
         "passwordUpdating": "비밀번호를 변경합니다...",
         "passwordSuccess": "비밀번호를 성공적으로 변경하였습니다",
         "passwordFailed": "비밀번호를 변경하지 못했습니다",
-        "syncingAccounts": "Syncing accounts...",
-        "exportingStronghold": "Exporting Stronghold...",
-        "exportingStrongholdSuccess": "Exported Stronghold successfully",
-        "exportingStrongholdFailed": "Exporting Stronghold failed",
-        "pinCodeUpdating": "PIN 번호를 변경합니다...",
-        "pinCodeSuccess": "PIN 번호를 성공적으로 변경하였습니다",
-        "pinCodeFailed": "PIN 번호를 변경하지 못했습니다",
+        "syncingAccounts": "계정 동기화 중...",
+        "exportingStronghold": "Stronghold를 내보내는 중...",
+        "exportingStrongholdSuccess": "Stronghold를 성공적으로 내보냈습니다",
+        "exportingStrongholdFailed": "Stronghold를 내보내지 못했습니다",
+        "pinCodeUpdating": "PIN 코드 변경 중...",
+        "pinCodeSuccess": "PIN 코드 변경 성공",
+        "pinCodeFailed": "PIN 코드 변경 실패",
         "passwordStrength": "비밀번호 강도",
         "passwordStrength0": "나쁨",
         "passwordStrength1": "매우 약함",
         "passwordStrength2": "약함",
         "passwordStrength3": "보통",
         "passwordStrength4": "강함",
-        "creatingProfile": "사용자를 만드는 중입니다. 잠시만 기다려 주세요...",
-        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
+        "creatingProfile": "프로필을 만드는 중입니다. 잠시만 기다려 주세요...",
+        "accountRemoved": "이 계정은 숨겨져 있습니다. 거래를 위해 숨김 취소를 해주세요."
     },
     "dates": {
         "today": "오늘",
@@ -614,7 +618,7 @@
         "valueTx": "{{account}}에 {{value}}를 받는 중",
         "confirmed": "{{account}}에서 {{value}}를 보내는 거래가 성공적으로 승인되었습니다",
         "confirmedInternal": "{{senderAccount}}에서 {{receiverAccount}}로 {{value}}을 보내는 거래가 승인되었습니다",
-        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
+        "confirmedInternalNoAccounts": "{{value}} 내부 전송이 승인되었습니다.",
         "failed": "{{account}}에서 {{value}}를 보내는 거래가 실패하였습니다",
         "downloadingUpdate": "업데이트 다운로드 중",
         "updateReady": "업데이트 준비됨",
@@ -648,19 +652,19 @@
             "length": "비밀번호는 {length, plural, other {#글자}}를 초과할 없습니다."
         },
         "pincode": {
-            "length": "PIN 번호는 {length, plural, other {#자리}}로 구성되어야 합니다.",
-            "match": "PIN 번호가 일치하지 않습니다.",
-            "incorrect": "PIN 번호가 잘못되었습니다."
+            "length": "PIN은 {length, plural, other {#자리}}로 구성되어야 합니다.",
+            "match": "PIN이 일치하지 않습니다.",
+            "incorrect": "PIN이 잘못되었습니다."
         },
         "account": {
             "length": "계정 이름은 {length, plural, other {#글자}}보다 길 수 없습니다.",
             "empty": "새 계정을 만들기 전에 아직 사용하지 않은 기존 계정을 사용해야 합니다.",
             "notEmpty": "이 계정을 삭제하려면 계정에 남은 잔고를 비워야 합니다.",
             "duplicate": "같은 이름의 계정이 이미 존재합니다.",
-            "tilde": "사용자 이름은 `~`로 시작할 수 없습니다.",
-            "control": "사용자 이름은 제어 문자를 포함할 수 없습니다.",
-            "startDot": "사용자 이름은 '.'로 시작할 수 없습니다.",
-            "chars": "사용자 이름은 <>:\"/\\|?*을 포함할 수 없습니다."
+            "tilde": "프로필 이름은 `~`로 시작할 수 없습니다.",
+            "control": "프로필 이름은 제어 문자를 포함할 수 없습니다.",
+            "startDot": "프로필 이름은 '.'로 시작할 수 없습니다.",
+            "chars": "프로필 이름은 <>:\"/\\|?*을 포함할 수 없습니다."
         },
         "send": {
             "addressLength": "주소는 {length, plural, other {#글자}}여야 합니다.",
@@ -670,6 +674,7 @@
             "amountZero": "보내는 양은 0보다 커야 합니다.",
             "wrongAddressPrefix": "주소는 {prefix}로 시작합니다.",
             "wrongAddressFormat": "주소가 형식에 맞지 않습니다.",
+            "invalidAddress": "주소가 유효하지 않습니다.",
             "insufficientFunds": "계정에 잔고가 부족합니다.",
             "noToAccount": "보낼 계정을 선택하지 않았습니다.",
             "sendingDust": "1 Mi 미만은 보낼 수 없습니다.",
@@ -692,7 +697,8 @@
             "seedTooShort": "시드의 길이는 81글자여야 합니다. 현재 길이는 {length, plural, other {#글자}}입니다.",
             "seedCharacters": "시드에는 A부터 Z까지의 알파벳과 숫자 9만 포함되어야 합니다.",
             "phraseWordCount": "복원 문구는 24개의 단어로 이루어지며, 현재 {length, plural, other {#}}개의 단어를 입력하였습니다.",
-            "phraseUnrecognizedWord": "복원 문구에 인식할 수 없는 단어 \"{word}\"가 있습니다"
+            "phraseUnrecognizedWord": "복원 문구에 인식할 수 없는 단어 \"{word}\"가 있습니다",
+            "phraseCaseWord": "\"{word}\" 단어는 소문자로 입력해주세요."
         }
     }
 }

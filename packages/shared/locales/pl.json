@@ -106,7 +106,7 @@
         "importFromText": {
             "title": "Przywróć portfel za pomocą wyrazów ratunkowych lub klucza seed",
             "body1": "Seed składa się z 81 znaków. Jest używany do odzyskiwania konta z portfela starego typu (Trinity).",
-            "body2": "Wyrazy ratunkowe składają się z 24 słów (oddzielonych od siebie spacją). Są one używane do odzyskania istniejącego portfela Firefly.",
+            "body2": "Wyrazy ratunkowe składają się z 24 słów pisanych małymi literami oraz oddzielonych od siebie spacją. Są one używane do odzyskania istniejącego portfela Firefly.",
             "body3": "Wprowadź swój seed lub wyrazy ratunkowe",
             "seedDetected": "Wykryto seed o długości 81 znaków",
             "phraseDetected": "Wykryto wyrazy ratunkowe (24 słowa)"
@@ -130,7 +130,7 @@
         },
         "migrate": {
             "title": "Migruj swoje środki",
-            "body1": "To jest automatyczny proces przekazywania środków do Twojego nowego portfela. Sprawdzimy czy zużyte adresy osłabiają Twoje bezpieczeństwo.",
+            "body1": "Migracja jest automatycznym procesem przeniesienia Twoich środków do nowego portfela. Sprawdzimy czy posiadasz jakieś zużyte adresy, które osłabiają Twoje bezpieczeństwo.",
             "body2": "Może to zająć trochę czasu. Nie wyłączaj urządzenia podczas migracji.",
             "existing": "Twój stary portfel",
             "new": "Twój nowy portfel"
@@ -411,14 +411,18 @@
         "portoflio": "Portfolio",
         "token": "Token",
         "accountValue": "Saldo konta",
-        "accountActivity": "Aktywność konta"
+        "accountActivity": "Aktywność konta",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "Kontynuuj",
         "back": "Wstecz",
         "cancel": "Anuluj",
         "close": "Zamknij",
-        "dismiss": "Anuluj",
+        "dismiss": "Zamknij",
         "save": "Zapisz",
         "importSeed": "Importuj istniejący klucz seed",
         "importWallet": "Importuj istniejący portfel",
@@ -670,6 +674,7 @@
             "amountZero": "Wartość musi być większa niż 0.",
             "wrongAddressPrefix": "Adresy zaczynają się od prefiksu {prefix}.",
             "wrongAddressFormat": "Adres nie jest poprawnie sformatowany.",
+            "invalidAddress": "Adres jest nieprawidłowy.",
             "insufficientFunds": "To konto nie ma wystarczających środków.",
             "noToAccount": "Nie wybrano konta docelowego do wysyłki środków.",
             "sendingDust": "Nie możesz wysłać mniej niż 1 Mi.",
@@ -692,7 +697,8 @@
             "seedTooShort": "Seed powinien składać się z 81 znaków, ten ma {length, plural, one {1 znak} few {# znaki} many {# znaków} other {to #}}",
             "seedCharacters": "Seed może składać się tylko z liter A-Z oraz cyfr 9",
             "phraseWordCount": "Wyrazy ratunkowe składają się z 24 słów. Aktualnie jest {length, plural, one {ono 1} few {ich #} many {ich #} other {ich #}}.",
-            "phraseUnrecognizedWord": "Nierozpoznane słowo \"{word}\" w Twoich wyrazach ratunkowych"
+            "phraseUnrecognizedWord": "Nierozpoznane słowo \"{word}\" w Twoich wyrazach ratunkowych",
+            "phraseCaseWord": "Słowo \"{word}\" powinno być pisane małymi literami"
         }
     }
 }
