@@ -106,7 +106,7 @@
         "importFromText": {
             "title": "Cüzdanınızı bir kurtarma ifadesi veya kelimesi ile geri yükleyin",
             "body1": "Bir seed 81 karakterden oluşur. Bu eski bir Trinity cüzdanından kurtarmak için kullanılır.",
-            "body2": "Bir kurtarma ifadesi 24 kelime uzunluktadır. Bu, mevcut bir Firefly cüzdanını kurtarmak için kullanılır.",
+            "body2": "Bir kurtarma ifadesi 24 kelime uzunluktadır, hepsi küçük harf olmaak üzere ve araları boşluklu olmalıdır. Bu halihazırdaki Firefly cüzdanınızı kurtarmaya yarar.",
             "body3": "Seed veya kurtarma ifadenizi girin",
             "seedDetected": "81 karakter seed tespit edilmiştir",
             "phraseDetected": "24 kelime kurtarma cümlesi tespit edilmiştir"
@@ -210,8 +210,8 @@
                 "description": "Hesaplarınızın güncel olduğundan emin olmak için bir arka plan görevi başlatır."
             },
             "hiddenAccounts": {
-                "title": "Hidden accounts",
-                "description": "Selecting this options will show accounts that were previously hidden."
+                "title": "Gizli Hesaplar",
+                "description": "Bu seçenek daha önce gizlenen hesapları görmeye yaramaktadır."
             },
             "deleteProfile": {
                 "title": "Profili sil",
@@ -227,19 +227,19 @@
             },
             "nodeSettings": {
                 "title": "Ağ Ayarları",
-                "description": "Select Manual to configure the node settings and connect to your own node"
+                "description": "Düğüm ayarlarınızı yapmak ve kendi düğümünüze bağlanmak için Manual’i seçiniz"
             },
             "configureNodeList": {
                 "title": "Seçilmiş Sayfa",
-                "description": "Manage the list of nodes your wallet connects to.",
-                "primaryNode": "Primary node",
-                "excludeNode": "Exclude node",
-                "includeNode": "Include node",
-                "viewDetails": "View details",
-                "setAsPrimary": "Set as primary",
+                "description": "Cüzdanınızın bağlandığı düğümlerin listesini yönetin.",
+                "primaryNode": "Birincil düğüm",
+                "excludeNode": "Düğümü hariç tut",
+                "includeNode": "Düğümü dahil et",
+                "viewDetails": "Detayları göster",
+                "setAsPrimary": "Birincil düğüm olarak ayarla",
                 "removeNode": "Düğüm kaldır",
-                "includeOfficialNodeList": "Include official node list",
-                "noNodes": "There are no nodes, automatic selection will be used instead."
+                "includeOfficialNodeList": "Resmi düğüm listesini dahil et",
+                "noNodes": "Düğüm yok, bunun yerine otomatik seçim kullanılacak."
             },
             "proofOfWork": {
                 "title": "İş Kanıtı",
@@ -325,8 +325,8 @@
     "popups": {
         "password": {
             "title": "Parola gerekli",
-            "subtitle": "Please enter your password to unlock Stronghold",
-            "backup": "Please enter your password to export a backup"
+            "subtitle": "Stronghold'u açmak için lütfen cüzdan parolasını giriniz",
+            "backup": "Bir yedeği dışa aktarmak için lütfen şifrenizi girin"
         },
         "qr": {
             "title": "QR Kodunuz"
@@ -345,33 +345,33 @@
             "backupWarning": "Eğer yedeğinizi ve kurtarma şifrenizi kaybederseniz, hesabınıza erişimi kaybedeceksiniz.",
             "notBackedUp": "Yedeklenmedi",
             "notBackedUpDescription": "Stronghold'unuzu yedeklemediniz",
-            "saving": "Saving..."
+            "saving": "Kaydediliyor..."
         },
         "deleteAccount": {
-            "title": "Delete {name}?",
-            "body": "This account has no transaction history. It can safely be deleted.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Delete account",
-            "errorTitle": "Unable to delete {name}",
-            "errorBody1": "You cannot delete this account, you must have at least one."
+            "title": "Sil {name}?",
+            "body": "Bu hesabın işlem geçmişi yok. Güvenle silinebilir.",
+            "typePassword": "Doğrulama için lütfen cüzdan parolanızı giriniz.",
+            "hideAccount": "Hesabı Sil",
+            "errorTitle": "Silinemedi: {name}",
+            "errorBody1": "Bu hesabı silemezsiniz, en azından bir hesabınız bulunmalıdır."
         },
         "hideAccount": {
-            "title": "Hide {name}?",
-            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Hide account",
-            "errorTitle": "Unable to hide {name}",
-            "errorBody1": "To hide an account it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
-            "errorBody3": "You cannot hide this account, you must have at least one."
+            "title": "Gizle {name}?",
+            "body": "Bu hesabı daha sonra Gelişmiş Ayarlar'da \"Gizli hesapları göster\" i etkinleştirerek bulabilirsiniz.",
+            "typePassword": "Doğrulama için lütfen cüzdan parolanızı giriniz.",
+            "hideAccount": "Hesabı gizle",
+            "errorTitle": "Gizlenemedi: {name}",
+            "errorBody1": "Bir hesabı silebilmek için hesap bakiyeniz boş olmalıdır.",
+            "errorBody2": "Hesabınızda {balance} tutarında bakiye bulunmaktadır. Lütfen bakiyeyi başka bir hesaba taşıyıp, tekrar deneyiniz.",
+            "errorBody3": "Bu hesabı silemezsiniz, en azından bir hesabınız bulunmalıdır."
         },
         "addressHistory": {
-            "title": "{name} address history",
+            "title": "{name} Adres geçmişi",
             "currentBalance": "Mevcut bakiye: {balance}"
         },
         "node": {
             "titleAdd": "Bir node ekle",
-            "titleUpdate": "Update a node",
+            "titleUpdate": "Bir düğümü güncelleyin",
             "titleRemove": "Düğüm kaldır",
             "titleDetails": "Node detayları",
             "nodeAddress": "Node adresi",
@@ -387,7 +387,7 @@
         "deleteProfile": {
             "title": "Profili sil",
             "confirmation": "Bu dosyayı silmek istiyor musunuz? Bu işlem geri alınamaz.",
-            "typePassword": "Type your password to confirm."
+            "typePassword": "Onaylamak için parolanızı girin."
         },
         "diagnostics": {
             "title": "Tanılama",
@@ -401,8 +401,8 @@
             "userPath": "Kullanıcı yolu"
         },
         "transaction": {
-            "title": "Confirm transaction",
-            "body": "You’re about to send {amount} to"
+            "title": "İşlemi onayla",
+            "body": "Bu kadar miktar göndermek üzeresiniz {amount}"
         }
     },
     "charts": {
@@ -411,7 +411,11 @@
         "portoflio": "Portföy",
         "token": "Token",
         "accountValue": "Hesap değeri",
-        "accountActivity": "Hesap etkinliği"
+        "accountActivity": "Hesap etkinliği",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "Devam Et",
@@ -453,19 +457,19 @@
         "enableDeveloperMode": "Geliştirici modunu etkinleştir",
         "enableSystemNotifications": "Bildirimleri etkinleştir",
         "exportState": "State dışa aktarın",
-        "localProofOfWork": "Local proof of work",
+        "localProofOfWork": "Lokal iş kanıtı",
         "unlock": "Kilidi Aç",
         "updateFirefly": "Firefly'ı güncelle",
         "restartNow": "Şimdi yeniden başlat",
         "saveBackup": "Stronghold yedeklemeyi kaydet",
         "customizeAcount": "Hesabı özelleştir",
         "viewAddressHistory": "Adres geçmişini göster",
-        "hideAccount": "Hide account",
-        "showAccount": "Unhide account",
-        "deleteAccount": "Delete account",
+        "hideAccount": "Hesabı gizle",
+        "showAccount": "Hesabı gizlilikten çıkar",
+        "deleteAccount": "Hesabı Sil",
         "max": "En yüksek",
         "addNode": "Düğüm ekle",
-        "updateNode": "Update node",
+        "updateNode": "Düğümü güncelle",
         "removeNode": "Düğüm kaldır",
         "hide": "Sakla",
         "hideOthers": "Diğerlerini sakla",
@@ -491,8 +495,8 @@
         "finishSetup": "Kurulumu Bitir",
         "readDocumentation": "Dokümantasyonu oku",
         "visitFaq": "FAQ ziyaret et",
-        "showHiddenAccounts": "Show hidden accounts",
-        "confirm": "Confirm"
+        "showHiddenAccounts": "Gizli hesapları göster",
+        "confirm": "Onayla"
     },
     "general": {
         "password": "Parola",
@@ -538,7 +542,7 @@
         "appearance": "Görünüm",
         "lightTheme": "Aydınlık tema",
         "darkTheme": "Karanlık tema",
-        "balance": "Balance",
+        "balance": "Bakiye",
         "accountBalance": "Hesap Bakiyesi",
         "incoming": "Gelen",
         "outgoing": "Giden",
@@ -586,10 +590,10 @@
         "passwordUpdating": "Şifre güncelleniyor..",
         "passwordSuccess": "Şifre başarıyla güncellendi",
         "passwordFailed": "Şifre güncellemesi yapılamadı",
-        "syncingAccounts": "Syncing accounts...",
-        "exportingStronghold": "Exporting Stronghold...",
-        "exportingStrongholdSuccess": "Exported Stronghold successfully",
-        "exportingStrongholdFailed": "Exporting Stronghold failed",
+        "syncingAccounts": "Hesapları senkronize ediyor...",
+        "exportingStronghold": "Stronghold Aktarılıyor...",
+        "exportingStrongholdSuccess": "Stronghold başarıyla dışa aktarıldı",
+        "exportingStrongholdFailed": "Stronghold dışa aktarımı başarısız oldu",
         "pinCodeUpdating": "Pın kodu güncelleniyor...",
         "pinCodeSuccess": "Şifre başarıyla güncellendi",
         "pinCodeFailed": "Şifre güncellemesi yapılamadı",
@@ -600,7 +604,7 @@
         "passwordStrength3": "Ortalama",
         "passwordStrength4": "Güçlü",
         "creatingProfile": "Yeni bir hesap oluşturuluyor, lütfen bekleyin...",
-        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
+        "accountRemoved": "Bu hesap gizlidir. Havale işlemlerini gerçekleştirmek için görünür hale getirin."
     },
     "dates": {
         "today": "Bugün",
@@ -614,7 +618,7 @@
         "valueTx": "{{account}} 'a {{value}} alınıyor",
         "confirmed": "{{account}} hesabından giden {{value}} onaylandı",
         "confirmedInternal": "{{senderAccount}} 'dan {{receiverAccount}} 'a {{value}} onaylandı",
-        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
+        "confirmedInternalNoAccounts": "{{value}} iç transfer onaylandı",
         "failed": "{{account}} hesabından giden {{value}} onaylandı",
         "downloadingUpdate": "Güncelleme indiriliyor",
         "updateReady": "Güncelleme hazır",
@@ -670,6 +674,7 @@
             "amountZero": "Toplam miktar 0'dan büyük olmalıdır",
             "wrongAddressPrefix": "Adresler {prefix} ön eki ile başlar.",
             "wrongAddressFormat": "Adres doğru şekilde biçimlendirilmemiş.",
+            "invalidAddress": "Adres geçerli değil.",
             "insufficientFunds": "Hesap bakiyesi yetersiz.",
             "noToAccount": "Bakiyeyi göndermek için bir hesap seçmediniz.",
             "sendingDust": "1 Mi den daha az gönderim yapamazsınız.",
@@ -692,7 +697,8 @@
             "seedTooShort": "Seed 81 karakter uzunluğunda olmalıdır, {length, plural, one {is 1} other {is #}}",
             "seedCharacters": "Seed sadece A-Z veya 9 karakterlerini içeriyor olmalıdır",
             "phraseWordCount": "Kurtarma cümleniz 24 kelimeden oluşmalıdır, şuan {length, plural, one {is 1} other { #}}.",
-            "phraseUnrecognizedWord": "Kurtarma cümlenizde \"{word}\" bilinmeyen kelime"
+            "phraseUnrecognizedWord": "Kurtarma cümlenizde \"{word}\" bilinmeyen kelime",
+            "phraseCaseWord": "Bu kelime \"{word}\" küçük harflerden oluşmalıdır"
         }
     }
 }

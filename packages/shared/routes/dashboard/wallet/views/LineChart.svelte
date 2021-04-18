@@ -127,8 +127,8 @@
             <span>
                 <Dropdown
                     small
-                    value={TIMEFRAME_MAP[$activeProfile?.settings.chartSelectors.timeframe]}
-                    items={Object.keys(TIMEFRAME_MAP).map((value) => ({ label: TIMEFRAME_MAP[value], value }))}
+                    value={locale(`charts.timeframe${TIMEFRAME_MAP[$activeProfile?.settings.chartSelectors.timeframe]}`)}
+                    items={Object.keys(TIMEFRAME_MAP).map((value) => ({ label: locale(`charts.timeframe${TIMEFRAME_MAP[value]}`), value }))}
                     onSelect={(newTimeframe) => updateProfile('settings.chartSelectors.timeframe', newTimeframe.value)}
                     contentWidth={true} />
             </span>

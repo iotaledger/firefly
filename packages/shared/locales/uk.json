@@ -1,8 +1,8 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA tokens",
-            "body": "Firefly is the official wallet of IOTA."
+            "title": "Надсилайте, отримуйте і керуйте IOTA токенами",
+            "body": "Firefly - офіційний гаманець IOTA."
         },
         "legal": {
             "title": "Privacy Policy & Terms of Service",
@@ -34,8 +34,8 @@
         "setup": {
             "title": "Налаштування Вашого гаманця",
             "body1": "You can create multiple user profiles to keep your tokens separate and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
-            "profileName": "Profile Name"
+            "body2": "Наразі давайте почнемо з імені вашого профілю. Ви можете додати більше профілів пізніше.",
+            "profileName": "Ім'я профілю"
         },
         "secure": {
             "title": "Secure your wallet",
@@ -106,7 +106,7 @@
         "importFromText": {
             "title": "Відновіть свій гаманець фразою відновлення або seed",
             "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body2": "A recovery phrase is 24 words long (with spaces). This is used to recover an existing Firefly wallet.",
+            "body2": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
             "body3": "Введіть seed, або фразу для відновлення",
             "seedDetected": "81 character seed detected",
             "phraseDetected": "24 word recovery phrase detected"
@@ -411,7 +411,11 @@
         "portoflio": "Portfolio",
         "token": "Token",
         "accountValue": "Account Value",
-        "accountActivity": "Account Activity"
+        "accountActivity": "Account Activity",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "Продовжити",
@@ -670,6 +674,7 @@
             "amountZero": "The amount must be greater than 0.",
             "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
             "wrongAddressFormat": "The address is not correctly formatted.",
+            "invalidAddress": "The address is not valid.",
             "insufficientFunds": "This account has insufficient funds.",
             "noToAccount": "You have not selected an account to send the funds to.",
             "sendingDust": "You cannot send less than 1 Mi.",
@@ -692,7 +697,8 @@
             "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
             "seedCharacters": "The seed should only contain characters A-Z or 9",
             "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
-            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase"
+            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
+            "phraseCaseWord": "The word \"{word}\" should be lower case"
         }
     }
 }

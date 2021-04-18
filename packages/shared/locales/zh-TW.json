@@ -106,7 +106,7 @@
         "importFromText": {
             "title": "使用恢復詞組或種子恢復您的錢包",
             "body1": "種子由 81 個字符組成。 這用於重新載入較舊的 Trinity 錢包。",
-            "body2": "助記詞的長度為 24 個字（帶空格）。這用於恢復現有的 Firefly 錢包。",
+            "body2": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
             "body3": "輸入您的種子或恢復詞組",
             "seedDetected": "檢測到81個字符的種子",
             "phraseDetected": "檢測到 24 個單字的助記詞"
@@ -411,7 +411,11 @@
         "portoflio": "資料夾",
         "token": "代幣",
         "accountValue": "賬戶餘額",
-        "accountActivity": "啟用帳戶"
+        "accountActivity": "啟用帳戶",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "繼續",
@@ -670,6 +674,7 @@
             "amountZero": "金額必須大於0。",
             "wrongAddressPrefix": "地址必須以 {prefix} 為字首。",
             "wrongAddressFormat": "地址格式不正確。",
+            "invalidAddress": "The address is not valid.",
             "insufficientFunds": "該帳戶資金不足。",
             "noToAccount": "您尚未選擇要向其匯款的帳戶。",
             "sendingDust": "您無法發送少於1 Mi。",
@@ -692,7 +697,8 @@
             "seedTooShort": "種子 (Sees) 長度必須為 81個字符長, 目前 {length, plural, one {is 1} other {長度 #}}",
             "seedCharacters": "種子 (Seed) 應僅包含字符 A-Z 或 9",
             "phraseWordCount": "您的恢復助記詞中應該有24個單字 {length, plural, one {is 1} other {目前有 #}}.",
-            "phraseUnrecognizedWord": "恢復短語中無法識別的單詞“ {word}”"
+            "phraseUnrecognizedWord": "恢復短語中無法識別的單詞“ {word}”",
+            "phraseCaseWord": "The word \"{word}\" should be lower case"
         }
     }
 }

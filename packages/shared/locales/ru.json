@@ -1,11 +1,11 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA tokens",
-            "body": "Firefly is the official wallet of IOTA."
+            "title": "Отправляй, получай и управляй своими токенами IOTA",
+            "body": "Firefly является официальным кошельком IOTA."
         },
         "legal": {
-            "title": "Privacy Policy & Terms of Service",
+            "title": "Политика конфиденциальности и условия обслуживания",
             "body": "Пожалуйста, ознакомьтесь с Политикой конфиденциальности и Условиями обслуживания.",
             "privacyPolicy": {
                 "title": "Политика конфиденциальности",
@@ -25,79 +25,79 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+            "checkbox": "Я ознакомился и согласен с правилами пользования и политикой конфиденциальности"
         },
         "appearance": {
             "title": "Внешний вид",
-            "body": "Choose your wallet’s theme."
+            "body": "Выбери тему своего кошелька."
         },
         "setup": {
             "title": "Настройте ваш кошелек",
-            "body1": "You can create multiple user profiles to keep your tokens separate and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "body1": "Ты можешь создать несколько профилей, чтобы сохранить свои токены отдельно и повысить безопасность.",
+            "body2": "Теперь давай начнем с твоего первого профиля. Ты можешь добавить дополнительные профили позже.",
             "profileName": "Название профиля"
         },
         "secure": {
-            "title": "Secure your wallet",
-            "body1": "Save and print the Recovery Kit PDF template.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
+            "title": "Защити твой кошелек",
+            "body1": "Сохранить и распечатать PDF документ для восстановление.",
+            "body2": "Если ты заполниш документ и сохранишь его безопасно, ты всегда сможешь восстановить твой кошелек."
         },
         "password": {
             "title": "Придумайте пароль",
-            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
-            "body2": "It is recommended that you write down your password in your Recovery Kit."
+            "body1": "Тебе нужен надежный пароль для защиты твоих средств. Используй комбинацию слов и избегай распространенных фраз, имен или дат.",
+            "body2": "Рекомендуется записать пароль в документ для востоновлениею."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body2": "Keep your PIN safe!"
+            "body1": "Установи PIN-код для входа в кошелек.",
+            "body2": "Держи PIN-код в безопасности!"
         },
         "pin": {
             "title": "Задайте PIN-код",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
+            "body1": "Введи 6-значный PIN-код ниже. Он будет тебе нужен для доступа к твоему профилю.",
+            "body2": "Используй только цифры"
         },
         "confirmPin": {
             "title": "Подтвердите PIN-код",
-            "body1": "Your PIN keeps your balance and transactions private.",
-            "body2": "Re-enter your PIN code to proceed. "
+            "body1": "Твой PIN-код будет держать твой баланс и транзакции секретными.",
+            "body2": "Повторно введи PIN-код для продолжения. "
         },
         "backup": {
             "title": "Сделайте резервную копию вашего кошелька",
-            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+            "body1": "Теперь тебе будет показана фраза восстановления. Запиши её в документ для восстановления.",
+            "body2": "Не передавай твою фразу восстановления никому. Она может быть использована для доступа к твоему токенам отовсюду.",
             "body3": "Если вы потеряете фразу восстановления, вы можете потерять свои средства."
         },
         "recoveryPhrase": {
             "title": "Фраза восстановления",
-            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-            "body2": "Keep this private and safely stored.",
-            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+            "body1": "В твоём документе для восстановления запиши слова в точном порядке.",
+            "body2": "Храни этот доумент приватно и безопасно.",
+            "body3": "Важно иметь резервную копию. Компьютеры часто не работают и файлы могут быть повреждены.",
             "revealRecoveryPhrase": "Показать фразу восстановлению",
             "hideRecoveryPhrase": "Скрыть восстановительную фразу"
         },
         "verifyRecoveryPhrase": {
             "title": "Проверьте фразу восстановления",
-            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
-            "word": "Word",
-            "verified": "Recovery phrase verified",
-            "verifiedBody": "Remember to keep it private and safely stored."
+            "body": "Давай проверим правильность записи фразы. Пожалуйста, выбери каждое слово в нумерованном порядке.",
+            "word": "Слово",
+            "verified": "Ключевая фраза подтверждена",
+            "verifiedBody": "Не забудь хранить его приватно и безопасно."
         },
         "backupWallet": {
             "title": "Сделайте резервную копию в файл Stronghold",
-            "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
-            "body2": "Reasons why digital backups are important:",
-            "reason1": "Easily recover your wallet without typing in your recovery phrase",
-            "reason2": "Import your wallet to other devices",
-            "reason3": "Recover your full transaction history"
+            "body1": "Введи пароль для резервного копирования кошелька на файл Stronghold. Твой пароль используется для шифрования резервной копии.",
+            "body2": "Причины, по которым важны цифровые резервные копии:",
+            "reason1": "Легкое восстановление твоего кошелека без ввода фразы восстановления",
+            "reason2": "Импортируй твой кошелек на другие устройства",
+            "reason3": "Восстановление всей историй транзакций"
         },
         "recoveryPhraseSaved": {
             "title": "Резервная копия сделано успешно",
             "body": "Вы сделали резервную копию вашего кошелька на Stronghold."
         },
         "congratulations": {
-            "title": "Wallet setup completed",
-            "body": "Your new wallet is ready to use."
+            "title": "Настройка кошелька завершена",
+            "body": "Твой новый кошелек готов к использованию."
         },
         "import": {
             "title": "Импортировать кошелёк",
@@ -105,14 +105,14 @@
         },
         "importFromText": {
             "title": "Восстановить кошелек с фразой восстановления или мнемоникой",
-            "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body2": "A recovery phrase is 24 words long (with spaces). This is used to recover an existing Firefly wallet.",
+            "body1": "Ключ состоит из 81 символа. Используется для восстановления со старого кошелька Trinity.",
+            "body2": "Ключевая фраза длиной 24 слов, все маленькими буквами с пробелами между ними. Используется для восстановления существующего кошелька Firefly.",
             "body3": "Введите вашу фразу восстановления или мнемонику",
-            "seedDetected": "81 character seed detected",
-            "phraseDetected": "24 word recovery phrase detected"
+            "seedDetected": "Обнаружено 81 символ seed",
+            "phraseDetected": "Обнаружена фраза восстановления 24 слов"
         },
         "importFromFile": {
-            "title": "Restore your wallet using a backup file",
+            "title": "Восстанови кошелек с помощью файла резервной копии",
             "body": "Импортируйте файл резервной копии для восстановления вашего кошелька. Резервные копии могут быть Stronghold (.stronghold) или Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
@@ -123,10 +123,10 @@
         "importSuccess": {
             "title": "Вы успешно восстановили вашу резервную копию",
             "body": "Теперь вы можете настроить ваш новый кошелёк.",
-            "seedvaultTitle": "Successfully imported",
-            "seedvaultBody": "Your password is correct, you can now continue.",
-            "strongholdTitle": "Successfully imported",
-            "strongholdBody": "Your password is correct, you can now continue."
+            "seedvaultTitle": "Успешно импортировано",
+            "seedvaultBody": "Твой пароль правильный, ты можешь продолжить.",
+            "strongholdTitle": "Успешно импортировано",
+            "strongholdBody": "Твой пароль правильный, ты можешь продолжить."
         },
         "migrate": {
             "title": "Мигрируйте свои средства",
@@ -151,19 +151,19 @@
             },
             "security": {
                 "title": "Настройки Безопасности",
-                "description": "Change your password and adjust security-related settings"
+                "description": "Измени пароль и настрой параметры безопасности"
             },
             "advancedSettings": {
                 "title": "Дополнительные Настройки",
-                "description": "Tools and manual settings for technical users"
+                "description": "Инструменты и настройки для технических пользователей"
             },
             "helpAndInfo": {
                 "title": "Помощь и Информация",
-                "description": "Find the answer to a question or get help with an issue"
+                "description": "Найди ответ на вопрос или получи помощь для проблемы"
             },
             "profile": {
                 "title": "Профиль",
-                "description": "Change your profile name or set an avatar"
+                "description": "Измени имя профиля или установи аватар"
             },
             "sync": {
                 "title": "Синхронизация учетных записей",
@@ -179,14 +179,14 @@
             },
             "currency": {
                 "title": "Валюта",
-                "description": "Adjusts balance conversion and updates chart options"
+                "description": "Регулировка конверсии баланса и обновления графика"
             },
             "notifications": {
                 "title": "Оповещения",
-                "description": "System notifications for transaction events"
+                "description": "Уведомления системы для транзакций"
             },
             "exportStronghold": {
-                "title": "Export Backup",
+                "title": "Экспорт резервной копии",
                 "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
             },
             "appLock": {
@@ -334,17 +334,17 @@
         "version": {
             "title": "Current version: {version}",
             "upToDateTitle": "Firefly is up to date",
-            "upToDateDescription": "You are running the latest and safest version of Firefly.",
-            "updateAvailable": "Firefly update available",
-            "updateDetails": "Version {version} - {date}"
+            "upToDateDescription": "Ты использушь последнюю и безопасную версию Firefly.",
+            "updateAvailable": "Доступно обновление Firefly",
+            "updateDetails": "Версия {version} - {date}"
         },
         "backup": {
-            "title": "Last backup: {date}",
-            "lastBackup": "You last backed up {date}",
-            "backupDescription": "It is important to back up regularly to ensure you have a copy of your accounts and transaction history.",
-            "backupWarning": "If you lose your backup and recovery phrase you will lose access to your funds.",
-            "notBackedUp": "Not backed up",
-            "notBackedUpDescription": "You have not backed up your Stronghold",
+            "title": "Последняя резервная копия: {date}",
+            "lastBackup": "Дата последней резервной копии: {date}",
+            "backupDescription": "Важно регулярно составлять резервную копию, чтобы убедиться, что у тебя есть копия всех твоих счетов и истории транзакций.",
+            "backupWarning": "Если ты потеряешь свою резервную копию и фразу восстановления, ты потеряешь доступ к своим средствам.",
+            "notBackedUp": "Резервная копия не создана",
+            "notBackedUpDescription": "Ты не сохранил резервную копию твоего Stronghold",
             "saving": "Сохранение..."
         },
         "deleteAccount": {
@@ -366,39 +366,39 @@
             "errorBody3": "Вы не можете скрыть эту учетную запись, вы должны иметь хотя бы одну."
         },
         "addressHistory": {
-            "title": "{name} address history",
-            "currentBalance": "Current balance: {balance}"
+            "title": "История адресов: {name}",
+            "currentBalance": "Текущий баланс: {balance}"
         },
         "node": {
-            "titleAdd": "Add a node",
+            "titleAdd": "Добавить узел",
             "titleUpdate": "Обновить узел",
-            "titleRemove": "Remove a node",
-            "titleDetails": "Node details",
-            "nodeAddress": "Node address",
-            "optionalUsername": "Username (optional)",
-            "optionalPassword": "Password (optional)",
-            "setAsPrimaryNode": "Set as primary node",
-            "removeConfirmation": "Are you sure you want to remove this node?"
+            "titleRemove": "Удалить узел",
+            "titleDetails": "Детали узла",
+            "nodeAddress": "Адрес узла",
+            "optionalUsername": "Имя пользователя (опционально)",
+            "optionalPassword": "Пароль (опционально)",
+            "setAsPrimaryNode": "Установить как основной узел",
+            "removeConfirmation": "Ты уверен, что хотешь удалить этот узел?"
         },
         "errorLog": {
-            "title": "Error Log",
-            "empty": "The error log is empty."
+            "title": "Журнал ошибок",
+            "empty": "Журнал ошибок пуст."
         },
         "deleteProfile": {
-            "title": "Delete profile",
-            "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone.",
-            "typePassword": "Type your password to confirm."
+            "title": "Удалить профиль",
+            "confirmation": "Ты уверен, что хочешь удалить этот профиль? Эта операция не может быть отменена.",
+            "typePassword": "Введи свой пароль для подтверждения."
         },
         "diagnostics": {
-            "title": "Diagnostics",
-            "node": "Node",
-            "platform": "Platform",
-            "platformVersion": "Platform Version",
-            "platformArchitecture": "Platform Architecture",
-            "cpuCount": "CPU Count",
-            "totalMem": "Total Memory",
-            "freeMem": "Free Memory",
-            "userPath": "User Path"
+            "title": "Диагностика",
+            "node": "Узел",
+            "platform": "Платформа",
+            "platformVersion": "Версия платформы",
+            "platformArchitecture": "Архитектура платформы",
+            "cpuCount": "Количество CPU",
+            "totalMem": "Всего памяти",
+            "freeMem": "Свободная память",
+            "userPath": "Путь пользователя"
         },
         "transaction": {
             "title": "Подтвердить транзакцию",
@@ -406,19 +406,23 @@
         }
     },
     "charts": {
-        "incomingMi": "Incoming {value} Mi",
-        "outgoingMi": "Outgoing {value} Mi",
-        "portoflio": "Portfolio",
-        "token": "Token",
-        "accountValue": "Account Value",
-        "accountActivity": "Account Activity"
+        "incomingMi": "Входящий {value} Mi",
+        "outgoingMi": "Исходящий {value} Mi",
+        "portoflio": "Портфолио",
+        "token": "Токен",
+        "accountValue": "Счёт аккаунт",
+        "accountActivity": "Активность аккаунта",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "Продолжить",
         "back": "Назад",
         "cancel": "Отменить",
         "close": "Закрыть",
-        "dismiss": "Dismiss",
+        "dismiss": "Отклонить",
         "save": "Сохранить",
         "importSeed": "Импортировать существующую мнемонику",
         "importWallet": "Импортировать существующий кошелек",
@@ -443,7 +447,7 @@
         "tryAgain": "Попрoбуйте снова",
         "visitDiscord": "Перейти в Discord",
         "dragDrop": "Перетащить",
-        "importExtentions": ".kdbx or .stronghold file",
+        "importExtentions": ".kdbx или .stronghold файл",
         "chooseFile": "Выберите файл",
         "dropHere": "Перенесите файл сюда",
         "syncAll": "Синхронизировать все",
@@ -455,20 +459,20 @@
         "exportState": "Экспортировать отчет",
         "localProofOfWork": "Локальное доказательство выполнения работы",
         "unlock": "Разблокировать",
-        "updateFirefly": "Update Firefly",
+        "updateFirefly": "Обновить Firefly",
         "restartNow": "Перезагрузить сейчас",
-        "saveBackup": "Save Stronghold backup",
-        "customizeAcount": "Customise account",
-        "viewAddressHistory": "View address history",
+        "saveBackup": "Сохранить резервную копию Stronghold",
+        "customizeAcount": "Настройка аккаунта",
+        "viewAddressHistory": "Просмотр истории адресов",
         "hideAccount": "Скрыть учетную запись",
         "showAccount": "Показать учетную запись",
         "deleteAccount": "Удалить учетную запись",
-        "max": "Max",
-        "addNode": "Add node",
+        "max": "Максимум",
+        "addNode": "Добавить узел",
         "updateNode": "Обновить узел",
-        "removeNode": "Remove node",
-        "hide": "Hide",
-        "hideOthers": "Hide Others",
+        "removeNode": "Удалить узел",
+        "hide": "Скрыть",
+        "hideOthers": "Скрыть остальные",
         "showAll": "Show All",
         "quit": "Quit",
         "edit": "Edit",
@@ -571,48 +575,48 @@
         "noAccounts": "You have no accounts, please create one.",
         "loadingAccounts": "Loading, please wait...",
         "addProfile": "Add Profile",
-        "noRecentHistory": "No recent history",
-        "transferSyncing": "Syncing account",
-        "transferSelectingInputs": "Selecting inputs",
-        "transferRemainderAddress": "Generating remainder deposit address",
-        "transferSigning": "Signing the transaction",
-        "transferPow": "Performing PoW",
-        "transferBroadcasting": "Broadcasting transaction",
-        "transferComplete": "Transfer complete",
-        "creatingAccount": "Creating account, please wait...",
-        "updatingAccount": "Updating account, please wait...",
-        "accountSyncing": "Account is syncing",
-        "accountSyncComplete": "Account sync complete",
-        "passwordUpdating": "Updating password...",
-        "passwordSuccess": "Updated password successfully",
-        "passwordFailed": "Updating password failed",
-        "syncingAccounts": "Syncing accounts...",
-        "exportingStronghold": "Exporting Stronghold...",
-        "exportingStrongholdSuccess": "Exported Stronghold successfully",
-        "exportingStrongholdFailed": "Exporting Stronghold failed",
-        "pinCodeUpdating": "Updating PIN code...",
-        "pinCodeSuccess": "Updated PIN code successfully",
-        "pinCodeFailed": "Updating PIN code failed",
-        "passwordStrength": "Password strength",
-        "passwordStrength0": "Bad",
-        "passwordStrength1": "Poor",
-        "passwordStrength2": "Weak",
-        "passwordStrength3": "Average",
-        "passwordStrength4": "Strong",
-        "creatingProfile": "Creating profile, please wait...",
+        "noRecentHistory": "Нет недавней истории",
+        "transferSyncing": "Синхронизация аккаунта",
+        "transferSelectingInputs": "Выбор входов",
+        "transferRemainderAddress": "Генерация адреса депозита",
+        "transferSigning": "Подписание транзакции",
+        "transferPow": "Выполнение PoW",
+        "transferBroadcasting": "Отправка транзакции",
+        "transferComplete": "Передача завершена",
+        "creatingAccount": "Создание аккаунта, пожалуйста подожди...",
+        "updatingAccount": "Обновление аккаунта, пожалуйста подожди...",
+        "accountSyncing": "Аккаунт синхронизируется",
+        "accountSyncComplete": "Синхронизация аккаунта завершена",
+        "passwordUpdating": "Обновление пароля...",
+        "passwordSuccess": "Пароль успешно обновлен",
+        "passwordFailed": "Не удалось обновить пароль",
+        "syncingAccounts": "Синхронизация аккаунтов...",
+        "exportingStronghold": "Экспортирование Stronghold...",
+        "exportingStrongholdSuccess": "Stronghold успешно экспортирован",
+        "exportingStrongholdFailed": "Экспортирование Stronghold не удалось",
+        "pinCodeUpdating": "Обновление PIN-кода...",
+        "pinCodeSuccess": "PIN-код успешно обновлен",
+        "pinCodeFailed": "Не удалось обновить PIN-код",
+        "passwordStrength": "Надёжность пароля",
+        "passwordStrength0": "Очень плохо",
+        "passwordStrength1": "Плохо",
+        "passwordStrength2": "Слабый",
+        "passwordStrength3": "Средний",
+        "passwordStrength4": "Сильный",
+        "creatingProfile": "Создание аккаунта, пожалуйста подожди...",
         "accountRemoved": "Эта учетная запись скрыта. Сделайте её видимой для выполнения переводов."
     },
     "dates": {
-        "today": "Today",
-        "yesterday": "Yesterday",
-        "daysAgo": "{time, plural, one {# day} other {# days}} ago",
-        "weeksAgo": "{time, plural, one {# week} other {# weeks}} ago",
-        "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
-        "yearsAgo": "{time, plural, one {# year} other {# years}} ago"
+        "today": "Сегодня",
+        "yesterday": "Вчера",
+        "daysAgo": "{time, plural, one {# день} other {# дней}} назад",
+        "weeksAgo": "{time, plural, one {# неделя} other {# недели}} назад",
+        "monthsAgo": "{time, plural, one {# месяц} other {# месяцев}} назад",
+        "yearsAgo": "{time, plural, one {# год} other {# лет}} назад"
     },
     "notifications": {
-        "valueTx": "Receiving {{value}} to {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
+        "valueTx": "Получение {{value}} в {{account}}",
+        "confirmed": "Исходящий {{value}} из {{account}} подтверждён",
         "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
         "confirmedInternalNoAccounts": "Внутренний перевод {{value}} подтвержден",
         "failed": "Outgoing {{value}} from {{account}} has failed",
@@ -670,6 +674,7 @@
             "amountZero": "The amount must be greater than 0.",
             "wrongAddressPrefix": "Адреса начинаются с префикса {prefix}.",
             "wrongAddressFormat": "Адрес неверно отформатирован.",
+            "invalidAddress": "The address is not valid.",
             "insufficientFunds": "This account has insufficient funds.",
             "noToAccount": "Вы не выбрали аккаунт для перевода средств.",
             "sendingDust": "You cannot send less than 1 Mi.",
@@ -692,7 +697,8 @@
             "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
             "seedCharacters": "The seed should only contain characters A-Z or 9",
             "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
-            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase"
+            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
+            "phraseCaseWord": "The word \"{word}\" should be lower case"
         }
     }
 }

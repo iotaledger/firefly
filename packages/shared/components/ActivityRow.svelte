@@ -2,7 +2,7 @@
     import { Icon, Text } from 'shared/components'
     import { truncateString } from 'shared/lib/helpers'
     import { formatUnit } from 'shared/lib/units'
-    import { date } from 'svelte-i18n'
+    import { formatDate } from 'shared/lib/i18n'
     import type { Payload } from 'shared/lib/typings/message'
 
     export let id
@@ -27,13 +27,12 @@
     <div class="flex flex-col ml-3.5 space-y-1.5">
         <Text type="p" bold smaller>{truncateString(id)}</Text>
         <p class="text-10 leading-120 text-gray-500">
-            {$date(new Date(timestamp), {
+            {formatDate(new Date(timestamp), {
                 year: 'numeric',
                 month: 'short',
                 day: 'numeric',
                 hour: 'numeric',
                 minute: 'numeric',
-                hour12: false,
             })}
         </p>
     </div>
