@@ -623,7 +623,6 @@ export const updateAccountAfterBalanceChange = (
                 const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD;
 
                 let updatedAddress = false
-                let maxKeyIndex = 0
                 const updatedAccount = Object.assign<WalletAccount, Partial<WalletAccount>>(storedAccount, {
                     rawIotaBalance,
                     balance: formatUnit(rawIotaBalance, 2),
@@ -638,21 +637,27 @@ export const updateAccountAfterBalanceChange = (
                             updatedAddress = true
                         }
 
-                        maxKeyIndex = Math.max(maxKeyIndex, _address.keyIndex)
-
                         return _address
                     })
                 })
 
-                // The address could not be found to update, so it's one we don't know about
-                // create a new address to store the details
+                // The address could not be found in our current list of addresses
+                // call getAccounts to fill in the missing information
                 if (!updatedAddress) {
-                    updatedAccount.addresses.push({
-                        address,
-                        balance: spentBalance + receivedBalance,
-                        keyIndex: maxKeyIndex + 1,
-                        internal: false,
-                        outputs: []
+                    api.getAccounts({
+                        onSuccess(accountsResponse) {
+                            const ac = accountsResponse.payload.find((a) => a.id === accountId)
+                            if (ac) {
+                                const addr = ac.addresses.find(ad => ad.address === address)
+                                if (addr) {
+                                    updatedAccount.addresses.push(addr)
+                                }
+                            }
+                        },
+                        onError(err) {
+                            // Not much we can do with an error here
+                            console.error(err)
+                        },
                     })
                 }
 
