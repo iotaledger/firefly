@@ -109,14 +109,28 @@
             "exportMigration": "Export migration log and finish setup"
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have a recovery phrase or Stronghold back up, you can import it here."
+            "title": "Recover or migrate funds",
+            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+            "importSeed": "I have an 81 character seed",
+            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "importMnemonic": "I have a Firefly recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase to recover your wallet",
+            "importFile": "I have a file backup",
+            "importFileDescription": "Upload a Seedvault or Stronghold file"
         },
         "importFromText": {
-            "title": "Restore your wallet with a recovery phrase or seed",
-            "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body2": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
-            "body3": "Enter your seed or recovery phrase",
+            "seed": {
+                "title": "Type your seed to commence migration",
+                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+                "enterSeed": "Enter your seed"
+
+            },
+            "mnemonic": {
+                "title": "Type your Recovery phrase",
+                "body1": "A secret phrase is a 24 word mnemonic. This is used to recover a newer FireFly wallet runnning on Chrysalis network.",
+                "body2": "Type each word in the correct order and separate them by spaces or commas.",
+                "enterMnemonic": "Enter your secret Recovery phrase"
+            },
             "seedDetected": "81 character seed detected",
             "phraseDetected": "24 word recovery phrase detected",
             "checksum": "Checksum"
@@ -607,10 +621,6 @@
         "yourAddress": "Your address",
         "generateNewAddress": "Generate new address",
         "copyAddress": "Copy Address",
-        "haveTextBackup": "I have a text backup",
-        "haveFileBackup": "I have a file backup",
-        "enterSeedOrPhrase": "Enter a recovery phrase or seed",
-        "uploadSeedvaultOrStronghold": "Import a Stronghold or SeedVault file",
         "import": "Import",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
