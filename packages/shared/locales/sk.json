@@ -106,7 +106,7 @@
         "importFromText": {
             "title": "Obnovte svoju peňaženku s frázou pre obnovenie alebo seedom",
             "body1": "Seed pozostáva za 81 znakov. Je používaný pre obnovenie zo staršej Trinity peňaženky.",
-            "body2": "Fráza obnovenia je dlhá 24 slov (s medzerami). Je použitá pre obnovenie existujúcej Firefly peňaženky.",
+            "body2": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
             "body3": "Zadajte váš seed alebo frázu obnovenia",
             "seedDetected": "81 znakový seed detegovaný",
             "phraseDetected": "24-slovná fráza obnovenia detegovaná"
@@ -411,7 +411,11 @@
         "portoflio": "Portfólio",
         "token": "Token",
         "accountValue": "Hodnota účtu",
-        "accountActivity": "Aktivita účtu"
+        "accountActivity": "Aktivita účtu",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "Pokračovať",
@@ -670,6 +674,7 @@
             "amountZero": "Hodnota musí byť vyššia ako 0.",
             "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
             "wrongAddressFormat": "The address is not correctly formatted.",
+            "invalidAddress": "The address is not valid.",
             "insufficientFunds": "Tento účet nemá dostatok prostriedkov.",
             "noToAccount": "You have not selected an account to send the funds to.",
             "sendingDust": "Nemôžete odoslať menej ako 1 Mi.",
@@ -692,7 +697,8 @@
             "seedTooShort": "Seed by mal byť dlhý 81 znakov, teraz {length, plural, one {je 1} other {is #}}",
             "seedCharacters": "Seed môže obsahovať iba znaky A-Z alebo 9",
             "phraseWordCount": "Vo vašej fráze obnovenia by malo byť 24 slov, teraz tam {length, plural, one {je 1} other {sú #}}.",
-            "phraseUnrecognizedWord": "Neznáme slovo \"{word}\" vo vašej fráze obnovenia"
+            "phraseUnrecognizedWord": "Neznáme slovo \"{word}\" vo vašej fráze obnovenia",
+            "phraseCaseWord": "The word \"{word}\" should be lower case"
         }
     }
 }

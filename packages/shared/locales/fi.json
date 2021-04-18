@@ -64,7 +64,7 @@
         },
         "backup": {
             "title": "Varmuuskopioi lompakko",
-            "body1": "Sinulle näytetään nyt palautuslauseke. Kirjoita se talteen palatussivullesi.",
+            "body1": "Sinulle näytetään nyt palautuslauseke. Kirjoita se talteen palautussivullesi.",
             "body2": "Älä jaa palautuslausekettasi kenenkään kanssa. Sitä voidaan käyttää varoihisi käsiksi pääsyyn mistä tahansa.",
             "body3": "Jos menetät palautuslausekkeesi, voit menettää varasi."
         },
@@ -106,7 +106,7 @@
         "importFromText": {
             "title": "Palauta lompakkosi palautuslausekkeella tai seed-merkkijonolla",
             "body1": "Seed-merkkijonossa on 81 merkkiä. Sitä käytetään vanhan Trinity-lompakon palauttamiseen.",
-            "body2": "Palautuslauseke on pituudeltaan 24 sanaa (välilyönteineen). Sitä käytetään olemassaolevan Firefly-lompakon palauttamiseen.",
+            "body2": "Palautuslauseke on pituudeltaan 24 sanaa, kaikki pienillä kirjaimilla ja välilyönnit sanojen välissä. Sitä käytetään olemassaolevan Firefly-lompakon palauttamiseen.",
             "body3": "Syötä seed-merkkijono tai palautuslauseke",
             "seedDetected": "81 merkin seed-luku havaittu",
             "phraseDetected": "24 sanan palautuslauseke havaittu"
@@ -207,11 +207,11 @@
             },
             "resyncAccounts": {
                 "title": "Uudelleensynkronoi tilit",
-                "description": "Starts a background task to make sure your accounts are up to date."
+                "description": "Käynnistää taustatehtävän tilien pitämiseksi ajan tasalla."
             },
             "hiddenAccounts": {
-                "title": "Hidden accounts",
-                "description": "Selecting this options will show accounts that were previously hidden."
+                "title": "Piilotetut tilit",
+                "description": "Tämän asetuksen valitseminen näyttää aiemmin piilotetut tilit."
             },
             "deleteProfile": {
                 "title": "Poista profiili",
@@ -227,19 +227,19 @@
             },
             "nodeSettings": {
                 "title": "Solmuasetukset",
-                "description": "Select Manual to configure the node settings and connect to your own node"
+                "description": "Valitse Manuaalinen määrittääksesi solmuasetukset ja yhdistääksesi omaan solmuusi"
             },
             "configureNodeList": {
                 "title": "Valitse solmu",
-                "description": "Manage the list of nodes your wallet connects to.",
-                "primaryNode": "Primary node",
-                "excludeNode": "Exclude node",
-                "includeNode": "Include node",
-                "viewDetails": "View details",
-                "setAsPrimary": "Set as primary",
+                "description": "Hallinnoi listaa solmuista, joihin lompakkosi yhdistää.",
+                "primaryNode": "Ensisijainen solmu",
+                "excludeNode": "Hylkää solmu",
+                "includeNode": "Sisällytä solmu",
+                "viewDetails": "Näytä yksityiskohdat",
+                "setAsPrimary": "Aseta ensisijaiseksi",
                 "removeNode": "Poista solmu",
-                "includeOfficialNodeList": "Include official node list",
-                "noNodes": "There are no nodes, automatic selection will be used instead."
+                "includeOfficialNodeList": "Sisällytä virallinen solmulista",
+                "noNodes": "Ei solmuja, sen sijaan käytetään automaattista valintaa."
             },
             "proofOfWork": {
                 "title": "Todiste työstä (PoW)",
@@ -314,7 +314,7 @@
                 "networkDown": "Verkkoyhteys katkaistu",
                 "status": "Tila",
                 "messagesPerSecond": "Viestejä sekunnissa",
-                "confirmationRate": "Varhvistusaste"
+                "confirmationRate": "Vahvistusaste"
             },
             "profileModal": {
                 "allSettings": "Kaikki asetukset",
@@ -325,8 +325,8 @@
     "popups": {
         "password": {
             "title": "Salasana vaaditaan",
-            "subtitle": "Please enter your password to unlock Stronghold",
-            "backup": "Please enter your password to export a backup"
+            "subtitle": "Ole hyvä ja syötä salasanasi avataksesi Strongholdin",
+            "backup": "Ole hyvä ja syötä salasanasi viedäksesi varmuuskopion"
         },
         "qr": {
             "title": "Sinun QR-koodisi"
@@ -345,33 +345,33 @@
             "backupWarning": "Jos menetät varmuuskopiosi ja palautuslausekkeesi, menetät pääsyn varoihisi.",
             "notBackedUp": "Ei varmuuskopioitu",
             "notBackedUpDescription": "Et ole varmuuskopioinut Strongholdiasi",
-            "saving": "Saving..."
+            "saving": "Tallennetaan..."
         },
         "deleteAccount": {
-            "title": "Delete {name}?",
-            "body": "This account has no transaction history. It can safely be deleted.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Delete account",
-            "errorTitle": "Unable to delete {name}",
-            "errorBody1": "You cannot delete this account, you must have at least one."
+            "title": "Poista {name}?",
+            "body": "Tällä tilillä ei ole maksutapahtumahistoriaa. Se voidaan turvallisesti poistaa.",
+            "typePassword": "Syötä lompakkosi salasana vahvistaaksesi.",
+            "hideAccount": "Poista tili",
+            "errorTitle": "Tiliä {name} ei voi poistaa",
+            "errorBody1": "Et voi poistaa tätä tiliä, sinulla on oltava vähintään yksi."
         },
         "hideAccount": {
-            "title": "Hide {name}?",
-            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Hide account",
-            "errorTitle": "Unable to hide {name}",
-            "errorBody1": "To hide an account it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
-            "errorBody3": "You cannot hide this account, you must have at least one."
+            "title": "Piilota {name}?",
+            "body": "Löydät tämän tilin myöhemmin ottamalla käyttöön \"Näytä piilotetut tilit\" lisäasetuksista.",
+            "typePassword": "Syötä lompakkosi salasana vahvistaaksesi.",
+            "hideAccount": "Piilota tili",
+            "errorTitle": "Tiliä {name} ei voi piilottaa",
+            "errorBody1": "Jotta tilin voi piilottaa, sillä on oltava 0 saldo.",
+            "errorBody2": "Sinulla on tällä hetkellä {balance} jäljellä tällä tilillä. Ole hyvä ja siirrä nämä varat toiselle tilille ja yritä uudelleen.",
+            "errorBody3": "Et voi piilottaa tätä tiliä, sinulla on oltava vähintään yksi."
         },
         "addressHistory": {
-            "title": "{name} address history",
+            "title": "Tilin {name} osoitehistoria",
             "currentBalance": "Nykyinen saldo: {balance}"
         },
         "node": {
             "titleAdd": "Lisää solmu",
-            "titleUpdate": "Update a node",
+            "titleUpdate": "Päivitä solmu",
             "titleRemove": "Poista solmu",
             "titleDetails": "Solmun tiedot",
             "nodeAddress": "Solmun osoite",
@@ -387,7 +387,7 @@
         "deleteProfile": {
             "title": "Poista profiili",
             "confirmation": "Oletko varma, että haluat poistaa tämän profiilin? Tätä toimintoa ei voi peruuttaa.",
-            "typePassword": "Type your password to confirm."
+            "typePassword": "Syötä salasanasi vahvistaaksesi."
         },
         "diagnostics": {
             "title": "Diagnostiikka",
@@ -401,8 +401,8 @@
             "userPath": "Käyttäjän polku"
         },
         "transaction": {
-            "title": "Confirm transaction",
-            "body": "You’re about to send {amount} to"
+            "title": "Vahvista siirtotapahtuma",
+            "body": "Olet lähettämässä {amount} osoitteeseen"
         }
     },
     "charts": {
@@ -411,7 +411,11 @@
         "portoflio": "Portfolio",
         "token": "Token",
         "accountValue": "Tilin arvo",
-        "accountActivity": "Tilin aktiivisuus"
+        "accountActivity": "Tilin aktiivisuus",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "Jatka",
@@ -453,19 +457,19 @@
         "enableDeveloperMode": "Ota kehittäjätila käyttöön",
         "enableSystemNotifications": "Ota järjestelmäilmoitukset käyttöön",
         "exportState": "Vie tila",
-        "localProofOfWork": "Local proof of work",
+        "localProofOfWork": "Paikallinen todiste työstä (PoW)",
         "unlock": "Avaa",
         "updateFirefly": "Päivitä Firefly",
         "restartNow": "Käynnistä uudelleen nyt",
         "saveBackup": "Tallenna Stronghold-varmuuskopio",
         "customizeAcount": "Muokkaa tiliä",
         "viewAddressHistory": "Näytä osoitehistoria",
-        "hideAccount": "Hide account",
-        "showAccount": "Unhide account",
-        "deleteAccount": "Delete account",
+        "hideAccount": "Piilota tili",
+        "showAccount": "Näytä tili",
+        "deleteAccount": "Poista tili",
         "max": "Maksimi",
         "addNode": "Lisää solmu",
-        "updateNode": "Update node",
+        "updateNode": "Päivitä solmu",
         "removeNode": "Poista solmu",
         "hide": "Piilota",
         "hideOthers": "Piilota Muut",
@@ -491,8 +495,8 @@
         "finishSetup": "Viimeistele asennus",
         "readDocumentation": "Lue dokumentaatio",
         "visitFaq": "Katso usein kysytyt kysymykset",
-        "showHiddenAccounts": "Show hidden accounts",
-        "confirm": "Confirm"
+        "showHiddenAccounts": "Näytä piilotetut tilit",
+        "confirm": "Vahvista"
     },
     "general": {
         "password": "Salasana",
@@ -538,7 +542,7 @@
         "appearance": "Ulkoasu",
         "lightTheme": "Vaalea teema",
         "darkTheme": "Tumma teema",
-        "balance": "Balance",
+        "balance": "Saldo",
         "accountBalance": "Tilin saldo",
         "incoming": "Saapuva",
         "outgoing": "Lähtevä",
@@ -586,10 +590,10 @@
         "passwordUpdating": "Päivitetään salasanaa...",
         "passwordSuccess": "Salasanan päivitys onnistui",
         "passwordFailed": "Salasanan päivittäminen epäonnistui",
-        "syncingAccounts": "Syncing accounts...",
-        "exportingStronghold": "Exporting Stronghold...",
-        "exportingStrongholdSuccess": "Exported Stronghold successfully",
-        "exportingStrongholdFailed": "Exporting Stronghold failed",
+        "syncingAccounts": "Synkronoidaan tilejä...",
+        "exportingStronghold": "Viedään Strongholdia...",
+        "exportingStrongholdSuccess": "Stronghold viety onnistuneesti",
+        "exportingStrongholdFailed": "Strongholdin vienti epäonnistui",
         "pinCodeUpdating": "Päivitetään PIN-koodia...",
         "pinCodeSuccess": "PIN-koodin päivitys onnistui",
         "pinCodeFailed": "PIN-koodin päivitys epäonnistui",
@@ -600,7 +604,7 @@
         "passwordStrength3": "Keskinkertainen",
         "passwordStrength4": "Vahva",
         "creatingProfile": "Luodaan profiilia, odota hetki...",
-        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
+        "accountRemoved": "Tämä tili on piilotettu. Näytä se tehdäksesi siirtoja."
     },
     "dates": {
         "today": "Tänään",
@@ -614,7 +618,7 @@
         "valueTx": "Vastaanotetaan {{value}} tilille {{account}}",
         "confirmed": "Lähtevä {{value}} tililtä {{account}} on vahvistettu",
         "confirmedInternal": "{{value}} tililtä {{senderAccount}} tilille {{receiverAccount}} on vahvistettu",
-        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
+        "confirmedInternalNoAccounts": "{{value}} sisäinen siirto on vahvistettu",
         "failed": "Lähtevä {{value}} tililtä {{account}} on epäonnistunut",
         "downloadingUpdate": "Ladataan päivitystä",
         "updateReady": "Päivitys valmis",
@@ -623,7 +627,7 @@
         "calcMinutesRemaining": "Lasketaan jäljellä olevia minuutteja...",
         "minutesRemaining": "{minutes, plural, one {1 minuutti jäljellä} other {# minuuttia jäljellä}}",
         "copiedToClipboard": "Kopioitu leikepöydälle",
-        "accountsSynchronized": "Account synchronization complete"
+        "accountsSynchronized": "Tilien synkronointi valmis"
     },
     "error": {
         "profile": {
@@ -643,7 +647,7 @@
             "dates": "Päivämäärät on helppo arvata.",
             "common": "Tämä on hyvin yleinen salasana.",
             "similar": "Tämä on samankaltainen yleisesti käytetyn salasanan kanssa.",
-            "word": "A single word is easy to guess.",
+            "word": "Yksittäinen sana on helppo arvata.",
             "incorrect": "Salasanasi on virheellinen.",
             "length": "Salasanasi ei voi olla pidempi kuin {length, plural, one {1 merkki} other {# merkkiä}}."
         },
@@ -657,10 +661,10 @@
             "empty": "Sinun täytyy käyttää viimeisintä tiliäsi ennen uuden luomista.",
             "notEmpty": "Sinun täytyy siirtää saldosi ennen kuin poistat tämän tilin.",
             "duplicate": "Samanniminen tili on jo olemassa.",
-            "tilde": "A profile name can't start with the '~' character.",
-            "control": "A profile name can't contain a control character.",
-            "startDot": "A profile name can't start with the '.' character.",
-            "chars": "A profile name can't contain the following characters <>:\"/\\|?*"
+            "tilde": "Profiilin nimi ei voi alkaa merkillä '~'.",
+            "control": "Profiilin nimi ei voi sisältää ohjausmerkkiä.",
+            "startDot": "Profiilin nimi ei voi alkaa pisteellä.",
+            "chars": "Profiilin nimi ei voi sisältää merkkejä <>:\"/\\|?*"
         },
         "send": {
             "addressLength": "Osoitteiden tulee olla {length, plural, one {1 merkin pituinen} other {# merkkiä pitkä}}.",
@@ -668,10 +672,11 @@
             "amountNoFloat": "Jos yksiköt ovat `i`, et voi käyttää desimaaleja.",
             "amountInvalidFormat": "Summa näyttää olevan virheellinen luku.",
             "amountZero": "Summan on oltava suurempi kuin 0.",
-            "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
-            "wrongAddressFormat": "The address is not correctly formatted.",
+            "wrongAddressPrefix": "Osoitteet alkavat etuliitteellä {prefix}.",
+            "wrongAddressFormat": "Osoite on muotoiltu virheellisesti.",
+            "invalidAddress": "Osoite ei ole kelvollinen.",
             "insufficientFunds": "Tällä tilillä ei ole riittävästi varoja.",
-            "noToAccount": "You have not selected an account to send the funds to.",
+            "noToAccount": "Et ole valinnut tiliä, johon varat lähetetään.",
             "sendingDust": "Et voi lähettää alle 1 Mi.",
             "leavingDust": "Et voi jättää alle 1 Mi osoitteeseesi."
         },
@@ -692,7 +697,8 @@
             "seedTooShort": "Seed-merkkijonon pitäisi olla 81 merkkiä pitkä, se {length, plural, one {on 1} other {on #}}",
             "seedCharacters": "Seed-luvun tulisi sisältää vain merkkejä A-Z tai 9",
             "phraseWordCount": "Palautuslausekkeessasi pitäisi olla 24 sanaa, tällä hetkellä siinä {length, plural, one {on 1} other {on #}}.",
-            "phraseUnrecognizedWord": "Tuntematon sana \"{word}\" palautuslauseessasi"
+            "phraseUnrecognizedWord": "Tuntematon sana \"{word}\" palautuslauseessasi",
+            "phraseCaseWord": "Sana \"{word}\" tulee olla pienillä kirjaimilla kirjoitettu"
         }
     }
 }
