@@ -512,24 +512,29 @@
     }
 
     onMount(async () => {
-        if (!$accountsLoaded) {
-            getAccounts()
+        // If we are in settings when logged out the router reset
+        // switches back to the wallet, but there is no longer
+        // an active profile, only init if there is a profile
+        if ($activeProfile) {
+            if (!$accountsLoaded) {
+                getAccounts()
+            }
+
+            removeEventListeners($activeProfile.id)
+
+            initialiseListeners()
+
+            api.getStrongholdStatus({
+                onSuccess(strongholdStatusResponse) {
+                    isStrongholdLocked.set(strongholdStatusResponse.payload.snapshot.status === 'Locked')
+                },
+                onError(error) {
+                    console.error(error)
+                },
+            })
+
+            addProfileCurrencyPriceData()
         }
-
-        removeEventListeners($activeProfile.id)
-
-        initialiseListeners()
-
-        api.getStrongholdStatus({
-            onSuccess(strongholdStatusResponse) {
-                isStrongholdLocked.set(strongholdStatusResponse.payload.snapshot.status === 'Locked')
-            },
-            onError(error) {
-                console.error(error)
-            },
-        })
-
-        addProfileCurrencyPriceData()
     })
 </script>
 
