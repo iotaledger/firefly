@@ -34,7 +34,7 @@
         "profile": {
             "title": "Create a profile",
             "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
-            "body2": "For now, let’s start with your first profile name. You can add more profiles later.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Profile Name"
         },
         "setup": {
@@ -106,7 +106,7 @@
             "body": "Your new wallet is ready to use.",
             "fundsMigrated": "Funds migrated",
             "success": "You have successfully migrated your funds to the new network",
-            "exportMigration": "Export migration log and finish Setup"
+            "exportMigration": "Export migration log and finish setup"
         },
         "import": {
             "title": "Import a wallet",
@@ -185,7 +185,7 @@
         "securingSpentAddresses": {
             "title": "Securing spent addresses...",
             "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
-            "body2": "Your computer will run at full capacity, you may do something else while you wait for this to complete."
+            "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
         },
         "transferFragmentedFunds": {
             "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
@@ -201,7 +201,7 @@
             "title": "Your balance",
             "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
             "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
-            "zeroBalance": "Try check again. If you still can't find your balance you might have entered your seed incorrectly."
+            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly."
         },
         "settings": {
             "settings": "Settings",
@@ -471,7 +471,7 @@
         },
         "missingBundle": {
             "title": "Warning: funds at risk during migration",
-            "body": "You have funds on spent addresses. But the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
+            "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
             "learnMore": "Learn more about spent addresses",
             "proceed": "I understand the risk"
         }
