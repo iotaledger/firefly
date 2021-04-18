@@ -59,7 +59,7 @@
         <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
             {#if transactions.length}
                 {#each transactions as transaction}
-                    <ActivityRow onClick={() => handleTransactionClick(transaction)} {...transaction} {color} />
+                    <ActivityRow onClick={() => handleTransactionClick(transaction)} {...transaction} {color} {locale} />
                 {/each}
             {:else}
                 <div class="h-full flex flex-col items-center justify-center text-center">

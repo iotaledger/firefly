@@ -1,6 +1,6 @@
 import { mnemonic } from 'shared/lib/app'
 import { convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
-import { stripTrailingSlash } from 'shared/lib/helpers'
+import { receiverAddressesFromPayload, sendAddressFromPayload, stripTrailingSlash } from 'shared/lib/helpers'
 import { localize } from 'shared/lib/i18n'
 import type { PriceData } from 'shared/lib/marketData'
 import { HistoryDataProps } from 'shared/lib/marketData'
@@ -40,7 +40,6 @@ export interface WalletAccount extends Account {
 
 export interface AccountMessage extends Message {
     account: number;
-    internal: boolean;
 }
 
 interface ActorState {
@@ -748,39 +747,20 @@ export const getTransactions = (accounts: WalletAccount[], count = 10): AccountM
 
     accounts.forEach((account) => {
         account.messages.forEach((message) => {
-
-            if (message.id in messages) {
-                const existingMessage = messages[message.id];
-
-                // If a copy of the message exists, only override it if the new message is confirmed and the existing one is unconfirmed
-                // Imagine an internal transfer (between accounts). 
-                // If the first account already updates the confirmation state as confirmed, there is a chance that the user might see the confirmation state
-                // changing from confirmed to unconfirmed. To avoid that, we always give preference to the message that's already confirmed. 
-                if (!existingMessage.confirmed && message.confirmed) {
-                    messages[message.id] = Object.assign<
-                        AccountMessage,
-                        Message,
-                        Partial<AccountMessage>
-                    >(
-                        {} as AccountMessage,
-                        message,
-                        { account: account.index });
-                }
-            } else {
-                messages[message.id] = Object.assign<
-                    AccountMessage,
-                    Message,
-                    Partial<AccountMessage>
-                >(
-                    {} as AccountMessage,
-                    message,
-                    { account: account.index });
+            messages[account.index + message.id] = {
+                ...message,
+                account: account.index
             }
         })
     });
 
     return Object.values(messages)
-        .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+        .sort((a, b) => {
+            if (a.id === b.id) {
+                return a.payload.data.essence.data.incoming ? -1 : 1
+            }
+            return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+        })
         .slice(0, count)
 }
 
@@ -1332,13 +1312,8 @@ export const updateAccountNetworkSettings = async (automaticNodeSelection, inclu
 export const isSelfTransaction = (payload: Payload, account: WalletAccount): boolean => {
     const accountAddresses = account?.addresses?.map(add => add.address) ?? []
     if (payload && accountAddresses.length) {
-        const senderAddress: string =
-            payload?.data?.essence?.data?.inputs?.find((input) => /utxo/i.test(input?.type))?.data?.metadata?.address ?? null
-
-        const receiverAddresses: string[] =
-            payload?.data?.essence?.data?.outputs
-                ?.filter((output) => output?.data?.remainder === false)
-                ?.map((output) => output?.data?.address) ?? []
+        const senderAddress = sendAddressFromPayload(payload)
+        const receiverAddresses: string[] = receiverAddressesFromPayload(payload)
         const transactionAddresses = [senderAddress, ...receiverAddresses]
         return senderAddress && receiverAddresses.length && transactionAddresses.every((txAddress) => accountAddresses.indexOf(txAddress) !== -1)
     }

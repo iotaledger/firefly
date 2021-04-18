@@ -1,13 +1,13 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
-    import { getInitials, truncateString } from 'shared/lib/helpers'
+    import { getInitials, receiverAddressesFromPayload, sendAddressFromPayload, truncateString } from 'shared/lib/helpers'
     import type { Payload } from 'shared/lib/typings/message'
     import { formatUnit } from 'shared/lib/units'
     import { setClipboard } from 'shared/lib/utils'
     import { formatDate } from 'shared/lib/i18n'
     import type { WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import type { Readable, Writable } from 'svelte/store'
+    import type { Writable } from 'svelte/store'
 
     export let id
     export let timestamp
@@ -17,18 +17,12 @@
     export let onBackClick = () => {}
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
-    const activeAccount = getContext<Readable<WalletAccount>>('selectedAccount')
 
     let senderAccount: WalletAccount
     let receiverAccount: WalletAccount
 
-    let senderAddress: string =
-        payload?.data?.essence?.data?.inputs?.find((input) => /utxo/i.test(input?.type))?.data?.metadata?.address ?? null
-
-    let receiverAddresses: string[] =
-        payload?.data?.essence?.data?.outputs
-            ?.filter((output) => output?.data?.remainder === false)
-            ?.map((output) => output?.data?.address) ?? []
+    let senderAddress = sendAddressFromPayload(payload)
+    let receiverAddresses = receiverAddressesFromPayload(payload)
 
     $: senderAccount = senderAddress
         ? $accounts?.find((acc) => acc.addresses.some((add) => senderAddress === add.address)) ?? null
@@ -37,8 +31,8 @@
         ? $accounts.find((acc) => acc.addresses.some((add) => receiverAddresses.includes(add.address))) ?? null
         : null
 
-    function isAccountSameAsActive(account) {
-        return account && $activeAccount && account?.id === $activeAccount?.id
+    function isAccountYours(account) {
+        return $accounts.find((a) => a.id === account.id)
     }
 </script>
 
@@ -51,7 +45,7 @@
                     class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold text-center bg-{senderAccount?.color ?? 'blue'}-500 text-white">
                     {getInitials(senderAccount.alias, 2)}
                 </div>
-                {#if isAccountSameAsActive(senderAccount)}
+                {#if isAccountYours(senderAccount)}
                     <Text smaller>{locale('general.you')}</Text>
                 {/if}
             {:else}
@@ -68,7 +62,7 @@
                     {getInitials(receiverAccount.alias, 2)}
                 </div>
             {/if}
-            {#if isAccountSameAsActive(receiverAccount)}
+            {#if isAccountYours(receiverAccount)}
                 <Text smaller>{locale('general.you')}</Text>
             {:else}
                 {#each receiverAddresses as address}

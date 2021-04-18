@@ -69,7 +69,9 @@
                 <ActivityRow
                     {...transaction}
                     onClick={() => handleTransactionClick(transaction)}
-                    color={$accounts.find((acc) => acc.index === transaction.account)?.color} />
+                    color={$accounts.find((acc) => acc.index === transaction.account)?.color}
+                    {locale}
+                    includeFullSender />
             {/each}
         {:else}
             <div class="h-full flex flex-col items-center justify-center text-center">
