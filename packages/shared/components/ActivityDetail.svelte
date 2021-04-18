@@ -134,11 +134,8 @@
                     class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold bg-{receiverAccount?.color ?? 'blue'}-500 text-white">
                     {getInitials(receiverAccount.alias, 2)}
                 </div>
-                {#if payload.type === 'Transaction' && payload.data.essence.data.incoming}
-                    <Text smaller>{locale('general.you')}</Text>
-                {/if}
             {/if}
-            {#if isAccountSameAsActive(receiverAccount)}
+            {#if payload.type === 'Transaction' && payload.data.essence.data.incoming || isAccountSameAsActive(receiverAccount)}
                 <Text smaller>{locale('general.you')}</Text>
             {:else}
                 {#each receiverAddresses as address}
