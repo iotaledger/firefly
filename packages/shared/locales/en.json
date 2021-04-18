@@ -265,9 +265,9 @@
                 "confirmNewPincode": "Confirm new PIN",
                 "action": "Change PIN"
             },
-            "resyncAccounts": {
-                "title": "Resync accounts",
-                "description": "Starts a background task to make sure your accounts are up to date."
+            "balanceFinder": {
+                "title": "Balance finder",
+                "description": "Perform an extended search of your addresses for tokens."
             },
             "hiddenAccounts": {
                 "title": "Hidden accounts",
@@ -464,6 +464,12 @@
             "title": "Confirm transaction",
             "body": "You’re about to send {amount} to"
         },
+        "balanceFinder": {
+            "title": "Balance finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances.",
+            "totalWalletBalance": "Total wallet balance",
+            "typePassword": "Type your password to allow searching."
+        },
         "riskFunds": {
             "title": "Warning: funds at risk during migration",
             "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
@@ -572,7 +578,11 @@
         "visitFaq": "Visit FAQ",
         "viewStatus": "View status",
         "showHiddenAccounts": "Show hidden accounts",
-        "confirm": "Confirm"
+        "confirm": "Confirm",
+        "findBalances": "Find balances",
+        "searchBalances": "Search for balances",
+        "searchAgain": "Search again",
+        "searching": "Searching..."
     },
     "general": {
         "password": "Password",

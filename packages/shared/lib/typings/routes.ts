@@ -87,7 +87,7 @@ export enum AdvancedSettings {
     ProofOfWork = 'proofOfWork',
     DeveloperMode = 'developerMode',
     DeepLinks = 'deepLinks',
-    ResyncAccounts = 'resyncAccounts',
+    BalanceFinder = 'balanceFinder',
     HiddenAccounts = 'hiddenAccounts',
     ErrorLog = 'errorLog',
     Diagnostics = 'diagnostics',

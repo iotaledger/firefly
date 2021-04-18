@@ -6,6 +6,7 @@
     import AddNode from './AddNode.svelte'
     import AddressHistory from './AddressHistory.svelte'
     import Backup from './Backup.svelte'
+    import BalanceFinder from './BalanceFinder.svelte'
     import Busy from './Busy.svelte'
     import HideAccount from './HideAccount.svelte'
     import DeleteAccount from './DeleteAccount.svelte'
@@ -42,6 +43,7 @@
         deleteProfile: DeleteProfile,
         diagnostics: Diagnostics,
         transaction: Transaction,
+        balanceFinder: BalanceFinder
     }
 
     const onkey = (e) => {
