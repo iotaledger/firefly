@@ -15,6 +15,7 @@
     export let contentWidth = false
     export let error = ''
     export let classes = ''
+    export let autofocus = false
 
     let dropdown = false
     let navContainer
@@ -92,6 +93,9 @@
     onMount(() => {
         if (contentWidth) {
             navWidth = `width: ${navContainer.clientWidth + 8}px`
+        }
+        if (autofocus) {
+            divContainer.focus()
         }
     })
 </script>

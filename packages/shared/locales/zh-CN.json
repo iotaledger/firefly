@@ -106,7 +106,7 @@
         "importFromText": {
             "title": "用恢复恢复或种子恢复你的钱包",
             "body1": "种子由81个字符组成。它用于从旧的 Trinity 钱包中恢复。",
-            "body2": "恢复密语长度为24个单词(含空格)。这个密语可用于恢复已有的Firefly钱包。",
+            "body2": "恢复密语长度为24个单词，单词间由空格隔开。这个密语可用于恢复已有的Firefly钱包。",
             "body3": "请输入您的种子或恢复密语",
             "seedDetected": "检测到81个字符种子",
             "phraseDetected": "检测到24个单词恢复密语"
@@ -207,11 +207,11 @@
             },
             "resyncAccounts": {
                 "title": "重新同步账户",
-                "description": "Starts a background task to make sure your accounts are up to date."
+                "description": "启动后台任务来以确保您的帐户同步到最新状态。"
             },
             "hiddenAccounts": {
-                "title": "Hidden accounts",
-                "description": "Selecting this options will show accounts that were previously hidden."
+                "title": "隐藏帐户",
+                "description": "选择此选项将显示以前隐藏的帐户。"
             },
             "deleteProfile": {
                 "title": "删除配置文件",
@@ -227,19 +227,19 @@
             },
             "nodeSettings": {
                 "title": "节点设置",
-                "description": "Select Manual to configure the node settings and connect to your own node"
+                "description": "请启用手动配置来设置并连接到您自己的节点"
             },
             "configureNodeList": {
                 "title": "选择节点",
-                "description": "Manage the list of nodes your wallet connects to.",
-                "primaryNode": "Primary node",
-                "excludeNode": "Exclude node",
-                "includeNode": "Include node",
-                "viewDetails": "View details",
-                "setAsPrimary": "Set as primary",
+                "description": "管理你钱包连接节点列表。",
+                "primaryNode": "主节点",
+                "excludeNode": "排除此节点",
+                "includeNode": "包含此节点",
+                "viewDetails": "查看详细信息",
+                "setAsPrimary": "设为主要节点",
                 "removeNode": "删除节点",
-                "includeOfficialNodeList": "Include official node list",
-                "noNodes": "There are no nodes, automatic selection will be used instead."
+                "includeOfficialNodeList": "包含官方节点列表",
+                "noNodes": "尚未配置节点，将使用节点自动选择功能。"
             },
             "proofOfWork": {
                 "title": "工作量证明",
@@ -325,8 +325,8 @@
     "popups": {
         "password": {
             "title": "需要输入密码",
-            "subtitle": "Please enter your password to unlock Stronghold",
-            "backup": "Please enter your password to export a backup"
+            "subtitle": "请输入您的密码来解锁Stronghold",
+            "backup": "请输入您的密码以导出备份"
         },
         "qr": {
             "title": "你的二维码"
@@ -345,33 +345,33 @@
             "backupWarning": "如果您丢失了备份文件和恢复短语，您将再也不能访问您的资金",
             "notBackedUp": "没有备份",
             "notBackedUpDescription": "您还没有备份您的 Stronghold",
-            "saving": "Saving..."
+            "saving": "正在保存..."
         },
         "deleteAccount": {
-            "title": "Delete {name}?",
-            "body": "This account has no transaction history. It can safely be deleted.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Delete account",
-            "errorTitle": "Unable to delete {name}",
-            "errorBody1": "You cannot delete this account, you must have at least one."
+            "title": "删除{name}?",
+            "body": "此帐户没有交易历史。它可以被安全地删除。",
+            "typePassword": "请输入您的钱包密码进行确认。",
+            "hideAccount": "删除帐户",
+            "errorTitle": "无法删除 {name}",
+            "errorBody1": "您不能删除这个账户，您必须至少有一个账户。"
         },
         "hideAccount": {
-            "title": "Hide {name}?",
-            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Hide account",
-            "errorTitle": "Unable to hide {name}",
-            "errorBody1": "To hide an account it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
-            "errorBody3": "You cannot hide this account, you must have at least one."
+            "title": "是否隐藏 {name}？",
+            "body": "您可以稍后通过在高级设置中启用\"显示隐藏账户\"来查找此账户。",
+            "typePassword": "请输入您的钱包密码进行确认。",
+            "hideAccount": "隐藏帐户",
+            "errorTitle": "无法隐藏 {name}",
+            "errorBody1": "你只能隐藏余额为0的账户",
+            "errorBody2": "目前您的这个账户还有 {balance} 余额. 请把这些资金移动到另一个账户后重试。",
+            "errorBody3": "您不能隐藏此账户，您必须至少有一个账户。"
         },
         "addressHistory": {
-            "title": "{name} address history",
+            "title": "{name} 地址历史记录",
             "currentBalance": "当前余额: {balance}"
         },
         "node": {
             "titleAdd": "添加节点",
-            "titleUpdate": "Update a node",
+            "titleUpdate": "更新节点",
             "titleRemove": "删除节点",
             "titleDetails": "节点详细信息",
             "nodeAddress": "节点地址",
@@ -387,7 +387,7 @@
         "deleteProfile": {
             "title": "删除配置文件",
             "confirmation": "您确定要删除此配置文件吗？此操作无法撤消。",
-            "typePassword": "Type your password to confirm."
+            "typePassword": "请输入您的密码以确认。"
         },
         "diagnostics": {
             "title": "诊断程序",
@@ -401,8 +401,8 @@
             "userPath": "用户路径"
         },
         "transaction": {
-            "title": "Confirm transaction",
-            "body": "You’re about to send {amount} to"
+            "title": "确认交易",
+            "body": "您将要发送 {amount} 到"
         }
     },
     "charts": {
@@ -411,7 +411,11 @@
         "portoflio": "资产组合",
         "token": "Token",
         "accountValue": "账户价值",
-        "accountActivity": "帐户活动"
+        "accountActivity": "帐户活动",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "继续",
@@ -453,19 +457,19 @@
         "enableDeveloperMode": "打开开发者模式",
         "enableSystemNotifications": "启用系统通知",
         "exportState": "导出状态",
-        "localProofOfWork": "Local proof of work",
+        "localProofOfWork": "本地工作量证明",
         "unlock": "解锁",
         "updateFirefly": "更新Firefly",
         "restartNow": "立即重启",
         "saveBackup": "保存Stronghold备份",
         "customizeAcount": "自定义账户",
         "viewAddressHistory": "显示地址历史记录",
-        "hideAccount": "Hide account",
-        "showAccount": "Unhide account",
-        "deleteAccount": "Delete account",
+        "hideAccount": "隐藏此帐户",
+        "showAccount": "显示此帐户",
+        "deleteAccount": "删除帐户",
         "max": "最大",
         "addNode": "添加节点",
-        "updateNode": "Update node",
+        "updateNode": "更新节点",
         "removeNode": "删除节点",
         "hide": "隐藏",
         "hideOthers": "隐藏其它",
@@ -491,8 +495,8 @@
         "finishSetup": "完成设置",
         "readDocumentation": "阅读文档",
         "visitFaq": "访问常见问题",
-        "showHiddenAccounts": "Show hidden accounts",
-        "confirm": "Confirm"
+        "showHiddenAccounts": "显示隐藏账户",
+        "confirm": "确认"
     },
     "general": {
         "password": "密码",
@@ -538,7 +542,7 @@
         "appearance": "外观",
         "lightTheme": "浅色主题",
         "darkTheme": "深色主题",
-        "balance": "Balance",
+        "balance": "余额",
         "accountBalance": "账户余额",
         "incoming": "收到",
         "outgoing": "转出",
@@ -586,6 +590,7 @@
         "passwordUpdating": "正在更新密码...",
         "passwordSuccess": "密码更新成功",
         "passwordFailed": "更新密码失败",
+        "syncingAccounts": "正在同步账户...",
         "exportingStronghold": "导出Stronghold...",
         "exportingStrongholdSuccess": "Stronghold导出成功",
         "exportingStrongholdFailed": "Stronghold导出失败",
@@ -599,7 +604,7 @@
         "passwordStrength3": "一般",
         "passwordStrength4": "强壮的",
         "creatingProfile": "正在创建帐户，请稍候...",
-        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
+        "accountRemoved": "此帐户被隐藏。请取消隐藏以执行转账。"
     },
     "dates": {
         "today": "今日",
@@ -613,7 +618,7 @@
         "valueTx": "帐户 {{account}} 收到 {{value}}",
         "confirmed": "帐户 {{account}} 的 {{value}} 转出交易已确认",
         "confirmedInternal": "{{value}} 从 {{senderAccount}} 到 {{receiverAccount}} 已确认",
-        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
+        "confirmedInternalNoAccounts": "内部转账 {{value}} 已确认",
         "failed": "帐户 {{account}} 的 {{value}} 转出交易未能成功。",
         "downloadingUpdate": "正在下载更新",
         "updateReady": "更新已准备就绪",
@@ -622,7 +627,7 @@
         "calcMinutesRemaining": "正在计算剩余分钟...",
         "minutesRemaining": "{minutes, plural, one {还剩最后一分钟...} other {还剩余 # 分钟...}}",
         "copiedToClipboard": "复制到剪贴板",
-        "accountsSynchronized": "Account synchronization complete"
+        "accountsSynchronized": "账户同步完成"
     },
     "error": {
         "profile": {
@@ -642,7 +647,7 @@
             "dates": "日期通常容易被猜到。",
             "common": "这是一个非常常见的密码。",
             "similar": "这是一个与常用密码很类似的密码。",
-            "word": "A single word is easy to guess.",
+            "word": "单个单词容易被猜测到。",
             "incorrect": "您的密码不正确。",
             "length": "您的密码不能超过 {length, plural, one {1 个字符} other {# 字符}}。"
         },
@@ -669,6 +674,7 @@
             "amountZero": "金额必须大于零。",
             "wrongAddressPrefix": "地址以前缀 {prefix} 开始。",
             "wrongAddressFormat": "地址格式不正确。",
+            "invalidAddress": "地址无效的",
             "insufficientFunds": "该账户资金不足。",
             "noToAccount": "您尚未选择一个账户来发送资金。",
             "sendingDust": "您的发送不能小于 1 Mi。",
@@ -691,7 +697,8 @@
             "seedTooShort": "种子长度应该是81个字符，而它 {length, plural, one {只有 1} other {是 #}} 个。",
             "seedCharacters": "种子只能包含字符 A-Z 或 9",
             "phraseWordCount": "您的恢复密语中应该有24个单词，目前 {length, plural, one {只有 1}other {是 #}} 个单词。",
-            "phraseUnrecognizedWord": "恢复短语中无法识别的单词“{word}”"
+            "phraseUnrecognizedWord": "恢复短语中无法识别的单词“{word}”",
+            "phraseCaseWord": "单词 \"{word}\" 应为小写"
         }
     }
 }

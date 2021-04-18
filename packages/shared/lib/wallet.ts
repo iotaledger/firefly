@@ -11,7 +11,7 @@ import type { Account, AccountToCreate, Balance, SyncedAccount } from 'shared/li
 import type { Address } from 'shared/lib/typings/address'
 import type { Actor } from 'shared/lib/typings/bridge'
 import type { BalanceChangeEventPayload, ConfirmationStateChangeEventPayload, ErrorEventPayload, Event, ReattachmentEventPayload, TransactionEventPayload, TransferProgressEventPayload, TransferProgressEventType } from 'shared/lib/typings/events'
-import type { Message } from 'shared/lib/typings/message'
+import type { Message, Payload } from 'shared/lib/typings/message'
 import { formatUnit } from 'shared/lib/units'
 import { get, writable, Writable } from 'svelte/store'
 import type { ClientOptions } from './typings/client'
@@ -265,6 +265,19 @@ export const asyncSetStrongholdPassword = (password) => {
     })
 }
 
+export const asyncChangeStrongholdPassword = (currentPassword, newPassword) => {
+    return new Promise<void>((resolve, reject) => {
+        api.changeStrongholdPassword(currentPassword, newPassword, {
+            onSuccess() {
+                resolve()
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
+
 export const asyncStoreMnemonic = (mnemonic) => {
     return new Promise<void>((resolve, reject) => {
         api.storeMnemonic(mnemonic, {
@@ -427,15 +440,13 @@ export const initialiseListeners = () => {
                 );
             }
 
-            if (!get(isSyncing)) {
-                // Update account with new message
-                saveNewMessage(response.payload.accountId, response.payload.message);
-                const notificationMessage = localize('notifications.valueTx')
-                    .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
-                    .replace('{{account}}', account.alias);
+            saveNewMessage(response.payload.accountId, response.payload.message);
 
-                showSystemNotification({ type: "info", message: notificationMessage, contextData: { type: "valueTx", accountId: account.id } });
-            }
+            const notificationMessage = localize('notifications.valueTx')
+                .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
+                .replace('{{account}}', account.alias);
+
+            showSystemNotification({ type: "info", message: notificationMessage, contextData: { type: "valueTx", accountId: account.id } });
         },
         onError(error) {
             console.error(error)
@@ -664,9 +675,11 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
     accounts.update((storedAccounts) => {
         return storedAccounts.map((storedAccount: WalletAccount) => {
             if (storedAccount.id === accountId) {
-                return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
-                    messages: [message, ...storedAccount.messages]
-                })
+                const hasMessage = storedAccount.messages.some(m => m.id === message.id)
+
+                if (!hasMessage) {
+                    storedAccount.messages.push(message)
+                }
             }
 
             return storedAccount;
@@ -878,7 +891,7 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
             addresses: mergeProps(storedAccount.addresses, syncedAccount.addresses, 'address'),
             messages: mergeProps(storedAccount.messages, syncedAccount.messages, 'id'),
         })
-    }).sort((a, b) => a.index - b.index)
+    })
 
     if (newAccounts.length) {
         const totalBalance = {
@@ -888,8 +901,9 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
         }
 
         const _accounts = []
+        let completeCount = 0
 
-        for (const [idx, newAccount] of newAccounts.entries()) {
+        for (const newAccount of newAccounts) {
             getAccountMeta(newAccount.id, (err, meta) => {
                 if (!err) {
                     totalBalance.balance += meta.balance
@@ -907,28 +921,30 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
                     }), meta)
 
                     _accounts.push(account)
-
-                    if (idx === newAccounts.length - 1) {
-                        const { balanceOverview } = get(wallet);
-                        const overview = get(balanceOverview);
-
-                        accounts.update(() => {
-                            return [...updatedStoredAccounts, ..._accounts]
-                        })
-
-                        updateBalanceOverview(
-                            overview.balanceRaw + totalBalance.balance,
-                            overview.incomingRaw + totalBalance.incoming,
-                            overview.outgoingRaw + totalBalance.outgoing
-                        )
-                    }
                 } else {
                     console.error(err)
                 }
+
+                completeCount++
+                if (completeCount === newAccounts.length) {
+                    const { balanceOverview } = get(wallet);
+                    const overview = get(balanceOverview);
+
+                    accounts.update(() => {
+                        return [...updatedStoredAccounts, ..._accounts].sort((a, b) => a.index - b.index)
+                    })
+
+                    updateBalanceOverview(
+                        overview.balanceRaw + totalBalance.balance,
+                        overview.incomingRaw + totalBalance.incoming,
+                        overview.outgoingRaw + totalBalance.outgoing
+                    )
+                }
+
             })
         }
     } else {
-        accounts.update(() => updatedStoredAccounts);
+        accounts.update(() => updatedStoredAccounts.sort((a, b) => a.index - b.index));
     }
 };
 
@@ -993,8 +1009,9 @@ export const getAccountsBalanceHistory = (accounts: WalletAccount[], priceData: 
                 [HistoryDataProps.SEVEN_DAYS]: [],
                 [HistoryDataProps.ONE_MONTH]: [],
             }
-            // Sort messages from last to newest
-            let messages = account.messages.slice().sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+            let messages: Message[] = account?.messages?.slice()
+                ?.filter((message) => !isSelfTransaction(message.payload, account)) // Remove self transactions
+                ?.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()) ?? [] // Sort messages from last to newest
             // Calculate the variations for each account
             var trackedBalance = account.rawIotaBalance;
             let accountBalanceVariations = [{ balance: trackedBalance, timestamp: new Date().toString() }]
@@ -1397,4 +1414,29 @@ export const updateAccountNetworkSettings = async (
             },
         }
     )
+}
+
+/**
+ * Check if a message was emitted and received by the provided account
+ *
+ * @method getWalletBalanceHistory
+ *
+ * @param {Payload} payload
+ * @param {WalletAccount} account
+ *
+ */
+export const isSelfTransaction = (payload: Payload, account: WalletAccount): boolean => {
+    const accountAddresses = account?.addresses?.map(add => add.address) ?? []
+    if (payload && accountAddresses.length) {
+        const senderAddress: string =
+            payload?.data?.essence?.data?.inputs?.find((input) => /utxo/i.test(input?.type))?.data?.metadata?.address ?? null
+
+        const receiverAddresses: string[] =
+            payload?.data?.essence?.data?.outputs
+                ?.filter((output) => output?.data?.remainder === false)
+                ?.map((output) => output?.data?.address) ?? []
+        const transactionAddresses = [senderAddress, ...receiverAddresses]
+        return senderAddress && receiverAddresses.length && transactionAddresses.every((txAddress) => accountAddresses.indexOf(txAddress) !== -1)
+    }
+    return false
 }

@@ -27,6 +27,7 @@ For all platforms, the following are required:
 -   `libssl` (Debian/Ubuntu: `libssl-dev`, Red Hat: `openssl-devel`, Arch Linux: `openssl`)
 -   `libusb` (Debian/Ubuntu: `libusb-1.0-0-dev`)
 -   `libudev` (Debian/Ubuntu: `libudev-dev`)
+-   `gnome-keyring`, `keepassxc`, or another secrets manager that implements the [freedesktop.org Secrets API](https://www.freedesktop.org/wiki/Specifications/secret-storage-spec/)
 
 ## Building Firefly 
 

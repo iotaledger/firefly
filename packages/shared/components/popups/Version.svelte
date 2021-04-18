@@ -3,7 +3,7 @@
     import { getVersionDetails, updateBusy, updateCheck, updateDownload, versionDetails } from 'shared/lib/appUpdater'
     import { closePopup } from 'shared/lib/popup'
     import { onMount } from 'svelte'
-    import { date } from 'svelte-i18n'
+    import { formatDate } from 'shared/lib/i18n'
 
     export let locale
 
@@ -57,7 +57,7 @@
                 {locale('popups.version.updateDetails', {
                     values: {
                         version: $versionDetails.newVersion,
-                        date: $date($versionDetails.newVersionReleaseDate, { format: 'long' }),
+                        date: formatDate($versionDetails.newVersionReleaseDate, { format: 'long' }),
                     },
                 })}
             </Text>

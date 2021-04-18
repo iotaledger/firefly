@@ -1,11 +1,12 @@
 <script lang="typescript">
     import { Button, Password, Text } from 'shared/components'
     import { logout } from 'shared/lib/app'
-    import { Electron } from 'shared/lib/electron'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
-    import { activeProfile, removeProfile, removeProfileFolder } from 'shared/lib/profile'
-    import { api, asyncRemoveStorage } from 'shared/lib/wallet'
+    import { activeProfile, profiles, removeProfile, removeProfileFolder } from 'shared/lib/profile'
+    import { setRoute } from 'shared/lib/router'
+    import { AppRoute } from 'shared/lib/typings/routes'
+    import { api } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
 
     export let locale
@@ -22,29 +23,25 @@
                 try {
                     const ap = get(activeProfile)
 
-                    if (ap) {
-                        // First remove the storage for the profile
-                        await asyncRemoveStorage()
-
-                        // Remove the from from pin manager
-                        const isRemoved = await Electron.PincodeManager.remove(ap.id)
-                        if (!isRemoved) {
-                            console.error('Something went wrong removing pincode entry.')
-                        }
-                    }
-
                     // We have to logout before the profile is removed
                     // from the profile list otherwise the activeProfile which is
                     // derived from profiles is undefined and the actor
                     // is not destroyed
-                    logout()
+                    await logout()
 
                     // Now that all the resources have been freed we try
                     // and remove the profile folder, this will retry until locks
                     // can be gained
                     if (ap) {
-                        // And remove the profile from the active list of profiles
+                        // Remove the profile from the active list of profiles
                         removeProfile(ap.id)
+
+                        // If after removing the profile there are none left
+                        // we need to make sure the router gets reset to the welcome screen
+                        // by default it will go to the profile selection
+                        if (get(profiles).length === 0) {
+                            setRoute(AppRoute.Welcome)
+                        }
 
                         // Remove the profile folder this will wait until it can get
                         // the lock on the resources

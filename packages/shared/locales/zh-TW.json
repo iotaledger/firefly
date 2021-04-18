@@ -34,18 +34,18 @@
         "setup": {
             "title": "設定您的錢包",
             "body1": "你可以創建多個用戶資料來儲存您的代幣並加強隱私。",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
-            "profileName": "描述檔名稱"
+            "body2": "現在，讓我們開始建立第一個帳號，您可以稍後添加更多帳號。",
+            "profileName": "設定檔名稱"
         },
         "secure": {
-            "title": "Secure your wallet",
-            "body1": "Save and print the Recovery Kit PDF template.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
+            "title": "保護你的錢包",
+            "body1": "保存並列印 Recovery Kit PDF 範本。",
+            "body2": "如果您填寫了 Recovery Kit 並將其安全存放，您將能夠恢復您的錢包。"
         },
         "password": {
             "title": "建立密碼",
-            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
-            "body2": "It is recommended that you write down your password in your Recovery Kit."
+            "body1": "您的密碼強度太弱，請使用單字組合，並避免常見的詞語、名稱或日期。",
+            "body2": "建議您在 Recovery Kit 中寫下密碼。"
         },
         "protect": {
             "title": "Protect your wallet",
@@ -54,50 +54,50 @@
         },
         "pin": {
             "title": "設置 PIN 碼",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
+            "body1": "在下面輸入一個 6 位數的 PIN 碼。 系統將要求您提供 PIN 碼以訪問您的個人帳號。",
+            "body2": "只能使用數字"
         },
         "confirmPin": {
             "title": "驗證您的 PIN 碼",
-            "body1": "Your PIN keeps your balance and transactions private.",
-            "body2": "Re-enter your PIN code to proceed. "
+            "body1": "您的 PIN 碼可確保您的餘額和交易不公開。",
+            "body2": "重新輸入您的 PIN 碼以繼續操作"
         },
         "backup": {
             "title": "備份您的錢包",
-            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+            "body1": "現在將顯示一個助記詞。 將其紀錄在您的 Recovery Kit 裡。",
+            "body2": "不要與任何人分享您的助記詞。 它可用於從任何地方訪問您的令牌。",
             "body3": "一旦復原詞遺失，您的代幣也會遺失"
         },
         "recoveryPhrase": {
             "title": "註記詞",
-            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-            "body2": "Keep this private and safely stored.",
-            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+            "body1": "在 Recovery Kit 中，按照顯示的確切順序寫下單字。",
+            "body2": "將此內容保密並安全地存儲。",
+            "body3": "進行書面備份很重要。 電腦通常會發生故障，文件可能會損壞。",
             "revealRecoveryPhrase": "揭示恢復詞組",
             "hideRecoveryPhrase": "隱藏註記詞"
         },
         "verifyRecoveryPhrase": {
             "title": "驗證種子助記詞",
-            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
-            "word": "Word",
-            "verified": "Recovery phrase verified",
-            "verifiedBody": "Remember to keep it private and safely stored."
+            "body": "讓我們檢查一下您是否正確記錄助記詞。 請按編號順序選擇每個單字。",
+            "word": "單字",
+            "verified": "助記詞已驗證",
+            "verifiedBody": "請記住將其保密並安全地存儲。"
         },
         "backupWallet": {
             "title": "備份至一個 Stronghold 檔案",
-            "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
-            "body2": "Reasons why digital backups are important:",
-            "reason1": "Easily recover your wallet without typing in your recovery phrase",
-            "reason2": "Import your wallet to other devices",
-            "reason3": "Recover your full transaction history"
+            "body1": "輸入密碼以將您的錢包備份至 Stronghold 檔案。您的密碼將用於加密此備份檔案。",
+            "body2": "數位備份之所以重要的原因：",
+            "reason1": "無需輸入助記詞即可輕鬆恢復錢包",
+            "reason2": "將您的錢包導入其他設備",
+            "reason3": "恢復您的完整交易記錄"
         },
         "recoveryPhraseSaved": {
             "title": "備份成功",
             "body": "您的錢包已備份至 Stronghold"
         },
         "congratulations": {
-            "title": "Wallet setup completed",
-            "body": "Your new wallet is ready to use."
+            "title": "錢包設置完成",
+            "body": "您的新錢包可以使用了。"
         },
         "import": {
             "title": "匯入錢包",
@@ -105,14 +105,14 @@
         },
         "importFromText": {
             "title": "使用恢復詞組或種子恢復您的錢包",
-            "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body2": "A recovery phrase is 24 words long (with spaces). This is used to recover an existing Firefly wallet.",
+            "body1": "種子由 81 個字符組成。 這用於重新載入較舊的 Trinity 錢包。",
+            "body2": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
             "body3": "輸入您的種子或恢復詞組",
             "seedDetected": "檢測到81個字符的種子",
-            "phraseDetected": "24 word recovery phrase detected"
+            "phraseDetected": "檢測到 24 個單字的助記詞"
         },
         "importFromFile": {
-            "title": "Restore your wallet using a backup file",
+            "title": "使用備份文件還原您的錢包",
             "body": "輸入備份檔案以恢復您的錢包。備份可以是Stronghold（.stronghold）或Trinity SeedVault（.kdbx）。"
         },
         "importBackupPassword": {
@@ -123,10 +123,10 @@
         "importSuccess": {
             "title": "您已成功恢復備份",
             "body": "您可以建立您的新錢包了。",
-            "seedvaultTitle": "Successfully imported",
-            "seedvaultBody": "Your password is correct, you can now continue.",
-            "strongholdTitle": "Successfully imported",
-            "strongholdBody": "Your password is correct, you can now continue."
+            "seedvaultTitle": "成功匯入",
+            "seedvaultBody": "您的密碼是正確的，您現在可以繼續。",
+            "strongholdTitle": "成功匯入",
+            "strongholdBody": "您的密碼是正確的，您現在可以繼續。"
         },
         "migrate": {
             "title": "轉移您的資金",
@@ -151,19 +151,19 @@
             },
             "security": {
                 "title": "安全性",
-                "description": "Change your password and adjust security-related settings"
+                "description": "更改密碼並調整與安全性相關的設置"
             },
             "advancedSettings": {
                 "title": "進階設定",
-                "description": "Tools and manual settings for technical users"
+                "description": "技術用戶的工具和手動設置"
             },
             "helpAndInfo": {
                 "title": "幫助及資訊",
-                "description": "Find the answer to a question or get help with an issue"
+                "description": "找到問題的答案或獲得問題的幫助"
             },
             "profile": {
                 "title": "用戶設定檔",
-                "description": "Change your profile name or set an avatar"
+                "description": "更改您的設定檔名稱或設置頭像"
             },
             "sync": {
                 "title": "同步帳戶",
@@ -179,27 +179,27 @@
             },
             "currency": {
                 "title": "貨幣",
-                "description": "Adjusts balance conversion and updates chart options"
+                "description": "調整餘額轉換並更新圖表選項"
             },
             "notifications": {
                 "title": "通知",
-                "description": "System notifications for transaction events"
+                "description": "交易記錄系統通知"
             },
             "exportStronghold": {
-                "title": "Export Backup",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
+                "title": "導出備份",
+                "description": "匯出到 Stronghold 文件 - 您的錢包和最新交易歷史記錄的完整加密備份。"
             },
             "appLock": {
                 "title": "自動鎖定",
-                "description": "Time elapsed before your wallet locks and logs you out"
+                "description": "錢包鎖定並登出之前所經過的時間"
             },
             "changePassword": {
                 "title": "修改密碼",
-                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
+                "description": "您的密碼用於保護您的錢包。 您必須使用高強度密碼保護您的資金。"
             },
             "changePincode": {
                 "title": "修改 PIN 碼",
-                "description": "Your PIN keeps your balance and transactions private",
+                "description": "您的 PIN 碼可確保您的餘額和交易不公開",
                 "currentPincode": "目前的 PIN 碼",
                 "newPincode": "新的 PIN 碼",
                 "confirmNewPincode": "確認新的 Pin 碼",
@@ -207,80 +207,80 @@
             },
             "resyncAccounts": {
                 "title": "重新同步帳戶",
-                "description": "Starts a background task to make sure your accounts are up to date."
+                "description": "啟動後台任務，以確保您的帳戶是最新的。"
             },
             "hiddenAccounts": {
-                "title": "Hidden accounts",
-                "description": "Selecting this options will show accounts that were previously hidden."
+                "title": "隱藏帳戶",
+                "description": "選擇此選項將顯示以前隱藏的帳戶。"
             },
             "deleteProfile": {
                 "title": "刪除設定檔",
-                "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
+                "description": "刪除您的整個錢包，設定檔和交易記錄。 確保您已備份。"
             },
             "deepLinks": {
                 "title": "深層連結",
-                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
+                "description": "點擊 iota：//link，自動在 Firefly 中填入交易數據。"
             },
             "developerMode": {
                 "title": "開發者模式",
-                "description": "Connect to testnets and other developer features"
+                "description": "連接到測試網和其他開發人員功能"
             },
             "nodeSettings": {
                 "title": "節點設定",
-                "description": "Select Manual to configure the node settings and connect to your own node"
+                "description": "選擇“手動”以配置節點設置並連接到您自己的節點"
             },
             "configureNodeList": {
                 "title": "選擇一個節點",
-                "description": "Manage the list of nodes your wallet connects to.",
-                "primaryNode": "Primary node",
-                "excludeNode": "Exclude node",
-                "includeNode": "Include node",
-                "viewDetails": "View details",
-                "setAsPrimary": "Set as primary",
+                "description": "管理您的錢包連接到的節點列表。",
+                "primaryNode": "主節點",
+                "excludeNode": "排除節點",
+                "includeNode": "包含節點",
+                "viewDetails": "查看詳情",
+                "setAsPrimary": "設為主要選項",
                 "removeNode": "移除節點",
-                "includeOfficialNodeList": "Include official node list",
-                "noNodes": "There are no nodes, automatic selection will be used instead."
+                "includeOfficialNodeList": "包括官方節點列表",
+                "noNodes": "沒有節點，將自動選擇節點。"
             },
             "proofOfWork": {
                 "title": "工作量證明",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "description": "在您的設備上本地完整工作證明或將資源外包給節點"
             },
             "errorLog": {
                 "title": "錯誤日誌",
-                "description": "View errors to debug an issue"
+                "description": "查看錯誤以解決問題"
             },
             "diagnostics": {
                 "title": "應用診斷",
-                "description": "View system and application information"
+                "description": "查看系統和應用程序訊息"
             },
             "stateExport": {
                 "title": "狀態輸出",
-                "description": "Export your transaction history to a .csv file"
+                "description": "將您的交易記錄導出到 .csv 文件"
             },
             "troubleshoot": {
                 "title": "疑難排解",
-                "description": "Use the troubleshooting wizard to solve common problems"
+                "description": "使用故障排除嚮導解決常見問題"
             },
             "documentation": {
                 "title": "文獻資料",
-                "description": "View the documentation for in depth explanations of how things work"
+                "description": "查看文件以獲取有關工作原理的深入說明"
             },
             "faq": {
                 "title": "常見問題",
-                "title2": "Frequently Asked Questions",
-                "description": "View the FAQs to get help with a common problem or question"
+                "title2": "常見問題",
+                "description": "查看常見問題解答以獲取有關常見問題的幫助"
             },
             "discord": {
                 "title": "Discord",
-                "description": "Get help from the IOTA community on Discord"
+                "description": "從 Discord IOTA 社區獲得幫助"
             },
             "about": {
                 "title": "關於",
                 "description": ""
             },
             "reportAnIssue": {
-                "title": "Report an issue",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
+                "title": "回報問題",
+                "description": "向開發人員回報錯誤。 請檢查以確保此問題尚未回報。"
             }
         },
         "login": {
@@ -299,19 +299,19 @@
                     "noneDetected": "偵測不到裝置"
                 },
                 "strongholdStatus": {
-                    "title": "Wallet Status",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "錢包狀態",
+                    "locked": "Stronghold 被鎖定",
+                    "unlocked": "Stronghold 已解鎖"
                 },
                 "strongholdBackup": {
-                    "title": "Wallet Backup",
+                    "title": "錢包備份",
                     "weeksAgo": "{weeks, plural, one {# 周} other {# 周}} 前"
                 }
             },
             "network": {
                 "networkOperational": "網路運行",
                 "networkDegraded": "網路訊號差",
-                "networkDown": "Network Disconnected",
+                "networkDown": "未連接網路",
                 "status": "狀態",
                 "messagesPerSecond": "每秒訊息量",
                 "confirmationRate": "確認率"
@@ -325,8 +325,8 @@
     "popups": {
         "password": {
             "title": "必須輸入密碼",
-            "subtitle": "Please enter your password to unlock Stronghold",
-            "backup": "Please enter your password to export a backup"
+            "subtitle": "請輸入密碼以解鎖 Stronghold",
+            "backup": "請輸入密碼以導出備份"
         },
         "qr": {
             "title": "您的QR碼"
@@ -345,33 +345,33 @@
             "backupWarning": "如果您遺失了備份以及註記詞，您將無法存取您的資金。",
             "notBackedUp": "沒有備份",
             "notBackedUpDescription": "您還沒有備份您的 Stronghold",
-            "saving": "Saving..."
+            "saving": "儲存中…"
         },
         "deleteAccount": {
-            "title": "Delete {name}?",
-            "body": "This account has no transaction history. It can safely be deleted.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Delete account",
-            "errorTitle": "Unable to delete {name}",
-            "errorBody1": "You cannot delete this account, you must have at least one."
+            "title": "刪除 {name}?",
+            "body": "該帳戶沒有交易記錄。 可以安全地刪除它。",
+            "typePassword": "輸入您的錢包密碼進行確認。",
+            "hideAccount": "刪除帳戶",
+            "errorTitle": "無法刪除 {name}",
+            "errorBody1": "您無法刪除此帳戶，您必須至少擁有一個帳戶。"
         },
         "hideAccount": {
-            "title": "Hide {name}?",
-            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Hide account",
-            "errorTitle": "Unable to hide {name}",
-            "errorBody1": "To hide an account it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
-            "errorBody3": "You cannot hide this account, you must have at least one."
+            "title": "隱藏 {name}？",
+            "body": "您可以稍後通過在“高級設置”中啟用“顯示隱藏的帳戶”來找到此帳戶。",
+            "typePassword": "輸入您的錢包密碼進行確認。",
+            "hideAccount": "隱藏帳號",
+            "errorTitle": "無法隱藏 {name}",
+            "errorBody1": "要隱藏一個帳戶，它必須有 0 餘額。",
+            "errorBody2": "目前您在這個帳號仍擁有 {balance} 餘額。請將這些資金移至另一個帳號後再重試。",
+            "errorBody3": "您無法隱藏此帳戶，您必須至少擁有一個帳戶。"
         },
         "addressHistory": {
-            "title": "{name} address history",
+            "title": "{name} 地址記錄",
             "currentBalance": "目前餘額: {balance}"
         },
         "node": {
             "titleAdd": "增加節點",
-            "titleUpdate": "Update a node",
+            "titleUpdate": "更新節點",
             "titleRemove": "刪除節點",
             "titleDetails": "節點詳細資訊",
             "nodeAddress": "節點地址",
@@ -386,8 +386,8 @@
         },
         "deleteProfile": {
             "title": "刪除設定檔",
-            "confirmation": "是否確定要刪除此檔？此操作無法撤銷。",
-            "typePassword": "Type your password to confirm."
+            "confirmation": "是否確定要刪除此設定檔？此操作無法撤銷。",
+            "typePassword": "請輸入您的密碼以便確認。"
         },
         "diagnostics": {
             "title": "應用診斷",
@@ -401,8 +401,8 @@
             "userPath": "使用者路徑"
         },
         "transaction": {
-            "title": "Confirm transaction",
-            "body": "You’re about to send {amount} to"
+            "title": "確認交易",
+            "body": "您即將發送 {amount} 到"
         }
     },
     "charts": {
@@ -411,7 +411,11 @@
         "portoflio": "資料夾",
         "token": "代幣",
         "accountValue": "賬戶餘額",
-        "accountActivity": "啟用帳戶"
+        "accountActivity": "啟用帳戶",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "繼續",
@@ -443,7 +447,7 @@
         "tryAgain": "重新嘗試",
         "visitDiscord": "探訪 Discord",
         "dragDrop": "拖拽並釋放",
-        "importExtentions": ".kdbx or .stronghold file",
+        "importExtentions": ".kdbx 或 .stronghold 文件",
         "chooseFile": "選擇一個檔案",
         "dropHere": "將檔案拖至此處",
         "syncAll": "同步全部",
@@ -453,19 +457,19 @@
         "enableDeveloperMode": "開啟開發者模式",
         "enableSystemNotifications": "啟用系統通知",
         "exportState": "匯出狀態",
-        "localProofOfWork": "Local proof of work",
+        "localProofOfWork": "本地工作量證明",
         "unlock": "解鎖",
         "updateFirefly": "更新 Firefly",
         "restartNow": "立即重新啟動",
-        "saveBackup": "Save Stronghold backup",
+        "saveBackup": "保存 Stronghold 備份",
         "customizeAcount": "自定義帳號",
         "viewAddressHistory": "檢視地址歷史紀錄",
-        "hideAccount": "Hide account",
-        "showAccount": "Unhide account",
-        "deleteAccount": "Delete account",
+        "hideAccount": "隱藏帳號",
+        "showAccount": "取消隱藏帳戶",
+        "deleteAccount": "刪除帳戶",
         "max": "最大",
         "addNode": "增加節點",
-        "updateNode": "Update node",
+        "updateNode": "更新節點",
         "removeNode": "移除節點",
         "hide": "隱藏",
         "hideOthers": "隱藏其他",
@@ -486,13 +490,13 @@
         "yes": "是",
         "no": "否",
         "reset": "重置",
-        "downloadRecoveryKit": "Save Recovery Kit template",
-        "skipBackup": "Skip file backup",
-        "finishSetup": "Finish setup",
-        "readDocumentation": "Read the documentation",
-        "visitFaq": "Visit FAQ",
-        "showHiddenAccounts": "Show hidden accounts",
-        "confirm": "Confirm"
+        "downloadRecoveryKit": "保存 Recovery Kit 範本",
+        "skipBackup": "跳過文件備份",
+        "finishSetup": "設置完成",
+        "readDocumentation": "閱讀文檔",
+        "visitFaq": "訪問常見問題解答",
+        "showHiddenAccounts": "顯示隱藏的帳戶",
+        "confirm": "確認"
     },
     "general": {
         "password": "密碼",
@@ -505,10 +509,10 @@
         "recentActivity": "近期活動",
         "sent": "已支出",
         "received": "已接收",
-        "sendPayment": "Send Payment",
-        "moveFunds": "Internal Transfer",
+        "sendPayment": "發送付款",
+        "moveFunds": "內部傳送",
         "sendFunds": "發送資金",
-        "sendToAddress": "Send to address",
+        "sendToAddress": "發送到地址",
         "scanQrOrPaste": "掃描QR碼 或 貼上地址",
         "moveFundsBetweenAccounts": "在帳戶間轉移資產",
         "sendTokensToAddress": "發送代幣至另一個地址",
@@ -521,7 +525,7 @@
         "reference": "參照",
         "from": "由",
         "to": "至",
-        "receiveFunds": "Receive Funds",
+        "receiveFunds": "接收資產",
         "myAddress": "我的地址",
         "shareAddress": "分享地址",
         "yourAddress": "您的地址",
@@ -538,20 +542,20 @@
         "appearance": "界面外觀",
         "lightTheme": "淺色主題",
         "darkTheme": "深色主題",
-        "balance": "Balance",
+        "balance": "餘額",
         "accountBalance": "帳號餘額",
         "incoming": "傳入",
         "outgoing": "傳出",
-        "totalIn": "Total in",
-        "totalOut": "Total out",
+        "totalIn": "合計",
+        "totalOut": "總支出",
         "accounts": "帳戶",
-        "myAccounts": "My Accounts",
+        "myAccounts": "我的帳戶",
         "automaticNodeSelection": "自動選取節點",
         "manualNodeSelection": "手動選取節點",
         "profiles": "設定檔",
         "developerProfile": "開發者資料",
         "dev": "開發者",
-        "createAccount": "Create an Account",
+        "createAccount": "建立帳戶",
         "accountName": "帳戶名稱",
         "latestTransactions": "最新交易",
         "transactions": "交易紀錄",
@@ -562,12 +566,12 @@
         "help": "幫助",
         "you": "你",
         "messageId": "訊息編號：",
-        "inputAddress": "Send Address",
+        "inputAddress": "發送至地址",
         "receiveAddress": "收款地址",
         "date": "日期",
         "status": "狀態",
-        "confirmed": "Confirmed",
-        "pending": "Pending",
+        "confirmed": "已確認",
+        "pending": "確認中",
         "noAccounts": "您沒有帳戶，請創建一個。",
         "loadingAccounts": "加載請稍候...",
         "addProfile": "添加個人檔案",
@@ -586,24 +590,25 @@
         "passwordUpdating": "正在更新密碼...",
         "passwordSuccess": "成功更新密碼",
         "passwordFailed": "更新密碼失敗",
-        "exportingStronghold": "導出據點資料...",
-        "exportingStrongholdSuccess": "導出據點資料成功",
-        "exportingStrongholdFailed": "導出據點資料失敗",
+        "syncingAccounts": "Syncing accounts...",
+        "exportingStronghold": "Exporting Stronghold...",
+        "exportingStrongholdSuccess": "Exported Stronghold successfully",
+        "exportingStrongholdFailed": "Exporting Stronghold failed",
         "pinCodeUpdating": "正在更新 PIN 碼...",
         "pinCodeSuccess": "更新 PIN 碼成功",
         "pinCodeFailed": "更 PIN 碼失敗",
         "passwordStrength": "密碼強度",
-        "passwordStrength0": "Bad",
-        "passwordStrength1": "Poor",
-        "passwordStrength2": "Weak",
-        "passwordStrength3": "Average",
-        "passwordStrength4": "Strong",
-        "creatingProfile": "Creating profile, please wait...",
-        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
+        "passwordStrength0": "壞",
+        "passwordStrength1": "差",
+        "passwordStrength2": "弱",
+        "passwordStrength3": "平均",
+        "passwordStrength4": "強",
+        "creatingProfile": "正在創建設定檔，請稍候...",
+        "accountRemoved": "此帳戶是隱藏的。 取消隱藏即可執行傳送。"
     },
     "dates": {
         "today": "今天",
-        "yesterday": "Yesterday",
+        "yesterday": "昨天",
         "daysAgo": "{time, plural, one {# 天} other {# 天}} 前",
         "weeksAgo": "{time, plural, one {# 周} other {# 周}} 前",
         "monthsAgo": "{time, plural, one {# 月} other {# 月}} 前",
@@ -612,8 +617,8 @@
     "notifications": {
         "valueTx": "從 {{account}} 收到 {{value}}",
         "confirmed": "{{account}} 轉出的 {{value}} 已被確認",
-        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
-        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
+        "confirmedInternal": "{{value}} 從 {{senderAccount}} 到 {{receiverAccount}} 已確認",
+        "confirmedInternalNoAccounts": "{{value}} 內部傳送已確認",
         "failed": "{{account}} 轉出的 {{value}} 發生錯誤",
         "downloadingUpdate": "下載更新中",
         "updateReady": "準備更新",
@@ -622,11 +627,11 @@
         "calcMinutesRemaining": "正在計算剩餘時間...",
         "minutesRemaining": "分鐘, 複數, 一 剩下一分鐘 其他 剩下一分鐘",
         "copiedToClipboard": "複製到剪貼簿",
-        "accountsSynchronized": "Account synchronization complete"
+        "accountsSynchronized": "帳戶同步完成"
     },
     "error": {
         "profile": {
-            "length": "您的個人資料名稱不能超過 {length, plural, one {1 character} other {# 字符}}.",
+            "length": "您的設定檔名稱不能超過 {length, plural, one {1 character} other {# 字符}}.",
             "duplicate": "以此為名的設定檔已存在"
         },
         "password": {
@@ -642,7 +647,7 @@
             "dates": "日期很容易被猜到",
             "common": "這是非常常見的密碼.",
             "similar": "這和常用密碼非常類似.",
-            "word": "A single word is easy to guess.",
+            "word": "只有一個單字很容易被猜到",
             "incorrect": "密碼不正確",
             "length": "你的密碼長度不能超過 {length, plural, one {1 character} other {# 字符}}."
         },
@@ -656,10 +661,10 @@
             "empty": "您必須使用最後存在的帳戶，在您創建新的帳戶之前。",
             "notEmpty": "您必須先轉移餘額，才能刪除該帳戶。",
             "duplicate": "相同名稱的帳戶已存在。",
-            "tilde": "A profile name can't start with the '~' character.",
-            "control": "A profile name can't contain a control character.",
-            "startDot": "A profile name can't start with the '.' character.",
-            "chars": "A profile name can't contain the following characters <>:\"/\\|?*"
+            "tilde": "文件名稱不能以“〜”字符開頭。",
+            "control": "文件名稱不能包含控製字符。",
+            "startDot": "檔案名稱不能以 “.” 開頭。",
+            "chars": "檔案名稱不可包含 <>:\"/\\|?* 等字元。"
         },
         "send": {
             "addressLength": "地址應為 {length, plural, one {1 character} other {# 字符}} 長度",
@@ -667,19 +672,20 @@
             "amountNoFloat": "如果單位是“ i”，則不能使用小數位。",
             "amountInvalidFormat": "該金額是無效數字。",
             "amountZero": "金額必須大於0。",
-            "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
-            "wrongAddressFormat": "The address is not correctly formatted.",
-            "insufficientFunds": "This account has insufficient funds.",
-            "noToAccount": "You have not selected an account to send the funds to.",
-            "sendingDust": "You cannot send less than 1 Mi.",
-            "leavingDust": "You cannot leave less than 1 Mi on your address."
+            "wrongAddressPrefix": "地址必須以 {prefix} 為字首。",
+            "wrongAddressFormat": "地址格式不正確。",
+            "invalidAddress": "The address is not valid.",
+            "insufficientFunds": "該帳戶資金不足。",
+            "noToAccount": "您尚未選擇要向其匯款的帳戶。",
+            "sendingDust": "您無法發送少於1 Mi。",
+            "leavingDust": "您的地址不能少於1Mi。"
         },
         "node": {
             "invalid": "請輸入有效的 URL。",
             "https": "需要HTTPS。 設置開發人員資料以使用不安全的HTTP連接。",
             "duplicate": "該節點已被添加。",
-            "unsynced": "The node is not in sync.",
-            "noSynced": "No synced nodes are available."
+            "unsynced": "此節點尚未同步",
+            "noSynced": "沒有可用的同步節點。"
         },
         "global": {
             "generic": "出現錯誤."
@@ -690,8 +696,9 @@
             "mnemonic": "助記詞無效。",
             "seedTooShort": "種子 (Sees) 長度必須為 81個字符長, 目前 {length, plural, one {is 1} other {長度 #}}",
             "seedCharacters": "種子 (Seed) 應僅包含字符 A-Z 或 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
-            "phraseUnrecognizedWord": "恢復短語中無法識別的單詞“ {word}”"
+            "phraseWordCount": "您的恢復助記詞中應該有24個單字 {length, plural, one {is 1} other {目前有 #}}.",
+            "phraseUnrecognizedWord": "恢復短語中無法識別的單詞“ {word}”",
+            "phraseCaseWord": "The word \"{word}\" should be lower case"
         }
     }
 }
