@@ -139,7 +139,7 @@ export const disposeNewProfile = async () => {
     const np = get(newProfile)
     if (np) {
         try {
-            await asyncRemoveStorage()
+            await removeProfileFolder(np.name)
         } catch (err) {
             console.error(err)
         }
