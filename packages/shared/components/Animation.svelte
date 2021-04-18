@@ -11,84 +11,80 @@
 
     const animations = {
         'welcome-desktop': {
-            lightmode: 'onboarding/welcome-desktop.json',
-            darkmode: 'onboarding/welcome-desktop-darkmode.json',
+            lightmode: 'welcome-desktop.json',
+            darkmode: 'welcome-desktop-darkmode.json',
         },
         'appearance-desktop': {
-            lightmode: 'onboarding/appearance-desktop.json',
-            darkmode: 'onboarding/appearance-desktop-darkmode.json',
+            lightmode: 'appearance-desktop.json',
+            darkmode: 'appearance-desktop-darkmode.json',
         },
         'setup-desktop': {
-            lightmode: 'onboarding/setup-desktop.json',
-            darkmode: 'onboarding/setup-desktop-darkmode.json',
+            lightmode: 'setup-desktop.json',
+            darkmode: 'setup-desktop-darkmode.json',
         },
         'secure-desktop': {
-            lightmode: 'onboarding/secure-desktop.json',
-            darkmode: 'onboarding/secure-desktop-darkmode.json',
+            lightmode: 'secure-desktop.json',
+            darkmode: 'secure-desktop-darkmode.json',
         },
         'password-desktop': {
-            lightmode: 'onboarding/password-desktop.json',
-            darkmode: 'onboarding/password-desktop-darkmode.json',
+            lightmode: 'password-desktop.json',
+            darkmode: 'password-desktop-darkmode.json',
         },
         'protect-desktop': {
-            lightmode: 'onboarding/protect-desktop.json',
-            darkmode: 'onboarding/protect-desktop-darkmode.json',
+            lightmode: 'protect-desktop.json',
+            darkmode: 'protect-desktop-darkmode.json',
         },
         'pin-desktop': {
-            lightmode: 'onboarding/pin-desktop.json',
-            darkmode: 'onboarding/pin-desktop-darkmode.json',
+            lightmode: 'pin-desktop.json',
+            darkmode: 'pin-desktop-darkmode.json',
         },
         'repeat-pin-desktop': {
-            lightmode: 'onboarding/repeat-pin-desktop.json',
-            darkmode: 'onboarding/repeat-pin-desktop-darkmode.json',
+            lightmode: 'repeat-pin-desktop.json',
+            darkmode: 'repeat-pin-desktop-darkmode.json',
         },
         'backup-desktop': {
-            lightmode: 'onboarding/backup-desktop.json',
-            darkmode: 'onboarding/backup-desktop-darkmode.json',
+            lightmode: 'backup-desktop.json',
+            darkmode: 'backup-desktop-darkmode.json',
         },
         'backup-recovery-phrase-desktop': {
-            lightmode: 'onboarding/backup-recovery-phrase-desktop.json',
-            darkmode: 'onboarding/backup-recovery-phrase-desktop-darkmode.json',
+            lightmode: 'backup-recovery-phrase-desktop.json',
+            darkmode: 'backup-recovery-phrase-desktop-darkmode.json',
         },
         'import-desktop': {
-            lightmode: 'onboarding/import-desktop.json',
-            darkmode: 'onboarding/import-desktop-darkmode.json',
+            lightmode: 'import-desktop.json',
+            darkmode: 'import-desktop-darkmode.json',
         },
         'import-from-text-desktop': {
-            lightmode: 'onboarding/import-from-text-desktop.json',
-            darkmode: 'onboarding/import-from-text-desktop-darkmode.json',
+            lightmode: 'import-from-text-desktop.json',
+            darkmode: 'import-from-text-desktop-darkmode.json',
         },
         'import-from-file-desktop': {
-            lightmode: 'onboarding/import-from-file-desktop.json',
-            darkmode: 'onboarding/import-from-file-desktop-darkmode.json',
+            lightmode: 'import-from-file-desktop.json',
+            darkmode: 'import-from-file-desktop-darkmode.json',
         },
         'import-from-file-password-desktop': {
-            lightmode: 'onboarding/import-from-file-password-desktop.json',
-            darkmode: 'onboarding/import-from-file-password-desktop-darkmode.json',
+            lightmode: 'import-from-file-password-desktop.json',
+            darkmode: 'import-from-file-password-desktop-darkmode.json',
         },
         'import-from-text-success-desktop': {
-            lightmode: 'onboarding/import-from-text-success-desktop.json',
-            darkmode: 'onboarding/import-from-text-success-desktop-darkmode.json',
+            lightmode: 'import-from-text-success-desktop.json',
+            darkmode: 'import-from-text-success-desktop-darkmode.json',
         },
         'import-from-file-success-desktop': {
-            lightmode: 'onboarding/import-from-file-success-desktop.json',
-            darkmode: 'onboarding/import-from-file-success-desktop-darkmode.json',
+            lightmode: 'import-from-file-success-desktop.json',
+            darkmode: 'import-from-file-success-desktop-darkmode.json',
         },
         'congratulations-desktop': {
-            lightmode: 'onboarding/congratulations-desktop.json',
-            darkmode: 'onboarding/congratulations-desktop-darkmode.json',
+            lightmode: 'congratulations-desktop.json',
+            darkmode: 'congratulations-desktop-darkmode.json',
         },
         'migrate-desktop': {
-            lightmode: 'onboarding/migrate-desktop.json',
-            darkmode: 'onboarding/migrate-desktop-darkmode.json',
-        },
-        'migrate-failed-desktop': {
-            lightmode: 'onboarding/migrate-failed-desktop.json',
-            darkmode: 'onboarding/migrate-failed-desktop-darkmode.json',
+            lightmode: 'migrate-desktop.json',
+            darkmode: 'migrate-desktop-darkmode.json',
         },
         'balance-desktop': {
-            lightmode: 'onboarding/balance-desktop.json',
-            darkmode: 'onboarding/balance-desktop-darkmode.json',
+            lightmode: 'balance-desktop.json',
+            darkmode: 'balance-desktop-darkmode.json',
         },
     }
 

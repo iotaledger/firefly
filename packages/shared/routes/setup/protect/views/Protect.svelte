@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
-    import { OnboardingLayout, Illustration, Text, Button } from 'shared/components'
+    import { OnboardingLayout, Text, Button } from 'shared/components'
     export let locale
     export let mobile
 
@@ -30,7 +30,7 @@
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-end items-center">
-            <Illustration illustration="protect-desktop" height="100%" width="auto" classes="h-full object-cover object-left" />
+            <!-- <Illustration illustration="protect-desktop" height="100%" width="auto" classes="h-full object-cover object-left" /> -->
         </div>
     </OnboardingLayout>
 {/if}
