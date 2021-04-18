@@ -28,6 +28,7 @@
         updateBalanceOverview,
         wallet,
         WalletAccount,
+        processMigratedTransactions
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, Writable } from 'svelte/store'
@@ -142,6 +143,7 @@
 
                             if (completeCount === accountsResponse.payload.length) {
                                 accounts.update((accounts) => [...accounts, ...newAccounts].sort((a, b) => a.index - b.index))
+                                processMigratedTransactions(payloadAccount.id, payloadAccount.messages, payloadAccount.addresses)
                                 updateBalanceOverview(totalBalance.balance, totalBalance.incoming, totalBalance.outgoing)
                                 _continue()
                             }

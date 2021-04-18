@@ -1299,7 +1299,7 @@ export const processMigratedTransactions = (accountId: string, messages: Message
         addresses.forEach((address) => {
             const outputs = address.outputs;
 
-            if (outputs.some((output) => output.messageId === '0'.repeat(64))) {
+            if (Object.values(outputs).some((output) => output.messageId === '0'.repeat(64))) {
                 updateProfile(
                     'migratedTransactions',
                     []
