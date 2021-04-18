@@ -611,7 +611,6 @@
         "sentFrom": "Sent from {account}",
         "receiving": "Receiving",
         "sending": "Sending"
-
     },
     "dates": {
         "today": "Today",
