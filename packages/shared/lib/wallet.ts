@@ -489,16 +489,14 @@ export const initialiseListeners = () => {
                     );
                 }
 
-                if (!get(isSyncing)) {
-                    // Update account with new message
-                    saveNewMessage(response.payload.accountId, response.payload.message);
+                // Update account with new message
+                saveNewMessage(response.payload.accountId, response.payload.message);
 
-                    const notificationMessage = localize('notifications.valueTx')
-                        .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
-                        .replace('{{account}}', account.alias);
+                const notificationMessage = localize('notifications.valueTx')
+                    .replace('{{value}}', formatUnit(message.payload.data.essence.data.value))
+                    .replace('{{account}}', account.alias);
 
-                    showSystemNotification({ type: "info", message: notificationMessage, contextData: { type: "valueTx", accountId: account.id } });
-                }
+                showSystemNotification({ type: "info", message: notificationMessage, contextData: { type: "valueTx", accountId: account.id } });
             } else if (message.payload.type === 'Milestone') {
                 // Update account with new message
                 saveNewMessage(response.payload.accountId, response.payload.message);
