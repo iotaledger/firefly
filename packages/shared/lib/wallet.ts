@@ -623,6 +623,7 @@ export const updateAccountAfterBalanceChange = (
                 const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD;
 
                 let updatedAddress = false
+                let maxKeyIndex = 0
                 const updatedAccount = Object.assign<WalletAccount, Partial<WalletAccount>>(storedAccount, {
                     rawIotaBalance,
                     balance: formatUnit(rawIotaBalance, 2),
@@ -637,6 +638,8 @@ export const updateAccountAfterBalanceChange = (
                             updatedAddress = true
                         }
 
+                        maxKeyIndex = Math.max(maxKeyIndex, _address.keyIndex)
+
                         return _address
                     })
                 })
@@ -647,7 +650,7 @@ export const updateAccountAfterBalanceChange = (
                     updatedAccount.addresses.push({
                         address,
                         balance: spentBalance + receivedBalance,
-                        keyIndex: updatedAccount.addresses.length,
+                        keyIndex: maxKeyIndex + 1,
                         internal: false,
                         outputs: []
                     })
