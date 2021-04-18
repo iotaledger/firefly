@@ -26,16 +26,9 @@
 {:else}
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content">
-            {#if $importType === ImportType.Seed}
-                <Text type="h2" classes="mb-5">{locale('views.importFromText.seed.title')}</Text>
-                <Text type="p" secondary classes="mb-8">{locale('views.importFromText.seed.body')}</Text>
-                <Text type="h5" classes="mb-3">{locale('views.importFromText.seed.enterSeed')}</Text>
-            {:else if $importType === ImportType.Mnemonic}
-                <Text type="h2" classes="mb-5">{locale('views.importFromText.mnemonic.title')}</Text>
-                <Text type="p" secondary classes="mb-4">{locale('views.importFromText.mnemonic.body1')}</Text>
-                <Text type="p" secondary classes="mb-8">{locale('views.importFromText.mnemonic.body2')}</Text>
-                <Text type="h5" classes="mb-3">{locale('views.importFromText.mnemonic.enterMnemonic')}</Text>
-            {/if}
+            <Text type="h2" classes="mb-5">{locale(`views.importFromText.${$importType}.title`)}</Text>
+            <Text type="p" secondary classes="mb-8">{locale(`views.importFromText.${$importType}.body`)}</Text>
+            <Text type="h5" classes="mb-3">{locale(`views.importFromText.${$importType}.enter`)}</Text>
             {#if $importType === ImportType.Seed}
                 <!-- TODO: remove this when enabling seed support -->
                 <Text type="p" error secondary classes="mb-3">Seeds are not currently supported.</Text>
