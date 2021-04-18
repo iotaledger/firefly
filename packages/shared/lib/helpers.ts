@@ -1,4 +1,5 @@
 import { writable, Writable } from 'svelte/store'
+import type { Payload } from './typings/message'
 
 /**
  * Update application path
@@ -53,19 +54,19 @@ export const getTrimmedLength = (name: string | undefined) => {
  * @param name The name to validate
  * @returns 
  */
- export const validateFilenameChars = (name: string | undefined) => {
+export const validateFilenameChars = (name: string | undefined) => {
     if (!name) {
         return
     }
     if (name.startsWith("~")) {
         return 'tilde'
-    } 
+    }
     if (/[\u0000-\u001f\u0080-\u009f]/g.test(name)) {
         return 'control'
-    } 
+    }
     if (/^\.\./.test(name)) {
-		return 'startDot';
-	} 
+        return 'startDot';
+    }
     if (/[<>:"/\\|?*]/g.test(name)) {
         return 'chars'
     }
@@ -134,16 +135,16 @@ export const diffDates = (firstDate: Date, secondDate: Date) => {
 
     if (years > 0) {
         return { unit: 'yearsAgo', value: years }
-    } 
+    }
     if (months > 0) {
         return { unit: 'monthsAgo', value: months }
-    } 
+    }
     if (weeks > 0) {
         return { unit: 'weeksAgo', value: weeks }
-    } 
+    }
     if (days > 0) {
         return { unit: 'daysAgo', value: days }
-    } 
+    }
 
     if (firstDate.getDate() !== secondDate.getDate()) {
         return { unit: 'yesterday' }
@@ -216,6 +217,22 @@ export const stripTrailingSlash = (str) => {
  * @param str The text to strip the values from
  * @returns The stripped text
  */
- export const stripSpaces = (str) => {
+export const stripSpaces = (str) => {
     return str ? str.replace(/ /g, '') : ''
+}
+
+/**
+ * Get the sender address from a payload.
+ */
+export const sendAddressFromPayload = (payload: Payload): string => {
+    return payload?.data?.essence?.data?.inputs?.find((input) => /utxo/i.test(input?.type))?.data?.metadata?.address ?? null
+}
+
+/**
+ * Get the receiver addresses from the payload.
+ */
+export const receiverAddressesFromPayload = (payload: Payload): string[] => {
+    return payload?.data?.essence?.data?.outputs
+        ?.filter((output) => output?.data?.remainder === false)
+        ?.map((output) => output?.data?.address) ?? []
 }
