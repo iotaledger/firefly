@@ -392,6 +392,19 @@ export const asyncSyncAccounts = (addressIndex?, gapLimit?, accountDiscoveryThre
     })
 }
 
+export const asyncGetNodeInfo = (accountId, url) => {
+    return new Promise<NodeInfo>((resolve, reject) => {
+        api.getNodeInfo(accountId, url, {
+            onSuccess(response) {
+                resolve(response.payload)
+            },
+            onError(err) {
+                reject(err)
+            },
+        })
+    })
+}
+
 /**
  * Initialises event listeners from wallet library
  *

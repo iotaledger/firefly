@@ -12,11 +12,11 @@
 
     let darkModeEnabled = $appSettings.darkMode
     let notificationsChecked = $appSettings.notifications
-    let showNetworkStatus = $activeProfile?.settings.showNetworkStatus
+    let hideNetworkStatistics = $activeProfile?.settings.hideNetworkStatistics
 
     $: $appSettings.darkMode = darkModeEnabled
     $: $appSettings.notifications = notificationsChecked
-    $: updateProfile('settings.showNetworkStatus', showNetworkStatus)
+    $: updateProfile('settings.hideNetworkStatistics', hideNetworkStatistics)
 
     const handleCurrencySelect = (item) => {
         updateProfile('settings.currency', item.value)
@@ -79,7 +79,7 @@
         <section id="networkStatus" class="w-3/4">
             <Text type="h4" classes="mb-3">{locale('views.settings.networkStatus.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.networkStatus.description')}</Text>
-            <Checkbox label={locale('actions.showNetworkStatus')} bind:checked={showNetworkStatus} />
+            <Checkbox label={locale('actions.hideNetworkStatistics')} bind:checked={hideNetworkStatistics} />
         </section>
     {/if}
 </div>

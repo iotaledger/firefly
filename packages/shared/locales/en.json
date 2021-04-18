@@ -259,7 +259,7 @@
             },
             "networkStatus": {
                 "title": "Network status",
-                "description": "Show the network status indicator"
+                "description": "Displays the status of the node you are currently connected to."
             },
             "exportStronghold": {
                 "title": "Export Backup",
@@ -595,7 +595,7 @@
         "viewStatus": "View status",
         "showHiddenAccounts": "Show hidden accounts",
         "confirm": "Confirm",
-        "showNetworkStatus": "Show network status indicator",
+        "hideNetworkStatistics": "Hide network statistics",
         "findBalances": "Find balances",
         "searchBalances": "Search for balances",
         "searchAgain": "Search again",

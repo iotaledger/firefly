@@ -58,11 +58,9 @@
             <Icon icon="wallet" />
         </button>
         <span class="flex flex-col items-center">
-            {#if $activeProfile?.settings.showNetworkStatus}
-                <button class="mb-7 health-status" on:click={() => (showNetwork = true)}>
-                    <Icon icon="network" classes="text-{NETWORK_HEALTH_COLORS[healthStatus]}-500" />
-                </button>
-            {/if}
+            <button class="mb-7 health-status" on:click={() => (showNetwork = true)}>
+                <Icon icon="network" classes="text-{NETWORK_HEALTH_COLORS[healthStatus]}-500" />
+            </button>
             <button
                 class="w-8 h-8 flex items-center justify-center rounded-full bg-{profileColor}-500 leading-100"
                 on:click={() => (showProfile = true)}>

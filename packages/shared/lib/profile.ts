@@ -41,7 +41,7 @@ export interface UserSettings {
     lockScreenTimeout: number
     showHiddenAccounts?: boolean
     chartSelectors: ChartSelectors
-    showNetworkStatus?: boolean
+    hideNetworkStatistics?: boolean
 }
 
 export const activeProfileId = writable<string | null>(null)

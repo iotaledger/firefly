@@ -1,7 +1,9 @@
 <script lang="typescript">
-    import { onDestroy } from 'svelte'
-    import { Text, Modal, HR } from 'shared/components'
+    import { HR, Modal, Text } from 'shared/components'
     import { networkStatus } from 'shared/lib/networkStatus'
+    import { activeProfile } from 'shared/lib/profile'
+    import { onDestroy } from 'svelte'
+
     export let isActive
     export let locale
     let healthStatus = 2
@@ -33,14 +35,16 @@
         <div class="px-7 pb-5 text-13 text-{NETWORK_HEALTH_COLORS[healthStatus]}-500">
             {locale(`views.dashboard.network.${healthStatusText}`)}
         </div>
-        <HR />
-        <div class="flex flex-row justify-between px-7 pt-5 pb-2">
-            <span class="text-12 text-gray-800 dark:text-white">{locale('views.dashboard.network.messagesPerSecond')}</span>
-            <span class="text-12 text-gray-500">{`${Math.round(messagesPerSecond)}`}</span>
-        </div>
-        <div class="flex flex-row justify-between px-7 pb-5">
-            <span class="text-12 text-gray-800 dark:text-white">{locale('views.dashboard.network.referencedRate')}</span>
-            <span class="text-12 text-gray-500">{`${Math.round(referencedRate)}%`}</span>
-        </div>
+        {#if !$activeProfile?.settings.hideNetworkStatistics}
+            <HR />
+            <div class="flex flex-row justify-between px-7 pt-5 pb-2">
+                <span class="text-12 text-gray-800 dark:text-white">{locale('views.dashboard.network.messagesPerSecond')}</span>
+                <span class="text-12 text-gray-500">{`${Math.round(messagesPerSecond)}`}</span>
+            </div>
+            <div class="flex flex-row justify-between px-7 pb-5">
+                <span class="text-12 text-gray-800 dark:text-white">{locale('views.dashboard.network.referencedRate')}</span>
+                <span class="text-12 text-gray-500">{`${Math.round(referencedRate)}%`}</span>
+            </div>
+        {/if}
     </network-indicator-content>
 </Modal>
