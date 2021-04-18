@@ -1,6 +1,6 @@
 <script lang="typescript">
+    import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { createEventDispatcher } from 'svelte'
-    import { OnboardingLayout, Illustration, Text, Button } from 'shared/components'
 
     export let locale
     export let mobile
@@ -34,8 +34,8 @@
             <Button ghost classes="flex-1" onClick={() => console.log('foo')}>{locale('actions.checkAgain')}</Button>
             <Button classes="flex-1" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex p-16 bg-pastel-yellow dark:bg-gray-900">
-            <Illustration width="100%" illustration="balance-desktop" classes="h-full object-cover object-left" />
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-yellow dark:bg-gray-900">
+            <Animation animation="balance-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

@@ -1,6 +1,7 @@
 <script lang="typescript">
+    import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { createEventDispatcher } from 'svelte'
-    import { OnboardingLayout, Illustration, Text, Button } from 'shared/components'
+
     export let locale
     export let mobile
 
@@ -32,8 +33,8 @@
                 <Text type="p" secondary smaller>{locale('general.uploadSeedvaultOrStronghold')}</Text>
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-end items-center bg-purple-green dark:bg-gray-900">
-            <Illustration width="100%" height="auto" illustration="import-desktop" />
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-purple-green dark:bg-gray-900">
+            <Animation animation="import-desktop" />
         </div>
     </OnboardingLayout>
 {/if}
