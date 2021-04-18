@@ -102,6 +102,11 @@
 <style type="text/scss">
     textarea {
         min-height: 200px;
+
+        &:disabled {
+           @apply pointer-events-none;
+           @apply opacity-50;
+        }
     }
 </style>
 
