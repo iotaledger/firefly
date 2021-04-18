@@ -622,7 +622,8 @@ export const updateAccountAfterBalanceChange = (
 
                 const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD;
 
-                return Object.assign<WalletAccount, Partial<WalletAccount>>(storedAccount, {
+                let updatedAddress = false
+                const updatedAccount = Object.assign<WalletAccount, Partial<WalletAccount>>(storedAccount, {
                     rawIotaBalance,
                     balance: formatUnit(rawIotaBalance, 2),
                     balanceEquiv: `${convertToFiat(
@@ -633,11 +634,26 @@ export const updateAccountAfterBalanceChange = (
                     addresses: storedAccount.addresses.map((_address: Address) => {
                         if (_address.address === address) {
                             _address.balance += receivedBalance - spentBalance
+                            updatedAddress = true
                         }
 
                         return _address
                     })
                 })
+
+                // The address could not be found to update, so it's one we don't know about
+                // create a new address to store the details
+                if (!updatedAddress) {
+                    updatedAccount.addresses.push({
+                        address,
+                        balance: spentBalance + receivedBalance,
+                        keyIndex: updatedAccount.addresses.length,
+                        internal: false,
+                        outputs: []
+                    })
+                }
+
+                return updatedAccount
             }
 
             return storedAccount;
