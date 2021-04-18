@@ -45,7 +45,7 @@
         "password": {
             "title": "Passwort erstellen",
             "body1": "Du benötigst ein sicheres Passwort, um dein Guthaben zu schützen. Verwende eine Kombination von Wörtern und vermeide geläufige Phrasen, Namen oder Daten.",
-            "body2": "Es wird empfohlen, das Password im Wiederherstellungs-Dokument zu notieren."
+            "body2": "Es wird empfohlen, das Passwort im Wiederherstellungs-Dokument zu notieren."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -89,7 +89,7 @@
             "body2": "Gründe warum digitale Backups wichtig sind:",
             "reason1": "Wiederherstellen deiner Wallet ohne Eingabe der Wiederherstellungsphrase",
             "reason2": "Importieren deiner Wallet auf anderen Geräten",
-            "reason3": "Wiederherstellen des gesamten Transaktionsverlauf"
+            "reason3": "Wiederherstellen des gesamten Transaktionsverlaufs"
         },
         "recoveryPhraseSaved": {
             "title": "Erfolgreich gesichert",
@@ -209,6 +209,10 @@
                 "title": "Konten neu synchronisieren",
                 "description": "Startet einen Prozess im Hintergrund, um sicherzustellen, dass deine Konten auf dem aktuellsten Stand sind."
             },
+            "hiddenAccounts": {
+                "title": "Ausgeblendete Konten",
+                "description": "Bei der Wahl dieser Optionen werden Konten angezeigt, die zuvor ausgeblendet wurden."
+            },
             "deleteProfile": {
                 "title": "Profil löschen",
                 "description": "Löscht deine gesamte Wallet, inklusive Profil und Transaktionsverlauf. Stelle sicher, dass du ein Backup besitzt."
@@ -223,11 +227,19 @@
             },
             "nodeSettings": {
                 "title": "Node-Einstellungen",
-                "description": "Wähle Manuell, um aus der Node-Liste zu wählen oder verbinde dich mit deinem eigenen Node"
+                "description": "Wähle Manuell, um die Node-Einstellungen zu konfigurieren und dich mit deinem eigenen Node zu verbinden"
             },
             "configureNodeList": {
                 "title": "Wähle einen Node aus",
-                "description": ""
+                "description": "Verwalte die Liste der Nodes, zu denen sich deine Wallet verbindet.",
+                "primaryNode": "Primärer Node",
+                "excludeNode": "Node ausschließen",
+                "includeNode": "Node einbeziehen",
+                "viewDetails": "Details anzeigen",
+                "setAsPrimary": "Als Primäre festlegen",
+                "removeNode": "Node entfernen",
+                "includeOfficialNodeList": "Offizielle Node-Liste einbeziehen",
+                "noNodes": "Es sind keine Nodes vorhanden, automatische Auswahl wird stattdessen verwendet."
             },
             "proofOfWork": {
                 "title": "Proof of Work",
@@ -313,8 +325,8 @@
     "popups": {
         "password": {
             "title": "Passwort erforderlich",
-            "subtitle": "Please enter your password to unlock Stronghold",
-            "backup": "Please enter your password to export a backup"
+            "subtitle": "Gib bitte dein Wallet-Passwort ein, um Stronghold zu entsperren",
+            "backup": "Gib bitte dein Wallet-Passwort ein, um das Backup zu exportieren"
         },
         "qr": {
             "title": "Dein QR Code"
@@ -332,17 +344,26 @@
             "backupDescription": "Es ist wichtig, regelmäßig Backups zu erstellen, um sicherzugehen, dass du eine Kopie deiner Konten und Transaktionen hast.",
             "backupWarning": "Wenn du dein Backup und die Wiederherstellungsphrase verlierst, verlierst du Zugriff auf dein Guthaben.",
             "notBackedUp": "Noch kein Backup erstellt",
-            "notBackedUpDescription": "Du hast noch kein Backup für Stronghold erstellt"
+            "notBackedUpDescription": "Du hast noch kein Stronghold-Backup erstellt",
+            "saving": "Speichern..."
         },
         "deleteAccount": {
-            "title": "{name} entfernen?",
-            "body": "Du kannst dieses Konto später wieder hinzufügen, jedoch könntest du deinen Transaktionsverlauf verlieren.",
-            "typePassword": "Type your password to confirm.",
-            "deleteAccount": "Konto entfernen",
-            "errorTitle": "{name} kann nicht entfernt werden",
-            "errorBody1": "Um ein Konto zu entfernen, muss es ein Guthaben von 0 aufweisen.",
+            "title": "{name} löschen?",
+            "body": "Dieses Konto hat keine Transaktionshistorie. Es kann gefahrlos entfernt werden.",
+            "typePassword": "Gib dein Wallet-Passwort zur Bestätigung ein.",
+            "hideAccount": "Konto löschen",
+            "errorTitle": "{name} kann nicht gelöscht werden",
+            "errorBody1": "Du kannst dieses Konto nicht löschen. Es muss mindestes eins vorhanden sein."
+        },
+        "hideAccount": {
+            "title": "{name} ausblenden?",
+            "body": "Du kannst dieses Konto später wiederfinden, indem du \"ausgeblendete Konten anzeigen\" in den erweiterten Einstellungen aktivierst.",
+            "typePassword": "Gib dein Wallet-Passwort zur Bestätigung ein.",
+            "hideAccount": "Konto ausblenden",
+            "errorTitle": "{name} kann nicht ausgeblendet werden",
+            "errorBody1": "Um ein Konto zu ausblenden, muss es ein Guthaben von 0 aufweisen.",
             "errorBody2": "Du hast derzeit {balance} auf deinem Konto. Bitte verschiebe dein Guthaben auf ein anderes Konto und versuche es erneut.",
-            "errorBody3": "Du kannst dieses Konto nicht löschen. Es muss mindestes eins vorhanden sein."
+            "errorBody3": "Du kannst dieses Konto nicht ausblenden. Es muss mindestes eins vorhanden sein."
         },
         "addressHistory": {
             "title": "{name} Adressverlauf",
@@ -350,6 +371,7 @@
         },
         "node": {
             "titleAdd": "Node hinzufügen",
+            "titleUpdate": "Node aktualisieren",
             "titleRemove": "Node entfernen",
             "titleDetails": "Node Details",
             "nodeAddress": "Node Adresse",
@@ -365,7 +387,7 @@
         "deleteProfile": {
             "title": "Profil löschen",
             "confirmation": "Willst du dieses Profil wirklich löschen? Dies kann nicht rückgängig gemacht werden.",
-            "typePassword": "Type your password to confirm."
+            "typePassword": "Gib zur Bestätigung dein Passwort ein."
         },
         "diagnostics": {
             "title": "Diagnose",
@@ -377,6 +399,10 @@
             "totalMem": "Gesamtspeicher",
             "freeMem": "Freier Speicher",
             "userPath": "Benutzerpfad"
+        },
+        "transaction": {
+            "title": "Transaktion bestätigen",
+            "body": "Du bist dabei {amount} zu senden an"
         }
     },
     "charts": {
@@ -385,7 +411,11 @@
         "portoflio": "Portfolio",
         "token": "Kurs",
         "accountValue": "Kontowert",
-        "accountActivity": "Kontoaktivität"
+        "accountActivity": "Kontoaktivität",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "Weiter",
@@ -427,16 +457,19 @@
         "enableDeveloperMode": "Entwicklermodus aktivieren",
         "enableSystemNotifications": "Aktiviere Systembenachrichtigungen",
         "exportState": "Status exportieren",
-        "outsourceProofOfWork": "Proof of work auslagern",
+        "localProofOfWork": "Lokales Proof-of-Work",
         "unlock": "Entsperren",
         "updateFirefly": "Firefly aktualisieren",
         "restartNow": "Jetzt Neustarten",
         "saveBackup": "Stronghold-Backup speichern",
         "customizeAcount": "Konto anpassen",
         "viewAddressHistory": "Adressverlauf anzeigen",
-        "deleteAccount": "Konto entfernen",
+        "hideAccount": "Konto ausblenden",
+        "showAccount": "Konto einblenden",
+        "deleteAccount": "Konto löschen",
         "max": "Maximal",
         "addNode": "Node hinzufügen",
+        "updateNode": "Node aktualisieren",
         "removeNode": "Node entfernen",
         "hide": "Ausblenden",
         "hideOthers": "Andere ausblenden",
@@ -453,7 +486,7 @@
         "checkForUpdates": "Suche nach Updates",
         "reportAnIssue": "Ein Problem melden",
         "clear": "Löschen",
-        "hideDetails": "Details Ausblenden",
+        "hideDetails": "Details ausblenden",
         "yes": "Ja",
         "no": "Nein",
         "reset": "Zurücksetzen",
@@ -461,7 +494,9 @@
         "skipBackup": "Backup überspringen",
         "finishSetup": "Einrichtung abschließen",
         "readDocumentation": "Lese die Dokumentation",
-        "visitFaq": "Gehe zu den FAQs"
+        "visitFaq": "Gehe zu den FAQs",
+        "showHiddenAccounts": "Versteckte Konten anzeigen",
+        "confirm": "Bestätigen"
     },
     "general": {
         "password": "Passwort",
@@ -491,7 +526,7 @@
         "from": "Von",
         "to": "An",
         "receiveFunds": "Guthaben empfangen",
-        "myAddress": "Meine Wallet Adresse",
+        "myAddress": "Meine Adresse",
         "shareAddress": "Adresse teilen",
         "yourAddress": "Deine Adresse",
         "generateNewAddress": "Neue Adresse erstellen",
@@ -507,7 +542,7 @@
         "appearance": "Erscheinungsbild",
         "lightTheme": "Heller Modus",
         "darkTheme": "Dunkler Modus",
-        "totalBalance": "Gesamtguthaben",
+        "balance": "Guthaben",
         "accountBalance": "Kontostand",
         "incoming": "Eingehend",
         "outgoing": "Ausgehend",
@@ -525,20 +560,20 @@
         "latestTransactions": "Neueste Transaktionen",
         "transactions": "Transaktionen",
         "security": "Sicherheit",
-        "accountAddress": "Konto Adresse",
+        "accountAddress": "Kontoadresse",
         "nodes": "Nodes",
         "wallet": "Wallet",
         "help": "Hilfe",
         "you": "Du",
         "messageId": "Message ID",
         "inputAddress": "Absendeadresse",
-        "receiveAddress": "Empfängeradresse",
+        "receiveAddress": "Empfangsadresse",
         "date": "Datum",
         "status": "Status",
         "confirmed": "Bestätigt",
         "pending": "Ausstehend",
         "noAccounts": "Du hast keine Konten. Bitte erstelle eines.",
-        "loadingAccounts": "Lädt, bitte warten...",
+        "loadingAccounts": "Wird geladen, bitte warten...",
         "addProfile": "Profil hinzufügen",
         "noRecentHistory": "Kein aktueller Verlauf",
         "transferSyncing": "Synchronisiere Konto",
@@ -555,6 +590,7 @@
         "passwordUpdating": "Passwort aktualisieren...",
         "passwordSuccess": "Passwort erfolgreich aktualisiert",
         "passwordFailed": "Passwortänderung fehlgeschlagen",
+        "syncingAccounts": "Synchronisiere Konten...",
         "exportingStronghold": "Exportiere Stronghold...",
         "exportingStrongholdSuccess": "Exportieren von Stronghold erfolgreich",
         "exportingStrongholdFailed": "Exportieren von Stronghold fehlgeschlagen",
@@ -567,7 +603,8 @@
         "passwordStrength2": "Schwach",
         "passwordStrength3": "Durchschnittlich",
         "passwordStrength4": "Stark",
-        "creatingProfile": "Erstelle Profil, bitte warten..."
+        "creatingProfile": "Erstelle Profil, bitte warten...",
+        "accountRemoved": "Dieses Konto ist ausgeblendet. Blende es wieder ein, um Überweisungen auszuführen."
     },
     "dates": {
         "today": "Heute",
@@ -581,10 +618,11 @@
         "valueTx": "Du hast {{value}} in {{account}} erhalten",
         "confirmed": "Eine ausgehende Transaktion über {{value}} von {{account}} wurde bestätigt",
         "confirmedInternal": "{{value}} von {{senderAccount}} an {{receiverAccount}} wurde bestätigt",
+        "confirmedInternalNoAccounts": "{{value}} interner Transfer bestätigt",
         "failed": "Ausgehende Transaktion {{value}} von {{account}} ist fehlgeschlagen",
-        "downloadingUpdate": "Update lädt herunter",
+        "downloadingUpdate": "Update wird heruntergeladen",
         "updateReady": "Update bereit",
-        "updateError": "Während des Updates ist ein Fehler aufgetreten. Versuche es erneut",
+        "updateError": "Während des Updates ist ein Fehler aufgetreten. Bitte versuche es erneut",
         "restartInstall": "Neustarten zum installieren",
         "calcMinutesRemaining": "Berechne verbleibende Zeit...",
         "minutesRemaining": "{minutes, plural, one {1 Minute verbleibend} other {# Minuten verbleibend}}",
@@ -636,16 +674,17 @@
             "amountZero": "Betrag muss größer als 0 sein.",
             "wrongAddressPrefix": "Adressen beginnen mit dem Präfix {prefix}.",
             "wrongAddressFormat": "Die Adresse ist nicht korrekt formatiert.",
+            "invalidAddress": "Die Adresse ist ungültig.",
             "insufficientFunds": "Dieses Konto hat nicht genug Guthaben.",
             "noToAccount": "Sie haben kein Konto ausgewählt, auf welches das Guthaben gesendet werden soll.",
             "sendingDust": "Du kannst nicht weniger als 1 Mi senden.",
             "leavingDust": "Du kannst nicht weniger als 1 Mi auf deiner Adresse hinterlassen."
         },
         "node": {
-            "invalid": "Gebe eine gültige URL ein.",
+            "invalid": "Gib eine gültige URL ein.",
             "https": "HTTPS wird benötigt. Benutze ein Entwicklerprofil um ungesicherte HTTP Verbindungen zu nutzen.",
             "duplicate": "Dieser Node wurde bereits hinzugefügt.",
-            "unsynced": "Die Node ist nicht synchronisiert.",
+            "unsynced": "Der Node ist nicht synchronisiert.",
             "noSynced": "Keine synchronisierte Node verfügbar."
         },
         "global": {
@@ -657,8 +696,9 @@
             "mnemonic": "Mnemorische Phrase nicht gültig.",
             "seedTooShort": "Der Seed sollte 81 Zeichen lang sein, er {length, plural, one {ist 1} other {ist #}}",
             "seedCharacters": "Der Seed enthält nur die Buchstaben A-Z oder 9",
-            "phraseWordCount": "Es sollten 24 Wörter in deiner Wiederherstellungsphrase sein. Aktuell {length, plural, one {ist es 1} other {sind es #}}.",
-            "phraseUnrecognizedWord": "Unbekanntes Wort \"{word}\" in deiner Wiederherstellungsphrase"
+            "phraseWordCount": "Deine Wiederherstellungsphrase sollte aus 24 Wörtern bestehen. Aktuell {length, plural, one {ist es 1} other {sind es #}}.",
+            "phraseUnrecognizedWord": "Unbekanntes Wort \"{word}\" in deiner Wiederherstellungsphrase",
+            "phraseCaseWord": "Das Wort \"{word}\" sollte in Kleinbuchstaben sein"
         }
     }
 }

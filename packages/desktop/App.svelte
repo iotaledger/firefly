@@ -36,7 +36,13 @@
     import { getLocalisedMenuItems } from './lib/helpers'
 
     $: $appSettings.darkMode ? document.body.classList.add('scheme-dark') : document.body.classList.remove('scheme-dark')
-    $: Electron.updateMenu('strings', getLocalisedMenuItems($_))
+    $: {
+        isLocaleLoaded.subscribe((loaded) => {
+            if (loaded) {
+                Electron.updateMenu('strings', getLocalisedMenuItems($_))
+            }
+        })
+    }
     $: Electron.updateMenu('loggedIn', $loggedIn)
 
     $: if (document.dir !== $dir) {
@@ -171,6 +177,9 @@
             @apply -mr-2;
             @apply pr-2;
         }
+    }
+    img {
+        -webkit-user-drag: none;
     }
 </style>
 

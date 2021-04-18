@@ -106,7 +106,7 @@
         "importFromText": {
             "title": "एक पुनर्प्राप्ति वाक्यांश या सीड के साथ अपने वॉलेट को पुनर्स्थापित करें",
             "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body2": "A recovery phrase is 24 words long (with spaces). This is used to recover an existing Firefly wallet.",
+            "body2": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
             "body3": "अपना सीड या पुनर्प्राप्ति वाक्यांश दर्ज करें",
             "seedDetected": "81 character seed detected",
             "phraseDetected": "24 word recovery phrase detected"
@@ -209,6 +209,10 @@
                 "title": "खाता को फिर से सिंक करें",
                 "description": "Starts a background task to make sure your accounts are up to date."
             },
+            "hiddenAccounts": {
+                "title": "Hidden accounts",
+                "description": "Selecting this options will show accounts that were previously hidden."
+            },
             "deleteProfile": {
                 "title": "Delete profile",
                 "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
@@ -223,11 +227,19 @@
             },
             "nodeSettings": {
                 "title": "नोड सेटिंग्स",
-                "description": "Select Manual to choose from the node list or connect to your own node"
+                "description": "Select Manual to configure the node settings and connect to your own node"
             },
             "configureNodeList": {
                 "title": "Select a node",
-                "description": ""
+                "description": "Manage the list of nodes your wallet connects to.",
+                "primaryNode": "Primary node",
+                "excludeNode": "Exclude node",
+                "includeNode": "Include node",
+                "viewDetails": "View details",
+                "setAsPrimary": "Set as primary",
+                "removeNode": "Remove node",
+                "includeOfficialNodeList": "Include official node list",
+                "noNodes": "There are no nodes, automatic selection will be used instead."
             },
             "proofOfWork": {
                 "title": "प्रूफ ऑफ़ वर्क",
@@ -332,17 +344,26 @@
             "backupDescription": "यह सुनिश्चित करने के लिए नियमित रूप से बैकअप लेना महत्वपूर्ण है कि आपके पास अपने खातों और लेनदेन के इतिहास की एक प्रति है",
             "backupWarning": "यदि आप अपना बैकअप और पुनर्प्राप्ति वाक्यांश खो देते हैं तो आप अपने फंड तक पहुंच खो देंगे",
             "notBackedUp": "बैकअप नहीं है",
-            "notBackedUpDescription": "आपने अपने स्ट्रॉन्गहोल्ड का बैकअप नहीं किया है"
+            "notBackedUpDescription": "आपने अपने स्ट्रॉन्गहोल्ड का बैकअप नहीं किया है",
+            "saving": "Saving..."
         },
         "deleteAccount": {
-            "title": "Remove {name}?",
-            "body": "You can add this account back later but you may lose your transaction history.",
-            "typePassword": "Type your password to confirm.",
-            "deleteAccount": "Remove account",
-            "errorTitle": "Unable to remove {name}",
-            "errorBody1": "To remove an account it must have 0 balance.",
-            "errorBody2": "वर्तमान में आपके पास इस खाते पर {balance} बैलेंस है। कृपया इन निधियों को एक अलग खाते में ले जाएँ और पुनः प्रयास करें",
-            "errorBody3": "You cannot remove this account, you must have at least one."
+            "title": "Delete {name}?",
+            "body": "This account has no transaction history. It can safely be deleted.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Delete account",
+            "errorTitle": "Unable to delete {name}",
+            "errorBody1": "You cannot delete this account, you must have at least one."
+        },
+        "hideAccount": {
+            "title": "Hide {name}?",
+            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Hide account",
+            "errorTitle": "Unable to hide {name}",
+            "errorBody1": "To hide an account it must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
+            "errorBody3": "You cannot hide this account, you must have at least one."
         },
         "addressHistory": {
             "title": "{name} address history",
@@ -350,6 +371,7 @@
         },
         "node": {
             "titleAdd": "नया नोड जोड़ें",
+            "titleUpdate": "Update a node",
             "titleRemove": "Remove a node",
             "titleDetails": "नोड विवरण",
             "nodeAddress": "नोड एड्रेस",
@@ -377,6 +399,10 @@
             "totalMem": "Total Memory",
             "freeMem": "Free Memory",
             "userPath": "User Path"
+        },
+        "transaction": {
+            "title": "Confirm transaction",
+            "body": "You’re about to send {amount} to"
         }
     },
     "charts": {
@@ -385,7 +411,11 @@
         "portoflio": "Portfolio",
         "token": "Token",
         "accountValue": "Account Value",
-        "accountActivity": "Account Activity"
+        "accountActivity": "Account Activity",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "जारी रखें",
@@ -427,16 +457,19 @@
         "enableDeveloperMode": "डेवलपर मोड सक्षम करें",
         "enableSystemNotifications": "Enable system notifications",
         "exportState": "स्थिति निर्यात करें",
-        "outsourceProofOfWork": "आउटसोर्स प्रूफ ऑफ़ वर्क",
+        "localProofOfWork": "Local proof of work",
         "unlock": "अनलॉक करें",
         "updateFirefly": "अपडेट फायरफ्लाई",
         "restartNow": "Restart now",
         "saveBackup": "Save Stronghold backup",
         "customizeAcount": "Customise account",
         "viewAddressHistory": "एड्रेस का इतिहास देखें",
-        "deleteAccount": "Remove account",
+        "hideAccount": "Hide account",
+        "showAccount": "Unhide account",
+        "deleteAccount": "Delete account",
         "max": "अधिकतम",
         "addNode": "नया नोड जोड़ें",
+        "updateNode": "Update node",
         "removeNode": "Remove node",
         "hide": "Hide",
         "hideOthers": "Hide Others",
@@ -461,7 +494,9 @@
         "skipBackup": "Skip file backup",
         "finishSetup": "Finish setup",
         "readDocumentation": "Read the documentation",
-        "visitFaq": "Visit FAQ"
+        "visitFaq": "Visit FAQ",
+        "showHiddenAccounts": "Show hidden accounts",
+        "confirm": "Confirm"
     },
     "general": {
         "password": "पासवर्ड",
@@ -507,7 +542,7 @@
         "appearance": "दिखावट",
         "lightTheme": "लाइट थीम",
         "darkTheme": "डार्क थीम",
-        "totalBalance": "कुल शेष",
+        "balance": "Balance",
         "accountBalance": "खाते की बैलेंस राशि",
         "incoming": "आने वाला",
         "outgoing": "बाहर जाने वाले",
@@ -555,9 +590,10 @@
         "passwordUpdating": "Updating password...",
         "passwordSuccess": "Updated password successfully",
         "passwordFailed": "Updating password failed",
-        "exportingStronghold": "Exporting stronghold...",
-        "exportingStrongholdSuccess": "Exported stronghold successfully",
-        "exportingStrongholdFailed": "Exported stronghold failed",
+        "syncingAccounts": "Syncing accounts...",
+        "exportingStronghold": "Exporting Stronghold...",
+        "exportingStrongholdSuccess": "Exported Stronghold successfully",
+        "exportingStrongholdFailed": "Exporting Stronghold failed",
         "pinCodeUpdating": "Updating PIN code...",
         "pinCodeSuccess": "Updated PIN code successfully",
         "pinCodeFailed": "Updating PIN code failed",
@@ -567,7 +603,8 @@
         "passwordStrength2": "Weak",
         "passwordStrength3": "Average",
         "passwordStrength4": "Strong",
-        "creatingProfile": "Creating profile, please wait..."
+        "creatingProfile": "Creating profile, please wait...",
+        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
     },
     "dates": {
         "today": "आज",
@@ -581,6 +618,7 @@
         "valueTx": "{{value}} में {{account}} रिसीव हो रहा है",
         "confirmed": "{{account}} से आउटगोइंग {{value}} की पुष्टि हो गयी है",
         "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
+        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
         "failed": "{{account}} से आउटगोइंग {{value}} फ़ैल हो गयी है",
         "downloadingUpdate": "Downloading update",
         "updateReady": "Update ready",
@@ -636,6 +674,7 @@
             "amountZero": "The amount must be greater than 0.",
             "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
             "wrongAddressFormat": "The address is not correctly formatted.",
+            "invalidAddress": "The address is not valid.",
             "insufficientFunds": "This account has insufficient funds.",
             "noToAccount": "You have not selected an account to send the funds to.",
             "sendingDust": "You cannot send less than 1 Mi.",
@@ -658,7 +697,8 @@
             "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
             "seedCharacters": "The seed should only contain characters A-Z or 9",
             "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
-            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase"
+            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
+            "phraseCaseWord": "The word \"{word}\" should be lower case"
         }
     }
 }

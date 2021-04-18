@@ -106,7 +106,7 @@
         "importFromText": {
             "title": "Restaureu la cartera amb una frase de recuperació o una llavor",
             "body1": "Una llavor consta de 81 caràcters. S’utilitza per recuperar d’una cartera Trinity antiga.",
-            "body2": "Una frase de recuperació té 24 paraules (amb espais). S’utilitza per recuperar una cartera Firefly existent.",
+            "body2": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
             "body3": "Introduïu la vostra llavor o la frase de recuperació",
             "seedDetected": "S'ha detectat una llavor de 81 caràcters",
             "phraseDetected": "Frase de 24 paraules detectada"
@@ -209,6 +209,10 @@
                 "title": "Torneu a sincronitzar els comptes",
                 "description": "Starts a background task to make sure your accounts are up to date."
             },
+            "hiddenAccounts": {
+                "title": "Hidden accounts",
+                "description": "Selecting this options will show accounts that were previously hidden."
+            },
             "deleteProfile": {
                 "title": "Suprimeix el perfil",
                 "description": "Elimina tota la cartera, el perfil i l'historial de transaccions. Assegureu-vos que teniu una còpia de seguretat."
@@ -223,11 +227,19 @@
             },
             "nodeSettings": {
                 "title": "Configuració dels dispositius",
-                "description": "Seleccioneu Manual per triar a la llista de nodes o connectar-vos al vostre propi node"
+                "description": "Select Manual to configure the node settings and connect to your own node"
             },
             "configureNodeList": {
                 "title": "Selecciona el node",
-                "description": ""
+                "description": "Manage the list of nodes your wallet connects to.",
+                "primaryNode": "Primary node",
+                "excludeNode": "Exclude node",
+                "includeNode": "Include node",
+                "viewDetails": "View details",
+                "setAsPrimary": "Set as primary",
+                "removeNode": "Elimina el node",
+                "includeOfficialNodeList": "Include official node list",
+                "noNodes": "There are no nodes, automatic selection will be used instead."
             },
             "proofOfWork": {
                 "title": "Prova de Treball",
@@ -332,17 +344,26 @@
             "backupDescription": "És important fer una còpia de seguretat periòdicament per assegurar-vos que teniu una còpia dels vostres comptes i de l'historial de transaccions.",
             "backupWarning": "Si perdeu la frase de còpia de seguretat i recuperació, perdrà l'accés als vostres fons.",
             "notBackedUp": "No s'ha fet una còpia de seguretat",
-            "notBackedUpDescription": "No heu fet una còpia de seguretat de Stronghold"
+            "notBackedUpDescription": "No heu fet una còpia de seguretat de Stronghold",
+            "saving": "Saving..."
         },
         "deleteAccount": {
-            "title": "Eliminar {name}?",
-            "body": "Podràs afegir aquest compte més tard, però és possible que perdis l'historial de transaccions.",
-            "typePassword": "Type your password to confirm.",
-            "deleteAccount": "Esborrar el compte",
-            "errorTitle": "No es pot suprimir {name}",
-            "errorBody1": "Per eliminar un compte, heu de tenir 0 saldo.",
-            "errorBody2": "Actualment us queda {balance} en aquest compte. Moveu aquests fons a un altre compte i torneu-ho a provar.",
-            "errorBody3": "No podeu suprimir aquest compte, n'heu de tenir almenys un."
+            "title": "Delete {name}?",
+            "body": "This account has no transaction history. It can safely be deleted.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Delete account",
+            "errorTitle": "Unable to delete {name}",
+            "errorBody1": "You cannot delete this account, you must have at least one."
+        },
+        "hideAccount": {
+            "title": "Hide {name}?",
+            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
+            "typePassword": "Type your wallet password to confirm.",
+            "hideAccount": "Hide account",
+            "errorTitle": "Unable to hide {name}",
+            "errorBody1": "To hide an account it must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
+            "errorBody3": "You cannot hide this account, you must have at least one."
         },
         "addressHistory": {
             "title": "{name} address history",
@@ -350,6 +371,7 @@
         },
         "node": {
             "titleAdd": "Afegeix un node",
+            "titleUpdate": "Update a node",
             "titleRemove": "Traieu un node",
             "titleDetails": "Detalls del node",
             "nodeAddress": "Adreça del node",
@@ -377,6 +399,10 @@
             "totalMem": "Memòria total",
             "freeMem": "Memòria lliure",
             "userPath": "Camí de l'usuari"
+        },
+        "transaction": {
+            "title": "Confirm transaction",
+            "body": "You’re about to send {amount} to"
         }
     },
     "charts": {
@@ -385,7 +411,11 @@
         "portoflio": "Portafoli",
         "token": "Token",
         "accountValue": "Valor del compte",
-        "accountActivity": "Activitat del compte"
+        "accountActivity": "Activitat del compte",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "Continuar",
@@ -427,16 +457,19 @@
         "enableDeveloperMode": "Activa el mode de desenvolupador",
         "enableSystemNotifications": "Activa les notificacions del sistema",
         "exportState": "Estat d'exportació",
-        "outsourceProofOfWork": "Subcontractar proves de treball",
+        "localProofOfWork": "Local proof of work",
         "unlock": "Desbloqueja",
         "updateFirefly": "Actualitza Firefly",
         "restartNow": "Reiniciar ara",
         "saveBackup": "Guarda una còpia de seguretat Stronghold",
         "customizeAcount": "Personalitza el compte",
         "viewAddressHistory": "Veure l'historial d'adreces",
-        "deleteAccount": "Esborrar el compte",
+        "hideAccount": "Hide account",
+        "showAccount": "Unhide account",
+        "deleteAccount": "Delete account",
         "max": "Màxim",
         "addNode": "Afegeix un node",
+        "updateNode": "Update node",
         "removeNode": "Elimina el node",
         "hide": "Oculta",
         "hideOthers": "Amaga els altres",
@@ -461,7 +494,9 @@
         "skipBackup": "Ometre la còpia de seguretat",
         "finishSetup": "Finalitzar la configuració",
         "readDocumentation": "Llegeix la documentació",
-        "visitFaq": "Visita les FAQ"
+        "visitFaq": "Visita les FAQ",
+        "showHiddenAccounts": "Show hidden accounts",
+        "confirm": "Confirm"
     },
     "general": {
         "password": "Contrasenya",
@@ -507,7 +542,7 @@
         "appearance": "Aspecte",
         "lightTheme": "Tema clar",
         "darkTheme": "Tema fosc",
-        "totalBalance": "Saldo Total",
+        "balance": "Balance",
         "accountBalance": "Saldo del compte",
         "incoming": "Entrant",
         "outgoing": "Sortint",
@@ -555,9 +590,10 @@
         "passwordUpdating": "S'està actualitzant la contrasenya...",
         "passwordSuccess": "S'ha actualitzat correctament la contrasenya",
         "passwordFailed": "No s'ha pogut actualitzar la contrasenya",
-        "exportingStronghold": "S'està exportant stronghold...",
-        "exportingStrongholdSuccess": "Stronghold exportat amb èxit",
-        "exportingStrongholdFailed": "No s'ha pogut exportar stronghold",
+        "syncingAccounts": "Syncing accounts...",
+        "exportingStronghold": "Exporting Stronghold...",
+        "exportingStrongholdSuccess": "Exported Stronghold successfully",
+        "exportingStrongholdFailed": "Exporting Stronghold failed",
         "pinCodeUpdating": "S'està actualitzant el codi PIN...",
         "pinCodeSuccess": "S'ha actualitzat correctament el codi PIN",
         "pinCodeFailed": "No s'ha pogut actualitzar el codi PIN",
@@ -567,7 +603,8 @@
         "passwordStrength2": "Feble",
         "passwordStrength3": "Mitjana",
         "passwordStrength4": "Forta",
-        "creatingProfile": "S'està creant un compte, espereu..."
+        "creatingProfile": "S'està creant un compte, espereu...",
+        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
     },
     "dates": {
         "today": "Avui",
@@ -581,6 +618,7 @@
         "valueTx": "S'està rebent {{value}} a {{account}}",
         "confirmed": "{{value}} de sortida de {{account}} s'ha confirmat",
         "confirmedInternal": "S'ha confirmat {{value}} de {{senderAccount}} a {{receiverAccount}}",
+        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
         "failed": "Ha fallat el {{value}} de sortida de {{account}}",
         "downloadingUpdate": "S'està baixant l'actualització",
         "updateReady": "Actualització llesta",
@@ -636,6 +674,7 @@
             "amountZero": "L'import ha de ser superior a 0.",
             "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
             "wrongAddressFormat": "The address is not correctly formatted.",
+            "invalidAddress": "The address is not valid.",
             "insufficientFunds": "Aquest compte no té fons suficients.",
             "noToAccount": "You have not selected an account to send the funds to.",
             "sendingDust": "No es possible enviar menys d'1 Mi.",
@@ -658,7 +697,8 @@
             "seedTooShort": "La llavor ha de tenir 81 caràcters, {length, plural, one {és 1} other {són #}}",
             "seedCharacters": "La llavor només ha de contenir caràcters A-Z o 9",
             "phraseWordCount": "Hi ha d'haver 24 paraules a la frase de recuperació, actualment {length, plural, one {és 1} other {són #}}.",
-            "phraseUnrecognizedWord": "Paraula no reconeguda \"{word}\" a la frase de recuperació"
+            "phraseUnrecognizedWord": "Paraula no reconeguda \"{word}\" a la frase de recuperació",
+            "phraseCaseWord": "The word \"{word}\" should be lower case"
         }
     }
 }

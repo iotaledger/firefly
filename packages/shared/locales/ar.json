@@ -106,7 +106,7 @@
         "importFromText": {
             "title": "استعد محفظتك مع عبارة استرداد أو seed",
             "body1": "الseed مكونة من 81 حرف او رقم، يستخدم للاستعادة من محفظة الترينيتي القديمة.",
-            "body2": "عبارة الاسترداد مكونة من 24 كلمة(مع الفراغات). تستخدم لاستعادة محفظة فايرفلاي موجودة.",
+            "body2": "عبارة الاسترداد هي ٢٤ كلمة ذات أحرف صغيرة مع المسافات الفاصلة بينها. هذه العبارة تستخدم لاستعادة محفظة Firefly الموجودة مسبقا.",
             "body3": "أدخل الseed أو عبارة الاسترداد الخاصة بك",
             "seedDetected": "تم اكتشاف seed مكون من 81 حرف",
             "phraseDetected": "تم اكتشاف عبارة استرداد مكونة من 24 كلمة"
@@ -207,7 +207,11 @@
             },
             "resyncAccounts": {
                 "title": "تحديث الحسابات",
-                "description": "Starts a background task to make sure your accounts are up to date."
+                "description": "يبدأ عملية خلفية للتأكد من أن حساباتك محدثة."
+            },
+            "hiddenAccounts": {
+                "title": "الحسابات المخفية",
+                "description": "تحديد هذه الخيارات سيظهر الحسابات التي كانت مخفية من قبل."
             },
             "deleteProfile": {
                 "title": "حذف الملف الشخصي",
@@ -223,11 +227,19 @@
             },
             "nodeSettings": {
                 "title": "إعدادات العقدة node",
-                "description": "حدد الدليل لاختياره من قائمة الnodes أو قم بالاتصال بالnode الخاصة بك"
+                "description": "إختر التحديث اليدوي لتغيير إعدادات العقد و الإتصال بعقدك الخاص"
             },
             "configureNodeList": {
                 "title": "اختر عقدة node",
-                "description": ""
+                "description": "إدارة قائمة العقود اللتي يمكن لمحفظتك الإتصال بها.",
+                "primaryNode": "العقدة الرئيسية",
+                "excludeNode": "استبعاد العقدة",
+                "includeNode": "ضمن العدقة",
+                "viewDetails": "عرض التفاصيل",
+                "setAsPrimary": "تعيين كعقدة أساسية",
+                "removeNode": "إزالة العقدة node",
+                "includeOfficialNodeList": "تضمين قائمة العقد الرسمية",
+                "noNodes": "لا توجد عقد، سيتم استخدام التحديد التلقائي بدلاً من ذلك."
             },
             "proofOfWork": {
                 "title": "إثبات العمل",
@@ -246,11 +258,11 @@
                 "description": "تصدير سجل المعاملات الخاص بك إلى ملف .csv"
             },
             "troubleshoot": {
-                "title": "استكشاف الأخطاء",
+                "title": "حل المشاكل",
                 "description": "استخدام معالج استكشاف الأخطاء لحل المشاكل الشائعة"
             },
             "documentation": {
-                "title": "الوثائق",
+                "title": "إرشادات الاستخدام",
                 "description": "عرض الوثائق لشرح متعمق لكيفية عمل الأشياء"
             },
             "faq": {
@@ -278,7 +290,7 @@
         "dashboard": {
             "security": {
                 "version": {
-                    "title": "فايرفلاي v{version}",
+                    "title": "إصدار فايرفلاي v{version}",
                     "upToDate": "مُحدّث",
                     "outOfDate": "غير محدّث"
                 },
@@ -313,8 +325,8 @@
     "popups": {
         "password": {
             "title": "كلمة المرور مطلوبة",
-            "subtitle": "Please enter your password to unlock Stronghold",
-            "backup": "Please enter your password to export a backup"
+            "subtitle": "الرجاء إدخال الكلمة السرية لفتح Stronghold",
+            "backup": "يرجى ادخال الكلمة السرية الخاصة بحسابك لإستيراد نسختك الإحتياطية"
         },
         "qr": {
             "title": "رمز QR الخاص بك"
@@ -323,7 +335,7 @@
             "title": "الإصدار الحالي: {version}",
             "upToDateTitle": "تم تحديث الفايرفلاي",
             "upToDateDescription": "أنت تقوم بتشغيل أحدث وأكثر إصدار أماناََ من فايرفلاي.",
-            "updateAvailable": "تحديث جديد للفايرفلاي متاح",
+            "updateAvailable": "يوجد تحديث لمحفظة فايرفلاي",
             "updateDetails": "الإصدار {version} - {date}"
         },
         "backup": {
@@ -332,24 +344,34 @@
             "backupDescription": "من المهم النسخ الاحتياطي بانتظام للتأكد من أن لديك نسخة من حساباتك وسجل المعاملات.",
             "backupWarning": "إذا فقدت النسخة الاحتياطية وعبارات الاسترداد الخاصة بك سوف تفقد الوصول إلى أموالك.",
             "notBackedUp": "لم يتم النسخ الاحتياطي",
-            "notBackedUpDescription": "لم تقم بالنسخ الاحتياطي للملف المحصّن الخاص بك"
+            "notBackedUpDescription": "لم تقم بالنسخ الاحتياطي للملف المحصّن الخاص بك",
+            "saving": "يتم الحفظ..."
         },
         "deleteAccount": {
-            "title": "إزالة {name}؟",
-            "body": "يمكنك إضافة هذا الحساب لاحقاً ولكن قد تفقد سجل المعاملات الخاص بك.",
-            "typePassword": "Type your password to confirm.",
-            "deleteAccount": "إزالة الحساب",
-            "errorTitle": "غير قادر على إزالة {name}",
-            "errorBody1": "لإزالة حساب، يجب أن يكون رصيد صفر.",
-            "errorBody2": "لديك حاليا {balance} متبقي على هذا الحساب. الرجاء نقل هذه الأموال إلى حساب مختلف وحاول مرة أخرى.",
-            "errorBody3": "لا يمكنك إزالة هذا الحساب، يجب أن يكون لديك حساب واحد على الأقل."
+            "title": "حذف {name}؟",
+            "body": "هذا الحساب ليس له سجل معاملات. يمكن حذفه بأمان.",
+            "typePassword": "اكتب كلمة مرور محفظتك للتأكيد.",
+            "hideAccount": "حذف الحساب",
+            "errorTitle": "لا يمكن حذف الحساب {name}",
+            "errorBody1": "لا يمكنك حذف هذا الحساب، يجب أن يكون لديك حساب واحد على الأقل."
+        },
+        "hideAccount": {
+            "title": "إخفاء {name}؟",
+            "body": "يمكنك العثور على هذا الحساب في وقت لاحق عن طريق تمكين \"إظهار الحسابات المخفية\" في الإعدادات المتقدمة.",
+            "typePassword": "اكتب كلمة مرور محفظتك للتأكيد.",
+            "hideAccount": "إخفاء الحساب",
+            "errorTitle": "لا يمكن إخفاء {name}",
+            "errorBody1": "لإخفاء حساب، يجب أن يكون رصيده صفر.",
+            "errorBody2": "رصيد هذا ال حساب هو {balance}. الرجاء نقل هذه الأموال إلى حساب مختلف و المحاولة من جديد.",
+            "errorBody3": "لا يمكنك إخفاء هذا الحساب، يجب أن يكون لديك حساب واحد على الأقل."
         },
         "addressHistory": {
-            "title": "{name} address history",
+            "title": "عرض سجل عمليات العنوان {name}",
             "currentBalance": "الرصيد الحالي: {balance}"
         },
         "node": {
             "titleAdd": "إضافة عقدة node",
+            "titleUpdate": "تحديث وحدة",
             "titleRemove": "إزالة عقدة node",
             "titleDetails": "تفاصيل العقدة node",
             "nodeAddress": "عنوان العقدة node",
@@ -365,7 +387,7 @@
         "deleteProfile": {
             "title": "حذف الملف الشخصي",
             "confirmation": "هل أنت متأكد من أنك تريد حذف هذا الملف الشخصي؟ لا يمكن التراجع عن هذه العملية.",
-            "typePassword": "Type your password to confirm."
+            "typePassword": "أدخل كلمة السر الخاصة بك للتأكيد."
         },
         "diagnostics": {
             "title": "التشخيص",
@@ -377,6 +399,10 @@
             "totalMem": "إجمالي الذاكرة",
             "freeMem": "الذاكرة الحرة",
             "userPath": "مسار المستخدم"
+        },
+        "transaction": {
+            "title": "تأكيد الصفقة",
+            "body": "أنت على وشك إرسال {amount} إلى"
         }
     },
     "charts": {
@@ -385,7 +411,11 @@
         "portoflio": "الحافظة",
         "token": "رمز token",
         "accountValue": "قيمة الحساب",
-        "accountActivity": "نشاط الحساب"
+        "accountActivity": "نشاط الحساب",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "مواصلة",
@@ -427,16 +457,19 @@
         "enableDeveloperMode": "تمكين وضع المبرمج",
         "enableSystemNotifications": "تمكين إشعارات النظام",
         "exportState": "تصدير الحالة",
-        "outsourceProofOfWork": "دليل المصادر الخارجية على العمل",
+        "localProofOfWork": "إثباث العمل محليّاً",
         "unlock": "فتح",
         "updateFirefly": "تحديث فايرفلاي",
         "restartNow": "إعادة التشغيل الآن",
         "saveBackup": "حفظ نسخة حصن Stronghold احتياطية",
         "customizeAcount": "تخصيص الحساب",
         "viewAddressHistory": "عرض سجل العناوين",
-        "deleteAccount": "إزالة الحساب",
+        "hideAccount": "إخفاء الحساب",
+        "showAccount": "إظهار الحساب",
+        "deleteAccount": "حذف الحساب",
         "max": "الحد الأقصى",
         "addNode": "إضافة عقدة node",
+        "updateNode": "تحديث العقدة",
         "removeNode": "إزالة العقدة node",
         "hide": "إخفاء",
         "hideOthers": "إخفاء الآخرين",
@@ -461,7 +494,9 @@
         "skipBackup": "تخطي النسخ الاحتياطي للملف",
         "finishSetup": "إنهاء الإعداد",
         "readDocumentation": "قراءة الوثائق",
-        "visitFaq": "زيارة الأسئلة المكررة"
+        "visitFaq": "زيارة الأسئلة المكررة",
+        "showHiddenAccounts": "إظهار الحسابات المخفية",
+        "confirm": "تأكيد"
     },
     "general": {
         "password": "كلمة المرور",
@@ -507,7 +542,7 @@
         "appearance": "المظهر",
         "lightTheme": "المظهر الفاتح",
         "darkTheme": "المظهر الداكن",
-        "totalBalance": "إجمالي الرصيد",
+        "balance": "الرصيد",
         "accountBalance": "رصيد الحساب",
         "incoming": "الواردة",
         "outgoing": "الصادرة",
@@ -555,6 +590,7 @@
         "passwordUpdating": "يتم تحديث كلمة المرور...",
         "passwordSuccess": "تم تحديث كلمة المرور بنجاح",
         "passwordFailed": "فشل تحديث كلمة المرور",
+        "syncingAccounts": "جاري مزامنة الحسابات...",
         "exportingStronghold": "يتم تصدير الملف المحصّن...",
         "exportingStrongholdSuccess": "تم تصدير الملف المحصّن بنجاح",
         "exportingStrongholdFailed": "فشل تصدير الملف المحصّن",
@@ -567,7 +603,8 @@
         "passwordStrength2": "ضعيف",
         "passwordStrength3": "متوسط",
         "passwordStrength4": "قوي",
-        "creatingProfile": "يتم إنشاء الملف الشخصي، الرجاء الانتظار..."
+        "creatingProfile": "يتم إنشاء الملف الشخصي، الرجاء الانتظار...",
+        "accountRemoved": "هذا الحساب مخفي. قم بإظهاره لإجراء عمليات."
     },
     "dates": {
         "today": "اليوم",
@@ -581,6 +618,7 @@
         "valueTx": "تلقي {{value}} إلى {{account}}",
         "confirmed": "تم تأكيد {{value}} الصادر من {{account}}",
         "confirmedInternal": "تم تأكيد {{value}} من {{senderAccount}} إلى {{receiverAccount}}",
+        "confirmedInternalNoAccounts": "تم تأكيد التحويل الداخلي بقيمة {{value}}",
         "failed": "{{value}} الصادر من {{account}} فشل",
         "downloadingUpdate": "يتم تنزيل التحديث",
         "updateReady": "التحديث جاهز",
@@ -589,7 +627,7 @@
         "calcMinutesRemaining": "يتم حساب الدقائق المتبقية...",
         "minutesRemaining": "{minutes, plural, one {1 دقيقة متبقية} other {# دقائق متبقية}}",
         "copiedToClipboard": "تم النسخ إلى الحافظة",
-        "accountsSynchronized": "Account synchronization complete"
+        "accountsSynchronized": "إنتهت عملية مزامنة الحساب بنجاح"
     },
     "error": {
         "profile": {
@@ -609,7 +647,7 @@
             "dates": "من السهل تخمين التواريخ.",
             "common": "هذه كلمة مرور شائعة جداً.",
             "similar": "هذا شبيه بكلمة مرور شائعة.",
-            "word": "A single word is easy to guess.",
+            "word": "من السهل تخمين كلمة واحدة.",
             "incorrect": "كلمة المرور غير صحيحة.",
             "length": "كلمة المرو الخاصة بك لا يجب ان تكون أطول من {length, plural, one {1 حرف} other {# أحرف}}."
         },
@@ -623,10 +661,10 @@
             "empty": "يجب عليك استخدام حسابك الأخير قبل إنشاء حساب جديد.",
             "notEmpty": "يجب عليك نقل رصيدك قبل حذف هذا الحساب.",
             "duplicate": "يوجد حساب بهذا الاسم مسبقاً.",
-            "tilde": "A profile name can't start with the '~' character.",
-            "control": "A profile name can't contain a control character.",
-            "startDot": "A profile name can't start with the '.' character.",
-            "chars": "A profile name can't contain the following characters <>:\"/\\|?*"
+            "tilde": "اسم الملف الشخصي لا يمكن أن يبدأ برمز '.'.",
+            "control": "لا يمكن أن يحتوي اسم الملف الشخصي على حرف تحكم.",
+            "startDot": "اسم الملف الشخصي لا يمكن أن يبدأ برمز '.'.",
+            "chars": "يجب أن لا يحتوي اسم الملف الشخصي على أي من الرموز التالية <>:\"/\\|?*"
         },
         "send": {
             "addressLength": "يجب على العناوين ان تكون بطول {length, plural, one {1 حرف} other {# احرف}}.",
@@ -634,10 +672,11 @@
             "amountNoFloat": "إذا كانت الوحدات 'i` لا يمكنك استخدام الأماكن العشرية.",
             "amountInvalidFormat": "يبدو أن المبلغ رقم غير صالح.",
             "amountZero": "يجب أن يكون المبلغ أكبر من 0.",
-            "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
-            "wrongAddressFormat": "The address is not correctly formatted.",
+            "wrongAddressPrefix": "العنواين تبدأ مسبوقة بـ{prefix}.",
+            "wrongAddressFormat": "صياغة العنوان غير صحيحة.",
+            "invalidAddress": "هذا العنوان غير صالح.",
             "insufficientFunds": "هذا الحساب لا يملك الأموال الكافية.",
-            "noToAccount": "You have not selected an account to send the funds to.",
+            "noToAccount": "لم تقم باختيار حساب لإرسال الأموال إليه.",
             "sendingDust": "لا يمكنك إرسال أقل من 1 Mi.",
             "leavingDust": "لا يمكنك ترك أقل من 1 Mi على عنوانك."
         },
@@ -658,7 +697,8 @@
             "seedTooShort": "يجب على الseed ان يكون طولها 81 حرف, الآن طولها {length, plural, one { 1} other { #}}",
             "seedCharacters": "يجب على الseed أن تحتوي فقط على أحرف A-Z أو 9",
             "phraseWordCount": "يجب ان تتضمن عبارة الاسترداد على 24 كلمة, حالياََ تتضمن {length, plural, one { 1} other { #}}.",
-            "phraseUnrecognizedWord": "كلمة غير متعرف عليها \"{word}\" في عبارة الاسترداد الخاصة بك"
+            "phraseUnrecognizedWord": "كلمة غير متعرف عليها \"{word}\" في عبارة الاسترداد الخاصة بك",
+            "phraseCaseWord": "يجب أن تكتب الكلمة \"{word}\" بأحرف صغيرة"
         }
     }
 }
