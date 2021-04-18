@@ -5,13 +5,16 @@
     import { isNodeUrlValid } from 'shared/lib/network'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
-    import { asyncGetNodeInfo } from 'shared/lib/wallet'
+    import { asyncGetNodeInfo, wallet } from 'shared/lib/wallet'
+import { get } from 'svelte/store';
 
     export let locale
     export let onSuccess
     export let node
     export let nodes
     export let network
+
+    const { accounts } = get(wallet)
 
     let url = node?.url ?? ''
     let username = node?.auth?.username ?? ''
@@ -51,7 +54,7 @@
                 addressError = locale(validErr)
             }
             if (!addressError) {
-                const info = await asyncGetNodeInfo(url)
+                const info = await asyncGetNodeInfo($accounts[0].id, url)
                 newNetworkId = info?.nodeinfo.networkId
 
                 if (!newNetworkId) {

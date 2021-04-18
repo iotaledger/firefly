@@ -1,20 +1,12 @@
 <script lang="typescript">
-    import { Button, Checkbox, Dropdown, HR, Input, Radio, Spinner, Text } from 'shared/components'
+    import { Button, Checkbox, Dropdown, HR, Input, Radio, Text } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { loggedIn } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { ExtendedNode, getOfficialDefaultNetwork, getOfficialNetworks, getOfficialNodes } from 'shared/lib/network'
-    import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile } from 'shared/lib/profile'
-    import {
-        api,
-        buildAccountNetworkSettings,
-        isSyncing,
-        syncAccounts,
-        updateAccountNetworkSettings,
-        wallet,
-    } from 'shared/lib/wallet'
+    import { buildAccountNetworkSettings, updateAccountNetworkSettings, wallet } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
 
     export let locale
@@ -163,30 +155,16 @@
         })
     }
 
-    function handleResyncAccountsClick() {
-        api.getStrongholdStatus({
-            onSuccess(strongholdStatusResponse) {
-                if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({ type: 'password', props: { onSuccess: () => syncAccounts(true, 0, 10) } })
-                } else {
-                    syncAccounts(true, 0, 10)
-                }
-            },
-            onError(err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error),
-                })
-            },
-        })
-    }
-
     function handleErrorLogClick() {
         openPopup({ type: 'errorLog' })
     }
 
     function handleDiagnosticsClick() {
         openPopup({ type: 'diagnostics' })
+    }
+
+    function handleBalanceFinderClick() {
+        openPopup({ type: 'balanceFinder', hideClose: true })
     }
 </script>
 
@@ -346,14 +324,13 @@
     </section>
     {#if $loggedIn}
         <HR classes="pb-5 mt-5 justify-center" />
-        <section id="resyncAccounts" class="w-3/4">
-            <Text type="h4" classes="mb-3">{locale('views.settings.resyncAccounts.title')}</Text>
-            <Text type="p" secondary classes="mb-5">{locale('views.settings.resyncAccounts.description')}</Text>
+        <section id="balanceFinder" class="w-3/4">
+            <Text type="h4" classes="mb-3">{locale('views.settings.balanceFinder.title')}</Text>
+            <Text type="p" secondary classes="mb-5">{locale('views.settings.balanceFinder.description')}</Text>
             <div class="flex flex-row items-center">
-                <Button medium inlineStyle="min-width: 156px;" onClick={() => handleResyncAccountsClick()} disabled={$isSyncing}>
-                    {locale('actions.syncAll')}
+                <Button medium inlineStyle="min-width: 156px;" onClick={() => handleBalanceFinderClick()}>
+                    {locale('actions.findBalances')}
                 </Button>
-                <Spinner busy={$isSyncing} message={$isSyncing ? locale('general.syncingAccounts') : ''} classes="ml-2" />
             </div>
         </section>
         <HR classes="pb-5 mt-5 justify-center" />

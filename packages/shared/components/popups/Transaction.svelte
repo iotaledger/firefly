@@ -1,27 +1,31 @@
 <script lang="typescript">
+    import { Unit } from '@iota/unit-converter'
     import { Button, Illustration, Text } from 'shared/components'
-    import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
-    import { appSettings } from 'shared/lib/appSettings'
+    import {
+        AvailableExchangeRates,
+        convertToFiat,
+        currencies,
+        CurrencyTypes,
+        exchangeRates,
+        formatCurrency,
+    } from 'shared/lib/currency'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile } from 'shared/lib/profile'
-    import { formatUnit } from 'shared/lib/units'
+    import { formatUnitPrecision } from 'shared/lib/units'
     import { get } from 'svelte/store'
 
     export let locale
     export let internal = false
     export let to = ''
     export let amount = 0
+    export let unit = Unit.i
     export let onConfirm = () => {}
 
-    let displayedAmount = `${formatUnit(amount)} (${converToFiat(amount)})`
+    let displayedAmount = `${formatUnitPrecision(amount, unit)} (${localConvertToFiat(amount)})`
 
-    function converToFiat(amount) {
+    function localConvertToFiat(amount) {
         const activeCurrency = get(activeProfile)?.settings.currency ?? AvailableExchangeRates.USD
-        return `${convertToFiat(
-            amount,
-            get(currencies)[CurrencyTypes.USD],
-            get(exchangeRates)[activeCurrency]
-        )} ${activeCurrency}`
+        return formatCurrency(convertToFiat(amount, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[activeCurrency]))
     }
 
     function handleCancelClick() {

@@ -84,8 +84,8 @@ export function getAccounts(): Promise<number> {
   return _getAccounts(sendMessage)
 }
 
-export function syncAccounts(addressIndex?: number, gapLimit?: number): Promise<number> {
-  return _syncAccounts(sendMessage, addressIndex, gapLimit)
+export function syncAccounts(addressIndex?: number, gapLimit?: number, accountDiscoveryThreshold?: number): Promise<number> {
+  return _syncAccounts(sendMessage, addressIndex, gapLimit, accountDiscoveryThreshold)
 }
 
 export function generateAddress(accountId: AccountIdentifier): Promise<number> {
