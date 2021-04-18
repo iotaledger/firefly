@@ -55,22 +55,29 @@ const Electron = {
     },
 
     exportMigrationLog: (sourcePath, defaultFileName) => {
-        return ipcRenderer.invoke('show-save-dialog', { properties: ['createDirectory', 'showOverwriteConfirmation'], defaultPath: defaultFileName }).then((result) => {
-            if (result.canceled) {
-                return null
-            }
+        return ipcRenderer.invoke('show-save-dialog',
+            {
+                properties: ['createDirectory', 'showOverwriteConfirmation'],
+                defaultPath: defaultFileName,
+                filters: [
+                    { name: 'Log Files', extensions: ['log'] }
+                ]
+            }).then((result) => {
+                if (result.canceled) {
+                    return null
+                }
 
-            return new Promise((resolve, reject) => {
-                fs.copyFile(sourcePath, result.filePath, (err) => {
-                    if (err) {
-                        reject(err)
-                    } else {
-                        resolve(true)
-                    }
-                });
+                return new Promise((resolve, reject) => {
+                    fs.copyFile(sourcePath, result.filePath, (err) => {
+                        if (err) {
+                            reject(err)
+                        } else {
+                            resolve(true)
+                        }
+                    });
+                })
+
             })
-
-        })
     },
 
     /**
@@ -157,14 +164,14 @@ const Electron = {
      *
      * @returns void
      */
-     updateCheck: () => ipcRenderer.invoke('update-check'),
-     /**
-     * Get version details
-     *
-     * @method getVersionDetails
-     *
-     * @returns void
-     */
+    updateCheck: () => ipcRenderer.invoke('update-check'),
+    /**
+    * Get version details
+    *
+    * @method getVersionDetails
+    *
+    * @returns void
+    */
     getVersionDetails: () => ipcRenderer.invoke('update-get-version-details'),
     /**
      * Change menu state to determine what menu items to display
