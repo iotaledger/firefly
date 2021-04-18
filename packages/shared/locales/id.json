@@ -106,7 +106,7 @@
         "importFromText": {
             "title": "Pulihkan dompet dengan frasa pemulihan atau seed",
             "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body2": "A recovery phrase is 24 words long (with spaces). This is used to recover an existing Firefly wallet.",
+            "body2": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
             "body3": "Masukkan seed atau frasa pemulihan",
             "seedDetected": "Seed dengan 81 karakter terdeteksi",
             "phraseDetected": "24 word recovery phrase detected"
@@ -411,7 +411,11 @@
         "portoflio": "Portofolio",
         "token": "Token",
         "accountValue": "Nilai Akun",
-        "accountActivity": "Aktivitas Akun"
+        "accountActivity": "Aktivitas Akun",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "Lanjutkan",
@@ -670,6 +674,7 @@
             "amountZero": "Jumlah harus lebih besar dari 0.",
             "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
             "wrongAddressFormat": "The address is not correctly formatted.",
+            "invalidAddress": "The address is not valid.",
             "insufficientFunds": "This account has insufficient funds.",
             "noToAccount": "You have not selected an account to send the funds to.",
             "sendingDust": "You cannot send less than 1 Mi.",
@@ -692,7 +697,8 @@
             "seedTooShort": "Benih harus sepanjang 81 karakter, tetapi memang demikian {length, plural, one {1} other {#}}",
             "seedCharacters": "Seed hanya boleh mengandung karakter A-Z atau 9",
             "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
-            "phraseUnrecognizedWord": "Kata \"{word}\" yang tidak dikenal dalam frasa pemulihan Anda"
+            "phraseUnrecognizedWord": "Kata \"{word}\" yang tidak dikenal dalam frasa pemulihan Anda",
+            "phraseCaseWord": "The word \"{word}\" should be lower case"
         }
     }
 }

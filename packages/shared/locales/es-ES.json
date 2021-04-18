@@ -106,7 +106,7 @@
         "importFromText": {
             "title": "Restaura tu cartera con una frase de recuperación o semilla",
             "body1": "Una semilla consta de 81 caracteres. Esta se utiliza para recuperar tus fondos de una cartera Trinity antigua.",
-            "body2": "Una frase de recuperación tiene 24 palabras (con espacios). Esta se utiliza para recuperar una cartera Firefly existente.",
+            "body2": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
             "body3": "Introduce tu semilla o tu frase de recuperación",
             "seedDetected": "Semilla de 81 caracteres detectada",
             "phraseDetected": "Frase de recuperación de 24 palabras detectada"
@@ -411,7 +411,11 @@
         "portoflio": "Portafolio",
         "token": "Token",
         "accountValue": "Valor de la cuenta",
-        "accountActivity": "Actividad de la cuenta"
+        "accountActivity": "Actividad de la cuenta",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "Continuar",
@@ -670,6 +674,7 @@
             "amountZero": "La cantidad debe ser mayor que 0.",
             "wrongAddressPrefix": "Las direcciones comienzan con el prefijo {prefix}.",
             "wrongAddressFormat": "La dirección no tiene el formato correcto.",
+            "invalidAddress": "The address is not valid.",
             "insufficientFunds": "Esta cuenta no tiene fondos suficientes.",
             "noToAccount": "No ha seleccionado una cuenta a la que enviar los fondos.",
             "sendingDust": "No puedes enviar menos de 1 Mi.",
@@ -692,7 +697,8 @@
             "seedTooShort": "La semilla debe tener 81 caracteres, ahora tiene {length, plural, one {1 carácter} other {# caracteres}}",
             "seedCharacters": "La semilla sólo debe contener caracteres A-Z ó 9",
             "phraseWordCount": "Debería haber 24 palabras en su frase de recuperación, ahora mismo {length, plural, one {es 1} other {son #}}.",
-            "phraseUnrecognizedWord": "No se reconoce la palabra \"{word}\" en su frase de recuperación"
+            "phraseUnrecognizedWord": "No se reconoce la palabra \"{word}\" en su frase de recuperación",
+            "phraseCaseWord": "The word \"{word}\" should be lower case"
         }
     }
 }

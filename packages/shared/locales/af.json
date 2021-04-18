@@ -106,7 +106,7 @@
         "importFromText": {
             "title": "Herstel jou beursie met 'n herstelfrase of seed",
             "body1": "'N seed bestaan uit 81 karakters. Dit word gebruik om van 'n ouer Trinity beursie te herstel.",
-            "body2": "'N Herstelfrase is 24 woorde lank (met spasies). Dit word gebruik om 'n bestaande Firefly beursie te herstel.",
+            "body2": "'N Herstelfrase is 24 woorde lank net kleinletters met spasies tussen. Dit word gebruik om 'n bestaande Firefly beursie te herstel.",
             "body3": "Voer you seed of herstelfrase in",
             "seedDetected": "81 karakter seed bespeur",
             "phraseDetected": "24 woord frase bespeur"
@@ -207,11 +207,11 @@
             },
             "resyncAccounts": {
                 "title": "Hersinkroniseer rekeninge",
-                "description": "Starts a background task to make sure your accounts are up to date."
+                "description": "Begin 'n agtergrondtaak om seker te maak dat jou rekeninge op datum is."
             },
             "hiddenAccounts": {
-                "title": "Hidden accounts",
-                "description": "Selecting this options will show accounts that were previously hidden."
+                "title": "Versteekte rekeninge",
+                "description": "As jy hierdie opsies kies, word rekeninge wat voorheen weggesteek was, vertoon."
             },
             "deleteProfile": {
                 "title": "Vee profiel uit",
@@ -227,19 +227,19 @@
             },
             "nodeSettings": {
                 "title": "Node instellings",
-                "description": "Select Manual to configure the node settings and connect to your own node"
+                "description": "Kies Manual om uit die nodelys te kies of koppel aan jou eie node"
             },
             "configureNodeList": {
                 "title": "Kies 'n node",
-                "description": "Manage the list of nodes your wallet connects to.",
-                "primaryNode": "Primary node",
+                "description": "Bestuur die lys met nodes waaraan jou beursie koppel.",
+                "primaryNode": "Primêre node",
                 "excludeNode": "Exclude node",
                 "includeNode": "Include node",
-                "viewDetails": "View details",
-                "setAsPrimary": "Set as primary",
+                "viewDetails": "Sien besonderhede",
+                "setAsPrimary": "Stel as primêre Node",
                 "removeNode": "Verwyder node",
-                "includeOfficialNodeList": "Include official node list",
-                "noNodes": "There are no nodes, automatic selection will be used instead."
+                "includeOfficialNodeList": "Sluit die amptelike nodelys in",
+                "noNodes": "Daar is geen nodes, outomatiese seleksie sal eerder gebruik word."
             },
             "proofOfWork": {
                 "title": "Proof of work",
@@ -348,30 +348,30 @@
             "saving": "Saving..."
         },
         "deleteAccount": {
-            "title": "Delete {name}?",
-            "body": "This account has no transaction history. It can safely be deleted.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Delete account",
-            "errorTitle": "Unable to delete {name}",
-            "errorBody1": "You cannot delete this account, you must have at least one."
+            "title": "Vee {name} uit?",
+            "body": "Hierdie rekening het geen transaksiegeskiedenis nie. Dit kan veilig verwyder word.",
+            "typePassword": "Voer die wagwoord van jou beursie in om te bevestig.",
+            "hideAccount": "Verwyder rekening",
+            "errorTitle": "Kan nie {name} verwyder nie",
+            "errorBody1": "Jy kan nie hierdie rekening verwyder nie, jy moet ten minste een hê."
         },
         "hideAccount": {
-            "title": "Hide {name}?",
-            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Hide account",
-            "errorTitle": "Unable to hide {name}",
-            "errorBody1": "To hide an account it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
-            "errorBody3": "You cannot hide this account, you must have at least one."
+            "title": "Versteek {name}?",
+            "body": "Jy kan hierdie rekening later vind deur \"Wys versteekte rekeninge\" aan te skakel in Gevorderde instellings.",
+            "typePassword": "Voer die wagwoord van jou beursie in om te bevestig.",
+            "hideAccount": "Versteekte rekening",
+            "errorTitle": "Kan nie {name} versteek nie",
+            "errorBody1": "Om 'n rekening te versteek, moet jy 0 balans hê.",
+            "errorBody2": "Jy het tans {balance} op hierdie rekening oor. Skuif hierdie fondse na 'n ander rekening en probeer weer.",
+            "errorBody3": "Jy kan nie hierdie rekening versteek nie, jy moet ten minste een hê."
         },
         "addressHistory": {
-            "title": "{name} address history",
+            "title": "{name} adresgeskiedenis",
             "currentBalance": "Huidige balaans: {balance}"
         },
         "node": {
             "titleAdd": "Add Node",
-            "titleUpdate": "Update a node",
+            "titleUpdate": "Dateer 'n node op",
             "titleRemove": "Verwyder 'n node",
             "titleDetails": "Node besonderhede",
             "nodeAddress": "Node adres",
@@ -401,8 +401,8 @@
             "userPath": "User Path"
         },
         "transaction": {
-            "title": "Confirm transaction",
-            "body": "You’re about to send {amount} to"
+            "title": "Bevestig die transaksie",
+            "body": "Jy is op die punt om {amount} na"
         }
     },
     "charts": {
@@ -411,7 +411,11 @@
         "portoflio": "Portefeulje",
         "token": "Tokenprys",
         "accountValue": "Rekening Balans",
-        "accountActivity": "Rekeningaktiwiteit"
+        "accountActivity": "Rekeningaktiwiteit",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "Gaan voort",
@@ -460,12 +464,12 @@
         "saveBackup": "Stoor Stronghold Back-up",
         "customizeAcount": "Pas rekening aan",
         "viewAddressHistory": "Bekyk adresgeskiedenis",
-        "hideAccount": "Hide account",
-        "showAccount": "Unhide account",
-        "deleteAccount": "Delete account",
+        "hideAccount": "Versteek rekening",
+        "showAccount": "Wys Rekening",
+        "deleteAccount": "Verwyder rekening",
         "max": "Max",
         "addNode": "Add Node",
-        "updateNode": "Update node",
+        "updateNode": "Dateer node op",
         "removeNode": "Verwyder node",
         "hide": "Versteek",
         "hideOthers": "Versteek Ander",
@@ -491,8 +495,8 @@
         "finishSetup": "Voltooi die opstelling",
         "readDocumentation": "Lees die dokumentasie",
         "visitFaq": "Besoek FAQ",
-        "showHiddenAccounts": "Show hidden accounts",
-        "confirm": "Confirm"
+        "showHiddenAccounts": "Wys Versteekte rekeninge",
+        "confirm": "Bevestig"
     },
     "general": {
         "password": "Wagwoord",
@@ -538,7 +542,7 @@
         "appearance": "Voorkoms",
         "lightTheme": "Ligte tema",
         "darkTheme": "Donker tema",
-        "balance": "Balance",
+        "balance": "Balans",
         "accountBalance": "Rekening balans",
         "incoming": "Inkomende",
         "outgoing": "Uitgaande",
@@ -586,10 +590,10 @@
         "passwordUpdating": "Wagwoord opdatering aan die gang...",
         "passwordSuccess": "Wagwoord suksesvol opgedateer",
         "passwordFailed": "Kon nie wagwoord opdateer nie",
-        "syncingAccounts": "Syncing accounts...",
-        "exportingStronghold": "Exporting Stronghold...",
-        "exportingStrongholdSuccess": "Exported Stronghold successfully",
-        "exportingStrongholdFailed": "Exporting Stronghold failed",
+        "syncingAccounts": "Sinkroniseer rekening...",
+        "exportingStronghold": "Voer Stronghold uit...",
+        "exportingStrongholdSuccess": "Die Stronghold is suksesvol uitgevoer",
+        "exportingStrongholdFailed": "Uitgevoer van Stronghold het misluk",
         "pinCodeUpdating": "Opdatering van PIN-kode...",
         "pinCodeSuccess": "PIN-kode suksesvol opgedateer",
         "pinCodeFailed": "Kon nie PIN-kode opdateer nie",
@@ -600,7 +604,7 @@
         "passwordStrength3": "Gemiddeld",
         "passwordStrength4": "Sterk",
         "creatingProfile": "Skep tans profiel op, wag asseblief...",
-        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
+        "accountRemoved": "Hierdie rekening is versteek. Wys dit om oordragte uit te voer."
     },
     "dates": {
         "today": "Vandag",
@@ -614,7 +618,7 @@
         "valueTx": "Ontvang {{value}} na {{account}}",
         "confirmed": "Uitgaande {{value}} vanaf {{account}} is bevestig",
         "confirmedInternal": "{{value}} van {{senderAccount}} na {{receiverAccount}} hat bevestig",
-        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
+        "confirmedInternalNoAccounts": "Die interne oordrag van {{value}} is bevestig",
         "failed": "Uitgaande {{value}} vanaf {{account}} het nie oordra nie",
         "downloadingUpdate": "Besig om bywerking af te laai",
         "updateReady": "Opdatering gereed",
@@ -623,7 +627,7 @@
         "calcMinutesRemaining": "Bereken oorblywende minute...",
         "minutesRemaining": "{minutes, plural, one {1 minuut oor} other {# minute oor}}",
         "copiedToClipboard": "Kopieer na knipbord",
-        "accountsSynchronized": "Account synchronization complete"
+        "accountsSynchronized": "Rekeningsinkronisering voltooi"
     },
     "error": {
         "profile": {
@@ -670,6 +674,7 @@
             "amountZero": "Die bedrag moet groter as 0 wees.",
             "wrongAddressPrefix": "Adresse begin met die voorvoegsel {prefix}.",
             "wrongAddressFormat": "Die adres is nie korrek geformateer nie.",
+            "invalidAddress": "Die adres is nie geldig nie.",
             "insufficientFunds": "Hierdie rekening het onvoldoende fondse.",
             "noToAccount": "Jy het nie 'n rekening gekies om die fondse na te stuur nie.",
             "sendingDust": "Jy kan nie minder as 1 Mi. stuur nie.",
@@ -692,7 +697,8 @@
             "seedTooShort": "Die seed moet 81 karakters lank wees, dit {length, plural, one {is 1} other {is #}}",
             "seedCharacters": "Die seed moet slegs karakters A-Z of 9 bevat",
             "phraseWordCount": "Daar moet 24 woorde in jou herstelfase voorkom, tans is daar {length, plural, one {1} other {#}}.",
-            "phraseUnrecognizedWord": "Onherkenbare woord \"{word}\" in jou herstelfrase"
+            "phraseUnrecognizedWord": "Onherkenbare woord \"{word}\" in jou herstelfrase",
+            "phraseCaseWord": "Die woord \"{word}\" moet kleinletters wees"
         }
     }
 }

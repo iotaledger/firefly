@@ -106,7 +106,7 @@
         "importFromText": {
             "title": "Restaurează-ți portofelul cu o frază de recuperare sau cu seed-ul tău",
             "body1": "Un seed este format din 81 de caractere. Acesta este folosit pentru a recupera de la un portofel mai vechi Trinity.",
-            "body2": "O frază de recuperare are 24 de cuvinte lungi (cu spații). Aceasta este folosită pentru a recupera un portofel Firefly existent.",
+            "body2": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
             "body3": "Introduce parola sau fraza de recuperare",
             "seedDetected": "Seed de 81 de caractere detectat",
             "phraseDetected": "Frază de recuperare de 24 de cuvinte detectată"
@@ -411,7 +411,11 @@
         "portoflio": "Portfolio",
         "token": "Token",
         "accountValue": "Account Value",
-        "accountActivity": "Account Activity"
+        "accountActivity": "Account Activity",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "Continuă",
@@ -670,6 +674,7 @@
             "amountZero": "The amount must be greater than 0.",
             "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
             "wrongAddressFormat": "The address is not correctly formatted.",
+            "invalidAddress": "The address is not valid.",
             "insufficientFunds": "This account has insufficient funds.",
             "noToAccount": "You have not selected an account to send the funds to.",
             "sendingDust": "You cannot send less than 1 Mi.",
@@ -692,7 +697,8 @@
             "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
             "seedCharacters": "The seed should only contain characters A-Z or 9",
             "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
-            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase"
+            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
+            "phraseCaseWord": "The word \"{word}\" should be lower case"
         }
     }
 }

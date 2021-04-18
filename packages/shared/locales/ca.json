@@ -106,7 +106,7 @@
         "importFromText": {
             "title": "Restaureu la cartera amb una frase de recuperació o una llavor",
             "body1": "Una llavor consta de 81 caràcters. S’utilitza per recuperar d’una cartera Trinity antiga.",
-            "body2": "Una frase de recuperació té 24 paraules (amb espais). S’utilitza per recuperar una cartera Firefly existent.",
+            "body2": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
             "body3": "Introduïu la vostra llavor o la frase de recuperació",
             "seedDetected": "S'ha detectat una llavor de 81 caràcters",
             "phraseDetected": "Frase de 24 paraules detectada"
@@ -411,7 +411,11 @@
         "portoflio": "Portafoli",
         "token": "Token",
         "accountValue": "Valor del compte",
-        "accountActivity": "Activitat del compte"
+        "accountActivity": "Activitat del compte",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "Continuar",
@@ -670,6 +674,7 @@
             "amountZero": "L'import ha de ser superior a 0.",
             "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
             "wrongAddressFormat": "The address is not correctly formatted.",
+            "invalidAddress": "The address is not valid.",
             "insufficientFunds": "Aquest compte no té fons suficients.",
             "noToAccount": "You have not selected an account to send the funds to.",
             "sendingDust": "No es possible enviar menys d'1 Mi.",
@@ -692,7 +697,8 @@
             "seedTooShort": "La llavor ha de tenir 81 caràcters, {length, plural, one {és 1} other {són #}}",
             "seedCharacters": "La llavor només ha de contenir caràcters A-Z o 9",
             "phraseWordCount": "Hi ha d'haver 24 paraules a la frase de recuperació, actualment {length, plural, one {és 1} other {són #}}.",
-            "phraseUnrecognizedWord": "Paraula no reconeguda \"{word}\" a la frase de recuperació"
+            "phraseUnrecognizedWord": "Paraula no reconeguda \"{word}\" a la frase de recuperació",
+            "phraseCaseWord": "The word \"{word}\" should be lower case"
         }
     }
 }
