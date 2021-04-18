@@ -635,7 +635,8 @@ export const updateAccountAfterBalanceChange = (
 
                 const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD;
 
-                return Object.assign<WalletAccount, Partial<WalletAccount>>(storedAccount, {
+                let updatedAddress = false
+                const updatedAccount = Object.assign<WalletAccount, Partial<WalletAccount>>(storedAccount, {
                     rawIotaBalance,
                     balance: formatUnitBestMatch(rawIotaBalance),
                     balanceEquiv: formatCurrency(convertToFiat(
@@ -646,11 +647,34 @@ export const updateAccountAfterBalanceChange = (
                     addresses: storedAccount.addresses.map((_address: Address) => {
                         if (_address.address === address) {
                             _address.balance += receivedBalance - spentBalance
+                            updatedAddress = true
                         }
 
                         return _address
                     })
                 })
+
+                // The address could not be found in our current list of addresses
+                // call getAccounts to fill in the missing information
+                if (!updatedAddress) {
+                    api.getAccounts({
+                        onSuccess(accountsResponse) {
+                            const ac = accountsResponse.payload.find((a) => a.id === accountId)
+                            if (ac) {
+                                const addr = ac.addresses.find(ad => ad.address === address)
+                                if (addr) {
+                                    updatedAccount.addresses.push(addr)
+                                }
+                            }
+                        },
+                        onError(err) {
+                            // Not much we can do with an error here
+                            console.error(err)
+                        },
+                    })
+                }
+
+                return updatedAccount
             }
 
             return storedAccount;
