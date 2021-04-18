@@ -107,7 +107,26 @@
     const handleSendClick = () => {
         amountError = ''
         addressError = ''
+        toError = ''
 
+        if (selectedSendType === SEND_TYPE.EXTERNAL) {
+            // Validate address length
+            if (address.length !== ADDRESS_LENGTH) {
+                addressError = locale('error.send.addressLength', {
+                    values: {
+                        length: ADDRESS_LENGTH,
+                    },
+                })
+            } else {
+                addressError = validateBech32Address(addressPrefix, address)
+            }
+        } else {
+            if (!to) {
+                toError = locale('error.send.noToAccount')
+            }
+        }
+
+        let amountAsI
         if (unit === Unit.i && Number.parseInt(amount, 10).toString() !== amount) {
             amountError = locale('error.send.amountNoFloat')
         } else {
@@ -115,7 +134,7 @@
             if (Number.isNaN(amountAsFloat)) {
                 amountError = locale('error.send.amountInvalidFormat')
             } else {
-                const amountAsI = convertUnits(amountAsFloat, unit, Unit.i)
+                amountAsI = convertUnits(amountAsFloat, unit, Unit.i)
                 if (amountAsI > from.balance) {
                     amountError = locale('error.send.amountTooHigh')
                 } else if (amountAsI <= 0) {
@@ -123,60 +142,43 @@
                 } else if (amountAsI < 1000000) {
                     amountError = locale('error.send.sendingDust')
                 }
+            }
+        }
 
-                if (selectedSendType === SEND_TYPE.EXTERNAL) {
-                    // Validate address length
-                    if (address.length !== ADDRESS_LENGTH) {
-                        addressError = locale('error.send.addressLength', {
-                            values: {
-                                length: ADDRESS_LENGTH,
-                            },
-                        })
-                    } else {
-                        addressError = validateBech32Address(addressPrefix, address)
+        if (!amountError && !addressError && !toError) {
+            // If this is an external send but the dest address is in one of
+            // the other accounts switch it to an internal transfer
+            let internal = selectedSendType === SEND_TYPE.INTERNAL
+
+            if (!internal) {
+                for (const acc of $accounts) {
+                    const internalAddress = acc.addresses.find((a) => a.address === address)
+                    if (internalAddress) {
+                        internal = true
+                        to = acc
+                        break
                     }
-                } else {
-                    if (!to) {
-                        toError = locale('error.send.noToAccount')
-                    }
-                }
-
-                if (!amountError && !addressError && !toError) {
-                    // If this is an external send but the dest address is in one of
-                    // the other accounts switch it to an internal transfer
-                    let internal = selectedSendType === SEND_TYPE.INTERNAL
-
-                    if (!internal) {
-                        for (const acc of $accounts) {
-                            const internalAddress = acc.addresses.find((a) => a.address === address)
-                            if (internalAddress) {
-                                internal = true
-                                to = acc
-                                break
-                            }
-                        }
-                    }
-
-                    $sendParams.address = address
-                    $sendParams.amount = amountAsI
-                    openPopup({
-                        type: 'transaction',
-                        props: {
-                            internal,
-                            amount: $sendParams.amount,
-                            to: internal ? to.alias : $sendParams.address,
-                            onConfirm: () => triggerSend(internal),
-                        },
-                    })
                 }
             }
+
+            $sendParams.address = address
+            $sendParams.amount = amountAsI
+            openPopup({
+                type: 'transaction',
+                props: {
+                    internal,
+                    amount: $sendParams.amount,
+                    to: internal ? to.alias : $sendParams.address,
+                    onConfirm: () => triggerSend(internal),
+                },
+            })
         }
     }
 
     const triggerSend = (internal) => {
         closePopup()
         if (internal) {
-            // We pass the original selectedSendType in case we are masquerading as 
+            // We pass the original selectedSendType in case we are masquerading as
             // an internal transfer by a send to an address in one of our
             // other accounts. When the transfer completes it resets
             // the send params to where it was
@@ -283,7 +285,7 @@
                             onSelect={handleToSelect}
                             disabled={$isTransferring || $liveAccounts.length === 2}
                             error={toError}
-                            classes="mb-6" 
+                            classes="mb-6"
                             autofocus />
                     {:else}
                         <Address

@@ -106,7 +106,7 @@
         "importFromText": {
             "title": "Restaurez votre portefeuille avec une phrase de récupération ou une seed",
             "body1": "Un germe aléatoire (seed) est composé de 81 caractères. Il est utilisé pour importer un portefeuille Trinity plus ancien.",
-            "body2": "Une phrase de récupération est composée de 24 mots. Elle est utilisée pour récupérer un portefeuille Firefly existant.",
+            "body2": "Une phrase de récupération est composée de 24 mots, tous en minuscules, avec un espace entre chaque mot. Elle est utilisée pour récupérer un portefeuille Firefly existant.",
             "body3": "Saisissez votre seed ou votre phrase de récupération",
             "seedDetected": "Graine de 81 caractères détectée",
             "phraseDetected": "Phrase de récupération de 24 mots détectée"
@@ -411,7 +411,11 @@
         "portoflio": "Portefeuille",
         "token": "Jeton",
         "accountValue": "Valeur du compte",
-        "accountActivity": "Activité du compte"
+        "accountActivity": "Activité du compte",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "Continuer",
@@ -670,6 +674,7 @@
             "amountZero": "Le montant doit être supérieur à 0.",
             "wrongAddressPrefix": "Les adresses commencent par le préfixe {prefix}.",
             "wrongAddressFormat": "L'adresse n'est pas correctement formatée.",
+            "invalidAddress": "Cette adresse n'est pas valide.",
             "insufficientFunds": "Ce compte ne dispose pas de fonds suffisants.",
             "noToAccount": "Vous n'avez pas sélectionné de compte vers lequel envoyer les fonds.",
             "sendingDust": "Vous ne pouvez pas envoyer moins de 1 Mi.",
@@ -692,7 +697,8 @@
             "seedTooShort": "La seed devrait contenir 81 caractères, elle en contient {length, plural, one {1} other {#}}",
             "seedCharacters": "La seed (graine) ne doit contenir que des caractères A-Z ou le chiffre 9",
             "phraseWordCount": "Il devrait y avoir 24 mots dans votre phrase de récupération, actuellement il y en a {length, plural, one {1} other {#}}.",
-            "phraseUnrecognizedWord": "Mot \"{word}\" non reconnu dans votre phrase de récupération"
+            "phraseUnrecognizedWord": "Mot \"{word}\" non reconnu dans votre phrase de récupération",
+            "phraseCaseWord": "Le mot \"{word}\" doit être écrit en minuscules"
         }
     }
 }

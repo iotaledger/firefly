@@ -87,9 +87,9 @@
             "title": "Stronghold biztonsági mentés",
             "body1": "Tárcája Stronghold-ba történő mentéséhez adja meg jelszavát. A jelszó a biztonsági mentés titkosítására szolgál.",
             "body2": "A digitális biztonsági mentés az alábbiak miatt fontos:",
-            "reason1": "- Egyszerűen helyreállíthatja tárcáját anélkül, hogy beírná a helyreállítási szavakat",
-            "reason2": "- Könnyen importálhatja tárcáját más eszközökre",
-            "reason3": "- Helyreállíthatja tranzakcióinak előzményeit"
+            "reason1": "Egyszerűen helyreállíthatja tárcáját anélkül, hogy beírná a helyreállítási szavakat",
+            "reason2": "Könnyen importálhatja tárcáját más eszközökre",
+            "reason3": "Helyreállíthatja tranzakcióinak előzményeit"
         },
         "recoveryPhraseSaved": {
             "title": "Sikeres biztonsági mentés",
@@ -104,15 +104,15 @@
             "body": "Ha rendelkezik helyreállítási szavakkal vagy Stronghold biztonsági mentéssel, itt importálhatja azokat."
         },
         "importFromText": {
-            "title": "Állítsa helyre tárcáját helyreállítási szavak vagy seed használatával",
+            "title": "Tárca helyreállítása helyreállítási szavak vagy seed használatával",
             "body1": "A seed 81 karakterből áll. Régebbi, Trinity tárcából történő helyreállításra szolgál.",
-            "body2": "A helyreállítási szavak 24 szóból állnak. Egy létező Firefly tárca helyreállítására használhatóak.",
+            "body2": "A helyreállítási szavak 24 csupa kisbetűs szóból állnak, egymástól szóközzel elválasztva, melyek egy már meglévő Firefly tárca helyreállítására szolgálnak.",
             "body3": "Írja be a seed-et vagy a helyreállítási szavakat",
             "seedDetected": "81 karakterből álló seed észlelve",
             "phraseDetected": "24 szóból álló helyreállítási szavak észlelve"
         },
         "importFromFile": {
-            "title": "Állítsa helyre tárcáját a biztonsági mentés használatával",
+            "title": "Tárca helyreállítása biztonsági mentés használatával",
             "body": "Importálja tárcáját egy meglévő biztonsági mentésből, mely lehet Stronghold (.stronghold) vagy Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
@@ -242,8 +242,8 @@
                 "noNodes": "Nincs egyetlen csomópont sem. Automatikus csomópont kiválasztás engedélyezve."
             },
             "proofOfWork": {
-                "title": "Kiszabott munka elvégzése",
-                "description": "Kiszabott munka saját eszközön történő elvégzése vagy csomópontra történő kiszervezése"
+                "title": "Tranzakcíók hitelesítéséhez szükséges számítás",
+                "description": "Számítás saját eszközön történő elvégzése vagy csomópontra történő kiszervezése"
             },
             "errorLog": {
                 "title": "Hibanapló",
@@ -304,12 +304,12 @@
                     "unlocked": "Stronghold kinyitva"
                 },
                 "strongholdBackup": {
-                    "title": "Tárca biztonsági mentés",
+                    "title": "Tárca biztonsági mentése",
                     "weeksAgo": "{weeks, plural, one {# héttel} other {# héttel}} ezelőtt"
                 }
             },
             "network": {
-                "networkOperational": "Hálózat elérhető",
+                "networkOperational": "A hálózat működik",
                 "networkDegraded": "Hálózati problémák",
                 "networkDown": "A hálózat nem elérhető",
                 "status": "Állapot",
@@ -406,12 +406,16 @@
         }
     },
     "charts": {
-        "incomingMi": "{value} Mi fogadása folyamatban...",
-        "outgoingMi": "{value} Mi küldése folyamatban...",
+        "incomingMi": "{value} Mi érkezett",
+        "outgoingMi": "{value} Mi elküldve",
         "portoflio": "Portfólió",
         "token": "Token",
         "accountValue": "Számlaegyenleg",
-        "accountActivity": "Számlatörténet"
+        "accountActivity": "Számlatörténet",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "Tovább",
@@ -446,14 +450,14 @@
         "importExtentions": ".kdbx vagy .stronghold file",
         "chooseFile": "Válasszon egy fájlt",
         "dropHere": "Húzza ide a fájlt",
-        "syncAll": "Összes szinkronizálása",
+        "syncAll": "Minden szinkronizálása",
         "export": "Exportálás",
         "exportNewStronghold": "Új Stronghold exportálása",
         "enableDeepLinks": "Mélylinkek engedélyezése",
         "enableDeveloperMode": "Fejlesztői mód engedélyezése",
         "enableSystemNotifications": "Rendszer értesítések engedélyezése",
         "exportState": "Állapot exportálása",
-        "localProofOfWork": "Kiszabott munka elvégzése helyben",
+        "localProofOfWork": "Számítás elvégzése helyben",
         "unlock": "Felold",
         "updateFirefly": "Firefly frissítése",
         "restartNow": "Újraindítás most",
@@ -505,13 +509,13 @@
         "recentActivity": "Legutóbbi tevékenységek",
         "sent": "Elküldött",
         "received": "Fogadott",
-        "sendPayment": "Küldés idegen számlára",
+        "sendPayment": "Átutalás",
         "moveFunds": "Küldés saját számlák közt",
         "sendFunds": "Átutalás",
         "sendToAddress": "Küldés a következő címre",
         "scanQrOrPaste": "QR-kód beolvasása vagy cím beillesztése",
         "moveFundsBetweenAccounts": "Egyenleg átvezetése számlák között",
-        "sendTokensToAddress": "Tokenek küldése egy címre",
+        "sendTokensToAddress": "Tokenek küldése",
         "manageAccount": "Számla kezelése",
         "customizeAcount": "Számla személyre szabása",
         "account": "Számla",
@@ -562,7 +566,7 @@
         "help": "Segítség",
         "you": "Ön",
         "messageId": "Üzenetazonosító",
-        "inputAddress": "Küldés címre",
+        "inputAddress": "Küldő cím",
         "receiveAddress": "Fogadó cím",
         "date": "Dátum",
         "status": "Állapot",
@@ -670,6 +674,7 @@
             "amountZero": "Az összegnek nagyobbnak kell lennie, mint 0.",
             "wrongAddressPrefix": "A címeknek {prefix} előtaggal kell kezdődniük.",
             "wrongAddressFormat": "A cím nem megfelelő formátumú.",
+            "invalidAddress": "Helytelen cím.",
             "insufficientFunds": "Nincs elég fedezet a számláján a tranzakció végrehajtásához.",
             "noToAccount": "Nem választott célszámlát a küldéshez.",
             "sendingDust": "1 Mi-nél kevesebbet nem lehet elküldeni.",
@@ -692,7 +697,8 @@
             "seedTooShort": "A seed-nek 81 karakter hosszúnak kell lennie, de a megadott seed csak {length, plural, one {1} other {#}} hosszú",
             "seedCharacters": "A seed csak A-Z vagy 9 karaktereket tartalmazhat",
             "phraseWordCount": "24 helyett csak {length, plural, one {1} other { #}} helyreállítási szót adott meg.",
-            "phraseUnrecognizedWord": "Ismeretlen szó \"{word}\" található a helyreállítási szavak között"
+            "phraseUnrecognizedWord": "Ismeretlen szó \"{word}\" található a helyreállítási szavak között",
+            "phraseCaseWord": "A “{word}” szó csak kisbetűkből állhat"
         }
     }
 }
