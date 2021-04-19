@@ -1,10 +1,10 @@
 <script lang="typescript">
-    import { Button, ButtonCheckbox, Illustration, Input, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, ButtonCheckbox, Input, OnboardingLayout, Text } from 'shared/components'
     import { cleanupSignup, developerMode } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
     import { getTrimmedLength, validateFilenameChars } from 'shared/lib/helpers'
-    import { showAppNotification } from 'shared/lib/notifications'
     import { initialiseMigrationListeners } from 'shared/lib/migration'
+    import { showAppNotification } from 'shared/lib/notifications'
     import {
         cleanupInProgressProfiles,
         createProfile,
@@ -128,9 +128,8 @@
                 {locale('actions.continue')}
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center p-16 bg-pastel-green dark:bg-gray-900">
-            <!-- TODO: update illustration -->
-            <Illustration illustration="setup-desktop" width="100%" height="auto" classes="object-cover" />
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-green dark:bg-gray-900">
+            <Animation illustration="profile-desktop" />
         </div>
     </OnboardingLayout>
 {/if}
