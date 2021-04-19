@@ -132,6 +132,16 @@ export const createMigrationBundle = (inputAddressIndexes: number[], offset: num
     })
 };
 
+/**
+ * Signs and broadcast bundle to the (legacy) network
+ * 
+ * @method sendMigrationBundle
+ * 
+ * @param {string} bundleHash 
+ * @param {number} [mwm]
+ *  
+ * @returns {Promise<void>}
+ */
 export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAGNITUDE): Promise<void> => {
     return new Promise((resolve, reject) => {
         api.sendMigrationBundle([MIGRATION_NODE], bundleHash, mwm, {
@@ -175,9 +185,14 @@ export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAG
 }
 
 /**
+ * Assigns bundle hash and crackability score to bundles
+ * 
+ * @method assignBundleHash
  * 
  * @param inputAddressIndexes 
  * @param migrationBundle 
+ * 
+ * @returns {void}
  */
 export const assignBundleHash = (inputAddressIndexes: number[], migrationBundle: MigrationBundle, didMine: boolean): void => {
     const { bundles } = get(migration);
@@ -312,6 +327,13 @@ const selectInputsForUnspentAddresses = (inputs: Input[]): Input[][] => {
     return chunks;
 };
 
+/**
+ * Prepares bundles from inputs
+ * 
+ * @method prepareBundles
+ * 
+ * @returns {void}
+ */
 export const prepareBundles = () => {
     const { data, bundles } = get(migration)
 
@@ -339,15 +361,26 @@ export const prepareBundles = () => {
     ].map((_, index) => ({ ..._, index })))
 };
 
+/**
+ * Gets input indexes for all addresses / inputs in a bundle
+ * 
+ * @method getInputIndexesForBundle
+ * 
+ * @param {Bundle} bundle
+ *  
+ * @returns {number[]} 
+ */
 export const getInputIndexesForBundle = (bundle: Bundle): number[] => {
     const { inputs } = bundle;
 
     return inputs.map((input) => input.index);
 }
 
+/**
+ * Get all spent addresses from bundles
+ */
 export const spentAddressesFromBundles = derived(get(migration).bundles, (_bundles) => _bundles
     .filter((bundle) => bundle.migrated === false && bundle.shouldMine === true)
-    // TODO: Perhaps use a different way to gather inputs
     .map((bundle) => Object.assign({}, bundle.inputs[0], {
         selectedToMine: bundle.selectedToMine,
         bundleHash: bundle.bundleHash,
@@ -355,11 +388,26 @@ export const spentAddressesFromBundles = derived(get(migration).bundles, (_bundl
     }))
 )
 
+/**
+ * Determines if we only have a single bundle to migrate
+ */
 export const hasSingleBundle = derived(get(migration).bundles, (_bundles) => _bundles.length === 1 && _bundles[0].selected === true)
 
+/**
+ * Determines if we have bundles with spent addresses
+ */
 export const hasBundlesWithSpentAddresses = derived(get(migration).bundles, (_bundles) => _bundles.length && _bundles.some((bundle) => bundle.shouldMine === true &&
     bundle.selected === true))
 
+/**
+ * Toggles mining selection
+ * 
+ * @method toggleMiningSelection
+ * 
+ * @param {Address} address
+ * 
+ * @returns {void} 
+ */
 export const toggleMiningSelection = (address: Address): void => {
     const { bundles } = get(migration)
 
@@ -372,6 +420,13 @@ export const toggleMiningSelection = (address: Address): void => {
     }))
 }
 
+/**
+ * Selects all addresses for mining
+ * 
+ * @method selectAllAddressesForMining
+ * 
+ * @returns {void}
+ */
 export const selectAllAddressesForMining = (): void => {
     const { bundles } = get(migration)
     bundles.update((_bundles) => _bundles.map((bundle) => {
@@ -401,42 +456,59 @@ export const resetMigrationState = (): void => {
     bundles.set([])
 }
 
-export const selectedUnmigratedBundles = derived(get(migration).bundles, (_bundles) => _bundles.filter((bundle) =>
-    bundle.selected === true && bundle.migrated === false
-))
-
+/**
+ * All selected bundles for mining
+ */
 export const selectedBundlesToMine = derived(get(migration).bundles, (_bundles) => _bundles.filter((bundle) =>
     bundle.selectedToMine === true &&
     bundle.shouldMine === true
 ))
 
+/**
+ * All selected bundles that are yet to migrate
+ */
 export const unmigratedBundles = derived(get(migration).bundles, (_bundles) => _bundles.filter((bundle) =>
     bundle.selected === true &&
     bundle.migrated === false
 ))
 
+/**
+ * Determines if we have migrated all bundles
+ */
 export const hasMigratedAllBundles = derived(get(migration).bundles, (_bundles) => _bundles.length && _bundles.every((bundle) =>
     bundle.selected === true &&
     bundle.migrated === true
 ))
 
+/**
+ * Determines if we have migrated any bundle
+ */
 export const hasMigratedAnyBundle = derived(get(migration).bundles, (_bundles) => _bundles.some((bundle) =>
     bundle.selected === true &&
     bundle.migrated === true
 ))
 
+/**
+ * Determines if we have migrated all selected bundles
+ */
 export const hasMigratedAllSelectedBundles = derived(get(migration).bundles, (_bundles) => {
     const selectedBundles = _bundles.filter((bundle) => bundle.selected === true)
 
     return selectedBundles.length && selectedBundles.every((bundle) => bundle.migrated === true)
 });
 
+/**
+ * Determines if all migrated bundles are confirmed
+ */
 export const hasMigratedAndConfirmedAllSelectedBundles = derived(get(migration).bundles, (_bundles) => {
     const selectedBundles = _bundles.filter((bundle) => bundle.selected === true)
 
     return selectedBundles.length && selectedBundles.every((bundle) => bundle.migrated === true && bundle.confirmed === true)
 });
 
+/**
+ * Total migration balance
+ */
 export const totalMigratedBalance = derived(get(migration).bundles, (_bundles) => {
     return _bundles.reduce((acc, bundle) => {
         if (bundle.selected && bundle.migrated) {
@@ -447,6 +519,9 @@ export const totalMigratedBalance = derived(get(migration).bundles, (_bundles) =
     }, 0)
 })
 
+/**
+ * Determines if all spent addresses have low (less than MINIMUM MIGRATION) balance
+ */
 export const hasLowBalanceOnAllSpentAddresses = derived(get(migration).bundles, (_bundles) => {
     const bundlesWithSpentAddresses = _bundles.filter((bundle) =>
         bundle.shouldMine === true
@@ -455,21 +530,36 @@ export const hasLowBalanceOnAllSpentAddresses = derived(get(migration).bundles, 
     return bundlesWithSpentAddresses.length && bundlesWithSpentAddresses.every((bundle) => bundle.inputs.every((input) => input.balance < MINIMUM_MIGRATION_BALANCE))
 })
 
+/**
+ * Bundles with unspent addresses as inputs
+ */
 export const bundlesWithUnspentAddresses = derived(get(migration).bundles, (_bundles) => _bundles.filter((bundle) =>
     bundle.selected === true &&
     bundle.shouldMine === false
 ))
 
+/**
+ * Determines if there is any spent address with associated (previous) bundle hashes
+ */
 export const hasAnySpentAddressWithNoBundleHashes = derived(get(migration).bundles, (_bundles) => _bundles.length &&
     _bundles.some((bundle) => bundle.inputs.some((input) => input.spent && ((Array.isArray(input.spentBundleHashes) && !input.spentBundleHashes.length) || input.spentBundleHashes === null))))
 
 
+/**
+ * All spent address that have no bundle hashes
+ */
 export const spentAddressesWithNoBundleHashes = derived([get(migration).data, get(migration).bundles], ([data]) => data.inputs.filter((input) => input.spent && input.balance >= MINIMUM_MIGRATION_BALANCE && ((Array.isArray(input.spentBundleHashes) && !input.spentBundleHashes.length) || input.spentBundleHashes === null)))
 
+/**
+ * Inputs that were not selected for migration (have low balance)
+ */
 export const unselectedInputs = derived([get(migration).data, get(migration).bundles], ([data, bundles]) => {
     return data.inputs.filter((input) => !bundles.some((bundle) => bundle.inputs.some((bundleInput) => bundleInput.address === input.address)))
 })
 
+/**
+ * All confirmed bundles
+ */
 export const confirmedBundles = derived(get(migration).bundles, (_bundles) => _bundles.filter((bundle) =>
     bundle.selected === true &&
     bundle.confirmed === true
@@ -480,30 +570,38 @@ export const confirmedBundles = derived(get(migration).bundles, (_bundles) => _b
  */
 // TODO: Update to mainnet chrysalis endpoint
 export const CHRYSALIS_NODE_ENDPOINTS = ['https://api.lb-0.migration4.iotatestmigration4.net/api/v1/info']
+
 /**
 * Default timeout for a request made to an endpoint
 */
 const DEFAULT_CHRYSALIS_NODE_ENDPOINT_TIMEOUT = 5000
+
 /**
 * Mainnet ID used in a chrysalis node 
 */
 // TODO: Update to 'mainnet'
 const MAINNET_ID = 'migration3'
+
 /**
  * Default interval for polling the market data
  */
 const DEFAULT_CHRYSALIS_NODE_POLL_INTERVAL = 300000 // 5 minutes
+
 type ChrysalisNode = {
     data: ChrysalisNodeData
 }
+
 type ChrysalisNodeData = {
     networkId: string
 }
+
 export type ChrysalisNodeDataValidationResponse = {
     type: 'ChrysalisNode'
     payload: ChrysalisNode
 }
+
 let chrysalisStatusIntervalID = null
+
 /**
  * Poll the Chrysalis mainnet status at an interval
  */
@@ -511,6 +609,7 @@ export async function pollChrysalisStatus(): Promise<void> {
     await checkChrysalisStatus()
     chrysalisStatusIntervalID = setInterval(async () => checkChrysalisStatus(), DEFAULT_CHRYSALIS_NODE_POLL_INTERVAL)
 }
+
 /**
  * Stops Chrysalis mainnet poll
  */
@@ -519,6 +618,7 @@ function stopPoll(): void {
         clearInterval(chrysalisStatusIntervalID)
     }
 }
+
 /**
  * Fetches Chrysalis mainnet status
  *
@@ -573,6 +673,9 @@ export async function checkChrysalisStatus(): Promise<void> {
     }
 }
 
+/**
+ * Initialise migration process listeners
+ */
 export const initialiseMigrationListeners = () => {
     api.onMigrationProgress({
         onSuccess(response) {

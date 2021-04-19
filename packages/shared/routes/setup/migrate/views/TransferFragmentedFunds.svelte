@@ -7,7 +7,6 @@
         createMigrationBundle,
         sendMigrationBundle,
         unmigratedBundles,
-        selectedUnmigratedBundles,
         hasMigratedAnyBundle,
         confirmedBundles,
         hasMigratedAndConfirmedAllSelectedBundles,
@@ -26,7 +25,7 @@
 
     const { didComplete } = $migration
 
-    let transactions = $selectedUnmigratedBundles.map((_bundle, index) => ({
+    let transactions = $unmigratedBundles.map((_bundle, index) => ({
         ..._bundle,
         name: locale('views.transferFragmentedFunds.transaction', { values: { number: index + 1 } }),
         balance: _bundle.inputs.reduce((acc, input) => acc + input.balance, 0),

@@ -54,6 +54,16 @@ const Electron = {
         })
     },
 
+    /**
+     * Exports migration log
+     * 
+     * @method exportMigrationLog
+     * 
+     * @param {string} sourcePath 
+     * @param {string} defaultFileName
+     *  
+     * @returns {Promise<boolean>}
+     */
     exportMigrationLog: (sourcePath, defaultFileName) => {
         return ipcRenderer.invoke('show-save-dialog',
             {
@@ -97,7 +107,6 @@ const Electron = {
     /**
      * Validates Seed Vault
      * 
-     * 
      * @method validateSeedVault
      * 
      * @param {Buffer} buffer 
@@ -107,7 +116,6 @@ const Electron = {
     validateSeedVault: (buffer) => {
         return kdbx.checkFormat(buffer);
     },
-
 
     /**
      * Gets directory for app's configuration files
