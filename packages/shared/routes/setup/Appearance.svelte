@@ -15,7 +15,6 @@
     let darkModeEnabled = $appSettings.darkMode
 
     let _clonedVariable = undefined
-    let onBlinkEnd = undefined
     let segments = BLINK_SEGMENTS
 
     $: $appSettings.darkMode = darkModeEnabled
@@ -23,7 +22,6 @@
     $: if (_clonedVariable !== undefined && _clonedVariable !== darkModeEnabled) {
         _clonedVariable = darkModeEnabled // ghetto reactive implementation
         segments = SWITCH_SEGMENTS
-        onBlinkEnd = restartAnimation
     }
 
     const dispatch = createEventDispatcher()
@@ -33,10 +31,6 @@
     }
     function handleBackClick() {
         dispatch('previous')
-    }
-    function restartAnimation() {
-        segments = BLINK_SEGMENTS
-        onBlinkEnd = null
     }
 
     onMount(() => {
