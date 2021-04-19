@@ -1,20 +1,26 @@
 <script lang="typescript">
     import { Box, Button, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
-    import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
-    import { formatUnitBestMatch } from 'shared/lib/units'
     import {
-        getInputIndexesForBundle,
-        hasSingleBundle,
-        hasBundlesWithSpentAddresses,
-        migration,
+        AvailableExchangeRates,
+        convertToFiat,
+        currencies,
+        CurrencyTypes,
+        exchangeRates,
+        formatCurrency,
+    } from 'shared/lib/currency'
+    import {
+        confirmedBundles,
         createMigrationBundle,
+        getInputIndexesForBundle,
+        hasBundlesWithSpentAddresses,
+        hasSingleBundle,
+        migration,
         sendMigrationBundle,
         unselectedInputs,
-        confirmedBundles,
     } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
-
+    import { formatUnitBestMatch } from 'shared/lib/units'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -28,11 +34,10 @@
 
     let migratableBalance = balance - $unselectedInputs.reduce((acc, input) => acc + input.balance, 0)
 
-    let fiatbalance = `${convertToFiat(
-        migratableBalance,
-        get(currencies)[CurrencyTypes.USD],
-        get(exchangeRates)[AvailableExchangeRates.USD]
-    )} ${CurrencyTypes.USD}`
+    let fiatbalance = formatCurrency(
+        convertToFiat(migratableBalance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[AvailableExchangeRates.USD]),
+        AvailableExchangeRates.USD
+    )
 
     let loading = false
 

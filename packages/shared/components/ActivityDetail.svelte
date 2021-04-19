@@ -16,6 +16,7 @@
     export let locale
     export let payload: Payload
     export let onBackClick = () => {}
+    export let balance // migration tx
 
     let milestonePayload = payload?.type === 'Milestone' ? (payload as Milestone) : undefined
     let txPayload = payload?.type === 'Transaction' ? (payload as Transaction) : undefined
@@ -28,7 +29,7 @@
 
     const prepareSenderAddress = () => {
         if (txPayload) {
-            return sendAddressFromTransactionPayload(payload)
+            return sendAddressFromTransactionPayload(txPayload)
         } else if (milestonePayload) {
             return 'Legacy Network'
         }
@@ -177,12 +178,14 @@
                 {/each}
             </div>
         {/if}
-        <div class="mb-5">
-            <Text secondary>{locale('general.amount')}</Text>
-            <button class="text-left" on:click={() => setClipboard(payload.data.essence.data.value.toString())}>
-                <Text type="pre" classes="mb-2">{formatUnitPrecision(payload.data.essence.data.value, Unit.i, true, true)}</Text>
-            </button>
-        </div>
+        {#if txPayload || milestonePayload}
+            <div class="mb-5">
+                <Text secondary>{locale('general.amount')}</Text>
+                <button class="text-left" on:click={() => setClipboard(value.toString())}>
+                    <Text type="pre" classes="mb-2">{formatUnitPrecision(value, Unit.i, true, true)}</Text>
+                </button>
+            </div>
+        {/if}
     </div>
 
     <div class="w-full flex justify-center">
