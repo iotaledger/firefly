@@ -7,10 +7,11 @@
     export let secondary = false
     export let disabled = false
     export let ghost = false
+    export let classes = ''
 </script>
 
 <a
-    class="text-12 leading-140 cursor-pointer text-blue-500"
+    class="text-12 leading-140 cursor-pointer text-blue-500 {classes}"
     data-label="link"
     use:bindEvents={events}
     {href}

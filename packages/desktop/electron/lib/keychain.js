@@ -6,7 +6,8 @@ const Keychain = {
     /**
      * Service name — Key under which credentials will be stored.
      */
-    SERVICE_NAME: app.isPackaged ? 'Firefly Beta' : 'Firefly — Dev',
+    // TODO: Remove `Firefly Migration`
+    SERVICE_NAME: app.isPackaged ? 'Firefly Migration' : 'Firefly — Dev',
     /**
      * Gets all credentials from keychain
      *

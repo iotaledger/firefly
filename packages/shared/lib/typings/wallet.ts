@@ -182,3 +182,13 @@ export function setStrongholdPasswordClearInterval(bridge: Bridge, __ids: Commun
         payload,
     })
 }
+
+
+export function getLegacySeedChecksum(bridge: Bridge, __ids: CommunicationIds, payload: string) {
+    return bridge({
+        actorId: __ids.actorId,
+        id: __ids.messageId,
+        cmd: 'GetSeedChecksum',
+        payload,
+    })
+}

@@ -8,10 +8,10 @@
     import {
         AccountMessage,
         api,
+        asyncSyncAccounts,
         isSyncing,
         selectedAccountId,
         selectedMessage,
-        syncAccounts,
         WalletAccount,
     } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
@@ -39,10 +39,10 @@
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
                 if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({ type: 'password', props: { onSuccess: () => syncAccounts(false, 0, 10, 5) } })
+                    openPopup({ type: 'password', props: { onSuccess: async () => asyncSyncAccounts(0, 10, 5) } })
                 } else {
                     const gapLimit = $activeProfile?.gapLimit
-                    syncAccounts(false, gapLimit === undefined ? undefined : 0, gapLimit, 5)
+                    asyncSyncAccounts(gapLimit === undefined ? undefined : 0, gapLimit, 5)
                     updateProfile('gapLimit', undefined)
                 }
             },

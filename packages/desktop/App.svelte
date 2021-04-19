@@ -28,6 +28,7 @@
         Secure,
         Settings,
         Setup,
+        Profile,
         Splash,
         Welcome,
     } from 'shared/routes'
@@ -207,6 +208,9 @@
         <Route route={AppRoute.Appearance}>
             <Appearance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
         </Route>
+        <Route route={AppRoute.Profile}>
+            <Profile on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
+        </Route>
         <Route route={AppRoute.Setup}>
             <Setup on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
         </Route>
@@ -229,7 +233,7 @@
             <Balance on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} />
         </Route>
         <Route route={AppRoute.Migrate}>
-            <Migrate on:next={routerNext} mobile={$mobile} locale={$_} {goto} />
+            <Migrate on:next={routerNext} on:previous={routerPrevious} mobile={$mobile} locale={$_} {goto} />
         </Route>
         <Route route={AppRoute.Congratulations}>
             <Congratulations on:next={routerNext} mobile={$mobile} locale={$_} {goto} />

@@ -43,17 +43,6 @@
     $: to, (toError = '')
     $: address, (addressError = '')
 
-    const updateFromSendParams = ((s) => {
-        selectedSendType = s.isInternal ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
-        unit = Unit.i
-        amount = s.amount === 0 ? '' : formatUnitPrecision(s.amount, Unit.i, false)
-        address = s.address
-    })
-
-    const sendSubscription = sendParams.subscribe((s) => {
-        updateFromSendParams(s)
-    })
-
     let transferSteps: {
         [key in TransferProgressEventType | 'Complete']: {
             label: string
@@ -90,31 +79,47 @@
         },
     }
 
-    $: accountsDropdownItems = $liveAccounts.map((acc) => format(acc))
-    $: from = $account ? format($account) : accountsDropdownItems[0]
+    let accountsDropdownItems
+    let from
+    $: {
+        accountsDropdownItems = $liveAccounts.map((acc) => format(acc))
+
+        if (from) {
+            from = accountsDropdownItems.find(a => a.id === from.id)
+        } else {
+            from = $account ? accountsDropdownItems.find(a => a.id === $account.id) : accountsDropdownItems[0]
+        }
+        if (to) {
+            to = accountsDropdownItems.find(a => a.id === to.id)
+        }
+    }
+
+    const clearErrors = () => {
+        amountError = ''
+        addressError = ''
+        toError = ''
+    }
 
     const handleSendTypeClick = (type) => {
         selectedSendType = type
-        amountError = ''
+        clearErrors()
     }
     const handleFromSelect = (item) => {
         from = item
         if (to === from) {
             to = $liveAccounts.length === 2 ? accountsDropdownItems[from.id === $liveAccounts[0].id ? 1 : 0] : undefined
         }
-        amountError = ''
+        clearErrors()
     }
     const handleToSelect = (item) => {
         to = item
         if (from === to) {
             from = undefined
         }
-        amountError = ''
+        clearErrors()
     }
     const handleSendClick = () => {
-        amountError = ''
-        addressError = ''
-        toError = ''
+        clearErrors()
 
         if (selectedSendType === SEND_TYPE.EXTERNAL) {
             // Validate address length
@@ -213,9 +218,23 @@
     const handleMaxClick = () => {
         amount = formatUnitPrecision(from.balance, unit, false)
     }
+
+    const updateFromSendParams = ((s) => {
+        selectedSendType = s.isInternal ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
+        unit =  s.amount === 0 ? Unit.Mi : Unit.i
+        amount = s.amount === 0 ? '' : formatUnitPrecision(s.amount, Unit.i, false)
+        address = s.address
+        if (from && accountsDropdownItems) {
+            to = $liveAccounts.length === 2 ? accountsDropdownItems[from.id === $liveAccounts[0].id ? 1 : 0] : to
+        }
+    })
+
+    const sendSubscription = sendParams.subscribe((s) => {
+        updateFromSendParams(s)
+    })
+
     onMount(() => {
         updateFromSendParams($sendParams)
-        to = $liveAccounts.length === 2 ? accountsDropdownItems[from.id === $liveAccounts[0].id ? 1 : 0] : to
     })
     onDestroy(() => {
         sendSubscription()
@@ -326,6 +345,6 @@
         </div>
     {/if}
     {#if $isTransferring}
-        <ProgressBar message={transferSteps[$transferState]?.label} percent={transferSteps[$transferState]?.percent} />
+        <ProgressBar secondary message={transferSteps[$transferState]?.label} percent={transferSteps[$transferState]?.percent} />
     {/if}
 </div>

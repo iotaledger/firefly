@@ -10,6 +10,14 @@ import {
 } from './marketData'
 import type { Node } from './typings/client'
 
+export interface MigratedTransaction {
+    address: string;
+    balance: number;
+    timestamp: string
+    account: number;
+    tailTransactionHash: string;
+}
+
 /**
  * Profile
  */
@@ -24,8 +32,9 @@ export interface Profile {
      * User settings
      */
     settings: UserSettings
+    hiddenAccounts?: string[],
+    migratedTransactions?: MigratedTransaction[]
     isDeveloperProfile: boolean
-    hiddenAccounts?: string[]
     gapLimit?: number
 }
 
@@ -130,7 +139,7 @@ export const disposeNewProfile = async () => {
     const np = get(newProfile)
     if (np) {
         try {
-            await asyncRemoveStorage()
+            await removeProfileFolder(np.name)
         } catch (err) {
             console.error(err)
         }
@@ -189,7 +198,7 @@ export const removeProfile = (id: string): void => {
  * @returns {void}
  */
 export const updateProfile = (
-    path: string, value: string | string[] | boolean | Date | number | AvailableExchangeRates | Node | Node[] | ChartSelectors | HistoryDataProps) => {
+    path: string, value: string | string[] | boolean | Date | number | AvailableExchangeRates | Node | Node[] | ChartSelectors | HistoryDataProps | MigratedTransaction[]) => {
     const _update = (_profile) => {
         const pathList = path.split('.')
 

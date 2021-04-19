@@ -19,8 +19,7 @@
             error = ''
             isBusy = true
             await asyncSetStrongholdPassword(password)
-            const syncedAccounts = await asyncSyncAccounts(addressIndex, gapIndex, accountDiscoveryThreshold)
-            updateAccounts(syncedAccounts)
+            await asyncSyncAccounts(addressIndex, gapIndex, accountDiscoveryThreshold, false)
             addressIndex += gapIndex
         } catch (err) {
             error = locale(err.error)

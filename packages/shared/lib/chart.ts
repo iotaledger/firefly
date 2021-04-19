@@ -159,16 +159,19 @@ export const getAccountActivityData = (account: WalletAccount) => {
             if (new Date(messages[messages.length - 1].timestamp).getTime() >= start && new Date(messages[messages.length - 1].timestamp).getTime() <= end) {
                 for (index; index < messages.length; index++) {
                     const message = messages[index]
-                    const messageTimestamp = new Date(message.timestamp).getTime()
-                    if (messageTimestamp >= start && messageTimestamp <= end) {
-                        if (message.payload.data.essence.data.incoming) {
-                            _incoming += message.payload.data.essence.data.value
+
+                    if (message.payload.type === 'Transaction') {
+                        const messageTimestamp = new Date(message.timestamp).getTime()
+                        if (messageTimestamp >= start && messageTimestamp <= end) {
+                            if (message.payload.data.essence.data.incoming) {
+                                _incoming += message.payload.data.essence.data.value
+                            }
+                            else {
+                                _outgoing += message.payload.data.essence.data.value
+                            }
                         }
-                        else {
-                            _outgoing += message.payload.data.essence.data.value
-                        }
+                        else if (messageTimestamp > end) return
                     }
-                    else if (messageTimestamp > end) return
                 }
             }
 

@@ -220,19 +220,3 @@ export const stripTrailingSlash = (str) => {
 export const stripSpaces = (str) => {
     return str ? str.replace(/ /g, '') : ''
 }
-
-/**
- * Get the sender address from a payload.
- */
-export const sendAddressFromPayload = (payload: Payload): string => {
-    return payload?.data?.essence?.data?.inputs?.find((input) => /utxo/i.test(input?.type))?.data?.metadata?.address ?? null
-}
-
-/**
- * Get the receiver addresses from the payload.
- */
-export const receiverAddressesFromPayload = (payload: Payload): string[] => {
-    return payload?.data?.essence?.data?.outputs
-        ?.filter((output) => output?.data?.remainder === false)
-        ?.map((output) => output?.data?.address) ?? []
-}
