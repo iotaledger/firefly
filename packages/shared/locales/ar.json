@@ -31,11 +31,17 @@
             "title": "المظهر",
             "body": "اختر مظهر محفظتك."
         },
+        "profile": {
+            "title": "Create a profile",
+            "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "profileName": "Profile Name"
+        },
         "setup": {
-            "title": "اعداد محفظتك",
-            "body1": "يمكنك إنشاء ملفات شخصية متعددة للحفاظ على فصل الرموز وتحسين الخصوصية.",
-            "body2": "في الوقت الحالي، دعنا نبدأ باسم ملفك الشخصي الأول. يمكنك إضافة المزيد من الملفات الشخصية لاحقاً.",
-            "profileName": "اسم الملف الشخصي"
+            "title": "Set up a wallet",
+            "chrysalisTitle": "Chrysalis Network Update",
+            "chrysalisBody": "From April 21st, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
+            "learnMore": "Learn about the migration"
         },
         "secure": {
             "title": "تأمين محفظتك",
@@ -97,7 +103,10 @@
         },
         "congratulations": {
             "title": "اكتمل إعداد المحفظة",
-            "body": "محفظتك الجديدة جاهزة للاستخدام."
+            "body": "محفظتك الجديدة جاهزة للاستخدام.",
+            "fundsMigrated": "Funds migrated",
+            "success": "You have successfully migrated your funds to the new network",
+            "exportMigration": "Export migration log and finish setup"
         },
         "import": {
             "title": "استيراد محفظة",
@@ -109,7 +118,8 @@
             "body2": "عبارة الاسترداد هي ٢٤ كلمة ذات أحرف صغيرة مع المسافات الفاصلة بينها. هذه العبارة تستخدم لاستعادة محفظة Firefly الموجودة مسبقا.",
             "body3": "أدخل الseed أو عبارة الاسترداد الخاصة بك",
             "seedDetected": "تم اكتشاف seed مكون من 81 حرف",
-            "phraseDetected": "تم اكتشاف عبارة استرداد مكونة من 24 كلمة"
+            "phraseDetected": "تم اكتشاف عبارة استرداد مكونة من 24 كلمة",
+            "checksum": "Checksum"
         },
         "importFromFile": {
             "title": "استعادة محفظتك باستخدام ملف النسخ الاحتياطي",
@@ -130,10 +140,58 @@
         },
         "migrate": {
             "title": "ترحيل رصيدك",
-            "body1": "هذه عملية تلقائية لنقل أموالك إلى محفظتك الجديدة. سوف نتحقق من العناوين المنفقة التي تضعف أمنك.",
+            "body1": "This is an automated process to transfer your funds to your new wallet.",
             "body2": "قد يستغرق الأمر بعض الوقت. لا تقم بإيقاف تشغيل جهازك أثناء الترحيل.",
             "existing": "محفظتك القديمة",
-            "new": "محفظتك الجديدة"
+            "new": "محفظتك الجديدة",
+            "learn": "Learn about the migration",
+            "beginMigration": "Begin Migration",
+            "migrating": "Migrating funds...",
+            "migrated": "{balance} migrated",
+            "migrationFailed": "Migration Failed",
+            "noAddressesForMigration": "Please select the addresses you wish to secure.",
+            "restoringWallet": "Restoring wallet...",
+            "findingBalance": "Finding balance...",
+            "incorrectSeedVaultPassword": "Incorrect SeedVault password.",
+            "signingBundle": "Signing bundle",
+            "broadcastingBundle": "Broadcasting bundle",
+            "miningBundle": "Mining bundle",
+            "problemRestoringWallet": "There was a problem restoring your wallet. Please try again.",
+            "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
+            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. {value} will be lost.",
+            "error": "There was an error migrating your funds. Please try again."
+        },
+        "bundleMiningWarning": {
+            "title": "Warning",
+            "body1": "You have funds on one or more spent addresses.",
+            "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
+            "body3": "If you close the app you will need to restart the whole migration.",
+            "learn": "Learn about spent addresses"
+        },
+        "secureSpentAddresses": {
+            "title": "Secure spent addresses",
+            "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.",
+            "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",
+            "error": "You can’t migrate spent addresses with less than 1 Mi"
+        },
+        "securityCheckCompleted": {
+            "title": "Security check completed",
+            "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
+            "body2": "When you are happy with the risk level(s) press continue.",
+            "rerun": "Rerun process for selected addresses",
+            "continueMigration": "Continue migration"
+        },
+        "securingSpentAddresses": {
+            "title": "Securing spent addresses...",
+            "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
+            "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
+            "migrate": "Migrate funds",
+            "transaction": "Transaction {number}",
+            "rerun": "حاول مرة اخرى"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,7 +199,9 @@
         },
         "balance": {
             "title": "رصيدك",
-            "body": "هل رصيدك صحيح؟"
+            "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
+            "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
+            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly."
         },
         "settings": {
             "settings": "الاعدادات",
@@ -403,6 +463,17 @@
         "transaction": {
             "title": "تأكيد الصفقة",
             "body": "أنت على وشك إرسال {amount} إلى"
+        },
+        "riskFunds": {
+            "title": "Warning: funds at risk during migration",
+            "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
+            "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
+        },
+        "missingBundle": {
+            "title": "Warning: funds at risk during migration",
+            "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
+            "learnMore": "Learn more about spent addresses",
+            "proceed": "I understand the risk"
         }
     },
     "charts": {
@@ -412,10 +483,10 @@
         "token": "رمز token",
         "accountValue": "قيمة الحساب",
         "accountActivity": "نشاط الحساب",
-        "timeframe1Hour": "1 hour",
-        "timeframe1Day": "1 day",
-        "timeframe1Week": "1 week",
-        "timeframe1Month": "1 month"
+        "timeframe1Hour": "ساعة واحدة",
+        "timeframe1Day": "يوم واحد",
+        "timeframe1Week": "أسبوع واحد",
+        "timeframe1Month": "شهر واحد"
     },
     "actions": {
         "continue": "مواصلة",
@@ -423,10 +494,13 @@
         "cancel": "إلغاء",
         "close": "إغلاق",
         "dismiss": "تجاهل",
+        "proceedAnyway": "Proceed anyway",
         "save": "حفظ",
         "importSeed": "استيراد seed موجودة",
-        "importWallet": "استيراد محفظة موجودة",
+        "restoreWallet": "Migrate or restore a wallet",
+        "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
         "createWallet": "إنشاء محفظة جديدة",
+        "createWalletDescription": "Create a fresh wallet running on Chrysalis",
         "savePassword": "حفظ كلمة المرور",
         "useBiometric": "استخدام الأمن بالبصمة",
         "setupPin": "تعيين رمز PIN",
@@ -438,7 +512,7 @@
         "verifyRecoveryPhrase": "التحقق من عبارة الاسترداد",
         "revealRecoveryPhrase": "كشف عبارة الاسترداد",
         "importSeedvault": "استيراد SeedVault",
-        "checkAgain": "لا، تحقق مرة أخرى",
+        "checkAgain": "Check Again",
         "importFromFile": "استيراد من ملف",
         "send": "إرسال",
         "receive": "استلام",
@@ -489,12 +563,14 @@
         "hideDetails": "إخفاء التفاصيل",
         "yes": "نعم",
         "no": "لا",
+        "skip": "Skip",
         "reset": "إعادة الضبط",
         "downloadRecoveryKit": "حفظ مجموعة الاسترداد",
         "skipBackup": "تخطي النسخ الاحتياطي للملف",
         "finishSetup": "إنهاء الإعداد",
         "readDocumentation": "قراءة الوثائق",
         "visitFaq": "زيارة الأسئلة المكررة",
+        "viewStatus": "View status",
         "showHiddenAccounts": "إظهار الحسابات المخفية",
         "confirm": "تأكيد"
     },
@@ -554,6 +630,7 @@
         "manualNodeSelection": "اختيار يدوي للعقدة node",
         "profiles": "الملفات الشخصية",
         "developerProfile": "الملف الشخصي للمبرمج",
+        "developerProfileDescription": "Allows you to connect to testnets",
         "dev": "المطور",
         "createAccount": "إنشاء حساب",
         "accountName": "اسم الحساب",
@@ -604,6 +681,7 @@
         "passwordStrength3": "متوسط",
         "passwordStrength4": "قوي",
         "creatingProfile": "يتم إنشاء الملف الشخصي، الرجاء الانتظار...",
+        "fundMigration": "Fund migration",
         "accountRemoved": "هذا الحساب مخفي. قم بإظهاره لإجراء عمليات."
     },
     "dates": {
@@ -627,7 +705,9 @@
         "calcMinutesRemaining": "يتم حساب الدقائق المتبقية...",
         "minutesRemaining": "{minutes, plural, one {1 دقيقة متبقية} other {# دقائق متبقية}}",
         "copiedToClipboard": "تم النسخ إلى الحافظة",
-        "accountsSynchronized": "إنتهت عملية مزامنة الحساب بنجاح"
+        "accountsSynchronized": "إنتهت عملية مزامنة الحساب بنجاح",
+        "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
+        "migratedAccountChrysalisUp": "Your funds will become available shortly"
     },
     "error": {
         "profile": {
@@ -699,6 +779,16 @@
             "phraseWordCount": "يجب ان تتضمن عبارة الاسترداد على 24 كلمة, حالياََ تتضمن {length, plural, one { 1} other { #}}.",
             "phraseUnrecognizedWord": "كلمة غير متعرف عليها \"{word}\" في عبارة الاسترداد الخاصة بك",
             "phraseCaseWord": "يجب أن تكتب الكلمة \"{word}\" بأحرف صغيرة"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Risk level: {risk}",
+            "veryHigh": "Very high",
+            "high": "High",
+            "medium": "Medium",
+            "low": "Low",
+            "veryLow": "Very low"
         }
     }
 }

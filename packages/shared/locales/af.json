@@ -31,11 +31,17 @@
             "title": "Voorkoms",
             "body": "Kies jou beursie se tema."
         },
-        "setup": {
-            "title": "Stel u beursie op",
-            "body1": "U kan verskeie gebruikersprofiele skep om u tokens apart te hou en privaatheid te verbeter.",
+        "profile": {
+            "title": "Skep 'n Profiel",
+            "body1": "Jy kan verskeie gebruikersprofiele skep om jou tokens apart te hou en privaatheid te verbeter.",
             "body2": "Kom ons begin nou met jou eerste profielnaam. Jy kan later nog profiele byvoeg.",
             "profileName": "Profiel Naam"
+        },
+        "setup": {
+            "title": "Stel jou beursie op",
+            "chrysalisTitle": "Chrysalis Network Update",
+            "chrysalisBody": "From April 21st, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
+            "learnMore": "Learn about the migration"
         },
         "secure": {
             "title": "Beveilig U beursie",
@@ -97,7 +103,10 @@
         },
         "congratulations": {
             "title": "Wallet-opstelling is voltooi",
-            "body": "Jou nuwe beursie is gereed om te gebruik."
+            "body": "Jou nuwe beursie is gereed om te gebruik.",
+            "fundsMigrated": "Funds migrated",
+            "success": "You have successfully migrated your funds to the new network",
+            "exportMigration": "Export migration log and finish setup"
         },
         "import": {
             "title": "Verbind 'n beursie",
@@ -109,7 +118,8 @@
             "body2": "'N Herstelfrase is 24 woorde lank net kleinletters met spasies tussen. Dit word gebruik om 'n bestaande Firefly beursie te herstel.",
             "body3": "Voer you seed of herstelfrase in",
             "seedDetected": "81 karakter seed bespeur",
-            "phraseDetected": "24 woord frase bespeur"
+            "phraseDetected": "24 woord frase bespeur",
+            "checksum": "Checksum"
         },
         "importFromFile": {
             "title": "Herstel jou beursie uit 'n back-up lêer",
@@ -130,10 +140,58 @@
         },
         "migrate": {
             "title": "Migreer jou fondse",
-            "body1": "Hierdie is 'n outomatiese proses om jou fondse na jou nuwe beursie oor te dra. Ons sal kyk na spandeerde adresse wat jou sekuriteit verswak.",
+            "body1": "This is an automated process to transfer your funds to your new wallet.",
             "body2": "Dit kan 'n rukkie neem. Moenie jou toestel tydens die migrasie afskakel nie.",
             "existing": "Jou ou beursie",
-            "new": "Jou nuwe beursie"
+            "new": "Jou nuwe beursie",
+            "learn": "Learn about the migration",
+            "beginMigration": "Begin Migration",
+            "migrating": "Migrating funds...",
+            "migrated": "{balance} migrated",
+            "migrationFailed": "Migration Failed",
+            "noAddressesForMigration": "Please select the addresses you wish to secure.",
+            "restoringWallet": "Restoring wallet...",
+            "findingBalance": "Finding balance...",
+            "incorrectSeedVaultPassword": "Incorrect SeedVault password.",
+            "signingBundle": "Signing bundle",
+            "broadcastingBundle": "Broadcasting bundle",
+            "miningBundle": "Mining bundle",
+            "problemRestoringWallet": "There was a problem restoring your wallet. Please try again.",
+            "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
+            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. {value} will be lost.",
+            "error": "There was an error migrating your funds. Please try again."
+        },
+        "bundleMiningWarning": {
+            "title": "Warning",
+            "body1": "You have funds on one or more spent addresses.",
+            "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
+            "body3": "If you close the app you will need to restart the whole migration.",
+            "learn": "Learn about spent addresses"
+        },
+        "secureSpentAddresses": {
+            "title": "Secure spent addresses",
+            "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.",
+            "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",
+            "error": "You can’t migrate spent addresses with less than 1 Mi"
+        },
+        "securityCheckCompleted": {
+            "title": "Security check completed",
+            "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
+            "body2": "When you are happy with the risk level(s) press continue.",
+            "rerun": "Rerun process for selected addresses",
+            "continueMigration": "Continue migration"
+        },
+        "securingSpentAddresses": {
+            "title": "Securing spent addresses...",
+            "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
+            "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
+            "migrate": "Migrate funds",
+            "transaction": "Transaction {number}",
+            "rerun": "Probeer weer"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,7 +199,9 @@
         },
         "balance": {
             "title": "Jou balans",
-            "body": "Is jou balans korrek?"
+            "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
+            "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
+            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly."
         },
         "settings": {
             "settings": "Instellings",
@@ -403,6 +463,17 @@
         "transaction": {
             "title": "Bevestig die transaksie",
             "body": "Jy is op die punt om {amount} na"
+        },
+        "riskFunds": {
+            "title": "Warning: funds at risk during migration",
+            "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
+            "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
+        },
+        "missingBundle": {
+            "title": "Warning: funds at risk during migration",
+            "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
+            "learnMore": "Learn more about spent addresses",
+            "proceed": "I understand the risk"
         }
     },
     "charts": {
@@ -412,10 +483,10 @@
         "token": "Tokenprys",
         "accountValue": "Rekening Balans",
         "accountActivity": "Rekeningaktiwiteit",
-        "timeframe1Hour": "1 hour",
-        "timeframe1Day": "1 day",
+        "timeframe1Hour": "1 huur",
+        "timeframe1Day": "1 dag",
         "timeframe1Week": "1 week",
-        "timeframe1Month": "1 month"
+        "timeframe1Month": "1 maand"
     },
     "actions": {
         "continue": "Gaan voort",
@@ -423,10 +494,13 @@
         "cancel": "Kanselleer",
         "close": "Maak toe",
         "dismiss": "Ontslaan",
+        "proceedAnyway": "Proceed anyway",
         "save": "Stoor",
         "importSeed": "Voer 'n bestaande seed in",
-        "importWallet": "Voer bestaande beursie in",
+        "restoreWallet": "Migrate or restore a wallet",
+        "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
         "createWallet": "Skep 'n nuwe beursie",
+        "createWalletDescription": "Create a fresh wallet running on Chrysalis",
         "savePassword": "Stoor wagwoord",
         "useBiometric": "Gebruik biometriese sekuriteit",
         "setupPin": "Stel PIN-kode op",
@@ -438,7 +512,7 @@
         "verifyRecoveryPhrase": "Verifieer herstelfrase",
         "revealRecoveryPhrase": "Openbaar herstelfrase",
         "importSeedvault": "Voer SeedVault in",
-        "checkAgain": "Nee, kyk weer",
+        "checkAgain": "Check Again",
         "importFromFile": "Invoer vanaf 'n lêer",
         "send": "Stuur",
         "receive": "Ontvang",
@@ -489,12 +563,14 @@
         "hideDetails": "Versteek besonderhede",
         "yes": "Ja",
         "no": "Nee",
+        "skip": "Skip",
         "reset": "Stel terug",
         "downloadRecoveryKit": "Stoor die Recovery Kit vorm",
         "skipBackup": "Slaan lêer-Back-up oor",
         "finishSetup": "Voltooi die opstelling",
         "readDocumentation": "Lees die dokumentasie",
         "visitFaq": "Besoek FAQ",
+        "viewStatus": "Sien status",
         "showHiddenAccounts": "Wys Versteekte rekeninge",
         "confirm": "Bevestig"
     },
@@ -554,6 +630,7 @@
         "manualNodeSelection": "Manuele node seleksie",
         "profiles": "Profiel",
         "developerProfile": "Ontwikkelaarsprofiel",
+        "developerProfileDescription": "Allows you to connect to testnets",
         "dev": "Dev",
         "createAccount": "Skep 'n rekening",
         "accountName": "Rekening naam",
@@ -604,6 +681,7 @@
         "passwordStrength3": "Gemiddeld",
         "passwordStrength4": "Sterk",
         "creatingProfile": "Skep tans profiel op, wag asseblief...",
+        "fundMigration": "Fund migration",
         "accountRemoved": "Hierdie rekening is versteek. Wys dit om oordragte uit te voer."
     },
     "dates": {
@@ -627,7 +705,9 @@
         "calcMinutesRemaining": "Bereken oorblywende minute...",
         "minutesRemaining": "{minutes, plural, one {1 minuut oor} other {# minute oor}}",
         "copiedToClipboard": "Kopieer na knipbord",
-        "accountsSynchronized": "Rekeningsinkronisering voltooi"
+        "accountsSynchronized": "Rekeningsinkronisering voltooi",
+        "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
+        "migratedAccountChrysalisUp": "Your funds will become available shortly"
     },
     "error": {
         "profile": {
@@ -699,6 +779,16 @@
             "phraseWordCount": "Daar moet 24 woorde in jou herstelfase voorkom, tans is daar {length, plural, one {1} other {#}}.",
             "phraseUnrecognizedWord": "Onherkenbare woord \"{word}\" in jou herstelfrase",
             "phraseCaseWord": "Die woord \"{word}\" moet kleinletters wees"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Risk level: {risk}",
+            "veryHigh": "Baie hoog",
+            "high": "Hoog",
+            "medium": "Gemiddeld",
+            "low": "Laag",
+            "veryLow": "Baie laag"
         }
     }
 }
