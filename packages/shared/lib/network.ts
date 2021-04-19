@@ -4,7 +4,11 @@ import { Network } from './typings/client'
 import { isValidHttpsUrl, isValidUrl } from './utils'
 
 const DEFAULT_NODES: Node[] = [
-    'https://api.lb-0.migration4.iotatestmigration4.net/'
+    'https://api.hornet-0.testnet.chrysalis2.com',
+    'https://api.hornet-1.testnet.chrysalis2.com',
+    'https://api.hornet-2.testnet.chrysalis2.com',
+    'https://api.hornet-3.testnet.chrysalis2.com',
+    'https://api.lb-0.migration4.iotatestmigration4.net'
 ].map((url) => ({
     url,
     auth: {

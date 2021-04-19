@@ -31,14 +31,20 @@
             "title": "Prikaz",
             "body": "Odaberi temu svojeg novčanika."
         },
+        "profile": {
+            "title": "Stvori novi profil",
+            "body1": "Možete stvoriti više korisničkih računa kako biste organizirali svoje novčanike i poboljšali privatnost.",
+            "body2": "Počnimo s imenom vašeg prvog profila. Kasnije možete dodati još profila.",
+            "profileName": "Ime profila"
+        },
         "setup": {
             "title": "Postavite svoj novčanik",
-            "body1": "Možete stvoriti više korisničkih računa kako biste razdvojili svoje tokene i poboljšali sigurnost.",
-            "body2": "Počnimo s imenom vašeg prvog profila. Kasnije možete dodati još profila.",
-            "profileName": "Naziv Profila"
+            "chrysalisTitle": "Chrysalis unaprijeđenje mreže",
+            "chrysalisBody": "Od 21. travnja, korisnici mogu obaviti migraciju svojih tokens na novu Chrysalis mrežu. Preporučamo da svoje tokene prebacite čim prije.",
+            "learnMore": "Saznajte detalje o migraciji"
         },
         "secure": {
-            "title": "Osigurajte svoj novčanik",
+            "title": "Osiguraj svoj novčanik",
             "body1": "Spremite i ispišite Recovery Kit PDF predložak.",
             "body2": "Ako ispunite Recovery Kit i spremite ga na sigurno, uvijek možete izvršiti oporavak svojeg novčanika."
         },
@@ -97,7 +103,10 @@
         },
         "congratulations": {
             "title": "Postavljanje novčanika je završeno",
-            "body": "Vaš novi novčanik spreman je za upotrebu."
+            "body": "Vaš novi novčanik spreman je za upotrebu.",
+            "fundsMigrated": "Sredstva su prebačena",
+            "success": "Uspješno ste prebacili svoja sredstva na novu mrežu",
+            "exportMigration": "Izvezite detalje o migraciji i dovršite postupak"
         },
         "import": {
             "title": "Uvezite novčanik",
@@ -106,10 +115,11 @@
         "importFromText": {
             "title": "Obnovite svoj novčanik pomoću fraze za oporavak ili seeda",
             "body1": "Seed se sastoji od 81 znaka. Potreban je za oporavak sredstava iz starijih Trinity novčanika.",
-            "body2": "Fraza za oporavak sastoji se od 24 riječi (zajedno s razmacima). Služi za oporavak postojećeg Firefly novčanika.",
+            "body2": "Fraza za oporavak sastoji se od 24 riječi, pisanih malim slovima, s razmacima između svake. Služi za oporavak postojećeg Firefly novčanika.",
             "body3": "Unesite svoj seed ili frazu za oporavak",
             "seedDetected": "81 znakova seeda prepoznati",
-            "phraseDetected": "Fraza od 24 riječi je prepoznata"
+            "phraseDetected": "Fraza od 24 riječi je prepoznata",
+            "checksum": "Kontrolni zbroj"
         },
         "importFromFile": {
             "title": "Obnovite svoj novčanik iz datoteke s pričuvnom kopijom",
@@ -130,10 +140,58 @@
         },
         "migrate": {
             "title": "Migrirajte svoja sredstva",
-            "body1": "Ovo je automatski postupak za prebacivanje vaših sredstava u novi novčanik. Provjerit ćemo već korištene adrese koje ugrožavaju vašu sigurnost.",
+            "body1": "Ovo je automatizirani postupak prebacivanja vaših sredstava u novi novčanik.",
             "body2": "Ovo bi moglo potrajati. Za trajanja migracije ne gasite uređaj.",
             "existing": "Vaš stari novčanik",
-            "new": "Vaš novi novčanik"
+            "new": "Vaš novi novčanik",
+            "learn": "Saznajte detalje o migraciji",
+            "beginMigration": "Započni migraciju",
+            "migrating": "Prebacujem sredstva...",
+            "migrated": "{balance} prebačeno",
+            "migrationFailed": "Migracija nije uspjela",
+            "noAddressesForMigration": "Molimo odaberite adrese koje želite osigurati.",
+            "restoringWallet": "Vraćanje novčanika...",
+            "findingBalance": "Dohvaćam stanje...",
+            "incorrectSeedVaultPassword": "Netočna SeedVault lozinka.",
+            "signingBundle": "Potpisujem skup",
+            "broadcastingBundle": "Odašiljem skup",
+            "miningBundle": "Rudarim skup",
+            "problemRestoringWallet": "Došlo je do greške prilikom oporavka vašeg novčanika. Molimo pokušajte ponovno.",
+            "minimumMigrationAmountSpentAddresses": "Najmanji mogući iznos za migraciju je 1 Mi po iskorištenoj adresi. Provjerite još jednom izgleda li iznos ispravno.",
+            "tooManyAddressesToMigrate": "Imate previše adresa s malim iznosima za migraciju. Provjerite još jednom izgledaju li iznosi ispravno.",
+            "cannotMigrateAllYourFunds": "Ne možemo migrirati sve vaše adrese jer neke imaju premalo sredstava. Možete nastaviti ali nepovratno ćete izgubiti {value}.",
+            "error": "Došlo je pogreške u migraciji vaših sredstava. Molimo Vas, pokušajte ponovno."
+        },
+        "bundleMiningWarning": {
+            "title": "Upozorenje",
+            "body1": "Imate sredstva na jednoj ili više iskorištenih adresa.",
+            "body2": "Preporučamo da pokrenete automatski postupak kako biste uspješno osigurali i prebacili svoja sredstva.",
+            "body3": "Ako zatvorite aplikaciju, postupak migracije morat ćete pokrenuti ispočetka.",
+            "learn": "Saznajte više o iskorištenim adresama"
+        },
+        "secureSpentAddresses": {
+            "title": "Osigurajte iskorištene adrese",
+            "body1": "Imate sredstva na {number, plural, one {# iskorištenoj adresi} few {# iskorištene adrese} other {# iskorištenih adresa}}.",
+            "body2": "Preporučamo da pokrenete automatski postupak kako biste uspješno osigurali i prebacili svoja sredstva.",
+            "error": "Ne možete migrirati iskorištene adrese s manje od 1Mi"
+        },
+        "securityCheckCompleted": {
+            "title": "Sigurnosna provjera završena",
+            "body1": "Izračunali smo razinu rizika. Ponovno pokretanje ovog postupka može smanjiti rizik.",
+            "body2": "Kada ste zadovoljni s razinom rizika, pritisnite za nastavak.",
+            "rerun": "Ponovno pokretanje postupka za odabrane adrese",
+            "continueMigration": "Nastavi s migracijom"
+        },
+        "securingSpentAddresses": {
+            "title": "Osiguravam iskorištene adrese...",
+            "body1": "Ovaj postupak trajat će {minutes, plural, one {1 minutu} few {# minute} other {# minuta}}.",
+            "body2": "Vaša će računalo raditi punom snagom, možda se želite posvetiti nečem drugom dok čekate završetak postupka."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly će sada započeti migraciju. Ovo bi moglo potrajati.",
+            "migrate": "Prebaci sredstva",
+            "transaction": "Transakcija {number}",
+            "rerun": "Pokušaj ponovo"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,13 +199,15 @@
         },
         "balance": {
             "title": "Vaš saldo",
-            "body": "Je li vaš saldo ispravan?"
+            "body": "Uvjerite se da je stanje sredstava ispravno prije no što započete. Ako stvari ne izgledaju točno, možete provjeriti još jednom.",
+            "error": "Najmanji mogući iznos za migraciju je 1 Mi po adresi. Ukoliko iznos ne izgleda ispravno, provjerite ponovo.",
+            "zeroBalance": "Provjerite još jednom. Ukoliko i dalje ne vidite ispravan iznos, možda ste krivo unijeli seed."
         },
         "settings": {
             "settings": "Postavke",
             "generalSettings": {
                 "title": "Opće postavke",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Postavite izgled svojeg novčanika i druge opće postavke"
             },
             "security": {
                 "title": "Sigurnost",
@@ -284,8 +344,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Please wait {time, plural, one {1 second} other {# seconds}}",
-            "incorrectAttempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
+            "pleaseWait": "Molimo pričekajte {time, plural, one {1 sekundu} few {# sekunde} other {# sekundi}}",
+            "incorrectAttempts": "{attempts, plural, one {1 neuspjeli pokušaj} few {# neuspjela pokušaja} other {# neuspjelih pokušaja}}"
         },
         "dashboard": {
             "security": {
@@ -305,7 +365,7 @@
                 },
                 "strongholdBackup": {
                     "title": "Sigurnosna kopija novčanika",
-                    "weeksAgo": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "weeksAgo": "{weeks, plural, one {# tjedan} few {# tjedna} other {# tjedana}} ago"
                 }
             },
             "network": {
@@ -349,7 +409,7 @@
         },
         "deleteAccount": {
             "title": "Obriši {name}?",
-            "body": "Ovj račun nema povijest transakcija i zato ga je sigurno obrisati.",
+            "body": "Ovaj račun nema povijest transakcija i zato ga je sigurno obrisati.",
             "typePassword": "Za potvrdu unesite lozinku novčanika.",
             "hideAccount": "Brisanje računa",
             "errorTitle": "Nije moguće ukloniti {name}",
@@ -403,6 +463,17 @@
         "transaction": {
             "title": "Potvrdi transakciju",
             "body": "Ovim ćete poslati {amount} na račun"
+        },
+        "riskFunds": {
+            "title": "Upozorenje: sredstva su u opasnosti tijekom migracije",
+            "body1": "Najtoplije preporučamo da osigurate svoja sredstva prije no što nastavite s migracijom. Ukoliko to ne učinite vaša sredstva neće biti sigurna od krađe.",
+            "body2": "Preporučamo da ponovite postupak za adrese sa srednjom ili višom razinom rizika."
+        },
+        "missingBundle": {
+            "title": "Upozorenje: sredstva su u opasnosti tijekom migracije",
+            "body": "Imate sredstava na iskorištenim adresama no informacije potrebne kako bismo ih osigurali nisu dostupne. Ovo se može dogoditi ukoliko su te transakcije učinjene pred dosta vremena. Možete nastaviti ali tijekom migracije {value} je pod rizikom.",
+            "learnMore": "Saznajte više o iskorištenim adresama",
+            "proceed": "Da, razumijem rizike"
         }
     },
     "charts": {
@@ -411,7 +482,11 @@
         "portoflio": "Portfolio",
         "token": "Token",
         "accountValue": "Ukupna vrijednost računa",
-        "accountActivity": "Aktivnosti računa"
+        "accountActivity": "Aktivnosti računa",
+        "timeframe1Hour": "1 sat",
+        "timeframe1Day": "1 dan",
+        "timeframe1Week": "1 tjedan",
+        "timeframe1Month": "1 mjesec"
     },
     "actions": {
         "continue": "Nastavi",
@@ -419,10 +494,13 @@
         "cancel": "Poništi",
         "close": "Zatvori",
         "dismiss": "Odbaci",
+        "proceedAnyway": "Ipak nastavi",
         "save": "Spremi",
         "importSeed": "Uvezite postojeći Seed",
-        "importWallet": "Uvezite postojeći novčanik",
+        "restoreWallet": "Migriraj ili obnovi novčanik",
+        "restoreWalletDescription": "Migriraj na Chrysalis mrežu ili obnovi postojeći novčanik",
         "createWallet": "Stvorite novi novčanik",
+        "createWalletDescription": "Napravi novi, svjež novčanik na Chrysalis mreži",
         "savePassword": "Spremi lozinku",
         "useBiometric": "Koristi biometričku zaštitu",
         "setupPin": "Postavite PIN",
@@ -434,7 +512,7 @@
         "verifyRecoveryPhrase": "Potvrdite frazu za oporavak",
         "revealRecoveryPhrase": "Prikaži frazu za oporavak",
         "importSeedvault": "Uvezi SeedVault",
-        "checkAgain": "Ne, provjeri opet",
+        "checkAgain": "Ne, provjeri ponovo",
         "importFromFile": "Uvezi iz datoteke",
         "send": "Pošalji",
         "receive": "Primi",
@@ -485,12 +563,14 @@
         "hideDetails": "Sakrij detalje",
         "yes": "Da",
         "no": "Ne",
+        "skip": "Preskoči",
         "reset": "Resetiraj",
         "downloadRecoveryKit": "Spremi predložak Recovery Kita",
         "skipBackup": "Preskoči izradu pričuvne kopije",
         "finishSetup": "Završi postavljanje",
         "readDocumentation": "Pročitajte dokumentaciju",
         "visitFaq": "Posjeti često postavljana pitanja",
+        "viewStatus": "Vidi status",
         "showHiddenAccounts": "Prikaži skrivene račune",
         "confirm": "Potvrdi"
     },
@@ -550,6 +630,7 @@
         "manualNodeSelection": "Ručni odabir nodea",
         "profiles": "Profili",
         "developerProfile": "Developer profil",
+        "developerProfileDescription": "Omogućuje vam spajanje na testnet",
         "dev": "Programer",
         "createAccount": "Napravi račun",
         "accountName": "Naziv računa",
@@ -574,7 +655,7 @@
         "noRecentHistory": "Nema nedavnih povijesnih podataka",
         "transferSyncing": "Sinkroniziranje računa",
         "transferSelectingInputs": "Odabir inputa",
-        "transferRemainderAddress": "Generating remainder deposit address",
+        "transferRemainderAddress": "Generiranje adrese za polog ostatka",
         "transferSigning": "Potpisivanje transakcije",
         "transferPow": "Izvodim PoW (Proof of Work)",
         "transferBroadcasting": "Odašiljem transakciju",
@@ -600,15 +681,16 @@
         "passwordStrength3": "Osrednje",
         "passwordStrength4": "Jako",
         "creatingProfile": "Stvaram račun, molim pričekajte...",
+        "fundMigration": "Prebacivanje sredstava",
         "accountRemoved": "Ovaj je račun skriven. Kako biste mogli raditi transfere prvo ga morate prikazati."
     },
     "dates": {
         "today": "Danas",
         "yesterday": "Jučer",
-        "daysAgo": "{time, plural, one {# day} other {# days}} ago",
-        "weeksAgo": "{time, plural, one {# week} other {# weeks}} ago",
-        "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
-        "yearsAgo": "{time, plural, one {# year} other {# years}} ago"
+        "daysAgo": "{time, plural, one {# dan} few {# dana} other {# dana}} ago",
+        "weeksAgo": "{time, plural, one {# tjedan} few {# tjedna} other {# tjedana}} ago",
+        "monthsAgo": "{time, plural, one {# mjesec} few {# mjeseca} other {# mjeseci}} ago",
+        "yearsAgo": "{time, plural, one {# godinu} few {# godine} other {# godina}} ago"
     },
     "notifications": {
         "valueTx": "Primanje {{value}} na {{account}} u tijeku",
@@ -621,13 +703,15 @@
         "updateError": "Došlo je do pogreške tijekom ažuriranja. Molimo, pokušajte ponovo",
         "restartInstall": "Za instalaciju ponovo pokreni aplikaciju",
         "calcMinutesRemaining": "Računam preostalo vrijeme...",
-        "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
+        "minutesRemaining": "{minutes, plural, one {minuta} few {# minute} other {# minuta}}",
         "copiedToClipboard": "Kopirano u međuspremnik",
-        "accountsSynchronized": "Sinkronizacija računa je završena"
+        "accountsSynchronized": "Sinkronizacija računa je završena",
+        "migratedAccountChrysalisDown": "Vaša će sredstva biti dostupna nakon Chrysalisa, 28. travnja",
+        "migratedAccountChrysalisUp": "Vaša će sredstva biti dostupna uskoro"
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "length": "Ime profila ne smije biti dulje od {length, plural, one {1 znaka} few {# znaka} other {# znakova}}.",
             "duplicate": "Profil s ovim imenom već postoji."
         },
         "password": {
@@ -645,15 +729,15 @@
             "similar": "Ovo je preslično često korištenoj lozinki.",
             "word": "Jednu je riječ lako pogoditi.",
             "incorrect": "Lozinka nije točna.",
-            "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
+            "length": "Lozinka ne smije biti dulja od {length, plural, one {1 znaka} few {# znaka} other {# znakova}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {1 digit} other {# digits}} long.",
+            "length": "Vaš PIN mora se sastojati od {length, plural, one {1 znaka} few {# znaka} other {# znakova}}.",
             "match": "PINovi se ne podudaraju.",
             "incorrect": "Vaš trenutni PIN je netočan."
         },
         "account": {
-            "length": "Your account name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "length": "Ime računa ne smije biti dulje od {length, plural, one {1 znaka} few {# znaka} other {# znakova}}.",
             "empty": "Morate upotrijebiti najnoviji račun prije no što možete stvoriti još jedan.",
             "notEmpty": "Morate prebaciti sredstva drugdje prije no što možete obrisati račun.",
             "duplicate": "Račun s ovim imenom već postoji.",
@@ -663,13 +747,14 @@
             "chars": "Ime profila ne smije uključivati neki od sljedećih znakova <>:\"/\\|?*"
         },
         "send": {
-            "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
+            "addressLength": "Adrese moraju sadržavati {length, plural, one {1 znak} few {# znaka} other {# znakova}}.",
             "amountTooHigh": "Ovo je više od sredstava koja su vam na raspolaganju.",
             "amountNoFloat": "Ako je jedinica `i`, ne možete koristiti decimalna mjesta.",
             "amountInvalidFormat": "Djeluje da je iznos nevažeći broj.",
             "amountZero": "Iznos mora biti veći od 0.",
             "wrongAddressPrefix": "Adrese započinju prefiksom {prefix}.",
             "wrongAddressFormat": "Adresa nije u ispravnom formatu.",
+            "invalidAddress": "Adresa nije valjana.",
             "insufficientFunds": "Ovaj račun nema dovoljno sredstava.",
             "noToAccount": "Niste odabrali račun na koji želite poslati sredstva.",
             "sendingDust": "Ne možete slati manje od 1 Mi.",
@@ -688,11 +773,22 @@
         "backup": {
             "invalid": "Sigurnosna kopija nije prepoznata.",
             "destination": "Destinacija za pričuvnu kopiju je nevažeća.",
-            "mnemonic": "The mnemonic is not valid.",
+            "mnemonic": "Mnemonic nije ispravan.",
             "seedTooShort": "Seed mora imati 81 znak, trenutno ih ima {length, plural, one {jedan} other {#}}",
             "seedCharacters": "Seed može sadržavati samo slova od A do Z i broj 9",
-            "phraseWordCount": "Vaša fraza za oiporavak mora se sastojati od 24 riječi. Trenutno {length, plural, one {je samo jedna} other {ih ima samo #}}.",
-            "phraseUnrecognizedWord": "Ne prepoznajemo riječ \"{word}\" u vašoj frazi za oporavak"
+            "phraseWordCount": "Vaša fraza za oporavak mora se sastojati od 24 riječi. Trenutno {length, plural, one {je samo jedna} other {ih ima samo #}}.",
+            "phraseUnrecognizedWord": "Ne prepoznajemo riječ \"{word}\" u vašoj frazi za oporavak",
+            "phraseCaseWord": "Riječ \"{word}\" treba započeti malim slovom"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Razina rizika: {risk}",
+            "veryHigh": "Vrlo visoka",
+            "high": "Visoka",
+            "medium": "Srednja",
+            "low": "Niska",
+            "veryLow": "Vrlo niska"
         }
     }
 }

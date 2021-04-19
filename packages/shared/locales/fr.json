@@ -31,11 +31,17 @@
             "title": "Apparence",
             "body": "Choisissez le thème de votre portefeuille."
         },
+        "profile": {
+            "title": "Créer un profil",
+            "body1": "Vous pouvez créer de multiples profils d'utilisateurs pour organiser vos portefeuilles et augmenter votre confidentialité.",
+            "body2": "Pour commencer, débutons avec votre premier nom de profil. Vous pourrez ajouter d'autres profils par la suite.",
+            "profileName": "Nom de profile"
+        },
         "setup": {
-            "title": "Installez votre portefeuille",
-            "body1": "Vous pouvez créer plusieurs profils d'utilisateurs pour garder vos jetons séparés et améliorer la confidentialité.",
-            "body2": "Pour l'instant, commençons avec votre premier nom de profil. Vous pourrez ajouter plus de profils plus tard.",
-            "profileName": "Nom du Profil"
+            "title": "Création d'un portefeuille",
+            "chrysalisTitle": "Mise-à-jour Chrysalis du réseau",
+            "chrysalisBody": "À partir du 21 avril, les utilisateurs peuvent déplacer leurs actifs dans le nouveau réseau Chrysalis. Nous recommandons d'effectuer ce déplacement dès que possible.",
+            "learnMore": "En apprendre plus sur la migration"
         },
         "secure": {
             "title": "Sécurisez votre portefeuille",
@@ -97,7 +103,10 @@
         },
         "congratulations": {
             "title": "Configuration du portefeuille terminée",
-            "body": "Votre nouveau portefeuille est prêt à être utilisé."
+            "body": "Votre nouveau portefeuille est prêt à être utilisé.",
+            "fundsMigrated": "Actifs déplacés",
+            "success": "Vous avez déplacés avec succès vos fonds dans le nouveau réseau",
+            "exportMigration": "Exporter le registre de migration et terminer l'installation"
         },
         "import": {
             "title": "Importer un portefeuille",
@@ -106,10 +115,11 @@
         "importFromText": {
             "title": "Restaurez votre portefeuille avec une phrase de récupération ou une seed",
             "body1": "Un germe aléatoire (seed) est composé de 81 caractères. Il est utilisé pour importer un portefeuille Trinity plus ancien.",
-            "body2": "Une phrase de récupération est composée de 24 mots. Elle est utilisée pour récupérer un portefeuille Firefly existant.",
+            "body2": "Une phrase de récupération est composée de 24 mots, tous en minuscules, avec un espace entre chaque mot. Elle est utilisée pour récupérer un portefeuille Firefly existant.",
             "body3": "Saisissez votre seed ou votre phrase de récupération",
             "seedDetected": "Graine de 81 caractères détectée",
-            "phraseDetected": "Phrase de récupération de 24 mots détectée"
+            "phraseDetected": "Phrase de récupération de 24 mots détectée",
+            "checksum": "Clef de concordance"
         },
         "importFromFile": {
             "title": "Restaurez votre portefeuille à partir d'un fichier de sauvegarde",
@@ -130,10 +140,58 @@
         },
         "migrate": {
             "title": "Migrer vos fonds",
-            "body1": "Ceci est un processus automatisé permettant de transférer vos fonds vers votre nouveau portefeuille. Nous vérifierons les adresses dépensées qui affaiblissent votre sécurité.",
+            "body1": "Ceci est un processus automatisé pour transférer vos fonds dans votre nouveau portefeuille.",
             "body2": "Cela peut prendre du temps. N'éteignez pas votre appareil pendant la migration.",
             "existing": "Votre ancien portefeuille",
-            "new": "Votre nouveau portefeuille"
+            "new": "Votre nouveau portefeuille",
+            "learn": "En apprendre plus sur la migration",
+            "beginMigration": "Commencer le transfert",
+            "migrating": "Les fonds sont en train d'être transférés...",
+            "migrated": "{balance} transféré",
+            "migrationFailed": "La migration a échoué",
+            "noAddressesForMigration": "Merci de sélectionner les adresses que vous souhaitez sécuriser.",
+            "restoringWallet": "Restauration du portefeuille...",
+            "findingBalance": "En train de récupérer le montant total...",
+            "incorrectSeedVaultPassword": "Mot de passe SeedVault incorrect.",
+            "signingBundle": "Lot de signature",
+            "broadcastingBundle": "Lot de diffusion",
+            "miningBundle": "Lot de signature",
+            "problemRestoringWallet": "Il y a eu un problème lors de la restauration de votre portefeuille. Merci de recommencer.",
+            "minimumMigrationAmountSpentAddresses": "Le montant minimum nécessaire pour déplacer vos fonds est de 1 Mi pour chaque adresse. Merci de vérifier le montant de votre portefeuille.",
+            "tooManyAddressesToMigrate": "Vous avez trop d'adresses avec un solde insuffisant pour déplacer vos fonds. Vérifiez à nouveau si votre solde ne semble pas correct.",
+            "cannotMigrateAllYourFunds": "Nous ne pouvons pas transférer tous vos fonds parce que certaines adresses ont trop de valeur. Vous pouvez néanmoins continuer. {value} seront perdues.",
+            "error": "Il s'est produit une erreur lors du transfert de vos fonds. Merci d'essayer à nouveau."
+        },
+        "bundleMiningWarning": {
+            "title": "Attention",
+            "body1": "Vous avez des fonds sur une ou plusieurs adresses ayant déjà servi à envoyer des fonds.",
+            "body2": "Nous vous recommandons d'exécuter un processus automatisé pour vous aider à sécuriser et à transférer ces fonds en toute sécurité.",
+            "body3": "Si vous fermez l'application, vous devrez redémarrer tout le transfert.",
+            "learn": "En savoir plus sur les adresses ayant déjà servi à envoyer des fonds"
+        },
+        "secureSpentAddresses": {
+            "title": "Sécuriser les adresses ayant déjà servi à envoyer des fonds",
+            "body1": "Vous avez des fonds détectés sur {number, plural, one {# adresse dépensée} other {# adresses dépensées}}.",
+            "body2": "Nous vous recommandons d'exécuter un processus automatisé pour vous aider à sécuriser et à transférer vos fonds en toute sécurité.",
+            "error": "Vous ne pouvez pas transférer les adresses passées avec moins de 1 Mi"
+        },
+        "securityCheckCompleted": {
+            "title": "Vérification de sécurité terminée",
+            "body1": "Nous avons calculé le niveau de risque de sécurité. Exécuter ce processus à nouveau peut réduire votre niveau de risque.",
+            "body2": "Lorsque vous êtes satisfait du ou des niveaux de risque(s) appuyez sur continuer.",
+            "rerun": "Relancer le processus pour les adresses sélectionnées",
+            "continueMigration": "Continuer le transfert"
+        },
+        "securingSpentAddresses": {
+            "title": "Sécuriser les adresses ayant déjà servi à envoyer des fonds...",
+            "body1": "Ce processus va prendre {minutes, plural, one {1 minute} other {# minutes}}.",
+            "body2": "Votre ordinateur fonctionnera en pleine capacité, vous voudrez peut-être faire autre chose pendant que vous attendez que cela soit terminé."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly va maintenant procéder au transfert de vos fonds. Cela peut prendre un certain temps.",
+            "migrate": "Les fonds sont en train d'être transférés",
+            "transaction": "Transaction {number}",
+            "rerun": "Réessayez"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,13 +199,15 @@
         },
         "balance": {
             "title": "Votre solde",
-            "body": "Votre solde est-il correct ?"
+            "body": "Assurez-vous que votre solde est correct avant de continuer. Vous pouvez vérifier à nouveau si les choses ne sont pas correctes.",
+            "error": "Le montant minimum nécessaire pour déplacer vos fonds est de 1 Mi pour chaque adresse. Merci de vérifier le montant de votre portefeuille.",
+            "zeroBalance": "Essayez à nouveau de vérifier. Si vous ne trouvez toujours pas votre solde, vous avez peut-être saisi votre seed de manière incorrecte."
         },
         "settings": {
-            "settings": "Paramètres",
+            "settings": "Réglages",
             "generalSettings": {
                 "title": "Réglages Généraux",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Configurer l'apparence de votre portefeuille et d'autres paramètres généraux"
             },
             "security": {
                 "title": "Sécurité",
@@ -403,6 +463,17 @@
         "transaction": {
             "title": "Confirmer la transaction",
             "body": "Vous êtes sur le point d'envoyer {amount} à"
+        },
+        "riskFunds": {
+            "title": "Avertissement: risque de perte de fonds lors du transfert",
+            "body1": "Il est fortement recommandé de sécuriser tous vos fonds avant de procéder au transfert. Vos fonds risquent d'être volés si vous ne les sécurisez pas.",
+            "body2": "Il est recommandé de relancer le processus pour les adresses avec un niveau de risque moyen ou supérieur."
+        },
+        "missingBundle": {
+            "title": "Avertissement: risque de perte de fonds lors du transfert",
+            "body": "Vous avez des fonds sur des adresses ayant déjà servi à envoyer des fonds, mais les informations nécessaires pour les sécuriser n'ont pas été trouvées. Cela peut se produire si vous avez effectué des transactions il y a longtemps. Vous pouvez continuer, mais vous risquez de perdre {value} pendant le transfert.",
+            "learnMore": "En savoir plus sur les adresses ayant déjà servi à envoyer des fonds",
+            "proceed": "Je comprends le risque"
         }
     },
     "charts": {
@@ -411,7 +482,11 @@
         "portoflio": "Portefeuille",
         "token": "Jeton",
         "accountValue": "Valeur du compte",
-        "accountActivity": "Activité du compte"
+        "accountActivity": "Activité du compte",
+        "timeframe1Hour": "1 heure",
+        "timeframe1Day": "1 jour",
+        "timeframe1Week": "1 semaine",
+        "timeframe1Month": "1 mois"
     },
     "actions": {
         "continue": "Continuer",
@@ -419,10 +494,13 @@
         "cancel": "Annuler",
         "close": "Fermer",
         "dismiss": "Ignorer",
+        "proceedAnyway": "Continuer tout de même",
         "save": "Sauvegarder",
         "importSeed": "Importer une seed existante",
-        "importWallet": "Importer un portefeuille existant",
+        "restoreWallet": "Transférer ou restaurer un portefeuille",
+        "restoreWalletDescription": "Migrer vers Chrysalis ou restaurer un portefeuille existant",
         "createWallet": "Créer un nouveau portefeuille",
+        "createWalletDescription": "Créez un nouveau portefeuille fonctionnant sur Chrysalis",
         "savePassword": "Sauvegarder le mot de passe",
         "useBiometric": "Utiliser la sécurité biométrique",
         "setupPin": "Configurer le code PIN",
@@ -434,7 +512,7 @@
         "verifyRecoveryPhrase": "Vérifier la phrase de récupération",
         "revealRecoveryPhrase": "Afficher la phrase de récupération",
         "importSeedvault": "Importer un SeedVault",
-        "checkAgain": "Non, vérifier à nouveau",
+        "checkAgain": "Vérifier à nouveau",
         "importFromFile": "Importer à partir d'un fichier",
         "send": "Envoyer",
         "receive": "Recevoir",
@@ -485,12 +563,14 @@
         "hideDetails": "Cacher détails",
         "yes": "Oui",
         "no": "Non",
+        "skip": "Passer",
         "reset": "Réinitialiser",
         "downloadRecoveryKit": "Enregistrer le modèle de kit de récupération",
         "skipBackup": "Ignorer la sauvegarde du fichier",
         "finishSetup": "Terminer la configuration",
         "readDocumentation": "Consulter la documentation",
         "visitFaq": "Visitez la FAQ",
+        "viewStatus": "Voir le statut",
         "showHiddenAccounts": "Afficher les comptes masqués",
         "confirm": "Confirmer"
     },
@@ -550,6 +630,7 @@
         "manualNodeSelection": "Sélection de nœud manuelle",
         "profiles": "Profils",
         "developerProfile": "Profil Développeur",
+        "developerProfileDescription": "Vous permet de vous connecter aux réseaux de test",
         "dev": "Dév",
         "createAccount": "Créer un compte",
         "accountName": "Nom du compte",
@@ -600,6 +681,7 @@
         "passwordStrength3": "Moyenne",
         "passwordStrength4": "Robuste",
         "creatingProfile": "Création du profile, veuillez patienter...",
+        "fundMigration": "Migration des fonds",
         "accountRemoved": "Ce compte est masqué. Démasquez-le pour effectuer des transferts."
     },
     "dates": {
@@ -623,7 +705,9 @@
         "calcMinutesRemaining": "Calcul des minutes restantes...",
         "minutesRemaining": "{minutes, plural, one {Il reste 1 minute} other {# minutes restantes}}",
         "copiedToClipboard": "Copié dans le presse-papier",
-        "accountsSynchronized": "Synchronisation du compte terminée"
+        "accountsSynchronized": "Synchronisation du compte terminée",
+        "migratedAccountChrysalisDown": "Vos fonds seront disponibles après Chrysalis le 28 avril",
+        "migratedAccountChrysalisUp": "Vos fonds seront bientôt disponibles"
     },
     "error": {
         "profile": {
@@ -670,6 +754,7 @@
             "amountZero": "Le montant doit être supérieur à 0.",
             "wrongAddressPrefix": "Les adresses commencent par le préfixe {prefix}.",
             "wrongAddressFormat": "L'adresse n'est pas correctement formatée.",
+            "invalidAddress": "Cette adresse n'est pas valide.",
             "insufficientFunds": "Ce compte ne dispose pas de fonds suffisants.",
             "noToAccount": "Vous n'avez pas sélectionné de compte vers lequel envoyer les fonds.",
             "sendingDust": "Vous ne pouvez pas envoyer moins de 1 Mi.",
@@ -692,7 +777,18 @@
             "seedTooShort": "La seed devrait contenir 81 caractères, elle en contient {length, plural, one {1} other {#}}",
             "seedCharacters": "La seed (graine) ne doit contenir que des caractères A-Z ou le chiffre 9",
             "phraseWordCount": "Il devrait y avoir 24 mots dans votre phrase de récupération, actuellement il y en a {length, plural, one {1} other {#}}.",
-            "phraseUnrecognizedWord": "Mot \"{word}\" non reconnu dans votre phrase de récupération"
+            "phraseUnrecognizedWord": "Mot \"{word}\" non reconnu dans votre phrase de récupération",
+            "phraseCaseWord": "Le mot \"{word}\" doit être écrit en minuscules"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Niveau de risque: {risk}",
+            "veryHigh": "Très élevé",
+            "high": "Élevé",
+            "medium": "Moyen",
+            "low": "Faible",
+            "veryLow": "Très faible"
         }
     }
 }

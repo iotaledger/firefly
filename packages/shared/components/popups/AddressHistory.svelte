@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
     import type { Address } from 'shared/lib/typings/address'
-    import { formatUnit } from 'shared/lib/units'
+    import { formatUnitBestMatch } from 'shared/lib/units'
     import type { WalletAccount } from 'shared/lib/wallet'
     import type { Readable } from 'svelte/store'
     import { setClipboard } from 'shared/lib/utils'
@@ -40,7 +40,7 @@
                 <Text type="pre">{_addr.address}</Text>
             </button>
             <Text type="p">
-                {locale('popups.addressHistory.currentBalance', { values: { balance: formatUnit(_addr.balance) } })}
+                {locale('popups.addressHistory.currentBalance', { values: { balance: formatUnitBestMatch(_addr.balance) } })}
             </Text>
         </div>
     {/each}

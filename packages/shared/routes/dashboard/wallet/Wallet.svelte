@@ -11,6 +11,7 @@
         AccountMessage,
         AccountsBalanceHistory,
         api,
+        asyncSyncAccounts,
         BalanceHistory,
         BalanceOverview,
         getAccountMessages,
@@ -21,14 +22,13 @@
         initialiseListeners,
         isTransferring,
         prepareAccountInfo,
+        processMigratedTransactions,
         removeEventListeners,
         selectedAccountId,
-        syncAccounts,
         transferState,
         updateBalanceOverview,
         wallet,
         WalletAccount,
-        processMigratedTransactions
     } from 'shared/lib/wallet'
     import { onMount, setContext } from 'svelte'
     import { derived, Readable, Writable } from 'svelte/store'
@@ -108,10 +108,14 @@
     function getAccounts() {
         api.getAccounts({
             onSuccess(accountsResponse) {
-                const _continue = () => {
+                const _continue = async () => {
                     accountsLoaded.set(true)
                     const gapLimit = $activeProfile?.gapLimit ?? 10
-                    syncAccounts(false, 0, gapLimit, false)
+                    try {
+                        await asyncSyncAccounts(0, gapLimit, 5, false)
+                    } catch (err) {
+                        console.error(err)
+                    }
                     updateProfile('gapLimit', 10)
                 }
 

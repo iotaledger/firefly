@@ -1,12 +1,14 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
-    import { OnboardingLayout, Text, Button, Icon, Illustration } from 'shared/components'
+    import { Button, Icon, Illustration, OnboardingLayout, Text } from 'shared/components'
+    import { createEventDispatcher, getContext } from 'svelte'
+    import type { Writable } from 'svelte/store'
+    import { ImportType } from '../Import.svelte'
 
     export let locale
     export let mobile
-    export let importType
 
     const dispatch = createEventDispatcher()
+    const importType = getContext<Writable<ImportType>>('importType')
 
     function handleContinueClick() {
         dispatch('next')
@@ -35,7 +37,7 @@
         <!-- TODO: missing illustration -->
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-green dark:bg-gray-900">
             <Illustration
-                illustration={importType === 'seed' || importType === 'mnemonic' ? 'import-from-text-success-desktop' : 'import-from-file-success-desktop'}
+                illustration={$importType === ImportType.Seed || $importType === ImportType.Mnemonic ? 'import-from-text-success-desktop' : 'import-from-file-success-desktop'}
                 width="100%"
                 height="auto" />
         </div>
