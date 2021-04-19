@@ -33,8 +33,10 @@
 
     onMount(async () => {
         api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
-        Electron.DeepLinkManager.requestDeepLink()
-        Electron.onEvent('deep-link-params', (data) => handleDeepLinkRequest(data))
+
+        // TODO: Re-enable deep links
+        // Electron.DeepLinkManager.requestDeepLink()
+        // Electron.onEvent('deep-link-params', (data) => handleDeepLinkRequest(data))
 
         Electron.onEvent('menu-logout', () => {
             logout()
@@ -70,38 +72,39 @@
         }
     })
 
-    /**
-     * Handles deep link request
-     * If deep linking is enabled, fill send input parameters
-     * If deep linking is disabled, direct user to settings
-     */
-    const handleDeepLinkRequest = (data) => {
-        const parsedData = parseDeepLink(data)
-        const _redirect = (tab) => {
-            deepLinkRequestActive.set(true)
-            if (get(dashboardRoute) !== tab) {
-                dashboardRoute.set(tab)
-            }
-        }
+    // TODO: re-enable deep links
+    // /**
+    //  * Handles deep link request
+    //  * If deep linking is enabled, fill send input parameters
+    //  * If deep linking is disabled, direct user to settings
+    //  */
+    // const handleDeepLinkRequest = (data) => {
+    //     const parsedData = parseDeepLink(data)
+    //     const _redirect = (tab) => {
+    //         deepLinkRequestActive.set(true)
+    //         if (get(dashboardRoute) !== tab) {
+    //             dashboardRoute.set(tab)
+    //         }
+    //     }
 
-        if (!$appSettings.deepLinking) {
-            _redirect(Tabs.Settings)
-            // TODO: Add alert system
-            console.log('deep linking not enabled')
-        } else if (parsedData) {
-            _redirect(Tabs.Wallet)
-            sendParams.set(parsedData)
-        } else {
-            console.log('error parsing')
-        }
-    }
+    //     if (!$appSettings.deepLinking) {
+    //         _redirect(Tabs.Settings)
+    //         // TODO: Add alert system
+    //         console.log('deep linking not enabled')
+    //     } else if (parsedData) {
+    //         _redirect(Tabs.Wallet)
+    //         sendParams.set(parsedData)
+    //     } else {
+    //         console.log('error parsing')
+    //     }
+    // }
 
-    $: {
-        if ($deepLinkRequestActive && $appSettings.deepLinking) {
-            walletRoute.set(WalletRoutes.Send)
-            deepLinkRequestActive.set(false)
-        }
-    }
+    // $: {
+    //     if ($deepLinkRequestActive && $appSettings.deepLinking) {
+    //         walletRoute.set(WalletRoutes.Send)
+    //         deepLinkRequestActive.set(false)
+    //     }
+    // }
 
     if ($walletRoute === WalletRoutes.Init && !$accountsLoaded && $loggedIn) {
         startInit = Date.now()
