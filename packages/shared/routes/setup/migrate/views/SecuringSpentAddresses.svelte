@@ -115,7 +115,7 @@
             </div>
         </div>
         <div slot="actions" class="w-2/5 mt-8">
-            <ProgressBar percent={progressBarPercent} message={progressBarMessage} />
+            <ProgressBar narrow percent={progressBarPercent} message={progressBarMessage} />
         </div>
     </BundleMiningLayout>
 {/if}

@@ -31,11 +31,17 @@
             "title": "Aspecte",
             "body": "Escull el tema de la vostra cartera."
         },
+        "profile": {
+            "title": "Create a profile",
+            "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "profileName": "Profile Name"
+        },
         "setup": {
-            "title": "Configureu la cartera",
-            "body1": "Podeu crear diversos perfils d'usuari per mantenir separats els vostres toquens i millorar la privadesa.",
-            "body2": "De moment, comencem pel vostre primer nom de perfil. Podeu afegir altres perfils més endavant.",
-            "profileName": "Nom del perfil"
+            "title": "Set up a wallet",
+            "chrysalisTitle": "Chrysalis Network Update",
+            "chrysalisBody": "From April 21st, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
+            "learnMore": "Learn about the migration"
         },
         "secure": {
             "title": "Assegura la cartera",
@@ -97,7 +103,10 @@
         },
         "congratulations": {
             "title": "S'ha completat la configuració de la cartera",
-            "body": "La vostra cartera ja es pot utilitzar."
+            "body": "La vostra cartera ja es pot utilitzar.",
+            "fundsMigrated": "Funds migrated",
+            "success": "You have successfully migrated your funds to the new network",
+            "exportMigration": "Export migration log and finish setup"
         },
         "import": {
             "title": "Importeu una cartera",
@@ -106,10 +115,11 @@
         "importFromText": {
             "title": "Restaureu la cartera amb una frase de recuperació o una llavor",
             "body1": "Una llavor consta de 81 caràcters. S’utilitza per recuperar d’una cartera Trinity antiga.",
-            "body2": "Una frase de recuperació té 24 paraules (amb espais). S’utilitza per recuperar una cartera Firefly existent.",
+            "body2": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
             "body3": "Introduïu la vostra llavor o la frase de recuperació",
             "seedDetected": "S'ha detectat una llavor de 81 caràcters",
-            "phraseDetected": "Frase de 24 paraules detectada"
+            "phraseDetected": "Frase de 24 paraules detectada",
+            "checksum": "Checksum"
         },
         "importFromFile": {
             "title": "Recupereu la cartera des d'un fitxer de còpia de seguretat",
@@ -130,10 +140,58 @@
         },
         "migrate": {
             "title": "Migra els teus fons",
-            "body1": "Això es tracta d’un procés automatitzat per transferir els vostres fons a la vostra cartera nova. Comprovarem si hi ha adreces gastades que debilitin la vostra seguretat.",
+            "body1": "This is an automated process to transfer your funds to your new wallet.",
             "body2": "Pot trigar una mica. No apagueu el dispositiu durant la migració.",
             "existing": "La teva vella cartera",
-            "new": "La vostra nova cartera"
+            "new": "La vostra nova cartera",
+            "learn": "Learn about the migration",
+            "beginMigration": "Begin Migration",
+            "migrating": "Migrating funds...",
+            "migrated": "{balance} migrated",
+            "migrationFailed": "Migration Failed",
+            "noAddressesForMigration": "Please select the addresses you wish to secure.",
+            "restoringWallet": "Restoring wallet...",
+            "findingBalance": "Finding balance...",
+            "incorrectSeedVaultPassword": "Incorrect SeedVault password.",
+            "signingBundle": "Signing bundle",
+            "broadcastingBundle": "Broadcasting bundle",
+            "miningBundle": "Mining bundle",
+            "problemRestoringWallet": "There was a problem restoring your wallet. Please try again.",
+            "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
+            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. {value} will be lost.",
+            "error": "There was an error migrating your funds. Please try again."
+        },
+        "bundleMiningWarning": {
+            "title": "Warning",
+            "body1": "You have funds on one or more spent addresses.",
+            "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
+            "body3": "If you close the app you will need to restart the whole migration.",
+            "learn": "Learn about spent addresses"
+        },
+        "secureSpentAddresses": {
+            "title": "Secure spent addresses",
+            "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.",
+            "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",
+            "error": "You can’t migrate spent addresses with less than 1 Mi"
+        },
+        "securityCheckCompleted": {
+            "title": "Security check completed",
+            "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
+            "body2": "When you are happy with the risk level(s) press continue.",
+            "rerun": "Rerun process for selected addresses",
+            "continueMigration": "Continue migration"
+        },
+        "securingSpentAddresses": {
+            "title": "Securing spent addresses...",
+            "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
+            "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
+            "migrate": "Migrate funds",
+            "transaction": "Transaction {number}",
+            "rerun": "Torna-ho a provar"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,7 +199,9 @@
         },
         "balance": {
             "title": "El vostre saldo",
-            "body": "El vostre saldo és correcte?"
+            "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
+            "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
+            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly."
         },
         "settings": {
             "settings": "Preferències",
@@ -403,6 +463,17 @@
         "transaction": {
             "title": "Confirm transaction",
             "body": "You’re about to send {amount} to"
+        },
+        "riskFunds": {
+            "title": "Warning: funds at risk during migration",
+            "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
+            "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
+        },
+        "missingBundle": {
+            "title": "Warning: funds at risk during migration",
+            "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
+            "learnMore": "Learn more about spent addresses",
+            "proceed": "I understand the risk"
         }
     },
     "charts": {
@@ -411,7 +482,11 @@
         "portoflio": "Portafoli",
         "token": "Token",
         "accountValue": "Valor del compte",
-        "accountActivity": "Activitat del compte"
+        "accountActivity": "Activitat del compte",
+        "timeframe1Hour": "1 hour",
+        "timeframe1Day": "1 day",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 month"
     },
     "actions": {
         "continue": "Continuar",
@@ -419,10 +494,13 @@
         "cancel": "Cancel·lar",
         "close": "Tancar",
         "dismiss": "Omet",
+        "proceedAnyway": "Proceed anyway",
         "save": "Guardar",
         "importSeed": "Importeu una llavor existent",
-        "importWallet": "Importeu la cartera existent",
+        "restoreWallet": "Migrate or restore a wallet",
+        "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
         "createWallet": "Crea una cartera nova",
+        "createWalletDescription": "Create a fresh wallet running on Chrysalis",
         "savePassword": "Desa la contrasenya",
         "useBiometric": "Utilitzeu seguretat biomètrica",
         "setupPin": "Configureu el codi PIN",
@@ -434,7 +512,7 @@
         "verifyRecoveryPhrase": "Verifiqueu la frase de recuperació",
         "revealRecoveryPhrase": "Mostrar la frase de recuperació",
         "importSeedvault": "Importar SeedVault",
-        "checkAgain": "Comprovar-ho un altre cop",
+        "checkAgain": "Check Again",
         "importFromFile": "Importa des d'un fitxer",
         "send": "Enviar",
         "receive": "Rebre",
@@ -485,12 +563,14 @@
         "hideDetails": "Amaga els detalls",
         "yes": "Si",
         "no": "No",
+        "skip": "Skip",
         "reset": "Restableix",
         "downloadRecoveryKit": "Desa la plantilla de recuperació",
         "skipBackup": "Ometre la còpia de seguretat",
         "finishSetup": "Finalitzar la configuració",
         "readDocumentation": "Llegeix la documentació",
         "visitFaq": "Visita les FAQ",
+        "viewStatus": "View status",
         "showHiddenAccounts": "Show hidden accounts",
         "confirm": "Confirm"
     },
@@ -550,6 +630,7 @@
         "manualNodeSelection": "Selecció manual de nodes",
         "profiles": "Perfils",
         "developerProfile": "Mode de desenvolupador",
+        "developerProfileDescription": "Allows you to connect to testnets",
         "dev": "Dev",
         "createAccount": "Crear un compte nou",
         "accountName": "Nom del compte",
@@ -600,6 +681,7 @@
         "passwordStrength3": "Mitjana",
         "passwordStrength4": "Forta",
         "creatingProfile": "S'està creant un compte, espereu...",
+        "fundMigration": "Fund migration",
         "accountRemoved": "This account is hidden. Unhide it to perform transfers."
     },
     "dates": {
@@ -623,7 +705,9 @@
         "calcMinutesRemaining": "S'estan calculant els minuts restants...",
         "minutesRemaining": "{minutes, plural, one {1 minut restant} other {# minuts restants}}",
         "copiedToClipboard": "Copiat al porta-retalls",
-        "accountsSynchronized": "Account synchronization complete"
+        "accountsSynchronized": "Account synchronization complete",
+        "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
+        "migratedAccountChrysalisUp": "Your funds will become available shortly"
     },
     "error": {
         "profile": {
@@ -670,6 +754,7 @@
             "amountZero": "L'import ha de ser superior a 0.",
             "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
             "wrongAddressFormat": "The address is not correctly formatted.",
+            "invalidAddress": "The address is not valid.",
             "insufficientFunds": "Aquest compte no té fons suficients.",
             "noToAccount": "You have not selected an account to send the funds to.",
             "sendingDust": "No es possible enviar menys d'1 Mi.",
@@ -692,7 +777,18 @@
             "seedTooShort": "La llavor ha de tenir 81 caràcters, {length, plural, one {és 1} other {són #}}",
             "seedCharacters": "La llavor només ha de contenir caràcters A-Z o 9",
             "phraseWordCount": "Hi ha d'haver 24 paraules a la frase de recuperació, actualment {length, plural, one {és 1} other {són #}}.",
-            "phraseUnrecognizedWord": "Paraula no reconeguda \"{word}\" a la frase de recuperació"
+            "phraseUnrecognizedWord": "Paraula no reconeguda \"{word}\" a la frase de recuperació",
+            "phraseCaseWord": "The word \"{word}\" should be lower case"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Risk level: {risk}",
+            "veryHigh": "Very high",
+            "high": "High",
+            "medium": "Medium",
+            "low": "Low",
+            "veryLow": "Very low"
         }
     }
 }

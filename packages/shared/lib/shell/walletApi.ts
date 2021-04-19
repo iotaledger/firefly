@@ -72,6 +72,7 @@ const apiToResponseTypeMap = {
     changeStrongholdPassword: ResponseTypes.StrongholdPasswordChanged,
     setStrongholdPasswordClearInterval: ResponseTypes.StrongholdPasswordClearIntervalSet,
     getLegacySeedChecksum: ResponseTypes.LegacySeedChecksum,
+    getNodeInfo: ResponseTypes.NodeInfo,
     ...eventsApiToResponseTypeMap
 }
 

@@ -6,7 +6,7 @@
     import { locales, setLanguage, _ } from 'shared/lib/i18n'
     import { addProfileCurrencyPriceData } from 'shared/lib/marketData'
     import { activeProfile, updateProfile } from 'shared/lib/profile'
-    import { updateAccountsBalanceEquiv, updateBalanceOverviewFiat } from 'shared/lib/wallet'
+    import { refreshBalanceOverview, updateAccountsBalanceEquiv } from 'shared/lib/wallet'
 
     export let locale
 
@@ -19,13 +19,15 @@
     const handleCurrencySelect = (item) => {
         updateProfile('settings.currency', item.value)
         addProfileCurrencyPriceData()
-        updateBalanceOverviewFiat()
+        refreshBalanceOverview()
         updateAccountsBalanceEquiv()
     }
 
     const handleLanguage = (item) => {
         setLanguage(item)
         locale = $_
+        refreshBalanceOverview()
+        updateAccountsBalanceEquiv()
     }
 </script>
 

@@ -1,7 +1,14 @@
 <script lang="typescript">
     import { Icon, Tooltip } from 'shared/components'
-    import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
-    import { formatUnit } from 'shared/lib/units'
+    import {
+        AvailableExchangeRates,
+        convertToFiat,
+        currencies,
+        CurrencyTypes,
+        exchangeRates,
+        formatCurrency,
+    } from 'shared/lib/currency'
+    import { formatUnitBestMatch } from 'shared/lib/units'
     import { get } from 'svelte/store'
     import Text from './Text.svelte'
 
@@ -18,12 +25,12 @@
     export let status = Status.ReadyToMigrate
     export let errorText = null
 
-    let fiatBalance = `${convertToFiat(
-        balance,
-        get(currencies)[CurrencyTypes.USD],
-        get(exchangeRates)[AvailableExchangeRates.USD]
-    )} ${CurrencyTypes.USD}`
-    let balanceString = `${formatUnit(balance)} • ${fiatBalance.toUpperCase()}`
+    let fiatBalance = formatCurrency(
+        convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[AvailableExchangeRates.USD]),
+        AvailableExchangeRates.USD
+    )
+
+    let balanceString = `${formatUnitBestMatch(balance)} • ${fiatBalance}`
 
     let showTooltip = false
     let errorBox

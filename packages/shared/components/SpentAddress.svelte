@@ -1,11 +1,18 @@
 <script lang="typescript">
     import { Icon, Text, Tooltip } from 'shared/components'
-    import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
+    import {
+        AvailableExchangeRates,
+        convertToFiat,
+        currencies,
+        CurrencyTypes,
+        exchangeRates,
+        formatCurrency,
+    } from 'shared/lib/currency'
     import { truncateString } from 'shared/lib/helpers'
     import { RiskLevel } from 'shared/lib/typings/migration'
-    import { formatUnit } from 'shared/lib/units'
-    import { get } from 'svelte/store'
+    import { formatUnitBestMatch } from 'shared/lib/units'
     import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
 
     export let locale
     export let address = ''
@@ -32,11 +39,10 @@
     let localeRiskLevel = ''
     let riskBars = 0
 
-    let fiatBalance = `${convertToFiat(
-        balance,
-        get(currencies)[CurrencyTypes.USD],
-        get(exchangeRates)[AvailableExchangeRates.USD]
-    )} ${CurrencyTypes.USD}`
+    let fiatBalance = formatCurrency(
+        convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[AvailableExchangeRates.USD]),
+        AvailableExchangeRates.USD
+    )
 
     function toggleTooltip(type: TooltipType) {
         if (risk) {
@@ -116,24 +122,26 @@
                 <Icon icon={selected ? 'radio' : 'radio-unchecked'} />
             </div>
             <div>
-                <Text type="pre" smaller>
-                    {truncateString(address, 9, 9)}
+                <Text type="pre" smaller>{truncateString(address, 9, 9)}</Text>
+                <Text type="p" secondary smaller>
+                    {formatUnitBestMatch(balance)}
+                    ·
+                    <span class="uppercase">{fiatBalance}</span>
                 </Text>
-                <Text type="p" secondary smaller>{formatUnit(balance)} · <span class="uppercase">{fiatBalance}</span></Text>
             </div>
         </div>
         {#if showRiskLevel}
-                <risk-meter
-                    bind:this={riskBox}
-                    on:mouseenter={() => toggleTooltip(TooltipType.Risk)}
-                    on:mouseleave={() => toggleTooltip(TooltipType.Risk)}
-                    class="flex flex-row items-center space-x-0.5">
-                    <Icon icon="info" classes="mr-1 text-gray-800 dark:text-white" width={20} height={20} />
-                    {#each Array(Object.keys(RiskLevel).length / 2) as _, i}
-                        <span
-                            class="h-4 w-1 rounded-2xl {i <= riskBars - 1 ? `bg-${riskColor}-500` : 'bg-gray-300 dark:bg-gray-700'}" />
-                    {/each}
-                </risk-meter>
+            <risk-meter
+                bind:this={riskBox}
+                on:mouseenter={() => toggleTooltip(TooltipType.Risk)}
+                on:mouseleave={() => toggleTooltip(TooltipType.Risk)}
+                class="flex flex-row items-center space-x-0.5">
+                <Icon icon="info" classes="mr-1 text-gray-800 dark:text-white" width={20} height={20} />
+                {#each Array(Object.keys(RiskLevel).length / 2) as _, i}
+                    <span
+                        class="h-4 w-1 rounded-2xl {i <= riskBars - 1 ? `bg-${riskColor}-500` : 'bg-gray-300 dark:bg-gray-700'}" />
+                {/each}
+            </risk-meter>
             {#if showRiskTooltip && risk}
                 <Tooltip {parentTop} {parentLeft} {parentWidth}>
                     <Text>{locale('tooltips.risk.title', { values: { risk: locale(`tooltips.risk.${localeRiskLevel}`) } })}</Text>

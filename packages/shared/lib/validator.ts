@@ -5,7 +5,7 @@ import type { Address } from './typings/address'
 import type { MessageResponse } from './typings/bridge'
 import { ResponseTypes } from './typings/bridge'
 import type { Message } from './typings/message'
-import type { StrongholdStatus } from './typings/wallet'
+import type { NodeInfo, StrongholdStatus } from './typings/wallet'
 
 type Validators =
     | IdValidator
@@ -18,6 +18,7 @@ type Validators =
     | MessageValidator
     | StrongholdStatusValidator
     | AddressValidator
+    | NodeInfoValidator
 
 export enum ErrorTypes {
     UnknownId = 'UnknownId',
@@ -573,6 +574,103 @@ class TypeValidator extends Validator {
     }
 }
 
+/**
+ * Validation for get node info
+ */
+class NodeInfoValidator extends Validator {
+    /**
+     * Checks if response is valid
+     *
+     * @method isValid
+     *
+     * @param {MessageResponse} response
+     *
+     * @returns {ValidationResponse}
+     */
+    isValid(response: MessageResponse): ValidationResponse {
+        const payload = response.payload as NodeInfo
+
+        if (!payload.nodeinfo || 'object' !== typeof payload.nodeinfo) {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'No node info.',
+            })
+        } else if ('string' !== typeof payload.url) {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'No node url.',
+            })
+        } else if ('string' !== typeof payload.nodeinfo.version) {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'Invalid type of node info version.',
+            })
+        } else if ('string' !== typeof payload.nodeinfo.networkId) {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'Invalid type of node info network id.',
+            })
+        } else if ('boolean' !== typeof payload.nodeinfo.isHealthy) {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'Invalid type of node info is healthy.',
+            })
+        } else if ('string' !== typeof payload.nodeinfo.bech32HRP) {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'Invalid type of node info bech 32 hrp.',
+            })
+        } else if ('number' !== typeof payload.nodeinfo.minPoWScore) {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'Invalid type of node info min pow score.',
+            })
+        } else if ('number' !== typeof payload.nodeinfo.latestMilestoneIndex) {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'Invalid type of node info latest milestone index.',
+            })
+        } else if ('number' !== typeof payload.nodeinfo.latestMilestoneTimestamp) {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'Invalid type of node info latest milestone timestamp.',
+            })
+        } else if ('number' !== typeof payload.nodeinfo.confirmedMilestoneIndex) {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'Invalid type of node info confirmed milestone index.',
+            })
+        } else if ('number' !== typeof payload.nodeinfo.pruningIndex) {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'Invalid type of node info latest pruning index.',
+            })
+        } else if (!Array.isArray(payload.nodeinfo.features)) {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'Invalid type of node info features.',
+            })
+        } else if ('number' !== typeof payload.nodeinfo.messagesPerSecond) {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'Invalid type of node info messages per second.',
+            })
+        } else if ('number' !== typeof payload.nodeinfo.referencedMessagesPerSecond) {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'Invalid type of node info referenced messages per second.',
+            })
+        } else if ('number' !== typeof payload.nodeinfo.referencedRate) {
+            return super.createResponse(false, {
+                type: ErrorTypes.InvalidType,
+                error: 'Invalid type of node info referenced rate.',
+            })
+        }
+
+        return super.isValid(response)
+    }
+}
+
 class ValidatorChainBuilder {
     first: Validators
     last: Validators
@@ -650,6 +748,7 @@ export default class ValidatorService {
             [ResponseTypes.StrongholdPasswordChanged]: this.createBaseValidator().getFirst(),
             [ResponseTypes.UpdatedAllClientOptions]: this.createBaseValidator().getFirst(),
             [ResponseTypes.StrongholdPasswordClearIntervalSet]: this.createBaseValidator().getFirst(),
+            [ResponseTypes.NodeInfo]: this.createBaseValidator().add(new NodeInfoValidator()).getFirst(),
             [ResponseTypes.Error]: this.createBaseValidator().getFirst(),
             [ResponseTypes.Panic]: this.createBaseValidator().getFirst(),
 

@@ -21,7 +21,7 @@ export interface MigratedTransaction {
 /**
  * Profile
  */
-interface Profile {
+export interface Profile {
     id: string
     name: string
     /**

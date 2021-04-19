@@ -1,19 +1,26 @@
 <script lang="typescript">
     import { Box, Button, Illustration, OnboardingLayout, Spinner, Text, Toast } from 'shared/components'
-    import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
     import {
+        AvailableExchangeRates,
+        convertToFiat,
+        currencies,
+        CurrencyTypes,
+        exchangeRates,
+        formatCurrency,
+    } from 'shared/lib/currency'
+    import {
+        bundlesWithUnspentAddresses,
         getMigrationData,
         hasAnySpentAddressWithNoBundleHashes,
+        hasLowBalanceOnAllSpentAddresses,
         migration,
         MINIMUM_MIGRATION_BALANCE,
-        hasLowBalanceOnAllSpentAddresses,
-        bundlesWithUnspentAddresses,
         resetMigrationState,
+        spentAddressesWithNoBundleHashes,
         unselectedInputs,
-        spentAddressesWithNoBundleHashes
     } from 'shared/lib/migration'
     import { closePopup, openPopup } from 'shared/lib/popup'
-    import { formatUnit } from 'shared/lib/units'
+    import { formatUnitBestMatch } from 'shared/lib/units'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -27,10 +34,17 @@
     let _data = $data
     let _bundles = $bundles
 
-    const getFiatBalance = (balance) =>{
-        const balanceAsFiat = convertToFiat(balance, get(currencies)[CurrencyTypes.USD], get(exchangeRates)[AvailableExchangeRates.USD])
-        
-        return `${balanceAsFiat === 0 ? '< 0.01' : balanceAsFiat} ${CurrencyTypes.USD}`
+    const getFiatBalance = (balance) => {
+        const balanceAsFiat = convertToFiat(
+            balance,
+            get(currencies)[CurrencyTypes.USD],
+            get(exchangeRates)[AvailableExchangeRates.USD]
+        )
+
+        if (balanceAsFiat === 0) {
+            return `< ${formatCurrency(0.01, AvailableExchangeRates.USD)}`
+        }
+        return formatCurrency(balanceAsFiat, AvailableExchangeRates.USD)
     }
 
     const hasInsufficientBalance = (balance) => balance < MINIMUM_MIGRATION_BALANCE
@@ -40,7 +54,7 @@
     let fiatBalance = getFiatBalance(balance)
 
     let error = getError(balance)
-    let formattedBalance = formatUnit(balance)
+    let formattedBalance = formatUnitBestMatch(balance)
 
     bundles.subscribe((updatedBundles) => {
         _bundles = updatedBundles
@@ -55,7 +69,7 @@
         _data = updatedData
 
         fiatBalance = getFiatBalance(_data.balance)
-        formattedBalance = formatUnit(_data.balance)
+        formattedBalance = formatUnitBestMatch(_data.balance)
         error = getError(_data.balance)
     })
 
@@ -95,7 +109,9 @@
                 allowToProceed: true,
                 text: locale('views.migrate.cannotMigrateAllYourFunds', {
                     values: {
-                        value: `${formatUnit(totalUnselectedBalance)} (${getFiatBalance(totalUnselectedBalance).toUpperCase()})`,
+                        value: `${formatUnitBestMatch(totalUnselectedBalance)} (${getFiatBalance(
+                            totalUnselectedBalance
+                        ).toUpperCase()})`,
                     },
                 }),
             }
@@ -110,7 +126,10 @@
     const dispatch = createEventDispatcher()
 
     function handleContinueClick() {
-        const spentAddressesWithNoBundleHashesTotalBalance = $spentAddressesWithNoBundleHashes.reduce((acc, input) => acc + input.balance, 0)
+        const spentAddressesWithNoBundleHashesTotalBalance = $spentAddressesWithNoBundleHashes.reduce(
+            (acc, input) => acc + input.balance,
+            0
+        )
         if ($hasAnySpentAddressWithNoBundleHashes) {
             openPopup({
                 type: 'missingBundle',
@@ -119,7 +138,9 @@
                         closePopup()
                         dispatch('next')
                     },
-                    balance: `${formatUnit(spentAddressesWithNoBundleHashesTotalBalance)} (${getFiatBalance(spentAddressesWithNoBundleHashesTotalBalance).toUpperCase()})`
+                    balance: `${formatUnitBestMatch(spentAddressesWithNoBundleHashesTotalBalance)} (${getFiatBalance(
+                        spentAddressesWithNoBundleHashesTotalBalance
+                    ).toUpperCase()})`,
                 },
             })
         } else {
@@ -173,7 +194,10 @@
                         classes="justify-center" />
                 {:else}{locale('actions.checkAgain')}{/if}
             </Button>
-            <Button classes="flex-1" disabled={isCheckingForBalance || !error.allowToProceed} onClick={() => handleContinueClick()}>
+            <Button
+                classes="flex-1"
+                disabled={isCheckingForBalance || !error.allowToProceed}
+                onClick={() => handleContinueClick()}>
                 {locale('actions.continue')}
             </Button>
         </div>

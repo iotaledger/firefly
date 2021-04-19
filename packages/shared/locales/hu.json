@@ -31,11 +31,17 @@
             "title": "Megjelenés",
             "body": "Válassza ki tárcája megjelenését."
         },
-        "setup": {
-            "title": "Tárca beállítása",
+        "profile": {
+            "title": "Profil létrehozása",
             "body1": "Több felhasználói profilt is létrehozhat a tokenek elkülönítése és a biztonság növelésének érdekében.",
             "body2": "Most kezdjük az első profilnévvel. Később további profilokat is hozzáadhat.",
-            "profileName": "Profilnév"
+            "profileName": "Profil név"
+        },
+        "setup": {
+            "title": "Tárca létrehozása",
+            "chrysalisTitle": "Chrysalis hálózati frissítés",
+            "chrysalisBody": "2021. április 21-től a felhasználók migrálhatják tokenjeiket az új Chrysalis hálózatra. Javasoljuk, hogy amint lehet, migrálja meglévő tokenjeit!",
+            "learnMore": "Tudjon meg többet a migrálásról"
         },
         "secure": {
             "title": "Tárca biztonsága",
@@ -64,7 +70,7 @@
         },
         "backup": {
             "title": "Tárca biztonsági mentése",
-            "body1": "Most meg fogjuk mutatni a tárcája helyreállításához szükséges szavakat. Írja le őket a helyreállítási lapra!",
+            "body1": "Most meg fogjuk mutatni a tárcája helyreállításához szükséges szavakat. Írja le őket a helyreállítási lapra.",
             "body2": "Ne ossza meg senkivel a helyreállítási szavakat! Azokkal bárki bárhonnan hozzáférhet a tokenjeihez.",
             "body3": "Ha elveszíti a helyreállítási szavakat, örökre elveszítheti számlájának teljes egyenlegét."
         },
@@ -87,9 +93,9 @@
             "title": "Stronghold biztonsági mentés",
             "body1": "Tárcája Stronghold-ba történő mentéséhez adja meg jelszavát. A jelszó a biztonsági mentés titkosítására szolgál.",
             "body2": "A digitális biztonsági mentés az alábbiak miatt fontos:",
-            "reason1": "- Egyszerűen helyreállíthatja tárcáját anélkül, hogy beírná a helyreállítási szavakat",
-            "reason2": "- Könnyen importálhatja tárcáját más eszközökre",
-            "reason3": "- Helyreállíthatja tranzakcióinak előzményeit"
+            "reason1": "Egyszerűen helyreállíthatja tárcáját anélkül, hogy beírná a helyreállítási szavakat",
+            "reason2": "Könnyen importálhatja tárcáját más eszközökre",
+            "reason3": "Helyreállíthatja tranzakcióinak előzményeit"
         },
         "recoveryPhraseSaved": {
             "title": "Sikeres biztonsági mentés",
@@ -97,22 +103,26 @@
         },
         "congratulations": {
             "title": "A tárca beállítása elkészült",
-            "body": "Az új tárcája használatra kész."
+            "body": "Az új tárcája használatra kész.",
+            "fundsMigrated": "Egyenleg migrálva",
+            "success": "Sikeresen migrálta tokenjeit az új hálózatra",
+            "exportMigration": "Migrálási napló exportálása és telepítés befejezése"
         },
         "import": {
             "title": "Tárca importálása",
             "body": "Ha rendelkezik helyreállítási szavakkal vagy Stronghold biztonsági mentéssel, itt importálhatja azokat."
         },
         "importFromText": {
-            "title": "Állítsa helyre tárcáját helyreállítási szavak vagy seed használatával",
+            "title": "Tárca helyreállítása helyreállítási szavak vagy seed használatával",
             "body1": "A seed 81 karakterből áll. Régebbi, Trinity tárcából történő helyreállításra szolgál.",
-            "body2": "A helyreállítási szavak 24 szóból állnak. Egy létező Firefly tárca helyreállítására használhatóak.",
+            "body2": "A helyreállítási szavak 24 csupa kisbetűs szóból állnak, egymástól szóközzel elválasztva, melyek egy már meglévő Firefly tárca helyreállítására szolgálnak.",
             "body3": "Írja be a seed-et vagy a helyreállítási szavakat",
             "seedDetected": "81 karakterből álló seed észlelve",
-            "phraseDetected": "24 szóból álló helyreállítási szavak észlelve"
+            "phraseDetected": "24 szóból álló helyreállítási szavak észlelve",
+            "checksum": "Ellenőrző összeg"
         },
         "importFromFile": {
-            "title": "Állítsa helyre tárcáját a biztonsági mentés használatával",
+            "title": "Tárca helyreállítása biztonsági mentés használatával",
             "body": "Importálja tárcáját egy meglévő biztonsági mentésből, mely lehet Stronghold (.stronghold) vagy Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
@@ -129,11 +139,59 @@
             "strongholdBody": "A jelszó helyes."
         },
         "migrate": {
-            "title": "Egyenleg átvezetése",
-            "body1": "Ez egy automatizált folyamat, melynek során egyenlegét átvezetjük új tárcájába. Ellenőrizni fogjuk, van-e olyan címén egyenleg, amelyről már indított korábban utalást. Az ilyen címek csökkentik az Ön tárcájának biztonságát.",
+            "title": "Egyenleg migrálása",
+            "body1": "Ez egy automatizált folyamat tokenjei új hálózatra történő átvezetéséhez.",
             "body2": "Ez hosszabb időt vehet igénybe. Ne kapcsolja ki az eszközét, amíg az átvezetés be nem fejeződik.",
             "existing": "Régi tárca",
-            "new": "Új tárca"
+            "new": "Új tárca",
+            "learn": "Tudjon meg többet a migrálásról",
+            "beginMigration": "Migráció kezdése",
+            "migrating": "Tőke migrálása...",
+            "migrated": "{balance} migrálva",
+            "migrationFailed": "Sikertelen migráció",
+            "noAddressesForMigration": "Válassza ki a címeket, amelyeket biztosítani szeretne.",
+            "restoringWallet": "Tárca helyreállítása...",
+            "findingBalance": "Egyenleg keresése...",
+            "incorrectSeedVaultPassword": "Helytelen SeedVault jelszó.",
+            "signingBundle": "Kötegtranzakció aláírása",
+            "broadcastingBundle": "Kötegtranzakció kiküldése",
+            "miningBundle": "Kötegtranzakció bányászása",
+            "problemRestoringWallet": "Hiba történt tárcája helyreállítása közben. Kérjük, próbálja újra.",
+            "minimumMigrationAmountSpentAddresses": "A migráláshoz legalalább 1 Mi egyenlegnek kell lennie minden olyan címen, amelyről korábban már költött. Ellenőrizze, hogy egyenlege rendben van-e.",
+            "tooManyAddressesToMigrate": "Túl sok 1 Mi alatti egyenleggel rendelkező címe van, amelyet így nem tud migrálni. Ellenőrizze, hogy egyenlege rendben van-e.",
+            "cannotMigrateAllYourFunds": "Nem tudjuk a teljes egyenlegét migrálni, mert néhány címén 1 Mi alatti egyenleggel rendelkezik. Ennek ellenére folyathatja, de {value} el fog veszni.",
+            "error": "Hiba történt az egyenlege migrálása során. Kérjük, próbálja újra."
+        },
+        "bundleMiningWarning": {
+            "title": "Figyelem",
+            "body1": "Egy vagy több olyan címén is van egyenlege, amelyről korábban költött már.",
+            "body2": "Azt javasoljuk, hogy egy automatizált folyamat révén küldje át ezt az összeget egy másik, biztonságos címre.",
+            "body3": "Ha bezárja az applikációt, a teljes migrációs folyamatat elölről kell kezdenie.",
+            "learn": "Tudjon meg többet a címekről, amelyekről korábban már költött"
+        },
+        "secureSpentAddresses": {
+            "title": "Korábban már használt címek biztosítása",
+            "body1": "Önnek {number, plural, one {# olyan címén van egyenlege, amelyről korábban már költött} other {# olyan címén van egyenlege, amelyről korábban már költött}}.",
+            "body2": "Azt javasoljuk, hogy egy automatizált folyamat révén küldje át ezt az összeget egy másik, biztonságos címre.",
+            "error": "Nem tudja migrálni olyan címekről az egyenlegét, amelyeken kevesebb, mint 1 Mi összeggel rendelkezik"
+        },
+        "securityCheckCompleted": {
+            "title": "Biztonsági ellenőrzés elkészült",
+            "body1": "Kiszámítottuk a biztonsági kockázat szintjét. A folyamat újrafuttatása csökkentheti a kockázati szintet.",
+            "body2": "Ha elégedett a kockázati szint(ekk)el, nyomja meg a Migráció folytatása gombot.",
+            "rerun": "Automatizált folyamat újrafuttatása a választott címekre",
+            "continueMigration": "Migráció folytatása"
+        },
+        "securingSpentAddresses": {
+            "title": "Korábban már használt címek biztosítása...",
+            "body1": "A folyamat {minutes, plural, one {1 percig} other {# percig}} is eltarthat.",
+            "body2": "A tárca az eszköze teljes kapacitását kihasználva fog futni, ezért érdemes lehet addig valami mást csinálnia."
+        },
+        "transferFragmentedFunds": {
+            "body1": "A Firefly most megkezdi egyenlegének migrálását. Ez eltarthat egy ideig.",
+            "migrate": "Egyenleg migrálása",
+            "transaction": "Tranzakció {number}",
+            "rerun": "Újrapróbálkozás"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,13 +199,15 @@
         },
         "balance": {
             "title": "Egyenleg",
-            "body": "Helyes az egyenlege?"
+            "body": "Győződjön meg róla, hogy egyenlege helyes, mielőtt folytatja. Még egyszer ellenőrizheti, ha valamit nem talál rendjén.",
+            "error": "A migráláshoz legalább 1 Mi egyenleggel kell rendelkeznie. Ellenőrizze, hogy rendben van-e az egyenlege!",
+            "zeroBalance": "Ellenőrizze egyenlegét még egyszer! Ha továbbra sincs rendben, elképzhelhető, hogy helytelen seed-et adott meg."
         },
         "settings": {
             "settings": "Beállítások",
             "generalSettings": {
                 "title": "Általános beállítások",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Tárca megjelenésének és általános beállításainak módosítása"
             },
             "security": {
                 "title": "Biztonság",
@@ -242,8 +302,8 @@
                 "noNodes": "Nincs egyetlen csomópont sem. Automatikus csomópont kiválasztás engedélyezve."
             },
             "proofOfWork": {
-                "title": "Kiszabott munka elvégzése",
-                "description": "Kiszabott munka saját eszközön történő elvégzése vagy csomópontra történő kiszervezése"
+                "title": "Tranzakcíók hitelesítéséhez szükséges számítás",
+                "description": "Számítás saját eszközön történő elvégzése vagy csomópontra történő kiszervezése"
             },
             "errorLog": {
                 "title": "Hibanapló",
@@ -304,12 +364,12 @@
                     "unlocked": "Stronghold kinyitva"
                 },
                 "strongholdBackup": {
-                    "title": "Tárca biztonsági mentés",
+                    "title": "Tárca biztonsági mentése",
                     "weeksAgo": "{weeks, plural, one {# héttel} other {# héttel}} ezelőtt"
                 }
             },
             "network": {
-                "networkOperational": "Hálózat elérhető",
+                "networkOperational": "A hálózat működik",
                 "networkDegraded": "Hálózati problémák",
                 "networkDown": "A hálózat nem elérhető",
                 "status": "Állapot",
@@ -317,7 +377,7 @@
                 "confirmationRate": "Visszaigazolási arány"
             },
             "profileModal": {
-                "allSettings": "Összes beállítás",
+                "allSettings": "Beállítások",
                 "logout": "Kijelentkezés"
             }
         }
@@ -403,15 +463,30 @@
         "transaction": {
             "title": "Küldés jóváhagyása",
             "body": "{amount} küldése"
+        },
+        "riskFunds": {
+            "title": "Figyelem: egyenlege veszélyben van a migráció során",
+            "body1": "Feltétlenül javasoljuk, hogy valamennyi címén lévő egyenlegét biztosítsa, mielőtt elkezdi a migrációt. Ennek hiányában fennáll a veszélye, hogy egyenlegét ellopják.",
+            "body2": "Javasoljuk, hogy futtassa újra a folyamatot azokra a címekre, ahol a kockázati szint közepes vagy annál magasabb."
+        },
+        "missingBundle": {
+            "title": "Figyelem: egyenlege veszélyben van a migráció során",
+            "body": "Az egyenlege, vagy annak egy része olyan cím(ek)en található, amely(ek)ről korábban már költött, de a biztosításukhoz nincs elegendő információ. Ez akkor fordulhat elő, ha már nagyon régen költött ezekről a címekről. Folytathatja, de vegye tudomásul, hogy {value} esetében fennáll a veszélye, hogy a migráció közben ellopják.",
+            "learnMore": "Tudjon meg többet a címekről, amelyekről korábban már költött",
+            "proceed": "Megértettem a kockázatokat"
         }
     },
     "charts": {
-        "incomingMi": "{value} Mi fogadása folyamatban...",
-        "outgoingMi": "{value} Mi küldése folyamatban...",
+        "incomingMi": "{value} Mi érkezett",
+        "outgoingMi": "{value} Mi elküldve",
         "portoflio": "Portfólió",
         "token": "Token",
         "accountValue": "Számlaegyenleg",
-        "accountActivity": "Számlatörténet"
+        "accountActivity": "Számlatörténet",
+        "timeframe1Hour": "1 óra",
+        "timeframe1Day": "1 nap",
+        "timeframe1Week": "1 hét",
+        "timeframe1Month": "1 hónap"
     },
     "actions": {
         "continue": "Tovább",
@@ -419,10 +494,13 @@
         "cancel": "Mégse",
         "close": "Bezár",
         "dismiss": "Elvet",
+        "proceedAnyway": "Tovább mindenképp",
         "save": "Mentés",
         "importSeed": "Meglévő seed importálása",
-        "importWallet": "Meglévő tárca importálása",
+        "restoreWallet": "Migráció vagy tárca helyreállítása",
+        "restoreWalletDescription": "Migrálás Chrysalis hálózatra vagy létező tárca helyreállítása",
         "createWallet": "Új tárca létrehozása",
+        "createWalletDescription": "Új tárca készítése a Chrysalis hálózaton",
         "savePassword": "Jelszó mentése",
         "useBiometric": "Biometrikus azonosítás használata",
         "setupPin": "PIN-kód beállítása",
@@ -434,7 +512,7 @@
         "verifyRecoveryPhrase": "Helyreállítási szavak ellenőrzése",
         "revealRecoveryPhrase": "Helyreállítási szavak megjelenítése",
         "importSeedvault": "SeedVault importálása",
-        "checkAgain": "Helytelen, ellenőrizze újra",
+        "checkAgain": "Ellenőrizze újra",
         "importFromFile": "Importálás fájlból",
         "send": "Küldés",
         "receive": "Fogadás",
@@ -446,14 +524,14 @@
         "importExtentions": ".kdbx vagy .stronghold file",
         "chooseFile": "Válasszon egy fájlt",
         "dropHere": "Húzza ide a fájlt",
-        "syncAll": "Összes szinkronizálása",
+        "syncAll": "Minden szinkronizálása",
         "export": "Exportálás",
         "exportNewStronghold": "Új Stronghold exportálása",
         "enableDeepLinks": "Mélylinkek engedélyezése",
         "enableDeveloperMode": "Fejlesztői mód engedélyezése",
         "enableSystemNotifications": "Rendszer értesítések engedélyezése",
         "exportState": "Állapot exportálása",
-        "localProofOfWork": "Kiszabott munka elvégzése helyben",
+        "localProofOfWork": "Számítás elvégzése helyben",
         "unlock": "Felold",
         "updateFirefly": "Firefly frissítése",
         "restartNow": "Újraindítás most",
@@ -485,12 +563,14 @@
         "hideDetails": "Részletek elrejtése",
         "yes": "Igen",
         "no": "Nem",
+        "skip": "Kihagyás",
         "reset": "Visszaállítás",
         "downloadRecoveryKit": "Helyreállítási sablon mentése",
         "skipBackup": "Biztonsági mentés kihagyása",
         "finishSetup": "Beállítás befejezése",
         "readDocumentation": "Dokumentáció elolvasása",
         "visitFaq": "GYIK megtekintése",
+        "viewStatus": "Állapot megtekintése",
         "showHiddenAccounts": "Rejtett számlák megjelenítése",
         "confirm": "Megerősít"
     },
@@ -505,13 +585,13 @@
         "recentActivity": "Legutóbbi tevékenységek",
         "sent": "Elküldött",
         "received": "Fogadott",
-        "sendPayment": "Küldés idegen számlára",
+        "sendPayment": "Átutalás",
         "moveFunds": "Küldés saját számlák közt",
         "sendFunds": "Átutalás",
         "sendToAddress": "Küldés a következő címre",
         "scanQrOrPaste": "QR-kód beolvasása vagy cím beillesztése",
         "moveFundsBetweenAccounts": "Egyenleg átvezetése számlák között",
-        "sendTokensToAddress": "Tokenek küldése egy címre",
+        "sendTokensToAddress": "Tokenek küldése",
         "manageAccount": "Számla kezelése",
         "customizeAcount": "Számla személyre szabása",
         "account": "Számla",
@@ -550,6 +630,7 @@
         "manualNodeSelection": "Kézi csomópont kiválasztás",
         "profiles": "Profilok",
         "developerProfile": "Fejlesztői profil",
+        "developerProfileDescription": "Lehetővé teszi a csatlakozást teszthálózatokhoz",
         "dev": "Fejlesztő",
         "createAccount": "Számla létrehozása",
         "accountName": "Számla neve",
@@ -562,7 +643,7 @@
         "help": "Segítség",
         "you": "Ön",
         "messageId": "Üzenetazonosító",
-        "inputAddress": "Küldés címre",
+        "inputAddress": "Küldő cím",
         "receiveAddress": "Fogadó cím",
         "date": "Dátum",
         "status": "Állapot",
@@ -600,6 +681,7 @@
         "passwordStrength3": "Átlagos",
         "passwordStrength4": "Erős",
         "creatingProfile": "Profil létrehozása folyamatban, kérjük várjon...",
+        "fundMigration": "Egyenleg migrálása",
         "accountRemoved": "Rejtett számláról nem tud küldeni. Állítsa be előbb a rejtett számlák megjelenítését."
     },
     "dates": {
@@ -623,7 +705,9 @@
         "calcMinutesRemaining": "Hátralévő idő kiszámítása...",
         "minutesRemaining": "{minutes, plural, one {1 perc van hátra} other {# perc van hátra}}",
         "copiedToClipboard": "A vágólapra másolva",
-        "accountsSynchronized": "Számlák sikeresen szinkronizálva"
+        "accountsSynchronized": "Számlák sikeresen szinkronizálva",
+        "migratedAccountChrysalisDown": "Egyenlege a Chrysalis migráció után lesz elérhető 2021. április 28-án",
+        "migratedAccountChrysalisUp": "Egyenlege hamarosan elérhető lesz"
     },
     "error": {
         "profile": {
@@ -670,6 +754,7 @@
             "amountZero": "Az összegnek nagyobbnak kell lennie, mint 0.",
             "wrongAddressPrefix": "A címeknek {prefix} előtaggal kell kezdődniük.",
             "wrongAddressFormat": "A cím nem megfelelő formátumú.",
+            "invalidAddress": "Helytelen cím.",
             "insufficientFunds": "Nincs elég fedezet a számláján a tranzakció végrehajtásához.",
             "noToAccount": "Nem választott célszámlát a küldéshez.",
             "sendingDust": "1 Mi-nél kevesebbet nem lehet elküldeni.",
@@ -692,7 +777,18 @@
             "seedTooShort": "A seed-nek 81 karakter hosszúnak kell lennie, de a megadott seed csak {length, plural, one {1} other {#}} hosszú",
             "seedCharacters": "A seed csak A-Z vagy 9 karaktereket tartalmazhat",
             "phraseWordCount": "24 helyett csak {length, plural, one {1} other { #}} helyreállítási szót adott meg.",
-            "phraseUnrecognizedWord": "Ismeretlen szó \"{word}\" található a helyreállítási szavak között"
+            "phraseUnrecognizedWord": "Ismeretlen szó \"{word}\" található a helyreállítási szavak között",
+            "phraseCaseWord": "A “{word}” szó csak kisbetűkből állhat"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Kockázati szint: {risk}",
+            "veryHigh": "Nagyon magas",
+            "high": "Magas",
+            "medium": "Közepes",
+            "low": "Alacsony",
+            "veryLow": "Nagyon alacsony"
         }
     }
 }
