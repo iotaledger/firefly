@@ -67,7 +67,7 @@
                     getMigrationData(input)
                         .then(() => {
                             isGettingMigrationData = false
-                            dispatch('next', { importType })
+                            dispatch('next', { importType: get(importType) })
                         })
                         .catch(() => {
                             showAppNotification({

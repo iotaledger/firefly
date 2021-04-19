@@ -3,7 +3,7 @@
     import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
     import { truncateString } from 'shared/lib/helpers'
     import { RiskLevel } from 'shared/lib/typings/migration'
-    import { formatUnit } from 'shared/lib/units'
+    import { formatUnitBestMatch } from 'shared/lib/units'
     import { get } from 'svelte/store'
     import { onMount } from 'svelte'
 
@@ -119,7 +119,7 @@
                 <Text type="pre" smaller>
                     {truncateString(address, 9, 9)}
                 </Text>
-                <Text type="p" secondary smaller>{formatUnit(balance)} · <span class="uppercase">{fiatBalance}</span></Text>
+                <Text type="p" secondary smaller>{formatUnitBestMatch(balance)} · <span class="uppercase">{fiatBalance}</span></Text>
             </div>
         </div>
         {#if showRiskLevel}

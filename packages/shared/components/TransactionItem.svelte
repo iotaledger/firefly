@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Icon, Tooltip } from 'shared/components'
     import { AvailableExchangeRates, convertToFiat, currencies, CurrencyTypes, exchangeRates } from 'shared/lib/currency'
-    import { formatUnit } from 'shared/lib/units'
+    import { formatUnitBestMatch } from 'shared/lib/units'
     import { get } from 'svelte/store'
     import Text from './Text.svelte'
 
@@ -23,7 +23,7 @@
         get(currencies)[CurrencyTypes.USD],
         get(exchangeRates)[AvailableExchangeRates.USD]
     )} ${CurrencyTypes.USD}`
-    let balanceString = `${formatUnit(balance)} • ${fiatBalance.toUpperCase()}`
+    let balanceString = `${formatUnitBestMatch(balance)} • ${fiatBalance.toUpperCase()}`
 
     let showTooltip = false
     let errorBox

@@ -4,7 +4,7 @@
     import { Electron } from 'shared/lib/electron'
     import { LOG_FILE_NAME, migration, resetMigrationState, totalMigratedBalance } from 'shared/lib/migration'
     import { activeProfile, newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
-    import { formatUnit } from 'shared/lib/units'
+    import { formatUnitBestMatch } from 'shared/lib/units'
     import { getStoragePath } from 'shared/lib/wallet'
     import { createEventDispatcher, onMount, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
@@ -76,7 +76,7 @@
                     </div>
                     <Text type="h2" classes="mb-6 text-center">{locale('views.congratulations.fundsMigrated')}</Text>
                     <Text type="p" secondary classes="mb-6 text-center">{locale('views.congratulations.success')}</Text>
-                    <Text type="h2">{formatUnit($totalMigratedBalance)}</Text>
+                    <Text type="h2">{formatUnitBestMatch($totalMigratedBalance)}</Text>
                     <Text type="p" highlighted classes="py-1 uppercase">{fiatbalance}</Text>
                 </div>
             {:else}

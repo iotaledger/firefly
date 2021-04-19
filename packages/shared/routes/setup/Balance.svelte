@@ -13,7 +13,7 @@
         spentAddressesWithNoBundleHashes
     } from 'shared/lib/migration'
     import { closePopup, openPopup } from 'shared/lib/popup'
-    import { formatUnit } from 'shared/lib/units'
+    import { formatUnitBestMatch } from 'shared/lib/units'
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { get } from 'svelte/store'
 
@@ -40,7 +40,7 @@
     let fiatBalance = getFiatBalance(balance)
 
     let error = getError(balance)
-    let formattedBalance = formatUnit(balance)
+    let formattedBalance = formatUnitBestMatch(balance)
 
     bundles.subscribe((updatedBundles) => {
         _bundles = updatedBundles
@@ -55,7 +55,7 @@
         _data = updatedData
 
         fiatBalance = getFiatBalance(_data.balance)
-        formattedBalance = formatUnit(_data.balance)
+        formattedBalance = formatUnitBestMatch(_data.balance)
         error = getError(_data.balance)
     })
 
@@ -95,7 +95,7 @@
                 allowToProceed: true,
                 text: locale('views.migrate.cannotMigrateAllYourFunds', {
                     values: {
-                        value: `${formatUnit(totalUnselectedBalance)} (${getFiatBalance(totalUnselectedBalance).toUpperCase()})`,
+                        value: `${formatUnitBestMatch(totalUnselectedBalance)} (${getFiatBalance(totalUnselectedBalance).toUpperCase()})`,
                     },
                 }),
             }
@@ -119,7 +119,7 @@
                         closePopup()
                         dispatch('next')
                     },
-                    balance: `${formatUnit(spentAddressesWithNoBundleHashesTotalBalance)} (${getFiatBalance(spentAddressesWithNoBundleHashesTotalBalance).toUpperCase()})`
+                    balance: `${formatUnitBestMatch(spentAddressesWithNoBundleHashesTotalBalance)} (${getFiatBalance(spentAddressesWithNoBundleHashesTotalBalance).toUpperCase()})`
                 },
             })
         } else {
