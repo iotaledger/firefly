@@ -129,7 +129,7 @@
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-green dark:bg-gray-900">
-            <Animation illustration="profile-desktop" />
+            <Animation animation="profile-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

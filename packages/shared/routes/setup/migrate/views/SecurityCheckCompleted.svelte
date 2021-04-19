@@ -1,9 +1,6 @@
 <script lang="typescript">
-    import { Button, Illustration, OnboardingLayout, SpentAddress, Text } from 'shared/components'
-    import {
-        toggleMiningSelection,
-        spentAddressesFromBundles,
-    } from 'shared/lib/migration'
+    import { Animation, Button, OnboardingLayout, SpentAddress, Text } from 'shared/components'
+    import { spentAddressesFromBundles, toggleMiningSelection } from 'shared/lib/migration'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { RiskLevel } from 'shared/lib/typings/migration'
     import { createEventDispatcher } from 'svelte'
@@ -88,7 +85,7 @@
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Illustration illustration="migrate-desktop" height="100%" width="auto" />
+            <Animation animation="migrate-desktop" />
         </div>
     </OnboardingLayout>
 {/if}
