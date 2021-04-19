@@ -10,10 +10,7 @@
 
     const dispatch = createEventDispatcher()
 
-    let addresses = $spentAddressesFromBundles
-        .map((address) =>
-            Object.assign({}, address, { id: address.index })
-        )
+    let addresses = $spentAddressesFromBundles.map((address) => Object.assign({}, address, { id: address.index }))
 
     let selectedAddresses = addresses.filter((address) => address.selectedToMine === true)
 
@@ -32,7 +29,7 @@
     function handleBackClick() {
         // If a user goes back, automatically select all bundles with spent addresses
         selectAllAddressesForMining()
-        
+
         dispatch('previous')
     }
 
@@ -44,7 +41,7 @@
                 dispatch('next')
             }
         } else {
-             showAppNotification({ type: 'error', message: locale('views.migrate.noAddressesForMigration') })
+            showAppNotification({ type: 'error', message: locale('views.migrate.noAddressesForMigration') })
         }
     }
 
@@ -71,7 +68,9 @@
     <OnboardingLayout onBackClick={handleBackClick}>
         <div slot="leftpane__content" class="relative h-full flex flex-col flex-wrap">
             <Text type="h2" classes="mb-5">{locale('views.secureSpentAddresses.title')}</Text>
-            <Text type="p mb-4" secondary>{locale('views.secureSpentAddresses.body1', { values: { number: addresses.length } })}</Text>
+            <Text type="p mb-4" secondary>
+                {locale('views.secureSpentAddresses.body1', { values: { number: addresses.length } })}
+            </Text>
             <Text type="p" secondary classes="mb-4">{locale('views.secureSpentAddresses.body2')}</Text>
             <Text type="p" secondary classes="mb-6">{locale('views.migrate.noAddressesForMigration')}</Text>
             <div class="flex-auto overflow-y-auto h-1 space-y-4 w-full scrollable-y scroll-secondary">

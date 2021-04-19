@@ -13,6 +13,7 @@
 
     let deepLinkingChecked = $appSettings.deepLinking
 
+    let isDeveloperProfile = get(activeProfile)?.isDeveloperProfile
     let showHiddenAccounts = get(activeProfile)?.settings.showHiddenAccounts
 
     let { automaticNodeSelection, includeOfficialNodes, nodes, primaryNodeUrl, localPow } = buildAccountNetworkSettings()
@@ -24,6 +25,7 @@
     $: $appSettings.deepLinking = deepLinkingChecked
 
     $: updateProfile('settings.showHiddenAccounts', showHiddenAccounts)
+    $: updateProfile('isDeveloperProfile', isDeveloperProfile)
 
     $: {
         const officialNodes = getOfficialNodes()
@@ -221,13 +223,14 @@
         </section>
         <HR classes="pb-5 mt-5 justify-center" />
     {/if}
-    <!-- TODO: Implement and enable -->
-    <section id="developerMode" class="w-3/4 opacity-50">
-        <Text type="h4" classes="mb-3">{locale('views.settings.developerMode.title')}</Text>
-        <Text type="p" secondary classes="mb-5">{locale('views.settings.developerMode.description')}</Text>
-        <Checkbox label={locale('actions.enableDeveloperMode')} disabled bind:checked={$appSettings.developerMode} />
-    </section>
-    <HR classes="pb-5 mt-5 justify-center" />
+    <!-- {#if $loggedIn}
+        <section id="developerMode" class="w-3/4">
+            <Text type="h4" classes="mb-3">{locale('views.settings.developerMode.title')}</Text>
+            <Text type="p" secondary classes="mb-5">{locale('views.settings.developerMode.description')}</Text>
+            <Checkbox label={locale('actions.enableDeveloperMode')} bind:checked={isDeveloperProfile} />
+        </section>
+        <HR classes="pb-5 mt-5 justify-center" />
+    {/if} -->
     <section id="deepLinks" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.deepLinks.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.deepLinks.description')}</Text>

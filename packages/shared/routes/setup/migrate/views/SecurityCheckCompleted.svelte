@@ -51,7 +51,7 @@
                     closePopup()
                     dispatch('next', { skippedMining })
                 },
-                subtitle: locale('popups.riskFunds.body2')
+                subtitle: locale('popups.riskFunds.body2'),
             },
         })
     }

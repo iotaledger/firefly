@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { Animation, Button, ButtonCheckbox, Input, OnboardingLayout, Text } from 'shared/components'
-    import { cleanupSignup, developerMode } from 'shared/lib/app'
+    import { Animation, Button, Input, OnboardingLayout, Text } from 'shared/components'
+    import { cleanupSignup } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
     import { getTrimmedLength, validateFilenameChars } from 'shared/lib/helpers'
     import { initialiseMigrationListeners } from 'shared/lib/migration'
@@ -24,8 +24,6 @@
 
     const dispatch = createEventDispatcher()
 
-    // TODO: Remove defaulting to dev profile
-    let isDeveloperProfile = true
     let profileName = get(newProfile)?.name ?? ''
 
     $: isProfileNameValid = profileName && profileName.trim()
@@ -71,7 +69,7 @@
                 busy = true
 
                 if (nameChanged) {
-                    profile = createProfile(trimmedProfileName, isDeveloperProfile)
+                    profile = createProfile(trimmedProfileName, false)
                     profileInProgress.set(trimmedProfileName)
 
                     const userDataPath = await Electron.getUserDataPath()
@@ -116,12 +114,6 @@
                 autofocus
                 disabled={busy}
                 submitHandler={handleContinueClick} />
-            {#if $developerMode}
-                <ButtonCheckbox icon="dev" classes="mt-4" bind:value={isDeveloperProfile}>
-                    {locale('general.developerProfile')}
-                    <Text smaller secondary>{locale('general.developerProfileDescription')}</Text>
-                </ButtonCheckbox>
-            {/if}
         </div>
         <div slot="leftpane__action" class="flex flex-col">
             <Button classes="w-full" disabled={!isProfileNameValid || busy} onClick={handleContinueClick}>
