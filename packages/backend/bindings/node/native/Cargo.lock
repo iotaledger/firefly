@@ -163,7 +163,7 @@ dependencies = [
 [[package]]
 name = "bee-common"
 version = "0.4.1"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#2a0be9db39b19ede223642c5bed0588d9c3272b1"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#868f395e432830f3903e387eea5c7016afa44f6e"
 dependencies = [
  "autocfg",
  "chrono",
@@ -211,7 +211,7 @@ dependencies = [
 [[package]]
 name = "bee-crypto"
 version = "0.2.1-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#2a0be9db39b19ede223642c5bed0588d9c3272b1"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#868f395e432830f3903e387eea5c7016afa44f6e"
 dependencies = [
  "bee-ternary 0.4.2-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
  "byteorder",
@@ -278,7 +278,7 @@ dependencies = [
 [[package]]
 name = "bee-message"
 version = "0.1.2"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#2a0be9db39b19ede223642c5bed0588d9c3272b1"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#868f395e432830f3903e387eea5c7016afa44f6e"
 dependencies = [
  "bech32",
  "bee-common 0.4.1 (git+https://github.com/iotaledger/bee.git?branch=dev)",
@@ -334,7 +334,7 @@ dependencies = [
 [[package]]
 name = "bee-pow"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#2a0be9db39b19ede223642c5bed0588d9c3272b1"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#868f395e432830f3903e387eea5c7016afa44f6e"
 dependencies = [
  "bee-crypto 0.2.1-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
  "bee-ternary 0.4.2-alpha (git+https://github.com/iotaledger/bee.git?branch=dev)",
@@ -389,20 +389,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "bee-signing"
-version = "0.1.1-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#f4c52456e960a2a69e8665c730fc1b8ef31b8252"
-dependencies = [
- "bee-common-derive",
- "bee-crypto 0.2.1-alpha",
- "bee-ternary 0.4.2-alpha",
- "rand 0.8.3",
- "sha3",
- "thiserror",
- "zeroize",
-]
-
-[[package]]
 name = "bee-ternary"
 version = "0.4.0-alpha"
 source = "git+https://github.com/iotaledger/bee.git?rev=c42171ff33c80cc2efb183e244dc79b7f58d9ac4#c42171ff33c80cc2efb183e244dc79b7f58d9ac4"
@@ -425,7 +411,7 @@ dependencies = [
 [[package]]
 name = "bee-ternary"
 version = "0.4.2-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#2a0be9db39b19ede223642c5bed0588d9c3272b1"
+source = "git+https://github.com/iotaledger/bee.git?branch=dev#868f395e432830f3903e387eea5c7016afa44f6e"
 dependencies = [
  "autocfg",
  "num-traits 0.2.14",
@@ -1834,7 +1820,7 @@ dependencies = [
 [[package]]
 name = "iota-wallet"
 version = "0.1.0"
-source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#2f6bf57be8450cce8dc80ade461c1a503e500b19"
+source = "git+https://github.com/iotaledger/wallet.rs?branch=develop#67f4fe0f2207d43830f52591c39f8546946c15e1"
 dependencies = [
  "async-trait",
  "backtrace",
@@ -4086,9 +4072,9 @@ dependencies = [
 
 [[package]]
 name = "zeroize"
-version = "1.2.0"
+version = "1.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "81a974bcdd357f0dca4d41677db03436324d45a4c9ed2d0b873a5a360ce41c36"
+checksum = "4756f7db3f7b5574938c3eb1c117038b8e07f95ee6718c0efad4ac21508f1efd"
 dependencies = [
  "zeroize_derive",
 ]
