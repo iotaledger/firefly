@@ -25,11 +25,12 @@ export const UNIT_MAP: { [unit in Unit]: { val: number; dp: number } } = {
  * @param {number} value
  * @param {number} decimalPlaces
  * @param {boolean} includeUnits Include the units in the output
+ * @param {number} overrideDecimalPlaces Override the default decimal places.
  *
  * @returns {string}
  */
-export const formatUnitBestMatch = (value: number, includeUnits: boolean = true): string => {
-    return formatUnitPrecision(value, getUnit(value), includeUnits)
+export const formatUnitBestMatch = (value: number, includeUnits: boolean = true, overrideDecimalPlaces?: number): string => {
+    return formatUnitPrecision(value, getUnit(value), includeUnits, false, overrideDecimalPlaces)
 }
 
 /**
@@ -37,9 +38,10 @@ export const formatUnitBestMatch = (value: number, includeUnits: boolean = true)
  * @param valueRaw The raw value to format
  * @param unit The unit precision
  * @param includeUnits Include the units in the output
+ * @param overrideDecimalPlaces Override the default decimal places.
  * @param grouped Group the thousands
  */
-export function formatUnitPrecision(valueRaw: number, unit: Unit, includeUnits: boolean = true, grouped: boolean = false): string {
+export function formatUnitPrecision(valueRaw: number, unit: Unit, includeUnits: boolean = true, grouped: boolean = false, overrideDecimalPlaces?: number): string {
     // At the moment we have no symbol for IOTA so we always put the currency code
     // at the end, in the future when we have a symbol this can be updated to position
     // it correctly to the left when necessary
@@ -51,7 +53,7 @@ export function formatUnitPrecision(valueRaw: number, unit: Unit, includeUnits: 
 
     const converted = changeUnits(valueRaw, Unit.i, unit)
 
-    const formatted = formatNumber(converted, UNIT_MAP[unit].dp, undefined, unit === Unit.i ? 0 : 2, grouped)
+    const formatted = formatNumber(converted, overrideDecimalPlaces ?? UNIT_MAP[unit].dp, overrideDecimalPlaces ?? UNIT_MAP[unit].dp, unit === Unit.i ? 0 : 2, grouped)
 
     if (includeUnits) {
         return currencyPosition === `left` ? `${formatted} ${unit}` : `${formatted} ${unit}`

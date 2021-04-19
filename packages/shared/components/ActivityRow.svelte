@@ -30,12 +30,16 @@
 
     const getMessageValue = () => {
         if (cachedMigrationTx) {
-            return formatUnitBestMatch(balance)
+            return formatUnitBestMatch(balance, true, 2)
         }
         if (milestonePayload) {
-            return formatUnitBestMatch(getMilestoneMessageValue(milestonePayload, $accounts))
+            return formatUnitBestMatch(getMilestoneMessageValue(milestonePayload, $accounts), true, 2)
         }
-        return `${!txPayload.data.essence.data.incoming ? '-' : ''}${formatUnitBestMatch(txPayload.data.essence.data.value)}`
+        return `${!txPayload.data.essence.data.incoming ? '-' : ''}${formatUnitBestMatch(
+            txPayload.data.essence.data.value,
+            true,
+            2
+        )}`
     }
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
@@ -98,7 +102,7 @@
 <button
     on:click={onClick}
     data-label="transaction-row"
-    class="w-full text-left flex rounded-2xl items-center bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 p-4 {(!confirmed || cachedMigrationTx) && 'opacity-50'} {cachedMigrationTx && 'pointer-events-none'}"
+    class="w-full text-left flex rounded-2xl items-center bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 p-4 {(!confirmed || cachedMigrationTx) && 'opacity-50'} {cachedMigrationTx && 'pointer-events-none'} overflow-hidden"
     disabled={cachedMigrationTx}>
     <div class="w-8">
         {#if cachedMigrationTx || milestonePayload}
@@ -111,8 +115,8 @@
                 icon={txPayload.data.essence.data.internal ? 'transfer' : txPayload.data.essence.data.incoming ? 'chevron-down' : 'chevron-up'} />
         {/if}
     </div>
-    <div class="flex flex-col ml-3.5 space-y-1.5">
-        <Text type="p" bold smaller>
+    <div class="flex flex-col ml-3.5 space-y-1.5 overflow-hidden">
+        <Text type="p" bold smaller classes="overflow-hidden overflow-ellipsis multiwrap-line2">
             {cachedMigrationTx || milestonePayload ? locale('general.fundMigration') : locale(direction, {
                       values: { account: accountAlias },
                   })}
@@ -128,6 +132,6 @@
         </p>
     </div>
     <div class="flex-1 items-end flex flex-col ml-4">
-        <Text type="p" smaller>{messageValue}</Text>
+        <Text type="p" smaller classes="whitespace-nowrap">{messageValue}</Text>
     </div>
 </button>
