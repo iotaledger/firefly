@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Error } from 'shared/components'
-    import { getDecimalSeparator } from 'shared/lib/i18n'
+    import { formatNumber, getAllDecimalSeparators, getDecimalSeparator, parseCurrency } from 'shared/lib/currency'
     import { onMount } from 'svelte'
 
     export let value = ''
@@ -21,6 +21,7 @@
     export let disableContextMenu = false
 
     let inputElement
+    let allDecimalSeparators = getAllDecimalSeparators()
     let decimalSeparator = getDecimalSeparator()
 
     const handleInput = (e) => {
@@ -71,17 +72,17 @@
             if (pasteVal.indexOf('e') >= 0 || pasteVal.indexOf('-') >= 0) {
                 e.preventDefault()
             } else if (float) {
-                const val = Number.parseFloat(pasteVal)
-                // Discard any number we can't parse as floats
+                const val = parseCurrency(pasteVal)
+                // Discard any numbers we can't parse as floats
                 if (Number.isNaN(val)) {
                     e.preventDefault()
                 } else if (maxDecimals !== undefined) {
-                    value = Number(val.toFixed(maxDecimals)).toString()
+                    value = formatNumber(val, maxDecimals, undefined, 0)
                     e.preventDefault()
                 }
             } else if (integer) {
                 // Dicard anything with a decimal separator
-                if (pasteVal.indexOf('.') >= 0 || pasteVal.indexOf(',') >= 0) {
+                if (allDecimalSeparators.some((sep) => pasteVal.indexOf(sep) >= 0)) {
                     e.preventDefault()
                 } else {
                     const val = Number.parseInt(pasteVal, 10)

@@ -14,14 +14,6 @@ let activeProfileId = null
 const Wallet = binding
 Wallet.api = proxyApi(() => activeProfileId)
 
-Wallet.initLogger({
-    color_enabled: true,
-    outputs: [{
-        name: 'wallet.log',
-        level_filter: 'debug'
-    }]
-})
-
 const eventListeners = {}
 
 const Electron = {

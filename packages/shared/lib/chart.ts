@@ -1,10 +1,11 @@
-import { convertUnits, Unit } from '@iota/unit-converter'
+import { Unit } from '@iota/unit-converter'
 import { AvailableExchangeRates, convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
 import { localize } from 'shared/lib/i18n'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
+import { formatUnitPrecision } from 'shared/lib/units'
 import type { WalletAccount } from 'shared/lib/wallet'
 import { isSelfTransaction, wallet } from 'shared/lib/wallet'
-import { date as i18nDate } from 'svelte-i18n'
+import { formatDate } from 'shared/lib/i18n'
 import { derived, get, writable } from 'svelte/store'
 import { CurrencyTypes, formatCurrencyValue } from './currency'
 import {
@@ -148,7 +149,7 @@ export const getAccountActivityData = (account: WalletAccount) => {
         let end: number = new Date(now.getFullYear(), now.getMonth() - i + 1, 0).getTime();
         activityTimeframes.push({ start, end })
         labels.unshift(
-            get(i18nDate)(new Date(start), { month: 'short' }))
+            formatDate(new Date(start), { month: 'short' }))
     }
     if (messages?.length) {
         let index = 0
@@ -162,38 +163,38 @@ export const getAccountActivityData = (account: WalletAccount) => {
                     if (message.payload.type === 'Transaction') {
                         const messageTimestamp = new Date(message.timestamp).getTime()
                         if (messageTimestamp >= start && messageTimestamp <= end) {
-                            const valueMiota = convertUnits(message.payload.data.essence.data.value, Unit.i, Unit.Mi)
                             if (message.payload.data.essence.data.incoming) {
-                                _incoming += valueMiota
+                                _incoming += message.payload.data.essence.data.value
                             }
                             else {
-                                _outgoing += valueMiota
+                                _outgoing += message.payload.data.essence.data.value
                             }
                         }
                         else if (messageTimestamp > end) return
                     }
                 }
             }
+
             incoming.data.unshift(_incoming)
             incoming.tooltips.unshift({
-                title: get(i18nDate)(new Date(start), {
+                title: formatDate(new Date(start), {
                     year: 'numeric',
                     month: 'long'
                 }),
                 label: localize('charts.incomingMi', {
                     values: {
-                        value: _incoming
+                        value: formatUnitPrecision(_incoming, Unit.Mi, true)
                     }
                 })
             })
             outgoing.data.unshift(_outgoing)
             outgoing.tooltips.unshift({
-                title: get(i18nDate)(new Date(start), {
+                title: formatDate(new Date(start), {
                     year: 'numeric',
                     month: 'long'
                 }), label: localize('charts.outgoingMi', {
                     values: {
-                        value: _outgoing
+                        value: formatUnitPrecision(_outgoing, Unit.Mi, true)
                     }
                 })
             })
@@ -203,7 +204,7 @@ export const getAccountActivityData = (account: WalletAccount) => {
         activityTimeframes.forEach(({ start, end }) => {
             incoming.data.push(0)
             incoming.tooltips.unshift({
-                title: get(i18nDate)(new Date(start), {
+                title: formatDate(new Date(start), {
                     year: 'numeric',
                     month: 'long'
                 }), label: localize('charts.incomingMi', {
@@ -214,7 +215,7 @@ export const getAccountActivityData = (account: WalletAccount) => {
             })
             outgoing.data.unshift(0)
             outgoing.tooltips.unshift({
-                title: get(i18nDate)(new Date(start), {
+                title: formatDate(new Date(start), {
                     year: 'numeric',
                     month: 'long'
                 }), label: localize('charts.outgoingMi', {
@@ -239,14 +240,14 @@ function formatLabel(timestamp: number): string {
     switch (get(activeProfile)?.settings.chartSelectors.timeframe) {
         case HistoryDataProps.ONE_HOUR:
         case HistoryDataProps.TWENTY_FOUR_HOURS:
-            formattedLabel = get(i18nDate)(new Date(date), {
+            formattedLabel = formatDate(new Date(date), {
                 hour: '2-digit',
                 minute: '2-digit',
             })
             break
         case HistoryDataProps.SEVEN_DAYS:
         case HistoryDataProps.ONE_MONTH:
-            formattedLabel = get(i18nDate)(new Date(date), {
+            formattedLabel = formatDate(new Date(date), {
                 month: 'short',
                 day: 'numeric'
             })
@@ -258,7 +259,7 @@ function formatLabel(timestamp: number): string {
 function formatLineChartTooltip(data: (number | string), timestamp: number | string, showMiota: boolean = false): Tooltip {
     const currency = get(activeProfile)?.settings.chartSelectors.currency ?? ''
     const title: string = `${showMiota ? `1 ${Unit.Mi}: ` : ''}${formatCurrencyValue(data, currency, 3)} ${currency}`
-    const label: string = get(i18nDate)(new Date(timestamp), {
+    const label: string = formatDate(new Date(timestamp), {
         year: 'numeric',
         month: 'short',
         day: '2-digit',

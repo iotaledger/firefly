@@ -1,5 +1,5 @@
 import { appSettings } from 'shared/lib/appSettings'
-import { addMessages, dictionary, getLocaleFromNavigator, init, _ } from 'svelte-i18n'
+import { addMessages, dictionary, getLocaleFromNavigator, init, _, getDateFormatter } from 'svelte-i18n'
 import { derived, get, writable } from 'svelte/store'
 
 /*
@@ -80,18 +80,17 @@ const setupI18n = (options = { withLocale: null }) => {
             addMessages(_locale, messages)
             appSettings.set({
                 ...get(appSettings),
-                language: _locale
+                language: _locale,
             })
             isDownloading.set(false)
 
             // If we have not loaded "en" make sure we have it as a backup language
             // in case the chosen language does not have all the translations
-            if (_locale !== "en" && !hasLoadedLocale("en")) {
+            if (_locale !== 'en' && !hasLoadedLocale('en')) {
                 const messagesFileUrl = MESSAGE_FILE_URL_TEMPLATE.replace('{locale}', 'en')
-                loadJson(messagesFileUrl)
-                    .then((messages) => {
-                        addMessages("en", messages)
-                    })
+                loadJson(messagesFileUrl).then((messages) => {
+                    addMessages('en', messages)
+                })
             }
         })
     }
@@ -136,7 +135,6 @@ const dir = derived(appSettings, (_appSettings) => {
     return 'ltr'
 })
 
-
 const setLanguage = (item) => {
     const locale = Object.keys(locales).find((key) => locales[key] === item.value)
     appSettings.set({
@@ -147,16 +145,17 @@ const setLanguage = (item) => {
     setupI18n({ withLocale: locale })
 }
 
-const getDecimalSeparator = () => {
-    const numberWithDecimalSeparator = 1.1;
-    return Intl.NumberFormat(getLocaleFromNavigator())
-        .formatToParts(numberWithDecimalSeparator)
-        .find(part => part.type === 'decimal')
-        .value;
-}
-
 const localize = get(_) as (string, values?) => string
+
+/**
+ * @param date
+ * @param format
+ * @returns Formatted date
+ */
+const formatDate = (date: Date, options: Intl.DateTimeFormatOptions & { format?: string; locale?: string }) => {
+    return getDateFormatter({ locale: getLocaleFromNavigator(), ...options }).format(date)
+}
 
 // We expose the svelte-i18n _ store so that our app has
 // a single API for i18n
-export { _, setupI18n, dir, isLocaleLoaded, localize, setLanguage, getDecimalSeparator }
+export { _, setupI18n, dir, isLocaleLoaded, localize, setLanguage, formatDate }

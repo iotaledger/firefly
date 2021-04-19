@@ -1,13 +1,21 @@
 <script lang="typescript">
+    import { Unit } from '@iota/unit-converter'
     import { Icon, Text } from 'shared/components'
+    import { convertToFiat, currencies, CurrencyTypes, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { getInitials, truncateString } from 'shared/lib/helpers'
-    import type { Payload } from 'shared/lib/typings/message'
-    import { formatUnit } from 'shared/lib/units'
+    import { formatDate } from 'shared/lib/i18n'
+    import { activeProfile } from 'shared/lib/profile'
+    import type { Milestone, Payload, Transaction } from 'shared/lib/typings/message'
+    import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { setClipboard } from 'shared/lib/utils'
-    import type { WalletAccount } from 'shared/lib/wallet'
+    import {
+        getMilestoneMessageValue,
+        receiverAddressesFromTransactionPayload,
+        sendAddressFromTransactionPayload,
+        WalletAccount,
+    } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import { date } from 'svelte-i18n'
-    import type { Readable, Writable } from 'svelte/store'
+    import type { Writable } from 'svelte/store'
 
     export let id
     export let timestamp
@@ -15,34 +23,31 @@
     export let locale
     export let payload: Payload
     export let onBackClick = () => {}
+    export let balance // migration tx
 
-    const accounts = getContext<Writable<WalletAccount[]>>('viewableAccounts')
-    const activeAccount = getContext<Readable<WalletAccount>>('selectedAccount')
+    let milestonePayload = payload?.type === 'Milestone' ? (payload as Milestone) : undefined
+    let txPayload = payload?.type === 'Transaction' ? (payload as Transaction) : undefined
+
+    const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
 
     let senderAccount: WalletAccount
     let receiverAccount: WalletAccount
 
     const prepareSenderAddress = () => {
-        if (payload.type === 'Transaction') {
-            return (
-                payload?.data?.essence?.data?.inputs?.find((input) => /utxo/i.test(input?.type))?.data?.metadata?.address ?? null
-            )
-        } else if (payload.type === 'Milestone') {
+        if (txPayload) {
+            return sendAddressFromTransactionPayload(txPayload)
+        } else if (milestonePayload) {
             return 'Legacy Network'
         }
 
         return null
     }
 
-    const prepareReceiverAddress = () => {
-        if (payload.type === 'Transaction') {
-            return (
-                payload?.data?.essence?.data?.outputs
-                    ?.filter((output) => output?.data?.remainder === false)
-                    ?.map((output) => output?.data?.address) ?? []
-            )
-        } else if (payload.type === 'Milestone') {
-            const funds = payload.data.essence.receipt.data.funds
+    const prepareReceiverAddresses = () => {
+        if (txPayload) {
+            return receiverAddressesFromTransactionPayload(txPayload)
+        } else if (milestonePayload) {
+            const funds = milestonePayload.data.essence.receipt.data.funds
 
             const firstAccount = $accounts.find((acc) => acc.index === 0)
             const firstAccountAddresses = firstAccount.addresses.map((address) => address.address)
@@ -58,10 +63,8 @@
     }
 
     const prepareSenderAccount = () => {
-        if (payload.type === 'Transaction') {
-            return !payload.data.essence.data.incoming
-                ? $activeAccount
-                : payload.data.essence.data.internal
+        if (txPayload) {
+            return txPayload.data.essence.data.internal
                 ? $accounts.find((acc) => acc.addresses.some((add) => senderAddress === add.address))
                 : null
         }
@@ -70,40 +73,33 @@
     }
 
     const prepareReceiverAccount = () => {
-        if (payload.type === 'Milestone') {
+        if (milestonePayload) {
             return $accounts.find((acc) => acc.index === 0)
         }
 
-        return payload.data.essence.data.incoming
-            ? $activeAccount
-            : payload.data.essence.data.internal
-            ? $accounts.find((acc) => acc.addresses.some((add) => receiverAddresses.includes(add.address)))
-            : null
-    }
+        if (txPayload) {
+            return txPayload.data.essence.data.internal
+                ? $accounts.find((acc) => acc.addresses.some((add) => receiverAddresses.includes(add.address)))
+                : null
+        }
 
-    const getMilestoneMessageValue = () => {
-        const funds = payload.data.essence.receipt.data.funds
-
-        const firstAccount = $accounts.find((acc) => acc.index === 0)
-        const firstAccountAddresses = firstAccount.addresses.map((address) => address.address)
-
-        const totalValue = funds
-            .filter((fund) => firstAccountAddresses.includes(fund.output.address))
-            .reduce((acc, fund) => acc + fund.output.amount, 0)
-
-        return totalValue
+        return null
     }
 
     let senderAddress: string = prepareSenderAddress()
-
-    let receiverAddresses: string[] = prepareReceiverAddress()
+    let receiverAddresses: string[] = prepareReceiverAddresses()
 
     $: senderAccount = prepareSenderAccount()
-
     $: receiverAccount = prepareReceiverAccount()
+    $: value = milestonePayload
+        ? getMilestoneMessageValue(milestonePayload, $accounts)
+        : txPayload
+        ? txPayload.data.essence.data.value
+        : 0
+    $: currencyValue = convertToFiat(value, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings.currency])
 
-    function isAccountSameAsActive(account) {
-        return account && $activeAccount && account?.id === $activeAccount?.id
+    function isAccountYours(account) {
+        return account && $accounts.find((a) => a.id === account.id)
     }
 </script>
 
@@ -116,7 +112,7 @@
                     class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold text-center bg-{senderAccount?.color ?? 'blue'}-500 text-white">
                     {getInitials(senderAccount.alias, 2)}
                 </div>
-                {#if isAccountSameAsActive(senderAccount)}
+                {#if isAccountYours(senderAccount)}
                     <Text smaller>{locale('general.you')}</Text>
                 {/if}
             {:else}
@@ -124,9 +120,7 @@
             {/if}
         </div>
         <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
-        <Text bold smaller>
-            {formatUnit(payload.type === 'Milestone' ? getMilestoneMessageValue() : payload.data.essence.data.value)}
-        </Text>
+        <Text bold smaller>{formatUnitBestMatch(value)}</Text>
         <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
         <div class="flex flex-col flex-wrap justify-center items-center text-center">
             {#if receiverAccount}
@@ -135,7 +129,7 @@
                     {getInitials(receiverAccount.alias, 2)}
                 </div>
             {/if}
-            {#if payload.type === 'Transaction' && payload.data.essence.data.incoming || isAccountSameAsActive(receiverAccount)}
+            {#if isAccountYours(receiverAccount)}
                 <Text smaller>{locale('general.you')}</Text>
             {:else}
                 {#each receiverAddresses as address}
@@ -153,13 +147,12 @@
             <div class="mb-5">
                 <Text secondary>{locale('general.date')}</Text>
                 <Text smaller>
-                    {$date(new Date(timestamp), {
+                    {formatDate(new Date(timestamp), {
                         year: 'numeric',
                         month: 'long',
                         day: 'numeric',
                         hour: 'numeric',
                         minute: 'numeric',
-                        hour12: false,
                     })}
                 </Text>
             </div>
@@ -188,6 +181,22 @@
                         <Text type="pre" classes="mb-2">{receiver}</Text>
                     </button>
                 {/each}
+            </div>
+        {/if}
+        {#if txPayload || milestonePayload}
+            <div class="mb-5">
+                <Text secondary>{locale('general.amount')}</Text>
+                <div class="flex flex-col mt-2">
+                    <button class="text-left" on:click={() => setClipboard(currencyValue.toString())}>
+                        <Text type="pre" classes="mb-2">{formatCurrency(currencyValue)}</Text>
+                    </button>
+                    <button class="text-left" on:click={() => setClipboard(formatUnitBestMatch(value))}>
+                        <Text type="pre" classes="mb-2">{formatUnitBestMatch(value)}</Text>
+                    </button>
+                    <button class="text-left" on:click={() => setClipboard(value.toString())}>
+                        <Text type="pre" classes="mb-2">{formatUnitPrecision(value, Unit.i, true, true)}</Text>
+                    </button>
+                </div>
             </div>
         {/if}
     </div>

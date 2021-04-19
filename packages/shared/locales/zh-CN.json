@@ -6,7 +6,7 @@
         },
         "legal": {
             "title": "隐私政策和服务条款",
-            "body": "请审查隐私政策和服务条款。",
+            "body": "请查看隐私政策和服务条款。",
             "privacyPolicy": {
                 "title": "看 -> 合法 -> 隐私政策 -> 标题",
                 "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
@@ -17,7 +17,7 @@
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "termsOfService": {
-                "title": "看 -> 合法 -> 服务条款 -> 标题",
+                "title": "服务条款",
                 "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -28,14 +28,20 @@
             "checkbox": "我已读过和接受隐私政策和服务条款"
         },
         "appearance": {
-            "title": "外表",
+            "title": "外观",
             "body": "选择您的钱包的主题。"
         },
-        "setup": {
-            "title": "设置您的钱包",
+        "profile": {
+            "title": "新建配置文件",
             "body1": "您可创建多个用户配置文件来分别存储您的Token以确保安全。",
-            "body2": "现在，让我们以您的第一个配置文件名开始。以后您可以添加更多的配置文件。",
+            "body2": "现在，让我们开始创建你的第一个配置文件。以后您可以添加更多的配置文件。",
             "profileName": "配置名称"
+        },
+        "setup": {
+            "title": "设置钱包",
+            "chrysalisTitle": "Chrysalis网络更新",
+            "chrysalisBody": "从4月21日起，用户可以将他们的Token迁移到新的 Chrysalis 网络。我们建议您尽快迁移您现有的Token。",
+            "learnMore": "了解迁移信息"
         },
         "secure": {
             "title": "保障钱包的安全",
@@ -97,7 +103,10 @@
         },
         "congratulations": {
             "title": "钱包设置完成",
-            "body": "您的新钱包已准备使用。"
+            "body": "您的新钱包已准备使用。",
+            "fundsMigrated": "资金已迁移",
+            "success": "您已成功地将您的资金迁移到新的网络",
+            "exportMigration": "导出迁移日志并完成设置"
         },
         "import": {
             "title": "导入钱包",
@@ -106,10 +115,11 @@
         "importFromText": {
             "title": "用恢复恢复或种子恢复你的钱包",
             "body1": "种子由81个字符组成。它用于从旧的 Trinity 钱包中恢复。",
-            "body2": "恢复密语长度为24个单词(含空格)。这个密语可用于恢复已有的Firefly钱包。",
+            "body2": "恢复密语长度为24个单词，单词间由空格隔开。这个密语可用于恢复已有的Firefly钱包。",
             "body3": "请输入您的种子或恢复密语",
             "seedDetected": "检测到81个字符种子",
-            "phraseDetected": "检测到24个单词恢复密语"
+            "phraseDetected": "检测到24个单词恢复密语",
+            "checksum": "校验和"
         },
         "importFromFile": {
             "title": "从备份文件恢复你的钱包",
@@ -130,10 +140,58 @@
         },
         "migrate": {
             "title": "迁移您的资金",
-            "body1": "这是一个将您的资金发送到您新钱包的自动化过程。我们将检查削弱您安全性的已花费地址。",
+            "body1": "这是一个自动化过程，可以将您的资金迁移到您的新钱包。",
             "body2": "这可能需要一些时间。不要在迁移过程中关闭您的设备。",
             "existing": "您的旧钱包",
-            "new": "您的新钱包"
+            "new": "您的新钱包",
+            "learn": "了解迁移信息",
+            "beginMigration": "开始迁移",
+            "migrating": "正在迁移资金...",
+            "migrated": "{balance} 已迁移",
+            "migrationFailed": "迁移失败",
+            "noAddressesForMigration": "请选择你要保护的地址。",
+            "restoringWallet": "正在恢复钱包...",
+            "findingBalance": "正在寻找余额...",
+            "incorrectSeedVaultPassword": "SeedVault 密码不正确。",
+            "signingBundle": "签名包",
+            "broadcastingBundle": "广播包",
+            "miningBundle": "签名包",
+            "problemRestoringWallet": "恢复钱包出现异常，请重试。",
+            "minimumMigrationAmountSpentAddresses": "每个已花费地址的最小迁移金额为1Mi，请再次检查你的余额是否符合。",
+            "tooManyAddressesToMigrate": "你有太多的低余额地址需要迁移，如果您的余额看起来不对，请再次检查。",
+            "cannotMigrateAllYourFunds": "我们不能迁移您的所有资金，因为某些地址的价值太低。您仍然可以继续，但是 {value} 将会丢失。",
+            "error": "资金迁移出现错误，请重试。"
+        },
+        "bundleMiningWarning": {
+            "title": "警告！",
+            "body1": "您在一个或多个已花费的地址上存有资金。",
+            "body2": "我们建议你执行一个自动化程序，以帮助您保护和安全地转移这些资金。",
+            "body3": "如果您关闭了应用程序，您将需要重新启动整个迁移。",
+            "learn": "了解已花费的地址"
+        },
+        "secureSpentAddresses": {
+            "title": "保护已花费的地址",
+            "body1": "在 {number, plural, other {# 个花费的地址}}上检查到有资金存在。",
+            "body2": "我们建议你执行一个自动化程序，以帮助您保护和安全地转移这些资金。",
+            "error": "你不能迁移余额小于1Mi 的已花费的地址"
+        },
+        "securityCheckCompleted": {
+            "title": "安全检查已完成",
+            "body1": "我们已经评估了安全风险等级。再次运行此进程可能会降低您的风险等级。",
+            "body2": "如果您对风险等级感到满意，请按键继续。",
+            "rerun": "重新评估被选中的地址",
+            "continueMigration": "继续迁移"
+        },
+        "securingSpentAddresses": {
+            "title": "保护已花费的地址...",
+            "body1": "这个过程将需要 {minutes, plural, other {# 分钟}}",
+            "body2": "您的计算机将满负荷运行，请等待完成以后再处理其他的事情。"
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly将立即开始迁移您的资金。这可能需要一段时间。",
+            "migrate": "迁移资金",
+            "transaction": "交易 {number}",
+            "rerun": "重试"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,13 +199,15 @@
         },
         "balance": {
             "title": "您的余额",
-            "body": "您的余额是否正确？"
+            "body": "在继续之前请确保您的余额是正确的。如果它看起来不正确，您可以再次检查。",
+            "error": "最小迁移金额是 1 Mi。请再次检查您的余额是否正确。",
+            "zeroBalance": "请再试一次。如果您仍然找不到您的余额，您输入的种子可能不正确。"
         },
         "settings": {
             "settings": "设置",
             "generalSettings": {
                 "title": "常规设置",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "配置您的钱包外观和其他常规设置"
             },
             "security": {
                 "title": "安全设置",
@@ -403,6 +463,17 @@
         "transaction": {
             "title": "确认交易",
             "body": "您将要发送 {amount} 到"
+        },
+        "riskFunds": {
+            "title": "警告：迁移过程面临风险的资金",
+            "body1": "强烈建议您在着手迁移之前为您的所有资金做好安全保护。 如果您不能保证资金安全，您的资金就有被盗的风险。",
+            "body2": "建议您为中风险级别或以上的地址重新进行处理。"
+        },
+        "missingBundle": {
+            "title": "警告：迁移过程面临风险的资金",
+            "body": "您在已花费的地址上存有资金，但是没有找到保护这些地址所需的信息。 如果您在很久以前进行了交易，就可能会发生这种情况。您可以继续，但是 {value} 在迁移过程中面临风险。",
+            "learnMore": "了解更多关于已花费的地址",
+            "proceed": "我已经了解风险"
         }
     },
     "charts": {
@@ -411,7 +482,11 @@
         "portoflio": "资产组合",
         "token": "Token",
         "accountValue": "账户价值",
-        "accountActivity": "帐户活动"
+        "accountActivity": "帐户活动",
+        "timeframe1Hour": "1 小时",
+        "timeframe1Day": "1 天",
+        "timeframe1Week": "1 周",
+        "timeframe1Month": "1个月"
     },
     "actions": {
         "continue": "继续",
@@ -419,10 +494,13 @@
         "cancel": "取消",
         "close": "关闭",
         "dismiss": "取消",
+        "proceedAnyway": "仍要继续",
         "save": "保存",
         "importSeed": "导入已有的种子",
-        "importWallet": "导入现有钱包",
+        "restoreWallet": "迁移或恢复钱包",
+        "restoreWalletDescription": "迁移到 Chrysalis 或恢复现有钱包",
         "createWallet": "创建新钱包",
+        "createWalletDescription": "在 Chrysalis 上创建一个新的钱包",
         "savePassword": "保存密码",
         "useBiometric": "使用生物特征安全机制",
         "setupPin": "设置PIN码",
@@ -434,7 +512,7 @@
         "verifyRecoveryPhrase": "验证恢复密语",
         "revealRecoveryPhrase": "显示恢复密语",
         "importSeedvault": "导入SeedVault",
-        "checkAgain": "不，再次检查",
+        "checkAgain": "再次检查",
         "importFromFile": "从文件导入",
         "send": "发送",
         "receive": "接收",
@@ -485,12 +563,14 @@
         "hideDetails": "隐藏详情",
         "yes": "是",
         "no": "否",
+        "skip": "跳过",
         "reset": "重置",
         "downloadRecoveryKit": "保存Recovery Kit模板",
         "skipBackup": "跳过文件备份",
         "finishSetup": "完成设置",
         "readDocumentation": "阅读文档",
         "visitFaq": "访问常见问题",
+        "viewStatus": "查看状态",
         "showHiddenAccounts": "显示隐藏账户",
         "confirm": "确认"
     },
@@ -550,6 +630,7 @@
         "manualNodeSelection": "手动选择节点",
         "profiles": "用户配置",
         "developerProfile": "开发者模式",
+        "developerProfileDescription": "允许您连接到测试网",
         "dev": "开发者",
         "createAccount": "创建帐户",
         "accountName": "账户名称",
@@ -600,6 +681,7 @@
         "passwordStrength3": "一般",
         "passwordStrength4": "强壮的",
         "creatingProfile": "正在创建帐户，请稍候...",
+        "fundMigration": "资金迁移",
         "accountRemoved": "此帐户被隐藏。请取消隐藏以执行转账。"
     },
     "dates": {
@@ -623,7 +705,9 @@
         "calcMinutesRemaining": "正在计算剩余分钟...",
         "minutesRemaining": "{minutes, plural, one {还剩最后一分钟...} other {还剩余 # 分钟...}}",
         "copiedToClipboard": "复制到剪贴板",
-        "accountsSynchronized": "账户同步完成"
+        "accountsSynchronized": "账户同步完成",
+        "migratedAccountChrysalisDown": "您的资金将在4月28日Chrysalis升级完成后可用",
+        "migratedAccountChrysalisUp": "您的资金将很快就可用。"
     },
     "error": {
         "profile": {
@@ -670,6 +754,7 @@
             "amountZero": "金额必须大于零。",
             "wrongAddressPrefix": "地址以前缀 {prefix} 开始。",
             "wrongAddressFormat": "地址格式不正确。",
+            "invalidAddress": "地址无效的",
             "insufficientFunds": "该账户资金不足。",
             "noToAccount": "您尚未选择一个账户来发送资金。",
             "sendingDust": "您的发送不能小于 1 Mi。",
@@ -692,7 +777,18 @@
             "seedTooShort": "种子长度应该是81个字符，而它 {length, plural, one {只有 1} other {是 #}} 个。",
             "seedCharacters": "种子只能包含字符 A-Z 或 9",
             "phraseWordCount": "您的恢复密语中应该有24个单词，目前 {length, plural, one {只有 1}other {是 #}} 个单词。",
-            "phraseUnrecognizedWord": "恢复短语中无法识别的单词“{word}”"
+            "phraseUnrecognizedWord": "恢复短语中无法识别的单词“{word}”",
+            "phraseCaseWord": "单词 \"{word}\" 应为小写"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "风险等级: {risk}",
+            "veryHigh": "非常高",
+            "high": "较高",
+            "medium": "中",
+            "low": "较低",
+            "veryLow": "非常低"
         }
     }
 }

@@ -1,5 +1,6 @@
-import { Unit, convertUnits } from '@iota/unit-converter'
+import { Unit } from '@iota/unit-converter'
 import Big from 'big.js'
+import { getCurrencyPosition, formatNumber } from 'shared/lib/currency'
 
 // Set this to avoid small numbers switching to exponential format
 Big.NE = -20
@@ -19,21 +20,43 @@ export const UNIT_MAP: { [unit in Unit]: { val: number; dp: number } } = {
 /**
  * Formats IOTA value
  *
- * @method formatUnit
+ * @method formatUnitBestMatch
  *
  * @param {number} value
  * @param {number} decimalPlaces
+ * @param {boolean} includeUnits Include the units in the output
  *
  * @returns {string}
  */
-export const formatUnit = (value: number, decimalPlaces = 2): string => {
-    const unit: Unit = getUnit(value)
+export const formatUnitBestMatch = (value: number, includeUnits: boolean = true): string => {
+    return formatUnitPrecision(value, getUnit(value), includeUnits)
+}
 
-    if (!value) {
-        return `0 ${unit}`
+/**
+ * Format a value with the provided value precision
+ * @param valueRaw The raw value to format
+ * @param unit The unit precision
+ * @param includeUnits Include the units in the output
+ * @param grouped Group the thousands
+ */
+export function formatUnitPrecision(valueRaw: number, unit: Unit, includeUnits: boolean = true, grouped: boolean = false): string {
+    if (!valueRaw) {
+        return includeUnits ? `0 ${unit}` : '0'
     }
 
-    return unit === Unit.i ? `${value} ${Unit.i}` : `${convertUnits(value, Unit.i, unit).toFixed(decimalPlaces)} ${unit}`
+    const converted = changeUnits(valueRaw, Unit.i, unit)
+
+    const formatted = formatNumber(converted, undefined, undefined, unit === Unit.i ? 0 : 2, grouped)
+
+    if (includeUnits) {
+        // At the moment we have no symbol for IOTA so we always put the currency code
+        // at the end, in the future when we have a symbol this can be updated to position
+        // it correctly to the left when necessary
+        const currencyPosition = getCurrencyPosition()
+        return currencyPosition === `left` ? `${formatted} ${unit}` : `${formatted} ${unit}`
+    } else {
+        return formatted
+    }
 }
 
 /**
@@ -76,20 +99,16 @@ const getUnit = (value: number): Unit => {
  * @param toUnit The to unit.
  * @returns The formatted unit.
  */
-export const convertUnitsNoE = (value: number, fromUnit: Unit, toUnit: Unit): string => {
+export const changeUnits = (value: number, fromUnit: Unit, toUnit: Unit): number => {
     if (value === 0) {
-        return "0";
-    }
-
-    if (!value) {
-        return "";
+        return 0;
     }
 
     if (fromUnit === toUnit) {
-        return value.toString();
+        return value;
     }
 
-    const scaledValue = new Big(value).times(UNIT_MAP[fromUnit].val).div(UNIT_MAP[toUnit].val)
+    const scaledValue = Number(new Big(value).times(UNIT_MAP[fromUnit].val).div(UNIT_MAP[toUnit].val))
 
-    return toUnit === Unit.i ? scaledValue.toFixed(0) : scaledValue.toString();
+    return toUnit === Unit.i ? Math.round(scaledValue) : scaledValue
 }

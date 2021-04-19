@@ -31,11 +31,17 @@
             "title": "Vormgeving",
             "body": "Kies het thema van uw portemonnee."
         },
-        "setup": {
-            "title": "Stel je wallet in",
-            "body1": "U kunt meerdere gebruikersprofielen aanmaken om uw tokens gescheiden te houden en de privacy te vergroten.",
-            "body2": "Voor nu, laten we beginnen met uw eeste profielnaam. U kunt later meer profielen toevoegen.",
+        "profile": {
+            "title": "Een profiel aanmaken",
+            "body1": "U kunt meerdere gebruikersprofielen aanmaken om uw portemonnees te organiseren en de privacy te verbeteren.",
+            "body2": "Voor nu, laten we beginnen met uw eerste profielnaam. U kunt later meer profielen toevoegen.",
             "profileName": "Profielnaam"
+        },
+        "setup": {
+            "title": "Stel een portemonnee in",
+            "chrysalisTitle": "Chrysalis Netwerk Update",
+            "chrysalisBody": "Vanaf 21 april kunnen gebruikers hun tokens migreren naar het nieuwe Chrysalis-netwerk. We raden u aan om uw bestaande tokens zo snel mogelijk te migreren.",
+            "learnMore": "Leer meer over de migratie"
         },
         "secure": {
             "title": "Beveilig uw portemonnee",
@@ -97,7 +103,10 @@
         },
         "congratulations": {
             "title": "Portemonnee installatie voltooid",
-            "body": "Uw nieuwe portemonnee is klaar voor gebruik."
+            "body": "Uw nieuwe portemonnee is klaar voor gebruik.",
+            "fundsMigrated": "Saldo gemigreerd",
+            "success": "U heeft uw saldo met succes gemigreerd naar het nieuwe netwerk",
+            "exportMigration": "Exporteer migratielogboek en maak set-up af"
         },
         "import": {
             "title": "Importeer wallet",
@@ -106,10 +115,11 @@
         "importFromText": {
             "title": "Herstel je wallet met een herstelzin of seed",
             "body1": "Een seed bestaat uit 81 tekens. Deze wordt gebruikt om te herstellen vanuit een oudere Trinity portemonnee.",
-            "body2": "Een herstel zin is 24 woorden lang (met spaties). Dit wordt gebruikt om een bestaande Firefly portemonnee te herstellen.",
+            "body2": "Een herstel zin is 24 woorden lang, bestaat uitzonderlijk uit kleine letters en gescheiden middels spaties. Dit wordt gebruikt om een bestaande Firefly portemonnee te herstellen.",
             "body3": "Voer je seed of herstelzin in",
             "seedDetected": "81 karakters gedetecteerd",
-            "phraseDetected": "24-woord herstelzin gedetecteerd"
+            "phraseDetected": "24-woord herstelzin gedetecteerd",
+            "checksum": "Controlesom"
         },
         "importFromFile": {
             "title": "Herstel uw portemonnee met behulp van een back-up bestand",
@@ -130,10 +140,58 @@
         },
         "migrate": {
             "title": "Migreer je saldo",
-            "body1": "Dit is een automatisch proces om je tokens naar je nieuwe wallet over te schrijven. We controleren op reeds bestede adressen die je beveiliging verzwakken.",
+            "body1": "Dit is een automatisch proces om je saldo over te maken naar je nieuwe portemonnee.",
             "body2": "Dit kan even duren. Schakel je apparaat niet uit tijdens de migratie.",
             "existing": "Je oude wallet",
-            "new": "Je nieuwe wallet"
+            "new": "Je nieuwe wallet",
+            "learn": "Leer meer over de migratie",
+            "beginMigration": "Migratie starten",
+            "migrating": "Migreren saldo...",
+            "migrated": "{balance} gemigreerd",
+            "migrationFailed": "Migreren mislukt",
+            "noAddressesForMigration": "Selecteer de adressen die u wilt beveiligen.",
+            "restoringWallet": "Herstellen portemonnee...",
+            "findingBalance": "Zoeken saldo...",
+            "incorrectSeedVaultPassword": "Onjuist SeedVault wachtwoord.",
+            "signingBundle": "Tekenen bundel",
+            "broadcastingBundle": "Uitzenden bundel",
+            "miningBundle": "Mijnen bundel",
+            "problemRestoringWallet": "Er was een probleem bij het herstellen van je portemonnee. Probeer het opnieuw.",
+            "minimumMigrationAmountSpentAddresses": "De minimum migratie bedrag voor elk uitgegeven adres is 1 Mi. Controleer opnieuw als uw saldo niet goed lijkt.",
+            "tooManyAddressesToMigrate": "U heeft te veel adressen met een laag saldo om te migreren. Controleer opnieuw als uw saldo niet juist lijkt.",
+            "cannotMigrateAllYourFunds": "We kunnen niet al uw saldi migreren, omdat sommige adressen een te laag bedrag hebben. U kunt toch doorgaan. {value} zal verloren gaan.",
+            "error": "Er is een fout opgetreden bij het migreren van uw saldi. Probeer het opnieuw."
+        },
+        "bundleMiningWarning": {
+            "title": "Waarschuwing",
+            "body1": "U heeft een saldo op een of meer uitgegeven adressen.",
+            "body2": "Wij raden u aan een geautomatiseerd proces te starten om te helpen deze saldi veilig te stellen en te migreren.",
+            "body3": "Als u de app sluit moet u de hele migratie herstarten.",
+            "learn": "Leer meer over uitgegeven adressen"
+        },
+        "secureSpentAddresses": {
+            "title": "Veiligstellen uitgegeven adressen",
+            "body1": "U heeft tegoeden gedetecteerd op {number, plural, one {# uitgegeven adres} other {# uitgegeven adressen}}.",
+            "body2": "Wij raden u aan een geautomatiseerd proces te starten om te helpen uw saldi veilig te stellen en te migreren.",
+            "error": "U kunt geen uitgegeven adressen met minder dan 1 Mi migreren"
+        },
+        "securityCheckCompleted": {
+            "title": "Beveiligingscontrole voltooid",
+            "body1": "We hebben het beveiligings risico niveau berekend. Het opnieuw uitvoeren van dit proces kan uw risico niveau verlagen.",
+            "body2": "Als je tevreden bent met het risico niveau(s) druk dan op doorgaan.",
+            "rerun": "Herstart proces voor geselecteerde adressen",
+            "continueMigration": "Doorgaan met migratie"
+        },
+        "securingSpentAddresses": {
+            "title": "Veiligstellen uitgegeven adressen...",
+            "body1": "Dit proces duurt {minutes, plural, one {1 minuut} other {# minuten}}.",
+            "body2": "Uw computer zal op volle capaciteit werken, je wilt misschien iets anders doen terwijl je wacht tot het klaar is."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly zal nu doorgaan met het migreren van je saldo. Dit kan een tijdje duren.",
+            "migrate": "Saldo migreren",
+            "transaction": "Transactie {number}",
+            "rerun": "Probeer opnieuw"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,13 +199,15 @@
         },
         "balance": {
             "title": "Je saldo",
-            "body": "Klopt je saldo?"
+            "body": "Zorg ervoor dat uw saldo correct is voordat u doorgaat. U kunt opnieuw controleren als het niet juist lijkt.",
+            "error": "Het minimum migratie bedrag is 1 Mi. Probeer het nog eens als uw saldo er niet goed uitziet.",
+            "zeroBalance": "Probeer het nog eens. Als u uw saldo nog niet kunt vinden, heeft u mogelijk uw seed verkeerd ingevoerd."
         },
         "settings": {
             "settings": "Instellingen",
             "generalSettings": {
                 "title": "Algemene instellingen",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Het uiterlijk van uw portemonnee en andere algemene instellingen configureren"
             },
             "security": {
                 "title": "Beveiliging",
@@ -403,6 +463,17 @@
         "transaction": {
             "title": "Bevestig transactie",
             "body": "Je staat op het punt {amount} te sturen naar"
+        },
+        "riskFunds": {
+            "title": "Waarschuwing: saldi in gevaar tijdens migratie",
+            "body1": "Het wordt sterk aanbevolen dat u al uw tegoeden beveiligt voordat u verder gaat met migratie. Uw tegoed loopt het risico om gestolen te worden als u ze niet veilig stelt.",
+            "body2": "Het wordt aanbevolen om het proces te herstarten voor adressen met een gemiddeld risiconiveau of hoger."
+        },
+        "missingBundle": {
+            "title": "Waarschuwing: saldi in gevaar tijdens migratie",
+            "body": "U heeft tegoeden op uitgegeven adressen, maar de informatie die nodig was om ze te beveiligen, is niet gevonden. Dit kan gebeuren als je lang geleden transacties hebt gemaakt. Je kunt doorgaan maar {value} is in gevaar tijdens de migratie.",
+            "learnMore": "Leer meer over uitgegeven adressen",
+            "proceed": "Ik begrijp het risico"
         }
     },
     "charts": {
@@ -411,7 +482,11 @@
         "portoflio": "Portfolio",
         "token": "Token",
         "accountValue": "Accountwaarde",
-        "accountActivity": "Recente activiteit"
+        "accountActivity": "Recente activiteit",
+        "timeframe1Hour": "1 uur",
+        "timeframe1Day": "1 dag",
+        "timeframe1Week": "1 week",
+        "timeframe1Month": "1 maand"
     },
     "actions": {
         "continue": "Doorgaan",
@@ -419,10 +494,13 @@
         "cancel": "Annuleer",
         "close": "Sluiten",
         "dismiss": "Sluiten",
+        "proceedAnyway": "Toch doorgaan",
         "save": "Opslaan",
         "importSeed": "Importeer een bestaande seed",
-        "importWallet": "Importeer bestaande wallet",
+        "restoreWallet": "Migreer of herstel een portemonnee",
+        "restoreWalletDescription": "Migreren naar Chrysalis of een bestaande portemonnee herstellen",
         "createWallet": "Nieuwe wallet maken",
+        "createWalletDescription": "Maak een nieuwe portemonnee die wordt uitgevoerd op Chrysalis",
         "savePassword": "Wachtwoord opslaan",
         "useBiometric": "Biometrische beveiliging gebruiken",
         "setupPin": "PIN-code instellen",
@@ -434,7 +512,7 @@
         "verifyRecoveryPhrase": "Verifieer jouw herstelzin",
         "revealRecoveryPhrase": "Toon herstelzin",
         "importSeedvault": "Importeer SeedVault",
-        "checkAgain": "Nee, controleer opnieuw",
+        "checkAgain": "Controleer Opnieuw",
         "importFromFile": "Importeer vanuit een bestand",
         "send": "Verstuur",
         "receive": "Ontvang",
@@ -485,12 +563,14 @@
         "hideDetails": "Details verbergen",
         "yes": "Ja",
         "no": "Nee",
+        "skip": "Overslaan",
         "reset": "Herstel",
         "downloadRecoveryKit": "Herstelkit sjabloon opslaan",
         "skipBackup": "Bestandsback-up overslaan",
         "finishSetup": "Installatie voltooien",
         "readDocumentation": "Lees de documentatie",
         "visitFaq": "Bezoek veelgestelde vragen",
+        "viewStatus": "Bekijk status",
         "showHiddenAccounts": "Toon verborgen accounts",
         "confirm": "Bevestig"
     },
@@ -550,6 +630,7 @@
         "manualNodeSelection": "Handmatige node selectie",
         "profiles": "Profielen",
         "developerProfile": "Ontwikkelaar Profiel",
+        "developerProfileDescription": "Maakt het mogelijk om verbinding te maken met testnets",
         "dev": "Ontwikkelaar",
         "createAccount": "Maak een account aan",
         "accountName": "Accountnaam",
@@ -600,6 +681,7 @@
         "passwordStrength3": "Gemiddeld",
         "passwordStrength4": "Sterk",
         "creatingProfile": "Profiel aanmaken, even geduld alstublieft...",
+        "fundMigration": "Saldo migratie",
         "accountRemoved": "Dit account is verborgen. Toon het om overschrijvingen uit te voeren."
     },
     "dates": {
@@ -623,7 +705,9 @@
         "calcMinutesRemaining": "Resterende minuten aan het berekenen...",
         "minutesRemaining": "{minutes, plural, one {1 minuut resterend} other {# minuten resterend}}",
         "copiedToClipboard": "Gekopieerd naar het klembord",
-        "accountsSynchronized": "Account synchronisatie voltooid"
+        "accountsSynchronized": "Account synchronisatie voltooid",
+        "migratedAccountChrysalisDown": "Uw tegoeden zullen beschikbaar komen na Chrysalis op 28 april",
+        "migratedAccountChrysalisUp": "Uw tegoeden komen binnenkort beschikbaar"
     },
     "error": {
         "profile": {
@@ -670,6 +754,7 @@
             "amountZero": "De waarde moet groter zijn dan 0.",
             "wrongAddressPrefix": "Adressen beginnen met het voorvoegsel {prefix}.",
             "wrongAddressFormat": "Het adres is niet correct opgemaakt.",
+            "invalidAddress": "Het adres is niet geldig.",
             "insufficientFunds": "Deze rekening heeft onvoldoende saldo.",
             "noToAccount": "U heeft geen account geselecteerd om de bedragen naar toe te sturen.",
             "sendingDust": "U kunt niet minder dan 1 Mi verzenden.",
@@ -692,7 +777,18 @@
             "seedTooShort": "De seed moet 81 tekens lang zijn, het {length, plural, one {is er nu 1} other {zijn er nu #}}",
             "seedCharacters": "De seed mag alleen de tekens A-Z of 9 bevatten",
             "phraseWordCount": "Uw herstelzin zou 24 woorden moeten bevatten, op dit moment {length, plural, one {is er 1} other {zijn er #}}.",
-            "phraseUnrecognizedWord": "Het woord \"{word}\" is niet herkend in uw herstel zin"
+            "phraseUnrecognizedWord": "Het woord \"{word}\" is niet herkend in uw herstel zin",
+            "phraseCaseWord": "Het woord \"{word}\" mag alleen uit kleine letters bestaan"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Risico niveau: {risk}",
+            "veryHigh": "Zeer hoog",
+            "high": "Hoog",
+            "medium": "Middelgroot",
+            "low": "Laag",
+            "veryLow": "Zeer laag"
         }
     }
 }
