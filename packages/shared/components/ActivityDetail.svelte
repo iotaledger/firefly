@@ -28,7 +28,7 @@
 
     const prepareSenderAddress = () => {
         if (txPayload) {
-            return sendAddressFromTransactionPayload(payload)
+            return sendAddressFromTransactionPayload(txPayload)
         } else if (milestonePayload) {
             return 'Legacy Network'
         }

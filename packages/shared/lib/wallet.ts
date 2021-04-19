@@ -1498,7 +1498,7 @@ export const isSelfTransaction = (payload: Payload, account: WalletAccount): boo
  * Get the sender address from a transaction payload.
  */
 export const sendAddressFromTransactionPayload = (payload: Payload): string => {
-    if (payload.type === "Transaction") {
+    if (payload?.type === "Transaction") {
         return payload?.data?.essence?.data?.inputs?.find((input) => /utxo/i.test(input?.type))?.data?.metadata?.address ?? null
     }
 
@@ -1509,7 +1509,7 @@ export const sendAddressFromTransactionPayload = (payload: Payload): string => {
  * Get the receiver addresses from a transaction payload.
  */
 export const receiverAddressesFromTransactionPayload = (payload: Payload): string[] => {
-    if (payload.type === "Transaction") {
+    if (payload?.type === "Transaction") {
         return payload?.data?.essence?.data?.outputs
             ?.filter((output) => output?.data?.remainder === false)
             ?.map((output) => output?.data?.address) ?? []
@@ -1522,7 +1522,7 @@ export const receiverAddressesFromTransactionPayload = (payload: Payload): strin
  * Get the receiver addresses from a milestone payload.
  */
 export const receiverAddressesFromMilestonePayload = (payload: Payload): string[] => {
-    if (payload.type === "Milestone") {
+    if (payload?.type === "Milestone") {
         return payload?.data?.essence?.receipt?.data?.funds
             ?.filter((receiptFunds) => receiptFunds?.output?.remainder === false)
             ?.map((receiptFunds) => receiptFunds?.output?.address) ?? []
@@ -1536,7 +1536,7 @@ export const receiverAddressesFromMilestonePayload = (payload: Payload): string[
  * @returns 
  */
 export const getMilestoneMessageValue = (payload: Payload, accounts) => {
-    if (payload.type === "Milestone") {
+    if (payload?.type === "Milestone") {
         const funds = payload.data.essence.receipt.data.funds
 
         const firstAccount = accounts.find((acc) => acc.index === 0)
