@@ -109,14 +109,26 @@
             "exportMigration": "导出迁移日志并完成设置"
         },
         "import": {
-            "title": "导入钱包",
-            "body": "如果您已有恢复恢复或是Stronghold的备份文件，您可以在此处导入。"
+            "title": "Recover or migrate funds",
+            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+            "importSeed": "I have an 81 character seed",
+            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "importMnemonic": "I have a Firefly recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase to recover your wallet",
+            "importFile": "I have a file backup",
+            "importFileDescription": "Upload a Seedvault or Stronghold file"
         },
         "importFromText": {
-            "title": "用恢复恢复或种子恢复你的钱包",
-            "body1": "种子由81个字符组成。它用于从旧的 Trinity 钱包中恢复。",
-            "body2": "恢复密语长度为24个单词，单词间由空格隔开。这个密语可用于恢复已有的Firefly钱包。",
-            "body3": "请输入您的种子或恢复密语",
+            "seed": {
+                "title": "Type your seed to commence migration",
+                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+                "enter": "Enter your seed"
+            },
+            "mnemonic": {
+                "title": "Type your recovery phrase",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
+                "enter": "Enter your secret recovery phrase"
+            },
             "seedDetected": "检测到81个字符种子",
             "phraseDetected": "检测到24个单词恢复密语",
             "checksum": "校验和"
@@ -265,9 +277,9 @@
                 "confirmNewPincode": "确认新PIN码",
                 "action": "更改 PIN 码"
             },
-            "resyncAccounts": {
-                "title": "重新同步账户",
-                "description": "启动后台任务来以确保您的帐户同步到最新状态。"
+            "balanceFinder": {
+                "title": "Balance finder",
+                "description": "Perform an extended search of your addresses for tokens."
             },
             "hiddenAccounts": {
                 "title": "隐藏帐户",
@@ -464,6 +476,12 @@
             "title": "确认交易",
             "body": "您将要发送 {amount} 到"
         },
+        "balanceFinder": {
+            "title": "Balance finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances.",
+            "totalWalletBalance": "Total wallet balance",
+            "typePassword": "Type your password to allow searching."
+        },
         "riskFunds": {
             "title": "警告：迁移过程面临风险的资金",
             "body1": "强烈建议您在着手迁移之前为您的所有资金做好安全保护。 如果您不能保证资金安全，您的资金就有被盗的风险。",
@@ -477,8 +495,8 @@
         }
     },
     "charts": {
-        "incomingMi": "传入 {value} Mi",
-        "outgoingMi": "发送 {value} Mi",
+        "incomingMi": "Incoming {value}",
+        "outgoingMi": "Outgoing {value}",
         "portoflio": "资产组合",
         "token": "Token",
         "accountValue": "账户价值",
@@ -572,7 +590,11 @@
         "visitFaq": "访问常见问题",
         "viewStatus": "查看状态",
         "showHiddenAccounts": "显示隐藏账户",
-        "confirm": "确认"
+        "confirm": "确认",
+        "findBalances": "Find balances",
+        "searchBalances": "Search for balances",
+        "searchAgain": "Search again",
+        "searching": "Searching..."
     },
     "general": {
         "password": "密码",
@@ -607,10 +629,6 @@
         "yourAddress": "您的地址",
         "generateNewAddress": "生成新地址",
         "copyAddress": "复制地址",
-        "haveTextBackup": "我有一个文本备份",
-        "haveFileBackup": "我有一个文本备份",
-        "enterSeedOrPhrase": "输入恢复密语或种子",
-        "uploadSeedvaultOrStronghold": "导入Strong或 SeedVault 文件",
         "import": "导入",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -682,7 +700,13 @@
         "passwordStrength4": "强壮的",
         "creatingProfile": "正在创建帐户，请稍候...",
         "fundMigration": "资金迁移",
-        "accountRemoved": "此帐户被隐藏。请取消隐藏以执行转账。"
+        "accountRemoved": "此帐户被隐藏。请取消隐藏以执行转账。",
+        "receivingTo": "Receiving to {account}",
+        "sendingFrom": "Sending from {account}",
+        "receivedTo": "Received to {account}",
+        "sentFrom": "Sent from {account}",
+        "receiving": "Receiving",
+        "sending": "Sending"
     },
     "dates": {
         "today": "今日",

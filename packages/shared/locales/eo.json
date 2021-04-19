@@ -1,14 +1,14 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA tokens",
-            "body": "Firefly is the official wallet of IOTA."
+            "title": "Sendu, ricevu kaj administru viajn IOTA ĵetonojn",
+            "body": "Firefly estas la oficiala monujo de IOTA."
         },
         "legal": {
-            "title": "Privacy Policy & Terms of Service",
-            "body": "Моля прегледайте Политика за поверителност и Общи условия за ползване.",
+            "title": "Regularo pri Privateco kaj Kondiĉoj de Uzado",
+            "body": "Bonvole kontrolu la regularon pri privateco kaj kondiĉojn de uzado.",
             "privacyPolicy": {
-                "title": "Политика за поверителност",
+                "title": "Privateca politiko",
                 "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -17,7 +17,7 @@
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
             "termsOfService": {
-                "title": "Условия за ползване",
+                "title": "Uzaj kondiĉoj",
                 "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
                 "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
@@ -25,72 +25,72 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+            "checkbox": "Mi legis kaj akceptas la regularon pri privateco kaj kondiĉojn de uzado"
         },
         "appearance": {
-            "title": "Appearance",
-            "body": "Choose your wallet’s theme."
+            "title": "Aspekto",
+            "body": "Elektu la etoson de via monujo."
         },
         "profile": {
-            "title": "Create a profile",
-            "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
-            "profileName": "Profile Name"
+            "title": "Krei profilon",
+            "body1": "Vi povas krei kelkajn uzantoprofilojn por organizi viajn monujojn kaj plibonigi la privatecon.",
+            "body2": "Por nun, komencu per la nomo de via unua profilo. Vi povas aldoni aliajn profilojn poste.",
+            "profileName": "Profilnomo"
         },
         "setup": {
-            "title": "Set up a wallet",
+            "title": "Agordu monujon",
             "chrysalisTitle": "Chrysalis Network Update",
             "chrysalisBody": "From April 21st, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
-            "learnMore": "Learn about the migration"
+            "learnMore": "Lernu pri la migrado"
         },
         "secure": {
-            "title": "Secure your wallet",
+            "title": "Sekurigi vian monujon",
             "body1": "Save and print the Recovery Kit PDF template.",
             "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
         },
         "password": {
-            "title": "Създаване на парола",
+            "title": "Krei pasvorton",
             "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
             "body2": "It is recommended that you write down your password in your Recovery Kit."
         },
         "protect": {
             "title": "Protect your wallet",
             "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body2": "Keep your PIN safe!"
+            "body2": "Tenu vian PIN-kodon sekure!"
         },
         "pin": {
-            "title": "Задаване на ПИН код",
+            "title": "Agordu PIN-kodon",
             "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
+            "body2": "Nur uzu numerojn"
         },
         "confirmPin": {
-            "title": "Верифицирайте ПИН кода си",
-            "body1": "Your PIN keeps your balance and transactions private.",
+            "title": "Konfirmu vian PIN-kodon",
+            "body1": "Via PIN-kodo tenas vian bonhavon kaj transakciojn private.",
             "body2": "Re-enter your PIN code to proceed. "
         },
         "backup": {
-            "title": "Бекъп на портфейл",
+            "title": "Faru savkopion de via monujo",
             "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
-            "body3": "Ако загубите фразата си за възстановяване, може да загубите средствата си."
+            "body2": "Ne konigu vian frazo-restarigon kun iu ajn. Ĝi povas esti uzata por atingi viajn ĵetonojn ie ajn.",
+            "body3": "Se vi perdas vian frazo-restarigon, vi eble perdos vian fonduson."
         },
         "recoveryPhrase": {
-            "title": "Фраза за възстановяване",
+            "title": "Frazo-restarigo",
             "body1": "In your Recovery Kit, write down the words in the exact order shown.",
             "body2": "Keep this private and safely stored.",
             "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
-            "revealRecoveryPhrase": "Разкриване на фраза за възстановяване",
-            "hideRecoveryPhrase": "Скриване на фраза за възстановяване"
+            "revealRecoveryPhrase": "Reveal recovery phrase",
+            "hideRecoveryPhrase": "Kaŝu frazo-restarigon"
         },
         "verifyRecoveryPhrase": {
-            "title": "Верифициране на фраза за възстановяване",
+            "title": "Konfirmu frazo-restarigon",
             "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
-            "word": "Word",
-            "verified": "Recovery phrase verified",
+            "word": "Vorto",
+            "verified": "Frazo-restarigo estas konfirmita",
             "verifiedBody": "Remember to keep it private and safely stored."
         },
         "backupWallet": {
-            "title": "Бекъп към Stronghold файл",
+            "title": "Back up to a Stronghold file",
             "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
             "body2": "Reasons why digital backups are important:",
             "reason1": "Easily recover your wallet without typing in your recovery phrase",
@@ -98,12 +98,12 @@
             "reason3": "Recover your full transaction history"
         },
         "recoveryPhraseSaved": {
-            "title": "Успешен бекъп",
+            "title": "Successfully backed up",
             "body": "You have backed up your wallet to a Stronghold."
         },
         "congratulations": {
             "title": "Wallet setup completed",
-            "body": "Your new wallet is ready to use.",
+            "body": "Via nova monujo estas preta por uzi.",
             "fundsMigrated": "Funds migrated",
             "success": "You have successfully migrated your funds to the new network",
             "exportMigration": "Export migration log and finish setup"
@@ -139,8 +139,8 @@
         },
         "importBackupPassword": {
             "title": "Restore your wallet from a SeedVault or Stronghold",
-            "body1": "Please enter your backup password.",
-            "body2": "This is the password you set when you first created your backup."
+            "body1": "Tajpu vian savkopio-pasvorton.",
+            "body2": "Ĉi tiu estas pasvorto kiun vi agordis, kiam vi por la unua fojo kreis vian savkopion."
         },
         "importSuccess": {
             "title": "You have successfully recovered your backup",
@@ -154,13 +154,13 @@
             "title": "Migrate your funds",
             "body1": "This is an automated process to transfer your funds to your new wallet.",
             "body2": "It may take some time. Do not turn off your device during the migration.",
-            "existing": "Your old wallet",
-            "new": "Your new wallet",
-            "learn": "Learn about the migration",
-            "beginMigration": "Begin Migration",
+            "existing": "Via malnova monujo",
+            "new": "Niva nova monujo",
+            "learn": "Lernu pri la migrado",
+            "beginMigration": "Komencu migri",
             "migrating": "Migrating funds...",
             "migrated": "{balance} migrated",
-            "migrationFailed": "Migration Failed",
+            "migrationFailed": "La migrado malsukcesis",
             "noAddressesForMigration": "Please select the addresses you wish to secure.",
             "restoringWallet": "Restoring wallet...",
             "findingBalance": "Finding balance...",
@@ -175,7 +175,7 @@
             "error": "There was an error migrating your funds. Please try again."
         },
         "bundleMiningWarning": {
-            "title": "Warning",
+            "title": "Averto",
             "body1": "You have funds on one or more spent addresses.",
             "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
             "body3": "If you close the app you will need to restart the whole migration.",
@@ -192,7 +192,7 @@
             "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
             "body2": "When you are happy with the risk level(s) press continue.",
             "rerun": "Rerun process for selected addresses",
-            "continueMigration": "Continue migration"
+            "continueMigration": "Daŭrigu migradon"
         },
         "securingSpentAddresses": {
             "title": "Securing spent addresses...",
@@ -202,59 +202,59 @@
         "transferFragmentedFunds": {
             "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
             "migrate": "Migrate funds",
-            "transaction": "Transaction {number}",
-            "rerun": "Try again"
+            "transaction": "Transakcio {number}",
+            "rerun": "Reprovi"
         },
         "migrateFailed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
-            "title": "Your balance",
+            "title": "Via bonhavo",
             "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
             "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
             "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly."
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "Agordoj",
             "generalSettings": {
-                "title": "General Settings",
+                "title": "Ĝeneralaj Agordoj",
                 "description": "Configure your wallet’s appearance and other general settings"
             },
             "security": {
-                "title": "Security",
+                "title": "Sekureco",
                 "description": "Change your password and adjust security-related settings"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
+                "title": "Detalaj Agordoj",
                 "description": "Tools and manual settings for technical users"
             },
             "helpAndInfo": {
-                "title": "Help & Information",
+                "title": "Helpo kaj informoj",
                 "description": "Find the answer to a question or get help with an issue"
             },
             "profile": {
-                "title": "Profile",
-                "description": "Change your profile name or set an avatar"
+                "title": "Profilo",
+                "description": "Ŝanĝu vian profilnomon aŭ agordu avataron"
             },
             "sync": {
-                "title": "Sync accounts",
+                "title": "Sinkronigi la kontojn",
                 "description": ""
             },
             "theme": {
-                "title": "Theme",
+                "title": "Etoso",
                 "description": ""
             },
             "language": {
-                "title": "Language",
+                "title": "Lingvo",
                 "description": ""
             },
             "currency": {
-                "title": "Currency",
+                "title": "Monunuo",
                 "description": "Adjusts balance conversion and updates chart options"
             },
             "notifications": {
-                "title": "Notifications",
+                "title": "Sciigoj",
                 "description": "System notifications for transaction events"
             },
             "exportStronghold": {
@@ -273,7 +273,7 @@
                 "title": "Change PIN code",
                 "description": "Your PIN keeps your balance and transactions private",
                 "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
+                "newPincode": "Nova PIN-kodo",
                 "confirmNewPincode": "Confirm new PIN",
                 "action": "Change PIN"
             },
@@ -290,7 +290,7 @@
                 "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
             },
             "deepLinks": {
-                "title": "Deep links",
+                "title": "Profundaj ligiloj",
                 "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
             },
             "developerMode": {
@@ -338,7 +338,7 @@
                 "description": "View the documentation for in depth explanations of how things work"
             },
             "faq": {
-                "title": "FAQ",
+                "title": "Oftaj demandoj",
                 "title2": "Frequently Asked Questions",
                 "description": "View the FAQs to get help with a common problem or question"
             },
@@ -347,7 +347,7 @@
                 "description": "Get help from the IOTA community on Discord"
             },
             "about": {
-                "title": "About",
+                "title": "Pri",
                 "description": ""
             },
             "reportAnIssue": {
@@ -384,13 +384,13 @@
                 "networkOperational": "Network Operational",
                 "networkDegraded": "Network Degraded",
                 "networkDown": "Network Disconnected",
-                "status": "Status",
+                "status": "Stato",
                 "messagesPerSecond": "Messages per second",
                 "confirmationRate": "Confirmation rate"
             },
             "profileModal": {
-                "allSettings": "All settings",
-                "logout": "Log out"
+                "allSettings": "Ĉiuj agordoj",
+                "logout": "Elsaluti"
             }
         }
     },
@@ -401,14 +401,14 @@
             "backup": "Please enter your password to export a backup"
         },
         "qr": {
-            "title": "Your QR code"
+            "title": "Via QR-kodo"
         },
         "version": {
-            "title": "Current version: {version}",
-            "upToDateTitle": "Firefly is up to date",
+            "title": "Nuna versio: {version}",
+            "upToDateTitle": "Firefly estas ĝisdatigita",
             "upToDateDescription": "You are running the latest and safest version of Firefly.",
             "updateAvailable": "Firefly update available",
-            "updateDetails": "Version {version} - {date}"
+            "updateDetails": "Versio {version} - {date}"
         },
         "backup": {
             "title": "Last backup: {date}",
@@ -417,7 +417,7 @@
             "backupWarning": "If you lose your backup and recovery phrase you will lose access to your funds.",
             "notBackedUp": "Not backed up",
             "notBackedUpDescription": "You have not backed up your Stronghold",
-            "saving": "Saving..."
+            "saving": "Konservado..."
         },
         "deleteAccount": {
             "title": "Delete {name}?",
@@ -442,7 +442,7 @@
             "currentBalance": "Current balance: {balance}"
         },
         "node": {
-            "titleAdd": "Add a node",
+            "titleAdd": "Aldoni nodon",
             "titleUpdate": "Update a node",
             "titleRemove": "Remove a node",
             "titleDetails": "Node details",
@@ -463,8 +463,8 @@
         },
         "diagnostics": {
             "title": "Diagnostics",
-            "node": "Node",
-            "platform": "Platform",
+            "node": "Nodo",
+            "platform": "Platformo",
             "platformVersion": "Platform Version",
             "platformArchitecture": "Platform Architecture",
             "cpuCount": "CPU Count",
@@ -498,22 +498,22 @@
         "incomingMi": "Incoming {value}",
         "outgoingMi": "Outgoing {value}",
         "portoflio": "Portfolio",
-        "token": "Token",
+        "token": "Ĵetono",
         "accountValue": "Account Value",
         "accountActivity": "Account Activity",
-        "timeframe1Hour": "1 hour",
-        "timeframe1Day": "1 day",
-        "timeframe1Week": "1 week",
-        "timeframe1Month": "1 month"
+        "timeframe1Hour": "1 horo",
+        "timeframe1Day": "1 tago",
+        "timeframe1Week": "1 semajno",
+        "timeframe1Month": "1 monato"
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "cancel": "Cancel",
-        "close": "Close",
+        "continue": "Daŭrigi",
+        "back": "Reveni",
+        "cancel": "Nuligi",
+        "close": "Fermi",
         "dismiss": "Dismiss",
         "proceedAnyway": "Proceed anyway",
-        "save": "Save",
+        "save": "Konservi",
         "importSeed": "Import an existing seed",
         "restoreWallet": "Migrate or restore a wallet",
         "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
@@ -521,36 +521,36 @@
         "createWalletDescription": "Create a fresh wallet running on Chrysalis",
         "savePassword": "Save password",
         "useBiometric": "Use biometric security",
-        "setupPin": "Задаване на ПИН код",
+        "setupPin": "Agordu PIN-kodon",
         "setPin": "Set PIN code",
         "confirmPin": "Confirm PIN code",
         "enterYourPin": "Enter your PIN",
         "saveBackupFile": "Save backup file",
         "iveWrittenRecoveryPhrase": "I’ve written down my recovery phrase",
-        "verifyRecoveryPhrase": "Верифициране на фраза за възстановяване",
-        "revealRecoveryPhrase": "Разкриване на фраза за възстановяване",
+        "verifyRecoveryPhrase": "Konfirmu frazo-restarigon",
+        "revealRecoveryPhrase": "Reveal recovery phrase",
         "importSeedvault": "Import SeedVault",
-        "checkAgain": "Check Again",
+        "checkAgain": "Rekontroli",
         "importFromFile": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "create": "Create",
+        "send": "Sendi",
+        "receive": "Ricevi",
+        "create": "Krei",
         "beginTransfer": "Begin Transfer",
-        "tryAgain": "Try again",
+        "tryAgain": "Reprovi",
         "visitDiscord": "Visit Discord",
         "dragDrop": "Drag & Drop",
         "importExtentions": ".kdbx or .stronghold file",
         "chooseFile": "Choose a File",
         "dropHere": "Drop your file here",
-        "syncAll": "Sync all",
-        "export": "Export",
+        "syncAll": "Sinkronigi ĉion",
+        "export": "Eksporti",
         "exportNewStronghold": "Export a new Stronghold",
         "enableDeepLinks": "Enable deep links",
         "enableDeveloperMode": "Enable developer mode",
         "enableSystemNotifications": "Enable system notifications",
         "exportState": "Export state",
         "localProofOfWork": "Local proof of work",
-        "unlock": "Unlock",
+        "unlock": "Malŝlosi",
         "updateFirefly": "Update Firefly",
         "restartNow": "Restart now",
         "saveBackup": "Save Stronghold backup",
@@ -559,29 +559,29 @@
         "hideAccount": "Hide account",
         "showAccount": "Unhide account",
         "deleteAccount": "Delete account",
-        "max": "Max",
-        "addNode": "Add node",
+        "max": "Maksimume",
+        "addNode": "Aldoni nodon",
         "updateNode": "Update node",
         "removeNode": "Remove node",
-        "hide": "Hide",
-        "hideOthers": "Hide Others",
-        "showAll": "Show All",
-        "quit": "Quit",
-        "edit": "Edit",
-        "undo": "Undo",
-        "redo": "Redo",
-        "cut": "Cut",
-        "copy": "Copy",
-        "paste": "Paste",
+        "hide": "Kaŝi",
+        "hideOthers": "Kaŝi aliajn",
+        "showAll": "Montri ĉion",
+        "quit": "Forlasi",
+        "edit": "Redakti",
+        "undo": "Malfari",
+        "redo": "Refari",
+        "cut": "Eltranĉi",
+        "copy": "Kopi",
+        "paste": "Alglui",
         "selectAll": "Select All",
-        "addAccount": "Add Account",
+        "addAccount": "Aldoni konton",
         "checkForUpdates": "Check for Updates",
         "reportAnIssue": "Report an Issue",
         "clear": "Clear",
         "hideDetails": "Hide Details",
-        "yes": "Yes",
-        "no": "No",
-        "skip": "Skip",
+        "yes": "Jes",
+        "no": "Ne",
+        "skip": "Preterpasi",
         "reset": "Reset",
         "downloadRecoveryKit": "Save Recovery Kit template",
         "skipBackup": "Skip file backup",
@@ -590,86 +590,86 @@
         "visitFaq": "Visit FAQ",
         "viewStatus": "View status",
         "showHiddenAccounts": "Show hidden accounts",
-        "confirm": "Confirm",
+        "confirm": "Konfirmi",
         "findBalances": "Find balances",
         "searchBalances": "Search for balances",
         "searchAgain": "Search again",
         "searching": "Searching..."
     },
     "general": {
-        "password": "Password",
+        "password": "Pasvorto",
         "confirmPassword": "Confirm password",
         "currentPassword": "Current password",
-        "newPassword": "New password",
+        "newPassword": "Nova pasvorto",
         "confirmNewPassword": "Confirm new password",
         "yourSeed": "Your Seed",
         "recoveryPhrase": "Recovery Phrase",
         "recentActivity": "Recent Activity",
-        "sent": "Sent",
-        "received": "Received",
+        "sent": "Sendita",
+        "received": "Ricevita",
         "sendPayment": "Send Payment",
         "moveFunds": "Internal Transfer",
         "sendFunds": "Send funds",
-        "sendToAddress": "Send to address",
+        "sendToAddress": "Sendu al adreso",
         "scanQrOrPaste": "Scan a QR code or paste an Address",
         "moveFundsBetweenAccounts": "Move funds between accounts",
         "sendTokensToAddress": "Send tokens to an address",
-        "manageAccount": "Manage Account",
-        "customizeAcount": "Customize your account",
-        "account": "Account",
+        "manageAccount": "Administru la konton",
+        "customizeAcount": "Agordu vian konton",
+        "account": "Konto",
         "sendingToAddress": "Sending to address",
-        "amount": "Amount",
-        "addAddress": "Add Address",
-        "reference": "Reference",
-        "from": "From",
-        "to": "To",
+        "amount": "Kvanto",
+        "addAddress": "Aldoni adreson",
+        "reference": "Referenco",
+        "from": "De",
+        "to": "Al",
         "receiveFunds": "Receive Funds",
-        "myAddress": "My Address",
+        "myAddress": "Mia adreso",
         "shareAddress": "Share an address",
-        "yourAddress": "Your address",
+        "yourAddress": "Via adreso",
         "generateNewAddress": "Generate new address",
-        "copyAddress": "Copy Address",
-        "import": "Import",
+        "copyAddress": "Kopii la adreson",
+        "import": "Importi",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
-        "language": "Language",
-        "appearance": "Appearance",
-        "lightTheme": "Light theme",
-        "darkTheme": "Dark theme",
-        "balance": "Balance",
+        "language": "Lingvo",
+        "appearance": "Aspekto",
+        "lightTheme": "Hela etoso",
+        "darkTheme": "Malhela etoso",
+        "balance": "Saldo",
         "accountBalance": "Account Balance",
         "incoming": "Incoming",
         "outgoing": "Outgoing",
         "totalIn": "Total in",
         "totalOut": "Total out",
-        "accounts": "Accounts",
-        "myAccounts": "My Accounts",
+        "accounts": "Kontoj",
+        "myAccounts": "Miaj kontoj",
         "automaticNodeSelection": "Automatic node selection",
         "manualNodeSelection": "Manual node selection",
-        "profiles": "Profiles",
+        "profiles": "Profiloj",
         "developerProfile": "Developer Profile",
         "developerProfileDescription": "Allows you to connect to testnets",
-        "dev": "Dev",
+        "dev": "Programisto",
         "createAccount": "Create an Account",
-        "accountName": "Account name",
-        "latestTransactions": "Latest Transactions",
-        "transactions": "Transactions",
-        "security": "Security",
-        "accountAddress": "Account Address",
-        "nodes": "Nodes",
-        "wallet": "Wallet",
-        "help": "Help",
-        "you": "You",
+        "accountName": "La nomo de la konto",
+        "latestTransactions": "La lastaj transakcioj",
+        "transactions": "Transakcioj",
+        "security": "Sekureco",
+        "accountAddress": "La adreso de la konto",
+        "nodes": "Nodo",
+        "wallet": "Monujo",
+        "help": "Helpo",
+        "you": "Vi",
         "messageId": "Message ID",
         "inputAddress": "Send Address",
         "receiveAddress": "Receive Address",
-        "date": "Date",
-        "status": "Status",
-        "confirmed": "Confirmed",
+        "date": "Dato",
+        "status": "Stato",
+        "confirmed": "Konfirmita",
         "pending": "Pending",
         "noAccounts": "You have no accounts, please create one.",
         "loadingAccounts": "Loading, please wait...",
-        "addProfile": "Add Profile",
+        "addProfile": "Aldoni profilon",
         "noRecentHistory": "No recent history",
         "transferSyncing": "Syncing account",
         "transferSelectingInputs": "Selecting inputs",
@@ -693,11 +693,11 @@
         "pinCodeSuccess": "Updated PIN code successfully",
         "pinCodeFailed": "Updating PIN code failed",
         "passwordStrength": "Password strength",
-        "passwordStrength0": "Bad",
-        "passwordStrength1": "Poor",
-        "passwordStrength2": "Weak",
-        "passwordStrength3": "Average",
-        "passwordStrength4": "Strong",
+        "passwordStrength0": "Malbona",
+        "passwordStrength1": "Malbona",
+        "passwordStrength2": "Malforta",
+        "passwordStrength3": "Averaĝa",
+        "passwordStrength4": "Forta",
         "creatingProfile": "Creating profile, please wait...",
         "fundMigration": "Fund migration",
         "accountRemoved": "This account is hidden. Unhide it to perform transfers.",
@@ -709,9 +709,9 @@
         "sending": "Sending"
     },
     "dates": {
-        "today": "Today",
-        "yesterday": "Yesterday",
-        "daysAgo": "{time, plural, one {# day} other {# days}} ago",
+        "today": "Hodiaŭ",
+        "yesterday": "Hieraŭ",
+        "daysAgo": "antaŭ {time, plural, one {# tago} other {# tagoj}}",
         "weeksAgo": "{time, plural, one {# week} other {# weeks}} ago",
         "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
         "yearsAgo": "{time, plural, one {# year} other {# years}} ago"
@@ -808,11 +808,11 @@
     "tooltips": {
         "risk": {
             "title": "Risk level: {risk}",
-            "veryHigh": "Very high",
-            "high": "High",
-            "medium": "Medium",
-            "low": "Low",
-            "veryLow": "Very low"
+            "veryHigh": "Tre alta",
+            "high": "Alta",
+            "medium": "Meza",
+            "low": "Malalta",
+            "veryLow": "Tre malalta"
         }
     }
 }

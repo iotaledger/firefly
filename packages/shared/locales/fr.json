@@ -109,14 +109,26 @@
             "exportMigration": "Exporter le registre de migration et terminer l'installation"
         },
         "import": {
-            "title": "Importer un portefeuille",
-            "body": "Si vous avez une phrase de récupération ou une sauvegarde Stronghold, vous pouvez l'importer ici."
+            "title": "Recover or migrate funds",
+            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+            "importSeed": "I have an 81 character seed",
+            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "importMnemonic": "I have a Firefly recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase to recover your wallet",
+            "importFile": "I have a file backup",
+            "importFileDescription": "Upload a Seedvault or Stronghold file"
         },
         "importFromText": {
-            "title": "Restaurez votre portefeuille avec une phrase de récupération ou une seed",
-            "body1": "Un germe aléatoire (seed) est composé de 81 caractères. Il est utilisé pour importer un portefeuille Trinity plus ancien.",
-            "body2": "Une phrase de récupération est composée de 24 mots, tous en minuscules, avec un espace entre chaque mot. Elle est utilisée pour récupérer un portefeuille Firefly existant.",
-            "body3": "Saisissez votre seed ou votre phrase de récupération",
+            "seed": {
+                "title": "Type your seed to commence migration",
+                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+                "enter": "Enter your seed"
+            },
+            "mnemonic": {
+                "title": "Type your recovery phrase",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
+                "enter": "Enter your secret recovery phrase"
+            },
             "seedDetected": "Graine de 81 caractères détectée",
             "phraseDetected": "Phrase de récupération de 24 mots détectée",
             "checksum": "Clef de concordance"
@@ -265,9 +277,9 @@
                 "confirmNewPincode": "Confirmer le nouveau code PIN",
                 "action": "Modifier le code PIN"
             },
-            "resyncAccounts": {
-                "title": "Resynchroniser les comptes",
-                "description": "Démarre une tâche en arrière-plan pour s'assurer que vos comptes sont à jour."
+            "balanceFinder": {
+                "title": "Balance finder",
+                "description": "Perform an extended search of your addresses for tokens."
             },
             "hiddenAccounts": {
                 "title": "Comptes cachés",
@@ -464,6 +476,12 @@
             "title": "Confirmer la transaction",
             "body": "Vous êtes sur le point d'envoyer {amount} à"
         },
+        "balanceFinder": {
+            "title": "Balance finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances.",
+            "totalWalletBalance": "Total wallet balance",
+            "typePassword": "Type your password to allow searching."
+        },
         "riskFunds": {
             "title": "Avertissement: risque de perte de fonds lors du transfert",
             "body1": "Il est fortement recommandé de sécuriser tous vos fonds avant de procéder au transfert. Vos fonds risquent d'être volés si vous ne les sécurisez pas.",
@@ -477,8 +495,8 @@
         }
     },
     "charts": {
-        "incomingMi": "{value} Mi entrants",
-        "outgoingMi": "{value} Mi sortant",
+        "incomingMi": "Incoming {value}",
+        "outgoingMi": "Outgoing {value}",
         "portoflio": "Portefeuille",
         "token": "Jeton",
         "accountValue": "Valeur du compte",
@@ -572,7 +590,11 @@
         "visitFaq": "Visitez la FAQ",
         "viewStatus": "Voir le statut",
         "showHiddenAccounts": "Afficher les comptes masqués",
-        "confirm": "Confirmer"
+        "confirm": "Confirmer",
+        "findBalances": "Find balances",
+        "searchBalances": "Search for balances",
+        "searchAgain": "Search again",
+        "searching": "Searching..."
     },
     "general": {
         "password": "Mot de passe",
@@ -607,10 +629,6 @@
         "yourAddress": "Votre adresse",
         "generateNewAddress": "Générer une nouvelle adresse",
         "copyAddress": "Copier Adresse",
-        "haveTextBackup": "J'ai une sauvegarde texte",
-        "haveFileBackup": "J'ai une sauvegarde fichier",
-        "enterSeedOrPhrase": "Saisissez une phrase de récupération ou une seed",
-        "uploadSeedvaultOrStronghold": "Importer un fichier Stronghold ou SeedVault",
         "import": "Importer",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -682,7 +700,13 @@
         "passwordStrength4": "Robuste",
         "creatingProfile": "Création du profile, veuillez patienter...",
         "fundMigration": "Migration des fonds",
-        "accountRemoved": "Ce compte est masqué. Démasquez-le pour effectuer des transferts."
+        "accountRemoved": "Ce compte est masqué. Démasquez-le pour effectuer des transferts.",
+        "receivingTo": "Receiving to {account}",
+        "sendingFrom": "Sending from {account}",
+        "receivedTo": "Received to {account}",
+        "sentFrom": "Sent from {account}",
+        "receiving": "Receiving",
+        "sending": "Sending"
     },
     "dates": {
         "today": "Aujourd'hui",

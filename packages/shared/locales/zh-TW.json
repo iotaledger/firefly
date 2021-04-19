@@ -109,14 +109,26 @@
             "exportMigration": "導出遷移紀錄檔並結束設定"
         },
         "import": {
-            "title": "匯入錢包",
-            "body": "如果您有 註記詞 或 Stronghold 備份，您可以在此處輸入。"
+            "title": "Recover or migrate funds",
+            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+            "importSeed": "I have an 81 character seed",
+            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "importMnemonic": "I have a Firefly recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase to recover your wallet",
+            "importFile": "I have a file backup",
+            "importFileDescription": "Upload a Seedvault or Stronghold file"
         },
         "importFromText": {
-            "title": "使用註記詞或種子恢復您的錢包",
-            "body1": "種子由 81 個字符組成。 這用於重新載入較舊的 Trinity 錢包。",
-            "body2": "註記詞的長度為 24 個字（帶空格）。這用於恢復既存的 Firefly 錢包。",
-            "body3": "輸入您的種子或註記詞",
+            "seed": {
+                "title": "Type your seed to commence migration",
+                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+                "enter": "Enter your seed"
+            },
+            "mnemonic": {
+                "title": "Type your recovery phrase",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
+                "enter": "Enter your secret recovery phrase"
+            },
             "seedDetected": "檢測到81個字符的種子",
             "phraseDetected": "檢測到 24 個單字的註記詞",
             "checksum": "檢查碼"
@@ -265,9 +277,9 @@
                 "confirmNewPincode": "確認新的 Pin 碼",
                 "action": "變更 PIN 碼"
             },
-            "resyncAccounts": {
-                "title": "重新同步帳戶",
-                "description": "啟動後台任務，以確保您的帳戶是最新的。"
+            "balanceFinder": {
+                "title": "Balance finder",
+                "description": "Perform an extended search of your addresses for tokens."
             },
             "hiddenAccounts": {
                 "title": "隱藏帳戶",
@@ -464,6 +476,12 @@
             "title": "確認交易",
             "body": "您即將發送 {amount} 到"
         },
+        "balanceFinder": {
+            "title": "Balance finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances.",
+            "totalWalletBalance": "Total wallet balance",
+            "typePassword": "Type your password to allow searching."
+        },
         "riskFunds": {
             "title": "警告：資金在轉移中有風險",
             "body1": "強烈建議您在轉移前保管好資金．如果您沒有安全保管資金則其會處於竊盜風險中．",
@@ -477,8 +495,8 @@
         }
     },
     "charts": {
-        "incomingMi": "傳入 {value} Mi",
-        "outgoingMi": "支出  {value} Mi",
+        "incomingMi": "Incoming {value}",
+        "outgoingMi": "Outgoing {value}",
         "portoflio": "資料夾",
         "token": "代幣",
         "accountValue": "賬戶餘額",
@@ -572,7 +590,11 @@
         "visitFaq": "訪問常見問題解答",
         "viewStatus": "查看狀態",
         "showHiddenAccounts": "顯示隱藏的帳戶",
-        "confirm": "確認"
+        "confirm": "確認",
+        "findBalances": "Find balances",
+        "searchBalances": "Search for balances",
+        "searchAgain": "Search again",
+        "searching": "Searching..."
     },
     "general": {
         "password": "密碼",
@@ -607,10 +629,6 @@
         "yourAddress": "您的地址",
         "generateNewAddress": "產生新地址",
         "copyAddress": "複製地址",
-        "haveTextBackup": "我有文字備份",
-        "haveFileBackup": "我有檔案備份",
-        "enterSeedOrPhrase": "輸入註記詞組或種子",
-        "uploadSeedvaultOrStronghold": "匯入 Stronghold 或 SeedVault 檔案",
         "import": "匯入",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -682,7 +700,13 @@
         "passwordStrength4": "強",
         "creatingProfile": "正在創建設定檔，請稍候...",
         "fundMigration": "資金遷移",
-        "accountRemoved": "此帳戶是隱藏的。 取消隱藏即可執行傳送。"
+        "accountRemoved": "此帳戶是隱藏的。 取消隱藏即可執行傳送。",
+        "receivingTo": "Receiving to {account}",
+        "sendingFrom": "Sending from {account}",
+        "receivedTo": "Received to {account}",
+        "sentFrom": "Sent from {account}",
+        "receiving": "Receiving",
+        "sending": "Sending"
     },
     "dates": {
         "today": "今天",

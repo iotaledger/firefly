@@ -32,7 +32,7 @@
             "body": "Pilih tema dompet Anda."
         },
         "profile": {
-            "title": "Create a profile",
+            "title": "Buat Profil",
             "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
             "body2": "For now, let's start with your first profile name. You can add more profiles later.",
             "profileName": "Profile Name"
@@ -109,14 +109,26 @@
             "exportMigration": "Export migration log and finish setup"
         },
         "import": {
-            "title": "Impor dompet",
-            "body": "Anda bisa mengimpornya jika ada frasa pemulihan atau file Stronghold."
+            "title": "Recover or migrate funds",
+            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+            "importSeed": "I have an 81 character seed",
+            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "importMnemonic": "I have a Firefly recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase to recover your wallet",
+            "importFile": "I have a file backup",
+            "importFileDescription": "Upload a Seedvault or Stronghold file"
         },
         "importFromText": {
-            "title": "Pulihkan dompet dengan frasa pemulihan atau seed",
-            "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body2": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
-            "body3": "Masukkan seed atau frasa pemulihan",
+            "seed": {
+                "title": "Type your seed to commence migration",
+                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+                "enter": "Enter your seed"
+            },
+            "mnemonic": {
+                "title": "Type your recovery phrase",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
+                "enter": "Enter your secret recovery phrase"
+            },
             "seedDetected": "Seed dengan 81 karakter terdeteksi",
             "phraseDetected": "24 word recovery phrase detected",
             "checksum": "Checksum"
@@ -265,9 +277,9 @@
                 "confirmNewPincode": "Konfirmasi PIN baru",
                 "action": "Ganti pin"
             },
-            "resyncAccounts": {
-                "title": "Sinkronkan ulang akun",
-                "description": "Starts a background task to make sure your accounts are up to date."
+            "balanceFinder": {
+                "title": "Balance finder",
+                "description": "Perform an extended search of your addresses for tokens."
             },
             "hiddenAccounts": {
                 "title": "Hidden accounts",
@@ -464,6 +476,12 @@
             "title": "Confirm transaction",
             "body": "You’re about to send {amount} to"
         },
+        "balanceFinder": {
+            "title": "Balance finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances.",
+            "totalWalletBalance": "Total wallet balance",
+            "typePassword": "Type your password to allow searching."
+        },
         "riskFunds": {
             "title": "Warning: funds at risk during migration",
             "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
@@ -477,8 +495,8 @@
         }
     },
     "charts": {
-        "incomingMi": "Menerima {value} Mi",
-        "outgoingMi": "Keluar {value} Mi",
+        "incomingMi": "Incoming {value}",
+        "outgoingMi": "Outgoing {value}",
         "portoflio": "Portofolio",
         "token": "Token",
         "accountValue": "Nilai Akun",
@@ -572,7 +590,11 @@
         "visitFaq": "Visit FAQ",
         "viewStatus": "View status",
         "showHiddenAccounts": "Show hidden accounts",
-        "confirm": "Confirm"
+        "confirm": "Confirm",
+        "findBalances": "Find balances",
+        "searchBalances": "Search for balances",
+        "searchAgain": "Search again",
+        "searching": "Searching..."
     },
     "general": {
         "password": "Kata sandi",
@@ -607,10 +629,6 @@
         "yourAddress": "Alamat Anda",
         "generateNewAddress": "Buatkan alamat baru",
         "copyAddress": "Salin Alamat",
-        "haveTextBackup": "Aku punya cadangan teks",
-        "haveFileBackup": "Aku punya cadangan file",
-        "enterSeedOrPhrase": "Masukkan frasa atau seed pemulihan",
-        "uploadSeedvaultOrStronghold": "Impor file Stronghold atau SeedVault",
         "import": "Impor",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -682,7 +700,13 @@
         "passwordStrength4": "Strong",
         "creatingProfile": "Creating profile, please wait...",
         "fundMigration": "Fund migration",
-        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
+        "accountRemoved": "This account is hidden. Unhide it to perform transfers.",
+        "receivingTo": "Receiving to {account}",
+        "sendingFrom": "Sending from {account}",
+        "receivedTo": "Received to {account}",
+        "sentFrom": "Sent from {account}",
+        "receiving": "Receiving",
+        "sending": "Sending"
     },
     "dates": {
         "today": "Hari ini",

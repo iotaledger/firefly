@@ -109,14 +109,26 @@
             "exportMigration": "Migrationsprotokoll exportieren und abschließen"
         },
         "import": {
-            "title": "Wallet importieren",
-            "body": "Falls du eine Wiederherstellungsphrase oder ein Stronghold-Backup hast, kannst du es hier importieren."
+            "title": "Recover or migrate funds",
+            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+            "importSeed": "I have an 81 character seed",
+            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "importMnemonic": "I have a Firefly recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase to recover your wallet",
+            "importFile": "I have a file backup",
+            "importFileDescription": "Upload a Seedvault or Stronghold file"
         },
         "importFromText": {
-            "title": "Stelle deine Wallet mit einer Wiederherstellungsphrase oder einem Seed wieder her",
-            "body1": "Ein Seed besteht aus 81 Zeichen. Dieser wird benötigt, um deine Daten aus der alten Trinity Wallet wiederherzustellen.",
-            "body2": "Eine Wiederherstellungsphrase ist 24 Wörter lang (mit Leerzeichen). Diese wird benutzt, um eine bestehende Firefly Wallet wiederherzustellen.",
-            "body3": "Gib deinen Seed oder deine Wiederherstellungsphrase ein",
+            "seed": {
+                "title": "Type your seed to commence migration",
+                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+                "enter": "Enter your seed"
+            },
+            "mnemonic": {
+                "title": "Type your recovery phrase",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
+                "enter": "Enter your secret recovery phrase"
+            },
             "seedDetected": "81 Zeichen Seed erkannt",
             "phraseDetected": "24 Wörter Wiederherstellungsphrase erkannt",
             "checksum": "Prüfsumme"
@@ -156,7 +168,7 @@
             "signingBundle": "Signiere Bundle",
             "broadcastingBundle": "Übertrage Bundle",
             "miningBundle": "Mine Bundle",
-            "problemRestoringWallet": "Es gab ein Problem bei der Wiederherstellung der Wallet. Bitte versuche es erneut.",
+            "problemRestoringWallet": "Beim Wiederherstellen deiner Wallet ist ein Problem aufgetreten. Bitte versuche es erneut.",
             "minimumMigrationAmountSpentAddresses": "Der minimale Migrationsbetrag für jede wiederverwendete Adresse beträgt 1 Mi. Versuche es erneut, wenn der Betrag nicht richtig ist.",
             "tooManyAddressesToMigrate": "Du hast zu viele Adressen mit niedrigem Guthaben. Überprüfe erneut, ob dein Guthaben unvollständig ist.",
             "cannotMigrateAllYourFunds": "Wir können nicht alle Guthaben migrieren, da einige Adressen zu wenig Guthaben aufweisen. Du kannst trotzdem fortfahren. {value} gehen verloren.",
@@ -265,9 +277,9 @@
                 "confirmNewPincode": "Neue PIN bestätigen",
                 "action": "PIN ändern"
             },
-            "resyncAccounts": {
-                "title": "Profile neu synchronisieren",
-                "description": "Startet einen Hintergrundprozess, um sicherzustellen, dass deine Konten auf dem aktuellsten Stand sind."
+            "balanceFinder": {
+                "title": "Balance finder",
+                "description": "Perform an extended search of your addresses for tokens."
             },
             "hiddenAccounts": {
                 "title": "Ausgeblendete Profile",
@@ -369,7 +381,7 @@
                 }
             },
             "network": {
-                "networkOperational": "Netzwerk im Betrieb",
+                "networkOperational": "Netzwerk online",
                 "networkDegraded": "Netzwerk eingeschränkt",
                 "networkDown": "Netzwerk nicht verbunden",
                 "status": "Status",
@@ -464,6 +476,12 @@
             "title": "Überweisung bestätigen",
             "body": "Du bist dabei {amount} zu senden"
         },
+        "balanceFinder": {
+            "title": "Balance finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances.",
+            "totalWalletBalance": "Total wallet balance",
+            "typePassword": "Type your password to allow searching."
+        },
         "riskFunds": {
             "title": "Warnung: Verlust von Guthaben möglich",
             "body1": "Es wird dringend empfohlen, dass du deine Guthaben vor der Migration absicherst. Andernfalls besteht das Risiko, dass dein Guthaben gestohlen wird.",
@@ -477,8 +495,8 @@
         }
     },
     "charts": {
-        "incomingMi": "Eingehende {value} Mi",
-        "outgoingMi": "Ausgehende {value} Mi",
+        "incomingMi": "Incoming {value}",
+        "outgoingMi": "Outgoing {value}",
         "portoflio": "Portfolio",
         "token": "Token",
         "accountValue": "Kontostand",
@@ -572,7 +590,11 @@
         "visitFaq": "Gehe zu den FAQs",
         "viewStatus": "Status ansehen",
         "showHiddenAccounts": "Ausgeblendete Konten anzeigen",
-        "confirm": "Bestätigen"
+        "confirm": "Bestätigen",
+        "findBalances": "Find balances",
+        "searchBalances": "Search for balances",
+        "searchAgain": "Search again",
+        "searching": "Searching..."
     },
     "general": {
         "password": "Passwort",
@@ -607,10 +629,6 @@
         "yourAddress": "Deine Adresse",
         "generateNewAddress": "Neue Adresse erstellen",
         "copyAddress": "Adresse kopieren",
-        "haveTextBackup": "Ich habe ein Text-Backup",
-        "haveFileBackup": "Ich habe eine Backup Datei",
-        "enterSeedOrPhrase": "Wiederherstellungsphrase oder Seed eingeben",
-        "uploadSeedvaultOrStronghold": "Importiere eine Stronghold- oder SeedVault-Datei",
         "import": "Importieren",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -682,7 +700,13 @@
         "passwordStrength4": "Stark",
         "creatingProfile": "Erstelle Profil, bitte warten...",
         "fundMigration": "Guthabenmigration",
-        "accountRemoved": "Dieses Konto ist ausgeblendet. Blende es wieder ein, um Überweisungen auszuführen."
+        "accountRemoved": "Dieses Konto ist ausgeblendet. Blende es wieder ein, um Überweisungen auszuführen.",
+        "receivingTo": "Receiving to {account}",
+        "sendingFrom": "Sending from {account}",
+        "receivedTo": "Received to {account}",
+        "sentFrom": "Sent from {account}",
+        "receiving": "Receiving",
+        "sending": "Sending"
     },
     "dates": {
         "today": "Heute",
