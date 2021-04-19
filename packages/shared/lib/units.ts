@@ -40,19 +40,20 @@ export const formatUnitBestMatch = (value: number, includeUnits: boolean = true)
  * @param grouped Group the thousands
  */
 export function formatUnitPrecision(valueRaw: number, unit: Unit, includeUnits: boolean = true, grouped: boolean = false): string {
+    // At the moment we have no symbol for IOTA so we always put the currency code
+    // at the end, in the future when we have a symbol this can be updated to position
+    // it correctly to the left when necessary
+    const currencyPosition = getCurrencyPosition()
+
     if (!valueRaw) {
-        return includeUnits ? `0 ${unit}` : '0'
+        return includeUnits ? (currencyPosition === `left` ? `0 ${unit}` : `0 ${unit}`) : '0'
     }
 
     const converted = changeUnits(valueRaw, Unit.i, unit)
 
-    const formatted = formatNumber(converted, undefined, undefined, unit === Unit.i ? 0 : 2, grouped)
+    const formatted = formatNumber(converted, UNIT_MAP[unit].dp, undefined, unit === Unit.i ? 0 : 2, grouped)
 
     if (includeUnits) {
-        // At the moment we have no symbol for IOTA so we always put the currency code
-        // at the end, in the future when we have a symbol this can be updated to position
-        // it correctly to the left when necessary
-        const currencyPosition = getCurrencyPosition()
         return currencyPosition === `left` ? `${formatted} ${unit}` : `${formatted} ${unit}`
     } else {
         return formatted
