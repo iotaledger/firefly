@@ -479,7 +479,7 @@ export const confirmedBundles = derived(get(migration).bundles, (_bundles) => _b
  * List of chrysalis node endpoints to detect when is live
  */
 // TODO: Update to mainnet chrysalis endpoint
-export const CHRYSALIS_NODE_ENDPOINTS = ['https://api.lb-0.migration4.iotatestmigration4.net/']
+export const CHRYSALIS_NODE_ENDPOINTS = ['https://api.lb-0.migration4.iotatestmigration4.net/api/v1/info']
 /**
 * Default timeout for a request made to an endpoint
 */
