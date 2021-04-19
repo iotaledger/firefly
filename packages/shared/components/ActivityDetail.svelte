@@ -1,14 +1,21 @@
 <script lang="typescript">
     import { Unit } from '@iota/unit-converter'
     import { Icon, Text } from 'shared/components'
+    import { convertToFiat, currencies, CurrencyTypes, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { getInitials, truncateString } from 'shared/lib/helpers'
     import { formatDate } from 'shared/lib/i18n'
-    import type { Payload, Milestone, Transaction } from 'shared/lib/typings/message'
+    import { activeProfile } from 'shared/lib/profile'
+    import type { Milestone, Payload, Transaction } from 'shared/lib/typings/message'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { setClipboard } from 'shared/lib/utils'
-    import { receiverAddressesFromTransactionPayload, sendAddressFromTransactionPayload, WalletAccount, getMilestoneMessageValue } from 'shared/lib/wallet'
+    import {
+        getMilestoneMessageValue,
+        receiverAddressesFromTransactionPayload,
+        sendAddressFromTransactionPayload,
+        WalletAccount,
+    } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import type { Readable, Writable } from 'svelte/store'
+    import type { Writable } from 'svelte/store'
 
     export let id
     export let timestamp
@@ -22,7 +29,6 @@
     let txPayload = payload?.type === 'Transaction' ? (payload as Transaction) : undefined
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
-    const activeAccount = getContext<Readable<WalletAccount>>('selectedAccount')
 
     let senderAccount: WalletAccount
     let receiverAccount: WalletAccount
@@ -58,9 +64,7 @@
 
     const prepareSenderAccount = () => {
         if (txPayload) {
-            return !txPayload.data.essence.data.incoming
-                ? $activeAccount
-                : txPayload.data.essence.data.internal
+            return txPayload.data.essence.data.internal
                 ? $accounts.find((acc) => acc.addresses.some((add) => senderAddress === add.address))
                 : null
         }
@@ -74,9 +78,7 @@
         }
 
         if (txPayload) {
-            return txPayload.data.essence.data.incoming
-                ? $activeAccount
-                : txPayload.data.essence.data.internal
+            return txPayload.data.essence.data.internal
                 ? $accounts.find((acc) => acc.addresses.some((add) => receiverAddresses.includes(add.address)))
                 : null
         }
@@ -89,7 +91,12 @@
 
     $: senderAccount = prepareSenderAccount()
     $: receiverAccount = prepareReceiverAccount()
-    $: value = milestonePayload ? getMilestoneMessageValue(milestonePayload, $accounts) : txPayload ? txPayload.data.essence.data.value : 0
+    $: value = milestonePayload
+        ? getMilestoneMessageValue(milestonePayload, $accounts)
+        : txPayload
+        ? txPayload.data.essence.data.value
+        : 0
+    $: currencyValue = convertToFiat(value, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings.currency])
 
     function isAccountYours(account) {
         return account && $accounts.find((a) => a.id === account.id)
@@ -113,9 +120,7 @@
             {/if}
         </div>
         <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
-        <Text bold smaller>
-            {formatUnitBestMatch(value)}
-        </Text>
+        <Text bold smaller>{formatUnitBestMatch(value)}</Text>
         <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
         <div class="flex flex-col flex-wrap justify-center items-center text-center">
             {#if receiverAccount}
@@ -181,9 +186,17 @@
         {#if txPayload || milestonePayload}
             <div class="mb-5">
                 <Text secondary>{locale('general.amount')}</Text>
-                <button class="text-left" on:click={() => setClipboard(value.toString())}>
-                    <Text type="pre" classes="mb-2">{formatUnitPrecision(value, Unit.i, true, true)}</Text>
-                </button>
+                <div class="flex flex-col mt-2">
+                    <button class="text-left" on:click={() => setClipboard(currencyValue.toString())}>
+                        <Text type="pre" classes="mb-2">{formatCurrency(currencyValue)}</Text>
+                    </button>
+                    <button class="text-left" on:click={() => setClipboard(formatUnitBestMatch(value))}>
+                        <Text type="pre" classes="mb-2">{formatUnitBestMatch(value)}</Text>
+                    </button>
+                    <button class="text-left" on:click={() => setClipboard(value.toString())}>
+                        <Text type="pre" classes="mb-2">{formatUnitPrecision(value, Unit.i, true, true)}</Text>
+                    </button>
+                </div>
             </div>
         {/if}
     </div>
