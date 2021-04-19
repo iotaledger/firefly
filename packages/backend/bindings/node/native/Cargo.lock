@@ -1814,19 +1814,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "iota-model"
-version = "0.3.0"
-source = "git+https://github.com/iotaledger/iota.rs?rev=0aa7e11b075bea17ae52b1f7dff51f3a13c9d914#0aa7e11b075bea17ae52b1f7dff51f3a13c9d914"
-dependencies = [
- "failure",
- "iota-constants 0.2.1 (git+https://github.com/iotaledger/iota.rs?rev=0aa7e11b075bea17ae52b1f7dff51f3a13c9d914)",
- "iota-conversion 0.3.0",
- "iota-crypto 0.3.0 (git+https://github.com/iotaledger/iota.rs?rev=0aa7e11b075bea17ae52b1f7dff51f3a13c9d914)",
- "serde 1.0.125",
- "serde_json",
-]
-
-[[package]]
 name = "iota-stronghold"
 version = "0.3.0"
 source = "git+https://github.com/iotaledger/stronghold.rs?rev=ab6fea59a81c9ad84e8bd79d482833dc3df249c8#ab6fea59a81c9ad84e8bd79d482833dc3df249c8"
