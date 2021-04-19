@@ -46,11 +46,6 @@ export const clearSendParams = (isInternal = false) => sendParams.set({ amount: 
 export const loggedIn = writable<boolean>(false)
 
 /**
- * Determines if user can make developer profiles
- */
-export const developerMode = persistent<boolean>('developerMode', false)
-
-/**
  * Cleanup the signup vars
  */
 export const cleanupSignup = () => {
