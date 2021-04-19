@@ -268,7 +268,7 @@
             {/if}
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Animation illustration="migrate-desktop" />
+            <Animation animation="migrate-desktop" />
         </div>
     </OnboardingLayout>
 {/if}
