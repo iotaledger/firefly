@@ -39,9 +39,9 @@
         },
         "setup": {
             "title": "Stel jou beursie op",
-            "chrysalisTitle": "Chrysalis Network Update",
-            "chrysalisBody": "From April 21st, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
-            "learnMore": "Learn about the migration"
+            "chrysalisTitle": "Chrysalis-netwerkopdatering",
+            "chrysalisBody": "Vanaf 21 April kan gebruikers hul tokens migreer na die nuwe Chrysalis-netwerk. Ons beveel aan dat jy jou bestaande tokens so gou as moontlik migreer.",
+            "learnMore": "Leer meer oor die migrasie"
         },
         "secure": {
             "title": "Beveilig U beursie",
@@ -104,19 +104,31 @@
         "congratulations": {
             "title": "Wallet-opstelling is voltooi",
             "body": "Jou nuwe beursie is gereed om te gebruik.",
-            "fundsMigrated": "Funds migrated",
-            "success": "You have successfully migrated your funds to the new network",
-            "exportMigration": "Export migration log and finish setup"
+            "fundsMigrated": "Fondse migreer",
+            "success": "Jy het jou fondse suksesvol na die nuwe netwerk gemigreer",
+            "exportMigration": "Voer migrasielogboek uit en voltooi die opstelling"
         },
         "import": {
-            "title": "Verbind 'n beursie",
-            "body": "As jy 'n herstelfrase of 'n Stronghold back-up het, kan jy dit hier invoer."
+            "title": "Recover or migrate funds",
+            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+            "importSeed": "I have an 81 character seed",
+            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "importMnemonic": "I have a Firefly recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase to recover your wallet",
+            "importFile": "I have a file backup",
+            "importFileDescription": "Upload a Seedvault or Stronghold file"
         },
         "importFromText": {
-            "title": "Herstel jou beursie met 'n herstelfrase of seed",
-            "body1": "'N seed bestaan uit 81 karakters. Dit word gebruik om van 'n ouer Trinity beursie te herstel.",
-            "body2": "'N Herstelfrase is 24 woorde lank net kleinletters met spasies tussen. Dit word gebruik om 'n bestaande Firefly beursie te herstel.",
-            "body3": "Voer you seed of herstelfrase in",
+            "seed": {
+                "title": "Type your seed to commence migration",
+                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+                "enter": "Enter your seed"
+            },
+            "mnemonic": {
+                "title": "Type your recovery phrase",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
+                "enter": "Enter your secret recovery phrase"
+            },
             "seedDetected": "81 karakter seed bespeur",
             "phraseDetected": "24 woord frase bespeur",
             "checksum": "Checksum"
@@ -140,44 +152,44 @@
         },
         "migrate": {
             "title": "Migreer jou fondse",
-            "body1": "This is an automated process to transfer your funds to your new wallet.",
+            "body1": "Dit is 'n outomatiese proses om jou fondse na jou nuwe beursie oor te plaas.",
             "body2": "Dit kan 'n rukkie neem. Moenie jou toestel tydens die migrasie afskakel nie.",
             "existing": "Jou ou beursie",
             "new": "Jou nuwe beursie",
-            "learn": "Learn about the migration",
-            "beginMigration": "Begin Migration",
-            "migrating": "Migrating funds...",
-            "migrated": "{balance} migrated",
-            "migrationFailed": "Migration Failed",
-            "noAddressesForMigration": "Please select the addresses you wish to secure.",
-            "restoringWallet": "Restoring wallet...",
-            "findingBalance": "Finding balance...",
-            "incorrectSeedVaultPassword": "Incorrect SeedVault password.",
+            "learn": "Leer meer oor die migrasie",
+            "beginMigration": "Begin migrasie",
+            "migrating": "Fondse migrasie aan die gang...",
+            "migrated": "{balance} gemigreer",
+            "migrationFailed": "Migrasie het misluk",
+            "noAddressesForMigration": "Kies asseblief die adresse wat jy wil beveilig.",
+            "restoringWallet": "Beursie hersteling...",
+            "findingBalance": "Bevinding van balans...",
+            "incorrectSeedVaultPassword": "Verkeerde SeedVault wagwoord.",
             "signingBundle": "Signing bundle",
-            "broadcastingBundle": "Broadcasting bundle",
-            "miningBundle": "Mining bundle",
-            "problemRestoringWallet": "There was a problem restoring your wallet. Please try again.",
-            "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
-            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
-            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. {value} will be lost.",
-            "error": "There was an error migrating your funds. Please try again."
+            "broadcastingBundle": "Uitsaaibondel",
+            "miningBundle": "Bondelmynbou",
+            "problemRestoringWallet": "Kon nie jou beursie herstel nie. Probeer asseblief weer.",
+            "minimumMigrationAmountSpentAddresses": "Die minimum migrasiebedrag vir elke bestede adres is 1 Mi. Kyk weer of jou balans nie reg lyk nie.",
+            "tooManyAddressesToMigrate": "Jy het te veel adresse met 'n lae balans om te migreer. Kyk weer of jou balans nie reg lyk nie.",
+            "cannotMigrateAllYourFunds": "Ons kan nie al jou fondse migreer nie, sommige adresse is the min. Jy kan in elk geval voortgaan. {value} sal verlore gaan.",
+            "error": "Daar was 'n fout tydens die migrasie van jou fondse. Probeer asseblief weer."
         },
         "bundleMiningWarning": {
-            "title": "Warning",
-            "body1": "You have funds on one or more spent addresses.",
-            "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
-            "body3": "If you close the app you will need to restart the whole migration.",
-            "learn": "Learn about spent addresses"
+            "title": "Waarskuwing",
+            "body1": "Jy het geld op een of meer spent adresse.",
+            "body2": "Ons beveel aan dat jy die outomatiese proses uitvoer om hierdie fondse veilig te beveilig en oor te dra.",
+            "body3": "As jy die program toemaak, moet jy die hele migrasie weer oor begin.",
+            "learn": "Leer oor spandeerde adresse"
         },
         "secureSpentAddresses": {
-            "title": "Secure spent addresses",
+            "title": "Veilige spandeerde adresse",
             "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.",
-            "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",
-            "error": "You can’t migrate spent addresses with less than 1 Mi"
+            "body2": "Ons beveel aan dat jy die outomatiese proses uitvoer om hierdie fondse the beveilig en veilig oor te dra.",
+            "error": "Jy kan nie adresse met minder as 1 Mi migreer nie"
         },
         "securityCheckCompleted": {
-            "title": "Security check completed",
-            "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
+            "title": "Veiligheidskontrole voltooi",
+            "body1": "Ons het die veiligheidsrisikovlak bereken. As jy hierdie proses weer uitvoer, kan jy die risiko verlaag.",
             "body2": "When you are happy with the risk level(s) press continue.",
             "rerun": "Rerun process for selected addresses",
             "continueMigration": "Continue migration"
@@ -265,9 +277,9 @@
                 "confirmNewPincode": "Bevestig nuwe PIN",
                 "action": "Verander PIN"
             },
-            "resyncAccounts": {
-                "title": "Hersinkroniseer rekeninge",
-                "description": "Begin 'n agtergrondtaak om seker te maak dat jou rekeninge op datum is."
+            "balanceFinder": {
+                "title": "Balance finder",
+                "description": "Perform an extended search of your addresses for tokens."
             },
             "hiddenAccounts": {
                 "title": "Versteekte rekeninge",
@@ -464,6 +476,12 @@
             "title": "Bevestig die transaksie",
             "body": "Jy is op die punt om {amount} na"
         },
+        "balanceFinder": {
+            "title": "Balance finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances.",
+            "totalWalletBalance": "Total wallet balance",
+            "typePassword": "Type your password to allow searching."
+        },
         "riskFunds": {
             "title": "Warning: funds at risk during migration",
             "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
@@ -477,8 +495,8 @@
         }
     },
     "charts": {
-        "incomingMi": "Inkomende {value} Mi",
-        "outgoingMi": "Uitgaande {value} Mi",
+        "incomingMi": "Incoming {value}",
+        "outgoingMi": "Outgoing {value}",
         "portoflio": "Portefeulje",
         "token": "Tokenprys",
         "accountValue": "Rekening Balans",
@@ -572,7 +590,11 @@
         "visitFaq": "Besoek FAQ",
         "viewStatus": "Sien status",
         "showHiddenAccounts": "Wys Versteekte rekeninge",
-        "confirm": "Bevestig"
+        "confirm": "Bevestig",
+        "findBalances": "Find balances",
+        "searchBalances": "Search for balances",
+        "searchAgain": "Search again",
+        "searching": "Searching..."
     },
     "general": {
         "password": "Wagwoord",
@@ -607,10 +629,6 @@
         "yourAddress": "Jou adres",
         "generateNewAddress": "Genereer nuwe adres",
         "copyAddress": "Kopieer Adres",
-        "haveTextBackup": "Ek het 'n teks back-up",
-        "haveFileBackup": "Ek het 'n lêer back-up",
-        "enterSeedOrPhrase": "Voer 'n herstelfrase of seed in",
-        "uploadSeedvaultOrStronghold": "Voer 'n Stronghold of SeedVault lêer in",
         "import": "Invoer",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -682,7 +700,13 @@
         "passwordStrength4": "Sterk",
         "creatingProfile": "Skep tans profiel op, wag asseblief...",
         "fundMigration": "Fund migration",
-        "accountRemoved": "Hierdie rekening is versteek. Wys dit om oordragte uit te voer."
+        "accountRemoved": "Hierdie rekening is versteek. Wys dit om oordragte uit te voer.",
+        "receivingTo": "Receiving to {account}",
+        "sendingFrom": "Sending from {account}",
+        "receivedTo": "Received to {account}",
+        "sentFrom": "Sent from {account}",
+        "receiving": "Receiving",
+        "sending": "Sending"
     },
     "dates": {
         "today": "Vandag",

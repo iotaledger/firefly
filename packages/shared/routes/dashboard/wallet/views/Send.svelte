@@ -85,12 +85,12 @@
         accountsDropdownItems = $liveAccounts.map((acc) => format(acc))
 
         if (from) {
-            from = accountsDropdownItems.find(a => a.id === from.id)
+            from = accountsDropdownItems.find((a) => a.id === from.id)
         } else {
-            from = $account ? accountsDropdownItems.find(a => a.id === $account.id) : accountsDropdownItems[0]
+            from = $account ? accountsDropdownItems.find((a) => a.id === $account.id) : accountsDropdownItems[0]
         }
         if (to) {
-            to = accountsDropdownItems.find(a => a.id === to.id)
+            to = accountsDropdownItems.find((a) => a.id === to.id)
         }
     }
 
@@ -219,15 +219,15 @@
         amount = formatUnitPrecision(from.balance, unit, false)
     }
 
-    const updateFromSendParams = ((s) => {
+    const updateFromSendParams = (s) => {
         selectedSendType = s.isInternal ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
-        unit =  s.amount === 0 ? Unit.Mi : Unit.i
+        unit = s.amount === 0 ? Unit.Mi : Unit.i
         amount = s.amount === 0 ? '' : formatUnitPrecision(s.amount, Unit.i, false)
         address = s.address
         if (from && accountsDropdownItems) {
             to = $liveAccounts.length === 2 ? accountsDropdownItems[from.id === $liveAccounts[0].id ? 1 : 0] : to
         }
-    })
+    }
 
     const sendSubscription = sendParams.subscribe((s) => {
         updateFromSendParams(s)
@@ -332,8 +332,7 @@
                         maxClick={handleMaxClick}
                         {locale}
                         disabled={$isTransferring}
-                        autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2}
-                    />
+                        autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2} />
                 </div>
             </div>
         </div>

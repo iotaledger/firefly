@@ -6,7 +6,7 @@
         },
         "legal": {
             "title": "Gizlilik Politikası ve Kullanım Şartları",
-            "body": "Lütfen Gizlilik Politikası ve Hizmet Şartları'nı inceleyin.",
+            "body": "Lütfen Gizlilik Politikası ve Hizmet Şartları'nı inceleyiniz.",
             "privacyPolicy": {
                 "title": "Gizlilik Politikası",
                 "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
@@ -41,11 +41,11 @@
             "title": "Bir cüzdan oluşturun",
             "chrysalisTitle": "Chrysalis Ağ Güncellemesi",
             "chrysalisBody": "21 Nisan'dan itibaren kullanıcılar tokenlerini yeni Chrysalis ağına taşıyabilir. Mevcut tokenlerinizi mümkün olan en kısa sürede taşımanızı öneririz.",
-            "learnMore": "Learn about the migration"
+            "learnMore": "Taşıma hakkında bilgi edinin"
         },
         "secure": {
             "title": "Cüzdanınızı güvence altına alın",
-            "body1": "Kaydedin ve Kurtarma Kiti pdf taslağını çıktı alın.",
+            "body1": "Kaydedin ve Kurtarma Kiti PDF taslağını çıktı alın.",
             "body2": "Eğer Kurtarma Kitini doldurur ve güvenli bir şekilde saklarsanız, her zaman cüzdanınızı geri kurtarabilirsiniz."
         },
         "password": {
@@ -60,13 +60,13 @@
         },
         "pin": {
             "title": "PIN kodunuzu ayarlayın",
-            "body1": "Aşağıya 6 haneli şifrenizi girin. Profilinize girebilmek için PIN sorgulaması yapılacaktır.",
+            "body1": "Aşağıya 6 haneli PIN kodunuzu girin. Profilinize girebilmek için PIN sorgulaması yapılacaktır.",
             "body2": "Sadece sayıları kullanın"
         },
         "confirmPin": {
             "title": "PIN kodunuzu doğrulayın",
             "body1": "PIN bakiyenizi ve işlem gizliliğinizi korur.",
-            "body2": "İşlem için PIN kodunuzu tekrar girin. "
+            "body2": "İlerlemek için PIN kodunuzu tekrar girin. "
         },
         "backup": {
             "title": "Cüzdanınızı yedekleyin",
@@ -102,33 +102,45 @@
             "body": "Cüzdanınızı Stronghold'a yedeklediniz."
         },
         "congratulations": {
-            "title": "Cüzdan kurulumu tamamlanmadı",
-            "body": "Cüzdanınız kullanıma hazır.",
-            "fundsMigrated": "Funds migrated",
-            "success": "You have successfully migrated your funds to the new network",
-            "exportMigration": "Export migration log and finish setup"
+            "title": "Cüzdan kurulumu tamamlandı",
+            "body": "Yeni cüzdanınız kullanıma hazır.",
+            "fundsMigrated": "Bakiye taşındı",
+            "success": "Bakiyenizi başarılı bir şekilde yeni ağa aktardınız",
+            "exportMigration": "Taşıma kaydını dışa aktar ve yüklemeyi bitir"
         },
         "import": {
-            "title": "Cüzdanı içe aktar",
-            "body": "Bir kurtarma ifadeniz veya Stronghold yedeklemeniz varsa, buradan içe aktarabilirsiniz."
+            "title": "Recover or migrate funds",
+            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+            "importSeed": "I have an 81 character seed",
+            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "importMnemonic": "I have a Firefly recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase to recover your wallet",
+            "importFile": "I have a file backup",
+            "importFileDescription": "Upload a Seedvault or Stronghold file"
         },
         "importFromText": {
-            "title": "Cüzdanınızı bir kurtarma ifadesi veya kelimesi ile geri yükleyin",
-            "body1": "Bir seed 81 karakterden oluşur. Bu eski bir Trinity cüzdanından kurtarmak için kullanılır.",
-            "body2": "Bir kurtarma ifadesi 24 kelime uzunluktadır, hepsi küçük harf olmaak üzere ve araları boşluklu olmalıdır. Bu halihazırdaki Firefly cüzdanınızı kurtarmaya yarar.",
-            "body3": "Seed veya kurtarma ifadenizi girin",
+            "seed": {
+                "title": "Type your seed to commence migration",
+                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+                "enter": "Enter your seed"
+            },
+            "mnemonic": {
+                "title": "Type your recovery phrase",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
+                "enter": "Enter your secret recovery phrase"
+            },
             "seedDetected": "81 karakter seed tespit edilmiştir",
             "phraseDetected": "24 kelime kurtarma cümlesi tespit edilmiştir",
-            "checksum": "Checksum"
+            "checksum": "Sağlama"
         },
         "importFromFile": {
             "title": "Yedekleme dosyasını kullanarak cüzdanınızı kurtarın",
-            "body": "Cüzdanınızı geri yüklemek için bir yedekleme dosyasını içe aktarın. Yedekleme dosyaları Strongghold (.stronghold) veya Trinity SeedVault (.kdbx) olabilir."
+            "body": "Cüzdanınızı geri yüklemek için bir yedekleme dosyasını içe aktarın. Yedekleme dosyaları Stronghold (.stronghold) veya Trinity SeedVault (.kdbx) olabilir."
         },
         "importBackupPassword": {
             "title": "Cüzdanınızı SeedVault veya Stronghold ile geri yükleyin",
-            "body1": "Lütfen yedek şifrenizi girin.",
-            "body2": "Bu, yedeğinizi ilk oluşturduğunuzda belirlediğiniz paroladır."
+            "body1": "Lütfen yedekleme şifrenizi girin.",
+            "body2": "Bu, yedeğinizi ilk oluşturduğunuzda belirlediğiniz şifredir."
         },
         "importSuccess": {
             "title": "Yedeklemenizi başarıyla geri yüklediniz",
@@ -140,57 +152,57 @@
         },
         "migrate": {
             "title": "Varlıklarınızı taşıyın",
-            "body1": "This is an automated process to transfer your funds to your new wallet.",
+            "body1": "Bu bakiyenizi yeni cüzdanınıza otomatik olarak aktarmak için yapılacak bir işlemdir.",
             "body2": "Bu biraz zaman alabilir. Taşıma sırasında cihazınızı kapatmayın.",
             "existing": "Eski cüzdanınız",
             "new": "Yeni cüzdanınız",
-            "learn": "Learn about the migration",
-            "beginMigration": "Begin Migration",
-            "migrating": "Migrating funds...",
-            "migrated": "{balance} migrated",
-            "migrationFailed": "Migration Failed",
-            "noAddressesForMigration": "Please select the addresses you wish to secure.",
-            "restoringWallet": "Restoring wallet...",
-            "findingBalance": "Finding balance...",
-            "incorrectSeedVaultPassword": "Incorrect SeedVault password.",
-            "signingBundle": "Signing bundle",
-            "broadcastingBundle": "Broadcasting bundle",
-            "miningBundle": "Mining bundle",
-            "problemRestoringWallet": "There was a problem restoring your wallet. Please try again.",
-            "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
-            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
-            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. {value} will be lost.",
-            "error": "There was an error migrating your funds. Please try again."
+            "learn": "Taşıma hakkında bilgi edinin",
+            "beginMigration": "Taşımaya başlayın",
+            "migrating": "Bakiye taşınıyor...",
+            "migrated": "{balance} taşındı",
+            "migrationFailed": "Taşıma başarısız",
+            "noAddressesForMigration": "Lütfen güvence altına almak istediğiniz adresleri seçin.",
+            "restoringWallet": "Cüzdan geri yükleniyor...",
+            "findingBalance": "Bakiye bulunuyor...",
+            "incorrectSeedVaultPassword": "Hatalı SeedVault şifresi.",
+            "signingBundle": "Paket imzalanıyor",
+            "broadcastingBundle": "Paket yayınlanıyor",
+            "miningBundle": "Paket işleniyor",
+            "problemRestoringWallet": "Cüzdan geri yüklenirken bir sorun oluştu. Lütfen tekrar deneyin.",
+            "minimumMigrationAmountSpentAddresses": "Harcama yapılmış her adres için minimum geçiş miktarı 1 Mi'dir. Bakiyeniz doğru görünmüyorsa tekrar kontrol edin.",
+            "tooManyAddressesToMigrate": "Düşük bakiyeli adres sayınız taşımak için çok fazla. Eğer bakiyeniz doğru görünmüyorsa lütfen tekrar kontrol ediniz.",
+            "cannotMigrateAllYourFunds": "Bazı adreslerin değeri çok düşük olduğu için bütün bakiyenizi taşıyamıyoruz. İşleminize bu şekilde de devam edebilirsiniz. {value} kaybolacaktır.",
+            "error": "Bakiyeniz taşınırken bir hata oluştu. Lütfen tekrar deneyin."
         },
         "bundleMiningWarning": {
-            "title": "Warning",
-            "body1": "You have funds on one or more spent addresses.",
-            "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
-            "body3": "If you close the app you will need to restart the whole migration.",
-            "learn": "Learn about spent addresses"
+            "title": "Uyarı",
+            "body1": "Daha önceden harcama yaptığınız bir veya birden fazla adreste bakiyeniz bulunmaktadır.",
+            "body2": "Bu fonların güvence altına alınmasına ve güvenli bir şekilde aktarılmasına yardımcı olmak için otomatik bir süreç çalıştırmanızı öneririz.",
+            "body3": "Eğer uygulamayı kapatırsanız, taşıma sürecine en baştan başlamanız gerekecektir.",
+            "learn": "Harcama yapılmış adresler hakkında daha fazla bilgi edinin"
         },
         "secureSpentAddresses": {
-            "title": "Secure spent addresses",
-            "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.",
-            "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",
-            "error": "You can’t migrate spent addresses with less than 1 Mi"
+            "title": "Kullanılmış adresleri güvence altına al",
+            "body1": "{number, plural, one {# kullanılmış adres} other {# kullanılmış adres}}te bakiyeniz tespit edilmiştir.",
+            "body2": "Bakiyenizin güvence altına alınmasına ve güvenli bir şekilde aktarılmasına yardımcı olmak için otomatik bir süreç çalıştırmanızı öneririz.",
+            "error": "1 Mi'den az olan kullanılmış adresleri taşıyamazsınız"
         },
         "securityCheckCompleted": {
-            "title": "Security check completed",
-            "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
-            "body2": "When you are happy with the risk level(s) press continue.",
-            "rerun": "Rerun process for selected addresses",
-            "continueMigration": "Continue migration"
+            "title": "Güvenlik kontrolü tamamlandı",
+            "body1": "Güvenlik risk seviyesini hesapladık. Bu işlemi tekrar çalıştırmak risk seviyenizi düşürebilir.",
+            "body2": "Risk seviyesi/seviyelerinden memnunsanız, devam tuşuna basınız.",
+            "rerun": "Seçilen adresler için süreci yeniden başlat",
+            "continueMigration": "Taşımaya devam et"
         },
         "securingSpentAddresses": {
-            "title": "Securing spent addresses...",
-            "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
-            "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
+            "title": "Kullanılmış adreslerin güvenliği sağlanıyor...",
+            "body1": "Bu işlem {minutes, plural, one {1 dakika} other {# dakika}} sürecektir.",
+            "body2": "Bilgisayarınız tam kapasitede çalışacak, bu işlemin tamamlanmasını beklerken başka bir şeyler yapabilirsiniz."
         },
         "transferFragmentedFunds": {
-            "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
-            "migrate": "Migrate funds",
-            "transaction": "Transaction {number}",
+            "body1": "Firefly şimdi paranızı taşımaya başlayacak. Bu biraz zaman alabilir.",
+            "migrate": "Bakiyeyi taşı",
+            "transaction": "İşlem {number}",
             "rerun": "Tekrar deneyin"
         },
         "migrateFailed": {
@@ -199,15 +211,15 @@
         },
         "balance": {
             "title": "Bakiyeniz",
-            "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
-            "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
-            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly."
+            "body": "Devam etmeden önce bakiyenizin doğru olduğundan emin olun. Eğer bazı şeyler doğru görünmüyorsa tekrar kontrol edebilirsin.",
+            "error": "Minimum taşıma miktarı 1 Mi'dir. Bakiyeniz doğru görünmüyorsa tekrar kontrol edin.",
+            "zeroBalance": "Tekrar kontrol etmeyi deneyin. Bakiyenizi hala bulamıyorsanız, seed'inizi yanlış girmiş olabilirsiniz."
         },
         "settings": {
             "settings": "Ayarlar",
             "generalSettings": {
                 "title": "Genel ayarlar",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Cüzdanınızın görünüşünü ve diğer genel ayarları düzenleyin"
             },
             "security": {
                 "title": "Güvenlik",
@@ -265,9 +277,9 @@
                 "confirmNewPincode": "Yeni PIN'i doğrulayın",
                 "action": "PIN'i değiştir"
             },
-            "resyncAccounts": {
-                "title": "Hesabı Yeniden Eşitle",
-                "description": "Hesaplarınızın güncel olduğundan emin olmak için bir arka plan görevi başlatır."
+            "balanceFinder": {
+                "title": "Balance finder",
+                "description": "Perform an extended search of your addresses for tokens."
             },
             "hiddenAccounts": {
                 "title": "Gizli Hesaplar",
@@ -279,7 +291,7 @@
             },
             "deepLinks": {
                 "title": "Derin Bağlantılar",
-                "description": "iota://linkine tıkladığında Firefly’daki işlem bilgisini otomatik olarak doldur"
+                "description": "Firefly’daki işlem bilgisini, iota:// linkine tıkladığında otomatik olarak doldur"
             },
             "developerMode": {
                 "title": "Geliştirici Modu",
@@ -361,7 +373,7 @@
                 "strongholdStatus": {
                     "title": "Cüzdan durumu",
                     "locked": "Stronghold kilitlendi",
-                    "unlocked": "stronghold kilit açıldı"
+                    "unlocked": "Stronghold kilidi açıldı"
                 },
                 "strongholdBackup": {
                     "title": "Cüzdan yedeği",
@@ -442,7 +454,7 @@
         },
         "errorLog": {
             "title": "Hata Geçmişi",
-            "empty": "Hata geçmişi boş"
+            "empty": "Hata geçmişi boş."
         },
         "deleteProfile": {
             "title": "Profili sil",
@@ -464,21 +476,27 @@
             "title": "İşlemi onayla",
             "body": "Bu kadar miktar göndermek üzeresiniz {amount}"
         },
+        "balanceFinder": {
+            "title": "Balance finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances.",
+            "totalWalletBalance": "Total wallet balance",
+            "typePassword": "Type your password to allow searching."
+        },
         "riskFunds": {
-            "title": "Warning: funds at risk during migration",
-            "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
-            "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
+            "title": "Uyarı: taşıma sırasında bakiye risk altında",
+            "body1": "Taşıma işlemine devam etmeden önce tüm paranızı güvence altına almanız şiddetle tavsiye edilir. Paranızı güvence altına almazsanız, paranız hırsızlık riski altındadır.",
+            "body2": "Orta veya daha yüksek risk düzeyine sahip adresler için işlemi yeniden başlatmanız önerilir."
         },
         "missingBundle": {
-            "title": "Warning: funds at risk during migration",
-            "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
-            "learnMore": "Learn more about spent addresses",
-            "proceed": "I understand the risk"
+            "title": "Uyarı: taşıma sırasında bakiye risk altında",
+            "body": "Kullanılmış adreslerde bakiyeniz bulunmakta fakat güvence altına almak için gereken bilgi bulunmamaktadır. Bu durum uzun zaman önce işlem yaptıysanız olabilmektedir. Devam edebilirsiniz ancak taşıma sırasında {value} risk altında olacaktır.",
+            "learnMore": "Kullanılmış adresler hakkında daha fazla bilgi edinin",
+            "proceed": "Riski göze alıyorum"
         }
     },
     "charts": {
-        "incomingMi": "Gelen {value} Mi",
-        "outgoingMi": "Giden {value} Mi",
+        "incomingMi": "Incoming {value}",
+        "outgoingMi": "Outgoing {value}",
         "portoflio": "Portföy",
         "token": "Token",
         "accountValue": "Hesap değeri",
@@ -494,13 +512,13 @@
         "cancel": "İptal",
         "close": "Çıkış",
         "dismiss": "Vazgeç",
-        "proceedAnyway": "Proceed anyway",
+        "proceedAnyway": "Yine de devam et",
         "save": "Kaydet",
         "importSeed": "Mevcut bir Seed'i içe aktarın",
-        "restoreWallet": "Migrate or restore a wallet",
-        "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
+        "restoreWallet": "Bir cüzdanı taşı veya geri yükle",
+        "restoreWalletDescription": "Chrysalis'e geçiş yapın veya mevcut bir cüzdanı geri yükleyin",
         "createWallet": "Yeni cüzdan oluştur",
-        "createWalletDescription": "Create a fresh wallet running on Chrysalis",
+        "createWalletDescription": "Chrysalis'te çalışan yeni bir cüzdan oluşturun",
         "savePassword": "Parolayı kaydet",
         "useBiometric": "Biyometrik güvenlik kullanın",
         "setupPin": "PIN kodunuzu ayarlayın",
@@ -512,7 +530,7 @@
         "verifyRecoveryPhrase": "Kurtarma şifrenizi doğrulayın",
         "revealRecoveryPhrase": "Kurtarma ifadesini göster",
         "importSeedvault": "SeedVault'u içe aktar",
-        "checkAgain": "Check Again",
+        "checkAgain": "Tekrar Kontrol Et",
         "importFromFile": "Dosyadan İçe Aktar",
         "send": "Gönder",
         "receive": "Al",
@@ -563,16 +581,20 @@
         "hideDetails": "Detayları Gizle",
         "yes": "Evet",
         "no": "Hayır",
-        "skip": "Skip",
+        "skip": "Atla",
         "reset": "Sıfırla",
         "downloadRecoveryKit": "Kurtarma kit taslağını kaydet",
         "skipBackup": "Kurtarma dosyasını geç",
         "finishSetup": "Kurulumu Bitir",
         "readDocumentation": "Dokümantasyonu oku",
         "visitFaq": "FAQ ziyaret et",
-        "viewStatus": "View status",
+        "viewStatus": "Durumu görüntüle",
         "showHiddenAccounts": "Gizli hesapları göster",
-        "confirm": "Onayla"
+        "confirm": "Onayla",
+        "findBalances": "Find balances",
+        "searchBalances": "Search for balances",
+        "searchAgain": "Search again",
+        "searching": "Searching..."
     },
     "general": {
         "password": "Parola",
@@ -607,10 +629,6 @@
         "yourAddress": "Adresiniz",
         "generateNewAddress": "Yeni adres oluştur",
         "copyAddress": "Adresi Kopyala",
-        "haveTextBackup": "Metin yedeğim var",
-        "haveFileBackup": "Dosya yedeğim var",
-        "enterSeedOrPhrase": "Bir kurtarma ifadesi veya seed'i girin",
-        "uploadSeedvaultOrStronghold": "Bir Stronghold veya SeedVault dosyasını içe aktarın",
         "import": "İçe aktar",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -630,7 +648,7 @@
         "manualNodeSelection": "Manuel seçim",
         "profiles": "Profiller",
         "developerProfile": "Geliştirici hesabı",
-        "developerProfileDescription": "Allows you to connect to testnets",
+        "developerProfileDescription": "Test ağlarına bağlanmanıza izin verir",
         "dev": "Geliştirici",
         "createAccount": "Bir hesap oluştur",
         "accountName": "Hesap adı",
@@ -652,7 +670,7 @@
         "noAccounts": "Hesabınız yok, lütfen bir tane oluşturun.",
         "loadingAccounts": "Yükleniyor, lütfen bekleyin...",
         "addProfile": "Profil Ekle",
-        "noRecentHistory": "geçmiş yok",
+        "noRecentHistory": "Geçmiş bulunamadı",
         "transferSyncing": "Hesap senkronize ediliyor",
         "transferSelectingInputs": "Girişlerin seçimi",
         "transferRemainderAddress": "Kalan mevduat adresi oluşturuluyor",
@@ -664,7 +682,7 @@
         "updatingAccount": "Hesap doğrulanıyor, lütfen bekleyin...",
         "accountSyncing": "Hesap Eşzamanlama",
         "accountSyncComplete": "Hesap eşzamanlama tamamlandır",
-        "passwordUpdating": "Şifre güncelleniyor..",
+        "passwordUpdating": "Şifre güncelleniyor...",
         "passwordSuccess": "Şifre başarıyla güncellendi",
         "passwordFailed": "Şifre güncellemesi yapılamadı",
         "syncingAccounts": "Hesapları senkronize ediyor...",
@@ -681,8 +699,14 @@
         "passwordStrength3": "Ortalama",
         "passwordStrength4": "Güçlü",
         "creatingProfile": "Yeni bir hesap oluşturuluyor, lütfen bekleyin...",
-        "fundMigration": "Fund migration",
-        "accountRemoved": "Bu hesap gizlidir. Havale işlemlerini gerçekleştirmek için görünür hale getirin."
+        "fundMigration": "Bakiye taşıma",
+        "accountRemoved": "Bu hesap gizlidir. Havale işlemlerini gerçekleştirmek için görünür hale getirin.",
+        "receivingTo": "Receiving to {account}",
+        "sendingFrom": "Sending from {account}",
+        "receivedTo": "Received to {account}",
+        "sentFrom": "Sent from {account}",
+        "receiving": "Receiving",
+        "sending": "Sending"
     },
     "dates": {
         "today": "Bugün",
@@ -702,21 +726,21 @@
         "updateReady": "Güncelleme hazır",
         "updateError": "Davetiye gönderilirken bir hata oluştu, lütfen tekrar deneyin",
         "restartInstall": "Yüklemenizi yeniden başlatın",
-        "calcMinutesRemaining": "Kalan dakikalar hesaplanıyor",
+        "calcMinutesRemaining": "Kalan dakikalar hesaplanıyor...",
         "minutesRemaining": "{minutes, plural, one {1 dakika kaldı} other {# dakika kaldı}}",
         "copiedToClipboard": "Panoya kopyalandı",
         "accountsSynchronized": "Hesap senkronizasyonu tamamlandı",
-        "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
-        "migratedAccountChrysalisUp": "Your funds will become available shortly"
+        "migratedAccountChrysalisDown": "Bakiyeniz 28 Nisan'da Chrysalis'ten sonra kullanılabilir olacaktır",
+        "migratedAccountChrysalisUp": "Bakiyeniz kısa süre içinde kullanılabilir hale gelecektir"
     },
     "error": {
         "profile": {
             "length": "Profil adınız {length, plural, one {1 karakter} other {# karakter}} den uzun olamaz.",
-            "duplicate": "Bu isimde bir profil halihazırda oluşturuldu"
+            "duplicate": "Bu isimde bir profil zaten var."
         },
         "password": {
             "doNotMatch": "Parolalar eşleşmiyor.",
-            "tooWeak": "Yeni şifren oldukça zayıf",
+            "tooWeak": "Yeni şifreniz çok zayıf.",
             "row": "Düz tuş satırlarının tahmin edilmesi kolaydır.",
             "pattern": "Kısa klavye kalıplarının tahmin edilmesi kolaydır.",
             "names": "Yaygın adların ve soyadların tahmin edilmesi kolaydır.",
@@ -729,7 +753,7 @@
             "similar": "Bu, yaygın olarak kullanılan bir parolaya benziyor.",
             "word": "Tek bir kelimenin tahmin edilmesi kolaydır.",
             "incorrect": "Şifreniz doğru değil.",
-            "length": "Şifreniz  {length, plural, one {1 character} other {# characters}} den daha fazla olamaz"
+            "length": "Şifreniz {length, plural, one {1 karakter} other {# karakter}}den daha uzun olamaz."
         },
         "pincode": {
             "length": "PINiniz {length, plural, one {1 digit} other {# digits}} uzunluğunda olmalıdır.",
@@ -751,7 +775,7 @@
             "amountTooHigh": "Bu, mevcut bakiyenizden daha büyüktür.",
             "amountNoFloat": "Birimler \"i\" ise, ondalık basamakları kullanamazsınız.",
             "amountInvalidFormat": "Miktar geçersiz görünüyor.",
-            "amountZero": "Toplam miktar 0'dan büyük olmalıdır",
+            "amountZero": "Miktar 0'dan büyük olmalıdır.",
             "wrongAddressPrefix": "Adresler {prefix} ön eki ile başlar.",
             "wrongAddressFormat": "Adres doğru şekilde biçimlendirilmemiş.",
             "invalidAddress": "Adres geçerli değil.",
@@ -765,15 +789,15 @@
             "https": "HTTPS gerekmektedir. Güvenli olmayan HTTP bağlantılarını kullanmak için bir geliştirici profili oluşturun.",
             "duplicate": "Bu sunucu zaten eklenmiş.",
             "unsynced": "Ağ senkronize değil.",
-            "noSynced": "Hiçbir düğüm mevcut değil"
+            "noSynced": "Senkronize node bulunamadı."
         },
         "global": {
             "generic": "Bir şeyler yanlış gitti."
         },
         "backup": {
             "invalid": "Yedek dosyası okunamaz.",
-            "destination": "Yedekleme noktası geçerli değil",
-            "mnemonic": "Nedeni geçerli değil",
+            "destination": "Yedekleme noktası geçerli değil.",
+            "mnemonic": "Hatırlatıcı geçerli değil.",
             "seedTooShort": "Seed 81 karakter uzunluğunda olmalıdır, {length, plural, one {is 1} other {is #}}",
             "seedCharacters": "Seed sadece A-Z veya 9 karakterlerini içeriyor olmalıdır",
             "phraseWordCount": "Kurtarma cümleniz 24 kelimeden oluşmalıdır, şuan {length, plural, one {is 1} other { #}}.",
@@ -783,12 +807,12 @@
     },
     "tooltips": {
         "risk": {
-            "title": "Risk level: {risk}",
-            "veryHigh": "Very high",
-            "high": "High",
-            "medium": "Medium",
-            "low": "Low",
-            "veryLow": "Very low"
+            "title": "Risk seviyesi: {risk}",
+            "veryHigh": "Çok yüksek",
+            "high": "Yüksek",
+            "medium": "Orta",
+            "low": "Düşük",
+            "veryLow": "Çok düşük"
         }
     }
 }

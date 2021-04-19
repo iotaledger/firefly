@@ -109,14 +109,26 @@
             "exportMigration": "Vie migraatioloki ja viimeistele määritys"
         },
         "import": {
-            "title": "Tuo lompakko",
-            "body": "Jos sinulla on palautuslauseke tai Stronghold-varmuuskopio, voit tuoda sen täällä."
+            "title": "Recover or migrate funds",
+            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+            "importSeed": "I have an 81 character seed",
+            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "importMnemonic": "I have a Firefly recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase to recover your wallet",
+            "importFile": "I have a file backup",
+            "importFileDescription": "Upload a Seedvault or Stronghold file"
         },
         "importFromText": {
-            "title": "Palauta lompakkosi palautuslausekkeella tai seed-merkkijonolla",
-            "body1": "Seed-merkkijonossa on 81 merkkiä. Sitä käytetään vanhan Trinity-lompakon palauttamiseen.",
-            "body2": "Palautuslauseke on pituudeltaan 24 sanaa, kaikki pienillä kirjaimilla ja välilyönnit sanojen välissä. Sitä käytetään olemassaolevan Firefly-lompakon palauttamiseen.",
-            "body3": "Syötä seed-merkkijono tai palautuslauseke",
+            "seed": {
+                "title": "Type your seed to commence migration",
+                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+                "enter": "Enter your seed"
+            },
+            "mnemonic": {
+                "title": "Type your recovery phrase",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
+                "enter": "Enter your secret recovery phrase"
+            },
             "seedDetected": "81 merkin seed-luku havaittu",
             "phraseDetected": "24 sanan palautuslauseke havaittu",
             "checksum": "Tarkistussumma"
@@ -265,9 +277,9 @@
                 "confirmNewPincode": "Vahvista uusi PIN-koodi",
                 "action": "Vaihda PIN-koodi"
             },
-            "resyncAccounts": {
-                "title": "Uudelleensynkronoi tilit",
-                "description": "Käynnistää taustatehtävän tilien pitämiseksi ajan tasalla."
+            "balanceFinder": {
+                "title": "Balance finder",
+                "description": "Perform an extended search of your addresses for tokens."
             },
             "hiddenAccounts": {
                 "title": "Piilotetut tilit",
@@ -464,6 +476,12 @@
             "title": "Vahvista siirtotapahtuma",
             "body": "Olet lähettämässä {amount} osoitteeseen"
         },
+        "balanceFinder": {
+            "title": "Balance finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances.",
+            "totalWalletBalance": "Total wallet balance",
+            "typePassword": "Type your password to allow searching."
+        },
         "riskFunds": {
             "title": "Varoitus: varoja riskialttiina migraation aikana",
             "body1": "On erittäin suositeltavaa, että suojaat kaikki varasi ennen migraation jatkamista. Varasi ovat alttiina varkauksille, jos et suojaa niitä.",
@@ -477,8 +495,8 @@
         }
     },
     "charts": {
-        "incomingMi": "Saapuva {value} Mi",
-        "outgoingMi": "Lähtevä {value} Mi",
+        "incomingMi": "Incoming {value}",
+        "outgoingMi": "Outgoing {value}",
         "portoflio": "Portfolio",
         "token": "Token",
         "accountValue": "Tilin arvo",
@@ -572,7 +590,11 @@
         "visitFaq": "Katso usein kysytyt kysymykset",
         "viewStatus": "Näytä tila",
         "showHiddenAccounts": "Näytä piilotetut tilit",
-        "confirm": "Vahvista"
+        "confirm": "Vahvista",
+        "findBalances": "Find balances",
+        "searchBalances": "Search for balances",
+        "searchAgain": "Search again",
+        "searching": "Searching..."
     },
     "general": {
         "password": "Salasana",
@@ -607,10 +629,6 @@
         "yourAddress": "Osoitteesi",
         "generateNewAddress": "Luo uusi osoite",
         "copyAddress": "Kopioi osoite",
-        "haveTextBackup": "Minulla on tekstimuotoinen varmuuskopio",
-        "haveFileBackup": "Minulla on tiedostomuotoinen varmuuskopio",
-        "enterSeedOrPhrase": "Syötä palautuslauseke tai seed-merkkijono",
-        "uploadSeedvaultOrStronghold": "Tuo Stronghold- tai SeedVault-tiedosto",
         "import": "Tuo",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -682,7 +700,13 @@
         "passwordStrength4": "Vahva",
         "creatingProfile": "Luodaan profiilia, odota hetki...",
         "fundMigration": "Varojen migraatio",
-        "accountRemoved": "Tämä tili on piilotettu. Näytä se tehdäksesi siirtoja."
+        "accountRemoved": "Tämä tili on piilotettu. Näytä se tehdäksesi siirtoja.",
+        "receivingTo": "Receiving to {account}",
+        "sendingFrom": "Sending from {account}",
+        "receivedTo": "Received to {account}",
+        "sentFrom": "Sent from {account}",
+        "receiving": "Receiving",
+        "sending": "Sending"
     },
     "dates": {
         "today": "Tänään",

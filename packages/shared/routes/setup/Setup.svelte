@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Illustration, Link, Logo, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, Link, Logo, OnboardingLayout, Text } from 'shared/components'
     import { SetupType } from 'shared/lib/typings/routes'
     import { createEventDispatcher } from 'svelte'
 
@@ -42,8 +42,8 @@
                 <Text type="p" secondary smaller>{locale('actions.restoreWalletDescription')}</Text>
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center p-16 bg-pastel-green dark:bg-gray-900">
-            <Illustration illustration="setup-desktop" width="100%" height="auto" classes="object-cover" />
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
+            <Animation animation="setup-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

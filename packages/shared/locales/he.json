@@ -1,12 +1,12 @@
 {
     "views": {
         "onboarding1": {
-            "title": "שלח, קבל או נהל את המטבעות שלך",
+            "title": "שלח, קבל או נהל את אסימוני הIOTA שלך",
             "body": "Firefly הוא הארנק הרשמי של IOTA."
         },
         "legal": {
             "title": "מדיניות הפרטיות ותנאי השירות",
-            "body": "Please review the Privacy Policy and Terms of Service.",
+            "body": "אנא קראו בעיון את מסמכי מדיניות הפרטיות שלנו.",
             "privacyPolicy": {
                 "title": "מדיניות הפרטיות",
                 "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
@@ -25,28 +25,28 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+            "checkbox": "קראתי, הבנתי והסכמתי עם מדיניות הפרטיות ותנאי השירות"
         },
         "appearance": {
             "title": "מראה",
-            "body": "Choose your wallet’s theme."
+            "body": "בחר את ערכת הנושא של הארנק שלך."
         },
         "profile": {
-            "title": "Create a profile",
-            "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
-            "profileName": "Profile Name"
+            "title": "צור פרופיל",
+            "body1": "ניתן ליצור פרופילים מרובים כדי לארגן את הארנקים שלך ולשפר פרטיות.",
+            "body2": "בינתיים, נתחיל עם פתיחת הפרופיל הראשון שלך. תוכל ליצור פרופילים נוספים בעתיד.",
+            "profileName": "שם הפרופיל"
         },
         "setup": {
-            "title": "Set up a wallet",
-            "chrysalisTitle": "Chrysalis Network Update",
-            "chrysalisBody": "From April 21st, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
-            "learnMore": "Learn about the migration"
+            "title": "הגדר ארנק",
+            "chrysalisTitle": "עדכון רשת הChrysalis",
+            "chrysalisBody": "החל מאפריל 21, משתמשים יכולים לבצע הגירה (migrate) של האסימונים שלהם לרשת הChrysalis החדשה. אנו ממליצים להעביר את כל האסימונים שלך בהקדם האפשרי.",
+            "learnMore": "למד אודות ההגירה"
         },
         "secure": {
-            "title": "אבטח את הארנק",
-            "body1": "Save and print the Recovery Kit PDF template.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
+            "title": "אבטח את הארנק שלך",
+            "body1": "שמור והדפס את תבנית מסמך הPDF של ערכת השחזור.",
+            "body2": "אם תמלא את פרטי ערכת השחזור ותשמור אותם בבטחה, תוכל תמיד לשחזר את הארנק שלך."
         },
         "password": {
             "title": "צור סיסמא חדשה",
@@ -55,78 +55,90 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
-            "body2": "Keep your PIN safe!"
+            "body1": "הגדר מספר זיהוי להתחברות כדי לוודא שרק אתה תוכל להיכנס לארנק.",
+            "body2": "שמור את מספר הזיהוי שלך בבטחה!"
         },
         "pin": {
-            "title": "Set up PIN code",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
+            "title": "הגדר מספר זיהוי",
+            "body1": "הזן מספר זיהוי באורך 6 ספרות למטה. נדרש ממך להכניס את מספר הזיהוי כדי לגשת לפרופיל שלך.",
+            "body2": "השתמש במספרים בלבד"
         },
         "confirmPin": {
-            "title": "Verify your PIN code",
-            "body1": "Your PIN keeps your balance and transactions private.",
-            "body2": "Re-enter your PIN code to proceed. "
+            "title": "אמת את מספר הזיהוי שלך",
+            "body1": "מספר הזיהוי שלך שומר על פרטיות המאזן והטרנזקציות שלך.",
+            "body2": "הזן שוב את מספר הזיהוי שלך כדי להמשיך. "
         },
         "backup": {
-            "title": "Back up your wallet",
-            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
-            "body3": "If you lose your recovery phrase, you may lose your funds."
+            "title": "גבה את הארנק שלך",
+            "body1": "כעט יוצג לך ביטוי שחזור. רשום אותו בערכת השחזור שלך.",
+            "body2": "אל תשתף את ביטוי השחזור שלך עם אף אחד. ניתן להשתמש בו כדי לגשת לאסימונים שלך מכל מקום.",
+            "body3": "אם תאבד את ביטוי השחזור שלך, אתה עלול לאבד את כספים שלך."
         },
         "recoveryPhrase": {
-            "title": "Recovery phrase",
-            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-            "body2": "Keep this private and safely stored.",
-            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
-            "revealRecoveryPhrase": "Reveal recovery phrase",
-            "hideRecoveryPhrase": "Hide recovery phrase"
+            "title": "ביטוי שחזור",
+            "body1": "בערכת השחזור שלך, רשום את המילים בסדר המדויק המוצג.",
+            "body2": "אחסן את זה באופן פרטי ובטוח.",
+            "body3": "חשוב שיהיה גיבוי בכתב יד. מחשבים עשויים לפשל וקבצים עשויים להיפגם.",
+            "revealRecoveryPhrase": "חשוף את ביטוי השחזור",
+            "hideRecoveryPhrase": "הסתר את ביטוי השחזור"
         },
         "verifyRecoveryPhrase": {
-            "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
-            "word": "Word",
-            "verified": "Recovery phrase verified",
-            "verifiedBody": "Remember to keep it private and safely stored."
+            "title": "אמת את ביטוי השחזור",
+            "body": "נבדוק שכתבת את הביטוי בצורה הנכונה. נא לבחור כל מילה לפי הסדר הממוספר שלה.",
+            "word": "מילה",
+            "verified": "ביטוי השחזור אומת",
+            "verifiedBody": "זכור לאחסן אותו במקום פרטי ובטוח."
         },
         "backupWallet": {
-            "title": "Back up to a Stronghold file",
-            "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
-            "body2": "Reasons why digital backups are important:",
-            "reason1": "Easily recover your wallet without typing in your recovery phrase",
-            "reason2": "Import your wallet to other devices",
-            "reason3": "Recover your full transaction history"
+            "title": "גבה לקובץ מבצר (Stronghold)",
+            "body1": "הזן את הסיסמה שלך כדי לגבות את הארנק שלך לקובץ מבצר (Stronghold). יבוצע שימוש בסיסמא שלך כדי להצפין את הגיבוי.",
+            "body2": "סיבות לכך שגיבויים דיגיטליים הם חשובים:",
+            "reason1": "שחזר את הארנק שלך בקלות מבלי לרשום את ביטוי השחזור שלך",
+            "reason2": "יבא את הארנק שלך למכשירים אחרים",
+            "reason3": "שחזר את היסטוריית הטרנזקציות המלאה שלך"
         },
         "recoveryPhraseSaved": {
             "title": "הגיבוי בוצע בהצלחה",
-            "body": "You have backed up your wallet to a Stronghold."
+            "body": "ביצעת גיבוי של הארנק שלך למבצר (Stronghold)."
         },
         "congratulations": {
             "title": "הגדרת הארנק הושלמה",
             "body": "הארנק שלך מוכן לשימוש.",
-            "fundsMigrated": "Funds migrated",
-            "success": "You have successfully migrated your funds to the new network",
-            "exportMigration": "Export migration log and finish setup"
+            "fundsMigrated": "הגירת הכספים בוצעה",
+            "success": "ביצעת בהצלחה את הגירת הכספים שלך לרשת החדשה",
+            "exportMigration": "יצא דוח הגירה וסיים את התהליך"
         },
         "import": {
-            "title": "Import a wallet",
-            "body": "If you have a recovery phrase or Stronghold back up, you can import it here."
+            "title": "Recover or migrate funds",
+            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+            "importSeed": "I have an 81 character seed",
+            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "importMnemonic": "I have a Firefly recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase to recover your wallet",
+            "importFile": "I have a file backup",
+            "importFileDescription": "Upload a Seedvault or Stronghold file"
         },
         "importFromText": {
-            "title": "Restore your wallet with a recovery phrase or seed",
-            "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body2": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
-            "body3": "Enter your seed or recovery phrase",
-            "seedDetected": "81 character seed detected",
-            "phraseDetected": "24 word recovery phrase detected",
-            "checksum": "Checksum"
+            "seed": {
+                "title": "Type your seed to commence migration",
+                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+                "enter": "Enter your seed"
+            },
+            "mnemonic": {
+                "title": "Type your recovery phrase",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
+                "enter": "Enter your secret recovery phrase"
+            },
+            "seedDetected": "זוהה seed באורך 81 תווים",
+            "phraseDetected": "זוהה ביטוי שחזור באורך 24 מילים",
+            "checksum": "סיכום ביקורת"
         },
         "importFromFile": {
-            "title": "Restore your wallet using a backup file",
-            "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "שחזר את הארנק שלך בעזרת קובץ גיבוי",
+            "body": "יבא קובץ גיבוי כדי לשחזר את הארנק שלך. גיבויים יכולים להיות קבצי (stronghold.) או (kdbx.)."
         },
         "importBackupPassword": {
-            "title": "Restore your wallet from a SeedVault or Stronghold",
+            "title": "שחזר את האנרק שלך מSeedVault או מStronghold",
             "body1": "Please enter your backup password.",
             "body2": "This is the password you set when you first created your backup."
         },
@@ -144,7 +156,7 @@
             "body2": "It may take some time. Do not turn off your device during the migration.",
             "existing": "Your old wallet",
             "new": "Your new wallet",
-            "learn": "Learn about the migration",
+            "learn": "למד אודות ההגירה",
             "beginMigration": "Begin Migration",
             "migrating": "Migrating funds...",
             "migrated": "{balance} migrated",
@@ -265,9 +277,9 @@
                 "confirmNewPincode": "אישור קוד גישה",
                 "action": "שינוי קוד גישה"
             },
-            "resyncAccounts": {
-                "title": "Resync accounts",
-                "description": "Starts a background task to make sure your accounts are up to date."
+            "balanceFinder": {
+                "title": "Balance finder",
+                "description": "Perform an extended search of your addresses for tokens."
             },
             "hiddenAccounts": {
                 "title": "Hidden accounts",
@@ -464,6 +476,12 @@
             "title": "Confirm transaction",
             "body": "You’re about to send {amount} to"
         },
+        "balanceFinder": {
+            "title": "Balance finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances.",
+            "totalWalletBalance": "Total wallet balance",
+            "typePassword": "Type your password to allow searching."
+        },
         "riskFunds": {
             "title": "Warning: funds at risk during migration",
             "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
@@ -477,8 +495,8 @@
         }
     },
     "charts": {
-        "incomingMi": "Incoming {value} Mi",
-        "outgoingMi": "Outgoing {value} Mi",
+        "incomingMi": "Incoming {value}",
+        "outgoingMi": "Outgoing {value}",
         "portoflio": "Portfolio",
         "token": "Token",
         "accountValue": "Account Value",
@@ -503,14 +521,14 @@
         "createWalletDescription": "Create a fresh wallet running on Chrysalis",
         "savePassword": "Save password",
         "useBiometric": "Use biometric security",
-        "setupPin": "Set up PIN code",
+        "setupPin": "הגדר מספר זיהוי",
         "setPin": "Set PIN code",
         "confirmPin": "Confirm PIN code",
         "enterYourPin": "Enter your PIN",
         "saveBackupFile": "Save backup file",
         "iveWrittenRecoveryPhrase": "I’ve written down my recovery phrase",
-        "verifyRecoveryPhrase": "Verify recovery phrase",
-        "revealRecoveryPhrase": "Reveal recovery phrase",
+        "verifyRecoveryPhrase": "אמת את ביטוי השחזור",
+        "revealRecoveryPhrase": "חשוף את ביטוי השחזור",
         "importSeedvault": "Import SeedVault",
         "checkAgain": "Check Again",
         "importFromFile": "Import from a file",
@@ -572,7 +590,11 @@
         "visitFaq": "Visit FAQ",
         "viewStatus": "View status",
         "showHiddenAccounts": "Show hidden accounts",
-        "confirm": "Confirm"
+        "confirm": "Confirm",
+        "findBalances": "Find balances",
+        "searchBalances": "Search for balances",
+        "searchAgain": "Search again",
+        "searching": "Searching..."
     },
     "general": {
         "password": "Password",
@@ -607,10 +629,6 @@
         "yourAddress": "Your address",
         "generateNewAddress": "Generate new address",
         "copyAddress": "Copy Address",
-        "haveTextBackup": "I have a text backup",
-        "haveFileBackup": "I have a file backup",
-        "enterSeedOrPhrase": "Enter a recovery phrase or seed",
-        "uploadSeedvaultOrStronghold": "Import a Stronghold or SeedVault file",
         "import": "Import",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -682,7 +700,13 @@
         "passwordStrength4": "Strong",
         "creatingProfile": "Creating profile, please wait...",
         "fundMigration": "Fund migration",
-        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
+        "accountRemoved": "This account is hidden. Unhide it to perform transfers.",
+        "receivingTo": "Receiving to {account}",
+        "sendingFrom": "Sending from {account}",
+        "receivedTo": "Received to {account}",
+        "sentFrom": "Sent from {account}",
+        "receiving": "Receiving",
+        "sending": "Sending"
     },
     "dates": {
         "today": "Today",

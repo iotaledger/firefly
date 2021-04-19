@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Illustration, OnboardingLayout, Password, Spinner, Text } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, Password, Spinner, Text } from 'shared/components'
     import { createEventDispatcher } from 'svelte'
 
     export let locale
@@ -57,7 +57,7 @@
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Illustration illustration="backup-recovery-phrase-desktop" width="100%" height="auto" />
+            <Animation animation="backup-recovery-phrase-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

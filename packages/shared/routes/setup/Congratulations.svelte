@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Icon, Illustration, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import {
         AvailableExchangeRates,
         convertToFiat,
@@ -105,7 +105,7 @@
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Illustration illustration="congratulations-desktop" width="100%" height="auto" />
+            <Animation animation="congratulations-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

@@ -109,14 +109,26 @@
             "exportMigration": "Izvezite detalje o migraciji i dovršite postupak"
         },
         "import": {
-            "title": "Uvezite novčanik",
-            "body": "Ako imate frazu za oporavak ili Stronghold pričuvnu kopiju, možete ih uvesti ovdje."
+            "title": "Recover or migrate funds",
+            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+            "importSeed": "I have an 81 character seed",
+            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "importMnemonic": "I have a Firefly recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase to recover your wallet",
+            "importFile": "I have a file backup",
+            "importFileDescription": "Upload a Seedvault or Stronghold file"
         },
         "importFromText": {
-            "title": "Obnovite svoj novčanik pomoću fraze za oporavak ili seeda",
-            "body1": "Seed se sastoji od 81 znaka. Potreban je za oporavak sredstava iz starijih Trinity novčanika.",
-            "body2": "Fraza za oporavak sastoji se od 24 riječi, pisanih malim slovima, s razmacima između svake. Služi za oporavak postojećeg Firefly novčanika.",
-            "body3": "Unesite svoj seed ili frazu za oporavak",
+            "seed": {
+                "title": "Type your seed to commence migration",
+                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+                "enter": "Enter your seed"
+            },
+            "mnemonic": {
+                "title": "Type your recovery phrase",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
+                "enter": "Enter your secret recovery phrase"
+            },
             "seedDetected": "81 znakova seeda prepoznati",
             "phraseDetected": "Fraza od 24 riječi je prepoznata",
             "checksum": "Kontrolni zbroj"
@@ -265,9 +277,9 @@
                 "confirmNewPincode": "Potvrdite novi PIN",
                 "action": "Promijenite PIN"
             },
-            "resyncAccounts": {
-                "title": "Ponovno sinkroniziranje računa",
-                "description": "Pokreće pozadinski postupak koji će provjeriti jesu li svi vaši računi aktualni."
+            "balanceFinder": {
+                "title": "Balance finder",
+                "description": "Perform an extended search of your addresses for tokens."
             },
             "hiddenAccounts": {
                 "title": "Skriveni računi",
@@ -464,6 +476,12 @@
             "title": "Potvrdi transakciju",
             "body": "Ovim ćete poslati {amount} na račun"
         },
+        "balanceFinder": {
+            "title": "Balance finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances.",
+            "totalWalletBalance": "Total wallet balance",
+            "typePassword": "Type your password to allow searching."
+        },
         "riskFunds": {
             "title": "Upozorenje: sredstva su u opasnosti tijekom migracije",
             "body1": "Najtoplije preporučamo da osigurate svoja sredstva prije no što nastavite s migracijom. Ukoliko to ne učinite vaša sredstva neće biti sigurna od krađe.",
@@ -477,8 +495,8 @@
         }
     },
     "charts": {
-        "incomingMi": "{value} Mi u dolasku",
-        "outgoingMi": "{value} Mi u odlasku",
+        "incomingMi": "Incoming {value}",
+        "outgoingMi": "Outgoing {value}",
         "portoflio": "Portfolio",
         "token": "Token",
         "accountValue": "Ukupna vrijednost računa",
@@ -572,7 +590,11 @@
         "visitFaq": "Posjeti često postavljana pitanja",
         "viewStatus": "Vidi status",
         "showHiddenAccounts": "Prikaži skrivene račune",
-        "confirm": "Potvrdi"
+        "confirm": "Potvrdi",
+        "findBalances": "Find balances",
+        "searchBalances": "Search for balances",
+        "searchAgain": "Search again",
+        "searching": "Searching..."
     },
     "general": {
         "password": "Lozinka",
@@ -607,10 +629,6 @@
         "yourAddress": "Vaša adresa",
         "generateNewAddress": "Stvorite novu adresu",
         "copyAddress": "Kopiraj adresu",
-        "haveTextBackup": "Imam tekstualnu pričuvnu kopiju",
-        "haveFileBackup": "Imam datoteku s pričuvnom kopijom",
-        "enterSeedOrPhrase": "Unesite frazu za oporavak ili seed",
-        "uploadSeedvaultOrStronghold": "Uvezite Stronghold ili SeedVault datoteku",
         "import": "Uvezi",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -682,7 +700,13 @@
         "passwordStrength4": "Jako",
         "creatingProfile": "Stvaram račun, molim pričekajte...",
         "fundMigration": "Prebacivanje sredstava",
-        "accountRemoved": "Ovaj je račun skriven. Kako biste mogli raditi transfere prvo ga morate prikazati."
+        "accountRemoved": "Ovaj je račun skriven. Kako biste mogli raditi transfere prvo ga morate prikazati.",
+        "receivingTo": "Receiving to {account}",
+        "sendingFrom": "Sending from {account}",
+        "receivedTo": "Received to {account}",
+        "sentFrom": "Sent from {account}",
+        "receiving": "Receiving",
+        "sending": "Sending"
     },
     "dates": {
         "today": "Danas",
