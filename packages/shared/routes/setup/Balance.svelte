@@ -54,7 +54,7 @@
     let fiatBalance = getFiatBalance(balance)
 
     let error = getError(balance)
-    let formattedBalance = formatUnitBestMatch(balance)
+    let formattedBalance = formatUnitBestMatch(balance, true, 3)
 
     bundles.subscribe((updatedBundles) => {
         _bundles = updatedBundles
@@ -69,7 +69,7 @@
         _data = updatedData
 
         fiatBalance = getFiatBalance(_data.balance)
-        formattedBalance = formatUnitBestMatch(_data.balance)
+        formattedBalance = formatUnitBestMatch(_data.balance, true, 3)
         error = getError(_data.balance)
     })
 
@@ -109,7 +109,7 @@
                 allowToProceed: true,
                 text: locale('views.migrate.cannotMigrateAllYourFunds', {
                     values: {
-                        value: `${formatUnitBestMatch(totalUnselectedBalance)} (${getFiatBalance(
+                        value: `${formatUnitBestMatch(totalUnselectedBalance, true, 3)} (${getFiatBalance(
                             totalUnselectedBalance
                         ).toUpperCase()})`,
                     },
@@ -138,7 +138,7 @@
                         closePopup()
                         dispatch('next')
                     },
-                    balance: `${formatUnitBestMatch(spentAddressesWithNoBundleHashesTotalBalance)} (${getFiatBalance(
+                    balance: `${formatUnitBestMatch(spentAddressesWithNoBundleHashesTotalBalance, true, 3)} (${getFiatBalance(
                         spentAddressesWithNoBundleHashesTotalBalance
                     ).toUpperCase()})`,
                 },
