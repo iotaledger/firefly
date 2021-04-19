@@ -389,20 +389,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "bee-signing"
-version = "0.1.1-alpha"
-source = "git+https://github.com/iotaledger/bee.git?branch=dev#f4c52456e960a2a69e8665c730fc1b8ef31b8252"
-dependencies = [
- "bee-common-derive",
- "bee-crypto 0.2.1-alpha",
- "bee-ternary 0.4.2-alpha",
- "rand 0.8.3",
- "sha3",
- "thiserror",
- "zeroize",
-]
-
-[[package]]
 name = "bee-ternary"
 version = "0.4.0-alpha"
 source = "git+https://github.com/iotaledger/bee.git?rev=c42171ff33c80cc2efb183e244dc79b7f58d9ac4#c42171ff33c80cc2efb183e244dc79b7f58d9ac4"
