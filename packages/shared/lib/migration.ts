@@ -4,6 +4,7 @@ import type { Address } from 'shared/lib/typings/address'
 import Validator from 'shared/lib/validator'
 import { api } from 'shared/lib/wallet'
 import { derived, get, writable, Writable } from 'svelte/store'
+import { openPopup, closePopup } from 'shared/lib/popup'
 
 export const LOG_FILE_NAME = 'migration.log'
 
@@ -61,6 +62,10 @@ export const migration = writable<MigrationState>({
  * Chrysalis status
  */
 export const chrysalisLive = writable<Boolean>(false)
+/*
+ * ongoingSnapshot
+ */
+export const ongoingSnapshot = writable<Boolean>(false)
 /**
  * Gets migration data and sets it to state
  * 
@@ -570,22 +575,20 @@ export const confirmedBundles = derived(get(migration).bundles, (_bundles) => _b
  */
 // TODO: Update to mainnet chrysalis endpoint
 export const CHRYSALIS_NODE_ENDPOINTS = ['https://api.lb-0.migration4.iotatestmigration4.net/api/v1/info']
-
 /**
 * Default timeout for a request made to an endpoint
 */
 const DEFAULT_CHRYSALIS_NODE_ENDPOINT_TIMEOUT = 5000
+/**
+ * Default interval for polling the market data
+ */
+const DEFAULT_CHRYSALIS_NODE_POLL_INTERVAL = 300000 // 5 minutes
 
 /**
 * Mainnet ID used in a chrysalis node 
 */
 // TODO: Update to 'mainnet'
 const MAINNET_ID = 'migration3'
-
-/**
- * Default interval for polling the market data
- */
-const DEFAULT_CHRYSALIS_NODE_POLL_INTERVAL = 300000 // 5 minutes
 
 type ChrysalisNode = {
     data: ChrysalisNodeData
@@ -613,7 +616,7 @@ export async function pollChrysalisStatus(): Promise<void> {
 /**
  * Stops Chrysalis mainnet poll
  */
-function stopPoll(): void {
+function stopChrysalisStatusPoll(): void {
     if (chrysalisStatusIntervalID) {
         clearInterval(chrysalisStatusIntervalID)
     }
@@ -660,7 +663,7 @@ export async function checkChrysalisStatus(): Promise<void> {
                 const nodeData: ChrysalisNodeData = jsonResponse?.data
                 if (nodeData?.networkId === MAINNET_ID) {
                     chrysalisLive.set(true)
-                    stopPoll()
+                    stopChrysalisStatusPoll()
                     break
                 }
             } else {
@@ -671,6 +674,101 @@ export async function checkChrysalisStatus(): Promise<void> {
             console.error(err.name === "AbortError" ? new Error(`Could not fetch from ${endpoint}.`) : err)
         }
     }
+}
+
+const CHRYSALIS_VARIABLES_ENDPOINT = 'https://gist.githubusercontent.com/begonaalvarezd/639c59dc1b5b940071c85389cece52ac/raw'
+const DEFAULT_CHRYSALIS_VARIABLES_ENDPOINT_TIMEOUT = 5000
+const DEFAULT_CHRYSALIS_VARIABLES_POLL_INTERVAL = 60000 / 10 // 1 minute
+
+type ChrysalisVariables = {
+    snapshot: boolean
+}
+
+export type ChrysalisVariablesValidationResponse = {
+    type: 'ChrysalisVariables'
+    payload: ChrysalisVariables
+}
+
+let snapshotIntervalID = null
+
+/**
+ * Fetches Chrysalis snapshot state
+ *
+ * @method checkChrysalisSnapshot
+ *
+ * @returns {Promise<void>}
+ */
+export async function checkChrysalisSnapshot(): Promise<void> {
+    const requestOptions: RequestInit = {
+        headers: {
+            Accept: 'application/json',
+        },
+    }
+    const endpoint = `${CHRYSALIS_VARIABLES_ENDPOINT}?_=16174438232${new Date().getTime()}`
+    try {
+        const abortController = new AbortController()
+        const timerId = setTimeout(
+            () => {
+                if (abortController) {
+                    abortController.abort();
+                }
+            },
+            DEFAULT_CHRYSALIS_VARIABLES_ENDPOINT_TIMEOUT);
+
+        requestOptions.signal = abortController.signal;
+
+        const response = await fetch(endpoint, requestOptions);
+
+        clearTimeout(timerId)
+
+        const jsonResponse: ChrysalisVariables = await response.json()
+
+        const { isValid, payload } = new Validator().performValidation({
+            type: 'ChrysalisVariables',
+            payload: jsonResponse,
+        })
+        if (isValid) {
+            const _ongoingSnapshot = jsonResponse.snapshot
+            if (get(ongoingSnapshot) === true && _ongoingSnapshot === false && snapshotIntervalID) { // snapshot finished
+                stopChrysalisSnapshotPoll()
+                closePopup()
+            }
+            else if (get(ongoingSnapshot) === false && _ongoingSnapshot === true && !snapshotIntervalID) { // snapshot started
+                blockMigration()
+                pollChrysalisSnapshot()
+            }
+            ongoingSnapshot.set(_ongoingSnapshot)
+        } else {
+            throw new Error(payload.error)
+        }
+    } catch (err) {
+        console.error(err.name === "AbortError" ? new Error(`Could not fetch from ${endpoint}.`) : err)
+    }
+}
+
+/**
+ * Poll the Chrysalis snapshot state at an interval
+ */
+export async function pollChrysalisSnapshot(): Promise<void> {
+    await checkChrysalisSnapshot()
+    snapshotIntervalID = setInterval(async () => checkChrysalisSnapshot(), DEFAULT_CHRYSALIS_VARIABLES_POLL_INTERVAL)
+}
+
+/**
+ * Stops Chrysalis snapshot state poll
+ */
+export function stopChrysalisSnapshotPoll(): void {
+    if (snapshotIntervalID) {
+        clearInterval(snapshotIntervalID)
+        snapshotIntervalID = null
+    }
+}
+
+export function blockMigration(): void {
+    openPopup({
+        type: 'snapshot',
+        hideClose: true,
+    })
 }
 
 /**

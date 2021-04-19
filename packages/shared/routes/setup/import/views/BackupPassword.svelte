@@ -1,8 +1,10 @@
 <script lang="typescript">
     import { Button, Illustration, OnboardingLayout, Password, Spinner, Text } from 'shared/components'
+    import { checkChrysalisSnapshot, ongoingSnapshot } from 'shared/lib/migration'
     import { createEventDispatcher, getContext } from 'svelte'
     import type { Writable } from 'svelte/store'
-    import type { ImportType } from '../Import.svelte'
+    import { get } from 'svelte/store'
+    import { ImportType } from '../Import.svelte'
 
     export let locale
     export let mobile
@@ -13,12 +15,24 @@
     const importType = getContext<Writable<ImportType>>('importType')
 
     let password = ''
+    let snapshotBusy = false
 
     const dispatch = createEventDispatcher()
 
-    function handleContinue() {
+    async function handleContinue() {
         if (password) {
-            dispatch('next', { password })
+            if ($importType === ImportType.SeedVault) {
+                // Migration: snapshot check
+                snapshotBusy = true
+                await checkChrysalisSnapshot()
+                //
+                if (get(ongoingSnapshot) === false) {
+                    dispatch('next', { password })
+                }
+                snapshotBusy = false
+            } else {
+                dispatch('next', { password })
+            }
         }
     }
     function handleBackClick() {
@@ -50,7 +64,7 @@
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
             <Button
                 classes="flex-1"
-                disabled={password.length === 0 || busy || isGettingMigrationData}
+                disabled={password.length === 0 || busy || isGettingMigrationData || snapshotBusy}
                 onClick={() => handleContinue()}>
                 {#if isGettingMigrationData}
                     <Spinner

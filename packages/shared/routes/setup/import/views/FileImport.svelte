@@ -1,6 +1,8 @@
 <script lang="typescript">
+    import { Button, Dropzone, Illustration, OnboardingLayout, Text } from 'shared/components'
+    import { checkChrysalisSnapshot, ongoingSnapshot } from 'shared/lib/migration'
     import { createEventDispatcher } from 'svelte'
-    import { OnboardingLayout, Illustration, Text, Dropzone, Button, Spinner } from 'shared/components'
+    import { get } from 'svelte/store'
 
     export let locale
     export let mobile
@@ -8,13 +10,24 @@
     let fileName
     let filePath
 
-    // TODO: remove this to enable seed support
-    $: isSeedVault = fileName && fileName.endsWith('.kdbx')
+    let snapshotBusy = false
 
     const dispatch = createEventDispatcher()
 
-    function handleContinueClick() {
-        dispatch('next', { file, fileName, filePath })
+    async function handleContinueClick() {
+        const seedvaultRegex = /\.(kdbx)$/i
+        if (seedvaultRegex.test(fileName)) {
+            // Migration: snapshot check
+            snapshotBusy = true
+            await checkChrysalisSnapshot()
+            //
+            if (get(ongoingSnapshot) === false) {
+                dispatch('next', { file, fileName, filePath })
+            }
+            snapshotBusy = false
+        } else {
+            dispatch('next', { file, fileName, filePath })
+        }
     }
     function handleBackClick() {
         dispatch('previous')
@@ -48,7 +61,9 @@
                 allowedExtensions={['kdbx', 'stronghold']} />
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-            <Button classes="flex-1" disabled={!file} onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
+            <Button classes="flex-1" disabled={!file || snapshotBusy} onClick={() => handleContinueClick()}>
+                {locale('actions.continue')}
+            </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
             <Illustration illustration="import-from-file-desktop" width="100%" height="auto" />
