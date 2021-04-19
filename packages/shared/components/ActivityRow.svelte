@@ -30,10 +30,10 @@
 
     const getMessageValue = () => {
         if (cachedMigrationTx) {
-            return formatUnitBestMatch(balance, true, 2)
+            return formatUnitBestMatch(balance, true, 3)
         }
         if (milestonePayload) {
-            return formatUnitBestMatch(getMilestoneMessageValue(milestonePayload, $accounts), true, 2)
+            return formatUnitBestMatch(getMilestoneMessageValue(milestonePayload, $accounts), true, 3)
         }
         return `${!txPayload.data.essence.data.incoming ? '-' : ''}${formatUnitBestMatch(
             txPayload.data.essence.data.value,

@@ -120,7 +120,7 @@
             {/if}
         </div>
         <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
-        <Text bold smaller>{formatUnitBestMatch(value)}</Text>
+        <Text bold smaller>{formatUnitBestMatch(value, true, 2)}</Text>
         <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
         <div class="flex flex-col flex-wrap justify-center items-center text-center">
             {#if receiverAccount}
