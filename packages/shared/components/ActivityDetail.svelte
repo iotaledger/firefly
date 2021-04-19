@@ -1,13 +1,21 @@
 <script lang="typescript">
+    import { Unit } from '@iota/unit-converter'
     import { Icon, Text } from 'shared/components'
+    import { convertToFiat, currencies, CurrencyTypes, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { getInitials, truncateString } from 'shared/lib/helpers'
-    import type { Payload } from 'shared/lib/typings/message'
-    import { formatUnit } from 'shared/lib/units'
-    import { setClipboard } from 'shared/lib/utils'
     import { formatDate } from 'shared/lib/i18n'
-    import type { WalletAccount } from 'shared/lib/wallet'
+    import { activeProfile } from 'shared/lib/profile'
+    import type { Milestone, Payload, Transaction } from 'shared/lib/typings/message'
+    import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
+    import { setClipboard } from 'shared/lib/utils'
+    import {
+        getMilestoneMessageValue,
+        receiverAddressesFromTransactionPayload,
+        sendAddressFromTransactionPayload,
+        WalletAccount,
+    } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import type { Readable, Writable } from 'svelte/store'
+    import type { Writable } from 'svelte/store'
 
     export let id
     export let timestamp
@@ -15,30 +23,83 @@
     export let locale
     export let payload: Payload
     export let onBackClick = () => {}
+    export let balance // migration tx
+
+    let milestonePayload = payload?.type === 'Milestone' ? (payload as Milestone) : undefined
+    let txPayload = payload?.type === 'Transaction' ? (payload as Transaction) : undefined
 
     const accounts = getContext<Writable<WalletAccount[]>>('walletAccounts')
-    const activeAccount = getContext<Readable<WalletAccount>>('selectedAccount')
 
     let senderAccount: WalletAccount
     let receiverAccount: WalletAccount
 
-    let senderAddress: string =
-        payload?.data?.essence?.data?.inputs?.find((input) => /utxo/i.test(input?.type))?.data?.metadata?.address ?? null
+    const prepareSenderAddress = () => {
+        if (txPayload) {
+            return sendAddressFromTransactionPayload(txPayload)
+        } else if (milestonePayload) {
+            return 'Legacy Network'
+        }
 
-    let receiverAddresses: string[] =
-        payload?.data?.essence?.data?.outputs
-            ?.filter((output) => output?.data?.remainder === false)
-            ?.map((output) => output?.data?.address) ?? []
+        return null
+    }
 
-    $: senderAccount = senderAddress
-        ? $accounts?.find((acc) => acc.addresses.some((add) => senderAddress === add.address)) ?? null
-        : null
-    $: receiverAccount = receiverAddresses?.length
-        ? $accounts.find((acc) => acc.addresses.some((add) => receiverAddresses.includes(add.address))) ?? null
-        : null
+    const prepareReceiverAddresses = () => {
+        if (txPayload) {
+            return receiverAddressesFromTransactionPayload(txPayload)
+        } else if (milestonePayload) {
+            const funds = milestonePayload.data.essence.receipt.data.funds
 
-    function isAccountSameAsActive(account) {
-        return account && $activeAccount && account?.id === $activeAccount?.id
+            const firstAccount = $accounts.find((acc) => acc.index === 0)
+            const firstAccountAddresses = firstAccount.addresses.map((address) => address.address)
+
+            const receiverAddresses = funds
+                .filter((fund) => firstAccountAddresses.includes(fund.output.address))
+                .map((fund) => fund.output.address)
+
+            return receiverAddresses
+        }
+
+        return []
+    }
+
+    const prepareSenderAccount = () => {
+        if (txPayload) {
+            return txPayload.data.essence.data.internal
+                ? $accounts.find((acc) => acc.addresses.some((add) => senderAddress === add.address))
+                : null
+        }
+
+        return null
+    }
+
+    const prepareReceiverAccount = () => {
+        if (milestonePayload) {
+            return $accounts.find((acc) => acc.index === 0)
+        }
+
+        if (txPayload) {
+            return txPayload.data.essence.data.internal
+                ? $accounts.find((acc) => acc.addresses.some((add) => receiverAddresses.includes(add.address)))
+                : null
+        }
+
+        return null
+    }
+
+    let senderAddress: string = prepareSenderAddress()
+    let receiverAddresses: string[] = prepareReceiverAddresses()
+
+    $: senderAccount = prepareSenderAccount()
+    $: receiverAccount = prepareReceiverAccount()
+    $: value = milestonePayload
+        ? getMilestoneMessageValue(milestonePayload, $accounts)
+        : txPayload
+        ? txPayload.data.essence.data.value
+        : 0
+    $: currencyValue = convertToFiat(value, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings.currency])
+
+    function isAccountYours(account) {
+        return account && $accounts.find((a) => a.id === account.id)
     }
 </script>
 
@@ -51,7 +112,7 @@
                     class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold text-center bg-{senderAccount?.color ?? 'blue'}-500 text-white">
                     {getInitials(senderAccount.alias, 2)}
                 </div>
-                {#if isAccountSameAsActive(senderAccount)}
+                {#if isAccountYours(senderAccount)}
                     <Text smaller>{locale('general.you')}</Text>
                 {/if}
             {:else}
@@ -59,7 +120,7 @@
             {/if}
         </div>
         <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
-        <Text bold smaller>{formatUnit(payload.data.essence.data.value)}</Text>
+        <Text bold smaller>{formatUnitBestMatch(value)}</Text>
         <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
         <div class="flex flex-col flex-wrap justify-center items-center text-center">
             {#if receiverAccount}
@@ -68,7 +129,7 @@
                     {getInitials(receiverAccount.alias, 2)}
                 </div>
             {/if}
-            {#if isAccountSameAsActive(receiverAccount)}
+            {#if isAccountYours(receiverAccount)}
                 <Text smaller>{locale('general.you')}</Text>
             {:else}
                 {#each receiverAddresses as address}
@@ -120,6 +181,22 @@
                         <Text type="pre" classes="mb-2">{receiver}</Text>
                     </button>
                 {/each}
+            </div>
+        {/if}
+        {#if txPayload || milestonePayload}
+            <div class="mb-5">
+                <Text secondary>{locale('general.amount')}</Text>
+                <div class="flex flex-col mt-2">
+                    <button class="text-left" on:click={() => setClipboard(currencyValue.toString())}>
+                        <Text type="pre" classes="mb-2">{formatCurrency(currencyValue)}</Text>
+                    </button>
+                    <button class="text-left" on:click={() => setClipboard(formatUnitBestMatch(value))}>
+                        <Text type="pre" classes="mb-2">{formatUnitBestMatch(value)}</Text>
+                    </button>
+                    <button class="text-left" on:click={() => setClipboard(value.toString())}>
+                        <Text type="pre" classes="mb-2">{formatUnitPrecision(value, Unit.i, true, true)}</Text>
+                    </button>
+                </div>
             </div>
         {/if}
     </div>

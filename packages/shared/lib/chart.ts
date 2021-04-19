@@ -1,7 +1,8 @@
-import { convertUnits, Unit } from '@iota/unit-converter'
+import { Unit } from '@iota/unit-converter'
 import { AvailableExchangeRates, convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
 import { localize } from 'shared/lib/i18n'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
+import { formatUnitPrecision } from 'shared/lib/units'
 import type { WalletAccount } from 'shared/lib/wallet'
 import { isSelfTransaction, wallet } from 'shared/lib/wallet'
 import { formatDate } from 'shared/lib/i18n'
@@ -158,19 +159,22 @@ export const getAccountActivityData = (account: WalletAccount) => {
             if (new Date(messages[messages.length - 1].timestamp).getTime() >= start && new Date(messages[messages.length - 1].timestamp).getTime() <= end) {
                 for (index; index < messages.length; index++) {
                     const message = messages[index]
-                    const messageTimestamp = new Date(message.timestamp).getTime()
-                    if (messageTimestamp >= start && messageTimestamp <= end) {
-                        const valueMiota = convertUnits(message.payload.data.essence.data.value, Unit.i, Unit.Mi)
-                        if (message.payload.data.essence.data.incoming) {
-                            _incoming += valueMiota
+
+                    if (message.payload.type === 'Transaction') {
+                        const messageTimestamp = new Date(message.timestamp).getTime()
+                        if (messageTimestamp >= start && messageTimestamp <= end) {
+                            if (message.payload.data.essence.data.incoming) {
+                                _incoming += message.payload.data.essence.data.value
+                            }
+                            else {
+                                _outgoing += message.payload.data.essence.data.value
+                            }
                         }
-                        else {
-                            _outgoing += valueMiota
-                        }
+                        else if (messageTimestamp > end) return
                     }
-                    else if (messageTimestamp > end) return
                 }
             }
+
             incoming.data.unshift(_incoming)
             incoming.tooltips.unshift({
                 title: formatDate(new Date(start), {
@@ -179,7 +183,7 @@ export const getAccountActivityData = (account: WalletAccount) => {
                 }),
                 label: localize('charts.incomingMi', {
                     values: {
-                        value: _incoming
+                        value: formatUnitPrecision(_incoming, Unit.Mi, true)
                     }
                 })
             })
@@ -190,7 +194,7 @@ export const getAccountActivityData = (account: WalletAccount) => {
                     month: 'long'
                 }), label: localize('charts.outgoingMi', {
                     values: {
-                        value: _outgoing
+                        value: formatUnitPrecision(_outgoing, Unit.Mi, true)
                     }
                 })
             })

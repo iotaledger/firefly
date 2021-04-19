@@ -48,7 +48,8 @@
                 break
 
             case BackupState.RecoveryPhrase:
-                nextState = BackupState.Verify
+                // TODO: Reenable before production
+                nextState = BackupState.Backup
                 break
 
             case BackupState.Verify:
@@ -67,6 +68,7 @@
                     } else {
                         const dest = await Electron.getStrongholdBackupDestination(getDefaultStrongholdName())
                         if (dest) {
+
                             busy = true
                             await asyncStoreMnemonic(get(mnemonic).join(' '))
                             await asyncCreateAccount()

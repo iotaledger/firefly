@@ -12,5 +12,7 @@ export interface Address {
     balance: number
     keyIndex: number
     internal: boolean
-    outputs: AddressOutput[]
+    outputs: {
+        [key: string]: AddressOutput
+    }
 }

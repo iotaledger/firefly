@@ -24,7 +24,7 @@
     }
 
     const handlViewAddressHistoryClick = () => {
-        openPopup({ type: 'addressHistory', props: { account } })
+        openPopup({ type: 'addressHistory', wide: true, props: { account } })
         isActive = false
     }
     const handleHideAccountClick = () => {

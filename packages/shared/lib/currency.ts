@@ -1,4 +1,6 @@
-import { writable } from 'svelte/store'
+import { get, writable } from 'svelte/store'
+import { appSettings } from './appSettings'
+import { activeProfile } from './profile'
 
 export enum CurrencyTypes {
     BTC = 'btc',
@@ -89,7 +91,7 @@ export type ExchangeRates = {
 /**
  * Default exchange rates
  */
-const DEFAULT_EXCHANGE_RATES = {
+const DEFAULT_EXCHANGE_RATES: { [key in AvailableExchangeRates]: number } = {
     [AvailableExchangeRates.AUD]: 1,
     [AvailableExchangeRates.BGN]: 1,
     [AvailableExchangeRates.BRL]: 1,
@@ -158,14 +160,136 @@ export const convertToFiat = (amount: number, usdPrice: number, conversionRate: 
  *
  * @returns {string}
  */
-export const formatCurrencyValue = (data: (number | string), currency: string, fiatFixed: number = 2, btcFixed: number = 7, ethFixed: number = 6, ): string => {
+export const formatCurrencyValue = (data: (number | string), currency: string, fiatFixed: number = 2, btcFixed: number = 7, ethFixed: number = 6,): string => {
     const parsedData: number = parseFloat(data.toString())
-    switch(currency.toLowerCase()) {
+    switch (currency.toLowerCase()) {
         case CurrencyTypes.BTC:
-            return parsedData.toFixed(btcFixed)
+            return replaceCurrencyDecimal(parsedData.toFixed(btcFixed), 'USD')
         case CurrencyTypes.ETH:
-            return parsedData.toFixed(ethFixed)
+            return replaceCurrencyDecimal(parsedData.toFixed(ethFixed), 'USD')
         default:
-            return parsedData.toFixed(fiatFixed)
+            return replaceCurrencyDecimal(parsedData.toFixed(fiatFixed), currency)
     }
 }
+
+export const getDecimalSeparator = (currency: string | undefined = undefined) => {
+    const appLanguage = get(appSettings).language
+
+    if (!currency) {
+        currency = get(activeProfile)?.settings?.currency
+    }
+
+    return Intl.NumberFormat(appLanguage, {
+        style: 'currency',
+        currency: currency ?? 'USD',
+    })
+        .formatToParts(1.1)
+        .find(part => part.type === 'decimal')
+        .value;
+}
+
+export const getCurrencyPosition = (): "left" | "right" => {
+    const appLanguage = get(appSettings).language
+
+    const format = Intl.NumberFormat(appLanguage, {
+        style: 'currency',
+        currency: 'USD'
+    }).formatToParts(1.1)
+
+    return format.findIndex(p => p.type === "currency") === 0 ? 'left' : 'right'
+}
+
+export const getGroupSeparator = (currency: string | undefined = undefined) => {
+    const appLanguage = get(appSettings).language
+
+    if (!currency) {
+        currency = get(activeProfile)?.settings?.currency
+    }
+
+    return Intl.NumberFormat(appLanguage, {
+        style: 'currency',
+        currency: currency ?? 'USD',
+    })
+        .formatToParts(1111)
+        .find(part => part.type === 'group')
+        .value;
+}
+
+
+export const getAllDecimalSeparators = () => {
+    return ['.', ',']
+}
+
+export const parseCurrency = (valueString: string, currency: string | undefined = undefined): number => {
+    // Need to escape the character in the regex in case it is . otherwise it will replace all characters
+    const v = valueString.replace(new RegExp(`\\${getGroupSeparator()}`, 'g'), '')
+    return Number.parseFloat(v.replace(getDecimalSeparator(currency), '.'))
+}
+
+export const formatCurrency = (value: number, currency: string | undefined = undefined, minDecimals: number | undefined = undefined, maxDecimals: number | undefined = undefined, grouped: boolean = false): string => {
+    if (Number.isNaN(value)) {
+        return ''
+    }
+
+    const appLanguage = get(appSettings).language
+
+    if (!currency) {
+        currency = get(activeProfile)?.settings?.currency
+    }
+
+    const parts = Intl.NumberFormat(appLanguage, {
+        style: 'currency',
+        currency: currency ?? 'USD',
+        currencyDisplay: 'symbol',
+        minimumFractionDigits: minDecimals ?? 2,
+        maximumFractionDigits: maxDecimals,
+        useGrouping: grouped
+    }).formatToParts(value)
+
+    // Default symbol usage does not always include a literal beside 
+    // the
+    const curIndex = parts.findIndex(p => p.type === "currency")
+    if (curIndex >= 0) {
+        if (curIndex === 0 && parts[curIndex + 1].type !== "literal") {
+            parts.splice(curIndex + 1, 0, { type: "literal", value: " " })
+        } else if (parts[curIndex - 1].type !== "literal") {
+            parts.splice(curIndex, 0, { type: "literal", value: " " })
+        }
+    }
+
+    return parts.map(p => p.value).join('')
+}
+
+export const formatNumber = (value: number, minDecimals: number | undefined = undefined, maxDecimals: number | undefined = undefined, maxZeros: number = 2, grouped: boolean = false): string => {
+    const appLanguage = get(appSettings).language
+
+    const formatted = Intl.NumberFormat(appLanguage, {
+        minimumFractionDigits: minDecimals ?? 2,
+        maximumFractionDigits: maxDecimals,
+        useGrouping: grouped
+    }).format(value)
+
+    return ensureZeros(formatted, maxZeros)
+}
+
+export const ensureZeros = (val: string, maxZeros: number): string => {
+    const decimalSeparator = getDecimalSeparator()
+
+    const parts = val.split(decimalSeparator)
+
+    // If there are more then decimal places and it is just 0s remove them
+    if (parts[1].length > maxZeros) {
+        parts[1] = `${parts[1].slice(0, maxZeros)}${parts[1].slice(maxZeros).replace(/0+$/, '')}`
+    }
+
+    if (parts[1].length > 0) {
+        return `${parts[0]}${decimalSeparator}${parts[1]}`
+    } else {
+        return parts[0]
+    }
+}
+
+export const replaceCurrencyDecimal = (value: string, currency: string | undefined = undefined): string => {
+    return value.replace('.', getDecimalSeparator(currency))
+}
+

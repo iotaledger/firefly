@@ -81,9 +81,9 @@ export const logout = () => {
             isStrongholdLocked.set(true)
             clearSendParams()
             closePopup()
+            clearActiveProfile()
             resetWallet()
             resetRouter()
-            clearActiveProfile()
             loggedIn.set(false)
 
             resolve()

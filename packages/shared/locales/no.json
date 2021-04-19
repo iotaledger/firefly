@@ -31,11 +31,17 @@
             "title": "Utseende",
             "body": "Velg tema for lommeboken."
         },
-        "setup": {
-            "title": "Sett opp lommeboken din",
-            "body1": "Du kan opprette flere brukerprofiler for å holde dine tokens adskilt og forbedre personvernet.",
+        "profile": {
+            "title": "Opprett profil",
+            "body1": "Du kan opprette flere brukerprofiler for å organisere dine lommebøker og forbedre ditt personvern.",
             "body2": "La oss nå starte med ditt første profilnavn. Du kan legge til flere profiler senere.",
             "profileName": "Profilnavn"
+        },
+        "setup": {
+            "title": "Sett opp en lommebok",
+            "chrysalisTitle": "Chrysalis Nettverksoppdatering",
+            "chrysalisBody": "Fra den 21. april kan brukere migrere tokens til det nye Chrysalis nettverket. Vi anbefaler at du migrerer dine eksisterende tokens så fort som mulig.",
+            "learnMore": "Lær om migrasjonen"
         },
         "secure": {
             "title": "Sikre din lommebok",
@@ -97,7 +103,10 @@
         },
         "congratulations": {
             "title": "Oppsett av lommebok fullført",
-            "body": "Din nye lommebok er klar til bruk."
+            "body": "Din nye lommebok er klar til bruk.",
+            "fundsMigrated": "Midlene er migrert",
+            "success": "Migreringen av dine midler til det nye nettverket var vellykket",
+            "exportMigration": "Eksporter migrasjonsloggen og fullfør oppsettet"
         },
         "import": {
             "title": "Importer en lommebok",
@@ -109,7 +118,8 @@
             "body2": "En gjenopprettingsfrase består av 24 ord med små bokstaver, skilt med mellomrom. Den brukes til å gjenopprette en eksisterende Firefly-lommebok.",
             "body3": "Angi gjenopprettingsfrasen eller hovednøkkelen din",
             "seedDetected": "Hovednøkkel med 81 tegn oppdaget",
-            "phraseDetected": "24 ords gjenopprettingsfrase oppdaget"
+            "phraseDetected": "24 ords gjenopprettingsfrase oppdaget",
+            "checksum": "Sjekksum"
         },
         "importFromFile": {
             "title": "Gjenopprett lommeboken din ved hjelp av en sikkerhetskopifil",
@@ -130,10 +140,58 @@
         },
         "migrate": {
             "title": "Overfør midlene dine",
-            "body1": "Dette er en automatisert prosess for å overføre midlene dine til din nye lommebok. Vi vil se etter brukte adresser som svekker sikkerhet din.",
+            "body1": "Dette er en automatisk prosess for å overføre dine midler til din nye lommebok.",
             "body2": "Dette kan ta litt tid. Ikke slå av enheten under overføringen.",
             "existing": "Din gamle lommebok",
-            "new": "Din nye lommebok"
+            "new": "Din nye lommebok",
+            "learn": "Lær om migrasjonen",
+            "beginMigration": "Begynn migrering",
+            "migrating": "Migrerer midler...",
+            "migrated": "{balance} migrert",
+            "migrationFailed": "Migrasjon mislyktes",
+            "noAddressesForMigration": "Vennligst velg adressene du ønsker å sikre.",
+            "restoringWallet": "Gjenoppretter lommeboken...",
+            "findingBalance": "Finner saldo...",
+            "incorrectSeedVaultPassword": "Feil passord for SeedVault.",
+            "signingBundle": "Signerer bundle",
+            "broadcastingBundle": "Kringkaster bundle",
+            "miningBundle": "Mining bundle",
+            "problemRestoringWallet": "Det oppsto et problem under gjenopprettingen av din lommebok. Vennligst prøv igjen.",
+            "minimumMigrationAmountSpentAddresses": "Minste overføringsbeløp for hver brukte adresse er 1 Mi. Sjekk igjen om din saldo ser riktig ut.",
+            "tooManyAddressesToMigrate": "Du har for mange adresser med lav saldo til å migrere. Sjekk igjen om din saldo ser riktig ut.",
+            "cannotMigrateAllYourFunds": "Vi kan ikke migrere alle dine midler fordi noen adresser har for lav verdi. Du kan allikevell fortsette. {value} vil gå tapt.",
+            "error": "Det oppsto en feil ved migreringen av dine midler. Vennligst prøv igjen."
+        },
+        "bundleMiningWarning": {
+            "title": "Advarsel",
+            "body1": "Du har midler på én eller flere brukte adresser.",
+            "body2": "Vi anbefaler deg å kjøre en automatisert prosess for å hjelpe deg med å sikre og overføre disse midlene på en trygg måte.",
+            "body3": "Hvis du lukker appen, må du starte hele migreringen på nytt.",
+            "learn": "Lær om brukte adresser"
+        },
+        "secureSpentAddresses": {
+            "title": "Sikre brukte adresser",
+            "body1": "Det er oppdaget at du har midler på {number, plural, one {# brukt adresse} other {# brukte adresser}}.",
+            "body2": "Vi anbefaler deg å kjøre en automatisert prosess for å hjelpe deg med å sikre og overføre dine midler på en trygg måte.",
+            "error": "Du kan ikke migrere brukte adresser med mindre enn 1 Mi"
+        },
+        "securityCheckCompleted": {
+            "title": "Sikkerhetskontroll fullført",
+            "body1": "Vi har beregnet sikkerhetsrisikonivået. Å kjøre denne prosessen igjen kan redusere ditt risikonivå.",
+            "body2": "Når du er fornøyd med risikonivået/-nivåene trykker du på fortsett.",
+            "rerun": "Kjør prosessen for valgte adresser igjen",
+            "continueMigration": "Fortsett migrering"
+        },
+        "securingSpentAddresses": {
+            "title": "Sikrer brukte adresser...",
+            "body1": "Denne prosessen vil ta {minutes, plural, one {1 minutt} other {# minutter}}.",
+            "body2": "Datamaskinen din vil kjøre med full kapasitet, du kan kanskje ønske å gjøre noe annet mens du venter på at dette skal fullføres."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly vil nå gå videre med migreringen av dine midler. Dette kan ta en stund.",
+            "migrate": "Migrer midler",
+            "transaction": "Transaksjon {number}",
+            "rerun": "Prøv på nytt"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,7 +199,9 @@
         },
         "balance": {
             "title": "Din saldo",
-            "body": "Er saldoen riktig?"
+            "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
+            "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
+            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly."
         },
         "settings": {
             "settings": "Innstillinger",
@@ -242,7 +302,7 @@
                 "noNodes": "Ingen noder, automatisk selektering brukes i stedet."
             },
             "proofOfWork": {
-                "title": "Bevis på arbeid",
+                "title": "Proof of work",
                 "description": "Fullfør proof of work lokalt på din enhet eller deleger arbeidet til noden"
             },
             "errorLog": {
@@ -403,6 +463,17 @@
         "transaction": {
             "title": "Bekreft transaksjon",
             "body": "Du er i ferd med å sende {amount} til"
+        },
+        "riskFunds": {
+            "title": "Warning: funds at risk during migration",
+            "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
+            "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
+        },
+        "missingBundle": {
+            "title": "Warning: funds at risk during migration",
+            "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
+            "learnMore": "Learn more about spent addresses",
+            "proceed": "I understand the risk"
         }
     },
     "charts": {
@@ -412,10 +483,10 @@
         "token": "Token",
         "accountValue": "Kontoverdi",
         "accountActivity": "Kontoaktivitet",
-        "timeframe1Hour": "1 hour",
-        "timeframe1Day": "1 day",
-        "timeframe1Week": "1 week",
-        "timeframe1Month": "1 month"
+        "timeframe1Hour": "1 time",
+        "timeframe1Day": "1 dag",
+        "timeframe1Week": "1 uke",
+        "timeframe1Month": "1 måned"
     },
     "actions": {
         "continue": "Fortsett",
@@ -423,10 +494,13 @@
         "cancel": "Avbryt",
         "close": "Lukk",
         "dismiss": "Avvis",
+        "proceedAnyway": "Proceed anyway",
         "save": "Lagre",
         "importSeed": "Importer en eksisterende hovednøkkel",
-        "importWallet": "Importer en eksisterende lommebok",
+        "restoreWallet": "Migrate or restore a wallet",
+        "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
         "createWallet": "Opprett en ny lommebok",
+        "createWalletDescription": "Create a fresh wallet running on Chrysalis",
         "savePassword": "Lagre passord",
         "useBiometric": "Bruk biometrisk sikkerhet",
         "setupPin": "Opprett PIN-kode",
@@ -438,7 +512,7 @@
         "verifyRecoveryPhrase": "Bekreft gjenopprettingsfrasen",
         "revealRecoveryPhrase": "Vis gjenopprettingsfrasen",
         "importSeedvault": "Importer SeedVault",
-        "checkAgain": "Nei, sjekk igjen",
+        "checkAgain": "Check Again",
         "importFromFile": "Importer fra fil",
         "send": "Send",
         "receive": "Motta",
@@ -489,12 +563,14 @@
         "hideDetails": "Skjul detaljer",
         "yes": "Ja",
         "no": "Nei",
+        "skip": "Skip",
         "reset": "Tilbakestill",
         "downloadRecoveryKit": "Lagre mal for Recovery Kit",
         "skipBackup": "Hopp over filsikkerhetskopi",
         "finishSetup": "Fullfør oppsett",
         "readDocumentation": "Les dokumentasjonen",
         "visitFaq": "Besøk FAQ",
+        "viewStatus": "View status",
         "showHiddenAccounts": "Vis skjulte kontoer",
         "confirm": "Bekreft"
     },
@@ -554,6 +630,7 @@
         "manualNodeSelection": "Manuell node selektering",
         "profiles": "Profiler",
         "developerProfile": "Utviklerprofil",
+        "developerProfileDescription": "Allows you to connect to testnets",
         "dev": "Utvikling",
         "createAccount": "Opprett konto",
         "accountName": "Kontonavn",
@@ -604,6 +681,7 @@
         "passwordStrength3": "Gjennomsnittlig",
         "passwordStrength4": "Sterk",
         "creatingProfile": "Oppretter profil, vennligst vent...",
+        "fundMigration": "Fund migration",
         "accountRemoved": "Denne kontoen er skjult. Vis den for å utføre overføringer."
     },
     "dates": {
@@ -627,7 +705,9 @@
         "calcMinutesRemaining": "Beregner minutter som gjenstår...",
         "minutesRemaining": "{minutes, plural, one {1 minutt gjenstår} other {# minutter gjenstår}}",
         "copiedToClipboard": "Kopiert til utklippstavle",
-        "accountsSynchronized": "Synkronisering av konto fullført"
+        "accountsSynchronized": "Synkronisering av konto fullført",
+        "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
+        "migratedAccountChrysalisUp": "Your funds will become available shortly"
     },
     "error": {
         "profile": {
@@ -699,6 +779,16 @@
             "phraseWordCount": "Det skal være 24 ord i gjenopprettingsfrasen din, akkurat nå er det {length, plural, one {1} other {#}}.",
             "phraseUnrecognizedWord": "Ukjent ord \"{word}\" i gjenopprettingsfrasen din.",
             "phraseCaseWord": "Ordet \"{word}\" kan kun ha små bokstaver"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Risk level: {risk}",
+            "veryHigh": "Very high",
+            "high": "High",
+            "medium": "Medium",
+            "low": "Low",
+            "veryLow": "Very low"
         }
     }
 }

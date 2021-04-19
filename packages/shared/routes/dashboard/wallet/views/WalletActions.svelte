@@ -1,13 +1,11 @@
 <script lang="typescript">
     import { AccountTile, Button, Text } from 'shared/components'
-    import { loggedIn } from 'shared/lib/app'
-    import { closePopup, openPopup } from 'shared/lib/popup'
     import { activeProfile } from 'shared/lib/profile'
     import { accountRoute, walletRoute } from 'shared/lib/router'
     import { AccountRoutes, WalletRoutes } from 'shared/lib/typings/routes'
     import { selectedAccountId, WalletAccount } from 'shared/lib/wallet'
     import { getContext } from 'svelte'
-    import type { Readable, Writable } from 'svelte/store'
+    import type { Readable } from 'svelte/store'
     import { Receive, Send } from '.'
 
     export let locale
@@ -17,31 +15,9 @@
     export let isGeneratingAddress
 
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
-    const accountsLoaded = getContext<Writable<boolean>>('walletAccountsLoaded')
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
 
-    let startInit
-
-    if ($walletRoute === WalletRoutes.Init && !$accountsLoaded && $loggedIn) {
-        startInit = Date.now()
-        openPopup({
-            type: 'busy',
-            hideClose: true,
-            fullScreen: true,
-            transition: false,
-        })
-    }
-
-    $: {
-        if ($accountsLoaded) {
-            const minTimeElapsed = 3000 - (Date.now() - startInit)
-            if (minTimeElapsed < 0) {
-                closePopup()
-            } else {
-                setTimeout(() => closePopup(), minTimeElapsed)
-            }
-        }
-    }
+    $: waitingChrysalis = $activeProfile?.migratedTransactions?.length
 
     function handleAccountClick(accountId) {
         selectedAccountId.set(accountId)
@@ -58,7 +34,9 @@
         <div data-label="accounts" class="w-full h-full flex flex-col flex-no-wrap justify-start">
             <div class="flex flex-row mb-4 justify-between items-center">
                 <Text type="h5">{locale('general.myAccounts')}</Text>
-                <Button onClick={handleCreateClick} secondary small showHoverText icon="plus">{locale('actions.create')}</Button>
+                <Button disabled={waitingChrysalis} onClick={handleCreateClick} secondary small showHoverText icon="plus">
+                    {locale('actions.create')}
+                </Button>
             </div>
             {#if $viewableAccounts.length > 0}
                 <div
@@ -69,8 +47,9 @@
                             name={account.alias}
                             balance={account.balance}
                             balanceEquiv={account.balanceEquiv}
-                            hidden={hiddenAccounts.includes(account.id)}
                             size={$viewableAccounts.length === 1 ? 'l' : 'm'}
+                            hidden={hiddenAccounts.includes(account.id)}
+                            disabled={waitingChrysalis}
                             onClick={() => handleAccountClick(account.id)} />
                     {/each}
                 </div>

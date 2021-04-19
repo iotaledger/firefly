@@ -31,11 +31,17 @@
             "title": "ظاهر",
             "body": "تم کیف پول خود را انتخاب کنید."
         },
+        "profile": {
+            "title": "Create a profile",
+            "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "profileName": "Profile Name"
+        },
         "setup": {
-            "title": "راه اندازی کیف پول",
-            "body1": "شما میتوانید برای نگهداری توکن های خود به صورت جداگانه و ارتقای حریم خصوصی، چندین پروفایل کاربری درست کنید.",
-            "body2": "برای الان٬ از نام اولین پروفایل خود شروع کنید. شما میتوانید پروفایل های بیشتری را بعدا اضافه کنید.",
-            "profileName": "نام پروفایل"
+            "title": "Set up a wallet",
+            "chrysalisTitle": "Chrysalis Network Update",
+            "chrysalisBody": "From April 21st, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
+            "learnMore": "Learn about the migration"
         },
         "secure": {
             "title": "ایمن سازی کیف پول",
@@ -97,7 +103,10 @@
         },
         "congratulations": {
             "title": "راه اندازی کیف پول کامل شد",
-            "body": "کیف پول جدید شما آماده استفاده میباشد."
+            "body": "کیف پول جدید شما آماده استفاده میباشد.",
+            "fundsMigrated": "Funds migrated",
+            "success": "You have successfully migrated your funds to the new network",
+            "exportMigration": "Export migration log and finish setup"
         },
         "import": {
             "title": "یک کیف پول وارد کنید",
@@ -109,7 +118,8 @@
             "body2": "عبارت بازیابی 24 کلمه می باشد، تماما حروف کوچک، با جدا کننده فاصله بین آنها. این عبارت برای بازیابی کیف پول فایرفلای که قبلا ایجاد شده است استفاده می شود.",
             "body3": "سید یا عبارت بازیابی خود را وارد کنید.",
             "seedDetected": "سید 81 کاراکتری یافت شد",
-            "phraseDetected": "عبارت بازیابی 24 کلمه ای یافت شد"
+            "phraseDetected": "عبارت بازیابی 24 کلمه ای یافت شد",
+            "checksum": "Checksum"
         },
         "importFromFile": {
             "title": "بازگرداندنی کیف پول توسط فایل بک آپ",
@@ -130,10 +140,58 @@
         },
         "migrate": {
             "title": "توکن های خود را انتقال دائمی دهید",
-            "body1": "این یک فرایند خودکار میباشد تا توکن های شما به والت جدید منتقل شود. ما آدرس هایی را که قبلا استفاده شده و امنیت شما را پایین می آورد٬ چک میکنیم.",
+            "body1": "This is an automated process to transfer your funds to your new wallet.",
             "body2": "این فرایند زمان بر میباشد. دستگاه خود را حین انتقال دائمی خاموش نکنید.",
             "existing": "کیف پول قدیمی شما",
-            "new": "کیف پول جدید شما"
+            "new": "کیف پول جدید شما",
+            "learn": "Learn about the migration",
+            "beginMigration": "Begin Migration",
+            "migrating": "Migrating funds...",
+            "migrated": "{balance} migrated",
+            "migrationFailed": "Migration Failed",
+            "noAddressesForMigration": "Please select the addresses you wish to secure.",
+            "restoringWallet": "Restoring wallet...",
+            "findingBalance": "Finding balance...",
+            "incorrectSeedVaultPassword": "Incorrect SeedVault password.",
+            "signingBundle": "Signing bundle",
+            "broadcastingBundle": "Broadcasting bundle",
+            "miningBundle": "Mining bundle",
+            "problemRestoringWallet": "There was a problem restoring your wallet. Please try again.",
+            "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
+            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. {value} will be lost.",
+            "error": "There was an error migrating your funds. Please try again."
+        },
+        "bundleMiningWarning": {
+            "title": "Warning",
+            "body1": "You have funds on one or more spent addresses.",
+            "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
+            "body3": "If you close the app you will need to restart the whole migration.",
+            "learn": "Learn about spent addresses"
+        },
+        "secureSpentAddresses": {
+            "title": "Secure spent addresses",
+            "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.",
+            "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",
+            "error": "You can’t migrate spent addresses with less than 1 Mi"
+        },
+        "securityCheckCompleted": {
+            "title": "Security check completed",
+            "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
+            "body2": "When you are happy with the risk level(s) press continue.",
+            "rerun": "Rerun process for selected addresses",
+            "continueMigration": "Continue migration"
+        },
+        "securingSpentAddresses": {
+            "title": "Securing spent addresses...",
+            "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
+            "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
+            "migrate": "Migrate funds",
+            "transaction": "Transaction {number}",
+            "rerun": "تلاش مجدد"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,7 +199,9 @@
         },
         "balance": {
             "title": "موجودی شما",
-            "body": "آیا موجودی شما درست است؟"
+            "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
+            "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
+            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly."
         },
         "settings": {
             "settings": "تنظیمات",
@@ -403,6 +463,17 @@
         "transaction": {
             "title": "تایید تراکنش",
             "body": "شما در حال انتقال مقدار {amount} هستید به"
+        },
+        "riskFunds": {
+            "title": "Warning: funds at risk during migration",
+            "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
+            "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
+        },
+        "missingBundle": {
+            "title": "Warning: funds at risk during migration",
+            "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
+            "learnMore": "Learn more about spent addresses",
+            "proceed": "I understand the risk"
         }
     },
     "charts": {
@@ -423,10 +494,13 @@
         "cancel": "لغو",
         "close": "بستن",
         "dismiss": "نادیده گرفتن",
+        "proceedAnyway": "Proceed anyway",
         "save": "ذخیره",
         "importSeed": "وارد کردن سید موجود",
-        "importWallet": "وارد کردن کیف پول موجود",
+        "restoreWallet": "Migrate or restore a wallet",
+        "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
         "createWallet": "ایجاد کیف پول جدید",
+        "createWalletDescription": "Create a fresh wallet running on Chrysalis",
         "savePassword": "ذخیره رمزعبور",
         "useBiometric": "استفاده از امنیت بیومتریک",
         "setupPin": "تنظیم PIN کد",
@@ -438,7 +512,7 @@
         "verifyRecoveryPhrase": "عبارت بازیابی را تایید کنید",
         "revealRecoveryPhrase": "عبارت بازیابی را نشان بده",
         "importSeedvault": "وارد کردن SeedVault",
-        "checkAgain": "خیر، بررسی دوباره",
+        "checkAgain": "Check Again",
         "importFromFile": "وارد کردن از یک فایل",
         "send": "ارسال",
         "receive": "دریافت",
@@ -489,12 +563,14 @@
         "hideDetails": "پنهان کردن جزئیات",
         "yes": "بله",
         "no": "نه",
+        "skip": "Skip",
         "reset": "بازنشانی",
         "downloadRecoveryKit": "ذخیره قالب کیت بازیابی",
         "skipBackup": "رد شدن از بک آپ گیری فایل",
         "finishSetup": "پایان راه اندازی",
         "readDocumentation": "مستندات را بخوانید",
         "visitFaq": "بخش سوالات متداول را ببینید",
+        "viewStatus": "View status",
         "showHiddenAccounts": "نمایش حساب های پنهان شده",
         "confirm": "تایید"
     },
@@ -554,6 +630,7 @@
         "manualNodeSelection": "انتخاب دستی نُد",
         "profiles": "پروفایل ها",
         "developerProfile": "پروفایل برنامه نویسی",
+        "developerProfileDescription": "Allows you to connect to testnets",
         "dev": "برنامه نویس",
         "createAccount": "ایجاد یک حساب کاربری",
         "accountName": "نام حساب",
@@ -604,6 +681,7 @@
         "passwordStrength3": "متوسط",
         "passwordStrength4": "قوی",
         "creatingProfile": "در حال ساختن پروفایل، لطفا صبر کنید...",
+        "fundMigration": "Fund migration",
         "accountRemoved": "این حساب پنهان شده است. آن را نمایان کنید تا عملیات های انتقال انجام شود."
     },
     "dates": {
@@ -627,7 +705,9 @@
         "calcMinutesRemaining": "در حال شمارش زمان باقیمانده...",
         "minutesRemaining": "{minutes, plural, one {1 دقیقه باقی مانده } other {# دقیقه باقی مانده}}",
         "copiedToClipboard": "در کلیپ‌بورد کپی شد",
-        "accountsSynchronized": "همگام سازی حساب تمام شد"
+        "accountsSynchronized": "همگام سازی حساب تمام شد",
+        "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
+        "migratedAccountChrysalisUp": "Your funds will become available shortly"
     },
     "error": {
         "profile": {
@@ -699,6 +779,16 @@
             "phraseWordCount": "عبارت بازیابی شما باید 24 کلمه ای باشد٬ در حال حاضر {length, plural, one {1 کلمه ایست} other {کلمه ایست #}}.",
             "phraseUnrecognizedWord": "کلمه نا آشنا \"{word}\" در عبارت بازیابی شما یافت شد",
             "phraseCaseWord": "کلمه \"{word} \" می بایست حروف کوچک باشد"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Risk level: {risk}",
+            "veryHigh": "Very high",
+            "high": "High",
+            "medium": "Medium",
+            "low": "Low",
+            "veryLow": "Very low"
         }
     }
 }

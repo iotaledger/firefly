@@ -1,18 +1,17 @@
 <script lang="typescript">
     import { DashboardPane } from 'shared/components'
     import { clearSendParams } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
-    import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { activeProfile, isStrongholdLocked, updateProfile } from 'shared/lib/profile'
+    import { activeProfile, isStrongholdLocked, MigratedTransaction, updateProfile } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
         AccountMessage,
         AccountsBalanceHistory,
         api,
+        asyncSyncAccounts,
         BalanceHistory,
         BalanceOverview,
         getAccountMessages,
@@ -23,9 +22,9 @@
         initialiseListeners,
         isTransferring,
         prepareAccountInfo,
+        processMigratedTransactions,
         removeEventListeners,
         selectedAccountId,
-        syncAccounts,
         transferState,
         updateBalanceOverview,
         wallet,
@@ -86,7 +85,10 @@
         return $accounts.filter((a) => !$activeProfile.hiddenAccounts?.includes(a.id)).sort((a, b) => a.index - b.index)
     })
 
-    const transactions = derived(viewableAccounts, ($viewableAccounts) => {
+    const transactions = derived([viewableAccounts, activeProfile], ([$viewableAccounts, $activeProfile]) => {
+        if ($activeProfile?.migratedTransactions?.length) {
+            return $activeProfile.migratedTransactions
+        }
         return getTransactions($viewableAccounts)
     })
 
@@ -95,7 +97,7 @@
     setContext<Readable<WalletAccount[]>>('viewableAccounts', viewableAccounts)
     setContext<Readable<WalletAccount[]>>('liveAccounts', liveAccounts)
     setContext<Writable<boolean>>('walletAccountsLoaded', accountsLoaded)
-    setContext<Readable<AccountMessage[]>>('walletTransactions', transactions)
+    setContext<Readable<AccountMessage[] | MigratedTransaction[]>>('walletTransactions', transactions)
     setContext<Readable<WalletAccount>>('selectedAccount', selectedAccount)
     setContext<Readable<AccountsBalanceHistory>>('accountsBalanceHistory', accountsBalanceHistory)
     setContext<Readable<AccountMessage[]>>('accountTransactions', accountTransactions)
@@ -106,10 +108,14 @@
     function getAccounts() {
         api.getAccounts({
             onSuccess(accountsResponse) {
-                const _continue = () => {
+                const _continue = async () => {
                     accountsLoaded.set(true)
                     const gapLimit = $activeProfile?.gapLimit ?? 10
-                    syncAccounts(false, 0, gapLimit)
+                    try {
+                        await asyncSyncAccounts(0, gapLimit, 5, false)
+                    } catch (err) {
+                        console.error(err)
+                    }
                     updateProfile('gapLimit', 10)
                 }
 
@@ -141,6 +147,7 @@
 
                             if (completeCount === accountsResponse.payload.length) {
                                 accounts.update((accounts) => [...accounts, ...newAccounts].sort((a, b) => a.index - b.index))
+                                processMigratedTransactions(payloadAccount.id, payloadAccount.messages, payloadAccount.addresses)
                                 updateBalanceOverview(totalBalance.balance, totalBalance.incoming, totalBalance.outgoing)
                                 _continue()
                             }
@@ -508,32 +515,30 @@
         })
     }
 
-    $: {
-        if ($deepLinkRequestActive && $appSettings.deepLinking) {
-            walletRoute.set(WalletRoutes.Send)
-            deepLinkRequestActive.set(false)
+    onMount(async () => {
+        // If we are in settings when logged out the router reset
+        // switches back to the wallet, but there is no longer
+        // an active profile, only init if there is a profile
+        if ($activeProfile) {
+            if (!$accountsLoaded) {
+                getAccounts()
+            }
+
+            removeEventListeners($activeProfile.id)
+
+            initialiseListeners()
+
+            api.getStrongholdStatus({
+                onSuccess(strongholdStatusResponse) {
+                    isStrongholdLocked.set(strongholdStatusResponse.payload.snapshot.status === 'Locked')
+                },
+                onError(error) {
+                    console.error(error)
+                },
+            })
+
+            addProfileCurrencyPriceData()
         }
-    }
-
-    onMount(() => {
-        if (!$accountsLoaded) {
-            getAccounts()
-        }
-
-        removeEventListeners($activeProfile.id)
-
-        initialiseListeners()
-
-        api.getStrongholdStatus({
-            onSuccess(strongholdStatusResponse) {
-                isStrongholdLocked.set(strongholdStatusResponse.payload.snapshot.status === 'Locked')
-            },
-            onError(error) {
-                console.error(error)
-            },
-        })
-
-        addProfileCurrencyPriceData()
     })
 </script>
 

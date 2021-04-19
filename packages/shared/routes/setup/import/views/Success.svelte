@@ -1,12 +1,14 @@
 <script lang="typescript">
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
-    import { createEventDispatcher } from 'svelte'
+    import { createEventDispatcher, getContext } from 'svelte'
+    import type { Writable } from 'svelte/store'
+    import { ImportType } from '../Import.svelte'
 
     export let locale
     export let mobile
-    export let importType
 
     const dispatch = createEventDispatcher()
+    const importType = getContext<Writable<ImportType>>('importType')
 
     function handleContinueClick() {
         dispatch('next')
@@ -35,7 +37,7 @@
         <!-- TODO: missing illustration -->
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-green dark:bg-gray-900">
             <Animation
-                animation={importType === 'seed' || importType === 'mnemonic' ? 'import-from-text-success-desktop' : 'import-from-file-success-desktop'} />
+                animation={$importType === ImportType.Seed || $importType === ImportType.Mnemonic ? 'import-from-text-success-desktop' : 'import-from-file-success-desktop'} />
         </div>
     </OnboardingLayout>
 {/if}

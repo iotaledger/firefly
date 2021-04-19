@@ -1,10 +1,11 @@
+const fs = require('fs')
 const binding = require('wallet-nodejs-binding')
 const PincodeManager = require('./lib/pincodeManager')
 const DeepLinkManager = require('./lib/deepLinkManager')
 const NotificationManager = require('./lib/notificationManager')
 const { ipcRenderer, contextBridge } = require('electron')
 const { menuState } = require('./lib/menuState')
-const fs = require('fs');
+const kdbx = require('./lib/kdbx')
 const { proxyApi } = require('shared/lib/shell/walletApi')
 const { hookErrorLogger } = require('shared/lib/shell/errorLogger')
 
@@ -38,8 +39,8 @@ const Electron = {
     DeepLinkManager,
     NotificationManager,
     getStrongholdBackupDestination: (defaultPath) => {
-        return ipcRenderer.invoke('show-save-dialog', { 
-            properties: ['createDirectory', 'showOverwriteConfirmation'], 
+        return ipcRenderer.invoke('show-save-dialog', {
+            properties: ['createDirectory', 'showOverwriteConfirmation'],
             defaultPath,
             filters: [
                 { name: 'Stronghold Files', extensions: ['stronghold'] }
@@ -52,6 +53,70 @@ const Electron = {
             return result.filePath
         })
     },
+
+    /**
+     * Exports migration log
+     * 
+     * @method exportMigrationLog
+     * 
+     * @param {string} sourcePath 
+     * @param {string} defaultFileName
+     *  
+     * @returns {Promise<boolean>}
+     */
+    exportMigrationLog: (sourcePath, defaultFileName) => {
+        return ipcRenderer.invoke('show-save-dialog',
+            {
+                properties: ['createDirectory', 'showOverwriteConfirmation'],
+                defaultPath: defaultFileName,
+                filters: [
+                    { name: 'Log Files', extensions: ['log'] }
+                ]
+            }).then((result) => {
+                if (result.canceled) {
+                    return null
+                }
+
+                return new Promise((resolve, reject) => {
+                    fs.copyFile(sourcePath, result.filePath, (err) => {
+                        if (err) {
+                            reject(err)
+                        } else {
+                            resolve(true)
+                        }
+                    });
+                })
+
+            })
+    },
+
+    /**
+     * Imports legacy IOTA seed
+     * 
+     * @method importLegacySeed
+     * 
+     * @param {Buffer} buffer 
+     * @param {string} password 
+     * 
+     * @returns {Promise<string>} 
+     */
+    importLegacySeed: (buffer, password) => {
+        return kdbx.importVault(buffer, password);
+    },
+
+    /**
+     * Validates Seed Vault
+     * 
+     * @method validateSeedVault
+     * 
+     * @param {Buffer} buffer 
+     * 
+     * @returns {boolean} 
+     */
+    validateSeedVault: (buffer) => {
+        return kdbx.checkFormat(buffer);
+    },
+
     /**
      * Gets directory for app's configuration files
      *
@@ -107,14 +172,14 @@ const Electron = {
      *
      * @returns void
      */
-     updateCheck: () => ipcRenderer.invoke('update-check'),
-     /**
-     * Get version details
-     *
-     * @method getVersionDetails
-     *
-     * @returns void
-     */
+    updateCheck: () => ipcRenderer.invoke('update-check'),
+    /**
+    * Get version details
+    *
+    * @method getVersionDetails
+    *
+    * @returns void
+    */
     getVersionDetails: () => ipcRenderer.invoke('update-get-version-details'),
     /**
      * Change menu state to determine what menu items to display

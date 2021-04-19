@@ -31,11 +31,17 @@
             "title": "Afișare",
             "body": "Alege tema portofelului tău."
         },
-        "setup": {
-            "title": "Configurează portofelul tău",
-            "body1": "Poți crea mai multe profiluri de utilizator pentru a îți păstra token-urile separate și pentru a îmbunătăți confidențialitatea.",
+        "profile": {
+            "title": "Crează un profil",
+            "body1": "Poți crea mai multe profiluri de utilizator pentru a îți organiza portofelele și pentru a îmbunătăți confidențialitatea.",
             "body2": "Pentru moment, să începem cu primul tău nume de profil. Poți adăuga mai multe profiluri mai târziu.",
             "profileName": "Nume Profil"
+        },
+        "setup": {
+            "title": "Configurează un portofel",
+            "chrysalisTitle": "Actualizare rețea Chrysalis",
+            "chrysalisBody": "Începând cu 21 aprilie, utilizatorii pot migra monedele lor în noua rețea Chrysalis. Vă recomandăm să migrați monedele existente cât mai curând posibil.",
+            "learnMore": "Află mai multe despre migrație"
         },
         "secure": {
             "title": "Securizează-ți portofelul",
@@ -97,7 +103,10 @@
         },
         "congratulations": {
             "title": "Configurarea portofelului finalizată",
-            "body": "Noul tău portofel este gata de utilizare."
+            "body": "Noul tău portofel este gata de utilizare.",
+            "fundsMigrated": "Fonduri migrate",
+            "success": "Ai migrat cu succes fondurile către noua rețea",
+            "exportMigration": "Exportă jurnalul migrarii și finalizează configurarea"
         },
         "import": {
             "title": "Importă un portofel",
@@ -109,7 +118,8 @@
             "body2": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
             "body3": "Introduce parola sau fraza de recuperare",
             "seedDetected": "Seed de 81 de caractere detectat",
-            "phraseDetected": "Frază de recuperare de 24 de cuvinte detectată"
+            "phraseDetected": "Frază de recuperare de 24 de cuvinte detectată",
+            "checksum": "Suma de verificare"
         },
         "importFromFile": {
             "title": "Restaurează-ți portofelul folosind o copie de rezervă",
@@ -130,10 +140,58 @@
         },
         "migrate": {
             "title": "Migrează-ți fondurile",
-            "body1": "Acesta este un proces automat pentru a transfera fondurile către noul portofel. Vom verifica adresele cheltuite care vă slăbesc securitatea.",
+            "body1": "This is an automated process to transfer your funds to your new wallet.",
             "body2": "Poate dura ceva timp. Nu opri dispozitivul în timpul migrării.",
             "existing": "Vechiul tău portofel",
-            "new": "Noul tău portofel"
+            "new": "Noul tău portofel",
+            "learn": "Află mai multe despre migrație",
+            "beginMigration": "Începe migrarea",
+            "migrating": "Migrarea fondurilor...",
+            "migrated": "{balance} a migrat",
+            "migrationFailed": "Migrare Eșuată",
+            "noAddressesForMigration": "Te rugăm să selectezi adresele pe care doresti să le securizezi.",
+            "restoringWallet": "Restaurare portofel...",
+            "findingBalance": "Se caută soldul...",
+            "incorrectSeedVaultPassword": "Incorrect SeedVault password.",
+            "signingBundle": "Semnare pachet",
+            "broadcastingBundle": "Broadcasting bundle",
+            "miningBundle": "Mining bundle",
+            "problemRestoringWallet": "There was a problem restoring your wallet. Please try again.",
+            "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
+            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
+            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. {value} will be lost.",
+            "error": "There was an error migrating your funds. Please try again."
+        },
+        "bundleMiningWarning": {
+            "title": "Warning",
+            "body1": "You have funds on one or more spent addresses.",
+            "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
+            "body3": "If you close the app you will need to restart the whole migration.",
+            "learn": "Learn about spent addresses"
+        },
+        "secureSpentAddresses": {
+            "title": "Secure spent addresses",
+            "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.",
+            "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",
+            "error": "You can’t migrate spent addresses with less than 1 Mi"
+        },
+        "securityCheckCompleted": {
+            "title": "Security check completed",
+            "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
+            "body2": "When you are happy with the risk level(s) press continue.",
+            "rerun": "Rerun process for selected addresses",
+            "continueMigration": "Continue migration"
+        },
+        "securingSpentAddresses": {
+            "title": "Securing spent addresses...",
+            "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
+            "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
+            "migrate": "Migrate funds",
+            "transaction": "Transaction {number}",
+            "rerun": "Încearcă din nou"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,7 +199,9 @@
         },
         "balance": {
             "title": "Soldul tău",
-            "body": "Este soldul tău corect?"
+            "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
+            "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
+            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly."
         },
         "settings": {
             "settings": "Setări",
@@ -403,6 +463,17 @@
         "transaction": {
             "title": "Confirm transaction",
             "body": "You’re about to send {amount} to"
+        },
+        "riskFunds": {
+            "title": "Warning: funds at risk during migration",
+            "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
+            "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
+        },
+        "missingBundle": {
+            "title": "Warning: funds at risk during migration",
+            "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
+            "learnMore": "Learn more about spent addresses",
+            "proceed": "I understand the risk"
         }
     },
     "charts": {
@@ -423,10 +494,13 @@
         "cancel": "Cancel",
         "close": "Close",
         "dismiss": "Dismiss",
+        "proceedAnyway": "Proceed anyway",
         "save": "Save",
         "importSeed": "Importă un seed existent",
-        "importWallet": "Importă un portofel existent",
+        "restoreWallet": "Migrate or restore a wallet",
+        "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
         "createWallet": "Creează portofel nou",
+        "createWalletDescription": "Create a fresh wallet running on Chrysalis",
         "savePassword": "Salvează parola",
         "useBiometric": "Utilizează securitatea biometrică",
         "setupPin": "Setează-ți un cod PIN",
@@ -438,7 +512,7 @@
         "verifyRecoveryPhrase": "Verifică fraza de recuperare",
         "revealRecoveryPhrase": "Afișează fraza de recuperare",
         "importSeedvault": "Importă SeedVault",
-        "checkAgain": "Nu, verifică din nou",
+        "checkAgain": "Check Again",
         "importFromFile": "Importă dintr-un fișier",
         "send": "Trimite",
         "receive": "Primește",
@@ -489,12 +563,14 @@
         "hideDetails": "Hide Details",
         "yes": "Yes",
         "no": "No",
+        "skip": "Skip",
         "reset": "Reset",
         "downloadRecoveryKit": "Save Recovery Kit template",
         "skipBackup": "Skip file backup",
         "finishSetup": "Finish setup",
         "readDocumentation": "Read the documentation",
         "visitFaq": "Visit FAQ",
+        "viewStatus": "View status",
         "showHiddenAccounts": "Show hidden accounts",
         "confirm": "Confirm"
     },
@@ -554,6 +630,7 @@
         "manualNodeSelection": "Manual node selection",
         "profiles": "Profiles",
         "developerProfile": "Developer Profile",
+        "developerProfileDescription": "Allows you to connect to testnets",
         "dev": "Dev",
         "createAccount": "Create an Account",
         "accountName": "Account name",
@@ -604,6 +681,7 @@
         "passwordStrength3": "Average",
         "passwordStrength4": "Strong",
         "creatingProfile": "Creating profile, please wait...",
+        "fundMigration": "Fund migration",
         "accountRemoved": "This account is hidden. Unhide it to perform transfers."
     },
     "dates": {
@@ -627,7 +705,9 @@
         "calcMinutesRemaining": "Calculating minutes remaining...",
         "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Copied to clipboard",
-        "accountsSynchronized": "Account synchronization complete"
+        "accountsSynchronized": "Account synchronization complete",
+        "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
+        "migratedAccountChrysalisUp": "Your funds will become available shortly"
     },
     "error": {
         "profile": {
@@ -699,6 +779,16 @@
             "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
             "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
             "phraseCaseWord": "The word \"{word}\" should be lower case"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Risk level: {risk}",
+            "veryHigh": "Very high",
+            "high": "High",
+            "medium": "Medium",
+            "low": "Low",
+            "veryLow": "Very low"
         }
     }
 }

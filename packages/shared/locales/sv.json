@@ -31,11 +31,17 @@
             "title": "Utseende",
             "body": "Välj din plånboks tema."
         },
-        "setup": {
-            "title": "Ställ in din plånbok",
-            "body1": "Du kan skapa flera användarprofiler för att hålla dina tokens separata och förbättra sekretessen.",
+        "profile": {
+            "title": "Skapa en profil",
+            "body1": "Du kan skapa flera användarprofiler för att organisera dina plånböcker och förbättra sekretessen.",
             "body2": "Låt oss börja med ditt första profilnamn. Du kan lägga till fler profiler senare.",
             "profileName": "Profilnamn"
+        },
+        "setup": {
+            "title": "Konfigurera en plånbok",
+            "chrysalisTitle": "Chrysalis nätverksuppdatering",
+            "chrysalisBody": "Från och med den 21 april kan man migrera sina tokens till det nya Chrysalis-nätverket. Vi rekommenderar att du migrerar dina befintliga tokens så snart som möjligt.",
+            "learnMore": "Läs mer om migreringen"
         },
         "secure": {
             "title": "Säkra din plånbok",
@@ -97,7 +103,10 @@
         },
         "congratulations": {
             "title": "Installationen av plånboken slutförd",
-            "body": "Din nya plånbok är redo att användas."
+            "body": "Din nya plånbok är redo att användas.",
+            "fundsMigrated": "Tokens migrerade",
+            "success": "Du har framgångsrikt migrerat dina IOTA till det nya nätverket",
+            "exportMigration": "Exportera migrationslogg och avsluta installationen"
         },
         "import": {
             "title": "Importera en plånbok",
@@ -109,7 +118,8 @@
             "body2": "En återställningsfras är 24 ord lång, endast små bokstäver och mellanrum mellan varje ord. Denna används för att återställa en befintlig Firefly-plånbok.",
             "body3": "Ange din seed eller återställningsfras",
             "seedDetected": "81 tecken lång seed upptäckt",
-            "phraseDetected": "24 ord lång återställningsfras upptäckt"
+            "phraseDetected": "24 ord lång återställningsfras upptäckt",
+            "checksum": "Kontrollnummer"
         },
         "importFromFile": {
             "title": "Återställ din plånbok från en säkerhetskopia",
@@ -130,10 +140,58 @@
         },
         "migrate": {
             "title": "Migrera dina tillgångar",
-            "body1": "Detta är en automatiserad process för att överföra dina tillgångar till din nya plånbok. Vi kommer att kontrollera eventuella förbrukade adresser som försvagar din säkerhet.",
+            "body1": "Detta är en automatiserad process för att överföra dina IOTA till din nya plånbok.",
             "body2": "Det kan ta lite tid. Stäng inte av enheten under migreringen.",
             "existing": "Din gamla plånbok",
-            "new": "Din nya plånbok"
+            "new": "Din nya plånbok",
+            "learn": "Läs mer om migreringen",
+            "beginMigration": "Påbörja migrering",
+            "migrating": "Migrerar tillgångar...",
+            "migrated": "{balance} migrerade",
+            "migrationFailed": "Migrering misslyckades",
+            "noAddressesForMigration": "Vänligen välj de adresser du vill säkra.",
+            "restoringWallet": "Återställer plånboken...",
+            "findingBalance": "Söker saldo...",
+            "incorrectSeedVaultPassword": "Felaktigt lösenord för SeedVault.",
+            "signingBundle": "Signerar bundle",
+            "broadcastingBundle": "Sänder bundle",
+            "miningBundle": "Utvinner säker bundle",
+            "problemRestoringWallet": "Det gick inte att återställa din plånbok. Försök igen.",
+            "minimumMigrationAmountSpentAddresses": "Minsta migreringsbelopp för varje förbrukad adress är 1 Mi. Kontrollera igen om ditt saldo inte ser rätt ut.",
+            "tooManyAddressesToMigrate": "Du har för många adresser med lågt saldo för att migrera. Kontrollera igen om ditt saldo inte ser rätt ut.",
+            "cannotMigrateAllYourFunds": "Vi kan inte migrera alla dina tillgångar eftersom vissa adresser är för låga i värde. Du kan fortsätta ändå. {value} kommer att gå förlorad.",
+            "error": "Det gick inte att migrera dina tillgångar. Försök igen."
+        },
+        "bundleMiningWarning": {
+            "title": "Varning",
+            "body1": "Du har IOTA på en eller flera förbrukade adresser.",
+            "body2": "Vi rekommenderar att du kör en automatiserad process för att säkra och överföra dessa IOTA på ett säkert sätt.",
+            "body3": "Om du stänger appen måste du starta om hela migreringen.",
+            "learn": "Läs mer om förbrukade adresser"
+        },
+        "secureSpentAddresses": {
+            "title": "Säkra förbrukade adresser",
+            "body1": "Firefly har upptäckt IOTA på {number, plural, one {# förbrukade adresser} other {# förbrukade adresser}}.",
+            "body2": "Vi rekommenderar att du kör en automatiserad process för att säkra och överföra dessa IOTA på ett säkert sätt.",
+            "error": "Du kan inte migrera förbrukade adresser med mindre än 1 Mi"
+        },
+        "securityCheckCompleted": {
+            "title": "Säkerhetskontroll slutförd",
+            "body1": "Vi har beräknat risknivån. Att köra denna process igen kan sänka din risknivå.",
+            "body2": "När du är nöjd med risknivåerna klickar du på fortsätt.",
+            "rerun": "Kör processen igen för valda adresser",
+            "continueMigration": "Fortsätt migrera"
+        },
+        "securingSpentAddresses": {
+            "title": "Säkrar förbrukade adresser...",
+            "body1": "Denna process tar {minutes, plural, one {1 minut} other {# minuter}}.",
+            "body2": "Din dator kommer att köras på full kapacitet, du kanske vill göra något annat medan du väntar på att detta ska slutföras."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly kommer nu att fortsätta migrera dina IOTA. Detta kan ta ett tag.",
+            "migrate": "Migrera tillgångar",
+            "transaction": "Transaktion {number}",
+            "rerun": "Försök igen"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,13 +199,15 @@
         },
         "balance": {
             "title": "Ditt saldo",
-            "body": "Är ditt saldo korrekt?"
+            "body": "Se till att ditt saldo är korrekt innan du fortsätter. Du kan kontrollera igen om det inte ser rätt ut.",
+            "error": "Minsta migreringsbelopp är 1 Mi. Kontrollera igen om ditt saldo inte ser rätt ut.",
+            "zeroBalance": "Försök kontrollera igen. Om du fortfarande inte hittar ditt saldo kan du ha angett din seed felaktigt."
         },
         "settings": {
             "settings": "Inställningar",
             "generalSettings": {
                 "title": "Allmänna inställningar",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Konfigurera plånbokens utseende och andra allmänna inställningar"
             },
             "security": {
                 "title": "Säkerhet",
@@ -403,6 +463,17 @@
         "transaction": {
             "title": "Bekräfta transaktion",
             "body": "Du håller på att skicka {amount} till"
+        },
+        "riskFunds": {
+            "title": "Varning: Tillgångar i riskzonen vid migrering",
+            "body1": "Det rekommenderas starkt att du säkrar alla dina IOTA innan du fortsätter med migration. Dina pengar riskerar att stjälas om du inte säkrar dem.",
+            "body2": "Det rekommenderas att du kör processen igen för adresser med en risknivå på medel eller högre."
+        },
+        "missingBundle": {
+            "title": "Varning: Tillgångar i riskzonen vid migrering",
+            "body": "Du har IOTA på förbrukade adresser, men den information som behövdes för att säkra dem hittades inte. Detta kan hända om du gjorde transaktioner för länge sedan. Du kan fortsätta men {value} är i riskzonen vid migrering.",
+            "learnMore": "Läs mer om förbrukade adresser",
+            "proceed": "Jag förstår riskerna"
         }
     },
     "charts": {
@@ -412,10 +483,10 @@
         "token": "Token",
         "accountValue": "Kontovärde",
         "accountActivity": "Kontoaktivitet",
-        "timeframe1Hour": "1 hour",
-        "timeframe1Day": "1 day",
-        "timeframe1Week": "1 week",
-        "timeframe1Month": "1 month"
+        "timeframe1Hour": "1 timme",
+        "timeframe1Day": "1 dag",
+        "timeframe1Week": "1 vecka",
+        "timeframe1Month": "1 månad"
     },
     "actions": {
         "continue": "Fortsätt",
@@ -423,10 +494,13 @@
         "cancel": "Avbryt",
         "close": "Stäng",
         "dismiss": "Avfärda",
+        "proceedAnyway": "Fortsätt ändå",
         "save": "Spara",
         "importSeed": "Importera en befintlig seed",
-        "importWallet": "Importera befintlig plånbok",
+        "restoreWallet": "Migrera eller återställ en plånbok",
+        "restoreWalletDescription": "Migrera till Chrysalis eller återställ en befintlig plånbok",
         "createWallet": "Skapa ny plånbok",
+        "createWalletDescription": "Skapa en ny plånbok som körs på Chrysalis",
         "savePassword": "Spara lösenord",
         "useBiometric": "Använd biometrisk säkerhet",
         "setupPin": "Ställ in PIN-kod",
@@ -438,7 +512,7 @@
         "verifyRecoveryPhrase": "Verifiera återställningsfras",
         "revealRecoveryPhrase": "Visa återställningsfras",
         "importSeedvault": "Importera SeedVault",
-        "checkAgain": "Nej, kontrollera igen",
+        "checkAgain": "Kontrollera igen",
         "importFromFile": "Importera från en fil",
         "send": "Skicka",
         "receive": "Ta emot",
@@ -489,12 +563,14 @@
         "hideDetails": "Dölj detaljer",
         "yes": "Ja",
         "no": "Nej",
+        "skip": "Hoppa över",
         "reset": "Återställ",
         "downloadRecoveryKit": "Spara återställningsblad",
         "skipBackup": "Hoppa över säkerhetskopiering",
         "finishSetup": "Slutför installationen",
         "readDocumentation": "Läs dokumentationen",
         "visitFaq": "Besök FAQ",
+        "viewStatus": "Visa status",
         "showHiddenAccounts": "Visa dolda konton",
         "confirm": "Bekräfta"
     },
@@ -554,6 +630,7 @@
         "manualNodeSelection": "Manuellt val av nod",
         "profiles": "Profiler",
         "developerProfile": "Utvecklarprofil",
+        "developerProfileDescription": "Låter dig ansluta till testnät",
         "dev": "Utvecklare",
         "createAccount": "Skapa ett konto",
         "accountName": "Kontonamn",
@@ -604,6 +681,7 @@
         "passwordStrength3": "Medel",
         "passwordStrength4": "Starkt",
         "creatingProfile": "Skapar profil, vänligen vänta...",
+        "fundMigration": "Token-migration",
         "accountRemoved": "Detta konto är dolt. Avtäck kontot för att utföra överföringar."
     },
     "dates": {
@@ -627,7 +705,9 @@
         "calcMinutesRemaining": "Beräknar minuter kvar...",
         "minutesRemaining": "{minutes, plural, one {1 minut kvar} other {# minuter kvar}}",
         "copiedToClipboard": "Kopierad till urklipp",
-        "accountsSynchronized": "Kontosynkronisering slutförd"
+        "accountsSynchronized": "Kontosynkronisering slutförd",
+        "migratedAccountChrysalisDown": "Dina IOTA kommer att bli tillgängliga efter Chrysalis den 28 april",
+        "migratedAccountChrysalisUp": "Dina IOTA kommer inom kort att bli tillgängliga"
     },
     "error": {
         "profile": {
@@ -699,6 +779,16 @@
             "phraseWordCount": "Det ska finnas 24 ord i din återställningsfras, just nu är det {length, plural, one {är 1} other {är #}}.",
             "phraseUnrecognizedWord": "Okänt ord \"{word}\" i din återställningsfras",
             "phraseCaseWord": "Ordet \"{word}\" ska vara skrivet med små bokstäver"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Risknivå: {risk}",
+            "veryHigh": "Mycket hög",
+            "high": "Hög",
+            "medium": "Medel",
+            "low": "Låg",
+            "veryLow": "Mycket låg"
         }
     }
 }

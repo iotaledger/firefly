@@ -39,6 +39,7 @@ const eventsApiToResponseTypeMap = {
     onBroadcast: ResponseTypes.Broadcast,
     onStrongholdStatusChange: ResponseTypes.StrongholdStatusChange,
     onTransferProgress: ResponseTypes.TransferProgress,
+    onMigrationProgress: ResponseTypes.MigrationProgress,
 }
 
 const apiToResponseTypeMap = {
@@ -70,6 +71,8 @@ const apiToResponseTypeMap = {
     lockStronghold: ResponseTypes.LockedStronghold,
     changeStrongholdPassword: ResponseTypes.StrongholdPasswordChanged,
     setStrongholdPasswordClearInterval: ResponseTypes.StrongholdPasswordClearIntervalSet,
+    getLegacySeedChecksum: ResponseTypes.LegacySeedChecksum,
+    getNodeInfo: ResponseTypes.NodeInfo,
     ...eventsApiToResponseTypeMap
 }
 

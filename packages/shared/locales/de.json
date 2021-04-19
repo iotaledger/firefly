@@ -2,7 +2,7 @@
     "views": {
         "onboarding1": {
             "title": "Sende, Empfange & Verwalte deine IOTA Token",
-            "body": "Firefly ist die offizielle Wallet von IOTA."
+            "body": "Firefly ist die offizielle Wallet für IOTA."
         },
         "legal": {
             "title": "Datenschutzerklärung & Nutzungsbedingungen",
@@ -31,26 +31,32 @@
             "title": "Erscheinungsbild",
             "body": "Wähle das Erscheinungsbild deiner Wallet aus."
         },
-        "setup": {
-            "title": "Richte deine Wallet ein",
-            "body1": "Du kannst mehrere Benutzerprofile erstellen, um deine Token getrennt zu halten und die Privatsphäre zu verbessern.",
-            "body2": "Lass uns zunächst mit deinem ersten Profilnamen beginnen. Du kannst später weitere Profile hinzufügen.",
+        "profile": {
+            "title": "Erstelle ein Profil",
+            "body1": "Du kannst mehrere Benutzerprofile erstellen, um deine Token getrennt zu verwalten und deine Privatsphäre zu verbessern.",
+            "body2": "Lass uns zunächst mit deinem Profilnamen beginnen. Du kannst später noch weitere Profile hinzufügen.",
             "profileName": "Profilname"
+        },
+        "setup": {
+            "title": "Richte eine Wallet ein",
+            "chrysalisTitle": "Chrysalis Netzwerk Update",
+            "chrysalisBody": "Ab dem 21. April können Benutzer ihre Token in das neue Chrysalis-Netzwerk migrieren. Wir empfehlen dir, deine bestehenden Token so schnell wie möglich zu migrieren.",
+            "learnMore": "Erfahre mehr über die Migration"
         },
         "secure": {
             "title": "Sichere deine Wallet",
-            "body1": "Speicher die Wiederherstellungs-Dokument PDF-Vorlage ab und drucke sie aus.",
-            "body2": "Wenn du das Wiederherstellungs-Dokument ausfüllst und sicher aufbewahrst, kannst du deine Wallet jederzeit wiederherstellen."
+            "body1": "Sichere und Drucke deine Wiederherstellungsdokumente als PDF-Vorlage.",
+            "body2": "Wenn du das Wiederherstellungsdokument ausfüllst und sicher verwahrst, kannst du deine Wallet jederzeit wiederherstellen."
         },
         "password": {
             "title": "Passwort erstellen",
-            "body1": "Du benötigst ein sicheres Passwort, um dein Guthaben zu schützen. Verwende eine Kombination von Wörtern und vermeide geläufige Phrasen, Namen oder Daten.",
-            "body2": "Es wird empfohlen, das Passwort im Wiederherstellungs-Dokument zu notieren."
+            "body1": "Du benötigst ein sicheres Passwort, um dein Guthaben zu schützen. Verwende eine Kombination von Wörtern und vermeide allgemein bekannte Phrasen, Namen oder Zahlenkombinationen.",
+            "body2": "Es wird empfohlen, das Passwort im Wiederherstellungsdokument zu notieren."
         },
         "protect": {
             "title": "Protect your wallet",
             "body1": "Richte eine PIN ein, um sicherzustellen, dass nur Du auf deine Wallet zugreifen kannst.",
-            "body2": "Bewahre den Pin sicher auf!"
+            "body2": "Bewahre deine Pin sicher auf!"
         },
         "pin": {
             "title": "PIN-Code festlegen",
@@ -71,16 +77,16 @@
         "recoveryPhrase": {
             "title": "Wiederherstellungsphrase",
             "body1": "Schreibe die Wörter in der selben Reihenfolge in das Wiederherstellungs-Dokument, wie sie dir angezeigt werden.",
-            "body2": "Bewahre es sicher auf.",
-            "body3": "Es ist wichtig, ein schriftliches Backup zu haben. Computer können Probleme haben und Dateien beschädigt werden.",
+            "body2": "Bewahre es geheim und sicher auf.",
+            "body3": "Es ist wichtig ein schriftliches Backup zu haben. Computer können ausfallen und Dateien beschädigt werden.",
             "revealRecoveryPhrase": "Wiederherstellungsphrase anzeigen",
             "hideRecoveryPhrase": "Wiederherstellungsphrase ausblenden"
         },
         "verifyRecoveryPhrase": {
             "title": "Wiederherstellungsphrase bestätigen",
-            "body": "Lass uns überprüfen, ob du die Phrase korrekt notiert hast. Wähle die Wörter in der richtigen Reihenfolge.",
+            "body": "Lass uns überprüfen, ob du die Phrase korrekt notiert hast. Wähle jedes Wort in der richtigen Reihenfolge.",
             "word": "Wort",
-            "verified": "Wiederherstellungsphrase verifiziert",
+            "verified": "Wiederherstellungsphrase bestätigt",
             "verifiedBody": "Denke daran, diese privat und sicher aufzubewahren."
         },
         "backupWallet": {
@@ -88,16 +94,19 @@
             "body1": "Gib dein Passwort ein, um deine Wallet in einer Stronghold-Datei zu sichern. Dein Passwort wird verwendet, um das Backup zu verschlüsseln.",
             "body2": "Gründe warum digitale Backups wichtig sind:",
             "reason1": "Wiederherstellen deiner Wallet ohne Eingabe der Wiederherstellungsphrase",
-            "reason2": "Importieren deiner Wallet auf anderen Geräten",
-            "reason3": "Wiederherstellen des gesamten Transaktionsverlaufs"
+            "reason2": "Importiere deine Wallet auf andere Geräte",
+            "reason3": "Wiederherstellen des gesamten Überweisungsverlaufs"
         },
         "recoveryPhraseSaved": {
             "title": "Erfolgreich gesichert",
             "body": "Du hast deine Wallet in Stronghold gesichert."
         },
         "congratulations": {
-            "title": "Einrichten der Wallet abgeschlossen",
-            "body": "Deine neue Wallet ist einsatzbereit."
+            "title": "Einrichten der Wallet erfolgreich abgeschlossen",
+            "body": "Deine neue Wallet ist nun einsatzbereit.",
+            "fundsMigrated": "Guthaben migriert",
+            "success": "Du hast dein Guthaben erfolgreich ins neue Netzwerk übertragen",
+            "exportMigration": "Migrationsprotokoll exportieren und abschließen"
         },
         "import": {
             "title": "Wallet importieren",
@@ -105,20 +114,21 @@
         },
         "importFromText": {
             "title": "Stelle deine Wallet mit einer Wiederherstellungsphrase oder einem Seed wieder her",
-            "body1": "Ein Seed besteht aus 81 Zeichen. Dieser wird benötigt, um von einer älteren Trinity Wallet wiederherzustellen.",
+            "body1": "Ein Seed besteht aus 81 Zeichen. Dieser wird benötigt, um deine Daten aus der alten Trinity Wallet wiederherzustellen.",
             "body2": "Eine Wiederherstellungsphrase ist 24 Wörter lang (mit Leerzeichen). Diese wird benutzt, um eine bestehende Firefly Wallet wiederherzustellen.",
             "body3": "Gib deinen Seed oder deine Wiederherstellungsphrase ein",
             "seedDetected": "81 Zeichen Seed erkannt",
-            "phraseDetected": "24 Wörter Wiederherstellungsphrase erkannt"
+            "phraseDetected": "24 Wörter Wiederherstellungsphrase erkannt",
+            "checksum": "Prüfsumme"
         },
         "importFromFile": {
             "title": "Wallet aus einem Backup wiederherstellen",
-            "body": "Importiere ein Backup, um deine Wallet wiederherzustellen. Backups können entweder ein Stronghold (.stronghold) oder ein Trinity SeedVault (.kdbx) sein."
+            "body": "Importiere ein Backup um deine Wallet wiederherzustellen. Backups können entweder ein Stronghold (.stronghold) oder ein Trinity SeedVault (.kdbx) sein."
         },
         "importBackupPassword": {
             "title": "Wallet aus SeedVault oder Stronghold wiederherstellen",
             "body1": "Bitte gib dein Backup Passwort ein.",
-            "body2": "Dies ist das Passwort, das du beim Erstellen deines Backups festgelegt hast."
+            "body2": "Das ist das Passwort, das du beim Erstellen deines Backups festgelegt hast."
         },
         "importSuccess": {
             "title": "Du hast dein Backup erfolgreich wiederhergestellt",
@@ -130,10 +140,58 @@
         },
         "migrate": {
             "title": "Guthaben migrieren",
-            "body1": "Dies ist ein automatisierter Vorgang, um dein Guthaben auf deine neue Wallet zu übertragen. Wir werden nach ausgegebenen Adressen suchen, die deine Sicherheit beeinträchtigen könnten.",
+            "body1": "Dies ist ein automatischer Vorgang, um dein Guthaben auf deine neue Wallet zu übertragen.",
             "body2": "Das kann einige Zeit dauern. Schalte dein Gerät während der Migration nicht aus.",
             "existing": "Deine alte Wallet",
-            "new": "Deine neue Wallet"
+            "new": "Deine neue Wallet",
+            "learn": "Erfahre mehr über die Migration",
+            "beginMigration": "Migration beginnen",
+            "migrating": "Guthaben migrieren...",
+            "migrated": "{balance} migriert",
+            "migrationFailed": "Migration fehlgeschlagen",
+            "noAddressesForMigration": "Bitte wähle die Adressen, welche du absichern möchtest.",
+            "restoringWallet": "Wallet wiederherstellen...",
+            "findingBalance": "Suche Guthaben...",
+            "incorrectSeedVaultPassword": "Falsches SeedVault Passwort.",
+            "signingBundle": "Signiere Bundle",
+            "broadcastingBundle": "Übertrage Bundle",
+            "miningBundle": "Mine Bundle",
+            "problemRestoringWallet": "Es gab ein Problem bei der Wiederherstellung der Wallet. Bitte versuche es erneut.",
+            "minimumMigrationAmountSpentAddresses": "Der minimale Migrationsbetrag für jede wiederverwendete Adresse beträgt 1 Mi. Versuche es erneut, wenn der Betrag nicht richtig ist.",
+            "tooManyAddressesToMigrate": "Du hast zu viele Adressen mit niedrigem Guthaben. Überprüfe erneut, ob dein Guthaben unvollständig ist.",
+            "cannotMigrateAllYourFunds": "Wir können nicht alle Guthaben migrieren, da einige Adressen zu wenig Guthaben aufweisen. Du kannst trotzdem fortfahren. {value} gehen verloren.",
+            "error": "Beim Migrieren der Guthaben ist ein Fehler aufgetreten. Bitte versuche es erneut."
+        },
+        "bundleMiningWarning": {
+            "title": "Warnung",
+            "body1": "Du hast Guthaben auf einer oder mehreren wiederverwendeten Adressen.",
+            "body2": "Wir empfehlen, dass du einen automatisierten Vorgang durchführst, um diese Guthaben abzusichern.",
+            "body3": "Solltest du die App vorzeitig schließen, muss die Migration erneut durchgeführt werden.",
+            "learn": "Erfahre mehr über wiederverwendete Adressen"
+        },
+        "secureSpentAddresses": {
+            "title": "Wiederverwendete Adressen sichern",
+            "body1": "Du hast Guthaben auf {number, plural, one {# wiederverwendeten Adresse} other {# wiederverwendeten Adressen}}.",
+            "body2": "Wir empfehlen, dass du einen automatisierten Vorgang durchführst, um diese Guthaben abzusichern und sicher zu überweisen.",
+            "error": "Du kannst wiederverwendete Adressen mit weniger als 1 Mi nicht migrieren"
+        },
+        "securityCheckCompleted": {
+            "title": "Sicherheitsüberprüfung abgeschlossen",
+            "body1": "Wir haben das Sicherheitsrisiko berechnet. Das erneutes Ausführen dieses Vorgangs kann dein Risikolevel senken.",
+            "body2": "Wenn du mit deinem Risikolevel zufrieden bist, drücke weiter.",
+            "rerun": "Vorgang für die ausgewählten Adressen wiederholen",
+            "continueMigration": "Migration fortsetzen"
+        },
+        "securingSpentAddresses": {
+            "title": "Wiederverwendete Adressen sichern...",
+            "body1": "Dieser Vorgang wird {minutes, plural, one {1 Minute} other {# Minuten}} dauern.",
+            "body2": "Dein Computer wird unter voller Last laufen. Wenn du möchtest, kannst du in dieser Zeit etwas anderes tun."
+        },
+        "transferFragmentedFunds": {
+            "body1": "Firefly wird nun dein Guthaben migrieren. Dies kann eine Weile dauern.",
+            "migrate": "Guthaben migrieren",
+            "transaction": "Transaktion {number}",
+            "rerun": "Erneut versuchen"
         },
         "migrateFailed": {
             "title": "To do",
@@ -141,13 +199,15 @@
         },
         "balance": {
             "title": "Dein Guthaben",
-            "body": "Stimmt dein Guthaben?"
+            "body": "Stelle sicher, dass dein Guthaben korrekt ist, bevor du fortfährst. Versuche es erneut, wenn der Betrag nicht richtig ist.",
+            "error": "Der minimale Migrationsbetrag für jede Adresse beträgt 1 Mi. Versuche es erneut, wenn der Betrag nicht richtig ist.",
+            "zeroBalance": "Versuche es erneut. Wenn du dein Guthaben noch immer nicht finden konntest, hast du den Seed vielleicht falsch eingegeben."
         },
         "settings": {
             "settings": "Einstellungen",
             "generalSettings": {
                 "title": "Allgemeine Einstellungen",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Konfiguriere das Aussehen deiner Wallet und ändere allgemeine Einstellungen"
             },
             "security": {
                 "title": "Sicherheit",
@@ -163,7 +223,7 @@
             },
             "profile": {
                 "title": "Profil",
-                "description": "Ändere deinen Profilnamen oder lege ein Avatar fest"
+                "description": "Ändere deinen Profilnamen oder bestimme deinen Avatar"
             },
             "sync": {
                 "title": "Konten synchronisieren",
@@ -183,14 +243,14 @@
             },
             "notifications": {
                 "title": "Benachrichtigungen",
-                "description": "Systembenachrichtigungen für Transaktions-Ereignisse"
+                "description": "Systembenachrichtigungen bei Transaktionen"
             },
             "exportStronghold": {
                 "title": "Backup exportieren",
                 "description": "Exportiere in eine Stronghold-Datei - ein vollständig verschlüsseltes Backup deiner Wallet und des gesamten Transaktionsverlaufs."
             },
             "appLock": {
-                "title": "Automatisches Sperren",
+                "title": "Automatische Sperre",
                 "description": "Zeit, die vergehen muss, bevor sich dein Wallet sperrt und du abgemeldet wirst"
             },
             "changePassword": {
@@ -199,19 +259,19 @@
             },
             "changePincode": {
                 "title": "PIN ändern",
-                "description": "Deine PIN hält dein Guthaben und deine Transaktionen privat",
+                "description": "Deine PIN hält dein Guthaben und deine Transaktionen geheim",
                 "currentPincode": "Aktuelle PIN",
                 "newPincode": "Neue PIN",
                 "confirmNewPincode": "Neue PIN bestätigen",
                 "action": "PIN ändern"
             },
             "resyncAccounts": {
-                "title": "Konten neu synchronisieren",
-                "description": "Startet einen Prozess im Hintergrund, um sicherzustellen, dass deine Konten auf dem aktuellsten Stand sind."
+                "title": "Profile neu synchronisieren",
+                "description": "Startet einen Hintergrundprozess, um sicherzustellen, dass deine Konten auf dem aktuellsten Stand sind."
             },
             "hiddenAccounts": {
-                "title": "Ausgeblendete Konten",
-                "description": "Bei der Wahl dieser Optionen werden Konten angezeigt, die zuvor ausgeblendet wurden."
+                "title": "Ausgeblendete Profile",
+                "description": "Wähle diese Option um ausgeblendete Konten wieder anzuzeigen."
             },
             "deleteProfile": {
                 "title": "Profil löschen",
@@ -226,8 +286,8 @@
                 "description": "Mit Testnetzwerken verbinden und andere Entwickleroptionen"
             },
             "nodeSettings": {
-                "title": "Node-Einstellungen",
-                "description": "Wähle Manuell, um die Node-Einstellungen zu konfigurieren und dich mit deinem eigenen Node zu verbinden"
+                "title": "Node Einstellungen",
+                "description": "Wähle Manuell, um die Node Einstellungen zu konfigurieren und dich mit deinem eigenen Node zu verbinden"
             },
             "configureNodeList": {
                 "title": "Wähle einen Node aus",
@@ -236,14 +296,14 @@
                 "excludeNode": "Node ausschließen",
                 "includeNode": "Node einbeziehen",
                 "viewDetails": "Details anzeigen",
-                "setAsPrimary": "Als Primäre festlegen",
+                "setAsPrimary": "Als Standard festlegen",
                 "removeNode": "Node entfernen",
-                "includeOfficialNodeList": "Offizielle Node-Liste einbeziehen",
+                "includeOfficialNodeList": "Offizielle Node Liste miteinbeziehen",
                 "noNodes": "Es sind keine Nodes vorhanden, automatische Auswahl wird stattdessen verwendet."
             },
             "proofOfWork": {
                 "title": "Proof of Work",
-                "description": "Führe Proof of Work lokal auf deinem Gerät aus oder delegiere diesen an den Node"
+                "description": "Proof of Work lokal auf deinem Gerät ausführen oder an den Node ausgliedern"
             },
             "errorLog": {
                 "title": "Fehlerprotokoll",
@@ -255,7 +315,7 @@
             },
             "stateExport": {
                 "title": "Status exportieren",
-                "description": "Exportiere deinen Transaktionsverlauf in eine .csv-Datei"
+                "description": "Exportiere deine Kontobewegungen in eine .csv-Datei"
             },
             "troubleshoot": {
                 "title": "Fehlerbehebung",
@@ -280,7 +340,7 @@
             },
             "reportAnIssue": {
                 "title": "Ein Problem melden",
-                "description": "Melde einen Fehler an die Entwickler. Überprüfe, ob es nicht bereits gemeldet wurde."
+                "description": "Melde einen Fehler an die Entwickler. Überprüfe ob es nicht bereits gemeldet wurde."
             }
         },
         "login": {
@@ -304,7 +364,7 @@
                     "unlocked": "Stronghold entsperrt"
                 },
                 "strongholdBackup": {
-                    "title": "Wallet-Backup",
+                    "title": "Wallet Backup",
                     "weeksAgo": "{weeks, plural, one {# Woche} other {# Wochen}}"
                 }
             },
@@ -345,7 +405,7 @@
             "backupWarning": "Wenn du dein Backup und die Wiederherstellungsphrase verlierst, verlierst du Zugriff auf dein Guthaben.",
             "notBackedUp": "Noch kein Backup erstellt",
             "notBackedUpDescription": "Du hast noch kein Stronghold-Backup erstellt",
-            "saving": "Speichern..."
+            "saving": "Speichere..."
         },
         "deleteAccount": {
             "title": "{name} löschen?",
@@ -353,17 +413,17 @@
             "typePassword": "Gib dein Wallet-Passwort zur Bestätigung ein.",
             "hideAccount": "Konto löschen",
             "errorTitle": "{name} kann nicht gelöscht werden",
-            "errorBody1": "Du kannst dieses Konto nicht löschen. Es muss mindestes eins vorhanden sein."
+            "errorBody1": "Du kannst dieses Konto nicht löschen. Es muss mindestes eines vorhanden sein."
         },
         "hideAccount": {
             "title": "{name} ausblenden?",
-            "body": "Du kannst dieses Konto später wiederfinden, indem du \"ausgeblendete Konten anzeigen\" in den erweiterten Einstellungen aktivierst.",
+            "body": "Du kannst dieses Konto später wiederfinden, indem du \"Ausgeblendete Konten anzeigen\" in den erweiterten Einstellungen aktivierst.",
             "typePassword": "Gib dein Wallet-Passwort zur Bestätigung ein.",
             "hideAccount": "Konto ausblenden",
             "errorTitle": "{name} kann nicht ausgeblendet werden",
             "errorBody1": "Um ein Konto zu ausblenden, muss es ein Guthaben von 0 aufweisen.",
             "errorBody2": "Du hast derzeit {balance} auf deinem Konto. Bitte verschiebe dein Guthaben auf ein anderes Konto und versuche es erneut.",
-            "errorBody3": "Du kannst dieses Konto nicht ausblenden. Es muss mindestes eins vorhanden sein."
+            "errorBody3": "Du kannst dieses Konto nicht ausblenden. Es muss mindestes eines vorhanden sein."
         },
         "addressHistory": {
             "title": "{name} Adressverlauf",
@@ -377,7 +437,7 @@
             "nodeAddress": "Node Adresse",
             "optionalUsername": "Benutzername (optional)",
             "optionalPassword": "Passwort (optional)",
-            "setAsPrimaryNode": "Als primäre Node festlegen",
+            "setAsPrimaryNode": "Als primären Node festlegen",
             "removeConfirmation": "Willst du diesen Node wirklich löschen?"
         },
         "errorLog": {
@@ -401,21 +461,32 @@
             "userPath": "Benutzerpfad"
         },
         "transaction": {
-            "title": "Transaktion bestätigen",
-            "body": "Du bist dabei {amount} zu senden an"
+            "title": "Überweisung bestätigen",
+            "body": "Du bist dabei {amount} zu senden"
+        },
+        "riskFunds": {
+            "title": "Warnung: Verlust von Guthaben möglich",
+            "body1": "Es wird dringend empfohlen, dass du deine Guthaben vor der Migration absicherst. Andernfalls besteht das Risiko, dass dein Guthaben gestohlen wird.",
+            "body2": "Es wird empfohlen, den Vorgang für Adressen mit mittlerem Risiko oder höher erneut durchzuführen."
+        },
+        "missingBundle": {
+            "title": "Warnung: Verlust von Guthaben möglich",
+            "body": "Du hast Guthaben auf wiederverwendeten Adressen, aber die für die Absicherung erforderlichen Informationen wurden nicht gefunden. Dies kann passieren, wenn die Transaktionen vor langer Zeit durchgeführt wurden. Du kannst fortfahren, aber {value} sind während der Migration gefährdet.",
+            "learnMore": "Erfahre mehr über wiederverwendete Adressen",
+            "proceed": "Ich akzeptiere das Risiko"
         }
     },
     "charts": {
         "incomingMi": "Eingehende {value} Mi",
         "outgoingMi": "Ausgehende {value} Mi",
         "portoflio": "Portfolio",
-        "token": "Kurs",
-        "accountValue": "Kontowert",
+        "token": "Token",
+        "accountValue": "Kontostand",
         "accountActivity": "Kontoaktivität",
-        "timeframe1Hour": "1 hour",
-        "timeframe1Day": "1 day",
-        "timeframe1Week": "1 week",
-        "timeframe1Month": "1 month"
+        "timeframe1Hour": "1 Stunde",
+        "timeframe1Day": "1 Tag",
+        "timeframe1Week": "1 Woche",
+        "timeframe1Month": "1 Monat"
     },
     "actions": {
         "continue": "Weiter",
@@ -423,12 +494,15 @@
         "cancel": "Abbrechen",
         "close": "Schließen",
         "dismiss": "Verwerfen",
+        "proceedAnyway": "Trotzdem fortfahren",
         "save": "Speichern",
-        "importSeed": "Importiere einen bestehenden Seed",
-        "importWallet": "Bestehende Wallet importieren",
+        "importSeed": "Importiere einen vorhandenen Seed",
+        "restoreWallet": "Wallet migrieren oder wiederherstellen",
+        "restoreWalletDescription": "Zu Chrysalis migrieren oder vorhandene Wallet wiederherstellen",
         "createWallet": "Neue Wallet erstellen",
+        "createWalletDescription": "Erstelle eine neue Wallet auf dem Chrysalis-Netzwerk",
         "savePassword": "Passwort speichern",
-        "useBiometric": "Biometrische Sicherheit verwenden",
+        "useBiometric": "Biometrische Sicherheitsmerkmale verwenden",
         "setupPin": "PIN-Code festlegen",
         "setPin": "PIN-Code festlegen",
         "confirmPin": "PIN-Code bestätigen",
@@ -438,7 +512,7 @@
         "verifyRecoveryPhrase": "Wiederherstellungsphrase bestätigen",
         "revealRecoveryPhrase": "Wiederherstellungsphrase anzeigen",
         "importSeedvault": "SeedVault importieren",
-        "checkAgain": "Erneut überprüfen",
+        "checkAgain": "Erneut prüfen",
         "importFromFile": "Von einer Datei importieren",
         "send": "Senden",
         "receive": "Empfangen",
@@ -451,13 +525,13 @@
         "chooseFile": "Datei auswählen",
         "dropHere": "Datei hier ablegen",
         "syncAll": "Alle synchronisieren",
-        "export": "Export",
+        "export": "Exportieren",
         "exportNewStronghold": "Neuen Stronghold exportieren",
         "enableDeepLinks": "Deep Links aktivieren",
         "enableDeveloperMode": "Entwicklermodus aktivieren",
-        "enableSystemNotifications": "Aktiviere Systembenachrichtigungen",
+        "enableSystemNotifications": "Systembenachrichtigungen einschalten",
         "exportState": "Status exportieren",
-        "localProofOfWork": "Lokales Proof-of-Work",
+        "localProofOfWork": "Lokaler Proof-of-Work",
         "unlock": "Entsperren",
         "updateFirefly": "Firefly aktualisieren",
         "restartNow": "Jetzt Neustarten",
@@ -489,13 +563,15 @@
         "hideDetails": "Details ausblenden",
         "yes": "Ja",
         "no": "Nein",
+        "skip": "Überspringen",
         "reset": "Zurücksetzen",
-        "downloadRecoveryKit": "Wiederherstellungs-Dokument Vorlage speichern",
+        "downloadRecoveryKit": "Wiederherstellungsdokument als Vorlage speichern",
         "skipBackup": "Backup überspringen",
         "finishSetup": "Einrichtung abschließen",
         "readDocumentation": "Lese die Dokumentation",
         "visitFaq": "Gehe zu den FAQs",
-        "showHiddenAccounts": "Versteckte Konten anzeigen",
+        "viewStatus": "Status ansehen",
+        "showHiddenAccounts": "Ausgeblendete Konten anzeigen",
         "confirm": "Bestätigen"
     },
     "general": {
@@ -513,7 +589,7 @@
         "moveFunds": "Interner Transfer",
         "sendFunds": "Guthaben senden",
         "sendToAddress": "An Adresse senden",
-        "scanQrOrPaste": "Scanne einen QR-Code oder füge eine Adresse ein",
+        "scanQrOrPaste": "Scanne einen QR-Code ein oder füge eine Adresse hinzu",
         "moveFundsBetweenAccounts": "Guthaben zwischen deinen Konten verschieben",
         "sendTokensToAddress": "Token an eine Adresse senden",
         "manageAccount": "Konto verwalten",
@@ -532,7 +608,7 @@
         "generateNewAddress": "Neue Adresse erstellen",
         "copyAddress": "Adresse kopieren",
         "haveTextBackup": "Ich habe ein Text-Backup",
-        "haveFileBackup": "Ich habe ein Backup",
+        "haveFileBackup": "Ich habe eine Backup Datei",
         "enterSeedOrPhrase": "Wiederherstellungsphrase oder Seed eingeben",
         "uploadSeedvaultOrStronghold": "Importiere eine Stronghold- oder SeedVault-Datei",
         "import": "Importieren",
@@ -554,10 +630,11 @@
         "manualNodeSelection": "Manuelle Node-Verwaltung",
         "profiles": "Profile",
         "developerProfile": "Entwicklerprofil",
+        "developerProfileDescription": "Ermöglicht die Verbindung zu Testnetzen",
         "dev": "Entwickler",
         "createAccount": "Konto erstellen",
         "accountName": "Kontoname",
-        "latestTransactions": "Neueste Transaktionen",
+        "latestTransactions": "Neueste Überweisungen",
         "transactions": "Transaktionen",
         "security": "Sicherheit",
         "accountAddress": "Kontoadresse",
@@ -576,7 +653,7 @@
         "loadingAccounts": "Wird geladen, bitte warten...",
         "addProfile": "Profil hinzufügen",
         "noRecentHistory": "Kein aktueller Verlauf",
-        "transferSyncing": "Synchronisiere Konto",
+        "transferSyncing": "Konto Synchronisierung",
         "transferSelectingInputs": "Wähle Inputs",
         "transferRemainderAddress": "Erzeuge Rest-Einzahlungsadresse",
         "transferSigning": "Signieren der Transaktion",
@@ -585,18 +662,18 @@
         "transferComplete": "Überweisung abgeschlossen",
         "creatingAccount": "Erstelle Konto, bitte warten...",
         "updatingAccount": "Aktualisiere Konto, bitte warten...",
-        "accountSyncing": "Konto synchronisiert",
-        "accountSyncComplete": "Konto Synchronisierung vollständig",
-        "passwordUpdating": "Passwort aktualisieren...",
-        "passwordSuccess": "Passwort erfolgreich aktualisiert",
+        "accountSyncing": "Konto wird synchronisiert",
+        "accountSyncComplete": "Konto Synchronisierung abgeschlossen",
+        "passwordUpdating": "Ändere Passwort...",
+        "passwordSuccess": "Passwort erfolgreich geändert",
         "passwordFailed": "Passwortänderung fehlgeschlagen",
         "syncingAccounts": "Synchronisiere Konten...",
         "exportingStronghold": "Exportiere Stronghold...",
-        "exportingStrongholdSuccess": "Exportieren von Stronghold erfolgreich",
+        "exportingStrongholdSuccess": "Stronghold erfolgreich exportiert",
         "exportingStrongholdFailed": "Exportieren von Stronghold fehlgeschlagen",
-        "pinCodeUpdating": "PIN aktualisieren...",
-        "pinCodeSuccess": "PIN erfolgreich aktualisiert",
-        "pinCodeFailed": "PIN konnte nicht aktualisiert werden",
+        "pinCodeUpdating": "Ändere Pin...",
+        "pinCodeSuccess": "PIN erfolgreich geändert",
+        "pinCodeFailed": "PIN konnte nicht geändert werden",
         "passwordStrength": "Passwortstärke",
         "passwordStrength0": "Unsicher",
         "passwordStrength1": "Sehr schwach",
@@ -604,6 +681,7 @@
         "passwordStrength3": "Durchschnittlich",
         "passwordStrength4": "Stark",
         "creatingProfile": "Erstelle Profil, bitte warten...",
+        "fundMigration": "Guthabenmigration",
         "accountRemoved": "Dieses Konto ist ausgeblendet. Blende es wieder ein, um Überweisungen auszuführen."
     },
     "dates": {
@@ -623,60 +701,62 @@
         "downloadingUpdate": "Update wird heruntergeladen",
         "updateReady": "Update bereit",
         "updateError": "Während des Updates ist ein Fehler aufgetreten. Bitte versuche es erneut",
-        "restartInstall": "Neustarten zum installieren",
+        "restartInstall": "Zum Installieren neustarten",
         "calcMinutesRemaining": "Berechne verbleibende Zeit...",
         "minutesRemaining": "{minutes, plural, one {1 Minute verbleibend} other {# Minuten verbleibend}}",
         "copiedToClipboard": "In die Zwischenablage kopiert",
-        "accountsSynchronized": "Synchronisation der Konten abgeschlossen"
+        "accountsSynchronized": "Synchronisation der Konten abgeschlossen",
+        "migratedAccountChrysalisDown": "Dein Guthaben wird nach dem Chrysalis Upgrade am 28. April verfügbar sein",
+        "migratedAccountChrysalisUp": "Dein Guthaben wird in Kürze verfügbar sein"
     },
     "error": {
         "profile": {
-            "length": "Dein Profilname darf nicht länger sein als {length, plural, one {1 Zeichen} other {# Zeichen}} sein.",
+            "length": "Dein Profilname darf nicht länger als {length, plural, one {1 Zeichen} other {# Zeichen}} sein.",
             "duplicate": "Ein Profil mit diesem Namen existiert bereits."
         },
         "password": {
             "doNotMatch": "Die Passwörter stimmen nicht überein.",
             "tooWeak": "Dein neues Passwort ist zu schwach.",
-            "row": "Buchstabenfolgen sind leicht zu erraten.",
+            "row": "Buchstabenfolgen aus nebeneinander liegenden Tasten sind leicht zu erraten.",
             "pattern": "Kurze Tastaturmuster sind leicht zu erraten.",
             "names": "Geläufige Vor- und Nachnamen sind leicht zu erraten.",
             "repeats": "Wiederholungen wie z. B. \"aaa\" sind leicht zu erraten.",
             "repeats2": "Wiederholungen wie z. B. \"abcabcabc\" sind leicht zu erraten.",
             "sequence": "Wiederholungen von Zeichen sind leicht zu erraten.",
             "years": "Gegenwärtige Jahreszahlen sind leicht zu erraten.",
-            "dates": "Datumsangaben sind häufig leicht zu erraten.",
+            "dates": "Datumsangaben sind leicht zu erraten.",
             "common": "Dies ist ein sehr häufig verwendetes Passwort.",
-            "similar": "Dies ähnelt einem häufig verwendeten Passwort.",
+            "similar": "Deine Eingabe ähnelt einem häufig verwendeten Passwort.",
             "word": "Ein einzelnes Wort ist zu leicht zu erraten.",
             "incorrect": "Dein Passwort ist falsch.",
             "length": "Dein Passwort darf nicht länger als {length, plural, one {1 Zeichen} other {# Zeichen}} sein."
         },
         "pincode": {
-            "length": "Deine PIN muss {length, plural, one {1 Ziffer} other {# Ziffern}} lang sein.",
+            "length": "Deine PIN muss noch {length, plural, one {1 Ziffer} other {# Ziffern}} länger sein.",
             "match": "Die PINs stimmen nicht überein.",
-            "incorrect": "Dein PIN ist nicht korrekt."
+            "incorrect": "Deine PIN ist nicht korrekt."
         },
         "account": {
             "length": "Dein Kontoname darf nicht länger als {length, plural, one {1 Zeichen} other {# Zeichen}} sein.",
             "empty": "Du musst dein neuestes Konto verwenden, bevor du ein neues erstellen kannst.",
-            "notEmpty": "Du musst dein Guthaben transferieren bevor dieses Konto gelöscht werden kann.",
+            "notEmpty": "Du musst dein Guthaben übertragen bevor dieses Konto gelöscht werden kann.",
             "duplicate": "Ein Konto mit diesem Namen existiert bereits.",
-            "tilde": "Ein Profilname kann nicht mit dem Zeichen '~' beginnen.",
+            "tilde": "Ein Profilname darf nicht mit dem Zeichen '~' beginnen.",
             "control": "Ein Profilname darf kein Kontrollzeichen enthalten.",
-            "startDot": "Ein Profilname kann nicht mit dem Zeichen '.' beginnen.",
+            "startDot": "Ein Profilname darf nicht mit dem Zeichen '.' beginnen.",
             "chars": "Ein Profilname darf die folgenden Zeichen nicht enthalten: <>:\"/\\|?*"
         },
         "send": {
-            "addressLength": "Adressen sollten {length, plural, one {1 Zeichen} other {# Zeichen}} lang sein.",
+            "addressLength": "Adressen sollten noch {length, plural, one {1 Zeichen} other {# Zeichen}} länger sein.",
             "amountTooHigh": "Das übersteigt dein verfügbares Guthaben.",
             "amountNoFloat": "Wenn Einheiten `i` sind, können keine Dezimalstellen verwendet werden.",
             "amountInvalidFormat": "Der Betrag scheint eine ungültige Zahl zu sein.",
-            "amountZero": "Betrag muss größer als 0 sein.",
+            "amountZero": "Der Betrag muss größer als 0 sein.",
             "wrongAddressPrefix": "Adressen beginnen mit dem Präfix {prefix}.",
             "wrongAddressFormat": "Die Adresse ist nicht korrekt formatiert.",
             "invalidAddress": "Die Adresse ist ungültig.",
-            "insufficientFunds": "Dieses Konto hat nicht genug Guthaben.",
-            "noToAccount": "Sie haben kein Konto ausgewählt, auf welches das Guthaben gesendet werden soll.",
+            "insufficientFunds": "Dieses Konto verfügt nicht über ausreichend Guthaben.",
+            "noToAccount": "Du hast kein Konto ausgewählt, auf welches das Guthaben gesendet werden soll.",
             "sendingDust": "Du kannst nicht weniger als 1 Mi senden.",
             "leavingDust": "Du kannst nicht weniger als 1 Mi auf deiner Adresse hinterlassen."
         },
@@ -685,7 +765,7 @@
             "https": "HTTPS wird benötigt. Benutze ein Entwicklerprofil um ungesicherte HTTP Verbindungen zu nutzen.",
             "duplicate": "Dieser Node wurde bereits hinzugefügt.",
             "unsynced": "Der Node ist nicht synchronisiert.",
-            "noSynced": "Keine synchronisierte Node verfügbar."
+            "noSynced": "Keine synchronisierten Nodes verfügbar."
         },
         "global": {
             "generic": "Ein Fehler ist aufgetreten."
@@ -695,10 +775,20 @@
             "destination": "Das Backup Ziel ist nicht gültig.",
             "mnemonic": "Mnemorische Phrase nicht gültig.",
             "seedTooShort": "Der Seed sollte 81 Zeichen lang sein, er {length, plural, one {ist 1} other {ist #}}",
-            "seedCharacters": "Der Seed enthält nur die Buchstaben A-Z oder 9",
+            "seedCharacters": "Der Seed darf nur die Buchstaben A-Z oder die Zahl 9 enthalten",
             "phraseWordCount": "Deine Wiederherstellungsphrase sollte aus 24 Wörtern bestehen. Aktuell {length, plural, one {ist es 1} other {sind es #}}.",
             "phraseUnrecognizedWord": "Unbekanntes Wort \"{word}\" in deiner Wiederherstellungsphrase",
-            "phraseCaseWord": "Das Wort \"{word}\" sollte in Kleinbuchstaben sein"
+            "phraseCaseWord": "Das Wort \"{word}\" muss aus Kleinbuchstaben bestehen"
+        }
+    },
+    "tooltips": {
+        "risk": {
+            "title": "Risiko-Level: {risk}",
+            "veryHigh": "Sehr hoch",
+            "high": "Hoch",
+            "medium": "Durchschnittlich",
+            "low": "Gering",
+            "veryLow": "Sehr gering"
         }
     }
 }
