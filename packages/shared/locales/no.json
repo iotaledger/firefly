@@ -109,14 +109,26 @@
             "exportMigration": "Eksporter migrasjonsloggen og fullfør oppsettet"
         },
         "import": {
-            "title": "Importer en lommebok",
-            "body": "Hvis du har en gjenopprettingsfrase eller en Stronghold-sikkerhetskopiering, kan du importere den her."
+            "title": "Recover or migrate funds",
+            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+            "importSeed": "I have an 81 character seed",
+            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "importMnemonic": "I have a Firefly recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase to recover your wallet",
+            "importFile": "I have a file backup",
+            "importFileDescription": "Upload a Seedvault or Stronghold file"
         },
         "importFromText": {
-            "title": "Gjenopprett lommeboken med en gjenopprettingsfrase eller hovednøkkel",
-            "body1": "En hovednøkkel består av 81 tegn. Denne brukes til å gjenopprette en eldre Trinity-lommebok.",
-            "body2": "En gjenopprettingsfrase består av 24 ord med små bokstaver, skilt med mellomrom. Den brukes til å gjenopprette en eksisterende Firefly-lommebok.",
-            "body3": "Angi gjenopprettingsfrasen eller hovednøkkelen din",
+            "seed": {
+                "title": "Type your seed to commence migration",
+                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+                "enter": "Enter your seed"
+            },
+            "mnemonic": {
+                "title": "Type your recovery phrase",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
+                "enter": "Enter your secret recovery phrase"
+            },
             "seedDetected": "Hovednøkkel med 81 tegn oppdaget",
             "phraseDetected": "24 ords gjenopprettingsfrase oppdaget",
             "checksum": "Sjekksum"
@@ -155,7 +167,7 @@
             "incorrectSeedVaultPassword": "Feil passord for SeedVault.",
             "signingBundle": "Signerer bundle",
             "broadcastingBundle": "Kringkaster bundle",
-            "miningBundle": "Mining bundle",
+            "miningBundle": "Utvinner bunt",
             "problemRestoringWallet": "Det oppsto et problem under gjenopprettingen av din lommebok. Vennligst prøv igjen.",
             "minimumMigrationAmountSpentAddresses": "Minste overføringsbeløp for hver brukte adresse er 1 Mi. Sjekk igjen om din saldo ser riktig ut.",
             "tooManyAddressesToMigrate": "Du har for mange adresser med lav saldo til å migrere. Sjekk igjen om din saldo ser riktig ut.",
@@ -199,15 +211,15 @@
         },
         "balance": {
             "title": "Din saldo",
-            "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
-            "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
-            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly."
+            "body": "Kontroller at saldoen stemmer før du fortsetter. Du kan sjekke igjen om det ikke ser riktig ut.",
+            "error": "Minste migrasjonsbeløp er 1 Mi. Sjekk igjen om saldoen ikke ser riktig ut.",
+            "zeroBalance": "Prøv å sjekke igjen. Hvis du fortsatt ikke kan finne balansen din, kan det hende at du har skrevet inn din hovednøkkel feil."
         },
         "settings": {
             "settings": "Innstillinger",
             "generalSettings": {
                 "title": "Generelle innstillinger",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Konfigurer lommebokens utseende og andre generelle innstillinger"
             },
             "security": {
                 "title": "Sikkerhet",
@@ -265,9 +277,9 @@
                 "confirmNewPincode": "Bekreft ny PIN-kode",
                 "action": "Endre PIN-koden"
             },
-            "resyncAccounts": {
-                "title": "Synkroniser kontoene på nytt.",
-                "description": "Starter en bakgrunnsoppgave for å sørge for at kontoene dine er oppdaterte."
+            "balanceFinder": {
+                "title": "Balance finder",
+                "description": "Perform an extended search of your addresses for tokens."
             },
             "hiddenAccounts": {
                 "title": "Skjulte kontoer",
@@ -464,21 +476,27 @@
             "title": "Bekreft transaksjon",
             "body": "Du er i ferd med å sende {amount} til"
         },
+        "balanceFinder": {
+            "title": "Balance finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances.",
+            "totalWalletBalance": "Total wallet balance",
+            "typePassword": "Type your password to allow searching."
+        },
         "riskFunds": {
-            "title": "Warning: funds at risk during migration",
-            "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
-            "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
+            "title": "Advarsel: Midler er utsatt for risiko under migrasjonen",
+            "body1": "Det er sterkt anbefalt at du sikrer midlene dine før du går videre med migrasjonen. Midlene dine er utsatt for tyveri hvis du ikke sikrer dem.",
+            "body2": "Det anbefales at du gjentar prosessen for adresser med et middels risikonivå eller høyere."
         },
         "missingBundle": {
-            "title": "Warning: funds at risk during migration",
-            "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
-            "learnMore": "Learn more about spent addresses",
-            "proceed": "I understand the risk"
+            "title": "Advarsel: Midler er utsatt for risiko under migrasjonen",
+            "body": "Du har tilgjengelige midler på brukte adresser, men nødvendig informasjon for å sikre dem ble ikke funnet. Dette kan skje hvis du har utført transaksjoner for lenge siden. Du kan fortsette, men {value} er utsatt for risiko under migrasjonen.",
+            "learnMore": "Lær mer om brukte adresser",
+            "proceed": "Jeg forstår risikoen"
         }
     },
     "charts": {
-        "incomingMi": "Innkommende {value} Mi",
-        "outgoingMi": "Utgående {value} Mi",
+        "incomingMi": "Incoming {value}",
+        "outgoingMi": "Outgoing {value}",
         "portoflio": "Portefølje",
         "token": "Token",
         "accountValue": "Kontoverdi",
@@ -494,13 +512,13 @@
         "cancel": "Avbryt",
         "close": "Lukk",
         "dismiss": "Avvis",
-        "proceedAnyway": "Proceed anyway",
+        "proceedAnyway": "Fortsett likevel",
         "save": "Lagre",
         "importSeed": "Importer en eksisterende hovednøkkel",
-        "restoreWallet": "Migrate or restore a wallet",
-        "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
+        "restoreWallet": "Migrer eller gjenopprett en lommebok",
+        "restoreWalletDescription": "Migrer til Chrysalis eller gjenopprett en eksisterende lommebok",
         "createWallet": "Opprett en ny lommebok",
-        "createWalletDescription": "Create a fresh wallet running on Chrysalis",
+        "createWalletDescription": "Lag en fersk lommebok som kjører på Chrysalis",
         "savePassword": "Lagre passord",
         "useBiometric": "Bruk biometrisk sikkerhet",
         "setupPin": "Opprett PIN-kode",
@@ -512,7 +530,7 @@
         "verifyRecoveryPhrase": "Bekreft gjenopprettingsfrasen",
         "revealRecoveryPhrase": "Vis gjenopprettingsfrasen",
         "importSeedvault": "Importer SeedVault",
-        "checkAgain": "Check Again",
+        "checkAgain": "Sjekk igjen",
         "importFromFile": "Importer fra fil",
         "send": "Send",
         "receive": "Motta",
@@ -563,16 +581,20 @@
         "hideDetails": "Skjul detaljer",
         "yes": "Ja",
         "no": "Nei",
-        "skip": "Skip",
+        "skip": "Hopp over",
         "reset": "Tilbakestill",
         "downloadRecoveryKit": "Lagre mal for Recovery Kit",
         "skipBackup": "Hopp over filsikkerhetskopi",
         "finishSetup": "Fullfør oppsett",
         "readDocumentation": "Les dokumentasjonen",
         "visitFaq": "Besøk FAQ",
-        "viewStatus": "View status",
+        "viewStatus": "Vis status",
         "showHiddenAccounts": "Vis skjulte kontoer",
-        "confirm": "Bekreft"
+        "confirm": "Bekreft",
+        "findBalances": "Find balances",
+        "searchBalances": "Search for balances",
+        "searchAgain": "Search again",
+        "searching": "Searching..."
     },
     "general": {
         "password": "Passord",
@@ -607,10 +629,6 @@
         "yourAddress": "Din adresse",
         "generateNewAddress": "Generer en ny adresse",
         "copyAddress": "Kopier adresse",
-        "haveTextBackup": "Jeg har en nedskrevet sikkerhetskopi",
-        "haveFileBackup": "Jeg har en sikkerhetskopi-fil",
-        "enterSeedOrPhrase": "Angi en gjenopprettingsfrase eller hovednøkkel",
-        "uploadSeedvaultOrStronghold": "Importer en Stronghold- eller SeedVault-fil",
         "import": "Importer",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -630,7 +648,7 @@
         "manualNodeSelection": "Manuell node selektering",
         "profiles": "Profiler",
         "developerProfile": "Utviklerprofil",
-        "developerProfileDescription": "Allows you to connect to testnets",
+        "developerProfileDescription": "Lar deg koble til testnett",
         "dev": "Utvikling",
         "createAccount": "Opprett konto",
         "accountName": "Kontonavn",
@@ -681,8 +699,14 @@
         "passwordStrength3": "Gjennomsnittlig",
         "passwordStrength4": "Sterk",
         "creatingProfile": "Oppretter profil, vennligst vent...",
-        "fundMigration": "Fund migration",
-        "accountRemoved": "Denne kontoen er skjult. Vis den for å utføre overføringer."
+        "fundMigration": "Migrasjon av midler",
+        "accountRemoved": "Denne kontoen er skjult. Vis den for å utføre overføringer.",
+        "receivingTo": "Receiving to {account}",
+        "sendingFrom": "Sending from {account}",
+        "receivedTo": "Received to {account}",
+        "sentFrom": "Sent from {account}",
+        "receiving": "Receiving",
+        "sending": "Sending"
     },
     "dates": {
         "today": "I dag",
@@ -706,8 +730,8 @@
         "minutesRemaining": "{minutes, plural, one {1 minutt gjenstår} other {# minutter gjenstår}}",
         "copiedToClipboard": "Kopiert til utklippstavle",
         "accountsSynchronized": "Synkronisering av konto fullført",
-        "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
-        "migratedAccountChrysalisUp": "Your funds will become available shortly"
+        "migratedAccountChrysalisDown": "Midlene dine vil bli tilgjengelig etter Chrysalis den 28. april",
+        "migratedAccountChrysalisUp": "Dine midler vil bli tilgjengelig snarlig"
     },
     "error": {
         "profile": {
@@ -783,12 +807,12 @@
     },
     "tooltips": {
         "risk": {
-            "title": "Risk level: {risk}",
-            "veryHigh": "Very high",
-            "high": "High",
-            "medium": "Medium",
-            "low": "Low",
-            "veryLow": "Very low"
+            "title": "Risikonivå: {risk}",
+            "veryHigh": "Veldig høyt",
+            "high": "Høyt",
+            "medium": "Middels",
+            "low": "Lavt",
+            "veryLow": "Veldig lavt"
         }
     }
 }

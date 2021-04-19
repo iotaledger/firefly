@@ -109,14 +109,26 @@
             "exportMigration": "마이그레이션 로그 내보내기 및 설정 완료"
         },
         "import": {
-            "title": "지갑 불러오기",
-            "body": "복원 문구 또는 Stronghold 백업을 가지고 있다면 불러올 수 있습니다."
+            "title": "Recover or migrate funds",
+            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+            "importSeed": "I have an 81 character seed",
+            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "importMnemonic": "I have a Firefly recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase to recover your wallet",
+            "importFile": "I have a file backup",
+            "importFileDescription": "Upload a Seedvault or Stronghold file"
         },
         "importFromText": {
-            "title": "복원 문구 또는 시드로 지갑을 복구하기",
-            "body1": "시드는 81개의 글자로 이루어져 있습니다. 시드가 있으면 기존에 사용하던 Trinity 지갑을 복구할 수 있습니다.",
-            "body2": "복원 문구는 띄어쓰기와 24개의 소문자 단어로 이루어진 문장입니다. 복원 문구가 있으면 기존에 사용하던 Firefly 지갑을 복구할 수 있습니다.",
-            "body3": "시드 또는 복원 문구 입력",
+            "seed": {
+                "title": "Type your seed to commence migration",
+                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+                "enter": "Enter your seed"
+            },
+            "mnemonic": {
+                "title": "Type your recovery phrase",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
+                "enter": "Enter your secret recovery phrase"
+            },
             "seedDetected": "81자의 시드 감지됨",
             "phraseDetected": "24개 단어로 된 복원 문구 감지",
             "checksum": "체크섬"
@@ -265,9 +277,9 @@
                 "confirmNewPincode": "새 PIN 확인",
                 "action": "PIN 변경하기"
             },
-            "resyncAccounts": {
-                "title": "계정 다시 동기화",
-                "description": "계정이 최신 상태인지 확인하기 위해 백그라운드 작업을 시작합니다."
+            "balanceFinder": {
+                "title": "Balance finder",
+                "description": "Perform an extended search of your addresses for tokens."
             },
             "hiddenAccounts": {
                 "title": "숨겨진 계정",
@@ -464,6 +476,12 @@
             "title": "트랜잭션 확인",
             "body": "{amount} 만큼 보내려고 합니다"
         },
+        "balanceFinder": {
+            "title": "Balance finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances.",
+            "totalWalletBalance": "Total wallet balance",
+            "typePassword": "Type your password to allow searching."
+        },
         "riskFunds": {
             "title": "경고: 마이그레이션 중 위험에 처한 자금",
             "body1": "마이그레이션을 진행하기 전에 모든 자금을 확보하는 것이 좋습니다. 자금을 확보하지 않으면 자금이 도난 될 위험이 있습니다.",
@@ -477,8 +495,8 @@
         }
     },
     "charts": {
-        "incomingMi": "{value} Mi 받음",
-        "outgoingMi": "{value} Mi 보냄",
+        "incomingMi": "Incoming {value}",
+        "outgoingMi": "Outgoing {value}",
         "portoflio": "포트폴리오",
         "token": "토큰",
         "accountValue": "계정 잔액",
@@ -572,7 +590,11 @@
         "visitFaq": "자주 묻는 질문들 보기",
         "viewStatus": "상태 보기",
         "showHiddenAccounts": "숨긴 계정 보이기",
-        "confirm": "확인"
+        "confirm": "확인",
+        "findBalances": "Find balances",
+        "searchBalances": "Search for balances",
+        "searchAgain": "Search again",
+        "searching": "Searching..."
     },
     "general": {
         "password": "비밀번호",
@@ -607,10 +629,6 @@
         "yourAddress": "내 주소",
         "generateNewAddress": "새 주소 생성하기",
         "copyAddress": "주소 복사하기",
-        "haveTextBackup": "복원 문구를 가지고 있습니다",
-        "haveFileBackup": "백업 파일을 가지고 있습니다",
-        "enterSeedOrPhrase": "복원 문구 또는 시드 입력하기",
-        "uploadSeedvaultOrStronghold": "Stronghold 또는 SeedVault 파일 가져오기",
         "import": "불러오기",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -682,7 +700,13 @@
         "passwordStrength4": "강함",
         "creatingProfile": "프로필을 만드는 중입니다. 잠시만 기다려 주세요...",
         "fundMigration": "자금 마이그레이션",
-        "accountRemoved": "이 계정은 숨겨져 있습니다. 거래를 위해 숨김 취소를 해주세요."
+        "accountRemoved": "이 계정은 숨겨져 있습니다. 거래를 위해 숨김 취소를 해주세요.",
+        "receivingTo": "Receiving to {account}",
+        "sendingFrom": "Sending from {account}",
+        "receivedTo": "Received to {account}",
+        "sentFrom": "Sent from {account}",
+        "receiving": "Receiving",
+        "sending": "Sending"
     },
     "dates": {
         "today": "오늘",

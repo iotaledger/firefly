@@ -109,14 +109,26 @@
             "exportMigration": "Экспорт журнала миграции и завершение настройки"
         },
         "import": {
-            "title": "Импортировать кошелёк",
-            "body": "Если у вас есть фраза восстановления или резервная копия, вы можете импортировать его здесь."
+            "title": "Recover or migrate funds",
+            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+            "importSeed": "I have an 81 character seed",
+            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "importMnemonic": "I have a Firefly recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase to recover your wallet",
+            "importFile": "I have a file backup",
+            "importFileDescription": "Upload a Seedvault or Stronghold file"
         },
         "importFromText": {
-            "title": "Восстановить кошелек с фразой восстановления или мнемоникой",
-            "body1": "Ключ состоит из 81 символа. Используется для восстановления со старого кошелька Trinity.",
-            "body2": "Ключевая фраза длиной 24 слов, все маленькими буквами с пробелами между ними. Используется для восстановления существующего кошелька Firefly.",
-            "body3": "Введите вашу фразу восстановления или мнемонику",
+            "seed": {
+                "title": "Type your seed to commence migration",
+                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+                "enter": "Enter your seed"
+            },
+            "mnemonic": {
+                "title": "Type your recovery phrase",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
+                "enter": "Enter your secret recovery phrase"
+            },
             "seedDetected": "Обнаружено 81 символ seed",
             "phraseDetected": "Обнаружена фраза восстановления 24 слов",
             "checksum": "Контрольная сумма"
@@ -265,9 +277,9 @@
                 "confirmNewPincode": "Подтвердите новый PIN",
                 "action": "Изменить PIN-код"
             },
-            "resyncAccounts": {
-                "title": "Повторить синхронизацию учетных записей",
-                "description": "Starts a background task to make sure your accounts are up to date."
+            "balanceFinder": {
+                "title": "Balance finder",
+                "description": "Perform an extended search of your addresses for tokens."
             },
             "hiddenAccounts": {
                 "title": "Скрытые учетные записи",
@@ -319,28 +331,28 @@
             },
             "troubleshoot": {
                 "title": "Диагностика",
-                "description": "Use the troubleshooting wizard to solve common problems"
+                "description": "Используй ассистент по устранению неполадок для решения общих проблем"
             },
             "documentation": {
                 "title": "Документация",
-                "description": "View the documentation for in depth explanations of how things work"
+                "description": "Смотри документацию для подробного объяснения того, как всё устроено"
             },
             "faq": {
                 "title": "ЧАВО",
-                "title2": "Frequently Asked Questions",
-                "description": "View the FAQs to get help with a common problem or question"
+                "title2": "Часто задаваемые вопросы",
+                "description": "Просмотреть часто задаваемые вопросы для получения помощи с общей проблемой или вопросом"
             },
             "discord": {
                 "title": "Discord",
-                "description": "Get help from the IOTA community on Discord"
+                "description": "Получить помощь от сообщества IOTA в Discord"
             },
             "about": {
                 "title": "О приложение",
                 "description": ""
             },
             "reportAnIssue": {
-                "title": "Report an issue",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
+                "title": "Сообщить об ошибке",
+                "description": "Сообщи об ошибке разработчикам. Убедись что об этом еще не сообщили."
             }
         },
         "login": {
@@ -351,49 +363,49 @@
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "upToDate": "Up to date",
-                    "outOfDate": "Out of date"
+                    "upToDate": "Последняя версия",
+                    "outOfDate": "Требует обновления"
                 },
                 "hardwareDevice": {
-                    "title": "Hardware Device",
-                    "noneDetected": "None detected"
+                    "title": "Устройства",
+                    "noneDetected": "Не обнаружено"
                 },
                 "strongholdStatus": {
-                    "title": "Wallet Status",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "Статус кошелька",
+                    "locked": "Stronghold заблокирован",
+                    "unlocked": "Stronghold заблокирован"
                 },
                 "strongholdBackup": {
-                    "title": "Wallet Backup",
-                    "weeksAgo": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "title": "Резервная копия кошелька",
+                    "weeksAgo": "{weeks, plural, one {# неделя} few {# недели} other {# недель}}"
                 }
             },
             "network": {
-                "networkOperational": "Network Operational",
-                "networkDegraded": "Network Degraded",
-                "networkDown": "Network Disconnected",
-                "status": "Status",
-                "messagesPerSecond": "Messages per second",
-                "confirmationRate": "Confirmation rate"
+                "networkOperational": "Сетевой оператор",
+                "networkDegraded": "Деградация сети",
+                "networkDown": "Сеть отключена",
+                "status": "Статус",
+                "messagesPerSecond": "Сообщений в секунду",
+                "confirmationRate": "Уровень подтверждения"
             },
             "profileModal": {
-                "allSettings": "All settings",
-                "logout": "Log out"
+                "allSettings": "Все настройки",
+                "logout": "Выйти"
             }
         }
     },
     "popups": {
         "password": {
             "title": "Требуется пароль",
-            "subtitle": "Please enter your password to unlock Stronghold",
-            "backup": "Please enter your password to export a backup"
+            "subtitle": "Пожалуйста, введи свой пароль, чтобы разблокировать Stronghold",
+            "backup": "Пожалуйста, введи свой пароль для экспорта резервной копии"
         },
         "qr": {
             "title": "Ваш QR-код"
         },
         "version": {
-            "title": "Current version: {version}",
-            "upToDateTitle": "Firefly is up to date",
+            "title": "Актуальная версия: {version}",
+            "upToDateTitle": "Firefly актуальный",
             "upToDateDescription": "Ты использушь последнюю и безопасную версию Firefly.",
             "updateAvailable": "Доступно обновление Firefly",
             "updateDetails": "Версия {version} - {date}"
@@ -464,29 +476,35 @@
             "title": "Подтвердить транзакцию",
             "body": "Вы собираетесь отправить {amount}"
         },
+        "balanceFinder": {
+            "title": "Balance finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances.",
+            "totalWalletBalance": "Total wallet balance",
+            "typePassword": "Type your password to allow searching."
+        },
         "riskFunds": {
-            "title": "Warning: funds at risk during migration",
-            "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
-            "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
+            "title": "Предупреждение: средства, находящиеся под угрозой во время миграции",
+            "body1": "Настоятельно рекомендуем защитить все твои средства, прежде чем приступить к миграции. Твои средства могут быть потерены, если ты не создашь резервную копию.",
+            "body2": "Рекомендуется перезапустить процесс для адресов со средним уровнем риска или выше."
         },
         "missingBundle": {
-            "title": "Warning: funds at risk during migration",
-            "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
-            "learnMore": "Learn more about spent addresses",
-            "proceed": "I understand the risk"
+            "title": "Предупреждение: средства, находящиеся под угрозой во время миграции",
+            "body": "У тебя есть средства на потраченных адресах, но информация, необходима для их сохранения, не найдена. Это может произойти, если ты выполнял транзакции давно. Ты можешь продолжить, но {value} находятся под угрозой во время миграции.",
+            "learnMore": "Узнай больше о потраченных адресах",
+            "proceed": "Я понимаю риск"
         }
     },
     "charts": {
-        "incomingMi": "Входящий {value} Mi",
-        "outgoingMi": "Исходящий {value} Mi",
+        "incomingMi": "Incoming {value}",
+        "outgoingMi": "Outgoing {value}",
         "portoflio": "Портфолио",
         "token": "Токен",
         "accountValue": "Счёт аккаунт",
         "accountActivity": "Активность аккаунта",
-        "timeframe1Hour": "1 hour",
-        "timeframe1Day": "1 day",
-        "timeframe1Week": "1 week",
-        "timeframe1Month": "1 month"
+        "timeframe1Hour": "1 час",
+        "timeframe1Day": "1 день",
+        "timeframe1Week": "1 неделя",
+        "timeframe1Month": "1 месяц"
     },
     "actions": {
         "continue": "Продолжить",
@@ -494,13 +512,13 @@
         "cancel": "Отменить",
         "close": "Закрыть",
         "dismiss": "Отклонить",
-        "proceedAnyway": "Proceed anyway",
+        "proceedAnyway": "Все равно продолжить",
         "save": "Сохранить",
         "importSeed": "Импортировать существующую мнемонику",
-        "restoreWallet": "Migrate or restore a wallet",
-        "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
+        "restoreWallet": "Миграция или восстановление кошелька",
+        "restoreWalletDescription": "Миграция в Chrysalis или восстановление существующего кошелька",
         "createWallet": "Создать новый кошелек",
-        "createWalletDescription": "Create a fresh wallet running on Chrysalis",
+        "createWalletDescription": "Создать новый кошелек на Chrysalis",
         "savePassword": "Сохранить пароль",
         "useBiometric": "Использовать биометрическую защиту",
         "setupPin": "Задайте PIN-код",
@@ -512,7 +530,7 @@
         "verifyRecoveryPhrase": "Проверьте фразу восстановления",
         "revealRecoveryPhrase": "Показать фразу восстановлению",
         "importSeedvault": "Импортировать SeedVault",
-        "checkAgain": "Check Again",
+        "checkAgain": "Нет, снова проверить",
         "importFromFile": "Импортировать из файла",
         "send": "Отправить",
         "receive": "Получить",
@@ -547,32 +565,36 @@
         "removeNode": "Удалить узел",
         "hide": "Скрыть",
         "hideOthers": "Скрыть остальные",
-        "showAll": "Show All",
-        "quit": "Quit",
-        "edit": "Edit",
-        "undo": "Undo",
-        "redo": "Redo",
-        "cut": "Cut",
-        "copy": "Copy",
-        "paste": "Paste",
-        "selectAll": "Select All",
-        "addAccount": "Add Account",
-        "checkForUpdates": "Check for Updates",
-        "reportAnIssue": "Report an Issue",
-        "clear": "Clear",
-        "hideDetails": "Hide Details",
-        "yes": "Yes",
-        "no": "No",
-        "skip": "Skip",
-        "reset": "Reset",
-        "downloadRecoveryKit": "Save Recovery Kit template",
-        "skipBackup": "Skip file backup",
-        "finishSetup": "Finish setup",
-        "readDocumentation": "Read the documentation",
-        "visitFaq": "Visit FAQ",
-        "viewStatus": "View status",
+        "showAll": "Показать всё",
+        "quit": "Выйти",
+        "edit": "Редактировать",
+        "undo": "Отменить",
+        "redo": "Повторить",
+        "cut": "Вырезать",
+        "copy": "Копировать",
+        "paste": "Вставить",
+        "selectAll": "Выбрать все",
+        "addAccount": "Добавить аккаунт",
+        "checkForUpdates": "Проверять обновления",
+        "reportAnIssue": "Сообщить об ошибке",
+        "clear": "Очистить",
+        "hideDetails": "Скрыть подробности",
+        "yes": "Да",
+        "no": "Нет",
+        "skip": "Пропустить",
+        "reset": "Сбросить",
+        "downloadRecoveryKit": "Сохранить шаблон документа для востановления",
+        "skipBackup": "Пропустить резервную копию",
+        "finishSetup": "Завершить настройку",
+        "readDocumentation": "Читать документацию",
+        "visitFaq": "Посетить FAQ",
+        "viewStatus": "Просмотр статуса",
         "showHiddenAccounts": "Показать скрытые учетные записи",
-        "confirm": "Подтвердить"
+        "confirm": "Подтвердить",
+        "findBalances": "Find balances",
+        "searchBalances": "Search for balances",
+        "searchAgain": "Search again",
+        "searching": "Searching..."
     },
     "general": {
         "password": "Пароль",
@@ -585,15 +607,15 @@
         "recentActivity": "Последние действия",
         "sent": "Отправлено",
         "received": "Получено",
-        "sendPayment": "Send Payment",
-        "moveFunds": "Internal Transfer",
+        "sendPayment": "Отправить платёж",
+        "moveFunds": "Внутренний перевод",
         "sendFunds": "Отправить средства",
-        "sendToAddress": "Send to address",
+        "sendToAddress": "Отправить на адрес",
         "scanQrOrPaste": "Сканировать QR-код или вставить Адрес",
         "moveFundsBetweenAccounts": "Переместить средства между своими счетами",
-        "sendTokensToAddress": "Send tokens to an address",
+        "sendTokensToAddress": "Отправить токены на адрес",
         "manageAccount": "Управление аккаунтом",
-        "customizeAcount": "Customize your account",
+        "customizeAcount": "Индивидуальные настройки аккаунта",
         "account": "Аккаунт",
         "sendingToAddress": "Отправляется на адрес",
         "amount": "Сумма",
@@ -601,16 +623,12 @@
         "reference": "Ссылка",
         "from": "От",
         "to": "Кому",
-        "receiveFunds": "Receive Funds",
-        "myAddress": "My Address",
+        "receiveFunds": "Получить средства",
+        "myAddress": "Мой адрес",
         "shareAddress": "Поделиться адресом",
         "yourAddress": "Ваш адрес",
         "generateNewAddress": "Создать новый адрес",
         "copyAddress": "Скопировать адрес",
-        "haveTextBackup": "У меня есть резервная копия текста",
-        "haveFileBackup": "У меня есть резервная копия файла",
-        "enterSeedOrPhrase": "Введите фразу восстановлении или мнемонику",
-        "uploadSeedvaultOrStronghold": "Импорт файла Stronghold или SeedVault",
         "import": "Импорт",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -619,39 +637,39 @@
         "lightTheme": "Светлая тема",
         "darkTheme": "Тёмная тема",
         "balance": "Баланс",
-        "accountBalance": "Account Balance",
+        "accountBalance": "Баланс счета",
         "incoming": "Входящие",
         "outgoing": "Исходящие",
-        "totalIn": "Total in",
-        "totalOut": "Total out",
+        "totalIn": "Всего (вх.)",
+        "totalOut": "Всего (исх.)",
         "accounts": "Аккаунты",
-        "myAccounts": "My Accounts",
+        "myAccounts": "Мои аккаунты",
         "automaticNodeSelection": "Авто подбор Node (точка подключения к сети)",
         "manualNodeSelection": "Ручной выбор Node (точка подключения к сети)",
         "profiles": "Профили",
-        "developerProfile": "Developer Profile",
-        "developerProfileDescription": "Allows you to connect to testnets",
-        "dev": "Dev",
-        "createAccount": "Create an Account",
+        "developerProfile": "Профиль разработчика",
+        "developerProfileDescription": "Позволяет подключаться к тестовым сетям",
+        "dev": "Разработчик",
+        "createAccount": "Создать аккаунт",
         "accountName": "Название учетной записи",
         "latestTransactions": "Последние Транзакции",
         "transactions": "Транзакции",
         "security": "Настройки Безопасности",
         "accountAddress": "Адрес кошелька",
-        "nodes": "Nodes",
-        "wallet": "Wallet",
-        "help": "Help",
-        "you": "You",
-        "messageId": "Message ID",
-        "inputAddress": "Send Address",
-        "receiveAddress": "Receive Address",
-        "date": "Date",
-        "status": "Status",
-        "confirmed": "Confirmed",
-        "pending": "Pending",
-        "noAccounts": "You have no accounts, please create one.",
-        "loadingAccounts": "Loading, please wait...",
-        "addProfile": "Add Profile",
+        "nodes": "Узлы",
+        "wallet": "Кошелёк",
+        "help": "Помощь",
+        "you": "Ты",
+        "messageId": "ID сообщения",
+        "inputAddress": "Адрес отправителя",
+        "receiveAddress": "Адрес получателя",
+        "date": "Дата",
+        "status": "Статус",
+        "confirmed": "Подтверждено",
+        "pending": "В ожидании",
+        "noAccounts": "У тебя нет аккаунтов, пожалуйста создай его.",
+        "loadingAccounts": "Загрузка, пожалуйста подожди...",
+        "addProfile": "Добавить профиль",
         "noRecentHistory": "Нет недавней истории",
         "transferSyncing": "Синхронизация аккаунта",
         "transferSelectingInputs": "Выбор входов",
@@ -681,8 +699,14 @@
         "passwordStrength3": "Средний",
         "passwordStrength4": "Сильный",
         "creatingProfile": "Создание аккаунта, пожалуйста подожди...",
-        "fundMigration": "Fund migration",
-        "accountRemoved": "Эта учетная запись скрыта. Сделайте её видимой для выполнения переводов."
+        "fundMigration": "Миграция счета",
+        "accountRemoved": "Эта учетная запись скрыта. Сделайте её видимой для выполнения переводов.",
+        "receivingTo": "Receiving to {account}",
+        "sendingFrom": "Sending from {account}",
+        "receivedTo": "Received to {account}",
+        "sentFrom": "Sent from {account}",
+        "receiving": "Receiving",
+        "sending": "Sending"
     },
     "dates": {
         "today": "Сегодня",
@@ -695,100 +719,100 @@
     "notifications": {
         "valueTx": "Получение {{value}} в {{account}}",
         "confirmed": "Исходящий {{value}} из {{account}} подтверждён",
-        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
+        "confirmedInternal": "{{value}} с {{senderAccount}} на {{receiverAccount}} подтверждено",
         "confirmedInternalNoAccounts": "Внутренний перевод {{value}} подтвержден",
-        "failed": "Outgoing {{value}} from {{account}} has failed",
+        "failed": "Исходящий {{value}} из {{account}} подтверждён",
         "downloadingUpdate": "Загрузка обновлений",
         "updateReady": "Обновление готово",
         "updateError": "Во время обновления произошла ошибка, попробуйте ещё раз",
         "restartInstall": "Перезапустите для установки",
         "calcMinutesRemaining": "Вычисление оставшихся минут...",
-        "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
-        "copiedToClipboard": "Copied to clipboard",
-        "accountsSynchronized": "Account synchronization complete",
-        "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
-        "migratedAccountChrysalisUp": "Your funds will become available shortly"
+        "minutesRemaining": "{minutes, plural, one {Осталась 1 минута} other { Осталось # минут}}",
+        "copiedToClipboard": "Скопировано в буфер обмена",
+        "accountsSynchronized": "Синхронизация аккаунта завершена",
+        "migratedAccountChrysalisDown": "Твои средства будут доступны после 28 апреля Chrysalis",
+        "migratedAccountChrysalisUp": "Твои средства станут доступны в ближайшее время"
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "duplicate": "A profile with this name already exists."
+            "length": "Имя твоего профиля не может быть длиннее {length, plural, one {1 символа} few {# символов} many {# символов} other {# символов}}.",
+            "duplicate": "Профиль с таким именем уже существует."
         },
         "password": {
-            "doNotMatch": "Passwords do not match.",
-            "tooWeak": "Your new password is too weak.",
-            "row": "Straight rows of keys are easy to guess.",
-            "pattern": "Short keyboard patterns are easy to guess.",
-            "names": "Common names and surnames are easy to guess.",
-            "repeats": "Repeats like 'aaa' are easy to guess.",
-            "repeats2": "Repeats like 'abcabcabc' are easy to guess.",
-            "sequence": "Sequences of characters are easy to guess.",
-            "years": "Recent years are easy to guess.",
-            "dates": "Dates are easy to guess.",
-            "common": "This is a very common password.",
-            "similar": "This is similar to a common password.",
-            "word": "A single word is easy to guess.",
-            "incorrect": "Your password is incorrect.",
-            "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
+            "doNotMatch": "Пароли не совпадают.",
+            "tooWeak": "Новый пароль установлен.",
+            "row": "Последовательный ряд символов легко угадать.",
+            "pattern": "Короткие сочетания клавиш легко угадать.",
+            "names": "Распространенные имена и фамилии легко угадать.",
+            "repeats": "Повторы как 'aaa' легко угадать.",
+            "repeats2": "Повторы как 'abcabcabc' легко угадать.",
+            "sequence": "Последовательный ряд букв легко угадать.",
+            "years": "Последние годы легко угадать.",
+            "dates": "Даты легко угадать.",
+            "common": "Это очень распространенный пароль.",
+            "similar": "Похоже на один из широко распространенных паролей.",
+            "word": "Одно слово легко угадать.",
+            "incorrect": "Неправильный пароль.",
+            "length": "Твой пароль не может быть длиннее {length, plural, one {1 символа} few {# символов} many {# символов} other {# символов}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {1 digit} other {# digits}} long.",
-            "match": "PINs do not match.",
-            "incorrect": "Your current PIN is incorrect."
+            "length": "Твой PIN-код должен быть {length, plural, one {1 цифра} few {# цифр} many {# цифр} other {# цифр}}.",
+            "match": "PIN-код и подтверждение не совпадают.",
+            "incorrect": "Твой PIN-код неверен."
         },
         "account": {
-            "length": "Your account name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "empty": "You must use your latest account before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this account.",
-            "duplicate": "An account with this name already exists.",
+            "length": "Имя твоего профиля не может быть длиннее {length, plural, one {1 символа} few {# символов} many {# символов} other {# символов}}.",
+            "empty": "Ты должен использовать твой последний аккаунт перед созданием нового.",
+            "notEmpty": "Вы должны перевести свой баланс перед удалением этого аккаунта.",
+            "duplicate": "Счет с таким названием уже существует.",
             "tilde": "Имя профиля не может начинаться с символа '~'.",
             "control": "Имя профиля не может содержать управляющий символ.",
             "startDot": "Имя профиля не может начинаться с символа '.'.",
             "chars": "Имя профиля не может содержать символы <>:\"/\\|?*"
         },
         "send": {
-            "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
-            "amountTooHigh": "This is greater than your available balance.",
-            "amountNoFloat": "If units are `i` you cannot use decimal places.",
-            "amountInvalidFormat": "The amount appears to be an invalid number.",
-            "amountZero": "The amount must be greater than 0.",
+            "addressLength": "Длина адресов должна быть {length, plural, one {1 символ} other {# символов}}.",
+            "amountTooHigh": "Это больше, чем твой баланс.",
+            "amountNoFloat": "Если единицы измерения 'i', то вы не можете использовать знаки после запятой.",
+            "amountInvalidFormat": "Сумма является недопустимым числом.",
+            "amountZero": "Сумма должна быть больше 0.",
             "wrongAddressPrefix": "Адреса начинаются с префикса {prefix}.",
             "wrongAddressFormat": "Адрес неверно отформатирован.",
-            "invalidAddress": "The address is not valid.",
-            "insufficientFunds": "This account has insufficient funds.",
+            "invalidAddress": "Адрес недействителен.",
+            "insufficientFunds": "Недостаточно средств на этом счете.",
             "noToAccount": "Вы не выбрали аккаунт для перевода средств.",
-            "sendingDust": "You cannot send less than 1 Mi.",
-            "leavingDust": "You cannot leave less than 1 Mi on your address."
+            "sendingDust": "Вы не можете отправить менее 1 Mi.",
+            "leavingDust": "Вы не можете оставить менее 1 Mi на вашем адресе."
         },
         "node": {
-            "invalid": "Please enter a valid URL.",
-            "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
-            "duplicate": "This node has already been added.",
-            "unsynced": "The node is not in sync.",
-            "noSynced": "No synced nodes are available."
+            "invalid": "Пожалуйста, введите правильный адрес.",
+            "https": "Требуется HTTPS. Настройте профиль разработчика для использования небезопасных HTTP-соединений.",
+            "duplicate": "Этот узел уже был добавлен.",
+            "unsynced": "Узел не синхронизирован.",
+            "noSynced": "Нет доступных синхронизированных узлов."
         },
         "global": {
-            "generic": "Something went wrong."
+            "generic": "Что-то пошло не так."
         },
         "backup": {
-            "invalid": "The backup file was not recognised.",
-            "destination": "The backup destination was not valid.",
-            "mnemonic": "The mnemonic is not valid.",
-            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
-            "seedCharacters": "The seed should only contain characters A-Z or 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
-            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
-            "phraseCaseWord": "The word \"{word}\" should be lower case"
+            "invalid": "Файл резервной копии не распознан.",
+            "destination": "Резервная копия недействительна.",
+            "mnemonic": "Мнемоника недействительна.",
+            "seedTooShort": "Ключ должен быть 81 символ длиной, это {length, plural, one {1} other {#}}",
+            "seedCharacters": "Ключ должен содержать только символы A-Z или 9",
+            "phraseWordCount": "В твоей фразе восстановления должно быть 24 слов, сейчас здесь {length, plural, one {1} few {#} many {#} other {#}}.",
+            "phraseUnrecognizedWord": "Нераспознанное слово \"{word}\" в твоей фразе восстановления",
+            "phraseCaseWord": "Слово \"{word}\" должно быть строчным регистром"
         }
     },
     "tooltips": {
         "risk": {
-            "title": "Risk level: {risk}",
-            "veryHigh": "Very high",
-            "high": "High",
-            "medium": "Medium",
-            "low": "Low",
-            "veryLow": "Very low"
+            "title": "Уровень риска: {risk}",
+            "veryHigh": "Очень высокий",
+            "high": "Высокий",
+            "medium": "Средний",
+            "low": "Низкий",
+            "veryLow": "Очень низкий"
         }
     }
 }

@@ -109,14 +109,26 @@
             "exportMigration": "Exportă jurnalul migrarii și finalizează configurarea"
         },
         "import": {
-            "title": "Importă un portofel",
-            "body": "Dacă ai o frază de recuperare sau o copie de rezervă Stronghold, o poți importa aici."
+            "title": "Recover or migrate funds",
+            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+            "importSeed": "I have an 81 character seed",
+            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "importMnemonic": "I have a Firefly recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase to recover your wallet",
+            "importFile": "I have a file backup",
+            "importFileDescription": "Upload a Seedvault or Stronghold file"
         },
         "importFromText": {
-            "title": "Restaurează-ți portofelul cu o frază de recuperare sau cu seed-ul tău",
-            "body1": "Un seed este format din 81 de caractere. Acesta este folosit pentru a recupera de la un portofel mai vechi Trinity.",
-            "body2": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
-            "body3": "Introduce parola sau fraza de recuperare",
+            "seed": {
+                "title": "Type your seed to commence migration",
+                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+                "enter": "Enter your seed"
+            },
+            "mnemonic": {
+                "title": "Type your recovery phrase",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
+                "enter": "Enter your secret recovery phrase"
+            },
             "seedDetected": "Seed de 81 de caractere detectat",
             "phraseDetected": "Frază de recuperare de 24 de cuvinte detectată",
             "checksum": "Suma de verificare"
@@ -140,7 +152,7 @@
         },
         "migrate": {
             "title": "Migrează-ți fondurile",
-            "body1": "This is an automated process to transfer your funds to your new wallet.",
+            "body1": "Acesta este un proces automat de transfer al fondurilor personale către noul portofel.",
             "body2": "Poate dura ceva timp. Nu opri dispozitivul în timpul migrării.",
             "existing": "Vechiul tău portofel",
             "new": "Noul tău portofel",
@@ -152,14 +164,14 @@
             "noAddressesForMigration": "Te rugăm să selectezi adresele pe care doresti să le securizezi.",
             "restoringWallet": "Restaurare portofel...",
             "findingBalance": "Se caută soldul...",
-            "incorrectSeedVaultPassword": "Incorrect SeedVault password.",
+            "incorrectSeedVaultPassword": "Parolă SeedVault incorectă.",
             "signingBundle": "Semnare pachet",
-            "broadcastingBundle": "Broadcasting bundle",
-            "miningBundle": "Mining bundle",
-            "problemRestoringWallet": "There was a problem restoring your wallet. Please try again.",
-            "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
-            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
-            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. {value} will be lost.",
+            "broadcastingBundle": "Pachet difuzare",
+            "miningBundle": "Semnare pachet",
+            "problemRestoringWallet": "A aparut o problema la restaurarea portofelului. Incercati din nou.",
+            "minimumMigrationAmountSpentAddresses": "Suma minimă de migrare pentru fiecare adresă cheltuită este de 1 Mi. Verifică din nou dacă soldul tău nu arată corect.",
+            "tooManyAddressesToMigrate": "Ai prea multe adrese cu sold mic pentru a migra. Verifică din nou dacă soldul tău nu arată corect.",
+            "cannotMigrateAllYourFunds": "Nu putem migra toate fondurile pentru că unele adrese au o valoare prea mică. Poți continua oricum. {value} va fi pierdut.",
             "error": "There was an error migrating your funds. Please try again."
         },
         "bundleMiningWarning": {
@@ -265,9 +277,9 @@
                 "confirmNewPincode": "Confirmã noul PIN",
                 "action": "Schimbă PIN"
             },
-            "resyncAccounts": {
-                "title": "Resincronizează conturile",
-                "description": "Starts a background task to make sure your accounts are up to date."
+            "balanceFinder": {
+                "title": "Balance finder",
+                "description": "Perform an extended search of your addresses for tokens."
             },
             "hiddenAccounts": {
                 "title": "Hidden accounts",
@@ -464,6 +476,12 @@
             "title": "Confirm transaction",
             "body": "You’re about to send {amount} to"
         },
+        "balanceFinder": {
+            "title": "Balance finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances.",
+            "totalWalletBalance": "Total wallet balance",
+            "typePassword": "Type your password to allow searching."
+        },
         "riskFunds": {
             "title": "Warning: funds at risk during migration",
             "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
@@ -477,8 +495,8 @@
         }
     },
     "charts": {
-        "incomingMi": "Incoming {value} Mi",
-        "outgoingMi": "Outgoing {value} Mi",
+        "incomingMi": "Incoming {value}",
+        "outgoingMi": "Outgoing {value}",
         "portoflio": "Portfolio",
         "token": "Token",
         "accountValue": "Account Value",
@@ -572,7 +590,11 @@
         "visitFaq": "Visit FAQ",
         "viewStatus": "View status",
         "showHiddenAccounts": "Show hidden accounts",
-        "confirm": "Confirm"
+        "confirm": "Confirm",
+        "findBalances": "Find balances",
+        "searchBalances": "Search for balances",
+        "searchAgain": "Search again",
+        "searching": "Searching..."
     },
     "general": {
         "password": "Parolă",
@@ -607,10 +629,6 @@
         "yourAddress": "Adresa ta",
         "generateNewAddress": "Generează o adresă nouă",
         "copyAddress": "Copy Address",
-        "haveTextBackup": "Am un text de rezervă",
-        "haveFileBackup": "Am o copie de rezervă a fișierului",
-        "enterSeedOrPhrase": "Introdu o frază de recuperare sau un seed",
-        "uploadSeedvaultOrStronghold": "Importă un fișier Stronghold sau SeedVault",
         "import": "Importă",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -682,7 +700,13 @@
         "passwordStrength4": "Strong",
         "creatingProfile": "Creating profile, please wait...",
         "fundMigration": "Fund migration",
-        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
+        "accountRemoved": "This account is hidden. Unhide it to perform transfers.",
+        "receivingTo": "Receiving to {account}",
+        "sendingFrom": "Sending from {account}",
+        "receivedTo": "Received to {account}",
+        "sentFrom": "Sent from {account}",
+        "receiving": "Receiving",
+        "sending": "Sending"
     },
     "dates": {
         "today": "Today",
