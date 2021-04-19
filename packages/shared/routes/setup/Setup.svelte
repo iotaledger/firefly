@@ -42,7 +42,7 @@
                 <Text type="p" secondary smaller>{locale('actions.restoreWalletDescription')}</Text>
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-green dark:bg-gray-900">
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
             <Animation animation="setup-desktop" />
         </div>
     </OnboardingLayout>

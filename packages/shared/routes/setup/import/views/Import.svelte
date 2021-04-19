@@ -38,7 +38,7 @@
                 <Text type="p" secondary smaller>{locale('views.import.importFileDescription')}</Text>
             </Button>
         </div>
-        <div slot="rightpane" class="w-full h-full flex justify-center bg-purple-green dark:bg-gray-900">
+        <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-purple dark:bg-gray-900">
             <Animation animation="import-desktop" />
         </div>
     </OnboardingLayout>
