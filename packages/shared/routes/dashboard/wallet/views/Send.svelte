@@ -48,6 +48,7 @@
         unit =  s.amount === 0 ? Unit.Mi : Unit.i
         amount = s.amount === 0 ? '' : formatUnitPrecision(s.amount, Unit.i, false)
         address = s.address
+        to = $liveAccounts.length === 2 ? accountsDropdownItems[from.id === $liveAccounts[0].id ? 1 : 0] : to
     })
 
     const sendSubscription = sendParams.subscribe((s) => {
@@ -215,7 +216,6 @@
     }
     onMount(() => {
         updateFromSendParams($sendParams)
-        to = $liveAccounts.length === 2 ? accountsDropdownItems[from.id === $liveAccounts[0].id ? 1 : 0] : to
     })
     onDestroy(() => {
         sendSubscription()
