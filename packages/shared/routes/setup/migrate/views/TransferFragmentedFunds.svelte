@@ -1,17 +1,17 @@
 <script lang="typescript">
-    import { Button, Illustration, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
-    import { createEventDispatcher, onDestroy } from 'svelte'
+    import { Animation, Button, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
     import {
-        migration,
-        getInputIndexesForBundle,
+        confirmedBundles,
         createMigrationBundle,
+        getInputIndexesForBundle,
+        hasMigratedAndConfirmedAllSelectedBundles,
+        hasMigratedAnyBundle,
+        migration,
         sendMigrationBundle,
         unmigratedBundles,
-        hasMigratedAnyBundle,
-        confirmedBundles,
-        hasMigratedAndConfirmedAllSelectedBundles,
     } from 'shared/lib/migration'
     import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
+    import { createEventDispatcher, onDestroy } from 'svelte'
 
     export let locale
     export let mobile
@@ -268,7 +268,7 @@
             {/if}
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Illustration illustration="migrate-desktop" height="100%" width="auto" />
+            <Animation animation="migrate-desktop" />
         </div>
     </OnboardingLayout>
 {/if}
