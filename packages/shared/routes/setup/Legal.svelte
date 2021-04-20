@@ -176,8 +176,8 @@
                                 <Text type="p" secondary classes="mb-4">
                                     Crypto-asset transactions are irreversible. As the User, it is your responsibility to ensure
                                     that any crypto-assets that you send with the App are sent to the correct address. We do not
-                                    have access to the wallets created through the App and we are not able to assist you in
-                                    case you send crypto-assets to the wrong address; you are using the App at your own risk.
+                                    have access to the wallets and we are not able to assist you in case you send crypto-assets to
+                                    the wrong address; you are using the App at your own risk.
                                 </Text>
                             </li>
                             <li>
@@ -283,10 +283,10 @@
                                 <Text type="p" secondary classes="mb-4">
                                     The IOTA Foundation does not accept any liability for transactions, due to a lack of control
                                     over transaction processes. We are therefore expressly not responsible for any claims, damages
-                                    or any other type of liability caused by any third-party service provider. In no event will the
-                                    IOTA Foundation be liable to the User for any losses caused by user-error, software or system
-                                    malfunctions, errors, interruptions, delays or inability to use the App, including any losses
-                                    caused thereof to the User or any third party.
+                                    or any other type of liability caused by any third-party service provider. In no event will
+                                    the IOTA Foundation be liable to the User for any losses caused by user-error, software or
+                                    system malfunctions, errors, interruptions, delays or inability to use the App, including any
+                                    losses caused thereof to the User or any third party.
                                 </Text>
                             </li>
                             <li>
@@ -543,7 +543,11 @@
                     </Text>
 
                     <Text type="h2" classes="mt-8 mb-5">Use of Cookies</Text>
-                    <Text type="p" secondary classes="mb-4">We do not use cookies in the App.</Text>
+                    <Text type="p" secondary classes="mb-4">
+                        We do not use cookies in the App, but we use the localStorage API to store information about the login
+                        data to keep you logged in through various sessions (we do not store personal information), furthermore
+                        the localStorage data is not accessible by third-parties.
+                    </Text>
 
                     <Text type="h2" classes="mt-8 mb-5">How we Protect and Store Personal Data</Text>
                     <Text type="p" secondary classes="mb-4">
@@ -598,6 +602,11 @@
                         European Union: GitHub BV Vijzelstraat 68-72, 1017 HL Amsterdam, The Netherlands) to check for app updates
                         in order to provide the auto-update functionality. Further information regarding their privacy policy can
                         be found under https://help.github.com/articles/github-privacy-statement/
+                    </Text>
+                    <Text type="h3" classes="mb-5">Amazon Web Services</Text>
+                    <Text type="p" secondary classes="mb-4">
+                        We use Amazon Web Services to host our website and any updated versions of the App. Further information
+                        regarding their privacy policy can be found under https://aws.amazon.com/privacy/
                     </Text>
 
                     <Text type="h2" classes="mt-8 mb-5">Providers of Operating Systems and Telecommunication Services</Text>
@@ -713,10 +722,9 @@
                         A copy of the Personal Data undergoing processing can be requested.
                     </Text>
 
-                    <Text type="h2" classes="mt-8 mb-5">Our Contact Information, Data Controller</Text>
+                    <Text type="h2" classes="mt-8 mb-5">Our Contact Information</Text>
                     <Text type="p" secondary classes="mb-4">
-                        If you have a direct business relationship with us, we are a data controller according to Art. 4 para. 7
-                        GDPR. For any requests, you can contact us as follows: privacy@iota.org.
+                        For any requests, you can contact us as follows: privacy@iota.org.
                     </Text>
                     <Text type="p" secondary classes="mb-4">
                         IOTA Foundation, c/o Nextland, Strassburgerstr. 55, 10405 Berlin.
