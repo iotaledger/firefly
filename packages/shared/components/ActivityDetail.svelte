@@ -103,9 +103,15 @@
     }
 </script>
 
+<style type="text/scss">
+    .visualization {
+        min-height: 84px;
+    }
+</style>
+
 <div class="flex flex-col h-full min-h-0">
     <div
-        class="p-4 pb-3.5 mb-5 rounded-xl text-center items-center justify-center flex flex-row bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 {!confirmed && 'opacity-50'}">
+        class="visualization p-4 pb-3.5 mb-5 rounded-xl text-center items-center justify-center flex flex-row bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 {!confirmed && 'opacity-50'}">
         <div class="flex flex-col flex-wrap justify-center items-center text-center">
             {#if senderAccount}
                 <div
