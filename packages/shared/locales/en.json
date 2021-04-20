@@ -495,7 +495,9 @@
         },
         "snapshot": {
             "title": "Ongoing network upgrade",
-            "body": "The Chrysalis network upgrade has begun. Migration is disabled until it is complete."
+            "body": "The Chrysalis network upgrade has begun.",
+            "bodyMigration": "Migration is disabled until it is complete.",
+            "bodyFirefly": "Firefly is disabled until it is complete."
         }
     },
     "charts": {
