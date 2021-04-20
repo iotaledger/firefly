@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href=""><img src="header-beta.png"></a>
+  <a href=""><img src="header.png"></a>
 </h1>
 
 <h2 align="center">IOTA's upcoming wallet</h2>
@@ -22,7 +22,7 @@
 
 ## About
 
-Firefly is IOTA's new official wallet for Chrysalis. It is currently in public beta.
+Firefly is IOTA's new official wallet for Chrysalis.
 
 
 ## Installation
