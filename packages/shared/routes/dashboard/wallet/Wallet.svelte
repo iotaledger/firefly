@@ -112,7 +112,7 @@
                     accountsLoaded.set(true)
                     const gapLimit = $activeProfile?.gapLimit ?? 10
                     try {
-                        await asyncSyncAccounts(0, gapLimit, 5, false)
+                        await asyncSyncAccounts(0, gapLimit, 1, false)
                     } catch (err) {
                         console.error(err)
                     }
