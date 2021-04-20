@@ -693,9 +693,9 @@ export async function checkChrysalisStatus(): Promise<void> {
     }
 }
 
-const CHRYSALIS_VARIABLES_ENDPOINT = 'https://gist.githubusercontent.com/begonaalvarezd/639c59dc1b5b940071c85389cece52ac/raw'
+const CHRYSALIS_VARIABLES_ENDPOINT = 'https://github.com/iotaledger/firefly/tree/develop/packages/shared/lib/chrysalis.json'
 const DEFAULT_CHRYSALIS_VARIABLES_ENDPOINT_TIMEOUT = 5000
-const DEFAULT_CHRYSALIS_VARIABLES_POLL_INTERVAL = 60000 / 10 // 1 minute
+const DEFAULT_CHRYSALIS_VARIABLES_POLL_INTERVAL = 60000 // 1 minute
 
 type ChrysalisVariables = {
     snapshot: boolean
@@ -721,7 +721,7 @@ export async function checkChrysalisSnapshot(): Promise<void> {
             Accept: 'application/json',
         },
     }
-    const endpoint = `${CHRYSALIS_VARIABLES_ENDPOINT}?_=16174438232${new Date().getTime()}`
+    const endpoint = CHRYSALIS_VARIABLES_ENDPOINT
     try {
         const abortController = new AbortController()
         const timerId = setTimeout(
