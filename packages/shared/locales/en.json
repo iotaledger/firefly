@@ -91,10 +91,10 @@
         },
         "backupWallet": {
             "title": "Back up to a Stronghold file",
-            "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
+            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
             "body2": "Reasons why digital backups are important:",
-            "reason1": "Easily recover your wallet without typing in your recovery phrase",
-            "reason2": "Import your wallet to other devices",
+            "reason1": "Easily recover your wallets without typing in your recovery phrase",
+            "reason2": "Import your wallets to other devices",
             "reason3": "Recover your full transaction history"
         },
         "recoveryPhraseSaved": {
@@ -134,11 +134,11 @@
             "checksum": "Checksum"
         },
         "importFromFile": {
-            "title": "Restore your wallet using a backup file",
+            "title": "Restore your wallets using a backup file",
             "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
-            "title": "Restore your wallet from a SeedVault or Stronghold",
+            "title": "Restore your wallets from a SeedVault or Stronghold",
             "body1": "Please enter your backup password.",
             "body2": "This is the password you set when you first created your backup."
         },
