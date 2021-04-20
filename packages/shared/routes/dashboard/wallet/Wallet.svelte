@@ -19,14 +19,17 @@
         getAccountMessages,
         getAccountMeta,
         getAccountsBalanceHistory,
+        getIncomingFlag,
         getTransactions,
         getWalletBalanceHistory,
         initialiseListeners,
+        isSelfTransaction,
         isTransferring,
         prepareAccountInfo,
         processMigratedTransactions,
         removeEventListeners,
         selectedAccountId,
+        setIncomingFlag,
         transferState,
         updateBalanceOverview,
         wallet,
@@ -121,6 +124,8 @@
                     updateProfile('gapLimit', 10)
                 }
 
+                console.log(JSON.stringify(accountsResponse, undefined, '\t'))
+
                 if (accountsResponse.payload.length === 0) {
                     _continue()
                 } else {
@@ -133,6 +138,32 @@
                     let completeCount = 0
                     let newAccounts = []
                     for (const payloadAccount of accountsResponse.payload) {
+                        // The wallet only returns one side of internal transfers
+                        // to the same account, so create the other side
+                        const internalMessages = payloadAccount.messages.filter(
+                            (m) => m.payload.type === 'Transaction' && m.payload.data.essence.data.internal
+                        )
+
+                        for (const internalMessage of internalMessages) {
+                            const isSelf = isSelfTransaction(internalMessage.payload, payloadAccount)
+
+                            if (isSelf) {
+                                // Try and find the other side of the pair
+                                let pair = internalMessages.find(
+                                    (m) =>
+                                        m.id === internalMessage.id &&
+                                        getIncomingFlag(m.payload) !== getIncomingFlag(internalMessage.payload)
+                                )
+
+                                if (!pair) {
+                                    pair = deepCopy(internalMessage)
+                                    // Reverse the incoming flag for the other side of the pair
+                                    setIncomingFlag(pair.payload, !getIncomingFlag(pair.payload))
+                                    payloadAccount.messages.push(pair)
+                                }
+                            }
+                        }
+
                         getAccountMeta(payloadAccount.id, (err, meta) => {
                             if (!err) {
                                 totalBalance.balance += meta.balance

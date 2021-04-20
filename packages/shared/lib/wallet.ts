@@ -803,10 +803,12 @@ export const updateAccountAfterBalanceChange = (
 export const saveNewMessage = (accountId: string, message: Message): void => {
     const { accounts } = get(wallet)
 
+    const messageIncoming = getIncomingFlag(message.payload)
+
     accounts.update((storedAccounts) => {
         return storedAccounts.map((storedAccount: WalletAccount) => {
             if (storedAccount.id === accountId) {
-                const hasMessage = storedAccount.messages.some(m => m.id === message.id && m.payload.data.essence.incoming === message.payload.data.essence.incoming)
+                const hasMessage = storedAccount.messages.some(m => m.id === message.id && getIncomingFlag(m.payload) === messageIncoming)
 
                 if (!hasMessage) {
                     storedAccount.messages.push(message)
@@ -830,12 +832,14 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
 export const replaceMessage = (accountId: string, messageId: string, newMessage: Message): void => {
     const { accounts } = get(wallet)
 
+    const messageIncoming = getIncomingFlag(newMessage.payload)
+
     accounts.update((storedAccounts) => {
         return storedAccounts.map((storedAccount: WalletAccount) => {
             if (storedAccount.id === accountId) {
                 return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
                     messages: storedAccount.messages.map((_message) => {
-                        if (_message.id === messageId && _message.payload.data.essence.incoming === newMessage.payload.data.essence.incoming) {
+                        if (_message.id === messageId && getIncomingFlag(_message.payload) === messageIncoming) {
                             return newMessage;
                         }
 
@@ -866,7 +870,7 @@ export const getAccountMessages = (account: WalletAccount): AccountMessage[] => 
     account.messages.forEach((message) => {
         let extraId = ''
         if (message.payload.type === "Transaction") {
-            extraId = message.payload.data.essence.data.incoming ? 'in' : 'out'
+            extraId = getIncomingFlag(message.payload) ? 'in' : 'out'
         }
         messages[message.id + extraId] = {
             ...message,
@@ -877,8 +881,7 @@ export const getAccountMessages = (account: WalletAccount): AccountMessage[] => 
     return Object.values(messages)
         .sort((a, b) => {
             if (a.id === b.id && a.payload.type == "Transaction") {
-                const txA = a.payload as Transaction
-                return txA.data.essence.data.incoming ? -1 : 1
+                return getIncomingFlag(a.payload) ? -1 : 1
             }
             return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
         })
@@ -903,7 +906,7 @@ export const getTransactions = (accounts: WalletAccount[], count = 10): AccountM
         account.messages.forEach((message) => {
             let extraId = ''
             if (message.payload.type === "Transaction") {
-                extraId = message.payload.data.essence.data.incoming ? 'in' : 'out'
+                extraId = getIncomingFlag(message.payload) ? 'in' : 'out'
             }
             messages[account.index + message.id + extraId] = {
                 ...message,
@@ -915,8 +918,7 @@ export const getTransactions = (accounts: WalletAccount[], count = 10): AccountM
     return Object.values(messages)
         .sort((a, b) => {
             if (a.id === b.id && a.payload.type == "Transaction") {
-                const txA = a.payload as Transaction
-                return txA.data.essence.data.incoming ? -1 : 1
+                return getIncomingFlag(a.payload) ? -1 : 1
             }
             return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
         })
@@ -1013,7 +1015,7 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
         // If we have received a new message, simply add it;
         // If we have received an existing message, update the properties.
         for (const msg of syncedAccount.messages) {
-            const msgIndex = storedAccount.messages.findIndex(m => m.id === msg.id && m.payload.data.essence.incoming === msg.payload.data.essence.incoming)
+            const msgIndex = storedAccount.messages.findIndex(m => m.id === msg.id && getIncomingFlag(m.payload) === getIncomingFlag(msg.payload))
             if (msgIndex < 0) {
                 storedAccount.messages.push(msg)
             } else {
@@ -1475,7 +1477,7 @@ export const updateAccountNetworkSettings = async (automaticNodeSelection, inclu
  * @param {WalletAccount} account
  *
  */
-export const isSelfTransaction = (payload: Payload, account: WalletAccount): boolean => {
+export const isSelfTransaction = (payload: Payload, account: Account): boolean => {
     const accountAddresses = account?.addresses?.map(add => add.address) ?? []
     if (payload && accountAddresses.length) {
         const getSenderAddress = () => {
@@ -1561,3 +1563,25 @@ export const getMilestoneMessageValue = (payload: Payload, accounts) => {
 
     return 0
 }
+
+/**
+ * Get incoming flag from message
+ * @returns 
+ */
+ export const getIncomingFlag = (payload: Payload) => {
+    if (payload?.type === "Transaction") {
+       return payload.data.essence.data.incoming
+    }
+
+    return undefined
+}
+
+/**
+ * Set incoming flag on the message
+ * @returns 
+ */
+ export const setIncomingFlag = (payload: Payload, incoming: boolean) => {
+    if (payload?.type === "Transaction") {
+       payload.data.essence.data.incoming = incoming
+    }
+ }
