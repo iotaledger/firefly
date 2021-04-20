@@ -21,9 +21,9 @@
 {#if mobile}
     <div>Not yet implemented</div>
 {:else}
-    <section class="flex flex-col justify-center items-center h-full bg-white dark:bg-gray-900 space-y-20 p-20">
-        <Logo width="64px" logo="logo-firefly" />
-        <div class="h-auto items-start justify-center w-full overflow-y-auto flex flex-row flex-wrap px-20">
+    <section class="flex flex-col justify-center items-center h-full bg-white dark:bg-gray-900 px-40 pt-48 pb-20">
+        <Logo width="64px" logo="logo-firefly" classes="absolute top-20" />
+        <div class="profiles-wrapper h-auto items-start justify-center w-full overflow-y-auto flex flex-row flex-wrap">
             {#each $profiles as profile}
                 <div class="mx-4 mb-8">
                     <Profile
