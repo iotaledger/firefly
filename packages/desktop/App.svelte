@@ -152,6 +152,12 @@
             }
         }
 
+        .scroll-quaternary {
+            &::-webkit-scrollbar-thumb {
+                @apply border-gray-100;
+            }
+        }
+
         &.scheme-dark {
             @apply bg-gray-900;
             :global(::-webkit-scrollbar-thumb) {
@@ -166,6 +172,12 @@
             }
 
             .scroll-tertiary {
+                &::-webkit-scrollbar-thumb {
+                    @apply border-gray-900;
+                }
+            }
+
+            .scroll-quaternary {
                 &::-webkit-scrollbar-thumb {
                     @apply border-gray-900;
                 }
