@@ -186,15 +186,13 @@
         {#if txPayload || milestonePayload}
             <div class="mb-5">
                 <Text secondary>{locale('general.amount')}</Text>
-                <div class="flex flex-col mt-2">
-                    <button class="text-left" on:click={() => setClipboard(currencyValue.toString())}>
-                        <Text type="pre" classes="mb-2">{formatCurrency(currencyValue)}</Text>
-                    </button>
+                <div class="flex flex-row mt-2">
                     <button class="text-left" on:click={() => setClipboard(formatUnitBestMatch(value))}>
-                        <Text type="pre" classes="mb-2">{formatUnitBestMatch(value)}</Text>
+                        <Text>{formatUnitBestMatch(value)}</Text>
                     </button>
-                    <button class="text-left" on:click={() => setClipboard(value.toString())}>
-                        <Text type="pre" classes="mb-2">{formatUnitPrecision(value, Unit.i, true, true)}</Text>
+                    &nbsp;
+                    <button class="text-left" on:click={() => setClipboard(currencyValue.toString())}>
+                        <Text highlighted>({formatCurrency(currencyValue)})</Text>
                     </button>
                 </div>
             </div>
