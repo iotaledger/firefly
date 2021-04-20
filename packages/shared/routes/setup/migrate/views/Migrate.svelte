@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Box, Button, Illustration, OnboardingLayout, Spinner, Text } from 'shared/components'
+    import { Animation, Box, Button, OnboardingLayout, Spinner, Text } from 'shared/components'
     import {
         AvailableExchangeRates,
         convertToFiat,
@@ -115,7 +115,7 @@
             <Text type="p" secondary classes="mb-4">{locale('views.migrate.body1')}</Text>
             <Text type="p" secondary highlighted classes="mb-8 font-bold">{locale('views.migrate.body2')}</Text>
             <Box classes="flex flex-col flex-grow items-center py-12 bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 rounded-lg ">
-                <Text type="h2">{formatUnitBestMatch(migratableBalance)}</Text>
+                <Text type="h2">{formatUnitBestMatch(migratableBalance, true, 3)}</Text>
                 <Text type="p" highlighted classes="py-1 uppercase">{fiatbalance}</Text>
             </Box>
         </div>
@@ -130,7 +130,7 @@
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Illustration illustration="migrate-desktop" height="100%" width="auto" />
+            <Animation animation="migrate-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

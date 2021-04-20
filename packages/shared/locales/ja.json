@@ -33,8 +33,8 @@
         },
         "profile": {
             "title": "プロファイルを作成",
-            "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "body1": "複数のユーザープロファイルを作成してトークンを分離し、プライバシーを向上させることができます。",
+            "body2": "まずは、最初のプロファイルから始めましょう。あとから、さらにプロファイルを追加できます。",
             "profileName": "プロファイル名"
         },
         "setup": {
@@ -65,7 +65,7 @@
         },
         "confirmPin": {
             "title": "PINコードを選択します",
-            "body1": "Your PIN keeps your balance and transactions private.",
+            "body1": "PINは残高と取引を非公開に保ちます。",
             "body2": "続行するにはPINコードを再入力してください。 "
         },
         "backup": {
@@ -84,7 +84,7 @@
         },
         "verifyRecoveryPhrase": {
             "title": "復元フレーズを確認",
-            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
+            "body": "フレーズを正しく書き留めたことを確認しましょう。各単語を番号順に選択してください。",
             "word": "単語",
             "verified": "復元フレーズが確認されました",
             "verifiedBody": "プライベートかつ安全に保管することを忘れないでください。"
@@ -109,16 +109,28 @@
             "exportMigration": "移行ログをエクスポートしてセットアップを終了します"
         },
         "import": {
-            "title": "ウォレットをインポートしてください。",
-            "body": "復元フレーズや Stronghold を使っている場合は、こちらからインポートできます。"
+            "title": "Recover or migrate funds",
+            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+            "importSeed": "I have an 81 character seed",
+            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "importMnemonic": "I have a Firefly recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase to recover your wallet",
+            "importFile": "I have a file backup",
+            "importFileDescription": "Upload a Seedvault or Stronghold file"
         },
         "importFromText": {
-            "title": "復元フレーズまたはシードでウォレットを復元する",
-            "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body2": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
-            "body3": "リカバリーフレーズを入力してください",
-            "seedDetected": "81 character seed detected",
-            "phraseDetected": "24 word recovery phrase detected",
+            "seed": {
+                "title": "Type your seed to commence migration",
+                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+                "enter": "Enter your seed"
+            },
+            "mnemonic": {
+                "title": "Type your recovery phrase",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
+                "enter": "Enter your secret recovery phrase"
+            },
+            "seedDetected": "81文字のシードを検出しました",
+            "phraseDetected": "24語の復元フレーズが検出されました",
             "checksum": "Checksum"
         },
         "importFromFile": {
@@ -156,7 +168,7 @@
             "signingBundle": "Signing bundle",
             "broadcastingBundle": "Broadcasting bundle",
             "miningBundle": "Mining bundle",
-            "problemRestoringWallet": "There was a problem restoring your wallet. Please try again.",
+            "problemRestoringWallet": "ウォレットの復元中に問題が発生しました。もう一度やり直してください。",
             "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
             "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. {value} will be lost.",
@@ -167,7 +179,7 @@
             "body1": "You have funds on one or more spent addresses.",
             "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
             "body3": "If you close the app you will need to restart the whole migration.",
-            "learn": "Learn about spent addresses"
+            "learn": "使用済みアドレスについて"
         },
         "secureSpentAddresses": {
             "title": "Secure spent addresses",
@@ -176,19 +188,19 @@
             "error": "You can’t migrate spent addresses with less than 1 Mi"
         },
         "securityCheckCompleted": {
-            "title": "Security check completed",
+            "title": "セキュリティチェックが完了しました",
             "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
             "body2": "When you are happy with the risk level(s) press continue.",
-            "rerun": "Rerun process for selected addresses",
+            "rerun": "選択したアドレスの再実行プロセス",
             "continueMigration": "移行を続ける"
         },
         "securingSpentAddresses": {
-            "title": "Securing spent addresses...",
-            "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
+            "title": "使用済みアドレスを保護しています...",
+            "body1": "このプロセスには {minutes, plural, one {1 分} other {# 分}}かかります.",
             "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
         },
         "transferFragmentedFunds": {
-            "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
+            "body1": "Firefly はあなたの資金を移行します。しばらく時間がかかる場合があります。",
             "migrate": "資金の移行",
             "transaction": "取引 {number}",
             "rerun": "やり直す"
@@ -211,19 +223,19 @@
             },
             "security": {
                 "title": "セキュリティ",
-                "description": "Change your password and adjust security-related settings"
+                "description": "パスワードを変更し、セキュリティ関連の設定を調整する"
             },
             "advancedSettings": {
                 "title": "高度な設定",
-                "description": "Tools and manual settings for technical users"
+                "description": "技術者向けツールと手動設定"
             },
             "helpAndInfo": {
                 "title": "ヘルプ & 情報",
-                "description": "Find the answer to a question or get help with an issue"
+                "description": "質問に対する答えを見つけるか、問題のヘルプを表示します"
             },
             "profile": {
                 "title": "プロファイル",
-                "description": "Change your profile name or set an avatar"
+                "description": "プロファイル名を変更するか、アバターを設定します"
             },
             "sync": {
                 "title": "アカウントを同期",
@@ -250,7 +262,7 @@
                 "description": "Export to a Stronghold file - a complete encrypted backup of your wallet and latest transaction history."
             },
             "appLock": {
-                "title": "Automatic Lock",
+                "title": "自動ロック",
                 "description": "Time elapsed before your wallet locks and logs you out"
             },
             "changePassword": {
@@ -265,9 +277,9 @@
                 "confirmNewPincode": "新しいPINの確認",
                 "action": "PINを変更"
             },
-            "resyncAccounts": {
-                "title": "アカウントの再同期",
-                "description": "Starts a background task to make sure your accounts are up to date."
+            "balanceFinder": {
+                "title": "Balance finder",
+                "description": "Perform an extended search of your addresses for tokens."
             },
             "hiddenAccounts": {
                 "title": "アカウントを非表示",
@@ -315,7 +327,7 @@
             },
             "stateExport": {
                 "title": "状態のエクスポート",
-                "description": "Export your transaction history to a .csv file"
+                "description": "取引履歴を .csv ファイルにエクスポートします"
             },
             "troubleshoot": {
                 "title": "トラブルシューティング",
@@ -464,6 +476,12 @@
             "title": "取引を承認する",
             "body": "{amount} を送金しようとしています"
         },
+        "balanceFinder": {
+            "title": "Balance finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances.",
+            "totalWalletBalance": "Total wallet balance",
+            "typePassword": "Type your password to allow searching."
+        },
         "riskFunds": {
             "title": "Warning: funds at risk during migration",
             "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
@@ -477,8 +495,8 @@
         }
     },
     "charts": {
-        "incomingMi": "Incoming {value} Mi",
-        "outgoingMi": "Outgoing {value} Mi",
+        "incomingMi": "Incoming {value}",
+        "outgoingMi": "Outgoing {value}",
         "portoflio": "ポートフォリオ",
         "token": "トークン",
         "accountValue": "Account Value",
@@ -505,7 +523,7 @@
         "useBiometric": "生体認証セキュリティを使用",
         "setupPin": "PIN コードを設定",
         "setPin": "PIN コードを設定",
-        "confirmPin": "Confirm PIN code",
+        "confirmPin": "PINコードを確認",
         "enterYourPin": "PINコードを入力してください",
         "saveBackupFile": "バックアップファイルを保存",
         "iveWrittenRecoveryPhrase": "I’ve written down my recovery phrase",
@@ -520,24 +538,24 @@
         "beginTransfer": "転送開始",
         "tryAgain": "やり直す",
         "visitDiscord": "Visit Discord",
-        "dragDrop": "Drag & Drop",
-        "importExtentions": ".kdbx or .stronghold file",
+        "dragDrop": "ドラッグ＆ドロップ",
+        "importExtentions": ".kdbx または .stronghold ファイル",
         "chooseFile": "ファイルを選択",
         "dropHere": "ここにファイルをドロップ",
         "syncAll": "すべて同期",
         "export": "エクスポート",
         "exportNewStronghold": "新しい Stronghold をエクスポート",
         "enableDeepLinks": "ディープリンクを有効にする",
-        "enableDeveloperMode": "Enable developer mode",
-        "enableSystemNotifications": "Enable system notifications",
-        "exportState": "Export state",
+        "enableDeveloperMode": "開発者モードを有効にする",
+        "enableSystemNotifications": "システム通知を有効にする",
+        "exportState": "ステータス をエクスポート",
         "localProofOfWork": "Local proof of work",
         "unlock": "ロック解除",
         "updateFirefly": "Firefly を更新",
         "restartNow": "今すぐ再起動",
         "saveBackup": "Stronghold のバックアップを保存",
         "customizeAcount": "アカウントをカスタマイズ",
-        "viewAddressHistory": "View address history",
+        "viewAddressHistory": "アドレス履歴を表示",
         "hideAccount": "アカウントを非表示",
         "showAccount": "アカウントを再表示",
         "deleteAccount": "アカウントを削除",
@@ -572,7 +590,11 @@
         "visitFaq": "よくある質問を見る",
         "viewStatus": "ステータスを表示",
         "showHiddenAccounts": "非表示のアカウントを表示",
-        "confirm": "確定"
+        "confirm": "確定",
+        "findBalances": "Find balances",
+        "searchBalances": "Search for balances",
+        "searchAgain": "Search again",
+        "searching": "Searching..."
     },
     "general": {
         "password": "パスワード",
@@ -607,10 +629,6 @@
         "yourAddress": "あなたのアドレス",
         "generateNewAddress": "新しいアドレスを作成する",
         "copyAddress": "アドレスをコビー",
-        "haveTextBackup": "テキストのバックアップがあります",
-        "haveFileBackup": "ファイルのバックアップがあります",
-        "enterSeedOrPhrase": "復元フレーズやシードを入力してください",
-        "uploadSeedvaultOrStronghold": "Stronghold またはSeedVault ファイルをインポート",
         "import": "インポート",
         "seedvault": "Seedvault",
         "stronghold": "Stronghold",
@@ -629,7 +647,7 @@
         "automaticNodeSelection": "ノードを自動選択",
         "manualNodeSelection": "ノードを手動選択",
         "profiles": "プロフィール",
-        "developerProfile": "Developer Profile",
+        "developerProfile": "開発者プロフィール",
         "developerProfileDescription": "テストネットに接続することができます",
         "dev": "開発者",
         "createAccount": "アカウントを作成",
@@ -671,9 +689,9 @@
         "exportingStronghold": "Strongholdのエクスポート中...",
         "exportingStrongholdSuccess": "Strongholdのエクスポートに成功しました",
         "exportingStrongholdFailed": "Strongholdのエクスポートに失敗しました",
-        "pinCodeUpdating": "Updating PIN code...",
-        "pinCodeSuccess": "Updated PIN code successfully",
-        "pinCodeFailed": "Updating PIN code failed",
+        "pinCodeUpdating": "PINコードを更新しています...",
+        "pinCodeSuccess": "PINコードは正常に更新しました",
+        "pinCodeFailed": "PINコードの更新に失敗しました",
         "passwordStrength": "パスワードの強度",
         "passwordStrength0": "Bad",
         "passwordStrength1": "とても弱い",
@@ -682,15 +700,21 @@
         "passwordStrength4": "とても強い",
         "creatingProfile": "プロファイルを作成しています。お待ちください...",
         "fundMigration": "Fund migration",
-        "accountRemoved": "このアカウントは非表示になっています。表示にすると転送ができます。"
+        "accountRemoved": "このアカウントは非表示になっています。表示にすると転送ができます。",
+        "receivingTo": "Receiving to {account}",
+        "sendingFrom": "Sending from {account}",
+        "receivedTo": "Received to {account}",
+        "sentFrom": "Sent from {account}",
+        "receiving": "Receiving",
+        "sending": "Sending"
     },
     "dates": {
         "today": "今日",
         "yesterday": "昨日",
-        "daysAgo": "{time, plural, one {# day} other {# days}} ago",
-        "weeksAgo": "{time, plural, one {# week} other {# weeks}} ago",
-        "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
-        "yearsAgo": "{time, plural, one {# year} other {# years}} ago"
+        "daysAgo": "{time, plural, one {# 日} other {# 日}} 前",
+        "weeksAgo": "{time, plural, one {# 週間} other {# 週間}} 前",
+        "monthsAgo": "{time, plural, one {# ヶ月 } other {# ヶ月 }} 前",
+        "yearsAgo": "{time, plural, one {# 年 } other {# 年 }} 前"
     },
     "notifications": {
         "valueTx": "Receiving {{value}} to {{account}}",
@@ -698,14 +722,14 @@
         "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
         "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
         "failed": "Outgoing {{value}} from {{account}} has failed",
-        "downloadingUpdate": "Downloading update",
-        "updateReady": "Update ready",
-        "updateError": "An error occurred during the update, please try again",
-        "restartInstall": "Restart to install",
-        "calcMinutesRemaining": "Calculating minutes remaining...",
-        "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
-        "copiedToClipboard": "Copied to clipboard",
-        "accountsSynchronized": "Account synchronization complete",
+        "downloadingUpdate": "アップデートをダウンロードしています",
+        "updateReady": "更新の準備ができました",
+        "updateError": "更新中にエラーが発生しました。もう一度やり直してください。",
+        "restartInstall": "再起動してインストール",
+        "calcMinutesRemaining": "残り時間を計算しています...",
+        "minutesRemaining": "{minutes, plural, one { 残り1分 } other {# 残り分 }}",
+        "copiedToClipboard": "クリップボードにコピーしました",
+        "accountsSynchronized": "アカウントの同期が完了",
         "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
         "migratedAccountChrysalisUp": "資金はまもなく利用可能になります"
     },
@@ -740,9 +764,9 @@
             "length": "Your account name can't be longer than {length, plural, one {1 character} other {# characters}}.",
             "empty": "You must use your latest account before creating a new one.",
             "notEmpty": "You must transfer your balance before deleting this account.",
-            "duplicate": "An account with this name already exists.",
+            "duplicate": "この名前のアカウントは既に存在します。",
             "tilde": "A profile name can't start with the '~' character.",
-            "control": "A profile name can't contain a control character.",
+            "control": "プロファイル名に制御文字を含めることはできません。",
             "startDot": "A profile name can't start with the '.' character.",
             "chars": "A profile name can't contain the following characters <>:\"/\\|?*"
         },
@@ -778,7 +802,7 @@
             "seedCharacters": "The seed should only contain characters A-Z or 9",
             "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
             "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
-            "phraseCaseWord": "The word \"{word}\" should be lower case"
+            "phraseCaseWord": "単語「{word}」は小文字でなければなりません"
         }
     },
     "tooltips": {

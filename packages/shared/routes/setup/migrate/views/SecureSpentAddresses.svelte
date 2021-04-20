@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Illustration, Link, OnboardingLayout, SpentAddress, Text } from 'shared/components'
+    import { Animation, Button, Link, OnboardingLayout, SpentAddress, Text } from 'shared/components'
     import {
         checkChrysalisSnapshot,
         ongoingSnapshot,
@@ -57,6 +57,8 @@
             } else {
                 showAppNotification({ type: 'error', message: locale('views.migrate.noAddressesForMigration') })
             }
+        } else {
+            showAppNotification({ type: 'error', message: locale('views.migrate.noAddressesForMigration') })
         }
         snapshotBusy = false
     }
@@ -115,7 +117,7 @@
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Illustration illustration="migrate-desktop" height="100%" width="auto" />
+            <Animation animation="migrate-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

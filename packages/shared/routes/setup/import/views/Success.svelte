@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Icon, Illustration, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import { createEventDispatcher, getContext } from 'svelte'
     import type { Writable } from 'svelte/store'
     import { ImportType } from '../Import.svelte'
@@ -34,12 +34,9 @@
         <div slot="leftpane__action">
             <Button classes="w-full" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
-        <!-- TODO: missing illustration -->
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-green dark:bg-gray-900">
-            <Illustration
-                illustration={$importType === ImportType.Seed || $importType === ImportType.Mnemonic ? 'import-from-text-success-desktop' : 'import-from-file-success-desktop'}
-                width="100%"
-                height="auto" />
+            <Animation
+                animation={$importType === ImportType.Seed || $importType === ImportType.Mnemonic ? 'import-from-text-success-desktop' : 'import-from-file-success-desktop'} />
         </div>
     </OnboardingLayout>
 {/if}

@@ -1,11 +1,11 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA tokens",
-            "body": "Firefly is the official wallet of IOTA."
+            "title": "Send, Modtag & Håndtér dine IOTA-tokens",
+            "body": "Firefly er den officielle IOTA wallet."
         },
         "legal": {
-            "title": "Privacy Policy & Terms of Service",
+            "title": "Privatlivspolitik & Servicevilkår",
             "body": "Gennemgå venligst privatlivspolitikken samt vilkår og betingelser.",
             "privacyPolicy": {
                 "title": "Privatlivspolitik",
@@ -25,104 +25,116 @@
                 "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
                 "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
             },
-            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+            "checkbox": "Jeg har læst og jeg accepterer privatlivspolitiken og servicevilkårene"
         },
         "appearance": {
             "title": "Udseende",
-            "body": "Choose your wallet’s theme."
+            "body": "Vælg din wallets tema."
         },
         "profile": {
-            "title": "Create a profile",
-            "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
-            "profileName": "Profile Name"
+            "title": "Opret en profil",
+            "body1": "Du kan oprette flere brugerprofiler for at organisere dine wallets og øge din fortrolighed.",
+            "body2": "For nu, lad os starte med dit profilnavn. Du kan tilføje flere profiler senere.",
+            "profileName": "Profilnavn"
         },
         "setup": {
-            "title": "Set up a wallet",
-            "chrysalisTitle": "Chrysalis Network Update",
-            "chrysalisBody": "From April 21st, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
-            "learnMore": "Learn about the migration"
+            "title": "Konfigurér en wallet",
+            "chrysalisTitle": "Chrysalis Netværksopdatering",
+            "chrysalisBody": "Fra d. 21. april kan brugere overføre deres tokens til det nye Chrysalis-netværk. Vi anbefaler, at du migrerer dine eksisterende tokens så hurtigt som muligt.",
+            "learnMore": "Lær om migrationen"
         },
         "secure": {
-            "title": "Secure your wallet",
-            "body1": "Save and print the Recovery Kit PDF template.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
+            "title": "Gør din wallet sikker",
+            "body1": "Gem og udskriv Recovery Kit PDF-skabelonen.",
+            "body2": "Hvis du udfylder Recovery Kit og gemmer det et sikkert sted, vil du altid være i stand til at gendanne din wallet."
         },
         "password": {
             "title": "Opret en adgangskode",
-            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
-            "body2": "It is recommended that you write down your password in your Recovery Kit."
+            "body1": "Du skal bruge en stærk adgangskode til at beskytte dine midler. Brug en kombination af ord, og undgå almindelige sætninger, navne eller datoer.",
+            "body2": "Det anbefales, at du skriver din adgangskode ned i dit Recovery Kit."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
+            "body1": "Opret en pinkode for at sikre, at det kun er dig som kan tilgå din wallet.",
             "body2": "Hold din pinkode sikker!"
         },
         "pin": {
             "title": "Vælg en PIN-kode",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
+            "body1": "Indtast en 6-cifret pinkode nedenfor. Du vil blive bedt om din pinkode for at få adgang til din profil.",
+            "body2": "Brug kun tal"
         },
         "confirmPin": {
             "title": "Bekræft din PIN-kode",
-            "body1": "Your PIN keeps your balance and transactions private.",
-            "body2": "Re-enter your PIN code to proceed. "
+            "body1": "Din pinkode holder din saldo og transaktioner private.",
+            "body2": "Indtast din pinkode igen for at fortsætte. "
         },
         "backup": {
             "title": "Sikkerhedskopier din tegnebog",
-            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+            "body1": "Du vil nu få vist dine gendannelsesord. Skriv den ned i dit Recovery Kit.",
+            "body2": "Del ikke dine gendannelsesord med andre. Den kan bruges til at tilgå dine tokens alle steder fra.",
             "body3": "Hvis du mister din gendannelsessætning, kan du miste dine penge."
         },
         "recoveryPhrase": {
             "title": "Gendannelsesssætning",
-            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-            "body2": "Keep this private and safely stored.",
-            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+            "body1": "Skriv dine gendannelsesord ned i dit Recovery Kit, i den nøjagtige rækkefølge, der vises.",
+            "body2": "Hold dette fortroligt og sikkert gemt.",
+            "body3": "Det er vigtigt at have en skriftlig sikkerhedskopi. Computere fejler tit og filer kan mistes.",
             "revealRecoveryPhrase": "Vis gendannelsessætning",
-            "hideRecoveryPhrase": "Hide recovery phrase"
+            "hideRecoveryPhrase": "Skjul gendannelsesord"
         },
         "verifyRecoveryPhrase": {
             "title": "Bekræft gendannelsessætning",
-            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
-            "word": "Word",
-            "verified": "Recovery phrase verified",
-            "verifiedBody": "Remember to keep it private and safely stored."
+            "body": "Lad os tjekke om du har skrevet ordene rigtigt ned. Vælg hvert ord i den rigtige rækkefølge.",
+            "word": "Ord",
+            "verified": "Gendannelsesord bekræftet",
+            "verifiedBody": "Husk at holde det fortroligt og sikkert gemt."
         },
         "backupWallet": {
             "title": "Sikkerhedskopiér til en Stronghold fil",
-            "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
-            "body2": "Reasons why digital backups are important:",
-            "reason1": "Easily recover your wallet without typing in your recovery phrase",
-            "reason2": "Import your wallet to other devices",
-            "reason3": "Recover your full transaction history"
+            "body1": "Indtast din adgangskode for at sikkerhedskopiere din wallet til en Stronghold fil. Din adgangskode bruges til at kryptere sikkerhedskopien.",
+            "body2": "Grunde til at digitale sikkerhedskopier er vigtige:",
+            "reason1": "Gendan nemt din wallet uden at skrive dine gendannelsesord",
+            "reason2": "Importér din wallet til andre enheder",
+            "reason3": "Gendan din fulde transaktionshistorik"
         },
         "recoveryPhraseSaved": {
             "title": "Sikkerhedskopiering lykkedes",
             "body": "Du har sikkerhedskopieret din tegnebog til Stronghold."
         },
         "congratulations": {
-            "title": "Wallet setup completed",
-            "body": "Your new wallet is ready to use.",
-            "fundsMigrated": "Funds migrated",
-            "success": "You have successfully migrated your funds to the new network",
-            "exportMigration": "Export migration log and finish setup"
+            "title": "Opsætning af wallet fuldført",
+            "body": "Din nye wallet er klar til brug.",
+            "fundsMigrated": "Midler migreret",
+            "success": "Du har nu migreret dine midler til det nye netværk",
+            "exportMigration": "Eksportér migrationslog og afslut opsætning"
         },
         "import": {
-            "title": "Importér en tegnebog",
-            "body": "Hvis du har en gendannelsessætning eller Stronghold backup, kan du importere den her."
+            "title": "Recover or migrate funds",
+            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+            "importSeed": "I have an 81 character seed",
+            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "importMnemonic": "I have a Firefly recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase to recover your wallet",
+            "importFile": "I have a file backup",
+            "importFileDescription": "Upload a Seedvault or Stronghold file"
         },
         "importFromText": {
-            "title": "Gendan din tegnebog med en gendannelsessætning eller et seed",
-            "body1": "A seed consists of 81 characters. This is used to recover from an older Trinity wallet.",
-            "body2": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
-            "body3": "Indtast dit seed eller din gendannelsessætning",
-            "seedDetected": "81 character seed detected",
-            "phraseDetected": "24 word recovery phrase detected",
-            "checksum": "Checksum"
+            "seed": {
+                "title": "Type your seed to commence migration",
+                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+                "enter": "Enter your seed"
+            },
+            "mnemonic": {
+                "title": "Type your recovery phrase",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
+                "enter": "Enter your secret recovery phrase"
+            },
+            "seedDetected": "81 tegns seed fundet",
+            "phraseDetected": "24 ordgendannelsessætning fundet",
+            "checksum": "Kontrolsum"
         },
         "importFromFile": {
-            "title": "Restore your wallet using a backup file",
+            "title": "Gendan din wallet ved hjælp af en sikkerhedskopi fil",
             "body": "Importer en backupfil for at gendanne din tegnebog. Backups kan enten være en Stronghold-fil (.stronghold) eller en Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
@@ -133,58 +145,58 @@
         "importSuccess": {
             "title": "Du har gendannet din sikkerhedskopi med succes",
             "body": "Du kan nu konfigurere din nye tegnebog.",
-            "seedvaultTitle": "Successfully imported",
-            "seedvaultBody": "Your password is correct, you can now continue.",
-            "strongholdTitle": "Successfully imported",
-            "strongholdBody": "Your password is correct, you can now continue."
+            "seedvaultTitle": "Import lykkedes",
+            "seedvaultBody": "Din adgangskode er korrekt, du kan nu fortsætte.",
+            "strongholdTitle": "Import lykkedes",
+            "strongholdBody": "Din adgangskode er korrekt, du kan nu fortsætte."
         },
         "migrate": {
             "title": "Migrér dine penge",
-            "body1": "This is an automated process to transfer your funds to your new wallet.",
+            "body1": "Dette er en automatiseret proces til at overføre dine midler til din nye wallet.",
             "body2": "Det kan tage nogen tid. Sluk ikke din enhed under migrationen.",
             "existing": "Din gamle tegnebog",
             "new": "Din nye tegnebog",
-            "learn": "Learn about the migration",
-            "beginMigration": "Begin Migration",
-            "migrating": "Migrating funds...",
-            "migrated": "{balance} migrated",
-            "migrationFailed": "Migration Failed",
-            "noAddressesForMigration": "Please select the addresses you wish to secure.",
-            "restoringWallet": "Restoring wallet...",
-            "findingBalance": "Finding balance...",
-            "incorrectSeedVaultPassword": "Incorrect SeedVault password.",
-            "signingBundle": "Signing bundle",
-            "broadcastingBundle": "Broadcasting bundle",
-            "miningBundle": "Mining bundle",
-            "problemRestoringWallet": "There was a problem restoring your wallet. Please try again.",
-            "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
-            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
-            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. {value} will be lost.",
-            "error": "There was an error migrating your funds. Please try again."
+            "learn": "Lær om migrationen",
+            "beginMigration": "Begynd Migration",
+            "migrating": "Migrerer midler...",
+            "migrated": "{balance} migreret",
+            "migrationFailed": "Migration mislykkedes",
+            "noAddressesForMigration": "Vælg venligst de adresser, du ønsker at sikre.",
+            "restoringWallet": "Gendanner wallet...",
+            "findingBalance": "Finder saldo...",
+            "incorrectSeedVaultPassword": "Forkert SeedVault adgangskode.",
+            "signingBundle": "Signerer pakke",
+            "broadcastingBundle": "Udsender pakke",
+            "miningBundle": "Miner pakke",
+            "problemRestoringWallet": "Der opstod et problem med at genoprette din wallet. Prøv igen.",
+            "minimumMigrationAmountSpentAddresses": "Det mindste migrationsbeløb for hver brugt adresse er 1 Mi. Tjek igen, hvis din saldo ikke ser rigtig ud.",
+            "tooManyAddressesToMigrate": "Du har for mange adresser med lav saldo til at migrere. Tjek igen, hvis din saldo ikke ser rigtigt ud.",
+            "cannotMigrateAllYourFunds": "Vi kan ikke migrere alle dine penge, fordi nogle adresser har for lav værdi. Du kan fortsætte alligevel. {value} vil gå tabt.",
+            "error": "Der opstod en fejl under migrering af dine midler. Prøv igen."
         },
         "bundleMiningWarning": {
-            "title": "Warning",
-            "body1": "You have funds on one or more spent addresses.",
-            "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
-            "body3": "If you close the app you will need to restart the whole migration.",
-            "learn": "Learn about spent addresses"
+            "title": "Advarsel",
+            "body1": "Du har midler på en eller flere brugte adresser.",
+            "body2": "Vi anbefaler, at du kører en automatiseret proces for at hjælpe med at sikre og overføre disse midler sikkert.",
+            "body3": "Hvis du lukker appen, skal du genstarte hele migrationen.",
+            "learn": "Læs mere om brugte adresser"
         },
         "secureSpentAddresses": {
-            "title": "Secure spent addresses",
-            "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.",
-            "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",
-            "error": "You can’t migrate spent addresses with less than 1 Mi"
+            "title": "Gør dine brugte adresser sikre",
+            "body1": "Du har midler på {number, plural, one {# brugt adresse} other {# brugte adresser}}.",
+            "body2": "Vi anbefaler, at du kører en automatiseret proces for at hjælpe med at sikre og overføre dine midler sikkert.",
+            "error": "Du kan ikke migrere brugte adresser med mindre end 1 Mi"
         },
         "securityCheckCompleted": {
-            "title": "Security check completed",
-            "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
-            "body2": "When you are happy with the risk level(s) press continue.",
-            "rerun": "Rerun process for selected addresses",
-            "continueMigration": "Continue migration"
+            "title": "Sikkerhedstjek fuldført",
+            "body1": "Vi har beregnet sikkerhedsrisikoen. At køre denne proces igen kan sænke dit risikoniveau.",
+            "body2": "Når du er tilfreds med risikoniveauet/risikoniveauerne, tryk forsæt.",
+            "rerun": "Genkør proces for valgte adresser",
+            "continueMigration": "Fortsæt migration"
         },
         "securingSpentAddresses": {
-            "title": "Securing spent addresses...",
-            "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
+            "title": "Sikring af brugte adresser...",
+            "body1": "Denne proces vil tage {minutes, plural, one {1 minut} other {# minutter}}.",
             "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
         },
         "transferFragmentedFunds": {
@@ -251,96 +263,96 @@
             },
             "appLock": {
                 "title": "Automatic Lock",
-                "description": "Time elapsed before your wallet locks and logs you out"
+                "description": "Tid før din wallet bliver låst og du bliver logget ud"
             },
             "changePassword": {
                 "title": "Skift adgangskode",
-                "description": "Your password is used to secure your wallet. You must use a strong password to protect your funds."
+                "description": "Din adgangskode bruges til at sikre din wallet. Du skal bruge en stærk adgangskode for at beskytte dine midler."
             },
             "changePincode": {
-                "title": "Change PIN code",
-                "description": "Your PIN keeps your balance and transactions private",
+                "title": "Skift pinkode",
+                "description": "Din pinkode holder din saldo og transaktioner fortrolige",
                 "currentPincode": "Nuværende Pinkode",
                 "newPincode": "Ny Pinkode",
                 "confirmNewPincode": "Bekræft ny Pinkode",
                 "action": "Skift Pinkode"
             },
-            "resyncAccounts": {
-                "title": "Synkronisér konti",
-                "description": "Starts a background task to make sure your accounts are up to date."
+            "balanceFinder": {
+                "title": "Balance finder",
+                "description": "Perform an extended search of your addresses for tokens."
             },
             "hiddenAccounts": {
-                "title": "Hidden accounts",
-                "description": "Selecting this options will show accounts that were previously hidden."
+                "title": "Skjulte konti",
+                "description": "Valg af disse indstillinger vil vise konti, der tidligere var skjult."
             },
             "deleteProfile": {
                 "title": "Slet profil",
-                "description": "Deletes your entire wallet, profile and transaction history. Make sure you have a backup."
+                "description": "Sletter hele din wallet, profil og transaktionshistorik. Sørg for at du har en sikkerhedskopi."
             },
             "deepLinks": {
                 "title": "Dybe Links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
+                "description": "Udfyld automatisk transaktionsdata i Firefly ved at klikke på et iota:// link"
             },
             "developerMode": {
                 "title": "Udviklertilstand",
-                "description": "Connect to testnets and other developer features"
+                "description": "Opret forbindelse til testnet og andre udviklerfunktioner"
             },
             "nodeSettings": {
                 "title": "Nodeindstillinger",
-                "description": "Select Manual to configure the node settings and connect to your own node"
+                "description": "Vælg Manuel for at konfigurere nodeindstillingerne og oprette forbindelse til din egen node"
             },
             "configureNodeList": {
-                "title": "Select a node",
-                "description": "Manage the list of nodes your wallet connects to.",
-                "primaryNode": "Primary node",
-                "excludeNode": "Exclude node",
-                "includeNode": "Include node",
-                "viewDetails": "View details",
-                "setAsPrimary": "Set as primary",
-                "removeNode": "Remove node",
-                "includeOfficialNodeList": "Include official node list",
-                "noNodes": "There are no nodes, automatic selection will be used instead."
+                "title": "Vælg en node",
+                "description": "Håndtér listen over nodes som din wallet forbinder til.",
+                "primaryNode": "Primær node",
+                "excludeNode": "Udeluk node",
+                "includeNode": "Inkludér node",
+                "viewDetails": "Vis detaljer",
+                "setAsPrimary": "Sæt som primær",
+                "removeNode": "Fjern node",
+                "includeOfficialNodeList": "Inkludér den officielle node-liste",
+                "noNodes": "Der er ingen nodes, automatisk valg vil blive brugt i stedet."
             },
             "proofOfWork": {
                 "title": "Bevis for arbejde",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "description": "Udfør proof of work lokalt på din enhed eller outsource til noden"
             },
             "errorLog": {
                 "title": "Fejllog",
-                "description": "View errors to debug an issue"
+                "description": "Vis fejl for at fejlfinde et problem"
             },
             "diagnostics": {
-                "title": "Diagnostics",
-                "description": "View system and application information"
+                "title": "Diagnostik",
+                "description": "Vis system og applikationsinformation"
             },
             "stateExport": {
                 "title": "Eksportér tilstand",
-                "description": "Export your transaction history to a .csv file"
+                "description": "Eksporter din transaktionshistorik til en .csv-fil"
             },
             "troubleshoot": {
                 "title": "Fejlfinding",
-                "description": "Use the troubleshooting wizard to solve common problems"
+                "description": "Brug fejlfindingsguiden til at løse almindelige problemer"
             },
             "documentation": {
                 "title": "Dokumentation",
-                "description": "View the documentation for in depth explanations of how things work"
+                "description": "Se dokumentationen for dybdegående forklaringer om hvordan tingene fungerer"
             },
             "faq": {
                 "title": "FAQ",
-                "title2": "Frequently Asked Questions",
-                "description": "View the FAQs to get help with a common problem or question"
+                "title2": "Ofte Stillede Spørgsmål",
+                "description": "Se ofte stillede spørgsmål for at få hjælp til et typisk problem eller spørgsmål"
             },
             "discord": {
                 "title": "Discord",
-                "description": "Get help from the IOTA community on Discord"
+                "description": "Få hjælp fra IOTA-fællesskabet på Discord"
             },
             "about": {
                 "title": "Om",
                 "description": ""
             },
             "reportAnIssue": {
-                "title": "Report an issue",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported."
+                "title": "Rapporter et problem",
+                "description": "Rapporter en fejl til udviklerne. Tjek igennem for at sikre, at den ikke allerede er blevet rapporteret."
             }
         },
         "login": {
@@ -351,30 +363,30 @@
             "security": {
                 "version": {
                     "title": "Firefly v{version}",
-                    "upToDate": "Up to date",
-                    "outOfDate": "Out of date"
+                    "upToDate": "Ajourført",
+                    "outOfDate": "Forældet"
                 },
                 "hardwareDevice": {
-                    "title": "Hardware Device",
-                    "noneDetected": "None detected"
+                    "title": "Hardware-enhed",
+                    "noneDetected": "Ingen fundet"
                 },
                 "strongholdStatus": {
                     "title": "Wallet Status",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "locked": "Stronghold låst",
+                    "unlocked": "Stronghold låst op"
                 },
                 "strongholdBackup": {
-                    "title": "Wallet Backup",
-                    "weeksAgo": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "title": "Wallet sikkerhedskopi",
+                    "weeksAgo": "{weeks, plural, one {# uge} other {# uger}} siden"
                 }
             },
             "network": {
-                "networkOperational": "Network Operational",
-                "networkDegraded": "Network Degraded",
-                "networkDown": "Network Disconnected",
+                "networkOperational": "Netværket er operationelt",
+                "networkDegraded": "Netværk er forringet",
+                "networkDown": "Netværket er frakoblet",
                 "status": "Status",
-                "messagesPerSecond": "Messages per second",
-                "confirmationRate": "Confirmation rate"
+                "messagesPerSecond": "Beskeder pr. sekund",
+                "confirmationRate": "Bekræftelsesrate"
             },
             "profileModal": {
                 "allSettings": "Alle indstillinger",
@@ -385,7 +397,7 @@
     "popups": {
         "password": {
             "title": "Adgangskode påkrævet",
-            "subtitle": "Please enter your password to unlock Stronghold",
+            "subtitle": "Angiv din adgangskode for at låse Stronghold op",
             "backup": "Please enter your password to export a backup"
         },
         "qr": {
@@ -450,7 +462,7 @@
             "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
-            "title": "Diagnostics",
+            "title": "Diagnostik",
             "node": "Node",
             "platform": "Platform",
             "platformVersion": "Platform Version",
@@ -464,43 +476,49 @@
             "title": "Confirm transaction",
             "body": "You’re about to send {amount} to"
         },
+        "balanceFinder": {
+            "title": "Balance finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances.",
+            "totalWalletBalance": "Total wallet balance",
+            "typePassword": "Type your password to allow searching."
+        },
         "riskFunds": {
             "title": "Warning: funds at risk during migration",
             "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
-            "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
+            "body2": "Det anbefales, at du genstarter processen for adresser med et middel risikoniveau eller højere."
         },
         "missingBundle": {
-            "title": "Warning: funds at risk during migration",
-            "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
-            "learnMore": "Learn more about spent addresses",
-            "proceed": "I understand the risk"
+            "title": "Advarsel: midler, i fare under migrationen",
+            "body": "Du har midler på brugte adresser, men informationen for at sikre dem blev ikke fundet. Dette kan ske, hvis du har foretaget transaktioner for længe siden. Du kan fortsætte, men {value} er i fare under migrationen.",
+            "learnMore": "Læs mere om brugte adresser",
+            "proceed": "Jeg forstår risikoen"
         }
     },
     "charts": {
-        "incomingMi": "Incoming {value} Mi",
-        "outgoingMi": "Outgoing {value} Mi",
-        "portoflio": "Portfolio",
+        "incomingMi": "Incoming {value}",
+        "outgoingMi": "Outgoing {value}",
+        "portoflio": "Portefølje",
         "token": "Token",
-        "accountValue": "Account Value",
-        "accountActivity": "Account Activity",
-        "timeframe1Hour": "1 hour",
-        "timeframe1Day": "1 day",
-        "timeframe1Week": "1 week",
-        "timeframe1Month": "1 month"
+        "accountValue": "Anslået kontoværdi",
+        "accountActivity": "Kontoaktivitet",
+        "timeframe1Hour": "1 time",
+        "timeframe1Day": "1 dag",
+        "timeframe1Week": "1 uge",
+        "timeframe1Month": "1 måned"
     },
     "actions": {
         "continue": "Fortsæt",
         "back": "Tilbage",
         "cancel": "Annullér",
         "close": "Luk",
-        "dismiss": "Dismiss",
-        "proceedAnyway": "Proceed anyway",
+        "dismiss": "Afvis",
+        "proceedAnyway": "Fortsæt alligevel",
         "save": "Gem",
         "importSeed": "Importer et eksisterende seed",
-        "restoreWallet": "Migrate or restore a wallet",
-        "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
+        "restoreWallet": "Migrér eller gendan en wallet",
+        "restoreWalletDescription": "Migrér til Chrysalis eller gendan en eksisterende wallet",
         "createWallet": "Opret ny tegnebog",
-        "createWalletDescription": "Create a fresh wallet running on Chrysalis",
+        "createWalletDescription": "Opret en frisk wallet, der kører på Chrysalis",
         "savePassword": "Gem adgangskode",
         "useBiometric": "Brug biometrisk sikkerhed",
         "setupPin": "Vælg en PIN-kode",
@@ -512,7 +530,7 @@
         "verifyRecoveryPhrase": "Bekræft gendannelsessætning",
         "revealRecoveryPhrase": "Vis gendannelsessætning",
         "importSeedvault": "Importér SeedVault",
-        "checkAgain": "Check Again",
+        "checkAgain": "Kontrollér igen",
         "importFromFile": "Importer fra en fil",
         "send": "Send",
         "receive": "Modtag",
@@ -521,7 +539,7 @@
         "tryAgain": "Prøv igen",
         "visitDiscord": "Besøg Discord",
         "dragDrop": "Træk Og Slip",
-        "importExtentions": ".kdbx or .stronghold file",
+        "importExtentions": ".kdbx eller .stronghold fil",
         "chooseFile": "Vælg fil",
         "dropHere": "Slip din fil her",
         "syncAll": "Synkronisér alle",
@@ -529,41 +547,41 @@
         "exportNewStronghold": "Eksportér en ny Stronghold",
         "enableDeepLinks": "Aktivér dybe links",
         "enableDeveloperMode": "Aktiver udviklertilstand",
-        "enableSystemNotifications": "Enable system notifications",
+        "enableSystemNotifications": "Aktiver notifikationer",
         "exportState": "Eksportér tilstand",
-        "localProofOfWork": "Local proof of work",
+        "localProofOfWork": "Lokal proof of work",
         "unlock": "Lås op",
         "updateFirefly": "Opdater Firefly",
-        "restartNow": "Restart now",
-        "saveBackup": "Save Stronghold backup",
-        "customizeAcount": "Customise account",
-        "viewAddressHistory": "View address history",
-        "hideAccount": "Hide account",
-        "showAccount": "Unhide account",
-        "deleteAccount": "Delete account",
-        "max": "Max",
-        "addNode": "Add node",
-        "updateNode": "Update node",
-        "removeNode": "Remove node",
-        "hide": "Hide",
-        "hideOthers": "Hide Others",
-        "showAll": "Show All",
-        "quit": "Quit",
+        "restartNow": "Genstart nu",
+        "saveBackup": "Gem Stronghold sikkerhedskopi",
+        "customizeAcount": "Tilpas din konto",
+        "viewAddressHistory": "Se historik for addresse",
+        "hideAccount": "Skjul konto",
+        "showAccount": "Vis konto",
+        "deleteAccount": "Slet konto",
+        "max": "Maks",
+        "addNode": "Tilføj node",
+        "updateNode": "Opdater node",
+        "removeNode": "Fjern node",
+        "hide": "Skjul",
+        "hideOthers": "Skjul øvrige",
+        "showAll": "Vis alle",
+        "quit": "Afslut",
         "edit": "Rediger",
-        "undo": "Undo",
-        "redo": "Redo",
+        "undo": "Fortryd",
+        "redo": "Omgør",
         "cut": "Klip",
-        "copy": "Copy",
-        "paste": "Paste",
-        "selectAll": "Select All",
-        "addAccount": "Add Account",
-        "checkForUpdates": "Check for Updates",
-        "reportAnIssue": "Report an Issue",
-        "clear": "Clear",
-        "hideDetails": "Hide Details",
+        "copy": "Kopiér",
+        "paste": "Indsæt",
+        "selectAll": "Vælg alle",
+        "addAccount": "Tilføj konto",
+        "checkForUpdates": "Tjek for opdateringer",
+        "reportAnIssue": "Rapportér et problem",
+        "clear": "Ryd",
+        "hideDetails": "Skjul detaljer",
         "yes": "Ja",
         "no": "Nej",
-        "skip": "Skip",
+        "skip": "Spring over",
         "reset": "Reset",
         "downloadRecoveryKit": "Save Recovery Kit template",
         "skipBackup": "Skip file backup",
@@ -572,7 +590,11 @@
         "visitFaq": "Visit FAQ",
         "viewStatus": "View status",
         "showHiddenAccounts": "Show hidden accounts",
-        "confirm": "Confirm"
+        "confirm": "Confirm",
+        "findBalances": "Find balances",
+        "searchBalances": "Search for balances",
+        "searchAgain": "Search again",
+        "searching": "Searching..."
     },
     "general": {
         "password": "Adgangskode",
@@ -607,10 +629,6 @@
         "yourAddress": "Din adresse",
         "generateNewAddress": "Generér ny adresse",
         "copyAddress": "Kopiér adresse",
-        "haveTextBackup": "Jeg har en tekst sikkerhedskopi",
-        "haveFileBackup": "Jeg har en fil sikkerhedskopi",
-        "enterSeedOrPhrase": "Indtast en gendannelsessætning eller seed",
-        "uploadSeedvaultOrStronghold": "Importér en Stronghold - eller SeedVault- fil",
         "import": "Importér",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -665,130 +683,136 @@
         "accountSyncing": "Account is syncing",
         "accountSyncComplete": "Account sync complete",
         "passwordUpdating": "Updating password...",
-        "passwordSuccess": "Updated password successfully",
-        "passwordFailed": "Updating password failed",
-        "syncingAccounts": "Syncing accounts...",
-        "exportingStronghold": "Exporting Stronghold...",
-        "exportingStrongholdSuccess": "Exported Stronghold successfully",
-        "exportingStrongholdFailed": "Exporting Stronghold failed",
-        "pinCodeUpdating": "Updating PIN code...",
-        "pinCodeSuccess": "Updated PIN code successfully",
-        "pinCodeFailed": "Updating PIN code failed",
-        "passwordStrength": "Password strength",
-        "passwordStrength0": "Bad",
-        "passwordStrength1": "Poor",
-        "passwordStrength2": "Weak",
-        "passwordStrength3": "Average",
-        "passwordStrength4": "Strong",
-        "creatingProfile": "Creating profile, please wait...",
-        "fundMigration": "Fund migration",
-        "accountRemoved": "This account is hidden. Unhide it to perform transfers."
+        "passwordSuccess": "Adgangskode opdateret",
+        "passwordFailed": "Opdatering af adgangskode mislykkedes",
+        "syncingAccounts": "Synkroniserer konti...",
+        "exportingStronghold": "Eksporterer Stronghold...",
+        "exportingStrongholdSuccess": "Eksport af Stronghold lykkedes",
+        "exportingStrongholdFailed": "Eksport af Stronghold mislykkedes",
+        "pinCodeUpdating": "Opdaterer pinkode...",
+        "pinCodeSuccess": "Opdatering af pinkode lykkedes",
+        "pinCodeFailed": "Opdatering af pinkode mislykkedes",
+        "passwordStrength": "Adgangskodens styrke",
+        "passwordStrength0": "Dårlig",
+        "passwordStrength1": "Ringe",
+        "passwordStrength2": "Svag",
+        "passwordStrength3": "Gennemsnitlig",
+        "passwordStrength4": "Stærk",
+        "creatingProfile": "Opretter profil. Vent venligst...",
+        "fundMigration": "Migration af midler",
+        "accountRemoved": "Denne konto er skjult. Vis den for at udføre overførsler.",
+        "receivingTo": "Receiving to {account}",
+        "sendingFrom": "Sending from {account}",
+        "receivedTo": "Received to {account}",
+        "sentFrom": "Sent from {account}",
+        "receiving": "Receiving",
+        "sending": "Sending"
     },
     "dates": {
-        "today": "Today",
-        "yesterday": "Yesterday",
-        "daysAgo": "{time, plural, one {# day} other {# days}} ago",
-        "weeksAgo": "{time, plural, one {# week} other {# weeks}} ago",
-        "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
-        "yearsAgo": "{time, plural, one {# year} other {# years}} ago"
+        "today": "I dag",
+        "yesterday": "I går",
+        "daysAgo": "{time, plural, one {# dag} other {# dage}} siden",
+        "weeksAgo": "{time, plural, one {# uge} other {# uger}} siden",
+        "monthsAgo": "{time, plural, one {# måned} other {# måneder}} siden",
+        "yearsAgo": "{time, plural, one {# år} other {# år}} siden"
     },
     "notifications": {
-        "valueTx": "Receiving {{value}} to {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
-        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed",
-        "downloadingUpdate": "Downloading update",
-        "updateReady": "Update ready",
-        "updateError": "An error occurred during the update, please try again",
-        "restartInstall": "Restart to install",
-        "calcMinutesRemaining": "Calculating minutes remaining...",
-        "minutesRemaining": "{minutes, plural, one {1 minute remaining} other {# minutes remaining}}",
-        "copiedToClipboard": "Copied to clipboard",
-        "accountsSynchronized": "Account synchronization complete",
-        "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
-        "migratedAccountChrysalisUp": "Your funds will become available shortly"
+        "valueTx": "Modtager {{value}} til {{account}}",
+        "confirmed": "Udgående {{value}} fra {{account}} er gennemført",
+        "confirmedInternal": "{{value}} fra {{senderAccount}} til {{receiverAccount}} er gennemført",
+        "confirmedInternalNoAccounts": "{{value}} intern overførsel er gennemført",
+        "failed": "Udgående {{value}} fra {{account}} mislykkedes",
+        "downloadingUpdate": "Downloader opdatering",
+        "updateReady": "Opdatering klar",
+        "updateError": "Der opstod en fejl under opdateringen, prøv igen",
+        "restartInstall": "Genstart for at installere",
+        "calcMinutesRemaining": "Beregner minutter tilbage...",
+        "minutesRemaining": "{minutes, plural, one {1 minut tilbage} other {# minutter tilbage}}",
+        "copiedToClipboard": "Kopieret til udklipsholder",
+        "accountsSynchronized": "Konto synkronisering fuldført",
+        "migratedAccountChrysalisDown": "Dine midler vil blive tilgængelige efter Chrysalis den 28. april",
+        "migratedAccountChrysalisUp": "Dine midler vil snart være tilgængelige"
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "duplicate": "A profile with this name already exists."
+            "length": "Dit profilnavn kan ikke være længere end {length, plural, one {1 tegn} other {# tegn}}.",
+            "duplicate": "En profil med dette navn findes allerede."
         },
         "password": {
-            "doNotMatch": "Passwords do not match.",
-            "tooWeak": "Your new password is too weak.",
-            "row": "Straight rows of keys are easy to guess.",
-            "pattern": "Short keyboard patterns are easy to guess.",
-            "names": "Common names and surnames are easy to guess.",
-            "repeats": "Repeats like 'aaa' are easy to guess.",
-            "repeats2": "Repeats like 'abcabcabc' are easy to guess.",
-            "sequence": "Sequences of characters are easy to guess.",
-            "years": "Recent years are easy to guess.",
-            "dates": "Dates are easy to guess.",
-            "common": "This is a very common password.",
-            "similar": "This is similar to a common password.",
-            "word": "A single word is easy to guess.",
-            "incorrect": "Your password is incorrect.",
-            "length": "Your password can't be longer than {length, plural, one {1 character} other {# characters}}."
+            "doNotMatch": "Adgangskoderne er ikke ens.",
+            "tooWeak": "Din nye adgangskode er for svag.",
+            "row": "Lige rækker af taster er nemme at gætte.",
+            "pattern": "Korte tastaturmønstre er nemme at gætte.",
+            "names": "Almindelige navne og efternavne er nemme at gætte.",
+            "repeats": "Gentagelser som 'aaa' er nemme at gætte.",
+            "repeats2": "Gentagelser som 'abcabcabc' er nemme at gætte.",
+            "sequence": "Sekvenser af tegn er nemme at gætte.",
+            "years": "De seneste år er nemme at gætte.",
+            "dates": "Datoer er nemme at gætte.",
+            "common": "Dette er en meget almindelig adgangskode.",
+            "similar": "Dette ligner en almen anvendt adgangskode.",
+            "word": "Et enkelt ord er nemt at gætte.",
+            "incorrect": "Adgangskoden er forkert.",
+            "length": "Dit profilnavn kan ikke være længere end {length, plural, one {1 tegn} other {# tegn}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {1 digit} other {# digits}} long.",
-            "match": "PINs do not match.",
-            "incorrect": "Your current PIN is incorrect."
+            "length": "Din pinkode skal være {length, plural, one {1 ciffer} other {# cifre}} lang.",
+            "match": "Pinkoderne stemmer ikke overens.",
+            "incorrect": "Din nuværende pinkode er forkert."
         },
         "account": {
-            "length": "Your account name can't be longer than {length, plural, one {1 character} other {# characters}}.",
-            "empty": "You must use your latest account before creating a new one.",
-            "notEmpty": "You must transfer your balance before deleting this account.",
-            "duplicate": "An account with this name already exists.",
-            "tilde": "A profile name can't start with the '~' character.",
-            "control": "A profile name can't contain a control character.",
-            "startDot": "A profile name can't start with the '.' character.",
-            "chars": "A profile name can't contain the following characters <>:\"/\\|?*"
+            "length": "Dit kontonavn kan ikke være længere end {length, plural, one {1 tegn} other {# tegn}}.",
+            "empty": "Du skal bruge din seneste konto, før du opretter en ny.",
+            "notEmpty": "Du skal overføre din saldo før du sletter denne konto.",
+            "duplicate": "En konto med dette navn findes allerede.",
+            "tilde": "Et profilnavn kan ikke starte med '~'.",
+            "control": "Et profilnavn kan ikke indeholde et kontroltegn.",
+            "startDot": "Et profilnavn kan ikke starte med '.'.",
+            "chars": "Et profilnavn kan ikke indeholde følgende tegn <>:\"/\\|?*"
         },
         "send": {
-            "addressLength": "Addresses should be {length, plural, one {1 character} other {# characters}} long.",
-            "amountTooHigh": "This is greater than your available balance.",
-            "amountNoFloat": "If units are `i` you cannot use decimal places.",
-            "amountInvalidFormat": "The amount appears to be an invalid number.",
-            "amountZero": "The amount must be greater than 0.",
-            "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
-            "wrongAddressFormat": "The address is not correctly formatted.",
-            "invalidAddress": "The address is not valid.",
-            "insufficientFunds": "This account has insufficient funds.",
-            "noToAccount": "You have not selected an account to send the funds to.",
-            "sendingDust": "You cannot send less than 1 Mi.",
-            "leavingDust": "You cannot leave less than 1 Mi on your address."
+            "addressLength": "Adresser skal være {length, plural, one {1 tegn} other {# tegn}} langt.",
+            "amountTooHigh": "Dette er større end din tilgængelige saldo.",
+            "amountNoFloat": "Hvis enheder er `i` kan du ikke bruge decimaler.",
+            "amountInvalidFormat": "Beløbet ser ud til at være et ugyldigt tal.",
+            "amountZero": "Beløb skal være større end 0.",
+            "wrongAddressPrefix": "Adresser starter med præfikset {prefix}.",
+            "wrongAddressFormat": "Adressen er ikke formateret korrekt.",
+            "invalidAddress": "Adressen er ikke gyldig.",
+            "insufficientFunds": "Denne konto har utilstrækkelige midler.",
+            "noToAccount": "Du har ikke valgt en konto at sende midlerne til.",
+            "sendingDust": "Du kan ikke sende mindre end 1 Mi.",
+            "leavingDust": "Du kan ikke forlade mindre end 1 Mi på din adresse."
         },
         "node": {
-            "invalid": "Please enter a valid URL.",
-            "https": "HTTPS is required. Set up a developer profile to use unsecured HTTP connections.",
-            "duplicate": "This node has already been added.",
-            "unsynced": "The node is not in sync.",
-            "noSynced": "No synced nodes are available."
+            "invalid": "Indtast venligst en gyldig URL.",
+            "https": "HTTPS er påkrævet. Opsæt en udviklerprofil for at bruge usikrede HTTP-forbindelser.",
+            "duplicate": "Denne node er allerede blevet tilføjet.",
+            "unsynced": "Noden er ikke synkroniseret.",
+            "noSynced": "Ingen synkroniserede noder er tilgængelige."
         },
         "global": {
-            "generic": "Something went wrong."
+            "generic": "Noget gik galt."
         },
         "backup": {
-            "invalid": "The backup file was not recognised.",
-            "destination": "The backup destination was not valid.",
-            "mnemonic": "The mnemonic is not valid.",
-            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is 1} other {is #}}",
-            "seedCharacters": "The seed should only contain characters A-Z or 9",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is 1} other {are #}}.",
-            "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
-            "phraseCaseWord": "The word \"{word}\" should be lower case"
+            "invalid": "Sikkerhedskopifilen blev ikke genkendt.",
+            "destination": "Backup-destinationen var ikke gyldig.",
+            "mnemonic": "Gendannelsesordene var ikke gyldige.",
+            "seedTooShort": "Seedet skal være 81 tegn langt, det {length, plural, one {er 1} other {er #}}",
+            "seedCharacters": "Seedet må kun indeholder tegn A-Z eller 9",
+            "phraseWordCount": "Der bør være 24 ord i dine gendannelsesord, i øjeblikket der {length, plural, one {er 1} other {er #}}.",
+            "phraseUnrecognizedWord": "Ordet \"{word}\" blev ikke genkendt i dine gendannelsesord",
+            "phraseCaseWord": "Ordet \"{word}\" skal være små bogstaver"
         }
     },
     "tooltips": {
         "risk": {
-            "title": "Risk level: {risk}",
-            "veryHigh": "Very high",
-            "high": "High",
-            "medium": "Medium",
-            "low": "Low",
-            "veryLow": "Very low"
+            "title": "Risiko niveau: {risk}",
+            "veryHigh": "Meget høj",
+            "high": "Høj",
+            "medium": "Mellem",
+            "low": "Lav",
+            "veryLow": "Meget lav"
         }
     }
 }

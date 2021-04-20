@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Illustration, OnboardingLayout, Password, Text } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, Password, Text } from 'shared/components'
     import { strongholdPassword } from 'shared/lib/app'
     import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
@@ -101,7 +101,7 @@
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-yellow dark:bg-gray-900">
-            <Illustration illustration="password-desktop" width="100%" height="auto" />
+            <Animation animation="password-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

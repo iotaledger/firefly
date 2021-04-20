@@ -231,11 +231,12 @@
         </section>
         <HR classes="pb-5 mt-5 justify-center" />
     {/if} -->
-    <section id="deepLinks" class="w-3/4">
+    <!-- TODO: re-enable deep links -->
+    <!-- <section id="deepLinks" class="w-3/4">
         <Text type="h4" classes="mb-3">{locale('views.settings.deepLinks.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.deepLinks.description')}</Text>
         <Checkbox label={locale('actions.enableDeepLinks')} bind:checked={deepLinkingChecked} />
-    </section>
+    </section> -->
     {#if $loggedIn}
         <HR classes="pb-5 mt-5 justify-center" />
         <section id="balanceFinder" class="w-3/4">

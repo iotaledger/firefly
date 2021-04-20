@@ -109,14 +109,26 @@
             "exportMigration": "Exportera migrationslogg och avsluta installationen"
         },
         "import": {
-            "title": "Importera en plånbok",
-            "body": "Om du har en återställningsfras eller Stronghold -fil så kan du importera den här."
+            "title": "Recover or migrate funds",
+            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+            "importSeed": "I have an 81 character seed",
+            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "importMnemonic": "I have a Firefly recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase to recover your wallet",
+            "importFile": "I have a file backup",
+            "importFileDescription": "Upload a Seedvault or Stronghold file"
         },
         "importFromText": {
-            "title": "Återställ din plånbok med en återställningsfras eller seed",
-            "body1": "En seed består av 81 tecken. Denna används för att återställa plånboken från en äldre Trinity-plånbok.",
-            "body2": "En återställningsfras är 24 ord lång, endast små bokstäver och mellanrum mellan varje ord. Denna används för att återställa en befintlig Firefly-plånbok.",
-            "body3": "Ange din seed eller återställningsfras",
+            "seed": {
+                "title": "Type your seed to commence migration",
+                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+                "enter": "Enter your seed"
+            },
+            "mnemonic": {
+                "title": "Type your recovery phrase",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
+                "enter": "Enter your secret recovery phrase"
+            },
             "seedDetected": "81 tecken lång seed upptäckt",
             "phraseDetected": "24 ord lång återställningsfras upptäckt",
             "checksum": "Kontrollnummer"
@@ -265,9 +277,9 @@
                 "confirmNewPincode": "Bekräfta ny PIN-kod",
                 "action": "Ändra PIN-kod"
             },
-            "resyncAccounts": {
-                "title": "Synkronisera om konton",
-                "description": "Startar en bakgrundsprocess för att se till att dina konton är uppdaterade."
+            "balanceFinder": {
+                "title": "Balance finder",
+                "description": "Perform an extended search of your addresses for tokens."
             },
             "hiddenAccounts": {
                 "title": "Dolda konton",
@@ -464,6 +476,12 @@
             "title": "Bekräfta transaktion",
             "body": "Du håller på att skicka {amount} till"
         },
+        "balanceFinder": {
+            "title": "Balance finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances.",
+            "totalWalletBalance": "Total wallet balance",
+            "typePassword": "Type your password to allow searching."
+        },
         "riskFunds": {
             "title": "Varning: Tillgångar i riskzonen vid migrering",
             "body1": "Det rekommenderas starkt att du säkrar alla dina IOTA innan du fortsätter med migration. Dina pengar riskerar att stjälas om du inte säkrar dem.",
@@ -477,8 +495,8 @@
         }
     },
     "charts": {
-        "incomingMi": "Inkommande {value} Mi",
-        "outgoingMi": "Utgående {value} Mi",
+        "incomingMi": "Incoming {value}",
+        "outgoingMi": "Outgoing {value}",
         "portoflio": "Portfölj",
         "token": "Token",
         "accountValue": "Kontovärde",
@@ -572,7 +590,11 @@
         "visitFaq": "Besök FAQ",
         "viewStatus": "Visa status",
         "showHiddenAccounts": "Visa dolda konton",
-        "confirm": "Bekräfta"
+        "confirm": "Bekräfta",
+        "findBalances": "Find balances",
+        "searchBalances": "Search for balances",
+        "searchAgain": "Search again",
+        "searching": "Searching..."
     },
     "general": {
         "password": "Lösenord",
@@ -607,10 +629,6 @@
         "yourAddress": "Din adress",
         "generateNewAddress": "Skapa ny adress",
         "copyAddress": "Kopiera adress",
-        "haveTextBackup": "Jag har en säkerhetskopia-fras",
-        "haveFileBackup": "Jag har en säkerhetskopia-fil",
-        "enterSeedOrPhrase": "Ange en återställningsfras eller seed",
-        "uploadSeedvaultOrStronghold": "Importera en Stronghold eller SeedVault-fil",
         "import": "Importera",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -682,7 +700,13 @@
         "passwordStrength4": "Starkt",
         "creatingProfile": "Skapar profil, vänligen vänta...",
         "fundMigration": "Token-migration",
-        "accountRemoved": "Detta konto är dolt. Avtäck kontot för att utföra överföringar."
+        "accountRemoved": "Detta konto är dolt. Avtäck kontot för att utföra överföringar.",
+        "receivingTo": "Receiving to {account}",
+        "sendingFrom": "Sending from {account}",
+        "receivedTo": "Received to {account}",
+        "sentFrom": "Sent from {account}",
+        "receiving": "Receiving",
+        "sending": "Sending"
     },
     "dates": {
         "today": "Idag",

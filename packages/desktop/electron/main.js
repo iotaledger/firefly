@@ -344,39 +344,40 @@ app.on('second-instance', (_e, args) => {
     }
 })
 
+// TODO: re-enable deep links
 /**
  * Register iota:// protocol for deep links
  * Set Firefly as the default handler for iota:// protocol
  */
-protocol.registerSchemesAsPrivileged([{ scheme: 'iota', privileges: { secure: true, standard: true } }])
-if (process.defaultApp) {
-    if (process.argv.length >= 2) {
-        app.setAsDefaultProtocolClient('iota', process.execPath, [path.resolve(process.argv[1])])
-    }
-} else {
-    app.setAsDefaultProtocolClient('iota')
-}
+// protocol.registerSchemesAsPrivileged([{ scheme: 'iota', privileges: { secure: true, standard: true } }])
+// if (process.defaultApp) {
+//     if (process.argv.length >= 2) {
+//         app.setAsDefaultProtocolClient('iota', process.execPath, [path.resolve(process.argv[1])])
+//     }
+// } else {
+//     app.setAsDefaultProtocolClient('iota')
+// }
 
-/**
- * Proxy deep link event to the wallet application
- */
-app.on('open-url', (event, url) => {
-    event.preventDefault()
-    deepLinkUrl = url
-    if (windows.main) {
-        windows.main.webContents.send('deep-link-params', url)
-    }
-})
+// /**
+//  * Proxy deep link event to the wallet application
+//  */
+// app.on('open-url', (event, url) => {
+//     event.preventDefault()
+//     deepLinkUrl = url
+//     if (windows.main) {
+//         windows.main.webContents.send('deep-link-params', url)
+//     }
+// })
 
-/**
- * Proxy deep link event to the wallet application
- */
-ipcMain.on('deep-link-request', () => {
-    if (deepLinkUrl) {
-        windows.main.webContents.send('deep-link-params', deepLinkUrl)
-        deepLinkUrl = null
-    }
-})
+// /**
+//  * Proxy deep link event to the wallet application
+//  */
+// ipcMain.on('deep-link-request', () => {
+//     if (deepLinkUrl) {
+//         windows.main.webContents.send('deep-link-params', deepLinkUrl)
+//         deepLinkUrl = null
+//     }
+// })
 
 /**
  * Proxy notification activated to the wallet application

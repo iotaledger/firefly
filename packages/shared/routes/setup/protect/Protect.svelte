@@ -6,7 +6,7 @@
     import { api, asyncSetStoragePassword, asyncVerifyMnemonic, asyncStoreMnemonic, asyncCreateAccount } from 'shared/lib/wallet'
     import { createEventDispatcher } from 'svelte'
     import { get } from 'svelte/store'
-    import { Pin, Protect } from './views/'
+    import { Pin, Protect, RepeatPin } from './views/'
     import { showAppNotification } from 'shared/lib/notifications'
     import { walletSetupType } from 'shared/lib/router'
     import { mnemonic } from 'shared/lib/app'
@@ -21,7 +21,7 @@
         Init = 'init',
         Biometric = 'biometric',
         Pin = 'pin',
-        Confirm = 'confirm',
+        RepeatPin = 'repeatPin',
     }
 
     const dispatch = createEventDispatcher()
@@ -54,9 +54,9 @@
             case ProtectState.Pin:
                 const { pinCandidate } = params
                 pin = pinCandidate
-                nextState = ProtectState.Confirm
+                nextState = ProtectState.RepeatPin
                 break
-            case ProtectState.Confirm:
+            case ProtectState.RepeatPin:
                 try {
                     busy = true
 
@@ -119,8 +119,12 @@
     </Transition>
 {/if}-->
 
-{#if state === ProtectState.Pin || state === ProtectState.Confirm}
+{#if state === ProtectState.Pin}
     <Transition>
-        <Pin {busy} on:next={_next} on:previous={_previous} pinCandidate={pin} {locale} {mobile} />
+        <Pin {busy} on:next={_next} on:previous={_previous} {locale} {mobile} />
+    </Transition>
+{:else if state === ProtectState.RepeatPin}
+    <Transition>
+        <RepeatPin {busy} on:next={_next} on:previous={_previous} pinCandidate={pin} {locale} {mobile} />
     </Transition>
 {/if}

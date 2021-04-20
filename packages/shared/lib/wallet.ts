@@ -528,7 +528,7 @@ export const initialiseListeners = () => {
                 saveNewMessage(response.payload.accountId, response.payload.message);
 
                 const notificationMessage = localize('notifications.valueTx')
-                    .replace('{{value}}', formatUnitBestMatch(message.payload.data.essence.data.value))
+                    .replace('{{value}}', formatUnitBestMatch(message.payload.data.essence.data.value, true, 3))
                     .replace('{{account}}', account.alias);
 
                 showSystemNotification({ type: "info", message: notificationMessage, contextData: { type: "valueTx", accountId: account.id } });
@@ -605,7 +605,7 @@ export const initialiseListeners = () => {
 
                         if (accountTo) {
                             notificationMessage = localize(`notifications.${messageKey}Internal`)
-                                .replace('{{value}}', formatUnitBestMatch(tx.data.essence.data.value))
+                                .replace('{{value}}', formatUnitBestMatch(tx.data.essence.data.value, true, 3))
                                 .replace('{{senderAccount}}', account1.alias)
                                 .replace('{{receiverAccount}}', accountTo)
                         } else {
@@ -615,10 +615,10 @@ export const initialiseListeners = () => {
                                 // out before an internal transfer completed so the internalTransfersInProgress
                                 // was wiped, display the anonymous account message instead
                                 notificationMessage = localize(`notifications.confirmedInternalNoAccounts`)
-                                    .replace('{{value}}', formatUnitBestMatch(tx.data.essence.data.value))
+                                    .replace('{{value}}', formatUnitBestMatch(tx.data.essence.data.value, true, 3))
                             } else {
                                 notificationMessage = localize(`notifications.${messageKey}`)
-                                    .replace('{{value}}', formatUnitBestMatch(tx.data.essence.data.value))
+                                    .replace('{{value}}', formatUnitBestMatch(tx.data.essence.data.value, true, 3))
                                     .replace('{{account}}', account1.alias)
                             }
                         }
@@ -748,7 +748,7 @@ export const updateAccountAfterBalanceChange = (
                 let updatedAddress = false
                 const updatedAccount = Object.assign<WalletAccount, Partial<WalletAccount>>(storedAccount, {
                     rawIotaBalance,
-                    balance: formatUnitBestMatch(rawIotaBalance),
+                    balance: formatUnitBestMatch(rawIotaBalance, true, 3),
                     balanceEquiv: formatCurrency(convertToFiat(
                         rawIotaBalance,
                         get(currencies)[CurrencyTypes.USD],
@@ -931,11 +931,11 @@ export const updateBalanceOverview = (balance: number, incoming: number, outgoin
 
     balanceOverview.update((overview) => {
         return Object.assign<BalanceOverview, BalanceOverview, Partial<BalanceOverview>>({} as BalanceOverview, overview, {
-            incoming: formatUnitBestMatch(incoming),
+            incoming: formatUnitBestMatch(incoming, true, 3),
             incomingRaw: incoming,
-            outgoing: formatUnitBestMatch(outgoing),
+            outgoing: formatUnitBestMatch(outgoing, true, 3),
             outgoingRaw: outgoing,
-            balance: formatUnitBestMatch(balance),
+            balance: formatUnitBestMatch(balance, true, 3),
             balanceRaw: balance,
             balanceFiat: formatCurrency(convertToFiat(
                 balance,
@@ -1081,7 +1081,7 @@ export const updateAccountsBalanceEquiv = (): void => {
 
     accounts.update((storedAccounts) => {
         for (const storedAccount of storedAccounts) {
-            storedAccount.balance = formatUnitBestMatch(storedAccount.rawIotaBalance)
+            storedAccount.balance = formatUnitBestMatch(storedAccount.rawIotaBalance, true, 3)
             storedAccount.balanceEquiv = formatCurrency(convertToFiat(
                 storedAccount.rawIotaBalance,
                 get(currencies)[CurrencyTypes.USD],
@@ -1248,7 +1248,7 @@ export const prepareAccountInfo = (
         depositAddress,
         alias,
         rawIotaBalance: balance,
-        balance: formatUnitBestMatch(balance),
+        balance: formatUnitBestMatch(balance, true, 3),
         balanceEquiv: formatCurrency(convertToFiat(
             balance,
             get(currencies)[CurrencyTypes.USD],

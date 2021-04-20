@@ -171,6 +171,12 @@
                 }
             }
         }
+
+        .multiwrap-line2 {
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
+        }
     }
     @layer utilities {
         .scrollable-y {

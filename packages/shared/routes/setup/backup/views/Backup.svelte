@@ -1,6 +1,7 @@
 <script lang="typescript">
+    import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { createEventDispatcher } from 'svelte'
-    import { OnboardingLayout, Illustration, Text, Button } from 'shared/components'
+
     export let locale
     export let mobile
     export let busy
@@ -29,7 +30,7 @@
             <Button classes="w-full" onClick={() => handleContinueClick()} autofocus>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-purple dark:bg-gray-900">
-            <Illustration illustration="backup-desktop" width="100%" height="auto" />
+            <Animation animation="backup-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

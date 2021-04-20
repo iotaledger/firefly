@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Illustration, OnboardingLayout, Password, Spinner, Text } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, Password, Spinner, Text } from 'shared/components'
     import { checkChrysalisSnapshot, ongoingSnapshot } from 'shared/lib/migration'
     import { createEventDispatcher, getContext } from 'svelte'
     import type { Writable } from 'svelte/store'
@@ -75,7 +75,7 @@
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Illustration illustration="import-from-file-password-desktop" width="100%" height="auto" />
+            <Animation animation="import-from-file-password-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

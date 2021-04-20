@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, Icon, Illustration, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import {
         AvailableExchangeRates,
         convertToFiat,
@@ -86,7 +86,7 @@
                     </div>
                     <Text type="h2" classes="mb-6 text-center">{locale('views.congratulations.fundsMigrated')}</Text>
                     <Text type="p" secondary classes="mb-6 text-center">{locale('views.congratulations.success')}</Text>
-                    <Text type="h2">{formatUnitBestMatch($totalMigratedBalance)}</Text>
+                    <Text type="h2">{formatUnitBestMatch($totalMigratedBalance, true, 3)}</Text>
                     <Text type="p" highlighted classes="py-1 uppercase">{fiatbalance}</Text>
                 </div>
             {:else}
@@ -105,7 +105,7 @@
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
-            <Illustration illustration="congratulations-desktop" width="100%" height="auto" />
+            <Animation animation="congratulations-desktop" />
         </div>
     </OnboardingLayout>
 {/if}

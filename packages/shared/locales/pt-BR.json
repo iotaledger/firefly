@@ -32,16 +32,16 @@
             "body": "Escolha o tema da sua carteira."
         },
         "profile": {
-            "title": "Create a profile",
-            "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
-            "profileName": "Profile Name"
+            "title": "Criar um perfil",
+            "body1": "Você pode criar vários perfis de usuários para manter sua carteira organizada e melhorarar a privacidade.",
+            "body2": "Por agora, vamos começar com o nome do seu primeiro perfil. Você pode adicionar mais perfis mais tarde.",
+            "profileName": "Nome do Perfil"
         },
         "setup": {
-            "title": "Set up a wallet",
-            "chrysalisTitle": "Chrysalis Network Update",
-            "chrysalisBody": "From April 21st, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
-            "learnMore": "Learn about the migration"
+            "title": "Configurar uma carteira",
+            "chrysalisTitle": "Atualização da Rede Chrysalis",
+            "chrysalisBody": "A partir de 21 de abril, os usuários poderão migrar seus tokens para a nova rede Chrysalis. Recomendamos que você migre seus tokens existentes o mais rápido possível.",
+            "learnMore": "Saiba mais sobre a migração"
         },
         "secure": {
             "title": "Proteja sua carteira",
@@ -104,19 +104,31 @@
         "congratulations": {
             "title": "Configuração da carteira concluída",
             "body": "Sua nova carteira está pronta para ser usada.",
-            "fundsMigrated": "Funds migrated",
-            "success": "You have successfully migrated your funds to the new network",
-            "exportMigration": "Export migration log and finish setup"
+            "fundsMigrated": "Fundos migrados",
+            "success": "Você migrou seus fundos com sucesso para a nova rede",
+            "exportMigration": "Exportar log de migração e concluir a configuração"
         },
         "import": {
-            "title": "Importar uma carteira",
-            "body": "Se você tem uma frase de recuperação ou backup Stronghold, você pode importá-los aqui."
+            "title": "Recover or migrate funds",
+            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+            "importSeed": "I have an 81 character seed",
+            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
+            "importMnemonic": "I have a Firefly recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase to recover your wallet",
+            "importFile": "I have a file backup",
+            "importFileDescription": "Upload a Seedvault or Stronghold file"
         },
         "importFromText": {
-            "title": "Recupere sua carteira com uma frase de recuperação ou seed",
-            "body1": "Uma Seed consiste em 81 caracteres. Essa é usada para a restauração de uma carteira Trinity mais velha.",
-            "body2": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
-            "body3": "Digite sua seed ou frase de recuperação",
+            "seed": {
+                "title": "Type your seed to commence migration",
+                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+                "enter": "Enter your seed"
+            },
+            "mnemonic": {
+                "title": "Type your recovery phrase",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
+                "enter": "Enter your secret recovery phrase"
+            },
             "seedDetected": "Seed de 81 caracteres detectada",
             "phraseDetected": "24 palavras de recuperação detectadas",
             "checksum": "Checksum"
@@ -140,57 +152,57 @@
         },
         "migrate": {
             "title": "Migre seus fundos",
-            "body1": "This is an automated process to transfer your funds to your new wallet.",
+            "body1": "Este é um processo automatizado para transferir seus fundos para a sua nova carteira.",
             "body2": "Isto pode levar algum tempo. Não desligue seu dispositivo durante a migração.",
             "existing": "Sua carteira antiga",
             "new": "Sua nova carteira",
-            "learn": "Learn about the migration",
-            "beginMigration": "Begin Migration",
-            "migrating": "Migrating funds...",
-            "migrated": "{balance} migrated",
-            "migrationFailed": "Migration Failed",
-            "noAddressesForMigration": "Please select the addresses you wish to secure.",
-            "restoringWallet": "Restoring wallet...",
-            "findingBalance": "Finding balance...",
-            "incorrectSeedVaultPassword": "Incorrect SeedVault password.",
-            "signingBundle": "Signing bundle",
-            "broadcastingBundle": "Broadcasting bundle",
-            "miningBundle": "Mining bundle",
-            "problemRestoringWallet": "There was a problem restoring your wallet. Please try again.",
-            "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
-            "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
-            "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. {value} will be lost.",
-            "error": "There was an error migrating your funds. Please try again."
+            "learn": "Saiba mais sobre a migração",
+            "beginMigration": "Começar a Migração",
+            "migrating": "Migrando fundos...",
+            "migrated": "{balance} migrado",
+            "migrationFailed": "Falha na Migração",
+            "noAddressesForMigration": "Por favor selecione os endereços que deseja proteger.",
+            "restoringWallet": "Restaurando a carteira...",
+            "findingBalance": "Procurando saldo...",
+            "incorrectSeedVaultPassword": "Senha SeedVault incorreta.",
+            "signingBundle": "Assinando pacote",
+            "broadcastingBundle": "Transmitindo pacote",
+            "miningBundle": "Minerando pacote",
+            "problemRestoringWallet": "Ocorreu um problema ao restaurar sua carteira. Por favor, tente novamente.",
+            "minimumMigrationAmountSpentAddresses": "O valor mínimo de migração para cada endereço usado é de 1 Mi. Verifique novamente se seu saldo está correto.",
+            "tooManyAddressesToMigrate": "Você tem muitos endereços com saldo baixo para migrar. Verifique novamente se seu saldo está correto.",
+            "cannotMigrateAllYourFunds": "Não podemos migrar todos os seus fundos porque alguns endereços possuem valores muito baixos. Você pode prosseguir mesmo assim. {value} será perdido.",
+            "error": "Ocorreu um erro ao migrar os seus fundos. Tente novamente."
         },
         "bundleMiningWarning": {
-            "title": "Warning",
-            "body1": "You have funds on one or more spent addresses.",
-            "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
-            "body3": "If you close the app you will need to restart the whole migration.",
-            "learn": "Learn about spent addresses"
+            "title": "Alerta",
+            "body1": "Você tem fundos em um ou mais endereços usados.",
+            "body2": "Recomendamos que você execute um processo automatizado para ajudar a proteger e transferir esses fundos de forma segura.",
+            "body3": "Se você fechar o aplicativo, você precisará reiniciar toda a migração.",
+            "learn": "Saiba mais sobre os endereços usados"
         },
         "secureSpentAddresses": {
-            "title": "Secure spent addresses",
-            "body1": "You have funds detected on {number, plural, one {# spent address} other {# spent addresses}}.",
-            "body2": "We recommend you run an automated process to help secure and transfer your funds safely.",
-            "error": "You can’t migrate spent addresses with less than 1 Mi"
+            "title": "Endereços usados seguros",
+            "body1": "Você possui fundos detectados em {number, plural, one {# endereço usado} other {# endereços usados}}.",
+            "body2": "Recomendamos que você execute um processo automatizado para ajudar a proteger e transferir seus fundos de forma segura.",
+            "error": "Você não pode migrar endereços usados com menos de 1 Mi"
         },
         "securityCheckCompleted": {
-            "title": "Security check completed",
-            "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
-            "body2": "When you are happy with the risk level(s) press continue.",
-            "rerun": "Rerun process for selected addresses",
-            "continueMigration": "Continue migration"
+            "title": "Verificação de segurança concluída",
+            "body1": "Calculamos o nível de risco de segurança. Executar este processo novamente poderá diminuir seu nível de risco.",
+            "body2": "Quando você estiver satisfeito com o nível de risco pressione continue.",
+            "rerun": "Reexecutar o processo para endereços selecionados",
+            "continueMigration": "Continuar migração"
         },
         "securingSpentAddresses": {
-            "title": "Securing spent addresses...",
-            "body1": "This process will take {minutes, plural, one {1 minute} other {# minutes}}.",
-            "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
+            "title": "Protegendo endereços usados...",
+            "body1": "Este processo levará {minutes, plural, one {1 minuto} other {# minutos}}.",
+            "body2": "Seu computador irá executar com a capacidade máxima, você pode fazer outra coisa enquanto aguarda a conclusão."
         },
         "transferFragmentedFunds": {
-            "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
-            "migrate": "Migrate funds",
-            "transaction": "Transaction {number}",
+            "body1": "Firefly irá agora migrar seus fundos. Isso pode demorar um pouco.",
+            "migrate": "Migrar fundos",
+            "transaction": "Transação {number}",
             "rerun": "Tente novamente"
         },
         "migrateFailed": {
@@ -199,15 +211,15 @@
         },
         "balance": {
             "title": "Seu saldo",
-            "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
-            "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
-            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly."
+            "body": "Certifique-se de que seu saldo está correto antes de continuar. Você pode verificar novamente se as coisas não parecem corretas.",
+            "error": "O valor mínimo de migração é 1 Mi. Verifique novamente se seu saldo não parece certo.",
+            "zeroBalance": "Tente verificar novamente. Se você ainda não conseguiu encontrar seu saldo, talvez tenha inserido sua Seed incorretamente."
         },
         "settings": {
             "settings": "Configurações",
             "generalSettings": {
                 "title": "Configurações Gerais",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Configure a aparência da sua carteira e outras configurações gerais"
             },
             "security": {
                 "title": "Segurança",
@@ -265,9 +277,9 @@
                 "confirmNewPincode": "Confirme o novo PIN",
                 "action": "Alterar PIN"
             },
-            "resyncAccounts": {
-                "title": "Ressincronizar Contas",
-                "description": "Inicia uma tarefa em segundo plano para certificar-se de que suas contas estão atualizadas."
+            "balanceFinder": {
+                "title": "Balance finder",
+                "description": "Perform an extended search of your addresses for tokens."
             },
             "hiddenAccounts": {
                 "title": "Contas ocultas",
@@ -464,29 +476,35 @@
             "title": "Confirmar transação",
             "body": "Você está prestes a enviar {amount} para"
         },
+        "balanceFinder": {
+            "title": "Balance finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances.",
+            "totalWalletBalance": "Total wallet balance",
+            "typePassword": "Type your password to allow searching."
+        },
         "riskFunds": {
-            "title": "Warning: funds at risk during migration",
-            "body1": "It is strongly recommended that you secure all your funds before proceeding with migration. Your funds are at risk of theft if you do not secure them.",
-            "body2": "It is recommended that you rerun the process for addresses with a medium risk level or above."
+            "title": "Aviso: fundos em risco durante a migração",
+            "body1": "É altamente recomendável que você assegure todos os seus fundos antes de prosseguir com a migração. Seus fundos estão em risco de roubo se você não os proteger.",
+            "body2": "É recomendável que você execute novamente o processo para endereços com um nível de risco médio ou superior."
         },
         "missingBundle": {
-            "title": "Warning: funds at risk during migration",
-            "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
-            "learnMore": "Learn more about spent addresses",
-            "proceed": "I understand the risk"
+            "title": "Aviso: fundos em risco durante a migração",
+            "body": "Você tem fundos em endereços usados, mas a informação necessária para protegê-los não foi encontrada. Isso pode acontecer se você fez transações há muito tempo. Você pode continuar, mas {value} está em risco durante a migração.",
+            "learnMore": "Saiba mais sobre endereços usados",
+            "proceed": "Eu compreendo o risco"
         }
     },
     "charts": {
-        "incomingMi": "Recebendo {value} Mi",
-        "outgoingMi": "Enviando {value} Mi",
+        "incomingMi": "Incoming {value}",
+        "outgoingMi": "Outgoing {value}",
         "portoflio": "Portfólio",
         "token": "Token",
         "accountValue": "Saldo da Conta",
         "accountActivity": "Atividade da Conta",
-        "timeframe1Hour": "1 hour",
-        "timeframe1Day": "1 day",
-        "timeframe1Week": "1 week",
-        "timeframe1Month": "1 month"
+        "timeframe1Hour": "1 hora",
+        "timeframe1Day": "1 dia",
+        "timeframe1Week": "1 semana",
+        "timeframe1Month": "1 mês"
     },
     "actions": {
         "continue": "Continuar",
@@ -494,13 +512,13 @@
         "cancel": "Cancelar",
         "close": "Fechar",
         "dismiss": "Fechar",
-        "proceedAnyway": "Proceed anyway",
+        "proceedAnyway": "Continuar mesmo assim",
         "save": "Salvar",
         "importSeed": "Importar uma seed existente",
-        "restoreWallet": "Migrate or restore a wallet",
-        "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
+        "restoreWallet": "Migrar ou restaurar uma carteira",
+        "restoreWalletDescription": "Migrar para Chrysalis ou restaurar uma carteira existente",
         "createWallet": "Criar nova carteira",
-        "createWalletDescription": "Create a fresh wallet running on Chrysalis",
+        "createWalletDescription": "Criar uma carteira nova executando na Chrysalis",
         "savePassword": "Salvar senha",
         "useBiometric": "Utilizar segurança biométrica",
         "setupPin": "Definir código PIN",
@@ -512,7 +530,7 @@
         "verifyRecoveryPhrase": "Verificar frase de recuperação",
         "revealRecoveryPhrase": "Revelar frase de recuperação",
         "importSeedvault": "Importar SeedVault",
-        "checkAgain": "Check Again",
+        "checkAgain": "Verificar novamente",
         "importFromFile": "Importar de um arquivo",
         "send": "Enviar",
         "receive": "Receber",
@@ -563,16 +581,20 @@
         "hideDetails": "Ocultar Detalhes",
         "yes": "Sim",
         "no": "Não",
-        "skip": "Skip",
+        "skip": "Ignorar",
         "reset": "Redefinir",
         "downloadRecoveryKit": "Salvar modelo Kit de Recuperação",
         "skipBackup": "Ignorar backup de arquivo",
         "finishSetup": "Concluir configuração",
         "readDocumentation": "Ler a documentação",
         "visitFaq": "Visitar FAQ",
-        "viewStatus": "View status",
+        "viewStatus": "Ver status",
         "showHiddenAccounts": "Mostrar contas ocultas",
-        "confirm": "Confirmar"
+        "confirm": "Confirmar",
+        "findBalances": "Find balances",
+        "searchBalances": "Search for balances",
+        "searchAgain": "Search again",
+        "searching": "Searching..."
     },
     "general": {
         "password": "Senha",
@@ -607,10 +629,6 @@
         "yourAddress": "Seu endereço",
         "generateNewAddress": "Gerar novo endereço",
         "copyAddress": "Copiar endereço",
-        "haveTextBackup": "Eu tenho um backup de texto",
-        "haveFileBackup": "Eu tenho um arquivo de recuperação",
-        "enterSeedOrPhrase": "Digite uma frase de recuperação ou a seed",
-        "uploadSeedvaultOrStronghold": "Importar arquivo Stronghold ou Seedvault",
         "import": "Importar",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -630,7 +648,7 @@
         "manualNodeSelection": "Seleção manual do servidor",
         "profiles": "Perfis",
         "developerProfile": "Perfil do Desenvolvedor",
-        "developerProfileDescription": "Allows you to connect to testnets",
+        "developerProfileDescription": "Permite que você conecte às redes de teste",
         "dev": "Dev",
         "createAccount": "Criar uma Conta",
         "accountName": "Nome da Conta",
@@ -681,8 +699,14 @@
         "passwordStrength3": "Média",
         "passwordStrength4": "Forte",
         "creatingProfile": "Criando perfil, por favor aguarde...",
-        "fundMigration": "Fund migration",
-        "accountRemoved": "Esta conta está oculta. Exiba a conta para realizar transferências."
+        "fundMigration": "Migração de fundo",
+        "accountRemoved": "Esta conta está oculta. Exiba a conta para realizar transferências.",
+        "receivingTo": "Receiving to {account}",
+        "sendingFrom": "Sending from {account}",
+        "receivedTo": "Received to {account}",
+        "sentFrom": "Sent from {account}",
+        "receiving": "Receiving",
+        "sending": "Sending"
     },
     "dates": {
         "today": "Hoje",
@@ -706,8 +730,8 @@
         "minutesRemaining": "{minutes, plural, one {1 minuto restante} other {# minutos restantes}}",
         "copiedToClipboard": "Copiado para área de transferência",
         "accountsSynchronized": "Sincronização da conta concluída",
-        "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
-        "migratedAccountChrysalisUp": "Your funds will become available shortly"
+        "migratedAccountChrysalisDown": "Os seus fundos estarão disponíveis após o Chrysalis no dia 28 de Abril",
+        "migratedAccountChrysalisUp": "Seus fundos estarão disponíveis em breve"
     },
     "error": {
         "profile": {
@@ -778,17 +802,17 @@
             "seedCharacters": "A seed deve conter apenas caracteres A-Z ou 9",
             "phraseWordCount": "Deve haver 24 palavras em sua frase de recuperação, atualmente {length, plural, one {há 1} other {há #}}.",
             "phraseUnrecognizedWord": "Palavra \"{word}\" não reconhecida na sua frase de recuperação",
-            "phraseCaseWord": "The word \"{word}\" should be lower case"
+            "phraseCaseWord": "A palavra \"{word}\" deve ser minúscula"
         }
     },
     "tooltips": {
         "risk": {
-            "title": "Risk level: {risk}",
-            "veryHigh": "Very high",
-            "high": "High",
-            "medium": "Medium",
-            "low": "Low",
-            "veryLow": "Very low"
+            "title": "Nível de risco: {risk}",
+            "veryHigh": "Muito alto",
+            "high": "Alto",
+            "medium": "Médio",
+            "low": "Baixo",
+            "veryLow": "Muito baixo"
         }
     }
 }

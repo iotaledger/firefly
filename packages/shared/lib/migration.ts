@@ -588,7 +588,7 @@ const DEFAULT_CHRYSALIS_NODE_POLL_INTERVAL = 300000 // 5 minutes
 * Mainnet ID used in a chrysalis node 
 */
 // TODO: Update to 'mainnet'
-const MAINNET_ID = 'migration3'
+const MAINNET_ID = 'migration4'
 
 type ChrysalisNode = {
     data: ChrysalisNodeData
