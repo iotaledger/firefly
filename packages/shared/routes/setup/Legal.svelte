@@ -176,8 +176,8 @@
                                 <Text type="p" secondary classes="mb-4">
                                     Crypto-asset transactions are irreversible. As the User, it is your responsibility to ensure
                                     that any crypto-assets that you send with the App are sent to the correct address. We do not
-                                    have access to the wallets created through the App and we are not able to assist you in
-                                    case you send crypto-assets to the wrong address; you are using the App at your own risk.
+                                    have access to the wallets created through the App and we are not able to assist you in case
+                                    you send crypto-assets to the wrong address; you are using the App at your own risk.
                                 </Text>
                             </li>
                             <li>
@@ -283,10 +283,10 @@
                                 <Text type="p" secondary classes="mb-4">
                                     The IOTA Foundation does not accept any liability for transactions, due to a lack of control
                                     over transaction processes. We are therefore expressly not responsible for any claims, damages
-                                    or any other type of liability caused by any third-party service provider. In no event will the
-                                    IOTA Foundation be liable to the User for any losses caused by user-error, software or system
-                                    malfunctions, errors, interruptions, delays or inability to use the App, including any losses
-                                    caused thereof to the User or any third party.
+                                    or any other type of liability caused by any third-party service provider. In no event will
+                                    the IOTA Foundation be liable to the User for any losses caused by user-error, software or
+                                    system malfunctions, errors, interruptions, delays or inability to use the App, including any
+                                    losses caused thereof to the User or any third party.
                                 </Text>
                             </li>
                             <li>
@@ -543,7 +543,11 @@
                     </Text>
 
                     <Text type="h2" classes="mt-8 mb-5">Use of Cookies</Text>
-                    <Text type="p" secondary classes="mb-4">We do not use cookies in the App.</Text>
+                    <Text type="p" secondary classes="mb-4">
+                        We do not use cookies in the App, but we use the localStorage API to store information about the login
+                        data to keep you logged in through various sessions (we do not store personal information), furthermore
+                        the localStorage data is not accessible by third-parties.
+                    </Text>
 
                     <Text type="h2" classes="mt-8 mb-5">How we Protect and Store Personal Data</Text>
                     <Text type="p" secondary classes="mb-4">
