@@ -64,7 +64,11 @@
         </button>
     </div>
     <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
-        {#if $transactions?.length}
+        {#if ($activeProfile?.gapLimit === 50 && $isSyncing)}
+            <div class="h-full flex flex-col items-center justify-center text-center">
+                <Text secondary>{locale('general.firstSync')}</Text>
+            </div>
+        {:else if $transactions?.length}
             {#each $transactions as transaction}
                 <ActivityRow
                     {...transaction}
