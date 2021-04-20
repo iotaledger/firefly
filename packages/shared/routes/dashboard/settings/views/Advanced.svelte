@@ -236,9 +236,9 @@
         <Text type="h4" classes="mb-3">{locale('views.settings.deepLinks.title')}</Text>
         <Text type="p" secondary classes="mb-5">{locale('views.settings.deepLinks.description')}</Text>
         <Checkbox label={locale('actions.enableDeepLinks')} bind:checked={deepLinkingChecked} />
+        <HR classes="pb-5 mt-5 justify-center" />
     </section> -->
     {#if $loggedIn}
-        <HR classes="pb-5 mt-5 justify-center" />
         <section id="balanceFinder" class="w-3/4">
             <Text type="h4" classes="mb-3">{locale('views.settings.balanceFinder.title')}</Text>
             <Text type="p" secondary classes="mb-5">{locale('views.settings.balanceFinder.description')}</Text>
