@@ -409,7 +409,7 @@
             "upToDateDescription": "You are running the latest and safest version of Firefly.",
             "updateAvailable": "Firefly update available",
             "updateDetails": "Version {version} - {date}",
-            "noAutoUpdate": "Auto-update is disabled in this version, please go to https://firefly.iota.org to download the update."
+            "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update."
         },
         "backup": {
             "title": "Last backup: {date}",
