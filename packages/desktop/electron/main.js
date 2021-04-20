@@ -38,11 +38,6 @@ const windows = {
     about: null,
 }
 
-/**
- * Set environment mode
- */
-const devMode = process.env.NODE_ENV === 'development'
-
 let paths = {
     preload: '',
     html: '',
@@ -61,8 +56,7 @@ const defaultWebPreferences = {
     disableBlinkFeatures: 'Auxclick',
     webviewTag: false,
     enableWebSQL: false,
-    // TODO: Remove before stable
-    devTools: true,
+    devTools: !app.isPackaged,
 }
 
 if (app.isPackaged) {
@@ -153,12 +147,10 @@ function createWindow() {
 
     mainWindowState.track(windows.main);
 
-    if (devMode) {
+    if (!app.isPackaged) {
         // Enable dev tools only in developer mode
         windows.main.webContents.openDevTools()
-    }
 
-    if (devMode) {
         windows.main.loadURL('http://localhost:8080')
     } else {
         initAutoUpdate(windows.main)

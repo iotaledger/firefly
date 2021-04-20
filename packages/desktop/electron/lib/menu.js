@@ -85,21 +85,29 @@ const buildTemplate = () => {
                     label: state.strings.diagnostics,
                     click: () => getOrInitWindow('main').webContents.send('menu-diagnostics'),
                 },
-                {
-                    // TODO: Remove before stable release
-                    label: "Developer Tools",
-                    role: 'toggleDevTools'
-                },
-                {
-                    label: state.strings.errorLog,
-                    click: () => getOrInitWindow('main').webContents.send('menu-error-log')
-                },
-                {
-                    type: 'separator',
-                },
             ]
         }
     ]
+
+    if (!app.isPackaged) {
+        template[0].submenu.push(
+            {
+                label: "Developer Tools",
+                role: 'toggleDevTools'
+            }
+        )
+    }
+
+    template[0].submenu = template[0].submenu.concat([
+        {
+            label: state.strings.errorLog,
+            click: () => getOrInitWindow('main').webContents.send('menu-error-log')
+        },
+        {
+            type: 'separator',
+        },
+    ]
+    )
 
     if (process.platform === 'darwin') {
         template[0].submenu = template[0].submenu.concat([
