@@ -121,7 +121,7 @@
         "importFromText": {
             "seed": {
                 "title": "Type your seed to commence migration",
-                "body": "A seed consists of 81 characters. This is used to recover the older Trinity app.",
+                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
                 "enter": "Enter your seed"
             },
             "mnemonic": {
@@ -219,7 +219,7 @@
             "settings": "Settings",
             "generalSettings": {
                 "title": "General Settings",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Configure your app's appearance and other general settings"
             },
             "security": {
                 "title": "Security",
