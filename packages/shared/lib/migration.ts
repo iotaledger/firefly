@@ -580,7 +580,7 @@ const DEFAULT_CHRYSALIS_NODE_ENDPOINT_TIMEOUT = 5000
 * Mainnet ID used in a chrysalis node 
 */
 // TODO: Update to 'mainnet'
-const MAINNET_ID = 'migration3'
+const MAINNET_ID = 'migration4'
 
 /**
  * Default interval for polling the market data

@@ -86,7 +86,7 @@
                     </div>
                     <Text type="h2" classes="mb-6 text-center">{locale('views.congratulations.fundsMigrated')}</Text>
                     <Text type="p" secondary classes="mb-6 text-center">{locale('views.congratulations.success')}</Text>
-                    <Text type="h2">{formatUnitBestMatch($totalMigratedBalance)}</Text>
+                    <Text type="h2">{formatUnitBestMatch($totalMigratedBalance, true, 3)}</Text>
                     <Text type="p" highlighted classes="py-1 uppercase">{fiatbalance}</Text>
                 </div>
             {:else}
