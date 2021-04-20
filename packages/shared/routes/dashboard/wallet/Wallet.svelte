@@ -124,8 +124,6 @@
                     updateProfile('gapLimit', 10)
                 }
 
-                console.log(JSON.stringify(accountsResponse, undefined, '\t'))
-
                 if (accountsResponse.payload.length === 0) {
                     _continue()
                 } else {
