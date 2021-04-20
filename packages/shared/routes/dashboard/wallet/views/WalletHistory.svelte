@@ -39,10 +39,10 @@
         api.getStrongholdStatus({
             onSuccess(strongholdStatusResponse) {
                 if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
-                    openPopup({ type: 'password', props: { onSuccess: async () => asyncSyncAccounts(0, 10, 5, false) } })
+                    openPopup({ type: 'password', props: { onSuccess: async () => asyncSyncAccounts(0, 10, 1, false) } })
                 } else {
                     const gapLimit = $activeProfile?.gapLimit
-                    asyncSyncAccounts(gapLimit === undefined ? undefined : 0, gapLimit, 5, false)
+                    asyncSyncAccounts(gapLimit === undefined ? undefined : 0, gapLimit, 1, false)
                     updateProfile('gapLimit', undefined)
                 }
             },

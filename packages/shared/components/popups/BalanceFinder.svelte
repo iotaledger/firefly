@@ -8,7 +8,7 @@
     const { balanceOverview } = $wallet
 
     let addressIndex = 0
-    let gapIndex = 50
+    let gapIndex = 25
     let accountDiscoveryThreshold = 10
     let password
     let error = ''
