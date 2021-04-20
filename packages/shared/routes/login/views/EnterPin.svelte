@@ -61,9 +61,6 @@
     }
 
     async function onSubmit() {
-        // LOGIN KILL SWITCH
-        // TODO: replace this with proper kill switch
-        // for now we will just reuse the logic
         await checkChrysalisSnapshot()
         if (get(ongoingSnapshot) === true) {
             pinRef.resetAndFocus()
