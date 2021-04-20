@@ -150,10 +150,9 @@
                                 // It's a transfer between two addresses in the same account
                                 // Try and find the other side of the pair where the message id
                                 // would be the same and the incoming flag the opposite
+                                const internalIncoming = getIncomingFlag(internalMessage.payload)
                                 let pair = internalMessages.find(
-                                    (m) =>
-                                        m.id === internalMessage.id &&
-                                        getIncomingFlag(m.payload) !== getIncomingFlag(internalMessage.payload)
+                                    (m) => m.id === internalMessage.id && getIncomingFlag(m.payload) !== internalIncoming
                                 )
 
                                 // Can't find the other side of the pair so clone the original
