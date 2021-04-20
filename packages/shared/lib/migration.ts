@@ -77,37 +77,47 @@ export const ongoingSnapshot = writable<Boolean>(false)
  * @returns {Promise<void} 
  */
 export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0): Promise<void> => {
-    return new Promise((resolve, reject) => {
-        api.getMigrationData(
-            migrationSeed,
-            [MIGRATION_NODE],
-            ADDRESS_SECURITY_LEVEL,
-            initialAddressIndex,
-            PERMANODE, {
-            onSuccess(response) {
-                const { seed, data } = get(migration)
+    return new Promise(async (resolve, reject) => {
+        // Migration: snapshot check
+        await checkChrysalisSnapshot()
+        if (get(ongoingSnapshot) === true) {
+            // we dont display the error because a notification popup will open already
+            reject({ snapshot: true })
+            console.error('Ongoing network upgrade')
+        }
+        else {
+            api.getMigrationData(
+                migrationSeed,
+                [MIGRATION_NODE],
+                ADDRESS_SECURITY_LEVEL,
+                initialAddressIndex,
+                PERMANODE, {
+                onSuccess(response) {
+                    const { seed, data } = get(migration)
 
-                if (initialAddressIndex === 0) {
-                    seed.set(migrationSeed)
-                    data.set(response.payload)
-                } else {
-                    data.update((_existingData) => {
-                        return Object.assign({}, _existingData, {
-                            balance: _existingData.balance + response.payload.balance,
-                            inputs: [..._existingData.inputs, ...response.payload.inputs],
-                            lastCheckedAddressIndex: response.payload.lastCheckedAddressIndex
+                    if (initialAddressIndex === 0) {
+                        seed.set(migrationSeed)
+                        data.set(response.payload)
+                    } else {
+                        data.update((_existingData) => {
+                            return Object.assign({}, _existingData, {
+                                balance: _existingData.balance + response.payload.balance,
+                                inputs: [..._existingData.inputs, ...response.payload.inputs],
+                                lastCheckedAddressIndex: response.payload.lastCheckedAddressIndex
+                            })
                         })
-                    })
-                }
+                    }
 
-                prepareBundles()
+                    prepareBundles()
 
-                resolve()
-            },
-            onError(error) {
-                reject(error)
-            },
-        })
+                    resolve()
+                },
+                onError(error) {
+                    reject(error)
+                },
+            })
+        }
+
     })
 };
 
@@ -148,44 +158,52 @@ export const createMigrationBundle = (inputAddressIndexes: number[], offset: num
  * @returns {Promise<void>}
  */
 export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAGNITUDE): Promise<void> => {
-    return new Promise((resolve, reject) => {
-        api.sendMigrationBundle([MIGRATION_NODE], bundleHash, mwm, {
-            onSuccess(response) {
-                const { bundles } = get(migration);
+    return new Promise(async (resolve, reject) => {
+        // Migration: snapshot check
+        await checkChrysalisSnapshot()
+        if (get(ongoingSnapshot) === true) {
+            // we dont display the error because a notification popup will open already
+            reject({ snapshot: true })
+        }
+        else {
+            api.sendMigrationBundle([MIGRATION_NODE], bundleHash, mwm, {
+                onSuccess(response) {
+                    const { bundles } = get(migration);
 
-                // Update bundle and mark it as migrated
-                bundles.update((_bundles) => {
-                    return _bundles.map((bundle) => {
-                        if (bundle.bundleHash === bundleHash) {
-                            return Object.assign({}, bundle, { migrated: true })
-                        }
+                    // Update bundle and mark it as migrated
+                    bundles.update((_bundles) => {
+                        return _bundles.map((bundle) => {
+                            if (bundle.bundleHash === bundleHash) {
+                                return Object.assign({}, bundle, { migrated: true })
+                            }
 
-                        return bundle
+                            return bundle
+                        })
                     })
-                })
 
-                // Persist these bundles in local storage
-                const _activeProfile = get(activeProfile)
+                    // Persist these bundles in local storage
+                    const _activeProfile = get(activeProfile)
 
-                const migratedTransaction = {
-                    address: response.payload.address,
-                    balance: response.payload.value,
-                    tailTransactionHash: response.payload.tailTransactionHash,
-                    timestamp: new Date().toISOString(),
-                    // Account index. Since we migrate funds to account at 0th index
-                    account: 0
-                }
+                    const migratedTransaction = {
+                        address: response.payload.address,
+                        balance: response.payload.value,
+                        tailTransactionHash: response.payload.tailTransactionHash,
+                        timestamp: new Date().toISOString(),
+                        // Account index. Since we migrate funds to account at 0th index
+                        account: 0
+                    }
 
-                updateProfile(
-                    'migratedTransactions',
-                    _activeProfile.migratedTransactions ? [..._activeProfile.migratedTransactions, migratedTransaction] : [migratedTransaction]
-                )
-                resolve()
-            },
-            onError(error) {
-                reject(error)
-            },
-        })
+                    updateProfile(
+                        'migratedTransactions',
+                        _activeProfile.migratedTransactions ? [..._activeProfile.migratedTransactions, migratedTransaction] : [migratedTransaction]
+                    )
+                    resolve()
+                },
+                onError(error) {
+                    reject(error)
+                },
+            })
+        }
     })
 }
 
