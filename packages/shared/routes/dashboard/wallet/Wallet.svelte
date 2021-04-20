@@ -145,16 +145,21 @@
                         )
 
                         for (const internalMessage of internalMessages) {
+                            // First check if the message send to another address in the same account
                             const isSelf = isSelfTransaction(internalMessage.payload, payloadAccount)
 
                             if (isSelf) {
-                                // Try and find the other side of the pair
+                                // Its a transfer between two addresses in the same account
+                                // Try and find the other side of the pair where the message id
+                                // would be the same and the incoming flag the opposite
                                 let pair = internalMessages.find(
                                     (m) =>
                                         m.id === internalMessage.id &&
                                         getIncomingFlag(m.payload) !== getIncomingFlag(internalMessage.payload)
                                 )
 
+                                // Can't find the other size of the pair so clone the original
+                                // reverse its incoming flag and store it
                                 if (!pair) {
                                     pair = deepCopy(internalMessage)
                                     // Reverse the incoming flag for the other side of the pair
