@@ -1480,14 +1480,6 @@ export const updateAccountNetworkSettings = async (automaticNodeSelection, inclu
 export const isSelfTransaction = (payload: Payload, account: Account): boolean => {
     const accountAddresses = account?.addresses?.map(add => add.address) ?? []
     if (payload && accountAddresses.length) {
-        const getSenderAddress = () => {
-            if (payload.type === 'Transaction') {
-                return sendAddressFromTransactionPayload(payload)
-            }
-
-            return null
-        }
-
         const getReceiverAddresses = () => {
             if (payload.type === 'Transaction') {
                 return receiverAddressesFromTransactionPayload(payload)
@@ -1498,7 +1490,7 @@ export const isSelfTransaction = (payload: Payload, account: Account): boolean =
             return null;
         }
 
-        const senderAddress: string = getSenderAddress()
+        const senderAddress: string = sendAddressFromTransactionPayload(payload)
 
         const receiverAddresses: string[] = getReceiverAddresses()
 
@@ -1585,3 +1577,16 @@ export const getMilestoneMessageValue = (payload: Payload, accounts) => {
        payload.data.essence.data.incoming = incoming
     }
  }
+
+ /**
+ * Get internal flag from message
+ * @returns 
+ */
+  export const getInternalFlag = (payload: Payload) => {
+    if (payload?.type === "Transaction") {
+       return payload.data.essence.data.internal
+    }
+
+    return undefined
+}
+

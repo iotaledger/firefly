@@ -20,6 +20,7 @@
         getAccountMeta,
         getAccountsBalanceHistory,
         getIncomingFlag,
+        getInternalFlag,
         getTransactions,
         getWalletBalanceHistory,
         initialiseListeners,
@@ -137,13 +138,12 @@
                     let newAccounts = []
                     for (const payloadAccount of accountsResponse.payload) {
                         // The wallet only returns one side of internal transfers
-                        // to the same account, so create the other side
-                        const internalMessages = payloadAccount.messages.filter(
-                            (m) => m.payload.type === 'Transaction' && m.payload.data.essence.data.internal
-                        )
+                        // to the same account, so create the other side by first finding
+                        // the internal messages
+                        const internalMessages = payloadAccount.messages.filter((m) => getInternalFlag(m.payload))
 
                         for (const internalMessage of internalMessages) {
-                            // First check if the message sends to another address in the same account
+                            // Check if the message sends to another address in the same account
                             const isSelf = isSelfTransaction(internalMessage.payload, payloadAccount)
 
                             if (isSelf) {
