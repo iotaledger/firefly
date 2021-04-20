@@ -58,7 +58,7 @@
         setTimeout(() => {
             splash = false
             initRouter()
-        }, 2000)
+        }, 4200)
 
         await pollMarketData()
         await pollNetworkStatus()

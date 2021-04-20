@@ -8,6 +8,7 @@
     export let loop = true
     export let autoplay = true
     export let segments = undefined
+    export let renderer = 'svg'
 
     const animations = {
         'welcome-desktop': {
@@ -90,6 +91,10 @@
             lightmode: 'balance-desktop.json',
             darkmode: 'balance-desktop-darkmode.json',
         },
+        'splashscreen-desktop': {
+            lightmode: 'splashscreen-desktop.json',
+            darkmode: 'splashscreen-desktop-darkmode.json',
+        },
     }
 
     let container
@@ -101,7 +106,7 @@
     $: if (selected && container) {
         let options = {
             container,
-            renderer: 'svg',
+            renderer,
             path: `assets/animations/${selected}`,
             loop,
             autoplay,
