@@ -804,10 +804,12 @@ export const updateAccountAfterBalanceChange = (
 export const saveNewMessage = (accountId: string, message: Message): void => {
     const { accounts } = get(wallet)
 
+    const messageIncoming = getIncomingFlag(message.payload)
+
     accounts.update((storedAccounts) => {
         return storedAccounts.map((storedAccount: WalletAccount) => {
             if (storedAccount.id === accountId) {
-                const hasMessage = storedAccount.messages.some(m => m.id === message.id)
+                const hasMessage = storedAccount.messages.some(m => m.id === message.id && getIncomingFlag(m.payload) === messageIncoming)
 
                 if (!hasMessage) {
                     storedAccount.messages.push(message)
@@ -831,12 +833,14 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
 export const replaceMessage = (accountId: string, messageId: string, newMessage: Message): void => {
     const { accounts } = get(wallet)
 
+    const messageIncoming = getIncomingFlag(newMessage.payload)
+
     accounts.update((storedAccounts) => {
         return storedAccounts.map((storedAccount: WalletAccount) => {
             if (storedAccount.id === accountId) {
                 return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
                     messages: storedAccount.messages.map((_message) => {
-                        if (_message.id === messageId) {
+                        if (_message.id === messageId && getIncomingFlag(_message.payload) === messageIncoming) {
                             return newMessage;
                         }
 
@@ -865,18 +869,23 @@ export const getAccountMessages = (account: WalletAccount): AccountMessage[] => 
     } = {};
 
     account.messages.forEach((message) => {
-        messages[message.id] = Object.assign<
-            AccountMessage,
-            Message,
-            Partial<AccountMessage>
-        >(
-            {} as AccountMessage,
-            message,
-            { account: account.index });
-    });
+        let extraId = ''
+        if (message.payload.type === "Transaction") {
+            extraId = getIncomingFlag(message.payload) ? 'in' : 'out'
+        }
+        messages[message.id + extraId] = {
+            ...message,
+            account: account.index
+        }
+    })
 
     return Object.values(messages)
-        .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+        .sort((a, b) => {
+            if (a.id === b.id && a.payload.type == "Transaction") {
+                return getIncomingFlag(a.payload) ? -1 : 1
+            }
+            return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+        })
 }
 
 /**
@@ -896,7 +905,11 @@ export const getTransactions = (accounts: WalletAccount[], count = 10): AccountM
 
     accounts.forEach((account) => {
         account.messages.forEach((message) => {
-            messages[account.index + message.id] = {
+            let extraId = ''
+            if (message.payload.type === "Transaction") {
+                extraId = getIncomingFlag(message.payload) ? 'in' : 'out'
+            }
+            messages[account.index + message.id + extraId] = {
                 ...message,
                 account: account.index
             }
@@ -906,8 +919,7 @@ export const getTransactions = (accounts: WalletAccount[], count = 10): AccountM
     return Object.values(messages)
         .sort((a, b) => {
             if (a.id === b.id && a.payload.type == "Transaction") {
-                const txA = a.payload as Transaction
-                return txA.data.essence.data.incoming ? -1 : 1
+                return getIncomingFlag(a.payload) ? -1 : 1
             }
             return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
         })
@@ -987,14 +999,32 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
     const updatedStoredAccounts = get(accounts).map((storedAccount) => {
         const syncedAccount = existingAccounts.find((_account) => _account.id === storedAccount.id)
 
-        return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
-            // Update deposit address
-            depositAddress: syncedAccount.depositAddress.address,
-            // If we have received a new address, simply add it;
-            // If we have received an existing address, update the properties.
-            addresses: mergeProps(storedAccount.addresses, syncedAccount.addresses, 'address'),
-            messages: mergeProps(storedAccount.messages, syncedAccount.messages, 'id'),
-        })
+        // Update deposit address
+        storedAccount.depositAddress = syncedAccount.depositAddress.address
+
+        // If we have received a new address, simply add it;
+        // If we have received an existing address, update the properties.
+        for (const addr of syncedAccount.addresses) {
+            const addressIndex = storedAccount.addresses.findIndex(a => a.address === addr.address)
+            if (addressIndex < 0) {
+                storedAccount.addresses.push(addr)
+            } else {
+                storedAccount.addresses[addressIndex] = addr
+            }
+        }
+
+        // If we have received a new message, simply add it;
+        // If we have received an existing message, update the properties.
+        for (const msg of syncedAccount.messages) {
+            const msgIndex = storedAccount.messages.findIndex(m => m.id === msg.id && getIncomingFlag(m.payload) === getIncomingFlag(msg.payload))
+            if (msgIndex < 0) {
+                storedAccount.messages.push(msg)
+            } else {
+                storedAccount.messages[msgIndex] = msg
+            }
+        }
+
+        return storedAccount
     })
 
     if (newAccounts.length) {
@@ -1051,22 +1081,6 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
         accounts.update(() => updatedStoredAccounts.sort((a, b) => a.index - b.index));
     }
 };
-
-function mergeProps<T>(existingPayload: T[], newPayload: T[], prop: string): T[] {
-    const existingPayloadMap = existingPayload.reduce((acc, object) => {
-        acc[object[prop]] = object
-
-        return acc
-    }, {})
-
-    const newPayloadMap = newPayload.reduce((acc, object) => {
-        acc[object[prop]] = object
-
-        return acc
-    }, {})
-
-    return Object.values(Object.assign({}, existingPayloadMap, newPayloadMap))
-}
 
 /**
  * Updates balance fiat value for every account
@@ -1464,17 +1478,9 @@ export const updateAccountNetworkSettings = async (automaticNodeSelection, inclu
  * @param {WalletAccount} account
  *
  */
-export const isSelfTransaction = (payload: Payload, account: WalletAccount): boolean => {
+export const isSelfTransaction = (payload: Payload, account: Account): boolean => {
     const accountAddresses = account?.addresses?.map(add => add.address) ?? []
     if (payload && accountAddresses.length) {
-        const getSenderAddress = () => {
-            if (payload.type === 'Transaction') {
-                return sendAddressFromTransactionPayload(payload)
-            }
-
-            return null
-        }
-
         const getReceiverAddresses = () => {
             if (payload.type === 'Transaction') {
                 return receiverAddressesFromTransactionPayload(payload)
@@ -1485,7 +1491,7 @@ export const isSelfTransaction = (payload: Payload, account: WalletAccount): boo
             return null;
         }
 
-        const senderAddress: string = getSenderAddress()
+        const senderAddress: string = sendAddressFromTransactionPayload(payload)
 
         const receiverAddresses: string[] = getReceiverAddresses()
 
@@ -1512,7 +1518,6 @@ export const sendAddressFromTransactionPayload = (payload: Payload): string => {
 export const receiverAddressesFromTransactionPayload = (payload: Payload): string[] => {
     if (payload?.type === "Transaction") {
         return payload?.data?.essence?.data?.outputs
-            ?.filter((output) => output?.data?.remainder === false)
             ?.map((output) => output?.data?.address) ?? []
     }
 
@@ -1525,7 +1530,6 @@ export const receiverAddressesFromTransactionPayload = (payload: Payload): strin
 export const receiverAddressesFromMilestonePayload = (payload: Payload): string[] => {
     if (payload?.type === "Milestone") {
         return payload?.data?.essence?.receipt?.data?.funds
-            ?.filter((receiptFunds) => receiptFunds?.output?.remainder === false)
             ?.map((receiptFunds) => receiptFunds?.output?.address) ?? []
     }
 
@@ -1552,3 +1556,38 @@ export const getMilestoneMessageValue = (payload: Payload, accounts) => {
 
     return 0
 }
+
+/**
+ * Get incoming flag from message
+ * @returns 
+ */
+ export const getIncomingFlag = (payload: Payload) => {
+    if (payload?.type === "Transaction") {
+       return payload.data.essence.data.incoming
+    }
+
+    return undefined
+}
+
+/**
+ * Set incoming flag on the message
+ * @returns 
+ */
+ export const setIncomingFlag = (payload: Payload, incoming: boolean) => {
+    if (payload?.type === "Transaction") {
+       payload.data.essence.data.incoming = incoming
+    }
+ }
+
+ /**
+ * Get internal flag from message
+ * @returns 
+ */
+  export const getInternalFlag = (payload: Payload) => {
+    if (payload?.type === "Transaction") {
+       return payload.data.essence.data.internal
+    }
+
+    return undefined
+}
+
