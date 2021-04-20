@@ -996,10 +996,8 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
     const updatedStoredAccounts = get(accounts).map((storedAccount) => {
         const syncedAccount = existingAccounts.find((_account) => _account.id === storedAccount.id)
 
-        const acc = storedAccount
-
         // Update deposit address
-        acc.depositAddress = syncedAccount.depositAddress.address
+        storedAccount.depositAddress = syncedAccount.depositAddress.address
 
         // If we have received a new address, simply add it;
         // If we have received an existing address, update the properties.
@@ -1022,6 +1020,8 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
                 storedAccount.messages[msgIndex] = msg
             }
         }
+
+        return storedAccount
     })
 
     if (newAccounts.length) {
