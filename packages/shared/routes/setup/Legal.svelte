@@ -713,10 +713,9 @@
                         A copy of the Personal Data undergoing processing can be requested.
                     </Text>
 
-                    <Text type="h2" classes="mt-8 mb-5">Our Contact Information, Data Controller</Text>
+                    <Text type="h2" classes="mt-8 mb-5">Our Contact Information</Text>
                     <Text type="p" secondary classes="mb-4">
-                        If you have a direct business relationship with us, we are a data controller according to Art. 4 para. 7
-                        GDPR. For any requests, you can contact us as follows: privacy@iota.org.
+                        For any requests, you can contact us as follows: privacy@iota.org.
                     </Text>
                     <Text type="p" secondary classes="mb-4">
                         IOTA Foundation, c/o Nextland, Strassburgerstr. 55, 10405 Berlin.
