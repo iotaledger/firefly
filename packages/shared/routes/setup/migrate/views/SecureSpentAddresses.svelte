@@ -1,16 +1,9 @@
 <script lang="typescript">
     import { Animation, Button, Link, OnboardingLayout, SpentAddress, Text } from 'shared/components'
-    import {
-        checkChrysalisSnapshot,
-        ongoingSnapshot,
-        selectAllAddressesForMining,
-        spentAddressesFromBundles,
-        toggleMiningSelection,
-    } from 'shared/lib/migration'
+    import { selectAllAddressesForMining, spentAddressesFromBundles, toggleMiningSelection } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { createEventDispatcher } from 'svelte'
-    import { get } from 'svelte/store'
 
     export let locale
     export let mobile
@@ -20,8 +13,6 @@
     let addresses = $spentAddressesFromBundles.map((address) => Object.assign({}, address, { id: address.index }))
 
     let selectedAddresses = addresses.filter((address) => address.selectedToMine === true)
-
-    let snapshotBusy = false
 
     function onAddressClick(address) {
         var index = selectedAddresses.findIndex((_address) => _address.id === address.id)
@@ -42,36 +33,20 @@
         dispatch('previous')
     }
 
-    async function secureAddresses() {
-        // Migration: snapshot check
-        snapshotBusy = true
-        await checkChrysalisSnapshot()
-        //
-        if (get(ongoingSnapshot) === false) {
-            if (selectedAddresses.length) {
-                if (selectedAddresses?.length < addresses?.length) {
-                    triggerPopup()
-                } else {
-                    dispatch('next')
-                }
+    function secureAddresses() {
+        if (selectedAddresses.length) {
+            if (selectedAddresses?.length < addresses?.length) {
+                triggerPopup()
             } else {
-                showAppNotification({ type: 'error', message: locale('views.migrate.noAddressesForMigration') })
+                dispatch('next')
             }
         } else {
             showAppNotification({ type: 'error', message: locale('views.migrate.noAddressesForMigration') })
         }
-        snapshotBusy = false
     }
 
-    async function handleSkipClick() {
-        // Migration: snapshot check
-        snapshotBusy = true
-        await checkChrysalisSnapshot()
-        //
-        if (get(ongoingSnapshot) === false) {
-            triggerPopup(true)
-        }
-        snapshotBusy = false
+    function handleSkipClick() {
+        triggerPopup(true)
     }
 
     function triggerPopup(skippedMining = false) {
@@ -107,14 +82,10 @@
                         onClick={() => onAddressClick(address)} />
                 {/each}
             </div>
-            <Link disabled={snapshotBusy} onClick={handleSkipClick} classes="absolute -top-12 right-0">
-                {locale('actions.skip')}
-            </Link>
+            <Link onClick={handleSkipClick} classes="absolute -top-12 right-0">{locale('actions.skip')}</Link>
         </div>
         <div slot="leftpane__action">
-            <Button disabled={snapshotBusy} classes="w-full" onClick={() => secureAddresses()}>
-                {locale('views.secureSpentAddresses.title')}
-            </Button>
+            <Button classes="w-full" onClick={() => secureAddresses()}>{locale('views.secureSpentAddresses.title')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
             <Animation animation="migrate-desktop" />

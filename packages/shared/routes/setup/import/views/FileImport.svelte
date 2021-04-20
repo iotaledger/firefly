@@ -1,8 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, Dropzone, OnboardingLayout, Text } from 'shared/components'
-    import { checkChrysalisSnapshot, ongoingSnapshot } from 'shared/lib/migration'
     import { createEventDispatcher } from 'svelte'
-    import { get } from 'svelte/store'
 
     export let locale
     export let mobile
@@ -10,24 +8,13 @@
     let fileName
     let filePath
 
-    let snapshotBusy = false
+    // TODO: remove this to enable seed support
+    $: isSeedVault = fileName && fileName.endsWith('.kdbx')
 
     const dispatch = createEventDispatcher()
 
-    async function handleContinueClick() {
-        const seedvaultRegex = /\.(kdbx)$/i
-        if (seedvaultRegex.test(fileName)) {
-            // Migration: snapshot check
-            snapshotBusy = true
-            await checkChrysalisSnapshot()
-            //
-            if (get(ongoingSnapshot) === false) {
-                dispatch('next', { file, fileName, filePath })
-            }
-            snapshotBusy = false
-        } else {
-            dispatch('next', { file, fileName, filePath })
-        }
+    function handleContinueClick() {
+        dispatch('next', { file, fileName, filePath })
     }
     function handleBackClick() {
         dispatch('previous')
@@ -61,9 +48,7 @@
                 allowedExtensions={['kdbx', 'stronghold']} />
         </div>
         <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-            <Button classes="flex-1" disabled={!file || snapshotBusy} onClick={() => handleContinueClick()}>
-                {locale('actions.continue')}
-            </Button>
+            <Button classes="flex-1" disabled={!file} onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-blue dark:bg-gray-900">
             <Animation animation="import-from-file-desktop" />

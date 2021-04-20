@@ -9,14 +9,12 @@
         formatCurrency,
     } from 'shared/lib/currency'
     import {
-        checkChrysalisSnapshot,
         confirmedBundles,
         createMigrationBundle,
         getInputIndexesForBundle,
         hasBundlesWithSpentAddresses,
         hasSingleBundle,
         migration,
-        ongoingSnapshot,
         sendMigrationBundle,
         unselectedInputs,
     } from 'shared/lib/migration'
@@ -47,8 +45,6 @@
 
     let singleMigrationBundleHash
 
-    let snapshotBusy = false
-
     confirmedBundles.subscribe((newConfirmedBundles) => {
         newConfirmedBundles.forEach((bundle) => {
             if (bundle.bundleHash && bundle.bundleHash === singleMigrationBundleHash && bundle.confirmed) {
@@ -59,41 +55,35 @@
         })
     })
 
-    async function handleContinueClick() {
-        // Migration: snapshot check
-        snapshotBusy = true
-        await checkChrysalisSnapshot()
-        //
-        if (get(ongoingSnapshot) === false) {
-            if ($hasSingleBundle && !$hasBundlesWithSpentAddresses) {
-                loading = true
-                createMigrationBundle(getInputIndexesForBundle($bundles[0]), 0, false)
-                    .then((response) => {
-                        singleMigrationBundleHash = response.payload.bundleHash
-                        return sendMigrationBundle(response.payload.bundleHash).then(() => {
-                            // Save profile
-                            saveProfile($newProfile)
-                            setActiveProfile($newProfile.id)
+    function handleContinueClick() {
+        if ($hasSingleBundle && !$hasBundlesWithSpentAddresses) {
+            loading = true
 
-                            profileInProgress.set(undefined)
-                            newProfile.set(null)
-                        })
+            createMigrationBundle(getInputIndexesForBundle($bundles[0]), 0, false)
+                .then((response) => {
+                    singleMigrationBundleHash = response.payload.bundleHash
+                    return sendMigrationBundle(response.payload.bundleHash).then(() => {
+                        // Save profile
+                        saveProfile($newProfile)
+                        setActiveProfile($newProfile.id)
+
+                        profileInProgress.set(undefined)
+                        newProfile.set(null)
                     })
-                    .catch(() => {
-                        loading = false
-                        showAppNotification({
-                            type: 'error',
-                            message: locale('views.migrate.error'),
-                        })
+                })
+                .catch(() => {
+                    loading = false
+                    showAppNotification({
+                        type: 'error',
+                        message: locale('views.migrate.error'),
                     })
-            } else {
-                loading = true
-                timeout = setTimeout(() => {
-                    dispatch('next')
-                }, 2000)
-            }
+                })
+        } else {
+            loading = true
+            timeout = setTimeout(() => {
+                dispatch('next')
+            }, 2000)
         }
-        snapshotBusy = false
     }
 
     //TODO: complete function functionality
@@ -123,7 +113,7 @@
             <button on:click={learnAboutMigrationsClick}>
                 <Text type="p" highlighted>{locale('views.migrate.learn')}</Text>
             </button>
-            <Button disabled={loading || snapshotBusy} classes="w-full" onClick={() => handleContinueClick()}>
+            <Button disabled={loading} classes="w-full" onClick={() => handleContinueClick()}>
                 {#if loading}
                     <Spinner busy={loading} message={locale('views.migrate.migrating')} classes="justify-center" />
                 {:else}{locale('views.migrate.beginMigration')}{/if}

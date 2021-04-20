@@ -1,26 +1,22 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
     import {
-        checkChrysalisSnapshot,
         confirmedBundles,
         createMigrationBundle,
         getInputIndexesForBundle,
         hasMigratedAndConfirmedAllSelectedBundles,
         hasMigratedAnyBundle,
         migration,
-        ongoingSnapshot,
         sendMigrationBundle,
         unmigratedBundles,
     } from 'shared/lib/migration'
     import { newProfile, profileInProgress, saveProfile, setActiveProfile } from 'shared/lib/profile'
     import { createEventDispatcher, onDestroy } from 'svelte'
-    import { get } from 'svelte/store'
 
     export let locale
     export let mobile
 
     let busy = false
-    let snapshotBusy = false
     let migrated = false
     let migratingFundsMessage = ''
     let fullSuccess = $hasMigratedAndConfirmedAllSelectedBundles
@@ -93,80 +89,73 @@
         dispatch('next')
     }
 
-    async function handleRerunClick() {
-        // Migration: snapshot check
-        snapshotBusy = true
-        await checkChrysalisSnapshot()
-        //
-        if (get(ongoingSnapshot) === false) {
-            const _unmigratedBundles = $unmigratedBundles
-            const unmigratedBundleIndexes = _unmigratedBundles.map((_bundle) => _bundle.index)
+    function handleRerunClick() {
+        const _unmigratedBundles = $unmigratedBundles
+        const unmigratedBundleIndexes = _unmigratedBundles.map((_bundle) => _bundle.index)
 
-            // TODO: What happens if this fails too? Do we proceed?
-            transactions = transactions.map((item) => {
-                if (unmigratedBundleIndexes.includes(item.index)) {
-                    return { ...item, status: 1, errorText: null }
-                }
+        // TODO: What happens if this fails too? Do we proceed?
+        transactions = transactions.map((item) => {
+            if (unmigratedBundleIndexes.includes(item.index)) {
+                return { ...item, status: 1, errorText: null }
+            }
 
-                return item
-            })
+            return item
+        })
 
-            busy = true
-            migrated = false
-            migratingFundsMessage = locale('views.migrate.migrating')
+        busy = true
+        migrated = false
+        migratingFundsMessage = locale('views.migrate.migrating')
 
-            _unmigratedBundles.reduce(
-                (promise, transaction, idx) =>
-                    // @ts-ignore
-                    promise
-                        .then((acc) => {
-                            if (transaction.bundleHash) {
-                                return sendMigrationBundle(transaction.bundleHash).then(() => {
-                                    migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, transaction.bundleHash]
-                                })
-                            }
-
-                            return createMigrationBundle(getInputIndexesForBundle(transaction), 0, false).then((result) => {
-                                transactions = transactions.map((_transaction) => {
-                                    if (_transaction.index === transaction.index) {
-                                        return { ..._transaction, bundleHash: result.payload.bundleHash }
-                                    }
-
-                                    return _transaction
-                                })
-
-                                return sendMigrationBundle(result.payload.bundleHash).then(() => {
-                                    migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, result.payload.bundleHash]
-                                })
+        _unmigratedBundles.reduce(
+            (promise, transaction, idx) =>
+                // @ts-ignore
+                promise
+                    .then((acc) => {
+                        if (transaction.bundleHash) {
+                            return sendMigrationBundle(transaction.bundleHash).then(() => {
+                                migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, transaction.bundleHash]
                             })
-                        })
-                        .catch((error) => {
-                            console.error(error)
+                        }
 
-                            transactions = transactions.map((_transaction, i) => {
+                        return createMigrationBundle(getInputIndexesForBundle(transaction), 0, false).then((result) => {
+                            transactions = transactions.map((_transaction) => {
                                 if (_transaction.index === transaction.index) {
-                                    return { ..._transaction, status: -1, errorText: locale('views.migrate.migrationFailed') }
+                                    return { ..._transaction, bundleHash: result.payload.bundleHash }
                                 }
 
                                 return _transaction
                             })
 
-                            if (
-                                idx === _unmigratedBundles.length - 1 &&
-                                _unmigratedBundles.every((bundle) => {
-                                    const tx = transactions.find((tx) => tx.index === bundle.index)
+                            return sendMigrationBundle(result.payload.bundleHash).then(() => {
+                                migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, result.payload.bundleHash]
+                            })
+                        })
+                    })
+                    .catch((error) => {
+                        console.error(error)
 
-                                    return tx.status === -1
-                                })
-                            ) {
-                                migrated = true
-                                busy = false
+                        transactions = transactions.map((_transaction, i) => {
+                            if (_transaction.index === transaction.index) {
+                                return { ..._transaction, status: -1, errorText: locale('views.migrate.migrationFailed') }
                             }
-                        }),
-                Promise.resolve([])
-            )
-        }
-        snapshotBusy = false
+
+                            return _transaction
+                        })
+
+                        if (
+                            idx === _unmigratedBundles.length - 1 &&
+                            _unmigratedBundles.every((bundle) => {
+                                const tx = transactions.find((tx) => tx.index === bundle.index)
+
+                                return tx.status === -1
+                            })
+                        ) {
+                            migrated = true
+                            busy = false
+                        }
+                    }),
+            Promise.resolve([])
+        )
     }
 
     function persistProfile() {
@@ -180,81 +169,74 @@
 
     onDestroy(unsubscribe)
 
-    async function migrateFunds() {
-        // Migration: snapshot check
-        snapshotBusy = true
-        await checkChrysalisSnapshot()
-        //
-        if (get(ongoingSnapshot) === false) {
-            // TODO: Rethink if we need to only update status of the transaction we are actually sending
-            transactions = transactions.map((item) => ({ ...item, status: 1 }))
-            busy = true
-            migrated = false
-            migratingFundsMessage = locale('views.migrate.migrating')
+    function migrateFunds() {
+        // TODO: Rethink if we need to only update status of the transaction we are actually sending
+        transactions = transactions.map((item) => ({ ...item, status: 1 }))
+        busy = true
+        migrated = false
+        migratingFundsMessage = locale('views.migrate.migrating')
 
-            transactions.reduce(
-                (promise, transaction, idx) =>
-                    // @ts-ignore
-                    promise
-                        .then((acc) => {
-                            if (transaction.bundleHash) {
-                                return sendMigrationBundle(transaction.bundleHash).then(() => {
-                                    if (!hasBroadcastAnyBundle) {
-                                        hasBroadcastAnyBundle = true
+        transactions.reduce(
+            (promise, transaction, idx) =>
+                // @ts-ignore
+                promise
+                    .then((acc) => {
+                        if (transaction.bundleHash) {
+                            return sendMigrationBundle(transaction.bundleHash).then(() => {
+                                if (!hasBroadcastAnyBundle) {
+                                    hasBroadcastAnyBundle = true
 
-                                        persistProfile()
-                                    }
+                                    persistProfile()
+                                }
 
-                                    migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, transaction.bundleHash]
-                                })
-                            }
-
-                            return createMigrationBundle(getInputIndexesForBundle(transaction), 0, false).then((result) => {
-                                transactions = transactions.map((_transaction, i) => {
-                                    if (_transaction.index === transaction.index) {
-                                        return { ..._transaction, bundleHash: result.payload.bundleHash }
-                                    }
-
-                                    return _transaction
-                                })
-
-                                return sendMigrationBundle(result.payload.bundleHash).then(() => {
-                                    if (!hasBroadcastAnyBundle) {
-                                        hasBroadcastAnyBundle = true
-
-                                        persistProfile()
-                                    }
-
-                                    migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, result.payload.bundleHash]
-                                })
+                                migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, transaction.bundleHash]
                             })
-                        })
+                        }
 
-                        .catch((error) => {
-                            console.error(error)
-
+                        return createMigrationBundle(getInputIndexesForBundle(transaction), 0, false).then((result) => {
                             transactions = transactions.map((_transaction, i) => {
                                 if (_transaction.index === transaction.index) {
-                                    return { ..._transaction, status: -1, errorText: 'Migration failed' }
+                                    return { ..._transaction, bundleHash: result.payload.bundleHash }
                                 }
 
                                 return _transaction
                             })
 
-                            if (
-                                idx === transactions.length - 1 &&
-                                transactions.every((tx) => {
-                                    return tx.status === -1
-                                })
-                            ) {
-                                migrated = true
-                                busy = false
+                            return sendMigrationBundle(result.payload.bundleHash).then(() => {
+                                if (!hasBroadcastAnyBundle) {
+                                    hasBroadcastAnyBundle = true
+
+                                    persistProfile()
+                                }
+
+                                migratedAndUnconfirmedBundles = [...migratedAndUnconfirmedBundles, result.payload.bundleHash]
+                            })
+                        })
+                    })
+
+                    .catch((error) => {
+                        console.error(error)
+
+                        transactions = transactions.map((_transaction, i) => {
+                            if (_transaction.index === transaction.index) {
+                                return { ..._transaction, status: -1, errorText: 'Migration failed' }
                             }
-                        }),
-                Promise.resolve([])
-            )
-        }
-        snapshotBusy = false
+
+                            return _transaction
+                        })
+
+                        if (
+                            idx === transactions.length - 1 &&
+                            transactions.every((tx) => {
+                                return tx.status === -1
+                            })
+                        ) {
+                            migrated = true
+                            busy = false
+                        }
+                    }),
+            Promise.resolve([])
+        )
     }
 </script>
 
@@ -273,14 +255,14 @@
         </div>
         <div slot="leftpane__action" class="flex flex-col items-center space-y-4">
             {#if !migrated}
-                <Button disabled={busy || snapshotBusy} classes="w-full py-3 mt-2 text-white" onClick={() => migrateFunds()}>
+                <Button disabled={busy} classes="w-full py-3 mt-2 text-white" onClick={() => migrateFunds()}>
                     <Spinner {busy} message={migratingFundsMessage} classes="justify-center" />
                     {#if !busy && !migrated}{locale('views.transferFragmentedFunds.migrate')}{/if}
                 </Button>
             {:else if fullSuccess}
                 <Button classes="w-full py-3 mt-2" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
             {:else}
-                <Button disabled={snapshotBusy} classes="w-full py-3 mt-2" onClick={() => handleRerunClick()}>
+                <Button classes="w-full py-3 mt-2" onClick={() => handleRerunClick()}>
                     {locale('views.transferFragmentedFunds.rerun')}
                 </Button>
             {/if}
