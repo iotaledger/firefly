@@ -161,8 +161,8 @@ export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAG
         // Migration: snapshot check
         await checkChrysalisSnapshot()
         if (get(ongoingSnapshot) === true) {
-            // we dont display the error because a notification popup will open already
             reject({ snapshot: true })
+            console.error('Ongoing network upgrade. Migration is disabled until it is complete.')
         }
         else {
             api.sendMigrationBundle([MIGRATION_NODE], bundleHash, mwm, {
