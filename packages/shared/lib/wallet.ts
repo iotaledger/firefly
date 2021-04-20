@@ -806,7 +806,7 @@ export const saveNewMessage = (accountId: string, message: Message): void => {
     accounts.update((storedAccounts) => {
         return storedAccounts.map((storedAccount: WalletAccount) => {
             if (storedAccount.id === accountId) {
-                const hasMessage = storedAccount.messages.some(m => m.id === message.id)
+                const hasMessage = storedAccount.messages.some(m => m.id === message.id && m.payload.data.essence.incoming === message.payload.data.essence.incoming)
 
                 if (!hasMessage) {
                     storedAccount.messages.push(message)
@@ -835,7 +835,7 @@ export const replaceMessage = (accountId: string, messageId: string, newMessage:
             if (storedAccount.id === accountId) {
                 return Object.assign<WalletAccount, Partial<WalletAccount>, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
                     messages: storedAccount.messages.map((_message) => {
-                        if (_message.id === messageId) {
+                        if (_message.id === messageId && _message.payload.data.essence.incoming === newMessage.payload.data.essence.incoming) {
                             return newMessage;
                         }
 
@@ -864,18 +864,24 @@ export const getAccountMessages = (account: WalletAccount): AccountMessage[] => 
     } = {};
 
     account.messages.forEach((message) => {
-        messages[message.id] = Object.assign<
-            AccountMessage,
-            Message,
-            Partial<AccountMessage>
-        >(
-            {} as AccountMessage,
-            message,
-            { account: account.index });
-    });
+        let extraId = ''
+        if (message.payload.type === "Transaction") {
+            extraId = message.payload.data.essence.data.incoming ? 'in' : 'out'
+        }
+        messages[message.id + extraId] = {
+            ...message,
+            account: account.index
+        }
+    })
 
     return Object.values(messages)
-        .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+        .sort((a, b) => {
+            if (a.id === b.id && a.payload.type == "Transaction") {
+                const txA = a.payload as Transaction
+                return txA.data.essence.data.incoming ? -1 : 1
+            }
+            return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+        })
 }
 
 /**
@@ -895,7 +901,11 @@ export const getTransactions = (accounts: WalletAccount[], count = 10): AccountM
 
     accounts.forEach((account) => {
         account.messages.forEach((message) => {
-            messages[account.index + message.id] = {
+            let extraId = ''
+            if (message.payload.type === "Transaction") {
+                extraId = message.payload.data.essence.data.incoming ? 'in' : 'out'
+            }
+            messages[account.index + message.id + extraId] = {
                 ...message,
                 account: account.index
             }
@@ -986,14 +996,32 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
     const updatedStoredAccounts = get(accounts).map((storedAccount) => {
         const syncedAccount = existingAccounts.find((_account) => _account.id === storedAccount.id)
 
-        return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>({} as WalletAccount, storedAccount, {
-            // Update deposit address
-            depositAddress: syncedAccount.depositAddress.address,
-            // If we have received a new address, simply add it;
-            // If we have received an existing address, update the properties.
-            addresses: mergeProps(storedAccount.addresses, syncedAccount.addresses, 'address'),
-            messages: mergeProps(storedAccount.messages, syncedAccount.messages, 'id'),
-        })
+        const acc = storedAccount
+
+        // Update deposit address
+        acc.depositAddress = syncedAccount.depositAddress.address
+
+        // If we have received a new address, simply add it;
+        // If we have received an existing address, update the properties.
+        for (const addr of syncedAccount.addresses) {
+            const addressIndex = storedAccount.addresses.findIndex(a => a.address === addr.address)
+            if (addressIndex < 0) {
+                storedAccount.addresses.push(addr)
+            } else {
+                storedAccount.addresses[addressIndex] = addr
+            }
+        }
+
+        // If we have received a new message, simply add it;
+        // If we have received an existing message, update the properties.
+        for (const msg of syncedAccount.messages) {
+            const msgIndex = storedAccount.messages.findIndex(m => m.id === msg.id && m.payload.data.essence.incoming === msg.payload.data.essence.incoming)
+            if (msgIndex < 0) {
+                storedAccount.messages.push(msg)
+            } else {
+                storedAccount.messages[msgIndex] = msg
+            }
+        }
     })
 
     if (newAccounts.length) {
@@ -1050,22 +1078,6 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
         accounts.update(() => updatedStoredAccounts.sort((a, b) => a.index - b.index));
     }
 };
-
-function mergeProps<T>(existingPayload: T[], newPayload: T[], prop: string): T[] {
-    const existingPayloadMap = existingPayload.reduce((acc, object) => {
-        acc[object[prop]] = object
-
-        return acc
-    }, {})
-
-    const newPayloadMap = newPayload.reduce((acc, object) => {
-        acc[object[prop]] = object
-
-        return acc
-    }, {})
-
-    return Object.values(Object.assign({}, existingPayloadMap, newPayloadMap))
-}
 
 /**
  * Updates balance fiat value for every account
@@ -1511,7 +1523,6 @@ export const sendAddressFromTransactionPayload = (payload: Payload): string => {
 export const receiverAddressesFromTransactionPayload = (payload: Payload): string[] => {
     if (payload?.type === "Transaction") {
         return payload?.data?.essence?.data?.outputs
-            ?.filter((output) => output?.data?.remainder === false)
             ?.map((output) => output?.data?.address) ?? []
     }
 
@@ -1524,7 +1535,6 @@ export const receiverAddressesFromTransactionPayload = (payload: Payload): strin
 export const receiverAddressesFromMilestonePayload = (payload: Payload): string[] => {
     if (payload?.type === "Milestone") {
         return payload?.data?.essence?.receipt?.data?.funds
-            ?.filter((receiptFunds) => receiptFunds?.output?.remainder === false)
             ?.map((receiptFunds) => receiptFunds?.output?.address) ?? []
     }
 

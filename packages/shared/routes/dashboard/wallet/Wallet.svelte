@@ -1,11 +1,13 @@
 <script lang="typescript">
     import { DashboardPane } from 'shared/components'
     import { clearSendParams } from 'shared/lib/app'
+    import { deepCopy } from 'shared/lib/helpers'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, isStrongholdLocked, MigratedTransaction, updateProfile } from 'shared/lib/profile'
     import { walletRoute } from 'shared/lib/router'
+    import type { Transaction } from 'shared/lib/typings/message'
     import { WalletRoutes } from 'shared/lib/typings/routes'
     import {
         AccountMessage,
@@ -451,30 +453,19 @@
 
                     accounts.update((_accounts) => {
                         return _accounts.map((_account) => {
-                            const isSenderAccount = _account.id === senderAccountId
-                            const isReceiverAccount = _account.id === receiverAccountId
-                            if (isSenderAccount || isReceiverAccount) {
-                                return Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                                    {} as WalletAccount,
-                                    _account,
-                                    {
-                                        messages: [
-                                            Object.assign({}, message, {
-                                                payload: Object.assign({}, message.payload, {
-                                                    data: Object.assign({}, message.payload.data, {
-                                                        essence: Object.assign({}, message.payload.data.essence, {
-                                                            data: Object.assign({}, message.payload.data.essence.data, {
-                                                                incoming: isReceiverAccount,
-                                                                internal: true,
-                                                            }),
-                                                        }),
-                                                    }),
-                                                }),
-                                            }),
-                                            ..._account.messages,
-                                        ],
-                                    }
-                                )
+                            if (_account.id === senderAccountId) {
+                                const m = deepCopy(message)
+                                const mPayload = m.payload as Transaction
+                                mPayload.data.essence.data.incoming = false
+                                mPayload.data.essence.data.internal = true
+                                _account.messages.push(m)
+                            }
+                            if (_account.id === receiverAccountId) {
+                                const m = deepCopy(message)
+                                const mPayload = m.payload as Transaction
+                                mPayload.data.essence.data.incoming = true
+                                mPayload.data.essence.data.internal = true
+                                _account.messages.push(m)
                             }
 
                             return _account
