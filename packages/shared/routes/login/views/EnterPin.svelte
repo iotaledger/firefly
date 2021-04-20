@@ -59,49 +59,48 @@
     }
 
     async function onSubmit() {
-            if (!hasReachedMaxAttempts) {
-                const profile = get(activeProfile)
+        if (!hasReachedMaxAttempts) {
+            const profile = get(activeProfile)
 
-                isBusy = true
+            isBusy = true
 
-                Electron.PincodeManager.verify(profile.id, pinCode)
-                    .then((verified) => {
-                        if (verified === true) {
-                            return Electron.getUserDataPath().then((path) => {
-                                initialise(profile.id, getStoragePath(path, profile.name))
-                                api.setStoragePassword(pinCode, {
-                                    onSuccess() {
-                                        dispatch('next')
-                                    },
-                                    onError(err) {
-                                        isBusy = false
-                                        showAppNotification({
-                                            type: 'error',
-                                            message: locale(err.error),
-                                        })
-                                    },
-                                })
+            Electron.PincodeManager.verify(profile.id, pinCode)
+                .then((verified) => {
+                    if (verified === true) {
+                        return Electron.getUserDataPath().then((path) => {
+                            initialise(profile.id, getStoragePath(path, profile.name))
+                            api.setStoragePassword(pinCode, {
+                                onSuccess() {
+                                    dispatch('next')
+                                },
+                                onError(err) {
+                                    isBusy = false
+                                    showAppNotification({
+                                        type: 'error',
+                                        message: locale(err.error),
+                                    })
+                                },
                             })
-                        } else {
-                            shake = true
-                            shakeTimeout = setTimeout(() => {
-                                shake = false
-                                isBusy = false
-                                attempts++
-                                if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
-                                    clearInterval(maxAttemptsTimer)
-                                    maxAttemptsTimer = setInterval(countdown, 1000)
-                                } else {
-                                    pinRef.resetAndFocus()
-                                }
-                            }, 1000)
-                        }
-                    })
-                    .catch((error) => {
-                        console.error(error)
-                        isBusy = false
-                    })
-            }
+                        })
+                    } else {
+                        shake = true
+                        shakeTimeout = setTimeout(() => {
+                            shake = false
+                            isBusy = false
+                            attempts++
+                            if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
+                                clearInterval(maxAttemptsTimer)
+                                maxAttemptsTimer = setInterval(countdown, 1000)
+                            } else {
+                                pinRef.resetAndFocus()
+                            }
+                        }, 1000)
+                    }
+                })
+                .catch((error) => {
+                    console.error(error)
+                    isBusy = false
+                })
         }
     }
 
