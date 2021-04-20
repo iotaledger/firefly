@@ -2,7 +2,7 @@
     "views": {
         "onboarding1": {
             "title": "Send, Receive & Manage your IOTA tokens",
-            "body": "Firefly is the official wallet of IOTA."
+            "body": "Firefly is the official wallet software of IOTA."
         },
         "legal": {
             "title": "Privacy Policy & Terms of Service",
@@ -46,7 +46,7 @@
         "secure": {
             "title": "Secure your wallet",
             "body1": "Save and print the Recovery Kit PDF template.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallet."
+            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
         },
         "password": {
             "title": "Create a password",
@@ -55,7 +55,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your wallet.",
+            "body1": "Set up a login PIN to make sure that only you can enter your profile.",
             "body2": "Keep your PIN safe!"
         },
         "pin": {
@@ -91,10 +91,10 @@
         },
         "backupWallet": {
             "title": "Back up to a Stronghold file",
-            "body1": "Enter your password to backup your wallet to a Stronghold file. Your password is used to encrypt the backup.",
+            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
             "body2": "Reasons why digital backups are important:",
-            "reason1": "Easily recover your wallet without typing in your recovery phrase",
-            "reason2": "Import your wallet to other devices",
+            "reason1": "Easily recover your wallets without typing in your recovery phrase",
+            "reason2": "Import your wallets to other devices",
             "reason3": "Recover your full transaction history"
         },
         "recoveryPhraseSaved": {
@@ -121,12 +121,12 @@
         "importFromText": {
             "seed": {
                 "title": "Type your seed to commence migration",
-                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
                 "enter": "Enter your seed"
             },
             "mnemonic": {
                 "title": "Type your recovery phrase",
-                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly wallets.",
                 "enter": "Enter your secret recovery phrase"
             },
             "seedDetected": "81 character seed detected",
@@ -134,17 +134,17 @@
             "checksum": "Checksum"
         },
         "importFromFile": {
-            "title": "Restore your wallet using a backup file",
-            "body": "Import a backup file to restore your wallet. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "Restore your wallets using a backup file",
+            "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
-            "title": "Restore your wallet from a SeedVault or Stronghold",
+            "title": "Restore your wallets from a SeedVault or Stronghold",
             "body1": "Please enter your backup password.",
             "body2": "This is the password you set when you first created your backup."
         },
         "importSuccess": {
             "title": "You have successfully recovered your backup",
-            "body": "You can now set up your new wallet.",
+            "body": "You can now set up your new profile.",
             "seedvaultTitle": "Successfully imported",
             "seedvaultBody": "Your password is correct, you can now continue.",
             "strongholdTitle": "Successfully imported",
@@ -219,7 +219,7 @@
             "settings": "Settings",
             "generalSettings": {
                 "title": "General Settings",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Configure your app's appearance and other general settings"
             },
             "security": {
                 "title": "Security",
