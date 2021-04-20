@@ -2,34 +2,16 @@
     "views": {
         "onboarding1": {
             "title": "Posielajte, Prijímajte a Manažujte svoje IOTA tokeny",
-            "body": "Firefly je oficiálna IOTA peňaženka."
+            "body": "Firefly is the official wallet software of IOTA."
         },
         "legal": {
             "title": "Ochrana osobných údajov a zmluvné podmienky",
             "body": "Prosím preštudujte si Zásady ochrany osobných údajov a zmluvné podmienky.",
-            "privacyPolicy": {
-                "title": "Zásady ochrany osobných údajov",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "termsOfService": {
-                "title": "Podmienky použitia",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
             "checkbox": "Prečítal som a súhlasím so Zásadami ochrany osobných údajov a Podmienkami služby"
         },
         "appearance": {
             "title": "Vzhľad",
-            "body": "Zvoľte si motív peňaženky."
+            "body": "Choose your app theme."
         },
         "profile": {
             "title": "Vytvoriť profil",
@@ -46,7 +28,7 @@
         "secure": {
             "title": "Zabezpečte svoju peňaženku",
             "body1": "Uložiť a vytlačiť PDF šablónu dokumentu pre overenie.",
-            "body2": "Ak vyplníte dokumentu pre overenie a bezpečne si ho uschováte, budete schopný kedykoľvek obnoviť svoju peňaženku."
+            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
         },
         "password": {
             "title": "Vytvoriť heslo",
@@ -55,7 +37,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Nastavte prihlasovací PIN kód pre uistenie sa, že iba vy máte prístup k peňaženke.",
+            "body1": "Set up a login PIN to make sure that only you can enter your profile.",
             "body2": "Uchovajte váš PIN kód v bezpečí!"
         },
         "pin": {
@@ -91,15 +73,15 @@
         },
         "backupWallet": {
             "title": "Zálohovať do súboru Stronghold",
-            "body1": "Zadajte svoje heslo pre zálohovanie vašej peňaženky do Stronghold súboru. Vaše heslo je použité pre zašifrovanie zálohy.",
+            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
             "body2": "Dôvody prečo digitálne zálohy sú dôležité:",
-            "reason1": "Jednoducho obnovte svoju peňaženku bez zadávania vašej frázy obnovenia",
-            "reason2": "Importovať vašu peňaženku do iných zariadení",
+            "reason1": "Easily recover your wallets without typing in your recovery phrase",
+            "reason2": "Import your wallets on other devices",
             "reason3": "Obnovte celú vašu históriu transakcii"
         },
         "recoveryPhraseSaved": {
             "title": "Úspešne zálohované",
-            "body": "Zálohovali ste svoju peňaženku do Strongholdu."
+            "body": "You have backed up your wallets to a Stronghold."
         },
         "congratulations": {
             "title": "Nastavenie peňaženky dokončené",
@@ -114,19 +96,19 @@
             "importSeed": "I have an 81 character seed",
             "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
             "importMnemonic": "I have a Firefly recovery phrase",
-            "importMnemonicDescription": "Enter your secret phrase to recover your wallet",
+            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
             "importFile": "I have a file backup",
             "importFileDescription": "Upload a Seedvault or Stronghold file"
         },
         "importFromText": {
             "seed": {
                 "title": "Type your seed to commence migration",
-                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
                 "enter": "Enter your seed"
             },
             "mnemonic": {
                 "title": "Type your recovery phrase",
-                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly wallets.",
                 "enter": "Enter your secret recovery phrase"
             },
             "seedDetected": "81 znakový seed detegovaný",
@@ -134,17 +116,17 @@
             "checksum": "Kontrolný súčet"
         },
         "importFromFile": {
-            "title": "Obnovte svoju peňaženky pomocou zálohy zo súboru",
-            "body": "Importovať súbor zálohy pre obnovenie vašej peňaženky. Záloha môže byť buď Stronghold (.stronghold) alebo Trinity SeedVault (.kdbx)."
+            "title": "Restore your wallets using a backup file",
+            "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
-            "title": "Obnovte svoju peňaženku zo SeedVaultu alebo Strongholdu",
+            "title": "Restore your wallets from a SeedVault or Stronghold",
             "body1": "Prosím, zadajte heslo vašej zálohy.",
             "body2": "Toto je heslo, ktoré ste nastavili keď ste si prvýkrát vytvorili zálohu."
         },
         "importSuccess": {
             "title": "Úspešne ste obnovili vašu zálohu",
-            "body": "Teraz si môžete nastaviť svoju novú peňaženku.",
+            "body": "You can now set up your new profile.",
             "seedvaultTitle": "Úspešne importované",
             "seedvaultBody": "Vaše heslo je správne. Je možné pokračovať.",
             "strongholdTitle": "Úspešne importované",
@@ -168,7 +150,7 @@
             "signingBundle": "Podpisovanie zväzku",
             "broadcastingBundle": "Vysielanie zväzka",
             "miningBundle": "Ťaženie zväzka",
-            "problemRestoringWallet": "Vyskytol sa problem s obnovovanim Vašej peňaženky. Prosím skúste znova.",
+            "problemRestoringWallet": "There was a network error restoring your wallet. Please try again.",
             "minimumMigrationAmountSpentAddresses": "Minimálna suma pre každú použitú adresu je 1 Mi. Skontrolujte ešte raz, ak zostatok nevyzera správne.",
             "tooManyAddressesToMigrate": "Máte príliš veľa adries s malým zostatok na presúvanie. Skontrolujte ešte raz, ak zostatok nevyzera správne.",
             "cannotMigrateAllYourFunds": "Nemožeme presunúť všetky vaše prostriedky, pretože niektoré adresy majú nízky zostatok. Ale v každom prípade možete pokračovať. {value} budú stratené.",
@@ -219,7 +201,7 @@
             "settings": "Nastavenia",
             "generalSettings": {
                 "title": "Všeobecné nastavenia",
-                "description": "Configure your wallet’s appearance and other general settings"
+                "description": "Configure your app's appearance and other general settings"
             },
             "security": {
                 "title": "Bezpečnosť",
@@ -238,7 +220,7 @@
                 "description": "Zmeniť názov vášho profilu alebo nastaviť obrázok"
             },
             "sync": {
-                "title": "Synchronizovať účty",
+                "title": "Sync wallets",
                 "description": ""
             },
             "theme": {
@@ -259,15 +241,15 @@
             },
             "exportStronghold": {
                 "title": "Exportovať zálohu",
-                "description": "Exportovať do Stronghold súboru - kompletná zašifrovaná záloha vašej peňaženky a najnovšej histórie transakcii."
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history."
             },
             "appLock": {
                 "title": "Automatické uzamknutie",
-                "description": "Doba po ktorej sa vaša peňaženka zamkne a odhlási vás"
+                "description": "Inactivity time before your wallets lock and you are logged out"
             },
             "changePassword": {
                 "title": "Zmeniť heslo",
-                "description": "Vaše heslo je použité k zabezpečeniu vašej peňaženky. Musíte použiť silné heslo k ochrane vašich prostriedkov."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds."
             },
             "changePincode": {
                 "title": "Zmeniť PIN kód",
@@ -282,12 +264,12 @@
                 "description": "Perform an extended search of your addresses for tokens."
             },
             "hiddenAccounts": {
-                "title": "Skryté adresy",
-                "description": "Selecting this options will show accounts that were previously hidden."
+                "title": "Hidden wallets",
+                "description": "Selecting this options will show wallets that were previously hidden."
             },
             "deleteProfile": {
                 "title": "Odstrániť profil",
-                "description": "Odstráni celú peňaženku, profil a históriu transakcii. Uistite sa, že máte zálohu."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup."
             },
             "deepLinks": {
                 "title": "Deep linky",
@@ -303,7 +285,7 @@
             },
             "configureNodeList": {
                 "title": "Zvoliť uzol",
-                "description": "Manage the list of nodes your wallet connects to.",
+                "description": "Manage the list of IOTA network nodes you connect to.",
                 "primaryNode": "Hlavný uzol",
                 "excludeNode": "Vylúčiť uzol",
                 "includeNode": "Zahrnúť uzol",
@@ -372,8 +354,8 @@
                 },
                 "strongholdStatus": {
                     "title": "Stav peňaženky",
-                    "locked": "Stronghold uzamknutý",
-                    "unlocked": "Stronghold odomknutý"
+                    "locked": "Locked",
+                    "unlocked": "Unlocked"
                 },
                 "strongholdBackup": {
                     "title": "Záloha peňaženky",
@@ -397,7 +379,7 @@
     "popups": {
         "password": {
             "title": "Heslo je vyžadované",
-            "subtitle": "Please enter your password to unlock Stronghold",
+            "subtitle": "Please enter your password to unlock your wallets",
             "backup": "Please enter your password to export a backup"
         },
         "qr": {
@@ -408,34 +390,35 @@
             "upToDateTitle": "Firefly je aktuálny",
             "upToDateDescription": "Používate najnovšiu a najbezpečnejšiu verziu Firefly.",
             "updateAvailable": "Je dostupná aktualizácia Firefly",
-            "updateDetails": "Verzia {version} - {date}"
+            "updateDetails": "Verzia {version} - {date}",
+            "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update."
         },
         "backup": {
             "title": "Posledná záloha: {date}",
             "lastBackup": "Naposledy ste zálohovali {date}",
-            "backupDescription": "Je dôležité zálohovať pravidelne pre uistenie sa, že máte kópiu vašich účtov a histórií transakcií.",
+            "backupDescription": "It is important to back up regularly to ensure you have a copy of your wallets and transaction history.",
             "backupWarning": "Ak stratíte vašu zálohu a frázu obnovenia, stratíte prístup k svojim prostriedkom.",
             "notBackedUp": "Nezálohované",
-            "notBackedUpDescription": "Nezálohovali ste svoj Stronghold",
+            "notBackedUpDescription": "You have not backed up your wallets",
             "saving": "Ukladanie..."
         },
         "deleteAccount": {
             "title": "Vymazať {name}?",
-            "body": "This account has no transaction history. It can safely be deleted.",
+            "body": "This wallet has no transaction history. It can safely be deleted.",
             "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Vymazať účet",
+            "hideAccount": "Delete wallet",
             "errorTitle": "Unable to delete {name}",
-            "errorBody1": "You cannot delete this account, you must have at least one."
+            "errorBody1": "You cannot delete this wallet, you must have at least one."
         },
         "hideAccount": {
             "title": "Skryť {name}?",
-            "body": "You can find this account later by enabling \"Show hidden accounts\" in Advanced Settings.",
+            "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
             "typePassword": "Pre potvrdenie napíšte Vaše heslo do peňaženky.",
-            "hideAccount": "Skryť účet",
+            "hideAccount": "Hide wallet",
             "errorTitle": "Nemožno skryť {name}",
-            "errorBody1": "To hide an account it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this account. Please move these funds to a different account and try again.",
-            "errorBody3": "You cannot hide this account, you must have at least one."
+            "errorBody1": "To hide a wallet it must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
+            "errorBody3": "You cannot hide this wallet, you must have at least one."
         },
         "addressHistory": {
             "title": "Hístória adries konta {name} \n",
@@ -478,8 +461,8 @@
         },
         "balanceFinder": {
             "title": "Balance finder",
-            "body": "Perform a more exhaustive search of addresses to find missing balances.",
-            "totalWalletBalance": "Total wallet balance",
+            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
+            "totalWalletBalance": "Total balance",
             "typePassword": "Type your password to allow searching."
         },
         "riskFunds": {
@@ -492,6 +475,12 @@
             "body": "You have funds on spent addresses, but the information needed to secure them was not found. This can happen if you made transactions a long time ago. You can proceed but {value} are at risk during migration.",
             "learnMore": "Viac o použitých adresách",
             "proceed": "Rozumiem riziku"
+        },
+        "snapshot": {
+            "title": "Ongoing network upgrade",
+            "body": "The Chrysalis network upgrade has begun.",
+            "bodyMigration": "Migration is disabled until it is complete.",
+            "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
         }
     },
     "charts": {
@@ -499,8 +488,8 @@
         "outgoingMi": "Outgoing {value}",
         "portoflio": "Portfólio",
         "token": "Token",
-        "accountValue": "Hodnota účtu",
-        "accountActivity": "Aktivita účtu",
+        "accountValue": "Wallet Value",
+        "accountActivity": "Wallet Activity",
         "timeframe1Hour": "1 hodina",
         "timeframe1Day": "1 deň",
         "timeframe1Week": "1 týždeň",
@@ -554,11 +543,11 @@
         "updateFirefly": "Aktualizovať Firefly",
         "restartNow": "Reštartovať",
         "saveBackup": "Uložiť Stronghold zálohu",
-        "customizeAcount": "Upraviť konto",
+        "customizeAcount": "Customise wallet",
         "viewAddressHistory": "Zobraziť históriu adresy",
-        "hideAccount": "Skryť účet",
-        "showAccount": "Zobrazenie učtu",
-        "deleteAccount": "Vymazať účet",
+        "hideAccount": "Hide wallet",
+        "showAccount": "Unhide wallet",
+        "deleteAccount": "Delete wallet",
         "max": "Max",
         "addNode": "Pridať uzol",
         "updateNode": "Aktualizácia uzla",
@@ -574,7 +563,7 @@
         "copy": "Kopírovať",
         "paste": "Prilepiť",
         "selectAll": "Vybrať všetko",
-        "addAccount": "Pridať účet",
+        "addAccount": "Add Wallet",
         "checkForUpdates": "Kontrola aktualizácií",
         "reportAnIssue": "Nahlásiť problém",
         "clear": "Vymazať",
@@ -589,12 +578,13 @@
         "readDocumentation": "Prečítajte si dokumentáciu",
         "visitFaq": "Navštíviť FAQ",
         "viewStatus": "Zobrazenie stavu",
-        "showHiddenAccounts": "Zobrazenie skrytých účtov",
+        "showHiddenAccounts": "Show hidden wallets",
         "confirm": "Potvrdiť",
         "findBalances": "Find balances",
         "searchBalances": "Search for balances",
         "searchAgain": "Search again",
-        "searching": "Searching..."
+        "searching": "Searching...",
+        "closeFirefly": "Close Firefly"
     },
     "general": {
         "password": "Heslo",
@@ -612,11 +602,11 @@
         "sendFunds": "Odoslať prostriedky",
         "sendToAddress": "Odoslať na adresu",
         "scanQrOrPaste": "Naskenujte QR kód alebo vložte Adresu",
-        "moveFundsBetweenAccounts": "Presunúť prostriedky medzi účtami",
+        "moveFundsBetweenAccounts": "Move funds between wallets",
         "sendTokensToAddress": "Odoslať tokeny na adresu",
-        "manageAccount": "Spravovať konto",
-        "customizeAcount": "Upraviť váš účet",
-        "account": "Účet",
+        "manageAccount": "Manage Wallet",
+        "customizeAcount": "Customize your wallet",
+        "account": "Peňaženka",
         "sendingToAddress": "Odosielanie na adresu",
         "amount": "Čiastka",
         "addAddress": "Pridať adresu",
@@ -637,25 +627,25 @@
         "lightTheme": "Svetlý motív",
         "darkTheme": "Tmavý motív",
         "balance": "Zostatok",
-        "accountBalance": "Zostatok na účte",
+        "accountBalance": "Wallet Balance",
         "incoming": "Prichádzajúce",
         "outgoing": "Odchádzajúce",
         "totalIn": "Celkovo prijatých",
         "totalOut": "Celkovo odoslaných",
-        "accounts": "Účty",
-        "myAccounts": "Moje účty",
+        "accounts": "Wallets",
+        "myAccounts": "My Wallets",
         "automaticNodeSelection": "Automatický výber uzla",
         "manualNodeSelection": "Manuálny výber uzla",
         "profiles": "Profily",
         "developerProfile": "Vývojársky profil",
         "developerProfileDescription": "Allows you to connect to testnets",
         "dev": "Vývojár",
-        "createAccount": "Vytvoriť účet",
-        "accountName": "Názov účtu",
+        "createAccount": "Create a Wallet",
+        "accountName": "Wallet name",
         "latestTransactions": "Posledné transakcie",
         "transactions": "Transakcie",
         "security": "Bezpečnosť",
-        "accountAddress": "Adresa účtu",
+        "accountAddress": "Wallet Address",
         "nodes": "Uzly",
         "wallet": "Peňaženka",
         "help": "Nápoveda",
@@ -667,25 +657,26 @@
         "status": "Stav",
         "confirmed": "Potvrdené",
         "pending": "Čakajúce",
-        "noAccounts": "Nemáte žiadne účty, prosím jeden vytvorte.",
+        "noAccounts": "You have no wallets, please create one.",
         "loadingAccounts": "Načítavanie, počkajte prosím...",
         "addProfile": "Pridať profil",
         "noRecentHistory": "Žiadna nedávna história",
-        "transferSyncing": "Synchronizácia účtu",
+        "firstSync": "Syncing history, this may take a while...",
+        "transferSyncing": "Syncing wallet",
         "transferSelectingInputs": "Výber vstupov",
         "transferRemainderAddress": "Generovanie zostatkových adries",
         "transferSigning": "Podpísať transakciu",
         "transferPow": "Vykonávanie PoW",
         "transferBroadcasting": "Vysielanie transakcie",
         "transferComplete": "Prenos bol dokončený",
-        "creatingAccount": "Vytváranie účtu, prosím počkajte...",
-        "updatingAccount": "Aktualizácia účtu, prosím počkajte...",
-        "accountSyncing": "Účet sa synchronizuje",
-        "accountSyncComplete": "Synchronizácia účtu dokončená",
+        "creatingAccount": "Creating wallet, please wait...",
+        "updatingAccount": "Updating wallet, please wait...",
+        "accountSyncing": "Wallet is syncing",
+        "accountSyncComplete": "Wallet sync complete",
         "passwordUpdating": "Aktualizácia hesla...",
         "passwordSuccess": "Heslo úspešne aktualizované",
         "passwordFailed": "Aktualizácia hesla zlyhala",
-        "syncingAccounts": "Synchronizácia účtov...",
+        "syncingAccounts": "Syncing wallets...",
         "exportingStronghold": "Exporting Stronghold...",
         "exportingStrongholdSuccess": "Exported Stronghold successfully",
         "exportingStrongholdFailed": "Exporting Stronghold failed",
@@ -700,7 +691,7 @@
         "passwordStrength4": "Silné",
         "creatingProfile": "Vytváranie profilu, prosím počkajte...",
         "fundMigration": "Presun prostriedkov",
-        "accountRemoved": "This account is hidden. Unhide it to perform transfers.",
+        "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
         "receivingTo": "Receiving to {account}",
         "sendingFrom": "Sending from {account}",
         "receivedTo": "Received to {account}",
@@ -729,7 +720,7 @@
         "calcMinutesRemaining": "Výpočet zostávajúcich minút...",
         "minutesRemaining": "{minutes, plural, one {ostáva 1 minúta} \nfew {ostávajú # minúty} \nmany {ostáva # minút} \nother {ostáva # minút}}",
         "copiedToClipboard": "Skopírované do schránky",
-        "accountsSynchronized": "Synchronizácia úctu je kompletná",
+        "accountsSynchronized": "Wallet synchronization complete",
         "migratedAccountChrysalisDown": "Your funds will become available after Chrysalis on 28th April",
         "migratedAccountChrysalisUp": "Vaše prostriedky budú onedlho k dispozícii"
     },
@@ -761,10 +752,10 @@
             "incorrect": "Aktuálny PIN kód je nesprávny."
         },
         "account": {
-            "length": "Názov vášho účtu nemôže byť dlhší ako {length, plural, one {1 znak} few {# znaky} other {# znakov}}.",
-            "empty": "Musíte použiť svoj najnovší účet pred vytvorením nového.",
-            "notEmpty": "Pred odstránením tohto účtu musíte previesť svoj zostatok.",
-            "duplicate": "Účet s týmto menom už existuje.",
+            "length": "Your wallet name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "empty": "You must use your latest wallet before creating a new one.",
+            "notEmpty": "You must transfer your balance before deleting this wallet.",
+            "duplicate": "A wallet with this name already exists.",
             "tilde": "Profilové meno sa nemože začínať znakom '~'.",
             "control": "Profilové meno sa nemože obsahovať kontrolné znaky.",
             "startDot": "Profilové meno sa nemože začínať znakom '.'.",
@@ -779,8 +770,8 @@
             "wrongAddressPrefix": "Adresy začínaju s predponou {prefix}.",
             "wrongAddressFormat": "Adresa nie je v spravnom formáte.",
             "invalidAddress": "Adresa nie je správna.",
-            "insufficientFunds": "Tento účet nemá dostatok prostriedkov.",
-            "noToAccount": "Nevybrali ste konto na ktoré majú byť vyslané prostriedky.",
+            "insufficientFunds": "This wallet has insufficient funds.",
+            "noToAccount": "You have not selected a wallet to send the funds to.",
             "sendingDust": "Nemôžete odoslať menej ako 1 Mi.",
             "leavingDust": "Zostatok vašej adresy nemôže byť nižší ako 1 Mi."
         },

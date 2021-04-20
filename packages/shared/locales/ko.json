@@ -2,34 +2,16 @@
     "views": {
         "onboarding1": {
             "title": "IOTA 보내기, 받기, 관리하기",
-            "body": "Firefly는 IOTA 공식 지갑입니다"
+            "body": "Firefly is the official wallet software of IOTA."
         },
         "legal": {
             "title": "개인정보 보호 정책 & 이용 약관",
             "body": "개인정보 보호 정책과 서비스 약관을 검토바랍니다.",
-            "privacyPolicy": {
-                "title": "개인정보 보호 정책",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "termsOfService": {
-                "title": "서비스 약관",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
             "checkbox": "개인정보 보호 정책과 서비스 약관을 읽었으며 이에 동의합니다"
         },
         "appearance": {
             "title": "모양새",
-            "body": "지갑의 테마를 선택해 주세요."
+            "body": "Choose your app theme."
         },
         "profile": {
             "title": "프로필 생성하기",
@@ -46,7 +28,7 @@
         "secure": {
             "title": "지갑을 안전하게 보관하기",
             "body1": "복원 양식 PDF 파일을 받아 인쇄하세요.",
-            "body2": "복원 양식을 작성하여 보관하면 이 양식을 이용하여 지갑을 복원할 수 있습니다."
+            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
         },
         "password": {
             "title": "비밀번호 만들기",
@@ -55,7 +37,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "본인 만 지갑을 사용할 수 있도록 로그인 PIN을 설정하세요.",
+            "body1": "Set up a login PIN to make sure that only you can enter your profile.",
             "body2": "PIN을 안전하게 보관하세요!"
         },
         "pin": {
@@ -91,15 +73,15 @@
         },
         "backupWallet": {
             "title": "Stronghold 파일로 백업",
-            "body1": "지갑을 Stronghold 파일로 백업하기 위해 사용할 비밀번호를 입력하세요. 이 비밀번호를 사용해 백업을 암호화합니다.",
+            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
             "body2": "아래와 같은 이유 때문에 전자 백업도 중요합니다.",
-            "reason1": "복원 문구를 입력하지 않고 지갑을 쉽게 복원할 수 있습니다.",
-            "reason2": "다른 기기에서 지갑을 불러올 수 있습니다.",
+            "reason1": "Easily recover your wallets without typing in your recovery phrase",
+            "reason2": "Import your wallets on other devices",
             "reason3": "전체 거래 내역을 복구할 수 있습니다."
         },
         "recoveryPhraseSaved": {
             "title": "백업 성공",
-            "body": "Stronghold로 지갑을 백업하였습니다."
+            "body": "You have backed up your wallets to a Stronghold."
         },
         "congratulations": {
             "title": "지갑 설정 완료",
@@ -109,42 +91,42 @@
             "exportMigration": "마이그레이션 로그 내보내기 및 설정 완료"
         },
         "import": {
-            "title": "Recover or migrate funds",
-            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
-            "importSeed": "I have an 81 character seed",
-            "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
-            "importMnemonic": "I have a Firefly recovery phrase",
-            "importMnemonicDescription": "Enter your secret phrase to recover your wallet",
-            "importFile": "I have a file backup",
-            "importFileDescription": "Upload a Seedvault or Stronghold file"
+            "title": "복구 또는 자금 마이그레이션",
+            "body": "기존 시드 또는 지갑 백업 파일이있는 경우 여기에서 가져올 수 있습니다. 이전 네트워크 자금을 보유하고있는 경우 Chrysalis 네트워크로 이동하기 위해 마이그레이션 단계를 거치게됩니다.",
+            "importSeed": "81 자 시드가 있습니다",
+            "importSeedDescription": "시드를 입력하고 자금을 Chrysalis로 마이그레이션",
+            "importMnemonic": "Firefly 복원 문구가 있습니다",
+            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
+            "importFile": "파일 백업이 있습니다",
+            "importFileDescription": "Seedvault 또는 Stronghold 파일 업로드"
         },
         "importFromText": {
             "seed": {
-                "title": "Type your seed to commence migration",
-                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
-                "enter": "Enter your seed"
+                "title": "마이그레이션을 시작하려면 시드를 입력해주세요",
+                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
+                "enter": "시드를 입력해주세요"
             },
             "mnemonic": {
-                "title": "Type your recovery phrase",
-                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
-                "enter": "Enter your secret recovery phrase"
+                "title": "복원 문구를 입력해주세요",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly wallets.",
+                "enter": "복원 문구를 입력해주세요"
             },
             "seedDetected": "81자의 시드 감지됨",
             "phraseDetected": "24개 단어로 된 복원 문구 감지",
             "checksum": "체크섬"
         },
         "importFromFile": {
-            "title": "백업 파일로부터 지갑 복구",
-            "body": "지갑을 복구하는 데 사용할 백업 파일을 불러옵니다. Stronghold (.stronghold) 또는 Trinity 지갑의 SeedVault (.kdbx) 파일을 선택해 주세요."
+            "title": "Restore your wallets using a backup file",
+            "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
-            "title": "SeedVault 또는 Stronghold로부터 지갑 복구하기",
+            "title": "Restore your wallets from a SeedVault or Stronghold",
             "body1": "백업 파일의 비밀번호를 입력해 주세요.",
             "body2": "백업 파일을 처음 만들때 설정했던 비밀번호를 입력합니다."
         },
         "importSuccess": {
             "title": "백업 파일에서 복구 완료",
-            "body": "이제 새로운 지갑을 설정할 수 있습니다.",
+            "body": "You can now set up your new profile.",
             "seedvaultTitle": "가져오기 성공",
             "seedvaultBody": "암호를 확인하였습니다. 다음 단계로 계속합니다.",
             "strongholdTitle": "가져오기 성공",
@@ -168,7 +150,7 @@
             "signingBundle": "Signing 번들",
             "broadcastingBundle": "Broadcasting 번들",
             "miningBundle": "Mining 번들",
-            "problemRestoringWallet": "지갑을 복원하는 중에 문제가 발생했습니다. 다시 시도하십시오.",
+            "problemRestoringWallet": "There was a network error restoring your wallet. Please try again.",
             "minimumMigrationAmountSpentAddresses": "각 지출 주소의 최소 마이그레이션 금액은 1Mi입니다. 잔액이 올바르지 않은지 다시 확인하십시오.",
             "tooManyAddressesToMigrate": "마이그레이션 할 잔액이 적은 주소가 너무 많습니다. 잔액이 올바르지 않은지 다시 확인하십시오.",
             "cannotMigrateAllYourFunds": "일부 주소의 가치가 너무 낮아 모든 자금을 마이그레이션 할 수 없습니다. 어쨌든 계속할 수 있습니다. {value} 가 손실됩니다.",
@@ -219,7 +201,7 @@
             "settings": "설정",
             "generalSettings": {
                 "title": "일반 설정",
-                "description": "지갑 모양 및 기타 일반 설정 구성"
+                "description": "Configure your app's appearance and other general settings"
             },
             "security": {
                 "title": "보안",
@@ -238,7 +220,7 @@
                 "description": "프로필 이름을 바꾸거나 사진 등록하기"
             },
             "sync": {
-                "title": "계정 동기화",
+                "title": "Sync wallets",
                 "description": ""
             },
             "theme": {
@@ -259,15 +241,15 @@
             },
             "exportStronghold": {
                 "title": "백업 내보내기",
-                "description": "Stronghold 파일로 백업을 내보냅니다. Stronghold 파일은 암호화된 지갑과 최근의 거래 내역을 담고 있습니다."
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history."
             },
             "appLock": {
                 "title": "자동 잠금",
-                "description": "지갑을 잠그고 자동으로 로그아웃하기까지 걸리는 시간"
+                "description": "Inactivity time before your wallets lock and you are logged out"
             },
             "changePassword": {
                 "title": "비밀번호 변경하기",
-                "description": "암호는 지갑의 보안에 사용됩니다. 잔고를 안전하게 보관하기 위해 강력한 암호를 사용해야 합니다."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds."
             },
             "changePincode": {
                 "title": "PIN 코드 변경",
@@ -278,16 +260,16 @@
                 "action": "PIN 변경하기"
             },
             "balanceFinder": {
-                "title": "Balance finder",
-                "description": "Perform an extended search of your addresses for tokens."
+                "title": "잔고 찾기",
+                "description": "토큰에 대한 주소의 확장 검색을 수행해주세요."
             },
             "hiddenAccounts": {
-                "title": "숨겨진 계정",
-                "description": "이 옵션을 선택하면 이전에 숨겨진 계정이 표시됩니다."
+                "title": "Hidden wallets",
+                "description": "Selecting this options will show wallets that were previously hidden."
             },
             "deleteProfile": {
                 "title": "프로필 삭제",
-                "description": "지갑, 사용자 및 거래 내역 전체를 삭제합니다. 삭제 전에 지갑을 백업해 놓았는지 확인하세요."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup."
             },
             "deepLinks": {
                 "title": "딥 링크",
@@ -303,7 +285,7 @@
             },
             "configureNodeList": {
                 "title": "노드 선택",
-                "description": "지갑이 연결되는 노드 목록을 관리합니다.",
+                "description": "Manage the list of IOTA network nodes you connect to.",
                 "primaryNode": "주 노드",
                 "excludeNode": "이 노드 제외하기",
                 "includeNode": "포함 노드",
@@ -372,8 +354,8 @@
                 },
                 "strongholdStatus": {
                     "title": "지갑 상태",
-                    "locked": "Stronghold 잠김",
-                    "unlocked": "Stronghold 잠금 해제"
+                    "locked": "Locked",
+                    "unlocked": "Unlocked"
                 },
                 "strongholdBackup": {
                     "title": "지갑 백업",
@@ -397,7 +379,7 @@
     "popups": {
         "password": {
             "title": "비밀번호 필요",
-            "subtitle": "Stronghold를 잠금 해제하기 위해 지갑 비밀번호를 입력하세요.",
+            "subtitle": "Please enter your password to unlock your wallets",
             "backup": "백업을 내보내기 위해 비밀번호를 입력해주세요"
         },
         "qr": {
@@ -408,34 +390,35 @@
             "upToDateTitle": "Firefly가 최신 버전임",
             "upToDateDescription": "안전한 Firefly 최신 버전을 사용하고 있습니다.",
             "updateAvailable": "Firefly 업데이트 가능",
-            "updateDetails": "버전 {version} - {date}"
+            "updateDetails": "버전 {version} - {date}",
+            "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update."
         },
         "backup": {
             "title": "마지막 백업: {date}",
             "lastBackup": "{date} 마지막으로 백업했습니다",
-            "backupDescription": "계정과 거래 기록의 사본을 유지하기 위해 규칙적으로 백업하는 것이 중요합니다.",
+            "backupDescription": "It is important to back up regularly to ensure you have a copy of your wallets and transaction history.",
             "backupWarning": "백업과 복원 문구를 잃어버리게 될 경우 지갑 잔고를 잃게 됩니다.",
             "notBackedUp": "백업되지 않음",
-            "notBackedUpDescription": "아직 Stronghold를 백업하지 않았습니다.",
+            "notBackedUpDescription": "You have not backed up your wallets",
             "saving": "저장 중..."
         },
         "deleteAccount": {
             "title": "{name} 계정을 삭제할까요?",
-            "body": "이 계정에는 거래내역이 없으며, 안전하게 삭제될 수 있습니다.",
+            "body": "This wallet has no transaction history. It can safely be deleted.",
             "typePassword": "계정을 삭제하려면 지갑 비밀번호를 입력하세요.",
-            "hideAccount": "계정 삭제하기",
+            "hideAccount": "Delete wallet",
             "errorTitle": "{name} 계정을 삭제할 수 없습니다",
-            "errorBody1": "이 계정은 삭제할 수 없습니다. 하나 이상의 계정이 있어야합니다."
+            "errorBody1": "You cannot delete this wallet, you must have at least one."
         },
         "hideAccount": {
             "title": "{name} 계정을 숨길까요?",
-            "body": "숨겨진 계정은 고급설정의 \"숨겨진 계정 보이기\"를 활성화하면 다시 찾을 수 있습니다.",
+            "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
             "typePassword": "계정을 삭제하려면 지갑 비밀번호를 입력하세요.",
-            "hideAccount": "계정 숨기기",
+            "hideAccount": "Hide wallet",
             "errorTitle": "{name} 계정을 숨길 수 없습니다",
-            "errorBody1": "계정을 숨기기 위해서는 잔액이 0이어야 합니다.",
-            "errorBody2": "이 계정에 잔액 {balance} 가 남아있습니다. 이 잔액을 다른 계정으로 옮기고 다시 시도해 주세요.",
-            "errorBody3": "이 계정은 숨길 수 없습니다. 하나 이상의 계정이 있어야합니다."
+            "errorBody1": "To hide a wallet it must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
+            "errorBody3": "You cannot hide this wallet, you must have at least one."
         },
         "addressHistory": {
             "title": "주소 {name} 이력",
@@ -477,10 +460,10 @@
             "body": "{amount} 만큼 보내려고 합니다"
         },
         "balanceFinder": {
-            "title": "Balance finder",
-            "body": "Perform a more exhaustive search of addresses to find missing balances.",
-            "totalWalletBalance": "Total wallet balance",
-            "typePassword": "Type your password to allow searching."
+            "title": "잔고 찾기",
+            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
+            "totalWalletBalance": "Total balance",
+            "typePassword": "검색을 허용하려면 암호를 입력해주세요."
         },
         "riskFunds": {
             "title": "경고: 마이그레이션 중 위험에 처한 자금",
@@ -492,15 +475,21 @@
             "body": "사용한 주소에 대한 자금이 있지만 보안에 필요한 정보를 찾을 수 없습니다. 이것은 오래 전에 거래를 한 경우 발생할 수 있습니다. 계속할 수 있지만 마이그레이션 중에 {value} 이 위험합니다.",
             "learnMore": "사용한 주소에 대해 자세히 알아보기",
             "proceed": "네, 위험 사항을 이해했습니다"
+        },
+        "snapshot": {
+            "title": "Ongoing network upgrade",
+            "body": "The Chrysalis network upgrade has begun.",
+            "bodyMigration": "Migration is disabled until it is complete.",
+            "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
         }
     },
     "charts": {
-        "incomingMi": "Incoming {value}",
-        "outgoingMi": "Outgoing {value}",
+        "incomingMi": "{value} 받음",
+        "outgoingMi": "{value} 보냄",
         "portoflio": "포트폴리오",
         "token": "토큰",
-        "accountValue": "계정 잔액",
-        "accountActivity": "최근 활동",
+        "accountValue": "Wallet Value",
+        "accountActivity": "Wallet Activity",
         "timeframe1Hour": "1시간",
         "timeframe1Day": "1일",
         "timeframe1Week": "1주",
@@ -554,11 +543,11 @@
         "updateFirefly": "Firefly 업데이트",
         "restartNow": "지금 다시 시작",
         "saveBackup": "Stronghold 백업 저장하기",
-        "customizeAcount": "계정 설정",
+        "customizeAcount": "Customise wallet",
         "viewAddressHistory": "주소 이력 보기",
-        "hideAccount": "계정 숨기기",
-        "showAccount": "계정 숨김취소",
-        "deleteAccount": "계정 삭제하기",
+        "hideAccount": "Hide wallet",
+        "showAccount": "Unhide wallet",
+        "deleteAccount": "Delete wallet",
         "max": "최대",
         "addNode": "노드 추가",
         "updateNode": "노드 변경",
@@ -574,7 +563,7 @@
         "copy": "복사하기",
         "paste": "붙여넣기",
         "selectAll": "모두 선택",
-        "addAccount": "계정 추가",
+        "addAccount": "Add Wallet",
         "checkForUpdates": "업데이트 확인",
         "reportAnIssue": "오류 보고",
         "clear": "지우기",
@@ -589,12 +578,13 @@
         "readDocumentation": "설명서 읽기",
         "visitFaq": "자주 묻는 질문들 보기",
         "viewStatus": "상태 보기",
-        "showHiddenAccounts": "숨긴 계정 보이기",
+        "showHiddenAccounts": "Show hidden wallets",
         "confirm": "확인",
-        "findBalances": "Find balances",
-        "searchBalances": "Search for balances",
-        "searchAgain": "Search again",
-        "searching": "Searching..."
+        "findBalances": "잔고 찾기",
+        "searchBalances": "잔고 검색",
+        "searchAgain": "다시 검색",
+        "searching": "검색 중...",
+        "closeFirefly": "Close Firefly"
     },
     "general": {
         "password": "비밀번호",
@@ -612,11 +602,11 @@
         "sendFunds": "자금 보내기",
         "sendToAddress": "주소로 보내기",
         "scanQrOrPaste": "QR 코드를 스캔하거나 주소를 복사해 붙이기",
-        "moveFundsBetweenAccounts": "계정간 잔고 보내기",
+        "moveFundsBetweenAccounts": "Move funds between wallets",
         "sendTokensToAddress": "주소로 토큰 보내기",
-        "manageAccount": "계정 관리하기",
-        "customizeAcount": "사용자 계정 설정",
-        "account": "계정",
+        "manageAccount": "Manage Wallet",
+        "customizeAcount": "Customize your wallet",
+        "account": "지갑",
         "sendingToAddress": "주소로 보내는 중",
         "amount": "수량",
         "addAddress": "주소 추가하기",
@@ -637,25 +627,25 @@
         "lightTheme": "밝은 테마",
         "darkTheme": "어두운 테마",
         "balance": "잔고",
-        "accountBalance": "계정 잔고",
+        "accountBalance": "Wallet Balance",
         "incoming": "받음",
         "outgoing": "보냄",
         "totalIn": "전체 받은 양",
         "totalOut": "전체 보낸 양",
-        "accounts": "계정",
-        "myAccounts": "내 계정",
+        "accounts": "Wallets",
+        "myAccounts": "My Wallets",
         "automaticNodeSelection": "자동으로 노드 선택",
         "manualNodeSelection": "수동으로 노드 선택",
         "profiles": "프로필",
         "developerProfile": "개발자 프로필",
         "developerProfileDescription": "테스트 넷에 연결할 수 있습니다",
         "dev": "개발자",
-        "createAccount": "계정 만들기",
-        "accountName": "계정 이름",
+        "createAccount": "Create a Wallet",
+        "accountName": "Wallet name",
         "latestTransactions": "최근 거래",
         "transactions": "거래내역",
         "security": "보안",
-        "accountAddress": "계정 주소",
+        "accountAddress": "Wallet Address",
         "nodes": "노드",
         "wallet": "지갑",
         "help": "도움말",
@@ -667,25 +657,26 @@
         "status": "상태",
         "confirmed": "승인됨",
         "pending": "처리 중",
-        "noAccounts": "계정이 없습니다. 생성해 주세요.",
+        "noAccounts": "You have no wallets, please create one.",
         "loadingAccounts": "불러오는 중입니다. 잠시만 기다려 주세요...",
         "addProfile": "프로필 추가",
         "noRecentHistory": "최근 기록 없음",
-        "transferSyncing": "계정 동기화 중",
+        "firstSync": "Syncing history, this may take a while...",
+        "transferSyncing": "Syncing wallet",
         "transferSelectingInputs": "보낼 주소를 선택하는 중",
         "transferRemainderAddress": "나머지를 보낼 주소를 생성하는 중",
         "transferSigning": "거래에 서명하는 중",
         "transferPow": "작업 증명 수행 중",
         "transferBroadcasting": "거래를 송출하는 중",
         "transferComplete": "전송 완료",
-        "creatingAccount": "계정을 만드는 중입니다. 잠시만 기다려 주세요...",
-        "updatingAccount": "계정을 업데이트 중입니다. 잠시만 기다려 주세요...",
-        "accountSyncing": "계정 동기화 중",
-        "accountSyncComplete": "계정 동기화 완료",
+        "creatingAccount": "Creating wallet, please wait...",
+        "updatingAccount": "Updating wallet, please wait...",
+        "accountSyncing": "Wallet is syncing",
+        "accountSyncComplete": "Wallet sync complete",
         "passwordUpdating": "비밀번호를 변경합니다...",
         "passwordSuccess": "비밀번호를 성공적으로 변경하였습니다",
         "passwordFailed": "비밀번호를 변경하지 못했습니다",
-        "syncingAccounts": "계정 동기화 중...",
+        "syncingAccounts": "Syncing wallets...",
         "exportingStronghold": "Stronghold를 내보내는 중...",
         "exportingStrongholdSuccess": "Stronghold를 성공적으로 내보냈습니다",
         "exportingStrongholdFailed": "Stronghold를 내보내지 못했습니다",
@@ -700,13 +691,13 @@
         "passwordStrength4": "강함",
         "creatingProfile": "프로필을 만드는 중입니다. 잠시만 기다려 주세요...",
         "fundMigration": "자금 마이그레이션",
-        "accountRemoved": "이 계정은 숨겨져 있습니다. 거래를 위해 숨김 취소를 해주세요.",
-        "receivingTo": "Receiving to {account}",
-        "sendingFrom": "Sending from {account}",
-        "receivedTo": "Received to {account}",
-        "sentFrom": "Sent from {account}",
-        "receiving": "Receiving",
-        "sending": "Sending"
+        "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
+        "receivingTo": "{account} 계정으로 받는 중",
+        "sendingFrom": "{account} 계정으로 보내는 중",
+        "receivedTo": "{account} 계정으로 받음",
+        "sentFrom": "{account} 계정으로 보냄",
+        "receiving": "받는 중",
+        "sending": "보내는 중"
     },
     "dates": {
         "today": "오늘",
@@ -729,7 +720,7 @@
         "calcMinutesRemaining": "남은 시간 계산중...",
         "minutesRemaining": "{minutes, plural, other {남은 시간 #분}}",
         "copiedToClipboard": "클립보드에 복사되었습니다.",
-        "accountsSynchronized": "계정 동기화 완료",
+        "accountsSynchronized": "Wallet synchronization complete",
         "migratedAccountChrysalisDown": "4 월 28 일 Chrysalis 이후에 자금을 사용할 수 있습니다",
         "migratedAccountChrysalisUp": "곧 자금을 사용할 수 있습니다"
     },
@@ -761,10 +752,10 @@
             "incorrect": "PIN이 잘못되었습니다."
         },
         "account": {
-            "length": "계정 이름은 {length, plural, other {#글자}}보다 길 수 없습니다.",
-            "empty": "새 계정을 만들기 전에 아직 사용하지 않은 기존 계정을 사용해야 합니다.",
-            "notEmpty": "이 계정을 삭제하려면 계정에 남은 잔고를 비워야 합니다.",
-            "duplicate": "같은 이름의 계정이 이미 존재합니다.",
+            "length": "Your wallet name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "empty": "You must use your latest wallet before creating a new one.",
+            "notEmpty": "You must transfer your balance before deleting this wallet.",
+            "duplicate": "A wallet with this name already exists.",
             "tilde": "프로필 이름은 `~`로 시작할 수 없습니다.",
             "control": "프로필 이름은 제어 문자를 포함할 수 없습니다.",
             "startDot": "프로필 이름은 '.'로 시작할 수 없습니다.",
@@ -779,8 +770,8 @@
             "wrongAddressPrefix": "주소는 {prefix}로 시작합니다.",
             "wrongAddressFormat": "주소가 형식에 맞지 않습니다.",
             "invalidAddress": "주소가 유효하지 않습니다.",
-            "insufficientFunds": "계정에 잔고가 부족합니다.",
-            "noToAccount": "보낼 계정을 선택하지 않았습니다.",
+            "insufficientFunds": "This wallet has insufficient funds.",
+            "noToAccount": "You have not selected a wallet to send the funds to.",
             "sendingDust": "1 Mi 미만은 보낼 수 없습니다.",
             "leavingDust": "주소에 1 Mi 미만을 남겨놓을 수 없습니다."
         },
