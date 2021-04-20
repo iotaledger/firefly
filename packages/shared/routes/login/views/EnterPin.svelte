@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { Icon, Pin, Profile, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
-    import { checkChrysalisSnapshot, ongoingSnapshot } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { activeProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
@@ -10,7 +9,6 @@
     import { get } from 'svelte/store'
 
     export let locale
-    export let mobile
 
     let attempts = 0
     let pinCode = ''
@@ -61,11 +59,6 @@
     }
 
     async function onSubmit() {
-        await checkChrysalisSnapshot()
-        if (get(ongoingSnapshot) === true) {
-            pinRef.resetAndFocus()
-            console.error('Ongoing network upgrade. Migration is disabled until it is complete.')
-        } else {
             if (!hasReachedMaxAttempts) {
                 const profile = get(activeProfile)
 
