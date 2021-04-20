@@ -48,8 +48,7 @@
                 break
 
             case BackupState.RecoveryPhrase:
-                // TODO: Reenable before production
-                nextState = BackupState.Backup
+                nextState = BackupState.Verify
                 break
 
             case BackupState.Verify:

@@ -220,7 +220,7 @@
     }
 
     const updateFromSendParams = (s) => {
-        selectedSendType = s.isInternal ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
+        selectedSendType = s.isInternal && $liveAccounts.length > 1 ? SEND_TYPE.INTERNAL : SEND_TYPE.EXTERNAL
         unit = s.amount === 0 ? Unit.Mi : Unit.i
         amount = s.amount === 0 ? '' : formatUnitPrecision(s.amount, Unit.i, false)
         address = s.address

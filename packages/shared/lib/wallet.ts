@@ -415,8 +415,9 @@ export const asyncCreateAccount = () => {
                 clientOptions: {
                     nodes: officialNodes,
                     node: officialNodes[Math.floor(Math.random() * officialNodes.length)],
-                    network: get(network)
-                }
+                    network: get(network),
+                },
+                alias: `${localize('general.account')} 1`
             },
             {
                 onSuccess() {
@@ -1046,7 +1047,7 @@ export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
                     const account = prepareAccountInfo(Object.assign<
                         WalletAccount, WalletAccount, Partial<WalletAccount>
                     >({} as WalletAccount, newAccount, {
-                        alias: `Account ${newAccount.index + 1}`,
+                        alias: `${localize('general.account')} ${newAccount.index + 1}`,
                         clientOptions: existingAccounts[0].clientOptions,
                         createdAt: new Date().toISOString(),
                         signerType: existingAccounts[0].signerType,
