@@ -95,6 +95,10 @@
             lightmode: 'splashscreen-desktop.json',
             darkmode: 'splashscreen-desktop-darkmode.json',
         },
+        'loading-desktop': {
+            lightmode: 'loading-desktop.json',
+            darkmode: 'loading-desktop.json',
+        },
     }
 
     let container
@@ -143,4 +147,4 @@
     })
 </script>
 
-<div class="relative w-full{classes}" bind:this={container} />
+<div class="relative w-full {classes}" bind:this={container} />
