@@ -81,9 +81,8 @@ export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0)
         // Migration: snapshot check
         await checkChrysalisSnapshot()
         if (get(ongoingSnapshot) === true) {
-            // we dont display the error because a notification popup will open already
             reject({ snapshot: true })
-            console.error('Ongoing network upgrade')
+            console.error('Ongoing network upgrade. Migration is disabled until it is complete.')
         }
         else {
             api.getMigrationData(
