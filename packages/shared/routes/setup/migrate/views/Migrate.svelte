@@ -71,12 +71,14 @@
                         newProfile.set(null)
                     })
                 })
-                .catch(() => {
+                .catch((err) => {
                     loading = false
-                    showAppNotification({
-                        type: 'error',
-                        message: locale('views.migrate.error'),
-                    })
+                    if (!err?.snapshot) {
+                        showAppNotification({
+                            type: 'error',
+                            message: locale('views.migrate.error'),
+                        })
+                    }
                 })
         } else {
             loading = true

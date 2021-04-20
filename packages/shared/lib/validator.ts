@@ -1,5 +1,5 @@
 import type { MarketDataValidationResponse } from 'shared/lib/marketData'
-import type { ChrysalisNodeDataValidationResponse } from 'shared/lib/migration'
+import type { ChrysalisNodeDataValidationResponse, ChrysalisVariablesValidationResponse } from 'shared/lib/migration'
 import type { Account, SyncedAccount } from './typings/account'
 import type { Address } from './typings/address'
 import type { MessageResponse } from './typings/bridge'
@@ -773,6 +773,8 @@ export default class ValidatorService {
             MarketData: new ValidatorChainBuilder().add(new TypeValidator()).getFirst(),
             // Chrysalis node
             ChrysalisNode: new ValidatorChainBuilder().add(new TypeValidator()).getFirst(),
+            // Chrysalis github variables
+            ChrysalisVariables: new ValidatorChainBuilder().add(new TypeValidator()).getFirst(),
         }
     }
 
@@ -807,7 +809,7 @@ export default class ValidatorService {
      *
      * @returns {ValidationResponse}
      */
-    performValidation(response: MessageResponse | MarketDataValidationResponse | ChrysalisNodeDataValidationResponse): ValidationResponse {
+    performValidation(response: MessageResponse | MarketDataValidationResponse | ChrysalisNodeDataValidationResponse | ChrysalisVariablesValidationResponse): ValidationResponse {
         return this.validators[response.type].isValid(response)
     }
 }

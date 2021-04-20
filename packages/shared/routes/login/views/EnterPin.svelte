@@ -1,6 +1,7 @@
 <script lang="typescript">
-    import { Button, Icon, Pin, Profile, Text } from 'shared/components'
+    import { Icon, Pin, Profile, Text } from 'shared/components'
     import { Electron } from 'shared/lib/electron'
+    import { checkChrysalisSnapshot, ongoingSnapshot } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { activeProfile } from 'shared/lib/profile'
     import { validatePinFormat } from 'shared/lib/utils'
@@ -59,49 +60,55 @@
         }
     }
 
-    function onSubmit() {
-        if (!hasReachedMaxAttempts) {
-            const profile = get(activeProfile)
+    async function onSubmit() {
+        await checkChrysalisSnapshot()
+        if (get(ongoingSnapshot) === true) {
+            pinRef.resetAndFocus()
+            console.error('Ongoing network upgrade. Migration is disabled until it is complete.')
+        } else {
+            if (!hasReachedMaxAttempts) {
+                const profile = get(activeProfile)
 
-            isBusy = true
+                isBusy = true
 
-            Electron.PincodeManager.verify(profile.id, pinCode)
-                .then((verified) => {
-                    if (verified === true) {
-                        return Electron.getUserDataPath().then((path) => {
-                            initialise(profile.id, getStoragePath(path, profile.name))
-                            api.setStoragePassword(pinCode, {
-                                onSuccess() {
-                                    dispatch('next')
-                                },
-                                onError(err) {
-                                    isBusy = false
-                                    showAppNotification({
-                                        type: 'error',
-                                        message: locale(err.error),
-                                    })
-                                },
+                Electron.PincodeManager.verify(profile.id, pinCode)
+                    .then((verified) => {
+                        if (verified === true) {
+                            return Electron.getUserDataPath().then((path) => {
+                                initialise(profile.id, getStoragePath(path, profile.name))
+                                api.setStoragePassword(pinCode, {
+                                    onSuccess() {
+                                        dispatch('next')
+                                    },
+                                    onError(err) {
+                                        isBusy = false
+                                        showAppNotification({
+                                            type: 'error',
+                                            message: locale(err.error),
+                                        })
+                                    },
+                                })
                             })
-                        })
-                    } else {
-                        shake = true
-                        shakeTimeout = setTimeout(() => {
-                            shake = false
-                            isBusy = false
-                            attempts++
-                            if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
-                                clearInterval(maxAttemptsTimer)
-                                maxAttemptsTimer = setInterval(countdown, 1000)
-                            } else {
-                                pinRef.resetAndFocus()
-                            }
-                        }, 1000)
-                    }
-                })
-                .catch((error) => {
-                    console.error(error)
-                    isBusy = false
-                })
+                        } else {
+                            shake = true
+                            shakeTimeout = setTimeout(() => {
+                                shake = false
+                                isBusy = false
+                                attempts++
+                                if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
+                                    clearInterval(maxAttemptsTimer)
+                                    maxAttemptsTimer = setInterval(countdown, 1000)
+                                } else {
+                                    pinRef.resetAndFocus()
+                                }
+                            }, 1000)
+                        }
+                    })
+                    .catch((error) => {
+                        console.error(error)
+                        isBusy = false
+                    })
+            }
         }
     }
 

@@ -20,6 +20,7 @@
     import RiskFunds from './RiskFunds.svelte'
     import Transaction from './Transaction.svelte'
     import Version from './Version.svelte'
+    import Snapshot from './Snapshot.svelte'
 
     export let locale = 'en'
     export let type = undefined
@@ -48,6 +49,7 @@
         riskFunds: RiskFunds,
         missingBundle: MissingBundle,
         balanceFinder: BalanceFinder,
+        snapshot: Snapshot,
     }
 
     const onkey = (e) => {

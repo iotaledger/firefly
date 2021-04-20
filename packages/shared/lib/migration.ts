@@ -1,6 +1,9 @@
+import { closePopup, openPopup } from 'shared/lib/popup'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
-import type { Input, MigrationBundle, MigrationData } from 'shared/lib/typings/migration'
+import { appRoute } from 'shared/lib/router'
 import type { Address } from 'shared/lib/typings/address'
+import type { Input, MigrationBundle, MigrationData } from 'shared/lib/typings/migration'
+import { AppRoute } from 'shared/lib/typings/routes'
 import Validator from 'shared/lib/validator'
 import { api } from 'shared/lib/wallet'
 import { derived, get, writable, Writable } from 'svelte/store'
@@ -61,6 +64,10 @@ export const migration = writable<MigrationState>({
  * Chrysalis status
  */
 export const chrysalisLive = writable<Boolean>(false)
+/*
+ * ongoingSnapshot
+ */
+export const ongoingSnapshot = writable<Boolean>(false)
 /**
  * Gets migration data and sets it to state
  * 
@@ -72,37 +79,46 @@ export const chrysalisLive = writable<Boolean>(false)
  * @returns {Promise<void} 
  */
 export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0): Promise<void> => {
-    return new Promise((resolve, reject) => {
-        api.getMigrationData(
-            migrationSeed,
-            [MIGRATION_NODE],
-            ADDRESS_SECURITY_LEVEL,
-            initialAddressIndex,
-            PERMANODE, {
-            onSuccess(response) {
-                const { seed, data } = get(migration)
+    return new Promise(async (resolve, reject) => {
+        // Migration: snapshot check
+        await checkChrysalisSnapshot()
+        if (get(ongoingSnapshot) === true) {
+            reject({ snapshot: true })
+            console.error('Ongoing network upgrade. Migration is disabled until it is complete.')
+        }
+        else {
+            api.getMigrationData(
+                migrationSeed,
+                [MIGRATION_NODE],
+                ADDRESS_SECURITY_LEVEL,
+                initialAddressIndex,
+                PERMANODE, {
+                onSuccess(response) {
+                    const { seed, data } = get(migration)
 
-                if (initialAddressIndex === 0) {
-                    seed.set(migrationSeed)
-                    data.set(response.payload)
-                } else {
-                    data.update((_existingData) => {
-                        return Object.assign({}, _existingData, {
-                            balance: _existingData.balance + response.payload.balance,
-                            inputs: [..._existingData.inputs, ...response.payload.inputs],
-                            lastCheckedAddressIndex: response.payload.lastCheckedAddressIndex
+                    if (initialAddressIndex === 0) {
+                        seed.set(migrationSeed)
+                        data.set(response.payload)
+                    } else {
+                        data.update((_existingData) => {
+                            return Object.assign({}, _existingData, {
+                                balance: _existingData.balance + response.payload.balance,
+                                inputs: [..._existingData.inputs, ...response.payload.inputs],
+                                lastCheckedAddressIndex: response.payload.lastCheckedAddressIndex
+                            })
                         })
-                    })
-                }
+                    }
 
-                prepareBundles()
+                    prepareBundles()
 
-                resolve()
-            },
-            onError(error) {
-                reject(error)
-            },
-        })
+                    resolve()
+                },
+                onError(error) {
+                    reject(error)
+                },
+            })
+        }
+
     })
 };
 
@@ -143,44 +159,52 @@ export const createMigrationBundle = (inputAddressIndexes: number[], offset: num
  * @returns {Promise<void>}
  */
 export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAGNITUDE): Promise<void> => {
-    return new Promise((resolve, reject) => {
-        api.sendMigrationBundle([MIGRATION_NODE], bundleHash, mwm, {
-            onSuccess(response) {
-                const { bundles } = get(migration);
+    return new Promise(async (resolve, reject) => {
+        // Migration: snapshot check
+        await checkChrysalisSnapshot()
+        if (get(ongoingSnapshot) === true) {
+            reject({ snapshot: true })
+            console.error('Ongoing network upgrade. Migration is disabled until it is complete.')
+        }
+        else {
+            api.sendMigrationBundle([MIGRATION_NODE], bundleHash, mwm, {
+                onSuccess(response) {
+                    const { bundles } = get(migration);
 
-                // Update bundle and mark it as migrated
-                bundles.update((_bundles) => {
-                    return _bundles.map((bundle) => {
-                        if (bundle.bundleHash === bundleHash) {
-                            return Object.assign({}, bundle, { migrated: true })
-                        }
+                    // Update bundle and mark it as migrated
+                    bundles.update((_bundles) => {
+                        return _bundles.map((bundle) => {
+                            if (bundle.bundleHash === bundleHash) {
+                                return Object.assign({}, bundle, { migrated: true })
+                            }
 
-                        return bundle
+                            return bundle
+                        })
                     })
-                })
 
-                // Persist these bundles in local storage
-                const _activeProfile = get(activeProfile)
+                    // Persist these bundles in local storage
+                    const _activeProfile = get(activeProfile)
 
-                const migratedTransaction = {
-                    address: response.payload.address,
-                    balance: response.payload.value,
-                    tailTransactionHash: response.payload.tailTransactionHash,
-                    timestamp: new Date().toISOString(),
-                    // Account index. Since we migrate funds to account at 0th index
-                    account: 0
-                }
+                    const migratedTransaction = {
+                        address: response.payload.address,
+                        balance: response.payload.value,
+                        tailTransactionHash: response.payload.tailTransactionHash,
+                        timestamp: new Date().toISOString(),
+                        // Account index. Since we migrate funds to account at 0th index
+                        account: 0
+                    }
 
-                updateProfile(
-                    'migratedTransactions',
-                    _activeProfile.migratedTransactions ? [..._activeProfile.migratedTransactions, migratedTransaction] : [migratedTransaction]
-                )
-                resolve()
-            },
-            onError(error) {
-                reject(error)
-            },
-        })
+                    updateProfile(
+                        'migratedTransactions',
+                        _activeProfile.migratedTransactions ? [..._activeProfile.migratedTransactions, migratedTransaction] : [migratedTransaction]
+                    )
+                    resolve()
+                },
+                onError(error) {
+                    reject(error)
+                },
+            })
+        }
     })
 }
 
@@ -570,22 +594,20 @@ export const confirmedBundles = derived(get(migration).bundles, (_bundles) => _b
  */
 // TODO: Update to mainnet chrysalis endpoint
 export const CHRYSALIS_NODE_ENDPOINTS = ['https://api.lb-0.migration4.iotatestmigration4.net/api/v1/info']
-
 /**
 * Default timeout for a request made to an endpoint
 */
 const DEFAULT_CHRYSALIS_NODE_ENDPOINT_TIMEOUT = 5000
+/**
+ * Default interval for polling the market data
+ */
+const DEFAULT_CHRYSALIS_NODE_POLL_INTERVAL = 300000 // 5 minutes
 
 /**
 * Mainnet ID used in a chrysalis node 
 */
 // TODO: Update to 'mainnet'
 const MAINNET_ID = 'migration4'
-
-/**
- * Default interval for polling the market data
- */
-const DEFAULT_CHRYSALIS_NODE_POLL_INTERVAL = 300000 // 5 minutes
 
 type ChrysalisNode = {
     data: ChrysalisNodeData
@@ -613,7 +635,7 @@ export async function pollChrysalisStatus(): Promise<void> {
 /**
  * Stops Chrysalis mainnet poll
  */
-function stopPoll(): void {
+function stopChrysalisStatusPoll(): void {
     if (chrysalisStatusIntervalID) {
         clearInterval(chrysalisStatusIntervalID)
     }
@@ -660,7 +682,7 @@ export async function checkChrysalisStatus(): Promise<void> {
                 const nodeData: ChrysalisNodeData = jsonResponse?.data
                 if (nodeData?.networkId === MAINNET_ID) {
                     chrysalisLive.set(true)
-                    stopPoll()
+                    stopChrysalisStatusPoll()
                     break
                 }
             } else {
@@ -671,6 +693,110 @@ export async function checkChrysalisStatus(): Promise<void> {
             console.error(err.name === "AbortError" ? new Error(`Could not fetch from ${endpoint}.`) : err)
         }
     }
+}
+
+const CHRYSALIS_VARIABLES_ENDPOINT = 'https://github.com/iotaledger/firefly/tree/develop/packages/shared/lib/chrysalis.json'
+const DEFAULT_CHRYSALIS_VARIABLES_ENDPOINT_TIMEOUT = 5000
+const DEFAULT_CHRYSALIS_VARIABLES_POLL_INTERVAL = 60000 // 1 minute
+
+type ChrysalisVariables = {
+    snapshot: boolean
+}
+
+export type ChrysalisVariablesValidationResponse = {
+    type: 'ChrysalisVariables'
+    payload: ChrysalisVariables
+}
+
+let snapshotIntervalID = null
+
+/**
+ * Fetches Chrysalis snapshot state
+ *
+ * @method checkChrysalisSnapshot
+ *
+ * @param {boolean} stopPoll if true it will automatically stop the interval when the snapshot is over
+ *
+ * @returns {Promise<void>}
+ */
+export async function checkChrysalisSnapshot(stopPoll: boolean = true): Promise<void> {
+    const requestOptions: RequestInit = {
+        headers: {
+            Accept: 'application/json',
+        },
+    }
+    const endpoint = CHRYSALIS_VARIABLES_ENDPOINT
+    try {
+        const abortController = new AbortController()
+        const timerId = setTimeout(
+            () => {
+                if (abortController) {
+                    abortController.abort();
+                }
+            },
+            DEFAULT_CHRYSALIS_VARIABLES_ENDPOINT_TIMEOUT);
+
+        requestOptions.signal = abortController.signal;
+
+        const response = await fetch(endpoint, requestOptions);
+
+        clearTimeout(timerId)
+
+        const jsonResponse: ChrysalisVariables = await response.json()
+
+        const { isValid, payload } = new Validator().performValidation({
+            type: 'ChrysalisVariables',
+            payload: jsonResponse,
+        })
+        if (isValid) {
+            const _ongoingSnapshot = jsonResponse.snapshot
+            if (get(ongoingSnapshot) === true && _ongoingSnapshot === false) { // snapshot finished
+                closePopup()
+                if (stopPoll) {
+                    stopChrysalisSnapshotPoll()
+                }
+            }
+            else if (get(ongoingSnapshot) === false && _ongoingSnapshot === true) { // snapshot started
+                openSnapshotPopup()
+                if (!snapshotIntervalID) { // if there is no polling active, activate it
+                    pollChrysalisSnapshot()
+                }
+            }
+            ongoingSnapshot.set(_ongoingSnapshot)
+        } else {
+            throw new Error(payload.error)
+        }
+    } catch (err) {
+        console.error(err.name === "AbortError" ? new Error(`Could not fetch from ${endpoint}.`) : err)
+    }
+}
+
+/**
+ * Poll the Chrysalis snapshot state at an interval
+ */
+export async function pollChrysalisSnapshot(stopPoll: boolean = true): Promise<void> {
+    await checkChrysalisSnapshot()
+    snapshotIntervalID = setInterval(async () => checkChrysalisSnapshot(stopPoll), DEFAULT_CHRYSALIS_VARIABLES_POLL_INTERVAL)
+}
+
+/**
+ * Stops Chrysalis snapshot state poll
+ */
+export function stopChrysalisSnapshotPoll(): void {
+    if (snapshotIntervalID) {
+        clearInterval(snapshotIntervalID)
+        snapshotIntervalID = null
+    }
+}
+
+export function openSnapshotPopup(): void {
+    openPopup({
+        type: 'snapshot',
+        hideClose: true,
+        props: {
+            dashboard: get(appRoute) === AppRoute.Dashboard
+        }
+    })
 }
 
 /**
