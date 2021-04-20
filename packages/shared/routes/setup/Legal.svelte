@@ -48,7 +48,7 @@
             </Button>
         </div>
         <div slot="rightpane" class="w-full h-full flex items-center px-40 py-20">
-            <div class="block relative max-h-full overflow-y-auto w-full text-justify pr-10">
+            <div class="block relative max-h-full overflow-y-auto w-full text-justify pr-10 scroll-quaternary">
                 <div class="mb-8">
                     <Text type="h1" classes="mb-5">Conditions of Use for the Firefly App</Text>
 
