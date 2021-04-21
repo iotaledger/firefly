@@ -1608,12 +1608,30 @@ export const findAccountWithAddress = (address: string): WalletAccount | undefin
 /**
  * Find an address in one of our accounts
  * @param addresses The addresses to find
+ * @param excludeFirst A wallet to exclude on first pass
  * @returns The wallet account matching the address or undefined if not found
  */
- export const findAccountWithAnyAddress = (addresses: string[]): WalletAccount | undefined => {
+ export const findAccountWithAnyAddress = (addresses: string[], excludeFirst?: WalletAccount): WalletAccount | undefined => {
     if (!addresses || addresses.length === 0) {
         return
     }
-    const accounts = get(get(wallet).accounts)
-    return accounts.find((acc) => acc.addresses.some((add) => addresses.includes(add.address)))
+    let accounts = get(get(wallet).accounts)
+
+    let res = accounts.filter((acc) => acc.addresses.some((add) => addresses.includes(add.address)))
+
+    if (res.length > 0) {
+        if (excludeFirst) {
+            const initialLen = res.length
+            res = res.filter(a => a.id !== excludeFirst.id)
+            // If the length changed we removed it, so put it back
+            // at the end
+            if (res.length !== initialLen) {
+                res.push(excludeFirst)
+            }
+        }
+
+        if (res.length > 0) {
+            return res[0]
+        }
+    }
 }
