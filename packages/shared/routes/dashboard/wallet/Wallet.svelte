@@ -3,7 +3,6 @@
     import { clearSendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
     import { addProfileCurrencyPriceData, priceData } from 'shared/lib/marketData'
-    import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
     import { activeProfile, isStrongholdLocked, MigratedTransaction, updateProfile } from 'shared/lib/profile'
@@ -399,9 +398,6 @@
     }
 
     function onSend(senderAccountId, receiveAddress, amount) {
-        if (get(ongoingSnapshot) === true) {
-            return openSnapshotPopup()
-        }
         const _send = () => {
             isTransferring.set(true)
             api.send(
