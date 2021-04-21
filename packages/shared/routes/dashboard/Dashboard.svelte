@@ -4,7 +4,7 @@
     import { appSettings } from 'shared/lib/appSettings'
     import { deepLinkRequestActive } from 'shared/lib/deepLinking'
     import { Electron } from 'shared/lib/electron'
-    import { chrysalisLive, pollChrysalisStatus, pollChrysalisSnapshot, stopChrysalisSnapshotPoll } from 'shared/lib/migration'
+    import { chrysalisLive, ongoingSnapshot, openSnapshotPopup, pollChrysalisStatus } from 'shared/lib/migration'
     import { NOTIFICATION_TIMEOUT_NEVER, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { activeProfile } from 'shared/lib/profile'
@@ -30,6 +30,12 @@
     let chrysalisStatusUnsubscribe
     let busy
     let migrationNotificationId
+
+    ongoingSnapshot.subscribe((os) => {
+        if (os) {
+            openSnapshotPopup()
+        }
+    });
 
     onMount(async () => {
         api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
@@ -70,7 +76,6 @@
         if (migrationNotificationId) {
             removeDisplayNotification(migrationNotificationId)
         }
-        stopChrysalisSnapshotPoll()
     })
 
     // TODO: re-enable deep links
@@ -136,8 +141,6 @@
         if (get(activeProfile)?.migratedTransactions?.length) {
             handleChrysalisStatusNotifications()
         }
-        // Chrysalis Snapshot Check
-        pollChrysalisSnapshot(false)
     }
     $: if ($activeProfile) {
         if (!get(activeProfile)?.migratedTransactions?.length && migrationNotificationId) {
