@@ -2,7 +2,7 @@
     "views": {
         "onboarding1": {
             "title": "Wysyłaj, odbieraj i zarządzaj swoimi tokenami IOTA",
-            "body": "Firefly jest oficjalnym portfelem programowym IOTA."
+            "body": "Firefly jest oficjalnym oprogramowaniem portfela IOTA."
         },
         "legal": {
             "title": "Polityka prywatności i Warunki świadczenia usług",
@@ -15,8 +15,8 @@
         },
         "profile": {
             "title": "Utwórz profil",
-            "body1": "Możesz stworzyć wiele profili użytkownika, aby rozdzielić swoje portfele i zwiększyć swoją prywatność.",
-            "body2": "Na razie zacznijmy od Twojej pierwszej nazwy profilu. Będziesz mógł dodać więcej profili później.",
+            "body1": "Możesz tworzyć wiele profili użytkownika w celu organizacji swoich portfeli i zwiększenia prywatności.",
+            "body2": "Zacznijmy od Twojej pierwszej nazwy profilu. Później będziesz mógł dodać większą liczbę profili.",
             "profileName": "Nazwa profilu"
         },
         "setup": {
@@ -27,12 +27,12 @@
         },
         "secure": {
             "title": "Zabezpiecz swój portfel",
-            "body1": "Zapisz i wydrukuj szablon odzyskiwania PDF.",
+            "body1": "Zapisz oraz wydrukuj szablon odzyskiwania PDF.",
             "body2": "Jeśli wypełnisz szablon odzyskiwania i będziesz przechowywać go bezpiecznie, zawsze będziesz w stanie odzyskać swoje portfele."
         },
         "password": {
             "title": "Utwórz hasło",
-            "body1": "Potrzebujesz silnego hasła, aby chronić swoje środki. Użyj kombinacji słów i unikaj powszechnych zwrotów, nazw lub dat.",
+            "body1": "Potrzebujesz silnego hasła, aby chronić swoje środki. Użyj kombinacji słów oraz unikaj używania powszechnych zwrotów, nazw lub dat.",
             "body2": "Zaleca się zapisanie hasła w swoim szablonie odzyskiwania."
         },
         "protect": {
@@ -47,37 +47,37 @@
         },
         "confirmPin": {
             "title": "Zweryfikuj swój kod PIN",
-            "body1": "Twój PIN zachowuje Twoje saldo oraz transakcje w ukryciu.",
+            "body1": "Twój PIN zabezpiecza Twoje środki oraz transakcje.",
             "body2": "Wprowadź kod PIN ponownie, aby kontynuować. "
         },
         "backup": {
             "title": "Utwórz kopię zapasową portfela",
             "body1": "W następnym oknie zobaczysz wyrazy ratunkowe. Zapisz je w swoim szablonie odzyskiwania.",
-            "body2": "Nie udostępniaj swoich wyrazów ratunkowych nikomu. Mogą być one użyte do uzyskania dostępu do Twoich środków z dowolnego miejsca.",
-            "body3": "Jeśli stracisz swoje wyrazy ratunkowe, możesz stracić swoje środki."
+            "body2": "Nie udostępniaj swoich wyrazów ratunkowych nikomu. Mogą być one użyte w celu uzyskania dostępu do Twoich środków z dowolnego miejsca.",
+            "body3": "Jeśli stracisz swoje wyrazy ratunkowe, narazisz się na utratę swoich środków."
         },
         "recoveryPhrase": {
             "title": "Wyrazy ratunkowe",
             "body1": "Słowa w Twoim szablonie odzyskiwania muszą być zapisane w dokładnie ukazanej kolejności.",
             "body2": "Zachowaj te wyrazy dla siebie i bezpiecznie je przechowuj.",
-            "body3": "Kopia zapasowa na piśmie jest bardzo ważna. Komputery często zawodzą, a pliki mogą ulegać uszkodzeniu.",
+            "body3": "Fizyczna (pisemna) kopia zapasowa jest bardzo ważna. Komputery często zawodzą, a pliki mogą ulec uszkodzeniu.",
             "revealRecoveryPhrase": "Pokaż wyrazy ratunkowe",
             "hideRecoveryPhrase": "Ukryj wyrazy ratunkowe"
         },
         "verifyRecoveryPhrase": {
             "title": "Zweryfikuj wyrazy ratunkowe",
-            "body": "Sprawdźmy, czy zapisałeś wyrazy poprawnie. Wybierz słowa w odpowiedniej kolejności.",
+            "body": "Sprawdźmy, czy zapisałeś wszystkie wyrazy poprawnie. Przyporządkuj zapisane słowa do podanej kolejności.",
             "word": "Słowo",
             "verified": "Wyrazy ratunkowe zostały zweryfikowane",
-            "verifiedBody": "Pamiętaj, aby zatrzymać ją dla siebie oraz w bezpiecznym miejscu."
+            "verifiedBody": "Pamiętaj, aby zachować te wyrazy wyłącznie dla siebie oraz przechowywać je w bezpiecznym miejscu."
         },
         "backupWallet": {
             "title": "Kopia zapasowa do pliku Stronghold",
-            "body1": "Wprowadź hasło, aby utworzyć kopię zapasową portfeli do pliku Stronghold. Twoje hasło jest używane do szyfrowania kopii zapasowej.",
+            "body1": "Wprowadź swoje hasło, aby utworzyć kopię zapasową portfeli do pliku Stronghold. Twoje hasło jest używane do szyfrowania kopii zapasowych.",
             "body2": "Powody, dla których cyfrowe kopie zapasowe są ważne:",
             "reason1": "Łatwe odzyskiwanie portfeli bez wpisywania wyrazów ratunkowych",
-            "reason2": "Import your wallets on other devices",
-            "reason3": "Odzyskiwanie pełnej historii transakcji"
+            "reason2": "Możliwość importu swoich portfeli do innych urządzeń",
+            "reason3": "Zachowanie pełnych historii transakcji"
         },
         "recoveryPhraseSaved": {
             "title": "Pomyślnie utworzono kopię zapasową",
@@ -85,30 +85,30 @@
         },
         "congratulations": {
             "title": "Konfiguracja portfela zakończona",
-            "body": "Twój nowy portfel jest gotowy do użycia.",
+            "body": "Twój nowy portfel jest już gotowy do użycia.",
             "fundsMigrated": "Środki zostały przeniesione",
-            "success": "Pomyślnie przeniosłeś środki do nowej sieci",
+            "success": "Twoje środki zostały pomyślnie przeniesione do nowej sieci",
             "exportMigration": "Eksportuj dziennik migracji i zakończ konfigurację"
         },
         "import": {
             "title": "Odzyskaj lub migruj środki",
-            "body": "Jeśli posiadasz istniejący klucz seed lub plik kopii zapasowej portfela, możesz go zaimportować tutaj. Jeśli posiadasz środki w starszej sieci IOTA, zostaniesz przeprowadzony przez migrację do sieci Chrysalis.",
+            "body": "Jeśli posiadasz już klucz seed lub plik kopii zapasowej portfela, możesz zaimportować go tutaj. Jeśli posiadasz środki w starszej sieci IOTA, zostaniesz przeprowadzony przez proces migracji środków do sieci Chrysalis.",
             "importSeed": "Mam klucz seed (81 znaków)",
             "importSeedDescription": "Wprowadź seed i migruj środki do Chrysalis",
             "importMnemonic": "Mam wyrazy ratunkowe z Firefly",
-            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
+            "importMnemonicDescription": "Wprowadź wyrazy ratunkowe, aby przywrócić swoje portfele",
             "importFile": "Mam plik kopii zapasowej",
             "importFileDescription": "Prześlij plik Seedvault lub Stronghold"
         },
         "importFromText": {
             "seed": {
                 "title": "Wpisz swój seed aby rozpocząć migrację",
-                "body": "Seed składa się z 81 znaków. Jest on używany do odzyskiwania danych ze starszej aplikacji Trinity.",
+                "body": "Klucz seed składa się z 81 znaków. Jest on używany do odzyskiwania danych ze starszej aplikacji Trinity.",
                 "enter": "Wprowadź swój seed"
             },
             "mnemonic": {
                 "title": "Wpisz swoje wyrazy ratunkowe",
-                "body": "Wyrazy ratunkowe składają się z 24 słów pisanych małymi literami oraz oddzielonych od siebie spacją. Są one używane do odzyskania istniejących portfeli Firefly.",
+                "body": "Wyrazy ratunkowe składają się z 24 słów pisanych małymi literami oraz oddzielonych od siebie spacją. Są one używane w celu odzyskania istniejących portfeli Firefly.",
                 "enter": "Wprowadź swoje tajne wyrazy odzyskiwania"
             },
             "seedDetected": "Wykryto seed o długości 81 znaków",
@@ -122,7 +122,7 @@
         "importBackupPassword": {
             "title": "Przywróć swój portfel za pomocą SeedVault lub Stronghold",
             "body1": "Wprowadź hasło kopii zapasowej.",
-            "body2": "To jest hasło, które ustawiłeś podczas tworzenia kopii zapasowej."
+            "body2": "To jest hasło, które ustawiłeś w przeszłości podczas tworzenia tego konkretnego pliku kopii zapasowej."
         },
         "importSuccess": {
             "title": "Pomyślnie odzyskałeś kopię zapasową",
@@ -134,8 +134,8 @@
         },
         "migrate": {
             "title": "Migruj swoje środki",
-            "body1": "Jest to automatyczny proces transferu Twoich środków do nowego portfela.",
-            "body2": "Może to zająć trochę czasu. Nie wyłączaj urządzenia podczas migracji.",
+            "body1": "Migracja jest automatycznym procesem transferu Twoich środków do Twojego nowego portfela.",
+            "body2": "Ten proces może zająć trochę czasu. Nie wyłączaj urządzenia na czas migracji.",
             "existing": "Twój stary portfel",
             "new": "Twój nowy portfel",
             "learn": "Dowiedz się więcej o migracji",
@@ -147,6 +147,7 @@
             "restoringWallet": "Przywracanie portfela...",
             "findingBalance": "Wyszukiwanie środków...",
             "incorrectSeedVaultPassword": "Nieprawidłowe hasło SeedVault.",
+            "noDataSeedVault": "No data could be found in the SeedVault.",
             "signingBundle": "Podpisywanie pakietu",
             "broadcastingBundle": "Nadawanie pakietu",
             "miningBundle": "Wydobywanie pakietu",
@@ -193,15 +194,15 @@
         },
         "balance": {
             "title": "Twoje saldo",
-            "body": "Upewnij się, że Twoje saldo jest poprawne zanim przejdziesz dalej. Możesz wykonać ponowne sprawdzenie środków, jeśli suma się nie zgadza.",
+            "body": "Zanim przejdziesz dalej, upewnij się, że Twoje saldo jest poprawne. Jeśli coś się nie zgadza, możesz wykonać ponowne sprawdzenie środków.",
             "error": "Minimalna kwota migracji wynosi 1 Mi. Sprawdź ponownie, jeśli Twoje saldo nie wygląda prawidłowo.",
-            "zeroBalance": "Spróbuj sprawdzić ponownie. Jeśli nadal nie możesz znaleźć swojego salda, mogłeś wprowadzić seed nieprawidłowo."
+            "zeroBalance": "Spróbuj sprawdzić środki jeszcze raz. Jeśli saldo nadal jest nieprawidłowe, być może wprowadziłeś błędny klucz seed."
         },
         "settings": {
             "settings": "Ustawienia",
             "generalSettings": {
                 "title": "Ustawienia ogólne",
-                "description": "Skonfiguruj wygląd aplikacji i inne ustawienia ogólne"
+                "description": "Skonfiguruj wygląd aplikacji oraz inne ustawienia ogólne"
             },
             "security": {
                 "title": "Bezpieczeństwo",
@@ -233,7 +234,7 @@
             },
             "currency": {
                 "title": "Waluta",
-                "description": "Dostosuj kurs przeliczeniowy i opcje wykresu"
+                "description": "Dostosuj kurs przeliczeniowy oraz opcje wykresu"
             },
             "notifications": {
                 "title": "Powiadomienia",
@@ -241,11 +242,13 @@
             },
             "exportStronghold": {
                 "title": "Eksportuj kopię zapasową",
-                "description": "Eksportuj do pliku Stronghold - kompletna zaszyfrowana kopia zapasowa portfeli wraz z ostatnią historią transakcji."
+                "description": "Eksport do pliku Stronghold - kompletna zaszyfrowana kopia zapasowa portfeli wraz z ostatnią historią transakcji."
             },
             "appLock": {
                 "title": "Automatyczna blokada ekranu",
-                "description": "Czas bezczynności przed zablokowaniem aplikacji i wylogowaniem z portfeli"
+                "description": "Czas bezczynności przed zablokowaniem ekranu aplikacji i wylogowaniem z portfeli",
+                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
+                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
                 "title": "Zmiana hasła",
@@ -253,7 +256,7 @@
             },
             "changePincode": {
                 "title": "Zmiana kodu PIN",
-                "description": "Twój PIN zachowuje Twoje saldo oraz transakcje w ukryciu",
+                "description": "Twój PIN zabezpiecza Twoje środki oraz transakcje",
                 "currentPincode": "Aktualny PIN",
                 "newPincode": "Nowy PIN",
                 "confirmNewPincode": "Potwierdź nowy PIN",
@@ -269,7 +272,7 @@
             },
             "deleteProfile": {
                 "title": "Usuwanie profilu",
-                "description": "Usuwa cały Twój profil, portfele i historię transakcji. Upewnij się, że masz kopię zapasową."
+                "description": "Ta opcja usuwa cały Twój profil, portfele oraz historie transakcji. Upewnij się, że posiadasz kopię zapasową."
             },
             "deepLinks": {
                 "title": "Deep linki",
@@ -368,7 +371,7 @@
                 "networkDown": "Brak dostępu do sieci",
                 "status": "Status",
                 "messagesPerSecond": "Wiadomości na sekundę",
-                "confirmationRate": "Współczynnik potwierdzeń"
+                "confirmationRate": "Potwierdzenia"
             },
             "profileModal": {
                 "allSettings": "Wszystkie ustawienia",
@@ -380,7 +383,7 @@
         "password": {
             "title": "Hasło wymagane",
             "subtitle": "Wprowadź swoje hasło, aby odblokować portfele",
-            "backup": "Wprowadź swoje hasło, aby wyeksportować kopię zapasową"
+            "backup": "Wprowadź swoje hasło, aby eksportować kopię zapasową"
         },
         "qr": {
             "title": "Twój kod QR"
@@ -396,15 +399,15 @@
         "backup": {
             "title": "Ostatnia kopia zapasowa: {date}",
             "lastBackup": "Ostatnia kopia została wykonana {date}",
-            "backupDescription": "Ważne jest regularne tworzenie kopii zapasowych, aby być pewnym, że posiada się kopię swoich portfeli i historii transakcji.",
-            "backupWarning": "Jeśli utracisz swoją kopię zapasową oraz wyrazy ratunkowe, stracisz dostęp do swoich środków.",
+            "backupDescription": "Ważne jest, aby regularnie wykonywać kopie zapasowe. Będziemy mieć wtedy pewność co do swoich portfeli oraz historii transakcji.",
+            "backupWarning": "Jeśli utracisz swoją kopię zapasową i wyrazy ratunkowe, stracisz dostęp do swoich środków.",
             "notBackedUp": "Nie wykonano kopii zapasowej",
             "notBackedUpDescription": "Nie wykonałeś kopii zapasowej swoich portfeli",
             "saving": "Zapisywanie..."
         },
         "deleteAccount": {
             "title": "Usunąć {name}?",
-            "body": "Ten portfel nie ma historii transakcji. Można go bezpiecznie usunąć.",
+            "body": "Ten portfel nie ma historii transakcji. Można go więc bezpiecznie usunąć.",
             "typePassword": "Wpisz hasło portfela, aby potwierdzić.",
             "hideAccount": "Usuń portfel",
             "errorTitle": "Nie można usunąć {name}",
@@ -415,13 +418,13 @@
             "body": "Portfel można odkryć później poprzez włączenie opcji \"Pokaż ukryte portfele\" w ustawieniach zaawansowanych.",
             "typePassword": "Wpisz hasło portfela, aby potwierdzić.",
             "hideAccount": "Ukryj portfel",
-            "errorTitle": "Nie można ukryć konta {name}",
+            "errorTitle": "Nie można ukryć portfela {name}",
             "errorBody1": "Aby ukryć portfel, jego saldo musi wynosić 0.",
-            "errorBody2": "Posiadasz obecnie {balance} na tym portfelu. Przenieś te środki na inny portfel i spróbuj ponownie.",
+            "errorBody2": "Obecnie posiadasz {balance} na tym portfelu. Przenieś te środki na inny portfel i spróbuj ponownie.",
             "errorBody3": "Nie możesz ukryć tego portfela. Co najmniej jeden portfel musi pozostać aktywny."
         },
         "addressHistory": {
-            "title": "Historia adresów dla konta {name}",
+            "title": "Historia adresów dla portfela {name}",
             "currentBalance": "Aktualne saldo: {balance}"
         },
         "node": {
@@ -448,10 +451,10 @@
             "title": "Diagnostyka",
             "node": "Serwer",
             "platform": "Platforma",
-            "platformVersion": "Wersja platformy",
-            "platformArchitecture": "Architektura platformy",
+            "platformVersion": "Wersja systemu",
+            "platformArchitecture": "Architektura systemu",
             "cpuCount": "Liczba procesorów",
-            "totalMem": "Pamięć calkowita",
+            "totalMem": "Pamięć całkowita",
             "freeMem": "Wolna pamięć",
             "userPath": "Ścieżka użytkownika"
         },
@@ -461,8 +464,8 @@
         },
         "balanceFinder": {
             "title": "Wyszukiwarka środków",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
-            "totalWalletBalance": "Total balance",
+            "body": "Wykonaj bardziej dogłębne wyszukiwanie adresów w celu znalezienia brakujących środków. To może chwilę potrwać.",
+            "totalWalletBalance": "Wszystkie środki",
             "typePassword": "Wpisz hasło, aby umożliwić wyszukiwanie."
         },
         "riskFunds": {
@@ -472,7 +475,7 @@
         },
         "missingBundle": {
             "title": "Ostrzeżenie: fundusze zagrożone podczas migracji",
-            "body": "Masz środki na zużytych adresach, ale nie znaleziono informacji potrzebnych do ich zabezpieczenia. Może się to zdarzyć, jeśli dokonywałeś transakcji dawno temu. Możesz kontynuować, ale {value} jest zagrożone podczas migracji.",
+            "body": "Masz środki na zużytych adresach, ale nie znaleziono informacji potrzebnych do ich zabezpieczenia. Może się to zdarzyć, jeśli dokonywałeś transakcji dawno temu. Możesz kontynuować, ale {value} będzie zagrożone podczas migracji.",
             "learnMore": "Dowiedz się więcej o zużytych adresach",
             "proceed": "Rozumiem ryzyko"
         },
@@ -505,9 +508,9 @@
         "save": "Zapisz",
         "importSeed": "Importuj istniejący klucz seed",
         "restoreWallet": "Migruj lub przywróć portfel",
-        "restoreWalletDescription": "Migracja do Chrysalis lub przywrócenie istniejącego portfela",
+        "restoreWalletDescription": "Migracja do sieci Chrysalis lub przywrócenie istniejącego portfela",
         "createWallet": "Stwórz nowy portfel",
-        "createWalletDescription": "Utwórz nowy portfel w sieci Chrysalis",
+        "createWalletDescription": "Utwórz nowy portfel działający w sieci Chrysalis",
         "savePassword": "Zapisz hasło",
         "useBiometric": "Użyj zabezpieczeń biometrycznych",
         "setupPin": "Ustaw kod PIN",
@@ -533,16 +536,16 @@
         "dropHere": "Upuść plik tutaj",
         "syncAll": "Synchronizuj wszystko",
         "export": "Eksportuj",
-        "exportNewStronghold": "Eksportuj nowy Stronghold",
+        "exportNewStronghold": "Eksportuj zaktualizowany plik Stronghold",
         "enableDeepLinks": "Włącz deep linki",
         "enableDeveloperMode": "Włącz tryb deweloperski",
-        "enableSystemNotifications": "Włącz powiadomienia",
+        "enableSystemNotifications": "Włącz powiadomienia systemowe",
         "exportState": "Eksportuj stan",
         "localProofOfWork": "Lokalny proof of work",
         "unlock": "Odblokuj",
         "updateFirefly": "Zaktualizuj Firefly",
         "restartNow": "Uruchom ponownie teraz",
-        "saveBackup": "Zapisz kopię zapasową Stronghold",
+        "saveBackup": "Zapisz kopię Stronghold",
         "customizeAcount": "Dostosuj portfel",
         "viewAddressHistory": "Pokaż historię adresów",
         "hideAccount": "Ukryj portfel",
@@ -651,12 +654,12 @@
         "help": "Pomoc",
         "you": "Ty",
         "messageId": "ID wiadomości",
-        "inputAddress": "Adresy wysyłki",
+        "inputAddress": "Adres nadawczy",
         "receiveAddress": "Adres odbiorczy",
         "date": "Data",
         "status": "Status",
         "confirmed": "Potwierdzono",
-        "pending": "W toku",
+        "pending": "Przetwarzanie",
         "noAccounts": "Nie posiadasz żadnego portfela, proszę utwórz jeden.",
         "loadingAccounts": "Wczytywanie, proszę czekać...",
         "addProfile": "Dodaj profil",
@@ -683,21 +686,22 @@
         "pinCodeUpdating": "Aktualizacja kodu PIN...",
         "pinCodeSuccess": "Kod PIN zaktualizowany pomyślnie",
         "pinCodeFailed": "Aktualizacja kodu PIN nie powiodła się",
-        "passwordStrength": "Siła hasła",
-        "passwordStrength0": "Nieodpowiednia",
-        "passwordStrength1": "Bardzo słaba",
-        "passwordStrength2": "Słaba",
-        "passwordStrength3": "Wystarczająca",
-        "passwordStrength4": "Silna",
+        "passwordStrength": "Poziom hasła",
+        "passwordStrength0": "Nieodpowiednie",
+        "passwordStrength1": "Bardzo słabe",
+        "passwordStrength2": "Słabe",
+        "passwordStrength3": "Średnie",
+        "passwordStrength4": "Mocne",
         "creatingProfile": "Tworzenie profilu, proszę czekać...",
         "fundMigration": "Migracja środków",
         "accountRemoved": "Ten portfel jest ukryty. Odkryj go, aby wykonywać transfery.",
-        "receivingTo": "Odbieranie na konto {account}",
-        "sendingFrom": "Wysyłanie z konta {account}",
-        "receivedTo": "Odebrano na konto {account}",
-        "sentFrom": "Wysłano z konta {account}",
+        "receivingTo": "Odbieranie na portfel {account}",
+        "sendingFrom": "Wysyłanie z portfela {account}",
+        "receivedTo": "Odebrano na portfel {account}",
+        "sentFrom": "Wysłano z portfela {account}",
         "receiving": "Odbieranie",
-        "sending": "Wysyłanie"
+        "sending": "Wysyłanie",
+        "legacyNetwork": "Legacy Network"
     },
     "dates": {
         "today": "Dzisiaj",
@@ -708,11 +712,11 @@
         "yearsAgo": "{time, plural, one {# rok} few {# lata} many {# lat} other {# lat}} temu"
     },
     "notifications": {
-        "valueTx": "Odbieranie {{value}} na konto {{account}}",
-        "confirmed": "Transakcja wychodząca {{value}} z konta {{account}} została potwierdzona",
-        "confirmedInternal": "Transfer {{value}} z konta {{senderAccount}} na konto {{receiverAccount}} został potwierdzony",
+        "valueTx": "Odbieranie {{value}} na portfel {{account}}",
+        "confirmed": "Transakcja wychodząca {{value}} z portfela {{account}} została potwierdzona",
+        "confirmedInternal": "Transfer {{value}} z portfela {{senderAccount}} na portfel {{receiverAccount}} został potwierdzony",
         "confirmedInternalNoAccounts": "{{value}} wewnętrzny transfer został potwierdzony",
-        "failed": "Wysyłka {{value}} z konta {{account}} nie powiodła się",
+        "failed": "Wysyłka {{value}} z portfela {{account}} nie powiodła się",
         "downloadingUpdate": "Pobieranie aktualizacji",
         "updateReady": "Aktualizacja jest gotowa",
         "updateError": "Podczas aktualizacji wystąpił błąd, spróbuj ponownie",
@@ -753,7 +757,7 @@
         },
         "account": {
             "length": "Nazwa Twojego portfela nie może być dłuższa niż {length, plural, one {1 znak} few {# znaki} many {# znaków} other {# znaków}}.",
-            "empty": "Musisz skorzystać ze swojego ostatniego portfela przed utworzeniem nowego.",
+            "empty": "Przed utworzeniem nowego portfela musisz skorzystać z poprzedniego.",
             "notEmpty": "Musisz przenieść swoje środki przed usunięciem tego portfela.",
             "duplicate": "Portfel o tej nazwie już istnieje.",
             "tilde": "Nazwa profilu nie może zaczynać się od znaku '~'.",
@@ -788,7 +792,7 @@
         "backup": {
             "invalid": "Plik kopii zapasowej nie został rozpoznany.",
             "destination": "Miejsce docelowe kopii zapasowej nie jest prawidłowe.",
-            "mnemonic": "Mnemonik jest nieprawidłowy.",
+            "mnemonic": "Błąd w wyrazach ratunkowych.",
             "seedTooShort": "Seed powinien składać się z 81 znaków, ten ma {length, plural, one {1 znak} few {# znaki} many {# znaków} other {to #}}",
             "seedCharacters": "Seed może składać się tylko z liter A-Z oraz cyfr 9",
             "phraseWordCount": "Wyrazy ratunkowe składają się z 24 słów. Aktualnie jest {length, plural, one {ono 1} few {ich #} many {ich #} other {ich #}}.",

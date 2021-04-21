@@ -147,6 +147,7 @@
             "restoringWallet": "استعادة المحفظة...",
             "findingBalance": "العثور على الرصيد...",
             "incorrectSeedVaultPassword": "كلمة المرور غير صحيحة.",
+            "noDataSeedVault": "No data could be found in the SeedVault.",
             "signingBundle": "حزمة التوقيع",
             "broadcastingBundle": "حزمة البث",
             "miningBundle": "Mining bundle",
@@ -245,7 +246,9 @@
             },
             "appLock": {
                 "title": "قفل تلقائي",
-                "description": "Inactivity time before your wallets lock and you are logged out"
+                "description": "Inactivity time before your wallets lock and you are logged out",
+                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
+                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
                 "title": "تغيير كلمة المرور",
@@ -697,7 +700,8 @@
         "receivedTo": "Received to {account}",
         "sentFrom": "Sent from {account}",
         "receiving": "Receiving",
-        "sending": "Sending"
+        "sending": "Sending",
+        "legacyNetwork": "Legacy Network"
     },
     "dates": {
         "today": "اليوم",

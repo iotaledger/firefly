@@ -2,7 +2,7 @@
     "views": {
         "onboarding1": {
             "title": "Gửi, Nhận và Lưu giữ IOTA của bạn",
-            "body": "Firefly is the official wallet software of IOTA."
+            "body": "Firefly là phần mềm ví chính thức của IOTA."
         },
         "legal": {
             "title": "Chính sách Riêng tư & Điều khoản Dịch vụ",
@@ -11,64 +11,64 @@
         },
         "appearance": {
             "title": "Giao diện",
-            "body": "Choose your app theme."
+            "body": "Chọn chủ đề cho ứng dụng của bạn."
         },
         "profile": {
-            "title": "Create a profile",
-            "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
-            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
-            "profileName": "Profile Name"
+            "title": "Tạo một hồ sơ",
+            "body1": "Bạn có thể tạo nhiều hồ sơ người dùng để giữ các mã token của bạn riêng biệt và cải thiện quyền riêng tư.",
+            "body2": "Bây giờ, hãy bắt đầu với tên hồ sơ đầu tiên của bạn. Bạn có thể thêm nhiều hồ sơ sau này.",
+            "profileName": "Tên hồ sơ"
         },
         "setup": {
-            "title": "Set up a wallet",
-            "chrysalisTitle": "Chrysalis Network Update",
-            "chrysalisBody": "From April 21st, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
-            "learnMore": "Learn about the migration"
+            "title": "Thiết lập một ví",
+            "chrysalisTitle": "Cập nhật mạng lưới Chrysalis",
+            "chrysalisBody": "Từ ngày 21/4, người dùng có thể di chuyển token của họ sang mạng lưới mới Chrysalis. Chúng tôi khuyên bạn hãy di chuyển token của bạn sớm nhất có thể.",
+            "learnMore": "Tìm hiểu về quá trình di chuyển token"
         },
         "secure": {
             "title": "Bảo mật ví của bạn",
             "body1": "Lưu và in mẫu PDF của Bộ Khôi phục.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
+            "body2": "Nếu bạn đã điền vào Bộ Khôi phục và cất giữ nó một cách an toàn, bạn sẽ luôn luôn có thể khôi phục các ví của bạn."
         },
         "password": {
             "title": "Tạo mật khẩu",
-            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
-            "body2": "It is recommended that you write down your password in your Recovery Kit."
+            "body1": "Bạn cần một mật khẩu mạnh để bảo vệ tiền của mình. Sử dụng kết hợp giữa các từ, và tránh dùng những cụm từ phổ biến, tên hoặc ngày tháng.",
+            "body2": "Nên viết mật khẩu của bạn xuống trong Bộ Khôi phục."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your profile.",
-            "body2": "Keep your PIN safe!"
+            "body1": "Thiết lập mật mã cá nhân (PIN) để chắc chắn rằng chỉ có bạn mới có thể vào hồ sơ của mình.",
+            "body2": "Giữ mã PIN của bạn an toàn!"
         },
         "pin": {
             "title": "Thiết lập mã PIN",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
+            "body1": "Nhập mã PIN có 6 kí tự vào ô bên dưới. Bạn sẽ được yêu cầu nhập mã PIN để có thể truy cập vào hồ sơ của mình.",
+            "body2": "Chỉ sử dụng số"
         },
         "confirmPin": {
             "title": "Xác thực mã PIN của bạn",
-            "body1": "Your PIN keeps your balance and transactions private.",
-            "body2": "Re-enter your PIN code to proceed. "
+            "body1": "Mã PIN của bạn giúp giữ số dư và các giao dịch trong tài khoản của bạn một cách riêng tư.",
+            "body2": "Nhập lại mã PIN của bạn để tiếp tục. "
         },
         "backup": {
             "title": "Sao lưu ví của bạn",
-            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+            "body1": "Bây giờ bạn sẽ được xem cụm từ khôi phục. Viết chúng xuống trong Bộ Khôi phục của bạn.",
+            "body2": "Không chia sẻ cụm từ khôi phục của bạn với bất kỳ ai. Cụm từ này được sử dụng để truy cập vào token của bạn từ bất kỳ nơi nào.",
             "body3": "Nếu bạn làm mất cụm từ khôi phục tài khoản ví, bạn có thể sẽ bị mất tiền của mình."
         },
         "recoveryPhrase": {
             "title": "Cụm từ hồi phục tài khoản ví",
-            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-            "body2": "Keep this private and safely stored.",
-            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+            "body1": "Trong Bộ Khôi phục, viết các từ xuống chính xác theo đúng thứ tự của chúng.",
+            "body2": "Cất giữ cụm từ này một cách riêng tư và an toàn.",
+            "body3": "Rất là quan trọng để viết tay các sao lưu xuống. Máy tính đôi khi bị hỏng hóc và các tập tin có thể bị hư hại.",
             "revealRecoveryPhrase": "Hiển thị cụm từ khôi phục ví",
             "hideRecoveryPhrase": "Ẩn cụm từ khôi phục ví"
         },
         "verifyRecoveryPhrase": {
             "title": "Xác thực cụm từ phục hồi tài khoản ví",
-            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
-            "word": "Word",
-            "verified": "Recovery phrase verified",
+            "body": "Hãy kiểm tra lại cụm từ đã được viết xuống một cách chính xác. Chọn các từ theo đúng thứ tự của chúng.",
+            "word": "Từ",
+            "verified": "Cụm từ khôi phục đã được xác thực",
             "verifiedBody": "Remember to keep it private and safely stored."
         },
         "backupWallet": {
@@ -138,7 +138,7 @@
             "body2": "Nó có thể mất một khoảng thời gian. Không tắt thiết bị của bạn trong quá trình chuyển tiền.",
             "existing": "Ví cũ của bạn",
             "new": "Ví mới của bạn",
-            "learn": "Learn about the migration",
+            "learn": "Tìm hiểu về quá trình di chuyển token",
             "beginMigration": "Begin Migration",
             "migrating": "Migrating funds...",
             "migrated": "{balance} migrated",
@@ -147,6 +147,7 @@
             "restoringWallet": "Restoring wallet...",
             "findingBalance": "Finding balance...",
             "incorrectSeedVaultPassword": "Incorrect SeedVault password.",
+            "noDataSeedVault": "No data could be found in the SeedVault.",
             "signingBundle": "Signing bundle",
             "broadcastingBundle": "Broadcasting bundle",
             "miningBundle": "Mining bundle",
@@ -245,7 +246,9 @@
             },
             "appLock": {
                 "title": "Automatic Lock",
-                "description": "Inactivity time before your wallets lock and you are logged out"
+                "description": "Inactivity time before your wallets lock and you are logged out",
+                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
+                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
                 "title": "Đổi mật khẩu",
@@ -697,7 +700,8 @@
         "receivedTo": "Received to {account}",
         "sentFrom": "Sent from {account}",
         "receiving": "Receiving",
-        "sending": "Sending"
+        "sending": "Sending",
+        "legacyNetwork": "Legacy Network"
     },
     "dates": {
         "today": "Ngày hôm nay",

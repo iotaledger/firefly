@@ -147,6 +147,7 @@
             "restoringWallet": "Восстановление кошелька...",
             "findingBalance": "Поиск баланса...",
             "incorrectSeedVaultPassword": "Неправильный пароль сида.",
+            "noDataSeedVault": "No data could be found in the SeedVault.",
             "signingBundle": "Пакет подписи",
             "broadcastingBundle": "Передача пакета",
             "miningBundle": "Майнинг данных",
@@ -245,7 +246,9 @@
             },
             "appLock": {
                 "title": "Автоматическая блокировка",
-                "description": "Inactivity time before your wallets lock and you are logged out"
+                "description": "Inactivity time before your wallets lock and you are logged out",
+                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
+                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
                 "title": "Изменить пароль",
@@ -697,7 +700,8 @@
         "receivedTo": "Received to {account}",
         "sentFrom": "Sent from {account}",
         "receiving": "Receiving",
-        "sending": "Sending"
+        "sending": "Sending",
+        "legacyNetwork": "Legacy Network"
     },
     "dates": {
         "today": "Сегодня",

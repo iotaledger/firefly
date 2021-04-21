@@ -1,78 +1,78 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Надсилайте, отримуйте і керуйте IOTA токенами",
-            "body": "Firefly - офіційний гаманець IOTA."
+            "title": "Send, Receive & Manage your IOTA tokens",
+            "body": "Firefly is the official wallet software of IOTA."
         },
         "legal": {
-            "title": "Політика конфіденційності та Умови використання",
-            "body": "Будь ласка, ознайомтеся з Політикою конфіденційності та Умовами надання послуг.",
-            "checkbox": "Я прочитав і приймаю Політику конфіденційності та Умови надання послуг"
+            "title": "Privacy Policy & Terms of Service",
+            "body": "Please review the Privacy Policy and Terms of Service.",
+            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
         },
         "appearance": {
-            "title": "Оформлення",
-            "body": "Оберіть тему"
+            "title": "Appearance",
+            "body": "Choose your app theme."
         },
         "profile": {
-            "title": "Створити профіль",
-            "body1": "Ви можете створити декілька профілів користувачів для організації ваших гаманців та покращення конфіденційності.",
-            "body2": "Наразі давайте почнемо з імені вашого профілю. Ви можете додати більше профілів пізніше.",
-            "profileName": "Ім'я профілю"
+            "title": "Create a profile",
+            "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
+            "body2": "For now, let's start with your first profile name. You can add more profiles later.",
+            "profileName": "Profile Name"
         },
         "setup": {
-            "title": "Налаштування гаманця",
-            "chrysalisTitle": "Оновлення мережі Chrysalis",
-            "chrysalisBody": "З 21 квітня користувачі можуть мігрувати свої токени в нову Хризалісову мережу. Ми рекомендуємо вам перенести існуючі токени якомога швидше.",
-            "learnMore": "Дізнатися про міграцію"
+            "title": "Set up a wallet",
+            "chrysalisTitle": "Chrysalis Network Update",
+            "chrysalisBody": "From April 21st, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
+            "learnMore": "Learn about the migration"
         },
         "secure": {
-            "title": "Захистіть ваш гаманець",
-            "body1": "Зберегти та роздрукувати шаблон Recovery Kit PDF.",
-            "body2": "Якщо ви заповните Recovery Kit і будете зберігати беспечно, ви завжди зможете відновити ваші гаманці."
+            "title": "Secure your wallet",
+            "body1": "Save and print the Recovery Kit PDF template.",
+            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
         },
         "password": {
-            "title": "Створіть пароль",
-            "body1": "Вам потрібен надійний пароль, щоб захистити свої кошти. Використовуйте комбінацію слів, а також уникайте загальних фраз, імен або дат.",
-            "body2": "Рекомендується записати свій пароль у Recovery Kit."
+            "title": "Create a password",
+            "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
+            "body2": "It is recommended that you write down your password in your Recovery Kit."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Налаштуйте PIN-код входу, щоб тільки ви могли використовувати свій профіль.",
-            "body2": "Бережіть свій PIN-код!"
+            "body1": "Set up a login PIN to make sure that only you can enter your profile.",
+            "body2": "Keep your PIN safe!"
         },
         "pin": {
-            "title": "Встановіть PIN-код",
-            "body1": "Введіть 6-значний PIN-код нижче. Вам буде запропоновано ввести PIN-код для доступу до вашого профілю.",
-            "body2": "Використовуйте лише цифри"
+            "title": "Set up PIN code",
+            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
+            "body2": "Use numbers only"
         },
         "confirmPin": {
-            "title": "Підтвердіть свій PIN-код",
-            "body1": "Ваш PIN-код забезпечує збереження балансу та трансакцій, приватними.",
-            "body2": "Повторно введіть свій PIN-код, щоб продовжити. "
+            "title": "Verify your PIN code",
+            "body1": "Your PIN keeps your balance and transactions private.",
+            "body2": "Re-enter your PIN code to proceed. "
         },
         "backup": {
-            "title": "Створити резервну копію вашого гаманця",
-            "body1": "Зараз вам буде показано фразу для відновлення. Запишіть її у Recovery Kit.",
-            "body2": "Нікому не показуйте фразу відновлення. Будь хто, зможе використати її, для доступу до ваших токенів.",
-            "body3": "Якщо ви загубите фразу відновлення, ви можете втратити свої кошти."
+            "title": "Back up your wallet",
+            "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
+            "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+            "body3": "If you lose your recovery phrase, you may lose your funds."
         },
         "recoveryPhrase": {
-            "title": "Фраза відновлення",
-            "body1": "Запишіть у вашому Recovery Kit, слова в точному порядку.",
-            "body2": "Надійно зберігайте, і нікому не росповідайте.",
-            "body3": "Важливо мати письмову резервну копію. Комп’ютери часто виходять з ладу, а файли можуть пошкодитись.",
-            "revealRecoveryPhrase": "Перевірте фразу відновлення",
-            "hideRecoveryPhrase": "Приховати фразу відновлення"
+            "title": "Recovery phrase",
+            "body1": "In your Recovery Kit, write down the words in the exact order shown.",
+            "body2": "Keep this private and safely stored.",
+            "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+            "revealRecoveryPhrase": "Reveal recovery phrase",
+            "hideRecoveryPhrase": "Hide recovery phrase"
         },
         "verifyRecoveryPhrase": {
-            "title": "Перевірте фразу відновлення",
+            "title": "Verify recovery phrase",
             "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
             "word": "Word",
             "verified": "Recovery phrase verified",
             "verifiedBody": "Remember to keep it private and safely stored."
         },
         "backupWallet": {
-            "title": "Зробити резервну копію Stronghold",
+            "title": "Back up to a Stronghold file",
             "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
             "body2": "Reasons why digital backups are important:",
             "reason1": "Easily recover your wallets without typing in your recovery phrase",
@@ -80,7 +80,7 @@
             "reason3": "Recover your full transaction history"
         },
         "recoveryPhraseSaved": {
-            "title": "Резервне копіювання успішно виконано",
+            "title": "Successfully backed up",
             "body": "You have backed up your wallets to a Stronghold."
         },
         "congratulations": {
@@ -121,11 +121,11 @@
         },
         "importBackupPassword": {
             "title": "Restore your wallets from a SeedVault or Stronghold",
-            "body1": "Будь ласка введіть пароль для захисту резервної копії.",
-            "body2": "Це пароль, який ви встановили під час створення резервної копії."
+            "body1": "Please enter your backup password.",
+            "body2": "This is the password you set when you first created your backup."
         },
         "importSuccess": {
-            "title": "Ви успішно відновили резервну копію",
+            "title": "You have successfully recovered your backup",
             "body": "You can now set up your new profile.",
             "seedvaultTitle": "Successfully imported",
             "seedvaultBody": "Your password is correct, you can now continue.",
@@ -133,12 +133,12 @@
             "strongholdBody": "Your password is correct, you can now continue."
         },
         "migrate": {
-            "title": "Перенести свої кошти",
+            "title": "Migrate your funds",
             "body1": "This is an automated process to transfer your funds to your new wallet.",
-            "body2": "Це може зайняти деякий час. Не вимикайте пристрій під час міграції.",
-            "existing": "Ваш старий гаманець",
-            "new": "Ваш новий гаманець",
-            "learn": "Дізнатися про міграцію",
+            "body2": "It may take some time. Do not turn off your device during the migration.",
+            "existing": "Your old wallet",
+            "new": "Your new wallet",
+            "learn": "Learn about the migration",
             "beginMigration": "Begin Migration",
             "migrating": "Migrating funds...",
             "migrated": "{balance} migrated",
@@ -186,38 +186,38 @@
             "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
             "migrate": "Migrate funds",
             "transaction": "Transaction {number}",
-            "rerun": "Повторити"
+            "rerun": "Try again"
         },
         "migrateFailed": {
             "title": "To do",
             "body": "To do"
         },
         "balance": {
-            "title": "Ваш баланс",
+            "title": "Your balance",
             "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
             "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
             "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly."
         },
         "settings": {
-            "settings": "Налаштування",
+            "settings": "Settings",
             "generalSettings": {
-                "title": "Загальні налаштування",
+                "title": "General Settings",
                 "description": "Configure your app's appearance and other general settings"
             },
             "security": {
-                "title": "Безпека",
+                "title": "Security",
                 "description": "Change your password and adjust security-related settings"
             },
             "advancedSettings": {
-                "title": "Розширені налаштування",
+                "title": "Advanced Settings",
                 "description": "Tools and manual settings for technical users"
             },
             "helpAndInfo": {
-                "title": "Допомога та інформація",
+                "title": "Help & Information",
                 "description": "Find the answer to a question or get help with an issue"
             },
             "profile": {
-                "title": "Профіль",
+                "title": "Profile",
                 "description": "Change your profile name or set an avatar"
             },
             "sync": {
@@ -225,19 +225,19 @@
                 "description": ""
             },
             "theme": {
-                "title": "Тема",
+                "title": "Theme",
                 "description": ""
             },
             "language": {
-                "title": "Мова",
+                "title": "Language",
                 "description": ""
             },
             "currency": {
-                "title": "Валюта",
+                "title": "Currency",
                 "description": "Adjusts balance conversion and updates chart options"
             },
             "notifications": {
-                "title": "Сповіщення",
+                "title": "Notifications",
                 "description": "System notifications for transaction events"
             },
             "exportStronghold": {
@@ -251,7 +251,7 @@
                 "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
-                "title": "Змінити пароль",
+                "title": "Change password",
                 "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds."
             },
             "changePincode": {
@@ -275,15 +275,15 @@
                 "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup."
             },
             "deepLinks": {
-                "title": "Глибокі посилання",
+                "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
             },
             "developerMode": {
-                "title": "Режим розробника",
+                "title": "Developer mode",
                 "description": "Connect to testnets and other developer features"
             },
             "nodeSettings": {
-                "title": "Налаштування Node",
+                "title": "Node settings",
                 "description": "Select Manual to configure the node settings and connect to your own node"
             },
             "configureNodeList": {
@@ -303,7 +303,7 @@
                 "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
-                "title": "Звіт помилок",
+                "title": "Error log",
                 "description": "View errors to debug an issue"
             },
             "diagnostics": {
@@ -311,19 +311,19 @@
                 "description": "View system and application information"
             },
             "stateExport": {
-                "title": "Експорт звіту",
+                "title": "State export",
                 "description": "Export your transaction history to a .csv file"
             },
             "troubleshoot": {
-                "title": "Виправлення помилок",
+                "title": "Troubleshoot",
                 "description": "Use the troubleshooting wizard to solve common problems"
             },
             "documentation": {
-                "title": "Документація",
+                "title": "Documentation",
                 "description": "View the documentation for in depth explanations of how things work"
             },
             "faq": {
-                "title": "Питання, що часто ставляться",
+                "title": "FAQ",
                 "title2": "Frequently Asked Questions",
                 "description": "View the FAQs to get help with a common problem or question"
             },
@@ -332,7 +332,7 @@
                 "description": "Get help from the IOTA community on Discord"
             },
             "about": {
-                "title": "Про програму",
+                "title": "About",
                 "description": ""
             },
             "reportAnIssue": {
@@ -341,8 +341,8 @@
             }
         },
         "login": {
-            "pleaseWait": "Будь ласка, зачекайте {time, plural, one {1 секунду} few {# секунди} many {# секунд} other {# секунд}}",
-            "incorrectAttempts": "{attempts, plural, one {1 некоректна спроба} few {# некоректні спроби} many {# некоректних спроб} other {# некоректних спроб}}"
+            "pleaseWait": "Please wait {time, plural, one {1 second} other {# seconds}}",
+            "incorrectAttempts": "{attempts, plural, one {1 incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "security": {
@@ -381,12 +381,12 @@
     },
     "popups": {
         "password": {
-            "title": "Необхідний пароль",
+            "title": "Password required",
             "subtitle": "Please enter your password to unlock your wallets",
             "backup": "Please enter your password to export a backup"
         },
         "qr": {
-            "title": "Ваш QR-код"
+            "title": "Your QR code"
         },
         "version": {
             "title": "Current version: {version}",
@@ -499,50 +499,50 @@
         "timeframe1Month": "1 month"
     },
     "actions": {
-        "continue": "Продовжити",
-        "back": "Назад",
-        "cancel": "Скасувати",
-        "close": "Закрити",
+        "continue": "Continue",
+        "back": "Back",
+        "cancel": "Cancel",
+        "close": "Close",
         "dismiss": "Dismiss",
         "proceedAnyway": "Proceed anyway",
-        "save": "Зберегти",
-        "importSeed": "Імпортувати існуючий seed",
+        "save": "Save",
+        "importSeed": "Import an existing seed",
         "restoreWallet": "Migrate or restore a wallet",
         "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
-        "createWallet": "Створити новий гаманець",
+        "createWallet": "Create new wallet",
         "createWalletDescription": "Create a fresh wallet running on Chrysalis",
-        "savePassword": "Зберегти пароль",
-        "useBiometric": "Використовувати біометричний захист",
-        "setupPin": "Встановіть PIN-код",
-        "setPin": "Встановіть PIN-код",
-        "confirmPin": "Підтвердьте PIN-код",
-        "enterYourPin": "Введіть Ваш PIN-код",
-        "saveBackupFile": "Збережіть файл резервної копії",
-        "iveWrittenRecoveryPhrase": "Я записав свою фразу для відновлення",
-        "verifyRecoveryPhrase": "Перевірте фразу відновлення",
-        "revealRecoveryPhrase": "Перевірте фразу відновлення",
-        "importSeedvault": "Імпорт SeedVault",
+        "savePassword": "Save password",
+        "useBiometric": "Use biometric security",
+        "setupPin": "Set up PIN code",
+        "setPin": "Set PIN code",
+        "confirmPin": "Confirm PIN code",
+        "enterYourPin": "Enter your PIN",
+        "saveBackupFile": "Save backup file",
+        "iveWrittenRecoveryPhrase": "I’ve written down my recovery phrase",
+        "verifyRecoveryPhrase": "Verify recovery phrase",
+        "revealRecoveryPhrase": "Reveal recovery phrase",
+        "importSeedvault": "Import SeedVault",
         "checkAgain": "Check Again",
-        "importFromFile": "Імпортувати з файлу",
-        "send": "Надіслати",
-        "receive": "Отримати",
-        "create": "Створити",
-        "beginTransfer": "Почати відправку",
-        "tryAgain": "Повторити",
-        "visitDiscord": "Відвідати Discord",
-        "dragDrop": "Перетягнути і відпустити",
+        "importFromFile": "Import from a file",
+        "send": "Send",
+        "receive": "Receive",
+        "create": "Create",
+        "beginTransfer": "Begin Transfer",
+        "tryAgain": "Try again",
+        "visitDiscord": "Visit Discord",
+        "dragDrop": "Drag & Drop",
         "importExtentions": ".kdbx or .stronghold file",
-        "chooseFile": "Обрати файл",
-        "dropHere": "Перетягніть файл сюди",
-        "syncAll": "Синхронізувати все",
-        "export": "Експортувати",
-        "exportNewStronghold": "Експортувати новий Stronghold",
-        "enableDeepLinks": "Активувати смарт лінки",
-        "enableDeveloperMode": "Активувати режим розробника",
+        "chooseFile": "Choose a File",
+        "dropHere": "Drop your file here",
+        "syncAll": "Sync all",
+        "export": "Export",
+        "exportNewStronghold": "Export a new Stronghold",
+        "enableDeepLinks": "Enable deep links",
+        "enableDeveloperMode": "Enable developer mode",
         "enableSystemNotifications": "Enable system notifications",
-        "exportState": "Експортувати звіт",
+        "exportState": "Export state",
         "localProofOfWork": "Local proof of work",
-        "unlock": "Розблокувати",
+        "unlock": "Unlock",
         "updateFirefly": "Update Firefly",
         "restartNow": "Restart now",
         "saveBackup": "Save Stronghold backup",
@@ -590,64 +590,64 @@
         "closeFirefly": "Close Firefly"
     },
     "general": {
-        "password": "Пароль",
-        "confirmPassword": "Підтвердити пароль",
-        "currentPassword": "Поточний пароль",
-        "newPassword": "Новий пароль",
-        "confirmNewPassword": "Підвердіть новий пароль",
-        "yourSeed": "Ваш Seed",
-        "recoveryPhrase": "Фраза відновлення",
-        "recentActivity": "Останні дії",
-        "sent": "Надіслано",
-        "received": "Отримано",
+        "password": "Password",
+        "confirmPassword": "Confirm password",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "confirmNewPassword": "Confirm new password",
+        "yourSeed": "Your Seed",
+        "recoveryPhrase": "Recovery Phrase",
+        "recentActivity": "Recent Activity",
+        "sent": "Sent",
+        "received": "Received",
         "sendPayment": "Send Payment",
         "moveFunds": "Internal Transfer",
-        "sendFunds": "Відправити кошти",
+        "sendFunds": "Send funds",
         "sendToAddress": "Send to address",
-        "scanQrOrPaste": "Скануйте QR код або вставте адресу",
+        "scanQrOrPaste": "Scan a QR code or paste an Address",
         "moveFundsBetweenAccounts": "Move funds between wallets",
         "sendTokensToAddress": "Send tokens to an address",
         "manageAccount": "Manage Wallet",
         "customizeAcount": "Customize your wallet",
         "account": "Wallet",
-        "sendingToAddress": "Відправити на адресу",
-        "amount": "Сума",
-        "addAddress": "Додати адресу",
-        "reference": "Посилання",
-        "from": "Звідки",
-        "to": "Кому",
+        "sendingToAddress": "Sending to address",
+        "amount": "Amount",
+        "addAddress": "Add Address",
+        "reference": "Reference",
+        "from": "From",
+        "to": "To",
         "receiveFunds": "Receive Funds",
         "myAddress": "My Address",
-        "shareAddress": "Поділитися адресою",
-        "yourAddress": "Ваша адреса",
-        "generateNewAddress": "Згенерувати нову адресу",
-        "copyAddress": "Копіювати адресу",
-        "import": "Імпортувати",
+        "shareAddress": "Share an address",
+        "yourAddress": "Your address",
+        "generateNewAddress": "Generate new address",
+        "copyAddress": "Copy Address",
+        "import": "Import",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
-        "language": "Мова",
-        "appearance": "Оформлення",
-        "lightTheme": "Світлий фон",
-        "darkTheme": "Темний фон",
+        "language": "Language",
+        "appearance": "Appearance",
+        "lightTheme": "Light theme",
+        "darkTheme": "Dark theme",
         "balance": "Balance",
         "accountBalance": "Wallet Balance",
-        "incoming": "Вхідні",
-        "outgoing": "Вихідні",
+        "incoming": "Incoming",
+        "outgoing": "Outgoing",
         "totalIn": "Total in",
         "totalOut": "Total out",
         "accounts": "Wallets",
         "myAccounts": "My Wallets",
-        "automaticNodeSelection": "Автоматичний вибір Node",
-        "manualNodeSelection": "Ручний вибір Node",
-        "profiles": "Профілі",
+        "automaticNodeSelection": "Automatic node selection",
+        "manualNodeSelection": "Manual node selection",
+        "profiles": "Profiles",
         "developerProfile": "Developer Profile",
         "developerProfileDescription": "Allows you to connect to testnets",
         "dev": "Dev",
         "createAccount": "Create a Wallet",
         "accountName": "Wallet name",
-        "latestTransactions": "Останні транзакції",
-        "transactions": "Транзакції",
-        "security": "Безпека",
+        "latestTransactions": "Latest Transactions",
+        "transactions": "Transactions",
+        "security": "Security",
         "accountAddress": "Wallet Address",
         "nodes": "Nodes",
         "wallet": "Wallet",

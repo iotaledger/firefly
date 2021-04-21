@@ -2,7 +2,7 @@
     "views": {
         "onboarding1": {
             "title": "Envoyer, Recevoir & Gérer vos IOTA",
-            "body": "Firefly is the official wallet software of IOTA."
+            "body": "Firefly est le portefeuille officiel de IOTA."
         },
         "legal": {
             "title": "Politique de Confidentialité et Conditions d'Utilisation",
@@ -28,7 +28,7 @@
         "secure": {
             "title": "Sécurisez votre portefeuille",
             "body1": "Enregistrez et imprimez le modèle PDF du Kit de récupération.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
+            "body2": "Si vous renseignez le Kit de Récupération et que vous le stockez en toute sécurité, vous pourrez toujours récupérer vos portefeuilles."
         },
         "password": {
             "title": "Créer un mot de passe",
@@ -37,7 +37,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Set up a login PIN to make sure that only you can enter your profile.",
+            "body1": "Configurez un code PIN pour vous assurer que vous seul pouvez accéder à votre profil.",
             "body2": "Conservez votre code PIN en sécurité!"
         },
         "pin": {
@@ -73,10 +73,10 @@
         },
         "backupWallet": {
             "title": "Sauvegarder dans un fichier Stronghold",
-            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
+            "body1": "Saisissez votre mot de passe pour sauvegarder vos portefeuilles dans un fichier Stronghold. Votre mot de passe est utilisé pour chiffrer la sauvegarde.",
             "body2": "Raisons pour lesquelles les sauvegardes numériques sont importantes:",
-            "reason1": "Easily recover your wallets without typing in your recovery phrase",
-            "reason2": "Import your wallets on other devices",
+            "reason1": "Récupérez facilement vos portefeuilles sans saisir votre phrase de récupération",
+            "reason2": "Importer vos portefeuilles sur d'autres appareils",
             "reason3": "Récupérer l'historique complet de vos transactions"
         },
         "recoveryPhraseSaved": {
@@ -96,19 +96,19 @@
             "importSeed": "Je possède déjà une seed (graine) de 81 caractères",
             "importSeedDescription": "Saisissez une seed et transférez les fonds vers le nouveau réseau Chrysalis",
             "importMnemonic": "Je possède déjà une phrase de récupération pour mon portefeuille Firefly",
-            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
+            "importMnemonicDescription": "Saisissez votre phrase secrète pour récupérer vos portefeuilles",
             "importFile": "J'ai déjà une sauvegarde fichier",
             "importFileDescription": "Télécharger un fichier Seedvault ou Stronghold"
         },
         "importFromText": {
             "seed": {
                 "title": "Saisissez votre seed pour commencer la migration",
-                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
+                "body": "Une seed est composée de 81 caractères. Elle est utilisée pour récupérer un portefeuille de l'ancienne application Trinity.",
                 "enter": "Saisissez votre seed"
             },
             "mnemonic": {
                 "title": "Saisissez votre phrase de récupération",
-                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly wallets.",
+                "body": "Une phrase de récupération est composée de 24 mots, tous en minuscules, avec un espace entre chaque mot. Elle est utilisée pour récupérer des portefeuilles Firefly existants.",
                 "enter": "Saisissez votre phrase de récupération secrète"
             },
             "seedDetected": "Graine de 81 caractères détectée",
@@ -116,17 +116,17 @@
             "checksum": "Clef de concordance"
         },
         "importFromFile": {
-            "title": "Restore your wallets using a backup file",
-            "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "title": "Restaurez vos portefeuilles à partir d'un fichier de sauvegarde",
+            "body": "Importez un fichier de sauvegarde pour restaurer vos portefeuilles. Les sauvegardes peuvent être de type Stronghold (.stronghold) ou Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
-            "title": "Restore your wallets from a SeedVault or Stronghold",
+            "title": "Restaurez vos portefeuilles à partir d'un fichier SeedVault ou Stronghold",
             "body1": "Veuillez saisir votre mot de passe de sauvegarde.",
             "body2": "C'est le mot de passe que vous avez défini lorsque vous avez créé votre sauvegarde pour la première fois."
         },
         "importSuccess": {
             "title": "Vous avez récupéré votre sauvegarde avec succès",
-            "body": "You can now set up your new profile.",
+            "body": "Vous pouvez maintenant configurer votre nouveau profil.",
             "seedvaultTitle": "Importé avec succès",
             "seedvaultBody": "Votre mot de passe est correct, vous pouvez maintenant continuer.",
             "strongholdTitle": "Importé avec succès",
@@ -147,6 +147,7 @@
             "restoringWallet": "Restauration du portefeuille...",
             "findingBalance": "En train de récupérer le montant total...",
             "incorrectSeedVaultPassword": "Mot de passe SeedVault incorrect.",
+            "noDataSeedVault": "No data could be found in the SeedVault.",
             "signingBundle": "Lot de signature",
             "broadcastingBundle": "Lot de diffusion",
             "miningBundle": "Lot de signature",
@@ -201,7 +202,7 @@
             "settings": "Réglages",
             "generalSettings": {
                 "title": "Réglages Généraux",
-                "description": "Configure your app's appearance and other general settings"
+                "description": "Configurez l'apparence de votre application et d'autres paramètres généraux"
             },
             "security": {
                 "title": "Sécurité",
@@ -245,7 +246,9 @@
             },
             "appLock": {
                 "title": "Verrouillage automatique",
-                "description": "Inactivity time before your wallets lock and you are logged out"
+                "description": "Inactivity time before your wallets lock and you are logged out",
+                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
+                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
                 "title": "Modifier le mot de passe",
@@ -461,8 +464,8 @@
         },
         "balanceFinder": {
             "title": "Retrouvez vos fonds",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
-            "totalWalletBalance": "Total balance",
+            "body": "Effectuer une recherche plus exhaustive d'adresses pour trouver les soldes manquants. Cela peut prendre du temps.",
+            "totalWalletBalance": "Solde total",
             "typePassword": "Saisissez votre mot de passe pour autoriser la recherche."
         },
         "riskFunds": {
@@ -697,7 +700,8 @@
         "receivedTo": "Reçu sur {account}",
         "sentFrom": "Envoyé depuis {account}",
         "receiving": "Réception en cours",
-        "sending": "Envoi en cours"
+        "sending": "Envoi en cours",
+        "legacyNetwork": "Legacy Network"
     },
     "dates": {
         "today": "Aujourd'hui",

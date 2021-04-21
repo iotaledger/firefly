@@ -76,7 +76,7 @@
             "body1": "Voer je wachtwoord in om een back-up van je wallet te maken naar een Stronghold bestand. Je wachtwoord wordt gebruikt om de back-up te versleutelen.",
             "body2": "Redenen waarom digitale back-up's belangrijk zijn:",
             "reason1": "Herstel gemakkelijk uw portemonnee zonder uw herstelzin in te typen",
-            "reason2": "Import your wallets on other devices",
+            "reason2": "Importeer uw wallet naar andere apparaten",
             "reason3": "Herstel uw volledige transactie geschiedenis"
         },
         "recoveryPhraseSaved": {
@@ -96,7 +96,7 @@
             "importSeed": "Ik heb een 81 tekenreeks seed",
             "importSeedDescription": "Voer een seed in en migreer tegoeden naar Chrysalis",
             "importMnemonic": "Ik heb een Firefly herstel zin",
-            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
+            "importMnemonicDescription": "Voer uw herstel zin in om uw portemonnees te herstellen",
             "importFile": "Ik heb een bestandsback-up",
             "importFileDescription": "Upload een Seedkluis of Stronghold bestand"
         },
@@ -147,6 +147,7 @@
             "restoringWallet": "Herstellen portemonnee...",
             "findingBalance": "Zoeken saldo...",
             "incorrectSeedVaultPassword": "Onjuist SeedVault wachtwoord.",
+            "noDataSeedVault": "No data could be found in the SeedVault.",
             "signingBundle": "Tekenen bundel",
             "broadcastingBundle": "Uitzenden bundel",
             "miningBundle": "Mijnen bundel",
@@ -245,7 +246,9 @@
             },
             "appLock": {
                 "title": "Automatisch vergrendelen",
-                "description": "Inactiviteit tijd voordat uw portemonnees vergrendelen en u bent uitgelogd"
+                "description": "Inactiviteit tijd voordat uw portemonnees vergrendelen en u bent uitgelogd",
+                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
+                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
                 "title": "Wachtwoord wijzigen",
@@ -461,8 +464,8 @@
         },
         "balanceFinder": {
             "title": "Saldo zoeker",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
-            "totalWalletBalance": "Total balance",
+            "body": "Voer een uitvoerigere zoekopdracht uit van adressen om ontbrekende saldi te vinden. Dit kan enige tijd duren.",
+            "totalWalletBalance": "Totaalsaldo",
             "typePassword": "Voer uw wachtwoord in om zoeken mogelijk te maken."
         },
         "riskFunds": {
@@ -697,7 +700,8 @@
         "receivedTo": "Ontvangen op {account}",
         "sentFrom": "Verzonden vanaf {account}",
         "receiving": "Ontvangen",
-        "sending": "Verzenden"
+        "sending": "Verzenden",
+        "legacyNetwork": "Legacy Network"
     },
     "dates": {
         "today": "Vandaag",

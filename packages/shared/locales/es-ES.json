@@ -76,7 +76,7 @@
             "body1": "Introduce tu contraseña para realizar una copia de seguridad de tus carteras a un archivo Stronghold. Tu contraseña es utlizada para encriptar la copia de seguridad.",
             "body2": "Razones por las que las copias de seguridad digitales son importantes:",
             "reason1": "Recupera fácilmente tus carteras sin escribir tu frase de recuperación",
-            "reason2": "Import your wallets on other devices",
+            "reason2": "Importa tus carteras a otros dispositivos",
             "reason3": "Recuperar todo tu historial de transacciones"
         },
         "recoveryPhraseSaved": {
@@ -96,7 +96,7 @@
             "importSeed": "Tengo una semilla de 81 caracteres",
             "importSeedDescription": "Introducir una semilla y migrar fondos a Chrysalis",
             "importMnemonic": "Tengo una frase de recuperación Firefly",
-            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
+            "importMnemonicDescription": "Introduce tu frase de recuperación para recuperar tus carteras",
             "importFile": "Tengo una copia de seguridad en archivo",
             "importFileDescription": "Subir un archivo Seedvault o Stronghold"
         },
@@ -147,6 +147,7 @@
             "restoringWallet": "Restaurando cartera...",
             "findingBalance": "Buscando balance...",
             "incorrectSeedVaultPassword": "Contraseña de SeedVault incorrecta.",
+            "noDataSeedVault": "No data could be found in the SeedVault.",
             "signingBundle": "Firmando paquete",
             "broadcastingBundle": "Transmitiendo paquete",
             "miningBundle": "Minando paquete",
@@ -245,7 +246,9 @@
             },
             "appLock": {
                 "title": "Bloqueo Automático",
-                "description": "Tiempo de inactividad antes de que se bloqueen tus carteras y se te cierre la sesión"
+                "description": "Tiempo de inactividad antes de que se bloqueen tus carteras y se te cierre la sesión",
+                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
+                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
             },
             "changePassword": {
                 "title": "Modificar contraseña",
@@ -461,8 +464,8 @@
         },
         "balanceFinder": {
             "title": "Buscador de balances",
-            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
-            "totalWalletBalance": "Total balance",
+            "body": "Realizar una búsqueda más exhaustiva de direcciones para encontrar balances perdidos. Puede llevar un tiempo.",
+            "totalWalletBalance": "Balance total",
             "typePassword": "Escribe tu contraseña para permitir la búsqueda."
         },
         "riskFunds": {
@@ -697,7 +700,8 @@
         "receivedTo": "Recibido desde {account}",
         "sentFrom": "Enviado desde {account}",
         "receiving": "Recibiendo",
-        "sending": "Enviando"
+        "sending": "Enviando",
+        "legacyNetwork": "Legacy Network"
     },
     "dates": {
         "today": "Hoy",
