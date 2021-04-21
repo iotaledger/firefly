@@ -185,7 +185,7 @@ export const getDecimalSeparator = (currency: string | undefined = undefined) =>
     })
         .formatToParts(1.1)
         .find(part => part.type === 'decimal')
-        .value;
+        ?.value ?? '.';
 }
 
 export const getCurrencyPosition = (): "left" | "right" => {
@@ -210,9 +210,9 @@ export const getGroupSeparator = (currency: string | undefined = undefined) => {
         style: 'currency',
         currency: currency ?? 'USD',
     })
-        .formatToParts(1111)
+        .formatToParts(1111111)
         .find(part => part.type === 'group')
-        .value;
+        ?.value ?? ',';
 }
 
 

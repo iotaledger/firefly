@@ -1,12 +1,13 @@
 <script lang="typescript">
     import { BundleMiningLayout, Button, Icon, ProgressBar, Text } from 'shared/components'
-    import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+    import { Electron } from 'shared/lib/electron'
     import {
-        MINING_TIMEOUT_SECONDS,
-        getInputIndexesForBundle,
         createMigrationBundle,
+        getInputIndexesForBundle,
+        MINING_TIMEOUT_SECONDS,
         selectedBundlesToMine,
     } from 'shared/lib/migration'
+    import { createEventDispatcher, onDestroy, onMount } from 'svelte'
 
     export let locale
     export let mobile
@@ -82,10 +83,6 @@
     }
 
     //TODO:
-    const learnClick = () => {
-        console.log('Learn more clicked')
-    }
-    //TODO:
     const handleCancelClick = () => {
         console.log('Cancel clicked')
         // dispatch('previous')
@@ -111,7 +108,9 @@
             <Text type="p" secondary classes="mb-4 text-center">{locale('views.securingSpentAddresses.body1', { values: { minutes: $selectedBundlesToMine.length * 10 } })}</Text>
             <Text type="p" secondary classes="mb-8 text-center">{locale('views.securingSpentAddresses.body2')}</Text>
             <div class="flex flex-col flex-grow items-center">
-                <Button secondary classes="w-56" onClick={() => learnClick()}>{locale('views.bundleMiningWarning.learn')}</Button>
+                <Button secondary classes="w-56" onClick={() => Electron.openUrl('https://firefly.iota.org/faq#spent-addresses')}>
+                    {locale('views.bundleMiningWarning.learn')}
+                </Button>
             </div>
         </div>
         <div slot="actions" class="w-2/5 mt-8">

@@ -69,11 +69,13 @@
                             isGettingMigrationData = false
                             dispatch('next', { importType: get(importType) })
                         })
-                        .catch(() => {
-                            showAppNotification({
-                                type: 'error',
-                                message: locale('views.migrate.problemRestoringWallet'),
-                            })
+                        .catch((err) => {
+                            if (!err?.snapshot) {
+                                showAppNotification({
+                                    type: 'error',
+                                    message: locale('views.migrate.problemRestoringWallet'),
+                                })
+                            }
                             isGettingMigrationData = false
                         })
                 } else if (get(importType) === ImportType.Mnemonic) {
@@ -122,10 +124,14 @@
 
                     nextState = ImportState.Success
                 } catch (err) {
-                    if (err && err.name === 'KdbxError' && err.code === 'InvalidKey') {
-                        error = locale('views.migrate.incorrectSeedVaultPassword')
-                    } else {
-                        error = locale(err.error)
+                    if (!err?.snapshot) {
+                        if (err && err.name === 'KdbxError' && err.code === 'InvalidKey') {
+                            error = locale('views.migrate.incorrectSeedVaultPassword')
+                        } else if (err && err.name === 'KdbxError' && err.code === 'FileCorrupt') {
+                            error = locale('views.migrate.noDataSeedVault')
+                        } else {
+                            error = locale(err.error)
+                        }
                     }
                 } finally {
                     busy = false

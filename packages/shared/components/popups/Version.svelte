@@ -4,11 +4,17 @@
     import { closePopup } from 'shared/lib/popup'
     import { onMount } from 'svelte'
     import { formatDate } from 'shared/lib/i18n'
+    import { Electron } from 'shared/lib/electron';
 
     export let locale
+    let hasAutoUpdate = true
 
     function handleDownload() {
-        updateDownload()
+        if (hasAutoUpdate) {
+            updateDownload()
+        } else {
+            Electron.openUrl('https://firefly.iota.org')
+        }
         closePopup()
     }
     function handleCancelClick() {
@@ -21,6 +27,8 @@
             await getVersionDetails()
             await updateCheck()
         }
+        const os = await Electron.getOS()
+        hasAutoUpdate = os !== "win32"
     })
 </script>
 
@@ -64,10 +72,13 @@
             <div class="changelog overflow-y-auto">
                 <Text secondary classes="whitespace-pre-wrap">{$versionDetails.changelog}</Text>
             </div>
+            {#if !hasAutoUpdate}
+                <Text error classes="mt-4">{locale('popups.version.noAutoUpdate')}</Text>
+            {/if}
         </div>
         <div class="flex flex-row justify-between space-x-4 w-full px-8">
             <Button secondary classes="w-1/2" onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
-            <Button classes="w-1/2" onClick={() => handleDownload()} bind:disabled={$updateBusy}>
+            <Button classes="w-1/2" onClick={() => handleDownload()} disabled={$updateBusy}>
                 {locale('actions.updateFirefly')}
             </Button>
         </div>

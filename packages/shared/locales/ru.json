@@ -2,34 +2,16 @@
     "views": {
         "onboarding1": {
             "title": "Отправляй, получай и управляй своими токенами IOTA",
-            "body": "Firefly является официальным кошельком IOTA."
+            "body": "Firefly is the official wallet software of IOTA."
         },
         "legal": {
             "title": "Политика конфиденциальности и условия обслуживания",
             "body": "Пожалуйста, ознакомьтесь с Политикой конфиденциальности и Условиями обслуживания.",
-            "privacyPolicy": {
-                "title": "Политика конфиденциальности",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
-            "termsOfService": {
-                "title": "Условия обслуживания",
-                "body1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body2": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body3": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate.",
-                "body4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In risus nisl euismod vitae venenatis nec, efficitur nec nisl. Etiam eu vulputate eros Quisque et massa turpis. Suspendisse tempus feugiat risus nec iaculis Vestibulum nulla nulla, convallis ut nisi non, imperdiet fermentum est Aliquam dictum sit amet dolor vel efficitur. Quisque quis urna in puru ultricies vestibulum. Integer vel arcu eget eros varius hendrerit id ut diam Sed aliquam, sapien bibendum suscipit semper, turpis urna varius justo at elementum sem leo tincidunt orci.",
-                "body5": "Phasellus mattis, est eget vestibulum egestas, felis dolor ultricies diam, quis ornare urna odio vitae nisi. Donec gravida imperdiet lorem et pellentesque. In at congue dui, a rhoncus ante. Proin euismod molestie tellus id efficitur. Integer vehicula magna at fringilla luctus. Sed hendrerit orci rhoncus eros sollicitudin, ac vulputate nisl iaculis. Sed vitae mi nisi. Nunc pellentesque tortor arcu, in consequat enim consectetur nec. In feugiat gravida lacinia. In quis purus eu diam finibus finibus.",
-                "body6": "Sed et turpis egestas, blandit lorem varius, porta metus. Morbi commodo risus urna, ac fringilla velit vehicula id. Cras sagittis lorem in dolor interdum, a mattis velit malesuada. Suspendisse rutrum mi quis ligula convallis, nec semper libero vehicula. Praesent nec pulvinar diam. Vestibulum a lacus quam. Cras eros magna, efficitur nec enim tincidunt, molestie porttitor turpis. Donec nibh leo, eleifend non dictum vitae, eleifend et erat. Cras et magna a justo tincidunt fermentum non interdum massa. In ultricies in felis eu vulputate."
-            },
             "checkbox": "Я ознакомился и согласен с правилами пользования и политикой конфиденциальности"
         },
         "appearance": {
             "title": "Внешний вид",
-            "body": "Выбери тему своего кошелька."
+            "body": "Choose your app theme."
         },
         "profile": {
             "title": "Создать профиль",
@@ -46,7 +28,7 @@
         "secure": {
             "title": "Защити твой кошелек",
             "body1": "Сохранить и распечатать PDF документ для восстановление.",
-            "body2": "Если ты заполниш документ и сохранишь его безопасно, ты всегда сможешь восстановить твой кошелек."
+            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
         },
         "password": {
             "title": "Придумайте пароль",
@@ -55,7 +37,7 @@
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "Установи PIN-код для входа в кошелек.",
+            "body1": "Set up a login PIN to make sure that only you can enter your profile.",
             "body2": "Держи PIN-код в безопасности!"
         },
         "pin": {
@@ -91,15 +73,15 @@
         },
         "backupWallet": {
             "title": "Сделайте резервную копию в файл Stronghold",
-            "body1": "Введи пароль для резервного копирования кошелька на файл Stronghold. Твой пароль используется для шифрования резервной копии.",
+            "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
             "body2": "Причины, по которым важны цифровые резервные копии:",
-            "reason1": "Легкое восстановление твоего кошелека без ввода фразы восстановления",
-            "reason2": "Импортируй твой кошелек на другие устройства",
+            "reason1": "Easily recover your wallets without typing in your recovery phrase",
+            "reason2": "Import your wallets on other devices",
             "reason3": "Восстановление всей историй транзакций"
         },
         "recoveryPhraseSaved": {
             "title": "Резервная копия сделано успешно",
-            "body": "Вы сделали резервную копию вашего кошелька на Stronghold."
+            "body": "You have backed up your wallets to a Stronghold."
         },
         "congratulations": {
             "title": "Настройка кошелька завершена",
@@ -114,19 +96,19 @@
             "importSeed": "I have an 81 character seed",
             "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
             "importMnemonic": "I have a Firefly recovery phrase",
-            "importMnemonicDescription": "Enter your secret phrase to recover your wallet",
+            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
             "importFile": "I have a file backup",
             "importFileDescription": "Upload a Seedvault or Stronghold file"
         },
         "importFromText": {
             "seed": {
                 "title": "Type your seed to commence migration",
-                "body": "A seed consists of 81 characters. This is used to recover the older Trinity wallet.",
+                "body": "A seed consists of 81 characters. This is used to recover from the older Trinity app.",
                 "enter": "Enter your seed"
             },
             "mnemonic": {
                 "title": "Type your recovery phrase",
-                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover an existing Firefly wallet.",
+                "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly wallets.",
                 "enter": "Enter your secret recovery phrase"
             },
             "seedDetected": "Обнаружено 81 символ seed",
@@ -134,17 +116,17 @@
             "checksum": "Контрольная сумма"
         },
         "importFromFile": {
-            "title": "Восстанови кошелек с помощью файла резервной копии",
-            "body": "Импортируйте файл резервной копии для восстановления вашего кошелька. Резервные копии могут быть Stronghold (.stronghold) или Trinity SeedVault (.kdbx)."
+            "title": "Restore your wallets using a backup file",
+            "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
         },
         "importBackupPassword": {
-            "title": "Восстановить кошелёк из SeedVault или Stronghold",
+            "title": "Restore your wallets from a SeedVault or Stronghold",
             "body1": "Пожалуйста, введите ваш пароль от резервной копии.",
             "body2": "Это пароль, который вы установили при первом создании резервной копии."
         },
         "importSuccess": {
             "title": "Вы успешно восстановили вашу резервную копию",
-            "body": "Теперь вы можете настроить ваш новый кошелёк.",
+            "body": "You can now set up your new profile.",
             "seedvaultTitle": "Успешно импортировано",
             "seedvaultBody": "Твой пароль правильный, ты можешь продолжить.",
             "strongholdTitle": "Успешно импортировано",
@@ -168,7 +150,7 @@
             "signingBundle": "Пакет подписи",
             "broadcastingBundle": "Передача пакета",
             "miningBundle": "Майнинг данных",
-            "problemRestoringWallet": "При ресторинге кошелька возникла проблема. Пожалуйста, попробуйте ещё раз.",
+            "problemRestoringWallet": "There was a network error restoring your wallet. Please try again.",
             "minimumMigrationAmountSpentAddresses": "Минимальная сумма миграции для каждого потраченного адреса составляет 1 мега айота. Проверьте снова, если ваш баланс неправильный.",
             "tooManyAddressesToMigrate": "У вас слишком много адресов с низким балансом для миграции. Проверьте правильность отображения баланса.",
             "cannotMigrateAllYourFunds": "Мы не можем перенести все ваши средства, потому что некоторые адреса слишком низки. Вы все равно можете продолжить. {value} будет потерян.",
@@ -219,7 +201,7 @@
             "settings": "Настройки",
             "generalSettings": {
                 "title": "Общие настройки",
-                "description": "Настройте внешний вид вашего кошелька и другие общие настройки"
+                "description": "Configure your app's appearance and other general settings"
             },
             "security": {
                 "title": "Настройки Безопасности",
@@ -238,7 +220,7 @@
                 "description": "Измени имя профиля или установи аватар"
             },
             "sync": {
-                "title": "Синхронизация учетных записей",
+                "title": "Sync wallets",
                 "description": ""
             },
             "theme": {
@@ -259,15 +241,15 @@
             },
             "exportStronghold": {
                 "title": "Экспорт резервной копии",
-                "description": "Экспорт в файл Stronghold - полная зашифрованная резервная копия вашего кошелька и последняя история транзакций."
+                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history."
             },
             "appLock": {
                 "title": "Автоматическая блокировка",
-                "description": "Время, прошедшее перед блокировкой кошелька и выходом из него"
+                "description": "Inactivity time before your wallets lock and you are logged out"
             },
             "changePassword": {
                 "title": "Изменить пароль",
-                "description": "Ваш пароль используется для защиты вашего кошелька. Вы должны использовать надежный пароль для защиты ваших средств."
+                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds."
             },
             "changePincode": {
                 "title": "Изменить PIN-код",
@@ -282,12 +264,12 @@
                 "description": "Perform an extended search of your addresses for tokens."
             },
             "hiddenAccounts": {
-                "title": "Скрытые учетные записи",
-                "description": "При выборе этого параметра будут показаны учетные записи, которые были ранее скрыты."
+                "title": "Hidden wallets",
+                "description": "Selecting this options will show wallets that were previously hidden."
             },
             "deleteProfile": {
                 "title": "Удалить профиль",
-                "description": "Удаляет весь ваш кошелек, профиль и историю транзакций. Убедитесь, что у вас есть резервная копия."
+                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup."
             },
             "deepLinks": {
                 "title": "Умные ссылки",
@@ -303,7 +285,7 @@
             },
             "configureNodeList": {
                 "title": "Выберите узел",
-                "description": "Управление списком узлов, к которым подключается ваш кошелек.",
+                "description": "Manage the list of IOTA network nodes you connect to.",
                 "primaryNode": "Основной узел",
                 "excludeNode": "Исключить узел",
                 "includeNode": "Включить узел",
@@ -372,8 +354,8 @@
                 },
                 "strongholdStatus": {
                     "title": "Статус кошелька",
-                    "locked": "Stronghold заблокирован",
-                    "unlocked": "Stronghold заблокирован"
+                    "locked": "Locked",
+                    "unlocked": "Unlocked"
                 },
                 "strongholdBackup": {
                     "title": "Резервная копия кошелька",
@@ -397,7 +379,7 @@
     "popups": {
         "password": {
             "title": "Требуется пароль",
-            "subtitle": "Пожалуйста, введи свой пароль, чтобы разблокировать Stronghold",
+            "subtitle": "Please enter your password to unlock your wallets",
             "backup": "Пожалуйста, введи свой пароль для экспорта резервной копии"
         },
         "qr": {
@@ -408,34 +390,35 @@
             "upToDateTitle": "Firefly актуальный",
             "upToDateDescription": "Ты использушь последнюю и безопасную версию Firefly.",
             "updateAvailable": "Доступно обновление Firefly",
-            "updateDetails": "Версия {version} - {date}"
+            "updateDetails": "Версия {version} - {date}",
+            "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update."
         },
         "backup": {
             "title": "Последняя резервная копия: {date}",
             "lastBackup": "Дата последней резервной копии: {date}",
-            "backupDescription": "Важно регулярно составлять резервную копию, чтобы убедиться, что у тебя есть копия всех твоих счетов и истории транзакций.",
+            "backupDescription": "It is important to back up regularly to ensure you have a copy of your wallets and transaction history.",
             "backupWarning": "Если ты потеряешь свою резервную копию и фразу восстановления, ты потеряешь доступ к своим средствам.",
             "notBackedUp": "Резервная копия не создана",
-            "notBackedUpDescription": "Ты не сохранил резервную копию твоего Stronghold",
+            "notBackedUpDescription": "You have not backed up your wallets",
             "saving": "Сохранение..."
         },
         "deleteAccount": {
             "title": "Удалить {name}?",
-            "body": "Эта учетная запись не имеет истории транзакций. Ее можно безопасно удалить.",
+            "body": "This wallet has no transaction history. It can safely be deleted.",
             "typePassword": "Введите пароль для подтверждения.",
-            "hideAccount": "Удалить учетную запись",
+            "hideAccount": "Delete wallet",
             "errorTitle": "Не удается удалить {name}",
-            "errorBody1": "Вы не можете удалить эту учетную запись, у вас должна быть хотя бы одна."
+            "errorBody1": "You cannot delete this wallet, you must have at least one."
         },
         "hideAccount": {
             "title": "Скрыть {name}?",
-            "body": "Вы можете найти эту учетную запись позже, включив \"Показать скрытые учетные записи\" в расширенных настройках.",
+            "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
             "typePassword": "Введите пароль для подтверждения.",
-            "hideAccount": "Скрыть учетную запись",
+            "hideAccount": "Hide wallet",
             "errorTitle": "Не удается скрыть {name}",
-            "errorBody1": "Чтобы скрыть учетную запись, она должна иметь нулевой баланс.",
-            "errorBody2": "В настоящее время на этом аккаунте осталось {balance}. Переведите эти средства на другой счет и повторите попытку.",
-            "errorBody3": "Вы не можете скрыть эту учетную запись, вы должны иметь хотя бы одну."
+            "errorBody1": "To hide a wallet it must have 0 balance.",
+            "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
+            "errorBody3": "You cannot hide this wallet, you must have at least one."
         },
         "addressHistory": {
             "title": "История адресов: {name}",
@@ -478,8 +461,8 @@
         },
         "balanceFinder": {
             "title": "Balance finder",
-            "body": "Perform a more exhaustive search of addresses to find missing balances.",
-            "totalWalletBalance": "Total wallet balance",
+            "body": "Perform a more exhaustive search of addresses to find missing balances. This may take a while.",
+            "totalWalletBalance": "Total balance",
             "typePassword": "Type your password to allow searching."
         },
         "riskFunds": {
@@ -492,6 +475,12 @@
             "body": "У тебя есть средства на потраченных адресах, но информация, необходима для их сохранения, не найдена. Это может произойти, если ты выполнял транзакции давно. Ты можешь продолжить, но {value} находятся под угрозой во время миграции.",
             "learnMore": "Узнай больше о потраченных адресах",
             "proceed": "Я понимаю риск"
+        },
+        "snapshot": {
+            "title": "Ongoing network upgrade",
+            "body": "The Chrysalis network upgrade has begun.",
+            "bodyMigration": "Migration is disabled until it is complete.",
+            "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
         }
     },
     "charts": {
@@ -499,8 +488,8 @@
         "outgoingMi": "Outgoing {value}",
         "portoflio": "Портфолио",
         "token": "Токен",
-        "accountValue": "Счёт аккаунт",
-        "accountActivity": "Активность аккаунта",
+        "accountValue": "Wallet Value",
+        "accountActivity": "Wallet Activity",
         "timeframe1Hour": "1 час",
         "timeframe1Day": "1 день",
         "timeframe1Week": "1 неделя",
@@ -554,11 +543,11 @@
         "updateFirefly": "Обновить Firefly",
         "restartNow": "Перезагрузить сейчас",
         "saveBackup": "Сохранить резервную копию Stronghold",
-        "customizeAcount": "Настройка аккаунта",
+        "customizeAcount": "Customise wallet",
         "viewAddressHistory": "Просмотр истории адресов",
-        "hideAccount": "Скрыть учетную запись",
-        "showAccount": "Показать учетную запись",
-        "deleteAccount": "Удалить учетную запись",
+        "hideAccount": "Hide wallet",
+        "showAccount": "Unhide wallet",
+        "deleteAccount": "Delete wallet",
         "max": "Максимум",
         "addNode": "Добавить узел",
         "updateNode": "Обновить узел",
@@ -574,7 +563,7 @@
         "copy": "Копировать",
         "paste": "Вставить",
         "selectAll": "Выбрать все",
-        "addAccount": "Добавить аккаунт",
+        "addAccount": "Add Wallet",
         "checkForUpdates": "Проверять обновления",
         "reportAnIssue": "Сообщить об ошибке",
         "clear": "Очистить",
@@ -589,12 +578,13 @@
         "readDocumentation": "Читать документацию",
         "visitFaq": "Посетить FAQ",
         "viewStatus": "Просмотр статуса",
-        "showHiddenAccounts": "Показать скрытые учетные записи",
+        "showHiddenAccounts": "Show hidden wallets",
         "confirm": "Подтвердить",
         "findBalances": "Find balances",
         "searchBalances": "Search for balances",
         "searchAgain": "Search again",
-        "searching": "Searching..."
+        "searching": "Searching...",
+        "closeFirefly": "Close Firefly"
     },
     "general": {
         "password": "Пароль",
@@ -612,11 +602,11 @@
         "sendFunds": "Отправить средства",
         "sendToAddress": "Отправить на адрес",
         "scanQrOrPaste": "Сканировать QR-код или вставить Адрес",
-        "moveFundsBetweenAccounts": "Переместить средства между своими счетами",
+        "moveFundsBetweenAccounts": "Move funds between wallets",
         "sendTokensToAddress": "Отправить токены на адрес",
-        "manageAccount": "Управление аккаунтом",
-        "customizeAcount": "Индивидуальные настройки аккаунта",
-        "account": "Аккаунт",
+        "manageAccount": "Manage Wallet",
+        "customizeAcount": "Customize your wallet",
+        "account": "Кошелёк",
         "sendingToAddress": "Отправляется на адрес",
         "amount": "Сумма",
         "addAddress": "Добавить Адрес",
@@ -637,25 +627,25 @@
         "lightTheme": "Светлая тема",
         "darkTheme": "Тёмная тема",
         "balance": "Баланс",
-        "accountBalance": "Баланс счета",
+        "accountBalance": "Wallet Balance",
         "incoming": "Входящие",
         "outgoing": "Исходящие",
         "totalIn": "Всего (вх.)",
         "totalOut": "Всего (исх.)",
-        "accounts": "Аккаунты",
-        "myAccounts": "Мои аккаунты",
+        "accounts": "Wallets",
+        "myAccounts": "My Wallets",
         "automaticNodeSelection": "Авто подбор Node (точка подключения к сети)",
         "manualNodeSelection": "Ручной выбор Node (точка подключения к сети)",
         "profiles": "Профили",
         "developerProfile": "Профиль разработчика",
         "developerProfileDescription": "Позволяет подключаться к тестовым сетям",
         "dev": "Разработчик",
-        "createAccount": "Создать аккаунт",
-        "accountName": "Название учетной записи",
+        "createAccount": "Create a Wallet",
+        "accountName": "Wallet name",
         "latestTransactions": "Последние Транзакции",
         "transactions": "Транзакции",
         "security": "Настройки Безопасности",
-        "accountAddress": "Адрес кошелька",
+        "accountAddress": "Wallet Address",
         "nodes": "Узлы",
         "wallet": "Кошелёк",
         "help": "Помощь",
@@ -667,25 +657,26 @@
         "status": "Статус",
         "confirmed": "Подтверждено",
         "pending": "В ожидании",
-        "noAccounts": "У тебя нет аккаунтов, пожалуйста создай его.",
+        "noAccounts": "You have no wallets, please create one.",
         "loadingAccounts": "Загрузка, пожалуйста подожди...",
         "addProfile": "Добавить профиль",
         "noRecentHistory": "Нет недавней истории",
-        "transferSyncing": "Синхронизация аккаунта",
+        "firstSync": "Syncing history, this may take a while...",
+        "transferSyncing": "Syncing wallet",
         "transferSelectingInputs": "Выбор входов",
         "transferRemainderAddress": "Генерация адреса депозита",
         "transferSigning": "Подписание транзакции",
         "transferPow": "Выполнение PoW",
         "transferBroadcasting": "Отправка транзакции",
         "transferComplete": "Передача завершена",
-        "creatingAccount": "Создание аккаунта, пожалуйста подожди...",
-        "updatingAccount": "Обновление аккаунта, пожалуйста подожди...",
-        "accountSyncing": "Аккаунт синхронизируется",
-        "accountSyncComplete": "Синхронизация аккаунта завершена",
+        "creatingAccount": "Creating wallet, please wait...",
+        "updatingAccount": "Updating wallet, please wait...",
+        "accountSyncing": "Wallet is syncing",
+        "accountSyncComplete": "Wallet sync complete",
         "passwordUpdating": "Обновление пароля...",
         "passwordSuccess": "Пароль успешно обновлен",
         "passwordFailed": "Не удалось обновить пароль",
-        "syncingAccounts": "Синхронизация аккаунтов...",
+        "syncingAccounts": "Syncing wallets...",
         "exportingStronghold": "Экспортирование Stronghold...",
         "exportingStrongholdSuccess": "Stronghold успешно экспортирован",
         "exportingStrongholdFailed": "Экспортирование Stronghold не удалось",
@@ -700,7 +691,7 @@
         "passwordStrength4": "Сильный",
         "creatingProfile": "Создание аккаунта, пожалуйста подожди...",
         "fundMigration": "Миграция счета",
-        "accountRemoved": "Эта учетная запись скрыта. Сделайте её видимой для выполнения переводов.",
+        "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
         "receivingTo": "Receiving to {account}",
         "sendingFrom": "Sending from {account}",
         "receivedTo": "Received to {account}",
@@ -729,7 +720,7 @@
         "calcMinutesRemaining": "Вычисление оставшихся минут...",
         "minutesRemaining": "{minutes, plural, one {Осталась 1 минута} other { Осталось # минут}}",
         "copiedToClipboard": "Скопировано в буфер обмена",
-        "accountsSynchronized": "Синхронизация аккаунта завершена",
+        "accountsSynchronized": "Wallet synchronization complete",
         "migratedAccountChrysalisDown": "Твои средства будут доступны после 28 апреля Chrysalis",
         "migratedAccountChrysalisUp": "Твои средства станут доступны в ближайшее время"
     },
@@ -761,10 +752,10 @@
             "incorrect": "Твой PIN-код неверен."
         },
         "account": {
-            "length": "Имя твоего профиля не может быть длиннее {length, plural, one {1 символа} few {# символов} many {# символов} other {# символов}}.",
-            "empty": "Ты должен использовать твой последний аккаунт перед созданием нового.",
-            "notEmpty": "Вы должны перевести свой баланс перед удалением этого аккаунта.",
-            "duplicate": "Счет с таким названием уже существует.",
+            "length": "Your wallet name can't be longer than {length, plural, one {1 character} other {# characters}}.",
+            "empty": "You must use your latest wallet before creating a new one.",
+            "notEmpty": "You must transfer your balance before deleting this wallet.",
+            "duplicate": "A wallet with this name already exists.",
             "tilde": "Имя профиля не может начинаться с символа '~'.",
             "control": "Имя профиля не может содержать управляющий символ.",
             "startDot": "Имя профиля не может начинаться с символа '.'.",
@@ -779,8 +770,8 @@
             "wrongAddressPrefix": "Адреса начинаются с префикса {prefix}.",
             "wrongAddressFormat": "Адрес неверно отформатирован.",
             "invalidAddress": "Адрес недействителен.",
-            "insufficientFunds": "Недостаточно средств на этом счете.",
-            "noToAccount": "Вы не выбрали аккаунт для перевода средств.",
+            "insufficientFunds": "This wallet has insufficient funds.",
+            "noToAccount": "You have not selected a wallet to send the funds to.",
             "sendingDust": "Вы не можете отправить менее 1 Mi.",
             "leavingDust": "Вы не можете оставить менее 1 Mi на вашем адресе."
         },
