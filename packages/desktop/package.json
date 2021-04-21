@@ -126,7 +126,7 @@
         },
         "publish": {
             "provider": "generic",
-            "url": "https://iotaledger-files.s3.eu-central-1.amazonaws.com/4a1ddea1-10c1-4f1d-83f0-e14903931a46/releases/",
+            "url": "https://iotaledger-files.s3.eu-central-1.amazonaws.com/firefly/releases/",
             "publishAutoUpdate": true,
             "channel": "latest"
         }
