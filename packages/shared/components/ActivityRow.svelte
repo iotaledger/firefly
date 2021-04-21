@@ -52,7 +52,7 @@
     $: senderAddress = sendAddressFromTransactionPayload(payload)
     $: receiverAddresses = receiverAddressesFromTransactionPayload(payload)
 
-    // There can only be one sender address which either belongs to use or not
+    // There can only be one sender address which either belongs to us or not
     $: senderAccount = findAccountWithAddress(senderAddress)
 
     // For an incoming transaction there might be multiple receiver addresses
