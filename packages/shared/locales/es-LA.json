@@ -147,7 +147,7 @@
             "restoringWallet": "Restaurando la billetera...",
             "findingBalance": "Buscando saldo...",
             "incorrectSeedVaultPassword": "Clave de SeedVault incorrecta.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "No se encontraron datos en la SeedVault.",
             "signingBundle": "Paquete de firmas",
             "broadcastingBundle": "Transmitiendo paquete",
             "miningBundle": "Minando paquete",
@@ -247,8 +247,8 @@
             "appLock": {
                 "title": "Bloqueo automático",
                 "description": "Tiempo de inactividad antes de que se bloqueen tus billeteras y se te cierre la sesión",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "durationMinute": "{time, plural, one {1 minuto} other {# minutos}}",
+                "durationHour": "{time, plural, one {1 hora} other {# horas}}"
             },
             "changePassword": {
                 "title": "Cambiar contraseña",
@@ -701,7 +701,7 @@
         "sentFrom": "Enviado desde {account}",
         "receiving": "Recibiendo",
         "sending": "Enviando",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Red heredada"
     },
     "dates": {
         "today": "Hoy",

@@ -147,7 +147,7 @@
             "restoringWallet": "Restauration du portefeuille...",
             "findingBalance": "En train de récupérer le montant total...",
             "incorrectSeedVaultPassword": "Mot de passe SeedVault incorrect.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "Aucune donnée n'a été trouvée dans le SeedVault.",
             "signingBundle": "Lot de signature",
             "broadcastingBundle": "Lot de diffusion",
             "miningBundle": "Lot de signature",
@@ -248,7 +248,7 @@
                 "title": "Verrouillage automatique",
                 "description": "Inactivity time before your wallets lock and you are logged out",
                 "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "durationHour": "{time, plural, one {1 heure} other {# heures}}"
             },
             "changePassword": {
                 "title": "Modifier le mot de passe",
@@ -701,7 +701,7 @@
         "sentFrom": "Envoyé depuis {account}",
         "receiving": "Réception en cours",
         "sending": "Envoi en cours",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Ancien Réseau"
     },
     "dates": {
         "today": "Aujourd'hui",

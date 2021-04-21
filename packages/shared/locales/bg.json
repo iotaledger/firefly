@@ -59,7 +59,7 @@
         "recoveryPhrase": {
             "title": "Фраза за възстановяване",
             "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-            "body2": "Keep this private and safely stored.",
+            "body2": "Пазете това в тайна и на сигурно място.",
             "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
             "revealRecoveryPhrase": "Разкриване на фраза за възстановяване",
             "hideRecoveryPhrase": "Скриване на фраза за възстановяване"
@@ -69,7 +69,7 @@
             "body": "Нека проверим дали сте записали правилно фразата. Изберете думите в правилния ред.",
             "word": "Дума",
             "verified": "Фраза за възстановяване потвърдена",
-            "verifiedBody": "Remember to keep it private and safely stored."
+            "verifiedBody": "Запомнете, че трябва да се пази в тайна и на сигурно място."
         },
         "backupWallet": {
             "title": "Бекъп към Stronghold файл",
@@ -98,7 +98,7 @@
             "importMnemonic": "I have a Firefly recovery phrase",
             "importMnemonicDescription": "Въведете фраза за възстановяване, за да възстановите своите портфейли",
             "importFile": "Имам бекъп файл",
-            "importFileDescription": "Upload a Seedvault or Stronghold file"
+            "importFileDescription": "Качване на Seedvault или Stronghold файл"
         },
         "importFromText": {
             "seed": {
@@ -126,42 +126,42 @@
         },
         "importSuccess": {
             "title": "Успешно възстановихте от бекъп",
-            "body": "You can now set up your new profile.",
+            "body": "Можете да настроите своя нов профил.",
             "seedvaultTitle": "Импортирането успешно",
             "seedvaultBody": "Паролата е потвърдена, можете да продължите.",
             "strongholdTitle": "Импортирането успешно",
             "strongholdBody": "Паролата е потвърдена, можете да продължите."
         },
         "migrate": {
-            "title": "Migrate your funds",
-            "body1": "This is an automated process to transfer your funds to your new wallet.",
-            "body2": "It may take some time. Do not turn off your device during the migration.",
+            "title": "Мигриране на Вашите средства",
+            "body1": "Това е автоматичен процес за преместване на Вашите средства във Вашият нов портфейл.",
+            "body2": "Може да отнеме време. Моля не изключвайте устройството по време на миграцията.",
             "existing": "Стар портфейл",
             "new": "Нов портфейл",
             "learn": "Научете повече за миграцията",
-            "beginMigration": "Begin Migration",
-            "migrating": "Migrating funds...",
-            "migrated": "{balance} migrated",
+            "beginMigration": "Започни миграция",
+            "migrating": "Мигриране на средствата...",
+            "migrated": "{balance} мигрирани",
             "migrationFailed": "Грешка при миграция",
             "noAddressesForMigration": "Please select the addresses you wish to secure.",
-            "restoringWallet": "Restoring wallet...",
+            "restoringWallet": "Възстановяване на портфейла...",
             "findingBalance": "Finding balance...",
             "incorrectSeedVaultPassword": "Грешна парола за Seedvault.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "Не са намерени данни в SeedVault.",
             "signingBundle": "Signing bundle",
             "broadcastingBundle": "Broadcasting bundle",
             "miningBundle": "Mining bundle",
-            "problemRestoringWallet": "There was a network error restoring your wallet. Please try again.",
+            "problemRestoringWallet": "Възникна мрежова грешка по време на възстановяване на портфейла. Моля опитайте отново.",
             "minimumMigrationAmountSpentAddresses": "The minimum migration amount for each spent address is 1 Mi. Check again if your balance doesn't look right.",
             "tooManyAddressesToMigrate": "You have too many addresses with low balance to migrate. Check again if your balance doesn't look right.",
             "cannotMigrateAllYourFunds": "We cannot migrate all of your funds because some addresses are too low in value. You can proceed anyway. {value} will be lost.",
             "error": "Възникна грешка при мигриране на средствата. Моля опитайте отново."
         },
         "bundleMiningWarning": {
-            "title": "Warning",
+            "title": "Внимание",
             "body1": "You have funds on one or more spent addresses.",
             "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
-            "body3": "If you close the app you will need to restart the whole migration.",
+            "body3": "Ако затворите приложението, ще трябва на започнете от начало цялата миграция.",
             "learn": "Learn about spent addresses"
         },
         "secureSpentAddresses": {
@@ -205,81 +205,81 @@
                 "description": "Configure your app's appearance and other general settings"
             },
             "security": {
-                "title": "Security",
+                "title": "Сигурност",
                 "description": "Change your password and adjust security-related settings"
             },
             "advancedSettings": {
-                "title": "Advanced Settings",
+                "title": "Разширени настройки",
                 "description": "Tools and manual settings for technical users"
             },
             "helpAndInfo": {
-                "title": "Help & Information",
+                "title": "Помощна информация",
                 "description": "Find the answer to a question or get help with an issue"
             },
             "profile": {
-                "title": "Profile",
-                "description": "Change your profile name or set an avatar"
+                "title": "Профил",
+                "description": "Промяна на името на профила и задаване на снимка"
             },
             "sync": {
-                "title": "Sync wallets",
+                "title": "Синхронизация портфейли",
                 "description": ""
             },
             "theme": {
-                "title": "Theme",
+                "title": "Тема",
                 "description": ""
             },
             "language": {
-                "title": "Language",
+                "title": "Език",
                 "description": ""
             },
             "currency": {
-                "title": "Currency",
+                "title": "Валута",
                 "description": "Adjusts balance conversion and updates chart options"
             },
             "notifications": {
-                "title": "Notifications",
+                "title": "Известия",
                 "description": "System notifications for transaction events"
             },
             "exportStronghold": {
-                "title": "Export Backup",
+                "title": "Създаване резервно копие",
                 "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history."
             },
             "appLock": {
-                "title": "Automatic Lock",
-                "description": "Inactivity time before your wallets lock and you are logged out",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "title": "Автоматично заключване",
+                "description": "Време на неактивност преди заключване на портфейла и изход от профила",
+                "durationMinute": "{time, plural, one {1 минута} other {# минути}}",
+                "durationHour": "{time, plural, one {1 час} other {# часа}}"
             },
             "changePassword": {
-                "title": "Change password",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds."
+                "title": "Промяна на паролата",
+                "description": "Вашата парола се използва за подсигуряване на портфейла. Трябва да изберете сигурна парола, за да защитите средства си."
             },
             "changePincode": {
-                "title": "Change PIN code",
-                "description": "Your PIN keeps your balance and transactions private",
-                "currentPincode": "Current PIN",
-                "newPincode": "New PIN",
-                "confirmNewPincode": "Confirm new PIN",
-                "action": "Change PIN"
+                "title": "Промяна на ПИН код",
+                "description": "Вашият ПИН защитава Вашето салдо и трансакции да останат поверителни",
+                "currentPincode": "Текущ ПИН код",
+                "newPincode": "Нов ПИН код",
+                "confirmNewPincode": "Потвърдете новия ПИН код",
+                "action": "Смяна на ПИН кода"
             },
             "balanceFinder": {
                 "title": "Balance finder",
                 "description": "Perform an extended search of your addresses for tokens."
             },
             "hiddenAccounts": {
-                "title": "Hidden wallets",
+                "title": "Скрити портфейли",
                 "description": "Selecting this options will show wallets that were previously hidden."
             },
             "deleteProfile": {
-                "title": "Delete profile",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup."
+                "title": "Изтриване на профила",
+                "description": "Изтриване на потребителския профил, портфейл и история на трансакциите. Уверете се, че имате резервно копие."
             },
             "deepLinks": {
                 "title": "Deep links",
                 "description": "Automatically fill transaction data in Firefly upon clicking an iota:// link"
             },
             "developerMode": {
-                "title": "Developer mode",
+                "title": "Режим на разработчик",
                 "description": "Connect to testnets and other developer features"
             },
             "nodeSettings": {
@@ -292,8 +292,8 @@
                 "primaryNode": "Primary node",
                 "excludeNode": "Exclude node",
                 "includeNode": "Include node",
-                "viewDetails": "View details",
-                "setAsPrimary": "Set as primary",
+                "viewDetails": "Виж детайли",
+                "setAsPrimary": "Задай като основен",
                 "removeNode": "Remove node",
                 "includeOfficialNodeList": "Include official node list",
                 "noNodes": "There are no nodes, automatic selection will be used instead."
@@ -357,75 +357,75 @@
                 },
                 "strongholdStatus": {
                     "title": "Wallet Status",
-                    "locked": "Locked",
-                    "unlocked": "Unlocked"
+                    "locked": "Заключен",
+                    "unlocked": "Отключен"
                 },
                 "strongholdBackup": {
-                    "title": "Wallet Backup",
-                    "weeksAgo": "{weeks, plural, one {# week} other {# weeks}} ago"
+                    "title": "Резервно копие портфейл",
+                    "weeksAgo": "Преди {weeks, plural, one {# седмица} other {# седмици}} "
                 }
             },
             "network": {
                 "networkOperational": "Network Operational",
                 "networkDegraded": "Network Degraded",
-                "networkDown": "Network Disconnected",
-                "status": "Status",
+                "networkDown": "Мрежата е прекъсната",
+                "status": "Статус",
                 "messagesPerSecond": "Messages per second",
                 "confirmationRate": "Confirmation rate"
             },
             "profileModal": {
-                "allSettings": "All settings",
-                "logout": "Log out"
+                "allSettings": "Всички настройки",
+                "logout": "Отписване"
             }
         }
     },
     "popups": {
         "password": {
-            "title": "Password required",
-            "subtitle": "Please enter your password to unlock your wallets",
-            "backup": "Please enter your password to export a backup"
+            "title": "Необходима е парола",
+            "subtitle": "Моля въведете своята парола за отключване на портфейла",
+            "backup": "Моля въведете своята парола за създаване на резервно копие"
         },
         "qr": {
-            "title": "Your QR code"
+            "title": "Вашият QR код"
         },
         "version": {
-            "title": "Current version: {version}",
+            "title": "Настояща версия: {version}",
             "upToDateTitle": "Firefly is up to date",
-            "upToDateDescription": "You are running the latest and safest version of Firefly.",
-            "updateAvailable": "Firefly update available",
-            "updateDetails": "Version {version} - {date}",
+            "upToDateDescription": "Използвате последната и най-сигурната версия на Firefly.",
+            "updateAvailable": "Наличен е ъпдейт за Firefly",
+            "updateDetails": "Версия {version} - {date}",
             "noAutoUpdate": "Auto-update is disabled in this Windows version, please go to https://firefly.iota.org to download the update."
         },
         "backup": {
             "title": "Last backup: {date}",
             "lastBackup": "You last backed up {date}",
             "backupDescription": "It is important to back up regularly to ensure you have a copy of your wallets and transaction history.",
-            "backupWarning": "If you lose your backup and recovery phrase you will lose access to your funds.",
+            "backupWarning": "Ако изгубите резервното копие и фразата за възстановяване, губите достъп до средата си.",
             "notBackedUp": "Not backed up",
-            "notBackedUpDescription": "You have not backed up your wallets",
-            "saving": "Saving..."
+            "notBackedUpDescription": "Не сте създали резервно копие на портфейла си",
+            "saving": "Запазване..."
         },
         "deleteAccount": {
-            "title": "Delete {name}?",
+            "title": "Изтриване {name}?",
             "body": "This wallet has no transaction history. It can safely be deleted.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Delete wallet",
-            "errorTitle": "Unable to delete {name}",
-            "errorBody1": "You cannot delete this wallet, you must have at least one."
+            "typePassword": "Въведете своята парола за потвърждение.",
+            "hideAccount": "Изтриване на портфейл",
+            "errorTitle": "Неуспешно изтриване {name}",
+            "errorBody1": "Не можете да изтриете този портфейл, трябва да имате минимум един."
         },
         "hideAccount": {
-            "title": "Hide {name}?",
+            "title": "Скриване {name}?",
             "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Hide wallet",
-            "errorTitle": "Unable to hide {name}",
-            "errorBody1": "To hide a wallet it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
-            "errorBody3": "You cannot hide this wallet, you must have at least one."
+            "typePassword": "Въведете своята парола за потвърждение.",
+            "hideAccount": "Скрий портфейл",
+            "errorTitle": "Неуспешно скриване {name}",
+            "errorBody1": "За да скриете портфейл, трябва да има 0 наличност.",
+            "errorBody2": "В момента имате {balance} оставащи в този портфейл. Моля преместете средствата в друг портфейл и опитайте отново.",
+            "errorBody3": "Не можете да изтриете този портфейл, трябва да имате минимум един."
         },
         "addressHistory": {
             "title": "{name} address history",
-            "currentBalance": "Current balance: {balance}"
+            "currentBalance": "Наличност: {balance}"
         },
         "node": {
             "titleAdd": "Add a node",
@@ -443,7 +443,7 @@
             "empty": "The error log is empty."
         },
         "deleteProfile": {
-            "title": "Delete profile",
+            "title": "Изтриване на профила",
             "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone.",
             "typePassword": "Type your password to confirm."
         },
@@ -487,49 +487,49 @@
         }
     },
     "charts": {
-        "incomingMi": "Incoming {value}",
-        "outgoingMi": "Outgoing {value}",
-        "portoflio": "Portfolio",
+        "incomingMi": "Приходи {value}",
+        "outgoingMi": "Разходи {value}",
+        "portoflio": "Портфолио",
         "token": "Token",
-        "accountValue": "Wallet Value",
+        "accountValue": "Наличност в портфейла",
         "accountActivity": "Wallet Activity",
-        "timeframe1Hour": "1 hour",
-        "timeframe1Day": "1 day",
-        "timeframe1Week": "1 week",
-        "timeframe1Month": "1 month"
+        "timeframe1Hour": "1 час",
+        "timeframe1Day": "1 ден",
+        "timeframe1Week": "1 седмица",
+        "timeframe1Month": "1 месец"
     },
     "actions": {
-        "continue": "Continue",
-        "back": "Back",
-        "cancel": "Cancel",
-        "close": "Close",
-        "dismiss": "Dismiss",
-        "proceedAnyway": "Proceed anyway",
-        "save": "Save",
+        "continue": "Продължаване",
+        "back": "Назад",
+        "cancel": "Отказ",
+        "close": "Затваряне",
+        "dismiss": "Пропусни",
+        "proceedAnyway": "Продължи въпреки това",
+        "save": "Запис",
         "importSeed": "Import an existing seed",
         "restoreWallet": "Migrate or restore a wallet",
         "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
-        "createWallet": "Create new wallet",
+        "createWallet": "Създаване на нов портфейл",
         "createWalletDescription": "Create a fresh wallet running on Chrysalis",
-        "savePassword": "Save password",
-        "useBiometric": "Use biometric security",
+        "savePassword": "Запазване на паролата",
+        "useBiometric": "Използване на биометрична сигурност",
         "setupPin": "Задаване на ПИН код",
-        "setPin": "Set PIN code",
-        "confirmPin": "Confirm PIN code",
-        "enterYourPin": "Enter your PIN",
-        "saveBackupFile": "Save backup file",
-        "iveWrittenRecoveryPhrase": "I’ve written down my recovery phrase",
+        "setPin": "Задаване на ПИН код",
+        "confirmPin": "Потвърждаване на ПИН код",
+        "enterYourPin": "Въведете своя ПИН",
+        "saveBackupFile": "Запази бекъп файл",
+        "iveWrittenRecoveryPhrase": "Записах моята възстановяваща фраза",
         "verifyRecoveryPhrase": "Верифициране на фраза за възстановяване",
         "revealRecoveryPhrase": "Разкриване на фраза за възстановяване",
-        "importSeedvault": "Import SeedVault",
-        "checkAgain": "Check Again",
-        "importFromFile": "Import from a file",
-        "send": "Send",
-        "receive": "Receive",
-        "create": "Create",
+        "importSeedvault": "Импортиране от SeedVault",
+        "checkAgain": "Провери отново",
+        "importFromFile": "Импорт от файл",
+        "send": "Изпрати",
+        "receive": "Получи",
+        "create": "Създаване",
         "beginTransfer": "Begin Transfer",
-        "tryAgain": "Try again",
-        "visitDiscord": "Visit Discord",
+        "tryAgain": "Опитайте отново",
+        "visitDiscord": "Посети Discord",
         "dragDrop": "Drag & Drop",
         "importExtentions": ".kdbx or .stronghold file",
         "chooseFile": "Choose a File",
@@ -548,9 +548,9 @@
         "saveBackup": "Save Stronghold backup",
         "customizeAcount": "Customise wallet",
         "viewAddressHistory": "View address history",
-        "hideAccount": "Hide wallet",
+        "hideAccount": "Скрий портфейл",
         "showAccount": "Unhide wallet",
-        "deleteAccount": "Delete wallet",
+        "deleteAccount": "Изтриване на портфейл",
         "max": "Max",
         "addNode": "Add node",
         "updateNode": "Update node",
@@ -647,7 +647,7 @@
         "accountName": "Wallet name",
         "latestTransactions": "Latest Transactions",
         "transactions": "Transactions",
-        "security": "Security",
+        "security": "Сигурност",
         "accountAddress": "Wallet Address",
         "nodes": "Nodes",
         "wallet": "Wallet",
@@ -657,7 +657,7 @@
         "inputAddress": "Send Address",
         "receiveAddress": "Receive Address",
         "date": "Date",
-        "status": "Status",
+        "status": "Статус",
         "confirmed": "Confirmed",
         "pending": "Pending",
         "noAccounts": "You have no wallets, please create one.",

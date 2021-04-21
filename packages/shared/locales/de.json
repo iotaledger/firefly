@@ -51,7 +51,7 @@
             "body2": "Gib deinen PIN-Code erneut ein, um fortzufahren. "
         },
         "backup": {
-            "title": "Erstelle ein Backup deiner Wallets",
+            "title": "Erstelle ein Backup deiner Wallet",
             "body1": "Dir wird nun eine Wiederherstellungsphrase angezeigt. Notiere diese in deinem Wiederherstellungs-Dokument.",
             "body2": "Teile deine Wiederherstellungsphrase mit niemandem. Sie kann verwendet werden, um von überall auf deine Token zuzugreifen.",
             "body3": "Falls du deine Wiederherstellungsphrase verlierst, kannst du dein Guthaben verlieren."
@@ -76,7 +76,7 @@
             "body1": "Gib dein Passwort ein, um deine Wallets in einer Stronghold-Datei zu sichern. Das Passwort wird verwendet, um das Backup zu verschlüsseln.",
             "body2": "Gründe warum digitale Backups wichtig sind:",
             "reason1": "Wiederherstellen deiner Wallets ohne Eingabe der Wiederherstellungsphrase",
-            "reason2": "Importiere deine Wallets auf andere Geräte",
+            "reason2": "Importieren deiner Wallets auf anderen Geräten",
             "reason3": "Wiederherstellen des gesamten Transaktionsverlaufs"
         },
         "recoveryPhraseSaved": {
@@ -147,7 +147,7 @@
             "restoringWallet": "Wallet wiederherstellen...",
             "findingBalance": "Suche Guthaben...",
             "incorrectSeedVaultPassword": "Falsches SeedVault Passwort.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "Im SeedVault konnten keine Daten gefunden werden.",
             "signingBundle": "Signiere Bundle",
             "broadcastingBundle": "Übertrage Bundle",
             "miningBundle": "Mine Bundle",
@@ -247,8 +247,8 @@
             "appLock": {
                 "title": "Automatische Sperre",
                 "description": "Zeit bei Inaktivität, bis die Wallet gesperrt und du ausgeloggt wirst",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "durationMinute": "{time, plural, one {1 Minute} other {# Minuten}}",
+                "durationHour": "{time, plural, one {1 Stunde} other {# Stunden}}"
             },
             "changePassword": {
                 "title": "Passwort ändern",
@@ -283,12 +283,12 @@
                 "description": "Mit Testnetzwerken verbinden und andere Entwickleroptionen"
             },
             "nodeSettings": {
-                "title": "Node Einstellungen",
+                "title": "Node-Einstellungen",
                 "description": "Wähle Manuell, um die Node-Einstellungen zu konfigurieren und dich mit deinem eigenen Node zu verbinden"
             },
             "configureNodeList": {
                 "title": "Wähle einen Node aus",
-                "description": "Verwalte die Liste, der mit dir verbundenen IOTA Netzwerkknoten.",
+                "description": "Verwalte die Liste der IOTA Nodes mit denen du dich verbinden kannst.",
                 "primaryNode": "Primärer Node",
                 "excludeNode": "Node ausschließen",
                 "includeNode": "Node einbeziehen",
@@ -383,7 +383,7 @@
         "password": {
             "title": "Passwort erforderlich",
             "subtitle": "Gib bitte dein Passwort ein, um deine Wallets zu entsperren",
-            "backup": "Gib bitte dein Wallet-Passwort ein, um das Backup zu exportieren"
+            "backup": "Gib bitte dein Passwort ein, um das Backup zu exportieren"
         },
         "qr": {
             "title": "Dein QR Code"
@@ -398,8 +398,8 @@
         },
         "backup": {
             "title": "Letztes Backup: {date}",
-            "lastBackup": "Du hast zuletzt ein Backup erstellt am {date}",
-            "backupDescription": "Es ist wichtig regelmäßig Backups zu erstellen, damit du eine Sicherung deiner Wallets und Transaktionen hast.",
+            "lastBackup": "Dein letztes Backup ist vom {date}",
+            "backupDescription": "Es ist wichtig, regelmäßig Backups zu erstellen, damit du eine Sicherung deiner Wallets und Transaktionen hast.",
             "backupWarning": "Wenn du dein Backup und die Wiederherstellungsphrase verlierst, verlierst du Zugriff auf dein Guthaben.",
             "notBackedUp": "Noch kein Backup erstellt",
             "notBackedUpDescription": "Du hast noch kein Backup deiner Wallets erstellt",
@@ -408,7 +408,7 @@
         "deleteAccount": {
             "title": "{name} löschen?",
             "body": "Diese Wallet besitzt keinen Transaktionsverlauf. Sie kann bedenkenlos entfernt werden.",
-            "typePassword": "Gib dein Wallet-Passwort zur Bestätigung ein.",
+            "typePassword": "Gib dein Passwort zur Bestätigung ein.",
             "hideAccount": "Wallet löschen",
             "errorTitle": "{name} kann nicht gelöscht werden",
             "errorBody1": "Du kannst diese Wallet nicht löschen. Es muss mindestes eine vorhanden sein."
@@ -416,7 +416,7 @@
         "hideAccount": {
             "title": "{name} ausblenden?",
             "body": "Du kannst diese Wallet später wiederfinden, indem du \"Ausgeblendete Wallets anzeigen\" in den erweiterten Einstellungen aktivierst.",
-            "typePassword": "Gib dein Wallet-Passwort zur Bestätigung ein.",
+            "typePassword": "Gib dein Passwort zur Bestätigung ein.",
             "hideAccount": "Wallet ausblenden",
             "errorTitle": "{name} kann nicht ausgeblendet werden",
             "errorBody1": "Um eine Wallet auszublenden, muss diese ein Guthaben von 0 aufweisen.",
@@ -491,7 +491,7 @@
         "outgoingMi": "Ausgehende {value}",
         "portoflio": "Portfolio",
         "token": "Token",
-        "accountValue": "Wallet Guthaben",
+        "accountValue": "Wallet-Wert",
         "accountActivity": "Wallet-Aktivität",
         "timeframe1Hour": "1 Stunde",
         "timeframe1Day": "1 Tag",
@@ -701,7 +701,7 @@
         "sentFrom": "Gesendet von {account}",
         "receiving": "Empfange",
         "sending": "Sende",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Pre-Chrysalis Netzwerk"
     },
     "dates": {
         "today": "Heute",

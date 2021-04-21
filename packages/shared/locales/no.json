@@ -147,7 +147,7 @@
             "restoringWallet": "Gjenoppretter lommebok...",
             "findingBalance": "Finner saldo...",
             "incorrectSeedVaultPassword": "Feil passord for SeedVault.",
-            "noDataSeedVault": "No data could be found in the SeedVault.",
+            "noDataSeedVault": "Fant ingen data i SeedVault.",
             "signingBundle": "Signerer bundle",
             "broadcastingBundle": "Kringkaster bundle",
             "miningBundle": "Utvinner bundle",
@@ -247,8 +247,8 @@
             "appLock": {
                 "title": "Automatisk lås",
                 "description": "Inaktivitetstid før lommeboken låses og du blir logget ut",
-                "durationMinute": "{time, plural, one {1 minute} other {# minutes}}",
-                "durationHour": "{time, plural, one {1 hour} other {# hours}}"
+                "durationMinute": "{time, plural, one {1 minutt} other {# minutter}}",
+                "durationHour": "{time, plural, one {1 time} other {# timer}}"
             },
             "changePassword": {
                 "title": "Bytt passord",
@@ -701,7 +701,7 @@
         "sentFrom": "Sendt fra {account}",
         "receiving": "Mottar",
         "sending": "Sender",
-        "legacyNetwork": "Legacy Network"
+        "legacyNetwork": "Gammelt Nettverk"
     },
     "dates": {
         "today": "I dag",
