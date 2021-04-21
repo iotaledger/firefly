@@ -127,6 +127,8 @@
                     if (!err?.snapshot) {
                         if (err && err.name === 'KdbxError' && err.code === 'InvalidKey') {
                             error = locale('views.migrate.incorrectSeedVaultPassword')
+                        } else if (err && err.name === 'KdbxError' && err.code === 'FileCorrupt') {
+                            error = locale('views.migrate.noDataSeedVault')
                         } else {
                             error = locale(err.error)
                         }
