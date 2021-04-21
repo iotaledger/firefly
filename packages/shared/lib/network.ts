@@ -5,7 +5,8 @@ const DEFAULT_NETWORK = 'chrysalis-mainnet'
 
 // TODO: Update default nodes
 const DEFAULT_NODES: Node[] = [
-    'https://api.lb-0.migration4.iotatestmigration4.net'
+    'https://chrysalis-nodes.iota.org',
+    'https://chrysalis-nodes.iota.cafe'
 ].map((url) => ({
     url,
     auth: {

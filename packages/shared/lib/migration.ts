@@ -1,3 +1,4 @@
+import { getOfficialNetwork } from 'shared/lib/network'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import type { Input, MigrationBundle, MigrationData } from 'shared/lib/typings/migration'
 import type { Address } from 'shared/lib/typings/address'
@@ -7,9 +8,8 @@ import { derived, get, writable, Writable } from 'svelte/store'
 
 export const LOG_FILE_NAME = 'migration.log'
 
-export const MIGRATION_NODE = 'https://nodes-migration4-legacy.iota.cafe/'
-
-export const PERMANODE = 'http://permanode-migration4.iota.cafe/api'
+export const MIGRATION_NODES = ['https://nodes.iota.org', 'https://nodes.iota.cafe']
+export const PERMANODE = 'https://chronicle.iota.org/api'
 
 export const ADDRESS_SECURITY_LEVEL = 2
 
@@ -75,7 +75,7 @@ export const getMigrationData = (migrationSeed: string, initialAddressIndex = 0)
     return new Promise((resolve, reject) => {
         api.getMigrationData(
             migrationSeed,
-            [MIGRATION_NODE],
+            MIGRATION_NODES,
             ADDRESS_SECURITY_LEVEL,
             initialAddressIndex,
             PERMANODE, {
@@ -569,7 +569,7 @@ export const confirmedBundles = derived(get(migration).bundles, (_bundles) => _b
  * List of chrysalis node endpoints to detect when is live
  */
 // TODO: Update to mainnet chrysalis endpoint
-export const CHRYSALIS_NODE_ENDPOINTS = ['https://api.lb-0.migration4.iotatestmigration4.net/api/v1/info']
+export const CHRYSALIS_NODE_ENDPOINTS = ['https://chrysalis-nodes.iota.org', 'https://chrysalis-nodes.iota.cafe/api/v1/info']
 
 /**
 * Default timeout for a request made to an endpoint
@@ -580,7 +580,7 @@ const DEFAULT_CHRYSALIS_NODE_ENDPOINT_TIMEOUT = 5000
 * Mainnet ID used in a chrysalis node 
 */
 // TODO: Update to 'mainnet'
-const MAINNET_ID = 'migration4'
+const MAINNET_ID = getOfficialNetwork()
 
 /**
  * Default interval for polling the market data
